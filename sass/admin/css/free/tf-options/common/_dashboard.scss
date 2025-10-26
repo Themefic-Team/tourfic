@@ -265,10 +265,12 @@
 
         .tf-report-wrapper{
             @include flex(0 0 calc(70% - 24px));
+            
         }
 
         .tf-settings-sidebar{
             @include flex(0 0 30%);
+           
         }
 
         #tf-report-loader {

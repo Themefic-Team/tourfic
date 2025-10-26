@@ -175,8 +175,9 @@ final class Tourfic {
 				?>
                 <div id="message" class="error">
 					<p>
-						<?php printf(
-							esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ),
+						<?php 
+						/* translators: %1$s is return strong tag %2$s is return closeing of strong tag */
+						printf(esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ),
 							'<strong><a href="plugin-install.php?s=woocommerce&tab=search&type=term">', '</a></strong>'
 						); ?>
 					</p>

@@ -338,7 +338,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 											<span><?php esc_html_e("Year","tourfic"); ?></span>
 											<select name="tf-year-report" id="tf-year-report">
 												<?php
-												$current_year = (int) date('Y'); 
+												$current_year = (int) gmdate('Y'); 
 												for ( $i = 0; $i <= 5; $i++ ) {
 													$year = $current_year - $i;
 													$value = substr( $year, -2 ); // last 2 digits

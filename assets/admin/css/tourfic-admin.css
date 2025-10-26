@@ -1601,12 +1601,14 @@ Steps
 }
 .tf-admin-meta-box .tf-admin-tab {
   border-right: 1px solid #e1e5ea;
-  background-color: #f8f9fb;
-  min-width: 280px;
+  background-color: #FFFFFF;
+  min-width: 242px;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  padding: 24px;
+  box-sizing: border-box;
 }
 @media only screen and (max-width: 1024px) {
   .tf-admin-meta-box .tf-admin-tab {
@@ -1624,20 +1626,22 @@ Steps
   -ms-flex-align: center;
   align-items: center;
   text-decoration: none;
-  color: #363e4a;
+  color: #27333F;
   padding: 12px 16px;
   text-align: left;
-  font-size: 1rem;
+  font-size: 15px;
   line-height: 24px;
+  font-weight: 600;
   cursor: pointer;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  border-radius: 8px;
 }
 .tf-admin-meta-box .tf-admin-tab a.tf-tablinks .tf-sec-icon {
-  margin-right: 10px;
-  color: #8997a9;
+  margin-right: 8px;
+  color: #566676;
   min-width: 25px;
   display: -webkit-box;
   display: -moz-box;
@@ -1651,18 +1655,15 @@ Steps
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-.tf-admin-meta-box .tf-admin-tab a.tf-tablinks:hover {
-  background-color: #ffffff;
-  outline: none;
-}
 .tf-admin-meta-box .tf-admin-tab a.tf-tablinks:focus {
   box-shadow: none;
   outline: none;
 }
 .tf-admin-meta-box .tf-admin-tab a.tf-tablinks.active {
-  background-color: #003c79;
-  color: #ffffff;
   position: relative;
+  color: #FFFFFF;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
 }
 @media only screen and (max-width: 1024px) {
   .tf-admin-meta-box .tf-admin-tab a.tf-tablinks.active {
@@ -1671,26 +1672,6 @@ Steps
 }
 .tf-admin-meta-box .tf-admin-tab a.tf-tablinks.active .tf-sec-icon {
   color: #ffffff;
-}
-.tf-admin-meta-box .tf-admin-tab a.tf-tablinks.active::after {
-  position: absolute;
-  content: "";
-  height: 10px;
-  width: 10px;
-  background: #ffffff;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-  right: -5px;
-  top: 50%;
-  margin-top: -5px;
-}
-@media only screen and (max-width: 1024px) {
-  .tf-admin-meta-box .tf-admin-tab a.tf-tablinks.active::after {
-    position: static;
-    display: none;
-  }
 }
 .tf-admin-meta-box .tf-admin-tab ul.tf-submenu {
   margin: 0;
@@ -1735,9 +1716,9 @@ Steps
   left: 0;
 }
 .tf-admin-meta-box .tf-tab-wrapper {
-  -webkit-flex: 0 0 calc(100% - 280px);
-  -ms-flex: 0 0 calc(100% - 280px);
-  flex: 0 0 calc(100% - 280px);
+  -webkit-flex: 0 0 calc(100% - 242px);
+  -ms-flex: 0 0 calc(100% - 242px);
+  flex: 0 0 calc(100% - 242px);
 }
 @media only screen and (max-width: 1024px) {
   .tf-admin-meta-box .tf-tab-wrapper {
@@ -3235,11 +3216,56 @@ Steps
   font-style: normal;
   margin-bottom: 3px;
   font-weight: 600;
-  font-size: 1rem;
-  color: #000;
+  font-size: 15px;
+  color: #27333F;
   display: flex !important;
   align-items: center;
-  line-height: 20px;
+  line-height: 25.5px;
+  letter-spacing: -0.25px;
+  margin-bottom: 4px;
+}
+.tf-field .tf-field-label .tf-desc-tooltip {
+  margin-left: 4px;
+  position: relative;
+  display: flex;
+}
+.tf-field .tf-field-label .tf-desc-tooltip .tf-desc-tooltip-content {
+  position: absolute;
+  width: 124px;
+  border-radius: 8px;
+  background: #27333F;
+  padding: 8px 12px;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+  z-index: 9;
+  left: 50%;
+  margin-left: -74px;
+  bottom: 25px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.tf-field .tf-field-label .tf-desc-tooltip .tf-desc-tooltip-content::before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 3px;
+  background: #27333F;
+  left: 50%;
+  margin-left: -8px;
+  bottom: -4px;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+.tf-field .tf-field-label .tf-desc-tooltip:hover .tf-desc-tooltip-content {
+  opacity: 1;
+  visibility: visible;
+}
+.tf-field .tf-field-label .tf-desc-tooltip svg {
+  cursor: pointer;
 }
 .tf-field .tf-field-label .tf-csf-badge {
   margin-left: 13px;
@@ -3261,16 +3287,16 @@ Steps
 .tf-field .tf-fieldset {
   font-style: normal;
   font-size: 0.875rem;
-  margin-top: 15px;
 }
 .tf-field .tf-fieldset a {
   font-style: normal;
   font-weight: 600;
 }
 .tf-field .tf-field-sub-title {
-  color: #87888B;
-  font-size: 0.875rem;
+  color: #566676;
+  font-size: 13px;
   margin-bottom: 0px;
+  margin-top: 4px;
   display: block;
 }
 
@@ -3291,51 +3317,53 @@ Steps
 .tf-field-text input, .tf-field-password input {
   width: 100%;
   padding: 12px 8px 12px 12px;
-  border: 1px solid #c4cbd4;
-  background-color: #f5f8ff;
+  height: 40px;
+  color: #27333F;
+  font-size: 15px;
+  padding: 8px 8px 8px 12px;
+  border: 1px solid #D9E0E8;
+  background: #F5F9FF;
   border-radius: 4px;
-  height: 48px;
-  color: #363e4a;
-  font-size: 0.875rem;
 }
 .tf-field-ical input:focus,
 .tf-field-ical_export input:focus,
 .tf-field-text input:focus, .tf-field-password input:focus {
-  background: #ffffff;
-  box-shadow: 0 0 0 2px #2979ff;
+  background: transparent;
+  box-shadow: none;
   border-radius: 4px;
+  border: 1px solid #D9E0E8;
 }
 .tf-field-ical input::-webkit-input-placeholder,
 .tf-field-ical_export input::-webkit-input-placeholder,
 .tf-field-text input::-webkit-input-placeholder, .tf-field-password input::-webkit-input-placeholder {
-  color: #a6b1bf;
+  color: #95A3B2;
 }
 .tf-field-ical input::-ms-input-placeholder,
 .tf-field-ical_export input::-ms-input-placeholder,
 .tf-field-text input::-ms-input-placeholder, .tf-field-password input::-ms-input-placeholder {
-  color: #a6b1bf;
+  color: #95A3B2;
 }
 .tf-field-ical input input:-ms-input-placeholder,
 .tf-field-ical_export input input:-ms-input-placeholder,
 .tf-field-text input input:-ms-input-placeholder, .tf-field-password input input:-ms-input-placeholder {
-  color: #a6b1bf;
+  color: #95A3B2;
 }
 .tf-field-ical input::-moz-placeholder,
 .tf-field-ical_export input::-moz-placeholder,
 .tf-field-text input::-moz-placeholder, .tf-field-password input::-moz-placeholder {
   opacity: 1;
-  color: #a6b1bf;
+  color: #95A3B2;
 }
 .tf-field-ical input:-moz-placeholder,
 .tf-field-ical_export input:-moz-placeholder,
 .tf-field-text input:-moz-placeholder, .tf-field-password input:-moz-placeholder {
   opacity: 1;
-  color: #a6b1bf;
+  color: #95A3B2;
 }
 .tf-field-ical input::placeholder,
 .tf-field-ical_export input::placeholder,
 .tf-field-text input::placeholder, .tf-field-password input::placeholder {
-  color: #a6b1bf;
+  color: #95A3B2;
 }
 .tf-field-ical input:read-only,
 .tf-field-ical_export input:read-only,
@@ -3349,38 +3377,72 @@ Steps
   box-shadow: none;
   border: 1px solid #c4cbd4;
 }
+.tf-field-ical .tf-field-text-group,
+.tf-field-ical_export .tf-field-text-group,
+.tf-field-text .tf-field-text-group, .tf-field-password .tf-field-text-group {
+  border-radius: 4px;
+  border: 1px solid #D9E0E8;
+  background: #FFFFFF;
+  height: 40px;
+  padding: 8px 8px 8px 12px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.tf-field-ical .tf-field-text-group i,
+.tf-field-ical_export .tf-field-text-group i,
+.tf-field-text .tf-field-text-group i, .tf-field-password .tf-field-text-group i {
+  color: #95A3B2;
+}
+.tf-field-ical .tf-field-text-group input,
+.tf-field-ical_export .tf-field-text-group input,
+.tf-field-text .tf-field-text-group input, .tf-field-password .tf-field-text-group input {
+  height: 24px;
+  border: 0px solid;
+  background: transparent;
+  box-shadow: none;
+}
+.tf-field-ical .tf-field-text-group input:focus,
+.tf-field-ical_export .tf-field-text-group input:focus,
+.tf-field-text .tf-field-text-group input:focus, .tf-field-password .tf-field-text-group input:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
 
 .tf-field-textarea textarea {
   width: 100% !important;
-  height: 180px;
-  padding: 12px 8px 12px 12px;
-  border: 1px solid #c4cbd4;
-  background-color: #f5f8ff;
-  border-radius: 4px;
-  color: #363e4a;
-  font-size: 0.875rem;
+  height: 120px;
+  padding: 8px 8px 8px 12px;
+  color: #566676;
+  font-size: 15px;
   width: 100%;
+  border-radius: 4px;
+  border: 1px solid #D9E0E8;
+  background: #F5F9FF;
+  line-height: 24px;
 }
 .tf-field-textarea textarea:focus {
   background: #ffffff;
-  box-shadow: 0 0 0 2px #2979ff;
-  border-radius: 4px;
+  box-shadow: none;
 }
 
 .tf-field-select select.tf-select {
   width: 100%;
   max-width: 100%;
-  padding: 12px 8px 12px 12px;
-  border: 1px solid #c4cbd4;
-  background-color: #f5f8ff;
+  padding: 8px 8px 8px 12px;
+  border: 1px solid #D9E0E8;
+  background-color: #FFFFFF;
   border-radius: 4px;
-  height: 48px;
-  color: #363e4a;
-  font-size: 0.875rem;
-  line-height: 22px;
+  height: 40px;
+  color: #27333F;
+  font-size: 15px;
+  line-height: 24px;
 }
 .tf-field-select select.tf-select:focus {
   outline: none;
+  border-color: #D9E0E8;
+  box-shadow: none;
 }
 
 .tf-field-select2 .select2-container {
@@ -3389,11 +3451,11 @@ Steps
 }
 .tf-field-select2 .select2-container .select2-selection {
   width: 100%;
-  padding: 2px 8px 0 12px;
-  border: 1px solid #c4cbd4;
-  background-color: #f5f8ff;
+  padding: 4px 8px 0 12px;
+  border: 1px solid #D9E0E8;
+  background: #F5F9FF;
   border-radius: 4px;
-  min-height: 48px;
+  min-height: 40px;
   color: #363e4a;
   font-size: 0.875rem;
 }
@@ -3436,7 +3498,7 @@ Steps
   word-break: keep-all;
 }
 .tf-field-select2 .select2-container--default .select2-selection--single .select2-selection__arrow {
-  height: 48px;
+  height: 40px;
 }
 .tf-field-select2 .tf-select-box-option .tf-add-category {
   margin-top: 16px;
@@ -3829,9 +3891,9 @@ Steps
 }
 
 .tf-field-heading {
-  padding: 16px 24px;
+  padding: 24px;
   margin: 0 -24px;
-  background-color: #f0f2f4;
+  background-color: #EBF5FF;
 }
 .tf-field-heading .tf-field-heading-inner {
   display: -webkit-box;
@@ -3839,6 +3901,8 @@ Steps
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  gap: 32px;
+  align-items: end;
 }
 .tf-field-heading .tf-field-heading-inner .tf-field-heading-icon {
   margin-right: 10px;
@@ -3855,22 +3919,48 @@ Steps
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: #2979ff;
+  background-color: #EBF5FF;
   color: #ffffff;
   border-radius: 4px;
+  flex-wrap: nowrap;
 }
 .tf-field-heading .tf-field-heading-inner .tf-field-heading-content {
   color: #000;
   font-size: 0.875rem;
   font-weight: 600;
+  width: 100%;
 }
 .tf-field-heading .tf-field-heading-inner .tf-field-heading-content h3 {
   margin: 0;
+  color: #27333F;
+  font-size: 19px;
+  font-style: normal;
   font-weight: 600;
-  color: #363e4a;
+  line-height: 32px;
+  letter-spacing: -0.75px;
+}
+.tf-field-heading .tf-field-heading-inner .tf-field-heading-content p {
+  color: #566676;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px; /* 153.846% */
+  margin: 0;
 }
 .tf-field-heading .tf-field-heading-inner .tf-field-heading-content.has-content h3 {
-  margin-bottom: 10px;
+  margin-bottom: 4px;
+}
+.tf-field-heading .tf-field-heading-inner .tf-heading-docs a {
+  display: flex;
+  text-decoration: none;
+  color: #003C79;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px; /* 153.846% */
+  gap: 8px;
+}
+.tf-field-heading .tf-field-heading-inner .tf-heading-docs a:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .tf-field-notice-inner {
@@ -3957,11 +4047,19 @@ Steps
   color: #295BFF;
 }
 
+.tf-field-switch .tf-inline-switch {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.tf-field-switch .tf-inline-switch .tf-field-label {
+  margin-bottom: 0px;
+}
 .tf-field-switch .tf-switch-label {
   position: relative;
   display: inline-block;
-  width: 62px;
-  height: 28px;
+  width: 32px;
+  height: 20px;
   border-radius: 32px;
 }
 .tf-field-switch .tf-switch-label input {
@@ -3974,8 +4072,8 @@ Steps
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #DEE6EE;
-  border-radius: 20px;
+  background-color: #95A3B2;
+  border-radius: 50px;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
@@ -3984,12 +4082,12 @@ Steps
 .tf-field-switch .tf-switch-label .tf-switch-slider::before {
   position: absolute;
   content: "";
-  height: 20px;
-  width: 20px;
+  height: 14px;
+  width: 14px;
   border-radius: 50px;
-  top: 4px;
+  top: 3px;
   left: 4px;
-  background-color: #ECF2F8;
+  background-color: #FFFFFF;
   filter: drop-shadow(0px 2px 4px rgba(12, 31, 49, 0.12));
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
@@ -4019,11 +4117,11 @@ Steps
   opacity: 1;
 }
 .tf-field-switch .tf-switch-label input:checked + .tf-switch-slider {
-  background-color: #21A159;
+  background-color: #003C79;
 }
 .tf-field-switch .tf-switch-label input:checked + .tf-switch-slider:before {
   left: 100%;
-  margin-left: -24px;
+  margin-left: -18px;
   background-color: #ffffff;
   filter: drop-shadow(0px 2px 4px rgba(12, 31, 49, 0.12));
 }
@@ -4100,11 +4198,12 @@ Steps
   width: 100%;
   padding: 12px 8px 12px 12px;
   border: none;
-  background-color: #f5f8ff;
+  border: 1px solid #D9E0E8;
+  background: #F5F9FF;
   border-radius: 4px;
-  height: 48px;
-  color: #363e4a;
-  font-size: 0.875rem;
+  height: 40px;
+  color: #27333F;
+  font-size: 15px;
   border: 1px solid #c4cbd4;
 }
 .tf-field-time input:focus {
@@ -4113,105 +4212,129 @@ Steps
   border-radius: 4px;
 }
 .tf-field-time input::-webkit-input-placeholder {
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-time input::-ms-input-placeholder {
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-time input input:-ms-input-placeholder {
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-time input::-moz-placeholder {
   opacity: 1;
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-time input:-moz-placeholder {
   opacity: 1;
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-time input::placeholder {
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-time i {
   position: absolute;
   top: 50%;
   right: 8px;
   transform: translateY(-50%);
-  color: #a6b1bf;
+  color: #27333F;
   font-size: 1rem;
 }
 
-.tf-repeater {
-  margin-bottom: 8px;
+.tf-field-repeater {
+  margin: 12px 0px;
 }
-.tf-repeater .tf-single-repeater-clone {
+.tf-field-repeater > .tf-fieldset {
+  border-radius: 8px;
+  border: 1px solid #F2F5F7;
+  background: #FFFFFF;
+  padding: 16px 16px 16px 0px;
+}
+.tf-field-repeater .tf-field-repeater-desc {
+  margin-bottom: 16px;
+}
+.tf-field-repeater .tf-repeater .tf-single-repeater-clone {
   display: none;
 }
-.tf-repeater .tf-repeater-header {
+.tf-field-repeater .tf-repeater .tf-repeater-header {
   display: flex;
   width: 100%;
-  padding: 8px 0;
-  background: #D8E6FF;
   position: relative;
-  border-radius: 5px 5px 0px 0px;
   align-items: center;
-  cursor: pointer;
 }
-.tf-repeater .tf-repeater-header .tf-repeater-icon {
-  padding: 8px;
+.tf-field-repeater .tf-repeater .tf-repeater-header:hover .tf-repeater-icon-move {
+  opacity: 1;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header.active-repeater .tf-repeater-header-info {
+  border-radius: 4px 4px 0 0;
+  background: #DBEAFE;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header.active-repeater .tf-repeater-header-info .tf-repeater-title {
+  font-weight: 600;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-header-info {
+  border-radius: 4px;
+  background: #F5F9FF;
+  border: 1px solid #F2F5F7;
+  width: 100%;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon {
+  padding: 4px;
   cursor: pointer;
   text-align: center;
-  display: inline-block;
-  border-radius: 4px;
+  display: inline-flex;
   font-size: 1rem;
   line-height: 24px;
   height: 24px;
   width: 24px;
+  border-radius: 6px;
+  border: 1px solid #D9E0E8;
+  background: #FFFFFF;
+  box-sizing: border-box;
 }
-.tf-repeater .tf-repeater-header .tf-repeater-icon-move {
-  color: #76a9ff;
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-move {
+  cursor: pointer;
+  opacity: 0;
+  transition: 0.3s all ease;
 }
-.tf-repeater .tf-repeater-header .tf-repeater-icon-move:hover {
-  background-color: #c4daff;
-  transition: 0.4s;
-  color: #2979ff;
-}
-.tf-repeater .tf-repeater-header .tf-repeater-icon-clone {
-  color: #76a9ff;
-}
-.tf-repeater .tf-repeater-header .tf-repeater-icon-clone:hover {
-  background-color: #c4daff;
-  transition: 0.4s;
-  color: #2979ff;
-}
-.tf-repeater .tf-repeater-header .tf-repeater-icon-delete {
-  color: #f8877f;
-}
-.tf-repeater .tf-repeater-header .tf-repeater-icon-delete:hover {
-  background-color: #fccbc8;
-  transition: 0.4s;
-  color: #dc3545;
-}
-.tf-repeater .tf-repeater-header .tf-repeater-title {
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-title {
   display: inline-block;
-  width: 100%;
-  margin-right: 120px;
   font-style: normal;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 400;
+  font-size: 15px;
   line-height: 24px;
+  cursor: pointer;
+  color: #27333F;
+  width: calc(100% - 108px);
 }
-.tf-repeater .tf-repeater-header .tf-repeater-icon-absulate {
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate {
   position: absolute;
   right: 8px;
   top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
-.tf-repeater .tf-repeater-content-wrap {
-  border: 1px solid #F0F2F4;
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate .tf-field-switch {
+  width: auto !important;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate .tf-field-switch .tf-field-label {
+  display: none !important;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate .package-action-hide {
+  display: none;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate .package-action-hide.show {
+  display: flex;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-content-wrap {
   background-color: #ffffff;
-  padding: 10px 24px;
-  box-shadow: 0px 5px 10px 1px #f5f5f5;
-  overflow: hidden;
+  padding: 8px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -4222,27 +4345,67 @@ Steps
   flex-wrap: wrap;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+  border-left: 1px solid #F2F5F7;
+  border-right: 1px solid #F2F5F7;
+  border-bottom: 1px solid #F2F5F7;
+  margin-left: 15px;
+  border-radius: 0 0 4px 4px;
 }
-.tf-repeater .tf-repeater-add .tf-repeater-icon {
-  padding: 8px 15px;
-  cursor: pointer;
-  text-align: center;
-  line-height: 0;
-  display: inline-block;
-  line-height: 24px;
-  background-color: #003c79;
-  border-radius: 4px;
-  font-size: 1rem;
+.tf-field-repeater .tf-repeater .tf-repeater-content-wrap .tf-field:nth-child(1) {
+  padding-top: 0px;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-content-wrap .tf-action-button-group {
+  display: flex;
+  gap: 24px;
+  margin-top: 12px;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-content-wrap .tf-action-button-group .button-primary,
+.tf-field-repeater .tf-repeater .tf-repeater-content-wrap .tf-action-button-group .button-secondary {
+  border-radius: 8px;
+  background: #EBF5FF;
+  color: #003C79;
+  border-radius: 8px;
+  padding: 12px 32px !important;
+  font-size: 15px;
   font-weight: 600;
-  color: #ffffff;
-  letter-spacing: 0.5px;
+  line-height: 24px !important;
+  border: 0px solid;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-.tf-repeater .tf-single-repeater {
-  margin-bottom: 24px;
+.tf-field-repeater .tf-repeater .tf-repeater-content-wrap .tf-action-button-group .button-primary {
+  background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
+  color: #FFFFFF;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header.active-repeater + .tf-repeater-content-wrap {
+  background-color: #FBFCFE;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-add {
+  margin-left: 16px;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-add .tf-repeater-icon {
+  color: #003C79;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.tf-field-repeater .tf-repeater .tf-single-repeater {
+  margin-bottom: 16px;
   border-radius: 5px;
-  overflow: hidden;
 }
-.tf-repeater .tf-field-notice-inner {
+.tf-field-repeater .tf-repeater .tf-single-repeater.tf-single-repeater-group_discount_package .tf-repeater-header .tf-repeater-header-info .tf-repeater-title {
+  width: calc(100% - 104px);
+  margin-right: 0px;
+}
+.tf-field-repeater .tf-repeater .tf-single-repeater.tf-single-repeater-group_discount_package .tf-repeater-content-wrap .tf-field:nth-child(1) {
+  padding-top: 12px;
+}
+.tf-field-repeater .tf-repeater .tf-field-notice-inner {
   margin-bottom: 24px;
 }
 
@@ -4638,38 +4801,109 @@ Steps
 
 .tf-field-number input {
   width: 100%;
-  padding: 12px 8px 12px 12px;
-  border: 1px solid #c4cbd4;
-  background-color: #f5f8ff;
   border-radius: 4px;
-  height: 48px;
-  color: #363e4a;
-  font-size: 0.875rem;
+  height: 40px;
+  color: #27333F;
+  font-size: 15px;
+  padding: 8px 8px 8px 12px;
+  border: 1px solid #D9E0E8;
+  background: #F5F9FF;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
 }
 .tf-field-number input:focus {
-  background: #ffffff;
-  box-shadow: 0 0 0 2px #2979ff;
+  background: transparent;
+  box-shadow: none;
   border-radius: 4px;
+  border: 1px solid #D9E0E8;
 }
 .tf-field-number input::-webkit-input-placeholder {
-  color: #a6b1bf;
+  color: #95A3B2;
 }
 .tf-field-number input::-ms-input-placeholder {
-  color: #a6b1bf;
+  color: #95A3B2;
 }
 .tf-field-number input input:-ms-input-placeholder {
-  color: #a6b1bf;
+  color: #95A3B2;
 }
 .tf-field-number input::-moz-placeholder {
   opacity: 1;
-  color: #a6b1bf;
+  color: #95A3B2;
 }
 .tf-field-number input:-moz-placeholder {
   opacity: 1;
-  color: #a6b1bf;
+  color: #95A3B2;
 }
 .tf-field-number input::placeholder {
-  color: #a6b1bf;
+  color: #95A3B2;
+}
+.tf-field-number input::-webkit-outer-spin-button, .tf-field-number input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.tf-field-number .tf-unit-price-box {
+  border-radius: 4px;
+  border: 1px solid #D9E0E8;
+  background: #FFFFFF;
+  display: flex;
+  width: 100%;
+}
+.tf-field-number .tf-unit-price-box input,
+.tf-field-number .tf-unit-price-box select {
+  width: 50%;
+}
+.tf-field-number .tf-unit-price-box input {
+  border: 0px solid;
+  color: #27333F;
+  text-align: center;
+  font-size: 15px;
+  background-color: transparent;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+}
+.tf-field-number .tf-unit-price-box input:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+.tf-field-number .tf-unit-price-box input::-webkit-outer-spin-button, .tf-field-number .tf-unit-price-box input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.tf-field-number .tf-unit-price-box select {
+  background-color: #F5F9FF;
+  border-radius: 0px;
+  border: 0px solid;
+  color: #566676;
+  text-align: center;
+}
+.tf-field-number .tf-unit-price-box select:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+.tf-field-number .tf-number-range {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+.tf-field-number .tf-number-range .tf-number-field-box {
+  border-radius: 4px;
+  border: 1px solid #D9E0E8;
+  background: #FFFFFF;
+  height: 40px;
+  padding: 8px 8px 8px 12px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: calc(50% - 12px);
+}
+.tf-field-number .tf-number-range .tf-number-field-box input {
+  height: 24px;
+  border: 0px solid;
+  background: transparent;
 }
 
 textarea.tf-exp-imp-field {
@@ -4804,26 +5038,169 @@ a.tf-import-btn, a.tf-export-btn {
 }
 
 .tf-apt-cal-wrap .fc-view-harness,
-.tf-room-cal-wrap .fc-view-harness {
+.tf-room-cal-wrap .fc-view-harness,
+.tf-tour-cal-wrap .fc-view-harness {
   height: 395px !important;
 }
 .tf-apt-cal-wrap .fc-direction-ltr .fc-daygrid-event.fc-event-end,
 .tf-apt-cal-wrap .fc-direction-rtl .fc-daygrid-event.fc-event-start,
 .tf-room-cal-wrap .fc-direction-ltr .fc-daygrid-event.fc-event-end,
-.tf-room-cal-wrap .fc-direction-rtl .fc-daygrid-event.fc-event-start {
+.tf-room-cal-wrap .fc-direction-rtl .fc-daygrid-event.fc-event-start,
+.tf-tour-cal-wrap .fc-direction-ltr .fc-daygrid-event.fc-event-end,
+.tf-tour-cal-wrap .fc-direction-rtl .fc-daygrid-event.fc-event-start {
   font-size: 0.625rem;
 }
 .tf-apt-cal-wrap .fc .fc-bg-event .fc-event-title,
-.tf-room-cal-wrap .fc .fc-bg-event .fc-event-title {
+.tf-room-cal-wrap .fc .fc-bg-event .fc-event-title,
+.tf-tour-cal-wrap .fc .fc-bg-event .fc-event-title {
   font-size: 0.625rem;
 }
 .tf-apt-cal-wrap .fc .fc-daygrid-event,
-.tf-room-cal-wrap .fc .fc-daygrid-event {
+.tf-room-cal-wrap .fc .fc-daygrid-event,
+.tf-tour-cal-wrap .fc .fc-daygrid-event {
   cursor: pointer;
 }
+.tf-apt-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date,
+.tf-room-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date,
+.tf-tour-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date {
+  background-color: #e33529 !important;
+  border-color: #e33529 !important;
+}
+.tf-apt-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date .fc-event-main,
+.tf-room-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date .fc-event-main,
+.tf-tour-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date .fc-event-main {
+  opacity: 0;
+}
 .tf-apt-cal-wrap table,
-.tf-room-cal-wrap table {
+.tf-room-cal-wrap table,
+.tf-tour-cal-wrap table {
   margin-bottom: 0 !important;
+}
+.tf-apt-cal-wrap .bulk-popup-content,
+.tf-room-cal-wrap .bulk-popup-content,
+.tf-tour-cal-wrap .bulk-popup-content {
+  margin-top: 15px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .bulk-popup-content-box,
+.tf-room-cal-wrap .bulk-popup-content .bulk-popup-content-box,
+.tf-tour-cal-wrap .bulk-popup-content .bulk-popup-content-box {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-edit-header,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-edit-header,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-edit-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  left: 0;
+  width: 100%;
+  background: #fff;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-edit-header h3,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-edit-header h3,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-edit-header h3 {
+  margin: 0;
+  font-size: 24px;
+  color: #27333F;
+  color: #27333F;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: -0.75px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-edit-header .tf_tour_bulk_close,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-edit-header .tf_tour_bulk_close,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-edit-header .tf_tour_bulk_close {
+  cursor: pointer;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section {
+  display: none;
+  border-radius: 8px;
+  border: 1px solid #F2F5F7;
+  background: #FFFFFF;
+  padding: 24px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-field-checkbox,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-field-checkbox,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-field-checkbox {
+  margin-bottom: 16px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-field-checkbox > label,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-field-checkbox > label,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-field-checkbox > label {
+  margin-bottom: 8px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li {
+  margin: 0;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label {
+  color: #27333F;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  padding-left: 26px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::before,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::before,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::before {
+  top: -2px;
+  height: 16px;
+  width: 16px;
+  border: 2px solid #D9E0E8;
+  border-radius: 4px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::after,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::after,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::after {
+  top: -1px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-weeks-checkbox ul li,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-weeks-checkbox ul li,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-weeks-checkbox ul li {
+  width: calc(25% - 16px);
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-days-checkbox ul li,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-days-checkbox ul li,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-days-checkbox ul li {
+  width: calc(9.0909090909% - 16px);
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-months-checkbox ul li,
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-years-checkbox ul li,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-months-checkbox ul li,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-years-checkbox ul li,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-months-checkbox ul li,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-years-checkbox ul li {
+  width: calc(16.6666666667% - 16px);
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-years-checkbox,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-years-checkbox,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-years-checkbox {
+  margin-bottom: 0px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-field.tf-field-repeater,
+.tf-room-cal-wrap .bulk-popup-content .tf-field.tf-field-repeater,
+.tf-tour-cal-wrap .bulk-popup-content .tf-field.tf-field-repeater {
+  padding-bottom: 0px;
 }
 
 .tf-room-cal-field a.button-primary {
@@ -4846,6 +5223,95 @@ a.tf-import-btn, a.tf-export-btn {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.tf-bulk-popup,
+.tf-reset-confirmation-box {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+.tf-bulk-popup .bulk-popup-content,
+.tf-reset-confirmation-box .bulk-popup-content {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0px 4px 140px 0px rgba(0, 0, 0, 0.25);
+  padding: 24px;
+  width: 736px;
+}
+.tf-bulk-popup .bulk-popup-content .bulk-popup-content-box,
+.tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-height: 500px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  scrollbar-width: thin;
+}
+@media only screen and (max-width: 768px) {
+  .tf-bulk-popup .bulk-popup-content .bulk-popup-content-box,
+  .tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box {
+    max-height: 360px;
+  }
+}
+.tf-bulk-popup .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar,
+.tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar {
+  width: 6px;
+}
+.tf-bulk-popup .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar-track,
+.tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar-track {
+  background: transparent;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.tf-bulk-popup .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar-thumb,
+.tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+.tf-bulk-popup .bulk-popup-content .bulk-popup-content-box .tf-date-time-selection,
+.tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box .tf-date-time-selection {
+  border: 0px solid;
+  padding: 0px;
+}
+.tf-bulk-popup .bulk-popup-content .bulk-popup-content-box .tf-date-time-selection .tf-field-select,
+.tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box .tf-date-time-selection .tf-field-select {
+  width: calc(100% - 2px) !important;
+}
+.tf-bulk-popup .bulk-popup-content .tf-repeater .tf-repeater-add .tf-repeater-icon,
+.tf-reset-confirmation-box .bulk-popup-content .tf-repeater .tf-repeater-add .tf-repeater-icon {
+  font-size: 12px;
+}
+.tf-bulk-popup .bulk-popup-content .tf-mb-5,
+.tf-reset-confirmation-box .bulk-popup-content .tf-mb-5 {
+  margin-bottom: 10px;
+}
+
+.tf-single-package .tf-field-switch {
+  width: 160px;
+}
+.tf-single-package .tf-form-fields {
+  width: calc(100% - 160px);
+  display: flex;
+  gap: 12px;
+}
+.tf-single-package .tf-form-fields .tf_option_pricing_type_person {
+  width: 33%;
+}
+
+.tf-tour-limitation-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
 }
 
 .tf-single-option {
@@ -4880,6 +5346,734 @@ a.tf-import-btn, a.tf-export-btn {
   transition: opacity 0.2s ease, visibility 0.2s ease;
   -webkit-animation: tf-rotate 450ms infinite linear;
   animation: tf-rotate 450ms infinite linear;
+}
+
+.tf-reset-confirmation-box {
+  display: none;
+}
+.tf-reset-confirmation-box .tf-confirmation-content {
+  width: 320px;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header {
+  display: flex;
+  gap: 8px;
+}
+.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header h3 {
+  margin: 0 0 35px 0;
+}
+.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header .tf_reset_confirmation_close svg {
+  cursor: pointer;
+}
+.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-actions button {
+  border-radius: 8px;
+  background: #EBF5FF;
+  color: #003C79;
+  border-radius: 8px;
+  padding: 12px 32px !important;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px !important;
+  border: 0px solid;
+  cursor: pointer;
+}
+.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-actions button.tf-confirmed-btn {
+  background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
+  color: #FFFFFF;
+}
+
+.tf-tour-cal-wrap,
+.tf-apt-cal-wrap,
+.tf-room-cal-wrap {
+  position: relative;
+}
+.tf-tour-cal-wrap .tf-tour-reset-refresh,
+.tf-apt-cal-wrap .tf-tour-reset-refresh,
+.tf-room-cal-wrap .tf-tour-reset-refresh {
+  position: absolute;
+  right: 110px;
+  top: 25px;
+}
+.tf-tour-cal-wrap .tf-tour-reset-refresh span,
+.tf-apt-cal-wrap .tf-tour-reset-refresh span,
+.tf-room-cal-wrap .tf-tour-reset-refresh span {
+  height: 32px;
+  font-size: 12px;
+  padding: 0 12px !important;
+}
+.tf-tour-cal-wrap .tf-tour-reset-refresh span svg,
+.tf-apt-cal-wrap .tf-tour-reset-refresh span svg,
+.tf-room-cal-wrap .tf-tour-reset-refresh span svg {
+  height: 18px;
+}
+.tf-tour-cal-wrap .tf-tour-cal,
+.tf-tour-cal-wrap .tf-apt-cal,
+.tf-tour-cal-wrap .tf-room-cal,
+.tf-apt-cal-wrap .tf-tour-cal,
+.tf-apt-cal-wrap .tf-apt-cal,
+.tf-apt-cal-wrap .tf-room-cal,
+.tf-room-cal-wrap .tf-tour-cal,
+.tf-room-cal-wrap .tf-apt-cal,
+.tf-room-cal-wrap .tf-room-cal {
+  border-radius: 8px;
+  border: 1px solid #F2F5F7;
+  background: #FFFFFF;
+  padding: 24px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar {
+  margin-bottom: 16px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-toolbar-title {
+  padding: 0 !important;
+  color: #27333F;
+  font-size: 15px !important;
+  font-weight: 600;
+  line-height: 24px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group {
+  border-radius: 8px;
+  border: 0.5px solid #F2F5F7;
+  background: #FFFFFF;
+  padding: 6px 8px;
+  gap: 20px;
+  height: 32px;
+  align-items: center;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button {
+  background-color: transparent;
+  border: 0px;
+  padding: 0;
+  position: relative;
+  top: -1px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before {
+  color: #566676;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button {
+  position: relative;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after {
+  position: absolute;
+  content: "";
+  width: 8px;
+  height: 8px;
+  background-color: #566676;
+  border-radius: 50%;
+  left: -14px;
+  top: 8.5px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table {
+  border: 0px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header th {
+  border: 0px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller {
+  scroll-behavior: smooth;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  scrollbar-width: thin;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar {
+  width: 6px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track {
+  background: transparent;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header {
+  border-top: 0.5px solid #F2F5F7;
+  margin-bottom: 16px !important;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th {
+  border: 0px;
+  padding-top: 12px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a {
+  color: #27333F;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body > td {
+  border: 0px solid;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child {
+  margin-bottom: 0px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td {
+  width: calc((100% - 48px) / 7);
+  border-radius: 8px;
+  border: 0.5px solid #F2F5F7;
+  background: #FFFFFF;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today {
+  background-color: rgba(255, 220, 40, 0.15);
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top {
+  flex-direction: row;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a {
+  padding: 8px;
+  color: #27333F;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event {
+  border-radius: 4px;
+  border: 0px;
+  border-left: 1px solid #002AB3;
+  background: #EBEFFF;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 8px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title {
+  color: #002AB3;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+}
+.tf-tour-cal-wrap .tf-apt-cal-field,
+.tf-tour-cal-wrap .tf-room-cal-field,
+.tf-apt-cal-wrap .tf-apt-cal-field,
+.tf-apt-cal-wrap .tf-room-cal-field,
+.tf-room-cal-wrap .tf-apt-cal-field,
+.tf-room-cal-wrap .tf-room-cal-field {
+  border-radius: 8px;
+  border: 1px solid #F2F5F7;
+  background: #FFFFFF;
+  padding: 24px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+.tf-tour-cal-wrap .tf-date-time-selection,
+.tf-apt-cal-wrap .tf-date-time-selection,
+.tf-room-cal-wrap .tf-date-time-selection {
+  border-radius: 8px;
+  border: 1px solid #F2F5F7;
+  background: #FFFFFF;
+  padding: 24px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater,
+.tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater,
+.tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap {
+  margin: 0;
+  border: 0px solid;
+}
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset,
+.tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset,
+.tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset {
+  border: 0px solid #f2f5f7;
+  background: #fff;
+  padding: 0px;
+}
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset .tf-repeater-add,
+.tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset .tf-repeater-add,
+.tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset .tf-repeater-add {
+  margin-left: 0px;
+}
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap {
+  padding: 0 1px 0 0;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 16px;
+}
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-field,
+.tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-field,
+.tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-field {
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete,
+.tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete,
+.tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete {
+  cursor: pointer;
+}
+.tf-tour-cal-wrap .tf-field-group-box,
+.tf-apt-cal-wrap .tf-field-group-box,
+.tf-room-cal-wrap .tf-field-group-box {
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid #F2F5F7;
+  background: #FFFFFF;
+}
+.tf-tour-cal-wrap .tf-field-group-box .tf-fieldset,
+.tf-apt-cal-wrap .tf-field-group-box .tf-fieldset,
+.tf-room-cal-wrap .tf-field-group-box .tf-fieldset {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.tf-tour-cal-wrap .tf-field-group-box .tf-fieldset .tf-field,
+.tf-apt-cal-wrap .tf-field-group-box .tf-fieldset .tf-field,
+.tf-room-cal-wrap .tf-field-group-box .tf-fieldset .tf-field {
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater,
+.tf-apt-cal-wrap .tf-package-field-repeater,
+.tf-room-cal-wrap .tf-package-field-repeater {
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid #F2F5F7;
+  background: #FFFFFF;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater:last-child,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater:last-child,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater:last-child {
+  margin-bottom: 0px;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-header .tf-repeater-title,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-header .tf-repeater-title,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-header .tf-repeater-title {
+  width: calc(100% - 30px) !important;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap {
+  padding: 8px;
+  margin: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap .tf-tab-switch-box .tf-tab-field-content .tf-field:first-child,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap .tf-tab-switch-box .tf-tab-field-content .tf-field:first-child,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap .tf-tab-switch-box .tf-tab-field-content .tf-field:first-child {
+  padding-bottom: 0px;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field:first-child,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field:first-child,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field:first-child {
+  padding: 12px 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field .tf-repeater-content-wrap {
+  border: 0px solid;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields {
+  margin: 0;
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset {
+  padding: 0;
+  border: 0px solid;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater {
+  margin-bottom: 16px;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap .tf-field,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap .tf-field,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap .tf-field {
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete svg,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete svg,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete svg {
+  cursor: pointer;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf-repeater-add,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf-repeater-add,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf-repeater-add {
+  margin: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater {
+  padding-bottom: 16px;
+  margin: 0;
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset {
+  padding: 0;
+  border: 0px solid;
+  background: transparent;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater {
+  margin-bottom: 16px;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater .tf-repeater-content-wrap {
+  padding: 0;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: nowrap;
+  background-color: transparent;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater .tf-repeater-content-wrap .tf-field,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater .tf-repeater-content-wrap .tf-field,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater .tf-repeater-content-wrap .tf-field {
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .tf-repeater-add,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .tf-repeater-add,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .tf-repeater-add {
+  margin: 0;
+}
+.tf-tour-cal-wrap .tf-save-calendar,
+.tf-apt-cal-wrap .tf-save-calendar,
+.tf-room-cal-wrap .tf-save-calendar {
+  display: flex;
+  gap: 16px;
+}
+.tf-tour-cal-wrap .button-primary,
+.tf-tour-cal-wrap .button-secondary,
+.tf-apt-cal-wrap .button-primary,
+.tf-apt-cal-wrap .button-secondary,
+.tf-room-cal-wrap .button-primary,
+.tf-room-cal-wrap .button-secondary {
+  border-radius: 8px;
+  background: #EBF5FF;
+  color: #003C79;
+  border-radius: 8px;
+  padding: 12px 32px !important;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px !important;
+  border: 0px solid;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.tf-tour-cal-wrap .button-primary,
+.tf-apt-cal-wrap .button-primary,
+.tf-room-cal-wrap .button-primary {
+  background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
+  color: #FFFFFF;
+}
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater:last-child,
+.tf-apt-cal-wrap .tf-single-options .tf-single-repeater:last-child,
+.tf-room-cal-wrap .tf-single-options .tf-single-repeater:last-child {
+  margin-bottom: 0px;
+}
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset,
+.tf-apt-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset,
+.tf-room-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater,
+.tf-apt-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater,
+.tf-room-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater {
+  padding: 16px;
+}
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater:last-child,
+.tf-apt-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater:last-child,
+.tf-room-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater:last-child {
+  margin-bottom: 16px;
+}
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap {
+  padding: 0;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: nowrap;
+}
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-field,
+.tf-apt-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-field,
+.tf-room-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-field {
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete,
+.tf-apt-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete,
+.tf-room-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete {
+  cursor: pointer;
+}
+
+.tf-apt-cal-wrap,
+.tf-room-cal-wrap {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.tf-apt-cal-wrap .tf-apt-cal,
+.tf-apt-cal-wrap .tf-room-cal,
+.tf-room-cal-wrap .tf-apt-cal,
+.tf-room-cal-wrap .tf-room-cal {
+  width: 100%;
 }
 
 @-webkit-keyframes tf-rotate {
@@ -5153,6 +6347,79 @@ a.tf-import-btn, a.tf-export-btn {
 }
 .tf-field-switch_group .tf-switch-label input:checked + .tf-switch-slider .tf-switch-off {
   opacity: 0;
+}
+
+.tf-field-accordion .tf-tab-switch-box.active-repeater .tf-tab-field-header {
+  border-radius: 4px 4px 0 0;
+  border-top: 1px solid #D9E0E8;
+  border-bottom: 1px solid transparent;
+  border-left: 1px solid #D9E0E8;
+  border-right: 1px solid #D9E0E8;
+}
+.tf-field-accordion .tf-tab-switch-box.active-repeater .tf-tab-field-content {
+  border-bottom: 1px solid #D9E0E8;
+  border-top: 0px solid;
+  border-left: 1px solid #D9E0E8;
+  border-right: 1px solid #D9E0E8;
+}
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header {
+  border-radius: 4px;
+  border-bottom: 1px solid #D9E0E8;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-top: 1px solid transparent;
+  background: #F5F9FF;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+}
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas.rotated i {
+  transform: rotate(180deg);
+}
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .field-label {
+  color: #27333F;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+}
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas i {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid #D9E0E8;
+  background: #FFFFFF;
+  line-height: 26px;
+}
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field.tf-field-switch {
+  padding: 0;
+  width: 32px !important;
+}
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field.tf-field-switch .tf-inline-switch {
+  justify-content: end;
+  width: 32px;
+}
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field.tf-field-switch .tf-inline-switch .tf-field-label {
+  display: none !important;
+}
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-content {
+  border-radius: 0px 0px 4px 4px;
+  border: 1px solid #F2F5F7;
+  background: #FFFCF5;
+  padding: 4px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 15px;
 }
 
 .tf-backend-tour-booking h1,
