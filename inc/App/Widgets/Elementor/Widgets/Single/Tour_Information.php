@@ -64,7 +64,10 @@ class Tour_Information extends Widget_Base {
 		// $this->tf_content_layout_controls();
 
 		do_action( 'tf/single-tour-information/before-style-controls', $this );
-		$this->tf_tour_information_style_controls();
+		$this->tf_card_style_controls();
+		$this->tf_info_items_style_controls();
+		$this->tf_person_card_style_controls();
+		$this->tf_price_style_controls();
 		do_action( 'tf/single-tour-information/after-style-controls', $this );
 	}
 
@@ -82,34 +85,293 @@ class Tour_Information extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function tf_tour_information_style_controls() {
-		$this->start_controls_section( 'tour_information_style_section', [
-			'label' => esc_html__( 'Style', 'tourfic' ),
+    protected function tf_card_style_controls() {
+		$this->start_controls_section( 'card_style', [
+			'label' => esc_html__( 'Card Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
-		]);
+		] );
 
-		$this->add_control( "bg_color", [
-			'label'     => __( 'Background Color', 'tourfic' ),
+		$this->add_responsive_control( "card_padding", [
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-trip-info" => $this->tf_apply_dim( 'padding' ),
+			],
+		] );
+
+		$this->add_control( 'card_bg_color', [
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-trip-info" => 'background-color: {{VALUE}};',
 			],
 		] );
 
-        // $this->add_control( "btn_color", [
-		// 	'label'     => __( 'Text Color', 'tourfic' ),
-		// 	'type'      => Controls_Manager::COLOR,
-		// 	'selectors' => [
-		// 		"{{WRAPPER}} .tf-single-action-btns a" => 'color: {{VALUE}};',
-		// 		"{{WRAPPER}} .tf-single-action-btns a svg path" => 'fill: {{VALUE}};',
-		// 	],
-		// ] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "card_border",
+			'selector' => "{{WRAPPER}} .tf-trip-info",
+		] );
 
-        // $this->add_group_control( Group_Control_Typography::get_type(), [
-		// 	'name'     => "btn_typography",
-		// 	'selector' => "{{WRAPPER}} .tf-single-action-btns a",
-		// ] );
+		$this->add_control( "card_border_radius", [
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-trip-info" => $this->tf_apply_dim( 'border-radius' ),
+			],
+		] );
 
+		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
+			'name' => 'card_shadow',
+			'selector' => '{{WRAPPER}} .tf-trip-info',
+		]);
+		
+		$this->end_controls_section();
+	}
+
+    protected function tf_info_items_style_controls() {
+		$this->start_controls_section( 'content_style', [
+			'label' => esc_html__( 'Items Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+        $this->add_responsive_control( "tf_items_gap", [
+			'label'      => esc_html__( 'Items gap', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-trip-info .tf-short-info ul li" => 'margin-bottom: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_control( "icon_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Icon', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_item_icon_color', [
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-trip-info .tf-short-info ul li i' => 'color: {{VALUE}};',
+			],
+		]);
+
+        $this->add_responsive_control( "item_icon_size", [
+			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-trip-info .tf-short-info ul li i" => 'font-size: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+			],
+		] );
+
+		$this->add_control( "item_label_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Label', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_item_label_color', [
+			'label'     => esc_html__( 'Label Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-trip-info .tf-short-info ul li' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Label Typography', 'tourfic' ),
+			'name'     => "tf_item_label_typography",
+			'selector' => "{{WRAPPER}} .tf-trip-info .tf-short-info ul li",
+		]);
+		
+		$this->end_controls_section();
+	}
+
+    protected function tf_person_card_style_controls() {
+		$this->start_controls_section( 'person_card_style', [
+			'label' => esc_html__( 'Traveller Category Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+		$this->add_responsive_control( "person_card_padding", [
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-trip-info .person-info" => $this->tf_apply_dim( 'padding' ),
+			],
+		] );
+
+		$this->add_control( 'person_card_bg_color', [
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-trip-info .person-info" => 'background-color: {{VALUE}};',
+			],
+		] );
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "person_card_border",
+			'selector' => "{{WRAPPER}} .tf-trip-info .person-info",
+		] );
+
+		$this->add_control( "person_card_border_radius", [
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-trip-info .person-info" => $this->tf_apply_dim( 'border-radius' ),
+			],
+		] );
+
+		$this->add_responsive_control( "tf_tcategory_items_gap", [
+			'label'      => esc_html__( 'Items gap', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-trip-person-info ul" => 'gap: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+        $this->add_control( "tcategory_icon_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Icon', 'tourfic' ),
+		] );
+
+        $this->add_responsive_control( "tcategory_icon_size", [
+			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-trip-info .person-info i" => 'font-size: {{SIZE}}{{UNIT}}',
+			],
+		] );
+
+		$this->add_control( "tcategory_icon_color", [
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-trip-info .person-info i" => 'color: {{VALUE}}',
+			],
+		] );
+
+        $this->add_control( "tcategory_label_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Label', 'tourfic' ),
+		] );
+
+        $this->add_control( 'tcategory_label_color', [
+			'label'     => esc_html__( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-trip-info .person-info p' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
+			'name'     => "tcategory_label_typography",
+			'selector' => "{{WRAPPER}} .tf-trip-info .person-info p",
+		]);
+		
+		$this->end_controls_section();
+	}
+
+    protected function tf_price_style_controls() {
+		$this->start_controls_section( 'price_style', [
+			'label' => esc_html__( 'Price Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+        $this->add_control( 'price_color', [
+			'label'     => esc_html__( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-trip-info .tf-trip-pricing .tf-price-amount' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
+			'name'     => "price_typography",
+			'selector' => "{{WRAPPER}} .tf-trip-info .tf-trip-pricing .tf-price-amount",
+		]);
+
+        $this->add_control( "price_label_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Label', 'tourfic' ),
+		] );
+
+        $this->add_control( 'price_label_color', [
+			'label'     => esc_html__( 'Label Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-trip-info .tf-trip-pricing .tf-price-label, .tf-trip-info .tf-trip-pricing .tf-price-label-bttm' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Label Typography', 'tourfic' ),
+			'name'     => "price_label_typography",
+			'selector' => "{{WRAPPER}} .tf-trip-info .tf-trip-pricing .tf-price-label, .tf-trip-info .tf-trip-pricing .tf-price-label-bttm",
+		]);
+		
 		$this->end_controls_section();
 	}
 

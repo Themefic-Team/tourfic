@@ -5,6 +5,18 @@
     background-color: $color-filling-fg;
     @include bd-radius(5px);
 
+    .tf-short-info{
+        li{
+            &:last-child{
+                margin-bottom: 0;
+            }
+            i{
+                width: auto;
+                min-width: 24px;
+            }
+        }
+    }
+
     // trip info -
     .person-info.active {
         background: $color-brand-lite;
@@ -30,8 +42,7 @@
         justify-content: center;
         flex-direction: column;
         gap: 8px;
-        width: 50px;
-        height: 60px;
+        padding: 10px 10px;
         margin-top: 0px;
         &:hover{
             cursor: pointer;

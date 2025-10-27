@@ -59,6 +59,9 @@ class Tour_Info_Cards extends Widget_Base {
 
 		do_action( 'tf/single-tour-info-cards/before-style-controls', $this );
 		$this->tf_card_style_controls();
+		$this->tf_icon_style_controls();
+		$this->tf_title_style_controls();
+		$this->tf_content_style_controls();
 		do_action( 'tf/single-tour-info-cards/after-style-controls', $this );
 	}
 
@@ -98,10 +101,10 @@ class Tour_Info_Cards extends Widget_Base {
     }
 
     protected function tf_card_style_controls() {
-		$this->start_controls_section( 'tour_info_cards_style_section', [
-			'label' => esc_html__( 'Style', 'tourfic' ),
+		$this->start_controls_section( 'card_style', [
+			'label' => esc_html__( 'Card Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
-		]);
+		] );
 
 		$this->add_responsive_control( "card_padding", [
 			'label'      => esc_html__( 'Padding', 'tourfic' ),
@@ -112,22 +115,26 @@ class Tour_Info_Cards extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block" => $this->tf_apply_dim( 'padding' ),
+				"{{WRAPPER}} .tf-features-block-inner .tf-feature-block" => $this->tf_apply_dim( 'padding' ),
+				"{{WRAPPER}} .tf-square-block-content .tf-single-square-block" => $this->tf_apply_dim( 'padding' ),
 			],
 		] );
 
-		$this->add_control( "bg_color", [
-			'label'     => __( 'Card Background Color', 'tourfic' ),
+		$this->add_control( 'card_bg_color', [
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .tf-features-block-inner .tf-feature-block" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .tf-square-block-content .tf-single-square-block" => 'background-color: {{VALUE}};',
 			],
 		] );
 
-        $this->add_group_control( Group_Control_Border::get_type(), [
+		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "card_border",
-			'selector' => "{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block",
+			'selector' => "{{WRAPPER}} .tf-features-block-inner .tf-feature-block,
+						   {{WRAPPER}} .tf-square-block-content .tf-single-square-block",
 		] );
+
 		$this->add_control( "card_border_radius", [
 			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -136,12 +143,134 @@ class Tour_Info_Cards extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf-features-block-inner .tf-feature-block" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf-square-block-content .tf-single-square-block" => $this->tf_apply_dim( 'border-radius' ),
 			],
 		] );
+
 		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
 			'name' => 'card_shadow',
-			'selector' => '{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block',
+			'selector' => '{{WRAPPER}} .tf-features-block-inner .tf-feature-block,
+						   {{WRAPPER}} .tf-square-block-content .tf-single-square-block',
+		]);
+		
+		$this->end_controls_section();
+	}
+
+	protected function tf_icon_style_controls() {
+		$this->start_controls_section( 'icon_style', [
+			'label' => esc_html__( 'Icon Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+		$this->add_responsive_control( "tf_icon_size", [
+			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-feature-block .tf-feature-block-icon i" => 'font-size: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .tf-square-block-content .tf-single-square-block i" => 'font-size: {{SIZE}}{{UNIT}}',
+			],
+		] );
+
+		$this->add_control( "tf_icon_color", [
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-feature-block .tf-feature-block-icon i" => 'color: {{VALUE}}',
+				"{{WRAPPER}} .tf-square-block-content .tf-single-square-block i" => 'color: {{VALUE}}',
+			],
+		] );
+
+		$this->add_responsive_control( "tc_icon_gap", [
+			'label'     => esc_html__( 'Icon Gap', 'tourfic' ),
+			'type'      => Controls_Manager::SLIDER,
+			'range'     => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors' => [
+				"{{WRAPPER}} .tf-features-block-inner .tf-feature-block" => 'gap: {{SIZE}}px;',
+				"{{WRAPPER}} .tf-square-block-content .tf-single-square-block i" => 'margin-bottom: {{SIZE}}px;',
+			],
+		] );
+
+		$this->end_controls_section();
+	}
+
+    protected function tf_title_style_controls() {
+		$this->start_controls_section( 'title_style', [
+			'label' => esc_html__( 'Title Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+        $this->add_control( 'tf_title_color', [
+			'label'     => esc_html__( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-square-block-content .tf-single-square-block h4' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-feature-block .tf-feature-block-details h5' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
+			'name'     => "tf_title_typography",
+			'selector' => "{{WRAPPER}} .tf-square-block-content .tf-single-square-block h4,
+						   {{WRAPPER}} .tf-feature-block .tf-feature-block-details h5",
+		]);
+
+		$this->add_responsive_control( "title_margin", [
+			'label'      => __( 'Margin', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-feature-block .tf-feature-block-details h5' => $this->tf_apply_dim( 'margin' ),
+				'{{WRAPPER}} .tf-square-block-content .tf-single-square-block h4' => $this->tf_apply_dim( 'margin' ),
+			],
+		]);
+
+		$this->end_controls_section();
+	}
+
+    protected function tf_content_style_controls() {
+        $this->start_controls_section( 'content_style', [
+			'label' => esc_html__( 'Content Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+		$this->add_control( 'tf_content_color', [
+			'label'     => esc_html__( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-feature-block p' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-single-square-block p' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
+			'name'     => "tf_content_typography",
+			'selector' => "{{WRAPPER}} .tf-feature-block p,
+						   {{WRAPPER}} .tf-single-square-block p",
 		]);
 
 		$this->end_controls_section();
@@ -264,7 +393,7 @@ class Tour_Info_Cards extends Widget_Base {
         } elseif($style == 'style2' && ($tour_duration || $info_tour_type || $group_size || $language)) {
             ?>
             <div class="tf-square-block tf-info-cards-style2">
-                <div class="tf-square-block-content">
+                <div class="tf-square-block-content tf-grid-<?php echo esc_attr($grid_column); ?>">
                     <?php if ( $tour_duration ) { ?>
                         <div class="tf-single-square-block first">
                             <i class="<?php echo esc_attr($tour_duration_icon); ?>"></i>
