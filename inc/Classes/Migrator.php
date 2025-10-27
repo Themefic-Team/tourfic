@@ -1733,7 +1733,11 @@ class Migrator {
 						}
 					}
 				}
-				
+
+				// If not an array, initialize it
+				if ( ! is_array( $meta ) ) {
+					$meta = [];
+				}
 				$meta['tour_availability'] = wp_json_encode( $tour_availability_data );
 				if($discount_type!='none'){
 					$meta['allow_discount'] = '1';

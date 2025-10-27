@@ -213,6 +213,26 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 
 		$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability']) : '';
 
+		if($tour_type=='fixed'){
+			$tour_availability          = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
+
+			$expanded = [];
+			if ( !empty($tour_availability) && is_array( $tour_availability ) ) {
+				foreach ( $tour_availability as $range_key => $data ) {
+					if ( empty( $data['check_in'] ) || empty( $data['check_out'] ) ) {
+						continue;
+					}
+					// copy original data and set check_in/check_out to the single date
+					$entry = $data;
+					$key = $data['check_in'].' - '.$data['check_in'];
+					$entry['check_in']  = $data['check_in'];
+					$entry['check_out'] = $data['check_in'];
+					$expanded[ $key ] = $entry;
+				}
+			}
+			$tour_availability =  $expanded;
+		}
+		
 		echo wp_json_encode( array(
 			'tour_type'                 => $tour_type,
 			'disable_same_day'          => $disable_same_day,

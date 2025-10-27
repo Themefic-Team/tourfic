@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.18.2
+Stable tag: 2.18.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -404,11 +404,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.18.2 – October 26, 2025 =
+= 2.18.3 – October 27, 2025 =
 
-- New: Package pricing introduced for tour bookings.
-- New: Bulk selection added for the tour availability calendar.
-- Improved: Reset calendar option for hotel rooms and apartments.
+- Fixed: Import/export functionality issue.
+- Fixed: Tourfic resolved the availability issue.
+- Improved: Reset pop-up design for better user experience.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
