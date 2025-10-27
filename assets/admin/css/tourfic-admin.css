@@ -5356,6 +5356,7 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 40px;
   background-color: #ffffff;
   border-radius: 10px;
+  position: relative;
 }
 .tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header {
   display: flex;
@@ -5363,6 +5364,11 @@ a.tf-import-btn, a.tf-export-btn {
 }
 .tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header h3 {
   margin: 0 0 35px 0;
+}
+.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header .tf_reset_confirmation_close {
+  position: absolute;
+  right: 12px;
+  top: 12px;
 }
 .tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header .tf_reset_confirmation_close svg {
   cursor: pointer;

@@ -267,6 +267,7 @@
         padding: 40px;
         background-color: $color-white;
         border-radius: 10px;
+        position: relative;
         .tf-confirmation-header{
             display: flex;
             gap: 8px;
@@ -274,6 +275,9 @@
                 margin: 0 0 35px 0;
             }
             .tf_reset_confirmation_close{
+                position: absolute;
+                right: 12px;
+                top: 12px;
                 svg{
                     cursor: pointer;
                 }
