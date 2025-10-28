@@ -81,6 +81,12 @@ class Nearby_Places extends Widget_Base {
             ],
         ]);
 
+        $this->add_control('service',[
+			'label' => esc_html__( 'Service', 'tourfic' ),
+			'type' => \Elementor\Controls_Manager::HIDDEN,
+			'default' => $this->get_current_post_type(),
+		]);
+
 	    do_action( 'tf/single-nearby-places/after-content/controls', $this );
 
         $this->end_controls_section();
@@ -112,35 +118,33 @@ class Nearby_Places extends Widget_Base {
 			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .surroundings_sec_title",
 		]);
 
-		if($this->get_current_post_type() == 'tf_apartment'){
-			$this->add_control( 'tf_subtitle_heading', [
-				'type'  => Controls_Manager::HEADING,
-				'label' => __( 'Subtitle', 'tourfic' ),
-				'condition' => [
-					'nearby_places_style' => ['style2'],
-				],
-			] );
+		$this->add_control( 'tf_subtitle_heading', [
+			'type'  => Controls_Manager::HEADING,
+			'label' => __( 'Subtitle', 'tourfic' ),
+			'conditions' => $this->tf_display_conditionally_single([
+				'tf_apartment' => ['nearby_places_style' => ['style2']],
+			]),
+		] );
 
-			$this->add_control( 'tf_subtitle_color', [
-				'label'     => esc_html__( 'Subtitle Color', 'tourfic' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors'  => [
-					'{{WRAPPER}} .surroundings_subtitle' => 'color: {{VALUE}};',
-				],
-				'condition' => [
-					'nearby_places_style' => ['style2'],
-				],
-			]);
+		$this->add_control( 'tf_subtitle_color', [
+			'label'     => esc_html__( 'Subtitle Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .surroundings_subtitle' => 'color: {{VALUE}};',
+			],
+			'conditions' => $this->tf_display_conditionally_single([
+				'tf_apartment' => ['nearby_places_style' => ['style2']],
+			]),
+		]);
 
-			$this->add_group_control( Group_Control_Typography::get_type(), [
-				'label'    => esc_html__( 'Subtitle Typography', 'tourfic' ),
-				'name'     => "tf_subtitle_typography",
-				'selector' => "{{WRAPPER}} .surroundings_subtitle",
-				'condition' => [
-					'nearby_places_style' => ['style2'],
-				],
-			]);
-		}
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+			'label'    => esc_html__( 'Subtitle Typography', 'tourfic' ),
+			'name'     => "tf_subtitle_typography",
+			'selector' => "{{WRAPPER}} .surroundings_subtitle",
+			'conditions' => $this->tf_display_conditionally_single([
+				'tf_apartment' => ['nearby_places_style' => ['style2']],
+			]),
+		]);
 
 		$this->end_controls_section();
 	}
@@ -151,12 +155,16 @@ class Nearby_Places extends Widget_Base {
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
-		$this->add_responsive_control( "item_gap", [
-			'label'      => esc_html__( 'Item Gap', 'tourfic' ),
+		$this->add_control( "item_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Item', 'tourfic' ),
+		] );
+
+        $this->add_responsive_control( "tf_items_gap", [
+			'label'      => esc_html__( 'Items gap', 'tourfic' ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [
 				'px',
-				'em',
 			],
 			'range'      => [
 				'px' => [
@@ -171,9 +179,96 @@ class Nearby_Places extends Widget_Base {
 				"{{WRAPPER}} .tf-whats-around.tf-apartment-single-places-style1 ul" => 'gap: {{SIZE}}{{UNIT}};',
 				"{{WRAPPER}} .about-location.tf-apartment-single-places-style2 .tf-apartment-surronding-criteria" => 'margin-bottom: {{SIZE}}{{UNIT}};',
 			],
+		] );
+
+        $this->add_responsive_control( "item_padding", [
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-hotel-single-places ul li" => $this->tf_apply_dim( 'padding' ),
+			],
+			'conditions' => $this->tf_display_conditionally_single([
+     			'tf_hotel' => ['nearby_places_style' => ['style1']],
+     		]),
+		] );
+
+        $this->add_control( 'tf_item_bg_color', [
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-hotel-single-places ul li' => 'background-color: {{VALUE}};',
+			],
+            'conditions' => $this->tf_display_conditionally_single([
+     			'tf_hotel' => ['nearby_places_style' => ['style1']],
+     		]),
 		]);
 
-		
+		$this->add_control( "icon_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Icon', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_icon_color', [
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-hotel-single-places ul li .tf-place .tf-icon i' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-whats-around ul li i' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-apartment-surronding-criteria-label i' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_responsive_control( "icon_size", [
+			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-hotel-single-places ul li .tf-place .tf-icon i" => 'font-size: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .tf-whats-around ul li i" => 'font-size: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .tf-apartment-surronding-criteria-label i" => 'font-size: {{SIZE}}{{UNIT}}',
+			],
+		] );
+
+		$this->add_control( "label_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Label', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_item_label_color', [
+			'label'     => esc_html__( 'Label Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-hotel-single-places.tf-hotel-single-places-style1 ul li span' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-whats-around ul li span' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-apartment-surronding-criteria-label' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-apartment-surronding-places li span' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Label Typography', 'tourfic' ),
+			'name'     => "tf_item_label_typography",
+			'selector' => "{{WRAPPER}} .tf-hotel-single-places.tf-hotel-single-places-style1 ul li span,
+						   {{WRAPPER}} .tf-whats-around ul li span,
+						   {{WRAPPER}} .tf-apartment-surronding-criteria-label,
+						   {{WRAPPER}} .tf-apartment-surronding-places li span",
+		]);
 
 		$this->end_controls_section();
 	}
