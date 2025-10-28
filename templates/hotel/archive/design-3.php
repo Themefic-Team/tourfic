@@ -145,9 +145,9 @@ defined( 'ABSPATH' ) || exit;
                                             $min_discount_amount = !empty($min_price_arr['min_discount_amount']) ? $min_price_arr['min_discount_amount'] : 0;
 
                                             if ($min_regular_price != 0) {
-                                                $price_html = wc_format_sale_price($min_regular_price, $min_sale_price);
+                                                $price_html = tf_format_sale_price($min_regular_price, $min_sale_price);
                                             } else {
-                                                $price_html = wp_kses_post(wc_price($min_sale_price)) . " ";
+                                                $price_html = wp_kses_post(tf_price($min_sale_price)) . " ";
                                             }
 
                                             if (!empty($map)) {
@@ -170,7 +170,7 @@ defined( 'ABSPATH' ) || exit;
                                                         <?php
                                                         if (!empty($min_discount_amount)) : ?>
                                                             <div class="tf-map-item-discount">
-                                                                <?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount . '%') : wp_kses_post(wc_price($min_discount_amount)) ?><?php esc_html_e(" Off", "tourfic"); ?>
+                                                                <?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount . '%') : wp_kses_post(tf_price($min_discount_amount)) ?><?php esc_html_e(" Off", "tourfic"); ?>
                                                             </div>
                                                         <?php endif; ?>
                                                     </div>
@@ -218,9 +218,9 @@ defined( 'ABSPATH' ) || exit;
                                             $min_discount_amount = !empty($min_price_arr['min_discount_amount']) ? $min_price_arr['min_discount_amount'] : 0;
 
                                             if ($min_regular_price != 0) {
-                                                $price_html = wc_format_sale_price($min_regular_price, $min_sale_price);
+                                                $price_html = tf_format_sale_price($min_regular_price, $min_sale_price);
                                             } else {
-                                                $price_html = wp_kses_post(wc_price($min_sale_price)) . " ";
+                                                $price_html = wp_kses_post(tf_price($min_sale_price)) . " ";
                                             }
 
                                             if (!empty($map)) {
@@ -243,7 +243,7 @@ defined( 'ABSPATH' ) || exit;
                                                         <?php
                                                         if (!empty($min_discount_amount)) : ?>
                                                             <div class="tf-map-item-discount">
-                                                                <?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount . '%') : wp_kses_post(wc_price($min_discount_amount)) ?>
+                                                                <?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount . '%') : wp_kses_post(tf_price($min_discount_amount)) ?>
                                                                 <?php esc_html_e(" Off", "tourfic"); ?>
                                                             </div>
                                                         <?php endif; ?>

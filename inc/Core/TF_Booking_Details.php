@@ -948,7 +948,7 @@ abstract Class TF_Booking_Details {
                                         <tr>
                                             <th><?php esc_html_e("Total", "tourfic"); ?></th>
                                             <td>:</td>
-                                            <td><?php echo wp_kses_post(wc_price($tf_tour_details->total_price)); ?></td>
+                                            <td><?php echo wp_kses_post(tf_price($tf_tour_details->total_price)); ?></td>
                                         </tr>
                                         <?php } ?>
                                         <?php $taxs = !empty($tf_tour_details->tax_info) ? json_decode($tf_tour_details->tax_info, true) : array();
@@ -962,7 +962,7 @@ abstract Class TF_Booking_Details {
                                         <tr>
                                             <th><?php esc_html_e("Tax", "tourfic"); ?></th>
                                             <td>:</td>
-                                            <td><?php echo wp_kses_post(wc_price($taxs_summations)); ?></td>
+                                            <td><?php echo wp_kses_post(tf_price($taxs_summations)); ?></td>
                                         </tr>
                                         <?php } ?>
                                         <?php 
@@ -970,7 +970,7 @@ abstract Class TF_Booking_Details {
                                         <tr>
                                             <th><?php esc_html_e("Due Price", "tourfic"); ?></th>
                                             <td>:</td>
-                                            <td><?php echo is_int($tf_tour_details->due_price) ? wp_kses_post(wc_price($tf_tour_details->due_price)) : wp_kses_post($tf_tour_details->due_price); ?></td>
+                                            <td><?php echo is_int($tf_tour_details->due_price) ? wp_kses_post(tf_price($tf_tour_details->due_price)) : wp_kses_post($tf_tour_details->due_price); ?></td>
                                         </tr>
                                         <?php } ?>
                                     </table>

@@ -271,7 +271,7 @@ class Pricing {
                             $price = $single_extra_info['price'];
                         }
                         $prices += $price * $singleqty;
-                        $extra_title[] = $single_extra_info['title'].'('.$price_type.') × '. $singleqty. ' = ' . wc_price($price * $singleqty);
+                        $extra_title[] = $single_extra_info['title'].'('.$price_type.') × '. $singleqty. ' = ' . tf_price($price * $singleqty);
                     }
                 }
             }
@@ -311,7 +311,7 @@ class Pricing {
             }
 
             if( !empty($tf_single_protection['title']) && !empty($tf_single_protection['price']) ){
-                $selected_protection_title[] = $tf_single_protection['title']. '('. $tf_single_protection['price_by'] .') × ' . wc_price($tf_single_protection['price'] * $total_days);
+                $selected_protection_title[] = $tf_single_protection['title']. '('. $tf_single_protection['price_by'] .') × ' . tf_price($tf_single_protection['price'] * $total_days);
             }
             if( !empty($tf_single_protection['title']) && empty($tf_single_protection['price']) ){
                 $selected_protection_title[] = $tf_single_protection['title']. '('. $tf_single_protection['price_by'] .')';

@@ -96,6 +96,24 @@ TF_Settings::option( 'tf_settings', array(
 					),
 				),
 				array(
+					'id'       => 'ecommerce_system',
+					'type'     => 'imageselect',
+					'label'    => esc_html__( 'eCommerce System', 'tourfic' ),
+					'multiple' => true,
+					'img-width'=> '100',
+					'img-height'=> '100',
+					'options'  => array(
+						'woocommerce' => array(
+							'title' => 'Woocommerce',
+							'url'   => TF_ASSETS_ADMIN_URL . "images/hotel.png",
+						),
+						'fluentcart' 		=> array(
+							'title'	=> 'FluentCart',
+							'url' 	=> TF_ASSETS_ADMIN_URL."images/tour.png",
+						),
+					),
+				),
+				array(
 					'id'       => 'tf-date-format-for-users',
 					'type'     => 'select',
 					'label'    => esc_html__( 'Select Date Format', 'tourfic' ),

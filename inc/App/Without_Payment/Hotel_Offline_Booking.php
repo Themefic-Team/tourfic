@@ -385,32 +385,32 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
                     <td align="left">' . 
 					/* translators: 1: total room, 2: total night */
 					sprintf( esc_html__( '%1$s Room × %2$s Night', 'tourfic' ), $room_selected, $day_difference ) . '</td>
-                    <td align="right">' . wc_price( $price_total ) . '</td>
+                    <td align="right">' . tf_price( $price_total ) . '</td>
                 </tr>';
 			}
 			
 			if ( ! empty( $airport_service_arr['title'] ) ) {
 				$response['hotel_booking_summery'] .= '<tr>
 						<td align="left">' . esc_html( $airport_service_arr['label'] ) . '</td>
-						<td align="right">' . wc_price( $airport_service_arr['price'] ) . '</td>
+						<td align="right">' . tf_price( $airport_service_arr['price'] ) . '</td>
 					</tr>';
 			}
 
 			if ( !empty($hotel_extra_option) && ! empty( $total_extras_titles ) ) {
 				$response['hotel_booking_summery'] .= '<tr>
 						<td align="left">' . esc_html( $total_extras_titles ) . '</td>
-						<td align="right">' . wc_price( $total_extras_price ) . '</td>
+						<td align="right">' . tf_price( $total_extras_price ) . '</td>
 					</tr>';
 			}
 
 			if ( ! empty( $tf_due_amount ) ) {
 				$response['hotel_booking_summery'] .= '<tr>
                     <td align="left">' . sprintf( esc_html__( 'Due', 'tourfic' ) ) . '</td>
-                    <td align="right">' . wc_price( $tf_due_amount + $airport_service_arr['price'] + $total_extras_price ) . '</td>
+                    <td align="right">' . tf_price( $tf_due_amount + $airport_service_arr['price'] + $total_extras_price ) . '</td>
                 </tr>';
 			}
 
-			$total_price = ! empty( $tf_due_amount ) ? wc_price( $price_total - $tf_due_amount ) : ( !empty( $airport_service_arr['price'] ) || !empty( $total_extras_price ) ? wc_price( $price_total + $airport_service_arr['price'] + $total_extras_price ) : wc_price( $price_total ) );
+			$total_price = ! empty( $tf_due_amount ) ? tf_price( $price_total - $tf_due_amount ) : ( !empty( $airport_service_arr['price'] ) || !empty( $total_extras_price ) ? tf_price( $price_total + $airport_service_arr['price'] + $total_extras_price ) : tf_price( $price_total ) );
 
 			$response['hotel_booking_summery'] .= '</tbody>
             <tfoot>

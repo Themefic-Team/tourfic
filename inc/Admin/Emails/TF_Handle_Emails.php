@@ -192,24 +192,24 @@ class TF_Handle_Emails {
 
             $booking_details .= '</td>';
             $booking_details .= '<td align="center">' . $item['item_quantity'] . '</td>';
-            $booking_details .= '<td align="right"><b>' . wc_price( $item['item_subtotal'] ) . '</b></td>';
+            $booking_details .= '<td align="right"><b>' . tf_price( $item['item_subtotal'] ) . '</b></td>';
             $booking_details .= '</tr>';
 
         }
         $booking_details .= '</tbody>';
         $booking_details .= '<tfoot><tr><th colspan="2" align="left" style="padding-bottom:10px;padding-top:10px;">Sub-Total</th>';
-        $booking_details .= '<td align="right"><b>' . wc_price( $order_subtotal ) . '</b></td></tr>';
+        $booking_details .= '<td align="right"><b>' . tf_price( $order_subtotal ) . '</b></td></tr>';
         //payment method
         $booking_details .= '<tr style="border-bottom: 1px solid #D9D9D9;"><th colspan="2" align="left" style="padding-bottom:10px">Payment Method</th>';
         $booking_details .= '<td align="right"><b>' . $payment_method_title . '</b></td></tr>';
         //Tax
         if(!empty($taxs_summations)){
             $booking_details .= '<tr style="border-bottom: 1px solid #D9D9D9;"><th colspan="2" align="left" style="padding-bottom:10px">Tax</th>';
-            $booking_details .= '<td align="right"><b>' . wc_price($taxs_summations) . '</b></td></tr>';
+            $booking_details .= '<td align="right"><b>' . tf_price($taxs_summations) . '</b></td></tr>';
         }
         //total
         $booking_details .= '<tr><th colspan="2" align="left" style="padding-bottom:10px; font-weight: 900;">Total Amount</th>';
-        $booking_details .= '<td align="right"><b style="font-weight: 900;">' . wc_price( $order_total ) . '</b></td></tr>';
+        $booking_details .= '<td align="right"><b style="font-weight: 900;">' . tf_price( $order_total ) . '</b></td></tr>';
         $booking_details .= '</tfoot>';
 
         $booking_details .= '</table>';
@@ -261,8 +261,8 @@ class TF_Handle_Emails {
             '{country}'          => $order_data['billing']['country'],
             '{phone}'            => $order_data['billing']['phone'],
             '{payment_method}'   => $order_data['payment_method_title'],
-            '{order_total}'      => wc_price($order_total),
-            '{order_subtotal}'   => wc_price($order_subtotal),
+            '{order_total}'      => tf_price($order_total),
+            '{order_subtotal}'   => tf_price($order_subtotal),
             '{order_date}'       => $order_date_created,
             '{order_status}'     => $order_status,
             '{site_name}'        => get_bloginfo( 'name' ),
@@ -387,24 +387,24 @@ class TF_Handle_Emails {
         }
 
         if ( !empty($order_items['due_price']) ) {
-            $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Due Amount:</strong> ' . wc_price($order_items['due_price']);
+            $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Due Amount:</strong> ' . tf_price($order_items['due_price']);
         }
 
         $booking_details .= '</td>';
         $booking_details .= '<td align="center">1</td>';
-        $booking_details .= '<td align="right">' . wc_price( $order_items['total_price'] ) . '</td>';
+        $booking_details .= '<td align="right">' . tf_price( $order_items['total_price'] ) . '</td>';
         $booking_details .= '</tr>';
 
 
         $booking_details .= '</tbody>';
         $booking_details .= '<tfoot><tr><th colspan="2" align="left" style="padding-bottom:10px;padding-top:10px;">Subtotal</th>';
-        $booking_details .= '<td align="right">' . wc_price( $order_items['total_price'] ) . '</td></tr>';
+        $booking_details .= '<td align="right">' . tf_price( $order_items['total_price'] ) . '</td></tr>';
         //payment method
         $booking_details .= '<tr><th colspan="2" align="left" style="padding-bottom:10px">Payment Method</th>';
         $booking_details .= '<td align="right">' . $order_data['payment_method'] . '</td></tr>';
         //total
         $booking_details .= '<tr><th colspan="2" align="left" style="padding-bottom:10px">Total</th>';
-        $booking_details .= '<td align="right">' . wc_price( $order_items['total_price'] ) . '</td></tr>';
+        $booking_details .= '<td align="right">' . tf_price( $order_items['total_price'] ) . '</td></tr>';
         $booking_details .= '</tfoot>';
 
         $booking_details .= '</table></div>';
@@ -463,8 +463,8 @@ class TF_Handle_Emails {
             '{country}'          => $order_billing_country,
             '{phone}'            => $order_billing_phone,
             '{payment_method}'   => $payment_method_title,
-            '{order_total}'      => wc_price($order_total),
-            '{order_subtotal}'   => wc_price($order_subtotal),
+            '{order_total}'      => tf_price($order_total),
+            '{order_subtotal}'   => tf_price($order_subtotal),
             '{order_date}'       => $order_date_created,
             '{order_status}'     => $order_status,
             '{site_name}'        => get_bloginfo( 'name' ),

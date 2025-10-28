@@ -187,9 +187,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                 <div class="tf-price group-price">
                                     <span class="sale-price">
-                                        <?php echo wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['group_price']))) ?>
+                                        <?php echo wp_kses_post(wp_strip_all_tags(tf_price($avail_prices['group_price']))) ?>
                                     </span>
-                                    <?php echo ( !empty($avail_prices['sale_group_price']) ) ? '<del>' . wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['sale_group_price']))) . '</del>' : ''; ?>
+                                    <?php echo ( !empty($avail_prices['sale_group_price']) ) ? '<del>' . wp_kses_post(wp_strip_all_tags(tf_price($avail_prices['sale_group_price']))) . '</del>' : ''; ?>
                                 </div>
 
                             <?php } elseif ( $pricing_rule == 'person' ) { ?>
@@ -198,9 +198,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                     <div class="tf-price adult-price">
                                         <span class="sale-price">
-                                            <?php echo wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['adult_price']))); ?>
+                                            <?php echo wp_kses_post(wp_strip_all_tags(tf_price($avail_prices['adult_price']))); ?>
                                         </span>
-                                        <?php echo ( !empty($avail_prices['sale_adult_price']) ) ? '<del>' . wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['sale_adult_price']))) . '</del>' : ''; ?>
+                                        <?php echo ( !empty($avail_prices['sale_adult_price']) ) ? '<del>' . wp_kses_post(wp_strip_all_tags(tf_price($avail_prices['sale_adult_price']))) . '</del>' : ''; ?>
                                     </div>
 
                                 <?php }
@@ -208,9 +208,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                     <div class="tf-price child-price tf-d-n">
                                         <span class="sale-price">
-                                            <?php echo wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['child_price']))); ?>
+                                            <?php echo wp_kses_post(wp_strip_all_tags(tf_price($avail_prices['child_price']))); ?>
                                         </span>
-                                        <?php echo ( !empty($avail_prices['sale_child_price']) ) ? '<del>' . wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['sale_child_price']))) . '</del>' : ''; ?>
+                                        <?php echo ( !empty($avail_prices['sale_child_price']) ) ? '<del>' . wp_kses_post(wp_strip_all_tags(tf_price($avail_prices['sale_child_price']))) . '</del>' : ''; ?>
                                     </div>
 
                             <?php }
@@ -218,9 +218,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                     <div class="tf-price infant-price tf-d-n">
                                         <span class="sale-price">
-                                            <?php echo wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['infant_price']))); ?>
+                                            <?php echo wp_kses_post(wp_strip_all_tags(tf_price($avail_prices['infant_price']))); ?>
                                         </span>
-                                        <?php echo ( !empty($avail_prices['sale_infant_price']) ) ? '<del>' . wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['sale_infant_price']))) . '</del>' : ''; ?>
+                                        <?php echo ( !empty($avail_prices['sale_infant_price']) ) ? '<del>' . wp_kses_post(wp_strip_all_tags(tf_price($avail_prices['sale_infant_price']))) . '</del>' : ''; ?>
                                     </div>
 
                                 <?php } ?>

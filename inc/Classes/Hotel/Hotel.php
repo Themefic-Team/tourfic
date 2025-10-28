@@ -1394,10 +1394,10 @@ class Hotel {
 						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Child Count, %4$s Child Fee, %5$s Service Fee */
 						echo sprintf( esc_html__( 'Airport Pickup Fee Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) : %5$s', 'tourfic' ),
 							sanitize_key( $_POST['hoteladult'] ),
-							wp_kses_post( wc_price( $service_adult_fee ) ),
+							wp_kses_post( tf_price( $service_adult_fee ) ),
 							sanitize_key( $_POST['hotelchildren'] ),
-							wp_kses_post( wc_price( $service_child_fee ) ),
-							"<b>" . wp_kses_post( wc_price( $service_fee ) ) . "</b>"
+							wp_kses_post( tf_price( $service_child_fee ) ),
+							"<b>" . wp_kses_post( tf_price( $service_fee ) ) . "</b>"
 						);
 						echo "</span></br>";
 					} else {
@@ -1405,21 +1405,21 @@ class Hotel {
 						/* translators: %1$s Adult Count, %2$s Adult Fee */
 						echo sprintf( esc_html__( 'Airport Pickup Fee Adult ( %1$s × %2$s ) :', 'tourfic' ),
 								sanitize_key( $_POST['hoteladult'] ),
-								wp_kses_post( wc_price( $service_adult_fee ) ),
-						     ) . " " . "<b>" . wp_kses_post( wc_price( $service_fee ) ) . "</b>";
+								wp_kses_post( tf_price( $service_adult_fee ) ),
+						     ) . " " . "<b>" . wp_kses_post( tf_price( $service_fee ) ) . "</b>";
 						echo "</span></br>";
 					}
 					if ( $deposit == "true" ) {
 						echo "<span>";
 						/* translators: %1$s Due Amount, %2$s Service Fee */
-						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( wc_price( $price_total - $deposit_amount ) ) . " + " . wp_kses_post( wc_price( $service_fee ) ) . '</b>';
+						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( tf_price( $price_total - $deposit_amount ) ) . " + " . wp_kses_post( tf_price( $service_fee ) ) . '</b>';
 						echo "</span></br>";
 						echo "<span>";
-						echo esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $deposit_amount ) ) . '</b>';
+						echo esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $deposit_amount ) ) . '</b>';
 						echo "</span>";
 					} else {
 						echo "<span>";
-						echo esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $price_total + $service_fee ) ) . '</b>';
+						echo esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $price_total + $service_fee ) ) . '</b>';
 						echo "</span>";
 					}
 				}
@@ -1427,28 +1427,28 @@ class Hotel {
 					$service_fee = ! empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
 					/* translators: %s Service Fee */
 					echo sprintf( esc_html__( 'Airport Pickup Fee (Fixed): %s', 'tourfic' ),
-						wp_kses_post( wc_price( $service_fee ) )
+						wp_kses_post( tf_price( $service_fee ) )
 					);
 					if ( $deposit == "true" ) {
 						echo "</br><span>";
-						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( wc_price( $price_total - $deposit_amount ) ) . " + " . wp_kses_post( wc_price( $service_fee ) ) . '</b>';
+						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( tf_price( $price_total - $deposit_amount ) ) . " + " . wp_kses_post( tf_price( $service_fee ) ) . '</b>';
 						echo "</span>";
 
 						/* translators: %s Payable Amount */
-						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $deposit_amount ) ) . '</b></span>';
+						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $deposit_amount ) ) . '</b></span>';
 
 					} else {
 						/* translators: %s Payable Amount */
-						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $price_total + $service_fee ) ) . '</b></span>';
+						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $price_total + $service_fee ) ) . '</b></span>';
 					}
 				}
 				if ( "free" == $airport_pickup_price['airport_pickup_price_type'] ) {
 					echo esc_html__( 'Airport Pickup Fee: Free', 'tourfic' );
 					if ( $deposit == "true" ) {
-						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $price_total - $deposit_amount ) ) . '</b></span>';
+						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $price_total - $deposit_amount ) ) . '</b></span>';
 					} else {
 
-						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $price_total ) ) . '</b></span>';
+						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $price_total ) ) . '</b></span>';
 					}
 				}
 			}
@@ -1463,54 +1463,54 @@ class Hotel {
 						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Child Count, %4$s Child Fee, %5$s Service Fee */
 						echo "<span>" . sprintf( esc_html__( 'Airport Dropoff Fee Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) : ', 'tourfic' ),
 								sanitize_key( $_POST['hoteladult'] ),
-								wp_kses_post( wc_price( $service_adult_fee ) ),
+								wp_kses_post( tf_price( $service_adult_fee ) ),
 								sanitize_key( $_POST['hotelchildren'] ),
-								wp_kses_post( wc_price( $service_child_fee ) ),
-							) . "<b>" . wp_kses_post( wc_price( $service_fee ) ) . "</b>" . "</span></br>";
+								wp_kses_post( tf_price( $service_child_fee ) ),
+							) . "<b>" . wp_kses_post( tf_price( $service_fee ) ) . "</b>" . "</span></br>";
 					} else {
 						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Service Fee */
 						echo "<span>" . sprintf( esc_html__( 'Airport Dropoff Fee Adult ( %1$s × %2$s ) : ', 'tourfic' ),
 								sanitize_key( $_POST['hoteladult'] ),
-								wp_kses_post( wc_price( $service_adult_fee ) ),
-							) . "<b>" . wp_kses_post( wc_price( $service_fee ) ) . "</b>" . "</span></br>";
+								wp_kses_post( tf_price( $service_adult_fee ) ),
+							) . "<b>" . wp_kses_post( tf_price( $service_fee ) ) . "</b>" . "</span></br>";
 					}
 					if ( $deposit == "true" ) {
 						/* translators: %1$s Due Amount, %2$s Service Fee */
 						echo "<span>";
-						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( wc_price( $price_total - $deposit_amount ) ) . " + " . wp_kses_post( wc_price( $service_fee ) ) . '</b>';
+						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( tf_price( $price_total - $deposit_amount ) ) . " + " . wp_kses_post( tf_price( $service_fee ) ) . '</b>';
 						echo "</span></br>";
-						echo '<span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $deposit_amount ) ) . '</b></span>';
+						echo '<span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $deposit_amount ) ) . '</b></span>';
 					} else {
-						echo '<span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $price_total + $service_fee ) ) . '</b></span>';
+						echo '<span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $price_total + $service_fee ) ) . '</b></span>';
 					}
 				}
 				if ( "fixed" == $airport_dropoff_price['airport_pickup_price_type'] ) {
 					$service_fee = ! empty( $airport_dropoff_price['airport_service_fee_fixed'] ) ? $airport_dropoff_price['airport_service_fee_fixed'] : 0;
 					/* translators: %s Service Fee */
 					echo sprintf( esc_html__( 'Airport Dropoff Fee (Fixed): %s', 'tourfic' ),
-						wp_kses_post( wc_price( $service_fee ) )
+						wp_kses_post( tf_price( $service_fee ) )
 					);
 					if ( $deposit == "true" ) {
 						/* translators: %1$s Due Amount, %2$s Service Fee */
 						echo "</br><span>";
-						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( wc_price( $price_total - $deposit_amount ) ) . " + " . wp_kses_post( wc_price( $service_fee ) ) . '</b>';
+						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( tf_price( $price_total - $deposit_amount ) ) . " + " . wp_kses_post( tf_price( $service_fee ) ) . '</b>';
 						echo "</span>";
 
-						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $deposit_amount ) ) . '</b></span>';
+						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $deposit_amount ) ) . '</b></span>';
 					} else {
-						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $price_total + $service_fee ) ) . '</b></span>';
+						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $price_total + $service_fee ) ) . '</b></span>';
 					}
 				}
 				if ( "free" == $airport_dropoff_price['airport_pickup_price_type'] ) {
 					echo esc_html__( 'Airport Dropoff Fee: Free', 'tourfic' );
 					if ( $deposit == "true" ) {
 						echo "</br><span>";
-						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( wc_price( $price_total - $deposit_amount ) ) . '</b>';
+						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( tf_price( $price_total - $deposit_amount ) ) . '</b>';
 						echo "</span>";
 						/* translators: %s Deposit Amount */
-						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $deposit_amount ) ) . '</b></span>';
+						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $deposit_amount ) ) . '</b></span>';
 					} else {
-						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $price_total ) ) . '</b></span>';
+						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $price_total ) ) . '</b></span>';
 					}
 				}
 			}
@@ -1526,26 +1526,26 @@ class Hotel {
 						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Child Count, %4$s Child Fee, %5$s Service Fee */
 						echo "<span>" . sprintf( esc_html__( 'Airport Pickup & Dropoff Fee Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) : ', 'tourfic' ),
 								sanitize_key( $_POST['hoteladult'] ),
-								wp_kses_post( wc_price( $service_adult_fee ) ),
+								wp_kses_post( tf_price( $service_adult_fee ) ),
 								sanitize_key( $_POST['hotelchildren'] ),
-								wp_kses_post( wc_price( $service_child_fee ) ),
-							) . "<b>" . wp_kses_post( wc_price( $service_fee ) ) . "</b>" . "</span></br>";
+								wp_kses_post( tf_price( $service_child_fee ) ),
+							) . "<b>" . wp_kses_post( tf_price( $service_fee ) ) . "</b>" . "</span></br>";
 					} else {
 						/* translators: %1$s Adult Count, %2$s Adult Fee, %3$s Service Fee */
 						echo "<span>" . sprintf( esc_html__( 'Airport Pickup & Dropoff Fee Adult ( %1$s × %2$s ) : ', 'tourfic' ),
 								sanitize_key( $_POST['hoteladult'] ),
-								wp_kses_post( wc_price( $service_adult_fee ) ),
-							) . "<b>" . wp_kses_post( wc_price( $service_fee ) ) . "</b>" . "</span></br>";
+								wp_kses_post( tf_price( $service_adult_fee ) ),
+							) . "<b>" . wp_kses_post( tf_price( $service_fee ) ) . "</b>" . "</span></br>";
 					}
 					if ( $deposit == "true" ) {
 						echo "<span>";
-						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( wc_price( $price_total - $deposit_amount ) ) . " + " . wp_kses_post( wc_price( $service_fee ) ) . '</b>';
+						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( tf_price( $price_total - $deposit_amount ) ) . " + " . wp_kses_post( tf_price( $service_fee ) ) . '</b>';
 						echo "</span></br>";
 
 						/* translators: %s Total Price */
-						echo '<span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $deposit_amount ) ) . '</b></span>';
+						echo '<span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $deposit_amount ) ) . '</b></span>';
 					} else {
-						echo '<span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $price_total + $service_fee ) ) . '</b></span>';
+						echo '<span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $price_total + $service_fee ) ) . '</b></span>';
 					}
 
 				}
@@ -1553,30 +1553,30 @@ class Hotel {
 					$service_fee = ! empty( $airport_pickup_dropoff_price['airport_service_fee_fixed'] ) ? $airport_pickup_dropoff_price['airport_service_fee_fixed'] : 0;
 					/* translators: %s Service Fee */
 					echo sprintf( esc_html__( 'Airport Pickup & Dropoff Fee (Fixed): %s', 'tourfic' ),
-						wp_kses_post( wc_price( $service_fee ) )
+						wp_kses_post( tf_price( $service_fee ) )
 					);
 
 					if ( $deposit == "true" ) {
 						echo "</br><span>";
-						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( wc_price( $price_total - $deposit_amount ) ) . " + " . wp_kses_post( wc_price( $service_fee ) ) . '</b>';
+						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( tf_price( $price_total - $deposit_amount ) ) . " + " . wp_kses_post( tf_price( $service_fee ) ) . '</b>';
 						echo "</span>";
 
 						/* translators: %s Deposit Amount */
-						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $deposit_amount ) ) . '</b></span>';
+						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $deposit_amount ) ) . '</b></span>';
 					} else {
-						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $price_total + $service_fee ) ) . '</b></span>';
+						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $price_total + $service_fee ) ) . '</b></span>';
 					}
 				}
 				if ( "free" == $airport_pickup_dropoff_price['airport_pickup_price_type'] ) {
 					echo esc_html__( 'Airport Pickup & Dropoff Fee: Free', 'tourfic' );
 					if ( $deposit == "true" ) {
 						echo "</br><span>";
-						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( wc_price( $price_total - $deposit_amount ) ) . '</b>';
+						echo esc_html__( 'Due Amount : ', 'tourfic' ) . "<b>" . wp_kses_post( tf_price( $price_total - $deposit_amount ) ) . '</b>';
 						echo "</span>";
 						/* translators: %s Deposit Amount */
-						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( wc_price( $deposit_amount ) ) . '</b></span>';
+						echo '</br><span>' . esc_html__( 'Total Payable Amount : ', 'tourfic' ) . '<b>' . wp_kses_post( tf_price( $deposit_amount ) ) . '</b></span>';
 					} else {
-						echo "</br><span>Total Payable Amount : <b>" . wp_kses_post( wc_price( $price_total ) ) . "</b></span>";
+						echo "</br><span>Total Payable Amount : <b>" . wp_kses_post( tf_price( $price_total ) ) . "</b></span>";
 					}
 				}
 			}
@@ -3256,7 +3256,7 @@ class Hotel {
 											}
 											?>
 
-											<?php echo esc_html($airport_service['title']); ?> = <?php echo wp_kses_post(wc_price( $airport_service['price'] )); ?>
+											<?php echo esc_html($airport_service['title']); ?> = <?php echo wp_kses_post(tf_price( $airport_service['price'] )); ?>
 										</option>
 									<?php } ?>
 									</select>
@@ -3281,7 +3281,7 @@ class Hotel {
 												<h5>
 													<?php echo esc_html($extra['title']);?>
 												</h5>
-												<p><?php echo esc_html($extra_service['title']); ?> = <?php echo wp_kses_post(wc_price( $extra_service['price'] )); ?></p>
+												<p><?php echo esc_html($extra_service['title']); ?> = <?php echo wp_kses_post(tf_price( $extra_service['price'] )); ?></p>
 											</div>
 										</label>
 									</div>
@@ -3506,9 +3506,9 @@ class Hotel {
 							// translators: 1: adult count, 2: adult price, 3: child count, 4: child price.
 							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )', 'tourfic' ),
 								intval( $adult ),
-								wp_kses_post( wc_price( $service_adult_fee ) ),
+								wp_kses_post( tf_price( $service_adult_fee ) ),
 								intval( $child ),
-								wp_kses_post( wc_price( $service_child_fee ) )
+								wp_kses_post( tf_price( $service_child_fee ) )
 							),
 							'price' => $airport_service_price_total,
 						);
@@ -3517,7 +3517,7 @@ class Hotel {
 							// translators: 1: adult count, 2: adult price.
 							'title' => sprintf(esc_html__( 'Adult ( %1$s × %2$s )', 'tourfic' ),
 								intval( $adult ),
-								wp_kses_post( wc_price( $service_adult_fee ) )
+								wp_kses_post( tf_price( $service_adult_fee ) )
 							),
 							'price' => $airport_service_price_total,
 						);
@@ -3555,9 +3555,9 @@ class Hotel {
 							// translators: 1: adult count, 2: adult price, 3: child count, 4: child price.
 							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )', 'tourfic' ),
 								$adult,
-								wp_strip_all_tags( wc_price( $service_adult_fee ) ),
+								wp_strip_all_tags( tf_price( $service_adult_fee ) ),
 								$child,
-								wp_strip_all_tags( wc_price( $service_child_fee ) )
+								wp_strip_all_tags( tf_price( $service_child_fee ) )
 							),
 							'price' => $airport_service_price_total
 						);
@@ -3566,7 +3566,7 @@ class Hotel {
 							// translators: 1: adult count, 2: adult price.
 							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s )', 'tourfic' ),
 								$adult,
-								wp_strip_all_tags( wc_price( $service_adult_fee ) )
+								wp_strip_all_tags( tf_price( $service_adult_fee ) )
 							),
 							'price' => $airport_service_price_total
 						);
@@ -3604,9 +3604,9 @@ class Hotel {
 							// translators: 1: adult count, 2: adult price, 3: child count, 4: child price.
 							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )', 'tourfic' ),
 								$adult,
-								wp_strip_all_tags( wc_price( $service_adult_fee ) ),
+								wp_strip_all_tags( tf_price( $service_adult_fee ) ),
 								$child,
-								wp_strip_all_tags( wc_price( $service_child_fee ) )
+								wp_strip_all_tags( tf_price( $service_child_fee ) )
 							),
 							'price' => $airport_service_price_total
 						);
@@ -3615,7 +3615,7 @@ class Hotel {
 							// translators: 1: adult count, 2: adult price.
 							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s )', 'tourfic' ),
 								$adult,
-								wp_strip_all_tags( wc_price( $service_adult_fee ) )
+								wp_strip_all_tags( tf_price( $service_adult_fee ) )
 							),
 							'price' => $airport_service_price_total
 						);
@@ -3821,7 +3821,7 @@ class Hotel {
 							<!-- Discount -->
 							<?php if ( $discount_tag == 'yes' && ! empty( $min_discount_amount ) ) { ?>
 								<div class="tf-discount">
-									<?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( wc_price( $min_discount_amount ) ) ?><?php esc_html_e( " Off ", "tourfic" ); ?>
+									<?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( tf_price( $min_discount_amount ) ) ?><?php esc_html_e( " Off ", "tourfic" ); ?>
 								</div>
 							<?php } ?>
 
@@ -4040,7 +4040,7 @@ class Hotel {
 								<?php if ( $discount_tag == 'yes' && ! empty( $min_discount_amount ) ) { ?>
                                     <div class="tf-available-room-off">
                                         <span>
-                                            <?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( wc_price( $min_discount_amount ) ) ?><?php esc_html_e( " Off ", "tourfic" ); ?>
+                                            <?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( tf_price( $min_discount_amount ) ) ?><?php esc_html_e( " Off ", "tourfic" ); ?>
                                         </span>
                                     </div>
 								<?php } ?>
@@ -4091,7 +4091,7 @@ class Hotel {
 							<?php if ( $discount_tag == 'yes' && ! empty( $min_discount_amount ) ) : ?>
                                 <div class="tf-available-room-off">
                                     <span>
-                                        <?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( wc_price( $min_discount_amount ) ) ?><?php esc_html_e( " Off ", "tourfic" ); ?>
+                                        <?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( tf_price( $min_discount_amount ) ) ?><?php esc_html_e( " Off ", "tourfic" ); ?>
                                     </span>
                                 </div>
 							<?php endif; ?>
@@ -4132,7 +4132,7 @@ class Hotel {
 						<!-- Discount -->
 						<?php if ( $discount_tag == 'yes' && ! empty( $min_discount_amount ) ) : ?>
 							<div class="tf-tag-item tf-tag-item-discount">
-								<?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( wc_price( $min_discount_amount ) ) ?><?php esc_html_e( " Off", "tourfic" ); ?>
+								<?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( tf_price( $min_discount_amount ) ) ?><?php esc_html_e( " Off", "tourfic" ); ?>
 							</div>
 						<?php endif; ?>
 

@@ -171,10 +171,10 @@ class Tour_Price {
             }
 
             # WooCommerce Price
-            $wc_price = wc_price($price);
+            $tf_price = tf_price($price);
 
             if(!empty($allow_discount) && ($discount_type == 'percent' || $discount_type == 'fixed')) {
-                $wc_sale_price = wc_price($sale_price);
+                $wc_sale_price = tf_price($sale_price);
             }
 
         } else {
@@ -194,21 +194,21 @@ class Tour_Price {
             }
 
             # WooCommerce Price
-            $wc_adult_price  = wc_price($adult_price);
-            $wc_child_price  = wc_price($child_price);
-            $wc_infant_price = wc_price($infant_price);
+            $wc_adult_price  = tf_price($adult_price);
+            $wc_child_price  = tf_price($child_price);
+            $wc_infant_price = tf_price($infant_price);
 
             if(!empty($allow_discount) && ($discount_type == 'percent' || $discount_type == 'fixed')) {
-                $wc_sale_adult_price  = !empty($sale_adult_price) ? wc_price($sale_adult_price) : 0;
-                $wc_sale_child_price  = !empty($sale_child_price) ? wc_price($sale_child_price) : 0;
-                $wc_sale_infant_price = !empty($sale_infant_price) ? wc_price($sale_infant_price) : 0;
+                $wc_sale_adult_price  = !empty($sale_adult_price) ? tf_price($sale_adult_price) : 0;
+                $wc_sale_child_price  = !empty($sale_child_price) ? tf_price($sale_child_price) : 0;
+                $wc_sale_infant_price = !empty($sale_infant_price) ? tf_price($sale_infant_price) : 0;
             }
 
         }
 
 
         $this->group          = $price ?? null;
-        $this->wc_group       = $wc_price ?? null;
+        $this->wc_group       = $tf_price ?? null;
         $this->sale_group     = $sale_price ?? null;
         $this->wc_sale_group  = $wc_sale_price ?? null;
         $this->adult          = $adult_price ?? null;

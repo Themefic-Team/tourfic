@@ -137,9 +137,9 @@ defined( 'ABSPATH' ) || exit;
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6.66669 5V10M12.5 5V10M1.66669 10H18M15 15H17.5C17.5 15 17.9167 13.5833 18.1667 12.6667C18.25 12.3333 18.3334 12 18.3334 11.6667C18.3334 11.3333 18.25 11 18.1667 10.6667L17 6.5C16.75 5.66667 15.9167 5 15 5H3.33335C2.89133 5 2.4674 5.17559 2.15484 5.48816C1.84228 5.80072 1.66669 6.22464 1.66669 6.66667V15H4.16669M15 15C15 15.9205 14.2538 16.6667 13.3334 16.6667C12.4129 16.6667 11.6667 15.9205 11.6667 15M15 15C15 14.0795 14.2538 13.3333 13.3334 13.3333C12.4129 13.3333 11.6667 14.0795 11.6667 15M4.16669 15C4.16669 15.9205 4.91288 16.6667 5.83335 16.6667C6.75383 16.6667 7.50002 15.9205 7.50002 15M4.16669 15C4.16669 14.0795 4.91288 13.3333 5.83335 13.3333C6.75383 13.3333 7.50002 14.0795 7.50002 15M7.50002 15H11.6667" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>    
-            <?php echo 'paid'==$shuttle_car_fee_type && !empty($shuttle_car_fee) ? wp_kses_post(wc_price($shuttle_car_fee)) : esc_html__('Free', 'tourfic'); ?>
+            <?php echo 'paid'==$shuttle_car_fee_type && !empty($shuttle_car_fee) ? wp_kses_post(tf_price($shuttle_car_fee)) : esc_html__('Free', 'tourfic'); ?>
             <div class="tf-car-info-tooltip">
-                <span><?php esc_html_e("Shuttle", "tourfic"); ?> <?php echo 'paid'==$shuttle_car_fee_type && !empty($shuttle_car_fee) ? esc_html__('Fee:', 'tourfic'). esc_html(wc_price($shuttle_car_fee)) : esc_html__('Fee: Free', 'tourfic'); ?></span>
+                <span><?php esc_html_e("Shuttle", "tourfic"); ?> <?php echo 'paid'==$shuttle_car_fee_type && !empty($shuttle_car_fee) ? esc_html__('Fee:', 'tourfic'). esc_html(tf_price($shuttle_car_fee)) : esc_html__('Fee: Free', 'tourfic'); ?></span>
             </div>
         </li>
         <?php } ?>

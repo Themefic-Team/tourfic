@@ -31,6 +31,8 @@ class Base {
 
 		if ( Helper::tf_is_woo_active() ) {
 			\Tourfic\Classes\Woocommerce\Woocommerce::instance();
+		} elseif(Helper::tf_is_fluentcart_active()){
+			//\Tourfic\Classes\Fluentcart\Fluentcart::get_instance();
 		}
 
 		if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {

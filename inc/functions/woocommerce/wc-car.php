@@ -349,7 +349,7 @@ function car_display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 	if ( isset( $cart_item['tf_car_data']['due'] ) ) {
 		$item_data[] = array(
 			'key'   => esc_html__( 'Due', 'tourfic' ),
-			'value' => wc_price($cart_item['tf_car_data']['due']),
+			'value' => tf_price($cart_item['tf_car_data']['due']),
 		);
 	}
 
@@ -377,7 +377,7 @@ function tf_car_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	$tf_dropoff_time = !empty($values['tf_car_data']['tf_dropoff_time']) ? $values['tf_car_data']['tf_dropoff_time'] : '';
 	$extras = !empty($values['tf_car_data']['extras']) ? $values['tf_car_data']['extras'] : '';
 	$protection = !empty($values['tf_car_data']['protection']) ? $values['tf_car_data']['protection'] : '';
-	$due = !empty($values['tf_car_data']['due']) ? wc_price($values['tf_car_data']['due']) : '';
+	$due = !empty($values['tf_car_data']['due']) ? tf_price($values['tf_car_data']['due']) : '';
 	/**
 	 * Show data in order meta & email
 	 *

@@ -294,12 +294,12 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						<?php
 						if ( ! empty( $d_price ) && $hotel_discount_type != "none" ) {
 							?>
-                            <span class="tf-price"><del><?php echo wp_kses_post( wc_price( $price ) ); ?></del> <?php echo wp_kses_post( wc_price( $d_price ) ); ?></span>
+                            <span class="tf-price"><del><?php echo wp_kses_post( tf_price( $price ) ); ?></del> <?php echo wp_kses_post( tf_price( $d_price ) ); ?></span>
 							<?php
 							$price = $d_price = "";
 						} else if ( $hotel_discount_type == "none" || empty( $d_price ) ) {
 							?>
-                            <span class="tf-price"><?php echo wp_kses_post( wc_price( $price ) ); ?></span>
+                            <span class="tf-price"><?php echo wp_kses_post( tf_price( $price ) ); ?></span>
 							<?php
 							$price = '';
 						}
@@ -330,7 +330,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						<?php } ?>
 
 						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                            <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
+                            <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( tf_price( $deposit_amount ) ); ?></span>
                             <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
 						<?php } ?>
                     </div>
@@ -436,12 +436,12 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 					<?php
 					if ( ! empty( $d_price ) && $hotel_discount_type != "none" ) {
 						?>
-                        <span class="tf-price"><del><?php echo wp_kses_post( wc_price( $price ) ); ?></del> <?php echo wp_kses_post( wc_price( $d_price ) ); ?></span>
+                        <span class="tf-price"><del><?php echo wp_kses_post( tf_price( $price ) ); ?></del> <?php echo wp_kses_post( tf_price( $d_price ) ); ?></span>
 						<?php
 						$d_price = "";
 					} else if ( $hotel_discount_type == "none" || empty( $d_price ) ) {
 						?>
-                        <span class="tf-price"><?php echo wp_kses_post( wc_price( $price ) ); ?></span>
+                        <span class="tf-price"><?php echo wp_kses_post( tf_price( $price ) ); ?></span>
 						<?php
 					}
 					if ( $pricing_by == '1' ) { ?>
@@ -471,7 +471,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 					<?php } ?>
 
 					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                        <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
+                        <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( tf_price( $deposit_amount ) ); ?></span>
                         <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
 					<?php } ?>
                 </div>
@@ -817,7 +817,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                             if ( ! empty( $hotel_discount_type ) && ! empty( $hotel_discount_amount ) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type ) ) { ?>
                                 <div class="tf-available-room-off">
                                 <span>
-                                    <?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( wc_price( $hotel_discount_amount ) ) . 'off'; ?>
+                                    <?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( tf_price( $hotel_discount_amount ) ) . 'off'; ?>
                                 </span>
                                 </div>
                             <?php } ?>
@@ -839,10 +839,10 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                 <?php if ( $hotel_discount_type != 'none' && ! empty( $hotel_discount_amount ) ) { ?>
                                     <span class="tf-price">
                                         <span class="discount-price">
-                                            <del><?php echo wp_kses_post( wc_price( $price ) ); ?></del>
+                                            <del><?php echo wp_kses_post( tf_price( $price ) ); ?></del>
                                         </span>
                                         <span class="sale-price">
-                                            <?php echo wp_kses_post( wc_price( $d_price ) ); ?>
+                                            <?php echo wp_kses_post( tf_price( $d_price ) ); ?>
                                         </span>
                                     </span>
                                     <?php
@@ -850,7 +850,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                     ?>
                                     <span class="tf-price">
                                         <span class="sale-price">
-                                            <?php echo wp_kses_post( wc_price( $price ) ); ?>
+                                            <?php echo wp_kses_post( tf_price( $price ) ); ?>
                                         </span>
                                     </span>
                                     <?php
@@ -884,7 +884,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                             <div class="room-submit-wrap">
                                 <div class="tf-deposit-content">
                                     <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                                        <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
+                                        <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( tf_price( $deposit_amount ) ); ?></span>
                                         <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide"
                                              style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
                                     <?php } ?>
@@ -987,7 +987,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 					if ( ! empty( $hotel_discount_type ) && ! empty( $hotel_discount_amount ) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type ) ) { ?>
                         <div class="tf-available-room-off">
                             <span>
-                                <?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( wc_price( $hotel_discount_amount ) ) . 'off'; ?>
+                                <?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( tf_price( $hotel_discount_amount ) ) . 'off'; ?>
                             </span>
                         </div>
 					<?php } ?>
@@ -1011,10 +1011,10 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 								?>
                                 <span class="tf-price">
                                     <span class="discount-price">
-                                        <del><?php echo wp_kses_post( wc_price( $price ) ); ?></del>
+                                        <del><?php echo wp_kses_post( tf_price( $price ) ); ?></del>
                                     </span>
                                     <span class="sale-price">
-                                        <?php echo wp_kses_post( wc_price( $d_price ) ); ?>
+                                        <?php echo wp_kses_post( tf_price( $d_price ) ); ?>
                                     </span>
                                 </span>
 								<?php
@@ -1022,7 +1022,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 								?>
                                 <span class="tf-price">
                                     <span class="sale-price">
-                                        <?php echo wp_kses_post( wc_price( $price ) ); ?>
+                                        <?php echo wp_kses_post( tf_price( $price ) ); ?>
                                     </span>
                                 </span>
 								<?php
@@ -1034,10 +1034,10 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 								?>
                                 <span class="tf-price">
                                     <span class="discount-price">
-                                        <del><?php echo wp_kses_post( wc_price( $price ) ); ?></del>
+                                        <del><?php echo wp_kses_post( tf_price( $price ) ); ?></del>
                                     </span>
                                     <span class="sale-price">
-                                        <?php echo wp_kses_post( wc_price( $d_price ) ); ?>
+                                        <?php echo wp_kses_post( tf_price( $d_price ) ); ?>
                                     </span>
                                 </span>
 								<?php
@@ -1045,7 +1045,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 								?>
                                 <span class="tf-price">
                                     <span class="sale-price">
-                                        <?php echo wp_kses_post( wc_price( $price ) ); ?>
+                                        <?php echo wp_kses_post( tf_price( $price ) ); ?>
                                     </span>
                                 </span>
 								<?php
@@ -1097,7 +1097,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                     <div class="room-submit-wrap">
                         <div class="tf-deposit-content">
 							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                                <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
+                                <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( tf_price( $deposit_amount ) ); ?></span>
                                 <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide"
                                      style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
 							<?php } ?>
@@ -1147,7 +1147,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						if ( ! empty( $hotel_discount_type ) && ! empty( $hotel_discount_amount ) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type ) ) { ?>
                             <div class="tf-available-room-off">
                                 <span>
-                                    <?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( wc_price( $hotel_discount_amount ) ) . 'off'; ?>
+                                    <?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( tf_price( $hotel_discount_amount ) ) . 'off'; ?>
                                 </span>
                             </div>
 						<?php } ?>
@@ -1207,10 +1207,10 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 									?>
                                     <span class="tf-price">
                                         <span class="discount-price">
-                                            <del><?php echo wp_kses_post( wc_price( $price ) ); ?></del>
+                                            <del><?php echo wp_kses_post( tf_price( $price ) ); ?></del>
                                         </span>
                                         <span class="sale-price">
-                                            <?php echo wp_kses_post( wc_price( $d_price ) ); ?>
+                                            <?php echo wp_kses_post( tf_price( $d_price ) ); ?>
                                         </span>
                                     </span>
 									<?php
@@ -1218,7 +1218,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 									?>
                                     <span class="tf-price">
                                         <span class="sale-price">
-                                            <?php echo wp_kses_post( wc_price( $price ) ); ?>
+                                            <?php echo wp_kses_post( tf_price( $price ) ); ?>
                                         </span>
                                     </span>
 									<?php
@@ -1230,10 +1230,10 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 									?>
                                     <span class="tf-price">
                             <span class="discount-price">
-                                <del><?php echo wp_kses_post( wc_price( $price ) ); ?></del>
+                                <del><?php echo wp_kses_post( tf_price( $price ) ); ?></del>
                             </span>
                             <span class="sale-price">
-                                <?php echo wp_kses_post( wc_price( $d_price ) ); ?>
+                                <?php echo wp_kses_post( tf_price( $d_price ) ); ?>
                             </span>
                         </span>
 									<?php
@@ -1241,7 +1241,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 									?>
                                     <span class="tf-price">
                             <span class="sale-price">
-                                <?php echo wp_kses_post( wc_price( $price ) ); ?>
+                                <?php echo wp_kses_post( tf_price( $price ) ); ?>
                             </span>
                         </span>
 									<?php
@@ -1370,7 +1370,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                     <div class="room-submit-wrap">
                         <div class="tf-deposit-content">
 							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                                <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
+                                <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( tf_price( $deposit_amount ) ); ?></span>
                                 <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide"
                                      style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
 							<?php } ?>
@@ -1414,7 +1414,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                 <div class="tf-room-gallery <?php echo empty( $room_gallerys ) ? esc_attr( 'tf-no-room-gallery' ) : ''; ?>">
 					<?php if ( ! empty( $hotel_discount_type ) && ! empty( $hotel_discount_amount ) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type ) ) { ?>
                         <div class="tf-available-room-off">
-							<?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( wc_price( $hotel_discount_amount ) . ' off' ); ?>
+							<?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( tf_price( $hotel_discount_amount ) . ' off' ); ?>
                         </div>
 					<?php } ?>
 					<?php if ( ! empty( $room_preview_img ) ) : ?>
@@ -1628,10 +1628,10 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 			                        <?php if ( $hotel_discount_type != 'none' && ! empty( $hotel_discount_amount ) ) { ?>
                                         <span class="tf-price">
                                         <span class="discount-price">
-                                            <del><?php echo wp_kses_post( wc_price( $price ) ); ?></del>
+                                            <del><?php echo wp_kses_post( tf_price( $price ) ); ?></del>
                                         </span>
                                         <span class="sale-price">
-                                            <?php echo wp_kses_post( wc_price( $d_price ) ); ?>
+                                            <?php echo wp_kses_post( tf_price( $d_price ) ); ?>
                                         </span>
                                     </span>
 				                        <?php
@@ -1639,7 +1639,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 				                        ?>
                                         <span class="tf-price">
                                         <span class="sale-price">
-                                            <?php echo wp_kses_post( wc_price( $price ) ); ?>
+                                            <?php echo wp_kses_post( tf_price( $price ) ); ?>
                                         </span>
                                     </span>
 				                        <?php
@@ -1671,7 +1671,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                 <div class="room-submit-wrap">
                                     <div class="tf-deposit-content">
 				                        <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                                            <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
+                                            <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( tf_price( $deposit_amount ) ); ?></span>
                                             <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide"
                                                  style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
 				                        <?php } ?>
@@ -1791,10 +1791,10 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 			                            ?>
                                         <span class="tf-price">
                                     <span class="discount-price">
-                                        <del><?php echo wp_kses_post( wc_price( $price ) ); ?></del>
+                                        <del><?php echo wp_kses_post( tf_price( $price ) ); ?></del>
                                     </span>
                                     <span class="sale-price">
-                                        <?php echo wp_kses_post( wc_price( $d_price ) ); ?>
+                                        <?php echo wp_kses_post( tf_price( $d_price ) ); ?>
                                     </span>
                                 </span>
 			                            <?php
@@ -1802,7 +1802,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 			                            ?>
                                         <span class="tf-price">
                                     <span class="sale-price">
-                                        <?php echo wp_kses_post( wc_price( $price ) ); ?>
+                                        <?php echo wp_kses_post( tf_price( $price ) ); ?>
                                     </span>
                                 </span>
 			                            <?php
@@ -1814,10 +1814,10 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 			                            ?>
                                         <span class="tf-price">
                                     <span class="discount-price">
-                                        <del><?php echo wp_kses_post( wc_price( $price ) ); ?></del>
+                                        <del><?php echo wp_kses_post( tf_price( $price ) ); ?></del>
                                     </span>
                                     <span class="sale-price">
-                                        <?php echo wp_kses_post( wc_price( $d_price ) ); ?>
+                                        <?php echo wp_kses_post( tf_price( $d_price ) ); ?>
                                     </span>
                                 </span>
 			                            <?php
@@ -1825,7 +1825,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 			                            ?>
                                         <span class="tf-price">
                                     <span class="sale-price">
-                                        <?php echo wp_kses_post( wc_price( $price ) ); ?>
+                                        <?php echo wp_kses_post( tf_price( $price ) ); ?>
                                     </span>
                                 </span>
 			                            <?php
@@ -1877,7 +1877,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                             <div class="room-submit-wrap">
                                 <div class="tf-deposit-content">
 			                        <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                                        <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
+                                        <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( tf_price( $deposit_amount ) ); ?></span>
                                         <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide"
                                              style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
 			                        <?php } ?>
@@ -2196,12 +2196,12 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						<?php
 						if ( ! empty( $d_price ) ) {
 							?>
-                            <span class="tf-price"><del><?php echo wp_kses_post( wc_price( $price ) ); ?></del> <?php echo wp_kses_post( wc_price( $d_price ) ); ?></span>
+                            <span class="tf-price"><del><?php echo wp_kses_post( tf_price( $price ) ); ?></del> <?php echo wp_kses_post( tf_price( $d_price ) ); ?></span>
 							<?php
 							$d_price = "";
 						} else if ( $hotel_discount_type == "none" || empty( $d_price ) ) {
 							?>
-                            <span class="tf-price"><?php echo wp_kses_post( wc_price( $price ) ); ?></span>
+                            <span class="tf-price"><?php echo wp_kses_post( tf_price( $price ) ); ?></span>
 							<?php
 						}
 						?>
@@ -2218,7 +2218,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         </div>
 
 						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                            <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
+                            <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( tf_price( $deposit_amount ) ); ?></span>
                             <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
 						<?php } ?>
                     </div>
@@ -2327,12 +2327,12 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 					<?php
 					if ( ! empty( $d_price ) ) {
 						?>
-                        <span class="tf-price"><del><?php echo wp_kses_post( wc_price( $price ) ); ?></del> <?php echo wp_kses_post( wc_price( $d_price ) ); ?></span>
+                        <span class="tf-price"><del><?php echo wp_kses_post( tf_price( $price ) ); ?></del> <?php echo wp_kses_post( tf_price( $d_price ) ); ?></span>
 						<?php
 						$d_price = "";
 					} else if ( $hotel_discount_type == "none" || empty( $d_price ) ) {
 						?>
-                        <span class="tf-price"><?php echo wp_kses_post( wc_price( $price ) ); ?></span>
+                        <span class="tf-price"><?php echo wp_kses_post( tf_price( $price ) ); ?></span>
 						<?php
 					}
 					?>
@@ -2364,7 +2364,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 					<?php } ?>
 
 					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                        <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
+                        <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( tf_price( $deposit_amount ) ); ?></span>
                         <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
 					<?php } ?>
                 </div>

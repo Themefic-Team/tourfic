@@ -144,9 +144,9 @@ defined( 'ABSPATH' ) || exit;
                                             $min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
 
                                             // if ($min_regular_price != 0) {
-                                            //     $price_html = wc_format_sale_price($min_regular_price, $min_sale_price);
+                                            //     $price_html = tf_format_sale_price($min_regular_price, $min_sale_price);
                                             // } else {
-                                            //     $price_html = wp_kses_post(wc_price($min_sale_price)) . " ";
+                                            //     $price_html = wp_kses_post(tf_price($min_sale_price)) . " ";
                                             // }
 
                                             $price_html = Pricing::instance(get_the_ID())->get_min_price_html();
@@ -156,7 +156,7 @@ defined( 'ABSPATH' ) || exit;
                                                 $lng = $map['longitude'];
                                                 ob_start();
                                                 ?>
-                                                <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                                <div class="tf-map-item" data-price="<?php //echo esc_attr( tf_price( $min_sale_price ) ); ?>">
                                                     <div class="tf-map-item-thumb">
                                                         <a href="<?php the_permalink(); ?>">
                                                             <?php
@@ -171,7 +171,7 @@ defined( 'ABSPATH' ) || exit;
                                                         <?php
                                                         if (!empty($discount_price)) : ?>
                                                             <div class="tf-map-item-discount">
-                                                                <?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price($discount_price)) ?>
+                                                                <?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(tf_price($discount_price)) ?>
                                                                 <?php esc_html_e(" Off", "tourfic"); ?>
                                                             </div>
                                                         <?php endif; ?>
@@ -220,9 +220,9 @@ defined( 'ABSPATH' ) || exit;
                                             $min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
 
                                             // if ($min_regular_price != 0) {
-                                            //     $price_html = wc_format_sale_price($min_regular_price, $min_sale_price);
+                                            //     $price_html = tf_format_sale_price($min_regular_price, $min_sale_price);
                                             // } else {
-                                            //     $price_html = wp_kses_post(wc_price($min_sale_price)) . " ";
+                                            //     $price_html = wp_kses_post(tf_price($min_sale_price)) . " ";
                                             // }
 
                                             $price_html = Pricing::instance(get_the_ID())->get_min_price_html();
@@ -232,7 +232,7 @@ defined( 'ABSPATH' ) || exit;
                                                 $lng = $map['longitude'];
                                                 ob_start();
                                                 ?>
-                                                <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                                <div class="tf-map-item" data-price="<?php //echo esc_attr( tf_price( $min_sale_price ) ); ?>">
                                                     <div class="tf-map-item-thumb">
                                                         <a href="<?php the_permalink(); ?>">
                                                             <?php
@@ -247,7 +247,7 @@ defined( 'ABSPATH' ) || exit;
                                                         <?php
                                                         if (!empty($discount_price)) : ?>
                                                             <div class="tf-map-item-discount">
-                                                                <?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price($discount_price)) ?>
+                                                                <?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(tf_price($discount_price)) ?>
                                                                 <?php esc_html_e(" Off", "tourfic"); ?>
                                                             </div>
                                                         <?php endif; ?>

@@ -121,9 +121,9 @@ class Tour_Booking_Details extends \Tourfic\Core\TF_Booking_Details
                                         $billing_last_name = !empty($tf_billing_details->billing_last_name) ? $tf_billing_details->billing_last_name : '';
                                         ?>
                                         <h5><?php esc_html_e("Name:", "tourfic"); ?> <?php echo esc_html( $billing_first_name.' '.$billing_last_name ); ?></h5>
-                                        <h5><?php esc_html_e("Price:", "tourfic"); ?> <?php echo wp_kses_post( wc_price( $tf_tour_details->total_price ) ); ?></h5>
+                                        <h5><?php esc_html_e("Price:", "tourfic"); ?> <?php echo wp_kses_post( tf_price( $tf_tour_details->total_price ) ); ?></h5>
                                         <?php if(!empty($tf_tour_details->due_price)){ ?>
-                                        <h5><?php esc_html_e("Due Price:", "tourfic"); ?> <?php echo wp_kses_post(wc_price( $tf_tour_details->due_price )) ?></h5>
+                                        <h5><?php esc_html_e("Due Price:", "tourfic"); ?> <?php echo wp_kses_post(tf_price( $tf_tour_details->due_price )) ?></h5>
                                         <?php } ?>
                                         <h5 style="text-transform: uppercase;"><?php esc_html_e("Payment Status:", "tourfic"); ?> <?php echo esc_html( $tf_order_details->payment_method ) ?></h5>
                                         <?php 
@@ -261,9 +261,9 @@ class Tour_Booking_Details extends \Tourfic\Core\TF_Booking_Details
                             $billing_last_name = !empty($tf_billing_details->billing_last_name) ? $tf_billing_details->billing_last_name : '';
                             ?>
                             <h5><?php esc_html_e("Name:", "tourfic"); ?> <?php echo esc_html( $billing_first_name.' '.$billing_last_name ); ?></h5>
-                            <h5><?php esc_html_e("Price:", "tourfic"); ?> <?php echo wp_kses_post(wc_price( $tf_tour_details->total_price )) ?></h5>
+                            <h5><?php esc_html_e("Price:", "tourfic"); ?> <?php echo wp_kses_post(tf_price( $tf_tour_details->total_price )) ?></h5>
                             <?php if(!empty($tf_tour_details->due_price)){ ?>
-                            <h5><?php esc_html_e("Due Price:", "tourfic"); ?> <?php echo wp_kses_post(wc_price( $tf_tour_details->due_price )) ?></h5>
+                            <h5><?php esc_html_e("Due Price:", "tourfic"); ?> <?php echo wp_kses_post(tf_price( $tf_tour_details->due_price )) ?></h5>
                             <?php } ?>
                             <h5 style="text-transform: uppercase;"><?php esc_html_e("Payment Status:", "tourfic"); ?> <?php echo esc_html( $tf_order_details->payment_method ) ?></h5>
                             <?php 

@@ -144,7 +144,7 @@ class Helper {
                         /* translators: %1$s: number of adult and %2$s: extra price */
 						'title' => sprintf( __( 'Adult ( %1$s × %2$s )', 'tourfic' ),
 							$adult,
-							wp_strip_all_tags( wc_price( $hotel_extras[$key]['price'] ) )
+							wp_strip_all_tags( tf_price( $hotel_extras[$key]['price'] ) )
 						),
 						'price' => $hotel_extras[$key]['price'] * $adult
 					);
@@ -3100,6 +3100,10 @@ class Helper {
 
 	static function tf_is_woo_active() {
 		return is_plugin_active( 'woocommerce/woocommerce.php' );
+	}
+
+	static function tf_is_fluentcart_active() {
+		return is_plugin_active( 'fluent-cart/fluent-cart.php' );
 	}
 
 	static function tf_set_order( $order_data ) {

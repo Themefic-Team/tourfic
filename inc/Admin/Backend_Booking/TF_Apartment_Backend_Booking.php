@@ -127,7 +127,7 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 					$all_fees[] = array(
 						"label" => ! empty( $fees["additional_fee_label"] ) ? $fees["additional_fee_label"] : '',
 						"fee"   => ! empty( $fees["additional_fee"] ) ? $fees["additional_fee"] : 0,
-						"price" => ! empty( $fees["additional_fee"] ) ? wc_price( $fees["additional_fee"] ) : wc_price( 0 ),
+						"price" => ! empty( $fees["additional_fee"] ) ? tf_price( $fees["additional_fee"] ) : tf_price( 0 ),
 						"type"  => ! empty( $fees["fee_type"] ) ? $fees["fee_type"] : '',
 					);
 				}
@@ -141,7 +141,7 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 				$all_fees[] = array(
 					"label" => $additional_fee_label ?? "",
 					"fee"   => $additional_fee_amount,
-					"price" => wc_price( $additional_fee_amount ),
+					"price" => tf_price( $additional_fee_amount ),
 					"type"  => $additional_fee_type,
 				);
 			}

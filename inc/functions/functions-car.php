@@ -56,7 +56,7 @@ if(!empty($car_extra_pass)){
 	$total_prices = $total_prices + $total_extra['price'];
 }
 /* translators: %1$s will return total price */
-$response['total_price'] = sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price($total_prices) );
+$response['total_price'] = sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), tf_price($total_prices) );
 
 $total_days = 1;
 if( !empty($pickup_date) && !empty($dropoff_date) && !empty($pickup_time) && !empty($dropoff_time) ){
@@ -95,7 +95,7 @@ foreach($extra_qty as $key => $singleqty){
 					<div class="line-sum tf-flex tf-flex-align-center">
 						<i class="ri-close-line"></i> 
 						<span class="qty"><?php echo esc_attr($singleqty); ?></span> 
-						<span class="price"><?php echo !empty($single_extra_info['price']) ? wp_kses_post( wc_price( ($single_extra_info['price'] * $calday) * $singleqty) ) : ''; ?></span>
+						<span class="price"><?php echo !empty($single_extra_info['price']) ? wp_kses_post( tf_price( ($single_extra_info['price'] * $calday) * $singleqty) ) : ''; ?></span>
 						</div>
 					<span class="delete">
 						<input type="hidden" value="<?php echo esc_attr($extra_key); ?>" name="selected_extra[]" />
@@ -373,7 +373,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 				<?php
 				$total_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time, $tf_archive = true);
 				?>
-				<h3><?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <small>/ <?php echo esc_html($total_prices['type']); ?></small></h3>
+				<h3><?php echo $total_prices['sale_price'] ? wp_kses_post(tf_price($total_prices['sale_price'])) : '' ?> <small>/ <?php echo esc_html($total_prices['type']); ?></small></h3>
 			</div>
 			<?php endif; ?>
 
@@ -807,9 +807,9 @@ function tf_car_booking_pupup_callback() {
 						<td align="center">
 							<?php 
 							if(!empty($protection['price'])){
-								echo wp_kses_post(wc_price($protection['price']));
+								echo wp_kses_post(tf_price($protection['price']));
 							}else{
-								echo wp_kses_post(wc_price(0.0));
+								echo wp_kses_post(tf_price(0.0));
 							}
 							?>
 							
@@ -825,7 +825,7 @@ function tf_car_booking_pupup_callback() {
 							<input type="hidden" id="tf_total_proteciton_price" value="0">
 						</th>
 						<th align="center" id="tf_proteciton_subtotal">
-							<?php echo wp_kses_post(wc_price(0.0)); ?>
+							<?php echo wp_kses_post(tf_price(0.0)); ?>
 						</th>
 					</tr>
 				</tfoot>
@@ -1086,7 +1086,7 @@ function tf_car_price_calculation_callback() {
 				if ( $bestRefundPolicy['refund_amount_type'] === 'percent' ) {
 					$cancellation_message = esc_html( $bestRefundPolicy['refund_amount'] ) . '% ' . esc_html__( "Cancellation fee", "tourfic" );
 				} else {
-					$cancellation_message = wc_price( $bestRefundPolicy['refund_amount'] ) . ' ' . esc_html__( "Cancellation fee", "tourfic" );
+					$cancellation_message = tf_price( $bestRefundPolicy['refund_amount'] ) . ' ' . esc_html__( "Cancellation fee", "tourfic" );
 				}
 			} else {
 				$cancellation_message = esc_html__( "Cancellation policy not specified", "tourfic" );
@@ -1148,7 +1148,7 @@ function tf_car_price_calculation_callback() {
     // Send response
     wp_send_json_success( [
 		/* translators: %s will return total price */
-        'total_price' => sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price( $total_prices ) ),
+        'total_price' => sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), tf_price( $total_prices ) ),
         'cancellation' => $cancellation,
     ] );
 

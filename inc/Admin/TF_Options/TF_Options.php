@@ -535,20 +535,20 @@ class TF_Options {
 			$room_avail_data = array_map( function ( $item ) {
 				$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
 				if ( $item['price_by'] == '1' ) {
-					$item['title'] = esc_html__( 'Price: ', 'tourfic' ) . wc_price( $item['price'] );
+					$item['title'] = esc_html__( 'Price: ', 'tourfic' ) . tf_price( $item['price'] );
 				} elseif ( $item['price_by'] == '2' ) {
-					$item['title'] = esc_html__( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . esc_html__( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
+					$item['title'] = esc_html__( 'Adult: ', 'tourfic' ) . tf_price( $item['adult_price'] ) . '<br>' . esc_html__( 'Child: ', 'tourfic' ) . tf_price( $item['child_price'] );
 				} elseif ( $item['price_by'] == '3' ) {
 					$item['title'] = '';
 					if ( ! empty( $item['options_count'] ) ) {
 						for ( $i = 0; $i <= $item['options_count'] - 1; $i ++ ) {
 							if ( $item[ 'tf_room_option_' . $i ] == '1' && $item['tf_option_pricing_type_'.$i] == 'per_room') {
 								$item['title'] .= esc_html__( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
-								$item['title'] .= esc_html__( 'Price: ', 'tourfic' ) . wc_price($item['tf_option_room_price_'.$i]). '<br><br>';
+								$item['title'] .= esc_html__( 'Price: ', 'tourfic' ) . tf_price($item['tf_option_room_price_'.$i]). '<br><br>';
 							} else if($item[ 'tf_room_option_' . $i ] == '1' && $item['tf_option_pricing_type_'.$i] == 'per_person'){
 								$item['title'] .= esc_html__( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
-								$item['title'] .= esc_html__( 'Adult: ', 'tourfic' ) . wc_price($item['tf_option_adult_price_'.$i]). '<br>';
-								$item['title'] .= esc_html__( 'Child: ', 'tourfic' ) . wc_price($item['tf_option_child_price_'.$i]). '<br><br>';
+								$item['title'] .= esc_html__( 'Adult: ', 'tourfic' ) . tf_price($item['tf_option_adult_price_'.$i]). '<br>';
+								$item['title'] .= esc_html__( 'Child: ', 'tourfic' ) . tf_price($item['tf_option_child_price_'.$i]). '<br><br>';
                             }
 						}
 					}
@@ -838,7 +838,7 @@ class TF_Options {
 			$apt_availability_data = array_values( $apt_availability_data );
 			$apt_availability_data = array_map( function ( $item ) {
 				$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
-				$item['title'] = $item['pricing_type'] == 'per_night' ? esc_html__( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : esc_html__( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . esc_html__( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] ) . '<br>' . esc_html__( 'Infant: ', 'tourfic' ) . wc_price( $item['infant_price'] );
+				$item['title'] = $item['pricing_type'] == 'per_night' ? esc_html__( 'Price: ', 'tourfic' ) . tf_price( $item['price'] ) : esc_html__( 'Adult: ', 'tourfic' ) . tf_price( $item['adult_price'] ) . '<br>' . esc_html__( 'Child: ', 'tourfic' ) . tf_price( $item['child_price'] ) . '<br>' . esc_html__( 'Infant: ', 'tourfic' ) . tf_price( $item['infant_price'] );
 
 				if ( $item['status'] == 'unavailable' ) {
 					$item['display'] = 'background';
@@ -1315,9 +1315,9 @@ class TF_Options {
 					}
 				}
 				if ( $item['pricing_type'] == 'group' && (empty($group_package_option) || empty($group_package_pricing)) ) {
-					$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) . '<br>'. $time_string;
+					$item['title'] = __( 'Price: ', 'tourfic' ) . tf_price( $item['price'] ) . '<br>'. $time_string;
 				} elseif ( $item['pricing_type'] == 'person' ) {
-					$item['title'] = __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] ). '<br>' . __( 'Infant: ', 'tourfic' ) . wc_price( $item['infant_price'] ). '<br>'. $time_string;
+					$item['title'] = __( 'Adult: ', 'tourfic' ) . tf_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . tf_price( $item['child_price'] ). '<br>' . __( 'Infant: ', 'tourfic' ) . tf_price( $item['infant_price'] ). '<br>'. $time_string;
 				} elseif ( $item['pricing_type'] == 'package' ) {
 					$item['title'] = '';
 					if ( ! empty( $item['options_count'] ) ) {
@@ -1329,13 +1329,13 @@ class TF_Options {
 
 							if ( $item['tf_option_pricing_type_'.$i] == 'group') {
 								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
-								$item['title'] .= __( 'Group Price: ', 'tourfic' ) . wc_price($item['tf_option_group_price_'.$i]). '<br>';
+								$item['title'] .= __( 'Group Price: ', 'tourfic' ) . tf_price($item['tf_option_group_price_'.$i]). '<br>';
 								$item['title'] .=  !empty($package_active_time) ? 'Time: '.$package_active_time. '<br><br>' : '';
 							} else if($item['tf_option_pricing_type_'.$i] == 'person'){
 								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
-								$item['title'] .= __( 'Adult: ', 'tourfic' ) . wc_price($item['tf_option_adult_price_'.$i]). '<br>';
-								$item['title'] .= __( 'Child: ', 'tourfic' ) . wc_price($item['tf_option_child_price_'.$i]). '<br>';
-								$item['title'] .= __( 'Infant: ', 'tourfic' ) . wc_price($item['tf_option_infant_price_'.$i]). '<br>';
+								$item['title'] .= __( 'Adult: ', 'tourfic' ) . tf_price($item['tf_option_adult_price_'.$i]). '<br>';
+								$item['title'] .= __( 'Child: ', 'tourfic' ) . tf_price($item['tf_option_child_price_'.$i]). '<br>';
+								$item['title'] .= __( 'Infant: ', 'tourfic' ) . tf_price($item['tf_option_infant_price_'.$i]). '<br>';
 								$item['title'] .=  !empty($package_active_time) ? 'Time: '.$package_active_time. '<br><br>' : '';
                             }
 						}
@@ -1346,7 +1346,7 @@ class TF_Options {
 						for ( $i = 0; $i <= $item['options_count'] - 1; $i ++ ) {
 							if( !empty($item['tf_option_title_'.$i]) && !empty($item['tf_option_group_price_'.$i]) ){
 								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
-								$item['title'] .= __( 'Price: ', 'tourfic' ) . wc_price($item['tf_option_group_price_'.$i]). '<br><br>';
+								$item['title'] .= __( 'Price: ', 'tourfic' ) . tf_price($item['tf_option_group_price_'.$i]). '<br><br>';
 							}
 						}
 					}

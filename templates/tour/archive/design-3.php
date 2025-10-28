@@ -146,9 +146,9 @@ $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googl
                                             $min_discount = !empty($min_price_arr['min_discount']) ? $min_price_arr['min_discount'] : 0;
 
                                             if (!empty($min_discount)) {
-                                                $price_html = wc_format_sale_price($min_regular_price, $min_sale_price);
+                                                $price_html = tf_format_sale_price($min_regular_price, $min_sale_price);
                                             } else {
-                                                $price_html = wp_kses_post(wc_price($min_sale_price)) . " ";
+                                                $price_html = wp_kses_post(tf_price($min_sale_price)) . " ";
                                             }
 
                                             if (!empty($map)) {
@@ -170,7 +170,7 @@ $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googl
 
                                                         <?php if (!empty($allow_discount) && $discount_type !== 'none' && !empty($discount_price)) : ?>
                                                             <div class="tf-map-item-discount">
-                                                                <?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price($discount_price)) ?>
+                                                                <?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(tf_price($discount_price)) ?>
                                                                 <?php esc_html_e(" Off", "tourfic"); ?>
                                                             </div>
                                                         <?php endif; ?>
@@ -220,9 +220,9 @@ $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googl
                                             $min_discount = !empty($min_price_arr['min_discount']) ? $min_price_arr['min_discount'] : 0;
 
                                             if (!empty($min_discount)) {
-                                                $price_html = wc_format_sale_price($min_regular_price, $min_sale_price);
+                                                $price_html = tf_format_sale_price($min_regular_price, $min_sale_price);
                                             } else {
-                                                $price_html = wp_kses_post(wc_price($min_sale_price)) . " ";
+                                                $price_html = wp_kses_post(tf_price($min_sale_price)) . " ";
                                             }
 
                                             if (!empty($map)) {
@@ -230,7 +230,7 @@ $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googl
                                                 $lng = $map['longitude'];
                                                 ob_start();
                                                 ?>
-                                                <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                                <div class="tf-map-item" data-price="<?php //echo esc_attr( tf_price( $min_sale_price ) ); ?>">
                                                     <div class="tf-map-item-thumb">
                                                         <a href="<?php the_permalink(); ?>">
                                                             <?php
@@ -244,7 +244,7 @@ $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googl
 
                                                         <?php if (!empty($allow_discount) && $discount_type !== 'none' && !empty($discount_price)) : ?>
                                                             <div class="tf-map-item-discount">
-                                                                <?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price($discount_price)) ?>
+                                                                <?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(tf_price($discount_price)) ?>
                                                                 <?php esc_html_e(" Off", "tourfic"); ?>
                                                             </div>
                                                         <?php endif; ?>

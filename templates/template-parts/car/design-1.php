@@ -118,7 +118,7 @@ $tf_cars_slug = get_option('car_slug');
                 <div class="tf-top-bar-booking tf-flex tf-flex-gap-32">
                     <div class="tf-price-header">
                         <h2><?php esc_html_e("Total:", "tourfic"); ?> 
-                        <?php echo $total_prices['sale_price'] ? wp_kses_post( wc_price($total_prices['sale_price']) ) : '' ?></h2>
+                        <?php echo $total_prices['sale_price'] ? wp_kses_post( tf_price($total_prices['sale_price']) ) : '' ?></h2>
                         <p><?php echo wp_kses_post(Pricing::is_taxable($meta)); ?></p>
                     </div>
                     <button class="tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-gap-8 tf-back-to-booking">
@@ -356,8 +356,8 @@ $tf_cars_slug = get_option('car_slug');
 
                     <div class="tf-price-header tf-mb-30">
                         <h2><?php esc_html_e("Total:", "tourfic"); ?> 
-                        <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wp_kses_post(wc_price($total_prices['regular_price'])); ?></del>  <?php } ?>
-                        <?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <?php if( empty($_GET['pickup_date']) && !empty($total_prices['type'])){ ?>
+                        <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wp_kses_post(tf_price($total_prices['regular_price'])); ?></del>  <?php } ?>
+                        <?php echo $total_prices['sale_price'] ? wp_kses_post(tf_price($total_prices['sale_price'])) : '' ?> <?php if( empty($_GET['pickup_date']) && !empty($total_prices['type'])){ ?>
                             <small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> 
                             <?php } ?></h2>
                         <p><?php echo wp_kses_post(Pricing::is_taxable($meta)); ?></p>
@@ -559,14 +559,14 @@ $tf_cars_slug = get_option('car_slug');
                                 <?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($car_allow_deposit) && $car_deposit_type!='none' && !empty($car_deposit_amount) ){  ?>
                                     <div class="tf-partial-payment-button tf-flex tf-flex-direction-column tf-flex-gap-16">
                                         <button class="tf_btn tf-flex tf-flex-align-center tf-partial-button tf-flex-justify-center tf-flex-gap-8 <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>" data-partial="<?php echo esc_attr('yes'); ?>">
-                                            <?php esc_html_e( 'Part Pay', 'tourfic' ); ?> <?php echo wp_kses_post(wc_price($due_amount)); ?>
+                                            <?php esc_html_e( 'Part Pay', 'tourfic' ); ?> <?php echo wp_kses_post(tf_price($due_amount)); ?>
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11.3299 10.3541L11.6835 10.0006L11.3299 9.64703L7.55867 5.87577L8.03008 5.40437L12.6263 10.0006L8.03008 14.5967L7.55867 14.1253L11.3299 10.3541Z" fill="#566676" stroke="#0866C4"/>
                                             </svg>
                                         </button>
 
                                         <button class="tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-gap-8 <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>" data-partial="<?php echo esc_attr('no'); ?>">
-                                            <?php esc_html_e( 'Full Pay', 'tourfic' ); ?> <?php echo wp_kses_post(wc_price($total_prices['sale_price'])); ?>
+                                            <?php esc_html_e( 'Full Pay', 'tourfic' ); ?> <?php echo wp_kses_post(tf_price($total_prices['sale_price'])); ?>
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
@@ -614,8 +614,8 @@ $tf_cars_slug = get_option('car_slug');
                     <div class="tf-mobile-booking-btn">
                         <div class="tf-price-header">
                             <h2><?php esc_html_e("Total:", "tourfic"); ?> 
-                            <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wp_kses_post(wc_price($total_prices['regular_price'])); ?></del>  <?php } ?>
-                            <?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <?php if(!empty($total_prices['type'])){ ?><small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> <?php } ?></h2>
+                            <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wp_kses_post(tf_price($total_prices['regular_price'])); ?></del>  <?php } ?>
+                            <?php echo $total_prices['sale_price'] ? wp_kses_post(tf_price($total_prices['sale_price'])) : '' ?> <?php if(!empty($total_prices['type'])){ ?><small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> <?php } ?></h2>
                             <p><?php echo wp_kses_post(Pricing::is_taxable($meta)); ?></p>
                         </div>
                         <button><?php esc_html_e("Book Now", "tourfic"); ?></button>

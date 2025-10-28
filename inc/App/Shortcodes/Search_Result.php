@@ -1009,9 +1009,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 									$min_discount_amount = !empty($min_price_arr['min_discount_amount']) ? $min_price_arr['min_discount_amount'] : 0;
 
 									if ( $min_regular_price != 0 ) {
-										$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+										$price_html = tf_format_sale_price( $min_regular_price, $min_sale_price );
 									} else {
-										$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+										$price_html = wp_kses_post( tf_price( $min_sale_price ) ) . " ";
 									}
 
 									if ( ! empty( $map ) ) {
@@ -1034,7 +1034,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 												<?php
 												if ( ! empty( $min_discount_amount ) ) : ?>
                                                     <div class="tf-map-item-discount">
-														<?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount) . '%' : wp_kses_post(wc_price( $min_discount_amount )) ?>
+														<?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount) . '%' : wp_kses_post(tf_price( $min_discount_amount )) ?>
 														<?php esc_html_e( " Off", "tourfic" ); ?>
                                                     </div>
 												<?php endif; ?>
@@ -1093,9 +1093,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 									$min_discount      = ! empty( $min_price_arr['min_discount'] ) ? $min_price_arr['min_discount'] : 0;
 
 									if ( ! empty( $min_discount ) ) {
-										$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+										$price_html = tf_format_sale_price( $min_regular_price, $min_sale_price );
 									} else {
-										$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+										$price_html = wp_kses_post( tf_price( $min_sale_price ) ) . " ";
 									}
 
 									if ( ! empty( $map ) ) {
@@ -1117,7 +1117,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 												<?php if ( $discount_type !== 'none' && ! empty( $discount_price ) ) : ?>
                                                     <div class="tf-map-item-discount">
-														<?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price( $discount_price )) ?>
+														<?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(tf_price( $discount_price )) ?>
 														<?php esc_html_e( " Off", "tourfic" ); ?>
                                                     </div>
 												<?php endif; ?>
@@ -1174,9 +1174,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 									$min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
 
 									// if ( $min_regular_price != 0 ) {
-									// 	$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+									// 	$price_html = tf_format_sale_price( $min_regular_price, $min_sale_price );
 									// } else {
-									// 	$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+									// 	$price_html = wp_kses_post( tf_price( $min_sale_price ) ) . " ";
 									// }
 
 									$price_html = apartmentPricing::instance(get_the_ID())->get_min_price_html();
@@ -1201,7 +1201,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 												<?php
 												if ( ! empty( $discount_price ) ) : ?>
                                                     <div class="tf-map-item-discount">
-														<?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price( $discount_price )) ?>
+														<?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(tf_price( $discount_price )) ?>
 														<?php esc_html_e( " Off", "tourfic" ); ?>
                                                     </div>
 												<?php endif; ?>
@@ -1262,9 +1262,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 									$min_discount_amount = !empty($min_price_arr['min_discount_amount']) ? $min_price_arr['min_discount_amount'] : 0;
 
 									if ( $min_regular_price != 0 ) {
-										$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+										$price_html = tf_format_sale_price( $min_regular_price, $min_sale_price );
 									} else {
-										$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+										$price_html = wp_kses_post( tf_price( $min_sale_price ) ) . " ";
 									}
 
 									if ( ! empty( $map ) ) {
@@ -1287,7 +1287,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 												<?php
 												if ( ! empty( $min_discount_amount ) ) : ?>
                                                     <div class="tf-map-item-discount">
-														<?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount . '%') : wp_kses_post(wc_price( $min_discount_amount )) ?>
+														<?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount . '%') : wp_kses_post(tf_price( $min_discount_amount )) ?>
 														<?php esc_html_e( " Off", "tourfic" ); ?>
                                                     </div>
 												<?php endif; ?>
@@ -1346,9 +1346,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 									$min_discount      = ! empty( $min_price_arr['min_discount'] ) ? $min_price_arr['min_discount'] : 0;
 
 									if ( ! empty( $min_discount ) ) {
-										$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+										$price_html = tf_format_sale_price( $min_regular_price, $min_sale_price );
 									} else {
-										$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+										$price_html = wp_kses_post( tf_price( $min_sale_price ) ) . " ";
 									}
 
 									if ( ! empty( $map ) ) {
@@ -1370,7 +1370,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 												<?php if ( $discount_type !== 'none' && ! empty( $discount_price ) ) : ?>
                                                     <div class="tf-map-item-discount">
-														<?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price( $discount_price )) ?>
+														<?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(tf_price( $discount_price )) ?>
 														<?php esc_html_e( " Off", "tourfic" ); ?>
                                                     </div>
 												<?php endif; ?>
@@ -1428,9 +1428,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 									$min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
 
 									// if ( $min_regular_price != 0 ) {
-									// 	$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+									// 	$price_html = tf_format_sale_price( $min_regular_price, $min_sale_price );
 									// } else {
-									// 	$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+									// 	$price_html = wp_kses_post( tf_price( $min_sale_price ) ) . " ";
 									// }
 
 									$price_html = apartmentPricing::instance(get_the_ID())->get_min_price_html();
@@ -1455,7 +1455,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 												<?php
 												if ( ! empty( $discount_price ) ) : ?>
                                                     <div class="tf-map-item-discount">
-														<?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price( $discount_price )) ?>
+														<?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(tf_price( $discount_price )) ?>
 														<?php esc_html_e( " Off", "tourfic" ); ?>
                                                     </div>
 												<?php endif; ?>

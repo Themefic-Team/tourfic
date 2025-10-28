@@ -287,9 +287,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                     $tf_tour_min_price      = !empty($tour_price) ? min( $tour_price ) : 0;
                                                     
                                                     if ( ! empty( $min_sale_price ) ) {
-                                                        echo wp_kses_post(wp_strip_all_tags(wc_price($tf_tour_min_price))). " " . "<span><del>" . wp_kses_post(wp_strip_all_tags(wc_price( $min_sale_price ))) . "</del></span>";
+                                                        echo wp_kses_post(wp_strip_all_tags(tf_price($tf_tour_min_price))). " " . "<span><del>" . wp_kses_post(wp_strip_all_tags(tf_price( $min_sale_price ))) . "</del></span>";
                                                     } else {
-                                                        echo wp_kses_post(wp_strip_all_tags(wc_price($tf_tour_min_price)));
+                                                        echo wp_kses_post(wp_strip_all_tags(tf_price($tf_tour_min_price)));
                                                     }
                                                     ?>
                                                     </p>
@@ -399,10 +399,10 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                         <?php
                                                             //get the lowest price from all available room price
                                                             $tf_tour_min_price      = !empty($tour_price) ? min( $tour_price ) : 0;
-                                                            $lowest_price = wp_strip_all_tags(wc_price( $tf_tour_min_price ));
+                                                            $lowest_price = wp_strip_all_tags(tf_price( $tf_tour_min_price ));
                                                             
                                                             if ( ! empty( $min_sale_price ) ) {
-                                                                echo wp_kses_post($lowest_price). " " . "<span><del>" . wp_kses_post(wp_strip_all_tags(wc_price( $min_sale_price ))) . "</del></span>";
+                                                                echo wp_kses_post($lowest_price). " " . "<span><del>" . wp_kses_post(wp_strip_all_tags(tf_price( $min_sale_price ))) . "</del></span>";
                                                             } else {
                                                                 echo wp_kses_post($lowest_price);
                                                             }

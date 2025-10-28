@@ -142,28 +142,28 @@ defined( 'ABSPATH' ) || exit;
 			<?php if ( $pricing_rule == 'group' ) { ?>
                 <div class="tf-trip-pricing tf-flex tf-group active">
                     <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?></span>
-                    <span class="tf-price-amount"><?php echo wp_kses_post(wc_price($group_price)); ?></span>
+                    <span class="tf-price-amount"><?php echo wp_kses_post(tf_price($group_price)); ?></span>
                     <span class="tf-price-label-bttm"><?php esc_html_e( "Per Group", "tourfic" ); ?></span>
                 </div>
 			<?php } elseif ( $pricing_rule == 'person' ) { ?>
 				<?php if ( ! $disable_adult && ! empty( $adult_price ) ) { ?>
                     <div class="tf-trip-pricing tf-flex tf-adult active">
                         <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?></span>
-                        <span class="tf-price-amount"><?php echo wp_kses_post(wc_price($adult_price)); ?></span>
+                        <span class="tf-price-amount"><?php echo wp_kses_post(tf_price($adult_price)); ?></span>
                         <span class="tf-price-label-bttm"><?php esc_html_e( "Per Adult", "tourfic" ); ?></span>
                     </div>
 				<?php }
 				if ( ! $disable_child && ! empty( $child_price ) ) { ?>
                     <div class="tf-trip-pricing tf-flex tf-child <?php echo $disable_adult || empty( $adult_price ) ? esc_attr('active') : ''; ?>">
                         <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?></span>
-                        <span class="tf-price-amount"><?php echo wp_kses_post(wc_price($child_price)); ?></span>
+                        <span class="tf-price-amount"><?php echo wp_kses_post(tf_price($child_price)); ?></span>
                         <span class="tf-price-label-bttm"><?php esc_html_e( "Per Child", "tourfic" ); ?></span>
                     </div>
 				<?php }
 				if ( ! $disable_adult && ( ! $disable_infant && ! empty( $infant_price ) ) ) { ?>
                     <div class="tf-trip-pricing tf-flex tf-infant <?php echo ($disable_adult || empty( $adult_price)) && ($disable_child || empty( $child_price )) ? esc_attr('active') : ''; ?>">
                         <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?></span>
-                        <span class="tf-price-amount"><?php echo wp_kses_post(wc_price($infant_price)); ?></span>
+                        <span class="tf-price-amount"><?php echo wp_kses_post(tf_price($infant_price)); ?></span>
                         <span class="tf-price-label-bttm"><?php esc_html_e( "Per Infant", "tourfic" ); ?></span>
                     </div>
 				<?php } ?>

@@ -243,7 +243,7 @@ class Pricing {
 	}
 
 	function get_total_price_html() {
-		return !empty($this->total_price) ? wc_price( $this->total_price ) : wc_price( 0 );
+		return !empty($this->total_price) ? tf_price( $this->total_price ) : tf_price( 0 );
 	}
 
 	function get_adult_price() {
@@ -349,9 +349,9 @@ class Pricing {
 		if ( ! empty( $min_max_price ) ) {
 			$price_html .= esc_html__( "From ", "tourfic" );
 			if ( $sale_price != 0 && $sale_price != $regular_price ) {
-				$price_html .= wc_format_sale_price( $regular_price, $sale_price );
+				$price_html .= tf_format_sale_price( $regular_price, $sale_price );
 			} else {
-				$price_html .= wp_kses_post( wc_price( $regular_price ) ) . " ";
+				$price_html .= wp_kses_post( tf_price( $regular_price ) ) . " ";
 			}
 		}
 

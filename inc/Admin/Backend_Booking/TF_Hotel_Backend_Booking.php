@@ -708,18 +708,18 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 						/* translators: %1$s adult number, %2$s adult price, %3$s child number, %4$s child price, %5$s total price */
 						$air_service_info = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
 							$adult,
-							wp_strip_all_tags( wc_price( $service_adult_fee ) ),
+							wp_strip_all_tags( tf_price( $service_adult_fee ) ),
 							$child,
-							wp_strip_all_tags( wc_price( $service_child_fee ) ),
-							wp_strip_all_tags( wc_price( $airport_service_price_total ) )
+							wp_strip_all_tags( tf_price( $service_child_fee ) ),
+							wp_strip_all_tags( tf_price( $airport_service_price_total ) )
 						);
 
 					} else {
 						/* translators: %1$s adult number, %2$s adult price, %3$s total price */
 						$air_service_info = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
 							$adult,
-							wp_strip_all_tags( wc_price( $service_adult_fee ) ),
-							wp_strip_all_tags( wc_price( $airport_service_price_total ) )
+							wp_strip_all_tags( tf_price( $service_adult_fee ) ),
+							wp_strip_all_tags( tf_price( $airport_service_price_total ) )
 						);
 
 					}
@@ -730,13 +730,13 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 					$price_total                 += $airport_service_price_total;
 					/* translators: %1$s total price */
 					$air_service_info            = sprintf( esc_html__( '( Fixed ) = %1$s', 'tourfic' ),
-						wp_strip_all_tags( wc_price( $airport_service_price_total ) )
+						wp_strip_all_tags( tf_price( $airport_service_price_total ) )
 					);
 				}
 				if ( "free" == $price_type ) {
 					$air_service_price = 0;
 					$price_total       += 0;
-					$air_service_info  = wp_strip_all_tags( wc_price( 0 ) );
+					$air_service_info  = wp_strip_all_tags( tf_price( 0 ) );
 				}
 			}
 			if ( "dropoff" == $service_type ) {
@@ -759,18 +759,18 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 						/* translators: %1$s adult number, %2$s adult price, %3$s child number, %4$s child price, %5$s total price */
 						$air_service_info = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
 							$adult,
-							wp_strip_all_tags( wc_price( $service_adult_fee ) ),
+							wp_strip_all_tags( tf_price( $service_adult_fee ) ),
 							$child,
-							wp_strip_all_tags( wc_price( $service_child_fee ) ),
-							wp_strip_all_tags( wc_price( $airport_service_price_total ) )
+							wp_strip_all_tags( tf_price( $service_child_fee ) ),
+							wp_strip_all_tags( tf_price( $airport_service_price_total ) )
 						);
 
 					} else {
 						/* translators: %1$s adult number, %2$s adult price, %3$s total price */
 						$air_service_info = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
 							$adult,
-							wp_strip_all_tags( wc_price( $service_adult_fee ) ),
-							wp_strip_all_tags( wc_price( $airport_service_price_total ) )
+							wp_strip_all_tags( tf_price( $service_adult_fee ) ),
+							wp_strip_all_tags( tf_price( $airport_service_price_total ) )
 						);
 
 					}
@@ -781,13 +781,13 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 					$price_total                 += $airport_service_price_total;
 					/* translators: %1$s total price */
 					$air_service_info            = sprintf( esc_html__( '( Fixed ) = %1$s', 'tourfic' ),
-						wp_strip_all_tags( wc_price( $airport_service_price_total ) )
+						wp_strip_all_tags( tf_price( $airport_service_price_total ) )
 					);
 				}
 				if ( "free" == $price_type ) {
 					$air_service_price = 0;
 					$price_total       += 0;
-					$air_service_info  = wp_strip_all_tags( wc_price( 0 ) );
+					$air_service_info  = wp_strip_all_tags( tf_price( 0 ) );
 				}
 			}
 			if ( "both" == $service_type ) {
@@ -810,18 +810,18 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 						/* translators: %1$s adult number, %2$s adult price, %3$s child number, %4$s child price, %5$s total price */
 						$air_service_info = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s', 'tourfic' ),
 							$adult,
-							wp_strip_all_tags( wc_price( $service_adult_fee ) ),
+							wp_strip_all_tags( tf_price( $service_adult_fee ) ),
 							$child,
-							wp_strip_all_tags( wc_price( $service_child_fee ) ),
-							wp_strip_all_tags( wc_price( $airport_service_price_total ) )
+							wp_strip_all_tags( tf_price( $service_child_fee ) ),
+							wp_strip_all_tags( tf_price( $airport_service_price_total ) )
 						);
 
 					} else {
 						/* translators: %1$s adult number, %2$s adult price, %3$s total price */
 						$air_service_info = sprintf( esc_html__( 'Adult ( %1$s × %2$s ) = %3$s', 'tourfic' ),
 							$adult,
-							wp_strip_all_tags( wc_price( $service_adult_fee ) ),
-							wp_strip_all_tags( wc_price( $airport_service_price_total ) )
+							wp_strip_all_tags( tf_price( $service_adult_fee ) ),
+							wp_strip_all_tags( tf_price( $airport_service_price_total ) )
 						);
 
 					}
@@ -832,13 +832,13 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 					$price_total                 += $airport_service_price_total;
 					/* translators: %1$s total price */
 					$air_service_info            = sprintf( esc_html__( '( Fixed ) = %1$s', 'tourfic' ),
-						wp_strip_all_tags( wc_price( $airport_service_price_total ) )
+						wp_strip_all_tags( tf_price( $airport_service_price_total ) )
 					);
 				}
 				if ( "free" == $price_type ) {
 					$air_service_price = 0;
 					$price_total       += 0;
-					$air_service_info  = wp_strip_all_tags( wc_price( 0 ) );
+					$air_service_info  = wp_strip_all_tags( tf_price( 0 ) );
 				}
 			}
 		}

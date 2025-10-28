@@ -586,9 +586,9 @@ class Pricing {
 		if ( ! empty( $min_max_price ) ) {
 			$price_html .= esc_html__( "From ", "tourfic" );
 			if ( ! empty( $min_discount ) ) {
-				$price_html .= wc_format_sale_price( $regular_price, $sale_price );
+				$price_html .= tf_format_sale_price( $regular_price, $sale_price );
 			} else {
-				$price_html .= wp_kses_post( wc_price( $sale_price ) ) . " ";
+				$price_html .= wp_kses_post( tf_price( $sale_price ) ) . " ";
 			}
 		}
 

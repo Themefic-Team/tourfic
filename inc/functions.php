@@ -33,6 +33,63 @@ if ( file_exists( TF_INC_PATH . 'functions/functions-car.php' ) ) {
 	tf_file_missing( TF_INC_PATH . 'functions/functions-car.php' );
 }
 
+/**
+ * Tourfic unified price formatting function
+ *
+ * @param float|int|string $price
+ * @param array $args Optional formatting arguments
+ * @return string
+ */
+if ( ! function_exists( 'tf_price' ) ) {
+    function tf_price( $price, $args = [] ) {
+		$ecommerce_system = ! empty( Helper::tfopt( "ecommerce_system" ) ) ? Helper::tfopt( "ecommerce_system" ) : "woocommerce";
+
+        // --- WooCommerce ---
+        if ( $ecommerce_system === 'woocommerce' && function_exists( 'wc_price' ) ) {
+            return wc_price( $price, $args );
+        }
+
+        // --- FluentCart ---
+        if ( $ecommerce_system === 'fluentcart' && class_exists( '\FluentCart\App\Helpers\Helper' ) ) {
+            try {
+                $amount_in_cents = floatval( $price ) * 100;
+                return \FluentCart\App\Helpers\Helper::toDecimal($amount_in_cents);
+            } catch ( Exception $e ) {
+                return number_format_i18n( floatval( $price ), 2 );
+            }
+        }
+
+        // --- Fallback ---
+        return number_format_i18n( floatval( $price ), 2 );
+    }
+}
+
+/**
+ * Tourfic unified sale price formatter
+ *
+ * @param float|string $regular_price Regular (original) price
+ * @param float|string $sale_price Sale (discounted) price
+ * @param array $args Optional args passed to tf_price()
+ * @return string HTML-formatted price string
+ */
+if ( ! function_exists( 'tf_format_sale_price' ) ) {
+    function tf_format_sale_price( $regular_price, $sale_price, $args = [] ) {
+
+        // Ensure both values are numeric or formatted strings
+        $regular = is_numeric( $regular_price ) ? tf_price( $regular_price, $args ) : $regular_price;
+        $sale    = is_numeric( $sale_price ) ? tf_price( $sale_price, $args ) : $sale_price;
+
+        $price_html = '<del>' . $regular . '</del> <ins>' . $sale . '</ins>';
+
+        /**
+         * Filter: allow theme/plugins to modify sale price display
+         * Matches WooCommerce’s filter signature.
+         */
+        return apply_filters( 'tf_format_sale_price', $price_html, $regular_price, $sale_price, $args );
+    }
+}
+
+
 /*
  * Temporary functions
  */
