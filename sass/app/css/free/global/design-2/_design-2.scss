@@ -2928,6 +2928,23 @@
         .tf-search-date-wrapper {
             background: $color-filling-fg;
             padding: 24px;
+            &.tf-box-loading{
+                position: relative;
+                @media #{$max768}{
+                    position: fixed;
+                }
+                &::before{
+                    position: absolute;
+                    content: "";
+                    right: 0;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    background-color: rgba(255,255,255,.5);
+                    z-index: 99;
+                    border-radius: 16px;
+                }
+            }
             .tf-booking-date-wrap {
                 display: flex;
                 flex-direction: row;

@@ -2491,11 +2491,15 @@ function convertTo24HourFormat(timeStr) {
             // }
             var deposit = $this.find("input[name=hotel_room_depo]").val();
             var airport_service = $this.find('[name="airport_service"]').val();
-
+            let selectedExtras = [];
+            $($this.find('input[name="extra_service"]:checked')).each(function() {
+                selectedExtras.push($(this).val());
+            });
             formData.append('action', 'tf_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
             formData.append('deposit', deposit);
             formData.append('airport_service', airport_service);
+            formData.append('extras', selectedExtras);
 
 
             $.ajax({
@@ -3073,6 +3077,57 @@ function convertTo24HourFormat(timeStr) {
 
         }
 
+        // Tour price by onchange
+        $('.tf_tours_booking .tours-check-in-out').on("change", function () {
+            var date = $(this).val();
+            let post_id = $('input[name="post_id"]').val();
+
+            if( !date ){
+                return;
+            }
+            var data = {
+                action: 'tf_tour_price_calculation',
+                _nonce: tf_params.nonce,
+                post_id: post_id,
+                date: date,
+            };
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    if($('.tf-tour-booking-box')){
+                        $('.tf-tour-booking-box').addClass('tf-box-loading');
+                    }
+                    if($('.tf-search-date-wrapper')){
+                        $('.tf-search-date-wrapper').addClass('tf-box-loading');
+                    }
+                },
+                success: function (response) {
+                    if(response){
+                        if(response.data.min_price){
+                            $('.tf-tour-booking-box .tf-booking-price p').html(response.data.min_price);
+                        }
+                        if($('.acr-adult-price') && response.data.adult){
+                            $('.acr-adult-price').html(response.data.adult);
+                        }
+                        if($('.acr-child-price') && response.data.child){
+                            $('.acr-child-price').html(response.data.child);
+                        }
+                        if($('.acr-infant-price') && response.data.infant){
+                            $('.acr-infant-price').html(response.data.infant);
+                        }
+                        if($('.tf-tour-booking-box')){
+                            $('.tf-tour-booking-box').removeClass('tf-box-loading');
+                        }
+                        if($('.tf-search-date-wrapper')){
+                            $('.tf-search-date-wrapper').removeClass('tf-box-loading');
+                        }
+                    }
+                }
+            });
+        });
         /*
         * New Template Itinerary Accordion
         * @author: Jahid
@@ -3364,12 +3419,19 @@ function convertTo24HourFormat(timeStr) {
 
                     if (timestamp >= from && timestamp <= to) {
                         const allowedTime = availability.allowed_time?.time || [];
-
-                        allowedTime.forEach((t) => {
-                            if (t && t.trim() !== '') {
-                                times[t] = t;
-                            }
-                        });
+                        if (Array.isArray(allowedTime)) {
+                            allowedTime.forEach((t) => {
+                                if (t && t.trim() !== '') {
+                                    times[t] = t;
+                                }
+                            });
+                        } else if (typeof allowedTime === 'object' && allowedTime !== null) {
+                            Object.values(allowedTime).forEach((t) => {
+                                if (t && t.trim() !== '') {
+                                    times[t] = t;
+                                }
+                            });
+                        }
 
                         break; // stop after first match
                     }

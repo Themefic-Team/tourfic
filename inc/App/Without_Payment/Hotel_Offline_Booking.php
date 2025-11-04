@@ -105,6 +105,19 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
             "max_stay" => ! empty( $room_meta["maximum_stay_requirement"] ) ? $room_meta["maximum_stay_requirement"] : 0
         );
 
+		$total_extras_title = [];
+		$total_extras_price = 0;
+		$hotel_extra_option     = ! empty( $meta['hotel_extra_option'] ) ? $meta['hotel_extra_option'] : '';
+		if(function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($hotel_extra_option)){
+			$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
+			foreach ( $extras as $key => $extra ) {
+				$extra_service = Helper::tf_hotel_extras_title_price( $post_id, $adult, $child, $extra );
+				$total_extras_title[] = $hotel_extras[$extra]['title'];
+				$total_extras_price += $extra_service['price'];
+			}
+		}
+		$total_extras_titles = implode(',', $total_extras_title);
+
 		foreach ( $room_stay_requirements as $min_max_days ) {
 			if ( $day_difference < $min_max_days["min_stay"] && $min_max_days["min_stay"] > 0 ) {
 				if ( $min_max_days["uid"] == $unique_id ) {
@@ -241,8 +254,8 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 
 				Helper::tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
 				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) {
-						if ( ! empty( $airport_service ) ) {
-							$tf_due_amount = ( $price_total + $airport_service_arr['price'] ) - $deposit_amount;
+						if ( ! empty( $airport_service ) || ! empty( $total_extras_price ) ) {
+							$tf_due_amount = ( $price_total + $airport_service_arr['price'] + $total_extras_price ) - $deposit_amount;
 						} else {
 							$tf_due_amount = $price_total - $deposit_amount;
 						}
@@ -382,14 +395,22 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 						<td align="right">' . wc_price( $airport_service_arr['price'] ) . '</td>
 					</tr>';
 			}
+
+			if ( !empty($hotel_extra_option) && ! empty( $total_extras_titles ) ) {
+				$response['hotel_booking_summery'] .= '<tr>
+						<td align="left">' . esc_html( $total_extras_titles ) . '</td>
+						<td align="right">' . wc_price( $total_extras_price ) . '</td>
+					</tr>';
+			}
+
 			if ( ! empty( $tf_due_amount ) ) {
 				$response['hotel_booking_summery'] .= '<tr>
                     <td align="left">' . sprintf( esc_html__( 'Due', 'tourfic' ) ) . '</td>
-                    <td align="right">' . wc_price( $tf_due_amount + $airport_service_arr['price'] ) . '</td>
+                    <td align="right">' . wc_price( $tf_due_amount + $airport_service_arr['price'] + $total_extras_price ) . '</td>
                 </tr>';
 			}
 
-			$total_price = ! empty( $tf_due_amount ) ? wc_price( $price_total - $tf_due_amount ) : ( !empty( $airport_service_arr['price'] ) ? wc_price( $price_total + $airport_service_arr['price'] ) : wc_price( $price_total ) );
+			$total_price = ! empty( $tf_due_amount ) ? wc_price( $price_total - $tf_due_amount ) : ( !empty( $airport_service_arr['price'] ) || !empty( $total_extras_price ) ? wc_price( $price_total + $airport_service_arr['price'] + $total_extras_price ) : wc_price( $price_total ) );
 
 			$response['hotel_booking_summery'] .= '</tbody>
             <tfoot>

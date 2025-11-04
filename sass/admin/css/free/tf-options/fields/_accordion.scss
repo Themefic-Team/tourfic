@@ -1,8 +1,26 @@
 .tf-field-accordion{
     .tf-tab-switch-box{
+        &.active-repeater{
+            .tf-tab-field-header{
+                border-radius: 4px 4px 0 0;
+                border-top: 1px solid $tf_border_default;
+                border-bottom: 1px solid transparent;
+                border-left: 1px solid $tf_border_default;
+                border-right: 1px solid $tf_border_default;
+            }
+            .tf-tab-field-content{
+                border-bottom: 1px solid $tf_border_default;
+                border-top: 0px solid;
+                border-left: 1px solid $tf_border_default;
+                border-right: 1px solid $tf_border_default;
+            }
+        }
         .tf-tab-field-header{
-            border-radius: 4px 4px 0px 0px;
+            border-radius: 4px;
             border-bottom: 1px solid $tf_border_default;
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+            border-top: 1px solid transparent;
             background: $tf_fill_background;
             padding: 8px 12px;
             display: flex;
@@ -58,6 +76,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            padding-bottom: 15px;
         }
     }
 }

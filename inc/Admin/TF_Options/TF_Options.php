@@ -41,13 +41,16 @@ class TF_Options {
 
 		add_action( 'wp_ajax_tf_add_hotel_room_availability', array( $this, 'tf_add_hotel_room_availability' ) );
 		add_action( 'wp_ajax_tf_get_hotel_room_availability', array( $this, 'tf_get_hotel_room_availability' ) );
+		add_action( 'wp_ajax_tf_reset_room_availability', array( $this, 'tf_reset_room_availability' ) );
 		add_action( 'save_post', array( $this, 'tf_update_room_avail_date_price' ), 9999, 2 );
 		add_action( 'wp_ajax_tf_add_apartment_availability', array( $this, 'tf_add_apartment_availability' ) );
 		add_action( 'wp_ajax_tf_get_apartment_availability', array( $this, 'tf_get_apartment_availability' ) );
+		add_action( 'wp_ajax_tf_reset_apt_availability', array( $this, 'tf_reset_apt_availability' ) );
 
 		add_action( 'wp_ajax_tf_add_tour_availability', array( $this, 'tf_add_tour_availability' ) );
 		add_action( 'wp_ajax_tf_get_tour_availability', array( $this, 'tf_get_tour_availability' ) );
 		add_action( 'wp_ajax_save_tour_package_pricing', array( $this, 'save_tour_package_pricing' ) );
+		add_action( 'wp_ajax_save_tour_pricing_type', array( $this, 'save_tour_pricing_type' ) );
 		add_action( 'wp_ajax_tf_reset_tour_availability', array( $this, 'tf_reset_tour_availability' ) );
 		add_action( 'save_post', array( $this, 'tf_update_apt_availability_price' ), 99, 2 );
 		add_action( 'wp_ajax_tf_insert_category_data', array( $this, 'tf_insert_category_data_callback' ) );
@@ -418,6 +421,14 @@ class TF_Options {
 		$avail_date          = isset( $_POST['avail_date'] ) && ! empty( $_POST['avail_date'] ) ? sanitize_text_field( $_POST['avail_date'] ) : '';
 		$options_count       = isset( $_POST['options_count'] ) && ! empty( $_POST['options_count'] ) ? sanitize_text_field( $_POST['options_count'] ) : '';
 
+		$room_meta = get_post_meta( $room_id, 'tf_room_opt', true );
+		if(empty($room_meta)){
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Publish the Room First!', 'tourfic' )
+			] );
+		}
+
 		if ( empty( $check_in ) || empty( $check_out ) ) {
 			wp_send_json_error( [
 				'status'  => false,
@@ -470,7 +481,6 @@ class TF_Options {
 			$room_avail_data[ $tf_room_date ] = $tf_room_data;
 		}
 
-		$room_meta = get_post_meta( $room_id, 'tf_room_opt', true );
 		if ( $new_post != 'true' ) {
 			$avail_date = json_decode( $room_meta['avail_date'], true );
 			if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
@@ -669,6 +679,35 @@ class TF_Options {
 	}
 
 	/*
+     * Reset room availability calendar
+     * @auther Foysal
+     */
+	function tf_reset_room_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$room_id     = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
+		$room_data = get_post_meta( $room_id, 'tf_room_opt', true );
+
+		if(empty($room_data)){
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Publish the Room First!', 'tourfic' )
+			] );
+		}
+
+		$room_data['avail_date'] = [];
+
+		update_post_meta( $room_id, 'tf_room_opt', $room_data );
+		wp_send_json_success( [
+			'status'     => true,
+			'message'    => __( 'Availability Reset Successfully.', 'tourfic' ),
+			'avail_date' => [],
+		] );
+		wp_die();
+	}
+
+	/*
 	 * Apartment availability calendar update
 	 * @auther Foysal
 	 */
@@ -697,6 +736,14 @@ class TF_Options {
 		$tf_apt_child_price  = isset( $_POST['tf_apt_child_price'] ) && ! empty( $_POST['tf_apt_child_price'] ) ? sanitize_text_field( $_POST['tf_apt_child_price'] ) : '';
 		$tf_apt_infant_price = isset( $_POST['tf_apt_infant_price'] ) && ! empty( $_POST['tf_apt_infant_price'] ) ? sanitize_text_field( $_POST['tf_apt_infant_price'] ) : '';
 		$apt_availability    = isset( $_POST['apt_availability'] ) && ! empty( $_POST['apt_availability'] ) ? sanitize_text_field( $_POST['apt_availability'] ) : '';
+
+		$apartment_data = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
+		if(empty($apartment_meta)){
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Publish the Apartment First!', 'tourfic' )
+			] );
+		}
 
 		if ( empty( $check_in ) || empty( $check_out ) ) {
 			wp_send_json_error( [
@@ -739,7 +786,6 @@ class TF_Options {
 			$apt_availability_data[ $tf_apt_date ] = $tf_apt_data;
 		}
 
-		$apartment_data = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
 		if ( $new_post != 'true' ) {
 			$apt_availability = json_decode( $apartment_data['apt_availability'], true );
 			if ( isset( $apt_availability ) && ! empty( $apt_availability ) ) {
@@ -809,10 +855,38 @@ class TF_Options {
 		die();
 	}
 
+	/*
+     * Reset apartment availability calendar
+     * @auther Foysal
+     */
+	function tf_reset_apt_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$apartment_id     = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
+		$apartment_data = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
+
+		if(empty($apartment_data)){
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Publish the Apartment First!', 'tourfic' )
+			] );
+		}
+		
+		$apartment_data['apt_availability'] = [];
+
+		update_post_meta( $apartment_id, 'tf_apartment_opt', $apartment_data );
+		wp_send_json_success( [
+			'status'     => true,
+			'message'    => __( 'Availability Reset Successfully.', 'tourfic' ),
+			'apt_availability' => [],
+		] );
+		wp_die();
+	}
 
 	/*
-	 * Apartment availability calendar update
-	 * @auther Foysal
+	 * Tour availability calendar update
+	 * @auther Jahid
 	 */
 	function tf_add_tour_availability() {
 		// Add nonce for security and authentication.
@@ -951,7 +1025,11 @@ class TF_Options {
 												$options_data[ 'tf_package_option_' . $j ]         = isset( $_POST[ 'tf_package_option_' . $j ] ) && ! empty( $_POST[ 'tf_package_option_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_package_option_' . $j ] ) : '';
 												$options_data[ 'tf_option_title_' . $j ]        = isset( $_POST[ 'tf_option_title_' . $j ] ) && ! empty( $_POST[ 'tf_option_title_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_title_' . $j ] ) : '';
 												$options_data[ 'tf_option_pricing_type_' . $j ] = isset( $_POST[ 'tf_option_pricing_type_' . $j ] ) && ! empty( $_POST[ 'tf_option_pricing_type_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_pricing_type_' . $j ] ) : '';
+
 												$options_data[ 'tf_option_group_price_' . $j ]   = isset( $_POST[ 'tf_option_group_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_group_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_group_price_' . $j ] ) : '';
+
+												$options_data[ 'tf_option_group_discount_' . $j ]  = isset( $_POST[ 'tf_option_' . $j.'_group_discount' ] ) && ! empty( $_POST[ 'tf_option_' . $j.'_group_discount' ] ) ? $_POST[ 'tf_option_' . $j.'_group_discount' ] : '';
+
 												$options_data[ 'tf_option_adult_price_' . $j ]  = isset( $_POST[ 'tf_option_adult_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_adult_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_adult_price_' . $j ] ) : '';
 												$options_data[ 'tf_option_child_price_' . $j ]  = isset( $_POST[ 'tf_option_child_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_child_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_child_price_' . $j ] ) : '';
 												$options_data[ 'tf_option_infant_price_' . $j ]  = isset( $_POST[ 'tf_option_infant_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_infant_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_infant_price_' . $j ] ) : '';
@@ -1153,29 +1231,18 @@ class TF_Options {
 				}
 			}
 
-			// if($pricing_type == 'group' && !empty($group_package_option) && !empty($group_package_pricing)) {
-			// 	if ( $group_options_count != 0 ) {
-			// 		$options_data = [
-			// 			'options_count' => $group_options_count,
-			// 		];
-			// 		for ( $j = 0; $j <= $group_options_count - 1; $j ++ ) {
-			// 			$options_data[ 'tf_option_title_' . $j ]        = isset( $_POST[ 'tf_option_title_' . $j ] ) && ! empty( $_POST[ 'tf_option_title_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_title_' . $j ] ) : '';
-			// 			$options_data[ 'tf_option_min_person_' . $j ]   = isset( $_POST[ 'tf_option_min_person_' . $j ] ) && ! empty( $_POST[ 'tf_option_min_person_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_min_person_' . $j ] ) : '';
-			// 			$options_data[ 'tf_option_max_person_' . $j ]   = isset( $_POST[ 'tf_option_max_person_' . $j ] ) && ! empty( $_POST[ 'tf_option_max_person_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_max_person_' . $j ] ) : '';
-			// 			$options_data[ 'tf_option_group_price_' . $j ]   = isset( $_POST[ 'tf_option_group_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_group_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_group_price_' . $j ] ) : '';
-			// 		}
-			// 	}
-			// 	if ( ! empty( $options_data ) ) {
-			// 		$tf_tour_data = array_merge( $tf_tour_data, $options_data );
-			// 	}
-			// }
-
 			$tour_availability_data[$tf_tour_date] = $tf_tour_data;
 		}
 
 		$tour_data = get_post_meta( $tour_id, 'tf_tours_opt', true );
+		if(empty($tour_data)){
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Publish the Tour First!', 'tourfic' )
+			] );
+		}
 		if ( $new_post != 'true' ) {
-			$tour_availability = json_decode( $tour_data['tour_availability'], true );
+			$tour_availability = !empty($tour_data['tour_availability']) ? json_decode( $tour_data['tour_availability'], true ) : [];
 
 			if ( isset( $tour_availability ) && ! empty( $tour_availability ) ) {
 				$tour_availability_data = array_merge( $tour_availability, $tour_availability_data );
@@ -1306,7 +1373,7 @@ class TF_Options {
         if($pricing_by == 'package' && function_exists( 'is_tf_pro' ) && is_tf_pro()){ ?>
 			<div class="tf-repeater">
 			<div class="tf-field" style="padding-top: 0px">
-				<label class="tf-field-label"><?php echo esc_html__('Packages', 'status'); ?></label>
+				<label class="tf-field-label"><?php echo esc_html__('Packages', 'tourfic'); ?></label>
 				<div class="tf-field-sub-title">
 					<?php echo esc_html__('You can add, customize any packages from here.', 'tourfic'); ?>
 				</div>
@@ -1323,7 +1390,7 @@ class TF_Options {
 				<div class="tf-single-repeater">
 					<div class="tf-repeater-header">
 						<div class="tf-repeater-header-info">
-							<span class="tf-repeater-title"><?php echo esc_html( $item['title'] ); ?></span>
+							<span class="tf-repeater-title tf-avail-repeater-title"><?php echo esc_html( $item['title'] ); ?></span>
 							<div class="tf-repeater-icon-absulate">
 								<span class="tf-repeater-icon tf-repeater-icon-collapse tf-avail-repeater-collapse">
 									<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1687,6 +1754,7 @@ class TF_Options {
 		}
 
 		$post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
+		$pricing_type = isset($_POST['pricing_type']) ? sanitize_text_field($_POST['pricing_type']) : '';
 		$package_index = isset($_POST['package_index']) ? intval($_POST['package_index']) : null;
 		$package_data = isset($_POST['package_data']) ? $_POST['package_data'] : array();
 
@@ -1697,6 +1765,11 @@ class TF_Options {
 		// Sanitize the incoming data
 		$sanitized_package = $this->recursive_sanitize_package($package_data);
 
+		// Update pricing type
+		if(!empty($pricing_type)){
+			$existing['pricing'] = $pricing_type;
+		}
+
 		// Update just this package
 		$existing['package_pricing'][$package_index] = $sanitized_package;
 
@@ -1704,6 +1777,40 @@ class TF_Options {
 		update_post_meta($post_id, 'tf_tours_opt', $existing);
 
 		wp_send_json_success('Package saved');
+	}
+
+	/*
+     * Save Tour Package
+     * @auther Jahid
+     */
+	function save_tour_pricing_type(){
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', 'nonce' );
+
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'You do not have permission to access this resource.', 'tourfic' )
+			] );
+			return;
+		}
+
+		$post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
+		$pricing_type = isset($_POST['pricing_type']) ? sanitize_text_field($_POST['pricing_type']) : '';
+
+		// Get existing data
+		$existing = get_post_meta($post_id, 'tf_tours_opt', true) ?: ['package_pricing' => []];
+
+		// Update pricing type
+		if(!empty($pricing_type)){
+			$existing['pricing'] = $pricing_type;
+		}
+
+		// Save back to post meta
+		update_post_meta($post_id, 'tf_tours_opt', $existing);
+
+		wp_send_json_success('Pricing saved');
 	}
 
 	private function recursive_sanitize_package($data) {
@@ -1755,10 +1862,16 @@ class TF_Options {
 		check_ajax_referer( 'updates', '_nonce' );
 
 		$tour_id     = isset( $_POST['tour_id'] ) && ! empty( $_POST['tour_id'] ) ? sanitize_text_field( $_POST['tour_id'] ) : '';
-		
 		$tour_data = get_post_meta( $tour_id, 'tf_tours_opt', true );
+		
+		if(empty($tour_data)){
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Publish the Tour First!', 'tourfic' )
+			] );
+		}
+		
 		$tour_data['tour_availability'] = [];
-
 		update_post_meta( $tour_id, 'tf_tours_opt', $tour_data );
 		wp_send_json_success( [
 			'status'           => true,

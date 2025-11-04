@@ -315,7 +315,25 @@ class Enqueue {
 			$single_tour_form_data['select_time_text'] = esc_html__( "Select Time", "tourfic" );
 			$single_tour_form_data['date_format']      = esc_html( $tour_date_format_for_users );
 			$single_tour_form_data['flatpickr_locale'] = ! empty( get_locale() ) ? get_locale() : 'en_US';
+			if($tour_type=='fixed'){
+				$tour_availability          = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
 
+				$expanded = [];
+				if ( !empty($tour_availability) && is_array( $tour_availability ) ) {
+					foreach ( $tour_availability as $range_key => $data ) {
+						if ( empty( $data['check_in'] ) || empty( $data['check_out'] ) ) {
+							continue;
+						}
+						// copy original data and set check_in/check_out to the single date
+						$entry = $data;
+						$key = $data['check_in'].' - '.$data['check_in'];
+						$entry['check_in']  = $data['check_in'];
+						$entry['check_out'] = $data['check_in'];
+						$expanded[ $key ] = $entry;
+					}
+				}
+				$tour_availability =  $expanded;
+			}
 			$single_tour_form_data['disable_same_day'] = $disable_same_day;
 			$single_tour_form_data['tour_availability'] = $tour_availability;
 			$single_tour_form_data['is_all_unavailable'] = Helper::is_all_unavailable($tour_availability);

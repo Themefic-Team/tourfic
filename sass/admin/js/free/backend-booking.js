@@ -317,47 +317,6 @@
 
         });
 
-
-        /*
-        * Check available tour by date
-        * Author @Foysal
-        */
-        /*$(document).on('change', '[name="tf_tour_date"], [name="tf_tour_adults_number"], [name="tf_tour_children_number"]', function (e) {
-            e.preventDefault();
-
-            var tourDate = $('[name="tf_tour_date"]').val();
-            var adults = $('[name="tf_tour_adults_number"]').val();
-            var children = $('[name="tf_tour_children_number"]').val();
-
-            if (tourDate.length > 0 && adults.length > 0) {
-                jQuery.ajax({
-                    type: 'post',
-                    url: tf_admin_params.ajax_url,
-                    data: {
-                        action: 'tf_check_available_tour',
-                        tourDate: tourDate,
-                        adults: adults,
-                        children: children
-                    },
-                    beforeSend: function () {
-                        $('#tf-backend-tour-book-btn').attr('disabled', 'disabled');
-                    },
-                    success: function (response) {
-                        var select2 = $('[name="tf_available_tours"]');
-                        select2.empty();
-                        select2.append('<option value="">' + tf_admin_params.select_tour + '</option>');
-                        $.each(response.data.tours, function (key, value) {
-                            select2.append('<option value="' + key + '">' + value + '</option>');
-                        });
-                        select2.select2();
-                        //select the first option
-                        select2.val(select2.find('option:eq(1)').val()).trigger('change');
-                        $('#tf-backend-tour-book-btn').removeAttr('disabled');
-                    }
-                });
-            }
-        });*/
-
         /*
         * Tour time and extra fields update
         * Author @Foysal
@@ -383,10 +342,6 @@
                         if(response){
                             const obj = JSON.parse(response);
 
-                            if (obj.custom_avail !== '1') {
-                                populateObjectTimeSelect(obj.allowed_times)
-                            }
-
                             let flatpickerObj = {
                                 enableTime: false,
                                 dateFormat: "Y/m/d",
@@ -399,16 +354,20 @@
                                 .filter(([dateRange, data]) => data.status === "available")
                                 .map(([dateRange, data]) => {
                                     const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
-
+                    
                                     const today = new Date();
                                     const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
                                     let fromDate = fromRaw;
-
+                    
                                     return {
                                         from: fromDate,
                                         to: toRaw
                                     };
                                 });
+                            }
+
+                            if(obj.tour_packages_array){
+                                populatePackageSelect(obj.tour_packages_array);
                             }
 
                             flatpickerObj.onChange = function (selectedDates, dateStr, instance) {
@@ -430,36 +389,43 @@
                                     if (timestamp >= from && timestamp <= to) {
                                         const allowedTime = availability.allowed_time?.time || [];
 
-                                        allowedTime.forEach((t) => {
-                                            if (t && t.trim() !== '') {
-                                                times[t] = t;
-                                            }
-                                        });
+                                        if (Array.isArray(allowedTime)) {
+                                            allowedTime.forEach((t) => {
+                                                if (t && t.trim() !== '') {
+                                                    times[t] = t;
+                                                }
+                                            });
+                                        } else if (typeof allowedTime === 'object' && allowedTime !== null) {
+                                            Object.values(allowedTime).forEach((t) => {
+                                                if (t && t.trim() !== '') {
+                                                    times[t] = t;
+                                                }
+                                            });
+                                        }
 
                                         break; // stop after first match
                                     }
                                 }
 
                                 populateTimeSelect(times);
-
+                                
                                 instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                             }
 
                             $("[name='tf_tour_date']").flatpickr(flatpickerObj);
 
-
                             if (obj.tour_extras_array && Object.keys(obj.tour_extras_array).length > 0) {
                                 let extras = $('[name="tf_tour_extras[]"]');
                                 extras.removeAttr('disabled');
                                 extras.empty();
-
+                            
                                 $.each(obj.tour_extras_array, function (key, value) {
                                     extras.append($('<option>', {
                                         value: key,
                                         html: value // Use html to parse entities like &#36;
                                     }));
                                 });
-
+                            
                                 extras.select2();
                             } else {
                                 let extras = $('[name="tf_tour_extras[]"]');
@@ -473,19 +439,18 @@
             }
         });
 
-        function populateObjectTimeSelect(times) {
-            let timeSelect = $('[name="tf_tour_time"]');
-            timeSelect.empty();
+        function populatePackageSelect(packages) {
+            let packSelect = $('[name="tf_tour_packages"]');
+            packSelect.empty();
 
-            if (Object.keys(times).length > 0) {
+            if (Object.keys(packages).length > 0) {
                 // Use the keys and values from the object to populate the options
-                $.each(times, function (key, value) {
-                    timeSelect.append(`<option value="${key}">${value}</option>`);
+                $.each(packages, function (key, value) {
+                    packSelect.append(`<option value="${key}">${value}</option>`);
                 });
-                timeSelect.attr('disabled', false);
             } else {
-                timeSelect.append(`<option value="" selected>No Time Available</option>`);
-                timeSelect.attr('disabled', 'disabled');
+                packSelect.append(`<option value="" selected>No Package Available</option>`);
+                packSelect.attr('disabled', 'disabled');
             }
 
         }
@@ -559,8 +524,6 @@
                             }
                         }
                     } else {
-                        alert_popup.success(obj.message)
-
                         alert_popup.success(obj.message)
 
                         form[0].reset();

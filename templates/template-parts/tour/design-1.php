@@ -216,7 +216,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                 <?php
                                                 $tour_price = [];
                                                 $tf_pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-                                                $tour_single_price_settings = !empty(Helper::tfopt('tour_archive_price_minimum_settings')) ? Helper::tfopt('tour_archive_price_minimum_settings') : 'all';
+                                                $tour_single_price_settings = !empty(Helper::tfopt('tour_archive_price_minimum_settings')) ? Helper::tfopt('tour_archive_price_minimum_settings') : 'adult';
                                                 
                                                 $min_sale_price = null;
                                                 if( $tf_pricing_rule  && $tf_pricing_rule == 'person' ){

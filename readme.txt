@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.18.1
+Stable tag: 2.18.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -404,34 +404,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.18.1 – October 04, 2025 =
+= 2.18.3 – October 27, 2025 =
 
-- New: Checkout notes field value in booking details
-- New: Date format setting for Car Rental
-- Update: Map display on frontend
-- Update: Traveler info saving flow
-- Update: Taxonomy permission and media handling in frontend dashboard
-- Tweak: Hotel room option/person-based pricing in booking
-- Tweak: Itinerary builder and login pop-ups
-- Tweak: Tour date translation and Hide/Show translation
-- Tweak: Hotel, Tour & Apartment search form date handling
-- Tweak: Traveler & Guest info saving, car rental date format
-- Tweak: Tour highlight HTML formatting
-- Tweak: Hotel adult number validation after availability check
-- Tweak: Car rental pricing, sorting, and deprecated warnings
-- Tweak: Car tab enable/disable option
-- Tweak: Search page excluded from Google index
-- Tweak: Review system, email templates, FAQ links, and gallery issues
-- Tweak: Facilities feature duplication
-- Tweak: Compatibility with Google Site Kit plugin
-- Tweak: Tour backend booking and extra options
-- Remove: Tourfic email template for WooCommerce product orders
-- Improve: Enquiry emails now include user name and email
-- Improve: Dynamic year in dashboard report chart
-- Improve: Tour booking pop-up UX on mobile devices
-- Improve: Tour information display after QR code verification
-- Improve: Performance and security enhancements
-- Fix: Various minor bugs and design issues
+- Fixed: Import/export functionality issue.
+- Fixed: Tourfic resolved the availability issue.
+- Improved: Reset pop-up design for better user experience.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 

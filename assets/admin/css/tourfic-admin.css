@@ -2041,7 +2041,7 @@ Steps
   gap: 24px;
   position: relative;
 }
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1199.98px) {
   .tf-setting-dashboard .tf-setting-performace-section {
     flex-direction: column;
   }
@@ -2094,7 +2094,7 @@ Steps
   }
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-order-report canvas {
-  width: 100%;
+  width: 100% !important;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter {
   display: flex;
@@ -2130,49 +2130,33 @@ Steps
   /* Loader */
   /* Customization */
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content ul {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-plugin-lists {
+  border-radius: 8px;
+  background: #F8F7FD;
+  padding: 16px;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-plugin-lists h3 {
+  color: #06040C;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  margin: 0 0 16px 0;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-plugin-lists ul {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: 1fr;
+  gap: 16px;
   margin: 0;
 }
-@media only screen and (max-width: 1650px) {
-  .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content ul {
-    grid-template-columns: 1fr;
-  }
-}
-@media only screen and (max-width: 1024px) {
-  .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content ul {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media only screen and (max-width: 640px) {
-  .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content ul {
-    grid-template-columns: 1fr;
-  }
-}
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-item {
-  border-bottom: 1px solid #eee;
-  background-color: #fff;
-  padding: 24px;
   border-radius: 6px;
+  background: #FFF;
+  box-shadow: 0 1px 4px 0 rgba(44, 39, 63, 0.01), 0 2px 2px 0 rgba(44, 39, 63, 0.02), 0 1px 1px 0 rgba(44, 39, 63, 0.04);
+  padding: 20px 24px 24px 20px;
   transition: all ease-in-out 0.3s;
   margin-bottom: 0;
   position: relative;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-item:hover {
-  box-shadow: 0px 4px 30px 0px rgba(6, 4, 12, 0.0784313725);
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-item h4 {
-  font-size: 16px;
-  margin: 5px 0;
-  font-weight: 600;
-  color: #1d2327;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-item p {
-  font-size: 13px;
-  color: #4f4e52;
-  margin: 0;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-item.featured {
   border-radius: 6px;
@@ -2181,65 +2165,92 @@ Steps
   box-shadow: 0px 1px 4px 0px rgba(44, 39, 63, 0.01), 0px 2px 2px 0px rgba(44, 39, 63, 0.02), 0px 1px 1px 0px rgba(44, 39, 63, 0.04);
   box-sizing: border-box;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content {
   display: flex;
-  gap: 10px;
-  flex-direction: column;
-  position: relative;
+  gap: 12px;
+  justify-content: space-between;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper img {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-image {
+  border-radius: 16px;
+  background: #FFF;
+  box-shadow: 0 0 8px 0 rgba(65, 65, 65, 0.08);
+  height: 56px;
+  width: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-image img {
   width: 32px;
   height: 32px;
-  border: 1px solid #bebcfd;
-  border-radius: 50%;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper img.beaf-logo {
-  border-radius: 0;
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title {
+  width: calc(100% - 167px);
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info {
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-  align-items: flex-start;
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title h4 {
+  color: #2C273F;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 160% */
+  margin: 0 0 2px 0;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .tf-plugin-btn {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title h4 .badge.free {
+  border-radius: 3px;
+  background: #E6FAEE;
+  font-size: 12px;
+  padding: 2px 8px;
+  color: #17723F;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px; /* 145.455% */
+  text-transform: uppercase;
+  margin-left: 6px;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title p {
+  color: #5D5676;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 160% */
+  margin: 0;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn {
   font-weight: 600;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .tf-plugin-button {
-  padding: 5px;
-  border-radius: 4px;
-  font-size: 14px;
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button {
+  padding: 0px;
+  color: #382673;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 160% */
   text-decoration: none;
   position: relative;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .tf-plugin-button.install {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.install {
   color: #382673;
+  cursor: pointer;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .tf-plugin-button.activate {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.activate {
   color: #382673;
+  cursor: pointer;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .tf-plugin-button.pro, .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .tf-plugin-button.activate-pro {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.pro, .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.activate-pro {
   color: #ff9800;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .tf-plugin-status.active {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.activate-pro {
+  color: #ff5722;
+  cursor: pointer;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-status.active {
   color: #382673;
   opacity: 0.8;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .tf-plugin-status.active-pro {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-status.active-pro {
   color: #ff5722;
   opacity: 0.8;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .tf-plugin-button.activate-pro {
-  color: #ff5722;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .badge.free {
-  background: rgba(0, 165, 140, 0.1019607843);
-  color: #00a58c;
-  font-size: 12px;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-weight: 600;
-  border: 1px solid #00a58c;
 }
 @keyframes spin {
   0% {
@@ -2259,7 +2270,7 @@ Steps
   transition: background 0.3s;
   position: relative;
   background-color: transparent;
-  flex-direction: column;
+  gap: 3px;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-button.loading {
   background: #ccc;
@@ -2280,90 +2291,79 @@ Steps
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-customization-quote {
   background: #fff;
-  padding: 20px;
+  padding: 16px;
   border-radius: 6px;
-  margin: 18px 0 20px 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin: 16px 0 16px 0;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-customization-quote .tf-quote-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 16px;
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-customization-quote .tf-quote-content h3 {
+  margin: 0 0 4px 0;
+  color: #1B334B;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 27px */
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-customization-quote .tf-quote-header h3 {
-  margin: 0px;
-  font-size: 0.938rem;
-  font-weight: 500;
-  line-height: 24px;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-customization-quote .tf-quote-header a {
-  color: #382673;
-  text-decoration: none;
-  font-weight: 600;
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-customization-quote .tf-quote-content p {
+  color: #344D65;
   font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 21px */
+  margin: 0 0 16px 0;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-customization-quote .tf-quote-header i {
-  -webkit-flex: 0 0 24px;
-  -ms-flex: 0 0 24px;
-  flex: 0 0 24px;
-  color: #fff;
-  background-color: #ff0000;
-  padding: 5px;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  justify-content: center;
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-customization-quote .tf-quote-content a {
+  color: #FFF;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 160% */
+  text-decoration: none;
+  border-radius: 8px;
+  background: #003C7A;
+  padding: 8px 16px;
+  display: inline-flex;
   align-items: center;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-customization-quote .tf-quote-header p {
-  margin-top: 0;
+  gap: 8px;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  margin-top: 20px;
-  margin-bottom: 10px;
+  background: #F7F8FA;
+  border-radius: 8px;
+  padding: 16px;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access h3 {
+  color: #06040C;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 25.5px */
+  margin-bottom: 16px;
+  margin-top: 0px;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access .tf-quick-access-wrapper {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 5px;
+  gap: 16px;
   flex-direction: column;
-  background-color: #F7F8FA;
-  padding: 5px;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access .tf-quick-access-wrapper h3 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 15px;
-  margin-top: 0px;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access .tf-quick-access-wrapper .tf-access-item {
-  background: #fff;
-  border-radius: 8px;
+  background: #FFF;
+  box-shadow: 0 1px 4px 0 rgba(44, 39, 63, 0.01), 0 2px 2px 0 rgba(44, 39, 63, 0.02), 0 1px 1px 0 rgba(44, 39, 63, 0.04);
+  border-radius: 6px;
   transition: all ease-in-out 0.3s;
   width: 100%;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access .tf-quick-access-wrapper .tf-access-item:hover {
-  box-shadow: 0px 4px 30px 0px rgba(6, 4, 12, 0.0784313725);
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access .tf-quick-access-wrapper .tf-access-item a {
   display: flex;
   align-items: center;
-  padding: 12px;
-  font-size: 14px;
-  font-weight: 500;
+  padding: 12px 16px;
   text-decoration: none;
-  color: #333;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access .tf-quick-access-wrapper .tf-access-item .icon {
-  font-size: 18px;
-  margin-right: 10px;
+  color: #2C273F;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 160% */
+  gap: 12px;
 }
 
 .tf-settings-help-center .tf-support-cards {
@@ -3336,34 +3336,34 @@ Steps
 .tf-field-ical input::-webkit-input-placeholder,
 .tf-field-ical_export input::-webkit-input-placeholder,
 .tf-field-text input::-webkit-input-placeholder, .tf-field-password input::-webkit-input-placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-ical input::-ms-input-placeholder,
 .tf-field-ical_export input::-ms-input-placeholder,
 .tf-field-text input::-ms-input-placeholder, .tf-field-password input::-ms-input-placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-ical input input:-ms-input-placeholder,
 .tf-field-ical_export input input:-ms-input-placeholder,
 .tf-field-text input input:-ms-input-placeholder, .tf-field-password input input:-ms-input-placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-ical input::-moz-placeholder,
 .tf-field-ical_export input::-moz-placeholder,
 .tf-field-text input::-moz-placeholder, .tf-field-password input::-moz-placeholder {
   opacity: 1;
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-ical input:-moz-placeholder,
 .tf-field-ical_export input:-moz-placeholder,
 .tf-field-text input:-moz-placeholder, .tf-field-password input:-moz-placeholder {
   opacity: 1;
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-ical input::placeholder,
 .tf-field-ical_export input::placeholder,
 .tf-field-text input::placeholder, .tf-field-password input::placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-ical input:read-only,
 .tf-field-ical_export input:read-only,
@@ -4264,9 +4264,17 @@ Steps
 .tf-field-repeater .tf-repeater .tf-repeater-header:hover .tf-repeater-icon-move {
   opacity: 1;
 }
+.tf-field-repeater .tf-repeater .tf-repeater-header.active-repeater .tf-repeater-header-info {
+  border-radius: 4px 4px 0 0;
+  background: #DBEAFE;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header.active-repeater .tf-repeater-header-info .tf-repeater-title {
+  font-weight: 600;
+}
 .tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-header-info {
   border-radius: 4px;
   background: #F5F9FF;
+  border: 1px solid #F2F5F7;
   width: 100%;
   padding: 8px 12px;
   display: flex;
@@ -4293,12 +4301,13 @@ Steps
 }
 .tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-title {
   display: inline-block;
-  margin-right: 120px;
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 24px;
   cursor: pointer;
+  color: #27333F;
+  width: calc(100% - 108px);
 }
 .tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate {
   position: absolute;
@@ -4325,7 +4334,7 @@ Steps
 }
 .tf-field-repeater .tf-repeater .tf-repeater-content-wrap {
   background-color: #ffffff;
-  padding: 10px 1px 0px 15px;
+  padding: 8px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -4336,6 +4345,14 @@ Steps
   flex-wrap: wrap;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+  border-left: 1px solid #F2F5F7;
+  border-right: 1px solid #F2F5F7;
+  border-bottom: 1px solid #F2F5F7;
+  margin-left: 15px;
+  border-radius: 0 0 4px 4px;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-content-wrap .tf-field:nth-child(1) {
+  padding-top: 0px;
 }
 .tf-field-repeater .tf-repeater .tf-repeater-content-wrap .tf-action-button-group {
   display: flex;
@@ -4361,6 +4378,9 @@ Steps
   background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
   color: #FFFFFF;
 }
+.tf-field-repeater .tf-repeater .tf-repeater-header.active-repeater + .tf-repeater-content-wrap {
+  background-color: #FBFCFE;
+}
 .tf-field-repeater .tf-repeater .tf-repeater-add {
   margin-left: 16px;
 }
@@ -4377,6 +4397,13 @@ Steps
 .tf-field-repeater .tf-repeater .tf-single-repeater {
   margin-bottom: 16px;
   border-radius: 5px;
+}
+.tf-field-repeater .tf-repeater .tf-single-repeater.tf-single-repeater-group_discount_package .tf-repeater-header .tf-repeater-header-info .tf-repeater-title {
+  width: calc(100% - 104px);
+  margin-right: 0px;
+}
+.tf-field-repeater .tf-repeater .tf-single-repeater.tf-single-repeater-group_discount_package .tf-repeater-content-wrap .tf-field:nth-child(1) {
+  padding-top: 12px;
 }
 .tf-field-repeater .tf-repeater .tf-field-notice-inner {
   margin-bottom: 24px;
@@ -4791,24 +4818,24 @@ Steps
   border: 1px solid #D9E0E8;
 }
 .tf-field-number input::-webkit-input-placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-number input::-ms-input-placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-number input input:-ms-input-placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-number input::-moz-placeholder {
   opacity: 1;
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-number input:-moz-placeholder {
   opacity: 1;
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-number input::placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-number input::-webkit-outer-spin-button, .tf-field-number input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -5036,9 +5063,13 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-apt-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date,
 .tf-room-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date,
 .tf-tour-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date {
-  background-color: #003c79 !important;
-  border-color: #003c79 !important;
-  opacity: 0.3;
+  background-color: #e33529 !important;
+  border-color: #e33529 !important;
+}
+.tf-apt-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date .fc-event-main,
+.tf-room-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date .fc-event-main,
+.tf-tour-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date .fc-event-main {
+  opacity: 0;
 }
 .tf-apt-cal-wrap table,
 .tf-room-cal-wrap table,
@@ -5064,7 +5095,7 @@ a.tf-import-btn, a.tf-export-btn {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 14px;
+  padding-bottom: 14px;
   position: sticky;
   top: 0;
   z-index: 99;
@@ -5220,11 +5251,17 @@ a.tf-import-btn, a.tf-export-btn {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  max-height: 360px;
+  max-height: 500px;
   overflow-y: auto;
   scroll-behavior: smooth;
   scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
   scrollbar-width: thin;
+}
+@media only screen and (max-width: 768px) {
+  .tf-bulk-popup .bulk-popup-content .bulk-popup-content-box,
+  .tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box {
+    max-height: 360px;
+  }
 }
 .tf-bulk-popup .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar,
 .tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar {
@@ -5319,6 +5356,7 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 40px;
   background-color: #ffffff;
   border-radius: 10px;
+  position: relative;
 }
 .tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header {
   display: flex;
@@ -5327,7 +5365,12 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header h3 {
   margin: 0 0 35px 0;
 }
-.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header .tf_tour_bulk_close svg {
+.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header .tf_reset_confirmation_close {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+}
+.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header .tf_reset_confirmation_close svg {
   cursor: pointer;
 }
 .tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-actions {
@@ -5352,6 +5395,30 @@ a.tf-import-btn, a.tf-export-btn {
   color: #FFFFFF;
 }
 
+.tf-tour-cal-wrap,
+.tf-apt-cal-wrap,
+.tf-room-cal-wrap {
+  position: relative;
+}
+.tf-tour-cal-wrap .tf-tour-reset-refresh,
+.tf-apt-cal-wrap .tf-tour-reset-refresh,
+.tf-room-cal-wrap .tf-tour-reset-refresh {
+  position: absolute;
+  right: 110px;
+  top: 25px;
+}
+.tf-tour-cal-wrap .tf-tour-reset-refresh span,
+.tf-apt-cal-wrap .tf-tour-reset-refresh span,
+.tf-room-cal-wrap .tf-tour-reset-refresh span {
+  height: 32px;
+  font-size: 12px;
+  padding: 0 12px !important;
+}
+.tf-tour-cal-wrap .tf-tour-reset-refresh span svg,
+.tf-apt-cal-wrap .tf-tour-reset-refresh span svg,
+.tf-room-cal-wrap .tf-tour-reset-refresh span svg {
+  height: 18px;
+}
 .tf-tour-cal-wrap .tf-tour-cal,
 .tf-tour-cal-wrap .tf-apt-cal,
 .tf-tour-cal-wrap .tf-room-cal,
@@ -5748,6 +5815,12 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 0;
   margin: 0;
 }
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap {
+  margin: 0;
+  border: 0px solid;
+}
 .tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset,
 .tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset,
 .tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset {
@@ -5811,10 +5884,31 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater:last-child {
   margin-bottom: 0px;
 }
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-header .tf-repeater-title,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-header .tf-repeater-title,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-header .tf-repeater-title {
+  width: calc(100% - 30px) !important;
+}
 .tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap,
 .tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap,
 .tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap {
-  padding-left: 0px;
+  padding: 8px;
+  margin: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap .tf-tab-switch-box .tf-tab-field-content .tf-field:first-child,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap .tf-tab-switch-box .tf-tab-field-content .tf-field:first-child,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap .tf-tab-switch-box .tf-tab-field-content .tf-field:first-child {
+  padding-bottom: 0px;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field:first-child,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field:first-child,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field:first-child {
+  padding: 12px 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field .tf-repeater-content-wrap {
+  border: 0px solid;
 }
 .tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset,
 .tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset,
@@ -6261,9 +6355,25 @@ a.tf-import-btn, a.tf-export-btn {
   opacity: 0;
 }
 
-.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header {
-  border-radius: 4px 4px 0px 0px;
+.tf-field-accordion .tf-tab-switch-box.active-repeater .tf-tab-field-header {
+  border-radius: 4px 4px 0 0;
+  border-top: 1px solid #D9E0E8;
+  border-bottom: 1px solid transparent;
+  border-left: 1px solid #D9E0E8;
+  border-right: 1px solid #D9E0E8;
+}
+.tf-field-accordion .tf-tab-switch-box.active-repeater .tf-tab-field-content {
   border-bottom: 1px solid #D9E0E8;
+  border-top: 0px solid;
+  border-left: 1px solid #D9E0E8;
+  border-right: 1px solid #D9E0E8;
+}
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header {
+  border-radius: 4px;
+  border-bottom: 1px solid #D9E0E8;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-top: 1px solid transparent;
   background: #F5F9FF;
   padding: 8px 12px;
   display: flex;
@@ -6315,6 +6425,7 @@ a.tf-import-btn, a.tf-export-btn {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding-bottom: 15px;
 }
 
 .tf-backend-tour-booking h1,

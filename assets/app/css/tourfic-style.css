@@ -3879,10 +3879,10 @@ li.tf-filter-item {
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .switch .switcher::before {
   position: absolute;
   content: "";
-  height: 18px;
-  width: 18px;
-  left: 2px;
-  bottom: 1px;
+  height: 14px;
+  width: 14px;
+  left: 4px;
+  bottom: 3px;
   background-color: #ffffff;
   -webkit-transition: 0.4s;
   transition: 0.4s;
@@ -5025,6 +5025,7 @@ div#tf-destinationautocomplete-list div:before {
   border-radius: 0px;
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info .tf_acrselection-wrap .acr-label {
+  color: var(--tf-text-paragraph);
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.3;
@@ -5039,6 +5040,7 @@ div#tf-destinationautocomplete-list div:before {
   border: 0.2px solid var(--tf-border-lite);
   font-size: 1rem;
   font-weight: 600;
+  color: var(--tf-text-paragraph);
   text-align: center;
   padding-left: 0px;
   padding-right: 0px;
@@ -11397,6 +11399,9 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__one .tf-booking-form .tf-booking-form-inner .tf-field-group #check-in-out-date {
   width: 100%;
 }
+.tf-single-template__one .tf-booking-form .tf-booking-form-inner .tf-field-group.check-in-time-div {
+  display: none;
+}
 .tf-single-template__one .tf-booking-form .tf-booking-person .tf-field {
   align-items: center;
   justify-content: space-between;
@@ -11608,7 +11613,7 @@ div#tf-destinationautocomplete-list div:before {
   border: 1px solid var(--tf-border-lite);
   background-color: var(--tf-filling-background);
   cursor: pointer;
-  height: 100%;
+  height: 50px;
 }
 @media only screen and (max-width: 575.98px) {
   .tf-archive-listing__one .tf-archive-head .tf-search-layout .tf-sorting-selection-warper form select,
@@ -16877,6 +16882,25 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__two .tf-search-date-wrapper {
   background: var(--tf-filling-foreground);
   padding: 24px;
+}
+.tf-single-template__two .tf-search-date-wrapper.tf-box-loading {
+  position: relative;
+}
+@media only screen and (max-width: 768px) {
+  .tf-single-template__two .tf-search-date-wrapper.tf-box-loading {
+    position: fixed;
+  }
+}
+.tf-single-template__two .tf-search-date-wrapper.tf-box-loading::before {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 99;
+  border-radius: 16px;
 }
 .tf-single-template__two .tf-search-date-wrapper .tf-booking-date-wrap {
   display: flex;

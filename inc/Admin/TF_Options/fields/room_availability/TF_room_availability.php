@@ -111,10 +111,28 @@ if ( ! class_exists( 'TF_room_availability' ) ) {
                             </select>
                         </div>
 
-                        <div class="tf-calendar-save" style="width: 100%">
+                        <div class="tf-reset-confirmation-box">
+                            <div class="tf-confirmation-content">
+                                <div class="tf-confirmation-header">
+                                    <h3><?php echo esc_html__( 'Are you sure you want to reset this calendar?', 'tourfic' ); ?></h3>
+                                    <span class="tf_reset_confirmation_close">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M18 6L6 18M6 6L18 18" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="tf-confirmation-actions">
+                                    <button class="tf-cancel-btn"><?php echo esc_html__( 'Cancel', 'tourfic' ); ?></button>
+                                    <button class="tf-confirmed-btn"><?php echo esc_html__( 'Confirmed', 'tourfic' ); ?></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tf-calendar-save tf-save-calendar" style="width: 100%">
                             <input type="hidden" name="new_post" value="<?php echo $this->value ? 'false' : 'true'; ?>">
                             <input type="hidden" name="room_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
                             <span class="tf_room_cal_update button button-primary button-large"><?php echo esc_html__( 'Save Calendar', 'tourfic' ); ?></span>
+                            <span class="tf_room_cal_reset button button-secondary button-large"><?php echo esc_html__( 'Reset Calendar', 'tourfic' ); ?></span>
                         </div>
 
                     </div>
