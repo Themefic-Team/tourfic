@@ -5620,7 +5620,13 @@ function convertTo24HourFormat(timeStr) {
             if (tf_hasErrorsFlag) {
                 return false;
             }
-            let step = $(this).attr("data-step");
+            let active_steps = $('.tf_popup_stpes').val();
+            let stepsArray = active_steps.split(',').map(Number);
+            let currentStep = parseInt($(this).attr("data-step"));
+
+            let currentIndex = stepsArray.indexOf(currentStep);
+            let step = stepsArray[currentIndex + 1];
+
             if (step > 1) {
                 for (let i = 1; i <= step; i++) {
                     $('.tf-booking-step-' + i).removeClass("active");
@@ -5638,7 +5644,16 @@ function convertTo24HourFormat(timeStr) {
         // Navigation Back
         $(document).on('click', '.tf-step-back', function (e) {
             e.preventDefault();
-            let step = $(this).attr("data-step");
+            
+            let active_steps = $('.tf_popup_stpes').val();
+            let stepsArray = active_steps.split(',').map(Number);
+            let currentStep = parseInt($(this).attr("data-step"));
+
+            // Find the previous available step from active_steps
+            let currentIndex = stepsArray.indexOf(currentStep);
+            let step = (currentIndex > 0) ? stepsArray[currentIndex - 1] : 1;
+            
+            // let step = $(this).attr("data-step");
             if (step == 1) {
                 $('.tf-booking-step').removeClass("active");
                 $('.tf-booking-step').removeClass("done");
