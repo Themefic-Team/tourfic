@@ -148,6 +148,7 @@
                             $('select[name="tf_taxonomy_term"]').html(response.data.term_markup);
                         } else {
                             $('.tf-field-term').hide();
+                            $('select[name="tf_taxonomy_term"]').html('');
                         }
                     }
                 },
