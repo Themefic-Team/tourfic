@@ -3257,7 +3257,7 @@ class Hotel {
 											}
 											?>
 
-											<?php echo esc_html($airport_service['title']); ?> = <?php echo wp_kses_post(wc_price( $airport_service['price'] )); ?>
+											<?php echo wp_kses_post($airport_service['title']); ?> = <?php echo wp_kses_post(wc_price( $airport_service['price'] )); ?>
 										</option>
 									<?php } ?>
 									</select>
