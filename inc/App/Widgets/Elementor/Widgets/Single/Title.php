@@ -142,6 +142,25 @@ class Title extends Widget_Base {
 			'selector' => "{{WRAPPER}} .tf-post-title",
 		]);
 
+		$post_type = $this->get_current_post_type();
+
+		if($post_type == 'tf_carrental'){
+			$this->add_control( 'tf_bc_color', [
+				'label'     => esc_html__( 'Breadcrumb Color', 'tourfic' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors'  => [
+					'{{WRAPPER}} .tf-car-title .breadcrumb ul li' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .tf-car-title .breadcrumb ul li a' => 'color: {{VALUE}};',
+				],
+			]);
+
+			$this->add_group_control( Group_Control_Typography::get_type(), [
+				'label'    => esc_html__( 'Breadcrumb Typography', 'tourfic' ),
+				'name'     => "tf_bc_typography",
+				'selector' => "{{WRAPPER}} .tf-car-title .breadcrumb ul li",
+			]);
+		}
+
 		$this->end_controls_section();
 	}
 
@@ -151,8 +170,11 @@ class Title extends Widget_Base {
 		$post_type = get_post_type();
 		if($post_type == 'tf_carrental'):
         ?>
-			<div class="tf-car-title">
-				<h1><?php the_title(); ?></h1>
+			<div class="tf-car-title tf-head-title">
+				<?php 
+				/* translators: %1$s title Tag, %2$s post title */
+				printf('<%1$s class="tf-post-title">%2$s</%1$s>', esc_attr( $settings['tf-title-tag'], 'h1' ), esc_html(get_the_title())); 
+				?>
 				<div class="breadcrumb">
 					<ul>
 						<li><a href="<?php echo esc_url(site_url()); ?>"><?php esc_html_e( "Home", "tourfic" ) ?></a></li>

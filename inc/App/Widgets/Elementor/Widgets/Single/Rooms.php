@@ -59,7 +59,7 @@ class Rooms extends Widget_Base {
 		$this->tf_content_layout_controls();
 
 		do_action( 'tf/single-room/before-style-controls', $this );
-		$this->tf_room_style_controls();
+		// $this->tf_room_style_controls();
 		do_action( 'tf/single-room/after-style-controls', $this );
 	}
 

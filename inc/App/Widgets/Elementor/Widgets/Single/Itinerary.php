@@ -58,7 +58,7 @@ class Itinerary extends Widget_Base {
 		$this->tf_content_layout_controls();
 
 		do_action( 'tf/single-itinerary/before-style-controls', $this );
-		$this->tf_itinerary_style_controls();
+		// $this->tf_itinerary_style_controls();
 		do_action( 'tf/single-itinerary/after-style-controls', $this );
 	}
 

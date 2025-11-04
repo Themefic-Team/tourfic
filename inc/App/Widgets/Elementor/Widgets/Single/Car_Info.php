@@ -58,7 +58,8 @@ class Car_Info extends Widget_Base {
 		// $this->tf_content_layout_controls();
 
 		do_action( 'tf/single-car-info/before-style-controls', $this );
-		$this->tf_car_info_style_controls();
+		$this->tf_title_style_controls();
+		$this->tf_content_style_controls();
 		do_action( 'tf/single-car-info/after-style-controls', $this );
 	}
 
@@ -69,15 +70,13 @@ class Car_Info extends Widget_Base {
 
         do_action( 'tf/single-car-info/before-content/controls', $this );
 
-        $post_type = $this->get_current_post_type();
-		$options = [
-			'style1' => esc_html__('Style 1', 'tourfic')
-		];
 		$this->add_control('car_info_style',[
             'label' => esc_html__('Style', 'tourfic'),
             'type' => \Elementor\Controls_Manager::SELECT,
             'default' => 'style1',
-            'options' => $options,
+            'options' => [
+                'style1' => esc_html__('Style 1', 'tourfic')
+            ],
         ]);
 
 	    do_action( 'tf/single-car-info/after-content/controls', $this );
@@ -85,16 +84,11 @@ class Car_Info extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function tf_car_info_style_controls() {
-		$this->start_controls_section( 'car_info_style_section', [
-			'label' => esc_html__( 'Style', 'tourfic' ),
+    protected function tf_title_style_controls() {
+		$this->start_controls_section( 'title_style_section', [
+			'label' => esc_html__( 'Title Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
-
-		$this->add_control( 'tf_title_heading', [
-			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Title', 'tourfic' ),
-		] );
 
         $this->add_responsive_control('title_align',[
 			'label' => esc_html__('Alignment', 'tourfic'),
@@ -116,7 +110,6 @@ class Car_Info extends Widget_Base {
 			'toggle' => true,
             'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => 'text-align: {{VALUE}};',
-				'{{WRAPPER}} h2.section-heading' => 'text-align: {{VALUE}};',
 			],
 		]);
 
@@ -130,7 +123,6 @@ class Car_Info extends Widget_Base {
 			],
 			'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => $this->tf_apply_dim( 'margin' ),
-				'{{WRAPPER}} h2.section-heading' => $this->tf_apply_dim( 'margin' ),
 			],
 		]);
 
@@ -139,16 +131,123 @@ class Car_Info extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => 'color: {{VALUE}};',
-				'{{WRAPPER}} h2.section-heading' => 'color: {{VALUE}};',
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => esc_html__( 'Title Typography', 'tourfic' ),
 			'name'     => "tf_title_typography",
-			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .section-heading",
+			'selector' => "{{WRAPPER}} .tf-section-title",
 		]);
 
+		$this->end_controls_section();
+	}
+
+	protected function tf_content_style_controls() {
+		$this->start_controls_section( 'content_style', [
+			'label' => esc_html__( 'Content Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+        $this->add_responsive_control( "tf_items_gap", [
+			'label'      => esc_html__( 'Items gap', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-car-info ul" => 'gap: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_control( 'tf_icon_color', [
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-car-info ul li i' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-car-info ul li svg path' => 'stroke: {{VALUE}};',
+			],
+		]);
+
+		$this->add_responsive_control( "tf_icon_size", [
+			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 1,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-car-info ul li i" => 'font-size: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .tf-car-info ul li svg" => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}',
+			],
+		] );
+
+		$this->add_control( 'tf_info_color', [
+			'label'     => __( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-car-info ul li' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => __( 'Typography', 'tourfic' ),
+			'name'     => "tf_info_typography",
+			'selector' => "{{WRAPPER}} .tf-car-info ul li",
+		]);
+
+		$this->add_responsive_control( "content_padding", [
+			'label'      => __( 'Padding', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-car-info ul li' => $this->tf_apply_dim( 'padding' ),
+			],
+		]);
+
+		$this->add_control( 'content_bg_color', [
+			'label'     => __( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-car-info ul li' => 'background-color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "content_border",
+			'selector' => "{{WRAPPER}} .tf-car-info ul li",
+		]);
+
+		$this->add_control( "content_border_radius", [
+			'label'      => __( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-car-info ul li' => $this->tf_apply_dim( 'border-radius' ),
+			],
+		]);
+		
 		$this->end_controls_section();
 	}
 

@@ -180,7 +180,7 @@ class Amenities extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-facilities .tf-facility-item ul li' => 'color: {{VALUE}};',
-				'{{WRAPPER}} .hotel-facility-item ul li' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-hotel-facilities-content-area .hotel-facility-item ul li' => 'color: {{VALUE}};',
 				'{{WRAPPER}} .tf-apartment-amenities .tf-apt-amenity' => 'color: {{VALUE}};',
 			],
 		]);

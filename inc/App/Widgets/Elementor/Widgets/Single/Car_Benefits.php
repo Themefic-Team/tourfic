@@ -58,7 +58,8 @@ class Car_Benefits extends Widget_Base {
 		// $this->tf_content_layout_controls();
 
 		do_action( 'tf/single-car-benefits/before-style-controls', $this );
-		$this->tf_car_benefits_style_controls();
+		$this->tf_title_style_controls();
+		$this->tf_content_style_controls();
 		do_action( 'tf/single-car-benefits/after-style-controls', $this );
 	}
 
@@ -69,15 +70,13 @@ class Car_Benefits extends Widget_Base {
 
         do_action( 'tf/single-car-benefits/before-content/controls', $this );
 
-        $post_type = $this->get_current_post_type();
-		$options = [
-			'style1' => esc_html__('Style 1', 'tourfic')
-		];
 		$this->add_control('car_benefits_style',[
             'label' => esc_html__('Style', 'tourfic'),
             'type' => \Elementor\Controls_Manager::SELECT,
             'default' => 'style1',
-            'options' => $options,
+            'options' => [
+				'style1' => esc_html__('Style 1', 'tourfic')
+			],
         ]);
 
 	    do_action( 'tf/single-car-benefits/after-content/controls', $this );
@@ -85,16 +84,11 @@ class Car_Benefits extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function tf_car_benefits_style_controls() {
-		$this->start_controls_section( 'car_benefits_style_section', [
-			'label' => esc_html__( 'Style', 'tourfic' ),
+    protected function tf_title_style_controls() {
+		$this->start_controls_section( 'tf_title_style_section', [
+			'label' => esc_html__( 'Title Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
-
-		$this->add_control( 'tf_title_heading', [
-			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Title', 'tourfic' ),
-		] );
 
         $this->add_responsive_control('title_align',[
 			'label' => esc_html__('Alignment', 'tourfic'),
@@ -116,7 +110,6 @@ class Car_Benefits extends Widget_Base {
 			'toggle' => true,
             'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => 'text-align: {{VALUE}};',
-				'{{WRAPPER}} h2.section-heading' => 'text-align: {{VALUE}};',
 			],
 		]);
 
@@ -130,7 +123,6 @@ class Car_Benefits extends Widget_Base {
 			],
 			'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => $this->tf_apply_dim( 'margin' ),
-				'{{WRAPPER}} h2.section-heading' => $this->tf_apply_dim( 'margin' ),
 			],
 		]);
 
@@ -139,16 +131,83 @@ class Car_Benefits extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => 'color: {{VALUE}};',
-				'{{WRAPPER}} h2.section-heading' => 'color: {{VALUE}};',
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => esc_html__( 'Title Typography', 'tourfic' ),
 			'name'     => "tf_title_typography",
-			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .section-heading",
+			'selector' => "{{WRAPPER}} .tf-section-title",
 		]);
 
+		$this->end_controls_section();
+	}
+
+	protected function tf_content_style_controls() {
+		$this->start_controls_section( 'content_style', [
+			'label' => esc_html__( 'Content Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+        $this->add_responsive_control( "tf_items_gap", [
+			'label'      => esc_html__( 'Items gap', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-car-benefits ul" => 'row-gap: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_control( 'tf_icon_color', [
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-car-benefits ul li i' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_responsive_control( "tf_icon_size", [
+			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 1,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-car-benefits ul li i" => 'font-size: {{SIZE}}{{UNIT}}',
+			],
+		] );
+
+		$this->add_control( 'tf_item_content_color', [
+			'label'     => esc_html__( 'Content Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-car-benefits ul li' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Content Typography', 'tourfic' ),
+			'name'     => "tf_item_content_typography",
+			'selector' => "{{WRAPPER}} .tf-car-benefits ul li",
+		]);
+		
 		$this->end_controls_section();
 	}
 

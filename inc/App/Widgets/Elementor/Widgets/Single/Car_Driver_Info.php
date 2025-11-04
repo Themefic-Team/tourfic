@@ -58,7 +58,11 @@ class Car_Driver_Info extends Widget_Base {
 		// $this->tf_content_layout_controls();
 
 		do_action( 'tf/single-car-driver-info/before-style-controls', $this );
-		$this->tf_car_driver_info_style_controls();
+		$this->tf_card_style_controls();
+		$this->tf_title_style_controls();
+		$this->tf_avatar_style_controls();
+		$this->tf_content_style_controls();
+		$this->tf_social_style_controls();
 		do_action( 'tf/single-car-driver-info/after-style-controls', $this );
 	}
 
@@ -85,43 +89,37 @@ class Car_Driver_Info extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function tf_car_driver_info_style_controls() {
-		$this->start_controls_section( 'car_driver_info_style_section', [
-			'label' => esc_html__( 'Style', 'tourfic' ),
+    protected function tf_title_style_controls() {
+		$this->start_controls_section( 'title_style', [
+			'label' => esc_html__( 'Title Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+        $this->add_control( 'tf_title_color', [
+			'label'     => esc_html__( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-driver-details .tf-driver-details-header h3' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
+			'name'     => "tf_title_typography",
+			'selector' => "{{WRAPPER}} .tf-driver-details .tf-driver-details-header h3",
+		]);
+
+		$this->end_controls_section();
+	}
+
+    protected function tf_card_style_controls() {
+		$this->start_controls_section( 'card_style', [
+			'label' => esc_html__( 'Card Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
-		$this->add_control( 'tf_title_heading', [
-			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Title', 'tourfic' ),
-		] );
-
-        $this->add_responsive_control('title_align',[
-			'label' => esc_html__('Alignment', 'tourfic'),
-			'type' => Controls_Manager::CHOOSE,
-			'options' => [
-				'left' => [
-					'title' => esc_html__('Left', 'tourfic'),
-					'icon' => 'eicon-text-align-left',
-				],
-				'center' => [
-					'title' => esc_html__('Center', 'tourfic'),
-					'icon' => 'eicon-text-align-center',
-				],
-				'right' => [
-					'title' => esc_html__('Right', 'tourfic'),
-					'icon' => 'eicon-text-align-right',
-				],
-			],
-			'toggle' => true,
-            'selectors'  => [
-				'{{WRAPPER}} .tf-section-title' => 'text-align: {{VALUE}};',
-				'{{WRAPPER}} h2.section-heading' => 'text-align: {{VALUE}};',
-			],
-		]);
-
-        $this->add_responsive_control( "title_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
+		$this->add_responsive_control( "card_padding", [
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -129,25 +127,159 @@ class Car_Driver_Info extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				'{{WRAPPER}} .tf-section-title' => $this->tf_apply_dim( 'margin' ),
-				'{{WRAPPER}} h2.section-heading' => $this->tf_apply_dim( 'margin' ),
+				"{{WRAPPER}} .tf-driver-details" => $this->tf_apply_dim( 'padding' ),
 			],
-		]);
+		] );
 
-		$this->add_control( 'tf_title_color', [
-			'label'     => esc_html__( 'Title Color', 'tourfic' ),
+		$this->add_control( 'card_bg_color', [
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-driver-details" => 'background-color: {{VALUE}};',
+			],
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "card_border",
+			'selector' => "{{WRAPPER}} .tf-driver-details",
+		] );
+		$this->add_control( "card_border_radius", [
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-driver-details" => $this->tf_apply_dim( 'border-radius' ),
+			],
+		] );
+		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
+			'name' => 'card_shadow',
+			'selector' => '{{WRAPPER}} .tf-driver-details',
+		]);
+		
+		$this->end_controls_section();
+	}
+
+	protected function tf_avatar_style_controls() {
+		$this->start_controls_section( 'avatart_style', [
+			'label' => esc_html__( 'Avatar Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+		
+		$this->add_responsive_control( "tf_avatar_size", [
+			'label'      => esc_html__( 'Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 20,
+					'max'  => 400,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-driver-details .tf-driver-photo img" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_control( "avatar_border_radius", [
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-driver-details .tf-driver-photo img' => $this->tf_apply_dim( 'border-radius'),
+			],
+		] );
+
+		$this->end_controls_section();
+	}
+
+    protected function tf_content_style_controls() {
+        $this->start_controls_section( 'content_style', [
+			'label' => esc_html__( 'Content Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+        $this->add_control( "name_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Name', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_name_color', [
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
-				'{{WRAPPER}} .tf-section-title' => 'color: {{VALUE}};',
-				'{{WRAPPER}} h2.section-heading' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-driver-details .tf-driver-photo .tf-driver-info h4' => 'color: {{VALUE}};',
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => esc_html__( 'Title Typography', 'tourfic' ),
-			'name'     => "tf_title_typography",
-			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .section-heading",
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
+			'name'     => "tf_name_typography",
+			'selector' => "{{WRAPPER}} .tf-driver-details .tf-driver-photo .tf-driver-info h4",
 		]);
+
+        $this->add_control( "age_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Age', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_age_color', [
+			'label'     => esc_html__( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-driver-details .tf-driver-photo .tf-driver-info p' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
+			'name'     => "tf_age_typography",
+			'selector' => "{{WRAPPER}} .tf-driver-details .tf-driver-photo .tf-driver-info p",
+		]);
+
+		$this->end_controls_section();
+	}
+
+    protected function tf_social_style_controls() {
+        $this->start_controls_section( 'social_style', [
+			'label' => esc_html__( 'Social Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+        $this->add_responsive_control( "tf_icon_size", [
+			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 5,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+			],
+		] );
+
+        $this->add_control( 'tf_icon_color', [
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li svg path" => 'stroke: {{VALUE}};',
+			],
+		] );
 
 		$this->end_controls_section();
 	}

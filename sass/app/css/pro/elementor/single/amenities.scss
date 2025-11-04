@@ -56,18 +56,9 @@
         line-height: 1.5;
         color: var(--tf-text-heading);
     }
-    .tf-hotel-facilities-title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        h2.section-heading {
-            margin: 0px;
-            color: $color-heading;
-        }
-        .tf-section-title {
-            margin-bottom: 0px;
-        }
+    h2.section-heading {
+        margin: 0px;
+        color: $color-heading;
     }
 
     .tf-hotel-facilities-content-area {

@@ -64,7 +64,9 @@ class Tour_Contact_Information extends Widget_Base {
 		$this->tf_content_layout_controls();
 
 		do_action( 'tf/single-tour-contact-information/before-style-controls', $this );
-		$this->tf_tour_contact_information_style_controls();
+		$this->tf_card_style_controls();
+		$this->tf_title_style_controls();
+		$this->tf_info_items_style_controls();
 		do_action( 'tf/single-tour-contact-information/after-style-controls', $this );
 	}
 
@@ -90,34 +92,193 @@ class Tour_Contact_Information extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function tf_tour_contact_information_style_controls() {
-		$this->start_controls_section( 'tour_contact_information_style_section', [
-			'label' => esc_html__( 'Style', 'tourfic' ),
+    protected function tf_card_style_controls() {
+		$this->start_controls_section( 'card_style', [
+			'label' => esc_html__( 'Card Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
-		]);
+		] );
 
-		$this->add_control( "bg_color", [
-			'label'     => __( 'Background Color', 'tourfic' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [
-				"{{WRAPPER}} .tf-trip-info" => 'background-color: {{VALUE}};',
+		$this->add_responsive_control( "card_padding", [
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-tour-booking-advantages" => $this->tf_apply_dim( 'padding' ),
 			],
 		] );
 
-        // $this->add_control( "btn_color", [
-		// 	'label'     => __( 'Text Color', 'tourfic' ),
-		// 	'type'      => Controls_Manager::COLOR,
-		// 	'selectors' => [
-		// 		"{{WRAPPER}} .tf-single-action-btns a" => 'color: {{VALUE}};',
-		// 		"{{WRAPPER}} .tf-single-action-btns a svg path" => 'fill: {{VALUE}};',
-		// 	],
-		// ] );
+		$this->add_control( 'card_bg_color', [
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-tour-booking-advantages" => 'background-color: {{VALUE}};',
+			],
+		] );
 
-        // $this->add_group_control( Group_Control_Typography::get_type(), [
-		// 	'name'     => "btn_typography",
-		// 	'selector' => "{{WRAPPER}} .tf-single-action-btns a",
-		// ] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "card_border",
+			'selector' => "{{WRAPPER}} .tf-tour-booking-advantages",
+		] );
 
+		$this->add_control( "card_border_radius", [
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-tour-booking-advantages" => $this->tf_apply_dim( 'border-radius' ),
+			],
+		] );
+
+		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
+			'name' => 'card_shadow',
+			'selector' => '{{WRAPPER}} .tf-tour-booking-advantages',
+		]);
+		
+		$this->end_controls_section();
+	}
+
+    protected function tf_title_style_controls() {
+		$this->start_controls_section( 'title_style_section', [
+			'label' => esc_html__( 'Title Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		]);
+
+        $this->add_responsive_control('title_align',[
+			'label' => esc_html__('Alignment', 'tourfic'),
+			'type' => Controls_Manager::CHOOSE,
+			'options' => [
+				'left' => [
+					'title' => esc_html__('Left', 'tourfic'),
+					'icon' => 'eicon-text-align-left',
+				],
+				'center' => [
+					'title' => esc_html__('Center', 'tourfic'),
+					'icon' => 'eicon-text-align-center',
+				],
+				'right' => [
+					'title' => esc_html__('Right', 'tourfic'),
+					'icon' => 'eicon-text-align-right',
+				],
+			],
+			'toggle' => true,
+            'selectors'  => [
+				'{{WRAPPER}} .tf-tour-booking-advantages .tf-head-title h3' => 'text-align: {{VALUE}};',
+			],
+		]);
+
+        $this->add_responsive_control( "title_margin", [
+			'label'      => __( 'Margin', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-tour-booking-advantages .tf-head-title h3' => $this->tf_apply_dim( 'margin' ),
+			],
+		]);
+
+		$this->add_control( 'tf_title_color', [
+			'label'     => esc_html__( 'Title Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-tour-booking-advantages .tf-head-title h3' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Title Typography', 'tourfic' ),
+			'name'     => "tf_title_typography",
+			'selector' => "{{WRAPPER}} .tf-tour-booking-advantages .tf-head-title h3",
+		]);
+
+		$this->end_controls_section();
+	}
+
+    protected function tf_info_items_style_controls() {
+		$this->start_controls_section( 'content_style', [
+			'label' => esc_html__( 'Items Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+        $this->add_responsive_control( "tf_items_gap", [
+			'label'      => esc_html__( 'Items gap', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-tour-booking-advantages ul li" => 'margin-bottom: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_control( "icon_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Icon', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_item_icon_color', [
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-tour-booking-advantages ul li i' => 'color: {{VALUE}};',
+			],
+		]);
+
+        $this->add_responsive_control( "item_icon_size", [
+			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 35,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-tour-booking-advantages ul li i" => 'font-size: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_control( "item_label_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Label', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_item_label_color', [
+			'label'     => esc_html__( 'Label Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-tour-booking-advantages ul li a' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Label Typography', 'tourfic' ),
+			'name'     => "tf_item_label_typography",
+			'selector' => "{{WRAPPER}} .tf-tour-booking-advantages ul li a",
+		]);
+		
 		$this->end_controls_section();
 	}
 

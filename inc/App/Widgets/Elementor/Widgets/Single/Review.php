@@ -60,7 +60,7 @@ class Review extends Widget_Base {
 		$this->tf_content_layout_controls();
 
 		do_action( 'tf/single-review/before-style-controls', $this );
-		$this->tf_review_style_controls();
+		// $this->tf_review_style_controls();
 		do_action( 'tf/single-review/after-style-controls', $this );
 	}
 
