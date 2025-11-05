@@ -1284,13 +1284,15 @@ class Template_Builder {
                     'orderby' => 'rand'
                 ];
                 if ($taxonomy_type && $taxonomy_type !== 'all') {
-                    $args['tax_query'] = [
-                        [
-                            'taxonomy' => $taxonomy_type,
-                            'field' => 'slug',
-                            'terms' => $taxonomy_term === 'all' ? [] : $taxonomy_term,
-                        ]
-                    ];
+                    if($taxonomy_term !== 'all'){
+                        $args['tax_query'] = [
+                            [
+                                'taxonomy' => $taxonomy_type,
+                                'field' => 'slug',
+                                'terms' => $taxonomy_term,
+                            ]
+                        ];
+                    }
                 }
                 $sample_post = get_posts($args);
 
