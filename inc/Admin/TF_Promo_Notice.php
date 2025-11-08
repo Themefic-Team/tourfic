@@ -92,8 +92,16 @@ class TF_Promo_Notice {
                 add_action( 'wp_ajax_tf_promo_notice_custom_post_meta_callback', array($this, 'tf_promo_notice_custom_post_meta_callback') );
             } 
 
+            $tf_widget_exists = get_option('tf_promo_widget_exists');
             $dashboard_widget = isset($this->tf_promo_option['dashboard_widget']) ? $this->tf_promo_option['dashboard_widget'] : [];
-            if (isset($dashboard_widget['enable_status']) && $dashboard_widget['enable_status'] == true) {
+            if (
+                !in_array($tf_widget_exists, $this->plugins_existes) && 
+                isset($dashboard_widget['enable_status']) && 
+                $dashboard_widget['enable_status'] == true
+            ) {
+                // Mark that one Themefic widget already exists
+                update_option('tf_promo_widget_exists', 'tf');
+                
                 add_action('wp_dashboard_setup', [$this, 'register_dashboard_notice_widget']);
                 add_action('wp_ajax_tf_dashboard_widget_dismiss', [$this, 'tf_dashboard_widget_dismiss']);
             }
@@ -776,6 +784,7 @@ class TF_Promo_Notice {
         delete_option('tf_room_promo_sidebar_notice');
         delete_option('tf_promo__schudle_start_from');
         delete_option('tf_promo_notice_exists');
+        delete_option('tf_promo_widget_exists');
     }
  
 }
