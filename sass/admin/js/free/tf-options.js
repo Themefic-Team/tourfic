@@ -1072,6 +1072,39 @@
             $('[name="tf_room_price"]', roomCalData).val('');
             $('[name="tf_room_adult_price"]', roomCalData).val('');
             $('[name="tf_room_child_price"]', roomCalData).val('');
+
+            // Destroy old flatpickr instances to avoid conflicts
+            $(roomCalData).find('[name="tf_room_check_in"]').each(function () {
+                if (this._flatpickr) {
+                    this._flatpickr.destroy();
+                }
+            });
+            $(roomCalData).find('[name="tf_room_check_out"]').each(function () {
+                if (this._flatpickr) {
+                    this._flatpickr.destroy();
+                }
+            });
+
+            // Re-initialize flatpickr instances
+            let checkIn = $(roomCalData).find('[name="tf_room_check_in"]').flatpickr({
+                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                minDate: 'today',
+                altInput: true,
+                altFormat: tf_options.tf_admin_date_format,
+                onChange: function (selectedDates, dateStr, instance) {
+                    if (checkOut) checkOut.set('minDate', dateStr);
+                }
+            });
+
+            let checkOut = $(roomCalData).find('[name="tf_room_check_out"]').flatpickr({
+                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                minDate: 'today',
+                altInput: true,
+                altFormat: tf_options.tf_admin_date_format,
+                onChange: function (selectedDates, dateStr, instance) {
+                    if (checkIn) checkIn.set('maxDate', dateStr);
+                }
+            });
         }
 
         const tfHotelCalendar = () => {
@@ -1332,6 +1365,39 @@
             $('[name="tf_apt_adult_price"]', apartmentCalData).val('');
             $('[name="tf_apt_child_price"]', apartmentCalData).val('');
             $('[name="tf_apt_infant_price"]', apartmentCalData).val('');
+
+            // Destroy old flatpickr instances to avoid conflicts
+            $(apartmentCalData).find('[name="tf_apt_check_in"]').each(function () {
+                if (this._flatpickr) {
+                    this._flatpickr.destroy();
+                }
+            });
+            $(apartmentCalData).find('[name="tf_apt_check_out"]').each(function () {
+                if (this._flatpickr) {
+                    this._flatpickr.destroy();
+                }
+            });
+
+            // Re-initialize flatpickr instances
+            let checkIn = $(apartmentCalData).find('[name="tf_apt_check_in"]').flatpickr({
+                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                minDate: 'today',
+                altInput: true,
+                altFormat: tf_options.tf_admin_date_format,
+                onChange: function (selectedDates, dateStr, instance) {
+                    if (checkOut) checkOut.set('minDate', dateStr);
+                }
+            });
+
+            let checkOut = $(apartmentCalData).find('[name="tf_apt_check_out"]').flatpickr({
+                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                minDate: 'today',
+                altInput: true,
+                altFormat: tf_options.tf_admin_date_format,
+                onChange: function (selectedDates, dateStr, instance) {
+                    if (checkIn) checkIn.set('maxDate', dateStr);
+                }
+            });
         }
 
         const tfApartmentCalendar = () => {
@@ -1793,6 +1859,39 @@
             while (container.firstChild) {
                 container.removeChild(container.firstChild);
             }
+
+            // Destroy old flatpickr instances to avoid conflicts
+            $(tourCalData).find('[name="tf_tour_check_in"]').each(function () {
+                if (this._flatpickr) {
+                    this._flatpickr.destroy();
+                }
+            });
+            $(tourCalData).find('[name="tf_tour_check_out"]').each(function () {
+                if (this._flatpickr) {
+                    this._flatpickr.destroy();
+                }
+            });
+
+            // Re-initialize flatpickr instances
+            let checkIn = $(tourCalData).find('[name="tf_tour_check_in"]').flatpickr({
+                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                minDate: 'today',
+                altInput: true,
+                altFormat: tf_options.tf_admin_date_format,
+                onChange: function (selectedDates, dateStr, instance) {
+                    if (checkOut) checkOut.set('minDate', dateStr);
+                }
+            });
+
+            let checkOut = $(tourCalData).find('[name="tf_tour_check_out"]').flatpickr({
+                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                minDate: 'today',
+                altInput: true,
+                altFormat: tf_options.tf_admin_date_format,
+                onChange: function (selectedDates, dateStr, instance) {
+                    if (checkIn) checkIn.set('maxDate', dateStr);
+                }
+            });
         }
 
         const tfTourCalendar = () => {

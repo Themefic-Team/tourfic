@@ -737,7 +737,7 @@ class TF_Options {
 		$tf_apt_infant_price = isset( $_POST['tf_apt_infant_price'] ) && ! empty( $_POST['tf_apt_infant_price'] ) ? sanitize_text_field( $_POST['tf_apt_infant_price'] ) : '';
 		$apt_availability    = isset( $_POST['apt_availability'] ) && ! empty( $_POST['apt_availability'] ) ? sanitize_text_field( $_POST['apt_availability'] ) : '';
 
-		$apartment_data = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
+		$apartment_meta = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
 		if(empty($apartment_meta)){
 			wp_send_json_error( [
 				'status'  => false,
