@@ -4613,20 +4613,6 @@ class Tour {
 
 			}
 
-			if ( ! empty( $_POST['deposit'] ) && $_POST['deposit'] == "true" ) {
-				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) ) {
-
-					if ( ! empty( $meta['deposit_type'] ) && $meta['deposit_type'] == 'fixed' ) {
-						$tf_deposit_amount   = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : 0;
-						$tf_due_amount       = $tf_tours_data_price - $tf_deposit_amount;
-						$tf_tours_data_price = $tf_deposit_amount;
-					} else {
-						$tf_deposit_amount   = ! empty( $meta['deposit_amount'] ) ? ( $tf_tours_data_price * $meta['deposit_amount'] ) / 100 : 0;
-						$tf_due_amount       = $tf_tours_data_price - $tf_deposit_amount;
-						$tf_tours_data_price = $tf_deposit_amount;
-					}
-				}
-			}
 			$traveller_info_fields = ! empty( Helper::tfopt( 'without-payment-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'without-payment-field' ) ) : '';
 
 			$response['traveller_info']    = '';
@@ -4815,6 +4801,22 @@ class Tour {
 					}
 				}
 			}
+
+			if ( ! empty( $_POST['deposit'] ) && $_POST['deposit'] == "true" ) {
+				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) ) {
+					
+					if ( ! empty( $meta['deposit_type'] ) && $meta['deposit_type'] == 'fixed' ) {
+						$tf_deposit_amount   = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : 0;
+						$tf_due_amount       = $tf_tours_data_price - $tf_deposit_amount;
+						$tf_tours_data_price = $tf_deposit_amount;
+					} else {
+						$tf_deposit_amount   = ! empty( $meta['deposit_amount'] ) ? ( $tf_tours_data_price * $meta['deposit_amount'] ) / 100 : 0;
+						$tf_due_amount       = $tf_tours_data_price - $tf_deposit_amount;
+						$tf_tours_data_price = $tf_deposit_amount;
+					}
+				}
+			}
+
 			if ( ! empty( $tf_due_amount ) ) {
 				$response['traveller_summery'] .= '<tr>
                     <td align="left">' . esc_html__( 'Due', 'tourfic' ) . '</td>

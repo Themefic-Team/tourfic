@@ -4327,9 +4327,11 @@ jQuery(function ($) {
             $('.tf-tour-cal-field .tf_tour_allowed_times').html('');
 
             // More specific selector with error handling
-            const container = document.querySelector('.tf_tour_allowed_times');
-            while (container.firstChild) {
-                container.removeChild(container.firstChild);
+            if($('.tf_tour_allowed_times').length > 0){
+                const container = document.querySelector('.tf_tour_allowed_times');
+                while (container.firstChild) {
+                    container.removeChild(container.firstChild);
+                }
             }
 
             // Destroy old flatpickr instances to avoid conflicts
