@@ -32,7 +32,7 @@ class TF_Promo_Notice {
         'November',
         'December'
     ];
-    private $plugins_existes = ['ins', 'uacf7', 'beaf', 'ebef'];
+    private $plugins_existes = ['ins', 'uacf7', 'beaf', 'ebef', 'uawpf', 'hydra'];
 
     public function __construct() {   
         if(in_array(gmdate('F'), $this->months) && !function_exists('is_tf_pro') ){ 
@@ -233,11 +233,13 @@ class TF_Promo_Notice {
                 margin-bottom:8px; 
                 text-align:left;
                 gap: 10px;
+                padding-top: 0px;
             }
 
             .tf-dashboard-widget .highlight .before-img {
                 width: 58px;
                 height: 58px;
+                flex : 0 0 58px;
             }
             .tf-dashboard-widget .highlight .after-img {
                 width: 100px;
@@ -248,6 +250,8 @@ class TF_Promo_Notice {
                 justify-content: space-between;
                 align-items: flex-start;
                 flex-direction: column;
+                flex: 1;
+                width: 100%;
             }
             .tf-dashboard-widget .highlight .content p{
                 color: #1D2327;
