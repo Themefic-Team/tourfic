@@ -2015,7 +2015,7 @@
         });
 
         // Navigation Next
-        $(document).on('click', '.tf-tabs-control', function (e) {
+        $('body').on('click', '.tf-tabs-control', function (e) {
             e.preventDefault();
             if (tf_hasErrorsFlag) {
                 return false;
@@ -2042,7 +2042,7 @@
         });
 
         // Navigation Back
-        $(document).on('click', '.tf-step-back', function (e) {
+        $('body').on('click', '.tf-step-back', function (e) {
             e.preventDefault();
             
             let active_steps = $('.tf_popup_stpes').val();
@@ -2267,17 +2267,17 @@
         * Custom modal
         * @author: Foysal
         */
-        $(document).on('click', '.tf-modal-btn', function (e) {
+        $('body').on('click', '.tf-modal-btn', function (e) {
             e.preventDefault();
             var dataTarget = $(this).attr('data-target');
             $(dataTarget).addClass('tf-modal-show');
             $('body').addClass('tf-modal-open');
         });
-        $(document).on("click", '.tf-modal-close', function () {
+        $('body').on("click", '.tf-modal-close', function () {
             $('.tf-modal').removeClass('tf-modal-show');
             $('body').removeClass('tf-modal-open');
         });
-        $(document).on("click", function (event) {
+        $('body').on("click", function (event) {
             if(!$('.tf-map-modal').length) {
                 if (!$(event.target).closest(".tf-modal-content,.tf-modal-btn").length) {
                     $("body").removeClass("tf-modal-open");
@@ -2290,7 +2290,7 @@
          * Hotel Details Popup
          *
          */
-        $(document).on('click', '.tf-room-detail-qv', function (e) {
+        $('body').on('click', '.tf-room-detail-qv', function (e) {
             e.preventDefault();
             $("#tour_room_details_loader").show();
             var post_id = $(this).attr("data-hotel");
