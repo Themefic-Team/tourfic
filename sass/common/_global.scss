@@ -134,50 +134,6 @@ input[type="submit"].tf_btn,
         font-size: 1rem;
     }
   
-    &_shadow{
-        &:hover{
-            box-shadow: 0px 40px 40px 0px rgba(#C75605, 0.16),0px 32px 32px 0px rgba(#C75605, 0.14),0px 24px 24px 0px rgba(#C75605, 0.12), 0px 20px 20px 0px rgba(#C75605, 0.10),0px 16px 16px 0px rgba(#C75605, 0.08),0px 12px 12px 0px rgba(#C75605, 0.06),0px 8px 8px 0px rgba(#C75605, 0.04),0px 4px 4px 0px rgba(#C75605, 0.02);
-        }
-    }
-
-    &_animate{
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-        &::after{
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            transform: translateX(-100%);
-            width: 100%;
-            height: 100%;
-            background-color: $color-white;
-            opacity: 0;
-            z-index: 1;
-            box-shadow: none;
-            border-top-right-radius: 100px;
-            border-bottom-right-radius: 100px;
-            transition: 0.2s ease;
-        }
-        &:focus{
-            color: $color-text;
-            &::after{
-                opacity: 1;
-                transform: translateX(0);
-            }
-            .tf_btn_animate_text{
-                color: $color-text; 
-            }
-        }
-        &_text{
-            position: relative;
-            z-index: 2;
-        }
-        
-    }
 
     //disabled
     &:disabled,

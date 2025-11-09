@@ -10,10 +10,12 @@
                     backdrop-filter: blur(32px);
                     box-shadow: 0px 16px 40px 0px #EE550914;
                     gap: 24px;
+
                     label{
                         color: $color-white;
                         font-size: 1.25rem;
                         line-height: 1.5;
+                        font-weight: 400;
                     }
                     .tf-search-field{
                         backdrop-filter: blur(32px);
@@ -82,13 +84,14 @@
                             min-width: 267px;
                             min-height: 72px;
                             border: 2px solid $color-brand-dark;
-                            color: #F5FFFE;
-                            font-weight: 600;
                             font-size: 1.25rem;
                             line-height: 1.5;
-                            position: relative;
-                            overflow: hidden;
                             margin-top: 10px;
+
+                            &:hover{
+                                background-color: $color-primary;
+                                box-shadow: 0 40px 40px 0 rgba(238, 85, 9, 0.16), 0 32px 32px 0 rgba(238, 85, 9, 0.14), 0 24px 24px 0 rgba(238, 85, 9, 0.12), 0 20px 20px 0 rgba(238, 85, 9, 0.10), 0 16px 16px 0 rgba(238, 85, 9, 0.08), 0 12px 12px 0 rgba(238, 85, 9, 0.06), 0 8px 8px 0 rgba(238, 85, 9, 0.04), 0 4px 4px 0 rgba(238, 85, 9, 0.02);
+                            }
                         }
                     }
 
@@ -153,6 +156,8 @@
                                     color: $color-text;
                                     font-size: 1.25rem;
                                     font-weight: 600;
+                                    height: 32px;
+                                    padding: 5px;
                                 }
                             }
                           

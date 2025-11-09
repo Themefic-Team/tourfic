@@ -2858,9 +2858,7 @@ class Helper {
                     </div>
                     <div class="tf-submit-button">
                         <input type="hidden" class="tf-post-type" value="<?php echo esc_attr("tf_room"); ?>">
-                        <button class="tf-filter-rooms tf_btn tf_btn_rounded tf_btn_shadow tf_btn_animate tf-flex-align-center">
-                            <div class="tf_btn_animate_text"><?php esc_html_e("Modify search", "tourfic"); ?></div>
-                        </button>
+                        <button class="tf-filter-rooms tf_btn tf_btn_rounded tf-flex-align-center"><?php esc_html_e("Modify search", "tourfic"); ?></button>
                     </div>
 
                     <script>
