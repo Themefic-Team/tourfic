@@ -27,7 +27,7 @@ class Room_CPT extends \Tourfic\Core\Post_Type {
 			'menu_position' => 26.3,
 			'supports'      => apply_filters( 'tf_room_supports', array( 'title', 'editor', 'thumbnail', 'author' ) ),
 			'capability'    => array( 'tf_room', 'tf_rooms' ),
-			'rewrite_slug'  => ''
+			'rewrite_slug'  => $this->get_room_slug(),
 		) );
 
 		add_filter( 'manage_edit-tf_room_columns', array( $this, 'tf_room_list_column' ) );
@@ -59,5 +59,13 @@ class Room_CPT extends \Tourfic\Core\Post_Type {
 			}
 		}
 
+	}
+
+	private function get_room_slug() {
+		$tf_room_setting_permalink_slug = ! empty( Helper::tfopt( 'room-permalink-setting' ) ) ? Helper::tfopt( 'room-permalink-setting' ) : "rooms";
+
+		update_option( "room_slug", $tf_room_setting_permalink_slug );
+
+		return apply_filters( 'tf_room_slug', get_option( 'room_slug' ) );
 	}
 }

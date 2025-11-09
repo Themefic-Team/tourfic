@@ -1,0 +1,21 @@
+.post-type-archive-tf_room,
+.page-template-tf-search{
+    .tf-archive-template{
+        &__one{
+            .tf-archive-room-details{
+                background-color: $color-filling-fg;
+                padding: 48px 0;
+                .tf-archive-header{
+                    .tf-total-result-bar{
+                        h3{
+                            color: $color-heading;
+                            font-size: 1.563rem;
+                            font-weight: 400;
+                        }
+                    }
+                }
+            }
+           
+        }
+    }
+}

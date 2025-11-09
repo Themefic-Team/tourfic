@@ -1,0 +1,293 @@
+.single-tf_carrental{
+    .tf-single-template{
+        &__one{
+            .tf-date-select-box{
+                border-radius: 16px;
+                background: $color-filling-fg;
+                padding: 8px 8px 16px 8px;
+                margin-bottom: 32px;
+                @media #{$max768}{
+                    position: fixed;
+                    left: 0;
+                    bottom: 72px;
+                    right: 0;
+                    z-index: 99999;
+                    margin-bottom: 0px;
+                    display: none;
+                }
+                &.tf-box-loading{
+                    position: relative;
+                    @media #{$max768}{
+                        position: fixed;
+                    }
+                    &::before{
+                        position: absolute;
+                        content: "";
+                        right: 0;
+                        top: 0;
+                        left: 0;
+                        bottom: 0;
+                        background-color: rgba(255,255,255,.5);
+                        z-index: 99;
+                        border-radius: 16px;
+                    }
+                }
+                .tf-date-single-select{
+                    border-radius: 8px;
+                    background: $color-filling-bg;
+                    padding: 16px;
+                    margin-bottom: 8px;
+                    &:last-child{
+                        margin-bottom: 0px;
+                    }
+                    .tf-select-date{
+                        width: calc(50% - 8px);
+                        .tf-flex{
+                            flex-wrap: nowrap;
+                        }
+                        &:first-child{
+                            border-right: 1px solid $color-border-lite;
+                        }
+
+                        .info-select{
+                            width: 100%;
+                            position: relative;
+                            h5{
+                                color: $color-heading;
+                                font-size: 0.75rem;
+                                font-weight: 400;
+                                margin-top: 0px;
+                                margin-bottom: 8px;
+                            }
+                            input{
+                                min-width: auto;
+                                width: 100%;
+                                color: $color-text;
+                                font-size: 1rem;
+                                font-weight: 400;
+                                border: 0px solid;
+                                padding: 0;
+                                &:focus{
+                                    outline: none;
+                                    box-shadow: none;
+                                }
+                                &::placeholder{
+                                    color: $color-text;
+                                    opacity: 1;
+                                }
+                            }
+                            .autocomplete-items{
+                                position: absolute;
+                                z-index: 99;
+                                top: 100%;
+                                left: 0;
+                                right: 0;
+                                width: 190px;
+                                max-height: 200px;
+                                overflow: auto;
+                                border-radius: 4px;
+                                background: $color-filling-fg;
+                                padding: 2px;
+                                scrollbar-width: thin;
+                                scrollbar-color: $scrollbar-color;
+            
+                                /* Chrome, Edge, and Safari */
+                                *::-webkit-scrollbar {
+                                    width: 5px;
+                                }
+                                *::-webkit-scrollbar-track {
+                                    background: $color-white;
+                                }
+                                &::-webkit-scrollbar-thumb {
+                                    background-color: $scrollbar-thumb-color;
+                                    border-radius: 5px;
+                                    border: 3px solid $color-white;
+                                }
+                                
+                                >div{
+                                    padding: 8px;
+                                    cursor: pointer;
+                                    border-radius: 4px;
+                                    background: $color-white;
+                                    text-transform: capitalize;
+                                    color: $color-text;
+                                    font-size: 1rem;
+                                    margin-bottom: 2px;
+                                    transition: .3s all ease;
+                                    &:last-child{
+                                        margin-bottom: 0px;
+                                    }
+                                    &:hover{
+                                        background-color: $color-brand-lite;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+                .tf-form-submit-btn{
+                    padding-top: 8px;
+                    .error-notice{
+                        text-align: center;
+                        color: $color-danger;
+                        margin-bottom: 10px;
+                        display: none;
+                    }
+                    button{
+                        padding: 16px 32px;
+                        border-radius: 8px;
+                        background: $color-primary;
+                        color: $color-white;
+                        font-size: 1rem;
+                        font-weight: 700;
+                        cursor: pointer;
+                        width: 100%;
+                        border: 0px solid;
+                        transition: .3s all ease;
+                        &:hover{
+                            background: $color-brand-dark;
+                        }
+                        &.tf-partial-button{
+                            border: 1px solid $color-primary;
+                            background: transparent;
+                            color: $color-primary;
+                            transition: .3s all ease;
+                            svg{
+                                path{
+                                    stroke: $color-primary;
+                                }
+                            }
+                            &:hover{
+                                border: 1px solid $color-brand-dark;
+                                background: $color-brand-dark;
+                                color: $color-white;
+                                svg{
+                                    path{
+                                        stroke: $color-white;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .tf-instraction-btn{
+                    @media #{$max768}{
+                        display: none;
+                    }
+                    text-align: center;
+                    span{
+                        color: $color-primary;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        margin: 0;
+                        cursor: pointer;
+                    }
+                }
+                .tf-cancellation-box{
+                    border-radius: 8px;
+                    background: $color-white;
+                    padding: 16px;
+                    margin-top: 16px;
+                    display: none;
+                    @media #{$max768}{
+                        display: none;
+                    }
+                    .tf-cancellation-timeline{
+                        margin-top: 12px;
+                        border-bottom: 1px solid $color-border-lite;
+                        .tf-timeline{
+                            ul{
+                                display: flex;
+                                margin: 0;
+                                list-style: none;
+                                li{
+                                    border-left: 1px dotted $color-border;
+                                    border-right: 1px dotted $color-border;
+                                    width: 50%;
+                                    padding: 4px;
+                                    span.free{
+                                        border-radius: 2px;
+                                        background: $color-success;
+                                        color: $color-white;
+                                        font-size: 1rem;
+                                        font-weight: 400;
+                                        padding: 4px 8px;
+                                        display: block;
+                                        text-align: center;
+                                    }
+                                    span.paid{
+                                        border-radius: 2px;
+                                        background: $color-brand-dark;
+                                        color: $color-white;
+                                        font-size: 0.75rem;
+                                        font-weight: 400;
+                                        padding: 4px 8px;
+                                        display: block;
+                                        text-align: center;
+                                    }
+                                }
+                            }
+                        }
+                        .tf-timeline-text{
+                            padding: 4px 0 16px 0;
+                            ul{
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                margin: 0;
+                                padding: 0;
+                                list-style: none;
+                                li{
+                                    color: $color-text;
+                                    font-size: 0.75rem;
+                                    font-weight: 400;
+                                }
+                            }
+                        }
+                    }
+                    .tf-cancelltion-popup-btn{
+                        text-align: center;
+                        margin-top: 16px;
+                        a{
+                            color: $color-primary;
+                            font-size: 1rem;
+                            font-weight: 400;
+                            text-decoration: none;
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+
+            .tf-mobile-booking-btn{
+                display: none;
+                background: $color-brand-lite;
+                padding: 8px;
+                @media #{$max768}{
+                    display: block;
+                    position: fixed;
+                    left: 0;
+                    bottom: 0;
+                    right: 0;
+                    z-index: 9999;
+                }
+                button{
+                    padding: 16px 32px;
+                    border-radius: 8px;
+                    background: $color-primary;
+                    color: $color-white;
+                    font-size: 1rem;
+                    font-weight: 700;
+                    cursor: pointer;
+                    width: 100%;
+                    border: 0px solid;
+                    transition: .3s all ease;
+                    &:hover{
+                        background: $color-brand-dark;
+                    }
+                }
+            }
+        }
+    }
+}

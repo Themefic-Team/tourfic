@@ -1,0 +1,42 @@
+.post-type-archive-tf_room,
+.page-template-tf-search{
+    .tf-archive-template{
+        &__one{
+            .tf-archive-room-banner{
+                min-height: 532px;
+                background-size: cover;
+                background-position: center;
+                padding-bottom: 96px;
+                position: relative;
+                z-index: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                &::after{
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(180deg, rgba(21, 61, 58, 0.3) 0%, #153D3A 100%);
+                    z-index: -1;
+                }
+                .tf-container{
+                    width: 100%;
+                    .tf-banner-content{
+                        height: 100%;
+                        gap: 56px;
+                        h1{
+                            color: $color-white;
+                            font-size: 3.188rem;
+                            line-height: 1.3;
+                            font-weight: 700;
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

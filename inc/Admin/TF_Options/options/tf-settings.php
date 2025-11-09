@@ -152,8 +152,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'tf-template',
 					'type'  => 'tab',
-					'label' => esc_html__('Hotel, Tour, Apartment & Car Template', 'tourfic'),
+					'label' => esc_html__('Hotel, Tour, Apartment, Car & Room Template', 'tourfic'),
 					'tabs'  => array(
+						// Hotel
 						array(
 							'id'     => 'hotel_template',
 							'title'  => esc_html__( 'Hotel', 'tourfic' ),
@@ -360,6 +361,7 @@ TF_Settings::option( 'tf_settings', array(
 								),
 							),
 						),
+						// Tour
 						array(
 							'id'     => 'tour_template',
 							'title'  => esc_html__( 'Tour', 'tourfic' ),
@@ -592,6 +594,7 @@ TF_Settings::option( 'tf_settings', array(
 								),
 							),
 						),
+						// Apartment
 						array(
 							'id'     => 'apartment_template',
 							'title'  => esc_html__( 'Apartment', 'tourfic' ),
@@ -720,7 +723,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'apartment_archive_design_1_bannar',
 									'type'    => 'image',
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
-									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'subtitle' => esc_html__( 'Upload Banner Image for this apartment archive template.', 'tourfic' ),
 									'library' => 'image',
 									'default' => TF_ASSETS_ADMIN_URL . "images/apartment-placeholder.webp",
 									'dependency' => array( 'apartment-archive', '==', 'design-1' ),
@@ -729,7 +732,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'apartment_archive_design_2_bannar',
 									'type'    => 'image',
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
-									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'subtitle' => esc_html__( 'Upload Banner Image for this apartment archive template.', 'tourfic' ),
 									'library' => 'image',
 									'default' => TF_ASSETS_ADMIN_URL . "images/apartment-placeholder.webp",
 									'dependency' => array( 'apartment-archive', '==', 'design-2' ),
@@ -753,6 +756,7 @@ TF_Settings::option( 'tf_settings', array(
 								),
 							),
 						),
+						// Car
 						array(
 							'id'     => 'car_template',
 							'title'  => esc_html__( 'Car', 'tourfic' ),
@@ -769,7 +773,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'       => 'single-car',
 									'type'     => 'imageselect',
 									'label'    => esc_html__( 'Select Single Car Template', 'tourfic' ),
-									'subtitle'   => esc_html__( 'You have the option to override this from the settings specific to each individual apartment page.', 'tourfic' ),
+									'subtitle'   => esc_html__( 'You have the option to override this from the settings specific to each individual car page.', 'tourfic' ),
 									'options'  => array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
@@ -863,7 +867,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'car_archive_design_1_bannar',
 									'type'    => 'image',
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
-									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'subtitle' => esc_html__( 'Upload Banner Image for this car archive template.', 'tourfic' ),
 									'library' => 'image',
 									'default' => TF_ASSETS_ADMIN_URL . "images/carrental-placeholder.png",
 									// 'dependency' => array( 'car-archive', '==', 'design-1' ),
@@ -898,6 +902,107 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'car_archive_notice',
 									'type'    => 'notice',
 									'content' => esc_html__( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
+								),
+							),
+						),
+						// Room
+						array(
+							'id'     => 'room_template',
+							'title'  => __( 'Room', 'tourfic' ),
+							'icon'   => 'fa fa-gear',
+							'post_dependency' => 'rooms',
+							'fields' => array(
+								array(
+									'id'      => 'room-title',
+									'type'    => 'heading',
+									'content' => __( 'Room Single Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'single-room',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Single Room Template', 'tourfic' ),
+									'subtitle'   => __( 'You have the option to override this from the settings specific to each individual room page.', 'tourfic' ),
+									'options'  => array(
+										'design-1' => array(
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-room-design-1.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/cars/honda-city/'),
+										),
+										'design-2' => array(
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-coming-soon.png",
+											'disabled' => true
+										),
+									),
+									'default'  => 'design-1',
+								),
+							
+								array(
+									'id'         => 'single-room-layout',
+									'type'       => 'switch_group',
+									'column'  	 => 4,
+									'label'      => __( 'Single Room Template Sections', 'tourfic' ),
+									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'dependency' => array( 'single-car', '==', 'design-1' ),
+									'default'    => array(
+										array(
+											'label'  => __( 'Description', 'tourfic' ),
+											'slug'   => 'description',
+											'status' => 1,
+										),
+										array(
+											'label'  => __( 'Amenities', 'tourfic' ),
+											'slug'   => 'room-amenities',
+											'status' => 1,
+										),
+										array(
+											'label'  => __( 'Rules', 'tourfic' ),
+											'slug'   => 'room-rules',
+											'status' => 1,
+										),
+										array(
+											'label'  => __( 'Policy', 'tourfic' ),
+											'slug'   => 'room-cancellation-policy',
+											'status' => 1,
+										),
+										array(
+											'label'  => __( 'Review', 'tourfic' ),
+											'slug'   => 'room-review',
+											'status' => 1,
+										)
+									),
+								),
+								
+								array(
+									'id'      => 'room-title',
+									'type'    => 'heading',
+									'content' => __( 'Room Archive & Search Result Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'room-archive',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
+									'options'  => array(
+										'design-1' => array(
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-room-design-1.png",
+										),
+										'design-2' => array(
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-coming-soon.png",
+											'disabled' => true
+										),
+									),
+									'default'  => 'design-1',
+								),
+								array(
+									'id'      => 'room_archive_design_1_bannar',
+									'type'    => 'image',
+									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
+									'subtitle' => __( 'Upload Banner Image for this room archive template.', 'tourfic' ),
+									'library' => 'image',
 								),
 							),
 						),

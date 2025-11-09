@@ -1,0 +1,26 @@
+.single-tf_carrental{
+    .tf-single-template{
+        &__one{
+            .tf-car-benefits{
+                width: 100%;
+                ul{
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    gap: 16px 8px;
+                    li{
+                        color: $color-text;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        width: calc(50% - 8px);
+                        @media #{$max768}{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

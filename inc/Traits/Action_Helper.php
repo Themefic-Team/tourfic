@@ -63,6 +63,16 @@ trait Action_Helper {
 			}
 		}
 
+		if ( is_post_type_archive( 'tf_room' ) ) {
+			$theme_files     = array( 'tourfic/room/archive-rooms.php' );
+			$exists_in_theme = locate_template( $theme_files, false );
+			if ( $exists_in_theme ) {
+				return $exists_in_theme;
+			} else {
+				return TF_TEMPLATE_PATH . 'room/archive-rooms.php';
+			}
+		}
+
 		return $template;
 	}
 
@@ -510,6 +520,23 @@ trait Action_Helper {
 				return $exists_in_theme;
 			} else {
 				return TF_TEMPLATE_PATH . "car/single-car.php";
+			}
+		}
+
+		/**
+		 * Room Single
+		 *
+		 * single-room.php
+		 */
+		if ( $post->post_type == 'tf_room' ) {
+
+			$theme_files     = array( 'tourfic/room/single-room.php' );
+			$exists_in_theme = locate_template( $theme_files, false );
+
+			if ( $exists_in_theme ) {
+				return $exists_in_theme;
+			} else {
+				return TF_TEMPLATE_PATH . "room/single-room.php";
 			}
 		}
 

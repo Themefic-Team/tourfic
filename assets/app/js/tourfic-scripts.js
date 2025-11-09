@@ -145,7 +145,7 @@
          * Ajax apartment booking
          * @author Foysal
          */
-        $(document).on('submit', 'form#tf-apartment-booking', function (e) {
+        $('body').on('submit', 'form#tf-apartment-booking', function (e) {
             e.preventDefault();
 
             var $this = $(this);
@@ -209,7 +209,7 @@
         * @since 2.9.7
         * @author Jahid
         */
-        $(document).on('submit', '#tf_apartment_booking', function (e) {
+        $('body').on('submit', '#tf_apartment_booking', function (e) {
             e.preventDefault();
             let form = $(this),
                 submitBtn = form.find('button[type="submit"]'),
@@ -251,7 +251,7 @@
         /*
         * Apartment room quick view
         * */
-        $(document).on('click', '.tf-apt-room-qv', function (e) {
+        $('body').on('click', '.tf-apt-room-qv', function (e) {
             e.preventDefault();
             $("#tour_room_details_loader").show();
             let post_id = $(this).data("post-id");
@@ -285,7 +285,7 @@
          * Design 1 Apartment Room Popup
          *
          */
-        $(document).on('click', '.tf-apt-room-qv-desgin-1', function (e) {
+        $('body').on('click', '.tf-apt-room-qv-desgin-1', function (e) {
 
             e.preventDefault();
             $("#tour_room_details_loader").show();
@@ -545,7 +545,7 @@
             ]
         });
 
-        $(document).on('click', '.tf-apartment-show-more', function (e) {
+        $('body').on('click', '.tf-apartment-show-more', function (e) {
             if ($(this).siblings('.tf-full-description')) {
                 $(this).siblings('.tf-full-description').show();
                 $(this).siblings('.tf-description').hide();
@@ -554,7 +554,7 @@
             }
         });
         
-        $(document).on('click', '.tf-apartment-show-less', function (e) {
+        $('body').on('click', '.tf-apartment-show-less', function (e) {
             if ($(this).siblings('.tf-full-description')) {
                 $(this).siblings('.tf-full-description').hide();
                 $(this).siblings('.tf-description').show();
@@ -917,7 +917,7 @@
 
         });
 
-        $(document).on('click touchstart', '.tf-booking-content-wraper .booking-next', function (e) {
+        $('body').on('click touchstart', '.tf-booking-content-wraper .booking-next', function (e) {
             e.preventDefault();
             let $this = $(this);
 
@@ -1018,7 +1018,7 @@
                 return true;
             }
         };
-        $(document).on('click touchstart', '.booking-process', function (e) {
+        $('body').on('click touchstart', '.booking-process', function (e) {
             
             if (e.type === 'touchstart') {
                 $(this).off('click');
@@ -1213,7 +1213,7 @@
         * Car Search submit
         * @author Jahid
         */
-        $(document).on('submit', '#tf_car_booking', function (e) {
+        $('body').on('submit', '#tf_car_booking', function (e) {
             e.preventDefault();
             let form = $(this),
                 submitBtn = form.find('button[type="submit"]'),
@@ -1546,7 +1546,7 @@
         * Car Archive View
         * @author Jahid
         */
-         $(document).on('click', '.tf-archive-header .tf-archive-view ul li', function (e) {
+         $('body').on('click', '.tf-archive-header .tf-archive-view ul li', function (e) {
             $('.tf-archive-header .tf-archive-view ul li').removeClass('active');
             let $this = $(this);
             $this.addClass('active');
@@ -1611,7 +1611,7 @@
         }
 
         // Back to Booking Form
-        $(document).on('click', '.tf-back-to-booking', function (e) {
+        $('body').on('click', '.tf-back-to-booking', function (e) {
             e.preventDefault(); 
             $('.tf-single-booking-bar').fadeOut();
             var bookingBarHeight = $('.tf-single-booking-bar').outerHeight() || 0;
@@ -1634,7 +1634,7 @@
         });
 
         // Instructions showing
-        $(document).on('click', '.tf-instraction-showing', function (e) {
+        $('body').on('click', '.tf-instraction-showing', function (e) {
             $('.tf-car-instraction-popup').css('display', 'flex');
         });   
 
@@ -1650,7 +1650,7 @@
         })
 
         // Showing Total into a protections
-        $(document).on('change', '.protection-checkbox', function (e) {
+        $('body').on('change', '.protection-checkbox', function (e) {
             let total_price = 0;
             let prev_total = parseFloat($("#tf_total_proteciton_price").val()) || 0; // Parse as float, default to 0 if empty
             let single_price = parseFloat($(this).parent().parent().find('#tf_single_protection_price').val()) || 0; // Parse as float
@@ -1854,7 +1854,7 @@ function convertTo24HourFormat(timeStr) {
         /**
          * Click to go back to hotel availability form
          */
-        $(document).on('click', '.hotel-room-availability', function (e) {
+        $('body').on('click', '.hotel-room-availability', function (e) {
             e.preventDefault();
             var offset = 200;
             if (window.innerWidth <= 768) {
@@ -2103,7 +2103,7 @@ function convertTo24HourFormat(timeStr) {
         * @since 2.9.7
         * @author Foysal
         */
-        $(document).on('submit', '#tf_hotel_aval_check', function (e) {
+        $('body').on('submit', '#tf_hotel_aval_check', function (e) {
             e.preventDefault();
             let form = $(this),
                 submitBtn = form.find('button[type="submit"]'),
@@ -2330,7 +2330,7 @@ function convertTo24HourFormat(timeStr) {
                 $(".tf-hotel-locations").removeClass('tf-locations-show');
             }, 100); 
         });
-        $(document).on('click', function (event) {
+        $('body').on('click', function (event) {
             if (!$(event.target).closest("#tf-destination-adv, #ui-id-1").length) {
                 $(".tf-hotel-locations").removeClass('tf-locations-show');
             }
@@ -2854,7 +2854,7 @@ function convertTo24HourFormat(timeStr) {
          *
          * adult, child, infant
          */
-        $(document).on('click', '.tf-single-tour-pricing .tf-price-tab li', function () {
+        $('body').on('click', '.tf-single-tour-pricing .tf-price-tab li', function () {
             var t = $(this).attr('id');
 
             $(this).addClass('active').siblings().removeClass('active');
@@ -2869,7 +2869,7 @@ function convertTo24HourFormat(timeStr) {
          *
          * adult, child, infant
          */
-        $(document).on('click', '.tf-trip-person-info ul li', function () {
+        $('body').on('click', '.tf-trip-person-info ul li', function () {
             var t = $(this).attr('data');
 
             $(this).addClass('active').siblings().removeClass('active');
@@ -2882,7 +2882,7 @@ function convertTo24HourFormat(timeStr) {
         * @since 2.9.7
         * @author Foysal
         */
-        $(document).on('submit', '#tf_tour_aval_check', function (e) {
+        $('body').on('submit', '#tf_tour_aval_check', function (e) {
             e.preventDefault();
             let form = $(this),
                 submitBtn = form.find('button[type="submit"]'),
@@ -3069,7 +3069,7 @@ function convertTo24HourFormat(timeStr) {
             }
 
              // Close when clicking outside
-             $(document).on('click', function (event) {
+             $('body').on('click', function (event) {
                 if (!$(event.target).closest("#tf-destination").length) {
                     $("#tf-destinationautocomplete-list").hide();
                 }
@@ -3357,7 +3357,7 @@ function convertTo24HourFormat(timeStr) {
             $('.tf-single-template__two .tf-mobile-booking-btn').slideUp(300);
         });
 
-        $(document).on('click touchstart', function (e) {
+        $('body').on('click touchstart', function (e) {
             if ($(window).width() <= 768) {
                 if (!$(e.target).closest('.tf-bottom-booking-bar, .tf-mobile-booking-btn, .flatpickr-calendar').length) {
                     $('.tf-bottom-booking-bar').removeClass('tf-mobile-booking-form');
@@ -3567,7 +3567,7 @@ function convertTo24HourFormat(timeStr) {
             $("#check-in-out-date").flatpickr(tour_date_options);
         }
 
-        $(document).on('click', "#tour-deposit > div > div.tf_button_group > button", function (e) {
+        $('body').on('click', "#tour-deposit > div > div.tf_button_group > button", function (e) {
             e.preventDefault();
             var form = $(document).find('form.tf_tours_booking');
             var has_deposit = $(this).data('deposit');
@@ -5615,7 +5615,7 @@ function convertTo24HourFormat(timeStr) {
         });
 
         // Navigation Next
-        $(document).on('click', '.tf-tabs-control', function (e) {
+        $('body').on('click', '.tf-tabs-control', function (e) {
             e.preventDefault();
             if (tf_hasErrorsFlag) {
                 return false;
@@ -5642,7 +5642,7 @@ function convertTo24HourFormat(timeStr) {
         });
 
         // Navigation Back
-        $(document).on('click', '.tf-step-back', function (e) {
+        $('body').on('click', '.tf-step-back', function (e) {
             e.preventDefault();
             
             let active_steps = $('.tf_popup_stpes').val();
@@ -5867,17 +5867,17 @@ function convertTo24HourFormat(timeStr) {
         * Custom modal
         * @author: Foysal
         */
-        $(document).on('click', '.tf-modal-btn', function (e) {
+        $('body').on('click', '.tf-modal-btn', function (e) {
             e.preventDefault();
             var dataTarget = $(this).attr('data-target');
             $(dataTarget).addClass('tf-modal-show');
             $('body').addClass('tf-modal-open');
         });
-        $(document).on("click", '.tf-modal-close', function () {
+        $('body').on("click", '.tf-modal-close', function () {
             $('.tf-modal').removeClass('tf-modal-show');
             $('body').removeClass('tf-modal-open');
         });
-        $(document).on("click", function (event) {
+        $('body').on("click", function (event) {
             if(!$('.tf-map-modal').length) {
                 if (!$(event.target).closest(".tf-modal-content,.tf-modal-btn").length) {
                     $("body").removeClass("tf-modal-open");
@@ -5890,7 +5890,7 @@ function convertTo24HourFormat(timeStr) {
          * Hotel Details Popup
          *
          */
-        $(document).on('click', '.tf-room-detail-qv', function (e) {
+        $('body').on('click', '.tf-room-detail-qv', function (e) {
             e.preventDefault();
             $("#tour_room_details_loader").show();
             var post_id = $(this).attr("data-hotel");
@@ -6135,13 +6135,13 @@ function convertTo24HourFormat(timeStr) {
         })
 
         $(document).on("mouseup", function (e) {
-            var container = $(".tf-single-template__two .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf_acrselection-wrap");
+            var container = $(".tf-single-template__two .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap");
             if (!container.is(e.target) && container.has(e.target).length === 0) {
-                $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room .tf_acrselection-wrap").removeClass("tf-show");
+                $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap").removeClass("tf-show");
             }
         });
-        $(".tf-single-template__two .tf-booking-form-guest-and-room, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room").on("click", function () {
-            $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
+        $(".tf-single-template__two .tf-booking-form-guest-and-room, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room, .tf-archive-template__one .tf-booking-adult-child-infant").on("click", function () {
+            $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap").addClass("tf-show");
         });
 
         $(".tf-single-template__two .tf-review-open").on("click", function () {
