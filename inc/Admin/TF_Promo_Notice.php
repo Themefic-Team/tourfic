@@ -32,7 +32,7 @@ class TF_Promo_Notice {
         'November',
         'December'
     ];
-    private $plugins_existes = ['ins', 'uacf7', 'beaf', 'ebef'];
+    private $plugins_existes = ['ins', 'uacf7', 'beaf', 'ebef', 'uawpf', 'hydra'];
 
     public function __construct() {   
         if(in_array(gmdate('F'), $this->months) && !function_exists('is_tf_pro') ){ 
@@ -92,6 +92,20 @@ class TF_Promo_Notice {
                 add_action( 'wp_ajax_tf_promo_notice_custom_post_meta_callback', array($this, 'tf_promo_notice_custom_post_meta_callback') );
             } 
 
+            $tf_widget_exists = get_option('tf_promo_widget_exists');
+            $dashboard_widget = isset($this->tf_promo_option['dashboard_widget']) ? $this->tf_promo_option['dashboard_widget'] : [];
+            if (
+                !in_array($tf_widget_exists, $this->plugins_existes) && 
+                isset($dashboard_widget['enable_status']) && 
+                $dashboard_widget['enable_status'] == true
+            ) {
+                // Mark that one Themefic widget already exists
+                update_option('tf_promo_widget_exists', 'tf');
+                
+                add_action('wp_dashboard_setup', [$this, 'register_dashboard_notice_widget']);
+                add_action('wp_ajax_tf_dashboard_widget_dismiss', [$this, 'tf_dashboard_widget_dismiss']);
+            }
+
 
             register_deactivation_hook( TF_PATH . 'tourfic.php', array($this, 'tf_promo_notice_deactivation_hook') );
         }
@@ -99,6 +113,227 @@ class TF_Promo_Notice {
         
        
     }
+
+
+    public function register_dashboard_notice_widget() {
+
+        $dashboard_banner = isset($this->tf_promo_option['dashboard_widget'])
+        ? $this->tf_promo_option['dashboard_widget']
+        : [];
+
+        $widget_title = !empty($dashboard_banner['title'])
+        ? esc_html($dashboard_banner['title'])
+        : __('Themefic Deals & Services', 'tourfic');
+
+
+		wp_add_dashboard_widget(
+			'tf_promo_dashboard_widget',
+			$widget_title,
+			[$this, 'render_dashboard_notice_widget'],
+            null, null, 'side', 'high'
+		);
+	}
+
+    public function render_dashboard_notice_widget() {
+        $dashboard_widget = isset($this->tf_promo_option['dashboard_widget']) ? $this->tf_promo_option['dashboard_widget'] : [];
+
+        if (empty($dashboard_widget) || empty($dashboard_widget['enable_status'])) {
+            echo '<p>' . esc_html__('No active widget promotion.', 'tourfic') . '</p>';
+            return;
+        }
+
+        $highlight = isset($dashboard_widget['highlight']) ? $dashboard_widget['highlight'] : [];
+        $links     = isset($dashboard_widget['links']) ? $dashboard_widget['links'] : [];
+        $footer    = isset($dashboard_widget['footer']) ? $dashboard_widget['footer'] : [];
+
+        ?>
+        <div class="tf-dashboard-widget" style="position:relative;">
+            <?php if (!empty($dashboard_widget['dismiss_status'])) : ?>
+                <button type="button" class="notice-dismiss tf-dashboard-dismiss" style="position:absolute; top:10px; right:10px;"></button>
+            <?php endif; ?>
+
+            <?php if (!empty($highlight)) : ?>
+                <div class="highlight">
+                    <?php if (!empty($highlight['before_image'])) : ?>
+                        <img class="before-img" src="<?php echo esc_url($highlight['before_image']); ?>" style="max-width:100%; height:auto;" alt="">
+                    <?php endif; ?>
+                    <div class="content">
+                        <?php if (!empty($highlight['title'])) : ?>
+                        <p style="font-weight:600; margin:5px 0;"><?php echo esc_html($highlight['title']); ?></p>
+                        <?php endif; ?>
+                        <?php if (!empty($highlight['button_text']) && !empty($highlight['button_url'])) : ?>
+                            <a href="<?php echo esc_url($highlight['button_url']); ?>" target="_blank" class="button button-primary"><?php echo esc_html($highlight['button_text']); ?></a>
+                        <?php endif; ?>
+                    </div>
+                     <?php if (!empty($highlight['after_image'])) : ?>
+                        <img class="after-img" src="<?php echo esc_url($highlight['after_image']); ?>" style="max-width:100%; height:auto;" alt="">
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($links)) : ?>
+                <ul>
+                    <?php foreach ($links as $link) : ?>
+                        <li>
+                            <a href="<?php echo esc_url($link['url']); ?>" target="_blank">
+                                <?php if (!empty($link['tag'])) echo ' <span class="new-tag">' . esc_html($link['tag']) . '</span>'; ?>
+                                <?php echo esc_html($link['text']); ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+
+            <?php if (!empty($footer)) : ?>
+                <div class="footer" style="display:flex; justify-content:space-between; margin-top:15px; font-size:13px;">
+                    <?php if (!empty($footer['left'])) : ?>
+                        <a href="<?php echo esc_url($footer['left']['url']); ?>" target="_blank"><?php echo esc_html($footer['left']['text']); ?>
+                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.5 0H6.66667V1.25H10.3667L5.39167 6.225L6.275 7.10833L11.25 2.13333V5.83333H12.5V0ZM1.66667 0.833333C1.22464 0.833333 0.800716 1.00893 0.488155 1.32149C0.175595 1.63405 0 2.05797 0 2.5V10.8333C0 11.2754 0.175595 11.6993 0.488155 12.0118C0.800716 12.3244 1.22464 12.5 1.66667 12.5H10C10.442 12.5 10.8659 12.3244 11.1785 12.0118C11.4911 11.6993 11.6667 11.2754 11.6667 10.8333V8.33333H10.4167V10.8333C10.4167 10.9438 10.3728 11.0498 10.2946 11.128C10.2165 11.2061 10.1105 11.25 10 11.25H1.66667C1.55616 11.25 1.45018 11.2061 1.37204 11.128C1.2939 11.0498 1.25 10.9438 1.25 10.8333V2.5C1.25 2.38949 1.2939 2.28351 1.37204 2.20537C1.45018 2.12723 1.55616 2.08333 1.66667 2.08333H4.16667V0.833333H1.66667Z" fill="#2271B1"/>
+                        </svg>
+                        </a>
+                    <?php endif; ?>
+                    <?php if (!empty($footer['right'])) : ?>
+                        <a href="<?php echo esc_url($footer['right']['url']); ?>" target="_blank"><?php echo esc_html($footer['right']['text']); ?>
+                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.5 0H6.66667V1.25H10.3667L5.39167 6.225L6.275 7.10833L11.25 2.13333V5.83333H12.5V0ZM1.66667 0.833333C1.22464 0.833333 0.800716 1.00893 0.488155 1.32149C0.175595 1.63405 0 2.05797 0 2.5V10.8333C0 11.2754 0.175595 11.6993 0.488155 12.0118C0.800716 12.3244 1.22464 12.5 1.66667 12.5H10C10.442 12.5 10.8659 12.3244 11.1785 12.0118C11.4911 11.6993 11.6667 11.2754 11.6667 10.8333V8.33333H10.4167V10.8333C10.4167 10.9438 10.3728 11.0498 10.2946 11.128C10.2165 11.2061 10.1105 11.25 10 11.25H1.66667C1.55616 11.25 1.45018 11.2061 1.37204 11.128C1.2939 11.0498 1.25 10.9438 1.25 10.8333V2.5C1.25 2.38949 1.2939 2.28351 1.37204 2.20537C1.45018 2.12723 1.55616 2.08333 1.66667 2.08333H4.16667V0.833333H1.66667Z" fill="#2271B1"/>
+                        </svg>
+                        </a>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <style>
+            .tf-dashboard-widget {
+                background: #fff;
+                border-radius: 4px;
+                padding: 0;
+                font-family: Arial, sans-serif;
+                font-size: 13px;
+                color: #23282d;
+            }
+
+            .tf-dashboard-widget .header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: #f8f9fa;
+                padding: 14px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .tf-dashboard-widget .highlight {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: #fff;
+                border-bottom:1px solid #ccd0d4; 
+                padding:12px 0px; 
+                margin-bottom:8px; 
+                text-align:left;
+                gap: 10px;
+                padding-top: 0px;
+            }
+
+            .tf-dashboard-widget .highlight .before-img {
+                width: 58px;
+                height: 58px;
+                flex : 0 0 58px;
+            }
+            .tf-dashboard-widget .highlight .after-img {
+                width: 100px;
+                height: 60px;
+            }
+            .tf-dashboard-widget .highlight .content {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                flex-direction: column;
+                flex: 1;
+                width: 100%;
+            }
+            .tf-dashboard-widget .highlight .content p{
+                color: #1D2327;
+                font-family: "Roboto", sans-serif;
+                font-size: 13px;
+                font-weight: 500;
+                line-height: 19.6px;
+            }
+            .tf-dashboard-widget .highlight .content .button{
+                height: 30px;
+                color: #FFF;
+                font-family: "Roboto", sans-serif;
+                font-size: 13px;
+                font-weight: 500;
+                border-radius: 3px;
+                background: #2271B1;
+            }
+
+            .tf-dashboard-widget ul li a {
+                color: #2271B1;
+                font-family: "Roboto", sans-serif;
+                font-size: 13px;
+                font-weight: 400;
+                line-height: 120%;
+            }
+
+            .tf-dashboard-widget .new-tag {
+                padding: 3px 6px;
+                border-radius: 3px;
+                background-color: #0A875A;
+                font-family: "Roboto", sans-serif;
+                font-size: 10.5px;
+                font-weight: 500;
+                line-height: 12.6px;
+                line-height: 12.6px;
+                color: #fff;
+                text-transform: uppercase;
+            }
+
+            .tf-dashboard-widget .footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-top: 1px solid #ddd;
+                padding: 10px 0px;
+                background: #fff;
+            }
+
+            .tf-dashboard-widget .footer a {
+                text-decoration: none;
+                font-weight: 500;
+                color: #2271B1;
+                font-family: "Roboto", sans-serif;
+                font-size: 13px;
+                font-weight: 400;
+                line-height: 15.6px;
+            }
+
+            .tf-dashboard-widget .footer a svg {
+                padding-left: 4px;
+            }
+
+        </style>
+
+        <script>
+        jQuery(document).ready(function($){
+            $(document).on('click', '.tf-dashboard-dismiss', function(){
+                $(this).closest('.tf-dashboard-widget').fadeOut(300);
+                $.post(ajaxurl, { action: 'ins_dashboard_widget_dismissed' });
+            });
+        });
+        </script>
+        <?php
+    }
+
+
+
+    public function tf_dashboard_widget_dismiss() {
+        // Dismiss control - 7 days
+		update_option('ins_dashboard_widget_dismissed', time() + (86400 * 7));
+		wp_die();
+	}
 
     public function tf_get_api_response(){
         $query_params = array(
@@ -553,6 +788,7 @@ class TF_Promo_Notice {
         delete_option('tf_room_promo_sidebar_notice');
         delete_option('tf_promo__schudle_start_from');
         delete_option('tf_promo_notice_exists');
+        delete_option('tf_promo_widget_exists');
     }
  
 }

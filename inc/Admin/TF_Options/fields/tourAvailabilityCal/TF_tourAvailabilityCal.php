@@ -317,6 +317,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         </div>
                                     </div>
 
+                                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) { ?>
                                     <div class="tf-field tf-field-repeater" style="width:100%; display: <?php echo esc_attr( $pricing_type == 'person' || $pricing_type == 'group' ? 'block' : 'none' ) ?>;">
                                         <div class="tf-fieldset">
                                             <div id="tf-repeater-1" class="tf-repeater allowed_time" data-max-index="0">
@@ -369,6 +370,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                             </div>
                                         </div>
                                     </div>
+                                    <?php } ?>
 
                                     <div class="tf-field-select" style="width: 100%">
                                         <label class="tf-field-label"><?php echo esc_html__( 'Booking status', 'tourfic' ); ?></label>
