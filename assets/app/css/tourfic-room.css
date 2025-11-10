@@ -1473,6 +1473,17 @@
 .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-search-field svg path {
   stroke: #ffffff;
 }
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-search-field .tf-guest,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-search-field .tf-guest {
+  color: #ffffff;
+  background: transparent;
+  border: 0;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  padding: 0;
+  flex: 1;
+  text-align: center;
+}
 .post-type-archive-tf_room .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-submit-button button,
 .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-submit-button button {
   min-width: 267px;
@@ -1570,11 +1581,68 @@
   background-color: var(--tf-filling-foreground);
   padding: 48px 0;
 }
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header,
+.page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header {
+  margin-bottom: 48px;
+}
 .post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-total-result-bar h3,
 .page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-total-result-bar h3 {
   color: var(--tf-text-heading);
   font-size: 1.563rem;
   font-weight: 400;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-archive-filter-btn,
+.page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-archive-filter-btn {
+  padding: 8px 24px;
+  color: var(--tf-primary);
+  border-radius: 32px;
+  border: 1px solid var(--tf-primary);
+  background-color: var(--tf-brand-lite);
+  backdrop-filter: blur(16px);
+  font-size: 1.25rem;
+  font-weight: 600;
+  height: 48px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  cursor: pointer;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-archive-filter-btn i,
+.page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-archive-filter-btn i {
+  margin-right: 8px;
+  font-weight: 400;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-archive-filter-btn:hover,
+.page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-archive-filter-btn:hover {
+  background: var(--tf-brand-lite);
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header form.tf-archive-ordering,
+.page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header form.tf-archive-ordering {
+  position: relative;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header form.tf-archive-ordering select,
+.page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header form.tf-archive-ordering select {
+  -webkit-appearance: none;
+  appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header form.tf-archive-ordering i,
+.page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header form.tf-archive-ordering i {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: var(--tf-primary);
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,

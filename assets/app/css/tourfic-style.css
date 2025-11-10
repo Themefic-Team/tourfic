@@ -11626,6 +11626,7 @@ div#tf-destinationautocomplete-list div:before {
   background-color: var(--tf-filling-background);
   cursor: pointer;
   height: 50px;
+  background-image: none;
 }
 @media only screen and (max-width: 575.98px) {
   .tf-archive-listing__one .tf-archive-head .tf-search-layout .tf-sorting-selection-warper form select,

@@ -6098,7 +6098,7 @@ function convertTo24HourFormat(timeStr) {
             $('.tf-short-description').slideDown();
         });
 
-        $('.tf-single-template__two .acr-inc, .tf-archive-booking-form__style-2 .acr-inc, .tf-single-template__two .acr-dec, .tf-archive-booking-form__style-2 .acr-dec').on('click', function () {
+        $('.tf-single-template__two .acr-inc, .tf-archive-booking-form__style-2 .acr-inc, .tf-single-template__two .acr-dec, .tf-archive-booking-form__style-2 .acr-dec, .tf-archive-template__one .acr-inc, .tf-archive-template__one .acr-dec').on('click', function () {
 
             if ($('input#infant').length) {
                 var guest = Number($('input#adults').val() ? $('input#adults').val() : 0) + Number($('input#children').val() ? $('input#children').val() : 0) + Number($('input#infant').val() ? $('input#infant').val() : 0);

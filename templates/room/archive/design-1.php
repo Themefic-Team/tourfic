@@ -1,6 +1,7 @@
 <?php
 
 use \Tourfic\Classes\Helper;
+use Tourfic\Classes\Room\Room;
 
 $tf_room_arc_banner = ! empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar']) ?  Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar'] : '';
 $tf_room_arc_banner = !empty($tf_room_arc_banner) ? $tf_room_arc_banner : TF_ASSETS_APP_URL . '/images/room-hero-banner.png';
@@ -18,57 +19,51 @@ $tf_room_arc_banner = !empty($tf_room_arc_banner) ? $tf_room_arc_banner : TF_ASS
     </div>
     <div class="tf-archive-room-details">
         <div class="tf-container">
-            <div class="tf-container-inner">
-                <div class="tf-archive-room-details-warper">
-                    <div class="tf-archive-header tf-flex tf-flex-space-bttn tf-flex-align-center tf-mb-30">
-                        <?php
-                        $post_count = $GLOBALS['wp_query']->post_count;
-                        ?>
-                        <div class="tf-total-result-bar">
-                            <h3>
-                                <span>
-                                    <?php echo esc_html__('Total ', 'tourfic'); ?>
-                                </span>
-                                <div class="tf-total-results">
-                                    <span><?php echo esc_html($post_count) . esc_html__(' room type available ', 'tourfic'); ?> </span>
-                                </div>
-                            </h3>
-                        </div>
-                        <div class="tf-archive-filter">
-                            
-                        </div>
-                    </div>
-                    <div class="tf-room-details-column tf-flex tf-flex-gap-32">
-                        <div class="tf-room-archive-result">
-                            <?php do_action("tf_room_archive_roomd_items_before"); ?>
-                            <div class="tf-room-result archive_ajax_result tf-flex tf-flex-gap-32 <?php echo $tf_defult_views == "list" ? esc_attr('list-view') : esc_attr('grid-view'); ?>">
-
-                                <?php
-                                if (have_posts()) {
-                                    while (have_posts()) {
-                                        the_post();
-                                        $room_meta = get_post_meta(get_the_ID(), 'tf_roomrental_opt', true);
-                                        if (!empty($room_meta["room_as_featured"]) && $room_meta["room_as_featured"] == 1) {
-                                            tf_car_archive_single_item();
-                                        }
-                                    }
-                                    while (have_posts()) {
-                                        the_post();
-                                        $room_meta = get_post_meta(get_the_ID(), 'tf_roomrental_opt', true);
-                                        if (empty($room_meta["room_as_featured"])) {
-                                            tf_car_archive_single_item();
-                                        }
-                                    }
-                                } else {
-                                    echo '<div class="tf-nothing-found" data-post-count="0" >' . esc_html__("No Tours Found!", "tourfic") . '</div>';
-                                }
-                                ?>
-
-                            </div>
-                            <?php do_action("tf_room_archive_roomd_items_after"); ?>
-                        </div>
+            <div class="tf-archive-header tf-flex tf-flex-space-bttn tf-flex-align-center">
+                <?php $post_count = $GLOBALS['wp_query']->post_count; ?>
+                <h3 class="tf-total-results">
+                    <?php 
+                    /* translators: %s: number of rooms */ 
+                    printf( esc_html__( 'Total %s rooms available', 'tourfic' ), '<span>' . esc_html( $post_count ) . '</span>' ); 
+                    ?>
+                </h3>
+                <div class="tf-archive-header-right tf-flex tf-flex-space-bttn tf-flex-align-center tf-flex-gap-16">
+                    <form class="tf-archive-ordering" method="get">
+                        <select class="tf-orderby tf-archive-filter-btn" name="tf-orderby" id="tf-orderby">
+                            <option value="default"><?php echo esc_html__( 'Default Sorting', 'tourfic' ); ?></option>
+                            <option value="enquiry"><?php echo esc_html__( 'Sort By Recommended', 'tourfic' ); ?></option>
+                            <option value="order"><?php echo esc_html__( 'Sort By Popularity', 'tourfic' ); ?></option>
+                            <option value="rating"><?php echo esc_html__( 'Sort By Average Rating', 'tourfic' ); ?></option>
+                            <option value="latest"><?php echo esc_html__( 'Sort By Latest', 'tourfic' ); ?></option>
+                            <option value="price-high"><?php echo esc_html__( 'Sort By Price: High to Low', 'tourfic' ); ?></option>
+                            <option value="price-low"><?php echo esc_html__( 'Sort By Price: Low to High', 'tourfic' ); ?></option>
+                        </select>
+                        <i class="fas fa-chevron-down"></i>
+                    </form>
+                    <div class="tf-archive-filter-btn">
+                        <i class="ri-equalizer-line"></i>
+                        <span><?php esc_html_e("All Filter", "tourfic"); ?></span>
                     </div>
                 </div>
+            </div>
+
+            <div class="tf-room-archive-result">
+                <?php do_action("tf_room_archive_roomd_items_before"); ?>
+                <div class="tf-room-result archive_ajax_result">
+
+                    <?php
+                    if (have_posts()) {
+                        while (have_posts()) {
+                            the_post();
+                            Room::tf_room_archive_single_item();
+                        }
+                    } else {
+                        echo '<div class="tf-nothing-found" data-post-count="0" >' . esc_html__("No Rooms Found!", "tourfic") . '</div>';
+                    }
+                    ?>
+
+                </div>
+                <?php do_action("tf_room_archive_roomd_items_after"); ?>
             </div>
         </div>
    </div>

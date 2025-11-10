@@ -2792,7 +2792,7 @@ class Helper {
                             </label>
                             <div class="tf_acrselection tf-search-field tf-booking-adult-child-infant">
                                 <div class="acr-select">
-                                    <input type="tel" name="guests" id="guests" min="1" value="1" readonly="">
+                                    <span class="tf-guest"><?php esc_html_e( "1", "tourfic" ); ?></span>
                                     <div class="tf-archive-guest-info">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M5 7.5L10 12.5L15 7.5" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

@@ -830,6 +830,7 @@
                             background-color: $color-filling-bg;
                             cursor: pointer;
                             height: 50px;
+                            background-image: none;
                             @media #{$max575}{
                                 height: auto;
                                 padding: 8px;

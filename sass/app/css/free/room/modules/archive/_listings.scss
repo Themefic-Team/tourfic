@@ -1,0 +1,69 @@
+.post-type-archive-tf_room,
+.page-template-tf-search{
+    .tf-archive-template{
+        &__one{
+            .tf-archive-room-details{
+                background-color: $color-filling-fg;
+                padding: 48px 0;
+
+                .tf-archive-header{
+                    margin-bottom: 48px;
+                    
+                    .tf-total-result-bar{
+                        h3{
+                            color: $color-heading;
+                            font-size: 1.563rem;
+                            font-weight: 400;
+                        }
+                    }
+
+                    .tf-archive-filter-btn {
+                        padding: 8px 24px;
+                        color: $color-primary;
+                        border-radius: 32px;
+                        border: 1px solid $color-primary;
+                        background-color: $color-brand-lite;
+                        backdrop-filter: blur(16px);
+                        font-size: 1.25rem;
+                        font-weight: 600;
+                        height: 48px;
+                        @include flexbox();
+                        align-items: center;
+                        justify-content: center;
+                        text-align: left;
+                        cursor: pointer;
+                        @include transition();
+
+                        i {
+                            margin-right: 8px;
+                            font-weight: 400;
+                        }
+
+                        &:hover {
+                            background: $color-brand-lite;
+                        }
+                    }
+
+                    form.tf-archive-ordering{
+                        position: relative;
+
+                        select {
+                            -webkit-appearance: none;
+                            appearance: none;
+                            -moz-appearance: none;
+                            background-image: none;
+                        }
+                        i{
+                            position: absolute;
+                            top: 50%;
+                            right: 12px;
+                            transform: translateY(-50%);
+                            color: $color-primary;
+                        }
+                    }
+                }
+            }
+           
+        }
+    }
+}
