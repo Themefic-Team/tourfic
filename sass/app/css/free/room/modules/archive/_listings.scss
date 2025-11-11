@@ -8,7 +8,7 @@
 
                 .tf-archive-header{
                     margin-bottom: 48px;
-                    
+
                     .tf-total-result-bar{
                         h3{
                             color: $color-heading;
@@ -24,7 +24,7 @@
                         border: 1px solid $color-primary;
                         background-color: $color-brand-lite;
                         backdrop-filter: blur(16px);
-                        font-size: 1.25rem;
+                        font-size: 1rem;
                         font-weight: 600;
                         height: 48px;
                         @include flexbox();
@@ -60,6 +60,219 @@
                             transform: translateY(-50%);
                             color: $color-primary;
                         }
+                    }
+                }
+
+                .tf-room-item-cards{
+                    flex-direction: column;
+                    gap: 48px;
+                }
+
+                .tf-room-item-card{
+                    @include flexbox();
+                    background-color: #fff;
+
+                    &-left{
+                        @include flex(0 0 490px);
+                    }
+                    &-right{
+                        @include flex(0 0 calc(100% - 490px));
+                        padding: 32px;
+                    }
+
+                    .tf-room-gallery{
+                        position: relative;
+
+                        .tf-room-ratings {
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            @include flexbox();
+                            @include align-items(center);
+                            gap: 8px;
+                            background: $color-filling-bg;
+                            padding: 6px 16px;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            line-height: 1.5;
+                            color: $color-text;
+                            i {
+                                color: #E29A00;
+                            }
+                        }
+                    }
+                    .tf-room-thumb{
+                        img{
+                            height: 280px;
+                            width: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                    .tf-room-left-card-content{
+                        padding: 24px;
+                        @include flexbox();
+                        @include flex-direction(column);
+                        gap: 16px;
+
+                        h2{
+                            margin: 0;
+                            font-size: 2rem;
+                            line-height: 1.4;
+
+                            a{
+                                color: $color-heading;
+
+                                &:hover{
+                                    color: $color-primary;
+                                }
+                            }
+                        }
+
+                        .tf-details{
+                            p{
+                                margin: 0;
+                                color: $color-text;
+                                font-size: 1rem;
+                                line-height: 1.5;
+                            }
+                        }
+
+                        .tf-room-details-url{
+                            color: $color-primary;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            line-height: 1.5;
+
+                            &:hover{
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                    .tf-room-option{
+                        @include flexbox();
+                        @include justify-content(space-between);
+                        gap: 16px;
+                        margin-bottom: 24px;
+                        padding-bottom: 24px;
+                        border-bottom: 1px solid $color-border-lite;
+
+                        &-right{
+                            @include flexbox();
+                            @include flex-direction(column);
+                            @include justify-content(space-between);
+                            @include align-items(flex-end);
+                            @include flex(0 0 200px);
+                            text-align: right;
+                        }
+
+                        &:last-child{
+                            border-bottom: none;
+                            margin-bottom: 0;
+                            padding-bottom: 0;
+                        }
+
+                        h3{
+                            color: $color-heading;
+                            font-size: 1.563rem;
+                            font-weight: 400;
+                            line-height: 1.4;
+                            margin: 0 0 18px 0;
+                        }
+
+                        ul.tf-room-features{
+                            list-style: none;
+                            @include flexbox();
+                            @include flex-wrap();
+                            gap: 12px 32px;
+                            padding: 0;
+                            margin: 0;
+
+                            li{
+                                @include flexbox();
+                                gap: 8px;
+                                color: $color-text;
+                                font-size: 1rem;
+                                line-height: 1.5;
+
+                                i{
+                                    color: $color-border;
+                                }
+                            }
+                        }
+
+                        .tf-room-off {
+                            padding: 6px 16px;
+                            background: #C5FBD9;
+                            font-size: 0.813rem;
+                            font-weight: 600;
+                            color: #126832;
+                            margin-bottom: 8px;
+                            margin-left: auto;
+                            width: fit-content;
+                            border-radius: 30px;
+                        }
+
+                        .tf-room-price{
+                            color: $color-heading;
+                            text-align: right;
+                            font-size: 1.12rem;
+                            font-weight: 400;
+                            line-height: 1.5;
+                            margin-bottom: 24px;
+
+                            .sale-price .amount{
+                                font-size: 1.25rem;
+                                font-weight: 700;
+                            }
+                        }
+                    }
+                }
+
+                .tf-pagination-bar{
+                    display: block;
+                    width: 100%;
+
+                    .tf_posts_navigation,
+                    #tf_posts_navigation_bar{
+                        width: 100%;
+                        display: flex;
+                        gap: 10px;
+                        
+                        .page-numbers {
+                            font-size: 0.875rem;
+                            color: $color-primary;
+                            text-decoration: none;
+                            padding: 8px 16px;
+                            background: $color-white;
+                            box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+                            border-radius: 5px;
+                            display: inline-block;
+                            border: 1px solid $color-border-lite;
+                        }
+                        .page-numbers.current{
+                            background: $color-primary;
+                            color: $color-white;
+                            border-color: $color-white;
+                        }
+                    }
+                }
+                .tf_posts_navigation.tf_posts_ajax_navigation,
+                .tf_posts_navigation.tf_posts_page_navigation{
+                    width: 100%;
+
+                    .page-numbers {
+                        font-size: 0.875rem;
+                        color: $color-primary;
+                        text-decoration: none;
+                        padding: 12px 18px;
+                        background: $color-white;
+                        box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+                        border-radius: 5px;
+                        display: inline-block;
+                    }
+                    .page-numbers.current{
+                        background: $color-primary;
+                        color: $color-white;
                     }
                 }
             }

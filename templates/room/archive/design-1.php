@@ -49,7 +49,7 @@ $tf_room_arc_banner = !empty($tf_room_arc_banner) ? $tf_room_arc_banner : TF_ASS
 
             <div class="tf-room-archive-result">
                 <?php do_action("tf_room_archive_roomd_items_before"); ?>
-                <div class="tf-room-result archive_ajax_result">
+                <div class="tf-room-item-cards tf-flex tf-room-result archive_ajax_result">
 
                     <?php
                     if (have_posts()) {
@@ -62,6 +62,9 @@ $tf_room_arc_banner = !empty($tf_room_arc_banner) ? $tf_room_arc_banner : TF_ASS
                     }
                     ?>
 
+                    <div class="tf-pagination-bar">
+                        <?php Helper::tourfic_posts_navigation(); ?>
+                    </div>
                 </div>
                 <?php do_action("tf_room_archive_roomd_items_after"); ?>
             </div>
