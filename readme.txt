@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.18.4
+Stable tag: 2.18.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -405,6 +405,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.18.5 – November 16, 2025 =
+
+- Fixed: Shortcode error has been resolved.
+- Improved: System stability and performance.
+
 = 2.18.4 – November 09, 2025 =
 
 - Fixed: Tour deposit issue resolved.
@@ -412,12 +417,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Settings reset issue resolved.
 - Updated: Information in readme.txt file.
 - Improved: System stability and performance.
-
-= 2.18.3 – October 27, 2025 =
-
-- Fixed: Import/export functionality issue.
-- Fixed: Tourfic resolved the availability issue.
-- Improved: Reset pop-up design for better user experience.
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 

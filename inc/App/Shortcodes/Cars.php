@@ -5,6 +5,7 @@ namespace Tourfic\App\Shortcodes;
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\App\TF_Review;
+use \Tourfic\Classes\Helper;
 
 class Cars extends \Tourfic\Core\Shortcodes {
 
@@ -25,6 +26,11 @@ class Cars extends \Tourfic\Core\Shortcodes {
 				$atts
 			)
 		);
+
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		if (in_array('carrentals', $tf_disable_services)){
+			return;
+		}
 
 		$args = array(
 			'post_type'      => 'tf_carrental',

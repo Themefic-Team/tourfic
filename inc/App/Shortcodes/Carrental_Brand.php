@@ -4,6 +4,7 @@ namespace Tourfic\App\Shortcodes;
 
 defined( 'ABSPATH' ) || exit;
 
+use \Tourfic\Classes\Helper;
 class Carrental_Brand extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
@@ -26,6 +27,11 @@ class Carrental_Brand extends \Tourfic\Core\Shortcodes {
 			)
 		);
 
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		if (in_array('carrentals', $tf_disable_services)){
+			return;
+		}
+		
 		$brands = get_terms( array(
 			'taxonomy'     => 'carrental_brand',
 			'orderby'      => $orderby,
