@@ -5,6 +5,7 @@ namespace Tourfic\App\Shortcodes;
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\App\TF_Review;
+use \Tourfic\Classes\Helper;
 
 class Tour_External_Listings extends \Tourfic\Core\Shortcodes {
 
@@ -25,6 +26,11 @@ class Tour_External_Listings extends \Tourfic\Core\Shortcodes {
 				$atts
 			)
 		);
+
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		if (in_array('tour', $tf_disable_services)){
+			return;
+		}
 
 		$external_post_ids = $this->tf_get_external_post_ids('tour', $locations);
 

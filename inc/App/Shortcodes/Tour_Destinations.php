@@ -27,6 +27,11 @@ class Tour_Destinations extends \Tourfic\Core\Shortcodes {
 			)
 		);
 
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		if (in_array('tour', $tf_disable_services)){
+			return;
+		}
+		
 		// 1st search on Destination taxonomy
 		$destinations = get_terms( array(
 			'taxonomy'     => 'tour_destination',
