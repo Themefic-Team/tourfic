@@ -27,8 +27,7 @@ defined( 'ABSPATH' ) || exit;
 
 					
 				$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
-				$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
-				$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+
 				$tf_package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
 				$tf_max_people = [];
@@ -48,17 +47,7 @@ defined( 'ABSPATH' ) || exit;
 							} 
 						}
 		
-						if($data['pricing_type'] == 'group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
-							if(!empty($data['options_count'])){
-								for($i = 0; $i < $data['options_count']; $i++){
-									if (!empty($data['tf_option_max_person_'.$i])) {
-										$tf_max_people [] = $data['tf_option_max_person_'.$i];
-									}
-								}
-							}
-						}
-		
-						if($data['pricing_type'] == 'group' && (empty($allow_package_pricing) || empty($group_package_pricing)) ){
+						if($data['pricing_type'] == 'group'){
 							if (!empty($data['max_person'])) {
 								$tf_max_people [] = $data['max_person'];
 							} 

@@ -917,7 +917,6 @@ class TF_Options {
 		$tf_tour_infant_price = isset( $_POST['tf_tour_infant_price'] ) && ! empty( $_POST['tf_tour_infant_price'] ) ? sanitize_text_field( $_POST['tf_tour_infant_price'] ) : '';
 		$tour_availability    = isset( $_POST['tour_availability'] ) && ! empty( $_POST['tour_availability'] ) ? sanitize_text_field( $_POST['tour_availability'] ) : '';
 		$options_count       = isset( $_POST['options_count'] ) && ! empty( $_POST['options_count'] ) ? sanitize_text_field( $_POST['options_count'] ) : '';
-		$group_options_count       = isset( $_POST['group_options_count'] ) && ! empty( $_POST['group_options_count'] ) ? sanitize_text_field( $_POST['group_options_count'] ) : '';
 
 		$tf_tour_min_person	 = isset( $_POST['tf_tour_min_person'] ) && ! empty( $_POST['tf_tour_min_person'] ) ? sanitize_text_field( $_POST['tf_tour_min_person'] ) : '';
 		$tf_tour_max_person	 = isset( $_POST['tf_tour_max_person'] ) && ! empty( $_POST['tf_tour_max_person'] ) ? sanitize_text_field( $_POST['tf_tour_max_person'] ) : '';
@@ -955,8 +954,7 @@ class TF_Options {
 		}
 
 		$meta = get_post_meta( $tour_id, 'tf_tours_opt', true );
-		$group_package_option = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
-		$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+
 		$package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
 		$check_in  = strtotime( $this->tf_convert_date_format( $check_in, $date_format ) );
@@ -1317,7 +1315,7 @@ class TF_Options {
 						$time_string = 'Time: '.$active_time;
 					}
 				}
-				if ( $item['pricing_type'] == 'group' && (empty($group_package_option) || empty($group_package_pricing)) ) {
+				if ( $item['pricing_type'] == 'group' ) {
 					$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) . '<br>'. $time_string;
 				} elseif ( $item['pricing_type'] == 'person' ) {
 					$item['title'] = __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] ). '<br>' . __( 'Infant: ', 'tourfic' ) . wc_price( $item['infant_price'] ). '<br>'. $time_string;
@@ -1343,17 +1341,6 @@ class TF_Options {
                             }
 						}
 					}
-				} elseif ( $item['pricing_type'] == 'group' && !empty($group_package_option) && !empty($group_package_pricing) ) {
-					$item['title'] = '';
-					if ( ! empty( $item['options_count'] ) ) {
-						for ( $i = 0; $i <= $item['options_count'] - 1; $i ++ ) {
-							if( !empty($item['tf_option_title_'.$i]) && !empty($item['tf_option_group_price_'.$i]) ){
-								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
-								$item['title'] .= __( 'Price: ', 'tourfic' ) . wc_price($item['tf_option_group_price_'.$i]). '<br><br>';
-							}
-						}
-					}
-					$item['title'] .=  $time_string;
 				}
 
 				if(!empty($item['title'])){
@@ -1690,47 +1677,6 @@ class TF_Options {
 			</div> <!-- .tf-repeater -->
        <?php }
 		$options_html .= ob_get_clean();
-
-		if($pricing_by == 'group' && !empty($group_package_option) && !empty($group_package_pricing)){
-            foreach ( $group_option_arr as $key => $item ) {
-                ob_start();
-				if(empty($item)){
-					continue;
-				}
-                ?>
-				<div class="tf-single-option tf-single-package">
-					<div class="tf-field-switch">
-						<label for="tf_package_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-field-label"><?php echo esc_html( $item['title'] ); ?></label>
-					</div>
-					<div class="tf-form-fields">
-						<div class="tf-field-text tf_option_pricing_type_group">
-							<label class="tf-field-label"><?php echo esc_html__( 'Minimum Person', 'tourfic' ); ?></label>
-							<div class="tf-fieldset">
-								<input type="number" min="0" name="tf_option_min_person_<?php echo esc_attr( $item['index'] ); ?>" />
-							</div>
-						</div>
-						<div class="tf-field-text tf_option_pricing_type_group">
-							<label class="tf-field-label"><?php echo esc_html__( 'Maximum Person', 'tourfic' ); ?></label>
-							<div class="tf-fieldset">
-								<input type="number" min="0" name="tf_option_max_person_<?php echo esc_attr( $item['index'] ); ?>" />
-							</div>
-						</div>
-						<div class="tf-field-text tf_option_pricing_type_group">
-							<label class="tf-field-label"><?php echo esc_html__( 'Group Price', 'tourfic' ); ?></label>
-							<div class="tf-fieldset">
-								<input type="number" min="0" name="tf_option_group_price_<?php echo esc_attr( $item['index'] ); ?>" />
-							</div>
-						</div>
-					</div>
-					<input type="hidden" name="tf_option_title_<?php echo esc_attr( $item['index'] ); ?>" value="<?php echo esc_attr($item['title']); ?>"/>
-					<input type="hidden" name="tf_option_pricing_type_<?php echo esc_attr( $item['index'] ); ?>" value="group"/>
-				</div>
-
-          
-                <?php
-                $options_html .= ob_get_clean();
-            }
-        }
 
 		echo wp_json_encode( array(
 			'avail_data'   => $tour_availability_data,

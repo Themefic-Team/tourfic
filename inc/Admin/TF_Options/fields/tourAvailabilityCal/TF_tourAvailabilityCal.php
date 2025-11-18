@@ -20,8 +20,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
 			$meta         = get_post_meta( $post->ID, 'tf_tours_opt', true );
 			$pricing_type = ! empty( $meta['pricing'] ) ? $meta['pricing'] : 'person';
             $tour_package_options = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : [];
-            $group_package_option = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
-            $group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+
             $tour_avail_type = ! empty( $meta['type'] ) ? $meta['type'] : 'continuous';
 			if ( Helper::tf_is_woo_active() ) {
 				?>
