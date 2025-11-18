@@ -787,7 +787,7 @@ class TF_Options {
 		}
 
 		if ( $new_post != 'true' ) {
-			$apt_availability = json_decode( $apartment_meta['apt_availability'], true );
+			$apt_availability = !empty($apartment_meta['apt_availability']) ? json_decode( $apartment_meta['apt_availability'], true ) : [];
 
 			if ( isset( $apt_availability ) && ! empty( $apt_availability ) ) {
 				$apt_availability_data = array_merge( $apt_availability, $apt_availability_data );
