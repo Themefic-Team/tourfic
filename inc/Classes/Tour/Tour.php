@@ -2870,24 +2870,10 @@ class Tour {
 									<?php
 									//get the lowest price from all available room price
 									$tf_tour_min_price      = ! empty( $tour_price ) ? min( $tour_price ) : 0;
-									$tf_tour_full_price     = ! empty( $tour_price ) ? min( $tour_price ) : 0;
-									$tf_tour_discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
-									$tf_tour_discount_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : 0;
-									if ( ! empty( $tf_tour_discount_type ) && ! empty( $tf_tour_min_price ) && ! empty( $tf_tour_discount_price ) ) {
-
-										if ( $tf_tour_discount_type == "percent" ) {
-											$tf_tour_min_discount = ( $tf_tour_min_price * $tf_tour_discount_price ) / 100;
-											$tf_tour_min_price    = (int) $tf_tour_min_price - $tf_tour_min_discount;
-										}
-										if ( $tf_tour_discount_type == "fixed" ) {
-											$tf_tour_min_discount = $tf_tour_discount_price;
-											$tf_tour_min_price    = $tf_tour_min_price - $tf_tour_discount_price;
-										}
-									}
 									$lowest_price = wc_price( $tf_tour_min_price );
 									echo esc_html__( "From ", "tourfic" ) . wp_kses_post( $lowest_price ) . " ";
-									if ( ! empty( $tf_tour_min_discount ) ) {
-										echo "<del>" . wp_kses_post( wc_price( $tf_tour_full_price ) ) . "</del>";
+									if ( ! empty( $min_sale_price ) ) {
+										echo "<del>" . wp_kses_post( wc_price( $min_sale_price ) ) . "</del>";
 									}
 									?>
 									</span>
@@ -2959,24 +2945,10 @@ class Tour {
 								<?php
 								//get the lowest price from all available room price
 								$tf_tour_min_price      = ! empty( $tour_price ) ? min( $tour_price ) : 0;
-								$tf_tour_full_price     = ! empty( $tour_price ) ? min( $tour_price ) : 0;
-								$tf_tour_discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
-								$tf_tour_discount_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : 0;
-								if ( !empty($allow_discount) && ! empty( $tf_tour_discount_type ) && ! empty( $tf_tour_min_price ) && ! empty( $tf_tour_discount_price ) ) {
-
-									if ( $tf_tour_discount_type == "percent" ) {
-										$tf_tour_min_discount = ( $tf_tour_min_price * $tf_tour_discount_price ) / 100;
-										$tf_tour_min_price    = (int) $tf_tour_min_price - $tf_tour_min_discount;
-									}
-									if ( $tf_tour_discount_type == "fixed" ) {
-										$tf_tour_min_discount = $tf_tour_discount_price;
-										$tf_tour_min_price    = $tf_tour_min_price - $tf_tour_discount_price;
-									}
-								}
 								$lowest_price = wc_price( $tf_tour_min_price );
 
-								if ( ! empty( $tf_tour_min_discount ) ) {
-									echo esc_html__( "From ", "tourfic" ) . " " . "<del>" . wp_kses_post( wp_strip_all_tags( wc_price( $tf_tour_full_price ) ) ) . "</del>" . " " . wp_kses_post( $lowest_price );
+								if ( ! empty( $min_sale_price ) ) {
+									echo esc_html__( "From ", "tourfic" ) . " " . "<del>" . wp_kses_post( wp_strip_all_tags( wc_price( $min_sale_price ) ) ) . "</del>" . " " . wp_kses_post( $lowest_price );
 								} else {
 									echo esc_html__( "From ", "tourfic" ) . wp_kses_post( $lowest_price ) . " ";
 								}
