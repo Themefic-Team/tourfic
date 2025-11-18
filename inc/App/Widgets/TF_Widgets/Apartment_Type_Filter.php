@@ -41,7 +41,7 @@ class Apartment_Type_Filter extends \WP_Widget {
 	public function widget( $args, $instance ) {
 
 		//check if is Apartment
-		$posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+		$posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type();
 
 		if ( is_admin() || $posttype == 'tf_apartment' ) {
 			extract( $args );
@@ -63,7 +63,8 @@ class Apartment_Type_Filter extends \WP_Widget {
 
 			$get_terms = get_terms( $taxonomy );
 
-			$search_types_query = !empty($_GET['types']) ? $_GET['types'] : array();
+			$search_types_query = !empty($_GET['types']) ? wp_unslash( $_GET['types'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			
 			echo "<div class='tf-filter'><ul>";
 			foreach ( $get_terms as $key => $term ) {
 				$id = $term->term_id;

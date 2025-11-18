@@ -9,7 +9,7 @@
                 background: $color-blue-light;
                 padding: 8px;
                 position: relative;
-                top: -60px;
+                top: -90px;
 
                 .tf-date-select-box{
                     padding: 8px;
@@ -45,7 +45,13 @@
                             }
                             .tf-flex{
                                 flex-wrap: nowrap;
-                              
+                            }
+                            .icon{
+                                svg{
+                                    path{
+                                        stroke: $color-text;
+                                    }
+                                }
                             }
                             .info-select{
                                 width: 100%;
@@ -168,7 +174,7 @@
                             list-style: none;
                             display: flex;
                             flex-wrap: wrap;
-                            gap: 0px 32px;
+                            gap: 5px 32px;
                             li{
                                 label{
                                     color: $color-text;
@@ -244,6 +250,7 @@
                             border: 0px solid;
                             cursor: pointer;
                             transition: .3s all ease;
+                            width: 100%;
                             &:hover{
                                 background: $color-brand-dark;
                             }

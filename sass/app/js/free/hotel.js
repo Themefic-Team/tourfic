@@ -90,7 +90,7 @@
                             scrollTop: $("#rooms").offset().top
                         }, 500);
                         $("#rooms").html(data);
-                        $('.tf-room-filter').show();
+                        $('.tf-room-filter').addClass('tf-filter-show');
                         $("#tf-single-hotel-avail .tf-submit").removeClass('tf-btn-loading');
                      } else {
                          notyf.error(tf_params.no_room_found);
@@ -129,9 +129,12 @@
          */
         $(document).on('click', '.hotel-room-availability', function (e) {
             e.preventDefault();
-
+            var offset = 200;
+            if (window.innerWidth <= 768) {
+                offset = 100;
+            }
             $('html, body').animate({
-                scrollTop: $("#tf-single-hotel-avail").offset().top
+                scrollTop: $("#tf-single-hotel-avail").offset().top - offset
             }, 500);
         });
 
@@ -376,7 +379,7 @@
         $(document).on('submit', '#tf_hotel_aval_check', function (e) {
             e.preventDefault();
             let form = $(this),
-                submitBtn = form.find('.tf-submit'),
+                submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
             
             formData.append('action', 'tf_hotel_search');
@@ -394,12 +397,12 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    form.css({'pointer-events': 'none'});
                     submitBtn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
-                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    form.css({'pointer-events': 'all'});
                     submitBtn.removeClass('tf-btn-loading');
                     if (obj.status === 'error') {
                         notyf.error(obj.message);
@@ -419,7 +422,6 @@
 
             // Executes when some one click in the search form location
             inp.addEventListener("focus", function () {
-
                 closeAllLists();
 
                 let a = document.createElement("DIV");
@@ -727,6 +729,13 @@
                         }
                         $this.closest(".room-submit-wrap").siblings(".tf-withoutpayment-booking").find('.tf-control-pagination:first-child').show()
                     }
+
+                    $('.tf-date-picker').each(function() {
+                        let format = $(this).data('format') || "Y/m/d";
+                        flatpickr(this, {
+                            dateFormat: format
+                        });
+                    });
                 },
                 error: function (data) {
                     console.log(data);
@@ -755,11 +764,15 @@
             // }
             var deposit = $this.find("input[name=hotel_room_depo]").val();
             var airport_service = $this.find('[name="airport_service"]').val();
-
+            let selectedExtras = [];
+            $($this.find('input[name="extra_service"]:checked')).each(function() {
+                selectedExtras.push($(this).val());
+            });
             formData.append('action', 'tf_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
             formData.append('deposit', deposit);
             formData.append('airport_service', airport_service);
+            formData.append('extras', selectedExtras);
 
 
             $.ajax({
@@ -812,6 +825,30 @@
             $(this).find('.hotel-facilities-icon-up').toggleClass('active');
             $this.next().slideToggle();
         });
+
+        if ($('#hotel-location').length) {
+            const map = L.map('hotel-location').setView([tf_params.single_hotel_data.address_latitude, tf_params.single_hotel_data.address_longitude], tf_params.single_hotel_data.address_zoom);
+
+            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            const marker = L.marker([tf_params.single_hotel_data.address_latitude, tf_params.single_hotel_data.address_longitude], {alt: tf_params.single_hotel_data.address}).addTo(map)
+                .bindPopup(tf_params.single_hotel_data.address);
+        }
+
+        if ($('#mobile-hotel-location').length) {
+            const mapMobile = L.map('mobile-hotel-location').setView([tf_params.single_hotel_data.address_latitude, tf_params.single_hotel_data.address_longitude], tf_params.single_hotel_data.address_zoom);
+
+            const tilesMobile = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(mapMobile);
+
+            const markerMobile = L.marker([tf_params.single_hotel_data.address_latitude, tf_params.single_hotel_data.address_longitude], {alt: tf_params.single_hotel_data.address}).addTo(map)
+                .bindPopup(tf_params.single_hotel_data.address);
+        }
     });
 
 })(jQuery, window);

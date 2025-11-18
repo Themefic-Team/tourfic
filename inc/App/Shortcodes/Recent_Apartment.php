@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Apartment\Pricing;
+use \Tourfic\Classes\Helper;
 
 class Recent_Apartment extends \Tourfic\Core\Shortcodes {
 
@@ -26,6 +27,11 @@ class Recent_Apartment extends \Tourfic\Core\Shortcodes {
 			)
 		);
 
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		if (in_array('apartment', $tf_disable_services)){
+			return;
+		}
+		
 		$args = array(
 			'post_type'      => 'tf_apartment',
 			'post_status'    => 'publish',
@@ -65,7 +71,9 @@ class Recent_Apartment extends \Tourfic\Core\Shortcodes {
 							<div class="tf-slider-content">
 								<div class="tf-slider-desc">
 									<h3>
-										<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+										<a href="<?php the_permalink() ?>">
+											<?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title($post_id), 60 ) ) ?>
+										</a>
 									</h3>
 									<?php if ( $related_comments_apartment ) { ?>
 										<div class="tf-slider-rating-star">

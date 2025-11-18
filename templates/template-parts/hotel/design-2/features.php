@@ -1,4 +1,8 @@
-<?php if ( $features ) { ?>
+<?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
+if ( $features ) { ?>
     <!--Popular Features -->
     <div class="tf-overview-wrapper">
         <div class="tf-overview-popular-facilities">

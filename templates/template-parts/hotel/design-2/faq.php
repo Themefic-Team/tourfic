@@ -1,4 +1,8 @@
-<?php if ( $faqs ): ?>
+<?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
+if ( $faqs ): ?>
 <!-- Hotel Questions Srart -->
 <div class="tf-questions-wrapper tf-section" id="tf-hotel-faq">
     <h2 class="tf-section-title">

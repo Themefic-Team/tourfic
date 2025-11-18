@@ -40,7 +40,7 @@ class Hotel_Feature_Filter extends \WP_Widget {
     public function widget( $args, $instance ) {
 
         //check if is Hotel
-        $posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type();
 
         if ( is_admin() || $posttype == 'tf_hotel' ) {
             extract( $args );
@@ -62,8 +62,8 @@ class Hotel_Feature_Filter extends \WP_Widget {
 
             $get_terms = get_terms( $taxonomy );
 
-            $destination_name = !empty( $_GET['destination'] ) ? $_GET['destination'] : '';
-            $search_features_query = !empty($_GET['features']) ? $_GET['features'] : array();
+            $destination_name = !empty( $_GET['destination'] ) ? sanitize_text_field( wp_unslash($_GET['destination']) ) : '';
+            $search_features_query = isset( $_GET['features'] ) ? wp_unslash( $_GET['features'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             echo "<div class='tf-filter'><ul>";
             foreach ( $get_terms as $key => $term ) {
                 $id = $term->term_id;

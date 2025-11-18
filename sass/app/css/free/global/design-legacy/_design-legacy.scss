@@ -10,9 +10,11 @@
                     text-transform: capitalize;
                     letter-spacing: 0.5px;
                     font-size: 0.813rem;
+                    line-height: 1;
                 }
                 i {
-                    color: $color-success;
+                    color: $color-text;
+                    line-height: 1;
                 }
                 .single-feature-box {
                     display: flex;
@@ -33,17 +35,27 @@
                     flex-wrap: wrap;
                 }
             }
-            .tf-toc-wrap{
-                background-color: transparent;
-                td {
-                    white-space: break-spaces;
+            .toc-section{
+                @media #{$max768}{
+                    padding-bottom: 18px;
                 }
-                .tf-toc-inner{
-                    p{
-                        margin-bottom: 0;
+                .tf-toc-wrap{
+                    background-color: transparent;
+                    td {
+                        white-space: break-spaces;
+                    }
+                    .tf-toc-inner{
+                        p{
+                            margin-bottom: 0;
+                        }
+                        table{
+                            margin-top: 15px;
+                            margin-bottom: 0;
+                        }
                     }
                 }
             }
+            
             .tf-highlight-wrapper{
                 background-color: $color-filling-fg;
             }
@@ -74,6 +86,9 @@
             }
             .tf-faq-items-wrapper {
                 flex: 5;
+                @media #{$max768}{
+                    margin-top: 10px;
+                }
             }
             #tf-faq-item {
                 border-bottom: 1px solid $color-border-lite;
@@ -85,9 +100,11 @@
                     @include flexbox();
                     @include align-items(center);
                     padding: 20px 0;
+                    gap: 10px;
                     h4{
                         font-size: 1.125rem;
                         margin-bottom: 0;
+                        flex: 1;
                     }
                     &.active {
                         margin-bottom: 0;
@@ -132,7 +149,7 @@
     .tf-single-template{
         &__one{
             .tf-single-car-details-warper{
-                padding: 32px 0;
+                padding-bottom: 32px;
                 display: flex;
                 gap: 32px;
                 @media #{$max768}{
@@ -174,6 +191,9 @@
                                     display: inline-block;
                                     a{
                                         color: $color-text;
+                                    }
+                                    &:last-child{
+                                        font-weight: 700;
                                     }
                                 }
                             }
@@ -307,13 +327,9 @@
         &__one{
             .tf-archive-car-details-warper{
                 padding: 0px 0px 56px 0px;
-                @media #{$max1024}{
-                    padding-left: 15px;
-                    padding-right: 15px;
-                }
+    
                 @media #{$max575}{
-                    padding-left: 10px;
-                    padding-right: 10px;
+                    padding-bottom: 40px;
                 }
                 .tf-archive-search-box{
                     border-radius: 24px;
@@ -754,6 +770,8 @@
     .tf-date-select-box{
         padding: 8px;
         flex-wrap: nowrap;
+        padding-bottom: 0;
+        margin-top: 0;
         @media #{$max991}{
             flex-wrap: wrap;
             justify-content: flex-start;
@@ -794,6 +812,13 @@
                 .tf-flex{
                     flex-wrap: nowrap;
                 }
+                .icon{
+                    svg{
+                        path{
+                            stroke: $color-text;
+                        }
+                    }
+                }
                 .info-select{
                     width: 100%;
                     position: relative;
@@ -814,6 +839,9 @@
                         padding-left: 0px;
                         box-shadow: none;
                         background: transparent;
+                        padding: 3px;
+                        margin-top: 0;
+                        min-height: auto;
                         &:focus{
                             outline: none;
                             box-shadow: none;
@@ -1013,6 +1041,7 @@
                 line-height: 1.5;
                 border: 0px solid;
                 cursor: pointer;
+                width: 100%;
                 transition: .3s all ease;
                 &:hover{
                     background: $color-brand-dark;

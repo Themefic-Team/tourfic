@@ -96,8 +96,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'          => 'car_info_sec_title',
 					'type'        => 'text',
-					'label'       => __( 'Section Title', 'tourfic' ),
-					'subtitle'       => __( 'This will be the heading of the Car info Section.', 'tourfic' ),
+					'label'       => esc_html__( 'Section Title', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This will be the heading of the Car info Section.', 'tourfic' ),
 					'default'    => esc_html__('Car info', 'tourfic' ),
 				),
                 array(
@@ -134,7 +134,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'         => 'brands',
 					'type'       => 'select2',
-					'label'      => __( 'Select Brands/Make', 'tourfic' ),
+					'label'      => esc_html__( 'Select Brands/Make', 'tourfic' ),
 					'options'    => 'terms',
 					'query_args' => array(
 						'taxonomy'   => 'carrental_brand',
@@ -149,7 +149,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'         => 'fuel_types',
 					'type'       => 'select2',
-					'label'      => __( 'Select Fuel Type', 'tourfic' ),
+					'label'      => esc_html__( 'Select Fuel Type', 'tourfic' ),
 					'options'    => 'terms',
 					'query_args' => array(
 						'taxonomy'   => 'carrental_fuel_type',
@@ -164,7 +164,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'         => 'engine_year',
 					'type'       => 'select2',
-					'label'      => __( 'Select Year', 'tourfic' ),
+					'label'      => esc_html__( 'Select Year', 'tourfic' ),
 					'options'    => 'terms',
 					'query_args' => array(
 						'taxonomy'   => 'carrental_engine_year',
@@ -194,10 +194,10 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'       => 'shuttle_car_fee_type',
 					'type'     => 'select',
-					'label'    => __( 'Price Type', 'tourfic' ),
+					'label'    => esc_html__( 'Price Type', 'tourfic' ),
 					'options'  => array(
-						'free' => __( 'Free', 'tourfic' ),
-						'paid'   => __( 'Paid', 'tourfic' ),
+						'free' => esc_html__( 'Free', 'tourfic' ),
+						'paid'   => esc_html__( 'Paid', 'tourfic' ),
 					),
 					'default'  => 'free',
 					'dependency'  => [
@@ -208,7 +208,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'shuttle_car_fee',
 					'type'  => 'text',
-					'label' => __( 'Shuttle Price', 'tourfic' ),
+					'label' => esc_html__( 'Shuttle Price', 'tourfic' ),
 					'dependency'  => [
 						array( 'shuttle_car', '==', 'true' ),
 						array( 'shuttle_car_fee_type', '==', 'paid' )
@@ -239,10 +239,10 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'       => 'mileage_type',
 					'type'     => 'select',
-					'label'    => __( 'Unit Type', 'tourfic' ),
+					'label'    => esc_html__( 'Unit Type', 'tourfic' ),
 					'options'  => array(
-						'km' => __( 'Kilometer', 'tourfic' ),
-						'miles'   => __( 'Miles', 'tourfic' ),
+						'km' => esc_html__( 'Kilometer', 'tourfic' ),
+						'miles'   => esc_html__( 'Miles', 'tourfic' ),
 					),
 					'default'  => 'km',
 					'dependency'  => [
@@ -253,7 +253,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'mileage',
 					'type'  => 'text',
-					'label' => __( 'Mileage', 'tourfic' ),
+					'label' => esc_html__( 'Mileage', 'tourfic' ),
 					'dependency'  => [
 						array( 'unlimited_mileage', '==', 'false' )
 					],
@@ -270,7 +270,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
                 array(
 					'id'    => 'car-driverinfo-heading',
 					'type'  => 'heading',
-					'title' => 'Driver Details Section',
+					'title' => esc_html__( 'Driver Details Section', 'tourfic'),
 					'content' => __( 'Add all your driver related information here.', 'tourfic' ),
 				),
 				array(
@@ -291,8 +291,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'          => 'driver_sec_title',
 					'type'        => 'text',
-					'label'       => __( 'Section Title', 'tourfic' ),
-					'subtitle'       => __( 'This will be displayed in the Driver details Box.', 'tourfic' ),
+					'label'       => esc_html__( 'Section Title', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This will be displayed in the Driver details Box.', 'tourfic' ),
 					'default'    => esc_html__( 'Driver details', 'tourfic' ),
 					'dependency'  => [
 						array( 'driver_included', '==', 'true' )
@@ -301,7 +301,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'          => 'driver_name',
 					'type'        => 'text',
-					'label'       => __( 'Driver Name', 'tourfic' ),
+					'label'       => esc_html__( 'Driver Name', 'tourfic' ),
 					'field_width' => '50',
 					'dependency'  => [
 						array( 'driver_included', '==', 'true' )
@@ -310,7 +310,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'          => 'driver_email',
 					'type'        => 'text',
-					'label'       => __( 'Email address', 'tourfic' ),
+					'label'       => esc_html__( 'Email address', 'tourfic' ),
 					'field_width' => '50',
 					'dependency'  => [
 						array( 'driver_included', '==', 'true' )
@@ -319,7 +319,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'          => 'driver_phone',
 					'type'        => 'text',
-					'label'       => __( 'Phone Number', 'tourfic' ),
+					'label'       => esc_html__( 'Phone Number', 'tourfic' ),
 					'field_width' => '50',
 					'dependency'  => [
 						array( 'driver_included', '==', 'true' )
@@ -328,7 +328,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'          => 'driver_age',
 					'type'        => 'number',
-					'label'       => __( 'Age', 'tourfic' ),
+					'label'       => esc_html__( 'Age', 'tourfic' ),
 					'field_width' => '50',
 					'dependency'  => [
 						array( 'driver_included', '==', 'true' )
@@ -338,7 +338,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'          => 'driver_address',
 					'type'        => 'text',
-					'label'       => __( 'Address', 'tourfic' ),
+					'label'       => esc_html__( 'Address', 'tourfic' ),
 					'dependency'  => [
 						array( 'driver_included', '==', 'true' )
 					],
@@ -346,7 +346,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'      => 'driver_image',
 					'type'    => 'image',
-					'label'   => __( 'Driver Photo', 'tourfic' ),
+					'label'   => esc_html__( 'Driver Photo', 'tourfic' ),
 					'library' => 'image',
 					'dependency'  => [
 						array( 'driver_included', '==', 'true' )
@@ -359,13 +359,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 		
 		// Additional Info
 		'additional_info' => array(
-			'title'  => __( 'Additional Info', 'tourfic' ),
+			'title'  => esc_html__( 'Additional Info', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
 				array(
 					'id'    => 'car-add-info-heading',
 					'type'  => 'heading',
-					'title' => 'Benefits',
+					'title' => esc_html__( 'Benefits', 'tourfic' ),
 					'content' => __( 'Include all the benefits or features of your rental package.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/additional-information/')
 				),
@@ -373,13 +373,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'id'       => 'benefits_section',
 					'type'     => 'switch',
 					'label'    => esc_html__( 'Display Benefits on Website', 'tourfic' ),
-					'subtitle'       => __( 'This setting allows you to show the benefits of the rental package on the frontend for customers to view.', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This setting allows you to show the benefits of the rental package on the frontend for customers to view.', 'tourfic' ),
 				),
 				array(
 					'id'          => 'benefits_sec_title',
 					'type'        => 'text',
-					'label'       => __( 'Section Title', 'tourfic' ),
-					'subtitle'       => __( 'This will be the heading of Benefits Section.', 'tourfic' ),
+					'label'       => esc_html__( 'Section Title', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This will be the heading of Benefits Section.', 'tourfic' ),
 					'default'    => esc_html__( 'Benefits', 'tourfic' ),
 					'dependency'  => [
 						array( 'benefits_section', '==', 'true' )
@@ -388,9 +388,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'           => 'benefits',
 					'type'         => 'repeater',
-					'button_title' => __( 'Add New Benefits', 'tourfic' ),
-					'label'        => __( 'Add Your Benefits', 'tourfic' ),
-					'subtitle'        => __( 'Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Benefits using the icons on the right side.', 'tourfic' ),
+					'button_title' => esc_html__( 'Add New Benefits', 'tourfic' ),
+					'label'        => esc_html__( 'Add Your Benefits', 'tourfic' ),
+					'subtitle'        => esc_html__( 'Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Benefits using the icons on the right side.', 'tourfic' ),
 					'field_title'  => 'title',
 					'dependency'  => [
 						array( 'benefits_section', '==', 'true' )
@@ -399,33 +399,33 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 						array(
 							'id'    => 'title',
 							'type'  => 'text',
-							'label' => __( 'Title', 'tourfic' ),
+							'label' => esc_html__( 'Title', 'tourfic' ),
 						),
                         array(
                             'id'       => 'icon',
                             'type'     => 'icon',
-                            'label'    => __( 'Icon', 'tourfic' ),
-                            'subtitle' => __( 'Choose icon', 'tourfic' ),
+                            'label'    => esc_html__( 'Icon', 'tourfic' ),
+                            'subtitle' => esc_html__( 'Choose icon', 'tourfic' ),
                         )
 					),
 				),
 				array(
 					'id'    => 'car-inc-heading',
 					'type'  => 'heading',
-					'title' => 'Include & Exclude Section',
+					'title' => esc_html__('Include & Exclude Section', 'tourfic'),
 					'content' => __( 'Each rental package includes certain items. Clearly define these inclusions and exclusions to prevent any misunderstandings during your rental period.', 'tourfic' ),
 				),
 				array(
 					'id'       => 'inc_exc_section',
 					'type'     => 'switch',
 					'label'    => esc_html__( 'Display Inclusions and Exclusions on Website', 'tourfic' ),
-					'subtitle'       => __( 'This setting allows you to show the included and excluded features of the rental on the frontend for customers to view.', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This setting allows you to show the included and excluded features of the rental on the frontend for customers to view.', 'tourfic' ),
 				),
 				array(
 					'id'          => 'inc_sec_title',
 					'type'        => 'text',
-					'label'       => __( 'Section Title', 'tourfic' ),
-					'subtitle'       => __( 'This will be the heading of the Include Section.', 'tourfic' ),
+					'label'       => esc_html__( 'Section Title', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This will be the heading of the Include Section.', 'tourfic' ),
 					'default'    => esc_html__( 'Include', 'tourfic' ),
 					'dependency'  => [
 						array( 'inc_exc_section', '==', 'true' )
@@ -434,9 +434,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'           => 'inc',
 					'type'         => 'repeater',
-					'label'        => __( 'Items Included', 'tourfic' ),
-					'subtitle'     => __( 'Add all the items/features included in this package.', 'tourfic' ),
-					'button_title' => __( 'Add New Include', 'tourfic' ),
+					'label'        => esc_html__( 'Items Included', 'tourfic' ),
+					'subtitle'     => esc_html__( 'Add all the items/features included in this package.', 'tourfic' ),
+					'button_title' => esc_html__( 'Add New Include', 'tourfic' ),
 					'field_title'  => 'title',
 					'dependency'  => [
 						array( 'inc_exc_section', '==', 'true' )
@@ -445,15 +445,15 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 						array(
 							'id'    => 'title',
 							'type'  => 'text',
-							'label' => __( 'Insert your item', 'tourfic' ),
+							'label' => esc_html__( 'Insert your item', 'tourfic' ),
 						),
 					),
 				),
 				array(
 					'id'       => 'inc_icon',
 					'type'     => 'icon',
-					'label'    => __( 'Icon for Included Item', 'tourfic' ),
-					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'label'    => esc_html__( 'Icon for Included Item', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose icon', 'tourfic' ),
 					'dependency'  => [
 						array( 'inc_exc_section', '==', 'true' )
 					],
@@ -461,8 +461,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'          => 'exc_sec_title',
 					'type'        => 'text',
-					'label'       => __( 'Section Title', 'tourfic' ),
-					'subtitle'       => __( 'This will be the heading of the Exclude Section.', 'tourfic' ),
+					'label'       => esc_html__( 'Section Title', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This will be the heading of the Exclude Section.', 'tourfic' ),
 					'default'    => esc_html__( 'Exclude', 'tourfic' ),
 					'dependency'  => [
 						array( 'inc_exc_section', '==', 'true' )
@@ -471,15 +471,15 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'           => 'exc',
 					'type'         => 'repeater',
-					'label'        => __( 'Items Excluded', 'tourfic' ),
-					'subtitle'        => __( 'List all the items/features excluded in this package.', 'tourfic' ),
-					'button_title' => __( 'Add New Exclude', 'tourfic' ),
+					'label'        => esc_html__( 'Items Excluded', 'tourfic' ),
+					'subtitle'        => esc_html__( 'List all the items/features excluded in this package.', 'tourfic' ),
+					'button_title' => esc_html__( 'Add New Exclude', 'tourfic' ),
 					'field_title'  => 'title',
 					'fields'       => array(
 						array(
 							'id'    => 'title',
 							'type'  => 'text',
-							'label' => __( 'Insert your item', 'tourfic' ),
+							'label' => esc_html__( 'Insert your item', 'tourfic' ),
 						),
 					),
 					'dependency'  => [
@@ -489,8 +489,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'       => 'exc_icon',
 					'type'     => 'icon',
-					'label'    => __( 'Icon for Excluded item', 'tourfic' ),
-					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'label'    => esc_html__( 'Icon for Excluded item', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose icon', 'tourfic' ),
 					'dependency'  => [
 						array( 'inc_exc_section', '==', 'true' )
 					],
@@ -500,39 +500,39 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 
         // Badges
 		'badges' => array(
-			'title'  => __( 'Badges', 'tourfic' ),
+			'title'  => esc_html__( 'Badges', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
 				array(
 					'id'    => 'car-faq-heading',
 					'type'  => 'heading',
-					'title' => 'Badge Section',
+					'title' => esc_html__('Badge Section', 'tourfic' ),
 					'content' => __( 'These badges are for marketing purposes and will be visible on the listing page. e.g. Hot Deals, 20% Discount, etc.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/badges/')
 				),
 				array(
 					'id'           => 'badge',
 					'type'         => 'repeater',
-					'button_title' => __( 'Add New Badge', 'tourfic' ),
-					'label'        => __( 'Add Your Badges', 'tourfic' ),
-					'subtitle'        => __( 'Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Badge using the icons on the right side.', 'tourfic' ),
+					'button_title' => esc_html__( 'Add New Badge', 'tourfic' ),
+					'label'        => esc_html__( 'Add Your Badges', 'tourfic' ),
+					'subtitle'        => esc_html__( 'Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Badge using the icons on the right side.', 'tourfic' ),
 					'field_title'  => 'title',
 					'fields'       => array(
 						array(
 							'id'    => 'title',
 							'type'  => 'text',
-							'label' => __( 'Title', 'tourfic' ),
+							'label' => esc_html__( 'Title', 'tourfic' ),
 						),
 						array(
 							'id'    => 'description',
 							'type'  => 'editor',
-							'label' => __( 'Description ', 'tourfic' ),
+							'label' => esc_html__( 'Description ', 'tourfic' ),
 						),
                         array(
                             'id'       => 'badge_icon',
                             'type'     => 'icon',
-                            'label'    => __( 'Icon', 'tourfic' ),
-                            'subtitle' => __( 'Choose icon', 'tourfic' ),
+                            'label'    => esc_html__( 'Icon', 'tourfic' ),
+                            'subtitle' => esc_html__( 'Choose icon', 'tourfic' ),
                         )
 					),
 				)
@@ -541,13 +541,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 
         // Contact Information
 		'contact_info'         => array(
-			'title'  => __( 'Contact Info', 'tourfic' ),
+			'title'  => esc_html__( 'Contact Info', 'tourfic' ),
 			'icon'   => 'fa-solid fa-address-book',
 			'fields' => array(
 				array(
 					'id'    => 'car-continfo-heading',
 					'type'  => 'heading',
-					'title' => 'Contact Info',
+					'title' =>  esc_html__( 'Contact Info', 'tourfic' ),
 					'content' => __( 'Please share your contact information here.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/contact-info/')
 				),
@@ -555,13 +555,13 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'id'       => 'information_section',
 					'type'     => 'switch',
 					'label'    => esc_html__( 'Display Contact Information on Website', 'tourfic' ),
-					'subtitle'       => __( 'This setting allows you to show contact details on the frontend for customers to view.', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This setting allows you to show contact details on the frontend for customers to view.', 'tourfic' ),
 				),
 				array(
 					'id'          => 'owner_sec_title',
 					'type'        => 'text',
-					'label'       => __( 'Section Title', 'tourfic' ),
-					'subtitle'       => __( 'This will be the heading of the Renters Information Box.', 'tourfic' ),
+					'label'       => esc_html__( 'Section Title', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This will be the heading of the Renters Information Box.', 'tourfic' ),
 					'default'    => esc_html__( 'Renters Information', 'tourfic' ),
 					'dependency'  => [
 						array( 'information_section', '==', 'true' )
@@ -570,7 +570,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'          => 'owner_name',
 					'type'        => 'text',
-					'label'       => __( 'Renters Name', 'tourfic' ),
+					'label'       => esc_html__( 'Renters Name', 'tourfic' ),
 					'field_width' => '50',
 					'dependency'  => [
 						array( 'information_section', '==', 'true' )
@@ -579,7 +579,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'          => 'email',
 					'type'        => 'text',
-					'label'       => __( 'Email address', 'tourfic' ),
+					'label'       => esc_html__( 'Email address', 'tourfic' ),
 					'field_width' => '50',
 					'dependency'  => [
 						array( 'information_section', '==', 'true' )
@@ -588,7 +588,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'          => 'phone',
 					'type'        => 'text',
-					'label'       => __( 'Phone Number', 'tourfic' ),
+					'label'       => esc_html__( 'Phone Number', 'tourfic' ),
 					'field_width' => '50',
 					'dependency'  => [
 						array( 'information_section', '==', 'true' )
@@ -597,7 +597,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'          => 'website',
 					'type'        => 'text',
-					'label'       => __( 'Website Url', 'tourfic' ),
+					'label'       => esc_html__( 'Website Url', 'tourfic' ),
 					'field_width' => '50',
 					'dependency'  => [
 						array( 'information_section', '==', 'true' )
@@ -606,7 +606,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'          => 'fax',
 					'type'        => 'text',
-					'label'       => __( 'Fax Number', 'tourfic' ),
+					'label'       => esc_html__( 'Fax Number', 'tourfic' ),
 					'field_width' => '50',
 					'dependency'  => [
 						array( 'information_section', '==', 'true' )
@@ -615,7 +615,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'      => 'owner_image',
 					'type'    => 'image',
-					'label'   => __( 'Renters Photo', 'tourfic' ),
+					'label'   => esc_html__( 'Renters Photo', 'tourfic' ),
 					'library' => 'image',
 					'dependency'  => [
 						array( 'information_section', '==', 'true' )
@@ -626,30 +626,30 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 
         // Price
 		'price'                => array(
-			'title'  => __( 'Pricing', 'tourfic' ),
+			'title'  => esc_html__( 'Pricing', 'tourfic' ),
 			'icon'   => 'fa-solid fa-money-check',
 			'fields' => array(
 				array(
 					'id'    => 'car-pricing-heading',
 					'type'  => 'heading',
-					'title' => 'Pricing Settings',
+					'title' => esc_html__( 'Pricing Settings', 'tourfic' ),
 					'content' => __( 'The pricing of a rental package plays a crucial role. Make sure you set it correctly.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/pricing/')
 				),
 				array(
 					'id'       => 'price_by',
 					'type'     => 'select',
-					'label'    => __( 'Base Pricing Rule', 'tourfic' ),
+					'label'    => esc_html__( 'Base Pricing Rule', 'tourfic' ),
 					'options'  => array(
-						'day' => __( 'Per Day', 'tourfic' ),
-						'hour'   => __( 'Per Hour', 'tourfic' ),
+						'day' => esc_html__( 'Per Day', 'tourfic' ),
+						'hour'   => esc_html__( 'Per Hour', 'tourfic' ),
 					),
 					'default'  => 'day',
 				),
 				array(
 					'id'          => 'car_rent',
 					'type'        => 'number',
-					'label'       => __( 'Base Pricing', 'tourfic' ),
+					'label'       => esc_html__( 'Base Pricing', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '0',
 					),
@@ -666,20 +666,20 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'       => 'discount_type',
 					'type'     => 'select',
-					'label'    => __( 'Discount Type', 'tourfic' ),
-					'subtitle' => __( 'Set a discount for this tour to incentivize bookings. Choose between a fixed amount off or a percentage-based reduction.', 'tourfic' ),
+					'label'    => esc_html__( 'Discount Type', 'tourfic' ),
+					'subtitle' => esc_html__( 'Set a discount for this tour to incentivize bookings. Choose between a fixed amount off or a percentage-based reduction.', 'tourfic' ),
 					'options'  => array(
-						'none'    => __( 'None', 'tourfic' ),
-						'percent' => __( 'Percent', 'tourfic' ),
-						'fixed'   => __( 'Fixed', 'tourfic' ),
+						'none'    => esc_html__( 'None', 'tourfic' ),
+						'percent' => esc_html__( 'Percent', 'tourfic' ),
+						'fixed'   => esc_html__( 'Fixed', 'tourfic' ),
 					),
 					'default'  => 'none',
 				),
 				array(
 					'id'         => 'discount_price',
 					'type'       => 'number',
-					'label'      => __( 'Discount Price', 'tourfic' ),
-					'subtitle'   => __( 'Insert amount only', 'tourfic' ),
+					'label'      => esc_html__( 'Discount Price', 'tourfic' ),
+					'subtitle'   => esc_html__( 'Insert amount only', 'tourfic' ),
 					'attributes' => array(
 						'min' => '0',
 					),
@@ -690,12 +690,12 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'      => 'car_availability',
 					'type'    => 'heading',
-					'title' => __( 'Inventory Management', 'tourfic' ),
+					'title' => esc_html__( 'Inventory Management', 'tourfic' ),
 				),
 				array(
 					'id'          => 'car_numbers',
 					'type'        => 'number',
-					'label'       => __( 'Number of cars available for rent', 'tourfic' ),
+					'label'       => esc_html__( 'Number of cars available for rent', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '0',
 					),
@@ -703,7 +703,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'      => 'price_deposit',
 					'type'    => 'heading',
-					'title' => __( 'Deposit', 'tourfic' ),
+					'title' => esc_html__( 'Deposit', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -718,14 +718,14 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 
 		// Car Extra
 		'car_extra'         => array(
-			'title'  => __( 'Rental Extras', 'tourfic' ),
+			'title'  => esc_html__( 'Rental Extras', 'tourfic' ),
 			'icon'   => 'fa-solid fa-route',
 			'fields' => array(
 				array(
 					'id'    => 'car-extra-heading',
 					'type'  => 'heading',
-					'title' => 'Rental Extras',
-					'content' => __( 'Include the extras you want to sell with this package. e.g. Baby child seat, navigation system, etc.', 'tourfic' ),
+					'title' => esc_html__('Rental Extras', 'tourfic'),
+					'content' => esc_html__( 'Include the extras you want to sell with this package. e.g. Baby child seat, navigation system, etc.', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -746,7 +746,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-protection-heading',
 					'type'  => 'heading',
-					'title' => 'Protection Plan',
+					'title' => esc_html__( 'Protection Plan', 'tourfic' ),
 					'content' => __( 'Add and customize protection plans for your car rentals, offering coverage for damage, theft, or accidents. Enhance customer security by providing tailored protection options during the booking process.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/protection-plan/')
 				),
@@ -758,14 +758,14 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'protection_tab_title',
 					'type'  => 'text',
-					'label' => __( 'Section Title', 'tourfic' ),
-					'subtitle'        => __( 'This will be the heading of the Protection Section.', 'tourfic' ),
+					'label' => esc_html__( 'Section Title', 'tourfic' ),
+					'subtitle'        => esc_html__( 'This will be the heading of the Protection Section.', 'tourfic' ),
 					'default' => esc_html__( 'Protection', 'tourfic' )
 				),
 				array(
 					'id'    => 'protection_content',
 					'type'  => 'editor',
-					'label' => __( 'Protection Plan Description', 'tourfic' ),
+					'label' => esc_html__( 'Protection Plan Description', 'tourfic' ),
 					'dependency'  => [
 						array( 'protection_section', '==', 'true' )
 					],
@@ -773,9 +773,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'           => 'protections',
 					'type'         => 'repeater',
-					'label'        => __( 'Add Protection Plans', 'tourfic' ),
-					'subtitle'        => __( 'Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Protection Plan using the icons on the right side.', 'tourfic' ),
-					'button_title' => __( 'Add Protection Plan', 'tourfic' ),
+					'label'        => esc_html__( 'Add Protection Plans', 'tourfic' ),
+					'subtitle'        => esc_html__( 'Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Protection Plan using the icons on the right side.', 'tourfic' ),
+					'button_title' => esc_html__( 'Add Protection Plan', 'tourfic' ),
 					'field_title'  => 'title',
 					'dependency'  => [
 						array( 'protection_section', '==', 'true' )
@@ -784,32 +784,32 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 						array(
 							'id'    => 'title',
 							'type'  => 'text',
-							'label' => __( 'Plan Title', 'tourfic' ),
+							'label' => esc_html__( 'Plan Title', 'tourfic' ),
 						),
 						array(
 							'id'    => 'content',
 							'type'  => 'textarea',
-							'label' => __( 'Plan Description', 'tourfic' ),
+							'label' => esc_html__( 'Plan Description', 'tourfic' ),
 						),
 						array(
 							'id'       => 'price_by',
 							'type'     => 'select',
-							'label'    => __( 'Plan Pricing Rule', 'tourfic' ),
+							'label'    => esc_html__( 'Plan Pricing Rule', 'tourfic' ),
 							'options'  => array(
-								'day' => __( 'Per Day', 'tourfic' ),
-								'rental'   => __( 'Per Rental', 'tourfic' ),
+								'day' => esc_html__( 'Per Day', 'tourfic' ),
+								'rental'   => esc_html__( 'Per Rental', 'tourfic' ),
 							),
 							'default'  => 'day',
 						),
 						array(
 							'id'    => 'price',
 							'type'  => 'number',
-							'label' => __( 'Plan Price', 'tourfic' ),
+							'label' => esc_html__( 'Plan Price', 'tourfic' ),
 						),
 						array(
 							'id'    => 'protection_required',
 							'type'  => 'switch',
-							'label' => __( 'Required protection?', 'tourfic' ),
+							'label' => esc_html__( 'Required protection?', 'tourfic' ),
 							'default' => 0
 						),
 					),
@@ -818,7 +818,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'id'    => 'car-instructions-heading',
 					'type'  => 'heading',
 					'label' => 'Pickup and Dropoff Instructions',
-					'subtitle' => __( 'This instruction will shown as a popup under the Booking form.', 'tourfic' ),
+					'subtitle' => esc_html__( 'This instruction will shown as a popup under the Booking form.', 'tourfic' ),
 				),
 				array(
 					'id'       => 'instructions_section',
@@ -828,7 +828,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'instructions_content',
 					'type'  => 'editor',
-					'label' => __( 'Instructions Content', 'tourfic' ),
+					'label' => esc_html__( 'Instructions Content', 'tourfic' ),
 					'dependency'  => [
 						array( 'instructions_section', '==', 'true' )
 					],
@@ -846,8 +846,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-cancellation-heading',
 					'type'  => 'heading',
-					'title' => 'Cancellation Condition',
-					'content' => __( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
+					'title' => esc_html__( 'Cancellation Condition', 'tourfic' ),
+					'content' => esc_html__( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -896,40 +896,40 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 
 		// FAQ
 		'faq' => array(
-			'title'  => __( 'FAQ Section', 'tourfic' ),
+			'title'  => esc_html__( 'FAQ Section', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
 				array(
 					'id'    => 'car-faq-heading',
 					'type'  => 'heading',
-					'title' => 'FAQ Section',
-					'content' => __( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
+					'title' => esc_html__( 'FAQ Section', 'tourfic' ),
+					'content' => esc_html__( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/faq-section/')
 				),
 				array(
 					'id'          => 'faq_sec_title',
 					'type'        => 'text',
-					'label'       => __( 'Section Title', 'tourfic' ),
-					'subtitle'       => __( 'This will be the heading of the FAQ Section.', 'tourfic' ),
+					'label'       => esc_html__( 'Section Title', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This will be the heading of the FAQ Section.', 'tourfic' ),
 					'default'    => esc_html__( 'FAQ’s', 'tourfic' ),
 				),
 				array(
 					'id'           => 'faq',
 					'type'         => 'repeater',
-					'button_title' => __( 'Add New Faq', 'tourfic' ),
-					'label'        => __( 'Add Your Faqs', 'tourfic' ),
-					'subtitle'        => __( 'Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Faq using the icons on the right side.', 'tourfic' ),
+					'button_title' => esc_html__( 'Add New Faq', 'tourfic' ),
+					'label'        => esc_html__( 'Add Your Faqs', 'tourfic' ),
+					'subtitle'        => esc_html__( 'Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Faq using the icons on the right side.', 'tourfic' ),
 					'field_title'  => 'title',
 					'fields'       => array(
 						array(
 							'id'    => 'title',
 							'type'  => 'text',
-							'label' => __( 'Title', 'tourfic' ),
+							'label' => esc_html__( 'Title', 'tourfic' ),
 						),
 						array(
 							'id'    => 'description',
 							'type'  => 'editor',
-							'label' => __( 'Description ', 'tourfic' ),
+							'label' => esc_html__( 'Description ', 'tourfic' ),
 						),
 					),
 				)
@@ -938,40 +938,40 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 
 		// Terms & Conditions
 		'terms_and_conditions' => array(
-			'title'  => __( 'Policy', 'tourfic' ),
+			'title'  => esc_html__( 'Policy', 'tourfic' ),
 			'icon'   => 'fa-regular fa-square-check',
 			'fields' => array(
 				array(
 					'id'    => 'car-tnc-heading',
 					'type'  => 'heading',
-					'title' => 'Terms & Conditions Section',
-					'content' => __( 'Include your set of regulations and guidelines that customers must agree to in order to use the service provided in your rental package. ', 'tourfic' ),
+					'title' => esc_html__( 'Terms & Conditions Section', 'tourfic' ),
+					'content' => esc_html__( 'Include your set of regulations and guidelines that customers must agree to in order to use the service provided in your rental package. ', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/terms-conditions/')
 				),
 				array(
 					'id'    => 'car-tc-section-title',
 					'type'  => 'text',
-					'label' => __( 'Title of the Section', 'tourfic' ),
-					'subtitle' => __( 'This will be the heading of the Terms & Conditions section.', 'tourfic' ),
-					'default' => __( "Tour Terms & Conditions", 'tourfic' ),
+					'label' => esc_html__( 'Title of the Section', 'tourfic' ),
+					'subtitle' => esc_html__( 'This will be the heading of the Terms & Conditions section.', 'tourfic' ),
+					'default' => esc_html__( "Tour Terms & Conditions", 'tourfic' ),
 				),
 				array(
 					'id'           => 'terms_conditions',
 					'type'         => 'repeater',
-					'button_title' => __( 'Add New Terms & Condition', 'tourfic' ),
-					'label'        => __( 'Add Your Terms & Conditions', 'tourfic' ),
-					'subtitle'        => __( 'Click the button below to add Terms Conditions for your Car. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Terms & Condition using the icons on the right side.', 'tourfic' ),
+					'button_title' => esc_html__( 'Add New Terms & Condition', 'tourfic' ),
+					'label'        => esc_html__( 'Add Your Terms & Conditions', 'tourfic' ),
+					'subtitle'        => esc_html__( 'Click the button below to add Terms Conditions for your Car. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each Terms & Condition using the icons on the right side.', 'tourfic' ),
 					'field_title'  => 'title',
 					'fields'       => array(
 						array(
 							'id'    => 'title',
 							'type'  => 'text',
-							'label' => __( 'Title', 'tourfic' ),
+							'label' => esc_html__( 'Title', 'tourfic' ),
 						),
 						array(
 							'id'    => 'content',
 							'type'  => 'editor',
-							'label' => __( 'Content', 'tourfic' ),
+							'label' => esc_html__( 'Content', 'tourfic' ),
 						)
 					),
 				)
@@ -980,37 +980,37 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 
 		// Settings
 		'settings'             => array(
-			'title'  => __( 'Settings', 'tourfic' ),
+			'title'  => esc_html__( 'Settings', 'tourfic' ),
 			'icon'   => 'fa-solid fa-viruses',
 			'fields' => array(
 				array(
 					'id'    => 'settings_headding',
 					'type'  => 'heading',
-					'title' =>  __('Other Settings', 'tourfic' ),
-					'content' => __( 'These are some additional settings specific to this Car Package. Note that some of these settings may override the global settings. ', 'tourfic' ),
+					'title' =>  esc_html__('Other Settings', 'tourfic' ),
+					'content' => esc_html__( 'These are some additional settings specific to this Car Package. Note that some of these settings may override the global settings. ', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/settings/')
 				),
 				array(
 					'id'          => 'review_sec_title',
 					'type'        => 'text',
-					'label'       => __( 'Review Section Title', 'tourfic' ),
-					'subtitle'       => __( 'This will be the heading of the Review Section.', 'tourfic' ),
+					'label'       => esc_html__( 'Review Section Title', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This will be the heading of the Review Section.', 'tourfic' ),
 					'default'    => esc_html__( 'Review Scores', 'tourfic' ),
 				),
 				array(
 					'id'        => 'c-share',
 					'type'      => 'switch',
-					'label'     => __( 'Disable Share Option', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
+					'label'     => esc_html__( 'Disable Share Option', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
 					'default'   => false
 				),
 				array(
 					'id'        => 'c-wishlist',
 					'type'      => 'switch',
-					'label'     => __( 'Disable Wishlist Option', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
+					'label'     => esc_html__( 'Disable Wishlist Option', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
 					'default'   => false
 				)
 			),

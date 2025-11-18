@@ -1,5 +1,6 @@
 <?php
-
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Tour\Tour;
@@ -224,7 +225,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                             <h2 class="tf-section-title"><?php esc_html_e( "Book This Tour", "tourfic" ); ?></h2>
                             <div class="tf-btn-wrap">
                                 <a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf_btn tf_btn_full tf_btn_sharp tf-tour-external-booking-button"
-                                   style="margin-top: 10px;"><?php esc_html_e( $tf_tour_single_book_now_text, 'tourfic' ); ?></a>
+                                   style="margin-top: 10px;"><?php echo esc_html( $tf_tour_single_book_now_text ); ?></a>
                             </div>
                         </div>
 					<?php endif; ?>
@@ -322,7 +323,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 							) );
 							?>
 							<?php if ( empty( $tf_comment_counts ) && $tf_comment_counts == 0 ): ?>
-                                <button class="tf_btn tf_btn_lite tf_btn_full tf_btn_sharp tf_btn_large tf-review-open">
+                                <button class="tf_btn tf_btn_secondary tf_btn_full tf_btn_sharp tf_btn_large tf-review-open">
 									<?php esc_html_e( "Leave your review", "tourfic" ); ?>
                                 </button>
 							<?php endif; ?>
@@ -358,7 +359,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 					<?php endif; ?>
                     <!-- Enquery Section -->
 					<?php
-					$tf_enquiry_section_status = ! empty( $meta['t-enquiry-section'] ) ? $meta['t-enquiry-section'] : "";
+					$tf_enquiry_section_status = ! empty( $meta['t-enquiry-section'] ) ? $meta['t-enquiry-section'] : 1;
 					$tf_enquiry_section_icon   = ! empty( $meta['t-enquiry-option-icon'] ) ? esc_html( $meta['t-enquiry-option-icon'] ) : '';
 					$tf_enquiry_section_title  = ! empty( $meta['t-enquiry-option-title'] ) ? esc_html( $meta['t-enquiry-option-title'] ) : '';
 					$tf_enquiry_section_des    = ! empty( $meta['t-enquiry-option-content'] ) ? esc_html( $meta['t-enquiry-option-content'] ) : '';

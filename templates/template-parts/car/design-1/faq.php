@@ -1,4 +1,8 @@
-<?php if(!empty($faqs)){ ?>
+<?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
+if(!empty($faqs)){ ?>
 <div class="tf-car-faq-section" id="tf-faq">
     <?php if(!empty($faq_sec_title)){ ?>   
     <h3><?php echo esc_html($faq_sec_title); ?></h3>

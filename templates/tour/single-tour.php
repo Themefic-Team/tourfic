@@ -3,6 +3,8 @@
  * Template: Signle Tour (Full width)
  */
 // Get header
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Tour\Tour_Price;
@@ -35,6 +37,7 @@ while ( have_posts() ) : the_post();
 
 	// Get Tour Meta
 	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+	
 	/**
 	 * Show/hide sections
 	 */

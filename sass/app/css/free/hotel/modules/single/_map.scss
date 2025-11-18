@@ -5,15 +5,13 @@
                 display: none;
                 @media #{$max1024}{
                     display: block;
-                    margin-top: 15px;
                 }
 
             }
             .map-for-mobile {
                 display: none;
-                @media #{$max1024}{
+                @media #{$max768}{
                     display: block;
-                    margin-top: 15px;
                 }
             }
             .show-on-map {
@@ -21,11 +19,13 @@
                 @include flexbox();
                 flex-direction: column;
                 gap: 10px;
+                @media #{$max768}{
+                    margin-bottom: 0;
+                }
                 iframe {
                     height: 130px;
                 }
                 .tf_btn {
-                    background: linear-gradient(to bottom, $color-primary 0, $color-brand-dark 100%);
                     border: none;
                     text-transform: uppercase;
                     font-weight: bold;
@@ -37,7 +37,7 @@
             }
             .hero-right{
                 .show-on-map{
-                    @media #{$max1024}{
+                    @media #{$max768}{
                         display: none;
                     }
                 }
@@ -54,7 +54,6 @@
                 .tf-hotel-location-preview{
                     position: relative;
                     margin-bottom: 0px;
-                    border: 1px solid $color-border-lite;
                     line-height: 0;
                     @media #{$max768}{
                         margin-bottom: 30px;

@@ -40,6 +40,10 @@ class Tour {
 		add_action( 'wp_after_insert_post', array( $this, 'tf_tour_type_assign_taxonomies'), 100, 3 );
 		add_action( 'wp_ajax_nopriv_tf_tour_booking_popup', array( $this, 'tf_tour_booking_popup_callback' ) );
 		add_action( 'wp_ajax_tf_tour_booking_popup', array( $this, 'tf_tour_booking_popup_callback' ) );
+
+		add_action( 'wp_ajax_nopriv_tf_tour_price_calculation', array( $this, 'tf_tour_price_calculation_callback' ) );
+		add_action( 'wp_ajax_tf_tour_price_calculation', array( $this, 'tf_tour_price_calculation_callback' ) );
+
 	}
 
 	/**
@@ -248,7 +252,10 @@ class Tour {
 							if ( $author ) { ?>
                                 <input type="hidden" name="tf-author" value="<?php echo esc_attr( $author ); ?>" class="tf-post-type"/>
 							<?php } ?>
-                            <button><?php echo esc_html_e( "Check availability", "tourfic" ); ?></button>
+                            <button class="tf_btn">
+								<?php echo esc_html__("Check", "tourfic"); ?>
+								<span><?php echo esc_html__("availability", "tourfic"); ?></span>
+							</button>
                         </div>
                     </div>
                 </div>
@@ -427,7 +434,7 @@ class Tour {
 				<div class="tf-driver-location-box">
 					<div class="tf-submit-button">
 						<input type="hidden" name="type" value="tf_tours" class="tf-post-type"/>
-						<button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html__( apply_filters("tf_tour_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?>  <i class="ri-search-line"></i></button>
+						<button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html( apply_filters("tf_tour_search_form_submit_button_text", 'Search' ) ); ?>  <i class="ri-search-line"></i></button>
 					</div>
 				</div>
 				</div>
@@ -657,7 +664,7 @@ class Tour {
 						<!-- Submit Button -->
 						<input type="hidden" name="type" value="tf_tours" class="tf-post-type" />
 						<button type="submit" class="tf-search__form__submit tf_btn">
-							<?php echo esc_html__(apply_filters("tf_tour_search_form_submit_button_text", 'Search'), 'tourfic'); ?>
+							<?php echo esc_html(apply_filters("tf_tour_search_form_submit_button_text", 'Search')); ?>
 							<svg class="tf-search__form__submit__icon" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M15.75 14.7188L11.5625 10.5312C12.4688 9.4375 12.9688 8.03125 12.9688 6.5C12.9688 2.9375 10.0312 0 6.46875 0C2.875 0 0 2.9375 0 6.5C0 10.0938 2.90625 13 6.46875 13C7.96875 13 9.375 12.5 10.5 11.5938L14.6875 15.7812C14.8438 15.9375 15.0312 16 15.25 16C15.4375 16 15.625 15.9375 15.75 15.7812C16.0625 15.5 16.0625 15.0312 15.75 14.7188ZM1.5 6.5C1.5 3.75 3.71875 1.5 6.5 1.5C9.25 1.5 11.5 3.75 11.5 6.5C11.5 9.28125 9.25 11.5 6.5 11.5C3.71875 11.5 1.5 9.28125 1.5 6.5Z" fill="white" />
 							</svg>
@@ -674,11 +681,17 @@ class Tour {
 						$(".tf_tour_check_in_out_date").on("click", function() {
 							$(".tf-tour-check-in-out-date").trigger("click");
 						});
+						// today + tomorrow
+						const today = new Date();
+						const tomorrow = new Date();
+						tomorrow.setDate(today.getDate() + 1);
+
 						$(".tf-tour-check-in-out-date").flatpickr({
 							enableTime: false,
 							mode: "range",
 							dateFormat: "Y/m/d",
 							minDate: "today",
+							defaultDate: [today, tomorrow],
 
 							// flatpickr locale
 							<?php Helper::tf_flatpickr_locale(); ?>
@@ -907,7 +920,7 @@ class Tour {
                             'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
                             'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
                         };
-                        const dateRegex = regexMap['<?php echo $tour_date_format_for_users; ?>'];
+                        const dateRegex = regexMap['<?php echo esc_attr($tour_date_format_for_users); ?>'];
 
                         // flatpickr first day of Week
 						<?php Helper::tf_flatpickr_locale( 'root' ); ?>
@@ -1039,9 +1052,9 @@ class Tour {
                 <form class="tf_tours_booking tf_tours_main_booking">
 
 					<?php
-					if ( self::tf_booking_popup( $post_id ) ) {
-						echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
-					}
+					// if ( self::tf_booking_popup( $post_id ) ) {
+					// 	echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
+					// }
 					?>
                     <div class="tf-field-group tf-mt-8">
                         <i class="fa-sharp fa-solid fa-calendar-days"></i>
@@ -1062,9 +1075,9 @@ class Tour {
                             <p><?php esc_html_e( "Person Info", "tourfic" ); ?></p>
                         </div>
 
-						<?php do_action( 'tf_tour_single_before_person_selection' ); ?>
-						
-						<?php if ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) :
+                        <?php do_action( 'tf_tour_single_before_person_selection' ); ?>
+
+						<?php if ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' ) ) :
 							?>
 							<div class="tf-field-group tf-mt-16 tf_acrselection">
 								<div class="tf-field tf-flex">
@@ -1081,7 +1094,7 @@ class Tour {
 							</div>
 						<?php endif; ?>
 
-						<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+						<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' ) ) { ?>
 							<div class="tf-field-group tf-mt-16 tf_acrselection">
 								<div class="tf-field tf-flex">
 									<div class="acr-label tf-flex">
@@ -1097,7 +1110,7 @@ class Tour {
 							</div>
 						<?php } ?>
 
-						<?php if ( ! $disable_adult_price && ( ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) ) { ?>
+						<?php if ( ! $disable_adult_price && ( ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' ) ) ) { ?>
 							<div class="tf-field-group tf-mt-16 tf_acrselection">
 								<div class="tf-field tf-flex">
 									<div class="acr-label tf-flex">
@@ -1123,6 +1136,11 @@ class Tour {
                                 <a href="#" class="tf_btn tf_btn_full tf-booking-popup-btn" type="submit"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
                             </div>
 						<?php endif; ?>
+						<?php
+						if ( self::tf_booking_popup( $post_id ) ) {
+							echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
+						}
+						?>
                     </div>
 
                 </form>
@@ -1247,9 +1265,9 @@ class Tour {
                 <form class="tf_tours_booking tf_tours_main_booking">
 
 					<?php
-					if ( self::tf_booking_popup( $post_id ) ) {
-						echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
-					}
+					// if ( self::tf_booking_popup( $post_id ) ) {
+					// 	echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
+					// }
 					?>
                     <div class="tf-field-group tf-mt-8 tf-field-calander">
                         <i class="fa-sharp fa-solid fa-calendar-days"></i>
@@ -1269,7 +1287,7 @@ class Tour {
                         <div class="tf-form-title">
                             <h3 class="tf-person-info-title"><?php esc_html_e( "Person Info", "tourfic" ); ?></h3>
                         </div>
-						<?php if ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+						<?php if ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' ) ) { ?>
                             <div class="tf-field-group tf-mt-16 tf_acrselection">
                                 <div class="tf-field tf-flex">
                                     <div class="acr-label tf-flex">
@@ -1316,7 +1334,7 @@ class Tour {
                             </div>
 						<?php } ?>
 
-						<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+						<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' ) ) { ?>
                             <div class="tf-field-group tf-mt-16 tf_acrselection">
                                 <div class="tf-field tf-flex">
                                     <div class="acr-label tf-flex">
@@ -1359,7 +1377,7 @@ class Tour {
                                 </div>
                             </div>
 						<?php } ?>
-						<?php if ( ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+						<?php if ( ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' ) ) { ?>
                             <div class="tf-field-group tf-mt-16 tf_acrselection">
                                 <div class="tf-field tf-flex">
                                     <div class="acr-label tf-flex">
@@ -1412,6 +1430,11 @@ class Tour {
                                 <a href="#" class="tf_btn tf_btn_full tf_btn_sharp tf-booking-popup-btn" type="submit"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
                             </div>
 						<?php endif; ?>
+						<?php
+						if ( self::tf_booking_popup( $post_id ) ) {
+							echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
+						}
+						?>
                     </div>
 
                     <!-- bottom bar -->
@@ -1755,13 +1778,13 @@ class Tour {
 			endif; ?>
 			<?php if ( $tf_booking_type == 2 && $tf_hide_booking_form == 1 ): ?>
                 <div class="tf-btn-wrap">
-                    <a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf_btn tf_btn_full tf_btn_sharp tf-tour-external-booking-button" style="margin-top: 10px;"><?php esc_html_e( $tf_tour_single_book_now_text, 'tourfic' ); ?></a>
+                    <a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf_btn tf_btn_full tf_btn_sharp tf-tour-external-booking-button" style="margin-top: 10px;"><?php echo esc_html( $tf_tour_single_book_now_text); ?></a>
                 </div>
 				<?php if ( ! empty( $tf_tour_book_now_text ) ) : ?>
                     <div class="tf-mobile-booking-btn">
 						<span>
 							<a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf_btn tf_btn_full tf_btn_sharp tf-tour-external-booking-button"
-                               style="margin-top: 10px;"><?php esc_html_e( $tf_tour_single_book_now_text, 'tourfic' ); ?></a>
+                               style="margin-top: 10px;"><?php echo esc_html( $tf_tour_single_book_now_text); ?></a>
 						</span>
                     </div>
 				<?php endif; ?>
@@ -1776,16 +1799,16 @@ class Tour {
 								<span class="tf_person-icon">
 									<i class="fas fa-user"></i>
 								</span>
-								<?php if ( ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) ) { ?>
+								<?php if ( ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' ) ) ) { ?>
 									<div class="adults-text"><?php echo ( ! empty( $adults ) ? esc_attr( $adults ) : '0' ) . ' ' . esc_html__( "Adults", "tourfic" ); ?></div>
 								<?php } ?>
 
-								<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+								<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' ) ) { ?>
 									<div class="person-sep"></div>
 									<div class="child-text"><?php echo ( ! empty( $child ) ? esc_attr( $child ) : '0' ) . ' ' . esc_html__( "Children", "tourfic" ); ?></div>
 								<?php } ?>
 
-								<?php if ( ! $disable_adult_price && ( ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) ) { ?>
+								<?php if ( ! $disable_adult_price && ( ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' ) ) ) { ?>
 									<div class="person-sep"></div>
 									<div class="infant-text"><?php echo ( ! empty( $infant ) ? esc_attr( $infant ) : '0' ) . ' ' . esc_html__( "Infant", "tourfic" ); ?></div>
 								<?php } ?>
@@ -1794,7 +1817,7 @@ class Tour {
                             </div>
                             <div class="tf_acrselection-wrap" style="display: none;">
                                 <div class="tf_acrselection-inner">
-									<?php if ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+									<?php if ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' ) ) { ?>
 										<div class="tf_acrselection">
 											<div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
 											<div class="acr-select">
@@ -1805,7 +1828,7 @@ class Tour {
 										</div>
 									<?php } ?>
 
-									<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
+									<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' ) ) { ?>
 										<div class="tf_acrselection">
 											<div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
 											<div class="acr-select">
@@ -1816,7 +1839,7 @@ class Tour {
 										</div>
 									<?php } ?>
 
-									<?php if ( ! $disable_adult_price && ( ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) ) { ?>
+									<?php if ( ! $disable_adult_price && ( ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' ) ) ) { ?>
 										<div class="tf_acrselection">
 											<div class="acr-label"><?php esc_html_e( 'Infant', 'tourfic' ); ?></div>
 											<div class="acr-select">
@@ -1835,6 +1858,7 @@ class Tour {
                         <div class='tf_form-row'>
                             <label class='tf_label-row'>
                                 <div class='tf_form-inner'>
+									<i class="fa-sharp fa-solid fa-calendar-days"></i>
                                     <input type='text' name='check-in-out-date' id='check-in-out-date' class='tours-check-in-out' onkeypress="return false;" placeholder='<?php esc_html_e( "Select Date", "tourfic" ); ?>'
                                            value=''
                                            required/>
@@ -2027,12 +2051,12 @@ class Tour {
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $tf_booking_by ) {
 								$active_steps[4] = 4;
 								?>
-                                <li class="tf-booking-step tf-booking-step-<?php echo empty( $traveller_info_coll ) ? esc_attr( "3" ) : esc_attr( "4" ); ?> <?php echo empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( 'active' ) : ''; ?>">
+                                <li class="tf-booking-step tf-booking-step-<?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( "3" ) : esc_attr( "4" ); ?> <?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( 'active' ) : ''; ?>">
                                     <i class="ri-calendar-check-line"></i> <?php echo esc_html__( "Booking info", "tourfic" ); ?>
                                 </li>
 							<?php } ?>
                         </ul>
-						<input type="hidden" value="<?php echo implode(",",$active_steps); ?>" class="tf_popup_stpes" />
+						<input type="hidden" value="<?php echo esc_attr(implode(",",$active_steps)); ?>" class="tf_popup_stpes" />
                     </div>
 					
                     <div class="tf-booking-times">
@@ -2229,7 +2253,7 @@ class Tour {
 						?>
 
                         <!-- Popup Booking Confirmation -->
-                        <div class="tf-booking-content tf-booking-content-<?php echo empty( $traveller_info_coll ) ? esc_attr( "3" ) : esc_attr( "4" ); ?> <?php echo empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-booking-content tf-booking-content-<?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( "3" ) : esc_attr( "4" ); ?> <?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( 'show' ) : ''; ?>">
                             <p><?php echo esc_html( $traveler_details_text ); ?></p>
                             <div class="tf-booking-content-traveller">
                                 <div class="tf-single-tour-traveller">
@@ -2367,7 +2391,7 @@ class Tour {
 						$tf_deposit_amount              = array(
 							"{amount}" => $meta['deposit_type'] == 'fixed' ? wp_kses_post( wc_price( $meta['deposit_amount'] ) ) : $meta['deposit_amount'] . '%'
 						);
-						$tf_partial_payment_label       = ! empty( Helper::tfopt( "deposit-title" ) ) ? Helper::tfopt( "deposit-title" ) : '';
+						$tf_partial_payment_label       = ! empty( Helper::tfopt( "deposit-title" ) ) ? Helper::tfopt( "deposit-title" ) : 'Partial payment of {amount} on total';
 						$tf_partial_payment_description = ! empty( Helper::tfopt( "deposit-subtitle" ) ) ? Helper::tfopt( "deposit-subtitle" ) : '';
 						?>
                         <div class="tf-diposit-switcher">
@@ -2440,7 +2464,7 @@ class Tour {
 					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $tf_booking_by ) {
 						?>
                         <!-- Popup Booking Confirmation -->
-                        <div class="tf-control-pagination tf-pagination-content-<?php echo empty( $traveller_info_coll ) ? esc_attr( "3" ) : esc_attr( "4" ); ?> <?php echo empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-control-pagination tf-pagination-content-<?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( "3" ) : esc_attr( "4" ); ?> <?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( 'show' ) : ''; ?>">
 							<?php
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $tour_extras || $traveller_info_coll ) ) { ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="4"><i class="fa fa-angle-left"></i><?php echo esc_html__( "Back", "tourfic" ); ?></a>
@@ -2500,7 +2524,7 @@ class Tour {
 			$traveler_categories = [];
 			$enable_traveler_category = !empty(Helper::tfopt('enable_traveler_category')) ? Helper::tfopt('enable_traveler_category') : '';
 			$tour_traveler_category = !empty(Helper::tf_data_types(tfopt('tour_traveler_category'))) ? Helper::tf_data_types(tfopt('tour_traveler_category')) : [];
-			
+
 			if ($enable_traveler_category && !empty($tour_traveler_category)) {
 				foreach ($tour_traveler_category as $category) {
 					$category_slug = !empty($category['traveler_slug']) ? sanitize_title($category['traveler_slug']) : '';
@@ -2510,7 +2534,7 @@ class Tour {
 				}
 			}
 		}
-		
+
 		// Check-in & out date
 		if ( empty( $check_in_out ) ) {
 			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
@@ -2524,7 +2548,7 @@ class Tour {
 		$adult_price                      = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : false;
 		$child_price                      = ! empty( $meta['child_price'] ) ? $meta['child_price'] : false;
 		$infant_price                     = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
-		$tour_archive_page_price_settings = ! empty( Helper::tfopt( 'tour_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'tour_archive_price_minimum_settings' ) : 'all';
+		$tour_archive_page_price_settings = ! empty( Helper::tfopt( 'tour_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'tour_archive_price_minimum_settings' ) : 'adult';
 		$meta_disable_review 			  = !empty($meta["t-review"]) ? $meta["t-review"] : 0;
 		$tfopt_disable_review 			  = !empty(Helper::tfopt("t-review")) ? Helper::tfopt("t-review") : 0;
 		$disable_review 				  = $tfopt_disable_review == 1 || $meta_disable_review == 1 ? true : $tfopt_disable_review;
@@ -2551,14 +2575,14 @@ class Tour {
 			'children' => $child,
 			'infant' => $infant
 		];
-		
+
 		// Add traveler categories to URL if they exist
 		if (!empty($traveler_categories)) {
 			foreach ($traveler_categories as $slug => $value) {
 				$query_args[$slug] = $value;
 			}
 		}
-		
+
 		$url = add_query_arg($query_args, $url);
 
 		// Tour Starting Price
@@ -3313,7 +3337,7 @@ class Tour {
 
 			// Loop through each day in range
 			for ($date = $start_ts; $date <= $end_ts; $date = strtotime('+1 day', $date)) {
-				$current_day = date('Y/m/d', $date);
+				$current_day = gmdate('Y/m/d', $date);
 				$found = false;
 
 				// Check if current day exists in any available date range
@@ -3363,7 +3387,7 @@ class Tour {
 				}
 			}
 		}
-		
+
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		if(!empty($package_pricing) && $pricing_rule=='package'){
 			$min_person = null;
@@ -3455,8 +3479,7 @@ class Tour {
 		if ( ! empty( $max_person ) && $max_person >= $total_people && $max_person != 0 && ! empty( $min_person ) && $min_person <= $total_people && $min_person != 0 ) {
 			$people_counter ++;
 		}
-		
-		if ( $people_counter > 0 ) {
+		// if ( $people_counter > 0 ) {
 			$show_fixed_tour = [];
 			if ( ! empty( $first_match ) ) {
 				$show_fixed_tour[] = 1;
@@ -3552,7 +3575,7 @@ class Tour {
 					}
 				}
 			}
-		}
+		// }
 		
 		if ( $has_tour ) {
 
@@ -3625,7 +3648,7 @@ class Tour {
 				$total_people += intval($category_count);
 			}
 		}
-		
+
 		$people_counter = 0;
 		// Max & Min People Check
 		if ( ! empty( $avail_persons['max_person'] ) && $avail_persons['max_person'] >= $total_people && $avail_persons['max_person'] != 0 && ! empty( $avail_persons['min_person'] ) && $avail_persons['min_person'] <= $total_people && $avail_persons['min_person'] != 0 ) {
@@ -3635,7 +3658,7 @@ class Tour {
 		// Set initial tour availability status
 		$has_tour = false;
 
-		if ( $people_counter > 0 ) {
+		// if ( $people_counter > 0 ) {
 			if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
 				if($pricing_type=='person'){
 					if ( ! empty( $meta['adult_price'] ) ) {
@@ -3709,7 +3732,7 @@ class Tour {
 			} else {
 				$has_tour = true;
 			}
-		}
+		// }
 		
 		if ( $has_tour ) {
 
@@ -3725,6 +3748,189 @@ class Tour {
 			);
 
 		}
+	}
+
+	function tf_tour_price_calculation_callback(){
+		// Check nonce security
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
+			return;
+		}
+
+		$post_id = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : '';
+		$tour_date = ! empty( $_POST['date'] ) ? sanitize_text_field( $_POST['date'] ) : '';
+
+		$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+		$pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+		$package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+		$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
+
+		$allow_discount    = ! empty( $meta['allow_discount'] ) ? $meta['allow_discount'] : '';
+        # Get discounts
+        $discount_type    = !empty($meta['discount_type']) ? $meta['discount_type'] : 'none';
+        $discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : 0;
+
+		$matched_availability = null;
+		if ( $tour_date && is_array($tour_availability) ) {
+			$input_date = strtotime($tour_date);
+
+			foreach ( $tour_availability as $date_range => $details ) {
+				if ( !isset($details['check_in'], $details['check_out'], $details['status']) ) {
+					continue;
+				}
+
+				$check_in  = strtotime(trim($details['check_in']));
+				$check_out = strtotime(trim($details['check_out']));
+				$status    = $details['status'];
+
+				if ( $status === 'available' && $input_date >= $check_in && $input_date <= $check_out ) {
+					$matched_availability = $details;
+					break; // Stop loop after first match
+				}
+			}
+
+		}
+
+		if (! empty($matched_availability) ) {
+			if($pricing_rule == 'person'){
+				$adult_price    = ! empty( $matched_availability['adult_price'] ) ? $matched_availability['adult_price'] : '';
+				$child_price = ! empty( $matched_availability['child_price'] ) ? $matched_availability['child_price'] : '' ;
+				$infant_price   = ! empty( $matched_availability['infant_price'] ) ? $matched_availability['infant_price'] : '';
+			}
+			if($pricing_rule == 'group'){
+				$price    = ! empty( $matched_availability['price'] ) ? $matched_availability['price'] : '';
+			}
+			if($pricing_rule == 'package'){
+				$adult_price = null;
+                $child_price = null;
+                $infant_price = null;
+                $price = null;
+				$options_count = ! empty( $matched_availability['options_count'] ) ? $matched_availability['options_count'] : '';
+				if(!empty($options_count)){
+					for($i = 0; $i <= $options_count; $i++){
+
+						if ( !empty($matched_availability['tf_option_adult_price_'.$i]) && ( is_null($adult_price) || $matched_availability['tf_option_adult_price_'.$i] < $adult_price ) ) {
+                            $adult_price = $matched_availability['tf_option_adult_price_'.$i];
+                        }
+
+						if ( !empty($matched_availability['tf_option_child_price_'.$i]) && ( is_null($child_price) || $matched_availability['tf_option_child_price_'.$i] < $child_price ) ) {
+                            $child_price = $matched_availability['tf_option_child_price_'.$i];
+                        }
+
+						if ( !empty($matched_availability['tf_option_infant_price_'.$i]) && ( is_null($infant_price) || $matched_availability['tf_option_infant_price_'.$i] < $infant_price ) ) {
+                            $infant_price = $matched_availability['tf_option_infant_price_'.$i];
+                        }
+
+						if ( !empty($matched_availability['tf_option_group_price_'.$i]) && ( is_null($price) || $matched_availability['tf_option_group_price_'.$i] < $price ) ) {
+                            $price = $matched_availability['tf_option_group_price_'.$i];
+                        }
+
+					}
+				}
+			}
+		} else {
+			if($pricing_rule == 'person'){
+				$adult_price  = !empty($meta['adult_price']) ? $meta['adult_price'] : 0;
+                $child_price  = !empty($meta['child_price']) ? $meta['child_price'] : 0;
+                $infant_price = !empty($meta['infant_price']) ? $meta['infant_price'] : 0;
+			}
+			if($pricing_rule == 'group'){
+				$price = !empty($meta['group_price']) ? $meta['group_price'] : 0;
+			}
+            if($pricing_rule == 'package' && !empty($package_pricing)){
+                $adult_price = null;
+                $child_price = null;
+                $infant_price = null;
+                $price = null;
+                foreach($package_pricing as $package){
+
+                    if (!empty($package['adult_tabs'][1]['adult_price'])) {
+                        if (is_null($adult_price) || $package['adult_tabs'][1]['adult_price'] < $adult_price) {
+                            $adult_price = $package['adult_tabs'][1]['adult_price'];
+                        }
+                    }
+
+                    if (!empty($package['child_tabs'][1]['child_price'])) {
+                        if (is_null($child_price) || $package['child_tabs'][1]['child_price'] < $child_price) {
+                            $child_price = $package['child_tabs'][1]['child_price'];
+                        }
+                    }
+
+                    if (!empty($package['infant_tabs'][1]['infant_price'])) {
+                        if (is_null($infant_price) || $package['infant_tabs'][1]['infant_price'] < $infant_price) {
+                            $infant_price = $package['infant_tabs'][1]['infant_price'];
+                        }
+                    }
+
+                    if (!empty($package['group_tabs'][1]['group_price'])) {
+                        if (is_null($price) || $package['group_tabs'][1]['group_price'] < $price) {
+                            $price = $package['group_tabs'][1]['group_price'];
+                        }
+                    }
+
+                }
+            }
+		}
+
+		// Discount Apply
+		if(!empty($allow_discount) && $discount_type == 'percent') {
+			if(!empty($adult_price)){
+				$adult_price = number_format( $adult_price - (( $adult_price / 100 ) * $discounted_price) , 2, '.', '' );
+			}
+			if(!empty($child_price)){
+				$child_price = number_format( $child_price - (( $child_price / 100 ) * $discounted_price) , 2, '.', '' );
+			}
+			if(!empty($infant_price)){
+				$infant_price = number_format( $infant_price - (( $infant_price / 100 ) * $discounted_price) , 2, '.', '' );
+			}
+			if(!empty($price)){
+				$price = number_format( $price - (( $price / 100 ) * $discounted_price) , 2, '.', '' );
+			}
+		} else if(!empty($allow_discount) && $discount_type == 'fixed') {
+			if(!empty($adult_price)){
+				$adult_price = number_format( ( $adult_price - $discounted_price ), 2, '.', '' );
+			}
+			if(!empty($child_price)){
+				$child_price = number_format( ( $child_price - $discounted_price ), 2, '.', '' );
+			}
+			if(!empty($infant_price)){
+				$infant_price = number_format( ( $infant_price - $discounted_price ), 2, '.', '' );
+			}
+			if(!empty($price)){
+				$price = number_format( ( $price - $discounted_price ), 2, '.', '' );
+			}
+		}
+
+
+		$tour_archive_page_price_settings = ! empty( Helper::tfopt( 'tour_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'tour_archive_price_minimum_settings' ) : 'adult';
+		if($tour_archive_page_price_settings=='adult'){
+			$min_price = !empty($adult_price) ? $adult_price : '';
+		}elseif($tour_archive_page_price_settings=='child'){
+			$min_price = !empty($child_price) ? $child_price : '';
+		}elseif($tour_archive_page_price_settings=='all'){
+			if($pricing_rule == 'group'){
+				$min_price    = ! empty( $price ) ? $price : '';
+			}else{
+				$all_prices = [];
+				if(!empty($adult_price)){
+					$all_prices[] = $adult_price;
+				}
+				if(!empty($child_price)){
+					$all_prices[] = $child_price;
+				}
+				$min_price = !empty($all_prices) ? min($all_prices) : '';
+			}
+		}
+
+		wp_send_json_success( [
+			'adult' => !empty($adult_price) ? wp_strip_all_tags(wc_price($adult_price)) : '',
+			'child' => !empty($child_price) ? wp_strip_all_tags(wc_price($child_price)) : '',
+			'infant'    => !empty($infant_price) ? wp_strip_all_tags(wc_price($infant_price)) : '',
+			'group_price'    => !empty($price) ? wp_strip_all_tags(wc_price($price)) : '',
+			/* translators: %s will return total price */
+			'min_price' => sprintf( __( '<span>From</span> %1$s', 'tourfic' ), wp_strip_all_tags(wc_price( $min_price )) ),
+		] );
+
+		wp_die();
 	}
 
 	/*
@@ -3748,16 +3954,38 @@ class Tour {
 			$response['message'] = esc_html__( 'Please select a date', 'tourfic' );
 		}
 
-		if ( Helper::tfopt( 'date_tour_search' ) ) {
-			if ( ! empty( $_POST['check-in-out-date'] ) ) {
-				$response['query_string'] = str_replace( '&action=tf_tour_search', '', http_build_query( $_POST ) );
-				$response['status']       = 'success';
+		// Whitelist only fields needed for search
+		$allowed_fields = [
+			'place-name',
+			'place',
+			'adults',
+			'children',
+			'infant',
+			'check-in-out-date',
+			'type',
+			'types',
+			'from',
+			'to',
+			'_nonce',
+		];
+
+		$fields = [];
+		foreach ( $allowed_fields as $key ) {
+			if ( isset( $_POST[ $key ] ) ) {
+				if ( is_array( $_POST[ $key ] ) ) {
+					$fields[ $key ] = array_map( 'sanitize_text_field', wp_unslash( $_POST[ $key ] ) );
+				} else {
+					$fields[ $key ] = sanitize_text_field( wp_unslash( $_POST[ $key ] ) );
+				}
 			}
-		} else {
-			if ( ! Helper::tfopt( 'required_location_tour_search' ) || ! empty( $_POST['place'] ) ) {
-				$response['query_string'] = str_replace( '&action=tf_tour_search', '', http_build_query( $_POST ) );
-				$response['status']       = 'success';
-			}
+		}
+
+		// Success response if validation passes
+		if ( ( Helper::tfopt( 'date_tour_search' ) && ! empty( $fields['check-in-out-date'] ) )
+			|| ( ! Helper::tfopt( 'date_tour_search' ) && ( ! Helper::tfopt( 'required_location_tour_search' ) || ! empty( $fields['place'] ) ) ) ) {
+
+			$response['query_string'] = http_build_query( $fields );
+			$response['status']       = 'success';
 		}
 
 		echo wp_json_encode( $response );
@@ -3819,7 +4047,7 @@ class Tour {
     */
 	function tf_tours_custom_status_creation() {
 		register_post_status( 'expired', array(
-			'label'                     => _x( 'Expired', 'post', 'tourfic'),
+			'label'                     => esc_html(_x( 'Expired', 'post', 'tourfic')),
 			/* translators: %s: number of posts */
 			'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>', 'tourfic'),
 			'public'                    => true,
@@ -4296,8 +4524,8 @@ class Tour {
 
 		if ( $pricing_rule=='package' && !empty($single_package) && $single_package['pricing_type'] == 'group' ) {
 			$pack_max_people = !empty($single_package['group_tabs'][3]['max_person']) ? $single_package['group_tabs'][3]['max_person'] : 0;
-
-			$max_text = sprintf( _n( '%s person', '%s people', $pack_max_people, 'tourfic' ), $pack_max_people );
+			/* translators: %s: maximum number of person */
+			$max_text = sprintf( __( '%s person', 'tourfic' ), $pack_max_people );
 			if ( $total_people_booking > $pack_max_people && $pack_max_people > 0 ) {
 				/* translators: %1$s: maximum number of people, %2$s: start date, %3$s: end date */
 				$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
@@ -4308,14 +4536,14 @@ class Tour {
 		if ( $pricing_rule!='package' && empty($matched_availability) ) {
 			$pack_max_people = !empty($meta['max_person']) ? $meta['max_person'] : 0;
 			$pack_min_people = !empty($meta['min_person']) ? $meta['min_person'] : 0;
-
-			$max_text = sprintf( _n( '%s person', '%s people', $pack_max_people, 'tourfic' ), $pack_max_people );
+			/* translators: %s: maximum number of person */
+			$max_text = sprintf( __( '%s person', 'tourfic' ), $pack_max_people );
 			if ( $total_people_booking > $pack_max_people && $pack_max_people > 0 ) {
 				/* translators: %1$s: maximum number of people, %2$s: start date, %3$s: end date */
 				$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
 			}
-
-			$min_text = sprintf( _n( '%s person', '%s people', $pack_min_people, 'tourfic' ), $pack_min_people );
+			/* translators: %s: minimum number of person */
+			$min_text = sprintf( __( '%s person', 'tourfic' ), $pack_min_people );
 			if ( $total_people_booking < $pack_min_people && $pack_min_people > 0 ) {
 				/* translators: %1$s: Minimum number of people, %2$s: start date, %3$s: end date */
 				$response['errors'][] = sprintf( esc_html__( 'Minimum %1$s required', 'tourfic' ), $min_text );
@@ -4436,33 +4664,38 @@ class Tour {
 		$tour_extra_title_arr = [];
 		$tour_extra_meta      = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
 		if ( ! empty( $tour_extra_meta ) ) {
-			$tours_extra         = explode( ',', $_POST['tour_extra'] );
-			$tour_extra_quantity = explode( ',', $_POST["tour_extra_quantity"] );
-			foreach ( $tours_extra as $extra_key => $extra ) {
-				$tour_extra_pricetype = ! empty( $tour_extra_meta[ $extra ]['price_type'] ) ? $tour_extra_meta[ $extra ]['price_type'] : 'fixed';
-				if ( $tour_extra_pricetype == "fixed" ) {
-					if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-						$tour_extra_total       += $tour_extra_meta[ $extra ]['price'];
-						$tour_extra_title_arr[] = array(
-							'title' => $tour_extra_meta[ $extra ]['title'],
-							'price' => $tour_extra_meta[ $extra ]['price']
-						);
-					}
-				} else if ( $tour_extra_pricetype == "quantity" ) {
-					if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-						$tour_extra_total       += $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ];
-						$tour_extra_title_arr[] = array(
-							'title' => $tour_extra_meta[ $extra ]['title'] . " x " . $tour_extra_quantity[ $extra_key ],
-							'price' => $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ]
-						);
-					}
-				} else {
-					if ( ! empty( $tour_extra_meta[ $extra ]['price'] ) && ! empty( $tour_extra_meta[ $extra ]['title'] ) ) {
-						$tour_extra_total       += ( $tour_extra_meta[ $extra ]['price'] * $total_people );
-						$tour_extra_title_arr[] = array(
-							'title' => $tour_extra_meta[ $extra ]['title'],
-							'price' => $tour_extra_meta[ $extra ]['price'] * $total_people
-						);
+			$tf_tour_extra = !empty($_POST['tour_extra']) ? sanitize_text_field($_POST['tour_extra']) : '';
+			$tours_extra         = !empty($tf_tour_extra) ? explode( ',', $tf_tour_extra ) : [];
+			$tf_tour_extra_quantity = !empty($_POST['tour_extra_quantity']) ? sanitize_text_field($_POST['tour_extra_quantity']) : '';
+			$tour_extra_quantity = !empty($tf_tour_extra_quantity) ? explode( ',', $tf_tour_extra_quantity ) : [];
+
+			if(!empty($tours_extra)){
+				foreach ( $tours_extra as $extra_key => $extra ) {
+					$tour_extra_pricetype = ! empty( $tour_extra_meta[ $extra ]['price_type'] ) ? $tour_extra_meta[ $extra ]['price_type'] : 'fixed';
+					if ( $tour_extra_pricetype == "fixed" ) {
+						if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
+							$tour_extra_total       += $tour_extra_meta[ $extra ]['price'];
+							$tour_extra_title_arr[] = array(
+								'title' => $tour_extra_meta[ $extra ]['title'],
+								'price' => $tour_extra_meta[ $extra ]['price']
+							);
+						}
+					} else if ( $tour_extra_pricetype == "quantity" ) {
+						if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
+							$tour_extra_total       += $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ];
+							$tour_extra_title_arr[] = array(
+								'title' => $tour_extra_meta[ $extra ]['title'] . " x " . $tour_extra_quantity[ $extra_key ],
+								'price' => $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ]
+							);
+						}
+					} else {
+						if ( ! empty( $tour_extra_meta[ $extra ]['price'] ) && ! empty( $tour_extra_meta[ $extra ]['title'] ) ) {
+							$tour_extra_total       += ( $tour_extra_meta[ $extra ]['price'] * $total_people );
+							$tour_extra_title_arr[] = array(
+								'title' => $tour_extra_meta[ $extra ]['title'],
+								'price' => $tour_extra_meta[ $extra ]['price'] * $total_people
+							);
+						}
 					}
 				}
 			}
@@ -4575,24 +4808,26 @@ class Tour {
 
 			}
 
-			if ( ! empty( $_POST['deposit'] ) && $_POST['deposit'] == "true" ) {
-				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) ) {
-
-					if ( ! empty( $meta['deposit_type'] ) && $meta['deposit_type'] == 'fixed' ) {
-						$tf_deposit_amount   = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : 0;
-						$tf_due_amount       = $tf_tours_data_price - $tf_deposit_amount;
-						$tf_tours_data_price = $tf_deposit_amount;
-					} else {
-						$tf_deposit_amount   = ! empty( $meta['deposit_amount'] ) ? ( $tf_tours_data_price * $meta['deposit_amount'] ) / 100 : 0;
-						$tf_due_amount       = $tf_tours_data_price - $tf_deposit_amount;
-						$tf_tours_data_price = $tf_deposit_amount;
-					}
-				}
-			}
 			$traveller_info_fields = ! empty( Helper::tfopt( 'without-payment-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'without-payment-field' ) ) : '';
 
 			$response['traveller_info']    = '';
 			$response['traveller_summery'] = '';
+			$date_format = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+
+			// Map PHP date format to JS-friendly placeholder
+			$placeholders = array(
+				'Y/m/d' => 'YYYY/MM/DD',
+				'd/m/Y' => 'DD/MM/YYYY',
+				'm/d/Y' => 'MM/DD/YYYY',
+				'Y-m-d' => 'YYYY-MM-DD',
+				'd-m-Y' => 'DD-MM-YYYY',
+				'm-d-Y' => 'MM-DD-YYYY',
+				'Y.m.d' => 'YYYY.MM.DD',
+				'd.m.Y' => 'DD.MM.YYYY',
+				'm.d.Y' => 'MM.DD.YYYY',
+			);
+			$placeholder = isset( $placeholders[ $date_format ] ) ? $placeholders[ $date_format ] : 'YYYY/MM/DD';
+
 			$response['tour_packages'] = '';
 			for ( $traveller_in = 1; $traveller_in <= $total_people; $traveller_in ++ ) {
 				$response['traveller_info'] .= '<div class="tf-single-tour-traveller tf-single-travel">
@@ -4606,7 +4841,12 @@ class Tour {
                     </div>
                     <div class="traveller-single-info">
                         <label for="tf_dob' . $traveller_in . '">' . sprintf( esc_html__( 'Date of birth', 'tourfic' ) ) . '</label>
-                        <input type="date" name="traveller[' . $traveller_in . '][tf_dob]" id="tf_dob' . $traveller_in . '" data-required="1" />
+                        <input type="text" class="tf-date-picker" 
+							name="traveller[' . $traveller_in . '][tf_dob]" 
+							id="tf_dob' . $traveller_in . '" 
+							data-required="1" 
+							placeholder="' . esc_attr( $placeholder ) . '" 
+							data-format="' . esc_attr( $date_format ) . '" />
                         <div class="error-text" data-error-for="tf_dob' . $traveller_in . '"></div>
                     </div>
                     <div class="traveller-single-info">
@@ -4617,12 +4857,21 @@ class Tour {
                     ';
 				} else {
 					foreach ( $traveller_info_fields as $field ) {
-						if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) {
+						if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] ) {
 							$reg_field_required         = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
 							$response['traveller_info'] .= '
                             <div class="traveller-single-info">
                                 <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
                                 <input type="' . $field['reg-fields-type'] . '" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $traveller_in . '" />
+                                <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
+                            </div>';
+						}
+						if ( "date" == $field['reg-fields-type'] ) {
+							$reg_field_required         = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
+							$response['traveller_info'] .= '
+                            <div class="traveller-single-info">
+                                <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
+                                <input type="text" class="tf-date-picker" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $traveller_in . '" placeholder="' . esc_attr( $placeholder ) . '" data-format="' . esc_attr( $date_format ) . '" />
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
                             </div>';
 						}
@@ -4747,6 +4996,22 @@ class Tour {
 					}
 				}
 			}
+
+			if ( ! empty( $_POST['deposit'] ) && $_POST['deposit'] == "true" ) {
+				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) ) {
+
+					if ( ! empty( $meta['deposit_type'] ) && $meta['deposit_type'] == 'fixed' ) {
+						$tf_deposit_amount   = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : 0;
+						$tf_due_amount       = $tf_tours_data_price - $tf_deposit_amount;
+						$tf_tours_data_price = $tf_deposit_amount;
+					} else {
+						$tf_deposit_amount   = ! empty( $meta['deposit_amount'] ) ? ( $tf_tours_data_price * $meta['deposit_amount'] ) / 100 : 0;
+						$tf_due_amount       = $tf_tours_data_price - $tf_deposit_amount;
+						$tf_tours_data_price = $tf_deposit_amount;
+					}
+				}
+			}
+
 			if ( ! empty( $tf_due_amount ) ) {
 				$response['traveller_summery'] .= '<tr>
                     <td align="left">' . esc_html__( 'Due', 'tourfic' ) . '</td>

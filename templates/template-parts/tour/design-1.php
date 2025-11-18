@@ -1,4 +1,6 @@
 <?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Tour\Tour;
@@ -102,7 +104,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                 <div class="tf-share">
                                     <a href="#dropdown-share-center" class="share-toggle tf-icon tf-social-box"
                                        data-toggle="true">
-                                        <i class="fa-solid fa-share-nodes"></i>
+                                        <i class="ri-share-line"></i>
                                     </a>
                                     <div id="dropdown-share-center" class="share-tour-content">
                                         <div class="tf-dropdown-share-content">
@@ -210,7 +212,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                 <?php
                                                 $tour_price = [];
                                                 $tf_pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-                                                $tour_single_price_settings = !empty(Helper::tfopt('tour_archive_price_minimum_settings')) ? Helper::tfopt('tour_archive_price_minimum_settings') : 'all';
+                                                $tour_single_price_settings = !empty(Helper::tfopt('tour_archive_price_minimum_settings')) ? Helper::tfopt('tour_archive_price_minimum_settings') : 'adult';
                                                 
                                                 $min_sale_price = null;
                                                 if( $tf_pricing_rule  && $tf_pricing_rule == 'person' ){
@@ -306,7 +308,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         }
                                         ?>
 	                                    <?php if ($tf_booking_type == 2 && $tf_hide_booking_form == 1):?>
-                                            <a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank" class="tf_btn tf_btn_large" style="margin-top: 10px;"><?php echo esc_html__($tf_tour_single_book_now_text, 'tourfic'); ?></a>
+                                            <a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank" class="tf_btn tf_btn_large" style="margin-top: 10px;"><?php echo esc_html($tf_tour_single_book_now_text); ?></a>
 	                                    <?php endif; ?>
                                     </div>
                                 </div>
@@ -341,7 +343,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                 </div>
 							<?php } ?>
 							<?php
-							$tf_enquiry_section_status = ! empty( $meta['t-enquiry-section'] ) ? $meta['t-enquiry-section'] : "";
+							$tf_enquiry_section_status = ! empty( $meta['t-enquiry-section'] ) ? $meta['t-enquiry-section'] : 1;
                             $tf_enquiry_section_icon = ! empty( $meta['t-enquiry-option-icon'] ) ? esc_html( $meta['t-enquiry-option-icon'] ) : '';
                             $tf_enquiry_section_title = ! empty( $meta['t-enquiry-option-title'] ) ? esc_html( $meta['t-enquiry-option-title'] ) : '';
                             $tf_enquiry_section_des = ! empty( $meta['t-enquiry-option-content'] ) ? esc_html( $meta['t-enquiry-option-content'] ) : '';

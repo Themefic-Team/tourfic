@@ -226,6 +226,9 @@
                                     @media #{$max1024}{
                                         text-align: center;
                                     }
+                                    @media #{$max575}{
+                                        content: "→";
+                                    }
                                 }
                             }
                         }
@@ -297,6 +300,7 @@
                     
                     p{
                         color: $color-text;
+                        margin-bottom: 0;
                     }
                     
                 }
@@ -347,7 +351,7 @@
                     padding: 0px;
                     .tf-single-itinerary {
                         background: $color-filling-fg;
-                        padding: 16px 32px;
+                        padding: 16px;
                         display: flex;
                         flex-direction: column;
                         gap: 24px;
@@ -392,10 +396,7 @@
                             margin-right: 16px;
                             width: max-content;
                             max-width: 30%;
-                            @media #{$max768}{
-                                padding-left: 0;
-                                margin-right: 0;
-                            }
+                            background-color: $color-brand-lite;
                         }
                         .tf-itinerary-title-text {
                             flex: 1;
@@ -428,6 +429,7 @@
                             grid-template-columns: 1fr 1fr;
                             gap: 15px;
                             .tf-itinerary-single-meta{
+                                position: relative;
                                 li{
                                     color: $color-text;
                                     font-size: 1rem;
@@ -459,10 +461,6 @@
                         flex-direction: row;
                         flex-wrap: wrap;
                         gap: 12px 10px;
-                    }
-            
-                    .tf-itinerary-content-details ul li {
-                        width: calc(50% - 5px);
                     }
                 }
             

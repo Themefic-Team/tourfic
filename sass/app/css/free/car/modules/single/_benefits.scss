@@ -18,6 +18,9 @@
                         @media #{$max768}{
                             width: 100%;
                         }
+                        i{
+                            color: $color-primary;
+                        }
                     }
                 }
             }

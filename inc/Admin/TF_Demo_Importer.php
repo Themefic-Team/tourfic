@@ -21,6 +21,58 @@ class TF_Demo_Importer {
 		return self::$instance;
 	}
 
+	/**
+	 * Get remote image data from a URL using WordPress HTTP API
+	 * 
+	 * @param string $image_url The URL of the image to download
+	 * @return array|false Returns array with image data on success, false on failure
+	 */
+	private function get_remote_image_data($image_url) {
+		if (!filter_var($image_url, FILTER_VALIDATE_URL)) {
+			return false;
+		}
+
+		$response = wp_remote_get($image_url, array(
+			'timeout' => 30,
+			'redirection' => 5,
+		));
+
+		// Check for errors
+		if (is_wp_error($response)) {
+			error_log('Error downloading image: ' . $response->get_error_message());
+			return false;
+		}
+
+		// Check response code
+		$response_code = wp_remote_retrieve_response_code($response);
+		if (200 !== $response_code) {
+			error_log('Invalid response code when downloading image: ' . $response_code);
+			return false;
+		}
+
+		// Get the image data
+		$image_data = wp_remote_retrieve_body($response);
+		if (empty($image_data)) {
+			error_log('Empty image data received');
+			return false;
+		}
+
+		// Get content type to verify this is actually an image
+		$content_type = wp_remote_retrieve_header($response, 'content-type');
+		if (!str_contains($content_type, 'image/')) {
+			error_log('URL does not point to an image (Content-Type: ' . $content_type . ')');
+			return false;
+		}
+
+		// Return the image data along with some useful metadata
+		return array(
+			'data' => $image_data,
+			'content_type' => $content_type,
+			'filename' => basename(wp_parse_url($image_url, PHP_URL_PATH)),
+			'filesize' => strlen($image_data),
+		);
+	}
+
 	public function tf_dummy_hotels_import() {
 		$hotels_post = array(
 			'post_type'      => 'tf_hotel',
@@ -276,30 +328,32 @@ class TF_Demo_Importer {
 								$upload_dir = wp_upload_dir();
 								$image_path = $upload_dir['path'] . '/' . $filename;
 
-								$image_data = file_get_contents( $thumbnail );
-								file_put_contents( $image_path, $image_data );
+								$image_data = $this->get_remote_image_data($thumbnail);
+								if ($image_data !== false) {
+									file_put_contents( $image_path, $image_data['data'] );
 
-								// Check if the image was downloaded successfully.
-								if ( file_exists( $image_path ) ) {
-									// Create the attachment in the media library.
-									$attachment = array(
-										'guid'           => $upload_dir['url'] . '/' . $filename,
-										'post_mime_type' => 'image/jpeg', // Replace with the appropriate mime type if needed.
-										'post_title'     => sanitize_file_name( $filename ),
-										'post_content'   => '',
-										'post_status'    => 'inherit',
-									);
+									// Check if the image was downloaded successfully.
+									if ( file_exists( $image_path ) ) {
+										// Create the attachment in the media library.
+										$attachment = array(
+											'guid'           => $upload_dir['url'] . '/' . $filename,
+											'post_mime_type' => $image_data['content_type'], // Replace with the appropriate mime type if needed.
+											'post_title'     => sanitize_file_name( $filename ),
+											'post_content'   => '',
+											'post_status'    => 'inherit',
+										);
 
-									$attach_id = wp_insert_attachment( $attachment, $image_path, $post_id );
+										$attach_id = wp_insert_attachment( $attachment, $image_path, $post_id );
 
-									// Include the necessary file for media_handle_sideload().
-									require_once( ABSPATH . 'wp-admin/includes/image.php' );
+										// Include the necessary file for media_handle_sideload().
+										require_once( ABSPATH . 'wp-admin/includes/image.php' );
 
-									// Set the image as the post thumbnail.
-									$attach_data = wp_generate_attachment_metadata( $attach_id, $image_path );
-									wp_update_attachment_metadata( $attach_id, $attach_data );
+										// Set the image as the post thumbnail.
+										$attach_data = wp_generate_attachment_metadata( $attach_id, $image_path );
+										wp_update_attachment_metadata( $attach_id, $attach_data );
 
-									$post_meta['_thumbnail_id'] = $attach_id;
+										$post_meta['_thumbnail_id'] = $attach_id;
+									}
 								}
 							}
 
@@ -324,18 +378,18 @@ class TF_Demo_Importer {
 							foreach ( $image_urls as $image_url ) {
 								if ( ! empty( $image_url ) ) {
 									// Download the image file
-									$image_data = file_get_contents( $image_url );
+									$image_data = $this->get_remote_image_data($image_url);
 									//if not found image
 									if ( $image_data === false ) {
 										continue;
 									}
 									// Create a unique filename for the image
-									$filename   = basename( $image_url );
+									$filename   = $image_data['filename'];
 									$upload_dir = wp_upload_dir();
 									$image_path = $upload_dir['path'] . '/' . $filename;
 
 									// Save the image file to the uploads directory
-									$result = file_put_contents( $image_path, $image_data );
+									$result = file_put_contents( $image_path, $image_data['data'] );
 
 									//failed to save image
 									if ( $result === false ) {
@@ -345,7 +399,7 @@ class TF_Demo_Importer {
 									// Create the attachment for the uploaded image
 									$attachment = array(
 										'guid'           => $upload_dir['url'] . '/' . $filename,
-										'post_mime_type' => 'image/jpeg',
+										'post_mime_type' => $image_data['content_type'],
 										'post_title'     => preg_replace( '/\.[^.]+$/', '', $filename ),
 										'post_content'   => '',
 										'post_status'    => 'inherit'
@@ -393,18 +447,18 @@ class TF_Demo_Importer {
 
 									if ( ! empty( $image_url ) ) {
 										// Download the image file
-										$image_data = file_get_contents( $image_url );
+										$image_data = $this->get_remote_image_data($image_url);
 										//if not found image
 										if ( $image_data === false ) {
 											continue;
 										}
 										// Create a unique filename for the image
-										$filename   = basename( $image_url );
+										$filename   = $image_data['filename'];
 										$upload_dir = wp_upload_dir();
 										$image_path = $upload_dir['path'] . '/' . $filename;
 
 										// Save the image file to the uploads directory
-										$result = file_put_contents( $image_path, $image_data );
+										$result = file_put_contents( $image_path, $image_data['data'] );
 
 										//failed to save image
 										if ( $result === false ) {
@@ -414,7 +468,7 @@ class TF_Demo_Importer {
 										// Create the attachment for the uploaded image
 										$attachment = array(
 											'guid'           => $upload_dir['url'] . '/' . $filename,
-											'post_mime_type' => 'image/jpeg',
+											'post_mime_type' => $image_data['content_type'],
 											'post_title'     => preg_replace( '/\.[^.]+$/', '', $filename ),
 											'post_content'   => '',
 											'post_status'    => 'inherit'
@@ -952,30 +1006,32 @@ class TF_Demo_Importer {
 							$upload_dir = wp_upload_dir();
 							$image_path = $upload_dir['path'] . '/' . $filename;
 
-							$image_data = file_get_contents( $thumbnail );
-							file_put_contents( $image_path, $image_data );
+							$image_data = $this->get_remote_image_data( $thumbnail );
+							if ($image_data !== false) {
+								file_put_contents( $image_path, $image_data['data'] );
 
-							// Check if the image was downloaded successfully.
-							if ( file_exists( $image_path ) ) {
-								// Create the attachment in the media library.
-								$attachment = array(
-									'guid'           => $upload_dir['url'] . '/' . $filename,
-									'post_mime_type' => 'image/jpeg', // Replace with the appropriate mime type if needed.
-									'post_title'     => sanitize_file_name( $filename ),
-									'post_content'   => '',
-									'post_status'    => 'inherit',
-								);
+								// Check if the image was downloaded successfully.
+								if ( file_exists( $image_path ) ) {
+									// Create the attachment in the media library.
+									$attachment = array(
+										'guid'           => $upload_dir['url'] . '/' . $filename,
+										'post_mime_type' => $image_data['content_type'], // Replace with the appropriate mime type if needed.
+										'post_title'     => sanitize_file_name( $filename ),
+										'post_content'   => '',
+										'post_status'    => 'inherit',
+									);
 
-								$attach_id = wp_insert_attachment( $attachment, $image_path, $post_id );
+									$attach_id = wp_insert_attachment( $attachment, $image_path, $post_id );
 
-								// Include the necessary file
-								require_once( ABSPATH . 'wp-admin/includes/image.php' );
+									// Include the necessary file
+									require_once( ABSPATH . 'wp-admin/includes/image.php' );
 
-								// Set the image as the post thumbnail.
-								$attach_data = wp_generate_attachment_metadata( $attach_id, $image_path );
-								wp_update_attachment_metadata( $attach_id, $attach_data );
+									// Set the image as the post thumbnail.
+									$attach_data = wp_generate_attachment_metadata( $attach_id, $image_path );
+									wp_update_attachment_metadata( $attach_id, $attach_data );
 
-								$post_meta['_thumbnail_id'] = $attach_id;
+									$post_meta['_thumbnail_id'] = $attach_id;
+								}
 							}
 						}
 
@@ -1006,18 +1062,18 @@ class TF_Demo_Importer {
 						foreach ( $image_urls as $image_url ) {
 							if ( ! empty( $image_url ) ) {
 								// Download the image file
-								$image_data = file_get_contents( $image_url );
+								$image_data = $this->get_remote_image_data( $image_url );
 								//if not found image
 								if ( $image_data === false ) {
 									continue;
 								}
 								// Create a unique filename for the image
-								$filename   = basename( $image_url );
+								$filename   = $image_data['filename'];
 								$upload_dir = wp_upload_dir();
 								$image_path = $upload_dir['path'] . '/' . $filename;
 
 								// Save the image file to the uploads directory
-								$result = file_put_contents( $image_path, $image_data );
+								$result = file_put_contents( $image_path, $image_data['data'] );
 
 								//failed to save image
 								if ( $result === false ) {
@@ -1027,7 +1083,7 @@ class TF_Demo_Importer {
 								// Create the attachment for the uploaded image
 								$attachment = array(
 									'guid'           => $upload_dir['url'] . '/' . $filename,
-									'post_mime_type' => 'image/jpeg',
+									'post_mime_type' => $image_data['content_type'],
 									'post_title'     => preg_replace( '/\.[^.]+$/', '', $filename ),
 									'post_content'   => '',
 									'post_status'    => 'inherit'
@@ -1170,18 +1226,18 @@ class TF_Demo_Importer {
 							foreach ( $image_urls as $image_url ) {
 								if ( ! empty( $image_url ) ) {
 									// Download the image file
-									$image_data = file_get_contents( $image_url );
+									$image_data = $this->get_remote_image_data( $image_url );
 									//if not found image
 									if ( $image_data === false ) {
 										continue;
 									}
 									// Create a unique filename for the image
-									$filename   = basename( $image_url );
+									$filename   = $image_data['filename'];
 									$upload_dir = wp_upload_dir();
 									$image_path = $upload_dir['path'] . '/' . $filename;
 
 									// Save the image file to the uploads directory
-									$result = file_put_contents( $image_path, $image_data );
+									$result = file_put_contents( $image_path, $image_data['data'] );
 
 									//failed to save image
 									if ( $result === false ) {
@@ -1191,7 +1247,7 @@ class TF_Demo_Importer {
 									// Create the attachment for the uploaded image
 									$attachment = array(
 										'guid'           => $upload_dir['url'] . '/' . $filename,
-										'post_mime_type' => 'image/jpeg',
+										'post_mime_type' => $image_data['content_type'],
 										'post_title'     => preg_replace( '/\.[^.]+$/', '', $filename ),
 										'post_content'   => '',
 										'post_status'    => 'inherit'
@@ -1611,30 +1667,32 @@ class TF_Demo_Importer {
 								$upload_dir = wp_upload_dir();
 								$image_path = $upload_dir['path'] . '/' . $filename;
 
-								$image_data = file_get_contents( $thumbnail );
-								file_put_contents( $image_path, $image_data );
+								$image_data = $this->get_remote_image_data( $thumbnail );
+									if ($image_data !== false) {
+									file_put_contents( $image_path, $image_data['data'] );
 
-								// Check if the image was downloaded successfully.
-								if ( file_exists( $image_path ) ) {
-									// Create the attachment in the media library.
-									$attachment = array(
-										'guid'           => $upload_dir['url'] . '/' . $filename,
-										'post_mime_type' => 'image/jpeg', // Replace with the appropriate mime type if needed.
-										'post_title'     => sanitize_file_name( $filename ),
-										'post_content'   => '',
-										'post_status'    => 'inherit',
-									);
+									// Check if the image was downloaded successfully.
+									if ( file_exists( $image_path ) ) {
+										// Create the attachment in the media library.
+										$attachment = array(
+											'guid'           => $upload_dir['url'] . '/' . $filename,
+											'post_mime_type' => $image_data['content_type'], // Replace with the appropriate mime type if needed.
+											'post_title'     => sanitize_file_name( $filename ),
+											'post_content'   => '',
+											'post_status'    => 'inherit',
+										);
 
-									$attach_id = wp_insert_attachment( $attachment, $image_path, $post_id );
+										$attach_id = wp_insert_attachment( $attachment, $image_path, $post_id );
 
-									// Include the necessary file for media_handle_sideload().
-									require_once( ABSPATH . 'wp-admin/includes/image.php' );
+										// Include the necessary file for media_handle_sideload().
+										require_once( ABSPATH . 'wp-admin/includes/image.php' );
 
-									// Set the image as the post thumbnail.
-									$attach_data = wp_generate_attachment_metadata( $attach_id, $image_path );
-									wp_update_attachment_metadata( $attach_id, $attach_data );
+										// Set the image as the post thumbnail.
+										$attach_data = wp_generate_attachment_metadata( $attach_id, $image_path );
+										wp_update_attachment_metadata( $attach_id, $attach_data );
 
-									$post_meta['_thumbnail_id'] = $attach_id;
+										$post_meta['_thumbnail_id'] = $attach_id;
+									}
 								}
 							}
 
@@ -1686,18 +1744,18 @@ class TF_Demo_Importer {
 							foreach ( $image_urls as $image_url ) {
 								if ( ! empty( $image_url ) ) {
 									// Download the image file
-									$image_data = file_get_contents( $image_url );
+									$image_data = $this->get_remote_image_data( $image_url );
 									//if not found image
 									if ( $image_data === false ) {
 										continue;
 									}
 									// Create a unique filename for the image
-									$filename   = basename( $image_url );
+									$filename   = $image_data['filename'];
 									$upload_dir = wp_upload_dir();
 									$image_path = $upload_dir['path'] . '/' . $filename;
 
 									// Save the image file to the uploads directory
-									$result = file_put_contents( $image_path, $image_data );
+									$result = file_put_contents( $image_path, $image_data['data'] );
 
 									//failed to save image
 									if ( $result === false ) {
@@ -1707,7 +1765,7 @@ class TF_Demo_Importer {
 									// Create the attachment for the uploaded image
 									$attachment = array(
 										'guid'           => $upload_dir['url'] . '/' . $filename,
-										'post_mime_type' => 'image/jpeg',
+										'post_mime_type' => $image_data['content_type'],
 										'post_title'     => preg_replace( '/\.[^.]+$/', '', $filename ),
 										'post_content'   => '',
 										'post_status'    => 'inherit'
@@ -1753,18 +1811,18 @@ class TF_Demo_Importer {
 
 										if ( ! empty( $image_url ) ) {
 											// Download the image file
-											$image_data = file_get_contents( $image_url );
+											$image_data = $this->get_remote_image_data( $image_url );
 											//if not found image
 											if ( $image_data === false ) {
 												continue;
 											}
 											// Create a unique filename for the image
-											$filename   = basename( $image_url );
+											$filename   = $image_data['filename'];
 											$upload_dir = wp_upload_dir();
 											$image_path = $upload_dir['path'] . '/' . $filename;
 
 											// Save the image file to the uploads directory
-											$result = file_put_contents( $image_path, $image_data );
+											$result = file_put_contents( $image_path, $image_data['data'] );
 
 											//failed to save image
 											if ( $result === false ) {
@@ -1774,7 +1832,7 @@ class TF_Demo_Importer {
 											// Create the attachment for the uploaded image
 											$attachment = array(
 												'guid'           => $upload_dir['url'] . '/' . $filename,
-												'post_mime_type' => 'image/jpeg',
+												'post_mime_type' => $image_data['content_type'],
 												'post_title'     => preg_replace( '/\.[^.]+$/', '', $filename ),
 												'post_content'   => '',
 												'post_status'    => 'inherit'
@@ -2247,30 +2305,32 @@ class TF_Demo_Importer {
 							$upload_dir = wp_upload_dir();
 							$image_path = $upload_dir['path'] . '/' . $filename;
 	
-							$image_data = file_get_contents($thumbnail);
-							file_put_contents($image_path, $image_data);
-	
-							// Check if the image was downloaded successfully.
-							if (file_exists($image_path)) {
-								// Create the attachment in the media library.
-								$attachment = array(
-									'guid'           => $upload_dir['url'] . '/' . $filename,
-									'post_mime_type' => 'image/jpeg', // Replace with the appropriate mime type if needed.
-									'post_title'     => sanitize_file_name($filename),
-									'post_content'   => '',
-									'post_status'    => 'inherit',
-								);
-	
-								$attach_id = wp_insert_attachment($attachment, $image_path, $post_id);
-	
-								// Include the necessary file 
-								require_once(ABSPATH . 'wp-admin/includes/image.php');
-	
-								// Set the image as the post thumbnail.
-								$attach_data = wp_generate_attachment_metadata($attach_id, $image_path);
-								wp_update_attachment_metadata($attach_id, $attach_data);
-	
-								$post_meta['_thumbnail_id'] = $attach_id;
+							$image_data = $this->get_remote_image_data($thumbnail);
+							if ($image_data !== false) {
+								file_put_contents($image_path, $image_data['data']);
+		
+								// Check if the image was downloaded successfully.
+								if (file_exists($image_path)) {
+									// Create the attachment in the media library.
+									$attachment = array(
+										'guid'           => $upload_dir['url'] . '/' . $filename,
+										'post_mime_type' => $image_data['content_type'], // Replace with the appropriate mime type if needed.
+										'post_title'     => sanitize_file_name($filename),
+										'post_content'   => '',
+										'post_status'    => 'inherit',
+									);
+		
+									$attach_id = wp_insert_attachment($attachment, $image_path, $post_id);
+		
+									// Include the necessary file 
+									require_once(ABSPATH . 'wp-admin/includes/image.php');
+		
+									// Set the image as the post thumbnail.
+									$attach_data = wp_generate_attachment_metadata($attach_id, $image_path);
+									wp_update_attachment_metadata($attach_id, $attach_data);
+		
+									$post_meta['_thumbnail_id'] = $attach_id;
+								}
 							}
 						}
 	
@@ -2359,19 +2419,19 @@ class TF_Demo_Importer {
 						foreach ( $image_urls as $image_url ) {
 							if(!empty($image_url)){
 								// Download the image file
-								$image_data = file_get_contents( $image_url );
+								$image_data = $this->get_remote_image_data( $image_url );
 								
 								//if not found image
 								if( $image_data === false ){
 									continue;
 								}
 								// Create a unique filename for the image
-								$filename = basename( $image_url );
+								$filename = $image_data['filename'];
 								$upload_dir = wp_upload_dir();
 								$image_path = $upload_dir['path'] . '/' . $filename;
 			
 								// Save the image file to the uploads directory
-								$result = file_put_contents( $image_path, $image_data );
+								$result = file_put_contents( $image_path, $image_data['data'] );
 								
 								//failed to save image
 								if( $result === false ){
@@ -2381,7 +2441,7 @@ class TF_Demo_Importer {
 								// Create the attachment for the uploaded image
 								$attachment = array(
 									'guid'           => $upload_dir['url'] . '/' . $filename,
-									'post_mime_type' => 'image/jpeg',
+									'post_mime_type' => $image_data['content_type'],
 									'post_title'     => preg_replace( '/\.[^.]+$/', '', $filename ),
 									'post_content'   => '',
 									'post_status'    => 'inherit'

@@ -117,18 +117,16 @@ if ( ! function_exists( 'tourfic_get_user_order_table_data' ) ) {
 
 		// Adjust the query to use customer_id instead of post_author
 		if ( ! is_array( $query_type ) ) {
-			$vendor_query = $wpdb->prepare(
+			$orders_result = $wpdb->get_results($wpdb->prepare(
 				"SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s AND customer_id = %d ORDER BY order_id DESC $query_limit",
 				$query_type, $query_customer
-			);
+			), ARRAY_A );
 		} else {
-			$vendor_query = $wpdb->prepare(
+			$orders_result = $wpdb->get_results($wpdb->prepare(
 				"SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type IN (" . implode( ',', array_fill( 0, count( $query_type ), '%s' ) ) . ") AND customer_id = %d ORDER BY order_id DESC $query_limit",
 				array_merge( $query_type, array( $query_customer ) ) // Add customer_id to the array
-			);
+			), ARRAY_A );
 		}
-
-		$orders_result = $wpdb->get_results( $vendor_query, ARRAY_A );
 
 		return $orders_result;
 	}
@@ -410,7 +408,28 @@ if(!function_exists('tf_tour_date_format_changer')) {
 		} else return;
 	}
 }
+function tf_normalize_date( $date ) {
+    $date = sanitize_text_field( $date );
+    if ( empty( $date ) ) {
+        return '';
+    }
 
+    // List of supported formats
+    $formats = [
+        'Y/m/d', 'd/m/Y', 'm/d/Y',
+        'Y-m-d', 'd-m-Y', 'm-d-Y',
+        'Y.m.d', 'd.m.Y', 'm.d.Y'
+    ];
+
+    foreach ( $formats as $format ) {
+        $dt = DateTime::createFromFormat( $format, $date );
+        if ( $dt && $dt->format($format) === $date ) {
+            return $dt->format( 'Y/m/d' ); // normalize
+        }
+    }
+
+    return ''; // return empty if no match
+}
 /**
  * Remove room order ids
  */

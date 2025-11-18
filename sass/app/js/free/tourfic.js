@@ -406,7 +406,6 @@
             if (max_seat) {
                 formData.append('max_seat', max_seat);
             }
-
             if(mapCoordinates.length === 4){
                 formData.append('mapCoordinates', mapCoordinates.join(','));
                 formData.append('mapFilter', true);
@@ -810,9 +809,7 @@
             }, 3000);
             const inputElement = $(this).parent().find("#share_link_input");
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(inputElement.val()).then(() => {
-                    
-                });
+                navigator.clipboard.writeText(inputElement.val()).then(() => {});
             } else {
                 const tempInput = document.createElement("textarea");
                 tempInput.value = inputElement.val();
@@ -849,7 +846,7 @@
                     }
                 },
                 {
-                    breakpoint: 600,
+                    breakpoint: 767,
                     settings: {
                         slidesToShow: 2,
                         slidesToScroll: 1
@@ -1060,15 +1057,21 @@
                     url: tf_params.ajax_url,
                     data: data,
                     beforeSend: function (data) {
-                        notyf.success(tf_params.wishlist_add)
+                        window.wishlistNotification = notyf.success({
+                            message: tf_params.wishlist_add
+                        });
                     },
                     success: function (response) {
                         if (response.success) {
                             wishIconFill(targetNode);
-                            notyf.success({
-                                message: response.data,
-                                duration: 4e3
-                            });
+                            setTimeout(function() {
+                                if (window.wishlistNotification) {
+                                    notyf.dismiss(window.wishlistNotification);
+                                }
+                                notyf.success({
+                                    message: response.data,
+                                });
+                            }, 400); 
                         }
                     }
                 });
@@ -1076,12 +1079,19 @@
             } else {
                 /* For guest */
                 if (addWish(data) === true) {
-                    notyf.success(tf_params.wishlist_add)
-                    wishIconFill(targetNode);
-                    notyf.success({
-                        message: tf_params.wishlist_added,
-                        duration: 4e3
+                    window.wishlistNotification = notyf.success({
+                        message: tf_params.wishlist_add
                     });
+                    wishIconFill(targetNode);
+                    
+                    setTimeout(function() {
+                        if (window.wishlistNotification) {
+                            notyf.dismiss(window.wishlistNotification);
+                        }
+                        notyf.success({
+                            message: tf_params.wishlist_add_success || 'Added to wishlist successfully'
+                        });
+                    }, 1000);
                 } else notyf.error(tf_params.wishlist_add_error);
 
             }
@@ -1810,8 +1820,10 @@
         * @author Jahid
         */
         let tf_hasErrorsFlag = false;
+        let tf_firstErrorElement = null; // track the first error field
         $('body').on('click', '.tf-traveller-error', function (e) {
             let hasErrors = [];
+            tf_firstErrorElement = null; // reset before validation
             let $this = $(this).closest('.tf-withoutpayment-booking');
             $('.error-text').text("");
             $this.find('.tf-single-travel').each(function () {
@@ -1826,6 +1838,7 @@
                             } else {
                                 errorContainer.removeClass('error-visible');
                             }
+                            if (!tf_firstErrorElement) tf_firstErrorElement = $(this); // save first invalid field
                         }
                     }
                 });
@@ -1843,6 +1856,7 @@
                             } else {
                                 errorContainer.removeClass('error-visible');
                             }
+                            if (!tf_firstErrorElement) tf_firstErrorElement = $(this);
                         }
                     }
                 });
@@ -1850,6 +1864,13 @@
             });
             if (hasErrors.includes(true)) {
                 tf_hasErrorsFlag = true;
+                if (tf_firstErrorElement) {
+                    $('html, body').animate({
+                        scrollTop: tf_firstErrorElement.offset().top - 100
+                    }, 500, function () {
+                        tf_firstErrorElement.focus(); // focus after scrolling
+                    });
+                }
                 return false;
             }
             tf_hasErrorsFlag = false;
@@ -1858,6 +1879,7 @@
         // Booking Confirmation Form Validation
         $('body').on('click', '.tf-book-confirm-error, .tf-hotel-book-confirm-error', function (e) {
             let hasErrors = [];
+            tf_firstErrorElement = null;
             let $this = $(this).closest('.tf-withoutpayment-booking');
             $('.error-text').text("");
             $this.find('.tf-confirm-fields').each(function () {
@@ -1872,6 +1894,7 @@
                             } else {
                                 errorContainer.removeClass('error-visible');
                             }
+                            if (!tf_firstErrorElement) tf_firstErrorElement = $(this);
                         }
                     }
                 });
@@ -1889,12 +1912,20 @@
                             } else {
                                 errorContainer.removeClass('error-visible');
                             }
+                            if (!tf_firstErrorElement) tf_firstErrorElement = $(this);
                         }
                     }
                 });
             });
             if (hasErrors.includes(true)) {
                 tf_hasErrorsFlag = true;
+                if (tf_firstErrorElement) {
+                    $('html, body').animate({
+                        scrollTop: tf_firstErrorElement.offset().top - 100
+                    }, 500, function () {
+                        tf_firstErrorElement.focus(); // focus after scrolling
+                    });
+                }
                 return false;
             }
         });
@@ -2039,13 +2070,12 @@
                     $this.unblock();
                 },
                 success: function (data) {
+                    $('#tour_room_details_loader').hide();
                     $this.unblock();
 
                     var response = JSON.parse(data);
 
                     if (response.status == 'error') {
-
-                        $('#tour_room_details_loader').hide();
                         if (response.errors) {
                             response.errors.forEach(function (text) {
                                 notyf.error(text);
@@ -2054,7 +2084,6 @@
 
                         return false;
                     } else {
-                        $('#tour_room_details_loader').hide();
                         if ($('.tf-traveller-info-box').length > 0) {
                             if ($(".tf-traveller-info-box").html().trim() == "") {
                                 $('.tf-traveller-info-box').html(response.traveller_info);
@@ -2092,14 +2121,22 @@
                         
                         $('.tf-withoutpayment-booking').addClass('show');
                     }
+
+                    $('.tf-date-picker').each(function() {
+                        let format = $(this).data('format') || "Y/m/d";
+                        flatpickr(this, {
+                            dateFormat: format
+                        });
+                    });
                 },
                 error: function (data) {
                     console.log(data);
+                    $('#tour_room_details_loader').hide();
                 },
 
             });
         }
-        $('.tf-booking-popup-btn').on('click', function(e){
+        $('body').on('click', '.tf-booking-popup-btn', function (e) {
             e.preventDefault();
             $(".tf-withoutpayment-booking input[type='text'], .tf-withoutpayment-booking input[type='email'], .tf-withoutpayment-booking input[type='date'], .tf-withoutpayment-booking select, .tf-withoutpayment-booking textarea").val("");
 
@@ -2268,9 +2305,7 @@
 
 
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(inputElement.val()).then(() => {
-                    
-                });
+                navigator.clipboard.writeText(inputElement.val()).then(() => {});
             } else {
                 const tempInput = document.createElement("textarea");
                 tempInput.value = inputElement.val();
@@ -2315,6 +2350,10 @@
             $(this).find('.tf-question-desc').slideToggle();
         });
 
+        $(".tf-question .tf-question-desc").on("click", function(e) {
+            e.stopPropagation();
+        });
+
         $(".tf-single-template__two .tf-hero-hotel.tf-popup-buttons").on("click", function (e) {
             e.preventDefault();
             $("#tour_room_details_loader").show();
@@ -2349,9 +2388,18 @@
             $('.tf-archive-right').toggleClass('tf-filter-show');
         });
 
+        // Archive Filter Close
+        $(document).on('click', '.tf-close-sidebar', function () {
+            $(this).closest('.tf-filter-show').removeClass('tf-filter-show');
+        });
+
+        $('.tf-archive-template__one .tf-archive-filter-showing').on('click', function () {
+            $('.tf-car-archive-sidebar').toggleClass('tf-filter-show');
+        });
+
         $(document).on('click touchstart', function (event) {
-            if (!$(event.target).closest(".tf-archive-filter-showing, .tf-details-right").length) {
-                $(".tf-details-right").removeClass('tf-filter-show');
+            if (!$(event.target).closest(".tf-archive-filter-showing, .tf-details-right, .tf-car-archive-sidebar").length) {
+                $(".tf-details-right, .tf-car-archive-sidebar").removeClass('tf-filter-show');
             }
         });
 
@@ -2362,13 +2410,13 @@
         });
 
         // Full Description Showing
-        $('.tf-single-template__two span.tf-see-description, .tf-archive-template__three span.tf-see-description, .single-tf_carrental .tf-single-template__one span.tf-see-description').on('click', function () {
+        $('.tf-single-template__two .tf-see-description, .tf-archive-template__three .tf-see-description, .single-tf_carrental .tf-single-template__one .tf-see-description').on('click', function () {
             $('.tf-short-description').slideUp();
             $('.tf-full-description').slideDown();
         });
 
         // See Less Description Showing
-        $('.tf-single-template__two span.tf-see-less-description, .tf-single-template__three span.tf-see-less-description, .single-tf_carrental .tf-single-template__one span.tf-see-less-description').on('click', function () {
+        $('.tf-single-template__two .tf-see-less-description, .tf-single-template__three .tf-see-less-description, .single-tf_carrental .tf-single-template__one .tf-see-less-description').on('click', function () {
             $('.tf-full-description').slideUp();
             $('.tf-short-description').slideDown();
         });
@@ -2433,8 +2481,9 @@
             $("#tour_room_details_loader").show();
             var post_id = $(this).attr("data-id");
             var post_type = $(this).attr("data-type");
+
             var data = {
-                action: 'tf_hotel_archive_popup_qv',
+                action: 'tf_archive_gallery_popup_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 post_type: post_type
@@ -2449,6 +2498,10 @@
                     $(".tf-hotel-popup").addClass("tf-show")
                     $("#tour_room_details_loader").hide();
 
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', status, error);
+                    console.log('Response:', xhr.responseText);
                 }
             });
         });
@@ -2916,6 +2969,28 @@
                 $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
             }
         });
+
+        // Offset scroll to available room
+        $('.tf-available-room-content-right .tf_btn').on('click', function(e){
+            var target = $(this).attr('href');
+            if (target.startsWith('#')) {
+                console.log('clicked');
+                e.preventDefault();
+
+                var offset = 200;
+                if (window.innerWidth <= 768) {
+                    offset = 100;
+                }
+
+                var targetElement = $(target);
+                if (targetElement.length) {
+                    $('html, body').animate({
+                        scrollTop: targetElement.offset().top - offset
+                    }, 600);
+                }
+            }
+        });
+
     });
 
 })(jQuery, window);

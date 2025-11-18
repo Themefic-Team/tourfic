@@ -30,7 +30,7 @@ abstract Class TF_Booking_Details {
         add_submenu_page(
             'edit.php?post_type=' . $booking_args['post_type'],
             $booking_args['menu_title'],
-            __( 'Booking Details', 'tourfic' ),
+            esc_html__( 'Booking Details', 'tourfic' ),
             $booking_args['capability'],
             $booking_args['menu_slug'],
             array( $this, 'tf_booking_page_callback' )
@@ -63,9 +63,9 @@ abstract Class TF_Booking_Details {
 			if ( $current_user_role == 'administrator' ) {
 
 				// Filter Perameters
-				$checkinout_perms = ! empty( $_GET['checkinout'] ) ? $_GET['checkinout'] : '';
-				$tf_post_perms    = ! empty( $_GET['post'] ) ? $_GET['post'] : '';
-				$tf_payment_perms = ! empty( $_GET['payment'] ) ? $_GET['payment'] : '';
+				$checkinout_perms = ! empty( $_GET['checkinout'] ) ? sanitize_text_field( wp_unslash( $_GET['checkinout'] ) ) : '';
+				$tf_post_perms    = ! empty( $_GET['post'] ) ? sanitize_text_field( wp_unslash( $_GET['post'] ) ) : '';
+				$tf_payment_perms = ! empty( $_GET['payment'] ) ? sanitize_text_field( wp_unslash( $_GET['payment'] ) ) : '';
 
 				$tf_filter_query = "";
 				if ( $checkinout_perms ) {
@@ -81,7 +81,7 @@ abstract Class TF_Booking_Details {
 				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
 					if ( isset( $_GET['paged'] ) ) {
-						$paged = $_GET['paged'];
+						$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) );
 					} else {
 						$paged = 1;
 					}
@@ -114,6 +114,7 @@ abstract Class TF_Booking_Details {
 						'query'     => " $tf_filter_query ORDER BY id DESC LIMIT 15"
 					);
 					$tf_order_details_result = Helper::tourfic_order_table_data( $tf_orders_select );
+                    $total_pages = 1;
 				}
 			?>
             <div class="wrap tf_booking_details_wrap" style="margin-right: 20px;">
@@ -195,7 +196,7 @@ abstract Class TF_Booking_Details {
     function tf_booking_details_list( $booking_type, $tf_order_details_result, $total_pages ) {
 
         if ( isset( $_GET['paged'] ) ) {
-            $paged = $_GET['paged'];
+            $paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) );
         } else {
             $paged = 1;
         }
@@ -359,7 +360,7 @@ abstract Class TF_Booking_Details {
                 </div>
             </div>
             <form class="tf-right-search-filter">
-                <input type="number" value="<?php echo ! empty( $_GET['post'] ) ? esc_attr( $_GET['post'] ) : ''; ?>" placeholder="Search by <?php echo esc_html( $this->booking_args['booking_title'] ); ?> ID"
+                <input type="number" value="<?php echo ! empty( $_GET['post'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['post'] ) ) ) : ''; ?>" placeholder="Search by <?php echo esc_html( $this->booking_args['booking_title'] ); ?> ID"
                        id="tf-searching-key">
                 <button class="tf-search-by-id" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -372,7 +373,7 @@ abstract Class TF_Booking_Details {
 
         <?php do_action( $this->booking_args["post_type"] . '_before_booking_order_table'); ?>
 
-        <div class="<?php echo apply_filters( $this->booking_args["post_type"] . '_booking_oder_table_class', "tf-order-table-responsive") ?>" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: block') : '' ?>">
+        <div class="<?php echo esc_html( apply_filters( $this->booking_args["post_type"] . '_booking_oder_table_class', "tf-order-table-responsive") ) ?>" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: block') : '' ?>">
             <table class="wp-list-table table" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
@@ -553,7 +554,10 @@ abstract Class TF_Booking_Details {
                 global $wpdb;
                 $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s",sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) );
                 ?>
-                <input type="hidden" id="tf_email_order_id" value="<?php echo !empty($_GET['order_id']) ? esc_html( $_GET['order_id'] ) : ''; ?>">
+                <input type="hidden" id="tf_email_order_id" value="<?php
+                    echo isset( $_GET['order_id'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['order_id'] ) ) ) : '';
+                ?>">
+
                 <div class="tf-title">
                     <h2><?php echo esc_html( get_the_title( $tf_order_details->post_id ) ); ?></h2>
                 </div>
@@ -839,6 +843,33 @@ abstract Class TF_Booking_Details {
                                                 </td>
                                             </tr>
                                        <?php } ?>
+                                       <?php
+                                        $hotel_extra  = !empty( $tf_tour_details->hotel_extra ) ? $tf_tour_details->hotel_extra : '';
+                                        if(!empty($hotel_extra) && $hotel_extra != 'undefined' && $hotel_extra != 'null'){
+                                            ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Extra Service", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td>
+                                                    <?php echo esc_html($hotel_extra); ?>
+                                                </td>
+                                            </tr>
+                                       <?php } ?>
+                                    <?php
+                                    $tf_order = wc_get_order( intval( $_GET['order_id'] ) );
+                                    if($tf_order_details->payment_method!='offline'){
+                                        $customer_note = !empty($tf_order->get_customer_note()) ? $tf_order->get_customer_note() : '';
+                                    }
+                                    if(!empty($customer_note)){
+                                    ?>
+                                       <tr>
+                                            <th><?php esc_html_e("Order Note", "tourfic"); ?></th>
+                                            <td>:</td>
+                                            <td>
+                                                <?php echo esc_html($customer_note); ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
 
                                        <?php do_action('tf_booking_details_after_other_details', $tf_tour_details); ?>
                                     </table>
@@ -851,7 +882,7 @@ abstract Class TF_Booking_Details {
                     <!-- Pricing Details -->
                     <div class="customers-order-date details-box">
                         <h4>
-                            <?php echo esc_html( apply_filters( 'tf_' . $this->booking_args["booking_type"] . 'booking_details_pricing_section_title_change',  __( "Pricing details",  "tourfic"  ))); ?>
+                            <?php echo esc_html( apply_filters( 'tf_' . $this->booking_args["booking_type"] . 'booking_details_pricing_section_title_change',  esc_html__( "Pricing details",  "tourfic"  ))); ?>
                         </h4>
                         <div class="tf-grid-box tf-pricing-grid-box">
 
@@ -903,6 +934,14 @@ abstract Class TF_Booking_Details {
                                                 <th><?php esc_html_e("Airport Service Fee", "tourfic"); ?></th>
                                                 <td>:</td>
                                                 <td><?php echo wp_kses_post($tf_tour_details->airport_service_fee); ?></td>
+                                            </tr>
+                                        <?php } ?>
+
+                                        <?php if(!empty($tf_tour_details->hotel_extra_fee)){ ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Extra Service Fee", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td><?php echo wp_kses_post($tf_tour_details->hotel_extra_fee); ?></td>
                                             </tr>
                                         <?php } ?>
 
@@ -965,8 +1004,17 @@ abstract Class TF_Booking_Details {
                                 foreach($tf_visitors_details as $visitor){
                             ?>
                             <div class="tf-grid-single">
-                                <?php /* translators: %s Visitor. */ ?>
-                                <h3><?php echo $tf_order_details->post_type == 'tour' ? sprintf( esc_html__("Visitor %s", "tourfic"), $visitor_count ) : ( $tf_order_details->post_type == 'hotel' ? sprintf( esc_html__("Guest %s", "tourfic"), $visitor_count ) : '' ) ?></h3>
+                                <h3>
+                                <?php
+                                if ( $tf_order_details->post_type == 'tour' ) {
+                                    /* translators: %s Visitor. */
+                                    echo esc_html( sprintf( esc_html__( 'Visitor %s', 'tourfic' ), intval( $visitor_count ) ) );
+                                } elseif ( $tf_order_details->post_type == 'hotel' ) {
+                                    /* translators: %s Visitor. */
+                                    echo esc_html( sprintf( esc_html__( 'Guest %s', 'tourfic' ), intval( $visitor_count ) ) );
+                                }
+                                ?>
+                                </h3>
                                 <div class="tf-single-box">
                                     <table class="table" cellpadding="0" callspacing="0">
                                         <?php 
@@ -1088,7 +1136,9 @@ abstract Class TF_Booking_Details {
                                 <path d="M5 7.5L10 12.5L15 7.5" stroke="#F0F0F1" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </label>
-                            <input type="hidden" id="tf_email_order_id" value="<?php echo !empty($_GET['order_id']) ? esc_html( $_GET['order_id'] ) : ''; ?>">
+                            <input type="hidden" id="tf_email_order_id" value="<?php
+                                echo isset($_GET['order_id']) ? esc_attr(sanitize_text_field(wp_unslash($_GET['order_id']))) : '';
+                            ?>">
                             <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo esc_attr($tf_order_details->id); ?>">
                             <ul>
                                 <li class="checkin" data-value="in"><?php esc_html_e("Checked in", "tourfic"); ?></li>
@@ -1154,7 +1204,24 @@ abstract Class TF_Booking_Details {
                     <div class="visitor-details-popup">
                     <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo esc_attr($tf_order_details->id); ?>">
                     <?php 
-                    for($traveller_in = 1; $traveller_in <= $tf_total_visitor; $traveller_in++){ ?>
+                    for($traveller_in = 1; $traveller_in <= $tf_total_visitor; $traveller_in++){
+
+                        $date_format = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+
+                        // Map PHP date format to JS-friendly placeholder
+                        $placeholders = array(
+                            'Y/m/d' => 'YYYY/MM/DD',
+                            'd/m/Y' => 'DD/MM/YYYY',
+                            'm/d/Y' => 'MM/DD/YYYY',
+                            'Y-m-d' => 'YYYY-MM-DD',
+                            'd-m-Y' => 'DD-MM-YYYY',
+                            'm-d-Y' => 'MM-DD-YYYY',
+                            'Y.m.d' => 'YYYY.MM.DD',
+                            'd.m.Y' => 'DD.MM.YYYY',
+                            'm.d.Y' => 'MM.DD.YYYY',
+                        );
+                        $placeholder = isset( $placeholders[ $date_format ] ) ? $placeholders[ $date_format ] : 'YYYY/MM/DD';
+                        ?>
                         <div class="tf-single-tour-traveller tf-single-travel">
                             <h4><?php echo $tf_order_details->post_type == 'tour' ? esc_html__( 'Traveler ', 'tourfic' ) . esc_html($traveller_in) : ( $tf_order_details->post_type == 'hotel' ? esc_html__( 'Guest ', 'tourfic' ) . esc_html($traveller_in) : '' ) ?></h4>
                             <div class="traveller-info">
@@ -1167,7 +1234,16 @@ abstract Class TF_Booking_Details {
                             </div>
                             <div class="traveller-single-info">
                                 <label for="tf_dob<?php echo esc_attr($traveller_in); ?>"><?php esc_html_e( 'Date of birth', 'tourfic' ); ?></label>
-                                <input type="date" name="traveller[<?php echo esc_attr($traveller_in); ?>][tf_dob]" id="tf_dob<?php echo esc_attr($traveller_in); ?>" data-required="1" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{'tf_dob'}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{'tf_dob'} ) : '' ?>"/>
+                                <input
+                                    type="text"
+                                    name="traveller[<?php echo esc_attr($traveller_in); ?>][tf_dob]"
+                                    id="tf_dob<?php echo esc_attr($traveller_in); ?>"
+                                    data-required="1"
+                                    value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{'tf_dob'}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{'tf_dob'} ) : '' ?>"
+                                    placeholder="<?php echo esc_attr( $placeholder ); ?>"
+                                    data-format="<?php echo esc_attr( $date_format ); ?>"
+                                    class="tf-date-picker"
+                                    />
                                 
                             </div>
                             <div class="traveller-single-info">
@@ -1178,12 +1254,29 @@ abstract Class TF_Booking_Details {
                         <?php
                         }else{
                             foreach($traveler_fields as $field){
-                                if("text"==$field['reg-fields-type'] || "email"==$field['reg-fields-type'] || "date"==$field['reg-fields-type']){
+                                if("text"==$field['reg-fields-type'] || "email"==$field['reg-fields-type']){
                                     $field_keys = $field['reg-field-name'];
                                     ?>
                                     <div class="traveller-single-info">
                                         <label for="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>"><?php echo esc_html( $field['reg-field-label'] ); ?></label>
                                         <input type="<?php echo esc_attr($field['reg-fields-type']); ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]" id="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in); ?>" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{$field_keys} ) : '' ?>" />
+                                    </div>
+                                <?php
+                                }
+                                if("date"==$field['reg-fields-type']){
+                                    $field_keys = $field['reg-field-name'];
+                                    ?>
+                                    <div class="traveller-single-info">
+                                        <label for="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>"><?php echo esc_html( $field['reg-field-label'] ); ?></label>
+                                        <input
+                                            type="text"
+                                            name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]"
+                                            id="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in); ?>"
+                                            value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{$field_keys} ) : '' ?>"
+                                            placeholder="<?php echo esc_attr( $placeholder ); ?>"
+                                            data-format="<?php echo esc_attr( $date_format ); ?>"
+                                            class="tf-date-picker"
+                                            />
                                     </div>
                                 <?php
                                 }
@@ -1259,18 +1352,20 @@ abstract Class TF_Booking_Details {
     // Pagination Function
 
     function tf_booking_details_pagination($page){
-        $currentURL = home_url($_SERVER['REQUEST_URI']);
+        $request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+        $queryString   = isset( $_SERVER['QUERY_STRING'] ) ? sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ) ) : '';
+
+        $currentURL = home_url($request_uri);
         $BaseURL = strtok($currentURL, '?');
-        $queryString = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
         
         parse_str($queryString, $currentURLParams);
 
         if (array_key_exists('paged', $currentURLParams)) {
             $currentURLParams['paged'] = $page;
             $updatedQuery = http_build_query($currentURLParams);
-            return $updatedUrl = $BaseURL . '?' . $updatedQuery;
+            return esc_url($updatedUrl = $BaseURL . '?' . $updatedQuery);
         } else {
-            return $updatedUrl = $currentURL . '&paged=' . $page;
+            return esc_url($updatedUrl = $currentURL . '&paged=' . $page);
         }
     }
 
@@ -1286,14 +1381,14 @@ abstract Class TF_Booking_Details {
 		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) ||
             (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) ||
             (in_array( 'tf_manager', (array) $user->roles ) && !current_user_can('tf_manager_options'))) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 
         // Order Id
-        $tf_order_id = !empty($_POST['order_id']) ? $_POST['order_id'] : "";
+        $tf_order_id = !empty($_POST['order_id']) ? absint( wp_unslash( $_POST['order_id'] ) ) : "";
         // status Value
-        $tf_status = !empty($_POST['status']) ? $_POST['status'] : "";
+        $tf_status = !empty($_POST['status']) ? sanitize_text_field( wp_unslash( $_POST['status'] ) ) : "";
     
         global $wpdb;
         $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, order_id, payment_method FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
@@ -1342,14 +1437,14 @@ abstract Class TF_Booking_Details {
 
         // Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 
         // Order Id
-        $tf_order_id = !empty($_POST['order_id']) ? $_POST['order_id'] : "";
+        $tf_order_id = !empty($_POST['order_id']) ? absint( wp_unslash( $_POST['order_id'] ) ) : "";
         // Visitor Details
-        $tf_visitor_details = !empty($_POST['traveller']) ? $_POST['traveller'] : "";
+        $tf_visitor_details = isset( $_POST['traveller'] ) ? wp_unslash( $_POST['traveller'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
     
         global $wpdb;
         $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id,order_details FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
@@ -1375,14 +1470,14 @@ abstract Class TF_Booking_Details {
 		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) ||
             (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) ||
             (in_array( 'tf_manager', (array) $user->roles ) && !current_user_can('tf_manager_options'))) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 
         // Order Id
-        $tf_order_id = !empty($_POST['order_id']) ? $_POST['order_id'] : "";
+        $tf_order_id = !empty($_POST['order_id']) ? absint( wp_unslash( $_POST['order_id'] ) ) : "";
         // Checkinout Value
-        $tf_checkinout = !empty($_POST['checkinout']) ? $_POST['checkinout'] : "";
+        $tf_checkinout = !empty($_POST['checkinout']) ? sanitize_text_field( wp_unslash( $_POST['checkinout'] ) ) : "";
     
         /**
          * Get current logged in user
@@ -1428,14 +1523,21 @@ abstract Class TF_Booking_Details {
 		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) ||
             (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) ||
             (in_array( 'tf_manager', (array) $user->roles ) && !current_user_can('tf_manager_options'))) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 
         // Order Id
-        $tf_orders = !empty($_POST['orders']) ? $_POST['orders'] : "";
+        $tf_orders = array();
+        if ( isset( $_POST['orders'] ) ) {
+            if ( is_array( $_POST['orders'] ) ) {
+                $tf_orders = array_map( 'absint', wp_unslash( $_POST['orders'] ) ); // sanitize each ID
+            } else {
+                $tf_orders = array( absint( wp_unslash( $_POST['orders'] ) ) );
+            }
+        }
         // status Value
-        $tf_status = !empty($_POST['status']) ? $_POST['status'] : "";
+        $tf_status = !empty($_POST['status']) ? sanitize_text_field( wp_unslash( $_POST['status'] ) ) : "";
     
         global $wpdb;
         foreach($tf_orders as $order){
@@ -1460,7 +1562,7 @@ abstract Class TF_Booking_Details {
                      * @param object $order_data      The order data object.
                      */
                     do_action('tf_order_status_changed', $tf_single_order->order_id, $tf_status, $tf_single_order);
-    
+
                     if ( 'offline'== $tf_single_order->payment_method && ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
 
                         /**
@@ -1498,7 +1600,7 @@ abstract Class TF_Booking_Details {
         <div class="tf-popup-header">
             <h3>
             <?php echo esc_html( get_the_title( $tf_order_details->post_id ) ); ?>
-            <a href="<?php echo esc_url(admin_url() . 'edit.php?post_type=' . $_POST['type'] . '&amp;page=' . $_POST['page'] . '&amp;order_id=' . $tf_order_details->order_id . '&amp;book_id=' . $tf_order_details->id . '&amp;action=preview'); ?>" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a>
+            <a href="<?php echo esc_url(admin_url() . 'edit.php?post_type=' . esc_attr(sanitize_text_field( wp_unslash( $_POST['type'] ) )) . '&amp;page=' . esc_attr(sanitize_text_field( wp_unslash( $_POST['page'] ) )) . '&amp;order_id=' . $tf_order_details->order_id . '&amp;book_id=' . $tf_order_details->id . '&amp;action=preview'); ?>" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a>
             </h3>
             <div class="tf-close">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1685,10 +1787,10 @@ abstract Class TF_Booking_Details {
         // Add nonce for security and authentication.
         check_ajax_referer('updates', '_ajax_nonce');
 
-        $tf_payment_perms = ! empty( $_POST['ostatus'] ) ? $_POST['ostatus'] : '';
-        $checkinout_perms = ! empty( $_POST['checkinout'] ) ? $_POST['checkinout'] : '';
-        $tf_post_perms = ! empty( $_POST['post_id'] ) ? $_POST['post_id'] : '';
-        $booking_type = ! empty( $_POST['post_type'] ) ? $_POST['post_type'] : '';
+        $tf_payment_perms = ! empty( $_POST['ostatus'] ) ? sanitize_text_field( wp_unslash( $_POST['ostatus'] ) ) : '';
+        $checkinout_perms = ! empty( $_POST['checkinout'] ) ? sanitize_text_field( wp_unslash( $_POST['checkinout'] ) ) : '';
+        $tf_post_perms = ! empty( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : '';
+        $booking_type = ! empty( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : '';
 
         $tf_filter_query = "";
         if ( $checkinout_perms ) {

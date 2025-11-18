@@ -27,17 +27,22 @@
         });
 
         // Tabs Section
-        $('.tf-details-menu ul li').on("click", function () {
-            var $this = $(this);
-            $currentmenu = $this.attr('data-menu');
+        $(document).on('click', '.tf-details-menu ul li', function (e) {
+            var $clicked = $(this);
+            var key = String( $clicked.data('menu') || $clicked.attr('data-menu') ).trim();
+
+            if ( key === '' ) {
+                return;
+            }
+
+            // remove .active from all menu items in all menus
             $('.tf-details-menu ul li').removeClass('active');
 
-            $('.tf-details-menu ul li[data-menu="' + $currentmenu + '"]').addClass('active');
+            // add .active to every li whose data-menu matches the clicked one
+            $('.tf-details-menu ul li').filter(function () {
+                return String( $(this).data('menu') || $(this).attr('data-menu') ).trim() === key;
+            }).addClass('active');
         });
-
-       
-        
-        
         
         // Car Location Autocomplete
 
@@ -614,7 +619,7 @@
         $(document).on('submit', '#tf_car_booking', function (e) {
             e.preventDefault();
             let form = $(this),
-                submitBtn = form.find('.tf-submit'),
+                submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
             formData.append('action', 'tf_car_search');
             formData.append('_nonce', tf_params.nonce);
@@ -631,12 +636,12 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    form.css({'pointer-events': 'none'});
                     submitBtn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
-                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    form.css({'pointer-events': 'all'});
                     submitBtn.removeClass('tf-btn-loading');
                     if (obj.status === 'error') {
                         notyf.error(obj.message);
@@ -908,6 +913,37 @@
             });
         };
 
+        /*
+        * Car menu scroll
+        * @author Mofazzal Hossain
+        */
+        let $scrollContainer = $('.tf-details-menu ul');
+
+        $scrollContainer.on('click', 'li', function (e) {
+            let $item = $(this);
+
+            // Remove previous active and set new one
+            $scrollContainer.find('li').removeClass('active');
+            $item.addClass('active');
+
+            scrollToItem($item);
+        });
+
+        function scrollToItem($item) {
+            let container = $scrollContainer.get(0);
+            let containerLeft = container.scrollLeft;
+            let containerWidth = $scrollContainer.outerWidth();
+            let itemLeft = $item.position().left + containerLeft;
+            let itemWidth = $item.outerWidth();
+
+            let scrollTo = itemLeft - (containerWidth / 2) + (itemWidth / 2);
+
+            // Animate scroll
+            $scrollContainer.animate({
+                scrollLeft: scrollTo
+            }, 400);
+        }
+
 
         /*
         * Car Archive View
@@ -927,21 +963,52 @@
             }
         });
 
+        /*
+        * Booking Bar Show
+        * @author Mofazzal Hossain
+        */
         if($('.tf-single-car-details-warper .tf-details-menu').length){
-            // Booking Bar Show
-            $(window).scroll(function() {
+            $(window).on('scroll resize', function () {
                 // Check the position of the target div
-                var targetOffset = $('.tf-single-car-details-warper .tf-details-menu').offset().top;
-                var targetHeight = $('.tf-single-car-details-warper .tf-details-menu').outerHeight(); // Get the full height of the div including padding
+                var $target = $('.tf-single-car-details-warper .tf-details-menu');
+                var $bookingBar = $('.tf-single-booking-bar');
+                var $wpAdminBar = $('#wpadminbar');
+                var $header = $('header');
+                var $desktopHeader = $('.tft-header-desktop');
+                
+                var targetOffset = $target.offset().top;
+                var targetHeight = $target.outerHeight();
                 var targetBottom = targetOffset + targetHeight;
 
                 var scrollPosition = $(window).scrollTop();
-        
-                // If the user has scrolled past the target div, show the other div
-                if (scrollPosition > targetBottom) {
-                    $('.tf-single-booking-bar').fadeIn(); // You can change this to show() or add animations
+
+                // Calculate heights
+                var wpAdminBarHeight = $wpAdminBar.length ? $wpAdminBar.outerHeight() : 0;
+                var headerHeight = $header.length ? $header.outerHeight() : 0;
+                
+                if($header.hasClass('tf-navbar-shrink')) {
+                    headerHeight = $header.outerHeight();
+                }else {
+                    headerHeight = 0;
+                }
+                
+                // Total offset is admin bar + header heights
+                var totalOffset = wpAdminBarHeight + headerHeight;
+                $bookingBar.css('top', totalOffset + 'px');
+                
+                // Adjust scroll position check to account for the total offset
+                if (scrollPosition + totalOffset > targetBottom) {
+                    $bookingBar.fadeIn(function () {
+                        if ($bookingBar.is(':visible')) {
+                            $header.css("box-shadow", "none");
+                            $desktopHeader.css("box-shadow", "none");
+                        }
+                    });
                 } else {
-                    $('.tf-single-booking-bar').fadeOut();
+                    $bookingBar.fadeOut(function () {
+                        $header.css("box-shadow", ""); 
+                        $desktopHeader.css("box-shadow", "");
+                    });
                 }
             });
         }
@@ -951,10 +1018,16 @@
             e.preventDefault(); 
             $('.tf-single-booking-bar').fadeOut();
             var bookingBarHeight = $('.tf-single-booking-bar').outerHeight() || 0;
+            var $wpAdminBar = $('#wpadminbar');
+            var $header = $('header');
+            var wpAdminBarHeight = $wpAdminBar.length ? $wpAdminBar.outerHeight() : 0;
+            var headerHeight = $header.length ? $header.outerHeight() : 0;
+            var totalOffset = wpAdminBarHeight + headerHeight;
+            
             $('html, body').animate({
-                scrollTop: $('.tf-date-select-box').offset().top - bookingBarHeight
-            }); 
-        });        
+                scrollTop: $('.tf-date-select-box').offset().top - totalOffset
+            }, 1000); 
+        });     
 
         // Social Share
         $('.single-tf_carrental .tf-single-template__one .tf-share-toggle').on("click", function (e) {
@@ -1008,14 +1081,24 @@
             $('.tf-date-select-box').slideToggle( function () {
                 // Check visibility after the toggle animation completes
                 if ($(this).is(':visible')) {
-                    $button.text('Hide');
+                    $button.text(tf_params.car_mobile_button_hide);
                 } else {
-                    $button.text('Book Now');
+                    $button.text(tf_params.car_mobile_button_book_now);
                 }
             });
         });
 
-    
+        if ($('#car-location').length) {
+            const map = L.map('car-location').setView([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], tf_params.single_car_data.address_zoom);
+
+            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            const marker = L.marker([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], {alt: tf_params.single_car_data.address}).addTo(map)
+                .bindPopup(tf_params.single_car_data.address);
+        }
     });
 
 })(jQuery, window);

@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Hotel\Pricing;
+use \Tourfic\Classes\Helper;
 
 class Hotel_External_Listings extends \Tourfic\Core\Shortcodes {
 
@@ -26,6 +27,11 @@ class Hotel_External_Listings extends \Tourfic\Core\Shortcodes {
 				$atts
 			)
 		);
+
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		if (in_array('hotel', $tf_disable_services)){
+			return;
+		}
 
 		$external_post_ids = $this->tf_get_external_post_ids('hotel', $locations);
 

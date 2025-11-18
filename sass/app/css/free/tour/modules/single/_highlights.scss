@@ -11,14 +11,22 @@
                     }
                     .tf-highlight-text {
                         flex: 0 0 49%;
-                        ul {
-                            margin: 0;
-                            padding: 0;
-                            margin-top: 15px;
-                            list-style-position: inside;
-                        }
                         p{
-                            margin-bottom: 0;
+                            margin: 0 0 15px 0;
+                        }
+                        blockquote{
+                            margin-bottom: 15px;
+                        }
+                        ul,
+                        ol {
+                            margin: 0px 0px 15px 13px;;
+                            padding: 0;
+                            display: flex;
+                            gap: 16px;
+                            flex-direction: column;
+                            li{
+                                list-style: unset;
+                            }
                         }
                         .section-heading{
                             color: $color-heading;
@@ -45,6 +53,10 @@
                     gap: 40px;
                     align-items: flex-start;
                     .tf-highlights-icon{
+                        @media #{$max1024}{
+                            line-height: 0;
+                            display: none;
+                        }
                         img{
                             object-fit: cover;
                             height: 100%;    
@@ -55,16 +67,19 @@
                 }
             
                 .highlights-list {
+                    blockquote,
                     p{
-                        margin-bottom: 0;
+                        margin-bottom: 15px;
                     }
                     ul {
                         padding: 0;
                         margin-top: 20px;
+                        margin-left: 16px;
                     }
                     li {
                         margin-top: 12px;
                         line-height: 1.3;
+                        list-style: unset;
                         i{
                             color: $color-primary;
                             width: 24px;

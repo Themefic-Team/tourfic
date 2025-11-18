@@ -1,18 +1,20 @@
 <?php
 /**
- * Plugin Name:     Tourfic - Travel, Hotel, and Apartment Booking Solution for WooCommerce
+ * Plugin Name:     Tourfic – Travel Booking, Hotel Booking & Car Rental WordPress Plugin
  * Plugin URI:      https://themefic.com/tourfic
- * Description:     The Ultimate WordPress plugin for tour, travel, accommodation, and hotel bookings. Effortlessly manage your entire online travel booking system, including orders and any WooCommerce payment method.
+ * Description:     The ultimate plugin for tour, travel, accommodation, and hotel bookings. Effortlessly manage your entire online travel booking system, including orders and any WooCommerce payment method.
  * Author:          Themefic
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.16.9
+ * Version:         2.18.5
  * Tested up to:    6.8
- * WC tested up to: 9.9
- * Requires PHP:    7.4
- * Elementor tested up to: 3.29
- */
+ * WC tested up to: 10.0
+ * Requires PHP:    7.4 
+ * Elementor tested up to: 3.32
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+*/
 
 // Don't load directly
 defined( 'ABSPATH' ) || exit;
@@ -25,7 +27,7 @@ final class Tourfic {
 	 * @var string
 	 */
 
-	const VERSION = '2.16.9';
+	const VERSION = '2.18.5';
 
 	/**
 	 * Minimum PHP version required.
@@ -158,8 +160,8 @@ final class Tourfic {
 		$locale = apply_filters( 'plugin_locale', get_locale(), 'tourfic' );
 		// Allow upgrade safe, site specific language files in /wp-content/languages/tourfic/
 		load_textdomain( 'tourfic', WP_LANG_DIR . '/tourfic/tourfic-' . $locale . '.mo' );
-		// Then check for a language file in /wp-content/plugins/tourfic/lang/ (this will be overriden by any file already loaded)
-		load_plugin_textdomain( 'tourfic', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+		// // Then check for a language file in /wp-content/plugins/tourfic/lang/ (this will be overriden by any file already loaded)
+		// load_plugin_textdomain( 'tourfic', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 	}
 
 	/**
@@ -172,23 +174,32 @@ final class Tourfic {
 			if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
 				?>
                 <div id="message" class="error">
-					<?php /* translators: %1$s: WooCommerce plugin url start, %2$s: WooCommerce plugin url end */ ?>
-                    <p><?php printf( esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
-                    <p><a id="tf_wooinstall" class="install-now button" data-plugin-slug="woocommerce"><?php esc_html_e( 'Install Now', 'tourfic' ); ?></a></p>
-                </div>
+					<p>
+						<?php 
+						/* translators: %1$s is return strong tag %2$s is return closeing of strong tag */
+						printf(esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ),
+							'<strong><a href="plugin-install.php?s=woocommerce&tab=search&type=term">', '</a></strong>'
+						); ?>
+					</p>
+					<p>
+						<a class="button-primary" href="<?php echo esc_url( admin_url( 'plugin-install.php?s=woocommerce&tab=search&type=term' ) ); ?>">
+							<?php esc_html_e( 'Install Now', 'tourfic' ); ?>
+						</a>
+					</p>
+				</div>
 
-                <script>
+                <!-- <script>
                     jQuery(document).on('click', '#tf_wooinstall', function (e) {
                         e.preventDefault();
                         var current = jQuery(this);
                         var plugin_slug = current.attr("data-plugin-slug");
-                        var ajax_url = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) )?>';
+                        var ajax_url = '</?php echo esc_url( admin_url( 'admin-ajax.php' ) )?>';
 
                         current.addClass('updating-message').text('Installing...');
 
                         var data = {
                             action: 'tf_ajax_install_plugin',
-                            _ajax_nonce: '<?php echo esc_html( wp_create_nonce( 'updates' ) ); ?>',
+                            _ajax_nonce: '</?php echo esc_html( wp_create_nonce( 'updates' ) ); ?>',
                             slug: plugin_slug,
                         };
 
@@ -206,7 +217,7 @@ final class Tourfic {
                                 current[0].click();
                             });
                     });
-                </script>
+                </script> -->
 
 				<?php
 			} elseif ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) ) {
@@ -214,7 +225,7 @@ final class Tourfic {
 
                 <div id="message" class="error">
 					<?php /* translators: %1$s: WooCommerce plugin url start, %2$s: WooCommerce plugin url end */ ?>
-                    <p><?php printf( esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank">', '</a></strong>' ); ?></p>
+                    <p><?php printf( esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/woocommerce/" target="_blank" rel="noopener noreferrer">', '</a></strong>' ); ?></p>
                     <p>
                         <a href="<?php echo esc_url( get_admin_url() ); ?>plugins.php?_wpnonce=<?php echo esc_attr( wp_create_nonce( 'activate-plugin_woocommerce/woocommerce.php' ) ); ?>&action=activate&plugin=woocommerce/woocommerce.php"
                            class="button activate-now button-primary"><?php esc_html_e( 'Activate', 'tourfic' ); ?></a></p>

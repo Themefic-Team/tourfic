@@ -1,4 +1,7 @@
-<?php if ( $tc ) { ?>
+<?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+if ( $tc ) { ?>
 <!-- Hotel Policies Starts -->        
 <div class="tf-policies-wrapper tf-section" id="tf-hotel-policies">            
     <h2 class="tf-section-title">

@@ -3,6 +3,7 @@
 namespace Tourfic\App\Shortcodes;
 
 defined( 'ABSPATH' ) || exit;
+use Tourfic\Classes\Helper;
 
 class Vendor_Post extends \Tourfic\Core\Shortcodes {
 
@@ -24,6 +25,22 @@ class Vendor_Post extends \Tourfic\Core\Shortcodes {
 				$atts
 			)
 		);
+
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+
+		$service_type = '';
+		if( $type == "tf_hotel" ){
+			$service_type = "hotel";
+		}elseif( $type == "tf_tours" ){
+			$service_type = "tour";
+		}elseif( $type == "tf_apartment" ){
+			$service_type = "apartment";
+		}elseif( $type == "tf_carrental" ){
+			$service_type = "carrentals";
+		}		
+		if (in_array($service_type, $tf_disable_services)){
+			return;
+		}
 
 		$args = array(
 			'post_type'      => $type,

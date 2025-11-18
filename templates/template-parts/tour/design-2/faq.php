@@ -1,6 +1,9 @@
+<?php // Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 <?php if ( $faqs ): ?>
-<!-- Hotel Questions Srart -->
-<div class="tf-questions-wrapper tf-section" id="tf-hotel-faq">
+<!-- Tour Questions Srart -->
+<div class="tf-questions-wrapper tf-section" id="tf-tour-faq">
     <h2 class="tf-section-title">
     <?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : esc_html__( "Faq’s", 'tourfic' ); ?>
     </h2>            
@@ -48,5 +51,5 @@
     </div>
 </div>
 
-<!-- Hotel Questions end -->
+<!-- Tour Questions end -->
 <?php endif; ?>

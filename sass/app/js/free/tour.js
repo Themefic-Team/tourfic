@@ -200,10 +200,10 @@
             }
         })
 
-        $(".tf-itinerary-single-meta li .fa-info-circle, .ininerary-other-info li .fa-info-circle").on("click", function (e) {
+        $(".tf-itinerary-single-meta li a, .ininerary-other-info li a").on("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
-            var id = $(this).parent().attr("id");
+            var id = $(this).attr("id");
             $(".tour-itinerary-sleep").each(function () {
                 var elementId = $(this).attr("id"); 
                 if (id === elementId) {
@@ -304,7 +304,7 @@
         $(document).on('submit', '#tf_tour_aval_check', function (e) {
             e.preventDefault();
             let form = $(this),
-                submitBtn = form.find('.tf-submit'),
+                submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
 
             formData.append('action', 'tf_tour_search');
@@ -322,12 +322,12 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    form.css({'pointer-events': 'none'});
                     submitBtn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
-                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    form.css({'pointer-events': 'all'});
                     submitBtn.removeClass('tf-btn-loading');
                     if (obj.status === 'error') {
                         notyf.error(obj.message);
@@ -496,6 +496,57 @@
 
         }
 
+        // Tour price by onchange
+        $('.tf_tours_booking .tours-check-in-out').on("change", function () {
+            var date = $(this).val();
+            let post_id = $('input[name="post_id"]').val();
+
+            if( !date ){
+                return;
+            }
+            var data = {
+                action: 'tf_tour_price_calculation',
+                _nonce: tf_params.nonce,
+                post_id: post_id,
+                date: date,
+            };
+
+            $.ajax({
+                url: tf_params.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    if($('.tf-tour-booking-box')){
+                        $('.tf-tour-booking-box').addClass('tf-box-loading');
+                    }
+                    if($('.tf-search-date-wrapper')){
+                        $('.tf-search-date-wrapper').addClass('tf-box-loading');
+                    }
+                },
+                success: function (response) {
+                    if(response){
+                        if(response.data.min_price){
+                            $('.tf-tour-booking-box .tf-booking-price p').html(response.data.min_price);
+                        }
+                        if($('.acr-adult-price') && response.data.adult){
+                            $('.acr-adult-price').html(response.data.adult);
+                        }
+                        if($('.acr-child-price') && response.data.child){
+                            $('.acr-child-price').html(response.data.child);
+                        }
+                        if($('.acr-infant-price') && response.data.infant){
+                            $('.acr-infant-price').html(response.data.infant);
+                        }
+                        if($('.tf-tour-booking-box')){
+                            $('.tf-tour-booking-box').removeClass('tf-box-loading');
+                        }
+                        if($('.tf-search-date-wrapper')){
+                            $('.tf-search-date-wrapper').removeClass('tf-box-loading');
+                        }
+                    }
+                }
+            });
+        });
         /*
         * New Template Itinerary Accordion
         * @author: Jahid
@@ -639,7 +690,7 @@
                     scroll = $(window).scrollTop(),
                     footer = $('footer');
             
-                if (footer.length === 0) {
+                if (footer.length === 0 || bookingBox.length === 0 || sticky.length === 0) {
                     return; 
                 }
                 let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
@@ -787,12 +838,19 @@
 
                     if (timestamp >= from && timestamp <= to) {
                         const allowedTime = availability.allowed_time?.time || [];
-
-                        allowedTime.forEach((t) => {
-                            if (t && t.trim() !== '') {
-                                times[t] = t;
-                            }
-                        });
+                        if (Array.isArray(allowedTime)) {
+                            allowedTime.forEach((t) => {
+                                if (t && t.trim() !== '') {
+                                    times[t] = t;
+                                }
+                            });
+                        } else if (typeof allowedTime === 'object' && allowedTime !== null) {
+                            Object.values(allowedTime).forEach((t) => {
+                                if (t && t.trim() !== '') {
+                                    times[t] = t;
+                                }
+                            });
+                        }
 
                         break; // stop after first match
                     }
@@ -941,6 +999,18 @@
             }
             form.submit();
         });
+
+        if ($('#tour-location').length) {
+            const map = L.map('tour-location').setView([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], tf_params.tour_form_data.location_zoom);
+            
+            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            const marker = L.marker([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], {alt: tf_params.tour_form_data.location}).addTo(map)
+                .bindPopup(tf_params.tour_form_data.location);
+        }
 
     });
 

@@ -21,29 +21,29 @@
         }
 
         &::-webkit-input-placeholder {
-            color: $tf_text_title;
+            color: $tf_text_faint;
         }
 
         &::-ms-input-placeholder {
-            color: $tf_text_title;
+            color: $tf_text_faint;
         }
 
         input:-ms-input-placeholder {
-            color: $tf_text_title;
+            color: $tf_text_faint;
         }
 
         &::-moz-placeholder {
             opacity: 1;
-            color: $tf_text_title;
+            color: $tf_text_faint;
         }
 
         &:-moz-placeholder {
             opacity: 1;
-            color: $tf_text_title;
+            color: $tf_text_faint;
         }
 
         &::placeholder {
-            color: $tf_text_title;
+            color: $tf_text_faint;
         }
 
         &:read-only {

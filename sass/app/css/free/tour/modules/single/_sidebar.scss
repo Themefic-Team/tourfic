@@ -5,13 +5,26 @@
                 .tf-tour-booking-box  {
                     background: $color-filling-fg;
                     @include bd-radius(5px);
-                
-                    .check-in-time-div{
-                        display: none;
-                    }
-                    .tf_tours_main_booking{
+                    // .tf_tours_main_booking{
+                    //     @media #{$max768}{
+                    //         display: none;
+                    //     }
+                    // }
+                    &.tf-box-loading{
+                        position: relative;
                         @media #{$max768}{
-                            display: none;
+                            position: fixed;
+                        }
+                        &::before{
+                            position: absolute;
+                            content: "";
+                            right: 0;
+                            top: 0;
+                            left: 0;
+                            bottom: 0;
+                            background-color: rgba(255,255,255,.5);
+                            z-index: 99;
+                            border-radius: 16px;
                         }
                     }
                 }

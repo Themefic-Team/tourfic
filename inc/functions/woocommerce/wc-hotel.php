@@ -50,10 +50,16 @@ function tf_hotel_booking_callback() {
 		$instantio_is_active = 1;
 	}
 
+	if(!empty($_POST['extras'])){
+		$extras = explode( ',', $_POST['extras'] );
+	}
+
 
 	// Without Payment Booking Data
-	$tf_without_payment_guest_info = !empty( $_POST['guest'] ) ? $_POST['guest'] : '';
-	$tf_without_payment_confirmation_details = !empty( $_POST['booking_confirm'] ) ? $_POST['booking_confirm'] : array();
+	$tf_without_payment_guest_info = !empty( $_POST['guest'] ) ? wp_unslash( $_POST['guest'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+	$tf_without_payment_confirmation_details = !empty( $_POST['booking_confirm'] ) ? wp_unslash( $_POST['booking_confirm'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
 	$tf_without_payment_booking_fields = !empty( Helper::tfopt( 'hotel-book-confirm-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel-book-confirm-field' ) ) : '';
 
 	// Check errors
@@ -221,7 +227,7 @@ function tf_hotel_booking_callback() {
 			}
 		}
 		$total_extras_titles = implode(',', $total_extras_title);
-		
+
 		$tf_room_data['tf_hotel_data']['order_type']         = 'hotel';
 		$tf_room_data['tf_hotel_data']['post_id']            = $post_id;
 		$tf_room_data['tf_hotel_data']['unique_id']          = $unique_id;
@@ -589,7 +595,7 @@ function tf_hotel_booking_callback() {
 		}
 
 		if (!empty( $tf_without_payment_guest_info )) {
-			$tf_room_data['tf_hotel_data']['visitor_details']	=	json_encode($tf_without_payment_guest_info);
+			$tf_room_data['tf_hotel_data']['visitor_details']	=	wp_json_encode($tf_without_payment_guest_info);
 		}
 		// Booking Type
 		$tf_booking_type = $tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = '';
@@ -633,7 +639,7 @@ function tf_hotel_booking_callback() {
 				'hotel_extra_fee'  => isset($total_extras_price) ? wc_price( $total_extras_price ) : '',
 				'total_price'          => !empty($tf_room_data['tf_hotel_data']['price_total']) ? $tf_room_data['tf_hotel_data']['price_total'] : 0,
 				'due_price'            => !empty($tf_room_data['tf_hotel_data']['due']) ? $tf_room_data['tf_hotel_data']['due'] : '',
-				'visitor_details' => json_encode($tf_without_payment_guest_info),
+				'visitor_details' => wp_json_encode($tf_without_payment_guest_info),
 			];
 	
 			$without_payment_order_data = array(
@@ -649,7 +655,7 @@ function tf_hotel_booking_callback() {
 				'payment_method'   => "offline",
 				'customer_id'	   => $tf_offline_user_id,
 				'status'           => 'processing',
-				'order_date'       => date( 'Y-m-d H:i:s' ),
+				'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 			);
 
 			$response['without_payment'] = 'true';
@@ -722,7 +728,7 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 	}
 	if ( isset( $cart_item['tf_hotel_data']['option'] ) ) {
 		$item_data[] = array(
-			'key'   => __( 'Option', 'tourfic' ),
+			'key'   => esc_html__( 'Option', 'tourfic' ),
 			'value' => $cart_item['tf_hotel_data']['option'],
 		);
 	}
@@ -1081,6 +1087,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$children_ages        = $item->get_meta( 'Children Ages', true );
 			$airport_service_type = $item->get_meta( 'Airport Service', true );
 			$airport_service_fee  = $item->get_meta( 'Airport Service Fee', true );
+			$total_extras_titles  = $item->get_meta( 'Hotel Extra Service', true );
+			$total_extras_price  = $item->get_meta( 'Hotel Extra Service Fee', true );
 			$guest_details = $item->get_meta( '_visitor_details', true );
 
 			$iteminfo = [
@@ -1095,6 +1103,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'children_ages'        => $children_ages,
 				'airport_service_type' => $airport_service_type,
 				'airport_service_fee'  => $airport_service_fee,
+				'hotel_extra' => $total_extras_titles,
+				'hotel_extra_fee'  => $total_extras_price,
 				'total_price'          => $price,
 				'due_price'            => $due,
 				'tax_info'             => wp_json_encode( $fee_sums ),
@@ -1112,6 +1122,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'children_ages'        => $children_ages,
 				'airport_service_type' => $airport_service_type,
 				'airport_service_fee'  => $airport_service_fee,
+				'hotel_extra' => $total_extras_titles,
+				'hotel_extra_fee'  => $total_extras_price,
 				'total_price'          => $price,
 				'due_price'            => $due,
 				'customer_id'          => $order->get_customer_id(),
