@@ -787,17 +787,20 @@ class TF_Options {
 		}
 
 		if ( $new_post != 'true' ) {
-			$apt_availability = json_decode( $apartment_data['apt_availability'], true );
+			$apt_availability = json_decode( $apartment_meta['apt_availability'], true );
+
 			if ( isset( $apt_availability ) && ! empty( $apt_availability ) ) {
 				$apt_availability_data = array_merge( $apt_availability, $apt_availability_data );
 			}
-			$apartment_data['apt_availability'] = wp_json_encode( $apt_availability_data );
-			update_post_meta( $apartment_id, 'tf_apartment_opt', $apartment_data );
+			$apartment_meta['apt_availability'] = wp_json_encode( $apt_availability_data );
+			update_post_meta( $apartment_id, 'tf_apartment_opt', $apartment_meta );
 		} else {
 			$apt_availability = json_decode( stripslashes( $apt_availability ), true );
 			if ( isset( $apt_availability ) && ! empty( $apt_availability ) ) {
 				$apt_availability_data = array_merge( $apt_availability, $apt_availability_data );
 			}
+			$apartment_meta['apt_availability'] = wp_json_encode( $apt_availability_data );
+			update_post_meta( $apartment_id, 'tf_apartment_opt', $apartment_meta );
 		}
 
 		wp_send_json_success( [
