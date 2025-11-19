@@ -170,6 +170,7 @@
                                         width: auto;
                                         height: auto;
                                         padding: 0;
+                                        cursor: pointer;
                                     }
                                     input{
                                         color: $color-text;
@@ -180,6 +181,7 @@
                                         border: 0px solid;
                                         padding: 0;
                                         text-align: center;
+                                        height: auto;
                                         &:focus{
                                             box-shadow: none;
                                             outline: none;
