@@ -155,7 +155,13 @@ while ( have_posts() ) : the_post();
 	}elseif( $tf_hotel_selected_template == "design-2" ){
 		include TF_TEMPLATE_PART_PATH . 'hotel/design-2.php';
 	}else{
-		include TF_TEMPLATE_PART_PATH . 'hotel/design-legacy.php';
+		$template = apply_filters(
+			'tf_hotel_single_legacy_template',
+			TF_TEMPLATE_PART_PATH . 'hotel/design-legacy.php'
+		);
+
+		include $template;
+		
 	}
 endwhile;
 
