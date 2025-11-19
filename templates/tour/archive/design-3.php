@@ -135,6 +135,8 @@ $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googl
 
                                             $count++;
                                             $map = !empty($meta['location']) ? Helper::tf_data_types($meta['location']) : '';
+
+			                                $allow_discount    = ! empty( $meta['allow_discount'] ) ? $meta['allow_discount'] : '';
                                             $discount_type = !empty($meta['discount_type']) ? $meta['discount_type'] : '';
                                             $discount_price = !empty($meta['discount_price']) ? $meta['discount_price'] : '';
 
@@ -166,7 +168,7 @@ $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googl
                                                             ?>
                                                         </a>
 
-                                                        <?php if ($discount_type !== 'none' && !empty($discount_price)) : ?>
+                                                        <?php if (!empty($allow_discount) && $discount_type !== 'none' && !empty($discount_price)) : ?>
                                                             <div class="tf-map-item-discount">
                                                                 <?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price($discount_price)) ?>
                                                                 <?php esc_html_e(" Off", "tourfic"); ?>
@@ -240,7 +242,7 @@ $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googl
                                                             ?>
                                                         </a>
 
-                                                        <?php if ($discount_type !== 'none' && !empty($discount_price)) : ?>
+                                                        <?php if (!empty($allow_discount) && $discount_type !== 'none' && !empty($discount_price)) : ?>
                                                             <div class="tf-map-item-discount">
                                                                 <?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price($discount_price)) ?>
                                                                 <?php esc_html_e(" Off", "tourfic"); ?>

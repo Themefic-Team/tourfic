@@ -8,11 +8,12 @@
     width: 100%;
     padding: 12px 8px 12px 12px;
     border: none;
-    background-color: $blue0;
+    border: 1px solid $tf_border_default;
+    background: $tf_fill_background;
     border-radius: 4px;
-    height: 48px;
-    color: $slate80;
-    font-size: 0.875rem;
+    height: 40px;
+    color: $tf_text_title;
+    font-size: 15px;
     border: 1px solid #c4cbd4;
 
     &:focus {
@@ -22,29 +23,29 @@
     }
 
     &::-webkit-input-placeholder {
-      color: $slate30;
+      color: $tf_text_title;
     }
 
     &::-ms-input-placeholder {
-      color: $slate30;
+      color: $tf_text_title;
     }
 
     input:-ms-input-placeholder {
-      color: $slate30;
+      color: $tf_text_title;
     }
 
     &::-moz-placeholder {
       opacity: 1;
-      color: $slate30;
+      color: $tf_text_title;
     }
 
     &:-moz-placeholder {
       opacity: 1;
-      color: $slate30;
+      color: $tf_text_title;
     }
 
     &::placeholder {
-      color: $slate30;
+      color: $tf_text_title;
     }
   }
 
@@ -53,7 +54,7 @@
     top: 50%;
     right: 8px;
     transform: translateY(-50%);
-    color: $slate30;
+    color: $tf_text_title;
     font-size: 1rem;
   }
 }

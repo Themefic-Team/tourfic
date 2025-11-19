@@ -1310,12 +1310,22 @@
         $('.acr-inc, .quanity-acr-inc').on('click', function (e) {
             var input = $(this).parent().find('input');
             var max = input.attr('max') ? input.attr('max') : 999;
+            if(input.attr('data-max')){
+                max = input.attr('data-max');
+            }
+
             var step = input.attr('step') ? input.attr('step') : 1;
             if (!input.val()) {
                 input.val(0);
             }
             if (input.val() < max) {
                 input.val(parseInt(input.val()) + parseInt(step)).change();
+            }
+            if(input.val() == max){
+                $(this).addClass('disable');
+                $(this).parent().find('.acr-dec').removeClass('disable');
+            }else{
+                $(this).parent().find('.acr-dec').removeClass('disable');
             }
             // input focus disable
             input.blur();
@@ -1326,12 +1336,21 @@
 
             var input = $(this).parent().find('input');
             var min = input.attr('min') ? input.attr('min') : 0;
+            if(input.attr('data-min')){
+                min = input.attr('data-min');
+            }
             var step = input.attr('step') ? input.attr('step') : 1;
             if (!input.val()) {
                 input.val(0);
             }
             if (input.val() > min) {
                 input.val(input.val() - parseInt(step)).change();
+            }
+            if(input.val() == min){
+                $(this).addClass('disable');
+                $(this).parent().find('.acr-inc').removeClass('disable');
+            }else{
+                $(this).parent().find('.acr-inc').removeClass('disable');
             }
         });
 
@@ -1981,7 +2000,13 @@
             if (tf_hasErrorsFlag) {
                 return false;
             }
-            let step = $(this).attr("data-step");
+            let active_steps = $('.tf_popup_stpes').val();
+            let stepsArray = active_steps.split(',').map(Number);
+            let currentStep = parseInt($(this).attr("data-step"));
+
+            let currentIndex = stepsArray.indexOf(currentStep);
+            let step = stepsArray[currentIndex + 1];
+
             if (step > 1) {
                 for (let i = 1; i <= step; i++) {
                     $('.tf-booking-step-' + i).removeClass("active");
@@ -1999,7 +2024,16 @@
         // Navigation Back
         $(document).on('click', '.tf-step-back', function (e) {
             e.preventDefault();
-            let step = $(this).attr("data-step");
+            
+            let active_steps = $('.tf_popup_stpes').val();
+            let stepsArray = active_steps.split(',').map(Number);
+            let currentStep = parseInt($(this).attr("data-step"));
+
+            // Find the previous available step from active_steps
+            let currentIndex = stepsArray.indexOf(currentStep);
+            let step = (currentIndex > 0) ? stepsArray[currentIndex - 1] : 1;
+            
+            // let step = $(this).attr("data-step");
             if (step == 1) {
                 $('.tf-booking-step').removeClass("active");
                 $('.tf-booking-step').removeClass("done");
@@ -2036,7 +2070,22 @@
             var deposit = $('input[name=deposit]').is(':checked');
             var extras = [];
             var quantity = [];
+            var selectedPackage = $('.tf-booking-content-package input[name="tf_package"]:checked').val();
+            if (selectedPackage !== undefined) {
+                var $selectedDiv = $('#package-' + selectedPackage).closest('.tf-single-package');
+                adults = $selectedDiv.find('input[name="adults"]').val();
+                children = $selectedDiv.find('input[name="childrens"]').val();
+                infant = $selectedDiv.find('input[name="infants"]').val();
+                check_in_time = $selectedDiv.find('select[name=package_start_time] option').filter(':selected').val();
 
+                $('.tf-single-package').each(function () {
+                    var $package = $(this);
+                    var currentKey = $package.find('input[name="tf_package"]').val();
+                    var isSelected = currentKey === selectedPackage;
+            
+                    $package.find('input[type="number"]').prop('disabled', !isSelected);
+                });
+            }
             $('.tour-extra-single').each(function (e) {
                 let $this = $(this);
 
@@ -2068,7 +2117,8 @@
                 check_in_time: check_in_time,
                 tour_extra: extras,
                 tour_extra_quantity: quantities,
-                deposit: deposit
+                deposit: deposit,
+                selectedPackage: selectedPackage
             };
 
             $.ajax({
@@ -2082,13 +2132,12 @@
                     $this.unblock();
                 },
                 success: function (data) {
+                    $('#tour_room_details_loader').hide();
                     $this.unblock();
 
                     var response = JSON.parse(data);
 
                     if (response.status == 'error') {
-
-                        $('#tour_room_details_loader').hide();
                         if (response.errors) {
                             response.errors.forEach(function (text) {
                                 notyf.error(text);
@@ -2097,7 +2146,6 @@
 
                         return false;
                     } else {
-                        $('#tour_room_details_loader').hide();
                         if ($('.tf-traveller-info-box').length > 0) {
                             if ($(".tf-traveller-info-box").html().trim() == "") {
                                 $('.tf-traveller-info-box').html(response.traveller_info);
@@ -2108,6 +2156,23 @@
                         if ($('.tf-booking-traveller-info').length > 0) {
                             $('.tf-booking-traveller-info').html(response.traveller_summery);
                         }
+                        if (response.pacakge_times && typeof response.pacakge_times === 'object') {
+                            Object.entries(response.pacakge_times).forEach(([key, times]) => {
+                                const wrapper = $(`.tf-package-times-${key}`);
+                                wrapper.css('display', 'flex');
+                                const select = wrapper.find('select[name="package_start_time"]');
+                                if (select.length && select.children('option').length === 0) {                        
+                                    // Add placeholder option first
+                                    select.append(`<option value="" disabled selected>Time</option>`);
+
+                                    // Then add time options
+                                    times.forEach((time) => {
+                                        select.append(`<option value="${time}">${time}</option>`);
+                                    });
+                                }
+                            });
+                        }
+                        
                         $('.tf-withoutpayment-booking').addClass('show');
                     }
 
@@ -2120,6 +2185,7 @@
                 },
                 error: function (data) {
                     console.log(data);
+                    $('#tour_room_details_loader').hide();
                 },
 
             });
@@ -2139,9 +2205,25 @@
         $(document).on('change', '[name*=tf-tour-extra], input[name="extra-quantity"]', function () {
             tourPopupBooking();
         });
-        $(document).on('change', '[name=deposit]', function () {
+        $(document).on('change', '[name=deposit], [name=tf_package]', function () {
             tourPopupBooking();
         });
+
+        $('.tf-single-person .acr-inc, .tf-single-person .acr-dec').on('click', function (e) {
+            tourPopupBooking();
+        });
+
+        $('input[name="tf_package"]').on('change', function () {
+            var selectedKey = $(this).val();
+            $('.tf-single-package').each(function () {
+                var $package = $(this);
+                if ($package.find('input[name="tf_package"]').val() !== selectedKey) {
+                    $package.find('input[type="number"]').prop('disabled', true);
+                } else {
+                    $package.find('input[type="number"]').prop('disabled', false);
+                }
+            });
+        });        
 
         // Popup Close
         $('body').on('click touchstart', '.tf-booking-times span', function (e) {

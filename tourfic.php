@@ -7,11 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.18.0
+ * Version:         2.18.5
  * Tested up to:    6.8
  * WC tested up to: 10.0
  * Requires PHP:    7.4 
- * Elementor tested up to: 3.31
+ * Elementor tested up to: 3.32
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -27,7 +27,7 @@ final class Tourfic {
 	 * @var string
 	 */
 
-	const VERSION = '2.18.0';
+	const VERSION = '2.18.5';
 
 	/**
 	 * Minimum PHP version required.
@@ -175,8 +175,9 @@ final class Tourfic {
 				?>
                 <div id="message" class="error">
 					<p>
-						<?php printf(
-							esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ),
+						<?php 
+						/* translators: %1$s is return strong tag %2$s is return closeing of strong tag */
+						printf(esc_html__( 'Tourfic requires %1$s WooCommerce %2$s to be activated.', 'tourfic' ),
 							'<strong><a href="plugin-install.php?s=woocommerce&tab=search&type=term">', '</a></strong>'
 						); ?>
 					</p>

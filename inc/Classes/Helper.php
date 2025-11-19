@@ -85,6 +85,12 @@ class Helper {
         add_action( 'wp_ajax_tf_archive_gallery_popup_qv', array( $this, 'tf_archive_gallery_popup_qv_callback' ) );
 		add_action( 'wp_ajax_nopriv_tf_archive_gallery_popup_qv', array( $this, 'tf_archive_gallery_popup_qv_callback' ) );
 
+        add_action( 'wp_head', function() {
+            if ( is_page_template( 'tf-search' ) ) {
+                echo '<meta name="robots" content="noindex,follow">';
+            }
+        });
+
 	}
 
 	static function tfopt( $option = '', $default = null ) {
@@ -105,6 +111,50 @@ class Helper {
 		}
 	}
 
+    static function is_all_unavailable($tour_availability) {
+        if (empty($tour_availability) || !is_object($tour_availability)) {
+            return false;
+        }
+    
+        foreach ($tour_availability as $availability) {
+            if (!isset($availability->status) || $availability->status !== 'unavailable') {
+                return false;
+            }
+        }
+    
+        return true;
+    }
+    
+
+    static function tf_hotel_extras_title_price( $post_id, $adult, $child, $key ) {
+		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+		$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
+
+		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $hotel_extras[$key] ) ) {
+			if ( !empty($hotel_extras[$key]['price']) ) {
+				
+				if ( "fixed" == $hotel_extras[$key]['price_type'] ) {
+					$airport_service_arr = array(
+						'title' => __( 'Fixed Price', 'tourfic' ),
+						'price' => $hotel_extras[$key]['price']
+					);
+				}
+				if ( "person" == $hotel_extras[$key]['price_type'] ) {
+					$airport_service_arr = array(
+                        /* translators: %1$s: number of adult and %2$s: extra price */
+						'title' => sprintf( __( 'Adult ( %1$s × %2$s )', 'tourfic' ),
+							$adult,
+							wp_strip_all_tags( wc_price( $hotel_extras[$key]['price'] ) )
+						),
+						'price' => $hotel_extras[$key]['price'] * $adult
+					);
+				}
+			}
+		}
+
+		return !empty( $airport_service_arr ) ? $airport_service_arr : array( 'title' => '', 'price' => 0 );
+	}
+    
     /**
 	 * Template 3 Compatible to others Themes
 	 *
@@ -1006,7 +1056,7 @@ class Helper {
                 <div class="tf-booking-form-guest-and-room">
 					<?php if ( $post_type == 'tf_hotel' ) { ?>
                         <div class="tf-booking-form-guest-and-room-inner">
-                            <span class="tf-booking-form-title"><?php echo $post_type == "tf_hotel" ? esc_html_e( apply_filters("tf_hotel_guest_name_change", "Guest") . "s & rooms", "tourfic" ) : esc_html_e( "Guests & rooms", "tourfic" ); ?></span>
+                            <span class="tf-booking-form-title"><?php echo $post_type == "tf_hotel" ? esc_html( apply_filters("tf_hotel_guest_name_change", "Guest") . "s & rooms" ) : esc_html_e( "Guests & rooms", "tourfic" ); ?></span>
                             <div class="tf-booking-guest-and-room-wrap tf-archive-guest-info">
                                 <span class="tf-guest"><?php echo esc_html( $adult + $children ) ?> </span> <?php echo esc_html( apply_filters("tf_hotel_guest_name_change", "guest")); ?> <span
                                         class="tf-room"><?php echo esc_html( $room ); ?></span> <?php esc_html_e( "Rooms", "tourfic" ); ?>
@@ -2052,7 +2102,7 @@ class Helper {
                         <div class="tf-booking-form-guest-and-room">
                             <?php if ( $post_type == 'tf_hotel' ) { ?>
                                 <div class="tf-booking-form-guest-and-room-inner">
-                                    <span class="tf-booking-form-title"><?php $post_type == "tf_hotel" ? esc_html_e( apply_filters("tf_hotel_guest_name_change", "Guest") . "s & rooms", "tourfic" ) : esc_html_e( "Guests & rooms", "tourfic" ); ?></span>
+                                    <span class="tf-booking-form-title"><?php echo $post_type == "tf_hotel" ? esc_html( apply_filters("tf_hotel_guest_name_change", "Guest") . "s & rooms", "tourfic" ) : esc_html__( "Guests & rooms", "tourfic" ); ?></span>
                                     <div class="tf-booking-guest-and-room-wrap tf-archive-guest-info">
                                         <span class="tf-guest"><?php esc_html_e( "00", "tourfic" ); ?></span> 
                                         <?php 

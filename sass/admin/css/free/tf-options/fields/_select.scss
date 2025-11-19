@@ -3,16 +3,18 @@
   select.tf-select{
     width: 100%;
     max-width: 100%;
-    padding: 12px 8px 12px 12px;
-    border: 1px solid $slate20;
-    background-color: $blue0;
+    padding: 8px 8px 8px 12px;
+    border: 1px solid $tf_border_default;
+    background-color: $tf_fill_white;
     border-radius: 4px;
-    height: 48px;
-    color: $slate80;
-    font-size: 0.875rem;
-    line-height: 22px;
+    height: 40px;
+    color: $tf_text_title;
+    font-size: 15px;
+    line-height: 24px;
     &:focus{
       outline: none;
+      border-color: $tf_border_default;
+      box-shadow: none;
     }
   }
 }

@@ -37,6 +37,7 @@ while ( have_posts() ) : the_post();
 
 	// Get Tour Meta
 	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+	
 	/**
 	 * Show/hide sections
 	 */
@@ -71,12 +72,6 @@ while ( have_posts() ) : the_post();
 
 	// tour type meta
 	$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
-	// Repeated Fixed Tour meta
-	if(!empty($tour_type) && ($tour_type == 'fixed')) {
-		$tf_start_date = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
-		$tf_repeated_fixed_tour_switch = ! empty( $meta['fixed_availability']["tf-repeat-months-switch"] ) ? $meta['fixed_availability']["tf-repeat-months-switch"] : 0;
-		$tf_tour_repeat_months = ($tf_repeated_fixed_tour_switch == 1) && !empty($meta['fixed_availability']['tf-repeat-months-checkbox']) ? $meta['fixed_availability']['tf-repeat-months-checkbox'] : array();
-	}
 
 	// date format for users
 	$tf_tour_date_format_for_users  = !empty(Helper::tfopt( "tf-date-format-for-users")) ? Helper::tfopt( "tf-date-format-for-users") : "Y/m/d";
@@ -233,18 +228,16 @@ while ( have_posts() ) : the_post();
 	 */
 	$pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 	$tour_type    = ! empty( $meta['type'] ) ? $meta['type'] : '';
-	if ( $tour_type && $tour_type == 'continuous' ) {
-		$custom_avail = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : false;
-	}
 	$discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : 'none';
 	$disable_adult  = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
 	$disable_child  = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
 	$disable_infant = ! empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
-	if ( $tour_type == 'continuous' && $custom_avail == true ) {
-		$pricing_rule = ! empty( $meta['custom_pricing_by'] ) ? $meta['custom_pricing_by'] : 'person';
-	}
 
 	# Get Pricing
+	$group_price    = ! empty( $meta['group_price'] ) ? $meta['group_price'] : 0;
+	$adult_price    = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
+	$children_price = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
+	$infant_price   = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
 	$tour_price = new Tour_Price( $meta );
 
 	// Single Template

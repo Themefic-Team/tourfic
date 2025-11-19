@@ -9,17 +9,32 @@ if ( ! class_exists( 'TF_Fields' ) ) {
 		public $value;
 		public $settings_id;
 		public $parent_field;
+		public $related_value;
 
-		public function __construct( $field = array(), $value = '', $settings_id = '', $parent_field = '') {
+		public function __construct( $field = array(), $value = '', $settings_id = '', $parent_field = '', $related_value = '') {
 			$this->field       = $field;
 			$this->value       = $value;
 			$this->settings_id = $settings_id;
 			$this->parent_field = $parent_field;
+			$this->related_value = $related_value;
 		}
 
 		public function field_name() {
 
 			$field_id   = ( ! empty( $this->field['id'] ) ) ? $this->field['id'] : '';
+			if(!empty($field_id)){ 
+				$field_name = ( ! empty( $this->settings_id ) ) ? $this->settings_id . $this->parent_field . '[' . $field_id . ']' : $field_id;
+			}else{ 
+				$field_name = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $field_id . ']' : $field_id;
+			}
+
+			return $field_name;
+
+		}
+
+		public function related_field_name() {
+
+			$field_id   = ( ! empty( $this->field['related_name'] ) ) ? $this->field['related_name'] : '';
 			if(!empty($field_id)){ 
 				$field_name = ( ! empty( $this->settings_id ) ) ? $this->settings_id . $this->parent_field . '[' . $field_id . ']' : $field_id;
 			}else{ 

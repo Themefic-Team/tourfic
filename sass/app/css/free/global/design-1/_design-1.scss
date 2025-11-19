@@ -602,6 +602,9 @@
                     #check-in-out-date {
                         width: 100%;
                     }
+                    &.check-in-time-div{
+                        display: none;
+                    }
                 }
             }
            
@@ -823,7 +826,7 @@
                             border: 1px solid $color-border-lite;
                             background-color: $color-filling-bg;
                             cursor: pointer;
-                            height: 100%;
+                            height: 50px;
                             @media #{$max575}{
                                 height: auto;
                                 padding: 8px;

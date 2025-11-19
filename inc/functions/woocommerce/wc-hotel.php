@@ -42,11 +42,16 @@ function tf_hotel_booking_callback() {
 	$check_out       = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
 	$deposit         = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 	$airport_service = isset( $_POST['airport_service'] ) ? sanitize_text_field( $_POST['airport_service'] ) : '';
+	$extras = isset( $_POST['extra_service'] ) ? $_POST['extra_service'] : '';
 	$quick_checkout = !empty(Helper::tfopt( 'tf-quick-checkout' )) ? Helper::tfopt( 'tf-quick-checkout' ) : 0;
 	$instantio_is_active = 0;
 
 	if( is_plugin_active('instantio/instantio.php') ){
 		$instantio_is_active = 1;
+	}
+
+	if(!empty($_POST['extras'])){
+		$extras = explode( ',', $_POST['extras'] );
 	}
 
 
@@ -209,6 +214,20 @@ function tf_hotel_booking_callback() {
 			}
 		}
 
+		// Hotel Extra
+		$total_extras_title = [];
+		$total_extras_price = 0;
+		$hotel_extra_option     = ! empty( $meta['hotel_extra_option'] ) ? $meta['hotel_extra_option'] : '';
+		if(function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($hotel_extra_option)){
+			$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
+			foreach ( $extras as $key => $extra ) {
+				$extra_service = Helper::tf_hotel_extras_title_price( $post_id, $adult, $child, $extra );
+				$total_extras_title[] = $hotel_extras[$extra]['title'];
+				$total_extras_price += $extra_service['price'];
+			}
+		}
+		$total_extras_titles = implode(',', $total_extras_title);
+
 		$tf_room_data['tf_hotel_data']['order_type']         = 'hotel';
 		$tf_room_data['tf_hotel_data']['post_id']            = $post_id;
 		$tf_room_data['tf_hotel_data']['unique_id']          = $unique_id;
@@ -224,6 +243,8 @@ function tf_hotel_booking_callback() {
 		$tf_room_data['tf_hotel_data']['room_name']          = $room_name;
 		$tf_room_data['tf_hotel_data']['air_serivicetype']   = $airport_service;
 		$tf_room_data['tf_hotel_data']['air_serivice_avail'] = $meta['airport_service'] ?? null;
+		$tf_room_data['tf_hotel_data']['hotel_extra'] = $total_extras_titles;
+		$tf_room_data['tf_hotel_data']['hotel_extra_price'] = $total_extras_price;
 
 		/**
 		 * Calculate Pricing
@@ -394,6 +415,12 @@ function tf_hotel_booking_callback() {
 			$tf_offline_user_id = 1;
 		}
 
+
+		// Set Extra Price
+		if(function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($total_extras_price) && !empty($hotel_extra_option)){
+			$tf_room_data['tf_hotel_data']['price_total'] += $total_extras_price;
+		}
+
 		# Airport Service Fee
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tf_room_data['tf_hotel_data']['air_serivice_avail'] ) && 1 == $tf_room_data['tf_hotel_data']['air_serivice_avail'] ) {
 			if ( "pickup" == $airport_service ) {
@@ -558,8 +585,8 @@ function tf_hotel_booking_callback() {
 			Helper::tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
 			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) {
 				$tf_room_data['tf_hotel_data']['price_total'] = $deposit_amount;
-				if ( ! empty( $airport_service ) ) {
-					$tf_room_data['tf_hotel_data']['due'] = ( $price_total + $airport_service_price_total ) - $deposit_amount;
+				if ( ! empty( $airport_service ) || !empty($total_extras_price) ) {
+					$tf_room_data['tf_hotel_data']['due'] = ( $price_total + $airport_service_price_total + $total_extras_price ) - $deposit_amount;
 				} else {
 					$tf_room_data['tf_hotel_data']['due'] = $price_total - $deposit_amount;
 				}
@@ -608,11 +635,12 @@ function tf_hotel_booking_callback() {
 				'children_ages'        => $children_ages,
 				'airport_service_type' => $airport_service,
 				'airport_service_fee'  => isset($airport_service_price_total) ? wc_price( $airport_service_price_total ) : '',
+				'hotel_extra' => $total_extras_titles,
+				'hotel_extra_fee'  => isset($total_extras_price) ? wc_price( $total_extras_price ) : '',
 				'total_price'          => !empty($tf_room_data['tf_hotel_data']['price_total']) ? $tf_room_data['tf_hotel_data']['price_total'] : 0,
 				'due_price'            => !empty($tf_room_data['tf_hotel_data']['due']) ? $tf_room_data['tf_hotel_data']['due'] : '',
 				'visitor_details' => wp_json_encode($tf_without_payment_guest_info),
 			];
-	
 	
 			$without_payment_order_data = array(
 				'post_id'          => !empty( $tf_room_data['tf_hotel_data']['post_id'] ) ? $tf_room_data['tf_hotel_data']['post_id'] : '',
@@ -777,6 +805,20 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 		);
 	}
 
+	// Hotel Extra
+	if ( ! empty( $cart_item['tf_hotel_data']['hotel_extra'] ) ) {
+		$item_data[] = array(
+			'key'   => esc_html__( 'Hotel Extra Service', 'tourfic' ),
+			'value' =>  $cart_item['tf_hotel_data']['hotel_extra'],
+		);
+	}
+	if ( ! empty( $cart_item['tf_hotel_data']['hotel_extra_price'] ) ) {
+		$item_data[] = array(
+			'key'   => esc_html__( 'Hotel Extra Service Fee', 'tourfic' ),
+			'value' =>  wp_strip_all_tags( wc_price($cart_item['tf_hotel_data']['hotel_extra_price'])),
+		);
+	}
+
 	if ( isset( $cart_item['tf_hotel_data']['due'] ) ) {
 		$item_data[] = array(
 			'key'   => esc_html__( 'Due', 'tourfic' ),
@@ -827,6 +869,8 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	$due                  = ! empty( $values['tf_hotel_data']['due'] ) ? $values['tf_hotel_data']['due'] : '';
 	$airport_service_type = ! empty( $values['tf_hotel_data']['air_serivicetype'] ) ? $values['tf_hotel_data']['air_serivicetype'] : null;
 	$airport_fees         = ! empty( $values['tf_hotel_data']['air_service_info'] ) ? $values['tf_hotel_data']['air_service_info'] : null;
+	$extra_service 		  = ! empty( $values['tf_hotel_data']['hotel_extra'] ) ? $values['tf_hotel_data']['hotel_extra'] : null;
+	$extra_service_free   = ! empty( $values['tf_hotel_data']['hotel_extra_price'] ) ? $values['tf_hotel_data']['hotel_extra_price'] : null;
 	$guest_details = !empty($values['tf_hotel_data']['visitor_details']) ? $values['tf_hotel_data']['visitor_details'] : null;
 
 	/**
@@ -892,6 +936,13 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	}
 	if ( ! empty( $airport_fees ) ) {
 		$item->update_meta_data( 'Airport Service Fee', $values['tf_hotel_data']['air_service_info'] );
+	}
+
+	if ( ! empty( $extra_service ) ) {
+		$item->update_meta_data( 'Hotel Extra Service', $extra_service );
+	}
+	if ( ! empty( $extra_service_free ) ) {
+		$item->update_meta_data( 'Hotel Extra Service Fee', wc_price($extra_service_free) );
 	}
 
 	if ( ! empty( $due ) ) {
@@ -1036,6 +1087,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$children_ages        = $item->get_meta( 'Children Ages', true );
 			$airport_service_type = $item->get_meta( 'Airport Service', true );
 			$airport_service_fee  = $item->get_meta( 'Airport Service Fee', true );
+			$total_extras_titles  = $item->get_meta( 'Hotel Extra Service', true );
+			$total_extras_price  = $item->get_meta( 'Hotel Extra Service Fee', true );
 			$guest_details = $item->get_meta( '_visitor_details', true );
 
 			$iteminfo = [
@@ -1050,6 +1103,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'children_ages'        => $children_ages,
 				'airport_service_type' => $airport_service_type,
 				'airport_service_fee'  => $airport_service_fee,
+				'hotel_extra' => $total_extras_titles,
+				'hotel_extra_fee'  => $total_extras_price,
 				'total_price'          => $price,
 				'due_price'            => $due,
 				'tax_info'             => wp_json_encode( $fee_sums ),
@@ -1067,6 +1122,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'children_ages'        => $children_ages,
 				'airport_service_type' => $airport_service_type,
 				'airport_service_fee'  => $airport_service_fee,
+				'hotel_extra' => $total_extras_titles,
+				'hotel_extra_fee'  => $total_extras_price,
 				'total_price'          => $price,
 				'due_price'            => $due,
 				'customer_id'          => $order->get_customer_id(),
