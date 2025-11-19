@@ -38,8 +38,7 @@ class Tour_Price {
         $pricing_rule = !empty($meta['pricing']) ? $meta['pricing'] : 'person';
 
         $tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
-		$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
-		$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+		
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
 		if(!empty($tour_availability_data) && Helper::is_all_unavailable($tour_availability_data)){
@@ -64,19 +63,7 @@ class Tour_Price {
 					}
 				}
 
-				if($pricing_rule == 'group' && $data['pricing_type'] == 'group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
-					if(!empty($data['options_count'])){
-						for($i = 0; $i < $data['options_count']; $i++){
-							if (!empty($data['tf_option_group_price_'.$i])) {
-                                if (is_null($price) || $data['tf_option_group_price_'.$i] < $price) {
-                                    $price = $data['tf_option_group_price_'.$i];
-                                }
-							}
-						}
-					}
-				}
-
-				if($pricing_rule == 'group' && $data['pricing_type'] == 'group' && (empty($allow_package_pricing) || empty($group_package_pricing)) ){
+				if($pricing_rule == 'group' && $data['pricing_type'] == 'group' ){
 					// Group Price
                     if (is_null($price) || $data['price'] < $price) {
                         $price = $data['price'];

@@ -3379,30 +3379,10 @@ jQuery(function ($) {
             return optionsArr;
         }
 
-        /*
-        * Tour Group Package count
-        */
-        function tourGroupPackageArr(){
-            var optionsArr = [];
-            $('.tf-repeater-wrap-group_package_pricing .tf-single-repeater-group_package_pricing').each(function(i){
-                // Get the dynamic index from the tf_repeater_count field
-                let index = $(this).find('[name="tf_repeater_count"]').val();
-                // Extract the option title and type using the dynamic index
-                let optionTitle = $(this).find(`[name="tf_tours_opt[group_package_pricing][${index}][pack_title]"]`).val();
-                if (index !== undefined) {
-                    optionsArr[index] = {
-                        index: index,
-                        title: optionTitle,
-                    };
-                }
-            })
-            return optionsArr;
-        }
 
         $(window).on('load', function () {
             roomOptionsArr();
             tourPackageArr();
-            tourGroupPackageArr();
         });
 
         /*
@@ -4019,7 +3999,6 @@ jQuery(function ($) {
                             tour_id: $('[name="tour_id"]').val(),
                             tour_availability: $('.tour_availability').val(),
                             option_arr: tourPackageArr(),
-                            group_option_arr: tourGroupPackageArr(),
                         },
                         beforeSend: function () {
                             $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
@@ -4411,7 +4390,6 @@ jQuery(function ($) {
             data.push({name: 'pricing_type', value: pricingType});
             data.push({name: 'tour_availability', value: tourAvailability.val()});
             data.push({name: 'options_count', value: tourPackageArr().length});
-            data.push({name: 'group_options_count', value: tourGroupPackageArr().length});
 
             $.ajax({
                 url: tf_options.ajax_url,
