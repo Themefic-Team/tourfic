@@ -48,14 +48,6 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		$pickup   = isset( $_GET['pickup'] ) ? sanitize_text_field( $_GET['pickup'] ) : '';
 		$dropoff = isset( $_GET['dropoff'] ) ? sanitize_text_field( $_GET['dropoff'] ) : '';
 
-		if(empty($pickup)){
-			$pickup   = isset( $_GET['pickup-name'] ) ? sanitize_text_field( $_GET['pickup-name'] ) : '';
-		}
-
-		if(empty($dropoff)){
-			$dropoff   = isset( $_GET['dropoff-name'] ) ? sanitize_text_field( $_GET['dropoff-name'] ) : '';
-		}
-
 		$tf_pickup_date  = isset( $_GET['pickup-date'] ) ? sanitize_text_field( $_GET['pickup-date'] ) : '';
 		$tf_dropoff_date  = isset( $_GET['dropoff-date'] ) ? sanitize_text_field( $_GET['dropoff-date'] ) : '';
 		$tf_pickup_time  = isset( $_GET['pickup-time'] ) ? sanitize_text_field( $_GET['pickup-time'] ) : '';
