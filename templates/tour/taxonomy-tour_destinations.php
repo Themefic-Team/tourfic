@@ -31,6 +31,7 @@ $post_type = 'tf_tours';
 $taxonomy = $term->taxonomy;
 $taxonomy_name = $term->name;
 $taxonomy_slug = $term->slug;
+$taxonomy_id = $term->term_id;
 $max = '2';
 
 $tf_location_meta      = get_term_meta( $term->term_id, 'tf_tour_destination', true );
@@ -48,7 +49,7 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
 		<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
 		<!-- SideBar-->
 		<div class="tf-sidebar tf-archive-right">
-			<?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
+			<?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug, $taxonomy_id); ?>
 		</div>
 		</div>
 	</div>
@@ -79,7 +80,7 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
                     <span class="tf-modify-search-btn">
                         <?php esc_html_e("Modify search", "tourfic"); ?>
                     </span>
-                    <?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
+                    <?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug, $taxonomy_id); ?>
 					<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
@@ -132,7 +133,7 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
 
             <div class="tf-archive-search-form tf-booking-form-wrapper">
                 <div class="tf-container">                    
-                    <?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
+                    <?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug, $taxonomy_id); ?>
                 </div>
             </div>
 
@@ -153,7 +154,7 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
 			</div>
 
 			<div class="tf-search-right">
-				<?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
+				<?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug, $taxonomy_id); ?>
                 <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
                     <div id="tf__booking_sidebar">
                         <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>

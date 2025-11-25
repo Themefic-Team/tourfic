@@ -14,67 +14,87 @@
 
         // Apartment Location Autocomplete
         function tourfic_autocomplete(inp, arr) {
-            var currentFocus;
-        
-            // Show autocomplete suggestions on focus
+            
             inp.addEventListener("focus", function () {
                 closeAllLists();
                 let a = document.createElement("DIV");
-                a.setAttribute("id", this.id + "-autocomplete-list");
-                a.classList.add("autocomplete-items");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
                 this.parentNode.appendChild(a);
         
-                for (const [key, value] of Object.entries(arr)) {
+                for (const [slug, data] of Object.entries(arr)) {
+                    let name = data.name;
+                    let id = data.id;
+        
                     let b = document.createElement("DIV");
-                    b.innerHTML = value;
-                    b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'>`;
+                    b.innerHTML = name;
+                    b.innerHTML += `<input type='hidden' value="${name}" data-slug="${slug}" data-id="${id}">`;
+        
                     b.addEventListener("click", function () {
                         let source = this.getElementsByTagName("input")[0];
+        
                         inp.value = source.value;
+        
+                        // store slug (1st hidden field)
                         inp.closest('input').nextElementSibling.value = source.dataset.slug;
-                        setTimeout(() => {
-                            closeAllLists();
-                        },100);
+        
+                        // store ID (2nd hidden field)
+                        inp.closest('input').nextElementSibling.nextElementSibling.value = source.dataset.id;
+        
+                        setTimeout(() => closeAllLists(), 100);
                     });
+        
                     a.appendChild(b);
                 }
             });
         
-            // Filter suggestions on keyup
+            var currentFocus;
+        
             inp.addEventListener("keyup", function (e) {
-                var val = this.value.toLowerCase();
+                var a, b, i, val = this.value;
+        
                 closeAllLists();
                 currentFocus = -1;
-                
-                if (!val) return false;
         
-                let a = document.createElement("DIV");
-                a.setAttribute("id", this.id + "-autocomplete-list");
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
                 a.setAttribute("class", "autocomplete-items");
                 this.parentNode.appendChild(a);
         
-                var found = false;
-                for (const [key, value] of Object.entries(arr)) {
-                    if (value.toLowerCase().startsWith(val)) {
-                        found = true;
-                        let b = document.createElement("DIV");
-                        b.innerHTML = `<strong>${value.substr(0, val.length)}</strong>${value.substr(val.length)}`;
-                        b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'>`;
-                        b.addEventListener("click", function (e) {
+                var $notfound = [];
+        
+                for (const [slug, data] of Object.entries(arr)) {
+                    let name = data.name;
+                    let id = data.id;
+        
+                    if (name.substr(0, val.length).toUpperCase() === val.toUpperCase()) {
+                        $notfound.push('found');
+        
+                        b = document.createElement("DIV");
+                        b.innerHTML = "<strong>" + name.substr(0, val.length) + "</strong>";
+                        b.innerHTML += name.substr(val.length);
+                        b.innerHTML += `<input type="hidden" value="${name}" data-slug="${slug}" data-id="${id}">`;
+        
+                        b.addEventListener("click", function () {
                             let source = this.getElementsByTagName("input")[0];
+        
                             inp.value = source.value;
                             inp.closest('input').nextElementSibling.value = source.dataset.slug;
-                
+                            inp.closest('input').nextElementSibling.nextElementSibling.value = source.dataset.id;
+        
                             closeAllLists();
                         });
+        
                         a.appendChild(b);
+        
+                    } else {
+                        $notfound.push('notfound');
                     }
                 }
         
-                // If no match found, show "No results found"
-                if (!found) {
-                    let b = document.createElement("DIV");
-                    b.innerHTML = `<span>${tf_params.no_found}</span>`;
+                if ($notfound.indexOf('found') === -1) {
+                    b = document.createElement("DIV");
+                    b.innerHTML += tf_params.no_found;
                     b.innerHTML += `<input type='hidden' value="">`;
                     b.addEventListener("click", function () {
                         inp.value = "";
@@ -84,24 +104,20 @@
                 }
             });
         
-            // Handle keyboard navigation
             inp.addEventListener("keydown", function (e) {
-                var x = document.getElementById(this.id + "-autocomplete-list");
+                var x = document.getElementById(this.id + "autocomplete-list");
                 if (x) x = x.getElementsByTagName("div");
         
                 if (e.keyCode == 40) {
-                    // Arrow DOWN
                     currentFocus++;
                     addActive(x);
                 } else if (e.keyCode == 38) {
-                    // Arrow UP
                     currentFocus--;
                     addActive(x);
                 } else if (e.keyCode == 13) {
-                    // ENTER key
                     e.preventDefault();
-                    if (currentFocus > -1 && x) {
-                        x[currentFocus].click();
+                    if (currentFocus > -1) {
+                        if (x) x[currentFocus].click();
                     }
                 }
             });
@@ -109,8 +125,10 @@
             function addActive(x) {
                 if (!x) return false;
                 removeActive(x);
+        
                 if (currentFocus >= x.length) currentFocus = 0;
-                if (currentFocus < 0) currentFocus = x.length - 1;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+        
                 x[currentFocus].classList.add("autocomplete-active");
             }
         
@@ -123,7 +141,7 @@
             function closeAllLists(elmnt) {
                 var x = document.getElementsByClassName("autocomplete-items");
                 for (var i = 0; i < x.length; i++) {
-                    if (elmnt !== x[i] && elmnt !== inp) {
+                    if (elmnt != x[i] && elmnt != inp) {
                         x[i].parentNode.removeChild(x[i]);
                     }
                 }

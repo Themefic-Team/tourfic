@@ -351,6 +351,7 @@
             let pickup_slug = $('#tf_pickup_location_id').val();
             let dropoff_slug = $('#tf_dropoff_location_id').val();
             let pickup_id = $('#tf_pickup_id').val();
+            let place_id = $('#tf-place-id').val();
             let dropoff_id = $('#tf_dropoff_id').val();
             let elSettings = $('#tf-elementor-settings').text();
             
@@ -360,6 +361,7 @@
             formData.append('type', posttype);
             formData.append('page', page);
             formData.append('dest', dest);
+            formData.append('place_id', place_id);
             formData.append('adults', adults );
             formData.append('room', room);
             formData.append('children', children ? children : 0);

@@ -330,6 +330,7 @@ class Apartment {
 			$allowed_fields = [
 				'place-name',
 				'place',
+				'place-id',
 				'adults',
 				'children',
 				'infant',
@@ -386,6 +387,7 @@ class Apartment {
 									</svg>
 									<input type="text" required="" name="place-name" id="tf-apartment-location" class="" placeholder="<?php esc_html_e( 'Enter Location', 'tourfic' ); ?>" value="">
                                     <input type="hidden" name="place" class="tf-place-input">
+									<input type="hidden" name="place-id" class="tf-id-input">
 								</div>
 							</label>
 						</div>
@@ -631,6 +633,7 @@ class Apartment {
 									<h5><?php esc_html_e("Location", "tourfic"); ?></h5>
 									<input type="text" required="" name="place-name" id="tf-apartment-location" class="" placeholder="<?php esc_html_e( 'Enter Location', 'tourfic' ); ?>" value="">
                                     <input type="hidden" name="place" class="tf-place-input">
+									<input type="hidden" name="place-id" class="tf-id-input">
 								</div>
 							</div>
 						</div>
@@ -771,6 +774,7 @@ class Apartment {
                         <div class="tf-search__form__field">
                             <input type="text" required="" name="place-name" id="tf-apartment-location" class="tf-search__form__input" placeholder="<?php esc_html_e('Where you wanna stay?', 'tourfic'); ?>" value="">
                             <input type="hidden" name="place" class="tf-place-input">
+							<input type="hidden" name="place-id" class="tf-id-input">
                             <span class="tf-search__form__field__icon icon--location">
 								<svg width="12" height="17" viewBox="0 0 12 17" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M5.25 15.625C3.625 13.5938 0 8.75 0 6C0 2.6875 2.65625 0 6 0C9.3125 0 12 2.6875 12 6C12 8.75 8.34375 13.5938 6.71875 15.625C6.34375 16.0938 5.625 16.0938 5.25 15.625ZM6 8C7.09375 8 8 7.125 8 6C8 4.90625 7.09375 4 6 4C4.875 4 4 4.90625 4 6C4 7.125 4.875 8 6 8Z" fill="white" />
@@ -1031,6 +1035,7 @@ class Apartment {
                                     </div>
                                     <input type="text" required="" name="place-name" id="tf-apartment-location" class="" placeholder="<?php esc_html_e( 'Enter Location', 'tourfic' ); ?>" value="">
                                     <input type="hidden" name="place" class="tf-place-input">
+									<input type="hidden" name="place-id" class="tf-id-input">
                                 </div>
                             </label>
                         </div>

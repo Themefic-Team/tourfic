@@ -1355,6 +1355,8 @@ class Search_Form extends Widget_Base {
                     <?php } ?>
                     <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? esc_attr( $taxonomy_slug ) : ''; ?>"/>
 
+                    <input type="hidden" id="tf-place-id" name="place-id" value="<?php echo ! empty( $taxonomy_slug ) ? esc_attr( $taxonomy_slug ) : ''; ?>"/>
+
                 </div>
                 <div class="tf-field-group tf-mt-16 tf_acrselection">
                     <div class="tf-field tf-flex">

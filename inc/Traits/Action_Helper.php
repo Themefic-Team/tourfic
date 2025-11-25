@@ -754,6 +754,8 @@ trait Action_Helper {
 		$filter_relation = self::tfopt( 'filter_relation', 'OR' );
 
 		$search                = !empty( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
+		$place_id = isset( $_POST['place_id'] ) ? sanitize_key( $_POST['place_id'] ) : '';
+
 		$filters               = !empty( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
 		$features              = !empty( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
 		$tf_hotel_types        = !empty( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
@@ -891,13 +893,21 @@ trait Action_Helper {
 		}
 
 		if ( $search && 'undefined'!=$search ) {
-
 			$args['tax_query'] = array(
 				'relation' => 'AND',
 				array(
 					'taxonomy' => $place_taxonomy,
 					'field'    => 'slug',
 					'terms'    => sanitize_title( $search, '' ),
+				),
+			);
+		}elseif($place_id && 'undefined'!=$place_id){
+			$args['tax_query'] = array(
+				'relation' => 'AND',
+				array(
+					'taxonomy' => $place_taxonomy,
+					'field'    => 'id',
+					'terms'    => $place_id,
 				),
 			);
 		}

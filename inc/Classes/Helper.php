@@ -289,14 +289,10 @@ class Helper {
 		$term_dropdown = array();
 		if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 			foreach ( $terms as $term ) {
-                if('carrental_location'==$taxonomy){
-                    $term_dropdown[ $term->slug ] = array(
-                        'id'   => $term->term_id,
-                        'name' => $term->name,
-                    );
-                }else{
-                    $term_dropdown[ $term->slug ] = $term->name;
-                }
+                $term_dropdown[ $term->slug ] = array(
+                    'id'   => $term->term_id,
+                    'name' => $term->name,
+                );
 			}
 		}
 
@@ -805,6 +801,7 @@ class Helper {
 			$taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : ( $post_type == 'tf_tour' ? 'tour_destination' : 'apartment_location' );
 			// $place_name = ! empty( $place_value ) ? get_term_by( 'slug', $place_value, $taxonomy )->name : '';
 			$place_name = ! empty( $place_value ) ? esc_attr( $place_value ) : '';
+            $place_id = ! empty( $_GET['place-id'] ) ? intval( wp_unslash( $_GET['place-id'] ) ) : '';
 
 			$room = ! empty( $_GET['room'] ) ? sanitize_text_field( wp_unslash( $_GET['room'] ) ) : 0;
 		}
@@ -849,9 +846,11 @@ class Helper {
                             <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" required class="tf-field"
                                    placeholder="<?php echo esc_attr( $place_placeholder ) ?? esc_html__( 'Location/Destination', 'tourfic' ); ?>"
                                    value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
+
 						<?php } ?>
 
                         <input type="hidden" name="place" id="tf-place" value="<?php echo esc_attr( $place_value ) ?? ''; ?> "/>
+                        <input type="hidden" name="place" id="tf-place-id" value="<?php echo esc_attr( $place_id ) ?? ''; ?> "/>
                     </div>
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
@@ -998,6 +997,8 @@ class Helper {
 						<?php } ?>
 
                         <input type="hidden" name="place" id="tf-place" value="<?php echo esc_attr( $place_value ) ?? ''; ?>"/>
+
+                        <input type="hidden" name="place-id" id="tf-place-id" value="<?php echo esc_attr( $place_id ) ?? ''; ?> "/>
                     </label>
                 </div>
 				<?php if ( $post_type == 'tf_hotel' || $post_type == "tf_apartment" ) { ?>
@@ -1359,6 +1360,8 @@ class Helper {
 
                         <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="tf-search-input" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
                         <input type="hidden" name="place" id="tf-place" value="<?php echo esc_attr( $place_value ) ?? ''; ?>"/>
+
+                        <input type="hidden" name="place-id" id="tf-place-id" value="<?php echo esc_attr( $place_id ) ?? ''; ?> "/>
                     </label>
                 </div>
                 <div class="tf-search-field-divider"></div>
@@ -1641,6 +1644,8 @@ class Helper {
                                        value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
 							<?php } ?>
                             <input type="hidden" name="place" id="tf-place" value="<?php echo isset( $place_value ) ? esc_attr( $place_value ) : ''; ?>"/>
+
+                            <input type="hidden" name="place-id" id="tf-place-id" value="<?php echo esc_attr( $place_id ) ?? ''; ?> "/>
                         </div>
                     </label>
                 </div>
@@ -1837,7 +1842,7 @@ class Helper {
 	/**
 	 * Archive Sidebar Search Form
 	 */
-	static function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_name = '', $taxonomy_slug = '' ) {
+	static function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_name = '', $taxonomy_slug = '', $taxonomy_id = '' ) {
 		$place = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
 		if ( $post_type == 'tf_apartment' ) {
 			$place = 'tf-apartment-location';
@@ -1908,6 +1913,8 @@ class Helper {
                                    value="<?php echo ! empty( $taxonomy_name ) ? esc_attr( $taxonomy_name ) : ''; ?>">
 						<?php } ?>
                         <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? esc_attr( $taxonomy_slug ) : ''; ?>"/>
+
+                        <input type="hidden" id="tf-place-id" name="place-id" value="<?php echo ! empty( $taxonomy_id ) ? esc_attr( $taxonomy_id ) : ''; ?>"/>
 
                     </div>
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
@@ -2046,6 +2053,8 @@ class Helper {
                                         value="<?php echo ! empty( $taxonomy_name ) ? esc_attr( $taxonomy_name ) : ''; ?>">
                                 <?php } ?>
                                 <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? esc_attr( $taxonomy_slug ) : ''; ?>"/>
+
+                                <input type="hidden" id="tf-place-id" name="place-id" value="<?php echo ! empty( $taxonomy_id ) ? esc_attr( $taxonomy_id ) : ''; ?>"/>
                             </label>
                         </div>
 
@@ -2686,6 +2695,8 @@ class Helper {
 
                             <input type="text" required="" id="<?php echo esc_attr($place); ?>" class="tf-search-input" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr($taxonomy_name) : ''; ?>">
                             <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? esc_attr($taxonomy_slug) : ''; ?>"/>
+
+                            <input type="hidden" id="tf-place-id" name="place-id" value="<?php echo ! empty( $taxonomy_id ) ? esc_attr( $taxonomy_id ) : ''; ?>"/>
                         </label>
                     </div>
                     <div class="tf-search-field-divider"></div>
@@ -2965,6 +2976,8 @@ class Helper {
 							<?php } ?>
 
                             <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? esc_attr( $taxonomy_slug ) : ''; ?>"/>
+
+                            <input type="hidden" id="tf-place-id" name="place-id" value="<?php echo ! empty( $taxonomy_id ) ? esc_attr( $taxonomy_id ) : ''; ?>"/>
                         </div>
                     </label>
                 </div>
