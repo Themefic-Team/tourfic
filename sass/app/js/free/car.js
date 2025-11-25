@@ -47,141 +47,131 @@
         // Car Location Autocomplete
 
         function tourfic_car_autocomplete(inp, arr) {
-            /*the autocomplete function takes two arguments,
-            the text field element and an array of possible autocompleted values:*/
 
-            // Executes when some one click in the search form location
             inp.addEventListener("focus", function () {
-                    closeAllLists();
-                    let a = document.createElement("DIV");
-                    a.setAttribute("id", this.id + "-autocomplete-list");
-                    a.setAttribute("class", "autocomplete-items");
-                    this.parentNode.appendChild(a);
-                    for (const [key, value] of Object.entries(arr)) {
-                        let b = document.createElement("DIV");
-                        b.innerHTML = value;
-                        b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'>`;
-                        b.addEventListener("click", function (e) {
-                            let source = this.getElementsByTagName("input")[0];
-                            inp.value = source.value;
-                            inp.closest('input').nextElementSibling.value = source.dataset.slug;
-                            setTimeout(() => {
-                                closeAllLists();
-                            },100);
-                        });
-                        a.appendChild(b);
-                    }
-                // }
-            })
-
+                closeAllLists();
+                let a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "-autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                this.parentNode.appendChild(a);
+        
+                for (const [slug, data] of Object.entries(arr)) {
+                    let name = data.name;
+                    let id = data.id;
+        
+                    let b = document.createElement("DIV");
+                    b.innerHTML = name;
+                    b.innerHTML += `<input type='hidden' value="${name}" data-slug="${slug}" data-id="${id}">`;
+        
+                    b.addEventListener("click", function () {
+                        let source = this.getElementsByTagName("input")[0];
+        
+                        inp.value = source.value;
+        
+                        // store slug (1st hidden field)
+                        inp.closest('input').nextElementSibling.value = source.dataset.slug;
+        
+                        // store ID (2nd hidden field)
+                        inp.closest('input').nextElementSibling.nextElementSibling.value = source.dataset.id;
+        
+                        setTimeout(() => closeAllLists(), 100);
+                    });
+        
+                    a.appendChild(b);
+                }
+            });
+        
             var currentFocus;
-            /*execute a function when someone writes in the text field:*/
+        
             inp.addEventListener("keyup", function (e) {
                 var a, b, i, val = this.value;
-                /*close any already open lists of autocompleted values*/
+        
                 closeAllLists();
                 currentFocus = -1;
-                /*create a DIV element that will contain the items (values):*/
+        
                 a = document.createElement("DIV");
                 a.setAttribute("id", this.id + "autocomplete-list");
                 a.setAttribute("class", "autocomplete-items");
-                /*append the DIV element as a child of the autocomplete container:*/
                 this.parentNode.appendChild(a);
+        
                 var $notfound = [];
-                /*for each item in the array...*/
-                for (const [key, value] of Object.entries(arr)) {
-                    if (value.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+        
+                for (const [slug, data] of Object.entries(arr)) {
+                    let name = data.name;
+                    let id = data.id;
+        
+                    if (name.substr(0, val.length).toUpperCase() === val.toUpperCase()) {
                         $notfound.push('found');
-                        /*create a DIV element for each matching element:*/
+        
                         b = document.createElement("DIV");
-                        /*make the matching letters bold:*/
-                        b.innerHTML = "<strong>" + value.substr(0, val.length) + "</strong>";
-                        b.innerHTML += value.substr(val.length);
-                        /*insert a input field that will hold the current array item's value:*/
-                        b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'> `;
-                        /*execute a function when someone clicks on the item value (DIV element):*/
-                        b.addEventListener("click", function (e) {
+                        b.innerHTML = "<strong>" + name.substr(0, val.length) + "</strong>";
+                        b.innerHTML += name.substr(val.length);
+                        b.innerHTML += `<input type="hidden" value="${name}" data-slug="${slug}" data-id="${id}">`;
+        
+                        b.addEventListener("click", function () {
                             let source = this.getElementsByTagName("input")[0];
-                            /*insert the value for the autocomplete text field:*/
+        
                             inp.value = source.value;
-                            inp.closest('input').nextElementSibling.value = source.dataset.slug //source.dataset.slug
-                            /*close the list of autocompleted values,
-                            (or any other open lists of autocompleted values:*/
+                            inp.closest('input').nextElementSibling.value = source.dataset.slug;
+                            inp.closest('input').nextElementSibling.nextElementSibling.value = source.dataset.id;
+        
                             closeAllLists();
                         });
+        
                         a.appendChild(b);
-
+        
                     } else {
                         $notfound.push('notfound');
                     }
                 }
-
-                if ($notfound.indexOf('found') == -1) {
-                    /*create a DIV element for each matching element:*/
+        
+                if ($notfound.indexOf('found') === -1) {
                     b = document.createElement("DIV");
-                    /*make the matching letters bold:*/
-
                     b.innerHTML += tf_params.no_found;
-                    /*insert a input field that will hold the current array item's value:*/
-                    b.innerHTML += "<input type='hidden' value=''>";
-                    /*execute a function when someone clicks on the item value (DIV element):*/
-                    b.addEventListener("click", function (e) {
-                        /*insert the value for the autocomplete text field:*/
-                        inp.value = this.getElementsByTagName("input")[0].value;
-                        /*close the list of autocompleted values,
-                        (or any other open lists of autocompleted values:*/
+                    b.innerHTML += `<input type='hidden' value="">`;
+                    b.addEventListener("click", function () {
+                        inp.value = "";
                         closeAllLists();
                     });
                     a.appendChild(b);
                 }
             });
-            /*execute a function presses a key on the keyboard:*/
+        
             inp.addEventListener("keydown", function (e) {
                 var x = document.getElementById(this.id + "autocomplete-list");
                 if (x) x = x.getElementsByTagName("div");
+        
                 if (e.keyCode == 40) {
-                    /*If the arrow DOWN key is pressed,
-                    increase the currentFocus variable:*/
                     currentFocus++;
-                    /*and and make the current item more visible:*/
                     addActive(x);
-                } else if (e.keyCode == 38) { //up
-                    /*If the arrow UP key is pressed,
-                    decrease the currentFocus variable:*/
+                } else if (e.keyCode == 38) {
                     currentFocus--;
-                    /*and and make the current item more visible:*/
                     addActive(x);
                 } else if (e.keyCode == 13) {
-                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
                     e.preventDefault();
                     if (currentFocus > -1) {
-                        /*and simulate a click on the "active" item:*/
-                        if (x) x[currentFocus].trigger("click");;
+                        if (x) x[currentFocus].click();
                     }
                 }
             });
-
+        
             function addActive(x) {
-                /*a function to classify an item as "active":*/
                 if (!x) return false;
-                /*start by removing the "active" class on all items:*/
                 removeActive(x);
+        
                 if (currentFocus >= x.length) currentFocus = 0;
                 if (currentFocus < 0) currentFocus = (x.length - 1);
-                /*add class "autocomplete-active":*/
+        
                 x[currentFocus].classList.add("autocomplete-active");
             }
-
+        
             function removeActive(x) {
-                /*a function to remove the "active" class from all autocomplete items:*/
                 for (var i = 0; i < x.length; i++) {
                     x[i].classList.remove("autocomplete-active");
                 }
             }
-
+        
             function closeAllLists(elmnt) {
-                /*close all autocomplete lists in the document,
-                except the one passed as an argument:*/
                 var x = document.getElementsByClassName("autocomplete-items");
                 for (var i = 0; i < x.length; i++) {
                     if (elmnt != x[i] && elmnt != inp) {
@@ -189,14 +179,13 @@
                     }
                 }
             }
-
-            /*execute a function when someone clicks in the document:*/
+        
             $(document).on('click', function (event) {
                 if (!$(event.target).closest("#tf_dropoff_location, #tf_pickup_location").length) {
                     $("#tf_pickup_location-autocomplete-list,#tf_dropoff_location-autocomplete-list").hide();
                 }
             });
-        }
+        }        
 
         // Car location autocomplete
         var car_pickup_input = document.getElementById("tf_pickup_location");
@@ -229,6 +218,8 @@
             $('.tf-booking-content-wraper').html("");
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
+            var pickup_id = $('#tf_pickup_id').val();
+            let dropoff_id = $('#tf_dropoff_id').val();
             let pickup_date = $('.tf_pickup_date').val();
             let dropoff_date = $('.tf_dropoff_date').val();
             let pickup_time = $('.tf_pickup_time').val();
@@ -256,7 +247,9 @@
                 pickup_date: pickup_date,
                 pickup_time: pickup_time,
                 dropoff_date: dropoff_date,
-                dropoff_time: dropoff_time
+                dropoff_time: dropoff_time,
+                pickup_id: pickup_id,
+                dropoff_id: dropoff_id
             };
 
             $.ajax({
@@ -275,46 +268,6 @@
                         $(".tf-date-select-box").hide();
                         $(".tf-mobile-booking-btn").hide();
                     }
-                }
-            });
-
-        });
-
-        /*
-        * Car Archive Booking Popup
-        * @author Jahid
-        */
-        $('body').on('click', '.tf-car-quick-booking', function (e) {
-            e.preventDefault();
-            $this = $(this);
-            $('.tf-booking-content-wraper').html("");
-            let post_id = $this.closest('.tf-booking-btn').find('#post_id').val();
-            let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
-            let dropoff_date = $this.closest('.tf-booking-btn').find('#dropoff_date').val();
-            let pickup_time = $this.closest('.tf-booking-btn').find('#pickup_time').val();
-            let dropoff_time = $this.closest('.tf-booking-btn').find('#dropoff_time').val();
-
-            var data = {
-                action: 'tf_car_booking_pupup',
-                _nonce: tf_params.nonce,
-                post_id: post_id,
-                pickup_date: pickup_date,
-                pickup_time: pickup_time,
-                dropoff_date: dropoff_date,
-                dropoff_time: dropoff_time
-            };
-
-            $.ajax({
-                url: tf_params.ajax_url,
-                type: 'POST',
-                data: data,
-                beforeSend: function () {
-                    $this.addClass('tf-btn-loading');
-                },
-                success: function (data) {
-                    $this.closest('.tf-booking-btn').find('.tf-booking-content-wraper').html(data);
-                    $this.closest('.tf-booking-btn').find('.tf-car-booking-popup').css('display', 'flex');
-                    $this.removeClass('tf-btn-loading');
                 }
             });
 
@@ -488,6 +441,8 @@
 
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
+            var pickup_id = $('#tf_pickup_id').val();
+            let dropoff_id = $('#tf_dropoff_id').val();
             let pickup_date = $('.tf_pickup_date').val();
             let dropoff_date = $('.tf_dropoff_date').val();
             let pickup_time = $('.tf_pickup_time').val();
@@ -518,6 +473,8 @@
                 post_id: post_id,
                 pickup: pickup,
                 dropoff: dropoff,
+                pickup_id: pickup_id,
+                dropoff_id: dropoff_id,
                 pickup_date: pickup_date,
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,
@@ -654,70 +611,6 @@
             });
         });
 
-        /*
-        * Car Quick Booking
-        * @author Jahid
-        */
-
-        $(".quick-booking").on('click', function (e) {
-            let $this = $(this);
-
-            var pickup = $('#tf_pickup_location').val();
-            let dropoff = $('#tf_dropoff_location').val();
-            let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
-            let dropoff_date = $this.closest('.tf-booking-btn').find('#dropoff_date').val();
-            let pickup_time = $this.closest('.tf-booking-btn').find('#pickup_time').val();
-            let dropoff_time = $this.closest('.tf-booking-btn').find('#dropoff_time').val();
-            let post_id = $this.closest('.tf-booking-btn').find('#post_id').val();
-
-            var data = {
-                action: 'tf_car_booking',
-                _nonce: tf_params.nonce,
-                post_id: post_id,
-                pickup: pickup,
-                dropoff: dropoff,
-                pickup_date: pickup_date,
-                dropoff_date: dropoff_date,
-                pickup_time: pickup_time,
-                dropoff_time: dropoff_time
-            };
-
-            $.ajax({
-                url: tf_params.ajax_url,
-                type: 'POST',
-                data: data,
-                beforeSend: function () {
-                    $this.addClass('tf-btn-loading');
-                },
-                success: function (data) {
-                    $this.unblock();
-
-                    var response = JSON.parse(data);
-                    if (response.without_payment == 'false') {
-                        if (response.status == 'error') {
-
-                            if (response.errors) {
-                                response.errors.forEach(function (text) {
-                                    notyf.error(text);
-                                });
-                            }
-
-                            return false;
-                        } else {
-
-                            if (response.redirect_to) {
-                                window.location.replace(response.redirect_to);
-                            } else {
-                                jQuery(document.body).trigger('added_to_cart');
-                            }
-
-                        }
-                    }
-                }
-            });
-
-        });
-
         $(".tf-booking-btn .booking-process").on("click touchstart", function (e) {
             if(e.type === 'touchstart'){
                 $(this).off('click');
@@ -755,6 +648,8 @@
     
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
+            var pickup_id = $('#tf_pickup_id').val();
+            let dropoff_id = $('#tf_dropoff_id').val();
             let partial_payment = $('#tf_partial_payment').val();
             let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
             let dropoff_date = $this.closest('.tf-booking-btn').find('#dropoff_date').val();
@@ -780,6 +675,8 @@
                 post_id: post_id,
                 pickup: pickup,
                 dropoff: dropoff,
+                pickup_id: pickup_id,
+                dropoff_id: dropoff_id,
                 pickup_date: pickup_date,
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,

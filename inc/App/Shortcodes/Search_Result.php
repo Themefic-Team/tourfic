@@ -48,6 +48,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		$pickup   = isset( $_GET['pickup'] ) ? sanitize_text_field( $_GET['pickup'] ) : '';
 		$dropoff = isset( $_GET['dropoff'] ) ? sanitize_text_field( $_GET['dropoff'] ) : '';
 
+		$pickup_id   = isset( $_GET['pickup-id'] ) ? sanitize_key( $_GET['pickup-id'] ) : '';
+		$dropoff_id = isset( $_GET['dropoff-id'] ) ? sanitize_key( $_GET['dropoff-id'] ) : '';
+
 		$tf_pickup_date  = isset( $_GET['pickup-date'] ) ? sanitize_text_field( $_GET['pickup-date'] ) : '';
 		$tf_dropoff_date  = isset( $_GET['dropoff-date'] ) ? sanitize_text_field( $_GET['dropoff-date'] ) : '';
 		$tf_pickup_time  = isset( $_GET['pickup-time'] ) ? sanitize_text_field( $_GET['pickup-time'] ) : '';
@@ -177,6 +180,15 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 					'taxonomy' => 'carrental_location',
 					'field'    => 'slug',
 					'terms'    => sanitize_title( $pickup, '' ),
+				),
+			);
+		}elseif(!empty($pickup_id)){
+			$args['tax_query'] = array(
+				'relation' => 'AND',
+				array(
+					'taxonomy' => 'carrental_location',
+					'field'    => 'id',
+					'terms'    => $pickup_id,
 				),
 			);
 		}
@@ -813,7 +825,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										if ( $post_type == 'tf_carrental' ) {
 											$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
 											if ( $car_meta["car_as_featured"] ) {
-												tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+												tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, '', $pickup_id, $dropoff_id);
 											}
 										}
 
@@ -825,7 +837,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										if ( $post_type == 'tf_carrental' ) {
 											$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
 											if ( ! $car_meta["car_as_featured"] ) {
-												tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+												tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, '', $pickup_id, $dropoff_id);
 											}
 										}
 

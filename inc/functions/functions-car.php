@@ -115,7 +115,7 @@ wp_send_json( $response );
 wp_die();
 }
 
-function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = '', $dropoff_date = '', $pickup_time = '', $dropoff_time = '', $settings = []){
+function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = '', $dropoff_date = '', $pickup_time = '', $dropoff_time = '', $settings = [], $pickup_id = '', $dropoff_id = ''){
 	$post_id = get_the_ID();
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	// Single link
@@ -126,7 +126,9 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 		'pickup_date'      => $pickup_date,
 		'dropoff_date'     => $dropoff_date,
 		'pickup_time' 	   => $pickup_time,
-		'dropoff_time'     => $dropoff_time
+		'dropoff_time'     => $dropoff_time,
+		'pickup-id'     => $pickup_id,
+		'dropoff-id'     => $dropoff_id
 	), $url );
 
 	// Car Info 
@@ -611,8 +613,10 @@ if ( ! function_exists( 'tf_car_search_ajax_callback' ) ) {
 		$allowed_fields = [
 			'pickup-name',
 			'pickup',
+			'pickup-id',
 			'dropoff-name',
 			'dropoff',
+			'dropoff-id',
 			'pickup-date',
 			'pickup-time',
 			'dropoff-date',

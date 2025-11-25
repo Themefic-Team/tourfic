@@ -783,6 +783,10 @@ trait Action_Helper {
 		// Cars Data Start
 		$pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( $_POST['pickup'] ) : '';
 		$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( $_POST['dropoff'] ) : '';
+
+		$pickup_id   = isset( $_POST['pickup_id'] ) ? sanitize_key( $_POST['pickup_id'] ) : '';
+		$dropoff_id = isset( $_POST['dropoff_id'] ) ? sanitize_key( $_POST['dropoff_id'] ) : '';
+
 		$tf_pickup_date  = ! empty( $_POST['pickup_date'] ) ? tf_normalize_date( sanitize_text_field( $_POST['pickup_date'] ) ) : '';
 		$tf_dropoff_date = ! empty( $_POST['dropoff_date'] ) ? tf_normalize_date( sanitize_text_field( $_POST['dropoff_date'] ) ) : '';
 		$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
@@ -791,6 +795,7 @@ trait Action_Helper {
 		$tf_dropoff_same_location  = isset( $_POST['same_location'] ) ? sanitize_text_field( $_POST['same_location'] ) : '';
 		if(!empty($tf_dropoff_same_location)){
 			$dropoff = $pickup;
+			$dropoff_id = $pickup_id;
 		}
 		$tf_driver_age  = isset( $_POST['driver_age'] ) ? sanitize_text_field( $_POST['driver_age'] ) : '';
 
@@ -1100,6 +1105,15 @@ trait Action_Helper {
 					'taxonomy' => 'carrental_location',
 					'field'    => 'slug',
 					'terms'    => sanitize_title( $pickup, '' ),
+				),
+			);
+		}elseif(!empty($pickup_id) && "undefined"!=$pickup_id){
+			$args['tax_query'] = array(
+				'relation' => 'AND',
+				array(
+					'taxonomy' => 'carrental_location',
+					'field'    => 'id',
+					'terms'    => $pickup_id,
 				),
 			);
 		}
@@ -1615,7 +1629,7 @@ trait Action_Helper {
 						} elseif ( $posttype == 'tf_carrental' ) {
 							$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
 							if ( $car_meta["car_as_featured"] ) {
-								tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+								tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, '', $pickup_id, $dropoff_id);
 							}
 						}else{
 
@@ -1912,7 +1926,7 @@ trait Action_Helper {
 						} elseif ( $posttype == 'tf_carrental' ) {
 							$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
 							if ( ! $car_meta["car_as_featured"] ) {
-								tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+								tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, '', $pickup_id, $dropoff_id);
 							}
 						}else{
 

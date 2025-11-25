@@ -34,6 +34,23 @@ function tf_car_booking_callback() {
 	$post_id   = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
 	$pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( $_POST['pickup'] ) : '';
 	$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( $_POST['dropoff'] ) : '';
+
+	$pickup_id   = isset( $_POST['pickup_id'] ) ? intval( $_POST['pickup_id'] ) : '';
+	$dropoff_id = isset( $_POST['dropoff_id'] ) ? intval( $_POST['dropoff_id'] ) : '';
+
+	if(empty($pickup)){
+		$term = get_term( $pickup_id, 'carrental_location' );
+		if ( ! is_wp_error( $term ) && $term ) {
+			$pickup = $term->name;
+		}
+	}
+	if(empty($dropoff)){
+		$term = get_term( $dropoff_id, 'carrental_location' );
+		if ( ! is_wp_error( $term ) && $term ) {
+			$dropoff = $term->name;
+		}
+	}
+
 	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? tf_normalize_date(sanitize_text_field( $_POST['pickup_date'] )) : '';
 	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? tf_normalize_date(sanitize_text_field( $_POST['dropoff_date'] )) : '';
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';

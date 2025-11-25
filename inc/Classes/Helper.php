@@ -289,7 +289,10 @@ class Helper {
 		$term_dropdown = array();
 		if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 			foreach ( $terms as $term ) {
-				$term_dropdown[ $term->slug ] = $term->name;
+				$term_dropdown[ $term->slug ] = array(
+                    'id'   => $term->term_id,
+                    'name' => $term->name,
+                );
 			}
 		}
 
@@ -2408,6 +2411,8 @@ class Helper {
 									<h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
 									<input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-name']) ) ) : '' ?>" />
 									<input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : '' ?>" />
+
+                                    <input type="hidden" id="tf_pickup_id" name="tf-pickup-id" value="<?php echo !empty($_GET['pickup-id']) ? esc_html(intval( wp_unslash($_GET['pickup-id']) ) ) : '' ?>" class="tf-id-input">
 								</div>
 							</div>
 						</div>
@@ -2429,6 +2434,8 @@ class Helper {
 									<h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
 									<input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-name']) )) : '' ?>" />
 									<input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : '' ?>" />
+
+                                    <input type="hidden" id="tf_dropoff_id" name="tf-dropoff-id" value="<?php echo !empty($_GET['dropoff-id']) ? esc_html(intval( wp_unslash($_GET['dropoff-id']) ) ) : '' ?>" class="tf-id-input">
 								</div>
 							</div>
 						</div>

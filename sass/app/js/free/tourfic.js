@@ -350,6 +350,8 @@
             let dropoff_time = $('.tf_dropoff_time').val();
             let pickup_slug = $('#tf_pickup_location_id').val();
             let dropoff_slug = $('#tf_dropoff_location_id').val();
+            let pickup_id = $('#tf_pickup_id').val();
+            let dropoff_id = $('#tf_dropoff_id').val();
             let elSettings = $('#tf-elementor-settings').text();
             
             var formData = new FormData();
@@ -379,6 +381,8 @@
             formData.append('engine_year', engine_year);
             formData.append('pickup', pickup_slug);
             formData.append('dropoff', dropoff_slug);
+            formData.append('pickup_id', pickup_id);
+            formData.append('dropoff_id', dropoff_id);
             formData.append('pickup_date', pickup_date);
             formData.append('dropoff_date', dropoff_date);
             formData.append('pickup_time', pickup_time);
