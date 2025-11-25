@@ -289,10 +289,14 @@ class Helper {
 		$term_dropdown = array();
 		if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 			foreach ( $terms as $term ) {
-				$term_dropdown[ $term->slug ] = array(
-                    'id'   => $term->term_id,
-                    'name' => $term->name,
-                );
+                if('carrental_location'==$taxonomy){
+                    $term_dropdown[ $term->slug ] = array(
+                        'id'   => $term->term_id,
+                        'name' => $term->name,
+                    );
+                }else{
+                    $term_dropdown[ $term->slug ] = $term->name;
+                }
 			}
 		}
 
