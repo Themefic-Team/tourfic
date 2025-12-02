@@ -1314,7 +1314,9 @@ class Apartment {
 				return !in_array($date, $only_booked_dates);
 			});
 		}
-		
+		echo "<pre>";
+var_dump($booked_dates);
+echo "</pre>";
 		$apartment_min_price = Apt_Pricing::instance( get_the_ID() )->get_min_max_price();
 
 		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
@@ -1722,7 +1724,11 @@ class Apartment {
 
                     let minStay = <?php echo esc_js( $min_stay ) ?>;
 
-                    const bookingCalculation = (selectedDates) => {
+                    const bookingCalculation = (selectedDates, DisabledDate) => {
+						if(DisabledDate){
+							selectedDates[1] = DisabledDate;
+						}
+
 						<?php if ( ( $pricing_type === 'per_night' && ! empty( $price_per_night ) ) || ( $pricing_type === 'per_person' && ! empty( $adult_price ) ) ): ?>
                         //calculate total days
                         if (selectedDates[0] && selectedDates[1]) {
@@ -1933,27 +1939,68 @@ class Apartment {
                             instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
 								return `${d1} - ${d2}`;
 							});
-                            bookingCalculation(selectedDates);
-                            dateSetToFields(selectedDates, instance);
+                            bookingCalculation(selectedDates, null);
+                            dateSetToFields(selectedDates, instance, null);
                         },
                         onChange: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+
+							let nextDisabledDate = null;
+							if (selectedDates.length === 1) {
+								const start = selectedDates[0];
+
+								let next = new Date(start.getTime());
+								next.setDate(next.getDate() + 1);
+
+								if (!instance.isEnabled(next)) {
+									let cursor = new Date(next.getTime());
+									let safety = 0;
+
+									while (!instance.isEnabled(cursor) && safety < 365) {
+										cursor.setDate(cursor.getDate() + 1);
+										safety++;
+									}
+
+									if (safety < 365) {
+										instance.setDate([start, cursor], false);
+										selectedDates = instance.selectedDates;
+										dateStr = instance.input.value;
+
+										nextDisabledDate = next; 
+									}
+									instance.close();
+								}
+							}
+							
+							instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
 								return `${date1} - ${date2}`;
 							});
-                            instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+							instance.altInput.value = instance.altInput.value.replace(dateRegex, function (match, d1, d2) {
 								return `${d1} - ${d2}`;
 							});
-                            bookingCalculation(selectedDates);
-                            dateSetToFields(selectedDates, instance);
-                        }, 
+
+							function formatDate(date) {
+								var d = new Date(date);
+								var year = d.getFullYear();
+								var month = (d.getMonth() + 1).toString().padStart(2, '0'); 
+								var day = d.getDate().toString().padStart(2, '0');
+								return `${year}/${month}/${day}`;
+							}
+
+							const formattedNextDisabledDate = nextDisabledDate ? formatDate(nextDisabledDate) : null;
+
+							bookingCalculation(selectedDates, nextDisabledDate);  
+							dateSetToFields(selectedDates, instance, formattedNextDisabledDate);  
+						},
 						<?php if (!empty($checked_enable_dates) && is_array($checked_enable_dates)) : ?>
 							enable: [ <?php array_walk($checked_enable_dates, function($date) {echo '"'. esc_html( $date ) . '",';}); ?> ],
 						<?php endif; ?>
                         disable: [
-							<?php foreach ( $booked_dates as $booked_date ) : ?>
+							<?php foreach ( $booked_dates as $booked_date ) : 
+								    $check_out = (new \DateTime($booked_date['check_out']))->modify('-1 day')->format('Y-m-d');
+								?>
 								{
 									from: "<?php echo esc_html( $booked_date['check_in'] ); ?>",
-									to: "<?php echo esc_html( $booked_date['check_out'] ); ?>"
+									to: "<?php echo esc_html( $check_out ); ?>"
 								},
 							<?php endforeach; ?>
 							<?php foreach ( $apt_disable_dates as $apt_disable_date ) : ?>
@@ -1967,23 +2014,30 @@ class Apartment {
                     });
 
 					// Need to change the date format
-                    function dateSetToFields(selectedDates, instance) {
-						
+                    function dateSetToFields(selectedDates, instance, nextDisabledDate) {
+
 						var dates = instance.altInput.value.split(' - ');
 
                         if (dates.length === 2) {
                             if (dates[0]) {
                                 $(".tf-apartment-design-one-form #check-in-date").val(dates[0]);
                             }
-                            if (dates[1]) {
-                                $(".tf-apartment-design-one-form #check-out-date").val(dates[1]);
-                            }
+                            if (nextDisabledDate === null) {
+								if (dates[1]) {
+									$(".tf-apartment-design-one-form #check-out-date").val(dates[1]);
+								}
+							} else {
+								$(".tf-apartment-design-one-form #check-out-date").val(nextDisabledDate);
+							}
                         }
                     }
 
                     $(document).on('change', '.tf_acrselection #adults, .tf_acrselection #children, .tf_acrselection #infant', function () {
+						var checkoutDateValue = $('#tf-apartment-booking #check-out-date').val();
+						var checkoutDate = new Date(checkoutDateValue);
+
                         if ($('#tf-apartment-booking #check-in-out-date').val() !== '') {
-                            bookingCalculation(checkinoutdateange.selectedDates);
+                            bookingCalculation(checkinoutdateange.selectedDates, checkoutDate);
                         }
                     });
                 });

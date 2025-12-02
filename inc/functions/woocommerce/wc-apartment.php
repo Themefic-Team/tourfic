@@ -23,7 +23,7 @@ function tf_apartment_booking_callback() {
 	$adults            = isset( $_POST['adults'] ) ? intval( sanitize_text_field( $_POST['adults'] ) ) : '0';
 	$children          = isset( $_POST['children'] ) ? intval( sanitize_text_field( $_POST['children'] ) ) : '0';
 	$infant            = isset( $_POST['infant'] ) ? intval( sanitize_text_field( $_POST['infant'] ) ) : '0';
-	$check_in_out_date = isset( $_POST['check-in-out-date'] ) ? sanitize_text_field( $_POST['check-in-out-date'] ) : '';
+	$check_in_out_date = isset( $_POST['check-in-date'] ) && isset( $_POST['check-out-date'] )  ? sanitize_text_field( $_POST['check-in-date']. ' - ' . $_POST['check-out-date']) : '';
 
 	$product_id          = get_post_meta( $post_id, 'product_id', true );
 	$post_author         = get_post_field( 'post_author', $post_id );
