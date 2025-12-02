@@ -13,6 +13,7 @@
         });
 
         wp.hooks.addFilter('tf_tour_booking_popup_data', 'tfProNameSpace', function(data, selectedPackage) {
+            console.log(tf_pro_params.tour_traveler_category);
             
             $.each(tf_pro_params.tour_traveler_category, function(index, category) {
                 if (category.traveler_slug && category.traveler_slug !== '') {

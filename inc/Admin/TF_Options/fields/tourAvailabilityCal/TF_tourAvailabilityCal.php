@@ -387,7 +387,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         <div id="adult_tabs" class="tf-tab-switch-box tf-show-for-person active-repeater"  style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>;">
                                             <div class="tf-tab-field-header">
                                                 <div class="tf-field-collapas">
-                                                    <div class="field-label"><?php echo esc_html__( 'Adult', 'tourfic' ); ?></div>
+                                                    <div class="field-label"><?php echo esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ); ?></div>
                                                     <i class="fa fa-angle-up" aria-hidden="true"></i>
                                                 </div>
                                             </div>
@@ -395,7 +395,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                             <div class="tf-tab-field-content">
                                                 <div class="tf-field tf-field-number" style="width: 100%;">
                                                     <label for="" class="tf-field-label">
-                                                    <?php echo esc_html__( 'Price for Adult', 'tourfic' ); ?>
+                                                    <?php echo sprintf( esc_html__( 'Price for %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ) ); ?>
                                                         <span class="tf-desc-tooltip">
                                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <g clip-path="url(#clip0_1017_4247)">
@@ -423,7 +423,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         <div id="child_tabs" class="tf-tab-switch-box tf-show-for-person active-repeater"  style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>;">
                                             <div class="tf-tab-field-header">
                                                 <div class="tf-field-collapas">
-                                                    <div class="field-label"><?php echo esc_html__( 'Child', 'tourfic' ); ?></div>
+                                                    <div class="field-label"><?php echo esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ); ?></div>
                                                     <i class="fa fa-angle-up" aria-hidden="true"></i>
                                                 </div>
                                             </div>
@@ -431,7 +431,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                             <div class="tf-tab-field-content">
                                                 <div class="tf-field tf-field-number" style="width: 100%;">
                                                     <label for="" class="tf-field-label">
-                                                    <?php echo esc_html__( 'Price for Child', 'tourfic' ); ?>
+                                                    <?php echo sprintf( esc_html__( 'Price for %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ) ); ?>
                                                         <span class="tf-desc-tooltip">
                                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <g clip-path="url(#clip0_1017_4247)">
@@ -459,7 +459,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         <div id="infant_tabs" class="tf-tab-switch-box tf-show-for-person active-repeater"  style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>;">
                                             <div class="tf-tab-field-header">
                                                 <div class="tf-field-collapas">
-                                                    <div class="field-label"><?php echo esc_html__( 'Infant', 'tourfic' ); ?></div>
+                                                    <div class="field-label"><?php echo esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ); ?></div>
                                                     <i class="fa fa-angle-up" aria-hidden="true"></i>
                                                 </div>
                                             </div>
@@ -467,7 +467,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                             <div class="tf-tab-field-content">
                                                 <div class="tf-field tf-field-number" style="width: 100%;">
                                                     <label for="" class="tf-field-label">
-                                                    <?php echo esc_html__( 'Price for Infant', 'tourfic' ); ?>
+                                                    <?php echo sprintf( esc_html__( 'Price for %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ) ); ?>
                                                         <span class="tf-desc-tooltip">
                                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <g clip-path="url(#clip0_1017_4247)">
@@ -610,7 +610,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                                                 <div id="adult_tabs" class="tf-tab-switch-box"  style="display: <?php echo $option_pricing_type == 'person' && !empty($item['adult_tabs'][0]['disable_adult_price']) ? 'block' : 'none' ?>;">
                                                                     <div class="tf-tab-field-header">
                                                                         <div class="tf-field-collapas">
-                                                                            <div class="field-label"><?php echo esc_html__( 'Adult', 'tourfic' ); ?></div>
+                                                                            <div class="field-label"><?php echo esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ); ?></div>
                                                                             <i class="fa fa-angle-up" aria-hidden="true"></i>
                                                                         </div>
                                                                     </div>
@@ -618,7 +618,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                                                     <div class="tf-tab-field-content">
                                                                         <div class="tf-field tf-field-number" style="width: 100%;">
                                                                             <label for="tf_tours_opt[adult_tabs][adult_price]" class="tf-field-label">
-                                                                            <?php echo esc_html__( 'Price for Adult', 'tourfic' ); ?>
+                                                                            <?php echo sprintf( esc_html__( 'Price for %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ) ); ?>
                                                                                 <span class="tf-desc-tooltip">
                                                                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                                         <g clip-path="url(#clip0_1017_4247)">
@@ -646,7 +646,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                                                 <div id="child_tabs" class="tf-tab-switch-box"  style="display: <?php echo $option_pricing_type == 'person' && !empty($item['child_tabs'][0]['disable_child_price']) ? 'block' : 'none' ?>;">
                                                                     <div class="tf-tab-field-header">
                                                                         <div class="tf-field-collapas">
-                                                                            <div class="field-label"><?php echo esc_html__( 'Child', 'tourfic' ); ?></div>
+                                                                            <div class="field-label"><?php echo esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ); ?></div>
                                                                             <i class="fa fa-angle-up" aria-hidden="true"></i>
                                                                         </div>
                                                                     </div>
@@ -654,7 +654,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                                                     <div class="tf-tab-field-content">
                                                                         <div class="tf-field tf-field-number" style="width: 100%;">
                                                                             <label for="" class="tf-field-label">
-                                                                            <?php echo esc_html__( 'Price for Child', 'tourfic' ); ?>
+                                                                            <?php echo sprintf( esc_html__( 'Price for %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ) ); ?>
                                                                                 <span class="tf-desc-tooltip">
                                                                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                                         <g clip-path="url(#clip0_1017_4247)">
@@ -682,7 +682,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                                                 <div id="infant_tabs" class="tf-tab-switch-box"  style="display: <?php echo $option_pricing_type == 'person' && !empty($item['infant_tabs'][0]['disable_infant_price']) ? 'block' : 'none' ?>;">
                                                                     <div class="tf-tab-field-header">
                                                                         <div class="tf-field-collapas">
-                                                                            <div class="field-label"><?php echo esc_html__( 'Infant', 'tourfic' ); ?></div>
+                                                                            <div class="field-label"><?php echo esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ); ?></div>
                                                                             <i class="fa fa-angle-up" aria-hidden="true"></i>
                                                                         </div>
                                                                     </div>
@@ -690,7 +690,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                                                     <div class="tf-tab-field-content">
                                                                         <div class="tf-field tf-field-number" style="width: 100%;">
                                                                             <label for="" class="tf-field-label">
-                                                                            <?php echo esc_html__( 'Price for Infant', 'tourfic' ); ?>
+                                                                            <?php echo sprintf( esc_html__( 'Price for %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ) ); ?>
                                                                                 <span class="tf-desc-tooltip">
                                                                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                                         <g clip-path="url(#clip0_1017_4247)">

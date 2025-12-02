@@ -143,7 +143,7 @@ class Tour {
                                 <div class="tf_acrselection-wrap">
                                     <div class="tf_acrselection-inner">
                                         <div class="tf_acrselection">
-                                            <div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
+                                            <div class="acr-label"><?php echo esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true ) ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -176,7 +176,7 @@ class Tour {
 										if ( empty( $disable_child_search ) ) {
 											?>
                                             <div class="tf_acrselection">
-                                                <div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
+                                                <div class="acr-label"><?php echo esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true ) ); ?></div>
                                                 <div class="acr-select">
                                                     <div class="acr-dec">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -209,7 +209,7 @@ class Tour {
 										if ( empty( $disable_infant_search ) ) {
 											?>
                                             <div class="tf_acrselection">
-                                                <div class="acr-label"><?php esc_html_e( 'Infant', 'tourfic' ); ?></div>
+                                                <div class="acr-label"><?php echo esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true ) ); ?></div>
                                                 <div class="acr-select">
                                                     <div class="acr-dec">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -373,24 +373,24 @@ class Tour {
 									<h5><?php esc_html_e("Guests", "tourfic"); ?></h5>
 									<div class="tf_selectperson-wrap">
 										<div class="tf_input-inner">
-											<div class="adults-text"><?php esc_html_e( '1 Adults', 'tourfic' ); ?></div>
+											<div class="adults-text"><?php echo sprintf( esc_html__( '1 %s', 'tourfic' ), apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ); ?></div>
 											<?php
 											if ( empty( $disable_child_search ) ) {
 												?>
 												<div class="person-sep"></div>
-												<div class="child-text"><?php esc_html_e( '0 Children', 'tourfic' ); ?></div>
+												<div class="child-text"><?php echo sprintf( esc_html__( '0 %s', 'tourfic' ), apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ); ?></div>
 											<?php }
 											if ( empty( $disable_infant_search ) ) {
 												?>
 												<div class="person-sep"></div>
-												<div class="infant-text"><?php esc_html_e( '0 Infant', 'tourfic' ); ?></div>
+												<div class="infant-text"><?php echo sprintf( esc_html__( '0 %s', 'tourfic' ), apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ); ?></div>
 											<?php } ?>
 											<?php do_action( 'tf_tour_search_form_after_person_text', $design ); ?>
 										</div>
 										<div class="tf_acrselection-wrap">
 											<div class="tf_acrselection-inner">
 												<div class="tf_acrselection">
-													<div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
+													<div class="acr-label"><?php echo esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true ) ); ?></div>
 													<div class="acr-select">
 														<div class="acr-dec">-</div>
 														<input type="number" name="adults" id="adults" min="1" value="1">
@@ -401,7 +401,7 @@ class Tour {
 												if ( empty( $disable_child_search ) ) {
 													?>
 													<div class="tf_acrselection">
-														<div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
+														<div class="acr-label"><?php echo esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true ) ); ?></div>
 														<div class="acr-select">
 															<div class="acr-dec">-</div>
 															<input type="number" name="children" id="children" min="0" value="0">
@@ -412,7 +412,7 @@ class Tour {
 												if ( empty( $disable_infant_search ) ) {
 													?>
 													<div class="tf_acrselection">
-														<div class="acr-label"><?php esc_html_e( 'Infant', 'tourfic' ); ?></div>
+														<div class="acr-label"><?php echo esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true ) ); ?></div>
 														<div class="acr-select">
 															<div class="acr-dec">-</div>
 															<input type="number" name="infant" id="infant" min="0" value="0">
@@ -493,7 +493,7 @@ class Tour {
 						<!-- Adult Person -->
 						<div class="tf-search__form__group tf_selectperson-wrap">
 							<label for="tf-search__form-adult" class="tf-search__form__label">
-								<?php echo esc_html_e('Adult Person', 'tourfic'); ?>
+								<?php echo esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ) . esc_html__(' Person', 'tourfic'); ?>
 							</label>
 							<div class="tf-search__form__field tf-mx-width">
 								<div class="tf-search__form__field__icon">
@@ -789,27 +789,27 @@ class Tour {
                         <span class="tf_person-icon tf-search-form-field-icon">
                             <i class="fas fa-user"></i>
                         </span>
-                            <div class="adults-text"><?php esc_html_e( '1 Adults', 'tourfic' ); ?></div>
+                            <div class="adults-text"><?php echo sprintf( esc_html__( '0 %s', 'tourfic' ), apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true ) ); ?></div>
 							<?php
 							if ( empty( $disable_child_search ) ) {
 								?>
                                 <div class="person-sep"></div>
-                                <div class="child-text"><?php esc_html_e( '0 Children', 'tourfic' ); ?></div>
+                                <div class="child-text"><?php echo sprintf( esc_html__( '0 %s', 'tourfic' ), apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true ) ); ?></div>
 							<?php }
 							if ( empty( $disable_infant_search ) ) {
 								?>
                                 <div class="person-sep"></div>
-                                <div class="infant-text"><?php esc_html_e( '0 Infant', 'tourfic' ); ?></div>
+                                <div class="infant-text"><?php echo sprintf( esc_html__( '0 %s', 'tourfic' ), apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true ) ); ?></div>
 							<?php } ?>
 							<?php do_action( 'tf_tour_search_form_after_person_text', $design ); ?>
                         </div>
                         <div class="tf_acrselection-wrap">
                             <div class="tf_acrselection-inner">
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
+                                    <div class="acr-label"><?php echo esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true ) ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">-</div>
-                                        <input type="number" name="adults" id="adults" min="1" value="1">
+                                        <input type="number" name="adults" id="adults" min="0" value="0">
                                         <div class="acr-inc">+</div>
                                     </div>
                                 </div>
@@ -817,7 +817,7 @@ class Tour {
 								if ( empty( $disable_child_search ) ) {
 									?>
                                     <div class="tf_acrselection">
-                                        <div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
+                                        <div class="acr-label"><?php echo esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true ) ); ?></div>
                                         <div class="acr-select">
                                             <div class="acr-dec">-</div>
                                             <input type="number" name="children" id="children" min="0" value="0">
@@ -828,7 +828,7 @@ class Tour {
 								if ( empty( $disable_infant_search ) ) {
 									?>
                                     <div class="tf_acrselection">
-                                        <div class="acr-label"><?php esc_html_e( 'Infant', 'tourfic' ); ?></div>
+                                        <div class="acr-label"><?php echo esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true ) ); ?></div>
                                         <div class="acr-select">
                                             <div class="acr-dec">-</div>
                                             <input type="number" name="infant" id="infant" min="0" value="0">
@@ -2115,7 +2115,7 @@ class Tour {
 													<?php if($pack['pricing_type']=='person'){ ?>
 														<?php if(!empty($package_pricing[$key]['adult_tabs'][0]['disable_adult_price'])){ ?>
 														<div class="tf-single-person">
-															<h3><?php echo esc_html__( "Adult", "tourfic" ); ?></h3>
+															<h3><?php echo esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
 																<input type="number" name="adults" id="adults" value="<?php echo !empty($pack['adult_tabs'][2]['min_adult']) ? esc_attr($pack['adult_tabs'][2]['min_adult']) : 1; ?>" data-min="<?php echo !empty($pack['adult_tabs'][2]['min_adult']) ? esc_attr($pack['adult_tabs'][2]['min_adult']) : ''; ?>" data-max="<?php echo !empty($pack['adult_tabs'][3]['max_adult']) ? esc_attr($pack['adult_tabs'][3]['max_adult']) : ''; ?>" />
@@ -2125,7 +2125,7 @@ class Tour {
 														<?php } if(!empty($package_pricing[$key]['child_tabs'][0]['disable_child_price'])){
 														?>
 														<div class="tf-single-person">
-															<h3><?php echo esc_html__( "Child", "tourfic" ); ?></h3>
+															<h3><?php echo esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
 																<input type="number" name="childrens" id="childs" value="<?php echo !empty($pack['child_tabs'][2]['min_child']) ? esc_attr($pack['child_tabs'][2]['min_child']) : 0; ?>" data-min="<?php echo !empty($pack['child_tabs'][2]['min_child']) ? esc_attr($pack['child_tabs'][2]['min_child']) : ''; ?>" data-max="<?php echo !empty($pack['child_tabs'][3]['max_child']) ? esc_attr($pack['child_tabs'][3]['max_child']) : ''; ?>" />
@@ -2135,7 +2135,7 @@ class Tour {
 														<?php } if(!empty($package_pricing[$key]['infant_tabs'][0]['disable_infant_price'])){
 														?>
 														<div class="tf-single-person">
-															<h3><?php echo esc_html__( "Infant", "tourfic" ); ?></h3>
+															<h3><?php echo esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
 																<input type="number" name="infants" id="infant" value="<?php echo !empty($pack['infant_tabs'][2]['min_infant']) ? esc_attr($pack['infant_tabs'][2]['min_infant']) : 0; ?>" data-min="<?php echo !empty($pack['infant_tabs'][2]['min_infant']) ? esc_attr($pack['infant_tabs'][2]['min_infant']) : ''; ?>" data-max="<?php echo !empty($pack['infant_tabs'][3]['max_infant']) ? esc_attr($pack['infant_tabs'][3]['max_infant']) : ''; ?>" />
@@ -2145,7 +2145,7 @@ class Tour {
 														<?php } ?>
 													<?php }else{ ?>
 														<div class="tf-single-person">
-															<h3><?php echo esc_html__( "Adult", "tourfic" ); ?></h3>
+															<h3><?php echo esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
 																<input type="number" name="adults" id="adults" value="1" />
@@ -2153,7 +2153,7 @@ class Tour {
 															</div>
 														</div>
 														<div class="tf-single-person">
-															<h3><?php echo esc_html__( "Child", "tourfic" ); ?></h3>
+															<h3><?php echo esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
 																<input type="number" name="childrens" id="childs" value="0" />
@@ -2161,7 +2161,7 @@ class Tour {
 															</div>
 														</div>
 														<div class="tf-single-person">
-															<h3><?php echo esc_html__( "Infant", "tourfic" ); ?></h3>
+															<h3><?php echo esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
 																<input type="number" name="infants" id="infant" value="0" />
@@ -4119,7 +4119,7 @@ class Tour {
 		$tour_date = ! empty( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
 		$tour_time = isset( $_POST['check_in_time'] ) ? sanitize_text_field( $_POST['check_in_time'] ) : null;
 		$selectedPackage = ! empty( $_POST['selectedPackage'] ) ? $_POST['selectedPackage'] : '';
-		// var_dump($tour_time);
+		// var_dump($total_people);
 
 		$post_id              = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : '';
 		$meta                 = get_post_meta( $post_id, 'tf_tours_opt', true );
@@ -4371,7 +4371,7 @@ class Tour {
 		 *
 		 */
 		if ( $total_people == 0 && $pricing_rule!='package' ) {
-			$response['errors'][] = esc_html__( 'Please Select Adults/Children/Infant required', 'tourfic' );
+			$response['errors'][] = esc_html__( 'Please Select at least 1 Person', 'tourfic' );
 		}
 
 		/**
@@ -4512,8 +4512,13 @@ class Tour {
 						$response['errors'][] = esc_html__( 'Booking limit is Reached this Date', 'tourfic' );
 					}
 					if ( $tf_total_people != $tf_tour_booking_limit && $tf_today_limit < $total_people_booking && $pricing_rule!='package' ) {
-						/* translators: %1$s: available seats */
-						$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Date', 'tourfic' ), $tf_today_limit );
+						// translators: %1$s is the number of available seats, %2$s: adult label, %3$s: children label
+						$response['errors'][] = sprintf(
+							esc_html__( 'Only %1$s %2$s/%3$s are available this Date', 'tourfic' ),
+							$tf_today_limit,
+							esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ),
+							esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ) ) )
+						);
 					}
 				}
 			}
@@ -4828,10 +4833,122 @@ class Tour {
 			);
 			$placeholder = isset( $placeholders[ $date_format ] ) ? $placeholders[ $date_format ] : 'YYYY/MM/DD';
 
+			$enable_traveler_category = ! empty( Helper::tfopt( 'enable_traveler_category' ) ) ? Helper::tfopt( 'enable_traveler_category' ) : '';
+        	$tour_traveler_category = ! empty( Helper::tf_data_types( tfopt( 'tour_traveler_category' ) ) ) ? Helper::tf_data_types( tfopt( 'tour_traveler_category' ) ) : [];
+
+			// Default labels (fallback).
+			$traveller_label_map = array(
+				'adult'  => apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ),
+				'child'  => apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ),
+				'infant' => apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ),
+			);
+
+			// If custom traveler category is enabled, override/add labels from settings.
+			if ( $enable_traveler_category && ! empty( $tour_traveler_category ) && is_array( $tour_traveler_category ) ) {
+				foreach ( $tour_traveler_category as $cat ) {
+					if ( empty( $cat['traveler_slug'] ) || empty( $cat['traveler_label'] ) ) {
+						continue;
+					}
+					$key   = sanitize_key( $cat['traveler_slug'] );
+					$label = wp_kses_post( $cat['traveler_label'] );
+
+					$traveller_label_map[ $key ] = $label;
+				}
+			}
+
+
+			// --- Traveller categories map (Adult / Child / Infant / Custom) ---.
+			$traveller_categories = array();
+
+			// Add adults first.
+			if ( $adults > 0 ) {
+				$traveller_categories = array_merge(
+					$traveller_categories,
+					array_fill( 0, $adults, 'adult' )
+				);
+			}
+
+			// Then children.
+			if ( $children > 0 ) {
+				$traveller_categories = array_merge(
+					$traveller_categories,
+					array_fill( 0, $children, 'child' )
+				);
+			}
+
+			// Then infants.
+			if ( $infant > 0 ) {
+				$traveller_categories = array_merge(
+					$traveller_categories,
+					array_fill( 0, $infant, 'infant' )
+				);
+			}
+
+			// If there are any custom categories (from traveler_slug).
+			if ( ! empty( $tour_traveler_category ) ) {
+				foreach ( $tour_traveler_category as $cat ) {
+					if ( isset( $cat['traveler_slug'] ) && ! empty( $cat['traveler_slug'] ) ) {
+						$traveller_categories = array_merge(
+							$traveller_categories,
+							array_fill( 0, sanitize_text_field( $_POST[$cat['traveler_slug']] ), sanitize_key( $cat['traveler_slug'] ) )
+						);
+					}
+				}
+			}
+			
+			/**
+			 * Filter to allow custom traveller categories or custom ordering.
+			*
+			* Example: add 'senior', 'guide', etc.
+			*/
+			$traveller_categories = apply_filters(
+				'tf_tour_booking_traveller_categories',
+				$traveller_categories,
+				array(
+					'post_id'   => $post_id,
+					'adults'    => $adults,
+					'children'  => $children,
+					'infant'    => $infant,
+					'total'     => $total_people,
+					'meta'      => $meta,
+				)
+			);
+			
 			$response['tour_packages'] = '';
 			for ( $traveller_in = 1; $traveller_in <= $total_people; $traveller_in ++ ) {
+				$category_key = isset( $traveller_categories[ $traveller_in - 1 ] ) ? $traveller_categories[ $traveller_in - 1 ] : '';
+
+				// Resolve label from map (or fallback to ucfirst of key).
+				$category_label = '';
+				if ( ! empty( $category_key ) && isset( $traveller_label_map[ $category_key ] ) ) {
+					$category_label = $traveller_label_map[ $category_key ];
+				} elseif ( ! empty( $category_key ) ) {
+					$category_label = ucfirst( $category_key );
+				}
+
+				/**
+				 * Filter the final traveler title label.
+				 * Allows addons/themes to customize per category.
+				 */
+				$category_label = apply_filters(
+					'tf_tour_booking_traveller_category_label',
+					$category_label,
+					array(
+						'category_key' => $category_key,
+						'index'        => $traveller_in,
+						'post_id'      => $post_id,
+					)
+				);
+
+				$traveller_title = sprintf(
+					/* translators: 1: traveler index, 2: traveler category. */
+					esc_html__( 'Traveler %1$s%2$s', 'tourfic' ),
+					$traveller_in,
+					$category_label ? ' (' . esc_html( $category_label ) . ')' : ''
+				);
+
 				$response['traveller_info'] .= '<div class="tf-single-tour-traveller tf-single-travel">
-                <h4>' . sprintf( esc_html__( 'Traveler ', 'tourfic' ) ) . $traveller_in . '</h4>
+                <h4>' . $traveller_title . '</h4>
                 <div class="traveller-info">';
 				if ( empty( $traveller_info_fields ) ) {
 					$response['traveller_info'] .= '<div class="traveller-single-info">

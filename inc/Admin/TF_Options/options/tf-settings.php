@@ -1499,8 +1499,8 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => esc_html__( 'Show Minimum Price', 'tourfic' ),
 					'options'  => array(
 						'all'   => esc_html__( 'All', 'tourfic' ),
-						'adult'   => esc_html__( 'Adult', 'tourfic' ),
-						'child'   => esc_html__( 'Child', 'tourfic' ),
+						'adult'   => esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ),
+						'child'   => esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ),
 					),
 					'default'    => 'adult',
 				),

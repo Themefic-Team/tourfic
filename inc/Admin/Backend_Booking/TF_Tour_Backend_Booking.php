@@ -49,7 +49,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 					),
 					array(
 						'id'          => 'tf_tour_adults_number',
-						'label'       => esc_html__( 'Adults', 'tourfic' ),
+						'label'       => esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ),
 						'type'        => 'number',
 						'attributes'  => array(
 							'min' => '0',
@@ -481,8 +481,13 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 						$response['errors'][] = esc_html__( 'Booking limit is Reached this Tour', 'tourfic' );
 					}
 					if ( $tf_total_people != $tf_tour_booking_limit && $tf_today_limit < $total_people_booking ) {
-						// translators: %1$s is the number of available seats */
-						$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Tour', 'tourfic' ), $tf_today_limit );
+						// translators: %1$s is the number of available seats, %2$s: adult label, %3$s: children label
+						$response['errors'][] = sprintf(
+							esc_html__( 'Only %1$s %2$s/%3$s are available this Tour', 'tourfic' ),
+							$tf_today_limit,
+							esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ),
+							esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ) ) )
+						);
 					}
 				}
 			}
@@ -577,8 +582,13 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 					$response['errors'][] = esc_html__( 'Booking limit is Reached this Date', 'tourfic' );
 				}
 				if( $tf_total_people!=$tf_tour_booking_limit && $tf_today_limit < $total_people_booking && $pricing_rule!='package' ){ 
-					/* translators: %1$s Limit  */
-					$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Date', 'tourfic' ), $tf_today_limit );
+					// translators: %1$s is the number of available seats, %2$s: adult label, %3$s: children label
+					$response['errors'][] = sprintf(
+						esc_html__( 'Only %1$s %2$s/%3$s are available this Date', 'tourfic' ),
+						$tf_today_limit,
+						esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ),
+						esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ) ) )
+					);
 				}
 			}
 
@@ -632,7 +642,13 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		 * People 0 number validation
 		 */
 		if ( $total_people == 0 ) {
-			$response['errors'][] = esc_html__( 'Please Select Adults/Children/Infant required', 'tourfic' );
+			/* translators: %1$s: adult label, %2$s: children label, %3$s: infant label */
+			$response['errors'][] = sprintf(
+				esc_html__( 'Please select %1$s/%2$s/%3$s required', 'tourfic' ),
+				esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ),
+				esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ) ) ),
+				esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) )
+			);
 		}
 
 		/**
@@ -761,8 +777,13 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 						$response['errors'][] = esc_html__( 'Booking limit is Reached this Date', 'tourfic' );
 					}
 					if ( $tf_total_people != $tf_tour_booking_limit && $tf_today_limit < $total_people_booking ) {
-						// translators: %1$s is the number of available seats */
-						$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Date', 'tourfic' ), $tf_today_limit );
+						// translators: %1$s is the number of available seats, %2$s: adult label, %3$s: children label
+						$response['errors'][] = sprintf(
+							esc_html__( 'Only %1$s %2$s/%3$s are available this Date', 'tourfic' ),
+							$tf_today_limit,
+							esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ),
+							esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ) ) )
+						);
 					}
 				}
 			}
@@ -894,17 +915,23 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		if ( $pricing_rule == 'person' ) {
 
 			if ( ! $disable_adult_price && $adults > 0 && empty( $adult_price ) ) {
-				$response['errors'][] = esc_html__( 'Adult price is blank!', 'tourfic' );
+				/* translators: %s: person type (e.g. Adult) */
+				$response['errors'][] = sprintf( esc_html__( '%s price is blank!', 'tourfic' ), esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ) );
 			}
 			if ( ! $disable_child_price && $children > 0 && empty( $children_price ) ) {
-				$response['errors'][] = esc_html__( 'Childern price is blank!', 'tourfic' );
+				$response['errors'][] = sprintf( esc_html__( '%s price is blank!', 'tourfic' ), esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ) ) ) );
 			}
 			if ( ! $disable_infant_price && $infant > 0 && empty( $infant_price ) ) {
-				$response['errors'][] = esc_html__( 'Infant price is blank!', 'tourfic' );
+				$response['errors'][] = sprintf( esc_html__( '%s price is blank!', 'tourfic' ), esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ) );
 			}
 			if ( $infant > 0 && ! empty( $infant_price ) && ! $adults ) {
-				$response['errors'][] = esc_html__( 'Infant without adults is not allowed!', 'tourfic' );
-			} 
+				/* translators: %1$s: person type (e.g. Infant), %2$s: person type (e.g. adult) - will be lowercased */
+				$response['errors'][] = sprintf(
+					esc_html__( '%1$s without %2$s is not allowed!', 'tourfic' ),
+					esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ),
+					esc_html( strtolower( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ) )
+				);
+			}
 	
 		} else if ( $pricing_rule == 'group' ) {
 	

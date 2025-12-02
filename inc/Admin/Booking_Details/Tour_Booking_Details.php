@@ -128,16 +128,16 @@ class Tour_Booking_Details extends \Tourfic\Core\TF_Booking_Details
                                         <h5 style="text-transform: uppercase;"><?php esc_html_e("Payment Status:", "tourfic"); ?> <?php echo esc_html( $tf_order_details->payment_method ) ?></h5>
                                         <?php 
                                         if(!empty($tf_total_adult[0])){ ?>
-                                            <h5><?php esc_html_e("Adult:", "tourfic"); ?> <?php echo esc_html( $tf_total_adult[0] ) ?></h5>
+                                            <h5><?php echo esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) .':' ); ?> <?php echo esc_html( $tf_total_adult[0] ) ?></h5>
                                             <?php
                                         }
                                         if(!empty($tf_total_children[0])){ ?>
-                                            <h5><?php esc_html_e("Child:", "tourfic"); ?> <?php echo esc_html( $tf_total_children[0] ) ?></h5>
+                                            <h5><?php echo esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) .':' ); ?> <?php echo esc_html( $tf_total_children[0] ) ?></h5>
                                             <?php
                                         }
                                         if(!empty($tf_total_infants[0])){
                                             ?>
-                                            <h5><?php esc_html_e("Infant:", "tourfic"); ?> <?php echo esc_html( $tf_total_infants[0] ) ?></h5>
+                                            <h5><?php echo esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) .':' ); ?> <?php echo esc_html( $tf_total_infants[0] ) ?></h5>
                                             <?php
                                         } ?>
                                     </div>
@@ -268,16 +268,16 @@ class Tour_Booking_Details extends \Tourfic\Core\TF_Booking_Details
                             <h5 style="text-transform: uppercase;"><?php esc_html_e("Payment Status:", "tourfic"); ?> <?php echo esc_html( $tf_order_details->payment_method ) ?></h5>
                             <?php 
                             if(!empty($tf_total_adult[0])){ ?>
-                                <h5><?php esc_html_e("Adult:", "tourfic"); ?> <?php echo esc_html( $tf_total_adult[0] ) ?></h5>
+                                <h5><?php echo esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) .':' ); ?> <?php echo esc_html( $tf_total_adult[0] ) ?></h5>
                                 <?php
                             }
                             if(!empty($tf_total_children[0])){ ?>
-                                <h5><?php esc_html_e("Child:", "tourfic"); ?> <?php echo esc_html( $tf_total_children[0] ) ?></h5>
+                                <h5><?php echo esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) .':' ); ?> <?php echo esc_html( $tf_total_children[0] ) ?></h5>
                                 <?php
                             }
                             if(!empty($tf_total_infants[0])){
                                 ?>
-                                <h5><?php esc_html_e("Infant:", "tourfic"); ?> <?php echo esc_html( $tf_total_infants[0] ) ?></h5>
+                                <h5><?php echo esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) .':' ); ?> <?php echo esc_html( $tf_total_infants[0] ) ?></h5>
                                 <?php
                             } ?>
                         </div>

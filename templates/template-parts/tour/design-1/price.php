@@ -125,15 +125,15 @@ defined( 'ABSPATH' ) || exit;
 					} elseif ( $pricing_rule == 'person' ) {
 
 						if ( ! $disable_adult && ! empty( $adult_price ) ) {
-							echo '<li data="adult" class="person-info active"><i class="fa-solid fa-user"></i><p>' . esc_html__( "Adult", "tourfic" ) . '</p></li>';
+							echo '<li data="adult" class="person-info active"><i class="fa-solid fa-user"></i><p>' . wp_kses_post( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, true ) ) . '</p></li>';
 						}
 						if ( ! $disable_child && ! empty( $child_price ) ) {
                             $active_class = $disable_adult || empty( $adult_price) ? 'active' : '';
-							echo '<li data="child" class="person-info '. esc_attr($active_class) .'"><i class="fa-solid fa-child"></i><p>' . esc_html__( "Child", "tourfic" ) . '</p></li>';
+							echo '<li data="child" class="person-info '. esc_attr($active_class) .'"><i class="fa-solid fa-child"></i><p>' . wp_kses_post( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, true ) ) . '</p></li>';
 						}
 						if ( ! $disable_adult && ( ! $disable_infant && ! empty( $infant_price ) ) ) {
                             $active_class = ($disable_adult || empty( $adult_price)) && ($disable_child || empty( $child_price )) ? 'active' : '';
-							echo '<li data="infant" class="person-info '. esc_attr($active_class) .'"><i class="fa-solid fa-baby"></i><p>' . esc_html__( "Infant", "tourfic" ) . '</p></li>';
+							echo '<li data="infant" class="person-info '. esc_attr($active_class) .'"><i class="fa-solid fa-baby"></i><p>' . wp_kses_post( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, true ) ) . '</p></li>';
 						}
 					}
 
@@ -152,21 +152,21 @@ defined( 'ABSPATH' ) || exit;
                     <div class="tf-trip-pricing tf-flex tf-adult active">
                         <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?></span>
                         <span class="tf-price-amount"><?php echo wp_kses_post(wc_price($adult_price)); ?></span>
-                        <span class="tf-price-label-bttm"><?php esc_html_e( "Per Adult", "tourfic" ); ?></span>
+                        <span class="tf-price-label-bttm"><?php echo esc_html__( "Per ", "tourfic" ) . esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true ) ); ?></span>
                     </div>
 				<?php }
 				if ( ! $disable_child && ! empty( $child_price ) ) { ?>
                     <div class="tf-trip-pricing tf-flex tf-child <?php echo $disable_adult || empty( $adult_price ) ? esc_attr('active') : ''; ?>">
                         <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?></span>
                         <span class="tf-price-amount"><?php echo wp_kses_post(wc_price($child_price)); ?></span>
-                        <span class="tf-price-label-bttm"><?php esc_html_e( "Per Child", "tourfic" ); ?></span>
+                        <span class="tf-price-label-bttm"><?php echo esc_html__( "Per ", "tourfic" ) . esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true ) ); ?></span>
                     </div>
 				<?php }
 				if ( ! $disable_adult && ( ! $disable_infant && ! empty( $infant_price ) ) ) { ?>
                     <div class="tf-trip-pricing tf-flex tf-infant <?php echo ($disable_adult || empty( $adult_price)) && ($disable_child || empty( $child_price )) ? esc_attr('active') : ''; ?>">
                         <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?></span>
                         <span class="tf-price-amount"><?php echo wp_kses_post(wc_price($infant_price)); ?></span>
-                        <span class="tf-price-label-bttm"><?php esc_html_e( "Per Infant", "tourfic" ); ?></span>
+                        <span class="tf-price-label-bttm"><?php echo esc_html__( "Per ", "tourfic" ) . esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true ) ); ?></span>
                     </div>
 				<?php } ?>
 			<?php } ?>

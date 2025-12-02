@@ -386,13 +386,13 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'          => 'disable_adult_price',
 					'type'        => 'switch',
-					'label'       => esc_html__( 'Disable Adult', 'tourfic' ),
+					'label'       => sprintf( esc_html__( 'Disable %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ) ),
 					'dependency' => array( 'pricing', '!=', 'package' ),
 				),
 				array(
 					'id'          => 'adult_price',
 					'type'        => 'number',
-					'description'    => esc_html__( 'Number of adult price only, ex. 250', 'tourfic' ),
+					'description'    => sprintf( esc_html__( 'Number of %s price only, ex. 250', 'tourfic' ), esc_html( strtolower( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ) ) ),
 					'dependency'  => [
 						array( 'pricing', '==', 'person' ),
 						[ 'disable_adult_price', '==', 'false' ]
@@ -404,7 +404,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'          => 'disable_child_price',
 					'type'        => 'switch',
-					'label'       => esc_html__( 'Disable Child', 'tourfic' ),
+					'label'       => sprintf( esc_html__( 'Disable %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ) ),
 					'dependency' => array( 'pricing', '!=', 'package' ),
 				),
 				array(
@@ -414,7 +414,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						array( 'pricing', '==', 'person' ),
 						[ 'disable_child_price', '==', 'false' ]
 					],
-					'description'    => esc_html__( 'Number of child price only, ex. 200', 'tourfic' ),
+					'description'    => sprintf( esc_html__( 'Number of %s price only, ex. 200', 'tourfic' ), esc_html( strtolower( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ) ) ),
 					'attributes'  => array(
 						'min' => '0',
 					),
@@ -422,7 +422,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'          => 'disable_infant_price',
 					'type'        => 'switch',
-					'label'       => esc_html__( 'Disable Infant', 'tourfic' ),
+					'label'       => sprintf( esc_html__( 'Disable %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ) ),
 					'dependency' => array( 'pricing', '!=', 'package' ),
 				),
 				array(
@@ -433,7 +433,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						[ 'disable_infant_price', '==', 'false' ],
 						[ 'disable_adult_price', '==', 'false' ],
 					],
-					'description'    => esc_html__( 'Number of infant price only, ex. 150', 'tourfic' ),
+					'description'    => sprintf( esc_html__( 'Number of %s price only, ex. 150', 'tourfic' ), esc_html( strtolower( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ) ) ),
 					'attributes'  => array(
 						'min' => '0',
 					),
@@ -942,8 +942,10 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'          => 'require_adult_child_booking',
 					'type'        => 'switch',
-					'label'       => esc_html__( 'Adult Required for Child Booking', 'tourfic' ),
-					'subtitle'       => esc_html__( 'By enabling this option, an adult will be required when booking a child. By default, an adult is required for infant bookings.', 'tourfic' ),
+					/* translators: %1$s: adult label, %2$s: child label */
+					'label'       => sprintf( esc_html__( '%1$s Required for %2$s Booking', 'tourfic' ), esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ), esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ) ),
+					/* translators: %1$s: adult label (lowercased), %2$s: child label (lowercased), %3$s: infant label (lowercased) */
+					'subtitle'    => sprintf( esc_html__( 'By enabling this option, %1$s will be required when booking a %2$s. By default, a %1$s is required for %3$s bookings.', 'tourfic' ), esc_html( strtolower( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ) ), esc_html( strtolower( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ) ), esc_html( strtolower( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ) ) ),
 					'field_width' => '50%',
 					'default' => 0
 				),

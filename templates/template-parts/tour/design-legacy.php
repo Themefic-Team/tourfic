@@ -234,13 +234,13 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                 } elseif ( $pricing_rule == 'person' ) {
 
                                 if ( ! $disable_adult && ! empty( $avail_prices['adult_price'] ) ) {
-                                    echo '<li id="adult" class="active">' . esc_html__( "Adult", "tourfic" ) . '</li>';
+                                    echo '<li id="adult" class="active">' . esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ) . '</li>';
                                 }
                                 if ( ! $disable_child && ! empty( $avail_prices['child_price'] ) ) {
-                                    echo '<li id="child">' . esc_html__( "Child", "tourfic" ) . '</li>';
+                                    echo '<li id="child">' . esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ) . '</li>';
                                 }
                                 if ( !$disable_adult && (! $disable_infant && ! empty( $avail_prices['infant_price'] )) ) {
-                                    echo '<li id="infant">' . esc_html__( "Infant", "tourfic" ) . '</li>';
+                                    echo '<li id="infant">' . esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ) . '</li>';
                                 }
                                 do_action( 'tf_tour_single_person_info_after', get_the_ID(), 'default' );
                                 }
