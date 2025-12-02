@@ -1314,9 +1314,7 @@ class Apartment {
 				return !in_array($date, $only_booked_dates);
 			});
 		}
-		echo "<pre>";
-var_dump($booked_dates);
-echo "</pre>";
+
 		$apartment_min_price = Apt_Pricing::instance( get_the_ID() )->get_min_max_price();
 
 		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
