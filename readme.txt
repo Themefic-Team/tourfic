@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.18.7
+Stable tag: 2.18.8
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -81,11 +81,11 @@ Additionally, numerous vital features contribute to making Tourfic the ideal Hot
 * Advanced / Partial Payment (Pro)
 * Sell Tours Extras (Pro)
 * Tours booking restrictions (Pro)
-* Advanced Itinerary Builder with option to dimply in google map (Pro)
-* Dynamic Location Search based on OpenStreetMap on Option Panel (Coming Soon)
-* Dynamic Location Search based on Google Maps on Option Panel (Coming Soon)
+* Advanced Itinerary Builder with option to display in Google Maps (Pro)
+* Dynamic Location Search based on OpenStreetMap on the Option Panel (Coming Soon)
+* Dynamic Location Search based on Google Maps on the Option Panel (Coming Soon)
 
-Plus, a range of key features which makes Tourfic as the Excellent Travel Booking WordPress plugin.
+Plus, a range of key features that make Tourfic an Excellent Travel Booking WordPress plugin.
 
 = 🎉  CAR RENTAL / RENT A CAR SYSTEM =
 * Unlimited Cars with Photo Gallery
@@ -106,7 +106,7 @@ Plus, a range of key features which makes Tourfic as the Excellent Travel Bookin
 * Advanced Search Options
 * Mobile-Friendly Responsive Design
 
-Moreover, it offers a comprehensive suite of key features that make it the excellent car rental WordPress plugin. You can also use this function to build website for Cab booking, Bike rental and Bus booking.
+Moreover, it offers a comprehensive suite of key features that make it an excellent car rental WordPress plugin. You can also use this function to build a website for Cab booking, Bike rental, and Bus booking.
 
 = 🎉  APARTMENT BOOKING & VACATION RENTAL =
 * Add Unlimited Apartment
@@ -404,6 +404,10 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 22. Map Template(Pro)
 
 == Changelog ==
+
+= 2.18.8 – December 04, 2025 =
+
+- Updated: Readme.txt file info.
 
 = 2.18.7 – December 04, 2025 =
 
