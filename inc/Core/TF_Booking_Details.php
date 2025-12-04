@@ -539,7 +539,9 @@ abstract Class TF_Booking_Details {
 		<?php
 	}
 
-	function tf_single_booking_details( $booking_type, $tf_order_details ) { ?>
+	function tf_single_booking_details( $booking_type, $tf_order_details ) { 
+        $post_type = get_post_type( $tf_order_details->post_id );
+        ?>
         <div class="tf-booking-details-preview">
             <div class="tf-details-preview-header">
                 <div class="tf-back">
@@ -699,7 +701,7 @@ abstract Class TF_Booking_Details {
                                             $tf_total_adult = explode( " × ", $book_adult );
                                         ?>
                                         <tr>
-                                            <th><?php esc_html_e("Adult", "tourfic"); ?></th>
+                                            <th><?php echo $post_type == 'tf_tours' ? esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $tf_order_details->post_id ) ) : esc_html__( 'Adult', 'tourfic' ); ?></th>
                                             <td>:</td>
                                             <td>
                                                 <?php if(!empty($tf_total_adult[0])) {
@@ -719,7 +721,7 @@ abstract Class TF_Booking_Details {
                                             $tf_total_children = explode( " × ", $book_children );
                                         ?>
                                         <tr>
-                                            <th><?php esc_html_e("Child", "tourfic"); ?></th>
+                                            <th><?php echo $post_type == 'tf_tours' ? esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, false, $tf_order_details->post_id ) ) : esc_html__( 'Child', 'tourfic' ); ?></th>
                                             <td>:</td>
                                             <td>
                                                 <?php if(!empty($tf_total_children[0])) {
@@ -739,7 +741,7 @@ abstract Class TF_Booking_Details {
                                             $tf_total_infants = explode( " × ", $book_infants );
                                             ?>
                                             <tr>
-                                                <th><?php esc_html_e("Infant", "tourfic"); ?></th>
+                                                <th><?php echo $post_type == 'tf_tours' ? esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $tf_order_details->post_id ) ) : esc_html__( 'Infant', 'tourfic' ); ?></th>
                                                 <td>:</td>
                                                 <td>
                                                     <?php if(!empty($tf_total_infants[0])) {
@@ -999,16 +1001,148 @@ abstract Class TF_Booking_Details {
                             <?php 
                             $tf_visitors_details = !empty($tf_tour_details->visitor_details) ? json_decode($tf_tour_details->visitor_details) : '';
                             $traveler_fields = !empty(Helper::tfopt('without-payment-field')) ? Helper::tf_data_types(Helper::tfopt('without-payment-field')) : '';
+
+                            $enable_traveler_category = ! empty( Helper::tfopt( 'enable_traveler_category' ) ) ? Helper::tfopt( 'enable_traveler_category' ) : '';
+                            $tour_traveler_category = ! empty( Helper::tf_data_types( tfopt( 'tour_traveler_category' ) ) ) ? Helper::tf_data_types( tfopt( 'tour_traveler_category' ) ) : [];
+
+                            // Default labels (fallback).
+                            $traveller_label_map = array(
+                                'adult'  => apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $tf_order_details->post_id ),
+                                'child'  => apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, false, $tf_order_details->post_id ),
+                                'infant' => apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $tf_order_details->post_id ),
+                            );
+
+                            // If custom traveler category is enabled, override/add labels from settings.
+                            if ( $enable_traveler_category && ! empty( $tour_traveler_category ) && is_array( $tour_traveler_category ) ) {
+                                foreach ( $tour_traveler_category as $cat ) {
+                                    if ( empty( $cat['traveler_slug'] ) || empty( $cat['traveler_label'] ) ) {
+                                        continue;
+                                    }
+                                    $key   = sanitize_key( $cat['traveler_slug'] );
+                                    $label = wp_kses_post( $cat['traveler_label'] );
+
+                                    $traveler_min_age = ! empty( $cat['traveler_min_age'] ) ? sanitize_title( $cat['traveler_min_age'] ) : '';
+                                    $traveler_max_age = ! empty( $cat['traveler_max_age'] ) ? sanitize_title( $cat['traveler_max_age'] ) : '';
+                                    $traveler_age_type = ! empty( $cat['traveler_age_type'] ) ? sanitize_title( $cat['traveler_age_type'] ) : 'years';
+                                    
+                                    if($traveler_min_age && $traveler_max_age){
+                                        $label = esc_html($label).' ('.esc_html($traveler_min_age).'–'.esc_html($traveler_max_age).' '.esc_html($traveler_age_type).' old)';
+                                    }
+
+                                    $traveller_label_map[ $key ] = $label;
+                                }
+                            }
+
+
+                            // --- Traveller categories map (Adult / Child / Infant / Custom) ---.
+                            $traveller_categories = array();
+
+                            // Add adults first.
+                            if ( $tf_total_adult[0] > 0 ) {
+                                $traveller_categories = array_merge(
+                                    $traveller_categories,
+                                    array_fill( 0, $tf_total_adult[0], 'adult' )
+                                );
+                            }
+
+                            // Then children.
+                            if ( $tf_total_children[0] > 0 ) {
+                                $traveller_categories = array_merge(
+                                    $traveller_categories,
+                                    array_fill( 0, $tf_total_children[0], 'child' )
+                                );
+                            }
+
+                            // Then infants.
+                            if ( $tf_total_infants[0] > 0 ) {
+                                $traveller_categories = array_merge(
+                                    $traveller_categories,
+                                    array_fill( 0, $tf_total_infants[0], 'infant' )
+                                );
+                            }
+
+                            // Convert object to array
+                            $_tf_order_details = (array) $tf_order_details;
+
+                            // Decode order_details JSON
+                            if (isset($_tf_order_details['order_details'])) {
+                                $_tf_order_details['order_details'] = json_decode($_tf_order_details['order_details'], true);
+                            }
+
+                            if (!empty($tour_traveler_category)) {
+                                foreach ($tour_traveler_category as $cat) {
+                                    $slug = $cat['traveler_slug'];
+
+                                    if (!empty($slug) && isset($_tf_order_details['order_details'][$slug])) {
+
+                                        // Extract count: "1 × $81.00" → 1
+                                        $rawValue = $_tf_order_details['order_details'][$slug];
+                                        $count = intval(trim(explode('×', $rawValue)[0]));
+
+                                        $traveller_categories = array_merge(
+                                            $traveller_categories,
+                                            array_fill(0, $count, sanitize_key($slug))
+                                        );
+                                    }
+                                }
+                            }
+                            
+                            /**
+                             * Filter to allow custom traveller categories or custom ordering.
+                            *
+                            * Example: add 'senior', 'guide', etc.
+                            */
+                            $traveller_categories = apply_filters(
+                                'tf_tour_booking_traveller_categories',
+                                $traveller_categories,
+                                array(
+                                    'post_id'   => $tf_order_details->post_id,
+                                    'adults'    => $tf_total_adult[0],
+                                    'children'  => $tf_total_children[0],
+                                    'infant'    => $tf_total_infants[0],
+                                )
+                            );
+                            
                             if(!empty($tf_visitors_details)){
                                 $visitor_count = 1;
                                 foreach($tf_visitors_details as $visitor){
+                                    $category_key = isset( $traveller_categories[ $visitor_count - 1 ] ) ? $traveller_categories[ $visitor_count - 1 ] : '';
+
+                                    // Resolve label from map (or fallback to ucfirst of key).
+                                    $category_label = '';
+                                    if ( ! empty( $category_key ) && isset( $traveller_label_map[ $category_key ] ) ) {
+                                        $category_label = $traveller_label_map[ $category_key ];
+                                    } elseif ( ! empty( $category_key ) ) {
+                                        $category_label = ucfirst( $category_key );
+                                    }
+
+                                    /**
+                                     * Filter the final traveler title label.
+                                     * Allows addons/themes to customize per category.
+                                     */
+                                    $category_label = apply_filters(
+                                        'tf_tour_booking_traveller_category_label',
+                                        $category_label,
+                                        array(
+                                            'category_key' => $category_key,
+                                            'index'        => $visitor_count,
+                                            'post_id'      => $tf_order_details->post_id,
+                                        )
+                                    );
+
+                                    $traveller_title = sprintf(
+                                        /* translators: 1: traveler index, 2: traveler category. */
+                                        esc_html__( 'Visitor %1$s%2$s', 'tourfic' ),
+                                        $visitor_count,
+                                        $category_label ? ' (' . esc_html( $category_label ) . ')' : ''
+                                    );
                             ?>
                             <div class="tf-grid-single">
                                 <h3>
                                 <?php
                                 if ( $tf_order_details->post_type == 'tour' ) {
                                     /* translators: %s Visitor. */
-                                    echo esc_html( sprintf( esc_html__( 'Visitor %s', 'tourfic' ), intval( $visitor_count ) ) );
+                                    echo esc_html( $traveller_title );
                                 } elseif ( $tf_order_details->post_type == 'hotel' ) {
                                     /* translators: %s Visitor. */
                                     echo esc_html( sprintf( esc_html__( 'Guest %s', 'tourfic' ), intval( $visitor_count ) ) );
@@ -1595,6 +1729,7 @@ abstract Class TF_Booking_Details {
         global $wpdb;
         $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $_POST['id'] ) ) );$tf_billing_details = json_decode($tf_order_details->billing_details);
         $tf_tour_details = json_decode($tf_order_details->order_details);
+        $post_type = get_post_type( $tf_order_details->post_id );
         ?>
 
         <div class="tf-popup-header">
@@ -1681,7 +1816,7 @@ abstract Class TF_Booking_Details {
                     if(!empty($tf_total_adult[0])) {
                     ?>
                     <div class="tf-single-content">
-                        <h5><?php esc_html_e("Adult", "tourfic"); ?></h5>
+                        <h5><?php echo $post_type == 'tf_tours' ? esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $tf_order_details->post_id ) ) : esc_html__( 'Adult', 'tourfic' ); ?></h5>
                         <p><?php echo esc_html($tf_total_adult[0]); ?></p>
                     </div>
                     <?php } ?>
@@ -1694,7 +1829,7 @@ abstract Class TF_Booking_Details {
                     if(!empty($tf_total_children[0])) {
                     ?>
                     <div class="tf-single-content">
-                        <h5><?php esc_html_e("Child", "tourfic"); ?></h5>
+                        <h5><?php echo $post_type == 'tf_tours' ? esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, false, $tf_order_details->post_id ) ) : esc_html__( 'Child', 'tourfic' ); ?></h5>
                         <p><?php echo esc_html($tf_total_children[0]); ?></p>
                     </div>
                     <?php } ?>
@@ -1707,7 +1842,7 @@ abstract Class TF_Booking_Details {
                     if(!empty($tf_total_infants[0])) {
                     ?>
                     <div class="tf-single-content">
-                        <h5><?php esc_html_e("Infant", "tourfic"); ?></h5>
+                        <h5><?php echo $post_type == 'tf_tours' ? esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $tf_order_details->post_id ) ) : esc_html__( 'Infant', 'tourfic' ); ?></h5>
                         <p><?php echo esc_html($tf_total_infants[0]); ?></p>
                     </div>
                     <?php } ?>

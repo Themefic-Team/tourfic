@@ -852,7 +852,7 @@ class Helper {
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
                                 <i class="fa-regular fa-user"></i>
-								<?php echo $post_type == "tf_hotel" ? esc_html( $adults_name . 's' ) : esc_html__( 'Adults', 'tourfic' ); ?>
+								<?php echo $post_type == "tf_hotel" ? esc_html( $adults_name . 's' ) : apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true ); ?>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
@@ -870,7 +870,7 @@ class Helper {
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
                                 <i class="fa-solid fa-child"></i>
-								<?php esc_html_e( 'Children', 'tourfic' ); ?>
+								<?php echo $post_type == "tf_tours" ? wp_kses_post(apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true )) : esc_html__( 'Children', 'tourfic' ); ?>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
@@ -1093,7 +1093,15 @@ class Helper {
                         <div class="tf_acrselection-inner">
                             <?php do_action('tf_search_result_sidebar_form_before_personal_fields', $post_type, $design); ?>
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's' ) : esc_html__( 'Adults', 'tourfic' ); ?></div>
+                                <div class="acr-label">
+                                    <?php if($post_type == "tf_hotel"){
+                                        echo esc_html( $adults_name . 's' );
+                                    } elseif($post_type == "tf_tours"){
+                                        echo wp_kses_post( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adults', 'tourfic' ), true ) );
+                                    }else{
+                                        echo esc_html__( 'Adults', 'tourfic' );
+                                    } ?>
+                                </div>
                                 <div class="acr-select">
                                     <div class="acr-dec">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1127,7 +1135,9 @@ class Helper {
                             ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
                             ) { ?>
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
+                                <div class="acr-label">
+                                    <?php echo $post_type == "tf_tours" ? wp_kses_post(apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true )) : esc_html__( 'Children', 'tourfic' ); ?>
+                                </div>
                                 <div class="acr-select">
                                     <div class="acr-dec">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1452,7 +1462,15 @@ class Helper {
                         <div class="tf_acrselection-inner">
                             <?php do_action('tf_search_result_sidebar_form_before_personal_fields', $post_type, $design); ?>
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's') : esc_html__( 'Adults', 'tourfic' ); ?></div>
+                                <div class="acr-label">
+                                    <?php if($post_type == "tf_hotel"){
+                                        echo esc_html( $adults_name . 's' );
+                                    } elseif($post_type == "tf_tours"){
+                                        echo wp_kses_post( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adults', 'tourfic' ), true ) );
+                                    }else{
+                                        echo esc_html__( 'Adults', 'tourfic' );
+                                    } ?>
+                                </div>
                                 <div class="acr-select">
                                     <div class="acr-dec">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1486,7 +1504,7 @@ class Helper {
 	                                   ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
 	                        ) { ?>
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
+                                <div class="acr-label"><?php echo $post_type == "tf_tours" ? wp_kses_post(apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true )) : esc_html__( 'Children', 'tourfic' ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1649,10 +1667,25 @@ class Helper {
                         <div class="tf_form-inner">
                             <i class="fas fa-user-friends"></i>
                             <select name="adults" id="adults" class="">
-                                <option <?php echo 1 == $adult ? 'selected' : null ?> value="1">1 <?php echo $post_type == "tf_hotel" ? esc_html( $adults_name ) : esc_html__( 'Adult', 'tourfic' ); ?></option>
+                                <option <?php echo 1 == $adult ? 'selected' : null ?> value="1">1 
+                                    <?php if($post_type == "tf_hotel"){
+                                        echo esc_html( $adults_name . 's' );
+                                    } elseif($post_type == "tf_tours"){
+                                        echo wp_kses_post( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true ) );
+                                    }else{
+                                        echo esc_html__( 'Adult', 'tourfic' );
+                                    } ?>
+                                </option>
 								<?php foreach ( range( 2, 8 ) as $value ) {
 									$selected = $value == $adult ? 'selected' : null;
-									echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html( $adults_name . 's') . '</option>';
+                                    if($post_type == "tf_hotel"){
+                                        echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html( $adults_name . 's') . '</option>';
+                                    } elseif($post_type == "tf_tours"){
+                                        echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . wp_kses_post( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adults', 'tourfic' ), true ) ) . '</option>';
+                                    }else{
+                                        echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( 'adults', 'tourfic' ) . '</option>';
+                                    }
+									
 								} ?>
                             </select>
                             <i class="fas fa-chevron-down"></i>
@@ -1665,11 +1698,15 @@ class Helper {
                             <div class="tf_form-inner">
                                 <i class="fas fa-child"></i>
                                 <select name="children" id="children" class="">
-                                    <option value="0">0 <?php esc_html_e( 'Children', 'tourfic' ); ?></option>
-                                    <option <?php echo 1 == $children ? 'selected' : null ?> value="1">1 <?php esc_html_e( 'Children', 'tourfic' ); ?></option>
+                                    <option value="0">0 <?php echo $post_type == "tf_tours" ? wp_kses_post(apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true )) : esc_html__( 'Children', 'tourfic' ); ?></option>
+                                    <option <?php echo 1 == $children ? 'selected' : null ?> value="1">1 <?php echo $post_type == "tf_tours" ? wp_kses_post(apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true )) : esc_html__( 'Children', 'tourfic' ); ?></option>
 									<?php foreach ( range( 2, 8 ) as $value ) {
 										$selected = $value == $children ? 'selected' : null;
-										echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Children", "tourfic" ) . '</option>';
+                                        if($post_type == "tf_tours"){
+										    echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . wp_kses_post(apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true )) . '</option>';
+                                        } else{
+                                            echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Children", "tourfic" ) . '</option>';
+                                        }
 									} ?>
 
                                 </select>
@@ -1707,8 +1744,8 @@ class Helper {
                             <div class="tf_form-inner">
                                 <i class="fas fa-child"></i>
                                 <select name="infant" id="infant" class="">
-                                    <option value="0">0 <?php esc_html_e( 'Infant', 'tourfic' ); ?></option>
-                                    <option <?php echo 1 == $infant ? 'selected' : null ?> value="1">1 <?php esc_html_e( 'Infant', 'tourfic' ); ?></option>
+                                    <option value="0">0 <?php echo $post_type == "tf_tours" ? wp_kses_post(apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true )) : esc_html__( 'Infant', 'tourfic' ); ?></option>
+                                    <option <?php echo 1 == $infant ? 'selected' : null ?> value="1">1 <?php echo $post_type == "tf_tours" ? wp_kses_post(apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true )) : esc_html__( 'Infant', 'tourfic' ); ?></option>
 									<?php foreach ( range( 2, 8 ) as $value ) {
 										$selected = $value == $infant ? 'selected' : null;
 										echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Infant", "tourfic" ) . '</option>';
@@ -1918,7 +1955,7 @@ class Helper {
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
                                 <i class="fa-regular fa-user"></i>
-								<?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's' ) : esc_html__( 'Adults', 'tourfic' ); ?>
+								<?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's' ) : wp_kses_post( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adults', 'tourfic' ), true ) ); ?>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
@@ -1934,7 +1971,7 @@ class Helper {
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
                                 <i class="fa-solid fa-child"></i>
-								<?php esc_html_e( 'Children', 'tourfic' ); ?>
+								<?php echo $post_type == "tf_tours" ? wp_kses_post(apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true )) : esc_html__( 'Children', 'tourfic' ); ?>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
@@ -2154,7 +2191,15 @@ class Helper {
                             <div class="tf_acrselection-wrap">
                                 <div class="tf_acrselection-inner">
                                     <div class="tf_acrselection">
-                                        <div class="acr-label"><?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's' ) : esc_html__( 'Adults', 'tourfic' ); ?></div>
+                                        <div class="acr-label">
+                                            <?php if($post_type == "tf_hotel"){
+                                                echo esc_html( $adults_name . 's' );
+                                            } elseif($post_type == "tf_tours"){
+                                                echo wp_kses_post( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adults', 'tourfic' ), true ) );
+                                            }else{
+                                                echo esc_html__( 'Adults', 'tourfic' );
+                                            } ?>
+                                        </div>
                                         <div class="acr-select">
                                             <div class="acr-dec">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2188,7 +2233,7 @@ class Helper {
                                             ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
                                     ) { ?>
                                     <div class="tf_acrselection">
-                                        <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
+                                        <div class="acr-label"><?php echo $post_type == "tf_tours" ? wp_kses_post(apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true )) : esc_html__( 'Children', 'tourfic' ); ?></div>
                                         <div class="acr-select">
                                             <div class="acr-dec">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2787,7 +2832,15 @@ class Helper {
                         <div class="tf_acrselection-wrap">
                             <div class="tf_acrselection-inner">
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's' ) : esc_html__( 'Adults', 'tourfic' ); ?></div>
+                                    <div class="acr-label">
+                                        <?php if($post_type == "tf_hotel"){
+                                            echo esc_html( $adults_name . 's' );
+                                        } elseif($post_type == "tf_tours"){
+                                            echo wp_kses_post( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adults', 'tourfic' ), true ) );
+                                        }else{
+                                            echo esc_html__( 'Adults', 'tourfic' );
+                                        } ?>
+                                    </div>
                                     <div class="acr-select">
                                         <div class="acr-dec">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2821,7 +2874,7 @@ class Helper {
                                         ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
                                 ) { ?>
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
+                                    <div class="acr-label"><?php echo $post_type == "tf_tours" ? wp_kses_post(apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true )) : esc_html__( 'Children', 'tourfic' ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -3005,10 +3058,17 @@ class Helper {
                             <i class="fas fa-child"></i>
                             <select name="children" id="children" class="">
 								<?php
-								echo '<option value="0">0 ' . esc_html__( "Children", "tourfic" ) . '</option>';
-								foreach ( range( 1, 8 ) as $value ) {
-									echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Children", "tourfic" ) . '</option>';
-								}
+                                if($post_type == 'tf_tours'){
+                                    echo '<option value="0">0 ' . wp_kses_post(apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true )) . '</option>';
+                                    foreach ( range( 1, 8 ) as $value ) {
+                                        echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . wp_kses_post(apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true )) . '</option>';
+                                    }
+                                } else {
+                                    echo '<option value="0">0 ' . esc_html__( "Children", "tourfic" ) . '</option>';
+                                    foreach ( range( 1, 8 ) as $value ) {
+                                        echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Children", "tourfic" ) . '</option>';
+                                    }
+                                }
 								?>
                             </select>
                             <i class="fas fa-chevron-down"></i>

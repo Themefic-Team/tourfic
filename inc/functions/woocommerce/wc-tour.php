@@ -1238,6 +1238,7 @@ function tf_tours_cart_item_custom_data( $item_data, $cart_item ) {
 	$tour_extra       = ! empty( $cart_item['tf_tours_data']['tour_extra_title'] ) ? $cart_item['tf_tours_data']['tour_extra_title'] : '';
 	$package_title    = ! empty( $cart_item['tf_tours_data']['package_title'] ) ? $cart_item['tf_tours_data']['package_title'] : '';
 	$due              = ! empty( $cart_item['tf_tours_data']['due'] ) ? $cart_item['tf_tours_data']['due'] : null;
+	$tour_id              = ! empty( $cart_item['tf_tours_data']['tour_id'] ) ? $cart_item['tf_tours_data']['tour_id'] : null;
 
 	/**
 	 * Show data in cart & checkout
@@ -1245,21 +1246,21 @@ function tf_tours_cart_item_custom_data( $item_data, $cart_item ) {
 	// Adults
 	if ( $adults_number && $adults_number >= 1 ) {
 		$item_data[] = array(
-			'key'   => esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true ) ),
+			'key'   => esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $tour_id ) ),
 			'value' => $adults_number,
 		);
 	}
 	// Childrens
 	if ( $childrens_number && $childrens_number >= 1 ) {
 		$item_data[] = array(
-			'key'   => esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true ) ),
+			'key'   => esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true, false, $tour_id ) ),
 			'value' => $childrens_number,
 		);
 	}
 	// Infants
 	if ( $infants_number && $infants_number >= 1 ) {
 		$item_data[] = array(
-			'key'   => esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true ) ),
+			'key'   => esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $tour_id ) ),
 			'value' => $infants_number,
 		);
 	}
@@ -1353,15 +1354,15 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	}
 
 	if ( $adults_number && $adults_number > 0 ) {
-		$item->update_meta_data( esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true ) ), $adults_number );
+		$item->update_meta_data( esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $tour_id ) ), $adults_number );
 	}
 
 	if ( $childrens_number && $childrens_number > 0 ) {
-		$item->update_meta_data( esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true ) ), $childrens_number );
+		$item->update_meta_data( esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, false, $tour_id ) ), $childrens_number );
 	}
 
 	if ( $infants_number && $infants_number > 0 ) {
-		$item->update_meta_data( esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true ) ), $infants_number );
+		$item->update_meta_data( esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $tour_id ) ), $infants_number );
 	}
 
 	if ( $tour_type && $tour_type == 'fixed' ) {
@@ -1497,9 +1498,9 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 			$due = $item->get_meta( 'Due', true );
 			$tour_extra = $item->get_meta( 'Tour Extra', true );
 			$package = $item->get_meta( 'Package', true );
-			$adult = $item->get_meta( esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true ) ), true );
-			$child = $item->get_meta( esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true ) ), true );
-			$infants = $item->get_meta( esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true ) ), true );
+			$adult = $item->get_meta( esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $post_id ) ), true );
+			$child = $item->get_meta( esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, false, $post_id ) ), true );
+			$infants = $item->get_meta( esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $post_id ) ), true );
 			$visitor_details = $item->get_meta( '_visitor_details', true );
 			
 			if ( $tour_date ) {
@@ -1733,9 +1734,9 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 			$price = $item->get_subtotal();
 			$due = $item->get_meta( 'Due', true );
 			$tour_extra = $item->get_meta( 'Tour Extra', true );
-			$adult = $item->get_meta( esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true ) ), true );
-			$child = $item->get_meta( esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true ) ), true );
-			$infants = $item->get_meta( esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true ) ), true );
+			$adult = $item->get_meta( esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $post_id ) ), true );
+			$child = $item->get_meta( esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, false, $post_id ) ), true );
+			$infants = $item->get_meta( esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $post_id ) ), true );
 			$visitor_details = $item->get_meta( '_visitor_details', true );
 
 			if ( $tour_date ) {

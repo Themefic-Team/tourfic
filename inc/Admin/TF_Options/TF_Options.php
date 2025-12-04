@@ -1322,7 +1322,7 @@ class TF_Options {
 
 		if ( ! empty( $tour_availability_data ) && is_array( $tour_availability_data ) ) {
 			$tour_availability_data = array_values( $tour_availability_data );
-			$tour_availability_data = array_map( function ( $item ) use ($group_package_option, $group_package_pricing) {	
+			$tour_availability_data = array_map( function ( $item ) use ($group_package_option, $group_package_pricing, $tour_id) {	
 
 				$time_string = '';
 				if($item['pricing_type'] == 'group' || $item['pricing_type'] == 'person'){
@@ -1337,9 +1337,9 @@ class TF_Options {
 				if ( $item['pricing_type'] == 'group' && (empty($group_package_option) || empty($group_package_pricing)) ) {
 					$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) . '<br>'. $time_string;
 				} elseif ( $item['pricing_type'] == 'person' ) {
-					$item['title'] = esc_html( apply_filters( 'tf_tour_adult_label', __( 'Adult', 'tourfic' ) ) ) . ': ' . wc_price( $item['adult_price'] ) . '<br>'
-						. esc_html( apply_filters( 'tf_tour_child_label', __( 'Child', 'tourfic' ) ) ) . ': ' . wc_price( $item['child_price'] ) . '<br>'
-						. esc_html( apply_filters( 'tf_tour_infant_label', __( 'Infant', 'tourfic' ) ) ) . ': ' . wc_price( $item['infant_price'] ) . '<br>'
+					$item['title'] = esc_html( apply_filters( 'tf_tour_adult_label', __( 'Adult', 'tourfic' ), true, false, $tour_id ) ) . ': ' . wc_price( $item['adult_price'] ) . '<br>'
+						. esc_html( apply_filters( 'tf_tour_child_label', __( 'Child', 'tourfic' ), true, false, $tour_id ) ) . ': ' . wc_price( $item['child_price'] ) . '<br>'
+						. esc_html( apply_filters( 'tf_tour_infant_label', __( 'Infant', 'tourfic' ), true, false, $tour_id ) ) . ': ' . wc_price( $item['infant_price'] ) . '<br>'
 						. $time_string;
 					$item = apply_filters('tf_tour_availability_item_before_display', $item, '');
 				} elseif ( $item['pricing_type'] == 'package' ) {
@@ -1357,9 +1357,9 @@ class TF_Options {
 								$item['title'] .=  !empty($package_active_time) ? 'Time: '.$package_active_time. '<br><br>' : '';
 							} else if($item['tf_option_pricing_type_'.$i] == 'person'){
 								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
-								$item['title'] .= esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) .': ' ) . wc_price($item['tf_option_adult_price_'.$i]). '<br>';
-								$item['title'] .= esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) .': ' ) . wc_price($item['tf_option_child_price_'.$i]). '<br>';
-								$item['title'] .= esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) .': ' ) . wc_price($item['tf_option_infant_price_'.$i]). '<br>';
+								$item['title'] .= esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $tour_id ) .': ' ) . wc_price($item['tf_option_adult_price_'.$i]). '<br>';
+								$item['title'] .= esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, false, $tour_id ) .': ' ) . wc_price($item['tf_option_child_price_'.$i]). '<br>';
+								$item['title'] .= esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $tour_id ) .': ' ) . wc_price($item['tf_option_infant_price_'.$i]). '<br>';
 								$item['title'] .=  !empty($package_active_time) ? 'Time: '.$package_active_time. '<br><br>' : '';
                             }
 							$item = apply_filters('tf_tour_availability_item_before_display', $item, $i);
@@ -1437,7 +1437,7 @@ class TF_Options {
 								<div id="adult_tabs" class="tf-tab-switch-box"  style="display: <?php echo $item['type'] == 'person' && !empty($package_pricing[$key]['adult_tabs'][0]['disable_adult_price']) ? 'block' : 'none' ?>;">
 									<div class="tf-tab-field-header">
 										<div class="tf-field-collapas">
-											<div class="field-label"><?php echo esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ); ?></div>
+											<div class="field-label"><?php echo esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $tour_id ) ); ?></div>
 											<i class="fa fa-angle-up" aria-hidden="true"></i>
 										</div>
 									</div>
@@ -1445,7 +1445,7 @@ class TF_Options {
 									<div class="tf-tab-field-content">
 										<div class="tf-field tf-field-number" style="width: 100%;">
 											<label for="tf_tours_opt[adult_tabs][adult_price]" class="tf-field-label">
-												<?php echo sprintf( esc_html__( 'Price for %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ) ) ) ); ?>
+												<?php echo sprintf( esc_html__( 'Price for %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $tour_id ) ) ); ?>
 												<span class="tf-desc-tooltip">
 													<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 														<g clip-path="url(#clip0_1017_4247)">
@@ -1473,7 +1473,7 @@ class TF_Options {
 								<div id="child_tabs" class="tf-tab-switch-box"  style="display: <?php echo $item['type'] == 'person' && !empty($package_pricing[$key]['child_tabs'][0]['disable_child_price']) ? 'block' : 'none' ?>;">
 									<div class="tf-tab-field-header">
 										<div class="tf-field-collapas">
-											<div class="field-label"><?php echo esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ); ?></div>
+											<div class="field-label"><?php echo esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, false, $tour_id ) ); ?></div>
 											<i class="fa fa-angle-up" aria-hidden="true"></i>
 										</div>
 									</div>
@@ -1481,7 +1481,7 @@ class TF_Options {
 									<div class="tf-tab-field-content">
 										<div class="tf-field tf-field-number" style="width: 100%;">
 											<label for="" class="tf-field-label">
-												<?php echo sprintf( esc_html__( 'Price for %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ) ) ) ); ?>
+												<?php echo sprintf( esc_html__( 'Price for %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, false, $tour_id ) ) ); ?>
 												<span class="tf-desc-tooltip">
 													<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 														<g clip-path="url(#clip0_1017_4247)">
@@ -1509,7 +1509,7 @@ class TF_Options {
 								<div id="infant_tabs" class="tf-tab-switch-box"  style="display: <?php echo $item['type'] == 'person' && !empty($package_pricing[$key]['infant_tabs'][0]['disable_infant_price']) ? 'block' : 'none' ?>;">
 									<div class="tf-tab-field-header">
 										<div class="tf-field-collapas">
-											<div class="field-label"><?php echo esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ); ?></div>
+											<div class="field-label"><?php echo esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $tour_id ) ); ?></div>
 											<i class="fa fa-angle-up" aria-hidden="true"></i>
 										</div>
 									</div>
@@ -1517,7 +1517,7 @@ class TF_Options {
 									<div class="tf-tab-field-content">
 										<div class="tf-field tf-field-number" style="width: 100%;">
 											<label for="" class="tf-field-label">
-											<?php echo sprintf( esc_html__( 'Price for %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ) ) ) ); ?>
+											<?php echo sprintf( esc_html__( 'Price for %s', 'tourfic' ), esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $tour_id ) ) ); ?>
 												<span class="tf-desc-tooltip">
 													<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 														<g clip-path="url(#clip0_1017_4247)">
