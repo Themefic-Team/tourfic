@@ -29,10 +29,12 @@ class Base {
 		add_action('admin_init', array($this, 'tf_order_table_create'));
 		add_action( 'admin_init', array($this, 'tf_admin_table_alter_order_data') );
 
-		if ( Helper::tf_is_woo_active() ) {
+		$ecommerce_system = ! empty( Helper::tfopt( "ecommerce_system" ) ) ? Helper::tfopt( "ecommerce_system" ) : "woocommerce";
+
+		if ( $ecommerce_system === 'woocommerce' && Helper::tf_is_woo_active() ) {
 			\Tourfic\Classes\Woocommerce\Woocommerce::instance();
-		} elseif(Helper::tf_is_fluentcart_active()){
-			//\Tourfic\Classes\Fluentcart\Fluentcart::get_instance();
+		} elseif($ecommerce_system === 'fluentcart' && Helper::tf_is_fluentcart_active()){
+			\Tourfic\Classes\Fluentcart\Fluentcart::instance();
 		}
 
 		if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {

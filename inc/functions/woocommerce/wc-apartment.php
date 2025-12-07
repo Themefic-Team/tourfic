@@ -3,6 +3,7 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
 use Tourfic\Classes\Helper;
+use Tourfic\Classes\Fluentcart\Fluentcart;
 
 /**
  * Apartment booking ajax function
@@ -151,12 +152,20 @@ function tf_apartment_booking_callback() {
 			$response['redirect_to'] = $tf_booking_url;
 		} else {
 
+			$ecommerce_system = ! empty( Helper::tfopt( "ecommerce_system" ) ) ? Helper::tfopt( "ecommerce_system" ) : "woocommerce";
+
 			# Add product to cart with the custom cart item data
-			WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_apartment_data );
+			if ( $ecommerce_system === 'woocommerce' && Helper::tf_is_woo_active() ) {
+				WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_apartment_data );
+				$checkout_url = $instantio_is_active == 1 ? ($quick_checkout == 0 ? wc_get_checkout_url() : '') : wc_get_checkout_url();
+			
+			} elseif($ecommerce_system === 'fluentcart' && Helper::tf_is_fluentcart_active()){
+				$checkout_url = Fluentcart::tf_add_to_fluentcart($post_id, floatval( $total_price ) * 100, $tf_apartment_data);
+			}
 
 			$response['product_id']  = $product_id;
 			$response['add_to_cart'] = 'true';
-			$response['redirect_to'] = $instantio_is_active == 1 ? ($quick_checkout == 0 ? wc_get_checkout_url() : '') : wc_get_checkout_url();;
+			$response['redirect_to'] = $checkout_url;
 		}
 	} else {
 		$response['status'] = 'error';

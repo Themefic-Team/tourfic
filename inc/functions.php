@@ -4,6 +4,9 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
 use Tourfic\Classes\Room\Room;
+use FluentCart\App\Models\Cart;
+use FluentCart\Api\StoreSettings;
+use FluentCart\Api\CurrencySettings;
 
 /**
  * Show admin warning if a required file is missing
@@ -88,7 +91,6 @@ if ( ! function_exists( 'tf_format_sale_price' ) ) {
         return apply_filters( 'tf_format_sale_price', $price_html, $regular_price, $sale_price, $args );
     }
 }
-
 
 /*
  * Temporary functions
