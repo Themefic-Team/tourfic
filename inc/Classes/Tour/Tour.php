@@ -1182,7 +1182,7 @@ class Tour {
 											<?php endif; ?>
 											<div class="infant-text"><?php echo ( ! empty( $infant ) ? esc_attr( $infant ) : '0' ) . ' ' . apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, true, $post_id ); ?></div>
 										<?php } ?>
-										<?php do_action('tf_tour_single_bottom_booking_bar_after_person_text'); ?>
+										<?php do_action('tf_tour_single_bottom_booking_bar_after_person_text', $post_id); ?>
                                     </div>
                                     <div class="tf_acrselection-wrap" style="display: none;">
                                         <div class="tf_acrselection-inner">
@@ -2170,7 +2170,7 @@ class Tour {
 														</div>
 													<?php } ?>
 
-													<?php do_action( 'tf_tour_package_persons', $package_pricing, $key, $pack ); ?>
+													<?php do_action( 'tf_tour_package_persons', $package_pricing, $key, $pack, $post_id ); ?>
 												</div>
 											</div>
 										</div>
