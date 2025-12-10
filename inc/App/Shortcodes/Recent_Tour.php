@@ -28,6 +28,11 @@ class Recent_Tour extends \Tourfic\Core\Shortcodes {
 			)
 		);
 
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		if (in_array('tour', $tf_disable_services)){
+			return;
+		}
+
 		$args = array(
 			'post_type'      => 'tf_tours',
 			'post_status'    => 'publish',

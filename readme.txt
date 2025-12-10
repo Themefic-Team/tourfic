@@ -2,8 +2,8 @@
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi, hasanet
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
-Tested up to: 6.8
-Stable tag: 2.18.3
+Tested up to: 6.9
+Stable tag: 2.18.8
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -14,13 +14,14 @@ Hotel, Travel, Car Rental & Tour Booking WordPress plugin. Build a website like 
 
 ## HOTEL BOOKING, TRAVEL BOOKING, CAR RENTAL, TOUR BOOKING & VACATION RENTAL PLUGIN FOR WORDPRESS – TOURFIC
 
-👉 Our Official Website: [Click Here](https://themefic.com/tourfic/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=website)
+👉 Our Official Website: [Click Here](https://tourfic.com/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=website)
 👉 Live Demo Link: [Click Here](https://tourfic-demo.themefic.com/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=demo_link)
 👉 Need a WordPress Theme? Use [Travelfic](https://wordpress.org/themes/travelfic/)
 👉 Video Guide on [Youtube](https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N)
 👉 Our [Documentation](https://themefic.com/docs/tourfic/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=plugin_docs)
 👉 Get Support: [Click Here](https://portal.themefic.com/support/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=plugin_support)
 👉 Join Our [Facebook Group](https://www.facebook.com/groups/tourfic)
+👉 Join Our [Community](https://community.themefic.com/feed/)
 
 Tourfic stands as the choice for building an Advanced Travel, Apartment Booking, Car Rental, and Hotel booking website on WordPress. Designed to integrate effortlessly with WooCommerce, this plugin offers a user-intuitive interface and sophisticated pricing function, enabling effective management of your online booking and payment systems.
 
@@ -80,11 +81,11 @@ Additionally, numerous vital features contribute to making Tourfic the ideal Hot
 * Advanced / Partial Payment (Pro)
 * Sell Tours Extras (Pro)
 * Tours booking restrictions (Pro)
-* Advanced Itinerary Builder with option to dimply in google map (Pro)
-* Dynamic Location Search based on OpenStreetMap on Option Panel (Coming Soon)
-* Dynamic Location Search based on Google Maps on Option Panel (Coming Soon)
+* Advanced Itinerary Builder with option to display in Google Maps (Pro)
+* Dynamic Location Search based on OpenStreetMap on the Option Panel (Coming Soon)
+* Dynamic Location Search based on Google Maps on the Option Panel (Coming Soon)
 
-Plus, a range of key features which makes Tourfic as the Excellent Travel Booking WordPress plugin.
+Plus, a range of key features that make Tourfic an Excellent Travel Booking WordPress plugin.
 
 = 🎉  CAR RENTAL / RENT A CAR SYSTEM =
 * Unlimited Cars with Photo Gallery
@@ -105,7 +106,7 @@ Plus, a range of key features which makes Tourfic as the Excellent Travel Bookin
 * Advanced Search Options
 * Mobile-Friendly Responsive Design
 
-Moreover, it offers a comprehensive suite of key features that make it the excellent car rental WordPress plugin. You can also use this function to build website for Cab booking, Bike rental and Bus booking.
+Moreover, it offers a comprehensive suite of key features that make it an excellent car rental WordPress plugin. You can also use this function to build a website for Cab booking, Bike rental, and Bus booking.
 
 = 🎉  APARTMENT BOOKING & VACATION RENTAL =
 * Add Unlimited Apartment
@@ -211,7 +212,7 @@ In short, Tourfic is a WordPress tour booking plugin designed for hotel booking,
 
 We believe the free version meets the needs of most businesses. However, we have a **Pro version** with more advanced features.
 
-> Upscale your Travel Business with Advanced Features of [Tourfic Pro](https://themefic.com/tourfic/pricing).
+> Upscale your Travel Business with Advanced Features of [Tourfic Pro](https://tourfic.com/pricing/).
 
 ### How to create a Hotel Booking Website with WooCommerce & Tourfic:
 
@@ -331,7 +332,7 @@ Tourfic is a WordPress plugin for Hotel, Travel, and Vacation Rental bookings. I
 
 = Is the Free version fully free? =
 
-Yes, Tourfic is 100% free on WordPress.org. A Pro version with advanced features is also available on our [website](https://themefic.com/tourfic/pricing).
+Yes, Tourfic is 100% free on WordPress.org. A Pro version with advanced features is also available on our [website](https://tourfic.com/pricing/).
 
 = Can I build a Hotel Booking system with Tourfic? =
 
@@ -404,13 +405,22 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.18.3 – October 27, 2025 =
+= 2.18.8 – December 04, 2025 =
 
-- Fixed: Import/export functionality issue.
-- Fixed: Tourfic resolved the availability issue.
-- Improved: Reset pop-up design for better user experience.
+- Updated: Readme.txt file info.
 
-**Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
+= 2.18.7 – December 04, 2025 =
+
+- Compatibility: Fully compatible with WordPress v6.9.
+
+= 2.18.6 – November 19, 2025 =
+
+- Fixed: Warning notice issue has been resolved.
+- Fixed: Apartment availability issue has been resolved.
+- Fixed: Discount calculation issue has been resolved.
+- Updated: Person selection option in package pricing.
+
+**Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 
 = 1.0.0 - 23/03/2021 =
 

@@ -40,9 +40,10 @@ $meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 
 $car_extra = !empty($meta['extras']) ? $meta['extras'] : '';
 // Extra key from POST
-$car_extra_pass = isset( $_POST['extra_key'] ) ? sanitize_text_field( wp_unslash( $_POST['extra_key'] ) ) : '';
+$car_extra_pass = !empty( $_POST['extra_key'] ) ? $_POST['extra_key'] : '';
+
 // Quantity from POST
-$extra_qty = isset( $_POST['qty'] ) ? absint( wp_unslash( $_POST['qty'] ) ) : 0;
+$extra_qty = !empty( $_POST['qty'] ) ? $_POST['qty'] : 0;
 $pickup_date = !empty($_POST['pickup_date']) ? sanitize_text_field($_POST['pickup_date']) : '';
 $dropoff_date = !empty($_POST['dropoff_date']) ? sanitize_text_field($_POST['dropoff_date']) : '';
 $pickup_time = !empty($_POST['pickup_time']) ? sanitize_text_field($_POST['pickup_time']) : '';

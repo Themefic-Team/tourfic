@@ -5,6 +5,7 @@ namespace Tourfic\App\Shortcodes;
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\App\TF_Review;
+use Tourfic\Classes\Helper;
 
 class Reviews extends \Tourfic\Core\Shortcodes {
 
@@ -33,6 +34,23 @@ class Reviews extends \Tourfic\Core\Shortcodes {
 		$type == "tour" ? $type = "tf_tours" : $type == '';
 		$type == "apartment" ? $type = "tf_apartment" : $type == '';
 		$type == "car" ? $type = "tf_carrental" : $type == '';
+
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+
+		$service_type = '';
+		if( $type == "tf_hotel" || $type == "hotel" ){
+			$service_type = "hotel";
+		}elseif( $type == "tf_tours" || $type == "tour" ){
+			$service_type = "tour";
+		}elseif( $type == "tf_apartment" || $type == "apartment" ){
+			$service_type = "apartment";
+		}elseif( $type == "tf_carrental" || $type == "car" ){
+			$service_type = "carrentals";
+		}		
+		if (in_array($service_type, $tf_disable_services)){
+			return;
+		}
+
 		ob_start();
 		?>
 		<div class="tf-single-review tf-slick-slider tf-reviews-slider">

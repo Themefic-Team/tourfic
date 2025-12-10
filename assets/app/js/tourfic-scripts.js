@@ -5752,13 +5752,12 @@ function convertTo24HourFormat(timeStr) {
                     $this.unblock();
                 },
                 success: function (data) {
+                    $('#tour_room_details_loader').hide();
                     $this.unblock();
 
                     var response = JSON.parse(data);
 
                     if (response.status == 'error') {
-
-                        $('#tour_room_details_loader').hide();
                         if (response.errors) {
                             response.errors.forEach(function (text) {
                                 notyf.error(text);
@@ -5767,7 +5766,6 @@ function convertTo24HourFormat(timeStr) {
 
                         return false;
                     } else {
-                        $('#tour_room_details_loader').hide();
                         if ($('.tf-traveller-info-box').length > 0) {
                             if ($(".tf-traveller-info-box").html().trim() == "") {
                                 $('.tf-traveller-info-box').html(response.traveller_info);
@@ -5807,6 +5805,7 @@ function convertTo24HourFormat(timeStr) {
                 },
                 error: function (data) {
                     console.log(data);
+                    $('#tour_room_details_loader').hide();
                 },
 
             });
@@ -6649,7 +6648,6 @@ function convertTo24HourFormat(timeStr) {
         $('.tf-available-room-content-right .tf_btn').on('click', function(e){
             var target = $(this).attr('href');
             if (target.startsWith('#')) {
-                console.log('clicked');
                 e.preventDefault();
 
                 var offset = 200;

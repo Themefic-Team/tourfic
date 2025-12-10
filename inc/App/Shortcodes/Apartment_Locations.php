@@ -1,6 +1,7 @@
 <?php
 
 namespace Tourfic\App\Shortcodes;
+use \Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -25,6 +26,11 @@ class Apartment_Locations extends \Tourfic\Core\Shortcodes {
 				$atts
 			)
 		);
+
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		if (in_array('apartment', $tf_disable_services)){
+			return;
+		}
 
 		$locations = get_terms( array(
 			'taxonomy'     => 'apartment_location',

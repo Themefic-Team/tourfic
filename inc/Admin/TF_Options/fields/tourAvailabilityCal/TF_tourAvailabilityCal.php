@@ -20,8 +20,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
 			$meta         = get_post_meta( $post->ID, 'tf_tours_opt', true );
 			$pricing_type = ! empty( $meta['pricing'] ) ? $meta['pricing'] : 'person';
             $tour_package_options = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : [];
-            $group_package_option = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
-            $group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+
             $tour_avail_type = ! empty( $meta['type'] ) ? $meta['type'] : 'continuous';
 			if ( Helper::tf_is_woo_active() ) {
 				?>
@@ -317,6 +316,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         </div>
                                     </div>
 
+                                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) { ?>
                                     <div class="tf-field tf-field-repeater" style="width:100%; display: <?php echo esc_attr( $pricing_type == 'person' || $pricing_type == 'group' ? 'block' : 'none' ) ?>;">
                                         <div class="tf-fieldset">
                                             <div id="tf-repeater-1" class="tf-repeater allowed_time" data-max-index="0">
@@ -369,6 +369,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                             </div>
                                         </div>
                                     </div>
+                                    <?php } ?>
 
                                     <div class="tf-field-select" style="width: 100%">
                                         <label class="tf-field-label"><?php echo esc_html__( 'Booking status', 'tourfic' ); ?></label>

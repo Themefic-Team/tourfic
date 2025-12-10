@@ -1304,7 +1304,7 @@ class Template_Builder {
         }
     }
 
-    public function modify_elementor_edit_url($url, $document) {
+    public function modify_elementor_edit_url_old($url, $document) {
         $post = $document->get_post();
 
         if ($post->post_type === 'tf_template_builder') {
@@ -1348,58 +1348,86 @@ class Template_Builder {
         return $url;
     }
 
-    public function setup_editor_post_data() {
-        // ARCHIVE PREVIEW
-        if (isset($_GET['tf_archive_service'])) {
-            $post_type = sanitize_key($_GET['tf_archive_service']);
+    public function modify_elementor_edit_url($url, $document) {
+        $post = $document->get_post();
 
-            global $wp_query;
+        // Ensure we are editing a Template Builder post
+        if ($post->post_type === 'tf_template_builder') {
+            $service = get_post_meta($post->ID, 'tf_template_service', true);
+            $template_type = get_post_meta($post->ID, 'tf_template_type', true);
+            $taxonomy_type = get_post_meta($post->ID, 'tf_taxonomy_type', true);
+            $taxonomy_term = get_post_meta($post->ID, 'tf_taxonomy_term', true);
 
-            // Mock an archive query
-            $wp_query = new \WP_Query([
-                'post_type' => $post_type,
-                'posts_per_page' => 10,
-                'orderby' => 'rand',
-            ]);
+            if ($template_type === 'archive' && $service) {
+                // Add the service param to the URL for correct context
+                return add_query_arg('tf_archive_service', $service, $url);
+            }
 
-            // Ensure Elementor knows it's an archive
-            add_filter('elementor/utils/is_archive_template', '__return_true');
-            add_filter('elementor_pro/utils/is_archive_template', '__return_true');
-            add_filter('elementor_pro/utils/get_preview_query_vars', function($vars) use ($post_type) {
-                $vars['post_type'] = $post_type;
-                return $vars;
-            });
+            if ($template_type === 'single' && !empty($service)) {
+                // Fetch a random post of the selected service type
+                $args = [
+                    'post_type' => $service,
+                    'posts_per_page' => 1,
+                    'orderby' => 'rand'
+                ];
+                if ($taxonomy_type && $taxonomy_type !== 'all') {
+                    if ($taxonomy_term !== 'all') {
+                        $args['tax_query'] = [
+                            [
+                                'taxonomy' => $taxonomy_type,
+                                'field' => 'slug',
+                                'terms' => $taxonomy_term,
+                            ]
+                        ];
+                    }
+                }
+                $sample_post = get_posts($args);
+
+                if (!empty($sample_post)) {
+                    // Add the template post ID to the URL for Elementor to edit
+                    return add_query_arg('tf_preview_post_id', $sample_post[0]->ID, $url);
+                }
+            }
         }
 
-        // SINGLE PREVIEW
-        if(isset($_GET['tf_preview_post_id'])){
+        return $url;
+    }
+
+
+    public function setup_editor_post_data() {
+        // Check if a preview post ID is provided (service post ID)
+        if (isset($_GET['tf_preview_post_id'])) {
             $post_id = intval($_GET['tf_preview_post_id']);
             $preview_post = get_post($post_id);
+
             if ($preview_post) {
                 global $post, $wp_query;
-            
-                // Store original post
+
+                // Save the original post data
                 $original_post = $post;
-                
-                // Set up the preview post data
+
+                // Set up the preview post as the current post
                 $post = $preview_post;
                 setup_postdata($preview_post);
-                
-                // Filter to ensure Elementor uses our preview post for dynamic content
+
+                // Ensure Elementor uses this post data in the editor
                 add_filter('elementor/frontend/builder_content_data', function($data) use ($preview_post) {
                     $data['post_id'] = $preview_post->ID;
                     $data['post'] = $preview_post;
                     return $data;
                 });
-                
-                // Restore original post when editor is done
+
+                // Hook into Elementor's 'after_enqueue_scripts' to reset the context after editing
                 add_action('elementor/editor/after_enqueue_scripts', function() use ($original_post) {
+                    // Reset the post data back to the original context after Elementor has loaded
                     wp_reset_postdata();
                     global $post;
-                    $post = $original_post;
-                    setup_postdata($post);
+                    $post = $original_post; // Restore the original post object
+                    setup_postdata($post);   // Set the correct post data for the context
                 });
             }
         }
     }
+
+
 }

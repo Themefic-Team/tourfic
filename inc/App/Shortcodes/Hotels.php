@@ -29,6 +29,11 @@ class Hotels extends \Tourfic\Core\Shortcodes {
 			)
 		);
 
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		if (in_array('hotel', $tf_disable_services)){
+			return;
+		}
+
 		$args = array(
 			'post_type'      => 'tf_hotel',
 			'post_status'    => 'publish',
