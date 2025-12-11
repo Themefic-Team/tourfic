@@ -409,6 +409,8 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 - Fixed: Email template shortcode issues.
 - Fixed: Search button text translation issue.
+- Fixed: Frontend analytics chart issue.
+- Fixed: Dashboard booking chart month filter issue.
 
 = 2.18.8 – December 04, 2025 =
 
