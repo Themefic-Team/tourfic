@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.18.8
+Stable tag: 2.18.9
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -405,6 +405,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.18.9 – December 11, 2025 =
+
+- Fixed: Email template shortcode issues.
+- Fixed: Search button text translation issue.
+
 = 2.18.8 – December 04, 2025 =
 
 - Updated: Readme.txt file info.
@@ -412,13 +417,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 = 2.18.7 – December 04, 2025 =
 
 - Compatibility: Fully compatible with WordPress v6.9.
-
-= 2.18.6 – November 19, 2025 =
-
-- Fixed: Warning notice issue has been resolved.
-- Fixed: Apartment availability issue has been resolved.
-- Fixed: Discount calculation issue has been resolved.
-- Updated: Person selection option in package pricing.
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 
