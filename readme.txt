@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.18.9
+Stable tag: 2.18.10
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -13,6 +13,8 @@ Hotel, Travel, Car Rental & Tour Booking WordPress plugin. Build a website like 
 == Description ==
 
 ## HOTEL BOOKING, TRAVEL BOOKING, CAR RENTAL, TOUR BOOKING & VACATION RENTAL PLUGIN FOR WORDPRESS – TOURFIC
+
+Unlock all features with [Tourfic Pro](https://tourfic.com/pricing/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=pro_link)
 
 👉 Our Official Website: [Click Here](https://tourfic.com/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=website)
 👉 Live Demo Link: [Click Here](https://tourfic-demo.themefic.com/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=demo_link)
@@ -176,28 +178,32 @@ Tourfic offers many important features and works smoothly with WooCommerce to ha
 * External Booking for Apartment
 * External Booking for Car Rental
 
-= 🎉  MULTI VENDOR FUNCTIONS (PRO) =
-* Vendors can add unlimited hotels, tours, Cars and apartments with all the fields (Pro)
-* Vendors have dedicated order details pages (Pro)
-* Dedicated login and registration system for vendors (Pro)
-* Enable/disable specific vendors (Pro)
-* Email verification for vendors (Pro)
-* Frontend Dashboard for Vendors (Pro)
+= 🎉 MULTI VENDOR FUNCTIONS (PRO) =
+* Vendors can add unlimited hotels, tours, Cars and apartments with all the fields
+* Vendors have dedicated order details pages
+* Dedicated login and registration system for vendors
+* Enable/disable specific vendors
+* Email verification for vendors
+* Frontend Dashboard for Vendors
 
 In short, Tourfic includes all the features for a multi-vendor hotel, travel, Apartment and car rental booking system in WordPress.
 
-= 🎉  API BASED AFFILIATE INTEGRATION =
-* Booking.com Affiliate Program (Pro)
-* TravelPayouts Affiliate Program (Pro)
+= 🎉 API BASED AFFILIATE INTEGRATION (PRO) =
+* Booking.com Affiliate Program
+* TravelPayouts Affiliate Program
 
-= 🎉  PAGE BUILDER SUPPORT =
+= 🎉 PAGE BUILDER SUPPORT (PRO) =
 * Added: Elementor support for Tour Archive pages.
 * Added: Elementor support for Hotel Archive pages.
-* Added: Elementor support for Apartments Archive pages.
-* Added: Elementor support for Cars Archive pages.
+* Added: Elementor support for Apartment Archive pages.
+* Added: Elementor support for Car Archive pages.
+* Added: Elementor support for single Tour pages.
+* Added: Elementor support for single Hotel pages.
+* Added: Elementor support for single Apartment pages.
+* Added: Elementor support for single Car pages.
 
 = 🎉  MISCELLANEOUS =
-* Email piping for customer enquery
+* Email piping for customer inquiries
 * Compatible with Woocommerce Tax settings
 * Complete Style Panel
 * Easy to use Option Panel
@@ -364,7 +370,7 @@ Yes, Tourfic supports multi-vendor hotel booking websites.
 
 = Can I create a Travel or Hotel Marketplace? =
 
-Yes, with Tourfic Pro you can build hotel, tour, and car rental marketplaces.
+Yes, with Tourfic Pro, you can build hotel, tour, and car rental marketplaces.
 
 = Can Tourfic be used as a Bus Booking plugin? =
 
@@ -402,8 +408,17 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 20. Car Rental Service
 21. Sync Booking with Google Calendar(Pro)
 22. Map Template(Pro)
+23. Elementor Page Builder support.
 
 == Changelog ==
+
+= 2.18.10 – December 15, 2025 =
+
+- Added: Elementor Page Builder support.
+- Added: Elementor Theme Builder support.
+- Added: Elementor widgets for Services.
+- Added: Edit single Service pages with Elementor.
+- Added: Elementor support for single Tour, Hotel, Car, and Apartment pages.
 
 = 2.18.9 – December 11, 2025 =
 
@@ -411,14 +426,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Search button text translation issue.
 - Fixed: Frontend analytics chart issue.
 - Fixed: Dashboard booking chart month filter issue.
-
-= 2.18.8 – December 04, 2025 =
-
-- Updated: Readme.txt file info.
-
-= 2.18.7 – December 04, 2025 =
-
-- Compatibility: Fully compatible with WordPress v6.9.
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 
