@@ -1,0 +1,67 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-hotel-location-map{
+    #hotel-location{
+        height: 258px;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .tf-hotel-location-preview{
+        position: relative;
+        margin-bottom: 0px;
+        border: 1px solid $color-border-lite;
+        line-height: 0;
+        @media #{$max768}{
+            margin-bottom: 30px;
+        }
+        @media #{$max575}{
+            margin-bottom: 0;
+        }
+        iframe{
+            height: 260px;
+        }
+        a.map-pre{
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            svg,
+            i{
+                height: 80px;
+                width: 80px;
+                text-align: center;
+                line-height: 4;
+                color: $color-white; 
+                background-color: $color-primary;
+                border-radius: 50%;
+                padding: 0;
+                font-size: 1.25rem;
+            }
+
+            svg{
+                padding: 24px;
+
+                path{
+                    fill: $color-white; 
+                }
+            }
+        }
+    }
+}
+
+.tf-car-location{
+    h3{
+        color: $color-heading;
+        font-size: 1.313rem;
+        font-weight: 400;
+        margin-bottom: 16px;
+        margin-top: 0px;
+    }
+}

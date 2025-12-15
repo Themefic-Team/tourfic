@@ -135,17 +135,6 @@ class Hotel_Type_Filter extends \WP_Widget {
             <label for="<?php echo esc_attr($this->get_field_id( 'hide_empty' )); ?>"><?php esc_html_e( 'Hide Empty Categories:', 'tourfic' )?></label>
             <input id="<?php echo esc_attr($this->get_field_id( 'hide_empty' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'hide_empty' )); ?>" type="checkbox" <?php checked( 'on', $hide_empty );?>>
         </p>
-        <style>
-            .tf-widget-field label {
-                font-weight: 600;
-            }
-        </style>
-        <script>
-            jQuery('#<?php echo esc_attr($this->get_field_id( 'terms' )); ?>').select2({
-                width: '100%'
-            });
-            jQuery(document).trigger('tf_select2');
-        </script>
     <?php
     }
 

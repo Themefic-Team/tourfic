@@ -738,7 +738,7 @@ trait Action_Helper {
 			// Handle guest users
 			wp_set_current_user(0);
 		}
-	
+
 		/**
 		 * Get form data
 		 */

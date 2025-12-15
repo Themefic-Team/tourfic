@@ -1,0 +1,21 @@
+.tf-title-meta{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    svg{
+        margin-right: 5px;
+        height: 16px;
+
+        path{
+            fill: var(--tf-primary);
+        }
+    }
+
+    .more-hotel {
+        color: var(--tf-primary);
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+}
