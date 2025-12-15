@@ -40,6 +40,7 @@ class Apartment {
 		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 			return;
 		}
+		$design = isset( $_POST['design'] ) ? sanitize_text_field( wp_unslash( $_POST['design'] ) ) : '';
 		$meta = get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'tf_apartment_opt', true );
 		// Single Template Style
 		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
@@ -50,7 +51,7 @@ class Apartment {
 
 		$tf_apartment_selected_check = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
 
-		$tf_apartment_selected_template = $tf_apartment_selected_check;
+		$tf_apartment_selected_template = !empty($design) ? $design : $tf_apartment_selected_check;
 		if('default'==$tf_apartment_selected_template){
 		?>
         <div class="tf-hotel-quick-view" style="display: flex">
@@ -1218,7 +1219,7 @@ class Apartment {
 		}
 	}
 
-	public static function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
+	public static function tf_apartment_single_booking_form( $comments, $disable_review_sec, $design = '' ) {
 
 		$meta                = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
 		
@@ -1320,7 +1321,7 @@ class Apartment {
 
 		$tf_apartment_selected_check = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
 
-		$tf_apartment_selected_template = $tf_apartment_selected_check;
+		$tf_apartment_selected_template = !empty($design) ? $design : $tf_apartment_selected_check;
 
 		if($tf_apartment_selected_template=="design-1"){
 		?>

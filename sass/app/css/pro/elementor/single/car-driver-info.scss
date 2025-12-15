@@ -1,0 +1,115 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-driver-details{
+    border-radius: 16px;
+    background: $color-gray-light;
+    padding: 24px;
+    .tf-driver-details-header{
+        h3{
+            color: $color-heading;
+            font-size: 1.313rem;
+            font-weight: 400;
+            margin: 0;
+        }
+        span{
+            color: $color-primary;
+            font-size: 1rem;
+            font-weight: 400;
+            i{
+                color: $color-primary;
+            }
+        }
+    }
+    .tf-driver-photo{
+        img{
+            height: 56px;
+            width: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .tf-driver-info{
+            width: calc(100% - 72px);
+            h4{
+                color: $color-heading;
+                font-size: 1rem;
+                font-weight: 700;
+                margin: 0;
+            }
+            p{
+                color: $color-text;
+                font-size: 1rem;
+                font-weight: 400;
+                margin: 0;
+            }
+            
+            .tf-driver-contact-info{
+                border-top: 1px solid $color-border-lite;
+                margin-top: 16px;
+                padding-top: 16px;
+                ul{
+                    padding: 0;
+                    margin: 0;
+                    list-style: none;
+                    li{
+                        a{
+                            position: relative;
+                            text-decoration: none;
+                            i{
+                                font-size: 1.25rem;
+                            }
+                            color: $color-primary;
+                            font-size: 1rem;
+                            font-weight: 400;
+                            display: inline-block;
+                            &:hover{
+                                .tf-tooltip-info{
+                                    visibility: visible;
+                                    opacity: 1;
+                                }
+                            }
+                            path{
+                                stroke: $color-primary;
+                            }
+                            .tf-tooltip-info{
+                                visibility: hidden;
+                                opacity: 0;
+                                position: absolute;
+                                border-radius: 8px;
+                                background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #27333F);
+                                padding: 8px 12px;
+                                width: 218px;
+                                z-index: 0;
+                                bottom: 30px;
+                                left: 50%;
+                                margin-left: -109px;
+                                transition: .3s all ease;
+                                &::after{
+                                    position: absolute;
+                                    content: "";
+                                    height: 16px;
+                                    width: 16px;
+                                    background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #27333F);
+                                    border-radius: 5px;
+                                    transform: rotate(45deg);
+                                    left: 50%;
+                                    margin-left: -8px;
+                                    bottom: -6px;
+                                    z-index: -1;
+                                }
+                                p{
+                                    color: $color-white;
+                                    text-align: center;
+                                    font-size: 0.75rem;
+                                    font-weight: 400;
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+}

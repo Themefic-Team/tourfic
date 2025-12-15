@@ -1,0 +1,86 @@
+// Action buttons
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-single-action-btns {
+    a {
+        @include flexbox();
+        @include align-items(center);
+        @include justify-content(center);
+        gap: 8px;
+        text-decoration: none;
+        color: $color-heading;
+        padding: 5px 12px;
+        border-radius: 5px;
+        transition: all .4s ease;
+        min-height: 35px;
+        background: $color-white;
+        border-radius: 5px;
+
+        @media #{$max575}{
+            font-size: 0.875rem;
+            padding: 5px 8px;
+        }
+
+        &:hover{
+            background-color: $color-primary;
+            color: $color-white;
+            transition: all .6s ease;
+        }
+        i{
+            line-height: inherit;
+        }
+        svg{
+            width: 18px;
+            height: 18px;
+            transition: all .4s ease;
+        }
+    }
+}
+
+.tf-single-action-btns-style2 {
+    &>div.tf-hero-hotel {
+        height: 80px;
+        width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $color-gray-linear;
+        color: $color-white;
+        background-size: cover;
+        background-position: center;
+        cursor: pointer;
+        @media #{$max1024}{
+            width: 103px;
+            height: 40px;
+        }
+        @media #{$max1024}{
+            width: 104px;
+            height: 40px;
+        }
+        @media #{$max768}{
+            width: 52px;
+            height: 32px;
+        }
+    }
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        color: $color-white;
+
+        svg {
+            @media #{$max1024}{
+                width: 16px;
+            }
+            @media #{$max1024}{
+                width: 16px;
+            }
+            @media #{$max768}{
+                width: 12px;
+            }
+        }
+    }
+}

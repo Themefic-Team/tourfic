@@ -61,6 +61,7 @@ class Hotel {
         $form_child        = ! empty( $_POST['child'] ) ? sanitize_text_field( $_POST['child'] ) : 0;
         $children_ages     = ! empty( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '';
         $form_check_in_out = ! empty( $_POST['check_in_out'] ) ? sanitize_text_field( $_POST['check_in_out'] ) : '';
+        $design = ! empty( $_POST['design'] ) ? sanitize_text_field( $_POST['design'] ) : '';
 
 
         $form_total_person = $form_adult + $form_child;
@@ -114,7 +115,7 @@ class Hotel {
 
         $tf_hotel_selected_check = !empty($tf_hotel_single_template_check) ? $tf_hotel_single_template_check : $tf_hotel_global_template_check;
 
-        $tf_hotel_selected_template_check = $tf_hotel_selected_check;
+        $tf_hotel_selected_template_check = !empty($design) ? $design : $tf_hotel_selected_check;
 
         if( $tf_hotel_selected_template_check == "design-1" ){
         ?>
@@ -2550,7 +2551,7 @@ class Hotel {
 	/**
 	 * Single Hotel Sidebar Booking Form
 	 */
-	static function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
+	static function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '', $design = '' ) {
 
 		//get children ages
 		$children_ages = isset( $_GET['children_ages'] ) ? sanitize_text_field($_GET['children_ages']) : '';
@@ -2647,7 +2648,7 @@ class Hotel {
 
 		$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
-		$tf_hotel_selected_template = $tf_hotel_selected_check;
+		$tf_hotel_selected_template = !empty($design) ? $design : $tf_hotel_selected_check;
 
 		$tf_hotel_book_avaibality_button_text = ! empty( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ) : "Booking Availability";
 		$hotel_location_field_required        = ! empty( Helper::tfopt( "required_location_hotel_search" ) ) ? Helper::tfopt( "required_location_hotel_search" ) : 1;
@@ -3191,9 +3192,9 @@ class Hotel {
                 <div class="tf-booking-tabs">
                     <div class="tf-booking-tab-menu">
                         <ul>
-							<?php 
-							$active_steps = []; 
-							if ( ($airport_service_type || $hotel_extras) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) { 
+							<?php
+							$active_steps = [];
+							if ( ($airport_service_type || $hotel_extras) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 								$active_steps[1] = 1;
 								?>
                                 <li class="tf-booking-step tf-booking-step-1 active">
@@ -3256,7 +3257,7 @@ class Hotel {
 											}
 											?>
 
-											<?php echo esc_html($airport_service['title']); ?> = <?php echo wp_kses_post(wc_price( $airport_service['price'] )); ?>
+											<?php echo wp_kses_post($airport_service['title']); ?> = <?php echo wp_kses_post(wc_price( $airport_service['price'] )); ?>
 										</option>
 									<?php } ?>
 									</select>
@@ -3403,7 +3404,7 @@ class Hotel {
                                                                            id="<?php echo esc_attr( $sfield['option-value'] ); ?>" value="<?php echo esc_html( $sfield['option-value'] ); ?>"
                                                                            data-required="<?php echo esc_attr($field['reg-field-required']); ?>"/>
                                                                     <label for="<?php echo esc_attr( $sfield['option-value'] ); ?>">
-																	<?php 
+																	<?php
 																	// Output the field label safely without translation, since it's dynamic content
 																	echo esc_html( $sfield['option-label'] );
 																	?>
@@ -3521,7 +3522,7 @@ class Hotel {
 							),
 							'price' => $airport_service_price_total,
 						);
-					}					
+					}
 				}
 				if ( "fixed" == $airport_pickup_price['airport_pickup_price_type'] ) {
 					$airport_service_price_total = ! empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
@@ -3845,7 +3846,7 @@ class Hotel {
 											<span class="tf-multiple-tag">' . esc_html( $hotel_tag_name ) . '</span>
 										</div>'
 									);
-								}								
+								}
 							}
 						}
 						?>
@@ -4000,7 +4001,7 @@ class Hotel {
 									echo '<span class="tf-multiple-tag" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . '">'
 										. wp_kses_post( $hotel_tag_name ) .
 									'</span>';
-								}								
+								}
 							}
 						}
 						?>
@@ -4153,7 +4154,7 @@ class Hotel {
 									echo '<div class="tf-tag-item tf-multiple-tag" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . '">'
 										. wp_kses_post( $hotel_tag_name ) .
 									'</div>';
-								}								
+								}
 							}
 						}
 						?>
@@ -4256,7 +4257,7 @@ class Hotel {
 											. wp_kses_post( $hotel_tag_name ) .
 										'</span>';
 									}
-									
+
 								}
 							}
 							?>
@@ -4384,6 +4385,7 @@ class Hotel {
 			return;
 		}
 		$post_id = isset( $_POST['post_id'] ) ? intval( wp_unslash( $_POST['post_id'] ) ) : 0;
+		$design = isset( $_POST['design'] ) ? sanitize_text_field( wp_unslash( $_POST['design'] ) ) : '';
 		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 
 		// Single Template Style
@@ -4395,7 +4397,7 @@ class Hotel {
 
 		$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
-		$tf_hotel_selected_template = $tf_hotel_selected_check;
+		$tf_hotel_selected_template = !empty($design) ? $design : $tf_hotel_selected_check;
 		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
 		$rooms                       = Room::get_hotel_rooms( $post_id );
@@ -4462,7 +4464,7 @@ class Hotel {
 										breakpoint: 640,
 										settings: {
 											arrows: false
-										}	
+										}
 									}]
                                 });
 
