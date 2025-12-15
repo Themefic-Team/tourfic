@@ -13,6 +13,7 @@ use \Tourfic\Admin\Emails\TF_Handle_Emails;
 use Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
 use Tourfic\Classes\Tour\Pricing as Tour_Pricing;
 use Tourfic\Classes\Hotel\Pricing as Hotel_Pricing;
+use Tourfic\Classes\Room\Room;
 
 trait Action_Helper {
 	
@@ -847,6 +848,8 @@ trait Action_Helper {
 				$data = array( $adults, $child, $check_in_out, $startprice, $endprice );
 			} elseif ( $posttype == "tf_hotel" ) {
 				$data = array( $adults, $child, $room, $check_in_out, $startprice, $endprice );
+			} elseif ( $posttype == "tf_room" ) {
+				$data = array( $adults, $child, $infant, $room, $check_in_out, $startprice, $endprice );
 			} else {
 				$data = array( $adults, $child, $infant, $check_in_out, $startprice, $endprice );
 			}
@@ -855,6 +858,8 @@ trait Action_Helper {
 				$data = array( $adults, $child, $check_in_out );
 			} elseif ( $posttype == "tf_hotel" ) {
 				$data = array( $adults, $child, $room, $check_in_out );
+			} elseif ( $posttype == "tf_room" ) {
+				$data = array( $adults, $child, $infant, $room, $check_in_out );
 			} else {
 				$data = array( $adults, $child, $infant, $check_in_out );
 			}
@@ -1280,7 +1285,13 @@ trait Action_Helper {
 					if($car_inventory){
 						tf_car_availability_response($car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice);
 					}
-				}else{
+				} elseif ( $posttype == 'tf_room' ) {
+					if ( empty( $check_in_out ) ) {
+						Room::tf_filter_room_without_date( $period, $not_found, $data );
+					} else {
+						Room::tf_filter_room_by_date( $period, $not_found, $data );
+					}
+				} else {
 
 				}
 			}
