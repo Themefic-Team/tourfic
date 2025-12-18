@@ -849,7 +849,7 @@ trait Action_Helper {
 			} elseif ( $posttype == "tf_hotel" ) {
 				$data = array( $adults, $child, $room, $check_in_out, $startprice, $endprice );
 			} elseif ( $posttype == "tf_room" ) {
-				$data = array( $adults, $child, $infant, $room, $check_in_out, $startprice, $endprice );
+				$data = array( $adults, $child, $room, $check_in_out, $startprice, $endprice );
 			} else {
 				$data = array( $adults, $child, $infant, $check_in_out, $startprice, $endprice );
 			}
@@ -859,7 +859,7 @@ trait Action_Helper {
 			} elseif ( $posttype == "tf_hotel" ) {
 				$data = array( $adults, $child, $room, $check_in_out );
 			} elseif ( $posttype == "tf_room" ) {
-				$data = array( $adults, $child, $infant, $room, $check_in_out );
+				$data = array( $adults, $child, $room, $check_in_out );
 			} else {
 				$data = array( $adults, $child, $infant, $check_in_out );
 			}
@@ -1286,6 +1286,7 @@ trait Action_Helper {
 						tf_car_availability_response($car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice);
 					}
 				} elseif ( $posttype == 'tf_room' ) {
+					
 					if ( empty( $check_in_out ) ) {
 						Room::tf_filter_room_without_date( $period, $not_found, $data );
 					} else {
@@ -1654,6 +1655,18 @@ trait Action_Helper {
 							$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
 							if ( $car_meta["car_as_featured"] ) {
 								tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+							}
+						} elseif ( $posttype == 'tf_room' ) {
+							if ( ! empty( $data ) ) {
+								if ( isset( $data[4] ) && isset( $data[5] ) ) {
+									[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
+									Room::tf_room_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice, $elSettings );
+								} else {
+									[ $adults, $child, $room, $check_in_out ] = $data;
+									Room::tf_room_archive_single_item( $adults, $child, $room, $check_in_out, '', '', $elSettings );
+								}
+							} else {
+								Room::tf_room_archive_single_item('', '', '', '', '', '', $elSettings );
 							}
 						}else{
 

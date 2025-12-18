@@ -1575,6 +1575,12 @@
   height: 32px;
   padding: 5px;
 }
+.post-type-archive-tf_room .tf-archive-template__one .tf-booking-date-wrap .tf-search-input.form-control,
+.page-template-tf-search .tf-archive-template__one .tf-booking-date-wrap .tf-search-input.form-control {
+  width: 200px;
+  opacity: 0;
+  position: absolute;
+}
 
 .post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details,
 .page-template-tf-search .tf-archive-template__one .tf-archive-room-details {
@@ -1591,8 +1597,8 @@
   font-size: 1.563rem;
   font-weight: 400;
 }
-.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-archive-filter-btn,
-.page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-archive-filter-btn {
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-room-archive-action-btn,
+.page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-room-archive-action-btn {
   padding: 8px 24px;
   color: var(--tf-primary);
   border-radius: 32px;
@@ -1616,13 +1622,13 @@
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
-.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-archive-filter-btn i,
-.page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-archive-filter-btn i {
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-room-archive-action-btn i,
+.page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-room-archive-action-btn i {
   margin-right: 8px;
   font-weight: 400;
 }
-.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-archive-filter-btn:hover,
-.page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-archive-filter-btn:hover {
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-room-archive-action-btn:hover,
+.page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-room-archive-action-btn:hover {
   background: var(--tf-brand-lite);
 }
 .post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header form.tf-archive-ordering,
@@ -1918,294 +1924,263 @@
   color: #ffffff;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar {
-  width: 358px;
-  border-radius: 16px;
-  background: var(--tf-filling-foreground);
-  padding: 32px;
-}
-@media only screen and (max-width: 1024px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,
-  .tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,
-  .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar {
-    width: 280px;
-  }
-}
-@media only screen and (max-width: 768px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,
-  .tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,
-  .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar {
-    width: 100%;
-  }
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header {
-  margin-bottom: 32px;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header h4,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header h4,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header h4,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header h4 {
-  color: var(--tf-text-heading);
-  font-size: 1rem;
-  font-weight: 400;
-  margin: 0;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header button,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header button,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header button,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header button {
-  color: var(--tf-text-paragraph);
-  font-size: 1rem;
-  font-weight: 400;
-  background-color: transparent;
-  padding: 0px;
-  border: 0px solid;
-  cursor: pointer;
-  display: none;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget {
-  margin-bottom: 32px;
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget:last-child,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget:last-child,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget:last-child,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget:last-child {
-  margin-bottom: 0px;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title {
-  background: transparent;
-  padding: 0;
-  height: auto;
-  border: 0;
-  box-shadow: none;
-  border-radius: 0px;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title span,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title span,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title span,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title span {
-  color: var(--tf-text-paragraph);
-  font-size: 1rem;
-  font-weight: 400;
-  margin-bottom: 16px;
-  cursor: auto;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title i,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title i,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title i,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title i {
-  display: none;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li {
-  width: 100%;
-  background: transparent;
-  border-radius: 0;
-  margin: 0;
-  padding: 0;
-  display: flow-root;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li.hidden,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li.hidden,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li.hidden,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li.hidden {
-  display: none;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label {
-  color: #F1F3F4;
-  color: var(--tf-text-paragraph);
-  font-size: 1rem;
-  font-weight: 400;
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 0px;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input:checked ~ .tf-checkmark:after,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input:checked ~ .tf-checkmark:after,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input:checked ~ .tf-checkmark:after,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input:checked ~ .tf-checkmark:after {
-  display: block;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input:checked ~ .tf-checkmark,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input:checked ~ .tf-checkmark,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input:checked ~ .tf-checkmark,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input:checked ~ .tf-checkmark {
-  background-color: transparent;
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter label input:checked ~ .tf-checkmark,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter label input:checked ~ .tf-checkmark {
+  background-color: var(--tf-primary);
   border-color: var(--tf-primary);
 }
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label .tf-checkmark,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label .tf-checkmark,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label .tf-checkmark,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label .tf-checkmark {
-  position: absolute;
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf-archive-filter-sidebar,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf-archive-filter-sidebar {
+  position: fixed;
   top: 0;
+  left: -320px;
+  width: 300px;
+  height: 100vh;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.1);
+  padding: 16px;
+  z-index: 99999;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf-archive-filter-sidebar.tf-show,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf-archive-filter-sidebar.tf-show {
   left: 0;
-  height: 20px;
-  width: 20px;
-  border: 2px solid #808080;
-  background-color: transparent;
-  border-radius: 5px;
 }
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label .tf-checkmark::after,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label .tf-checkmark::after,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label .tf-checkmark::after,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label .tf-checkmark::after {
-  content: "";
-  position: absolute;
-  display: none;
-  left: 5px;
-  top: 2px;
-  width: 7px;
-  height: 10px;
-  border: solid #ffffff;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists a,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists a,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists a,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists a {
-  text-decoration: none;
-  color: var(--tf-text-paragraph);
-  font-size: 1rem;
-  font-weight: 400;
-  text-align: left;
-  margin-top: 8px;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__track,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__track,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__track,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__track {
-  border-radius: 4px;
-  background: var(--tf-brand-lite);
-  margin: 0 0 28px 0;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__tooltip,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__tooltip,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__tooltip,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__tooltip {
-  bottom: -30px;
-  background: transparent;
-  color: var(--tf-text-paragraph);
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider_dark .al-range-slider__bar,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider_dark .al-range-slider__bar,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider_dark .al-range-slider__bar,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider_dark .al-range-slider__bar {
-  background-color: var(--tf-text-paragraph);
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__knob,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__knob,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__knob,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__knob {
-  border-radius: 12px;
-  border: 1.5px solid var(--tf-border-default);
-  background: var(--tf-filling-background);
-  width: 24px;
-  height: 24px;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_seat_filters .al-range-slider__knob::before,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_seat_filters .al-range-slider__knob::before,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_seat_filters .al-range-slider__knob::before,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_seat_filters .al-range-slider__knob::before {
-  content: "\f6c0";
-  position: absolute;
-  font-family: "FontAwesome";
-  color: var(--tf-primary);
-  height: 100%;
-  width: 100%;
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf-filter-title,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf-filter-title {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin-bottom: 24px;
 }
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul {
-  gap: 8px;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li {
-  width: calc(33% - 5px);
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li label,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li label,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li label,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li label {
-  background: var(--tf-filling-background);
-  border-radius: 8px;
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf-filter-title .tf-section-title,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf-filter-title .tf-section-title {
   margin: 0;
   padding: 0;
   font-size: 1rem;
-  font-weight: 400;
-  padding: 4px 8px;
-  text-align: center;
-  z-index: 0;
+  font-weight: 500;
+  color: var(--tf-text-heading);
+  line-height: 1.5;
 }
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li.active label,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li.active label,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li.active label,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li.active label {
-  background: var(--tf-primary);
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget a,
-.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget a,
-.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget a,
-.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget a {
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf-filter-title button.filter-reset-btn,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf-filter-title button.filter-reset-btn {
+  margin: 0;
+  padding: 0;
+  border: none;
   color: var(--tf-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  background-color: transparent;
+  letter-spacing: 0.15px;
+  cursor: pointer;
+  display: none;
+}
+@media only screen and (max-width: 1024px) {
+  .post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf-filter-title button.filter-reset-btn,
+  .page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf-filter-title button.filter-reset-btn {
+    font-size: 0.75rem;
+  }
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf_widget .tf-hotel-result-price-range,
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf_widget .tf-tour-result-price-range,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf_widget .tf-hotel-result-price-range,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf_widget .tf-tour-result-price-range {
+  margin-top: 20px;
+  padding-bottom: 0px;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf_widget h4,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf_widget h4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf_widget .al-range-slider__track,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf_widget .al-range-slider__track {
+  background: var(--tf-brand-lite);
+  height: 10px;
+  box-shadow: none;
+  margin: 30px 0px 10px 0px;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf_widget .al-range-slider_dark,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf_widget .al-range-slider_dark {
+  padding: 0px;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf_widget .al-range-slider_dark .al-range-slider__bar,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf_widget .al-range-slider_dark .al-range-slider__bar {
+  background: var(--tf-text-paragraph);
+  box-shadow: none;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf_widget .al-range-slider__knob,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf_widget .al-range-slider__knob {
+  background: var(--tf-filling-background);
+  height: 24px;
+  width: 24px;
+  box-shadow: none;
+  border: 1.5px solid var(--tf-border-default);
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf_widget .al-range-slider__knob:first-child span,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf_widget .al-range-slider__knob:first-child span {
+  left: 10px;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf_widget .al-range-slider__tooltip,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf_widget .al-range-slider__tooltip {
+  background: var(--tf-primary);
+  border-radius: 5px;
+  box-shadow: none;
+  padding: 3px 10px;
+  color: #ffffff;
+  font-size: 0.813rem;
+  margin-bottom: 0px;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf_widget .al-range-slider__input.js-al-range-slider__input,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf_widget .al-range-slider__input.js-al-range-slider__input {
+  display: none;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf_map_popup_sidebar,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf_map_popup_sidebar {
+  display: none;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar::-webkit-scrollbar,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar::-webkit-scrollbar-thumb,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 32px;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar::-webkit-scrollbar-track,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar::-webkit-scrollbar-track {
+  border-radius: 32px;
+  background: rgba(6, 13, 28, 0.2);
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget {
+  border: none;
+  background: inherit;
+  border-radius: 0;
+  margin-bottom: 32px;
+  padding: 0px;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-widget-title,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-widget-title {
+  background-color: inherit;
+  border: 0px solid;
+  padding: 0px;
+  border-radius: 0px;
+  height: auto;
+  pointer-events: none;
+  color: var(--tf-text-paragraph);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.15px;
+  margin-bottom: 16px;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-widget-title i,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-widget-title i {
+  display: none;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter {
+  padding: 0;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul {
+  padding: 0;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 8px;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li {
+  padding: 0;
+  margin: 0;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li label,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li label {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  display: inline-block;
+  padding-left: 24px;
+  color: var(--tf-text-paragraph);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.15px;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li label .tf-checkmark,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li label .tf-checkmark {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  transform: translateY(-50%);
+  height: 16px;
+  width: 16px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: 1px solid var(--tf-primary);
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li label .tf-checkmark:after,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li label .tf-checkmark:after {
+  left: 4.5px;
+  top: 1.5px;
+  width: 5px;
+  border-width: 0 2px 2px 0;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li label input,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li label input {
+  display: none;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li label input:checked ~ .tf-checkmark,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li label input:checked ~ .tf-checkmark {
+  background-color: var(--tf-primary);
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li.active,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li.active {
+  background: transparent;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter a.see-more,
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter a.see-less,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter a.see-more,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter a.see-less {
+  text-align: left;
+  color: var(--tf-primary);
+  text-transform: capitalize;
+  font-weight: 400;
+  text-decoration: none;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter a.see-more span,
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter a.see-less span,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter a.see-more span,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter a.see-less span {
+  margin-left: 8px;
+}
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter a.see-less,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter #tf__booking_sidebar .widget .tf-filter a.see-less {
+  display: none;
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=tourfic-room.css.map*/

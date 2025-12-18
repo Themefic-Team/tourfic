@@ -5,7 +5,6 @@ use Tourfic\Classes\Room\Room;
 
 $tf_room_arc_banner = ! empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar']) ?  Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar'] : '';
 $tf_room_arc_banner = !empty($tf_room_arc_banner) ? $tf_room_arc_banner : TF_ASSETS_APP_URL . '/images/room-hero-banner.png';
-
 ?>
 
 <div class="tf-archive-template__one sp-0">
@@ -29,7 +28,7 @@ $tf_room_arc_banner = !empty($tf_room_arc_banner) ? $tf_room_arc_banner : TF_ASS
                 </h3>
                 <div class="tf-archive-header-right tf-flex tf-flex-space-bttn tf-flex-align-center tf-flex-gap-16">
                     <form class="tf-archive-ordering" method="get">
-                        <select class="tf-orderby tf-archive-filter-btn" name="tf-orderby" id="tf-orderby">
+                        <select class="tf-orderby tf-room-archive-action-btn" name="tf-orderby" id="tf-orderby">
                             <option value="default"><?php echo esc_html__( 'Default Sorting', 'tourfic' ); ?></option>
                             <option value="enquiry"><?php echo esc_html__( 'Sort By Recommended', 'tourfic' ); ?></option>
                             <option value="order"><?php echo esc_html__( 'Sort By Popularity', 'tourfic' ); ?></option>
@@ -40,9 +39,24 @@ $tf_room_arc_banner = !empty($tf_room_arc_banner) ? $tf_room_arc_banner : TF_ASS
                         </select>
                         <i class="fas fa-chevron-down"></i>
                     </form>
-                    <div class="tf-archive-filter-btn">
+                    <div class="tf-room-archive-action-btn tf-archive-filter-btn">
                         <i class="ri-equalizer-line"></i>
                         <span><?php esc_html_e("All Filter", "tourfic"); ?></span>
+                    </div>
+                    <div class="tf-archive-filter">
+                        <div class="tf-archive-filter-sidebar">
+                            <div class="tf-filter-wrapper">
+                                <div class="tf-filter-title">
+                                    <h4 class="tf-section-title"><?php echo esc_html__("Filter", "tourfic"); ?></h4>
+                                    <button class="filter-reset-btn"><?php echo esc_html__("Reset", "tourfic"); ?></button>
+                                </div>
+                                <?php if (is_active_sidebar('tf_archive_booking_sidebar')) { ?>
+                                    <div id="tf__booking_sidebar">
+                                        <?php //dynamic_sidebar('tf_archive_booking_sidebar'); ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

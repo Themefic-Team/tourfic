@@ -173,6 +173,12 @@
                     }   
                 }
             }
+
+            .tf-booking-date-wrap .tf-search-input.form-control{
+                width: 200px;
+                opacity: 0;
+                position: absolute;
+            }
         }
     }
 }

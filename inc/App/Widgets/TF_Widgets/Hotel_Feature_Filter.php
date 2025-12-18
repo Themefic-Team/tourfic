@@ -42,7 +42,7 @@ class Hotel_Feature_Filter extends \WP_Widget {
         //check if is Hotel
         $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type();
 
-        if ( is_admin() || $posttype == 'tf_hotel' ) {
+        if ( is_admin() || $posttype == 'tf_hotel' || $posttype == 'tf_room' ) {
             extract( $args );
             $title = apply_filters( 'widget_title', $instance['title'] );
 

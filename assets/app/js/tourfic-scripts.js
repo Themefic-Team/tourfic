@@ -3910,6 +3910,7 @@ function convertTo24HourFormat(timeStr) {
         var filter_xhr;
         // Creating a function for reuse this filter in any where we needs.
         const makeFilter = (page = 1, mapCoordinates = []) => {
+            console.log($('#check-in-out-date').val());
             var dest = $('#tf-place').val();
             var page = page;
             var adults = $('#adults').val();

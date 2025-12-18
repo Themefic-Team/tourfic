@@ -2741,7 +2741,8 @@ class Helper {
                                     <?php esc_html_e("Check in", "tourfic"); ?>
                                 </label>
                                 <div class="info-select tf-booking-date-wrap tf-search-field tf-flex tf-flex-space-bttn tf-flex-align-center">
-                                    <input type="text" name="check-in-out-date" id="check-in-out-date" class="flatpickr-input" value="<?php echo !empty($_GET['pickup-date']) ? esc_html($_GET['pickup-date']) : '' ?>" placeholder="<?php echo esc_attr($tf_current_date);?>" />
+                                    <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr(gmdate($date_format_for_users, strtotime('+1 day'))) ?>" readonly>
+                                    <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr(gmdate('Y/m/d', strtotime('+1 day')) . ' - ' . gmdate('Y/m/d', strtotime('+2 day'))); ?>" style="display: none;">
                                     <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -2754,9 +2755,7 @@ class Helper {
                                     <?php esc_html_e("Check out", "tourfic"); ?>
                                 </label>
                                 <div class="info-select tf-booking-date-wrap tf-search-field tf-flex tf-flex-space-bttn tf-flex-align-center">
-                                    <div class="tf-checkout-date">
-                                        <?php echo esc_html($tf_current_date); ?>
-                                    </div>
+                                    <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr(gmdate($date_format_for_users, strtotime('+2 day'))); ?>">
                                     <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -2837,23 +2836,6 @@ class Helper {
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="tf_acrselection">
-                                        <div class="acr-label"><?php esc_html_e( "Infant", "tourfic" ); ?></div>
-                                        <div class="acr-select">
-                                            <div class="acr-dec">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                    <path d="M4.16666 10H15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                            </div>
-                                            <input type="tel" name="infant" id="infant" min="0" value="0" readonly>
-                                            <div class="acr-inc">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                    <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -2866,48 +2848,53 @@ class Helper {
                             (function ($) {
                                 $(document).ready(function () {
 
-                                        // flatpickr locale first day of Week
+                                    // flatpickr locale first day of Week
                                     <?php self::tf_flatpickr_locale( "root" ); ?>
 
-                                    $(".tf-archive-template__one .tf-checkout-date").on("click", function () {
-                                        $("#check-in-out-date").trigger("click");
+                                    $(".tf-archive-template__one #tf-check-out").on('click', function () {
+                                        $(".tf-search-input.form-control").click();
                                     });
                                     $("#check-in-out-date").flatpickr({
                                         enableTime: false,
                                         mode: "range",
-                                        dateFormat: "d-m-Y",
+                                        dateFormat: "Y/m/d",
                                         minDate: "today",
+                                        altInput: true,
+                                        altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
                                         showMonths: $(window).width() >= 1240 ? 2 : 1,
+
                                         // flatpickr locale
                                         <?php self::tf_flatpickr_locale(); ?>
 
                                         onReady: function (selectedDates, dateStr, instance) {
+                                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                                             dateSetToFields(selectedDates, instance);
                                         },
-
                                         onChange: function (selectedDates, dateStr, instance) {
-                                        
+                                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                                             dateSetToFields(selectedDates, instance);
                                         },
-                                        <?php
-                                        if(! empty( $check_in_out )){ ?>
-                                            defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+                                        <?php if(! empty( $date )){ ?>
+                                        defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
                                         <?php } ?>
                                     });
 
                                     function dateSetToFields(selectedDates, instance) {
+                                        const format = '<?php echo esc_html( $date_format_for_users ); ?>';
                                         if (selectedDates.length === 2) {
                                             if (selectedDates[0]) {
-                                                const startDate = flatpickr.formatDate(selectedDates[0], "d-m-Y");
-                                                $(".tf-archive-template__one #check-in-out-date").val(startDate);
+                                                let checkInDate = instance.formatDate(selectedDates[0], format);
+                                                $(".tf-archive-template__one #tf-check-in").val(checkInDate);
                                             }
+
                                             if (selectedDates[1]) {
-                                                const endDate = flatpickr.formatDate(selectedDates[1], "d-m-Y");
-                                                $(".tf-archive-template__one .tf-select-date .tf-checkout-date").html(endDate);
+                                                let checkOutDate = instance.formatDate(selectedDates[1], format);
+                                                $(".tf-archive-template__one #tf-check-out").val(checkOutDate);
                                             }
                                         }
                                     }
-                                    
                                 });
                             })(jQuery);
 
