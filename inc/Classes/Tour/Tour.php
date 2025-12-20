@@ -4898,7 +4898,7 @@ class Tour {
 					if ( isset( $cat['traveler_slug'] ) && ! empty( $cat['traveler_slug'] ) ) {
 						$traveller_categories = array_merge(
 							$traveller_categories,
-							array_fill( 0, sanitize_text_field( $_POST[$cat['traveler_slug']] ), sanitize_key( $cat['traveler_slug'] ) )
+							array_fill( 0, intval(sanitize_text_field( $_POST[$cat['traveler_slug']] )), sanitize_key( $cat['traveler_slug'] ) )
 						);
 					}
 				}
