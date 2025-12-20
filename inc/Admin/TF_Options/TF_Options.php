@@ -1337,9 +1337,9 @@ class TF_Options {
 				if ( $item['pricing_type'] == 'group' && (empty($group_package_option) || empty($group_package_pricing)) ) {
 					$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) . '<br>'. $time_string;
 				} elseif ( $item['pricing_type'] == 'person' ) {
-					$item['title'] = esc_html( apply_filters( 'tf_tour_adult_label', __( 'Adult', 'tourfic' ), true, false, $tour_id ) ) . ': ' . wc_price( $item['adult_price'] ) . '<br>'
-						. esc_html( apply_filters( 'tf_tour_child_label', __( 'Child', 'tourfic' ), true, false, $tour_id ) ) . ': ' . wc_price( $item['child_price'] ) . '<br>'
-						. esc_html( apply_filters( 'tf_tour_infant_label', __( 'Infant', 'tourfic' ), true, false, $tour_id ) ) . ': ' . wc_price( $item['infant_price'] ) . '<br>'
+					$item['title'] = esc_html( apply_filters( 'tf_tour_adult_label', __( 'Adult', 'tourfic' ), false ) ) . ': ' . wc_price( $item['adult_price'] ) . '<br>'
+						. esc_html( apply_filters( 'tf_tour_child_label', __( 'Child', 'tourfic' ), false ) ) . ': ' . wc_price( $item['child_price'] ) . '<br>'
+						. esc_html( apply_filters( 'tf_tour_infant_label', __( 'Infant', 'tourfic' ), false ) ) . ': ' . wc_price( $item['infant_price'] ) . '<br>'
 						. $time_string;
 					$item = apply_filters('tf_tour_availability_item_before_display', $item, '');
 				} elseif ( $item['pricing_type'] == 'package' ) {
@@ -1357,9 +1357,9 @@ class TF_Options {
 								$item['title'] .=  !empty($package_active_time) ? 'Time: '.$package_active_time. '<br><br>' : '';
 							} else if($item['tf_option_pricing_type_'.$i] == 'person'){
 								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
-								$item['title'] .= esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $tour_id ) .': ' ) . wc_price($item['tf_option_adult_price_'.$i]). '<br>';
-								$item['title'] .= esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, false, $tour_id ) .': ' ) . wc_price($item['tf_option_child_price_'.$i]). '<br>';
-								$item['title'] .= esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $tour_id ) .': ' ) . wc_price($item['tf_option_infant_price_'.$i]). '<br>';
+								$item['title'] .= esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), false ) .': ' ) . wc_price($item['tf_option_adult_price_'.$i]). '<br>';
+								$item['title'] .= esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), false ) .': ' ) . wc_price($item['tf_option_child_price_'.$i]). '<br>';
+								$item['title'] .= esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), false ) .': ' ) . wc_price($item['tf_option_infant_price_'.$i]). '<br>';
 								$item['title'] .=  !empty($package_active_time) ? 'Time: '.$package_active_time. '<br><br>' : '';
                             }
 							$item = apply_filters('tf_tour_availability_item_before_display', $item, $i);

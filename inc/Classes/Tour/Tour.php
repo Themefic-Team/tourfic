@@ -1081,9 +1081,9 @@ class Tour {
 							?>
 							<div class="tf-field-group tf-mt-16 tf_acrselection">
 								<div class="tf-field tf-flex">
-									<div class="acr-label tf-flex">
+									<div class="acr-label tf-flex tf-flex-wrap">
 										<i class="fa-regular fa-user"></i>
-										<?php echo wp_kses_post( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $post_id ) ); ?>
+										<?php echo wp_kses_post( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, true, $post_id ) ); ?>
 									</div>
 									<div class="acr-select">
 										<div class="acr-dec">-</div>
@@ -1097,9 +1097,9 @@ class Tour {
 						<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' ) ) { ?>
 							<div class="tf-field-group tf-mt-16 tf_acrselection">
 								<div class="tf-field tf-flex">
-									<div class="acr-label tf-flex">
+									<div class="acr-label tf-flex tf-flex-wrap">
 										<i class="fa-solid fa-child"></i>
-										<?php echo wp_kses_post( apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true, false, $post_id ) ); ?>
+										<?php echo wp_kses_post( apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true, true, $post_id ) ); ?>
 									</div>
 									<div class="acr-select">
 										<div class="acr-dec">-</div>
@@ -1113,9 +1113,9 @@ class Tour {
 						<?php if ( ! $disable_adult_price && ( ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' ) ) ) { ?>
 							<div class="tf-field-group tf-mt-16 tf_acrselection">
 								<div class="tf-field tf-flex">
-									<div class="acr-label tf-flex">
+									<div class="acr-label tf-flex tf-flex-wrap">
 										<i class="fa-solid fa-baby"></i>
-										<?php echo wp_kses_post( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $post_id ) ); ?>
+										<?php echo wp_kses_post( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, true, $post_id ) ); ?>
 									</div>
 									<div class="acr-select">
 										<div class="acr-dec">-</div>
@@ -2115,17 +2115,17 @@ class Tour {
 													<?php if($pack['pricing_type']=='person'){ ?>
 														<?php if(!empty($package_pricing[$key]['adult_tabs'][0]['disable_adult_price'])){ ?>
 														<div class="tf-single-person">
-															<h3><?php echo esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $post_id ) ); ?></h3>
+															<h3><?php echo wp_kses_post( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, true, $post_id ) ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
-																<input type="number" name="adults" id="adults" value="<?php echo !empty($pack['adult_tabs'][2]['min_adult']) ? esc_attr($pack['adult_tabs'][2]['min_adult']) : 1; ?>" data-min="<?php echo !empty($pack['adult_tabs'][2]['min_adult']) ? esc_attr($pack['adult_tabs'][2]['min_adult']) : ''; ?>" data-max="<?php echo !empty($pack['adult_tabs'][3]['max_adult']) ? esc_attr($pack['adult_tabs'][3]['max_adult']) : ''; ?>" />
+																<input type="number" name="adults" id="adults" value="<?php echo !empty($pack['adult_tabs'][2]['min_adult']) ? esc_attr($pack['adult_tabs'][2]['min_adult']) : 0; ?>" data-min="<?php echo !empty($pack['adult_tabs'][2]['min_adult']) ? esc_attr($pack['adult_tabs'][2]['min_adult']) : ''; ?>" data-max="<?php echo !empty($pack['adult_tabs'][3]['max_adult']) ? esc_attr($pack['adult_tabs'][3]['max_adult']) : ''; ?>" />
 																<div class="acr-inc">+</div>
 															</div>
 														</div>
 														<?php } if(!empty($package_pricing[$key]['child_tabs'][0]['disable_child_price'])){
 														?>
 														<div class="tf-single-person">
-															<h3><?php echo esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, false, $post_id ) ); ?></h3>
+															<h3><?php echo wp_kses_post( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, true, $post_id ) ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
 																<input type="number" name="childrens" id="childs" value="<?php echo !empty($pack['child_tabs'][2]['min_child']) ? esc_attr($pack['child_tabs'][2]['min_child']) : 0; ?>" data-min="<?php echo !empty($pack['child_tabs'][2]['min_child']) ? esc_attr($pack['child_tabs'][2]['min_child']) : ''; ?>" data-max="<?php echo !empty($pack['child_tabs'][3]['max_child']) ? esc_attr($pack['child_tabs'][3]['max_child']) : ''; ?>" />
@@ -2135,7 +2135,7 @@ class Tour {
 														<?php } if(!empty($package_pricing[$key]['infant_tabs'][0]['disable_infant_price'])){
 														?>
 														<div class="tf-single-person">
-															<h3><?php echo esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $post_id ) ); ?></h3>
+															<h3><?php echo wp_kses_post( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, true, $post_id ) ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
 																<input type="number" name="infants" id="infant" value="<?php echo !empty($pack['infant_tabs'][2]['min_infant']) ? esc_attr($pack['infant_tabs'][2]['min_infant']) : 0; ?>" data-min="<?php echo !empty($pack['infant_tabs'][2]['min_infant']) ? esc_attr($pack['infant_tabs'][2]['min_infant']) : ''; ?>" data-max="<?php echo !empty($pack['infant_tabs'][3]['max_infant']) ? esc_attr($pack['infant_tabs'][3]['max_infant']) : ''; ?>" />
@@ -2145,15 +2145,15 @@ class Tour {
 														<?php } ?>
 													<?php }else{ ?>
 														<div class="tf-single-person">
-															<h3><?php echo esc_html( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $post_id ) ); ?></h3>
+															<h3><?php echo wp_kses_post( apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, true, $post_id ) ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
-																<input type="number" name="adults" id="adults" value="1" />
+																<input type="number" name="adults" id="adults" value="0" />
 																<div class="acr-inc">+</div>
 															</div>
 														</div>
 														<div class="tf-single-person">
-															<h3><?php echo esc_html( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, false, $post_id ) ); ?></h3>
+															<h3><?php echo wp_kses_post( apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, true, $post_id ) ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
 																<input type="number" name="childrens" id="childs" value="0" />
@@ -2161,7 +2161,7 @@ class Tour {
 															</div>
 														</div>
 														<div class="tf-single-person">
-															<h3><?php echo esc_html( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $post_id ) ); ?></h3>
+															<h3><?php echo wp_kses_post( apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, true, $post_id ) ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
 																<input type="number" name="infants" id="infant" value="0" />
@@ -5052,19 +5052,19 @@ class Tour {
 			if ( ! empty( $pricing_rule ) && $pricing_rule == "person" ) {
 				if ( ! empty( $adult_price ) && ! empty( $adults ) ) {
 					$response['traveller_summery'] .= '<tr>
-                        <td align="left">' . $adults .' '. apply_filters( 'tf_tour_adult_label', esc_html__( 'adult', 'tourfic' ), true, false, $post_id ) . ' (' . wc_price( $adult_price ) . '/' . $pricing_rule . ')</td>
+                        <td align="left">' . $adults .' '. apply_filters( 'tf_tour_adult_label', esc_html__( 'adult', 'tourfic' ), true, true, $post_id ) . ' (' . wc_price( $adult_price ) . '/' . $pricing_rule . ')</td>
                         <td align="right">' . wc_price( $adult_price * $adults ) . '</td>
                     </tr>';
 				}
 				if ( ! empty( $children_price ) && ! empty( $children ) ) {
 					$response['traveller_summery'] .= '<tr>
-                        <td align="left">' . $children .' '. apply_filters( 'tf_tour_child_label', esc_html__( 'children', 'tourfic' ), true, false, $post_id ) . ' (' . wc_price( $children_price ) . '/' . $pricing_rule . ')</td>
+                        <td align="left">' . $children .' '. apply_filters( 'tf_tour_child_label', esc_html__( 'children', 'tourfic' ), true, true, $post_id ) . ' (' . wc_price( $children_price ) . '/' . $pricing_rule . ')</td>
                         <td align="right">' . wc_price( $children_price * $children ) . '</td>
                     </tr>';
 				}
 				if ( ! empty( $infant_price ) && ! empty( $infant ) ) {
 					$response['traveller_summery'] .= '<tr>
-                        <td align="left">' . $infant .' '. apply_filters( 'tf_tour_infant_label', esc_html__( 'infant', 'tourfic' ), true, false, $post_id ) . ' (' . wc_price( $infant_price ) . '/' . $pricing_rule . ')</td>
+                        <td align="left">' . $infant .' '. apply_filters( 'tf_tour_infant_label', esc_html__( 'infant', 'tourfic' ), true, true, $post_id ) . ' (' . wc_price( $infant_price ) . '/' . $pricing_rule . ')</td>
                         <td align="right">' . wc_price( $infant_price * $infant ) . '</td>
                     </tr>';
 				}
@@ -5083,19 +5083,19 @@ class Tour {
 
 					if ( ! empty( $adult_price ) && ! empty( $adults ) ) {
 						$response['traveller_summery'] .= '<tr>
-							<td align="left">' . $adults .' '. apply_filters( 'tf_tour_adult_label', esc_html__( 'adult', 'tourfic' ), true, false, $post_id ) . ' (' . wc_price( $adult_price ) . '/' . $single_package['pricing_type'] . ')</td>
+							<td align="left">' . $adults .' '. apply_filters( 'tf_tour_adult_label', esc_html__( 'adult', 'tourfic' ), true, true, $post_id ) . ' (' . wc_price( $adult_price ) . '/' . $single_package['pricing_type'] . ')</td>
 							<td align="right">' . wc_price( $adult_price * $adults ) . '</td>
 						</tr>';
 					}
 					if ( ! empty( $children_price ) && ! empty( $children ) ) {
 						$response['traveller_summery'] .= '<tr>
-							<td align="left">' . $children .' '. apply_filters( 'tf_tour_child_label', esc_html__( 'children', 'tourfic' ), true, false, $post_id ) . ' (' . wc_price( $children_price ) . '/' . $single_package['pricing_type'] . ')</td>
+							<td align="left">' . $children .' '. apply_filters( 'tf_tour_child_label', esc_html__( 'children', 'tourfic' ), true, true, $post_id ) . ' (' . wc_price( $children_price ) . '/' . $single_package['pricing_type'] . ')</td>
 							<td align="right">' . wc_price( $children_price * $children ) . '</td>
 						</tr>';
 					}
 					if ( ! empty( $infant_price ) && ! empty( $infant ) ) {
 						$response['traveller_summery'] .= '<tr>
-							<td align="left">' . $infant .' '. apply_filters( 'tf_tour_infant_label', esc_html__( 'infant', 'tourfic' ), true, false, $post_id ) . ' (' . wc_price( $infant_price ) . '/' . $single_package['pricing_type'] . ')</td>
+							<td align="left">' . $infant .' '. apply_filters( 'tf_tour_infant_label', esc_html__( 'infant', 'tourfic' ), true, true, $post_id ) . ' (' . wc_price( $infant_price ) . '/' . $single_package['pricing_type'] . ')</td>
 							<td align="right">' . wc_price( $infant_price * $infant ) . '</td>
 						</tr>';
 					}
