@@ -57,6 +57,11 @@ class Room {
 		}
 	}
 
+	static function get_hotel_id_by_room_id( $room_id ) {
+		$meta = get_post_meta( $room_id, 'tf_room_opt', true );
+		return ! empty( $meta['tf_hotel'] ) ? $meta['tf_hotel'] : '';
+	}
+
 	static function get_room_options_count( $rooms ) {
 		$total_room_option_count = 0;
 		if ( ! empty( $rooms ) ) {
@@ -395,7 +400,7 @@ class Room {
 	 *
 	 */
 	static function tf_filter_room_by_date( $period, array &$not_found, array $data = [] ): void {
-// var_dump($data);
+		
 		// Form Data
 		if ( isset( $data[4] ) && isset( $data[5] ) ) {
 			[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;

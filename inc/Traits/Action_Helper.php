@@ -13,6 +13,7 @@ use \Tourfic\Admin\Emails\TF_Handle_Emails;
 use Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
 use Tourfic\Classes\Tour\Pricing as Tour_Pricing;
 use Tourfic\Classes\Hotel\Pricing as Hotel_Pricing;
+use Tourfic\Classes\Room\Pricing as Room_Pricing;
 use Tourfic\Classes\Room\Room;
 
 trait Action_Helper {
@@ -2078,9 +2079,13 @@ trait Action_Helper {
         foreach ( $results as $post_id ) {
 			$comments = $ratings = '';
             if( $ordering_type == 'order') {
+				$post_id = $post_type == 'tf_room' ? Room::get_hotel_id_by_room_id($post_id) : $post_id;
+
                 $order_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_order_data WHERE post_id = %s AND ostatus != %s", $post_id, 'cancelled' ));
                 $sort_results[$post_id] = $order_count;
             }else if( $ordering_type == 'enquiry') {
+				$post_id = $post_type == 'tf_room' ? Room::get_hotel_id_by_room_id($post_id) : $post_id;
+				
                 $enquiry_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_enquiry_data WHERE post_id = %s ", $post_id ));
                 $sort_results[$post_id] = $enquiry_count;
             } else if( $ordering_type == 'rating') {
@@ -2103,6 +2108,11 @@ trait Action_Helper {
 					$sort_results[$post_id] = $min_max_price['max']["regular_price"];
 				}
 
+				if( $post_type == 'tf_room' ) {
+					$min_max_price = Room_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['max']["regular_price"];
+				}
+
             }else if ($ordering_type == 'price-low') {
 
                 if($post_type == 'tf_apartment') {
@@ -2117,6 +2127,11 @@ trait Action_Helper {
 
 				if( $post_type == 'tf_hotel' ) {
 					$min_max_price = Hotel_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['min']["regular_price"];
+				}
+
+				if( $post_type == 'tf_room' ) {
+					$min_max_price = Room_Pricing::instance($post_id)->get_min_max_price();
 					$sort_results[$post_id] = $min_max_price['min']["regular_price"];
 				}
 

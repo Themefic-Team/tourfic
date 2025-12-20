@@ -25,6 +25,33 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 					'content' => esc_html__( 'These are some common settings specific to this Room', 'tourfic' ),
                     'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/room-management/')
 				),
+                array(
+					'id'       => 'tf_single_room_layout_opt',
+					'type'     => 'select',
+					'label'    => esc_html__( 'Single Room Template Settings', 'tourfic' ),
+					'subtitle' => esc_html__( 'You can keep the Global Template settings or choose a different layout for this room.', 'tourfic' ),
+					'options'  => [
+						'global' => esc_html__( 'Global Settings', 'tourfic' ),
+						'single' => esc_html__( 'Single Settings', 'tourfic' ),
+					],
+					'default'  => 'global',
+				),
+                array(
+					'id'       => 'tf_single_room_template',
+					'type'     => 'imageselect',
+					'label'    => esc_html__( 'Single Room Page Layout', 'tourfic' ),
+					'options'  => array(
+						'design-1' => array(
+							'title' => esc_html__('Design 1', 'tourfic'),
+							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+							'preview_link' => esc_url('https://tourfic.com/preview/cars/honda-city/'),
+						),
+					),
+					'default'   	=> 'design-1',
+					'dependency'  => [
+						array( 'tf_single_room_layout_opt', '==', 'single' )
+					],
+				),
 				array(
 					'id'          => 'tf_hotel',
 					'type'        => 'select2',
