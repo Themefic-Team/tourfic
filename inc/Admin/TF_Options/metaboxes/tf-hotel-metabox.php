@@ -634,13 +634,13 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'subtitle' => sprintf(esc_html__( 'These are some additional settings specific to this %s. Note that some of these settings may override the global settings.', 'tourfic' ),
 						$hotel_name
 					),
-				),		
+				),
 				array(
 					'id'    => 'hotel-settings-docs',
 					'type'  => 'heading',
 					'title' => esc_html__( 'Settings', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/hotel-settings/')
-				),		
+				),
 				array(
 					'id'        => 'h-review',
 					'type'      => 'switch',

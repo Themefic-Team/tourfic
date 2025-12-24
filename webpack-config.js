@@ -63,6 +63,13 @@ const ApartmentAppScss = glob.sync('./sass/app/css/free/apartment/apartment.scss
 const TourAppScss = glob.sync('./sass/app/css/free/tour/tour.scss');
 const HotelAppScss = glob.sync('./sass/app/css/free/hotel/hotel.scss');
 
+//Elementor files in pro
+const elementorScssFiles = glob.sync('./sass/app/css/pro/elementor/**/*.scss');
+elementorScssFiles.forEach(file => {
+    const relativePath = path.relative('./sass/app/css/pro', file);
+    StyleEntryPoints[`tourfic-pro/assets/app/css/${relativePath.replace(/\.scss$/, '')}`] = [file];
+});
+
 StyleEntryPoints['tourfic/assets/app/css/tourfic-style'] = appScss;
 StyleEntryPoints['tourfic-pro/assets/app/css/tourfic-pro'] = proAppScss;
 StyleEntryPoints['tourfic/assets/admin/css/tourfic-admin'] = adminScss;

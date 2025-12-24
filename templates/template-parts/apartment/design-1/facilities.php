@@ -9,7 +9,7 @@ if ( ! empty( $total_facilities_cat ) && ! empty( $meta['amenities'] ) ) {
 	?>
     <!-- apartment facilities Srart -->
     <div class="tf-facilities-wrapper" id="tf-apartment-facilities">
-        <h2 class="tf-section-title"><?php echo ! empty( $meta['facilities-section-title'] ) ? esc_html( $meta['facilities-section-title'] ) : esc_html( "Amenities" ); ?></h2>
+        <h2 class="tf-section-title"><?php echo ! empty( $meta['amenities_title'] ) ? esc_html( $meta['amenities_title'] ) : esc_html( "Amenities" ); ?></h2>
         <div class="tf-facilities">
 			<?php
 			$facilites_list = [];

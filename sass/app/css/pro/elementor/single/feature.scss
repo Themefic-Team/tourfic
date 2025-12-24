@@ -1,0 +1,131 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+.tf-single-template__one.tf-single-feature-style1{
+    padding: 0;
+    .tf-hotel-single-features{
+        ul{
+            margin: 0;
+            padding: 0;
+            li{
+                display: inline-flex;
+                align-items: center;
+                background-color: $color-filling-fg;
+                border-radius: 5px;
+                padding: 10px;
+                text-transform: capitalize;
+                margin: 5px 5px 5px 0px;
+                font-size: 0.938rem;
+                i{
+                    margin-right: 8px;
+                }
+                img{
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+
+    .tf-tour-features {
+        ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            list-style-type: none;
+            gap: 5px;
+
+            li{
+                display: inline-flex;
+                justify-content: flex-start;
+                background-color: $color-filling-fg;
+                border-radius: 5px;
+                padding: 10px 15px;
+                text-transform: capitalize;
+                margin: 5px 16px 10px 0px;
+                font-size: 0.938rem;
+                font-weight: 300;
+                
+                .tf-tour-features-icon {
+                    margin-right: 8px;
+                } 
+            }
+        }
+    }
+}
+.tf-single-feature-section.tf-single-feature-style2{
+    .tf-overview-popular-facilities {
+        span.tf-popular-facilities-title {
+            color: $color-text;
+            font-size: 1rem;
+            display: block;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        &>ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 12px 0;
+            li {
+                width: 25%;
+                display: flex;
+                @media #{$max768}{
+                    width: 50%;
+                }
+                @media only screen and (max-width: 1280px) {
+                    width: 33%;
+                }
+                i{
+                    margin-right: 8px;
+                    font-size: 1.25rem;
+                }
+            }
+        }
+    }
+}
+
+.tf-apartment-feature-style1.tf-place-offer-section{
+    @media #{$max768}{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    h2{
+        color: $color-heading;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 24px;
+        @media #{$max768}{
+            font-size: 1.5rem;
+        }
+    }
+    .place-offer-items{
+        display: grid;
+        gap: 8px 16px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        @media #{$max768}{
+            grid-template-columns: 1fr 1fr;
+        }
+        .tf-apt-amenity{
+            display: flex;
+            gap: 9px;
+            align-items: center;
+            .tf-apt-amenity-icon{
+                line-height: 0.69;
+                img{
+                    height: 16px;
+                    width: 16px;
+                }
+            }
+            span{
+                color: $color-text;
+                font-size: 0.875rem;
+                font-weight: 400;
+                line-height: 0.928;
+            }
+        }
+    }
+}

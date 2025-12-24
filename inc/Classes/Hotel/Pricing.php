@@ -1113,7 +1113,7 @@ class Pricing {
 	/*
 	 * Get per person / per room price html
 	 */
-	function get_per_price_html( $option_key = '' ) {
+	function get_per_price_html( $option_key = '', $design ='' ) {
 		$room_meta      = $this->room_meta;
 		$price_arr      = $this->get_per_price( $option_key );
 		$price          = $price_arr['price'];
@@ -1126,7 +1126,9 @@ class Pricing {
 		$room_options = ! empty( $room_meta['room-options'] ) ? $room_meta['room-options'] : [];
 		$option_price_type = ! empty( $room_options[$option_key]['option_pricing_type'] ) ? $room_options[$option_key]['option_pricing_type'] : 'per_room';
 
-		if ( $this->template == 'design-2' ) {
+		$$design = !empty($design) ? $design : $this->template;
+
+		if ( $$design == 'design-2' ) {
 			?>
             <span class="tf-price">
                 <span class="discount-price">

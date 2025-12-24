@@ -1,0 +1,169 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-single-template{
+    &__legacy.tf-single-apartment-house-rules-style-legacy{
+        padding: 0;
+        .tf-house-rules {
+            margin-bottom: 0px;
+        
+            .tf-house-rules-wrapper {
+                @include flexbox();
+                @include flex-wrap(wrap);
+                gap: 30px;
+                padding: 24px;
+                background-color: $color-brand-lite;
+                border: 1px solid $color-border-lite;
+                border-radius: 8px;
+        
+                .tf-not-included-house-rules,
+                .tf-included-house-rules {
+                    list-style: none;
+                    @include flex(0 0 calc(50% - 15px));
+                    padding-left: 30px;
+                    margin: 0;
+                    box-sizing: border-box;
+        
+                    @media #{$max768} {
+                        @include flex(0 0 100%);
+                    }
+        
+                    li {
+                        margin: 16px 0;
+                        position: relative;
+        
+                        h6 {
+                            margin: 0 0 5px 0;
+                            font-weight: 500;
+                            font-size: 1.125rem;
+                            color: $color-primary;
+                        }
+        
+                        &::before {
+                            content: '\f058';
+                            font-family: 'Font Awesome 5 Free';
+                            position: absolute;
+                            top: 0;
+                            left: -29px;
+                            font-size: 1.25rem;
+                            color: $color-primary;
+                        }
+        
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            left: -20px;
+                            top: 23px;
+                            width: 2px;
+                            height: 99%;
+                            background: $color-primary;
+                        }
+        
+                        &:first-child {
+                            margin-top: 0;
+                        }
+        
+                        &:last-child {
+                            margin-bottom: 0;
+        
+                            &::after {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+        
+                &.tf-house-rules-full {
+        
+                    .tf-not-included-house-rules,
+                    .tf-included-house-rules {
+                        @include flex(0 0 100%);
+                    }
+                }
+        
+                .tf-not-included-house-rules {
+                    li {
+                        h6 {
+                            color: $color-error;
+                        }
+        
+                        &::before {
+                            content: '\f057';
+                            color: $color-error;
+                        }
+        
+                        &::after {
+                            background: $color-error;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &__two.tf-single-apartment-house-rules-style1{
+        padding: 0;
+        .tf-aprtment-rules-section{
+            @media #{$max768}{
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            h2{
+                color: $color-heading;
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 24px;
+                @media #{$max768}{
+                    font-size: 1.5rem;
+                }
+            }
+            .aprtment-inc-exc{
+                display: flex;
+                gap: 26px;
+                @media #{$max768}{
+                    flex-wrap: wrap;
+                }
+                .aprtment-single-rules{
+                    width: 50%;
+                    @media #{$max768}{
+                        width: 100%;
+                    }
+                    ul{
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+                        display: flex;
+                        gap: 16px;
+                        flex-wrap: wrap;
+                        li{
+                            display: flex;
+                            gap: 8px;
+                            .rules-icon{
+                                width: 16px;
+                                margin-top: 3px;
+                            }
+                            .rules-content{
+                                span{
+                                    color: $color-gray;
+                                    font-size: 1rem;
+                                    font-weight: 600;
+                                    margin: 0 0 8px 0px;
+                                    display: block;
+                                }
+                                p{
+                                    color: $color-text;
+                                    font-size: 1rem;
+                                    margin: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .aprtment-inc-exc.tf-inc-exc-full{
+                .aprtment-single-rules{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

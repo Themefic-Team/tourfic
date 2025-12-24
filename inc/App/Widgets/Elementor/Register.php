@@ -43,15 +43,6 @@ class Register {
         $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\TF_Apartment_Locations::instance() );
         $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\TF_Recent_Apartments_slider::instance() );
         $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\TF_Apartment_Grid_Slider::instance() );
-    
-        //Template Widgets
-        if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
-            //Archive
-            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Archive\Search_Form::instance() );
-            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Archive\Listings::instance() );
-            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Archive\Sidebar::instance() );
-            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Archive\Banner::instance() );
-        }
     }
 
 }

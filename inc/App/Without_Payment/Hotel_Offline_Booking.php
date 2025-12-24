@@ -23,7 +23,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 
     function without_payment_booking_popup_callback() {
 		// Check nonce security
-		if ( ! isset( $_POST['tf_room_booking_nonce'] ) || 
+		if ( ! isset( $_POST['tf_room_booking_nonce'] ) ||
 			! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_room_booking_nonce'] ) ), 'check_room_booking_nonce' ) ) {
 			return;
 		}
@@ -382,13 +382,13 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 
 			if ( ! empty( $room_selected ) ) {
 				$response['hotel_booking_summery'] .= '<tr>
-                    <td align="left">' . 
+                    <td align="left">' .
 					/* translators: 1: total room, 2: total night */
 					sprintf( esc_html__( '%1$s Room × %2$s Night', 'tourfic' ), $room_selected, $day_difference ) . '</td>
                     <td align="right">' . wc_price( $price_total ) . '</td>
                 </tr>';
 			}
-			
+
 			if ( ! empty( $airport_service_arr['title'] ) ) {
 				$response['hotel_booking_summery'] .= '<tr>
 						<td align="left">' . esc_html( $airport_service_arr['label'] ) . '</td>

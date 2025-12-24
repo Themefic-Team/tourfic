@@ -13,6 +13,7 @@ class Helper {
 	use \Tourfic\Traits\Action_Helper;
 
 	public function __construct() {
+        add_action( 'admin_bar_menu', array( $this, 'tf_add_admin_bar_links'), 100 );
 		add_action( 'admin_footer', array( $this, 'tf_admin_footer' ) );
 		add_action( 'wp_footer', array($this, 'tf_ask_question_modal') );
 		add_filter( 'rest_prepare_taxonomy', array( $this, 'tf_remove_metabox_gutenburg' ), 10, 3 );
@@ -92,6 +93,91 @@ class Helper {
         });
 
 	}
+
+    function tf_add_admin_bar_links( $admin_bar ) {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
+
+        // Parent item
+        $admin_bar->add_menu( array(
+            'id'    => 'tf-quick-links',
+            'title' => esc_html__( 'Tourfic', 'tourfic' ),
+            'href'  => admin_url( 'admin.php?page=tf_dashboard' ),
+            'meta'  => array(
+                'title' => esc_html__( 'Tourfic Dashboard', 'tourfic' ),
+            ),
+        ) );
+
+        // Dashboard
+        $admin_bar->add_menu( array(
+            'id'     => 'tf-quick-dashboard',
+            'parent' => 'tf-quick-links',
+            'title'  => esc_html__( 'Dashboard', 'tourfic' ),
+            'href'   => admin_url( 'admin.php?page=tf_dashboard' ),
+        ) );
+
+        // Settings
+        $admin_bar->add_menu( array(
+            'id'     => 'tf-quick-settings',
+            'parent' => 'tf-quick-links',
+            'title'  => esc_html__( 'Settings', 'tourfic' ),
+            'href'   => admin_url( 'admin.php?page=tf_settings#tab=general' ),
+        ) );
+
+        // Get Help
+        $admin_bar->add_menu( array(
+            'id'     => 'tf-quick-get-help',
+            'parent' => 'tf-quick-links',
+            'title'  => esc_html__( 'Get Help', 'tourfic' ),
+            'href'   => admin_url( 'admin.php?page=tf_get_help' ),
+        ) );
+
+        // Shortcodes
+        $admin_bar->add_menu( array(
+            'id'     => 'tf-quick-shortcodes',
+            'parent' => 'tf-quick-links',
+            'title'  => esc_html__( 'Shortcodes', 'tourfic' ),
+            'href'   => admin_url( 'admin.php?page=tf_shortcodes' ),
+        ) );
+
+        // Template Library (if plugin active)
+        if ( is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ) {
+            $admin_bar->add_menu( array(
+                'id'     => 'tf-quick-library',
+                'parent' => 'tf-quick-links',
+                'title'  => esc_html__( 'Template Library', 'tourfic' ),
+                'href'   => admin_url( 'admin.php?page=travelfic-template-list' ),
+            ) );
+        }
+
+        // Template Builder (if Elementor or TF Pro)
+        if ( did_action( 'elementor/loaded' ) && function_exists( 'is_tf_pro' ) ) {
+            $admin_bar->add_menu( array(
+                'id'     => 'tf-quick-builder',
+                'parent' => 'tf-quick-links',
+                'title'  => esc_html__( 'Template Builder', 'tourfic' ),
+                'href'   => admin_url( 'edit.php?post_type=tf_template_builder' ),
+            ) );
+        } elseif ( function_exists( 'is_tf_pro' ) ) {
+            $admin_bar->add_menu( array(
+                'id'     => 'tf-quick-builder',
+                'parent' => 'tf-quick-links',
+                'title'  => esc_html__( 'Template Builder', 'tourfic' ),
+                'href'   => admin_url( 'admin.php?page=tf_template_builder' ),
+            ) );
+        }
+
+        // License Info (TF Pro only)
+        if ( function_exists( 'is_tf_pro' ) ) {
+            $admin_bar->add_menu( array(
+                'id'     => 'tf-quick-license',
+                'parent' => 'tf-quick-links',
+                'title'  => esc_html__( 'License Info', 'tourfic' ),
+                'href'   => admin_url( 'admin.php?page=tf_license_info' ),
+            ) );
+        }
+    }
 
 	static function tfopt( $option = '', $default = null ) {
 		$options = get_option( 'tf_settings' );

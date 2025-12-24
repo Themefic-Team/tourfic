@@ -1,0 +1,56 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-tour-booking-advantages{
+    background-color: $color-filling-fg;
+    @include bd-radius(5px);;
+    .tf-head-title{
+        h3{
+            font-size: 1.5rem;
+            color: $color-heading;
+        }
+    }
+    ul{
+        margin: 0px;
+
+        li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: $color-heading;
+            i {
+                height: 38px;
+                width: 38px;
+                background: $color-white;
+                border: 1px solid $color-border-lite;
+                @include bd-radius(5px);;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            a{
+                color: $color-heading;
+                text-decoration: none;
+            }
+        }
+
+        &.tf-icon-style2{
+            li {
+                margin-top: 5px;
+                margin-bottom: 15px;
+                align-items: center;
+                line-height: 1.3;
+                i{
+                    height: auto;
+                    width: auto;
+                    background: transparent;
+                    border: none;
+                    @include bd-radius(0);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}

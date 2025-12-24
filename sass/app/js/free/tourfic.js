@@ -1016,21 +1016,41 @@
 
         /* fill icon class */
         const wishIconFill = targetNode => {
-            targetNode.addClass('remove-wishlist');
-            targetNode.addClass('fas fa-heart');
-            targetNode.addClass('tf-text-red');
-            targetNode.removeClass('far fa-heart-o');
+            // Remove inactive icon classes
+            const inactiveIcon = targetNode.data('icon');
+            if (inactiveIcon) {
+                const inactiveClasses = inactiveIcon.split(' ');
+                targetNode.removeClass(inactiveClasses.join(' '));
+            }
+            
+            // Add active icon classes
+            const activeIcon = targetNode.data('active-icon');
+            if (activeIcon) {
+                const activeClasses = activeIcon.split(' ');
+                targetNode.addClass(activeClasses.join(' '));
+            }
+
+            targetNode.addClass('remove-wishlist tf-text-red');
             targetNode.removeClass('add-wishlist');
-
-
         }
         /* blank icon */
         const wishIcon = targetNode => {
+            // Remove active icon classes
+            const activeIcon = targetNode.data('active-icon');
+            if (activeIcon) {
+                const activeClasses = activeIcon.split(' ');
+                targetNode.removeClass(activeClasses.join(' '));
+            }
+            
+            // Add inactive icon classes
+            const inactiveIcon = targetNode.data('icon');
+            if (inactiveIcon) {
+                const inactiveClasses = inactiveIcon.split(' ');
+                targetNode.addClass(inactiveClasses.join(' '));
+            }
+
             targetNode.addClass('add-wishlist');
-            targetNode.addClass('far fa-heart-o');
-            targetNode.removeClass('fas fa-heart');
-            targetNode.removeClass('tf-text-red');
-            targetNode.removeClass('remove-wishlist');
+            targetNode.removeClass('remove-wishlist tf-text-red');
         }
         /* send request to wp-admin for storing request */
         $(document).on('click', '.add-wishlist', function () {
@@ -2306,11 +2326,13 @@
             e.preventDefault();
             $("#tour_room_details_loader").show();
             var post_id = $(this).attr("data-hotel");
+            var design = $('input[name=design]').val();
             var uniqid_id = $(this).attr("data-uniqid");
             var data = {
                 action: 'tf_tour_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
+                design: design,
                 uniqid_id: uniqid_id
             };
 
