@@ -910,7 +910,7 @@ TF_Settings::option( 'tf_settings', array(
 							'id'     => 'room_template',
 							'title'  => __( 'Room', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
-							'post_dependency' => 'rooms',
+							'post_dependency' => 'hotel',
 							'fields' => array(
 								array(
 									'id'      => 'room-title',
@@ -944,7 +944,7 @@ TF_Settings::option( 'tf_settings', array(
 									'column'  	 => 4,
 									'label'      => __( 'Single Room Template Sections', 'tourfic' ),
 									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
-									'dependency' => array( 'single-car', '==', 'design-1' ),
+									'dependency' => array( 'single-room', '==', 'design-1' ),
 									'default'    => array(
 										array(
 											'label'  => __( 'Description', 'tourfic' ),
@@ -953,22 +953,17 @@ TF_Settings::option( 'tf_settings', array(
 										),
 										array(
 											'label'  => __( 'Amenities', 'tourfic' ),
-											'slug'   => 'room-amenities',
-											'status' => 1,
-										),
-										array(
-											'label'  => __( 'Rules', 'tourfic' ),
-											'slug'   => 'room-rules',
+											'slug'   => 'amenities',
 											'status' => 1,
 										),
 										array(
 											'label'  => __( 'Policy', 'tourfic' ),
-											'slug'   => 'room-cancellation-policy',
+											'slug'   => 'cancellation-policy',
 											'status' => 1,
 										),
 										array(
 											'label'  => __( 'Review', 'tourfic' ),
-											'slug'   => 'room-review',
+											'slug'   => 'reviews',
 											'status' => 1,
 										)
 									),
@@ -1790,6 +1785,21 @@ TF_Settings::option( 'tf_settings', array(
 						'min' => '0',
 					),
 					'dependency' => array( 'enable_child_age_limit', '==', '1' ),
+				),
+				array(
+					'id'        => 'single_room_heading',
+					'type'      => 'heading',
+					'title'     => esc_html__( 'Global Settings for Single Room', 'tourfic' ),
+					'content' => esc_html__( 'These options can be overridden from Single Room Settings.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/')
+				),
+				array(
+					'id'        => 'disable-room-review',
+					'type'      => 'switch',
+					'label'     => esc_html__( 'Disable Review Section', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
+					'default'   => false,
 				),
 			),
 		),
@@ -3052,6 +3062,45 @@ TF_Settings::option( 'tf_settings', array(
 					'button_title' => esc_html__( 'Add New', 'tourfic' ),
 					'label'        => esc_html__( 'Review Fields for Hotels', 'tourfic' ),
 					'subtitle'     => esc_html__( 'Design customer review fields for hotels. Custom fields are permitted.', 'tourfic' ),
+					'max'      => '6',
+					'drag_only'   => true,
+					'field_title'  => 'r-field-type',
+					'fields'   => array(
+						array(
+							'id'    => 'r-field-type',
+							'type'  => 'text',
+							'label' => esc_html__( 'Review for', 'tourfic' ),
+						),
+
+					),
+					'default'  => array(
+						array(
+							'r-field-type' => esc_html__( 'Staff', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => esc_html__( 'Facilities', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => esc_html__( 'Cleanliness', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => esc_html__( 'Comfort', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => esc_html__( 'Value for money', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => esc_html__( 'Location', 'tourfic' ),
+						),
+					)
+				),
+				array(
+					'id'       => 'r-room',
+					'class'    => 'disable-sortable',
+					'type'     => 'repeater',
+					'button_title' => esc_html__( 'Add New', 'tourfic' ),
+					'label'        => esc_html__( 'Review Fields for Rooms', 'tourfic' ),
+					'subtitle'     => esc_html__( 'Design customer review fields for rooms. Custom fields are permitted.', 'tourfic' ),
 					'max'      => '6',
 					'drag_only'   => true,
 					'field_title'  => 'r-field-type',

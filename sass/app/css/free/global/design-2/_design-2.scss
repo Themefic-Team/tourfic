@@ -5119,3 +5119,198 @@
         }
     }
 }
+
+/* Room post type */
+.single-tf_room{
+    background-color: $color-filling-fg;
+
+    .tf-single-template{
+        &__two{
+            // Hero Section
+            .tf-hero-section-wrap {
+                margin-bottom: 0;
+
+                .tf-container {
+                    .tf-hero-content {
+                        @include justify-content(flex-end);
+
+                        .tf-hero-bottom-area {
+                            padding-bottom: 96px;
+
+                            .tf-head-title {
+                                h1{
+                                    margin: 0;
+                                    font-size: 3.188rem;
+                                    @media #{$max1024}{
+                                        font-size: 2rem;
+                                    }
+                                    @media #{$max768}{
+                                        font-size: 1.25rem;
+                                    }
+                                }
+                            }
+
+                            .tf-hero-gallery-videos {
+                                &>div {
+                                    @include flexbox();
+                                    width: 250px;
+                                    height: 150px;
+                                    padding: 51px 0;
+                                    justify-content: center;
+                                    align-items: center;
+                                    border-radius: 16px;
+                                    background: rgba(13, 38, 36, 0.80);
+                                    color: $color-white;
+                                    background-size: cover;
+                                    background-position: center;
+                                    cursor: pointer;
+
+                                    @media #{$max1024}{
+                                        width: 104px;
+                                        height: 40px;
+                                    }
+                                    @media #{$max768}{
+                                        width: 52px;
+                                        height: 32px;
+                                    }
+                                }
+                                a {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    height: 100%;
+                                    width: 100%;
+                                    color: $color-white;
+
+                                    svg {
+                                        @media #{$max1024}{
+                                            width: 16px;
+                                        }
+                                        @media #{$max1024}{
+                                            width: 16px;
+                                        }
+                                        @media #{$max768}{
+                                            width: 12px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .tf-content-wrapper{
+                padding: 48px 0;
+
+                .tf-section-title{
+                    color: $color-heading;
+                    font-size: 1.563rem;
+                    font-weight: 700;
+                    line-height: 1.5;
+                    margin-bottom: 16px;
+                }
+
+                .tf-details {
+                    gap: 48px;
+
+                    .tf-details-left {
+                        gap: 40px;
+
+                        .tf-overview-popular-facilities {
+                            
+                            &>ul {
+                                gap: 12px 32px;
+                                
+                                li {
+                                    width: calc(33.33% - 21.33px);
+
+                                    @media #{$max575}{
+                                        width: calc(50% - 16px);
+                                    }
+                                    
+                                    i{
+                                        margin-right: 8px;
+                                        font-size: 1.25rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .tf-reviews-wrapper {
+                padding-bottom: 0;
+
+                .tf-section-title{
+                    color: $color-heading;
+                    font-size: 1.563rem;
+                    font-weight: 700;
+                    line-height: 1.5;
+                    margin-bottom: 16px;
+                }
+                p{
+                    margin-bottom: 0;
+                }
+                .tf-review-items {
+
+                    .tf-reviews-item {
+                        padding: 24px;
+                        background-color: #fff;
+
+                        .tf-reviews-item-header{
+                            margin-bottom: 16px;
+                            @include flexbox();
+                            @include justify-content(space-between);
+                            gap: 32px;
+
+                            .tf-reviews-item-header-left{
+                                @include flexbox();
+                                gap: 16px;
+
+                                .tf-reviews-avater img{
+                                    border-radius: 50%;
+                                }
+
+                                .tf-reviews-avater-right{
+                                    @include flexbox();
+                                    @include flex-direction(column);
+                                    gap: 8px;
+
+                                    .tf-reviews-name{
+                                        color: $color-heading;
+                                        font-size: 1.25rem;
+                                        font-weight: 600;
+                                        line-height: 1.5;
+                                    }
+
+                                    .tf-review-rating {
+                                        div{
+                                            @include flexbox();
+                                            gap: 8px;
+                                            color: #FFB820;
+                                        }
+
+                                        span{
+                                            display: none;
+                                        }
+                                    }
+                                }
+                            }
+
+                            
+                        }
+
+                        .tf-reviews-text p {
+                            margin: 0;
+                            color: $color-text;
+                            font-size: 1rem;
+                            line-height: 1.5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

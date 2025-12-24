@@ -46,6 +46,11 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
 							'preview_link' => esc_url('https://tourfic.com/preview/cars/honda-city/'),
 						),
+                        'design-2' => array(
+                            'title' => esc_html__('Design 2', 'tourfic'),
+                            'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-coming-soon.png",
+                            'disabled' => true
+                        ),
 					),
 					'default'   	=> 'design-1',
 					'dependency'  => [
@@ -417,5 +422,48 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 			),
 		),
 
+        // Settings
+		'settings'         => array(
+			'title'  => esc_html__( 'Settings', 'tourfic' ),
+			'icon'   => 'fa-solid fa-viruses',
+			'fields' => array(
+				array(
+					'id'    => 'room-settings-docs',
+					'type'  => 'heading',
+					'title' => esc_html__( 'Settings', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/hotel-settings/')
+				),
+				array(
+					'id'        => 'disable-room-review',
+					'type'      => 'switch',
+					'label'     => esc_html__( 'Disable Review Section', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
+					'default'   => false
+				),
+
+				array(
+					'id'      => 'different-sections',
+					'type'    => 'heading',
+					'title' => esc_html__( 'Titles / Heading of Different Sections', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'      => 'room-feature-section-title',
+					'type'    => 'text',
+					'label' => esc_html__( 'Title for the Popular Features Section', 'tourfic' ),
+					'subtitle'    => esc_html__( 'This text will appear as the heading of the Popular Features section on the frontend.', 'tourfic' ),
+					'default' => "Amenities"
+
+				),
+				array(
+					'id'      => 'review-section-title',
+					'type'    => 'text',
+					'label' => esc_html__( 'Title for the Reviews Section', 'tourfic' ),
+					'subtitle'    => esc_html__( 'This text will appear as the heading of the Reviews section on the frontend.', 'tourfic' ),
+					'default' => "Guest Reviews"
+				),
+			),
+		),
 	),
 ) );
