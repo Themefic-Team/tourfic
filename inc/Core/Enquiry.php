@@ -367,7 +367,7 @@ abstract class Enquiry {
 			<div class="tf_booking_wrap_header">
 				<div class="tf-enquiry-single-header-details">
 					<div class="tf-single-enquiry-header-logo">
-						<img src="<?php echo esc_url( esc_url(TF_ASSETS_APP_URL.'images/tourfic-logo-icon-blue.png') ); ?>" alt="<?php echo esc_html( get_the_title( $data['post_id'] ) ); ?>">
+						<img src="<?php echo esc_url( TF_ASSETS_APP_URL.'images/tourfic-logo-icon-blue.png' ); ?>" alt="<?php echo esc_html( get_the_title( $data['post_id'] ) ); ?>">
 					</div>
 					<h1 class="wp-heading-inline"> <?php echo esc_html( get_the_title($data["post_id"])); ?> <?php echo esc_html(" / ID #"); ?><?php echo esc_html($data["id"]) ?></h1>
 				</div>
