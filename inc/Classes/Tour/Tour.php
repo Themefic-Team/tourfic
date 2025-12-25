@@ -3708,9 +3708,44 @@ class Tour {
 
 		$tour_archive_page_price_settings = ! empty( Helper::tfopt( 'tour_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'tour_archive_price_minimum_settings' ) : 'adult';
 		if($tour_archive_page_price_settings=='adult'){
-			$min_price = !empty($adult_price) ? $adult_price : '';
+			if($pricing_rule == 'group'){
+				$min_price    = ! empty( $price ) ? $price : '';
+			}elseif($pricing_rule == 'person'){
+				$all_prices = [];
+				if(!empty($adult_price)){
+					$all_prices[] = $adult_price;
+				}
+				$min_price = !empty($all_prices) ? min($all_prices) : '';
+			}elseif($pricing_rule == 'package'){
+				$all_prices = [];
+				if(!empty($adult_price)){
+					$all_prices[] = $adult_price;
+				}
+				if(!empty($price)){
+					$all_prices[] = $price;
+				}
+				$min_price = !empty($all_prices) ? min($all_prices) : '';
+			}
+
 		}elseif($tour_archive_page_price_settings=='child'){
-			$min_price = !empty($child_price) ? $child_price : '';
+			if($pricing_rule == 'group'){
+				$min_price    = ! empty( $price ) ? $price : '';
+			}elseif($pricing_rule == 'person'){
+				$all_prices = [];
+				if(!empty($child_price)){
+					$all_prices[] = $child_price;
+				}
+				$min_price = !empty($all_prices) ? min($all_prices) : '';
+			}elseif($pricing_rule == 'package'){
+				$all_prices = [];
+				if(!empty($child_price)){
+					$all_prices[] = $child_price;
+				}
+				if(!empty($price)){
+					$all_prices[] = $price;
+				}
+				$min_price = !empty($all_prices) ? min($all_prices) : '';
+			}
 		}elseif($tour_archive_page_price_settings=='all'){
 			if($pricing_rule == 'group'){
 				$min_price    = ! empty( $price ) ? $price : '';
