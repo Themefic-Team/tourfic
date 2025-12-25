@@ -849,7 +849,7 @@ function tf_tours_booking_function() {
 		$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 		$discounted_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
 
-		if ( $tour_type == 'continuous' ) {
+		if ( $tour_type == 'continuous' && empty( $tour_time_title ) ) {
 			$tf_tours_data['tf_tours_data']['tour_time'] = $tour_time_title;
 		}
 
@@ -966,6 +966,8 @@ function tf_tours_booking_function() {
 			$tf_offline_user_id = 1;
 		}
 
+		$tour_ides = wp_rand();
+
 		$order_details = [
 			'order_by'    => '',
 			'tour_date'   => $tour_date,
@@ -977,7 +979,8 @@ function tf_tours_booking_function() {
 			'infants'     => $infant,
 			'total_price' => $without_payment_price + $tour_extra_total,
 			'due_price'   => wc_price($without_payment_price + $tour_extra_total),
-			'visitor_details' => wp_json_encode($tf_visitor_details)
+			'visitor_details' => wp_json_encode($tf_visitor_details),
+			'unique_id' => $tour_ides,
 		];
 
 		$order_data = array(
@@ -996,6 +999,11 @@ function tf_tours_booking_function() {
 		);
 		$response['without_payment'] = 'true';
 		$order_id = Helper::tf_set_order( $order_data );
+
+		update_option( $tour_ides, $order_id);
+		update_option( 'tf_order_uni_'.$order_id, $tour_ides);
+		update_option( 'tf_order_tour_'.$tour_ides, $post_id);
+		
 		if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($order_id) ) {
 			do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
 
