@@ -304,7 +304,7 @@
         .tf-modify-search-btn{
             background: $color-primary;
             padding: 8px 32px;
-            color: $color-white;
+            color: $color-heading;
             text-align: center;
             font-size: 0.75rem;
             font-weight: 600;
@@ -5308,6 +5308,200 @@
                             font-size: 1rem;
                             line-height: 1.5;
                         }
+                    }
+                }
+            }
+
+            .tf-details-right{
+                @include flexbox();
+                @include flex-direction(column);
+                gap: 32px;
+
+                .tf-single-booking-box-wrapper{
+                    @include flex-direction(column);
+                    padding: 24px 32px 32px 32px;
+                    gap: 24px;
+                    border-radius: 24px;
+                    background-color: #fff;
+                    box-shadow: 0 16px 40px 0 rgba(238, 85, 9, 0.08);
+
+                    .tf-single-booking-box-bottom{
+                        @include flexbox();
+                        @include justify-content(space-between);
+                        gap: 24px;
+                        width: 100%;
+                    }
+
+                    label{
+                        color: $color-heading;
+                        font-size: 1rem;
+                        line-height: 1.5;
+                        font-weight: 400;
+                    }
+                    .tf-select-date{
+                        width: 100%;
+
+                        select{
+                            background-size: 13px;
+                            background-position: 93% center;
+                        }
+                    }
+                    .tf-search-field{
+                        background-color: $color-filling-bg;
+                        padding: 8px 10px;
+                        border-radius: 32px;
+                        height: 48px;
+                        margin-bottom: 0;
+                        border: 1px solid $color-border-lite;
+                        transition: all 0.2s ease;
+                        
+                        &.info-select{
+                            padding: 9px 20px;
+                            cursor: pointer;
+                            width: 100%;
+                        }
+                        &.tf_acrselection {
+                            width: 138px;
+                            
+                            .acr-select{
+                                .acr-dec,
+                                .acr-inc,
+                                .tf-archive-guest-info {
+                                    background: $color-filling-bg;
+                                    min-width: 32px;
+                                    min-height: 32px;
+                                    padding: 0;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    border: 0;
+                                    border-radius: 50%;
+                                }
+                                input{
+                                    text-align: center;
+                                }
+                            }
+                        }
+                        input,
+                        .tf-checkout-date{
+                            color: $color-heading;
+                            background: transparent;
+                            border: 0;
+                            font-size: 1rem;
+                            line-height: 1.5;
+                            padding: 0;
+                            flex: 1;
+
+                            &::placeholder{
+                                color: $color-heading;
+                            }
+                        }
+                        svg{
+                            path{
+                                stroke: $color-heading;
+                            }
+                        }
+                        .tf-guest{
+                            color: $color-heading;
+                            background: transparent;
+                            border: 0;
+                            font-size: 1rem;
+                            line-height: 1.5;
+                            padding: 0;
+                            flex: 1;
+                            text-align: center;
+                        }
+                    }
+                    .tf-submit-button{
+                        width: 100%;
+                        button{
+                            background-color: $color-primary;
+                            width: 100%;
+                            min-height: 72px;
+                            border: 2px solid $color-brand-dark;
+                            font-size: 1rem;
+                            line-height: 1.5;
+                            margin-top: 10px;
+
+                            &:hover{
+                                background-color: $color-primary;
+                                box-shadow: 0 40px 40px 0 rgba(238, 85, 9, 0.16), 0 32px 32px 0 rgba(238, 85, 9, 0.14), 0 24px 24px 0 rgba(238, 85, 9, 0.12), 0 20px 20px 0 rgba(238, 85, 9, 0.10), 0 16px 16px 0 rgba(238, 85, 9, 0.08), 0 12px 12px 0 rgba(238, 85, 9, 0.06), 0 8px 8px 0 rgba(238, 85, 9, 0.04), 0 4px 4px 0 rgba(238, 85, 9, 0.02);
+                            }
+                        }
+                    }
+
+                    .tf-select-guests{
+                        position: relative;
+                        .tf_acrselection{
+                            cursor: pointer;
+                        }
+                        .tf_acrselection-wrap {
+                            display: unset;
+                            min-width: 302px;
+                            top: 60%;
+                            opacity: 0;
+                            visibility: hidden;
+                            transition: 0.3s;
+                            border-radius: 12px;
+                            background: #F8FDFD;
+                            padding: 6px;
+                            right: 0;
+                            box-shadow: rgba(238,85,9,0.09) 0px 6px 17px 6px;
+
+                            &.tf-show {
+                                visibility: visible;
+                                opacity: 1;
+                                top: 110%;
+                                margin-top: 0;
+                                display: block!important;
+                            }
+                            .tf_acrselection{
+                                border-radius: 8px;
+                                background: $color-white;
+                                margin-bottom: 4px;
+                                &:last-child{
+                                    margin-bottom: 0;   
+                                }
+                                .acr-label{
+                                    padding: 8px 8px 8px 20px;
+                                    color: $color-text;
+                                    font-size: 1rem;
+                                    font-weight: 600;
+                                }
+                                .acr-select {
+                                    padding: 8px 10px;
+                                    border-radius: 8px;
+                                    background: $color-white;
+                                }
+                                .acr-dec,
+                                .acr-inc{
+                                    min-width: 32px;
+                                    min-height: 32px;
+                                    border-radius: 32px;
+                                    background: #DCE5E5;
+                                    backdrop-filter: blur(16px);
+                                    padding: 0;
+                                    border: 0;
+                                }
+                                input {
+                                    background: transparent;
+                                    border: 0;
+                                    text-align: center;
+                                    color: $color-text;
+                                    font-size: 1rem;
+                                    font-weight: 600;
+                                    height: 32px;
+                                    padding: 5px;
+                                }
+                            }
+                          
+                        }
+                    }
+
+                    .tf-search-input.form-control{
+                        width: 280px;
+                        opacity: 0;
+                        position: absolute;
                     }
                 }
             }

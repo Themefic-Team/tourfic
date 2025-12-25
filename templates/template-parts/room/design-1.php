@@ -4,6 +4,8 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
+use Tourfic\Classes\Room\Room;
+
 ?>
 
 <div class="tf-single-template__two">
@@ -55,8 +57,10 @@ use \Tourfic\App\TF_Review;
                     }
                     ?>
                 </div>
-                <div class="tf-details-right tf-sitebar-widgets">
-                    
+                <div class="tf-details-right tf-sidebar-widgets">
+                    <div class="tf-room-booking-box">
+                        <?php Room::tf_room_sidebar_booking_form(); ?>
+                    </div>
                     
                     <div class="tf-location tf-single-widgets">
                         <?php

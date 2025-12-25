@@ -2876,9 +2876,7 @@ class Helper {
                                             instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                                             dateSetToFields(selectedDates, instance);
                                         },
-                                        <?php if(! empty( $date )){ ?>
-                                        defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
-                                        <?php } ?>
+                                        defaultDate: <?php echo ! empty( $date ) ? wp_json_encode( explode( '-', $date ) ) : '[' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+1 day' ) ) ) . ', ' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+2 day' ) ) ) . ']' ; ?>,
                                     });
 
                                     function dateSetToFields(selectedDates, instance) {

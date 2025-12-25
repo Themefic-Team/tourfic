@@ -137,6 +137,10 @@ function tf_hotel_booking_callback() {
 	$hotel_discount_type   = ! empty( $room_meta["discount_hotel_type"] ) ? $room_meta["discount_hotel_type"] : "none";
 	$hotel_discount_amount = ! empty( $room_meta["discount_hotel_price"] ) ? $room_meta["discount_hotel_price"] : 0;
 
+	if( $pricing_by == 3 && ! $option_id ) {
+		$response['errors'][] = esc_html__( 'Select Room Option.', 'tourfic' );
+	}
+
 	/**
 	 * If no errors then process
 	 */

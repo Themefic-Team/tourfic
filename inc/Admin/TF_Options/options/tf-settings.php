@@ -1801,6 +1801,13 @@ TF_Settings::option( 'tf_settings', array(
 					'label_off' => esc_html__( 'No', 'tourfic' ),
 					'default'   => false,
 				),
+				array(
+					'id'       => 'room_booking_button_text',
+					'type'     => 'text',
+					'label'    => esc_html__( 'Change Book Button Text', 'tourfic' ),
+					'subtitle'  => esc_html__( 'With this option, you can change the text of the book now button on the single room pages.', 'tourfic' ),
+					'default'    => esc_html__('Book Now', 'tourfic'),
+				),
 			),
 		),
 

@@ -185,21 +185,32 @@
             var post_id = $('input[name=post_id]').val();
             var unique_id = $this.closest('.tf-room').find('input[name=unique_id]').val();
             var room_id = $this.closest('.tf-room').find('input[name=room_id]').val();
-            var option_id = $this.closest('.tf-room').find('input[name=option_id]').val();
+            var option_id = $this.closest('.tf-room').find('[name=option_id]').val();
+            var single_room = $this.closest('.tf-room').find('[name=single_room]').val();
 
             var location = $('input[name=place]').val();
             var adult = $('input[name=adult]').val();
             var child = $('input[name=child]').val();
             var children_ages = $('input[name=children_ages]').val();
-            var check_in_date = $('input[name=check_in_date]').val();
-            var check_out_date = $('input[name=check_out_date]').val();
-            if ($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
-                var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
+            if(single_room == 1){
+                var check_in_out_date = $('input[name=check-in-out-date]').val();
+                var check_in_date = check_in_out_date.split(' - ')[0];
+                var check_out_date = check_in_out_date.split(' - ')[1];
+                var room = $('[name=room]').val();
                 var deposit = $(this).closest('.tf-room').find('input[name=make_deposit]').is(':checked');
+                
             } else {
-                var room = $("#hotel_room_number").val();
-                var deposit = $this.closest('.tf-room').find('input[name=make_deposit]').is(':checked');
+                var check_in_date = $('input[name=check_in_date]').val();
+                var check_out_date = $('input[name=check_out_date]').val();
+                if ($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
+                    var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
+                    var deposit = $(this).closest('.tf-room').find('input[name=make_deposit]').is(':checked');
+                } else {
+                    var room = $("#hotel_room_number").val();
+                    var deposit = $this.closest('.tf-room').find('input[name=make_deposit]').is(':checked');
+                }
             }
+            
             var airport_service = $this.closest('.tf-withoutpayment-popup').find('[name="airport_service"]').val();
 
             let selectedExtras = [];
@@ -234,21 +245,26 @@
                 url: tf_params.ajax_url,
                 data: data,
                 beforeSend: function (data) {
-                    $this.block({
-                        message: null,
-                        overlayCSS: {
-                            background: "#fff",
-                            opacity: .5
-                        }
-                    });
+                    if(single_room == 1){
+                        $('#tour_room_details_loader').show();
+                    } else {
+                        $this.block({
+                            message: null,
+                            overlayCSS: {
+                                background: "#fff",
+                                opacity: .5
+                            }
+                        });
 
-                    $('.tf_notice_wrapper').html("").hide();
+                        $('.tf_notice_wrapper').html("").hide();
+                    }
                 },
                 complete: function (data) {
                     $this.unblock();
                 },
                 success: function (data) {
                     $this.unblock();
+                    $('#tour_room_details_loader').hide();
 
                     var response = JSON.parse(data);
 
@@ -273,6 +289,7 @@
                     }
                 },
                 error: function (data) {
+                    $('#tour_room_details_loader').hide();
                     console.log(data);
                 },
 
