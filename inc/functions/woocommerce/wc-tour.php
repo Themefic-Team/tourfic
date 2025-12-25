@@ -854,14 +854,14 @@ function tf_tours_booking_function() {
 		}
 
 		# Calculate discounted price
-		if ( !empty($allow_discount) && $discount_type == 'percent' ) {
+		if ( !empty($allow_discount) && $discount_type == 'percent' && !empty($discounted_price) ) {
 
 			$adult_price    = floatval(preg_replace('/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $discounted_price ), 2 )));
 			$children_price = floatval(preg_replace('/[^\d.]/', '', number_format( $children_price - ( ( $children_price / 100 ) * $discounted_price ), 2 )));
 			$infant_price   = floatval(preg_replace('/[^\d.]/', '', number_format( $infant_price - ( ( $infant_price / 100 ) * $discounted_price ), 2 )));
 			$group_price    = floatval(preg_replace('/[^\d.]/', '', number_format( $group_price - ( ( $group_price / 100 ) * $discounted_price ), 2 )));
 
-		} elseif ( !empty($allow_discount) && $discount_type == 'fixed' ) {
+		} elseif ( !empty($allow_discount) && $discount_type == 'fixed' && !empty($discounted_price) ) {
 
 			$adult_price    = floatval(preg_replace('/[^\d.]/', '', number_format( ( $adult_price - $discounted_price ), 2 )));
 			$children_price = floatval(preg_replace('/[^\d.]/', '', number_format( ( $children_price - $discounted_price ), 2 )));
