@@ -3,7 +3,7 @@
 namespace Tourfic\Classes\Room;
 
 use Tourfic\Classes\Helper;
-use \Tourfic\Classes\Hotel\Pricing;
+use \Tourfic\Classes\Room\Pricing;
 use Tourfic\App\TF_Review;
 use \Elementor\Group_Control_Image_Size;
 use \Elementor\Icons_Manager;
@@ -194,7 +194,7 @@ class Room {
 
 		$pricing_by   = ! empty( $meta['pricing-by'] ) ? $meta['pricing-by'] : '';
 		$room_options = ! empty( $meta['room-options'] ) ? $meta['room-options'] : [];
-        $min_price_arr = Pricing::instance($hotel_id)->get_min_price($period);
+        $min_price_arr = Pricing::instance($post_id)->get_min_price($period);
 		$min_discount_type = !empty($min_price_arr['min_discount_type']) ? $min_price_arr['min_discount_type'] : 'none';
 		$min_discount_amount = !empty($min_price_arr['min_discount_amount']) ? $min_price_arr['min_discount_amount'] : 0;
 
@@ -282,13 +282,13 @@ class Room {
 
                 <div class="tf-room-item-card-right" style="<?php echo $show_image != 'yes' ? 'width: 100%;' : ''; ?>">
 					<?php if ( $pricing_by == '3' && ! empty( $room_options ) ):
-						echo '<div class="tf-room-options">';
+						echo '<div class="tf-room-options tf-room-options-collapsed">';
 							foreach ( $room_options as $room_option_key => $room_option ):
 								$url = add_query_arg( array(
 									'room-option' => $room_option_key,
 								), $url);
 								?>
-                                <div class="tf-room-option">
+                                <div class="tf-room-option tf-room-option-item">
 									<div class="tf-room-option-left">
 										<h3><?php echo !empty($room_option['option_title']) ? esc_html($room_option['option_title']) : ''; ?></h3>
 										<?php if ( ! empty( $room_option['room-facilities'] ) ) :
@@ -317,7 +317,7 @@ class Room {
 
 											<!-- Price -->
 											<?php if($show_price == 'yes') : ?>
-											<div class="tf-room-price"><?php Pricing::instance( $hotel_id, $post_id )->get_per_price_html( $room_option_key, 'design-2' ); ?></div>
+											<div class="tf-room-price"><?php Pricing::instance( $post_id )->get_per_price_html( $room_option_key, 'design-2' ); ?></div>
 											<?php endif; ?>
 										</div>
 
@@ -329,6 +329,15 @@ class Room {
 								</div>
 								<?php
 							endforeach;
+							echo '
+							<div class="tf-room-view-more-wrap">
+								<span class="tf-room-view-more">
+									' . esc_html__( 'View More Pricing', 'tourfic' ) . '
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<path d="M5 12H19M12 5V19" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+								</span>
+							</div>';
 							echo '</div>';
 						else: ?>
 						<div class="tf-room-option">
@@ -374,7 +383,7 @@ class Room {
 
 									<!-- Price -->
 									<?php if($show_price == 'yes') : ?>
-									<div class="tf-room-price"><?php Pricing::instance( $hotel_id, $post_id )->get_per_price_html( '', 'design-2' ); ?></div>
+									<div class="tf-room-price"><?php Pricing::instance( $post_id )->get_per_price_html( '', 'design-2' ); ?></div>
 									<?php endif; ?>
 								</div>
 

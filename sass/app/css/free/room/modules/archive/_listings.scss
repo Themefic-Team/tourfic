@@ -227,6 +227,32 @@
                         }
                     }
                 }
+                
+                .tf-room-options-collapsed .tf-room-option-item {
+                    display: none;
+                }
+
+                .tf-room-options-collapsed .tf-room-option-item:nth-child(1),
+                .tf-room-options-collapsed .tf-room-option-item:nth-child(2) {
+                    display: flex;
+                }
+
+                .tf-room-view-more-wrap {
+                    margin-top: 24px;
+
+                    .tf-room-view-more{
+                        color: $color-primary;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        line-height: 1.5;
+                        gap: 8px;
+                        @include flexbox();
+                        @include align-items(center);
+                        @include justify-content(center);
+                        cursor: pointer;
+                    }
+                }
+
 
                 .tf-pagination-bar{
                     display: block;

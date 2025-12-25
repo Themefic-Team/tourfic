@@ -1109,9 +1109,9 @@ class Pricing {
 		$room_options = ! empty( $meta['room-options'] ) ? $meta['room-options'] : [];
 		$option_price_type = ! empty( $room_options[$option_key]['option_pricing_type'] ) ? $room_options[$option_key]['option_pricing_type'] : 'per_room';
 
-		// $design = !empty($design) ? $design : $this->template;
+		$$design = !empty($design) ? $design : $this->template;
 
-		if ( $design == 'design-2' ) {
+		if ( $$design == 'design-2' ) {
 			?>
             <span class="tf-price">
                 <span class="discount-price">

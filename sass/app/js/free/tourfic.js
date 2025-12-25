@@ -3067,6 +3067,25 @@
             }
         });
 
+        $(document).on('click', '.tf-room-view-more', function () {
+
+            const $btn = $(this);
+            const $wrapper = $btn.closest('.tf-room-options');
+            const $hiddenItems = $wrapper.find('.tf-room-option-item:hidden');
+
+            // Show next 2 items
+            $hiddenItems.slice(0, 2).slideDown(200);
+
+            // If no more hidden items, hide button
+            if ($wrapper.find('.tf-room-option-item:hidden').length <= 2) {
+                setTimeout(function () {
+                    if ($wrapper.find('.tf-room-option-item:hidden').length === 0) {
+                        $btn.fadeOut(150);
+                    }
+                }, 250);
+            }
+        });
+
     });
 
 })(jQuery, window);
