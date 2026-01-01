@@ -930,7 +930,7 @@ trait Action_Helper {
 			);
 		}
 
-		if ( $filters ) {
+		if ( $filters && $posttype == 'tf_room' ) {
 			$args['tax_query']['relation'] = $relation;
 
 			if ( $filter_relation == "OR" ) {
@@ -2583,6 +2583,8 @@ trait Action_Helper {
 			$response[$post_type] = Apt_Pricing::get_min_max_price_from_all_apartment();
 		} else if( $post_type == 'tf_carrental' ) {
 			$response[$post_type] = get_cars_min_max_price();
+		} else if( $post_type == 'tf_room' ) {
+			$response[$post_type] = Room_Pricing::get_min_max_price_from_all_room();
 		}
 
 		wp_send_json_success( $response );

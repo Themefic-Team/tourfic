@@ -3649,7 +3649,7 @@ function convertTo24HourFormat(timeStr) {
             if(!post_type){
                 post_type = $(document).find('input[name="post_id"]').attr("data-post-type");
             }
-            if( post_type == 'tf_hotel' || post_type == 'tf_tours' || post_type == 'tf_apartment' || post_type == 'tf_carrental' ){
+            if( post_type == 'tf_hotel' || post_type == 'tf_tours' || post_type == 'tf_apartment' || post_type == 'tf_carrental' || post_type == 'tf_room' ){
                 $.ajax({
                     type: 'POST',
                     url: tf_params.ajax_url,
@@ -3891,7 +3891,65 @@ function convertTo24HourFormat(timeStr) {
                                     min_seat: parseInt(response.data?.tf_carrental?.min_seat),
                                     max_seat: parseInt(response.data?.tf_carrental?.max_seat)
                                 }
-                            } 
+                            } else if( post_type == 'tf_room' ) { 
+                                let tf_room_range_options = {
+                                    range: {
+                                        min: parseInt( response.data?.tf_room?.min ),
+                                        max: parseInt( response.data?.tf_room?.max ),
+                                        step: 1
+                                    },
+                                    initialSelectedValues: {
+                                        from: parseInt( response.data?.tf_room?.min ),
+                                        to: parseInt( response.data?.tf_room?.max )
+                                    },
+                                    grid: false,
+                                    theme: "dark",
+                                    onFinish: function () {
+                                        if($(".filter-reset-btn").length>0){
+                                            $(".filter-reset-btn").show();
+                                        }
+                                        makeFilter();
+                                    }
+                                };
+                                if ( response.data?.tf_room?.min != 0 && response.data?.tf_room?.max != 0) {
+                                    $('.tf-room-filter-range').alRangeSlider(tf_room_range_options);
+                                }
+                        
+                                // room Min and Max Range in Search Result
+                                var tf_search_page_params = new window.URLSearchParams(window.location.search);
+                                let tf_room_search_range = {
+                                    range: {
+                                        min: parseInt( response.data?.tf_room?.min ),
+                                        max: parseInt( response.data?.tf_room?.max ),
+                                        step: 1
+                                    },
+                                    initialSelectedValues: {
+                                        from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt( response.data?.tf_room?.min ),
+                                        to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt( response.data?.tf_room?.max )
+                                    },
+                                    grid: false,
+                                    theme: "dark",
+                                    onFinish: function () {
+                                        if($(".filter-reset-btn").length>0){
+                                            $(".filter-reset-btn").show();
+                                        }
+                                        makeFilter();
+                                    }
+                                };
+                                if ( response.data?.tf_room?.min != 0 && response.data?.tf_room?.max != 0) {
+                                    $('.tf-room-result-price-range').alRangeSlider(tf_room_search_range);
+                                }
+
+                                // Store in global variable or object
+                                window.tf_price_ranges = {
+                                    min: parseInt(response.data?.tf_room?.min),
+                                    max: parseInt(response.data?.tf_room?.max)
+                                };
+                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
+                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
+                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
+                                }
+                            }
                         }
                     }
                 })
@@ -6691,7 +6749,7 @@ function convertTo24HourFormat(timeStr) {
             const $hiddenItems = $wrapper.find('.tf-room-option-item:hidden');
 
             // Show next 2 items
-            $hiddenItems.slice(0, 2).slideDown(200);
+            $hiddenItems.slice(0, 2).css('display', 'flex');
 
             // If no more hidden items, hide button
             if ($wrapper.find('.tf-room-option-item:hidden').length <= 2) {

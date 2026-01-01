@@ -51,7 +51,7 @@ $tf_room_arc_banner = !empty($tf_room_arc_banner) ? $tf_room_arc_banner : TF_ASS
                                 </div>
                                 <?php if (is_active_sidebar('tf_archive_booking_sidebar')) { ?>
                                     <div id="tf__booking_sidebar">
-                                        <?php //dynamic_sidebar('tf_archive_booking_sidebar'); ?>
+                                        <?php dynamic_sidebar('tf_archive_booking_sidebar'); ?>
                                     </div>
                                 <?php } ?>
                             </div>

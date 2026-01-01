@@ -2022,6 +2022,11 @@
     font-size: 0.75rem;
   }
 }
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf_widget .tf-room-result-price-range,
+.page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf_widget .tf-room-result-price-range {
+  padding-left: 14px;
+  padding-right: 24px;
+}
 .post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf_widget .tf-hotel-result-price-range,
 .post-type-archive-tf_room .tf-archive-template__one .tf-archive-filter .tf_widget .tf-tour-result-price-range,
 .page-template-tf-search .tf-archive-template__one .tf-archive-filter .tf_widget .tf-hotel-result-price-range,

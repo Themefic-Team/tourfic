@@ -1317,4 +1317,92 @@ class Pricing {
 			'option_title' => $option_title ?? ''
 		);
 	}
+
+	static function get_min_max_price_from_all_room() {
+		$price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'hotel_archive_price_minimum_settings' ) : 'all';
+		$current_date   = strtotime( "today" );
+
+		$room_args    = array(
+			'posts_per_page' => - 1,
+			'post_type'      => 'tf_room',
+			'post_status'    => 'publish'
+		);
+		$room_query   = new \WP_Query( $room_args );
+		$min_max_price = array();
+
+		if ( $room_query->have_posts() ):
+			while ( $room_query->have_posts() ) : $room_query->the_post();
+				$room_meta     = get_post_meta( get_the_ID(), 'tf_room_opt', true );
+				$pricing_by    = $room_meta['pricing-by'] ?? 1;
+				$avail_by_date = $room_meta['avil_by_date'] ?? 1;
+				$room_options  = $room_meta['room-options'] ?? [];
+
+				if ( $pricing_by == 1 && ! empty( $room_meta['price'] ) ) {
+					$min_max_price[] = $room_meta['price'];
+				}
+				if ( $pricing_by == 2 && ! empty( $room_meta['adult_price'] ) ) {
+					$min_max_price[] = $room_meta['adult_price'];
+				}
+				if ( $pricing_by == 2 && ! empty( $room_meta['child_price'] ) ) {
+					$min_max_price[] = $room_meta['child_price'];
+				}
+
+				if ( $pricing_by == 3 && ! empty( $room_options ) ) {
+					foreach ( $room_options as $room_option ) {
+						$option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
+						if ( $option_price_type == 'per_room' ) {
+							$min_max_price[] = ! empty( $room_option['option_price'] ) ? floatval( $room_option['option_price'] ) : 0;
+						} elseif ( $option_price_type == 'per_person' ) {
+							if ( $price_settings == 'adult' || $price_settings == 'all' ) {
+								$min_max_price[] = ! empty( $room_option['option_adult_price'] ) ? floatval( $room_option['option_adult_price'] ) : 0;
+							}
+							if ( $price_settings == 'child' || $price_settings == 'all' ) {
+								$min_max_price[] = ! empty( $room_option['option_child_price'] ) ? floatval( $room_option['option_child_price'] ) : 0;
+							}
+						}
+					}
+				}
+
+				if ( $avail_by_date == '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room_meta['avail_date'] ) ) {
+					$avail_date = json_decode( $room_meta['avail_date'], true );
+					if ( ! empty( $avail_date ) && is_array( $avail_date ) ) {
+						foreach ( $avail_date as $singleavailroom ) {
+							if ( $current_date < strtotime( $singleavailroom['check_in'] ) && $singleavailroom['status'] == 'available' ) {
+								if ( $pricing_by == 1 && ! empty( $singleavailroom['price'] ) ) {
+									$min_max_price[] = $singleavailroom['price'];
+								}
+								if ( $pricing_by == 2 && ! empty( $singleavailroom['adult_price'] ) ) {
+									$min_max_price[] = $singleavailroom['adult_price'];
+								}
+								if ( $pricing_by == 2 && ! empty( $singleavailroom['child_price'] ) ) {
+									$min_max_price[] = $singleavailroom['child_price'];
+								}
+								if ( $pricing_by == 3 && ! empty( $singleavailroom['options_count'] ) ) {
+									$options_count = $singleavailroom['options_count'] ?? 0;
+									for ( $i = 0; $i <= $options_count - 1; $i ++ ) {
+										if ( $singleavailroom[ 'tf_room_option_' . $i ] == '1' && $singleavailroom[ 'tf_option_pricing_type_' . $i ] == 'per_room' ) {
+											$min_max_price[] = $singleavailroom[ 'tf_option_room_price_' . $i ] ?? 0;
+										} else if ( $singleavailroom[ 'tf_room_option_' . $i ] == '1' && $singleavailroom[ 'tf_option_pricing_type_' . $i ] == 'per_person' ) {
+											if ( $price_settings == 'adult' || $price_settings == 'all' ) {
+												$min_max_price[] = $singleavailroom[ 'tf_option_adult_price_' . $i ] ?? 0;
+											}
+											if ( $price_settings == 'child' || $price_settings == 'all' ) {
+												$min_max_price[] = $singleavailroom[ 'tf_option_child_price_' . $i ] ?? 0;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			endwhile;
+		endif;
+		wp_reset_query();
+
+		return array(
+			'min' => ! empty( $min_max_price ) && min( $min_max_price ) != max( $min_max_price ) ? min( $min_max_price ) : 0,
+			'max' => ! empty( $min_max_price ) ? max( $min_max_price ) : 0,
+		);
+	}
 }
