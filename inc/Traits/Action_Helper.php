@@ -930,7 +930,22 @@ trait Action_Helper {
 			);
 		}
 
-		if ( $filters && $posttype == 'tf_room' ) {
+		if ( $filters && $posttype === 'tf_room' ) {
+			
+			$filters = array_values( array_filter( array_map( 'absint', (array) $filters ) ) );
+
+			$args['meta_query'] = $args['meta_query'] ?? [];
+			$args['meta_query']['relation'] = ( $filter_relation === 'OR' ) ? 'OR' : 'AND';
+
+			foreach ( $filters as $term_id ) {
+				$args['meta_query'][] = [
+					'key'     => 'tf_search_features',
+					'value'   => '"' . $term_id . '"',
+					'compare' => 'LIKE',
+				];
+			}
+			
+		} elseif ( $filters ) {
 			$args['tax_query']['relation'] = $relation;
 
 			if ( $filter_relation == "OR" ) {

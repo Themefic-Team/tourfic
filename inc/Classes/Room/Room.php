@@ -1186,4 +1186,36 @@ class Room {
 			</form>
 		<?php }
 	}
+
+	public static function tf_room_feature_count( $term_id ) {
+		global $wpdb;
+
+		$term_id = absint( $term_id );
+		if ( ! $term_id ) {
+			return 0;
+		}
+
+		// Meta value is serialized array like: a:3:{i:0;s:2:"34";...}
+		$like = '%"' . $wpdb->esc_like( (string) $term_id ) . '"%';
+
+		$sql = $wpdb->prepare(
+			"
+			SELECT COUNT(DISTINCT p.ID)
+			FROM {$wpdb->posts} p
+			INNER JOIN {$wpdb->postmeta} pm
+				ON pm.post_id = p.ID
+			WHERE p.post_type = %s
+				AND p.post_status = %s
+				AND pm.meta_key = %s
+				AND pm.meta_value LIKE %s
+			",
+			'tf_room',
+			'publish',
+			'tf_search_features',
+			$like
+		);
+
+		return (int) $wpdb->get_var( $sql );
+	}
+
 }

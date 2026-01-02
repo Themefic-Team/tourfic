@@ -895,3 +895,31 @@ function tf_update_main_post_meta($translated_post_id, $meta_key, $value) {
 
 	update_post_meta($main_post_id, $meta_key, $value);
 }
+
+// add_action( 'init', function () {
+// 	// Ensure taxonomy exists already.
+// 	register_taxonomy_for_object_type( 'hotel_feature', 'tf_room' );
+// }, 20 );
+
+// add_action( 'save_post_tf_room', function ( $post_id, $post, $update ) {
+
+// 	// Bail on autosave/revisions
+// 	if ( wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
+// 		return;
+// 	}
+
+// 	// Capability check (adjust capability if needed)
+// 	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+// 		return;
+// 	}
+
+// 	$meta = get_post_meta( $post_id, 'tf_room_opt', true );
+// 	$features = ! empty( $meta['features'] ) && is_array( $meta['features'] ) ? $meta['features'] : [];
+
+// 	// Make sure they are valid term IDs
+// 	$features = array_values( array_filter( array_map( 'absint', $features ) ) );
+
+// 	// Assign terms to room
+// 	wp_set_object_terms( $post_id, $features, 'hotel_feature', false );
+
+// }, 10, 3 );

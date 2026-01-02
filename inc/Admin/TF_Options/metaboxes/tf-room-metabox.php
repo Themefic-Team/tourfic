@@ -187,6 +187,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                         'hide_empty' => false,
                     ),
                     'field_width' => 100,
+                    'is_search_able' => true,
                 ),
 			),
 		),
