@@ -4004,6 +4004,7 @@ function convertTo24HourFormat(timeStr) {
 
             let filters = termIdsByFeildName('tf_filters');
             let tfHotelTypes = termIdsByFeildName('tf_hotel_types');
+            let tfRoomTypes = termIdsByFeildName('tf_room_types');
             let features = termIdsByFeildName('tf_features');
             let tour_features = termIdsByFeildName('tour_features');
             let attractions = termIdsByFeildName('tf_attractions');
@@ -4043,6 +4044,7 @@ function convertTo24HourFormat(timeStr) {
             formData.append('filters', filters);
             formData.append('features', features);
             formData.append('tf_hotel_types', tfHotelTypes);
+            formData.append('tf_room_types', tfRoomTypes);
             formData.append('tour_features', tour_features);
             formData.append('attractions', attractions);
             formData.append('activities', activities);
@@ -4189,7 +4191,7 @@ function convertTo24HourFormat(timeStr) {
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '.widget_tf_price_filters input[name="from"], .widget_tf_price_filters input[name="to"], [name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year]', function () {
+        $(document).on('change', '.widget_tf_price_filters input[name="from"], .widget_tf_price_filters input[name="to"], [name*=tf_filters],[name*=tf_hotel_types],[name*=tf_room_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year]', function () {
             if ($(".filter-reset-btn").length > 0) {
                 $(".filter-reset-btn").show();
             }

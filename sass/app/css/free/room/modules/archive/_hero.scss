@@ -13,6 +13,11 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
+                overflow: hidden;
+
+                @media #{$max1024} {
+                    padding-bottom: 56px;
+                }
 
                 &::after{
                     content: "";
@@ -29,6 +34,10 @@
 
                     .tf-banner-content{
                         gap: 56px;
+
+                        @media #{$max1024} {
+                            gap: 32px;
+                        }
 
                         h1{
                             color: $color-white;

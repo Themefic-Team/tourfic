@@ -70,13 +70,13 @@ if ( ! empty( $room_options ) ) {
                     }
                     ?>
                 </div>
-                <div class="tf-details-right tf-sidebar-widgets">
+                <div class="tf-details-right tf-sitebar-widgets">
                     <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( $room_option, 'design-2' ); ?></div>
                     <div class="tf-room-booking-box">
                         <?php Room::tf_room_sidebar_booking_form(); ?>
                     </div>
                     
-                    <div class="tf-location tf-single-widgets">
+                    <div class="tf-review-widget tf-single-widgets ">
                         <?php
                         if($disable_review_sec != 1) :
                         global $current_user;
@@ -137,7 +137,7 @@ if ( ! empty( $room_options ) ) {
                         ) );
                         ?>
                         <?php if( empty($tf_comment_counts) && $tf_comment_counts == 0 ) : ?>
-                            <button class="tf_btn tf_btn_secondary tf_btn_full tf_btn_sharp tf_btn_large tf-review-open">
+                            <button class="tf_btn tf_btn_rounded tf_btn_full tf_btn_large tf-review-open">
                             <?php esc_html_e("Leave your review", "tourfic"); ?>
                         </button>
                         <?php endif; ?>
@@ -167,40 +167,6 @@ if ( ! empty( $room_options ) ) {
                         </div>
                         <?php } } } ?>
                         <?php endif; ?>
-
-                        <!-- Enquery Section -->
-                        <?php 
-                        $tf_enquiry_section_status = !empty($meta['h-enquiry-section']) ? $meta['h-enquiry-section'] : "";
-                        $tf_enquiry_section_icon = !empty($meta['h-enquiry-option-icon']) ? esc_html($meta['h-enquiry-option-icon']) : '';
-                        $tf_enquiry_section_title = !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : '';
-                        $tf_enquiry_section_cont = !empty($meta['h-enquiry-option-content']) ? esc_html($meta['h-enquiry-option-content']) : '';
-                        $tf_enquiry_section_button = !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : '';
-                        if(!empty($tf_enquiry_section_status) && ( !empty($tf_enquiry_section_icon) || !empty($tf_enquiry_section_title) || !empty($enquery_button_text))){
-                        ?>
-                        <div class="tf-send-inquiry tf-single-widgets">
-                            <?php 
-                            if (!empty($tf_enquiry_section_icon)) { ?>
-                                <i class="<?php echo wp_kses_post($tf_enquiry_section_icon); ?>" aria-hidden="true"></i>
-                            <?php
-                            }
-                            if(!empty($tf_enquiry_section_title)) {
-                                ?>
-                                <h3><?php echo wp_kses_post($tf_enquiry_section_title); ?></h3>
-                                <?php
-                            }
-                            if(!empty($tf_enquiry_section_cont)) {
-                                ?>
-                                <p><?php echo wp_kses_post($tf_enquiry_section_cont);  ?></p>
-                                <?php
-                            }
-                            if( !empty( $tf_enquiry_section_button )) {
-                                ?>
-                                <div class="tf-btn-wrap"><a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_full tf_btn_large tf_btn_sharp"><span><?php echo esc_html($tf_enquiry_section_button); ?></span></a></div>
-                                <?php
-                            }
-                            ?>
-                        </div>
-                        <?php } ?>
                     </div>
                     
                 </div>        

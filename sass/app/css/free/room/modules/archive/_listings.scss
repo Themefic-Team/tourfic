@@ -6,8 +6,28 @@
                 background-color: $color-filling-fg;
                 padding: 48px 0;
 
+                @media #{$max575} {
+                    padding-top: 32px;
+                }
+
                 .tf-archive-header{
                     margin-bottom: 48px;
+                    gap: 16px;
+
+                    @media #{$max575} {
+                        margin-bottom: 32px;
+                    }
+
+                    .tf-total-results{
+                        color: $color-heading;
+                        font-size: 1.563rem;
+                        font-weight: 400;
+                        line-height: 1.4;
+                    }
+                    
+                    .tf-archive-header-right{
+                        gap: 8px;
+                    }
 
                     .tf-total-result-bar{
                         h3{
@@ -42,6 +62,12 @@
                         &:hover {
                             background: $color-brand-lite;
                         }
+
+                        @media #{$max575} {
+                            padding: 4px 18px;
+                            font-size: 14px;
+                            height: 40px;
+                        }
                     }
 
                     form.tf-archive-ordering{
@@ -72,12 +98,28 @@
                     @include flexbox();
                     background-color: #fff;
 
+                    @media #{$max991} {
+                        @include flex-wrap();
+                        @include flex-direction(column);
+                    }
+
                     &-left{
                         @include flex(0 0 490px);
+
+                        @media #{$max991} {
+                            @include flex(0 0 100%);
+                        }
                     }
                     &-right{
                         @include flex(0 0 calc(100% - 490px));
                         padding: 32px;
+
+                        @media #{$max991} {
+                            @include flex(0 0 100%);
+                        }
+                        @media #{$max575} {
+                            padding: 16px 24px 32px 24px;
+                        }
                     }
 
                     .tf-room-gallery{
@@ -114,10 +156,18 @@
                         @include flex-direction(column);
                         gap: 16px;
 
+                        @media #{$max575} {
+                            padding: 24px 24px 16px 24px;
+                        }
+
                         h2{
                             margin: 0;
                             font-size: 2rem;
                             line-height: 1.4;
+
+                            @media #{$max575} {
+                                font-size: 1.563rem;
+                            }
 
                             a{
                                 color: $color-heading;
@@ -156,6 +206,10 @@
                         padding-bottom: 24px;
                         border-bottom: 1px solid $color-border-lite;
 
+                        @media #{$max575} {
+                            @include flex-direction(column);
+                        }
+
                         &-right{
                             @include flexbox();
                             @include flex-direction(column);
@@ -163,6 +217,16 @@
                             @include align-items(flex-end);
                             @include flex(0 0 200px);
                             text-align: right;
+
+                            @media #{$max575} {
+                                @include align-items(flex-start);
+                                @include flex(0 0 100%);
+                                text-align: left;
+
+                                .tf_btn{
+                                    width: 100%;
+                                }
+                            }
                         }
 
                         &:last-child{
@@ -210,6 +274,10 @@
                             margin-left: auto;
                             width: fit-content;
                             border-radius: 30px;
+
+                            @media #{$max575} {
+                                margin-left: 0;
+                            }
                         }
 
                         .tf-room-price{

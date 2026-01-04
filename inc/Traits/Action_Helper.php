@@ -786,6 +786,7 @@ trait Action_Helper {
 		$filters               = !empty( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
 		$features              = !empty( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
 		$tf_hotel_types        = !empty( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
+		$tf_room_types        = !empty( $_POST['tf_room_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_room_types'] ) ) : null;
 		$tour_features         = !empty( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
 		$attractions           = !empty( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
 		$activities            = !empty( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
@@ -980,6 +981,28 @@ trait Action_Helper {
 				foreach ( $filters as $key => $term_id ) {
 					$args['tax_query']['tf_feature'][] = array(
 						'taxonomy' => 'tf_feature',
+						'terms'    => array( $term_id ),
+					);
+				}
+			}
+		}
+
+		//Query for the types filter of room
+		if ( $tf_room_types ) {
+
+			$args['tax_query']['relation'] = $relation;
+
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => 'room_type',
+					'terms'    => $tf_room_types,
+				);
+			} else {
+				$args['tax_query']['room_type']['relation'] = 'AND';
+
+				foreach ( $tf_room_types as $key => $term_id ) {
+					$args['tax_query']['room_type'][] = array(
+						'taxonomy' => 'room_type',
 						'terms'    => array( $term_id ),
 					);
 				}

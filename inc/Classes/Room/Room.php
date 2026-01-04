@@ -1218,4 +1218,42 @@ class Room {
 		return (int) $wpdb->get_var( $sql );
 	}
 
+	static function tf_term_count( $filter, $destination, $default_count ) {
+
+		if ( $destination == '' ) {
+			return $default_count;
+		}
+
+		$term_count = array();
+
+		$args = array(
+			'post_type'      => 'tf_room',
+			'post_status'    => 'publish',
+			'posts_per_page' => - 1,
+			'tax_query'      => array(
+				'relation' => 'AND',
+				array(
+					'taxonomy' => 'room_type',
+					'field'    => 'slug',
+					'terms'    => $destination
+				)
+			)
+		);
+
+		$loop = new \WP_Query( $args );
+
+		if ( $loop->have_posts() ) :
+			while ( $loop->have_posts() ) : $loop->the_post();
+
+				if ( has_term( $filter, 'room_type', get_the_ID() ) == true ) {
+					$term_count[] = 'true';
+				}
+
+			endwhile;
+		endif;
+
+		return count( $term_count );
+
+		wp_reset_postdata();
+	}
 }

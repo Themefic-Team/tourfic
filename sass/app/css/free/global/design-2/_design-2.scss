@@ -5133,9 +5133,22 @@
                 .tf-container {
                     .tf-hero-content {
                         @include justify-content(flex-end);
+                        @media #{$max1024}{
+                            max-height: inherit;
+                        }
 
                         .tf-hero-bottom-area {
                             padding-bottom: 96px;
+                            @media #{$max1024}{
+                                padding-bottom: 56px;
+                                padding-top: 56px;
+                            }
+                            @media #{$max768}{
+                                gap: 16px;
+                                @include flex-wrap(wrap);
+                                padding-bottom: 32px;
+                                padding-top: 32px;
+                            }
 
                             .tf-head-title {
                                 h1{
@@ -5144,10 +5157,10 @@
                                     -webkit-box-orient: inherit;
 
                                     @media #{$max1024}{
-                                        font-size: 2rem;
+                                        font-weight: 400;
                                     }
                                     @media #{$max768}{
-                                        font-size: 1.25rem;
+                                        font-size: 2.5rem;
                                     }
                                 }
                             }
@@ -5168,12 +5181,13 @@
                                     cursor: pointer;
 
                                     @media #{$max1024}{
-                                        width: 104px;
-                                        height: 40px;
+                                        width: 200px;
+                                        height: 120px;
+                                        padding: 20px 0;
                                     }
                                     @media #{$max768}{
-                                        width: 52px;
-                                        height: 32px;
+                                        width: 120px;
+                                        height: 80px;
                                     }
                                 }
                                 a {
@@ -5186,13 +5200,10 @@
 
                                     svg {
                                         @media #{$max1024}{
-                                            width: 16px;
-                                        }
-                                        @media #{$max1024}{
-                                            width: 16px;
+                                            width: 36px;
                                         }
                                         @media #{$max768}{
-                                            width: 12px;
+                                            width: 24px;
                                         }
                                     }
                                 }
@@ -5216,8 +5227,25 @@
                 .tf-details {
                     gap: 48px;
 
+                    @media #{$max1024} {
+                        overflow: hidden;
+                        @include flex-direction(column-reverse);
+                    }
+
                     .tf-details-left {
                         gap: 40px;
+
+                        .tf-review-mobile-widget{
+                            display: none;
+                        }
+
+                        @media #{$max1024} {
+                            width: 100%;
+
+                            .tf-review-mobile-widget{
+                                display: block;
+                            }
+                        }
 
                         .tf-overview-popular-facilities {
                             
@@ -5236,6 +5264,17 @@
                                         font-size: 1.25rem;
                                     }
                                 }
+                            }
+                        }
+                    }
+
+                    .tf-details-right{
+                        @media #{$max1024} {
+                            width: 100%;
+                            padding: 0;
+
+                            .tf-review-widget{
+                                display: none;
                             }
                         }
                     }
@@ -5345,6 +5384,13 @@
                         @include justify-content(space-between);
                         gap: 24px;
                         width: 100%;
+
+                        @media #{$max1024} {
+                            .tf-select-guests,
+                            .tf-select-room{
+                                width: calc(50% - 12px);
+                            }
+                        }
                     }
 
                     label{
@@ -5374,11 +5420,23 @@
                             padding: 9px 20px;
                             cursor: pointer;
                             width: 100%;
+
+                            @media #{$max1024} {
+                                padding: 0 20px;
+                            }
+
                         }
                         &.tf_acrselection {
                             width: 138px;
+                            @media #{$max1024} {
+                                width: 100%;
+                            }
                             
                             .acr-select{
+                                @media #{$max1024} {
+                                    width: 100%;
+                                }
+                                
                                 .acr-dec,
                                 .acr-inc,
                                 .tf-archive-guest-info {
@@ -5437,6 +5495,10 @@
                             font-size: 1rem;
                             line-height: 1.5;
                             margin-top: 10px;
+
+                            @media #{$max768} {
+                                min-height: 48px;
+                            }
 
                             &:hover{
                                 background-color: $color-primary;

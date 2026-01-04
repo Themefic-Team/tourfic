@@ -11,6 +11,20 @@
                     box-shadow: 0px 16px 40px 0px #EE550914;
                     gap: 24px;
 
+                    @media #{$max1024} {
+                        .tf-select-date{
+                            width: calc(50% - 12px);
+                        }
+                    }
+
+                    @media #{$max575} {
+                        padding: 20px 24px 24px 24px;
+
+                        .tf-select-date{
+                            width: 100%;
+                        }
+                    }
+
                     label{
                         color: $color-white;
                         font-size: 1.25rem;
@@ -35,10 +49,25 @@
                             padding: 9px 20px;
                             cursor: pointer;
                             width: 272px;
+
+                            @media #{$max1024} {
+                                padding: 3px 20px;
+                                width: 100%;
+                            }
                         }
                         &.tf_acrselection {
                             width: 124px;
+
+                            @media #{$max1024} {
+                                width: 100%;
+                            }
+
                             .acr-select{
+
+                                @media #{$max1024} {
+                                    width: 100%;
+                                }
+                                
                                 .acr-dec,
                                 .acr-inc,
                                 .tf-archive-guest-info {
@@ -87,7 +116,32 @@
                             text-align: center;
                         }
                     }
+
+                    .tf-form-bottom-left{
+                        @include flexbox();
+                        gap: 24px;
+
+                        @media #{$max1024} {
+                            width: calc(50% - 12px);
+
+                            .tf-select-guests,
+                            .tf-select-room{
+                                width: calc(50% - 12px);
+                            }
+                        }
+
+                        @media #{$max575} {
+                            width: 100%;
+                        }
+                    }
+
                     .tf-submit-button{
+                        @media #{$max1024} {
+                            width: calc(50% - 12px);
+                        }
+                        @media #{$max575} {
+                            width: 100%;
+                        }
                         button{
                             min-width: 267px;
                             min-height: 72px;
@@ -95,6 +149,11 @@
                             font-size: 1.25rem;
                             line-height: 1.5;
                             margin-top: 10px;
+
+                            @media #{$max1024} {
+                                width: 100%;
+                                min-width: auto;
+                            }
 
                             &:hover{
                                 background-color: $color-primary;
@@ -119,8 +178,9 @@
                             background: #F8FDFD;
                             padding: 6px;
                             right: inherit;
-                                left: 50%;
-                                transform: translateX(-50%);
+                            left: 50%;
+                            transform: translateX(-50%);
+
                             &.tf-show {
                                 visibility: visible;
                                 opacity: 1;

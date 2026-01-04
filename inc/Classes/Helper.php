@@ -2762,83 +2762,86 @@ class Helper {
                                 </div>
                             </div>
                         </div>
-                        <div class="tf-select-room">
-                            <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
-                                <label for="tf-rooms-number">
-                                    <?php esc_html_e("Rooms", "tourfic"); ?>
-                                </label>
-                            
-                                <div class="tf_acrselection tf-search-field">
-                                    <div class="acr-select">
-                                        <div class="acr-dec">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4.16602 10H15.8327" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </div>
-                                        <input type="tel" name="room" id="room" min="1" value="1" readonly="">
-                                        <div class="acr-inc">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4.16699 10.0001H15.8337M10.0003 4.16675V15.8334" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tf-select-guests">
-                            <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
-                                <label for="guests">
-                                    <?php esc_html_e("Guests", "tourfic"); ?>
-                                </label>
-                                <div class="tf_acrselection tf-search-field tf-booking-adult-child-infant">
-                                    <div class="acr-select">
-                                        <span class="tf-guest"><?php esc_html_e( "1", "tourfic" ); ?></span>
-                                        <div class="tf-archive-guest-info">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M5 7.5L10 12.5L15 7.5" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tf_acrselection-wrap">
-                                <div class="tf_acrselection-inner">
-                                    <div class="tf_acrselection">
-                                        <div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
-                                        <div class="acr-select">
-                                            <div class="acr-dec">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                    <path d="M4.16666 10H15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                            </div>
-                                            <input type="tel" name="adults" id="adults" min="1" value="1" readonly>
-                                            <div class="acr-inc">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                    <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="tf-form-bottom-left">
+                            <div class="tf-select-room">
+                                <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
+                                    <label for="tf-rooms-number">
+                                        <?php esc_html_e("Rooms", "tourfic"); ?>
+                                    </label>
                                 
-                                    <div class="tf_acrselection">
-                                        <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
+                                    <div class="tf_acrselection tf-search-field">
                                         <div class="acr-select">
                                             <div class="acr-dec">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                    <path d="M4.16666 10H15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.16602 10H15.8327" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
                                             </div>
-                                            <input type="tel" name="childrens" id="children" min="0" value="0" readonly>
+                                            <input type="tel" name="room" id="room" min="1" value="1" readonly="">
                                             <div class="acr-inc">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                    <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.16699 10.0001H15.8337M10.0003 4.16675V15.8334" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="tf-select-guests">
+                                <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
+                                    <label for="guests">
+                                        <?php esc_html_e("Guests", "tourfic"); ?>
+                                    </label>
+                                    <div class="tf_acrselection tf-search-field tf-booking-adult-child-infant">
+                                        <div class="acr-select">
+                                            <span class="tf-guest"><?php esc_html_e( "1", "tourfic" ); ?></span>
+                                            <div class="tf-archive-guest-info">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M5 7.5L10 12.5L15 7.5" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf_acrselection-wrap">
+                                    <div class="tf_acrselection-inner">
+                                        <div class="tf_acrselection">
+                                            <div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
+                                            <div class="acr-select">
+                                                <div class="acr-dec">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                        <path d="M4.16666 10H15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                                <input type="tel" name="adults" id="adults" min="1" value="1" readonly>
+                                                <div class="acr-inc">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                        <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="tf_acrselection">
+                                            <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
+                                            <div class="acr-select">
+                                                <div class="acr-dec">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                        <path d="M4.16666 10H15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                                <input type="tel" name="childrens" id="children" min="0" value="0" readonly>
+                                                <div class="acr-inc">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                        <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="tf-submit-button">
                             <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
                             <button class="tf-filter-rooms tf_btn tf_btn_rounded tf-flex-align-center"><?php esc_html_e("Modify search", "tourfic"); ?></button>
