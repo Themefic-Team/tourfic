@@ -2398,6 +2398,7 @@ TF_Settings::option( 'tf_settings', array(
 					'default'  => 8,
 				),
 
+				//Hotel Search
 				array(
 					'id'       => 'hotel_search_heading',
 					'type'     => 'heading',
@@ -2439,6 +2440,32 @@ TF_Settings::option( 'tf_settings', array(
 					'default'   => false,
 					'dependency' => array( "required_location_hotel_search", "==", "false")
 				),
+				
+				//Room Search
+				array(
+					'id'       => 'room_search_heading',
+					'type'     => 'heading',
+					'title'    => esc_html__( 'Room Search', 'tourfic' ),
+				),
+				array(
+					'id'        => 'date_room_search',
+					'type'      => 'switch',
+					'label'     => esc_html__( 'Date Required in Room Search', 'tourfic' ),
+					'subtitle'  => esc_html__( 'Activate this feature to enable users to pick their check-in and check-out dates for searching.', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
+					'default'   => true,
+				),
+				array(
+					'id'        => 'disable_room_child_search',
+					'type'      => 'switch',
+					'label'     => esc_html__( 'Disable Child in Room Search', 'tourfic' ),
+					'subtitle'  => esc_html__( 'Turn on this setting to hide the child option from the search form.', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
+				),
+
+				//Tour Search
 				array(
 					'id'       => 'tour_search_heading',
 					'type'     => 'heading',
