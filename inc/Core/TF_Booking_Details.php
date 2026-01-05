@@ -1423,6 +1423,23 @@ abstract Class TF_Booking_Details {
 				apply_filters( 'tf_after_booking_completed_calendar_data', $tf_order->order_id, $order_data='', '' );
 			}
 
+            if ( 'offline'== $tf_order->payment_method) {
+                global $wpdb;
+	            $order_data = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE order_id = %d", $tf_order->order_id ), ARRAY_A );
+
+                // Decode JSON fields safely
+                $json_fields = [ 'billing_details', 'shipping_details', 'order_details' ];
+
+                foreach ( $json_fields as $field ) {
+                    if ( ! empty( $order_data[ $field ] ) && is_string( $order_data[ $field ] ) ) {
+                        $decoded = json_decode( $order_data[ $field ], true );
+                        $order_data[ $field ] = is_array( $decoded ) ? $decoded : [];
+                    }
+                }
+
+                do_action( 'tf_offline_payment_booking_confirmation', $tf_order->order_id, $order_data );
+            }
+
             // Woocommerce status
             $order = wc_get_order($tf_order->order_id);
             if (!empty($order)) {
