@@ -2447,3 +2447,24 @@ li.tf-filter-item {
         max-width: 95%;
     }
 }
+
+#tf_room_aval_check{
+    .tf_selectperson-wrap{
+        width: 40%;
+    }
+    .tf_selectdate-wrap{
+        width: 40%;
+    }
+
+    &.tf-advanced-search-enabled{
+        .tf_selectperson-wrap{
+            width: 30%;
+        }
+        .tf_selectdate-wrap{
+            width: 30%;
+        }
+        .tf_selectdate-wrap.tf_more_info_selections{
+            width: 20%;
+        }
+    }
+}

@@ -1,3 +1,6 @@
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/app/css/free/tourfic.scss ***!
+  \*********************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /* 
 Container
@@ -4175,6 +4178,22 @@ li.tf-filter-item {
   }
 }
 
+#tf_room_aval_check .tf_selectperson-wrap {
+  width: 40%;
+}
+#tf_room_aval_check .tf_selectdate-wrap {
+  width: 40%;
+}
+#tf_room_aval_check.tf-advanced-search-enabled .tf_selectperson-wrap {
+  width: 30%;
+}
+#tf_room_aval_check.tf-advanced-search-enabled .tf_selectdate-wrap {
+  width: 30%;
+}
+#tf_room_aval_check.tf-advanced-search-enabled .tf_selectdate-wrap.tf_more_info_selections {
+  width: 20%;
+}
+
 @media only screen and (max-width: 1024px) {
   .tf-booking-form-tab {
     display: none;
@@ -4864,6 +4883,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf-check-in-out-date,
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf-tour-check-in-out-date,
+.tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf-room-check-in-out-date,
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date .tf-apartment-check-in-out-date {
   visibility: hidden;
   height: 0px;

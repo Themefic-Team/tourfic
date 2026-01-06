@@ -1281,15 +1281,18 @@ class Room {
 
 		$disable_room_child_search = ! empty( Helper::tfopt( 'disable_room_child_search' ) ) ? Helper::tfopt( 'disable_room_child_search' ) : '';
 
+		if ( ! empty( $advanced ) && $advanced == 'enabled' ) {
+			$classes .= ' tf-advanced-search-enabled';
+		}
 		if ( ! empty( $design ) && 2 == $design ) {
 			?>
-            <form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2 <?php echo esc_attr( $classes ); ?>" id="tf_room_aval_check" method="get" autocomplete="off"
+            <form class="tf_booking-widget-design-2 tf_room-shortcode-design-2 <?php echo esc_attr( $classes ); ?>" id="tf_room_aval_check" method="get" autocomplete="off"
                   action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
                 <div class="tf_hotel_searching">
                     <div class="tf_form_innerbody">
                         <div class="tf_form_fields">
                             <div class="tf_checkin_date">
-                                <label class="tf_label_checkin tf_check_inout_dates tf_hotel_check_in_out_date">
+                                <label class="tf_label_checkin tf_room_check_in_out_date">
                                     <span class="tf-label"><?php esc_html_e( 'Check in', 'tourfic' ); ?></span>
                                     <div class="tf_form_inners">
                                         <div class="tf_checkin_dates">
@@ -1307,11 +1310,11 @@ class Room {
                                     </div>
                                 </label>
 
-                                <input type="hidden" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;"
+                                <input type="hidden" name="check-in-out-date" class="tf-room-check-in-out-date" onkeypress="return false;"
                                        placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo Helper::tfopt( 'date_room_search' ) ? 'required' : ''; ?>>
                             </div>
 
-                            <div class="tf_checkin_date tf_check_inout_dates tf_hotel_check_in_out_date">
+                            <div class="tf_checkin_date tf_room_check_in_out_date">
                                 <label class="tf_label_checkin">
                                     <span class="tf-label"><?php esc_html_e( 'Check Out', 'tourfic' ); ?></span>
                                     <div class="tf_form_inners">
@@ -1445,33 +1448,13 @@ class Room {
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Children age input field based on children number -->
-									<?php
-
-									$children_age        = Helper::tfopt( 'children_age_limit' );
-									$children_age_status = Helper::tfopt( 'enable_child_age_limit' );
-									if ( ! empty( $children_age_status ) && $children_age_status == "1" ) {
-										?>
-                                        <div class="tf-children-age-fields">
-                                            <div class="tf-children-age" id="tf-age-field-0" style="display:none">
-                                                <label for="children-age"><?php esc_html__( 'Children 0 Age:', 'tourfic' ) ?></label>
-                                                <select>
-													<?php for ( $age = 0; $age <= $children_age; $age ++ ) {
-														?>
-                                                        <option value="<?php echo esc_attr( $age ); ?>"><?php echo esc_attr( $age ); ?></option>
-													<?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-									<?php } ?>
                                 </div>
 
                             </div>
                         </div>
                         <div class="tf_availability_checker_box">
                             <input type="hidden" name="type" value="tf_room" class="tf-post-type"/>
-							<?php
-							if ( $author ) { ?>
+							<?php if ( $author ) { ?>
                                 <input type="hidden" name="tf-author" value="<?php echo esc_attr( $author ); ?>" class="tf-post-type"/>
 							<?php } ?>
                             <button class="tf_btn">
@@ -1490,10 +1473,10 @@ class Room {
                         // flatpickr locale first day of Week
 						<?php Helper::tf_flatpickr_locale( "root" ); ?>
 
-                        $(".tf_check_inout_dates").on("click", function () {
-                            $(".tf-check-in-out-date").trigger("click");
+                        $(".tf_room_check_in_out_date").on("click", function () {
+                            $(".tf-room-check-in-out-date").trigger("click");
                         });
-                        $(".tf-check-in-out-date").flatpickr({
+                        $(".tf-room-check-in-out-date").flatpickr({
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
@@ -1520,13 +1503,13 @@ class Room {
                                 ];
                                 if (selectedDates[0]) {
                                     const startDate = selectedDates[0];
-                                    $(".tf_hotel_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
-                                    $(".tf_hotel_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
+                                    $(".tf_room_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
+                                    $(".tf_room_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
                                 }
                                 if (selectedDates[1]) {
                                     const endDate = selectedDates[1];
-                                    $(".tf_hotel_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
-                                    $(".tf_hotel_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
+                                    $(".tf_room_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
+                                    $(".tf_room_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
                                 }
                             }
                         }
@@ -1537,111 +1520,92 @@ class Room {
 		<?php }elseif( !empty($design) && 3==$design ){ ?>
 			<form class="tf-archive-search-box-wrapper <?php echo esc_attr( $classes ); ?>" id="tf_room_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
 				<div class="tf-date-selection-form">
-				<div class="tf-date-select-box tf-flex tf-flex-gap-8">
+					<div class="tf-date-select-box tf-flex tf-flex-gap-8">
 
-					<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn full-width">
-						<div class="tf-select-date">
-							<div class="tf-flex tf-flex-gap-4">
-								<div class="icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-								</div>
-								<div class="info-select">
-									<h5><?php esc_html_e("Check-in & Check-out Date", "tourfic"); ?></h5>
-									<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo Helper::tfopt( 'date_room_search' ) ? 'required' : ''; ?>>
+						<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn full-width">
+							<div class="tf-select-date">
+								<div class="tf-flex tf-flex-gap-4">
+									<div class="icon">
+										<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									</div>
+									<div class="info-select">
+										<h5><?php esc_html_e("Check-in & Check-out Date", "tourfic"); ?></h5>
+										<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Check-in - Check-out', 'tourfic' ); ?>" <?php echo Helper::tfopt( 'date_room_search' ) ? 'required' : ''; ?>>
+									</div>
 								</div>
 							</div>
+
 						</div>
 
-					</div>
-
-					<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn full-width">
-						<div class="tf-select-date">
-							<div class="tf-flex tf-flex-gap-4">
-								<div class="icon">
-									<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M9.99992 10.8333C12.3011 10.8333 14.1666 8.96785 14.1666 6.66667C14.1666 4.36548 12.3011 2.5 9.99992 2.5C7.69873 2.5 5.83325 4.36548 5.83325 6.66667C5.83325 8.96785 7.69873 10.8333 9.99992 10.8333ZM9.99992 10.8333C11.768 10.8333 13.4637 11.5357 14.714 12.786C15.9642 14.0362 16.6666 15.7319 16.6666 17.5M9.99992 10.8333C8.23181 10.8333 6.53612 11.5357 5.28587 12.786C4.03563 14.0362 3.33325 15.7319 3.33325 17.5" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-									</svg>
-								</div>
-								<div class="info-select">
-									<h5><?php esc_html_e("Guests & Rooms", "tourfic"); ?></h5>
-									<div class="tf_selectperson-wrap">
-										<div class="tf_input-inner">
-											<div class="adults-text"><?php echo esc_html__( '1 Adults', 'tourfic' ); ?></div>
-											<?php if ( empty( $disable_room_child_search ) ) : ?>
+						<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn full-width">
+							<div class="tf-select-date">
+								<div class="tf-flex tf-flex-gap-4">
+									<div class="icon">
+										<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M9.99992 10.8333C12.3011 10.8333 14.1666 8.96785 14.1666 6.66667C14.1666 4.36548 12.3011 2.5 9.99992 2.5C7.69873 2.5 5.83325 4.36548 5.83325 6.66667C5.83325 8.96785 7.69873 10.8333 9.99992 10.8333ZM9.99992 10.8333C11.768 10.8333 13.4637 11.5357 14.714 12.786C15.9642 14.0362 16.6666 15.7319 16.6666 17.5M9.99992 10.8333C8.23181 10.8333 6.53612 11.5357 5.28587 12.786C4.03563 14.0362 3.33325 15.7319 3.33325 17.5" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									</div>
+									<div class="info-select">
+										<h5><?php esc_html_e("Guests & Rooms", "tourfic"); ?></h5>
+										<div class="tf_selectperson-wrap">
+											<div class="tf_input-inner">
+												<div class="adults-text"><?php echo esc_html__( '1 Adults', 'tourfic' ); ?></div>
+												<?php if ( empty( $disable_room_child_search ) ) : ?>
+													<div class="person-sep"></div>
+													<div class="child-text"><?php echo esc_html__( '0 Children', 'tourfic' ); ?></div>
+												<?php endif; ?>
 												<div class="person-sep"></div>
-												<div class="child-text"><?php echo esc_html__( '0 Children', 'tourfic' ); ?></div>
-											<?php endif; ?>
-											<div class="person-sep"></div>
-											<div class="room-text"><?php echo esc_html__( '1 Room', 'tourfic' ); ?></div>
-										</div>
+												<div class="room-text"><?php echo esc_html__( '1 Room', 'tourfic' ); ?></div>
+											</div>
 
-										<div class="tf_acrselection-wrap">
-											<div class="tf_acrselection-inner">
-												<div class="tf_acrselection">
-													<div class="acr-label"><?php esc_html__( 'Adults', 'tourfic' ); ?></div>
-													<div class="acr-select">
-														<div class="acr-dec">-</div>
-														<input type="number" name="adults" id="adults" min="1" value="1" readonly>
-														<div class="acr-inc">+</div>
-													</div>
-												</div>
-												<?php
-												$children_age        = Helper::tfopt( 'children_age_limit' );
-												$children_age_status = Helper::tfopt( 'enable_child_age_limit' );
-												if ( empty( $disable_room_child_search ) ) : ?>
+											<div class="tf_acrselection-wrap">
+												<div class="tf_acrselection-inner">
 													<div class="tf_acrselection">
-														<div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
+														<div class="acr-label"><?php esc_html__( 'Adults', 'tourfic' ); ?></div>
 														<div class="acr-select">
-															<div class="acr-dec <?php echo ! empty( $children_age_status ) && ! empty( $children_age_status ) ? esc_attr( 'child-dec' ) : ''; ?>">-</div>
-															<input type="number" name="children" id="children" min="0" value="0">
-															<div class="acr-inc <?php echo ! empty( $children_age_status ) && ! empty( $children_age_status ) ? esc_attr( 'child-inc' ) : ''; ?>">+</div>
+															<div class="acr-dec">-</div>
+															<input type="number" name="adults" id="adults" min="1" value="1" readonly>
+															<div class="acr-inc">+</div>
 														</div>
 													</div>
-												<?php endif; ?>
-												<div class="tf_acrselection">
-													<div class="acr-label"><?php esc_html_e( 'Rooms', 'tourfic' ); ?></div>
-													<div class="acr-select">
-														<div class="acr-dec">-</div>
-														<input type="number" name="room" id="room" min="1" value="1">
-														<div class="acr-inc">+</div>
+													<?php if ( empty( $disable_room_child_search ) ) : ?>
+														<div class="tf_acrselection">
+															<div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
+															<div class="acr-select">
+																<div class="acr-dec">-</div>
+																<input type="number" name="children" id="children" min="0" value="0">
+																<div class="acr-inc">+</div>
+															</div>
+														</div>
+													<?php endif; ?>
+													<div class="tf_acrselection">
+														<div class="acr-label"><?php esc_html_e( 'Rooms', 'tourfic' ); ?></div>
+														<div class="acr-select">
+															<div class="acr-dec">-</div>
+															<input type="number" name="room" id="room" min="1" value="1">
+															<div class="acr-inc">+</div>
+														</div>
 													</div>
 												</div>
 											</div>
-											<?php
-											if ( ! empty( $children_age_status ) && $children_age_status == "1" ) {
-												?>
-												<div class="tf-children-age-fields">
-													<div class="tf-children-age" id="tf-age-field-0" style="display:none">
-														<label for="children-age"><?php esc_html__( 'Children 0 Age:', 'tourfic' ) ?></label>
-														<select>
-															<?php for ( $age = 0; $age <= $children_age; $age ++ ) {
-																?>
-																<option value="<?php echo esc_attr( $age ); ?>"><?php echo esc_attr( $age ); ?></option>
-															<?php } ?>
-														</select>
-													</div>
-												</div>
-											<?php } ?>
 										</div>
-									</div>
 
+									</div>
 								</div>
 							</div>
+
 						</div>
+					</div>
 
+					<div class="tf-driver-location-box">
+						<div class="tf-submit-button">
+							<input type="hidden" name="type" value="tf_room" class="tf-post-type"/>
+							<button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html( apply_filters("tf_hotel_search_form_submit_button_text", esc_html__('Search', 'tourfic') ) ); ?> <i class="ri-search-line"></i></button>
+						</div>
 					</div>
 				</div>
-
-				<div class="tf-driver-location-box">
-					<div class="tf-submit-button">
-						<input type="hidden" name="type" value="tf_room" class="tf-post-type"/>
-                        <button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html( apply_filters("tf_hotel_search_form_submit_button_text", esc_html__('Search', 'tourfic') ) ); ?> <i class="ri-search-line"></i></button>
-					</div>
-				</div>
-				</div>
-
             </form>
 
             <script>
@@ -1677,8 +1641,6 @@ class Room {
                 <fieldset class="tf-search__form__fieldset">
 
                     <div class="tf-search__form__fieldset__middle">
-
-
                         <!-- Adult Person -->
                         <div class="tf-search__form__group tf_selectperson-wrap">
                             <label for="tf-search__form-adult" class="tf-search__form__label">
@@ -1934,16 +1896,13 @@ class Room {
                                         <div class="acr-inc">+</div>
                                     </div>
                                 </div>
-								<?php
-								$children_age        = Helper::tfopt( 'children_age_limit' );
-								$children_age_status = Helper::tfopt( 'enable_child_age_limit' );
-								if ( empty( $disable_room_child_search ) ) : ?>
+								<?php if ( empty( $disable_room_child_search ) ) : ?>
                                     <div class="tf_acrselection">
                                         <div class="acr-label"><?php esc_html_e( 'Children', 'tourfic' ); ?></div>
                                         <div class="acr-select">
-                                            <div class="acr-dec <?php echo ! empty( $children_age_status ) && ! empty( $children_age_status ) ? esc_attr( 'child-dec' ) : ''; ?>">-</div>
+                                            <div class="acr-dec">-</div>
                                             <input type="number" name="children" id="children" min="0" value="0">
-                                            <div class="acr-inc <?php echo ! empty( $children_age_status ) && ! empty( $children_age_status ) ? esc_attr( 'child-inc' ) : ''; ?>">+</div>
+                                            <div class="acr-inc">+</div>
                                         </div>
                                     </div>
 								<?php endif; ?>
@@ -1956,22 +1915,6 @@ class Room {
                                     </div>
                                 </div>
                             </div>
-							<?php
-							if ( ! empty( $children_age_status ) && $children_age_status == "1" ) {
-								?>
-                                <div class="tf-children-age-fields">
-                                    <div class="tf-children-age" id="tf-age-field-0" style="display:none">
-                                        <label for="children-age"><?php esc_html__( 'Children 0 Age:', 'tourfic' ) ?></label>
-                                        <select>
-											<?php for ( $age = 0; $age <= $children_age; $age ++ ) {
-												?>
-                                                <option value="<?php echo esc_attr( $age ); ?>"><?php echo esc_attr( $age ); ?></option>
-											<?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
-							<?php } ?>
-
                         </div>
                     </div>
 
