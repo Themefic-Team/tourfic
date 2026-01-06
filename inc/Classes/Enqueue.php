@@ -124,6 +124,10 @@ class Enqueue {
 				wp_enqueue_style("tf-app-{$key}", TF_ASSETS_URL . "app/css/tourfic-{$key}" . $this->css_min . ".css", null, TF_VERSION);
 			}
 		}
+		//is page template tf-search then enqueue room css
+		if ( get_page_template_slug() == 'tf-search' ) {
+			wp_enqueue_style( 'tf-app-room', TF_ASSETS_URL . 'app/css/tourfic-room' . $this->css_min . '.css', null, TF_VERSION );
+		}
 
 		if ( get_post_type() == 'tf_tours' ) {
 

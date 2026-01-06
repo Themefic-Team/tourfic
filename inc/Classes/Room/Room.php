@@ -441,7 +441,7 @@ class Room {
 		if ( ! empty( $room_meta['adult'] ) && $room_meta['adult'] >= $adults && ! empty( $room_meta['child'] ) && $room_meta['child'] >= $child && ! empty( $room_meta['num-room'] ) && $room_meta['num-room'] >= $room ) {
 
 			// Check custom date range status of room
-			$avil_by_date = !empty( $room_meta['avil_by_date'] ) ? $room_meta['avil_by_date'] : [];
+			$avil_by_date = !empty( $room_meta['avail_date'] ) ? json_decode($room_meta['avail_date'], true) : [];
 
 			// Check if any room available without custom date range
 			if ( empty( $avil_by_date ) ) {
@@ -502,7 +502,7 @@ class Room {
 				// If all the room has custom date range then filter the rooms by date
 
 				// Get custom date range repeater
-				$dates  = !empty( $room_meta['avil_by_date'] ) ? $room_meta['avil_by_date'] : [];
+				$dates  = !empty( $room_meta['avail_date'] ) ? json_decode($room_meta['avail_date'], true) : [];
 				// If no date range return
 				if ( empty( $dates ) ) {
 					return;
@@ -524,6 +524,7 @@ class Room {
 				$availability_dates     = [];
 				$tf_check_in_date_price = [];
 				// Run loop through custom date range repeater and filter out only the dates
+				
 				foreach ( $dates as $date ) {
 					if ( ! empty( $date ) && gettype( $date ) == "string" ) {
 						$date = json_decode( $date, true );
@@ -607,7 +608,7 @@ class Room {
 		if ( ! empty( $room_meta['adult'] ) && $room_meta['adult'] >= $adults && empty( $room_meta['child'] ) && $room_meta['child'] >= $child && ! empty( $room_meta['num-room'] ) && $room_meta['num-room'] >= $room ) {
 		
 			// Check custom date range status of room
-			$avil_by_date = !empty( $room_meta['avil_by_date'] ) ? $room_meta['avil_by_date'] : [];
+			$avil_by_date = !empty( $room_meta['avail_date'] ) ? json_decode($room_meta['avail_date'], true) : [];
 
 			// Check if any room available without custom date range
 			if ( empty( $avil_by_date ) ) {
@@ -668,7 +669,7 @@ class Room {
 				// If all the room has custom date range then filter the rooms by date
 
 				// Get custom date range repeater
-				$dates  = !empty( $room_meta['avil_by_date'] ) ? $room_meta['avil_by_date'] : [];
+				$dates  = !empty( $room_meta['avail_date'] ) ? $room_meta['avail_date'] : [];
 
 				// If no date range return
 				if ( empty( $dates ) ) {
@@ -1286,7 +1287,7 @@ class Room {
 		}
 		if ( ! empty( $design ) && 2 == $design ) {
 			?>
-            <form class="tf_booking-widget-design-2 tf_room-shortcode-design-2 <?php echo esc_attr( $classes ); ?>" id="tf_room_aval_check" method="get" autocomplete="off"
+            <form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2 <?php echo esc_attr( $classes ); ?>" id="tf_room_aval_check" method="get" autocomplete="off"
                   action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
                 <div class="tf_hotel_searching">
                     <div class="tf_form_innerbody">
@@ -1563,7 +1564,7 @@ class Room {
 											<div class="tf_acrselection-wrap">
 												<div class="tf_acrselection-inner">
 													<div class="tf_acrselection">
-														<div class="acr-label"><?php esc_html__( 'Adults', 'tourfic' ); ?></div>
+														<div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
 														<div class="acr-select">
 															<div class="acr-dec">-</div>
 															<input type="number" name="adults" id="adults" min="1" value="1" readonly>

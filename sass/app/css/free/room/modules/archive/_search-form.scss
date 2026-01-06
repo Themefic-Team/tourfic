@@ -2,243 +2,246 @@
 .page-template-tf-search{
     .tf-archive-template{
         &__one{
-            .tf-archive-search-box{
-                .tf-archive-search-box-wrapper{               
-                    border-radius: 24px;
-                    padding: 24px 32px 32px;
-                    background: #FFF8F51A;
-                    backdrop-filter: blur(32px);
-                    box-shadow: 0px 16px 40px 0px #EE550914;
-                    gap: 24px;
-
-                    @media #{$max1024} {
-                        .tf-select-date{
-                            width: calc(50% - 12px);
-                        }
-                    }
-
-                    @media #{$max575} {
-                        padding: 20px 24px 24px 24px;
-
-                        .tf-select-date{
-                            width: 100%;
-                        }
-                    }
-
-                    label{
-                        color: $color-white;
-                        font-size: 1.25rem;
-                        line-height: 1.5;
-                        font-weight: 400;
-                    }
-                    .tf-search-field{
+            .tf-archive-room-banner{
+                .tf-archive-search-box{
+                    .tf-archive-search-box-wrapper{               
+                        border-radius: 24px;
+                        padding: 24px 32px 32px;
+                        background: #FFF8F51A;
                         backdrop-filter: blur(32px);
-                        background: #FFF8F529;
-                        padding: 8px 10px;
-                        border-radius: 32px;
-                        height: 48px;
-                        margin-bottom: 0;
-                        border: 1px solid transparent;
-                        transition: all 0.2s ease;
-                     
-                        &:hover,
-                        &:focus{
-                            border: 1px solid $color-white;
-                        }
-                        &.info-select{
-                            padding: 9px 20px;
-                            cursor: pointer;
-                            width: 272px;
-
-                            @media #{$max1024} {
-                                padding: 3px 20px;
-                                width: 100%;
-                            }
-                        }
-                        &.tf_acrselection {
-                            width: 124px;
-
-                            @media #{$max1024} {
-                                width: 100%;
-                            }
-
-                            .acr-select{
-
-                                @media #{$max1024} {
-                                    width: 100%;
-                                }
-                                
-                                .acr-dec,
-                                .acr-inc,
-                                .tf-archive-guest-info {
-                                    background: #FFF8F529;
-                                    min-width: 32px;
-                                    min-height: 32px;
-                                    padding: 0;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    backdrop-filter: blur(32px);
-                                    border: 0;
-                                    border-radius: 50%;
-                                }
-                                input{
-                                    text-align: center;
-                                }
-                            }
-                        }
-                        input,
-                        .tf-checkout-date{
-                            color: $color-white;
-                            background: transparent;
-                            border: 0;
-                            font-size: 1.25rem;
-                            line-height: 1.5;
-                            padding: 0;
-                            flex: 1;
-                            &::placeholder{
-                                color: $color-white;
-                            }
-                        }
-                        svg{
-                            path{
-                                stroke: $color-white;
-                            }
-                        }
-                        .tf-guest{
-                            color: $color-white;
-                            background: transparent;
-                            border: 0;
-                            font-size: 1.25rem;
-                            line-height: 1.5;
-                            padding: 0;
-                            flex: 1;
-                            text-align: center;
-                        }
-                    }
-
-                    .tf-form-bottom-left{
-                        @include flexbox();
+                        box-shadow: 0px 16px 40px 0px #EE550914;
                         gap: 24px;
 
                         @media #{$max1024} {
-                            width: calc(50% - 12px);
-
-                            .tf-select-guests,
-                            .tf-select-room{
+                            .tf-select-date{
                                 width: calc(50% - 12px);
                             }
                         }
 
                         @media #{$max575} {
-                            width: 100%;
-                        }
-                    }
+                            padding: 20px 24px 24px 24px;
 
-                    .tf-submit-button{
-                        @media #{$max1024} {
-                            width: calc(50% - 12px);
+                            .tf-select-date{
+                                width: 100%;
+                            }
                         }
-                        @media #{$max575} {
-                            width: 100%;
-                        }
-                        button{
-                            min-width: 267px;
-                            min-height: 72px;
-                            border: 2px solid $color-brand-dark;
+
+                        label{
+                            color: $color-white;
                             font-size: 1.25rem;
                             line-height: 1.5;
-                            margin-top: 10px;
+                            font-weight: 400;
+                        }
+                        .tf-search-field{
+                            backdrop-filter: blur(32px);
+                            background: #FFF8F529;
+                            padding: 8px 10px;
+                            border-radius: 32px;
+                            height: 48px;
+                            margin-bottom: 0;
+                            border: 1px solid transparent;
+                            transition: all 0.2s ease;
+                        
+                            &:hover,
+                            &:focus{
+                                border: 1px solid $color-white;
+                            }
+                            &.info-select{
+                                padding: 9px 20px;
+                                cursor: pointer;
+                                width: 272px;
+
+                                @media #{$max1024} {
+                                    padding: 3px 20px;
+                                    width: 100%;
+                                }
+                            }
+                            &.tf_acrselection {
+                                width: 124px;
+
+                                @media #{$max1024} {
+                                    width: 100%;
+                                }
+
+                                .acr-select{
+
+                                    @media #{$max1024} {
+                                        width: 100%;
+                                    }
+                                    
+                                    .acr-dec,
+                                    .acr-inc,
+                                    .tf-archive-guest-info {
+                                        background: #FFF8F529;
+                                        min-width: 32px;
+                                        min-height: 32px;
+                                        padding: 0;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        backdrop-filter: blur(32px);
+                                        border: 0;
+                                        border-radius: 50%;
+                                    }
+                                    input{
+                                        text-align: center;
+                                    }
+                                }
+                            }
+                            input,
+                            .tf-checkout-date{
+                                color: $color-white;
+                                background: transparent;
+                                border: 0;
+                                font-size: 1.25rem;
+                                line-height: 1.5;
+                                padding: 0;
+                                flex: 1;
+                                &::placeholder{
+                                    color: $color-white;
+                                }
+                            }
+                            svg{
+                                path{
+                                    stroke: $color-white;
+                                }
+                            }
+                            .tf-guest{
+                                color: $color-white;
+                                background: transparent;
+                                border: 0;
+                                font-size: 1.25rem;
+                                line-height: 1.5;
+                                padding: 0;
+                                flex: 1;
+                                text-align: center;
+                            }
+                        }
+
+                        .tf-form-bottom-left{
+                            @include flexbox();
+                            gap: 24px;
 
                             @media #{$max1024} {
+                                width: calc(50% - 12px);
+
+                                .tf-select-guests,
+                                .tf-select-room{
+                                    width: calc(50% - 12px);
+                                }
+                            }
+
+                            @media #{$max575} {
                                 width: 100%;
-                                min-width: auto;
-                            }
-
-                            &:hover{
-                                background-color: $color-primary;
-                                box-shadow: 0 40px 40px 0 rgba(238, 85, 9, 0.16), 0 32px 32px 0 rgba(238, 85, 9, 0.14), 0 24px 24px 0 rgba(238, 85, 9, 0.12), 0 20px 20px 0 rgba(238, 85, 9, 0.10), 0 16px 16px 0 rgba(238, 85, 9, 0.08), 0 12px 12px 0 rgba(238, 85, 9, 0.06), 0 8px 8px 0 rgba(238, 85, 9, 0.04), 0 4px 4px 0 rgba(238, 85, 9, 0.02);
                             }
                         }
-                    }
 
-                    .tf-select-guests{
-                        position: relative;
-                        .tf_acrselection{
-                            cursor: pointer;
-                        }
-                        .tf_acrselection-wrap {
-                            display: unset;
-                            min-width: 302px;
-                            top: 60%;
-                            opacity: 0;
-                            visibility: hidden;
-                            transition: 0.3s;
-                            border-radius: 12px;
-                            background: #F8FDFD;
-                            padding: 6px;
-                            right: inherit;
-                            left: 50%;
-                            transform: translateX(-50%);
-
-                            &.tf-show {
-                                visibility: visible;
-                                opacity: 1;
-                                
-                                top: 110%;
-                                margin-top: 0;
-                                display: block!important;
+                        .tf-submit-button{
+                            @media #{$max1024} {
+                                width: calc(50% - 12px);
                             }
+                            @media #{$max575} {
+                                width: 100%;
+                            }
+                            button{
+                                min-width: 267px;
+                                min-height: 72px;
+                                border: 2px solid $color-brand-dark;
+                                font-size: 1.25rem;
+                                line-height: 1.5;
+                                margin-top: 10px;
+
+                                @media #{$max1024} {
+                                    width: 100%;
+                                    min-width: auto;
+                                }
+
+                                &:hover{
+                                    background-color: $color-primary;
+                                    box-shadow: 0 40px 40px 0 rgba(238, 85, 9, 0.16), 0 32px 32px 0 rgba(238, 85, 9, 0.14), 0 24px 24px 0 rgba(238, 85, 9, 0.12), 0 20px 20px 0 rgba(238, 85, 9, 0.10), 0 16px 16px 0 rgba(238, 85, 9, 0.08), 0 12px 12px 0 rgba(238, 85, 9, 0.06), 0 8px 8px 0 rgba(238, 85, 9, 0.04), 0 4px 4px 0 rgba(238, 85, 9, 0.02);
+                                }
+                            }
+                        }
+
+                        .tf-select-guests{
+                            position: relative;
                             .tf_acrselection{
-                                border-radius: 8px;
-                                background: $color-white;
-                                margin-bottom: 4px;
-                                &:last-child{
-                                    margin-bottom: 0;   
+                                cursor: pointer;
+                            }
+                            .tf_acrselection-wrap {
+                                display: unset;
+                                min-width: 302px;
+                                top: 60%;
+                                opacity: 0;
+                                visibility: hidden;
+                                transition: 0.3s;
+                                border-radius: 12px;
+                                background: #F8FDFD;
+                                padding: 6px;
+                                right: inherit;
+                                left: 50%;
+                                transform: translateX(-50%);
+
+                                &.tf-show {
+                                    visibility: visible;
+                                    opacity: 1;
+                                    
+                                    top: 110%;
+                                    margin-top: 0;
+                                    display: block!important;
                                 }
-                                .acr-label{
-                                    padding: 8px 8px 8px 20px;
-                                    color: $color-text;
-                                    font-size: 1.25rem;
-                                    font-weight: 600;
-                                }
-                                .acr-select {
-                                    padding: 8px 10px;
+                                .tf_acrselection{
                                     border-radius: 8px;
                                     background: $color-white;
+                                    margin-bottom: 4px;
+                                    &:last-child{
+                                        margin-bottom: 0;   
+                                    }
+                                    .acr-label{
+                                        padding: 8px 8px 8px 20px;
+                                        color: $color-text;
+                                        font-size: 1.25rem;
+                                        font-weight: 600;
+                                    }
+                                    .acr-select {
+                                        padding: 8px 10px;
+                                        border-radius: 8px;
+                                        background: $color-white;
+                                    }
+                                    .acr-dec,
+                                    .acr-inc{
+                                        min-width: 32px;
+                                        min-height: 32px;
+                                        border-radius: 32px;
+                                        background: #DCE5E5;
+                                        backdrop-filter: blur(16px);
+                                        padding: 0;
+                                        border: 0;
+                                    }
+                                    input {
+                                        background: transparent;
+                                        border: 0;
+                                        text-align: center;
+                                        color: $color-text;
+                                        font-size: 1.25rem;
+                                        font-weight: 600;
+                                        height: 32px;
+                                        padding: 5px;
+                                    }
                                 }
-                                .acr-dec,
-                                .acr-inc{
-                                    min-width: 32px;
-                                    min-height: 32px;
-                                    border-radius: 32px;
-                                    background: #DCE5E5;
-                                    backdrop-filter: blur(16px);
-                                    padding: 0;
-                                    border: 0;
-                                }
-                                input {
-                                    background: transparent;
-                                    border: 0;
-                                    text-align: center;
-                                    color: $color-text;
-                                    font-size: 1.25rem;
-                                    font-weight: 600;
-                                    height: 32px;
-                                    padding: 5px;
-                                }
+                            
                             }
-                          
-                        }
-                    }   
+                        }   
+                    }
+                }
+
+                .tf-booking-date-wrap .tf-search-input.form-control{
+                    width: 200px;
+                    opacity: 0;
+                    position: absolute;
                 }
             }
-
-            .tf-booking-date-wrap .tf-search-input.form-control{
-                width: 200px;
-                opacity: 0;
-                position: absolute;
-            }
+            
         }
     }
 }

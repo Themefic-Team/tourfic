@@ -2467,4 +2467,12 @@ li.tf-filter-item {
             width: 20%;
         }
     }
+
+    &.tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date{
+        width: 30%;
+    }
+    &.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select:first-child,
+    &.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select{
+        width: 50%;
+    }
 }

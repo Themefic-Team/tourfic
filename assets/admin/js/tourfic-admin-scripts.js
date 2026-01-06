@@ -1,109 +1,6608 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 /******/ (() => { // webpackBootstrap
-/******/ 	var __webpack_modules__ = ({
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+(() => {
+(function ($) {
 
-/***/ "./sass/admin/js/free/admin.js":
-/*!*************************************!*\
-  !*** ./sass/admin/js/free/admin.js ***!
-  \*************************************/
-/***/ (() => {
+    $(document).ready(function () {
 
-eval("(function ($) {\n\n    $(document).ready(function () {\n\n        // Create an instance of Notyf\n        const notyf = new Notyf({\n            ripple: true,\n            dismissable: true,\n            duration: 3000,\n            position: {\n                x: 'right',\n                y: 'bottom',\n            },\n        });\n\n\n        /**\n         * Delete old review fields\n         * @author kabir, fida\n         */\n        $(document).on('click', '.tf-del-old-review-fields', function (e) {\n            e.preventDefault();\n            var $this = $(this);\n            var data = {\n                action: 'tf_delete_old_review_fields',\n                deleteAll: $(this).data('delete-all'),\n                _ajax_nonce: tf_admin_params.tf_nonce\n            };\n\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: data,\n                beforeSend: function (data) {\n                    notyf.success(tf_admin_params.deleting_old_review_fields);\n                },\n                success: function (data) {\n                    notyf.success(data.data);\n                },\n                error: function (data) {\n                    notyf.error(data.data);\n                },\n\n            });\n\n        });\n\n        /**\n         * Delete room order ids\n         * @author fida\n         */\n        $(document).on('click', '.remove-order-ids', function (e) {\n\n            e.preventDefault();\n\n            var $this = $(this);\n            var post_id = $(\"#post_ID\").val();\n            var meta_field = $this.closest('.tf-repeater-content-wrap').find('.tf-order_id input').attr('name');\n            var data = {\n                action: 'tf_remove_room_order_ids',\n                meta_field: meta_field,\n                post_id: post_id,\n                _ajax_nonce: tf_admin_params.tf_nonce\n            };\n\n            $.ajax({\n                type: 'post',\n                url: ajaxurl,\n                data: data,\n                beforeSend: function (data) {\n                    notyf.success(tf_admin_params.deleting_room_order_ids);\n                },\n                success: function (response) {\n                    notyf.success(response.data.message);\n                    location.reload();\n                },\n                error: function (data) {\n                    notyf.error(data.data);\n                },\n            });\n\n        });\n\n        /**\n         * Tour location required\n         *\n         * show notyf error\n         */\n        $(document).on('click', '.post-type-tf_tours #publish, .post-type-tf_tours #save-post', function (e) {\n            if ($('input[name=\"tf_tours_opt[location][address]\"]').val().length === 0) {\n                e.preventDefault;\n                e.stopImmediatePropagation();\n                notyf.error(tf_admin_params.tour_location_required);\n                return false;\n            }\n        });\n\n        /**\n         * Hotel location required\n         *\n         * show notyf error\n         */\n        $(document).on('click', '.post-type-tf_hotel #publish, .post-type-tf_hotel #save-post', function (e) {\n            if ($('input[name=\"tf_hotels_opt[map][address]\"]').val().length === 0) {\n                e.preventDefault;\n                e.stopImmediatePropagation();\n                notyf.error(tf_admin_params.hotel_location_required);\n                return false;\n            }\n        });\n\n        /**\n         * Apartment location required\n         *\n         * show notyf error\n         */\n        $(document).on('click', '.post-type-tf_apartment #publish, .post-type-tf_apartment #save-post', function (e) {\n            if ($('[name=\"tf_apartment_opt[map][address]\"]').val().length === 0) {\n                e.preventDefault;\n                e.stopImmediatePropagation();\n                notyf.error(tf_admin_params.apartment_location_required);\n                return false;\n            }\n        });\n\n        /**\n         * Ajax install\n         *\n         * @since 1.0\n         */\n        $(document).on('click', '.tf-install', function (e) {\n            e.preventDefault();\n\n            var current = $(this);\n            var plugin_slug = current.attr(\"data-plugin-slug\");\n\n            current.addClass('updating-message').text(tf_admin_params.installing);\n\n            var data = {\n                action: 'tf_ajax_install_plugin',\n                _ajax_nonce: tf_admin_params.tf_nonce,\n                slug: plugin_slug,\n            };\n\n            jQuery.post(tf_admin_params.ajax_url, data, function (response) {\n                current.removeClass('updating-message');\n                current.addClass('updated-message').text(tf_admin_params.installed);\n                current.attr(\"href\", response.data.activateUrl);\n            })\n                .fail(function () {\n                    current.removeClass('updating-message').text(tf_admin_params.install_failed);\n                })\n                .always(function () {\n                    current.removeClass('install-now updated-message').addClass('activate-now button-primary').text(tf_admin_params.activating);\n                    current.unbind(e);\n                    current[0].trigger(\"click\");\n                });\n        });\n\n        /**\n         * Pro Feature button link\n         */\n        $(document).on('click', '.tf-pro', function (e) {\n            e.preventDefault();\n            window.open('https://tourfic.com/');\n        });\n\n        $(window).on('load', function () {\n            $('.tf-field-disable').find('input, select, textarea, button, div, span').attr('disabled', 'disabled');\n        });\n\n        $(document).on('click', '.tf-field-pro', function (e) {\n            e.preventDefault();\n            window.open('https://tourfic.com/');\n        });\n\n        /**\n         * Generate & set unique id for hotel rooms\n         */\n        $(document).on('click', '.room-repeater > div.csf-fieldset > a.csf-repeater-add', function (e) {\n\n            var repeaterNumber = $('.room-repeater .csf-repeater-wrapper [data-depend-id=\"room\"]').length - 2;\n\n            $('.room-repeater .unique-id input').each(function () {\n                repeaterNumber++;\n                if ($('.room-repeater [data-depend-id=\"room\"] [data-depend-id=\"unique_id\"]').val().length === 0) {\n                    $('.room-repeater [name=\"tf_hotel[room][' + repeaterNumber + '][unique_id]\"]').val(new Date().valueOf() + repeaterNumber);\n                }\n            });\n\n        });\n\n        //documentation link open in new tab\n        $('.tf-go-docs').parent().attr('target', '_blank');\n\n        /*\n        * Author @Jahid\n        * Tour Booking Status\n        */\n\n        $('.tf-ticket-status').on(\"click\", function () {\n            if ($(this).is(':checked')) {\n                var order_unique_id = $(this).val();\n                $(\"#tf-booking-status-loader\").addClass('show');\n                jQuery.ajax({\n                    type: 'post',\n                    url: tf_admin_params.ajax_url,\n                    data: {\n                        action: 'tf_ticket_status_change',\n                        _ajax_nonce: tf_admin_params.tf_nonce,\n                        status: \"check in\",\n                        order_unique_id: order_unique_id,\n                    },\n                    success: function (data) {\n                        $(\"#tf-booking-status-loader\").removeClass('show');\n                    }\n                });\n            } else {\n                var order_unique_id = $(this).val();\n                $(\"#tf-booking-status-loader\").addClass('show');\n                jQuery.ajax({\n                    type: 'post',\n                    url: tf_admin_params.ajax_url,\n                    data: {\n                        action: 'tf_ticket_status_change',\n                        _ajax_nonce: tf_admin_params.tf_nonce,\n                        status: \"\",\n                        order_unique_id: order_unique_id,\n                    },\n                    success: function (data) {\n                        $(\"#tf-booking-status-loader\").removeClass('show');\n                    }\n                });\n            }\n        });\n\n        /*\n        * active tourfic affiliate plugin\n        */\n        $(document).on('click', '.tf-affiliate-active', function(e) {\n            e.preventDefault();\n\n            var btn = $(this);\n\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: {\n                    action: 'tf_affiliate_active',\n                    nonce: tf_admin_params.tf_nonce,\n                },\n                beforeSend: function (data) {\n                    btn.addClass('tf-btn-loading').css({'pointer-events': 'none'});\n                },\n                success: function (data) {\n                    let response = JSON.parse(data);\n                    if( response.status === 'success' ) {\n                        notyf.success(response.message);\n\n                        setTimeout(function() {\n                            location.reload();\n                        }, 500);\n                    }\n                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});\n                },\n                error: function (data) {\n                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});\n                },\n                complete: function (data) {\n                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});\n                }\n            })\n        });\n\n        /*\n        * install tourfic affiliate plugin\n        */\n        $(document).on('click', '.tf-affiliate-install', function(e) {\n            e.preventDefault();\n\n            var btn = $(this);\n\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: {\n                    action: 'tf_affiliate_install',\n                    nonce: tf_admin_params.tf_nonce,\n                },\n                beforeSend: function (data) {\n                    btn.addClass('tf-btn-loading').css({'pointer-events': 'none'});\n                },\n                success: function (data) {\n                    let response = JSON.parse(data);\n                    if( response.status === 'success' ) {\n                        location.reload();\n                    }\n                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});\n                },\n                error: function (data) {\n                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});\n                }\n            })\n        });\n\n        /*\n        * Author @Jahid\n        * Hotel, Tour, Apartment Duplicator\n        */\n       \n        $('.tf-post-data-duplicate').on('click', function(e) {\n            e.preventDefault();\n            var postID = $(this).data('postid');\n            var postType = $(this).data('posttype');\n            var nonce = $(this).data('nonce');\n            $('#wpcontent').append('<div class=\"tf-duplicator-loader\"></div>');\n            // AJAX request to duplicate post\n            $.ajax({\n                type: 'POST',\n                url: tf_admin_params.ajax_url,\n                data: {\n                    action: 'tf_duplicate_post_data',\n                    postID: postID,\n                    postType: postType,\n                    security: nonce\n                },\n                success: function(response) {\n                    window.location.reload();\n                },\n                error: function(errorThrown) {\n                    // Handle errors (if any)\n                    console.error('Error duplicating post:', errorThrown);\n                }\n            });\n        });\n\n    });\n\n})(jQuery);\n\n//# sourceURL=webpack://tourfic/./sass/admin/js/free/admin.js?");
+        // Create an instance of Notyf
+        const notyf = new Notyf({
+            ripple: true,
+            dismissable: true,
+            duration: 3000,
+            position: {
+                x: 'right',
+                y: 'bottom',
+            },
+        });
 
-/***/ }),
 
-/***/ "./sass/admin/js/free/backend-booking.js":
-/*!***********************************************!*\
-  !*** ./sass/admin/js/free/backend-booking.js ***!
-  \***********************************************/
-/***/ (() => {
+        /**
+         * Delete old review fields
+         * @author kabir, fida
+         */
+        $(document).on('click', '.tf-del-old-review-fields', function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            var data = {
+                action: 'tf_delete_old_review_fields',
+                deleteAll: $(this).data('delete-all'),
+                _ajax_nonce: tf_admin_params.tf_nonce
+            };
 
-eval("(function ($) {\n    $(document).ready(function () {\n\n        // Create an instance of Notyf\n        const notyf = new Notyf({\n            ripple: true,\n            duration: 3000,\n            dismissable: true,\n            position: {\n                x: 'right',\n                y: 'bottom',\n            },\n        });\n\n        const alert_popup = {\n            success: function (message) {\n                $.confirm({\n                    icon: 'fa fa-check',\n                    theme: 'modern',\n                    title: 'Success!',\n                    content: message,\n                    type: 'green',\n                    animat6ionSpeed: 300,\n                    animation: 'scale',\n                    closeAnimation: 'scale',\n                    animateFromElement: false,\n                    typeAnimated: true,\n                    boxWidth: '500px',\n                    useBootstrap: false,\n                    closeIcon: true,\n                    buttons: {\n                        OK: {\n                            btnClass: 'btn-blue',\n                        }\n                    }\n                })\n            },\n\n            error: function (message) { \n                $.confirm({\n                    icon: 'fa fa-times',\n                    theme: 'modern',\n                    title: 'Error!',\n                    content: message,\n                    type: 'red',\n                    typeAnimated: true,\n                    animationSpeed: 300,\n                    animation: 'scale',\n                    closeAnimation: 'scale',\n                    animateFromElement: false,\n                    boxWidth: '500px',\n                    useBootstrap: false,\n                    closeIcon: true,\n                    buttons: {\n                        OK: {\n                            btnClass: 'btn-red',\n                        }\n                    }\n                })\n            }\n        }\n\n        /*\n        * Check available hotel room from date to date\n        * Author @Foysal\n        */\n        $(document).on('change', '[name=\"tf_hotel_date[from]\"], [name=\"tf_hotel_date[to]\"]', function (e) {\n            e.preventDefault();\n\n            var from = $('[name=\"tf_hotel_date[from]\"]').val();\n            var to = $('[name=\"tf_hotel_date[to]\"]').val();\n\n            if (from.length > 0 && to.length > 0) {\n                jQuery.ajax({\n                    type: 'post',\n                    url: tf_admin_params.ajax_url,\n                    data: {\n                        action: 'tf_check_available_hotel',\n                        _nonce: tf_admin_params.tf_nonce,\n                        from: from,\n                        to: to,\n                    },\n                    beforeSend: function () {\n                        $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');\n                    },\n                    success: function (response) {\n                        if(!response.success){\n                            notyf.error(response.data)\n                        } else {\n                            var select2 = $('[name=\"tf_available_hotels\"]');\n                            select2.empty();\n                            select2.append('<option value=\"\">' + tf_admin_params.select_hotel + '</option>');\n                            $.each(response.data.hotels, function (key, value) {\n                                select2.append('<option value=\"' + key + '\">' + value + '</option>');\n                            });\n                            select2.select2();\n                            //select the first option\n                            select2.val(select2.find('option:eq(1)').val()).trigger('change');\n                            $('#tf-backend-hotel-book-btn').removeAttr('disabled');\n                            $('[name=\"tf_hotel_rooms_number\"]').removeAttr('disabled');\n                        }\n                    },\n                    error: function (response) {\n                        console.log(response);\n                    },\n                    complete: function (response) {\n                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');\n                    }\n                });\n            }\n        });\n\n        /*\n        * Room filter on hotel change\n        * Author @Foysal\n        */\n        $(document).on('change', '[name=\"tf_available_hotels\"]', function (e) {\n            e.preventDefault();\n\n            var hotel_id = $('[name=\"tf_available_hotels\"]').val();\n            var from = $('[name=\"tf_hotel_date[from]\"]').val();\n            var to = $('[name=\"tf_hotel_date[to]\"]').val();\n\n            if (hotel_id.length > 0) {\n                jQuery.ajax({\n                    type: 'post',\n                    url: tf_admin_params.ajax_url,\n                    data: {\n                        action: 'tf_check_available_room',\n                        _nonce: tf_admin_params.tf_nonce,\n                        hotel_id: hotel_id,\n                        from: from,\n                        to: to,\n                    },\n                    beforeSend: function () {\n                        $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');\n                    },\n                    success: function (response) {\n                        if(!response.success){\n                            notyf.error(response.data)\n                        } else {\n                            var select2 = $('[name=\"tf_available_rooms\"]');\n                            var serviceSelect = $('[name=\"tf_hotel_service_type\"]');\n\n                            select2.removeAttr('disabled');\n                            select2.empty();\n                            select2.append('<option value=\"\">' + tf_admin_params.select_room + '</option>');\n                            $.each(response.data.rooms, function (key, value) {\n                                select2.append('<option value=\"' + key + '\">' + value + '</option>');\n                            });\n                            select2.select2();\n                            //auto select the first option\n                            select2.val(select2.find('option:eq(1)').val()).trigger('change');\n\n                            //service type select\n                            serviceSelect.empty();\n                            $.each(response.data.services, function (key, value) {\n                                serviceSelect.append('<option value=\"' + key + '\">' + value + '</option>');\n                            });\n\n                            $('#tf-backend-hotel-book-btn').removeAttr('disabled');\n                        }\n                    },\n                    error: function (response) {\n                        console.log(response);\n                    },\n                    complete: function (response) {\n                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');\n                    }\n                });\n            }\n        });\n\n        /*\n        * Room adults, children, infants fields update on room change\n        * Author @Foysal\n        */\n        $(document).on('change', '[name=\"tf_available_rooms\"]', function (e) {\n            e.preventDefault();\n\n            let hotel_id = $('[name=\"tf_available_hotels\"]').val();\n            let room_id = $('[name=\"tf_available_rooms\"]').val();\n            var from = $('[name=\"tf_hotel_date[from]\"]').val();\n            var to = $('[name=\"tf_hotel_date[to]\"]').val();\n\n            if (room_id.length > 0) {\n                jQuery.ajax({\n                    type: 'post',\n                    url: tf_admin_params.ajax_url,\n                    data: {\n                        action: 'tf_update_room_fields',\n                        _nonce: tf_admin_params.tf_nonce,\n                        hotel_id: hotel_id,\n                        room_id: room_id,\n                        from: from,\n                        to: to,\n                    },\n                    beforeSend: function () {\n                        $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');\n                    },\n                    success: function (response) {\n                        if(!response.success){\n                            notyf.error(response.data)\n                        } else {\n                            var select = $('[name=\"tf_hotel_rooms_number\"]');\n                            select.empty();\n                            \n                            if(response.data.rooms > 0 ){\n                                for (var i = 1; i <= response.data.rooms; i++) {\n                                    if (i === 1) {\n                                        select.append('<option value=\"' + i + '\" selected>' + i + ' Room</option>');\n                                    } else {\n                                        select.append('<option value=\"' + i + '\">' + i + ' Rooms</option>');\n                                    }\n                                }\n                                \n                                $('#tf-backend-hotel-book-btn').removeAttr('disabled');\n                            } else {\n                                select.append('<option value=\"\" selected>No Room Available</option>');\n                                select.attr('disabled', 'disabled');\n                            }\n\n                            $('[name=\"tf_hotel_adults_number\"]').val(response.data.adults).attr('max', response.data.adults * response.data.rooms);\n                            $('[name=\"tf_hotel_children_number\"]').val(response.data.children).attr('max', response.data.children * response.data.rooms);\n                        }\n                    },\n                    error: function (response) {\n                        console.log(response);\n                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');\n                    },\n                });\n            }\n        });\n\n        /*\n        * Backend Hotel Booking\n        * Author @Foysal\n        */\n        $(document).on('click', '#tf-backend-hotel-book-btn', function (e) {\n            e.preventDefault();\n\n            let btn = $(this);\n            let form = btn.closest('form.tf-backend-hotel-booking');\n            let formData = new FormData(form[0]);\n            formData.append('action', 'tf_backend_hotel_booking');\n            let requiredFields = [\n                'tf_hotel_booked_by', 'tf_customer_first_name', 'tf_customer_email', 'tf_customer_phone', 'tf_customer_country', 'tf_customer_address', 'tf_customer_city', 'tf_customer_state', 'tf_customer_zip', 'tf_hotel_date[from]', 'tf_hotel_date[to]', 'tf_available_hotels', 'tf_available_rooms', 'tf_hotel_rooms_number', 'tf_hotel_adults_number', 'tf_hotel_children_number'];\n\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: formData,\n                processData: false,\n                contentType: false,\n                beforeSend: function (response) {\n                    btn.addClass('tf-btn-loading');\n                },\n                success: function (response) {\n                    const obj = JSON.parse(response);\n                    if (!obj.success) {\n                        if (obj.message) {\n                            alert_popup.error(obj.message);\n\n                            form.find('input').removeClass('error-input');\n                            form.find('select').removeClass('error-input');\n                            form.find('textarea').removeClass('error-input');\n                            form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();\n                            form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();\n                            form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();\n                        } else {\n\n                            for (const requiredField of requiredFields) {\n                                const errorField = obj['fieldErrors'][requiredField + '_error'];\n\n                                form.find('[name=\"' + requiredField + '\"]').removeClass('error-input');\n                                if (requiredField === 'tf_hotel_date[from]') {\n                                    form.find('[name=\"' + requiredField + '\"]').closest('.tf-date-from').find('small.text-danger').remove();\n                                } else if (requiredField === 'tf_hotel_date[to]') {\n                                    form.find('[name=\"' + requiredField + '\"]').closest('.tf-date-to').find('small.text-danger').remove();\n                                } else {\n                                    form.find('[name=\"' + requiredField + '\"]').closest('.tf-fieldset').find('small.text-danger').remove();\n                                }\n                                if (errorField) {\n                                    form.find('[name=\"' + requiredField + '\"]').addClass('error-input');\n                                    if (requiredField === 'tf_hotel_date[from]') {\n                                        form.find('[name=\"' + requiredField + '\"]').closest('.tf-date-from').append('<small class=\"text-danger\">' + errorField + '</small>');\n                                    } else if (requiredField === 'tf_hotel_date[to]') {\n                                        form.find('[name=\"' + requiredField + '\"]').closest('.tf-date-to').append('<small class=\"text-danger\">' + errorField + '</small>');\n                                    } else {\n                                        form.find('[name=\"' + requiredField + '\"]').closest('.tf-fieldset').append('<small class=\"text-danger\">' + errorField + '</small>');\n                                    }\n                                }\n                            }\n                        }\n                    } else {\n                        alert_popup.success(obj.message)\n\n                        alert_popup.success(obj.message)\n\n                        form[0].reset();\n                        form.find('input').removeClass('error-input');\n                        form.find('select').removeClass('error-input');\n                        form.find('textarea').removeClass('error-input');\n                        form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();\n                        form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();\n                        form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();\n                    }\n                    btn.removeClass('tf-btn-loading');\n                },\n                error: function (response) {\n                    console.log(response);\n                },\n                complete: function (response) {\n                    btn.removeClass('tf-btn-loading');\n                }\n            })\n\n        });\n\n        /*\n        * Tour time and extra fields update\n        * Author @Foysal\n        */\n        $(document).on('change', '[name=\"tf_available_tours\"]', function (e) {\n            e.preventDefault();\n\n            var tourId = $('[name=\"tf_available_tours\"]').val();\n\n            if (tourId) {\n                jQuery.ajax({\n                    type: 'post',\n                    url: tf_admin_params.ajax_url,\n                    data: {\n                        action: 'tf_tour_date_time_update',\n                        _nonce: tf_admin_params.tf_nonce,\n                        tour_id: tourId,\n                    },\n                    beforeSend: function () {\n                        $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');\n                    },\n                    success: function (response) {\n                        if(response){\n                            const obj = JSON.parse(response);\n\n                            let flatpickerObj = {\n                                enableTime: false,\n                                dateFormat: \"Y/m/d\",\n                            };\n\n                            if (obj.tour_availability) {\n                                flatpickerObj.minDate = \"today\";\n                                flatpickerObj.disableMobile = \"true\";\n                                flatpickerObj.enable = Object.entries(obj.tour_availability)\n                                .filter(([dateRange, data]) => data.status === \"available\")\n                                .map(([dateRange, data]) => {\n                                    const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());\n                    \n                                    const today = new Date();\n                                    const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();\n                                    let fromDate = fromRaw;\n                    \n                                    return {\n                                        from: fromDate,\n                                        to: toRaw\n                                    };\n                                });\n                            }\n\n                            if(obj.tour_packages_array){\n                                populatePackageSelect(obj.tour_packages_array);\n                            }\n\n                            flatpickerObj.onChange = function (selectedDates, dateStr, instance) {\n                                // Initialize empty object for times\n                                let times = {};\n                                const selectedDate = selectedDates[0];\n                                const timestamp = selectedDate.getTime();\n\n                                const tourAvailability = obj.tour_availability;\n\n                                for (const key in tourAvailability) {\n                                    const availability = tourAvailability[key];\n\n                                    if (availability.status !== 'available') continue;\n\n                                    const from = new Date(availability.check_in.trim()).getTime();\n                                    const to   = new Date(availability.check_out.trim()).getTime();\n\n                                    if (timestamp >= from && timestamp <= to) {\n                                        const allowedTime = availability.allowed_time?.time || [];\n\n                                        if (Array.isArray(allowedTime)) {\n                                            allowedTime.forEach((t) => {\n                                                if (t && t.trim() !== '') {\n                                                    times[t] = t;\n                                                }\n                                            });\n                                        } else if (typeof allowedTime === 'object' && allowedTime !== null) {\n                                            Object.values(allowedTime).forEach((t) => {\n                                                if (t && t.trim() !== '') {\n                                                    times[t] = t;\n                                                }\n                                            });\n                                        }\n\n                                        break; // stop after first match\n                                    }\n                                }\n\n                                populateTimeSelect(times);\n                                \n                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');\n                            }\n\n                            $(\"[name='tf_tour_date']\").flatpickr(flatpickerObj);\n\n                            if (obj.tour_extras_array && Object.keys(obj.tour_extras_array).length > 0) {\n                                let extras = $('[name=\"tf_tour_extras[]\"]');\n                                extras.removeAttr('disabled');\n                                extras.empty();\n                            \n                                $.each(obj.tour_extras_array, function (key, value) {\n                                    extras.append($('<option>', {\n                                        value: key,\n                                        html: value // Use html to parse entities like &#36;\n                                    }));\n                                });\n                            \n                                extras.select2();\n                            } else {\n                                let extras = $('[name=\"tf_tour_extras[]\"]');\n                                extras.empty().attr('disabled', 'disabled');\n                            }\n\n                            $('#tf-backend-hotel-book-btn').removeAttr('disabled');\n                        }\n                    }\n                });\n            }\n        });\n\n        function populatePackageSelect(packages) {\n            let packSelect = $('[name=\"tf_tour_packages\"]');\n            packSelect.empty();\n\n            if (Object.keys(packages).length > 0) {\n                // Use the keys and values from the object to populate the options\n                $.each(packages, function (key, value) {\n                    packSelect.append(`<option value=\"${key}\">${value}</option>`);\n                });\n            } else {\n                packSelect.append(`<option value=\"\" selected>No Package Available</option>`);\n                packSelect.attr('disabled', 'disabled');\n            }\n\n        }\n\n        function populateTimeSelect(times) {\n            let timeSelect = $('[name=\"tf_tour_time\"]');\n            timeSelect.empty();\n\n            if (Object.keys(times).length > 0) {\n                // Use the keys and values from the object to populate the options\n                $.each(times, function (key, value) {\n                    timeSelect.append(`<option value=\"${key}\">${value}</option>`);\n                });\n            } else {\n                timeSelect.append(`<option value=\"\" selected>No Time Available</option>`);\n                timeSelect.attr('disabled', 'disabled');\n            }\n\n        }\n\n        /*\n        * Backend Tour Booking\n        * Author @Foysal\n        */\n        $(document).on('click', '#tf-backend-tour-book-btn', function (e) {\n            e.preventDefault();\n\n            let btn = $(this);\n            let form = btn.closest('form.tf-backend-tour-booking');\n            let formData = new FormData(form[0]);\n            formData.append('action', 'tf_backend_tour_booking');\n            let requiredFields = ['tf_tours_booked_by', 'tf_customer_first_name', 'tf_customer_email', 'tf_customer_phone', 'tf_customer_country', 'tf_customer_address', 'tf_customer_city', 'tf_customer_state', 'tf_customer_zip', 'tf_tour_date', 'tf_available_tours', 'tf_tour_adults_number', 'tf_tour_children_number'];\n\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: formData,\n                processData: false,\n                contentType: false,\n                beforeSend: function (response) {\n                    btn.addClass('tf-btn-loading');\n                },\n                success: function (response) {\n                    const obj = JSON.parse(response);\n                    if (!obj.success) {\n                        alert_popup.error(obj.message)\n\n                        if (obj.errors) {\n                            obj.errors.forEach(function (text) {\n                                notyf.error(text);\n                            });\n                        }\n\n                        form.find('input').removeClass('error-input');\n                        form.find('select').removeClass('error-input');\n                        form.find('textarea').removeClass('error-input');\n                        form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();\n                        form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();\n                        form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();\n\n                        if (obj['fieldErrors']) {\n                            for (const requiredField of requiredFields) {\n                                const errorField = obj['fieldErrors'][requiredField + '_error'];\n\n                                form.find('[name=\"' + requiredField + '\"]').removeClass('error-input');\n                                form.find('[name=\"' + requiredField + '\"]').closest('.tf-fieldset').find('small.text-danger').remove();\n                                if (errorField) {\n                                    form.find('[name=\"' + requiredField + '\"]').addClass('error-input');\n                                    form.find('[name=\"' + requiredField + '\"]').closest('.tf-fieldset').append('<small class=\"text-danger\">' + errorField + '</small>');\n                                }\n                            }\n                        }\n                    } else {\n                        alert_popup.success(obj.message)\n\n                        form[0].reset();\n                        form.find('input').removeClass('error-input');\n                        form.find('select').removeClass('error-input');\n                        form.find('textarea').removeClass('error-input');\n                        form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();\n                        form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();\n                        form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();\n                    }\n                    btn.removeClass('tf-btn-loading');\n                },\n            })\n\n        });\n\n        /**\n         * Backend Apartments Booking\n        */\n        \n        // Chekck Available Apartment by Date\n\n        $(document).on('change', '[name=\"tf_apartment_date[from]\"], [name=\"tf_apartment_date[to]\"]', function (e) {\n            e.preventDefault();\n\n            var fromValue = $('[name=\"tf_apartment_date[from]\"]').val();\n            var toValue = $('[name=\"tf_apartment_date[to]\"]').val();\n            var apartment_id = $('[name=\"tf_available_apartments\"]').val()\n\n            if (fromValue.length > 0 && toValue.length > 0) {\n                jQuery.ajax({\n                    type: 'post',\n                    url: tf_admin_params.ajax_url,\n                    data: {\n                        action: 'tf_check_available_apartment',\n                        _nonce: tf_admin_params.tf_nonce,\n                        from: fromValue,\n                        to: toValue,\n                        apartment_id: apartment_id\n                    },\n                    beforeSend: function () {\n                        $('#tf-backend-apartment-book-btn').attr('disabled', 'disabled');\n                    },\n                    success: function (response) {\n                        if(!response.success){\n                            notyf.error(response.data)\n                        } else {\n                            var select2 = $('[name=\"tf_available_apartments\"]');\n                            select2.empty();\n                            select2.append('<option value=\"\">' + 'Select Apartment' + '</option>');\n                            $.each(response.data.apartments, function (key, value) {\n                                select2.append('<option value=\"' + key + '\">' + value + '</option>');\n                            });\n                            // select2.select2();\n\n                            //select the first option\n                            select2.val(select2.find('option:eq(1)').val()).trigger('change');\n                            $('#tf-backend-apartment-book-btn').removeAttr('disabled');\n                        }\n                    },\n                    error: function (response) {\n                        console.log(response);\n                    },\n                    complete: function (response) {\n                        $('#tf-backend-apartment-book-btn').removeAttr('disabled');\n                    }\n                });\n            }\n        })\n        \n        // Available Additional Fees\n\n        $(document).on('change', '[name=\"tf_available_apartments\"]', function (e) {\n            e.preventDefault();\n\n            var apartment_id = $('[name=\"tf_available_apartments\"]').val();\n            var from = $('[name=\"tf_apartment_date[from]\"]').val();\n            var to = $('[name=\"tf_apartment_date[to]\"]').val();\n\n            if (apartment_id.length > 0) {\n                jQuery.ajax({\n                    type: 'post',\n                    url: tf_admin_params.ajax_url,\n                    data: {\n                        action: 'tf_check_apartment_aditional_fees',\n                        _nonce: tf_admin_params.tf_nonce,\n                        apartment_id: apartment_id,\n                        from: from,\n                        to: to,\n                    },\n                    beforeSend: function () {\n                        $('#tf-backend-apartment-book-btn').attr('disabled', 'disabled');\n                    },\n                    success: function (response) {\n                        if(!response.success){\n                            notyf.error(response.data)\n                        } else {\n                            var serviceSelect = $('[name=\"tf_apartment_additional_fees\"]');\n\n                            serviceSelect.select2({multiple: true});\n\n                            //Additional fees auto selection\n                            serviceSelect.empty();\n\n                            if (response.data.additional_fees.length > 0) {\n                                $.each(response.data.additional_fees, function (key, value) {\n                                    serviceSelect.append('<option value=\"' + key + '\">' + value.label + ' - ' + value.price + '</option>');\n                                });\n                            } else {\n                                serviceSelect.append('<option value=\"' + 1 + '\">' + 'There are no additional fees' + '</option>');\n                            }\n\n                            serviceSelect.find('option').prop('selected', true).trigger('change');\n\n                            $('#tf-backend-apartment-book-btn').removeAttr('disabled');\n                        }\n                    },\n                    error: function (response) {\n                        console.log(response);\n                    },\n                    complete: function (response) {\n                        $('#tf-backend-apartment-book-btn').removeAttr('disabled');\n                    }\n                });\n            }\n        });\n\n        /*\n        * Backend Apartment Booking\n        */\n        $(document).on('click', '#tf-backend-apartment-book-btn', function (e) {\n            e.preventDefault();\n\n            let btn = $(this);\n            let form = btn.closest('form.tf-backend-apartment-booking');\n            let formData = new FormData(form[0]);\n            formData.append('action', 'tf_backend_apartment_booking');\n            let requiredFields = [\n                'tf_apartment_booked_by',\n                'tf_customer_first_name',\n                'tf_customer_email',\n                'tf_customer_phone',\n                'tf_customer_country',\n                'tf_customer_address',\n                'tf_customer_city',\n                'tf_customer_state',\n                'tf_customer_zip',\n                'tf_apartment_date[from]',\n                'tf_apartment_date[to]',\n                'tf_available_apartments',\n                'tf_apartment_adults_number',\n                'tf_apartment_children_number',\n                'tf_apartment_infant_number',\n            ];\n\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: formData,\n                processData: false,\n                contentType: false,\n                beforeSend: function (response) {\n                    btn.addClass('tf-btn-loading');\n                },\n                success: function (response) {\n                    const obj = JSON.parse(response);\n                    if (!obj.success) {\n                        if (obj.message) {\n                            alert_popup.error(obj.message)\n\n                            form.find('input').removeClass('error-input');\n                            form.find('select').removeClass('error-input');\n                            form.find('textarea').removeClass('error-input');\n                            form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();\n                            form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();\n                            form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();\n                        } else {\n\n                            for (const requiredField of requiredFields) {\n                                const errorField = obj['fieldErrors'][requiredField + '_error'];\n\n                                form.find('[name=\"' + requiredField + '\"]').removeClass('error-input');\n                                if (requiredField === 'tf_apartment_date[from]') {\n                                    form.find('[name=\"' + requiredField + '\"]').closest('.tf-date-from').find('small.text-danger').remove();\n                                } else if (requiredField === 'tf_apartment_date[to]') {\n                                    form.find('[name=\"' + requiredField + '\"]').closest('.tf-date-to').find('small.text-danger').remove();\n                                } else {\n                                    form.find('[name=\"' + requiredField + '\"]').closest('.tf-fieldset').find('small.text-danger').remove();\n                                }\n                                if (errorField) {\n                                    form.find('[name=\"' + requiredField + '\"]').addClass('error-input');\n                                    if (requiredField === 'tf_apartment_date[from]') {\n                                        form.find('[name=\"' + requiredField + '\"]').closest('.tf-date-from').append('<small class=\"text-danger\">' + errorField + '</small>');\n                                    } else if (requiredField === 'tf_apartment_date[to]') {\n                                        form.find('[name=\"' + requiredField + '\"]').closest('.tf-date-to').append('<small class=\"text-danger\">' + errorField + '</small>');\n                                    } else {\n                                        form.find('[name=\"' + requiredField + '\"]').closest('.tf-fieldset').append('<small class=\"text-danger\">' + errorField + '</small>');\n                                    }\n                                }\n                            }\n                        }\n                    } else {\n                        alert_popup.success(obj.message)\n\n                        form[0].reset();\n                        form.find('input').removeClass('error-input');\n                        form.find('select').removeClass('error-input');\n                        form.find('textarea').removeClass('error-input');\n                        form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();\n                        form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();\n                        form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();\n                    }\n                    btn.removeClass('tf-btn-loading');\n                },\n                error: function (response) {\n                    console.log(response);\n                },\n                complete: function (response) {\n                    btn.removeClass('tf-btn-loading');\n                }\n            })\n        });\n    });\n\n})(jQuery);\n\n//# sourceURL=webpack://tourfic/./sass/admin/js/free/backend-booking.js?");
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: data,
+                beforeSend: function (data) {
+                    notyf.success(tf_admin_params.deleting_old_review_fields);
+                },
+                success: function (data) {
+                    notyf.success(data.data);
+                },
+                error: function (data) {
+                    notyf.error(data.data);
+                },
 
-/***/ }),
+            });
 
-/***/ "./sass/admin/js/free/booking-details.js":
-/*!***********************************************!*\
-  !*** ./sass/admin/js/free/booking-details.js ***!
-  \***********************************************/
-/***/ (() => {
+        });
 
-eval("(function ($) {\n    $(document).ready(function () {\n\n        // Create an instance of Notyf\n        const notyf = new Notyf({\n            ripple: true,\n            duration: 3000,\n            dismissable: true,\n            position: {\n                x: 'right',\n                y: 'bottom',\n            },\n        });\n\n        // Select Form\n        $('.tf-filter-selection').on(\"click\", function() {\n            $(this).toggleClass('active');\n        });\n\n        // Form Selection\n        $('.tf-filter-selection ul li').on(\"click\", function() {\n            let $this = $(this).closest('.tf-filter-selection');\n            // let selected_value = $(this).attr('data-id');\n            let selected_label = $(this).text();\n            $this.find('label span').text(selected_label);\n        });\n\n        // Pyment Status Section\n        if ($('.tf-order-payment-status, .tf-calendar-order-payment-status').length > 0 ) {\n            $('.tf-order-payment-status, .tf-calendar-order-payment-status').select2({\n                dropdownCssClass: 'tf-booking-filter-modal',\n                placeholder: \"Order Status\",\n                allowClear: true\n            });\n        }\n        // Bulk Section\n        if ( $('.tf-filter-bulk-option').length > 0 ) {\n            $('.tf-filter-bulk-option').select2({\n                dropdownCssClass: 'tf-booking-filter-modal',\n                placeholder: \"Bulk Action\",\n            });\n        }\n        \n        if ( $('.tf-filter-bulk-option-enquiry').length > 0 ) {\n            $('.tf-filter-bulk-option-enquiry').select2({\n                dropdownCssClass: 'tf-booking-filter-modal',\n                placeholder: \"Bulk Action\",\n                minimumResultsForSearch: -1,\n            });\n        }\n        if ( $('.tf-enquiry-filter-hotel-name').length > 0 ) {\n            $('.tf-enquiry-filter-hotel-name').select2({\n                dropdownCssClass: 'tf-booking-filter-modal',\n                placeholder: \"Hotel Name\",\n                allowClear: true\n            });\n        }\n        \n        if ( $('.tf-enquiry-filter-apartment-name').length > 0 ) {\n            $('.tf-enquiry-filter-apartment-name').select2({\n                dropdownCssClass: 'tf-booking-filter-modal',\n                placeholder: \"Apartment Name\",\n                allowClear: true\n            });\n        }\n        if ( $('.tf-enquiry-filter-tour-name ').length > 0 ) {\n            $('.tf-enquiry-filter-tour-name').select2({\n                dropdownCssClass: 'tf-booking-filter-modal',\n                placeholder: \"Tours Name\",\n                allowClear: true\n            });\n        }\n        if ( $('.tf-filter-mail-option-enquiry').length > 0 ) {\n            $('.tf-filter-mail-option-enquiry').select2({\n                dropdownCssClass: 'tf-booking-filter-modal',\n                placeholder: \"Filters\",\n                allowClear: true,\n                minimumResultsForSearch: -1,\n            });\n        }\n        \n        // Tour Post Section\n        if( $('.tf-post-id-filter-options, .tf-booking-post-id-filter-options').length > 0 ) {\n            $('.tf-post-id-filter-options, .tf-booking-post-id-filter-options').select2({\n                dropdownCssClass: 'tf-booking-filter-modal',\n                placeholder: \"Tour Name\",\n                allowClear: true\n            });\n        }\n        \n        // Hotel Post Section\n        if ( $('.tf-hotel-id-filter-options, .tf-booking-hotel-id-filter-options').length > 0 ) {\n            $('.tf-hotel-id-filter-options, .tf-booking-hotel-id-filter-options').select2({\n                dropdownCssClass: 'tf-booking-filter-modal',\n                placeholder: \"Hotel Name\",\n                allowClear: true\n            });\n        }\n        \n        // Apartment Post Section\n        if ( $('.tf-apartment-id-filter-options, .tf-booking-apartment-id-filter-options').length > 0 ) {\n            $('.tf-apartment-id-filter-options, .tf-booking-apartment-id-filter-options').select2({\n                dropdownCssClass: 'tf-booking-filter-modal',\n                placeholder: \"Apartment Name\",\n                allowClear: true\n            });\n        }\n\n        // Car Post Section\n        if ( $('.tf-car-id-filter-options').length > 0 ) {\n            $('.tf-car-id-filter-options').select2({\n                dropdownCssClass: 'tf-booking-filter-modal',\n                placeholder: \"Car Name\",\n                allowClear: true\n            });\n        }\n        \n\n        // Checked Section\n        if ( $('.tf-tour-checkinout-options, .tf-booking-checkinout-options').length > 0 ) {\n            $('.tf-tour-checkinout-options, .tf-booking-checkinout-options').select2({\n                dropdownCssClass: 'tf-booking-checkinout-filter-modal',\n                placeholder: \"Checked in status\",\n                allowClear: true\n            });\n        }\n\n        /**\n         * Visitor Details Popup Open\n         *\n         */\n        $(document).on('click', '.visitor_edit span', function (e) {\n            e.preventDefault();\n            $(\".visitor-details-edit-form\").show();\n        });\n\n        /**\n         * Visitor Details Popup Close\n         *\n         */\n        $(document).on('click', '.visitor-details-edit-popup .tf-booking-times span', function (e) {\n            e.preventDefault();\n            $(\".visitor-details-edit-form\").hide();\n        });\n\n        /**\n         * Ajax tour booking\n         *\n         * tf_visitor_details_edit\n         */\n        $(document).on('submit', 'form.visitor-details-edit-popup', function (e) {\n            e.preventDefault();\n            var $this = $(this);\n\n            var formData = new FormData(this);\n            formData.append('action', 'tf_visitor_details_edit');\n            formData.append('_ajax_nonce', tf_admin_params.tf_nonce);\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: formData,\n                processData: false,\n                contentType: false,\n                beforeSend: function (data) {\n                    $('.tf-preloader-box').show();\n                },\n                complete: function (data) {\n                    \n                },\n                success: function (data) {\n                    location.reload();\n                },\n                error: function (data) {\n                    console.log(data);\n                },\n\n            });\n        });\n\n        /**\n         * Ajax Checkinout Status\n         *\n         * tf_checkinout_details_edit\n         */\n        $('.tf-order-checkinout-status ul li').on(\"click\", function() {\n            \n            let selected_value = $(this).attr('data-value');\n            let order_id = $('.tf_single_order_id').val();\n\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: {\n                    action: 'tf_checkinout_details_edit',\n                    order_id: order_id,\n                    checkinout: selected_value,\n                    _ajax_nonce: tf_admin_params.tf_nonce\n                },\n                beforeSend: function (data) {\n                    $('.tf-preloader-box').show();\n                },\n                complete: function (data) {\n                    \n                },\n                success: function (data) {\n                    location.reload();\n                },\n                error: function (data) {\n                    console.log(data);\n                },\n\n            });\n        });\n\n        /**\n         * Ajax Order Status Status\n         *\n         * tf_order_status_edit\n         */\n        $('.tf-order-ostatus ul li').on(\"click\", function() {\n            \n            let selected_value = $(this).attr('data-value');\n            let order_id = $('.tf_single_order_id').val();\n\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: {\n                    action: 'tf_order_status_edit',\n                    order_id: order_id,\n                    status: selected_value,\n                    _ajax_nonce: tf_admin_params.tf_nonce\n                },\n                beforeSend: function (data) {\n                    $('.tf-preloader-box').show();\n                },\n                complete: function (data) {\n                    \n                },\n                success: function (data) {\n                    location.reload();\n                },\n                error: function (data) {\n                    console.log(data);\n                },\n\n            });\n        });\n\n        /**\n         * Ajax Order Status Email Resend\n         *\n         * tf_order_status_email_resend\n         */\n        $('.tf-order-email-resend ul li').on(\"click\", function() {\n            \n            let selected_value = $(this).attr('data-value');\n            let order_id = $('#tf_email_order_id').val();\n            let db_id = $('.tf_single_order_id').val();\n\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: {\n                    action: 'tf_order_status_email_resend',\n                    order_id: order_id,\n                    status: selected_value,\n                    id : db_id,\n                    _ajax_nonce: tf_admin_params.tf_nonce\n                },\n                beforeSend: function (data) {\n                    $('.tf-preloader-box').show();\n                },\n                complete: function (data) {\n                    \n                },\n                success: function (data) {\n                    $('.tf-preloader-box').hide();\n                    notyf.success(\"Email Sucessfully Resend!\");\n                },\n                error: function (data) {\n                    console.log(data);\n                },\n\n            });\n        });\n\n        /**\n         * Vouchers Popup Open\n         *\n         */\n        $(document).on('click', '.tf-voucher-preview .tf-preview-btn a', function (e) {\n            e.preventDefault();\n            $(\".tf-voucher-quick-view-box\").css('display', 'flex');\n        });\n\n        /**\n         * Vouchers Popup Close\n         *\n         */\n        $(document).on('click', '.tf-voucher-quick-view-box .tf-quick-view-times span', function (e) {\n            e.preventDefault();\n            $(\".tf-voucher-quick-view-box\").hide();\n        });\n\n        // Filter Checkbox Selected\n\n        $(\"#cb #cb-select-all-1\").on(\"click\", function() {\n            $('input[name=\"order_id[]\"]').each(function() {\n                $(this).prop(\"checked\", !$(this).prop(\"checked\"));\n            });\n        });\n\n        /**\n         * Filter Bulk Action\n         *\n         * tf_order_bulk_action_edit\n         */\n        $('.tf-order-status-filter-btn').on(\"click\", function() {\n            \n            let order_list = [];\n            let bulk_action = $('.tf-filter-bulk-option').val();\n            $('.tf_booking_details_wrap input[name=\"order_id[]\"]:checked').each(function() {\n                order_list.push($(this).val());\n            });\n            \n            if(order_list.length > 0 && bulk_action!==''){\n                $.ajax({\n                    type: 'post',\n                    url: tf_admin_params.ajax_url,\n                    data: {\n                        action: 'tf_order_bulk_action_edit',\n                        orders: order_list,\n                        status: bulk_action,\n                        _ajax_nonce: tf_admin_params.tf_nonce\n                    },\n                    beforeSend: function (data) {\n                        $('.tf-preloader-box').show();\n                    },\n                    complete: function (data) {\n                        \n                    },\n                    success: function (data) {\n                        location.reload();\n                    },\n                    error: function (data) {\n                        console.log(data);\n                    },\n\n                });\n            }\n        });\n\n        /**\n         * Search Filter BY ID boly\n         *\n         * tf-right-search-filter\n         */\n        $(document).on('submit', 'form.tf-right-search-filter', function (e) {\n            e.preventDefault();\n\n            let id = $(\"#tf-searching-key\").val();\n            if(id!==\"\"){\n                $('.tf-preloader-box').show();\n                let currentURL = window.location.href;\n                let BaseURL = currentURL.split('?')[0];\n                let queryString = currentURL.split('?')[1];\n\n                let currentURLParams= new URLSearchParams(queryString);\n                currentURLParams.delete(\"paged\");\n                if (currentURLParams.has(\"post\")) {\n                    currentURLParams.set(\"post\", id);\n                    let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();\n                    window.location.href = updatedUrl;\n                }else{\n                    let updatedUrl = currentURL + \"&post=\" + id;\n                    window.location.href = updatedUrl;\n                }\n            }\n        });\n\n        /**\n         * Filter Checked Perameter Passing\n         *\n         */\n        $('.tf-tour-checkinout-options').change(function() {\n            let changeValue = $(this).val();\n            $('.tf-preloader-box').show();\n            let currentURL = window.location.href;\n            let BaseURL = currentURL.split('?')[0];\n            let queryString = currentURL.split('?')[1];\n\n            let currentURLParams= new URLSearchParams(queryString);\n            currentURLParams.delete(\"paged\");\n            if (currentURLParams.has(\"checkinout\")) {\n                currentURLParams.set(\"checkinout\", changeValue);\n                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();\n                window.location.href = updatedUrl;\n            }else{\n                currentURLParams.set(\"checkinout\", changeValue);\n                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();\n                window.location.href = updatedUrl;\n            }\n\n            //Nonce\n            if (!currentURLParams.has(\"nonce\")) {\n                currentURLParams.set(\"nonce\", tf_admin_params.tf_nonce);\n                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();\n                window.location.href = updatedUrl;\n            }\n        });\n\n        /**\n         * Filter Post Perameter Passing\n         *\n         */\n        $('.tf-post-id-filter-options, .tf-hotel-id-filter-options, .tf-apartment-id-filter-options').change(function() {\n            let changeValue = $(this).val();\n            $('.tf-preloader-box').show();\n            let currentURL = window.location.href;\n            let BaseURL = currentURL.split('?')[0];\n            let queryString = currentURL.split('?')[1];\n\n            let currentURLParams= new URLSearchParams(queryString);\n            currentURLParams.delete(\"paged\");\n            if (currentURLParams.has(\"post\")) {\n                currentURLParams.set(\"post\", changeValue);\n                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();\n                window.location.href = updatedUrl;\n            }else{\n                currentURLParams.set(\"post\", changeValue);\n                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();\n                window.location.href = updatedUrl;\n            }\n\n            //Nonce\n            if (!currentURLParams.has(\"nonce\")) {\n                currentURLParams.set(\"nonce\", tf_admin_params.tf_nonce);\n                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();\n                window.location.href = updatedUrl;\n            }\n        });\n\n        /**\n         * Filter Post Perameter Passing\n         *\n         */\n        $('.tf-order-payment-status').change(function() {\n            let changeValue = $(this).val();\n            $('.tf-preloader-box').show();\n            let currentURL = window.location.href;\n            let BaseURL = currentURL.split('?')[0];\n            let queryString = currentURL.split('?')[1];\n\n            let currentURLParams= new URLSearchParams(queryString);\n            currentURLParams.delete(\"paged\");\n            if (currentURLParams.has(\"payment\")) {\n                currentURLParams.set(\"payment\", changeValue);\n                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();\n                window.location.href = updatedUrl;\n            }else{\n                currentURLParams.set(\"payment\", changeValue);\n                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();\n                window.location.href = updatedUrl;\n            }\n            \n            //Nonce\n            if (!currentURLParams.has(\"nonce\")) {\n                currentURLParams.set(\"nonce\", tf_admin_params.tf_nonce);\n                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();\n                window.location.href = updatedUrl;\n            }\n        });\n\n        // Booking View Change\n\n        $(\".tf_booking_views_button ul li\").on(\"click\", function() {\n            $(\".tf_booking_views_button ul li\").removeClass('active');\n            let $this =  $(this);\n            let view = $this.attr('data-view');\n            $this.addClass('active');\n            if('calendar'==view){\n                $('.tf-booking-header-filter').hide();\n                $('.tf-order-table-responsive').hide();\n                $('#tf-booking-calendar').css('padding', '24px');\n                $('.tf-calendar-booking-header-filter').css('display', 'flex');\n                $('#tf-booking-calendar').show();\n                \n                // Re-render the calendar\n                initializeCalendar();\n                \n            }\n            if('list'==view){\n                $('#tf-booking-calendar').hide();\n                $('.tf-calendar-booking-header-filter').hide();\n                $('.tf-booking-header-filter').css('display','flex');\n                $('.tf-order-table-responsive').show();\n            }\n        });\n\n        // Booking Details Popup close\n        $(document).on('click', '.tf-booking-calendar-popup-box .tf-popup-header .tf-close', function (e) {\n            $(\".tf-booking-calendar-popup-box\").hide();\n        });\n\n        // Booking Details Popup\n        $(document).on('click', '.tf-booking-single-popup', function (e) {\n            e.preventDefault();\n            let $this = $(this);\n            $('.tf-calendar-popup-box').html('');\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: {\n                    action: 'tf_booking_details_popup',\n                    id: $this.attr('data-id'),\n                    type: $this.attr('data-type'),\n                    page: $this.attr('data-page'),\n                    _ajax_nonce: tf_admin_params.tf_nonce\n                },\n                beforeSend: function (data) {\n                    $('.tf-preloader-box').show();\n                },\n                complete: function (data) {\n                    \n                },\n                success: function (data) {\n                    $('.tf-calendar-popup-box').html(data);\n                    $('.tf-preloader-box').hide();\n                    $('.tf-booking-calendar-popup-box').css('display', 'flex');\n                },\n                error: function (data) {\n                    console.log(data);\n                },\n\n            });\n        });\n\n        // Booking Calendar Filter\n        $(document).on('change', '.tf-calendar-order-payment-status, .tf-booking-checkinout-options, .tf-filter-by-post', function (e) {\n            e.preventDefault();\n            let ostatus = $('.tf-calendar-order-payment-status').val();\n            let checkinout = $('.tf-booking-checkinout-options').val();\n            let post_id = $('.tf-filter-by-post').val();\n            \n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: {\n                    action: 'tf_booking_calendar_filter',\n                    ostatus: ostatus,\n                    checkinout: checkinout,\n                    post_id: post_id,\n                    post_type: $('#tf_booking_post_type').val(),\n                    _ajax_nonce: tf_admin_params.tf_nonce\n                },\n                beforeSend: function (data) {\n                    $('.tf-preloader-box').show();\n                },\n                complete: function (data) {\n                    \n                },\n                success: function (response) {\n                    let data = JSON.parse(response);\n                    $('.tf-preloader-box').hide();\n                    initializeCalendar(data.events);\n                },\n                error: function (data) {\n                    console.log(data);\n                },\n            });\n        });\n\n        $('.tf-date-picker').each(function() {\n            let format = $(this).data('format') || \"Y/m/d\";\n            flatpickr(this, {\n                dateFormat: format\n            });\n        });\n    });\n\n})(jQuery);\n\n// Booking Calendar\nfunction initializeCalendar(eventsSource) {\n    var calendarEl = document.getElementById('tf-booking-calendar');\n    var currentPageUrl = window.location.href;\n\n    // Set the events based on the page URL\n    if (!eventsSource) {\n        if (currentPageUrl.includes('post_type=tf_tours&page=tf_tours_booking')) {\n            eventsSource = tf_options.tf_tours_orders;\n        } else if (currentPageUrl.includes('post_type=tf_hotel&page=tf_hotel_booking')) {\n            eventsSource = tf_options.tf_hotels_orders;\n        } else if (currentPageUrl.includes('post_type=tf_apartment&page=tf_apartment_booking')) {\n            eventsSource = tf_options.tf_apartments_orders;\n        } else if (currentPageUrl.includes('post_type=tf_carrental&page=tf_carrental_booking')) {\n            eventsSource = tf_options.tf_cars_orders;\n        } else {\n            eventsSource = []; // Fallback option if none of the conditions match\n        }\n    }\n\n    var calendar = new FullCalendar.Calendar(calendarEl, {\n        editable: false,\n        selectable: true,\n        dayMaxEvents: 3,\n        headerToolbar: {\n            left: 'prev,next',\n            center: 'title',\n            right: 'dayGridMonth,timeGridWeek,timeGridDay'\n        },\n        events: eventsSource,\n        eventContent: function(info) {\n            var customEl = document.createElement('div');\n            customEl.classList.add('tf-booking-single-popup');\n            customEl.setAttribute('data-id', info.event.id);\n            customEl.setAttribute('data-type', info.event.extendedProps.post_type);\n            customEl.setAttribute('data-page', info.event.extendedProps.page);\n            customEl.innerHTML = `<span>${info.event.title}</span>`;\n            return { domNodes: [customEl] };\n        }\n    });\n\n    calendar.render();\n}\n\ndocument.addEventListener('DOMContentLoaded', function() {\n    var tfcalendarEl = document.getElementById('tf-booking-calendar');\n\n    if (tfcalendarEl) {\n        var eventsSource;\n        \n        if (tfcalendarEl.dataset.set) {\n            initializeCalendar(eventsSource);\n            tfcalendarEl.style.display = 'none';\n        } else {\n            initializeCalendar(eventsSource);\n        }\n    } \n});\n\n\n//# sourceURL=webpack://tourfic/./sass/admin/js/free/booking-details.js?");
+        /**
+         * Delete room order ids
+         * @author fida
+         */
+        $(document).on('click', '.remove-order-ids', function (e) {
 
-/***/ }),
+            e.preventDefault();
 
-/***/ "./sass/admin/js/free/enquiry-details.js":
-/*!***********************************************!*\
-  !*** ./sass/admin/js/free/enquiry-details.js ***!
-  \***********************************************/
-/***/ (() => {
+            var $this = $(this);
+            var post_id = $("#post_ID").val();
+            var meta_field = $this.closest('.tf-repeater-content-wrap').find('.tf-order_id input').attr('name');
+            var data = {
+                action: 'tf_remove_room_order_ids',
+                meta_field: meta_field,
+                post_id: post_id,
+                _ajax_nonce: tf_admin_params.tf_nonce
+            };
 
-eval(";(function($) {\n\n    \"use strict\";\n\n    $(document).ready(function() {\n\n        // Create an instance of Notyf\n        const notyf = new Notyf({\n            ripple: true,\n            duration: 3000,\n            dismissable: true,\n            position: {\n                x: 'right',\n                y: 'bottom',\n            },\n        });\n\n        $(\".tf-enquiry-details-wrap .tf-order-status-filter-btn\").on(\"click\", function(e) {\n\n            e.preventDefault();\n\n            let $this = $(this);\n            let selected_items = [];\n            let actions = $this.closest(\".tf-enquiry-details-wrap\").find(\".tf-filter-bulk-option-enquiry\").val();\n            let hotelIdFilter = $this.closest(\".tf-enquiry-details-wrap\").find(\".tf-enquiry-filter-hotel-name\").val();\n            let mainWrap = $this.closest(\".tf-enquiry-details-wrap\");\n\n            mainWrap.find(\".tf-checkbox-listing #tf-enquiry-name-checkbox:checked\").each(function() {\n                selected_items.push($(this).val());\n            });\n\n            $.ajax({\n                url: tf_admin_params.ajax_url,\n                type: 'POST',\n                data: {\n                    action: 'tf_enquiry_bulk_action',\n                    selected_items: selected_items,\n                    bulk_action: actions,\n                    _ajax_nonce: tf_admin_params.tf_nonce\n                },\n                beforeSend: function() {\n                    $this.addClass(\"loading\");\n                },\n                success: function(response) {\n                    let data = $.parseJSON(response);\n                    $this.removeClass(\"loading\");\n                    if(data.status == \"success\") {\n                        notyf.success(data.msg);\n                    } else if (data.status == \"error\") {\n                        notyf.error(data.msg);\n                    }\n                    \n                }\n            });\n            \n        });\n\n        $(\".tf-enquiry-filter-hotel-name, .tf-enquiry-filter-tour-name, .tf-enquiry-filter-apartment-name\").on('change', function() {\n            let $this = $(this);\n            let post_id = $this.val() ? $this.val() : '';\n            let post_type = $(\".enquiry-post-type\").val();\n            let filter = $(\".tf-filter-mail-option-enquiry \").val();\n\n            $.ajax({\n                url: tf_admin_params.ajax_url,\n                type: 'POST',\n                data: {\n                    action: 'tf_enquiry_filter_post',\n                    post_id: post_id,\n                    post_type: post_type,\n                    filter: filter,\n                    _ajax_nonce: tf_admin_params.tf_nonce\n                },\n                beforeSend: function() {\n                    $(\"#tf-enquiry-status-loader\").addClass(\"show\");\n                },\n                success: function (response) {\n                    $(\"#tf-enquiry-status-loader\").removeClass(\"show\");\n                    if( response.status == \"error\" ) {\n                        $(\".tf-enquiry-details-wrap\").append(response.msg);\n                    } else {\n                        $(\".tf-enquiry-table\").remove();\n                        $(\".tf-enquiry-details-wrap\").append(response);\n                    }\n                }\n            });\n        });\n\n        $(\".tf-order-status-filter-reset-btn\").on('click', function() {\n            $(\".tf-filter-bulk-option-enquiry\").val('').trigger('change');\n            $(\".tf-filter-hotel-name\").val(\"\").trigger('change');\n            $(\".tf-filter-mail-option-enquiry\").val( \"\").trigger('change');\n        });\n\n        $(\".tf-filter-mail-option-enquiry\").on('change', function() {\n            let $this = $(this);\n            let filter = $this.val() ? $this.val() : '';\n            let post_id = $(\".tf-filter-hotel-name \").val()\n            let post_type = $(\".enquiry-post-type\").val();\n\n            $.ajax({\n                url: tf_admin_params.ajax_url,\n                type: 'POST',\n                data: {\n                    action: 'tf_enquiry_filter_mail',\n                    filter: filter,\n                    post_id : post_id,\n                    post_type: post_type,\n                    _ajax_nonce: tf_admin_params.tf_nonce\n                },\n                beforeSend: function() {\n                    $(\"#tf-enquiry-status-loader\").addClass(\"show\");\n                },\n                success: function (response) {\n                    $(\"#tf-enquiry-status-loader\").removeClass(\"show\");\n                    if( response.status == \"error\" ) {\n                        $(\".tf-enquiry-details-wrap\").append(response.msg);\n                    } else {\n                        $(\".tf-enquiry-table\").remove();\n                        $(\".tf-enquiry-details-wrap\").append(response);\n                    }\n                }\n            });\n        });\n\n        $(\"#tf-single-enquiry-reply-form\").on('submit', function(e) {\n            e.preventDefault();\n\n            let $this = $(this);\n            let reply_mail = $this.find(\".tf-enquiry-reply-email\").val();\n            let reply_message = tinyMCE.activeEditor && tinyMCE.activeEditor.getContent() ? tinyMCE.activeEditor.getContent() : $(\"#tf-enquiry-reply-editor\").val();\n            let userName = $this.find(\".tf-enquiry-reply-name\").val();\n            let subject = $this.find(\".tf-enquiry-reply-subject\").val();\n            let post_id = $this.find(\".tf-enquiry-reply-post-id\").val();\n            let enquiry_id = $this.find(\".tf-enquiry-reply-id\").val();\n\n            $.ajax({\n                url: tf_admin_params.ajax_url,\n                type: 'POST',\n                data: {\n                    action: 'tf_enquiry_reply_email',\n                    reply_mail: reply_mail,\n                    reply_message: reply_message,\n                    user_name: userName,\n                    subject: subject,\n                    post_id: post_id,\n                    enquiry_id: enquiry_id,\n                    _ajax_nonce: tf_admin_params.tf_nonce\n                },\n                beforeSend: function() {\n                    $(\"#tf-enquiry-status-loader\").addClass(\"show\");\n                },\n                success: function(response) {\n                    $(\"#tf-enquiry-status-loader\").removeClass(\"show\");\n\n                    let data = JSON.parse(response);\n                    \n                    if(data.status == \"success\") {\n                        notyf.success(data.msg);\n                        window.location.reload();\n                    } else if (data.status == \"error\") {\n                        notyf.error(data.msg);\n                    }\n                },\n                error: function(data) {\n                    console.log(data);\n                },\n            });\n        })\n\n        $(document).on(\"submit\", 'form.tf-enquiry-right-search-filter', function(e) {\n            e.preventDefault();\n\n            let post_id = $(\"#tf-searching-enquiry-key\").val();\n            let select_option = $(\".tf-filter-hotel-name option\");\n            var values = $.map(select_option ,function(option) {\n                return option.value;\n              }); \n\n            if( $.inArray(post_id, values) !== -1 ) {\n                $('.tf-filter-hotel-name').val(post_id).trigger('change');\n            } else {\n                notyf.error(tf_admin_params.no_data_found_with_id);\n            }\n            \n        })\n\n        $(document).on(\"click\", \".tf-single-enquiry-copy-btn\", function (e) {\n            let $this = $(this),\n                copy_text = $this.closest(\".tf-single-enquiry-details-value\").data(\"enquiry-copy-text\"),\n                $temp = $(\"<input>\"),\n                copy_ip_addr = $(this).parent().parent().find(\".tf-single-enquiry-log-details-single-value\").data(\"enquiry-copy-text\");\n            \n            copy_text = copy_text ? copy_text : copy_ip_addr;\n\n            $(\"body\").append($temp);\n            $temp.val(copy_text).select();\n            document.execCommand(\"copy\");\n            $temp.remove();\n            notyf.success(\"Copied to clipboard\");\n        });\n\n        $(document).on(\"click\", '.tf-single-enquiry-reply-mail-button', function (e) { \n            $(\".tf-single-enquiry-reply-wrapper\").slideDown();\n            $(this).hide();\n        });\n\n        $('.tf-single-enquiry-reply-another-mail-button').on('click', function(e) {\n            $('#tf-single-enquiry-reply-form').slideDown();\n            $(this).hide();\n        });\n\n        $(\".tf-single-enquiry-accordion-item.is-active\").children(\".tf-single-accordion-body\").slideDown();\n\n        $(\".tf-single-enquiry-accordion-head\").on(\"click\", function() {\n            let $this = $(this).parent();\n            $this.siblings(\".tf-single-enquiry-accordion-item\").removeClass(\"is-active\").find(\".tf-single-accordion-body\").slideUp();\n            $this.toggleClass(\"is-active\").find(\".tf-single-accordion-body\").slideToggle(\"ease-out\");\n\n        });\n\n        $(\".tf-enquiry-single-row\").on(\"click\", function(e) {\n\n            let currentURL = window.location.href;\n            let id = $(\".tf-enquiry-id\", this).val();\n\n            if( $(e.target)[0].className == 'check-column' || $(e.target)[0].className == 'tf-enquiry-name-checkbox'|| $(e.target)[0].className == 'table-name-column' ) {\n                return;\n            }\n\n            let updatedUrl = currentURL + \"&enquiry_id=\" + id + \"&action=preview\";\n            window.location.href = updatedUrl;\n        });\n    });\n\n})(jQuery);\n\n//# sourceURL=webpack://tourfic/./sass/admin/js/free/enquiry-details.js?");
+            $.ajax({
+                type: 'post',
+                url: ajaxurl,
+                data: data,
+                beforeSend: function (data) {
+                    notyf.success(tf_admin_params.deleting_room_order_ids);
+                },
+                success: function (response) {
+                    notyf.success(response.data.message);
+                    location.reload();
+                },
+                error: function (data) {
+                    notyf.error(data.data);
+                },
+            });
 
-/***/ }),
+        });
 
-/***/ "./sass/admin/js/free/required-taxonomies-gutenberg.js":
-/*!*************************************************************!*\
-  !*** ./sass/admin/js/free/required-taxonomies-gutenberg.js ***!
-  \*************************************************************/
-/***/ (() => {
+        /**
+         * Tour location required
+         *
+         * show notyf error
+         */
+        $(document).on('click', '.post-type-tf_tours #publish, .post-type-tf_tours #save-post', function (e) {
+            if ($('input[name="tf_tours_opt[location][address]"]').val().length === 0) {
+                e.preventDefault;
+                e.stopImmediatePropagation();
+                notyf.error(tf_admin_params.tour_location_required);
+                return false;
+            }
+        });
 
-eval("const {select, dispatch} = wp.data;\n\n//required taxonomies\n\nfunction TfPrePublishCheck() {\n    let lockPost = false;\n    tf_admin_params.error = false;\n    tf_admin_params.messages = [];\n\n    let tf_post_pre_save = Object.assign({}, select('core/editor').getCurrentPost(), select('core/editor').getPostEdits());\n\n    if (tf_post_pre_save.hasOwnProperty('categories')) {\n        tf_post_pre_save['categories'] = tf_post_pre_save['categories'].filter(function (ele) {\n            return ele !== 1;\n        });\n    }\n\n    jQuery.each(tf_admin_params.taxonomies, function (taxonomy, config) {\n        if (tf_post_pre_save.hasOwnProperty(taxonomy) && tf_post_pre_save[taxonomy].length === 0) {\n            dispatch('core/notices').createNotice(\n                'error',\n                config.message,\n                {\n                    id: 'tfNotice_' + taxonomy,\n                    isDismissible: false\n                }\n            );\n            tf_admin_params.error = lockPost = true;\n        }else{\n            dispatch('core/notices').removeNotice('tfNotice_' + taxonomy);\n        }\n    });\n\n    if (lockPost === true) {\n        dispatch('core/editor').lockPostSaving();\n    } else {\n        dispatch('core/editor').unlockPostSaving();\n    }\n\n}\n\nTfPrePublishCheck();\n\nlet rpc_check_interval = setInterval(TfPrePublishCheck, 500);\n\n\n//# sourceURL=webpack://tourfic/./sass/admin/js/free/required-taxonomies-gutenberg.js?");
+        /**
+         * Hotel location required
+         *
+         * show notyf error
+         */
+        $(document).on('click', '.post-type-tf_hotel #publish, .post-type-tf_hotel #save-post', function (e) {
+            if ($('input[name="tf_hotels_opt[map][address]"]').val().length === 0) {
+                e.preventDefault;
+                e.stopImmediatePropagation();
+                notyf.error(tf_admin_params.hotel_location_required);
+                return false;
+            }
+        });
 
-/***/ }),
+        /**
+         * Apartment location required
+         *
+         * show notyf error
+         */
+        $(document).on('click', '.post-type-tf_apartment #publish, .post-type-tf_apartment #save-post', function (e) {
+            if ($('[name="tf_apartment_opt[map][address]"]').val().length === 0) {
+                e.preventDefault;
+                e.stopImmediatePropagation();
+                notyf.error(tf_admin_params.apartment_location_required);
+                return false;
+            }
+        });
 
-/***/ "./sass/admin/js/free/required-taxonomies.js":
-/*!***************************************************!*\
-  !*** ./sass/admin/js/free/required-taxonomies.js ***!
-  \***************************************************/
-/***/ (() => {
+        /**
+         * Ajax install
+         *
+         * @since 1.0
+         */
+        $(document).on('click', '.tf-install', function (e) {
+            e.preventDefault();
 
-eval("jQuery(function ($) {\n\n    //required taxonomies\n\t// Create an instance of Notyf\n\tconst notyf = new Notyf({\n\t\tripple: true,\n\t\tdismissable: true,\n\t\tduration: 3000,\n\t\tposition: {\n\t\t\tx: 'right',\n\t\t\ty: 'bottom',\n\t\t},\n\t});\n\n    function tf_event_handler(e) {\n        tf_admin_params.error = false;\n        $.each(tf_admin_params.taxonomies, function (taxonomy, config) {\n            if (config.type == 'hierarchical') {\n                if ($('#taxonomy-' + taxonomy + ' input:checked').length == 0) {\n                    //alert(config.message);\n\t\t\t\t\tnotyf.error(config.message);\n                    tf_admin_params.error = true;\n                }\n            } else {\n                if ($('#tagsdiv-' + taxonomy + ' .tagchecklist').is(':empty')) {\n                    //alert(config.message);\n                    notyf.error(config.message);\n                    tf_admin_params.error = true;\n                }\n            }\n        });\n        if (tf_admin_params.error) {\n            e.stopImmediatePropagation();\n            return false;\n        } else {\n            return true;\n        }\n    }\n\n    $('#publish, #save-post').on('click.require-post-category', tf_event_handler);\n    $('#post').on('submit.require-post-category', tf_event_handler);\n    if ($('#publish')[0] != null && $._data($('#publish')[0], \"events\") != null) {\n        var publish_click_events = $._data($('#publish')[0], \"events\").click;\n        if (publish_click_events) {\n            if (publish_click_events.length > 1) {\n                publish_click_events.unshift(publish_click_events.pop());\n            }\n        }\n    }\n    if ($('#save-post')[0] != null && $._data($('#save-post')[0], \"events\") != null) {\n        var save_click_events = $._data($('#save-post')[0], \"events\").click;\n        if (save_click_events) {\n            if (save_click_events.length > 1) {\n                save_click_events.unshift(save_click_events.pop());\n            }\n        }\n    }\n    if ($('#post')[0] != null && $._data($('#post')[0], \"events\") != null) {\n        var post_submit_events = $._data($('#post')[0], \"events\").submit;\n        if (post_submit_events) {\n            if (post_submit_events.length > 1) {\n                post_submit_events.unshift(post_submit_events.pop());\n            }\n        }\n    }\n});\n\n//# sourceURL=webpack://tourfic/./sass/admin/js/free/required-taxonomies.js?");
+            var current = $(this);
+            var plugin_slug = current.attr("data-plugin-slug");
 
-/***/ }),
+            current.addClass('updating-message').text(tf_admin_params.installing);
 
-/***/ "./sass/admin/js/free/setup-wizard.js":
-/*!********************************************!*\
-  !*** ./sass/admin/js/free/setup-wizard.js ***!
-  \********************************************/
-/***/ (() => {
+            var data = {
+                action: 'tf_ajax_install_plugin',
+                _ajax_nonce: tf_admin_params.tf_nonce,
+                slug: plugin_slug,
+            };
 
-eval("(function ($) {\n    $(document).ready(function () {\n\n        // Create an instance of Notyf\n        const notyf = new Notyf({\n            ripple: true,\n            dismissable: true,\n            duration: 3000,\n            position: {\n                x: 'right',\n                y: 'bottom',\n            },\n        });\n\n        //if body has class .tourfic-settings_page_tf-setup-wizard then add background-color: #ecf5ff; to html\n        if ($('body').hasClass('tourfic-settings_page_tf-setup-wizard')) {\n            $('html').css('padding', '0');\n        }\n\n        $(document).on('click', '.tf-setup-start-btn', function (e) {\n            e.preventDefault();\n            $('.tf-welcome-step').hide();\n            if(tf_admin_params.is_woo_not_active) {\n                $('.tf-setup-step-1').fadeIn(600);\n            } else {\n                $('.tf-setup-step-2').fadeIn(600);\n            }\n        });\n\n        $(document).on('click', '.tf-setup-next-btn, .tf-setup-skip-btn', function (e) {\n            e.preventDefault();\n            let form = $('#tf-setup-wizard-form');\n            let skipSteps = form.find('input[name=\"tf-skip-steps\"]').val();\n            let step = $(this).closest('.tf-setup-step-container').data('step');\n            let nextStep = step + 1;\n\n            //min one service required\n            if (step === 2 && $(this).hasClass('tf-setup-next-btn')) {\n                let services = $('input[name=\"tf-services[]\"]:checked').length;\n\n                if (!services) {\n                    alert(tf_admin_params.i18n.no_services_selected);\n                    return false;\n                }\n\n                //if hotel service not checked, hide hotel settings\n                if (!$('input[name=\"tf-services[]\"][value=\"hotel\"]').is(':checked')) {\n                    $('.tf-hotel-setup-wizard').hide();\n                    $('.tf-add-new-hotel').hide();\n                } else {\n                    $('.tf-hotel-setup-wizard').show();\n                    $('.tf-add-new-hotel').show();\n                }\n\n                //if tour service not checked, hide tour settings\n                if (!$('input[name=\"tf-services[]\"][value=\"tour\"]').is(':checked')) {\n                    $('.tf-tour-setup-wizard').hide();\n                    $('.tf-add-new-tour').hide();\n                } else {\n                    $('.tf-tour-setup-wizard').show();\n                    $('.tf-add-new-tour').show();\n                }\n\n                //if apartment service not checked, hide apartment settings\n                if (!$('input[name=\"tf-services[]\"][value=\"apartment\"]').is(':checked')) {\n                    $('.tf-apartment-setup-wizard').hide();\n                    $('.tf-add-new-apartment').hide();\n                } else {\n                    $('.tf-apartment-setup-wizard').show();\n                    $('.tf-add-new-apartment').show();\n                }\n\n                //if car service not checked, hide car settings\n                if (!$('input[name=\"tf-services[]\"][value=\"carrentals\"]').is(':checked')) {\n                    $('.tf-car-setup-wizard').hide();\n                    $('.tf-add-new-car').hide();\n                } else {\n                    $('.tf-car-setup-wizard').show();\n                    $('.tf-add-new-car').show();\n                }\n            }\n\n            //skip steps add to input[name=\"tf-skip-steps\"]\n            if ($(this).hasClass('tf-setup-skip-btn')) {\n                skipSteps = !skipSteps ? step : skipSteps.indexOf(step) === -1 ? skipSteps + ',' + step : skipSteps;\n                form.find('input[name=\"tf-skip-steps\"]').val(skipSteps);\n\n                if(step === 1){\n                    $('.tf-hotel-setup-wizard').show();\n                    $('.tf-tour-setup-wizard').show();\n                }\n            }\n\n            //remove skip steps from input[name=\"tf-skip-steps\"] if user back to step and go to next step\n            if($(this).hasClass('tf-setup-next-btn') && skipSteps.indexOf(step) !== -1) {\n                skipSteps = skipSteps.replace(step, '');\n                form.find('input[name=\"tf-skip-steps\"]').val(skipSteps);\n            }\n\n            //hide current step and show next step (if not last step)\n            if(!$(this).hasClass('tf-setup-submit-btn')) {\n                $('.tf-setup-step-' + step).fadeOut(300, function () {\n                    $('.tf-setup-step-' + nextStep).fadeIn(300);\n                });\n            }\n        });\n\n        $(document).on('click', '.tf-setup-prev-btn', function (e) {\n            e.preventDefault();\n            let step = $(this).closest('.tf-setup-step-container').data('step');\n            let prevStep = step - 1;\n            if(step === 2 && !tf_admin_params.is_woo_not_active) {\n                $('.tf-setup-step-2').fadeOut(300, function () {\n                    $('.tf-setup-step-0').fadeIn(300);\n                });\n            } else {\n                $('.tf-setup-step-' + step).fadeOut(300, function () {\n                    $('.tf-setup-step-' + prevStep).fadeIn(300);\n                });\n            }\n        });\n\n        /*\n        * Setup Wizard form submit\n        * @author: Foysal\n        */\n        $(document).on('click', '.tf-setup-submit-btn', function (e) {\n            e.preventDefault();\n            let submitBtn = $('.tf-setup-submit-btn.tf-quick-setup-btn');\n            let form = $(this).closest('#tf-setup-wizard-form');\n            let step = $(this).closest('.tf-setup-step-container').data('step');\n            let skipSteps = form.find('input[name=\"tf-skip-steps\"]').val();\n\n            if($(this).hasClass('tf-quick-setup-btn') && skipSteps.indexOf(step) !== -1) {\n                skipSteps = skipSteps.replace(step, '');\n                form.find('input[name=\"tf-skip-steps\"]').val(skipSteps);\n            }\n\n            let formData = new FormData(form[0]);\n            formData.append('action', 'tf_setup_wizard_submit');\n\n            $.ajax({\n                url: tf_admin_params.ajax_url,\n                type: 'POST',\n                data: formData,\n                processData: false,\n                contentType: false,\n                beforeSend: function () {\n                    submitBtn.addClass('tf-btn-loading');\n                },\n                success: function (response) {\n                    let data = JSON.parse(response);\n                    submitBtn.removeClass('tf-btn-loading');\n                    if (data.success) {\n                        $('.tf-finish-step').show();\n                        $('.tf-setup-step-' + step).hide();\n                    }\n                },\n                complete: function () {\n                    submitBtn.removeClass('tf-btn-loading');\n                },\n                error: function (error) {\n                    submitBtn.removeClass('tf-btn-loading');\n                    console.log(error);\n                }\n            });\n        });\n\n        /*\n        * Travelfic Theme Installing\n        * @author: Jahid\n        */\n        let travelfic_toolkit_active_plugins = tf_admin_params.is_travelfic_toolkit_active;\n\n        $(document).on('click', '.tf-setup-travelfic-theme-btn', function (e) {\n            e.preventDefault();\n            \n            if(tf_admin_params.current_active_theme && \"travelfic\"!=tf_admin_params.current_active_theme && \"ultimate-hotel-booking\"!=tf_admin_params.current_active_theme){\n                let theme_slug = $('.tf-template-selection input[name=\"tf_theme_select\"]:checked').val();\n                if(\"travelfic\"==theme_slug){\n                    $('.tf-setup-travelfic-theme-btn').text(\"Travelfic Installing...\");\n                }\n                if(\"ultimate-hotel-booking\"==theme_slug){\n                    $('.tf-setup-travelfic-theme-btn').text(\"Hotel Booking Installing...\");\n                }\n                $('.tf-setup-travelfic-theme-btn').addClass('tf-btn-loading');\n                var data = {\n                    action: \"tf_theme_installing\",\n                    _ajax_nonce: tf_admin_params.tf_nonce,\n                    slug: theme_slug,\n                };\n                // Installing Function\n                jQuery.post(tf_admin_params.ajax_url, data, function (response) {\n                    $('.tf-setup-travelfic-theme-active').trigger(\"click\");\n                })\n            }else{\n                $('.tf-setup-travelfic-toolkit-btn').trigger(\"click\");\n            }\n            \n        });\n\n        /*\n        * Travelfic Theme Activating\n        * @author: Jahid\n        */\n\n        $(document).on('click', '.tf-setup-travelfic-theme-active', function (e) {\n\n            e.preventDefault();\n            let theme_slug = $('.tf-template-selection input[name=\"tf_theme_select\"]:checked').val();\n\n            if(\"travelfic\"==theme_slug){\n                $('.tf-setup-travelfic-theme-btn').text(\"Travelfic Activate...\");\n            }\n            if(\"ultimate-hotel-booking\"==theme_slug){\n                $('.tf-setup-travelfic-theme-btn').text(\"Hotel Booking Activate...\");\n            }\n\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: {\n                    action: \"tf_setup_travelfic_theme_active\",\n                    _ajax_nonce: tf_admin_params.tf_nonce,\n                    slug: theme_slug,\n                },\n                success: function(response) {\n                    if ($.inArray(\"travelfic-toolkit\", travelfic_toolkit_active_plugins) !== -1) {\n                        $('.tf-setup-travelfic-toolkit-btn').trigger(\"click\");\n                    }else{\n                        window.location.replace(tf_admin_params.toolkit_page_url);\n                    }\n                },\n                error: function(error) {\n                    \n                }\n            });\n\n        });\n\n        /*\n        * Travelfic Toolkit Installing\n        * @author: Jahid\n        */\n       \n        $(document).on('click', '.tf-setup-travelfic-toolkit-btn', function (e) {\n            e.preventDefault();\n            var $this = $(this);\n            if ($.inArray(\"travelfic-toolkit\", travelfic_toolkit_active_plugins) !== -1) {\n                let plugin_slug = $(this).attr('data-install');\n                $this.text(\"Toolkit Activate...\");\n                $this.addClass('tf-btn-loading');\n\n                var data = {\n                    action: \"tf_travelfic_toolkit_installing\",\n                    _ajax_nonce: tf_admin_params.tf_nonce,\n                    slug: plugin_slug,\n                };\n                // Installing Function\n                jQuery.post(tf_admin_params.ajax_url, data, function (response) {\n                    $('.tf-setup-travelfic-toolkit-active').trigger(\"click\");\n                })\n            }else{\n                window.location.replace(tf_admin_params.toolkit_page_url);\n            }\n        });\n\n        /*\n        * Travelfic Toolkit Activating\n        * @author: Jahid\n        */\n        $(document).on('click', '.tf-setup-travelfic-toolkit-active', function (e) {\n\n            e.preventDefault();\n            let plugin_slug = $(this).attr('data-install');\n            $('.tf-setup-travelfic-theme-btn').text(\"Toolkit Activate...\");\n\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: {\n                    action: \"tf_travelfic_toolkit_activate\",\n                    _ajax_nonce: tf_admin_params.tf_nonce,\n                    slug: plugin_slug,\n                },\n                success: function(response) {\n                    window.location.replace(tf_admin_params.toolkit_page_url);\n                },\n                error: function(error) {\n                    \n                }\n            });\n        });\n\n        /*\n        * WooCommerce Plugin Install\n        * @auther: Foysal\n        */\n        $(document).on('click', '.tf-install-woo-btn', function (e) {\n            e.preventDefault();\n            let btn = $(this);\n\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: {\n                    action: \"tf_ajax_install_woo\",\n                    _ajax_nonce: tf_admin_params.tf_nonce,\n                    slug: 'woocommerce',\n                },\n                beforeSend: function () {\n                    btn.text(tf_admin_params.installing)\n                    btn.addClass('tf-btn-loading');\n                },\n                success: function(response) {\n                    btn.text(tf_admin_params.activating);\n                    $('.tf-active-woo-btn').trigger(\"click\");\n                },\n                error: function(error) {\n                    console.log(error);\n                }\n            });\n        });\n\n        /*\n        * WooCommerce Plugin Activate\n        * @auther: Foysal\n        */\n        $(document).on('click', '.tf-active-woo-btn', function (e) {\n            e.preventDefault();\n            let btn = $(this);\n\n            $.ajax({\n                type: 'post',\n                url: tf_admin_params.ajax_url,\n                data: {\n                    action: \"tf_ajax_activate_woo\",\n                    _ajax_nonce: tf_admin_params.tf_nonce,\n                    slug: 'woocommerce',\n                },\n                beforeSend: function () {\n                    btn.text(tf_admin_params.activating)\n                    btn.addClass('tf-btn-loading');\n                },\n                success: function(response) {\n                    notyf.success(response.data);\n\n                    setTimeout(function(){\n                        btn.closest('.tf-setup-step-layout').find('.tf-setup-next-btn').trigger(\"click\");\n                    }, 500);\n\n                    btn.removeClass('tf-btn-loading');\n                    $('.tf-install-woo-btn').removeClass('tf-btn-loading');\n                },\n                error: function(error) {\n                    console.log(error);\n                }\n            });\n        });\n    });\n\n})(jQuery);\n\n//# sourceURL=webpack://tourfic/./sass/admin/js/free/setup-wizard.js?");
+            jQuery.post(tf_admin_params.ajax_url, data, function (response) {
+                current.removeClass('updating-message');
+                current.addClass('updated-message').text(tf_admin_params.installed);
+                current.attr("href", response.data.activateUrl);
+            })
+                .fail(function () {
+                    current.removeClass('updating-message').text(tf_admin_params.install_failed);
+                })
+                .always(function () {
+                    current.removeClass('install-now updated-message').addClass('activate-now button-primary').text(tf_admin_params.activating);
+                    current.unbind(e);
+                    current[0].trigger("click");
+                });
+        });
 
-/***/ }),
+        /**
+         * Pro Feature button link
+         */
+        $(document).on('click', '.tf-pro', function (e) {
+            e.preventDefault();
+            window.open('https://tourfic.com/');
+        });
 
-/***/ "./sass/admin/js/free/tf-options.js":
-/*!******************************************!*\
-  !*** ./sass/admin/js/free/tf-options.js ***!
-  \******************************************/
-/***/ (() => {
+        $(window).on('load', function () {
+            $('.tf-field-disable').find('input, select, textarea, button, div, span').attr('disabled', 'disabled');
+        });
 
-eval("(function ($) {\n    'use strict';\n    $(document).ready(function () {\n\n        // Create an instance of Notyf\n        const notyf = new Notyf({\n            ripple: true,\n            duration: 3000,\n            dismissable: true,\n            position: {\n                x: 'right',\n                y: 'bottom',\n            },\n        });\n\n        /*\n        * window url on change tab click\n        * @author: Foysal\n        */\n\n        function activateTabFromHash(hash = '') {\n            if (!hash) {\n                hash = window.location.hash;\n            }\n    \n            let slug = hash.replace('#tab=', '').split('&')[0];\n    \n            if (slug) {\n                let selectedTab = $('.tf-tablinks[data-tab=\"' + slug + '\"]');\n                let selectedContent = $('#' + slug);\n    \n                if (selectedTab.length && selectedContent.length) {\n                    $('.tf-admin-tab .tf-tablinks').removeClass('active');\n                    $('.tf-tab-wrapper .tf-tab-content').removeClass('active');\n                    selectedTab.addClass('active');\n                    selectedContent.addClass('active');\n                }\n            }\n        }\n    \n        // Save current tab hash before post update\n        $('.post-type-tf_tours #post, .post-type-tf_hotel #post, .post-type-tf_room #post, .post-type-tf_apartment #post, .post-type-tf_carrental #post, .post-type-tf_email_templates #post').on('submit', function () {\n            localStorage.setItem('tf_saved_tab_hash', window.location.hash);\n        });\n    \n        // Restore saved hash and activate tab\n        let savedHash = localStorage.getItem('tf_saved_tab_hash');\n        if (savedHash) {\n            localStorage.removeItem('tf_saved_tab_hash');\n            window.location.hash = savedHash;\n            activateTabFromHash(savedHash);\n        } else {\n            // Run on initial page load\n            activateTabFromHash();\n        }\n\n        \n        \n        $(window).on('hashchange load', function () {\n            let hash = window.location.hash;\n            let query = window.location.search;\n\n            if (query.indexOf('dashboard') > -1) {\n                let submenu = $(\"#toplevel_page_tf_settings\").find(\".wp-submenu\");\n                submenu.find(\"a\").filter(function (a, e) {\n                    return e.href.indexOf(query) > -1;\n                }).parent().addClass(\"current\");\n            }\n\n            tfApartmentCalendar()\n            tfHotelCalendar()\n            tfTourCalendar()\n        });\n\n        /*\n        * Tab click\n        * @author: Foysal\n        */\n        $(document).on('click', '.tf-tablinks', function (e) {\n            e.preventDefault();\n            let firstTabId,\n                $this = $(this),\n                parentDiv = $this.closest('.tf-admin-tab-item'),\n                parentTabId = parentDiv.children('.tf-tablinks').attr('data-tab'),\n                tabcontent = $('.tf-tab-content'),\n                tablinks = $('.tf-tablinks');\n\n            tabcontent.hide();\n            tablinks.removeClass('active');\n\n            let tabId = $this.attr('data-tab');\n            $('#' + tabId).css('display', 'flex');\n\n            if ($this.next().hasClass('tf-submenu')) {\n                firstTabId = parentDiv.find('.tf-submenu li:first-child .tf-tablinks').data('tab');\n            }\n\n            if (firstTabId === tabId) {\n                parentDiv.find('.tf-submenu li:first-child .tf-tablinks').addClass('active');\n            } else {\n                $this.addClass('active');\n            }\n            // url hash update\n            window.location.hash = '#tab=' + tabId;\n\n            $(\".tf-admin-tab\").removeClass('active');\n\n            let submenu = $(\"#toplevel_page_tf_settings\").find(\".wp-submenu\");\n            submenu.find(\"a\").filter(function (a, e) {\n                let slug = e.hash.replace('#tab=', '');\n                return tabId === slug || parentTabId === slug;\n            }).parent().addClass(\"current\").siblings().removeClass(\"current\")\n\n            roomOptionsArr();\n        });\n\n        /*\n        * Submenu toggle\n        * @author: Foysal\n        */\n        $(document).on('click', '.tf-admin-tab-item', function (e) {\n            e.preventDefault();\n            let $this = $(this);\n\n            $this.addClass('open');\n            $this.children('ul').slideDown();\n            $this.siblings('.tf-admin-tab-item').children('ul').slideUp();\n            $this.siblings('.tf-admin-tab-item').removeClass('open');\n            $this.siblings('.tf-admin-tab-item').find('li').removeClass('open');\n            $this.siblings('.tf-admin-tab-item').find('ul').slideUp();\n        });\n\n        /*\n        * Each date field initialize flatpickr\n        * @author: Foysal\n        */\n        const tfDateInt = dateSelector => {\n            $(dateSelector).each(function () {\n                let $this = $(this),\n                    dateField = $this.find('input.flatpickr'),\n                    format = dateField.data('format'),\n                    multiple = dateField.data('multiple'),\n                    minDate = dateField.data('min-date');\n\n                if (dateField.length === 2) {\n                    let startDate = $this.find('.tf-date-from input.flatpickr').flatpickr({\n                        dateFormat: format,\n                        minDate: minDate,\n                        altInput: true,\n                        altFormat: tf_options.tf_admin_date_format,\n                        onChange: function (selectedDates, dateStr, instance) {\n                            endDate.set('minDate', dateStr);\n                        }\n                    });\n                    let endDate = $this.find('.tf-date-to input.flatpickr').flatpickr({\n                        dateFormat: format,\n                        minDate: minDate,\n                        altInput: true,\n                        altFormat: tf_options.tf_admin_date_format,\n                        onChange: function (selectedDates, dateStr, instance) {\n                            startDate.set('maxDate', dateStr);\n                        }\n                    });\n                } else {\n                    dateField.flatpickr({\n                        dateFormat: format,\n                        minDate: minDate,\n                        altInput: true,\n                        altFormat: tf_options.tf_admin_date_format,\n                        mode: multiple ? 'multiple' : 'single',\n                    });\n                }\n            });\n        }\n        tfDateInt('.tf-field-date');\n\n        /*\n        * Each time field initialize flatpickr\n        * @author: Foysal\n        */\n        const tfTimeInt = timeSelector => {\n            $(timeSelector).each(function () {\n                let $this = $(this),\n                    timeField = $this.find('input.flatpickr'),\n                    format = timeField.data('format');\n\n                timeField.flatpickr({\n                    enableTime: true,\n                    noCalendar: true,\n                    dateFormat: format,\n                });\n            });\n        }\n        tfTimeInt('.tf-field-time');\n\n\n        /*\n        * Each color field initialize wpColorPicker\n        * @author: Foysal\n        */\n        const tfColorInt = colorSelector => {\n            $(colorSelector).each(function () {\n                let $this = $(this),\n                    colorField = $this.find('input.tf-color');\n\n                colorField.wpColorPicker();\n            });\n        }\n        tfColorInt('.tf-field-color');\n\n        /*\n        * Custom modal\n        * @author: Foysal\n        */\n        TF_dependency();\n\n        function TF_dependency() {\n            $('.tf-tab-content, .tf-taxonomy-metabox').each(function () {\n                var $this = $(this);\n                $this.find('[data-controller]').each(function () {\n                    var $tffields = $(this);\n                    if ($tffields.length) {\n                        // alert($tffields.length);\n                        var normal_ruleset = $.tf_deps.createRuleset(),\n                            global_ruleset = $.tf_deps.createRuleset(),\n                            normal_depends = [],\n                            global_depends = [];\n\n                        $tffields.each(function () {\n\n                            var $field = $(this),\n                                controllers = $field.data('controller').split('|'),\n                                conditions = $field.data('condition').split('|'),\n                                values = $field.data('value').toString().split('|'),\n                                is_global = $field.data('depend-global') ? true : false,\n                                ruleset = normal_ruleset;\n\n                            $.each(controllers, function (index, depend_id) {\n\n                                var value = values[index] || '',\n                                    condition = conditions[index] || conditions[0];\n\n                                ruleset = ruleset.createRule($this.find('[data-depend-id=\"' + depend_id + '\"]'), condition, value);\n\n                                ruleset.include($field);\n\n                                if (is_global) {\n                                    global_depends.push(depend_id);\n                                } else {\n                                    normal_depends.push(depend_id);\n                                }\n\n                            });\n\n                        });\n\n                        if (normal_depends.length) {\n                            $.tf_deps.enable($this, normal_ruleset, normal_depends);\n                        }\n\n                        if (global_depends.length) {\n                            $.tf_deps.enable(TF.vars.$body, global_ruleset, global_depends);\n                        }\n                    }\n                });\n\n\n            });\n        }\n\n\n        /*\n        * Custom modal\n        * @author: Foysal\n        */\n        $(document).on('click', '.tf-modal-btn', function (e) {\n            e.preventDefault();\n            let $this = $(this),\n                modal = $('#tf-icon-modal');\n\n            if (modal.length > 0 && modal.hasClass('tf-modal-show')) {\n                modal.removeClass('tf-modal-show');\n                $('body').removeClass('tf-modal-open');\n            } else {\n                modal.addClass('tf-modal-show');\n                $('body').addClass('tf-modal-open');\n            }\n        });\n        $(document).on(\"click\", '.tf-modal-close', function () {\n            $('.tf-modal').removeClass('tf-modal-show');\n            $('body').removeClass('tf-modal-open');\n        });\n        $(document).on('click', function (event) {\n            if(!$('.tf-map-modal').length) {\n                if (!$(event.target).closest(\".tf-modal-content,.tf-modal-btn\").length) {\n                    $(\"body\").removeClass(\"tf-modal-open\");\n                    $(\".tf-modal\").removeClass(\"tf-modal-show\");\n                }\n            }\n        });\n\n        /*\n        * Icon tab\n        * @author: Foysal\n        */\n        $(document).on('click', '.tf-icon-tab', function (e) {\n            e.preventDefault();\n            let $this = $(this),\n                tab = $this.data('tab');\n\n            $('.tf-icon-tab').removeClass('active');\n            $this.addClass('active');\n\n            $('#' + tab).addClass('active').siblings().removeClass('active');\n            let searchVal = $('.tf-icon-search-input').val();\n\n            tfIconInfiniteScroll();\n            tfIconFilter(searchVal);\n        });\n\n        /*\n        * Icon select\n        * @author: Foysal\n        */\n        $(document).on('click', '.tf-icon-select .tf-admin-btn, .tf-icon-select .tf-icon-preview', function (e) {\n            e.preventDefault();\n            let btn = $(this);\n\n            let fieldId = btn.closest('.tf-icon-select').attr('id');\n            $('#tf-icon-modal').data('icon-field', fieldId);\n        });\n\n        /*\n        * Icon select\n        * @author: Foysal\n        */\n        $(document).on('click', '.tf-icon-list li', function (e) {\n            e.preventDefault();\n            let $this = $(this);\n\n            $('.tf-icon-list li').removeClass('active');\n            $this.addClass('active');\n\n            //remove disabled class\n            $('.tf-icon-insert').removeClass('disabled');\n        });\n\n        /*\n        * Icon insert\n        * @author: Foysal\n        */\n        $(document).on('click', '.tf-icon-insert', function (e) {\n            e.preventDefault();\n            let $this = $(this),\n                fieldId = $('#tf-icon-modal').data('icon-field'),\n                field = $('#' + fieldId),\n                preview = field.find('.tf-icon-preview'),\n                icon = $('.tf-icon-list li.active').data('icon');\n\n            if (icon) {\n                preview.removeClass('tf-hide');\n                field.find('.tf-icon-preview-wrap i').attr('class', icon);\n                field.find('.tf-icon-value').val(icon).trigger('change');\n\n                //Close modal\n                $('.tf-modal').removeClass('tf-modal-show');\n                $('body').removeClass('tf-modal-open');\n            }\n        })\n\n        /*\n        * Icon remove\n        * @author: Foysal\n        */\n        $(document).on('click', '.tf-icon-preview .remove-icon', function (e) {\n            e.preventDefault();\n            let $this = $(this),\n                preview = $this.closest('.tf-icon-preview'),\n                iconSelect = $this.closest('.tf-icon-select'),\n                iconLi = $('#tf-icon-modal').find('.tf-icon-list li');\n\n            preview.addClass('tf-hide');\n            iconSelect.find('.tf-icon-preview-wrap i').attr('class', '');\n            iconSelect.find('.tf-icon-value').val('').trigger('change');\n\n            //remove active class\n            iconLi.removeClass('active');\n        })\n\n        /*\n        * Icon search\n        * @author: Foysal\n        */\n        //debounce\n        const debounce = (func, delay) => {\n            let debounceTimer;\n            return function () {\n                const context = this;\n                const args = arguments;\n                clearTimeout(debounceTimer);\n                debounceTimer = setTimeout(() => func.apply(context, args), delay);\n            }\n        }\n\n        $(document).on('keyup', '.tf-icon-search-input', debounce(function (e) {\n            let searchVal = $(this).val();\n            tfIconFilter(searchVal);\n        }, 500));\n\n        const tfIconFilter = (searchVal) => {\n            let type = $('.tf-icon-tab-pane.active').data('type');\n            let iconList = $('.tf-icon-tab-pane.active .tf-icon-list');\n\n            $.ajax({\n                url: tf_options.ajax_url,\n                type: 'POST',\n                data: {\n                    action: 'tf_icon_search',\n                    _nonce: tf_admin_params.tf_nonce,\n                    search: searchVal,\n                    type: type,\n                },\n                beforeSend: function () {\n                    iconList.html('<div class=\"tf-icon-loading\">Loading...</div>');\n                },\n                success: function (response) {\n                    if(!response.success){\n                        notyf.error(response.data)\n                    } else {\n                        iconList.html(response.data.html);\n                        $('.tf-icon-tab-pane.active').attr('data-max', response.data.count);\n                    }\n                },\n                error: function (xhr, status, error) {\n                    console.error(error);\n                }\n            });\n        }\n\n        /*\n        * Icon Infinite Scroll\n        * @author: Foysal\n        */\n        const tfIconInfiniteScroll = () => {\n            var loading = false;\n            var startIndex = 100;\n            let iconList = $('.tf-icon-tab-pane.active .tf-icon-list');\n            let iconListBottom = 0;\n            let searchVal = $('.tf-icon-search-input').val();\n\n            iconList.on(\"scroll\", function () {\n                let type = $('.tf-icon-tab-pane.active').data('type');\n                let max = $('.tf-icon-tab-pane.active').data('max');\n                iconListBottom = iconList[0].scrollHeight - iconList.height();\n\n                if (iconList.scrollTop() >= iconListBottom && !loading && startIndex < max) {\n                    loading = true;\n                    $.ajax({\n                        url: tf_options.ajax_url,\n                        type: 'POST',\n                        data: {\n                            action: 'tf_load_more_icons',\n                            _nonce: tf_admin_params.tf_nonce,\n                            start_index: startIndex,\n                            type: type,\n                            search: searchVal,\n                        },\n                        beforeSend: function () {\n                            $('.tf-icon-list').append('<div class=\"tf-icon-loading\">Loading...</div>');\n                        },\n                        success: function (response) {\n                            if(!response.success){\n                                $('.tf-icon-loading').remove();\n                                notyf.error(response.data)\n                            } else {\n                                loading = false;\n                                $('#tf-icon-tab-'+type+' .tf-icon-list').append(response.data);\n                                $('.tf-icon-loading').remove();\n                                startIndex += 100;\n                            }\n\n                        },\n                        error: function (xhr, status, error) {\n                            loading = false;\n                            console.error(error);\n                            $('.tf-icon-loading').remove();\n                        }\n                    });\n                }\n            });\n        }\n        tfIconInfiniteScroll();\n\n        /*\n        * Options ajax save\n        * @author: Foysal\n        */\n\n        $(document).on(\"click\", '.tf-setting-save-btn .tf-submit-btn', function (e) {\n            e.preventDefault();\n            $('.tf-option-form.tf-ajax-save').submit();\n\n        })\n\n        $(document).on('click', '.tf-setting-save-btn .tf-reset-btn', function (e) {\n\n            $.confirm({\n                icon: 'fa fa-warning',\n                title: tf_options.swal_reset_title_text,\n                content: tf_options.swal_reset_other_text,\n                type: 'red',\n                typeAnimated: false,\n                boxWidth: '500px',\n                animationSpeed: 500,\n                animation: 'scale',\n                closeAnimation: 'scale',\n                animateFromElement: false,\n                useBootstrap: false,\n                theme: 'modern',\n                buttons: {\n                    confirm: {\n                        text: tf_options.swal_reset_btn_text,\n                        btnClass: 'btn-blue',\n                        action: function () {\n                            $.ajax({\n                                url: tf_options.ajax_url,\n                                type: 'POST',\n                                data: {\n                                    action: 'tf_options_reset',\n                                    tf_option_nonce: tf_admin_params.tf_nonce,\n                                },\n                                beforeSend: function () {\n                                    $('.tf-setting-save-btn .tf-reset-btn').addClass('tf-btn-loading');\n                                },\n                                success: function (response) {\n\n                                    let data = JSON.parse(response)\n                                    \n                                    if (data.status === 'success') {\n                                        notyf.success(data.message);\n                                        window.location.reload();\n                                    } else {\n                                        notyf.error(data.message);\n                                    }\n                                    \n                                    $('.tf-setting-save-btn .tf-reset-btn').removeClass('tf-btn-loading');\n                                },\n                                error: function (xhr, status, error) {\n                                    console.log(error);\n                                }\n                            }).done(function () {\n                                // window.location.reload();\n                            });\n                        }\n                    },\n                    cancel: {\n                        text: tf_options.swal_reset_cancel_btn_text,\n                        btnClass: 'btn-red',\n                    }\n                }\n            })\n\n            });\n\n        $(document).find(\"#tf-settings-header-search-filed\").on(\"keyup\", debounce(\n            function () {\n                var value = $(this).val().toLowerCase();\n                let div = document.createElement('div');\n                div.classList.add('tf-search-results');\n                if( value.length >= 3 ) {\n                    $.ajax({\n                        url: tf_options.ajax_url,\n                        type: 'POST',\n                        data: {\n                            action: 'tf_search_settings_autocomplete',\n                            tf_option_nonce: tf_admin_params.tf_nonce,\n                            search: value,\n                        },\n                        success: function (response) {\n                            let data = JSON.parse(response)\n                            let notfound = 0;\n                            let resultDiv = document.createElement('ul');\n                            if (data.status === 'success') {\n                                $.each( data.message, function( key, obj ) {\n                                    if( obj.field_title.toLowerCase().indexOf(value) != -1 ) {\n                                        let textDiv = document.createElement('li');\n                                        let titleDiv = document.createElement('div');\n                                        titleDiv.classList.add('tf-search-result-title');\n                                        let link = document.createElement('a');\n                                        link.href = `#tab=${obj.parent_id}`;\n                                        let icon = document.createElement('i');\n                                        let title = document.createElement('p');\n                                        let path = document.createElement('span');\n                                        title.innerHTML = obj.field_title;\n                                        path.innerHTML = obj.path;\n                                        icon.classList.add(...obj.icon.split(' '));\n                                        resultDiv.classList.add('tf-search-result');\n                                        textDiv.setAttribute('data-id', obj.id);\n                                        textDiv.setAttribute('data-tab-id', obj.tab_id);\n                                        link.append(icon);\n                                        titleDiv.append(title);\n                                        titleDiv.append(path);\n                                        link.append(titleDiv);\n                                        textDiv.append(link);\n                                        resultDiv.append(textDiv);\n                                    } else {\n                                        notfound = 1;\n                                    }\n                                    if( $('.tf-search-results').length || value < 3 ) {\n                                        $('.tf-search-results').remove();\n                                    } else {\n                                        div.append(resultDiv);\n                                    }\n                                });\n\n                                if( notfound == 1 ) {\n                                    let not_found = document.createElement(\"p\");\n                                    not_found.classList.add('tf-search-not-found');\n                                    not_found.innerHTML = tf_admin_params.setting_search_no_result;\n                                    resultDiv.append(not_found);\n                                }\n                                $(\".tf-setting-search\").append(div);\n                            } else {\n                                console.log(\"Something went wrong!\");\n                            }\n                        }\n                    })\n                    \n                } else {\n                    $(\".tf-search-results\").hide();\n                }\n            }, 700 \n        ));\n\n        $(document).on('click', function (e) {\n            if( e.target.id !== 'tf-settings-header-search-filed' && $('.tf-search-results').length ) {\n                $('.tf-search-results').hide();\n            }\n        });\n\n\n        $(\"#tf-settings-header-search-filed\").on('focus', function (e) {\n            if( $('.tf-search-results').length ) {\n                $('.tf-search-results').show();\n            }\n        });\n\n        $(document).on('click', '.tf-search-result li', function (e) {\n            let id = $(this).data('id');\n            let selector = `label[for='tf_settings\\\\[${id}\\\\]']`;\n            let tabId = $(this).closest('li').data('tab-id');\n            if( tabId ) {\n                $('.tf-tab-item[data-tab-id=\"'+tabId+'\"]').trigger('click');\n            }\n            $('html, body').animate({\n                scrollTop: $(document).find(selector).closest('.tf-field').offset().top\n            }, 100);\n        \n        });\n\n        $(document).on('submit', '.tf-option-form.tf-ajax-save', function (e) {\n            e.preventDefault();\n            let $this = $(this),\n                submitBtn = $this.find('.tf-submit-btn'),\n                data = new FormData(this);\n            var fontsfile = $('.itinerary-fonts-file').prop(\"files\");\n            if (typeof fontsfile !== \"undefined\") {\n                for (var i = 0; i < fontsfile.length; i++) {\n                    data.append('file[]', fontsfile[i]);\n                }\n            }\n            // get tf_import_option from data\n            let tf_import_option =  false\n            if (typeof data.get('tf_import_option') !== \"undefined\" && data.get('tf_import_option').trim() != '') {\n\n                //  confirm data before send\n                if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {\n                    return;\n                }\n\n                tf_import_option = true;\n            }\n            data.append('action', 'tf_options_save');\n\n            $.ajax({\n                url: tf_options.ajax_url,\n                type: 'POST',\n                data: data,\n                processData: false,\n                contentType: false,\n                beforeSend: function () {\n                    if(tf_import_option == true ){\n                        $this.find('.tf-import-btn').addClass('tf-btn-loading');\n                    }\n                    submitBtn.addClass('tf-btn-loading');\n                    $('.tf-setting-save-btn .tf-submit-btn').addClass('tf-btn-loading');\n                },\n                success: function (response) {\n                    let obj = JSON.parse(response);\n                    if (obj.status === 'success') {\n                        \n                        notyf.success(obj.message);\n\n                        if(tf_import_option == true ){\n                            window.location.reload();;\n                        }\n                    } else {\n                        notyf.error(obj.message);\n                    }\n                    submitBtn.removeClass('tf-btn-loading');\n                    $(\".tf-setting-save-btn .tf-submit-btn\").removeClass('tf-btn-loading');\n                    if(tf_import_option == true ){\n                        $this.find('.tf-import-btn').removeClass('tf-btn-loading');\n                    }\n                },\n                error: function (error) {\n                    submitBtn.removeClass('tf-btn-loading');\n                    console.log(error['responseText']);\n                    //if error msg contain max_input_vars then show a proper msg\n                    if(error['responseText'].includes('max_input_vars')) {\n                        notyf.error({\n                            message: tf_admin_params.max_input_vars_notice,\n                            duration: 15000,\n                            dismissible: true\n                        });\n                    } else {\n                        notyf.error({\n                            message: error['responseText'],\n                            duration: 6000\n                        });\n                    }\n                }\n            });\n        });\n\n        /*\n        * Each select2 field initialize select2\n        * @author: Foysal, Sydur\n        */\n        const tfSelect2Int = select2Selector => {\n            let $this = select2Selector,\n                id = $this.attr('id'),\n                placeholder = $this.data('placeholder'),\n                deleteData = $this.data('delete');\n\n            if(deleteData === 'yes'){\n                $('#' + id + '').select2({\n                    placeholder: placeholder,\n                    allowClear: true,\n                    templateResult: TfFormatOption,\n                    templateSelection: function (state) {\n                        if (!state.id) {\n                            return state.text;\n                        }\n                \n                        // Get the edit URL from the option's data attribute\n                        var editUrl = $(state.element).data('edit-url');\n                        if(editUrl){\n                            var $state = $(\n                                '<span>' + state.text + ' <a target=\"_blank\" href=\"'+editUrl+'\" class=\"tf-edit-room\"><i class=\"fa-regular fa-pen-to-square\"></i></a></span>'\n                            );\n                            return $state;\n                        }\n                \n                        return state.text;\n                    }\n                });\n            }else{\n                $('#' + id + '').select2({\n                    placeholder: placeholder,\n                    allowClear: true,\n                    templateSelection: function (state) {\n                        if (!state.id) {\n                            return state.text;\n                        }\n                \n                        // Get the edit URL from the option's data attribute\n                        var editUrl = $(state.element).data('edit-url');\n                        if(editUrl){\n                            var $state = $(\n                                '<span>' + state.text + ' <a target=\"_blank\" href=\"'+editUrl+'\" class=\"tf-edit-room\"><i class=\"fa-regular fa-pen-to-square\"></i></a></span>'\n                            );\n                            return $state;\n                        }\n                \n                        return state.text;\n                    }\n                });\n            }\n        \n        }\n        $('select.tf-select2').each(function () {\n            var $this = $(this);\n            tfSelect2Int($this);\n        });\n\n        // Clear Default Select in Tour Backend Booking\n        $('.tf-backend-booking-card-wrap #tf_available_tours').val(null).trigger('change');\n\n        function TfFormatOption(option) {\n            if (!option.id) {\n              return option.text;\n            }\n\n           var $option = $(\n              '<span style=\"display: flex; justify-content: space-between;\">' + option.text + '<span class=\"tf-remove-button\" data-id=\"' + option.id + '\">Remove</span></span>'\n            );\n    \n            return $option;\n        }\n        $(document).on('select2:selecting', '.tf-select2', function (e) {\n\n            if (e.params.args.originalEvent.target.className === 'tf-remove-button') {\n                e.stopPropagation();\n                e.preventDefault();\n\n                let $this = $(this);\n                let parentDiv = $this.closest('.tf-fieldset');\n                let categoryName = parentDiv.find('#category_name').val();\n                let categorySelect = parentDiv.find('#category_select_field_name').val();\n                var termId=$(e.params.args.originalEvent.target).data(\"id\");\n\n                $.ajax({\n                    url: tf_options.ajax_url,\n                    method: 'POST',\n                    data: {\n                        action: 'tf_delete_category_data',\n                        _nonce: tf_admin_params.tf_nonce,\n                        term_id: termId,\n                        categoryName: categoryName\n                    },\n                    success: function (response) {\n                        var data = JSON.parse(response);\n                        if (data.success) {\n                            // Remove the option and trigger the change event\n                            let $selectField = $('#' + categorySelect);\n\n                            // Remove the option from Select2\n                            $selectField.find('option[value=\"' + termId + '\"]').remove();\n\n                            // Close the Select2 dropdown\n                            $selectField.select2('close');\n\n                        } else {\n                            \n                        }\n                    }\n                });\n            }\n        });\n\n\n        $('select.tf-shortcode-select2').each(function(e) {\n            let $this = $(this);\n            let id = $this.attr(\"id\");\n            tfSelect2Int($this);\n\n            $(this).on(\"select2:select\", function (e) { \n                var select_val = $(e.currentTarget).val();\n                if(select_val && select_val.includes(\"'all'\")) {\n                    $(this).val([\"'all'\"]).trigger('change.select2');\n                }\n            });\n        })\n\n        /*\n        * Room options count\n        */\n        function roomOptionsArr(){\n            var optionsArr = [];\n            $('.tf-repeater-wrap-room-options .tf-single-repeater-room-options').each(function(i){\n                // Get the dynamic index from the tf_repeater_count field\n                let index = $(this).find('[name=\"tf_repeater_count\"]').val();\n                // Extract the option title and type using the dynamic index\n                let optionType = $(this).find(`[name=\"tf_room_opt[room-options][${index}][option_pricing_type]\"]`).val();\n                let optionTitle = $(this).find(`[name=\"tf_room_opt[room-options][${index}][option_title]\"]`).val();\n                if (index !== undefined) {\n                    optionsArr[index] = {\n                        index: index,\n                        title: optionTitle,\n                        type: optionType\n                    };\n                }\n            })\n            return optionsArr;\n        }\n\n        /*\n        * Tour options count\n        */\n        function tourPackageArr(){\n            var optionsArr = [];\n            $('.tf-repeater-wrap-package_pricing .tf-single-repeater-package_pricing').each(function(i){\n                // Get the dynamic index from the tf_repeater_count field\n                let index = $(this).find('[name=\"tf_repeater_count\"]').val();\n                // Extract the option title and type using the dynamic index\n                let optionType = $(this).find(`[name=\"tf_tours_opt[package_pricing][${index}][pricing_type]\"]`).val();\n                let optionTitle = $(this).find(`[name=\"tf_tours_opt[package_pricing][${index}][pack_title]\"]`).val();\n                if (optionTitle !== undefined) {\n                    optionsArr[index] = {\n                        index: index,\n                        title: optionTitle,\n                        type: optionType\n                    };\n                }\n            })\n            return optionsArr;\n        }\n\n        /*\n        * Tour Group Package count\n        */\n        function tourGroupPackageArr(){\n            var optionsArr = [];\n            $('.tf-repeater-wrap-group_package_pricing .tf-single-repeater-group_package_pricing').each(function(i){\n                // Get the dynamic index from the tf_repeater_count field\n                let index = $(this).find('[name=\"tf_repeater_count\"]').val();\n                // Extract the option title and type using the dynamic index\n                let optionTitle = $(this).find(`[name=\"tf_tours_opt[group_package_pricing][${index}][pack_title]\"]`).val();\n                if (index !== undefined) {\n                    optionsArr[index] = {\n                        index: index,\n                        title: optionTitle,\n                    };\n                }\n            })\n            return optionsArr;\n        }\n\n        $(window).on('load', function () {\n            roomOptionsArr();\n            tourPackageArr();\n            tourGroupPackageArr();\n        });\n\n        /*\n        * Room Availability Calendar\n        * @since 2.10.2\n        * @auther: Foysal\n        */\n        var roomCal = function (container) {\n            var self = this;\n            this.container = container;\n            this.calendar = null\n            this.roomCalData = null;\n            this.fullCalendar;\n            this.timeOut;\n            this.fullCalendarOptions = {\n                initialView: 'dayGridMonth',\n                firstDay: 1,\n                headerToolbar: {\n                    start: 'title',\n                    center: '',\n                    end: 'prev,next'\n                },\n                displayEventTime: true,\n                selectable: true,\n                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {\n                    if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {\n                        self.fullCalendar.unselect();\n                        setRoomCheckInOut(\"\", \"\", self.roomCalData);\n                    } else {\n                        var zone = moment(start).format(\"Z\");\n                        zone = zone.split(\":\");\n                        zone = \"\" + parseInt(zone[0]) + \":00\";\n                        var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || \"MM/DD/YYYY\").toUpperCase());\n                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || \"MM/DD/YYYY\").toUpperCase());\n                        setRoomCheckInOut(check_in, check_out, self.roomCalData);\n                    }\n                },\n                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {\n                    $.ajax({\n                        url: tf_options.ajax_url,\n                        dataType: \"json\",\n                        type: \"POST\",\n                        data: {\n                            action: \"tf_get_hotel_room_availability\",\n                            _nonce: tf_admin_params.tf_nonce,\n                            new_post: $(self.container).find('[name=\"new_post\"]').val(),\n                            room_id: $(self.container).find('[name=\"room_id\"]').val(),\n                            avail_date: $(self.container).find('.avail_date').val(),\n                            option_arr: roomOptionsArr(),\n                        },\n                        beforeSend: function () {\n                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});\n                            $(self.calendar).addClass('tf-content-loading');\n                        },\n                        success: function (doc) {\n                            if (typeof doc == \"object\") {\n                                successCallback(doc?.avail_data);\n                            }\n\n                            $('.tf-single-options').html(doc?.options_html);\n\n                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});\n                            $(self.calendar).removeClass('tf-content-loading');\n                        },\n                        error: function (e) {\n                            console.log(e);\n                        }\n                    });\n                },\n                eventContent: function (arg) {\n                    const title = arg.event.title;\n                    const eventTitleElement = document.createElement('div');\n                    eventTitleElement.classList.add('fc-event-title');\n                    eventTitleElement.innerHTML = title;\n                    return {domNodes: [eventTitleElement]};\n                },\n                eventClick: function ({event, el, jsEvent, view}) {\n                    let startTime = moment(event.start, String(tf_options.tf_admin_date_format || \"MM/DD/YYYY\").toUpperCase())\n                        .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());\n                    let endTime;\n                    if (event.end) {\n                        endTime = moment(event.end, String(tf_options.tf_admin_date_format || \"MM/DD/YYYY\").toUpperCase())\n                            .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());\n                    } else {\n                        endTime = startTime;\n                    }\n                    setRoomCheckInOut(startTime, endTime, self.roomCalData);\n                    let priceBy = $('.tf_room_pricing_by').val();\n                    if (priceBy === '1') {\n                        if (typeof event.extendedProps.price != 'undefined') {\n                            $(\"[name='tf_room_price']\", self.roomCalData).val(event.extendedProps.price);\n                        }\n                    } else if(priceBy === '2'){\n                        if (typeof event.extendedProps.adult_price != 'undefined') {\n                            $(\"[name='tf_room_adult_price']\", self.roomCalData).val(event.extendedProps.adult_price);\n                        }\n                        if (typeof event.extendedProps.child_price != 'undefined') {\n                            $(\"[name='tf_room_child_price']\", self.roomCalData).val(event.extendedProps.child_price);\n                        }\n                    } else {\n                        if(event.extendedProps.options_count != 0) {\n                            for (var i = 0; i <= event.extendedProps.options_count - 1; i++) {\n                                $(\"[name='tf_room_option_\" + i + \"']\", self.roomCalData).prop('checked', event.extendedProps[\"tf_room_option_\" + i] == 1);\n\n                                $(\"[name='tf_option_room_price_\" + i + \"']\", self.roomCalData).val(event.extendedProps[\"tf_option_room_price_\" + i]);\n                                $(\"[name='tf_option_adult_price_\" + i + \"']\", self.roomCalData).val(event.extendedProps[\"tf_option_adult_price_\" + i]);\n                                $(\"[name='tf_option_child_price_\" + i + \"']\", self.roomCalData).val(event.extendedProps[\"tf_option_child_price_\" + i]);\n                            }\n                        }\n                    }\n                    if (event.extendedProps.status) {\n                        $(\"[name='tf_room_status'] option[value=\" + event.extendedProps.status + \"]\", self.roomCalData).prop(\"selected\", true);\n                    }\n                },\n            };\n            this.init = function () {\n                self.container = jQuery(container);\n                self.calendar = container.querySelector('.tf-room-cal');\n                self.roomCalData = $('.tf-room-cal-field', self.container);\n                setRoomCheckInOut('', '', self.roomCalData);\n                self.initCalendar();\n            }\n            this.initCalendar = function () {\n                if (typeof FullCalendar != 'undefined') {\n                    self.fullCalendar = new FullCalendar.Calendar(self.calendar, self.fullCalendarOptions);\n                    self.fullCalendar.render();\n                }\n            }\n        };\n\n        function setRoomCheckInOut(check_in, check_out, roomCalData) {\n            $('.tf_room_check_in', roomCalData).val(check_in);\n            $('.tf_room_check_out', roomCalData).val(check_out);\n        }\n\n        function roomResetForm(roomCalData) {\n            $('.tf_room_check_in', roomCalData).val('');\n            $('.tf_room_check_out', roomCalData).val('');\n            $('[name=\"tf_room_price\"]', roomCalData).val('');\n            $('[name=\"tf_room_adult_price\"]', roomCalData).val('');\n            $('[name=\"tf_room_child_price\"]', roomCalData).val('');\n        }\n\n        const tfHotelCalendar = () => {\n            $('.tf-room-cal-wrap').each(function (index, el) {\n                var room = new roomCal(el);\n                room.init();\n            });\n        }\n        tfHotelCalendar();\n\n        $('.tf-room-cal-wrap').each(function (index, el) {\n            let checkIn = $(el).find('[name=\"tf_room_check_in\"]').flatpickr({\n                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',\n                minDate: 'today',\n                altInput: true,\n                altFormat: tf_options.tf_admin_date_format,\n                onChange: function (selectedDates, dateStr, instance) {\n                    checkOut.set('minDate', dateStr);\n                }\n            });\n\n            let checkOut = $(el).find('[name=\"tf_room_check_out\"]').flatpickr({\n                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',\n                minDate: 'today',\n                altInput: true,\n                altFormat: tf_options.tf_admin_date_format,\n                onChange: function (selectedDates, dateStr, instance) {\n                    checkIn.set('maxDate', dateStr);\n                }\n            });\n        });\n\n        $(document).on('click', '.tf_room_cal_update', function (e) {\n            e.preventDefault();\n\n            let btn = $(this);\n            let container = btn.closest('.tf-room-cal-wrap');\n            let containerEl = btn.closest('.tf-room-cal-wrap')[0];\n            let cal = container.find('.tf-room-cal');\n            let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();\n            let priceBy = $('.tf_room_pricing_by').val();\n            let avail_date = container.find('.avail_date');\n            data.push({name: 'action', value: 'tf_add_hotel_room_availability'});\n            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});\n            data.push({name: 'price_by', value: priceBy});\n            data.push({name: 'avail_date', value: avail_date.val()});\n            data.push({name: 'options_count', value: roomOptionsArr().length});\n\n            $.ajax({\n                url: tf_options.ajax_url,\n                type: 'POST',\n                data: data,\n                beforeSend: function () {\n                    container.css({'pointer-events': 'none', 'opacity': '0.5'})\n                    cal.addClass('tf-content-loading');\n                    btn.addClass('tf-btn-loading');\n                },\n                success: function (response) {\n                    if (typeof response == 'object') {\n                        if (response.data.status === true) {\n                            avail_date.val(response.data.avail_date)\n                            notyf.success(response.data.message);\n                            roomResetForm(container);\n\n                            var room = new roomCal(containerEl);\n                            room.init();\n                            if (room.fullCalendar) {\n                                room.fullCalendar.refetchEvents();\n                            }\n                        } else {\n                            notyf.error(response.data.message);\n                        }\n\n                        container.css({'pointer-events': 'auto', 'opacity': '1'})\n                        cal.removeClass('tf-content-loading');\n                        btn.removeClass('tf-btn-loading');\n                    }\n                },\n                error: function (e) {\n                    console.log(e);\n                    container.css({'pointer-events': 'auto', 'opacity': '1'})\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n                },\n                complete: function () {\n                    container.css({'pointer-events': 'auto', 'opacity': '1'});\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n                },\n            });\n        });\n\n        $(document).on('change', '.tf_room_pricing_by', function (e) {\n            let pricing_by = $(this).val();\n\n            if (pricing_by === '1') {\n                $('.tf-price-by-room').show();\n                $('.tf-price-by-person').hide();\n                $('.tf-room-cal-field .tf-single-option').hide();\n            } else if (pricing_by === '2') {\n                $('.tf-price-by-person').show();\n                $('.tf-price-by-room').hide();\n                $('.tf-room-cal-field .tf-single-option').hide();\n            } else if(pricing_by === '3') {\n                $('.tf-price-by-room').hide();\n                $('.tf-price-by-person').hide();\n                $('.tf-room-cal-field .tf-single-option').show();\n            }\n        });\n\n        // Switcher Value Changed\n        $(document).on(\"change\", \".tf-switch\", function (e) {\n            var $this = $(this);\n            if (this.checked) {\n                var value = $this.val(1);\n            } else {\n                var value = $this.val('');\n            }\n\n            if ($this.hasClass('tf_room_availability_by_date')) {\n                tfHotelCalendar();\n            }\n            if ($this.hasClass('tf_apartment_availability_by_date')){\n                tfApartmentCalendar();\n            }\n            if ($this.hasClass('tf_tour_availability_by_date')){\n                tfTourCalendar();\n            }\n        });\n\n        /*\n        * Apartment Availability Calendar\n        * @since 2.10.2\n        * @auther: Foysal\n        */\n        var apartmentCal = function (container) {\n            var self = this;\n            this.container = container;\n            this.calendar = null\n            this.apartmentCalData = null;\n            this.fullCalendar;\n            this.timeOut;\n            this.fullCalendarOptions = {\n                initialView: 'dayGridMonth',\n                firstDay: 1,\n                headerToolbar: {\n                    start: 'title',\n                    center: '',\n                    end: 'prev,next'\n                },\n                displayEventTime: true,\n                selectable: true,\n                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {\n                    if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {\n                        self.fullCalendar.unselect();\n                        setAptCheckInOut(\"\", \"\", self.apartmentCalData);\n                    } else {\n                        var zone = moment(start).format(\"Z\");\n                        zone = zone.split(\":\");\n                        zone = \"\" + parseInt(zone[0]) + \":00\";\n                        var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || \"MM/DD/YYYY\").toUpperCase());\n                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || \"MM/DD/YYYY\").toUpperCase());\n                        setAptCheckInOut(check_in, check_out, self.apartmentCalData);\n                    }\n                },\n                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {\n                    $.ajax({\n                        url: tf_options.ajax_url,\n                        dataType: \"json\",\n                        type: \"POST\",\n                        data: {\n                            action: \"tf_get_apartment_availability\",\n                            _nonce: tf_admin_params.tf_nonce,\n                            new_post: $('[name=\"new_post\"]').val(),\n                            apartment_id: $('[name=\"apartment_id\"]').val(),\n                            apt_availability: $('.apt_availability').val(),\n                        },\n                        beforeSend: function () {\n                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});\n                            $(self.calendar).addClass('tf-content-loading');\n                        },\n                        success: function (doc) {\n                            if (typeof doc == \"object\") {\n                                successCallback(doc);\n                            }\n\n                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});\n                            $(self.calendar).removeClass('tf-content-loading');\n                        },\n                        error: function (e) {\n                            console.log(e);\n                        }\n                    });\n                },\n                eventContent: function (arg) {\n                    const title = arg.event.title;\n                    const eventTitleElement = document.createElement('div');\n                    eventTitleElement.classList.add('fc-event-title');\n                    eventTitleElement.innerHTML = title;\n                    return {domNodes: [eventTitleElement]};\n                },\n                eventClick: function ({event, el, jsEvent, view}) {\n                    let startTime = moment(event.start, String(tf_options.tf_admin_date_format || \"MM/DD/YYYY\").toUpperCase())\n                        .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());\n                    let endTime;\n                    if (event.end) {\n                        endTime = moment(event.end, String(tf_options.tf_admin_date_format || \"MM/DD/YYYY\").toUpperCase())\n                            .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());\n                    } else {\n                        endTime = startTime;\n                    }\n                    setAptCheckInOut(startTime, endTime, self.apartmentCalData);\n                    let pricingType = $('.tf_apt_pricing_type').val();\n                    if (pricingType === 'per_night') {\n                        if (typeof event.extendedProps.price != 'undefined') {\n                            $(\"[name='tf_apt_price']\", self.apartmentCalData).val(event.extendedProps.price);\n                        }\n                    } else {\n                        if (typeof event.extendedProps.adult_price != 'undefined') {\n                            $(\"[name='tf_apt_adult_price']\", self.apartmentCalData).val(event.extendedProps.adult_price);\n                        }\n                        if (typeof event.extendedProps.child_price != 'undefined') {\n                            $(\"[name='tf_apt_child_price']\", self.apartmentCalData).val(event.extendedProps.child_price);\n                        }\n                        if (typeof event.extendedProps.infant_price != 'undefined') {\n                            $(\"[name='tf_apt_infant_price']\", self.apartmentCalData).val(event.extendedProps.infant_price);\n                        }\n                    }\n                    if (event.extendedProps.status) {\n                        $(\"[name='tf_apt_status'] option[value=\" + event.extendedProps.status + \"]\", self.apartmentCalData).prop(\"selected\", true);\n                    }\n                },\n            };\n            this.init = function () {\n                self.container = jQuery(container);\n                self.calendar = container.querySelector('.tf-apt-cal');\n                self.apartmentCalData = $('.tf-apt-cal-field', self.container);\n                setAptCheckInOut('', '', self.apartmentCalData);\n                self.initCalendar();\n            }\n            this.initCalendar = function () {\n                if (typeof FullCalendar != 'undefined') {\n                    self.fullCalendar = new FullCalendar.Calendar(self.calendar, self.fullCalendarOptions);\n                    self.fullCalendar.render();\n                }\n            }\n        };\n\n        function setAptCheckInOut(check_in, check_out, apartmentCalData) {\n            $('.tf_apt_check_in', apartmentCalData).val(check_in);\n            $('.tf_apt_check_out', apartmentCalData).val(check_out);\n        }\n\n        function aptResetForm(apartmentCalData) {\n            $('.tf_apt_check_in', apartmentCalData).val('');\n            $('.tf_apt_check_out', apartmentCalData).val('');\n            $('[name=\"tf_apt_price\"]', apartmentCalData).val('');\n            $('[name=\"tf_apt_adult_price\"]', apartmentCalData).val('');\n            $('[name=\"tf_apt_child_price\"]', apartmentCalData).val('');\n            $('[name=\"tf_apt_infant_price\"]', apartmentCalData).val('');\n        }\n\n        const tfApartmentCalendar = () => {\n            $('.tf-apt-cal-wrap').each(function (index, el) {\n                var apt = new apartmentCal(el);\n                apt.init();\n\n                let checkIn = $(el).find('[name=\"tf_apt_check_in\"]').flatpickr({\n                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',\n                    minDate: 'today',\n                    altInput: true,\n                    altFormat: tf_options.tf_admin_date_format,\n                    onChange: function (selectedDates, dateStr, instance) {\n                        checkOut.set('minDate', dateStr);\n                    }\n                });\n\n                let checkOut = $(el).find('[name=\"tf_apt_check_out\"]').flatpickr({\n                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',\n                    minDate: 'today',\n                    altInput: true,\n                    altFormat: tf_options.tf_admin_date_format,\n                    onChange: function (selectedDates, dateStr, instance) {\n                        checkIn.set('maxDate', dateStr);\n                    }\n                });\n            });\n        }\n        tfApartmentCalendar();\n\n        $(document).on('click', '.tf_apt_cal_update', function (e) {\n            e.preventDefault();\n\n            let btn = $(this);\n            let container = btn.closest('.tf-apt-cal-wrap');\n            let containerEl = btn.closest('.tf-apt-cal-wrap')[0];\n            let cal = container.find('.tf-apt-cal');\n            let data = $('input, select', container.find('.tf-apt-cal-field')).serializeArray();\n            let pricingType = $('.tf_apt_pricing_type').val();\n            let aptAvailability = container.find('.apt_availability');\n            data.push({name: 'action', value: 'tf_add_apartment_availability'});\n            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});\n            data.push({name: 'pricing_type', value: pricingType});\n            data.push({name: 'apt_availability', value: aptAvailability.val()});\n\n            $.ajax({\n                url: tf_options.ajax_url,\n                type: 'POST',\n                data: data,\n                beforeSend: function () {\n                    container.css({'pointer-events': 'none', 'opacity': '0.5'})\n                    cal.addClass('tf-content-loading');\n                    btn.addClass('tf-btn-loading');\n                },\n                success: function (response) {\n                    if (typeof response == 'object') {\n                        if (response.data.status === true) {\n                            aptAvailability.val(response.data.apt_availability)\n                            notyf.success(response.data.message);\n                            aptResetForm(container);\n\n                            var apt = new apartmentCal(containerEl);\n                            apt.init();\n                            if (apt.fullCalendar) {\n                                apt.fullCalendar.refetchEvents();\n                            }\n                        } else {\n                            notyf.error(response.data.message);\n                        }\n\n                        container.css({'pointer-events': 'auto', 'opacity': '1'})\n                        cal.removeClass('tf-content-loading');\n                        btn.removeClass('tf-btn-loading');\n                    }\n                },\n                error: function (e) {\n                    console.log(e);\n                    container.css({'pointer-events': 'auto', 'opacity': '1'})\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n                },\n                complete: function () {\n                    container.css({'pointer-events': 'auto', 'opacity': '1'});\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n                },\n            });\n        });\n\n        $(document).on('change', '.tf_apt_pricing_type', function (e) {\n            let pricingType = $(this).val();\n\n            if (pricingType === 'per_night') {\n                $('.tf-price-by-night').show();\n                $('.tf-price-by-person').hide();\n            } else if (pricingType === '2') {\n                $('.tf-price-by-person').show();\n                $('.tf-price-by-night').hide();\n            }\n        });\n\n         /*\n        * Tour Availability Calendar\n        * @since 2.10.2\n        * @auther: Foysal\n        */\n         var tourCal = function (container) {\n            var self = this;\n            this.container = container;\n            this.calendar = null\n            this.tourCalData = null;\n            this.fullCalendar;\n            this.timeOut;\n            this.fullCalendarOptions = {\n                initialView: 'dayGridMonth',\n                firstDay: 1,\n                headerToolbar: {\n                    start: 'title',\n                    center: '',\n                    end: 'prev,next'\n                },\n                displayEventTime: true,\n                selectable: true,\n                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {\n                    tourResetForm('');\n                    if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {\n                        self.fullCalendar.unselect();\n                        setTourCheckInOut(\"\", \"\", self.tourCalData);\n                    } else {\n                        var zone = moment(start).format(\"Z\");\n                        zone = zone.split(\":\");\n                        zone = \"\" + parseInt(zone[0]) + \":00\";\n                        var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || \"MM/DD/YYYY\").toUpperCase());\n                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || \"MM/DD/YYYY\").toUpperCase());\n                        setTourCheckInOut(check_in, check_out, self.tourCalData);\n                    }\n                },\n                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {\n                    $.ajax({\n                        url: tf_options.ajax_url,\n                        dataType: \"json\",\n                        type: \"POST\",\n                        data: {\n                            action: \"tf_get_tour_availability\",\n                            _nonce: tf_admin_params.tf_nonce,\n                            new_post: $('[name=\"new_post\"]').val(),\n                            tour_id: $('[name=\"tour_id\"]').val(),\n                            tour_availability: $('.tour_availability').val(),\n                            option_arr: tourPackageArr(),\n                            group_option_arr: tourGroupPackageArr(),\n                        },\n                        beforeSend: function () {\n                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});\n                            $(self.calendar).addClass('tf-content-loading');\n                        },\n                        success: function (doc) {\n                            if (typeof doc == \"object\") {\n                                successCallback(doc?.avail_data);\n                            }\n                            $('.tf-package-field-repeater').html(doc?.options_html);\n                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});\n                            $(self.calendar).removeClass('tf-content-loading');\n                        },\n                        error: function (e) {\n                            console.log(e);\n                        }\n                    });\n                },\n                eventContent: function (arg) {\n                    const title = arg.event.title;\n                    const eventTitleElement = document.createElement('div');\n                    eventTitleElement.classList.add('fc-event-title');\n                    eventTitleElement.innerHTML = title;\n                    return {domNodes: [eventTitleElement]};\n                },\n                eventDidMount: function (arg) {\n                    const customClass = arg.event.extendedProps.customClass || '';\n                    if(customClass){\n                        arg.el.classList.add(customClass);\n                    }\n                },\n                eventClick: function ({event, el, jsEvent, view}) {\n                    let startTime = moment(event.start, String(tf_options.tf_admin_date_format || \"MM/DD/YYYY\").toUpperCase())\n                        .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());\n                    let endTime;\n                    if (event.end) {\n                        endTime = moment(event.end, String(tf_options.tf_admin_date_format || \"MM/DD/YYYY\").toUpperCase()).subtract(1, 'days')\n                            .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());\n                    } else {\n                        endTime = startTime;\n                    }\n                    setTourCheckInOut(startTime, endTime, self.tourCalData);\n                    let pricingType = $('.tf_tour_pricing_type').val();\n                    let allow_package_pricing = $('[name=\"tf_tours_opt[allow_package_pricing]\"]').val();\n\n                    if (typeof event.extendedProps.min_person != 'undefined') {\n                        $(\"[name='tf_tour_min_person']\", self.tourCalData).val(event.extendedProps.min_person);\n                    }\n                    if (typeof event.extendedProps.max_person != 'undefined') {\n                        $(\"[name='tf_tour_max_person']\", self.tourCalData).val(event.extendedProps.max_person);\n                    }\n                    if (typeof event.extendedProps.max_capacity != 'undefined') {\n                        $(\"[name='tf_tour_max_capacity']\", self.tourCalData).val(event.extendedProps.max_capacity);\n                    }\n\n                    // Selected Time\n                    let allRepeaterHTML = '';\n                    if (typeof event.extendedProps.allowed_time != 'undefined') {\n                        const allowedTime = event.extendedProps.allowed_time;\n                        const times = Array.isArray(allowedTime.time)\n                            ? allowedTime.time\n                            : (typeof allowedTime.time === 'object' && allowedTime.time !== null)\n                                ? Object.values(allowedTime.time)\n                                : [];\n\n                        const capacities = Array.isArray(allowedTime.cont_max_capacity)\n                            ? allowedTime.cont_max_capacity\n                            : (typeof allowedTime.cont_max_capacity === 'object' && allowedTime.cont_max_capacity !== null)\n                                ? Object.values(allowedTime.cont_max_capacity)\n                                : [];\n                        // More specific selector with error handling\n                        const container = document.querySelector('.tf_tour_allowed_times');\n\n                        if (!container) {\n                            console.error('Container element not found!');\n                            return;\n                        }\n\n                        // Clear old content safely\n                        while (container.firstChild) {\n                            container.removeChild(container.firstChild);\n                        }\n\n                        \n                        if(times.length > 0){\n                            times.forEach((time, index) => {\n                                if (!time) return;\n                                const capacity = capacities[index] || '';\n\n                                allRepeaterHTML += `\n                                <div class=\"tf-single-repeater tf-single-repeater-allowed_time\">\n                                    <input type=\"hidden\" name=\"tf_parent_field\" value=\"\">\n                                    <input type=\"hidden\" name=\"tf_repeater_count\" value=\"${index + 1}\">\n                                    <input type=\"hidden\" name=\"tf_current_field\" value=\"allowed_time\">\n                                    <div class=\"tf-repeater-content-wrap\">\n                                        <div class=\"tf-field tf-field-time\" style=\"width: calc(50% - 6px);\">\n                                            <div class=\"tf-fieldset\">\n                                                <input type=\"text\" name=\"allowed_time[time][]\" placeholder=\"Select Time\" value=\"${time}\" class=\"flatpickr flatpickr-input\" data-format=\"h:i K\" readonly=\"readonly\">\n                                                <i class=\"fa-regular fa-clock\"></i>\n                                            </div>\n                                        </div>\n                                        <div class=\"tf-field tf-field-number\" style=\"width: calc(50% - 6px);\">\n                                            <div class=\"tf-fieldset\">\n                                                <input type=\"number\" name=\"allowed_time[cont_max_capacity][]\" id=\"allowed_time[cont_max_capacity]\" value=\"${capacity}\" placeholder=\"Maximum Capacity\">\n                                            </div>\n                                        </div>\n                                        <span class=\"tf-repeater-icon tf-repeater-icon-delete\">\n                                            <svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                                                <path d=\"M15 5L5 15\" stroke=\"#566676\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                                <path d=\"M5 5L15 15\" stroke=\"#566676\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                            </svg>\n                                        </span>\n                                    </div>\n                                </div>\n                            `;\n\n                            });\n                        }\n                    }\n                    // Append only if there's valid time\n                    if (pricingType!='package' && allRepeaterHTML) {\n                        $('.tf_tour_saved_allowed_times').append(allRepeaterHTML);\n                        // Re-initialize flatpickr on the newly added inputs\n                        $('.tf_tour_allowed_times .flatpickr-input').flatpickr({\n                            enableTime: true,\n                            noCalendar: true,\n                            dateFormat: \"h:i K\"\n                        });\n                    }\n\n                    if (pricingType === 'group' && allow_package_pricing!=1) {\n                        if (typeof event.extendedProps.price != 'undefined') {\n                            $(\"[name='tf_tour_price']\", self.tourCalData).val(event.extendedProps.price);\n                        }\n                    } else if (pricingType === 'person') {\n                        if (typeof event.extendedProps.adult_price != 'undefined') {\n                            $(\"[name='tf_tour_adult_price']\", self.tourCalData).val(event.extendedProps.adult_price);\n                        }\n                        if (typeof event.extendedProps.child_price != 'undefined') {\n                            $(\"[name='tf_tour_child_price']\", self.tourCalData).val(event.extendedProps.child_price);\n                        }\n                        if (typeof event.extendedProps.infant_price != 'undefined') {\n                            $(\"[name='tf_tour_infant_price']\", self.tourCalData).val(event.extendedProps.infant_price);\n                        }\n                    } else {\n                        if(event.extendedProps.options_count != 0) {\n                            for (var i = 0; i <= event.extendedProps.options_count - 1; i++) {\n                                $(\"[name='tf_option_min_person_\" + i + \"']\", self.roomCalData).val(event.extendedProps[\"tf_option_min_person_\" + i]);\n                                $(\"[name='tf_option_max_person_\" + i + \"']\", self.roomCalData).val(event.extendedProps[\"tf_option_max_person_\" + i]);\n                                $(\"[name='tf_option_group_price_\" + i + \"']\", self.roomCalData).val(event.extendedProps[\"tf_option_group_price_\" + i]);\n                                $(\"[name='tf_option_adult_price_\" + i + \"']\", self.roomCalData).val(event.extendedProps[\"tf_option_adult_price_\" + i]);\n                                $(\"[name='tf_option_child_price_\" + i + \"']\", self.roomCalData).val(event.extendedProps[\"tf_option_child_price_\" + i]);\n                                $(\"[name='tf_option_infant_price_\" + i + \"']\", self.roomCalData).val(event.extendedProps[\"tf_option_infant_price_\" + i]);\n\n                                const discountData = event.extendedProps[\"tf_option_group_discount_\" + i];\n                                let allGroupDiscountRepeaterHTML = '';\n\n                                if (discountData && Array.isArray(discountData.min_person)) {\n                                    discountData.min_person.forEach((min, index) => {\n                                        if (!min) return;\n                                        const max = discountData.max_person[index] || '';\n                                        const price = discountData.price[index] || '';\n\n                                        allGroupDiscountRepeaterHTML += `\n                                            <div class=\"tf-single-repeater tf-single-repeater-group_discount_package\">\n                                                <input type=\"hidden\" name=\"tf_parent_field\" value=\"[group_tabs]\">\n                                                <input type=\"hidden\" name=\"tf_repeater_count\" value=\"${index + 1}\">\n                                                <input type=\"hidden\" name=\"tf_current_field\" value=\"group_discount_package\">\n                                                \n                                                <div class=\"tf-repeater-content-wrap\">\n                                                    <div class=\"tf-field tf-field-number\" style=\"width:calc(66% - 10px);\">\n                                                        <div class=\"tf-fieldset\">\n                                                            <div class=\"tf-number-range\">\n                                                                <div class=\"tf-number-field-box\">\n                                                                    <i class=\"fa-regular fa-user\"></i>\n                                                                    <input type=\"number\" name=\"tf_option_${i}_group_discount[min_person][]\" value=\"${min}\" min=\"0\" placeholder=\"Min Person\">\n                                                                </div>\n                                                                <svg width=\"21\" height=\"20\" viewBox=\"0 0 21 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                                                                    <path d=\"M15.5 6.66797L18.8333 10.0013L15.5 13.3346\" stroke=\"#95A3B2\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n                                                                    <path d=\"M2.1665 10H18.8332\" stroke=\"#95A3B2\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n                                                                </svg>\n                                                                <div class=\"tf-number-field-box\">\n                                                                    <i class=\"fa-regular fa-user\"></i>\n                                                                    <input type=\"number\" name=\"tf_option_${i}_group_discount[max_person][]\" value=\"${max}\" min=\"0\" placeholder=\"Max Person\">\n                                                                </div>\n                                                            </div>\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"tf-field tf-field-number\" style=\"width:calc(33% - 10px);\">\n                                                        <div class=\"tf-fieldset\">\n                                                            <input type=\"number\" name=\"tf_option_${i}_group_discount[price][]\" value=\"${price}\" min=\"0\" placeholder=\"Price\">\n                                                        </div>\n                                                    </div>\n\n                                                    <span class=\"tf-repeater-icon tf-repeater-icon-delete\">\n                                                        <svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                                                            <path d=\"M15 5L5 15\" stroke=\"#566676\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n                                                            <path d=\"M5 5L15 15\" stroke=\"#566676\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n                                                        </svg>\n                                                    </span>\n                                                </div>\n                                            </div>\n                                        `;\n                                    });\n                                }\n                                if (allGroupDiscountRepeaterHTML) {\n                                    $('.tf-group-discount-package_'+i).append(allGroupDiscountRepeaterHTML);\n                                }\n\n                                // package times\n                                const packageTimesData = event.extendedProps[\"tf_option_times_\" + i];\n                                let allPackageRepeaterHTML = '';\n\n                                if (packageTimesData && Array.isArray(packageTimesData.time)) {\n                                    packageTimesData.time.forEach((time, index) => {\n                                        if (!time) return;\n                                        const capacity = packageTimesData.cont_max_capacity[index] || '';\n\n                                        allPackageRepeaterHTML += `\n                                            <div class=\"tf-single-repeater tf-single-repeater-allowed_time\">\n                                                <input type=\"hidden\" name=\"tf_parent_field\" value=\"\">\n                                                <input type=\"hidden\" name=\"tf_repeater_count\" value=\"${index + 1}\">\n                                                <input type=\"hidden\" name=\"tf_current_field\" value=\"allowed_time\">\n                                                <div class=\"tf-repeater-content-wrap\">\n                                                    <div class=\"tf-field tf-field-time\" style=\"width: calc(50% - 6px);\">\n                                                        <div class=\"tf-fieldset\">\n                                                            <input type=\"text\" name=\"tf_option_${i}_allowed_time[time][]\" placeholder=\"Select Time\" value=\"${time}\" class=\"flatpickr flatpickr-input\" data-format=\"h:i K\" readonly=\"readonly\">\n                                                            <i class=\"fa-regular fa-clock\"></i>\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"tf-field tf-field-number\" style=\"width: calc(50% - 6px);\">\n                                                        <div class=\"tf-fieldset\">\n                                                            <input type=\"number\" name=\"tf_option_${i}_allowed_time[cont_max_capacity][]\" value=\"${capacity}\" placeholder=\"Maximum Capacity\">\n                                                        </div>\n                                                    </div>\n                                                    <span class=\"tf-repeater-icon tf-repeater-icon-delete\">\n                                                        <svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                                                            <path d=\"M15 5L5 15\" stroke=\"#566676\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                                            <path d=\"M5 5L15 15\" stroke=\"#566676\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                                        </svg>\n                                                    </span>\n                                                </div>\n                                            </div>\n                                        `;\n                                    });\n                                }\n\n                                if (allPackageRepeaterHTML) {\n                                    $('.tf-tour-package-allowed-time_'+i).html(allPackageRepeaterHTML);\n\n                                    // Re-initialize flatpickr on the newly added inputs\n                                    $('.tf_tour_allowed_times .flatpickr-input').flatpickr({\n                                        enableTime: true,\n                                        noCalendar: true,\n                                        dateFormat: \"h:i K\"\n                                    });\n                                }\n\n                            }\n                        }\n                        if(typeof event.extendedProps.options_count == 'undefined'){\n                            $(\".tf_option_pricing_type_person input\").val('');\n                            $(\".tf_option_pricing_type_group input\").val('');\n                        }\n                    }\n                    if (event.extendedProps.status) {\n                        $(\"[name='tf_tour_status'] option[value=\" + event.extendedProps.status + \"]\", self.tourCalData).prop(\"selected\", true);\n                    }\n                },\n            };\n            this.init = function () {\n                self.container = jQuery(container);\n                self.calendar = container.querySelector('.tf-tour-cal');\n                self.tourCalData = $('.tf-tour-cal-field', self.container);\n                setTourCheckInOut('', '', self.tourCalData);\n                self.initCalendar();\n            }\n            this.initCalendar = function () {\n                if (typeof FullCalendar != 'undefined') {\n                    self.fullCalendar = new FullCalendar.Calendar(self.calendar, self.fullCalendarOptions);\n                    self.fullCalendar.render();\n                }\n            }\n        };\n\n        function setTourCheckInOut(check_in, check_out, tourCalData) {\n            $('.tf_tour_check_in', tourCalData).val(check_in);\n            $('.tf_tour_check_out', tourCalData).val(check_out);\n        }\n\n        function tourResetForm(tourCalData) {\n            $('.tf_tour_check_in', tourCalData).val('');\n            $('.tf_tour_check_out', tourCalData).val('');\n            $('[name=\"tf_tour_price\"]', tourCalData).val('');\n            $('[name=\"tf_tour_adult_price\"]', tourCalData).val('');\n            $('[name=\"tf_tour_child_price\"]', tourCalData).val('');\n            $('[name=\"tf_tour_infant_price\"]', tourCalData).val('');\n            $('[name=\"tf_tour_min_person\"]', tourCalData).val('');\n            $('[name=\"tf_tour_max_person\"]', tourCalData).val('');\n            $('[name=\"tf_tour_max_capacity\"]', tourCalData).val('');\n            $('[name=\"tf_tour_repeat_day[]\"], [name=\"tf_tour_repeat_month[]\"], [name=\"tf_tour_repeat_year[]\"], [name=\"tf_tour_repeat_week[]\"]')\n            .prop('checked', false);\n            $('.bulk-popup-content-box #adult_tabs input, .bulk-popup-content-box #child_tabs input, .bulk-popup-content-box #infant_tabs input, .bulk-popup-content-box #group_tabs input').val('');\n\n            $('.tf-tour-cal-field .tf_tour_allowed_times').html('');\n\n            // More specific selector with error handling\n            const container = document.querySelector('.tf_tour_allowed_times');\n            while (container.firstChild) {\n                container.removeChild(container.firstChild);\n            }\n        }\n\n        const tfTourCalendar = () => {\n            $('.tf-tour-cal-wrap').each(function (index, el) {\n                var tour = new tourCal(el);\n                tour.init();\n\n                let checkIn = $(el).find('[name=\"tf_tour_check_in\"]').flatpickr({\n                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',\n                    minDate: 'today',\n                    altInput: true,\n                    altFormat: tf_options.tf_admin_date_format,\n                    onChange: function (selectedDates, dateStr, instance) {\n                        checkOut.set('minDate', dateStr);\n                    }\n                });\n\n                let checkOut = $(el).find('[name=\"tf_tour_check_out\"]').flatpickr({\n                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',\n                    minDate: 'today',\n                    altInput: true,\n                    altFormat: tf_options.tf_admin_date_format,\n                    onChange: function (selectedDates, dateStr, instance) {\n                        checkIn.set('maxDate', dateStr);\n                    }\n                });\n            });\n        }\n        tfTourCalendar();\n\n        $(document).on('click', '.tf_tour_cal_update', function (e) {\n            e.preventDefault();\n\n            let btn = $(this);\n            let container = btn.closest('.tf-tour-cal-wrap');\n            let containerEl = btn.closest('.tf-tour-cal-wrap')[0];\n            let cal = container.find('.tf-tour-cal');\n            let data = $('input, select', container.find('.tf-tour-cal-field')).serializeArray();\n            let pricingType = $('.tf_tour_pricing_type').val();\n            let tourAvailability = container.find('.tour_availability');\n            data.push({name: 'action', value: 'tf_add_tour_availability'});\n            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});\n            data.push({name: 'pricing_type', value: pricingType});\n            data.push({name: 'tour_availability', value: tourAvailability.val()});\n            data.push({name: 'options_count', value: tourPackageArr().length});\n            data.push({name: 'group_options_count', value: tourGroupPackageArr().length});\n\n            $.ajax({\n                url: tf_options.ajax_url,\n                type: 'POST',\n                data: data,\n                beforeSend: function () {\n                    container.css({'pointer-events': 'none', 'opacity': '0.5'})\n                    cal.addClass('tf-content-loading');\n                    btn.addClass('tf-btn-loading');\n                },\n                success: function (response) {\n                    if (typeof response == 'object') {\n                        if (response.data.status === true) {\n                            tourAvailability.val(response.data.tour_availability)\n                            notyf.success(response.data.message);\n                            tourResetForm(container);\n\n                            var tour = new tourCal(containerEl);\n                            tour.init();\n                            if (tour.fullCalendar) {\n                                tour.fullCalendar.refetchEvents();\n                            }\n                        } else {\n                            notyf.error(response.data.message);\n                        }\n\n                        container.css({'pointer-events': 'auto', 'opacity': '1'})\n                        cal.removeClass('tf-content-loading');\n                        btn.removeClass('tf-btn-loading');\n                    }\n\n                    $('.tf-check-dates').show();\n                    $('.tf_tour_cal_reset').show();\n                    $('.tf_tour_cal_bulk_edit').show();\n                    $('.tf-tour-cal-field').removeClass('tf-bulk-popup');\n                    $('.tf-bulk-repeater-section').hide();\n                    $('.tf-bulk-edit-header').hide();\n                    $('.tf-field-group-box .tf-tab-switch-box .tf-tab-field-content').hide();\n                },\n                error: function (e) {\n                    console.log(e);\n                    container.css({'pointer-events': 'auto', 'opacity': '1'})\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n                },\n                complete: function () {\n                    container.css({'pointer-events': 'auto', 'opacity': '1'});\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n\n                    $('.tf-check-dates').show();\n                    $('.tf_tour_cal_reset').show();\n                    $('.tf_tour_cal_bulk_edit').show();\n                    $('.tf-tour-cal-field').removeClass('tf-bulk-popup');\n                    $('.tf-bulk-repeater-section').hide();\n                    $('.tf-bulk-edit-header').hide();\n                    $('.tf-field-group-box .tf-tab-switch-box .tf-tab-field-content').hide();\n                },\n            });\n        });\n\n        // Refresh Calendar\n        $(document).on(\"click\", \".tf_tour_cal_refresh\", function (e) {\n            e.preventDefault();\n            tfTourCalendar();\n        });\n\n        // Reset Calendar Data\n        $(document).on(\"click\", \".tf_tour_cal_reset, .tf_room_cal_reset, .tf_apt_cal_reset\", function (e) {\n            e.preventDefault();\n            $('.tf-reset-confirmation-box').css('display', 'flex');\n        });\n\n        //tour availability calander reset\n        $(document).on('click', '.tf-tour-cal-field .tf-reset-confirmation-box .tf-confirmed-btn', function (e) {\n            e.preventDefault();\n            let btn = $(this);\n            let container = btn.closest('.tf-tour-cal-wrap');\n            let containerEl = btn.closest('.tf-tour-cal-wrap')[0];\n            let cal = container.find('.tf-tour-cal');\n            let tourAvailability = container.find('.tour_availability');\n            $.ajax({\n                url: tf_options.ajax_url,\n                type: 'POST',\n                data: {\n                    'action': 'tf_reset_tour_availability',\n                    '_nonce': tf_admin_params.tf_nonce,\n                    'tour_id': $('#post_ID').val()\n                },\n                beforeSend: function () {\n                    container.css({'pointer-events': 'none', 'opacity': '0.5'})\n                    cal.addClass('tf-content-loading');\n                    btn.addClass('tf-btn-loading');\n                },\n                success: function (response) {\n                    if (response.data.status === true) {\n                        tourAvailability.val(response.data.tour_availability)\n                        notyf.success(response.data.message);\n                        tourResetForm(container);\n\n                        var tour = new tourCal(containerEl);\n                        tour.init();\n                        if (tour.fullCalendar) {\n                            tour.fullCalendar.refetchEvents();\n                        }\n                    } else {\n                        notyf.error(response.data.message);\n                    }\n\n                    $('.tf-reset-confirmation-box').hide();\n                    container.css({'pointer-events': 'auto', 'opacity': '1'})\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n\n                },\n                error: function (e) {\n                    container.css({'pointer-events': 'auto', 'opacity': '1'})\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n                },\n                complete: function () {\n                    container.css({'pointer-events': 'auto', 'opacity': '1'});\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n                    $('.tf-tour-cal-field').removeClass('tf-bulk-popup');\n                },\n            });\n        });\n\n        //room availability calander reset\n        $(document).on('click', '.tf-room-cal-field .tf-reset-confirmation-box .tf-confirmed-btn', function (e) {\n            e.preventDefault();\n            let btn = $(this);\n            let container = btn.closest('.tf-room-cal-wrap');\n            let containerEl = btn.closest('.tf-room-cal-wrap')[0];\n            let cal = container.find('.tf-room-cal');\n            let roomAvailability = container.find('avail_date');\n            $.ajax({\n                url: tf_options.ajax_url,\n                type: 'POST',\n                data: {\n                    'action': 'tf_reset_room_availability',\n                    '_nonce': tf_admin_params.tf_nonce,\n                    'room_id': $('#post_ID').val()\n                },\n                beforeSend: function () {\n                    container.css({'pointer-events': 'none', 'opacity': '0.5'})\n                    cal.addClass('tf-content-loading');\n                    btn.addClass('tf-btn-loading');\n                },\n                success: function (response) {\n                    if (response.data.status === true) {\n                        roomAvailability.val(response.data.avail_date)\n                        notyf.success(response.data.message);\n                        roomResetForm(container);\n\n                        var room_cal = new roomCal(containerEl);\n                        room_cal.init();\n                        if (room_cal.fullCalendar) {\n                            room_cal.fullCalendar.refetchEvents();\n                        }\n                    } else {\n                        notyf.error(response.data.message);\n                    }\n                    \n                    $('.tf-reset-confirmation-box').hide();\n                    container.css({'pointer-events': 'auto', 'opacity': '1'})\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n                },\n                error: function (e) {\n                    container.css({'pointer-events': 'auto', 'opacity': '1'})\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n                },\n                complete: function () {\n                    container.css({'pointer-events': 'auto', 'opacity': '1'});\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n                },\n            });\n        });\n\n        //apartment availability calander reset\n        $(document).on('click', '.tf-apt-cal-field .tf-reset-confirmation-box .tf-confirmed-btn', function (e) {\n            e.preventDefault();\n            let btn = $(this);\n            let container = btn.closest('.tf-apt-cal-wrap');\n            let containerEl = btn.closest('.tf-apt-cal-wrap')[0];\n            let cal = container.find('.tf-apt-cal');\n            let aptAvailability = container.find('.apt_availability');\n            $.ajax({\n                url: tf_options.ajax_url,\n                type: 'POST',\n                data: {\n                    'action': 'tf_reset_apt_availability',\n                    '_nonce': tf_admin_params.tf_nonce,\n                    'apartment_id': $('#post_ID').val()\n                },\n                beforeSend: function () {\n                    container.css({'pointer-events': 'none', 'opacity': '0.5'})\n                    cal.addClass('tf-content-loading');\n                    btn.addClass('tf-btn-loading');\n                },\n                success: function (response) {\n                    if (response.data.status === true) {\n                        aptAvailability.val(response.data.apt_availability)\n                        notyf.success(response.data.message);\n                        aptResetForm(container);\n\n                        var apt_cal = new apartmentCal(containerEl);\n                        apt_cal.init();\n                        if (apt_cal.fullCalendar) {\n                            apt_cal.fullCalendar.refetchEvents();\n                        }\n                    } else {\n                        notyf.error(response.data.message);\n                    }\n                    \n                    $('.tf-reset-confirmation-box').hide();\n                    container.css({'pointer-events': 'auto', 'opacity': '1'})\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n\n                },\n                error: function (e) {\n                    container.css({'pointer-events': 'auto', 'opacity': '1'})\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n                },\n                complete: function () {\n                    container.css({'pointer-events': 'auto', 'opacity': '1'});\n                    cal.removeClass('tf-content-loading');\n                    btn.removeClass('tf-btn-loading');\n                    $('.tf-tour-cal-field').removeClass('tf-bulk-popup');\n                },\n            });\n        });\n\n        $(document).on(\"click\", \".tf-reset-confirmation-box .tf-cancel-btn, .tf-reset-confirmation-box .tf_reset_confirmation_close svg\", function (e) {\n            e.preventDefault();\n            $('.tf-reset-confirmation-box').hide();\n        });\n\n        $(document).on(\"click\", \".tf-reset-confirmation-box\", function (e) {\n            if (!$(e.target).closest('.tf-confirmation-content').length) {\n                $(this).hide(); // Hide the popup\n            }\n        });\n\n        // add pacakge\n        // $(document).on(\"click\", \".tf-repeater-add-package_pricing\", function (e) {\n        //     $(this).hide(); // Hide the popup\n        // });\n        // Save Package\n        $(document).on('click', \".tf_tour_package_save\", function(e) {\n            e.preventDefault();\n            \n            var $repeater = $(this).closest('.tf-single-repeater-package_pricing');\n            var data = {};\n            var packageIndex = null;\n\n            // First pass: Find the package index\n            $repeater.find('[name^=\"tf_tours_opt[package_pricing]\"]').each(function() {\n                var name = $(this).attr('name');\n                var matches = name.match(/tf_tours_opt\\[package_pricing\\]\\[(\\d+)\\]/);\n                if (matches && matches[1]) {\n                    packageIndex = matches[1];\n                    return false; // Exit loop once we find the index\n                }\n            });\n\n            if (packageIndex === null) {\n                alert('Could not determine package index');\n                return;\n            }\n\n            // Second pass: Collect all data with proper structure\n            var packageData = {\n                pack_status: '',\n                pack_title: '',\n                pricing_type: 'person',\n                desc: '',\n                adult_tabs: [{}, {}, {}, {}],\n                child_tabs: [{}, {}, {}, {}],\n                infant_tabs: [{}, {}, {}, {}],\n                group_tabs: [{}, {}, {}, {}, {}, {}]\n            };\n\n            // Collect all form data\n            $repeater.find('input, select, textarea').each(function() {\n                var $el = $(this);\n                var name = $el.attr('name');\n                \n                // Skip system fields\n                if (name === 'tf_parent_field' || name === 'tf_repeater_count' || name === 'tf_current_field') {\n                    return;\n                }\n\n                // Extract the field path\n                var path = name.replace(/^tf_tours_opt\\[package_pricing\\]\\[\\d+\\]/, '')\n                            .replace(/^\\[|\\]$/g, '')\n                            .split('][');\n                \n                // Build the nested structure\n                var current = packageData;\n                for (var i = 0; i < path.length; i++) {\n                    var key = path[i];\n                    \n                    // Handle numeric array indexes\n                    if (!isNaN(key) && i > 0) {\n                        key = parseInt(key);\n                    }\n                    \n                    if (i === path.length - 1) {\n                        // Set the value\n                        if ($el.attr('type') === 'checkbox') {\n                            current[key] = $el.is(':checked') ? ($el.val() || '1') : '';\n                        } else {\n                            current[key] = $el.val();\n                        }\n                    } else {\n                        // Create nested objects if they don't exist\n                        if (current[key] === undefined) {\n                            current[key] = isNaN(path[i+1]) ? {} : [];\n                        }\n                        current = current[key];\n                    }\n                }\n            });\n\n            // Handle group discount repeater fields - filter out empty discounts\n            var discountRepeaters = [];\n            $repeater.find('.tf-single-repeater-group_discount_package').each(function() {\n                var $repeaterItem = $(this);\n                var discountData = {};\n                var hasValidDiscount = false;\n                \n                $repeaterItem.find('input[type=\"number\"]').each(function() {\n                    var name = $(this).attr('name').match(/\\[group_discount_package\\]\\[(\\d+)\\]\\[([^\\]]+)\\]/);\n                    if (name && name[1] && name[2]) {\n                        var val = $(this).val();\n                        discountData[name[2]] = val;\n                        \n                        // Check if this is a discount_price with a valid value\n                        if (name[2] === 'discount_price' && val && parseFloat(val) > 0) {\n                            hasValidDiscount = true;\n                        }\n                    }\n                });\n                \n                // Only include discounts with valid discount_price\n                if (hasValidDiscount && Object.keys(discountData).length > 0) {\n                    discountRepeaters.push(discountData);\n                }\n            });\n\n            // Add discount repeater data to package if we have valid discounts\n            if (discountRepeaters.length > 0) {\n                packageData.group_tabs[5] = {\n                    group_discount_package: discountRepeaters\n                };\n            } else {\n                // Remove discount data if no valid discounts\n                packageData.group_tabs[5] = [];\n            }\n\n    \n            // Prepare AJAX data\n            var ajaxData = {\n                action: 'save_tour_package_pricing',\n                post_id: $('#post_ID').val(),\n                pricing_type: $('.tf_tour_pricing_type').val(),\n                package_index: packageIndex,\n                package_data: packageData,\n                nonce: tf_admin_params.tf_nonce\n            };\n    \n            // UI feedback\n            var $button = $(this);\n            $button.text('Saving...').prop('disabled', true);\n    \n            $.post(tf_options.ajax_url, ajaxData, function(response) {\n                if (response.success) {\n                    if(packageData.pack_title){\n                        $repeater.find(' > .tf-repeater-header .tf-repeater-title').html(packageData.pack_title);\n                    }else{\n                        $repeater.find(' > .tf-repeater-header .tf-repeater-title').html('Create your Tour Packages');\n                    }\n                    $repeater.find('.tf-repeater-content-wrap').hide();\n                    $repeater.find('.tf-repeater-header').removeClass('active-repeater');\n\n                    $repeater.find('.tf-repeater-header .package-action-hide').addClass('show');\n                    // $('.tf-repeater-add-package_pricing').show();\n                    notyf.success('Package saved successfully!');\n                } else {\n                    notyf.error('There is an error!');\n                }\n                $button.text('Save').prop('disabled', false);\n            }).fail(function(xhr, status, error) {\n                notyf.error('There is an error!');\n                $button.text('Save').prop('disabled', false);\n            });\n        });\n\n        // Package Dependancy\n        $(\".group_discount_switcher\").each(function() {\n            let $switcher = $(this);\n            let $checkbox = $switcher.find('input[type=\"checkbox\"]');\n            let $box = $switcher.next(\".group_discount_package_box\");\n\n            $box.toggle($checkbox.is(\":checked\"));\n        });\n\n        $(document).on(\"change\", \".group_discount_switcher input[type='checkbox']\", function() {\n            let $switcher = $(this).closest(\".group_discount_switcher\");\n            let $box = $switcher.next(\".group_discount_package_box\");\n\n            $box.toggle($(this).is(\":checked\"));\n        });\n\n        // pricing type update when change\n        $(document).on('change', '#tf_tours_opt .tf_tour_pricing_type', function (e) {\n            let pricingType = $(this).val();\n            if(pricingType=='person'){\n                $('.tf-show-for-group').hide();\n                $('.tf-show-for-package').hide();\n                $('.tf-show-for-person').show();\n            }else if(pricingType=='group'){\n                $('.tf-show-for-package').hide();\n                $('.tf-show-for-person').hide();\n                $('.tf-show-for-group').show();\n            }else if(pricingType=='package'){\n                $('.tf-show-for-person').hide();\n                $('.tf-show-for-group').hide();\n                $('.tf-show-for-package').show();\n            }\n            // Prepare AJAX data\n            var ajaxData = {\n                action: 'save_tour_pricing_type',\n                post_id: $('#post_ID').val(),\n                pricing_type: pricingType,\n                nonce: tf_admin_params.tf_nonce\n            };\n\n            $.post(tf_options.ajax_url, ajaxData, function(response) {\n                if (response.success) {\n                    \n                } \n            }).fail(function(xhr, status, error) {\n            });\n        });\n\n\n        $(document).on('change', '.tf_tour_pricing_type', function (e) {\n            let pricingType = $(this).val();\n\n            if (pricingType === 'per_night') {\n                $('.tf-price-by-night').show();\n                $('.tf-price-by-person').hide();\n            } else if (pricingType === '2') {\n                $('.tf-price-by-person').show();\n                $('.tf-price-by-night').hide();\n            }\n        });\n\n        // Tour Map Initialize based on Tab\n        $(document).on(\"click\", \"#tf_tours_opt .tf-tablinks\", function (e) {\n            var $this = $(this);\n            if ($this.attr('data-tab')=='availability'){\n                tfTourCalendar();\n            }\n        });\n\n        // Bulk Popup Open\n        $(document).on(\"click\", \".tf_tour_cal_bulk_edit\", function (e) {\n            tourResetForm('');\n            $('.tf-tour-cal-field').addClass('tf-bulk-popup');\n            $('.tf-bulk-repeater-section').show();\n            $('.tf-check-dates').hide();\n            $('.tf_tour_cal_bulk_edit').hide();\n            $('.tf_tour_cal_reset').hide();\n            $('.bulk-popup-content .tf-repeater-wrap-group_discount_package').html('');\n            $('.bulk-popup-content .tf_tour_allowed_times').html('');\n            $('.tf-bulk-edit-header').css('display', 'flex');\n            $('.tf_bulk_edit_option').val('1');\n        });\n\n        // Bulk Popup Close\n        $(document).on(\"click\", \".tf_tour_bulk_close\", function (e) {\n            $('.tf-tour-cal-field').removeClass('tf-bulk-popup');\n            $('.tf-bulk-repeater-section').hide();\n            $('.tf-check-dates').show();\n            $('.tf_tour_cal_reset').show();\n            $('.bulk-popup-content .tf-repeater-wrap-group_discount_package').html('');\n            $('.bulk-popup-content .tf_tour_allowed_times').html('');\n            $('.tf_tour_cal_bulk_edit').show();\n            $('.tf-bulk-edit-header').hide();\n            $('.tf_bulk_edit_option').val('');\n        });\n\n        /*\n        * Options WP editor\n        * @author: Sydur\n        */\n        function TF_wp_editor($id) {\n            wp.editor.initialize($id, {\n                tinymce: {\n                    wpautop: true,\n                    plugins: 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',\n                    toolbar1: 'formatselect,bold,italic,bullist,numlist,blockquote,alignleft,aligncenter,alignright,link,wp_more,spellchecker,fullscreen,wp_adv,listbuttons',\n                    toolbar2: 'styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',\n                    //   textarea_rows : 20\n                },\n                quicktags: {buttons: 'strong,em,link,block,del,ins,img,ul,ol,li,code,more,close'},\n                mediaButtons: false,\n            });\n        }\n\n        $('textarea.wp_editor, textarea.tf_wp_editor').each(function () {\n            let $id = $(this).attr('id');\n\n            setTimeout(function() { \n                TF_wp_editor($id);\n            }, 1000);\n            \n        });\n\n        /*\n        * Booking Confirmation Field Fixed\n        * @since 2.9.28\n        * @author: Jahid\n        */\n        TF_Booking_Confirmation();\n\n        function TF_Booking_Confirmation() {\n            if ($('.tf-repeater-wrap .tf-single-repeater-book-confirm-field').length > 0) {\n                $('.tf-repeater-wrap .tf-single-repeater-book-confirm-field').each(function () {\n                    let $this = $(this);\n                    let repeaterCount = $this.find('input[name=\"tf_repeater_count\"]').val();\n                    if (0 == repeaterCount || 1 == repeaterCount || 2 == repeaterCount) {\n                        $this.find('.tf_hidden_fields').hide();\n                        $this.find('.tf-repeater-icon-clone').hide();\n                        $this.find('.tf-repeater-icon-delete').hide();\n                    }\n                });\n            }\n            if ($('.tf-repeater-wrap .tf-single-repeater-hotel-book-confirm-field').length > 0) {\n                $('.tf-repeater-wrap .tf-single-repeater-hotel-book-confirm-field').each(function () {\n                    let $this = $(this);\n                    let repeaterCount = $this.find('input[name=\"tf_repeater_count\"]').val();\n                    if (0 == repeaterCount || 1 == repeaterCount || 2 == repeaterCount) {\n                        $this.find('.tf_hidden_fields').hide();\n                        $this.find('.tf-repeater-icon-clone').hide();\n                        $this.find('.tf-repeater-icon-delete').hide();\n                    }\n                });\n            }\n            if ($('.tf-repeater-wrap .tf-single-repeater-car-book-confirm-field').length > 0) {\n                $('.tf-repeater-wrap .tf-single-repeater-car-book-confirm-field').each(function () {\n                    let $this = $(this);\n                    let repeaterCount = $this.find('input[name=\"tf_repeater_count\"]').val();\n                    if (0 == repeaterCount || 1 == repeaterCount || 2 == repeaterCount) {\n                        $this.find('.tf_hidden_fields').hide();\n                        $this.find('.tf-repeater-icon-clone').hide();\n                        $this.find('.tf-repeater-icon-delete').hide();\n                    }\n                });\n            }\n        }\n\n        /*\n        * Add New Repeater Item\n        * @author: Sydur\n        */\n        $(document).on('click', '.tf-repeater-icon-add', function () {\n            var $this = $(this);\n            var $this_parent = $this.parent().parent();\n            var id = $(this).attr(\"data-repeater-id\");\n            var max = $(this).attr(\"data-repeater-max\");\n            var add_value = $this_parent.find('.tf-single-repeater-clone-' + id + ' .tf-single-repeater-' + id + '').clone();\n            var count = $this_parent.find('.tf-repeater-wrap-' + id + ' .tf-single-repeater-' + id + '').length;\n            var parent_field = add_value.find(':input[name=\"tf_parent_field\"]').val();\n            var current_field = add_value.find(':input[name=\"tf_current_field\"]').val();\n            var maxIndex = parseInt($(this).closest('.tf-repeater').attr(\"data-max-index\")) + 1;\n            $(this).closest('.tf-repeater').attr(\"data-max-index\", maxIndex);\n\n            $this_parent.find('.tf-repeater-wrap .tf-field-notice-inner').remove();\n            // Chacked maximum repeater\n            if (!tf_admin_params.is_pro && max != '' && count >= max) {\n                $this_parent.find('.tf-repeater-wrap').append('<div class=\"tf-field-notice-inner tf-notice-danger\" style=\"display: block;\">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');\n                return false;\n            }\n\n            // Repeater Count Add Value\n            add_value.find(':input[name=\"tf_repeater_count\"]').val(maxIndex);\n\n            let repeatDateField = add_value.find('.tf-field-date');\n            if (repeatDateField.length > 0) {\n                repeatDateField.find('input').each(function () {\n\n                    if ($(this).attr('name') == '' || typeof $(this).attr('name') === \"undefined\") {\n                        $(this).remove()\n                    }\n                });\n                tfDateInt(repeatDateField);\n            }\n\n            let repeatTimeField = add_value.find('.tf-field-time');\n            if (repeatTimeField.length > 0) {\n                tfTimeInt(repeatTimeField);\n            }\n\n            let repeatColorField = add_value.find('.tf-field-color');\n            if (repeatColorField.length > 0) {\n                repeatColorField.find('input.tf-color').each(function () {\n                    var color_field =  $(this).clone(); \n                    if($(this).closest('li').length > 0){\n                        $(this).closest('li').append(color_field);\n                    }else{\n                        $(this).closest('.tf-fieldset').append(color_field);\n                    }\n                    $(this).closest('.wp-picker-container').remove();\n                 });\n                tfColorInt(repeatColorField);\n            }\n\n            if (parent_field == '') {\n                // Update  repeater name And id\n                add_value.find(':input').each(function () {\n                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');\n                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');\n                });\n                var update_paren = add_value.find('.tf-repeater input[name=\"tf_parent_field\"]').val();\n                if (typeof update_paren !== \"undefined\") {\n                    var update_paren = update_paren.replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');\n                }\n                add_value.find('.tf-repeater input[name=\"tf_parent_field\"]').val(update_paren);\n\n            } else {\n                // Update  repeater name And id\n                var update_paren = add_value.find(':input[name=\"tf_parent_field\"]').val();\n                add_value.find(':input').each(function () {\n                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');\n                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');\n                });\n            }\n            // Update Repeaterr label\n            add_value.find('label').each(function () {\n                var for_value = $(this).attr(\"for\");\n                if (typeof for_value !== \"undefined\") {\n                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');\n                    $(this).attr(\"for\", for_value);\n                }\n            });\n            // Update Icon select id\n            add_value.find('.tf-icon-select').each(function (index) {\n                var icon_id = $(this).attr(\"id\");\n                if (typeof icon_id !== \"undefined\") {\n                    icon_id = icon_id + index + maxIndex;\n                    $(this).attr(\"id\", icon_id)\n\n                }\n            });\n            // Update Data depend id\n            add_value.find('[data-depend-id]').each(function () {\n                var data_depend_id = $(this).attr(\"data-depend-id\");\n                if (typeof data_depend_id !== \"undefined\") {\n                    data_depend_id = data_depend_id.replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');\n                    $(this).attr(\"data-depend-id\", data_depend_id);\n                }\n            });\n            // Update Data Controller\n            add_value.find('[data-controller]').each(function () {\n                var data_controller = $(this).attr(\"data-controller\");\n                if (typeof data_controller !== \"undefined\") {\n                    data_controller = data_controller.replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');\n                    $(this).attr(\"data-controller\", data_controller);\n                }\n            });\n\n            // Replace Old editor\n            add_value.find('.wp-editor-wrap').each(function () {\n                var textarea = $(this).find('.tf_wp_editor').show();\n                // Get content of a specific editor:\n                var tf_editor_ex_data = $('#' + textarea.attr('id') + '').val();\n                if (tf_editor_ex_data && typeof tf_editor_ex_data !== \"undefined\") {\n                    var textarea_content = tinymce.get(textarea.attr('id')).getContent();\n                } else {\n                    var textarea_content = '';\n                }\n                textarea.val(textarea_content);\n                $(this).closest('.tf-field-textarea').append(textarea);\n                $(this).remove();\n            });\n\n            // Update Data Append value\n            var append = $this_parent.find('.tf-repeater-wrap-' + id + '');\n\n            add_value.appendTo(append).show();\n\n            // replace new editor\n            add_value.find('textarea.parent_wp_editor').each(function () {\n                var count = Math.random().toString(36).substring(3, 9) + 1;\n                // this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + count + '');\n                $(this).attr('id', current_field + count);\n                $(this).attr('data-count-id', count);\n                var parent_repeater_id = $(this).attr('id');\n                TF_wp_editor(parent_repeater_id);\n            });\n\n            // replace new Select 2\n            add_value.find('select.tf-select2-parent').each(function () {\n                this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + maxIndex + '');\n                var parent_repeater_id = $(this).attr('id');\n                var $this = $(this);\n                tfSelect2Int($this);\n            });\n\n            // repeater dependency repeater\n            TF_dependency();\n\n            // Booking Confirmation repeater Hidden field\n            TF_Booking_Confirmation();\n        });\n\n        // Repeater Delete Value\n        $(document).on('click', '.tf-repeater-icon-delete', function () {\n            var max = $(this).attr(\"data-repeater-max\");\n            var $this_parent = $(this).closest('.tf-repeater-wrap');\n            var count = $this_parent.find('.tf-single-repeater').length;\n            // Chacked maximum repeater\n\n            if (confirm(\"Are you sure to delete this item?\")) {\n                $this_parent.find('.tf-field-notice-inner').remove();\n                $(this).closest('.tf-single-repeater').remove();\n            }\n            return false;\n        });\n\n        /*\n        * Clone Repeater Item\n        * @author: Sydur\n        */\n        $(document).on('click', '.tf-repeater-icon-clone', function () {\n            var $this_parent = $(this).closest('.tf-repeater-wrap');\n            let clone_value = $(this).closest('.tf-single-repeater').clone();\n            var max = $(this).attr(\"data-repeater-max\");\n            var parent_field = clone_value.find('input[name=\"tf_parent_field\"]').val();\n            var current_field = clone_value.find('input[name=\"tf_current_field\"]').val();\n            var repeater_count = clone_value.find('input[name=\"tf_repeater_count\"]').val();\n            var count = $this_parent.find('.tf-single-repeater-' + current_field + '').length;\n            var maxIndex = parseInt($(this).closest('.tf-repeater').attr(\"data-max-index\")) + 1;\n            $(this).closest('.tf-repeater').attr(\"data-max-index\", maxIndex);\n\n            $this_parent.find('.tf-field-notice-inner').remove();\n            // Chacked maximum repeater\n            if (!tf_admin_params.is_pro && max != '' && count >= max) {\n                $this_parent.append('<div class=\"tf-field-notice-inner tf-notice-danger\" style=\"display: block;\">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');\n                return false;\n            }\n\n            let repeatDateField = clone_value.find('.tf-field-date');\n\n            if (repeatDateField.length > 0) {\n                repeatDateField.find('input').each(function () {\n                    if ($(this).attr('name') == '' || typeof $(this).attr('name') === \"undefined\") {\n                        $(this).remove();\n                    }\n                });\n                tfDateInt(repeatDateField);\n            }\n\n            let repeatTimeField = clone_value.find('.tf-field-time');\n            if (repeatTimeField.length > 0) {\n                tfTimeInt(repeatTimeField);\n            }\n\n            let repeatColorField = clone_value.find('.tf-field-color');\n            if (repeatColorField.length > 0) {\n                repeatColorField.find('input.tf-color').each(function () {\n                    var color_field =  $(this).clone(); \n                    if($(this).closest('li').length > 0){\n                        $(this).closest('li').append(color_field);\n                    }else{\n                        $(this).closest('.tf-fieldset').append(color_field);\n                    }\n                    $(this).closest('.wp-picker-container').remove();\n                 });\n                tfColorInt(repeatColorField);\n            }\n\n            if (parent_field == '') {\n                // Replace input id and name\n                clone_value.find(':input').each(function () {\n                    if ($(this).closest('.tf-single-repeater-clone').length == 0) {\n                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');\n                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');\n                    }\n                });\n                var update_paren = clone_value.find('.tf-repeater input[name=\"tf_parent_field\"]').val();\n                if (typeof update_paren !== \"undefined\") {\n                    var update_paren = update_paren.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');\n                }\n                clone_value.find('.tf-repeater input[name=\"tf_parent_field\"]').val(update_paren);\n\n            } else {\n                // Replace input id and name\n                clone_value.find(':input').each(function () {\n                    if ($(this).closest('.tf-single-repeater-clone').length == 0) {\n                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');\n                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');\n                    }\n                });\n            }\n            clone_value.find('label').each(function () {\n                var for_value = $(this).attr(\"for\");\n                if (typeof for_value !== \"undefined\") {\n                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');\n                    var for_value = $(this).attr(\"for\", for_value);\n                }\n            });\n            // Update Icon select id\n            clone_value.find('.tf-icon-select').each(function (index) {\n                var icon_id = $(this).attr(\"id\");\n                if (typeof icon_id !== \"undefined\") {\n                    icon_id = icon_id + index + maxIndex;\n                    $(this).attr(\"id\", icon_id)\n\n                }\n            });\n            // Replace Data depend id ID\n            clone_value.find('[data-depend-id]').each(function () {\n                var data_depend_id = $(this).attr(\"data-depend-id\");\n                if (typeof data_depend_id !== \"undefined\") {\n                    data_depend_id = data_depend_id.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');\n                    $(this).attr(\"data-depend-id\", data_depend_id);\n                }\n            });\n            // Replace Data depend id ID\n            clone_value.find('[data-controller]').each(function () {\n                var data_controller = $(this).attr(\"data-controller\");\n                if (typeof data_controller !== \"undefined\") {\n                    data_controller = data_controller.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');\n                    $(this).attr(\"data-controller\", data_controller);\n                }\n            });\n            // Replace Data repeter Count id ID\n            clone_value.find('input[name=\"tf_repeater_count\"]').val(maxIndex)\n\n            // Replace Old editor\n            clone_value.find('.wp-editor-wrap').each(function () {\n                var textarea = $(this).find('.tf_wp_editor').show();\n                // Get content of a specific editor:\n                var tf_editor_ex_data = $('#' + textarea.attr('id') + '').val();\n                var textarea_id = textarea.attr('id');\n                if (textarea_id != '' && typeof textarea_id !== \"undefined\") {\n                    // var textarea_content = tinymce.get(textarea.attr('id')).getContent();\n                    var textarea_content = tinymce.editors[textarea_id].getContent();\n                } else {\n                    var textarea_content = '';\n                }\n                textarea.val(textarea_content);\n                $(this).closest('.tf-field-textarea').append(textarea);\n                $(this).remove();\n            });\n\n            // Replace Old Select 2\n            clone_value.find('.tf-field-select2').each(function () {\n\n                var get_selected_value = $(this).find('select.tf-select-two').select2('val')\n                $(this).find('select.tf-select-two').removeAttr(\"data-select2-id aria-hidden tabindex\");\n                $(this).find('select.tf-select-two option').removeAttr(\"data-select2-id\");\n                $(this).find('select.tf-select-two').removeClass(\"select2-hidden-accessible\");\n                var select2 = $(this).find('select.tf-select-two').show();\n\n                select2.val(get_selected_value);\n                $(this).find('.tf-fieldset').append(select2);\n                $(this).find('span.select2-container').remove();\n            });\n\n            //Append Value\n            $(this).closest('.tf-repeater-wrap').append(clone_value).show();\n\n            // Clone Wp Editor\n            clone_value.find('textarea.parent_wp_editor, textarea.wp_editor').each(function () {\n                var count = Math.random().toString(36).substring(3, 9) + 1;\n                $(this).attr('id', current_field + count);\n                $(this).attr('data-count-id', count);\n                var parent_repeater_id = $(this).attr('id');\n                TF_wp_editor(parent_repeater_id);\n            });\n\n            // Clone Select 2\n            clone_value.find('select.tf-select2-parent, select.tf-select2').each(function () {\n                this.id = this.id.replace('' + current_field + '__' + repeater_count, '' + current_field + '__' + maxIndex + '');\n                var $this = $(this);\n                tfSelect2Int($this);\n            });\n\n            // Dependency value\n            TF_dependency();\n            // Copy Message\n            notyf.success('Duplicated Successfully');\n        });\n\n        // Repeater show hide\n        $(document).on('click', '.tf-repeater-icon-collapse, .tf-repeater-title', function () {\n            var tf_repater_fieldname = $(this).closest('.tf-single-repeater').find('input[name=tf_current_field]').val();\n\n            // Toggle Class for Header\n            $(this).closest('.tf-single-repeater').find('.tf-repeater-header').toggleClass('active-repeater');\n            $(this).closest('.tf-single-repeater').find('.tf-tab-switch-box').toggleClass('active-repeater');\n\n\n            $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').find('.tf-repeater-content-wrap').slideToggle();\n            $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').toggleClass('hide');\n            if ($(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').hasClass('hide') == true) {\n                $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + ' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class=\"fa-solid fa-angle-down\"></i>');\n            } else {\n                $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + ' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class=\"fa-solid fa-angle-up\"></i>');\n            }\n        });\n\n        // Repeater Drag and  show\n        $(\".tf-repeater-wrap\").sortable({\n            handle: '.tf-repeater-icon-move',\n            start: function (event, ui) { // turn TinyMCE off while sorting (if not, it won't work when resorted)\n                var textareaID = $(ui.item).find('.tf_wp_editor').attr('id');\n\n            },\n            stop: function (event, ui) { // re-initialize TinyMCE when sort is completed\n                $(ui.item).find('.tf_wp_editor').each(function () {\n                    var textareaID = $(this).attr('id');\n                    tinyMCE.execCommand('mceRemoveEditor', false, textareaID);\n                    tinyMCE.execCommand('mceAddEditor', false, textareaID);\n                });\n\n                // $(this).find('.update-warning').show();\n            }\n        });\n\n        // switch-group Drag and  show\n        $(\".tf-switch-group-wrap\").sortable({\n            placeholder: \"tf-switch-drag-highlight\"\n        });\n\n        // Discount Repeater Add\n        $(document).on('click', '.tf-repeater-add-group_discount_package', function (e) {\n            e.preventDefault();\n        \n            // Find the closest repeater container\n            var $repeater = $(this).closest('.tf-repeater');\n            \n            // Find the clone template\n            var $clone = $repeater.find('.tf-repeater-wrap-group_discount_package .tf-single-repeater .tf-repeater-content-wrap').show();\n        });\n\n        // Package Time Repeater Add\n        $(document).on('click', '.tf-package-add-allowed-time', function (e) {\n            e.preventDefault();\n        \n            // Find the closest repeater container\n            var $repeater = $(this).closest('.tf-repeater');\n            \n            // Find the clone template\n            var $clone = $repeater.find('.tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap').show();\n        });\n\n        // Repeater show hide\n        $(document).on('click', '.tf-field-accordion .tf-tab-field-header .tf-field-collapas', function () {\n            $(this).toggleClass('rotated');\n            $(this).closest('.tf-tab-switch-box').toggleClass('active-repeater');\n            $(this).closest('.tf-tab-switch-box').find('.tf-tab-field-content').slideToggle(200, function () {\n                if ($(this).is(':visible')) {\n                    $(this).css('display', 'flex');\n                }\n            });\n            \n        });\n\n        // Repeater Pacakge Cancel\n        $(document).on('click', '.tf-action-button-group .tf_tour_package_cancel', function () {\n            $(this).closest('.tf-repeater-content-wrap').hide();\n            $(this).closest('.tf-single-repeater').find('.tf-repeater-header').removeClass('active-repeater');\n            // $('.tf-repeater-add-package_pricing').show();\n        });\n\n        $(document).on('click', '.tf-action-button-group .tf_tour_package_deleted', function () {\n            $(this).closest('.tf-single-repeater').empty();\n            // $('.tf-repeater-add-package_pricing').show();\n        });\n\n        // Repeater show hide\n        $(document).on('click', '.tf-avail-repeater-collapse, .tf-avail-repeater-title', function () {\n            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').first().slideToggle(200);\n        });\n\n        // TAB jquery\n        $(document).on('click', '.tf-tab-item', function () {\n            var $this = $(this);\n            var tab_id = $this.data('tab-id');\n            if ($this.parent().parent().find('.tf-tab-item-content').hasClass(\"show\") == true) {\n                $this.parent().parent().find('.tf-tab-item-content').removeClass('show');\n            }\n\n            $this.parent().find('.tf-tab-item').removeClass('show');\n\n            $this.addClass('show');\n            $this.parent().parent().find('.tf-tab-item-content[data-tab-id = ' + tab_id + ']').addClass('show');\n\n            tfHotelCalendar();\n            tfApartmentCalendar();\n            tfTourCalendar();\n        });\n\n        // Select 2 add new category\n        $(document).on('click', '.tf-add-category span', function (event) { \n            event.preventDefault();\n            var $this = $(this);\n            var parentDiv = $this.closest('.tf-fieldset');\n            parentDiv.children('.tf-popup-box').css('display', 'flex');\n        });\n\n        // Close Popup\n        $(document).on('click', '.tf-add-category-box-close', function (event) { \n            event.preventDefault();\n            $('.tf-popup-box').hide();\n        });\n\n        // Create Category\n        $(document).on('click', '.tf-category-button', function (event) { \n            event.preventDefault();\n            var $this = $(this);\n            var parentDiv = $this.closest('.tf-add-category-box');\n            let categoryName = parentDiv.find('#category_name').val();\n            let categoryTitle = parentDiv.find('#category_title').val();\n            let parentCategory = parentDiv.find('#parent_category').val();\n            let categorySelect = parentDiv.find('#category_select_field_name').val();\n\n            $.ajax({\n                url: tf_options.ajax_url,\n                method: 'POST',\n                data: {\n                    action: 'tf_insert_category_data',\n                    _nonce: tf_admin_params.tf_nonce,\n                    categoryName: categoryName,\n                    categoryTitle: categoryTitle,\n                    parentCategory: parentCategory\n                },\n                success: function (response) {\n                    var data = JSON.parse(response);\n                    if (data.insert_category) {\n                        // Store to List and Selected\n                        var newOption = new Option(data.insert_category.title, data.insert_category.id, true, true);\n                        $('#'+categorySelect).append(newOption).trigger('change');\n\n                        // Store to Popup List\n                        var newPopuOption = new Option(data.insert_category.title, data.insert_category.id, false, false);\n                        parentDiv.find('#parent_category').append(newPopuOption).trigger('change');\n                    }\n                    $('.tf-popup-box').hide();\n                    parentDiv.find('#category_title').val('');\n                    parentDiv.find('#parent_category').val('');\n                }\n            });\n\n        });\n\n        // Create Post\n        $(document).on('click', '.tf-add-new-post-button', function (event) { \n            event.preventDefault();\n            var $this = $(this);\n            var parentDiv = $this.closest('.tf-add-category-box');\n            let postType = parentDiv.find('.post_type').val();\n            let postTitle = parentDiv.find('.post_title').val();\n            let postSelect = parentDiv.find('.post_select_field_name').val();\n            let fieldId = parentDiv.find('.field_id').val();\n            let postId = parentDiv.find('.post_id').val();\n\n            if(postTitle){\n                $.ajax({\n                    url: tf_options.ajax_url,\n                    method: 'POST',\n                    data: {\n                        action: 'tf_insert_post_data',\n                        _nonce: tf_admin_params.tf_nonce,\n                        postType: postType,\n                        postTitle: postTitle,\n                        fieldId: fieldId,\n                        postId: postId\n                    },\n                    beforeSend: function(){\n                        $this.addClass('tf-btn-loading');\n                    },\n                    success: function (response) {\n                        var data = JSON.parse(response);\n                        if (data.insert_post) {\n                            // Store to List and Selected\n                            var newOption = new Option(data.insert_post.title, data.insert_post.id, true, true);\n                            \n                            if(fieldId == 'tf_rooms'){\n                                $(newOption).attr('data-edit-url', data.insert_post.edit_url);\n                            }\n                            \n                            $('#'+postSelect).append(newOption).trigger('change');\n                        }\n                        $this.removeClass('tf-btn-loading');\n                        $('.tf-popup-box').hide();\n                        parentDiv.find('.post_title').val('');\n                    }\n                });\n            } else {\n                notyf.error('Please enter title');\n            }\n\n        });\n\n    });\n})(jQuery);\n\n\nfunction openTab(evt, tabName) {\n    evt.preventDefault();\n    var i, tabcontent, tablinks;\n    tabcontent = document.getElementsByClassName(\"tf-tab-content\");\n    for (i = 0; i < tabcontent.length; i++) {\n        tabcontent[i].style.display = \"none\";\n    }\n    tablinks = document.getElementsByClassName(\"tf-tablinks\");\n    for (i = 0; i < tablinks.length; i++) {\n        tablinks[i].className = tablinks[i].className.replace(\" active\", \"\");\n    }\n    document.getElementById(tabName).style.display = \"block\";\n    evt.target.className += \" active\";\n    jQuery(\".tf-admin-tab\").removeClass('active');\n}\n\nvar frame, gframe;\n(function ($) {\n    // Single Image remove\n    $(document).on(\"click\", \".tf-image-close\", function (e) {\n        e.preventDefault();\n        $this = $(this);\n        var fieldname = $(this).attr(\"tf-field-name\");\n        var tf_preview_class = fieldname.replace(/[.[\\]_-]/g, '_');\n\n        $this.parent().parent().find('input').val('');\n        $this.parent().html('');\n\n    });\n\n    // Gallery Image remove\n    $(document).on(\"click\", \".tf-gallery-remove\", function (e) {\n        e.preventDefault();\n        $this = $(this);\n        var fieldname = $(this).attr(\"tf-field-name\");\n        var tf_preview_class = fieldname.replace(/[.[\\]_-]/g, '_');\n\n        $this.parent().parent().find('input').val('');\n        $this.parent().parent().find('.tf-fieldset-gallery-preview').html('');\n        $('a.tf-gallery-edit, a.tf-gallery-remove').css(\"display\", \"none\");\n\n    });\n\n    $(document).ready(function () {\n\n        // Single Image Upload\n\n        $('body').on('click', '.tf-media-upload', function (e) {\n            var $this = $(this);\n            var fieldname = $(this).attr(\"tf-field-name\");\n            var tf_preview_class = fieldname.replace(/[.[\\]_-]/g, '_');\n\n            frame = wp.media({\n                title: \"Select Image\",\n                button: {\n                    text: \"Insert Image\"\n                },\n                multiple: false\n            });\n            frame.on('select', function () {\n\n                var attachment = frame.state().get('selection').first().toJSON();\n                $this.parent().parent().find('input').val(attachment.url);\n                $this.parent().parent().find('.tf-fieldset-media-preview').html(`<div class=\"tf-image-close\" tf-field-name='${fieldname}'>✖</div><img src='${attachment.url}' />`);\n            });\n            frame.open();\n            return false;\n        });\n\n        // Gallery Image Upload\n\n        $('body').on('click', '.tf-gallery-upload, .tf-gallery-edit', function (e) {\n            var $this = $(this);\n            var fieldname = $(this).attr(\"tf-field-name\");\n            var tf_preview_class = fieldname.replace(/[.[\\]_-]/g, '_');\n            gframe = wp.media({\n                title: \"Select Gallery\",\n                button: {\n                    text: \"Insert Gallery\"\n                },\n                multiple: 'add'\n            });\n\n            gframe.on('open', function () {\n                var selection = gframe.state().get('selection');\n                var ids_value = $this.parent().parent().find('input').val();\n\n                if (ids_value.length > 0) {\n                    var ids = ids_value.split(',');\n\n                    ids.forEach(function (id) {\n                        attachment = wp.media.attachment(id);\n                        attachment.fetch();\n                        selection.add(attachment ? [attachment] : []);\n                    });\n                }\n            });\n\n            gframe.on('select', function () {\n                var image_ids = [];\n                var image_urls = [];\n                var attachments = gframe.state().get('selection').toJSON();\n                $this.parent().parent().find('.tf-fieldset-gallery-preview').html('');\n                for (i in attachments) {\n                    var attachment = attachments[i];\n                    image_ids.push(attachment.id);\n                    image_urls.push(attachment.url);\n                    $this.parent().parent().find('.tf-fieldset-gallery-preview').append(`<img src='${attachment.url}' />`);\n                }\n                $this.parent().parent().find('input').val(image_ids.join(\",\"));\n                $this.parent().find('a.tf-gallery-edit, a.tf-gallery-remove').css(\"display\", \"inline-block\");\n            });\n\n            gframe.open();\n            return false;\n        });\n\n\n        // Texonomy submit event\n        $('#addtag > .submit #submit').on(\"click\", function () {\n            $(\".tf-fieldset-media-preview\").html(\"\");\n        });\n\n        if (tf_options.gmaps != \"googlemap\") {\n            $(\".tf-field-map\").each(function () {\n                var $this = $(this),\n                    $map = $this.find('.tf--map-osm'),\n                    $search_input = $this.find('.tf--map-search input'),\n                    $latitude = $this.find('.tf--latitude'),\n                    $longitude = $this.find('.tf--longitude'),\n                    $zoom = $this.find('.tf--zoom'),\n                    map_data = $map.data('map');\n\n                var mapInit = L.map($map.get(0), map_data);\n\n\n                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {\n                    attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors'\n                }).addTo(mapInit);\n\n                var mapMarker = L.marker(map_data.center, {draggable: true}).addTo(mapInit);\n\n                var update_latlng = function (data) {\n                    $latitude.val(data.lat);\n                    $longitude.val(data.lng);\n                    $zoom.val(mapInit.getZoom());\n                };\n\n                $latitude.on('change', function () {\n\n                })\n\n                function updateLocationField(latitude, longitude) {\n                    var apiUrl = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latitude + '&lon=' + longitude;\n\n                    $.ajax({\n                        url: apiUrl,\n                        dataType: 'json',\n                        success: function (data) {\n                            $search_input.val(data.display_name)\n                        },\n                        error: function (jqXHR, textStatus, errorThrown) {\n                            console.error('Error:', textStatus, errorThrown);\n                        }\n                    });\n                }\n\n                mapInit.on('click', function (data) {\n                    mapMarker.setLatLng(data.latlng);\n                    update_latlng(data.latlng);\n                    updateLocationField(data.latlng.lat, data.latlng.lng)\n                });\n\n                mapInit.on('zoom', function () {\n                    update_latlng(mapMarker.getLatLng());\n                });\n\n                mapMarker.on('drag', function () {\n                    update_latlng(mapMarker.getLatLng());\n                });\n\n                mapMarker.on('dragend', function (e) {\n                    let currentLng = e.target._latlng.lng\n                    let currentLat = e.target._latlng.lat\n\n                    updateLocationField(currentLat, currentLng)\n                })\n\n                if (!$search_input.length) {\n                    $search_input = $('[data-depend-id=\"' + $this.find('.tf--address-field').data('address-field') + '\"]');\n                }\n\n\n                var cache = {};\n\n                $search_input.autocomplete({\n                    source: function (request, response) {\n\n                        var term = request.term;\n\n                        if (term in cache) {\n                            response(cache[term]);\n                            return;\n                        }\n\n                        $.get('https://nominatim.openstreetmap.org/search', {\n                            format: 'json',\n                            q: term,\n                        }, function (results) {\n\n                            var data;\n\n                            if (results.length) {\n                                data = results.map(function (item) {\n                                    return {\n                                        value: item.display_name,\n                                        label: item.display_name,\n                                        lat: item.lat,\n                                        lon: item.lon\n                                    };\n                                }, 'json');\n                            } else {\n                                data = [{\n                                    value: 'no-data',\n                                    label: 'No Results.'\n                                }];\n                            }\n\n\n                            cache[term] = data;\n                            response(data);\n\n                        });\n\n                    },\n                    select: function (event, ui) {\n\n                        if (ui.item.value === 'no-data') {\n                            return false;\n                        }\n\n                        var latLng = L.latLng(ui.item.lat, ui.item.lon);\n\n                        mapInit.panTo(latLng);\n                        mapMarker.setLatLng(latLng);\n                        update_latlng(latLng);\n\n                    },\n                    create: function (event, ui) {\n                        $(this).autocomplete('widget').addClass('tf-map-ui-autocomplate');\n                    }\n                });\n\n                var input_update_latlng = function () {\n\n                    var latLng = L.latLng($latitude.val(), $longitude.val());\n\n                    mapInit.panTo(latLng);\n                    mapMarker.setLatLng(latLng);\n\n                };\n\n                $latitude.on('change', input_update_latlng);\n                $longitude.on('change', input_update_latlng);\n\n                setInterval(function () {\n                    mapInit.invalidateSize();\n                }, 100);\n            });\n        }\n\n        $('.tf-mobile-tabs').on(\"click\", function (e) {\n            e.preventDefault();\n            $(\".tf-admin-tab\").toggleClass('active');\n        });\n\n\n        $('.tf-faq-title').on(\"click\", function () {\n            var $this = $(this);\n            if (!$this.hasClass(\"active\")) {\n                $(\".tf-faq-desc\").slideUp(400);\n                $(\".tf-faq-title\").removeClass(\"active\");\n            }\n            $this.toggleClass(\"active\");\n            $this.next().slideToggle();\n        });\n    });\n\n\n})(jQuery);\n\n\n// Field Dependency\n\n(function ($) {\n\n    'use strict';\n\n    function Rule(controller, condition, value) {\n        this.init(controller, condition, value);\n    }\n\n    $.extend(Rule.prototype, {\n\n        init: function (controller, condition, value) {\n\n            this.controller = controller;\n            this.condition = condition;\n            this.value = value;\n            this.rules = [];\n            this.controls = [];\n\n        },\n\n        evalCondition: function (context, control, condition, val1, val2) {\n\n            if (condition == '==') {\n\n                return this.checkBoolean(val1) == this.checkBoolean(val2);\n\n            } else if (condition == '!=') {\n\n                return this.checkBoolean(val1) != this.checkBoolean(val2);\n\n            } else if (condition == '>=') {\n\n                return Number(val2) >= Number(val1);\n\n            } else if (condition == '<=') {\n\n                return Number(val2) <= Number(val1);\n\n            } else if (condition == '>') {\n\n                return Number(val2) > Number(val1);\n\n            } else if (condition == '<') {\n\n                return Number(val2) < Number(val1);\n\n            } else if (condition == '()') {\n\n                return window[val1](context, control, val2);\n\n            } else if (condition == 'any') {\n\n                if ($.isArray(val2)) {\n                    for (var i = val2.length - 1; i >= 0; i--) {\n                        if ($.inArray(val2[i], val1.split(',')) !== -1) {\n                            return true;\n                        }\n                    }\n                } else {\n                    if ($.inArray(val2, val1.split(',')) !== -1) {\n                        return true;\n                    }\n                }\n\n            } else if (condition == 'not-any') {\n\n                if ($.isArray(val2)) {\n                    for (var i = val2.length - 1; i >= 0; i--) {\n                        if ($.inArray(val2[i], val1.split(',')) == -1) {\n                            return true;\n                        }\n                    }\n                } else {\n                    if ($.inArray(val2, val1.split(',')) == -1) {\n                        return true;\n                    }\n                }\n\n            }\n\n            return false;\n\n        },\n\n        checkBoolean: function (value) {\n\n            switch (value) {\n\n                case true:\n                case 'true':\n                case 1:\n                case '1':\n                    value = true;\n                    break;\n\n                case null:\n                case false:\n                case 'false':\n                case 0:\n                case '0':\n                    value = false;\n                    break;\n\n            }\n\n            return value;\n        },\n\n        checkCondition: function (context) {\n\n            if (!this.condition) {\n                return true;\n            }\n\n            var control = context.find(this.controller);\n\n            var control_value = this.getControlValue(context, control);\n\n            if (control_value === undefined) {\n                return false;\n            }\n\n            control_value = this.normalizeValue(control, this.value, control_value);\n\n            return this.evalCondition(context, control, this.condition, this.value, control_value);\n        },\n\n        normalizeValue: function (control, baseValue, control_value) {\n\n            if (typeof baseValue == 'number') {\n                return parseFloat(control_value);\n            }\n\n            return control_value;\n        },\n\n        getControlValue: function (context, control) {\n\n            if (control.length > 1 && (control.attr('type') == 'radio' || control.attr('type') == 'checkbox')) {\n\n                return control.filter(':checked').map(function () {\n                    return this.value;\n                }).get();\n\n            } else if (control.attr('type') == 'checkbox' || control.attr('type') == 'radio') {\n\n                return control.is(':checked');\n\n            }\n\n            return control.val();\n\n        },\n\n        createRule: function (controller, condition, value) {\n            var rule = new Rule(controller, condition, value);\n            this.rules.push(rule);\n            return rule;\n        },\n\n        include: function (input) {\n            this.controls.push(input);\n        },\n\n        applyRule: function (context, enforced) {\n\n            var result;\n\n            if (typeof (enforced) == 'undefined') {\n                result = this.checkCondition(context);\n            } else {\n                result = enforced;\n            }\n\n            var controls = $.map(this.controls, function (elem, idx) {\n                return context.find(elem);\n            });\n\n            if (result) {\n\n                $(controls).each(function () {\n                    $(this).removeClass('tf-depend-on');\n                });\n\n                $(this.rules).each(function () {\n                    this.applyRule(context);\n                });\n\n            } else {\n\n                $(controls).each(function () {\n                    $(this).addClass('tf-depend-on');\n                });\n\n                $(this.rules).each(function () {\n                    this.applyRule(context, false);\n                });\n\n            }\n        }\n    });\n\n    function Ruleset() {\n        this.rules = [];\n    };\n\n    $.extend(Ruleset.prototype, {\n\n        createRule: function (controller, condition, value) {\n            var rule = new Rule(controller, condition, value);\n            this.rules.push(rule);\n            return rule;\n        },\n\n        applyRules: function (context) {\n            $(this.rules).each(function () {\n                this.applyRule(context);\n            });\n        }\n    });\n\n    $.tf_deps = {\n\n        createRuleset: function () {\n            return new Ruleset();\n        },\n\n        enable: function (selection, ruleset, depends) {\n\n            selection.on('change keyup', function (elem) {\n\n                var depend_id = elem.target.getAttribute('data-depend-id') || elem.target.getAttribute('data-sub-depend-id');\n\n                if (depends.indexOf(depend_id) !== -1) {\n                    ruleset.applyRules(selection);\n                }\n\n            });\n\n            ruleset.applyRules(selection);\n\n            return true;\n        }\n    };\n\n})(jQuery);\n\n/*\n* Author @Jahid\n* Report Chart\n*/\n\n(function ($) {\n    $(document).ready(function () {\n        if (tf_options.tf_chart_enable == 1) {\n            var ctx = document.getElementById('tf_months'); // node\n            var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context\n            var ctx = $('#tf_months'); // jQuery instance\n            var ctx = 'tf_months'; // element id\n\n            var chart = new Chart(ctx, {\n                type: 'line',\n                data: {\n                    labels: [\"January\", \"February\", \"March\", \"April\", \"May\", \"June\", \"July\", \"August\", \"September\", \"October\", \"November\", \"December\"],\n                    // Information about the dataset\n                    datasets: [{\n                        label: \"Completed Booking\",\n                        borderColor: '#003C79',\n                        tension: 0.1,\n                        data: tf_options.tf_complete_order,\n                        fill: false\n                    },\n                        {\n                            label: \"Cancelled Booking\",\n                            borderColor: 'red',\n                            tension: 0.1,\n                            data: tf_options.tf_cancel_orders,\n                            fill: false\n                        }\n                    ]\n                },\n\n                // Configuration options\n                options: {\n                    layout: {\n                        padding: 10,\n                    },\n                    legend: {\n                        display: true\n                    },\n                    title: {\n                        display: true,\n                        text: \"\"\n                    }\n                }\n\n            });\n        }\n\n        $(document).on('change', '#tf-month-report', function () {\n            var monthTarget = $(this).val();\n            if (monthTarget != 0) {\n                $(\"#tf-report-loader\").addClass('show');\n                $('.tf-order-report').find('iframe').remove();\n                var yearTarget = $(\"#tf-year-report\").val();\n                jQuery.ajax({\n                    type: 'post',\n                    url: tf_options.ajax_url,\n                    data: {\n                        action: 'tf_month_reports',\n                        _nonce: tf_admin_params.tf_nonce,\n                        month: monthTarget,\n                        year: yearTarget,\n                    },\n                    success: function (data) {\n                        if(!data.success){\n                            $(\"#tf-report-loader\").removeClass('show');\n                            notyf.error(data.data)\n                        } else {\n                            var response = JSON.parse(data);\n                            var ctx = document.getElementById('tf_months'); // node\n                            var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context\n                            var ctx = $('#tf_months'); // jQuery instance\n                            var ctx = 'tf_months'; // element id\n\n                            var chart = new Chart(ctx, {\n                                type: 'line',\n                                data: {\n                                    labels: response.months_day_number,\n                                    // Information about the dataset\n                                    datasets: [{\n                                        label: \"Completed Booking\",\n                                        borderColor: '#003C79',\n                                        tension: 0.1,\n                                        data: response.tf_complete_orders,\n                                        fill: false\n                                    },\n                                        {\n                                            label: \"Cancelled Booking\",\n                                            borderColor: 'red',\n                                            tension: 0.1,\n                                            data: response.tf_cancel_orders,\n                                            fill: false\n                                        }\n                                    ]\n                                },\n\n                                // Configuration options\n                                options: {\n                                    layout: {\n                                        padding: 10,\n                                    },\n                                    legend: {\n                                        display: true\n                                    },\n                                    title: {\n                                        display: true,\n                                        text: response.tf_search_month\n                                    }\n                                }\n\n                            });\n                            $(\"#tf-report-loader\").removeClass('show');\n                        }\n                    }\n                })\n            }\n        });\n\n\n        $(document).on('change', '#tf-year-report', function () {\n            var yearTarget = $(this).val();\n            var monthTarget = $(\"#tf-month-report\").val();\n            if (yearTarget != 0 && monthTarget != 0) {\n                $(\"#tf-report-loader\").addClass('show');\n                $('.tf-order-report').find('iframe').remove();\n                jQuery.ajax({\n                    type: 'post',\n                    url: tf_options.ajax_url,\n                    data: {\n                        action: 'tf_month_reports',\n                        _nonce: tf_admin_params.tf_nonce,\n                        month: monthTarget,\n                        year: yearTarget,\n                    },\n                    success: function (data) {\n                        var response = JSON.parse(data);\n                        var ctx = document.getElementById('tf_months'); // node\n                        var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context\n                        var ctx = $('#tf_months'); // jQuery instance\n                        var ctx = 'tf_months'; // element id\n\n                        var chart = new Chart(ctx, {\n                            type: 'line',\n                            data: {\n                                labels: response.months_day_number,\n                                // Information about the dataset\n                                datasets: [{\n                                    label: \"Completed Booking\",\n                                    borderColor: '#003C79',\n                                    tension: 0.1,\n                                    data: response.tf_complete_orders,\n                                    fill: false\n                                },\n                                    {\n                                        label: \"Cancelled Booking\",\n                                        borderColor: 'red',\n                                        tension: 0.1,\n                                        data: response.tf_cancel_orders,\n                                        fill: false\n                                    }\n                                ]\n                            },\n\n                            // Configuration options\n                            options: {\n                                layout: {\n                                    padding: 10,\n                                },\n                                legend: {\n                                    display: true\n                                },\n                                title: {\n                                    display: true,\n                                    text: response.tf_search_month\n                                }\n                            }\n\n                        });\n                        $(\"#tf-report-loader\").removeClass('show');\n                    }\n                })\n            }\n        });\n\n    });\n})(jQuery);\n\n/**\n * Shortcode generator js\n * @author Abu Hena\n * @since 2.9.3\n */\n(function ($) {\n    //get each of the field value\n    $(document).on('click', '.tf-generate-tour .tf-btn', function (event) {\n        event.preventDefault();\n        var arr = [];\n\n        $(this).parents('.tf-shortcode-generator-single').find(\".tf-sg-field-wrap\").each(function () {\n            var $this = $(this);\n            var data = $this.find('.tf-setting-field').val();\n            var option_name = $this.find('.tf-setting-field').attr('data-term');\n            var post_count = $this.find('.post-count').attr('data-count');\n            var section_title = $this.find('.tf-shortcode-title-field ').attr('data-title');\n            var section_subtitle = $this.find('.tf-shortcode-subtitle-field ').attr('data-subtitle');\n\n            var tour_tab_title = $this.find('.tf-shortcode-tour-tab-title-field ').attr('data-tour-tab-title');\n            var hotel_tab_title = $this.find('.tf-shortcode-hotel-tab-title-field ').attr('data-hotel-tab-title');\n            var apartment_tab_title = $this.find('.tf-shortcode-apartment-tab-title-field ').attr('data-apartment-tab-title');\n            var car_tab_title = $this.find('.tf-shortcode-car-tab-title-field ').attr('data-car-tab-title');\n\n            if (option_name != undefined && option_name != '') {\n                data = option_name + '=' + (data.length ? data : '\"\"');\n            }\n            if (post_count != undefined && post_count != '') {\n                data = post_count + '=' + (data.length ? data : '\"\"');\n            }\n            if (section_title != undefined && section_title != '' && data.length) {\n                data = section_title + '=' + (data.length ? `\"${data}\"` : '\"\"');\n            }\n            if (section_subtitle != undefined && section_subtitle != '' && data.length ) {\n                data = section_subtitle + '=' + (data.length ? `\"${data}\"` : '\"\"');\n            }\n            if (tour_tab_title != undefined && tour_tab_title != '' && data.length) {\n                data = tour_tab_title + '=' + (data.length ? `\"${data}\"` : '\"\"');\n            }\n            if (hotel_tab_title != undefined && hotel_tab_title != '' && data.length ) {\n                data = hotel_tab_title + '=' + (data.length ? `\"${data}\"` : '\"\"');\n            }\n            if (apartment_tab_title != undefined && apartment_tab_title != '' && data.length ) {\n                data = apartment_tab_title + '=' + (data.length ? `\"${data}\"` : '\"\"');\n            }\n            if (car_tab_title != undefined && car_tab_title != '' && data.length ) {\n                data = car_tab_title + '=' + (data.length ? `\"${data}\"` : '\"\"');\n            }\n            arr.push(data);\n        });\n\n        var allData = arr.filter(Boolean);\n        var shortcode = \"[\" + allData.join(' ') + \"]\";\n\n        $(this).parents('.tf-shortcode-generator-single').find('.tf-shortcode-value').val(shortcode);\n        $(this).parents('.tf-shortcode-generator-single').find('.tf-copy-item').slideDown();\n    });\n\n    $(document).on('click', '.tf-sg-close', function (event) {\n        $(this).parents('.tf-shortcode-generators').find('.tf-sg-form-wrapper').fadeOut();\n    });\n\n    $(document).on('click', '.tf-shortcode-btn', function (event) {\n        var $this = $(this);\n        $this.parents('.tf-shortcode-generator-single').find('.tf-sg-form-wrapper').fadeIn();\n\n        $this.parents('.tf-shortcode-generator-single').on(\"mouseup\", function (e) {\n            var container = $(this).find(\".tf-shortcode-generator-form\");\n            var container_parent = container.parent(\".tf-sg-form-wrapper\");\n            if (!container.is(e.target) && container.has(e.target).length === 0) {\n                container_parent.fadeOut();\n            }\n        });\n\n    });\n\n    //Copy the shortcode value\n    $(document).on('click', '.tf-copy-btn', function () {\n        var fieldIdValue = $(this).parent('.tf-shortcode-field').find('#tf-shortcode');\n        if (fieldIdValue) {\n            fieldIdValue.select();\n            document.execCommand(\"copy\");\n        }\n        //show the copied message\n        $(this).parents('.tf-copy-item').append('<div><span class=\"tf-copied-msg\">Copied<span></div>');\n        $(\"span.tf-copied-msg\").animate({opacity: 0}, 1000, function () {\n            $(this).slideUp('slow', function () {\n                $(this).remove();\n            });\n        });\n    });\n    \n    $(document).ready(function () {\n        // $('.tf-import-btn').on('click', function (event) {\n        //     event.preventDefault();\n        //     // Get the import URL from the button's href attribute\n        //     var importUrl = $(this).attr('href');\n        //     // Get the import data from the textarea\n        //     var importData = $('textarea[name=\"tf_import_option\"]').val().trim();\n        //     if (importData == '') {\n        //         alert(tf_options.tf_export_import_msg.import_empty);\n        //         let importField = $('textarea[name=\"tf_import_option\"]');\n        //         importField.focus();\n        //         importField.css('border', '1px solid red');\n        //         return;\n        //     } else {\n        //         //confirm data before send\n        //         if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {\n        //             return;\n        //         }\n        //         $.ajax({\n        //             url: importUrl,\n        //             method: 'POST',\n        //             data: {\n        //                 action: 'tf_import',\n        //                 nonce: tf_admin_params.tf_nonce,\n        //                 tf_import_option: importData,\n        //             },\n        //             beforeSend: function () {\n        //                 $('.tf-import-btn').html('Importing...');\n        //                 $('.tf-import-btn').attr('disabled', 'disabled');\n        //             },\n        //             success: function (response) {\n        //                 if (response.success) {\n        //                     alert(tf_options.tf_export_import_msg.imported);\n        //                     $('.tf-import-btn').html('Imported');\n        //                     window.location.reload();\n        //                 } else {\n        //                     alert('Something went wrong!');\n        //                 }\n        //             }\n        //         });\n        //     }\n        // })\n        $(document).on('click', '.tf-import-btn', function (event) { \n            event.preventDefault();\n            var textarea = $('textarea[name=\"tf_import_option\"]'); \n            var importData = textarea.val().trim();\n            if (importData == '') {\n                alert(tf_options.tf_export_import_msg.import_empty);\n                let importField = $('textarea[name=\"tf_import_option\"]');\n                importField.focus();\n                importField.css('border', '1px solid red');\n                return;\n            } \n            // Triger the form submit\n            $(\".tf-option-form\").submit(); \n        });\n\n        $(document).on('click', '.tf-export-btn', function (event) {\n            event.preventDefault();\n\n            $.ajax({\n                url: tf_options.ajax_url,\n                method: 'POST',\n                data: {\n                    action: 'tf_export_data',\n                    _nonce: tf_admin_params.tf_nonce,\n                },\n                beforeSend: function () {\n                    $('.tf-export-btn').html('Exporting...');\n                    $('.tf-export-btn').attr('disabled', 'disabled');\n                },\n                success: function (response) {\n                    let obj = JSON.parse(response);\n\n                    if (obj.status === 'success') {\n                        // Create a blob with the response value\n                        var blob = new Blob([obj.data], {type: 'text/plain'});\n\n                        // Create a temporary URL for the blob\n                        var url = window.URL.createObjectURL(blob);\n\n                        // Create a temporary link element\n                        var link = document.createElement('a');\n                        link.href = url;\n                        link.download = 'tf-settings-export.json';\n\n                        // Programmatically click the link to initiate the file download\n                        link.click();\n\n                        // Clean up the temporary URL\n                        window.URL.revokeObjectURL(url);\n                    } else {\n                        notyf.error(obj.message);\n                    }\n                    $('.tf-export-btn').html('Export');\n                    $('.tf-export-btn').removeAttr('disabled');\n                },\n                error: function (response) {\n                    console.log(response);\n                    $('.tf-export-btn').html('Export');\n                    $('.tf-export-btn').removeAttr('disabled');\n                }\n            });\n\n\n        });\n\n        // Select 2 add new category\n        $(document).on('click', '.tf-add-category i', function (event) { \n            event.preventDefault();\n            $this = $(this);\n            parentDiv = $this.closest('.tf-fieldset');\n            parentDiv.children('#tf-popup-box').css('display', 'flex');\n        });\n\n        // Close Popup\n        $(document).on('click', '.tf-add-category-box-close', function (event) { \n            event.preventDefault();\n            $('#tf-popup-box').hide();\n        });\n\n    });\n\n\n    /*\n    * Author @Jahid\n    * Color Palatte Change\n    */\n    jQuery(document).ready(function ($) {\n\n        // Function to get the selected design\n        function getSelectedDesign() {\n            return $('input[name=\"tf_settings\\\\[color-palette-template\\\\]\"]:checked').val();\n        }\n        \n        const designDefault = {\n            'd1': {\n                brand: {\n                    default: '#0E3DD8',\n                    dark: '#0A2B99',\n                    lite: '#C9D4F7',\n                },\n                text: {\n                    heading: '#1C2130',\n                    paragraph: '#494D59',\n                    lite: '#F3F5FD',\n                },\n                border: {\n                    default: '#16275F',\n                    lite: '#D1D7EE',\n                },\n                filling: {\n                    background: '#ffffff',\n                    foreground: '#F5F7FF',\n                },\n            },\n            'd2': {\n                brand: {\n                    default: '#B58E53',\n                    dark: '#917242',\n                    lite: '#FAEEDC',\n                },\n                text: {\n                    heading: '#30281C',\n                    paragraph: '#595349',\n                    lite: '#FDF9F3',\n                },\n                border: {\n                    default: '#5F4216',\n                    lite: '#EEE2D1',\n                },\n                filling: {\n                    background: '#ffffff',\n                    foreground: '#FDF9F3',\n                },\n            },\n            'd3': {\n                brand: {\n                    default: '#F97415',\n                    dark: '#C75605',\n                    lite: '#FDDCC3',\n                },\n                text: {\n                    heading: '#30241C',\n                    paragraph: '#595049',\n                    lite: '#FDF7F3',\n                },\n                border: {\n                    default: '#5F3416',\n                    lite: '#EEDDD1',\n                },\n                filling: {\n                    background: '#ffffff',\n                    foreground: '#FFF9F5',\n                },\n            },\n            'd4': {\n                brand: {\n                    default: '#003061',\n                    dark: '#002952',\n                    lite: '#C2E0FF',\n                },\n                text: {\n                    heading: '#1C2630',\n                    paragraph: '#495159',\n                    lite: '#F3F8FD',\n                },\n                border: {\n                    default: '#163A5F',\n                    lite: '#D1DFEE',\n                },\n                filling: {\n                    background: '#ffffff',\n                    foreground: '#F5FAFF',\n                },\n            },\n        };\n    \n        // Function to update custom colors based on the selected design\n        function updateCustomColors(selectedDesign) {\n            if (!selectedDesign) return;\n    \n            const colorPalettes = {\n                'design-1': 'tf-d1',\n                'design-2': 'tf-d2',\n                'design-3': 'tf-d3',\n                'design-4': 'tf-d4'\n            };\n    \n            const selectedPalette = colorPalettes[selectedDesign];\n            if (!selectedPalette) return;\n    \n            // Define the fields to be updated\n            const fields = ['brand', 'text', 'border', 'filling'];\n    \n            fields.forEach(field => {\n                $(`input[name^=\"tf_settings[${selectedPalette}-${field}]\"]`).each(function () {\n                    let fieldName = $(this).attr('name').split('[')[2].replace(']', ''); // Extract the sub-field (e.g., 'default', 'dark', 'lite')\n                    let fieldValue = $(this).val();\n                    let $customField = $(`input[name=\"tf_settings[tf-custom-${field}][${fieldName}]\"]`);\n\n                    if ($customField.length) {\n                        $customField.val(fieldValue).trigger('change');\n                    }\n                });\n            });\n        }     \n    \n        // Initialize wpColorPicker for all relevant inputs\n        $('input[name^=\"tf_settings[tf-d\"]').wpColorPicker({\n            change: function (event, ui) {\n                let $colorField = $(event.target);\n                let originalValue = $colorField.val();\n                let newValue = ui.color.toString();\n\n                updateCustomColors(getSelectedDesign());\n    \n                if (newValue !== originalValue) {\n                    // Switch to custom palette\n                    $('#tf_settings\\\\[color-palette-template\\\\]\\\\[custom\\\\]').prop(\"checked\", true);\n                    $('.tf-field.tf-field-color.tf-depend-hidden').addClass('tf-depend-on');\n                    $('.tf-field.tf-field-color.tf-depend-hidden[data-value=\"custom\"]').removeClass('tf-depend-on');\n    \n                    // Extract the field type and sub-field name\n                    let nameAttr = $colorField.attr('name');\n                    let match = nameAttr.match(/\\[tf-(d\\d+)-(brand|text|border|filling)]\\[(.*?)\\]/);\n                    if (!match) return;\n    \n                    let design = match[1]; // e.g., 'd1', 'd2', etc.\n                    let fieldType = match[2]; // e.g., 'brand', 'text', etc.\n                    let fieldName = match[3]; // e.g., 'default', 'dark', 'lite', etc.\n    \n                    // Update the corresponding custom field\n                    let $customColorField = $(`input[name=\"tf_settings[tf-custom-${fieldType}][${fieldName}]\"]`);\n                    if ($customColorField.length) {\n                        \n                        let value = $(`input[name=\"tf_settings[tf-${design}-${fieldType}][${fieldName}]\"]`).val();\n                        $(`input[name=\"tf_settings[tf-custom-${fieldType}][${fieldName}]\"]`).val(value).trigger('change');\n                        $(`input[name=\"tf_settings[tf-${design}-${fieldType}][${fieldName}]\"]`).val(designDefault[design][fieldType][fieldName]).trigger('change');\n                        $customColorField.val(newValue).trigger('change');\n                    }\n                }\n            }\n        });\n    });\n    \n    /* Plugin insatall from dashboard sidebar */\n    jQuery(document).ready(function($) {\n        $('.tf-plugin-button').not('.pro').on('click', function(e) {\n            e.preventDefault();\n\n            let button = $(this);\n            let action = button.data('action');\n            let pluginSlug = button.data('plugin');\n            let pluginFileName = button.data('plugin_filename');\n\n            if (!action || !pluginSlug) return;\n\n            let loader = button.find('.loader');\n            let originalText = button.clone().children().remove().end().text().trim();\n\n            if (action === 'install') {\n                button.contents().first().replaceWith('Installing..');\n            } else if (action === 'activate') {\n                button.contents().first().replaceWith('Activating..');\n            }\n\n            button.addClass('loading').prop('disabled', true);\n            loader.show();\n\n            $.ajax({\n                url: ajaxurl,\n                type: 'POST',\n                data: {\n                    action: 'themefic_manage_plugin',\n                    security: tf_admin_params.tf_nonce,\n                    plugin_slug: pluginSlug,\n                    plugin_filename: pluginFileName,\n                    plugin_action: action\n                },\n                success: function(response) {\n                    button.removeClass('loading').prop('disabled', false);\n                    loader.hide();\n\n                    if (response.success) {\n                        if (action === 'install') {\n                            button.contents().first().replaceWith('Activate');\n                            button.data('action', 'activate').removeClass('install').addClass('activate');\n                        } else if (action === 'activate') {\n                            button.replaceWith('<span class=\"tf-plugin-button tf-plugin-status active\">Activated</span>');\n                        }\n                    } else {\n                        button.contents().first().replaceWith(originalText);\n                        alert('Error: ' + response.data);\n                    }\n                },\n                error: function() {\n                    button.contents().first().replaceWith(originalText).removeClass('loading').prop('disabled', false);\n                    loader.hide();\n                    alert('An error occurred. Please try again.');\n                }\n            });\n        });\n    });\n})(jQuery);\n\n//# sourceURL=webpack://tourfic/./sass/admin/js/free/tf-options.js?");
+        $(document).on('click', '.tf-field-pro', function (e) {
+            e.preventDefault();
+            window.open('https://tourfic.com/');
+        });
 
-/***/ })
+        /**
+         * Generate & set unique id for hotel rooms
+         */
+        $(document).on('click', '.room-repeater > div.csf-fieldset > a.csf-repeater-add', function (e) {
 
-/******/ 	});
-/************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	__webpack_modules__["./sass/admin/js/free/admin.js"]();
-/******/ 	__webpack_modules__["./sass/admin/js/free/backend-booking.js"]();
-/******/ 	__webpack_modules__["./sass/admin/js/free/booking-details.js"]();
-/******/ 	__webpack_modules__["./sass/admin/js/free/enquiry-details.js"]();
-/******/ 	__webpack_modules__["./sass/admin/js/free/required-taxonomies-gutenberg.js"]();
-/******/ 	__webpack_modules__["./sass/admin/js/free/required-taxonomies.js"]();
-/******/ 	__webpack_modules__["./sass/admin/js/free/setup-wizard.js"]();
-/******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./sass/admin/js/free/tf-options.js"]();
-/******/ 	
+            var repeaterNumber = $('.room-repeater .csf-repeater-wrapper [data-depend-id="room"]').length - 2;
+
+            $('.room-repeater .unique-id input').each(function () {
+                repeaterNumber++;
+                if ($('.room-repeater [data-depend-id="room"] [data-depend-id="unique_id"]').val().length === 0) {
+                    $('.room-repeater [name="tf_hotel[room][' + repeaterNumber + '][unique_id]"]').val(new Date().valueOf() + repeaterNumber);
+                }
+            });
+
+        });
+
+        //documentation link open in new tab
+        $('.tf-go-docs').parent().attr('target', '_blank');
+
+        /*
+        * Author @Jahid
+        * Tour Booking Status
+        */
+
+        $('.tf-ticket-status').on("click", function () {
+            if ($(this).is(':checked')) {
+                var order_unique_id = $(this).val();
+                $("#tf-booking-status-loader").addClass('show');
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_ticket_status_change',
+                        _ajax_nonce: tf_admin_params.tf_nonce,
+                        status: "check in",
+                        order_unique_id: order_unique_id,
+                    },
+                    success: function (data) {
+                        $("#tf-booking-status-loader").removeClass('show');
+                    }
+                });
+            } else {
+                var order_unique_id = $(this).val();
+                $("#tf-booking-status-loader").addClass('show');
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_ticket_status_change',
+                        _ajax_nonce: tf_admin_params.tf_nonce,
+                        status: "",
+                        order_unique_id: order_unique_id,
+                    },
+                    success: function (data) {
+                        $("#tf-booking-status-loader").removeClass('show');
+                    }
+                });
+            }
+        });
+
+        /*
+        * active tourfic affiliate plugin
+        */
+        $(document).on('click', '.tf-affiliate-active', function(e) {
+            e.preventDefault();
+
+            var btn = $(this);
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_affiliate_active',
+                    nonce: tf_admin_params.tf_nonce,
+                },
+                beforeSend: function (data) {
+                    btn.addClass('tf-btn-loading').css({'pointer-events': 'none'});
+                },
+                success: function (data) {
+                    let response = JSON.parse(data);
+                    if( response.status === 'success' ) {
+                        notyf.success(response.message);
+
+                        setTimeout(function() {
+                            location.reload();
+                        }, 500);
+                    }
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                },
+                error: function (data) {
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                },
+                complete: function (data) {
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                }
+            })
+        });
+
+        /*
+        * install tourfic affiliate plugin
+        */
+        $(document).on('click', '.tf-affiliate-install', function(e) {
+            e.preventDefault();
+
+            var btn = $(this);
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_affiliate_install',
+                    nonce: tf_admin_params.tf_nonce,
+                },
+                beforeSend: function (data) {
+                    btn.addClass('tf-btn-loading').css({'pointer-events': 'none'});
+                },
+                success: function (data) {
+                    let response = JSON.parse(data);
+                    if( response.status === 'success' ) {
+                        location.reload();
+                    }
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                },
+                error: function (data) {
+                    btn.removeClass('tf-btn-loading').css({'pointer-events': 'auto'});
+                }
+            })
+        });
+
+        /*
+        * Author @Jahid
+        * Hotel, Tour, Apartment Duplicator
+        */
+       
+        $('.tf-post-data-duplicate').on('click', function(e) {
+            e.preventDefault();
+            var postID = $(this).data('postid');
+            var postType = $(this).data('posttype');
+            var nonce = $(this).data('nonce');
+            $('#wpcontent').append('<div class="tf-duplicator-loader"></div>');
+            // AJAX request to duplicate post
+            $.ajax({
+                type: 'POST',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_duplicate_post_data',
+                    postID: postID,
+                    postType: postType,
+                    security: nonce
+                },
+                success: function(response) {
+                    window.location.reload();
+                },
+                error: function(errorThrown) {
+                    // Handle errors (if any)
+                    console.error('Error duplicating post:', errorThrown);
+                }
+            });
+        });
+
+    });
+
+})(jQuery);
+})();
+
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+(() => {
+(function ($) {
+    $(document).ready(function () {
+
+        // Create an instance of Notyf
+        const notyf = new Notyf({
+            ripple: true,
+            duration: 3000,
+            dismissable: true,
+            position: {
+                x: 'right',
+                y: 'bottom',
+            },
+        });
+
+        const alert_popup = {
+            success: function (message) {
+                $.confirm({
+                    icon: 'fa fa-check',
+                    theme: 'modern',
+                    title: 'Success!',
+                    content: message,
+                    type: 'green',
+                    animat6ionSpeed: 300,
+                    animation: 'scale',
+                    closeAnimation: 'scale',
+                    animateFromElement: false,
+                    typeAnimated: true,
+                    boxWidth: '500px',
+                    useBootstrap: false,
+                    closeIcon: true,
+                    buttons: {
+                        OK: {
+                            btnClass: 'btn-blue',
+                        }
+                    }
+                })
+            },
+
+            error: function (message) { 
+                $.confirm({
+                    icon: 'fa fa-times',
+                    theme: 'modern',
+                    title: 'Error!',
+                    content: message,
+                    type: 'red',
+                    typeAnimated: true,
+                    animationSpeed: 300,
+                    animation: 'scale',
+                    closeAnimation: 'scale',
+                    animateFromElement: false,
+                    boxWidth: '500px',
+                    useBootstrap: false,
+                    closeIcon: true,
+                    buttons: {
+                        OK: {
+                            btnClass: 'btn-red',
+                        }
+                    }
+                })
+            }
+        }
+
+        /*
+        * Check available hotel room from date to date
+        * Author @Foysal
+        */
+        $(document).on('change', '[name="tf_hotel_date[from]"], [name="tf_hotel_date[to]"]', function (e) {
+            e.preventDefault();
+
+            var from = $('[name="tf_hotel_date[from]"]').val();
+            var to = $('[name="tf_hotel_date[to]"]').val();
+
+            if (from.length > 0 && to.length > 0) {
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_check_available_hotel',
+                        _nonce: tf_admin_params.tf_nonce,
+                        from: from,
+                        to: to,
+                    },
+                    beforeSend: function () {
+                        $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
+                    },
+                    success: function (response) {
+                        if(!response.success){
+                            notyf.error(response.data)
+                        } else {
+                            var select2 = $('[name="tf_available_hotels"]');
+                            select2.empty();
+                            select2.append('<option value="">' + tf_admin_params.select_hotel + '</option>');
+                            $.each(response.data.hotels, function (key, value) {
+                                select2.append('<option value="' + key + '">' + value + '</option>');
+                            });
+                            select2.select2();
+                            //select the first option
+                            select2.val(select2.find('option:eq(1)').val()).trigger('change');
+                            $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                            $('[name="tf_hotel_rooms_number"]').removeAttr('disabled');
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    },
+                    complete: function (response) {
+                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                    }
+                });
+            }
+        });
+
+        /*
+        * Room filter on hotel change
+        * Author @Foysal
+        */
+        $(document).on('change', '[name="tf_available_hotels"]', function (e) {
+            e.preventDefault();
+
+            var hotel_id = $('[name="tf_available_hotels"]').val();
+            var from = $('[name="tf_hotel_date[from]"]').val();
+            var to = $('[name="tf_hotel_date[to]"]').val();
+
+            if (hotel_id.length > 0) {
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_check_available_room',
+                        _nonce: tf_admin_params.tf_nonce,
+                        hotel_id: hotel_id,
+                        from: from,
+                        to: to,
+                    },
+                    beforeSend: function () {
+                        $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
+                    },
+                    success: function (response) {
+                        if(!response.success){
+                            notyf.error(response.data)
+                        } else {
+                            var select2 = $('[name="tf_available_rooms"]');
+                            var serviceSelect = $('[name="tf_hotel_service_type"]');
+
+                            select2.removeAttr('disabled');
+                            select2.empty();
+                            select2.append('<option value="">' + tf_admin_params.select_room + '</option>');
+                            $.each(response.data.rooms, function (key, value) {
+                                select2.append('<option value="' + key + '">' + value + '</option>');
+                            });
+                            select2.select2();
+                            //auto select the first option
+                            select2.val(select2.find('option:eq(1)').val()).trigger('change');
+
+                            //service type select
+                            serviceSelect.empty();
+                            $.each(response.data.services, function (key, value) {
+                                serviceSelect.append('<option value="' + key + '">' + value + '</option>');
+                            });
+
+                            $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    },
+                    complete: function (response) {
+                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                    }
+                });
+            }
+        });
+
+        /*
+        * Room adults, children, infants fields update on room change
+        * Author @Foysal
+        */
+        $(document).on('change', '[name="tf_available_rooms"]', function (e) {
+            e.preventDefault();
+
+            let hotel_id = $('[name="tf_available_hotels"]').val();
+            let room_id = $('[name="tf_available_rooms"]').val();
+            var from = $('[name="tf_hotel_date[from]"]').val();
+            var to = $('[name="tf_hotel_date[to]"]').val();
+
+            if (room_id.length > 0) {
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_update_room_fields',
+                        _nonce: tf_admin_params.tf_nonce,
+                        hotel_id: hotel_id,
+                        room_id: room_id,
+                        from: from,
+                        to: to,
+                    },
+                    beforeSend: function () {
+                        $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
+                    },
+                    success: function (response) {
+                        if(!response.success){
+                            notyf.error(response.data)
+                        } else {
+                            var select = $('[name="tf_hotel_rooms_number"]');
+                            select.empty();
+                            
+                            if(response.data.rooms > 0 ){
+                                for (var i = 1; i <= response.data.rooms; i++) {
+                                    if (i === 1) {
+                                        select.append('<option value="' + i + '" selected>' + i + ' Room</option>');
+                                    } else {
+                                        select.append('<option value="' + i + '">' + i + ' Rooms</option>');
+                                    }
+                                }
+                                
+                                $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                            } else {
+                                select.append('<option value="" selected>No Room Available</option>');
+                                select.attr('disabled', 'disabled');
+                            }
+
+                            $('[name="tf_hotel_adults_number"]').val(response.data.adults).attr('max', response.data.adults * response.data.rooms);
+                            $('[name="tf_hotel_children_number"]').val(response.data.children).attr('max', response.data.children * response.data.rooms);
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                    },
+                });
+            }
+        });
+
+        /*
+        * Backend Hotel Booking
+        * Author @Foysal
+        */
+        $(document).on('click', '#tf-backend-hotel-book-btn', function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let form = btn.closest('form.tf-backend-hotel-booking');
+            let formData = new FormData(form[0]);
+            formData.append('action', 'tf_backend_hotel_booking');
+            let requiredFields = [
+                'tf_hotel_booked_by', 'tf_customer_first_name', 'tf_customer_email', 'tf_customer_phone', 'tf_customer_country', 'tf_customer_address', 'tf_customer_city', 'tf_customer_state', 'tf_customer_zip', 'tf_hotel_date[from]', 'tf_hotel_date[to]', 'tf_available_hotels', 'tf_available_rooms', 'tf_hotel_rooms_number', 'tf_hotel_adults_number', 'tf_hotel_children_number'];
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (response) {
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    const obj = JSON.parse(response);
+                    if (!obj.success) {
+                        if (obj.message) {
+                            alert_popup.error(obj.message);
+
+                            form.find('input').removeClass('error-input');
+                            form.find('select').removeClass('error-input');
+                            form.find('textarea').removeClass('error-input');
+                            form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
+                            form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
+                            form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
+                        } else {
+
+                            for (const requiredField of requiredFields) {
+                                const errorField = obj['fieldErrors'][requiredField + '_error'];
+
+                                form.find('[name="' + requiredField + '"]').removeClass('error-input');
+                                if (requiredField === 'tf_hotel_date[from]') {
+                                    form.find('[name="' + requiredField + '"]').closest('.tf-date-from').find('small.text-danger').remove();
+                                } else if (requiredField === 'tf_hotel_date[to]') {
+                                    form.find('[name="' + requiredField + '"]').closest('.tf-date-to').find('small.text-danger').remove();
+                                } else {
+                                    form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').find('small.text-danger').remove();
+                                }
+                                if (errorField) {
+                                    form.find('[name="' + requiredField + '"]').addClass('error-input');
+                                    if (requiredField === 'tf_hotel_date[from]') {
+                                        form.find('[name="' + requiredField + '"]').closest('.tf-date-from').append('<small class="text-danger">' + errorField + '</small>');
+                                    } else if (requiredField === 'tf_hotel_date[to]') {
+                                        form.find('[name="' + requiredField + '"]').closest('.tf-date-to').append('<small class="text-danger">' + errorField + '</small>');
+                                    } else {
+                                        form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').append('<small class="text-danger">' + errorField + '</small>');
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        alert_popup.success(obj.message)
+
+                        alert_popup.success(obj.message)
+
+                        form[0].reset();
+                        form.find('input').removeClass('error-input');
+                        form.find('select').removeClass('error-input');
+                        form.find('textarea').removeClass('error-input');
+                        form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
+                    }
+                    btn.removeClass('tf-btn-loading');
+                },
+                error: function (response) {
+                    console.log(response);
+                },
+                complete: function (response) {
+                    btn.removeClass('tf-btn-loading');
+                }
+            })
+
+        });
+
+        /*
+        * Tour time and extra fields update
+        * Author @Foysal
+        */
+        $(document).on('change', '[name="tf_available_tours"]', function (e) {
+            e.preventDefault();
+
+            var tourId = $('[name="tf_available_tours"]').val();
+
+            if (tourId) {
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_tour_date_time_update',
+                        _nonce: tf_admin_params.tf_nonce,
+                        tour_id: tourId,
+                    },
+                    beforeSend: function () {
+                        $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
+                    },
+                    success: function (response) {
+                        if(response){
+                            const obj = JSON.parse(response);
+
+                            let flatpickerObj = {
+                                enableTime: false,
+                                dateFormat: "Y/m/d",
+                            };
+
+                            if (obj.tour_availability) {
+                                flatpickerObj.minDate = "today";
+                                flatpickerObj.disableMobile = "true";
+                                flatpickerObj.enable = Object.entries(obj.tour_availability)
+                                .filter(([dateRange, data]) => data.status === "available")
+                                .map(([dateRange, data]) => {
+                                    const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
+                    
+                                    const today = new Date();
+                                    const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+                                    let fromDate = fromRaw;
+                    
+                                    return {
+                                        from: fromDate,
+                                        to: toRaw
+                                    };
+                                });
+                            }
+
+                            if(obj.tour_packages_array){
+                                populatePackageSelect(obj.tour_packages_array);
+                            }
+
+                            flatpickerObj.onChange = function (selectedDates, dateStr, instance) {
+                                // Initialize empty object for times
+                                let times = {};
+                                const selectedDate = selectedDates[0];
+                                const timestamp = selectedDate.getTime();
+
+                                const tourAvailability = obj.tour_availability;
+
+                                for (const key in tourAvailability) {
+                                    const availability = tourAvailability[key];
+
+                                    if (availability.status !== 'available') continue;
+
+                                    const from = new Date(availability.check_in.trim()).getTime();
+                                    const to   = new Date(availability.check_out.trim()).getTime();
+
+                                    if (timestamp >= from && timestamp <= to) {
+                                        const allowedTime = availability.allowed_time?.time || [];
+
+                                        if (Array.isArray(allowedTime)) {
+                                            allowedTime.forEach((t) => {
+                                                if (t && t.trim() !== '') {
+                                                    times[t] = t;
+                                                }
+                                            });
+                                        } else if (typeof allowedTime === 'object' && allowedTime !== null) {
+                                            Object.values(allowedTime).forEach((t) => {
+                                                if (t && t.trim() !== '') {
+                                                    times[t] = t;
+                                                }
+                                            });
+                                        }
+
+                                        break; // stop after first match
+                                    }
+                                }
+
+                                populateTimeSelect(times);
+                                
+                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                            }
+
+                            $("[name='tf_tour_date']").flatpickr(flatpickerObj);
+
+                            if (obj.tour_extras_array && Object.keys(obj.tour_extras_array).length > 0) {
+                                let extras = $('[name="tf_tour_extras[]"]');
+                                extras.removeAttr('disabled');
+                                extras.empty();
+                            
+                                $.each(obj.tour_extras_array, function (key, value) {
+                                    extras.append($('<option>', {
+                                        value: key,
+                                        html: value // Use html to parse entities like &#36;
+                                    }));
+                                });
+                            
+                                extras.select2();
+                            } else {
+                                let extras = $('[name="tf_tour_extras[]"]');
+                                extras.empty().attr('disabled', 'disabled');
+                            }
+
+                            $('#tf-backend-hotel-book-btn').removeAttr('disabled');
+                        }
+                    }
+                });
+            }
+        });
+
+        function populatePackageSelect(packages) {
+            let packSelect = $('[name="tf_tour_packages"]');
+            packSelect.empty();
+
+            if (Object.keys(packages).length > 0) {
+                // Use the keys and values from the object to populate the options
+                $.each(packages, function (key, value) {
+                    packSelect.append(`<option value="${key}">${value}</option>`);
+                });
+            } else {
+                packSelect.append(`<option value="" selected>No Package Available</option>`);
+                packSelect.attr('disabled', 'disabled');
+            }
+
+        }
+
+        function populateTimeSelect(times) {
+            let timeSelect = $('[name="tf_tour_time"]');
+            timeSelect.empty();
+
+            if (Object.keys(times).length > 0) {
+                // Use the keys and values from the object to populate the options
+                $.each(times, function (key, value) {
+                    timeSelect.append(`<option value="${key}">${value}</option>`);
+                });
+            } else {
+                timeSelect.append(`<option value="" selected>No Time Available</option>`);
+                timeSelect.attr('disabled', 'disabled');
+            }
+
+        }
+
+        /*
+        * Backend Tour Booking
+        * Author @Foysal
+        */
+        $(document).on('click', '#tf-backend-tour-book-btn', function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let form = btn.closest('form.tf-backend-tour-booking');
+            let formData = new FormData(form[0]);
+            formData.append('action', 'tf_backend_tour_booking');
+            let requiredFields = ['tf_tours_booked_by', 'tf_customer_first_name', 'tf_customer_email', 'tf_customer_phone', 'tf_customer_country', 'tf_customer_address', 'tf_customer_city', 'tf_customer_state', 'tf_customer_zip', 'tf_tour_date', 'tf_available_tours', 'tf_tour_adults_number', 'tf_tour_children_number'];
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (response) {
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    const obj = JSON.parse(response);
+                    if (!obj.success) {
+                        alert_popup.error(obj.message)
+
+                        if (obj.errors) {
+                            obj.errors.forEach(function (text) {
+                                notyf.error(text);
+                            });
+                        }
+
+                        form.find('input').removeClass('error-input');
+                        form.find('select').removeClass('error-input');
+                        form.find('textarea').removeClass('error-input');
+                        form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
+
+                        if (obj['fieldErrors']) {
+                            for (const requiredField of requiredFields) {
+                                const errorField = obj['fieldErrors'][requiredField + '_error'];
+
+                                form.find('[name="' + requiredField + '"]').removeClass('error-input');
+                                form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').find('small.text-danger').remove();
+                                if (errorField) {
+                                    form.find('[name="' + requiredField + '"]').addClass('error-input');
+                                    form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').append('<small class="text-danger">' + errorField + '</small>');
+                                }
+                            }
+                        }
+                    } else {
+                        alert_popup.success(obj.message)
+
+                        form[0].reset();
+                        form.find('input').removeClass('error-input');
+                        form.find('select').removeClass('error-input');
+                        form.find('textarea').removeClass('error-input');
+                        form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
+                    }
+                    btn.removeClass('tf-btn-loading');
+                },
+            })
+
+        });
+
+        /**
+         * Backend Apartments Booking
+        */
+        
+        // Chekck Available Apartment by Date
+
+        $(document).on('change', '[name="tf_apartment_date[from]"], [name="tf_apartment_date[to]"]', function (e) {
+            e.preventDefault();
+
+            var fromValue = $('[name="tf_apartment_date[from]"]').val();
+            var toValue = $('[name="tf_apartment_date[to]"]').val();
+            var apartment_id = $('[name="tf_available_apartments"]').val()
+
+            if (fromValue.length > 0 && toValue.length > 0) {
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_check_available_apartment',
+                        _nonce: tf_admin_params.tf_nonce,
+                        from: fromValue,
+                        to: toValue,
+                        apartment_id: apartment_id
+                    },
+                    beforeSend: function () {
+                        $('#tf-backend-apartment-book-btn').attr('disabled', 'disabled');
+                    },
+                    success: function (response) {
+                        if(!response.success){
+                            notyf.error(response.data)
+                        } else {
+                            var select2 = $('[name="tf_available_apartments"]');
+                            select2.empty();
+                            select2.append('<option value="">' + 'Select Apartment' + '</option>');
+                            $.each(response.data.apartments, function (key, value) {
+                                select2.append('<option value="' + key + '">' + value + '</option>');
+                            });
+                            // select2.select2();
+
+                            //select the first option
+                            select2.val(select2.find('option:eq(1)').val()).trigger('change');
+                            $('#tf-backend-apartment-book-btn').removeAttr('disabled');
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    },
+                    complete: function (response) {
+                        $('#tf-backend-apartment-book-btn').removeAttr('disabled');
+                    }
+                });
+            }
+        })
+        
+        // Available Additional Fees
+
+        $(document).on('change', '[name="tf_available_apartments"]', function (e) {
+            e.preventDefault();
+
+            var apartment_id = $('[name="tf_available_apartments"]').val();
+            var from = $('[name="tf_apartment_date[from]"]').val();
+            var to = $('[name="tf_apartment_date[to]"]').val();
+
+            if (apartment_id.length > 0) {
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_check_apartment_aditional_fees',
+                        _nonce: tf_admin_params.tf_nonce,
+                        apartment_id: apartment_id,
+                        from: from,
+                        to: to,
+                    },
+                    beforeSend: function () {
+                        $('#tf-backend-apartment-book-btn').attr('disabled', 'disabled');
+                    },
+                    success: function (response) {
+                        if(!response.success){
+                            notyf.error(response.data)
+                        } else {
+                            var serviceSelect = $('[name="tf_apartment_additional_fees"]');
+
+                            serviceSelect.select2({multiple: true});
+
+                            //Additional fees auto selection
+                            serviceSelect.empty();
+
+                            if (response.data.additional_fees.length > 0) {
+                                $.each(response.data.additional_fees, function (key, value) {
+                                    serviceSelect.append('<option value="' + key + '">' + value.label + ' - ' + value.price + '</option>');
+                                });
+                            } else {
+                                serviceSelect.append('<option value="' + 1 + '">' + 'There are no additional fees' + '</option>');
+                            }
+
+                            serviceSelect.find('option').prop('selected', true).trigger('change');
+
+                            $('#tf-backend-apartment-book-btn').removeAttr('disabled');
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    },
+                    complete: function (response) {
+                        $('#tf-backend-apartment-book-btn').removeAttr('disabled');
+                    }
+                });
+            }
+        });
+
+        /*
+        * Backend Apartment Booking
+        */
+        $(document).on('click', '#tf-backend-apartment-book-btn', function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let form = btn.closest('form.tf-backend-apartment-booking');
+            let formData = new FormData(form[0]);
+            formData.append('action', 'tf_backend_apartment_booking');
+            let requiredFields = [
+                'tf_apartment_booked_by',
+                'tf_customer_first_name',
+                'tf_customer_email',
+                'tf_customer_phone',
+                'tf_customer_country',
+                'tf_customer_address',
+                'tf_customer_city',
+                'tf_customer_state',
+                'tf_customer_zip',
+                'tf_apartment_date[from]',
+                'tf_apartment_date[to]',
+                'tf_available_apartments',
+                'tf_apartment_adults_number',
+                'tf_apartment_children_number',
+                'tf_apartment_infant_number',
+            ];
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (response) {
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    const obj = JSON.parse(response);
+                    if (!obj.success) {
+                        if (obj.message) {
+                            alert_popup.error(obj.message)
+
+                            form.find('input').removeClass('error-input');
+                            form.find('select').removeClass('error-input');
+                            form.find('textarea').removeClass('error-input');
+                            form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
+                            form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
+                            form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
+                        } else {
+
+                            for (const requiredField of requiredFields) {
+                                const errorField = obj['fieldErrors'][requiredField + '_error'];
+
+                                form.find('[name="' + requiredField + '"]').removeClass('error-input');
+                                if (requiredField === 'tf_apartment_date[from]') {
+                                    form.find('[name="' + requiredField + '"]').closest('.tf-date-from').find('small.text-danger').remove();
+                                } else if (requiredField === 'tf_apartment_date[to]') {
+                                    form.find('[name="' + requiredField + '"]').closest('.tf-date-to').find('small.text-danger').remove();
+                                } else {
+                                    form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').find('small.text-danger').remove();
+                                }
+                                if (errorField) {
+                                    form.find('[name="' + requiredField + '"]').addClass('error-input');
+                                    if (requiredField === 'tf_apartment_date[from]') {
+                                        form.find('[name="' + requiredField + '"]').closest('.tf-date-from').append('<small class="text-danger">' + errorField + '</small>');
+                                    } else if (requiredField === 'tf_apartment_date[to]') {
+                                        form.find('[name="' + requiredField + '"]').closest('.tf-date-to').append('<small class="text-danger">' + errorField + '</small>');
+                                    } else {
+                                        form.find('[name="' + requiredField + '"]').closest('.tf-fieldset').append('<small class="text-danger">' + errorField + '</small>');
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        alert_popup.success(obj.message)
+
+                        form[0].reset();
+                        form.find('input').removeClass('error-input');
+                        form.find('select').removeClass('error-input');
+                        form.find('textarea').removeClass('error-input');
+                        form.find('input').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('select').closest('.tf-fieldset').find('small.text-danger').remove();
+                        form.find('textarea').closest('.tf-fieldset').find('small.text-danger').remove();
+                    }
+                    btn.removeClass('tf-btn-loading');
+                },
+                error: function (response) {
+                    console.log(response);
+                },
+                complete: function (response) {
+                    btn.removeClass('tf-btn-loading');
+                }
+            })
+        });
+    });
+
+})(jQuery);
+})();
+
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+(() => {
+(function ($) {
+    $(document).ready(function () {
+
+        // Create an instance of Notyf
+        const notyf = new Notyf({
+            ripple: true,
+            duration: 3000,
+            dismissable: true,
+            position: {
+                x: 'right',
+                y: 'bottom',
+            },
+        });
+
+        // Select Form
+        $('.tf-filter-selection').on("click", function() {
+            $(this).toggleClass('active');
+        });
+
+        // Form Selection
+        $('.tf-filter-selection ul li').on("click", function() {
+            let $this = $(this).closest('.tf-filter-selection');
+            // let selected_value = $(this).attr('data-id');
+            let selected_label = $(this).text();
+            $this.find('label span').text(selected_label);
+        });
+
+        // Pyment Status Section
+        if ($('.tf-order-payment-status, .tf-calendar-order-payment-status').length > 0 ) {
+            $('.tf-order-payment-status, .tf-calendar-order-payment-status').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Order Status",
+                allowClear: true
+            });
+        }
+        // Bulk Section
+        if ( $('.tf-filter-bulk-option').length > 0 ) {
+            $('.tf-filter-bulk-option').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Bulk Action",
+            });
+        }
+        
+        if ( $('.tf-filter-bulk-option-enquiry').length > 0 ) {
+            $('.tf-filter-bulk-option-enquiry').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Bulk Action",
+                minimumResultsForSearch: -1,
+            });
+        }
+        if ( $('.tf-enquiry-filter-hotel-name').length > 0 ) {
+            $('.tf-enquiry-filter-hotel-name').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Hotel Name",
+                allowClear: true
+            });
+        }
+        
+        if ( $('.tf-enquiry-filter-apartment-name').length > 0 ) {
+            $('.tf-enquiry-filter-apartment-name').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Apartment Name",
+                allowClear: true
+            });
+        }
+        if ( $('.tf-enquiry-filter-tour-name ').length > 0 ) {
+            $('.tf-enquiry-filter-tour-name').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Tours Name",
+                allowClear: true
+            });
+        }
+        if ( $('.tf-filter-mail-option-enquiry').length > 0 ) {
+            $('.tf-filter-mail-option-enquiry').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Filters",
+                allowClear: true,
+                minimumResultsForSearch: -1,
+            });
+        }
+        
+        // Tour Post Section
+        if( $('.tf-post-id-filter-options, .tf-booking-post-id-filter-options').length > 0 ) {
+            $('.tf-post-id-filter-options, .tf-booking-post-id-filter-options').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Tour Name",
+                allowClear: true
+            });
+        }
+        
+        // Hotel Post Section
+        if ( $('.tf-hotel-id-filter-options, .tf-booking-hotel-id-filter-options').length > 0 ) {
+            $('.tf-hotel-id-filter-options, .tf-booking-hotel-id-filter-options').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Hotel Name",
+                allowClear: true
+            });
+        }
+        
+        // Apartment Post Section
+        if ( $('.tf-apartment-id-filter-options, .tf-booking-apartment-id-filter-options').length > 0 ) {
+            $('.tf-apartment-id-filter-options, .tf-booking-apartment-id-filter-options').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Apartment Name",
+                allowClear: true
+            });
+        }
+
+        // Car Post Section
+        if ( $('.tf-car-id-filter-options').length > 0 ) {
+            $('.tf-car-id-filter-options').select2({
+                dropdownCssClass: 'tf-booking-filter-modal',
+                placeholder: "Car Name",
+                allowClear: true
+            });
+        }
+        
+
+        // Checked Section
+        if ( $('.tf-tour-checkinout-options, .tf-booking-checkinout-options').length > 0 ) {
+            $('.tf-tour-checkinout-options, .tf-booking-checkinout-options').select2({
+                dropdownCssClass: 'tf-booking-checkinout-filter-modal',
+                placeholder: "Checked in status",
+                allowClear: true
+            });
+        }
+
+        /**
+         * Visitor Details Popup Open
+         *
+         */
+        $(document).on('click', '.visitor_edit span', function (e) {
+            e.preventDefault();
+            $(".visitor-details-edit-form").show();
+        });
+
+        /**
+         * Visitor Details Popup Close
+         *
+         */
+        $(document).on('click', '.visitor-details-edit-popup .tf-booking-times span', function (e) {
+            e.preventDefault();
+            $(".visitor-details-edit-form").hide();
+        });
+
+        /**
+         * Ajax tour booking
+         *
+         * tf_visitor_details_edit
+         */
+        $(document).on('submit', 'form.visitor-details-edit-popup', function (e) {
+            e.preventDefault();
+            var $this = $(this);
+
+            var formData = new FormData(this);
+            formData.append('action', 'tf_visitor_details_edit');
+            formData.append('_ajax_nonce', tf_admin_params.tf_nonce);
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (data) {
+                    $('.tf-preloader-box').show();
+                },
+                complete: function (data) {
+                    
+                },
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+        });
+
+        /**
+         * Ajax Checkinout Status
+         *
+         * tf_checkinout_details_edit
+         */
+        $('.tf-order-checkinout-status ul li').on("click", function() {
+            
+            let selected_value = $(this).attr('data-value');
+            let order_id = $('.tf_single_order_id').val();
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_checkinout_details_edit',
+                    order_id: order_id,
+                    checkinout: selected_value,
+                    _ajax_nonce: tf_admin_params.tf_nonce
+                },
+                beforeSend: function (data) {
+                    $('.tf-preloader-box').show();
+                },
+                complete: function (data) {
+                    
+                },
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+        });
+
+        /**
+         * Ajax Order Status Status
+         *
+         * tf_order_status_edit
+         */
+        $('.tf-order-ostatus ul li').on("click", function() {
+            
+            let selected_value = $(this).attr('data-value');
+            let order_id = $('.tf_single_order_id').val();
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_order_status_edit',
+                    order_id: order_id,
+                    status: selected_value,
+                    _ajax_nonce: tf_admin_params.tf_nonce
+                },
+                beforeSend: function (data) {
+                    $('.tf-preloader-box').show();
+                },
+                complete: function (data) {
+                    
+                },
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+        });
+
+        /**
+         * Ajax Order Status Email Resend
+         *
+         * tf_order_status_email_resend
+         */
+        $('.tf-order-email-resend ul li').on("click", function() {
+            
+            let selected_value = $(this).attr('data-value');
+            let order_id = $('#tf_email_order_id').val();
+            let db_id = $('.tf_single_order_id').val();
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_order_status_email_resend',
+                    order_id: order_id,
+                    status: selected_value,
+                    id : db_id,
+                    _ajax_nonce: tf_admin_params.tf_nonce
+                },
+                beforeSend: function (data) {
+                    $('.tf-preloader-box').show();
+                },
+                complete: function (data) {
+                    
+                },
+                success: function (data) {
+                    $('.tf-preloader-box').hide();
+                    notyf.success("Email Sucessfully Resend!");
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+        });
+
+        /**
+         * Vouchers Popup Open
+         *
+         */
+        $(document).on('click', '.tf-voucher-preview .tf-preview-btn a', function (e) {
+            e.preventDefault();
+            $(".tf-voucher-quick-view-box").css('display', 'flex');
+        });
+
+        /**
+         * Vouchers Popup Close
+         *
+         */
+        $(document).on('click', '.tf-voucher-quick-view-box .tf-quick-view-times span', function (e) {
+            e.preventDefault();
+            $(".tf-voucher-quick-view-box").hide();
+        });
+
+        // Filter Checkbox Selected
+
+        $("#cb #cb-select-all-1").on("click", function() {
+            $('input[name="order_id[]"]').each(function() {
+                $(this).prop("checked", !$(this).prop("checked"));
+            });
+        });
+
+        /**
+         * Filter Bulk Action
+         *
+         * tf_order_bulk_action_edit
+         */
+        $('.tf-order-status-filter-btn').on("click", function() {
+            
+            let order_list = [];
+            let bulk_action = $('.tf-filter-bulk-option').val();
+            $('.tf_booking_details_wrap input[name="order_id[]"]:checked').each(function() {
+                order_list.push($(this).val());
+            });
+            
+            if(order_list.length > 0 && bulk_action!==''){
+                $.ajax({
+                    type: 'post',
+                    url: tf_admin_params.ajax_url,
+                    data: {
+                        action: 'tf_order_bulk_action_edit',
+                        orders: order_list,
+                        status: bulk_action,
+                        _ajax_nonce: tf_admin_params.tf_nonce
+                    },
+                    beforeSend: function (data) {
+                        $('.tf-preloader-box').show();
+                    },
+                    complete: function (data) {
+                        
+                    },
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    },
+
+                });
+            }
+        });
+
+        /**
+         * Search Filter BY ID boly
+         *
+         * tf-right-search-filter
+         */
+        $(document).on('submit', 'form.tf-right-search-filter', function (e) {
+            e.preventDefault();
+
+            let id = $("#tf-searching-key").val();
+            if(id!==""){
+                $('.tf-preloader-box').show();
+                let currentURL = window.location.href;
+                let BaseURL = currentURL.split('?')[0];
+                let queryString = currentURL.split('?')[1];
+
+                let currentURLParams= new URLSearchParams(queryString);
+                currentURLParams.delete("paged");
+                if (currentURLParams.has("post")) {
+                    currentURLParams.set("post", id);
+                    let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                    window.location.href = updatedUrl;
+                }else{
+                    let updatedUrl = currentURL + "&post=" + id;
+                    window.location.href = updatedUrl;
+                }
+            }
+        });
+
+        /**
+         * Filter Checked Perameter Passing
+         *
+         */
+        $('.tf-tour-checkinout-options').change(function() {
+            let changeValue = $(this).val();
+            $('.tf-preloader-box').show();
+            let currentURL = window.location.href;
+            let BaseURL = currentURL.split('?')[0];
+            let queryString = currentURL.split('?')[1];
+
+            let currentURLParams= new URLSearchParams(queryString);
+            currentURLParams.delete("paged");
+            if (currentURLParams.has("checkinout")) {
+                currentURLParams.set("checkinout", changeValue);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }else{
+                currentURLParams.set("checkinout", changeValue);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }
+
+            //Nonce
+            if (!currentURLParams.has("nonce")) {
+                currentURLParams.set("nonce", tf_admin_params.tf_nonce);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }
+        });
+
+        /**
+         * Filter Post Perameter Passing
+         *
+         */
+        $('.tf-post-id-filter-options, .tf-hotel-id-filter-options, .tf-apartment-id-filter-options').change(function() {
+            let changeValue = $(this).val();
+            $('.tf-preloader-box').show();
+            let currentURL = window.location.href;
+            let BaseURL = currentURL.split('?')[0];
+            let queryString = currentURL.split('?')[1];
+
+            let currentURLParams= new URLSearchParams(queryString);
+            currentURLParams.delete("paged");
+            if (currentURLParams.has("post")) {
+                currentURLParams.set("post", changeValue);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }else{
+                currentURLParams.set("post", changeValue);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }
+
+            //Nonce
+            if (!currentURLParams.has("nonce")) {
+                currentURLParams.set("nonce", tf_admin_params.tf_nonce);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }
+        });
+
+        /**
+         * Filter Post Perameter Passing
+         *
+         */
+        $('.tf-order-payment-status').change(function() {
+            let changeValue = $(this).val();
+            $('.tf-preloader-box').show();
+            let currentURL = window.location.href;
+            let BaseURL = currentURL.split('?')[0];
+            let queryString = currentURL.split('?')[1];
+
+            let currentURLParams= new URLSearchParams(queryString);
+            currentURLParams.delete("paged");
+            if (currentURLParams.has("payment")) {
+                currentURLParams.set("payment", changeValue);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }else{
+                currentURLParams.set("payment", changeValue);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }
+            
+            //Nonce
+            if (!currentURLParams.has("nonce")) {
+                currentURLParams.set("nonce", tf_admin_params.tf_nonce);
+                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
+                window.location.href = updatedUrl;
+            }
+        });
+
+        // Booking View Change
+
+        $(".tf_booking_views_button ul li").on("click", function() {
+            $(".tf_booking_views_button ul li").removeClass('active');
+            let $this =  $(this);
+            let view = $this.attr('data-view');
+            $this.addClass('active');
+            if('calendar'==view){
+                $('.tf-booking-header-filter').hide();
+                $('.tf-order-table-responsive').hide();
+                $('#tf-booking-calendar').css('padding', '24px');
+                $('.tf-calendar-booking-header-filter').css('display', 'flex');
+                $('#tf-booking-calendar').show();
+                
+                // Re-render the calendar
+                initializeCalendar();
+                
+            }
+            if('list'==view){
+                $('#tf-booking-calendar').hide();
+                $('.tf-calendar-booking-header-filter').hide();
+                $('.tf-booking-header-filter').css('display','flex');
+                $('.tf-order-table-responsive').show();
+            }
+        });
+
+        // Booking Details Popup close
+        $(document).on('click', '.tf-booking-calendar-popup-box .tf-popup-header .tf-close', function (e) {
+            $(".tf-booking-calendar-popup-box").hide();
+        });
+
+        // Booking Details Popup
+        $(document).on('click', '.tf-booking-single-popup', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+            $('.tf-calendar-popup-box').html('');
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_booking_details_popup',
+                    id: $this.attr('data-id'),
+                    type: $this.attr('data-type'),
+                    page: $this.attr('data-page'),
+                    _ajax_nonce: tf_admin_params.tf_nonce
+                },
+                beforeSend: function (data) {
+                    $('.tf-preloader-box').show();
+                },
+                complete: function (data) {
+                    
+                },
+                success: function (data) {
+                    $('.tf-calendar-popup-box').html(data);
+                    $('.tf-preloader-box').hide();
+                    $('.tf-booking-calendar-popup-box').css('display', 'flex');
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+        });
+
+        // Booking Calendar Filter
+        $(document).on('change', '.tf-calendar-order-payment-status, .tf-booking-checkinout-options, .tf-filter-by-post', function (e) {
+            e.preventDefault();
+            let ostatus = $('.tf-calendar-order-payment-status').val();
+            let checkinout = $('.tf-booking-checkinout-options').val();
+            let post_id = $('.tf-filter-by-post').val();
+            
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: 'tf_booking_calendar_filter',
+                    ostatus: ostatus,
+                    checkinout: checkinout,
+                    post_id: post_id,
+                    post_type: $('#tf_booking_post_type').val(),
+                    _ajax_nonce: tf_admin_params.tf_nonce
+                },
+                beforeSend: function (data) {
+                    $('.tf-preloader-box').show();
+                },
+                complete: function (data) {
+                    
+                },
+                success: function (response) {
+                    let data = JSON.parse(response);
+                    $('.tf-preloader-box').hide();
+                    initializeCalendar(data.events);
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+            });
+        });
+
+        $('.tf-date-picker').each(function() {
+            let format = $(this).data('format') || "Y/m/d";
+            flatpickr(this, {
+                dateFormat: format
+            });
+        });
+    });
+
+})(jQuery);
+
+// Booking Calendar
+function initializeCalendar(eventsSource) {
+    var calendarEl = document.getElementById('tf-booking-calendar');
+    var currentPageUrl = window.location.href;
+
+    // Set the events based on the page URL
+    if (!eventsSource) {
+        if (currentPageUrl.includes('post_type=tf_tours&page=tf_tours_booking')) {
+            eventsSource = tf_options.tf_tours_orders;
+        } else if (currentPageUrl.includes('post_type=tf_hotel&page=tf_hotel_booking')) {
+            eventsSource = tf_options.tf_hotels_orders;
+        } else if (currentPageUrl.includes('post_type=tf_apartment&page=tf_apartment_booking')) {
+            eventsSource = tf_options.tf_apartments_orders;
+        } else if (currentPageUrl.includes('post_type=tf_carrental&page=tf_carrental_booking')) {
+            eventsSource = tf_options.tf_cars_orders;
+        } else {
+            eventsSource = []; // Fallback option if none of the conditions match
+        }
+    }
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        editable: false,
+        selectable: true,
+        dayMaxEvents: 3,
+        headerToolbar: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: eventsSource,
+        eventContent: function(info) {
+            var customEl = document.createElement('div');
+            customEl.classList.add('tf-booking-single-popup');
+            customEl.setAttribute('data-id', info.event.id);
+            customEl.setAttribute('data-type', info.event.extendedProps.post_type);
+            customEl.setAttribute('data-page', info.event.extendedProps.page);
+            customEl.innerHTML = `<span>${info.event.title}</span>`;
+            return { domNodes: [customEl] };
+        }
+    });
+
+    calendar.render();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var tfcalendarEl = document.getElementById('tf-booking-calendar');
+
+    if (tfcalendarEl) {
+        var eventsSource;
+        
+        if (tfcalendarEl.dataset.set) {
+            initializeCalendar(eventsSource);
+            tfcalendarEl.style.display = 'none';
+        } else {
+            initializeCalendar(eventsSource);
+        }
+    } 
+});
+
+})();
+
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+(() => {
+;(function($) {
+
+    "use strict";
+
+    $(document).ready(function() {
+
+        // Create an instance of Notyf
+        const notyf = new Notyf({
+            ripple: true,
+            duration: 3000,
+            dismissable: true,
+            position: {
+                x: 'right',
+                y: 'bottom',
+            },
+        });
+
+        $(".tf-enquiry-details-wrap .tf-order-status-filter-btn").on("click", function(e) {
+
+            e.preventDefault();
+
+            let $this = $(this);
+            let selected_items = [];
+            let actions = $this.closest(".tf-enquiry-details-wrap").find(".tf-filter-bulk-option-enquiry").val();
+            let hotelIdFilter = $this.closest(".tf-enquiry-details-wrap").find(".tf-enquiry-filter-hotel-name").val();
+            let mainWrap = $this.closest(".tf-enquiry-details-wrap");
+
+            mainWrap.find(".tf-checkbox-listing #tf-enquiry-name-checkbox:checked").each(function() {
+                selected_items.push($(this).val());
+            });
+
+            $.ajax({
+                url: tf_admin_params.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'tf_enquiry_bulk_action',
+                    selected_items: selected_items,
+                    bulk_action: actions,
+                    _ajax_nonce: tf_admin_params.tf_nonce
+                },
+                beforeSend: function() {
+                    $this.addClass("loading");
+                },
+                success: function(response) {
+                    let data = $.parseJSON(response);
+                    $this.removeClass("loading");
+                    if(data.status == "success") {
+                        notyf.success(data.msg);
+                    } else if (data.status == "error") {
+                        notyf.error(data.msg);
+                    }
+                    
+                }
+            });
+            
+        });
+
+        $(".tf-enquiry-filter-hotel-name, .tf-enquiry-filter-tour-name, .tf-enquiry-filter-apartment-name").on('change', function() {
+            let $this = $(this);
+            let post_id = $this.val() ? $this.val() : '';
+            let post_type = $(".enquiry-post-type").val();
+            let filter = $(".tf-filter-mail-option-enquiry ").val();
+
+            $.ajax({
+                url: tf_admin_params.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'tf_enquiry_filter_post',
+                    post_id: post_id,
+                    post_type: post_type,
+                    filter: filter,
+                    _ajax_nonce: tf_admin_params.tf_nonce
+                },
+                beforeSend: function() {
+                    $("#tf-enquiry-status-loader").addClass("show");
+                },
+                success: function (response) {
+                    $("#tf-enquiry-status-loader").removeClass("show");
+                    if( response.status == "error" ) {
+                        $(".tf-enquiry-details-wrap").append(response.msg);
+                    } else {
+                        $(".tf-enquiry-table").remove();
+                        $(".tf-enquiry-details-wrap").append(response);
+                    }
+                }
+            });
+        });
+
+        $(".tf-order-status-filter-reset-btn").on('click', function() {
+            $(".tf-filter-bulk-option-enquiry").val('').trigger('change');
+            $(".tf-filter-hotel-name").val("").trigger('change');
+            $(".tf-filter-mail-option-enquiry").val( "").trigger('change');
+        });
+
+        $(".tf-filter-mail-option-enquiry").on('change', function() {
+            let $this = $(this);
+            let filter = $this.val() ? $this.val() : '';
+            let post_id = $(".tf-filter-hotel-name ").val()
+            let post_type = $(".enquiry-post-type").val();
+
+            $.ajax({
+                url: tf_admin_params.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'tf_enquiry_filter_mail',
+                    filter: filter,
+                    post_id : post_id,
+                    post_type: post_type,
+                    _ajax_nonce: tf_admin_params.tf_nonce
+                },
+                beforeSend: function() {
+                    $("#tf-enquiry-status-loader").addClass("show");
+                },
+                success: function (response) {
+                    $("#tf-enquiry-status-loader").removeClass("show");
+                    if( response.status == "error" ) {
+                        $(".tf-enquiry-details-wrap").append(response.msg);
+                    } else {
+                        $(".tf-enquiry-table").remove();
+                        $(".tf-enquiry-details-wrap").append(response);
+                    }
+                }
+            });
+        });
+
+        $("#tf-single-enquiry-reply-form").on('submit', function(e) {
+            e.preventDefault();
+
+            let $this = $(this);
+            let reply_mail = $this.find(".tf-enquiry-reply-email").val();
+            let reply_message = tinyMCE.activeEditor && tinyMCE.activeEditor.getContent() ? tinyMCE.activeEditor.getContent() : $("#tf-enquiry-reply-editor").val();
+            let userName = $this.find(".tf-enquiry-reply-name").val();
+            let subject = $this.find(".tf-enquiry-reply-subject").val();
+            let post_id = $this.find(".tf-enquiry-reply-post-id").val();
+            let enquiry_id = $this.find(".tf-enquiry-reply-id").val();
+
+            $.ajax({
+                url: tf_admin_params.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'tf_enquiry_reply_email',
+                    reply_mail: reply_mail,
+                    reply_message: reply_message,
+                    user_name: userName,
+                    subject: subject,
+                    post_id: post_id,
+                    enquiry_id: enquiry_id,
+                    _ajax_nonce: tf_admin_params.tf_nonce
+                },
+                beforeSend: function() {
+                    $("#tf-enquiry-status-loader").addClass("show");
+                },
+                success: function(response) {
+                    $("#tf-enquiry-status-loader").removeClass("show");
+
+                    let data = JSON.parse(response);
+                    
+                    if(data.status == "success") {
+                        notyf.success(data.msg);
+                        window.location.reload();
+                    } else if (data.status == "error") {
+                        notyf.error(data.msg);
+                    }
+                },
+                error: function(data) {
+                    console.log(data);
+                },
+            });
+        })
+
+        $(document).on("submit", 'form.tf-enquiry-right-search-filter', function(e) {
+            e.preventDefault();
+
+            let post_id = $("#tf-searching-enquiry-key").val();
+            let select_option = $(".tf-filter-hotel-name option");
+            var values = $.map(select_option ,function(option) {
+                return option.value;
+              }); 
+
+            if( $.inArray(post_id, values) !== -1 ) {
+                $('.tf-filter-hotel-name').val(post_id).trigger('change');
+            } else {
+                notyf.error(tf_admin_params.no_data_found_with_id);
+            }
+            
+        })
+
+        $(document).on("click", ".tf-single-enquiry-copy-btn", function (e) {
+            let $this = $(this),
+                copy_text = $this.closest(".tf-single-enquiry-details-value").data("enquiry-copy-text"),
+                $temp = $("<input>"),
+                copy_ip_addr = $(this).parent().parent().find(".tf-single-enquiry-log-details-single-value").data("enquiry-copy-text");
+            
+            copy_text = copy_text ? copy_text : copy_ip_addr;
+
+            $("body").append($temp);
+            $temp.val(copy_text).select();
+            document.execCommand("copy");
+            $temp.remove();
+            notyf.success("Copied to clipboard");
+        });
+
+        $(document).on("click", '.tf-single-enquiry-reply-mail-button', function (e) { 
+            $(".tf-single-enquiry-reply-wrapper").slideDown();
+            $(this).hide();
+        });
+
+        $('.tf-single-enquiry-reply-another-mail-button').on('click', function(e) {
+            $('#tf-single-enquiry-reply-form').slideDown();
+            $(this).hide();
+        });
+
+        $(".tf-single-enquiry-accordion-item.is-active").children(".tf-single-accordion-body").slideDown();
+
+        $(".tf-single-enquiry-accordion-head").on("click", function() {
+            let $this = $(this).parent();
+            $this.siblings(".tf-single-enquiry-accordion-item").removeClass("is-active").find(".tf-single-accordion-body").slideUp();
+            $this.toggleClass("is-active").find(".tf-single-accordion-body").slideToggle("ease-out");
+
+        });
+
+        $(".tf-enquiry-single-row").on("click", function(e) {
+
+            let currentURL = window.location.href;
+            let id = $(".tf-enquiry-id", this).val();
+
+            if( $(e.target)[0].className == 'check-column' || $(e.target)[0].className == 'tf-enquiry-name-checkbox'|| $(e.target)[0].className == 'table-name-column' ) {
+                return;
+            }
+
+            let updatedUrl = currentURL + "&enquiry_id=" + id + "&action=preview";
+            window.location.href = updatedUrl;
+        });
+    });
+
+})(jQuery);
+})();
+
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+(() => {
+const {select, dispatch} = wp.data;
+
+//required taxonomies
+
+function TfPrePublishCheck() {
+    let lockPost = false;
+    tf_admin_params.error = false;
+    tf_admin_params.messages = [];
+
+    let tf_post_pre_save = Object.assign({}, select('core/editor').getCurrentPost(), select('core/editor').getPostEdits());
+
+    if (tf_post_pre_save.hasOwnProperty('categories')) {
+        tf_post_pre_save['categories'] = tf_post_pre_save['categories'].filter(function (ele) {
+            return ele !== 1;
+        });
+    }
+
+    jQuery.each(tf_admin_params.taxonomies, function (taxonomy, config) {
+        if (tf_post_pre_save.hasOwnProperty(taxonomy) && tf_post_pre_save[taxonomy].length === 0) {
+            dispatch('core/notices').createNotice(
+                'error',
+                config.message,
+                {
+                    id: 'tfNotice_' + taxonomy,
+                    isDismissible: false
+                }
+            );
+            tf_admin_params.error = lockPost = true;
+        }else{
+            dispatch('core/notices').removeNotice('tfNotice_' + taxonomy);
+        }
+    });
+
+    if (lockPost === true) {
+        dispatch('core/editor').lockPostSaving();
+    } else {
+        dispatch('core/editor').unlockPostSaving();
+    }
+
+}
+
+TfPrePublishCheck();
+
+let rpc_check_interval = setInterval(TfPrePublishCheck, 500);
+
+})();
+
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+(() => {
+jQuery(function ($) {
+
+    //required taxonomies
+	// Create an instance of Notyf
+	const notyf = new Notyf({
+		ripple: true,
+		dismissable: true,
+		duration: 3000,
+		position: {
+			x: 'right',
+			y: 'bottom',
+		},
+	});
+
+    function tf_event_handler(e) {
+        tf_admin_params.error = false;
+        $.each(tf_admin_params.taxonomies, function (taxonomy, config) {
+            if (config.type == 'hierarchical') {
+                if ($('#taxonomy-' + taxonomy + ' input:checked').length == 0) {
+                    //alert(config.message);
+					notyf.error(config.message);
+                    tf_admin_params.error = true;
+                }
+            } else {
+                if ($('#tagsdiv-' + taxonomy + ' .tagchecklist').is(':empty')) {
+                    //alert(config.message);
+                    notyf.error(config.message);
+                    tf_admin_params.error = true;
+                }
+            }
+        });
+        if (tf_admin_params.error) {
+            e.stopImmediatePropagation();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    $('#publish, #save-post').on('click.require-post-category', tf_event_handler);
+    $('#post').on('submit.require-post-category', tf_event_handler);
+    if ($('#publish')[0] != null && $._data($('#publish')[0], "events") != null) {
+        var publish_click_events = $._data($('#publish')[0], "events").click;
+        if (publish_click_events) {
+            if (publish_click_events.length > 1) {
+                publish_click_events.unshift(publish_click_events.pop());
+            }
+        }
+    }
+    if ($('#save-post')[0] != null && $._data($('#save-post')[0], "events") != null) {
+        var save_click_events = $._data($('#save-post')[0], "events").click;
+        if (save_click_events) {
+            if (save_click_events.length > 1) {
+                save_click_events.unshift(save_click_events.pop());
+            }
+        }
+    }
+    if ($('#post')[0] != null && $._data($('#post')[0], "events") != null) {
+        var post_submit_events = $._data($('#post')[0], "events").submit;
+        if (post_submit_events) {
+            if (post_submit_events.length > 1) {
+                post_submit_events.unshift(post_submit_events.pop());
+            }
+        }
+    }
+});
+})();
+
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+(() => {
+(function ($) {
+    $(document).ready(function () {
+
+        // Create an instance of Notyf
+        const notyf = new Notyf({
+            ripple: true,
+            dismissable: true,
+            duration: 3000,
+            position: {
+                x: 'right',
+                y: 'bottom',
+            },
+        });
+
+        //if body has class .tourfic-settings_page_tf-setup-wizard then add background-color: #ecf5ff; to html
+        if ($('body').hasClass('tourfic-settings_page_tf-setup-wizard')) {
+            $('html').css('padding', '0');
+        }
+
+        $(document).on('click', '.tf-setup-start-btn', function (e) {
+            e.preventDefault();
+            $('.tf-welcome-step').hide();
+            if(tf_admin_params.is_woo_not_active) {
+                $('.tf-setup-step-1').fadeIn(600);
+            } else {
+                $('.tf-setup-step-2').fadeIn(600);
+            }
+        });
+
+        $(document).on('click', '.tf-setup-next-btn, .tf-setup-skip-btn', function (e) {
+            e.preventDefault();
+            let form = $('#tf-setup-wizard-form');
+            let skipSteps = form.find('input[name="tf-skip-steps"]').val();
+            let step = $(this).closest('.tf-setup-step-container').data('step');
+            let nextStep = step + 1;
+
+            //min one service required
+            if (step === 2 && $(this).hasClass('tf-setup-next-btn')) {
+                let services = $('input[name="tf-services[]"]:checked').length;
+
+                if (!services) {
+                    alert(tf_admin_params.i18n.no_services_selected);
+                    return false;
+                }
+
+                //if hotel service not checked, hide hotel settings
+                if (!$('input[name="tf-services[]"][value="hotel"]').is(':checked')) {
+                    $('.tf-hotel-setup-wizard').hide();
+                    $('.tf-add-new-hotel').hide();
+                } else {
+                    $('.tf-hotel-setup-wizard').show();
+                    $('.tf-add-new-hotel').show();
+                }
+
+                //if tour service not checked, hide tour settings
+                if (!$('input[name="tf-services[]"][value="tour"]').is(':checked')) {
+                    $('.tf-tour-setup-wizard').hide();
+                    $('.tf-add-new-tour').hide();
+                } else {
+                    $('.tf-tour-setup-wizard').show();
+                    $('.tf-add-new-tour').show();
+                }
+
+                //if apartment service not checked, hide apartment settings
+                if (!$('input[name="tf-services[]"][value="apartment"]').is(':checked')) {
+                    $('.tf-apartment-setup-wizard').hide();
+                    $('.tf-add-new-apartment').hide();
+                } else {
+                    $('.tf-apartment-setup-wizard').show();
+                    $('.tf-add-new-apartment').show();
+                }
+
+                //if car service not checked, hide car settings
+                if (!$('input[name="tf-services[]"][value="carrentals"]').is(':checked')) {
+                    $('.tf-car-setup-wizard').hide();
+                    $('.tf-add-new-car').hide();
+                } else {
+                    $('.tf-car-setup-wizard').show();
+                    $('.tf-add-new-car').show();
+                }
+            }
+
+            //skip steps add to input[name="tf-skip-steps"]
+            if ($(this).hasClass('tf-setup-skip-btn')) {
+                skipSteps = !skipSteps ? step : skipSteps.indexOf(step) === -1 ? skipSteps + ',' + step : skipSteps;
+                form.find('input[name="tf-skip-steps"]').val(skipSteps);
+
+                if(step === 1){
+                    $('.tf-hotel-setup-wizard').show();
+                    $('.tf-tour-setup-wizard').show();
+                }
+            }
+
+            //remove skip steps from input[name="tf-skip-steps"] if user back to step and go to next step
+            if($(this).hasClass('tf-setup-next-btn') && skipSteps.indexOf(step) !== -1) {
+                skipSteps = skipSteps.replace(step, '');
+                form.find('input[name="tf-skip-steps"]').val(skipSteps);
+            }
+
+            //hide current step and show next step (if not last step)
+            if(!$(this).hasClass('tf-setup-submit-btn')) {
+                $('.tf-setup-step-' + step).fadeOut(300, function () {
+                    $('.tf-setup-step-' + nextStep).fadeIn(300);
+                });
+            }
+        });
+
+        $(document).on('click', '.tf-setup-prev-btn', function (e) {
+            e.preventDefault();
+            let step = $(this).closest('.tf-setup-step-container').data('step');
+            let prevStep = step - 1;
+            if(step === 2 && !tf_admin_params.is_woo_not_active) {
+                $('.tf-setup-step-2').fadeOut(300, function () {
+                    $('.tf-setup-step-0').fadeIn(300);
+                });
+            } else {
+                $('.tf-setup-step-' + step).fadeOut(300, function () {
+                    $('.tf-setup-step-' + prevStep).fadeIn(300);
+                });
+            }
+        });
+
+        /*
+        * Setup Wizard form submit
+        * @author: Foysal
+        */
+        $(document).on('click', '.tf-setup-submit-btn', function (e) {
+            e.preventDefault();
+            let submitBtn = $('.tf-setup-submit-btn.tf-quick-setup-btn');
+            let form = $(this).closest('#tf-setup-wizard-form');
+            let step = $(this).closest('.tf-setup-step-container').data('step');
+            let skipSteps = form.find('input[name="tf-skip-steps"]').val();
+
+            if($(this).hasClass('tf-quick-setup-btn') && skipSteps.indexOf(step) !== -1) {
+                skipSteps = skipSteps.replace(step, '');
+                form.find('input[name="tf-skip-steps"]').val(skipSteps);
+            }
+
+            let formData = new FormData(form[0]);
+            formData.append('action', 'tf_setup_wizard_submit');
+
+            $.ajax({
+                url: tf_admin_params.ajax_url,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    submitBtn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    let data = JSON.parse(response);
+                    submitBtn.removeClass('tf-btn-loading');
+                    if (data.success) {
+                        $('.tf-finish-step').show();
+                        $('.tf-setup-step-' + step).hide();
+                    }
+                },
+                complete: function () {
+                    submitBtn.removeClass('tf-btn-loading');
+                },
+                error: function (error) {
+                    submitBtn.removeClass('tf-btn-loading');
+                    console.log(error);
+                }
+            });
+        });
+
+        /*
+        * Travelfic Theme Installing
+        * @author: Jahid
+        */
+        let travelfic_toolkit_active_plugins = tf_admin_params.is_travelfic_toolkit_active;
+
+        $(document).on('click', '.tf-setup-travelfic-theme-btn', function (e) {
+            e.preventDefault();
+            
+            if(tf_admin_params.current_active_theme && "travelfic"!=tf_admin_params.current_active_theme && "ultimate-hotel-booking"!=tf_admin_params.current_active_theme){
+                let theme_slug = $('.tf-template-selection input[name="tf_theme_select"]:checked').val();
+                if("travelfic"==theme_slug){
+                    $('.tf-setup-travelfic-theme-btn').text("Travelfic Installing...");
+                }
+                if("ultimate-hotel-booking"==theme_slug){
+                    $('.tf-setup-travelfic-theme-btn').text("Hotel Booking Installing...");
+                }
+                $('.tf-setup-travelfic-theme-btn').addClass('tf-btn-loading');
+                var data = {
+                    action: "tf_theme_installing",
+                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    slug: theme_slug,
+                };
+                // Installing Function
+                jQuery.post(tf_admin_params.ajax_url, data, function (response) {
+                    $('.tf-setup-travelfic-theme-active').trigger("click");
+                })
+            }else{
+                $('.tf-setup-travelfic-toolkit-btn').trigger("click");
+            }
+            
+        });
+
+        /*
+        * Travelfic Theme Activating
+        * @author: Jahid
+        */
+
+        $(document).on('click', '.tf-setup-travelfic-theme-active', function (e) {
+
+            e.preventDefault();
+            let theme_slug = $('.tf-template-selection input[name="tf_theme_select"]:checked').val();
+
+            if("travelfic"==theme_slug){
+                $('.tf-setup-travelfic-theme-btn').text("Travelfic Activate...");
+            }
+            if("ultimate-hotel-booking"==theme_slug){
+                $('.tf-setup-travelfic-theme-btn').text("Hotel Booking Activate...");
+            }
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: "tf_setup_travelfic_theme_active",
+                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    slug: theme_slug,
+                },
+                success: function(response) {
+                    if ($.inArray("travelfic-toolkit", travelfic_toolkit_active_plugins) !== -1) {
+                        $('.tf-setup-travelfic-toolkit-btn').trigger("click");
+                    }else{
+                        window.location.replace(tf_admin_params.toolkit_page_url);
+                    }
+                },
+                error: function(error) {
+                    
+                }
+            });
+
+        });
+
+        /*
+        * Travelfic Toolkit Installing
+        * @author: Jahid
+        */
+       
+        $(document).on('click', '.tf-setup-travelfic-toolkit-btn', function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            if ($.inArray("travelfic-toolkit", travelfic_toolkit_active_plugins) !== -1) {
+                let plugin_slug = $(this).attr('data-install');
+                $this.text("Toolkit Activate...");
+                $this.addClass('tf-btn-loading');
+
+                var data = {
+                    action: "tf_travelfic_toolkit_installing",
+                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    slug: plugin_slug,
+                };
+                // Installing Function
+                jQuery.post(tf_admin_params.ajax_url, data, function (response) {
+                    $('.tf-setup-travelfic-toolkit-active').trigger("click");
+                })
+            }else{
+                window.location.replace(tf_admin_params.toolkit_page_url);
+            }
+        });
+
+        /*
+        * Travelfic Toolkit Activating
+        * @author: Jahid
+        */
+        $(document).on('click', '.tf-setup-travelfic-toolkit-active', function (e) {
+
+            e.preventDefault();
+            let plugin_slug = $(this).attr('data-install');
+            $('.tf-setup-travelfic-theme-btn').text("Toolkit Activate...");
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: "tf_travelfic_toolkit_activate",
+                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    slug: plugin_slug,
+                },
+                success: function(response) {
+                    window.location.replace(tf_admin_params.toolkit_page_url);
+                },
+                error: function(error) {
+                    
+                }
+            });
+        });
+
+        /*
+        * WooCommerce Plugin Install
+        * @auther: Foysal
+        */
+        $(document).on('click', '.tf-install-woo-btn', function (e) {
+            e.preventDefault();
+            let btn = $(this);
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: "tf_ajax_install_woo",
+                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    slug: 'woocommerce',
+                },
+                beforeSend: function () {
+                    btn.text(tf_admin_params.installing)
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function(response) {
+                    btn.text(tf_admin_params.activating);
+                    $('.tf-active-woo-btn').trigger("click");
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        /*
+        * WooCommerce Plugin Activate
+        * @auther: Foysal
+        */
+        $(document).on('click', '.tf-active-woo-btn', function (e) {
+            e.preventDefault();
+            let btn = $(this);
+
+            $.ajax({
+                type: 'post',
+                url: tf_admin_params.ajax_url,
+                data: {
+                    action: "tf_ajax_activate_woo",
+                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    slug: 'woocommerce',
+                },
+                beforeSend: function () {
+                    btn.text(tf_admin_params.activating)
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function(response) {
+                    notyf.success(response.data);
+
+                    setTimeout(function(){
+                        btn.closest('.tf-setup-step-layout').find('.tf-setup-next-btn').trigger("click");
+                    }, 500);
+
+                    btn.removeClass('tf-btn-loading');
+                    $('.tf-install-woo-btn').removeClass('tf-btn-loading');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+
+})(jQuery);
+})();
+
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+(() => {
+(function ($) {
+    'use strict';
+    $(document).ready(function () {
+
+        // Create an instance of Notyf
+        const notyf = new Notyf({
+            ripple: true,
+            duration: 3000,
+            dismissable: true,
+            position: {
+                x: 'right',
+                y: 'bottom',
+            },
+        });
+
+        /*
+        * window url on change tab click
+        * @author: Foysal
+        */
+
+        function activateTabFromHash(hash = '') {
+            if (!hash) {
+                hash = window.location.hash;
+            }
+    
+            let slug = hash.replace('#tab=', '').split('&')[0];
+    
+            if (slug) {
+                let selectedTab = $('.tf-tablinks[data-tab="' + slug + '"]');
+                let selectedContent = $('#' + slug);
+    
+                if (selectedTab.length && selectedContent.length) {
+                    $('.tf-admin-tab .tf-tablinks').removeClass('active');
+                    $('.tf-tab-wrapper .tf-tab-content').removeClass('active');
+                    selectedTab.addClass('active');
+                    selectedContent.addClass('active');
+                }
+            }
+        }
+    
+        // Save current tab hash before post update
+        $('.post-type-tf_tours #post, .post-type-tf_hotel #post, .post-type-tf_room #post, .post-type-tf_apartment #post, .post-type-tf_carrental #post, .post-type-tf_email_templates #post').on('submit', function () {
+            localStorage.setItem('tf_saved_tab_hash', window.location.hash);
+        });
+    
+        // Restore saved hash and activate tab
+        let savedHash = localStorage.getItem('tf_saved_tab_hash');
+        if (savedHash) {
+            localStorage.removeItem('tf_saved_tab_hash');
+            window.location.hash = savedHash;
+            activateTabFromHash(savedHash);
+        } else {
+            // Run on initial page load
+            activateTabFromHash();
+        }
+
+        
+        
+        $(window).on('hashchange load', function () {
+            let hash = window.location.hash;
+            let query = window.location.search;
+
+            if (query.indexOf('dashboard') > -1) {
+                let submenu = $("#toplevel_page_tf_settings").find(".wp-submenu");
+                submenu.find("a").filter(function (a, e) {
+                    return e.href.indexOf(query) > -1;
+                }).parent().addClass("current");
+            }
+
+            tfApartmentCalendar()
+            tfHotelCalendar()
+            tfTourCalendar()
+        });
+
+        /*
+        * Tab click
+        * @author: Foysal
+        */
+        $(document).on('click', '.tf-tablinks', function (e) {
+            e.preventDefault();
+            let firstTabId,
+                $this = $(this),
+                parentDiv = $this.closest('.tf-admin-tab-item'),
+                parentTabId = parentDiv.children('.tf-tablinks').attr('data-tab'),
+                tabcontent = $('.tf-tab-content'),
+                tablinks = $('.tf-tablinks');
+
+            tabcontent.hide();
+            tablinks.removeClass('active');
+
+            let tabId = $this.attr('data-tab');
+            $('#' + tabId).css('display', 'flex');
+
+            if ($this.next().hasClass('tf-submenu')) {
+                firstTabId = parentDiv.find('.tf-submenu li:first-child .tf-tablinks').data('tab');
+            }
+
+            if (firstTabId === tabId) {
+                parentDiv.find('.tf-submenu li:first-child .tf-tablinks').addClass('active');
+            } else {
+                $this.addClass('active');
+            }
+            // url hash update
+            window.location.hash = '#tab=' + tabId;
+
+            $(".tf-admin-tab").removeClass('active');
+
+            let submenu = $("#toplevel_page_tf_settings").find(".wp-submenu");
+            submenu.find("a").filter(function (a, e) {
+                let slug = e.hash.replace('#tab=', '');
+                return tabId === slug || parentTabId === slug;
+            }).parent().addClass("current").siblings().removeClass("current")
+
+            roomOptionsArr();
+        });
+
+        /*
+        * Submenu toggle
+        * @author: Foysal
+        */
+        $(document).on('click', '.tf-admin-tab-item', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+
+            $this.addClass('open');
+            $this.children('ul').slideDown();
+            $this.siblings('.tf-admin-tab-item').children('ul').slideUp();
+            $this.siblings('.tf-admin-tab-item').removeClass('open');
+            $this.siblings('.tf-admin-tab-item').find('li').removeClass('open');
+            $this.siblings('.tf-admin-tab-item').find('ul').slideUp();
+        });
+
+        /*
+        * Each date field initialize flatpickr
+        * @author: Foysal
+        */
+        const tfDateInt = dateSelector => {
+            $(dateSelector).each(function () {
+                let $this = $(this),
+                    dateField = $this.find('input.flatpickr'),
+                    format = dateField.data('format'),
+                    multiple = dateField.data('multiple'),
+                    minDate = dateField.data('min-date');
+
+                if (dateField.length === 2) {
+                    let startDate = $this.find('.tf-date-from input.flatpickr').flatpickr({
+                        dateFormat: format,
+                        minDate: minDate,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
+                        onChange: function (selectedDates, dateStr, instance) {
+                            endDate.set('minDate', dateStr);
+                        }
+                    });
+                    let endDate = $this.find('.tf-date-to input.flatpickr').flatpickr({
+                        dateFormat: format,
+                        minDate: minDate,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
+                        onChange: function (selectedDates, dateStr, instance) {
+                            startDate.set('maxDate', dateStr);
+                        }
+                    });
+                } else {
+                    dateField.flatpickr({
+                        dateFormat: format,
+                        minDate: minDate,
+                        altInput: true,
+                        altFormat: tf_options.tf_admin_date_format,
+                        mode: multiple ? 'multiple' : 'single',
+                    });
+                }
+            });
+        }
+        tfDateInt('.tf-field-date');
+
+        /*
+        * Each time field initialize flatpickr
+        * @author: Foysal
+        */
+        const tfTimeInt = timeSelector => {
+            $(timeSelector).each(function () {
+                let $this = $(this),
+                    timeField = $this.find('input.flatpickr'),
+                    format = timeField.data('format');
+
+                timeField.flatpickr({
+                    enableTime: true,
+                    noCalendar: true,
+                    dateFormat: format,
+                });
+            });
+        }
+        tfTimeInt('.tf-field-time');
+
+
+        /*
+        * Each color field initialize wpColorPicker
+        * @author: Foysal
+        */
+        const tfColorInt = colorSelector => {
+            $(colorSelector).each(function () {
+                let $this = $(this),
+                    colorField = $this.find('input.tf-color');
+
+                colorField.wpColorPicker();
+            });
+        }
+        tfColorInt('.tf-field-color');
+
+        /*
+        * Custom modal
+        * @author: Foysal
+        */
+        TF_dependency();
+
+        function TF_dependency() {
+            $('.tf-tab-content, .tf-taxonomy-metabox').each(function () {
+                var $this = $(this);
+                $this.find('[data-controller]').each(function () {
+                    var $tffields = $(this);
+                    if ($tffields.length) {
+                        // alert($tffields.length);
+                        var normal_ruleset = $.tf_deps.createRuleset(),
+                            global_ruleset = $.tf_deps.createRuleset(),
+                            normal_depends = [],
+                            global_depends = [];
+
+                        $tffields.each(function () {
+
+                            var $field = $(this),
+                                controllers = $field.data('controller').split('|'),
+                                conditions = $field.data('condition').split('|'),
+                                values = $field.data('value').toString().split('|'),
+                                is_global = $field.data('depend-global') ? true : false,
+                                ruleset = normal_ruleset;
+
+                            $.each(controllers, function (index, depend_id) {
+
+                                var value = values[index] || '',
+                                    condition = conditions[index] || conditions[0];
+
+                                ruleset = ruleset.createRule($this.find('[data-depend-id="' + depend_id + '"]'), condition, value);
+
+                                ruleset.include($field);
+
+                                if (is_global) {
+                                    global_depends.push(depend_id);
+                                } else {
+                                    normal_depends.push(depend_id);
+                                }
+
+                            });
+
+                        });
+
+                        if (normal_depends.length) {
+                            $.tf_deps.enable($this, normal_ruleset, normal_depends);
+                        }
+
+                        if (global_depends.length) {
+                            $.tf_deps.enable(TF.vars.$body, global_ruleset, global_depends);
+                        }
+                    }
+                });
+
+
+            });
+        }
+
+
+        /*
+        * Custom modal
+        * @author: Foysal
+        */
+        $(document).on('click', '.tf-modal-btn', function (e) {
+            e.preventDefault();
+            let $this = $(this),
+                modal = $('#tf-icon-modal');
+
+            if (modal.length > 0 && modal.hasClass('tf-modal-show')) {
+                modal.removeClass('tf-modal-show');
+                $('body').removeClass('tf-modal-open');
+            } else {
+                modal.addClass('tf-modal-show');
+                $('body').addClass('tf-modal-open');
+            }
+        });
+        $(document).on("click", '.tf-modal-close', function () {
+            $('.tf-modal').removeClass('tf-modal-show');
+            $('body').removeClass('tf-modal-open');
+        });
+        $(document).on('click', function (event) {
+            if(!$('.tf-map-modal').length) {
+                if (!$(event.target).closest(".tf-modal-content,.tf-modal-btn").length) {
+                    $("body").removeClass("tf-modal-open");
+                    $(".tf-modal").removeClass("tf-modal-show");
+                }
+            }
+        });
+
+        /*
+        * Icon tab
+        * @author: Foysal
+        */
+        $(document).on('click', '.tf-icon-tab', function (e) {
+            e.preventDefault();
+            let $this = $(this),
+                tab = $this.data('tab');
+
+            $('.tf-icon-tab').removeClass('active');
+            $this.addClass('active');
+
+            $('#' + tab).addClass('active').siblings().removeClass('active');
+            let searchVal = $('.tf-icon-search-input').val();
+
+            tfIconInfiniteScroll();
+            tfIconFilter(searchVal);
+        });
+
+        /*
+        * Icon select
+        * @author: Foysal
+        */
+        $(document).on('click', '.tf-icon-select .tf-admin-btn, .tf-icon-select .tf-icon-preview', function (e) {
+            e.preventDefault();
+            let btn = $(this);
+
+            let fieldId = btn.closest('.tf-icon-select').attr('id');
+            $('#tf-icon-modal').data('icon-field', fieldId);
+        });
+
+        /*
+        * Icon select
+        * @author: Foysal
+        */
+        $(document).on('click', '.tf-icon-list li', function (e) {
+            e.preventDefault();
+            let $this = $(this);
+
+            $('.tf-icon-list li').removeClass('active');
+            $this.addClass('active');
+
+            //remove disabled class
+            $('.tf-icon-insert').removeClass('disabled');
+        });
+
+        /*
+        * Icon insert
+        * @author: Foysal
+        */
+        $(document).on('click', '.tf-icon-insert', function (e) {
+            e.preventDefault();
+            let $this = $(this),
+                fieldId = $('#tf-icon-modal').data('icon-field'),
+                field = $('#' + fieldId),
+                preview = field.find('.tf-icon-preview'),
+                icon = $('.tf-icon-list li.active').data('icon');
+
+            if (icon) {
+                preview.removeClass('tf-hide');
+                field.find('.tf-icon-preview-wrap i').attr('class', icon);
+                field.find('.tf-icon-value').val(icon).trigger('change');
+
+                //Close modal
+                $('.tf-modal').removeClass('tf-modal-show');
+                $('body').removeClass('tf-modal-open');
+            }
+        })
+
+        /*
+        * Icon remove
+        * @author: Foysal
+        */
+        $(document).on('click', '.tf-icon-preview .remove-icon', function (e) {
+            e.preventDefault();
+            let $this = $(this),
+                preview = $this.closest('.tf-icon-preview'),
+                iconSelect = $this.closest('.tf-icon-select'),
+                iconLi = $('#tf-icon-modal').find('.tf-icon-list li');
+
+            preview.addClass('tf-hide');
+            iconSelect.find('.tf-icon-preview-wrap i').attr('class', '');
+            iconSelect.find('.tf-icon-value').val('').trigger('change');
+
+            //remove active class
+            iconLi.removeClass('active');
+        })
+
+        /*
+        * Icon search
+        * @author: Foysal
+        */
+        //debounce
+        const debounce = (func, delay) => {
+            let debounceTimer;
+            return function () {
+                const context = this;
+                const args = arguments;
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => func.apply(context, args), delay);
+            }
+        }
+
+        $(document).on('keyup', '.tf-icon-search-input', debounce(function (e) {
+            let searchVal = $(this).val();
+            tfIconFilter(searchVal);
+        }, 500));
+
+        const tfIconFilter = (searchVal) => {
+            let type = $('.tf-icon-tab-pane.active').data('type');
+            let iconList = $('.tf-icon-tab-pane.active .tf-icon-list');
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'tf_icon_search',
+                    _nonce: tf_admin_params.tf_nonce,
+                    search: searchVal,
+                    type: type,
+                },
+                beforeSend: function () {
+                    iconList.html('<div class="tf-icon-loading">Loading...</div>');
+                },
+                success: function (response) {
+                    if(!response.success){
+                        notyf.error(response.data)
+                    } else {
+                        iconList.html(response.data.html);
+                        $('.tf-icon-tab-pane.active').attr('data-max', response.data.count);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        /*
+        * Icon Infinite Scroll
+        * @author: Foysal
+        */
+        const tfIconInfiniteScroll = () => {
+            var loading = false;
+            var startIndex = 100;
+            let iconList = $('.tf-icon-tab-pane.active .tf-icon-list');
+            let iconListBottom = 0;
+            let searchVal = $('.tf-icon-search-input').val();
+
+            iconList.on("scroll", function () {
+                let type = $('.tf-icon-tab-pane.active').data('type');
+                let max = $('.tf-icon-tab-pane.active').data('max');
+                iconListBottom = iconList[0].scrollHeight - iconList.height();
+
+                if (iconList.scrollTop() >= iconListBottom && !loading && startIndex < max) {
+                    loading = true;
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        type: 'POST',
+                        data: {
+                            action: 'tf_load_more_icons',
+                            _nonce: tf_admin_params.tf_nonce,
+                            start_index: startIndex,
+                            type: type,
+                            search: searchVal,
+                        },
+                        beforeSend: function () {
+                            $('.tf-icon-list').append('<div class="tf-icon-loading">Loading...</div>');
+                        },
+                        success: function (response) {
+                            if(!response.success){
+                                $('.tf-icon-loading').remove();
+                                notyf.error(response.data)
+                            } else {
+                                loading = false;
+                                $('#tf-icon-tab-'+type+' .tf-icon-list').append(response.data);
+                                $('.tf-icon-loading').remove();
+                                startIndex += 100;
+                            }
+
+                        },
+                        error: function (xhr, status, error) {
+                            loading = false;
+                            console.error(error);
+                            $('.tf-icon-loading').remove();
+                        }
+                    });
+                }
+            });
+        }
+        tfIconInfiniteScroll();
+
+        /*
+        * Options ajax save
+        * @author: Foysal
+        */
+
+        $(document).on("click", '.tf-setting-save-btn .tf-submit-btn', function (e) {
+            e.preventDefault();
+            $('.tf-option-form.tf-ajax-save').submit();
+
+        })
+
+        $(document).on('click', '.tf-setting-save-btn .tf-reset-btn', function (e) {
+
+            $.confirm({
+                icon: 'fa fa-warning',
+                title: tf_options.swal_reset_title_text,
+                content: tf_options.swal_reset_other_text,
+                type: 'red',
+                typeAnimated: false,
+                boxWidth: '500px',
+                animationSpeed: 500,
+                animation: 'scale',
+                closeAnimation: 'scale',
+                animateFromElement: false,
+                useBootstrap: false,
+                theme: 'modern',
+                buttons: {
+                    confirm: {
+                        text: tf_options.swal_reset_btn_text,
+                        btnClass: 'btn-blue',
+                        action: function () {
+                            $.ajax({
+                                url: tf_options.ajax_url,
+                                type: 'POST',
+                                data: {
+                                    action: 'tf_options_reset',
+                                    tf_option_nonce: tf_admin_params.tf_nonce,
+                                },
+                                beforeSend: function () {
+                                    $('.tf-setting-save-btn .tf-reset-btn').addClass('tf-btn-loading');
+                                },
+                                success: function (response) {
+
+                                    let data = JSON.parse(response)
+                                    
+                                    if (data.status === 'success') {
+                                        notyf.success(data.message);
+                                        window.location.reload();
+                                    } else {
+                                        notyf.error(data.message);
+                                    }
+                                    
+                                    $('.tf-setting-save-btn .tf-reset-btn').removeClass('tf-btn-loading');
+                                },
+                                error: function (xhr, status, error) {
+                                    console.log(error);
+                                }
+                            }).done(function () {
+                                // window.location.reload();
+                            });
+                        }
+                    },
+                    cancel: {
+                        text: tf_options.swal_reset_cancel_btn_text,
+                        btnClass: 'btn-red',
+                    }
+                }
+            })
+
+            });
+
+        $(document).find("#tf-settings-header-search-filed").on("keyup", debounce(
+            function () {
+                var value = $(this).val().toLowerCase();
+                let div = document.createElement('div');
+                div.classList.add('tf-search-results');
+                if( value.length >= 3 ) {
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        type: 'POST',
+                        data: {
+                            action: 'tf_search_settings_autocomplete',
+                            tf_option_nonce: tf_admin_params.tf_nonce,
+                            search: value,
+                        },
+                        success: function (response) {
+                            let data = JSON.parse(response)
+                            let notfound = 0;
+                            let resultDiv = document.createElement('ul');
+                            if (data.status === 'success') {
+                                $.each( data.message, function( key, obj ) {
+                                    if( obj.field_title.toLowerCase().indexOf(value) != -1 ) {
+                                        let textDiv = document.createElement('li');
+                                        let titleDiv = document.createElement('div');
+                                        titleDiv.classList.add('tf-search-result-title');
+                                        let link = document.createElement('a');
+                                        link.href = `#tab=${obj.parent_id}`;
+                                        let icon = document.createElement('i');
+                                        let title = document.createElement('p');
+                                        let path = document.createElement('span');
+                                        title.innerHTML = obj.field_title;
+                                        path.innerHTML = obj.path;
+                                        icon.classList.add(...obj.icon.split(' '));
+                                        resultDiv.classList.add('tf-search-result');
+                                        textDiv.setAttribute('data-id', obj.id);
+                                        textDiv.setAttribute('data-tab-id', obj.tab_id);
+                                        link.append(icon);
+                                        titleDiv.append(title);
+                                        titleDiv.append(path);
+                                        link.append(titleDiv);
+                                        textDiv.append(link);
+                                        resultDiv.append(textDiv);
+                                    } else {
+                                        notfound = 1;
+                                    }
+                                    if( $('.tf-search-results').length || value < 3 ) {
+                                        $('.tf-search-results').remove();
+                                    } else {
+                                        div.append(resultDiv);
+                                    }
+                                });
+
+                                if( notfound == 1 ) {
+                                    let not_found = document.createElement("p");
+                                    not_found.classList.add('tf-search-not-found');
+                                    not_found.innerHTML = tf_admin_params.setting_search_no_result;
+                                    resultDiv.append(not_found);
+                                }
+                                $(".tf-setting-search").append(div);
+                            } else {
+                                console.log("Something went wrong!");
+                            }
+                        }
+                    })
+                    
+                } else {
+                    $(".tf-search-results").hide();
+                }
+            }, 700 
+        ));
+
+        $(document).on('click', function (e) {
+            if( e.target.id !== 'tf-settings-header-search-filed' && $('.tf-search-results').length ) {
+                $('.tf-search-results').hide();
+            }
+        });
+
+
+        $("#tf-settings-header-search-filed").on('focus', function (e) {
+            if( $('.tf-search-results').length ) {
+                $('.tf-search-results').show();
+            }
+        });
+
+        $(document).on('click', '.tf-search-result li', function (e) {
+            let id = $(this).data('id');
+            let selector = `label[for='tf_settings\\[${id}\\]']`;
+            let tabId = $(this).closest('li').data('tab-id');
+            if( tabId ) {
+                $('.tf-tab-item[data-tab-id="'+tabId+'"]').trigger('click');
+            }
+            $('html, body').animate({
+                scrollTop: $(document).find(selector).closest('.tf-field').offset().top
+            }, 100);
+        
+        });
+
+        $(document).on('submit', '.tf-option-form.tf-ajax-save', function (e) {
+            e.preventDefault();
+            let $this = $(this),
+                submitBtn = $this.find('.tf-submit-btn'),
+                data = new FormData(this);
+            var fontsfile = $('.itinerary-fonts-file').prop("files");
+            if (typeof fontsfile !== "undefined") {
+                for (var i = 0; i < fontsfile.length; i++) {
+                    data.append('file[]', fontsfile[i]);
+                }
+            }
+            // get tf_import_option from data
+            let tf_import_option =  false
+            if (typeof data.get('tf_import_option') !== "undefined" && data.get('tf_import_option').trim() != '') {
+
+                //  confirm data before send
+                if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {
+                    return;
+                }
+
+                tf_import_option = true;
+            }
+            data.append('action', 'tf_options_save');
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: data,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    if(tf_import_option == true ){
+                        $this.find('.tf-import-btn').addClass('tf-btn-loading');
+                    }
+                    submitBtn.addClass('tf-btn-loading');
+                    $('.tf-setting-save-btn .tf-submit-btn').addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    let obj = JSON.parse(response);
+                    if (obj.status === 'success') {
+                        
+                        notyf.success(obj.message);
+
+                        if(tf_import_option == true ){
+                            window.location.reload();;
+                        }
+                    } else {
+                        notyf.error(obj.message);
+                    }
+                    submitBtn.removeClass('tf-btn-loading');
+                    $(".tf-setting-save-btn .tf-submit-btn").removeClass('tf-btn-loading');
+                    if(tf_import_option == true ){
+                        $this.find('.tf-import-btn').removeClass('tf-btn-loading');
+                    }
+                },
+                error: function (error) {
+                    submitBtn.removeClass('tf-btn-loading');
+                    console.log(error['responseText']);
+                    //if error msg contain max_input_vars then show a proper msg
+                    if(error['responseText'].includes('max_input_vars')) {
+                        notyf.error({
+                            message: tf_admin_params.max_input_vars_notice,
+                            duration: 15000,
+                            dismissible: true
+                        });
+                    } else {
+                        notyf.error({
+                            message: error['responseText'],
+                            duration: 6000
+                        });
+                    }
+                }
+            });
+        });
+
+        /*
+        * Each select2 field initialize select2
+        * @author: Foysal, Sydur
+        */
+        const tfSelect2Int = select2Selector => {
+            let $this = select2Selector,
+                id = $this.attr('id'),
+                placeholder = $this.data('placeholder'),
+                deleteData = $this.data('delete');
+
+            if(deleteData === 'yes'){
+                $('#' + id + '').select2({
+                    placeholder: placeholder,
+                    allowClear: true,
+                    templateResult: TfFormatOption,
+                    templateSelection: function (state) {
+                        if (!state.id) {
+                            return state.text;
+                        }
+                
+                        // Get the edit URL from the option's data attribute
+                        var editUrl = $(state.element).data('edit-url');
+                        if(editUrl){
+                            var $state = $(
+                                '<span>' + state.text + ' <a target="_blank" href="'+editUrl+'" class="tf-edit-room"><i class="fa-regular fa-pen-to-square"></i></a></span>'
+                            );
+                            return $state;
+                        }
+                
+                        return state.text;
+                    }
+                });
+            }else{
+                $('#' + id + '').select2({
+                    placeholder: placeholder,
+                    allowClear: true,
+                    templateSelection: function (state) {
+                        if (!state.id) {
+                            return state.text;
+                        }
+                
+                        // Get the edit URL from the option's data attribute
+                        var editUrl = $(state.element).data('edit-url');
+                        if(editUrl){
+                            var $state = $(
+                                '<span>' + state.text + ' <a target="_blank" href="'+editUrl+'" class="tf-edit-room"><i class="fa-regular fa-pen-to-square"></i></a></span>'
+                            );
+                            return $state;
+                        }
+                
+                        return state.text;
+                    }
+                });
+            }
+        
+        }
+        $('select.tf-select2').each(function () {
+            var $this = $(this);
+            tfSelect2Int($this);
+        });
+
+        // Clear Default Select in Tour Backend Booking
+        $('.tf-backend-booking-card-wrap #tf_available_tours').val(null).trigger('change');
+
+        function TfFormatOption(option) {
+            if (!option.id) {
+              return option.text;
+            }
+
+           var $option = $(
+              '<span style="display: flex; justify-content: space-between;">' + option.text + '<span class="tf-remove-button" data-id="' + option.id + '">Remove</span></span>'
+            );
+    
+            return $option;
+        }
+        $(document).on('select2:selecting', '.tf-select2', function (e) {
+
+            if (e.params.args.originalEvent.target.className === 'tf-remove-button') {
+                e.stopPropagation();
+                e.preventDefault();
+
+                let $this = $(this);
+                let parentDiv = $this.closest('.tf-fieldset');
+                let categoryName = parentDiv.find('#category_name').val();
+                let categorySelect = parentDiv.find('#category_select_field_name').val();
+                var termId=$(e.params.args.originalEvent.target).data("id");
+
+                $.ajax({
+                    url: tf_options.ajax_url,
+                    method: 'POST',
+                    data: {
+                        action: 'tf_delete_category_data',
+                        _nonce: tf_admin_params.tf_nonce,
+                        term_id: termId,
+                        categoryName: categoryName
+                    },
+                    success: function (response) {
+                        var data = JSON.parse(response);
+                        if (data.success) {
+                            // Remove the option and trigger the change event
+                            let $selectField = $('#' + categorySelect);
+
+                            // Remove the option from Select2
+                            $selectField.find('option[value="' + termId + '"]').remove();
+
+                            // Close the Select2 dropdown
+                            $selectField.select2('close');
+
+                        } else {
+                            
+                        }
+                    }
+                });
+            }
+        });
+
+
+        $('select.tf-shortcode-select2').each(function(e) {
+            let $this = $(this);
+            let id = $this.attr("id");
+            tfSelect2Int($this);
+
+            $(this).on("select2:select", function (e) { 
+                var select_val = $(e.currentTarget).val();
+                if(select_val && select_val.includes("'all'")) {
+                    $(this).val(["'all'"]).trigger('change.select2');
+                }
+            });
+        })
+
+        /*
+        * Room options count
+        */
+        function roomOptionsArr(){
+            var optionsArr = [];
+            $('.tf-repeater-wrap-room-options .tf-single-repeater-room-options').each(function(i){
+                // Get the dynamic index from the tf_repeater_count field
+                let index = $(this).find('[name="tf_repeater_count"]').val();
+                // Extract the option title and type using the dynamic index
+                let optionType = $(this).find(`[name="tf_room_opt[room-options][${index}][option_pricing_type]"]`).val();
+                let optionTitle = $(this).find(`[name="tf_room_opt[room-options][${index}][option_title]"]`).val();
+                if (index !== undefined) {
+                    optionsArr[index] = {
+                        index: index,
+                        title: optionTitle,
+                        type: optionType
+                    };
+                }
+            })
+            return optionsArr;
+        }
+
+        /*
+        * Tour options count
+        */
+        function tourPackageArr(){
+            var optionsArr = [];
+            $('.tf-repeater-wrap-package_pricing .tf-single-repeater-package_pricing').each(function(i){
+                // Get the dynamic index from the tf_repeater_count field
+                let index = $(this).find('[name="tf_repeater_count"]').val();
+                // Extract the option title and type using the dynamic index
+                let optionType = $(this).find(`[name="tf_tours_opt[package_pricing][${index}][pricing_type]"]`).val();
+                let optionTitle = $(this).find(`[name="tf_tours_opt[package_pricing][${index}][pack_title]"]`).val();
+                if (optionTitle !== undefined) {
+                    optionsArr[index] = {
+                        index: index,
+                        title: optionTitle,
+                        type: optionType
+                    };
+                }
+            })
+            return optionsArr;
+        }
+
+        /*
+        * Tour Group Package count
+        */
+        function tourGroupPackageArr(){
+            var optionsArr = [];
+            $('.tf-repeater-wrap-group_package_pricing .tf-single-repeater-group_package_pricing').each(function(i){
+                // Get the dynamic index from the tf_repeater_count field
+                let index = $(this).find('[name="tf_repeater_count"]').val();
+                // Extract the option title and type using the dynamic index
+                let optionTitle = $(this).find(`[name="tf_tours_opt[group_package_pricing][${index}][pack_title]"]`).val();
+                if (index !== undefined) {
+                    optionsArr[index] = {
+                        index: index,
+                        title: optionTitle,
+                    };
+                }
+            })
+            return optionsArr;
+        }
+
+        $(window).on('load', function () {
+            roomOptionsArr();
+            tourPackageArr();
+            tourGroupPackageArr();
+        });
+
+        /*
+        * Room Availability Calendar
+        * @since 2.10.2
+        * @auther: Foysal
+        */
+        var roomCal = function (container) {
+            var self = this;
+            this.container = container;
+            this.calendar = null
+            this.roomCalData = null;
+            this.fullCalendar;
+            this.timeOut;
+            this.fullCalendarOptions = {
+                initialView: 'dayGridMonth',
+                firstDay: 1,
+                headerToolbar: {
+                    start: 'title',
+                    center: '',
+                    end: 'prev,next'
+                },
+                displayEventTime: true,
+                selectable: true,
+                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {
+                    if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
+                        self.fullCalendar.unselect();
+                        setRoomCheckInOut("", "", self.roomCalData);
+                    } else {
+                        var zone = moment(start).format("Z");
+                        zone = zone.split(":");
+                        zone = "" + parseInt(zone[0]) + ":00";
+                        var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        setRoomCheckInOut(check_in, check_out, self.roomCalData);
+                    }
+                },
+                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        dataType: "json",
+                        type: "POST",
+                        data: {
+                            action: "tf_get_hotel_room_availability",
+                            _nonce: tf_admin_params.tf_nonce,
+                            new_post: $(self.container).find('[name="new_post"]').val(),
+                            room_id: $(self.container).find('[name="room_id"]').val(),
+                            avail_date: $(self.container).find('.avail_date').val(),
+                            option_arr: roomOptionsArr(),
+                        },
+                        beforeSend: function () {
+                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
+                            $(self.calendar).addClass('tf-content-loading');
+                        },
+                        success: function (doc) {
+                            if (typeof doc == "object") {
+                                successCallback(doc?.avail_data);
+                            }
+
+                            $('.tf-single-options').html(doc?.options_html);
+
+                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
+                            $(self.calendar).removeClass('tf-content-loading');
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
+                },
+                eventContent: function (arg) {
+                    const title = arg.event.title;
+                    const eventTitleElement = document.createElement('div');
+                    eventTitleElement.classList.add('fc-event-title');
+                    eventTitleElement.innerHTML = title;
+                    return {domNodes: [eventTitleElement]};
+                },
+                eventClick: function ({event, el, jsEvent, view}) {
+                    let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                        .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    let endTime;
+                    if (event.end) {
+                        endTime = moment(event.end, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                            .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    } else {
+                        endTime = startTime;
+                    }
+                    setRoomCheckInOut(startTime, endTime, self.roomCalData);
+                    let priceBy = $('.tf_room_pricing_by').val();
+                    if (priceBy === '1') {
+                        if (typeof event.extendedProps.price != 'undefined') {
+                            $("[name='tf_room_price']", self.roomCalData).val(event.extendedProps.price);
+                        }
+                    } else if(priceBy === '2'){
+                        if (typeof event.extendedProps.adult_price != 'undefined') {
+                            $("[name='tf_room_adult_price']", self.roomCalData).val(event.extendedProps.adult_price);
+                        }
+                        if (typeof event.extendedProps.child_price != 'undefined') {
+                            $("[name='tf_room_child_price']", self.roomCalData).val(event.extendedProps.child_price);
+                        }
+                    } else {
+                        if(event.extendedProps.options_count != 0) {
+                            for (var i = 0; i <= event.extendedProps.options_count - 1; i++) {
+                                $("[name='tf_room_option_" + i + "']", self.roomCalData).prop('checked', event.extendedProps["tf_room_option_" + i] == 1);
+
+                                $("[name='tf_option_room_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_room_price_" + i]);
+                                $("[name='tf_option_adult_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_adult_price_" + i]);
+                                $("[name='tf_option_child_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_child_price_" + i]);
+                            }
+                        }
+                    }
+                    if (event.extendedProps.status) {
+                        $("[name='tf_room_status'] option[value=" + event.extendedProps.status + "]", self.roomCalData).prop("selected", true);
+                    }
+                },
+            };
+            this.init = function () {
+                self.container = jQuery(container);
+                self.calendar = container.querySelector('.tf-room-cal');
+                self.roomCalData = $('.tf-room-cal-field', self.container);
+                setRoomCheckInOut('', '', self.roomCalData);
+                self.initCalendar();
+            }
+            this.initCalendar = function () {
+                if (typeof FullCalendar != 'undefined') {
+                    self.fullCalendar = new FullCalendar.Calendar(self.calendar, self.fullCalendarOptions);
+                    self.fullCalendar.render();
+                }
+            }
+        };
+
+        function setRoomCheckInOut(check_in, check_out, roomCalData) {
+            $('.tf_room_check_in', roomCalData).val(check_in);
+            $('.tf_room_check_out', roomCalData).val(check_out);
+        }
+
+        function roomResetForm(roomCalData) {
+            $('.tf_room_check_in', roomCalData).val('');
+            $('.tf_room_check_out', roomCalData).val('');
+            $('[name="tf_room_price"]', roomCalData).val('');
+            $('[name="tf_room_adult_price"]', roomCalData).val('');
+            $('[name="tf_room_child_price"]', roomCalData).val('');
+        }
+
+        const tfHotelCalendar = () => {
+            $('.tf-room-cal-wrap').each(function (index, el) {
+                var room = new roomCal(el);
+                room.init();
+            });
+        }
+        tfHotelCalendar();
+
+        $('.tf-room-cal-wrap').each(function (index, el) {
+            let checkIn = $(el).find('[name="tf_room_check_in"]').flatpickr({
+                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                minDate: 'today',
+                altInput: true,
+                altFormat: tf_options.tf_admin_date_format,
+                onChange: function (selectedDates, dateStr, instance) {
+                    checkOut.set('minDate', dateStr);
+                }
+            });
+
+            let checkOut = $(el).find('[name="tf_room_check_out"]').flatpickr({
+                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                minDate: 'today',
+                altInput: true,
+                altFormat: tf_options.tf_admin_date_format,
+                onChange: function (selectedDates, dateStr, instance) {
+                    checkIn.set('maxDate', dateStr);
+                }
+            });
+        });
+
+        $(document).on('click', '.tf_room_cal_update', function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let container = btn.closest('.tf-room-cal-wrap');
+            let containerEl = btn.closest('.tf-room-cal-wrap')[0];
+            let cal = container.find('.tf-room-cal');
+            let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
+            let priceBy = $('.tf_room_pricing_by').val();
+            let avail_date = container.find('.avail_date');
+            data.push({name: 'action', value: 'tf_add_hotel_room_availability'});
+            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
+            data.push({name: 'price_by', value: priceBy});
+            data.push({name: 'avail_date', value: avail_date.val()});
+            data.push({name: 'options_count', value: roomOptionsArr().length});
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    cal.addClass('tf-content-loading');
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    if (typeof response == 'object') {
+                        if (response.data.status === true) {
+                            avail_date.val(response.data.avail_date)
+                            notyf.success(response.data.message);
+                            roomResetForm(container);
+
+                            var room = new roomCal(containerEl);
+                            room.init();
+                            if (room.fullCalendar) {
+                                room.fullCalendar.refetchEvents();
+                            }
+                        } else {
+                            notyf.error(response.data.message);
+                        }
+
+                        container.css({'pointer-events': 'auto', 'opacity': '1'})
+                        cal.removeClass('tf-content-loading');
+                        btn.removeClass('tf-btn-loading');
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                complete: function () {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+            });
+        });
+
+        $(document).on('change', '.tf_room_pricing_by', function (e) {
+            let pricing_by = $(this).val();
+
+            if (pricing_by === '1') {
+                $('.tf-price-by-room').show();
+                $('.tf-price-by-person').hide();
+                $('.tf-room-cal-field .tf-single-option').hide();
+            } else if (pricing_by === '2') {
+                $('.tf-price-by-person').show();
+                $('.tf-price-by-room').hide();
+                $('.tf-room-cal-field .tf-single-option').hide();
+            } else if(pricing_by === '3') {
+                $('.tf-price-by-room').hide();
+                $('.tf-price-by-person').hide();
+                $('.tf-room-cal-field .tf-single-option').show();
+            }
+        });
+
+        // Switcher Value Changed
+        $(document).on("change", ".tf-switch", function (e) {
+            var $this = $(this);
+            if (this.checked) {
+                var value = $this.val(1);
+            } else {
+                var value = $this.val('');
+            }
+
+            if ($this.hasClass('tf_room_availability_by_date')) {
+                tfHotelCalendar();
+            }
+            if ($this.hasClass('tf_apartment_availability_by_date')){
+                tfApartmentCalendar();
+            }
+            if ($this.hasClass('tf_tour_availability_by_date')){
+                tfTourCalendar();
+            }
+        });
+
+        /*
+        * Apartment Availability Calendar
+        * @since 2.10.2
+        * @auther: Foysal
+        */
+        var apartmentCal = function (container) {
+            var self = this;
+            this.container = container;
+            this.calendar = null
+            this.apartmentCalData = null;
+            this.fullCalendar;
+            this.timeOut;
+            this.fullCalendarOptions = {
+                initialView: 'dayGridMonth',
+                firstDay: 1,
+                headerToolbar: {
+                    start: 'title',
+                    center: '',
+                    end: 'prev,next'
+                },
+                displayEventTime: true,
+                selectable: true,
+                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {
+                    if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
+                        self.fullCalendar.unselect();
+                        setAptCheckInOut("", "", self.apartmentCalData);
+                    } else {
+                        var zone = moment(start).format("Z");
+                        zone = zone.split(":");
+                        zone = "" + parseInt(zone[0]) + ":00";
+                        var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        setAptCheckInOut(check_in, check_out, self.apartmentCalData);
+                    }
+                },
+                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        dataType: "json",
+                        type: "POST",
+                        data: {
+                            action: "tf_get_apartment_availability",
+                            _nonce: tf_admin_params.tf_nonce,
+                            new_post: $('[name="new_post"]').val(),
+                            apartment_id: $('[name="apartment_id"]').val(),
+                            apt_availability: $('.apt_availability').val(),
+                        },
+                        beforeSend: function () {
+                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
+                            $(self.calendar).addClass('tf-content-loading');
+                        },
+                        success: function (doc) {
+                            if (typeof doc == "object") {
+                                successCallback(doc);
+                            }
+
+                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
+                            $(self.calendar).removeClass('tf-content-loading');
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
+                },
+                eventContent: function (arg) {
+                    const title = arg.event.title;
+                    const eventTitleElement = document.createElement('div');
+                    eventTitleElement.classList.add('fc-event-title');
+                    eventTitleElement.innerHTML = title;
+                    return {domNodes: [eventTitleElement]};
+                },
+                eventClick: function ({event, el, jsEvent, view}) {
+                    let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                        .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    let endTime;
+                    if (event.end) {
+                        endTime = moment(event.end, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                            .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    } else {
+                        endTime = startTime;
+                    }
+                    setAptCheckInOut(startTime, endTime, self.apartmentCalData);
+                    let pricingType = $('.tf_apt_pricing_type').val();
+                    if (pricingType === 'per_night') {
+                        if (typeof event.extendedProps.price != 'undefined') {
+                            $("[name='tf_apt_price']", self.apartmentCalData).val(event.extendedProps.price);
+                        }
+                    } else {
+                        if (typeof event.extendedProps.adult_price != 'undefined') {
+                            $("[name='tf_apt_adult_price']", self.apartmentCalData).val(event.extendedProps.adult_price);
+                        }
+                        if (typeof event.extendedProps.child_price != 'undefined') {
+                            $("[name='tf_apt_child_price']", self.apartmentCalData).val(event.extendedProps.child_price);
+                        }
+                        if (typeof event.extendedProps.infant_price != 'undefined') {
+                            $("[name='tf_apt_infant_price']", self.apartmentCalData).val(event.extendedProps.infant_price);
+                        }
+                    }
+                    if (event.extendedProps.status) {
+                        $("[name='tf_apt_status'] option[value=" + event.extendedProps.status + "]", self.apartmentCalData).prop("selected", true);
+                    }
+                },
+            };
+            this.init = function () {
+                self.container = jQuery(container);
+                self.calendar = container.querySelector('.tf-apt-cal');
+                self.apartmentCalData = $('.tf-apt-cal-field', self.container);
+                setAptCheckInOut('', '', self.apartmentCalData);
+                self.initCalendar();
+            }
+            this.initCalendar = function () {
+                if (typeof FullCalendar != 'undefined') {
+                    self.fullCalendar = new FullCalendar.Calendar(self.calendar, self.fullCalendarOptions);
+                    self.fullCalendar.render();
+                }
+            }
+        };
+
+        function setAptCheckInOut(check_in, check_out, apartmentCalData) {
+            $('.tf_apt_check_in', apartmentCalData).val(check_in);
+            $('.tf_apt_check_out', apartmentCalData).val(check_out);
+        }
+
+        function aptResetForm(apartmentCalData) {
+            $('.tf_apt_check_in', apartmentCalData).val('');
+            $('.tf_apt_check_out', apartmentCalData).val('');
+            $('[name="tf_apt_price"]', apartmentCalData).val('');
+            $('[name="tf_apt_adult_price"]', apartmentCalData).val('');
+            $('[name="tf_apt_child_price"]', apartmentCalData).val('');
+            $('[name="tf_apt_infant_price"]', apartmentCalData).val('');
+        }
+
+        const tfApartmentCalendar = () => {
+            $('.tf-apt-cal-wrap').each(function (index, el) {
+                var apt = new apartmentCal(el);
+                apt.init();
+
+                let checkIn = $(el).find('[name="tf_apt_check_in"]').flatpickr({
+                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                    minDate: 'today',
+                    altInput: true,
+                    altFormat: tf_options.tf_admin_date_format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        checkOut.set('minDate', dateStr);
+                    }
+                });
+
+                let checkOut = $(el).find('[name="tf_apt_check_out"]').flatpickr({
+                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                    minDate: 'today',
+                    altInput: true,
+                    altFormat: tf_options.tf_admin_date_format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        checkIn.set('maxDate', dateStr);
+                    }
+                });
+            });
+        }
+        tfApartmentCalendar();
+
+        $(document).on('click', '.tf_apt_cal_update', function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let container = btn.closest('.tf-apt-cal-wrap');
+            let containerEl = btn.closest('.tf-apt-cal-wrap')[0];
+            let cal = container.find('.tf-apt-cal');
+            let data = $('input, select', container.find('.tf-apt-cal-field')).serializeArray();
+            let pricingType = $('.tf_apt_pricing_type').val();
+            let aptAvailability = container.find('.apt_availability');
+            data.push({name: 'action', value: 'tf_add_apartment_availability'});
+            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
+            data.push({name: 'pricing_type', value: pricingType});
+            data.push({name: 'apt_availability', value: aptAvailability.val()});
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    cal.addClass('tf-content-loading');
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    if (typeof response == 'object') {
+                        if (response.data.status === true) {
+                            aptAvailability.val(response.data.apt_availability)
+                            notyf.success(response.data.message);
+                            aptResetForm(container);
+
+                            var apt = new apartmentCal(containerEl);
+                            apt.init();
+                            if (apt.fullCalendar) {
+                                apt.fullCalendar.refetchEvents();
+                            }
+                        } else {
+                            notyf.error(response.data.message);
+                        }
+
+                        container.css({'pointer-events': 'auto', 'opacity': '1'})
+                        cal.removeClass('tf-content-loading');
+                        btn.removeClass('tf-btn-loading');
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                complete: function () {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+            });
+        });
+
+        $(document).on('change', '.tf_apt_pricing_type', function (e) {
+            let pricingType = $(this).val();
+
+            if (pricingType === 'per_night') {
+                $('.tf-price-by-night').show();
+                $('.tf-price-by-person').hide();
+            } else if (pricingType === '2') {
+                $('.tf-price-by-person').show();
+                $('.tf-price-by-night').hide();
+            }
+        });
+
+         /*
+        * Tour Availability Calendar
+        * @since 2.10.2
+        * @auther: Foysal
+        */
+         var tourCal = function (container) {
+            var self = this;
+            this.container = container;
+            this.calendar = null
+            this.tourCalData = null;
+            this.fullCalendar;
+            this.timeOut;
+            this.fullCalendarOptions = {
+                initialView: 'dayGridMonth',
+                firstDay: 1,
+                headerToolbar: {
+                    start: 'title',
+                    center: '',
+                    end: 'prev,next'
+                },
+                displayEventTime: true,
+                selectable: true,
+                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {
+                    tourResetForm('');
+                    if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
+                        self.fullCalendar.unselect();
+                        setTourCheckInOut("", "", self.tourCalData);
+                    } else {
+                        var zone = moment(start).format("Z");
+                        zone = zone.split(":");
+                        zone = "" + parseInt(zone[0]) + ":00";
+                        var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        setTourCheckInOut(check_in, check_out, self.tourCalData);
+                    }
+                },
+                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        dataType: "json",
+                        type: "POST",
+                        data: {
+                            action: "tf_get_tour_availability",
+                            _nonce: tf_admin_params.tf_nonce,
+                            new_post: $('[name="new_post"]').val(),
+                            tour_id: $('[name="tour_id"]').val(),
+                            tour_availability: $('.tour_availability').val(),
+                            option_arr: tourPackageArr(),
+                            group_option_arr: tourGroupPackageArr(),
+                        },
+                        beforeSend: function () {
+                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
+                            $(self.calendar).addClass('tf-content-loading');
+                        },
+                        success: function (doc) {
+                            if (typeof doc == "object") {
+                                successCallback(doc?.avail_data);
+                            }
+                            $('.tf-package-field-repeater').html(doc?.options_html);
+                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
+                            $(self.calendar).removeClass('tf-content-loading');
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
+                },
+                eventContent: function (arg) {
+                    const title = arg.event.title;
+                    const eventTitleElement = document.createElement('div');
+                    eventTitleElement.classList.add('fc-event-title');
+                    eventTitleElement.innerHTML = title;
+                    return {domNodes: [eventTitleElement]};
+                },
+                eventDidMount: function (arg) {
+                    const customClass = arg.event.extendedProps.customClass || '';
+                    if(customClass){
+                        arg.el.classList.add(customClass);
+                    }
+                },
+                eventClick: function ({event, el, jsEvent, view}) {
+                    let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                        .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    let endTime;
+                    if (event.end) {
+                        endTime = moment(event.end, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase()).subtract(1, 'days')
+                            .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    } else {
+                        endTime = startTime;
+                    }
+                    setTourCheckInOut(startTime, endTime, self.tourCalData);
+                    let pricingType = $('.tf_tour_pricing_type').val();
+                    let allow_package_pricing = $('[name="tf_tours_opt[allow_package_pricing]"]').val();
+
+                    if (typeof event.extendedProps.min_person != 'undefined') {
+                        $("[name='tf_tour_min_person']", self.tourCalData).val(event.extendedProps.min_person);
+                    }
+                    if (typeof event.extendedProps.max_person != 'undefined') {
+                        $("[name='tf_tour_max_person']", self.tourCalData).val(event.extendedProps.max_person);
+                    }
+                    if (typeof event.extendedProps.max_capacity != 'undefined') {
+                        $("[name='tf_tour_max_capacity']", self.tourCalData).val(event.extendedProps.max_capacity);
+                    }
+
+                    // Selected Time
+                    let allRepeaterHTML = '';
+                    if (typeof event.extendedProps.allowed_time != 'undefined') {
+                        const allowedTime = event.extendedProps.allowed_time;
+                        const times = Array.isArray(allowedTime.time)
+                            ? allowedTime.time
+                            : (typeof allowedTime.time === 'object' && allowedTime.time !== null)
+                                ? Object.values(allowedTime.time)
+                                : [];
+
+                        const capacities = Array.isArray(allowedTime.cont_max_capacity)
+                            ? allowedTime.cont_max_capacity
+                            : (typeof allowedTime.cont_max_capacity === 'object' && allowedTime.cont_max_capacity !== null)
+                                ? Object.values(allowedTime.cont_max_capacity)
+                                : [];
+                        // More specific selector with error handling
+                        const container = document.querySelector('.tf_tour_allowed_times');
+
+                        if (!container) {
+                            console.error('Container element not found!');
+                            return;
+                        }
+
+                        // Clear old content safely
+                        while (container.firstChild) {
+                            container.removeChild(container.firstChild);
+                        }
+
+                        
+                        if(times.length > 0){
+                            times.forEach((time, index) => {
+                                if (!time) return;
+                                const capacity = capacities[index] || '';
+
+                                allRepeaterHTML += `
+                                <div class="tf-single-repeater tf-single-repeater-allowed_time">
+                                    <input type="hidden" name="tf_parent_field" value="">
+                                    <input type="hidden" name="tf_repeater_count" value="${index + 1}">
+                                    <input type="hidden" name="tf_current_field" value="allowed_time">
+                                    <div class="tf-repeater-content-wrap">
+                                        <div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
+                                            <div class="tf-fieldset">
+                                                <input type="text" name="allowed_time[time][]" placeholder="Select Time" value="${time}" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
+                                                <i class="fa-regular fa-clock"></i>
+                                            </div>
+                                        </div>
+                                        <div class="tf-field tf-field-number" style="width: calc(50% - 6px);">
+                                            <div class="tf-fieldset">
+                                                <input type="number" name="allowed_time[cont_max_capacity][]" id="allowed_time[cont_max_capacity]" value="${capacity}" placeholder="Maximum Capacity">
+                                            </div>
+                                        </div>
+                                        <span class="tf-repeater-icon tf-repeater-icon-delete">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15 5L5 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M5 5L15 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            `;
+
+                            });
+                        }
+                    }
+                    // Append only if there's valid time
+                    if (pricingType!='package' && allRepeaterHTML) {
+                        $('.tf_tour_saved_allowed_times').append(allRepeaterHTML);
+                        // Re-initialize flatpickr on the newly added inputs
+                        $('.tf_tour_allowed_times .flatpickr-input').flatpickr({
+                            enableTime: true,
+                            noCalendar: true,
+                            dateFormat: "h:i K"
+                        });
+                    }
+
+                    if (pricingType === 'group' && allow_package_pricing!=1) {
+                        if (typeof event.extendedProps.price != 'undefined') {
+                            $("[name='tf_tour_price']", self.tourCalData).val(event.extendedProps.price);
+                        }
+                    } else if (pricingType === 'person') {
+                        if (typeof event.extendedProps.adult_price != 'undefined') {
+                            $("[name='tf_tour_adult_price']", self.tourCalData).val(event.extendedProps.adult_price);
+                        }
+                        if (typeof event.extendedProps.child_price != 'undefined') {
+                            $("[name='tf_tour_child_price']", self.tourCalData).val(event.extendedProps.child_price);
+                        }
+                        if (typeof event.extendedProps.infant_price != 'undefined') {
+                            $("[name='tf_tour_infant_price']", self.tourCalData).val(event.extendedProps.infant_price);
+                        }
+                    } else {
+                        if(event.extendedProps.options_count != 0) {
+                            for (var i = 0; i <= event.extendedProps.options_count - 1; i++) {
+                                $("[name='tf_option_min_person_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_min_person_" + i]);
+                                $("[name='tf_option_max_person_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_max_person_" + i]);
+                                $("[name='tf_option_group_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_group_price_" + i]);
+                                $("[name='tf_option_adult_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_adult_price_" + i]);
+                                $("[name='tf_option_child_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_child_price_" + i]);
+                                $("[name='tf_option_infant_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_infant_price_" + i]);
+
+                                const discountData = event.extendedProps["tf_option_group_discount_" + i];
+                                let allGroupDiscountRepeaterHTML = '';
+
+                                if (discountData && Array.isArray(discountData.min_person)) {
+                                    discountData.min_person.forEach((min, index) => {
+                                        if (!min) return;
+                                        const max = discountData.max_person[index] || '';
+                                        const price = discountData.price[index] || '';
+
+                                        allGroupDiscountRepeaterHTML += `
+                                            <div class="tf-single-repeater tf-single-repeater-group_discount_package">
+                                                <input type="hidden" name="tf_parent_field" value="[group_tabs]">
+                                                <input type="hidden" name="tf_repeater_count" value="${index + 1}">
+                                                <input type="hidden" name="tf_current_field" value="group_discount_package">
+                                                
+                                                <div class="tf-repeater-content-wrap">
+                                                    <div class="tf-field tf-field-number" style="width:calc(66% - 10px);">
+                                                        <div class="tf-fieldset">
+                                                            <div class="tf-number-range">
+                                                                <div class="tf-number-field-box">
+                                                                    <i class="fa-regular fa-user"></i>
+                                                                    <input type="number" name="tf_option_${i}_group_discount[min_person][]" value="${min}" min="0" placeholder="Min Person">
+                                                                </div>
+                                                                <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M15.5 6.66797L18.8333 10.0013L15.5 13.3346" stroke="#95A3B2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                    <path d="M2.1665 10H18.8332" stroke="#95A3B2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                </svg>
+                                                                <div class="tf-number-field-box">
+                                                                    <i class="fa-regular fa-user"></i>
+                                                                    <input type="number" name="tf_option_${i}_group_discount[max_person][]" value="${max}" min="0" placeholder="Max Person">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tf-field tf-field-number" style="width:calc(33% - 10px);">
+                                                        <div class="tf-fieldset">
+                                                            <input type="number" name="tf_option_${i}_group_discount[price][]" value="${price}" min="0" placeholder="Price">
+                                                        </div>
+                                                    </div>
+
+                                                    <span class="tf-repeater-icon tf-repeater-icon-delete">
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M15 5L5 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            <path d="M5 5L15 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        `;
+                                    });
+                                }
+                                if (allGroupDiscountRepeaterHTML) {
+                                    $('.tf-group-discount-package_'+i).append(allGroupDiscountRepeaterHTML);
+                                }
+
+                                // package times
+                                const packageTimesData = event.extendedProps["tf_option_times_" + i];
+                                let allPackageRepeaterHTML = '';
+
+                                if (packageTimesData && Array.isArray(packageTimesData.time)) {
+                                    packageTimesData.time.forEach((time, index) => {
+                                        if (!time) return;
+                                        const capacity = packageTimesData.cont_max_capacity[index] || '';
+
+                                        allPackageRepeaterHTML += `
+                                            <div class="tf-single-repeater tf-single-repeater-allowed_time">
+                                                <input type="hidden" name="tf_parent_field" value="">
+                                                <input type="hidden" name="tf_repeater_count" value="${index + 1}">
+                                                <input type="hidden" name="tf_current_field" value="allowed_time">
+                                                <div class="tf-repeater-content-wrap">
+                                                    <div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
+                                                        <div class="tf-fieldset">
+                                                            <input type="text" name="tf_option_${i}_allowed_time[time][]" placeholder="Select Time" value="${time}" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
+                                                            <i class="fa-regular fa-clock"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tf-field tf-field-number" style="width: calc(50% - 6px);">
+                                                        <div class="tf-fieldset">
+                                                            <input type="number" name="tf_option_${i}_allowed_time[cont_max_capacity][]" value="${capacity}" placeholder="Maximum Capacity">
+                                                        </div>
+                                                    </div>
+                                                    <span class="tf-repeater-icon tf-repeater-icon-delete">
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M15 5L5 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M5 5L15 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        `;
+                                    });
+                                }
+
+                                if (allPackageRepeaterHTML) {
+                                    $('.tf-tour-package-allowed-time_'+i).html(allPackageRepeaterHTML);
+
+                                    // Re-initialize flatpickr on the newly added inputs
+                                    $('.tf_tour_allowed_times .flatpickr-input').flatpickr({
+                                        enableTime: true,
+                                        noCalendar: true,
+                                        dateFormat: "h:i K"
+                                    });
+                                }
+
+                            }
+                        }
+                        if(typeof event.extendedProps.options_count == 'undefined'){
+                            $(".tf_option_pricing_type_person input").val('');
+                            $(".tf_option_pricing_type_group input").val('');
+                        }
+                    }
+                    if (event.extendedProps.status) {
+                        $("[name='tf_tour_status'] option[value=" + event.extendedProps.status + "]", self.tourCalData).prop("selected", true);
+                    }
+                },
+            };
+            this.init = function () {
+                self.container = jQuery(container);
+                self.calendar = container.querySelector('.tf-tour-cal');
+                self.tourCalData = $('.tf-tour-cal-field', self.container);
+                setTourCheckInOut('', '', self.tourCalData);
+                self.initCalendar();
+            }
+            this.initCalendar = function () {
+                if (typeof FullCalendar != 'undefined') {
+                    self.fullCalendar = new FullCalendar.Calendar(self.calendar, self.fullCalendarOptions);
+                    self.fullCalendar.render();
+                }
+            }
+        };
+
+        function setTourCheckInOut(check_in, check_out, tourCalData) {
+            $('.tf_tour_check_in', tourCalData).val(check_in);
+            $('.tf_tour_check_out', tourCalData).val(check_out);
+        }
+
+        function tourResetForm(tourCalData) {
+            $('.tf_tour_check_in', tourCalData).val('');
+            $('.tf_tour_check_out', tourCalData).val('');
+            $('[name="tf_tour_price"]', tourCalData).val('');
+            $('[name="tf_tour_adult_price"]', tourCalData).val('');
+            $('[name="tf_tour_child_price"]', tourCalData).val('');
+            $('[name="tf_tour_infant_price"]', tourCalData).val('');
+            $('[name="tf_tour_min_person"]', tourCalData).val('');
+            $('[name="tf_tour_max_person"]', tourCalData).val('');
+            $('[name="tf_tour_max_capacity"]', tourCalData).val('');
+            $('[name="tf_tour_repeat_day[]"], [name="tf_tour_repeat_month[]"], [name="tf_tour_repeat_year[]"], [name="tf_tour_repeat_week[]"]')
+            .prop('checked', false);
+            $('.bulk-popup-content-box #adult_tabs input, .bulk-popup-content-box #child_tabs input, .bulk-popup-content-box #infant_tabs input, .bulk-popup-content-box #group_tabs input').val('');
+
+            $('.tf-tour-cal-field .tf_tour_allowed_times').html('');
+
+            // More specific selector with error handling
+            const container = document.querySelector('.tf_tour_allowed_times');
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+        }
+
+        const tfTourCalendar = () => {
+            $('.tf-tour-cal-wrap').each(function (index, el) {
+                var tour = new tourCal(el);
+                tour.init();
+
+                let checkIn = $(el).find('[name="tf_tour_check_in"]').flatpickr({
+                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                    minDate: 'today',
+                    altInput: true,
+                    altFormat: tf_options.tf_admin_date_format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        checkOut.set('minDate', dateStr);
+                    }
+                });
+
+                let checkOut = $(el).find('[name="tf_tour_check_out"]').flatpickr({
+                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                    minDate: 'today',
+                    altInput: true,
+                    altFormat: tf_options.tf_admin_date_format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        checkIn.set('maxDate', dateStr);
+                    }
+                });
+            });
+        }
+        tfTourCalendar();
+
+        $(document).on('click', '.tf_tour_cal_update', function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let container = btn.closest('.tf-tour-cal-wrap');
+            let containerEl = btn.closest('.tf-tour-cal-wrap')[0];
+            let cal = container.find('.tf-tour-cal');
+            let data = $('input, select', container.find('.tf-tour-cal-field')).serializeArray();
+            let pricingType = $('.tf_tour_pricing_type').val();
+            let tourAvailability = container.find('.tour_availability');
+            data.push({name: 'action', value: 'tf_add_tour_availability'});
+            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
+            data.push({name: 'pricing_type', value: pricingType});
+            data.push({name: 'tour_availability', value: tourAvailability.val()});
+            data.push({name: 'options_count', value: tourPackageArr().length});
+            data.push({name: 'group_options_count', value: tourGroupPackageArr().length});
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    cal.addClass('tf-content-loading');
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    if (typeof response == 'object') {
+                        if (response.data.status === true) {
+                            tourAvailability.val(response.data.tour_availability)
+                            notyf.success(response.data.message);
+                            tourResetForm(container);
+
+                            var tour = new tourCal(containerEl);
+                            tour.init();
+                            if (tour.fullCalendar) {
+                                tour.fullCalendar.refetchEvents();
+                            }
+                        } else {
+                            notyf.error(response.data.message);
+                        }
+
+                        container.css({'pointer-events': 'auto', 'opacity': '1'})
+                        cal.removeClass('tf-content-loading');
+                        btn.removeClass('tf-btn-loading');
+                    }
+
+                    $('.tf-check-dates').show();
+                    $('.tf_tour_cal_reset').show();
+                    $('.tf_tour_cal_bulk_edit').show();
+                    $('.tf-tour-cal-field').removeClass('tf-bulk-popup');
+                    $('.tf-bulk-repeater-section').hide();
+                    $('.tf-bulk-edit-header').hide();
+                    $('.tf-field-group-box .tf-tab-switch-box .tf-tab-field-content').hide();
+                },
+                error: function (e) {
+                    console.log(e);
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                complete: function () {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+
+                    $('.tf-check-dates').show();
+                    $('.tf_tour_cal_reset').show();
+                    $('.tf_tour_cal_bulk_edit').show();
+                    $('.tf-tour-cal-field').removeClass('tf-bulk-popup');
+                    $('.tf-bulk-repeater-section').hide();
+                    $('.tf-bulk-edit-header').hide();
+                    $('.tf-field-group-box .tf-tab-switch-box .tf-tab-field-content').hide();
+                },
+            });
+        });
+
+        // Refresh Calendar
+        $(document).on("click", ".tf_tour_cal_refresh", function (e) {
+            e.preventDefault();
+            tfTourCalendar();
+        });
+
+        // Reset Calendar Data
+        $(document).on("click", ".tf_tour_cal_reset, .tf_room_cal_reset, .tf_apt_cal_reset", function (e) {
+            e.preventDefault();
+            $('.tf-reset-confirmation-box').css('display', 'flex');
+        });
+
+        //tour availability calander reset
+        $(document).on('click', '.tf-tour-cal-field .tf-reset-confirmation-box .tf-confirmed-btn', function (e) {
+            e.preventDefault();
+            let btn = $(this);
+            let container = btn.closest('.tf-tour-cal-wrap');
+            let containerEl = btn.closest('.tf-tour-cal-wrap')[0];
+            let cal = container.find('.tf-tour-cal');
+            let tourAvailability = container.find('.tour_availability');
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: {
+                    'action': 'tf_reset_tour_availability',
+                    '_nonce': tf_admin_params.tf_nonce,
+                    'tour_id': $('#post_ID').val()
+                },
+                beforeSend: function () {
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    cal.addClass('tf-content-loading');
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    if (response.data.status === true) {
+                        tourAvailability.val(response.data.tour_availability)
+                        notyf.success(response.data.message);
+                        tourResetForm(container);
+
+                        var tour = new tourCal(containerEl);
+                        tour.init();
+                        if (tour.fullCalendar) {
+                            tour.fullCalendar.refetchEvents();
+                        }
+                    } else {
+                        notyf.error(response.data.message);
+                    }
+
+                    $('.tf-reset-confirmation-box').hide();
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+
+                },
+                error: function (e) {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                complete: function () {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                    $('.tf-tour-cal-field').removeClass('tf-bulk-popup');
+                },
+            });
+        });
+
+        //room availability calander reset
+        $(document).on('click', '.tf-room-cal-field .tf-reset-confirmation-box .tf-confirmed-btn', function (e) {
+            e.preventDefault();
+            let btn = $(this);
+            let container = btn.closest('.tf-room-cal-wrap');
+            let containerEl = btn.closest('.tf-room-cal-wrap')[0];
+            let cal = container.find('.tf-room-cal');
+            let roomAvailability = container.find('avail_date');
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: {
+                    'action': 'tf_reset_room_availability',
+                    '_nonce': tf_admin_params.tf_nonce,
+                    'room_id': $('#post_ID').val()
+                },
+                beforeSend: function () {
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    cal.addClass('tf-content-loading');
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    if (response.data.status === true) {
+                        roomAvailability.val(response.data.avail_date)
+                        notyf.success(response.data.message);
+                        roomResetForm(container);
+
+                        var room_cal = new roomCal(containerEl);
+                        room_cal.init();
+                        if (room_cal.fullCalendar) {
+                            room_cal.fullCalendar.refetchEvents();
+                        }
+                    } else {
+                        notyf.error(response.data.message);
+                    }
+                    
+                    $('.tf-reset-confirmation-box').hide();
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                error: function (e) {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                complete: function () {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+            });
+        });
+
+        //apartment availability calander reset
+        $(document).on('click', '.tf-apt-cal-field .tf-reset-confirmation-box .tf-confirmed-btn', function (e) {
+            e.preventDefault();
+            let btn = $(this);
+            let container = btn.closest('.tf-apt-cal-wrap');
+            let containerEl = btn.closest('.tf-apt-cal-wrap')[0];
+            let cal = container.find('.tf-apt-cal');
+            let aptAvailability = container.find('.apt_availability');
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: {
+                    'action': 'tf_reset_apt_availability',
+                    '_nonce': tf_admin_params.tf_nonce,
+                    'apartment_id': $('#post_ID').val()
+                },
+                beforeSend: function () {
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    cal.addClass('tf-content-loading');
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    if (response.data.status === true) {
+                        aptAvailability.val(response.data.apt_availability)
+                        notyf.success(response.data.message);
+                        aptResetForm(container);
+
+                        var apt_cal = new apartmentCal(containerEl);
+                        apt_cal.init();
+                        if (apt_cal.fullCalendar) {
+                            apt_cal.fullCalendar.refetchEvents();
+                        }
+                    } else {
+                        notyf.error(response.data.message);
+                    }
+                    
+                    $('.tf-reset-confirmation-box').hide();
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+
+                },
+                error: function (e) {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                complete: function () {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                    $('.tf-tour-cal-field').removeClass('tf-bulk-popup');
+                },
+            });
+        });
+
+        $(document).on("click", ".tf-reset-confirmation-box .tf-cancel-btn, .tf-reset-confirmation-box .tf_reset_confirmation_close svg", function (e) {
+            e.preventDefault();
+            $('.tf-reset-confirmation-box').hide();
+        });
+
+        $(document).on("click", ".tf-reset-confirmation-box", function (e) {
+            if (!$(e.target).closest('.tf-confirmation-content').length) {
+                $(this).hide(); // Hide the popup
+            }
+        });
+
+        // add pacakge
+        // $(document).on("click", ".tf-repeater-add-package_pricing", function (e) {
+        //     $(this).hide(); // Hide the popup
+        // });
+        // Save Package
+        $(document).on('click', ".tf_tour_package_save", function(e) {
+            e.preventDefault();
+            
+            var $repeater = $(this).closest('.tf-single-repeater-package_pricing');
+            var data = {};
+            var packageIndex = null;
+
+            // First pass: Find the package index
+            $repeater.find('[name^="tf_tours_opt[package_pricing]"]').each(function() {
+                var name = $(this).attr('name');
+                var matches = name.match(/tf_tours_opt\[package_pricing\]\[(\d+)\]/);
+                if (matches && matches[1]) {
+                    packageIndex = matches[1];
+                    return false; // Exit loop once we find the index
+                }
+            });
+
+            if (packageIndex === null) {
+                alert('Could not determine package index');
+                return;
+            }
+
+            // Second pass: Collect all data with proper structure
+            var packageData = {
+                pack_status: '',
+                pack_title: '',
+                pricing_type: 'person',
+                desc: '',
+                adult_tabs: [{}, {}, {}, {}],
+                child_tabs: [{}, {}, {}, {}],
+                infant_tabs: [{}, {}, {}, {}],
+                group_tabs: [{}, {}, {}, {}, {}, {}]
+            };
+
+            // Collect all form data
+            $repeater.find('input, select, textarea').each(function() {
+                var $el = $(this);
+                var name = $el.attr('name');
+                
+                // Skip system fields
+                if (name === 'tf_parent_field' || name === 'tf_repeater_count' || name === 'tf_current_field') {
+                    return;
+                }
+
+                // Extract the field path
+                var path = name.replace(/^tf_tours_opt\[package_pricing\]\[\d+\]/, '')
+                            .replace(/^\[|\]$/g, '')
+                            .split('][');
+                
+                // Build the nested structure
+                var current = packageData;
+                for (var i = 0; i < path.length; i++) {
+                    var key = path[i];
+                    
+                    // Handle numeric array indexes
+                    if (!isNaN(key) && i > 0) {
+                        key = parseInt(key);
+                    }
+                    
+                    if (i === path.length - 1) {
+                        // Set the value
+                        if ($el.attr('type') === 'checkbox') {
+                            current[key] = $el.is(':checked') ? ($el.val() || '1') : '';
+                        } else {
+                            current[key] = $el.val();
+                        }
+                    } else {
+                        // Create nested objects if they don't exist
+                        if (current[key] === undefined) {
+                            current[key] = isNaN(path[i+1]) ? {} : [];
+                        }
+                        current = current[key];
+                    }
+                }
+            });
+
+            // Handle group discount repeater fields - filter out empty discounts
+            var discountRepeaters = [];
+            $repeater.find('.tf-single-repeater-group_discount_package').each(function() {
+                var $repeaterItem = $(this);
+                var discountData = {};
+                var hasValidDiscount = false;
+                
+                $repeaterItem.find('input[type="number"]').each(function() {
+                    var name = $(this).attr('name').match(/\[group_discount_package\]\[(\d+)\]\[([^\]]+)\]/);
+                    if (name && name[1] && name[2]) {
+                        var val = $(this).val();
+                        discountData[name[2]] = val;
+                        
+                        // Check if this is a discount_price with a valid value
+                        if (name[2] === 'discount_price' && val && parseFloat(val) > 0) {
+                            hasValidDiscount = true;
+                        }
+                    }
+                });
+                
+                // Only include discounts with valid discount_price
+                if (hasValidDiscount && Object.keys(discountData).length > 0) {
+                    discountRepeaters.push(discountData);
+                }
+            });
+
+            // Add discount repeater data to package if we have valid discounts
+            if (discountRepeaters.length > 0) {
+                packageData.group_tabs[5] = {
+                    group_discount_package: discountRepeaters
+                };
+            } else {
+                // Remove discount data if no valid discounts
+                packageData.group_tabs[5] = [];
+            }
+
+    
+            // Prepare AJAX data
+            var ajaxData = {
+                action: 'save_tour_package_pricing',
+                post_id: $('#post_ID').val(),
+                pricing_type: $('.tf_tour_pricing_type').val(),
+                package_index: packageIndex,
+                package_data: packageData,
+                nonce: tf_admin_params.tf_nonce
+            };
+    
+            // UI feedback
+            var $button = $(this);
+            $button.text('Saving...').prop('disabled', true);
+    
+            $.post(tf_options.ajax_url, ajaxData, function(response) {
+                if (response.success) {
+                    if(packageData.pack_title){
+                        $repeater.find(' > .tf-repeater-header .tf-repeater-title').html(packageData.pack_title);
+                    }else{
+                        $repeater.find(' > .tf-repeater-header .tf-repeater-title').html('Create your Tour Packages');
+                    }
+                    $repeater.find('.tf-repeater-content-wrap').hide();
+                    $repeater.find('.tf-repeater-header').removeClass('active-repeater');
+
+                    $repeater.find('.tf-repeater-header .package-action-hide').addClass('show');
+                    // $('.tf-repeater-add-package_pricing').show();
+                    notyf.success('Package saved successfully!');
+                } else {
+                    notyf.error('There is an error!');
+                }
+                $button.text('Save').prop('disabled', false);
+            }).fail(function(xhr, status, error) {
+                notyf.error('There is an error!');
+                $button.text('Save').prop('disabled', false);
+            });
+        });
+
+        // Package Dependancy
+        $(".group_discount_switcher").each(function() {
+            let $switcher = $(this);
+            let $checkbox = $switcher.find('input[type="checkbox"]');
+            let $box = $switcher.next(".group_discount_package_box");
+
+            $box.toggle($checkbox.is(":checked"));
+        });
+
+        $(document).on("change", ".group_discount_switcher input[type='checkbox']", function() {
+            let $switcher = $(this).closest(".group_discount_switcher");
+            let $box = $switcher.next(".group_discount_package_box");
+
+            $box.toggle($(this).is(":checked"));
+        });
+
+        // pricing type update when change
+        $(document).on('change', '#tf_tours_opt .tf_tour_pricing_type', function (e) {
+            let pricingType = $(this).val();
+            if(pricingType=='person'){
+                $('.tf-show-for-group').hide();
+                $('.tf-show-for-package').hide();
+                $('.tf-show-for-person').show();
+            }else if(pricingType=='group'){
+                $('.tf-show-for-package').hide();
+                $('.tf-show-for-person').hide();
+                $('.tf-show-for-group').show();
+            }else if(pricingType=='package'){
+                $('.tf-show-for-person').hide();
+                $('.tf-show-for-group').hide();
+                $('.tf-show-for-package').show();
+            }
+            // Prepare AJAX data
+            var ajaxData = {
+                action: 'save_tour_pricing_type',
+                post_id: $('#post_ID').val(),
+                pricing_type: pricingType,
+                nonce: tf_admin_params.tf_nonce
+            };
+
+            $.post(tf_options.ajax_url, ajaxData, function(response) {
+                if (response.success) {
+                    
+                } 
+            }).fail(function(xhr, status, error) {
+            });
+        });
+
+
+        $(document).on('change', '.tf_tour_pricing_type', function (e) {
+            let pricingType = $(this).val();
+
+            if (pricingType === 'per_night') {
+                $('.tf-price-by-night').show();
+                $('.tf-price-by-person').hide();
+            } else if (pricingType === '2') {
+                $('.tf-price-by-person').show();
+                $('.tf-price-by-night').hide();
+            }
+        });
+
+        // Tour Map Initialize based on Tab
+        $(document).on("click", "#tf_tours_opt .tf-tablinks", function (e) {
+            var $this = $(this);
+            if ($this.attr('data-tab')=='availability'){
+                tfTourCalendar();
+            }
+        });
+
+        // Bulk Popup Open
+        $(document).on("click", ".tf_tour_cal_bulk_edit", function (e) {
+            tourResetForm('');
+            $('.tf-tour-cal-field').addClass('tf-bulk-popup');
+            $('.tf-bulk-repeater-section').show();
+            $('.tf-check-dates').hide();
+            $('.tf_tour_cal_bulk_edit').hide();
+            $('.tf_tour_cal_reset').hide();
+            $('.bulk-popup-content .tf-repeater-wrap-group_discount_package').html('');
+            $('.bulk-popup-content .tf_tour_allowed_times').html('');
+            $('.tf-bulk-edit-header').css('display', 'flex');
+            $('.tf_bulk_edit_option').val('1');
+        });
+
+        // Bulk Popup Close
+        $(document).on("click", ".tf_tour_bulk_close", function (e) {
+            $('.tf-tour-cal-field').removeClass('tf-bulk-popup');
+            $('.tf-bulk-repeater-section').hide();
+            $('.tf-check-dates').show();
+            $('.tf_tour_cal_reset').show();
+            $('.bulk-popup-content .tf-repeater-wrap-group_discount_package').html('');
+            $('.bulk-popup-content .tf_tour_allowed_times').html('');
+            $('.tf_tour_cal_bulk_edit').show();
+            $('.tf-bulk-edit-header').hide();
+            $('.tf_bulk_edit_option').val('');
+        });
+
+        /*
+        * Options WP editor
+        * @author: Sydur
+        */
+        function TF_wp_editor($id) {
+            wp.editor.initialize($id, {
+                tinymce: {
+                    wpautop: true,
+                    plugins: 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
+                    toolbar1: 'formatselect,bold,italic,bullist,numlist,blockquote,alignleft,aligncenter,alignright,link,wp_more,spellchecker,fullscreen,wp_adv,listbuttons',
+                    toolbar2: 'styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
+                    //   textarea_rows : 20
+                },
+                quicktags: {buttons: 'strong,em,link,block,del,ins,img,ul,ol,li,code,more,close'},
+                mediaButtons: false,
+            });
+        }
+
+        $('textarea.wp_editor, textarea.tf_wp_editor').each(function () {
+            let $id = $(this).attr('id');
+
+            setTimeout(function() { 
+                TF_wp_editor($id);
+            }, 1000);
+            
+        });
+
+        /*
+        * Booking Confirmation Field Fixed
+        * @since 2.9.28
+        * @author: Jahid
+        */
+        TF_Booking_Confirmation();
+
+        function TF_Booking_Confirmation() {
+            if ($('.tf-repeater-wrap .tf-single-repeater-book-confirm-field').length > 0) {
+                $('.tf-repeater-wrap .tf-single-repeater-book-confirm-field').each(function () {
+                    let $this = $(this);
+                    let repeaterCount = $this.find('input[name="tf_repeater_count"]').val();
+                    if (0 == repeaterCount || 1 == repeaterCount || 2 == repeaterCount) {
+                        $this.find('.tf_hidden_fields').hide();
+                        $this.find('.tf-repeater-icon-clone').hide();
+                        $this.find('.tf-repeater-icon-delete').hide();
+                    }
+                });
+            }
+            if ($('.tf-repeater-wrap .tf-single-repeater-hotel-book-confirm-field').length > 0) {
+                $('.tf-repeater-wrap .tf-single-repeater-hotel-book-confirm-field').each(function () {
+                    let $this = $(this);
+                    let repeaterCount = $this.find('input[name="tf_repeater_count"]').val();
+                    if (0 == repeaterCount || 1 == repeaterCount || 2 == repeaterCount) {
+                        $this.find('.tf_hidden_fields').hide();
+                        $this.find('.tf-repeater-icon-clone').hide();
+                        $this.find('.tf-repeater-icon-delete').hide();
+                    }
+                });
+            }
+            if ($('.tf-repeater-wrap .tf-single-repeater-car-book-confirm-field').length > 0) {
+                $('.tf-repeater-wrap .tf-single-repeater-car-book-confirm-field').each(function () {
+                    let $this = $(this);
+                    let repeaterCount = $this.find('input[name="tf_repeater_count"]').val();
+                    if (0 == repeaterCount || 1 == repeaterCount || 2 == repeaterCount) {
+                        $this.find('.tf_hidden_fields').hide();
+                        $this.find('.tf-repeater-icon-clone').hide();
+                        $this.find('.tf-repeater-icon-delete').hide();
+                    }
+                });
+            }
+        }
+
+        /*
+        * Add New Repeater Item
+        * @author: Sydur
+        */
+        $(document).on('click', '.tf-repeater-icon-add', function () {
+            var $this = $(this);
+            var $this_parent = $this.parent().parent();
+            var id = $(this).attr("data-repeater-id");
+            var max = $(this).attr("data-repeater-max");
+            var add_value = $this_parent.find('.tf-single-repeater-clone-' + id + ' .tf-single-repeater-' + id + '').clone();
+            var count = $this_parent.find('.tf-repeater-wrap-' + id + ' .tf-single-repeater-' + id + '').length;
+            var parent_field = add_value.find(':input[name="tf_parent_field"]').val();
+            var current_field = add_value.find(':input[name="tf_current_field"]').val();
+            var maxIndex = parseInt($(this).closest('.tf-repeater').attr("data-max-index")) + 1;
+            $(this).closest('.tf-repeater').attr("data-max-index", maxIndex);
+
+            $this_parent.find('.tf-repeater-wrap .tf-field-notice-inner').remove();
+            // Chacked maximum repeater
+            if (!tf_admin_params.is_pro && max != '' && count >= max) {
+                $this_parent.find('.tf-repeater-wrap').append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');
+                return false;
+            }
+
+            // Repeater Count Add Value
+            add_value.find(':input[name="tf_repeater_count"]').val(maxIndex);
+
+            let repeatDateField = add_value.find('.tf-field-date');
+            if (repeatDateField.length > 0) {
+                repeatDateField.find('input').each(function () {
+
+                    if ($(this).attr('name') == '' || typeof $(this).attr('name') === "undefined") {
+                        $(this).remove()
+                    }
+                });
+                tfDateInt(repeatDateField);
+            }
+
+            let repeatTimeField = add_value.find('.tf-field-time');
+            if (repeatTimeField.length > 0) {
+                tfTimeInt(repeatTimeField);
+            }
+
+            let repeatColorField = add_value.find('.tf-field-color');
+            if (repeatColorField.length > 0) {
+                repeatColorField.find('input.tf-color').each(function () {
+                    var color_field =  $(this).clone(); 
+                    if($(this).closest('li').length > 0){
+                        $(this).closest('li').append(color_field);
+                    }else{
+                        $(this).closest('.tf-fieldset').append(color_field);
+                    }
+                    $(this).closest('.wp-picker-container').remove();
+                 });
+                tfColorInt(repeatColorField);
+            }
+
+            if (parent_field == '') {
+                // Update  repeater name And id
+                add_value.find(':input').each(function () {
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
+                });
+                var update_paren = add_value.find('.tf-repeater input[name="tf_parent_field"]').val();
+                if (typeof update_paren !== "undefined") {
+                    var update_paren = update_paren.replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
+                }
+                add_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
+
+            } else {
+                // Update  repeater name And id
+                var update_paren = add_value.find(':input[name="tf_parent_field"]').val();
+                add_value.find(':input').each(function () {
+                    this.name = this.name.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
+                    this.id = this.id.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
+                });
+            }
+            // Update Repeaterr label
+            add_value.find('label').each(function () {
+                var for_value = $(this).attr("for");
+                if (typeof for_value !== "undefined") {
+                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
+                    $(this).attr("for", for_value);
+                }
+            });
+            // Update Icon select id
+            add_value.find('.tf-icon-select').each(function (index) {
+                var icon_id = $(this).attr("id");
+                if (typeof icon_id !== "undefined") {
+                    icon_id = icon_id + index + maxIndex;
+                    $(this).attr("id", icon_id)
+
+                }
+            });
+            // Update Data depend id
+            add_value.find('[data-depend-id]').each(function () {
+                var data_depend_id = $(this).attr("data-depend-id");
+                if (typeof data_depend_id !== "undefined") {
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
+                    $(this).attr("data-depend-id", data_depend_id);
+                }
+            });
+            // Update Data Controller
+            add_value.find('[data-controller]').each(function () {
+                var data_controller = $(this).attr("data-controller");
+                if (typeof data_controller !== "undefined") {
+                    data_controller = data_controller.replace('[' + current_field + '][00]', '[' + current_field + '][' + maxIndex + ']');
+                    $(this).attr("data-controller", data_controller);
+                }
+            });
+
+            // Replace Old editor
+            add_value.find('.wp-editor-wrap').each(function () {
+                var textarea = $(this).find('.tf_wp_editor').show();
+                // Get content of a specific editor:
+                var tf_editor_ex_data = $('#' + textarea.attr('id') + '').val();
+                if (tf_editor_ex_data && typeof tf_editor_ex_data !== "undefined") {
+                    var textarea_content = tinymce.get(textarea.attr('id')).getContent();
+                } else {
+                    var textarea_content = '';
+                }
+                textarea.val(textarea_content);
+                $(this).closest('.tf-field-textarea').append(textarea);
+                $(this).remove();
+            });
+
+            // Update Data Append value
+            var append = $this_parent.find('.tf-repeater-wrap-' + id + '');
+
+            add_value.appendTo(append).show();
+
+            // replace new editor
+            add_value.find('textarea.parent_wp_editor').each(function () {
+                var count = Math.random().toString(36).substring(3, 9) + 1;
+                // this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + count + '');
+                $(this).attr('id', current_field + count);
+                $(this).attr('data-count-id', count);
+                var parent_repeater_id = $(this).attr('id');
+                TF_wp_editor(parent_repeater_id);
+            });
+
+            // replace new Select 2
+            add_value.find('select.tf-select2-parent').each(function () {
+                this.id = this.id.replace('' + current_field + '__00', '' + current_field + '__' + maxIndex + '');
+                var parent_repeater_id = $(this).attr('id');
+                var $this = $(this);
+                tfSelect2Int($this);
+            });
+
+            // repeater dependency repeater
+            TF_dependency();
+
+            // Booking Confirmation repeater Hidden field
+            TF_Booking_Confirmation();
+        });
+
+        // Repeater Delete Value
+        $(document).on('click', '.tf-repeater-icon-delete', function () {
+            var max = $(this).attr("data-repeater-max");
+            var $this_parent = $(this).closest('.tf-repeater-wrap');
+            var count = $this_parent.find('.tf-single-repeater').length;
+            // Chacked maximum repeater
+
+            if (confirm("Are you sure to delete this item?")) {
+                $this_parent.find('.tf-field-notice-inner').remove();
+                $(this).closest('.tf-single-repeater').remove();
+            }
+            return false;
+        });
+
+        /*
+        * Clone Repeater Item
+        * @author: Sydur
+        */
+        $(document).on('click', '.tf-repeater-icon-clone', function () {
+            var $this_parent = $(this).closest('.tf-repeater-wrap');
+            let clone_value = $(this).closest('.tf-single-repeater').clone();
+            var max = $(this).attr("data-repeater-max");
+            var parent_field = clone_value.find('input[name="tf_parent_field"]').val();
+            var current_field = clone_value.find('input[name="tf_current_field"]').val();
+            var repeater_count = clone_value.find('input[name="tf_repeater_count"]').val();
+            var count = $this_parent.find('.tf-single-repeater-' + current_field + '').length;
+            var maxIndex = parseInt($(this).closest('.tf-repeater').attr("data-max-index")) + 1;
+            $(this).closest('.tf-repeater').attr("data-max-index", maxIndex);
+
+            $this_parent.find('.tf-field-notice-inner').remove();
+            // Chacked maximum repeater
+            if (!tf_admin_params.is_pro && max != '' && count >= max) {
+                $this_parent.append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');
+                return false;
+            }
+
+            let repeatDateField = clone_value.find('.tf-field-date');
+
+            if (repeatDateField.length > 0) {
+                repeatDateField.find('input').each(function () {
+                    if ($(this).attr('name') == '' || typeof $(this).attr('name') === "undefined") {
+                        $(this).remove();
+                    }
+                });
+                tfDateInt(repeatDateField);
+            }
+
+            let repeatTimeField = clone_value.find('.tf-field-time');
+            if (repeatTimeField.length > 0) {
+                tfTimeInt(repeatTimeField);
+            }
+
+            let repeatColorField = clone_value.find('.tf-field-color');
+            if (repeatColorField.length > 0) {
+                repeatColorField.find('input.tf-color').each(function () {
+                    var color_field =  $(this).clone(); 
+                    if($(this).closest('li').length > 0){
+                        $(this).closest('li').append(color_field);
+                    }else{
+                        $(this).closest('.tf-fieldset').append(color_field);
+                    }
+                    $(this).closest('.wp-picker-container').remove();
+                 });
+                tfColorInt(repeatColorField);
+            }
+
+            if (parent_field == '') {
+                // Replace input id and name
+                clone_value.find(':input').each(function () {
+                    if ($(this).closest('.tf-single-repeater-clone').length == 0) {
+                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
+                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
+                    }
+                });
+                var update_paren = clone_value.find('.tf-repeater input[name="tf_parent_field"]').val();
+                if (typeof update_paren !== "undefined") {
+                    var update_paren = update_paren.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
+                }
+                clone_value.find('.tf-repeater input[name="tf_parent_field"]').val(update_paren);
+
+            } else {
+                // Replace input id and name
+                clone_value.find(':input').each(function () {
+                    if ($(this).closest('.tf-single-repeater-clone').length == 0) {
+                        this.name = this.name.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
+                        this.id = this.id.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
+                    }
+                });
+            }
+            clone_value.find('label').each(function () {
+                var for_value = $(this).attr("for");
+                if (typeof for_value !== "undefined") {
+                    for_value = for_value.replace('_____', '').replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
+                    var for_value = $(this).attr("for", for_value);
+                }
+            });
+            // Update Icon select id
+            clone_value.find('.tf-icon-select').each(function (index) {
+                var icon_id = $(this).attr("id");
+                if (typeof icon_id !== "undefined") {
+                    icon_id = icon_id + index + maxIndex;
+                    $(this).attr("id", icon_id)
+
+                }
+            });
+            // Replace Data depend id ID
+            clone_value.find('[data-depend-id]').each(function () {
+                var data_depend_id = $(this).attr("data-depend-id");
+                if (typeof data_depend_id !== "undefined") {
+                    data_depend_id = data_depend_id.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
+                    $(this).attr("data-depend-id", data_depend_id);
+                }
+            });
+            // Replace Data depend id ID
+            clone_value.find('[data-controller]').each(function () {
+                var data_controller = $(this).attr("data-controller");
+                if (typeof data_controller !== "undefined") {
+                    data_controller = data_controller.replace('[' + current_field + '][' + repeater_count + ']', '[' + current_field + '][' + maxIndex + ']');
+                    $(this).attr("data-controller", data_controller);
+                }
+            });
+            // Replace Data repeter Count id ID
+            clone_value.find('input[name="tf_repeater_count"]').val(maxIndex)
+
+            // Replace Old editor
+            clone_value.find('.wp-editor-wrap').each(function () {
+                var textarea = $(this).find('.tf_wp_editor').show();
+                // Get content of a specific editor:
+                var tf_editor_ex_data = $('#' + textarea.attr('id') + '').val();
+                var textarea_id = textarea.attr('id');
+                if (textarea_id != '' && typeof textarea_id !== "undefined") {
+                    // var textarea_content = tinymce.get(textarea.attr('id')).getContent();
+                    var textarea_content = tinymce.editors[textarea_id].getContent();
+                } else {
+                    var textarea_content = '';
+                }
+                textarea.val(textarea_content);
+                $(this).closest('.tf-field-textarea').append(textarea);
+                $(this).remove();
+            });
+
+            // Replace Old Select 2
+            clone_value.find('.tf-field-select2').each(function () {
+
+                var get_selected_value = $(this).find('select.tf-select-two').select2('val')
+                $(this).find('select.tf-select-two').removeAttr("data-select2-id aria-hidden tabindex");
+                $(this).find('select.tf-select-two option').removeAttr("data-select2-id");
+                $(this).find('select.tf-select-two').removeClass("select2-hidden-accessible");
+                var select2 = $(this).find('select.tf-select-two').show();
+
+                select2.val(get_selected_value);
+                $(this).find('.tf-fieldset').append(select2);
+                $(this).find('span.select2-container').remove();
+            });
+
+            //Append Value
+            $(this).closest('.tf-repeater-wrap').append(clone_value).show();
+
+            // Clone Wp Editor
+            clone_value.find('textarea.parent_wp_editor, textarea.wp_editor').each(function () {
+                var count = Math.random().toString(36).substring(3, 9) + 1;
+                $(this).attr('id', current_field + count);
+                $(this).attr('data-count-id', count);
+                var parent_repeater_id = $(this).attr('id');
+                TF_wp_editor(parent_repeater_id);
+            });
+
+            // Clone Select 2
+            clone_value.find('select.tf-select2-parent, select.tf-select2').each(function () {
+                this.id = this.id.replace('' + current_field + '__' + repeater_count, '' + current_field + '__' + maxIndex + '');
+                var $this = $(this);
+                tfSelect2Int($this);
+            });
+
+            // Dependency value
+            TF_dependency();
+            // Copy Message
+            notyf.success('Duplicated Successfully');
+        });
+
+        // Repeater show hide
+        $(document).on('click', '.tf-repeater-icon-collapse, .tf-repeater-title', function () {
+            var tf_repater_fieldname = $(this).closest('.tf-single-repeater').find('input[name=tf_current_field]').val();
+
+            // Toggle Class for Header
+            $(this).closest('.tf-single-repeater').find('.tf-repeater-header').toggleClass('active-repeater');
+            $(this).closest('.tf-single-repeater').find('.tf-tab-switch-box').toggleClass('active-repeater');
+
+
+            $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').find('.tf-repeater-content-wrap').slideToggle();
+            $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').toggleClass('hide');
+            if ($(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').hasClass('hide') == true) {
+                $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + ' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-down"></i>');
+            } else {
+                $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + ' .tf-repeater-header').children('.tf-repeater-icon-collapse').html('<i class="fa-solid fa-angle-up"></i>');
+            }
+        });
+
+        // Repeater Drag and  show
+        $(".tf-repeater-wrap").sortable({
+            handle: '.tf-repeater-icon-move',
+            start: function (event, ui) { // turn TinyMCE off while sorting (if not, it won't work when resorted)
+                var textareaID = $(ui.item).find('.tf_wp_editor').attr('id');
+
+            },
+            stop: function (event, ui) { // re-initialize TinyMCE when sort is completed
+                $(ui.item).find('.tf_wp_editor').each(function () {
+                    var textareaID = $(this).attr('id');
+                    tinyMCE.execCommand('mceRemoveEditor', false, textareaID);
+                    tinyMCE.execCommand('mceAddEditor', false, textareaID);
+                });
+
+                // $(this).find('.update-warning').show();
+            }
+        });
+
+        // switch-group Drag and  show
+        $(".tf-switch-group-wrap").sortable({
+            placeholder: "tf-switch-drag-highlight"
+        });
+
+        // Discount Repeater Add
+        $(document).on('click', '.tf-repeater-add-group_discount_package', function (e) {
+            e.preventDefault();
+        
+            // Find the closest repeater container
+            var $repeater = $(this).closest('.tf-repeater');
+            
+            // Find the clone template
+            var $clone = $repeater.find('.tf-repeater-wrap-group_discount_package .tf-single-repeater .tf-repeater-content-wrap').show();
+        });
+
+        // Package Time Repeater Add
+        $(document).on('click', '.tf-package-add-allowed-time', function (e) {
+            e.preventDefault();
+        
+            // Find the closest repeater container
+            var $repeater = $(this).closest('.tf-repeater');
+            
+            // Find the clone template
+            var $clone = $repeater.find('.tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap').show();
+        });
+
+        // Repeater show hide
+        $(document).on('click', '.tf-field-accordion .tf-tab-field-header .tf-field-collapas', function () {
+            $(this).toggleClass('rotated');
+            $(this).closest('.tf-tab-switch-box').toggleClass('active-repeater');
+            $(this).closest('.tf-tab-switch-box').find('.tf-tab-field-content').slideToggle(200, function () {
+                if ($(this).is(':visible')) {
+                    $(this).css('display', 'flex');
+                }
+            });
+            
+        });
+
+        // Repeater Pacakge Cancel
+        $(document).on('click', '.tf-action-button-group .tf_tour_package_cancel', function () {
+            $(this).closest('.tf-repeater-content-wrap').hide();
+            $(this).closest('.tf-single-repeater').find('.tf-repeater-header').removeClass('active-repeater');
+            // $('.tf-repeater-add-package_pricing').show();
+        });
+
+        $(document).on('click', '.tf-action-button-group .tf_tour_package_deleted', function () {
+            $(this).closest('.tf-single-repeater').empty();
+            // $('.tf-repeater-add-package_pricing').show();
+        });
+
+        // Repeater show hide
+        $(document).on('click', '.tf-avail-repeater-collapse, .tf-avail-repeater-title', function () {
+            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').first().slideToggle(200);
+        });
+
+        // TAB jquery
+        $(document).on('click', '.tf-tab-item', function () {
+            var $this = $(this);
+            var tab_id = $this.data('tab-id');
+            if ($this.parent().parent().find('.tf-tab-item-content').hasClass("show") == true) {
+                $this.parent().parent().find('.tf-tab-item-content').removeClass('show');
+            }
+
+            $this.parent().find('.tf-tab-item').removeClass('show');
+
+            $this.addClass('show');
+            $this.parent().parent().find('.tf-tab-item-content[data-tab-id = ' + tab_id + ']').addClass('show');
+
+            tfHotelCalendar();
+            tfApartmentCalendar();
+            tfTourCalendar();
+        });
+
+        // Select 2 add new category
+        $(document).on('click', '.tf-add-category span', function (event) { 
+            event.preventDefault();
+            var $this = $(this);
+            var parentDiv = $this.closest('.tf-fieldset');
+            parentDiv.children('.tf-popup-box').css('display', 'flex');
+        });
+
+        // Close Popup
+        $(document).on('click', '.tf-add-category-box-close', function (event) { 
+            event.preventDefault();
+            $('.tf-popup-box').hide();
+        });
+
+        // Create Category
+        $(document).on('click', '.tf-category-button', function (event) { 
+            event.preventDefault();
+            var $this = $(this);
+            var parentDiv = $this.closest('.tf-add-category-box');
+            let categoryName = parentDiv.find('#category_name').val();
+            let categoryTitle = parentDiv.find('#category_title').val();
+            let parentCategory = parentDiv.find('#parent_category').val();
+            let categorySelect = parentDiv.find('#category_select_field_name').val();
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                method: 'POST',
+                data: {
+                    action: 'tf_insert_category_data',
+                    _nonce: tf_admin_params.tf_nonce,
+                    categoryName: categoryName,
+                    categoryTitle: categoryTitle,
+                    parentCategory: parentCategory
+                },
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    if (data.insert_category) {
+                        // Store to List and Selected
+                        var newOption = new Option(data.insert_category.title, data.insert_category.id, true, true);
+                        $('#'+categorySelect).append(newOption).trigger('change');
+
+                        // Store to Popup List
+                        var newPopuOption = new Option(data.insert_category.title, data.insert_category.id, false, false);
+                        parentDiv.find('#parent_category').append(newPopuOption).trigger('change');
+                    }
+                    $('.tf-popup-box').hide();
+                    parentDiv.find('#category_title').val('');
+                    parentDiv.find('#parent_category').val('');
+                }
+            });
+
+        });
+
+        // Create Post
+        $(document).on('click', '.tf-add-new-post-button', function (event) { 
+            event.preventDefault();
+            var $this = $(this);
+            var parentDiv = $this.closest('.tf-add-category-box');
+            let postType = parentDiv.find('.post_type').val();
+            let postTitle = parentDiv.find('.post_title').val();
+            let postSelect = parentDiv.find('.post_select_field_name').val();
+            let fieldId = parentDiv.find('.field_id').val();
+            let postId = parentDiv.find('.post_id').val();
+
+            if(postTitle){
+                $.ajax({
+                    url: tf_options.ajax_url,
+                    method: 'POST',
+                    data: {
+                        action: 'tf_insert_post_data',
+                        _nonce: tf_admin_params.tf_nonce,
+                        postType: postType,
+                        postTitle: postTitle,
+                        fieldId: fieldId,
+                        postId: postId
+                    },
+                    beforeSend: function(){
+                        $this.addClass('tf-btn-loading');
+                    },
+                    success: function (response) {
+                        var data = JSON.parse(response);
+                        if (data.insert_post) {
+                            // Store to List and Selected
+                            var newOption = new Option(data.insert_post.title, data.insert_post.id, true, true);
+                            
+                            if(fieldId == 'tf_rooms'){
+                                $(newOption).attr('data-edit-url', data.insert_post.edit_url);
+                            }
+                            
+                            $('#'+postSelect).append(newOption).trigger('change');
+                        }
+                        $this.removeClass('tf-btn-loading');
+                        $('.tf-popup-box').hide();
+                        parentDiv.find('.post_title').val('');
+                    }
+                });
+            } else {
+                notyf.error('Please enter title');
+            }
+
+        });
+
+    });
+})(jQuery);
+
+
+function openTab(evt, tabName) {
+    evt.preventDefault();
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tf-tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tf-tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.target.className += " active";
+    jQuery(".tf-admin-tab").removeClass('active');
+}
+
+var frame, gframe;
+(function ($) {
+    // Single Image remove
+    $(document).on("click", ".tf-image-close", function (e) {
+        e.preventDefault();
+        $this = $(this);
+        var fieldname = $(this).attr("tf-field-name");
+        var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
+
+        $this.parent().parent().find('input').val('');
+        $this.parent().html('');
+
+    });
+
+    // Gallery Image remove
+    $(document).on("click", ".tf-gallery-remove", function (e) {
+        e.preventDefault();
+        $this = $(this);
+        var fieldname = $(this).attr("tf-field-name");
+        var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
+
+        $this.parent().parent().find('input').val('');
+        $this.parent().parent().find('.tf-fieldset-gallery-preview').html('');
+        $('a.tf-gallery-edit, a.tf-gallery-remove').css("display", "none");
+
+    });
+
+    $(document).ready(function () {
+
+        // Single Image Upload
+
+        $('body').on('click', '.tf-media-upload', function (e) {
+            var $this = $(this);
+            var fieldname = $(this).attr("tf-field-name");
+            var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
+
+            frame = wp.media({
+                title: "Select Image",
+                button: {
+                    text: "Insert Image"
+                },
+                multiple: false
+            });
+            frame.on('select', function () {
+
+                var attachment = frame.state().get('selection').first().toJSON();
+                $this.parent().parent().find('input').val(attachment.url);
+                $this.parent().parent().find('.tf-fieldset-media-preview').html(`<div class="tf-image-close" tf-field-name='${fieldname}'>✖</div><img src='${attachment.url}' />`);
+            });
+            frame.open();
+            return false;
+        });
+
+        // Gallery Image Upload
+
+        $('body').on('click', '.tf-gallery-upload, .tf-gallery-edit', function (e) {
+            var $this = $(this);
+            var fieldname = $(this).attr("tf-field-name");
+            var tf_preview_class = fieldname.replace(/[.[\]_-]/g, '_');
+            gframe = wp.media({
+                title: "Select Gallery",
+                button: {
+                    text: "Insert Gallery"
+                },
+                multiple: 'add'
+            });
+
+            gframe.on('open', function () {
+                var selection = gframe.state().get('selection');
+                var ids_value = $this.parent().parent().find('input').val();
+
+                if (ids_value.length > 0) {
+                    var ids = ids_value.split(',');
+
+                    ids.forEach(function (id) {
+                        attachment = wp.media.attachment(id);
+                        attachment.fetch();
+                        selection.add(attachment ? [attachment] : []);
+                    });
+                }
+            });
+
+            gframe.on('select', function () {
+                var image_ids = [];
+                var image_urls = [];
+                var attachments = gframe.state().get('selection').toJSON();
+                $this.parent().parent().find('.tf-fieldset-gallery-preview').html('');
+                for (i in attachments) {
+                    var attachment = attachments[i];
+                    image_ids.push(attachment.id);
+                    image_urls.push(attachment.url);
+                    $this.parent().parent().find('.tf-fieldset-gallery-preview').append(`<img src='${attachment.url}' />`);
+                }
+                $this.parent().parent().find('input').val(image_ids.join(","));
+                $this.parent().find('a.tf-gallery-edit, a.tf-gallery-remove').css("display", "inline-block");
+            });
+
+            gframe.open();
+            return false;
+        });
+
+
+        // Texonomy submit event
+        $('#addtag > .submit #submit').on("click", function () {
+            $(".tf-fieldset-media-preview").html("");
+        });
+
+        if (tf_options.gmaps != "googlemap") {
+            $(".tf-field-map").each(function () {
+                var $this = $(this),
+                    $map = $this.find('.tf--map-osm'),
+                    $search_input = $this.find('.tf--map-search input'),
+                    $latitude = $this.find('.tf--latitude'),
+                    $longitude = $this.find('.tf--longitude'),
+                    $zoom = $this.find('.tf--zoom'),
+                    map_data = $map.data('map');
+
+                var mapInit = L.map($map.get(0), map_data);
+
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(mapInit);
+
+                var mapMarker = L.marker(map_data.center, {draggable: true}).addTo(mapInit);
+
+                var update_latlng = function (data) {
+                    $latitude.val(data.lat);
+                    $longitude.val(data.lng);
+                    $zoom.val(mapInit.getZoom());
+                };
+
+                $latitude.on('change', function () {
+
+                })
+
+                function updateLocationField(latitude, longitude) {
+                    var apiUrl = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latitude + '&lon=' + longitude;
+
+                    $.ajax({
+                        url: apiUrl,
+                        dataType: 'json',
+                        success: function (data) {
+                            $search_input.val(data.display_name)
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.error('Error:', textStatus, errorThrown);
+                        }
+                    });
+                }
+
+                mapInit.on('click', function (data) {
+                    mapMarker.setLatLng(data.latlng);
+                    update_latlng(data.latlng);
+                    updateLocationField(data.latlng.lat, data.latlng.lng)
+                });
+
+                mapInit.on('zoom', function () {
+                    update_latlng(mapMarker.getLatLng());
+                });
+
+                mapMarker.on('drag', function () {
+                    update_latlng(mapMarker.getLatLng());
+                });
+
+                mapMarker.on('dragend', function (e) {
+                    let currentLng = e.target._latlng.lng
+                    let currentLat = e.target._latlng.lat
+
+                    updateLocationField(currentLat, currentLng)
+                })
+
+                if (!$search_input.length) {
+                    $search_input = $('[data-depend-id="' + $this.find('.tf--address-field').data('address-field') + '"]');
+                }
+
+
+                var cache = {};
+
+                $search_input.autocomplete({
+                    source: function (request, response) {
+
+                        var term = request.term;
+
+                        if (term in cache) {
+                            response(cache[term]);
+                            return;
+                        }
+
+                        $.get('https://nominatim.openstreetmap.org/search', {
+                            format: 'json',
+                            q: term,
+                        }, function (results) {
+
+                            var data;
+
+                            if (results.length) {
+                                data = results.map(function (item) {
+                                    return {
+                                        value: item.display_name,
+                                        label: item.display_name,
+                                        lat: item.lat,
+                                        lon: item.lon
+                                    };
+                                }, 'json');
+                            } else {
+                                data = [{
+                                    value: 'no-data',
+                                    label: 'No Results.'
+                                }];
+                            }
+
+
+                            cache[term] = data;
+                            response(data);
+
+                        });
+
+                    },
+                    select: function (event, ui) {
+
+                        if (ui.item.value === 'no-data') {
+                            return false;
+                        }
+
+                        var latLng = L.latLng(ui.item.lat, ui.item.lon);
+
+                        mapInit.panTo(latLng);
+                        mapMarker.setLatLng(latLng);
+                        update_latlng(latLng);
+
+                    },
+                    create: function (event, ui) {
+                        $(this).autocomplete('widget').addClass('tf-map-ui-autocomplate');
+                    }
+                });
+
+                var input_update_latlng = function () {
+
+                    var latLng = L.latLng($latitude.val(), $longitude.val());
+
+                    mapInit.panTo(latLng);
+                    mapMarker.setLatLng(latLng);
+
+                };
+
+                $latitude.on('change', input_update_latlng);
+                $longitude.on('change', input_update_latlng);
+
+                setInterval(function () {
+                    mapInit.invalidateSize();
+                }, 100);
+            });
+        }
+
+        $('.tf-mobile-tabs').on("click", function (e) {
+            e.preventDefault();
+            $(".tf-admin-tab").toggleClass('active');
+        });
+
+
+        $('.tf-faq-title').on("click", function () {
+            var $this = $(this);
+            if (!$this.hasClass("active")) {
+                $(".tf-faq-desc").slideUp(400);
+                $(".tf-faq-title").removeClass("active");
+            }
+            $this.toggleClass("active");
+            $this.next().slideToggle();
+        });
+    });
+
+
+})(jQuery);
+
+
+// Field Dependency
+
+(function ($) {
+
+    'use strict';
+
+    function Rule(controller, condition, value) {
+        this.init(controller, condition, value);
+    }
+
+    $.extend(Rule.prototype, {
+
+        init: function (controller, condition, value) {
+
+            this.controller = controller;
+            this.condition = condition;
+            this.value = value;
+            this.rules = [];
+            this.controls = [];
+
+        },
+
+        evalCondition: function (context, control, condition, val1, val2) {
+
+            if (condition == '==') {
+
+                return this.checkBoolean(val1) == this.checkBoolean(val2);
+
+            } else if (condition == '!=') {
+
+                return this.checkBoolean(val1) != this.checkBoolean(val2);
+
+            } else if (condition == '>=') {
+
+                return Number(val2) >= Number(val1);
+
+            } else if (condition == '<=') {
+
+                return Number(val2) <= Number(val1);
+
+            } else if (condition == '>') {
+
+                return Number(val2) > Number(val1);
+
+            } else if (condition == '<') {
+
+                return Number(val2) < Number(val1);
+
+            } else if (condition == '()') {
+
+                return window[val1](context, control, val2);
+
+            } else if (condition == 'any') {
+
+                if ($.isArray(val2)) {
+                    for (var i = val2.length - 1; i >= 0; i--) {
+                        if ($.inArray(val2[i], val1.split(',')) !== -1) {
+                            return true;
+                        }
+                    }
+                } else {
+                    if ($.inArray(val2, val1.split(',')) !== -1) {
+                        return true;
+                    }
+                }
+
+            } else if (condition == 'not-any') {
+
+                if ($.isArray(val2)) {
+                    for (var i = val2.length - 1; i >= 0; i--) {
+                        if ($.inArray(val2[i], val1.split(',')) == -1) {
+                            return true;
+                        }
+                    }
+                } else {
+                    if ($.inArray(val2, val1.split(',')) == -1) {
+                        return true;
+                    }
+                }
+
+            }
+
+            return false;
+
+        },
+
+        checkBoolean: function (value) {
+
+            switch (value) {
+
+                case true:
+                case 'true':
+                case 1:
+                case '1':
+                    value = true;
+                    break;
+
+                case null:
+                case false:
+                case 'false':
+                case 0:
+                case '0':
+                    value = false;
+                    break;
+
+            }
+
+            return value;
+        },
+
+        checkCondition: function (context) {
+
+            if (!this.condition) {
+                return true;
+            }
+
+            var control = context.find(this.controller);
+
+            var control_value = this.getControlValue(context, control);
+
+            if (control_value === undefined) {
+                return false;
+            }
+
+            control_value = this.normalizeValue(control, this.value, control_value);
+
+            return this.evalCondition(context, control, this.condition, this.value, control_value);
+        },
+
+        normalizeValue: function (control, baseValue, control_value) {
+
+            if (typeof baseValue == 'number') {
+                return parseFloat(control_value);
+            }
+
+            return control_value;
+        },
+
+        getControlValue: function (context, control) {
+
+            if (control.length > 1 && (control.attr('type') == 'radio' || control.attr('type') == 'checkbox')) {
+
+                return control.filter(':checked').map(function () {
+                    return this.value;
+                }).get();
+
+            } else if (control.attr('type') == 'checkbox' || control.attr('type') == 'radio') {
+
+                return control.is(':checked');
+
+            }
+
+            return control.val();
+
+        },
+
+        createRule: function (controller, condition, value) {
+            var rule = new Rule(controller, condition, value);
+            this.rules.push(rule);
+            return rule;
+        },
+
+        include: function (input) {
+            this.controls.push(input);
+        },
+
+        applyRule: function (context, enforced) {
+
+            var result;
+
+            if (typeof (enforced) == 'undefined') {
+                result = this.checkCondition(context);
+            } else {
+                result = enforced;
+            }
+
+            var controls = $.map(this.controls, function (elem, idx) {
+                return context.find(elem);
+            });
+
+            if (result) {
+
+                $(controls).each(function () {
+                    $(this).removeClass('tf-depend-on');
+                });
+
+                $(this.rules).each(function () {
+                    this.applyRule(context);
+                });
+
+            } else {
+
+                $(controls).each(function () {
+                    $(this).addClass('tf-depend-on');
+                });
+
+                $(this.rules).each(function () {
+                    this.applyRule(context, false);
+                });
+
+            }
+        }
+    });
+
+    function Ruleset() {
+        this.rules = [];
+    };
+
+    $.extend(Ruleset.prototype, {
+
+        createRule: function (controller, condition, value) {
+            var rule = new Rule(controller, condition, value);
+            this.rules.push(rule);
+            return rule;
+        },
+
+        applyRules: function (context) {
+            $(this.rules).each(function () {
+                this.applyRule(context);
+            });
+        }
+    });
+
+    $.tf_deps = {
+
+        createRuleset: function () {
+            return new Ruleset();
+        },
+
+        enable: function (selection, ruleset, depends) {
+
+            selection.on('change keyup', function (elem) {
+
+                var depend_id = elem.target.getAttribute('data-depend-id') || elem.target.getAttribute('data-sub-depend-id');
+
+                if (depends.indexOf(depend_id) !== -1) {
+                    ruleset.applyRules(selection);
+                }
+
+            });
+
+            ruleset.applyRules(selection);
+
+            return true;
+        }
+    };
+
+})(jQuery);
+
+/*
+* Author @Jahid
+* Report Chart
+*/
+
+(function ($) {
+    $(document).ready(function () {
+        if (tf_options.tf_chart_enable == 1) {
+            var ctx = document.getElementById('tf_months'); // node
+            var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
+            var ctx = $('#tf_months'); // jQuery instance
+            var ctx = 'tf_months'; // element id
+
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                    // Information about the dataset
+                    datasets: [{
+                        label: "Completed Booking",
+                        borderColor: '#003C79',
+                        tension: 0.1,
+                        data: tf_options.tf_complete_order,
+                        fill: false
+                    },
+                        {
+                            label: "Cancelled Booking",
+                            borderColor: 'red',
+                            tension: 0.1,
+                            data: tf_options.tf_cancel_orders,
+                            fill: false
+                        }
+                    ]
+                },
+
+                // Configuration options
+                options: {
+                    layout: {
+                        padding: 10,
+                    },
+                    legend: {
+                        display: true
+                    },
+                    title: {
+                        display: true,
+                        text: ""
+                    }
+                }
+
+            });
+        }
+
+        $(document).on('change', '#tf-month-report', function () {
+            var monthTarget = $(this).val();
+            if (monthTarget != 0) {
+                $("#tf-report-loader").addClass('show');
+                $('.tf-order-report').find('iframe').remove();
+                var yearTarget = $("#tf-year-report").val();
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_options.ajax_url,
+                    data: {
+                        action: 'tf_month_reports',
+                        _nonce: tf_admin_params.tf_nonce,
+                        month: monthTarget,
+                        year: yearTarget,
+                    },
+                    success: function (data) {
+                        if(!data.success){
+                            $("#tf-report-loader").removeClass('show');
+                            notyf.error(data.data)
+                        } else {
+                            var response = JSON.parse(data);
+                            var ctx = document.getElementById('tf_months'); // node
+                            var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
+                            var ctx = $('#tf_months'); // jQuery instance
+                            var ctx = 'tf_months'; // element id
+
+                            var chart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: response.months_day_number,
+                                    // Information about the dataset
+                                    datasets: [{
+                                        label: "Completed Booking",
+                                        borderColor: '#003C79',
+                                        tension: 0.1,
+                                        data: response.tf_complete_orders,
+                                        fill: false
+                                    },
+                                        {
+                                            label: "Cancelled Booking",
+                                            borderColor: 'red',
+                                            tension: 0.1,
+                                            data: response.tf_cancel_orders,
+                                            fill: false
+                                        }
+                                    ]
+                                },
+
+                                // Configuration options
+                                options: {
+                                    layout: {
+                                        padding: 10,
+                                    },
+                                    legend: {
+                                        display: true
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: response.tf_search_month
+                                    }
+                                }
+
+                            });
+                            $("#tf-report-loader").removeClass('show');
+                        }
+                    }
+                })
+            }
+        });
+
+
+        $(document).on('change', '#tf-year-report', function () {
+            var yearTarget = $(this).val();
+            var monthTarget = $("#tf-month-report").val();
+            if (yearTarget != 0 && monthTarget != 0) {
+                $("#tf-report-loader").addClass('show');
+                $('.tf-order-report').find('iframe').remove();
+                jQuery.ajax({
+                    type: 'post',
+                    url: tf_options.ajax_url,
+                    data: {
+                        action: 'tf_month_reports',
+                        _nonce: tf_admin_params.tf_nonce,
+                        month: monthTarget,
+                        year: yearTarget,
+                    },
+                    success: function (data) {
+                        var response = JSON.parse(data);
+                        var ctx = document.getElementById('tf_months'); // node
+                        var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
+                        var ctx = $('#tf_months'); // jQuery instance
+                        var ctx = 'tf_months'; // element id
+
+                        var chart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: response.months_day_number,
+                                // Information about the dataset
+                                datasets: [{
+                                    label: "Completed Booking",
+                                    borderColor: '#003C79',
+                                    tension: 0.1,
+                                    data: response.tf_complete_orders,
+                                    fill: false
+                                },
+                                    {
+                                        label: "Cancelled Booking",
+                                        borderColor: 'red',
+                                        tension: 0.1,
+                                        data: response.tf_cancel_orders,
+                                        fill: false
+                                    }
+                                ]
+                            },
+
+                            // Configuration options
+                            options: {
+                                layout: {
+                                    padding: 10,
+                                },
+                                legend: {
+                                    display: true
+                                },
+                                title: {
+                                    display: true,
+                                    text: response.tf_search_month
+                                }
+                            }
+
+                        });
+                        $("#tf-report-loader").removeClass('show');
+                    }
+                })
+            }
+        });
+
+    });
+})(jQuery);
+
+/**
+ * Shortcode generator js
+ * @author Abu Hena
+ * @since 2.9.3
+ */
+(function ($) {
+    //get each of the field value
+    $(document).on('click', '.tf-generate-tour .tf-btn', function (event) {
+        event.preventDefault();
+        var arr = [];
+
+        $(this).parents('.tf-shortcode-generator-single').find(".tf-sg-field-wrap").each(function () {
+            var $this = $(this);
+            var data = $this.find('.tf-setting-field').val();
+            var option_name = $this.find('.tf-setting-field').attr('data-term');
+            var post_count = $this.find('.post-count').attr('data-count');
+            var section_title = $this.find('.tf-shortcode-title-field ').attr('data-title');
+            var section_subtitle = $this.find('.tf-shortcode-subtitle-field ').attr('data-subtitle');
+
+            var tour_tab_title = $this.find('.tf-shortcode-tour-tab-title-field ').attr('data-tour-tab-title');
+            var hotel_tab_title = $this.find('.tf-shortcode-hotel-tab-title-field ').attr('data-hotel-tab-title');
+            var apartment_tab_title = $this.find('.tf-shortcode-apartment-tab-title-field ').attr('data-apartment-tab-title');
+            var car_tab_title = $this.find('.tf-shortcode-car-tab-title-field ').attr('data-car-tab-title');
+
+            if (option_name != undefined && option_name != '') {
+                data = option_name + '=' + (data.length ? data : '""');
+            }
+            if (post_count != undefined && post_count != '') {
+                data = post_count + '=' + (data.length ? data : '""');
+            }
+            if (section_title != undefined && section_title != '' && data.length) {
+                data = section_title + '=' + (data.length ? `"${data}"` : '""');
+            }
+            if (section_subtitle != undefined && section_subtitle != '' && data.length ) {
+                data = section_subtitle + '=' + (data.length ? `"${data}"` : '""');
+            }
+            if (tour_tab_title != undefined && tour_tab_title != '' && data.length) {
+                data = tour_tab_title + '=' + (data.length ? `"${data}"` : '""');
+            }
+            if (hotel_tab_title != undefined && hotel_tab_title != '' && data.length ) {
+                data = hotel_tab_title + '=' + (data.length ? `"${data}"` : '""');
+            }
+            if (apartment_tab_title != undefined && apartment_tab_title != '' && data.length ) {
+                data = apartment_tab_title + '=' + (data.length ? `"${data}"` : '""');
+            }
+            if (car_tab_title != undefined && car_tab_title != '' && data.length ) {
+                data = car_tab_title + '=' + (data.length ? `"${data}"` : '""');
+            }
+            arr.push(data);
+        });
+
+        var allData = arr.filter(Boolean);
+        var shortcode = "[" + allData.join(' ') + "]";
+
+        $(this).parents('.tf-shortcode-generator-single').find('.tf-shortcode-value').val(shortcode);
+        $(this).parents('.tf-shortcode-generator-single').find('.tf-copy-item').slideDown();
+    });
+
+    $(document).on('click', '.tf-sg-close', function (event) {
+        $(this).parents('.tf-shortcode-generators').find('.tf-sg-form-wrapper').fadeOut();
+    });
+
+    $(document).on('click', '.tf-shortcode-btn', function (event) {
+        var $this = $(this);
+        $this.parents('.tf-shortcode-generator-single').find('.tf-sg-form-wrapper').fadeIn();
+
+        $this.parents('.tf-shortcode-generator-single').on("mouseup", function (e) {
+            var container = $(this).find(".tf-shortcode-generator-form");
+            var container_parent = container.parent(".tf-sg-form-wrapper");
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                container_parent.fadeOut();
+            }
+        });
+
+    });
+
+    //Copy the shortcode value
+    $(document).on('click', '.tf-copy-btn', function () {
+        var fieldIdValue = $(this).parent('.tf-shortcode-field').find('#tf-shortcode');
+        if (fieldIdValue) {
+            fieldIdValue.select();
+            document.execCommand("copy");
+        }
+        //show the copied message
+        $(this).parents('.tf-copy-item').append('<div><span class="tf-copied-msg">Copied<span></div>');
+        $("span.tf-copied-msg").animate({opacity: 0}, 1000, function () {
+            $(this).slideUp('slow', function () {
+                $(this).remove();
+            });
+        });
+    });
+    
+    $(document).ready(function () {
+        // $('.tf-import-btn').on('click', function (event) {
+        //     event.preventDefault();
+        //     // Get the import URL from the button's href attribute
+        //     var importUrl = $(this).attr('href');
+        //     // Get the import data from the textarea
+        //     var importData = $('textarea[name="tf_import_option"]').val().trim();
+        //     if (importData == '') {
+        //         alert(tf_options.tf_export_import_msg.import_empty);
+        //         let importField = $('textarea[name="tf_import_option"]');
+        //         importField.focus();
+        //         importField.css('border', '1px solid red');
+        //         return;
+        //     } else {
+        //         //confirm data before send
+        //         if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {
+        //             return;
+        //         }
+        //         $.ajax({
+        //             url: importUrl,
+        //             method: 'POST',
+        //             data: {
+        //                 action: 'tf_import',
+        //                 nonce: tf_admin_params.tf_nonce,
+        //                 tf_import_option: importData,
+        //             },
+        //             beforeSend: function () {
+        //                 $('.tf-import-btn').html('Importing...');
+        //                 $('.tf-import-btn').attr('disabled', 'disabled');
+        //             },
+        //             success: function (response) {
+        //                 if (response.success) {
+        //                     alert(tf_options.tf_export_import_msg.imported);
+        //                     $('.tf-import-btn').html('Imported');
+        //                     window.location.reload();
+        //                 } else {
+        //                     alert('Something went wrong!');
+        //                 }
+        //             }
+        //         });
+        //     }
+        // })
+        $(document).on('click', '.tf-import-btn', function (event) { 
+            event.preventDefault();
+            var textarea = $('textarea[name="tf_import_option"]'); 
+            var importData = textarea.val().trim();
+            if (importData == '') {
+                alert(tf_options.tf_export_import_msg.import_empty);
+                let importField = $('textarea[name="tf_import_option"]');
+                importField.focus();
+                importField.css('border', '1px solid red');
+                return;
+            } 
+            // Triger the form submit
+            $(".tf-option-form").submit(); 
+        });
+
+        $(document).on('click', '.tf-export-btn', function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                method: 'POST',
+                data: {
+                    action: 'tf_export_data',
+                    _nonce: tf_admin_params.tf_nonce,
+                },
+                beforeSend: function () {
+                    $('.tf-export-btn').html('Exporting...');
+                    $('.tf-export-btn').attr('disabled', 'disabled');
+                },
+                success: function (response) {
+                    let obj = JSON.parse(response);
+
+                    if (obj.status === 'success') {
+                        // Create a blob with the response value
+                        var blob = new Blob([obj.data], {type: 'text/plain'});
+
+                        // Create a temporary URL for the blob
+                        var url = window.URL.createObjectURL(blob);
+
+                        // Create a temporary link element
+                        var link = document.createElement('a');
+                        link.href = url;
+                        link.download = 'tf-settings-export.json';
+
+                        // Programmatically click the link to initiate the file download
+                        link.click();
+
+                        // Clean up the temporary URL
+                        window.URL.revokeObjectURL(url);
+                    } else {
+                        notyf.error(obj.message);
+                    }
+                    $('.tf-export-btn').html('Export');
+                    $('.tf-export-btn').removeAttr('disabled');
+                },
+                error: function (response) {
+                    console.log(response);
+                    $('.tf-export-btn').html('Export');
+                    $('.tf-export-btn').removeAttr('disabled');
+                }
+            });
+
+
+        });
+
+        // Select 2 add new category
+        $(document).on('click', '.tf-add-category i', function (event) { 
+            event.preventDefault();
+            $this = $(this);
+            parentDiv = $this.closest('.tf-fieldset');
+            parentDiv.children('#tf-popup-box').css('display', 'flex');
+        });
+
+        // Close Popup
+        $(document).on('click', '.tf-add-category-box-close', function (event) { 
+            event.preventDefault();
+            $('#tf-popup-box').hide();
+        });
+
+    });
+
+
+    /*
+    * Author @Jahid
+    * Color Palatte Change
+    */
+    jQuery(document).ready(function ($) {
+
+        // Function to get the selected design
+        function getSelectedDesign() {
+            return $('input[name="tf_settings\\[color-palette-template\\]"]:checked').val();
+        }
+        
+        const designDefault = {
+            'd1': {
+                brand: {
+                    default: '#0E3DD8',
+                    dark: '#0A2B99',
+                    lite: '#C9D4F7',
+                },
+                text: {
+                    heading: '#1C2130',
+                    paragraph: '#494D59',
+                    lite: '#F3F5FD',
+                },
+                border: {
+                    default: '#16275F',
+                    lite: '#D1D7EE',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#F5F7FF',
+                },
+            },
+            'd2': {
+                brand: {
+                    default: '#B58E53',
+                    dark: '#917242',
+                    lite: '#FAEEDC',
+                },
+                text: {
+                    heading: '#30281C',
+                    paragraph: '#595349',
+                    lite: '#FDF9F3',
+                },
+                border: {
+                    default: '#5F4216',
+                    lite: '#EEE2D1',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#FDF9F3',
+                },
+            },
+            'd3': {
+                brand: {
+                    default: '#F97415',
+                    dark: '#C75605',
+                    lite: '#FDDCC3',
+                },
+                text: {
+                    heading: '#30241C',
+                    paragraph: '#595049',
+                    lite: '#FDF7F3',
+                },
+                border: {
+                    default: '#5F3416',
+                    lite: '#EEDDD1',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#FFF9F5',
+                },
+            },
+            'd4': {
+                brand: {
+                    default: '#003061',
+                    dark: '#002952',
+                    lite: '#C2E0FF',
+                },
+                text: {
+                    heading: '#1C2630',
+                    paragraph: '#495159',
+                    lite: '#F3F8FD',
+                },
+                border: {
+                    default: '#163A5F',
+                    lite: '#D1DFEE',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#F5FAFF',
+                },
+            },
+        };
+    
+        // Function to update custom colors based on the selected design
+        function updateCustomColors(selectedDesign) {
+            if (!selectedDesign) return;
+    
+            const colorPalettes = {
+                'design-1': 'tf-d1',
+                'design-2': 'tf-d2',
+                'design-3': 'tf-d3',
+                'design-4': 'tf-d4'
+            };
+    
+            const selectedPalette = colorPalettes[selectedDesign];
+            if (!selectedPalette) return;
+    
+            // Define the fields to be updated
+            const fields = ['brand', 'text', 'border', 'filling'];
+    
+            fields.forEach(field => {
+                $(`input[name^="tf_settings[${selectedPalette}-${field}]"]`).each(function () {
+                    let fieldName = $(this).attr('name').split('[')[2].replace(']', ''); // Extract the sub-field (e.g., 'default', 'dark', 'lite')
+                    let fieldValue = $(this).val();
+                    let $customField = $(`input[name="tf_settings[tf-custom-${field}][${fieldName}]"]`);
+
+                    if ($customField.length) {
+                        $customField.val(fieldValue).trigger('change');
+                    }
+                });
+            });
+        }     
+    
+        // Initialize wpColorPicker for all relevant inputs
+        $('input[name^="tf_settings[tf-d"]').wpColorPicker({
+            change: function (event, ui) {
+                let $colorField = $(event.target);
+                let originalValue = $colorField.val();
+                let newValue = ui.color.toString();
+
+                updateCustomColors(getSelectedDesign());
+    
+                if (newValue !== originalValue) {
+                    // Switch to custom palette
+                    $('#tf_settings\\[color-palette-template\\]\\[custom\\]').prop("checked", true);
+                    $('.tf-field.tf-field-color.tf-depend-hidden').addClass('tf-depend-on');
+                    $('.tf-field.tf-field-color.tf-depend-hidden[data-value="custom"]').removeClass('tf-depend-on');
+    
+                    // Extract the field type and sub-field name
+                    let nameAttr = $colorField.attr('name');
+                    let match = nameAttr.match(/\[tf-(d\d+)-(brand|text|border|filling)]\[(.*?)\]/);
+                    if (!match) return;
+    
+                    let design = match[1]; // e.g., 'd1', 'd2', etc.
+                    let fieldType = match[2]; // e.g., 'brand', 'text', etc.
+                    let fieldName = match[3]; // e.g., 'default', 'dark', 'lite', etc.
+    
+                    // Update the corresponding custom field
+                    let $customColorField = $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`);
+                    if ($customColorField.length) {
+                        
+                        let value = $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val();
+                        $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`).val(value).trigger('change');
+                        $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val(designDefault[design][fieldType][fieldName]).trigger('change');
+                        $customColorField.val(newValue).trigger('change');
+                    }
+                }
+            }
+        });
+    });
+    
+    /* Plugin insatall from dashboard sidebar */
+    jQuery(document).ready(function($) {
+        $('.tf-plugin-button').not('.pro').on('click', function(e) {
+            e.preventDefault();
+
+            let button = $(this);
+            let action = button.data('action');
+            let pluginSlug = button.data('plugin');
+            let pluginFileName = button.data('plugin_filename');
+
+            if (!action || !pluginSlug) return;
+
+            let loader = button.find('.loader');
+            let originalText = button.clone().children().remove().end().text().trim();
+
+            if (action === 'install') {
+                button.contents().first().replaceWith('Installing..');
+            } else if (action === 'activate') {
+                button.contents().first().replaceWith('Activating..');
+            }
+
+            button.addClass('loading').prop('disabled', true);
+            loader.show();
+
+            $.ajax({
+                url: ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'themefic_manage_plugin',
+                    security: tf_admin_params.tf_nonce,
+                    plugin_slug: pluginSlug,
+                    plugin_filename: pluginFileName,
+                    plugin_action: action
+                },
+                success: function(response) {
+                    button.removeClass('loading').prop('disabled', false);
+                    loader.hide();
+
+                    if (response.success) {
+                        if (action === 'install') {
+                            button.contents().first().replaceWith('Activate');
+                            button.data('action', 'activate').removeClass('install').addClass('activate');
+                        } else if (action === 'activate') {
+                            button.replaceWith('<span class="tf-plugin-button tf-plugin-status active">Activated</span>');
+                        }
+                    } else {
+                        button.contents().first().replaceWith(originalText);
+                        alert('Error: ' + response.data);
+                    }
+                },
+                error: function() {
+                    button.contents().first().replaceWith(originalText).removeClass('loading').prop('disabled', false);
+                    loader.hide();
+                    alert('An error occurred. Please try again.');
+                }
+            });
+        });
+    });
+})(jQuery);
+})();
+
 /******/ })()
 ;
