@@ -977,6 +977,7 @@ function tf_tours_booking_function() {
 			'infants'     => $infant,
 			'total_price' => $without_payment_price + $tour_extra_total,
 			'due_price'   => wc_price($without_payment_price + $tour_extra_total),
+			'unique_id'   => wp_rand(),
 			'visitor_details' => wp_json_encode($tf_visitor_details)
 		];
 
