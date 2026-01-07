@@ -128,7 +128,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 			);
 		}
 
-		if ( $post_type !== "tf_room" ) {
+		if ( $post_type !== "tf_room" && $post_type !== "tf_carrental" ) {
 			$taxonomy_query = new \WP_Term_Query( array(
 				'taxonomy'   => $taxonomy,
 				'orderby'    => 'name',

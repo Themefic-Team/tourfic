@@ -3706,14 +3706,14 @@ function convertTo24HourFormat(timeStr) {
          * @author Sunvi
         */
        
-        if( $(".widget_tf_price_filters").length > 0 ){
-
+        if( $(".widget_tf_price_filters").length > 0 || $("#tf-booking-search-tabs").length > 0 ){
+console.log('fsdd');
             let urlParams = new URLSearchParams(window.location.search);
             let post_type = urlParams.get('type');
             if(!post_type){
                 post_type = $(document).find('input[name="post_id"]').attr("data-post-type");
             }
-            if( post_type == 'tf_hotel' || post_type == 'tf_tours' || post_type == 'tf_apartment' || post_type == 'tf_carrental' || post_type == 'tf_room' ){
+            // if( post_type == 'tf_hotel' || post_type == 'tf_tours' || post_type == 'tf_apartment' || post_type == 'tf_carrental' || post_type == 'tf_room' ){
                 $.ajax({
                     type: 'POST',
                     url: tf_params.ajax_url,
@@ -3723,55 +3723,56 @@ function convertTo24HourFormat(timeStr) {
                         post_type: post_type
                     },
                     success: function (response) {
+                        console.log($(".tf-room-filter-range").length);
                         if (response.success) {
-                            if( post_type == 'tf_tours' ) {
-                                    let tf_tour_range_options = {
-                                        range: {
-                                            min: parseInt( response.data?.tf_tours?.min ),
-                                            max: parseInt( response.data?.tf_tours?.max ),
-                                            step: 1
-                                        },
-                                        initialSelectedValues: {
-                                            from: parseInt( response.data?.tf_tours?.min ),
-                                            to: parseInt( response.data?.tf_tours?.max )
-                                        },
-                                        grid: false,
-                                        theme: "dark",
-                                        onFinish: function () {
-                                            if($(".filter-reset-btn").length>0){
-                                                $(".filter-reset-btn").show();
-                                            }
-                                            makeFilter();
+                            if( $(".tf-tour-filter-range").length > 0 || $(".tf-tour-result-price-range").length > 0 ){
+                                let tf_tour_range_options = {
+                                    range: {
+                                        min: parseInt( response.data?.tf_tours?.min ),
+                                        max: parseInt( response.data?.tf_tours?.max ),
+                                        step: 1
+                                    },
+                                    initialSelectedValues: {
+                                        from: parseInt( response.data?.tf_tours?.min ),
+                                        to: parseInt( response.data?.tf_tours?.max )
+                                    },
+                                    grid: false,
+                                    theme: "dark",
+                                    onFinish: function () {
+                                        if($(".filter-reset-btn").length>0){
+                                            $(".filter-reset-btn").show();
                                         }
-                                    };
-                                    if ( parseInt( response.data?.tf_tours?.min ) != 0 && parseInt( response.data?.tf_tours?.max ) != 0) {
-                                        $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
+                                        makeFilter();
                                     }
-                            
-                                    // Tours Min and Max Range in Search Result
-                                    var tf_search_page_params = new window.URLSearchParams(window.location.search);
-                                    let tf_tours_search_range = {
-                                        range: {
-                                            min: parseInt( response.data?.tf_tours?.min  ),
-                                            max: parseInt( response.data?.tf_tours?.max ),
-                                            step: 1
-                                        },
-                                        initialSelectedValues: {
-                                            from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt( response.data?.tf_tours?.min ),
-                                            to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt( response.data?.tf_tours?.max )
-                                        },
-                                        grid: false,
-                                        theme: "dark",
-                                        onFinish: function () {
-                                            if($(".filter-reset-btn").length>0){
-                                                $(".filter-reset-btn").show();
-                                            }
-                                            makeFilter();
+                                };
+                                if ( parseInt( response.data?.tf_tours?.min ) != 0 && parseInt( response.data?.tf_tours?.max ) != 0) {
+                                    $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
+                                }
+                        
+                                // Tours Min and Max Range in Search Result
+                                var tf_search_page_params = new window.URLSearchParams(window.location.search);
+                                let tf_tours_search_range = {
+                                    range: {
+                                        min: parseInt( response.data?.tf_tours?.min  ),
+                                        max: parseInt( response.data?.tf_tours?.max ),
+                                        step: 1
+                                    },
+                                    initialSelectedValues: {
+                                        from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt( response.data?.tf_tours?.min ),
+                                        to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt( response.data?.tf_tours?.max )
+                                    },
+                                    grid: false,
+                                    theme: "dark",
+                                    onFinish: function () {
+                                        if($(".filter-reset-btn").length>0){
+                                            $(".filter-reset-btn").show();
                                         }
-                                    };
-                                    if ( parseInt( response.data?.tf_tours?.min ) != 0 && parseInt( response.data?.tf_tours?.max ) != 0) {
-                                        $('.tf-tour-result-price-range').alRangeSlider(tf_tours_search_range);
+                                        makeFilter();
                                     }
+                                };
+                                if ( parseInt( response.data?.tf_tours?.min ) != 0 && parseInt( response.data?.tf_tours?.max ) != 0) {
+                                    $('.tf-tour-result-price-range').alRangeSlider(tf_tours_search_range);
+                                }
 
                                 // Store in global variable or object
                                 window.tf_price_ranges = {
@@ -3782,54 +3783,55 @@ function convertTo24HourFormat(timeStr) {
                                     window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
                                     window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
                                 }
-                            } else if( post_type == 'tf_hotel' ) { 
-                                        let tf_hotel_range_options = {
-                                            range: {
-                                                min: parseInt( response.data?.tf_hotel?.min ),
-                                                max: parseInt( response.data?.tf_hotel?.max ),
-                                                step: 1
-                                            },
-                                            initialSelectedValues: {
-                                                from: parseInt( response.data?.tf_hotel?.min ),
-                                                to: parseInt( response.data?.tf_hotel?.max )
-                                            },
-                                            grid: false,
-                                            theme: "dark",
-                                            onFinish: function () {
-                                                if($(".filter-reset-btn").length>0){
-                                                    $(".filter-reset-btn").show();
-                                                }
-                                                makeFilter();
-                                            }
-                                        };
-                                        if ( response.data?.tf_hotel?.min != 0 && response.data?.tf_hotel?.max != 0) {
-                                            $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
+                            }
+                            if( $(".tf-hotel-filter-range").length > 0 || $(".tf-hotel-result-price-range").length > 0 ){
+                                let tf_hotel_range_options = {
+                                    range: {
+                                        min: parseInt( response.data?.tf_hotel?.min ),
+                                        max: parseInt( response.data?.tf_hotel?.max ),
+                                        step: 1
+                                    },
+                                    initialSelectedValues: {
+                                        from: parseInt( response.data?.tf_hotel?.min ),
+                                        to: parseInt( response.data?.tf_hotel?.max )
+                                    },
+                                    grid: false,
+                                    theme: "dark",
+                                    onFinish: function () {
+                                        if($(".filter-reset-btn").length>0){
+                                            $(".filter-reset-btn").show();
                                         }
-                                
-                                        // Hotel Min and Max Range in Search Result
-                                        var tf_search_page_params = new window.URLSearchParams(window.location.search);
-                                        let tf_hotel_search_range = {
-                                            range: {
-                                                min: parseInt( response.data?.tf_hotel?.min ),
-                                                max: parseInt( response.data?.tf_hotel?.max ),
-                                                step: 1
-                                            },
-                                            initialSelectedValues: {
-                                                from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt( response.data?.tf_hotel?.min ),
-                                                to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt( response.data?.tf_hotel?.max )
-                                            },
-                                            grid: false,
-                                            theme: "dark",
-                                            onFinish: function () {
-                                                if($(".filter-reset-btn").length>0){
-                                                    $(".filter-reset-btn").show();
-                                                }
-                                                makeFilter();
-                                            }
-                                        };
-                                        if ( response.data?.tf_hotel?.min != 0 && response.data?.tf_hotel?.max != 0) {
-                                            $('.tf-hotel-result-price-range').alRangeSlider(tf_hotel_search_range);
+                                        makeFilter();
+                                    }
+                                };
+                                if ( response.data?.tf_hotel?.min != 0 && response.data?.tf_hotel?.max != 0) {
+                                    $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
+                                }
+                        
+                                // Hotel Min and Max Range in Search Result
+                                var tf_search_page_params = new window.URLSearchParams(window.location.search);
+                                let tf_hotel_search_range = {
+                                    range: {
+                                        min: parseInt( response.data?.tf_hotel?.min ),
+                                        max: parseInt( response.data?.tf_hotel?.max ),
+                                        step: 1
+                                    },
+                                    initialSelectedValues: {
+                                        from: tf_search_page_params.get('from') ? tf_search_page_params.get('from') : parseInt( response.data?.tf_hotel?.min ),
+                                        to: tf_search_page_params.get('to') ? tf_search_page_params.get('to') : parseInt( response.data?.tf_hotel?.max )
+                                    },
+                                    grid: false,
+                                    theme: "dark",
+                                    onFinish: function () {
+                                        if($(".filter-reset-btn").length>0){
+                                            $(".filter-reset-btn").show();
                                         }
+                                        makeFilter();
+                                    }
+                                };
+                                if ( response.data?.tf_hotel?.min != 0 && response.data?.tf_hotel?.max != 0) {
+                                    $('.tf-hotel-result-price-range').alRangeSlider(tf_hotel_search_range);
+                                }
 
                                 // Store in global variable or object
                                 window.tf_price_ranges = {
@@ -3840,7 +3842,8 @@ function convertTo24HourFormat(timeStr) {
                                     window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
                                     window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
                                 }
-                            } else if( post_type == 'tf_apartment' ) {
+                            }
+                            if( $(".tf-apartment-filter-range").length > 0 || $(".tf-apartment-result-price-range").length > 0 ){
                                 let tf_apartment_range_options = {
                                     range: {
                                         min: parseInt( response.data?.tf_apartment?.min ),
@@ -3892,7 +3895,8 @@ function convertTo24HourFormat(timeStr) {
                                     window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
                                     window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
                                 }
-                            } else if( post_type == 'tf_carrental' ) {
+                            }
+                            if( $(".tf-car-result-price-range").length > 0 || $(".tf-car-result-seat-range").length > 0 ){
                                 var tf_search_page_params = new window.URLSearchParams(window.location.search);
                                 let tf_car_search_range = {
                                     range: {
@@ -3955,7 +3959,8 @@ function convertTo24HourFormat(timeStr) {
                                     min_seat: parseInt(response.data?.tf_carrental?.min_seat),
                                     max_seat: parseInt(response.data?.tf_carrental?.max_seat)
                                 }
-                            } else if( post_type == 'tf_room' ) { 
+                            }
+                            if( $(".tf-room-filter-range").length > 0 || $(".tf-room-result-price-range").length > 0 ){
                                 let tf_room_range_options = {
                                     range: {
                                         min: parseInt( response.data?.tf_room?.min ),
@@ -3975,6 +3980,8 @@ function convertTo24HourFormat(timeStr) {
                                         makeFilter();
                                     }
                                 };
+                                console.log(response.data?.tf_room?.min);
+                                console.log(response.data?.tf_room?.max);
                                 if ( response.data?.tf_room?.min != 0 && response.data?.tf_room?.max != 0) {
                                     $('.tf-room-filter-range').alRangeSlider(tf_room_range_options);
                                 }
@@ -4017,7 +4024,7 @@ function convertTo24HourFormat(timeStr) {
                         }
                     }
                 })
-            }
+            // }
         }
 
         /**

@@ -1950,6 +1950,26 @@ class Room {
                                     <div class="tf-room-filter-range"></div>
                                 </div>
 
+								<h3 class="tf_advance_search_form_feature_filter_label" style="margin-top: 20px"><?php esc_html_e( 'Room Features', 'tourfic' ); ?></h3>
+								<?php
+								$tf_room_feature = get_terms( array(
+									'taxonomy'     => 'hotel_feature',
+									'orderby'      => 'title',
+									'order'        => 'ASC',
+									'hide_empty'   => true,
+									'hierarchical' => 0,
+								) );
+								if ( $tf_room_feature ) : ?>
+                                    <div class="tf-hotel-features" style="overflow: hidden">
+										<?php foreach ( $tf_room_feature as $term ) : ?>
+                                            <div class="form-group form-check">
+                                                <input type="checkbox" name="features[]" class="form-check-input" value="<?php echo esc_html( $term->slug ); ?>" id="room_<?php echo esc_html( $term->slug ); ?>">
+                                                <label class="form-check-label" for="room_<?php echo esc_html( $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></label>
+                                            </div>
+										<?php endforeach; ?>
+                                    </div>
+								<?php endif; ?>
+
                                 <h3 class="tf_advance_search_form_feature_filter_label" style="margin-top: 20px"><?php esc_html_e( 'Room Types', 'tourfic' ); ?></h3>
 								<?php
 								$tf_room_type = get_terms( array(
@@ -2064,6 +2084,7 @@ class Room {
 			'children',
 			'room',
 			'check-in-out-date',
+			'features',
 			'room_types',
 			'type',
 			'from',

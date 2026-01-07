@@ -2613,17 +2613,17 @@ trait Action_Helper {
 		$post_type = !empty( $_POST['post_type']) ? sanitize_text_field( $_POST['post_type'] ) : '';
 		$response = array();
 
-		if( $post_type == 'tf_hotel' ) {
-			$response[$post_type] = Hotel_Pricing::get_min_max_price_from_all_hotel();
-		} else if( $post_type == 'tf_tours' ) {
-			$response[$post_type] = Tour_Pricing::get_min_max_price_from_all_tour();
-		} else if( $post_type == 'tf_apartment' ) {
-			$response[$post_type] = Apt_Pricing::get_min_max_price_from_all_apartment();
-		} else if( $post_type == 'tf_carrental' ) {
-			$response[$post_type] = get_cars_min_max_price();
-		} else if( $post_type == 'tf_room' ) {
-			$response[$post_type] = Room_Pricing::get_min_max_price_from_all_room();
-		}
+		// if( $post_type == 'tf_hotel' ) {
+			$response['tf_hotel'] = Hotel_Pricing::get_min_max_price_from_all_hotel();
+		// } else if( $post_type == 'tf_tours' ) {
+			$response['tf_tours'] = Tour_Pricing::get_min_max_price_from_all_tour();
+		// } else if( $post_type == 'tf_apartment' ) {
+			$response['tf_apartment'] = Apt_Pricing::get_min_max_price_from_all_apartment();
+		// } else if( $post_type == 'tf_carrental' ) {
+			$response['tf_carrental'] = get_cars_min_max_price();
+		// } else if( $post_type == 'tf_room' ) {
+			$response['tf_room'] = Room_Pricing::get_min_max_price_from_all_room();
+		// }
 
 		wp_send_json_success( $response );
 		wp_die();
