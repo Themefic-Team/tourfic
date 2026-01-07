@@ -2051,7 +2051,7 @@ class Hotel {
                             <?php echo esc_html_e("Locations", "tourfic"); ?>
                         </label>
                         <div class="tf-search__form__field" id="locationField">
-                            <input type="text" name="place-name" <?php echo $hotel_location_field_required != 1 ? '' : 'required'; ?> id="tf-location" class="tf-search__form__input" placeholder="<?php esc_html_e('Where you wanna stay?', 'tourfic'); ?>" value="">
+                            <input type="text" name="place-name" <?php echo $hotel_location_field_required != 1 ? '' : 'required'; ?> id="tf-location" class="tf-search__form__input"  placeholder="<?php echo esc_attr( apply_filters( 'tf_location_placeholder', __( 'Where you wanna stay?', 'tourfic' ) ) ); ?>" value="">
                             <input type="hidden" name="place" id="tf-search-hotel" class="tf-place-input">
                             <span class="tf-search__form__field__icon icon--location">
 							<svg width="12" height="17" viewBox="0 0 12 17" fill="none" xmlns="http://www.w3.org/2000/svg">

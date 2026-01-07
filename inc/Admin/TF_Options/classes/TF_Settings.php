@@ -188,7 +188,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					esc_html__('Template Builder', 'tourfic'),
 					'manage_options',
 					'tf_template_builder',
-					array( '\Tourfic\App\Templates\Template_Builder', 'tf_template_builder_elementor_check' )
+					array( 'Template_Builder', 'tf_template_builder_elementor_check' )
 				);
 			} 
 
@@ -1248,7 +1248,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			];
 
 			// Check if a nonce is valid.
-			if (  !isset( $_POST['tf_option_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_option_nonce'] ) ), 'tf_option_nonce_action' ) ) {
+			if (  !isset( $_POST['tf_option_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_option_nonce'] ) ), 'updates' ) ) {
 				return;
 			}
 

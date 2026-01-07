@@ -122,10 +122,7 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 	        }
 
 			$tf_taxonomy_value = array();
-			$taxonomy_request  = array();
-			if( !empty($_POST[ $this->taxonomy_id ]) ){
-				$taxonomy_request = array_map('sanitize_text_field', wp_unslash($_POST[ $this->taxonomy_id ]));
-			}
+			$taxonomy_request   = ( ! empty( $_POST[ $this->taxonomy_id ] ) ) ? $_POST[ $this->taxonomy_id ] : array();
 
 			// var_dump($taxonomy_request); exit;
 

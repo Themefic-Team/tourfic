@@ -107,8 +107,7 @@ class Pricing {
 		$infant_price   = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
 
 		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
-		$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
-		$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+		
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
 		if(!empty($tour_availability_data) && Helper::is_all_unavailable($tour_availability_data)){
@@ -139,22 +138,6 @@ class Pricing {
 						$tour_price[] = $infant_price;
 					}
 				}
-
-				// if($pricing_rule == 'group' && $data['pricing_type'] == 'group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
-				// 	if(!empty($data['options_count'])){
-				// 		for($i = 0; $i < $data['options_count']; $i++){
-				// 			if (!empty($data['tf_option_group_price_'.$i])) {
-				// 				if ($data['tf_option_group_price_'.$i]) {
-				// 					$tour_price[] = $data['tf_option_group_price_'.$i];
-				// 				}
-				// 			}
-				// 		}
-				// 	}else{
-				// 		if(!empty($group_price)){
-				// 			$tour_price[] = $group_price;
-				// 		}
-				// 	}
-				// }
 
 				if($pricing_rule == 'group' && $data['pricing_type'] == 'group'){
 					// Group Price
@@ -264,8 +247,7 @@ class Pricing {
 		$meta                             = $this->meta;
 		$pricing_rule                     = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
-		$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
-		$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
 		$group_price    = ! empty( $meta['group_price'] ) ? $meta['group_price'] : 0;
@@ -486,8 +468,6 @@ class Pricing {
 		$meta                             = $this->meta;
 		$pricing_rule                     = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
-		$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
-		$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
 		
 		$min_person = null;
 		$max_person = null;
@@ -617,8 +597,6 @@ class Pricing {
 		$tour_time = $this->time;
 
 		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
-		$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
-		$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
 
 		$matched_availability = null;
 		if ( $tour_date && is_array($tour_availability) ) {
@@ -698,9 +676,6 @@ class Pricing {
 				$pricing_rule = !empty( $meta['pricing'] ) ? $meta['pricing'] : 'person';
 				$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
 
-				$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
-				$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
-
 				if(!empty($tour_availability_data)){
 					foreach ($tour_availability_data as $data) {
 						if ($data['status'] !== 'available') {
@@ -723,16 +698,6 @@ class Pricing {
 								$tftours_min_maxprices[] = $data['infant_price'];
 							} 
 						}
-			
-						// if($data['pricing_type'] == 'group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
-						// 	if(!empty($data['options_count'])){
-						// 		for($i = 0; $i < $data['options_count']; $i++){
-						// 			if (!empty($data['tf_option_group_price_'.$i])) {
-						// 				$tftours_min_maxprices[] = $data['tf_option_group_price_'.$i];
-						// 			}
-						// 		}
-						// 	}
-						// }
 			
 						if($pricing_rule == 'group' && $data['pricing_type'] == 'group' ){
 							// Group Price
@@ -808,8 +773,7 @@ class Pricing {
 		$children_price = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
 
 		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
-		$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
-		$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
 		if(!empty($tour_availability_data)){
@@ -833,22 +797,6 @@ class Pricing {
 						$tour_price[] = $children_price;
 					}
 				}
-
-				// if($pricing_rule == 'group' && $data['pricing_type'] == 'group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
-				// 	if(!empty($data['options_count'])){
-				// 		for($i = 0; $i < $data['options_count']; $i++){
-				// 			if (!empty($data['tf_option_group_price_'.$i])) {
-				// 				if ($data['tf_option_group_price_'.$i]) {
-				// 					$tour_price[] = $data['tf_option_group_price_'.$i];
-				// 				}
-				// 			}
-				// 		}
-				// 	}else{
-				// 		if(!empty($group_price)){
-				// 			$tour_price[] = $group_price;
-				// 		}
-				// 	}
-				// }
 
 				if($pricing_rule == 'group' && $data['pricing_type'] == 'group' ){
 					// Group Price

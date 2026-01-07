@@ -143,19 +143,23 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
 
     </div>
 
-<?php } else{ ?>
+<?php } else{ 
+    
+ob_start();
+?>
+
 <div class="tf-main-wrapper tf-archive-template__legacy" data-fullwidth="true">
-	<?php do_action( 'tf_before_container' ); ?>
-	<div class="tf-container">
-		<h3><?php echo esc_html( $taxonomy_name ); ?></h3>
-		<div class="search-result-inner">
+    <?php do_action( 'tf_before_container' ); ?>
+    <div class="tf-container">
+        <h3><?php echo esc_html( $taxonomy_name ); ?></h3>
+        <div class="search-result-inner">
 
-			<div class="tf-search-left">
-				<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
-			</div>
+            <div class="tf-search-left">
+                <?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
+            </div>
 
-			<div class="tf-search-right">
-				<?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
+            <div class="tf-search-right">
+                <?php Helper::tf_archive_sidebar_search_form( $post_type, $taxonomy, $taxonomy_name, $taxonomy_slug ); ?>
                 <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
                     <div id="tf__booking_sidebar">
                         <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
@@ -163,11 +167,15 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
                 <?php } ?>
             </div>
 
-		</div>
-	</div>
-	<?php do_action( 'tf_after_container' ); ?>
+        </div>
+    </div>
+    <?php do_action( 'tf_after_container' ); ?>
 </div>
+
 <?php
+// Get the output and apply filter
+$template_output = ob_get_clean();
+echo apply_filters( 'tf_hotel_location_archive_legacy_template', $template_output, $post_type, $taxonomy, $taxonomy_name, $taxonomy_slug );
 }
 if(wp_is_block_theme()){
     wp_footer();

@@ -248,5 +248,39 @@
             $('.tf-template-preview').show();
             $('input[name="tf_template_design"][value="blank"]').prop('checked', true);
         }
+
+        $(document).on('change', '.tf-template-toggle', function () {
+            let post_id = $(this).data('id');
+            let status = $(this).is(':checked') ? 1 : 0;
+
+            $.ajax({
+                url: tf_pro_params.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'tf_toggle_template_status',
+                    post_id: post_id,
+                    status: status,
+                    nonce: tf_pro_params.tf_pro_nonce
+                },
+                beforeSend: function() {
+                    $('.tf-template-builder-loader').show();
+                },
+                success: function(response) {
+                    $('.tf-template-builder-loader').hide();
+
+                    if (response.success && status === 1) {
+                        // RESPONSE WILL INCLUDE OTHER DEACTIVATED IDS (we add this)
+                        let deactivated_ids = response.data.deactivated_ids || [];
+
+                        // Turn OFF all returned switchers
+                        deactivated_ids.forEach(function (id) {
+                            let $switch = $('.tf-template-toggle[data-id="' + id + '"]');
+                            $switch.prop('checked', false);
+                        });
+                    }
+                },
+            });
+        });
+
     });
 })(jQuery);

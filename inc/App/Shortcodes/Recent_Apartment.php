@@ -27,6 +27,11 @@ class Recent_Apartment extends \Tourfic\Core\Shortcodes {
 			)
 		);
 
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		if (in_array('apartment', $tf_disable_services)){
+			return;
+		}
+		
 		$args = array(
 			'post_type'      => 'tf_apartment',
 			'post_status'    => 'publish',

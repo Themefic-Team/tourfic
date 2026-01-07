@@ -3,7 +3,7 @@
 namespace Tourfic\App\Shortcodes;
 
 defined( 'ABSPATH' ) || exit;
-
+use Tourfic\Classes\Helper;
 class Hotel_Locations extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
@@ -31,6 +31,11 @@ class Hotel_Locations extends \Tourfic\Core\Shortcodes {
 				$atts
 			)
 		);
+
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		if (in_array('hotel', $tf_disable_services)){
+			return;
+		}
 
 		// 1st search on hotel_location taxonomy
 		$locations = get_terms( array(

@@ -892,6 +892,9 @@ class Migrator {
 			/** settings option migration */
 			// company_logo
 			$old_setting_option = get_option( 'tourfic_opt' );
+			if ( ! is_array( $old_setting_option ) ) {
+				$old_setting_option = [];
+			}
 			if ( isset( $old_setting_option['itinerary-builder-setings']['company_logo'] ) && is_array( $old_setting_option['itinerary-builder-setings']['company_logo'] ) ) {
 				$old_setting_option['itinerary-builder-setings']['company_logo'] = $old_setting_option['itinerary-builder-setings']['company_logo']['url'];
 			}

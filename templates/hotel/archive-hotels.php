@@ -30,7 +30,8 @@ if ( Helper::tf_is_woo_active() ) {
 	} elseif( $tf_hotel_arc_selected_template=="design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()){
 		include TF_TEMPLATE_PATH . 'hotel/archive/design-3.php';
 	} else {
-		include TF_TEMPLATE_PATH . 'hotel/archive/design-legacy.php';
+		$template = apply_filters( 'tf_hotel_archive_legacy_template', TF_TEMPLATE_PATH . 'hotel/archive/design-legacy.php' );
+		include $template;
 	}
 } else {
 	?>

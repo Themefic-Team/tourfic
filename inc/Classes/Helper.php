@@ -365,7 +365,9 @@ class Helper {
 			'orderby'    => 'name',
 			'order'      => 'ASC',
 		);
-		$args             = wp_parse_args( $args, $defaults );
+		$args  = wp_parse_args( $args, $defaults );
+
+        $args = apply_filters( 'tf_get_terms_dropdown_args', $args, $taxonomy );
 		$args['taxonomy'] = $taxonomy;
 
 		$terms = get_terms( $args );
