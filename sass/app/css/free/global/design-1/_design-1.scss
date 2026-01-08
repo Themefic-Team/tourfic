@@ -310,6 +310,622 @@
                 position: absolute;
             }
         }
+        .tf-archive-room-details{
+            background-color: $color-filling-fg;
+            padding: 48px 0;
+
+            @media #{$max575} {
+                padding-top: 32px;
+            }
+
+            .tf-archive-header{
+                margin-bottom: 48px;
+                gap: 16px;
+
+                @media #{$max575} {
+                    margin-bottom: 32px;
+                }
+
+                .tf-total-results{
+                    color: $color-heading;
+                    font-size: 1.563rem;
+                    font-weight: 400;
+                    line-height: 1.4;
+                }
+                
+                .tf-archive-header-right{
+                    gap: 8px;
+                }
+
+                .tf-total-result-bar{
+                    h3{
+                        color: $color-heading;
+                        font-size: 1.563rem;
+                        font-weight: 400;
+                    }
+                }
+
+                .tf-room-archive-action-btn {
+                    padding: 8px 24px;
+                    color: $color-primary;
+                    border-radius: 32px;
+                    border: 1px solid $color-primary;
+                    background-color: $color-brand-lite;
+                    backdrop-filter: blur(16px);
+                    font-size: 1rem;
+                    font-weight: 600;
+                    height: 48px;
+                    @include flexbox();
+                    align-items: center;
+                    justify-content: center;
+                    text-align: left;
+                    cursor: pointer;
+                    @include transition();
+
+                    i {
+                        margin-right: 8px;
+                        font-weight: 400;
+                    }
+
+                    &:hover {
+                        background: $color-brand-lite;
+                    }
+
+                    @media #{$max575} {
+                        padding: 4px 18px;
+                        font-size: 14px;
+                        height: 40px;
+                    }
+                }
+
+                form.tf-archive-ordering{
+                    position: relative;
+
+                    select {
+                        -webkit-appearance: none;
+                        appearance: none;
+                        -moz-appearance: none;
+                        background-image: none;
+                    }
+                    i{
+                        position: absolute;
+                        top: 50%;
+                        right: 12px;
+                        transform: translateY(-50%);
+                        color: $color-primary;
+                    }
+                }
+            }
+
+            .tf-room-item-cards{
+                flex-direction: column;
+                gap: 48px;
+            }
+
+            .tf-room-item-card{
+                @include flexbox();
+                background-color: #fff;
+
+                @media #{$max991} {
+                    @include flex-wrap();
+                    @include flex-direction(column);
+                }
+
+                &-left{
+                    @include flex(0 0 490px);
+
+                    @media #{$max991} {
+                        @include flex(0 0 100%);
+                    }
+                }
+                &-right{
+                    @include flex(0 0 calc(100% - 490px));
+                    padding: 32px;
+
+                    @media #{$max991} {
+                        @include flex(0 0 100%);
+                    }
+                    @media #{$max575} {
+                        padding: 16px 24px 32px 24px;
+                    }
+                }
+
+                .tf-room-gallery{
+                    position: relative;
+
+                    .tf-room-ratings {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        @include flexbox();
+                        @include align-items(center);
+                        gap: 8px;
+                        background: $color-filling-bg;
+                        padding: 6px 16px;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        line-height: 1.5;
+                        color: $color-text;
+                        i {
+                            color: #E29A00;
+                        }
+                    }
+                }
+                .tf-room-thumb{
+                    img{
+                        height: 280px;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+                .tf-room-left-card-content{
+                    padding: 24px;
+                    @include flexbox();
+                    @include flex-direction(column);
+                    gap: 16px;
+
+                    @media #{$max575} {
+                        padding: 24px 24px 16px 24px;
+                    }
+
+                    h2{
+                        margin: 0;
+                        font-size: 2rem;
+                        line-height: 1.4;
+
+                        @media #{$max575} {
+                            font-size: 1.563rem;
+                        }
+
+                        a{
+                            color: $color-heading;
+
+                            &:hover{
+                                color: $color-primary;
+                            }
+                        }
+                    }
+
+                    .tf-details{
+                        p{
+                            margin: 0;
+                            color: $color-text;
+                            font-size: 1rem;
+                            line-height: 1.5;
+                        }
+                    }
+
+                    .tf-room-details-url{
+                        color: $color-primary;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        line-height: 1.5;
+
+                        &:hover{
+                            text-decoration: underline;
+                        }
+                    }
+                }
+                .tf-room-option{
+                    @include flexbox();
+                    @include justify-content(space-between);
+                    gap: 16px;
+                    margin-bottom: 24px;
+                    padding-bottom: 24px;
+                    border-bottom: 1px solid $color-border-lite;
+
+                    @media #{$max575} {
+                        @include flex-direction(column);
+                    }
+
+                    &-right{
+                        @include flexbox();
+                        @include flex-direction(column);
+                        @include justify-content(space-between);
+                        @include align-items(flex-end);
+                        @include flex(0 0 200px);
+                        text-align: right;
+
+                        @media #{$max575} {
+                            @include align-items(flex-start);
+                            @include flex(0 0 100%);
+                            text-align: left;
+
+                            .tf_btn{
+                                width: 100%;
+                            }
+                        }
+                    }
+
+                    &:last-child{
+                        border-bottom: none;
+                        margin-bottom: 0;
+                        padding-bottom: 0;
+                    }
+
+                    h3{
+                        color: $color-heading;
+                        font-size: 1.563rem;
+                        font-weight: 400;
+                        line-height: 1.4;
+                        margin: 0 0 18px 0;
+                    }
+
+                    ul.tf-room-features{
+                        list-style: none;
+                        @include flexbox();
+                        @include flex-wrap();
+                        gap: 12px 32px;
+                        padding: 0;
+                        margin: 0;
+
+                        li{
+                            @include flexbox();
+                            gap: 8px;
+                            color: $color-text;
+                            font-size: 1rem;
+                            line-height: 1.5;
+
+                            i{
+                                color: $color-border;
+                            }
+                        }
+                    }
+
+                    .tf-room-off {
+                        padding: 6px 16px;
+                        background: #C5FBD9;
+                        font-size: 0.813rem;
+                        font-weight: 600;
+                        color: #126832;
+                        margin-bottom: 8px;
+                        margin-left: auto;
+                        width: fit-content;
+                        border-radius: 30px;
+
+                        @media #{$max575} {
+                            margin-left: 0;
+                        }
+                    }
+
+                    .tf-room-price{
+                        color: $color-heading;
+                        text-align: right;
+                        font-size: 1.12rem;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        margin-bottom: 24px;
+
+                        .sale-price .amount{
+                            font-size: 1.25rem;
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
+            
+            .tf-room-options-collapsed .tf-room-option-item {
+                display: none;
+            }
+
+            .tf-room-options-collapsed .tf-room-option-item:nth-child(1),
+            .tf-room-options-collapsed .tf-room-option-item:nth-child(2) {
+                display: flex;
+            }
+
+            .tf-room-view-more-wrap {
+                margin-top: 24px;
+
+                .tf-room-view-more{
+                    color: $color-primary;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    line-height: 1.5;
+                    gap: 8px;
+                    @include flexbox();
+                    @include align-items(center);
+                    @include justify-content(center);
+                    cursor: pointer;
+                }
+            }
+
+
+            .tf-pagination-bar{
+                display: block;
+                width: 100%;
+
+                .tf_posts_navigation,
+                #tf_posts_navigation_bar{
+                    width: 100%;
+                    display: flex;
+                    gap: 10px;
+                    
+                    .page-numbers {
+                        font-size: 0.875rem;
+                        color: $color-primary;
+                        text-decoration: none;
+                        padding: 8px 16px;
+                        background: $color-white;
+                        box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+                        border-radius: 5px;
+                        display: inline-block;
+                        border: 1px solid $color-border-lite;
+                    }
+                    .page-numbers.current{
+                        background: $color-primary;
+                        color: $color-white;
+                        border-color: $color-white;
+                    }
+                }
+            }
+            .tf_posts_navigation.tf_posts_ajax_navigation,
+            .tf_posts_navigation.tf_posts_page_navigation{
+                width: 100%;
+
+                .page-numbers {
+                    font-size: 0.875rem;
+                    color: $color-primary;
+                    text-decoration: none;
+                    padding: 12px 18px;
+                    background: $color-white;
+                    box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+                    border-radius: 5px;
+                    display: inline-block;
+                }
+                .page-numbers.current{
+                    background: $color-primary;
+                    color: $color-white;
+                }
+            }
+
+            //Sidebar
+            .tf-archive-filter {
+                //margin-bottom: 24px;
+
+                label input:checked ~ .tf-checkmark{
+                    background-color: $color-primary;
+                    border-color: $color-primary;
+                }
+
+                .tf-archive-filter-sidebar {
+                    position: fixed;
+                    top: 0;
+                    left: -320px;
+                    width: 300px;
+                    height: 100vh;
+                    background-color: $color-white;
+                    box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
+                    padding: 16px;
+                    z-index: 99999;
+                    @include transition();
+
+                    &.tf-show {
+                        left: 0;
+                    }
+                }
+
+                .tf-filter-title {
+                    @include flexbox();
+                    @include justify-content(space-between);
+                    margin-bottom: 24px;
+
+                    .tf-section-title {
+                        margin: 0;
+                        padding: 0;
+                        font-size: 1rem;
+                        font-weight: 500;
+                        color: $color-heading;
+                        line-height: 1.5;
+                    }
+
+                    button.filter-reset-btn {
+                        margin: 0;
+                        padding: 0;
+                        border: none;
+                        color: $color-primary;
+                        font-size: 1rem;
+                        font-weight: 700;
+                        line-height: 1.5;
+                        background-color: transparent;
+                        letter-spacing: 0.15px;
+                        cursor: pointer;
+                        display: none;
+
+                        @media #{$max1024}{
+                            font-size: 0.75rem;
+                        }
+                    }
+                }
+
+                .tf_widget {
+                    .tf-room-result-price-range{
+                        padding-left: 14px;
+                        padding-right: 24px;
+                    }
+                    .tf-hotel-result-price-range,
+                    .tf-tour-result-price-range {
+                        margin-top: 20px;
+                        padding-bottom: 0px;
+                    }
+
+                    h4 {
+                        font-size: 1.25rem;
+                        font-weight: 500;
+                    }
+
+                    .al-range-slider__track {
+                        background: $color-brand-lite;
+                        height: 10px;
+                        box-shadow: none;
+                        margin: 30px 0px 10px 0px;
+                    }
+
+                    .al-range-slider_dark {
+                        padding: 0px;
+
+                        .al-range-slider__bar {
+                            background: $color-text;
+                            box-shadow: none;
+                        }
+                    }
+
+                    .al-range-slider__knob {
+                        background: $color-filling-bg;
+                        height: 24px;
+                        width: 24px;
+                        box-shadow: none;
+                        border: 1.5px solid $color-border;
+
+                        &:first-child {
+                            span {
+                                left: 10px;
+                            }
+                        }
+                    }
+
+                    .al-range-slider__tooltip {
+                        background: $color-primary;
+                        border-radius: 5px;
+                        box-shadow: none;
+                        padding: 3px 10px;
+                        color: $color-white;
+                        font-size: 0.813rem;
+                        margin-bottom: 0px;
+                    }
+
+                    .al-range-slider__input.js-al-range-slider__input {
+                        display: none;
+                    }
+                }
+
+                #tf_map_popup_sidebar{
+                    display: none;
+                }
+                #tf__booking_sidebar {
+                    max-height: calc(100vh - 100px);
+                    overflow-y: auto;
+                    overflow-x: hidden;
+
+                    &::-webkit-scrollbar {
+                        width: 4px;
+                    }
+
+                    &::-webkit-scrollbar-thumb {
+                        background-color: $scrollbar-thumb-color;
+                        border-radius: 32px;
+                    }
+
+                    &::-webkit-scrollbar-track {
+                        border-radius: 32px;
+                        background: rgba(6, 13, 28, 0.20);
+                    }
+
+                    .widget {
+                        border: none;
+                        background: inherit;
+                        border-radius: 0;
+                        margin-bottom: 32px;
+                        padding: 0px;
+
+                        .tf-widget-title {
+                            background-color: inherit;
+                            border: 0px solid;
+                            padding: 0px;
+                            border-radius: 0px;
+                            height: auto;
+                            pointer-events: none;
+                            color: $color-text;
+                            font-size: 1rem;
+                            font-weight: 500;
+                            line-height: 1.5;
+                            letter-spacing: 0.15px;
+                            margin-bottom: 16px;
+
+                            i {
+                                display: none;
+                            }
+                        }
+
+                        .tf-filter {
+                            padding: 0;
+
+                            ul {
+                                padding: 0;
+                                margin-bottom: 8px;
+                                @include flexbox();
+                                @include flex-direction(column);
+                                gap: 8px;
+
+                                li {
+                                    padding: 0;
+                                    margin: 0;
+
+                                    label {
+                                        position: relative;
+                                        cursor: pointer;
+                                        width: 100%;
+                                        display: inline-block;
+                                        padding-left: 24px;
+                                        color: $color-text;
+                                        font-size: 0.875rem;
+                                        font-weight: 500;
+                                        line-height: 1.5;
+                                        letter-spacing: 0.15px;
+
+                                        .tf-checkmark {
+                                            position: absolute;
+                                            top: 50%;
+                                            left: 0px;
+                                            transform: translateY(-50%);
+                                            height: 16px;
+                                            width: 16px;
+                                            background-color: $color-white;
+                                            border-radius: 4px;
+                                            border: 1px solid $color-primary;
+
+                                            &:after{
+                                                left: 4.5px;
+                                                top: 1.5px;
+                                                width: 5px;
+                                                border-width: 0 2px 2px 0;
+                                            }
+                                        }
+                                        input {
+                                            display: none;
+                                            &:checked ~ .tf-checkmark {
+                                                background-color: $color-primary;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                li.active {
+                                    background: transparent;
+                                }
+                            }
+
+                            a.see-more,
+                            a.see-less{
+                                text-align: left;
+                                color: $color-primary;
+                                text-transform: capitalize;
+                                font-weight: 400;
+                                text-decoration: none;
+
+                                span {
+                                    margin-left: 8px;
+                                }
+                            }
+
+                            a.see-less {
+                                display: none;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

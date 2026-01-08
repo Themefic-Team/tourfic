@@ -210,6 +210,8 @@ class Room {
 		$title_length = isset($settings['title_length']) ? absint($settings['title_length']) : 55;
 		$show_excerpt = isset($settings['show_excerpt']) ? $settings['show_excerpt'] : 'yes';
 		$excerpt_length = isset($settings['excerpt_length']) ? absint($settings['excerpt_length']) : 100;
+		$show_features = isset($settings['show_features']) ? $settings['show_features'] : 'yes';
+		$features_count = isset($settings['features_count']) ? absint($settings['features_count']) : 4;
 		$show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';
 		$show_price = isset($settings['show_price']) ? $settings['show_price'] : 'yes';
 		$show_view_details = isset($settings['show_view_details']) ? $settings['show_view_details'] : 'yes';
@@ -292,7 +294,7 @@ class Room {
                                 <div class="tf-room-option tf-room-option-item">
 									<div class="tf-room-option-left">
 										<h3><?php echo !empty($room_option['option_title']) ? esc_html($room_option['option_title']) : ''; ?></h3>
-										<?php if ( ! empty( $room_option['room-facilities'] ) ) :
+										<?php if ( $show_features == 'yes' && ! empty( $room_option['room-facilities'] ) ) :
 											echo '<ul class="tf-room-features">';
 											foreach ( $room_option['room-facilities'] as $room_facility ) :
 												?>
@@ -343,7 +345,7 @@ class Room {
 						else: ?>
 						<div class="tf-room-option">
 							<div class="tf-room-option-left">
-								<?php if ( ! empty( $meta['features'] ) ) :
+								<?php if ( $show_features == 'yes' && ! empty( $meta['features'] ) ) :
 									echo '<ul class="tf-room-features">';
 									$tf_room_fec_key = 1;
 
