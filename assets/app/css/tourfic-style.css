@@ -10917,6 +10917,9 @@ div#tf-destinationautocomplete-list div:before {
   backdrop-filter: blur(32px);
   box-shadow: 0px 16px 40px 0px rgba(238, 85, 9, 0.0784313725);
   gap: 24px;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 @media only screen and (max-width: 1024px) {
   .tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-date,
@@ -11067,39 +11070,6 @@ div#tf-destinationautocomplete-list div:before {
     width: 100%;
   }
 }
-@media only screen and (max-width: 1024px) {
-  .tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-submit-button,
-  .tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-submit-button {
-    width: calc(50% - 12px);
-  }
-}
-@media only screen and (max-width: 575.98px) {
-  .tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-submit-button,
-  .tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-submit-button {
-    width: 100%;
-  }
-}
-.tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-submit-button button,
-.tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-submit-button button {
-  min-width: 267px;
-  min-height: 72px;
-  border: 2px solid var(--tf-brand-dark);
-  font-size: 1.25rem;
-  line-height: 1.5;
-  margin-top: 10px;
-}
-@media only screen and (max-width: 1024px) {
-  .tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-submit-button button,
-  .tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-submit-button button {
-    width: 100%;
-    min-width: auto;
-  }
-}
-.tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-submit-button button:hover,
-.tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-submit-button button:hover {
-  background-color: var(--tf-primary);
-  box-shadow: 0 40px 40px 0 rgba(238, 85, 9, 0.16), 0 32px 32px 0 rgba(238, 85, 9, 0.14), 0 24px 24px 0 rgba(238, 85, 9, 0.12), 0 20px 20px 0 rgba(238, 85, 9, 0.1), 0 16px 16px 0 rgba(238, 85, 9, 0.08), 0 12px 12px 0 rgba(238, 85, 9, 0.06), 0 8px 8px 0 rgba(238, 85, 9, 0.04), 0 4px 4px 0 rgba(238, 85, 9, 0.02);
-}
 .tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests,
 .tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests {
   position: relative;
@@ -11176,6 +11146,39 @@ div#tf-destinationautocomplete-list div:before {
   font-weight: 600;
   height: 32px;
   padding: 5px;
+}
+@media only screen and (max-width: 1024px) {
+  .tf-single-template__one .tf-archive-room-banner .tf-submit-button,
+  .tf-archive-template__one .tf-archive-room-banner .tf-submit-button {
+    width: calc(50% - 12px);
+  }
+}
+@media only screen and (max-width: 575.98px) {
+  .tf-single-template__one .tf-archive-room-banner .tf-submit-button,
+  .tf-archive-template__one .tf-archive-room-banner .tf-submit-button {
+    width: 100%;
+  }
+}
+.tf-single-template__one .tf-archive-room-banner .tf-submit-button .tf_btn,
+.tf-archive-template__one .tf-archive-room-banner .tf-submit-button .tf_btn {
+  min-width: 267px;
+  min-height: 72px;
+  border: 2px solid var(--tf-brand-dark);
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+@media only screen and (max-width: 1024px) {
+  .tf-single-template__one .tf-archive-room-banner .tf-submit-button .tf_btn,
+  .tf-archive-template__one .tf-archive-room-banner .tf-submit-button .tf_btn {
+    width: 100%;
+    min-width: auto;
+  }
+}
+.tf-single-template__one .tf-archive-room-banner .tf-submit-button .tf_btn:hover,
+.tf-archive-template__one .tf-archive-room-banner .tf-submit-button .tf_btn:hover {
+  background-color: var(--tf-primary);
+  box-shadow: 0 40px 40px 0 rgba(238, 85, 9, 0.16), 0 32px 32px 0 rgba(238, 85, 9, 0.14), 0 24px 24px 0 rgba(238, 85, 9, 0.12), 0 20px 20px 0 rgba(238, 85, 9, 0.1), 0 16px 16px 0 rgba(238, 85, 9, 0.08), 0 12px 12px 0 rgba(238, 85, 9, 0.06), 0 8px 8px 0 rgba(238, 85, 9, 0.04), 0 4px 4px 0 rgba(238, 85, 9, 0.02);
 }
 .tf-single-template__one .tf-archive-room-banner .tf-booking-date-wrap .tf-search-input.form-control,
 .tf-archive-template__one .tf-archive-room-banner .tf-booking-date-wrap .tf-search-input.form-control {
