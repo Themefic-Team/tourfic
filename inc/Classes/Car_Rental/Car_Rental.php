@@ -302,7 +302,7 @@ class Car_Rental
                                 </div>
                                 <div class="info-select">
                                     <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-                                    <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" name="pickup-name" />
+                                    <input type="text" placeholder="<?php echo esc_attr__( 'Pick Up Location', 'tourfic' ); ?>" id="tf_pickup_location" name="pickup-name" />
                                     <input type="hidden" name="pickup" class="tf-place-input">
                                 </div>
                             </div>

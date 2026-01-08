@@ -2492,7 +2492,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-									<input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-name']) ) ) : '' ?>" />
+									<input type="text" placeholder="<?php echo esc_attr__("Pick Up Location", "tourfic"); ?>" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-name']) ) ) : '' ?>" />
 									<input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : '' ?>" />
 								</div>
 							</div>
@@ -3127,7 +3127,7 @@ class Helper {
                             <div class="tf_form-inner">
                                 <i class="far fa-calendar-alt"></i>
                                 <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                       placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" required value="">
+                                       placeholder="<?php echo esc_attr__( 'Select Date', 'tourfic' ); ?>" required value="">
                             </div>
                         </label>
                     </div>
