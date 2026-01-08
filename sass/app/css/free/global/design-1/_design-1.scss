@@ -931,7 +931,11 @@
         }
     }
 }
-
+.tf-archive-listing__one{
+    .tf-archive-room-details{
+        background-color: transparent;
+    }
+}
 .tf-single-template{
     &__one{
         // Header

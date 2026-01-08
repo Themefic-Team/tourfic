@@ -11931,6 +11931,10 @@ div#tf-destinationautocomplete-list div:before {
   text-decoration: none;
 }
 
+.tf-archive-listing__one .tf-archive-room-details {
+  background-color: transparent;
+}
+
 .tf-single-template__one .tf-single-head .tf-head-info {
   align-items: baseline;
 }
