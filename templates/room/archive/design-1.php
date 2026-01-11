@@ -30,7 +30,6 @@ $tf_room_arc_banner = !empty($tf_room_arc_banner) ? $tf_room_arc_banner : TF_ASS
                     <form class="tf-archive-ordering" method="get">
                         <select class="tf-orderby tf-room-archive-action-btn" name="tf-orderby" id="tf-orderby">
                             <option value="default"><?php echo esc_html__( 'Default Sorting', 'tourfic' ); ?></option>
-                            <option value="order"><?php echo esc_html__( 'Sort By Popularity', 'tourfic' ); ?></option>
                             <option value="rating"><?php echo esc_html__( 'Sort By Average Rating', 'tourfic' ); ?></option>
                             <option value="latest"><?php echo esc_html__( 'Sort By Latest', 'tourfic' ); ?></option>
                             <option value="price-high"><?php echo esc_html__( 'Sort By Price: High to Low', 'tourfic' ); ?></option>

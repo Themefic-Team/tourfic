@@ -2117,8 +2117,6 @@ trait Action_Helper {
         foreach ( $results as $post_id ) {
 			$comments = $ratings = '';
             if( $ordering_type == 'order') {
-				$post_id = $post_type == 'tf_room' ? Room::get_hotel_id_by_room_id($post_id) : $post_id;
-
                 $order_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_order_data WHERE post_id = %s AND ostatus != %s", $post_id, 'cancelled' ));
                 $sort_results[$post_id] = $order_count;
             }else if( $ordering_type == 'enquiry') {
