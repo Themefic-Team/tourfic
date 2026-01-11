@@ -55,6 +55,12 @@ if ( ! empty( $room_options ) ) {
             <!-- Hotel details Srart -->
             <div class="tf-details" id="tf-hotel-overview">
                 <div class="tf-details-left">
+                    <div class="tf-room-single-mobile-booking-form-wrap">
+                        <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( $room_option, 'design-2' ); ?></div>
+                        <div class="tf-room-booking-box">
+                            <?php Room::tf_room_sidebar_booking_form(); ?>
+                        </div>
+                    </div>
                     <?php 
                     if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-room-layout']) ){
                         foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-room-layout'] as $section){
@@ -71,9 +77,11 @@ if ( ! empty( $room_options ) ) {
                     ?>
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets">
-                    <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( $room_option, 'design-2' ); ?></div>
-                    <div class="tf-room-booking-box">
-                        <?php Room::tf_room_sidebar_booking_form(); ?>
+                    <div class="tf-room-single-booking-form-wrap">
+                        <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( $room_option, 'design-2' ); ?></div>
+                        <div class="tf-room-booking-box">
+                            <?php Room::tf_room_sidebar_booking_form(); ?>
+                        </div>
                     </div>
                     
                     <div class="tf-review-widget tf-single-widgets ">

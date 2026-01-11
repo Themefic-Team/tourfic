@@ -62,6 +62,7 @@ while ( have_posts() ) : the_post();
 		$gallery_ids = explode( ',', $gallery );
 	}
 
+	$calcellation_policy_title = function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($meta['cancelation-section-title']) ? esc_html($meta['cancelation-section-title']) : '';
 	$calcellation_policy = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['calcellation_policy'] ) ? (array) $meta['calcellation_policy'] : [];
 	
 	// Single Template Style

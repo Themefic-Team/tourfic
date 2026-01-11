@@ -1141,7 +1141,7 @@ class Room {
 								$(".tf-room-booking-box #check_out_date").on('click', function () {
 									$(".tf-search-input.form-control").click();
 								});
-								$("#check-in-out-date").flatpickr({
+								$("[name='check-in-out-date']").flatpickr({
 									enableTime: false,
 									mode: "range",
 									dateFormat: "Y/m/d",

@@ -1,6 +1,6 @@
 <?php if(!empty($calcellation_policy)): ?>
 <div class="tf-room-cancellation-policy">
-    <h2 class="tf-title tf-section-title"><?php esc_html_e("Cancelation Policy", "tourfic"); ?></h2>
+    <h2 class="tf-title tf-section-title"><?php echo esc_html($calcellation_policy_title); ?></h2>
     
     <table>
         <?php
