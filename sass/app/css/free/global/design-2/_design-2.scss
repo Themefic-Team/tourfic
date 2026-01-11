@@ -5235,16 +5235,16 @@
                     .tf-details-left {
                         gap: 40px;
 
-                        .tf-review-mobile-widget{
-                            display: none;
-                        }
+                        // .tf-review-mobile-widget{
+                        //     display: none;
+                        // }
 
                         @media #{$max1024} {
                             width: 100%;
 
-                            .tf-review-mobile-widget{
-                                display: block;
-                            }
+                            // .tf-review-mobile-widget{
+                            //     display: block;
+                            // }
                         }
 
                         .tf-overview-popular-facilities {
@@ -5273,9 +5273,9 @@
                             width: 100%;
                             padding: 0;
 
-                            .tf-review-widget{
-                                display: none;
-                            }
+                            // .tf-review-widget{
+                            //     display: none;
+                            // }
                         }
                     }
                 }
