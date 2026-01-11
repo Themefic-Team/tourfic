@@ -1915,17 +1915,21 @@ function convertTo24HourFormat(timeStr) {
             var single_room = $this.closest('.tf-room').find('[name=single_room]').val();
 
             var location = $('input[name=place]').val();
-            var adult = $('input[name=adult]').val();
-            var child = $('input[name=child]').val();
+            // var adult = $('input[name=adult]').val();
+            // var child = $('input[name=child]').val();
             var children_ages = $('input[name=children_ages]').val();
             if(single_room == 1){
-                var check_in_out_date = $('input[name=check-in-out-date]').val();
+                var check_in_out_date = $(this).closest('.tf-booking-form').find('input[name=check-in-out-date]').val();
                 var check_in_date = check_in_out_date.split(' - ')[0];
                 var check_out_date = check_in_out_date.split(' - ')[1];
-                var room = $('[name=room]').val();
+                var adult = $(this).closest('.tf-booking-form').find('input[name=adult]').val();
+                var child = $(this).closest('.tf-booking-form').find('input[name=childrens]').val();
+                var room = $(this).closest('.tf-booking-form').find('[name=room]').val();
                 var deposit = $(this).closest('.tf-room').find('input[name=make_deposit]').is(':checked');
                 
             } else {
+                var adult = $('input[name=adult]').val();
+                var child = $('input[name=child]').val();
                 var check_in_date = $('input[name=check_in_date]').val();
                 var check_out_date = $('input[name=check_out_date]').val();
                 if ($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
@@ -6281,6 +6285,48 @@ console.log('fsdd');
             $('span.tf-adult').html(adult);
             $('span.tf-children').html(children);
         })
+
+        $(document).on(
+            'click',
+            '.tf-single-template__two .tf-room-booking-form .acr-inc, .tf-single-template__two .tf-room-booking-form .acr-dec',
+            function () {
+
+                const $form = $(this).closest('.tf-room-booking-form');
+
+                const adults   = Number($form.find('input#adults').val() || 0);
+                const children = Number($form.find('input#children').val() || 0);
+                const infant   = $form.find('input#infant').length
+                    ? Number($form.find('input#infant').val() || 0)
+                    : 0;
+
+                let guest = adults + children + infant;
+
+                guest = guest < 10 ? '0' + guest : guest;
+
+                $form.find('span.tf-room-guest').text(guest);
+            }
+        );
+
+        $(document).ready(function () {
+            $('.tf-room-booking-form').each(function () {
+
+                const $form = $(this);
+
+                const adults   = Number($form.find('input#adults').val() || 0);
+                const children = Number($form.find('input#children').val() || 0);
+                const infant   = $form.find('input#infant').length
+                    ? Number($form.find('input#infant').val() || 0)
+                    : 0;
+
+                let guest = adults + children + infant;
+
+                guest = guest < 10 ? '0' + guest : guest;
+
+                $form.find('span.tf-room-guest').text(guest);
+            });
+
+        });
+
 
         $(document).on("mouseup", function (e) {
             var container = $(".tf-single-template__two .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap");

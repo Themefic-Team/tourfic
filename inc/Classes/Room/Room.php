@@ -984,7 +984,7 @@ class Room {
 		$tf_room_book_button_text = ! empty( Helper::tfopt( 'room_booking_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'room_booking_button_text' ) ) ) : esc_html__( 'Book Now', 'tourfic' );
 		
 		if ( $tf_room_selected_template == "design-1" ) { ?>
-			<form class="tf-hotel-booking-sidebar tf-booking-form" method="get" autocomplete="off">
+			<form class="tf-hotel-booking-sidebar tf-booking-form tf-room-booking-form" method="get" autocomplete="off">
 				<?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' ); ?>
 				<div id="tour_room_details_loader">
 					<div id="tour-room-details-loader-img">
@@ -1072,7 +1072,7 @@ class Room {
 								</label>
 								<div class="tf_acrselection tf-search-field tf-booking-adult-child-infant">
 									<div class="acr-select">
-										<span class="tf-guest"><?php echo !empty( $guests ) ? esc_html( $guests ) : '1'; ?></span>
+										<span class="tf-room-guest"><?php echo !empty( $guests ) ? esc_html( $guests ) : '1'; ?></span>
 										<div class="tf-archive-guest-info">
 											<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 												<path d="M5 7.5L10 12.5L15 7.5" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1138,9 +1138,10 @@ class Room {
 								// flatpickr locale first day of Week
 								<?php Helper::tf_flatpickr_locale( "root" ); ?>
 
-								$(".tf-room-booking-box #check_out_date").on('click', function () {
-									$(".tf-search-input.form-control").click();
+								$(document).on('click', ".tf-room-booking-box #check_out_date", function () {
+									$(this).closest('.tf-single-booking-box-wrapper').find(".tf-search-input.form-control").click();
 								});
+
 								$("[name='check-in-out-date']").flatpickr({
 									enableTime: false,
 									mode: "range",

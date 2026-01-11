@@ -20924,15 +20924,7 @@ div#tf-destinationautocomplete-list div:before {
     width: 100%;
   }
   .single-tf_room .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-room-single-mobile-booking-form-wrap {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    gap: 32px;
+    display: block;
   }
 }
 .single-tf_room .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-popular-facilities > ul {
@@ -21075,7 +21067,7 @@ div#tf-destinationautocomplete-list div:before {
 .single-tf_room .tf-single-template__two .tf-content-wrapper .tf-single-booking-box-wrapper .tf-search-field svg path {
   stroke: var(--tf-text-heading);
 }
-.single-tf_room .tf-single-template__two .tf-content-wrapper .tf-single-booking-box-wrapper .tf-search-field .tf-guest {
+.single-tf_room .tf-single-template__two .tf-content-wrapper .tf-single-booking-box-wrapper .tf-search-field .tf-room-guest {
   color: var(--tf-text-heading);
   background: transparent;
   border: 0;
@@ -21378,7 +21370,7 @@ div#tf-destinationautocomplete-list div:before {
 .single-tf_room .tf-single-template__two .tf-details-right .tf-single-booking-box-wrapper .tf-search-field svg path {
   stroke: var(--tf-text-heading);
 }
-.single-tf_room .tf-single-template__two .tf-details-right .tf-single-booking-box-wrapper .tf-search-field .tf-guest {
+.single-tf_room .tf-single-template__two .tf-details-right .tf-single-booking-box-wrapper .tf-search-field .tf-room-guest {
   color: var(--tf-text-heading);
   background: transparent;
   border: 0;

@@ -189,17 +189,21 @@
             var single_room = $this.closest('.tf-room').find('[name=single_room]').val();
 
             var location = $('input[name=place]').val();
-            var adult = $('input[name=adult]').val();
-            var child = $('input[name=child]').val();
+            // var adult = $('input[name=adult]').val();
+            // var child = $('input[name=child]').val();
             var children_ages = $('input[name=children_ages]').val();
             if(single_room == 1){
-                var check_in_out_date = $('input[name=check-in-out-date]').val();
+                var check_in_out_date = $(this).closest('.tf-booking-form').find('input[name=check-in-out-date]').val();
                 var check_in_date = check_in_out_date.split(' - ')[0];
                 var check_out_date = check_in_out_date.split(' - ')[1];
-                var room = $('[name=room]').val();
+                var adult = $(this).closest('.tf-booking-form').find('input[name=adult]').val();
+                var child = $(this).closest('.tf-booking-form').find('input[name=childrens]').val();
+                var room = $(this).closest('.tf-booking-form').find('[name=room]').val();
                 var deposit = $(this).closest('.tf-room').find('input[name=make_deposit]').is(':checked');
                 
             } else {
+                var adult = $('input[name=adult]').val();
+                var child = $('input[name=child]').val();
                 var check_in_date = $('input[name=check_in_date]').val();
                 var check_out_date = $('input[name=check_out_date]').val();
                 if ($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
