@@ -513,7 +513,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                 <div class="tf-section-flex tf-flex">
                     <?php 
-                    $tf_enquiry_section_status = !empty($meta['t-enquiry-section']) ? $meta['t-enquiry-section'] : 1;
+                    $tf_enquiry_section_status = !empty($meta['t-enquiry-section']) ? $meta['t-enquiry-section'] : '';
                     $tf_enquiry_section_icon = !empty($meta['t-enquiry-option-icon']) ? esc_html($meta['t-enquiry-option-icon']) : '';
                     $tf_enquiry_section_title = !empty($meta['t-enquiry-option-title']) ? esc_html($meta['t-enquiry-option-title']) : '';
                     $tf_enquiry_section_des = !empty($meta['t-enquiry-option-content']) ? esc_html($meta['t-enquiry-option-content']) : '';

@@ -4567,8 +4567,10 @@ function convertTo24HourFormat(timeStr) {
                 let type = $(element).data('type');
                 type = type ? type.split(',') : undefined;
                 let userLists = getWish();
+                // console.log(userLists);
                 if (type !== undefined) userLists = userLists.filter(e => type.includes(e.type));
                 let ids = userLists.map(e => e.post);
+                // console.log(ids);
                 let data = {
                     nonce: $(element).data('nonce'),
                     action: 'tf_generate_table',
@@ -4576,6 +4578,7 @@ function convertTo24HourFormat(timeStr) {
                 }
                 $.post(tf_params.ajax_url, data,
                     function (data) {
+                        console.log(data.success);
                         if (data.success) {
                             $(element).html(data.data);
                         }

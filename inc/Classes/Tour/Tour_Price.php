@@ -41,6 +41,11 @@ class Tour_Price {
 		
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
+        $adult_price = null;
+        $child_price = null;
+        $infant_price = null;
+        $price = null;
+        
 		if(!empty($tour_availability_data) && Helper::is_all_unavailable($tour_availability_data)){
             $adult_price = null;
             $child_price = null;

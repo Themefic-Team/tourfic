@@ -92,16 +92,20 @@ class Wishlist {
 	 * @return string
 	 */
 	function tf_generate_table_guest() {
-		// Check nonce security
-		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'populate-wishlist-guest-nonce' ) ) {
-			die( esc_html_e( 'Nonce verification failed', 'tourfic' ) );
+		if (
+			! isset( $_POST['nonce'] ) ||
+			! wp_verify_nonce(
+				sanitize_text_field( wp_unslash( $_POST['nonce'] ) ),
+				'populate-wishlist-guest-nonce'
+			)
+		) {
+			wp_send_json_error( __( 'Nonce verification failed', 'tourfic' ) );
 		}
 
-		if ( isset( $_POST ) ) {
-			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-				$ids = isset( $_POST['ids'] ) ? intval( $_POST['ids'] ) : 0;
-				wp_send_json_success( $this->tf_generate_table( $ids ) );
-			}
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			$ids = isset( $_POST['ids'] ) ? array_map( 'absint', (array) $_POST['ids'] ) : [];
+
+			wp_send_json_success( $this->tf_generate_table( $ids ) );
 		}
 	}
 
