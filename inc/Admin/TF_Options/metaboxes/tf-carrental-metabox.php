@@ -17,7 +17,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-General-heading',
 					'type'  => 'heading',
-					'title' => 'General Information',
+					'title' => esc_html__( 'General Information', 'tourfic' ),
 				),
 				array(
 					'id'    => 'car_gallery',
@@ -55,7 +55,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-location-heading',
 					'type'  => 'heading',
-					'title' => 'Location Settings',
+					'title' => esc_html__( 'Location Settings', 'tourfic' ),
 					'content' => esc_html__( 'This is the location of your store or company (Note: this is not the pickup or search location, which can be set under Car Rentals -> Locations).', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/general/#Location_Setting')
 				),
@@ -89,7 +89,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-car-details-heading',
 					'type'  => 'heading',
-					'title' => 'Car Info',
+					'title' => esc_html__( 'Car Info', 'tourfic' ),
 					'content' => esc_html__( 'This section includes the basic information related to your car.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/car-info/')
 				),
@@ -868,7 +868,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'tour-booking-heading',
 					'type'  => 'heading',
-					'title' => 'Booking Settings',
+					'title' => esc_html__( 'Booking Settings', 'tourfic' ),
 					'content' => esc_html__( 'This section offer the options to customize the booking process for your rental package.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/booking/')
 				),

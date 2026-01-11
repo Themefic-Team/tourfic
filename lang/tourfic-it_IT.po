@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Tourfic – Travel Booking, Hotel Booking & Car Rental "
 "WordPress Plugin 2.18.12\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tourfic\n"
-"POT-Creation-Date: 2026-01-07 11:35:50+00:00\n"
-"PO-Revision-Date: 2026-01-08 20:23+0600\n"
+"POT-Creation-Date: 2026-01-08 14:36:54+00:00\n"
+"PO-Revision-Date: 2026-01-11 20:55+0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -3635,7 +3635,7 @@ msgstr "Layout della pagina per un singolo appartamento"
 #: inc/App/Template_Builder.php:597 inc/App/Template_Builder.php:616
 #: inc/App/Template_Builder.php:627
 msgid "Design 1"
-msgstr "Design 1"
+msgstr "Progetto 1"
 
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:86
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:100
@@ -3654,7 +3654,7 @@ msgstr "Design 1"
 #: inc/App/Template_Builder.php:564 inc/App/Template_Builder.php:586
 #: inc/App/Template_Builder.php:602
 msgid "Legacy"
-msgstr "Legacy"
+msgstr "L’eredità"
 
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:100
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:67
@@ -5270,6 +5270,7 @@ msgid "This will be the heading of the Protection Section."
 msgstr "Questo sarà il titolo della Sezione di Protezione."
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:763
+#: inc/functions/functions-car.php:726
 msgid "Protection"
 msgstr "Protezione"
 
@@ -5550,7 +5551,7 @@ msgstr "Layout di %s pagina singola"
 #: inc/App/Template_Builder.php:535 inc/App/Template_Builder.php:559
 #: inc/App/Template_Builder.php:582
 msgid "Design 2"
-msgstr "Design 2"
+msgstr "Progetto 2"
 
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:131
 msgid ""
@@ -5607,6 +5608,7 @@ msgstr "Aggiungi titolo della sezione"
 
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:181
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:182
+#: templates/template-parts/hotel/design-legacy.php:368
 msgid "What's around?"
 msgstr "Cosa c'è in giro?"
 
@@ -7215,7 +7217,7 @@ msgstr "Seleziona Archivio e Modello Risultati di Ricerca"
 #: inc/App/Template_Builder.php:406 inc/App/Template_Builder.php:492
 #: inc/App/Template_Builder.php:539
 msgid "Design 3"
-msgstr "Design 3"
+msgstr "Progetto 3"
 
 #: inc/Admin/TF_Options/options/tf-settings.php:329
 #: inc/Admin/TF_Options/options/tf-settings.php:338
@@ -12479,6 +12481,12 @@ msgstr "Data di consegna e orario"
 msgid "Enter Drop-off date"
 msgstr "Inserisci la data di consegna"
 
+#: inc/Classes/Car_Rental/Car_Rental.php:305 inc/Classes/Helper.php:2495
+#: inc/functions/woocommerce/wc-car.php:315
+#: templates/template-parts/car/design-1.php:397
+msgid "Pick Up Location"
+msgstr "Località di presa del cliente"
+
 #: inc/Classes/Car_Rental/Car_Rental.php:343 inc/Classes/Helper.php:2532
 #: templates/template-parts/car/design-1.php:435
 msgid "Pick-up date"
@@ -13010,6 +13018,10 @@ msgstr "Caratteristiche dell'hotel"
 msgid "Hotel Types"
 msgstr "Tipi di hotel"
 
+#: inc/Classes/Hotel/Hotel.php:2653
+msgid "Booking Availability"
+msgstr "Disponibilità delle prenotazioni"
+
 #: inc/Classes/Hotel/Hotel.php:2764
 msgid "01"
 msgstr "01"
@@ -13064,6 +13076,7 @@ msgstr "Prenotazione estiva"
 #: inc/Classes/Tour/Tour.php:2410 inc/Classes/Tour/Tour.php:2422
 #: inc/Classes/Tour/Tour.php:2425 inc/Classes/Tour/Tour.php:2439
 #: inc/Classes/Tour/Tour.php:2441 inc/Classes/Tour/Tour.php:2453
+#: inc/functions/functions-car.php:734
 #: templates/template-parts/hotel/hotel-availability-table-row.php:907
 #: templates/template-parts/hotel/hotel-availability-table-row.php:1121
 #: templates/template-parts/hotel/hotel-availability-table-row.php:1394
@@ -14264,10 +14277,6 @@ msgstr "Check-in-out"
 #: inc/functions/woocommerce/wc-car.php:76
 msgid "Car Not Available this Slot!"
 msgstr "Auto non disponibile in questo slot!"
-
-#: inc/functions/woocommerce/wc-car.php:315
-msgid "Pick Up Location"
-msgstr "Località di presa del cliente"
 
 #: inc/functions/woocommerce/wc-car.php:321
 msgid "Drop Off Location"

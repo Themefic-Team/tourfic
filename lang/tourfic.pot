@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tourfic – Travel Booking, Hotel Booking & Car Rental WordPress Plugin 2.18.12\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tourfic\n"
-"POT-Creation-Date: 2026-01-07 11:35:50+00:00\n"
+"POT-Creation-Date: 2026-01-08 14:36:54+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4844,6 +4844,7 @@ msgid "This will be the heading of the Protection Section."
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:763
+#: inc/functions/functions-car.php:726
 msgid "Protection"
 msgstr ""
 
@@ -5115,6 +5116,7 @@ msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:181
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:182
+#: templates/template-parts/hotel/design-legacy.php:368
 msgid "What's around?"
 msgstr ""
 
@@ -11105,7 +11107,6 @@ msgstr ""
 msgid "Check availability"
 msgstr ""
 
-
 #: inc/Classes/Apartment/Apartment.php:650 inc/Classes/Hotel/Hotel.php:1921
 #: inc/Classes/Tour/Tour.php:353
 msgid "Check-in & Check-out Date"
@@ -11297,6 +11298,12 @@ msgstr ""
 
 #: inc/Classes/Car_Rental/Car_Rental.php:191
 msgid "Enter Drop-off date"
+msgstr ""
+
+#: inc/Classes/Car_Rental/Car_Rental.php:305 inc/Classes/Helper.php:2495
+#: inc/functions/woocommerce/wc-car.php:315
+#: templates/template-parts/car/design-1.php:397
+msgid "Pick Up Location"
 msgstr ""
 
 #: inc/Classes/Car_Rental/Car_Rental.php:343 inc/Classes/Helper.php:2532
@@ -11826,6 +11833,10 @@ msgstr ""
 msgid "Hotel Types"
 msgstr ""
 
+#: inc/Classes/Hotel/Hotel.php:2653
+msgid "Booking Availability"
+msgstr ""
+
 #: inc/Classes/Hotel/Hotel.php:2764
 msgid "01"
 msgstr ""
@@ -11880,6 +11891,7 @@ msgstr ""
 #: inc/Classes/Tour/Tour.php:2410 inc/Classes/Tour/Tour.php:2422
 #: inc/Classes/Tour/Tour.php:2425 inc/Classes/Tour/Tour.php:2439
 #: inc/Classes/Tour/Tour.php:2441 inc/Classes/Tour/Tour.php:2453
+#: inc/functions/functions-car.php:734
 #: templates/template-parts/hotel/hotel-availability-table-row.php:907
 #: templates/template-parts/hotel/hotel-availability-table-row.php:1121
 #: templates/template-parts/hotel/hotel-availability-table-row.php:1394
@@ -13094,10 +13106,6 @@ msgstr ""
 
 #: inc/functions/woocommerce/wc-car.php:76
 msgid "Car Not Available this Slot!"
-msgstr ""
-
-#: inc/functions/woocommerce/wc-car.php:315
-msgid "Pick Up Location"
 msgstr ""
 
 #: inc/functions/woocommerce/wc-car.php:321

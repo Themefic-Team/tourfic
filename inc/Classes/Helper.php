@@ -3138,7 +3138,6 @@ class Helper {
                     <button class="tf_btn tf_btn_full tf-submit"
                             type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
                 </div>
-
             </form>
 
             <script>
