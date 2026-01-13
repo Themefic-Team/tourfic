@@ -766,7 +766,7 @@ class Helper {
 		$select = '';
 		//output the select field
 		if ( ! empty( $terms ) && is_array( $terms ) ) {
-			$select .= '<select data-placeholder=" Select from Dropdown" id="' . $id . '" data-term="' . $attribute . '" name="' . $term . '" class="tf-shortcode-select2 ' . $class . '" ' . $multiple . '>';
+			$select .= '<select  data-placeholder="' . esc_attr__( 'Select from Dropdown', 'tourfic' ) . '" id="' . $id . '" data-term="' . $attribute . '" name="' . $term . '" class="tf-shortcode-select2 ' . $class . '" ' . $multiple . '>';
 			$select .= '<option value="\'all\'">' . esc_html__( 'All', 'tourfic' ) . '</option>';
 			foreach ( $terms as $term ) {
 				$select .= '<option value="' . $term->term_id . '">' . $term->name . '</option>';

@@ -398,7 +398,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			<div class="tf-sidebar-content">
 
 				<div class="tf-plugin-lists">
-					<h3>Power up your website</h3>
+					<h3><?php echo esc_html__('Power up your website', 'tourfic'); ?></h3>
 					<?php echo $this->tf_get_sidebar_plugin_list(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized ?>
 				</div>
 
@@ -542,7 +542,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								<div class="tf-plugin-btn">
 									<?php if (!$installed): ?>
 										<button class="tf-plugin-button install" data-action="install" data-plugin="<?php echo esc_attr($plugin['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['file_name']); ?>">
-											Install 
+											<?php echo esc_html__('Install', 'tourfic'); ?> 
 											<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M4.66675 4.66663H11.3334V11.3333" stroke="#382673" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 											<path d="M4.66675 11.3333L11.3334 4.66663" stroke="#382673" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -551,10 +551,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										</button>
 									<?php elseif (!$activated): ?>
 										<button class="tf-plugin-button activate" data-action="activate" data-plugin="<?php echo esc_attr($plugin['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['file_name']); ?>" >
-											Activate <span class="loader"></span>
+											<?php echo esc_html__('Activate', 'tourfic'); ?> <span class="loader"></span>
 										</button>
 									<?php else: ?>
-										<span class="tf-plugin-button tf-plugin-status active">Activated</span>
+										<span class="tf-plugin-button tf-plugin-status active"><?php echo esc_html__('Activated', 'tourfic'); ?></span>
 									<?php endif; ?>
 
 									<?php if (!empty($plugin['pro'])): ?>
@@ -562,10 +562,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 											<a href="<?php echo esc_url($plugin['pro']['url']); ?>" class="tf-plugin-button pro" target="_blank">Get Pro</a>
 										<?php elseif (!$pro_activated): ?>
 											<button class="tf-plugin-button activate-pro" data-action="activate" data-plugin="<?php echo esc_attr($plugin['pro']['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['pro']['file_name']); ?>">
-												Activate Pro <span class="loader"></span>
+												<?php echo esc_html__('Activate Pro', 'tourfic'); ?> <span class="loader"></span>
 											</button>
 										<?php else: ?>
-											<span class="tf-plugin-button tf-plugin-status active-pro">Pro Activated</span>
+											<span class="tf-plugin-button tf-plugin-status active-pro"><?php echo esc_html__('Pro Activated', 'tourfic'); ?></span>
 										<?php endif; ?>
 									<?php endif; ?>
 								</div>

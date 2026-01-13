@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tourfic – Travel Booking, Hotel Booking & Car Rental WordPress Plugin 2.18.12\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tourfic\n"
-"POT-Creation-Date: 2026-01-08 14:36:54+00:00\n"
+"POT-Creation-Date: 2026-01-11 15:08:23+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -37,6 +37,22 @@ msgstr ""
 #: inc/App/Widgets/Elementor/Widgets/TF_Tour_Destinations.php:129
 #: inc/Classes/Helper.php:1116 inc/Classes/Helper.php:2163
 msgid "Date"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:105
+msgid "Enter a Title"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:111
+msgid "Enter a Subtitle"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:119
+msgid "Input classes with space"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:136
+msgid "Input the title here."
 msgstr ""
 
 #: inc/Admin/Backend_Booking/TF_Apartment_Backend_Booking.php:52
@@ -1606,6 +1622,10 @@ msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:381
 msgid "Please install and activate WooCommerce plugin to view reports."
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:401
+msgid "Power up your website"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:407
@@ -3386,6 +3406,16 @@ msgstr ""
 msgid "General"
 msgstr ""
 
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:37
+#: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:14
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:44
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:24
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:39
+#: inc/Admin/TF_Options/options/tf-settings.php:67
+#: inc/Admin/TF_Setup_Wizard.php:447 inc/Admin/TF_Setup_Wizard.php:556
+msgid "General Settings"
+msgstr ""
+
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:38
 msgid "These are some common settings specific to this Apartment."
 msgstr ""
@@ -3514,6 +3544,13 @@ msgstr ""
 msgid "Location"
 msgstr ""
 
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:106
+#: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:58
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:142
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:119
+msgid "Location Settings"
+msgstr ""
+
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:107
 msgid "The location of an apartment is a crucial element for every apartment. Set your apartment locations in this section."
 msgstr ""
@@ -3549,6 +3586,8 @@ msgid "We're offering an additional feature called <b>property surroundings</b> 
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:142
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:148
+#: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:871
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:113
 #: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:538
 msgid "Booking Settings"
@@ -3738,6 +3777,10 @@ msgstr ""
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:313
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:393
 msgid "Room Management"
+msgstr ""
+
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:319
+msgid "Create & Manage Your Apartment Rooms"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:320
@@ -4291,13 +4334,8 @@ msgstr ""
 msgid "Cars Settings"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:14
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:44
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:24
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:39
-#: inc/Admin/TF_Options/options/tf-settings.php:67
-#: inc/Admin/TF_Setup_Wizard.php:447 inc/Admin/TF_Setup_Wizard.php:556
-msgid "General Settings"
+#: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:20
+msgid "General Information"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:25
@@ -4344,6 +4382,7 @@ msgid "Enter the specific address you wish to use for the car and select the cor
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:86
+#: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:92
 msgid "Car Info"
 msgstr ""
 
@@ -5089,11 +5128,6 @@ msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:131
 msgid "We're offering some additional features like <b>external booking</b>, <b>taxable hotel</b>, <b>tax class for Woocommerce</b> in our pro plan. The external booking option provides seamless integration with external booking systems, enhancing your booking capabilities significantly. <a href=\"https://tourfic.com/\" target=\"_blank\">Upgrade to our pro package today to take advantage of this fantastic option!</a>"
-msgstr ""
-
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:142
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:119
-msgid "Location Settings"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:143
@@ -11563,6 +11597,11 @@ msgstr ""
 msgid "Feature Request"
 msgstr ""
 
+#: inc/Classes/Helper.php:769
+msgid "Select from Dropdown"
+msgstr ""
+
+
 #: inc/Classes/Helper.php:776
 msgid "Invalid taxonomy!!"
 msgstr ""
@@ -11675,11 +11714,11 @@ msgstr ""
 msgid "0"
 msgstr ""
 
-#: inc/Classes/Helper.php:3266
+#: inc/Classes/Helper.php:3265
 msgid "&laquo; Previous"
 msgstr ""
 
-#: inc/Classes/Helper.php:3267
+#: inc/Classes/Helper.php:3266
 msgid "Next &raquo;"
 msgstr ""
 
