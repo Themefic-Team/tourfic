@@ -75,6 +75,8 @@ final class Tourfic {
 		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		$this->define_constants();
 
+		require __DIR__ . '/vendor/autoload.php';
+
 		//Check if WooCommerce is active, and if it isn't, disable the plugin.
 		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 			add_action( 'admin_notices', array( $this, 'tf_is_woo' ) );
@@ -129,6 +131,9 @@ final class Tourfic {
 		// autoloader
 		require_once TF_PATH . 'autoloader.php';
 
+		// Initialize the appsero
+		$this->appsero_init_tracker_tourfic();
+
 		if ( class_exists( "\Tourfic\Classes\Base" ) ) {
 			\Tourfic\Classes\Base::instance();
 		} else {
@@ -147,14 +152,7 @@ final class Tourfic {
 	/**
 	 * Include required core files used in admin and on the frontend.
 	 */
-	public function includes() {
-		// Classes
-//		 if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
-//		 	require_once TF_INC_PATH . 'classes.php';
-//		 } else {
-//		 	tf_file_missing( TF_INC_PATH . 'classes.php' );
-//		 }
-	}
+	public function includes() {}
 
 	function tf_load_textdomain() {
 		$locale = apply_filters( 'plugin_locale', get_locale(), 'tourfic' );
@@ -248,6 +246,24 @@ final class Tourfic {
 		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
 			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
 		}
+	}
+
+	/**
+	 * Initialize the plugin tracker
+	 *
+	 * @return void
+	 */
+	public function appsero_init_tracker_tourfic() {
+
+		$client = new Appsero\Client( '19134f1b-2838-4a45-ac05-772b7dfc9850', 'Travel and Hotel Booking Solution for WooCommerce - Tourfic', __FILE__ );
+
+		// Change Admin notice text
+		$notice = sprintf( $client->__trans( 'Want to help make <strong>%1$s</strong> even more awesome? Allow %1$s to collect non-sensitive diagnostic data and usage information. I agree to get Important Product Updates & Discount related information on my email from  %1$s (I can unsubscribe anytime).' ), $client->name );
+		$client->insights()->notice( $notice );
+
+		// Active insights
+		$client->insights()->init();
+
 	}
 }
 
