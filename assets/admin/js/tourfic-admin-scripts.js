@@ -6069,17 +6069,17 @@ var frame, gframe;
             var chart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                    labels: tf_options.months,
                     // Information about the dataset
                     datasets: [{
-                        label: "Completed Booking",
+                        label: tf_options.completed,
                         borderColor: '#003C79',
                         tension: 0.1,
                         data: tf_options.tf_complete_order,
                         fill: false
                     },
                         {
-                            label: "Cancelled Booking",
+                            label: tf_options.cancelled,
                             borderColor: 'red',
                             tension: 0.1,
                             data: tf_options.tf_cancel_orders,

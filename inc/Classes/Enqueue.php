@@ -999,8 +999,24 @@ class Enqueue {
 			'tf_tours_orders' => $tf_tours_orders,
 			'tf_hotels_orders' => $tf_hotels_orders,
 			'tf_apartments_orders' => $tf_apartments_orders,
-			'tf_cars_orders' => $tf_cars_orders
-		) );
+			'tf_cars_orders' => $tf_cars_orders,
+			'months' => [
+				__( 'January', 'tourfic' ),
+				__( 'February', 'tourfic' ),
+				__( 'March', 'tourfic' ),
+				__( 'April', 'tourfic' ),
+				__( 'May', 'tourfic' ),
+				__( 'June', 'tourfic' ),
+				__( 'July', 'tourfic' ),
+				__( 'August', 'tourfic' ),
+				__( 'September', 'tourfic' ),
+				__( 'October', 'tourfic' ),
+				__( 'November', 'tourfic' ),
+				__( 'December', 'tourfic' ),
+			],
+			'completed' => __( 'Completed Booking', 'tourfic' ),
+			'cancelled' => __( 'Cancelled Booking', 'tourfic' ),
+		));
 	}
 
 	/**

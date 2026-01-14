@@ -1215,6 +1215,11 @@ msgstr ""
 msgid "Remix Icon"
 msgstr ""
 
+
+#: inc/Admin/TF_Options/fields/icon/TF_image.php:25
+msgid "Upload"
+msgstr ""
+
 #: inc/Admin/TF_Options/TF_Options.php:428
 #: inc/Admin/TF_Options/TF_Options.php:695
 msgid "Publish the Room First!"
@@ -1666,6 +1671,47 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Settings.php:469
 msgid "Request a Feature"
 msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:483
+msgid "Instantio"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:486
+msgid "WooCommerce Quick & Direct Checkout"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:490
+msgid "Hydra"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:493
+msgid "All in One Appointment Booking System"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:497
+msgid "BEAF"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:500
+msgid "Ultimate Before After Image Slider & Gallery"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:504
+msgid "UACF7"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:507
+msgid "40+ Essential Addons for Contact Form 7"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:537
+msgid "Free"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:545
+msgid "Install"
+msgstr ""
+
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:667
 msgid "Get Started Quickly"
@@ -9739,12 +9785,20 @@ msgstr ""
 msgid "Delete Old Review Fields"
 msgstr ""
 
+#: inc/App/TF_Review.php:147
+msgid "Delete review fields that don't match with the present fields.<br><b style='color: red;'>Be aware! You will lose your old data!</b>"
+msgstr ""
+
 #: inc/App/TF_Review.php:150
 msgid "Delete Fields"
 msgstr ""
 
 #: inc/App/TF_Review.php:160
 msgid "Delete Old Reviews"
+msgstr ""
+
+#: inc/App/TF_Review.php:161
+msgid "Delete reviews that don't have any review (rating) fields.<br><b style='color: red;'>Be aware! You will lose your old data!</b>"
 msgstr ""
 
 #: inc/App/TF_Review.php:164
@@ -11551,6 +11605,62 @@ msgstr ""
 
 #: inc/Classes/Enqueue.php:997
 msgid "Import Data cannot be empty!"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:1004
+msgid "January"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:1005
+msgid "February"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:1006
+msgid "March"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:1007
+msgid "April"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:1008
+msgid "May"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:1009
+msgid "June"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:1010
+msgid "July"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:1011
+msgid "August"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:1012
+msgid "September"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:1013
+msgid "October"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:1014
+msgid "November"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:1015
+msgid "December"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:1017
+msgid "Completed Booking"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:1017
+msgid "Cancelled Booking"
 msgstr ""
 
 #: inc/Classes/Enqueue.php:1220

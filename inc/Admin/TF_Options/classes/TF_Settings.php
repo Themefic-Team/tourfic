@@ -480,31 +480,31 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		public function tf_get_sidebar_plugin_list(){
 			$plugins = [
 				[
-					'name'       => 'Instantio',
+					'name'       => __('Instantio', 'tourfic'),
 					'slug'       => 'instantio',
 					'file_name'  => 'instantio',
-					'subtitle'   => 'WooCommerce Quick & Direct Checkout',
+					'subtitle'   =>  __('WooCommerce Quick & Direct Checkout', 'tourfic'),
 					'image'      => 'https://ps.w.org/instantio/assets/icon-128x128.png',
 				],
 				[
-					'name'       => 'Hydra',
+					'name'       => __('Hydra', 'tourfic'),
 					'slug'       => 'hydra-booking',
 					'file_name'  => 'hydra-booking',
-					'subtitle'   => 'All in One Appointment Booking System',
+					'subtitle'   => __('All in One Appointment Booking System', 'tourfic'),
 					'image'      => 'https://ps.w.org/hydra-booking/assets/icon-128x128.jpg',
 				],
 				[
-					'name'       => 'BEAF',
+					'name'       => __('BEAF', 'tourfic'),
 					'slug'       => 'beaf-before-and-after-gallery',
 					'file_name'  => 'before-and-after-gallery',
-					'subtitle'   => 'Ultimate Before After Image Slider & Gallery',
+					'subtitle'   => __('Ultimate Before After Image Slider & Gallery', 'tourfic'),
 					'image'      => 'https://ps.w.org/beaf-before-and-after-gallery/assets/icon-128x128.png',
 				],
 				[
-					'name'       => 'UACF7',
+					'name'       => __('UACF7', 'tourfic'),
 					'slug'       => 'ultimate-addons-for-contact-form-7',
 					'file_name'  => 'ultimate-addons-for-contact-form-7',
-					'subtitle'   => '40+ Essential Addons for Contact Form 7',
+					'subtitle'   => __('40+ Essential Addons for Contact Form 7', 'tourfic'),
 					'image'      => 'https://ps.w.org/ultimate-addons-for-contact-form-7/assets/icon-128x128.png',
 				],
 			];
@@ -534,7 +534,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</div>
 								<div class="tf-plugin-title">
 									<h4><?php echo esc_html($plugin['name']); ?>
-									<span class="badge free">Free</span></h4>
+									<span class="badge free"><?php echo esc_html__('Free', 'tourfic'); ?></span></h4>
 									<p><?php echo esc_html($plugin['subtitle']); ?></p>
 									<strong></strong>
 								</div>

@@ -6,7 +6,7 @@ msgstr ""
 "WordPress Plugin 2.18.12\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tourfic\n"
 "POT-Creation-Date: 2026-01-11 15:08:23+00:00\n"
-"PO-Revision-Date: 2026-01-13 19:06+0600\n"
+"PO-Revision-Date: 2026-01-14 11:38+0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -1294,6 +1294,10 @@ msgstr "Font Awesome 6"
 msgid "Remix Icon"
 msgstr "Remix Icon"
 
+#: inc/Admin/TF_Options/fields/icon/TF_image.php:25
+msgid "Upload"
+msgstr "Carica"
+
 #: inc/Admin/TF_Options/TF_Options.php:428
 #: inc/Admin/TF_Options/TF_Options.php:695
 msgid "Publish the Room First!"
@@ -1641,61 +1645,73 @@ msgstr "Seleziona Mese"
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:357
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:231
+#: inc/Classes/Enqueue.php:1004
 msgid "January"
 msgstr "Gennaio"
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:358
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:235
+#: inc/Classes/Enqueue.php:1005
 msgid "February"
 msgstr "Febbraio"
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:359
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:239
+#: inc/Classes/Enqueue.php:1006
 msgid "March"
 msgstr "Marzo"
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:360
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:243
+#: inc/Classes/Enqueue.php:1007
 msgid "April"
 msgstr "Aprile"
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:361
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:247
+#: inc/Classes/Enqueue.php:1008
 msgid "May"
 msgstr "Maggio"
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:362
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:251
+#: inc/Classes/Enqueue.php:1009
 msgid "June"
 msgstr "Giugno"
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:363
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:255
+#: inc/Classes/Enqueue.php:1010
 msgid "July"
 msgstr "Luglio"
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:364
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:259
+#: inc/Classes/Enqueue.php:1011
 msgid "August"
 msgstr "Agosto"
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:365
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:263
+#: inc/Classes/Enqueue.php:1012
 msgid "September"
 msgstr "Settembre"
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:366
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:267
+#: inc/Classes/Enqueue.php:1013
 msgid "October"
 msgstr "Ottobre"
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:367
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:271
+#: inc/Classes/Enqueue.php:1014
 msgid "November"
 msgstr "Novembre"
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:368
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:275
+#: inc/Classes/Enqueue.php:1015
 msgid "December"
 msgstr "Dicembre"
 
@@ -1755,6 +1771,50 @@ msgstr "Consulta la nostra Roadmap"
 #: inc/Admin/TF_Options/classes/TF_Settings.php:469
 msgid "Request a Feature"
 msgstr "Richiedi una Funzionalità"
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:483
+msgid "Instantio"
+msgstr "Instantio"
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:486
+msgid "WooCommerce Quick & Direct Checkout"
+msgstr "WooCommerce Checkout Rapido & Diretto"
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:490
+msgid "Hydra"
+msgstr "Hydra"
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:493
+msgid "All in One Appointment Booking System"
+msgstr "Sistema di prenotazione degli appuntamenti All in One"
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:497
+msgid "BEAF"
+msgstr "BEAF"
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:500
+msgid "Ultimate Before After Image Slider & Gallery"
+msgstr "Slider e galleria di immagini Ultimate Before After"
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:504
+msgid "UACF7"
+msgstr "UACF7"
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:507
+msgid "40+ Essential Addons for Contact Form 7"
+msgstr "40+ Addon essenziali per il Modulo di Contatto 7"
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:537
+#: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:199
+#: inc/Classes/Hotel/Hotel.php:3538 inc/Classes/Hotel/Hotel.php:3587
+#: inc/Classes/Hotel/Hotel.php:3636
+#: templates/template-parts/car/design-1/car-info.php:140
+msgid "Free"
+msgstr "Gratis"
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:545
+msgid "Install"
+msgstr "Installa"
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:667
 msgid "Get Started Quickly"
@@ -4311,7 +4371,6 @@ msgstr "Aggiungi Regole di Casa"
 #: inc/Admin/TF_Options/options/tf-settings.php:636
 #: inc/Admin/TF_Options/options/tf-settings.php:797
 #: inc/Admin/TF_Options/options/tf-settings.php:4449
-#: inc/Admin/TF_Options/classes/TF_Settings.php:249
 #: templates/template-parts/car/design-1.php:63
 #: templates/template-parts/car/design-1.php:279
 msgid "Description"
@@ -4803,13 +4862,6 @@ msgstr ""
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:197
 msgid "Price Type"
 msgstr "Tipo di Prezzo"
-
-#: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:199
-#: inc/Classes/Hotel/Hotel.php:3538 inc/Classes/Hotel/Hotel.php:3587
-#: inc/Classes/Hotel/Hotel.php:3636
-#: templates/template-parts/car/design-1/car-info.php:140
-msgid "Free"
-msgstr "Gratis"
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:200
 msgid "Paid"
@@ -10894,6 +10946,14 @@ msgstr "Per favore, fornisci una valutazione"
 msgid "Delete Old Review Fields"
 msgstr "Elimina i vecchi campi di revisione"
 
+#: inc/App/TF_Review.php:147
+msgid ""
+"Delete review fields that don't match with the present fields.<br><b "
+"style='color: red;'>Be aware! You will lose your old data!</b>"
+msgstr ""
+"Elimina i campi di revisione che non corrispondono a quelli attuali.<br><b "
+"style='color: red;'>Attenzione! Perderai i tuoi vecchi dati!</b>"
+
 #: inc/App/TF_Review.php:150
 msgid "Delete Fields"
 msgstr "Elimina i campi"
@@ -10901,6 +10961,14 @@ msgstr "Elimina i campi"
 #: inc/App/TF_Review.php:160
 msgid "Delete Old Reviews"
 msgstr "Elimina le vecchie recensioni"
+
+#: inc/App/TF_Review.php:161
+msgid ""
+"Delete reviews that don't have any review (rating) fields.<br><b "
+"style='color: red;'>Be aware! You will lose your old data!</b>"
+msgstr ""
+"Elimina le recensioni che non hanno campi di valutazione (recensione).<br><b "
+"style='color: red;'>Attenzione! Perderai i tuoi vecchi dati!</b>"
 
 #: inc/App/TF_Review.php:164
 msgid "Delete Reviews"
@@ -12738,6 +12806,14 @@ msgstr "Sei sicuro di voler importare questi dati?"
 msgid "Import Data cannot be empty!"
 msgstr "I dati di importazione non possono essere vuoti!"
 
+#: inc/Classes/Enqueue.php:1017
+msgid "Completed Booking"
+msgstr "Prenotazione completata"
+
+#: inc/Classes/Enqueue.php:1017
+msgid "Cancelled Booking"
+msgstr "Prenotazione Cancellata"
+
 #: inc/Classes/Enqueue.php:1220
 msgid "Please select a location before publishing this hotel"
 msgstr "Si prega di selezionare una location prima di pubblicare questo hotel"
@@ -12799,7 +12875,7 @@ msgstr ""
 
 #: inc/Classes/Helper.php:846 inc/functions.php:146
 msgid "Download"
-msgstr "Download"
+msgstr "Scaricamento"
 
 #: inc/Classes/Helper.php:848 inc/functions.php:148
 msgid ""
@@ -15186,3 +15262,6 @@ msgstr "Themefic"
 #. Author URI of the plugin/theme
 msgid "https://themefic.com"
 msgstr "https://themefic.com"
+
+#~ msgid "<strong>{order_id}</strong> : To display the order ID.<br>"
+#~ msgstr "<strong>{order_id}</strong> : Per mostrare l'ID dell'ordine.<br>"

@@ -246,7 +246,7 @@ TF_Settings::option( 'tf_settings', array(
 									'dependency' => array( 'single-hotel', '==', 'design-2' ),
 									'default'    => array(
 										array(
-											'label'  => esc_html__( 'Description', 'tourfic' ),
+											'label'  => __( 'Description', 'tourfic' ),
 											'slug'   => 'description',
 											'status' => 1,
 										),
@@ -2449,7 +2449,7 @@ TF_Settings::option( 'tf_settings', array(
 					'tabs' => array(
 						array(
 							'id'     => 'login-setting',
-							'title'  => 'Login Settings',
+							'title'  =>  esc_html__('Login Settings', 'tourfic'),
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
 								array(
@@ -3269,7 +3269,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'   => 'email-settings',
 					'type' => 'tab',
-					'label' => 'Email Templates',
+					'label' => esc_html__('Email Templates', 'tourfic'),
 					'subtitle'   => esc_html__( 'Tourfic provides a robust and sophisticated Email Template feature, enabling you to easily design and personalize impressive email templates for your business communications.', 'tourfic' ),
 					'tabs' => array(
 						array(
@@ -3437,9 +3437,7 @@ TF_Settings::option( 'tf_settings', array(
 					<strong>{site_name} </strong> : To display the site name.<br>
 					<strong>{site_url} </strong> : To display the site url.<br>
 
-					'
-
-				,
+					' ,
 				),
 			),
 		),
