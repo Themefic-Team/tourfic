@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.20.0
+Stable tag: 2.20.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -411,6 +411,10 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 23. Elementor Page Builder support.
 
 == Changelog ==
+
+= 2.20.1 – January 16, 2026 =
+
+- Updated: readme.txt updated
 
 = 2.20.0 – January 16, 2026 =
 
