@@ -978,6 +978,69 @@ class Room {
 		$tf_room_selected_template = !empty($design) ? $design : $tf_room_selected_check;
 		$tf_room_book_button_text = ! empty( Helper::tfopt( 'room_booking_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'room_booking_button_text' ) ) ) : esc_html__( 'Book Now', 'tourfic' );
 		
+		$enable_availability = ! empty( $meta['avil_by_date'] ) ? $meta['avil_by_date'] : '';
+		$room_availability   = ! empty( $meta['avail_date'] ) ? $meta['avail_date'] : '';
+		$num_room_available = ! empty( $meta['num-room'] ) ? (int) $meta['num-room'] : 1;
+		$reduce_num_room    = ! empty( $meta['reduce_num_room'] ) ? $meta['reduce_num_room'] : false;
+		$multi_by_date_ck = ! empty( $meta['price_multi_day'] ) ? ! empty( $meta['price_multi_day'] ) : false;
+		$booked_dates        = self::tf_room_booked_days( $hotel_id );
+
+		$room_disable_dates = [];
+		$room_enable_dates = [];
+		if ( $enable_availability === '1' && ! empty( $room_availability ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+			$room_availability_arr = json_decode( $room_availability, true );
+			//iterate all the available disabled dates
+			if ( ! empty( $room_availability_arr ) && is_array( $room_availability_arr ) ) {
+				foreach ( $room_availability_arr as $date ) {
+					if ( $date['status'] === 'unavailable' ) {
+						$room_disable_dates[$date['check_in']] = $date['check_in'];
+					}
+					if ( $date['status'] === 'available' ) {
+						$room_enable_dates[$date['check_in']] = $date['check_in'];
+					}
+				}
+			}
+		}
+	
+		$room_booked_per_day = [];
+		if ( ! empty( $booked_dates ) && is_array( $booked_dates ) ) {
+			foreach ( $booked_dates as $booking ) {
+
+				$check_in  = strtotime( $booking['check_in'] );
+				$check_out = strtotime( $booking['check_out'] );
+				$rooms     = (int) $booking['room'];
+
+				// Loop day by day (checkout excluded)
+				for ( $day = $check_in; $day < $check_out; $day = strtotime('+1 day', $day) ) {
+
+					$date = date('Y/m/d', $day);
+
+					if ( ! isset( $room_booked_per_day[ $date ] ) ) {
+						$room_booked_per_day[ $date ] = 0;
+					}
+
+					$room_booked_per_day[ $date ] += $rooms;
+				}
+			}
+		}
+
+		$room_available_per_day = [];
+		foreach ( $room_booked_per_day as $date => $booked ) {
+			$room_available_per_day[ $date ] = max( $num_room_available - $booked, 0 );
+
+			// if rooms booked >= total rooms → disable date
+			if ( $booked >= $num_room_available ) {
+				unset( $room_enable_dates[ $date ] );
+			}
+		}
+
+		$room_disable_dates = [];
+		foreach ( $room_available_per_day as $date => $available ) {
+			if ( $available <= 0 ) {
+				$room_disable_dates[] = $date;
+			}
+		}
+
 		if ( $tf_room_selected_template == "design-1" ) { ?>
 			<form class="tf-hotel-booking-sidebar tf-booking-form tf-room-booking-form" method="get" autocomplete="off">
 				<?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' ); ?>
@@ -1159,6 +1222,21 @@ class Room {
 										instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
 										dateSetToFields(selectedDates, instance);
 									},
+									disable: [
+										<?php foreach ( $room_disable_dates as $date ) : ?>
+											"<?php echo esc_html( $date ); ?>",
+										<?php endforeach; ?>
+									],
+									<?php if ( $enable_availability === '1' && ! empty( $room_enable_dates ) ) : ?>
+									enable: [
+										<?php foreach ( array_unique( $room_enable_dates ) as $date ) : ?>
+											"<?php echo esc_js( $date ); ?>",
+										<?php endforeach; ?>
+									],
+									<?php elseif ( $enable_availability === '1' && empty( $room_enable_dates ) ): ?>
+									enable: [],
+									<?php endif; ?>
+
 									<?php if(! empty( $check_in_out )){ ?>
 									defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
 									<?php } ?>
@@ -2111,5 +2189,36 @@ class Room {
 
 		echo wp_json_encode( $response );
 		wp_die();
+	}
+
+	public static function tf_room_booked_days( $post_id ) {
+		$wc_orders = wc_get_orders( array(
+			'post_status' => array( 'wc-completed' ),
+			'limit'       => - 1,
+		) );
+
+		$booked_days = array();
+		foreach ( $wc_orders as $wc_order ) {
+			$order_items = $wc_order->get_items();
+
+			foreach ( $order_items as $item_id => $item ) {
+				$item_post_id = wc_get_order_item_meta( $item_id, '_post_id', true );
+				if ( $item_post_id == $post_id ) {
+					$check_in = wc_get_order_item_meta( $item_id, 'check_in', true );
+					$check_out = wc_get_order_item_meta( $item_id, 'check_out', true );
+					$room = wc_get_order_item_meta( $item_id, 'number_room_booked', true );
+					
+					if ( ! empty( $check_in ) && !empty($check_out) && !empty($room) ) {
+						$booked_days[]     = array(
+							'check_in'  => $check_in,
+							'check_out' => $check_out,
+							'room' => $room,
+						);
+					}
+				}
+			}
+		}
+
+		return $booked_days;
 	}
 }
