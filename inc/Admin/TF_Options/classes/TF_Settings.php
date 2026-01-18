@@ -188,7 +188,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					esc_html__('Template Builder', 'tourfic'),
 					'manage_options',
 					'tf_template_builder',
-					array( 'Template_Builder', 'tf_template_builder_elementor_check' )
+					array( '\Tourfic\App\Template_Builder', 'tf_template_builder_elementor_check' )
 				);
 			} 
 
