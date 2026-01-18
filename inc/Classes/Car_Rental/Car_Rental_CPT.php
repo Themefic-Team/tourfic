@@ -74,7 +74,7 @@ class Car_Rental_CPT extends \Tourfic\Core\Post_Type {
 				'name'          => esc_html__('Year', 'tourfic' ),
 				'singular_name' => esc_html__('Year', 'tourfic' ),
 				'taxonomy'      => 'carrental_engine_year',
-				'rewrite_slug'  => apply_filters( 'tf_carrental_engine_year_slug', 'carrental-category' ),
+				'rewrite_slug'  => apply_filters( 'tf_carrental_engine_year_slug', 'carrental-year' ),
 				'capability'  => array(
 					'assign_terms' => 'edit_tf_carrental',
 					'edit_terms'   => 'edit_tf_carrental',

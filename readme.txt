@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.18.12
+Stable tag: 2.20.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -412,6 +412,23 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.20.2 – January 16, 2026 =
+
+- Added: Enhanced security feature.
+
+= 2.20.1 – January 16, 2026 =
+
+- Updated: readme.txt updated
+
+= 2.20.0 – January 16, 2026 =
+
+- Info: System stability has been improved.
+
+= 2.19.0 – January 13, 2026 =
+
+- Improved: Taxonomy archives are now enabled for taxonomies.
+- Fixed: Switcher issue resolved.
+
 = 2.18.12 – January 05, 2026 =
 
 - Tweak: Improved apartment search functionality.
@@ -427,21 +444,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Tweak: Tour pricing behavior
 - Tweak: Migrator functionality
 - Tweak: Tour and apartment search handling
-
-= 2.18.10 – December 15, 2025 =
-
-- Added: Elementor Page Builder support.
-- Added: Elementor Theme Builder support.
-- Added: Elementor widgets for Services.
-- Added: Edit single Service pages with Elementor.
-- Added: Elementor support for single Tour, Hotel, Car, and Apartment pages.
-
-= 2.18.9 – December 11, 2025 =
-
-- Fixed: Email template shortcode issues.
-- Fixed: Search button text translation issue.
-- Fixed: Frontend analytics chart issue.
-- Fixed: Dashboard booking chart month filter issue.
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 
