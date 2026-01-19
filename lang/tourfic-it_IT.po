@@ -6,7 +6,7 @@ msgstr ""
 "WordPress Plugin 2.18.12\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tourfic\n"
 "POT-Creation-Date: 2026-01-11 15:08:23+00:00\n"
-"PO-Revision-Date: 2026-01-14 11:38+0600\n"
+"PO-Revision-Date: 2026-01-19 13:44+0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -8597,6 +8597,10 @@ msgstr "Varie"
 msgid "Login & Register"
 msgstr "Accedi / Registrati"
 
+#: inc/Admin/TF_Options/options/tf-settings.php:2452
+msgid "Login Settings"
+msgstr "Impostazioni di login"
+
 #: inc/Admin/TF_Options/options/tf-settings.php:2463
 msgid "Login Page"
 msgstr "Pagina di login"
@@ -8643,6 +8647,10 @@ msgstr "Inserisci URL personalizzato"
 msgid "Enter the destination URL for users after they log in."
 msgstr "Inserisci l'URL di destinazione degli utenti dopo l'accesso."
 
+#: inc/Admin/TF_Options/options/tf-settings.php:2509
+msgid "Register Settings"
+msgstr "Impostazioni registrazione"
+
 #: inc/Admin/TF_Options/options/tf-settings.php:2520
 msgid "Registration Page"
 msgstr "Pagina Registrazione"
@@ -8658,6 +8666,10 @@ msgstr "Opzione di reindirizzamento della registrazione"
 #: inc/Admin/TF_Options/options/tf-settings.php:2529
 msgid "Select the destination for users after they register."
 msgstr "Seleziona la destinazione per gli utenti dopo la registrazione."
+
+#: inc/Admin/TF_Options/options/tf-settings.php:2566
+msgid "Social Login Options"
+msgstr "Opzioni di accesso social"
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2572
 msgid "Setup Google Login"
@@ -8691,6 +8703,10 @@ msgstr "Google Redirect URI"
 #: inc/Admin/TF_Options/options/tf-settings.php:2603
 msgid "Enter the Redirect URI"
 msgstr "Entra in scena l'URI di Redirezione"
+
+#: inc/Admin/TF_Options/options/tf-settings.php:2614
+msgid "Custom Registration Fields"
+msgstr "Campi di registrazione personalizzati"
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2621
 msgid "Anything confusing?"
@@ -9371,7 +9387,7 @@ msgstr "Puoi utilizzare i seguenti segnaposto nel corpo dell'email:"
 
 #: inc/Admin/TF_Options/options/tf-settings.php:3449
 msgid "QR Code"
-msgstr "QR Code"
+msgstr "Codice QR"
 
 #: inc/Admin/TF_Options/options/tf-settings.php:3456
 msgid "Tour QR Code"
