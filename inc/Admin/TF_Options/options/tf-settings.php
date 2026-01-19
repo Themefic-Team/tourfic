@@ -246,7 +246,7 @@ TF_Settings::option( 'tf_settings', array(
 									'dependency' => array( 'single-hotel', '==', 'design-2' ),
 									'default'    => array(
 										array(
-											'label'  => __( 'Description', 'tourfic' ),
+											'label'  => esc_html__( 'Description', 'tourfic' ),
 											'slug'   => 'description',
 											'status' => 1,
 										),
