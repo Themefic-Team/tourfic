@@ -1820,6 +1820,10 @@ msgstr ""
 msgid "Watch Video"
 msgstr ""
 
+#: templates/template-parts/car/design-1.php:10
+msgid "Continue"
+msgstr ""
+
 #: inc/Admin/TF_Options/classes/TF_Settings.php:738
 #: templates/template-parts/apartment/design-1.php:155
 #: templates/template-parts/car/design-1.php:105
@@ -13307,7 +13311,9 @@ msgstr ""
 msgid "Car Not Available this Slot!"
 msgstr ""
 
-#: inc/functions/woocommerce/wc-car.php:321
+#: inc/functions/woocommerce/wc-car.php:321 
+#: inc/Classes/Car_Rental/Car_Rental.php:327
+#: inc/Classes/Helper.php:2516
 msgid "Drop Off Location"
 msgstr ""
 

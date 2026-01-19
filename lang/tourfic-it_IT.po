@@ -6,7 +6,7 @@ msgstr ""
 "WordPress Plugin 2.18.12\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tourfic\n"
 "POT-Creation-Date: 2026-01-19 07:59:01+00:00\n"
-"PO-Revision-Date: 2026-01-19 14:26+0600\n"
+"PO-Revision-Date: 2026-01-19 18:01+0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -1913,6 +1913,23 @@ msgstr "Guarda video che ti guidano attraverso Tourfic."
 #: inc/Admin/TF_Options/classes/TF_Settings.php:733
 msgid "Watch Video"
 msgstr "Guarda Video"
+
+#: templates/template-parts/car/design-1.php:10
+#: inc/Classes/Hotel/Hotel.php:3443 inc/Classes/Hotel/Hotel.php:3451
+#: inc/Classes/Hotel/Hotel.php:3454 inc/Classes/Hotel/Hotel.php:3468
+#: inc/Classes/Hotel/Hotel.php:3470 inc/Classes/Hotel/Hotel.php:3483
+#: inc/Classes/Tour/Tour.php:2399 inc/Classes/Tour/Tour.php:2407
+#: inc/Classes/Tour/Tour.php:2410 inc/Classes/Tour/Tour.php:2422
+#: inc/Classes/Tour/Tour.php:2425 inc/Classes/Tour/Tour.php:2439
+#: inc/Classes/Tour/Tour.php:2441 inc/Classes/Tour/Tour.php:2453
+#: inc/functions/functions-car.php:734
+#: templates/template-parts/hotel/hotel-availability-table-row.php:907
+#: templates/template-parts/hotel/hotel-availability-table-row.php:1121
+#: templates/template-parts/hotel/hotel-availability-table-row.php:1394
+#: templates/template-parts/hotel/hotel-availability-table-row.php:1694
+#: templates/template-parts/hotel/hotel-availability-table-row.php:1900
+msgid "Continue"
+msgstr "Continua"
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:738
 #: templates/template-parts/apartment/design-1.php:155
@@ -13349,22 +13366,6 @@ msgstr "CAP"
 msgid "Booking summery"
 msgstr "Prenotazione estiva"
 
-#: inc/Classes/Hotel/Hotel.php:3443 inc/Classes/Hotel/Hotel.php:3451
-#: inc/Classes/Hotel/Hotel.php:3454 inc/Classes/Hotel/Hotel.php:3468
-#: inc/Classes/Hotel/Hotel.php:3470 inc/Classes/Hotel/Hotel.php:3483
-#: inc/Classes/Tour/Tour.php:2399 inc/Classes/Tour/Tour.php:2407
-#: inc/Classes/Tour/Tour.php:2410 inc/Classes/Tour/Tour.php:2422
-#: inc/Classes/Tour/Tour.php:2425 inc/Classes/Tour/Tour.php:2439
-#: inc/Classes/Tour/Tour.php:2441 inc/Classes/Tour/Tour.php:2453
-#: inc/functions/functions-car.php:734
-#: templates/template-parts/hotel/hotel-availability-table-row.php:907
-#: templates/template-parts/hotel/hotel-availability-table-row.php:1121
-#: templates/template-parts/hotel/hotel-availability-table-row.php:1394
-#: templates/template-parts/hotel/hotel-availability-table-row.php:1694
-#: templates/template-parts/hotel/hotel-availability-table-row.php:1900
-msgid "Continue"
-msgstr "Continua"
-
 #. translators: 1: adult count, 2: adult price, 3: child count, 4: child price.
 #: inc/Classes/Hotel/Hotel.php:3508 inc/Classes/Hotel/Hotel.php:3557
 #: inc/Classes/Hotel/Hotel.php:3606
@@ -14555,6 +14556,7 @@ msgid "Car Not Available this Slot!"
 msgstr "Auto non disponibile in questo slot!"
 
 #: inc/functions/woocommerce/wc-car.php:321
+#: inc/Classes/Car_Rental/Car_Rental.php:327 inc/Classes/Helper.php:2516
 msgid "Drop Off Location"
 msgstr "Luogo di Destinazione"
 
