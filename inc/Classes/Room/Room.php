@@ -296,13 +296,17 @@ class Room {
 										<h3><?php echo !empty($room_option['option_title']) ? esc_html($room_option['option_title']) : ''; ?></h3>
 										<?php if ( $show_features == 'yes' && ! empty( $room_option['room-facilities'] ) ) :
 											echo '<ul class="tf-room-features">';
+											$option_facilities_key = 0;
 											foreach ( $room_option['room-facilities'] as $room_facility ) :
+												if ( $option_facilities_key < $features_count ) {
 												?>
 												<li>
 													<span class="room-extra-icon"><i class="<?php echo esc_attr( $room_facility['room_facilities_icon'] ); ?>"></i></span>
 													<span class="room-extra-label"><?php echo wp_kses_post( $room_facility['room_facilities_label'] ); ?></span>
 												</li>
-											<?php endforeach;
+											<?php }
+											$option_facilities_key++;
+											endforeach;
 											echo '</ul>';
 										endif; ?>
 									</div>
@@ -347,23 +351,26 @@ class Room {
 							<div class="tf-room-option-left">
 								<?php if ( $show_features == 'yes' && ! empty( $meta['features'] ) ) :
 									echo '<ul class="tf-room-features">';
-									
+									$feature_key = 0;
 									foreach ( $meta['features'] as $feature_id ) {
-										$feature_meta = get_term_meta( $feature_id, 'tf_hotel_feature', true );
-										$feature = get_term( $feature_id );
-										$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-										if ( $f_icon_type == 'fa' && ! empty( $feature_meta['icon-fa'] ) ) {
-											$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
-										}
-										if ( $f_icon_type == 'c' && ! empty( $feature_meta['icon-c'] ) ) {
-											$feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
-										}
-										?>
-										<li>
-											<?php echo ! empty( $feature_meta ) && ! empty( $feature_icon ) ? wp_kses_post( $feature_icon ) : ''; ?>
-											<?php echo esc_html($feature->name); ?>
-										</li>
+										if ( $feature_key < $features_count ) {
+											$feature_meta = get_term_meta( $feature_id, 'tf_hotel_feature', true );
+											$feature = get_term( $feature_id );
+											$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+											if ( $f_icon_type == 'fa' && ! empty( $feature_meta['icon-fa'] ) ) {
+												$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
+											}
+											if ( $f_icon_type == 'c' && ! empty( $feature_meta['icon-c'] ) ) {
+												$feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
+											}
+											?>
+											<li>
+												<?php echo ! empty( $feature_meta ) && ! empty( $feature_icon ) ? wp_kses_post( $feature_icon ) : ''; ?>
+												<?php echo esc_html($feature->name); ?>
+											</li>
 									<?php }
+										$feature_key++;
+									}
 									echo '</ul>';
 								endif; ?>
 							</div>

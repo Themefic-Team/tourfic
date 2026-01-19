@@ -240,7 +240,7 @@ function tf_hotel_booking_callback() {
 		}
 
 		# Find the maximum number of rooms booked on any day within the date range
-		$number_orders = max($room_bookings_per_day);
+		$number_orders = !empty($room_bookings_per_day) ? max($room_bookings_per_day) : 0;
 
 		# Calculate available rooms
 		$num_room_available = $num_room_available - $number_orders;

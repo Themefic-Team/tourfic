@@ -11668,6 +11668,9 @@ div#tf-destinationautocomplete-list div:before {
   color: var(--tf-text-paragraph);
   font-size: 1rem;
   line-height: 1.5;
+  -webkit-flex: 0 0 calc(50% - 16px);
+  -ms-flex: 0 0 calc(50% - 16px);
+  flex: 0 0 calc(50% - 16px);
 }
 .tf-single-template__one .tf-archive-room-details .tf-room-item-card .tf-room-option ul.tf-room-features li i,
 .tf-archive-template__one .tf-archive-room-details .tf-room-item-card .tf-room-option ul.tf-room-features li i {
