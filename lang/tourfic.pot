@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Tourfic – Travel Booking, Hotel Booking & Car Rental WordPress Plugin package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Tourfic – Travel Booking, Hotel Booking & Car Rental WordPress Plugin 2.18.12\n"
+"Project-Id-Version: Tourfic – Travel Booking, Hotel Booking & Car Rental WordPress Plugin 2.20.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tourfic\n"
-"POT-Creation-Date: 2026-01-19 07:59:01+00:00\n"
+"POT-Creation-Date: 2026-01-20 12:22:21+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -970,6 +970,7 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1287
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1547
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1638
+#: inc/Admin/TF_Options/fields/select2/TF_select2.php:103
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:202
 #: inc/Admin/TF_Options/options/tf-settings.php:2640
 #: inc/Admin/TF_Options/options/tf-settings.php:4494
@@ -1161,21 +1162,6 @@ msgstr ""
 #: inc/Admin/TF_Options/fields/imageselect/TF_imageselect.php:33
 msgid "Pro"
 msgstr ""
-
-#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:29
-msgid "Add Gallery"
-msgstr ""
-
-#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:31
-#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:33
-msgid "Edit Gallery"
-msgstr ""
-
-#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:31
-#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:33
-msgid "Clear"
-msgstr ""
-
 
 #: inc/Admin/TF_Options/TF_Options.php:249
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:7
@@ -1723,7 +1709,7 @@ msgid "Install"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:554
-#: inc/Traits/Action_Helper.php:2480 tourfic.php:231
+#: inc/Traits/Action_Helper.php:2542 tourfic.php:229
 msgid "Activate"
 msgstr ""
 
@@ -1818,10 +1804,6 @@ msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:733
 msgid "Watch Video"
-msgstr ""
-
-#: templates/template-parts/car/design-1.php:10
-msgid "Continue"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:738
@@ -1934,22 +1916,17 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Settings.php:956
 #: inc/App/Shortcodes/Search_Result.php:753
 #: inc/App/Widgets/TF_Widgets/Map_Filter.php:201 inc/Core/Enquiry.php:63
-#: inc/Traits/Action_Helper.php:135 inc/functions.php:443
+#: inc/Traits/Action_Helper.php:135 inc/functions.php:444
 #: templates/apartment/archive/design-1.php:119
 #: templates/apartment/archive/design-2.php:61
-#: templates/apartment/taxonomy-apartment_locations.php:77
-#: templates/car/archive/design-1.php:56
-#: templates/car/taxonomy-carrental_brands.php:74
-#: templates/car/taxonomy-carrental_locations.php:74
-#: templates/hotel/archive/design-2.php:118
-#: templates/hotel/archive/design-3.php:62
-#: templates/hotel/taxonomy-hotel_locations.php:94
+#: templates/apartment/taxonomy.php:83 templates/car/archive/design-1.php:56
+#: templates/car/taxonomy.php:79 templates/hotel/archive/design-2.php:118
+#: templates/hotel/archive/design-3.php:62 templates/hotel/taxonomy.php:107
 #: templates/template-parts/archive.php:250
 #: templates/template-parts/search/design-2.php:77
 #: templates/template-parts/search/design-3.php:71
 #: templates/tour/archive/design-2.php:128
-#: templates/tour/archive/design-3.php:60
-#: templates/tour/taxonomy-tour_destinations.php:92
+#: templates/tour/archive/design-3.php:60 templates/tour/taxonomy.php:104
 msgid "Reset"
 msgstr ""
 
@@ -2338,6 +2315,7 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1548
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1639
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1678
+#: inc/Admin/TF_Options/fields/select2/TF_select2.php:152
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:457
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:545
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:402
@@ -3085,14 +3063,10 @@ msgstr ""
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:941
 #: inc/Core/TF_Backend_Booking.php:146
 #: templates/apartment/archive-apartments.php:38
-#: templates/apartment/taxonomy-apartment_locations.php:23
-#: templates/car/archive-cars.php:28
-#: templates/car/taxonomy-carrental_brands.php:13
-#: templates/car/taxonomy-carrental_locations.php:13
-#: templates/common/search-results.php:41 templates/hotel/archive-hotels.php:40
-#: templates/hotel/taxonomy-hotel_locations.php:23
-#: templates/tour/archive-tours.php:73
-#: templates/tour/taxonomy-tour_destinations.php:21
+#: templates/apartment/taxonomy.php:23 templates/car/archive-cars.php:28
+#: templates/car/taxonomy.php:13 templates/common/search-results.php:41
+#: templates/hotel/archive-hotels.php:40 templates/hotel/taxonomy.php:23
+#: templates/tour/archive-tours.php:73 templates/tour/taxonomy.php:21
 msgid "Please install and activate WooCommerce plugin to use this feature."
 msgstr ""
 
@@ -3156,6 +3130,20 @@ msgstr ""
 msgid "Select Date"
 msgstr ""
 
+#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:29
+msgid "Add Gallery"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:31
+#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:33
+msgid "Edit Gallery"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:31
+#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:33
+msgid "Clear"
+msgstr ""
+
 #: inc/Admin/TF_Options/fields/hotel_room/TF_hotel_room.php:30
 #: inc/Admin/TF_Options/options/tf-settings.php:213
 #: inc/Admin/TF_Options/options/tf-settings.php:259 inc/Classes/Enqueue.php:372
@@ -3184,7 +3172,8 @@ msgstr ""
 #: inc/Admin/TF_Options/options/tf-settings.php:2244
 #: inc/Classes/Apartment/Apartment.php:736
 #: inc/Classes/Apartment/Apartment.php:1166
-#: inc/Classes/Car_Rental/Car_Rental.php:471 inc/Classes/Helper.php:2668
+#: inc/Classes/Car_Rental/Car_Rental.php:471
+#: inc/Classes/Car_Rental/Car_Rental.php:925 inc/Classes/Helper.php:2668
 #: inc/Classes/Hotel/Hotel.php:2010 inc/Classes/Hotel/Hotel.php:2491
 #: inc/Classes/Tour/Tour.php:433 inc/Classes/Tour/Tour.php:893
 msgid "Search"
@@ -3211,6 +3200,8 @@ msgid "Longitude"
 msgstr ""
 
 #: inc/Admin/TF_Options/fields/select2/TF_select2.php:81
+#: inc/Admin/TF_Options/fields/select2/TF_select2.php:91
+#: inc/Admin/TF_Options/fields/select2/TF_select2.php:120
 #: inc/Admin/TF_Options/fields/select2/TF_select2.php:156
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:333
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:450
@@ -3230,10 +3221,6 @@ msgstr ""
 msgid "Add New"
 msgstr ""
 
-#. translators: %s: Post type label
-#. translators: %s: post type singular name
-#. translators: %s: taxonomy singular name
-
 #: inc/Admin/TF_Options/fields/select2/TF_select2.php:108
 msgid "Parent"
 msgstr ""
@@ -3241,6 +3228,10 @@ msgstr ""
 #: inc/Admin/TF_Options/fields/select2/TF_select2.php:110
 msgid "--select--"
 msgstr ""
+
+#. translators: %s: Post type label
+#. translators: %s: post type singular name
+#. translators: %s: taxonomy singular name
 
 #: inc/Admin/TF_Options/fields/select2/TF_select2.php:138
 #: inc/Core/Post_Type.php:35 inc/Core/Post_Type.php:113
@@ -5434,13 +5425,12 @@ msgstr ""
 msgid "%s Extras"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:377
-msgid "If you wish to provide additional services that are not included in your current hotel package, you can list them here."
-msgstr ""
-
-
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:376
 msgid "Offer Hotel Extras"
+msgstr ""
+
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:377
+msgid "If you wish to provide additional services that are not included in your current hotel package, you can list them here."
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:386
@@ -9648,9 +9638,7 @@ msgstr ""
 #: inc/App/Shortcodes/Search_Result.php:229
 #: inc/App/Shortcodes/Search_Result.php:733
 #: inc/App/Shortcodes/Search_Result.php:1533
-#: templates/car/archive/design-1.php:36
-#: templates/car/taxonomy-carrental_brands.php:60
-#: templates/car/taxonomy-carrental_locations.php:60
+#: templates/car/archive/design-1.php:36 templates/car/taxonomy.php:65
 #: templates/hotel/archive/design-1.php:20
 #: templates/template-parts/archive.php:68
 #: templates/tour/archive/design-1.php:19
@@ -9666,8 +9654,8 @@ msgstr ""
 #: inc/App/Shortcodes/Search_Result.php:964
 #: inc/App/Shortcodes/Search_Result.php:1520
 #: inc/App/Shortcodes/Search_Result.php:1593
-#: inc/App/Shortcodes/Search_Result.php:1722 inc/Traits/Action_Helper.php:1278
-#: inc/Traits/Action_Helper.php:1929 inc/Traits/Action_Helper.php:1974
+#: inc/App/Shortcodes/Search_Result.php:1722 inc/Traits/Action_Helper.php:1340
+#: inc/Traits/Action_Helper.php:1991 inc/Traits/Action_Helper.php:2036
 #: templates/template-parts/archive.php:855
 msgid "Nothing Found!"
 msgstr ""
@@ -9813,19 +9801,14 @@ msgstr ""
 #: inc/Classes/Apartment/Apartment.php:1112 inc/Classes/Tour/Tour.php:856
 #: templates/apartment/archive/design-1.php:118
 #: templates/apartment/archive/design-2.php:60
-#: templates/apartment/taxonomy-apartment_locations.php:76
-#: templates/car/archive/design-1.php:55
-#: templates/car/taxonomy-carrental_brands.php:73
-#: templates/car/taxonomy-carrental_locations.php:73
-#: templates/hotel/archive/design-2.php:117
-#: templates/hotel/archive/design-3.php:61
-#: templates/hotel/taxonomy-hotel_locations.php:93
+#: templates/apartment/taxonomy.php:82 templates/car/archive/design-1.php:55
+#: templates/car/taxonomy.php:78 templates/hotel/archive/design-2.php:117
+#: templates/hotel/archive/design-3.php:61 templates/hotel/taxonomy.php:106
 #: templates/template-parts/archive.php:249
 #: templates/template-parts/search/design-2.php:76
 #: templates/template-parts/search/design-3.php:70
 #: templates/tour/archive/design-2.php:127
-#: templates/tour/archive/design-3.php:59
-#: templates/tour/taxonomy-tour_destinations.php:91
+#: templates/tour/archive/design-3.php:59 templates/tour/taxonomy.php:103
 msgid "Filter"
 msgstr ""
 
@@ -9863,9 +9846,9 @@ msgstr ""
 #: inc/Classes/Apartment/Apartment.php:2287 inc/Classes/Hotel/Hotel.php:4136
 #: inc/Classes/Tour/Tour.php:2687 inc/Classes/Tour/Tour.php:2868
 #: inc/Classes/Tour/Tour.php:2942 inc/Classes/Tour/Tour.php:2998
-#: inc/Traits/Action_Helper.php:1375 inc/Traits/Action_Helper.php:1472
-#: inc/Traits/Action_Helper.php:1571 inc/Traits/Action_Helper.php:1677
-#: inc/Traits/Action_Helper.php:1776 inc/Traits/Action_Helper.php:1867
+#: inc/Traits/Action_Helper.php:1437 inc/Traits/Action_Helper.php:1534
+#: inc/Traits/Action_Helper.php:1633 inc/Traits/Action_Helper.php:1739
+#: inc/Traits/Action_Helper.php:1838 inc/Traits/Action_Helper.php:1929
 #: templates/apartment/archive/design-2.php:175
 #: templates/apartment/archive/design-2.php:251
 #: templates/hotel/archive/design-3.php:173
@@ -11522,6 +11505,12 @@ msgstr ""
 msgid "Pick Up Location"
 msgstr ""
 
+#: inc/Classes/Car_Rental/Car_Rental.php:327 inc/Classes/Helper.php:2516
+#: inc/functions/woocommerce/wc-car.php:321
+#: templates/template-parts/car/design-1.php:419
+msgid "Drop Off Location"
+msgstr ""
+
 #: inc/Classes/Car_Rental/Car_Rental.php:343 inc/Classes/Helper.php:2532
 #: templates/template-parts/car/design-1.php:435
 msgid "Pick-up date"
@@ -12116,6 +12105,8 @@ msgstr ""
 #: inc/Classes/Tour/Tour.php:2425 inc/Classes/Tour/Tour.php:2439
 #: inc/Classes/Tour/Tour.php:2441 inc/Classes/Tour/Tour.php:2453
 #: inc/functions/functions-car.php:734
+#: templates/template-parts/car/design-1.php:10
+#: templates/template-parts/car/design-1.php:577
 #: templates/template-parts/hotel/hotel-availability-table-row.php:907
 #: templates/template-parts/hotel/hotel-availability-table-row.php:1121
 #: templates/template-parts/hotel/hotel-availability-table-row.php:1394
@@ -13145,45 +13136,45 @@ msgstr ""
 msgid "GO PRO"
 msgstr ""
 
-#: inc/Traits/Action_Helper.php:1941 inc/Traits/Action_Helper.php:1970
+#: inc/Traits/Action_Helper.php:2003 inc/Traits/Action_Helper.php:2032
 msgid "No results found!"
 msgstr ""
 
-#: inc/Traits/Action_Helper.php:2159
+#: inc/Traits/Action_Helper.php:2221
 msgid "Remove this item"
 msgstr ""
 
-#: inc/Traits/Action_Helper.php:2228 inc/Traits/Action_Helper.php:2254
+#: inc/Traits/Action_Helper.php:2290 inc/Traits/Action_Helper.php:2316
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: inc/Traits/Action_Helper.php:2240
+#: inc/Traits/Action_Helper.php:2302
 msgid "Tourfic Affiliate installed successfully."
 msgstr ""
 
-#: inc/Traits/Action_Helper.php:2267
+#: inc/Traits/Action_Helper.php:2329
 msgid "Tourfic Affiliate activated successfully."
 msgstr ""
 
-#: inc/Traits/Action_Helper.php:2369
+#: inc/Traits/Action_Helper.php:2431
 msgid "Visit Vendor Dashboard"
 msgstr ""
 
 #. translators: %1$s opening strong tag, %2$s closing strong tag, highlighting
 #. the "QUICK CHECKOUT" feature.
 
-#: inc/Traits/Action_Helper.php:2443
+#: inc/Traits/Action_Helper.php:2505
 msgid "Instantio plugin is required for the %1$s\"QUICK CHECKOUT\"%2$s feature of Tourfic. Please install and activate Instantio to ensure this feature works seamlessly."
 msgstr ""
 
-#: inc/Traits/Action_Helper.php:2460 tourfic.php:186
+#: inc/Traits/Action_Helper.php:2522 tourfic.php:184
 msgid "Install Now"
 msgstr ""
 
 #. translators: 1: opening <strong><a> tag, 2: closing </a></strong> tag, 3:
 #. opening <b> tag, 4: closing </b> tag.
 
-#: inc/Traits/Action_Helper.php:2468
+#: inc/Traits/Action_Helper.php:2530
 msgid "The %1$sInstantio%2$s plugin is inactive. Please activate it to enable the %3$s \"QUICK CHECKOUT\" %4$s for Tourfic."
 msgstr ""
 
@@ -13328,12 +13319,6 @@ msgstr ""
 msgid "Car Not Available this Slot!"
 msgstr ""
 
-#: inc/functions/woocommerce/wc-car.php:321 
-#: inc/Classes/Car_Rental/Car_Rental.php:327
-#: inc/Classes/Helper.php:2516
-msgid "Drop Off Location"
-msgstr ""
-
 #: inc/functions/woocommerce/wc-car.php:327
 #: templates/template-parts/car/design-1.php:436
 msgid "Pick Up Date"
@@ -13418,29 +13403,24 @@ msgstr ""
 msgid " file is missing! It is required to function Tourfic properly!"
 msgstr ""
 
-#: inc/functions.php:439
+#: inc/functions.php:437
 msgid "Reset Room Availability"
 msgstr ""
 
 #: inc/functions.php:440
-msgid "Remove order ids linked with this room.<br><b style="color: red;">Be aware! It is irreversible!</b>"
+msgid "Remove order ids linked with this room.<br><b style=\"color: red;\">Be aware! It is irreversible!</b>"
 msgstr ""
 
-
 #: templates/apartment/archive/design-1.php:41
-#: templates/apartment/taxonomy-apartment_locations.php:68
-#: templates/hotel/archive/design-2.php:40
-#: templates/hotel/taxonomy-hotel_locations.php:82
+#: templates/apartment/taxonomy.php:68 templates/hotel/archive/design-2.php:40
+#: templates/hotel/taxonomy.php:89
 #: templates/template-parts/hotel/design-2/rooms.php:54
 #: templates/template-parts/search/design-2.php:59
-#: templates/tour/archive/design-2.php:38
-#: templates/tour/taxonomy-tour_destinations.php:80
+#: templates/tour/archive/design-2.php:38 templates/tour/taxonomy.php:86
 msgid "Modify search"
 msgstr ""
 
-#: templates/apartment/archive/design-1.php:97
-#: templates/car/taxonomy-carrental_brands.php:104
-#: templates/car/taxonomy-carrental_locations.php:104
+#: templates/apartment/archive/design-1.php:97 templates/car/taxonomy.php:109
 #: templates/hotel/archive/design-1.php:123
 #: templates/hotel/archive/design-2.php:95
 #: templates/template-parts/archive.php:149
@@ -14146,7 +14126,7 @@ msgstr ""
 msgid "Please install and activate WooCommerce plugin to view tour details."
 msgstr ""
 
-#: tourfic.php:138
+#: tourfic.php:143
 msgid "Something went Wrong. Please Reinstall the Tourfic Plugin "
 msgstr ""
 
@@ -14154,15 +14134,19 @@ msgstr ""
 #. translators: %1$s: WooCommerce plugin url start, %2$s: WooCommerce plugin
 #. url end
 
-#: tourfic.php:180 tourfic.php:228
+#: tourfic.php:178 tourfic.php:226
 msgid "Tourfic requires %1$s WooCommerce %2$s to be activated."
 msgstr ""
 
 #. translators: %1$s: strong tag start, %2$s: strong tag end, %3$s: plugin url
 #. start, %4$s: plugin url end
 
-#: tourfic.php:239
+#: tourfic.php:237
 msgid "%1$sTourfic is inactive.%2$s This plugin requires WooCommerce 2.5 or newer. Please %3$supdate WooCommerce to version 2.5 or newer%4$s"
+msgstr ""
+
+#: vendor/appsero/client/src/Insights.php:725
+msgid "Once Weekly"
 msgstr ""
 #. Plugin Name of the plugin/theme
 msgid "Tourfic – Travel Booking, Hotel Booking & Car Rental WordPress Plugin"

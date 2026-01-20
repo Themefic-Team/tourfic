@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tourfic – Travel Booking, Hotel Booking & Car Rental WordPress Plugin 2.18.12\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tourfic\n"
-"POT-Creation-Date: 2026-01-11 15:08:23+00:00\n"
+"POT-Creation-Date: 2026-01-19 07:59:01+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,29 +30,13 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1289
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1549
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1640
-#: inc/Admin/TF_Options/options/tf-settings.php:4504
-#: inc/Admin/TF_Options/options/tf-settings.php:4745
+#: inc/Admin/TF_Options/options/tf-settings.php:4506
+#: inc/Admin/TF_Options/options/tf-settings.php:4747
 #: inc/App/Widgets/Elementor/Widgets/TF_Apartment_Locations.php:130
 #: inc/App/Widgets/Elementor/Widgets/TF_Hotel_Locations.php:129
 #: inc/App/Widgets/Elementor/Widgets/TF_Tour_Destinations.php:129
 #: inc/Classes/Helper.php:1116 inc/Classes/Helper.php:2163
 msgid "Date"
-msgstr ""
-
-#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:105
-msgid "Enter a Title"
-msgstr ""
-
-#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:111
-msgid "Enter a Subtitle"
-msgstr ""
-
-#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:119
-msgid "Input classes with space"
-msgstr ""
-
-#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:136
-msgid "Input the title here."
 msgstr ""
 
 #: inc/Admin/Backend_Booking/TF_Apartment_Backend_Booking.php:52
@@ -171,7 +155,7 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Settings.php:1258
 #: inc/Admin/TF_Options/classes/TF_Settings.php:1289
 #: inc/Admin/TF_Options/classes/TF_Settings.php:1425
-#: inc/Admin/TF_Setup_Wizard.php:1359 inc/App/TF_Review.php:177
+#: inc/Admin/TF_Setup_Wizard.php:1359 inc/App/TF_Review.php:178
 #: inc/Classes/Room/Room.php:83 inc/Core/TF_Booking_Details.php:1396
 #: inc/Core/TF_Booking_Details.php:1460 inc/Core/TF_Booking_Details.php:1493
 #: inc/Core/TF_Booking_Details.php:1546
@@ -597,7 +581,7 @@ msgstr ""
 #: inc/Admin/TF_Options/options/tf-settings.php:597
 #: inc/Admin/TF_Options/options/tf-settings.php:1912
 #: inc/Admin/TF_Options/options/tf-settings.php:1973
-#: inc/Admin/TF_Options/options/tf-settings.php:4045
+#: inc/Admin/TF_Options/options/tf-settings.php:4047
 #: inc/Admin/TF_Setup_Wizard.php:262 inc/Admin/TF_Setup_Wizard.php:265
 #: inc/Admin/TF_Setup_Wizard.php:267 inc/App/Shortcodes/Search_Form.php:28
 #: inc/App/Template_Builder.php:176 inc/App/Template_Builder.php:325
@@ -988,8 +972,8 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1638
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:202
 #: inc/Admin/TF_Options/options/tf-settings.php:2640
-#: inc/Admin/TF_Options/options/tf-settings.php:4492
-#: inc/Admin/TF_Options/options/tf-settings.php:4733
+#: inc/Admin/TF_Options/options/tf-settings.php:4494
+#: inc/Admin/TF_Options/options/tf-settings.php:4735
 #: inc/App/Template_Builder.php:312 inc/App/Template_Builder.php:794
 #: inc/App/Widgets/Elementor/Widgets/TF_Apartment_Locations.php:129
 #: inc/App/Widgets/Elementor/Widgets/TF_Hotel_Locations.php:128
@@ -1004,10 +988,10 @@ msgstr ""
 #: inc/Admin/Emails/templates/booking/notification.php:13
 #: inc/Admin/TF_List_Table.php:24
 #: inc/Admin/TF_Options/options/tf-settings.php:2650
-#: inc/Admin/TF_Options/options/tf-settings.php:4503
-#: inc/Admin/TF_Options/options/tf-settings.php:4599
-#: inc/Admin/TF_Options/options/tf-settings.php:4744
-#: inc/Admin/TF_Options/options/tf-settings.php:4837
+#: inc/Admin/TF_Options/options/tf-settings.php:4505
+#: inc/Admin/TF_Options/options/tf-settings.php:4601
+#: inc/Admin/TF_Options/options/tf-settings.php:4746
+#: inc/Admin/TF_Options/options/tf-settings.php:4839
 #: inc/Classes/Hotel/Hotel.php:3329 inc/Classes/Tour/Tour.php:2258
 #: inc/Core/Enquiry.php:156 inc/Core/Enquiry.php:402
 #: inc/Core/TF_Backend_Booking.php:59 inc/Traits/Action_Helper.php:127
@@ -1030,8 +1014,8 @@ msgstr ""
 #: inc/Admin/Emails/templates/booking/cancellation.php:16
 #: inc/Admin/Emails/templates/booking/confirmation.php:13
 #: inc/Admin/Emails/templates/booking/notification.php:16
-#: inc/Admin/TF_Options/options/tf-settings.php:4611
-#: inc/Admin/TF_Options/options/tf-settings.php:4849
+#: inc/Admin/TF_Options/options/tf-settings.php:4613
+#: inc/Admin/TF_Options/options/tf-settings.php:4851
 #: inc/Classes/Hotel/Hotel.php:3339 inc/Classes/Tour/Tour.php:2268
 msgid "Country"
 msgstr ""
@@ -1039,8 +1023,8 @@ msgstr ""
 #: inc/Admin/Emails/templates/booking/cancellation.php:17
 #: inc/Admin/Emails/templates/booking/confirmation.php:14
 #: inc/Admin/Emails/templates/booking/notification.php:17
-#: inc/Admin/TF_Options/options/tf-settings.php:4605
-#: inc/Admin/TF_Options/options/tf-settings.php:4843
+#: inc/Admin/TF_Options/options/tf-settings.php:4607
+#: inc/Admin/TF_Options/options/tf-settings.php:4845
 #: inc/Classes/Hotel/Hotel.php:3334 inc/Classes/Tour/Tour.php:2263
 #: inc/Core/TF_Backend_Booking.php:66
 msgid "Phone"
@@ -1178,6 +1162,21 @@ msgstr ""
 msgid "Pro"
 msgstr ""
 
+#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:29
+msgid "Add Gallery"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:31
+#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:33
+msgid "Edit Gallery"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:31
+#: inc/Admin/TF_Options/fields/gallery/TF_gallery.php:33
+msgid "Clear"
+msgstr ""
+
+
 #: inc/Admin/TF_Options/TF_Options.php:249
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:7
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:9
@@ -1213,11 +1212,6 @@ msgstr ""
 #: inc/Admin/TF_Options/TF_Options.php:309
 #: inc/Admin/TF_Options/fields/icon/TF_icon.php:124
 msgid "Remix Icon"
-msgstr ""
-
-
-#: inc/Admin/TF_Options/fields/icon/TF_image.php:25
-msgid "Upload"
 msgstr ""
 
 #: inc/Admin/TF_Options/TF_Options.php:428
@@ -1567,61 +1561,73 @@ msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:357
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:231
+#: inc/Classes/Enqueue.php:1004
 msgid "January"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:358
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:235
+#: inc/Classes/Enqueue.php:1005
 msgid "February"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:359
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:239
+#: inc/Classes/Enqueue.php:1006
 msgid "March"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:360
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:243
+#: inc/Classes/Enqueue.php:1007
 msgid "April"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:361
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:247
+#: inc/Classes/Enqueue.php:1008
 msgid "May"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:362
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:251
+#: inc/Classes/Enqueue.php:1009
 msgid "June"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:363
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:255
+#: inc/Classes/Enqueue.php:1010
 msgid "July"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:364
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:259
+#: inc/Classes/Enqueue.php:1011
 msgid "August"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:365
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:263
+#: inc/Classes/Enqueue.php:1012
 msgid "September"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:366
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:267
+#: inc/Classes/Enqueue.php:1013
 msgid "October"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:367
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:271
+#: inc/Classes/Enqueue.php:1014
 msgid "November"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:368
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:275
+#: inc/Classes/Enqueue.php:1015
 msgid "December"
 msgstr ""
 
@@ -1705,6 +1711,10 @@ msgid "40+ Essential Addons for Contact Form 7"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:537
+#: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:199
+#: inc/Classes/Hotel/Hotel.php:3538 inc/Classes/Hotel/Hotel.php:3587
+#: inc/Classes/Hotel/Hotel.php:3636
+#: templates/template-parts/car/design-1/car-info.php:140
 msgid "Free"
 msgstr ""
 
@@ -1712,6 +1722,23 @@ msgstr ""
 msgid "Install"
 msgstr ""
 
+#: inc/Admin/TF_Options/classes/TF_Settings.php:554
+#: inc/Traits/Action_Helper.php:2480 tourfic.php:231
+msgid "Activate"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:557 inc/Classes/Enqueue.php:947
+#: inc/Classes/Enqueue.php:1328
+msgid "Activated"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:565
+msgid "Activate Pro"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Settings.php:568
+msgid "Pro Activated"
+msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:667
 msgid "Get Started Quickly"
@@ -1791,6 +1818,10 @@ msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:733
 msgid "Watch Video"
+msgstr ""
+
+#: templates/template-parts/car/design-1.php:10
+msgid "Continue"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:738
@@ -2053,8 +2084,8 @@ msgstr ""
 #: inc/Admin/TF_Options/options/tf-settings.php:159
 #: inc/Admin/TF_Options/options/tf-settings.php:1910
 #: inc/Admin/TF_Options/options/tf-settings.php:1971
-#: inc/Admin/TF_Options/options/tf-settings.php:3735
-#: inc/Admin/TF_Options/options/tf-settings.php:4015
+#: inc/Admin/TF_Options/options/tf-settings.php:3737
+#: inc/Admin/TF_Options/options/tf-settings.php:4017
 #: inc/Admin/TF_Setup_Wizard.php:237 inc/Admin/TF_Setup_Wizard.php:240
 #: inc/Admin/TF_Setup_Wizard.php:242 inc/App/Shortcodes/Search_Form.php:26
 #: inc/App/Template_Builder.php:174 inc/App/Template_Builder.php:323
@@ -2075,7 +2106,7 @@ msgstr ""
 #: inc/Admin/TF_Options/options/tf-settings.php:365
 #: inc/Admin/TF_Options/options/tf-settings.php:1911
 #: inc/Admin/TF_Options/options/tf-settings.php:1972
-#: inc/Admin/TF_Options/options/tf-settings.php:4030
+#: inc/Admin/TF_Options/options/tf-settings.php:4032
 #: inc/Admin/TF_Setup_Wizard.php:249 inc/Admin/TF_Setup_Wizard.php:252
 #: inc/Admin/TF_Setup_Wizard.php:254 inc/App/Shortcodes/Search_Form.php:27
 #: inc/App/Template_Builder.php:175 inc/App/Template_Builder.php:324
@@ -2170,24 +2201,24 @@ msgstr ""
 #: inc/Admin/TF_Options/options/tf-settings.php:2408
 #: inc/Admin/TF_Options/options/tf-settings.php:2417
 #: inc/Admin/TF_Options/options/tf-settings.php:2927
-#: inc/Admin/TF_Options/options/tf-settings.php:3545
-#: inc/Admin/TF_Options/options/tf-settings.php:3565
-#: inc/Admin/TF_Options/options/tf-settings.php:3591
-#: inc/Admin/TF_Options/options/tf-settings.php:3611
-#: inc/Admin/TF_Options/options/tf-settings.php:3637
-#: inc/Admin/TF_Options/options/tf-settings.php:3657
-#: inc/Admin/TF_Options/options/tf-settings.php:3683
-#: inc/Admin/TF_Options/options/tf-settings.php:3703
-#: inc/Admin/TF_Options/options/tf-settings.php:3743
-#: inc/Admin/TF_Options/options/tf-settings.php:3763
-#: inc/Admin/TF_Options/options/tf-settings.php:3789
-#: inc/Admin/TF_Options/options/tf-settings.php:3809
-#: inc/Admin/TF_Options/options/tf-settings.php:3835
-#: inc/Admin/TF_Options/options/tf-settings.php:3855
-#: inc/Admin/TF_Options/options/tf-settings.php:3881
-#: inc/Admin/TF_Options/options/tf-settings.php:3901
-#: inc/Admin/TF_Options/options/tf-settings.php:3941
-#: inc/Admin/TF_Options/options/tf-settings.php:4402
+#: inc/Admin/TF_Options/options/tf-settings.php:3547
+#: inc/Admin/TF_Options/options/tf-settings.php:3567
+#: inc/Admin/TF_Options/options/tf-settings.php:3593
+#: inc/Admin/TF_Options/options/tf-settings.php:3613
+#: inc/Admin/TF_Options/options/tf-settings.php:3639
+#: inc/Admin/TF_Options/options/tf-settings.php:3659
+#: inc/Admin/TF_Options/options/tf-settings.php:3685
+#: inc/Admin/TF_Options/options/tf-settings.php:3705
+#: inc/Admin/TF_Options/options/tf-settings.php:3745
+#: inc/Admin/TF_Options/options/tf-settings.php:3765
+#: inc/Admin/TF_Options/options/tf-settings.php:3791
+#: inc/Admin/TF_Options/options/tf-settings.php:3811
+#: inc/Admin/TF_Options/options/tf-settings.php:3837
+#: inc/Admin/TF_Options/options/tf-settings.php:3857
+#: inc/Admin/TF_Options/options/tf-settings.php:3883
+#: inc/Admin/TF_Options/options/tf-settings.php:3903
+#: inc/Admin/TF_Options/options/tf-settings.php:3943
+#: inc/Admin/TF_Options/options/tf-settings.php:4404
 #: inc/App/Template_Builder.php:302 inc/App/Template_Builder.php:784
 #: inc/App/Widgets/Elementor/Widgets/TF_Apartment_Locations.php:142
 #: inc/App/Widgets/Elementor/Widgets/TF_Hotel_Locations.php:141
@@ -2260,24 +2291,24 @@ msgstr ""
 #: inc/Admin/TF_Options/options/tf-settings.php:2409
 #: inc/Admin/TF_Options/options/tf-settings.php:2418
 #: inc/Admin/TF_Options/options/tf-settings.php:2928
-#: inc/Admin/TF_Options/options/tf-settings.php:3546
-#: inc/Admin/TF_Options/options/tf-settings.php:3566
-#: inc/Admin/TF_Options/options/tf-settings.php:3592
-#: inc/Admin/TF_Options/options/tf-settings.php:3612
-#: inc/Admin/TF_Options/options/tf-settings.php:3638
-#: inc/Admin/TF_Options/options/tf-settings.php:3658
-#: inc/Admin/TF_Options/options/tf-settings.php:3684
-#: inc/Admin/TF_Options/options/tf-settings.php:3704
-#: inc/Admin/TF_Options/options/tf-settings.php:3744
-#: inc/Admin/TF_Options/options/tf-settings.php:3764
-#: inc/Admin/TF_Options/options/tf-settings.php:3790
-#: inc/Admin/TF_Options/options/tf-settings.php:3810
-#: inc/Admin/TF_Options/options/tf-settings.php:3836
-#: inc/Admin/TF_Options/options/tf-settings.php:3856
-#: inc/Admin/TF_Options/options/tf-settings.php:3882
-#: inc/Admin/TF_Options/options/tf-settings.php:3902
-#: inc/Admin/TF_Options/options/tf-settings.php:3942
-#: inc/Admin/TF_Options/options/tf-settings.php:4403
+#: inc/Admin/TF_Options/options/tf-settings.php:3548
+#: inc/Admin/TF_Options/options/tf-settings.php:3568
+#: inc/Admin/TF_Options/options/tf-settings.php:3594
+#: inc/Admin/TF_Options/options/tf-settings.php:3614
+#: inc/Admin/TF_Options/options/tf-settings.php:3640
+#: inc/Admin/TF_Options/options/tf-settings.php:3660
+#: inc/Admin/TF_Options/options/tf-settings.php:3686
+#: inc/Admin/TF_Options/options/tf-settings.php:3706
+#: inc/Admin/TF_Options/options/tf-settings.php:3746
+#: inc/Admin/TF_Options/options/tf-settings.php:3766
+#: inc/Admin/TF_Options/options/tf-settings.php:3792
+#: inc/Admin/TF_Options/options/tf-settings.php:3812
+#: inc/Admin/TF_Options/options/tf-settings.php:3838
+#: inc/Admin/TF_Options/options/tf-settings.php:3858
+#: inc/Admin/TF_Options/options/tf-settings.php:3884
+#: inc/Admin/TF_Options/options/tf-settings.php:3904
+#: inc/Admin/TF_Options/options/tf-settings.php:3944
+#: inc/Admin/TF_Options/options/tf-settings.php:4405
 #: inc/App/Template_Builder.php:303 inc/App/Template_Builder.php:785
 #: inc/App/Widgets/Elementor/Widgets/TF_Apartment_Locations.php:143
 #: inc/App/Widgets/Elementor/Widgets/TF_Hotel_Locations.php:142
@@ -2328,6 +2359,21 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:105
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:420
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:580
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:660
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:780
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:940
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1020
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1140
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1300
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1380
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1491
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1679
+msgid "Enter a Title"
+msgstr ""
+
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:110
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:425
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:585
@@ -2347,8 +2393,27 @@ msgstr ""
 msgid "Subtitle"
 msgstr ""
 
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:111
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:426
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:586
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:669
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:786
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:946
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1029
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1146
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1306
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1389
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1497
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1685
+msgid "Enter a Subtitle"
+msgstr ""
+
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:118
 msgid "Classes"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:119
+msgid "Input classes with space"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:124
@@ -2390,6 +2455,13 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:135
 #: inc/App/Widgets/Elementor/Widgets/TF_Search_horizontal.php:134
 msgid "Tour Tab Title"
+msgstr ""
+
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:136
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:142
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:148
+#: inc/Admin/TF_Options/classes/TF_Shortcodes.php:154
+msgid "Input the title here."
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:141
@@ -3122,6 +3194,10 @@ msgstr ""
 msgid "Insert"
 msgstr ""
 
+#: inc/Admin/TF_Options/fields/image/TF_image.php:25
+msgid "Upload"
+msgstr ""
+
 #: inc/Admin/TF_Options/fields/map/TF_map.php:22
 msgid "Search Address..."
 msgstr ""
@@ -3148,8 +3224,8 @@ msgstr ""
 #: inc/Admin/TF_Options/options/tf-settings.php:2985
 #: inc/Admin/TF_Options/options/tf-settings.php:3019
 #: inc/Admin/TF_Options/options/tf-settings.php:3059
-#: inc/Admin/TF_Options/options/tf-settings.php:4478
-#: inc/Admin/TF_Options/options/tf-settings.php:4719
+#: inc/Admin/TF_Options/options/tf-settings.php:4480
+#: inc/Admin/TF_Options/options/tf-settings.php:4721
 #: inc/App/Template_Builder.php:81 inc/Core/Post_Type.php:33
 msgid "Add New"
 msgstr ""
@@ -3157,6 +3233,14 @@ msgstr ""
 #. translators: %s: Post type label
 #. translators: %s: post type singular name
 #. translators: %s: taxonomy singular name
+
+#: inc/Admin/TF_Options/fields/select2/TF_select2.php:108
+msgid "Parent"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/select2/TF_select2.php:110
+msgid "--select--"
+msgstr ""
 
 #: inc/Admin/TF_Options/fields/select2/TF_select2.php:138
 #: inc/Core/Post_Type.php:35 inc/Core/Post_Type.php:113
@@ -3573,8 +3657,8 @@ msgstr ""
 #: inc/Admin/TF_Options/options/tf-settings.php:817
 #: inc/Admin/TF_Options/options/tf-settings.php:2978
 #: inc/Admin/TF_Options/options/tf-settings.php:3050
-#: inc/Admin/TF_Options/options/tf-settings.php:3090 inc/App/TF_Review.php:305
-#: inc/App/TF_Review.php:325 inc/App/TF_Review.php:346
+#: inc/Admin/TF_Options/options/tf-settings.php:3090 inc/App/TF_Review.php:306
+#: inc/App/TF_Review.php:326 inc/App/TF_Review.php:347
 #: inc/Classes/Apartment/Apartment.php:383
 #: inc/Classes/Apartment/Apartment.php:632
 #: inc/Classes/Apartment/Apartment.php:1028
@@ -4097,7 +4181,7 @@ msgstr ""
 #: inc/Admin/TF_Options/options/tf-settings.php:476
 #: inc/Admin/TF_Options/options/tf-settings.php:636
 #: inc/Admin/TF_Options/options/tf-settings.php:797
-#: inc/Admin/TF_Options/options/tf-settings.php:4449
+#: inc/Admin/TF_Options/options/tf-settings.php:4451
 #: templates/template-parts/car/design-1.php:63
 #: templates/template-parts/car/design-1.php:279
 msgid "Description"
@@ -4521,13 +4605,6 @@ msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:197
 msgid "Price Type"
-msgstr ""
-
-#: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:199
-#: inc/Classes/Hotel/Hotel.php:3538 inc/Classes/Hotel/Hotel.php:3587
-#: inc/Classes/Hotel/Hotel.php:3636
-#: templates/template-parts/car/design-1/car-info.php:140
-msgid "Free"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:200
@@ -4986,7 +5063,7 @@ msgid "Instructions Content"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:842
-#: inc/Admin/TF_Options/options/tf-settings.php:3990
+#: inc/Admin/TF_Options/options/tf-settings.php:3992
 msgid "Cancellation"
 msgstr ""
 
@@ -5361,6 +5438,11 @@ msgstr ""
 msgid "If you wish to provide additional services that are not included in your current hotel package, you can list them here."
 msgstr ""
 
+
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:376
+msgid "Offer Hotel Extras"
+msgstr ""
+
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:386
 msgid "Are you interested in enriching your hotel offerings with exciting services? With our Pro package, you can easily add exciting activities such as paragliding, along with meals and hotel accommodations, through our <b>Hotel Extra Services</b>. This feature allows you to customize and expand your services as much as you want, providing a better experience for your customers. <a href=\"https://tourfic.com/\" target=\"_blank\">Upgrade to our Pro package today to take advantage of these fantastic options!</a>"
 msgstr ""
@@ -5501,6 +5583,10 @@ msgstr ""
 msgid "This text will appear as the heading of the Reviews section on the frontend."
 msgstr ""
 
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:12
+msgid "Room Settings"
+msgstr ""
+
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:25
 msgid "These are some common settings specific to this Room"
 msgstr ""
@@ -5600,8 +5686,8 @@ msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:150
 #: inc/Admin/TF_Options/options/tf-settings.php:2655
-#: inc/Admin/TF_Options/options/tf-settings.php:4507
-#: inc/Admin/TF_Options/options/tf-settings.php:4748
+#: inc/Admin/TF_Options/options/tf-settings.php:4509
+#: inc/Admin/TF_Options/options/tf-settings.php:4750
 msgid "Select"
 msgstr ""
 
@@ -6172,7 +6258,7 @@ msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:715
 #: inc/Admin/TF_Options/options/tf-settings.php:1551
-#: inc/Admin/TF_Options/options/tf-settings.php:4197
+#: inc/Admin/TF_Options/options/tf-settings.php:4199
 msgid "Itinerary Downloader Settings"
 msgstr ""
 
@@ -6413,8 +6499,8 @@ msgstr ""
 #: inc/Admin/TF_Options/options/tf-settings.php:274
 #: inc/Admin/TF_Options/options/tf-settings.php:2966
 #: inc/Admin/TF_Options/options/tf-settings.php:3038
-#: inc/Admin/TF_Options/options/tf-settings.php:3078 inc/App/TF_Review.php:293
-#: inc/App/TF_Review.php:313 inc/App/TF_Review.php:334
+#: inc/Admin/TF_Options/options/tf-settings.php:3078 inc/App/TF_Review.php:294
+#: inc/App/TF_Review.php:314 inc/App/TF_Review.php:335
 #: templates/template-parts/hotel/design-2.php:160
 msgid "Facilities"
 msgstr ""
@@ -6863,7 +6949,7 @@ msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:1518
 #: inc/Admin/TF_Options/options/tf-settings.php:1525
-#: inc/Admin/TF_Options/options/tf-settings.php:4097
+#: inc/Admin/TF_Options/options/tf-settings.php:4099
 msgid "Itinerary Settings"
 msgstr ""
 
@@ -7162,7 +7248,7 @@ msgid "View Payout"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:1952
-#: inc/Admin/TF_Options/options/tf-settings.php:3496
+#: inc/Admin/TF_Options/options/tf-settings.php:3498
 msgid "QR Code Verification"
 msgstr ""
 
@@ -7714,8 +7800,8 @@ msgid "Anything confusing?"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2621
-#: inc/Admin/TF_Options/options/tf-settings.php:3730
-#: inc/Admin/TF_Options/options/tf-settings.php:3928
+#: inc/Admin/TF_Options/options/tf-settings.php:3732
+#: inc/Admin/TF_Options/options/tf-settings.php:3930
 msgid "Read Documentation"
 msgstr ""
 
@@ -7728,27 +7814,27 @@ msgid "Design custom registration fields for vendor sign-up. Custom fields are p
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2635
-#: inc/Admin/TF_Options/options/tf-settings.php:4441
-#: inc/Admin/TF_Options/options/tf-settings.php:4487
-#: inc/Admin/TF_Options/options/tf-settings.php:4728
+#: inc/Admin/TF_Options/options/tf-settings.php:4443
+#: inc/Admin/TF_Options/options/tf-settings.php:4489
+#: inc/Admin/TF_Options/options/tf-settings.php:4730
 msgid "Label"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2641
-#: inc/Admin/TF_Options/options/tf-settings.php:4493
-#: inc/Admin/TF_Options/options/tf-settings.php:4734
+#: inc/Admin/TF_Options/options/tf-settings.php:4495
+#: inc/Admin/TF_Options/options/tf-settings.php:4736
 msgid "Space Not allowed (Ex: tf_name)"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2647
-#: inc/Admin/TF_Options/options/tf-settings.php:4500
-#: inc/Admin/TF_Options/options/tf-settings.php:4741
+#: inc/Admin/TF_Options/options/tf-settings.php:4502
+#: inc/Admin/TF_Options/options/tf-settings.php:4743
 msgid "Field Type"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2649
-#: inc/Admin/TF_Options/options/tf-settings.php:4502
-#: inc/Admin/TF_Options/options/tf-settings.php:4743
+#: inc/Admin/TF_Options/options/tf-settings.php:4504
+#: inc/Admin/TF_Options/options/tf-settings.php:4745
 msgid "Text"
 msgstr ""
 
@@ -7761,62 +7847,62 @@ msgid "Textarea"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2653
-#: inc/Admin/TF_Options/options/tf-settings.php:4505
-#: inc/Admin/TF_Options/options/tf-settings.php:4746
+#: inc/Admin/TF_Options/options/tf-settings.php:4507
+#: inc/Admin/TF_Options/options/tf-settings.php:4748
 msgid "Radio"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2654
-#: inc/Admin/TF_Options/options/tf-settings.php:4506
-#: inc/Admin/TF_Options/options/tf-settings.php:4747
+#: inc/Admin/TF_Options/options/tf-settings.php:4508
+#: inc/Admin/TF_Options/options/tf-settings.php:4749
 msgid "Checkbox"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2661
 #: inc/Admin/TF_Options/options/tf-settings.php:2683
 #: inc/Admin/TF_Options/options/tf-settings.php:2705
-#: inc/Admin/TF_Options/options/tf-settings.php:4514
-#: inc/Admin/TF_Options/options/tf-settings.php:4536
-#: inc/Admin/TF_Options/options/tf-settings.php:4558
-#: inc/Admin/TF_Options/options/tf-settings.php:4755
-#: inc/Admin/TF_Options/options/tf-settings.php:4776
-#: inc/Admin/TF_Options/options/tf-settings.php:4797
+#: inc/Admin/TF_Options/options/tf-settings.php:4516
+#: inc/Admin/TF_Options/options/tf-settings.php:4538
+#: inc/Admin/TF_Options/options/tf-settings.php:4560
+#: inc/Admin/TF_Options/options/tf-settings.php:4757
+#: inc/Admin/TF_Options/options/tf-settings.php:4778
+#: inc/Admin/TF_Options/options/tf-settings.php:4799
 msgid "Add New Option"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2662
 #: inc/Admin/TF_Options/options/tf-settings.php:2684
 #: inc/Admin/TF_Options/options/tf-settings.php:2706
-#: inc/Admin/TF_Options/options/tf-settings.php:4515
-#: inc/Admin/TF_Options/options/tf-settings.php:4537
-#: inc/Admin/TF_Options/options/tf-settings.php:4559
-#: inc/Admin/TF_Options/options/tf-settings.php:4756
-#: inc/Admin/TF_Options/options/tf-settings.php:4777
-#: inc/Admin/TF_Options/options/tf-settings.php:4798
+#: inc/Admin/TF_Options/options/tf-settings.php:4517
+#: inc/Admin/TF_Options/options/tf-settings.php:4539
+#: inc/Admin/TF_Options/options/tf-settings.php:4561
+#: inc/Admin/TF_Options/options/tf-settings.php:4758
+#: inc/Admin/TF_Options/options/tf-settings.php:4779
+#: inc/Admin/TF_Options/options/tf-settings.php:4800
 msgid "Option Label"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2669
 #: inc/Admin/TF_Options/options/tf-settings.php:2691
 #: inc/Admin/TF_Options/options/tf-settings.php:2713
-#: inc/Admin/TF_Options/options/tf-settings.php:4522
-#: inc/Admin/TF_Options/options/tf-settings.php:4544
-#: inc/Admin/TF_Options/options/tf-settings.php:4566
-#: inc/Admin/TF_Options/options/tf-settings.php:4762
-#: inc/Admin/TF_Options/options/tf-settings.php:4783
-#: inc/Admin/TF_Options/options/tf-settings.php:4804
+#: inc/Admin/TF_Options/options/tf-settings.php:4524
+#: inc/Admin/TF_Options/options/tf-settings.php:4546
+#: inc/Admin/TF_Options/options/tf-settings.php:4568
+#: inc/Admin/TF_Options/options/tf-settings.php:4764
+#: inc/Admin/TF_Options/options/tf-settings.php:4785
+#: inc/Admin/TF_Options/options/tf-settings.php:4806
 msgid "Field Label"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2674
 #: inc/Admin/TF_Options/options/tf-settings.php:2696
 #: inc/Admin/TF_Options/options/tf-settings.php:2718
-#: inc/Admin/TF_Options/options/tf-settings.php:4527
-#: inc/Admin/TF_Options/options/tf-settings.php:4549
-#: inc/Admin/TF_Options/options/tf-settings.php:4571
-#: inc/Admin/TF_Options/options/tf-settings.php:4767
-#: inc/Admin/TF_Options/options/tf-settings.php:4788
-#: inc/Admin/TF_Options/options/tf-settings.php:4809
+#: inc/Admin/TF_Options/options/tf-settings.php:4529
+#: inc/Admin/TF_Options/options/tf-settings.php:4551
+#: inc/Admin/TF_Options/options/tf-settings.php:4573
+#: inc/Admin/TF_Options/options/tf-settings.php:4769
+#: inc/Admin/TF_Options/options/tf-settings.php:4790
+#: inc/Admin/TF_Options/options/tf-settings.php:4811
 msgid "Field Value"
 msgstr ""
 
@@ -7825,8 +7911,8 @@ msgid "Placeholder"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2732
-#: inc/Admin/TF_Options/options/tf-settings.php:4580
-#: inc/Admin/TF_Options/options/tf-settings.php:4818
+#: inc/Admin/TF_Options/options/tf-settings.php:4582
+#: inc/Admin/TF_Options/options/tf-settings.php:4820
 msgid "Required Field ?"
 msgstr ""
 
@@ -8018,31 +8104,31 @@ msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2963
 #: inc/Admin/TF_Options/options/tf-settings.php:3035
-#: inc/Admin/TF_Options/options/tf-settings.php:3075 inc/App/TF_Review.php:290
-#: inc/App/TF_Review.php:310 inc/App/TF_Review.php:331
+#: inc/Admin/TF_Options/options/tf-settings.php:3075 inc/App/TF_Review.php:291
+#: inc/App/TF_Review.php:311 inc/App/TF_Review.php:332
 msgid "Staff"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2969
 #: inc/Admin/TF_Options/options/tf-settings.php:3041
-#: inc/Admin/TF_Options/options/tf-settings.php:3081 inc/App/TF_Review.php:296
-#: inc/App/TF_Review.php:316 inc/App/TF_Review.php:337
+#: inc/Admin/TF_Options/options/tf-settings.php:3081 inc/App/TF_Review.php:297
+#: inc/App/TF_Review.php:317 inc/App/TF_Review.php:338
 msgid "Cleanliness"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2972
 #: inc/Admin/TF_Options/options/tf-settings.php:3044
-#: inc/Admin/TF_Options/options/tf-settings.php:3084 inc/App/TF_Review.php:299
-#: inc/App/TF_Review.php:319 inc/App/TF_Review.php:340
+#: inc/Admin/TF_Options/options/tf-settings.php:3084 inc/App/TF_Review.php:300
+#: inc/App/TF_Review.php:320 inc/App/TF_Review.php:341
 msgid "Comfort"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2975
 #: inc/Admin/TF_Options/options/tf-settings.php:3008
 #: inc/Admin/TF_Options/options/tf-settings.php:3047
-#: inc/Admin/TF_Options/options/tf-settings.php:3087 inc/App/TF_Review.php:302
-#: inc/App/TF_Review.php:322 inc/App/TF_Review.php:343
-#: inc/App/TF_Review.php:358
+#: inc/Admin/TF_Options/options/tf-settings.php:3087 inc/App/TF_Review.php:303
+#: inc/App/TF_Review.php:323 inc/App/TF_Review.php:344
+#: inc/App/TF_Review.php:359
 msgid "Value for money"
 msgstr ""
 
@@ -8054,15 +8140,15 @@ msgstr ""
 msgid "Design customer review fields for tours. Custom fields are permitted."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3002 inc/App/TF_Review.php:352
+#: inc/Admin/TF_Options/options/tf-settings.php:3002 inc/App/TF_Review.php:353
 msgid "Guide"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3005 inc/App/TF_Review.php:355
+#: inc/Admin/TF_Options/options/tf-settings.php:3005 inc/App/TF_Review.php:356
 msgid "Transportation"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3011 inc/App/TF_Review.php:361
+#: inc/Admin/TF_Options/options/tf-settings.php:3011 inc/App/TF_Review.php:362
 msgid "Safety"
 msgstr ""
 
@@ -8203,6 +8289,7 @@ msgid "Email Settings"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:3265
+#: inc/Admin/TF_Options/options/tf-settings.php:3272
 msgid "Email Templates"
 msgstr ""
 
@@ -8318,802 +8405,827 @@ msgstr ""
 msgid "Email Shortcodes"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3415
-msgid "You can use the following placeholders in the email body:"
+#: inc/Admin/TF_Options/options/tf-settings.php:3416
+msgid ""
+"You can use the following placeholders in the email body:<br><br>\n"
+"\t\t\t\t\t\t\t<strong>{order_id}</strong> : To display the booking ID.<br>\n"
+"\t\t\t\t\t\t\t<strong>{booking_id}</strong> : To display the booking ID.<br>\n"
+"\t\t\t\t\t\t\t<strong>{booking_date}</strong> : To display the booking date.<br>\n"
+"\t\t\t\t\t\t\t<strong>{fullname}</strong> : To display the customer name.<br>\n"
+"\t\t\t\t\t\t\t<strong>{user_email}</strong> : To display the customer email.<br>\n"
+"\t\t\t\t\t\t\t<strong>{phone}</strong> : To display the customer phone.<br>\n"
+"\t\t\t\t\t\t\t<strong>{address}</strong> : To display the customer address.<br>\n"
+"\t\t\t\t\t\t\t<strong>{city}</strong> : To display the customer city.<br>\n"
+"\t\t\t\t\t\t\t<strong>{country}</strong> : To display the customer country.<br>\n"
+"\t\t\t\t\t\t\t<strong>{zip}</strong> : To display the customer zip.<br>\n"
+"\t\t\t\t\t\t\t<strong>{booking_details}</strong> : To display the booking details.<br>\n"
+"\t\t\t\t\t\t\t<strong>{shipping_address}</strong> : To display the shipping address.<br>\n"
+"\t\t\t\t\t\t\t<strong>{shipping_method}</strong> : To display the shipping method.<br>\n"
+"\t\t\t\t\t\t\t<strong>{shipping_city}</strong> : To display the shipping city.<br>\n"
+"\t\t\t\t\t\t\t<strong>{shipping_country}</strong> : To display the shipping country.<br>\n"
+"\t\t\t\t\t\t\t<strong>{shipping_zip}</strong> : To display the shipping zip.<br>\n"
+"\t\t\t\t\t\t\t<strong>{order_total}</strong> : To display the total price.<br>\n"
+"\t\t\t\t\t\t\t<strong>{order_subtotal}</strong> : To display the subtotal price.<br>\n"
+"\t\t\t\t\t\t\t<strong>{order_date}</strong> : To display the order date.<br>\n"
+"\t\t\t\t\t\t\t<strong>{order_status}</strong> : To display the order status.<br>\n"
+"\t\t\t\t\t\t\t<strong>{payment_method}</strong> : To display the payment method.<br>\n"
+"\t\t\t\t\t\t\t<strong>{booking_url}</strong> : To display the booking URL.<br>\n"
+"\t\t\t\t\t\t\t<strong>{site_name}</strong> : To display the site name.<br>\n"
+"\t\t\t\t\t\t\t<strong>{site_url}</strong> : To display the site URL.<br>"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3449
+#: inc/Admin/TF_Options/options/tf-settings.php:3451
 msgid "QR Code"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3456
+#: inc/Admin/TF_Options/options/tf-settings.php:3458
 msgid "Tour QR Code"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3457
+#: inc/Admin/TF_Options/options/tf-settings.php:3459
 msgid "Configure the QR code generation for your tours here. This will allow for the creation of unique QR codes that can be scanned for tour information or check-ins."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3464
-#: inc/Admin/TF_Options/options/tf-settings.php:4274
+#: inc/Admin/TF_Options/options/tf-settings.php:3466
+#: inc/Admin/TF_Options/options/tf-settings.php:4276
 msgid "Company Logo"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3470
+#: inc/Admin/TF_Options/options/tf-settings.php:3472
 msgid "QR Code Watermark"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3476
+#: inc/Admin/TF_Options/options/tf-settings.php:3478
 msgid "Voucher Title"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3483
+#: inc/Admin/TF_Options/options/tf-settings.php:3485
 msgid "Voucher ID Prefix"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3489
+#: inc/Admin/TF_Options/options/tf-settings.php:3491
 msgid "Voucher Policy"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3498
+#: inc/Admin/TF_Options/options/tf-settings.php:3500
 msgid "1 Step"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3499
+#: inc/Admin/TF_Options/options/tf-settings.php:3501
 msgid "2 Steps"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3514
+#: inc/Admin/TF_Options/options/tf-settings.php:3516
 msgid "Integration"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3521
+#: inc/Admin/TF_Options/options/tf-settings.php:3523
 msgid "Tourfic Integration Settings"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3522
+#: inc/Admin/TF_Options/options/tf-settings.php:3524
 msgid "For integration with other systems, we currently support connections via Pabbly, Zapier and Google Calendar only."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3532
+#: inc/Admin/TF_Options/options/tf-settings.php:3534
 msgid "Pabbly Setup"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3537
+#: inc/Admin/TF_Options/options/tf-settings.php:3539
 msgid "Hotel Integration"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3543
+#: inc/Admin/TF_Options/options/tf-settings.php:3545
 msgid "Enable Pabbly for Hotel?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3544
+#: inc/Admin/TF_Options/options/tf-settings.php:3546
 msgid "You have the ability to integrate Pabbly with the creation and updating of hotels in our system."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3553
-#: inc/Admin/TF_Options/options/tf-settings.php:3751
+#: inc/Admin/TF_Options/options/tf-settings.php:3555
+#: inc/Admin/TF_Options/options/tf-settings.php:3753
 msgid "Hotel Webhook"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3554
+#: inc/Admin/TF_Options/options/tf-settings.php:3556
 msgid "Enter Your Pabbly Webhook for Hotels."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3563
+#: inc/Admin/TF_Options/options/tf-settings.php:3565
 msgid "Enable Pabbly for Hotel Enquiry Form?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3564
+#: inc/Admin/TF_Options/options/tf-settings.php:3566
 msgid "Connect Pabbly with Hotel Enquiry Form."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3573
-#: inc/Admin/TF_Options/options/tf-settings.php:3771
+#: inc/Admin/TF_Options/options/tf-settings.php:3575
+#: inc/Admin/TF_Options/options/tf-settings.php:3773
 msgid "Hotel Enquiry Form Webhook"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3574
+#: inc/Admin/TF_Options/options/tf-settings.php:3576
 msgid "Enter Your Pabbly Webhook for Hotel Enquiry Form."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3583
-#: inc/Admin/TF_Options/options/tf-settings.php:3781
+#: inc/Admin/TF_Options/options/tf-settings.php:3585
+#: inc/Admin/TF_Options/options/tf-settings.php:3783
 msgid "Tour Integration"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3589
+#: inc/Admin/TF_Options/options/tf-settings.php:3591
 msgid "Enable Pabbly for Tour?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3590
+#: inc/Admin/TF_Options/options/tf-settings.php:3592
 msgid "You have the ability to integrate Pabbly with the creation and updating of tours in our system."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3599
-#: inc/Admin/TF_Options/options/tf-settings.php:3797
+#: inc/Admin/TF_Options/options/tf-settings.php:3601
+#: inc/Admin/TF_Options/options/tf-settings.php:3799
 msgid "Tour Webhook"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3600
+#: inc/Admin/TF_Options/options/tf-settings.php:3602
 msgid "Enter Your Pabbly Webhook for Tour."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3609
+#: inc/Admin/TF_Options/options/tf-settings.php:3611
 msgid "Enable Pabbly for Tour Enquiry Form?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3610
+#: inc/Admin/TF_Options/options/tf-settings.php:3612
 msgid "Connect Pabbly with Tour Enquiry Form."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3619
-#: inc/Admin/TF_Options/options/tf-settings.php:3817
+#: inc/Admin/TF_Options/options/tf-settings.php:3621
+#: inc/Admin/TF_Options/options/tf-settings.php:3819
 msgid "Tour Enquiry Form Webhook"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3620
+#: inc/Admin/TF_Options/options/tf-settings.php:3622
 msgid "Enter Your Pabbly Webhook for Tour Enquiry Form."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3629
-#: inc/Admin/TF_Options/options/tf-settings.php:3827
+#: inc/Admin/TF_Options/options/tf-settings.php:3631
+#: inc/Admin/TF_Options/options/tf-settings.php:3829
 msgid "Apartment Integration"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3635
+#: inc/Admin/TF_Options/options/tf-settings.php:3637
 msgid "Enable Pabbly for Apartment?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3636
+#: inc/Admin/TF_Options/options/tf-settings.php:3638
 msgid "You have the ability to integrate Pabbly with the creation and updating of apartments in our system."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3645
-#: inc/Admin/TF_Options/options/tf-settings.php:3843
+#: inc/Admin/TF_Options/options/tf-settings.php:3647
+#: inc/Admin/TF_Options/options/tf-settings.php:3845
 msgid "Apartment Webhook"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3646
+#: inc/Admin/TF_Options/options/tf-settings.php:3648
 msgid "Enter Your Pabbly Webhook for Apartment."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3655
+#: inc/Admin/TF_Options/options/tf-settings.php:3657
 msgid "Enable Pabbly for Apartment Enquiry Form?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3656
+#: inc/Admin/TF_Options/options/tf-settings.php:3658
 msgid "Connect Pabbly with Apartment Enquiry Form."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3665
-#: inc/Admin/TF_Options/options/tf-settings.php:3863
+#: inc/Admin/TF_Options/options/tf-settings.php:3667
+#: inc/Admin/TF_Options/options/tf-settings.php:3865
 msgid "Apartment Enquiry Form Webhook"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3666
+#: inc/Admin/TF_Options/options/tf-settings.php:3668
 msgid "Enter Your Pabbly Webhook for Apartment Enquiry Form."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3675
-#: inc/Admin/TF_Options/options/tf-settings.php:3873
+#: inc/Admin/TF_Options/options/tf-settings.php:3677
+#: inc/Admin/TF_Options/options/tf-settings.php:3875
 msgid "WooCommerce Integration"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3681
+#: inc/Admin/TF_Options/options/tf-settings.php:3683
 msgid "Enable Pabbly for Booking?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3682
+#: inc/Admin/TF_Options/options/tf-settings.php:3684
 msgid "Connect Pabbly with WooCommerce Booking."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3691
-#: inc/Admin/TF_Options/options/tf-settings.php:3889
+#: inc/Admin/TF_Options/options/tf-settings.php:3693
+#: inc/Admin/TF_Options/options/tf-settings.php:3891
 msgid "Booking Webhook"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3692
+#: inc/Admin/TF_Options/options/tf-settings.php:3694
 msgid "Enter Your Pabbly Webhook for Booking."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3701
+#: inc/Admin/TF_Options/options/tf-settings.php:3703
 msgid "Enable Pabbly for New Customer?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3702
+#: inc/Admin/TF_Options/options/tf-settings.php:3704
 msgid "Connect Pabbly with WooCommerce New Customer."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3711
-#: inc/Admin/TF_Options/options/tf-settings.php:3909
+#: inc/Admin/TF_Options/options/tf-settings.php:3713
+#: inc/Admin/TF_Options/options/tf-settings.php:3911
 msgid "New Customer Webhook"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3712
+#: inc/Admin/TF_Options/options/tf-settings.php:3714
 msgid "Enter Your Pabbly Webhook for New Customer."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3722
+#: inc/Admin/TF_Options/options/tf-settings.php:3724
 msgid "Zapier Setup"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3730
-#: inc/Admin/TF_Options/options/tf-settings.php:3928
+#: inc/Admin/TF_Options/options/tf-settings.php:3732
+#: inc/Admin/TF_Options/options/tf-settings.php:3930
 msgid "Anything confusing? "
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3741
+#: inc/Admin/TF_Options/options/tf-settings.php:3743
 msgid "Enable Zapier for Hotel?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3742
+#: inc/Admin/TF_Options/options/tf-settings.php:3744
 msgid "You have the ability to integrate Zapier with the creation and updating of hotels in our system."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3752
+#: inc/Admin/TF_Options/options/tf-settings.php:3754
 msgid "Enter Your Zapier Webhook for Hotels."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3761
+#: inc/Admin/TF_Options/options/tf-settings.php:3763
 msgid "Enable Zapier for Hotel Enquiry Form?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3762
+#: inc/Admin/TF_Options/options/tf-settings.php:3764
 msgid "Connect Zapier with Hotel Enquiry Form."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3772
+#: inc/Admin/TF_Options/options/tf-settings.php:3774
 msgid "Enter Your Zapier Webhook for Hotel Enquiry Form."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3787
+#: inc/Admin/TF_Options/options/tf-settings.php:3789
 msgid "Enable Zapier for Tour?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3788
+#: inc/Admin/TF_Options/options/tf-settings.php:3790
 msgid "You have the ability to integrate Zapier with the creation and updating of tours in our system."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3798
+#: inc/Admin/TF_Options/options/tf-settings.php:3800
 msgid "Enter Your Zapier Webhook for Tours."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3807
+#: inc/Admin/TF_Options/options/tf-settings.php:3809
 msgid "Enable Zapier for Tour Enquiry Form?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3808
+#: inc/Admin/TF_Options/options/tf-settings.php:3810
 msgid "Connect Zapier with Tour Enquiry Form."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3818
+#: inc/Admin/TF_Options/options/tf-settings.php:3820
 msgid "Enter Your Zapier Webhook for Tour Enquiry Form."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3833
+#: inc/Admin/TF_Options/options/tf-settings.php:3835
 msgid "Enable Zapier for Apartment?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3834
+#: inc/Admin/TF_Options/options/tf-settings.php:3836
 msgid "You have the ability to integrate Zapier with the creation and updating of apartments in our system."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3844
+#: inc/Admin/TF_Options/options/tf-settings.php:3846
 msgid "Enter Your Zapier Webhook for Apartment."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3853
+#: inc/Admin/TF_Options/options/tf-settings.php:3855
 msgid "Enable Zapier for Apartment Enquiry Form?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3854
+#: inc/Admin/TF_Options/options/tf-settings.php:3856
 msgid "Connect Zapier with Apartment Enquiry Form."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3864
+#: inc/Admin/TF_Options/options/tf-settings.php:3866
 msgid "Enter Your Zapier Webhook for Apartment Enquiry Form."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3879
+#: inc/Admin/TF_Options/options/tf-settings.php:3881
 msgid "Enable Zapier for Booking?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3880
+#: inc/Admin/TF_Options/options/tf-settings.php:3882
 msgid "Connect Zapier with WooCommerce Booking."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3890
+#: inc/Admin/TF_Options/options/tf-settings.php:3892
 msgid "Enter Your Zapier Webhook for Booking."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3899
+#: inc/Admin/TF_Options/options/tf-settings.php:3901
 msgid "Enable Zapier for New Customer?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3900
+#: inc/Admin/TF_Options/options/tf-settings.php:3902
 msgid "Connect Zapier with WooCommerce New Customer."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3910
+#: inc/Admin/TF_Options/options/tf-settings.php:3912
 msgid "Enter Your Zapier Webhook for New Customer."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3920
+#: inc/Admin/TF_Options/options/tf-settings.php:3922
 msgid "Google Calendar Setup"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3933
+#: inc/Admin/TF_Options/options/tf-settings.php:3935
 msgid "Google Calendar Integration"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3939
+#: inc/Admin/TF_Options/options/tf-settings.php:3941
 msgid "Enable Google Calendar for Booking?"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3940
+#: inc/Admin/TF_Options/options/tf-settings.php:3942
 msgid "Connect Google Calendar with WooCommerce Booking."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3949
+#: inc/Admin/TF_Options/options/tf-settings.php:3951
 msgid "Client Id"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3950
+#: inc/Admin/TF_Options/options/tf-settings.php:3952
 msgid "Enter Your Google Calendar Client Id for Booking."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3959
+#: inc/Admin/TF_Options/options/tf-settings.php:3961
 msgid "Secret Key"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3960
+#: inc/Admin/TF_Options/options/tf-settings.php:3962
 msgid "Enter Your Google Calendar Secret Key for Booking."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3969
+#: inc/Admin/TF_Options/options/tf-settings.php:3971
 msgid "Redirect Url"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3970
+#: inc/Admin/TF_Options/options/tf-settings.php:3972
 msgid "Enter Your Google Calendar Redirect Url for Booking."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:3997
+#: inc/Admin/TF_Options/options/tf-settings.php:3999
 msgid "Cancellation Settings"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4003
+#: inc/Admin/TF_Options/options/tf-settings.php:4005
 msgid "Select Time Zone"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4004
+#: inc/Admin/TF_Options/options/tf-settings.php:4006
 msgid "Choose your time-zone"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4006
+#: inc/Admin/TF_Options/options/tf-settings.php:4008
 msgid "(UTC-05:00) New York"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4007
+#: inc/Admin/TF_Options/options/tf-settings.php:4009
 msgid "(UTC+06:00) Dhaka"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4021
+#: inc/Admin/TF_Options/options/tf-settings.php:4023
 msgid "Hotel Check-in Time"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4022
+#: inc/Admin/TF_Options/options/tf-settings.php:4024
 msgid "Choose the hotel check-in time."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4036
+#: inc/Admin/TF_Options/options/tf-settings.php:4038
 msgid "Tour Check-in Time"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4037
+#: inc/Admin/TF_Options/options/tf-settings.php:4039
 msgid "Choose the tour check-in time."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4051
+#: inc/Admin/TF_Options/options/tf-settings.php:4053
 msgid "Apartment Check-in Time"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4052
+#: inc/Admin/TF_Options/options/tf-settings.php:4054
 msgid "Choose the apartment check-in time."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4066
-#: inc/Admin/TF_Options/options/tf-settings.php:4072
+#: inc/Admin/TF_Options/options/tf-settings.php:4068
+#: inc/Admin/TF_Options/options/tf-settings.php:4074
 msgid "Import/Export"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4084
+#: inc/Admin/TF_Options/options/tf-settings.php:4086
 msgid "Pro Options"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4090
+#: inc/Admin/TF_Options/options/tf-settings.php:4092
 msgid "Tour Itinerary Settings"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4112
+#: inc/Admin/TF_Options/options/tf-settings.php:4114
 msgid "You can create your own Itinerary using Tourfic's Itinerary builder. The builder can be found on Single Tour Settings"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4117
+#: inc/Admin/TF_Options/options/tf-settings.php:4119
 msgid "Create Custom Itinerary options"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4118
+#: inc/Admin/TF_Options/options/tf-settings.php:4120
 msgid "Add New Options"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4124
+#: inc/Admin/TF_Options/options/tf-settings.php:4126
 msgid "Field Title"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4129
+#: inc/Admin/TF_Options/options/tf-settings.php:4131
 msgid "Field Icon"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4136
+#: inc/Admin/TF_Options/options/tf-settings.php:4138
 msgid "Add New Meal"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4137
+#: inc/Admin/TF_Options/options/tf-settings.php:4139
 msgid "Include Meal"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4143
+#: inc/Admin/TF_Options/options/tf-settings.php:4145
 msgid "Meal name"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4149
+#: inc/Admin/TF_Options/options/tf-settings.php:4151
 msgid "Elevation Input"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4152
+#: inc/Admin/TF_Options/options/tf-settings.php:4154
 msgid "Meter"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4153
+#: inc/Admin/TF_Options/options/tf-settings.php:4155
 msgid "Feet"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4162
+#: inc/Admin/TF_Options/options/tf-settings.php:4164
 msgid "Show Chart on Trip Page"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4169
+#: inc/Admin/TF_Options/options/tf-settings.php:4171
 msgid "Always Show All Itinerary"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4176
+#: inc/Admin/TF_Options/options/tf-settings.php:4178
 msgid "Show X-Axis"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4183
+#: inc/Admin/TF_Options/options/tf-settings.php:4185
 msgid "Show Y-Axis"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4190
+#: inc/Admin/TF_Options/options/tf-settings.php:4192
 msgid "Show line Graph"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4204
+#: inc/Admin/TF_Options/options/tf-settings.php:4206
 msgid "Enable Itinerary Downloader"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4205
+#: inc/Admin/TF_Options/options/tf-settings.php:4207
 msgid "Turn this on to give customers the option to download the itinerary plan as a PDF."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4211
+#: inc/Admin/TF_Options/options/tf-settings.php:4213
 msgid "Tour Itinerary Downloader Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4216
+#: inc/Admin/TF_Options/options/tf-settings.php:4218
 msgid "Itinerary Downloader Title"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4224
+#: inc/Admin/TF_Options/options/tf-settings.php:4226
 msgid "Itinerary Downloader Description"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4232
+#: inc/Admin/TF_Options/options/tf-settings.php:4234
 msgid "Itinerary Downloader Button Text"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4240
+#: inc/Admin/TF_Options/options/tf-settings.php:4242
 msgid "Thumbnail Settings in PDF"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4241
+#: inc/Admin/TF_Options/options/tf-settings.php:4243
 msgid "These settings will adjust the height and width of the main tour image in the itinerary."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4246
+#: inc/Admin/TF_Options/options/tf-settings.php:4248
 msgid "Image Thumbnail Height"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4247
+#: inc/Admin/TF_Options/options/tf-settings.php:4249
 msgid "Adjust the height of the tour image in the itinerary. Leave blank to use the image in its full size."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4254
+#: inc/Admin/TF_Options/options/tf-settings.php:4256
 msgid "Image Thumbnail Width"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4255
+#: inc/Admin/TF_Options/options/tf-settings.php:4257
 msgid "Adjust the width of the tour image in the itinerary. Leave blank to use the image in its full size."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4262
+#: inc/Admin/TF_Options/options/tf-settings.php:4264
 msgid "Default Company Info in PDF"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4267
+#: inc/Admin/TF_Options/options/tf-settings.php:4269
 msgid "If no company information is specified in the Single Tour Settings, this information will be used by default."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4280
+#: inc/Admin/TF_Options/options/tf-settings.php:4282
 msgid "Company Description"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4286
+#: inc/Admin/TF_Options/options/tf-settings.php:4288
 msgid "Company Email Address"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4293
+#: inc/Admin/TF_Options/options/tf-settings.php:4295
 msgid "Company Address"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4300
+#: inc/Admin/TF_Options/options/tf-settings.php:4302
 msgid "Company Phone"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4306
+#: inc/Admin/TF_Options/options/tf-settings.php:4308
 msgid "Talk to Expert Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4312
+#: inc/Admin/TF_Options/options/tf-settings.php:4314
 msgid "Enable Talk To Expert Section in PDF"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4319
+#: inc/Admin/TF_Options/options/tf-settings.php:4321
 msgid "Talk to Expert - Label"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4328
+#: inc/Admin/TF_Options/options/tf-settings.php:4330
 msgid "Expert Name"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4338
+#: inc/Admin/TF_Options/options/tf-settings.php:4340
 msgid "Expert Email Address"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4348
+#: inc/Admin/TF_Options/options/tf-settings.php:4350
 msgid "Expert Phone Address"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4359
+#: inc/Admin/TF_Options/options/tf-settings.php:4361
 msgid "Expert Avatar Image"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4367
+#: inc/Admin/TF_Options/options/tf-settings.php:4369
 msgid "Enable Viber Contact"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4377
+#: inc/Admin/TF_Options/options/tf-settings.php:4379
 msgid "Enable WhatsApp Contact"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4385
+#: inc/Admin/TF_Options/options/tf-settings.php:4387
 msgid "PDF Downloader Font Support"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4386
+#: inc/Admin/TF_Options/options/tf-settings.php:4388
 msgid "If your site's language is not English, then upload your language font. Otherwise, your Downloader PDF may not work properly."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4391
+#: inc/Admin/TF_Options/options/tf-settings.php:4393
 msgid "Upload Fonts"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4401
+#: inc/Admin/TF_Options/options/tf-settings.php:4403
 msgid "Enable Itinerary Map"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4404
+#: inc/Admin/TF_Options/options/tf-settings.php:4406
 msgid "To show the itinerary on a map, it is necessary to add your Google Maps API key in the settings under Miscellaneous -> Map."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4411
+#: inc/Admin/TF_Options/options/tf-settings.php:4413
 msgid "Map Mode"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4413
+#: inc/Admin/TF_Options/options/tf-settings.php:4415
 msgid "Driving"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4414
+#: inc/Admin/TF_Options/options/tf-settings.php:4416
 msgid "Walking"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4415
+#: inc/Admin/TF_Options/options/tf-settings.php:4417
 msgid "Bycycling"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4426
+#: inc/Admin/TF_Options/options/tf-settings.php:4428
 msgid "Tour Partial Payment"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4433
+#: inc/Admin/TF_Options/options/tf-settings.php:4435
 msgid "Settings for Partial Payment"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4434
+#: inc/Admin/TF_Options/options/tf-settings.php:4436
 msgid "This option will appear as Popup during Booking."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4442
-#: inc/Admin/TF_Options/options/tf-settings.php:4443
+#: inc/Admin/TF_Options/options/tf-settings.php:4444
+#: inc/Admin/TF_Options/options/tf-settings.php:4445
 msgid "Partial payment of {amount} on total"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4451
+#: inc/Admin/TF_Options/options/tf-settings.php:4453
 msgid "You have the option to make a partial payment to secure your tour booking. The remaining balance can then be settled after the tour is completed."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4456
+#: inc/Admin/TF_Options/options/tf-settings.php:4458
 msgid "Use shortcode <code>{amount}</code> to show percentage amount in Label"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4463
+#: inc/Admin/TF_Options/options/tf-settings.php:4465
 msgid "Tour Without Payment"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4470
-#: inc/Admin/TF_Options/options/tf-settings.php:4711
+#: inc/Admin/TF_Options/options/tf-settings.php:4472
+#: inc/Admin/TF_Options/options/tf-settings.php:4713
 msgid "Settings for Without Payment Option"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4471
-#: inc/Admin/TF_Options/options/tf-settings.php:4712
+#: inc/Admin/TF_Options/options/tf-settings.php:4473
+#: inc/Admin/TF_Options/options/tf-settings.php:4714
 msgid "Activating the \"Without Payment\" booking option will enable the use of this section."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4479
-#: inc/Admin/TF_Options/options/tf-settings.php:4720
+#: inc/Admin/TF_Options/options/tf-settings.php:4481
+#: inc/Admin/TF_Options/options/tf-settings.php:4722
 msgid "Fields for Booking Confirmation"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4480
-#: inc/Admin/TF_Options/options/tf-settings.php:4721
+#: inc/Admin/TF_Options/options/tf-settings.php:4482
+#: inc/Admin/TF_Options/options/tf-settings.php:4723
 msgid "Custom fields allowed"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4587
-#: inc/Admin/TF_Options/options/tf-settings.php:4825
+#: inc/Admin/TF_Options/options/tf-settings.php:4589
+#: inc/Admin/TF_Options/options/tf-settings.php:4827
 #: inc/Classes/Hotel/Hotel.php:3319 inc/Classes/Tour/Tour.php:2248
 #: inc/Core/TF_Backend_Booking.php:45 inc/functions/functions-car.php:859
 msgid "First Name"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4588
-#: inc/Admin/TF_Options/options/tf-settings.php:4826
+#: inc/Admin/TF_Options/options/tf-settings.php:4590
+#: inc/Admin/TF_Options/options/tf-settings.php:4828
 msgid "tf_first_name"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4593
-#: inc/Admin/TF_Options/options/tf-settings.php:4831
+#: inc/Admin/TF_Options/options/tf-settings.php:4595
+#: inc/Admin/TF_Options/options/tf-settings.php:4833
 #: inc/Classes/Hotel/Hotel.php:3324 inc/Classes/Tour/Tour.php:2253
 #: inc/Core/TF_Backend_Booking.php:52 inc/functions/functions-car.php:864
 msgid "Last Name"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4594
-#: inc/Admin/TF_Options/options/tf-settings.php:4832
+#: inc/Admin/TF_Options/options/tf-settings.php:4596
+#: inc/Admin/TF_Options/options/tf-settings.php:4834
 msgid "tf_last_name"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4600
-#: inc/Admin/TF_Options/options/tf-settings.php:4838
+#: inc/Admin/TF_Options/options/tf-settings.php:4602
+#: inc/Admin/TF_Options/options/tf-settings.php:4840
 msgid "tf_email"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4606
-#: inc/Admin/TF_Options/options/tf-settings.php:4844
+#: inc/Admin/TF_Options/options/tf-settings.php:4608
+#: inc/Admin/TF_Options/options/tf-settings.php:4846
 msgid "tf_phone"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4612
-#: inc/Admin/TF_Options/options/tf-settings.php:4850
+#: inc/Admin/TF_Options/options/tf-settings.php:4614
+#: inc/Admin/TF_Options/options/tf-settings.php:4852
 msgid "tf_country"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4617
-#: inc/Admin/TF_Options/options/tf-settings.php:4855
+#: inc/Admin/TF_Options/options/tf-settings.php:4619
+#: inc/Admin/TF_Options/options/tf-settings.php:4857
 msgid "Street Address"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4618
-#: inc/Admin/TF_Options/options/tf-settings.php:4856
+#: inc/Admin/TF_Options/options/tf-settings.php:4620
+#: inc/Admin/TF_Options/options/tf-settings.php:4858
 msgid "tf_street_address"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4623
-#: inc/Admin/TF_Options/options/tf-settings.php:4861
+#: inc/Admin/TF_Options/options/tf-settings.php:4625
+#: inc/Admin/TF_Options/options/tf-settings.php:4863
 msgid "Town/City"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4624
-#: inc/Admin/TF_Options/options/tf-settings.php:4862
+#: inc/Admin/TF_Options/options/tf-settings.php:4626
+#: inc/Admin/TF_Options/options/tf-settings.php:4864
 msgid "tf_town_city"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4629
-#: inc/Admin/TF_Options/options/tf-settings.php:4867
+#: inc/Admin/TF_Options/options/tf-settings.php:4631
+#: inc/Admin/TF_Options/options/tf-settings.php:4869
 msgid "State/Country"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4630
-#: inc/Admin/TF_Options/options/tf-settings.php:4868
+#: inc/Admin/TF_Options/options/tf-settings.php:4632
+#: inc/Admin/TF_Options/options/tf-settings.php:4870
 msgid "tf_state_country"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4635
-#: inc/Admin/TF_Options/options/tf-settings.php:4873
+#: inc/Admin/TF_Options/options/tf-settings.php:4637
+#: inc/Admin/TF_Options/options/tf-settings.php:4875
 msgid "Postcode/ZIP"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4636
-#: inc/Admin/TF_Options/options/tf-settings.php:4874
+#: inc/Admin/TF_Options/options/tf-settings.php:4638
+#: inc/Admin/TF_Options/options/tf-settings.php:4876
 msgid "tf_postcode"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4645
-#: inc/Admin/TF_Options/options/tf-settings.php:4883
+#: inc/Admin/TF_Options/options/tf-settings.php:4647
+#: inc/Admin/TF_Options/options/tf-settings.php:4885
 msgid "Booking Confirmation Message"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4653
+#: inc/Admin/TF_Options/options/tf-settings.php:4655
 msgid "Hotel Popup Settings"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4660
+#: inc/Admin/TF_Options/options/tf-settings.php:4662
 msgid "Settings for Popup"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4661
+#: inc/Admin/TF_Options/options/tf-settings.php:4663
 msgid "The popup will appear when you enable the airport pickup service."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4667
+#: inc/Admin/TF_Options/options/tf-settings.php:4669
 msgid "Hotel Service Popup Title"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4674
+#: inc/Admin/TF_Options/options/tf-settings.php:4676
 msgid "Hotel Service Popup Description"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4681
+#: inc/Admin/TF_Options/options/tf-settings.php:4683
 msgid "Hotel Extra Popup Title"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4688
+#: inc/Admin/TF_Options/options/tf-settings.php:4690
 msgid "Hotel Extra Popup Description"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4695
+#: inc/Admin/TF_Options/options/tf-settings.php:4697
 msgid "Popup Button Text"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4696
+#: inc/Admin/TF_Options/options/tf-settings.php:4698
 msgid "Continue to booking"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:4703
+#: inc/Admin/TF_Options/options/tf-settings.php:4705
 msgid "Car Without Payment"
 msgstr ""
 
@@ -9813,63 +9925,63 @@ msgstr ""
 msgid "Delete Old Reviews"
 msgstr ""
 
-#: inc/App/TF_Review.php:161
+#: inc/App/TF_Review.php:162
 msgid "Delete reviews that don't have any review (rating) fields.<br><b style='color: red;'>Be aware! You will lose your old data!</b>"
 msgstr ""
 
-#: inc/App/TF_Review.php:164
+#: inc/App/TF_Review.php:165
 msgid "Delete Reviews"
 msgstr ""
 
-#: inc/App/TF_Review.php:234 inc/Traits/Action_Helper.php:136
+#: inc/App/TF_Review.php:235 inc/Traits/Action_Helper.php:136
 msgid "Submit"
 msgstr ""
 
-#: inc/App/TF_Review.php:235
+#: inc/App/TF_Review.php:236
 msgid "Write a Review"
 msgstr ""
 
-#: inc/App/TF_Review.php:236
+#: inc/App/TF_Review.php:237
 msgid "Reply"
 msgstr ""
 
-#: inc/App/TF_Review.php:237
+#: inc/App/TF_Review.php:238
 msgid "Your Name"
 msgstr ""
 
-#: inc/App/TF_Review.php:238
+#: inc/App/TF_Review.php:239
 msgid "Email Address"
 msgstr ""
 
-#: inc/App/TF_Review.php:239
+#: inc/App/TF_Review.php:240
 msgid "Review Description"
 msgstr ""
 
-#: inc/App/TF_Review.php:240
+#: inc/App/TF_Review.php:241
 msgid " By commenting you accept the"
 msgstr ""
 
-#: inc/App/TF_Review.php:241
+#: inc/App/TF_Review.php:242
 msgid " Privacy Policy"
 msgstr ""
 
-#: inc/App/TF_Review.php:243
+#: inc/App/TF_Review.php:244
 msgid "Cancel Reply"
 msgstr ""
 
-#: inc/App/TF_Review.php:618 inc/App/TF_Review.php:670
+#: inc/App/TF_Review.php:619 inc/App/TF_Review.php:671
 msgid "Trips"
 msgstr ""
 
-#: inc/App/TF_Review.php:656
+#: inc/App/TF_Review.php:657
 msgid " 0.0"
 msgstr ""
 
-#: inc/App/TF_Review.php:658
+#: inc/App/TF_Review.php:659
 msgid " (No Review)"
 msgstr ""
 
-#: inc/App/TF_Review.php:666 inc/App/TF_Review.php:675
+#: inc/App/TF_Review.php:667 inc/App/TF_Review.php:676
 #: templates/template-parts/hotel/design-1.php:192
 #: templates/template-parts/tour/design-1/gallery.php:42
 msgid "0.0"
@@ -9877,14 +9989,14 @@ msgstr ""
 
 #. translators: 1: number of comments
 
-#: inc/App/TF_Review.php:717
+#: inc/App/TF_Review.php:718
 msgctxt "comments title"
 msgid "%1$s review"
 msgid_plural "%1$s reviews"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/App/TF_Review.php:761 inc/App/TF_Review.php:774
+#: inc/App/TF_Review.php:762 inc/App/TF_Review.php:775
 msgid "Your review is waiting for approval"
 msgstr ""
 
@@ -11541,43 +11653,39 @@ msgstr ""
 msgid "Hide"
 msgstr ""
 
-#: inc/Classes/Enqueue.php:939 inc/Classes/Enqueue.php:1304
+#: inc/Classes/Enqueue.php:939 inc/Classes/Enqueue.php:1320
 msgid "Deleting old review fields..."
 msgstr ""
 
-#: inc/Classes/Enqueue.php:940 inc/Classes/Enqueue.php:1305
+#: inc/Classes/Enqueue.php:940 inc/Classes/Enqueue.php:1321
 msgid "Deleting order ids..."
 msgstr ""
 
-#: inc/Classes/Enqueue.php:941 inc/Classes/Enqueue.php:1306
+#: inc/Classes/Enqueue.php:941 inc/Classes/Enqueue.php:1322
 msgid "Tour Location is a required field!"
 msgstr ""
 
-#: inc/Classes/Enqueue.php:942 inc/Classes/Enqueue.php:1307
+#: inc/Classes/Enqueue.php:942 inc/Classes/Enqueue.php:1323
 msgid "Hotel Location is a required field!"
 msgstr ""
 
-#: inc/Classes/Enqueue.php:943 inc/Classes/Enqueue.php:1308
+#: inc/Classes/Enqueue.php:943 inc/Classes/Enqueue.php:1324
 msgid "Apartment Location is a required field!"
 msgstr ""
 
-#: inc/Classes/Enqueue.php:944 inc/Classes/Enqueue.php:1309
+#: inc/Classes/Enqueue.php:944 inc/Classes/Enqueue.php:1325
 msgid "Installing..."
 msgstr ""
 
-#: inc/Classes/Enqueue.php:945 inc/Classes/Enqueue.php:1310
+#: inc/Classes/Enqueue.php:945 inc/Classes/Enqueue.php:1326
 msgid "Activating..."
 msgstr ""
 
-#: inc/Classes/Enqueue.php:946 inc/Classes/Enqueue.php:1311
+#: inc/Classes/Enqueue.php:946 inc/Classes/Enqueue.php:1327
 msgid "Installed"
 msgstr ""
 
-#: inc/Classes/Enqueue.php:947 inc/Classes/Enqueue.php:1312
-msgid "Activated"
-msgstr ""
-
-#: inc/Classes/Enqueue.php:948 inc/Classes/Enqueue.php:1313
+#: inc/Classes/Enqueue.php:948 inc/Classes/Enqueue.php:1329
 msgid "Install failed"
 msgstr ""
 
@@ -11595,7 +11703,7 @@ msgstr ""
 msgid "No results found, with this ID"
 msgstr ""
 
-#: inc/Classes/Enqueue.php:956 inc/Classes/Enqueue.php:1315
+#: inc/Classes/Enqueue.php:956 inc/Classes/Enqueue.php:1331
 msgid "Please select at least one service."
 msgstr ""
 
@@ -11623,78 +11731,30 @@ msgstr ""
 msgid "Import Data cannot be empty!"
 msgstr ""
 
-#: inc/Classes/Enqueue.php:1004
-msgid "January"
-msgstr ""
-
-#: inc/Classes/Enqueue.php:1005
-msgid "February"
-msgstr ""
-
-#: inc/Classes/Enqueue.php:1006
-msgid "March"
-msgstr ""
-
-#: inc/Classes/Enqueue.php:1007
-msgid "April"
-msgstr ""
-
-#: inc/Classes/Enqueue.php:1008
-msgid "May"
-msgstr ""
-
-#: inc/Classes/Enqueue.php:1009
-msgid "June"
-msgstr ""
-
-#: inc/Classes/Enqueue.php:1010
-msgid "July"
-msgstr ""
-
-#: inc/Classes/Enqueue.php:1011
-msgid "August"
-msgstr ""
-
-#: inc/Classes/Enqueue.php:1012
-msgid "September"
-msgstr ""
-
-#: inc/Classes/Enqueue.php:1013
-msgid "October"
-msgstr ""
-
-#: inc/Classes/Enqueue.php:1014
-msgid "November"
-msgstr ""
-
-#: inc/Classes/Enqueue.php:1015
-msgid "December"
-msgstr ""
-
 #: inc/Classes/Enqueue.php:1017
 msgid "Completed Booking"
 msgstr ""
 
-#: inc/Classes/Enqueue.php:1017
+#: inc/Classes/Enqueue.php:1018
 msgid "Cancelled Booking"
 msgstr ""
 
-#: inc/Classes/Enqueue.php:1220
+#: inc/Classes/Enqueue.php:1236
 msgid "Please select a location before publishing this hotel"
 msgstr ""
 
-#: inc/Classes/Enqueue.php:1225
+#: inc/Classes/Enqueue.php:1241
 msgid "Please select a destination before publishing this tour"
 msgstr ""
 
-#: inc/Classes/Enqueue.php:1230
+#: inc/Classes/Enqueue.php:1246
 msgid "Please select a location before publishing this apartment"
 msgstr ""
 
 #. translators: %s taxonomy singular name, translators: %s: post type singular
 #. name
 
-#: inc/Classes/Enqueue.php:1284
+#: inc/Classes/Enqueue.php:1300
 msgid "Please choose at least one %1$s before publishing this %2$s."
 msgstr ""
 
@@ -11726,7 +11786,6 @@ msgstr ""
 #: inc/Classes/Helper.php:769
 msgid "Select from Dropdown"
 msgstr ""
-
 
 #: inc/Classes/Helper.php:776
 msgid "Invalid taxonomy!!"
@@ -13128,10 +13187,6 @@ msgstr ""
 msgid "The %1$sInstantio%2$s plugin is inactive. Please activate it to enable the %3$s \"QUICK CHECKOUT\" %4$s for Tourfic."
 msgstr ""
 
-#: inc/Traits/Action_Helper.php:2480 tourfic.php:231
-msgid "Activate"
-msgstr ""
-
 #. translators: %1$s will return total price
 #. translators: %s will return total price
 
@@ -13273,7 +13328,9 @@ msgstr ""
 msgid "Car Not Available this Slot!"
 msgstr ""
 
-#: inc/functions/woocommerce/wc-car.php:321
+#: inc/functions/woocommerce/wc-car.php:321 
+#: inc/Classes/Car_Rental/Car_Rental.php:327
+#: inc/Classes/Helper.php:2516
 msgid "Drop Off Location"
 msgstr ""
 
@@ -13364,6 +13421,11 @@ msgstr ""
 #: inc/functions.php:439
 msgid "Reset Room Availability"
 msgstr ""
+
+#: inc/functions.php:440
+msgid "Remove order ids linked with this room.<br><b style="color: red;">Be aware! It is irreversible!</b>"
+msgstr ""
+
 
 #: templates/apartment/archive/design-1.php:41
 #: templates/apartment/taxonomy-apartment_locations.php:68
