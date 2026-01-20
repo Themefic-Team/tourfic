@@ -82,6 +82,10 @@
                     gap: 24px;
                     @include flex-wrap(wrap);
 
+                    @media #{$max1199} {
+                        gap: 16px;
+                    }
+
                     @media #{$max1024} {
                         .tf-select-date{
                             width: calc(50% - 12px);
@@ -120,6 +124,10 @@
                             padding: 9px 20px;
                             cursor: pointer;
                             width: 272px;
+
+                            @media #{$max1199} {
+                                width: 220px;
+                            }
 
                             @media #{$max1024} {
                                 padding: 3px 20px;

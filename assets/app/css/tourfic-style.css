@@ -11053,6 +11053,12 @@ div#tf-destinationautocomplete-list div:before {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
+@media only screen and (max-width: 1199.98px) {
+  .tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper,
+  .tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper {
+    gap: 16px;
+  }
+}
 @media only screen and (max-width: 1024px) {
   .tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-date,
   .tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-date {
@@ -11097,6 +11103,12 @@ div#tf-destinationautocomplete-list div:before {
   padding: 9px 20px;
   cursor: pointer;
   width: 272px;
+}
+@media only screen and (max-width: 1199.98px) {
+  .tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-search-field.info-select,
+  .tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-search-field.info-select {
+    width: 220px;
+  }
 }
 @media only screen and (max-width: 1024px) {
   .tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-search-field.info-select,
