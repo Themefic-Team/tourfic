@@ -6,7 +6,7 @@ msgstr ""
 "WordPress Plugin 2.18.12\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tourfic\n"
 "POT-Creation-Date: 2026-01-19 07:59:01+00:00\n"
-"PO-Revision-Date: 2026-01-19 18:01+0600\n"
+"PO-Revision-Date: 2026-01-20 16:58+0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -3401,6 +3401,14 @@ msgstr "Aggiungi Nuovo"
 #. translators: %s: Post type label
 #. translators: %s: post type singular name
 #. translators: %s: taxonomy singular name
+#: inc/Admin/TF_Options/fields/select2/TF_select2.php:108
+msgid "Parent"
+msgstr "Genitore"
+
+#: inc/Admin/TF_Options/fields/select2/TF_select2.php:110
+msgid "--select--"
+msgstr "--seleziona--"
+
 #: inc/Admin/TF_Options/fields/select2/TF_select2.php:138
 #: inc/Core/Post_Type.php:35 inc/Core/Post_Type.php:113
 msgid "Add New %s"
@@ -3658,7 +3666,7 @@ msgstr "Prezzo per gruppo"
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:532
 #: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:446
 msgid "Min"
-msgstr "Min"
+msgstr "Minimo"
 
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:538
 msgid "Minimum Person (Required for Search)"
@@ -3668,7 +3676,7 @@ msgstr "Persona minima (richiesta per la ricerca)"
 #: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:452
 #: inc/Classes/Tour/Tour.php:2894 inc/Classes/Tour/Tour.php:3046
 msgid "Max"
-msgstr "Max"
+msgstr "Massimo"
 
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:550
 msgid "Maximum Person (Required for Search)"
@@ -3929,7 +3937,7 @@ msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:155
 msgid "Form Title"
-msgstr "Form Title"
+msgstr "Titolo Modulo"
 
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:156
 msgid "Book your apartment"
@@ -5961,6 +5969,10 @@ msgstr ""
 "Se desideri offrire servizi aggiuntivi non inclusi nel tuo attuale pacchetto "
 "alberghiero, puoi elencarli qui."
 
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:376
+msgid "Offer Hotel Extras"
+msgstr "Offerta Extra Hotel"
+
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:386
 msgid ""
 "Are you interested in enriching your hotel offerings with exciting services? "
@@ -6150,6 +6162,10 @@ msgid ""
 "This text will appear as the heading of the Reviews section on the frontend."
 msgstr ""
 "Questo testo apparirà come titolo della sezione Recensioni nel frontend."
+
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:12
+msgid "Room Settings"
+msgstr "Impostazioni Camera"
 
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:25
 msgid "These are some common settings specific to this Room"
@@ -14646,6 +14662,14 @@ msgstr ""
 #: inc/functions.php:439
 msgid "Reset Room Availability"
 msgstr "Disponibilità della stanza per il reset"
+
+#: inc/functions.php:440
+msgid ""
+"Remove order ids linked with this room.<br><b style=\"color: red;\">Be "
+"aware! It is irreversible!</b>"
+msgstr ""
+"Rimuovi gli ID degli ordini collegati a questa stanza.<br><b style=\"color: "
+"red;\">Attenzione! È irreversibile!</b>"
 
 #: templates/apartment/archive/design-1.php:41
 #: templates/apartment/taxonomy-apartment_locations.php:68

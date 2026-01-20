@@ -3234,6 +3234,14 @@ msgstr ""
 #. translators: %s: post type singular name
 #. translators: %s: taxonomy singular name
 
+#: inc/Admin/TF_Options/fields/select2/TF_select2.php:108
+msgid "Parent"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/select2/TF_select2.php:110
+msgid "--select--"
+msgstr ""
+
 #: inc/Admin/TF_Options/fields/select2/TF_select2.php:138
 #: inc/Core/Post_Type.php:35 inc/Core/Post_Type.php:113
 msgid "Add New %s"
@@ -5430,6 +5438,11 @@ msgstr ""
 msgid "If you wish to provide additional services that are not included in your current hotel package, you can list them here."
 msgstr ""
 
+
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:376
+msgid "Offer Hotel Extras"
+msgstr ""
+
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:386
 msgid "Are you interested in enriching your hotel offerings with exciting services? With our Pro package, you can easily add exciting activities such as paragliding, along with meals and hotel accommodations, through our <b>Hotel Extra Services</b>. This feature allows you to customize and expand your services as much as you want, providing a better experience for your customers. <a href=\"https://tourfic.com/\" target=\"_blank\">Upgrade to our Pro package today to take advantage of these fantastic options!</a>"
 msgstr ""
@@ -5568,6 +5581,10 @@ msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:689
 msgid "This text will appear as the heading of the Reviews section on the frontend."
+msgstr ""
+
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:12
+msgid "Room Settings"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:25
@@ -13404,6 +13421,11 @@ msgstr ""
 #: inc/functions.php:439
 msgid "Reset Room Availability"
 msgstr ""
+
+#: inc/functions.php:440
+msgid "Remove order ids linked with this room.<br><b style="color: red;">Be aware! It is irreversible!</b>"
+msgstr ""
+
 
 #: templates/apartment/archive/design-1.php:41
 #: templates/apartment/taxonomy-apartment_locations.php:68
