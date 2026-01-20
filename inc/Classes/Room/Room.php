@@ -1901,8 +1901,8 @@ class Room {
                         // flatpickr locale first day of Week
                         <?php Helper::tf_flatpickr_locale("root"); ?>
 
-                        $(".tf_check_inout_dates").on("click", function() {
-                            $(".tf-check-in-out-date").trigger("click");
+                        $(".tf-shortcode-design-4#tf_room_aval_check .tf_check_inout_dates").on("click", function() {
+                            $(".tf-shortcode-design-4#tf_room_aval_check .tf-check-in-out-date").trigger("click");
                         });
 
 						// today + tomorrow
@@ -1910,7 +1910,7 @@ class Room {
 						const tomorrow = new Date();
 						tomorrow.setDate(today.getDate() + 1);
 
-                        $(".tf-check-in-out-date").flatpickr({
+                        $(".tf-shortcode-design-4#tf_room_aval_check .tf-check-in-out-date").flatpickr({
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
@@ -1937,15 +1937,15 @@ class Room {
                                 ];
                                 if (selectedDates[0]) {
                                     const startDate = selectedDates[0];
-                                    $(".tf_checkin_dates span.date").html(startDate.getDate());
-                                    $(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
-                                    $(".tf_checkin_dates span.year").html(startDate.getFullYear());
+                                    $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkin_dates span.date").html(startDate.getDate());
+                                    $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
+                                    $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkin_dates span.year").html(startDate.getFullYear());
                                 }
                                 if (selectedDates[1]) {
                                     const endDate = selectedDates[1];
-                                    $(".tf_checkout_dates span.date").html(endDate.getDate());
-                                    $(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
-                                    $(".tf_checkout_dates span.year").html(endDate.getFullYear());
+                                    $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkout_dates span.date").html(endDate.getDate());
+                                    $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
+                                    $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkout_dates span.year").html(endDate.getFullYear());
                                 }
                             }
                         }
