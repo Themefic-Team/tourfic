@@ -1745,7 +1745,7 @@ class Apartment {
                                         if (total_price > 0) {
 											$('.tf-apartment-price-list').show();
                                             $('.total-days-price-wrap').show();
-                                            total_days_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', total_price.toFixed(2));
+                                            total_days_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0,00', total_price.toFixed(2));
                                         }
                                         $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php esc_html_e( 'nights', 'tourfic' ); ?>');
                                         $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
@@ -1753,11 +1753,11 @@ class Apartment {
                                         let totalPersonPrice = (adult_price * $('#adults').val()) + (child_price * $('#children').val()) + (infant_price * $('#infant').val());
                                         var total_price = totalPersonPrice * days;
                                         var total_days_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
-                                        var wc_price_per_person = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', totalPersonPrice.toFixed(2));
+                                        var wc_price_per_person = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0,00', totalPersonPrice.toFixed(2));
                                         if (total_price > 0) {
 											$('.tf-apartment-price-list').show();
                                             $('.total-days-price-wrap').show();
-                                            total_days_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', total_price.toFixed(2));
+                                            total_days_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0,00', total_price.toFixed(2));
                                         }
                                         $('.total-days-price-wrap .total-days').html(wc_price_per_person + ' x ' + days + ' <?php esc_html_e( 'nights', 'tourfic' ); ?>');
                                         $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
@@ -1791,7 +1791,7 @@ class Apartment {
                                     if (total_price > 0) {
                                         $('.tf-apartment-price-list').show();
                                         $('.total-days-price-wrap').show();
-                                        total_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', total_price.toFixed(2));
+                                        total_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0,00', total_price.toFixed(2));
                                     }
                                     $('.total-days-price-wrap .total-days').html(days + ' <?php esc_html_e( 'nights', 'tourfic' ); ?>');
                                     $('.total-days-price-wrap .days-total-price').html(total_price_html);
@@ -1804,10 +1804,10 @@ class Apartment {
                                     $('.apartment-discount-wrap').show();
 
 									<?php if ( $discount_type == 'percent' ): ?>
-                                    discount_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', (total_price * discount / 100).toFixed(2));
+                                    discount_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0,00', (total_price * discount / 100).toFixed(2));
                                     total_price = total_price - (total_price * discount / 100);
 									<?php else: ?>
-                                    discount_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', discount.toFixed(2));
+                                    discount_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0,00', discount.toFixed(2));
                                     total_price = total_price - discount;
 									<?php endif; ?>
                                 }
@@ -1834,7 +1834,7 @@ class Apartment {
                                 if (totalAdditionalFee_<?php echo esc_html( $key ) ?> > 0 ) {
                                     $('.additional-fee-wrap').show();
                                     total_price = total_price + totalAdditionalFee_<?php echo esc_html( $key ) ?>;
-                                    additional_fee_html_<?php echo esc_html( $key ) ?> = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', totalAdditionalFee_<?php echo esc_html( $key ) ?>.toFixed(2));
+                                    additional_fee_html_<?php echo esc_html( $key ) ?> = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0,00', totalAdditionalFee_<?php echo esc_html( $key ) ?>.toFixed(2));
                                 }
                                 $('.additional-fee-wrap .additional-fee-<?php echo esc_html( $key ) ?>').html(additional_fee_html_<?php echo esc_html( $key ) ?>);
 								<?php endforeach; ?>
@@ -1855,7 +1855,7 @@ class Apartment {
                                 if (totalAdditionalFee > 0) {
                                     $('.additional-fee-wrap').show();
                                     total_price = total_price + totalAdditionalFee;
-                                    additional_fee_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', totalAdditionalFee.toFixed(2));
+                                    additional_fee_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0,00', totalAdditionalFee.toFixed(2));
                                 }
                                 $('.additional-fee-wrap .additional-fee').html(additional_fee_html);
 								<?php endif; ?>
@@ -1866,7 +1866,7 @@ class Apartment {
                                 var total_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
                                 if (total_price > 0) {
                                     $('.total-price-wrap').show();
-                                    total_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', total_price.toFixed(2));
+                                    total_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0,00', total_price.toFixed(2));
                                 }
                                 $('.total-price-wrap .total-price').html(total_price_html);
                             } else {
@@ -1896,6 +1896,17 @@ class Apartment {
                             }
                         }
                     }
+
+					const formatPrice = (amount) => {
+						return new Intl.NumberFormat('<?php echo get_woocommerce_currency(); ?>', {
+							style: 'currency',
+							currency: '<?php echo get_woocommerce_currency(); ?>'
+						}).format(amount);
+					};
+
+					// Usage:
+					$('.total-price-wrap .total-price').html(formatPrice(total_price));
+
 
                     $(".tf-apartment-design-one-form #check-in-date").on('click', function () {
                         $(".tf-check-out-date .form-control").trigger( "click" );
