@@ -131,6 +131,11 @@ function tf_apartment_booking_callback() {
 			$tf_apartment_data['tf_apartment_data']['total_price']  = $total_price;
 		}
 
+		$tf_apartment_data = apply_filters('tf_apartment_data_before_add_to_cart', $tf_apartment_data, [
+			'meta' => $meta,
+			'post_id' => $post_id,
+		]);
+
 		if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) ) {
 			$external_search_info = array(
 				'{adult}'    => $adults,

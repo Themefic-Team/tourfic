@@ -122,6 +122,11 @@ function tf_car_booking_callback() {
 			}
 		}
 		
+		$tf_cars_data = apply_filters('tf_car_data_before_add_to_cart', $tf_cars_data, [
+			'meta' => $meta,
+			'post_id' => $post_id,
+		]);
+
 		if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($car_booking_by) && '3'==$car_booking_by ){
 
 			$tf_booking_fields = !empty(Helper::tfopt( 'car-book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'car-book-confirm-field' )) : '';

@@ -605,6 +605,12 @@ function tf_hotel_booking_callback() {
 			$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
 			$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 		}
+
+		$tf_room_data = apply_filters('tf_room_data_before_add_to_cart', $tf_room_data, [
+			'meta' => $meta,
+			'post_id' => $post_id,
+		]);
+
 		if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 			$external_search_info = array(
 				'{adult}'    => $adult,
