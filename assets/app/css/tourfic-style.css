@@ -21619,6 +21619,99 @@ div#tf-destinationautocomplete-list div:before {
   position: absolute;
   margin-left: -20px;
 }
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 24px;
+  background-color: var(--tf-brand-lite);
+  border: 1px solid var(--tf-border-lite);
+  border-radius: 8px;
+}
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules,
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules {
+  list-style: none;
+  -webkit-flex: 0 0 calc(50% - 15px);
+  -ms-flex: 0 0 calc(50% - 15px);
+  flex: 0 0 calc(50% - 15px);
+  padding-left: 30px;
+  margin: 0;
+  box-sizing: border-box;
+}
+@media only screen and (max-width: 768px) {
+  .single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules,
+  .single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules {
+    -webkit-flex: 0 0 100%;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+  }
+}
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li,
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li {
+  margin: 16px 0;
+  position: relative;
+}
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li h6,
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li h6 {
+  margin: 0 0 5px 0;
+  font-weight: 500;
+  font-size: 1.125rem;
+  color: var(--tf-primary);
+}
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li::before,
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li::before {
+  content: "\f058";
+  font-family: "Font Awesome 5 Free";
+  position: absolute;
+  top: 0;
+  left: -29px;
+  font-size: 1.25rem;
+  color: var(--tf-primary);
+}
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li::after,
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li::after {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 23px;
+  width: 2px;
+  height: 99%;
+  background: var(--tf-primary);
+}
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li:first-child,
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li:first-child {
+  margin-top: 0;
+}
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li:last-child,
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li:last-child {
+  margin-bottom: 0;
+}
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li:last-child::after,
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li:last-child::after {
+  display: none;
+}
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper.tf-house-rules-full .tf-not-included-house-rules,
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper.tf-house-rules-full .tf-included-house-rules {
+  -webkit-flex: 0 0 100%;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+}
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li h6 {
+  color: #dc3545;
+}
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li::before {
+  content: "\f057";
+  color: #dc3545;
+}
+.single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li::after {
+  background: #dc3545;
+}
 
 .tf-archive-listing__three,
 .tf-archive-template__three {

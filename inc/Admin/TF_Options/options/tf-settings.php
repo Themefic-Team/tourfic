@@ -957,6 +957,11 @@ TF_Settings::option( 'tf_settings', array(
 											'status' => 1,
 										),
 										array(
+											'label'  => __( 'House Rules', 'tourfic' ),
+											'slug'   => 'house-rules',
+											'status' => 1,
+										),
+										array(
 											'label'  => __( 'Policy', 'tourfic' ),
 											'slug'   => 'cancellation-policy',
 											'status' => 1,

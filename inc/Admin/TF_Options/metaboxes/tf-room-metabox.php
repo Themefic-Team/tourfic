@@ -189,6 +189,47 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'field_width' => 100,
                     'is_search_able' => true,
                 ),
+
+                //house rules
+				array(
+					'id'    => 'house_rules_heading',
+					'type'  => 'heading',
+					'title' => esc_html__( 'House Rules', 'tourfic' ),
+				),
+				array(
+					'id'    => 'house_rules_title',
+					'type'  => 'text',
+					'label' => esc_html__( 'Title of the Section', 'tourfic' ),
+					'subtitle' => esc_html__( 'This text will appear as the heading of the House Rules section on the frontend.', 'tourfic' ),
+					'default' => esc_html__( 'House Rules', 'tourfic' ),
+				),
+				array(
+					'id'           => 'house_rules',
+					'type'         => 'repeater',
+					'button_title' => esc_html__( 'Add New', 'tourfic' ),
+					'label'        => esc_html__( 'Add House Rules', 'tourfic' ),
+					'field_title'  => 'title',
+					'fields'       => array(
+						array(
+							'id'    => 'title',
+							'type'  => 'text',
+							'label' => esc_html__( 'Title', 'tourfic' ),
+						),
+						array(
+							'id'    => 'desc',
+							'type'  => 'editor',
+							'label' => esc_html__( 'Description', 'tourfic' ),
+						),
+						array(
+							'id'        => 'include',
+							'type'      => 'switch',
+							'label'     => esc_html__( 'Allowed?', 'tourfic' ),
+							'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+							'label_off' => esc_html__( 'No', 'tourfic' ),
+							'default'   => true,
+						),
+					),
+				),
 			),
 		),
 

@@ -71,6 +71,7 @@ if ( ! empty( $room_options ) ) {
                     }else{
                         include TF_TEMPLATE_PART_PATH . 'room/design-1/description.php';
                         include TF_TEMPLATE_PART_PATH . 'room/design-1/amenities.php';
+                        include TF_TEMPLATE_PART_PATH . 'room/design-1/house-rules.php';
                         include TF_TEMPLATE_PART_PATH . 'room/design-1/cancellation-policy.php';
                         include TF_TEMPLATE_PART_PATH . 'room/design-1/reviews.php';
                     }

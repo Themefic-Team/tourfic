@@ -7,6 +7,7 @@ use \Tourfic\Classes\Room\Pricing;
 use Tourfic\App\TF_Review;
 use \Elementor\Group_Control_Image_Size;
 use \Elementor\Icons_Manager;
+use Tourfic\Classes\Hotel\Hotel;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -1195,7 +1196,7 @@ class Room {
 						<input type="hidden" name="single_room" value="1"/>
 						<button class="tf_btn tf_btn_full tf_btn_rounded tf-submit hotel-room-book" type="submit"><?php echo esc_html( $tf_room_book_button_text ); ?></button>
 					</div>
-
+					<?php Hotel::hotel_booking_popup( $hotel_id, get_the_ID(), $adults, $child ); ?>
 					<script>
 						(function ($) {
 							$(document).ready(function () {
