@@ -1352,6 +1352,7 @@ class Apartment {
 				<?php endif; ?>
             </div>
 
+			<?php do_action("tf_apartment_before_single_booking_form_fields"); ?>
 			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form == '1' || ( $tf_ext_booking_type == 2 && empty( $tf_booking_code ) ) ) || $tf_booking_type == 1 ): ?>
 				
 				<h3 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h3>
@@ -1470,6 +1471,7 @@ class Apartment {
 				</div>
 			<?php endif; ?>
 
+			<?php do_action("tf_apartment_after_single_booking_form_fields"); ?>
             <div class="tf_form-row">
 				<?php $ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
@@ -1572,6 +1574,7 @@ class Apartment {
 				<?php endif; ?>
             </div>
 
+			<?php do_action("tf_apartment_before_single_booking_form_fields"); ?>
 			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
                 <div class="tf-apartment-form-fields">
                     <div class="tf_booking-dates">
@@ -1645,6 +1648,7 @@ class Apartment {
                 </div>
 			<?php endif; ?>
 
+			<?php do_action("tf_apartment_after_single_booking_form_fields"); ?>
             <div class="tf_form-row">
 				<?php $ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype); ?>" class="tf-post-type"/>

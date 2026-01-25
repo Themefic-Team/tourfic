@@ -550,6 +550,8 @@ function tf_add_car_data_checkout_order_processed( $order_id, $posted_data, $ord
 				'tax_info' => wp_json_encode($fee_sums)
 			];
 
+			$iteminfo = apply_filters( 'tf_car_order_item_info', $iteminfo, $item);
+
 			$tf_integration_order_data[] = [
 				'pickup_location'   => $pickup,
 				'pickup_date'   => $tf_pickup_date,
@@ -739,6 +741,8 @@ function tf_add_car_data_checkout_order_processed_block_checkout( $order ) {
 				'total_price' => $price,
 				'tax_info' => wp_json_encode($fee_sums)
 			];
+
+			$iteminfo = apply_filters( 'tf_car_order_item_info', $iteminfo, $item);
 
 			$tf_integration_order_data[] = [
 				'pickup_location'   => $pickup,

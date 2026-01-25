@@ -415,6 +415,8 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 				'tax_info' => wp_json_encode($fee_sums)
 			];
 
+			$iteminfo = apply_filters( 'tf_apartment_order_item_info', $iteminfo, $item);
+
 			$tf_integration_order_data[] = [
 				'check_in'       => $check_in,
 				'check_out'      => $check_out,
@@ -596,6 +598,8 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 				'total_price' => $price,
 				'tax_info' => wp_json_encode($fee_sums)
 			];
+
+			$iteminfo = apply_filters( 'tf_apartment_order_item_info', $iteminfo, $item);
 
 			$tf_integration_order_data[] = [
 				'check_in'       => $check_in,

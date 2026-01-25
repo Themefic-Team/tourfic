@@ -64,6 +64,8 @@
 * tf_apartment_after_single_booking_form - **file:** `Apartment.php` 
 * tf_apartment_archive_single_featured_card_design_one - **file:** `Apartment/Archive/Design-1.php`
 * tf_apartment_archive_single_card_design_one - **file:** `Apartment/Archive/Design-1.php`
+* tf_apartment_data_before_add_to_cart - **file:** `wc-apartment.php`
+* tf_apartment_order_item_info - **file:** `wc-apartment.php`
 
 
 #### Backend Booking
@@ -106,6 +108,10 @@
 
 ### Action hook
 
+#### Apartment
+* tf_apartment_before_single_booking_form_fields - **file:** `Apartment.php`
+* tf_apartment_after_single_booking_form_fields - **file:** `Apartment.php`
+
 #### Backend Booking
 * tf_before_{*}_backend_booking_form - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
 * tf_before_{*}_each_backend_booking_form_card - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
@@ -122,6 +128,8 @@
 * {*}_single_booking_details_after_title_text - **file:** `TF_Backend_Booking.php` - **dynamic:** `tf_tour/tf_hotel/tf_apartment`
 * tf_{*}_single_booking_details_card_first - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
 * tf_{*}_single_booking_details_card_first - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`
+* tf_booking_popup_after_other_details - **file:** `TF_Backend_Booking.php`
+* tf_booking_details_after_other_details - **file:** `TF_Backend_Booking.php`
 
 
 #### Enquiry
