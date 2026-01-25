@@ -7,18 +7,7 @@ use \Tourfic\App\TF_Review;
 use Tourfic\Classes\Room\Pricing;
 use Tourfic\Classes\Room\Room;
 
-$room_option = ! empty( $_GET['room-option'] ) ? sanitize_text_field( $_GET['room-option'] ) : '';
 $meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
-$room_options = ! empty( $meta['room-options'] ) ? $meta['room-options'] : [];
-$option_title = '';
-if ( ! empty( $room_options ) ) {
-    foreach ( $room_options as $option_key => $option ) {
-        if($room_option == $option_key ){
-            $option_title = ! empty( $option['option_title'] ) ? '<br>('. $option['option_title'] . ')' : '';
-            break;
-        }
-    }
-}
 ?>
 
 <div class="tf-single-template__two">
@@ -28,7 +17,7 @@ if ( ! empty( $room_options ) ) {
             <div class="tf-hero-content">
                 <div class="tf-hero-bottom-area">
                     <div class="tf-head-title">
-                        <h1><?php the_title(); ?><?php echo wp_kses_post($option_title); ?></h1>
+                        <h1><?php the_title(); ?></h1>
                     </div>
                     <div class="tf-hero-gallery-videos">
                         <?php if ( ! empty( $gallery_ids ) ) { ?>
@@ -56,7 +45,7 @@ if ( ! empty( $room_options ) ) {
             <div class="tf-details" id="tf-hotel-overview">
                 <div class="tf-details-left">
                     <div class="tf-room-single-mobile-booking-form-wrap">
-                        <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( $room_option, 'design-2' ); ?></div>
+                        <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( '', 'design-2' ); ?></div>
                         <div class="tf-room-booking-box">
                             <?php Room::tf_room_sidebar_booking_form(); ?>
                         </div>
@@ -79,7 +68,7 @@ if ( ! empty( $room_options ) ) {
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets">
                     <div class="tf-room-single-booking-form-wrap">
-                        <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( $room_option, 'design-2' ); ?></div>
+                        <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( '', 'design-2' ); ?></div>
                         <div class="tf-room-booking-box">
                             <?php Room::tf_room_sidebar_booking_form(); ?>
                         </div>

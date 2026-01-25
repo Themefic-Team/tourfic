@@ -1056,7 +1056,6 @@ class Pricing {
 				$price          = wc_price( $price );
 			}  elseif ( $pricing_by == '3' ) {
 				$room_options = ! empty( $meta['room-options'] ) ? $meta['room-options'] : [];
-
 				$option_prices = [];
 				if ( ! empty( $room_options ) ) {
 					foreach ( $room_options as $key => $room_option ) {
@@ -1079,7 +1078,8 @@ class Pricing {
 						}
 					}
 				}
-				$price = min( $option_prices );
+
+				$price = !empty($option_prices) && is_array($option_prices) ? min( $option_prices ) : 0;
 
 				$discount_price = self::apply_discount($price, $hotel_discount_type, $hotel_discount_amount);
 				$discount_price = wc_price( $discount_price );

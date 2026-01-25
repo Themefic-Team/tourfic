@@ -614,6 +614,59 @@
                         }
                     }
                 }
+
+                &.tf-room-item-card-single-option{
+                    .tf-room-thumb{
+                        img{
+                            height: 332px;
+                        }
+                    }
+
+                    .tf-room-option-left{
+                        @include flexbox();
+                        @include flex-direction(column);
+                        gap: 16px;
+                    }
+                    .tf-room-item-card-right{
+                        h2{
+                            margin: 0;
+                            font-size: 2rem;
+                            line-height: 1.4;
+
+                            @media #{$max575} {
+                                font-size: 1.563rem;
+                            }
+
+                            a{
+                                color: $color-heading;
+
+                                &:hover{
+                                    color: $color-primary;
+                                }
+                            }
+                        }
+
+                        .tf-details{
+                            p{
+                                margin: 0;
+                                color: $color-text;
+                                font-size: 1rem;
+                                line-height: 1.5;
+                            }
+                        }
+
+                        .tf-room-details-url{
+                            color: $color-primary;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            line-height: 1.5;
+
+                            &:hover{
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
             }
             
             .tf-room-options-collapsed .tf-room-option-item {

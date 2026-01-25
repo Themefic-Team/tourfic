@@ -5823,10 +5823,6 @@
                     @include flexbox();
                     @include flex-wrap(wrap);
                     gap: 30px;
-                    padding: 24px;
-                    background-color: $color-brand-lite;
-                    border: 1px solid $color-border-lite;
-                    border-radius: 8px;
             
                     .tf-not-included-house-rules,
                     .tf-included-house-rules {

@@ -11720,6 +11720,60 @@ div#tf-destinationautocomplete-list div:before {
   font-size: 1.25rem;
   font-weight: 700;
 }
+.tf-single-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-thumb img,
+.tf-archive-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-thumb img {
+  height: 332px;
+}
+.tf-single-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-option-left,
+.tf-archive-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-option-left {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 16px;
+}
+.tf-single-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-item-card-right h2,
+.tf-archive-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-item-card-right h2 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.4;
+}
+@media only screen and (max-width: 575.98px) {
+  .tf-single-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-item-card-right h2,
+  .tf-archive-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-item-card-right h2 {
+    font-size: 1.563rem;
+  }
+}
+.tf-single-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-item-card-right h2 a,
+.tf-archive-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-item-card-right h2 a {
+  color: var(--tf-text-heading);
+}
+.tf-single-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-item-card-right h2 a:hover,
+.tf-archive-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-item-card-right h2 a:hover {
+  color: var(--tf-primary);
+}
+.tf-single-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-item-card-right .tf-details p,
+.tf-archive-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-item-card-right .tf-details p {
+  margin: 0;
+  color: var(--tf-text-paragraph);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.tf-single-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-item-card-right .tf-room-details-url,
+.tf-archive-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-item-card-right .tf-room-details-url {
+  color: var(--tf-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.tf-single-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-item-card-right .tf-room-details-url:hover,
+.tf-archive-template__one .tf-archive-room-details .tf-room-item-card.tf-room-item-card-single-option .tf-room-item-card-right .tf-room-details-url:hover {
+  text-decoration: underline;
+}
 .tf-single-template__one .tf-archive-room-details .tf-room-options-collapsed .tf-room-option-item,
 .tf-archive-template__one .tf-archive-room-details .tf-room-options-collapsed .tf-room-option-item {
   display: none;
@@ -21629,10 +21683,6 @@ div#tf-destinationautocomplete-list div:before {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   gap: 30px;
-  padding: 24px;
-  background-color: var(--tf-brand-lite);
-  border: 1px solid var(--tf-border-lite);
-  border-radius: 8px;
 }
 .single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules,
 .single-tf_room .tf-single-template__two .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules {
