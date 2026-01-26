@@ -2601,26 +2601,25 @@ console.log('fsdd');
             $('span.tf-children').html(children);
         })
 
-        $(document).on(
-            'click',
-            '.tf-single-template__two .tf-room-booking-form .acr-inc, .tf-single-template__two .tf-room-booking-form .acr-dec',
-            function () {
+        $(document).on( 'click', '.tf-single-template__two .tf-room-booking-form .acr-inc, .tf-single-template__two .tf-room-booking-form .acr-dec', function () {
+            const $form = $(this).closest('.tf-room-booking-form');
 
-                const $form = $(this).closest('.tf-room-booking-form');
+            const adults   = Number($form.find('input#adults').val() || 0);
+            const children = Number($form.find('input#children').val() || 0);
+            const infant   = $form.find('input#infant').length
+                ? Number($form.find('input#infant').val() || 0)
+                : 0;
 
-                const adults   = Number($form.find('input#adults').val() || 0);
-                const children = Number($form.find('input#children').val() || 0);
-                const infant   = $form.find('input#infant').length
-                    ? Number($form.find('input#infant').val() || 0)
-                    : 0;
+            let guest = adults + children + infant;
 
-                let guest = adults + children + infant;
+            guest = guest < 10 ? '0' + guest : guest;
 
-                guest = guest < 10 ? '0' + guest : guest;
+            $form.find('span.tf-room-guest').text(guest);
 
-                $form.find('span.tf-room-guest').text(guest);
+            if ($('.tf-room-booking-popup').length > 0 ){
+                $('.tf-room-booking-popup').html('');
             }
-        );
+        });
 
         $(document).ready(function () {
             $('.tf-room-booking-form').each(function () {

@@ -577,10 +577,6 @@
                             font-size: 1rem;
                             line-height: 1.5;
                             @include flex(0 0 calc(50% - 16px));
-
-                            i{
-                                color: $color-border;
-                            }
                         }
                     }
 

@@ -1025,6 +1025,7 @@ class Room {
 		$meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
 		$unique_id = ! empty( $meta['unique_id'] ) ? $meta['unique_id'] : '';
 		$hotel_id = ! empty( $meta['tf_hotel'] ) ? $meta['tf_hotel'] : '';
+		$hotel_meta = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
 		
 		// Single Template Style
 		$tf_room_layout_conditions = ! empty( $meta['tf_single_room_layout_opt'] ) ? $meta['tf_single_room_layout_opt'] : 'global';
@@ -1100,15 +1101,14 @@ class Room {
 			}
 		}
 
-		if ( $tf_room_selected_template == "design-1" ) { ?>
-			<form class="tf-hotel-booking-sidebar tf-booking-form tf-room-booking-form" method="get" autocomplete="off">
-				<?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' ); ?>
-				<div id="tour_room_details_loader">
-					<div id="tour-room-details-loader-img">
-						<img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
-					</div>
-				</div>
+		$hotel_service_avail = ! empty( $hotel_meta['airport_service'] ) ? $hotel_meta['airport_service'] : '';
+		$hotel_service_type  = ! empty( $hotel_meta['airport_service_type'] ) ? $hotel_meta['airport_service_type'] : '';
+		$room_book_by        = ! empty( $hotel_meta['booking-by'] ) ? $hotel_meta['booking-by'] : 1;
+		$room_book_url       = ! empty( $hotel_meta['booking-url'] ) ? $hotel_meta['booking-url'] : '';
 
+		if ( $tf_room_selected_template == "design-1" ) { ?>
+			<form class="tf-hotel-booking-sidebar tf-booking-form tf-room-booking-form tf-room" method="get" autocomplete="off">
+				<?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' ); ?>
 				<div class="tf-single-booking-box-wrapper tf-room tf-flex tf-flex-space-bttn tf-flex-align-center">
 					<div class="tf-select-date">
 						<div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
@@ -1237,7 +1237,7 @@ class Room {
 							</div>
 						</div>
 					</div>
-					<div class="tf-submit-button">
+					<div class="tf-submit-button room-submit-wrap">
 						<?php $ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); ?>
 						<input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
 						<input type="hidden" name="post_id" value="<?php echo esc_attr( $hotel_id ); ?>"/>
@@ -1245,9 +1245,14 @@ class Room {
 						<input type="hidden" name="unique_id" value="<?php echo esc_attr( $unique_id ); ?>"/>
 						<input type="hidden" name="children_ages" value="<?php echo esc_attr( $children_ages ); ?>"/>
 						<input type="hidden" name="single_room" value="1"/>
-						<button class="tf_btn tf_btn_full tf_btn_rounded tf-submit hotel-room-book" type="submit"><?php echo esc_html( $tf_room_book_button_text ); ?></button>
+
+						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) : ?>
+							<button class="tf_btn tf_btn_full tf_btn_rounded tf-submit tf-hotel-booking-popup-btn" href="javascript:;"><?php echo esc_html( $tf_room_book_button_text ); ?></button>
+						<?php else: ?>
+							<button class="tf_btn tf_btn_full tf_btn_rounded tf-submit hotel-room-book" type="submit"><?php echo esc_html( $tf_room_book_button_text ); ?></button>
+						<?php endif; ?>
 					</div>
-					<?php //Hotel::hotel_booking_popup( $hotel_id, get_the_ID(), $adults, $child ); ?>
+					<div class="tf-room-booking-popup"></div>
 					<script>
 						(function ($) {
 							$(document).ready(function () {

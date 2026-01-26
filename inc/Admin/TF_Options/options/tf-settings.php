@@ -957,6 +957,11 @@ TF_Settings::option( 'tf_settings', array(
 											'status' => 1,
 										),
 										array(
+											'label'  => __( 'Room Options', 'tourfic' ),
+											'slug'   => 'room-options',
+											'status' => 1,
+										),
+										array(
 											'label'  => __( 'House Rules', 'tourfic' ),
 											'slug'   => 'house-rules',
 											'status' => 1,

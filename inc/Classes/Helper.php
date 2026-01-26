@@ -232,7 +232,7 @@ class Helper {
 							$adult,
 							wp_strip_all_tags( wc_price( $hotel_extras[$key]['price'] ) )
 						),
-						'price' => $hotel_extras[$key]['price'] * $adult
+						'price' => $hotel_extras[$key]['price'] * (int) $adult
 					);
 				}
 			}

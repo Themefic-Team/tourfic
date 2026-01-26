@@ -152,9 +152,132 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		$hotel_discount_amount = ! empty( $room_meta["discount_hotel_price"] ) ? $room_meta["discount_hotel_price"] : 0;
 
 		/**
+		 * Set room availability
+		 */
+		$unique_id          = ! empty( $room_meta['unique_id'] ) ? $room_meta['unique_id'] : '';
+		$order_ids          = ! empty( $room_meta['order_id'] ) ? $room_meta['order_id'] : '';
+		$num_room_available = ! empty( $room_meta['num-room'] ) ? $room_meta['num-room'] : '1';
+		$multi_by_date_ck = ! empty( $room_meta['price_multi_day'] ) ? ! empty( $room_meta['price_multi_day'] ) : false;
+		$reduce_num_room    = ! empty( $room_meta['reduce_num_room'] ) ? $room_meta['reduce_num_room'] : false;
+		$number_orders      = '0';
+		$avil_by_date       = ! empty( $room_meta['avil_by_date'] ) ? $room_meta['avil_by_date'] : false;      // Room Available by date enabled or  not ?
+		if ( $avil_by_date ) {
+			$avail_date = ! empty( $room_meta['avail_date'] ) ? json_decode($room_meta['avail_date'], true) : [];
+		}
+
+		// Check availability by date option
+		$tfperiod = new \DatePeriod(
+			new \DateTime( $check_in . ' 00:00' ),
+			new \DateInterval( 'P1D' ),
+			(new \DateTime( $check_out . ' 23:59' ))
+		);
+
+		$avail_durationdate = [];
+		$is_first = true;
+		foreach ( $tfperiod as $date ) {
+			if($multi_by_date_ck){
+				if ($is_first) {
+					$is_first = false;
+					continue;
+				}
+			}
+			$avail_durationdate[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
+		}
+
+		// Get the original (default language) post ID using WPML
+		if ( function_exists( 'wpml_get_default_language' ) ) {
+			$original_hotel_id = apply_filters( 'wpml_object_id', $post_id, 'tf_hotel', false, wpml_get_default_language() );
+		} else {
+			$original_hotel_id = $post_id;
+		}
+		//room inventory manage
+		if ( ! empty( $order_ids ) && $reduce_num_room == true ) {
+
+			# Get backend available date range as an array
+			if ( !empty( $avil_by_date ) ) {
+
+				$order_date_ranges = array();
+
+				$backend_date_ranges = array();
+				foreach ( $avail_date as $single_date_range ) {
+
+					if(is_array($single_date_range) && !empty( $single_date_range["availability"] )){
+						array_push( $backend_date_ranges, array( strtotime( $single_date_range["availability"]["from"] ), strtotime( $single_date_range["availability"]["to"] ) ) );
+					}
+				}
+			}
+
+			# Convert order ids to array
+			$order_ids = explode( ',', $order_ids );
+			$room_bookings_per_day = array();
+
+			foreach ($avail_durationdate as $available_date) {
+				$available_timestamp = strtotime($available_date);
+
+				$room_booked_today = 0;
+
+				foreach ($order_ids as $order_id) {
+
+					# Get completed orders
+					$tf_orders_select = array(
+						'select' => "post_id,order_details",
+						'post_type' => 'hotel',
+						'query' => " AND ostatus = 'completed' AND order_id = ".$order_id." AND post_id = ".$original_hotel_id
+					);
+					$tf_hotel_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
+
+					foreach ($tf_hotel_book_orders as $item) {
+						$order_details = json_decode($item['order_details']);
+						$order_check_in_date  = strtotime($order_details->check_in);
+						$order_check_out_date = strtotime($order_details->check_out);
+						$ordered_number_of_room = !empty($order_details->room) ? $order_details->room : 0;
+
+						# Check if the order's date range overlaps with the current available date
+						if($multi_by_date_ck){
+							if ($order_check_in_date < $available_timestamp && $order_check_out_date >= $available_timestamp) {
+								$room_booked_today += $ordered_number_of_room;
+							}
+						} else {
+							if ($order_check_in_date <= $available_timestamp && $order_check_out_date >= $available_timestamp) {
+								$room_booked_today += $ordered_number_of_room;
+							}
+						}
+					}
+				}
+
+				# Track room availability for this specific date
+				$room_bookings_per_day[$available_date] = $room_booked_today;
+			}
+
+			# Find the maximum number of rooms booked on any day within the date range
+			$number_orders = !empty($room_bookings_per_day) ? max($room_bookings_per_day) : 0;
+
+			# Calculate available rooms
+			$num_room_available = $num_room_available - $number_orders;
+			$num_room_available = max($num_room_available, 0);
+		}
+
+		if ( $room_selected > $num_room_available ) {
+
+			if ( $num_room_available > 0 ) {
+				/* translators: %1$s Available rooms */
+				$response['errors'][] = sprintf(
+					esc_html__( 'Only %1$s room(s) available for the selected date.', 'tourfic' ),
+					$num_room_available
+				);
+			} else {
+				$response['errors'][] = esc_html__( 'No rooms available for the selected date.', 'tourfic' );
+			}
+		}
+
+		/**
 		 * If no errors then process
 		 */
 		if ( ! array_key_exists( 'errors', $response ) || count( $response['errors'] ) == 0 ) {
+
+			ob_start();
+			Hotel::hotel_booking_popup( $post_id, $room_id, $adult, $child );
+			$response['booking_popup'] = ob_get_clean();
 
 			// Discount Calculation and Checking
 			$adult_price = ! empty( $room_meta['adult_price'] ) ? $room_meta['adult_price'] : 0;

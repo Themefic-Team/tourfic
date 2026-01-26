@@ -8,6 +8,7 @@ use Tourfic\Classes\Room\Pricing;
 use Tourfic\Classes\Room\Room;
 
 $meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
+$pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
 ?>
 
 <div class="tf-single-template__two">
@@ -45,7 +46,9 @@ $meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
             <div class="tf-details" id="tf-hotel-overview">
                 <div class="tf-details-left">
                     <div class="tf-room-single-mobile-booking-form-wrap">
-                        <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( '', 'design-2' ); ?></div>
+                        <?php if ( $pricing_by != '3' ) : ?>
+                            <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( '', 'design-2' ); ?></div>
+                        <?php endif; ?>
                         <div class="tf-room-booking-box">
                             <?php Room::tf_room_sidebar_booking_form(); ?>
                         </div>
@@ -60,6 +63,7 @@ $meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
                     }else{
                         include TF_TEMPLATE_PART_PATH . 'room/design-1/description.php';
                         include TF_TEMPLATE_PART_PATH . 'room/design-1/amenities.php';
+                        include TF_TEMPLATE_PART_PATH . 'room/design-1/room-options.php';
                         include TF_TEMPLATE_PART_PATH . 'room/design-1/house-rules.php';
                         include TF_TEMPLATE_PART_PATH . 'room/design-1/cancellation-policy.php';
                         include TF_TEMPLATE_PART_PATH . 'room/design-1/reviews.php';
@@ -68,7 +72,9 @@ $meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets">
                     <div class="tf-room-single-booking-form-wrap">
-                        <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( '', 'design-2' ); ?></div>
+                        <?php if ( $pricing_by != '3' ) : ?>
+                            <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( '', 'design-2' ); ?></div>
+                        <?php endif; ?>
                         <div class="tf-room-booking-box">
                             <?php Room::tf_room_sidebar_booking_form(); ?>
                         </div>
@@ -202,7 +208,11 @@ $meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
             <div class="tf-popup-wrapper tf-room-popup"></div>
             <!-- Room PopUp end --> 
 
-
+            <div id="tour_room_details_loader">
+                <div id="tour-room-details-loader-img">
+                    <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
+                </div>
+            </div>
         </div>
     </div>
     <!--Content section end -->
