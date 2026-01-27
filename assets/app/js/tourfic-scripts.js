@@ -838,7 +838,7 @@
 
             if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
                 $('.error-notice').show();
-                $('.error-notice').text('Fill up the all fields');
+                $('.error-notice').text(tf_params.fields_required_msg);
                 return;
             }
 
@@ -1076,7 +1076,7 @@
 
                 if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
                     $('.error-notice').show();
-                    $('.error-notice').text('Fill up the all fields');
+                    $('.error-notice').text(tf_params.fields_required_msg);
                     return;
                 }
             }

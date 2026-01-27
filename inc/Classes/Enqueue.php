@@ -416,6 +416,8 @@ class Enqueue {
 				'car_date_required_msg' => esc_html__( 'Select Pickup & Dropoff Date', 'tourfic' ),
 				'open_street_map_text' => esc_html__( 'OpenStreetMap', 'tourfic' ),
 				'required' => esc_html__( 'This field is required.', 'tourfic'),
+				'fields_required_msg' => esc_html__( 'Fill up the all fields', 'tourfic'),
+				'no_camera_msg' => esc_html__( 'No camera found', 'tourfic'),
 			)
 		);
 

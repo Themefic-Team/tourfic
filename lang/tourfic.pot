@@ -6274,6 +6274,14 @@ msgstr ""
 msgid "This field is required."
 msgstr ""
 
+#: inc/Classes/Enqueue.php:419
+msgid "Fill up the all fields"
+msgstr ""
+
+#: inc/Classes/Enqueue.php:420
+msgid "No camera found"
+msgstr ""
+
 #: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:573
 msgid "We're offering some extra features like <b>minimum days for booking</b>, <b>enable traveler info</b>, <b>external booking</b>, <b>booking without payment</b>, <b>taxable tour</b>, <b>tax class for Woocommerce</b> in our pro plan. <a href=\"https://tourfic.com/\" target=\"_blank\">Upgrade to our pro package today to take advantage of these fantastic options!</a>"
 msgstr ""

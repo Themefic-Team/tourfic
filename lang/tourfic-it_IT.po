@@ -4,7 +4,7 @@ msgstr ""
 "WordPress Plugin 2.18.12\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tourfic\n"
 "POT-Creation-Date: 2026-01-22T11:35:48+00:00\n"
-"PO-Revision-Date: 2026-01-26 19:34+0600\n"
+"PO-Revision-Date: 2026-01-27 10:48+0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -6853,6 +6853,14 @@ msgstr "OpenStreetMap"
 #: inc/Classes/Enqueue.php:418
 msgid "This field is required."
 msgstr "Questo campo è richiesto."
+
+#: inc/Classes/Enqueue.php:419
+msgid "Fill up the all fields"
+msgstr "Riempire tutti i campi"
+
+#: inc/Classes/Enqueue.php:420
+msgid "No camera found"
+msgstr "Nessuna telecamera trovata"
 
 #: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:573
 msgid ""
