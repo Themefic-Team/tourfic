@@ -78,19 +78,19 @@ TF_Settings::option( 'tf_settings', array(
 					'img-height'=> '100',
 					'options'  => array(
 						'hotel' => array(
-							'title' => 'Hotel',
+							'title' => esc_html__( 'Hotel', 'tourfic' ),
 							'url'   => TF_ASSETS_ADMIN_URL . "images/hotel.png",
 						),
 						'tour' 		=> array(
-							'title'	=> 'Tour',
+							'title'	=> esc_html__( 'Tour', 'tourfic' ),
 							'url' 	=> TF_ASSETS_ADMIN_URL."images/tour.png",
 						),
 						'apartment'  => array(
-							'title' => 'Apartment',
+							'title' => esc_html__( 'Apartment', 'tourfic' ),
 							'url'   => TF_ASSETS_ADMIN_URL . "images/apartment.png",
 						),
 						'carrentals'  => array(
-							'title' => 'Car',
+							'title' => esc_html__( 'Car', 'tourfic' ),
 							'url'   => TF_ASSETS_ADMIN_URL . "images/carrentals.png",
 						),
 					),
