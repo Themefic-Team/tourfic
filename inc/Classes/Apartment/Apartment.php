@@ -166,7 +166,7 @@ class Apartment {
 						$infant_number = ! empty( $room['infant'] ) ? $room['infant'] : '0';
 						?>
                         <h3><?php echo esc_html( $room['title'] ); ?></h3>
-                        <p><?php echo esc_html( $room['description'] ); ?></p>
+                        <div><?php echo wp_kses_post( $room['description'] ); ?></div>
                         <div class="tf-room-title description">
 							<?php if ( $footage ) { ?>
                                 <div class="tf-tooltip tf-d-ib">
@@ -268,6 +268,9 @@ class Apartment {
 					</div>
 					<div class="tf-popup-right">
 						<span class="tf-popup-info-title"><?php esc_html_e("Room details", "tourfic"); ?></span>
+						<div class="tf-room-details">
+							<?php echo wp_kses_post($room['description']); ?>
+						</div>
 						<ul>
 							<?php if ( $footage ) { ?>
 								<li><i class="ri-pencil-ruler-2-line"></i> <?php echo esc_html( $footage ); ?><?php esc_html_e( 'sft', 'tourfic' ); ?></li>
