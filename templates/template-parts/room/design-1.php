@@ -45,6 +45,7 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
             <!-- Hotel details Srart -->
             <div class="tf-details" id="tf-hotel-overview">
                 <div class="tf-details-left">
+                    <?php if(wp_is_mobile()): ?>
                     <div class="tf-room-single-mobile-booking-form-wrap">
                         <?php if ( $pricing_by != '3' ) : ?>
                             <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( '', 'design-2' ); ?></div>
@@ -53,6 +54,8 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
                             <?php Room::tf_room_sidebar_booking_form(); ?>
                         </div>
                     </div>
+                    <?php endif; ?>
+
                     <?php 
                     if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-room-layout']) ){
                         foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-room-layout'] as $section){
@@ -71,6 +74,7 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
                     ?>
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets">
+                    <?php if(!wp_is_mobile()): ?>
                     <div class="tf-room-single-booking-form-wrap">
                         <?php if ( $pricing_by != '3' ) : ?>
                             <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( '', 'design-2' ); ?></div>
@@ -79,6 +83,7 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
                             <?php Room::tf_room_sidebar_booking_form(); ?>
                         </div>
                     </div>
+                    <?php endif; ?>
                     
                     <div class="tf-review-widget tf-single-widgets ">
                         <?php

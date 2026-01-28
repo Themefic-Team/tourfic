@@ -5,6 +5,7 @@ namespace Tourfic\App\Without_Payment;
 use Tourfic\Core\Without_Payment_Booking;
 use Tourfic\Classes\Hotel\Hotel;
 use Tourfic\Classes\Helper;
+use Tourfic\Classes\Hotel\Pricing;
 
 // don't call the file directly
 defined( 'ABSPATH' ) || exit;
@@ -38,6 +39,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		$post_id         = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
 		$room_id         = isset( $_POST['room_id'] ) ? intval( sanitize_text_field( $_POST['room_id'] ) ) : null;
 		$unique_id       = isset( $_POST['unique_id'] ) ? intval( sanitize_text_field( $_POST['unique_id'] ) ) : null;
+		$option_id       = isset( $_POST['option_id'] ) ? sanitize_text_field( $_POST['option_id'] ) : null;
 		$location        = isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : '';
 		$adult           = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
 		$child           = isset( $_POST['child'] ) ? intval( sanitize_text_field( $_POST['child'] ) ) : '0';
@@ -47,11 +49,12 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		$check_out       = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
 		$deposit         = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 		$airport_service = isset( $_POST['airport_service'] ) ? sanitize_text_field( $_POST['airport_service'] ) : '';
-		$extras = isset( $_POST['extras'] ) ? $_POST['extras'] : '';
+		$extras = isset( $_POST['extras'] ) ? $_POST['extras'] : [];
 
 		$total_people    = $adult + $child;
 
 		# Calculate night number
+		$day_difference = 0;
 		if ( $check_in && $check_out ) {
 			$check_in_stt   = strtotime( $check_in . ' +1 day' );
 			$check_out_stt  = strtotime( $check_out );
@@ -109,7 +112,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		$total_extras_price = 0;
 		$hotel_extra_option     = ! empty( $meta['hotel_extra_option'] ) ? $meta['hotel_extra_option'] : '';
 		if(function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($hotel_extra_option)){
-			$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
+			$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? Helper::tf_data_types($meta['hotel-extra']) : [];
 			foreach ( $extras as $key => $extra ) {
 				$extra_service = Helper::tf_hotel_extras_title_price( $post_id, $adult, $child, $extra );
 				$total_extras_title[] = $hotel_extras[$extra]['title'];
@@ -330,8 +333,35 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 								$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (float) $child_price - ( ( (float) $child_price / 100 ) * (float) $hotel_discount_amount ), 2 ) ) );
 							}
 						}
+						
+						if ( $pricing_by == '1' ) {
+							$total_price += (float) $room_price;
+						} elseif ( $pricing_by == '2' ) {
+							$total_price += ( (float) $adult_price * (int) $adult ) + ( (float) $child_price * (int) $child );
+						} elseif ( $pricing_by == '3' ) {
+							$data          = $available_rooms[0];
+							$options_count = $data['options_count'] ?? 0;
+							$unique_id     = ! empty( $room_meta['unique_id'] ) ? $room_meta['unique_id'] : '';
 
-						$total_price += $pricing_by == '1' ? (float) $room_price : ( ( (float) $adult_price * (int) $adult ) + ( (float) $child_price * (int) $child ) );
+							for ( $i = 0; $i <= $options_count - 1; $i ++ ) {
+								$_option_id = $unique_id . '_' . $i;
+								if ( $_option_id == $option_id ) {
+									if ( $data[ 'tf_room_option_' . $i ] == '1' && $data[ 'tf_option_pricing_type_' . $i ] == 'per_room' ) {
+										$room_price  = ! empty( $data[ 'tf_option_room_price_' . $i ] ) ? $data[ 'tf_option_room_price_' . $i ] : 0;
+										$room_price  = Pricing::apply_discount($room_price, $hotel_discount_type, $hotel_discount_amount);
+										$total_price += $room_price;
+									} else if ( $data[ 'tf_room_option_' . $i ] == '1' && $data[ 'tf_option_pricing_type_' . $i ] == 'per_person' ) {
+										$adult_price = ! empty( $data[ 'tf_option_adult_price_' . $i ] ) ? $data[ 'tf_option_adult_price_' . $i ] : 0;
+										$child_price = ! empty( $data[ 'tf_option_child_price_' . $i ] ) ? $data[ 'tf_option_child_price_' . $i ] : 0;
+										$adult_price = Pricing::apply_discount($adult_price, $hotel_discount_type, $hotel_discount_amount);
+										$child_price = Pricing::apply_discount($child_price, $hotel_discount_type, $hotel_discount_amount);
+
+										$total_price += ( $adult_price * $adult ) + ( $child_price * $child );
+									}
+
+								}
+							}
+						}
 					};
 
 				}
@@ -359,6 +389,29 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 					$adult_price = (float) $adult_price * (int) $adult;
 					$child_price = (float) $child_price * (int) $child;
 					$total_price = (float) $adult_price + (float) $child_price;
+				} elseif ( $pricing_by == '3' ) {
+					$room_options = ! empty( $room_meta['room-options'] ) ? $room_meta['room-options'] : [];
+					$unique_id    = ! empty( $room_meta['unique_id'] ) ? $room_meta['unique_id'] : '';
+
+					if ( ! empty( $room_options ) ) {
+						foreach ( $room_options as $room_option_key => $room_option ) {
+							$_option_id = $unique_id . '_' . $room_option_key;
+							if ( $_option_id == $option_id ) {
+								$option_price_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
+								if ( $option_price_type == 'per_room' ) {
+									$total_price = ! empty( $room_option['option_price'] ) ? floatval( $room_option['option_price'] ) : 0;
+									$total_price = Pricing::apply_discount($total_price, $hotel_discount_type, $hotel_discount_amount);
+								} elseif ( $option_price_type == 'per_person' ) {
+									$option_adult_price = ! empty( $room_option['option_adult_price'] ) ? floatval( $room_option['option_adult_price'] ) : 0;
+									$option_child_price = ! empty( $room_option['option_child_price'] ) ? floatval( $room_option['option_child_price'] ) : 0;
+
+									$option_adult_price = Pricing::apply_discount($option_adult_price, $hotel_discount_type, $hotel_discount_amount);
+									$option_child_price = Pricing::apply_discount($option_child_price, $hotel_discount_type, $hotel_discount_amount);
+									$total_price        = ( $option_adult_price * $adult ) + ( $option_child_price * $child );
+								}
+							}
+						}
+					}
 				}
 
 				# Multiply pricing by night number

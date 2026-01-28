@@ -5236,7 +5236,7 @@
                         gap: 40px;
 
                         .tf-room-single-mobile-booking-form-wrap{
-                            display: none;
+                            // display: none;
 
                             .tf-single-booking-box-wrapper{
                                 .tf-search-input.form-control{
@@ -5249,9 +5249,9 @@
                         @media #{$max1024} {
                             width: 100%;
 
-                            .tf-room-single-mobile-booking-form-wrap{
-                                display: block;
-                            }
+                            // .tf-room-single-mobile-booking-form-wrap{
+                            //     display: block;
+                            // }
                         }
 
                         .tf-overview-popular-facilities {
@@ -5280,9 +5280,9 @@
                             width: 100%;
                             padding: 0;
 
-                            .tf-room-single-booking-form-wrap{
-                                display: none;
-                            }
+                            // .tf-room-single-booking-form-wrap{
+                            //     display: none;
+                            // }
                         }
                     }
                 }
@@ -5720,7 +5720,8 @@
                     }
                     .tf-submit-button{
                         width: 100%;
-                        button{
+
+                        .tf_btn{
                             background-color: $color-primary;
                             width: 100%;
                             min-height: 72px;

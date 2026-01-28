@@ -1024,6 +1024,7 @@ class Room {
 
 		$meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
 		$unique_id = ! empty( $meta['unique_id'] ) ? $meta['unique_id'] : '';
+		$pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
 		$hotel_id = ! empty( $meta['tf_hotel'] ) ? $meta['tf_hotel'] : '';
 		$hotel_meta = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
 		
@@ -1137,27 +1138,6 @@ class Room {
 							</div>
 						</div>
 					</div>
-					<?php if ( isset( $meta['pricing-by'] ) && $meta['pricing-by'] == '3' ) : ?>
-					<div class="tf-select-date">
-						<div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
-							<label for="tf-checkout-date"><?php esc_html_e("Room Option", "tourfic"); ?></label>
-							<select name="option_id" class="info-select tf-search-field">
-								<option value=""><?php esc_html_e("Select Room Option", "tourfic"); ?></option>
-								<?php
-								$room_meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
-								$room_options = ! empty( $room_meta['room-options'] ) ? $room_meta['room-options'] : [];
-								if ( ! empty( $room_options ) ) {
-									foreach ( $room_options as $option_key => $option ) {
-										$option_title = ! empty( $option['option_title'] ) ? $option['option_title'] : '';
-										$selected = ( $room_option == $option_key ) ? 'selected' : '';
-										echo '<option value="'. esc_attr($unique_id . '_' . $option_key) . '" ' . esc_attr( $selected ) . '>' . esc_html( $option_title ) . '</option>';
-									}
-								}
-								?>
-							</select>
-						</div>
-					</div>
-					<?php endif; ?>
 					<div class="tf-single-booking-box-bottom">
 						<div class="tf-select-room">
 							<div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
@@ -1246,10 +1226,16 @@ class Room {
 						<input type="hidden" name="children_ages" value="<?php echo esc_attr( $children_ages ); ?>"/>
 						<input type="hidden" name="single_room" value="1"/>
 
-						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) : ?>
-							<button class="tf_btn tf_btn_full tf_btn_rounded tf-submit tf-hotel-booking-popup-btn" href="javascript:;"><?php echo esc_html( $tf_room_book_button_text ); ?></button>
+						<?php if( $pricing_by == 3 ) :?>
+							<a class="tf_btn tf_btn_full tf_btn_rounded" href="#tf-room-options"><?php echo esc_html( $tf_room_book_button_text ); ?></a>
+							<button class="tf-hotel-booking-popup-btn" type="submit" style="display: none;"></button>
+							<input type="hidden" name="option_id" value=""/>
 						<?php else: ?>
-							<button class="tf_btn tf_btn_full tf_btn_rounded tf-submit hotel-room-book" type="submit"><?php echo esc_html( $tf_room_book_button_text ); ?></button>
+							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) : ?>
+								<button class="tf_btn tf_btn_full tf_btn_rounded tf-submit tf-hotel-booking-popup-btn" href="javascript:;"><?php echo esc_html( $tf_room_book_button_text ); ?></button>
+							<?php else: ?>
+								<button class="tf_btn tf_btn_full tf_btn_rounded tf-submit hotel-room-book" type="submit"><?php echo esc_html( $tf_room_book_button_text ); ?></button>
+							<?php endif; ?>
 						<?php endif; ?>
 					</div>
 					<div class="tf-room-booking-popup"></div>

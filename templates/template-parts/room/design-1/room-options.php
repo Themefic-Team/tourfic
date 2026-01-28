@@ -6,11 +6,12 @@ use Tourfic\Classes\Room\Pricing;
 
 defined( 'ABSPATH' ) || exit;
 $tf_room_book_button_text = ! empty( Helper::tfopt( 'room_booking_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'room_booking_button_text' ) ) ) : esc_html__( 'Book Now', 'tourfic' );
-$pricing_by    = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
+$pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
+$unique_id  = ! empty( $meta['unique_id'] ) ? $meta['unique_id'] : '';
 
 if ( $pricing_by == '3' && isset( $meta['room-options'] ) && ! empty( Helper::tf_data_types( $meta['room-options'] ) ) ):
     ?>
-    <div class="tf-room-options">
+    <div class="tf-room-options" id="tf-room-options">
         <?php foreach ( $meta['room-options'] as $room_option_key => $room_option ): ?>
             <div class="tf-room-option">
                 <div class="tf-room-option-left">
@@ -43,7 +44,7 @@ if ( $pricing_by == '3' && isset( $meta['room-options'] ) && ! empty( Helper::tf
                     </div>
 
                     <!-- View Details -->
-                    <a href="" class="tf_btn tf_btn_rounded tf_btn_large tf_btn_sharp"><?php echo esc_html( $tf_room_book_button_text ); ?></a>
+                    <a href="" class="tf_btn tf_btn_rounded tf_btn_large tf-room-option-book" data-option-key="<?php echo esc_attr($unique_id . '_' . $room_option_key); ?>"><?php echo esc_html( $tf_room_book_button_text ); ?></a>
                 </div>
             </div>
         <?php endforeach; ?>

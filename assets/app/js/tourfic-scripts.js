@@ -2408,9 +2408,9 @@ function convertTo24HourFormat(timeStr) {
                 }
             }
             
-
             var room_id = $this.closest('.tf-room').find('input[name=room_id]').val();
             var unique_id = $this.closest('.tf-room').find('input[name=unique_id]').val();
+            var option_id = $this.closest('.tf-room').find('[name=option_id]').val();
             var hotel_deposit = $this.closest('.tf-room').find('input[name=make_deposit]').is(':checked');
             var location = $('input[name=place]').val();
             var children_ages = $('input[name=children_ages]').val();
@@ -2426,6 +2426,7 @@ function convertTo24HourFormat(timeStr) {
                 post_id: post_id,
                 room_id: room_id,
                 unique_id: unique_id,
+                option_id: option_id,
                 location: location,
                 adult: adult,
                 child: child,
@@ -2567,6 +2568,19 @@ function convertTo24HourFormat(timeStr) {
             })
         });
 
+        $('body').on('click', '.tf-room-option .tf-room-option-book', function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            var room_option_id = $this.data('option-key');
+
+            $('input[name=option_id').val(room_option_id);
+
+            if(window.innerWidth <= 768){
+                $('.tf-room-booking-form.tf-room .tf-hotel-booking-popup-btn').trigger('click');
+            } else {
+                $('.tf-room-booking-form.tf-room .tf-hotel-booking-popup-btn').trigger('click');
+            }
+        });
 
         $(document).on("change", "[name='airport_service'], [name='extra_service']", function (e) {
             var $this = $(this);
