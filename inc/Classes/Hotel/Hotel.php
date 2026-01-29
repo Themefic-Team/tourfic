@@ -2735,7 +2735,7 @@ class Hotel {
                             <span class="tf-booking-date"><?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'd' ) ) : esc_html__( '00', 'tourfic' ); ?></span>
                             <span class="tf-booking-month">
 								<span>
-									<?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'M' ) ) : esc_html( gmdate( 'M' ) ); ?>
+									<?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'M' ) ) : esc_html( wp_date( 'M' ) ); ?>
 								</span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
@@ -2750,7 +2750,7 @@ class Hotel {
                         <div class="tf-booking-date-wrap">
                             <span class="tf-booking-date"><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'd' ) ) : esc_html__( '00', 'tourfic' ); ?></span>
                             <span class="tf-booking-month">
-								<span><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'M' ) ) : esc_html( gmdate( 'M' ) ); ?></span>
+								<span><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'M' ) ) : esc_html( wp_date( 'M' ) ); ?></span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 								</svg>
