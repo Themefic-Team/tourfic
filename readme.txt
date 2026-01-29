@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.20.2
+Stable tag: 2.20.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -412,6 +412,12 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.20.3 – January 22, 2026 =
+
+- Fixed: Issue with enquiry modal display.
+- Fixed: Tour itinerary map not rendering correctly.
+- Fixed: Incorrect apartment pricing issue.
+
 = 2.20.2 – January 16, 2026 =
 
 - Added: Enhanced security feature.
@@ -438,12 +444,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Offline payment tour voucher issue.
 - Fixed: Wishlist issue for logged-out users.
 - Fixed: Enquiry disable option issue.
-
-= 2.18.11 – December 24, 2025 =
-
-- Tweak: Tour pricing behavior
-- Tweak: Migrator functionality
-- Tweak: Tour and apartment search handling
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 

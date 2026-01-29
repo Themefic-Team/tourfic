@@ -5,6 +5,7 @@
         "composer.json",
         "composer.lock",
         ".gitignore",
+        "action-hook.md",
         "webpack-config.js",
         "package-lock.json",
         "package.json",
