@@ -1639,9 +1639,9 @@ class Hotel {
                                     <span class="tf-label"><?php esc_html_e( 'Check in', 'tourfic' ); ?></span>
                                     <div class="tf_form_inners">
                                         <div class="tf_checkin_dates">
-                                            <span class="date"><?php echo esc_html( gmdate( 'd' ) ); ?></span>
+                                            <span class="date"><?php echo esc_html( wp_date( 'd' ) ); ?></span>
                                             <span class="month">
-											<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+											<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -1662,9 +1662,9 @@ class Hotel {
                                     <span class="tf-label"><?php esc_html_e( 'Check Out', 'tourfic' ); ?></span>
                                     <div class="tf_form_inners">
                                         <div class="tf_checkout_dates">
-                                            <span class="date"><?php echo esc_html( gmdate( 'd' ) ); ?></span>
+                                            <span class="date"><?php echo esc_html( wp_date( 'd' ) ); ?></span>
                                             <span class="month">
-											<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+											<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -2178,10 +2178,10 @@ class Hotel {
                                         </svg>
                                     </div>
                                     <div class="tf_checkin_dates tf-flex tf-flex-align-center">
-                                        <span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+                                        <span class="date field--title"><?php echo esc_html(date_i18n('d')); ?></span>
                                         <div class="tf-search__form__field__mthyr">
-                                            <span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
-                                            <span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+                                            <span class="month form--span"><?php echo esc_html(date_i18n('M')); ?></span>
+                                            <span class="year form--span"><?php echo esc_html(date_i18n('Y')); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -2211,10 +2211,10 @@ class Hotel {
                                     </svg>
                                 </div>
                                 <div class="tf_checkout_dates tf-flex tf-flex-align-center">
-                                    <span class="date field--title"><?php echo esc_html(gmdate('d', strtotime('+1 day'))); ?></span>
+                                    <span class="date field--title"><?php echo esc_html(wp_date('d', strtotime('+1 day'))); ?></span>
                                     <div class="tf-search__form__field__mthyr">
-                                        <span class="month form--span"><?php echo esc_html(gmdate('M'), strtotime('+1 day')); ?></span>
-                                        <span class="year form--span"><?php echo esc_html(gmdate('Y'), strtotime('+1 day')); ?></span>
+                                        <span class="month form--span"><?php echo esc_html(wp_date('M'), strtotime('+1 day')); ?></span>
+                                        <span class="year form--span"><?php echo esc_html(wp_date('Y'), strtotime('+1 day')); ?></span>
                                     </div>
                                 </div>
 
