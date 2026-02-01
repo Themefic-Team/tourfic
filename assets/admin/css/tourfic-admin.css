@@ -1933,8 +1933,8 @@ Steps
   width: 100%;
 }
 .tf-setting-dashboard .tf-setting-overview-section {
-  margin: 24px 24px 0px 0;
   position: relative;
+  margin-bottom: 32px;
 }
 .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid {
   display: flex;
@@ -1951,9 +1951,11 @@ Steps
   }
 }
 .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid {
-  padding: 20px;
+  padding: 16px;
   border-radius: 8px;
-  background-color: #ffffff;
+  border: 1px solid #E7F5FD;
+  background: linear-gradient(180deg, rgba(231, 245, 253, 0.1) 0%, rgba(252, 235, 224, 0.1) 100%), #FFF;
+  box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
   display: flex;
   flex-wrap: wrap;
   flex-basis: calc(16.5% - 0px);
@@ -1985,34 +1987,35 @@ Steps
     flex-basis: 100%;
   }
 }
-.tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  flex-shrink: 0;
+.tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid:nth-child(2) {
+  border: 1px solid #FFE5D3;
+  background: linear-gradient(180deg, rgba(255, 229, 211, 0.1) 0%, rgba(255, 226, 240, 0.1) 100%), #FFF;
+  box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
 }
-.tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-icon img {
-  width: 100%;
+.tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid:nth-child(3) {
+  border: 1px solid #CBF4DF;
+  background: linear-gradient(180deg, rgba(203, 244, 223, 0.1) 0%, rgba(240, 252, 245, 0.1) 100%), #FFF;
+  box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
 }
-@media only screen and (max-width: 1650px) {
-  .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-icon {
-    width: 42px;
-    height: 42px;
-  }
+.tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid:nth-child(4) {
+  border: 1px solid #DCE9FF;
+  background: linear-gradient(180deg, rgba(241, 234, 255, 0.1) 0%, rgba(255, 237, 237, 0.1) 100%), #FFF;
+  box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
 }
-.tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content {
-  padding-left: 25px;
-}
-@media only screen and (max-width: 1650px) {
-  .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content {
-    padding-left: 10px;
-  }
+.tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid:nth-child(5) {
+  border: 1px solid #F1EAFF;
+  background: linear-gradient(180deg, rgba(235, 223, 248, 0.1) 0%, rgba(248, 251, 220, 0.1) 100%), #FFF;
+  box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
 }
 .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content p {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #222;
-  margin: 0 0 10px;
+  color: #414D59;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  align-items: center;
 }
 @media only screen and (max-width: 1650px) {
   .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content p {
@@ -2020,11 +2023,11 @@ Steps
   }
 }
 .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content h3 {
-  margin: 0;
+  color: #27333F;
   font-size: 30px;
-  font-weight: 700;
-  color: #000;
-  line-height: 0.8;
+  font-weight: 600;
+  line-height: 120%;
+  margin: 0 0 8px 0;
 }
 @media only screen and (max-width: 1650px) {
   .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content h3 {
@@ -2047,11 +2050,12 @@ Steps
   }
 }
 .tf-setting-dashboard .tf-setting-performace-section h2 {
-  font-size: 26px;
+  color: #27333F;
+  font-size: 17px;
   font-weight: 600;
-  line-height: 1;
-  color: #000;
-  margin: 0 0 16px;
+  line-height: 150%;
+  letter-spacing: -0.25px;
+  margin: 0 0 8px 0;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-wrapper {
   -webkit-flex: 0 0 calc(70% - 24px);
@@ -2062,6 +2066,7 @@ Steps
   -webkit-flex: 0 0 30%;
   -ms-flex: 0 0 30%;
   flex: 0 0 30%;
+  margin-top: 16px;
 }
 .tf-setting-dashboard .tf-setting-performace-section #tf-report-loader {
   position: absolute;
@@ -2130,40 +2135,128 @@ Steps
   /* Loader */
   /* Customization */
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-plugin-lists {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box {
   border-radius: 8px;
-  background: #F8F7FD;
-  padding: 16px;
+  border: 0.5px solid #238DFB;
+  background: #FFF;
+  box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
+  padding: 0 32px 32px 32px;
+  margin-bottom: 32px;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-plugin-lists h3 {
-  color: #06040C;
-  font-size: 17px;
-  font-style: normal;
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header .premium-logo {
+  text-align: center;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header .premium-logo img {
+  margin-top: -16px;
+  margin-bottom: 16px;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header h3 {
+  color: #0464C8;
+  font-size: 22px;
   font-weight: 600;
   line-height: 150%;
   margin: 0 0 16px 0;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-plugin-lists ul {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header h4 {
+  color: #27333F;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: -0.25px;
+  margin: 0 0 16px 0;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header p {
+  color: #414D59;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0 0 16px 0;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-features ul {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  gap: 16px;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-features ul li {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  color: #27333F;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-button {
+  padding: 16px 0;
+  border-bottom: 1px solid #F2F5F7;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-button a {
+  padding: 12px 32px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #0352A0 0%, #0464C8 100%);
+  color: #FFF;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px;
+  text-decoration: navajowhite;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-button p {
+  color: #27333F;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-moneyback-notice {
+  padding-top: 8px;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-moneyback-notice h2 {
+  color: #27333F;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px;
+  margin: 0;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-plugin-lists h3 {
+  color: #27333F;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: -0.25px;
+  margin: 0 0 8px 0;
+  padding-left: 16px;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-plugin-lists .tf-others-plugin {
+  border-radius: 8px;
+  background: #FFF;
+  box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
+  padding: 16px;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-plugin-lists .tf-others-plugin ul {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 6px;
   margin: 0;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-item {
   border-radius: 6px;
   background: #FFF;
-  box-shadow: 0 1px 4px 0 rgba(44, 39, 63, 0.01), 0 2px 2px 0 rgba(44, 39, 63, 0.02), 0 1px 1px 0 rgba(44, 39, 63, 0.04);
-  padding: 20px 24px 24px 20px;
+  padding: 16px;
   transition: all ease-in-out 0.3s;
   margin-bottom: 0;
   position: relative;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-item.featured {
   border-radius: 6px;
-  border: 4px solid transparent;
-  background: linear-gradient(white, white) padding-box, linear-gradient(90deg, #489355 0%, #B8FC81 100%) border-box;
-  box-shadow: 0px 1px 4px 0px rgba(44, 39, 63, 0.01), 0px 2px 2px 0px rgba(44, 39, 63, 0.02), 0px 1px 1px 0px rgba(44, 39, 63, 0.04);
   box-sizing: border-box;
+  background: #FFFCF5;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content {
   display: flex;
@@ -2188,7 +2281,7 @@ Steps
   width: calc(100% - 167px);
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title h4 {
-  color: #2C273F;
+  color: #27333F;
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
@@ -2209,11 +2302,10 @@ Steps
   margin-left: 6px;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title p {
-  color: #5D5676;
-  font-size: 15px;
-  font-style: normal;
+  color: #414D59;
+  font-size: 13px;
   font-weight: 400;
-  line-height: 24px; /* 160% */
+  line-height: 20px;
   margin: 0;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn {
@@ -2221,7 +2313,7 @@ Steps
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button {
   padding: 0px;
-  color: #382673;
+  color: #0464C8;
   font-size: 15px;
   font-style: normal;
   font-weight: 500;
@@ -2230,11 +2322,14 @@ Steps
   position: relative;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.install {
-  color: #382673;
+  color: #0464C8;
   cursor: pointer;
 }
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.install svg path {
+  stroke: #0464C8;
+}
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.activate {
-  color: #382673;
+  color: #0464C8;
   cursor: pointer;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.pro, .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.activate-pro {
@@ -2245,7 +2340,7 @@ Steps
   cursor: pointer;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-status.active {
-  color: #382673;
+  color: #0464C8;
   opacity: 0.8;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-status.active-pro {
@@ -2293,18 +2388,18 @@ Steps
   background: #fff;
   padding: 16px;
   border-radius: 6px;
-  margin: 16px 0 16px 0;
+  margin: 32px 0 32px 0;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-customization-quote .tf-quote-content h3 {
   margin: 0 0 4px 0;
-  color: #1B334B;
+  color: #27333f;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: 150%; /* 27px */
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-customization-quote .tf-quote-content p {
-  color: #344D65;
+  color: #414d59;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -2319,44 +2414,38 @@ Steps
   line-height: 24px; /* 160% */
   text-decoration: none;
   border-radius: 8px;
-  background: #003C7A;
+  background: linear-gradient(180deg, #0352A0 0%, #0464C8 100%);
   padding: 8px 16px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access {
-  background: #F7F8FA;
-  border-radius: 8px;
-  padding: 16px;
-}
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access h3 {
-  color: #06040C;
+  color: #27333F;
   font-size: 17px;
-  font-style: normal;
   font-weight: 600;
   line-height: 150%; /* 25.5px */
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   margin-top: 0px;
+  padding-left: 16px;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access .tf-quick-access-wrapper {
+  padding: 16px;
+  border-radius: 8px;
+  background: #FFF;
+  box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 16px;
   flex-direction: column;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access .tf-quick-access-wrapper .tf-access-item {
-  background: #FFF;
-  box-shadow: 0 1px 4px 0 rgba(44, 39, 63, 0.01), 0 2px 2px 0 rgba(44, 39, 63, 0.02), 0 1px 1px 0 rgba(44, 39, 63, 0.04);
-  border-radius: 6px;
   transition: all ease-in-out 0.3s;
   width: 100%;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access .tf-quick-access-wrapper .tf-access-item a {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
   text-decoration: none;
   color: #2C273F;
   font-size: 15px;
@@ -2364,6 +2453,16 @@ Steps
   font-weight: 600;
   line-height: 24px; /* 160% */
   gap: 12px;
+  border-bottom: 0.5px solid #D9E0E8;
+  background: #FFF;
+  padding: 16px;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access .tf-quick-access-wrapper .tf-access-item a:focus {
+  outline: none;
+  box-shadow: none;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-quick-access .tf-quick-access-wrapper .tf-access-item:last-child a {
+  border-bottom: 0px solid;
 }
 
 .tf-settings-help-center .tf-support-cards {

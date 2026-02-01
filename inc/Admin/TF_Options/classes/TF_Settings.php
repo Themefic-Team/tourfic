@@ -220,112 +220,132 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<?php \Tourfic\Classes\Helper::tf_dashboard_header(); ?>
 
 				<div class="tf-setting-preview">
-					<div class="tf-setting-overview-section">
-						<h2><?php esc_html_e("Overview","tourfic"); ?></h2>
-						<div class="tf-performance-grid">
-							<div class="tf-single-performance-grid">
-								<div class="tf-single-performance-icon">
-								<img src="<?php echo esc_url(TF_ASSETS_APP_URL.'images/tf-hotel.png'); ?>" alt="total Hotel">
-								</div>
-								<div class="tf-single-performance-content">
-									<p><?php esc_html_e("Total Hotels","tourfic"); ?></p>
-									<h3>
-										<?php
-										$tf_total_hotels = array(
-											'post_type'      => 'tf_hotel',
-											'post_status'    => 'publish',
-											'posts_per_page' => - 1
-										);
-										echo count( get_posts ($tf_total_hotels ) );
-										?>
-									</h3>
-								</div>
-							</div>
-
-							<div class="tf-single-performance-grid">
-								<div class="tf-single-performance-icon">
-								<img src="<?php echo esc_url(TF_ASSETS_APP_URL.'images/tf-tours.png'); ?>" alt="total Tours">
-								</div>
-								<div class="tf-single-performance-content">
-									<p><?php esc_html_e("Total Tours","tourfic"); ?></p>
-									<h3>
-										<?php
-										$tf_total_tours = array(
-											'post_type'      => 'tf_tours',
-											'post_status'    => 'publish',
-											'posts_per_page' => - 1
-										);
-										echo count( get_posts ($tf_total_tours ));
-										?>
-									</h3>
-								</div>
-							</div>
-
-							<div class="tf-single-performance-grid">
-								<div class="tf-single-performance-icon">
-									<img src="<?php echo esc_url(TF_ASSETS_APP_URL.'images/tf-apartment.png'); ?>" alt="total apartment">
-								</div>
-								<div class="tf-single-performance-content">
-									<p><?php esc_html_e("Total Apartments","tourfic"); ?></p>
-									<h3>
-										<?php
-										$tf_total_apartments = array(
-											'post_type'      => 'tf_apartment',
-											'post_status'    => 'publish',
-											'posts_per_page' => - 1
-										);
-										echo count( get_posts ($tf_total_apartments ) );
-										?>
-									</h3>
-								</div>
-							</div>
-
-							<div class="tf-single-performance-grid">
-								<div class="tf-single-performance-icon">
-								<img src="<?php echo esc_url(TF_ASSETS_APP_URL.'images/tf-booking-online.png'); ?>" alt="total Booking">
-								</div>
-								<div class="tf-single-performance-content">
-									<p><?php esc_html_e("Total Bookings","tourfic"); ?></p>
-									<h3>
-										<?php
-										if ( Helper::tf_is_woo_active() ) {
-											$tf_order_query_orders = wc_get_orders( array(
-													'limit'  => - 1,
-													'type'   => 'shop_order',
-													'status' => array( 'wc-completed' ),
-												)
-											);
-											echo count( $tf_order_query_orders );
-										} else {
-											echo '0';
-										}
-										?>
-									</h3>
-								</div>
-							</div>
-							<div class="tf-single-performance-grid">
-								<div class="tf-single-performance-icon">
-								<img src="<?php echo esc_url(TF_ASSETS_APP_URL.'images/tf-add-user.png'); ?>" alt="total Customer">
-								</div>
-								<div class="tf-single-performance-content">
-									<p><?php esc_html_e("Total Customers","tourfic"); ?></p>
-									<h3>
-										<?php
-										$tf_customer_query = new WP_User_Query(
-											array(
-												'role' => 'customer',
-											)
-										);
-										echo count( $tf_customer_query->get_results() );
-										?>
-									</h3>
-								</div>
-							</div>
-						</div>
-					</div>
 
 					<div class="tf-setting-performace-section">
 						<div class="tf-report-wrapper">
+							<div class="tf-setting-overview-section">
+								<h2><?php esc_html_e("Overview","tourfic"); ?></h2>
+								<div class="tf-performance-grid">
+									
+									<div class="tf-single-performance-grid">
+										<div class="tf-single-performance-content">
+											<h3>
+												<?php
+												$tf_customer_query = new WP_User_Query(
+													array(
+														'role' => 'customer',
+													)
+												);
+												echo count( $tf_customer_query->get_results() );
+												?>
+											</h3>
+											<p>
+												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<g clip-path="url(#clip0_2021_21400)">
+													<path d="M12.0002 14C12.0002 12.5855 11.4383 11.229 10.4381 10.2288C9.43787 9.22857 8.08132 8.66667 6.66683 8.66667M6.66683 8.66667C5.25234 8.66667 3.89579 9.22857 2.89559 10.2288C1.8954 11.229 1.3335 12.5855 1.3335 14M6.66683 8.66667C8.50778 8.66667 10.0002 7.17428 10.0002 5.33333C10.0002 3.49238 8.50778 2 6.66683 2C4.82588 2 3.3335 3.49238 3.3335 5.33333C3.3335 7.17428 4.82588 8.66667 6.66683 8.66667ZM14.6668 13.3333C14.6668 11.0867 13.3335 9 12.0002 8C12.4384 7.67118 12.7889 7.23939 13.0205 6.74285C13.2522 6.2463 13.3578 5.70031 13.3282 5.1532C13.2985 4.60609 13.1344 4.07472 12.8505 3.60613C12.5665 3.13754 12.1714 2.74617 11.7002 2.46667" stroke="#7D8FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_2021_21400">
+													<rect width="16" height="16" fill="white"/>
+													</clipPath>
+												</defs>
+												</svg>
+												<span><?php esc_html_e("Total Customers","tourfic"); ?></span>
+											</p>
+										</div>
+									</div>
+
+									<div class="tf-single-performance-grid">
+										<div class="tf-single-performance-content">
+											<h3>
+												<?php
+												if ( Helper::tf_is_woo_active() ) {
+													$tf_order_query_orders = wc_get_orders( array(
+															'limit'  => - 1,
+															'type'   => 'shop_order',
+															'status' => array( 'wc-completed' ),
+														)
+													);
+													echo count( $tf_order_query_orders );
+												} else {
+													echo '0';
+												}
+												?>
+											</h3>
+											<p>
+												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M5.33333 1.33301V3.99967M10.6667 1.33301V3.99967M14 9.33301V3.99967C14 3.64605 13.8595 3.30691 13.6095 3.05687C13.3594 2.80682 13.0203 2.66634 12.6667 2.66634H3.33333C2.97971 2.66634 2.64057 2.80682 2.39052 3.05687C2.14048 3.30691 2 3.64605 2 3.99967V13.333C2 13.6866 2.14048 14.0258 2.39052 14.2758C2.64057 14.5259 2.97971 14.6663 3.33333 14.6663H8.66667M2 6.66634H14M10.6667 13.333L12 14.6663L14.6667 11.9997" stroke="#7D8FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												</svg>
+												<span><?php esc_html_e("Total Bookings","tourfic"); ?></span>
+											</p>
+										</div>
+									</div>
+
+									<div class="tf-single-performance-grid">
+										<div class="tf-single-performance-content">
+											<h3>
+												<?php
+												$tf_total_hotels = array(
+													'post_type'      => 'tf_hotel',
+													'post_status'    => 'publish',
+													'posts_per_page' => - 1
+												);
+												echo count( get_posts ($tf_total_hotels ) );
+												?>
+											</h3>
+											<p>
+												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M6.6665 14.6663V10.2863M7.99984 7.33301H8.0065M7.99984 4.66634H8.0065M9.33317 10.2863V14.6663M9.99984 10.6663C9.42285 10.2336 8.72107 9.99967 7.99984 9.99967C7.2786 9.99967 6.57682 10.2336 5.99984 10.6663M10.6665 7.33301H10.6732M10.6665 4.66634H10.6732M5.33317 7.33301H5.33984M5.33317 4.66634H5.33984M3.99984 1.33301H11.9998C12.7362 1.33301 13.3332 1.92996 13.3332 2.66634V13.333C13.3332 14.0694 12.7362 14.6663 11.9998 14.6663H3.99984C3.26346 14.6663 2.6665 14.0694 2.6665 13.333V2.66634C2.6665 1.92996 3.26346 1.33301 3.99984 1.33301Z" stroke="#7D8FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												</svg>	
+												<span><?php esc_html_e("Total Hotels","tourfic"); ?></span>
+											</p>
+										</div>
+									</div>
+
+									<div class="tf-single-performance-grid">
+										<div class="tf-single-performance-content">
+											<h3>
+												<?php
+												$tf_total_tours = array(
+													'post_type'      => 'tf_tours',
+													'post_status'    => 'publish',
+													'posts_per_page' => - 1
+												);
+												echo count( get_posts ($tf_total_tours ));
+												?>
+											</h3>
+											<p>
+												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M10 3.84247C9.79312 3.84247 9.58907 3.79433 9.404 3.70185L6.596 2.29785C6.41094 2.20537 6.20689 2.15723 6 2.15723M10 3.84247C10.2069 3.84247 10.4109 3.79433 10.596 3.70185L13.0353 2.48185C13.1371 2.43102 13.2501 2.40705 13.3637 2.41223C13.4773 2.4174 13.5876 2.45154 13.6843 2.5114C13.781 2.57126 13.8607 2.65486 13.916 2.75424C13.9713 2.85361 14.0002 2.96547 14 3.07918V11.5885C13.9999 11.7123 13.9654 11.8336 13.9003 11.9389C13.8352 12.0441 13.7421 12.1292 13.6313 12.1845L10.596 13.7025C10.4109 13.795 10.2069 13.8431 10 13.8431M10 3.84247V13.8431M10 13.8431C9.79312 13.8431 9.58907 13.795 9.404 13.7025L6.596 12.2985C6.41094 12.206 6.20689 12.1579 6 12.1579C5.79312 12.1579 5.58907 12.206 5.404 12.2985L2.96467 13.5185C2.8629 13.5694 2.74982 13.5933 2.63617 13.5881C2.52253 13.5829 2.41211 13.5487 2.31541 13.4888C2.21872 13.4288 2.13898 13.3452 2.08377 13.2457C2.02856 13.1462 1.99972 13.0343 2 12.9205V4.41185C2.00007 4.28807 2.03459 4.16676 2.0997 4.0615C2.16482 3.95623 2.25795 3.87118 2.36867 3.81585L5.404 2.29785C5.58907 2.20537 5.79312 2.15723 6 2.15723M6 2.15723V12.1572" stroke="#7D8FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												</svg>
+												<span><?php esc_html_e("Total Tours","tourfic"); ?></span>
+											</p>
+										</div>
+									</div>
+
+									<div class="tf-single-performance-grid">
+										<div class="tf-single-performance-content">
+											<h3>
+												<?php
+												$tf_total_apartments = array(
+													'post_type'      => 'tf_apartment',
+													'post_status'    => 'publish',
+													'posts_per_page' => - 1
+												);
+												echo count( get_posts ($tf_total_apartments ) );
+												?>
+											</h3>
+											<p>
+												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M10 14V8.66666C10 8.48985 9.92976 8.32028 9.80474 8.19526C9.67971 8.07023 9.51014 7.99999 9.33333 7.99999H6.66667C6.48986 7.99999 6.32029 8.07023 6.19526 8.19526C6.07024 8.32028 6 8.48985 6 8.66666V14M2 6.66666C1.99995 6.47271 2.04222 6.28108 2.12386 6.10514C2.20549 5.9292 2.32453 5.77319 2.47267 5.64799L7.13933 1.64799C7.37999 1.4446 7.6849 1.33301 8 1.33301C8.3151 1.33301 8.62001 1.4446 8.86067 1.64799L13.5273 5.64799C13.6755 5.77319 13.7945 5.9292 13.8761 6.10514C13.9578 6.28108 14 6.47271 14 6.66666V12.6667C14 13.0203 13.8595 13.3594 13.6095 13.6095C13.3594 13.8595 13.0203 14 12.6667 14H3.33333C2.97971 14 2.64057 13.8595 2.39052 13.6095C2.14048 13.3594 2 13.0203 2 12.6667V6.66666Z" stroke="#7D8FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												</svg>
+												<span><?php esc_html_e("Total Apartments","tourfic"); ?></span>
+											</p>
+										</div>
+									</div>
+
+								</div>
+							</div>
 							<div id="tf-report-loader">
 								<img src="<?php echo esc_url(TF_ASSETS_APP_URL.'images/loader.gif'); ?>" alt="Loader">
 							</div>
@@ -397,9 +417,76 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			?>
 			<div class="tf-sidebar-content">
 
+				<div class="tf-premium-box">
+					<div class="premium-box-header">
+						<div class="premium-logo">
+							<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL.'images/tourfic.png'); ?>" alt="tourfic">
+						</div>
+						<h3><?php echo esc_html__('Tourfic Premium', 'tourfic');  ?></h3>
+						<h4><?php echo esc_html__('Build a Booking Website that Sells', 'tourfic');  ?></h4>
+						<p><?php echo esc_html__('Manage bookings, payments, vendors, and availability from WP Dashboard.', 'tourfic');  ?></p>
+					</div>
+					<div class="premium-box-features">
+						<ul>
+							<li>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M20 6L9 17L4 12" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+								<?php echo esc_html__('Multivendor Booking Support', 'tourfic'); ?>
+							</li>
+							<li>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M20 6L9 17L4 12" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+								<?php echo esc_html__('Backend Booking System', 'tourfic'); ?>
+							</li>
+							<li>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M20 6L9 17L4 12" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+								<?php echo esc_html__('Ical Synchronisation', 'tourfic'); ?>
+							</li>
+							<li>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M20 6L9 17L4 12" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+								<?php echo esc_html__('Dynamic Pricing Logic', 'tourfic'); ?>
+							</li>
+							<li>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M20 6L9 17L4 12" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+								<?php echo esc_html__('Data Import Export', 'tourfic'); ?>
+							</li>
+							<li>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M20 6L9 17L4 12" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+								<?php echo esc_html__('Advance Room Inventory Management', 'tourfic'); ?>
+							</li>
+						</ul>
+					</div>
+					<div class="premium-box-button">
+						<a href="<?php echo esc_url( 'https://tourfic.com/' ) ?>" target="_blank">
+							<?php echo esc_html__('Buy Now', 'tourfic');  ?>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M18 8L22 12L18 16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M2 12H22" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</a>
+						<p><?php echo esc_html__( 'Less friction. Faster publishing.', 'tourfic' ); ?></p>
+					</div>
+					<div class="premium-moneyback-notice">
+						<h2><?php echo esc_html__( '30-day money back guarantee', 'tourfic' ); ?></h2>
+						<h2><?php echo esc_html__( '24/7 support', 'tourfic' ); ?></h2>
+					</div>
+				</div>
+
 				<div class="tf-plugin-lists">
 					<h3>Power up your website</h3>
-					<?php echo $this->tf_get_sidebar_plugin_list(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized ?>
+					<div class="tf-others-plugin">
+						<?php echo $this->tf_get_sidebar_plugin_list(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized ?>
+					</div>
 				</div>
 
 				<div class="tf-customization-quote">
@@ -428,11 +515,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<div class="tf-access-item">
 							<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://themefic.com/docs/tourfic/', array( 'utm_medium' => 'dashboard_doc_link' ) ) ); ?>" target="_blank">
 								<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M12.0833 1.66663H4.99992C4.55789 1.66663 4.13397 1.84222 3.82141 2.15478C3.50885 2.46734 3.33325 2.89126 3.33325 3.33329V16.6666C3.33325 17.1087 3.50885 17.5326 3.82141 17.8451C4.13397 18.1577 4.55789 18.3333 4.99992 18.3333H14.9999C15.4419 18.3333 15.8659 18.1577 16.1784 17.8451C16.491 17.5326 16.6666 17.1087 16.6666 16.6666V6.24996L12.0833 1.66663Z" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								<path d="M11.6667 1.66663V6.66663H16.6667" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								<path d="M13.3334 10.8334H6.66675" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								<path d="M13.3334 14.1666H6.66675" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								<path d="M8.33341 7.5H6.66675" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M12.0835 1.66699H5.00016C4.55814 1.66699 4.13421 1.84259 3.82165 2.15515C3.50909 2.46771 3.3335 2.89163 3.3335 3.33366V16.667C3.3335 17.109 3.50909 17.5329 3.82165 17.8455C4.13421 18.1581 4.55814 18.3337 5.00016 18.3337H15.0002C15.4422 18.3337 15.8661 18.1581 16.1787 17.8455C16.4912 17.5329 16.6668 17.109 16.6668 16.667V6.25032L12.0835 1.66699Z" stroke="#7D8FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M11.6665 1.66699V6.66699H16.6665" stroke="#7D8FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M13.3332 10.833H6.6665" stroke="#7D8FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M13.3332 14.167H6.6665" stroke="#7D8FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M8.33317 7.5H6.6665" stroke="#7D8FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
 								<?php echo esc_html__( 'Documentation', 'tourfic' ); ?>
 							</a>
@@ -440,7 +527,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<div class="tf-access-item">
 							<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/support/', array( 'utm_medium' => 'dashboard_support_link' ) ) ); ?>" target="_blank">
 								<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M2.5 9.16662H5C5.44203 9.16662 5.86595 9.34222 6.17851 9.65478C6.49107 9.96734 6.66667 10.3913 6.66667 10.8333V13.3333C6.66667 13.7753 6.49107 14.1992 6.17851 14.5118C5.86595 14.8244 5.44203 15 5 15H4.16667C3.72464 15 3.30072 14.8244 2.98816 14.5118C2.67559 14.1992 2.5 13.7753 2.5 13.3333V9.16662ZM2.5 9.16662C2.5 8.18171 2.69399 7.20644 3.0709 6.2965C3.44781 5.38656 4.00026 4.55976 4.6967 3.86332C5.39314 3.16689 6.21993 2.61444 7.12987 2.23753C8.03982 1.86062 9.01509 1.66663 10 1.66663C10.9849 1.66663 11.9602 1.86062 12.8701 2.23753C13.7801 2.61444 14.6069 3.16689 15.3033 3.86332C15.9997 4.55976 16.5522 5.38656 16.9291 6.2965C17.306 7.20644 17.5 8.18171 17.5 9.16662M17.5 9.16662V13.3333M17.5 9.16662H15C14.558 9.16662 14.134 9.34222 13.8215 9.65478C13.5089 9.96734 13.3333 10.3913 13.3333 10.8333V13.3333C13.3333 13.7753 13.5089 14.1992 13.8215 14.5118C14.134 14.8244 14.558 15 15 15H15.8333C16.2754 15 16.6993 14.8244 17.0118 14.5118C17.3244 14.1992 17.5 13.7753 17.5 13.3333M17.5 13.3333V15C17.5 15.884 17.1488 16.7319 16.5237 17.357C15.8986 17.9821 15.0507 18.3333 14.1667 18.3333H10" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M2.5 9.16699H5C5.44203 9.16699 5.86595 9.34259 6.17851 9.65515C6.49107 9.96771 6.66667 10.3916 6.66667 10.8337V13.3337C6.66667 13.7757 6.49107 14.1996 6.17851 14.5122C5.86595 14.8247 5.44203 15.0003 5 15.0003H4.16667C3.72464 15.0003 3.30072 14.8247 2.98816 14.5122C2.67559 14.1996 2.5 13.7757 2.5 13.3337V9.16699ZM2.5 9.16699C2.5 8.18208 2.69399 7.20681 3.0709 6.29687C3.44781 5.38692 4.00026 4.56013 4.6967 3.86369C5.39314 3.16725 6.21993 2.61481 7.12987 2.2379C8.03982 1.86099 9.01509 1.66699 10 1.66699C10.9849 1.66699 11.9602 1.86099 12.8701 2.2379C13.7801 2.61481 14.6069 3.16725 15.3033 3.86369C15.9997 4.56013 16.5522 5.38692 16.9291 6.29687C17.306 7.20681 17.5 8.18208 17.5 9.16699M17.5 9.16699V13.3337M17.5 9.16699H15C14.558 9.16699 14.134 9.34259 13.8215 9.65515C13.5089 9.96771 13.3333 10.3916 13.3333 10.8337V13.3337C13.3333 13.7757 13.5089 14.1996 13.8215 14.5122C14.134 14.8247 14.558 15.0003 15 15.0003H15.8333C16.2754 15.0003 16.6993 14.8247 17.0118 14.5122C17.3244 14.1996 17.5 13.7757 17.5 13.3337M17.5 13.3337V15.0003C17.5 15.8844 17.1488 16.7322 16.5237 17.3573C15.8986 17.9825 15.0507 18.3337 14.1667 18.3337H10" stroke="#7D8FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
 								<?php echo esc_html__( 'Get Support', 'tourfic' ); ?>
 							</a>
@@ -448,7 +535,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<div class="tf-access-item">
 							<a href="https://www.facebook.com/groups/tourfic/" target="_blank">
 								<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M13.3334 17.5V15.8333C13.3334 14.9493 12.9822 14.1014 12.3571 13.4763C11.732 12.8512 10.8841 12.5 10.0001 12.5H5.00008C4.11603 12.5 3.26818 12.8512 2.64306 13.4763C2.01794 14.1014 1.66675 14.9493 1.66675 15.8333V17.5M13.3334 2.60667C14.0482 2.79197 14.6812 3.20939 15.1331 3.79339C15.5851 4.37738 15.8302 5.09491 15.8302 5.83333C15.8302 6.57176 15.5851 7.28928 15.1331 7.87328C14.6812 8.45728 14.0482 8.87469 13.3334 9.06M18.3334 17.5V15.8333C18.3329 15.0948 18.087 14.3773 17.6345 13.7936C17.1821 13.2099 16.5485 12.793 15.8334 12.6083M10.8334 5.83333C10.8334 7.67428 9.34103 9.16667 7.50008 9.16667C5.65913 9.16667 4.16675 7.67428 4.16675 5.83333C4.16675 3.99238 5.65913 2.5 7.50008 2.5C9.34103 2.5 10.8334 3.99238 10.8334 5.83333Z" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M13.3332 17.5V15.8333C13.3332 14.9493 12.982 14.1014 12.3569 13.4763C11.7317 12.8512 10.8839 12.5 9.99984 12.5H4.99984C4.11578 12.5 3.26794 12.8512 2.64281 13.4763C2.01769 14.1014 1.6665 14.9493 1.6665 15.8333V17.5M13.3332 2.60667C14.048 2.79197 14.681 3.20939 15.1329 3.79339C15.5848 4.37738 15.83 5.09491 15.83 5.83333C15.83 6.57176 15.5848 7.28928 15.1329 7.87328C14.681 8.45728 14.048 8.87469 13.3332 9.06M18.3332 17.5V15.8333C18.3326 15.0948 18.0868 14.3773 17.6343 13.7936C17.1818 13.2099 16.5483 12.793 15.8332 12.6083M10.8332 5.83333C10.8332 7.67428 9.34079 9.16667 7.49984 9.16667C5.65889 9.16667 4.1665 7.67428 4.1665 5.83333C4.1665 3.99238 5.65889 2.5 7.49984 2.5C9.34079 2.5 10.8332 3.99238 10.8332 5.83333Z" stroke="#7D8FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
 								<?php echo esc_html__( 'Join our Community', 'tourfic' ); ?>
 							</a>
@@ -456,7 +543,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<div class="tf-access-item">
 							<a href="https://app.loopedin.io/tourfic" target="_blank">
 								<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M14.1667 11.6667V17.5M5.83341 11.6667V17.5M14.1667 2.5V5M5.83341 2.5V5M8.33341 11.6667L1.91675 5.25M11.6667 5L18.0834 11.4167M6.66675 5L13.3334 11.6667M2.50008 5H17.5001C17.9603 5 18.3334 5.3731 18.3334 5.83333V10.8333C18.3334 11.2936 17.9603 11.6667 17.5001 11.6667H2.50008C2.03984 11.6667 1.66675 11.2936 1.66675 10.8333V5.83333C1.66675 5.3731 2.03984 5 2.50008 5Z" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M14.1665 11.6667V17.5M5.83317 11.6667V17.5M14.1665 2.5V5M5.83317 2.5V5M8.33317 11.6667L1.9165 5.25M11.6665 5L18.0832 11.4167M6.6665 5L13.3332 11.6667M2.49984 5H17.4998C17.9601 5 18.3332 5.3731 18.3332 5.83333V10.8333C18.3332 11.2936 17.9601 11.6667 17.4998 11.6667H2.49984C2.0396 11.6667 1.6665 11.2936 1.6665 10.8333V5.83333C1.6665 5.3731 2.0396 5 2.49984 5Z" stroke="#7D8FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
 								<?php echo esc_html__( 'See our Roadmap', 'tourfic' ); ?>
 							</a>
@@ -464,7 +551,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<div class="tf-access-item">
 							<a href="https://app.loopedin.io/tourfic#/ideas-board" target="_blank">
 								<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M12.5 11.6666C12.6667 10.8333 13.0833 10.25 13.75 9.58329C14.5833 8.83329 15 7.74996 15 6.66663C15 5.34054 14.4732 4.06877 13.5355 3.13109C12.5979 2.19341 11.3261 1.66663 10 1.66663C8.67392 1.66663 7.40215 2.19341 6.46447 3.13109C5.52678 4.06877 5 5.34054 5 6.66663C5 7.49996 5.16667 8.49996 6.25 9.58329C6.83333 10.1666 7.33333 10.8333 7.5 11.6666M7.5 15H12.5M8.33333 18.3333H11.6667" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M12.5 11.667C12.6667 10.8337 13.0833 10.2503 13.75 9.58366C14.5833 8.83366 15 7.75033 15 6.66699C15 5.34091 14.4732 4.06914 13.5355 3.13146C12.5979 2.19378 11.3261 1.66699 10 1.66699C8.67392 1.66699 7.40215 2.19378 6.46447 3.13146C5.52678 4.06914 5 5.34091 5 6.66699C5 7.50033 5.16667 8.50033 6.25 9.58366C6.83333 10.167 7.33333 10.8337 7.5 11.667M7.5 15.0003H12.5M8.33333 18.3337H11.6667" stroke="#7D8FA0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
 								<?php echo esc_html__( 'Request a Feature', 'tourfic' ); ?>
 							</a>
