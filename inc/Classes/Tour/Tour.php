@@ -3561,6 +3561,7 @@ class Tour {
 		$tour_date = ! empty( $_POST['date'] ) ? sanitize_text_field( $_POST['date'] ) : '';
 
 		$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+		$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
 		$pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 		$package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
@@ -3590,7 +3591,6 @@ class Tour {
 			}
 
 		}
-
 		if (! empty($matched_availability) ) {
 			if($pricing_rule == 'person'){
 				$adult_price    = ! empty( $matched_availability['adult_price'] ) ? $matched_availability['adult_price'] : '';
@@ -3738,6 +3738,45 @@ class Tour {
 			}
 		}
 
+		// Availability Capacity Check
+		$tf_orders_select = [
+			'select'    => "post_id,order_details",
+			'post_type' => 'tour',
+			'query'     => " AND ostatus = 'completed' ORDER BY order_id DESC"
+		];
+
+		$orders = Helper::tourfic_order_table_data( $tf_orders_select );
+
+		$tf_total_adults = 0;
+		$tf_total_childrens = 0;
+
+		$tf_tour_booking_limit = ! empty( $matched_availability['max_capacity'] ) ? $matched_availability['max_capacity'] : 0;
+
+		foreach ( $orders as $order ) {
+			if ( $order['post_id'] != $post_id ) continue;
+
+			$details = json_decode( $order['order_details'] );
+
+			if ( empty($details->tour_date) || $details->tour_date !== $tour_date ) continue;
+	
+			if ( $tour_type === 'continuous' && ! empty($tour_time) ) {
+				if ( empty($details->tour_time) || $details->tour_time !== $tour_time ) continue;
+			}
+
+			if ( ! empty($details->adult) ) {
+				list($a,) = explode(" × ", $details->adult);
+				$tf_total_adults += (int) $a;
+			}
+
+			if ( ! empty($details->child) ) {
+				list($c,) = explode(" × ", $details->child);
+				$tf_total_childrens += (int) $c;
+			}
+		}
+
+		$tf_total_people = $tf_total_adults + $tf_total_childrens;
+		$tf_max_capacity = $tf_tour_booking_limit - $tf_total_people;
+
 		wp_send_json_success( [
 			'adult' => !empty($adult_price) ? wp_strip_all_tags(wc_price($adult_price)) : '',
 			'child' => !empty($child_price) ? wp_strip_all_tags(wc_price($child_price)) : '',
@@ -3745,6 +3784,7 @@ class Tour {
 			'group_price'    => !empty($price) ? wp_strip_all_tags(wc_price($price)) : '',
 			/* translators: %s will return total price */
 			'min_price' => sprintf( __( '<span>From</span> %1$s', 'tourfic' ), wp_strip_all_tags(wc_price( $min_price )) ),
+			'max_capacity' => !empty($tf_max_capacity) ? $tf_max_capacity : 0,
 		] );
 
 		wp_die();

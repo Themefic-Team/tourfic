@@ -80,7 +80,7 @@ defined( 'ABSPATH' ) || exit;
                         <i class="fa-solid fa-people-group"></i>
 						<?php if ( ! empty( $tf_tour_booking_limit ) ) {
 							echo esc_html__( "Maximum Capacity: ", "tourfic" );
-							echo esc_html($tf_tour_booking_limit);
+							echo '<span class="tf-max-capacity-count">'.esc_html($tf_tour_booking_limit).'</span>';
 						} else {
 							echo esc_html__( "Maximum Allowed Per Booking: ", "tourfic" );
 							echo esc_html($max_people);

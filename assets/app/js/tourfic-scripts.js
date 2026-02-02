@@ -3124,6 +3124,9 @@ function convertTo24HourFormat(timeStr) {
                         if($('.tf-search-date-wrapper')){
                             $('.tf-search-date-wrapper').removeClass('tf-box-loading');
                         }
+                        if($('.tf-max-capacity-count')){
+                            $('.tf-max-capacity-count').html(response.data.max_capacity); 
+                        }
                     }
                 }
             });
