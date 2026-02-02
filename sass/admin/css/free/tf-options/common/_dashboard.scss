@@ -321,25 +321,25 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
-            .tf-month-filter {
-                margin-bottom: 15px;
-                display: inline-block;
-
-                span {
-                    display: block;
-                    font-size: 11px;
-                    line-height: 13px;
-                    font-weight: 600;
-                    color: #77797E;
-                    text-transform: uppercase;
-                    margin-bottom: 5px;
+            .tf-dates-filter{
+                position: relative;
+                top: 53px;
+                right: 25px;
+                @media #{$max640}{
+                    position: static;
                 }
-
+            }
+            .tf-month-filter {
+                display: inline-block;
+                @media #{$max640}{
+                    margin-bottom: 8px;
+                }
                 select {
-                    width: 180px;
+                    width: 120px;
                     color: #222;
                     border: 1px solid #ddd;
-                    height: 40px;
+                    height: 35px;
+                    border-radius: 10px;
                 }
             }
         }

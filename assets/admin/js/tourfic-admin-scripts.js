@@ -6058,7 +6058,19 @@ var frame, gframe;
 * Report Chart
 */
 
+const legendSpacingPlugin = {
+    id: 'legendSpacing',
+    beforeInit(chart) {
+        const fit = chart.legend.fit;
+        chart.legend.fit = function fitWithSpacing() {
+            fit.bind(chart.legend)();
+            this.height += 20;
+        };
+    }
+};
+
 (function ($) {
+    let tfChart = null;
     $(document).ready(function () {
         if (tf_options.tf_chart_enable == 1) {
             var ctx = document.getElementById('tf_months'); // node
@@ -6066,21 +6078,27 @@ var frame, gframe;
             var ctx = $('#tf_months'); // jQuery instance
             var ctx = 'tf_months'; // element id
 
-            var chart = new Chart(ctx, {
+            if (tfChart) {
+                tfChart.destroy();
+            }
+
+            tfChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                     // Information about the dataset
                     datasets: [{
-                        label: "Completed Booking",
-                        borderColor: '#003C79',
+                        label: "Complete Booking",
+                        backgroundColor: '#0185FF',
+                        borderColor: '#0185FF',
                         tension: 0.1,
                         data: tf_options.tf_complete_order,
                         fill: false
                     },
                         {
-                            label: "Cancelled Booking",
-                            borderColor: 'red',
+                            label: "Cancel Booking",
+                            borderColor: '#E7000B',
+                            backgroundColor: '#E7000B',
                             tension: 0.1,
                             data: tf_options.tf_cancel_orders,
                             fill: false
@@ -6090,17 +6108,25 @@ var frame, gframe;
 
                 // Configuration options
                 options: {
-                    layout: {
-                        padding: 10,
-                    },
-                    legend: {
-                        display: true
+                    plugins:{
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            align: 'start',
+                            labels: {
+                                usePointStyle: true,
+                                pointStyle: 'circle',
+                                fontSize: 10,    
+                                fontStyle: '400',
+                                fontColor: '#242B31',
+                            },
+                        },
                     },
                     title: {
-                        display: true,
-                        text: ""
+                        display: false,
                     }
-                }
+                },
+                plugins: [legendSpacingPlugin]
 
             });
         }
@@ -6127,21 +6153,27 @@ var frame, gframe;
                         var ctx = $('#tf_months'); // jQuery instance
                         var ctx = 'tf_months'; // element id
 
-                        var chart = new Chart(ctx, {
+                        if (tfChart) {
+                            tfChart.destroy();
+                        }
+
+                        tfChart = new Chart(ctx, {
                             type: 'line',
                             data: {
                                 labels: response.months_day_number,
                                 // Information about the dataset
                                 datasets: [{
-                                    label: "Completed Booking",
-                                    borderColor: '#003C79',
+                                    label: "Complete Booking",
+                                    backgroundColor: '#0185FF',
+                                    borderColor: '#0185FF',
                                     tension: 0.1,
                                     data: response.tf_complete_orders,
                                     fill: false
                                 },
                                     {
-                                        label: "Cancelled Booking",
-                                        borderColor: 'red',
+                                        label: "Cancel Booking",
+                                        borderColor: '#E7000B',
+                                        backgroundColor: '#E7000B',
                                         tension: 0.1,
                                         data: response.tf_cancel_orders,
                                         fill: false
@@ -6151,17 +6183,27 @@ var frame, gframe;
 
                             // Configuration options
                             options: {
-                                layout: {
-                                    padding: 10,
-                                },
-                                legend: {
-                                    display: true
+                                plugins:{
+                                    legend: {
+                                        display: true,
+                                        position: 'top',
+                                        align: 'start',
+                                        labels: {
+                                            usePointStyle: true,
+                                            pointStyle: 'circle',
+                                            fontSize: 10,    
+                                            fontStyle: '400',
+                                            fontColor: '#242B31',
+                                        },
+                                    },
                                 },
                                 title: {
                                     display: true,
-                                    text: response.tf_search_month
+                                    text: ''
                                 }
-                            }
+                            },
+
+                            plugins: [legendSpacingPlugin]
 
                         });
                         $("#tf-report-loader").removeClass('show');
@@ -6193,21 +6235,27 @@ var frame, gframe;
                         var ctx = $('#tf_months'); // jQuery instance
                         var ctx = 'tf_months'; // element id
 
-                        var chart = new Chart(ctx, {
+                        if (tfChart) {
+                            tfChart.destroy();
+                        }
+
+                        tfChart = new Chart(ctx, {
                             type: 'line',
                             data: {
                                 labels: response.months_day_number,
                                 // Information about the dataset
                                 datasets: [{
-                                    label: "Completed Booking",
-                                    borderColor: '#003C79',
+                                    label: "Complete Booking",
+                                    backgroundColor: '#0185FF',
+                                    borderColor: '#0185FF',
                                     tension: 0.1,
                                     data: response.tf_complete_orders,
                                     fill: false
                                 },
                                     {
-                                        label: "Cancelled Booking",
-                                        borderColor: 'red',
+                                        label: "Cancel Booking",
+                                        borderColor: '#E7000B',
+                                        backgroundColor: '#E7000B',
                                         tension: 0.1,
                                         data: response.tf_cancel_orders,
                                         fill: false
@@ -6217,17 +6265,27 @@ var frame, gframe;
 
                             // Configuration options
                             options: {
-                                layout: {
-                                    padding: 10,
-                                },
-                                legend: {
-                                    display: true
+                                plugins:{
+                                    legend: {
+                                        display: true,
+                                        position: 'top',
+                                        align: 'start',
+                                        labels: {
+                                            usePointStyle: true,
+                                            pointStyle: 'circle',
+                                            fontSize: 10,    
+                                            fontStyle: '400',
+                                            fontColor: '#242B31',
+                                        },
+                                    },
                                 },
                                 title: {
                                     display: true,
                                     text: response.tf_search_month
                                 }
-                            }
+                            },
+
+                            plugins: [legendSpacingPlugin]
 
                         });
                         $("#tf-report-loader").removeClass('show');

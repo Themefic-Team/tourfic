@@ -2112,24 +2112,30 @@ Steps
     align-items: flex-start;
   }
 }
+.tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-dates-filter {
+  position: relative;
+  top: 53px;
+  right: 25px;
+}
+@media only screen and (max-width: 640px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-dates-filter {
+    position: static;
+  }
+}
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter {
-  margin-bottom: 15px;
   display: inline-block;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter span {
-  display: block;
-  font-size: 11px;
-  line-height: 13px;
-  font-weight: 600;
-  color: #77797E;
-  text-transform: uppercase;
-  margin-bottom: 5px;
+@media only screen and (max-width: 640px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter {
+    margin-bottom: 8px;
+  }
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter select {
-  width: 180px;
+  width: 120px;
   color: #222;
   border: 1px solid #ddd;
-  height: 40px;
+  height: 35px;
+  border-radius: 10px;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar {
   /* Loader */

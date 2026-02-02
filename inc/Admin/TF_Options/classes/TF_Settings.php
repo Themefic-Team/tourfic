@@ -226,7 +226,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<div class="tf-setting-overview-section">
 								<h2><?php esc_html_e("Overview","tourfic"); ?></h2>
 								<div class="tf-performance-grid">
-									
+
 									<div class="tf-single-performance-grid">
 										<div class="tf-single-performance-content">
 											<h3>
@@ -355,7 +355,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								<?php if(class_exists('WooCommerce')): ?>
 									<div class="tf-dates-filter">
 										<div class="tf-month-filter">
-											<span><?php esc_html_e("Year","tourfic"); ?></span>
 											<select name="tf-year-report" id="tf-year-report">
 												<?php
 												$current_year = (int) gmdate('Y'); 
@@ -371,7 +370,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										</div>
 
 										<div class="tf-month-filter">
-											<span><?php esc_html_e("Month","tourfic"); ?></span>
 											<select name="tf-month-report" id="tf-month-report">
 												<option value=""><?php esc_html_e("Select Month","tourfic"); ?></option>
 												<option value="1"><?php esc_html_e("January","tourfic"); ?></option>
