@@ -1096,7 +1096,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                         <div class="tf-shortcode-generator-label">
                             <div class="tf-labels">
                                 <label><?php echo esc_html__( 'Rooms', 'tourfic' ); ?></label>
-                                <p><?php echo esc_html__( 'Display Rooms in specific location', 'tourfic' ); ?></p>
+                                <p><?php echo esc_html__( 'Display Rooms in specific room type', 'tourfic' ); ?></p>
                             </div>
                             <div class="tf-shortcode-btn tf-generate-tour">
                                 <button><?php echo esc_html__( 'Generate Shortcode', 'tourfic' ); ?></button>
