@@ -116,6 +116,10 @@ class Base {
 		\Tourfic\App\Shortcodes\Recent_Hotel::instance();
 		\Tourfic\App\Shortcodes\Hotel_External_Listings::instance();
 
+		\Tourfic\App\Shortcodes\Rooms::instance();
+		\Tourfic\App\Shortcodes\Room_Types::instance();
+		\Tourfic\App\Shortcodes\Recent_Room::instance();
+
 		\Tourfic\App\Shortcodes\Tours::instance();
 		\Tourfic\App\Shortcodes\Tour_Destinations::instance();
 		\Tourfic\App\Shortcodes\Recent_Tour::instance();
