@@ -417,7 +417,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Improved: Shortcode layout design.
 - Fixed: Filter issue in the vendor profile.
 - Fixed: Apartment room details issue.
-- Improved: Month translations.
+- Improved: "Month" Word translations.
 
 = 2.20.3 – January 22, 2026 =
 
