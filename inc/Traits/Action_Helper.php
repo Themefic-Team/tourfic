@@ -674,6 +674,9 @@ trait Action_Helper {
 				'hotel_feature',
 				'hotel_type',
 			],
+			'room' => [
+				'room_type',
+			],
 			'tour' => [
 				'tour_destination',
 				'tour_attraction',
