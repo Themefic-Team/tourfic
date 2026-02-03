@@ -1085,7 +1085,7 @@ class Helper {
                         <div class="tf-booking-date-wrap">
                             <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                             <span class="tf-booking-month">
-                                <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+                                <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                 <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                 </svg>
@@ -1102,7 +1102,7 @@ class Helper {
                         <div class="tf-booking-date-wrap">
                             <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                             <span class="tf-booking-month">
-                                <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+                                <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                 <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                 </svg>
@@ -1118,7 +1118,7 @@ class Helper {
                             <div class="tf-booking-date-wrap tf-tour-start-date">
                                 <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                 <span class="tf-booking-month">
-							<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+							<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
 						</span>
                             </div>
                             <div class="tf-duration">
@@ -1127,7 +1127,7 @@ class Helper {
                             <div class="tf-booking-date-wrap tf-tour-end-date">
                                 <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                 <span class="tf-booking-month">
-							<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+							<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 							<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 							</svg>
@@ -2134,7 +2134,7 @@ class Helper {
                                 <div class="tf-booking-date-wrap">
                                     <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                     <span class="tf-booking-month">
-                                        <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+                                        <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                         <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                         </svg>
@@ -2148,7 +2148,7 @@ class Helper {
                                 <div class="tf-booking-date-wrap">
                                     <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                     <span class="tf-booking-month">
-                                <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+                                <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                 <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                 </svg>
@@ -2165,7 +2165,7 @@ class Helper {
                                     <div class="tf-booking-date-wrap tf-tour-start-date">
                                         <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                         <span class="tf-booking-month">
-                                    <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+                                    <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
                                 </span>
                                     </div>
                                     <div class="tf-duration">
@@ -2174,7 +2174,7 @@ class Helper {
                                     <div class="tf-booking-date-wrap tf-tour-end-date">
                                         <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                         <span class="tf-booking-month">
-                                    <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+                                    <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                     <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                     </svg>
