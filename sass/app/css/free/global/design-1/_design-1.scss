@@ -270,6 +270,10 @@
                                     backdrop-filter: blur(16px);
                                     padding: 0;
                                     border: 0;
+
+                                    svg path{
+                                        stroke: $color-primary;
+                                    }
                                 }
                                 input {
                                     background: transparent;
@@ -310,7 +314,6 @@
 
                     &:hover{
                         background-color: $color-primary;
-                        box-shadow: 0 40px 40px 0 rgba(238, 85, 9, 0.16), 0 32px 32px 0 rgba(238, 85, 9, 0.14), 0 24px 24px 0 rgba(238, 85, 9, 0.12), 0 20px 20px 0 rgba(238, 85, 9, 0.10), 0 16px 16px 0 rgba(238, 85, 9, 0.08), 0 12px 12px 0 rgba(238, 85, 9, 0.06), 0 8px 8px 0 rgba(238, 85, 9, 0.04), 0 4px 4px 0 rgba(238, 85, 9, 0.02);
                     }
                 }
             }
@@ -687,6 +690,10 @@
                     @include align-items(center);
                     @include justify-content(center);
                     cursor: pointer;
+
+                    svg path{
+                        stroke: $color-primary;
+                    }
                 }
             }
 

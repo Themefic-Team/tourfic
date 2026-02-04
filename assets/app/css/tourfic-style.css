@@ -11280,6 +11280,12 @@ div#tf-destinationautocomplete-list div:before {
   padding: 0;
   border: 0;
 }
+.tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection .acr-dec svg path,
+.tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection .acr-inc svg path,
+.tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection .acr-dec svg path,
+.tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection .acr-inc svg path {
+  stroke: var(--tf-primary);
+}
 .tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection input,
 .tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection input {
   background: transparent;
@@ -11322,7 +11328,6 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__one .tf-archive-room-banner .tf-submit-button .tf_btn:hover,
 .tf-archive-template__one .tf-archive-room-banner .tf-submit-button .tf_btn:hover {
   background-color: var(--tf-primary);
-  box-shadow: 0 40px 40px 0 rgba(238, 85, 9, 0.16), 0 32px 32px 0 rgba(238, 85, 9, 0.14), 0 24px 24px 0 rgba(238, 85, 9, 0.12), 0 20px 20px 0 rgba(238, 85, 9, 0.1), 0 16px 16px 0 rgba(238, 85, 9, 0.08), 0 12px 12px 0 rgba(238, 85, 9, 0.06), 0 8px 8px 0 rgba(238, 85, 9, 0.04), 0 4px 4px 0 rgba(238, 85, 9, 0.02);
 }
 .tf-single-template__one .tf-archive-room-banner .tf-booking-date-wrap .tf-search-input.form-control,
 .tf-archive-template__one .tf-archive-room-banner .tf-booking-date-wrap .tf-search-input.form-control {
@@ -11802,6 +11807,10 @@ div#tf-destinationautocomplete-list div:before {
   -webkit-justify-content: center;
   justify-content: center;
   cursor: pointer;
+}
+.tf-single-template__one .tf-archive-room-details .tf-room-view-more-wrap .tf-room-view-more svg path,
+.tf-archive-template__one .tf-archive-room-details .tf-room-view-more-wrap .tf-room-view-more svg path {
+  stroke: var(--tf-primary);
 }
 .tf-single-template__one .tf-archive-room-details .tf-pagination-bar,
 .tf-archive-template__one .tf-archive-room-details .tf-pagination-bar {

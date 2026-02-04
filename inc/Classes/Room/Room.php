@@ -345,7 +345,7 @@ class Room {
 							<span class="tf-room-view-more">
 								' . esc_html__( 'View More Pricing', 'tourfic' ) . '
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<path d="M5 12H19M12 5V19" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M5 12H19M12 5V19" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
 							</span>
 						</div>';
@@ -1185,13 +1185,13 @@ class Room {
 										<div class="acr-select">
 											<div class="acr-dec">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-													<path d="M4.16666 10H15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+													<path d="M4.16666 10H15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 												</svg>
 											</div>
 											<input type="tel" name="adult" id="adults" min="1" value="<?php echo ! empty( $adults ) ? esc_attr( $adults ) : '1'; ?>" readonly>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-													<path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+													<path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 												</svg>
 											</div>
 										</div>
@@ -1202,13 +1202,13 @@ class Room {
 										<div class="acr-select">
 											<div class="acr-dec">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-													<path d="M4.16666 10H15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+													<path d="M4.16666 10H15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 												</svg>
 											</div>
 											<input type="tel" name="childrens" id="children" min="0" value="<?php echo ! empty( $child ) ? esc_attr( $child ) : '0'; ?>" readonly>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-													<path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+													<path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 												</svg>
 											</div>
 										</div>

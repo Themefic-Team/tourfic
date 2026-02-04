@@ -2820,13 +2820,13 @@ class Helper {
                                             <div class="acr-select">
                                                 <div class="acr-dec">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                        <path d="M4.16666 10H15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M4.16666 10H15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                     </svg>
                                                 </div>
                                                 <input type="tel" name="adults" id="adults" min="1" value="<?php echo esc_attr($adults); ?>" readonly>
                                                 <div class="acr-inc">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                        <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                     </svg>
                                                 </div>
                                             </div>
@@ -2837,13 +2837,13 @@ class Helper {
                                             <div class="acr-select">
                                                 <div class="acr-dec">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                        <path d="M4.16666 10H15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M4.16666 10H15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                     </svg>
                                                 </div>
                                                 <input type="tel" name="childrens" id="children" min="0" value="<?php echo esc_attr($child); ?>" readonly>
                                                 <div class="acr-inc">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                        <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                     </svg>
                                                 </div>
                                             </div>

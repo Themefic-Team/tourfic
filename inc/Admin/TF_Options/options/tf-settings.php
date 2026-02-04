@@ -915,7 +915,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'room-title',
 									'type'    => 'heading',
-									'content' => __( 'Room Single Page', 'tourfic' ),
+									'title'   => __( 'Room Single Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -982,7 +982,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'room-title',
 									'type'    => 'heading',
-									'content' => __( 'Room Archive & Search Result Page', 'tourfic' ),
+									'title' => __( 'Room Archive & Search Result Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
