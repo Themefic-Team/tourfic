@@ -5213,16 +5213,16 @@
                 }
             }
 
+            .tf-section-title{
+                color: $color-heading;
+                font-size: 1.563rem;
+                font-weight: 700;
+                line-height: 1.5;
+                margin-bottom: 16px;
+            }
+
             .tf-content-wrapper{
                 padding: 48px 0;
-
-                .tf-section-title{
-                    color: $color-heading;
-                    font-size: 1.563rem;
-                    font-weight: 700;
-                    line-height: 1.5;
-                    margin-bottom: 16px;
-                }
 
                 .tf-details {
                     gap: 48px;

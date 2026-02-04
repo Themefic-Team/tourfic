@@ -21094,15 +21094,15 @@ div#tf-destinationautocomplete-list div:before {
     width: 24px;
   }
 }
-.single-tf_room .tf-single-template__two .tf-content-wrapper {
-  padding: 48px 0;
-}
-.single-tf_room .tf-single-template__two .tf-content-wrapper .tf-section-title {
+.single-tf_room .tf-single-template__two .tf-section-title {
   color: var(--tf-text-heading);
   font-size: 1.563rem;
   font-weight: 700;
   line-height: 1.5;
   margin-bottom: 16px;
+}
+.single-tf_room .tf-single-template__two .tf-content-wrapper {
+  padding: 48px 0;
 }
 .single-tf_room .tf-single-template__two .tf-content-wrapper .tf-details {
   gap: 48px;
