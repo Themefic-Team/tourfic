@@ -166,7 +166,7 @@ class Apartment {
 						$infant_number = ! empty( $room['infant'] ) ? $room['infant'] : '0';
 						?>
                         <h3><?php echo esc_html( $room['title'] ); ?></h3>
-                        <p><?php echo esc_html( $room['description'] ); ?></p>
+                        <div><?php echo wp_kses_post( $room['description'] ); ?></div>
                         <div class="tf-room-title description">
 							<?php if ( $footage ) { ?>
                                 <div class="tf-tooltip tf-d-ib">
@@ -268,6 +268,9 @@ class Apartment {
 					</div>
 					<div class="tf-popup-right">
 						<span class="tf-popup-info-title"><?php esc_html_e("Room details", "tourfic"); ?></span>
+						<div class="tf-room-details">
+							<?php echo wp_kses_post($room['description']); ?>
+						</div>
 						<ul>
 							<?php if ( $footage ) { ?>
 								<li><i class="ri-pencil-ruler-2-line"></i> <?php echo esc_html( $footage ); ?><?php esc_html_e( 'sft', 'tourfic' ); ?></li>
@@ -396,9 +399,9 @@ class Apartment {
 								<span class="tf-label"><?php esc_html_e( 'Check in', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkin_dates">
-										<span class="date"><?php echo esc_html( gmdate('d') ); ?></span>
+										<span class="date"><?php echo esc_html( wp_date('d') ); ?></span>
 										<span class="month">
-											<span><?php echo esc_html( gmdate('M') ); ?></span>
+											<span><?php echo esc_html( wp_date('M') ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -417,9 +420,9 @@ class Apartment {
 								<span class="tf-label"><?php esc_html_e( 'Check Out', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkout_dates">
-										<span class="date"><?php echo esc_html( gmdate('d') ); ?></span>
+										<span class="date"><?php echo esc_html( wp_date('d') ); ?></span>
 										<span class="month">
-											<span><?php echo esc_html( gmdate('M') ); ?></span>
+											<span><?php echo esc_html( wp_date('M') ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -904,10 +907,10 @@ class Apartment {
                                         </svg>
                                     </div>
                                     <div class="tf_checkin_dates tf-flex tf-flex-align-center">
-                                        <span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+                                        <span class="date field--title"><?php echo esc_html(wp_date('d')); ?></span>
                                         <div class="tf-search__form__field__mthyr">
-                                            <span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
-                                            <span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+                                            <span class="month form--span"><?php echo esc_html(wp_date('M')); ?></span>
+                                            <span class="year form--span"><?php echo esc_html(wp_date('Y')); ?></span>
                                         </div>
                                     </div>
 
@@ -938,10 +941,10 @@ class Apartment {
                                     </svg>
                                 </div>
                                 <div class="tf_checkout_dates tf-flex tf-flex-align-center">
-                                    <span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+                                    <span class="date field--title"><?php echo esc_html(wp_date('d')); ?></span>
                                     <div class="tf-search__form__field__mthyr">
-                                        <span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
-                                        <span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+                                        <span class="month form--span"><?php echo esc_html(wp_date('M')); ?></span>
+                                        <span class="year form--span"><?php echo esc_html(wp_date('Y')); ?></span>
                                     </div>
                                 </div>
 
@@ -1745,7 +1748,7 @@ class Apartment {
                                         if (total_price > 0) {
 											$('.tf-apartment-price-list').show();
                                             $('.total-days-price-wrap').show();
-                                            total_days_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', total_price.toFixed(2));
+                                            total_days_price_html = wcFormatPrice(total_price);
                                         }
                                         $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php esc_html_e( 'nights', 'tourfic' ); ?>');
                                         $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
@@ -1753,11 +1756,11 @@ class Apartment {
                                         let totalPersonPrice = (adult_price * $('#adults').val()) + (child_price * $('#children').val()) + (infant_price * $('#infant').val());
                                         var total_price = totalPersonPrice * days;
                                         var total_days_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
-                                        var wc_price_per_person = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', totalPersonPrice.toFixed(2));
+                                        var wc_price_per_person = wcFormatPrice(totalPersonPrice);
                                         if (total_price > 0) {
 											$('.tf-apartment-price-list').show();
                                             $('.total-days-price-wrap').show();
-                                            total_days_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', total_price.toFixed(2));
+                                            total_days_price_html = wcFormatPrice(total_price);
                                         }
                                         $('.total-days-price-wrap .total-days').html(wc_price_per_person + ' x ' + days + ' <?php esc_html_e( 'nights', 'tourfic' ); ?>');
                                         $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
@@ -1791,7 +1794,7 @@ class Apartment {
                                     if (total_price > 0) {
                                         $('.tf-apartment-price-list').show();
                                         $('.total-days-price-wrap').show();
-                                        total_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', total_price.toFixed(2));
+                                        total_price_html = wcFormatPrice(total_price);
                                     }
                                     $('.total-days-price-wrap .total-days').html(days + ' <?php esc_html_e( 'nights', 'tourfic' ); ?>');
                                     $('.total-days-price-wrap .days-total-price').html(total_price_html);
@@ -1804,10 +1807,10 @@ class Apartment {
                                     $('.apartment-discount-wrap').show();
 
 									<?php if ( $discount_type == 'percent' ): ?>
-                                    discount_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', (total_price * discount / 100).toFixed(2));
+                                    discount_html = wcFormatPrice(total_price * discount / 100);
                                     total_price = total_price - (total_price * discount / 100);
 									<?php else: ?>
-                                    discount_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', discount.toFixed(2));
+                                    discount_html = wcFormatPrice(discount);
                                     total_price = total_price - discount;
 									<?php endif; ?>
                                 }
@@ -1834,7 +1837,7 @@ class Apartment {
                                 if (totalAdditionalFee_<?php echo esc_html( $key ) ?> > 0 ) {
                                     $('.additional-fee-wrap').show();
                                     total_price = total_price + totalAdditionalFee_<?php echo esc_html( $key ) ?>;
-                                    additional_fee_html_<?php echo esc_html( $key ) ?> = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', totalAdditionalFee_<?php echo esc_html( $key ) ?>.toFixed(2));
+                                    additional_fee_html_<?php echo esc_html( $key ) ?> = wcFormatPrice(totalAdditionalFee_<?php echo esc_html( $key ) ?>);
                                 }
                                 $('.additional-fee-wrap .additional-fee-<?php echo esc_html( $key ) ?>').html(additional_fee_html_<?php echo esc_html( $key ) ?>);
 								<?php endforeach; ?>
@@ -1855,7 +1858,7 @@ class Apartment {
                                 if (totalAdditionalFee > 0) {
                                     $('.additional-fee-wrap').show();
                                     total_price = total_price + totalAdditionalFee;
-                                    additional_fee_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', totalAdditionalFee.toFixed(2));
+                                    additional_fee_html = wcFormatPrice(totalAdditionalFee);
                                 }
                                 $('.additional-fee-wrap .additional-fee').html(additional_fee_html);
 								<?php endif; ?>
@@ -1866,7 +1869,7 @@ class Apartment {
                                 var total_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
                                 if (total_price > 0) {
                                     $('.total-price-wrap').show();
-                                    total_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', total_price.toFixed(2));
+                                    total_price_html = wcFormatPrice(total_price);
                                 }
                                 $('.total-price-wrap .total-price').html(total_price_html);
                             } else {
@@ -1896,6 +1899,34 @@ class Apartment {
                             }
                         }
                     }
+
+					function wcFormatPrice( price ) {
+
+						var currency_symbol     = "<?php echo esc_js(get_woocommerce_currency_symbol()); ?>",
+							currency_position   = "<?php echo esc_js(get_option( 'woocommerce_currency_pos', true )); ?>",
+							decimal_separator   = "<?php echo esc_js(wc_get_price_decimal_separator()); ?>",
+							thousand_separator  = "<?php echo esc_js(wc_get_price_thousand_separator()); ?>",
+							decimals 			= <?php echo (int) wc_get_price_decimals(); ?>;
+
+						price = parseFloat(price).toFixed(decimals);
+
+						// Thousand & decimal formatting
+						price = price.replace('.', decimal_separator);
+						price = price.replace(/\B(?=(\d{3})+(?!\d))/g, thousand_separator);
+
+						switch ( currency_position ) {
+							case 'left':
+								return currency_symbol + price;
+							case 'right':
+								return price + currency_symbol;
+							case 'left_space':
+								return currency_symbol + ' ' + price;
+							case 'right_space':
+								return price + ' ' + currency_symbol;
+							default:
+								return price;
+						}
+					}
 
                     $(".tf-apartment-design-one-form #check-in-date").on('click', function () {
                         $(".tf-check-out-date .form-control").trigger( "click" );
