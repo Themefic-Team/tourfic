@@ -268,6 +268,11 @@ class Pricing {
 				if ($data['status'] !== 'available') {
 					continue;
 				}
+				$avail_date = strtotime( $data['check_in'] );
+				$today = strtotime( wp_date('Y-m-d') );
+				if ( $avail_date < $today ) {
+					continue;
+				}
 
 				if($data['pricing_type'] == 'person'){
 					// Adult Price
