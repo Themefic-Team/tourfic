@@ -11547,6 +11547,12 @@ msgstr ""
 msgid "Room Image"
 msgstr ""
 
+#: templates/template-parts/hotel/design-2/rooms.php:418
+msgid "% off"
+msgstr ""
+
+
+
 #: inc/Classes/Apartment/Apartment.php:270
 #: inc/Classes/Hotel/Hotel.php:4730
 msgid "Room details"
