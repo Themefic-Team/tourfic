@@ -639,6 +639,7 @@ class Enqueue {
 			'tourfic-settings_page_tf_license_info',
 			'tourfic-settings_page_tf_dashboard',
 			'tourfic-settings_page_tf_shortcodes',
+			'tourfic-settings_page_tf_workspace',
 			'tourfic-vendor_page_tf_vendor_reports',
 			'tourfic-vendor_page_tf_vendor_list',
 			'tourfic-vendor_page_tf_vendor_commissions',

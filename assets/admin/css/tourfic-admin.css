@@ -1785,8 +1785,9 @@ Steps
   }
 }
 
-.tourfic-settings_page_tf_dashboard #wpcontent {
-  background-color: #EBF5FF;
+.tourfic-settings_page_tf_dashboard #wpcontent,
+.tourfic-settings_page_tf_workspace #wpcontent {
+  background-color: #F5F9FF;
 }
 
 .tourfic-settings_page_tf_get_help #wpcontent {
@@ -1994,6 +1995,7 @@ Steps
   display: flex;
   gap: 24px;
   position: relative;
+  justify-content: space-between;
 }
 @media only screen and (max-width: 991.98px) {
   .tf-setting-dashboard .tf-setting-performace-section {
@@ -2018,7 +2020,7 @@ Steps
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar {
   width: 256px;
-  margin-top: 16px;
+  margin-top: 33px;
 }
 @media only screen and (max-width: 991.98px) {
   .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar {
@@ -2094,6 +2096,123 @@ Steps
   height: 35px;
   border-radius: 10px;
 }
+.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 12px;
+}
+@media only screen and (max-width: 1650px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 1320px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs {
+    grid-template-columns: 1fr;
+  }
+}
+@media only screen and (max-width: 991.98px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs {
+    grid-template-columns: 1fr;
+  }
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace {
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #F2F5F7;
+  background: #FFF;
+  box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace span.pro {
+  border-radius: 6px;
+  background: #F0FDF4;
+  padding: 4px 6px;
+  color: #16A34A;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+  width: fit-content;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace h3 {
+  color: #27333F;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 150%;
+  margin: 0;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0 32px 0;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace ul li {
+  color: #27333F;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a {
+  border-radius: 8px;
+  border: 1px solid #0352A0;
+  color: #0464C8;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px;
+  padding: 12px 32px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 8px;
+  margin-top: auto;
+  width: fit-content;
+  transition: 0.3s all ease;
+}
+@media only screen and (max-width: 1650px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a {
+    padding: 12px 15px;
+  }
+}
+@media only screen and (max-width: 1320px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a {
+    padding: 12px 20px;
+  }
+}
+@media only screen and (max-width: 991.98px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a {
+    padding: 12px 20px;
+  }
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a svg path {
+  transition: 0.3s all ease;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a:hover {
+  background: linear-gradient(180deg, #0352A0 0%, #0464C8 100%);
+  color: #fff;
+}
+.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a:hover svg path {
+  stroke: #fff;
+}
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar {
   /* Loader */
   /* Customization */
@@ -2110,8 +2229,8 @@ Steps
   text-align: center;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header .premium-logo img {
-  margin-top: -16px;
-  margin-bottom: 16px;
+  margin-top: -32px;
+  margin-bottom: 14px;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header h3 {
   color: #0464C8;
@@ -2212,7 +2331,7 @@ Steps
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-item {
   border-radius: 6px;
   background: #FFF;
-  padding: 16px;
+  padding: 8px 12px;
   transition: all ease-in-out 0.3s;
   margin-bottom: 0;
   position: relative;
@@ -2242,7 +2361,7 @@ Steps
   height: 32px;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title {
-  width: calc(100% - 167px);
+  width: calc(100% - 56px);
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title h4 {
   color: #27333F;
@@ -2272,10 +2391,10 @@ Steps
   line-height: 20px;
   margin: 0;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn {
   font-weight: 600;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn .tf-plugin-button {
   padding: 0px;
   color: #0464C8;
   font-size: 15px;
@@ -2285,29 +2404,29 @@ Steps
   text-decoration: none;
   position: relative;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.install {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn .tf-plugin-button.install {
   color: #0464C8;
   cursor: pointer;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.install svg path {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn .tf-plugin-button.install svg path {
   stroke: #0464C8;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.activate {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn .tf-plugin-button.activate {
   color: #0464C8;
   cursor: pointer;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.pro, .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.activate-pro {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn .tf-plugin-button.pro, .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn .tf-plugin-button.activate-pro {
   color: #ff9800;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-button.activate-pro {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn .tf-plugin-button.activate-pro {
   color: #ff5722;
   cursor: pointer;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-status.active {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn .tf-plugin-status.active {
   color: #0464C8;
   opacity: 0.8;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-btn .tf-plugin-status.active-pro {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn .tf-plugin-status.active-pro {
   color: #ff5722;
   opacity: 0.8;
 }

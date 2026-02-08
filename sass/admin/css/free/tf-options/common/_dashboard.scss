@@ -1,6 +1,7 @@
-.tourfic-settings_page_tf_dashboard{
+.tourfic-settings_page_tf_dashboard,
+.tourfic-settings_page_tf_workspace{
     #wpcontent{
-        background-color: #EBF5FF;
+        background-color: #F5F9FF;
     }
 }
 .tourfic-settings_page_tf_get_help{
@@ -199,6 +200,7 @@
         @include flexbox();
         gap: 24px;
         position: relative;
+        justify-content: space-between;
         @media #{$max991}{
             flex-direction: column;
         }
@@ -220,7 +222,7 @@
 
         .tf-settings-sidebar{
             width: 256px;
-            margin-top: 16px;
+            margin-top: 33px;
             @media #{$max991}{
                 width: 100%;
             }
@@ -293,6 +295,114 @@
             }
         }
 
+        .tf-workspace-box{
+            .tf-workspace-boxs{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                gap: 12px;
+                @media #{$max1650}{
+                    grid-template-columns: 1fr 1fr 1fr;
+                }
+                @media #{$max1320}{
+                    grid-template-columns: 1fr 1fr;
+                }
+                @media #{$max1024}{
+                    grid-template-columns: 1fr;
+                }
+                @media #{$max991}{
+                    grid-template-columns: 1fr 1fr;
+                }
+                @media #{$max640}{
+                    grid-template-columns: 1fr;
+                }
+                .tf-single-workspace{
+                    padding: 24px;
+                    border-radius: 12px;
+                    border: 1px solid #F2F5F7;
+                    background: #FFF;
+                    box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
+                    display: flex;
+                    flex-direction: column;
+                    position: relative;
+                    span.pro{
+                        border-radius: 6px;
+                        background: #F0FDF4;
+                        padding: 4px 6px;
+                        color: #16A34A;
+                        font-size: 11px;
+                        font-weight: 600;
+                        line-height: 16px;
+                        width: fit-content;
+                        position: absolute;
+                        right: 16px;
+                        top: 16px;
+                    }
+                    h3{
+                        color: #27333F;
+                        font-size: 19px;
+                        font-weight: 600;
+                        line-height: 150%;
+                        margin: 0;
+                    }
+                    ul{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 8px;
+                        margin: 16px 0 32px 0;
+                        li{
+                            color: #27333F;
+                            font-size: 13px;
+                            font-weight: 400;
+                            line-height: 20px;
+                            display: flex;
+                            gap: 10px;
+                            align-items: center;
+                        }
+                    }
+                    a{
+                        border-radius: 8px;
+                        border: 1px solid #0352A0;
+                        color: #0464C8;
+                        font-size: 15px;
+                        font-weight: 600;
+                        line-height: 24px;
+                        padding: 12px 32px;
+                        text-align: center;
+                        display: flex;
+                        align-items: center;
+                        text-decoration: none;
+                        gap: 8px;
+                        margin-top: auto;
+                        width: fit-content;
+                        transition: .3s all ease;
+                        @media #{$max1650}{
+                            padding: 12px 15px;
+                        }
+                        @media #{$max1320}{
+                            padding: 12px 20px;
+                        }
+                        @media #{$max991}{
+                            padding: 12px 20px;
+                        }
+                        svg{
+                            path{
+                                transition: .3s all ease;
+                            }
+                        }
+                        &:hover{
+                            background: linear-gradient(180deg, #0352A0 0%, #0464C8 100%);
+                            color: #fff;
+                            svg{
+                                path{
+                                    stroke: #fff;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         .tf-settings-sidebar{
             .tf-sidebar-content {
                 .tf-premium-box{
@@ -306,8 +416,8 @@
                         .premium-logo{
                             text-align: center;
                             img{
-                                margin-top: -16px;
-                                margin-bottom: 16px;
+                                margin-top: -32px;
+                                margin-bottom: 14px;
                             }
                         }
                         h3{
@@ -417,7 +527,7 @@
             .tf-plugin-item { 
                 border-radius: 6px;
                 background: #FFF;
-                padding: 16px; 
+                padding: 8px 12px; 
                 transition: all ease-in-out 0.3s;
                 margin-bottom: 0;
                 position: relative;
@@ -448,7 +558,7 @@
                         }
                     }
                     .tf-plugin-title{
-                        width: calc(100% - 167px);
+                        width: calc(100% - 56px);
                         h4 {
                             color: #27333F;
                             font-size: 15px;
@@ -477,50 +587,51 @@
                             line-height: 20px;
                             margin: 0;
                         }
-                    }
-                    .tf-plugin-btn{
-                        font-weight: 600;
-                        .tf-plugin-button { 
-                            padding: 0px; 
-                            color: #0464C8;
-                            font-size: 15px;
-                            font-style: normal;
-                            font-weight: 500;
-                            line-height: 24px; /* 160% */
 
-                            text-decoration: none;
-                            position: relative;
-                            &.install{
-                                color: #0464C8; 
-                                cursor: pointer;
-                                svg{
-                                    path{
-                                    stroke: #0464C8; 
+                        .tf-plugin-btn{
+                            font-weight: 600;
+                            .tf-plugin-button { 
+                                padding: 0px; 
+                                color: #0464C8;
+                                font-size: 15px;
+                                font-style: normal;
+                                font-weight: 500;
+                                line-height: 24px; /* 160% */
+    
+                                text-decoration: none;
+                                position: relative;
+                                &.install{
+                                    color: #0464C8; 
+                                    cursor: pointer;
+                                    svg{
+                                        path{
+                                        stroke: #0464C8; 
+                                        }
                                     }
                                 }
+                                &.activate {
+                                    color: #0464C8; 
+                                    cursor: pointer;
+                                }
+                                &.pro,
+                                &.activate-pro{
+                                    color: #ff9800; 
+                                }
+                                &.activate-pro{
+                                    color: #ff5722;
+                                    cursor: pointer;
+                                }
                             }
-                            &.activate {
-                                color: #0464C8; 
-                                cursor: pointer;
-                            }
-                            &.pro,
-                            &.activate-pro{
-                                color: #ff9800; 
-                            }
-                            &.activate-pro{
-                                color: #ff5722;
-                                cursor: pointer;
-                            }
-                        }
-
-                        .tf-plugin-status {
-                            &.active{
-                                color: #0464C8; 
-                                opacity: 0.8; 
-                            }
-                            &.active-pro {
-                                color: #ff5722; 
-                                opacity: 0.8; 
+    
+                            .tf-plugin-status {
+                                &.active{
+                                    color: #0464C8; 
+                                    opacity: 0.8; 
+                                }
+                                &.active-pro {
+                                    color: #ff5722; 
+                                    opacity: 0.8; 
+                                }
                             }
                         }
                     }
