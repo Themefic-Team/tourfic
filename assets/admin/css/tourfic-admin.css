@@ -1794,84 +1794,44 @@ Steps
 }
 
 .tf-setting-dashboard .tf-setting-top-bar {
-  background-color: #ffffff;
-  padding: 15px 40px;
+  padding: 12px 32px;
   margin-left: -20px;
   margin-bottom: 24px;
   display: flex;
   justify-content: space-between;
+  gap: 24px;
   align-items: center;
+  background: #F8FAFC;
+  box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
 }
 .tf-setting-dashboard .tf-setting-top-bar .version {
   display: flex;
   align-items: center;
 }
 .tf-setting-dashboard .tf-setting-top-bar .version img {
-  width: 100px;
+  width: 138px;
+}
+@media only screen and (max-width: 480px) {
+  .tf-setting-dashboard .tf-setting-top-bar .version img {
+    width: 100px;
+  }
 }
 .tf-setting-dashboard .tf-setting-top-bar .version span {
-  font-size: 11px;
-  line-height: 11px;
-  color: #000;
-  font-weight: 700;
-  border: 1px solid #003c79;
-  border-radius: 4px;
-  background-color: rgba(0, 60, 121, 0.0392156863);
-  display: inline-block;
-  padding: 2px 6px;
-  margin-left: 10px;
+  color: #7D8FA0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-left: 8px;
 }
-.tf-setting-dashboard .tf-setting-top-bar .other-document {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.tf-setting-dashboard .tf-setting-top-bar .other-document span {
+  color: #566676;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
 }
-.tf-setting-dashboard .tf-setting-top-bar .other-document .dropdown {
-  position: absolute;
-  cursor: context-menu;
-  top: 60px;
-  right: -10px;
-  z-index: 1;
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  min-width: 200px;
-  max-width: 200px;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.2s ease;
-  z-index: 9999;
-}
-.tf-setting-dashboard .tf-setting-top-bar .other-document .dropdown:after {
-  content: "";
-  position: absolute;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  top: -10px;
-  right: 25px;
-  border-bottom: 10px solid white;
-  margin-top: 0;
-  z-index: 1;
-}
-.tf-setting-dashboard .tf-setting-top-bar .other-document .dropdown .list-item a {
-  font-size: 0.938rem;
-  font-weight: 500;
-  color: #000;
-  display: flex;
-  align-items: center;
-  transition: all 0.2s ease;
-  text-decoration: none;
-  padding: 10px 0px;
-}
-.tf-setting-dashboard .tf-setting-top-bar .other-document .dropdown .list-item a span {
-  margin-left: 10px;
-}
-.tf-setting-dashboard .tf-setting-top-bar .other-document:hover .dropdown {
-  visibility: visible;
-  opacity: 1;
+.tf-setting-dashboard .tf-setting-top-bar .other-document span a {
+  color: #003C79;
+  text-decoration: underline;
 }
 .tf-setting-dashboard .tf-setting-banner {
   background-color: transparent;
@@ -1937,17 +1897,29 @@ Steps
   margin-bottom: 32px;
 }
 .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  row-gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+@media all and (max-width: 1299px) {
+  .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 @media only screen and (max-width: 1199.98px) {
   .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 16px;
-    justify-content: flex-start;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid {
+    grid-template-columns: 1fr;
   }
 }
 .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid {
@@ -1958,33 +1930,12 @@ Steps
   box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
   display: flex;
   flex-wrap: wrap;
-  flex-basis: calc(16.5% - 0px);
+  width: 100%;
+  box-sizing: border-box;
 }
 @media only screen and (max-width: 1650px) {
   .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid {
     padding: 12px;
-  }
-}
-@media only screen and (max-width: 1199.98px) {
-  .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid {
-    flex-basis: calc(30% - 10px);
-  }
-}
-@media only screen and (max-width: 1024px) {
-  .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid {
-    flex-basis: calc(33.33% - 35px);
-    margin: 0;
-  }
-}
-@media only screen and (max-width: 768px) {
-  .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid {
-    width: inherit;
-    flex-basis: calc(50% - 35px);
-  }
-}
-@media only screen and (max-width: 480px) {
-  .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid {
-    flex-basis: 100%;
   }
 }
 .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid:nth-child(2) {
@@ -2044,7 +1995,7 @@ Steps
   gap: 24px;
   position: relative;
 }
-@media only screen and (max-width: 1199.98px) {
+@media only screen and (max-width: 991.98px) {
   .tf-setting-dashboard .tf-setting-performace-section {
     flex-direction: column;
   }
@@ -2058,15 +2009,21 @@ Steps
   margin: 0 0 8px 0;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-wrapper {
-  -webkit-flex: 0 0 calc(70% - 24px);
-  -ms-flex: 0 0 calc(70% - 24px);
-  flex: 0 0 calc(70% - 24px);
+  width: calc(100% - 288px);
+}
+@media only screen and (max-width: 991.98px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-report-wrapper {
+    width: 100%;
+  }
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar {
-  -webkit-flex: 0 0 30%;
-  -ms-flex: 0 0 30%;
-  flex: 0 0 30%;
+  width: 256px;
   margin-top: 16px;
+}
+@media only screen and (max-width: 991.98px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar {
+    width: 100%;
+  }
 }
 .tf-setting-dashboard .tf-setting-performace-section #tf-report-loader {
   position: absolute;
@@ -2146,7 +2103,7 @@ Steps
   border: 0.5px solid #238DFB;
   background: #FFF;
   box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
-  padding: 0 32px 32px 32px;
+  padding: 0 24px 24px 24px;
   margin-bottom: 32px;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header .premium-logo {
@@ -2158,22 +2115,22 @@ Steps
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header h3 {
   color: #0464C8;
-  font-size: 22px;
+  font-size: 19px;
   font-weight: 600;
   line-height: 150%;
-  margin: 0 0 16px 0;
+  margin: 0 0 8px 0;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header h4 {
   color: #27333F;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 150%;
   letter-spacing: -0.25px;
-  margin: 0 0 16px 0;
+  margin: 0 0 8px 0;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header p {
   color: #414D59;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 24px;
   margin: 0 0 16px 0;
@@ -2182,16 +2139,17 @@ Steps
   display: flex;
   flex-direction: column;
   margin: 0;
-  gap: 16px;
+  gap: 8px;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-features ul li {
   display: flex;
   gap: 8px;
   margin: 0;
   color: #27333F;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 20px;
+  align-items: center;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-button {
   padding: 16px 0;
@@ -2214,7 +2172,7 @@ Steps
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-button p {
   color: #27333F;
   text-align: center;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 24px;
   margin: 0;
@@ -2225,7 +2183,7 @@ Steps
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-moneyback-notice h2 {
   color: #27333F;
   text-align: center;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   line-height: 24px;
   margin: 0;

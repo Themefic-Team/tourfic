@@ -10,94 +10,44 @@
 }
 .tf-setting-dashboard {
     .tf-setting-top-bar {
-        background-color: #ffffff;
-        padding: 15px 40px;
+        padding: 12px 32px;
         margin-left: -20px;
         margin-bottom: 24px;
         display: flex;
         justify-content: space-between;
+        gap: 24px;
         align-items: center;
-
+        background: #F8FAFC;
+        box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
         .version {
             display: flex;
             align-items: center;
 
             img {
-                width: 100px;
+                width: 138px;
+                @media #{$max480}{
+                    width: 100px;
+                }
             }
 
             span {
-                font-size: 11px;
-                line-height: 11px;
-                color: $admin-color-heading;
-                font-weight: 700;
-                border: 1px solid #003c79;
-                border-radius: 4px;
-                background-color: #003c790a;
-                display: inline-block;
-                padding: 2px 6px;
-                margin-left: 10px;
+                color: #7D8FA0;
+                font-size: 15px;
+                font-weight: 400;
+                line-height: 24px;
+                margin-left: 8px;
             }
         }
 
         .other-document {
-            position: relative;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-
-            .dropdown {
-                position: absolute;
-                cursor: context-menu;
-                top: 60px;
-                right: -10px;
-                z-index: 1;
-                background-color: #ffffff;
-                padding: 30px;
-                border-radius: 8px;
-                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-                min-width: 200px;
-                max-width: 200px;
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.2s ease;
-                z-index: 9999;
-
-                &:after {
-                    content: "";
-                    position: absolute;
-                    border-left: 10px solid transparent;
-                    border-right: 10px solid transparent;
-                    top: -10px;
-                    right: 25px;
-                    border-bottom: 10px solid white;
-                    margin-top: 0;
-                    z-index: 1;
-                }
-
-                .list-item {
-                    a {
-                        font-size: 0.938rem;
-                        font-weight: 500;
-                        color: $admin-color-heading;
-                        display: flex;
-                        align-items: center;
-                        transition: all 0.2s ease;
-                        text-decoration: none;
-                        padding: 10px 0px;
-
-                        span {
-                            margin-left: 10px;
-                        }
-                    }
-                }
-            }
-
-            &:hover {
-                .dropdown {
-                    visibility: visible;
-                    opacity: 1;
+            span{
+                color: #566676;
+                font-size: 15px;
+                font-weight: 400;
+                line-height: 24px;
+                a{
+                    color: #003C79;
+                    text-decoration: underline;
                 }
             }
         }
@@ -163,15 +113,21 @@
         position: relative;
         margin-bottom: 32px;
         .tf-performance-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            row-gap: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            gap: 12px;
+            width: 100%;
+            @media all and (max-width: 1299px){
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
             @media #{$max1199}{
-                display: flex;
-                flex-wrap: wrap;
-                column-gap: 16px;
-                justify-content: flex-start;
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            @media #{$max640}{
+                grid-template-columns: 1fr 1fr;
+            }
+            @media #{$max480}{
+                grid-template-columns: 1fr;
             }
 
             .tf-single-performance-grid {
@@ -182,24 +138,12 @@
                 box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
                 display: flex;
                 flex-wrap: wrap;
-                flex-basis: calc(16.5% - 0px);
+                width: 100%;
+                box-sizing: border-box;
                 @media #{$max1650}{
                     padding: 12px;
                 }
-                @media #{$max1199}{
-                    flex-basis: calc(30% - 10px);
-                }
-                @media #{$max1024}{
-                    flex-basis: calc(33.33% - 35px);
-                    margin: 0;
-                }
-                @media #{$max768}{
-                    width: inherit;
-                    flex-basis: calc(50% - 35px);
-                }
-                @media #{$max480}{
-                    flex-basis: 100%;
-                }
+                
                 &:nth-child(2){
                     border: 1px solid #FFE5D3;
                     background: linear-gradient(180deg, rgba(255, 229, 211, 0.10) 0%, rgba(255, 226, 240, 0.10) 100%), #FFF;
@@ -255,7 +199,7 @@
         @include flexbox();
         gap: 24px;
         position: relative;
-        @media #{$max1199}{
+        @media #{$max991}{
             flex-direction: column;
         }
         h2 {
@@ -268,13 +212,18 @@
         }
 
         .tf-report-wrapper{
-            @include flex(0 0 calc(70% - 24px));
-            
+            width: calc(100% - 288px);
+            @media #{$max991}{
+                width: 100%;
+            }
         }
 
         .tf-settings-sidebar{
-            @include flex(0 0 30%);
+            width: 256px;
             margin-top: 16px;
+            @media #{$max991}{
+                width: 100%;
+            }
         }
 
         #tf-report-loader {
@@ -351,7 +300,7 @@
                     border: 0.5px solid #238DFB;
                     background: #FFF;
                     box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
-                    padding: 0 32px 32px 32px;
+                    padding: 0 24px 24px 24px;
                     margin-bottom: 32px;
                     .premium-box-header{
                         .premium-logo{
@@ -363,22 +312,22 @@
                         }
                         h3{
                             color: #0464C8;
-                            font-size: 22px;
+                            font-size: 19px;
                             font-weight: 600;
                             line-height: 150%;
-                            margin: 0 0 16px 0;
+                            margin: 0 0 8px 0;
                         }
                         h4{
                             color: #27333F;
-                            font-size: 17px;
+                            font-size: 15px;
                             font-weight: 600;
                             line-height: 150%;
                             letter-spacing: -0.25px;
-                            margin: 0 0 16px 0;
+                            margin: 0 0 8px 0;
                         }
                         p{
                             color: #414D59;
-                            font-size: 15px;
+                            font-size: 13px;
                             font-weight: 400;
                             line-height: 24px;
                             margin: 0 0 16px 0;
@@ -389,15 +338,16 @@
                             display: flex;
                             flex-direction: column;
                             margin: 0;
-                            gap: 16px;
+                            gap: 8px;
                             li{
                                 display: flex;
                                 gap: 8px;
                                 margin: 0;
                                 color: #27333F;
-                                font-size: 15px;
+                                font-size: 13px;
                                 font-weight: 400;
-                                line-height: 24px;
+                                line-height: 20px;
+                                align-items: center;
                             }
                         }
                     }
@@ -422,7 +372,7 @@
                         p{
                             color: #27333F;
                             text-align: center;
-                            font-size: 15px;
+                            font-size: 13px;
                             font-weight: 400;
                             line-height: 24px;
                             margin: 0;
@@ -433,7 +383,7 @@
                         h2{
                             color: #27333F;
                             text-align: center;
-                            font-size: 15px;
+                            font-size: 13px;
                             font-weight: 600;
                             line-height: 24px;
                             margin: 0;
