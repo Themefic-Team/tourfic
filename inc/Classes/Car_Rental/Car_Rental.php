@@ -130,9 +130,9 @@ class Car_Rental
                                     <div class="tf_form_inners">
                                         <div class="tf_checkin_dates">
                                             <div class="tf-select-date tf-car-search-pickup-date">
-                                                <span class="date"><?php echo esc_html( gmdate('d', strtotime('+1 day')) ); ?></span>
+                                                <span class="date"><?php echo esc_html( wp_date('d', strtotime('+1 day')) ); ?></span>
                                                 <span class="month">
-                                                    <span><?php echo esc_html( gmdate('M', strtotime('+1 day')) ); ?></span>
+                                                    <span><?php echo esc_html( wp_date('M', strtotime('+1 day')) ); ?></span>
                                                     <div class="tf_check_arrow">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                             <path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4" />
@@ -468,7 +468,7 @@ class Car_Rental
                     </div>
                     <div class="tf-submit-button">
                         <input type="hidden" name="type" value="tf_carrental" class="tf-post-type" />
-                        <button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html(apply_filters("tf_car_search_form_submit_button_text", 'Search')); ?> <i class="ri-search-line"></i></button>
+                        <button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html(apply_filters("tf_car_search_form_submit_button_text", esc_html__('Search', 'tourfic'))); ?> <i class="ri-search-line"></i></button>
                     </div>
                 </div>
             </form>
@@ -580,10 +580,10 @@ class Car_Rental
                                         </svg>
                                     </div>
                                     <div class="tf_pickup_dates tf-flex tf-flex-align-center">
-                                        <span class="date field--title"><?php echo esc_html(gmdate('d', strtotime('+1 day'))); ?></span>
+                                        <span class="date field--title"><?php echo esc_html(wp_date('d', strtotime('+1 day'))); ?></span>
                                         <div class="tf-search__form__field__mthyr">
-                                            <span class="month form--span"><?php echo esc_html(gmdate('M', strtotime('+1 day'))); ?></span>
-                                            <span class="year form--span"><?php echo esc_html(gmdate('Y', strtotime('+1 day'))); ?></span>
+                                            <span class="month form--span"><?php echo esc_html(wp_date('M', strtotime('+1 day'))); ?></span>
+                                            <span class="year form--span"><?php echo esc_html(wp_date('Y', strtotime('+1 day'))); ?></span>
                                         </div>
                                     </div>
                                     <input type="hidden" name="pickup-date" class="tf_pickup_date_input tf-check-inout-hidden" value="<?php echo esc_attr(gmdate('Y/m/d', strtotime('+1 day'))); ?>">
@@ -637,10 +637,10 @@ class Car_Rental
                                         </svg>
                                     </div>
                                     <div class="tf_dropoff_dates tf-flex tf-flex-align-center">
-                                        <span class="date field--title"><?php echo esc_html(gmdate('d', strtotime('+2 day'))); ?></span>
+                                        <span class="date field--title"><?php echo esc_html(wp_date('d', strtotime('+2 day'))); ?></span>
                                         <div class="tf-search__form__field__mthyr">
-                                            <span class="month form--span"><?php echo esc_html(gmdate('M', strtotime('+2 day'))); ?></span>
-                                            <span class="year form--span"><?php echo esc_html(gmdate('Y', strtotime('+2 day'))); ?></span>
+                                            <span class="month form--span"><?php echo esc_html(wp_date('M', strtotime('+2 day'))); ?></span>
+                                            <span class="year form--span"><?php echo esc_html(wp_date('Y', strtotime('+2 day'))); ?></span>
                                         </div>
                                     </div>
                                     <input type="hidden" placeholder="Drop Off Date" name="dropoff-date" class="tf_dropoff_date_input tf-check-inout-hidden" />

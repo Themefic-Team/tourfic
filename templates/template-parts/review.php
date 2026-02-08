@@ -175,7 +175,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
                         <div class="tf-review-author-name">
                             <h3><?php echo esc_html( $c_author_name ); ?></h3>
 	                        <?php if(get_post_type( $post_id ) == "tf_hotel" && $tf_hotel_selected_template == "design-3"): ?>
-                                <div class="tf-review-date"><?php echo esc_html( gmdate( "F d, Y", strtotime( $c_date ) ) ); ?></div>
+                                <div class="tf-review-date"><?php echo esc_html( wp_date( "F d, Y", strtotime( $c_date ) ) ); ?></div>
 	                        <?php endif; ?>
                         </div>
                         <div class="tf-review-ratings tf-mt-8">
@@ -187,7 +187,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 				        <?php if(get_post_type( $post_id ) == "tf_hotel" && $tf_hotel_selected_template != "design-3"): ?>
                             <div class="tf-review-date">
                                 <ul class="tf-list">
-                                    <li><i class="fa-regular fa-clock"></i> <?php echo esc_html( gmdate( "F d, Y", strtotime( $c_date ) ) ); ?></li>
+                                    <li><i class="fa-regular fa-clock"></i> <?php echo esc_html( wp_date( "F d, Y", strtotime( $c_date ) ) ); ?></li>
                                 </ul>
                             </div>
                         <?php endif; ?>
@@ -338,7 +338,8 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 							?>
                             <div class="tf-btn-wrap">
                                 <button class="<?php echo esc_attr( $btn_class ); ?> tf-modal-btn" data-target="#tf-rating-modal">
-                                    <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ); ?>
+                                    <i class="fas fa-plus"></i> 
+									 <?php echo esc_html( apply_filters( 'tourfic_add_review_button_text', __( 'Add Review', 'tourfic' ) ) );?>
                                 </button>
                             </div>
 							<?php
@@ -348,7 +349,8 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 							?>
                             <div class="tf-btn-wrap">
                                 <button class="<?php echo esc_attr( $btn_class ); ?> tf-modal-btn" data-target="#tf-rating-modal">
-                                    <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ) ?>
+                                    <i class="fas fa-plus"></i> 
+									 <?php echo esc_html( apply_filters( 'tourfic_add_review_button_text', __( 'Add Review', 'tourfic' ) ) ); ?>
                                 </button>
                             </div>
 							<?php
@@ -449,7 +451,8 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 					?>
                     <div class="tf-btn-wrap">
                         <button class="<?php echo esc_attr( $btn_class ); ?> tf-modal-btn" data-target="#tf-rating-modal">
-                            <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ); ?>
+                            <i class="fas fa-plus"></i> 
+							 <?php echo esc_html( apply_filters( 'tourfic_add_review_button_text', __( 'Add Review', 'tourfic' ) ) );?>
                         </button>
                     </div>
 
@@ -462,7 +465,8 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 					?>
                     <div class="tf-btn-wrap">
                         <button class="<?php echo esc_attr( $btn_class ); ?> tf-modal-btn" data-target="#tf-rating-modal">
-                            <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ) ?>
+                            <i class="fas fa-plus"></i> 
+							 <?php echo esc_html( apply_filters( 'tourfic_add_review_button_text', __( 'Add Review', 'tourfic' ) ) ); ?>
                         </button>
                     </div>
 					<?php
@@ -480,6 +484,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 		<div class="tf-modal-dialog">
 			<div class="tf-modal-content">
 				<div class="tf-modal-header">
+					<?php echo apply_filters( 'tf_rating_modal_header_content', '' );?>
 					<a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
 				</div>
 				<div class="tf-modal-body">

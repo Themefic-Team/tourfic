@@ -1,0 +1,556 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-single-template{
+    &__legacy.tf-single-itinerary-legacy{
+        padding: 0;
+        .tf-travel-itinerary-wrapper{
+            .tf-travel-itinerary-content {
+                h2 {
+                    margin-bottom: 30px;
+                    color: $color-heading;
+                }
+            }
+            #tf-accordion-wrapper {
+                margin-bottom: 30px;
+                @media #{$max575}{
+                    margin-bottom: 15px;
+                }
+                .tf-accordion-head {
+                    cursor: pointer;
+                    transition: 0.2s ease;
+                    display: flex;
+                    align-items: center;
+                    background: $color-white;
+                    border-radius: 4px;
+                    z-index: 1;
+                    position: relative;
+                    .tf-travel-time {
+                        background: $color-primary;
+                        border-radius: 4px 0px 0px 4px;
+                        width: 130px;
+                        height: 80px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 10px;
+                        @media #{$max768}{
+                            height: 60px;
+                        }
+                        span {
+                            font-size: 1.125rem;
+                            color: $color-white;
+                            @media #{$max768}{
+                                font-size: 0.938rem;
+                                text-align: center;
+                            }
+                        }
+                    }
+                    h4 {
+                        font-size: 1.125rem;
+                        color: $color-heading;
+                        padding-left: 25px;
+                        width: 100%;
+                        margin-bottom: 0;
+                        &:hover {
+                            color: $color-primary;
+                        }
+                        @media #{$max768}{
+                            font-size: 0.938rem;
+                            padding-left: 20px;
+                        }
+                    }
+                    .arrow {
+                        transition: 0.25s ease;
+                        transform: rotate(-90deg);
+                        font-size: 1.25rem;
+                        margin-right: 25px;
+                        &.arrow-animate {
+                            transform: rotate(0deg);
+                        }
+                    }
+                }
+                .tf-accordion-content {
+                    background-color: $color-white;
+                    display: none;
+                    padding: 20px 30px;
+                    color: $color-text;
+                    margin-top: -2px;
+                    z-index: 999;
+                    position: relative;
+                    border-bottom-left-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                    a {
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                    .tf-travel-desc {
+                        display: flex;
+                        padding-top: 20px;
+                        gap: 20px;
+                        flex-direction: row;
+                        @media #{$max768}{
+                            display: grid;
+                        }
+                        .tf-ititnerary-img {
+                            flex-basis: 30%;
+                            img {
+                                width: 100%;
+                                object-fit: cover;
+                                @media #{$max768}{
+                                    max-width: 100%;
+                                }
+                            }
+                        }
+                        .trav-cont {
+                            display: flex;
+                            &.tf-travel-description {
+                                display: flow-root;
+                                flex-basis: 70%;
+                            }
+                        }
+                    }
+                    .ininerary-other-gallery {
+                        margin-bottom: 20px;
+                        .ininerary-gallery-single {
+                            &.slick-slide.slick-active {
+                                height: 130px;
+                            }
+                            >a {
+                                img {
+                                    height: 130px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &__one.tf-single-itinerary-style1{
+        padding: 0;
+        .tf-itinerary-wrapper{
+            .tf-itinerary-box {
+                background: $color-filling-fg;
+                @include bd-radius(5px);;
+                @media #{$max768}{
+                    padding: 40px 24px;
+                }
+            }
+            .tf-single-itinerary-item{
+                padding-left: 40px;
+                border-bottom: 1px solid $color-border-lite;
+                padding-bottom: 24px;
+                padding-top: 24px;
+                .tf-itinerary-title{
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+                @media #{$max768}{
+                    padding-left: 30px;
+                }
+    
+                .tf-itinerary-content-box{
+                display: none;
+                    @media #{$max768}{
+                        margin-left: -30px;
+                    }
+                    .tf-itinerary-content-img{
+                        flex-basis: 20%;
+                        @media #{$max768}{
+                            flex-basis: 100%;
+                        }
+                        img{
+                            border-radius: 6px;
+                        }
+                    }
+                    .tf-itinerary-content{
+                        p{
+                            margin: 0;
+                        }
+                    }
+                    .tf-itinerary-content-details{
+                        p {
+                            margin-bottom: 5px;
+                            &:empty{
+                                display: none;
+                                margin: 0;
+                            }
+                        }
+                        flex-basis: 80%;
+                        @media #{$max768}{
+                            flex-basis: 100%;
+                        }
+                    }
+                    img{
+                        width: 100%;
+                    }
+                    .ininerary-other-gallery{
+                        margin-top: 20px;
+                        display: flex;
+                        gap: 10px;
+                        a {
+                            width: 20%;
+                            display: inline-block;
+                            float: left;
+                            display: none;
+                            position: relative;
+                            img{
+                                height: 91px;
+                                border-radius: 5px;
+                                object-fit: cover;
+                            }
+                            &:nth-child(1),
+                            &:nth-child(2),
+                            &:nth-child(3),
+                            &:nth-child(4),
+                            &:nth-child(5){
+                                display: block;
+                            }
+                        }
+                        a.tf-gallery-more {
+                            position: relative;
+    
+                            &::before{
+                                content: "View More → ";
+                                position: absolute;
+                                color: $color-white;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                top: 0;
+                                bottom: 0;
+                                left: 0;
+                                right: 0;
+                                width: 100%;
+                                z-index: 1;
+                                background: #0000009c;
+                                @media #{$max1024}{
+                                    text-align: center;
+                                }
+                                @media #{$max575}{
+                                    content: "→";
+                                }
+                            }
+                        }
+                    }
+                }
+                &:first-child {
+                    padding-top: 0px;
+                }
+                &:last-child {
+                    border: none;
+                    padding-bottom: 0;
+                }
+                h4 {
+                    position: relative;
+                    font-size: 1.125rem;
+                    line-height: 1.5;
+                    margin-bottom: 0;
+                    color: $color-heading;
+                }
+                
+                &.active{
+                    .accordion-checke::before {
+                        border: 1px solid $color-primary;
+                    }
+                    .accordion-checke::after {
+                        background: $color-primary;
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50px;
+                        position: absolute;
+                        top: calc(50% + -6px);
+                        left: -34px;
+                        content: "";
+                    }
+                }
+                
+                .itinerary-day{
+                    color: $color-primary;
+                }
+                .accordion-checke::before {
+                    width: 20px;
+                    height: 20px;
+                    border: 1px solid $color-heading;
+                    border-radius: 50px;
+                    position: absolute;
+                    left: -40px;
+                    top: calc(50% - 12px);
+                    content: "";
+                }
+                li{
+                    color: $color-heading;
+                    align-items: center;
+                    a{
+                        color: $color-heading;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+        .tf-itinerary-wrapper.tf-mb-50{
+            .tf-itinerary-downloader-option{
+                background-color: $color-filling-fg;
+                @include bd-radius(5px);;
+                .itinerary-downloader-left {
+                    overflow: hidden;
+                }
+                h3{
+                    color: $color-heading;
+                }
+                
+                p{
+                    color: $color-text;
+                    margin-bottom: 0;
+                }
+                
+            }
+        }
+    }
+    &__two.tf-single-itinerary-style2{
+        padding: 0;
+        .tf-itinerary-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            
+            .section-title {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 8px;
+                @media #{$max1024}{
+                    margin-bottom: 0px;
+                }
+            }
+            .section-title a {
+                display: flex;
+                flex-direction: row;
+                color: $color-text;
+                font-size: 1rem;
+                font-weight: 700;
+                line-height: 1.5;
+                word-wrap: break-word;
+                border: none;
+                background: $color-filling-fg;
+                min-width: 211px;
+                height: fit-content;
+                padding: 12px;
+                gap: 16px;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                @include transition();
+                @media #{$max1024}{
+                    font-size: 0.75rem;
+                }
+                &:hover{
+                    color: $color-white;
+                    background-color: $color-primary;
+                    border-color: $color-primary;
+                }
+            }
+            .tf-itinerary-wrapper{
+                padding: 0px;
+                .tf-single-itinerary {
+                    background: $color-filling-fg;
+                    padding: 16px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 24px;
+                    @media #{$max768}{
+                        padding: 16px;
+                    }
+                    .tf-itinerary-content-wrap{
+                        display: none;
+                    }
+                }
+        
+                .tf-itinerary-title {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: baseline;
+                    cursor: pointer;
+                    user-select: none;
+                    gap: 8px;
+                    i{
+                        color: $color-text ;
+                    }
+                }
+                .tf-itinerary-title.active {
+                    i{
+                        transform: rotate(180deg);
+                    }
+                }
+                .tf-itinerary-title span.tf-head-title {
+                    color: $color-text;
+                    font-size: 1.25rem;
+                    font-weight: 400;
+                    word-wrap: break-word;
+                    margin: 0px;
+                    display: flex;
+                    width: 100%;
+                    align-items: first baseline;
+                    @media #{$max1024}{
+                        font-size: 1rem;
+                    }
+                    span.tf-itinerary-time {
+                        padding: 8px 16px;
+                        margin-right: 16px;
+                        width: max-content;
+                        max-width: 30%;
+                        background-color: $color-brand-lite;
+                    }
+                    .tf-itinerary-title-text {
+                        flex: 1;
+                    }
+                }
+        
+        
+        
+                .tf-itinerary-content {
+                    display: flex;
+                    gap: 32px;
+                    @media #{$max768}{
+                        flex-wrap: wrap;
+                    }
+                }
+        
+                .tf-itinerary-content-details {
+                    display: flex;
+                    flex-direction: column;
+                    width: calc(100% - 320px);
+                    @media #{$max1024}{
+                        width: calc(100% - 204px);
+                    }
+                    @media #{$max768}{
+                        width: 100%;
+                    }
+                    .tf-itinerary-more-offer{
+                        margin-top: 16px;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 15px;
+                        .tf-itinerary-single-meta{
+                            position: relative;
+                            li{
+                                color: $color-text;
+                                font-size: 1rem;
+                                i{
+                                    margin-right: 8px;
+                                    width: 22px;
+                                    font-size: 1.25rem;
+                                }
+                                a{
+                                    color: $color-primary;
+                                    font-size: 1rem;
+                                    text-decoration: none;
+                                    i{
+                                        margin-right: 8px;
+                                        width: 22px;
+                                        font-size: 1.25rem;
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+        
+                .tf-itinerary-content-details ul {
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    gap: 12px 10px;
+                }
+            }
+        
+            .section-title h2 {
+                color: $color-heading;
+                font-size: 2rem;
+                font-weight: 700;
+                margin: 0;
+                @media #{$max1024}{
+                    font-size: 1.5rem;
+                }
+            }
+        
+            .tf-itinerary-content-images {
+                height: fit-content;
+                width: 320px;
+        
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                @media #{$max1024}{
+                    width: 179px;
+                }
+                @media #{$max768}{
+                    width: 100%;
+                }
+                .ininerary-other-gallery{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 8px;
+                    margin-bottom: 0px;
+                    margin-top: 8px;
+                    a{
+                        display: none;
+                        &:nth-child(1),
+                        &:nth-child(2){
+                            display: block
+                        }
+                    }
+                    a.tf-itinerary-gallery-more{
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+                        height: 100%;
+                        justify-content: center;
+                        background-size: cover;
+                        background-position: center;
+                    }
+                }
+            }
+        
+            .tf-single-itinerary.active .tf-itinerary-content {
+                display: flex;
+            }
+        
+            .tf-single-itinerary.active {
+                padding-bottom: 32px;
+            }
+        
+            .tf-itinerary-map iframe {
+                width: 100%;
+            }
+            .tf-single-itinerary.active .tf-itinerary-title i {
+                transform: rotate(180deg);
+            }
+        }
+        
+        .tf-itinerary-map{
+            margin-top: 16px;
+            margin-bottom: 0 !important;
+            
+            @media #{$max768}{
+                margin-top: 12px;
+            }
+        
+            #tour-location {
+                @media #{$max768}{
+                    height: 220px;
+                }
+            }
+            &#tf-map{
+                height: auto;
+            }
+        }
+    }
+}

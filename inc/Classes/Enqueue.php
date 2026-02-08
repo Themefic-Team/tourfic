@@ -33,6 +33,7 @@ class Enqueue {
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_options_wp_enqueue_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_global_custom_css' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_custom_css_conflicts_resolve' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'tf_elementor_widget_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_required_taxonomies' ) );
 	}
 
@@ -440,6 +441,47 @@ class Enqueue {
 
 		// wp_add_inline_script( 'tourfic', $inline_scripts );
 
+	}
+
+	/*
+	Elementor Widgets scripts
+	*/
+	function tf_elementor_widget_scripts() {
+		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
+			wp_register_style( 'tf-elementor-single-title', TF_PRO_ASSETS_URL . 'app/css/elementor/single/title.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-description', TF_PRO_ASSETS_URL . 'app/css/elementor/single/description.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-address', TF_PRO_ASSETS_URL . 'app/css/elementor/single/address.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-map', TF_PRO_ASSETS_URL . 'app/css/elementor/single/map.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-wishlist', TF_PRO_ASSETS_URL . 'app/css/elementor/single/wishlist.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-share', TF_PRO_ASSETS_URL . 'app/css/elementor/single/share.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-gallery', TF_PRO_ASSETS_URL . 'app/css/elementor/single/gallery.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-action-btns', TF_PRO_ASSETS_URL . 'app/css/elementor/single/action-btns.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-faq', TF_PRO_ASSETS_URL . 'app/css/elementor/single/faq.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-feature', TF_PRO_ASSETS_URL . 'app/css/elementor/single/feature.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-amenities', TF_PRO_ASSETS_URL . 'app/css/elementor/single/amenities.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-enquiry', TF_PRO_ASSETS_URL . 'app/css/elementor/single/enquiry.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-booking-form', TF_PRO_ASSETS_URL . 'app/css/elementor/single/booking-form.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-nearby-places', TF_PRO_ASSETS_URL . 'app/css/elementor/single/nearby-places.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-review', TF_PRO_ASSETS_URL . 'app/css/elementor/single/review.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-room', TF_PRO_ASSETS_URL . 'app/css/elementor/single/room.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-sticky-nav', TF_PRO_ASSETS_URL . 'app/css/elementor/single/sticky-nav.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-tour-information', TF_PRO_ASSETS_URL . 'app/css/elementor/single/tour-information.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-tour-info-cards', TF_PRO_ASSETS_URL . 'app/css/elementor/single/tour-info-cards.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-highlights', TF_PRO_ASSETS_URL . 'app/css/elementor/single/highlights.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-inc-exc', TF_PRO_ASSETS_URL . 'app/css/elementor/single/inc-exc.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-itinerary', TF_PRO_ASSETS_URL . 'app/css/elementor/single/itinerary.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-tour-contact-information', TF_PRO_ASSETS_URL . 'app/css/elementor/single/tour-contact-information.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-house-rules', TF_PRO_ASSETS_URL . 'app/css/elementor/single/house-rules.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-terms-and-conditions', TF_PRO_ASSETS_URL . 'app/css/elementor/single/terms-and-conditions.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-car-info', TF_PRO_ASSETS_URL . 'app/css/elementor/single/car-info.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-car-benefits', TF_PRO_ASSETS_URL . 'app/css/elementor/single/car-benefits.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-car-driver-info', TF_PRO_ASSETS_URL . 'app/css/elementor/single/car-driver-info.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-related-post', TF_PRO_ASSETS_URL . 'app/css/elementor/single/related-post.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-tour-price', TF_PRO_ASSETS_URL . 'app/css/elementor/single/tour-price.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-host-info', TF_PRO_ASSETS_URL . 'app/css/elementor/single/host-info.min.css', '', TF_VERSION );
+
+			wp_enqueue_script( 'Chart-js',  TF_ASSETS_APP_URL . 'libs/chart/chart.js', array( 'jquery' ), '2.6.0', true );
+		}
 	}
 
 	/**
@@ -1290,6 +1332,8 @@ class Enqueue {
 			null,
 			TF_VERSION
 		);
+
+		wp_enqueue_script( 'Chart-js',  TF_ASSETS_APP_URL . 'libs/chart/chart.js', array( 'jquery' ), '2.6.0', true );
 
 		// wp_enqueue_script(
 		// 	'tf-elementor-editor',

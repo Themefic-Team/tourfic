@@ -33,7 +33,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 	/* translators: %s is the hotel name */
 	'title' => sprintf( esc_html__( '%s Settings', 'tourfic' ), $hotel_name ),
 	'post_type' => 'tf_hotel',
-	'sections'  => array(
+	'sections'  => apply_filters( 'tf_hotels_opt_sections', array(
 		'general' => array(
 			'title'  => esc_html__( 'General', 'tourfic' ),
 			'icon'   => 'fa fa-cog',
@@ -634,13 +634,13 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'subtitle' => sprintf(esc_html__( 'These are some additional settings specific to this %s. Note that some of these settings may override the global settings.', 'tourfic' ),
 						$hotel_name
 					),
-				),		
+				),
 				array(
 					'id'    => 'hotel-settings-docs',
 					'type'  => 'heading',
 					'title' => esc_html__( 'Settings', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/hotel-settings/')
-				),		
+				),
 				array(
 					'id'        => 'h-review',
 					'type'      => 'switch',
@@ -691,5 +691,5 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				),
 			),
 		),
-	),
+	)),
 ) );

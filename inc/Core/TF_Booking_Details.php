@@ -442,7 +442,7 @@ abstract Class TF_Booking_Details {
 							?>
                         </td>
                         <td>
-							<?php echo esc_html(gmdate( 'F d, Y', strtotime( $tf_order['order_date'] ) )); ?>
+							<?php echo esc_html(wp_date( 'F d, Y', strtotime( $tf_order['order_date'] ) )); ?>
                         </td>
                         <td>
 							<?php
@@ -567,7 +567,7 @@ abstract Class TF_Booking_Details {
                     <ul>
                         <li><?php esc_html_e("Booking ID", "tourfic"); ?>: #<?php echo esc_html( $tf_order_details->order_id ); ?></li>
                         <li>|</li>
-                        <li><?php esc_html_e("Booking created", "tourfic"); ?>: <?php echo esc_html(gmdate('F d, Y',strtotime($tf_order_details->order_date))); ?></li>
+                        <li><?php esc_html_e("Booking created", "tourfic"); ?>: <?php echo esc_html(wp_date('F d, Y',strtotime($tf_order_details->order_date))); ?></li>
                         <li>|</li>
                         <li><?php esc_html_e("Booking by", "tourfic"); ?>: <span style="text-transform: capitalize;">
                             <?php 
@@ -829,6 +829,20 @@ abstract Class TF_Booking_Details {
                                                 <td>:</td>
                                                 <td>
                                                     <?php echo esc_html($dropoff_time); ?>
+                                                </td>
+                                            </tr>
+                                       <?php } ?>
+
+                                       
+                                       <?php
+                                        $car_extra  = !empty( $tf_tour_details->extra ) ? $tf_tour_details->extra : '';
+                                        if(!empty($car_extra) && $car_extra != 'undefined' && $car_extra != 'null'){
+                                            ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Extra Service", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td>
+                                                    <?php echo esc_html($car_extra); ?>
                                                 </td>
                                             </tr>
                                        <?php } ?>
@@ -1553,6 +1567,23 @@ abstract Class TF_Booking_Details {
 				 */
 				apply_filters( 'tf_after_booking_completed_calendar_data', $tf_order->order_id, $order_data='', '' );
 			}
+
+            // if ( 'offline'== $tf_order->payment_method) {
+            //     global $wpdb;
+	        //     $order_data = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE order_id = %d", $tf_order->order_id ), ARRAY_A );
+
+            //     // Decode JSON fields safely
+            //     $json_fields = [ 'billing_details', 'shipping_details', 'order_details' ];
+
+            //     foreach ( $json_fields as $field ) {
+            //         if ( ! empty( $order_data[ $field ] ) && is_string( $order_data[ $field ] ) ) {
+            //             $decoded = json_decode( $order_data[ $field ], true );
+            //             $order_data[ $field ] = is_array( $decoded ) ? $decoded : [];
+            //         }
+            //     }
+
+            //     do_action( 'tf_offline_payment_booking_confirmation', $tf_order->order_id, $order_data );
+            // }
 
             // Woocommerce status
             $order = wc_get_order($tf_order->order_id);

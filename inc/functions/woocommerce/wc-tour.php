@@ -49,10 +49,6 @@ function tf_tours_booking_function() {
 	$tour_time    = isset( $_POST['check-in-time'] ) ? sanitize_text_field( $_POST['check-in-time'] ) : null;
 	$make_deposit = ! empty( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 
-	// Group Type Package
-	$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
-	$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
-
 	// Tour Package
 	$selectedPackage = ! empty( $_POST['selectedPackage'] ) ? $_POST['selectedPackage'] : '';
 	$tf_package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
@@ -405,7 +401,7 @@ function tf_tours_booking_function() {
 	 * People number validation
 	 *
 	 */
-	if ( $tour_type == 'fixed' && $pricing_rule!='package' && ( empty($allow_package_pricing) && empty($group_package_pricing) ) ) {
+	if ( $tour_type == 'fixed' && $pricing_rule!='package' ) {
 
 		/* translators: %s Min Person  */
 		$min_text = sprintf( _n( '%s person', '%s people', $min_people, 'tourfic' ), $min_people );
@@ -422,7 +418,7 @@ function tf_tours_booking_function() {
 
 		}
 
-	} elseif ( $tour_type == 'continuous' && $pricing_rule!='package' && ( empty($allow_package_pricing) && empty($group_package_pricing) ) ) {
+	} elseif ( $tour_type == 'continuous' && $pricing_rule!='package' ) {
 
 		// Backend continuous date values
 		$back_date_from     = ! empty( $matched_availability['check_in'] ) ? $matched_availability['check_in'] : '';
@@ -1010,6 +1006,7 @@ function tf_tours_booking_function() {
 			'infants'     => $infant,
 			'total_price' => $without_payment_price + $tour_extra_total,
 			'due_price'   => wc_price($without_payment_price + $tour_extra_total),
+			'unique_id'   => wp_rand(),
 			'visitor_details' => wp_json_encode($tf_visitor_details)
 		];
 

@@ -65,6 +65,8 @@
                     $('.tf-template-preview-loader').show();
                     $('select[name="tf_taxonomy_type"]').attr('disabled', 'disabled');
                     $('select[name="tf_taxonomy_term"]').attr('disabled', 'disabled');
+                    $('#tf-save-template').attr('disabled', 'disabled');
+                    $('#tf-edit-with-elementor').attr('disabled', 'disabled');
                 },
                 success: function(response) {
                     $('.tf-template-preview-loader').hide();
@@ -72,6 +74,8 @@
                     $('.tf-field-term').hide();
                     $('select[name="tf_taxonomy_term"]').removeAttr('disabled');
                     $('select[name="tf_taxonomy_term"]').html('');
+                    $('#tf-save-template').removeAttr('disabled');
+                    $('#tf-edit-with-elementor').removeAttr('disabled');
                     if (response.success) {
                         // Update the template options markup
                         $('.tf-field-imageselect').html(response.data.markup);
@@ -144,6 +148,7 @@
                             $('select[name="tf_taxonomy_term"]').html(response.data.term_markup);
                         } else {
                             $('.tf-field-term').hide();
+                            $('select[name="tf_taxonomy_term"]').html('');
                         }
                     }
                 },
@@ -243,5 +248,39 @@
             $('.tf-template-preview').show();
             $('input[name="tf_template_design"][value="blank"]').prop('checked', true);
         }
+
+        $(document).on('change', '.tf-template-toggle', function () {
+            let post_id = $(this).data('id');
+            let status = $(this).is(':checked') ? 1 : 0;
+
+            $.ajax({
+                url: tf_pro_params.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'tf_toggle_template_status',
+                    post_id: post_id,
+                    status: status,
+                    nonce: tf_pro_params.tf_pro_nonce
+                },
+                beforeSend: function() {
+                    $('.tf-template-builder-loader').show();
+                },
+                success: function(response) {
+                    $('.tf-template-builder-loader').hide();
+
+                    if (response.success && status === 1) {
+                        // RESPONSE WILL INCLUDE OTHER DEACTIVATED IDS (we add this)
+                        let deactivated_ids = response.data.deactivated_ids || [];
+
+                        // Turn OFF all returned switchers
+                        deactivated_ids.forEach(function (id) {
+                            let $switch = $('.tf-template-toggle[data-id="' + id + '"]');
+                            $switch.prop('checked', false);
+                        });
+                    }
+                },
+            });
+        });
+
     });
 })(jQuery);

@@ -3192,7 +3192,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 				),
-				
+
 				array(
 					'id'        => 'remix_cdn',
 					'type'      => 'switch',
@@ -3201,7 +3201,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 				),
-				
+
 				array(
 					'id'        => 'leaflet_cdn',
 					'type'      => 'switch',
@@ -3210,7 +3210,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 				),
-				
+
 				array(
 					'id'        => 'swal_cdn',
 					'type'      => 'switch',
@@ -3219,7 +3219,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 				),
-				
+
 				array(
 					'id'        => 'chart_cdn',
 					'type'      => 'switch',

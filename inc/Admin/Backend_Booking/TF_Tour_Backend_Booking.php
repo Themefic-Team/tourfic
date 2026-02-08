@@ -388,9 +388,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		$disable_child_price  = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
 		$disable_infant_price = ! empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
 
-		// Group Type Package
-		$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
-		$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
 		// People number
 		$total_people         = $adults + $children + $infant;
 		$total_people_booking = $adults + $children;
@@ -655,7 +652,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		 * People number validation
 		 *
 		 */
-		if ( $tour_type == 'fixed' && $pricing_rule!='package' && ( empty($allow_package_pricing) && empty($group_package_pricing) ) ) {
+		if ( $tour_type == 'fixed' && $pricing_rule!='package' ) {
 
 			/* translators: %s minimum people */
 			$min_text = sprintf( _n( '%s person', '%s people', $min_people, 'tourfic' ), $min_people );
@@ -673,7 +670,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 
 			}
 
-		} elseif ( $tour_type == 'continuous' && $pricing_rule!='package' && ( empty($allow_package_pricing) && empty($group_package_pricing) ) ) {
+		} elseif ( $tour_type == 'continuous' && $pricing_rule!='package' ) {
 
 			// Backend continuous date values
 			$back_date_from     = ! empty( $matched_availability['check_in'] ) ? $matched_availability['check_in'] : '';
@@ -789,7 +786,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			}
 		}
 
-		if( $pricing_rule=='group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
+		if( $pricing_rule=='group' ){
 			$max_allowed = 0;
 			$matched_price = '';
 			$found_valid_option = false;
@@ -858,7 +855,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		$children_price = ! empty( $matched_availability['child_price'] ) ? $matched_availability['child_price'] : $children_price ;
 		$infant_price   = ! empty( $matched_availability['infant_price'] ) ? $matched_availability['infant_price'] : $infant_price;
 
-		if( $pricing_rule=='group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
+		if( $pricing_rule=='group' ){
 			$max_allowed = 0;
 			$matched_price = '';
 			$found_valid_option = false;
