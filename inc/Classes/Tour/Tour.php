@@ -4838,9 +4838,9 @@ class Tour {
 
 			// Default labels (fallback).
 			$traveller_label_map = array(
-				'adult'  => apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, false, $post_id ),
-				'child'  => apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, false, $post_id ),
-				'infant' => apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, false, $post_id ),
+				'adult'  => apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, true, $post_id ),
+				'child'  => apply_filters( 'tf_tour_child_label', esc_html__( 'Child', 'tourfic' ), true, true, $post_id ),
+				'infant' => apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, true, $post_id ),
 			);
 
 			// If custom traveler category is enabled, override/add labels from settings.
@@ -4857,7 +4857,7 @@ class Tour {
 					$traveler_age_type = ! empty( $cat['traveler_age_type'] ) ? sanitize_title( $cat['traveler_age_type'] ) : 'years';
 					
 					if($traveler_min_age && $traveler_max_age){
-						$label = esc_html($label).' ('.esc_html($traveler_min_age).'–'.esc_html($traveler_max_age).' '.esc_html($traveler_age_type).' old)';
+						$label = esc_html($label).' <small>('.esc_html($traveler_min_age).'–'.esc_html($traveler_max_age).' '.esc_html($traveler_age_type).' old)</small>';
 					}
 
 					$traveller_label_map[ $key ] = $label;
@@ -4952,7 +4952,7 @@ class Tour {
 					/* translators: 1: traveler index, 2: traveler category. */
 					esc_html__( 'Traveler %1$s%2$s', 'tourfic' ),
 					$traveller_in,
-					$category_label ? ' (' . esc_html( $category_label ) . ')' : ''
+					$category_label ? ' (' . wp_kses_post( $category_label ) . ')' : ''
 				);
 
 				$response['traveller_info'] .= '<div class="tf-single-tour-traveller tf-single-travel">

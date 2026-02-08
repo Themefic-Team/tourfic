@@ -1792,6 +1792,10 @@ li.tf-filter-item {
                             font-size: 1rem;
                             font-weight: 500;
                             line-height: 1.2;
+
+                            small{
+                                font-size: .7em;
+                            }
                         }
                         .traveller-info{
                             display: grid;
@@ -1930,6 +1934,10 @@ li.tf-filter-item {
                                             font-size: 1rem;
                                             font-weight: 500;
                                             margin: 0;
+
+                                            small{
+                                                font-size: .7em;
+                                            }
                                         }
                                         .inc-dec{
                                             display: flex;
