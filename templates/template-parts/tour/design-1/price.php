@@ -1,6 +1,8 @@
 <?php
 // Don't load directly
 defined( 'ABSPATH' ) || exit;
+
+use Tourfic\Classes\Helper;
 ?>
 <!-- Single Tour Trip informations -->
 <div class="tf-trip-info tf-box tf-mb-56 tf-template-section">
@@ -27,7 +29,6 @@ defined( 'ABSPATH' ) || exit;
 
 					
 				$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
-
 				$tf_package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
 				$tf_max_people = [];
@@ -42,20 +43,29 @@ defined( 'ABSPATH' ) || exit;
 							if (!empty($data['max_person'])) {
 								$tf_max_people [] = $data['max_person'];
 							} 
-							if (!empty($data['max_capacity'])) {
-								$tf_max_capacity [] = $data['max_capacity'];
-							} 
 						}
-		
+					
 						if($data['pricing_type'] == 'group'){
 							if (!empty($data['max_person'])) {
 								$tf_max_people [] = $data['max_person'];
 							} 
-							if (!empty($data['max_capacity'])) {
-								$tf_max_capacity [] = $data['max_capacity'];
-							}
 						}
 						
+						$capacity = !empty($data['max_capacity']) ? (int)$data['max_capacity'] : 0;
+
+						$start_date = $data['check_in'];
+						$end_date   = $data['check_out'] ?? $data['check_in']; 
+
+						$period = new DatePeriod(
+							new DateTime($start_date),
+							new DateInterval('P1D'),
+							(new DateTime($end_date))->modify('+1 day')
+						);
+
+						foreach ($period as $date) {
+							$d = $date->format('Y/m/d');
+							$tf_max_capacity[$d] = $capacity;
+						}
 
 					}
 				}
@@ -75,12 +85,63 @@ defined( 'ABSPATH' ) || exit;
 					$max_people = max( $tf_max_people );
 				}
 
+				// Get all completed orders for this date
+				$tf_orders_select = [
+					'select'    => "post_id,order_details",
+					'post_type' => 'tour',
+					'query'     => " AND ostatus = 'completed' ORDER BY order_id DESC"
+				];
+
+				$orders = Helper::tourfic_order_table_data( $tf_orders_select );
+
+				$tf_booked_per_date = [];
+				$tf_tour_id = get_the_ID();
+
+				foreach ( $orders as $order ) {
+
+					if($order['post_id'] != $tf_tour_id) continue;
+
+					$details = json_decode( $order['order_details'] );
+					if ( empty($details->tour_date) ) continue;
+
+					$tf_adults = 0;
+					$tf_children = 0;
+
+					if ( !empty($details->adult) ) {
+						list($a,) = explode(" × ", $details->adult);
+						$tf_adults = (int)$a;
+					}
+					if ( !empty($details->child) ) {
+						list($c,) = explode(" × ", $details->child);
+						$tf_children = (int)$c;
+					}
+
+					$tf_total_people = $tf_adults + $tf_children;
+
+					if ( isset($tf_booked_per_date[$details->tour_date]) ) {
+						$tf_booked_per_date[$details->tour_date] += $tf_total_people;
+					} else {
+						$tf_booked_per_date[$details->tour_date] = $tf_total_people;
+					}
+				}
+
+				// subtract booked for each date
+				$tf_adjusted_capacity = $tf_max_capacity;
+
+				foreach ($tf_booked_per_date as $date => $booked_count) {
+					if ( isset($tf_adjusted_capacity[$date]) ) {
+						$tf_adjusted_capacity[$date] = max(0, $tf_adjusted_capacity[$date] - $booked_count);
+					}
+				}
+
+				$tf_next_max_capacity = !empty($tf_adjusted_capacity) ? max($tf_adjusted_capacity) : 0;
+
 				if ( ! empty( $tf_tour_booking_limit ) || ! empty( $max_people ) ) { ?>
                     <li class="tf-flex tf-flex-gap-8">
                         <i class="fa-solid fa-people-group"></i>
 						<?php if ( ! empty( $tf_tour_booking_limit ) ) {
 							echo esc_html__( "Maximum Capacity: ", "tourfic" );
-							echo '<span class="tf-max-capacity-count">'.esc_html($tf_tour_booking_limit).'</span>';
+							echo '<span class="tf-max-capacity-count">'.esc_html($tf_next_max_capacity).'</span>';
 						} else {
 							echo esc_html__( "Maximum Allowed Per Booking: ", "tourfic" );
 							echo esc_html($max_people);
