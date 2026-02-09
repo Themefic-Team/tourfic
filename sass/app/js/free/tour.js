@@ -980,6 +980,7 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'default') {
+            tour_date_options.disableMobile = "true";
             $("#check-in-out-date").flatpickr(tour_date_options);
         }
 
