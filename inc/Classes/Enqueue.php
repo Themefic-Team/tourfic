@@ -35,6 +35,25 @@ class Enqueue {
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_custom_css_conflicts_resolve' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_elementor_widget_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_required_taxonomies' ) );
+
+		add_action( 'admin_head', function () {
+
+			$css = '
+			#adminmenu #toplevel_page_tf_settings a[href*="https://tourfic.com/go/upgrade"]{
+				border-radius: 6px;
+				background: radial-gradient(104% 50% at 50.21% 100%, #FFD24C 0%, rgba(220, 166, 4, 0.20) 100%), linear-gradient(180deg, #D7A613 0%, #FFC71F 100%);
+				box-shadow: 0 -4px 4px 0 rgba(236, 187, 39, 0.60) inset, 0 2px 4px 0 rgba(161, 121, 1, 0.40);
+				color: #22292F !important;
+				text-align: center;
+				font-size: 13px;
+				font-weight: 600;
+				line-height: 20px;
+				margin: 8px;
+				box-shadow: 0 -2px 2px 0 rgba(178, 159, 102, 0.12) inset;
+			}';
+		
+			echo '<style id="tf-upgrade-menu-style">' . $css . '</style>';
+		});		
 	}
 
 	/**
