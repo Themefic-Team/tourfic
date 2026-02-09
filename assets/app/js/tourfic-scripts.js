@@ -3510,6 +3510,7 @@ function convertTo24HourFormat(timeStr) {
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
+            tour_date_options.disableMobile = "true";
             $(".tours-check-in-out").flatpickr(tour_date_options);
             if(tour_date_options.defaultDate){
                 const monthNames = [
