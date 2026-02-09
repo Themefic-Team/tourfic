@@ -174,8 +174,8 @@ class Enqueue {
 		 * Fancybox
 		 * v3.5.7
 		 */
-		wp_enqueue_style( 'fancybox', TF_ASSETS_URL . 'app/libs/fancybox/jquery.fancybox.min.css', '', TF_VERSION );
-		wp_enqueue_script( 'fancybox', TF_ASSETS_URL . 'app/libs/fancybox/jquery.fancybox.min.js', array( 'jquery' ), TF_VERSION, true );
+		wp_enqueue_style( 'tf-fancybox', TF_ASSETS_URL . 'app/libs/fancybox/jquery.fancybox.min.css', '', TF_VERSION );
+		wp_enqueue_script( 'tf-fancybox', TF_ASSETS_URL . 'app/libs/fancybox/jquery.fancybox.min.js', array( 'jquery' ), TF_VERSION, true );
 		
 		/**
 		 * Slick
