@@ -434,17 +434,27 @@ function tf_normalize_date( $date ) {
  * Remove room order ids
  */
 function tf_remove_order_ids_from_room() {
-	echo '
+    $title = esc_html__( "Reset Room Availability", "tourfic" );
+    $subtitle = wp_kses_post(
+        sprintf(
+            __( 'Remove order ids linked with this room.<br><b style="color: red;">Be aware! It is irreversible!</b>', 'tourfic' ),
+        )
+    );
+
+    $button_text = esc_html__( "Reset", "tourfic" );
+
+    echo '
     <div class="csf-title">
-        <h4>' . esc_html__( "Reset Room Availability", "tourfic" ) . '</h4>
-        <div class="csf-subtitle-text">' . wp_kses_post( "Remove order ids linked with this room.<br><b style='color: red;'>Be aware! It is irreversible!</b>" ) . '</div>
+        <h4>' . $title . '</h4>
+        <div class="csf-subtitle-text">' . $subtitle . '</div>
     </div>
     <div class="csf-fieldset">
-        <button type="button" class="button button-large tf-order-remove remove-order-ids">' . esc_html__( "Reset", "tourfic" ) . '</button>
+        <button type="button" class="button button-large tf-order-remove remove-order-ids">' . $button_text . '</button>
     </div>
     <div class="clear"></div>
     ';
 }
+
 
 if(!function_exists('tf_filter_hotel_by_date')) {
 	function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] ): void {

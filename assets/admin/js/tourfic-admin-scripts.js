@@ -6069,17 +6069,17 @@ var frame, gframe;
             var chart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                    labels: tf_options.months,
                     // Information about the dataset
                     datasets: [{
-                        label: "Completed Booking",
+                        label: tf_options.completed,
                         borderColor: '#003C79',
                         tension: 0.1,
                         data: tf_options.tf_complete_order,
                         fill: false
                     },
                         {
-                            label: "Cancelled Booking",
+                            label: tf_options.cancelled,
                             borderColor: 'red',
                             tension: 0.1,
                             data: tf_options.tf_cancel_orders,
@@ -6399,7 +6399,7 @@ var frame, gframe;
                     _nonce: tf_admin_params.tf_nonce,
                 },
                 beforeSend: function () {
-                    $('.tf-export-btn').html('Exporting...');
+                    $('.tf-export-btn').html(tf_admin_params.setting_exporting_text);
                     $('.tf-export-btn').attr('disabled', 'disabled');
                 },
                 success: function (response) {
@@ -6425,12 +6425,12 @@ var frame, gframe;
                     } else {
                         notyf.error(obj.message);
                     }
-                    $('.tf-export-btn').html('Export');
+                    $('.tf-export-btn').html(tf_admin_params.setting_export_text);
                     $('.tf-export-btn').removeAttr('disabled');
                 },
                 error: function (response) {
                     console.log(response);
-                    $('.tf-export-btn').html('Export');
+                    $('.tf-export-btn').html(tf_admin_params.setting_export_text);
                     $('.tf-export-btn').removeAttr('disabled');
                 }
             });
