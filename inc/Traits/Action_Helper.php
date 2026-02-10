@@ -70,6 +70,14 @@ trait Action_Helper {
 	 * Ask question modal 
 	 */
 	function tf_ask_question_modal() {
+
+		// Allowed post types
+		$allowed_post_types = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental' );
+
+		// Ensure we're on a singular page and correct post type
+		if ( ! is_singular( $allowed_post_types ) && ! is_post_type_archive( $allowed_post_types ) ) {
+			return;
+		}
 		?>
 		<div class="tf-modal tf-modal-extra-small" id="tf-ask-modal">
 			<div class="tf-modal-dialog">
