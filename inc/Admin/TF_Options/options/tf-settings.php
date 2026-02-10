@@ -78,19 +78,19 @@ TF_Settings::option( 'tf_settings', array(
 					'img-height'=> '100',
 					'options'  => array(
 						'hotel' => array(
-							'title' => 'Hotel',
+							'title' => esc_html__( 'Hotel', 'tourfic' ),
 							'url'   => TF_ASSETS_ADMIN_URL . "images/hotel.png",
 						),
 						'tour' 		=> array(
-							'title'	=> 'Tour',
+							'title'	=> esc_html__( 'Tour', 'tourfic' ),
 							'url' 	=> TF_ASSETS_ADMIN_URL."images/tour.png",
 						),
 						'apartment'  => array(
-							'title' => 'Apartment',
+							'title' => esc_html__( 'Apartment', 'tourfic' ),
 							'url'   => TF_ASSETS_ADMIN_URL . "images/apartment.png",
 						),
 						'carrentals'  => array(
-							'title' => 'Car',
+							'title' => esc_html__( 'Car', 'tourfic' ),
 							'url'   => TF_ASSETS_ADMIN_URL . "images/carrentals.png",
 						),
 					),
@@ -2449,7 +2449,7 @@ TF_Settings::option( 'tf_settings', array(
 					'tabs' => array(
 						array(
 							'id'     => 'login-setting',
-							'title'  => 'Login Settings',
+							'title'  =>  esc_html__('Login Settings', 'tourfic'),
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
 								array(
@@ -2506,7 +2506,7 @@ TF_Settings::option( 'tf_settings', array(
 						),
 						array(
 							'id'     => 'register-setting',
-							'title'  => 'Register Settings',
+							'title'  => esc_html__('Register Settings', 'tourfic'),
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
 								array(
@@ -2563,7 +2563,7 @@ TF_Settings::option( 'tf_settings', array(
 						),
 						array(
 							'id'     => 'social-login-setting',
-							'title'  => 'Social Login Options',
+							'title'  => esc_html__('Social Login Options', 'tourfic'),
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
 								array(
@@ -2611,7 +2611,7 @@ TF_Settings::option( 'tf_settings', array(
 						),
 						array(
 							'id'     => 'registration-fields',
-							'title'  => 'Custom Registration Fields',
+							'title'  => esc_html__('Custom Registration Fields', 'tourfic'),
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
 								array(
@@ -3269,7 +3269,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'   => 'email-settings',
 					'type' => 'tab',
-					'label' => 'Email Templates',
+					'label' => esc_html__('Email Templates', 'tourfic'),
 					'subtitle'   => esc_html__( 'Tourfic provides a robust and sophisticated Email Template feature, enabling you to easily design and personalize impressive email templates for your business communications.', 'tourfic' ),
 					'tabs' => array(
 						array(
@@ -3412,34 +3412,36 @@ TF_Settings::option( 'tf_settings', array(
 					'type'    => 'notice',
 					'class'   => 'info',
 					'title'   => esc_html__( 'Email Shortcodes', 'tourfic' ),
-					'content' => esc_html__( 'You can use the following placeholders in the email body:', 'tourfic' ) . '<br><br><strong>{order_id} </strong> : To display the booking ID.<br>
-					<strong>{booking_id} </strong> : To display the booking ID.<br>
-					<strong>{booking_date} </strong> : To display the booking date.<br>
-					<strong>{fullname} </strong> : To display the customer name.<br>
-					<strong>{user_email} </strong> : To display the customer email.<br>
-					<strong>{phone} </strong> : To display the customer phone.<br>
-					<strong>{address} </strong> : To display the customer address.<br>
-					<strong>{city} </strong> : To display the customer city.<br>
-					<strong>{country} </strong> : To display the customer country.<br>
-					<strong>{zip} </strong> : To display the customer zip.<br>
-					<strong>{booking_details} </strong> : To display the booking details.<br>
-					<strong>{shipping_address} </strong> : To display the shipping address.<br>
-					<strong>{shipping_method} </strong> : To display the shipping method.<br>
-					<strong>{shipping_city} </strong> : To display the shipping city.<br>
-					<strong>{shipping_country} </strong> : To display the shipping country.<br>
-					<strong>{shipping_zip} </strong> : To display the shipping zip.<br>
-					<strong>{order_total} </strong> : To display the total price.<br>
-					<strong>{order_subtotal} </strong> : To display the subtotal price.<br>
-					<strong>{order_date} </strong> : To display the order date.<br>
-					<strong>{order_status} </strong> : To display the order status.<br>
-					<strong>{payment_method} </strong> : To display the payment method.<br>
-					<strong>{booking_url} </strong> : To display the booking url.<br>
-					<strong>{site_name} </strong> : To display the site name.<br>
-					<strong>{site_url} </strong> : To display the site url.<br>
-
-					'
-
-				,
+					'content' => wp_kses_post(
+						__( 
+							'You can use the following placeholders in the email body:<br><br>
+							<strong>{order_id}</strong> : To display the booking ID.<br>
+							<strong>{booking_id}</strong> : To display the booking ID.<br>
+							<strong>{booking_date}</strong> : To display the booking date.<br>
+							<strong>{fullname}</strong> : To display the customer name.<br>
+							<strong>{user_email}</strong> : To display the customer email.<br>
+							<strong>{phone}</strong> : To display the customer phone.<br>
+							<strong>{address}</strong> : To display the customer address.<br>
+							<strong>{city}</strong> : To display the customer city.<br>
+							<strong>{country}</strong> : To display the customer country.<br>
+							<strong>{zip}</strong> : To display the customer zip.<br>
+							<strong>{booking_details}</strong> : To display the booking details.<br>
+							<strong>{shipping_address}</strong> : To display the shipping address.<br>
+							<strong>{shipping_method}</strong> : To display the shipping method.<br>
+							<strong>{shipping_city}</strong> : To display the shipping city.<br>
+							<strong>{shipping_country}</strong> : To display the shipping country.<br>
+							<strong>{shipping_zip}</strong> : To display the shipping zip.<br>
+							<strong>{order_total}</strong> : To display the total price.<br>
+							<strong>{order_subtotal}</strong> : To display the subtotal price.<br>
+							<strong>{order_date}</strong> : To display the order date.<br>
+							<strong>{order_status}</strong> : To display the order status.<br>
+							<strong>{payment_method}</strong> : To display the payment method.<br>
+							<strong>{booking_url}</strong> : To display the booking URL.<br>
+							<strong>{site_name}</strong> : To display the site name.<br>
+							<strong>{site_url}</strong> : To display the site URL.<br>',
+							'tourfic'
+						)
+					),
 				),
 			),
 		),

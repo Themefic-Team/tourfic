@@ -102,13 +102,13 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                            <input type="text" value data-title="title" placeholder="<?php echo esc_attr__( 'Enter a Title', 'tourfic' ); ?>" class="tf-shortcode-title-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                            <input type="text" value data-subtitle="subtitle" placeholder="<?php echo esc_attr__( 'Enter a Subtitle', 'tourfic' ); ?>" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -116,7 +116,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Classes', 'tourfic' ) ?></h3>
-                                            <input type="text" value="" data-count="classes" placeholder="Input classes with space" class="post-count tf-setting-field">
+                                            <input type="text" value="" data-count="classes" placeholder="<?php echo esc_attr__('Input classes with space','tourfic') ?>" class="post-count tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
@@ -133,25 +133,25 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Tour Tab Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value="" data-tour-tab-title="tour_tab_title" placeholder="Input the title here." class="tf-shortcode-tour-tab-title-field tf-setting-field">
+                                            <input type="text" value="" data-tour-tab-title="tour_tab_title" placeholder="<?php echo esc_attr__( 'Input the title here.', 'tourfic' ); ?>" class="tf-shortcode-tour-tab-title-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Hotel Tab Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value="" data-hotel-tab-title="hotel_tab_title" placeholder="Input the title here." class="tf-shortcode-hotel-tab-title-field tf-setting-field">
+                                            <input type="text" value="" data-hotel-tab-title="hotel_tab_title" placeholder="<?php echo esc_attr__( 'Input the title here.', 'tourfic' ); ?>" class="tf-shortcode-hotel-tab-title-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Apartment Tab Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value="" data-apartment-tab-title="apartment_tab_title" placeholder="Input the title here." class="tf-shortcode-apartment-tab-title-field tf-setting-field">
+                                            <input type="text" value="" data-apartment-tab-title="apartment_tab_title" placeholder="<?php echo esc_attr__( 'Input the title here.', 'tourfic' ); ?>" class="tf-shortcode-apartment-tab-title-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Car Tab Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value="" data-car-tab-title="car_tab_title" placeholder="Input the title here." class="tf-shortcode-car-tab-title-field tf-setting-field">
+                                            <input type="text" value="" data-car-tab-title="car_tab_title" placeholder="<?php echo esc_attr__( 'Input the title here.', 'tourfic' ); ?>" class="tf-shortcode-car-tab-title-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -417,13 +417,13 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                            <input type="text" value data-title="title" placeholder="<?php echo esc_attr__( 'Enter a Title', 'tourfic' ); ?>" class="tf-shortcode-title-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                            <input type="text" value data-subtitle="subtitle" placeholder="<?php echo esc_attr__( 'Enter a Subtitle', 'tourfic' ); ?>" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -577,13 +577,13 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                            <input type="text" value data-title="title" placeholder="<?php echo esc_attr__( 'Enter a Title', 'tourfic' ); ?>" class="tf-shortcode-title-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                            <input type="text" value data-subtitle="subtitle" placeholder="<?php echo esc_attr__( 'Enter a Subtitle', 'tourfic' ); ?>" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -657,7 +657,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                            <input type="text" value data-title="title" placeholder="<?php echo esc_attr__( 'Enter a Title', 'tourfic' ); ?>" class="tf-shortcode-title-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -666,7 +666,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                            <input type="text" value data-subtitle="subtitle" placeholder="<?php echo esc_attr__( 'Enter a Subtitle', 'tourfic' ); ?>" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
@@ -777,13 +777,13 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                            <input type="text" value data-title="title" placeholder="<?php echo esc_attr__( 'Enter a Title', 'tourfic' ); ?>" class="tf-shortcode-title-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                            <input type="text" value data-subtitle="subtitle" placeholder="<?php echo esc_attr__( 'Enter a Subtitle', 'tourfic' ); ?>" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -937,13 +937,13 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                            <input type="text" value data-title="title" placeholder="<?php echo esc_attr__( 'Enter a Title', 'tourfic' ); ?>" class="tf-shortcode-title-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                            <input type="text" value data-subtitle="subtitle" placeholder="<?php echo esc_attr__( 'Enter a Subtitle', 'tourfic' ); ?>" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -1017,7 +1017,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                            <input type="text" value data-title="title" placeholder="<?php echo esc_attr__( 'Enter a Title', 'tourfic' ); ?>" class="tf-shortcode-title-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -1026,7 +1026,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                            <input type="text" value data-subtitle="subtitle" placeholder="<?php echo esc_attr__( 'Enter a Subtitle', 'tourfic' ); ?>" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
@@ -1137,13 +1137,13 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                            <input type="text" value data-title="title" placeholder="<?php echo esc_attr__( 'Enter a Title', 'tourfic' ); ?>" class="tf-shortcode-title-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                            <input type="text" value data-subtitle="subtitle" placeholder="<?php echo esc_attr__( 'Enter a Subtitle', 'tourfic' ); ?>" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -1297,13 +1297,13 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                            <input type="text" value data-title="title" placeholder="<?php echo esc_attr__( 'Enter a Title', 'tourfic' ); ?>" class="tf-shortcode-title-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                            <input type="text" value data-subtitle="subtitle" placeholder="<?php echo esc_attr__( 'Enter a Subtitle', 'tourfic' ); ?>" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -1377,7 +1377,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                            <input type="text" value data-title="title" placeholder="<?php echo esc_attr__( 'Enter a Title', 'tourfic' ); ?>" class="tf-shortcode-title-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -1386,7 +1386,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                            <input type="text" value data-subtitle="subtitle" placeholder="<?php echo esc_attr__( 'Enter a Subtitle', 'tourfic' ); ?>" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
@@ -1488,13 +1488,13 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                            <input type="text" value data-title="title" placeholder="<?php echo esc_attr__( 'Enter a Title', 'tourfic' ); ?>" class="tf-shortcode-title-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                            <input type="text" value data-subtitle="subtitle" placeholder="<?php echo esc_attr__( 'Enter a Subtitle', 'tourfic' ); ?>" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
@@ -1676,13 +1676,13 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Title', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-title="title" placeholder="Enter a Title" class="tf-shortcode-title-field tf-setting-field">
+                                            <input type="text" value data-title="title" placeholder="<?php echo esc_attr__( 'Enter a Title', 'tourfic' ); ?>" class="tf-shortcode-title-field tf-setting-field">
                                         </div>
                                     </div>
                                     <div class="tf-col-lg-6">
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Subtitle', 'tourfic' ) ?></h3>
-                                            <input type="text" value data-subtitle="subtitle" placeholder="Enter a Subtitle" class="tf-shortcode-subtitle-field tf-setting-field">
+                                            <input type="text" value data-subtitle="subtitle" placeholder="<?php echo esc_attr__( 'Enter a Subtitle', 'tourfic' ); ?>" class="tf-shortcode-subtitle-field tf-setting-field">
                                         </div>
                                     </div>
                                 </div>
