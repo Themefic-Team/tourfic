@@ -415,7 +415,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 = 2.20.5 – February 10, 2026 =
 
 - Improvement: Added Forgot Password to the login form.
-- Improvement: Added Italian language support.
+- Improvement: String Translation support.
 - Fixed: Search form date issue has been resolved.
 - Fixed: Tour Google Maps issue has been resolved.
 - Fixed: Tour starting price display issue has been resolved.
