@@ -907,6 +907,7 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
+            tour_date_options.disableMobile = "true";
             $(".tours-check-in-out").flatpickr(tour_date_options);
 
             $("select[name='check-in-time']").on("change", function () {
@@ -924,6 +925,7 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
+            tour_date_options.disableMobile = "true";
             $(".tours-check-in-out").flatpickr(tour_date_options);
             if(tour_date_options.defaultDate){
                 const monthNames = [
@@ -979,6 +981,7 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'default') {
+            tour_date_options.disableMobile = "true";
             $("#check-in-out-date").flatpickr(tour_date_options);
         }
 

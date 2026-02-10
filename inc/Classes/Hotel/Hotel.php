@@ -1839,11 +1839,18 @@ class Hotel {
                         $(".tf_check_inout_dates").on("click", function () {
                             $(".tf-check-in-out-date").trigger("click");
                         });
+
+						// today + tomorrow
+						const today = new Date();
+						const tomorrow = new Date();
+						tomorrow.setDate(today.getDate() + 1);
+
                         $(".tf-check-in-out-date").flatpickr({
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
                             minDate: "today",
+							defaultDate: [today, tomorrow],
 
                             // flatpickr locale
 							<?php Helper::tf_flatpickr_locale(); ?>
