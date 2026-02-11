@@ -134,6 +134,15 @@ use Tourfic\Classes\Helper;
 					}
 				}
 
+				// filter past dates
+				$tf_today_date = wp_date('Y/m/d', current_time('timestamp'));
+				foreach ($tf_adjusted_capacity as $date => $cap) {
+				    if ($date < $tf_today_date) {
+				        unset($tf_adjusted_capacity[$date]);
+				    }
+				}
+
+
 				$tf_next_max_capacity = !empty($tf_adjusted_capacity) ? max($tf_adjusted_capacity) : 0;
 
 				if ( ! empty( $tf_tour_booking_limit ) || ! empty( $max_people ) ) { ?>
