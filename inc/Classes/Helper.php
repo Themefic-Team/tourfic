@@ -2748,9 +2748,7 @@ class Helper {
                     <div class="tf-archive-search-box-wrapper tf-flex tf-flex-space-bttn tf-flex-align-center">
                         <div class="tf-select-date">
                             <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
-                                <label for="tf-checkin-date">
-                                    <?php esc_html_e("Check in", "tourfic"); ?>
-                                </label>
+                                <label for="tf-checkin-date"><?php esc_html_e("Check in", "tourfic"); ?></label>
                                 <div class="info-select tf-booking-date-wrap tf-search-field tf-flex tf-flex-space-bttn tf-flex-align-center">
                                     <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo !empty($check_in) ? esc_html(sanitize_text_field( wp_unslash($check_in) )) : esc_attr(gmdate($date_format_for_users, strtotime('+1 day'))) ?>" readonly>
                                     <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo !empty($check_in_out) ? esc_html(sanitize_text_field( wp_unslash($check_in_out) )) : esc_attr(gmdate('Y/m/d', strtotime('+1 day')) . ' - ' . gmdate('Y/m/d', strtotime('+2 day'))); ?>" style="display: none;">
