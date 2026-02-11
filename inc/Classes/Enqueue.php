@@ -571,7 +571,12 @@ class Enqueue {
 
 		if ( ! empty( $get_screen ) ) {
 
-			if ( $get_screen->base == "post" && ( $get_screen->id == "tf_hotel" || $get_screen->id == "tf_apartment" || $get_screen->id == "tf_tours" ) ) {
+			if ( $get_screen->base == "post" && ( $get_screen->id == "tf_hotel" || $get_screen->id == "tf_apartment" || $get_screen->id == "tf_tours" || $get_screen->id == "tf_carrental" || $get_screen->id == "tf_room" ) ) {
+
+				if ( wp_script_is( 'give-admin-scripts', 'enqueued' ) ) {
+					wp_dequeue_script( 'give-admin-scripts' );
+					wp_deregister_script( 'give-admin-scripts' );
+				}
 
 				if ( wp_script_is( 'select2', 'enqueued' ) ) {
 
