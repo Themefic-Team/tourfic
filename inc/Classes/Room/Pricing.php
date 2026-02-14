@@ -1139,6 +1139,26 @@ class Pricing {
                 </span>
             </span>
 			<?php
+		} elseif ( $$design == 'design-3' ) {
+			?>
+            <span class="tf-price">
+				<?php esc_html_e( 'From ', 'tourfic' ); ?>
+                <span class="discount-price">
+	                <?php if ( ! empty( $discount_price ) && $hotel_discount_type != "none" && ! empty( $hotel_discount_type ) ) { ?>
+                        <del><?php echo wp_kses_post( $price ); ?></del>
+	                <?php } ?>
+                </span>
+                <span class="sale-price">
+                    <?php
+                    if ( ! empty( $discount_price ) && $hotel_discount_type != "none" && ! empty( $hotel_discount_type ) ) {
+	                    echo wp_kses_post( $discount_price );
+                    } else {
+	                    echo wp_kses_post( $price ) . " ";
+                    }
+                    ?>
+                </span>
+            </span>
+			<?php
 		} else {
 			if ( ! empty( $discount_price ) && $hotel_discount_type != "none" && ! empty( $hotel_discount_type ) ) {
 				echo '<span class="tf-price"><del>' . wp_kses_post($price) . '</del> ' . wp_kses_post($discount_price) . '</span>';
