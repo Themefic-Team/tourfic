@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.20.3
+Stable tag: 2.20.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -412,38 +412,22 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.20.3 – January 22, 2026 =
+= 2.20.5 – February 10, 2026 =
 
-- Fixed: Issue with enquiry modal display.
-- Fixed: Tour itinerary map not rendering correctly.
-- Fixed: Incorrect apartment pricing issue.
+- Improvement: Added Forgot Password to the login form.
+- Improvement: String Translation support.
+- Fixed: Search form date issue has been resolved.
+- Fixed: Tour Google Maps issue has been resolved.
+- Fixed: Tour starting price display issue has been resolved.
+- Fixed: Tour date on mobile issue has been resolved.
+- Fixed: Backend tour booking voucher generation issue resolved.
 
-= 2.20.2 – January 16, 2026 =
+= 2.20.4 – February 03, 2026 =
 
-- Added: Enhanced security feature.
-
-= 2.20.1 – January 16, 2026 =
-
-- Updated: readme.txt updated
-
-= 2.20.0 – January 16, 2026 =
-
-- Info: System stability has been improved.
-
-= 2.19.0 – January 13, 2026 =
-
-- Improved: Taxonomy archives are now enabled for taxonomies.
-- Fixed: Switcher issue resolved.
-
-= 2.18.12 – January 05, 2026 =
-
-- Tweak: Improved apartment search functionality.
-- Tweak: Booking email sending functionality.
-- Fixed: Migrator fatal error. 
-- Fixed: Tour price calculation issue.
-- Fixed: Offline payment tour voucher issue.
-- Fixed: Wishlist issue for logged-out users.
-- Fixed: Enquiry disable option issue.
+- Improved: Shortcode layout design.
+- Fixed: Filter issue in the vendor profile.
+- Fixed: Apartment room details issue.
+- Improved: "Month" Word translations.
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 

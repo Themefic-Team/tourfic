@@ -411,7 +411,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                             <img src="<?php echo esc_url( get_avatar_url( $post_author_id ) ); ?>" alt="">
                             <div class="host-meta">
 								<?php echo sprintf( '<h4>%s %s</h4>', esc_html__( 'Hosted by', 'tourfic' ), esc_html( $author_info->display_name ) ); ?>
-								<?php echo sprintf( '<span class="tf-apartment-joined-text">%s <span>:</span> <span>%s</span></span>', esc_html__( 'Joined', 'tourfic' ), wp_kses_post( gmdate( 'F Y', strtotime( $author_info->user_registered ) ) ) ); ?>
+								<?php echo sprintf( '<span class="tf-apartment-joined-text">%s <span>:</span> <span>%s</span></span>', esc_html__( 'Joined', 'tourfic' ), wp_kses_post( wp_date( 'F Y', strtotime( $author_info->user_registered ) ) ) ); ?>
 								<?php Apartment::tf_apartment_host_rating( $post_author_id ) ?>
 
                             </div>

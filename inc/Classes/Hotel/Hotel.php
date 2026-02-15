@@ -1639,9 +1639,9 @@ class Hotel {
                                     <span class="tf-label"><?php esc_html_e( 'Check in', 'tourfic' ); ?></span>
                                     <div class="tf_form_inners">
                                         <div class="tf_checkin_dates">
-                                            <span class="date"><?php echo esc_html( gmdate( 'd' ) ); ?></span>
+                                            <span class="date"><?php echo esc_html( wp_date( 'd' ) ); ?></span>
                                             <span class="month">
-											<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+											<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -1662,9 +1662,9 @@ class Hotel {
                                     <span class="tf-label"><?php esc_html_e( 'Check Out', 'tourfic' ); ?></span>
                                     <div class="tf_form_inners">
                                         <div class="tf_checkout_dates">
-                                            <span class="date"><?php echo esc_html( gmdate( 'd' ) ); ?></span>
+                                            <span class="date"><?php echo esc_html( wp_date( 'd' ) ); ?></span>
                                             <span class="month">
-											<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+											<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -1839,11 +1839,18 @@ class Hotel {
                         $(".tf_check_inout_dates").on("click", function () {
                             $(".tf-check-in-out-date").trigger("click");
                         });
+
+						// today + tomorrow
+						const today = new Date();
+						const tomorrow = new Date();
+						tomorrow.setDate(today.getDate() + 1);
+
                         $(".tf-check-in-out-date").flatpickr({
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
                             minDate: "today",
+							defaultDate: [today, tomorrow],
 
                             // flatpickr locale
 							<?php Helper::tf_flatpickr_locale(); ?>
@@ -2178,10 +2185,10 @@ class Hotel {
                                         </svg>
                                     </div>
                                     <div class="tf_checkin_dates tf-flex tf-flex-align-center">
-                                        <span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+                                        <span class="date field--title"><?php echo esc_html(date_i18n('d')); ?></span>
                                         <div class="tf-search__form__field__mthyr">
-                                            <span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
-                                            <span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+                                            <span class="month form--span"><?php echo esc_html(date_i18n('M')); ?></span>
+                                            <span class="year form--span"><?php echo esc_html(date_i18n('Y')); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -2211,10 +2218,10 @@ class Hotel {
                                     </svg>
                                 </div>
                                 <div class="tf_checkout_dates tf-flex tf-flex-align-center">
-                                    <span class="date field--title"><?php echo esc_html(gmdate('d', strtotime('+1 day'))); ?></span>
+                                    <span class="date field--title"><?php echo esc_html(wp_date('d', strtotime('+1 day'))); ?></span>
                                     <div class="tf-search__form__field__mthyr">
-                                        <span class="month form--span"><?php echo esc_html(gmdate('M'), strtotime('+1 day')); ?></span>
-                                        <span class="year form--span"><?php echo esc_html(gmdate('Y'), strtotime('+1 day')); ?></span>
+                                        <span class="month form--span"><?php echo esc_html(wp_date('M'), strtotime('+1 day')); ?></span>
+                                        <span class="year form--span"><?php echo esc_html(wp_date('Y'), strtotime('+1 day')); ?></span>
                                     </div>
                                 </div>
 
@@ -2650,7 +2657,7 @@ class Hotel {
 
 		$tf_hotel_selected_template = !empty($design) ? $design : $tf_hotel_selected_check;
 
-		$tf_hotel_book_avaibality_button_text = ! empty( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ) : "Booking Availability";
+		$tf_hotel_book_avaibality_button_text = ! empty( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ) : __( 'Booking Availability', 'tourfic' );
 		$hotel_location_field_required        = ! empty( Helper::tfopt( "required_location_hotel_search" ) ) ? Helper::tfopt( "required_location_hotel_search" ) : 1;
 		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 		$child_field_hidden = apply_filters( 'tf_hotel_child_field_hidden', 1 );
@@ -2735,7 +2742,7 @@ class Hotel {
                             <span class="tf-booking-date"><?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'd' ) ) : esc_html__( '00', 'tourfic' ); ?></span>
                             <span class="tf-booking-month">
 								<span>
-									<?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'M' ) ) : esc_html( gmdate( 'M' ) ); ?>
+									<?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'M' ) ) : esc_html( wp_date( 'M' ) ); ?>
 								</span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
@@ -2750,7 +2757,7 @@ class Hotel {
                         <div class="tf-booking-date-wrap">
                             <span class="tf-booking-date"><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'd' ) ) : esc_html__( '00', 'tourfic' ); ?></span>
                             <span class="tf-booking-month">
-								<span><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'M' ) ) : esc_html( gmdate( 'M' ) ); ?></span>
+								<span><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'M' ) ) : esc_html( wp_date( 'M' ) ); ?></span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 								</svg>

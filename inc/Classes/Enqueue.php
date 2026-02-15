@@ -174,8 +174,8 @@ class Enqueue {
 		 * Fancybox
 		 * v3.5.7
 		 */
-		wp_enqueue_style( 'fancybox', TF_ASSETS_URL . 'app/libs/fancybox/jquery.fancybox.min.css', '', TF_VERSION );
-		wp_enqueue_script( 'fancybox', TF_ASSETS_URL . 'app/libs/fancybox/jquery.fancybox.min.js', array( 'jquery' ), TF_VERSION, true );
+		wp_enqueue_style( 'tf-fancybox', TF_ASSETS_URL . 'app/libs/fancybox/jquery.fancybox.min.css', '', TF_VERSION );
+		wp_enqueue_script( 'tf-fancybox', TF_ASSETS_URL . 'app/libs/fancybox/jquery.fancybox.min.js', array( 'jquery' ), TF_VERSION, true );
 		
 		/**
 		 * Slick
@@ -348,7 +348,7 @@ class Enqueue {
 		/**
 		 * Custom
 		 */
-		wp_enqueue_script( 'tourfic', TF_ASSETS_APP_URL . 'js/tourfic-scripts' . $this->js_min . '.js', '', TF_VERSION, true );
+		wp_enqueue_script( 'tourfic', TF_ASSETS_APP_URL . 'js/tourfic-scripts' . $this->js_min . '.js','', TF_VERSION, true );
 		wp_localize_script( 'tourfic', 'tf_params',
 			array(
 				'nonce'                  => wp_create_nonce( 'tf_ajax_nonce' ),
@@ -412,8 +412,15 @@ class Enqueue {
 				'single_car_data' => isset( $single_car_data ) ? $single_car_data : array(),
 				'car_mobile_button_hide' => esc_html__( 'Hide', 'tourfic' ),
 				'car_mobile_button_book_now' => esc_html__( 'Book Now', 'tourfic' ),
+				'car_location_required_msg' => esc_html__( 'Select Pickup & Dropoff Location', 'tourfic' ),
+				'car_date_required_msg' => esc_html__( 'Select Pickup & Dropoff Date', 'tourfic' ),
+				'open_street_map_text' => esc_html__( 'OpenStreetMap', 'tourfic' ),
+				'required' => esc_html__( 'This field is required.', 'tourfic'),
+				'fields_required_msg' => esc_html__( 'Fill up the all fields', 'tourfic'),
+				'no_camera_msg' => esc_html__( 'No camera found', 'tourfic'),
 			)
 		);
+
 
 		/**
 		 * Inline scripts
@@ -947,6 +954,8 @@ class Enqueue {
 					'activated'                        => esc_html__( 'Activated', 'tourfic' ),
 					'install_failed'                   => esc_html__( 'Install failed', 'tourfic' ),
 					'setting_search_no_result'         => esc_html__( 'No result found!', 'tourfic' ),
+					'setting_exporting_text'           => esc_html__('Exporting...', 'tourfic'),
+					'setting_export_text'              => esc_html__('Export','tourfic'),
 					/* translators: %s: strong tag */
 					'max_input_vars_notice'            => sprintf( esc_html__( 'WARNING: If you are having trouble saving your settings, please increase the %1$s "PHP Max Input Vars" %2$s value to save all settings.', 'tourfic' ), '<strong>', '</strong>' ),
 					'is_woo_not_active'                => ( ! file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) || ! is_plugin_active( 'woocommerce/woocommerce.php' ) ),
@@ -999,8 +1008,24 @@ class Enqueue {
 			'tf_tours_orders' => $tf_tours_orders,
 			'tf_hotels_orders' => $tf_hotels_orders,
 			'tf_apartments_orders' => $tf_apartments_orders,
-			'tf_cars_orders' => $tf_cars_orders
-		) );
+			'tf_cars_orders' => $tf_cars_orders,
+			'months' => [
+				__( 'January', 'tourfic' ),
+				__( 'February', 'tourfic' ),
+				__( 'March', 'tourfic' ),
+				__( 'April', 'tourfic' ),
+				__( 'May', 'tourfic' ),
+				__( 'June', 'tourfic' ),
+				__( 'July', 'tourfic' ),
+				__( 'August', 'tourfic' ),
+				__( 'September', 'tourfic' ),
+				__( 'October', 'tourfic' ),
+				__( 'November', 'tourfic' ),
+				__( 'December', 'tourfic' ),
+			],
+			'completed' => __( 'Completed Booking', 'tourfic' ),
+			'cancelled' => __( 'Cancelled Booking', 'tourfic' ),
+		));
 	}
 
 	/**

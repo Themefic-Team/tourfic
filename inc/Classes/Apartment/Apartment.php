@@ -166,7 +166,7 @@ class Apartment {
 						$infant_number = ! empty( $room['infant'] ) ? $room['infant'] : '0';
 						?>
                         <h3><?php echo esc_html( $room['title'] ); ?></h3>
-                        <p><?php echo esc_html( $room['description'] ); ?></p>
+                        <div><?php echo wp_kses_post( $room['description'] ); ?></div>
                         <div class="tf-room-title description">
 							<?php if ( $footage ) { ?>
                                 <div class="tf-tooltip tf-d-ib">
@@ -268,6 +268,9 @@ class Apartment {
 					</div>
 					<div class="tf-popup-right">
 						<span class="tf-popup-info-title"><?php esc_html_e("Room details", "tourfic"); ?></span>
+						<div class="tf-room-details">
+							<?php echo wp_kses_post($room['description']); ?>
+						</div>
 						<ul>
 							<?php if ( $footage ) { ?>
 								<li><i class="ri-pencil-ruler-2-line"></i> <?php echo esc_html( $footage ); ?><?php esc_html_e( 'sft', 'tourfic' ); ?></li>
@@ -396,9 +399,9 @@ class Apartment {
 								<span class="tf-label"><?php esc_html_e( 'Check in', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkin_dates">
-										<span class="date"><?php echo esc_html( gmdate('d') ); ?></span>
+										<span class="date"><?php echo esc_html( wp_date('d') ); ?></span>
 										<span class="month">
-											<span><?php echo esc_html( gmdate('M') ); ?></span>
+											<span><?php echo esc_html( wp_date('M') ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -417,9 +420,9 @@ class Apartment {
 								<span class="tf-label"><?php esc_html_e( 'Check Out', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkout_dates">
-										<span class="date"><?php echo esc_html( gmdate('d') ); ?></span>
+										<span class="date"><?php echo esc_html( wp_date('d') ); ?></span>
 										<span class="month">
-											<span><?php echo esc_html( gmdate('M') ); ?></span>
+											<span><?php echo esc_html( wp_date('M') ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -568,11 +571,18 @@ class Apartment {
 					$(".tf_apartment_check_in_out_date").on("click", function(){
 						$(".tf-apartment-check-in-out-date").trigger("click");
 					});
+
+					// today + tomorrow
+					const today = new Date();
+					const tomorrow = new Date();
+					tomorrow.setDate(today.getDate() + 1);
+					
 					$(".tf-apartment-check-in-out-date").flatpickr({
 						enableTime: false,
 						mode: "range",
 						dateFormat: "Y/m/d",
 						minDate: "today",
+						defaultDate: [today, tomorrow],
 
 						// flatpickr locale
 						<?php Helper::tf_flatpickr_locale(); ?>
@@ -904,10 +914,10 @@ class Apartment {
                                         </svg>
                                     </div>
                                     <div class="tf_checkin_dates tf-flex tf-flex-align-center">
-                                        <span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+                                        <span class="date field--title"><?php echo esc_html(wp_date('d')); ?></span>
                                         <div class="tf-search__form__field__mthyr">
-                                            <span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
-                                            <span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+                                            <span class="month form--span"><?php echo esc_html(wp_date('M')); ?></span>
+                                            <span class="year form--span"><?php echo esc_html(wp_date('Y')); ?></span>
                                         </div>
                                     </div>
 
@@ -938,10 +948,10 @@ class Apartment {
                                     </svg>
                                 </div>
                                 <div class="tf_checkout_dates tf-flex tf-flex-align-center">
-                                    <span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+                                    <span class="date field--title"><?php echo esc_html(wp_date('d')); ?></span>
                                     <div class="tf-search__form__field__mthyr">
-                                        <span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
-                                        <span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+                                        <span class="month form--span"><?php echo esc_html(wp_date('M')); ?></span>
+                                        <span class="year form--span"><?php echo esc_html(wp_date('Y')); ?></span>
                                     </div>
                                 </div>
 

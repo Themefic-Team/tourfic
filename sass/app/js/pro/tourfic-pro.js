@@ -1131,7 +1131,7 @@ const TFQRSCANER = () => {
         function checkCamera(scanner) {
             QrScanner.hasCamera().then(hasCamera => {
                 if (!hasCamera) {
-                    alert('No camera found');
+                    alert(tf_params.no_camera_msg);
                     jQuery('.camera-warning').show();
                     jQuery('#tf-video-preview').hide();
                 } else {
