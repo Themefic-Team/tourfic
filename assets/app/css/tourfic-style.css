@@ -7675,13 +7675,9 @@ div#tf-destinationautocomplete-list div:before {
 .tf-search-tabs__design--5 .tf-archive-search-box-wrapper .tf-submit-button .tf_btn {
   width: 100%;
   min-height: 72px;
-  border: 2px solid var(--tf-brand-dark);
   font-size: 1.25rem;
   line-height: 1.5;
   margin-top: 10px;
-}
-.tf-search-tabs__design--5 .tf-archive-search-box-wrapper .tf-submit-button .tf_btn:hover {
-  background-color: var(--tf-primary);
 }
 
 /* map widget */

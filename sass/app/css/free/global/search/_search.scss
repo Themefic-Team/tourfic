@@ -213,14 +213,9 @@
             .tf_btn{
                 width: 100%;
                 min-height: 72px;
-                border: 2px solid $color-brand-dark;
                 font-size: 1.25rem;
                 line-height: 1.5;
                 margin-top: 10px;
-
-                &:hover{
-                    background-color: $color-primary;
-                }
             }
         }
     }
