@@ -120,8 +120,6 @@
             gap: 24px;
 
             @media #{$max1024} {
-                width: calc(50% - 12px);
-
                 .tf-select-guests,
                 .tf-select-room{
                     width: calc(50% - 12px);

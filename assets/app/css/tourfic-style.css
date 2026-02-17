@@ -7586,9 +7586,6 @@ div#tf-destinationautocomplete-list div:before {
   gap: 24px;
 }
 @media only screen and (max-width: 1024px) {
-  .tf-search-tabs__design--5 .tf-archive-search-box-wrapper .tf-form-bottom-left {
-    width: calc(50% - 12px);
-  }
   .tf-search-tabs__design--5 .tf-archive-search-box-wrapper .tf-form-bottom-left .tf-select-guests,
   .tf-search-tabs__design--5 .tf-archive-search-box-wrapper .tf-form-bottom-left .tf-select-room {
     width: calc(50% - 12px);
