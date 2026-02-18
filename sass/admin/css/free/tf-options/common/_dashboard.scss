@@ -286,11 +286,16 @@
                     margin-bottom: 8px;
                 }
                 select {
-                    width: 120px;
-                    color: #222;
-                    border: 1px solid #ddd;
+                    width: 125px;
                     height: 35px;
-                    border-radius: 10px;
+                    border-radius: 6px;
+                    border: 1px solid #F2F5F7;
+                    background-color: #EBF5FF;
+                    color: #27333F;
+                    font-size: 15px;
+                    &:focus{
+                        box-shadow: none;
+                    }
                 }
             }
         }
