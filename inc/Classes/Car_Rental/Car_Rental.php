@@ -302,7 +302,7 @@ class Car_Rental
                                 </div>
                                 <div class="info-select">
                                     <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-                                    <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" name="pickup-name" />
+                                    <input type="text" placeholder="<?php echo esc_attr__( 'Pick Up Location', 'tourfic' ); ?>" id="tf_pickup_location" name="pickup-name" />
                                     <input type="hidden" name="pickup" class="tf-place-input">
                                 </div>
                             </div>
@@ -324,7 +324,7 @@ class Car_Rental
                                 </div>
                                 <div class="info-select">
                                     <h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-                                    <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" name="dropoff-name" />
+                                    <input type="text" placeholder="<?php echo esc_attr__( 'Drop Off Location', 'tourfic' ); ?>" id="tf_dropoff_location" name="dropoff-name" />
                                     <input type="hidden" name="dropoff" class="tf-place-input">
                                 </div>
                             </div>
@@ -545,7 +545,7 @@ class Car_Rental
                                 <?php echo esc_html_e("Drop-off", "tourfic"); ?>
                             </label>
                             <div class="tf-search__form__field">
-                                <input type="text" id="tf_dropoff_location" class="tf-search__form__input" name="dropoff-name" placeholder="<?php esc_html_e('Dropoff Location', 'tourfic'); ?>" />
+                                <input type="text" id="tf_dropoff_location" class="tf-search__form__input" name="dropoff-name" placeholder="<?php echo esc_attr__( 'Dropoff Location', 'tourfic' ); ?>" />
                                 <input type="hidden" name="dropoff" class="tf-place-input">
                                 <span class="tf-search__form__field__icon icon--location">
                                     <svg width="12" height="17" viewBox="0 0 12 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -922,7 +922,7 @@ class Car_Rental
 
                     <div class="tf_submit-wrap">
                         <input type="hidden" name="type" value="tf_carrental" class="tf-post-type" />
-                        <button class="tf_btn tf-submit" type="submit"><?php echo esc_html(apply_filters("tf_car_search_form_submit_button_text", 'Search')); ?></button>
+                        <button class="tf_btn tf-submit" type="submit"><?php echo esc_html(apply_filters("tf_car_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
                     </div>
 
                 </div>
