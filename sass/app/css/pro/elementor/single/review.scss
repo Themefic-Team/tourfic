@@ -114,7 +114,79 @@
         }
     }
 }
+.tf-room-single-review__style-2{
+    .tf-reviews-wrapper {
+        padding-bottom: 0;
 
+        .tf-section-title{
+            color: $color-heading;
+            font-size: 1.563rem;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        p{
+            margin-bottom: 0;
+        }
+        .tf-review-items {
+
+            .tf-reviews-item {
+                padding: 24px;
+                background-color: #fff;
+
+                .tf-reviews-item-header{
+                    margin-bottom: 16px;
+                    @include flexbox();
+                    @include justify-content(space-between);
+                    gap: 32px;
+
+                    .tf-reviews-item-header-left{
+                        @include flexbox();
+                        gap: 16px;
+
+                        .tf-reviews-avater img{
+                            border-radius: 50%;
+                        }
+
+                        .tf-reviews-avater-right{
+                            @include flexbox();
+                            @include flex-direction(column);
+                            gap: 8px;
+
+                            .tf-reviews-name{
+                                color: $color-heading;
+                                font-size: 1.25rem;
+                                font-weight: 600;
+                                line-height: 1.5;
+                            }
+
+                            .tf-review-rating {
+                                div{
+                                    @include flexbox();
+                                    gap: 8px;
+                                    color: #FFB820;
+                                }
+
+                                span{
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+
+                    
+                }
+
+                .tf-reviews-text p {
+                    margin: 0;
+                    color: $color-text;
+                    font-size: 1rem;
+                    line-height: 1.5;
+                }
+            }
+        }
+    }
+}
 .tf-single-review__style-legacy{
     padding: 0;
     .tf-review-form-container {
