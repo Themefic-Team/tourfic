@@ -1957,7 +1957,7 @@ class Hotel {
 										<div class="tf_acrselection-wrap">
 											<div class="tf_acrselection-inner">
 												<div class="tf_acrselection">
-													<div class="acr-label"><?php esc_html( $adults_name . 's', 'tourfic' ); ?></div>
+													<div class="acr-label"><?php echo esc_html( $adults_name . 's', 'tourfic' ); ?></div>
 													<div class="acr-select">
 														<div class="acr-dec">-</div>
 														<input type="number" name="adults" id="adults" min="1" value="1" readonly>
@@ -2247,8 +2247,8 @@ class Hotel {
                         // flatpickr locale first day of Week
                         <?php Helper::tf_flatpickr_locale("root"); ?>
 
-                        $(".tf_check_inout_dates").on("click", function() {
-                            $(".tf-check-in-out-date").trigger("click");
+                        $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_check_inout_dates").on("click", function() {
+                            $(".tf-shortcode-design-4#tf_hotel_aval_check .tf-check-in-out-date").trigger("click");
                         });
 
 						// today + tomorrow
@@ -2256,7 +2256,7 @@ class Hotel {
 						const tomorrow = new Date();
 						tomorrow.setDate(today.getDate() + 1);
 
-                        $(".tf-check-in-out-date").flatpickr({
+                        $(".tf-shortcode-design-4#tf_hotel_aval_check .tf-check-in-out-date").flatpickr({
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
@@ -2283,15 +2283,15 @@ class Hotel {
                                 ];
                                 if (selectedDates[0]) {
                                     const startDate = selectedDates[0];
-                                    $(".tf_checkin_dates span.date").html(startDate.getDate());
-                                    $(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
-                                    $(".tf_checkin_dates span.year").html(startDate.getFullYear());
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkin_dates span.date").html(startDate.getDate());
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkin_dates span.year").html(startDate.getFullYear());
                                 }
                                 if (selectedDates[1]) {
                                     const endDate = selectedDates[1];
-                                    $(".tf_checkout_dates span.date").html(endDate.getDate());
-                                    $(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
-                                    $(".tf_checkout_dates span.year").html(endDate.getFullYear());
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.date").html(endDate.getDate());
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.year").html(endDate.getFullYear());
                                 }
                             }
                         }
@@ -3161,14 +3161,13 @@ class Hotel {
 		$room_book_url            = ! empty( $meta['booking-url'] ) ? $meta['booking-url'] : '';
 		$room_allow_deposit       = ! empty( $room_meta['allow_deposit'] ) ? $room_meta['allow_deposit'] : '';
 		$room_deposit_type       = ! empty( $room_meta['deposit_type'] ) ? $room_meta['deposit_type'] : '';
-		$room_deposit_amount       = ! empty( $room_meta['deposit_amount'] ) ? $room_meta['deposit_amount'] : 0;
+		$room_deposit_amount      = ! empty( $room_meta['deposit_amount'] ) ? $room_meta['deposit_amount'] : 0;
 		$airport_service_type     = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $enable_airport_service ) && ! empty( $airport_service_type ) ? $airport_service_type : null;
 		$hotel_extras     = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $hotel_extra_option ) && ! empty( $hotel_extras ) ? $hotel_extras : null;
 		$enable_guest_info_global = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'enable_guest_info' ) ) ? Helper::tfopt( 'enable_guest_info' ) : 0;
 		$enable_guest_info        = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['enable_guest_info'] ) ? $meta['enable_guest_info'] : $enable_guest_info_global;
 		$hotel_guest_details_text = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'hotel_guest_details_text' ) ) ? Helper::tfopt( 'hotel_guest_details_text' ) : '';
 		?>
-        <!-- Loader Image -->
         <div id="tour_room_details_loader">
             <div id="tour-room-details-loader-img">
                 <img src="<?php echo esc_url(TF_ASSETS_APP_URL . 'images/loader.gif') ?>" alt="Loader">
@@ -3506,7 +3505,7 @@ class Hotel {
 				if ( "per_person" == $airport_pickup_price['airport_pickup_price_type'] ) {
 					$service_adult_fee           = ! empty( $airport_pickup_price['airport_service_fee_adult'] ) ? $airport_pickup_price['airport_service_fee_adult'] : 0;
 					$service_child_fee           = ! empty( $airport_pickup_price['airport_service_fee_children'] ) ? $airport_pickup_price['airport_service_fee_children'] : 0;
-					$airport_service_price_total = ( $adult * $service_adult_fee ) + ( $child * $service_child_fee );
+					$airport_service_price_total = ( (int) $adult * $service_adult_fee ) + ( (int) $child * $service_child_fee );
 					$airport_service_total       += $airport_service_price_total;
 
 					if ( $child != 0 ) {
@@ -3651,7 +3650,6 @@ class Hotel {
 
 		return !empty( $airport_service_arr ) ? $airport_service_arr : array( 'title' => '', 'price' => 0 );
 	}
-
 
 	/**
 	 * Hotel Archive Single Item Layout
@@ -5005,7 +5003,6 @@ class Hotel {
 
 		wp_die();
 	}
-
 
 	/*
      * Hotel search ajax

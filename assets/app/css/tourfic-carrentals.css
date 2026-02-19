@@ -1195,7 +1195,6 @@
   display: inline-flex;
   gap: 10px;
   height: 32px;
-  margin-top: 5px;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select .acr-dec,
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select .acr-inc {
@@ -1216,7 +1215,8 @@
   border: 0px solid;
   padding: 0;
   text-align: center;
-  height: auto;
+  margin: 0;
+  min-height: auto;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select input:focus {
   box-shadow: none;

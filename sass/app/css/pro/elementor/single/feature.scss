@@ -69,19 +69,29 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            gap: 12px 0;
+            gap: 12px;
             li {
                 width: 25%;
                 display: flex;
+                @media #{$max1199} {
+                    width: 33%;
+                }
                 @media #{$max768}{
                     width: 50%;
-                }
-                @media only screen and (max-width: 1280px) {
-                    width: 33%;
                 }
                 i{
                     margin-right: 8px;
                     font-size: 1.25rem;
+                }
+            }
+        }
+
+        &.tf-feature-column-3 ul{
+            li {
+                width: calc(33.33% - 8px);
+
+                @media #{$max575}{
+                    width: calc(50% - 6px);
                 }
             }
         }

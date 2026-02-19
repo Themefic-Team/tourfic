@@ -142,7 +142,7 @@
          * Ajax apartment booking
          * @author Foysal
          */
-        $(document).on('submit', 'form#tf-apartment-booking', function (e) {
+        $('body').on('submit', 'form#tf-apartment-booking', function (e) {
             e.preventDefault();
 
             var $this = $(this);
@@ -206,7 +206,7 @@
         * @since 2.9.7
         * @author Jahid
         */
-        $(document).on('submit', '#tf_apartment_booking', function (e) {
+        $('body').on('submit', '#tf_apartment_booking', function (e) {
             e.preventDefault();
             let form = $(this),
                 submitBtn = form.find('button[type="submit"]'),
@@ -248,7 +248,7 @@
         /*
         * Apartment room quick view
         * */
-        $(document).on('click', '.tf-apt-room-qv', function (e) {
+        $('body').on('click', '.tf-apt-room-qv', function (e) {
             e.preventDefault();
             $("#tour_room_details_loader").show();
             let post_id = $(this).data("post-id");
@@ -282,7 +282,7 @@
          * Design 1 Apartment Room Popup
          *
          */
-        $(document).on('click', '.tf-apt-room-qv-desgin-1', function (e) {
+        $('body').on('click', '.tf-apt-room-qv-desgin-1', function (e) {
 
             e.preventDefault();
             $("#tour_room_details_loader").show();
@@ -542,7 +542,7 @@
             ]
         });
 
-        $(document).on('click', '.tf-apartment-show-more', function (e) {
+        $('body').on('click', '.tf-apartment-show-more', function (e) {
             if ($(this).siblings('.tf-full-description')) {
                 $(this).siblings('.tf-full-description').show();
                 $(this).siblings('.tf-description').hide();
@@ -551,7 +551,7 @@
             }
         });
         
-        $(document).on('click', '.tf-apartment-show-less', function (e) {
+        $('body').on('click', '.tf-apartment-show-less', function (e) {
             if ($(this).siblings('.tf-full-description')) {
                 $(this).siblings('.tf-full-description').hide();
                 $(this).siblings('.tf-description').show();

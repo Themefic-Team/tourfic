@@ -71,6 +71,7 @@ class Enqueue {
 			'carrentals' => 'tf_carrental',
 			'tour' => 'tf_tours',
 			'hotel' => 'tf_hotel',
+			'room' => 'tf_room'
 		];
 
 		$tax_post_type = '';
@@ -122,6 +123,10 @@ class Enqueue {
 			if (!in_array($key, $tf_disable_services) && (is_singular($post_type) || is_post_type_archive($post_type) || $post_type == $tax_post_type)) {
 				wp_enqueue_style("tf-app-{$key}", TF_ASSETS_URL . "app/css/tourfic-{$key}" . $this->css_min . ".css", null, TF_VERSION);
 			}
+		}
+		//is page template tf-search then enqueue room css
+		if ( get_page_template_slug() == 'tf-search' ) {
+			wp_enqueue_style( 'tf-app-room', TF_ASSETS_URL . 'app/css/tourfic-room' . $this->css_min . '.css', null, TF_VERSION );
 		}
 
 		if ( get_post_type() == 'tf_tours' ) {
@@ -485,6 +490,7 @@ class Enqueue {
 			wp_register_style( 'tf-elementor-single-related-post', TF_PRO_ASSETS_URL . 'app/css/elementor/single/related-post.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-tour-price', TF_PRO_ASSETS_URL . 'app/css/elementor/single/tour-price.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-host-info', TF_PRO_ASSETS_URL . 'app/css/elementor/single/host-info.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-room-options', TF_PRO_ASSETS_URL . 'app/css/elementor/single/room-options.min.css', '', TF_VERSION );
 
 			wp_enqueue_script( 'Chart-js',  TF_ASSETS_APP_URL . 'libs/chart/chart.js', array( 'jquery' ), '2.6.0', true );
 		}
