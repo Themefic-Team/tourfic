@@ -21679,6 +21679,10 @@ div#tf-destinationautocomplete-list div:before {
   padding: 0;
   border: 0;
 }
+.single-tf_room .tf-single-template__two .tf-details-right .tf-single-booking-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection .acr-dec svg path,
+.single-tf_room .tf-single-template__two .tf-details-right .tf-single-booking-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection .acr-inc svg path {
+  stroke: var(--tf-primary);
+}
 .single-tf_room .tf-single-template__two .tf-details-right .tf-single-booking-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection input {
   background: transparent;
   border: 0;
