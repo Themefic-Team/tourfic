@@ -11264,6 +11264,20 @@ div#tf-destinationautocomplete-list div:before {
   left: 50%;
   transform: translateX(-50%);
 }
+@media only screen and (max-width: 575.98px) {
+  .tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap,
+  .tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap {
+    left: auto;
+    right: 0;
+    transform: translateX(0);
+  }
+}
+@media only screen and (max-width: 320px) {
+  .tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap,
+  .tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap {
+    min-width: 270px;
+  }
+}
 .tf-single-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap.tf-show,
 .tf-archive-template__one .tf-archive-room-banner .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap.tf-show {
   visibility: visible;

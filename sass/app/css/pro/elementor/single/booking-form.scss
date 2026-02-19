@@ -2407,6 +2407,10 @@
                         backdrop-filter: blur(16px);
                         padding: 0;
                         border: 0;
+
+                        svg path{
+                            stroke: $color-primary;
+                        }
                     }
                     input {
                         background: transparent;

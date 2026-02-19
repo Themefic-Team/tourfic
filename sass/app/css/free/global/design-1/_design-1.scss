@@ -235,6 +235,16 @@
                             left: 50%;
                             transform: translateX(-50%);
 
+                            @media #{$max575} {
+                                left: auto;
+                                right: 0;
+                                transform: translateX(0);
+                            }
+
+                            @media #{$max320} {
+                                min-width: 270px;
+                            }
+
                             &.tf-show {
                                 visibility: visible;
                                 opacity: 1;
