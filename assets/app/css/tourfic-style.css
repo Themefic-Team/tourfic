@@ -11368,7 +11368,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 .tf-single-template__one .tf-archive-room-banner .tf-submit-button .tf_btn:hover,
 .tf-archive-template__one .tf-archive-room-banner .tf-submit-button .tf_btn:hover {
-  background-color: var(--tf-primary);
+  background-color: var(--tf-brand-dark);
 }
 .tf-single-template__one .tf-archive-room-banner .tf-booking-date-wrap .tf-search-input.form-control,
 .tf-archive-template__one .tf-archive-room-banner .tf-booking-date-wrap .tf-search-input.form-control {
@@ -21621,7 +21621,6 @@ div#tf-destinationautocomplete-list div:before {
   width: 100%;
 }
 .single-tf_room .tf-single-template__two .tf-details-right .tf-single-booking-box-wrapper .tf-submit-button .tf_btn {
-  background-color: var(--tf-primary);
   width: 100%;
   min-height: 72px;
   border: 2px solid var(--tf-brand-dark);
@@ -21635,8 +21634,7 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 .single-tf_room .tf-single-template__two .tf-details-right .tf-single-booking-box-wrapper .tf-submit-button .tf_btn:hover {
-  background-color: var(--tf-primary);
-  box-shadow: 0 40px 40px 0 rgba(238, 85, 9, 0.16), 0 32px 32px 0 rgba(238, 85, 9, 0.14), 0 24px 24px 0 rgba(238, 85, 9, 0.12), 0 20px 20px 0 rgba(238, 85, 9, 0.1), 0 16px 16px 0 rgba(238, 85, 9, 0.08), 0 12px 12px 0 rgba(238, 85, 9, 0.06), 0 8px 8px 0 rgba(238, 85, 9, 0.04), 0 4px 4px 0 rgba(238, 85, 9, 0.02);
+  background-color: var(--tf-brand-dark);
 }
 .single-tf_room .tf-single-template__two .tf-details-right .tf-single-booking-box-wrapper .tf-select-guests {
   position: relative;
