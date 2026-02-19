@@ -1,6 +1,13 @@
 (function ($, win) {
     $(document).ready(function () {
 
+        // override the default required message
+        if ($.validator && $.validator.messages) {
+            $.extend($.validator.messages, {
+                required: tf_params.required
+            });
+        }
+
         // Create an instance of Notyf
         const notyf = new Notyf({
             ripple: true,
@@ -646,7 +653,9 @@
                     if ($.trim($('#tf_pickup_location').val()) == '') {
                         if ($('#tf-required').length === 0) {
                             if($('.tf-driver-location').length === 1){
-                                $('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Location</b></span>');
+                                $('.tf-driver-location').append(
+                                    '<span id="tf-required" class="required"><b>' + tf_params.car_location_required_msg + '</b></span>'
+                                );
                             }else{
                                 $("#tf_pickup_location").trigger("click");
                             }
@@ -662,7 +671,7 @@
                     if ($.trim($('#tf_pickup_location').val()) == '' || $.trim($('#tf_dropoff_location').val()) == '') {
                         if ($('#tf-required').length === 0) {
                             if($('.tf-driver-location').length === 1){
-                                $('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Location</b></span>');
+                                $('.tf-driver-location').append('<span id="tf-required" class="required"><b>' + tf_params.car_location_required_msg + '</b></span>');
                             }else{
                                 $("#tf_pickup_location").trigger("click");
                             }
@@ -683,7 +692,7 @@
                 if ($.trim($('.tf_pickup_date').val()) == '' || $.trim($('.tf_dropoff_date').val()) == '') {
                     if ($('#tf-required').length === 0) {
                         if($('.tf-driver-location').length === 1){
-                            $('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Date</b></span>');
+                            $('.tf-driver-location').append('<span id="tf-required" class="required"><b>' + tf_params.car_date_required_msg + '</b></span>');
                         }else{
                             $(".tf_pickup_date").trigger("click");
                         }
@@ -1916,7 +1925,7 @@
                         if ($(this).val() == "") {
                             hasErrors.push(true);
                             const errorContainer = $(this).siblings('.error-text');
-                            errorContainer.text('This field is required.');
+                            errorContainer.text(tf_params.field_required);
                             if (errorContainer.text() !== '') {
                                 errorContainer.addClass('error-visible');
                             } else {
@@ -1934,7 +1943,7 @@
                         if (!isChecked) {
                             hasErrors.push(true);
                             const errorContainer = $(this).parent().siblings('.error-text');
-                            errorContainer.text('This field is required.');
+                            errorContainer.text(tf_params.field_required);
                             if (errorContainer.text() !== '') {
                                 errorContainer.addClass('error-visible');
                             } else {
@@ -1972,7 +1981,7 @@
                         if ($(this).val() == "") {
                             hasErrors.push(true);
                             const errorContainer = $(this).siblings('.error-text');
-                            errorContainer.text('This field is required.');
+                            errorContainer.text(tf_params.field_required);
                             if (errorContainer.text() !== '') {
                                 errorContainer.addClass('error-visible');
                             } else {
@@ -1990,7 +1999,7 @@
                         if (!isChecked) {
                             hasErrors.push(true);
                             const errorContainer = $(this).parent().siblings('.error-text');
-                            errorContainer.text('This field is required.');
+                            errorContainer.text(tf_params.field_required);
                             if (errorContainer.text() !== '') {
                                 errorContainer.addClass('error-visible');
                             } else {

@@ -194,6 +194,33 @@ h3.section-heading {
     }
 }
 
+.tf-suggestion-wrapper .tf-slider-items-wrapper {
+    .slick-track {
+        display: -webkit-box !important;
+        display: -ms-flexbox !important;
+        display: flex !important;
+        @media #{$max768} {
+            margin-bottom: 15px !important;
+        }
+        >div {
+            height:auto;
+            min-height: -webkit-fill-available !important;
+            display: -webkit-box !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-align: end !important;
+                -ms-flex-align: end !important;
+                    align-items: flex-end !important;
+        }
+        .tf-slider-content {
+            margin-top: 200px !important;
+        }
+    }
+    .tf-slider-item {
+        height: auto;
+    }
+}
+
 .tf_form-row {
     .tf_label-row {
         margin-bottom: 15px;

@@ -241,7 +241,7 @@
 
             if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
                 $('.error-notice').show();
-                $('.error-notice').text('Fill up the all fields');
+                $('.error-notice').text(tf_params.fields_required_msg);
                 return;
             }
 
@@ -357,7 +357,7 @@
                         if ($(this).val() == "") {
                             hasErrors.push(true);
                             const errorContainer = $(this).siblings('.error-text');
-                            errorContainer.text('This field is required.');
+                            errorContainer.text(tf_params.field_required);
                             if (errorContainer.text() !== '') {
                                 errorContainer.addClass('error-visible');
                             } else {
@@ -374,7 +374,7 @@
                         if (!isChecked) {
                             hasErrors.push(true);
                             const errorContainer = $(this).parent().siblings('.error-text');
-                            errorContainer.text('This field is required.');
+                            errorContainer.text(tf_params.field_required);
                             if (errorContainer.text() !== '') {
                                 errorContainer.addClass('error-visible');
                             } else {
@@ -479,7 +479,7 @@
 
                 if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
                     $('.error-notice').show();
-                    $('.error-notice').text('Fill up the all fields');
+                    $('.error-notice').text(tf_params.fields_required_msg);
                     return;
                 }
             }
@@ -1093,7 +1093,7 @@
 
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
             }).addTo(map);
 
             const marker = L.marker([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], {alt: tf_params.single_car_data.address}).addTo(map)

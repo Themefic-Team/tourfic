@@ -338,6 +338,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 				'infants'     => $field['tf_tour_infants_number'],
 				'total_price' => $res['tf_tour_price'],
 				'due_price'   => '',
+				'unique_id'   => wp_rand(),
 			];
 
 			$order_data = array(
