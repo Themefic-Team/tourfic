@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.20.5
+Stable tag: 2.20.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -35,6 +35,9 @@ As a comprehensive solution for travel booking on WordPress, Tourfic encompasses
 Our team has released two dedicated WordPress themes, [Travelfic & Hotel Booking](https://theme-demo.themefic.com/), exclusively for Tourfic users. They offer multiple demo versions for free. Check it [here](https://wordpress.org/themes/travelfic/) & [here](https://wordpress.org/themes/ultimate-hotel-booking/).
 
 = 🎉  HOTEL BOOKING & ROOM MANAGEMENT =
+* Find a Single Room
+* Reserve a Single Room
+* House Rules Setup
 * Add Unlimited Hotels
 * Add Unlimited Rooms (Up to 5 on Free Version)
 * Set room price per Room
@@ -193,12 +196,14 @@ In short, Tourfic includes all the features for a multi-vendor hotel, travel, Ap
 * TravelPayouts Affiliate Program
 
 = 🎉 PAGE BUILDER SUPPORT (PRO) =
+* Added: Elementor support for Room Archive pages.
 * Added: Elementor support for Tour Archive pages.
 * Added: Elementor support for Hotel Archive pages.
 * Added: Elementor support for Apartment Archive pages.
 * Added: Elementor support for Car Archive pages.
 * Added: Elementor support for single Tour pages.
 * Added: Elementor support for single Hotel pages.
+* Added: Elementor support for single Room pages.
 * Added: Elementor support for single Apartment pages.
 * Added: Elementor support for single Car pages.
 
@@ -412,6 +417,17 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.20.6 – February 19, 2026 =
+
+- New: Added room archive, search, and taxonomy archive support.
+- New: Added Room Type taxonomy.
+- New: Added shortcodes – Search Form, Reviews, Rooms, Recent Rooms, and Room Types.
+- New: Added Elementor Template Builder support.
+- New: Added House Rules section on single room pages.
+- New: Added Review section on single room pages.
+- New: Added Cancellation Policy section on single room pages.
+- Improvement: Updated Room Options design.
+
 = 2.20.5 – February 10, 2026 =
 
 - Improvement: Added Forgot Password to the login form.
@@ -421,13 +437,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Tour starting price display issue has been resolved.
 - Fixed: Tour date on mobile issue has been resolved.
 - Fixed: Backend tour booking voucher generation issue resolved.
-
-= 2.20.4 – February 03, 2026 =
-
-- Improved: Shortcode layout design.
-- Fixed: Filter issue in the vendor profile.
-- Fixed: Apartment room details issue.
-- Improved: "Month" Word translations.
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 
