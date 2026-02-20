@@ -417,7 +417,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.20.6 – February 19, 2026 =
+= 2.20.6 – February 21, 2026 =
 
 - New: Added room archive, search, and taxonomy archive support.
 - New: Added Room Type taxonomy.
@@ -427,6 +427,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - New: Added Review section on single room pages.
 - New: Added Cancellation Policy section on single room pages.
 - Improvement: Updated Room Options design.
+- Improvement: License Stability has been improved.
 
 = 2.20.5 – February 10, 2026 =
 
