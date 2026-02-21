@@ -161,7 +161,6 @@
                                     display: inline-flex;
                                     gap: 10px;
                                     height: 32px;
-                                    margin-top: 5px;
                                     .acr-dec,
                                     .acr-inc{
                                         color: $color-brand-dark;
@@ -170,6 +169,7 @@
                                         width: auto;
                                         height: auto;
                                         padding: 0;
+                                        cursor: pointer;
                                     }
                                     input{
                                         color: $color-text;
@@ -180,6 +180,8 @@
                                         border: 0px solid;
                                         padding: 0;
                                         text-align: center;
+                                        margin: 0;
+                                        min-height: auto;
                                         &:focus{
                                             box-shadow: none;
                                             outline: none;

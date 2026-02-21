@@ -241,7 +241,7 @@
 
             if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
                 $('.error-notice').show();
-                $('.error-notice').text('Fill up the all fields');
+                $('.error-notice').text(tf_params.fields_required_msg);
                 return;
             }
 
@@ -320,7 +320,7 @@
 
         });
 
-        $(document).on('click touchstart', '.tf-booking-content-wraper .booking-next', function (e) {
+        $('body').on('click touchstart', '.tf-booking-content-wraper .booking-next', function (e) {
             e.preventDefault();
             let $this = $(this);
 
@@ -357,7 +357,7 @@
                         if ($(this).val() == "") {
                             hasErrors.push(true);
                             const errorContainer = $(this).siblings('.error-text');
-                            errorContainer.text('This field is required.');
+                            errorContainer.text(tf_params.field_required);
                             if (errorContainer.text() !== '') {
                                 errorContainer.addClass('error-visible');
                             } else {
@@ -374,7 +374,7 @@
                         if (!isChecked) {
                             hasErrors.push(true);
                             const errorContainer = $(this).parent().siblings('.error-text');
-                            errorContainer.text('This field is required.');
+                            errorContainer.text(tf_params.field_required);
                             if (errorContainer.text() !== '') {
                                 errorContainer.addClass('error-visible');
                             } else {
@@ -421,7 +421,7 @@
                 return true;
             }
         };
-        $(document).on('click touchstart', '.booking-process', function (e) {
+        $('body').on('click touchstart', '.booking-process', function (e) {
             
             if (e.type === 'touchstart') {
                 $(this).off('click');
@@ -479,7 +479,7 @@
 
                 if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
                     $('.error-notice').show();
-                    $('.error-notice').text('Fill up the all fields');
+                    $('.error-notice').text(tf_params.fields_required_msg);
                     return;
                 }
             }
@@ -616,7 +616,7 @@
         * Car Search submit
         * @author Jahid
         */
-        $(document).on('submit', '#tf_car_booking', function (e) {
+        $('body').on('submit', '#tf_car_booking', function (e) {
             e.preventDefault();
             let form = $(this),
                 submitBtn = form.find('button[type="submit"]'),
@@ -949,7 +949,7 @@
         * Car Archive View
         * @author Jahid
         */
-         $(document).on('click', '.tf-archive-header .tf-archive-view ul li', function (e) {
+         $('body').on('click', '.tf-archive-header .tf-archive-view ul li', function (e) {
             $('.tf-archive-header .tf-archive-view ul li').removeClass('active');
             let $this = $(this);
             $this.addClass('active');
@@ -1014,7 +1014,7 @@
         }
 
         // Back to Booking Form
-        $(document).on('click', '.tf-back-to-booking', function (e) {
+        $('body').on('click', '.tf-back-to-booking', function (e) {
             e.preventDefault(); 
             $('.tf-single-booking-bar').fadeOut();
             var bookingBarHeight = $('.tf-single-booking-bar').outerHeight() || 0;
@@ -1037,7 +1037,7 @@
         });
 
         // Instructions showing
-        $(document).on('click', '.tf-instraction-showing', function (e) {
+        $('body').on('click', '.tf-instraction-showing', function (e) {
             $('.tf-car-instraction-popup').css('display', 'flex');
         });   
 
@@ -1053,7 +1053,7 @@
         })
 
         // Showing Total into a protections
-        $(document).on('change', '.protection-checkbox', function (e) {
+        $('body').on('change', '.protection-checkbox', function (e) {
             let total_price = 0;
             let prev_total = parseFloat($("#tf_total_proteciton_price").val()) || 0; // Parse as float, default to 0 if empty
             let single_price = parseFloat($(this).parent().parent().find('#tf_single_protection_price').val()) || 0; // Parse as float
@@ -1093,7 +1093,7 @@
 
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
             }).addTo(map);
 
             const marker = L.marker([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], {alt: tf_params.single_car_data.address}).addTo(map)

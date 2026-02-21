@@ -31,9 +31,18 @@ if ( ! class_exists( 'TF_switch' ) ) {
 					<?php echo !empty($this->field['label']) ? esc_html( $this->field['label'] ) : ''; ?>
 				</span>
 				<label for="<?php echo esc_attr( $this->field_name() ); ?>" class="tf-switch-label" <?php echo wp_kses_post( $width ); ?>>
-					<input type="checkbox" id="<?php echo esc_attr( $this->field_name() ); ?>" name="<?php echo esc_attr( $this->field_name() ); ?>" value="<?php echo esc_attr($this->value); ?>"
+					<!-- Hidden input ensures 0 is saved when unchecked -->
+					<input type="hidden" name="<?php echo esc_attr( $this->field_name() ); ?>" value="0" />
+					<input 
+						type="checkbox" 
+						id="<?php echo esc_attr( $this->field_name() ); ?>" 
+						name="<?php echo esc_attr( $this->field_name() ); ?>" 
+						value="<?php echo esc_attr($this->value); ?>"
 						data-depend-id="<?php echo esc_attr( $this->field['id'] ); ?><?php echo esc_attr( $this->parent_field ); ?>"
-						class="<?php echo esc_attr($class) ?>" <?php checked( $this->value, 1 ); ?> <?php echo wp_kses_post($this->field_attributes()) ?>/>
+						class="<?php echo esc_attr($class) ?>" 
+						<?php checked( $this->value, 1 ); ?> 
+						<?php echo wp_kses_post($this->field_attributes()) ?>
+					/>
 					<span class="tf-switch-slider">
 						<span class="tf-switch-on"></span>
 						<span class="tf-switch-off"></span>

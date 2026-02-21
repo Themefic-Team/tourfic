@@ -269,7 +269,7 @@
          *
          * adult, child, infant
          */
-        $(document).on('click', '.tf-single-tour-pricing .tf-price-tab li', function () {
+        $('body').on('click', '.tf-single-tour-pricing .tf-price-tab li', function () {
             var t = $(this).attr('id');
 
             $(this).addClass('active').siblings().removeClass('active');
@@ -284,7 +284,7 @@
          *
          * adult, child, infant
          */
-        $(document).on('click', '.tf-trip-person-info ul li', function () {
+        $('body').on('click', '.tf-trip-person-info ul li', function () {
             var t = $(this).attr('data');
 
             $(this).addClass('active').siblings().removeClass('active');
@@ -297,7 +297,7 @@
         * @since 2.9.7
         * @author Foysal
         */
-        $(document).on('submit', '#tf_tour_aval_check', function (e) {
+        $('body').on('submit', '#tf_tour_aval_check', function (e) {
             e.preventDefault();
             let form = $(this),
                 submitBtn = form.find('button[type="submit"]'),
@@ -484,7 +484,7 @@
             }
 
              // Close when clicking outside
-             $(document).on('click', function (event) {
+             $('body').on('click', function (event) {
                 if (!$(event.target).closest("#tf-destination").length) {
                     $("#tf-destinationautocomplete-list").hide();
                 }
@@ -772,7 +772,7 @@
             $('.tf-single-template__two .tf-mobile-booking-btn').slideUp(300);
         });
 
-        $(document).on('click touchstart', function (e) {
+        $('body').on('click touchstart', function (e) {
             if ($(window).width() <= 768) {
                 if (!$(e.target).closest('.tf-bottom-booking-bar, .tf-mobile-booking-btn, .flatpickr-calendar').length) {
                     $('.tf-bottom-booking-bar').removeClass('tf-mobile-booking-form');
@@ -907,6 +907,7 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
+            tour_date_options.disableMobile = "true";
             $(".tours-check-in-out").flatpickr(tour_date_options);
 
             $("select[name='check-in-time']").on("change", function () {
@@ -924,6 +925,7 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
+            tour_date_options.disableMobile = "true";
             $(".tours-check-in-out").flatpickr(tour_date_options);
             if(tour_date_options.defaultDate){
                 const monthNames = [
@@ -979,10 +981,11 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'default') {
+            tour_date_options.disableMobile = "true";
             $("#check-in-out-date").flatpickr(tour_date_options);
         }
 
-        $(document).on('click', "#tour-deposit > div > div.tf_button_group > button", function (e) {
+        $('body').on('click', "#tour-deposit > div > div.tf_button_group > button", function (e) {
             e.preventDefault();
             var form = $(document).find('form.tf_tours_booking');
             var has_deposit = $(this).data('deposit');
@@ -999,7 +1002,7 @@
             
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
             }).addTo(map);
 
             const marker = L.marker([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], {alt: tf_params.tour_form_data.location}).addTo(map)

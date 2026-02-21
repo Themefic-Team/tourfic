@@ -58,6 +58,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                 if ( Helper::tfopt( 'wl-for' ) && in_array( 'li', Helper::tfopt( 'wl-for' ) ) ) { ?>
                                     <div class="tf-icon tf-wishlist-box">
                                         <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>"
+                                            data-icon="far fa-heart-o" data-active-icon="fas fa-heart" 
                                             data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
                                             echo 'data-page-title="' . esc_attr(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"';
                                         } ?>></i>
@@ -67,6 +68,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 								if ( Helper::tfopt( 'wl-for' ) && in_array( 'lo', Helper::tfopt( 'wl-for' ) ) ) { ?>
                                     <div class="tf-icon tf-wishlist-box">
                                         <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>"
+                                            data-icon="far fa-heart-o" data-active-icon="fas fa-heart" 
                                             data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>"
                                             data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
                                             echo 'data-page-title="' . esc_attr(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"';
@@ -80,6 +82,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 										?>
                                         <div class="tf-icon tf-wishlist-box">
                                             <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>"
+                                               data-icon="far fa-heart-o" data-active-icon="fas fa-heart" 
                                                data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
 												echo 'data-page-title="' . esc_attr(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"';
 											} ?>></i>
@@ -90,7 +93,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 										?>
                                         <div class="tf-icon tf-wishlist-box">
                                             <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>"
-                                               data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>"
+                                                data-icon="far fa-heart-o" data-active-icon="fas fa-heart"    
+                                                data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>"
                                                data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
 												echo 'data-page-title="' . esc_attr(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"';
 											} ?>></i>
@@ -343,7 +347,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                 </div>
 							<?php } ?>
 							<?php
-							$tf_enquiry_section_status = ! empty( $meta['t-enquiry-section'] ) ? $meta['t-enquiry-section'] : 1;
+							$tf_enquiry_section_status = ! empty( $meta['t-enquiry-section'] ) ? $meta['t-enquiry-section'] : '';
                             $tf_enquiry_section_icon = ! empty( $meta['t-enquiry-option-icon'] ) ? esc_html( $meta['t-enquiry-option-icon'] ) : '';
                             $tf_enquiry_section_title = ! empty( $meta['t-enquiry-option-title'] ) ? esc_html( $meta['t-enquiry-option-title'] ) : '';
                             $tf_enquiry_section_des = ! empty( $meta['t-enquiry-option-content'] ) ? esc_html( $meta['t-enquiry-option-content'] ) : '';
@@ -398,6 +402,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                         <p><span><?php esc_html_e( "From", "tourfic" ); ?></span>
                                                         <?php
                                                             //get the lowest price from all available room price
+                                                            $tour_price = isset($tour_price) && is_array($tour_price) ? $tour_price : [];
                                                             $tf_tour_min_price      = !empty($tour_price) ? min( $tour_price ) : 0;
                                                             $lowest_price = wp_strip_all_tags(wc_price( $tf_tour_min_price ));
                                                             

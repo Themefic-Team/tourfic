@@ -188,21 +188,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					esc_html__('Template Builder', 'tourfic'),
 					'manage_options',
 					'tf_template_builder',
-					array( '\Tourfic\App\Templates\Template_Builder', 'tf_template_builder_elementor_check' )
+					array( '\Tourfic\App\Template_Builder', 'tf_template_builder_elementor_check' )
 				);
 			} 
-
-			if ( function_exists('is_tf_pro') ) {
-				//License Info submenu
-				add_submenu_page(
-					$this->option_id,
-					esc_html__('License Info', 'tourfic'),
-					esc_html__('License Info', 'tourfic'),
-					'manage_options',
-					'tf_license_info',
-					array( $this,'tf_license_info_callback'),
-				);
-			}
 
 			// remove first submenu
 			remove_submenu_page( $this->option_id, $this->option_id );
@@ -398,7 +386,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			<div class="tf-sidebar-content">
 
 				<div class="tf-plugin-lists">
-					<h3>Power up your website</h3>
+					<h3><?php echo esc_html__('Power up your website', 'tourfic'); ?></h3>
 					<?php echo $this->tf_get_sidebar_plugin_list(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized ?>
 				</div>
 
@@ -480,31 +468,31 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		public function tf_get_sidebar_plugin_list(){
 			$plugins = [
 				[
-					'name'       => 'Instantio',
+					'name'       => __('Instantio', 'tourfic'),
 					'slug'       => 'instantio',
 					'file_name'  => 'instantio',
-					'subtitle'   => 'WooCommerce Quick & Direct Checkout',
+					'subtitle'   =>  __('WooCommerce Quick & Direct Checkout', 'tourfic'),
 					'image'      => 'https://ps.w.org/instantio/assets/icon-128x128.png',
 				],
 				[
-					'name'       => 'Hydra',
+					'name'       => __('Hydra', 'tourfic'),
 					'slug'       => 'hydra-booking',
 					'file_name'  => 'hydra-booking',
-					'subtitle'   => 'All in One Appointment Booking System',
+					'subtitle'   => __('All in One Appointment Booking System', 'tourfic'),
 					'image'      => 'https://ps.w.org/hydra-booking/assets/icon-128x128.jpg',
 				],
 				[
-					'name'       => 'BEAF',
+					'name'       => __('BEAF', 'tourfic'),
 					'slug'       => 'beaf-before-and-after-gallery',
 					'file_name'  => 'before-and-after-gallery',
-					'subtitle'   => 'Ultimate Before After Image Slider & Gallery',
+					'subtitle'   => __('Ultimate Before After Image Slider & Gallery', 'tourfic'),
 					'image'      => 'https://ps.w.org/beaf-before-and-after-gallery/assets/icon-128x128.png',
 				],
 				[
-					'name'       => 'UACF7',
+					'name'       => __('UACF7', 'tourfic'),
 					'slug'       => 'ultimate-addons-for-contact-form-7',
 					'file_name'  => 'ultimate-addons-for-contact-form-7',
-					'subtitle'   => '40+ Essential Addons for Contact Form 7',
+					'subtitle'   => __('40+ Essential Addons for Contact Form 7', 'tourfic'),
 					'image'      => 'https://ps.w.org/ultimate-addons-for-contact-form-7/assets/icon-128x128.png',
 				],
 			];
@@ -534,7 +522,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</div>
 								<div class="tf-plugin-title">
 									<h4><?php echo esc_html($plugin['name']); ?>
-									<span class="badge free">Free</span></h4>
+									<span class="badge free"><?php echo esc_html__('Free', 'tourfic'); ?></span></h4>
 									<p><?php echo esc_html($plugin['subtitle']); ?></p>
 									<strong></strong>
 								</div>
@@ -542,7 +530,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								<div class="tf-plugin-btn">
 									<?php if (!$installed): ?>
 										<button class="tf-plugin-button install" data-action="install" data-plugin="<?php echo esc_attr($plugin['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['file_name']); ?>">
-											Install 
+											<?php echo esc_html__('Install', 'tourfic'); ?> 
 											<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M4.66675 4.66663H11.3334V11.3333" stroke="#382673" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 											<path d="M4.66675 11.3333L11.3334 4.66663" stroke="#382673" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -551,10 +539,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										</button>
 									<?php elseif (!$activated): ?>
 										<button class="tf-plugin-button activate" data-action="activate" data-plugin="<?php echo esc_attr($plugin['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['file_name']); ?>" >
-											Activate <span class="loader"></span>
+											<?php echo esc_html__('Activate', 'tourfic'); ?> <span class="loader"></span>
 										</button>
 									<?php else: ?>
-										<span class="tf-plugin-button tf-plugin-status active">Activated</span>
+										<span class="tf-plugin-button tf-plugin-status active"><?php echo esc_html__('Activated', 'tourfic'); ?></span>
 									<?php endif; ?>
 
 									<?php if (!empty($plugin['pro'])): ?>
@@ -562,10 +550,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 											<a href="<?php echo esc_url($plugin['pro']['url']); ?>" class="tf-plugin-button pro" target="_blank">Get Pro</a>
 										<?php elseif (!$pro_activated): ?>
 											<button class="tf-plugin-button activate-pro" data-action="activate" data-plugin="<?php echo esc_attr($plugin['pro']['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['pro']['file_name']); ?>">
-												Activate Pro <span class="loader"></span>
+												<?php echo esc_html__('Activate Pro', 'tourfic'); ?> <span class="loader"></span>
 											</button>
 										<?php else: ?>
-											<span class="tf-plugin-button tf-plugin-status active-pro">Pro Activated</span>
+											<span class="tf-plugin-button tf-plugin-status active-pro"><?php echo esc_html__('Pro Activated', 'tourfic'); ?></span>
 										<?php endif; ?>
 									<?php endif; ?>
 								</div>
@@ -843,73 +831,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				</div>
 			</div>
 			<?php
-		}
-		public function tf_license_info_callback(){
-		?>
-		<div class="tf-setting-dashboard">
-
-			<!-- dashboard-header-include -->
-			<?php \Tourfic\Classes\Helper::tf_dashboard_header(); ?>
-
-			<div class="tf-setting-license">
-				<div class="tf-setting-license-tabs">
-					<ul>
-						<li class="active">
-							<span>
-								<i class="fas fa-key"></i>
-								<?php esc_html_e("License Info","tourfic"); ?>
-							</span>
-						</li>
-					</ul>
-				</div>
-				<div class="tf-setting-license-field">
-					<div class="tf-tab-wrapper">
-						<div id="license" class="tf-tab-content">
-							<div class="tf-field tf-field-callback" style="width: 100%;">
-								<div class="tf-fieldset"></div>
-							</div>
-							<?php
-							$licenseKey = ! empty( tfliopt( 'license-key' ) ) ? tfliopt( 'license-key' ) : '';
-							$liceEmail  = ! empty( tfliopt( 'license-email' ) ) ? tfliopt( 'license-email' ) : '';
-
-							if ( TourficProBase::CheckWPPlugin( $licenseKey, $liceEmail, $licenseMessage, $responseObj, TF_PRO_PATH . 'tourfic-pro.php' ) ) {
-								tf_license_info();
-							} else {
-							?>
-							<div class="tf-field tf-field-text" style="width: 100%;">
-								<label for="tf_settings[license-key]" class="tf-field-label"> <?php esc_html_e("License Key","tourfic"); ?></label>
-
-								<span class="tf-field-sub-title"><?php esc_html_e("Enter your license key here, to activate the product, and get full feature updates and premium support.","tourfic"); ?></span>
-
-								<div class="tf-fieldset">
-									<input type="text" name="tf_settings[license-key]" id="tf_settings[license-key]" value="" placeholder="xxxxxxxx-xxxxxxxx-xxxxxxxx-xxxxxxxx" />
-								</div>
-							</div>
-
-							<div class="tf-field tf-field-text" style="width: 100%;">
-								<label for="tf_settings[license-email]" class="tf-field-label"> <?php esc_html_e("License Email ","tourfic"); ?></label>
-
-								<span class="tf-field-sub-title"><?php esc_html_e("We will send update news of this product by this email address, don't worry, we hate spam","tourfic"); ?></span>
-
-								<div class="tf-fieldset">
-									<input type="text" name="tf_settings[license-email]" id="tf_settings[license-email]" value="" />
-								</div>
-							</div>
-
-							<div class="tf-field tf-field-callback" style="width: 100%;">
-								<div class="tf-fieldset">
-									<div class="tf-license-activate">
-										<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Activate" /></p>
-									</div>
-								</div>
-							</div>
-							<?php } ?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<?php
 		}
 
 		/**

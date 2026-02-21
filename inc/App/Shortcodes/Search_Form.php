@@ -8,6 +8,7 @@ use Tourfic\Classes\Helper;
 use Tourfic\Classes\Hotel\Hotel;
 use Tourfic\Classes\Apartment\Apartment;
 use Tourfic\Classes\Car_Rental\Car_Rental;
+use Tourfic\Classes\Room\Room;
 
 class Search_Form extends \Tourfic\Core\Shortcodes
 {
@@ -27,6 +28,7 @@ class Search_Form extends \Tourfic\Core\Shortcodes
 					'tour_tab_title' => esc_html__("Tour", 'tourfic'),
 					'apartment_tab_title' => esc_html__("Apartment", 'tourfic'),
 					'car_tab_title' => esc_html__("Car", 'tourfic'),
+					'room_tab_title' => esc_html__("Room", 'tourfic'),
 					'title'     => '',
 					'subtitle'  => '',
 					'classes'   => '',
@@ -90,6 +92,10 @@ class Search_Form extends \Tourfic\Core\Shortcodes
 								<button class="tf-tablinks tf_btn tf_btn_small tf_btn_secondary <?php echo esc_attr($tf_btn_rounded);?> active" data-form-id="tf-hotel-booking-form"><?php echo esc_html(apply_filters("tf_hotel_search_form_tab_button_text", $hotel_tab_title)); ?></button>
 							<?php endif; ?>
 
+							<?php if (! in_array('hotel', $disable_services) && Helper::tf_is_search_form_tab_type('room', $type) && ! Helper::tf_is_search_form_single_tab($type)) : ?>
+								<button class="tf-tablinks tf_btn tf_btn_small tf_btn_secondary <?php echo esc_attr($tf_btn_rounded);?>" data-form-id="tf-room-booking-form"><?php echo esc_html(apply_filters("tf_room_search_form_tab_button_text", $room_tab_title)); ?></button>
+							<?php endif; ?>
+
 							<?php if (! in_array('tour', $disable_services) && Helper::tf_is_search_form_tab_type('tour', $type) && ! Helper::tf_is_search_form_single_tab($type)) : ?>
 								<button class="tf-tablinks tf_btn tf_btn_small tf_btn_secondary <?php echo esc_attr($tf_btn_rounded);?>" data-form-id="tf-tour-booking-form"><?php echo esc_html(apply_filters("tf_tour_search_form_tab_button_text", $tour_tab_title)); ?></button>
 							<?php endif ?>
@@ -113,6 +119,9 @@ class Search_Form extends \Tourfic\Core\Shortcodes
 
 									<?php if (! in_array('hotel', $disable_services) && Helper::tf_is_search_form_tab_type('hotel', $type) && ! Helper::tf_is_search_form_single_tab($type)) : ?>
 										<option value="tf-hotel-booking-form"><?php echo esc_html(apply_filters("tf_hotel_search_form_tab_button_text", $hotel_tab_title)); ?></option>
+									<?php endif; ?>
+									<?php if (! in_array('hotel', $disable_services) && Helper::tf_is_search_form_tab_type('room', $type) && ! Helper::tf_is_search_form_single_tab($type)) : ?>
+										<option value="tf-room-booking-form"><?php echo esc_html(apply_filters("tf_room_search_form_tab_button_text", $room_tab_title)); ?></option>
 									<?php endif; ?>
 									<?php if (! in_array('tour', $disable_services) && Helper::tf_is_search_form_tab_type('tour', $type) && ! Helper::tf_is_search_form_single_tab($type)) : ?>
 										<option value="tf-tour-booking-form"><?php echo esc_html(apply_filters("tf_tour_search_form_tab_button_text", $tour_tab_title)); ?></option>
@@ -140,6 +149,15 @@ class Search_Form extends \Tourfic\Core\Shortcodes
 								<div id="tf-hotel-booking-form" style="display:block" class="tf-tabcontent <?php echo esc_attr($child_age_limit); ?>">
 									<?php
 									Hotel::tf_hotel_search_form_horizontal($classes, $title, $subtitle, $author, $advanced, $design);
+									?>
+								</div>
+							<?php
+							}
+							if (! in_array('hotel', $disable_services) && Helper::tf_is_search_form_tab_type('room', $type)) {
+							?>
+								<div id="tf-room-booking-form" class="tf-tabcontent <?php echo Helper::tf_is_search_form_single_tab($type) ? 'style="display:block"' : '' ?> <?php echo esc_attr($child_age_limit); ?>">
+									<?php
+									Room::tf_room_search_form_horizontal($classes, $title, $subtitle, $author, $advanced, $design);
 									?>
 								</div>
 							<?php

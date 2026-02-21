@@ -7,16 +7,16 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.18.6
- * Tested up to:    6.8
- * WC tested up to: 10.0
+ * Version:         2.20.6
+ * Tested up to:    6.9
+ * WC tested up to: 10.4
  * Requires PHP:    7.4 
- * Elementor tested up to: 3.32
+ * Elementor tested up to: 3.35
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
-// Don't load directly
+// Don't load directly 
 defined( 'ABSPATH' ) || exit;
 
 final class Tourfic {
@@ -27,7 +27,7 @@ final class Tourfic {
 	 * @var string
 	 */
 
-	const VERSION = '2.18.6';
+	const VERSION = '2.20.6';
 
 	/**
 	 * Minimum PHP version required.
@@ -74,6 +74,8 @@ final class Tourfic {
 	public function __construct() {
 		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		$this->define_constants();
+
+		require __DIR__ . '/vendor/autoload.php';
 
 		//Check if WooCommerce is active, and if it isn't, disable the plugin.
 		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
@@ -129,6 +131,9 @@ final class Tourfic {
 		// autoloader
 		require_once TF_PATH . 'autoloader.php';
 
+		// Initialize the appsero
+		$this->appsero_init_tracker_tourfic();
+
 		if ( class_exists( "\Tourfic\Classes\Base" ) ) {
 			\Tourfic\Classes\Base::instance();
 		} else {
@@ -147,14 +152,7 @@ final class Tourfic {
 	/**
 	 * Include required core files used in admin and on the frontend.
 	 */
-	public function includes() {
-		// Classes
-//		 if ( file_exists( TF_INC_PATH . 'classes.php' ) ) {
-//		 	require_once TF_INC_PATH . 'classes.php';
-//		 } else {
-//		 	tf_file_missing( TF_INC_PATH . 'classes.php' );
-//		 }
-	}
+	public function includes() {}
 
 	function tf_load_textdomain() {
 		$locale = apply_filters( 'plugin_locale', get_locale(), 'tourfic' );
@@ -248,6 +246,24 @@ final class Tourfic {
 		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
 			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
 		}
+	}
+
+	/**
+	 * Initialize the plugin tracker
+	 *
+	 * @return void
+	 */
+	public function appsero_init_tracker_tourfic() {
+
+		$client = new Appsero\Client( '19134f1b-2838-4a45-ac05-772b7dfc9850', 'Travel and Hotel Booking Solution for WooCommerce - Tourfic', __FILE__ );
+
+		// Change Admin notice text
+		$notice = sprintf( $client->__trans( 'Want to help make <strong>%1$s</strong> even more awesome? Allow %1$s to collect non-sensitive diagnostic data and usage information. I agree to get Important Product Updates & Discount related information on my email from  %1$s (I can unsubscribe anytime).' ), $client->name );
+		$client->insights()->notice( $notice );
+
+		// Active insights
+		$client->insights()->init();
+
 	}
 }
 

@@ -42,7 +42,7 @@ class Hotel_Feature_Filter extends \WP_Widget {
         //check if is Hotel
         $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type();
 
-        if ( is_admin() || $posttype == 'tf_hotel' ) {
+        if ( is_admin() || $posttype == 'tf_hotel' || $posttype == 'tf_room' ) {
             extract( $args );
             $title = apply_filters( 'widget_title', $instance['title'] );
 
@@ -71,8 +71,22 @@ class Hotel_Feature_Filter extends \WP_Widget {
                 $fslug = $term->slug;
                 $default_count = $term->count;
                 $tax_name = $term->taxonomy;
-                $count = $show_count ? '<span>' . Hotel::tf_term_count( $term->slug, $destination_name, $default_count ) . '</span>' : '';
+                $count = '';
+                $room_count = 0;
+
+                if ( $show_count ) {
+                    if ( $posttype === 'tf_room' ) {
+                        $room_count = (int) \Tourfic\Classes\Room\Room::tf_room_feature_count( $id );
+                        $count = '<span>' . esc_html( $room_count ) . '</span>';
+                    } else {
+                        $count = '<span>' . esc_html( Hotel::tf_term_count( $term->slug, $destination_name, $default_count ) ) . '</span>';
+                    }
+                }
+
                 $defult_select =  in_array($fslug, $search_features_query) ? 'checked' : '';
+                if ( $posttype === 'tf_room' && $hide_empty && $room_count === 0 ) {
+                    continue;
+                }
                 echo wp_kses("<li class='tf-filter-item'><label><input type='checkbox' name='tf_filters[]' value='{$id}' {$defult_select} /><input type='hidden' name='tf_widget_texonomy_name' id='tf_widget_texonomy_name' value='{$tax_name}'/><span class='tf-checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags() );
             }
             echo "</ul><a href='#' class='see-more btn-link'>" . esc_html__( 'See more', 'tourfic' ) . "<span class='fa fa-angle-down'></span></a><a href='#' class='see-less btn-link'>" . esc_html__( 'See Less', 'tourfic' ) . "<span class='fa fa-angle-up'></span></a></div>";
@@ -127,17 +141,6 @@ class Hotel_Feature_Filter extends \WP_Widget {
             <label for="<?php echo esc_attr($this->get_field_id( 'hide_empty' )); ?>"><?php esc_html_e( 'Hide Empty Categories:', 'tourfic' )?></label>
             <input id="<?php echo esc_attr($this->get_field_id( 'hide_empty' )); ?>" name="<?php echo esc_attr($this->get_field_name( 'hide_empty' )); ?>" type="checkbox" <?php checked( 'on', $hide_empty );?>>
         </p>
-        <style>
-            .tf-widget-field label {
-                font-weight: 600;
-            }
-        </style>
-        <script>
-            jQuery('#<?php echo esc_attr($this->get_field_id( 'terms' )); ?>').select2({
-                width: '100%'
-            });
-            jQuery(document).trigger('tf_select2');
-        </script>
     <?php
     }
 

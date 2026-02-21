@@ -194,6 +194,33 @@ h3.section-heading {
     }
 }
 
+.tf-suggestion-wrapper .tf-slider-items-wrapper {
+    .slick-track {
+        display: -webkit-box !important;
+        display: -ms-flexbox !important;
+        display: flex !important;
+        @media #{$max768} {
+            margin-bottom: 15px !important;
+        }
+        >div {
+            height:auto;
+            min-height: -webkit-fill-available !important;
+            display: -webkit-box !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-align: end !important;
+                -ms-flex-align: end !important;
+                    align-items: flex-end !important;
+        }
+        .tf-slider-content {
+            margin-top: 200px !important;
+        }
+    }
+    .tf-slider-item {
+        height: auto;
+    }
+}
+
 .tf_form-row {
     .tf_label-row {
         margin-bottom: 15px;
@@ -2445,5 +2472,34 @@ li.tf-filter-item {
     @media #{$max575} {
         width: auto !important;
         max-width: 95%;
+    }
+}
+
+#tf_room_aval_check{
+    .tf_selectperson-wrap{
+        width: 40%;
+    }
+    .tf_selectdate-wrap{
+        width: 40%;
+    }
+
+    &.tf-advanced-search-enabled{
+        .tf_selectperson-wrap{
+            width: 30%;
+        }
+        .tf_selectdate-wrap{
+            width: 30%;
+        }
+        .tf_selectdate-wrap.tf_more_info_selections{
+            width: 20%;
+        }
+    }
+
+    &.tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date{
+        width: 30%;
+    }
+    &.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select:first-child,
+    &.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select{
+        width: 50%;
     }
 }

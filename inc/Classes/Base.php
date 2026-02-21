@@ -106,7 +106,7 @@ class Base {
 
 		//Template Builder
 		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
-			\Tourfic\App\Templates\Template_Builder::instance();
+			\Tourfic\App\Template_Builder::instance();
 		}
 	}
 
@@ -115,6 +115,10 @@ class Base {
 		\Tourfic\App\Shortcodes\Hotel_Locations::instance();
 		\Tourfic\App\Shortcodes\Recent_Hotel::instance();
 		\Tourfic\App\Shortcodes\Hotel_External_Listings::instance();
+
+		\Tourfic\App\Shortcodes\Rooms::instance();
+		\Tourfic\App\Shortcodes\Room_Types::instance();
+		\Tourfic\App\Shortcodes\Recent_Room::instance();
 
 		\Tourfic\App\Shortcodes\Tours::instance();
 		\Tourfic\App\Shortcodes\Tour_Destinations::instance();

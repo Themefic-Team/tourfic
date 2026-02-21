@@ -3597,17 +3597,17 @@ var frame, gframe;
             var chart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                    labels: tf_options.months,
                     // Information about the dataset
                     datasets: [{
-                        label: "Completed Booking",
+                        label: tf_options.completed,
                         borderColor: '#003C79',
                         tension: 0.1,
                         data: tf_options.tf_complete_order,
                         fill: false
                     },
                         {
-                            label: "Cancelled Booking",
+                            label: tf_options.cancelled,
                             borderColor: 'red',
                             tension: 0.1,
                             data: tf_options.tf_cancel_orders,
@@ -3649,55 +3649,50 @@ var frame, gframe;
                         year: yearTarget,
                     },
                     success: function (data) {
-                        if(!data.success){
-                            $("#tf-report-loader").removeClass('show');
-                            notyf.error(data.data)
-                        } else {
-                            var response = JSON.parse(data);
-                            var ctx = document.getElementById('tf_months'); // node
-                            var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
-                            var ctx = $('#tf_months'); // jQuery instance
-                            var ctx = 'tf_months'; // element id
+                        var response = JSON.parse(data);
+                        var ctx = document.getElementById('tf_months'); // node
+                        var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
+                        var ctx = $('#tf_months'); // jQuery instance
+                        var ctx = 'tf_months'; // element id
 
-                            var chart = new Chart(ctx, {
-                                type: 'line',
-                                data: {
-                                    labels: response.months_day_number,
-                                    // Information about the dataset
-                                    datasets: [{
-                                        label: "Completed Booking",
-                                        borderColor: '#003C79',
-                                        tension: 0.1,
-                                        data: response.tf_complete_orders,
-                                        fill: false
-                                    },
-                                        {
-                                            label: "Cancelled Booking",
-                                            borderColor: 'red',
-                                            tension: 0.1,
-                                            data: response.tf_cancel_orders,
-                                            fill: false
-                                        }
-                                    ]
+                        var chart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: response.months_day_number,
+                                // Information about the dataset
+                                datasets: [{
+                                    label: "Completed Booking",
+                                    borderColor: '#003C79',
+                                    tension: 0.1,
+                                    data: response.tf_complete_orders,
+                                    fill: false
                                 },
-
-                                // Configuration options
-                                options: {
-                                    layout: {
-                                        padding: 10,
-                                    },
-                                    legend: {
-                                        display: true
-                                    },
-                                    title: {
-                                        display: true,
-                                        text: response.tf_search_month
+                                    {
+                                        label: "Cancelled Booking",
+                                        borderColor: 'red',
+                                        tension: 0.1,
+                                        data: response.tf_cancel_orders,
+                                        fill: false
                                     }
-                                }
+                                ]
+                            },
 
-                            });
-                            $("#tf-report-loader").removeClass('show');
-                        }
+                            // Configuration options
+                            options: {
+                                layout: {
+                                    padding: 10,
+                                },
+                                legend: {
+                                    display: true
+                                },
+                                title: {
+                                    display: true,
+                                    text: response.tf_search_month
+                                }
+                            }
+
+                        });
+                        $("#tf-report-loader").removeClass('show');
                     }
                 })
             }
@@ -3793,6 +3788,7 @@ var frame, gframe;
 
             var tour_tab_title = $this.find('.tf-shortcode-tour-tab-title-field ').attr('data-tour-tab-title');
             var hotel_tab_title = $this.find('.tf-shortcode-hotel-tab-title-field ').attr('data-hotel-tab-title');
+            var room_tab_title = $this.find('.tf-shortcode-room-tab-title-field ').attr('data-room-tab-title');
             var apartment_tab_title = $this.find('.tf-shortcode-apartment-tab-title-field ').attr('data-apartment-tab-title');
             var car_tab_title = $this.find('.tf-shortcode-car-tab-title-field ').attr('data-car-tab-title');
 
@@ -3813,6 +3809,9 @@ var frame, gframe;
             }
             if (hotel_tab_title != undefined && hotel_tab_title != '' && data.length ) {
                 data = hotel_tab_title + '=' + (data.length ? `"${data}"` : '""');
+            }
+            if (room_tab_title != undefined && room_tab_title != '' && data.length ) {
+                data = room_tab_title + '=' + (data.length ? `"${data}"` : '""');
             }
             if (apartment_tab_title != undefined && apartment_tab_title != '' && data.length ) {
                 data = apartment_tab_title + '=' + (data.length ? `"${data}"` : '""');
@@ -3932,7 +3931,7 @@ var frame, gframe;
                     _nonce: tf_admin_params.tf_nonce,
                 },
                 beforeSend: function () {
-                    $('.tf-export-btn').html('Exporting...');
+                    $('.tf-export-btn').html(tf_admin_params.setting_exporting_text);
                     $('.tf-export-btn').attr('disabled', 'disabled');
                 },
                 success: function (response) {
@@ -3958,12 +3957,12 @@ var frame, gframe;
                     } else {
                         notyf.error(obj.message);
                     }
-                    $('.tf-export-btn').html('Export');
+                    $('.tf-export-btn').html(tf_admin_params.setting_export_text);
                     $('.tf-export-btn').removeAttr('disabled');
                 },
                 error: function (response) {
                     console.log(response);
-                    $('.tf-export-btn').html('Export');
+                    $('.tf-export-btn').html(tf_admin_params.setting_export_text);
                     $('.tf-export-btn').removeAttr('disabled');
                 }
             });

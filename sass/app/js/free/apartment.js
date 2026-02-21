@@ -142,7 +142,7 @@
          * Ajax apartment booking
          * @author Foysal
          */
-        $(document).on('submit', 'form#tf-apartment-booking', function (e) {
+        $('body').on('submit', 'form#tf-apartment-booking', function (e) {
             e.preventDefault();
 
             var $this = $(this);
@@ -206,7 +206,7 @@
         * @since 2.9.7
         * @author Jahid
         */
-        $(document).on('submit', '#tf_apartment_booking', function (e) {
+        $('body').on('submit', '#tf_apartment_booking', function (e) {
             e.preventDefault();
             let form = $(this),
                 submitBtn = form.find('button[type="submit"]'),
@@ -248,7 +248,7 @@
         /*
         * Apartment room quick view
         * */
-        $(document).on('click', '.tf-apt-room-qv', function (e) {
+        $('body').on('click', '.tf-apt-room-qv', function (e) {
             e.preventDefault();
             $("#tour_room_details_loader").show();
             let post_id = $(this).data("post-id");
@@ -257,7 +257,8 @@
                 action: 'tf_apt_room_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
-                id: id
+                id: id,
+                design: 'default'
             };
 
             $.ajax({
@@ -281,7 +282,7 @@
          * Design 1 Apartment Room Popup
          *
          */
-        $(document).on('click', '.tf-apt-room-qv-desgin-1', function (e) {
+        $('body').on('click', '.tf-apt-room-qv-desgin-1', function (e) {
 
             e.preventDefault();
             $("#tour_room_details_loader").show();
@@ -291,7 +292,8 @@
                 action: 'tf_apt_room_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
-                id: id
+                id: id,
+                design: 'design-1'
             };
 
             $.ajax({
@@ -540,7 +542,7 @@
             ]
         });
 
-        $(document).on('click', '.tf-apartment-show-more', function (e) {
+        $('body').on('click', '.tf-apartment-show-more', function (e) {
             if ($(this).siblings('.tf-full-description')) {
                 $(this).siblings('.tf-full-description').show();
                 $(this).siblings('.tf-description').hide();
@@ -549,7 +551,7 @@
             }
         });
         
-        $(document).on('click', '.tf-apartment-show-less', function (e) {
+        $('body').on('click', '.tf-apartment-show-less', function (e) {
             if ($(this).siblings('.tf-full-description')) {
                 $(this).siblings('.tf-full-description').hide();
                 $(this).siblings('.tf-description').show();
@@ -577,7 +579,7 @@
 
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
             }).addTo(map);
 
             const marker = L.marker([tf_params.single_apartment_data.address_latitude, tf_params.single_apartment_data.address_longitude], {alt: tf_params.single_apartment_data.address}).addTo(map)
