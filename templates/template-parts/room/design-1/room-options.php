@@ -44,7 +44,7 @@ if ( $pricing_by == '3' && isset( $meta['room-options'] ) && ! empty( Helper::tf
                     </div>
 
                     <!-- View Details -->
-                    <a href="" class="tf_btn tf_btn_rounded tf_btn_large tf-room-option-book" data-option-key="<?php echo esc_attr($unique_id . '_' . $room_option_key); ?>"><?php echo esc_html( $tf_room_book_button_text ); ?></a>
+                    <a href="" class="tf_btn tf_btn_rounded tf_btn_outline tf_btn_large tf-room-option-book" data-option-key="<?php echo esc_attr($unique_id . '_' . $room_option_key); ?>"><?php echo esc_html( $tf_room_book_button_text ); ?></a>
                 </div>
             </div>
         <?php endforeach; ?>

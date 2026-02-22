@@ -907,6 +907,7 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
+            tour_date_options.disableMobile = "true";
             $(".tours-check-in-out").flatpickr(tour_date_options);
 
             $("select[name='check-in-time']").on("change", function () {
@@ -924,6 +925,7 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
+            tour_date_options.disableMobile = "true";
             $(".tours-check-in-out").flatpickr(tour_date_options);
             if(tour_date_options.defaultDate){
                 const monthNames = [
@@ -979,6 +981,7 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'default') {
+            tour_date_options.disableMobile = "true";
             $("#check-in-out-date").flatpickr(tour_date_options);
         }
 
@@ -999,7 +1002,7 @@
             
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
             }).addTo(map);
 
             const marker = L.marker([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], {alt: tf_params.tour_form_data.location}).addTo(map)

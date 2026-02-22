@@ -1839,11 +1839,18 @@ class Hotel {
                         $(".tf_check_inout_dates").on("click", function () {
                             $(".tf-check-in-out-date").trigger("click");
                         });
+
+						// today + tomorrow
+						const today = new Date();
+						const tomorrow = new Date();
+						tomorrow.setDate(today.getDate() + 1);
+
                         $(".tf-check-in-out-date").flatpickr({
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
                             minDate: "today",
+							defaultDate: [today, tomorrow],
 
                             // flatpickr locale
 							<?php Helper::tf_flatpickr_locale(); ?>
@@ -2650,7 +2657,7 @@ class Hotel {
 
 		$tf_hotel_selected_template = !empty($design) ? $design : $tf_hotel_selected_check;
 
-		$tf_hotel_book_avaibality_button_text = ! empty( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ) : "Booking Availability";
+		$tf_hotel_book_avaibality_button_text = ! empty( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ) : __( 'Booking Availability', 'tourfic' );
 		$hotel_location_field_required        = ! empty( Helper::tfopt( "required_location_hotel_search" ) ) ? Helper::tfopt( "required_location_hotel_search" ) : 1;
 		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 		$child_field_hidden = apply_filters( 'tf_hotel_child_field_hidden', 1 );

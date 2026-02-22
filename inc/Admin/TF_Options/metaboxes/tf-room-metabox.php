@@ -9,7 +9,7 @@ $hotels_name = apply_filters( 'tf_hotel_post_type_name_change_plural', esc_html_
 $adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
 TF_Metabox::metabox( 'tf_room_opt', array(
-	'title'     => 'Room Settings',
+	'title'     => esc_html__( 'Room Settings', 'tourfic' ),
 	'post_type' => 'tf_room',
 	'sections'  => array(
 		

@@ -571,11 +571,18 @@ class Apartment {
 					$(".tf_apartment_check_in_out_date").on("click", function(){
 						$(".tf-apartment-check-in-out-date").trigger("click");
 					});
+
+					// today + tomorrow
+					const today = new Date();
+					const tomorrow = new Date();
+					tomorrow.setDate(today.getDate() + 1);
+					
 					$(".tf-apartment-check-in-out-date").flatpickr({
 						enableTime: false,
 						mode: "range",
 						dateFormat: "Y/m/d",
 						minDate: "today",
+						defaultDate: [today, tomorrow],
 
 						// flatpickr locale
 						<?php Helper::tf_flatpickr_locale(); ?>
