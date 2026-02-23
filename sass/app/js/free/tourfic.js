@@ -39,6 +39,9 @@ console.log('fsdd');
             if(!post_type){
                 post_type = $(document).find('input[name="post_id"]').attr("data-post-type");
             }
+            if(!post_type){
+                post_type = $(document).find('.tf-post-type').first().val();
+            }
             // if( post_type == 'tf_hotel' || post_type == 'tf_tours' || post_type == 'tf_apartment' || post_type == 'tf_carrental' || post_type == 'tf_room' ){
                 $.ajax({
                     type: 'POST',
@@ -71,7 +74,7 @@ console.log('fsdd');
                                         makeFilter();
                                     }
                                 };
-                                if ( parseInt( response.data?.tf_tours?.min ) != 0 && parseInt( response.data?.tf_tours?.max ) != 0) {
+                                if ( parseInt( response.data?.tf_tours?.max ) > 0 ) {
                                     $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
                                 }
                         
@@ -96,7 +99,7 @@ console.log('fsdd');
                                         makeFilter();
                                     }
                                 };
-                                if ( parseInt( response.data?.tf_tours?.min ) != 0 && parseInt( response.data?.tf_tours?.max ) != 0) {
+                                if ( parseInt( response.data?.tf_tours?.max ) > 0 ) {
                                     $('.tf-tour-result-price-range').alRangeSlider(tf_tours_search_range);
                                 }
 
@@ -130,7 +133,7 @@ console.log('fsdd');
                                         makeFilter();
                                     }
                                 };
-                                if ( response.data?.tf_hotel?.min != 0 && response.data?.tf_hotel?.max != 0) {
+                                if ( parseInt( response.data?.tf_hotel?.max ) > 0 ) {
                                     $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
                                 }
                         
@@ -155,7 +158,7 @@ console.log('fsdd');
                                         makeFilter();
                                     }
                                 };
-                                if ( response.data?.tf_hotel?.min != 0 && response.data?.tf_hotel?.max != 0) {
+                                if ( parseInt( response.data?.tf_hotel?.max ) > 0 ) {
                                     $('.tf-hotel-result-price-range').alRangeSlider(tf_hotel_search_range);
                                 }
 
@@ -184,7 +187,7 @@ console.log('fsdd');
                                     theme: "dark",
                                 };
 
-                                if ( response.data?.tf_apartment?.min != 0 && response.data?.tf_apartment?.max != 0) {
+                                if ( parseInt( response.data?.tf_apartment?.max ) > 0 ) {
                                     $('.tf-apartment-filter-range').alRangeSlider(tf_apartment_range_options);
                                 }
 
@@ -208,7 +211,7 @@ console.log('fsdd');
                                         makeFilter();
                                     }
                                 };
-                                if ( parseInt(  response.data?.tf_apartment?.min ) != 0 && parseInt( response.data?.tf_apartment?.max ) != 0) {
+                                if ( parseInt( response.data?.tf_apartment?.max ) > 0 ) {
                                     $('.tf-apartment-result-price-range').alRangeSlider(tf_apartment_search_range);
                                 }
 
@@ -243,7 +246,7 @@ console.log('fsdd');
                                         makeFilter();
                                     }
                                 };
-                                if ( parseInt( response.data?.tf_carrental?.min ) != 0 && parseInt( response.data?.tf_carrental?.max ) != 0) {
+                                if ( parseInt( response.data?.tf_carrental?.max ) > 0 ) {
                                     $('.tf-car-result-price-range').alRangeSlider(tf_car_search_range);
                                 }
 

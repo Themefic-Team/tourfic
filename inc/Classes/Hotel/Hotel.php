@@ -572,7 +572,13 @@ class Hotel {
 
 		if ( ! empty( $rooms_meta ) ):
 			$rooms_meta = array_filter( $rooms_meta, function ( $value ) {
-				return ! empty( $value ) && empty( $value['enable'] ) ? $value['enable'] : '' != '0';
+				if ( empty( $value ) || ! is_array( $value ) ) {
+					return false;
+				}
+				if ( isset( $value['enable'] ) && (string) $value['enable'] === '0' ) {
+					return false;
+				}
+				return true;
 			} );
 		endif;
 
@@ -622,9 +628,10 @@ class Hotel {
 		}
 
 		$room_result = array_filter( $back_rooms );
+		$room_validation = ( ! empty( $room_result ) && $room_counter > 0 ) || ( empty( $room_result ) && ! empty( $rooms_meta ) );
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && $room_validation ) {
 
 			// Check custom date range status of room
 			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
@@ -796,7 +803,7 @@ class Hotel {
 		}
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $child_counter == 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $child_counter == 0 && $room_validation ) {
 
 			// Check custom date range status of room
 			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
@@ -1024,7 +1031,13 @@ class Hotel {
 		// Remove disabled rooms
 		if ( ! empty( $rooms_meta ) ):
 			$rooms_meta = array_filter( $rooms_meta, function ( $value ) {
-				return ! empty( $value ) && empty( $value['enable'] ) ? $value['enable'] : '' != '0';
+				if ( empty( $value ) || ! is_array( $value ) ) {
+					return false;
+				}
+				if ( isset( $value['enable'] ) && (string) $value['enable'] === '0' ) {
+					return false;
+				}
+				return true;
 			} );
 		endif;
 
@@ -1074,9 +1087,10 @@ class Hotel {
 		}
 
 		$room_result = array_filter( $back_rooms );
+		$room_validation = ( ! empty( $room_result ) && $room_counter > 0 ) || ( empty( $room_result ) && ! empty( $rooms_meta ) );
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && $room_validation ) {
 
 			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 				foreach ( $rooms as $_room ) {
@@ -1130,7 +1144,7 @@ class Hotel {
 			}
 
 		}
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $room_validation ) {
 			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 				foreach ( $rooms as $_room ) {
 					$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
