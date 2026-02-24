@@ -357,7 +357,7 @@ class Tour {
                                     </svg>
 								</div>
 								<div class="info-select">
-									<h5><?php esc_html_e("Check-in & Check-out Date", "tourfic"); ?></h5>
+										<h5><?php esc_html_e("Start & End Dates", "tourfic"); ?></h5>
 									<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
                                            placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo Helper::tfopt( 'date_tour_search' ) ? 'required' : ''; ?>>
 								</div>
@@ -843,7 +843,7 @@ class Tour {
                         <!-- @KK Merged two inputs into one  -->
                         <div class="tf_input-inner">
                             <label class="tf_label-row">
-                                <span class="tf-label"><?php esc_html_e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
+	                                <span class="tf-label"><?php esc_html_e( 'Start & End Dates', 'tourfic' ); ?></span>
                                 <div class="tf_form-inner">
                                     <div class="tf-search-form-field-icon">
                                         <i class="far fa-calendar-alt"></i>
