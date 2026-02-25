@@ -4913,7 +4913,7 @@ class Tour {
 					/* translators: 1: traveler index, 2: traveler category. */
 					esc_html__( 'Traveler %1$s%2$s', 'tourfic' ),
 					$traveller_in,
-					$category_label ? ' (' . wp_kses_post( $category_label ) . ')' : ''
+					$category_label ? ' - ' . wp_kses_post( $category_label ) : ''
 				);
 
 				$response['traveller_info'] .= '<div class="tf-single-tour-traveller tf-single-travel">
