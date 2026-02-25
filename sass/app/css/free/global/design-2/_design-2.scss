@@ -628,6 +628,7 @@
                     .tf-room-options-content-inner{
                         border-bottom: 1px solid $color-gray;
                         @include flexbox();
+                        flex: 1;
                         justify-content: space-between;
                         padding-bottom: 24px;
         
