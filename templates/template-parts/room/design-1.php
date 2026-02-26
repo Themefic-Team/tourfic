@@ -145,9 +145,12 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
                         ) );
                         ?>
                         <?php if( empty($tf_comment_counts) && $tf_comment_counts == 0 ) : ?>
-                            <button class="tf_btn tf_btn_rounded tf_btn_full tf_btn_large tf-review-open">
-                            <?php esc_html_e("Leave your review", "tourfic"); ?>
-                        </button>
+                            <button class="tf_btn tf_btn_outline tf_btn_full tf-review-open">
+                                <?php esc_html_e("Leave your review", "tourfic"); ?>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M12 5V19" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
                         <?php endif; ?>
                         <?php
                         // Review moderation notice

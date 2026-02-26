@@ -5529,6 +5529,28 @@
                     font-size: 0.75rem;
                 }
             }
+            .tf-review-widget{
+                button.tf_btn_outline{
+                    color: $color-links;
+                    font-weight: 600;
+                    font-size: 1.063rem;
+                    line-height: 1.5;
+                    padding: 0;
+                    border: none;
+                    border-radius: 0;
+                    justify-content: flex-start;
+
+                    svg{
+                        path{
+                            stroke: $color-links;
+                        }
+                    }
+
+                    &:hover{
+                        background-color: transparent;
+                    }
+                }
+            }
             .tf-review-data-inner{
                 .tf-review-data-average {
                     .avg-review{
@@ -5578,13 +5600,12 @@
                 span.percent-progress {
                     background: $color-text;
                 }
-
-                a.tf-all-reviews {
-                    color: #EE5509;
-                    font-weight: 500;
-                    letter-spacing: 0.16px;
-                    text-decoration: none;
-                }
+            }
+            a.tf-all-reviews {
+                color: $color-links;
+                font-weight: 500;
+                letter-spacing: 0.16px;
+                text-decoration: none;
             }
             .tf-review-form-wrapper{
                 background: $color-filling-fg;
@@ -5670,6 +5691,7 @@
                     .tf-reviews-item {
                         padding: 24px;
                         background-color: #fff;
+                        margin-bottom: 16px;
 
                         .tf-reviews-item-header{
                             margin-bottom: 16px;
@@ -5865,7 +5887,8 @@
                         .tf_btn{
                             width: 100%;
                             min-height: 72px;
-                            border: 2px solid $color-brand-dark;
+                            border: 2px solid $color-links-dark;
+                            background-color: $color-links;
                             font-size: 1rem;
                             line-height: 1.5;
                             margin-top: 10px;
@@ -5875,7 +5898,6 @@
                             }
 
                             &:hover{
-                                background-color: $color-brand-dark;
                                 box-shadow: $color-links-box-shadow;
                             }
                         }
@@ -5935,7 +5957,7 @@
                                     border: 0;
 
                                     svg path{
-                                        stroke: $color-primary;
+                                        stroke: $color-links;
                                     }
                                 }
                                 input {
@@ -6084,6 +6106,15 @@
 
                             .tf_btn{
                                 width: 100%;
+                            }
+                        }
+
+                        .tf_btn{
+                            border: 2px solid $color-links-dark;
+
+                            &:hover{
+                                background-color: $color-primary;
+                                box-shadow: $color-links-box-shadow;
                             }
                         }
                     }

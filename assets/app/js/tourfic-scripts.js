@@ -6335,7 +6335,7 @@ function convertTo24HourFormat(timeStr) {
 
             let guest = adults + children + infant;
 
-            guest = guest < 10 ? '0' + guest : guest;
+            guest = guest < 10 ? guest : guest;
 
             $form.find('span.tf-room-guest').text(guest);
 
@@ -6357,7 +6357,7 @@ function convertTo24HourFormat(timeStr) {
 
                 let guest = adults + children + infant;
 
-                guest = guest < 10 ? '0' + guest : guest;
+                guest = guest < 10 ? guest : guest;
 
                 $form.find('span.tf-room-guest').text(guest);
             });
