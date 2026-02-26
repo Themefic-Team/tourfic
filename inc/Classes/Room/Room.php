@@ -1227,7 +1227,7 @@ class Room {
 						<input type="hidden" name="single_room" value="1"/>
 
 						<?php if( $pricing_by == 3 ) :?>
-							<a class="tf_btn tf_btn_full tf_btn_rounded" href="#tf-room-options"><?php echo esc_html( $tf_room_book_button_text ); ?></a>
+							<a class="tf_btn tf_btn_full tf_btn_rounded" href="#tf-room-options"><?php echo esc_html__( 'Check availability', 'tourfic' ); ?></a>
 							<button class="tf-hotel-booking-popup-btn" type="submit" style="display: none;"></button>
 							<input type="hidden" name="option_id" value=""/>
 						<?php else: ?>
@@ -1996,7 +1996,7 @@ class Room {
                 })(jQuery);
             </script>
         <?php } elseif (!empty($design) && 5 == $design) { ?>
-            <form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-5 <?php echo esc_attr($classes); ?>" id="tf_room_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
+            <form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-5 tf-archive-booking-form__style-2 <?php echo esc_attr($classes); ?>" id="tf_room_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
                 <?php
 				$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '1';
 				$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '0';
@@ -2100,7 +2100,7 @@ class Room {
 													<path d="M4.16666 10H15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 												</svg>
 											</div>
-											<input type="tel" name="childrens" id="children" min="0" value="<?php echo esc_attr($child); ?>" readonly>
+											<input type="tel" name="children" id="children" min="0" value="<?php echo esc_attr($child); ?>" readonly>
 											<div class="acr-inc">
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 													<path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

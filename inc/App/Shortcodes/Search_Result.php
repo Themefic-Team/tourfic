@@ -912,6 +912,12 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 			</div>
 
 			<div class="tf-room-archive-result">
+				<!-- Loader Image -->
+				<div id="tf_ajax_searchresult_loader">
+					<div id="tf-searchresult-loader-img">
+						<img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
+					</div>
+				</div>
 				<?php do_action("tf_room_archive_roomd_items_before"); ?>
 				<div class="tf-room-item-cards tf-flex tf-room-result archive_ajax_result">
 					<?php

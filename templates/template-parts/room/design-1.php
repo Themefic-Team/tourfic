@@ -10,10 +10,9 @@ use Tourfic\Classes\Room\Room;
 $meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
 $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
 ?>
-
 <div class="tf-single-template__two">
     <!--Hero section start -->
-    <div class="tf-hero-section-wrap" style="<?php echo !empty(get_the_post_thumbnail_url()) ? 'background: linear-gradient(180deg, rgba(21, 61, 58, 0.30) 0%, #153D3A 100%), url('.esc_url(get_the_post_thumbnail_url()).') lightgray 50% / cover no-repeat; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
+    <div class="tf-hero-section-wrap" style="<?php echo !empty(get_the_post_thumbnail_url()) ? 'background: linear-gradient(180deg, rgba(21, 61, 58, 0.30) 0%, var(--tf-primary) 100%), url('.esc_url(get_the_post_thumbnail_url()).') lightgray 50% / cover no-repeat; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
         <div class="tf-container">
             <div class="tf-hero-content">
                 <div class="tf-hero-bottom-area">
@@ -104,9 +103,9 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
                         <div class="tf-review-data-inner">
                             <div class="tf-review-data">
                                 <div class="tf-review-data-average">
-                                    <span class="avg-review"><span>
+                                    <h3 class="avg-review"><span>
                                         <?php echo esc_html(sprintf( '%.1f', $total_rating )); ?>
-                                    </span>/ <?php echo wp_kses_post($tf_settings_base); ?></span>
+                                    </span>/ <?php echo wp_kses_post($tf_settings_base); ?></h3>
                                 </div>
                                 <div class="tf-review-all-info">
                                     <p><?php esc_html_e("Excellent", "tourfic"); ?> <span><?php esc_html_e("Total ", "tourfic"); ?> <?php TF_Review::tf_based_on_text( count( $comments ) ); ?></span></p>
