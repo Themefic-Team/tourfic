@@ -2647,6 +2647,9 @@ class Apartment {
 												if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 													$apt_availability_dates = json_decode( $apt_availability_dates, true );
 													foreach($apt_availability_dates as $sdate){
+														if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+															continue;
+														}
 														if($tf_check_in_date==$sdate['check_in']){
 															$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 														}
@@ -2736,6 +2739,9 @@ class Apartment {
 												if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 													$apt_availability_dates = json_decode( $apt_availability_dates, true );
 													foreach($apt_availability_dates as $sdate){
+														if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+															continue;
+														}
 														if($tf_check_in_date==$sdate['check_in']){
 															$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 														}
@@ -2821,6 +2827,9 @@ class Apartment {
 											if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 												$apt_availability_dates = json_decode( $apt_availability_dates, true );
 												foreach($apt_availability_dates as $sdate){
+													if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+														continue;
+													}
 													if($tf_check_in_date==$sdate['check_in']){
 														$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 													}
@@ -3001,6 +3010,9 @@ class Apartment {
 											if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 												$apt_availability_dates = json_decode( $apt_availability_dates, true );
 												foreach($apt_availability_dates as $sdate){
+													if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+														continue;
+													}
 													if($tf_check_in_date==$sdate['check_in']){
 														$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 													}
@@ -3087,6 +3099,9 @@ class Apartment {
 									if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 										$apt_availability_dates = json_decode( $apt_availability_dates, true );
 										foreach($apt_availability_dates as $sdate){
+											if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+												continue;
+											}
 											if($tf_check_in_date==$sdate['check_in']){
 												$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 											}
@@ -3187,6 +3202,9 @@ class Apartment {
 									if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 										$apt_availability_dates = json_decode( $apt_availability_dates, true );
 										foreach($apt_availability_dates as $sdate){
+											if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+												continue;
+											}
 											if($tf_check_in_date==$sdate['check_in']){
 												$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 											}
@@ -3272,6 +3290,9 @@ class Apartment {
 								if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 									$apt_availability_dates = json_decode( $apt_availability_dates, true );
 									foreach($apt_availability_dates as $sdate){
+										if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+											continue;
+										}
 										if($tf_check_in_date==$sdate['check_in']){
 											$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 										}
@@ -3450,6 +3471,9 @@ class Apartment {
 								if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 									$apt_availability_dates = json_decode( $apt_availability_dates, true );
 									foreach($apt_availability_dates as $sdate){
+										if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+											continue;
+										}
 										if($tf_check_in_date==$sdate['check_in']){
 											$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 										}
@@ -3541,6 +3565,9 @@ class Apartment {
 												if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 													$apt_availability_dates = json_decode( $apt_availability_dates, true );
 													foreach($apt_availability_dates as $sdate){
+														if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+															continue;
+														}
 														if($tf_check_in_date==$sdate['check_in']){
 															$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 														}
@@ -3630,6 +3657,9 @@ class Apartment {
 												if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 													$apt_availability_dates = json_decode( $apt_availability_dates, true );
 													foreach($apt_availability_dates as $sdate){
+														if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+															continue;
+														}
 														if($tf_check_in_date==$sdate['check_in']){
 															$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 														}
@@ -3715,6 +3745,9 @@ class Apartment {
 											if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 												$apt_availability_dates = json_decode( $apt_availability_dates, true );
 												foreach($apt_availability_dates as $sdate){
+													if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+														continue;
+													}
 													if($tf_check_in_date==$sdate['check_in']){
 														$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 													}
@@ -3895,6 +3928,9 @@ class Apartment {
 											if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 												$apt_availability_dates = json_decode( $apt_availability_dates, true );
 												foreach($apt_availability_dates as $sdate){
+													if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+														continue;
+													}
 													if($tf_check_in_date==$sdate['check_in']){
 														$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 													}
@@ -3981,6 +4017,9 @@ class Apartment {
 									if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 										$apt_availability_dates = json_decode( $apt_availability_dates, true );
 										foreach($apt_availability_dates as $sdate){
+											if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+												continue;
+											}
 											if($tf_check_in_date==$sdate['check_in']){
 												$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 											}
@@ -4081,6 +4120,9 @@ class Apartment {
 									if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 										$apt_availability_dates = json_decode( $apt_availability_dates, true );
 										foreach($apt_availability_dates as $sdate){
+											if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+												continue;
+											}
 											if($tf_check_in_date==$sdate['check_in']){
 												$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 											}
@@ -4166,6 +4208,9 @@ class Apartment {
 								if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 									$apt_availability_dates = json_decode( $apt_availability_dates, true );
 									foreach($apt_availability_dates as $sdate){
+										if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+											continue;
+										}
 										if($tf_check_in_date==$sdate['check_in']){
 											$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 										}
@@ -4344,6 +4389,9 @@ class Apartment {
 								if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 									$apt_availability_dates = json_decode( $apt_availability_dates, true );
 									foreach($apt_availability_dates as $sdate){
+										if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+											continue;
+										}
 										if($tf_check_in_date==$sdate['check_in']){
 											$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 										}
