@@ -1880,7 +1880,7 @@ class Hotel {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1890,8 +1890,8 @@ class Hotel {
                                     $(".tf_hotel_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
                                     $(".tf_hotel_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf_hotel_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
                                     $(".tf_hotel_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
                                 }
@@ -2290,7 +2290,7 @@ class Hotel {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -2301,8 +2301,8 @@ class Hotel {
                                     $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
                                     $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkin_dates span.year").html(startDate.getFullYear());
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.date").html(endDate.getDate());
                                     $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
                                     $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.year").html(endDate.getFullYear());
@@ -2925,7 +2925,7 @@ class Hotel {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -2935,8 +2935,8 @@ class Hotel {
                                     $(".tf-single-template__two .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
                                     $(".tf-single-template__two .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf-single-template__two .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
                                     $(".tf-single-template__two .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                 }

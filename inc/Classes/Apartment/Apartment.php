@@ -597,22 +597,22 @@ class Apartment {
 						},
 					});
 
-					function dateSetToFields(selectedDates, instance) {
-						if (selectedDates.length === 2) {
-							const monthNames = [
-								"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-								"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+						function dateSetToFields(selectedDates, instance) {
+							if (selectedDates.length >= 1) {
+								const monthNames = [
+									"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+									"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 							];
 							if(selectedDates[0]){
 								const startDate = selectedDates[0];
 								$(".tf_apartment_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
 								$(".tf_apartment_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
 							}
-							if(selectedDates[1]){
-								const endDate = selectedDates[1];
-								$(".tf_apartment_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
-								$(".tf_apartment_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
-							}
+								const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+								if(endDate){
+									$(".tf_apartment_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
+									$(".tf_apartment_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
+								}
 						}
 					}
 
@@ -1005,7 +1005,7 @@ class Apartment {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1016,8 +1016,8 @@ class Apartment {
                                     $(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
                                     $(".tf_checkin_dates span.year").html(startDate.getFullYear());
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf_checkout_dates span.date").html(endDate.getDate());
                                     $(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
                                     $(".tf_checkout_dates span.year").html(endDate.getFullYear());
@@ -2005,12 +2005,13 @@ class Apartment {
 						
 						var dates = instance.altInput.value.split(' - ');
 
-                        if (dates.length === 2) {
+                        if (dates.length >= 1) {
                             if (dates[0]) {
                                 $(".tf-apartment-design-one-form #check-in-date").val(dates[0]);
                             }
-                            if (dates[1]) {
-                                $(".tf-apartment-design-one-form #check-out-date").val(dates[1]);
+                            const checkOutDate = dates.length === 2 ? dates[1] : dates[0];
+                            if (checkOutDate) {
+                                $(".tf-apartment-design-one-form #check-out-date").val(checkOutDate);
                             }
                         }
                     }

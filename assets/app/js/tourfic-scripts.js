@@ -3636,30 +3636,14 @@ function convertTo24HourFormat(timeStr) {
                 $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
             }
             function dateSetToFields(selectedDates, instance) {
-                if (selectedDates.length === 1) {
+                if (selectedDates.length >= 1) {
                     const monthNames = [
                         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
                     ];
-                    if(selectedDates[0]){
-                        const startDate = selectedDates[0];
-                        $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-date").html(startDate.getDate());
-                        $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
-                    }
-                }
-                if (selectedDates.length === 2) {
-                    const monthNames = [
-                        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-                    ];
-                    if(selectedDates[0]){
-                        const startDate = selectedDates[0];
-                        $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout  span.tf-booking-date").html(startDate.getDate());
-                        $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
-                    }
-                    if(selectedDates[1]){
-                        const endDate = selectedDates[1];
-                        $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout  span.tf-booking-date").html(endDate.getDate());
+                    const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                    if(endDate){
+                        $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-date").html(endDate.getDate());
                         $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                     }
                 }
