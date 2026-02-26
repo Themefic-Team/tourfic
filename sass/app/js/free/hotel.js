@@ -116,7 +116,7 @@
             }
         });
 
-        $('#tf-single-hotel-avail .tf-submit').on('click', function (e) {
+        $(document).on('click', '#tf-single-hotel-avail .tf-submit', function (e) {
             e.preventDefault();
             e.stopPropagation();
             tfRoomFilter();

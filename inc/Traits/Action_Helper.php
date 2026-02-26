@@ -72,7 +72,7 @@ trait Action_Helper {
 	function tf_ask_question_modal() {
 
 		// Allowed post types
-		$allowed_post_types = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental' );
+		$allowed_post_types = apply_filters( 'tf_ask_question_post_types', array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental' ));
 
 		// Ensure we're on a singular page and correct post type
 		if ( ! is_singular( $allowed_post_types ) && ! is_post_type_archive( $allowed_post_types ) ) {

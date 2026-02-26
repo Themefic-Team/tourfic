@@ -547,7 +547,7 @@
         * New Template Itinerary Accordion
         * @author: Jahid
         */
-        $('.tf-itinerary-title').on("click", function () {
+        $(document).on('click', '.tf-itinerary-title', function () {
             var $this = $(this);
             if (!$this.hasClass("active")) {
                 $(".tf-itinerary-content-box").slideUp(400);
@@ -760,7 +760,7 @@
           });
 
         //Template 2 Mobile Booking Btn
-        $('.tf-single-template__one .tf-booking-mobile-btn').on('click', function (e) {
+        $(document).on('click', '.tf-single-template__one .tf-booking-mobile-btn', function (e) {
             e.preventDefault();
             e.stopPropagation();
             $(this).closest('.tf-bottom-booking-bar').toggleClass('mobile-active');

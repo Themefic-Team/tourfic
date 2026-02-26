@@ -38,7 +38,7 @@ class Ask_Question extends \WP_Widget {
         $subtitle = isset( $instance['subtitle'] ) ? $instance['subtitle'] : esc_html__( 'Find more info in the FAQ section.', 'tourfic' );
         $btn_label = isset( $instance['btn_label'] ) ? $instance['btn_label'] : esc_html__( 'Ask a question', 'tourfic' );
 
-        if ( !is_singular( array( 'tf_hotel', 'tf_tours' ) ) ) {
+        if ( !is_singular( array( 'tf_hotel', 'tf_tours',) ) ) {
             return;
         }
 

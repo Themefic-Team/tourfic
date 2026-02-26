@@ -1842,7 +1842,7 @@ function convertTo24HourFormat(timeStr) {
             }
         });
 
-        $('#tf-single-hotel-avail .tf-submit').on('click', function (e) {
+        $(document).on('click', '#tf-single-hotel-avail .tf-submit', function (e) {
             e.preventDefault();
             e.stopPropagation();
             tfRoomFilter();
@@ -3132,7 +3132,7 @@ function convertTo24HourFormat(timeStr) {
         * New Template Itinerary Accordion
         * @author: Jahid
         */
-        $('.tf-itinerary-title').on("click", function () {
+        $(document).on('click', '.tf-itinerary-title', function () {
             var $this = $(this);
             if (!$this.hasClass("active")) {
                 $(".tf-itinerary-content-box").slideUp(400);
@@ -3345,7 +3345,7 @@ function convertTo24HourFormat(timeStr) {
           });
 
         //Template 2 Mobile Booking Btn
-        $('.tf-single-template__one .tf-booking-mobile-btn').on('click', function (e) {
+        $(document).on('click', '.tf-single-template__one .tf-booking-mobile-btn', function (e) {
             e.preventDefault();
             e.stopPropagation();
             $(this).closest('.tf-bottom-booking-bar').toggleClass('mobile-active');
@@ -4401,14 +4401,14 @@ function convertTo24HourFormat(timeStr) {
          * Share buttons
          */
         // Toggle share buttons
-        $('.share-toggle[data-toggle="true"]').on("click", function (e) {
+        $(document).on("click", '.share-toggle[data-toggle="true"]', function (e) {
             e.preventDefault();
             var target = $(this).attr('href');
             $(target).slideToggle('fast');
         });
 
         // Copy button
-        $('button#share_link_button').on("click", function () {
+        $(document).on("click", 'button#share_link_button', function () {
             $(this).addClass('copied');
             $(this).children('span').css('display', 'block');
             setTimeout(function () {
@@ -4925,21 +4925,21 @@ function convertTo24HourFormat(timeStr) {
          * Open/close horizontal search form persons panel
          */
         // Adult, Child, Room Selection toggle
-        $(".tf_selectperson-wrap .tf_input-inner,.tf_person-selection-wrap .tf_person-selection-inner").on("click", function () {
+        $(document).on("click", ".tf_selectperson-wrap .tf_input-inner,.tf_person-selection-wrap .tf_person-selection-inner", function () {
             $('.tf_acrselection-wrap').slideToggle('fast');
         });
         // Close
         document.addEventListener("click", function (event) {
             if (!$(event.target).closest(".tf_selectperson-wrap, .tf_acrselection-wrap, .tf-booking-form-guest-and-room").length) {
                 $(".tf_acrselection-wrap, .tf_person-selection-wrap").slideUp("fast");
-            }
+            } 
         });
 
         /**
          * Number/text change horizontal search form
          */
         // Number Increment
-        $('.acr-inc, .quanity-acr-inc').on('click', function (e) {
+        $(document).on('click', '.acr-inc, .quanity-acr-inc', function (e) {
             var input = $(this).parent().find('input');
             var max = input.attr('max') ? input.attr('max') : 999;
             if(input.attr('data-max')){
@@ -4964,7 +4964,7 @@ function convertTo24HourFormat(timeStr) {
         });
 
         // Number Decrement
-        $('.acr-dec, .quanity-acr-dec').on('click', function (e) {
+        $(document).on('click', '.acr-dec, .quanity-acr-dec', function (e) {
 
             var input = $(this).parent().find('input');
             var min = input.attr('min') ? input.attr('min') : 0;
@@ -4990,13 +4990,11 @@ function convertTo24HourFormat(timeStr) {
         $(document).on('change', '#adults', function () {
             let thisEml = $(this);
             let thisVal = thisEml.val();
-
             if (thisVal > 1) {
                 $('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult + 's');
             } else {
                 $('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult);
             }
-
         });
 
         // Children change trigger
@@ -5279,8 +5277,7 @@ function convertTo24HourFormat(timeStr) {
         // End Feed Ajax Trigger
 
         // Hotel and Tour Advance Search form
-
-        $(".tf_selectdate-wrap.tf_more_info_selections .tf_input-inner").on("click", function () {
+        $(document).on('click', '.tf_selectdate-wrap.tf_more_info_selections .tf_input-inner', function () {
             $('.tf-more-info').toggleClass('show');
         });
         $(document).on("click", function (event) {
@@ -5290,7 +5287,7 @@ function convertTo24HourFormat(timeStr) {
         });
 
         // FAQ Accordion
-        $('.tf-faq-title').on("click", function () {
+        $(document).on('click', '.tf-faq-title', function () {
             var $this = $(this);
             if (!$this.hasClass("active")) {
                 $(".tf-faq-desc").slideUp(400);
@@ -5306,7 +5303,7 @@ function convertTo24HourFormat(timeStr) {
         * New Template FAQ Accordion
         * @author: Jahid
         */
-        $('.tf-faq-collaps').on("click", function () {
+        $(document).on( 'click', '.tf-faq-collaps', function () {
             var $this = $(this);
             if (!$this.hasClass("active")) {
                 $(".tf-faq-content").slideUp(400);
@@ -5822,7 +5819,7 @@ function convertTo24HourFormat(timeStr) {
 
             });
         }
-        $('body').on('click', '.tf-booking-popup-btn', function (e) {
+        $(document).on('click', '.tf-booking-popup-btn', function (e) {
             e.preventDefault();
             $(".tf-withoutpayment-booking input[type='text'], .tf-withoutpayment-booking input[type='email'], .tf-withoutpayment-booking input[type='date'], .tf-withoutpayment-booking select, .tf-withoutpayment-booking textarea").val("");
 
@@ -6734,13 +6731,13 @@ jQuery(".tf-search__form__field__input").on("input", function() {
 });
 
 // Increment button
-jQuery(".acr-inc").on("click", function() {
+jQuery(document).on('click', '.acr-inc', function() {
     let inputField = jQuery(".tf-search__form__field__input");
     inputField.trigger("input");
 });
 
 // Decrement button
-jQuery(".acr-dec").on("click", function() {
+jQuery(document).on('click', '.acr-dec', function() {
     let inputField = jQuery(".tf-search__form__field__input");
     inputField.trigger("input");
 });

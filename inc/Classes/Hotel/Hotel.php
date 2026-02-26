@@ -3111,6 +3111,7 @@ class Hotel {
 					};
 					const dateRegex = regexMap['<?php echo esc_attr($hotel_date_format_for_users); ?>'];
 
+					
                     const checkinoutdateange = flatpickr(".tf-hotel-booking-sidebar #check-in-out-date", {
                         enableTime: false,
                         mode: "range",

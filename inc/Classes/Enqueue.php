@@ -66,12 +66,12 @@ class Enqueue {
 		$flatpickr_locale = ! empty( get_locale() ) ? get_locale() : 'en_US';
 		$allowed_locale   = array( 'ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN' );	
 		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
-		$tf_services = [
-			'apartment' => 'tf_apartment',
-			'carrentals' => 'tf_carrental',
-			'tour' => 'tf_tours',
-			'hotel' => 'tf_hotel',
-		];
+		$tf_services = apply_filters('tf_services_list', [
+			'apartment'   => 'tf_apartment',
+			'carrentals'  => 'tf_carrental',
+			'tour'        => 'tf_tours',
+			'hotel'       => 'tf_hotel',
+		]);
 
 		$tax_post_type = '';
         if (is_tax()) {
