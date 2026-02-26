@@ -271,8 +271,8 @@ class Car_Rental
                                 $(".tf-car-search-pickup-date span.month span").html(monthNames[startDate.getMonth()]);
                                 $('.tf_search_pickup_date').val(flatpickr.formatDate(startDate, "Y/m/d"));
                             }
-                            if (selectedDates[1]) {
-                                const endDate = selectedDates[1];
+                            const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                            if (endDate) {
                                 $(".tf-car-search-dropoff-date span.date").html(endDate.getDate());
                                 $(".tf-car-search-dropoff-date span.month span").html(monthNames[endDate.getMonth()]);
                                 $(".tf_search_dropoff_date").val(flatpickr.formatDate(endDate, "Y/m/d"));
@@ -505,14 +505,15 @@ class Car_Rental
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 if (selectedDates[0]) {
                                     const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
                                     $(".tf_pickup_date").val(startDate);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
-                                    $(".tf-select-date .tf_dropoff_date").val(endDate);
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
+                                    const formattedEndDate = flatpickr.formatDate(endDate, "Y/m/d");
+                                    $(".tf-select-date .tf_dropoff_date").val(formattedEndDate);
                                 }
                             }
                         }
@@ -765,8 +766,8 @@ class Car_Rental
                                 $(".tf_pickup_date .year").html(startDate.getFullYear());
                                 $(".tf_pickup_date_input").val(flatpickr.formatDate(startDate, "Y/m/d"));
                             }
-                            if (selectedDates[1]) {
-                                const endDate = selectedDates[1];
+                            const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                            if (endDate) {
                                 $(".tf_dropoff_date .date").html(endDate.getDate());
                                 $(".tf_dropoff_date .month").html(monthNames[endDate.getMonth()]);
                                 $(".tf_dropoff_date .year").html(endDate.getFullYear());
@@ -962,14 +963,15 @@ class Car_Rental
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 if (selectedDates[0]) {
                                     const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
                                     $("#tf-car-booking-form .tf_pickup_date").val(startDate);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
-                                    $("#tf-car-booking-form .tf_dropoff_date").val(endDate);
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
+                                    const formattedEndDate = flatpickr.formatDate(endDate, "Y/m/d");
+                                    $("#tf-car-booking-form .tf_dropoff_date").val(formattedEndDate);
                                 }
                             }
                         }

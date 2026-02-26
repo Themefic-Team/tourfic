@@ -1292,19 +1292,20 @@ class Room {
 									<?php } ?>
 								});
 
-								function dateSetToFields(selectedDates, instance) {
-									const format = '<?php echo esc_html( $date_format_for_users ); ?>';
-									if (selectedDates.length === 2) {
-										if (selectedDates[0]) {
-											let checkInDate = instance.formatDate(selectedDates[0], format);
-											$(".tf-room-booking-box #check_in_date").val(checkInDate);
-										}
+									function dateSetToFields(selectedDates, instance) {
+										const format = '<?php echo esc_html( $date_format_for_users ); ?>';
+										if (selectedDates.length >= 1) {
+											if (selectedDates[0]) {
+												let checkInDate = instance.formatDate(selectedDates[0], format);
+												$(".tf-room-booking-box #check_in_date").val(checkInDate);
+											}
 
-										if (selectedDates[1]) {
-											let checkOutDate = instance.formatDate(selectedDates[1], format);
-											$(".tf-room-booking-box #check_out_date").val(checkOutDate);
+											const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+											if (endDate) {
+												let checkOutDate = instance.formatDate(endDate, format);
+												$(".tf-room-booking-box #check_out_date").val(checkOutDate);
+											}
 										}
-									}
 								}
 							});
 						})(jQuery);
@@ -1623,7 +1624,7 @@ class Room {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1633,8 +1634,8 @@ class Room {
                                     $(".tf_room_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
                                     $(".tf_room_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf_room_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
                                     $(".tf_room_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
                                 }
@@ -1973,7 +1974,7 @@ class Room {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1984,8 +1985,8 @@ class Room {
                                     $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
                                     $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkin_dates span.year").html(startDate.getFullYear());
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkout_dates span.date").html(endDate.getDate());
                                     $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
                                     $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkout_dates span.year").html(endDate.getFullYear());
