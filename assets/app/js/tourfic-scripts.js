@@ -3894,7 +3894,7 @@ function convertTo24HourFormat(timeStr) {
         /**
          * Scroll to Review Section
          */
-        $(".tf-top-review a").on("click", function () {
+        $(document).on("click", ".tf-top-review a", function () {
             $('html, body').animate({
                 scrollTop: $("#tf-review").offset().top - 32
             }, 1000);
@@ -3903,7 +3903,7 @@ function convertTo24HourFormat(timeStr) {
         /**
          * Scroll to Map Section
          */
-        $(".tf-map-link a").on("click", function () {
+        $(document).on("click", ".tf-map-link a", function () {
             $('html, body').animate({
                 scrollTop: $("#tour-map").offset().top - 32
             }, 1000);
@@ -5001,7 +5001,6 @@ function convertTo24HourFormat(timeStr) {
         $(document).on('change', '#children', function () {
             let thisEml = $(this);
             let thisVal = thisEml.val();
-
             if (thisVal > 1) {
                 $('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children);
             } else {
@@ -5010,11 +5009,10 @@ function convertTo24HourFormat(timeStr) {
 
         });
 
-        // Infant change trigger
+        // // Infant change trigger
         $(document).on('change', '#infant', function () {
             let thisEml = $(this);
             let thisVal = thisEml.val();
-
             if (thisVal > 1) {
                 $('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
             } else {
@@ -5750,6 +5748,7 @@ function convertTo24HourFormat(timeStr) {
                 selectedPackage: selectedPackage
             };
 
+
             $.ajax({
                 type: 'post',
                 url: tf_params.ajax_url,
@@ -5838,7 +5837,7 @@ function convertTo24HourFormat(timeStr) {
             tourPopupBooking();
         });
 
-        $('.tf-single-person .acr-inc, .tf-single-person .acr-dec').on('click', function (e) {
+        $(document).on('click', '.tf-single-person .acr-inc, .tf-single-person .acr-dec', function (e) {
             tourPopupBooking();
         });
 
