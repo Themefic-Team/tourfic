@@ -11,7 +11,7 @@ $color-filling-bg: var(--tf-filling-background);
 $color-filling-fg: var(--tf-filling-foreground);
 $color-links: var(--tf-links-color, var(--tf-primary-color));
 
-$color-box-shadow: var(--tf-box-shadow, #e0e8ee52);
+$color-box-shadow: var(--tf-box-shadow);
 $color-links-box-shadow: 0 40px 40px 0 color-mix(in srgb, $color-links 16%, transparent), 0 32px 32px 0 color-mix(in srgb, $color-links 14%, transparent), 0 24px 24px 0 color-mix(in srgb, $color-links 12%, transparent), 0 20px 20px 0 color-mix(in srgb, $color-links 10%, transparent), 0 16px 16px 0 color-mix(in srgb, $color-links 8%, transparent), 0 12px 12px 0 color-mix(in srgb, $color-links 6%, transparent), 0 8px 8px 0 color-mix(in srgb, $color-links 4%, transparent), 0 4px 4px 0 color-mix(in srgb, $color-links 2%, transparent);
 
 $color-primary-light: #2051f5;
