@@ -118,6 +118,7 @@
         .tf-form-bottom-left{
             @include flexbox();
             gap: 24px;
+            width: 100%;
 
             @media #{$max1024} {
                 .tf-select-guests,
