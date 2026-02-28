@@ -12194,7 +12194,7 @@ div#tf-destinationautocomplete-list div:before {
   margin: 0;
   padding: 0;
   border: none;
-  color: var(--tf-primary);
+  color: var(--tf-links-color, var(--tf-primary-color));
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.5;
@@ -12211,7 +12211,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 .tf-single-template__one .tf-archive-room-details .tf-archive-filter .tf_widget .tf-room-result-price-range,
 .tf-archive-template__one .tf-archive-room-details .tf-archive-filter .tf_widget .tf-room-result-price-range {
-  padding-left: 14px;
+  padding-left: 24px;
   padding-right: 24px;
 }
 .tf-single-template__one .tf-archive-room-details .tf-archive-filter .tf_widget .tf-hotel-result-price-range,
@@ -12256,7 +12256,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 .tf-single-template__one .tf-archive-room-details .tf-archive-filter .tf_widget .al-range-slider__tooltip,
 .tf-archive-template__one .tf-archive-room-details .tf-archive-filter .tf_widget .al-range-slider__tooltip {
-  background: var(--tf-primary);
+  background: var(--tf-links-color, var(--tf-primary-color));
   border-radius: 5px;
   box-shadow: none;
   padding: 3px 10px;
@@ -21658,7 +21658,7 @@ div#tf-destinationautocomplete-list div:before {
 .single-tf_room .tf-single-template__two .tf-review-widget button.tf_btn_outline svg path {
   stroke: var(--tf-links-color, var(--tf-primary-color));
 }
-.single-tf_room .tf-single-template__two .tf-review-widget button.tf_btn_outline:hover {
+.single-tf_room .tf-single-template__two .tf-review-widget button.tf_btn_outline:focus, .single-tf_room .tf-single-template__two .tf-review-widget button.tf_btn_outline:hover {
   background-color: transparent;
 }
 .single-tf_room .tf-single-template__two .tf-review-data-inner .tf-review-data-average .avg-review {
@@ -21710,7 +21710,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 .single-tf_room .tf-single-template__two .tf-review-form-wrapper {
   background: var(--tf-filling-foreground);
-  padding: 24px;
+  padding: 24px 0;
   display: none;
   flex-direction: column;
   gap: 16px;
@@ -21756,9 +21756,12 @@ div#tf-destinationautocomplete-list div:before {
 }
 .single-tf_room .tf-single-template__two .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit .tf_btn {
   width: 100%;
-  border-radius: 0;
+  border-radius: 30px;
   padding: 16px 32px;
   font-size: 1rem;
+}
+.single-tf_room .tf-single-template__two .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit .tf_btn:hover {
+  box-shadow: 0 40px 40px 0 color-mix(in srgb, var(--tf-links-color, var(--tf-primary-color)) 16%, transparent), 0 32px 32px 0 color-mix(in srgb, var(--tf-links-color, var(--tf-primary-color)) 14%, transparent), 0 24px 24px 0 color-mix(in srgb, var(--tf-links-color, var(--tf-primary-color)) 12%, transparent), 0 20px 20px 0 color-mix(in srgb, var(--tf-links-color, var(--tf-primary-color)) 10%, transparent), 0 16px 16px 0 color-mix(in srgb, var(--tf-links-color, var(--tf-primary-color)) 8%, transparent), 0 12px 12px 0 color-mix(in srgb, var(--tf-links-color, var(--tf-primary-color)) 6%, transparent), 0 8px 8px 0 color-mix(in srgb, var(--tf-links-color, var(--tf-primary-color)) 4%, transparent), 0 4px 4px 0 color-mix(in srgb, var(--tf-links-color, var(--tf-primary-color)) 2%, transparent);
 }
 .single-tf_room .tf-single-template__two .tf-review-form-wrapper .tf-review-form-container form input[type=text], .single-tf_room .tf-single-template__two .tf-review-form-wrapper .tf-review-form-container form textarea {
   border: 1px solid var(--tf-border-lite);

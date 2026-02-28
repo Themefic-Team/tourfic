@@ -5538,6 +5538,7 @@
                         }
                     }
 
+                    &:focus,
                     &:hover{
                         background-color: transparent;
                     }
@@ -5601,7 +5602,7 @@
             }
             .tf-review-form-wrapper{
                 background: $color-filling-fg;
-                padding: 24px;
+                padding: 24px 0;
                 display: none;
                 flex-direction: column;
                 gap: 16px;
@@ -5647,9 +5648,13 @@
 
                             .tf_btn{
                                 width: 100%;
-                                border-radius: 0;
+                                border-radius: 30px;
                                 padding: 16px 32px;
                                 font-size: 1rem;
+
+                                &:hover{
+                                    box-shadow: $color-links-box-shadow;
+                                }
                             }
                         }
                         input[type="text"],textarea{

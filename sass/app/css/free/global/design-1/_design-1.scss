@@ -818,7 +818,7 @@
                         margin: 0;
                         padding: 0;
                         border: none;
-                        color: $color-primary;
+                        color: $color-links;
                         font-size: 1rem;
                         font-weight: 700;
                         line-height: 1.5;
@@ -835,7 +835,7 @@
 
                 .tf_widget {
                     .tf-room-result-price-range{
-                        padding-left: 14px;
+                        padding-left: 24px;
                         padding-right: 24px;
                     }
                     .tf-hotel-result-price-range,
@@ -880,7 +880,7 @@
                     }
 
                     .al-range-slider__tooltip {
-                        background: $color-primary;
+                        background: $color-links;
                         border-radius: 5px;
                         box-shadow: none;
                         padding: 3px 10px;
