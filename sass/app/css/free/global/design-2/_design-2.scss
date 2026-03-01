@@ -1356,6 +1356,9 @@
                         }
                     }
                     .tf-available-room-content{
+                        &.tf-room-options-content{
+                            width: 100%;
+                        }
                         @media only screen and (max-width: 1600px) {
                             width: calc(100% - 230px);
                         }

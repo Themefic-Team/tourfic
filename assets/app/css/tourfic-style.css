@@ -16819,6 +16819,9 @@ div#tf-destinationautocomplete-list div:before {
     width: 105px;
   }
 }
+.single-tf_hotel .tf-single-template__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content.tf-room-options-content {
+  width: 100%;
+}
 @media only screen and (max-width: 1600px) {
   .single-tf_hotel .tf-single-template__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content {
     width: calc(100% - 230px);
