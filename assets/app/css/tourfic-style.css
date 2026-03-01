@@ -11780,6 +11780,14 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__one .tf-archive-room-details .tf-room-item-card .tf-room-gallery .tf-room-ratings i {
   color: #E29A00;
 }
+.tf-single-template__one .tf-archive-room-details .tf-room-item-card .tf-room-thumb,
+.tf-archive-template__one .tf-archive-room-details .tf-room-item-card .tf-room-thumb {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
 .tf-single-template__one .tf-archive-room-details .tf-room-item-card .tf-room-thumb img,
 .tf-archive-template__one .tf-archive-room-details .tf-room-item-card .tf-room-thumb img {
   height: 280px;
@@ -21371,6 +21379,10 @@ div#tf-destinationautocomplete-list div:before {
   font-weight: 700;
   line-height: 1.5;
   margin-bottom: 16px;
+}
+.single-tf_room .tf-single-template__two .tf-see-less-description,
+.single-tf_room .tf-single-template__two .tf-see-description {
+  color: var(--tf-links-color, var(--tf-primary-color)) !important;
 }
 .single-tf_room .tf-single-template__two .tf-content-wrapper {
   padding: 48px 0;

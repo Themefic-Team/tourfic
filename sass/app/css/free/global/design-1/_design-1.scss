@@ -481,6 +481,8 @@
                     }
                 }
                 .tf-room-thumb{
+                    @include flexbox();
+                    
                     img{
                         height: 280px;
                         width: 100%;
