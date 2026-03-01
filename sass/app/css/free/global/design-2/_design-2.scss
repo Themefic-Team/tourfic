@@ -630,6 +630,7 @@
                         @include flexbox();
                         justify-content: space-between;
                         padding-bottom: 24px;
+                        width: 100%;
         
                         @media #{$max1024}{
                             display: block;
