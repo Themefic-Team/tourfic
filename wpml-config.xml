@@ -1,0 +1,51 @@
+<wpml-config>
+    <admin-texts>
+        <key name="tf_settings">
+            <key name="book-confirm-field">
+                <key name="*">
+                    <key name="reg-field-label" />
+                </key>
+            </key>
+            <key name="tf-week-day-flatpickr"/>
+            <key name="rt-title"/>
+            <key name="rt-description"/>
+            <key name="tour_booking_form_button_text"/>
+            <key name="itinerary-builder-setings">
+                <key name="company_desc"/>
+                <key name="company_address"/>
+                <key name="expert_label"/>
+                <key name="expert_name"/>
+                <key name="itinerary-downloader-title"/>
+                <key name="itinerary-downloader-desc"/>
+                <key name="itinerary-downloader-button"/>
+                <key name="itinerary-field">
+					<key name="*">
+						<key name="sleep-mode-title" />
+					</key>
+				</key>
+				<key name="meals">
+					<key name="*">
+						<key name="meal" />
+					</key>
+				</key>
+            </key>
+            <key name="deposit-title"/>
+            <key name="deposit-subtitle"/>
+            <key name="booking-confirmation-msg"/>
+            <key name="tour_popup_extras_text"/>
+            <key name="tour_traveler_details_text"/>
+            <key name="hotel_booking_form_button_text"/>
+            <key name="hotel_booking_check_button_text"/>
+
+            <!-- <key name="*">
+                <key name="r-hotel">
+                    <key name="*">
+                        <key name="*" />
+                    </key>
+                </key>
+            </key> -->
+
+        </key>
+    </admin-texts>
+            
+</wpml-config>

@@ -1,0 +1,18 @@
+{
+    "exclude": [
+        "README.md",
+        "appsero.json",
+        "composer.json",
+        "composer.lock",
+        ".gitignore",
+        "action-hook.md",
+        "webpack-config.js",
+        "package-lock.json",
+        "package.json",
+        "sass",
+        "assets/admin/css/tourfic-admin.css.map",
+        "assets/admin/css/tourfic-admin.min.css.map",
+        "tourfic/assets/app/css/tourfic-style.css.map",
+        "tourfic/assets/app/css/tourfic-style.min.css.map"
+    ]
+}

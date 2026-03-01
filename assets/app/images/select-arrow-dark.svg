@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 5" width="8" height="5">
+	<title>Frame-svg</title>
+	<style>
+		.s0 { fill: #595349 } 
+	</style>
+	<g id="Frame">
+		<path id="Vector" class="s0" d="m4 4.7l-4-4h8z"/>
+	</g>
+</svg>
