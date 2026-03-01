@@ -572,7 +572,13 @@ class Hotel {
 
 		if ( ! empty( $rooms_meta ) ):
 			$rooms_meta = array_filter( $rooms_meta, function ( $value ) {
-				return ! empty( $value ) && empty( $value['enable'] ) ? $value['enable'] : '' != '0';
+				if ( empty( $value ) || ! is_array( $value ) ) {
+					return false;
+				}
+				if ( isset( $value['enable'] ) && (string) $value['enable'] === '0' ) {
+					return false;
+				}
+				return true;
 			} );
 		endif;
 
@@ -622,9 +628,10 @@ class Hotel {
 		}
 
 		$room_result = array_filter( $back_rooms );
+		$room_validation = ( ! empty( $room_result ) && $room_counter > 0 ) || ( empty( $room_result ) && ! empty( $rooms_meta ) );
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && $room_validation ) {
 
 			// Check custom date range status of room
 			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
@@ -796,7 +803,7 @@ class Hotel {
 		}
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $child_counter == 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $child_counter == 0 && $room_validation ) {
 
 			// Check custom date range status of room
 			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
@@ -1024,7 +1031,13 @@ class Hotel {
 		// Remove disabled rooms
 		if ( ! empty( $rooms_meta ) ):
 			$rooms_meta = array_filter( $rooms_meta, function ( $value ) {
-				return ! empty( $value ) && empty( $value['enable'] ) ? $value['enable'] : '' != '0';
+				if ( empty( $value ) || ! is_array( $value ) ) {
+					return false;
+				}
+				if ( isset( $value['enable'] ) && (string) $value['enable'] === '0' ) {
+					return false;
+				}
+				return true;
 			} );
 		endif;
 
@@ -1074,9 +1087,10 @@ class Hotel {
 		}
 
 		$room_result = array_filter( $back_rooms );
+		$room_validation = ( ! empty( $room_result ) && $room_counter > 0 ) || ( empty( $room_result ) && ! empty( $rooms_meta ) );
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && $room_validation ) {
 
 			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 				foreach ( $rooms as $_room ) {
@@ -1130,7 +1144,7 @@ class Hotel {
 			}
 
 		}
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $room_validation ) {
 			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 				foreach ( $rooms as $_room ) {
 					$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
@@ -1866,7 +1880,7 @@ class Hotel {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1876,8 +1890,8 @@ class Hotel {
                                     $(".tf_hotel_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
                                     $(".tf_hotel_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf_hotel_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
                                     $(".tf_hotel_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
                                 }
@@ -2276,7 +2290,7 @@ class Hotel {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -2287,8 +2301,8 @@ class Hotel {
                                     $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
                                     $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkin_dates span.year").html(startDate.getFullYear());
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.date").html(endDate.getDate());
                                     $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
                                     $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.year").html(endDate.getFullYear());
@@ -2911,7 +2925,7 @@ class Hotel {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -2921,8 +2935,8 @@ class Hotel {
                                     $(".tf-single-template__two .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
                                     $(".tf-single-template__two .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf-single-template__two .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
                                     $(".tf-single-template__two .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                 }

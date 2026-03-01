@@ -37,7 +37,14 @@ class Price_Filter extends \WP_Widget {
         ?>
 		<!-- Start Price Range widget -->
 		<?php 
-        $tf_query_taxonomy = !empty( get_taxonomy(get_queried_object()) ) ? get_taxonomy(get_queried_object()->taxonomy)->object_type : '' ;
+        $queried_object = get_queried_object();
+        $tf_query_taxonomy = array();
+
+        if ( is_tax() && ! empty( $queried_object->taxonomy ) ) {
+            $queried_taxonomy = get_taxonomy( $queried_object->taxonomy );
+            $tf_query_taxonomy = ! empty( $queried_taxonomy->object_type ) ? (array) $queried_taxonomy->object_type : array();
+        }
+
         if( is_post_type_archive('tf_tours') || is_post_type_archive('tf_hotel') || is_post_type_archive('tf_apartment') || is_post_type_archive('tf_carrental') || is_post_type_archive('tf_room') || ( !empty( $tf_query_taxonomy ) ) ){
             extract( $args );
             $title = apply_filters( 'widget_title', $instance['title'] );
@@ -81,7 +88,7 @@ class Price_Filter extends \WP_Widget {
                 <div class="tf-car-result-price-range"></div>
             <?php 
             }
-            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && !is_post_type_archive('tf_carrental') && !is_post_type_archive('tf_room') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_hotel" ) ){
+            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && !is_post_type_archive('tf_carrental') && !is_post_type_archive('tf_room') && in_array( 'tf_hotel', $tf_query_taxonomy, true ) ){
                 ?>
                     <div class="tf-widget-title">
                         <span><?php esc_html_e("Hotel Price Range","tourfic"); ?></span> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)
@@ -89,7 +96,7 @@ class Price_Filter extends \WP_Widget {
                     <div class="tf-hotel-result-price-range"></div>
                 <?php
             } 
-            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && !is_post_type_archive('tf_carrental') && !is_post_type_archive('tf_room') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_tours" ) ){
+            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && !is_post_type_archive('tf_carrental') && !is_post_type_archive('tf_room') && in_array( 'tf_tours', $tf_query_taxonomy, true ) ){
                 ?>
                     <div class="tf-widget-title">
                         <span><?php esc_html_e("Tour Price Range","tourfic"); ?> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)</span>
@@ -97,7 +104,7 @@ class Price_Filter extends \WP_Widget {
                     <div class="tf-tour-result-price-range"></div>
                 <?php
             }
-            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && !is_post_type_archive('tf_carrental') && !is_post_type_archive('tf_room') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_apartment" ) ){
+            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && !is_post_type_archive('tf_carrental') && !is_post_type_archive('tf_room') && in_array( 'tf_apartment', $tf_query_taxonomy, true ) ){
                 ?>
                     <div class="tf-widget-title">
                         <span><?php esc_html_e("Apartment Price Range","tourfic"); ?> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)</span>
@@ -105,7 +112,7 @@ class Price_Filter extends \WP_Widget {
                     <div class="tf-apartment-result-price-range"></div>
                 <?php
             }
-            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && !is_post_type_archive('tf_carrental') && !is_post_type_archive('tf_room') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_carrental" ) ){
+            if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && !is_post_type_archive('tf_carrental') && !is_post_type_archive('tf_room') && in_array( 'tf_carrental', $tf_query_taxonomy, true ) ){
                 ?>
                     <div class="tf-widget-title">
                         <span><?php esc_html_e("Price Range","tourfic"); ?> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)</span>
