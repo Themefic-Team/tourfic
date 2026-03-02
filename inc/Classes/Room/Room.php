@@ -1765,7 +1765,7 @@ class Room {
                 })(jQuery);
             </script>
         <?php } elseif (!empty($design) && 4 == $design) { ?>
-            <form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tf_room_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
+            <form class="tf-archive-search-box-wrapper tf-search__form tf-search__form--room-no-location tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tf_room_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
                 <fieldset class="tf-search__form__fieldset">
 
                     <div class="tf-search__form__fieldset__middle">

@@ -23759,4 +23759,38 @@ div#tf-destinationautocomplete-list div:before {
   transform: translate(-50%, -50%);
 }
 
+.tf-booking-forms-wrapper #tf_room_aval_check.tf-search__form--room-no-location.tf-shortcode-design-4 .tf-search__form__fieldset {
+  gap: 32px;
+}
+
+.tf-booking-forms-wrapper #tf_room_aval_check.tf-search__form--room-no-location.tf-shortcode-design-4 .tf-search__form__fieldset__middle {
+  justify-content: flex-start;
+  gap: 32px;
+}
+
+@media only screen and (max-width: 1366px) {
+  .tf-booking-forms-wrapper #tf_room_aval_check.tf-search__form--room-no-location.tf-shortcode-design-4 .tf-search__form__fieldset {
+    gap: 24px;
+  }
+  .tf-booking-forms-wrapper #tf_room_aval_check.tf-search__form--room-no-location.tf-shortcode-design-4 .tf-search__form__fieldset__middle {
+    gap: 24px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tf-booking-forms-wrapper #tf_room_aval_check.tf-search__form--room-no-location.tf-shortcode-design-4 .tf-search__form__fieldset__middle {
+    gap: 16px;
+    row-gap: 40px;
+  }
+  .tf-booking-forms-wrapper #tf_room_aval_check.tf-search__form--room-no-location.tf-shortcode-design-4 .tf-search__form__label {
+    margin-bottom: 14px;
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-booking-forms-wrapper #tf_room_aval_check.tf-search__form--room-no-location.tf-shortcode-design-4 .tf-search__form__fieldset__middle {
+    row-gap: 44px;
+  }
+}
+
 /*# sourceMappingURL=tourfic-style.css.map*/
