@@ -422,7 +422,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fix: Design-4 room form spacing issue. (room-search)
 - Fix: Archive view titles escaping.
 - Fix: Apartment search excludes unavailable custom dates.
-- Fix: Same-day flatpickr range selections across booking UIs. (date-display)
+- Fix: Same-day flatpickr range selections across booking.
 - Fix: Restore price filters on taxonomy pages.
 - Fix: Car rental pricing and validation messages translatable.
 - Tweak: Tour tab date labels updated to "Start & End Dates". (tour-search)
