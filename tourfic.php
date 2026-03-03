@@ -7,7 +7,7 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.21.0
+ * Version:         2.21.1
  * Tested up to:    6.9
  * WC tested up to: 10.4
  * Requires PHP:    7.4 
@@ -15,7 +15,7 @@
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
- 
+
 // Don't load directly
 defined( 'ABSPATH' ) || exit;
 
@@ -27,7 +27,7 @@ final class Tourfic {
 	 * @var string
 	 */
 
-	const VERSION = '2.21.0';
+	const VERSION = '2.21.1';
 
 	/**
 	 * Minimum PHP version required.

@@ -214,7 +214,7 @@
                             width: 100%;
                             padding: 10px 16px;
                         }
-                      
+
                         .tf-available-room-content-left{
                             @media #{$max768} {
                                 width: 100%;
@@ -223,7 +223,7 @@
                                 @media #{$max768} {
                                     display: flex;
                                     justify-content: space-between;
-                                   
+
                                     margin-bottom: 24px;
                                 }
                                 @media #{$max575} {
@@ -323,7 +323,7 @@
             .tf-booking-form {
                 display: flex;
                 margin: 0;
-                
+
                 .tf-booking-form-fields {
                     display: flex;
                     width: 78%;
@@ -338,7 +338,7 @@
                         display: flex;
                         flex-direction: column;
                         position: relative;
-                        
+
                         &.tf-booking-form-guest-and-room {
                             width: 30%;
                             padding-left: 25px;
@@ -592,21 +592,21 @@
                 }
                 .tf-available-room-contents{
                     width: calc(100% - 230px);
-        
+
                     @media #{$max1024}{
                         width: 100%;
                     }
-        
+
                     .tf-section-title {
                         margin-bottom: 0;
                         color: $color-heading;
                         padding: 24px 24px 0;
                     }
-        
+
                     h4{
                         margin-bottom: 16px;
                     }
-        
+
                     .tf-room-info-list{
                         margin-bottom: 24px ;
                     }
@@ -616,11 +616,11 @@
                         flex-direction: column;
                         gap: 12px 5px;
                     }
-        
+
                     .tf-available-room-content {
                         width: 100% ;
                         padding-bottom: 0;
-        
+
                         &:last-child .tf-room-options-content-inner{
                             border-bottom: none;
                         }
@@ -630,7 +630,7 @@
                         @include flexbox();
                         justify-content: space-between;
                         padding-bottom: 24px;
-        
+
                         @media #{$max1024}{
                             display: block;
                         }
@@ -640,9 +640,10 @@
                     width: calc(100% - 230px);
                     display: flex;
                     flex-wrap: nowrap;
+                    flex: 1;
                     justify-content: space-between;
                     padding: 24px;
-        
+
                     .tf-available-room-content-left {
                         width: auto;
                         display: flex;
@@ -929,7 +930,7 @@
                     width: fit-content;
                     margin-left: auto;
                 }
-         
+
             }
             .tf-filter{
                 padding: 0px;
@@ -953,7 +954,7 @@
                 width: 222px;
                 padding: 16px;
             }
-        
+
             &.tf-archive-right{
                 background-color: $color-filling-fg;
                 padding: 32px;
@@ -971,7 +972,7 @@
                     top: 100px;
                 }
             }
-        
+
             .tf_widget{
                 background-color: transparent;
                 border: 0px solid;
@@ -1229,7 +1230,7 @@
                 max-width: none;
                 padding-left: 45px;
                 padding-right: 45px;
-            } 
+            }
         }
     }
 }
@@ -1277,7 +1278,7 @@
                         }
                     }
                 }
-        
+
                 button{
                     background: $color-primary;
                     border-color: $color-primary;
@@ -1944,7 +1945,7 @@
             @media #{$max575}{
                 padding: 16px 0;
             }
-          
+
             h2{
                 color: $color-heading;
                 font-size: 2rem;
@@ -2107,7 +2108,7 @@
                     @media #{$max768}{
                         top: -40px;
                     }
-                   
+
                     &::before{
                         font-family: 'Remixicon';
                         font-size: 1.5rem;
@@ -3119,7 +3120,7 @@
                     }
                 }
             }
-            .tf-field-calander.check-in-time-div{ 
+            .tf-field-calander.check-in-time-div{
                 display: none;
                 .tf-field{
                     padding: 18.7px 40px;
@@ -3338,7 +3339,7 @@
                                     @media #{$max575}{
                                         width: 50%;
                                     }
-                                    
+
                                     i{
                                         margin-right: 8px;
                                         font-size: 1.25rem;
@@ -5114,7 +5115,7 @@
                     }
                 }
               }
-                 
+
             }
         }
     }
@@ -5255,17 +5256,17 @@
                         }
 
                         .tf-overview-popular-facilities {
-                            
+
                             &>ul {
                                 gap: 12px 32px;
-                                
+
                                 li {
                                     width: calc(33.33% - 21.33px);
 
                                     @media #{$max575}{
                                         width: calc(50% - 16px);
                                     }
-                                    
+
                                     i{
                                         margin-right: 8px;
                                         font-size: 1.25rem;
@@ -5343,7 +5344,7 @@
                         margin-bottom: 0;
                         border: 1px solid $color-border-lite;
                         transition: all 0.2s ease;
-                        
+
                         &.info-select{
                             padding: 9px 20px;
                             cursor: pointer;
@@ -5359,12 +5360,12 @@
                             @media #{$max1024} {
                                 width: 100%;
                             }
-                            
+
                             .acr-select{
                                 @media #{$max1024} {
                                     width: 100%;
                                 }
-                                
+
                                 .acr-dec,
                                 .acr-inc,
                                 .tf-archive-guest-info {
@@ -5465,7 +5466,7 @@
                                 background: $color-white;
                                 margin-bottom: 4px;
                                 &:last-child{
-                                    margin-bottom: 0;   
+                                    margin-bottom: 0;
                                 }
                                 .acr-label{
                                     padding: 8px 8px 8px 20px;
@@ -5499,7 +5500,7 @@
                                     padding: 5px;
                                 }
                             }
-                          
+
                         }
                     }
 
@@ -5570,7 +5571,7 @@
                                 }
                             }
 
-                            
+
                         }
 
                         .tf-reviews-text p {
@@ -5648,7 +5649,7 @@
                         margin-bottom: 0;
                         border: 1px solid $color-border-lite;
                         transition: all 0.2s ease;
-                        
+
                         &.info-select{
                             padding: 9px 20px;
                             cursor: pointer;
@@ -5664,12 +5665,12 @@
                             @media #{$max1024} {
                                 width: 100%;
                             }
-                            
+
                             .acr-select{
                                 @media #{$max1024} {
                                     width: 100%;
                                 }
-                                
+
                                 .acr-dec,
                                 .acr-inc,
                                 .tf-archive-guest-info {
@@ -5769,7 +5770,7 @@
                                 background: $color-white;
                                 margin-bottom: 4px;
                                 &:last-child{
-                                    margin-bottom: 0;   
+                                    margin-bottom: 0;
                                 }
                                 .acr-label{
                                     padding: 8px 8px 8px 20px;
@@ -5807,7 +5808,7 @@
                                     padding: 5px;
                                 }
                             }
-                          
+
                         }
                     }
 
@@ -5825,7 +5826,7 @@
                     @include flexbox();
                     @include flex-wrap(wrap);
                     gap: 30px;
-            
+
                     .tf-not-included-house-rules,
                     .tf-included-house-rules {
                         list-style: none;
@@ -5833,22 +5834,22 @@
                         padding-left: 30px;
                         margin: 0;
                         box-sizing: border-box;
-            
+
                         @media #{$max768} {
                             @include flex(0 0 100%);
                         }
-            
+
                         li {
                             margin: 16px 0;
                             position: relative;
-            
+
                             h6 {
                                 margin: 0 0 5px 0;
                                 font-weight: 500;
                                 font-size: 1.125rem;
                                 color: $color-primary;
                             }
-            
+
                             &::before {
                                 content: '\f058';
                                 font-family: 'Font Awesome 5 Free';
@@ -5858,7 +5859,7 @@
                                 font-size: 1.25rem;
                                 color: $color-primary;
                             }
-            
+
                             &::after {
                                 content: '';
                                 position: absolute;
@@ -5868,40 +5869,40 @@
                                 height: 99%;
                                 background: $color-primary;
                             }
-            
+
                             &:first-child {
                                 margin-top: 0;
                             }
-            
+
                             &:last-child {
                                 margin-bottom: 0;
-            
+
                                 &::after {
                                     display: none;
                                 }
                             }
                         }
                     }
-            
+
                     &.tf-house-rules-full {
-            
+
                         .tf-not-included-house-rules,
                         .tf-included-house-rules {
                             @include flex(0 0 100%);
                         }
                     }
-            
+
                     .tf-not-included-house-rules {
                         li {
                             h6 {
                                 color: $color-error;
                             }
-            
+
                             &::before {
                                 content: '\f057';
                                 color: $color-error;
                             }
-            
+
                             &::after {
                                 background: $color-error;
                             }
