@@ -34,7 +34,13 @@
         // Edit with Elementor button
         $(document).on('click', '#tf-edit-with-elementor', function(e) {
             e.preventDefault();
-            tf_save_template(true);
+            tf_save_template(true, false);
+        });
+
+        // Edit with Bricks button
+        $(document).on('click', '#tf-edit-with-bricks', function(e) {
+            e.preventDefault();
+            tf_save_template(false, true);
         });
 
         $(document).on("click", '.tf-modal-close', function () {
@@ -189,16 +195,19 @@
             });
         }
         
-        function tf_save_template(editWithElementor = false) {
+        function tf_save_template(editWithElementor = false, editWithBricks = false) {
             var form_data = $('#tf-template-builder-form').serialize();
-            
+            var extra = '&nonce=' + tf_pro_params.tf_pro_nonce + '&edit_with_elementor=' + editWithElementor + '&edit_with_bricks=' + editWithBricks;
+
             $.ajax({
                 url: tf_pro_params.ajax_url,
                 type: 'POST',
-                data: form_data + '&nonce=' + tf_pro_params.tf_pro_nonce + '&edit_with_elementor=' + editWithElementor,
+                data: form_data + extra,
                 beforeSend: function() {
                     if(editWithElementor) {
                         $('#tf-edit-with-elementor').addClass('tf-btn-loading');
+                    } else if (editWithBricks) {
+                        $('#tf-edit-with-bricks').addClass('tf-btn-loading');
                     } else {
                         $('#tf-save-template').addClass('tf-btn-loading');
                     }
@@ -210,6 +219,14 @@
                         if (response.success) {
                             notyf.success(response.data.message);
                             window.location.href = response.data.edit_url; // Redirect to Elementor editor
+                        }
+                    } else if (editWithBricks) {
+                        $('#tf-edit-with-bricks').removeClass('tf-btn-loading');
+                        if (response.success) {
+                            notyf.success(response.data.message);
+                            if (response.data && response.data.edit_url) {
+                                window.location.href = response.data.edit_url;
+                            }
                         }
                     } else {
                         $('#tf-save-template').removeClass('tf-btn-loading');
@@ -223,6 +240,8 @@
                     // Handle error
                     notyf.error('Error saving template: ' + error);
                     $('#tf-save-template').removeClass('tf-btn-loading');
+                    $('#tf-edit-with-elementor').removeClass('tf-btn-loading');
+                    $('#tf-edit-with-bricks').removeClass('tf-btn-loading');
                 }
             });
         }
