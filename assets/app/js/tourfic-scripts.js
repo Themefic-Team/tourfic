@@ -1011,9 +1011,9 @@
 
             if( response.includes(true) ){
                 if( attrCount > 1 ){
-                    notyf.error('( * ) fields are required');
+                    notyf.error(tf_params.fields_required_msg);
                 } else {
-                    notyf.error('( * ) field is required');
+                    notyf.error(tf_params.field_required);
                 }
                 return true;
             }
@@ -3695,6 +3695,7 @@ function convertTo24HourFormat(timeStr) {
     });
 
 })(jQuery, window);
+
 })();
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
@@ -6973,6 +6974,7 @@ jQuery(".acr-dec").on("click", function() {
     let inputField = jQuery(".tf-search__form__field__input");
     inputField.trigger("input");
 });
+
 })();
 
 /******/ })()
