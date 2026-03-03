@@ -417,7 +417,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.21.1 – March 04, 2026 =
+= 2.21.1 – March 03, 2026 =
 
 - Fix: Design-4 room form spacing issue. (room-search)
 - Fix: Archive view titles escaping.
