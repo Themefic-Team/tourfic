@@ -220,7 +220,7 @@ class Pricing {
             $all_prices['sale_price'] = $all_prices['sale_price'] - $discount_price;
         }
 
-        $all_prices['type'] = $price_type;
+        $all_prices['type'] = esc_html__($price_type, 'tourfic');
 
         return $all_prices;
     }

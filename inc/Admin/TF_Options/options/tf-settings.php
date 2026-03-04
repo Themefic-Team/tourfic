@@ -152,8 +152,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'tf-template',
 					'type'  => 'tab',
-					'label' => esc_html__('Hotel, Tour, Apartment & Car Template', 'tourfic'),
+					'label' => esc_html__('Hotel, Tour, Apartment, Car & Room Template', 'tourfic'),
 					'tabs'  => array(
+						// Hotel
 						array(
 							'id'     => 'hotel_template',
 							'title'  => esc_html__( 'Hotel', 'tourfic' ),
@@ -360,6 +361,7 @@ TF_Settings::option( 'tf_settings', array(
 								),
 							),
 						),
+						// Tour
 						array(
 							'id'     => 'tour_template',
 							'title'  => esc_html__( 'Tour', 'tourfic' ),
@@ -592,6 +594,7 @@ TF_Settings::option( 'tf_settings', array(
 								),
 							),
 						),
+						// Apartment
 						array(
 							'id'     => 'apartment_template',
 							'title'  => esc_html__( 'Apartment', 'tourfic' ),
@@ -720,7 +723,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'apartment_archive_design_1_bannar',
 									'type'    => 'image',
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
-									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'subtitle' => esc_html__( 'Upload Banner Image for this apartment archive template.', 'tourfic' ),
 									'library' => 'image',
 									'default' => TF_ASSETS_ADMIN_URL . "images/apartment-placeholder.webp",
 									'dependency' => array( 'apartment-archive', '==', 'design-1' ),
@@ -729,7 +732,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'apartment_archive_design_2_bannar',
 									'type'    => 'image',
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
-									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'subtitle' => esc_html__( 'Upload Banner Image for this apartment archive template.', 'tourfic' ),
 									'library' => 'image',
 									'default' => TF_ASSETS_ADMIN_URL . "images/apartment-placeholder.webp",
 									'dependency' => array( 'apartment-archive', '==', 'design-2' ),
@@ -753,6 +756,7 @@ TF_Settings::option( 'tf_settings', array(
 								),
 							),
 						),
+						// Car
 						array(
 							'id'     => 'car_template',
 							'title'  => esc_html__( 'Car', 'tourfic' ),
@@ -769,7 +773,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'       => 'single-car',
 									'type'     => 'imageselect',
 									'label'    => esc_html__( 'Select Single Car Template', 'tourfic' ),
-									'subtitle'   => esc_html__( 'You have the option to override this from the settings specific to each individual apartment page.', 'tourfic' ),
+									'subtitle'   => esc_html__( 'You have the option to override this from the settings specific to each individual car page.', 'tourfic' ),
 									'options'  => array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
@@ -863,7 +867,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'car_archive_design_1_bannar',
 									'type'    => 'image',
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
-									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'subtitle' => esc_html__( 'Upload Banner Image for this car archive template.', 'tourfic' ),
 									'library' => 'image',
 									'default' => TF_ASSETS_ADMIN_URL . "images/carrental-placeholder.png",
 									// 'dependency' => array( 'car-archive', '==', 'design-1' ),
@@ -898,6 +902,112 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'car_archive_notice',
 									'type'    => 'notice',
 									'content' => esc_html__( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
+								),
+							),
+						),
+						// Room
+						array(
+							'id'     => 'room_template',
+							'title'  => __( 'Room', 'tourfic' ),
+							'icon'   => 'fa fa-gear',
+							'post_dependency' => 'hotel',
+							'fields' => array(
+								array(
+									'id'      => 'room-title',
+									'type'    => 'heading',
+									'title'   => __( 'Room Single Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'single-room',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Single Room Template', 'tourfic' ),
+									'subtitle'   => __( 'You have the option to override this from the settings specific to each individual room page.', 'tourfic' ),
+									'options'  => array(
+										'design-1' => array(
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-room-design-1.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/cars/honda-city/'),
+										),
+										'design-2' => array(
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-coming-soon.png",
+											'disabled' => true
+										),
+									),
+									'default'  => 'design-1',
+								),
+							
+								array(
+									'id'         => 'single-room-layout',
+									'type'       => 'switch_group',
+									'column'  	 => 4,
+									'label'      => __( 'Single Room Template Sections', 'tourfic' ),
+									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'dependency' => array( 'single-room', '==', 'design-1' ),
+									'default'    => array(
+										array(
+											'label'  => __( 'Description', 'tourfic' ),
+											'slug'   => 'description',
+											'status' => 1,
+										),
+										array(
+											'label'  => __( 'Amenities', 'tourfic' ),
+											'slug'   => 'amenities',
+											'status' => 1,
+										),
+										array(
+											'label'  => __( 'Room Options', 'tourfic' ),
+											'slug'   => 'room-options',
+											'status' => 1,
+										),
+										array(
+											'label'  => __( 'House Rules', 'tourfic' ),
+											'slug'   => 'house-rules',
+											'status' => 1,
+										),
+										array(
+											'label'  => __( 'Policy', 'tourfic' ),
+											'slug'   => 'cancellation-policy',
+											'status' => 1,
+										),
+										array(
+											'label'  => __( 'Review', 'tourfic' ),
+											'slug'   => 'reviews',
+											'status' => 1,
+										)
+									),
+								),
+								
+								array(
+									'id'      => 'room-title',
+									'type'    => 'heading',
+									'title' => __( 'Room Archive & Search Result Page', 'tourfic' ),
+									'class'   => 'tf-field-class',
+								),
+								array(
+									'id'       => 'room-archive',
+									'type'     => 'imageselect',
+									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
+									'options'  => array(
+										'design-1' => array(
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-room-design-1.png",
+										),
+										'design-2' => array(
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-coming-soon.png",
+											'disabled' => true
+										),
+									),
+									'default'  => 'design-1',
+								),
+								array(
+									'id'      => 'room_archive_design_1_bannar',
+									'type'    => 'image',
+									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
+									'subtitle' => __( 'Upload Banner Image for this room archive template.', 'tourfic' ),
+									'library' => 'image',
 								),
 							),
 						),
@@ -1686,6 +1796,28 @@ TF_Settings::option( 'tf_settings', array(
 					),
 					'dependency' => array( 'enable_child_age_limit', '==', '1' ),
 				),
+				array(
+					'id'        => 'single_room_heading',
+					'type'      => 'heading',
+					'title'     => esc_html__( 'Global Settings for Single Room', 'tourfic' ),
+					'content' => esc_html__( 'These options can be overridden from Single Room Settings.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/')
+				),
+				array(
+					'id'        => 'disable-room-review',
+					'type'      => 'switch',
+					'label'     => esc_html__( 'Disable Review Section', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
+					'default'   => false,
+				),
+				array(
+					'id'       => 'room_booking_button_text',
+					'type'     => 'text',
+					'label'    => esc_html__( 'Change Book Button Text', 'tourfic' ),
+					'subtitle'  => esc_html__( 'With this option, you can change the text of the book now button on the single room pages.', 'tourfic' ),
+					'default'    => esc_html__('Book Now', 'tourfic'),
+				),
 			),
 		),
 
@@ -2276,6 +2408,7 @@ TF_Settings::option( 'tf_settings', array(
 					'default'  => 8,
 				),
 
+				//Hotel Search
 				array(
 					'id'       => 'hotel_search_heading',
 					'type'     => 'heading',
@@ -2317,6 +2450,32 @@ TF_Settings::option( 'tf_settings', array(
 					'default'   => false,
 					'dependency' => array( "required_location_hotel_search", "==", "false")
 				),
+				
+				//Room Search
+				array(
+					'id'       => 'room_search_heading',
+					'type'     => 'heading',
+					'title'    => esc_html__( 'Room Search', 'tourfic' ),
+				),
+				array(
+					'id'        => 'date_room_search',
+					'type'      => 'switch',
+					'label'     => esc_html__( 'Date Required in Room Search', 'tourfic' ),
+					'subtitle'  => esc_html__( 'Activate this feature to enable users to pick their check-in and check-out dates for searching.', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
+					'default'   => true,
+				),
+				array(
+					'id'        => 'disable_room_child_search',
+					'type'      => 'switch',
+					'label'     => esc_html__( 'Disable Child in Room Search', 'tourfic' ),
+					'subtitle'  => esc_html__( 'Turn on this setting to hide the child option from the search form.', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
+				),
+
+				//Tour Search
 				array(
 					'id'       => 'tour_search_heading',
 					'type'     => 'heading',
@@ -2947,6 +3106,45 @@ TF_Settings::option( 'tf_settings', array(
 					'button_title' => esc_html__( 'Add New', 'tourfic' ),
 					'label'        => esc_html__( 'Review Fields for Hotels', 'tourfic' ),
 					'subtitle'     => esc_html__( 'Design customer review fields for hotels. Custom fields are permitted.', 'tourfic' ),
+					'max'      => '6',
+					'drag_only'   => true,
+					'field_title'  => 'r-field-type',
+					'fields'   => array(
+						array(
+							'id'    => 'r-field-type',
+							'type'  => 'text',
+							'label' => esc_html__( 'Review for', 'tourfic' ),
+						),
+
+					),
+					'default'  => array(
+						array(
+							'r-field-type' => esc_html__( 'Staff', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => esc_html__( 'Facilities', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => esc_html__( 'Cleanliness', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => esc_html__( 'Comfort', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => esc_html__( 'Value for money', 'tourfic' ),
+						),
+						array(
+							'r-field-type' => esc_html__( 'Location', 'tourfic' ),
+						),
+					)
+				),
+				array(
+					'id'       => 'r-room',
+					'class'    => 'disable-sortable',
+					'type'     => 'repeater',
+					'button_title' => esc_html__( 'Add New', 'tourfic' ),
+					'label'        => esc_html__( 'Review Fields for Rooms', 'tourfic' ),
+					'subtitle'     => esc_html__( 'Design customer review fields for rooms. Custom fields are permitted.', 'tourfic' ),
 					'max'      => '6',
 					'drag_only'   => true,
 					'field_title'  => 'r-field-type',

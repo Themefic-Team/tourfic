@@ -25,6 +25,38 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 					'content' => esc_html__( 'These are some common settings specific to this Room', 'tourfic' ),
                     'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/room-management/')
 				),
+                array(
+					'id'       => 'tf_single_room_layout_opt',
+					'type'     => 'select',
+					'label'    => esc_html__( 'Single Room Template Settings', 'tourfic' ),
+					'subtitle' => esc_html__( 'You can keep the Global Template settings or choose a different layout for this room.', 'tourfic' ),
+					'options'  => [
+						'global' => esc_html__( 'Global Settings', 'tourfic' ),
+						'single' => esc_html__( 'Single Settings', 'tourfic' ),
+					],
+					'default'  => 'global',
+				),
+                array(
+					'id'       => 'tf_single_room_template',
+					'type'     => 'imageselect',
+					'label'    => esc_html__( 'Single Room Page Layout', 'tourfic' ),
+					'options'  => array(
+						'design-1' => array(
+							'title' => esc_html__('Design 1', 'tourfic'),
+							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+							'preview_link' => esc_url('https://tourfic.com/preview/cars/honda-city/'),
+						),
+                        'design-2' => array(
+                            'title' => esc_html__('Design 2', 'tourfic'),
+                            'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-coming-soon.png",
+                            'disabled' => true
+                        ),
+					),
+					'default'   	=> 'design-1',
+					'dependency'  => [
+						array( 'tf_single_room_layout_opt', '==', 'single' )
+					],
+				),
 				array(
 					'id'          => 'tf_hotel',
 					'type'        => 'select2',
@@ -155,7 +187,49 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                         'hide_empty' => false,
                     ),
                     'field_width' => 100,
+                    'is_search_able' => true,
                 ),
+
+                //house rules
+				array(
+					'id'    => 'house_rules_heading',
+					'type'  => 'heading',
+					'title' => esc_html__( 'House Rules', 'tourfic' ),
+				),
+				array(
+					'id'    => 'house_rules_title',
+					'type'  => 'text',
+					'label' => esc_html__( 'Title of the Section', 'tourfic' ),
+					'subtitle' => esc_html__( 'This text will appear as the heading of the House Rules section on the frontend.', 'tourfic' ),
+					'default' => esc_html__( 'House Rules', 'tourfic' ),
+				),
+				array(
+					'id'           => 'house_rules',
+					'type'         => 'repeater',
+					'button_title' => esc_html__( 'Add New', 'tourfic' ),
+					'label'        => esc_html__( 'Add House Rules', 'tourfic' ),
+					'field_title'  => 'title',
+					'fields'       => array(
+						array(
+							'id'    => 'title',
+							'type'  => 'text',
+							'label' => esc_html__( 'Title', 'tourfic' ),
+						),
+						array(
+							'id'    => 'desc',
+							'type'  => 'editor',
+							'label' => esc_html__( 'Description', 'tourfic' ),
+						),
+						array(
+							'id'        => 'include',
+							'type'      => 'switch',
+							'label'     => esc_html__( 'Allowed?', 'tourfic' ),
+							'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+							'label_off' => esc_html__( 'No', 'tourfic' ),
+							'default'   => true,
+						),
+					),
+				),
 			),
 		),
 
@@ -390,5 +464,48 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 			),
 		),
 
+        // Settings
+		'settings'         => array(
+			'title'  => esc_html__( 'Settings', 'tourfic' ),
+			'icon'   => 'fa-solid fa-viruses',
+			'fields' => array(
+				array(
+					'id'    => 'room-settings-docs',
+					'type'  => 'heading',
+					'title' => esc_html__( 'Settings', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/hotel-settings/')
+				),
+				array(
+					'id'        => 'disable-room-review',
+					'type'      => 'switch',
+					'label'     => esc_html__( 'Disable Review Section', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
+					'default'   => false
+				),
+
+				array(
+					'id'      => 'different-sections',
+					'type'    => 'heading',
+					'title' => esc_html__( 'Titles / Heading of Different Sections', 'tourfic' ),
+					'class'   => 'tf-field-class',
+				),
+				array(
+					'id'      => 'room-feature-section-title',
+					'type'    => 'text',
+					'label' => esc_html__( 'Title for the Popular Features Section', 'tourfic' ),
+					'subtitle'    => esc_html__( 'This text will appear as the heading of the Popular Features section on the frontend.', 'tourfic' ),
+					'default' => "Amenities"
+
+				),
+				array(
+					'id'      => 'review-section-title',
+					'type'    => 'text',
+					'label' => esc_html__( 'Title for the Reviews Section', 'tourfic' ),
+					'subtitle'    => esc_html__( 'This text will appear as the heading of the Reviews section on the frontend.', 'tourfic' ),
+					'default' => "Guest Reviews"
+				),
+			),
+		),
 	),
 ) );

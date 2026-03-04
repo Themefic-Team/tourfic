@@ -1,0 +1,110 @@
+<?php
+
+namespace Tourfic\App\Shortcodes;
+
+defined( 'ABSPATH' ) || exit;
+
+use \Tourfic\App\TF_Review;
+use Tourfic\Classes\Room\Room;
+use \Tourfic\Classes\Room\Pricing;
+use \Tourfic\Classes\Helper;
+
+class Rooms extends \Tourfic\Core\Shortcodes {
+
+	use \Tourfic\Traits\Singleton;
+
+	protected $shortcode = 'tf_room';
+
+	function render( $atts, $content = null ) {
+		extract(
+			shortcode_atts(
+				array(
+					'title'     => '',
+					'subtitle'  => '',
+					'types' => '',
+					'count'     => '3',
+					'style'     => 'grid',
+				),
+				$atts
+			)
+		);
+
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		if (in_array('hotel', $tf_disable_services)){
+			return;
+		}
+
+		$args = array(
+			'post_type'      => 'tf_room',
+			'post_status'    => 'publish',
+			'orderby'        => 'date',
+			'order'          => 'DESC',
+			'posts_per_page' => $count,
+		);
+
+
+		if ( ! empty( $types ) && $types !== 'all' ) {
+			$types         = explode( ',', $types );
+			$args['tax_query'] = array(
+				'relation' => 'AND',
+				array(
+					'taxonomy' => 'room_type',
+					'field'    => 'term_id',
+					'terms'    => $types,
+				)
+			);
+		}
+		ob_start();
+
+		if ( $style == 'slider' ) {
+			$slider_activate = 'tf-slider-activated tf-slick-slider';
+		} else {
+			$slider_activate = 'tf-hotel-grid';
+		}
+		$hotel_loop = new \WP_Query( $args );
+
+		?>
+		<?php if ( $hotel_loop->have_posts() ) : ?>
+			<div class="tf-widget-slider recent-hotel-slider">
+				<div class="tf-heading">
+					<?php
+					echo ! empty( $title ) ? '<h2>' . esc_html( $title ) . '</h2>' : '';
+					echo ! empty( $subtitle ) ? '<p>' . esc_html( $subtitle ) . '</p>' : '';
+					?>
+				</div>
+
+				<div class="<?php echo esc_attr( $slider_activate ); ?>">
+					<?php while ( $hotel_loop->have_posts() ) {
+						$hotel_loop->the_post();
+						$post_id                = get_the_ID();
+						$related_comments_hotel = get_comments( array( 'post_id' => $post_id ) );
+						?>
+						<div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg'); ?>);">
+							<div class="tf-slider-content">
+								<div class="tf-slider-desc">
+									<h3>
+										<a href="<?php the_permalink() ?>">
+											<?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title($post_id), 60 ) ) ?>
+										</a>
+									</h3>
+									<?php if ( $related_comments_hotel ) { ?>
+										<div class="tf-slider-rating-star">
+											<i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( TF_Review::tf_total_avg_rating( $related_comments_hotel ) ); ?></span>
+										</div>
+									<?php } ?>
+									<p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
+                                    <div class="tf-recent-room-price">
+                                        <?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html()); ?>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					<?php } ?>
+				</div>
+			</div>
+		<?php endif;
+		wp_reset_postdata();
+
+		return ob_get_clean();
+	}
+}

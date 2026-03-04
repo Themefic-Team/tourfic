@@ -175,6 +175,7 @@ class Template_Builder {
             'tf_tours' => esc_html__('Tour', 'tourfic'),
             'tf_apartment' => esc_html__('Apartment', 'tourfic'),
             'tf_carrental' => esc_html__('Car Rental', 'tourfic'),
+            'tf_room' => esc_html__('Room', 'tourfic'),
         ];
 
 		switch($column) {
@@ -321,6 +322,7 @@ class Template_Builder {
                                             <div class="tf-fieldset">
                                                 <select name="tf_template_service" id="tf-template-service" class="tf-select">
                                                     <option value="tf_hotel"><?php echo esc_html__('Hotel', 'tourfic'); ?></option>
+                                                    <option value="tf_room"><?php echo esc_html__('Room', 'tourfic'); ?></option>
                                                     <option value="tf_tours"><?php echo esc_html__('Tour', 'tourfic'); ?></option>
                                                     <option value="tf_apartment"><?php echo esc_html__('Apartment', 'tourfic'); ?></option>
                                                     <option value="tf_carrental"><?php echo esc_html__('Car Rental', 'tourfic'); ?></option>
@@ -518,6 +520,31 @@ class Template_Builder {
                         'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-hotel-single-legacy.png",
                         'preview_link' => 'https://tourfic.com/preview/hotels/rio-ontho-palace/'
                     ]
+                ]
+            ],
+            'tf_room' => [
+                'archive' => [
+                    'blank' => [
+                        'title' => esc_html__('Blank', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . 'images/template/tb-design-blank.png',
+                        'is_blank' => true
+                    ],
+                    'design-1' => [
+                        'title' => esc_html__('Design 1', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-room-design-1.png"
+                    ],
+                ],
+                'single' => [
+                    'blank' => [
+                        'title' => esc_html__('Blank', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . 'images/template/tb-design-blank.png',
+                        'is_blank' => true
+                    ],
+                    'design-1' => [
+                        'title' => esc_html__('Design 1', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-room-single-1.png",
+                        // 'preview_link' => 'https://tourfic.com/preview/hotels/tuvo-suites-hotel/'
+                    ],
                 ]
             ],
             'tf_tours' => [
@@ -803,6 +830,7 @@ class Template_Builder {
                 <div class="tf-fieldset">
                     <select name="tf_template_service" id="tf-template-service" class="tf-select">
                         <option value="tf_hotel" <?php selected($tf_template_service, 'tf_hotel'); ?>><?php echo esc_html__('Hotel', 'tourfic'); ?></option>
+                        <option value="tf_room" <?php selected($tf_template_service, 'tf_room'); ?>><?php echo esc_html__('Room', 'tourfic'); ?></option>
                         <option value="tf_tours" <?php selected($tf_template_service, 'tf_tours'); ?>><?php echo esc_html__('Tour', 'tourfic'); ?></option>
                         <option value="tf_apartment" <?php selected($tf_template_service, 'tf_apartment'); ?>><?php echo esc_html__('Apartment', 'tourfic'); ?></option>
                         <option value="tf_carrental" <?php selected($tf_template_service, 'tf_carrental'); ?>><?php echo esc_html__('Car Rental', 'tourfic'); ?></option>
@@ -923,6 +951,7 @@ class Template_Builder {
             if ( !empty( $tf_template_design ) && $tf_template_design !== 'blank' ) {
                 $service = array(
                     'tf_hotel' => 'hotel',
+                    'tf_room' => 'room',
                     'tf_tours' => 'tour',
                     'tf_apartment' => 'apartment',
                     'tf_carrental' => 'carrental'
@@ -1020,7 +1049,7 @@ class Template_Builder {
         }
         
         // For service templates (archive/single)
-        $service_post_types = ['tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental'];
+        $service_post_types = ['tf_hotel', 'tf_room', 'tf_tours', 'tf_apartment', 'tf_carrental'];
         
         // Check archive pages
         if (is_post_type_archive($service_post_types)) {

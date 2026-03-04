@@ -1,0 +1,102 @@
+<?php
+
+namespace Tourfic\App\Shortcodes;
+
+defined( 'ABSPATH' ) || exit;
+
+use \Tourfic\App\TF_Review;
+use Tourfic\Classes\Room\Room;
+use \Tourfic\Classes\Room\Pricing;
+use \Tourfic\Classes\Helper;
+
+class Recent_Room extends \Tourfic\Core\Shortcodes {
+
+	use \Tourfic\Traits\Singleton;
+
+	protected $shortcode = 'tf_recent_room';
+
+	function render( $atts, $content = null ) {
+		extract(
+			shortcode_atts(
+				array(
+					'title'        => '',  //title populer section
+					'subtitle'     => '',   // Sub title populer section
+					'orderby'      => 'date',
+					'order'        => 'DESC',
+					'count'        => 10,
+					'slidestoshow' => 5,
+				),
+				$atts
+			)
+		);
+
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		if (in_array('hotel', $tf_disable_services)){
+			return;
+		}
+
+		$args = array(
+			'post_type'      => 'tf_room',
+			'post_status'    => 'publish',
+			'orderby'        => $orderby,
+			'order'          => $order,
+			'posts_per_page' => $count,
+		);
+
+		ob_start();
+
+		$room_loop = new \WP_Query( $args );
+
+		// Generate an Unique ID
+		$thisid = uniqid( 'tfpopular_' );
+
+		?>
+		<?php if ( $room_loop->have_posts() ) : ?>
+			<div class="tf-widget-slider recent-hotel-slider">
+				<div class="tf-heading">
+					<?php
+					if ( ! empty( $title ) ) {
+						echo '<h2>' . esc_html( $title ) . '</h2>';
+					}
+					if ( ! empty( $subtitle ) ) {
+						echo '<p>' . esc_html( $subtitle ) . '</p>';
+					}
+					?>
+				</div>
+
+				<div class="tf-slider-items-wrapper tf-slick-slider" data-slick='{"slidesToShow": <?php echo esc_attr( $slidestoshow ); ?>}'>
+					<?php while ( $room_loop->have_posts() ) {
+						$room_loop->the_post();
+						$post_id                = get_the_ID();
+						$related_comments_room = get_comments( array( 'post_id' => $post_id ) );
+						?>
+						<div class="tf-slider-item"
+						     style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg'); ?>);">
+							<div class="tf-slider-content">
+								<div class="tf-slider-desc">
+									<h3>
+										<a href="<?php the_permalink() ?>">
+											<?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title($post_id), 60 ) ) ?>
+										</a>
+									</h3>
+									<?php if ( $related_comments_room ) { ?>
+										<div class="tf-slider-rating-star">
+											<i class="fas fa-star"></i> <span style="color:#fff;"><?php echo esc_html( TF_Review::tf_total_avg_rating( $related_comments_room ) ); ?></span>
+										</div>
+									<?php } ?>
+									<p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
+                                    <div class="tf-recent-room-price">
+                                        <?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html()); ?>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					<?php } ?>
+				</div>
+			</div>
+		<?php endif;
+		wp_reset_postdata(); ?>
+
+		<?php return ob_get_clean();
+	}
+}

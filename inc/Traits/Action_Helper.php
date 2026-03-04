@@ -13,6 +13,8 @@ use \Tourfic\Admin\Emails\TF_Handle_Emails;
 use Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
 use Tourfic\Classes\Tour\Pricing as Tour_Pricing;
 use Tourfic\Classes\Hotel\Pricing as Hotel_Pricing;
+use Tourfic\Classes\Room\Pricing as Room_Pricing;
+use Tourfic\Classes\Room\Room;
 
 trait Action_Helper {
 	
@@ -60,6 +62,16 @@ trait Action_Helper {
 				return $exists_in_theme;
 			} else {
 				return TF_TEMPLATE_PATH . 'car/archive-cars.php';
+			}
+		}
+
+		if ( is_post_type_archive( 'tf_room' ) ) {
+			$theme_files     = array( 'tourfic/room/archive-rooms.php' );
+			$exists_in_theme = locate_template( $theme_files, false );
+			if ( $exists_in_theme ) {
+				return $exists_in_theme;
+			} else {
+				return TF_TEMPLATE_PATH . 'room/archive-rooms.php';
 			}
 		}
 
@@ -521,6 +533,23 @@ trait Action_Helper {
 			}
 		}
 
+		/**
+		 * Room Single
+		 *
+		 * single-room.php
+		 */
+		if ( $post->post_type == 'tf_room' ) {
+
+			$theme_files     = array( 'tourfic/room/single-room.php' );
+			$exists_in_theme = locate_template( $theme_files, false );
+
+			if ( $exists_in_theme ) {
+				return $exists_in_theme;
+			} else {
+				return TF_TEMPLATE_PATH . "room/single-room.php";
+			}
+		}
+
 		return $single_template;
 	}
 
@@ -652,6 +681,9 @@ trait Action_Helper {
 				'hotel_location',
 				'hotel_feature',
 				'hotel_type',
+			],
+			'room' => [
+				'room_type',
 			],
 			'tour' => [
 				'tour_destination',
@@ -827,6 +859,7 @@ trait Action_Helper {
 		$filters               = !empty( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
 		$features              = !empty( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
 		$tf_hotel_types        = !empty( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
+		$tf_room_types        = !empty( $_POST['tf_room_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_room_types'] ) ) : null;
 		$tour_features         = !empty( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
 		$attractions           = !empty( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
 		$activities            = !empty( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
@@ -890,6 +923,8 @@ trait Action_Helper {
 				$data = array( $adults, $child, $check_in_out, $startprice, $endprice );
 			} elseif ( $posttype == "tf_hotel" ) {
 				$data = array( $adults, $child, $room, $check_in_out, $startprice, $endprice );
+			} elseif ( $posttype == "tf_room" ) {
+				$data = array( $adults, $child, $room, $check_in_out, $startprice, $endprice );
 			} else {
 				$data = array( $adults, $child, $infant, $check_in_out, $startprice, $endprice );
 			}
@@ -897,6 +932,8 @@ trait Action_Helper {
 			if ( $posttype == "tf_tours" ) {
 				$data = array( $adults, $child, $check_in_out );
 			} elseif ( $posttype == "tf_hotel" ) {
+				$data = array( $adults, $child, $room, $check_in_out );
+			} elseif ( $posttype == "tf_room" ) {
 				$data = array( $adults, $child, $room, $check_in_out );
 			} else {
 				$data = array( $adults, $child, $infant, $check_in_out );
@@ -967,7 +1004,22 @@ trait Action_Helper {
 			);
 		}
 
-		if ( $filters ) {
+		if ( $filters && $posttype === 'tf_room' ) {
+			
+			$filters = array_values( array_filter( array_map( 'absint', (array) $filters ) ) );
+
+			$args['meta_query'] = $args['meta_query'] ?? [];
+			$args['meta_query']['relation'] = ( $filter_relation === 'OR' ) ? 'OR' : 'AND';
+
+			foreach ( $filters as $term_id ) {
+				$args['meta_query'][] = [
+					'key'     => 'tf_search_features',
+					'value'   => '"' . $term_id . '"',
+					'compare' => 'LIKE',
+				];
+			}
+			
+		} elseif ( $filters ) {
 			$args['tax_query']['relation'] = $relation;
 
 			if ( $filter_relation == "OR" ) {
@@ -1002,6 +1054,28 @@ trait Action_Helper {
 				foreach ( $filters as $key => $term_id ) {
 					$args['tax_query']['tf_feature'][] = array(
 						'taxonomy' => 'tf_feature',
+						'terms'    => array( $term_id ),
+					);
+				}
+			}
+		}
+
+		//Query for the types filter of room
+		if ( $tf_room_types ) {
+
+			$args['tax_query']['relation'] = $relation;
+
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => 'room_type',
+					'terms'    => $tf_room_types,
+				);
+			} else {
+				$args['tax_query']['room_type']['relation'] = 'AND';
+
+				foreach ( $tf_room_types as $key => $term_id ) {
+					$args['tax_query']['room_type'][] = array(
+						'taxonomy' => 'room_type',
 						'terms'    => array( $term_id ),
 					);
 				}
@@ -1323,7 +1397,14 @@ trait Action_Helper {
 					if($car_inventory){
 						tf_car_availability_response($car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice);
 					}
-				}else{
+				} elseif ( $posttype == 'tf_room' ) {
+					
+					if ( empty( $check_in_out ) ) {
+						Room::tf_filter_room_without_date( $period, $not_found, $data );
+					} else {
+						Room::tf_filter_room_by_date( $period, $not_found, $data );
+					}
+				} else {
 
 				}
 			}
@@ -1686,6 +1767,18 @@ trait Action_Helper {
 							$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
 							if ( $car_meta["car_as_featured"] ) {
 								tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+							}
+						} elseif ( $posttype == 'tf_room' ) {
+							if ( ! empty( $data ) ) {
+								if ( isset( $data[4] ) && isset( $data[5] ) ) {
+									[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
+									Room::tf_room_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice, $elSettings );
+								} else {
+									[ $adults, $child, $room, $check_in_out ] = $data;
+									Room::tf_room_archive_single_item( $adults, $child, $room, $check_in_out, '', '', $elSettings );
+								}
+							} else {
+								Room::tf_room_archive_single_item('', '', '', '', '', '', $elSettings );
 							}
 						}else{
 
@@ -2100,6 +2193,8 @@ trait Action_Helper {
                 $order_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_order_data WHERE post_id = %s AND ostatus != %s", $post_id, 'cancelled' ));
                 $sort_results[$post_id] = $order_count;
             }else if( $ordering_type == 'enquiry') {
+				$post_id = $post_type == 'tf_room' ? Room::get_hotel_id_by_room_id($post_id) : $post_id;
+				
                 $enquiry_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_enquiry_data WHERE post_id = %s ", $post_id ));
                 $sort_results[$post_id] = $enquiry_count;
             } else if( $ordering_type == 'rating') {
@@ -2122,6 +2217,11 @@ trait Action_Helper {
 					$sort_results[$post_id] = $min_max_price['max']["regular_price"];
 				}
 
+				if( $post_type == 'tf_room' ) {
+					$min_max_price = Room_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['max']["regular_price"];
+				}
+
             }else if ($ordering_type == 'price-low') {
 
                 if($post_type == 'tf_apartment') {
@@ -2136,6 +2236,11 @@ trait Action_Helper {
 
 				if( $post_type == 'tf_hotel' ) {
 					$min_max_price = Hotel_Pricing::instance($post_id)->get_min_max_price();
+					$sort_results[$post_id] = $min_max_price['min']["regular_price"];
+				}
+
+				if( $post_type == 'tf_room' ) {
+					$min_max_price = Room_Pricing::instance($post_id)->get_min_max_price();
 					$sort_results[$post_id] = $min_max_price['min']["regular_price"];
 				}
 
@@ -2579,15 +2684,17 @@ trait Action_Helper {
 		$post_type = !empty( $_POST['post_type']) ? sanitize_text_field( $_POST['post_type'] ) : '';
 		$response = array();
 
-		if( $post_type == 'tf_hotel' ) {
-			$response[$post_type] = Hotel_Pricing::get_min_max_price_from_all_hotel();
-		} else if( $post_type == 'tf_tours' ) {
-			$response[$post_type] = Tour_Pricing::get_min_max_price_from_all_tour();
-		} else if( $post_type == 'tf_apartment' ) {
-			$response[$post_type] = Apt_Pricing::get_min_max_price_from_all_apartment();
-		} else if( $post_type == 'tf_carrental' ) {
-			$response[$post_type] = get_cars_min_max_price();
-		}
+		// if( $post_type == 'tf_hotel' ) {
+			$response['tf_hotel'] = Hotel_Pricing::get_min_max_price_from_all_hotel();
+		// } else if( $post_type == 'tf_tours' ) {
+			$response['tf_tours'] = Tour_Pricing::get_min_max_price_from_all_tour();
+		// } else if( $post_type == 'tf_apartment' ) {
+			$response['tf_apartment'] = Apt_Pricing::get_min_max_price_from_all_apartment();
+		// } else if( $post_type == 'tf_carrental' ) {
+			$response['tf_carrental'] = get_cars_min_max_price();
+		// } else if( $post_type == 'tf_room' ) {
+			$response['tf_room'] = Room_Pricing::get_min_max_price_from_all_room();
+		// }
 
 		wp_send_json_success( $response );
 		wp_die();
