@@ -142,12 +142,48 @@
          * Ajax apartment booking
          * @author Foysal
          */
-        $('body').on('submit', 'form#tf-apartment-booking', function (e) {
-            e.preventDefault();
+        let activeApartmentBookingForm = null;
 
-            var $this = $(this);
+        function showApartmentBookingErrors(errors) {
+            if (errors && Array.isArray(errors)) {
+                errors.forEach(function (text) {
+                    notyf.error(text);
+                });
+            }
+        }
 
-            var formData = new FormData(this);
+        function setApartmentDepositValue($form, isDeposit) {
+            const value = isDeposit ? '1' : '0';
+            if ($form.find('.tf-apartment-deposit-value').length) {
+                $form.find('.tf-apartment-deposit-value').val(value);
+            } else {
+                $form.append('<input type="hidden" name="deposit" value="' + value + '" class="tf-apartment-deposit-value" />');
+            }
+        }
+
+        function showApartmentPopupLoader() {
+            const $loader = $('#tour_room_details_loader');
+            if ($loader.length) {
+                $loader.show();
+            }
+        }
+
+        function hideApartmentPopupLoader() {
+            const $loader = $('#tour_room_details_loader');
+            if ($loader.length) {
+                $loader.hide();
+            }
+        }
+
+        function submitApartmentBooking($form, options = {}) {
+            const settings = $.extend({
+                fromPopup: false,
+                triggerButton: null
+            }, options);
+            let keepPopupLoading = false;
+
+            const $popup = $('.tf-apartment-booking-popup');
+            const formData = new FormData($form[0]);
             formData.append('action', 'tf_apartment_booking');
 
             $.ajax({
@@ -156,48 +192,163 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                beforeSend: function (data) {
-                    $this.block({
-                        message: null,
-                        overlayCSS: {
-                            background: "#fff",
-                            opacity: .5
-                        }
-                    });
-
-                    $('.tf-notice-wrapper').html("").hide();
+                beforeSend: function () {
+                    if (settings.fromPopup) {
+                        showApartmentPopupLoader();
+                        $popup.addClass('tf-is-processing');
+                    } else {
+                        $form.block({
+                            message: null,
+                            overlayCSS: {
+                                background: '#fff',
+                                opacity: 0.5
+                            }
+                        });
+                    }
+                    $('.tf-notice-wrapper').html('').hide();
                 },
-                complete: function (data) {
-                    $this.unblock();
+                complete: function () {
+                    if (settings.fromPopup) {
+                        if (keepPopupLoading) {
+                            return;
+                        }
+                        hideApartmentPopupLoader();
+                        $popup.removeClass('tf-is-processing');
+                    } else {
+                        $form.unblock();
+                    }
                 },
                 success: function (data) {
-                    $this.unblock();
-
-                    var response = JSON.parse(data);
+                    let response = {};
+                    try {
+                        response = JSON.parse(data);
+                    } catch (error) {
+                        response = { status: 'error', errors: [tf_params.something_went_wrong || 'Something went wrong.'] };
+                    }
 
                     if (response.status === 'error') {
-                        if (response.errors) {
-                            response.errors.forEach(function (text) {
-                                notyf.error(text);
-                            });
-                        }
-
+                        showApartmentBookingErrors(response.errors);
                         return false;
-                    } else {
+                    }
 
-                        if (response.redirect_to) {
-                            window.location.replace(response.redirect_to);
-                        } else {
-                            jQuery(document.body).trigger('added_to_cart');
+                    if (response.redirect_to) {
+                        if (settings.fromPopup) {
+                            keepPopupLoading = true;
+                            showApartmentPopupLoader();
+                            $popup.addClass('tf-is-processing');
                         }
-
+                        window.location.replace(response.redirect_to);
+                        return;
+                    } else {
+                        jQuery(document.body).trigger('added_to_cart');
+                        if (settings.fromPopup) {
+                            $popup.removeClass('show');
+                        }
                     }
                 },
                 error: function (data) {
                     console.log(data);
                 },
-
             });
+        }
+
+        function loadApartmentBookingPopupSummary($form) {
+            const $popup = $('.tf-apartment-booking-popup');
+            const formData = new FormData($form[0]);
+            formData.append('action', 'tf_apartment_booking_popup');
+            formData.append('_nonce', tf_params.nonce);
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    showApartmentPopupLoader();
+                },
+                complete: function () {
+                    hideApartmentPopupLoader();
+                },
+                success: function (data) {
+                    let response = {};
+                    try {
+                        response = JSON.parse(data);
+                    } catch (error) {
+                        response = { status: 'error', errors: [tf_params.something_went_wrong || 'Something went wrong.'] };
+                    }
+
+                    if (response.status === 'error') {
+                        showApartmentBookingErrors(response.errors);
+                        return false;
+                    }
+
+                    if (response.booking_summary && $popup.find('.tf-apartment-popup-summary').length) {
+                        $popup.find('.tf-apartment-popup-summary').html(response.booking_summary);
+                    }
+
+                    $popup.addClass('show');
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
+        function openApartmentBookingPopup($form) {
+            const $popup = $('.tf-apartment-booking-popup');
+
+            if (!$popup.length) {
+                submitApartmentBooking($form);
+                return;
+            }
+
+            activeApartmentBookingForm = $form;
+
+            const isDeposit = $form.find('.tf-apartment-deposit-value').val() === '1';
+            if ($popup.find('.tf-apartment-popup-deposit-switch').length) {
+                $popup.find('.tf-apartment-popup-deposit-switch').prop('checked', isDeposit);
+            }
+
+            loadApartmentBookingPopupSummary($form);
+        }
+
+        $('body').on('submit', 'form#tf-apartment-booking', function (e) {
+            e.preventDefault();
+            openApartmentBookingPopup($(this));
+        });
+
+        $('body').on('change', '.tf-apartment-popup-deposit-switch', function () {
+            if (!activeApartmentBookingForm || !activeApartmentBookingForm.length) {
+                return;
+            }
+
+            setApartmentDepositValue(activeApartmentBookingForm, $(this).is(':checked'));
+            loadApartmentBookingPopupSummary(activeApartmentBookingForm);
+        });
+
+        $('body').on('click', '.tf-apartment-popup-continue', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if ($('.tf-apartment-booking-popup').hasClass('tf-is-processing')) {
+                return;
+            }
+
+            if (!activeApartmentBookingForm || !activeApartmentBookingForm.length) {
+                return;
+            }
+
+            const isDeposit = $('.tf-apartment-popup-deposit-switch').is(':checked');
+            setApartmentDepositValue(activeApartmentBookingForm, isDeposit);
+            submitApartmentBooking(activeApartmentBookingForm, {
+                fromPopup: true
+            });
+        });
+
+        $('body').on('click touchstart', '.tf-apartment-booking-popup .tf-booking-times span', function (e) {
+            e.preventDefault();
+            $('.tf-apartment-booking-popup').removeClass('show');
         });
 
 
