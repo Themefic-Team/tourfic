@@ -1,0 +1,22 @@
+//global css
+@import '../../../common/variable';
+@import '../../../common/mixin';
+@import 'global/global';
+
+//core css
+@import 'core/admin';
+
+//setup wizard css
+@import 'setup-wizard/setup-wizard';
+
+//tf-options css
+@import 'tf-options/tf-options';
+
+//backend booking css
+@import 'backend-booking';
+
+//booking details css
+@import 'booking-details';
+
+// enquiry details css
+@import 'enquiry-details';

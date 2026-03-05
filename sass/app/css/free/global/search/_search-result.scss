@@ -1,0 +1,1078 @@
+.search-result-wrapper {
+    padding: 30px 0;
+}
+.search-result-inner {
+    display: grid;
+    grid-template-columns: 73% 27%;
+    @media #{$max1024} {
+        grid-template-columns: 67% 33%;
+    }
+    @media #{$max768} {
+        grid-template-columns: 100%;
+    }
+    .tf-search-left {
+        padding-right: 16px;
+        @media #{$max768} {
+            padding: 0;
+        }
+        .tf-action-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            margin-bottom: 15px;
+          
+            .tf-result-counter-info{
+                display: flex;
+                .tf-counter-title{
+                    margin-right: 5px;
+                }
+            }
+            @media #{$max575} {
+                gap: 8px;
+               
+            }
+            .tf-list-grid {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            
+                a {
+                    display: inline-flex;
+                    margin-left: 10px;
+                    font-size: 1.25rem;
+                    text-decoration: none;
+                    color: $color-primary;
+                    @media #{$max768}{
+                        display: none;
+                    }
+                }
+            
+                .tf-archive-ordering{
+                    position: relative;
+                    #tf-orderby{
+                        height: 100%;
+                        padding: 8px 30px 8px 8px;
+                        background-position: calc(100% - 8px) 54%;
+                        border-radius: 4px;
+                        font-size: 1rem;
+                        color: $color-text;
+                        background-color: $color-filling-bg;
+                        border-color: $color-border-lite;
+                        -webkit-appearance: none;
+                        appearance: none;
+                        -moz-appearance: none;
+                        cursor: pointer;
+            
+                        @media #{$max575}{
+                            max-width: 160px;
+                        }
+                    }
+                    i{
+                        position: absolute;
+                        top: 50%;
+                        right: 12px;
+                        transform: translateY(-50%);
+                    }
+                } 
+            }
+        }
+        
+        .archive_ajax_result {
+            @media #{$max1024} {
+                .single-tour-wrap {
+                    width: 100%;
+                    flex: none;
+                    margin-bottom: 20px;
+                }
+                .tourfic-single-left {
+                    margin-bottom: 16px;
+                }
+                .single-tour-inner {
+                    height: 100%;
+                    padding: 20px;
+                    gap: 20px;
+                }
+                .tourfic-single-right {
+                    padding: 0;
+                    height: auto;
+                }
+                .roomrow_flex {
+                    padding: 0;
+                    flex-wrap: wrap;
+                }
+                .roomName_flex {
+                    width: 100%;
+                    max-width: 100%;
+                }
+                .roomPrice.roomPrice_flex.sr_discount {
+                    text-align: left;
+                    margin: 10px 0;
+                }
+                .availability-btn-area {
+                    .tf_btn {
+                        width: 100%;
+                        margin-top: 15px;
+                    }
+                } 
+            }
+            @media #{$max768} {
+                display: grid;
+                grid-template-columns: 48% 49%;
+                gap: 20px;
+            }
+            @media #{$max575} {
+                grid-template-columns: 100%;
+                gap: 0;
+            }
+            .tourfic-single-left{
+                @media #{$max768} {
+                    width: 100%;
+                }
+            }
+            .single-tour-inner{
+                @media #{$max768} {
+                    margin-top: 0;
+                    gap: 0;
+                }
+            }
+            &.loading {
+                opacity: 0.3;
+            }
+            .tf-tour-price {
+                display: flex;
+                justify-content: end;
+                margin-top: 10px;
+            }
+            .tf_posts_navigation {
+                .page-numbers{
+                    background-color: $color-gray-light;
+                    color: $color-text;
+                    border: 1px solid $color-border-lite;
+                    &.current,
+                    &:hover {
+                        background: $color-primary;
+                        color: $color-white;
+                        padding: 5px 15px;
+                        border-color: $color-primary;
+                    }
+                }
+            }
+            &.tours-grid{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                .single-tour-wrap {
+                    width: 100%;
+                    padding: 0 5px;
+                    margin-bottom: 10px;
+                }
+                .single-tour-inner {
+                    margin: 0;
+                    height: 100%;
+                    padding: 20px;
+                }
+                .tourfic-single-left {
+                    width: 100%;
+                    margin-bottom: 16px;
+                    @media #{$max1024}{
+                        margin-bottom: 0;
+                    }
+                }
+                .tourfic-single-right {
+                    padding: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .roomrow_flex {
+                    padding: 0;
+                    flex-wrap: wrap;
+                }
+                .roomName_flex {
+                    width: 100%;
+                    max-width: 100%;
+                }
+                .availability-btn-area {
+                    .tf_btn {
+                        margin-top: 15px;
+                    }
+                }
+                .roomPrice.roomPrice_flex.sr_discount {
+                    text-align: left;
+                    margin: 10px 0;
+                }
+                .tf-tour-price {
+                    justify-content: start;
+                }
+                .availability-btn-area.tour-search{
+                    text-align: left;
+                }
+                .tf_posts_navigation {
+                    grid-column: span 2;
+                }
+            }
+        }
+        a.page-numbers {
+            background: $color-primary;
+            color: $color-white;
+            padding: 5px 15px;
+            text-decoration: none;
+        }
+    }
+    .tf-search-right {
+        padding-left: 16px;
+
+        @media #{$max768} {
+            padding: 0;
+            grid-row: 1;
+            margin-bottom: 24px;
+        }
+    }
+}
+.single-tour-wrap{
+    transition: all 0.3s ease-out;
+    * {
+        transition: all 0.3s ease-out;
+    }
+    @media #{$max768} {
+        margin-bottom: 0px;
+    }
+    .single-tour-inner {
+        overflow: hidden;
+        width: 100%;
+        min-height: 149px;
+        padding: 20px;
+        margin: 16px 0;
+        border: 1px solid $color-border-lite;
+        background: $color-filling-fg;
+        border-radius: 4px;
+        box-sizing: border-box;
+        cursor: default;
+        clear: both;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        position: relative;
+        .tf-featured-badge {
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            &::before, 
+            &::after {
+                position: absolute;
+                z-index: -1;
+                content: "";
+                display: block;
+                border: 5px solid $color-brand-dark;
+                border-top-color: rgba(0,0,0,0);
+                border-left-color: rgba(0,0,0,0);
+            }
+            &::before{
+                top: 0;
+                right: 0;
+            }
+            &::after {
+                bottom: 0;
+                left: 0;
+            }
+            span {
+                position: absolute;
+                display: block;
+                width: 225px;
+                padding: 6px 0;
+                background-color: $color-brand-dark;
+                box-shadow: 0 5px 10px rgba(0,0,0,.1);
+                color: $color-white;
+                text-shadow: 0 1px 1px rgba(0,0,0,.2);
+                text-transform: uppercase;
+                text-align: center;
+                font-size: 1rem;
+                z-index: 9;
+                right: -12px;
+                top: 33px;
+                font-weight: 700;
+                transform: rotate(-45deg);
+            }
+        }
+        .tourfic-single-left {
+            order: 1;
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: main-size;
+            width: 210px;
+            min-height: 210px;
+            position: relative;
+        
+            img {
+                height: 100%;
+                width: 100%;
+                -o-object-fit: cover;
+                object-fit: cover;
+                border-radius: 4px;
+            }
+            .default-tags-container {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: space-evenly;
+                width: 100%;
+                font-size: 0.75rem;
+                margin-top: 5px;
+        
+                .default-single-tag {
+                    padding: 6px 12px;
+                    display: block;
+                    border-radius: 50px;
+                    margin: 5px 4px;
+                    font-weight: 500;
+                    line-height: 1;
+                    text-transform: capitalize;
+                }
+            }
+        }
+        .tourfic-single-right {
+            order: 2;
+            flex-grow: 1;
+            flex-basis: 200px;
+            padding: 0 0 0 16px;
+            .tf-archive-rating-wrapper {
+                @media #{$max768} {
+                    margin: 15px 0;
+                }
+                .tf-archive-rating {
+                    width: 40px;
+                    height: 40px;
+                    line-height: 1;
+                    background: $color-primary;
+                    border-radius: 4px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    float: right;
+                    margin-bottom: 3px;
+                    font-size: 0.875rem;
+                    color: $color-white;
+                    font-weight: bold;
+                    @media #{$max768} {
+                        float: none;
+                    }
+                }
+                h6 {
+                    color: $color-heading;
+                    font-weight: 400;
+                    text-transform: capitalize;
+                    font-size: 0.875rem;
+                    text-align: right;
+                    @media #{$max768} {
+                        text-align: left;
+                    }
+                }
+            }
+            .tf-tour-desc {
+                line-height: 1.5;
+                margin: 5px 0 10px;
+                font-size: 0.875rem;
+                opacity: 0.85;
+                border-top: 1px solid $color-border-lite;
+                padding-top: 8px;
+            }
+            .availability-btn-area.tour-search {
+                font-size: 0.875rem;
+                line-height: 1;
+                text-align: right;
+            }
+            .tf-room-price {
+                margin-top: 10px;
+                .amount {
+                    font-weight: bold;
+                    margin-left: 5px;
+                }
+            }
+            .tf-tour-price {
+                .amount {
+                    font-weight: bold;
+                    margin-left: 5px;
+                }
+            }
+            .tf_property_block_main_row {
+                min-height: 50px;
+                display: flex;
+                flex-direction: row-reverse;
+                justify-content: space-between;
+                font-size: 0.75rem;
+                line-height: 1.5;
+                font-weight: 400;
+                @media #{$max768} {
+                    display: block;
+                }
+                .tf_item_main_block {
+                    order: 2;
+                    flex-grow: 1;
+                    .tf-hotel__title-wrap {
+                        margin-bottom: 4px;
+                        a{
+                            display: block;
+                            color: inherit;
+                            .tourfic_hotel-title {
+                                display: inline-block;
+                                margin: 0;
+                                padding-right: 2px;
+                                font-size: 1.5rem;
+                                color: $color-heading;
+                                @media #{$max768} {
+                                    font-size: 1.25rem;
+                                }
+                                &:hover {
+                                    color: $color-brand-dark;
+                                }
+                            }
+                            &:hover {
+                                color: $color-primary;
+                            }
+                        }
+                    }
+                    .tf-map-link {
+                        i{
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+            .sr_rooms_table_block {
+                margin-top: 8px;
+                .room_details {
+                    border-top: 1px solid $color-border-lite;
+                    padding-top: 8px;
+                    .featuredRooms {
+                        margin: 0;
+                        clear: both;
+                        width: 100%;
+                        line-height: 1;
+                        .tf-archive-shortdesc {
+                            line-height: 1.5;
+                            margin: 5px 0 10px;
+                            font-size: 0.875rem;
+                            opacity: 0.85;
+                            p{
+                                @media #{$max768} {
+                                    margin-bottom: 0;
+                                }
+                            }
+                        }
+                        .tf_room_name_inner{
+                            @media #{$max768} {
+                                padding-top: 0;
+                            }
+                        }
+                        .roomrow_flex {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: end;
+                            font-size: 0.875rem;
+                            align-items: center;
+                            .roomName_flex {
+                                flex-grow: 1;
+                                width: auto;
+                                max-width: 50%;
+                                .tf-archive-desc {
+                                    li {
+                                        display: inline-block;
+                                        margin-right: 7px;
+                                    }
+                                    margin: 0;
+                                    padding: 0;
+                                    i {
+                                        color: $color-success;
+                                        font-size: 0.938rem;
+                                        margin-bottom: 10px;
+                                    }
+                                }
+                            }
+                            .roomPrice.roomPrice_flex.sr_discount {
+                                text-align: right;
+                                max-width: 50%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.tf-featured{
+        .single-tour-inner {
+            background: $color-filling-fg;
+            border-color: $color-border-lite;
+        }
+    }
+    &:first-child {
+        .single-tour-inner {
+            margin-top: 0;
+        }
+    }
+}
+.tf_widget {
+    border: 1px solid $color-border-lite;
+    background: $color-white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 0px;
+    .tf-hotel-result-price-range,
+    .tf-tour-result-price-range,
+    .tf-apartment-result-price-range{
+        margin-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    h4,h2{
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: $color-heading;
+    }
+    .al-range-slider__track {
+        background: $color-brand-lite;
+        height: 10px;
+        box-shadow: none;
+        margin: 30px 0px 10px 0px;
+    }
+    .al-range-slider_dark {
+        padding: 0px;
+        .al-range-slider__bar {
+            background: $color-text;
+            box-shadow: none;
+        }
+    }
+    .al-range-slider__knob {
+        background: $color-filling-bg;
+        height: 24px;
+        width: 24px;
+        box-shadow: none;
+        border: 1.5px solid $color-border;
+        &:first-child {
+            span {
+                left: 10px;
+            }
+        }
+    }
+    .al-range-slider__tooltip {
+        background: $color-primary;
+        border-radius: 5px;
+        box-shadow: none;
+        padding: 3px 10px;
+        color: $color-white;
+        font-size: 0.813rem;
+        margin-bottom: 0px;
+        bottom: 30px;
+    }
+    .al-range-slider__input.js-al-range-slider__input {
+        display: none;
+    }
+    .tf-widget-title {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        height: 48px;
+        background: $color-gray-light;
+        border: 1px solid $color-border-lite;
+        border-radius: 8px 8px 0px 0px;
+        justify-content: space-between;
+        span {
+            font-size: 1rem;
+            line-height: 1.5;
+            cursor: pointer;
+            width: 100%;
+        }
+        i.fa {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+        }
+        i.fa.collapsed {
+            transform: rotate(180deg);
+        }
+    }
+
+    ul{
+        margin: 0;
+        padding: 0;
+        li.tf-filter-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin: 5px;
+            @media #{$max768} {
+                padding-right: 25px;
+                margin-top: 5px;
+            }
+            &.active {
+                background-color: $color-brand-lite;
+            }
+            &.hidden{
+                display: none;
+            }
+            label {
+                position: relative;
+                cursor: pointer;
+                width: 100%;
+                display: inline-block;
+                padding-left: 25px;
+                font-weight: 400;
+                @media #{$max1024} {
+                    padding-right: 25px;
+                    line-height: 1.5;
+                }
+                input{
+                    display: none;
+                }
+            }
+            .tf-checkmark {
+                position: absolute;
+                top: 1px;
+                left: 0px;
+                height: 20px;
+                width: 20px;
+                background-color: $color-white;
+                border-radius: 5px;
+                border: 1px solid $color-border-lite;
+                @media #{$max1024} {
+                    top: 0px;
+                }
+            }
+    
+            input[type=checkbox] {
+                display: none;
+            }
+    
+            label:hover input~.tf-checkmark {
+                background-color: $color-gray;
+            }
+    
+            label input:checked~.tf-checkmark {
+                background-color: $color-primary !important;
+            }
+    
+            .tf-checkmark:after {
+                content: "";
+                position: absolute;
+                display: none;
+            }
+    
+            label input:checked~.tf-checkmark:after {
+                display: block;
+            }
+    
+            /* Style the tf-checkmark/indicator */
+            label .tf-checkmark:after {
+                left: 6px;
+                top: 3px;
+                width: 6px;
+                height: 10px;
+                border: solid $color-white;
+                border-width: 0 3px 3px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+        }
+    }
+    a.see-more.btn-link {
+        text-align: center;
+        display: block;
+        font-weight: 600;
+        color: $color-primary;
+        text-decoration: none;
+    }
+    a.see-less.btn-link {
+        text-align: center;
+        display: block;
+        font-weight: 600;
+        display: none;
+        text-decoration: none;
+    }
+    a.see-more span {
+        margin-left: 3px;
+        vertical-align: middle;
+    }
+    a{
+        color: $color-primary;
+    }
+}
+
+.tf-room-filter{
+    display: none;
+    &.tf-filter-show{
+        display: block;
+    }
+    .tf-room-checkbox {
+        display: flex;
+        gap: 10px 30px;
+        list-style: none;
+        flex-wrap: wrap;
+        margin: 0 0 16px 0;
+        label {
+            position: relative;
+            cursor: pointer;
+            width: 100%;
+            display: inline-block;
+            padding-left: 30px;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+        .tf-checkmark {
+            position: absolute;
+            top: 0px;
+            left: 1px;
+            height: 20px;
+            width: 20px;
+            background-color: $color-white;
+            border-radius: 5px;
+            border: 1px solid $color-border-lite;
+        }
+
+        input[type=checkbox] {
+            display: none;
+        }
+
+        label:hover input~.tf-checkmark {
+            background-color: $color-gray;
+        }
+
+        label input:checked~.tf-checkmark {
+            background-color: $color-primary;
+        }
+
+        .tf-checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        label input:checked~.tf-checkmark:after {
+            display: block;
+        }
+
+        /* Style the tf-checkmark/indicator */
+        label .tf-checkmark:after {
+            left: 6px;
+            top: 3px;
+            width: 6px;
+            height: 10px;
+            border: solid $color-white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+    }
+}
+
+/* Car search */
+.page-template-tf-search{
+    .tf-archive-template{
+        &__one{
+            padding: 0;
+            .tf-archive-car-banner{
+                background: $color-gray-light;
+                height: 350px;
+                margin: 24px 24px 0 24px;
+                border-radius: 16px;
+                background-size: cover;
+                background-position: center;
+                @media #{$max575}{
+                    margin: 16px 16px 0;
+                }
+                .tf-banner-content{
+                    height: 100%;
+                    h1{
+                        color: $color-white;
+                        text-align: center;
+                        font-size: 2.375rem;
+                        font-weight: 700;
+                    }
+                }
+            }
+            .tf-archive-car-details-warper{
+                .tf-archive-header{
+                    .tf-archive-view{
+                        ul{
+                            margin: 0px;
+                            padding: 0;
+                            li{
+                                height: 52px;
+                                width: 52px;
+                                display: flex;
+                                border-radius: 8px;
+                                background: $color-filling-fg;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+                                i{
+                                    color: $color-text;
+                                }
+                                &.active{
+                                    background-color: $color-primary;
+                                    i{
+                                        color: $color-white;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .tf-total-result-bar{
+                        text-align: right;
+                        display: flex;
+                        gap: 2px;
+                        span{
+                            color: $color-text;
+                            font-size: 1rem;
+                            font-weight: 400;
+                        }
+                        .tf-archive-filter-showing{
+                            display: none;
+                            cursor: pointer;
+                            @media #{$max1024}{
+                                display: block;
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+                }
+
+                .tf-car-details-column{
+                    .tf-car-archive-sidebar{
+                        width: 358px;
+                        border-radius: 16px;
+                        background: $color-filling-fg;
+                        padding: 32px;
+                        position: relative;
+                        @media #{$max1024}{
+                            width: 100%;
+                            display: none;
+                        }
+                        @media #{$max768}{
+                            width: 100%;
+                        }
+
+                        &.tf-filter-show{
+                            display: block;
+                        }
+                        
+                        .tf-sidebar-header{
+                            margin-bottom: 32px;
+                           
+                            h4{
+                                color: $color-heading;
+                                font-size: 1rem;
+                                font-weight: 400;
+                                margin: 0;
+                            }
+                            button{
+                                color: $color-text;
+                                font-size: 1rem;
+                                font-weight: 400;
+                                background-color: transparent;
+                                padding: 0px;
+                                border: 0px solid;
+                                cursor: pointer;
+                                display: none;
+                            }
+                            .tf-close-sidebar {
+                                display: none;
+                                @media #{$max1024}{
+                                    position: absolute;
+                                    right: 17px;
+                                    top: 12px;
+                                    display: block;
+                                    color: $color-danger;
+                                }
+                            }
+                        }
+                        .tf_widget{
+                            margin-bottom: 32px;
+                            background: transparent;
+                            border: 0;
+                            border-radius: 0;
+                            &:last-child{
+                                margin-bottom: 0px;
+                            }
+                            .tf-widget-title{
+                                background: transparent;
+                                padding: 0;
+                                height: auto;
+                                border: 0;
+                                box-shadow: none;
+                                border-radius: 0px;
+                                span{
+                                    color: $color-text;
+                                    font-size: 1rem;
+                                    font-weight: 400;
+                                    margin-bottom: 16px;
+                                    cursor: auto;
+                                }
+                                i{
+                                    display: none;
+                                }
+                            }
+                            .tf-category-lists{
+                                ul{
+                                    margin: 0;
+                                    padding: 0;
+                                    list-style: none;
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    gap: 8px;
+                                    li{
+                                        width: 100%;
+                                        background: transparent;
+                                        border-radius: 0;
+                                        margin: 0;
+                                        padding: 0;
+                                        display: flow-root;
+                                        &.hidden{
+                                            display: none;
+                                        }
+                                        label{
+                                            color: $color-gray-light;
+                                            color: $color-text;
+                                            font-size: 1rem;
+                                            font-weight: 400;
+                                            display: block;
+                                            position: relative;
+                                            padding-left: 35px;
+                                            margin-bottom: 0px;
+                                            cursor: pointer;
+                                            -webkit-user-select: none;
+                                            -moz-user-select: none;
+                                            -ms-user-select: none;
+                                            user-select: none;
+                                            
+                                            input{
+                                                position: absolute;
+                                                opacity: 0;
+                                                cursor: pointer;
+                                                height: 0;
+                                                width: 0;
+                                            }
+                                            input:checked ~ .tf-checkmark:after {
+                                                display: block;
+                                            }
+                                            input:checked ~ .tf-checkmark{
+                                                background-color: transparent;
+                                                border-color: $color-primary;
+                                            }
+                                            .tf-checkmark {
+                                                position: absolute;
+                                                top: 0;
+                                                left: 0;
+                                                height: 20px;
+                                                width: 20px;
+                                                border: 2px solid $color-gray;
+                                                background-color: transparent;
+                                                border-radius: 5px;
+                                                &::after{
+                                                    content: "";
+                                                    position: absolute;
+                                                    display: none;
+                                                    left: 5px;
+                                                    top: 2px;
+                                                    width: 7px;
+                                                    height: 10px;
+                                                    border: solid $color-white;
+                                                    border-width: 0 3px 3px 0;
+                                                    -webkit-transform: rotate(45deg);
+                                                    -ms-transform: rotate(45deg);
+                                                    transform: rotate(45deg);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                a{
+                                    text-decoration: none;
+                                    color: $color-text;
+                                    font-size: 1rem;
+                                    font-weight: 400;
+                                    text-align: left;
+                                    margin-top: 8px;
+                                }
+                            }
+                            .al-range-slider__track{
+                                border-radius: 4px;
+                                background: $color-brand-lite;
+                                margin: 0 0 28px 0;
+                            }
+                            .al-range-slider__tooltip{
+                                bottom: -30px;
+                                background: transparent;
+                                color: $color-text;
+                            }
+                            .al-range-slider_dark .al-range-slider__bar{
+                                background-color: $color-text;
+                            }
+                            .al-range-slider__knob{
+                                border-radius: 12px;
+                                border: 1.5px solid $color-border;
+                                background: $color-filling-bg;
+                                width: 24px;
+                                height: 24px;
+                            }
+                            &.widget_tf_seat_filters{
+                                .al-range-slider__knob{
+                                    &::before{
+                                        content: "\f6c0";
+                                        position: absolute;
+                                        font-family: "FontAwesome";
+                                        color: $color-primary;
+                                        height: 100%;
+                                        width: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                    }
+                                }
+                            }
+                            &.widget_tf_car_engine_filter{
+                                .tf-category-lists{
+                                    ul{
+                                        gap: 8px;
+                                        li{
+                                            width: calc(33% - 5px);
+                                            label{
+                                                background: $color-filling-bg;
+                                                border-radius: 8px;
+                                                margin: 0;
+                                                padding: 0;
+                                                font-size: 1rem;
+                                                font-weight: 400;
+                                                padding: 4px 8px;
+                                                text-align: center;
+                                                z-index: 0;
+                                            }
+                                            &.active{
+                                                label{
+                                                    background: $color-primary;
+                                                    color: $color-white;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            a{
+                                color: $color-primary;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,83 @@
+.tf-field-ical,
+.tf-field-ical_export,
+.tf-field-text, .tf-field-password {
+
+    input {
+        width: 100%;
+        padding: 12px 8px 12px 12px;
+        height: 40px;
+        color: $tf_text_title;
+        font-size: 15px;
+        padding: 8px 8px 8px 12px;
+        border: 1px solid $tf_border_default;
+        background: $tf_fill_background;
+        border-radius: 4px;
+
+        &:focus {
+            background: transparent;
+            box-shadow: none;
+            border-radius: 4px;
+            border: 1px solid $tf_border_default;
+        }
+
+        &::-webkit-input-placeholder {
+            color: $tf_text_faint;
+        }
+
+        &::-ms-input-placeholder {
+            color: $tf_text_faint;
+        }
+
+        input:-ms-input-placeholder {
+            color: $tf_text_faint;
+        }
+
+        &::-moz-placeholder {
+            opacity: 1;
+            color: $tf_text_faint;
+        }
+
+        &:-moz-placeholder {
+            opacity: 1;
+            color: $tf_text_faint;
+        }
+
+        &::placeholder {
+            color: $tf_text_faint;
+        }
+
+        &:read-only {
+            box-shadow: inset 0 1px 2px rgba(0,0,0,.04);
+            background-color: $blue5;
+
+            &:focus {
+                box-shadow: none;
+                border: 1px solid $slate20;
+            }
+        }
+    }
+    .tf-field-text-group{
+        border-radius: 4px;
+        border: 1px solid $tf_border_default;
+        background: $tf_fill_white;
+        height: 40px;
+        padding: 8px 8px 8px 12px;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        i{
+            color: $tf_text_faint;
+        }
+        input{
+            height: 24px;
+            border: 0px solid;
+            background: transparent;
+            box-shadow: none;
+            &:focus{
+                outline: none;
+                border: none;
+                box-shadow: none;
+            }
+        }
+    }
+}

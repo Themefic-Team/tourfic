@@ -1,0 +1,26 @@
+.single-tf_apartment{
+    .tf-single-template{
+        &__legacy{
+            #tf-amenities-modal {
+                h2.section-heading{
+                    margin-bottom: 24px;
+                }
+                .tf-apartment-amenity-cat {
+                    border-bottom: 1px solid $color-gray;
+                    margin-bottom: 24px;
+
+                    &:last-child {
+                        border-bottom: none;
+                        margin-bottom: 0;
+                    }
+
+                    h3 {
+                        font-size: 1.25rem;
+                        color: $color-heading;
+                        margin-bottom: 16px;
+                    }
+                }
+            }
+        }
+    }
+}

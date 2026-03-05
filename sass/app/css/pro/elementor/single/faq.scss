@@ -1,0 +1,385 @@
+// Gallery
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+//style 1
+.tf-single-faq-section.tf-single-faq-style1{
+    .tf-section-title {
+        margin-bottom: 15px;
+        font-size: 1.875rem;
+        line-height: 1.5;
+        color: var(--tf-text-heading);
+    }
+    .tf-faq-inner{
+        .tf-faq-single.has-devider{
+            border-bottom: 1px solid $color-border-lite;
+        }
+        .active{
+            .tf-faq-single-inner{
+                background: $color-filling-fg;
+                @include bd-radius(5px);
+                margin: 0px 0px 30px 0px;
+                .tf-faq-collaps{
+                    .faq-icon{
+                        .tf-faq-close-icon{
+                            display: none;
+                        }
+                        .tf-faq-open-icon{
+                            color: $color-primary;
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+        .tf-faq-single-inner{
+            .tf-faq-content{
+                display: none;
+            }
+        }
+    }
+    .tf-faq-single-inner{
+        .tf-faq-content{
+            padding: 0px 24px 24px 24px;
+            p{
+                margin: 0;
+            }
+        }
+        .tf-faq-collaps{
+            padding: 24px;
+            @include flexbox();
+            gap: 16px;
+            @media #{$max575}{
+                flex-wrap: nowrap;
+                gap: 5px;
+            }
+            &:hover{
+                cursor: pointer;
+            }
+            &.tf-faq-icon-right{
+                @include justify-content(space-between);
+            }
+            .faq-icon{
+                svg{
+                    width: 16px;
+                    height: 16px;
+                }
+                .tf-faq-close-icon{
+                    display: block;
+                }
+                .tf-faq-open-icon{
+                    display: none;
+                }
+            }
+        }
+        .tf-faq-label{
+            line-height: 1.5;
+            margin-top: 0;
+            margin-bottom: 0;
+            font-size: 1.25rem;
+            color: $color-heading;
+        }
+    }
+
+    .tf-faq-single {
+        border-bottom: 0px solid;
+        .tf-faq-single-inner{
+            margin: 0px 0px 30px 0px;
+            background: $color-filling-fg;
+            transition: .3s all ease;
+            @media #{$max768}{
+                margin: 0px 0px 20px 0px;
+            }
+            &:hover{
+                background: $color-brand-lite;
+            }
+            h3{
+                font-size: 1.25rem;
+            }
+        }
+    }
+    .tf-faq-single.active {
+        .tf-faq-single-inner{
+            background: $color-brand-lite;
+        }
+    }
+}
+
+.tf-single-faq-style2.tf-questions-wrapper {
+    padding: 0;
+    h2{
+        color: $color-heading;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 24px;
+        @media #{$max1024}{
+            font-size: 1.5rem;
+        }
+    }
+    .tf-questions {
+        display: grid;
+        gap: 40px;
+        grid-template-columns: 1fr 1fr;
+        @media #{$max768}{
+            grid-template-columns: 1fr;
+            gap: 0px;
+        }
+        .tf-questions-col {
+            .tf-question {
+                padding: 24px;
+                background: transparent;
+                padding: 0px 24px;
+                transition: 0.3s;
+                display: block;
+                margin-bottom: 16px;
+                position: relative;
+                cursor: pointer;
+                .faq-icon{
+                    svg{
+                        width: 16px;
+                        height: 16px;
+                    }
+                    .tf-faq-close-icon{
+                        display: block;
+                    }
+                    .tf-faq-open-icon{
+                        display: none;
+                    }
+                }
+                &.tf-active {
+                    background: $color-filling-bg;
+                    padding: 24px;
+                    display: flex;
+                    flex-direction: column;
+                    cursor: text;
+                    .faq-icon{
+                        .tf-faq-close-icon{
+                            display: none;
+                        }
+                        .tf-faq-open-icon{
+                            display: block;
+                        }
+                    }
+                }
+                .tf-faq-head{
+                    cursor: pointer;
+                    @include flexbox();
+                    gap: 16px;
+                    align-items: center;
+
+                    &.tf-faq-icon-right{
+                        @include justify-content(space-between);
+                    }
+
+                    span {
+                        color: $color-text;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        margin-bottom: 8px;
+                    }
+                }
+                .tf-question-desc {
+                    display: none;
+                    @media #{$max768}{
+                        font-size: 0.875rem;
+                    }
+                }
+            }
+            .tf-question:last-child {
+                margin-bottom: 0px;
+            }
+        }
+    }
+}
+//style 3
+.tf-single-faq-section.tf-single-faq-style3{
+    h2{
+        color: $color-heading;
+        font-size: 1.313rem;
+        font-weight: 400;
+        margin-bottom: 16px;
+        margin-top: 0px;
+    }
+    .tf-faq-col{
+        margin-bottom: 16px;
+        &:last-child{
+            margin-bottom: 0px;
+        }
+        &.active{
+            .tf-faq-head{
+                .tf-faq-close-icon{
+                    display: none;
+                }
+                .tf-faq-open-icon{
+                    color: $color-primary;
+                    display: block;
+                }
+            } 
+        }
+        .tf-faq-head{
+            @include flexbox();
+            gap: 16px;
+            border-radius: 8px;
+            background: $color-gray-light;
+            padding: 8px 16px;
+            cursor: pointer;
+            color: $color-text;
+            font-size: 1rem;
+            font-weight: 400;
+            flex-wrap: nowrap;
+            
+            &.tf-faq-icon-right{
+                @include justify-content(space-between);
+            }
+            
+            i{
+                color: $color-text;
+            }
+            svg{
+                width: 16px;
+                height: 16px;
+            }
+            .tf-faq-close-icon{
+                display: block;
+            }
+            .tf-faq-open-icon{
+                display: none;
+            }
+        }
+        .tf-question-desc{
+            color: $color-text;
+            font-size: 0.938rem;
+            padding: 8px 16px;
+            display: none;
+        }
+    }
+}
+
+.tf-apartment-faq.tf-single-faq-style4 {
+    padding: 0;
+    .tf-faq-sec-title {
+        margin-bottom: 20px;
+        text-align: left;
+
+        h4 {
+            margin: 0;
+        }
+
+        p {
+            max-width: 100%;
+        }
+    }
+
+    .tf-faq-content-wrapper {
+        background: $color-brand-lite;
+        border: 1px solid $color-border-lite;
+        border-radius: 8px;
+        padding: 40px;
+        @media #{$max768}{
+            padding: 20px;
+        }
+    }
+
+    .tf-faq-items-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
+        gap: 20px;
+        @media #{$max768}{
+            gap: 16px;
+        }
+    }
+
+    #tf-faq-item {
+        border-radius: 8px;
+        padding: 0 0 20px;
+        margin-bottom: 0;
+        @media #{$max768}{
+            padding-bottom: 16px;
+        }
+
+        .tf-faq-title {
+            @include flexbox();
+            @include align-items(center);
+            gap: 8px;
+            padding: 0;
+            h4 {
+                font-size: 1rem;
+                color: $color-heading;
+                font-weight: 500;
+                line-height: 1.5;
+                letter-spacing: 0.5px;
+                margin: 0;
+
+                &:hover {
+                    color: $color-primary;
+                }
+            }
+
+            &.tf-faq-icon-right{
+                @include justify-content(space-between);
+            }
+            
+            i{
+                color: $color-text;
+            }
+            svg{
+                width: 16px;
+                height: 16px;
+                fill: $color-text;
+            }
+            .tf-faq-close-icon{
+                display: block;
+            }
+            .tf-faq-open-icon{
+                display: none;
+            }
+
+            &.active {
+                .tf-faq-close-icon{
+                    display: none;
+                }
+                .tf-faq-open-icon{
+                    color: $color-primary;
+                    display: block;
+                }
+
+                h4 {
+                    color: $color-primary;
+                }
+            }
+
+            &:hover {
+                i{
+                    color: $color-primary;
+                }
+                svg {
+                    fill: $color-primary;
+                }
+            }
+        }
+
+        .tf-faq-desc {
+            background-color: transparent;
+            padding: 0;
+            color: $color-text;
+            margin-top: 10px;
+        }
+    }
+
+    .tf-faq-desc {
+        p {
+            margin-bottom: 20px;
+        }
+    }
+
+    .tf-faq-items-wrapper {
+        #tf-faq-item {
+            &:last-child {
+                border-bottom: 0;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+        }
+    }
+}

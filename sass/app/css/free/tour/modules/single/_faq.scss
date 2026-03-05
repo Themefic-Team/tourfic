@@ -1,0 +1,48 @@
+.single-tf_tours{
+    .tf-single-template{
+        &__legacy{
+            .tour-faq{
+                .tf-tour-enquiry{
+                    flex-basis: 32%;
+                    padding-right: 30px;
+                    @media #{$max768}{
+                        flex-basis: 100%;
+                        padding-right: 0px;
+                    }
+                    .tf-ask-enquiry{
+                        background-color: $color-filling-fg;
+                        padding: 30px;
+                        text-align: center;
+                        i{
+                            text-align: center;
+                            background-color: $color-brand-lite;
+                            border-radius: 50%;
+                            color: $color-primary;
+                            margin: auto;
+                            margin-bottom: 25px;
+                            font-size: 1.875rem;
+                            height: 80px;
+                            width: 80px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                        h3{
+                            font-size: 1.5rem;
+                            color: $color-heading;
+                        }
+                        p{
+                            margin-top: 5px;
+                            margin-bottom: 25px;
+                        }
+                        .tf-btn{
+                            a:hover{
+                                background-color: $color-brand-dark;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

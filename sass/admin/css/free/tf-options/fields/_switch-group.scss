@@ -1,0 +1,137 @@
+.tf-field-switch_group {
+
+  .tf-switch-group-wrap{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+
+    &.tf-switch-column-4{
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+
+      @media #{$max1366} {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      @media #{$max1024} {
+        grid-template-columns: 1fr 1fr;
+      }
+      @media #{$max768} {
+        grid-template-columns: 1fr;
+      }
+    }
+    &.tf-switch-column-2{
+      grid-template-columns: 1fr 1fr;
+
+      @media #{$max768} {
+        grid-template-columns: 1fr;
+      }
+    }
+    &.tf-switch-column-1{
+      grid-template-columns: 1fr;
+    }
+
+    @media #{$max1024} {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media #{$max768} {
+      grid-template-columns: 1fr;
+    }
+
+    .tf-switch-column{
+      padding: 8px 16px;
+      border: 1px solid $slate20;
+      @include flexbox();
+      @include align-items(center);
+      @include justify-content(space-between);
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: move;
+
+      .tf-switch-group-label{
+        margin-right: 4px;
+        cursor: pointer;
+      }
+    }
+
+    .tf-switch-drag-highlight{
+      background-color: $slate10;
+    }
+
+  }
+
+  .tf-switch-label {
+    position: relative;
+    display: inline-block;
+    width: 62px;
+    height: 28px;
+    border-radius: 32px;
+
+    input {
+      display: none;
+    }
+
+    .tf-switch-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #DEE6EE;
+      border-radius: 20px;
+      @include transition(all, 0.4s);
+
+      &::before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        border-radius: 50px;
+        top: 4px;
+        left: 4px;
+        background-color: #ECF2F8;
+        filter: drop-shadow(0px 2px 4px rgba(12, 31, 49, 0.12));
+        @include transition(all, 0.4s);
+      }
+
+      .tf-switch-on, .tf-switch-off {
+        color: #ffffff;
+        position: absolute;
+        @include translateY(-50%);
+        top: 50%;
+        left: 12px;
+        font-size: 12px;
+        opacity: 0;
+        @include transition(all, 0.4s);
+      }
+
+      .tf-switch-off {
+        color: #8999A9;
+        left: auto;
+        right: 12px;
+        opacity: 1;
+      }
+    }
+
+    input:checked {
+      & + .tf-switch-slider {
+        background-color: #21A159;
+
+        &:before {
+          left: 100%;
+          margin-left: -24px;
+          background-color: #ffffff;
+          filter: drop-shadow(0px 2px 4px rgba(12, 31, 49, 0.12));
+        }
+
+        .tf-switch-on {
+          opacity: 1;
+        }
+
+        .tf-switch-off {
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+}

@@ -1,0 +1,25 @@
+.single-tf_apartment{
+    .tf-single-template{
+        &__legacy{
+            .apartment-toc {
+                margin-bottom: 48px;
+            
+                .tf-toc-wrap {
+                    padding: 40px;
+                    border-radius: 4px;
+                    border: 1px solid $color-border-lite;
+            
+                    @media #{$max768} {
+                        padding: 20px;
+                    }
+            
+                    p {
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

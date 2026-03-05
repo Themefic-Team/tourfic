@@ -1,0 +1,124 @@
+.tf-field {
+  padding: 12px 0;
+
+  @media #{$max1024} {
+    width: 100% !important;
+  }
+
+  .tf-field-label {
+    display: block;
+    font-style: normal;
+    margin-bottom: 3px;
+    font-weight: 600;
+    font-size: 15px;
+    color: $tf_text_title;
+    display: flex !important;
+    align-items: center;
+    line-height: 25.5px;
+    letter-spacing: -0.25px;
+    margin-bottom: 4px;
+
+    .tf-desc-tooltip{
+      margin-left: 4px;
+      position: relative;
+      display: flex;
+      .tf-desc-tooltip-content{
+        position: absolute;
+        width: 124px;
+        border-radius: 8px;
+        background: $tf_text_title;
+        padding: 8px 12px;
+        color: $tf_fill_white;
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 16px;
+        z-index: 9;
+        left: 50%;
+        margin-left: -74px;
+        bottom: 25px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        &::before{
+          position: absolute;
+          content: "";
+          height: 16px;
+          width: 16px;
+          border-radius: 3px;
+          background: $tf_text_title;
+          left: 50%;
+          margin-left: -8px;
+          bottom: -4px;
+          transform: rotate(45deg);
+          z-index: -1;
+        }
+      }
+
+      &:hover{
+        .tf-desc-tooltip-content{
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+      svg{
+        cursor: pointer;
+      }
+    }
+    .tf-csf-badge {
+      margin-left: 13px;
+      .tf-pro {
+        background-color: #F44336 !important;
+        margin: 0;
+      }
+
+      .tf-upcoming {
+        background-color: #006600 !important;
+        margin: 0;
+      }
+    }
+
+  }
+  
+.tf-label-field {
+  .tf-fieldset {
+    .tf-inline{
+      li {
+        background: #ededf8 !important;
+        padding: 20px 30px 13px 30px;
+        margin: 10px 0px;
+        border-radius: 8px;
+      }
+    }
+  }
+}
+
+  .tf-fieldset {
+    font-style: normal;
+    font-size: 0.875rem;
+    a {
+      font-style: normal;
+      font-weight: 600;
+    }
+  }
+
+  .tf-field-sub-title {
+    color: $tf_text_paragraph;
+    font-size: 13px;
+    margin-bottom: 0px;
+    margin-top: 4px;
+    display: block;
+  }
+}
+.tf-field.tf-field-heading{
+  .tf-fieldset{
+    margin-top: 0px;
+  }
+}
+.tf-taxonomy-metabox {
+  .tf-field {
+    padding: 12px 0;
+  }
+}
+.tf-inline-list{
+  display: inline-block;
+}

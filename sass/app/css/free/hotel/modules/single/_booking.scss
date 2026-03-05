@@ -1,0 +1,33 @@
+.single-tf_hotel{
+    .tf-single-template{
+        &__one{
+            #tf-single-hotel-avail{
+                margin: 0px;
+                .tf_booking-dates{
+                    .tf-field,
+                    #check-in-out-date{
+                        background-color: $color-filling-bg;
+                        
+                    }
+                    #tf-required {
+                        text-align: center;
+                        margin-top: 10px;
+                        display: block;
+                        b{
+                            font-weight: 500;
+                            color: $color-danger;
+                        }
+                    }
+                }
+                .tf-bttn-normal{
+                    padding: 16px 24px;
+                }
+            }
+            .tf-tour-booking-box{
+                margin-bottom: 25px;
+                background-color: $color-filling-fg;
+               
+            }
+        }
+    }
+}

@@ -1,0 +1,97 @@
+.single-tf_apartment{
+    .tf-single-template{
+        &__legacy{
+            .tf-apartment-review {
+                margin-bottom: 80px;
+            
+                .tf-review-container {
+                    .tf-total-review {
+                        margin: 0 0 24px 0;
+                        .tf-total-average {
+                            div {
+                                border-radius: 8px;
+                                background-color: $color-primary;
+                            }
+                
+                            span {
+                                color: $color-gray;
+                            }
+                        }
+                    }
+                }
+                .tf-review-progress-bar {
+                    background: $color-brand-lite;
+                    border-radius: 8px;
+                    column-gap: 200px;
+                    row-gap: 16px;
+                    border: 0;
+                    grid-template-columns: calc(50% - 100px) calc(50% - 100px);
+            
+                    @media #{$max768} {
+                        grid-template-columns: 1fr;
+                    }
+            
+                    .tf-single {
+                        grid-template-columns: 102px calc(100% - 212px) 30px;
+                        column-gap: 40px;
+                    }
+                }
+            
+                .tf-single-review {
+                    background-color: transparent;
+            
+                    .tf-single-details {
+                        padding-bottom: 25px;
+                    }
+            
+                    .tf-review-details {
+            
+                        .tf-rating-stars {
+                            font-size: 0.875rem;
+                        }
+            
+                        .tf-apartment-show-more {
+                            font-size: 0.875rem;
+                            font-weight: 500;
+                            line-height: 1.5;
+                            letter-spacing: 0.5px;
+                            color: $color-heading;
+                            cursor: pointer;
+                            user-select: none;
+                        }
+            
+                        .tf-full-description {
+                            margin-top: 8px;
+                        }
+                    }
+            
+                    p {
+                        margin: 0 0 8px 0;
+                        color: $color-text;
+                        font-size: 0.875rem;
+                        margin-bottom: 0;
+                    }
+                }
+            }
+            .show-all-review-wrap {
+                padding: 8px 24px;
+                border-radius: 4px;
+                background: $color-primary;
+                border: 1px solid $color-primary;
+                width: 200px;
+                margin: auto;
+            
+                .tf-apaartment-show-all {
+                    color: $color-white;
+                    text-align: center;
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                    line-height: 1.5;
+                    letter-spacing: 0.5px;
+                    user-select: none;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

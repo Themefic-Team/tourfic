@@ -1,0 +1,1010 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-single-hotel-room__style-1{
+    padding: 0;
+
+    .tf-rooms-sections{
+        .tf-rooms{
+            @media #{$max768}{
+                overflow-x: scroll;
+                width: auto;
+            }
+            .hotel-room-wrap {
+                overflow-x: unset;
+            }
+            .tf-availability-table{
+                background-color: $color-white;
+                box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
+                border-radius: 5px;
+                margin-bottom: 0px;
+                border-collapse: collapse;
+                width: 100%;
+                border-left: none;
+                &>thead{
+                    background-color: $color-filling-fg;
+                    tr{
+                        th{
+                            text-align: left;
+                            color: $color-text;
+                            border: 0px solid;
+                            border-radius: 5px 5px 0px 0px;
+                            padding: 13px 30px;
+                            font-size: 1rem;
+                            font-weight: 500;
+                            border: 1px solid $color-border-lite;
+                        }
+                    }
+                }
+                &>tbody{
+                    tr{
+                        td{
+                            border: 1px solid $color-border-lite;
+                            padding: 30px;
+                            border-right: none;
+                            vertical-align: top;
+                            text-align-last: left;
+                            @media #{$max768}{
+                                padding: 20px;
+                            }
+                            .tf-room-preview-img{
+                                margin-right: 20px;
+                                border-radius: 4px;
+                                position: relative;
+                                @media #{$max1024}{
+                                    width: 100%;
+                                    margin-bottom: 10px;
+                                    margin-right: 0;
+                                }
+                                img{
+                                    border-radius: 4px;
+                                    height: 100%;
+                                    max-width: 170px;
+                                    min-height: 155px;
+                                }
+                                span{
+                                    display: inline-block;
+                                    font-weight: 500;
+                                    background: $color-primary;
+                                    border-radius: 4px 0px 0px 0px;
+                                    padding: 3px 14px;
+                                    position: absolute;
+                                    left: 0;
+                                    top: 0;
+                                    color: $color-white;
+                                    font-size: 0.875rem;
+                                }
+                                
+                            }
+                            .tf-features-infos{
+                                @media #{$max1024}{
+                                    width: 100%!important;
+                                }
+                                .tf-room-type{
+                                    h3{
+                                        font-size: 1.25rem;
+                                        line-height: normal;
+                                        color: $color-heading;
+                                        a{
+                                            color: $color-heading;
+                                            text-decoration: none;
+                                        }
+                                    }
+                                }
+                                ul{
+                                    margin: 0;
+                                    padding: 0;
+                                    margin-bottom: 15px;
+                                    li{
+                                        display: inline-block;
+                                        background: $color-gray-light;
+                                        border-radius: 5px;
+                                        padding: 10px;
+                                        margin: 5px 10px 5px 0px;
+                                        line-height: 1.3;
+                                        font-size: 0.75rem;
+                                        i,
+                                        img{
+                                            margin-right: 5px;
+                                        }
+                                    }
+                                }
+                                > a{
+                                    color: $color-primary;
+                                }
+                            }
+                            .hotel-room-book{
+                                width: 100%;
+                                margin-top: 10px;
+                            }
+                        }
+                        td.description{
+                            width: 65%;
+                            padding: 30px;
+                            border-left: 0px;
+                            @media #{$max768}{
+                                width: 300px;
+                                padding: 20px;
+                                display: table-caption;
+                                border-top: 0;
+                            }
+                            .tf-room-description-box{
+                                width: 100%;
+                                .tf-room-detail-qv{
+                                    display: block;
+                                    &.tf-room-gallery-info{
+                                        text-decoration: underline;
+                                    }
+                                }
+                            }
+                            .bed-facilities{
+                                margin: 8px 0;
+                                p{
+                                    margin-bottom: 0;
+                                }
+                            }
+                        }
+                        td.pax{
+                            .tf-tooltip{
+                                @media #{$max768}{
+                                    width: 100px
+                                }
+                                .room-detail-icon {
+                                    margin: 15px 0 0 0;
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 10px;
+                                    .room-icon-wrap {
+                                        border: 1px solid $color-border-lite;
+                                        border-radius: 4px;
+                                        padding: 0;
+                                        margin-right: 0;
+                                        width: 40px;
+                                        height: 40px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        i{
+                                            font-size: 1rem;
+                                            color: $color-text;
+                                        }
+                                    }
+                                    .icon-text {
+                                        font-size: 0.875rem;
+                                        color: $color-text;
+                                    }
+                                }
+                                &:last-child{
+                                    .room-detail-icon {
+                                        margin-top: 10px;
+                                    }
+                                }
+                            }
+                        }
+                        td.reserve{
+                            .tf-room{
+                                margin-top: 15px;
+                                &>span{
+                                    display: block;
+                                    margin-bottom: 5px;
+                                }
+                            }
+                            .tf-price{
+                                font-size: 1.5rem;
+                                font-weight: 500;
+                                color: $color-heading;
+                                line-height: normal;
+                                @media #{$max768}{
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 5px;
+                                }
+                                del{
+                                    font-size: 1.2rem;
+                                    font-weight: 400;
+                                }
+                            }
+                            .price-per-night{
+                                font-size: .875rem;
+                                color: $color-text;
+                            }
+                            .hotel-room-availability{
+                                margin-top: 25px;
+                            }
+                            .room-selection-wrap{
+                                select{
+                                    border: 1px solid $color-border-lite;
+                                    text-align: center;
+                                    padding: 8px;
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                        td.options{
+                            ul{
+                                list-style: none;
+                                margin-left: 0;
+                                margin-bottom: 0;
+                                li{
+                                    margin-bottom: 4px;
+                                    .room-extra-icon{
+                                        margin-right: 5px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.tf-single-hotel-room__style-2{
+    padding: 0;
+
+    .tf-available-rooms-wrapper{
+        margin-bottom: 0;
+        @media only screen and (max-width: 1280px) {
+            padding: 16px;
+        }
+        .tf-available-room{
+            .tf-available-room-gallery{
+                @media only screen and (max-width: 1280px) {
+                    min-width: 222px;
+                    max-width: 222px;
+                }
+                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                    min-height: auto;
+                    max-height: none;
+                    height: auto;
+                }
+                .tf-room-gallery{
+                    &:nth-child(n+2){
+                        @media only screen and (max-width: 1280px) {
+                            width: 105px;
+                        }
+                    }
+                }
+            }
+            .tf-available-room-content{
+                @media only screen and (max-width: 1600px) {
+                    width: calc(100% - 230px);
+                }
+                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                    padding: 14px;
+                }
+                .tf-available-room-content-left{
+                    @media only screen and (max-width: 1280px) {
+                        width: calc(100% - 155px);
+                    }
+                    @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                        width: calc(100% - 154px);
+                    }
+                    h2{
+                        @media only screen and (max-width: 1280px) {
+                            font-size: 1.5rem;
+                        }
+                    }
+                    ul{
+                        li{
+                            @media only screen and (max-width: 1280px) {
+                                font-size: 0.875rem;
+                            }
+                            @media #{$max1024}{
+                                font-size: 1rem;
+                            }
+                            @media #{$max768}{
+                                font-size: 0.875rem;
+                            }
+                        }
+                    }
+                    .tf-card-heading-info{
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            margin-bottom: 32px;
+                        }
+                    }
+                }
+                .tf-available-room-content-right{
+                    @media only screen and (max-width: 1280px) {
+                        width: 133px;
+                    }
+                    @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                        width: 130px;
+                    }
+                    .tf-available-room-price{
+                        .tf-price{
+                            @media only screen and (max-width: 1280px) {
+                                text-align: right;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .tf-available-room.tf-desktop-room{
+            @media #{$max1024}{
+                display: none;
+            }
+        }
+        .tf-available-room.tf-tabs-room{
+            display: none;
+            @media #{$max1024}{
+                display: flow-root;
+            }
+            .tf-available-room-gallery{
+                min-width: auto;
+                max-width: none;
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                @media #{$max1024}{
+                    grid-template-columns: 1fr;
+                }
+                .tf-room-image{
+                    height: 140px;
+                    position: relative;
+                    img{
+                        height: 140px;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                    .tf-available-room-off{
+                        position: absolute;
+                        top: 12px;
+                        left: 12px;
+                    }
+                }
+                .tf-room-gallerys{
+                    display: grid;
+                    gap: 10px;
+                    @media #{$max575}{
+                        display: flex;
+                    }
+                    .tf-room-gallery{
+                        height: 66px;
+                        width: 100%;
+                        @media #{$max1024}{
+                            height: auto;
+                            width: auto;
+                            flex: 1;
+                        }
+                        img{
+                            height: 66px;
+                            width: 100%;
+                            object-fit: cover;
+                            @media #{$max1024}{
+                                height: auto;
+                            }
+                        }
+                        &:last-child{
+                            @media #{$max1024}{
+                                height: 66px;
+                                width: 105px;
+                                flex: inherit;
+                            }
+                        }
+                    }
+                }
+            }
+            .tf-available-room-gallery.tf-no-room-gallery{
+                grid-template-columns: 1fr;
+            }
+            .tf-available-room-content{
+                width: auto;
+                display: flow-root;
+                padding: 16px;
+                @media #{$max768} {
+                    padding: 16px;
+                }
+                @media #{$max575} {
+                    padding-top: 5px;
+                }
+
+                .tf-available-room-content-left{
+                    width: 100%;
+                    .room-heading-price{
+                        display: flex;
+                        justify-content: space-between;
+                        gap: 30px;
+                        margin-bottom: 16px;
+                        @media #{$max575}{
+                            flex-direction: column;
+                            gap: 10px;
+                        }
+                        h2{
+                            margin: 0;
+                            font-size: 1.25rem;
+                        }
+                        .tf-available-room-price{
+                            display: flex;
+                            flex-direction: column;
+                            align-items: end;
+                            .tf-price{
+                                color: $color-text;
+                                font-weight: 400;
+                                .discount-price {
+                                    color: $color-text;
+                                    font-size: 1rem;
+                                    font-weight: 400;
+                                    line-height: 1.3;
+                                    display: flex;
+                                    gap: 2px;
+                                    justify-content: end;
+                                    .amount{
+                                    font-weight: 400;
+                                    }
+                                }
+                                .sale-price {
+                                    font-size: 1.5rem;
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 2px;
+                                    justify-content: end;
+                                    .booking-type {
+                                        font-size: 1rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .tf-available-room-content-right{
+                    width: 100%;
+                    align-items: start;
+                    a.availability{
+                        width: 100%;
+                        margin-top: 32px;
+                        font-size: 0.75rem;
+                        @media only screen and (max-width: 1280px) {
+                            min-width: 128px;
+                        }
+                    }
+                    a.tf_air_service,
+                    button{
+                        width: 100%;
+                        font-size: 0.75rem;
+                    }
+                    a.tf_air_service{
+                        @media only screen and (max-width: 1280px) {
+                            min-width: 128px;
+                        }
+                    }
+                    a{
+                        width: 100%;
+                        margin-top: 32px;
+                        @media #{$max768}{
+                            font-size: 0.75rem;
+                            margin-top: 16px;
+                            padding: 10px 16px;
+                            line-height: 1;
+                        }
+                    }
+                    .tf-available-room-select{
+                        margin-top: 32px;
+                        margin-bottom: 16px;
+                    }
+                    .room-submit-wrap{
+                        width: 100%;
+                        .tf-deposit-content{
+                            text-align: left;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.tf-single-hotel-room__style-legacy{
+    padding: 0;
+
+    .tf-room-section{
+        margin-top: -20px;
+        @media #{$max768}{
+            margin-top: 0;
+            padding-bottom: 0;
+        }
+        .tf-room-filter .tf-room-checkbox, .tf-room-filter h3 {
+            color: $color-heading;
+            list-style: none;
+        }
+
+        h3.tf-room-feature-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0px;
+        }
+        ul.tf-room-checkbox {
+            margin-left: 0px;
+            li{
+                float: left;
+                margin: 10px;
+                display: flex;
+                align-items: center;
+                &:first-child{
+                    margin-left: 0;
+                }
+            }
+            label{
+                margin-left: 0;
+                line-height: 1.2;
+            }
+        }
+
+        .hotel-room-wrap {
+            width: 100%;
+            overflow-x: auto;
+            @media #{$max768} {
+                width: auto;
+                overflow-x: auto;
+            }
+        }
+
+        .tf-room-filter {
+            padding: 0 0 15px 0;
+            overflow: hidden;
+        }
+
+        .availability-table {
+            border: none;
+            margin-bottom: 0;
+            thead {
+                background: $color-filling-fg;
+                color: $color-text;
+            }
+            td,
+            th {
+                border-left: 1px solid $color-border-lite;
+                border-bottom: 1px solid $color-border-lite;
+                border-top: none;
+                border-right: none;
+                padding: 20px;
+            }
+            th{
+                border-top: 1px solid $color-border-lite;
+            }
+            td.description {
+                padding: 25px;
+                @media #{$max768} {
+                    min-width: 300px;
+                    padding: 20px;
+                }
+                h3,a{
+                    font-size: 1.25rem;
+                    line-height: 1.5;
+                    text-decoration: underline;
+                    color: $color-heading;
+                }
+                .room-features {
+                    margin-top: 15px;
+                    h4 {
+                        font-size: 1rem;
+                        color: $color-heading;
+                    }
+                    .room-feature-list {
+                        list-style: none;
+                        padding: 0;
+                        margin: 5px 0 0;
+                        li {
+                            display: inline-block;
+                            margin-right: 8px;
+                        }
+                    }
+                    i{
+                        font-size: 1rem;
+                        color: $color-text;
+                    }
+                }
+                .tf-tooltip {
+                    margin-right: 15px;
+                    .room-detail-icon {
+                        margin: 0;
+                        display: flex;
+                        gap: 10px;
+                        align-items: center;
+                        
+                        .room-icon-wrap {
+                            border: 1px solid $color-border-lite;
+                            border-radius: 4px;
+                            padding: 0;
+                            margin-right: 0;
+                            width: 40px;
+                            height: 40px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            i{
+                                font-size: 1rem;
+                                color: $color-text;
+                            }
+                        }
+                        .icon-text {
+                            font-size: 0.875rem;
+                            color: $color-text;
+                        }
+                    }
+                    &:last-child{
+                        .room-detail-icon {
+                            margin-right: 0;
+                        }
+                    }
+                }
+                
+                .bed-facilities {
+                    margin: 8px 0;
+                    p{
+                        color: $color-text;
+                    }
+                }
+            }
+
+            td.pax {
+                min-width: 80px;
+                h4 {
+                    font-size: 1rem;
+                }
+                .tf-tooltip{
+                    .room-detail-icon {
+                        text-align: center;
+                        margin: 15px 0 0 0;
+                        display: flex;
+                        gap: 10px;
+                        align-items: center;
+                        .room-icon-wrap {
+                            border: 1px solid $color-border-lite;
+                            border-radius: 4px;
+                            padding: 0;
+                            margin-right: 0;
+                            width: 40px;
+                            height: 40px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            i{
+                                font-size: 1rem;
+                                color: $color-text;
+                            }
+                        }
+                        .icon-text {
+                            font-size: 0.875rem;
+                            color: $color-text;
+                        }
+                    }
+                    &:last-child{
+                        .room-detail-icon {
+                            margin-top: 10px;
+                        }
+                    }
+                }
+            }
+            td.pricing{
+                text-align: center;
+            }
+            td.reserve,
+            td.pricing{
+                .tf-price{
+                    font-size: 1.5rem;
+                    font-weight: 500;
+                    line-height: normal;
+                    del{
+                        font-size: 1.2rem;
+                        font-weight: 400;
+                    }
+                }
+            }
+        
+            td.options{
+                ul{
+                    list-style: none;
+                    margin-left: 0;
+                    margin-bottom: 0;
+                    li{
+                        margin-bottom: 4px;
+                        .room-extra-icon{
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+            td.price{
+                .tf-hotel-deposit-hide {
+                    display: none;
+                }
+                span.tf-price .amount {
+                    font-weight: bold;
+                }
+                .price-per-night {
+                    font-size: 0.75rem;
+                    white-space: nowrap;
+                }
+            }
+            td.reserve {
+                border-right: 1px solid $color-border-lite;
+                .room-selection-wrap{
+                    select,
+                    .select2-container .select2-selection--single{
+                        background-image: none;
+                        padding: 10px;
+                        width: 100%;
+                        text-align: center;
+                        -moz-appearance: auto;
+                        
+                    }
+                }
+                .room-submit-wrap{
+                    margin-top: 15px;
+                }
+                #tour_room_details_loader {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(255, 255, 255, .8);
+                    display: none;
+                    z-index: 999999;
+                    #tour-room-details-loader-img {
+                        height: 100%;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+                .tf-withoutpayment-booking{
+                    text-align: left;
+                }
+                .hotel-room-availability,
+                .hotel-room-book {
+                    white-space: nowrap;
+                }
+                .hotel-room-book {
+                    margin-top: 15px;
+                }
+            }
+        }
+        
+    }
+}
+
+.tf-single-apartment-room__style-1{
+    padding: 0;
+
+    .tf-apartment-rooms-section{
+        .tf-apartment-room-details{
+            border-radius: 4px;
+            background: $color-filling-fg;
+            padding: 24px 24px 28px 24px;
+            h4{
+                color: $color-heading;
+                font-size: 1.25rem;
+                font-weight: 700;
+                margin: 0 0 16px 0;
+            }
+            .slick-track{
+                margin: 0;
+                .slick-slide{
+                    margin: 0px 5px;
+                }
+            }
+            .tf-apartment-room-item{
+                .tf-apartment-room-item-thumb{
+                    a{
+                        text-decoration: none;
+                        img{
+                            height: 200px;
+                            border-radius: 4px;
+                            object-fit: cover;
+                            @media #{$max575}{
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+                .tf-apartment-room-item-content{
+                    margin-top: 16px;
+                    a{
+                        text-decoration: none;
+                        span{
+                            color: $color-text;
+                            font-size: 1rem;
+                            font-weight: 600;
+                        }
+                    }
+                    p{
+                        margin: 8px 0 0 0;
+                        color: $color-text;
+                        font-size: 1rem;
+                        font-weight: 400;
+                    }
+                }
+            }
+            .slick-dots {
+                bottom: -36px;
+                li {
+                    width: 16px;
+                    height: 16px;
+
+                    button {
+                        background: transparent;
+                        border-radius: 30px;
+                        border: 1px solid $color-gray;
+                        height: 12px;
+                        width: 12px;
+
+                        &:before {
+                            opacity: 0;
+                            font-size: 0;
+                            width: 6px;
+                            height: 6px;
+                            background: $color-primary;
+                            top: 50%;
+                            left: 50%;
+                            border-radius: 100%;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+
+                    &.slick-active {
+                        button {
+                            background: transparent;
+                            border: 1px solid $color-primary;
+                            height: 16px;
+                            width: 16px;
+                            &:before {
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tf-single-apartment-room__style-legacy{
+    padding: 0;
+
+    .tf-apartment-rooms {
+        margin-bottom: 0px;
+
+        .slick-list {
+            margin: 0 -12px;
+        }
+
+        .slick-track {
+            margin: 0;
+        }
+
+        .slick-arrow {
+            display: inline-block;
+            z-index: 999;
+            right: 0;
+            top: 80px;
+            height: 40px;
+            width: 40px;
+
+            svg {
+                padding: 4px;
+                border-radius: 50%;
+                border: 1px solid $color-border-lite;
+                background: $color-filling-fg;
+                path {
+                    fill: $color-text;
+                }
+
+            }
+        }
+
+        .slick-prev {
+            left: 0;
+        }
+
+        .slick-arrow::before {
+            display: none;
+        }
+
+        .tf-apartment-default-design-room-slider {
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 50px;
+                height: 100%;
+                background: linear-gradient(270deg, $color-white -0.06%, rgba(255, 255, 255, 0.00) 100%);
+                border-radius: 8px;
+            }
+        }
+
+        .slick-dots {
+            bottom: 0;
+
+            li {
+                width: 16px;
+                height: 16px;
+
+                button {
+                    background: $color-gray;
+                    border-radius: 30px;
+                    border: 1px solid $color-gray;
+                    height: 16px;
+                    width: 16px;
+
+                    &:before {
+                        opacity: 0;
+                        font-size: 0;
+                        width: 6px;
+                        height: 6px;
+                        background: $color-primary;
+                        top: 50%;
+                        left: 50%;
+                        border-radius: 100%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+
+                &.slick-active {
+                    button {
+                        background: transparent;
+                        border: 1px solid $color-primary;
+
+                        &:before {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        .tf-apartment-room-item {
+            margin: 0 12px;
+
+            .tf-apartment-room-item-thumb {
+                overflow: hidden;
+                border-radius: 8px;
+                margin-bottom: 8px;
+
+                img {
+                    height: 170px;
+                    object-fit: cover;
+                    width: 100%;
+                    transition: all 0.3s ease-in-out;
+                }
+
+                &:hover {
+                    img {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+
+            .tf-apartment-room-item-content {
+
+                a {
+                    text-decoration: none;
+                }
+
+                h3 {
+                    font-weight: 400;
+                    font-size: 1.125rem;
+                    line-height: 1.5;
+                    letter-spacing: 0.2px;
+                    color: $color-heading;
+                    margin: 0;
+                }
+                
+                p {
+                    font-weight: 400;
+                    font-size: 0.875rem;
+                    letter-spacing: 0.2px;
+                    color: $color-gray;
+                    margin: 0;
+                }
+            }
+        }
+    }
+    #tf_apt_room_details_qv {
+        .room-detail-icon .icon-text {
+            margin-top: 5px;
+        }
+    }
+}

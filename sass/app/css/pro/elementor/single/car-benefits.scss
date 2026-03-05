@@ -1,0 +1,35 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-car-benefits{
+    width: 100%;
+
+    h3{
+        color: $color-heading;
+        font-size: 1.313rem;
+        font-weight: 400;
+        margin-bottom: 16px;
+        margin-top: 0px;
+    }
+    
+    ul{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        gap: 16px 8px;
+        li{
+            color: $color-text;
+            font-size: 1rem;
+            font-weight: 400;
+            width: calc(50% - 8px);
+            @media #{$max768}{
+                width: 100%;
+            }
+            i{
+                color: $color-primary;
+            }
+        }
+    }
+}

@@ -1,0 +1,31 @@
+.single-tf_carrental{
+    .tf-single-template{
+        &__one{
+            .tf-short-description,
+            .tf-full-description{
+                color: $color-text;
+                font-size: 1rem;
+                font-weight: 400;
+                p{
+                    color: $color-text;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    margin: 0;
+                    
+                }
+                .tf-see-description,
+                .tf-see-less-description{
+                    color: $color-primary;
+                    cursor: pointer;
+                    display: inline-block;
+                    &:hover{
+                        color: $color-brand-dark;
+                    }
+                }
+            }
+            .tf-full-description{
+                display: none;
+            }
+        }
+    }
+}

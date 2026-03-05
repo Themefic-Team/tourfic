@@ -1,0 +1,2505 @@
+/* Body bg */
+.post-type-archive-tf_tours,
+.post-type-archive-tf_hotel,
+.post-type-archive-tf_apartment,
+.tax-hotel_location,
+.tax-tour_destination,
+.tax-apartment_location,
+.page-template-tf-search,
+.single-tf_apartment,
+.single-tf_hotel,
+.single-tf_tours{
+    background-color: $color-white;
+}
+
+.section-heading {
+    font-size: 1.75rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: $color-heading;
+}
+h3.section-heading {
+    font-size: 1.75rem;
+    color: $color-heading;
+}
+
+.fancybox-navigation .fancybox-button--arrow_left > div,
+.fancybox-navigation .fancybox-button--arrow_right > div{
+    background-color: $color-heading;
+}
+
+.tf-title-area {
+    h1 {
+        font-size: 2.188rem;
+        margin-top: 0;
+        margin-bottom: 6px;
+        color: $color-heading;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        @media #{$max768}{
+            font-size: 1.75rem;
+            line-height: 1.3;
+        }
+    }
+
+    .tf-title-wrap {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        @media #{$max768}{
+            display: block;
+        }
+    
+        .tf-title-left {
+            flex: 1;
+            span.post-type {
+                background: $color-primary;
+                color: $color-white;
+                padding: 0 10px;
+                font-size: 0.813rem;
+                border-radius: 25px;
+                margin-bottom: 5px;
+                display: inline-block;
+            }
+            .tf-map-link{
+                .tf-d-ib{
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                }
+                a{
+                    color: $color-primary;
+                }
+            }
+        }
+    
+        .tf-title-right {
+            display: flex;
+            align-items: center;
+            column-gap: 5px;
+            @media #{$max768}{
+                margin-top: 15px;
+            }
+            .tf-wishlist-button {
+                font-size: 1.5rem;
+                cursor: pointer;
+                margin: 0 5px 0 0;
+                line-height: 1;
+            }
+        }
+    }
+}
+
+.tf-single-rating {
+    line-height: 1;
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 999;
+    display: inline-block;
+    background: rgba(19, 55, 116, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-sizing: border-box;
+    padding: 8px;
+    color: $color-white;
+    border-radius: 4px;
+    position: relative;
+
+    @media #{$max768}{
+        font-size: 0.875rem;
+        padding: 6px;
+    }
+
+    i {
+        font-size: 0.875rem;
+        color: $color-primary;
+    }
+    span {
+        margin: 0 3px 0 5px;
+        font-weight: 700;
+        font-size: 1.125rem;
+
+        @media #{$max768}{
+            font-size: 0.875rem;
+        }
+    }
+}
+.tf_room_name_inner {
+    padding-top: 20px;
+}
+.tf-slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+    .slick-track {
+        transform: translate3d(0, 0, 0);
+        position: relative;
+        top: 0;
+        left: 0;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        &:before {
+            display: table;
+            content: "";
+        }
+        &:after {
+            display: table;
+            content: "";
+            clear: both;
+        }
+    }
+    .slick-list {
+        transform: translate3d(0, 0, 0);
+        position: relative;
+        display: block;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        margin-left: -5px !important;
+        margin-right: -5px !important;
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .slick-slide {
+        margin-left: 5px;
+        margin-right: 5px;
+        
+        img {
+            display: block;
+        }
+    }
+
+    &.slick-initialized {
+        .slick-slide {
+            display: block;
+            @media #{$max768}{
+                margin: 0px !important;
+            }
+        }
+    }
+}
+
+.tf-suggestion-wrapper .tf-slider-items-wrapper {
+    .slick-track {
+        display: -webkit-box !important;
+        display: -ms-flexbox !important;
+        display: flex !important;
+        @media #{$max768} {
+            margin-bottom: 15px !important;
+        }
+        >div {
+            height:auto;
+            min-height: -webkit-fill-available !important;
+            display: -webkit-box !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-align: end !important;
+                -ms-flex-align: end !important;
+                    align-items: flex-end !important;
+        }
+        .tf-slider-content {
+            margin-top: 200px !important;
+        }
+    }
+    .tf-slider-item {
+        height: auto;
+    }
+}
+
+.tf_form-row {
+    .tf_label-row {
+        margin-bottom: 15px;
+        display: block;
+    }
+    .tf_form-inner {
+        svg{
+            width: 20px;
+            height: 20px;
+        }
+        i{
+            font-size: 18px;
+        }
+
+        input[type=text] {
+            width: 100%;
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            height: 45px;
+            margin: 0px;
+            &:focus {
+                background: transparent;
+                border: 0;
+                outline: 0;
+            }
+        }
+        select {
+            width: 100%;
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            height: 45px;
+            -webkit-appearance: none;
+            appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            color: $color-text;
+            &:focus {
+                background: transparent;
+                border: 0;
+                outline: 0;
+            }
+        }
+    }
+}
+.tf-hotel-deposit-hide {
+    display: none;
+}
+.tf-hotel-side-booking {
+    .tf_form-inner {
+        position: relative;
+        display: grid;
+        padding: 0;
+        background: $color-filling-bg;
+        grid-template-columns: 38px auto;
+        @include align-items(center);
+        justify-items: center;
+        padding-left: 5px;
+        i {
+            color: $color-text;
+            font-size: 1rem;
+            &:last-child {
+                position: absolute;
+                right: 12px;
+            }
+        }
+    }
+    #check-in-out-date {
+        min-width: 150px;
+    }
+}
+
+.tf_acrselection-wrap {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0px;
+    background: $color-filling-fg;
+    padding: 16px 20px 8px;
+    min-width: 250px;
+    border-radius: 4px;
+    z-index: 9999;
+    width: 100%;
+    display: none;
+}
+.tf_acrselection {
+    @include flexbox();
+    @include align-items(center);
+    @include justify-content(space-between);
+    margin-bottom: 16px;
+
+    .acr-select {
+        @include flexbox();
+        @include align-items(center);
+        width: 125px;
+
+        input[type=number] {
+            width: 50px;
+            padding: 0px;
+            margin: 0px;
+            border: 0px;
+            box-shadow: none;
+            background: transparent;
+            text-align: center;
+            appearance: textfield !important;
+            -moz-appearance: textfield !important;
+
+            &:focus {
+                outline: 0;
+            }
+        }
+    }
+
+    .acr-dec {
+        width: 30px;
+        height: 30px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        color: $color-brand-dark;
+        border-color: $color-brand-dark;
+        border: 1px solid $color-brand-dark;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+        padding: 7px 15px;
+        cursor: pointer;
+        text-decoration: none;
+        box-sizing: border-box;
+        vertical-align: middle;
+        position: relative;
+        min-height: 36px;
+        min-width: 36px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.5;
+        &:hover {
+            color: $color-text;
+            border-color: $color-text;
+        }
+    }
+    .acr-inc {
+        width: 30px;
+        height: 30px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        color: $color-brand-dark;
+        border-color: $color-brand-dark;
+        border: 1px solid $color-brand-dark;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+        padding: 7px 15px;
+        cursor: pointer;
+        text-decoration: none;
+        box-sizing: border-box;
+        vertical-align: middle;
+        position: relative;
+        min-height: 36px;
+        min-width: 36px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.5;
+        &:hover {
+            color: $color-text;
+            border-color: $color-text;
+        }
+    }
+}
+.tf-search-form-field-icon {
+    margin-right: 8px;
+}
+.tf_destination-wrap {
+    border-right: 1px solid $color-border-lite;
+    border-left: 0;
+    display: table-cell;
+    vertical-align: middle;
+    min-width: 150px;
+    width: 25%;
+
+    @media #{$max768}{
+        width: 100%;
+        display: block;
+        padding: 10px;
+        border-bottom: 1px solid $color-gray;
+    }
+
+    .tf_input-inner {
+        padding: 0 15px;
+        @media #{$max768}{
+            padding: 0 10px;
+        }
+    }
+    .ui-menu-item {
+        &:before {
+            content: "\f3c5";
+            font-weight: 900;
+            font-family: "Font Awesome 5 Free";
+            float: left;
+            font-size: 0.938rem;
+            line-height: 1.5;
+            margin-right: 5px;
+        }
+    }
+}
+#tf_car_booking{
+    .tf_homepage-booking{
+        @media #{$max991}{
+            display: inherit;
+            height: auto;
+        }
+    }
+    .tf_destination-wrap {
+        width: auto;
+        @media #{$max991}{
+            padding: 10px 5px;
+            width: 100%;
+            display: block;
+            border-bottom: 1px solid gray;
+        }
+    }
+    .tf_submit-wrap {
+        @media #{$max991}{
+            width: 100%;
+            display: block;
+            border-radius: 0 0 8px 8px;
+        }
+    }
+}
+.tf_selectdate-wrap {
+    border-right: 1px solid $color-border-lite;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0 15px;
+    width: 20%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    @media #{$max768}{
+        width: 100%;
+        display: block;
+        padding: 10px 20px;
+        border-bottom: 1px solid $color-gray;
+
+        &.tf_more_info_selections {
+            padding: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+    }
+
+    .tf_input-inner {
+        @include flexbox();
+        @include align-items(center);
+        cursor: pointer;
+    }
+}
+.tf_selectperson-wrap {
+    border-right: 1px solid $color-border-lite;
+    display: table-cell;
+    vertical-align: middle;
+    width: auto;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    @media #{$max768}{
+        width: 100%;
+        display: block;
+        padding: 20px 0;
+        border-bottom: 1px solid $color-gray;
+    }
+
+    .tf_input-inner {
+        @include flexbox();
+        @include align-items(center);
+        cursor: pointer;
+    }
+    .person-sep {
+        padding: 0 8px;
+        position: relative;
+        white-space: nowrap;
+        &:after {
+            content: "";
+            position: absolute;
+            height: 2px;
+            background: $color-brand-lite;
+            width: 2px;
+            left: 0;
+            top: 0px;
+            z-index: 2;
+            right: 0;
+            text-align: center;
+            margin: 0 auto;
+        }
+    }
+    .adults-text {
+        white-space: nowrap;
+    }
+    .child-text {
+        white-space: nowrap;
+    }
+    .room-text {
+        white-space: nowrap;
+    }
+    .infant-text {
+        white-space: nowrap;
+    }
+}
+.tf_submit-wrap {
+    border-right: 0;
+    border-radius: 0 8px 8px 0;
+    background: $color-primary;
+    width: 15%;
+    display: table-cell;
+    vertical-align: middle;
+
+    @media #{$max768} {
+        width: 100%;
+        display: block;
+        border-radius: 0 0 8px 8px;
+    }
+
+    button {
+        width: 100%;
+        height: 100%;
+        border-radius: 0 8px 8px 0;
+        padding: 20px 20px;
+    }
+}
+
+.tf-review-form-container {
+    min-width: 800px;
+    padding: 0;
+    margin: 0;
+    background: $color-white;
+    @media #{$max1024}{
+        min-width: 500px;
+    }
+    @media #{$max768}{
+        min-width: auto;
+    }
+    .logged-in-as {
+        display: none;
+    }
+    .tf-rating-wrapper {
+        display: grid;
+        grid-template-columns: calc(50% - 20px) calc(50% - 20px);
+        column-gap: 40px;
+        row-gap: 15px;
+        margin: 0 0 80px 0;
+
+        @media #{$max768}{
+            grid-template-columns: 100%;
+        }
+        .tf-form-single-rating {
+            display: grid;
+            grid-template-columns: auto auto;
+            justify-content: space-between;
+            align-items: center;
+            column-gap: 15px;
+            label {
+                color: $color-text;
+                font-weight: 500;
+                font-size: 1rem;
+                line-height: 1;
+                text-transform: capitalize;
+            }
+        }
+    }
+    .tf-form-single-rating {
+        .error {
+            color: $color-danger;
+        }
+        .ratings-container {
+            line-height: 1;
+            unicode-bidi: bidi-override;
+            direction: rtl;
+            label {
+                padding: 0;
+                margin: 0;
+                height: auto;
+                line-height: 1;
+                color: transparent;
+            }
+            >input {
+                display: none;
+            }
+        }
+        .ratings-container.star10 {
+            width: 220px;
+        }
+        .ratings-container.star5 {
+            width: 110px;
+        }
+    }
+    .ratings-container {
+        >input+label {
+            text-indent: -9999px;
+            font-family: "Font Awesome 5 Free";
+            display: inline-block;
+            overflow: hidden;
+            width: 22px;
+            white-space: nowrap;
+            cursor: pointer;
+            color: transparent;
+            &:before {
+                text-indent: 9999px;
+                display: inline-block;
+                content: "\f005";
+                color: $color-warning;
+                font-size: 1rem;
+                font-weight: 400;   
+            }
+            &:hover~label {
+                &:before {
+                    content: "\f005";
+                    color: $color-warning;
+                    font-weight: 900;
+                }
+            }
+           
+        }
+        >.star-cb-clear+label {
+            text-indent: 9999px;
+            text-indent: -9999px;
+            width: 0.5em;
+            margin-left: -0.5em;
+            &:before {
+                width: 0.5em;
+            }
+        }
+        >input {
+            &:checked~label {
+                &:before {
+                    content: "\f005";
+                    color: $color-warning;
+                    font-weight: 900;
+                }
+            }
+        }
+        &:hover {
+            >input+label {
+               
+                &:hover~label {
+                    &:before {
+                        content: "\f005";
+                        color: $color-warning;
+                        font-weight: 900;
+                    }
+                }
+                &:hover {
+                    &:before {
+                        content: "\f005";
+                        color: $color-warning;
+                        font-weight: 900;
+                    }
+                }
+            }
+        }
+    }
+    .review-desc {
+        textarea {
+            background: $color-gray-light;
+            border: 1px solid $color-border-lite;
+            border-radius: 4px;
+            padding: 16px 8px 16px 16px;
+            height: 160px;
+            outline: none;
+            color: $color-text;
+            box-shadow: none;
+            width: 100%;
+            &::placeholder {
+                color: $color-text;
+            }
+        }
+    }
+    .tf-visitor-info {
+        display: grid;
+        grid-template-columns: calc(50% - 20px) calc(50% - 20px);
+        column-gap: 40px;
+        margin: 16px 0 0 0;
+        input {
+            background: $color-gray-light;
+            border: 1px solid $color-border-lite;
+            box-sizing: border-box;
+            border-radius: 4px;
+            height: 56px;
+            padding: 16px 8px 16px 16px;
+            outline: none;
+            color: $color-text;
+            box-shadow: none;
+            width: 100%;
+        }
+        .error {
+            color: $color-danger;
+        }
+    }
+    .tf-review-submit {
+        margin: 25px 0 0 0;
+    }
+    form.tf-review-form {
+        @media #{$max1024}{
+            gap: 20px;
+        }
+    }
+}
+#tf-rating-modal {
+    .tf-modal-content{
+        padding: 40px;
+    }
+    .logged-in-as {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+}
+.tf-review-container {
+    .no-comments {
+        display: none;
+    }
+    .tf-total-review {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 0 25px 0;
+        .tf-total-average {
+            display: grid;
+            grid-template-columns: auto auto;
+            align-items: center;
+            div {
+                width: 60px;
+                height: 60px;
+                background: $color-primary;
+                border-radius: 4px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: 16px;
+                color: $color-white;
+                font-weight: 600;
+                font-size: 1.5rem;
+                line-height: 1.3;
+            }
+            span {
+                color: $color-text;
+                font-weight: 400;
+                font-size: 1rem;
+                line-height: 1.5;
+                margin: 0px 16px;
+            }
+        }
+    }
+    .tf-review-progress-bar {
+        background: $color-filling-fg;
+        display: grid;
+        grid-template-columns: calc(50% - 20px) calc(50% - 20px);
+        column-gap: 40px;
+        row-gap: 20px;
+        padding: 24px;
+        border: 1px solid $color-filling-fg;
+        box-sizing: border-box;
+        border-radius: 4px;
+        margin: 0 0 25px 0;
+
+        @media (min-width: 768px) and (max-width: 991px) {
+            grid-template-columns: auto;
+        }
+        @media #{$max768}{
+            grid-template-columns: auto;
+        }
+        .tf-single {
+            display: grid;
+            grid-template-columns: calc(50% - 15px) calc(50% - 15px) 30px;
+            align-items: center;
+            .tf-text {
+                text-align: left;
+                color: $color-text;
+                font-weight: 400;
+                font-size: 0.875rem;
+                line-height: 1;
+                text-transform: capitalize;
+            }
+            .tf-p-bar {
+                width: 100%;
+                height: 7px;
+                background: $color-filling-fg;
+                border-radius: 4px;
+                position: relative;
+                overflow: hidden;
+                .percent-progress {
+                    position: absolute;
+                    width: 0;
+                    background-color: $color-primary;
+                    height: 100%;
+                    transition: width 1s ease-in-out;
+                }
+            }
+            .tf-p-b-rating { 
+                text-align: right;
+                font-weight: 500;
+                font-size: 0.875rem;
+                line-height: 1;
+                color: $color-text;
+            }
+        }
+    }
+    .no-review {
+        h4 {
+            text-align: center;
+            color: $color-heading;
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+        }
+        .btn-styled {
+            padding: 18px 20px;
+        }
+    }
+}
+.tf-single-review {
+    display: grid;
+    grid-template-columns: calc(50% - 10px) calc(50% - 10px);
+    column-gap: 20px;
+    row-gap: 40px;
+
+    @media (min-width: 768px) and (max-width: 991px) {
+        grid-template-columns: auto;
+    }
+    @media #{$max768}{
+        grid-template-columns: auto;
+    }
+
+    &.tf-reviews-slider ul.slick-dots {
+        margin: 0;
+    }
+
+    .tf-single-details {
+        display: grid;
+        grid-template-columns: 56px calc(100% - 72px);
+        column-gap: 16px;
+        background: $color-filling-fg;
+        padding: 25px 25px 35px;
+        border-radius: 4px;
+    }
+    .tf-review-avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    .tf-review-details {
+        .tf-name {
+            font-weight: 500;
+            font-size: 1.125rem;
+            line-height: 1;
+            color: $color-heading;
+            margin: 0 0 8px 0;
+            text-transform: capitalize;
+        }
+        .tf-date {
+            font-weight: 400;
+            font-size: 0.75rem;
+            line-height: 1;
+            color: $color-text;
+            letter-spacing: 0.2px;
+            margin: 0 0 8px;
+        }
+        .tf-rating-stars {
+            display: grid;
+            grid-template-columns: auto auto;
+            column-gap: 5px;
+            align-items: center;
+            justify-content: start;
+            line-height: 1;
+            i {
+                color: $color-primary;
+                font-size: 0.625rem;
+                height: 14px;
+            }
+        }
+        .tf-description {
+            font-weight: 400;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: $color-text;
+            margin: 8px 0 0 0;
+            p{
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+.tf-review-pending {
+    text-align: center;
+    font-size: 1rem;
+    font-style: italic;
+    background: $color-white;
+    border-radius: 4px;
+    padding: 10px 10px;
+    color: $color-text;
+    margin: 30px 0 10px 0;
+}
+
+.tf-ask-question {
+    background: $color-filling-fg;
+    padding: 30px;
+    border-radius: 4px;
+    flex: 2;
+    text-align: center;
+    @media #{$max768}{
+        max-width: 450px;
+        margin: auto;
+    }
+    .default-enquiry-title-section {
+        @include flexbox();
+        justify-content: center;
+        align-items: baseline;
+
+        h3 {
+            font-size: 1.375rem;
+            color: $color-heading;
+            margin-bottom: 10px;
+        }
+        i {
+            font-weight: 900;
+            padding-right: 10px;
+            font-size: 1.375rem;
+            color: $color-primary;
+        }
+    }
+}
+
+.tf-slider-item {
+    border: 12px solid $color-filling-fg;
+    border-radius: 4px;
+    height: 450px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-end;
+    margin: 0 15px 15px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    margin-left: 0;
+    @media only screen and (min-width: 768px) and (max-width: 970px) {
+        border: 7px solid $color-white;
+        height: 300px;
+        padding: 15px;
+        margin: 0 7px 15px;
+    }
+    @media #{$max768}{
+        border: 7px solid $color-white;
+        height: 250px;
+        padding: 15px;
+        margin: 0 7px 15px;
+    }
+
+    .tf-slider-content {
+        background: rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        -webkit-backdrop-filter: blur(3px);
+        backdrop-filter: blur(3px);
+        border-radius: 4px;
+        width: 100%;
+        padding: 15px;
+        color: $color-white;
+    }
+
+    .tf-slider-desc {
+        h3 {
+            font-size: 1.25rem;
+            color: $color-white;
+            @media #{$max1024}{
+                font-size: 1.125rem;
+            }
+            @media #{$max575}{
+                font-size: 1rem;
+            }
+            span {
+                font-size: 0.938rem;
+                line-height: 1.5;
+                margin-top: 5px;
+                display: block;
+                font-weight: 400;
+            }
+        }
+        a {
+            color: $color-white;
+            text-decoration: none;
+            &:hover {
+                color: $color-brand-dark;
+            }
+        }
+    }
+}
+
+.tf-wishlists {
+    .remove-wishlist {
+        cursor: pointer;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    i {
+        padding-left: 10px;
+        color: $color-primary;
+    }
+
+    td {
+        @include flexbox();
+        align-items: center;
+        align-content: center;
+        justify-content: space-between;
+        padding: 15px;
+    }
+}
+
+.tf-wishlist-button {
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0 5px 0 0;
+    line-height: 1;
+    color: $color-text;
+    &:hover {
+        color: $color-primary;
+    }
+}
+.tf-wishlist {
+    text-align: right;
+    margin-bottom: 20px;
+}
+.single-tour-wish-bt {
+    color: $color-text;
+    font-size: 1.5rem;
+    cursor: pointer;
+    i {
+        background: rgba(26, 43, 72, .6);
+        border-radius: 50%;
+        color: $color-white;
+        font-size: 1.125rem;
+        padding: 10px 9px 7px 10px;
+        transition: 0.3s;
+        &.tf-text-red{
+            color: red;
+        }
+    }
+}
+.tf-text-red {
+    color: $color-danger;
+}
+.tf-filter {
+    padding: 10px 10px;
+}
+.tf-checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0px;
+    height: 15px;
+    width: 15px;
+    background-color: $color-white;
+    border-radius: 2px;
+    border: 1px solid $color-border-lite;
+}
+.tf-filter-item {
+    label {
+        position: relative;
+        cursor: pointer;
+        width: 100%;
+        display: inline-block;
+        padding-left: 25px;
+        line-height: 1.3;        
+    }
+}
+li.tf-filter-item {
+    @include flexbox();
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 0px;
+    border-radius: 4px;
+    margin: 5px;
+}
+.tf-widget-title {
+    @include flexbox();
+    align-items: center;
+    padding: 10px 16px;
+    height: 48px;
+    background: $color-brand-lite;
+    border: 1px solid $color-border-lite;
+    border-radius: 8px 8px 0px 0px;
+    justify-content: space-between;
+}
+.tf-product-total {
+    @include flexbox();
+    @include justify-content(flex-end);
+    gap: 15px;
+}
+.tf-refund-confirmation-box{
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    .tf-refund-box-content{
+        width: 450px;
+        background-color: $color-white;
+        padding: 24px;
+        border-radius: 8px;
+        text-align: center;
+        i{
+            font-size: 2rem;
+        }
+        h3{
+            margin: 10px 0;
+            color: $color-heading;
+            font-size: 1.25rem;
+        }
+        p{
+            color: $color-text;
+            font-size: 1rem;
+            margin: 0 0 20px 0;
+        }
+        .tf-refund-confirmation-button{
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            button{
+                border-radius: 8px;
+                background: $color-primary;
+                padding: 8px 30px;
+                border: 0px solid;
+                font-size: 1rem;
+                font-weight: 500;
+                line-height: 1.5;
+                cursor: pointer;
+                color: $color-white;
+                transition: .3s all ease;
+                &:hover{
+                    background: $color-brand-dark;
+                }
+                &.tf-refund-cancel{
+                    background: $color-brand-lite;
+                    color: $color-text;
+                    &:hover{
+                        background: $color-primary;
+                        color: $color-white;
+                    }
+                }
+            }
+        }
+    }
+}
+.tf-box-wrapper {
+    h4{
+        margin-bottom: 20px;
+        font-size: 1rem;
+    }
+    .al-range-slider__track {
+        background: $color-brand-lite;
+        height: 10px;
+        box-shadow: none;
+        margin: 30px 0px 10px 0px;
+        .al-range-slider__grid{
+            pointer-events: inherit;
+        }
+    }
+    .al-range-slider_dark {
+        padding: 0px;
+        .al-range-slider__bar {
+            background: $color-text;
+            box-shadow: none;
+            pointer-events: none;
+        }
+    }
+    .al-range-slider__knob {
+        background: $color-primary;
+        height: 15px;
+        width: 15px;
+        box-shadow: none;
+        border: 3px solid $color-primary;
+        &:first-child {
+            span {
+                left: 10px;
+            }
+        }
+    }
+    .al-range-slider__tooltip {
+        background: $color-primary;
+        border-radius: 5px;
+        box-shadow: none;
+        padding: 3px 10px;
+        color: $color-white;
+        font-size: 0.813rem;
+        margin-bottom: 0px;
+        bottom: 30px;
+    }
+    .al-range-slider__input.js-al-range-slider__input {
+        display: none;
+    }
+}
+
+.tf-share {
+    position: relative;
+    a {
+        line-height: 1;
+        font-size: 1.375rem;
+        display: block;
+        margin: 0 10px 0 0;
+        outline: none;
+        color: $color-text;
+        &:hover {
+            color: $color-primary;
+        }
+    }
+    .share-tour-content {
+        display: none;
+        position: absolute;
+        min-width: 100%;
+        top: 100%;
+        transform: translateY(8px);
+        z-index: 9999;
+        left: auto;
+        right: 0;
+        @media #{$max575} {
+            left: 50px;
+        }
+        .tf-dropdown-content {
+            margin: 0;
+            background: $color-filling-fg;
+            border-radius: 4px;
+            overflow: hidden;
+            min-width: 200px;
+            z-index: 100;
+            @media #{$max575} {
+                min-width: 270px;
+                margin-left: -170px;
+            }
+            li {
+                display: inline-block;
+                a{
+                    i{
+                        color: #1D75E3;
+                        font-size: calc(var(--tf-base-font-size) + 3px);
+                    }
+                }
+                &:nth-child(2){
+                    a{
+                        i{
+                            color: #1D9BF0;
+                        }
+                    }
+                }
+                &:nth-child(3){
+                    a{
+                        i{
+                            color: #0A66C2;
+                        }
+                    }
+                }
+                &:nth-child(4){
+                    a{
+                        i{
+                            color: #CC0000;
+                        }
+                    }
+                }
+                @media #{$max575} {
+                    display: block;
+                }
+            }
+            .tf-dropdown-item-content {
+                white-space: nowrap;
+                display: flex;
+                align-items: center;
+                column-gap: 5px;
+            }
+        }
+        .tf-dropdown-item {
+            border: 0;
+            margin: 0;
+            cursor: pointer;
+            padding: 12px 16px;
+            white-space: nowrap;
+            text-decoration: none;
+            color: $color-text;
+            fill: $color-text;
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            font-size: 0.875rem;
+            &:hover {
+                background-color: #f5f5f5;
+            }
+        }
+        .share-center-copy-form {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            @media #{$max575} {
+                display: block;
+            }
+        }
+        .share-center-copy-label {
+            white-space: nowrap;
+        }
+        .share-center-copied-message {
+            display: none;
+        }
+        .share-center-copy-cta.copied {
+            .share-center-copied-message {
+                display: inline-block;
+                font-weight: bold;
+            }
+            .share-center-copy-message {
+                display: none;
+            }
+        }
+        #share_link_button {
+            white-space: nowrap;
+            font-size: 0.813rem;
+            padding: 5px 12px;
+        }
+        input#share_link_input {
+            width: auto;
+            flex-grow: 1;
+            margin: 0 8px;
+            background-color: $color-brand-lite;
+            padding: 0;
+            border: 2px solid rgba(118, 118, 118, 0.3);
+
+            @media #{$max575} {
+                width: 100%;
+                margin: 5px 0;
+                max-width: 100%;
+                display: block;
+            }
+        }
+    }
+}
+
+// UNFOLD Theme Compatibily
+#commentform label{
+    position: static;
+    display: inline-block;
+}
+
+// Blocksy Theme Single Product image
+.woocommerce-product-gallery .ct-image-container {
+    width: 100%;
+}
+
+@media #{$max768}{
+
+    .tours-check-in-out.flatpickr-input.flatpickr-mobile {
+        width: 200px;
+        text-transform: uppercase;
+        height: 40px;
+        border: 1px solid $color-gray;
+        color: $color-text;
+        text-align: center;
+        background: transparent;
+    }
+}
+
+
+
+// Without Payment Booking Popup
+.tf-withoutpayment-booking,
+.tf-withoutpayment-booking-confirm{
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    &.show{
+        display: flex;
+    }
+    .tf-confirm-popup{
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 776px;
+        background-color: $color-brand-lite;
+        border-radius: 24px;
+        @media #{$max768}{
+            width: 100%;
+        }
+        img{
+            width: 320px;
+            padding-top: 8px;
+        }
+        h2{
+            text-align: center;
+            color: $color-heading;
+            font-size: 3rem;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: -0.96px;
+
+            @media #{$max768} {
+                font-size: 1.5rem;
+            }
+        }
+        .tf-tour-without-payment-booking-confirm-msg-container {
+            padding: 16px;
+            color: $color-heading;
+        }
+        .tf-booking-times {
+            position: absolute;
+            right: 24px;
+            top: 24px;
+            span{
+                cursor: pointer;
+            }
+        }
+    }
+    .tf-withoutpayment-popup{
+        width: 776px;
+        @media #{$max768}{
+            width: 100%;
+            margin: 0 10px;
+        }
+        background-color: $color-gray-info;
+        border-radius: 16px;
+        text-align: left;
+        .tf-single-hotel-service label {
+            display: flex;
+            align-items: baseline;
+            justify-content: flex-start;
+            gap: 8px;
+        }
+        .tf-booking-tabs{
+            padding: 16px;
+            border-bottom: 0.3px solid $color-gray;
+            border-radius: 16px 16px 0 0;
+            background: $color-gray-info;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            @media #{$max768}{
+                padding-top: 12px;
+                padding-bottom: 12px;
+                align-items: center;
+            }
+            .tf-booking-tab-menu{
+                ul{
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    border-radius: 10px;
+                    background: $color-gray-info;
+                    display: flex;
+                    @media #{$max768}{
+                        display: inline-block;
+                        background-color: transparent;
+                    }
+                    li{
+                        display: inline-block;
+                        padding: 8px 32px;
+                        cursor: pointer;
+                        color: $color-text;
+                        @media #{$max768}{
+                            padding: 8px;
+                            border-radius: 16px;
+                            border: 1px solid $color-gray;
+                            font-size: 0.813rem;
+                            margin: 5px 0px;
+                        }
+                    }
+                    li.done{
+                        background-color: $color-brand-lite; 
+                        color: $color-white;
+                        @media #{$max768}{
+                            border-color: $color-border-lite;
+                        }
+                        &:first-child{
+                            border-radius: 8px 0px 0px 8px;
+                            @media #{$max768}{
+                                border-radius: 16px;
+                            }
+                        }
+                    }
+                    li.active{
+                        position: relative;
+                        background-color: $color-primary;
+                        color: $color-white;
+                        padding-right: 50px;
+                        @media #{$max768}{
+                            padding-right: 8px;
+                            border: 1px solid $color-primary;
+                        }
+                        &:first-child{
+                            border-radius: 8px 0px 0px 8px;
+                            @media #{$max768}{
+                                border-radius: 16px;
+                            }
+                        }
+                        &::before{
+                            content: "";
+                            position: absolute;
+                            background: transparent;
+                            top: 0;
+                            right: -20px;
+                            border-radius: 0px 10px 0px 0px;
+                            width: 0;
+                            height: 0;
+                            border-top: 20px solid transparent;
+                            border-left: 20px solid $color-primary;
+                            border-bottom: 20px solid transparent;
+                            @media #{$max768}{
+                                position: static;
+                                display: none;
+                            }
+                        }
+                        &:last-child{
+                            border-radius: 0px 8px 8px 0px;
+                            &::before{
+                                position: static;
+                                border: 0;
+                            }
+                            @media #{$max768}{
+                                border-radius: 16px;
+                                border: 1px solid $color-primary;
+                            }
+                        }
+                        &:only-child {
+                            border-radius: 8px;
+                            @media #{$max768} {
+                                border-radius: 16px;
+                            }
+                        }
+                    }
+                    li.done{
+                        position: relative;
+                        &::before{
+                            content: "";
+                            position: absolute;
+                            background: transparent;
+                            top: 0;
+                            right: -20px;
+                            border-radius: 0px 10px 0px 0px;
+                            width: 0;
+                            height: 0;
+                            border-top: 20px solid transparent;
+                            border-left: 20px solid $color-brand-lite;
+                            border-bottom: 20px solid transparent;
+                            z-index: 9;
+                        }
+                      
+                    }
+                }
+            }
+            .tf-booking-times{
+                span{
+                    cursor: pointer;
+                }
+            }
+        }
+        .tf-booking-content-summery{
+            display: flex;
+            @media #{$max768}{
+                display: flow-root;
+                max-height: 360px;
+                overflow-y: auto;
+            }
+            @media #{$max575}{
+                max-height: 280px;
+            }
+            padding: 0px 16px;
+            align-items: flex-start;
+            align-content: flex-start;
+            gap: 24px;
+            align-self: stretch;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .tf-booking-content {
+                display: none;
+                width: calc(62% - 24px);
+                @media #{$max768}{
+                    width: calc(100% - 0px);
+                }
+                &.tf-booking-content-1{
+                    max-height: 380px;
+                    overflow-y: auto;
+                    @media #{$max768}{
+                        max-height: none;
+                        overflow: hidden;
+                    }
+                }
+                p{
+                    color: $color-text;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    line-height: 1.2;
+                    margin-top: 0px;
+                    margin-bottom: 24px;
+                }
+                .tf-booking-content-service{
+                    select[name="airport_service"]{
+                        width: 100%;
+                        height: 45px;
+                        border: 1px solid var(--tf-border-lite);
+                        background: transparent;
+                        padding: 8px;
+                        border-radius: 5px;
+                        margin-bottom: 24px;
+                    }
+                }
+                .tf-booking-content-extra,
+                .tf-booking-content-traveller{
+                    height: 240px;
+                    overflow-y: auto;
+                    scrollbar-width: thin;
+                    scrollbar-color: $scrollbar-color;
+                    margin-bottom: 20px;
+                    padding-right: 10px;
+                    @media #{$max768}{
+                        padding-right: 0px;
+                        height: auto;
+                    }
+                    scrollbar {
+                        width: 5px; 
+                    }
+                    scrollbar-thumb {
+                        background-color: $scrollbar-thumb-color;
+                        border-radius: 4px;
+                    }
+                    .tf-single-tour-extra{
+                        label{
+                            display: flex;
+                            padding-bottom: 15px;
+                            align-items: baseline;
+                            .tf-extra-check-box{
+                                position: relative;
+                                height: 13px;
+                                width: 20px;
+                                margin-right: 5px;
+                                .tf-checkmark{
+                                    position: absolute;
+                                    top: 0px;
+                                    left: 0px;
+                                    border-radius: 5px;
+                                    border: 1px solid $color-gray;
+                                    cursor: pointer;
+                                    &::after{
+                                        content: "";
+                                        position: absolute;
+                                        display: none;
+                                        left: 4px;
+                                        top: 1.5px;
+                                        width: 3px;
+                                        height: 6px;
+                                        border: solid $color-primary;
+                                        border-width: 0 2.5px 2.5px 0;
+                                        box-sizing: unset;
+                                        -webkit-transform: rotate(45deg);
+                                        -ms-transform: rotate(45deg);
+                                        transform: rotate(45deg);
+                                    }
+                                }
+                                input{
+                                    margin-right: 10px;
+                                    display: none;
+                                }
+                                
+                                input:checked ~ .tf-checkmark {
+                                    border-color: $color-primary;
+
+                                    &::after {
+                                        display: block;
+                                    }
+                                }
+                            }
+                            .tf-extra-content{
+                                padding-left: 5px;
+                                h5{
+                                    color: $color-heading;
+                                    font-size: 1rem;
+                                    font-weight: 500;
+                                    line-height: 1.2;
+                                    margin: 0;
+                                    span{
+                                        font-weight: 700;
+                                    }
+                                }
+                                p{
+                                    margin: 0;
+                                }
+                            }
+                        }
+                        .quantity-active {
+                            display: block;
+                        }
+                        .tf_quantity-acrselection {
+                            width: 80%;
+                            display: none;
+                            margin-left: 5px;
+                            margin-bottom: 20px;
+                            @media #{$max575}{
+                                width: 90%;
+                            }
+
+                            &.quantity-active{
+                                display: block;
+                            }
+                            .quanity-acr-label {
+                                width: 100%;
+                                @media #{$max575}{
+                                    font-size: 14px;
+                                }
+                            }
+
+                            .quanity-acr-fields {
+                                display: flex;
+                                align-items: center;
+                                padding: 12px 16px;
+                            }
+
+                            .quanity-acr-select {
+                                justify-content: flex-end;
+                            }
+
+                            .quanity-acr-dec, .quanity-acr-inc {
+                                padding: 10px;
+                                user-select: none;
+                                height: auto;
+                                border: 1.2px solid $color-primary;
+                                margin: 0px 0px;
+                                text-align: center;
+                                cursor: pointer;
+                                border-radius: 5px;
+                                background: $color-white;
+                                color: $color-primary;
+                                display: inline-flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-weight: 700;
+                                line-height: 0.62;
+                                height: 28px;
+                                width: 28px;
+                            }
+
+                            input[type=number] {
+                                width: 25%;
+                                padding: 0px;
+                                margin: 0px;
+                                border: 0px;
+                                box-shadow: none;
+                                background: rgba(0,0,0,0);
+                                text-align: center;
+                                font-size: 1rem;
+                                font-weight: 600;
+                                color: $color-text;
+                            }
+
+                            input::-webkit-outer-spin-button,
+                            input::-webkit-inner-spin-button {
+                                -webkit-appearance: none;
+                                margin: 0;
+                            }
+                        }
+                    }
+                    .tf-single-tour-traveller{
+                        padding-bottom: 16px;
+                        h4{
+                            color: $color-heading;
+                            font-size: 1rem;
+                            font-weight: 500;
+                            line-height: 1.2;
+                        }
+                        .traveller-info{
+                            display: grid;
+                            grid-template-columns: repeat(3, 1fr);
+                            @media #{$max575}{
+                                grid-template-columns: repeat(1, 1fr);
+                            }
+                            gap: 10px;
+                            .traveller-single-info{
+                                width: 100%;
+                                label{
+                                    color: $color-text;
+                                    font-size: 0.875rem;
+                                    font-weight: 500;
+                                }
+                                input[type="text"],
+                                input[type="email"],
+                                input[type="date"],
+                                select{
+                                    border-radius: 4px;
+                                    border: 0.5px solid $color-gray;
+                                    background: transparent;
+                                    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+                                    height: 32px;
+                                    width: 100%;
+                                    padding: 0 8px;
+                                }
+                                input[type="date"]{
+                                    text-transform: uppercase;
+                                    font-size: 0.813rem;
+                                }
+                                input[type="checkbox"],
+                                input[type="radio"]{
+                                    margin: 0;
+                                }
+                                .error-text.error-visible {
+                                    color: $color-danger;
+                                    font-size: 0.813rem;
+                                }
+                            }
+                        }
+                        .billing-details{
+                            grid-template-columns: repeat(2, 1fr);
+                            @media #{$max575}{
+                                grid-template-columns: repeat(1, 1fr);
+                            }
+                        }
+                    }
+                }
+                .tf-booking-content-package{
+                    display: flex;
+                    gap: 16px;
+                    flex-direction: column;
+                    .tf-single-package{
+                        border-radius: 4px;
+                        background: #EBF5FF;
+                        display: flex;
+                        gap: 8px;
+                        padding: 8px 12px;
+                        .tf-package-select{
+                            input{
+                                accent-color: $color-brand-dark;
+                            }
+                        }
+                        .tf-package-content{
+                            width: calc(100% - 20px);
+                            h3{
+                                color: $color-heading;
+                                font-size: 1rem;
+                                font-weight: 500;
+                                margin: 0;
+                            }
+                            .tf-pacakge-persons{
+                                display: none;
+                                p{
+                                    color: $color-text;
+                                    font-size: 0.875rem;
+                                    margin: 0;
+                                }
+                                .tf-pacakge-times{
+                                    display: none;
+                                    gap: 16px;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    margin-top: 8px;
+                                    h5{
+                                        color: $color-heading;
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        line-height: 20px; /* 125% */
+                                        margin: 0;
+                                    }
+                                    .tf-package-time{
+                                        border-radius: 4px;
+                                        background: $tf_fill_white;
+                                        padding: 8px 24px;
+                                        display: flex;
+                                        gap: 4px;
+                                        align-items: center;
+                                        select{
+                                            border: 0px solid;
+                                            width: 72px;
+                                            height: 20px;
+                                            padding: 0;
+                                            color: $color-heading;
+                                            text-align: center;
+                                            font-size: 16px;
+                                            font-weight: 500;
+                                            line-height: 20px;
+                                            background: $tf_fill_white;
+                                        }
+                                    }
+                                }
+                                .tf-select-persons{
+                                    border-radius: 4px;
+                                    background: $color-white;
+                                    padding: 8px 16px;
+                                    margin-top: 8px;
+                                    .tf-single-person{
+                                        display: flex;
+                                        justify-content: space-between;
+                                        padding: 8px 0px;
+                                        border-bottom: .5px solid $color-border;
+                                        &:first-child{
+                                            padding-bottom: 16px;
+                                        }
+                                        &:nth-child(2){
+                                            padding: 16px 0;
+                                        }
+                                        &:last-child{
+                                            border: 0px solid;
+                                            padding-top: 16px;
+                                        }
+                                        h3{
+                                            color: $color-heading;
+                                            font-size: 1rem;
+                                            font-weight: 500;
+                                            margin: 0;
+                                        }
+                                        .inc-dec{
+                                            display: flex;
+                                            gap: 8px;
+                                            align-items: center;
+                                            .acr-dec,
+                                            .acr-inc{
+                                                border-radius: 4px;
+                                                border: 1px solid $color-border;
+                                                background: $color-white;
+                                                width: 24px;
+                                                height: 24px;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                font-size: 1rem;
+                                                cursor: pointer;
+                                                &.disable{
+                                                    pointer-events: none;
+                                                    opacity: .5;
+                                                }
+                                            }
+                                            input{
+                                                height: 20px;
+                                                width: 20px;
+                                                padding: 0;
+                                                text-align: center;
+                                                background: transparent;
+                                                color: $color-text;
+                                                font-size: 1rem;
+                                                font-weight: 500;
+                                                border: 0px solid;
+                                                -webkit-appearance : textfield;
+                                                -moz-appearance : textfield;
+                                                accent-color: $color-brand-dark;
+                                                &:focus{
+                                                    outline: none;
+                                                }
+                                            }
+                                            input::-webkit-outer-spin-button,
+                                            input::-webkit-inner-spin-button {
+                                                -webkit-appearance: none;
+                                                margin: 0;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .tf-single-package:has(.tf-package-radio:checked) .tf-pacakge-persons {
+                        display: block;
+                    }
+                }
+            }
+            .tf-booking-content.show{
+                display: block;
+            }
+            .tf-booking-summery {
+                width: calc(38% - 24px);
+                @media #{$max768}{
+                    width: calc(100% - 0px);
+                }
+                .tf-booking-fixed-summery{
+                    h5{
+                        color: $color-heading;
+                        font-size: 1rem;
+                        font-weight: 500;
+                        line-height: 1.2; 
+                        margin-bottom: 16px;
+                    }
+                    h4{
+                        color: $color-heading;
+                        font-size: 1.25rem;
+                        font-weight: 500;
+                        line-height: 1.5;
+                        letter-spacing: -0.4px;
+                        margin-bottom: 15px;
+                    }
+                }
+                .tf-booking-traveller-info{
+                    max-height: 230px;
+                    overflow-y: auto;
+                    scrollbar-width: thin;
+                    scrollbar-color: $scrollbar-color;
+                    @media #{$max768}{
+                        padding-right: 0px;
+                        height: auto;
+                    }
+                    scrollbar {
+                        width: 5px; 
+                    }
+                    scrollbar-thumb {
+                        background-color: $scrollbar-thumb-color;
+                        border-radius: 4px;
+                    }
+                    h6{
+                        color: $color-heading;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        line-height: 1.2;
+                        margin-bottom: 16px;
+                    }
+                    table{
+                        border: 0px solid;
+                        margin-bottom: 0px;
+                        thead{
+                            background-color: transparent;
+                            tr{
+                                th{
+                                    color: $color-text;
+                                    font-size: 0.875rem;
+                                    font-weight: 600;
+                                    line-height: 2;
+                                    border: 0px solid;
+                                    padding: 0px;
+                                }
+                            }
+                        }
+                        tbody{
+                            tr{
+                                td{
+                                    color: $color-text;
+                                    font-size: 0.875rem;
+                                    font-weight: 400;
+                                    line-height: 1.8;
+                                    border: 0px solid;
+                                    padding: 0px;
+                                }
+                            } 
+                        }
+                        tfoot{
+                            tr{
+                                th{
+                                    color: $color-text;
+                                    font-size: 1rem;
+                                    font-weight: 700;
+                                    padding-top: 15px;
+                                    margin-top: 15px;
+                                    border: 0px solid;
+                                    border-top: .3px solid $color-border;
+                                    padding-left: 0px;
+                                    padding-right: 0px;
+                                }
+                            } 
+                        }
+                    }
+                }
+            }
+        }
+        .tf-booking-pagination{
+            padding: 0 16px;
+            margin-top: 32px;
+            .tf-tax-notice{
+                padding-bottom: 16px;
+                span{
+                    font-size: 1rem;
+                }
+            }
+            .tf-diposit-switcher{
+                padding-bottom: 16px;
+                display: flex;
+                align-items: center;
+                h4{
+                    margin: 0;
+                    display: inline-block;
+                    color: $color-heading;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    line-height: 1.5;
+                }
+                .tooltip-box {
+                    top: 11px;
+                    display: flex;
+                    padding-left: 10px;
+                    .tf-info-btn{
+                        width: 40px;
+                        text-align: center;
+                        position: relative;
+                        i{
+                            padding: 0px;
+                            font-weight: 400;
+                        }
+                        .tf-tooltip {
+                            padding: 10px 10px;
+                            color: $color-white;
+                            background-color: $color-gray;
+                            font-weight: normal;
+                            font-size: 0.813rem;
+                            border-radius: 4px;
+                            position: absolute;
+                            z-index: 99999999;
+                            box-sizing: border-box;
+                            border: 1px solid $color-gray;
+                            box-shadow: 0 1px 8px transparent;
+                            visibility: hidden;
+                            transition: .3s all ease;
+                            display: none;
+                            text-align: center;
+                            line-height: 1.3;
+                            width: 220px;
+                            position: absolute;
+                            left: 50%;
+                            margin-left: -110px;
+                            bottom: 30px;
+                        }
+                        .tooltip-title-box {
+                            margin-top: 0;
+                            font-weight: 900;
+                        }
+                    }
+                }
+                .tooltip-box{ 
+                    .tooltip-title-box:hover + .tf-tooltip{
+                        visibility: visible;
+                        display: block;
+                    }
+                }   
+                .tooltip-box .tf-tooltip::before {
+                    content: "";
+                    height: 12px;
+                    width: 12px;
+                    background-color: $color-gray;
+                    position: absolute;
+                    top: 95%;
+                    left: 50%;
+                    margin-left: -6px;
+                    transform: rotate(45deg);
+                }
+                .switch {
+                    position: relative;
+                    display: inline-block;
+                    width: 48px;
+                    height: 20px;
+                    input{
+                        opacity: 0;
+                        width: 0;
+                        height: 0;
+                    }
+                    .switcher {
+                        position: absolute;
+                        cursor: pointer;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background-color: $color-gray;
+                        transition: .4s;
+                        &::before{
+                            position: absolute;
+                            content: "";
+                            height: 14px;
+                            width: 14px;
+                            left: 4px;
+                            bottom: 3px;
+                            background-color: $color-white;
+                            -webkit-transition: .4s;
+                            transition: .4s;
+                        }
+                    }
+                    .switcher.round {
+                        border-radius: 20px;
+                        &::before{
+                            border-radius: 50%;
+                        }
+                    }
+                }
+            }
+            .tf-diposit-switcher input:checked + .switcher {
+                background-color: $color-primary;
+            }
+            
+            .tf-diposit-switcher input:checked + .switcher::before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
+            .tf-control-pagination{
+                padding: 0px 0px 24px 0px;
+                align-items: end;
+                display: none;
+                a.tf_btn{
+                    border-radius: 5px;
+                }
+                a{
+                    text-decoration: none;
+                    display: inline-block;
+                }
+                a.tf-back-control{
+                    color: $color-primary;
+                    font-size: 0.875rem;
+                    font-weight: 700;
+                    line-height: 1.4;
+                    margin-right: 24px;
+                    i{
+                        margin-right: 10px;
+                    }
+                }
+            }
+            .tf-control-pagination.show{
+                display: flex;
+            }
+        }
+    }
+}
+
+// Select Time
+.info-select{
+    position: relative;
+    .selected-pickup-time,
+    .selected-dropoff-time{
+        min-width: auto;
+        width: 100%;
+        color: $color-text;
+        font-size: 1rem;
+        font-weight: 400;
+        border: 0px solid;
+        padding-left: 0px;
+        box-shadow: none;
+        background: transparent;
+        cursor: pointer;
+        position: relative;
+        min-width: 110px;
+        @media #{$max575}{
+            font-size: 0.875rem;
+        }
+        &:focus{
+            outline: none;
+            box-shadow: none;
+        }
+        &::placeholder{
+            color: $color-text;
+        }
+        .icon{
+            svg{
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                transition: transform 0.3s ease;
+                path{
+                    stroke: $color-text;
+                }
+            }
+        }
+        &.active{
+            svg{
+                transform: translateY(-50%) rotate(180deg);
+                transition: transform 0.3s ease;
+            }
+        }
+    }
+    .tf-select-time{
+        position: absolute;
+        top: 44px;
+        left: -40px;
+        right: 0;
+        border-radius: 8px;
+        min-width: 212px;
+        background: #F8FAFC;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        z-index: 999;
+        @media #{$max768}{
+            min-width: 180px;
+        }
+        @media #{$max575}{
+            min-width: 150px;
+        }
+        .time-options-list {
+            max-height: 258px;
+            overflow-y: auto;
+            display: none;
+            padding: 4px 8px 4px 4px;
+            list-style: none;
+            margin-right: 4px;
+            @media #{$max768}{
+                padding-right: 10px;
+            }
+            &::-webkit-scrollbar {
+                width: 4px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: #566676;
+                border-radius: 16px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: transparent;
+                margin-right: 4px;
+            }
+            li {
+                padding: 8px 12px;
+                font-size: 1rem;
+                font-weight: 700;
+                cursor: pointer;
+                background: $color-white;
+                margin-bottom: 2px;
+                &:hover {
+                    background: #f3f3f3;
+                }
+                &:last-child{
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+// Room Details
+.fancybox-slide {
+    #tour_room_details_qv {
+        border-radius: 4px;
+        padding: 30px;
+        cursor: auto;
+        @media #{$max768}{
+            max-height: 80%;
+            padding: 20px;
+        }
+        .tf-hotel-quick-view{
+            @include flexbox();
+            @media #{$max768}{
+                flex-direction: column;
+            }
+            .tf-hotel-details-qc-gallelry{
+                width: 545px;
+                @media #{$max1024} {
+                    width: 55%;
+                }
+                @media #{$max768}{
+                    width: 100%;
+                }
+                img{
+                    width: 100%;
+                }
+                .tf-details-qc-slider-nav{
+                    .tf-details-qcs{
+                        &.is-active{
+                            img{
+                                border: 2px solid $color-primary;
+                            }
+                        }
+                    }
+                    img{
+                        cursor: pointer;
+                    }
+                }
+                .slick-arrow{
+                    z-index: 1;
+                    &.slick-prev{
+                        @media #{$max1024} {
+                            left: -5px;
+                        }
+                        @media #{$max768}{
+                            left: -10px;
+                        }
+                    }
+                    &.slick-next{
+                        @media #{$max1024}{
+                            right: -5px;
+                        }
+                        @media #{$max768}{
+                            right: -10px;
+                        }
+                    }
+                }
+            }  
+            .tf-hotel-details-info{
+                width: 440px;
+                padding-left: 35px;
+                max-height: 470px;
+                padding-top: 0;
+                overflow-y: auto;
+                @media #{$max1024}{
+                max-width: 550px;
+                padding-left: 0;
+                margin-top: 30px;
+                width: 100%;
+                @media #{$max1024}{
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    max-width: 100%;
+                    margin-top: 0;
+                }
+                @media #{$max768}{
+                   margin-top: 16px;
+                   padding: 0;
+                }
+                }
+                .tf-room-title.description{
+                    .tf-tooltip{
+                        margin-left: 15px;
+                        &:first-child{
+                            margin-left: 0;
+                        }   
+                    }
+                    .room-features{
+                        margin: 10px 0;
+                    }
+                }
+                .pax{
+                    .tf-tooltip{
+                        margin-right: 15px;
+                        &:last-child{
+                            margin-right: 0;
+                        }   
+                    }
+                }
+            }
+        }
+    }
+}
+
+.jconfirm .jconfirm-box {
+    @media #{$max575} {
+        width: auto !important;
+        max-width: 95%;
+    }
+}
+
+#tf_room_aval_check{
+    .tf_selectperson-wrap{
+        width: 40%;
+    }
+    .tf_selectdate-wrap{
+        width: 40%;
+    }
+
+    &.tf-advanced-search-enabled{
+        .tf_selectperson-wrap{
+            width: 30%;
+        }
+        .tf_selectdate-wrap{
+            width: 30%;
+        }
+        .tf_selectdate-wrap.tf_more_info_selections{
+            width: 20%;
+        }
+    }
+
+    &.tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date{
+        width: 30%;
+    }
+    &.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select:first-child,
+    &.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select{
+        width: 50%;
+    }
+}

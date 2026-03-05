@@ -1,0 +1,22 @@
+@import '../../../../common/variable';
+@import '../../../../common/mixin';
+
+@import './modules/archive/_listing';
+
+// Single Apartment Modules Start
+@import './modules/single/_head';
+@import './modules/single/_description';
+@import './modules/single/_gallery';
+@import './modules/single/_informations';
+@import './modules/single/_rooms';
+@import './modules/single/_rules';
+@import './modules/single/_offer';
+@import './modules/single/_map';
+@import './modules/single/_faq';
+@import './modules/single/_amenities';
+@import './modules/single/_review';
+@import './modules/single/_related-items';
+@import './modules/single/_booking-form';
+@import './modules/single/_host';
+@import './modules/single/_terms-and-condition';
+// Single Apartment Modules End

@@ -1,0 +1,89 @@
+.tf-colors-radio-group {
+    display: flex;
+    align-items: initial;
+    flex-wrap: wrap;
+    gap: 16px;
+    li {
+        display: inline-block;
+        border-radius: 5px;
+        width: calc(20% - 13px);
+        @media only  screen and (max-width: 1366px){
+            width: calc(33.33% - 12px);
+        }
+        @media #{$max1024}{
+            width: calc(25% - 12px);
+        }
+        @media #{$max768}{
+            width: calc(33.33% - 11px);
+        }
+        @media #{$max575}{
+            width: calc(50% - 8px);
+        }
+        @media #{$max320}{
+            width: 100%;
+        }
+        .tf-colors-checkbox{
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            display: block;
+            cursor: pointer;
+            .tf-colors-box{
+                height: 35px;
+                display: flex;
+                span{
+                    min-width: 25%;
+                    &:first-child{
+                        border-radius: 6px 0 0 0;
+                    }
+                    &:last-child{
+                        border-radius: 0 6px 0 0;
+                    }
+                }
+            }
+            .tf-color-footer{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 15px 10px;
+                span.tf-template-title{
+                    text-align: center;
+                    font-weight: 500;
+                    cursor: pointer;
+                }
+                input{
+                    display: none;
+                }
+                .tf-color-checkmark{
+                    border-radius: 4px;
+                    border: 1px solid #ddd;
+                    background: #fff;
+                    height: 16px;
+                    width: 16px;
+                    position: relative;
+                    z-index: 0;
+                    &::after{
+                        position: absolute;
+                        content: "";
+                        top: 0;
+                        left: 4px;
+                        border: solid #fff;
+                        border-color: #fff;
+                        border-width: 0 3px 3px 0;
+                        width: 6px;
+                        height: 9px;
+                        z-index: 99;
+                        transform: rotate(45deg);
+                    }
+                }
+            }
+        }
+
+        .tf-colors-checkbox input:checked~.tf-color-checkmark {
+            background-color: #3E64DE;
+            border-color: #3E64DE;
+            &::after{
+                display: block;
+            }
+        }
+    }
+}
