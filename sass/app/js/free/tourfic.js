@@ -2097,34 +2097,44 @@ console.log('fsdd');
             if (tf_hasErrorsFlag) {
                 return false;
             }
-            let active_steps = $('.tf_popup_stpes').val();
-            let stepsArray = active_steps.split(',').map(Number);
-            let currentStep = parseInt($(this).attr("data-step"));
+            const $popup = $(this).closest('.tf-withoutpayment-popup');
+            if (!$popup.length) {
+                return false;
+            }
+
+            let active_steps = $popup.find('.tf_popup_stpes').first().val() || '';
+            let stepsArray = active_steps.split(',').map(Number).filter(Boolean);
+            let currentStep = parseInt($(this).attr("data-step"), 10);
 
             let currentIndex = stepsArray.indexOf(currentStep);
             let step = stepsArray[currentIndex + 1];
 
-            if (step > 1) {
+            if (step && step > 1) {
                 for (let i = 1; i <= step; i++) {
-                    $('.tf-booking-step-' + i).removeClass("active");
-                    $('.tf-booking-step-' + (i - 1)).addClass("done");
+                    $popup.find('.tf-booking-step-' + i).removeClass("active");
+                    $popup.find('.tf-booking-step-' + (i - 1)).addClass("done");
                 }
-                $('.tf-booking-step-' + step).addClass("active");
-                $('.tf-booking-content').hide();
-                $('.tf-booking-content-' + step).fadeIn(300);
+                $popup.find('.tf-booking-step-' + step).addClass("active");
+                $popup.find('.tf-booking-content').hide();
+                $popup.find('.tf-booking-content-' + step).fadeIn(300);
 
-                $('.tf-control-pagination').hide();
-                $('.tf-pagination-content-' + step).fadeIn(300);
+                $popup.find('.tf-control-pagination').hide();
+                $popup.find('.tf-pagination-content-' + step).fadeIn(300);
             }
         });
 
         // Navigation Back
         $('body').on('click', '.tf-step-back', function (e) {
             e.preventDefault();
-            
-            let active_steps = $('.tf_popup_stpes').val();
-            let stepsArray = active_steps.split(',').map(Number);
-            let currentStep = parseInt($(this).attr("data-step"));
+
+            const $popup = $(this).closest('.tf-withoutpayment-popup');
+            if (!$popup.length) {
+                return false;
+            }
+
+            let active_steps = $popup.find('.tf_popup_stpes').first().val() || '';
+            let stepsArray = active_steps.split(',').map(Number).filter(Boolean);
+            let currentStep = parseInt($(this).attr("data-step"), 10);
 
             // Find the previous available step from active_steps
             let currentIndex = stepsArray.indexOf(currentStep);
@@ -2132,26 +2142,26 @@ console.log('fsdd');
             
             // let step = $(this).attr("data-step");
             if (step == 1) {
-                $('.tf-booking-step').removeClass("active");
-                $('.tf-booking-step').removeClass("done");
-                $('.tf-booking-step-' + step).addClass("active");
-                $('.tf-booking-content').hide();
-                $('.tf-booking-content-' + step).fadeIn(300);
+                $popup.find('.tf-booking-step').removeClass("active");
+                $popup.find('.tf-booking-step').removeClass("done");
+                $popup.find('.tf-booking-step-' + step).addClass("active");
+                $popup.find('.tf-booking-content').hide();
+                $popup.find('.tf-booking-content-' + step).fadeIn(300);
 
-                $('.tf-control-pagination').hide();
-                $('.tf-pagination-content-' + step).fadeIn(300);
+                $popup.find('.tf-control-pagination').hide();
+                $popup.find('.tf-pagination-content-' + step).fadeIn(300);
             }
             if (step > 1) {
                 let next_step = parseInt(step) + 1;
-                $('.tf-booking-step-' + next_step).removeClass("active");
-                $('.tf-booking-step-' + step).addClass("active");
-                $('.tf-booking-step-' + step).removeClass("done");
-                $('.tf-booking-step-' + next_step).removeClass("done");
+                $popup.find('.tf-booking-step-' + next_step).removeClass("active");
+                $popup.find('.tf-booking-step-' + step).addClass("active");
+                $popup.find('.tf-booking-step-' + step).removeClass("done");
+                $popup.find('.tf-booking-step-' + next_step).removeClass("done");
 
-                $('.tf-booking-content').hide();
-                $('.tf-booking-content-' + step).fadeIn(300);
-                $('.tf-control-pagination').hide();
-                $('.tf-pagination-content-' + step).fadeIn(300);
+                $popup.find('.tf-booking-content').hide();
+                $popup.find('.tf-booking-content-' + step).fadeIn(300);
+                $popup.find('.tf-control-pagination').hide();
+                $popup.find('.tf-pagination-content-' + step).fadeIn(300);
             }
         });
 

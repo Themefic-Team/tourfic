@@ -188,6 +188,31 @@
             $popup.find('.tf-control-pagination.show').show();
         }
 
+        function clearApartmentBookingConfirmFields($popup) {
+            if (!$popup.length) {
+                return;
+            }
+
+            $popup.find('[name^="booking_confirm["]').each(function () {
+                const $field = $(this);
+                const type = ($field.attr('type') || '').toLowerCase();
+
+                if (type === 'checkbox' || type === 'radio') {
+                    $field.prop('checked', false);
+                    return;
+                }
+
+                if ($field.is('select')) {
+                    $field.prop('selectedIndex', 0);
+                    return;
+                }
+
+                $field.val('');
+            });
+
+            $popup.find('.error-text').text('').removeClass('error-visible');
+        }
+
         function validateApartmentBookingConfirmFields($popup) {
             let hasErrors = false;
             let firstErrorElement = null;
@@ -406,6 +431,7 @@
 
             activeApartmentBookingForm = $form;
             resetApartmentPopupSteps($popup);
+            clearApartmentBookingConfirmFields($popup);
 
             const isDeposit = $form.find('.tf-apartment-deposit-value').val() === '1';
             if ($popup.find('.tf-apartment-popup-deposit-switch').length) {
@@ -456,13 +482,19 @@
         $('body').on('click touchstart', '.tf-apartment-booking-popup .tf-booking-times span', function (e) {
             e.preventDefault();
             const $popup = $('.tf-apartment-booking-popup');
-            $popup.removeClass('show');
+            $popup.removeClass('show tf-is-processing');
+            $('.tf-apartment-withoutpayment-booking-confirm').removeClass('show');
             resetApartmentPopupSteps($popup);
+            clearApartmentBookingConfirmFields($popup);
         });
 
         $('body').on('click touchstart', '.tf-apartment-withoutpayment-booking-confirm .tf-booking-times span', function (e) {
             e.preventDefault();
             $('.tf-apartment-withoutpayment-booking-confirm').removeClass('show');
+            const $popup = $('.tf-apartment-booking-popup');
+            $popup.removeClass('show tf-is-processing');
+            resetApartmentPopupSteps($popup);
+            clearApartmentBookingConfirmFields($popup);
         });
 
 
