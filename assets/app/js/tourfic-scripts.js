@@ -191,6 +191,31 @@
             $popup.find('.tf-control-pagination.show').show();
         }
 
+        function clearApartmentBookingConfirmFields($popup) {
+            if (!$popup.length) {
+                return;
+            }
+
+            $popup.find('[name^="booking_confirm["]').each(function () {
+                const $field = $(this);
+                const type = ($field.attr('type') || '').toLowerCase();
+
+                if (type === 'checkbox' || type === 'radio') {
+                    $field.prop('checked', false);
+                    return;
+                }
+
+                if ($field.is('select')) {
+                    $field.prop('selectedIndex', 0);
+                    return;
+                }
+
+                $field.val('');
+            });
+
+            $popup.find('.error-text').text('').removeClass('error-visible');
+        }
+
         function validateApartmentBookingConfirmFields($popup) {
             let hasErrors = false;
             let firstErrorElement = null;
@@ -409,6 +434,7 @@
 
             activeApartmentBookingForm = $form;
             resetApartmentPopupSteps($popup);
+            clearApartmentBookingConfirmFields($popup);
 
             const isDeposit = $form.find('.tf-apartment-deposit-value').val() === '1';
             if ($popup.find('.tf-apartment-popup-deposit-switch').length) {
@@ -459,13 +485,19 @@
         $('body').on('click touchstart', '.tf-apartment-booking-popup .tf-booking-times span', function (e) {
             e.preventDefault();
             const $popup = $('.tf-apartment-booking-popup');
-            $popup.removeClass('show');
+            $popup.removeClass('show tf-is-processing');
+            $('.tf-apartment-withoutpayment-booking-confirm').removeClass('show');
             resetApartmentPopupSteps($popup);
+            clearApartmentBookingConfirmFields($popup);
         });
 
         $('body').on('click touchstart', '.tf-apartment-withoutpayment-booking-confirm .tf-booking-times span', function (e) {
             e.preventDefault();
             $('.tf-apartment-withoutpayment-booking-confirm').removeClass('show');
+            const $popup = $('.tf-apartment-booking-popup');
+            $popup.removeClass('show tf-is-processing');
+            resetApartmentPopupSteps($popup);
+            clearApartmentBookingConfirmFields($popup);
         });
 
 
@@ -6067,34 +6099,44 @@ console.log('fsdd');
             if (tf_hasErrorsFlag) {
                 return false;
             }
-            let active_steps = $('.tf_popup_stpes').val();
-            let stepsArray = active_steps.split(',').map(Number);
-            let currentStep = parseInt($(this).attr("data-step"));
+            const $popup = $(this).closest('.tf-withoutpayment-popup');
+            if (!$popup.length) {
+                return false;
+            }
+
+            let active_steps = $popup.find('.tf_popup_stpes').first().val() || '';
+            let stepsArray = active_steps.split(',').map(Number).filter(Boolean);
+            let currentStep = parseInt($(this).attr("data-step"), 10);
 
             let currentIndex = stepsArray.indexOf(currentStep);
             let step = stepsArray[currentIndex + 1];
 
-            if (step > 1) {
+            if (step && step > 1) {
                 for (let i = 1; i <= step; i++) {
-                    $('.tf-booking-step-' + i).removeClass("active");
-                    $('.tf-booking-step-' + (i - 1)).addClass("done");
+                    $popup.find('.tf-booking-step-' + i).removeClass("active");
+                    $popup.find('.tf-booking-step-' + (i - 1)).addClass("done");
                 }
-                $('.tf-booking-step-' + step).addClass("active");
-                $('.tf-booking-content').hide();
-                $('.tf-booking-content-' + step).fadeIn(300);
+                $popup.find('.tf-booking-step-' + step).addClass("active");
+                $popup.find('.tf-booking-content').hide();
+                $popup.find('.tf-booking-content-' + step).fadeIn(300);
 
-                $('.tf-control-pagination').hide();
-                $('.tf-pagination-content-' + step).fadeIn(300);
+                $popup.find('.tf-control-pagination').hide();
+                $popup.find('.tf-pagination-content-' + step).fadeIn(300);
             }
         });
 
         // Navigation Back
         $('body').on('click', '.tf-step-back', function (e) {
             e.preventDefault();
-            
-            let active_steps = $('.tf_popup_stpes').val();
-            let stepsArray = active_steps.split(',').map(Number);
-            let currentStep = parseInt($(this).attr("data-step"));
+
+            const $popup = $(this).closest('.tf-withoutpayment-popup');
+            if (!$popup.length) {
+                return false;
+            }
+
+            let active_steps = $popup.find('.tf_popup_stpes').first().val() || '';
+            let stepsArray = active_steps.split(',').map(Number).filter(Boolean);
+            let currentStep = parseInt($(this).attr("data-step"), 10);
 
             // Find the previous available step from active_steps
             let currentIndex = stepsArray.indexOf(currentStep);
@@ -6102,26 +6144,26 @@ console.log('fsdd');
             
             // let step = $(this).attr("data-step");
             if (step == 1) {
-                $('.tf-booking-step').removeClass("active");
-                $('.tf-booking-step').removeClass("done");
-                $('.tf-booking-step-' + step).addClass("active");
-                $('.tf-booking-content').hide();
-                $('.tf-booking-content-' + step).fadeIn(300);
+                $popup.find('.tf-booking-step').removeClass("active");
+                $popup.find('.tf-booking-step').removeClass("done");
+                $popup.find('.tf-booking-step-' + step).addClass("active");
+                $popup.find('.tf-booking-content').hide();
+                $popup.find('.tf-booking-content-' + step).fadeIn(300);
 
-                $('.tf-control-pagination').hide();
-                $('.tf-pagination-content-' + step).fadeIn(300);
+                $popup.find('.tf-control-pagination').hide();
+                $popup.find('.tf-pagination-content-' + step).fadeIn(300);
             }
             if (step > 1) {
                 let next_step = parseInt(step) + 1;
-                $('.tf-booking-step-' + next_step).removeClass("active");
-                $('.tf-booking-step-' + step).addClass("active");
-                $('.tf-booking-step-' + step).removeClass("done");
-                $('.tf-booking-step-' + next_step).removeClass("done");
+                $popup.find('.tf-booking-step-' + next_step).removeClass("active");
+                $popup.find('.tf-booking-step-' + step).addClass("active");
+                $popup.find('.tf-booking-step-' + step).removeClass("done");
+                $popup.find('.tf-booking-step-' + next_step).removeClass("done");
 
-                $('.tf-booking-content').hide();
-                $('.tf-booking-content-' + step).fadeIn(300);
-                $('.tf-control-pagination').hide();
-                $('.tf-pagination-content-' + step).fadeIn(300);
+                $popup.find('.tf-booking-content').hide();
+                $popup.find('.tf-booking-content-' + step).fadeIn(300);
+                $popup.find('.tf-control-pagination').hide();
+                $popup.find('.tf-pagination-content-' + step).fadeIn(300);
             }
         });
 
@@ -7239,6 +7281,7 @@ jQuery(".acr-dec").on("click", function() {
     let inputField = jQuery(".tf-search__form__field__input");
     inputField.trigger("input");
 });
+
 })();
 
 /******/ })()
