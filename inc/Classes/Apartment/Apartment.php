@@ -1796,6 +1796,7 @@ class Apartment {
 		);
 		$is_without_payment_booking  = function_exists( 'is_tf_pro' ) && is_tf_pro() && '3' == $booking_type;
 		$show_popup_deposit_option   = ! $is_without_payment_booking && $show_deposit_option;
+		$show_booking_info_step      = $is_without_payment_booking || $show_popup_deposit_option;
 		$traveler_details_text       = ! empty( Helper::tfopt( 'tour_traveler_details_text' ) ) ? Helper::tfopt( 'tour_traveler_details_text' ) : '';
 		?>
 		<div id="tour_room_details_loader">
@@ -1827,18 +1828,23 @@ class Apartment {
 			<div class="tf-withoutpayment-popup">
 				<div class="tf-booking-tabs">
 					<div class="tf-booking-tab-menu">
-						<ul>
-							<?php if ( $is_without_payment_booking ) { ?>
-								<li class="tf-booking-step tf-booking-step-3 active">
-									<i class="ri-calendar-check-line"></i> <?php echo esc_html__( 'Booking info', 'tourfic' ); ?>
-								</li>
-							<?php } else { ?>
-								<li class="tf-booking-step tf-booking-step-1 active">
-									<i class="ri-box-3-line"></i> <?php echo esc_html__( 'Details', 'tourfic' ); ?>
-								</li>
-							<?php } ?>
-						</ul>
-					</div>
+							<ul>
+								<?php if ( $show_booking_info_step ) { ?>
+									<li class="tf-booking-step tf-booking-step-1 active">
+										<i class="ri-box-3-line"></i> <?php echo esc_html__( 'Details', 'tourfic' ); ?>
+									</li>
+									<li class="tf-booking-step tf-booking-step-2">
+										<i class="ri-calendar-check-line"></i> <?php echo esc_html__( 'Booking info', 'tourfic' ); ?>
+									</li>
+								<?php } else { ?>
+									<li class="tf-booking-step tf-booking-step-1 active">
+										<i class="ri-box-3-line"></i> <?php echo esc_html__( 'Details', 'tourfic' ); ?>
+									</li>
+								<?php } ?>
+							</ul>
+							<?php $active_steps = $show_booking_info_step ? array( 1, 2 ) : array( 1 ); ?>
+							<input type="hidden" value="<?php echo esc_attr( implode( ',', $active_steps ) ); ?>" class="tf_popup_stpes" />
+						</div>
 					<div class="tf-booking-times">
 						<span>
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1850,8 +1856,11 @@ class Apartment {
 					</div>
 				</div>
 				<div class="tf-booking-content-summery">
-					<?php if ( $is_without_payment_booking ) { ?>
-						<div class="tf-booking-content tf-booking-content-3 show">
+					<?php if ( $show_booking_info_step ) { ?>
+						<div class="tf-booking-content tf-booking-content-1 show">
+							<p><?php echo esc_html__( 'Review booking summary and continue to add billing details.', 'tourfic' ); ?></p>
+						</div>
+						<div class="tf-booking-content tf-booking-content-2">
 							<p><?php echo esc_html( $traveler_details_text ); ?></p>
 							<div class="tf-booking-content-traveller">
 								<div class="tf-single-tour-traveller">
@@ -1963,7 +1972,7 @@ class Apartment {
 							</div>
 						</div>
 					<?php } ?>
-					<div class="tf-booking-summery" <?php echo $is_without_payment_booking ? '' : 'style="width: 100%;"'; ?>>
+					<div class="tf-booking-summery" <?php echo $show_booking_info_step ? '' : 'style="width: 100%;"'; ?>>
 						<div class="tf-booking-fixed-summery">
 							<h5><?php echo esc_html__( 'Booking Summary', 'tourfic' ); ?></h5>
 							<h4><?php echo esc_html( get_the_title( $post_id ) ); ?></h4>
@@ -1996,9 +2005,13 @@ class Apartment {
 							</div>
 						</div>
 					<?php } ?>
-					<?php if ( $is_without_payment_booking ) { ?>
-						<div class="tf-control-pagination tf-pagination-content-3 show">
-							<button type="button" class="tf_btn tf-apartment-popup-continue"><?php echo esc_html__( 'Continue', 'tourfic' ); ?></button>
+					<?php if ( $show_booking_info_step ) { ?>
+						<div class="tf-control-pagination tf-pagination-content-1 show">
+							<a href="#" class="tf-next-control tf-tabs-control tf_btn" data-step="1"><?php echo esc_html__( 'Continue', 'tourfic' ); ?></a>
+						</div>
+						<div class="tf-control-pagination tf-pagination-content-2">
+							<a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo esc_html__( 'Back', 'tourfic' ); ?></a>
+							<button type="button" class="tf-book-confirm-error tf_btn tf-apartment-popup-continue"><?php echo esc_html__( 'Continue', 'tourfic' ); ?></button>
 						</div>
 					<?php } else { ?>
 						<div class="tf-control-pagination show">
@@ -4582,21 +4595,21 @@ class Apartment {
 
 	static function template( $type = 'archive', $post_id = '' ) {
 		$apartment_template = '';
-		$post_id        = ! empty( $post_id ) ? $post_id : '';
+		$post_id            = ! empty( $post_id ) ? $post_id : '';
 
 		if ( $type == 'archive' ) {
-			$apartment_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] : 'design-1';
+			$apartment_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] : 'default';
 		} elseif ( $type == 'single' && $post_id ) {
-			$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+			$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
 
 			$layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
 			if ( "single" == $layout_conditions ) {
-				$single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'design-1';
+				$single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'default';
 			}
-			$global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'design-1';
-			$apartment_template  = ! empty( $single_template ) ? $single_template : $global_template;
+			$global_template    = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'default';
+			$apartment_template = ! empty( $single_template ) ? $single_template : $global_template;
 		} elseif ( $type == 'single' ) {
-			$apartment_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'design-1';
+			$apartment_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'default';
 		}
 
 		return $apartment_template;
