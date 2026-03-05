@@ -715,6 +715,9 @@ trait Action_Helper {
 		if ( get_option( 'tf_admin_caps' ) < 7 ) {
 			$admin_role  = get_role( 'administrator' );
 			$editor_role = get_role( 'editor' );
+			if ( ! $admin_role || ! $editor_role ) {
+				return;
+			}
 
 			// Add a new capability.
 			$caps = array(
@@ -805,9 +808,12 @@ trait Action_Helper {
 		}
 	}
 
-	function tf_customer_role_caps(){
+	function tf_customer_role_caps() {
 		if ( get_option( 'tf_customer_caps' ) < 1 ) {
 			$customer_role  = get_role( 'customer' );
+			if ( ! $customer_role ) {
+				return;
+			}
 
 			// Add a new capability.
 			$caps = array(
