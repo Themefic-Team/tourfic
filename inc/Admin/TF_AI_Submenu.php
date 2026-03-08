@@ -95,7 +95,7 @@ class TF_AI_Submenu {
 			return;
 		}
 
-		$upgrade_url = 'https://tourfic.com/go/upgrade';
+		$upgrade_url = 'https://tourfic.com/pricing/';
 		?>
 		<style>
 			/* ── AI Submenu – "Create With AI" button ── */
@@ -199,6 +199,8 @@ class TF_AI_Submenu {
 				padding: 48px 40px 40px;
 				max-width: 460px;
 				width: 92%;
+				overflow: hidden;
+				z-index: 0;
 				text-align: center;
 				box-shadow:
 					0 24px 80px rgba(0, 0, 0, 0.25),
@@ -249,18 +251,22 @@ class TF_AI_Submenu {
 				align-items: center;
 				justify-content: center;
 				position: relative;
+				z-index: 1;
+				isolation: isolate;
 			}
 			.tf-ai-upsell-icon-wrap::after {
 				content: '';
 				position: absolute;
 				inset: -1px;
 				border-radius: 50%;
-				background: linear-gradient(135deg, rgba(0,36,114,0.25), rgba(26,194,255,0.3));
+				/* background: linear-gradient(135deg, rgba(0,36,114,0.25), rgba(26,194,255,0.3)); */
 				z-index: -1;
 			}
 			.tf-ai-upsell-icon-wrap svg {
 				width: 32px;
 				height: 32px;
+				position: relative;
+				z-index: 1;
 			}
 
 			/* PRO badge */
