@@ -103,6 +103,13 @@ class TF_AI_Submenu {
 			filemtime( TF_ASSETS_PATH . 'admin/css/tf-ai-submenu.css' )
 		);
 
+		wp_enqueue_style(
+			'tf-ai-upsell-modal',
+			TF_ASSETS_ADMIN_URL . 'css/tf-ai-upsell-modal.css',
+			array(),
+			filemtime( TF_ASSETS_PATH . 'admin/css/tf-ai-upsell-modal.css' )
+		);
+
 		wp_enqueue_script(
 			'tf-ai-submenu',
 			TF_ASSETS_ADMIN_URL . 'js/tf-ai-submenu.js',

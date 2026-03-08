@@ -1,0 +1,228 @@
+/* ── Upsell Modal ── */
+.tf-ai-upsell-overlay {
+	display: none;
+	position: fixed;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+	background: rgba(0, 0, 0, 0.65);
+	z-index: 999999;
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+}
+.tf-ai-upsell-overlay.active {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.tf-ai-upsell-box {
+	position: relative;
+	background: #fff url('../images/ai-modal-bg.png') no-repeat top right / contain;
+	border-radius: 20px;
+	padding: 48px 40px 40px;
+	max-width: 460px;
+	width: 100%;
+	overflow: hidden;
+	z-index: 0;
+	text-align: center;
+	box-shadow:
+		0 24px 80px rgba(0, 0, 0, 0.25),
+		0 8px 24px rgba(59, 130, 246, 0.08);
+	animation: tfUpsellIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tf-ai-upsell-box::before {
+	content: '';
+	position: absolute;
+	width: 544px;
+	height: 153px;
+	top: -50px;
+	right: 0;
+	background: url('../images/Ellipse_2009.png') no-repeat center / cover;
+	z-index: 10;
+	pointer-events: none;
+}
+@keyframes tfUpsellIn {
+	from { opacity: 0; transform: scale(0.92) translateY(24px); }
+	to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Close button */
+.tf-ai-upsell-close {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	width: 32px;
+	height: 32px;
+	border: none;
+	background: #f1f5f9;
+	border-radius: 8px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.2s, transform 0.2s;
+	padding: 0;
+	z-index: 2;
+}
+.tf-ai-upsell-close:hover {
+	background: #e2e8f0;
+	transform: scale(1.05);
+}
+.tf-ai-upsell-close svg {
+	width: 14px;
+	height: 14px;
+	color: #64748b;
+}
+
+/* Icon circle */
+.tf-ai-upsell-icon-wrap {
+	width: 72px;
+	height: 72px;
+	margin: 0 auto 20px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, rgba(0,36,114,0.08) 0%, rgba(0,119,241,0.1) 50%, rgba(26,194,255,0.1) 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	z-index: 1;
+	isolation: isolate;
+}
+.tf-ai-upsell-icon-wrap::after {
+	content: '';
+	position: absolute;
+	inset: -1px;
+	border-radius: 50%;
+	z-index: -1;
+}
+.tf-ai-upsell-icon-wrap svg {
+	width: 32px;
+	height: 32px;
+	position: relative;
+	z-index: 1;
+}
+
+/* PRO badge */
+.tf-ai-upsell-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 4px 12px;
+	border-radius: 100px;
+	background: linear-gradient(135deg, #3b82f6, #0464C8);
+	color: #fff;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	margin-bottom: 16px;
+}
+
+.tf-ai-upsell-box h2 {
+	margin: 0 0 10px;
+	font-size: 21px;
+	font-weight: 700;
+	color: #0f172a;
+	line-height: 1.3;
+}
+.tf-ai-upsell-box > p {
+	margin: 0 0 20px;
+	color: #64748b;
+	font-size: 14px;
+	line-height: 1.65;
+}
+
+/* Feature list */
+.tf-ai-upsell-features {
+	list-style: none;
+	margin: 0 0 28px;
+	padding: 0;
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.tf-ai-upsell-features li {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 13.5px;
+	color: #334155;
+	line-height: 1.4;
+}
+.tf-ai-upsell-features li svg {
+	flex-shrink: 0;
+	width: 18px;
+	height: 18px;
+}
+
+/* CTA button – matches Pro AI generate button design */
+.tf-ai-upsell-box .tf-ai-upsell-btn {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	width: 100%;
+	height: 48px;
+	padding: 12px 24px;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 12px;
+	border: 1.2px solid transparent;
+	background:
+		linear-gradient(271deg, #0051A2 1.03%, #0077F1 50%, #0051A2 98.97%) padding-box,
+		linear-gradient(135deg, #002472, #1AC2FF, #1AC2FF, #1AC2FF, #002472) border-box;
+	box-shadow:
+		-4px 2px 4px 0 rgba(132, 185, 255, 0.25) inset,
+		4px 2px 4px 0 rgba(132, 185, 255, 0.25) inset,
+		0 4px 4px 0 rgba(108, 191, 255, 0.25) inset,
+		4px 12px 8px 0 rgba(0, 40, 71, 0.04),
+		4px 12px 8px 0 rgba(0, 105, 186, 0.08);
+	font-size: 15px;
+	font-weight: 600;
+	font-family: Inter, sans-serif;
+	letter-spacing: 0.01em;
+	cursor: pointer;
+	overflow: visible;
+	z-index: 1;
+	box-sizing: border-box;
+	transition: all 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+.tf-ai-upsell-box .tf-ai-upsell-btn::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: 10px;
+	background: linear-gradient(271deg, #0051A2 1.03%, #0077F1 50%, #0051A2 98.97%);
+	z-index: -1;
+}
+
+.tf-ai-upsell-box .tf-ai-upsell-btn:active {
+	transform: translateY(0);
+}
+.tf-ai-upsell-box .tf-ai-upsell-btn svg {
+	width: 18px;
+	height: 18px;
+	position: relative;
+	z-index: 1;
+}
+
+/* Dismiss */
+.tf-ai-upsell-box .tf-ai-upsell-dismiss {
+	display: block;
+	width: 100%;
+	margin-top: 12px;
+	padding: 10px;
+	color: #94a3b8;
+	font-size: 13px;
+	cursor: pointer;
+	background: none;
+	border: none;
+	transition: color 0.2s;
+}
+.tf-ai-upsell-box .tf-ai-upsell-dismiss:hover {
+	color: #475569;
+}
