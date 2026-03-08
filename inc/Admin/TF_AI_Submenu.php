@@ -17,6 +17,8 @@ class TF_AI_Submenu {
 		add_action( 'admin_menu', array( $this, 'reorder_ai_submenu' ), 1000 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_ai_submenu_assets' ) );
 		add_action( 'admin_footer', array( $this, 'ai_submenu_assets' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_ai_list_button_assets' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_ai_editor_button_assets' ) );
 	}
 
 	/**
@@ -174,5 +176,97 @@ class TF_AI_Submenu {
 			</div>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Enqueue CSS/JS for the AI button on post list and classic editor screens.
+	 * Only loads on tf_hotel / tf_tours edit screens.
+	 */
+	public function enqueue_ai_list_button_assets() {
+		if ( defined( 'TF_PRO' ) ) {
+			return;
+		}
+
+		$screen = get_current_screen();
+		if ( ! $screen ) {
+			return;
+		}
+
+		$valid_post_types = array( 'tf_hotel', 'tf_tours' );
+
+		if ( ! in_array( $screen->post_type, $valid_post_types, true ) ) {
+			return;
+		}
+
+		// Determine which screen type we're on.
+		if ( 'edit' === $screen->base ) {
+			$screen_type = 'edit';
+		} elseif ( 'post' === $screen->base ) {
+			// Only for classic editor (not Gutenberg).
+			if ( ! $screen->is_block_editor ) {
+				$screen_type = 'post';
+			} else {
+				return;
+			}
+		} else {
+			return;
+		}
+
+		wp_enqueue_style(
+			'tf-ai-buttons',
+			TF_ASSETS_ADMIN_URL . 'css/tf-ai-buttons.css',
+			array(),
+			filemtime( TF_ASSETS_PATH . 'admin/css/tf-ai-buttons.css' )
+		);
+
+		wp_enqueue_script(
+			'tf-ai-buttons',
+			TF_ASSETS_ADMIN_URL . 'js/tf-ai-buttons.js',
+			array( 'jquery' ),
+			filemtime( TF_ASSETS_PATH . 'admin/js/tf-ai-buttons.js' ),
+			true
+		);
+
+		wp_localize_script( 'tf-ai-buttons', 'tfAiButtons', array(
+			'post_type'   => $screen->post_type,
+			'button_text' => __( 'Create With AI', 'tourfic' ),
+			'screen'      => $screen_type,
+		) );
+	}
+
+	/**
+	 * Enqueue CSS/JS for the AI button inside the Gutenberg block editor header.
+	 * Only loads on tf_hotel / tf_tours block editor screens.
+	 */
+	public function enqueue_ai_editor_button_assets() {
+		if ( defined( 'TF_PRO' ) ) {
+			return;
+		}
+
+		$screen = get_current_screen();
+		if ( ! $screen ) {
+			return;
+		}
+
+		$valid_post_types = array( 'tf_hotel', 'tf_tours' );
+
+		if ( ! in_array( $screen->post_type, $valid_post_types, true ) ) {
+			return;
+		}
+
+		wp_enqueue_style(
+			'tf-ai-buttons',
+			TF_ASSETS_ADMIN_URL . 'css/tf-ai-buttons.css',
+			array(),
+			filemtime( TF_ASSETS_PATH . 'admin/css/tf-ai-buttons.css' )
+		);
+
+		wp_enqueue_script(
+			'tf-ai-editor-button',
+			TF_ASSETS_ADMIN_URL . 'js/tf-ai-editor-button.js',
+			array(),
+			filemtime( TF_ASSETS_PATH . 'admin/js/tf-ai-editor-button.js' ),
+			true
+		);
 	}
 }
