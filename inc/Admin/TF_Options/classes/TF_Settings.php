@@ -1121,7 +1121,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			// Check if a nonce is valid.
 			if (  !isset( $_POST['tf_option_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_option_nonce'] ) ), 'tf_option_nonce_action' ) ) {
-				return;
+				$response['status'] = 'error';
+				$response['message'] = esc_html__('Security verification failed. This is usually caused by PHP max_input_vars being too low. Please increase it to at least 5000 in your PHP configuration.', 'tourfic');
+				echo wp_json_encode( $response );
+				wp_die();
 			}
 
 			// Check if the current user has the required capability.
