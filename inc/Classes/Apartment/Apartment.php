@@ -4612,6 +4612,17 @@ class Apartment {
 			}
 		}
 
+		if ( $has_apartment && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$range_start = (float) $startprice;
+			$range_end   = (float) $endprice;
+			$min_price   = Pricing::instance( get_the_ID() )->get_min_price( $period );
+			$card_price  = ! empty( $min_price['min_sale_price'] ) ? (float) $min_price['min_sale_price'] : ( ! empty( $min_price['min_regular_price'] ) ? (float) $min_price['min_regular_price'] : 0 );
+
+			if ( $card_price <= 0 || $card_price < $range_start || $card_price > $range_end ) {
+				$has_apartment = false;
+			}
+		}
+
 		// Conditional apartment showing
 		if ( $has_apartment ) {
 			$not_found[] = array(
@@ -4688,6 +4699,17 @@ class Apartment {
 			}
 		}
 
+
+		if ( $has_apartment && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$range_start = (float) $startprice;
+			$range_end   = (float) $endprice;
+			$min_price   = Pricing::instance( get_the_ID() )->get_min_price( $period );
+			$card_price  = ! empty( $min_price['min_sale_price'] ) ? (float) $min_price['min_sale_price'] : ( ! empty( $min_price['min_regular_price'] ) ? (float) $min_price['min_regular_price'] : 0 );
+
+			if ( $card_price <= 0 || $card_price < $range_start || $card_price > $range_end ) {
+				$has_apartment = false;
+			}
+		}
 
 		// Conditional apartment showing
 		if ( $has_apartment ) {
