@@ -2125,7 +2125,7 @@ class Room {
 								// flatpickr locale first day of Week
 								<?php Helper::tf_flatpickr_locale( "root" ); ?>
 
-								$(".tf-shortcode-design-5#tf_room_aval_check #tf-check-out").on('click', function () {
+								$(".tf-shortcode-design-5#tf_room_aval_check #tf-check-out, .tf-shortcode-design-5#tf_room_aval_check .tf-booking-date-wrap svg").on('click', function () {
 									$(".tf-search-input.form-control").click();
 								});
 								$("#check-in-out-date").flatpickr({

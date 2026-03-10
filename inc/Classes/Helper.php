@@ -2863,7 +2863,7 @@ class Helper {
                                     // flatpickr locale first day of Week
                                     <?php self::tf_flatpickr_locale( "root" ); ?>
 
-                                    $(".tf-archive-template__one #tf-check-out").on('click', function () {
+                                    $(".tf-archive-template__one #tf-check-out, .tf-archive-template__one .tf-booking-date-wrap svg").on('click', function () {
                                         $(".tf-search-input.form-control").click();
                                     });
                                     $("#check-in-out-date").flatpickr({
