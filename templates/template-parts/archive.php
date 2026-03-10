@@ -463,7 +463,8 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                                             Tour::tf_tour_archive_single_item();
                                         } elseif($post_type == 'tf_apartment'){
                                             $meta = get_post_meta(get_the_ID(), 'tf_apartment_opt', true);
-                                            if (!$meta["apartment_as_featured"]) {
+                                            $is_apartment_featured = is_array( $meta ) && ! empty( $meta['apartment_as_featured'] );
+                                            if ( ! $is_apartment_featured ) {
                                                 continue;
                                             }
 
@@ -534,6 +535,9 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                                             echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                         }
                                     }
+
+                                    $loop->rewind_posts();
+
                                     while ( $loop->have_posts() ) {
                                         $loop->the_post();
 
@@ -684,7 +688,8 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                                             Tour::tf_tour_archive_single_item();
                                         } elseif($post_type == 'tf_apartment'){
                                             $meta = get_post_meta(get_the_ID(), 'tf_apartment_opt', true);
-                                            if (!empty($meta["apartment_as_featured"]) && $meta["apartment_as_featured"]) {
+                                            $is_apartment_featured = is_array( $meta ) && ! empty( $meta['apartment_as_featured'] );
+                                            if ( $is_apartment_featured ) {
                                                 continue;
                                             }
 
