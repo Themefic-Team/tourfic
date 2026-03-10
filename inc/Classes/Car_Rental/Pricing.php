@@ -94,6 +94,9 @@ class Pricing {
 
             // Convert the difference to total hours
             $total_hours = ($interval->days * 24) + $interval->h + ($interval->i / 60);
+            if ( $total_hours < 1 ) {
+                $total_hours = 1;
+            }
 
             $all_prices = [];
             $result = array();
@@ -112,6 +115,9 @@ class Pricing {
                     // If there are leftover hours that count as a partial day
                     if ($interval->h > 0 || $interval->i > 0) {
                         $total_days += 1;  // Add an extra day for any remaining hours
+                    }
+                    if ( $total_days < 1 ) {
+                        $total_days = 1;
                     }
                     if(!empty($tf_archive)){
                         $total_multiply = 1;
@@ -153,6 +159,9 @@ class Pricing {
                     if ($interval->h > 0 || $interval->i > 0) {
                         $total_days += 1;  // Add an extra day for any remaining hours
                     }
+                    if ( $total_days < 1 ) {
+                        $total_days = 1;
+                    }
                     if(!empty($tf_archive)){
                         $total_multiply = 1;
                     }else{
@@ -180,6 +189,9 @@ class Pricing {
 
                 // Convert the difference to total hours
                 $total_hours = ($interval->days * 24) + $interval->h + ($interval->i / 60);
+                if ( $total_hours < 1 ) {
+                    $total_hours = 1;
+                }
                 
                 if('hour'==$pricing_by){
                     if(!empty($tf_archive)){
@@ -196,6 +208,9 @@ class Pricing {
                     // If there are leftover hours that count as a partial day
                     if ($interval->h > 0 || $interval->i > 0) {
                         $total_days += 1;  // Add an extra day for any remaining hours
+                    }
+                    if ( $total_days < 1 ) {
+                        $total_days = 1;
                     }
                     if(!empty($tf_archive)){
                         $total_multiply = 1;
@@ -267,6 +282,9 @@ class Pricing {
                             if ($interval->h > 0 || $interval->i > 0) {
                                 $total_days += 1;  // Add an extra day for any remaining hours
                             }
+                            if ( $total_days < 1 ) {
+                                $total_days = 1;
+                            }
 
                             $price = $single_extra_info['price'] * $total_days;
 
@@ -308,6 +326,9 @@ class Pricing {
                 // If there are leftover hours that count as a partial day
                 if ($interval->h > 0 || $interval->i > 0) {
                     $total_days += 1;  // Add an extra day for any remaining hours
+                }
+                if ( $total_days < 1 ) {
+                    $total_days = 1;
                 }
             }else{
                 $total_days = 1;

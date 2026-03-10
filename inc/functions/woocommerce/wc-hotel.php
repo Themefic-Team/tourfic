@@ -800,11 +800,15 @@ function tf_hotel_booking_callback() {
 			}
 		} else {
 			# Add product to cart with the custom cart item data
-			WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
-
-			$response['product_id']  = $product_id;
-			$response['add_to_cart'] = 'true';
-			$response['redirect_to'] = $instantio_is_active == 1 ? ($quick_checkout == 0 ? wc_get_checkout_url() : '') : wc_get_checkout_url();
+			$added_to_cart = WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
+			if ( ! $added_to_cart ) {
+				$response['status']   = 'error';
+				$response['errors'][] = esc_html__( 'Unable to add this hotel booking to cart. Please try again.', 'tourfic' );
+			} else {
+				$response['product_id']  = $product_id;
+				$response['add_to_cart'] = 'true';
+				$response['redirect_to'] = $instantio_is_active == 1 ? ( $quick_checkout == 0 ? wc_get_checkout_url() : '' ) : wc_get_checkout_url();
+			}
 		}
 	} else {
 		$response['status'] = 'error';
