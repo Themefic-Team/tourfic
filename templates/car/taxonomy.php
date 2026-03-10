@@ -35,6 +35,14 @@ if($taxonomy !== 'carrental_category'){
 }
 
 $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] : 'grid';
+$tf_car_search_context = function_exists( 'tf_get_car_archive_search_context' ) ? tf_get_car_archive_search_context() : array(
+	'pickup'       => '',
+	'dropoff'      => '',
+	'pickup_date'  => '',
+	'dropoff_date' => '',
+	'pickup_time'  => '',
+	'dropoff_time' => '',
+);
 
 ?>
 <div class="tf-archive-template__one">
@@ -96,7 +104,14 @@ $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' )
 	                                    $car_meta = get_post_meta( get_the_ID() , 'tf_carrental_opt', true );
 	                                    $is_car_featured = is_array( $car_meta ) && ! empty( $car_meta['car_as_featured'] );
 	                                    if ( $is_car_featured ) {
-	                                        tf_car_archive_single_item();
+	                                        tf_car_archive_single_item(
+												$tf_car_search_context['pickup'],
+												$tf_car_search_context['dropoff'],
+												$tf_car_search_context['pickup_date'],
+												$tf_car_search_context['dropoff_date'],
+												$tf_car_search_context['pickup_time'],
+												$tf_car_search_context['dropoff_time']
+											);
 	                                    }
 	                                }
 
@@ -107,7 +122,14 @@ $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' )
 	                                    $car_meta = get_post_meta( get_the_ID() , 'tf_carrental_opt', true );
 	                                    $is_car_featured = is_array( $car_meta ) && ! empty( $car_meta['car_as_featured'] );
 	                                    if ( ! $is_car_featured ) {
-	                                        tf_car_archive_single_item();
+	                                        tf_car_archive_single_item(
+												$tf_car_search_context['pickup'],
+												$tf_car_search_context['dropoff'],
+												$tf_car_search_context['pickup_date'],
+												$tf_car_search_context['dropoff_date'],
+												$tf_car_search_context['pickup_time'],
+												$tf_car_search_context['dropoff_time']
+											);
 	                                    }
 	                                }
 	                            } else {

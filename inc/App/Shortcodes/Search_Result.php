@@ -50,6 +50,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		// Price Range
 		$startprice = isset( $_GET['from'] ) ? absint( sanitize_text_field( $_GET['from'] ) ) : '';
 		$endprice   = isset( $_GET['to'] ) ? absint( sanitize_text_field( $_GET['to'] ) ) : '';
+		$tf_min_seat = isset( $_GET['min_seat'] ) ? absint( sanitize_text_field( $_GET['min_seat'] ) ) : '';
+		$tf_max_seat = isset( $_GET['max_seat'] ) ? absint( sanitize_text_field( $_GET['max_seat'] ) ) : '';
+		$tf_driver_age = isset( $_GET['driver_age'] ) ? sanitize_text_field( wp_unslash( $_GET['driver_age'] ) ) : '';
 
 		// Cars Data Start
 		$pickup   = isset( $_GET['pickup'] ) ? sanitize_text_field( $_GET['pickup'] ) : '';
@@ -190,32 +193,8 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 			);
 		}
 
-		if(!empty($startprice) && !empty($endprice) && $post_type == 'tf_carrental'){
-			$args['meta_query'] = array(
-				array(
-					'key' => 'tf_search_car_rent',
-					'value'    => [$startprice, $endprice],
-					'compare'    => 'BETWEEN',
-					'type' => 'DECIMAL(10,3)'
-				),
-			);
-		}
 		$car_driver_min_age = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] : 18;
         $car_driver_max_age = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] : 40;
-		if(!empty($_GET['driver_age']) && 'on'==$_GET['driver_age'] && $post_type == 'tf_carrental'){
-			$args['meta_query'] = array(
-				array(
-					'key' => 'tf_search_driver_age',
-					'value'    => [$car_driver_min_age, $car_driver_max_age],
-					'compare'    => 'BETWEEN',
-					'type' => 'DECIMAL(10,3)'
-				),
-			);
-		}
-
-		if (!empty($args['meta_query']) && count($args['meta_query']) > 1) {
-			$args['meta_query']['relation'] = 'AND';
-		}
 		// Car Data Filter End
 
 		$loop        = new \WP_Query( $args );
@@ -787,7 +766,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 									$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
 									$car_inventory = Availability::tf_car_inventory(get_the_ID(), $car_meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 									if($car_inventory){
-										tf_car_availability_response($car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $startprice, $endprice);
+										tf_car_availability_response( $car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $startprice, $endprice, $tf_min_seat, $tf_max_seat, $tf_driver_age, $car_driver_min_age, $car_driver_max_age );
 									}
 								}
 							}

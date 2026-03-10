@@ -11,8 +11,11 @@ class Pricing {
 
 	}
 
-    // all price will be calculate here
+	// all price will be calculate here
 	static function set_total_price( $meta, $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_archive='' ) {
+		if ( function_exists( 'tf_normalize_car_meta' ) ) {
+			$meta = tf_normalize_car_meta( $meta );
+		}
 
 		$pricing_by = !empty($meta["price_by"]) ? $meta["price_by"] : 'day';
 		$initial_pricing = !empty($meta["car_rent"]) ? $meta["car_rent"] : 0;

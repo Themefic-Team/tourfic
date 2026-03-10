@@ -1248,42 +1248,8 @@ trait Action_Helper {
 			);
 		}
 
-		if(!empty($tf_min_seat) && !empty($tf_max_seat)){
-			$args['meta_query'] = array(
-				array(
-					'key' => 'tf_search_passengers',
-					'value'    => [$tf_min_seat, $tf_max_seat],
-					'compare'    => 'BETWEEN',
-					'type' => 'DECIMAL(10,3)'
-				),
-			);
-		}
-
-		if(!empty($tf_startprice) && !empty($tf_endprice) && $posttype == 'tf_carrental'){
-			$args['meta_query'] = array(
-				array(
-					'key' => 'tf_search_car_rent',
-					'value'    => [$tf_startprice, $tf_endprice],
-					'compare'    => 'BETWEEN',
-					'type' => 'DECIMAL(10,3)'
-				),
-			);
-		}
-
-		if(!empty($tf_driver_age) && 'on'==$tf_driver_age && $posttype == 'tf_carrental'){
-			$args['meta_query'] = array(
-				array(
-					'key' => 'tf_search_driver_age',
-					'value'    => [$car_driver_min_age, $car_driver_max_age],
-					'compare'    => 'BETWEEN',
-					'type' => 'DECIMAL(10,3)'
-				),
-			);
-		}
-
-		if (!empty($args['meta_query']) && count($args['meta_query']) > 1) {
-			$args['meta_query']['relation'] = 'AND';
-		}
+		// NOTE: Car seat/price/driver-age filtering is handled by tf_car_availability_response()
+		// to keep behavior consistent across legacy and modern car meta schemas.
 
 		if ( $category ) {
 			$args['tax_query']['relation'] = $relation;
@@ -1395,7 +1361,7 @@ trait Action_Helper {
 
 					$car_inventory = Availability::tf_car_inventory(get_the_ID(), $car_meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 					if($car_inventory){
-						tf_car_availability_response($car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice);
+						tf_car_availability_response( $car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice, $tf_min_seat, $tf_max_seat, $tf_driver_age, $car_driver_min_age, $car_driver_max_age );
 					}
 				} elseif ( $posttype == 'tf_room' ) {
 					
