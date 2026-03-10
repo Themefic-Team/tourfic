@@ -1797,7 +1797,7 @@ class Apartment {
 		);
 		$is_without_payment_booking  = function_exists( 'is_tf_pro' ) && is_tf_pro() && '3' == $booking_type;
 		$show_popup_deposit_option   = ! $is_without_payment_booking && $show_deposit_option;
-		$show_booking_info_step      = $is_without_payment_booking || $show_popup_deposit_option;
+		$show_booking_info_step      = $is_without_payment_booking;
 		$traveler_details_text       = ! empty( Helper::tfopt( 'tour_traveler_details_text' ) ) ? Helper::tfopt( 'tour_traveler_details_text' ) : '';
 		?>
 		<div id="tour_room_details_loader">
