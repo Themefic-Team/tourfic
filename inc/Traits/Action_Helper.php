@@ -1467,7 +1467,6 @@ trait Action_Helper {
 				}
 
 				$result_query  = new \WP_Query( $filter_args );
-				$result_query2 = $result_query;
 				if ( $result_query->have_posts() ) {
 					$count     = 0;
 					$locations = [];
@@ -1477,13 +1476,13 @@ trait Action_Helper {
 
 						if ( $posttype == 'tf_hotel' ) {
 							$hotel_meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
-							if ( ! $hotel_meta["featured"] ) {
+							if ( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
                                 continue;
 							}
 
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 								$count ++;
-								$map                 = ! empty( $hotel_meta['map'] ) ? Helper::tf_data_types( $hotel_meta['map'] ) : '';
+								$map                 = Hotel::get_hotel_map_data( $hotel_meta );
 								$min_price_arr       = Hotel_Pricing::instance( get_the_ID() )->get_min_price();
 								$min_sale_price      = ! empty( $min_price_arr['min_sale_price'] ) ? $min_price_arr['min_sale_price'] : 0;
 								$min_regular_price   = ! empty( $min_price_arr['min_regular_price'] ) ? $min_price_arr['min_regular_price'] : 0;
@@ -1556,17 +1555,17 @@ trait Action_Helper {
 								if ( isset( $data[4] ) && isset( $data[5] ) ) {
 									[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
 
-									if ( $hotel_meta["featured"] ) {
+									if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice, $elSettings );
 									}
 								} else {
 									[ $adults, $child, $room, $check_in_out ] = $data;
-									if ( $hotel_meta["featured"] ) {
+									if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, '', '', $elSettings );
 									}
 								}
 							} else {
-								if ( $hotel_meta["featured"] ) {
+								if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 									Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $elSettings );
 								}
 							}
@@ -1786,17 +1785,19 @@ trait Action_Helper {
 
 					}
 
-					while ( $result_query2->have_posts() ) {
-						$result_query2->the_post();
+					$result_query->rewind_posts();
+
+					while ( $result_query->have_posts() ) {
+						$result_query->the_post();
 
 						if ( $posttype == 'tf_hotel' ) {
 							$hotel_meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
-							if ( $hotel_meta["featured"] ) {
+							if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 								continue;
 							}
 							if (function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 								$count ++;
-								$map                 = ! empty( $hotel_meta['map'] ) ? Helper::tf_data_types( $hotel_meta['map'] ) : '';
+								$map                 = Hotel::get_hotel_map_data( $hotel_meta );
 								$min_price_arr       = Hotel_Pricing::instance( get_the_ID() )->get_min_price();
 								$min_sale_price      = ! empty( $min_price_arr['min_sale_price'] ) ? $min_price_arr['min_sale_price'] : 0;
 								$min_regular_price   = ! empty( $min_price_arr['min_regular_price'] ) ? $min_price_arr['min_regular_price'] : 0;
@@ -1871,18 +1872,18 @@ trait Action_Helper {
 								if ( isset( $data[4] ) && isset( $data[5] ) ) {
 									[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
 
-									if ( ! $hotel_meta["featured"] ) {
+									if ( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice, $elSettings );
 									}
 								} else {
 									[ $adults, $child, $room, $check_in_out ] = $data;
 
-									if ( ! $hotel_meta["featured"] ) {
+									if ( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, '', '', $elSettings );
 									}
 								}
 							} else {
-								if ( ! $hotel_meta["featured"] ) {
+								if ( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 									Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $elSettings );
 								}
 							}

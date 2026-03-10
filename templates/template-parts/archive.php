@@ -318,12 +318,12 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
 
                                         if ( $post_type == 'tf_hotel' ) {
                                             $hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
-                                            if ( ! $hotel_meta["featured"] ) {
+                                            if ( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
                                                 continue;
                                             }
 
                                             $count ++;
-                                            $map  = ! empty( $hotel_meta['map'] ) ? Helper::tf_data_types( $hotel_meta['map'] ) : '';
+                                            $map  = Hotel::get_hotel_map_data( $hotel_meta );
 
                                             $min_price_arr = hotelPricing::instance(get_the_ID())->get_min_price();
                                             $min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
@@ -543,12 +543,12 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
 
                                         if ( $post_type == 'tf_hotel' ) {
                                             $hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
-                                            if ( !empty($hotel_meta["featured"]) && $hotel_meta["featured"] ) {
+                                            if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
                                                 continue;
                                             }
 
                                             $count ++;
-                                            $map  = ! empty( $hotel_meta['map'] ) ? Helper::tf_data_types( $hotel_meta['map'] ) : '';
+                                            $map  = Hotel::get_hotel_map_data( $hotel_meta );
 
                                             $min_price_arr = hotelPricing::instance(get_the_ID())->get_min_price();
                                             $min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
