@@ -3609,9 +3609,9 @@ class Tour {
 			}
 			if($pricing_rule == 'package'){
 				$adult_price = null;
-                $child_price = null;
-                $infant_price = null;
-                $price = null;
+				$child_price = null;
+				$infant_price = null;
+				$price = null;
 				$options_count = ! empty( $matched_availability['options_count'] ) ? $matched_availability['options_count'] : '';
 				if(!empty($options_count)){
 					for($i = 0; $i <= $options_count; $i++){
@@ -3636,6 +3636,56 @@ class Tour {
 							}
 						}
 
+					}
+				}
+
+				$matched_pricing_type = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
+				if ( 'person' === $matched_pricing_type ) {
+					if ( ! empty( $matched_availability['adult_price'] ) && ( is_null( $adult_price ) || $matched_availability['adult_price'] < $adult_price ) ) {
+						$adult_price = $matched_availability['adult_price'];
+					}
+
+					if ( ! empty( $matched_availability['child_price'] ) && ( is_null( $child_price ) || $matched_availability['child_price'] < $child_price ) ) {
+						$child_price = $matched_availability['child_price'];
+					}
+
+					if ( ! empty( $matched_availability['infant_price'] ) && ( is_null( $infant_price ) || $matched_availability['infant_price'] < $infant_price ) ) {
+						$infant_price = $matched_availability['infant_price'];
+					}
+				}
+
+				if ( 'group' === $matched_pricing_type ) {
+					if ( ! empty( $matched_availability['price'] ) && ( is_null( $price ) || $matched_availability['price'] < $price ) ) {
+						$price = $matched_availability['price'];
+					}
+				}
+
+				if ( is_null( $adult_price ) && is_null( $child_price ) && is_null( $infant_price ) && is_null( $price ) && ! empty( $package_pricing ) ) {
+					foreach ( $package_pricing as $package ) {
+
+						if ( ! empty( $package['adult_tabs'][1]['adult_price'] ) ) {
+							if ( is_null( $adult_price ) || $package['adult_tabs'][1]['adult_price'] < $adult_price ) {
+								$adult_price = $package['adult_tabs'][1]['adult_price'];
+							}
+						}
+
+						if ( ! empty( $package['child_tabs'][1]['child_price'] ) ) {
+							if ( is_null( $child_price ) || $package['child_tabs'][1]['child_price'] < $child_price ) {
+								$child_price = $package['child_tabs'][1]['child_price'];
+							}
+						}
+
+						if ( ! empty( $package['infant_tabs'][1]['infant_price'] ) ) {
+							if ( is_null( $infant_price ) || $package['infant_tabs'][1]['infant_price'] < $infant_price ) {
+								$infant_price = $package['infant_tabs'][1]['infant_price'];
+							}
+						}
+
+						if ( ! empty( $package['group_tabs'][1]['group_price'] ) ) {
+							if ( is_null( $price ) || $package['group_tabs'][1]['group_price'] < $price ) {
+								$price = $package['group_tabs'][1]['group_price'];
+							}
+						}
 					}
 				}
 			}
@@ -3714,6 +3764,7 @@ class Tour {
 
 
 		$tour_archive_page_price_settings = ! empty( Helper::tfopt( 'tour_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'tour_archive_price_minimum_settings' ) : 'adult';
+		$min_price = '';
 		if($tour_archive_page_price_settings=='adult'){
 			$min_price = !empty($adult_price) ? $adult_price : '';
 		}elseif($tour_archive_page_price_settings=='child'){
@@ -3742,6 +3793,37 @@ class Tour {
 					$all_prices[] = $price;
 				}
 				$min_price = !empty($all_prices) ? min($all_prices) : '';
+			}
+		}
+
+		if ( empty( $min_price ) ) {
+			if ( 'group' === $pricing_rule ) {
+				$min_price = ! empty( $price ) ? $price : '';
+			}
+
+			if ( 'person' === $pricing_rule ) {
+				$fallback_person_prices = [];
+				if ( ! empty( $adult_price ) ) {
+					$fallback_person_prices[] = $adult_price;
+				}
+				if ( ! empty( $child_price ) ) {
+					$fallback_person_prices[] = $child_price;
+				}
+				$min_price = ! empty( $fallback_person_prices ) ? min( $fallback_person_prices ) : $min_price;
+			}
+
+			if ( 'package' === $pricing_rule ) {
+				$fallback_package_prices = [];
+				if ( ! empty( $adult_price ) ) {
+					$fallback_package_prices[] = $adult_price;
+				}
+				if ( ! empty( $child_price ) ) {
+					$fallback_package_prices[] = $child_price;
+				}
+				if ( ! empty( $price ) ) {
+					$fallback_package_prices[] = $price;
+				}
+				$min_price = ! empty( $fallback_package_prices ) ? min( $fallback_package_prices ) : $min_price;
 			}
 		}
 
