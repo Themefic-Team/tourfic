@@ -3436,6 +3436,17 @@ class Tour {
 			}
 		// }
 
+		if ( $has_tour && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$range_start = (float) $startprice;
+			$range_end   = (float) $endprice;
+			$min_price   = Pricing::instance( get_the_ID() )->get_min_price();
+			$card_price  = ! empty( $min_price['min_sale_price'] ) ? (float) $min_price['min_sale_price'] : 0;
+
+			if ( $card_price <= 0 || $card_price < $range_start || $card_price > $range_end ) {
+				$has_tour = false;
+			}
+		}
+
 		if ( $has_tour ) {
 
 			$not_found[] = array(
@@ -3542,6 +3553,17 @@ class Tour {
 				$has_tour = true;
 			}
 		// }
+
+		if ( $has_tour && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$range_start = (float) $startprice;
+			$range_end   = (float) $endprice;
+			$min_price   = Pricing::instance( get_the_ID() )->get_min_price();
+			$card_price  = ! empty( $min_price['min_sale_price'] ) ? (float) $min_price['min_sale_price'] : 0;
+
+			if ( $card_price <= 0 || $card_price < $range_start || $card_price > $range_end ) {
+				$has_tour = false;
+			}
+		}
 
 		if ( $has_tour ) {
 

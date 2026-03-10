@@ -108,10 +108,6 @@ console.log('fsdd');
                                     min: parseInt(response.data?.tf_tours?.min),
                                     max: parseInt(response.data?.tf_tours?.max)
                                 };
-                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
-                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
-                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
-                                }
                             }
                             if( $(".tf-hotel-filter-range").length > 0 || $(".tf-hotel-result-price-range").length > 0 ){
                                 let tf_hotel_range_options = {
@@ -167,10 +163,6 @@ console.log('fsdd');
                                     min: parseInt(response.data?.tf_hotel?.min),
                                     max: parseInt(response.data?.tf_hotel?.max)
                                 };
-                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
-                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
-                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
-                                }
                             }
                             if( $(".tf-apartment-filter-range").length > 0 || $(".tf-apartment-result-price-range").length > 0 ){
                                 let tf_apartment_range_options = {
@@ -220,10 +212,6 @@ console.log('fsdd');
                                     min: parseInt(response.data?.tf_apartment?.min),
                                     max: parseInt(response.data?.tf_apartment?.max)
                                 };
-                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
-                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
-                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
-                                }
                             }
                             if( $(".tf-car-result-price-range").length > 0 || $(".tf-car-result-seat-range").length > 0 ){
                                 var tf_search_page_params = new window.URLSearchParams(window.location.search);
@@ -255,10 +243,6 @@ console.log('fsdd');
                                     min: parseInt(response.data?.tf_carrental?.min),
                                     max: parseInt(response.data?.tf_carrental?.max)
                                 };
-                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
-                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
-                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
-                                }
                 
                                 var tf_search_page_params = new window.URLSearchParams(window.location.search);
                                 let tf_car_search_seat_range = {
@@ -345,10 +329,6 @@ console.log('fsdd');
                                     min: parseInt(response.data?.tf_room?.min),
                                     max: parseInt(response.data?.tf_room?.max)
                                 };
-                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
-                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
-                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
-                                }
                             }
                         }
                     }
