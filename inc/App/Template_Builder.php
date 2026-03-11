@@ -23,7 +23,7 @@ class Template_Builder {
         add_action('wp_ajax_tf_update_term_options', array($this, 'tf_update_term_options_callback'));
         add_action('wp_ajax_tf_save_template_builder', array($this, 'tf_save_template_builder_callback'));
         add_filter('template_include', array($this, 'tf_template_builder_custom_template'));
-        add_action('save_post_tf_template_builder', [$this, 'enforce_elementor_template_on_save'], 20, 3);
+        add_action('save_post_tf_template_builder', [$this, 'enforce_template_on_save'], 20, 3);
         
         // Elementor-specific hooks
         if ( did_action( 'elementor/loaded' ) ) {
@@ -1551,7 +1551,7 @@ class Template_Builder {
         return $deactivated;
     }
 
-    public function enforce_elementor_template_on_save($post_id, $post, $update) {
+    public function enforce_template_on_save($post_id, $post, $update) {
         // Prevent autosave / revision
         if (wp_is_post_autosave($post_id) || wp_is_post_revision($post_id)) {
             return;
@@ -1769,52 +1769,12 @@ class Template_Builder {
                 // ] );
 
                 // Restore original wp_query on shutdown
-                // add_action( 'shutdown', function() use ( $original_wp_query ) {
-                //     global $wp_query;
-                //     $wp_query = $original_wp_query;
-                // } );
+                add_action( 'shutdown', function() use ( $original_wp_query ) {
+                    global $wp_query;
+                    $wp_query = $original_wp_query;
+                } );
             }
         }
-        
-        // If we have a single preview post, set global post data so Bricks frontend
-        // and template loader can render dynamic content from that post.
-        if ( ! empty( $preview_post ) ) {
-            global $post, $wp_query;
-
-            // Store originals so we can restore after the request
-            $original_post     = $post;
-            $original_wp_query = $wp_query;
-
-            // Override global post and setup postdata for preview
-            $post = $preview_post;
-            setup_postdata( $post );
-
-            // Ensure global wp_query reflects a single post context (some theme/template tags check it)
-            if ( empty( $wp_query ) || ! ( $wp_query instanceof \WP_Query ) ) {
-                $wp_query = new \WP_Query( [ 'post_type' => $preview_post->post_type, 'p' => $preview_post->ID, 'posts_per_page' => 1 ] );
-            } else {
-                $wp_query->post = $preview_post;
-                $wp_query->posts = array( $preview_post );
-                $wp_query->post_count = 1;
-                $wp_query->found_posts = 1;
-                $wp_query->max_num_pages = 1;
-            }
-
-            // Restore originals at shutdown to avoid leaking modified globals to other requests
-            add_action( 'shutdown', function() use ( $original_post, $original_wp_query ) {
-                // Reset global postdata
-                wp_reset_postdata();
-                global $post, $wp_query;
-                $post = $original_post;
-                if ( $post ) {
-                    setup_postdata( $post );
-                }
-                $wp_query = $original_wp_query;
-            } );
-        }
-
-        // If archive preview requested, mock an archive query so Bricks can render archive templates/loops
-        
     }
 
     private function tf_get_builder_type($post_id) {
