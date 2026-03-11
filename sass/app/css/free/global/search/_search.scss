@@ -102,6 +102,10 @@
                 &::placeholder{
                     color: $color-white;
                 }
+
+                @media #{$max1024} {
+                    min-height: 30px;
+                }
             }
             svg{
                 path{
