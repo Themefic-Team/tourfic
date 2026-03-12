@@ -1011,9 +1011,9 @@
 
             if( response.includes(true) ){
                 if( attrCount > 1 ){
-                    notyf.error('( * ) fields are required');
+                    notyf.error(tf_params.fields_required_msg);
                 } else {
-                    notyf.error('( * ) field is required');
+                    notyf.error(tf_params.field_required);
                 }
                 return true;
             }
@@ -3695,6 +3695,7 @@ function convertTo24HourFormat(timeStr) {
     });
 
 })(jQuery, window);
+
 })();
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
@@ -3734,7 +3735,7 @@ function convertTo24HourFormat(timeStr) {
         */
        
         if( $(".widget_tf_price_filters").length > 0 || $("#tf-booking-search-tabs").length > 0 ){
-console.log('fsdd');
+
             let urlParams = new URLSearchParams(window.location.search);
             let post_type = urlParams.get('type');
             if(!post_type){
@@ -3753,7 +3754,6 @@ console.log('fsdd');
                         post_type: post_type
                     },
                     success: function (response) {
-                        console.log($(".tf-room-filter-range").length);
                         if (response.success) {
                             if( $(".tf-tour-filter-range").length > 0 || $(".tf-tour-result-price-range").length > 0 ){
                                 let tf_tour_range_options = {
@@ -4010,8 +4010,7 @@ console.log('fsdd');
                                         makeFilter();
                                     }
                                 };
-                                console.log(response.data?.tf_room?.min);
-                                console.log(response.data?.tf_room?.max);
+                                
                                 if ( response.data?.tf_room?.min != 0 && response.data?.tf_room?.max != 0) {
                                     $('.tf-room-filter-range').alRangeSlider(tf_room_range_options);
                                 }
@@ -4086,7 +4085,6 @@ console.log('fsdd');
         var filter_xhr;
         // Creating a function for reuse this filter in any where we needs.
         const makeFilter = (page = 1, mapCoordinates = []) => {
-            console.log($('#check-in-out-date').val());
             var dest = $('#tf-place').val();
             var page = page;
             var adults = $('#adults').val();
@@ -6325,7 +6323,7 @@ console.log('fsdd');
 
             let guest = adults + children + infant;
 
-            guest = guest < 10 ? '0' + guest : guest;
+            guest = guest < 10 ? guest : guest;
 
             $form.find('span.tf-room-guest').text(guest);
 
@@ -6347,7 +6345,7 @@ console.log('fsdd');
 
                 let guest = adults + children + infant;
 
-                guest = guest < 10 ? '0' + guest : guest;
+                guest = guest < 10 ? guest : guest;
 
                 $form.find('span.tf-room-guest').text(guest);
             });
@@ -6356,13 +6354,13 @@ console.log('fsdd');
 
 
         $(document).on("mouseup", function (e) {
-            var container = $(".tf-single-template__two .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap");
+            var container = $(".tf-single-template__two .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap, .tf-shortcode-design-5 .tf_acrselection-wrap");
             if (!container.is(e.target) && container.has(e.target).length === 0) {
-                $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap").removeClass("tf-show");
+                $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap,.tf-shortcode-design-5 .tf_acrselection-wrap").removeClass("tf-show");
             }
         });
-        $(".tf-single-template__two .tf-booking-form-guest-and-room, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room, .tf-archive-template__one .tf-booking-adult-child-infant").on("click", function () {
-            $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap").addClass("tf-show");
+        $(".tf-single-template__two .tf-booking-form-guest-and-room, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room, .tf-archive-template__one .tf-booking-adult-child-infant, .tf-shortcode-design-5 .tf-booking-adult-child-infant").on("click", function () {
+            $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap, .tf-shortcode-design-5 .tf_acrselection-wrap").addClass("tf-show");
         });
 
         $(".tf-single-template__two .tf-review-open").on("click", function () {
@@ -6973,6 +6971,7 @@ jQuery(".acr-dec").on("click", function() {
     let inputField = jQuery(".tf-search__form__field__input");
     inputField.trigger("input");
 });
+
 })();
 
 /******/ })()
