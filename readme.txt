@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.21.1
+Stable tag: 2.21.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -417,6 +417,14 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.21.2 – March 12, 2026 =
+
+- New: Pre-built template for single room booking.
+- Added: Travelfic theme support for the room booking template.
+- Added: New design for single and archive pages for rooms.
+- Added: Customization settings for the demo template.
+- Improved: System stability has been improved.
+
 = 2.21.1 – March 03, 2026 =
 
 - Fix: Design-4 room form spacing issue. (room-search)
@@ -439,16 +447,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - New: Added Cancellation Policy section on single room pages.
 - Improvement: Updated Room Options design.
 - Improvement: License Stability has been improved.
-
-= 2.20.5 – February 10, 2026 =
-
-- Improvement: Added Forgot Password to the login form.
-- Improvement: String Translation support.
-- Fixed: Search form date issue has been resolved.
-- Fixed: Tour Google Maps issue has been resolved.
-- Fixed: Tour starting price display issue has been resolved.
-- Fixed: Tour date on mobile issue has been resolved.
-- Fixed: Backend tour booking voucher generation issue resolved.
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 
