@@ -2224,13 +2224,30 @@ trait Action_Helper {
 	 *
 	 * @author Jahid
 	 */
+	private function tf_get_days_in_month( $month, $year ) {
+		$month = (int) $month;
+		$year  = (int) $year;
+
+		if ( $month < 1 || $month > 12 || $year < 1 ) {
+			return 0;
+		}
+
+		if ( function_exists( 'cal_days_in_month' ) ) {
+			return (int) cal_days_in_month( CAL_GREGORIAN, $month, $year );
+		}
+
+		$month_start = strtotime( sprintf( '%04d-%02d-01', $year, $month ) );
+
+		return $month_start ? (int) gmdate( 't', $month_start ) : 0;
+	}
+
 	function tf_month_chart_filter_callback() {
 		//Verify Nonce
 		check_ajax_referer( 'updates', '_nonce' );
 
 		$search_month = sanitize_key( $_POST['month'] );
 		$search_year  = sanitize_key( $_POST['year'] );
-		$month_dates  = cal_days_in_month( CAL_GREGORIAN, $search_month, $search_year );
+		$month_dates  = $this->tf_get_days_in_month( $search_month, $search_year );
 
 		//Order Data Retrive
 		$tf_old_order_limit = new \WC_Order_Query( array(
