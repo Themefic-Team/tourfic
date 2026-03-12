@@ -630,6 +630,7 @@
                         @include flexbox();
                         justify-content: space-between;
                         padding-bottom: 24px;
+                        width: 100%;
 
                         @media #{$max1024}{
                             display: block;
@@ -1356,6 +1357,9 @@
                         }
                     }
                     .tf-available-room-content{
+                        &.tf-room-options-content{
+                            width: 100%;
+                        }
                         @media only screen and (max-width: 1600px) {
                             width: calc(100% - 230px);
                         }
@@ -5136,19 +5140,20 @@
                         @include justify-content(flex-end);
                         @media #{$max1024}{
                             max-height: inherit;
+                            min-height: inherit;
                         }
 
                         .tf-hero-bottom-area {
                             padding-bottom: 96px;
                             @media #{$max1024}{
                                 padding-bottom: 56px;
-                                padding-top: 56px;
+                                padding-top: 140px;
                             }
                             @media #{$max768}{
                                 gap: 16px;
                                 @include flex-wrap(wrap);
                                 padding-bottom: 32px;
-                                padding-top: 32px;
+                                padding-top: 116px;
                             }
 
                             .tf-head-title {
@@ -5222,6 +5227,11 @@
                 margin-bottom: 16px;
             }
 
+            .tf-see-less-description,
+            .tf-see-description{
+                color: $color-links !important;
+            }
+
             .tf-content-wrapper{
                 padding: 48px 0;
 
@@ -5239,6 +5249,20 @@
                         .tf-room-single-mobile-booking-form-wrap{
                             // display: none;
 
+                            .tf-room-price{
+                                color: $color-heading;
+                                font-size: 1.25rem;
+                                font-weight: 400;
+                                line-height: 1.4;
+                                margin-bottom: 24px;
+
+                                .woocommerce-Price-amount{
+                                    font-size: 1.88rem;
+                                    font-weight: 400;
+                                    line-height: 1.3;
+                                }
+                            }
+                            
                             .tf-single-booking-box-wrapper{
                                 .tf-search-input.form-control{
                                     width: 100%;
@@ -5314,11 +5338,9 @@
                         gap: 24px;
                         width: 100%;
 
-                        @media #{$max1024} {
-                            .tf-select-guests,
-                            .tf-select-room{
-                                width: calc(50% - 12px);
-                            }
+                        .tf-select-guests,
+                        .tf-select-room{
+                            width: calc(50% - 12px);
                         }
                     }
 
@@ -5356,16 +5378,11 @@
 
                         }
                         &.tf_acrselection {
-                            width: 138px;
-                            @media #{$max1024} {
-                                width: 100%;
-                            }
-
+                            width: 100%;
+                            
                             .acr-select{
-                                @media #{$max1024} {
-                                    width: 100%;
-                                }
-
+                                width: 100%;
+                                
                                 .acr-dec,
                                 .acr-inc,
                                 .tf-archive-guest-info {
@@ -5416,11 +5433,11 @@
                     }
                     .tf-submit-button{
                         width: 100%;
-                        button{
-                            background-color: $color-primary;
+                        .tf_btn{
                             width: 100%;
                             min-height: 72px;
-                            border: 2px solid $color-brand-dark;
+                            border: 2px solid $color-links;
+                            background-color: $color-links;
                             font-size: 1rem;
                             line-height: 1.5;
                             margin-top: 10px;
@@ -5430,8 +5447,7 @@
                             }
 
                             &:hover{
-                                background-color: $color-primary;
-                                box-shadow: 0 40px 40px 0 rgba(238, 85, 9, 0.16), 0 32px 32px 0 rgba(238, 85, 9, 0.14), 0 24px 24px 0 rgba(238, 85, 9, 0.12), 0 20px 20px 0 rgba(238, 85, 9, 0.10), 0 16px 16px 0 rgba(238, 85, 9, 0.08), 0 12px 12px 0 rgba(238, 85, 9, 0.06), 0 8px 8px 0 rgba(238, 85, 9, 0.04), 0 4px 4px 0 rgba(238, 85, 9, 0.02);
+                                box-shadow: $color-links-box-shadow;
                             }
                         }
                     }
@@ -5488,6 +5504,10 @@
                                     backdrop-filter: blur(16px);
                                     padding: 0;
                                     border: 0;
+
+                                    svg path{
+                                        stroke: $color-links;
+                                    }
                                 }
                                 input {
                                     background: transparent;
@@ -5512,6 +5532,173 @@
                 }
             }
 
+            // Review Section
+            .tf-review-data {
+                @include justify-content(space-between);
+            }
+            .tf-reting-field button {
+                color: $color-text;
+                font-size: 1rem;
+                font-weight: 700;
+                line-height: 1.5;
+                background: $color-brand-lite;
+                width: 100%;
+                border: none;
+                padding: 12px 0;
+                border-radius: 0px;
+                @media #{$max1024}{
+                    font-size: 0.75rem;
+                }
+            }
+            .tf-review-widget{
+                button.tf_btn_outline{
+                    color: $color-links;
+                    font-weight: 600;
+                    font-size: 1.063rem;
+                    line-height: 1.5;
+                    padding: 0;
+                    border: none;
+                    border-radius: 0;
+                    justify-content: flex-start;
+
+                    svg{
+                        path{
+                            stroke: $color-links;
+                        }
+                    }
+
+                    &:focus,
+                    &:hover{
+                        background-color: transparent;
+                    }
+                }
+            }
+            .tf-review-data-inner{
+                .tf-review-data-average {
+                    .avg-review{
+                        color: $color-text-lite;
+                        font-size: 2.313rem;
+                        font-weight: 700;
+                        line-height: 1.4;
+                        margin-bottom: 0px;
+                        word-wrap: break-word;
+
+                        @media #{$max1024}{
+                            font-size: 1.5rem;
+                        }
+                        span {
+                            color: $color-heading;
+                        }
+                    }
+                }
+                .tf-review-all-info {
+                    p{
+                        color: $color-heading;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        line-height: 1.5;
+                        margin: 0;
+
+                        span {
+                            font-weight: 400;
+                            color: $color-text;
+                            display: block;
+                            margin-top: 6px;
+                        }
+                    }
+                }
+
+                .tf-review-feature-label {
+                    padding-bottom: 8px;
+                    p{
+                        text-transform: capitalize;
+                    }
+                }
+
+                .tf-progress-bar {
+                    background: $color-text-lite;
+                }
+
+                span.percent-progress {
+                    background: $color-text;
+                }
+            }
+            a.tf-all-reviews {
+                color: $color-links;
+                font-weight: 500;
+                letter-spacing: 0.16px;
+                text-decoration: none;
+            }
+            .tf-review-form-wrapper{
+                background: $color-filling-fg;
+                padding: 24px 0;
+                display: none;
+                flex-direction: column;
+                gap: 16px;
+
+                &.tf-review-show{
+                    display: flex;
+                }
+                h3 {
+                    color: $color-heading;
+                    font-size: 1.25rem;
+                    font-weight: 700;
+                    margin-bottom: 0;
+                }
+                .tf-review-form-container{
+                    width: 100%;
+                    min-width: auto;
+                    background: transparent;
+                    form{
+                        .tf-rating-wrapper{
+                            grid-template-columns: 1fr;
+                            margin-bottom: 16px;
+                            .tf-form-single-rating{
+                                display: flex;
+                                label{
+                                    font-size: 0.875rem;
+                                    font-weight: 600;
+                                    line-height: 1.5;
+                                    display: block;
+                                    margin-right: 4px;
+                                }
+                                .ratings-container{
+                                    width: auto;
+                                    text-align: left;
+                                }
+                                span.error{
+                                    position: relative;
+                                    top: 4px;
+                                }
+                            }
+                        }
+                        .tf-review-submit{
+                            margin-top: 16px;
+
+                            .tf_btn{
+                                width: 100%;
+                                border-radius: 30px;
+                                padding: 16px 32px;
+                                font-size: 1rem;
+
+                                &:hover{
+                                    box-shadow: $color-links-box-shadow;
+                                }
+                            }
+                        }
+                        input[type="text"],textarea{
+                            border: 1px solid $color-border-lite;
+                            padding: 8px;
+                            color: $color-text;
+                            font-size: 1rem;
+                            border-radius: 0px;
+                        }
+                        textarea{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
             .tf-reviews-wrapper {
                 padding-bottom: 0;
 
@@ -5530,6 +5717,7 @@
                     .tf-reviews-item {
                         padding: 24px;
                         background-color: #fff;
+                        margin-bottom: 16px;
 
                         .tf-reviews-item-header{
                             margin-bottom: 16px;
@@ -5619,11 +5807,9 @@
                         gap: 24px;
                         width: 100%;
 
-                        @media #{$max1024} {
-                            .tf-select-guests,
-                            .tf-select-room{
-                                width: calc(50% - 12px);
-                            }
+                        .tf-select-guests,
+                        .tf-select-room{
+                            width: calc(50% - 12px);
                         }
                     }
 
@@ -5661,16 +5847,11 @@
 
                         }
                         &.tf_acrselection {
-                            width: 138px;
-                            @media #{$max1024} {
-                                width: 100%;
-                            }
-
+                            width: 100%;
+                            
                             .acr-select{
-                                @media #{$max1024} {
-                                    width: 100%;
-                                }
-
+                                width: 100%;
+                                
                                 .acr-dec,
                                 .acr-inc,
                                 .tf-archive-guest-info {
@@ -5725,7 +5906,8 @@
                         .tf_btn{
                             width: 100%;
                             min-height: 72px;
-                            border: 2px solid $color-brand-dark;
+                            border: 2px solid $color-links;
+                            background-color: $color-links;
                             font-size: 1rem;
                             line-height: 1.5;
                             margin-top: 10px;
@@ -5735,7 +5917,7 @@
                             }
 
                             &:hover{
-                                background-color: $color-brand-dark;
+                                box-shadow: $color-links-box-shadow;
                             }
                         }
                     }
@@ -5794,7 +5976,7 @@
                                     border: 0;
 
                                     svg path{
-                                        stroke: $color-primary;
+                                        stroke: $color-links;
                                     }
                                 }
                                 input {
@@ -5943,6 +6125,15 @@
 
                             .tf_btn{
                                 width: 100%;
+                            }
+                        }
+
+                        .tf_btn{
+                            border: 2px solid $color-links;
+
+                            &:hover{
+                                background-color: $color-primary;
+                                box-shadow: $color-links-box-shadow;
                             }
                         }
                     }
