@@ -33,6 +33,7 @@ class Template_Builder {
         
         if ( function_exists( 'bricks_is_builder' ) || defined( 'BRICKS_VERSION' ) ) {
             add_action('init', [$this, 'setup_bricks_editor_post_data']);
+            add_action('wp', [$this, 'prepare_bricks_frontend_assets'], 1);
             add_action( 'admin_bar_menu', [ $this, 'add_bricks_admin_bar_link' ], 100 );
         }
 
@@ -1761,12 +1762,28 @@ class Template_Builder {
 
                 $original_wp_query = $wp_query;
 
-                // Create a mock archive query
+                // Create a mock archive query so Bricks frontend/editor previews
+                // behave like a real post type archive. This ensures functions
+                // like get_query_var('post_type') and widgets calling get_post_type()
+                // will receive the expected service post type instead of the
+                // current template post type.
                 // $wp_query = new \WP_Query( [
-                //     'post_type' => $post_type,
-                //     'posts_per_page' => 10,
-                //     'orderby' => 'rand',
+                //     'post_type'      => $post_type,
+                //     'orderby'        => 'rand',
                 // ] );
+
+                // mark it as an archive for template conditionals
+                $wp_query->is_archive = true;
+                $wp_query->is_post_type_archive = true;
+                $wp_query->query_vars['post_type'] = $post_type;
+
+                // // set a proper queried object (post type object) so get_queried_object()
+                // // returns a sensible value for archive-related checks
+                $wp_query->queried_object = get_post_type_object( $post_type );
+
+                // Also set the global query var so theme functions using get_query_var()
+                // return the expected post type
+                set_query_var( 'post_type', $post_type );
 
                 // Restore original wp_query on shutdown
                 add_action( 'shutdown', function() use ( $original_wp_query ) {
@@ -1775,6 +1792,118 @@ class Template_Builder {
                 } );
             }
         }
+    }
+
+    public function prepare_bricks_frontend_assets() {
+        if ( is_admin() || wp_doing_ajax() ) {
+            return;
+        }
+
+        if ( ! class_exists( '\Bricks\Frontend' ) ) {
+            return;
+        }
+
+        $template_post = $this->get_current_frontend_template();
+
+        if ( ! $template_post || empty( $template_post->ID ) ) {
+            return;
+        }
+
+        if ( 'bricks' !== $this->tf_get_builder_type( $template_post->ID ) ) {
+            return;
+        }
+
+        $template_id = absint( $template_post->ID );
+
+        $GLOBALS['tf_bricks_template_id'] = $template_id;
+
+        if ( property_exists( '\Bricks\Frontend', 'template_ids_to_enqueue' ) ) {
+            if ( ! in_array( $template_id, \Bricks\Frontend::$template_ids_to_enqueue, true ) ) {
+                \Bricks\Frontend::$template_ids_to_enqueue[] = $template_id;
+            }
+        }
+    }
+
+    private function get_current_frontend_template() {
+        $service_post_types = [ 'tf_hotel', 'tf_room', 'tf_tours', 'tf_apartment', 'tf_carrental' ];
+
+        // Template builder single preview
+        if ( is_singular( 'tf_template_builder' ) ) {
+            return get_queried_object();
+        }
+
+        // Archive
+        if ( is_post_type_archive( $service_post_types ) ) {
+            $post_type = get_query_var( 'post_type' );
+
+            if ( is_array( $post_type ) ) {
+                $post_type = reset( $post_type );
+            }
+
+            if ( empty( $post_type ) ) {
+                $queried_object = get_queried_object();
+                if ( ! empty( $queried_object->name ) ) {
+                    $post_type = $queried_object->name;
+                }
+            }
+
+            if ( empty( $post_type ) ) {
+                return false;
+            }
+
+            return $this->get_active_template( $post_type, 'archive', 'all' );
+        }
+
+        // Taxonomy archive
+        if ( is_tax() ) {
+            $term_obj = get_queried_object();
+
+            if ( ! empty( $term_obj->taxonomy ) && ! empty( $term_obj->slug ) ) {
+                $template_post = $this->get_active_template_by_taxonomy( $term_obj->taxonomy, $term_obj->slug );
+
+                if ( ! $template_post ) {
+                    $template_post = $this->get_active_template_by_taxonomy( $term_obj->taxonomy, 'all' );
+                }
+
+                return $template_post;
+            }
+        }
+
+        // Single
+        if ( is_singular( $service_post_types ) ) {
+            $post_id = get_queried_object_id();
+
+            if ( ! $post_id ) {
+                return false;
+            }
+
+            $post_type  = get_post_type( $post_id );
+            $taxonomies = get_object_taxonomies( $post_type );
+
+            foreach ( $taxonomies as $taxonomy ) {
+                $terms = wp_get_post_terms( $post_id, $taxonomy, [ 'fields' => 'slugs' ] );
+
+                if ( is_wp_error( $terms ) || empty( $terms ) ) {
+                    continue;
+                }
+
+                foreach ( $terms as $term ) {
+                    $template_post = $this->get_single_active_template_by_taxonomy( $post_type, 'single', $taxonomy, $term );
+                    if ( $template_post ) {
+                        return $template_post;
+                    }
+                }
+
+                $template_post = $this->get_single_active_template_by_taxonomy( $post_type, 'single', $taxonomy, 'all' );
+                if ( $template_post ) {
+                    return $template_post;
+                }
+            }
+
+            return $this->get_single_active_template_by_taxonomy( $post_type, 'single', 'all', '' );
+        }
+
+        return false;
     }
 
     private function tf_get_builder_type($post_id) {
