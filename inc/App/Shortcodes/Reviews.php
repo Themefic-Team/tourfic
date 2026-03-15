@@ -31,6 +31,7 @@ class Reviews extends \Tourfic\Core\Shortcodes {
 			)
 		);
 		$type == "hotel" ? $type = "tf_hotel" : $type == '';
+		$type == "room" ? $type = "tf_room" : $type == '';
 		$type == "tour" ? $type = "tf_tours" : $type == '';
 		$type == "apartment" ? $type = "tf_apartment" : $type == '';
 		$type == "car" ? $type = "tf_carrental" : $type == '';
@@ -39,6 +40,8 @@ class Reviews extends \Tourfic\Core\Shortcodes {
 
 		$service_type = '';
 		if( $type == "tf_hotel" || $type == "hotel" ){
+			$service_type = "hotel";
+		}if( $type == "tf_room" || $type == "room" ){
 			$service_type = "hotel";
 		}elseif( $type == "tf_tours" || $type == "tour" ){
 			$service_type = "tour";

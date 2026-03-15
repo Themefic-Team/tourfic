@@ -71,8 +71,8 @@ class Enqueue {
 			'carrentals'  => 'tf_carrental',
 			'tour'        => 'tf_tours',
 			'hotel'       => 'tf_hotel',
+			'room' 		  => 'tf_room'
 		]);
-
 		$tax_post_type = '';
         if (is_tax()) {
             $taxonomy = get_queried_object();
@@ -122,6 +122,10 @@ class Enqueue {
 			if (!in_array($key, $tf_disable_services) && (is_singular($post_type) || is_post_type_archive($post_type) || $post_type == $tax_post_type)) {
 				wp_enqueue_style("tf-app-{$key}", TF_ASSETS_URL . "app/css/tourfic-{$key}" . $this->css_min . ".css", null, TF_VERSION);
 			}
+		}
+		//is page template tf-search then enqueue room css
+		if ( get_page_template_slug() == 'tf-search' ) {
+			wp_enqueue_style( 'tf-app-room', TF_ASSETS_URL . 'app/css/tourfic-room' . $this->css_min . '.css', null, TF_VERSION );
 		}
 
 		if ( get_post_type() == 'tf_tours' ) {
@@ -485,6 +489,7 @@ class Enqueue {
 			wp_register_style( 'tf-elementor-single-related-post', TF_PRO_ASSETS_URL . 'app/css/elementor/single/related-post.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-tour-price', TF_PRO_ASSETS_URL . 'app/css/elementor/single/tour-price.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-host-info', TF_PRO_ASSETS_URL . 'app/css/elementor/single/host-info.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-room-options', TF_PRO_ASSETS_URL . 'app/css/elementor/single/room-options.min.css', '', TF_VERSION );
 
 			wp_enqueue_script( 'Chart-js',  TF_ASSETS_APP_URL . 'libs/chart/chart.js', array( 'jquery' ), '2.6.0', true );
 		}
@@ -571,7 +576,12 @@ class Enqueue {
 
 		if ( ! empty( $get_screen ) ) {
 
-			if ( $get_screen->base == "post" && ( $get_screen->id == "tf_hotel" || $get_screen->id == "tf_apartment" || $get_screen->id == "tf_tours" ) ) {
+			if ( $get_screen->base == "post" && ( $get_screen->id == "tf_hotel" || $get_screen->id == "tf_apartment" || $get_screen->id == "tf_tours" || $get_screen->id == "tf_carrental" || $get_screen->id == "tf_room" ) ) {
+
+				if ( wp_script_is( 'give-admin-scripts', 'enqueued' ) ) {
+					wp_dequeue_script( 'give-admin-scripts' );
+					wp_deregister_script( 'give-admin-scripts' );
+				}
 
 				if ( wp_script_is( 'select2', 'enqueued' ) ) {
 

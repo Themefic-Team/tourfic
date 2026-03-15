@@ -27,8 +27,22 @@ class Room_CPT extends \Tourfic\Core\Post_Type {
 			'menu_position' => 26.3,
 			'supports'      => apply_filters( 'tf_room_supports', array( 'title', 'editor', 'thumbnail', 'author' ) ),
 			'capability'    => array( 'tf_room', 'tf_rooms' ),
-			'rewrite_slug'  => ''
+			'rewrite_slug'  => $this->get_room_slug(),
+		) )->set_tax_args( array(
+			array(
+				'name'          => esc_html__( 'Types', 'tourfic' ),
+				'singular_name' => esc_html__( 'Type', 'tourfic' ),
+				'taxonomy'      => 'room_type',
+				'rewrite_slug'  => apply_filters( 'tf_room_type_slug', 'room-type' ),
+				'capability'    => array(
+					'assign_terms' => 'edit_tf_room',
+					'edit_terms'   => 'edit_tf_room',
+				),
+				'show_in_menu' => true
+			)
 		) );
+
+		add_action( 'init', array( $this, 'tf_post_type_taxonomy_register' ) );
 
 		add_filter( 'manage_edit-tf_room_columns', array( $this, 'tf_room_list_column' ) );
 		add_action( 'manage_tf_room_posts_custom_column', array( $this, 'tf_room_list_column_value' ), 10, 2 );
@@ -59,5 +73,13 @@ class Room_CPT extends \Tourfic\Core\Post_Type {
 			}
 		}
 
+	}
+
+	private function get_room_slug() {
+		$tf_room_setting_permalink_slug = ! empty( Helper::tfopt( 'room-permalink-setting' ) ) ? Helper::tfopt( 'room-permalink-setting' ) : "rooms";
+
+		update_option( "room_slug", $tf_room_setting_permalink_slug );
+
+		return apply_filters( 'tf_room_slug', get_option( 'room_slug' ) );
 	}
 }

@@ -3788,6 +3788,7 @@ var frame, gframe;
 
             var tour_tab_title = $this.find('.tf-shortcode-tour-tab-title-field ').attr('data-tour-tab-title');
             var hotel_tab_title = $this.find('.tf-shortcode-hotel-tab-title-field ').attr('data-hotel-tab-title');
+            var room_tab_title = $this.find('.tf-shortcode-room-tab-title-field ').attr('data-room-tab-title');
             var apartment_tab_title = $this.find('.tf-shortcode-apartment-tab-title-field ').attr('data-apartment-tab-title');
             var car_tab_title = $this.find('.tf-shortcode-car-tab-title-field ').attr('data-car-tab-title');
 
@@ -3808,6 +3809,9 @@ var frame, gframe;
             }
             if (hotel_tab_title != undefined && hotel_tab_title != '' && data.length ) {
                 data = hotel_tab_title + '=' + (data.length ? `"${data}"` : '""');
+            }
+            if (room_tab_title != undefined && room_tab_title != '' && data.length ) {
+                data = room_tab_title + '=' + (data.length ? `"${data}"` : '""');
             }
             if (apartment_tab_title != undefined && apartment_tab_title != '' && data.length ) {
                 data = apartment_tab_title + '=' + (data.length ? `"${data}"` : '""');
