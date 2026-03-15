@@ -5831,6 +5831,9 @@ div#tf-destinationautocomplete-list div:before {
     margin-bottom: 24px;
   }
 }
+.search-result-inner.tf-archive-listing__legacy {
+  grid-template-columns: 100%;
+}
 
 .single-tour-wrap {
   transition: all 0.3s ease-out;
@@ -6051,6 +6054,11 @@ div#tf-destinationautocomplete-list div:before {
   color: var(--tf-primary);
 }
 .single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-map-link i {
+  margin-right: 5px;
+}
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-map-link svg {
+  width: 12px;
+  height: 12px;
   margin-right: 5px;
 }
 .single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block {
