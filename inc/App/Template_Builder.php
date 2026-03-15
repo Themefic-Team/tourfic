@@ -33,7 +33,9 @@ class Template_Builder {
         
         if ( function_exists( 'bricks_is_builder' ) || defined( 'BRICKS_VERSION' ) ) {
             add_action('init', [$this, 'setup_bricks_editor_post_data']);
-            add_action('wp', [$this, 'prepare_bricks_frontend_assets'], 1);
+            // add_action( 'wp_enqueue_scripts', [ $this, 'prepare_bricks_frontend_assets' ], 1 );
+            add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_bricks_template_css' ] );
+            // add_action( 'wp_head', [ $this, 'print_bricks_archive_inline_css' ], 20 );
             add_action( 'admin_bar_menu', [ $this, 'add_bricks_admin_bar_link' ], 100 );
         }
 
@@ -1799,7 +1801,7 @@ class Template_Builder {
             return;
         }
 
-        if ( ! class_exists( '\Bricks\Frontend' ) ) {
+        if ( ! class_exists( '\Bricks\Frontend' ) || ! class_exists( '\Bricks\Database' ) || ! class_exists( '\Bricks\Helpers' ) ) {
             return;
         }
 
@@ -1815,12 +1817,156 @@ class Template_Builder {
 
         $template_id = absint( $template_post->ID );
 
+        if ( ! $template_id ) {
+            return;
+        }
+
         $GLOBALS['tf_bricks_template_id'] = $template_id;
 
+        // Tell Bricks this is the active content template.
+        \Bricks\Database::$active_templates['content'] = $template_id;
+
+        // Keep template queued for Bricks frontend processing.
         if ( property_exists( '\Bricks\Frontend', 'template_ids_to_enqueue' ) ) {
             if ( ! in_array( $template_id, \Bricks\Frontend::$template_ids_to_enqueue, true ) ) {
                 \Bricks\Frontend::$template_ids_to_enqueue[] = $template_id;
             }
+        }
+
+        // Resolve correct preview/current post id.
+        $current_post_id = 0;
+
+        if ( isset( $_GET['tf_preview_post_id'] ) ) {
+            $current_post_id = absint( wp_unslash( $_GET['tf_preview_post_id'] ) );
+        } elseif ( is_singular() && ! is_singular( 'tf_template_builder' ) ) {
+            $current_post_id = get_queried_object_id();
+        } else {
+            $current_post_id = $template_id;
+        }
+
+        \Bricks\Database::$page_data['preview_or_post_id'] = $current_post_id;
+
+        /**
+         * THIS IS THE IMPORTANT PART:
+         * Inject the template builder content into Bricks page data
+         * so inline element CSS is generated from this template.
+         */
+        $template_bricks_data = \Bricks\Helpers::get_bricks_data( $template_id, 'content' );
+
+        if ( ! empty( $template_bricks_data ) && is_array( $template_bricks_data ) ) {
+            \Bricks\Database::$page_data['content'] = $template_bricks_data;
+        }
+    }
+
+    public function print_bricks_archive_inline_css() {
+        if ( is_admin() || wp_doing_ajax() ) {
+            return;
+        }
+
+        if ( ! class_exists( '\Bricks\Database' ) || ! class_exists( '\Bricks\Assets' ) ) {
+            return;
+        }
+
+        // Only for archive/tax pages. Single already works via prepare_bricks_frontend_assets().
+        if ( ! is_tax() && ! is_post_type_archive( [ 'tf_hotel', 'tf_room', 'tf_tours', 'tf_apartment', 'tf_carrental' ] ) ) {
+            return;
+        }
+
+        $template_post = $this->get_current_frontend_template();
+
+        if ( ! $template_post || empty( $template_post->ID ) ) {
+            return;
+        }
+
+        if ( 'bricks' !== $this->tf_get_builder_type( $template_post->ID ) ) {
+            return;
+        }
+
+        $template_id = absint( $template_post->ID );
+
+        if ( ! $template_id ) {
+            return;
+        }
+
+        $GLOBALS['tf_bricks_template_id'] = $template_id;
+
+        // Tell Bricks which template is active.
+        \Bricks\Database::$active_templates['content'] = $template_id;
+
+        // For archive/tax, use the template itself as page context for CSS generation.
+        \Bricks\Database::$page_data['preview_or_post_id'] = $template_id;
+
+        // Queue template for frontend processing too.
+        if ( class_exists( '\Bricks\Frontend' ) && property_exists( '\Bricks\Frontend', 'template_ids_to_enqueue' ) ) {
+            if ( ! in_array( $template_id, \Bricks\Frontend::$template_ids_to_enqueue, true ) ) {
+                \Bricks\Frontend::$template_ids_to_enqueue[] = $template_id;
+            }
+        }
+
+        $inline_css = \Bricks\Assets::generate_inline_css();
+
+        if ( empty( $inline_css ) ) {
+            return;
+        }
+
+        if ( \Bricks\Database::get_setting( 'smoothScroll' ) ) {
+            $inline_css = "html {scroll-behavior: smooth}\n" . $inline_css;
+        }
+
+        $inline_css = \Bricks\Assets::minify_css( $inline_css );
+        // var_dump($inline_css);
+        echo '<style id="tf-bricks-archive-inline-css">' . $inline_css . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+
+    public function enqueue_bricks_template_css() {
+        if ( is_admin() || wp_doing_ajax() ) {
+            return;
+        }
+
+        $template_post = $this->get_current_frontend_template();
+
+        if ( ! $template_post || empty( $template_post->ID ) ) {
+            return;
+        }
+
+        if ( 'bricks' !== $this->tf_get_builder_type( $template_post->ID ) ) {
+            return;
+        }
+
+        $template_id = absint( $template_post->ID );
+
+        if ( ! $template_id ) {
+            return;
+        }
+
+        // Try to enqueue the compiled Bricks CSS file for this template post.
+        if ( class_exists( '\Bricks\Database' ) && method_exists( '\Bricks\Database', 'get_page_settings' ) ) {
+            // Keep template id available globally too.
+            $GLOBALS['tf_bricks_template_id'] = $template_id;
+        }
+
+        /**
+         * Bricks stores generated CSS as post CSS assets.
+         * Common frontend CSS file pattern:
+         * uploads/bricks/css/post-{ID}.css
+         */
+        $upload_dir = wp_upload_dir();
+
+        if ( empty( $upload_dir['baseurl'] ) || empty( $upload_dir['basedir'] ) ) {
+            return;
+        }
+
+        $css_rel_path = '/bricks/css/post-' . $template_id . '.css';
+        $css_file     = trailingslashit( $upload_dir['basedir'] ) . 'bricks/css/post-' . $template_id . '.min.css';
+        $css_url      = trailingslashit( $upload_dir['baseurl'] ) . 'bricks/css/post-' . $template_id . '.min.css';
+
+        if ( file_exists( $css_file ) ) {
+            wp_enqueue_style(
+                'tf-bricks-template-' . $template_id,
+                $css_url,
+                [ 'bricks-frontend' ],
+                filemtime( $css_file )
+            );
         }
     }
 
