@@ -71,19 +71,4 @@ use Tourfic\Classes\Hotel\Components\Archive\Listings;
         </div>
     </div>
     <!--Content section end -->
-
-    
-    <!-- Hotel PopUp Starts -->       
-    <div class="tf-popup-wrapper tf-hotel-popup">
-        <div class="tf-popup-inner">
-            <div class="tf-popup-body">
-                
-            </div>                
-            <div class="tf-popup-close">
-                <i class="fa-solid fa-xmark"></i>
-            </div>
-        </div>
-    </div>
-    <!-- Hotel PopUp end -->  
-
 </div>
