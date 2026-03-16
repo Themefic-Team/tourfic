@@ -25,7 +25,7 @@
         }
 
         .tf-archive-room-banner{
-            // min-height: 532px;
+            min-height: 528px;
             padding-top: 72px;
             padding-bottom: 96px;
             background-size: cover;
@@ -39,6 +39,7 @@
 
             @media #{$max1024} {
                 padding-bottom: 56px;
+                padding-top: 104px;
             }
 
             &::after{
@@ -48,7 +49,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: linear-gradient(180deg, rgba(21, 61, 58, 0.3) 0%, #153D3A 100%);
+                background: linear-gradient(180deg, rgba(21, 61, 58, 0.3) 0%, $color-primary 100%);
                 z-index: -1;
             }
             .tf-container{
@@ -282,7 +283,7 @@
                                     border: 0;
 
                                     svg path{
-                                        stroke: $color-primary;
+                                        stroke: $color-links;
                                     }
                                 }
                                 input {
@@ -312,10 +313,11 @@
                 .tf_btn{
                     min-width: 267px;
                     min-height: 72px;
-                    border: 2px solid $color-brand-dark;
+                    border: 2px solid $color-links;
                     font-size: 1.25rem;
                     line-height: 1.5;
                     margin-top: 10px;
+                    background-color: $color-links;
 
                     @media #{$max1024} {
                         width: 100%;
@@ -323,15 +325,23 @@
                     }
 
                     &:hover{
-                        background-color: $color-brand-dark;
+                        box-shadow: $color-links-box-shadow;
                     }
                 }
             }
 
-            .tf-booking-date-wrap .tf-search-input.form-control{
-                width: 200px;
-                opacity: 0;
-                position: absolute;
+            .tf-booking-date-wrap {
+                svg{
+                    cursor: pointer;
+                    z-index: 2;
+                }
+
+                .tf-search-input.form-control{
+                    width: 100%;
+                    opacity: 0;
+                    position: absolute;
+                    margin-left: -20px;
+                }
             }
         }
         .tf-archive-room-details{
@@ -371,10 +381,10 @@
 
                 .tf-room-archive-action-btn {
                     padding: 8px 24px;
-                    color: $color-primary;
+                    color: $color-links;
                     border-radius: 32px;
-                    border: 1px solid $color-primary;
-                    background-color: $color-brand-lite;
+                    border: 1px solid $color-links;
+                    background-color: $color-links-lite;
                     backdrop-filter: blur(16px);
                     font-size: 1rem;
                     font-weight: 600;
@@ -416,9 +426,13 @@
                         top: 50%;
                         right: 12px;
                         transform: translateY(-50%);
-                        color: $color-primary;
+                        color: $color-links;
                     }
                 }
+            }
+
+            .tf-room-archive-result {
+                position: relative;
             }
 
             .tf-room-item-cards{
@@ -476,6 +490,8 @@
                     }
                 }
                 .tf-room-thumb{
+                    @include flexbox();
+                    
                     img{
                         height: 280px;
                         width: 100%;
@@ -505,7 +521,7 @@
                             color: $color-heading;
 
                             &:hover{
-                                color: $color-primary;
+                                color: $color-links;
                             }
                         }
                     }
@@ -520,7 +536,7 @@
                     }
 
                     .tf-room-details-url{
-                        color: $color-primary;
+                        color: $color-links;
                         font-size: 1rem;
                         font-weight: 600;
                         line-height: 1.5;
@@ -557,6 +573,15 @@
 
                             .tf_btn{
                                 width: 100%;
+                            }
+                        }
+
+                        .tf_btn{
+                            border: 2px solid $color-links;
+
+                            &:hover{
+                                background-color: $color-primary;
+                                box-shadow: $color-links-box-shadow;
                             }
                         }
                     }
@@ -650,7 +675,7 @@
                                 color: $color-heading;
 
                                 &:hover{
-                                    color: $color-primary;
+                                    color: $color-links;
                                 }
                             }
                         }
@@ -665,7 +690,7 @@
                         }
 
                         .tf-room-details-url{
-                            color: $color-primary;
+                            color: $color-links;
                             font-size: 1rem;
                             font-weight: 600;
                             line-height: 1.5;
@@ -691,7 +716,7 @@
                 margin-top: 24px;
 
                 .tf-room-view-more{
-                    color: $color-primary;
+                    color: $color-links;
                     font-size: 1rem;
                     font-weight: 600;
                     line-height: 1.5;
@@ -702,7 +727,7 @@
                     cursor: pointer;
 
                     svg path{
-                        stroke: $color-primary;
+                        stroke: $color-links;
                     }
                 }
             }
@@ -720,19 +745,23 @@
                     
                     .page-numbers {
                         font-size: 0.875rem;
-                        color: $color-primary;
+                        color: $color-links;
                         text-decoration: none;
                         padding: 8px 16px;
                         background: $color-white;
                         box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
                         border-radius: 5px;
                         display: inline-block;
-                        border: 1px solid $color-border-lite;
+                        border: 1px solid $color-links;
+
+                        &:hover{
+                            background-color: $color-links;
+                            color: $color-white;
+                        }
                     }
                     .page-numbers.current{
-                        background: $color-primary;
+                        background: $color-links;
                         color: $color-white;
-                        border-color: $color-white;
                     }
                 }
             }
@@ -742,7 +771,7 @@
 
                 .page-numbers {
                     font-size: 0.875rem;
-                    color: $color-primary;
+                    color: $color-links;
                     text-decoration: none;
                     padding: 12px 18px;
                     background: $color-white;
@@ -751,7 +780,7 @@
                     display: inline-block;
                 }
                 .page-numbers.current{
-                    background: $color-primary;
+                    background: $color-links;
                     color: $color-white;
                 }
             }
@@ -800,7 +829,7 @@
                         margin: 0;
                         padding: 0;
                         border: none;
-                        color: $color-primary;
+                        color: $color-links;
                         font-size: 1rem;
                         font-weight: 700;
                         line-height: 1.5;
@@ -817,7 +846,7 @@
 
                 .tf_widget {
                     .tf-room-result-price-range{
-                        padding-left: 14px;
+                        padding-left: 24px;
                         padding-right: 24px;
                     }
                     .tf-hotel-result-price-range,
@@ -862,7 +891,7 @@
                     }
 
                     .al-range-slider__tooltip {
-                        background: $color-primary;
+                        background: $color-links;
                         border-radius: 5px;
                         box-shadow: none;
                         padding: 3px 10px;
