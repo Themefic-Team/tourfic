@@ -2055,7 +2055,7 @@ class Tour {
                 <div class="tf-booking-content-summery">
 					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $pricing_type=='package' && $package_pricing ) { ?>
 						<div class="tf-booking-content show tf-booking-content-1">
-							<p><?php echo esc_html__( "Choose package:", "tourfic" ); ?></p>
+							<p><?php echo esc_html__( "Choose experience:", "tourfic" ); ?></p>
 							<div class="tf-booking-content-package">
 
 								<?php
