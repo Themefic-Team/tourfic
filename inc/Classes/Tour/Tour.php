@@ -2013,7 +2013,7 @@ class Tour {
 								$active_steps[1] = 1;
 							?>
 								<li class="tf-booking-step tf-booking-step-1 active">
-									<i class="ri-box-3-line"></i> <?php echo esc_html__( "Packages", "tourfic" ); ?>
+									<i class="ri-box-3-line"></i> <?php echo esc_html__( "Experience", "tourfic" ); ?>
 								</li>
 							<?php }
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_extras ) {
@@ -4740,19 +4740,26 @@ class Tour {
 			$discounted_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
 
 			# Calculate discounted price
-			if ( !empty($allow_discount) && $discount_type == 'percent' ) {
+			// Ensure numeric values
+			$adult_price     = (float) $adult_price;
+			$children_price  = (float) $children_price;
+			$infant_price    = (float) $infant_price;
+			$group_price     = (float) $group_price;
+			$discounted_price = (float) $discounted_price;
 
-				$adult_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $discounted_price ), 2 ) ) );
-				$children_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $children_price - ( ( $children_price / 100 ) * $discounted_price ), 2 ) ) );
-				$infant_price   = floatval( preg_replace( '/[^\d.]/', '', number_format( $infant_price - ( ( $infant_price / 100 ) * $discounted_price ), 2 ) ) );
-				$group_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( $group_price - ( ( $group_price / 100 ) * $discounted_price ), 2 ) ) );
+			if ( ! empty( $allow_discount ) && $discount_type === 'percent' ) {
 
-			} elseif ( !empty($allow_discount) && $discount_type == 'fixed' ) {
+				$adult_price    = round( $adult_price - ( ( $adult_price / 100 ) * $discounted_price ), 2 );
+				$children_price = round( $children_price - ( ( $children_price / 100 ) * $discounted_price ), 2 );
+				$infant_price   = round( $infant_price - ( ( $infant_price / 100 ) * $discounted_price ), 2 );
+				$group_price    = round( $group_price - ( ( $group_price / 100 ) * $discounted_price ), 2 );
 
-				$adult_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $adult_price - $discounted_price ), 2 ) ) );
-				$children_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $children_price - $discounted_price ), 2 ) ) );
-				$infant_price   = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $infant_price - $discounted_price ), 2 ) ) );
-				$group_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $group_price - $discounted_price ), 2 ) ) );
+			} elseif ( ! empty( $allow_discount ) && $discount_type === 'fixed' ) {
+
+				$adult_price    = round( $adult_price - $discounted_price, 2 );
+				$children_price = round( $children_price - $discounted_price, 2 );
+				$infant_price   = round( $infant_price - $discounted_price, 2 );
+				$group_price    = round( $group_price - $discounted_price, 2 );
 
 			}
 
