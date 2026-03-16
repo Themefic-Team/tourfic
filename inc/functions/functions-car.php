@@ -201,6 +201,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 	$mileage_type = ! empty( $meta['mileage_type'] ) ? $meta['mileage_type'] : 'Km';
 	$total_mileage = ! empty( $meta['mileage'] ) ? $meta['mileage'] : '';
 	$auto_transmission = ! empty( $meta['auto_transmission'] ) ? $meta['auto_transmission'] : '';
+	$carplay_android_auto = ! empty( $meta['carplay_android_auto'] ) ? $meta['carplay_android_auto'] : '';
 
 	// Fuel Type
 	$fuel_type_terms = wp_get_post_terms($post_id, 'carrental_fuel_type');
@@ -237,7 +238,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 	$title_length = isset($settings['title_length']) ? absint($settings['title_length']) : 55;
 	$show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';
 	$show_price = isset($settings['show_price']) ? $settings['show_price'] : 'yes';
-	$car_infos = isset($settings['car_infos']) ? $settings['car_infos'] : ['mileage', 'fuel_type', 'engine_year', 'transmission_type', 'passenger_capacity', 'luggage_capacity'];
+	$car_infos = isset($settings['car_infos']) ? $settings['car_infos'] : ['mileage', 'fuel_type', 'engine_year', 'transmission_type', 'carplay_android_auto', 'passenger_capacity', 'luggage_capacity'];
 	$show_view_details = isset($settings['show_view_details']) ? $settings['show_view_details'] : 'yes';
 	$view_details_text = esc_html__('Details', 'tourfic');
 
@@ -381,6 +382,13 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 				</defs>
 				</svg>
 				<p><?php echo $auto_transmission ? esc_html__("Auto", "tourfic") : esc_html__("Manual", "tourfic"); ?></p>
+				</li>
+				<?php endif; ?>
+
+				<?php if(!empty($car_infos) && is_array($car_infos) && in_array('carplay_android_auto', $car_infos)) : ?>
+				<li class="list">
+				<i class="ri-smartphone-line"></i>
+				<p><?php echo $carplay_android_auto ? esc_html__("CarPlay / Android Auto", "tourfic") : esc_html__("No CarPlay / Android Auto", "tourfic"); ?></p>
 				</li>
 				<?php endif; ?>
 
