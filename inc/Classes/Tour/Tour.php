@@ -1163,26 +1163,9 @@ class Tour {
                                     <div class="tf-bottom-booking-field-icon">
                                         <i class="ri-user-line"></i>
                                     </div>
-                                    <div class="tf_input-inner">
-
-										<?php if ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-											<div class="adults-text"><?php echo ( ! empty( $adults ) ? esc_attr( $adults ) : '0' ) . ' ' . apply_filters( 'tf_tour_adult_label', esc_html__( 'Adult', 'tourfic' ), true, true, $post_id ); ?></div>
-										<?php } ?>
-
-										<?php if ( ( ! $disable_child_price && $pricing_rule == 'person' && $child_price != false ) || ( ! $disable_child_price && $pricing_rule == 'group' && $group_price != false ) ) { ?>
-											<?php if ( ! $disable_adult_price && $adult_price != false ) : ?>
-												<div class="person-sep"></div>
-											<?php endif; ?>
-											<div class="child-text"><?php echo ( ! empty( $child ) ? esc_attr( $child ) : '0' ) . ' ' . apply_filters( 'tf_tour_child_label', esc_html__( 'Children', 'tourfic' ), true, true, $post_id ); ?></div>
-										<?php } ?>
-
-										<?php if ( ! $disable_adult_price && ( ( ! $disable_infant_price && $pricing_rule == 'person' && $infant_price != false ) || ( ! $disable_infant_price && $pricing_rule == 'group' && $group_price != false ) ) ) { ?>
-											<?php if ( ( ! $disable_adult_price && $adult_price != false ) || ( ! $disable_child_price && $child_price != false ) ) : ?>
-												<div class="person-sep"></div>
-											<?php endif; ?>
-											<div class="infant-text"><?php echo ( ! empty( $infant ) ? esc_attr( $infant ) : '0' ) . ' ' . apply_filters( 'tf_tour_infant_label', esc_html__( 'Infant', 'tourfic' ), true, true, $post_id ); ?></div>
-										<?php } ?>
-										<?php do_action('tf_tour_single_bottom_booking_bar_after_person_text', $post_id); ?>
+                                    <div class="tf_input-inner">				
+										<div class="bottom-booking-form-text"><?php echo esc_html__( 'Select number of visitors', 'tourfic' ); ?></div>
+										<?php //do_action('tf_tour_single_bottom_booking_bar_after_person_text', $post_id); ?>
                                     </div>
                                     <div class="tf_acrselection-wrap" style="display: none;">
                                         <div class="tf_acrselection-inner">
