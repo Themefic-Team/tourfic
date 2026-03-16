@@ -420,6 +420,8 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 = 2.21.3 – March 16, 2026 =
 
 - Improved: System stability has been improved.
+- Compatibility: Compatible with WordPress (v6.9.4).
+
 
 = 2.21.2 – March 12, 2026 =
 
