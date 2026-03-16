@@ -422,7 +422,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Improved: System stability has been improved.
 - Compatibility: Compatible with WordPress (v6.9.4).
 
-
 = 2.21.2 – March 12, 2026 =
 
 - New: Pre-built template for single room booking.
