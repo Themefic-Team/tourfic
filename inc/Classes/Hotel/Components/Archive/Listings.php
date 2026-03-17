@@ -30,18 +30,18 @@ class Listings {
         $post_count       = $query->post_count;
         $tf_defult_views  = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel_archive_view'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel_archive_view'] : 'list';
 
-        $show_total_result      = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
-        $show_sorting           = isset( $settings['show_sorting'] ) ? $settings['show_sorting'] : 'yes';
+        $show_total_result      = Helper::get_switcher_value( $settings, 'show_total_result', 'yes', $builder );
+        $show_sorting           = Helper::get_switcher_value( $settings, 'show_sorting', 'yes', $builder );
         $grid_column            = isset( $settings['grid_column'] ) ? absint( $settings['grid_column'] ) : 2;
-        $listing_layout_toggle  = isset( $settings['listing_layout_toggle'] ) ? $settings['listing_layout_toggle'] : 'yes';
+        $listing_layout_toggle  = Helper::get_switcher_value( $settings, 'listing_layout_toggle', 'yes', $builder );
 
-        if ( 'yes' === $listing_layout_toggle ) {
+        if ( 'yes' == $listing_layout_toggle ) {
             $listing_layout = isset( $settings['listing_default_layout'] ) ? $settings['listing_default_layout'] : $tf_defult_views;
         } else {
             $listing_layout = isset( $settings['listing_layout'] ) ? $settings['listing_layout'] : $tf_defult_views;
         }
 
-        $show_pagination        = isset( $settings['show_pagination'] ) ? $settings['show_pagination'] : 'yes';
+        $show_pagination        = Helper::get_switcher_value( $settings, 'show_pagination', 'yes', $builder );
         $pagination_prev_label  = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
         $pagination_next_label  = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
         ?>
@@ -195,16 +195,16 @@ class Listings {
         }
 
         $post_count             = $query->post_count;
-        $show_total_result      = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
-        $show_sorting           = isset( $settings['show_sorting'] ) ? $settings['show_sorting'] : 'yes';
-        $show_pagination        = isset( $settings['show_pagination'] ) ? $settings['show_pagination'] : 'yes';
+        $show_total_result      = Helper::get_switcher_value( $settings, 'show_total_result', 'yes', $builder );
+        $show_sorting           = Helper::get_switcher_value( $settings, 'show_sorting', 'yes', $builder );
+        $show_pagination        = Helper::get_switcher_value( $settings, 'show_pagination', 'yes', $builder );
         $pagination_prev_label  = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
         $pagination_next_label  = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
         ?>
 
         <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
             <div class="tf-archive-available-rooms-head tf-available-rooms-head">
-                <?php if ( 'yes' === $show_total_result ) : ?>
+                <?php if ( 'yes' == $show_total_result ) : ?>
                     <h3 class="tf-total-results tf-desktop-results">
                         <?php esc_html_e( 'Total', 'tourfic' ); ?>
                         <span><?php echo esc_html( $post_count ); ?></span>
@@ -212,7 +212,7 @@ class Listings {
                     </h3>
                 <?php endif; ?>
 
-                <?php if ( 'yes' === $show_sorting ) : ?>
+                <?php if ( 'yes' == $show_sorting ) : ?>
                     <div class="tf-sorting-selection-warper">
                         <form class="tf-archive-ordering" method="get">
                             <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
@@ -233,7 +233,7 @@ class Listings {
                     <i class="ri-equalizer-line"></i>
                 </div>
 
-                <?php if ( 'yes' === $show_total_result ) : ?>
+                <?php if ( 'yes' == $show_total_result ) : ?>
                     <h3 class="tf-total-results tf-mobile-results">
                         <?php esc_html_e( 'Total', 'tourfic' ); ?>
                         <span><?php echo esc_html( $post_count ); ?></span>
@@ -281,7 +281,7 @@ class Listings {
                 wp_reset_postdata();
                 ?>
 
-                <?php if ( 'yes' === $show_pagination ) : ?>
+                <?php if ( 'yes' == $show_pagination ) : ?>
                     <div class="tf-pagination-bar">
                         <?php Helper::tourfic_posts_navigation( $query, $pagination_prev_label, $pagination_next_label ); ?>
                     </div>
@@ -321,18 +321,18 @@ class Listings {
         $tf_map_settings   = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : 'default';
         $tf_map_api        = ! empty( Helper::tfopt( 'tf-googlemapapi' ) ) ? Helper::tfopt( 'tf-googlemapapi' ) : '';
 
-        $show_total_result      = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
-        $show_sidebar           = isset( $settings['show_sidebar'] ) ? $settings['show_sidebar'] : 'yes';
+        $show_total_result      = Helper::get_switcher_value( $settings, 'show_total_result', 'yes', $builder );
+        $show_sidebar           = Helper::get_switcher_value( $settings, 'show_sidebar', 'yes', $builder );
         $grid_column            = isset( $settings['grid_column'] ) ? absint( $settings['grid_column'] ) : 2;
-        $listing_layout_toggle  = isset( $settings['listing_layout_toggle'] ) ? $settings['listing_layout_toggle'] : 'yes';
+        $listing_layout_toggle  = Helper::get_switcher_value( $settings, 'listing_layout_toggle', 'yes', $builder );
 
-        if ( 'yes' === $listing_layout_toggle ) {
+        if ( 'yes' == $listing_layout_toggle ) {
             $listing_layout = isset( $settings['listing_default_layout'] ) ? $settings['listing_default_layout'] : $tf_defult_views;
         } else {
             $listing_layout = isset( $settings['listing_layout'] ) ? $settings['listing_layout'] : $tf_defult_views;
         }
 
-        $show_pagination        = isset( $settings['show_pagination'] ) ? $settings['show_pagination'] : 'yes';
+        $show_pagination        = Helper::get_switcher_value( $settings, 'show_pagination', 'yes', $builder );
         $pagination_prev_label  = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
         $pagination_next_label  = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
 
@@ -367,7 +367,7 @@ class Listings {
 
                                 <!--Available rooms start -->
                                 <div class="tf-archive-hotels-wrapper">
-                                    <?php if ( 'yes' === $show_sidebar ) : ?>
+                                    <?php if ( 'yes' == $show_sidebar ) : ?>
                                         <div class="tf-archive-filter">
                                             <div class="tf-archive-filter-sidebar">
                                                 <div class="tf-filter-wrapper">
@@ -393,7 +393,7 @@ class Listings {
                                     <?php endif; ?>
 
                                     <div class="tf-archive-top">
-                                        <?php if ( 'yes' === $show_total_result ) : ?>
+                                        <?php if ( 'yes' == $show_total_result ) : ?>
                                             <h5 class="tf-total-results">
                                                 <?php esc_html_e( 'Found', 'tourfic' ); ?>
                                                 <span class="tf-map-item-count"><?php echo esc_html( $post_count ); ?></span>
@@ -415,14 +415,14 @@ class Listings {
                                         </a>
 
                                         <ul class="tf-archive-view">
-                                            <?php if ( 'yes' === $show_sidebar ) : ?>
+                                            <?php if ( 'yes' == $show_sidebar ) : ?>
                                                 <li class="tf-archive-filter-btn">
                                                     <i class="ri-equalizer-line"></i>
                                                     <span><?php esc_html_e( 'All Filter', 'tourfic' ); ?></span>
                                                 </li>
                                             <?php endif; ?>
 
-                                            <?php if ( 'yes' === $listing_layout_toggle ) : ?>
+                                            <?php if ( 'yes' == $listing_layout_toggle ) : ?>
                                                 <li class="tf-archive-view-item tf-archive-list-view <?php echo 'list' === $listing_layout ? esc_attr( 'active' ) : ''; ?>" data-id="list-view">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                         <path d="M1.33398 7.59996C1.33398 6.82778 1.49514 6.66663 2.26732 6.66663H13.734C14.5062 6.66663 14.6673 6.82778 14.6673 7.59996V8.39996C14.6673 9.17214 14.5062 9.33329 13.734 9.33329H2.26732C1.49514 9.33329 1.33398 9.17214 1.33398 8.39996V7.59996Z" stroke="#6E655E" stroke-linecap="round"/>
@@ -616,7 +616,7 @@ class Listings {
                                             <?php echo array_filter( $locations ) ? wp_json_encode( array_values( $locations ) ) : wp_json_encode( [] ); ?>
                                         </div>
 
-                                        <?php if ( 'yes' === $show_pagination ) : ?>
+                                        <?php if ( 'yes' == $show_pagination ) : ?>
                                             <div class="tf-pagination-bar">
                                                 <?php Helper::tourfic_posts_navigation( $query, $pagination_prev_label, $pagination_next_label ); ?>
                                             </div>
@@ -692,18 +692,18 @@ class Listings {
             ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel_archive_view']
             : 'list';
 
-        $show_total_result      = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
-        $show_sorting           = isset( $settings['show_sorting'] ) ? $settings['show_sorting'] : 'yes';
+        $show_total_result      = Helper::get_switcher_value( $settings, 'show_total_result', 'yes', $builder );
+        $show_sorting           = Helper::get_switcher_value( $settings, 'show_sorting', 'yes', $builder );
         $grid_column            = isset( $settings['grid_column'] ) ? absint( $settings['grid_column'] ) : 2;
-        $listing_layout_toggle  = isset( $settings['listing_layout_toggle'] ) ? $settings['listing_layout_toggle'] : 'yes';
+        $listing_layout_toggle  = Helper::get_switcher_value( $settings, 'listing_layout_toggle', 'yes', $builder );
 
-        if ( 'yes' === $listing_layout_toggle ) {
+        if ( 'yes' == $listing_layout_toggle ) {
             $listing_layout = isset( $settings['listing_default_layout'] ) ? $settings['listing_default_layout'] : $tf_defult_views;
         } else {
             $listing_layout = isset( $settings['listing_layout'] ) ? $settings['listing_layout'] : $tf_defult_views;
         }
 
-        $show_pagination       = isset( $settings['show_pagination'] ) ? $settings['show_pagination'] : 'yes';
+        $show_pagination       = Helper::get_switcher_value( $settings, 'show_pagination', 'yes', $builder );
         $pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
         $pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
         ?>
@@ -711,7 +711,7 @@ class Listings {
         <!-- Start Content -->
         <div class="tf-search-left">
             <div class="tf-action-top">
-                <?php if ( 'yes' === $show_total_result ) : ?>
+                <?php if ( 'yes' == $show_total_result ) : ?>
                     <div class="tf-result-counter-info">
                         <span class="tf-counter-title"><?php echo esc_html__( 'Total Results', 'tourfic' ); ?></span>
                         <span><?php echo '('; ?></span>
@@ -723,7 +723,7 @@ class Listings {
                 <?php endif; ?>
 
                 <div class="tf-list-grid">
-                    <?php if ( 'yes' === $listing_layout_toggle ) : ?>
+                    <?php if ( 'yes' == $listing_layout_toggle ) : ?>
                         <a href="#list-view" data-id="list-view" class="change-view <?php echo 'list' === $listing_layout ? esc_attr( 'active' ) : ''; ?>" title="<?php esc_attr_e( 'List View', 'tourfic' ); ?>">
                             <i class="fas fa-list"></i>
                         </a>
@@ -732,7 +732,7 @@ class Listings {
                         </a>
                     <?php endif; ?>
 
-                    <?php if ( 'yes' === $show_sorting ) : ?>
+                    <?php if ( 'yes' == $show_sorting ) : ?>
                         <div class="tf-sorting-selection-warper">
                             <form class="tf-archive-ordering" method="get">
                                 <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
@@ -782,15 +782,13 @@ class Listings {
                 wp_reset_postdata();
                 ?>
 
-                <?php if ( 'yes' === $show_pagination ) : ?>
+                <?php if ( 'yes' == $show_pagination ) : ?>
                     <div class="tf_posts_navigation">
                         <?php Helper::tourfic_posts_navigation( $query, $pagination_prev_label, $pagination_next_label ); ?>
                     </div>
                 <?php endif; ?>
             </div>
         </div>
-        <!-- End Content -->
-
         <?php
     }
 }

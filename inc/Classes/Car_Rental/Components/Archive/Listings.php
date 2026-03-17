@@ -28,16 +28,16 @@ class Listings {
         $post_count = $query->post_count;
         $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] : 'list';
         // if($builder == 'elementor'){
-            $show_total_result = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
-            $show_sorting = isset( $settings['show_sorting'] ) ? $settings['show_sorting'] : 'yes';
+            $show_total_result = Helper::get_switcher_value( $settings, 'show_total_result', 'yes', $builder );
+            $show_sorting = Helper::get_switcher_value( $settings, 'show_sorting', 'yes', $builder );
             $grid_column = isset( $settings['grid_column'] ) ? absint($settings['grid_column']) : 2;
-            $listing_layout_toggle = isset( $settings['listing_layout_toggle'] ) ? $settings['listing_layout_toggle'] : 'yes';
+            $listing_layout_toggle = Helper::get_switcher_value( $settings, 'listing_layout_toggle', 'yes', $builder );
             if($listing_layout_toggle == 'yes'){
                 $listing_layout = isset( $settings['listing_default_layout'] ) ? $settings['listing_default_layout'] : $tf_defult_views;
             } else {
                 $listing_layout = isset( $settings['listing_layout'] ) ? $settings['listing_layout'] : $tf_defult_views;
             }
-            $show_pagination = isset( $settings['show_pagination'] ) ? $settings['show_pagination'] : 'yes';
+            $show_pagination = Helper::get_switcher_value( $settings, 'show_pagination', 'yes', $builder );
             $pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
             $pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
         // }
@@ -178,9 +178,9 @@ class Listings {
 
         $post_count = $query->post_count;
 
-		$show_total_result = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
-		$show_sorting = isset( $settings['show_sorting'] ) ? $settings['show_sorting'] : 'yes';
-		$show_pagination = isset( $settings['show_pagination'] ) ? $settings['show_pagination'] : 'yes';
+        $show_total_result = Helper::get_switcher_value( $settings, 'show_total_result', 'yes', $builder );
+        $show_sorting = Helper::get_switcher_value( $settings, 'show_sorting', 'yes', $builder );
+        $show_pagination = Helper::get_switcher_value( $settings, 'show_pagination', 'yes', $builder );
 		$pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
 		$pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
         ?>
@@ -284,16 +284,16 @@ class Listings {
 
         $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
         $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
-		$show_total_result = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
-		$show_sidebar = isset( $settings['show_sidebar'] ) ? $settings['show_sidebar'] : 'yes';
-		$grid_column = isset( $settings['grid_column'] ) ? absint($settings['grid_column']) : 2;
-		$listing_layout_toggle = isset( $settings['listing_layout_toggle'] ) ? $settings['listing_layout_toggle'] : 'yes';
+        $show_total_result = Helper::get_switcher_value( $settings, 'show_total_result', 'yes', $builder );
+        $show_sidebar = Helper::get_switcher_value( $settings, 'show_sidebar', 'yes', $builder );
+        $grid_column = isset( $settings['grid_column'] ) ? absint($settings['grid_column']) : 2;
+        $listing_layout_toggle = Helper::get_switcher_value( $settings, 'listing_layout_toggle', 'yes', $builder );
 		if($listing_layout_toggle == 'yes'){
 			$listing_layout = isset( $settings['listing_default_layout'] ) ? $settings['listing_default_layout'] : $tf_defult_views;
 		} else {
 			$listing_layout = isset( $settings['listing_layout'] ) ? $settings['listing_layout'] : $tf_defult_views;
 		}
-		$show_pagination = isset( $settings['show_pagination'] ) ? $settings['show_pagination'] : 'yes';
+        $show_pagination = Helper::get_switcher_value( $settings, 'show_pagination', 'yes', $builder );
 		$pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
 		$pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
 
@@ -624,16 +624,16 @@ class Listings {
         $post_count = $query->post_count;
         $tf_defult_views = !empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['hotel_archive_view']) ? Helper::tf_data_types(Helper::tfopt('tf-template'))['hotel_archive_view'] : 'list';
 
-        $show_total_result = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
-		$show_sorting = isset( $settings['show_sorting'] ) ? $settings['show_sorting'] : 'yes';
-		$grid_column = isset( $settings['grid_column'] ) ? absint($settings['grid_column']) : 2;
-		$listing_layout_toggle = isset( $settings['listing_layout_toggle'] ) ? $settings['listing_layout_toggle'] : 'yes';
+        $show_total_result = Helper::get_switcher_value( $settings, 'show_total_result', 'yes', $builder );
+        $show_sorting = Helper::get_switcher_value( $settings, 'show_sorting', 'yes', $builder );
+        $grid_column = isset( $settings['grid_column'] ) ? absint($settings['grid_column']) : 2;
+        $listing_layout_toggle = Helper::get_switcher_value( $settings, 'listing_layout_toggle', 'yes', $builder );
 		if($listing_layout_toggle == 'yes'){
 			$listing_layout = isset( $settings['listing_default_layout'] ) ? $settings['listing_default_layout'] : $tf_defult_views;
 		} else {
 			$listing_layout = isset( $settings['listing_layout'] ) ? $settings['listing_layout'] : $tf_defult_views;
 		}
-		$show_pagination = isset( $settings['show_pagination'] ) ? $settings['show_pagination'] : 'yes';
+        $show_pagination = Helper::get_switcher_value( $settings, 'show_pagination', 'yes', $builder );
 		$pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
 		$pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
         ?>

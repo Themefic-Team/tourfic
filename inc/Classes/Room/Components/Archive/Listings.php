@@ -29,10 +29,10 @@ class Listings {
         $post_count = $query->post_count;
 
         // if($builder == 'elementor'){
-        $show_total_result = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
-		$show_sorting = isset( $settings['show_sorting'] ) ? $settings['show_sorting'] : 'yes';
-		$show_sidebar = isset( $settings['show_sidebar'] ) ? $settings['show_sidebar'] : 'yes';
-		$show_pagination = isset( $settings['show_pagination'] ) ? $settings['show_pagination'] : 'yes';
+        $show_total_result = Helper::get_switcher_value( $settings, 'show_total_result', 'yes', $builder );
+        $show_sorting = Helper::get_switcher_value( $settings, 'show_sorting', 'yes', $builder );
+        $show_sidebar = Helper::get_switcher_value( $settings, 'show_sidebar', 'yes', $builder );
+        $show_pagination = Helper::get_switcher_value( $settings, 'show_pagination', 'yes', $builder );
 		$pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
 		$pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
         // }

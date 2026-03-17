@@ -185,6 +185,25 @@ class Helper {
 		return ( isset( $options[ $option ] ) ) ? $options[ $option ] : $default;
 	}
 
+    /**
+     * Return normalized switcher value for listing components and builders.
+     *
+     * @param array  $settings Settings array (usually widget settings).
+     * @param string $key      The key to read from settings.
+     * @param string $default  Default value when key not present (default: 'yes').
+     * @param string $builder  Optional builder identifier (e.g., 'bricks').
+     * @return string 'yes' or 'no'
+     */
+    static function get_switcher_value( $settings, $key, $default = 'yes', $builder = '' ) {
+        if ( 'bricks' === $builder ) {
+            return ! empty( $settings[ $key ] ) ? 'yes' : 'no';
+        }
+
+        $value = isset( $settings[ $key ] ) ? $settings[ $key ] : $default;
+
+        return 'yes' === $value ? 'yes' : 'no';
+    }
+
 	static function tf_data_types( $var ) {
 		if ( ! empty( $var ) && gettype( $var ) == "string" ) {
 			$tf_serialize_date = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
