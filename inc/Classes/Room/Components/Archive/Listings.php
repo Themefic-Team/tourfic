@@ -38,6 +38,7 @@ class Listings {
         // }
         ?>
         <div class="tf-archive-room-details">
+            <?php echo empty($builder) ? '<div class="tf-container">' : ''; ?>
             <div class="tf-archive-header tf-flex tf-flex-space-bttn tf-flex-align-center">
                 <?php if($show_total_result == 'yes') : ?>
                     <h3 class="tf-total-results">
@@ -108,6 +109,7 @@ class Listings {
                 </div>
                 <?php do_action("tf_room_archive_roomd_items_after"); ?>
             </div>
+            <?php echo empty($builder) ? '</div>' : ''; ?>
         </div>
         <?php
 	}
