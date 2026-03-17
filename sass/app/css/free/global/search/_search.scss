@@ -52,6 +52,11 @@
                     position: absolute;
                     margin-left: -20px;
                 }
+
+                svg{
+                    cursor: pointer;
+                    z-index: 2;
+                }
             }
             &.tf_acrselection {
                 width: 139px;
@@ -96,6 +101,10 @@
                 flex: 1;
                 &::placeholder{
                     color: $color-white;
+                }
+
+                @media #{$max1024} {
+                    min-height: 30px;
                 }
             }
             svg{
@@ -150,6 +159,12 @@
                 right: inherit;
                 left: 50%;
                 transform: translateX(-50%);
+
+                @media #{$max575} {
+                    left: auto;
+                    right: 0;
+                    transform: translateX(0);
+                }
 
                 &.tf-show {
                     visibility: visible;

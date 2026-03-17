@@ -39,6 +39,7 @@
 
             @media #{$max1024} {
                 padding-bottom: 56px;
+                padding-top: 104px;
             }
 
             &::after{
@@ -312,7 +313,7 @@
                 .tf_btn{
                     min-width: 267px;
                     min-height: 72px;
-                    border: 2px solid $color-links-dark;
+                    border: 2px solid $color-links;
                     font-size: 1.25rem;
                     line-height: 1.5;
                     margin-top: 10px;
@@ -329,10 +330,18 @@
                 }
             }
 
-            .tf-booking-date-wrap .tf-search-input.form-control{
-                width: 200px;
-                opacity: 0;
-                position: absolute;
+            .tf-booking-date-wrap {
+                svg{
+                    cursor: pointer;
+                    z-index: 2;
+                }
+
+                .tf-search-input.form-control{
+                    width: 100%;
+                    opacity: 0;
+                    position: absolute;
+                    margin-left: -20px;
+                }
             }
         }
         .tf-archive-room-details{
@@ -568,7 +577,7 @@
                         }
 
                         .tf_btn{
-                            border: 2px solid $color-links-dark;
+                            border: 2px solid $color-links;
 
                             &:hover{
                                 background-color: $color-primary;

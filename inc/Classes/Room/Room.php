@@ -32,14 +32,67 @@ class Room {
 
 		$hotel_rooms = array();
 		foreach ( $rooms as $room ) {
-			$room_meta = get_post_meta( $room->ID, 'tf_room_opt', true );
-			if ( ! empty( $room_meta['tf_hotel'] ) && $room_meta['tf_hotel'] == $hotel_id ) {
+			$room_meta = self::get_normalized_room_meta( $room->ID, true );
+			if ( ! empty( $room_meta['tf_hotel'] ) && intval( $room_meta['tf_hotel'] ) === intval( $hotel_id ) ) {
 				$hotel_rooms[] = $room;
 			}
 		}
 
 		return $hotel_rooms;
 
+	}
+
+	static function get_normalized_room_meta( $room_id, $sync_legacy = false ) {
+		$room_meta = get_post_meta( $room_id, 'tf_room_opt', true );
+		$room_meta = is_array( $room_meta ) ? $room_meta : array();
+		$has_changes = false;
+
+		$parent_hotel_id = absint( get_post_meta( $room_id, '_tf_room_parent_hotel', true ) );
+
+		if ( empty( $room_meta['tf_hotel'] ) && $parent_hotel_id > 0 ) {
+			$room_meta['tf_hotel'] = $parent_hotel_id;
+			$has_changes           = true;
+		}
+
+		$pricing_by = '';
+		if ( isset( $room_meta['pricing-by'] ) && '' !== (string) $room_meta['pricing-by'] ) {
+			$pricing_by = (string) $room_meta['pricing-by'];
+		} elseif ( isset( $room_meta['pricing_by'] ) && '' !== (string) $room_meta['pricing_by'] ) {
+			$pricing_by            = (string) $room_meta['pricing_by'];
+			$room_meta['pricing-by'] = $pricing_by;
+			$has_changes           = true;
+		}
+
+		if ( '1' === $pricing_by && empty( $room_meta['price'] ) && ( ! empty( $room_meta['adult_price'] ) || ! empty( $room_meta['child_price'] ) ) ) {
+			$room_meta['pricing-by'] = '2';
+			$has_changes             = true;
+		}
+
+		if ( ! isset( $room_meta['avil_by_date'] ) && isset( $room_meta['avail_by_date'] ) ) {
+			$room_meta['avil_by_date'] = $room_meta['avail_by_date'];
+			$has_changes               = true;
+		}
+
+		if ( ! isset( $room_meta['adult'] ) && isset( $room_meta['max_adult'] ) ) {
+			$room_meta['adult'] = $room_meta['max_adult'];
+			$has_changes        = true;
+		}
+
+		if ( ! isset( $room_meta['child'] ) && isset( $room_meta['max_child'] ) ) {
+			$room_meta['child'] = $room_meta['max_child'];
+			$has_changes        = true;
+		}
+
+		if ( ! isset( $room_meta['num-room'] ) && isset( $room_meta['room_number'] ) ) {
+			$room_meta['num-room'] = $room_meta['room_number'];
+			$has_changes           = true;
+		}
+
+		if ( $sync_legacy && $has_changes ) {
+			update_post_meta( $room_id, 'tf_room_opt', $room_meta );
+		}
+
+		return $room_meta;
 	}
 
 	static function get_hotel_id_for_assigned_room( $room_id ) {
@@ -58,10 +111,13 @@ class Room {
 				}
 			}
 		}
+
+		$room_meta = self::get_normalized_room_meta( $room_id, false );
+		return ! empty( $room_meta['tf_hotel'] ) ? intval( $room_meta['tf_hotel'] ) : 0;
 	}
 
 	static function get_hotel_id_by_room_id( $room_id ) {
-		$meta = get_post_meta( $room_id, 'tf_room_opt', true );
+		$meta = self::get_normalized_room_meta( $room_id, false );
 		return ! empty( $meta['tf_hotel'] ) ? $meta['tf_hotel'] : '';
 	}
 
@@ -829,6 +885,17 @@ class Room {
 
 		}
 
+		if ( $has_room && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$range_start = (float) $startprice;
+			$range_end   = (float) $endprice;
+			$min_price   = Pricing::instance( get_the_ID() )->get_min_price( $period );
+			$card_price  = ! empty( $min_price['min_sale_price'] ) ? (float) $min_price['min_sale_price'] : ( ! empty( $min_price['min_regular_price'] ) ? (float) $min_price['min_regular_price'] : 0 );
+
+			if ( $card_price <= 0 || $card_price < $range_start || $card_price > $range_end ) {
+				$has_room = false;
+			}
+		}
+
 		// Conditional hotel showing
 		if ( $has_room ) {
 
@@ -983,6 +1050,17 @@ class Room {
 				}
 			} else {
 				$has_room = true; // Show that hotel
+			}
+		}
+
+		if ( $has_room && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$range_start = (float) $startprice;
+			$range_end   = (float) $endprice;
+			$min_price   = Pricing::instance( get_the_ID() )->get_min_price( $period );
+			$card_price  = ! empty( $min_price['min_sale_price'] ) ? (float) $min_price['min_sale_price'] : ( ! empty( $min_price['min_regular_price'] ) ? (float) $min_price['min_regular_price'] : 0 );
+
+			if ( $card_price <= 0 || $card_price < $range_start || $card_price > $range_end ) {
+				$has_room = false;
 			}
 		}
 
@@ -1292,19 +1370,20 @@ class Room {
 									<?php } ?>
 								});
 
-								function dateSetToFields(selectedDates, instance) {
-									const format = '<?php echo esc_html( $date_format_for_users ); ?>';
-									if (selectedDates.length === 2) {
-										if (selectedDates[0]) {
-											let checkInDate = instance.formatDate(selectedDates[0], format);
-											$(".tf-room-booking-box #check_in_date").val(checkInDate);
-										}
+									function dateSetToFields(selectedDates, instance) {
+										const format = '<?php echo esc_html( $date_format_for_users ); ?>';
+										if (selectedDates.length >= 1) {
+											if (selectedDates[0]) {
+												let checkInDate = instance.formatDate(selectedDates[0], format);
+												$(".tf-room-booking-box #check_in_date").val(checkInDate);
+											}
 
-										if (selectedDates[1]) {
-											let checkOutDate = instance.formatDate(selectedDates[1], format);
-											$(".tf-room-booking-box #check_out_date").val(checkOutDate);
+											const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+											if (endDate) {
+												let checkOutDate = instance.formatDate(endDate, format);
+												$(".tf-room-booking-box #check_out_date").val(checkOutDate);
+											}
 										}
-									}
 								}
 							});
 						})(jQuery);
@@ -1623,7 +1702,7 @@ class Room {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1633,8 +1712,8 @@ class Room {
                                     $(".tf_room_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
                                     $(".tf_room_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf_room_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
                                     $(".tf_room_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
                                 }
@@ -1764,7 +1843,7 @@ class Room {
                 })(jQuery);
             </script>
         <?php } elseif (!empty($design) && 4 == $design) { ?>
-            <form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tf_room_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
+            <form class="tf-archive-search-box-wrapper tf-search__form tf-search__form--room-no-location tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tf_room_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
                 <fieldset class="tf-search__form__fieldset">
 
                     <div class="tf-search__form__fieldset__middle">
@@ -1973,7 +2052,7 @@ class Room {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1984,8 +2063,8 @@ class Room {
                                     $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
                                     $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkin_dates span.year").html(startDate.getFullYear());
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkout_dates span.date").html(endDate.getDate());
                                     $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
                                     $(".tf-shortcode-design-4#tf_room_aval_check .tf_checkout_dates span.year").html(endDate.getFullYear());
@@ -2125,7 +2204,7 @@ class Room {
 								// flatpickr locale first day of Week
 								<?php Helper::tf_flatpickr_locale( "root" ); ?>
 
-								$(".tf-shortcode-design-5#tf_room_aval_check #tf-check-out").on('click', function () {
+								$(".tf-shortcode-design-5#tf_room_aval_check #tf-check-out, .tf-shortcode-design-5#tf_room_aval_check .tf-booking-date-wrap svg").on('click', function () {
 									$(".tf-search-input.form-control").click();
 								});
 								$("#check-in-out-date").flatpickr({

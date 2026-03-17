@@ -296,7 +296,7 @@ class Tour {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -306,8 +306,8 @@ class Tour {
                                     $(".tf_tour_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
                                     $(".tf_tour_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf_tour_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
                                     $(".tf_tour_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
                                 }
@@ -357,7 +357,7 @@ class Tour {
                                     </svg>
 								</div>
 								<div class="info-select">
-									<h5><?php esc_html_e("Check-in & Check-out Date", "tourfic"); ?></h5>
+										<h5><?php esc_html_e("Start & End Dates", "tourfic"); ?></h5>
 									<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
                                            placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo Helper::tfopt( 'date_tour_search' ) ? 'required' : ''; ?>>
 								</div>
@@ -706,11 +706,11 @@ class Tour {
 							}
 						});
 
-						function dateSetToFields(selectedDates, instance) {
-							if (selectedDates.length === 2) {
-								const monthNames = [
-									"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-									"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+							function dateSetToFields(selectedDates, instance) {
+								if (selectedDates.length >= 1) {
+									const monthNames = [
+										"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+										"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 								];
 								if (selectedDates[0]) {
 									const startDate = selectedDates[0];
@@ -718,11 +718,11 @@ class Tour {
 									$(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
 									$(".tf_checkin_dates span.year").html(startDate.getFullYear());
 								}
-								if (selectedDates[1]) {
-									const endDate = selectedDates[1];
-									$(".tf_checkout_dates span.date").html(endDate.getDate());
-									$(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
-									$(".tf_checkout_dates span.year").html(endDate.getFullYear());
+									const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+									if (endDate) {
+										$(".tf_checkout_dates span.date").html(endDate.getDate());
+										$(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
+										$(".tf_checkout_dates span.year").html(endDate.getFullYear());
 								}
 							}
 						}
@@ -843,7 +843,7 @@ class Tour {
                         <!-- @KK Merged two inputs into one  -->
                         <div class="tf_input-inner">
                             <label class="tf_label-row">
-                                <span class="tf-label"><?php esc_html_e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
+	                                <span class="tf-label"><?php esc_html_e( 'Start & End Dates', 'tourfic' ); ?></span>
                                 <div class="tf_form-inner">
                                     <div class="tf-search-form-field-icon">
                                         <i class="far fa-calendar-alt"></i>
@@ -2296,29 +2296,30 @@ class Tour {
                                                 <input type="text" name="booking_confirm[tf_postcode]" id="tf_postcode" data-required="1"/>
                                                 <div class="error-text" data-error-for="tf_postcode"></div>
                                             </div>
-										<?php } else {
-											foreach ( $confirm_book_fields as $field ) {
-												if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) { ?>
-                                                    <div class="traveller-single-info tf-confirm-fields">
-                                                        <label for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"><?php echo esc_html( $field['reg-field-label'] ); ?></label>
-                                                        <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>]"
-                                                               id="<?php echo esc_attr( $field['reg-field-name'] ); ?>" data-required="<?php echo isset( $field['reg-field-required'] ) ? esc_attr( $field['reg-field-required'] ) : ''; ?>"/>
-                                                        <div class="error-text" data-error-for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"></div>
-                                                    </div>
-												<?php }
-												if ( "select" == $field['reg-fields-type'] && ! empty( $field['reg-options'] ) ) { ?>
-                                                    <div class="traveller-single-info tf-confirm-fields">
+											<?php } else {
+												foreach ( $confirm_book_fields as $field ) {
+													$reg_field_required = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : 0;
+													if ( "text" == $field['reg-fields-type'] || "number" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) { ?>
+	                                                    <div class="traveller-single-info tf-confirm-fields">
+	                                                        <label for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"><?php echo esc_html( $field['reg-field-label'] ); ?></label>
+	                                                        <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>]"
+	                                                               id="<?php echo esc_attr( $field['reg-field-name'] ); ?>" data-required="<?php echo esc_attr( $reg_field_required ); ?>" <?php echo $field['reg-fields-type'] == "number" ? 'min="0"' : ''; ?> />
+	                                                        <div class="error-text" data-error-for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"></div>
+	                                                    </div>
+													<?php }
+													if ( "select" == $field['reg-fields-type'] && ! empty( $field['reg-options'] ) ) { ?>
+	                                                    <div class="traveller-single-info tf-confirm-fields">
                                                         <label for="<?php echo esc_attr( $field['reg-field-name'] ); ?>">
 															<?php echo esc_html( $field['reg-field-label'] ); ?>
-                                                        </label>
-                                                        <select name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>]" id="<?php echo esc_attr( $field['reg-field-name'] ); ?>"
-                                                                data-required="<?php echo esc_attr( $field['reg-field-required'] ); ?>">
-                                                            <option value="">
-																<?php echo sprintf( esc_html__( 'Select One', 'tourfic' ) ); ?>
-                                                            </option>
-															<?php
-															foreach ( $field['reg-options'] as $sfield ) {
-																if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) { ?>
+	                                                        </label>
+	                                                        <select name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>]" id="<?php echo esc_attr( $field['reg-field-name'] ); ?>"
+	                                                                data-required="<?php echo esc_attr( $reg_field_required ); ?>">
+	                                                            <option value="">
+																	<?php esc_html_e( 'Select One', 'tourfic' ); ?>
+	                                                            </option>
+																<?php
+																foreach ( $field['reg-options'] as $sfield ) {
+																	if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) { ?>
                                                                     <option value="<?php echo esc_attr( $sfield['option-value'] ); ?>"><?php echo esc_html( $sfield['option-label'] ); ?></option>
 																<?php }
 															} ?>
@@ -2332,16 +2333,16 @@ class Tour {
 															<?php echo esc_html( $field['reg-field-label'] ); ?>
                                                         </label>
 														<?php
-														foreach ( $field['reg-options'] as $sfield ) {
-															if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) { ?>
-                                                                <div class="tf-single-checkbox">
-                                                                    <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>][]"
-                                                                           id="<?php echo esc_attr( $sfield['option-value'] ); ?>" value="<?php echo esc_html( $sfield['option-value'] ); ?>"
-                                                                           data-required="<?php echo esc_attr( $field['reg-field-required'] ); ?>"/>
-                                                                    <label for="<?php echo esc_attr( $sfield['option-value'] ); ?>">
-																		<?php echo esc_html( $sfield['option-label'] ); ?>
-                                                                    </label>
-                                                                </div>
+															foreach ( $field['reg-options'] as $sfield ) {
+																if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) { ?>
+	                                                                <div class="tf-single-checkbox">
+	                                                                    <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>][]"
+	                                                                           id="<?php echo esc_attr( $sfield['option-value'] ); ?>" value="<?php echo esc_attr( $sfield['option-value'] ); ?>"
+	                                                                           data-required="<?php echo esc_attr( $reg_field_required ); ?>"/>
+	                                                                    <label for="<?php echo esc_attr( $sfield['option-value'] ); ?>">
+																			<?php echo esc_html( $sfield['option-label'] ); ?>
+	                                                                    </label>
+	                                                                </div>
 															<?php }
 														} ?>
                                                         <div class="error-text" data-error-for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"></div>
@@ -3435,6 +3436,17 @@ class Tour {
 			}
 		// }
 
+		if ( $has_tour && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$range_start = (float) $startprice;
+			$range_end   = (float) $endprice;
+			$min_price   = Pricing::instance( get_the_ID() )->get_min_price();
+			$card_price  = ! empty( $min_price['min_sale_price'] ) ? (float) $min_price['min_sale_price'] : 0;
+
+			if ( $card_price <= 0 || $card_price < $range_start || $card_price > $range_end ) {
+				$has_tour = false;
+			}
+		}
+
 		if ( $has_tour ) {
 
 			$not_found[] = array(
@@ -3542,6 +3554,17 @@ class Tour {
 			}
 		// }
 
+		if ( $has_tour && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$range_start = (float) $startprice;
+			$range_end   = (float) $endprice;
+			$min_price   = Pricing::instance( get_the_ID() )->get_min_price();
+			$card_price  = ! empty( $min_price['min_sale_price'] ) ? (float) $min_price['min_sale_price'] : 0;
+
+			if ( $card_price <= 0 || $card_price < $range_start || $card_price > $range_end ) {
+				$has_tour = false;
+			}
+		}
+
 		if ( $has_tour ) {
 
 			$not_found[] = array(
@@ -3609,9 +3632,9 @@ class Tour {
 			}
 			if($pricing_rule == 'package'){
 				$adult_price = null;
-                $child_price = null;
-                $infant_price = null;
-                $price = null;
+				$child_price = null;
+				$infant_price = null;
+				$price = null;
 				$options_count = ! empty( $matched_availability['options_count'] ) ? $matched_availability['options_count'] : '';
 				if(!empty($options_count)){
 					for($i = 0; $i <= $options_count; $i++){
@@ -3636,6 +3659,56 @@ class Tour {
 							}
 						}
 
+					}
+				}
+
+				$matched_pricing_type = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
+				if ( 'person' === $matched_pricing_type ) {
+					if ( ! empty( $matched_availability['adult_price'] ) && ( is_null( $adult_price ) || $matched_availability['adult_price'] < $adult_price ) ) {
+						$adult_price = $matched_availability['adult_price'];
+					}
+
+					if ( ! empty( $matched_availability['child_price'] ) && ( is_null( $child_price ) || $matched_availability['child_price'] < $child_price ) ) {
+						$child_price = $matched_availability['child_price'];
+					}
+
+					if ( ! empty( $matched_availability['infant_price'] ) && ( is_null( $infant_price ) || $matched_availability['infant_price'] < $infant_price ) ) {
+						$infant_price = $matched_availability['infant_price'];
+					}
+				}
+
+				if ( 'group' === $matched_pricing_type ) {
+					if ( ! empty( $matched_availability['price'] ) && ( is_null( $price ) || $matched_availability['price'] < $price ) ) {
+						$price = $matched_availability['price'];
+					}
+				}
+
+				if ( is_null( $adult_price ) && is_null( $child_price ) && is_null( $infant_price ) && is_null( $price ) && ! empty( $package_pricing ) ) {
+					foreach ( $package_pricing as $package ) {
+
+						if ( ! empty( $package['adult_tabs'][1]['adult_price'] ) ) {
+							if ( is_null( $adult_price ) || $package['adult_tabs'][1]['adult_price'] < $adult_price ) {
+								$adult_price = $package['adult_tabs'][1]['adult_price'];
+							}
+						}
+
+						if ( ! empty( $package['child_tabs'][1]['child_price'] ) ) {
+							if ( is_null( $child_price ) || $package['child_tabs'][1]['child_price'] < $child_price ) {
+								$child_price = $package['child_tabs'][1]['child_price'];
+							}
+						}
+
+						if ( ! empty( $package['infant_tabs'][1]['infant_price'] ) ) {
+							if ( is_null( $infant_price ) || $package['infant_tabs'][1]['infant_price'] < $infant_price ) {
+								$infant_price = $package['infant_tabs'][1]['infant_price'];
+							}
+						}
+
+						if ( ! empty( $package['group_tabs'][1]['group_price'] ) ) {
+							if ( is_null( $price ) || $package['group_tabs'][1]['group_price'] < $price ) {
+								$price = $package['group_tabs'][1]['group_price'];
+							}
+						}
 					}
 				}
 			}
@@ -3714,6 +3787,7 @@ class Tour {
 
 
 		$tour_archive_page_price_settings = ! empty( Helper::tfopt( 'tour_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'tour_archive_price_minimum_settings' ) : 'adult';
+		$min_price = '';
 		if($tour_archive_page_price_settings=='adult'){
 			$min_price = !empty($adult_price) ? $adult_price : '';
 		}elseif($tour_archive_page_price_settings=='child'){
@@ -3742,6 +3816,37 @@ class Tour {
 					$all_prices[] = $price;
 				}
 				$min_price = !empty($all_prices) ? min($all_prices) : '';
+			}
+		}
+
+		if ( empty( $min_price ) ) {
+			if ( 'group' === $pricing_rule ) {
+				$min_price = ! empty( $price ) ? $price : '';
+			}
+
+			if ( 'person' === $pricing_rule ) {
+				$fallback_person_prices = [];
+				if ( ! empty( $adult_price ) ) {
+					$fallback_person_prices[] = $adult_price;
+				}
+				if ( ! empty( $child_price ) ) {
+					$fallback_person_prices[] = $child_price;
+				}
+				$min_price = ! empty( $fallback_person_prices ) ? min( $fallback_person_prices ) : $min_price;
+			}
+
+			if ( 'package' === $pricing_rule ) {
+				$fallback_package_prices = [];
+				if ( ! empty( $adult_price ) ) {
+					$fallback_package_prices[] = $adult_price;
+				}
+				if ( ! empty( $child_price ) ) {
+					$fallback_package_prices[] = $child_price;
+				}
+				if ( ! empty( $price ) ) {
+					$fallback_package_prices[] = $price;
+				}
+				$min_price = ! empty( $fallback_package_prices ) ? min( $fallback_package_prices ) : $min_price;
 			}
 		}
 

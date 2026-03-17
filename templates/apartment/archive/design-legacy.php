@@ -29,8 +29,8 @@ defined( 'ABSPATH' ) || exit;
                         <span><?php echo ')'; ?> </span>
                     </div>
 					<div class="tf-list-grid">
-		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
-		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
+		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_attr_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
+		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_attr_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
 						<div class="tf-sorting-selection-warper">
                             <form class="tf-archive-ordering" method="get">
                                 <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
@@ -54,14 +54,19 @@ defined( 'ABSPATH' ) || exit;
 						while ( have_posts() ) {
 							the_post();
 							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
-							if (!empty($apartment_meta[ "apartment_as_featured" ])) {
+							$is_apartment_featured = is_array( $apartment_meta ) && ! empty( $apartment_meta['apartment_as_featured'] );
+							if ( $is_apartment_featured ) {
 								Apartment::tf_apartment_archive_single_item();
 							}
 						}
+
+						rewind_posts();
+
 						while ( have_posts() ) {
 							the_post();
 							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
-							if ( empty($apartment_meta[ "apartment_as_featured" ])) {
+							$is_apartment_featured = is_array( $apartment_meta ) && ! empty( $apartment_meta['apartment_as_featured'] );
+							if ( ! $is_apartment_featured ) {
 								Apartment::tf_apartment_archive_single_item();
 							}
 						}

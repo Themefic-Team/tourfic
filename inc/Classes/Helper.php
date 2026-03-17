@@ -197,19 +197,27 @@ class Helper {
 		}
 	}
 
-    static function is_all_unavailable($tour_availability) {
-        if (empty($tour_availability) || !is_object($tour_availability)) {
-            return false;
-        }
-    
-        foreach ($tour_availability as $availability) {
-            if (!isset($availability->status) || $availability->status !== 'unavailable') {
-                return false;
-            }
-        }
-    
-        return true;
-    }
+	static function is_all_unavailable( $tour_availability ) {
+		if ( empty( $tour_availability ) || ! is_iterable( $tour_availability ) ) {
+			return false;
+		}
+
+		foreach ( $tour_availability as $availability ) {
+			$status = '';
+
+			if ( is_array( $availability ) && isset( $availability['status'] ) ) {
+				$status = $availability['status'];
+			} elseif ( is_object( $availability ) && isset( $availability->status ) ) {
+				$status = $availability->status;
+			}
+
+			if ( 'unavailable' !== $status ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
     
 
     static function tf_hotel_extras_title_price( $post_id, $adult, $child, $key ) {
@@ -1319,7 +1327,7 @@ class Helper {
                             });
 
                             function dateSetToFields(selectedDates, instance) {
-                                if (selectedDates.length === 2) {
+                                if (selectedDates.length >= 1) {
                                     const monthNames = [
                                         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1329,8 +1337,8 @@ class Helper {
                                         $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
                                         $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                     }
-                                    if (selectedDates[1]) {
-                                        const endDate = selectedDates[1];
+                                    const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                    if (endDate) {
                                         $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
                                         $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                     }
@@ -1393,7 +1401,7 @@ class Helper {
                             });
 
                             function dateSetToFields(selectedDates, instance) {
-                                if (selectedDates.length === 2) {
+                                if (selectedDates.length >= 1) {
                                     const monthNames = [
                                         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1403,8 +1411,8 @@ class Helper {
                                         $(".tf-archive-template__two .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
                                         $(".tf-archive-template__two .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                     }
-                                    if (selectedDates[1]) {
-                                        const endDate = selectedDates[1];
+                                    const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                    if (endDate) {
                                         $(".tf-archive-template__two .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
                                         $(".tf-archive-template__two .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                     }
@@ -1680,14 +1688,15 @@ class Helper {
 
                             function dateSetToFields(selectedDates, instance) {
                                 const format = '<?php echo esc_html( $date_format_for_users ); ?>';
-                                if (selectedDates.length === 2) {
+                                if (selectedDates.length >= 1) {
                                     if (selectedDates[0]) {
                                         let checkInDate = instance.formatDate(selectedDates[0], format);
                                         $(".tf-archive-template__three #tf-check-in").val(checkInDate);
                                     }
 
-                                    if (selectedDates[1]) {
-                                        let checkOutDate = instance.formatDate(selectedDates[1], format);
+                                    const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                    if (endDate) {
+                                        let checkOutDate = instance.formatDate(endDate, format);
                                         $(".tf-archive-template__three #tf-check-out").val(checkOutDate);
                                     }
                                 }
@@ -2373,7 +2382,7 @@ class Helper {
                                     });
 
                                     function dateSetToFields(selectedDates, instance) {
-                                        if (selectedDates.length === 2) {
+                                        if (selectedDates.length >= 1) {
                                             const monthNames = [
                                                 "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -2383,8 +2392,8 @@ class Helper {
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                             }
-                                            if (selectedDates[1]) {
-                                                const endDate = selectedDates[1];
+                                            const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                            if (endDate) {
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                             }
@@ -2448,7 +2457,7 @@ class Helper {
                                     });
 
                                     function dateSetToFields(selectedDates, instance) {
-                                        if (selectedDates.length === 2) {
+                                        if (selectedDates.length >= 1) {
                                             const monthNames = [
                                                 "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -2458,8 +2467,8 @@ class Helper {
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                             }
-                                            if (selectedDates[1]) {
-                                                const endDate = selectedDates[1];
+                                            const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                            if (endDate) {
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                             }
@@ -2714,14 +2723,15 @@ class Helper {
 
                                 function dateSetToFields(selectedDates, instance) {
                                     const format = '<?php echo esc_html( $date_format_for_users ); ?>';
-                                    if (selectedDates.length === 2) {
+                                    if (selectedDates.length >= 1) {
                                         if (selectedDates[0]) {
                                             const startDate = flatpickr.formatDate(selectedDates[0], format);
                                             $(".tf-archive-template__one .tf_pickup_date").val(startDate);
                                         }
-                                        if (selectedDates[1]) {
-                                            const endDate = flatpickr.formatDate(selectedDates[1], format);
-                                            $(".tf-archive-template__one .tf-select-date #tf_dropoff_date").val(endDate);
+                                        const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                        if (endDate) {
+                                            const formattedEndDate = flatpickr.formatDate(endDate, format);
+                                            $(".tf-archive-template__one .tf-select-date #tf_dropoff_date").val(formattedEndDate);
                                         }
                                     }
                                 }
@@ -2863,7 +2873,7 @@ class Helper {
                                     // flatpickr locale first day of Week
                                     <?php self::tf_flatpickr_locale( "root" ); ?>
 
-                                    $(".tf-archive-template__one #tf-check-out").on('click', function () {
+                                    $(".tf-archive-template__one #tf-check-out, .tf-archive-template__one .tf-booking-date-wrap svg").on('click', function () {
                                         $(".tf-search-input.form-control").click();
                                     });
                                     $("#check-in-out-date").flatpickr({
@@ -2893,14 +2903,15 @@ class Helper {
 
                                     function dateSetToFields(selectedDates, instance) {
                                         const format = '<?php echo esc_html( $date_format_for_users ); ?>';
-                                        if (selectedDates.length === 2) {
+                                        if (selectedDates.length >= 1) {
                                             if (selectedDates[0]) {
                                                 let checkInDate = instance.formatDate(selectedDates[0], format);
                                                 $(".tf-archive-template__one #tf-check-in").val(checkInDate);
                                             }
 
-                                            if (selectedDates[1]) {
-                                                let checkOutDate = instance.formatDate(selectedDates[1], format);
+                                            const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                            if (endDate) {
+                                                let checkOutDate = instance.formatDate(endDate, format);
                                                 $(".tf-archive-template__one #tf-check-out").val(checkOutDate);
                                             }
                                         }
@@ -3182,14 +3193,15 @@ class Helper {
 
                                 function dateSetToFields(selectedDates, instance) {
                                     const format = '<?php echo esc_html( $date_format_for_users ); ?>';
-                                    if (selectedDates.length === 2) {
+                                    if (selectedDates.length >= 1) {
                                         if (selectedDates[0]) {
                                             let checkInDate = instance.formatDate(selectedDates[0], format);
                                             $(".tf-archive-booking-form__style-3 #tf-check-in").val(checkInDate);
                                         }
 
-                                        if (selectedDates[1]) {
-                                            let checkOutDate = instance.formatDate(selectedDates[1], format);
+                                        const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                        if (endDate) {
+                                            let checkOutDate = instance.formatDate(endDate, format);
                                             $(".tf-archive-booking-form__style-3 #tf-check-out").val(checkOutDate);
                                         }
                                     }

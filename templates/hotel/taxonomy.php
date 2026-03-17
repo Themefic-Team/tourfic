@@ -58,6 +58,11 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
                 Helper::tf_archive_sidebar_search_form($post_type, '', '', '');
             }
             ?>
+            <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
+                <div id="tf__booking_sidebar">
+                    <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
+                </div>
+            <?php } ?>
 		</div>
 		</div>
 	</div>

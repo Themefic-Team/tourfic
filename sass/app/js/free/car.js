@@ -414,9 +414,9 @@
 
             if( response.includes(true) ){
                 if( attrCount > 1 ){
-                    notyf.error('( * ) fields are required');
+                    notyf.error(tf_params.fields_required_msg);
                 } else {
-                    notyf.error('( * ) field is required');
+                    notyf.error(tf_params.field_required);
                 }
                 return true;
             }
