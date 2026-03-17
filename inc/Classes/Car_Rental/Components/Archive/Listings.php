@@ -1,22 +1,20 @@
 <?php
 
-namespace Tourfic\Classes\Hotel\Components\Archive;
+namespace Tourfic\Classes\Car_Rental\Components\Archive;
 
 defined( 'ABSPATH' ) || exit;
 
-use Tourfic\Classes\Hotel\Hotel;
 use Tourfic\Classes\Helper;
-use Tourfic\Classes\Hotel\Pricing;
 
 /**
- * Centralized hotel archive listing renderer.
+ * Centralized Car_Rental archive listing renderer.
  * Other builders and template files should call the methods here so
  * markup is maintained in a single place.
  */
 class Listings {
 
 	/**
-	 * Render the Design-1 hotel archive listing markup.
+	 * Render the Design-1 Car_Rental archive listing markup.
 	 * @param \WP_Query|null $query Optional WP_Query instance. If null, global wp_query is used.
 	 * @param array $settings Optional settings array (from widgets).
 	 * @param string $builder Optional builder type (from widgets).
