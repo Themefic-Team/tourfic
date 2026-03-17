@@ -91,7 +91,7 @@ TF_Review::tf_get_review_fields( $fields );
             </div>
             <div class="tf-reviews-text">
                 <span class="tf-review-rating"><?php echo wp_kses_post( $c_rating ); ?></span>
-                <span class="tf-reviews-meta"><?php echo esc_html( $c_author_name ); ?> <span class="tf-reviews-time">| <?php echo wp_kses_post( gmdate( "F Y", strtotime( $c_date ) ) ); ?></span></span>
+                <span class="tf-reviews-meta"><?php echo esc_html( $c_author_name ); ?> <span class="tf-reviews-time">| <?php echo wp_kses_post( wp_date( "F Y", strtotime( $c_date ) ) ); ?></span></span>
                 <p><?php echo wp_kses_post( \Tourfic\Classes\Helper::tourfic_character_limit_callback( $c_content, 180 ) ); ?></p>
             </div>
         </div>

@@ -365,7 +365,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                         </div>
                     <?php endif; ?>
 					<?php
-					$places_section_title = ! empty( $meta["section-title"] ) ? $meta["section-title"] : "What's around?";
+					$places_section_title = ! empty( $meta["section-title"] ) ? $meta["section-title"] : __( "What's around?", 'tourfic' );
 					$places_meta          = ! empty( $meta["nearby-places"] ) ? Helper::tf_data_types($meta["nearby-places"]) : array();
 					?>
 					<?php if ( count( $places_meta ) > 0 ) : ?> <!-- nearby places - start -->

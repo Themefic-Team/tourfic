@@ -166,7 +166,7 @@ class Apartment {
 						$infant_number = ! empty( $room['infant'] ) ? $room['infant'] : '0';
 						?>
                         <h3><?php echo esc_html( $room['title'] ); ?></h3>
-                        <p><?php echo esc_html( $room['description'] ); ?></p>
+                        <div><?php echo wp_kses_post( $room['description'] ); ?></div>
                         <div class="tf-room-title description">
 							<?php if ( $footage ) { ?>
                                 <div class="tf-tooltip tf-d-ib">
@@ -268,6 +268,9 @@ class Apartment {
 					</div>
 					<div class="tf-popup-right">
 						<span class="tf-popup-info-title"><?php esc_html_e("Room details", "tourfic"); ?></span>
+						<div class="tf-room-details">
+							<?php echo wp_kses_post($room['description']); ?>
+						</div>
 						<ul>
 							<?php if ( $footage ) { ?>
 								<li><i class="ri-pencil-ruler-2-line"></i> <?php echo esc_html( $footage ); ?><?php esc_html_e( 'sft', 'tourfic' ); ?></li>
@@ -396,9 +399,9 @@ class Apartment {
 								<span class="tf-label"><?php esc_html_e( 'Check in', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkin_dates">
-										<span class="date"><?php echo esc_html( gmdate('d') ); ?></span>
+										<span class="date"><?php echo esc_html( wp_date('d') ); ?></span>
 										<span class="month">
-											<span><?php echo esc_html( gmdate('M') ); ?></span>
+											<span><?php echo esc_html( wp_date('M') ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -417,9 +420,9 @@ class Apartment {
 								<span class="tf-label"><?php esc_html_e( 'Check Out', 'tourfic' ); ?></span>
 								<div class="tf_form_inners">
 									<div class="tf_checkout_dates">
-										<span class="date"><?php echo esc_html( gmdate('d') ); ?></span>
+										<span class="date"><?php echo esc_html( wp_date('d') ); ?></span>
 										<span class="month">
-											<span><?php echo esc_html( gmdate('M') ); ?></span>
+											<span><?php echo esc_html( wp_date('M') ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -568,11 +571,18 @@ class Apartment {
 					$(".tf_apartment_check_in_out_date").on("click", function(){
 						$(".tf-apartment-check-in-out-date").trigger("click");
 					});
+
+					// today + tomorrow
+					const today = new Date();
+					const tomorrow = new Date();
+					tomorrow.setDate(today.getDate() + 1);
+					
 					$(".tf-apartment-check-in-out-date").flatpickr({
 						enableTime: false,
 						mode: "range",
 						dateFormat: "Y/m/d",
 						minDate: "today",
+						defaultDate: [today, tomorrow],
 
 						// flatpickr locale
 						<?php Helper::tf_flatpickr_locale(); ?>
@@ -587,22 +597,22 @@ class Apartment {
 						},
 					});
 
-					function dateSetToFields(selectedDates, instance) {
-						if (selectedDates.length === 2) {
-							const monthNames = [
-								"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-								"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+						function dateSetToFields(selectedDates, instance) {
+							if (selectedDates.length >= 1) {
+								const monthNames = [
+									"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+									"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 							];
 							if(selectedDates[0]){
 								const startDate = selectedDates[0];
 								$(".tf_apartment_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
 								$(".tf_apartment_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
 							}
-							if(selectedDates[1]){
-								const endDate = selectedDates[1];
-								$(".tf_apartment_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
-								$(".tf_apartment_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
-							}
+								const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+								if(endDate){
+									$(".tf_apartment_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
+									$(".tf_apartment_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
+								}
 						}
 					}
 
@@ -904,10 +914,10 @@ class Apartment {
                                         </svg>
                                     </div>
                                     <div class="tf_checkin_dates tf-flex tf-flex-align-center">
-                                        <span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+                                        <span class="date field--title"><?php echo esc_html(wp_date('d')); ?></span>
                                         <div class="tf-search__form__field__mthyr">
-                                            <span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
-                                            <span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+                                            <span class="month form--span"><?php echo esc_html(wp_date('M')); ?></span>
+                                            <span class="year form--span"><?php echo esc_html(wp_date('Y')); ?></span>
                                         </div>
                                     </div>
 
@@ -938,10 +948,10 @@ class Apartment {
                                     </svg>
                                 </div>
                                 <div class="tf_checkout_dates tf-flex tf-flex-align-center">
-                                    <span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+                                    <span class="date field--title"><?php echo esc_html(wp_date('d')); ?></span>
                                     <div class="tf-search__form__field__mthyr">
-                                        <span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
-                                        <span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+                                        <span class="month form--span"><?php echo esc_html(wp_date('M')); ?></span>
+                                        <span class="year form--span"><?php echo esc_html(wp_date('Y')); ?></span>
                                     </div>
                                 </div>
 
@@ -995,7 +1005,7 @@ class Apartment {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1006,8 +1016,8 @@ class Apartment {
                                     $(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
                                     $(".tf_checkin_dates span.year").html(startDate.getFullYear());
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf_checkout_dates span.date").html(endDate.getDate());
                                     $(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
                                     $(".tf_checkout_dates span.year").html(endDate.getFullYear());
@@ -1995,12 +2005,13 @@ class Apartment {
 						
 						var dates = instance.altInput.value.split(' - ');
 
-                        if (dates.length === 2) {
+                        if (dates.length >= 1) {
                             if (dates[0]) {
                                 $(".tf-apartment-design-one-form #check-in-date").val(dates[0]);
                             }
-                            if (dates[1]) {
-                                $(".tf-apartment-design-one-form #check-out-date").val(dates[1]);
+                            const checkOutDate = dates.length === 2 ? dates[1] : dates[0];
+                            if (checkOutDate) {
+                                $(".tf-apartment-design-one-form #check-out-date").val(checkOutDate);
                             }
                         }
                     }
@@ -2636,6 +2647,9 @@ class Apartment {
 												if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 													$apt_availability_dates = json_decode( $apt_availability_dates, true );
 													foreach($apt_availability_dates as $sdate){
+														if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+															continue;
+														}
 														if($tf_check_in_date==$sdate['check_in']){
 															$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 														}
@@ -2725,6 +2739,9 @@ class Apartment {
 												if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 													$apt_availability_dates = json_decode( $apt_availability_dates, true );
 													foreach($apt_availability_dates as $sdate){
+														if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+															continue;
+														}
 														if($tf_check_in_date==$sdate['check_in']){
 															$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 														}
@@ -2810,6 +2827,9 @@ class Apartment {
 											if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 												$apt_availability_dates = json_decode( $apt_availability_dates, true );
 												foreach($apt_availability_dates as $sdate){
+													if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+														continue;
+													}
 													if($tf_check_in_date==$sdate['check_in']){
 														$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 													}
@@ -2990,6 +3010,9 @@ class Apartment {
 											if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 												$apt_availability_dates = json_decode( $apt_availability_dates, true );
 												foreach($apt_availability_dates as $sdate){
+													if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+														continue;
+													}
 													if($tf_check_in_date==$sdate['check_in']){
 														$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 													}
@@ -3076,6 +3099,9 @@ class Apartment {
 									if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 										$apt_availability_dates = json_decode( $apt_availability_dates, true );
 										foreach($apt_availability_dates as $sdate){
+											if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+												continue;
+											}
 											if($tf_check_in_date==$sdate['check_in']){
 												$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 											}
@@ -3176,6 +3202,9 @@ class Apartment {
 									if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 										$apt_availability_dates = json_decode( $apt_availability_dates, true );
 										foreach($apt_availability_dates as $sdate){
+											if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+												continue;
+											}
 											if($tf_check_in_date==$sdate['check_in']){
 												$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 											}
@@ -3261,6 +3290,9 @@ class Apartment {
 								if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 									$apt_availability_dates = json_decode( $apt_availability_dates, true );
 									foreach($apt_availability_dates as $sdate){
+										if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+											continue;
+										}
 										if($tf_check_in_date==$sdate['check_in']){
 											$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 										}
@@ -3439,6 +3471,9 @@ class Apartment {
 								if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 									$apt_availability_dates = json_decode( $apt_availability_dates, true );
 									foreach($apt_availability_dates as $sdate){
+										if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+											continue;
+										}
 										if($tf_check_in_date==$sdate['check_in']){
 											$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 										}
@@ -3530,6 +3565,9 @@ class Apartment {
 												if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 													$apt_availability_dates = json_decode( $apt_availability_dates, true );
 													foreach($apt_availability_dates as $sdate){
+														if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+															continue;
+														}
 														if($tf_check_in_date==$sdate['check_in']){
 															$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 														}
@@ -3619,6 +3657,9 @@ class Apartment {
 												if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 													$apt_availability_dates = json_decode( $apt_availability_dates, true );
 													foreach($apt_availability_dates as $sdate){
+														if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+															continue;
+														}
 														if($tf_check_in_date==$sdate['check_in']){
 															$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 														}
@@ -3704,6 +3745,9 @@ class Apartment {
 											if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 												$apt_availability_dates = json_decode( $apt_availability_dates, true );
 												foreach($apt_availability_dates as $sdate){
+													if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+														continue;
+													}
 													if($tf_check_in_date==$sdate['check_in']){
 														$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 													}
@@ -3884,6 +3928,9 @@ class Apartment {
 											if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 												$apt_availability_dates = json_decode( $apt_availability_dates, true );
 												foreach($apt_availability_dates as $sdate){
+													if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+														continue;
+													}
 													if($tf_check_in_date==$sdate['check_in']){
 														$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 													}
@@ -3970,6 +4017,9 @@ class Apartment {
 									if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 										$apt_availability_dates = json_decode( $apt_availability_dates, true );
 										foreach($apt_availability_dates as $sdate){
+											if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+												continue;
+											}
 											if($tf_check_in_date==$sdate['check_in']){
 												$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 											}
@@ -4070,6 +4120,9 @@ class Apartment {
 									if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 										$apt_availability_dates = json_decode( $apt_availability_dates, true );
 										foreach($apt_availability_dates as $sdate){
+											if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+												continue;
+											}
 											if($tf_check_in_date==$sdate['check_in']){
 												$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 											}
@@ -4155,6 +4208,9 @@ class Apartment {
 								if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 									$apt_availability_dates = json_decode( $apt_availability_dates, true );
 									foreach($apt_availability_dates as $sdate){
+										if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+											continue;
+										}
 										if($tf_check_in_date==$sdate['check_in']){
 											$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 										}
@@ -4333,6 +4389,9 @@ class Apartment {
 								if ( ! empty( $apt_availability_dates ) && gettype( $apt_availability_dates ) == "string" ) {
 									$apt_availability_dates = json_decode( $apt_availability_dates, true );
 									foreach($apt_availability_dates as $sdate){
+										if(isset($sdate['status']) && $sdate['status'] !== 'available'){
+											continue;
+										}
 										if($tf_check_in_date==$sdate['check_in']){
 											$tf_check_in_date_price['price'] = !empty($sdate['price']) ? $sdate['price'] : '';
 										}

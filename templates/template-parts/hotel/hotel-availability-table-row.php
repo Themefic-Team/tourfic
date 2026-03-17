@@ -817,7 +817,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                             if ( ! empty( $hotel_discount_type ) && ! empty( $hotel_discount_amount ) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type ) ) { ?>
                                 <div class="tf-available-room-off">
                                 <span>
-                                    <?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( wc_price( $hotel_discount_amount ) ) . 'off'; ?>
+                                    <?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '' . esc_html__( '% off', 'tourfic' )  : wp_kses_post( wc_price( $hotel_discount_amount ) ) . ' ' . esc_html__( 'off', 'tourfic' );  ?>
                                 </span>
                                 </div>
                             <?php } ?>
@@ -987,7 +987,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 					if ( ! empty( $hotel_discount_type ) && ! empty( $hotel_discount_amount ) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type ) ) { ?>
                         <div class="tf-available-room-off">
                             <span>
-                                <?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( wc_price( $hotel_discount_amount ) ) . 'off'; ?>
+                               <?php echo ( "percent" == $hotel_discount_type )  ? esc_html( $hotel_discount_amount ) . ' ' . esc_html__( '% off', 'tourfic' ) : wp_kses_post( wc_price( $hotel_discount_amount ) ) . ' ' . esc_html__( 'off', 'tourfic' ); ?>
                             </span>
                         </div>
 					<?php } ?>
@@ -1147,7 +1147,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						if ( ! empty( $hotel_discount_type ) && ! empty( $hotel_discount_amount ) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type ) ) { ?>
                             <div class="tf-available-room-off">
                                 <span>
-                                    <?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( wc_price( $hotel_discount_amount ) ) . 'off'; ?>
+                                    <?php  echo ( "percent" == $hotel_discount_type )  ? esc_html( $hotel_discount_amount ) . ' ' . esc_html__( '% off', 'tourfic' ) : wp_kses_post( wc_price( $hotel_discount_amount ) ) . ' ' . esc_html__( 'off', 'tourfic' ); ?>
                                 </span>
                             </div>
 						<?php } ?>
@@ -1414,7 +1414,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                 <div class="tf-room-gallery <?php echo empty( $room_gallerys ) ? esc_attr( 'tf-no-room-gallery' ) : ''; ?>">
 					<?php if ( ! empty( $hotel_discount_type ) && ! empty( $hotel_discount_amount ) && ( "percent" == $hotel_discount_type || "fixed" == $hotel_discount_type ) ) { ?>
                         <div class="tf-available-room-off">
-							<?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . '% off' : wp_kses_post( wc_price( $hotel_discount_amount ) . ' off' ); ?>
+							<?php echo ( "percent" == $hotel_discount_type ) ? esc_html( $hotel_discount_amount ) . ' ' . esc_html__( '% off', 'tourfic' ) : wp_kses_post( wc_price( $hotel_discount_amount ) ) . ' ' . esc_html__( 'off', 'tourfic' );  ?>
                         </div>
 					<?php } ?>
 					<?php if ( ! empty( $room_preview_img ) ) : ?>

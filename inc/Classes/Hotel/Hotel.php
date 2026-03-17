@@ -572,7 +572,13 @@ class Hotel {
 
 		if ( ! empty( $rooms_meta ) ):
 			$rooms_meta = array_filter( $rooms_meta, function ( $value ) {
-				return ! empty( $value ) && empty( $value['enable'] ) ? $value['enable'] : '' != '0';
+				if ( empty( $value ) || ! is_array( $value ) ) {
+					return false;
+				}
+				if ( isset( $value['enable'] ) && (string) $value['enable'] === '0' ) {
+					return false;
+				}
+				return true;
 			} );
 		endif;
 
@@ -622,9 +628,10 @@ class Hotel {
 		}
 
 		$room_result = array_filter( $back_rooms );
+		$room_validation = ( ! empty( $room_result ) && $room_counter > 0 ) || ( empty( $room_result ) && ! empty( $rooms_meta ) );
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && $room_validation ) {
 
 			// Check custom date range status of room
 			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
@@ -796,7 +803,7 @@ class Hotel {
 		}
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $child_counter == 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $child_counter == 0 && $room_validation ) {
 
 			// Check custom date range status of room
 			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
@@ -1024,7 +1031,13 @@ class Hotel {
 		// Remove disabled rooms
 		if ( ! empty( $rooms_meta ) ):
 			$rooms_meta = array_filter( $rooms_meta, function ( $value ) {
-				return ! empty( $value ) && empty( $value['enable'] ) ? $value['enable'] : '' != '0';
+				if ( empty( $value ) || ! is_array( $value ) ) {
+					return false;
+				}
+				if ( isset( $value['enable'] ) && (string) $value['enable'] === '0' ) {
+					return false;
+				}
+				return true;
 			} );
 		endif;
 
@@ -1074,9 +1087,10 @@ class Hotel {
 		}
 
 		$room_result = array_filter( $back_rooms );
+		$room_validation = ( ! empty( $room_result ) && $room_counter > 0 ) || ( empty( $room_result ) && ! empty( $rooms_meta ) );
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && $room_validation ) {
 
 			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 				foreach ( $rooms as $_room ) {
@@ -1130,7 +1144,7 @@ class Hotel {
 			}
 
 		}
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $room_validation ) {
 			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 				foreach ( $rooms as $_room ) {
 					$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
@@ -1639,9 +1653,9 @@ class Hotel {
                                     <span class="tf-label"><?php esc_html_e( 'Check in', 'tourfic' ); ?></span>
                                     <div class="tf_form_inners">
                                         <div class="tf_checkin_dates">
-                                            <span class="date"><?php echo esc_html( gmdate( 'd' ) ); ?></span>
+                                            <span class="date"><?php echo esc_html( wp_date( 'd' ) ); ?></span>
                                             <span class="month">
-											<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+											<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -1662,9 +1676,9 @@ class Hotel {
                                     <span class="tf-label"><?php esc_html_e( 'Check Out', 'tourfic' ); ?></span>
                                     <div class="tf_form_inners">
                                         <div class="tf_checkout_dates">
-                                            <span class="date"><?php echo esc_html( gmdate( 'd' ) ); ?></span>
+                                            <span class="date"><?php echo esc_html( wp_date( 'd' ) ); ?></span>
                                             <span class="month">
-											<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+											<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -1839,11 +1853,18 @@ class Hotel {
                         $(".tf_check_inout_dates").on("click", function () {
                             $(".tf-check-in-out-date").trigger("click");
                         });
+
+						// today + tomorrow
+						const today = new Date();
+						const tomorrow = new Date();
+						tomorrow.setDate(today.getDate() + 1);
+
                         $(".tf-check-in-out-date").flatpickr({
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
                             minDate: "today",
+							defaultDate: [today, tomorrow],
 
                             // flatpickr locale
 							<?php Helper::tf_flatpickr_locale(); ?>
@@ -1859,7 +1880,7 @@ class Hotel {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1869,8 +1890,8 @@ class Hotel {
                                     $(".tf_hotel_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
                                     $(".tf_hotel_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf_hotel_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
                                     $(".tf_hotel_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
                                 }
@@ -1950,7 +1971,7 @@ class Hotel {
 										<div class="tf_acrselection-wrap">
 											<div class="tf_acrselection-inner">
 												<div class="tf_acrselection">
-													<div class="acr-label"><?php esc_html( $adults_name . 's', 'tourfic' ); ?></div>
+													<div class="acr-label"><?php echo esc_html( $adults_name . 's', 'tourfic' ); ?></div>
 													<div class="acr-select">
 														<div class="acr-dec">-</div>
 														<input type="number" name="adults" id="adults" min="1" value="1" readonly>
@@ -2178,10 +2199,10 @@ class Hotel {
                                         </svg>
                                     </div>
                                     <div class="tf_checkin_dates tf-flex tf-flex-align-center">
-                                        <span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+                                        <span class="date field--title"><?php echo esc_html(date_i18n('d')); ?></span>
                                         <div class="tf-search__form__field__mthyr">
-                                            <span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
-                                            <span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+                                            <span class="month form--span"><?php echo esc_html(date_i18n('M')); ?></span>
+                                            <span class="year form--span"><?php echo esc_html(date_i18n('Y')); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -2211,10 +2232,10 @@ class Hotel {
                                     </svg>
                                 </div>
                                 <div class="tf_checkout_dates tf-flex tf-flex-align-center">
-                                    <span class="date field--title"><?php echo esc_html(gmdate('d', strtotime('+1 day'))); ?></span>
+                                    <span class="date field--title"><?php echo esc_html(wp_date('d', strtotime('+1 day'))); ?></span>
                                     <div class="tf-search__form__field__mthyr">
-                                        <span class="month form--span"><?php echo esc_html(gmdate('M'), strtotime('+1 day')); ?></span>
-                                        <span class="year form--span"><?php echo esc_html(gmdate('Y'), strtotime('+1 day')); ?></span>
+                                        <span class="month form--span"><?php echo esc_html(wp_date('M'), strtotime('+1 day')); ?></span>
+                                        <span class="year form--span"><?php echo esc_html(wp_date('Y'), strtotime('+1 day')); ?></span>
                                     </div>
                                 </div>
 
@@ -2240,8 +2261,8 @@ class Hotel {
                         // flatpickr locale first day of Week
                         <?php Helper::tf_flatpickr_locale("root"); ?>
 
-                        $(".tf_check_inout_dates").on("click", function() {
-                            $(".tf-check-in-out-date").trigger("click");
+                        $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_check_inout_dates").on("click", function() {
+                            $(".tf-shortcode-design-4#tf_hotel_aval_check .tf-check-in-out-date").trigger("click");
                         });
 
 						// today + tomorrow
@@ -2249,7 +2270,7 @@ class Hotel {
 						const tomorrow = new Date();
 						tomorrow.setDate(today.getDate() + 1);
 
-                        $(".tf-check-in-out-date").flatpickr({
+                        $(".tf-shortcode-design-4#tf_hotel_aval_check .tf-check-in-out-date").flatpickr({
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
@@ -2269,22 +2290,22 @@ class Hotel {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
                                 ];
                                 if (selectedDates[0]) {
                                     const startDate = selectedDates[0];
-                                    $(".tf_checkin_dates span.date").html(startDate.getDate());
-                                    $(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
-                                    $(".tf_checkin_dates span.year").html(startDate.getFullYear());
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkin_dates span.date").html(startDate.getDate());
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkin_dates span.year").html(startDate.getFullYear());
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
-                                    $(".tf_checkout_dates span.date").html(endDate.getDate());
-                                    $(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
-                                    $(".tf_checkout_dates span.year").html(endDate.getFullYear());
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.date").html(endDate.getDate());
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.year").html(endDate.getFullYear());
                                 }
                             }
                         }
@@ -2650,7 +2671,7 @@ class Hotel {
 
 		$tf_hotel_selected_template = !empty($design) ? $design : $tf_hotel_selected_check;
 
-		$tf_hotel_book_avaibality_button_text = ! empty( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ) : "Booking Availability";
+		$tf_hotel_book_avaibality_button_text = ! empty( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ) : __( 'Booking Availability', 'tourfic' );
 		$hotel_location_field_required        = ! empty( Helper::tfopt( "required_location_hotel_search" ) ) ? Helper::tfopt( "required_location_hotel_search" ) : 1;
 		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 		$child_field_hidden = apply_filters( 'tf_hotel_child_field_hidden', 1 );
@@ -2735,7 +2756,7 @@ class Hotel {
                             <span class="tf-booking-date"><?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'd' ) ) : esc_html__( '00', 'tourfic' ); ?></span>
                             <span class="tf-booking-month">
 								<span>
-									<?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'M' ) ) : esc_html( gmdate( 'M' ) ); ?>
+									<?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'M' ) ) : esc_html( wp_date( 'M' ) ); ?>
 								</span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
@@ -2750,7 +2771,7 @@ class Hotel {
                         <div class="tf-booking-date-wrap">
                             <span class="tf-booking-date"><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'd' ) ) : esc_html__( '00', 'tourfic' ); ?></span>
                             <span class="tf-booking-month">
-								<span><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'M' ) ) : esc_html( gmdate( 'M' ) ); ?></span>
+								<span><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'M' ) ) : esc_html( wp_date( 'M' ) ); ?></span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 								</svg>
@@ -2904,7 +2925,7 @@ class Hotel {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -2914,8 +2935,8 @@ class Hotel {
                                     $(".tf-single-template__two .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
                                     $(".tf-single-template__two .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf-single-template__two .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
                                     $(".tf-single-template__two .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                 }
@@ -3154,14 +3175,13 @@ class Hotel {
 		$room_book_url            = ! empty( $meta['booking-url'] ) ? $meta['booking-url'] : '';
 		$room_allow_deposit       = ! empty( $room_meta['allow_deposit'] ) ? $room_meta['allow_deposit'] : '';
 		$room_deposit_type       = ! empty( $room_meta['deposit_type'] ) ? $room_meta['deposit_type'] : '';
-		$room_deposit_amount       = ! empty( $room_meta['deposit_amount'] ) ? $room_meta['deposit_amount'] : 0;
+		$room_deposit_amount      = ! empty( $room_meta['deposit_amount'] ) ? $room_meta['deposit_amount'] : 0;
 		$airport_service_type     = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $enable_airport_service ) && ! empty( $airport_service_type ) ? $airport_service_type : null;
 		$hotel_extras     = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $hotel_extra_option ) && ! empty( $hotel_extras ) ? $hotel_extras : null;
 		$enable_guest_info_global = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'enable_guest_info' ) ) ? Helper::tfopt( 'enable_guest_info' ) : 0;
 		$enable_guest_info        = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['enable_guest_info'] ) ? $meta['enable_guest_info'] : $enable_guest_info_global;
 		$hotel_guest_details_text = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'hotel_guest_details_text' ) ) ? Helper::tfopt( 'hotel_guest_details_text' ) : '';
 		?>
-        <!-- Loader Image -->
         <div id="tour_room_details_loader">
             <div id="tour-room-details-loader-img">
                 <img src="<?php echo esc_url(TF_ASSETS_APP_URL . 'images/loader.gif') ?>" alt="Loader">
@@ -3499,7 +3519,7 @@ class Hotel {
 				if ( "per_person" == $airport_pickup_price['airport_pickup_price_type'] ) {
 					$service_adult_fee           = ! empty( $airport_pickup_price['airport_service_fee_adult'] ) ? $airport_pickup_price['airport_service_fee_adult'] : 0;
 					$service_child_fee           = ! empty( $airport_pickup_price['airport_service_fee_children'] ) ? $airport_pickup_price['airport_service_fee_children'] : 0;
-					$airport_service_price_total = ( $adult * $service_adult_fee ) + ( $child * $service_child_fee );
+					$airport_service_price_total = ( (int) $adult * $service_adult_fee ) + ( (int) $child * $service_child_fee );
 					$airport_service_total       += $airport_service_price_total;
 
 					if ( $child != 0 ) {
@@ -3644,7 +3664,6 @@ class Hotel {
 
 		return !empty( $airport_service_arr ) ? $airport_service_arr : array( 'title' => '', 'price' => 0 );
 	}
-
 
 	/**
 	 * Hotel Archive Single Item Layout
@@ -4998,7 +5017,6 @@ class Hotel {
 
 		wp_die();
 	}
-
 
 	/*
      * Hotel search ajax

@@ -300,7 +300,7 @@ abstract Class TF_Booking_Details {
                 <div class="tf-filter-options">
                     <div class="tf-order-status-filter">
                         <select class="tf-tour-filter-options tf-order-payment-status">
-                            <option value=""><?php esc_html_e( "Order status", "tourfic" ); ?></option>
+                            <option value=""><?php echo esc_html_e( "Order status", "tourfic" ); ?></option>
                             <option value="processing" <?php echo ! empty( $_GET['payment'] ) && "processing" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Processing", "tourfic" ); ?></option>
                             <option value="on-hold" <?php echo ! empty( $_GET['payment'] ) && "on-hold" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "On Hold", "tourfic" ); ?></option>
                             <option value="completed" <?php echo ! empty( $_GET['payment'] ) && "completed" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Completed", "tourfic" ); ?></option>
@@ -314,9 +314,9 @@ abstract Class TF_Booking_Details {
                     <div class="tf-filter-options">
                         <div class="tf-order-status-filter">
                             <select class="tf-tour-checkinout-options">
-                                <option value=""><?php esc_html_e( "Checked in status", "tourfic" ); ?></option>
-                                <option value="in" <?php echo ! empty( $_GET['checkinout'] ) && "in" == $_GET['checkinout'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Checked in", "tourfic" ); ?></option>
-                                <option value="out" <?php echo ! empty( $_GET['checkinout'] ) && "out" == $_GET['checkinout'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Checked out", "tourfic" ); ?></option>
+                                <option value=""><?php echo esc_html_e( "Checked in status", "tourfic" ); ?></option>
+                                <option value="in" <?php echo ! empty( $_GET['checkinout'] ) && "in" == $_GET['checkinout'] ? esc_attr( 'selected' ) : ''; ?>><?php echo esc_html_e( "Checked in", "tourfic" ); ?></option>
+                                <option value="out" <?php echo ! empty( $_GET['checkinout'] ) && "out" == $_GET['checkinout'] ? esc_attr( 'selected' ) : ''; ?>><?php echo esc_html_e( "Checked out", "tourfic" ); ?></option>
                             </select>
                         </div>
                     </div>
@@ -442,7 +442,7 @@ abstract Class TF_Booking_Details {
 							?>
                         </td>
                         <td>
-							<?php echo esc_html(gmdate( 'F d, Y', strtotime( $tf_order['order_date'] ) )); ?>
+							<?php echo esc_html(wp_date( 'F d, Y', strtotime( $tf_order['order_date'] ) )); ?>
                         </td>
                         <td>
 							<?php
@@ -565,7 +565,7 @@ abstract Class TF_Booking_Details {
                     <ul>
                         <li><?php esc_html_e("Booking ID", "tourfic"); ?>: #<?php echo esc_html( $tf_order_details->order_id ); ?></li>
                         <li>|</li>
-                        <li><?php esc_html_e("Booking created", "tourfic"); ?>: <?php echo esc_html(gmdate('F d, Y',strtotime($tf_order_details->order_date))); ?></li>
+                        <li><?php esc_html_e("Booking created", "tourfic"); ?>: <?php echo esc_html(wp_date('F d, Y',strtotime($tf_order_details->order_date))); ?></li>
                         <li>|</li>
                         <li><?php esc_html_e("Booking by", "tourfic"); ?>: <span style="text-transform: capitalize;">
                             <?php 

@@ -86,9 +86,9 @@ class Tour {
                                     <span class="tf-label"><?php esc_html_e( 'Start Date', 'tourfic' ); ?></span>
                                     <div class="tf_form_inners">
                                         <div class="tf_checkin_dates">
-                                            <span class="date"><?php echo esc_html( gmdate( 'd' ) ); ?></span>
+                                            <span class="date"><?php echo esc_html( wp_date( 'd' ) ); ?></span>
                                             <span class="month">
-											<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+											<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -108,9 +108,9 @@ class Tour {
                                     <span class="tf-label"><?php esc_html_e( 'End Date', 'tourfic' ); ?></span>
                                     <div class="tf_form_inners">
                                         <div class="tf_checkout_dates">
-                                            <span class="date"><?php echo esc_html( gmdate( 'd' ) ); ?></span>
+                                            <span class="date"><?php echo esc_html( wp_date( 'd' ) ); ?></span>
                                             <span class="month">
-											<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+											<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -269,11 +269,18 @@ class Tour {
                         $(".tf_tour_check_in_out_date").on("click", function () {
                             $(".tf-tour-check-in-out-date").trigger("click");
                         });
+
+						// today + tomorrow
+						const today = new Date();
+						const tomorrow = new Date();
+						tomorrow.setDate(today.getDate() + 1);
+
                         $(".tf-tour-check-in-out-date").flatpickr({
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
                             minDate: "today",
+							defaultDate: [today, tomorrow],
 
                             // flatpickr locale
 							<?php Helper::tf_flatpickr_locale(); ?>
@@ -289,7 +296,7 @@ class Tour {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -299,8 +306,8 @@ class Tour {
                                     $(".tf_tour_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
                                     $(".tf_tour_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf_tour_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
                                     $(".tf_tour_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
                                 }
@@ -350,7 +357,7 @@ class Tour {
                                     </svg>
 								</div>
 								<div class="info-select">
-									<h5><?php esc_html_e("Check-in & Check-out Date", "tourfic"); ?></h5>
+										<h5><?php esc_html_e("Start & End Dates", "tourfic"); ?></h5>
 									<input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
                                            placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo Helper::tfopt( 'date_tour_search' ) ? 'required' : ''; ?>>
 								</div>
@@ -609,10 +616,10 @@ class Tour {
 										</svg>
 									</div>
 									<div class="tf_checkin_dates tf-flex tf-flex-align-center">
-										<span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+										<span class="date field--title"><?php echo esc_html(wp_date('d')); ?></span>
 										<div class="tf-search__form__field__mthyr">
-											<span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
-											<span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+											<span class="month form--span"><?php echo esc_html(wp_date('M')); ?></span>
+											<span class="year form--span"><?php echo esc_html(wp_date('Y')); ?></span>
 										</div>
 									</div>
 
@@ -643,10 +650,10 @@ class Tour {
 									</svg>
 								</div>
 								<div class="tf_checkout_dates tf-flex tf-flex-align-center">
-									<span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+									<span class="date field--title"><?php echo esc_html(wp_date('d')); ?></span>
 									<div class="tf-search__form__field__mthyr">
-										<span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
-										<span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+										<span class="month form--span"><?php echo esc_html(wp_date('M')); ?></span>
+										<span class="year form--span"><?php echo esc_html(wp_date('Y')); ?></span>
 									</div>
 								</div>
 
@@ -699,11 +706,11 @@ class Tour {
 							}
 						});
 
-						function dateSetToFields(selectedDates, instance) {
-							if (selectedDates.length === 2) {
-								const monthNames = [
-									"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-									"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+							function dateSetToFields(selectedDates, instance) {
+								if (selectedDates.length >= 1) {
+									const monthNames = [
+										"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+										"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 								];
 								if (selectedDates[0]) {
 									const startDate = selectedDates[0];
@@ -711,11 +718,11 @@ class Tour {
 									$(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
 									$(".tf_checkin_dates span.year").html(startDate.getFullYear());
 								}
-								if (selectedDates[1]) {
-									const endDate = selectedDates[1];
-									$(".tf_checkout_dates span.date").html(endDate.getDate());
-									$(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
-									$(".tf_checkout_dates span.year").html(endDate.getFullYear());
+									const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+									if (endDate) {
+										$(".tf_checkout_dates span.date").html(endDate.getDate());
+										$(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
+										$(".tf_checkout_dates span.year").html(endDate.getFullYear());
 								}
 							}
 						}
@@ -836,7 +843,7 @@ class Tour {
                         <!-- @KK Merged two inputs into one  -->
                         <div class="tf_input-inner">
                             <label class="tf_label-row">
-                                <span class="tf-label"><?php esc_html_e( 'Check-in & Check-out date', 'tourfic' ); ?></span>
+	                                <span class="tf-label"><?php esc_html_e( 'Start & End Dates', 'tourfic' ); ?></span>
                                 <div class="tf_form-inner">
                                     <div class="tf-search-form-field-icon">
                                         <i class="far fa-calendar-alt"></i>

@@ -723,7 +723,7 @@ function tf_car_booking_pupup_callback() {
 	$car_protection_section_status = ! empty( $meta['protection_section'] ) ? $meta['protection_section'] : '';
 	$car_protection_content = ! empty( $meta['protection_content'] ) ? $meta['protection_content'] : '';
 	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
-	$car_protection_tab_title = ! empty( $meta['protection_tab_title'] ) ? esc_html($meta['protection_tab_title']) : esc_html('Protection');
+	$car_protection_tab_title = ! empty( $meta['protection_tab_title'] ) ? esc_html($meta['protection_tab_title']) : __('Protection', 'tourfic');
 
 	$pickup_date = ! empty( $_POST['pickup_date'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_date']) ) : '';
 	$pickup_time = ! empty( $_POST['pickup_time'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_time']) ) : '';
@@ -731,7 +731,7 @@ function tf_car_booking_pupup_callback() {
 	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_date']) ) : '';
 	$dropoff_time = ! empty( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
 
-	$booking_btn_text = !empty(Helper::tfopt('car_booking_form_button_text')) ? Helper::tfopt('car_booking_form_button_text') : 'Continue';
+	$booking_btn_text = !empty(Helper::tfopt('car_booking_form_button_text')) ? Helper::tfopt('car_booking_form_button_text') : __('Continue', 'tourfic');
 
  	?>
 

@@ -159,16 +159,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				array( 'TF_Shortcodes','tf_shortcode_callback'),
 			);
 
-			// Workspace submenu
-			add_submenu_page(
-				$this->option_id,
-				wp_kses_post( 'Workspace <span style="border-radius: 6px;background: #FCF1CF;color: #27333F;font-size: 10px;font-weight: 600;line-height: 16px;padding: 0 6px;"> Premium </span>' ),
-				wp_kses_post( 'Workspace <span style="border-radius: 6px;background: #FCF1CF;color: #27333F;font-size: 10px;font-weight: 600;line-height: 16px;padding: 0 6px;"> Premium </span>' ),
-				'manage_options',
-				'tf_workspace',
-				array( $this,'tf_workspace_callback'),
-			);
-
 			// Library submenu
 			if ( is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ) {
 				$library_url = admin_url( 'admin.php?page=travelfic-template-list' );
@@ -198,21 +188,20 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					esc_html__('Template Builder', 'tourfic'),
 					'manage_options',
 					'tf_template_builder',
-					array( 'Template_Builder', 'tf_template_builder_elementor_check' )
+					array( '\Tourfic\App\Template_Builder', 'tf_template_builder_elementor_check' )
 				);
 			} 
 
-			if ( function_exists('is_tf_pro') ) {
-				//License Info submenu
-				add_submenu_page(
-					$this->option_id,
-					esc_html__('License Info', 'tourfic'),
-					esc_html__('License Info', 'tourfic'),
-					'manage_options',
-					'tf_license_info',
-					array( $this,'tf_license_info_callback'),
-				);
-			}
+
+			// Workspace submenu
+			add_submenu_page(
+				$this->option_id,
+				wp_kses_post( 'Workspace <span style="border-radius: 6px;background: #FCF1CF;color: #27333F;font-size: 10px;font-weight: 600;line-height: 16px;padding: 0 6px;"> Premium </span>' ),
+				wp_kses_post( 'Workspace <span style="border-radius: 6px;background: #FCF1CF;color: #27333F;font-size: 10px;font-weight: 600;line-height: 16px;padding: 0 6px;"> Premium </span>' ),
+				'manage_options',
+				'tf_workspace',
+				array( $this,'tf_workspace_callback'),
+			);
 			if ( !function_exists('is_tf_pro') ) {
 				add_submenu_page(
 					$this->option_id,
@@ -510,7 +499,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                     <div class="tf-quote-content">
 						<h3><?php echo esc_html__('Need help building your Travel, Hotel, or Rental Website?', 'tourfic');  ?></h3>
                         <p><?php echo esc_html__('Let our expert team craft a custom WordPress site tailored to your business—whether you\'re running a hotel, tour agency, or vacation rental. Optimized for performance, bookings, and conversions.', 'tourfic'); ?></p>
-						<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/hire-us/', array( 'utm_medium' => 'dashboard_free_quote' ) ) ); ?>" target="_blank" class="tf-admin-btn tf-btn-secondary">
+						<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://service.tourfic.com/', array( 'utm_medium' => 'dashboard_free_quote' ) ) ); ?>" target="_blank" class="tf-admin-btn tf-btn-secondary">
 						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<g clip-path="url(#clip0_1066_1543)">
 							<path d="M8.3334 7.49995L5.8334 9.99995L8.3334 12.4999M11.6667 12.4999L14.1667 9.99995L11.6667 7.49995M2.4934 13.6183C2.61593 13.9274 2.64321 14.2661 2.57173 14.5908L1.68423 17.3324C1.65564 17.4715 1.66303 17.6155 1.70571 17.7509C1.7484 17.8863 1.82495 18.0085 1.92812 18.106C2.03129 18.2035 2.15766 18.273 2.29523 18.308C2.43281 18.343 2.57704 18.3422 2.71423 18.3058L5.5584 17.4741C5.86483 17.4133 6.18218 17.4399 6.47423 17.5508C8.25372 18.3818 10.2695 18.5576 12.166 18.0472C14.0625 17.5368 15.7178 16.373 16.8398 14.7611C17.9618 13.1492 18.4785 11.1928 18.2986 9.23707C18.1188 7.28136 17.254 5.45201 15.8568 4.07178C14.4596 2.69155 12.6198 1.84915 10.6621 1.6932C8.70429 1.53724 6.75435 2.07777 5.15627 3.2194C3.55819 4.36103 2.41468 6.0304 1.92748 7.93298C1.44028 9.83556 1.64071 11.8491 2.4934 13.6183Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -584,28 +573,28 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		public function tf_get_sidebar_plugin_list(){
 			$plugins = [
 				[
-					'name'       => 'Instantio',
+					'name'       => __('Instantio', 'tourfic'),
 					'slug'       => 'instantio',
 					'file_name'  => 'instantio',
 					'subtitle'   => 'WooCommerce Quick & Direct Checkout',
 					'image'      => 'instantio-logo.png',
 				],
 				[
-					'name'       => 'Hydra',
+					'name'       => __('Hydra', 'tourfic'),
 					'slug'       => 'hydra-booking',
 					'file_name'  => 'hydra-booking',
 					'subtitle'   => 'All in One Appointment Booking System',
 					'image'      => 'hydra-logo.png',
 				],
 				[
-					'name'       => 'BEAF',
+					'name'       => __('BEAF', 'tourfic'),
 					'slug'       => 'beaf-before-and-after-gallery',
 					'file_name'  => 'before-and-after-gallery',
 					'subtitle'   => 'Ultimate Before After Image Slider & Gallery',
 					'image'      => 'beaf-logo.png',
 				],
 				[
-					'name'       => 'UACF7',
+					'name'       => __('UACF7', 'tourfic'),
 					'slug'       => 'ultimate-addons-for-contact-form-7',
 					'file_name'  => 'ultimate-addons-for-contact-form-7',
 					'subtitle'   => '40+ Essential Addons for Contact Form 7',
@@ -638,7 +627,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</div>
 								<div class="tf-plugin-title">
 									<h4><?php echo esc_html($plugin['name']); ?>
-									<span class="badge free">Free</span></h4>
+									<span class="badge free"><?php echo esc_html__('Free', 'tourfic'); ?></span></h4>
 									<p><?php echo esc_html($plugin['subtitle']); ?></p>
 									<strong></strong>
 
@@ -780,7 +769,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							</svg>
 							<h3><?php esc_html_e("Need a Custom Solution?","tourfic"); ?></h3>
 							<p><?php esc_html_e("We offer tailored plugin solutions based on your specific needs.","tourfic"); ?></p>
-							<a href="<?php echo esc_url(Helper::tf_utm_generator( 'https://portal.themefic.com/hire-us/', array( 'utm_medium' => 'get_help_request_quote' ) )); ?>" target="_blank" class="tf-link-skip-btn"><?php esc_html_e("Request Customization","tourfic"); ?></a>
+							<a href="<?php echo esc_url(Helper::tf_utm_generator( 'https://service.tourfic.com/', array( 'utm_medium' => 'get_help_request_quote' ) )); ?>" target="_blank" class="tf-link-skip-btn"><?php esc_html_e("Request Customization","tourfic"); ?></a>
 						</div>
 
 						<!-- Help Center -->
@@ -1252,75 +1241,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					</div>
 				</div>
 			</div>
-		<?php
-		}
-
-
-		public function tf_license_info_callback(){
-		?>
-		<div class="tf-setting-dashboard">
-
-			<!-- dashboard-header-include -->
-			<?php \Tourfic\Classes\Helper::tf_dashboard_header(); ?>
-
-			<div class="tf-setting-license">
-				<div class="tf-setting-license-tabs">
-					<ul>
-						<li class="active">
-							<span>
-								<i class="fas fa-key"></i>
-								<?php esc_html_e("License Info","tourfic"); ?>
-							</span>
-						</li>
-					</ul>
-				</div>
-				<div class="tf-setting-license-field">
-					<div class="tf-tab-wrapper">
-						<div id="license" class="tf-tab-content">
-							<div class="tf-field tf-field-callback" style="width: 100%;">
-								<div class="tf-fieldset"></div>
-							</div>
-							<?php
-							$licenseKey = ! empty( tfliopt( 'license-key' ) ) ? tfliopt( 'license-key' ) : '';
-							$liceEmail  = ! empty( tfliopt( 'license-email' ) ) ? tfliopt( 'license-email' ) : '';
-
-							if ( TourficProBase::CheckWPPlugin( $licenseKey, $liceEmail, $licenseMessage, $responseObj, TF_PRO_PATH . 'tourfic-pro.php' ) ) {
-								tf_license_info();
-							} else {
-							?>
-							<div class="tf-field tf-field-text" style="width: 100%;">
-								<label for="tf_settings[license-key]" class="tf-field-label"> <?php esc_html_e("License Key","tourfic"); ?></label>
-
-								<span class="tf-field-sub-title"><?php esc_html_e("Enter your license key here, to activate the product, and get full feature updates and premium support.","tourfic"); ?></span>
-
-								<div class="tf-fieldset">
-									<input type="text" name="tf_settings[license-key]" id="tf_settings[license-key]" value="" placeholder="xxxxxxxx-xxxxxxxx-xxxxxxxx-xxxxxxxx" />
-								</div>
-							</div>
-
-							<div class="tf-field tf-field-text" style="width: 100%;">
-								<label for="tf_settings[license-email]" class="tf-field-label"> <?php esc_html_e("License Email ","tourfic"); ?></label>
-
-								<span class="tf-field-sub-title"><?php esc_html_e("We will send update news of this product by this email address, don't worry, we hate spam","tourfic"); ?></span>
-
-								<div class="tf-fieldset">
-									<input type="text" name="tf_settings[license-email]" id="tf_settings[license-email]" value="" />
-								</div>
-							</div>
-
-							<div class="tf-field tf-field-callback" style="width: 100%;">
-								<div class="tf-fieldset">
-									<div class="tf-license-activate">
-										<p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Activate" /></p>
-									</div>
-								</div>
-							</div>
-							<?php } ?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 		<?php
 		}
 

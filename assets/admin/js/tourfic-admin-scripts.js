@@ -6085,7 +6085,7 @@ const legendSpacingPlugin = {
             tfChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                    labels: tf_options.months,
                     // Information about the dataset
                     datasets: [{
                         label: "Complete Booking",
@@ -6318,6 +6318,7 @@ const legendSpacingPlugin = {
 
             var tour_tab_title = $this.find('.tf-shortcode-tour-tab-title-field ').attr('data-tour-tab-title');
             var hotel_tab_title = $this.find('.tf-shortcode-hotel-tab-title-field ').attr('data-hotel-tab-title');
+            var room_tab_title = $this.find('.tf-shortcode-room-tab-title-field ').attr('data-room-tab-title');
             var apartment_tab_title = $this.find('.tf-shortcode-apartment-tab-title-field ').attr('data-apartment-tab-title');
             var car_tab_title = $this.find('.tf-shortcode-car-tab-title-field ').attr('data-car-tab-title');
 
@@ -6338,6 +6339,9 @@ const legendSpacingPlugin = {
             }
             if (hotel_tab_title != undefined && hotel_tab_title != '' && data.length ) {
                 data = hotel_tab_title + '=' + (data.length ? `"${data}"` : '""');
+            }
+            if (room_tab_title != undefined && room_tab_title != '' && data.length ) {
+                data = room_tab_title + '=' + (data.length ? `"${data}"` : '""');
             }
             if (apartment_tab_title != undefined && apartment_tab_title != '' && data.length ) {
                 data = apartment_tab_title + '=' + (data.length ? `"${data}"` : '""');
@@ -6457,7 +6461,7 @@ const legendSpacingPlugin = {
                     _nonce: tf_admin_params.tf_nonce,
                 },
                 beforeSend: function () {
-                    $('.tf-export-btn').html('Exporting...');
+                    $('.tf-export-btn').html(tf_admin_params.setting_exporting_text);
                     $('.tf-export-btn').attr('disabled', 'disabled');
                 },
                 success: function (response) {
@@ -6483,12 +6487,12 @@ const legendSpacingPlugin = {
                     } else {
                         notyf.error(obj.message);
                     }
-                    $('.tf-export-btn').html('Export');
+                    $('.tf-export-btn').html(tf_admin_params.setting_export_text);
                     $('.tf-export-btn').removeAttr('disabled');
                 },
                 error: function (response) {
                     console.log(response);
-                    $('.tf-export-btn').html('Export');
+                    $('.tf-export-btn').html(tf_admin_params.setting_export_text);
                     $('.tf-export-btn').removeAttr('disabled');
                 }
             });
