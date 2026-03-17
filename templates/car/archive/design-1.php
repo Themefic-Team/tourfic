@@ -63,7 +63,7 @@ $tf_car_search_context = function_exists( 'tf_get_car_archive_search_context' ) 
                             <h4><?php esc_html_e("Filter", "tourfic") ?></h4>
                             <button class="filter-reset-btn"><?php esc_html_e("Reset", "tourfic"); ?></button>
                         </div>
-                        
+
                         <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
                             <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
                         <?php } ?>

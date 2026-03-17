@@ -494,6 +494,31 @@ if ( ! function_exists( 'tf_get_car_archive_search_context' ) ) {
 	}
 }
 
+if ( ! function_exists( 'tf_normalize_car_binary_filter_values' ) ) {
+	/**
+	 * Normalize binary car filter values.
+	 *
+	 * @param mixed $raw_values Filter raw values.
+	 * @return array
+	 */
+	function tf_normalize_car_binary_filter_values( $raw_values ) {
+		if ( '' === $raw_values || null === $raw_values ) {
+			return array();
+		}
+
+		$values = is_array( $raw_values ) ? $raw_values : explode( ',', (string) $raw_values );
+		$normalized_values = array();
+
+		foreach ( $values as $value ) {
+			$value = sanitize_text_field( wp_unslash( (string) $value ) );
+			if ( in_array( $value, array( '0', '1' ), true ) ) {
+				$normalized_values[] = $value;
+			}
+		}
+
+		return array_values( array_unique( $normalized_values ) );
+	}
+}
 
 /**
  * Car Filter 
@@ -501,7 +526,7 @@ if ( ! function_exists( 'tf_get_car_archive_search_context' ) ) {
  * @include
  */
 
-function tf_car_availability_response($car_meta, array &$not_found, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_startprice='', $tf_endprice='', $tf_min_seat='', $tf_max_seat='', $tf_driver_age='', $car_driver_min_age=18, $car_driver_max_age=40) {
+function tf_car_availability_response($car_meta, array &$not_found, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_startprice='', $tf_endprice='', $tf_min_seat='', $tf_max_seat='', $tf_driver_age='', $car_driver_min_age=18, $car_driver_max_age=40, $tf_transmission = '', $tf_carplay_android_auto = '') {
 
 	$car_meta = tf_normalize_car_meta( $car_meta );
 	$has_car = false;
@@ -606,6 +631,22 @@ function tf_car_availability_response($car_meta, array &$not_found, $pickup='', 
 	if ( $has_car && 'on' === $tf_driver_age ) {
 		$driver_age = ! empty( $car_meta['driver_age'] ) ? (int) $car_meta['driver_age'] : 0;
 		if ( ! empty( $driver_age ) && ( $driver_age < (int) $car_driver_min_age || $driver_age > (int) $car_driver_max_age ) ) {
+			$has_car = false;
+		}
+	}
+
+	$selected_transmission = tf_normalize_car_binary_filter_values( $tf_transmission );
+	if ( $has_car && 1 === count( $selected_transmission ) ) {
+		$auto_transmission = isset( $car_meta['auto_transmission'] ) ? (string) absint( $car_meta['auto_transmission'] ) : '0';
+		if ( $selected_transmission[0] !== $auto_transmission ) {
+			$has_car = false;
+		}
+	}
+
+	$selected_carplay_android_auto = tf_normalize_car_binary_filter_values( $tf_carplay_android_auto );
+	if ( $has_car && 1 === count( $selected_carplay_android_auto ) ) {
+		$carplay_android_auto = isset( $car_meta['carplay_android_auto'] ) ? (string) absint( $car_meta['carplay_android_auto'] ) : '0';
+		if ( $selected_carplay_android_auto[0] !== $carplay_android_auto ) {
 			$has_car = false;
 		}
 	}
