@@ -998,15 +998,17 @@ $tf_cars_slug = get_option('car_slug');
 
             function dateSetToFields(selectedDates, instance) {
                 const format = '<?php echo esc_html( $date_format_for_users ); ?>';
-                if (selectedDates.length === 2) {
-                    const startDay = flatpickr.formatDate(selectedDates[0], "l");
-                    const endDay = flatpickr.formatDate(selectedDates[1], "l");
-                    if (selectedDates[0]) {
-                        const startDate = flatpickr.formatDate(selectedDates[0], format);
+                if (selectedDates.length >= 1) {
+                    const startDateObj = selectedDates[0];
+                    const endDateObj = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                    const startDay = flatpickr.formatDate(startDateObj, "l");
+                    const endDay = flatpickr.formatDate(endDateObj, "l");
+                    if (startDateObj) {
+                        const startDate = flatpickr.formatDate(startDateObj, format);
                         $(".tf-single-template__one .tf_pickup_date").val(startDate);
                     }
-                    if (selectedDates[1]) {
-                        const endDate = flatpickr.formatDate(selectedDates[1], format);
+                    if (endDateObj) {
+                        const endDate = flatpickr.formatDate(endDateObj, format);
                         $(".tf-single-template__one .tf_dropoff_date").val(endDate);
                     }
 

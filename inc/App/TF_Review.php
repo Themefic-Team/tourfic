@@ -17,7 +17,7 @@ class TF_Review {
         $this->define_review_constants();
 
         // All Action hooks
-        add_action("admin_init", array($this, "tf_remove_comment_meta_box"));
+        add_action( "admin_init", array($this, "tf_remove_comment_meta_box"));
         add_action( 'wp_enqueue_scripts', array($this, 'tf_review_script'), 99999 );
         add_action( 'comment_post', array( $this, 'tf_save_rating' ), 10, 3 );
         add_action( 'wp_insert_comment', array( $this, 'tf_auto_approve_comments' ) );
@@ -44,7 +44,7 @@ class TF_Review {
 
     function tf_review_script() {
 
-        if ( is_singular( array( 'tf_hotel', 'tf_tours', 'tf_apartment' ) ) ) {
+        if ( is_singular( array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_room' ) ) ) {
     
             /**
              * jquery-validate
@@ -124,7 +124,7 @@ class TF_Review {
 
         $post = get_post( $post_id );
     
-        if ( 'tf_hotel' == $post->post_type || 'tf_tours' == $post->post_type || 'tf_apartment' == $post->post_type ) {
+        if ( 'tf_hotel' == $post->post_type || 'tf_tours' == $post->post_type || 'tf_apartment' == $post->post_type || 'tf_room' == $post->post_type ) {
             $open = true;
         }
     
@@ -243,7 +243,8 @@ class TF_Review {
 		$comment_before    = '';
 		$comment_cancel    = esc_html__( 'Cancel Reply', 'tourfic' );
 		$comment_meta      = self::tf_generate_review_meta_fields( $fields );
-		//Array
+		
+        //Array
 		$comments_args = [
 			//Define Fields
 			'fields'               => [
@@ -287,6 +288,26 @@ class TF_Review {
          * Default fields until user save from option panel
          */
         $default_hotels_field     = [
+            array(
+                'r-field-type' => esc_html__( 'Staff', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Facilities', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Cleanliness', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Comfort', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Value for money', 'tourfic' ),
+            ),
+            array(
+                'r-field-type' => esc_html__( 'Location', 'tourfic' ),
+            ),
+        ];
+        $default_rooms_field     = [
             array(
                 'r-field-type' => esc_html__( 'Staff', 'tourfic' ),
             ),
@@ -368,10 +389,18 @@ class TF_Review {
         $tfopt_apartments = ! empty( Helper::tf_data_types( Helper::tfopt( 'r-apartment' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'r-apartment' ) ) : $default_apartments_field;
         $tfopt_tours      = ! empty( Helper::tf_data_types( Helper::tfopt( 'r-tour' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'r-tour' ) ) : $default_tours_field;
         $tfopt_cars      = ! empty( Helper::tf_data_types( Helper::tfopt( 'r-car' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'r-car' ) ) : $default_cars_field;
+        $tfopt_rooms      = ! empty( Helper::tf_data_types( Helper::tfopt( 'r-room' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'r-room' ) ) : $default_rooms_field;
     
-        $fields = 'tf_tours' === $type ? $tfopt_tours : ( 'tf_apartment' === $type ? $tfopt_apartments : $tfopt_hotels );
-        if('tf_carrental' === $type){
+        if('tf_hotel' === $type){
+            $fields = $tfopt_hotels;
+        } elseif('tf_tours' === $type){
+            $fields = $tfopt_tours;
+        } elseif('tf_apartment' === $type){
+            $fields = $tfopt_apartments;
+        } elseif('tf_carrental' === $type){
             $fields = $tfopt_cars;
+        }if('tf_room' === $type){
+            $fields = $tfopt_rooms;
         }
         if ( ! empty( $fields ) && gettype( $fields ) == "string" ) {
             $tf_hotel_fields_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
@@ -556,6 +585,7 @@ class TF_Review {
             $tf_hotel_arc_selected_template = !empty($design) ? $design : (! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1');
             $tf_apartment_arc_selected_template = !empty($design) ? $design : (! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default');
             $tf_car_arc_selected_template = !empty($design) ? $design : (! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] : 'design-1');
+            $tf_room_arc_selected_template = !empty($design) ? $design : (! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] : 'design-1');
             
             if( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-1" || $tf_tour_arc_selected_template=="design-3") || 
             ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-1" || $tf_hotel_arc_selected_template=="design-3" ) ||
@@ -609,7 +639,7 @@ class TF_Review {
                 </div>
             <?php } elseif( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-2" ) || 
             ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-2" ) || 
-            ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-1" ) ){ ?>
+            ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-1" ) || ( "tf_room"==$tf_current_post && $tf_room_arc_selected_template=="design-1" ) ){ ?>
                 <span class="tf-available-rating-number">
                     <?php echo wp_kses_post( self::tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?>
                 </span>

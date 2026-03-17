@@ -140,6 +140,9 @@ body{
 .tf-flex-align-center{
     align-items: center;
 }
+.tf-flex-align-end{
+    align-items: end;
+}
 .tf-flex-align-baseline{
     align-items: baseline;
 }
@@ -211,7 +214,9 @@ body{
         margin-bottom: 40px;
     }
 }
-
+.sp-0{
+    padding:0;
+}
 .sp-20 {
     padding: 20px 0;
 }

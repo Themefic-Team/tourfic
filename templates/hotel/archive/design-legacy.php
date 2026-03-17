@@ -30,8 +30,8 @@ use \Tourfic\Classes\Hotel\Hotel;
 						<span><?php echo ')'; ?> </span>
 					</div>
 					<div class="tf-list-grid">
-		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
-		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
+		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_attr_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
+		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_attr_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
 						<div class="tf-sorting-selection-warper">
                             <form class="tf-archive-ordering" method="get">
                                 <select class="tf-orderby" name="tf-orderby" id="tf-orderby">

@@ -1,0 +1,98 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-single-hotel-room-options__style-1{
+    padding: 0;
+
+    .tf-room-options{
+        @include flexbox();
+        @include flex-direction(column);
+        gap: 16px;
+
+        .tf-room-option{
+            @include flexbox();
+            @include justify-content(space-between);
+            padding: 24px;
+            gap: 32px;
+            border-radius: 16px;
+            background-color: $color-filling-bg;
+
+            @media #{$max575} {
+                @include flex-direction(column);
+            }
+
+            &-right{
+                @include flexbox();
+                @include flex-direction(column);
+                @include justify-content(space-between);
+                @include align-items(flex-end);
+                @include flex(0 0 200px);
+                text-align: right;
+
+                @media #{$max575} {
+                    @include align-items(flex-start);
+                    @include flex(0 0 100%);
+                    text-align: left;
+
+                    .tf_btn{
+                        width: 100%;
+                    }
+                }
+            }
+
+            h3{
+                color: $color-heading;
+                font-size: 1.563rem;
+                line-height: 1.5;
+                margin: 0 0 32px 0;
+            }
+            ul.tf-room-features{
+                list-style: none;
+                @include flexbox();
+                @include flex-wrap();
+                gap: 12px 32px;
+                padding: 0;
+                margin: 0;
+
+                li{
+                    @include flexbox();
+                    gap: 8px;
+                    color: $color-text;
+                    font-size: 1rem;
+                    line-height: 1.5;
+                    @include flex(0 0 calc(50% - 16px));
+                }
+            }
+
+            .tf-room-off {
+                padding: 6px 16px;
+                background: #C5FBD9;
+                font-size: 0.813rem;
+                font-weight: 600;
+                color: #126832;
+                margin-bottom: 8px;
+                margin-left: auto;
+                width: fit-content;
+                border-radius: 30px;
+
+                @media #{$max575} {
+                    margin-left: 0;
+                }
+            }
+
+            .tf-room-price{
+                color: $color-heading;
+                text-align: right;
+                font-size: 1.12rem;
+                font-weight: 400;
+                line-height: 1.5;
+                margin-bottom: 24px;
+
+                .sale-price .amount{
+                    font-size: 1.25rem;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+}
