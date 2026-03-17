@@ -193,16 +193,16 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			} 
 
 
-			// Workspace submenu
-			add_submenu_page(
-				$this->option_id,
-				wp_kses_post( 'Workspace <span style="border-radius: 6px;background: #FCF1CF;color: #27333F;font-size: 10px;font-weight: 600;line-height: 16px;padding: 0 6px;"> Premium </span>' ),
-				wp_kses_post( 'Workspace <span style="border-radius: 6px;background: #FCF1CF;color: #27333F;font-size: 10px;font-weight: 600;line-height: 16px;padding: 0 6px;"> Premium </span>' ),
-				'manage_options',
-				'tf_workspace',
-				array( $this,'tf_workspace_callback'),
-			);
 			if ( !function_exists('is_tf_pro') ) {
+				// Workspace submenu
+				add_submenu_page(
+					$this->option_id,
+					wp_kses_post( 'Workspace <span style="border-radius: 6px;background: #FCF1CF;color: #27333F;font-size: 10px;font-weight: 600;line-height: 16px;padding: 0 6px;"> Premium </span>' ),
+					wp_kses_post( 'Workspace <span style="border-radius: 6px;background: #FCF1CF;color: #27333F;font-size: 10px;font-weight: 600;line-height: 16px;padding: 0 6px;"> Premium </span>' ),
+					'manage_options',
+					'tf_workspace',
+					array( $this,'tf_workspace_callback'),
+				);
 				add_submenu_page(
 					$this->option_id,
 					esc_html__('Upgrade', 'tourfic'),
