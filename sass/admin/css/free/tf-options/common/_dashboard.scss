@@ -553,17 +553,8 @@
                     gap: 12px;
                     justify-content: space-between;
                     .tf-plugin-image{
-                        border-radius: 16px;
-                        background: #FFF;
-                        box-shadow: 0 0 8px 0 rgba(65, 65, 65, 0.08);
-                        height: 56px;
-                        width: 56px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
                         img {
-                            width: 32px;
-                            height: 32px;
+                            margin-top: 5px;
                         }
                     }
                     .tf-plugin-title{

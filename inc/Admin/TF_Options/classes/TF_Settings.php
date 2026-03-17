@@ -588,28 +588,28 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					'slug'       => 'instantio',
 					'file_name'  => 'instantio',
 					'subtitle'   => 'WooCommerce Quick & Direct Checkout',
-					'image'      => 'https://ps.w.org/instantio/assets/icon-128x128.png',
+					'image'      => 'instantio-logo.png',
 				],
 				[
 					'name'       => 'Hydra',
 					'slug'       => 'hydra-booking',
 					'file_name'  => 'hydra-booking',
 					'subtitle'   => 'All in One Appointment Booking System',
-					'image'      => 'https://ps.w.org/hydra-booking/assets/icon-128x128.jpg',
+					'image'      => 'hydra-logo.png',
 				],
 				[
 					'name'       => 'BEAF',
 					'slug'       => 'beaf-before-and-after-gallery',
 					'file_name'  => 'before-and-after-gallery',
 					'subtitle'   => 'Ultimate Before After Image Slider & Gallery',
-					'image'      => 'https://ps.w.org/beaf-before-and-after-gallery/assets/icon-128x128.png',
+					'image'      => 'beaf-logo.png',
 				],
 				[
 					'name'       => 'UACF7',
 					'slug'       => 'ultimate-addons-for-contact-form-7',
 					'file_name'  => 'ultimate-addons-for-contact-form-7',
 					'subtitle'   => '40+ Essential Addons for Contact Form 7',
-					'image'      => 'https://ps.w.org/ultimate-addons-for-contact-form-7/assets/icon-128x128.png',
+					'image'      => 'uacf7-logo.png',
 				],
 			];
 			?>
@@ -634,7 +634,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<div class="tf-plugin-info-wrapper">
 							<div class="tf-plugin-content">
 								<div class="tf-plugin-image">
-									<img src="<?php echo esc_url($plugin['image']); ?>" alt="<?php echo esc_attr($plugin['name']); ?>" class="<?php echo esc_attr($plugin['name'] == 'BEAF' ? 'beaf-logo' : ''); ?>" width="40" height="40">
+									<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL.'images/'.$plugin['image']); ?>" alt="<?php echo esc_attr($plugin['name']); ?>" class="<?php echo esc_attr($plugin['name'] == 'BEAF' ? 'beaf-logo' : ''); ?>" width="48" height="48">
 								</div>
 								<div class="tf-plugin-title">
 									<h4><?php echo esc_html($plugin['name']); ?>
