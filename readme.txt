@@ -423,9 +423,9 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - New: Apartment booking without payment option
 - New: Dynamic frontend availability for services
 - New: Sidebar details added to Tourfic settings page
-- Improved: Booking flow and pricing consistency across tours, hotels, apartments, and cars
+- Improved: Booking and pricing for tours, hotels, apartments, and cars
 - Improved: Archive filtering, listing accuracy, and widget rendering
-- Improved: System stability, AJAX handling, and admin experience
+- Improved: System stability, AJAX handling, and experience
 - Tweak: Apartment template alignment and popup UI
 - Tweak: Booking step visibility for no-payment mode
 - Tweak: Archive listing structure and featured loop behavior
