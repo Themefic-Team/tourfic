@@ -301,17 +301,192 @@ class Apartment {
 		wp_die();
 	}
 
+	public static function tf_sync_legacy_apartment_feature_terms() {
+		$sync_key = 'tf_apartment_data_sync_v2';
+
+		if ( 1 === absint( get_option( $sync_key, 0 ) ) ) {
+			return;
+		}
+
+		$existing_terms = get_terms(
+			array(
+				'taxonomy'   => 'apartment_feature',
+				'hide_empty' => false,
+				'number'     => 1,
+				'fields'     => 'ids',
+			)
+		);
+
+		if ( is_wp_error( $existing_terms ) ) {
+			return;
+		}
+
+		$should_sync_features = empty( $existing_terms );
+
+		$apartment_ids = get_posts(
+			array(
+				'post_type'      => 'tf_apartment',
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'fields'         => 'ids',
+				'no_found_rows'  => true,
+			)
+		);
+
+		if ( empty( $apartment_ids ) ) {
+			update_option( $sync_key, 1 );
+			return;
+		}
+
+		foreach ( $apartment_ids as $apartment_id ) {
+			self::tf_sync_legacy_apartment_pricing_meta( $apartment_id );
+
+			if ( $should_sync_features ) {
+				$feature_term_ids = self::tf_get_apartment_feature_term_ids( $apartment_id );
+
+				if ( ! empty( $feature_term_ids ) ) {
+					wp_set_object_terms( $apartment_id, $feature_term_ids, 'apartment_feature' );
+				}
+			}
+		}
+
+		update_option( $sync_key, 1 );
+	}
+
+	private static function tf_get_apartment_feature_term_ids( $post_id ) {
+		$feature_term_ids = array();
+		$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
+
+		if ( ! empty( $meta['amenities'] ) ) {
+			$current_amenities = Helper::tf_data_types( $meta['amenities'] );
+
+			if ( is_array( $current_amenities ) ) {
+				foreach ( $current_amenities as $amenity ) {
+					$feature_value = is_array( $amenity ) && isset( $amenity['feature'] ) ? $amenity['feature'] : $amenity;
+					$term_id = self::tf_get_or_create_apartment_feature_term_id( $feature_value );
+
+					if ( $term_id > 0 ) {
+						$feature_term_ids[] = $term_id;
+					}
+				}
+			}
+		}
+
+		if ( empty( $feature_term_ids ) ) {
+			$legacy_meta = get_post_meta( $post_id, 'tf_apartments_opt', true );
+			$legacy_amenities = ! empty( $legacy_meta['amenities'] ) ? maybe_unserialize( $legacy_meta['amenities'] ) : array();
+
+			if ( is_array( $legacy_amenities ) ) {
+				foreach ( $legacy_amenities as $legacy_amenity ) {
+					$term_id = self::tf_get_or_create_apartment_feature_term_id( $legacy_amenity );
+
+					if ( $term_id > 0 ) {
+						$feature_term_ids[] = $term_id;
+					}
+				}
+			}
+		}
+
+		return array_values( array_unique( array_map( 'absint', $feature_term_ids ) ) );
+	}
+
+	private static function tf_sync_legacy_apartment_pricing_meta( $post_id ) {
+		$legacy_meta = get_post_meta( $post_id, 'tf_apartments_opt', true );
+
+		if ( ! is_array( $legacy_meta ) || empty( $legacy_meta ) ) {
+			return;
+		}
+
+		$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
+		$meta = is_array( $meta ) ? $meta : array();
+		$has_changes = false;
+
+		if ( ( ! isset( $meta['pricing_type'] ) || '' === (string) $meta['pricing_type'] ) && isset( $legacy_meta['pricing_by'] ) ) {
+			$meta['pricing_type'] = '1' === (string) $legacy_meta['pricing_by'] ? 'per_night' : 'per_person';
+			$has_changes = true;
+		}
+
+		if ( ( ! isset( $meta['price_per_night'] ) || '' === (string) $meta['price_per_night'] ) && isset( $legacy_meta['per_night_price'] ) ) {
+			$meta['price_per_night'] = $legacy_meta['per_night_price'];
+			$has_changes = true;
+		}
+
+		if ( ( ! isset( $meta['adult_price'] ) || '' === (string) $meta['adult_price'] ) && isset( $legacy_meta['adult_price'] ) ) {
+			$meta['adult_price'] = $legacy_meta['adult_price'];
+			$has_changes = true;
+		}
+
+		if ( ! isset( $meta['apartment_as_featured'] ) && isset( $legacy_meta['apartment_as_featured'] ) ) {
+			$meta['apartment_as_featured'] = $legacy_meta['apartment_as_featured'];
+			$has_changes = true;
+		}
+
+		if ( $has_changes ) {
+			update_post_meta( $post_id, 'tf_apartment_opt', $meta );
+		}
+	}
+
+	private static function tf_get_or_create_apartment_feature_term_id( $feature_value ) {
+		if ( is_array( $feature_value ) ) {
+			if ( isset( $feature_value['feature'] ) ) {
+				$feature_value = $feature_value['feature'];
+			} elseif ( isset( $feature_value['slug'] ) ) {
+				$feature_value = $feature_value['slug'];
+			} elseif ( isset( $feature_value['name'] ) ) {
+				$feature_value = $feature_value['name'];
+			} else {
+				return 0;
+			}
+		}
+
+		if ( is_numeric( $feature_value ) ) {
+			$feature_term_id = absint( $feature_value );
+			$feature_term = get_term_by( 'id', $feature_term_id, 'apartment_feature' );
+
+			return $feature_term ? $feature_term_id : 0;
+		}
+
+		$feature_slug = sanitize_title( (string) $feature_value );
+
+		if ( empty( $feature_slug ) ) {
+			return 0;
+		}
+
+		$existing_term = get_term_by( 'slug', $feature_slug, 'apartment_feature' );
+
+		if ( $existing_term && ! is_wp_error( $existing_term ) ) {
+			return absint( $existing_term->term_id );
+		}
+
+		$feature_name = ucwords( str_replace( array( '-', '_' ), ' ', $feature_slug ) );
+		$term_created = wp_insert_term(
+			$feature_name,
+			'apartment_feature',
+			array(
+				'slug' => $feature_slug,
+			)
+		);
+
+		if ( is_wp_error( $term_created ) ) {
+			if ( 'term_exists' === $term_created->get_error_code() ) {
+				return absint( $term_created->get_error_data( 'term_exists' ) );
+			}
+
+			return 0;
+		}
+
+		return ! empty( $term_created['term_id'] ) ? absint( $term_created['term_id'] ) : 0;
+	}
+
 	function tf_apartment_feature_assign_taxonomies( $post_id, $post, $old_status ) {
 		if ( 'tf_apartment' !== $post->post_type ) {
 			return;
 		}
-		$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
-		if ( isset( $meta['amenities'] ) && ! empty( Helper::tf_data_types( $meta['amenities'] ) ) ) {
-			$apartment_features = array();
-			foreach ( Helper::tf_data_types( $meta['amenities'] ) as $amenity ) {
-				$apartment_features[] = intval( $amenity['feature'] );
-			}
-			wp_set_object_terms( $post_id, $apartment_features, 'apartment_feature' );
+
+		$feature_term_ids = self::tf_get_apartment_feature_term_ids( $post_id );
+
+		if ( ! empty( $feature_term_ids ) ) {
+			wp_set_object_terms( $post_id, $feature_term_ids, 'apartment_feature' );
 		}
 	}
 
@@ -375,6 +550,7 @@ class Apartment {
 
 		$disable_apartment_child_search  = ! empty( Helper::tfopt( 'disable_apartment_child_search' ) ) ? Helper::tfopt( 'disable_apartment_child_search' ) : '';
 		$disable_apartment_infant_search  = ! empty( Helper::tfopt( 'disable_apartment_infant_search' ) ) ? Helper::tfopt( 'disable_apartment_infant_search' ) : '';
+		self::tf_sync_legacy_apartment_feature_terms();
 		if( !empty($design) && 2==$design ){
 		?>
 		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
@@ -1128,19 +1304,19 @@ class Apartment {
                                 <div class="tf-apartment-filter-range"></div>
                             </div>
 
-                            <h3 style="margin-top: 20px"><?php esc_html_e( 'Apartment Features', 'tourfic' ); ?></h3>
-							<?php
-							$tf_apartment_feature = get_terms( array(
-								'taxonomy'     => 'apartment_feature',
-								'orderby'      => 'title',
-								'order'        => 'ASC',
-								'hide_empty'   => true,
-								'hierarchical' => 0,
-							) );
-							if ( $tf_apartment_feature ) : ?>
-                                <div class="tf-apartment-features" style="overflow: hidden">
-									<?php foreach ( $tf_apartment_feature as $term ) : ?>
-                                        <div class="form-group form-check">
+								<?php
+								$tf_apartment_feature = get_terms( array(
+									'taxonomy'     => 'apartment_feature',
+									'orderby'      => 'title',
+									'order'        => 'ASC',
+									'hide_empty'   => true,
+									'hierarchical' => 0,
+								) );
+								if ( ! is_wp_error( $tf_apartment_feature ) && ! empty( $tf_apartment_feature ) ) : ?>
+	                                <h3 style="margin-top: 20px"><?php esc_html_e( 'Apartment Features', 'tourfic' ); ?></h3>
+	                                <div class="tf-apartment-features" style="overflow: hidden">
+										<?php foreach ( $tf_apartment_feature as $term ) : ?>
+	                                        <div class="form-group form-check">
                                             <input type="checkbox" name="features[]" class="form-check-input" value="<?php echo esc_html( $term->slug ); ?>" id="<?php echo esc_html( $term->slug ); ?>">
                                             <label class="form-check-label" for="<?php echo esc_html( $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></label>
                                         </div>
@@ -1148,19 +1324,19 @@ class Apartment {
                                 </div>
 							<?php endif; ?>
 
-                            <h3 style="margin-top: 20px"><?php esc_html_e( 'Apartment Types', 'tourfic' ); ?></h3>
-							<?php
-							$tf_apartment_type = get_terms( array(
-								'taxonomy'     => 'apartment_type',
-								'orderby'      => 'title',
-								'order'        => 'ASC',
-								'hide_empty'   => true,
-								'hierarchical' => 0,
-							) );
-							if ( $tf_apartment_type ) : ?>
-                                <div class="tf-apartment-types" style="overflow: hidden">
-									<?php foreach ( $tf_apartment_type as $term ) : ?>
-                                        <div class="form-group form-check">
+								<?php
+								$tf_apartment_type = get_terms( array(
+									'taxonomy'     => 'apartment_type',
+									'orderby'      => 'title',
+									'order'        => 'ASC',
+									'hide_empty'   => true,
+									'hierarchical' => 0,
+								) );
+								if ( ! is_wp_error( $tf_apartment_type ) && ! empty( $tf_apartment_type ) ) : ?>
+	                                <h3 style="margin-top: 20px"><?php esc_html_e( 'Apartment Types', 'tourfic' ); ?></h3>
+	                                <div class="tf-apartment-types" style="overflow: hidden">
+										<?php foreach ( $tf_apartment_type as $term ) : ?>
+	                                        <div class="form-group form-check">
                                             <input type="checkbox" name="types[]" class="form-check-input" value="<?php echo esc_html( $term->slug ); ?>" id="<?php echo esc_html( $term->slug ); ?>">
                                             <label class="form-check-label" for="<?php echo esc_html( $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></label>
                                         </div>
@@ -1246,18 +1422,27 @@ class Apartment {
 		$booked_dates        = self::tf_apartment_booked_days( get_the_ID() );
 		$apt_reserve_button_text = !empty(Helper::tfopt('apartment_booking_form_button_text')) ? stripslashes(sanitize_text_field(Helper::tfopt('apartment_booking_form_button_text'))) : esc_html__("Reserve", 'tourfic');
 
-		$tf_booking_type = '1';
-		$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = $tf_booking_code = '';
+		$tf_booking_type      = '1';
+		$tf_booking_url       = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = $tf_booking_code = '';
+		$tf_allow_deposit     = $tf_deposit_type = $tf_deposit_amount = '';
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
-			$tf_ext_booking_type = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : 1;
-			$tf_booking_code = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
+			$tf_ext_booking_type  = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : 1;
+			$tf_booking_code      = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
 			$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
 			$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
 			$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 			$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
 			$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
+			$tf_allow_deposit     = ! empty( $meta['allow_deposit'] ) ? $meta['allow_deposit'] : '';
+			$tf_deposit_type      = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : '';
+			$tf_deposit_amount    = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : '';
 		}
+		$tf_show_internal_booking_form = ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3;
+		$tf_has_valid_deposit_type     = in_array( $tf_deposit_type, array( 'percent', 'fixed' ), true );
+		$tf_show_deposit_option        = function_exists( 'is_tf_pro' ) && is_tf_pro() && '1' == $tf_booking_type && '1' == $tf_allow_deposit && ! empty( $tf_deposit_amount ) && $tf_has_valid_deposit_type;
+		$tf_partial_payment_label      = ! empty( Helper::tfopt( 'deposit-title' ) ) ? Helper::tfopt( 'deposit-title' ) : 'Partial payment of {amount} on total';
+		$tf_partial_payment_description = ! empty( Helper::tfopt( 'deposit-subtitle' ) ) ? Helper::tfopt( 'deposit-subtitle' ) : '';
 
 		// date format for apartment
 		$date_format_change_appartments = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
@@ -1338,7 +1523,7 @@ class Apartment {
 		<form id="tf-apartment-booking" class="tf-apartment-side-booking" method="get" autocomplete="off">
             
             <div class="tf-apartment-form-header">
-				<?php if ( $tf_booking_type == 2 && $tf_hide_price !== '1' && ( $tf_ext_booking_type == 2 ) || $tf_booking_type == 1 ): ?>
+				<?php if ( $tf_booking_type == 2 && $tf_hide_price !== '1' && ( $tf_ext_booking_type == 2 ) || $tf_booking_type == 1 || $tf_booking_type == 3 ): ?>
 					<h3 class="tf-apartment-price-per-night">
 						<span class="tf-apartment-base-price">
 						<?php
@@ -1363,7 +1548,7 @@ class Apartment {
 				<?php endif; ?>
             </div>
 
-			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form == '1' || ( $tf_ext_booking_type == 2 && empty( $tf_booking_code ) ) ) || $tf_booking_type == 1 ): ?>
+			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form == '1' || ( $tf_ext_booking_type == 2 && empty( $tf_booking_code ) ) ) || $tf_booking_type == 1 || $tf_booking_type == 3 ): ?>
 				
 				<h3 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h3>
 				<div class="tf-apartment-form-fields">
@@ -1485,9 +1670,10 @@ class Apartment {
 				<?php $ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                 <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
+				<input type="hidden" name="deposit" value="0" class="tf-apartment-deposit-value"/>
 
                 <div class="tf-btn-booking">
-					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
+					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
 							<?php if (!empty($apt_reserve_button_text)) : ?>
 								<button class="tf_btn tf_btn_full tf_btn_large tf-submit" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
 						<?php endif; ?>
@@ -1504,39 +1690,6 @@ class Apartment {
 				<?php endif; ?>
             </div>
 
-            <ul class="tf-apartment-price-list" style="display: none">
-                <li class="total-days-price-wrap" style="display: none">
-                    <span class="total-days tf-price-list-label"></span>
-                    <span class="days-total-price tf-price-list-price"></span>
-                </li>
-
-				<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
-					<?php foreach ( $additional_fees as $key => $additional_fee ) : ?>
-                        <li class="additional-fee-wrap" style="display: none">
-                            <span class="additional-fee-label tf-price-list-label"><?php echo esc_html( $additional_fee['additional_fee_label'] ); ?></span>
-                            <span class="additional-fee-<?php echo esc_attr( $key ) ?> tf-price-list-price"></span>
-                        </li>
-					<?php endforeach; ?>
-				<?php elseif ( ! empty( $additional_fee_label ) && ! empty( $additional_fee ) ): ?>
-                    <li class="additional-fee-wrap" style="display: none">
-                        <span class="additional-fee-label tf-price-list-label"><?php echo esc_html( $additional_fee_label ); ?></span>
-                        <span class="additional-fee tf-price-list-price"></span>
-                    </li>
-				<?php endif; ?>
-
-				<?php if ( ! empty( $discount ) ): ?>
-                    <li class="apartment-discount-wrap" style="display: none">
-                        <span class="apartment-discount-label tf-price-list-label"><?php esc_html_e( 'Discount', 'tourfic' ); ?></span>
-                        <span class="apartment-discount tf-price-list-price"></span>
-                    </li>
-				<?php endif; ?>
-
-                <li class="total-price-wrap" style="display: none">
-                    <span class="total-price-label tf-price-list-label"><?php esc_html_e( 'Total Price', 'tourfic' ); ?></span>
-                    <span class="total-price"></span>
-                </li>
-            </ul>
-
 			<?php wp_nonce_field( 'tf_apartment_booking', 'tf_apartment_nonce' ); ?>
         </form>
 		<?php }else{ ?>
@@ -1546,7 +1699,7 @@ class Apartment {
         <form id="tf-apartment-booking" class="tf-apartment-side-booking tf-apartment-design-one-form" method="get" autocomplete="off">
             <h5><?php echo ! empty( $meta['booking_form_title'] ) ? esc_html( $meta['booking_form_title'] ) : esc_html_e( 'Book your Apartment', 'tourfic' ); ?></h5>
             <div class="tf-apartment-form-header">
-				<?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
+				<?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
                     <h3 class="tf-apartment-price-per-night">
                         <span class="tf-apartment-base-price">
 						<?php
@@ -1583,7 +1736,7 @@ class Apartment {
 				<?php endif; ?>
             </div>
 
-			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
+			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
                 <div class="tf-apartment-form-fields">
                     <div class="tf_booking-dates">
                         <div class="tf-check-in-date">
@@ -1660,9 +1813,10 @@ class Apartment {
 				<?php $ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype); ?>" class="tf-post-type"/>
                 <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
+				<input type="hidden" name="deposit" value="0" class="tf-apartment-deposit-value"/>
 
                 <div class="tf-btn-wrap">
-					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
+					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
                         <?php if (!empty($apt_reserve_button_text)) : ?>
 							<button class="tf_btn tf_btn_full tf_btn_large tf-submit" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
 						<?php endif; ?>
@@ -1680,45 +1834,17 @@ class Apartment {
 
             </div>
 
-            <ul class="tf-apartment-price-list" style="display: none">
-                <li class="total-days-price-wrap" style="display: none">
-                    <span class="total-days tf-price-list-label"></span>
-                    <span class="days-total-price tf-price-list-price"></span>
-                </li>
-
-				<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
-					<?php foreach ( $additional_fees as $key => $additional_fee ) : ?>
-                        <li class="additional-fee-wrap" style="display: none">
-                            <span class="additional-fee-label tf-price-list-label"><?php echo esc_html( $additional_fee['additional_fee_label'] ); ?></span>
-                            <span class="additional-fee-<?php echo esc_attr( $key ) ?> tf-price-list-price"></span>
-                        </li>
-					<?php endforeach; ?>
-				<?php elseif ( ! empty( $additional_fee_label ) && ! empty( $additional_fee ) ): ?>
-                    <li class="additional-fee-wrap" style="display: none">
-                        <span class="additional-fee-label tf-price-list-label"><?php echo esc_html( $additional_fee_label ); ?></span>
-                        <span class="additional-fee tf-price-list-price"></span>
-                    </li>
-				<?php endif; ?>
-
-				<?php if ( ! empty( $discount ) ): ?>
-                    <li class="apartment-discount-wrap" style="display: none">
-                        <span class="apartment-discount-label tf-price-list-label"><?php esc_html_e( 'Discount', 'tourfic' ); ?></span>
-                        <span class="apartment-discount tf-price-list-price"></span>
-                    </li>
-				<?php endif; ?>
-
-                <li class="total-price-wrap" style="display: none">
-                    <span class="total-price-label tf-price-list-label"><?php esc_html_e( 'Total Price', 'tourfic' ); ?></span>
-                    <span class="total-price"></span>
-                </li>
-            </ul>
-
 			<?php wp_nonce_field( 'tf_apartment_booking', 'tf_apartment_nonce' ); ?>
         </form>
 
 		<?php do_action("tf_apartment_after_single_booking_form"); ?>
 
 		<?php } ?>
+		<?php
+		if ( $tf_show_internal_booking_form ) {
+			self::tf_apartment_booking_popup( get_the_ID(), $meta, $tf_show_deposit_option, $tf_deposit_type, $tf_deposit_amount, $tf_partial_payment_label, $tf_partial_payment_description, $tf_booking_type );
+		}
+		?>
         <script>
             (function ($) {
                 $(document).ready(function () {
@@ -1729,165 +1855,6 @@ class Apartment {
                     let minStay = <?php echo esc_js( $min_stay ) ?>;
 
                     const bookingCalculation = (selectedDates) => {
-						<?php if ( ( $pricing_type === 'per_night' && ! empty( $price_per_night ) ) || ( $pricing_type === 'per_person' && ! empty( $adult_price ) ) ): ?>
-                        //calculate total days
-                        if (selectedDates[0] && selectedDates[1]) {
-                            var diff = Math.abs(selectedDates[1] - selectedDates[0]);
-                            var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-                            if (days > 0) {
-                                var pricing_type = '<?php echo esc_js( $pricing_type ); ?>';
-                                var price_per_night = <?php echo esc_js( $price_per_night ); ?>;
-                                var adult_price = <?php echo esc_js( $adult_price ); ?>;
-                                var child_price = <?php echo esc_js( $child_price ); ?>;
-                                var infant_price = <?php echo esc_js( $infant_price ); ?>;
-                                var enable_availability = '<?php echo esc_js( $enable_availability ); ?>';
-                                var apt_availability = '<?php echo wp_kses_post($apt_availability); ?>';
-
-								if(apt_availability) {
-									apt_availability = JSON.parse(apt_availability);
-								}
-
-                                if (enable_availability !== '1') {
-                                    if (pricing_type === 'per_night') {
-                                        var total_price = price_per_night * days;
-                                        var total_days_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
-                                        var wc_price_per_night = '<?php echo wp_kses_post(wc_price( $price_per_night ));	; ?>';
-                                        if (total_price > 0) {
-											$('.tf-apartment-price-list').show();
-                                            $('.total-days-price-wrap').show();
-                                            total_days_price_html = wcFormatPrice(total_price);
-                                        }
-                                        $('.total-days-price-wrap .total-days').html(wc_price_per_night + ' x ' + days + ' <?php esc_html_e( 'nights', 'tourfic' ); ?>');
-                                        $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
-                                    } else {
-                                        let totalPersonPrice = (adult_price * $('#adults').val()) + (child_price * $('#children').val()) + (infant_price * $('#infant').val());
-                                        var total_price = totalPersonPrice * days;
-                                        var total_days_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
-                                        var wc_price_per_person = wcFormatPrice(totalPersonPrice);
-                                        if (total_price > 0) {
-											$('.tf-apartment-price-list').show();
-                                            $('.total-days-price-wrap').show();
-                                            total_days_price_html = wcFormatPrice(total_price);
-                                        }
-                                        $('.total-days-price-wrap .total-days').html(wc_price_per_person + ' x ' + days + ' <?php esc_html_e( 'nights', 'tourfic' ); ?>');
-                                        $('.total-days-price-wrap .days-total-price').html(total_days_price_html);
-                                    }
-                                } else {
-                                    var total_price = 0;
-                                    var total_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
-                                    var checkInDate = new Date(selectedDates[0]);
-                                    var checkOutDate = new Date(selectedDates[1]);
-
-                                    for (var date in apt_availability) {
-                                        let d = new Date(date);
-
-                                        if (d.getTime() >= checkInDate.getTime() && d.getTime() < checkOutDate.getTime()) {
-											var availabilityData = apt_availability[date];
-											var pricing_type = availabilityData.pricing_type;
-											var price = availabilityData.price ? parseFloat(availabilityData.price) : 0;
-											var adultPrice = availabilityData.adult_price ? parseFloat(availabilityData.adult_price) : 0;
-											var childPrice = availabilityData.child_price ? parseFloat(availabilityData.child_price) : 0;
-											var infantPrice = availabilityData.infant_price ? parseFloat(availabilityData.infant_price) : 0;
-
-											if (pricing_type === 'per_night' && price > 0) {
-												total_price += price;
-											} else if (pricing_type === 'per_person') {
-												var totalPersonPrice = (adultPrice * $('#adults').val()) + (childPrice * $('#children').val()) + (infantPrice * $('#infant').val());
-												total_price += totalPersonPrice;
-											}
-                                        }
-                                    }
-
-                                    if (total_price > 0) {
-                                        $('.tf-apartment-price-list').show();
-                                        $('.total-days-price-wrap').show();
-                                        total_price_html = wcFormatPrice(total_price);
-                                    }
-                                    $('.total-days-price-wrap .total-days').html(days + ' <?php esc_html_e( 'nights', 'tourfic' ); ?>');
-                                    $('.total-days-price-wrap .days-total-price').html(total_price_html);
-                                }
-								//discount
-                                var discount = <?php echo esc_html( $discount ); ?>;
-								var discountType = "<?php echo esc_html( $discount_type ); ?>";
-                                var discount_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
-                                if (discount > 0 && discountType != "none") {
-                                    $('.apartment-discount-wrap').show();
-
-									<?php if ( $discount_type == 'percent' ): ?>
-                                    discount_html = wcFormatPrice(total_price * discount / 100);
-                                    total_price = total_price - (total_price * discount / 100);
-									<?php else: ?>
-                                    discount_html = wcFormatPrice(discount);
-                                    total_price = total_price - discount;
-									<?php endif; ?>
-                                }
-                                $('.apartment-discount-wrap .apartment-discount').html('-' + discount_html);
-
-
-                                let totalPerson = parseInt($('.tf_acrselection #adults').val()) + parseInt($('.tf_acrselection #children').val()) + parseInt($('.tf_acrselection #infant').val());
-
-                                //additional fee
-								<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
-								<?php foreach ($additional_fees as $key => $item) : ?>
-                                let additional_fee_<?php echo esc_html( $key ) ?> = <?php echo esc_html( $item['additional_fee'] ); ?>;
-                                let additional_fee_html_<?php echo esc_html( $key ) ?> = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
-                                let totalAdditionalFee_<?php echo esc_html ( $key ) ?> = 0;
-
-								<?php if ( $item['fee_type'] == 'per_night' ): ?>
-                                totalAdditionalFee_<?php echo esc_html( $key ) ?> = additional_fee_<?php echo esc_html( $key ) ?> * days;
-								<?php elseif($item['fee_type'] == 'per_person'): ?>
-                                totalAdditionalFee_<?php echo esc_html( $key ) ?> = additional_fee_<?php echo esc_html( $key ) ?> * totalPerson;
-								<?php else: ?>
-                                totalAdditionalFee_<?php echo esc_html( $key ) ?> = additional_fee_<?php echo esc_html( $key ) ?>;
-								<?php endif; ?>
-
-                                if (totalAdditionalFee_<?php echo esc_html( $key ) ?> > 0 ) {
-                                    $('.additional-fee-wrap').show();
-                                    total_price = total_price + totalAdditionalFee_<?php echo esc_html( $key ) ?>;
-                                    additional_fee_html_<?php echo esc_html( $key ) ?> = wcFormatPrice(totalAdditionalFee_<?php echo esc_html( $key ) ?>);
-                                }
-                                $('.additional-fee-wrap .additional-fee-<?php echo esc_html( $key ) ?>').html(additional_fee_html_<?php echo esc_html( $key ) ?>);
-								<?php endforeach; ?>
-								<?php else: ?>
-								<?php if ( ! empty( $additional_fee ) ): ?>
-                                let additional_fee = <?php echo esc_html( $additional_fee ); ?>;
-                                let additional_fee_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
-                                let totalAdditionalFee = 0;
-
-								<?php if ( $fee_type == 'per_night' ): ?>
-                                totalAdditionalFee = additional_fee * days;
-								<?php elseif($fee_type == 'per_person'): ?>
-                                totalAdditionalFee = additional_fee * totalPerson;
-								<?php else: ?>
-                                totalAdditionalFee = additional_fee;
-								<?php endif; ?>
-
-                                if (totalAdditionalFee > 0) {
-                                    $('.additional-fee-wrap').show();
-                                    total_price = total_price + totalAdditionalFee;
-                                    additional_fee_html = wcFormatPrice(totalAdditionalFee);
-                                }
-                                $('.additional-fee-wrap .additional-fee').html(additional_fee_html);
-								<?php endif; ?>
-								<?php endif; ?>
-                                //end additional fee
-
-                                //total price
-                                var total_price_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
-                                if (total_price > 0) {
-                                    $('.total-price-wrap').show();
-                                    total_price_html = wcFormatPrice(total_price);
-                                }
-                                $('.total-price-wrap .total-price').html(total_price_html);
-                            } else {
-                                $('.tf-apartment-price-list').hide();
-                                $('.total-days-price-wrap').hide();
-                                $('.additional-fee-wrap').hide();
-                                $('.total-price-wrap').hide();
-                            }
-                        }
-						<?php endif; ?>
-
                         //minimum stay
                         if (selectedDates[0] && selectedDates[1] && minStay > 0) {
                             var diff = Math.abs(selectedDates[1] - selectedDates[0]);
@@ -1906,34 +1873,6 @@ class Apartment {
                             }
                         }
                     }
-
-					function wcFormatPrice( price ) {
-
-						var currency_symbol     = "<?php echo esc_js(get_woocommerce_currency_symbol()); ?>",
-							currency_position   = "<?php echo esc_js(get_option( 'woocommerce_currency_pos', true )); ?>",
-							decimal_separator   = "<?php echo esc_js(wc_get_price_decimal_separator()); ?>",
-							thousand_separator  = "<?php echo esc_js(wc_get_price_thousand_separator()); ?>",
-							decimals 			= <?php echo (int) wc_get_price_decimals(); ?>;
-
-						price = parseFloat(price).toFixed(decimals);
-
-						// Thousand & decimal formatting
-						price = price.replace('.', decimal_separator);
-						price = price.replace(/\B(?=(\d{3})+(?!\d))/g, thousand_separator);
-
-						switch ( currency_position ) {
-							case 'left':
-								return currency_symbol + price;
-							case 'right':
-								return price + currency_symbol;
-							case 'left_space':
-								return currency_symbol + ' ' + price;
-							case 'right_space':
-								return price + ' ' + currency_symbol;
-							default:
-								return price;
-						}
-					}
 
                     $(".tf-apartment-design-one-form #check-in-date").on('click', function () {
                         $(".tf-check-out-date .form-control").trigger( "click" );
@@ -2028,6 +1967,240 @@ class Apartment {
 		<?php
 	}
 
+	private static function tf_apartment_booking_popup( $post_id, $meta, $show_deposit_option, $deposit_type, $deposit_amount, $partial_payment_label, $partial_payment_description, $booking_type ) {
+		$tf_deposit_amount = array(
+			'{amount}' => 'fixed' === $deposit_type ? wp_kses_post( wc_price( $deposit_amount ) ) : $deposit_amount . '%',
+		);
+		$is_without_payment_booking  = function_exists( 'is_tf_pro' ) && is_tf_pro() && '3' == $booking_type;
+		$show_popup_deposit_option   = ! $is_without_payment_booking && $show_deposit_option;
+		$show_booking_info_step      = $is_without_payment_booking;
+		$traveler_details_text       = ! empty( Helper::tfopt( 'tour_traveler_details_text' ) ) ? Helper::tfopt( 'tour_traveler_details_text' ) : '';
+		?>
+		<div id="tour_room_details_loader">
+			<div id="tour-room-details-loader-img">
+				<img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/loader.gif" alt="Loader">
+			</div>
+		</div>
+		<div class="tf-withoutpayment-booking-confirm tf-apartment-withoutpayment-booking-confirm">
+			<div class="tf-confirm-popup">
+				<div class="tf-booking-times">
+					<span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="#FCFDFF"/>
+							<path d="M12 11.1111L15.1111 8L16 8.88889L12.8889 12L16 15.1111L15.1111 16L12 12.8889L8.88889 16L8 15.1111L11.1111 12L8 8.88889L8.88889 8L12 11.1111Z" fill="#666D74"/>
+							<rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#FCFDFF"/>
+						</svg>
+					</span>
+				</div>
+				<img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/thank-you.gif" alt="Thank You">
+				<div class="tf-tour-without-payment-booking-confirm-msg-container">
+					<?php
+					$booking_confirmation_msg = ! empty( Helper::tfopt( 'booking-confirmation-msg' ) ) ? Helper::tfopt( 'booking-confirmation-msg' ) : '<h2>Booked Successfully</h2>';
+					echo wp_kses_post( $booking_confirmation_msg );
+					?>
+				</div>
+			</div>
+		</div>
+		<div class="tf-withoutpayment-booking tf-apartment-booking-popup" data-post-id="<?php echo esc_attr( $post_id ); ?>">
+			<div class="tf-withoutpayment-popup">
+				<div class="tf-booking-tabs">
+					<div class="tf-booking-tab-menu">
+							<ul>
+								<?php if ( $show_booking_info_step ) { ?>
+									<li class="tf-booking-step tf-booking-step-1 active">
+										<i class="ri-box-3-line"></i> <?php echo esc_html__( 'Details', 'tourfic' ); ?>
+									</li>
+									<li class="tf-booking-step tf-booking-step-2">
+										<i class="ri-calendar-check-line"></i> <?php echo esc_html__( 'Booking info', 'tourfic' ); ?>
+									</li>
+								<?php } else { ?>
+									<li class="tf-booking-step tf-booking-step-1 active">
+										<i class="ri-box-3-line"></i> <?php echo esc_html__( 'Details', 'tourfic' ); ?>
+									</li>
+								<?php } ?>
+							</ul>
+							<?php $active_steps = $show_booking_info_step ? array( 1, 2 ) : array( 1 ); ?>
+							<input type="hidden" value="<?php echo esc_attr( implode( ',', $active_steps ) ); ?>" class="tf_popup_stpes" />
+						</div>
+					<div class="tf-booking-times">
+						<span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+								<rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="#FCFDFF"/>
+								<path d="M12 11.1111L15.1111 8L16 8.88889L12.8889 12L16 15.1111L15.1111 16L12 12.8889L8.88889 16L8 15.1111L11.1111 12L8 8.88889L8.88889 8L12 11.1111Z" fill="#666D74"/>
+								<rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#FCFDFF"/>
+							</svg>
+						</span>
+					</div>
+				</div>
+				<div class="tf-booking-content-summery">
+					<?php if ( $show_booking_info_step ) { ?>
+						<div class="tf-booking-content tf-booking-content-1 show">
+							<p><?php echo esc_html__( 'Review booking summary and continue to add billing details.', 'tourfic' ); ?></p>
+						</div>
+						<div class="tf-booking-content tf-booking-content-2">
+							<p><?php echo esc_html( $traveler_details_text ); ?></p>
+							<div class="tf-booking-content-traveller">
+								<div class="tf-single-tour-traveller">
+									<h4><?php esc_html_e( 'Billing details', 'tourfic' ); ?></h4>
+									<div class="traveller-info billing-details">
+										<?php
+										$confirm_book_fields = ! empty( Helper::tfopt( 'book-confirm-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'book-confirm-field' ) ) : '';
+										if ( empty( $confirm_book_fields ) ) {
+											?>
+											<div class="traveller-single-info tf-confirm-fields">
+												<label for="tf_first_name"><?php esc_html_e( 'First Name', 'tourfic' ); ?></label>
+												<input type="text" name="booking_confirm[tf_first_name]" id="tf_first_name" data-required="1"/>
+												<div class="error-text" data-error-for="tf_first_name"></div>
+											</div>
+											<div class="traveller-single-info tf-confirm-fields">
+												<label for="tf_last_name"><?php esc_html_e( 'Last Name', 'tourfic' ); ?></label>
+												<input type="text" name="booking_confirm[tf_last_name]" id="tf_last_name" data-required="1"/>
+												<div class="error-text" data-error-for="tf_last_name"></div>
+											</div>
+											<div class="traveller-single-info tf-confirm-fields">
+												<label for="tf_email"><?php esc_html_e( 'Email', 'tourfic' ); ?></label>
+												<input type="email" name="booking_confirm[tf_email]" id="tf_email" data-required="1"/>
+												<div class="error-text" data-error-for="tf_email"></div>
+											</div>
+											<div class="traveller-single-info tf-confirm-fields">
+												<label for="tf_phone"><?php esc_html_e( 'Phone', 'tourfic' ); ?></label>
+												<input type="text" name="booking_confirm[tf_phone]" id="tf_phone" data-required="1"/>
+												<div class="error-text" data-error-for="tf_phone"></div>
+											</div>
+											<div class="traveller-single-info tf-confirm-fields">
+												<label for="tf_country"><?php esc_html_e( 'Country', 'tourfic' ); ?></label>
+												<input type="text" name="booking_confirm[tf_country]" id="tf_country" data-required="1"/>
+												<div class="error-text" data-error-for="tf_country"></div>
+											</div>
+											<div class="traveller-single-info tf-confirm-fields">
+												<label for="tf_street_address"><?php esc_html_e( 'Street address', 'tourfic' ); ?></label>
+												<input type="text" name="booking_confirm[tf_street_address]" id="tf_street_address" data-required="1"/>
+												<div class="error-text" data-error-for="tf_street_address"></div>
+											</div>
+											<div class="traveller-single-info tf-confirm-fields">
+												<label for="tf_town_city"><?php esc_html_e( 'Town / City', 'tourfic' ); ?></label>
+												<input type="text" name="booking_confirm[tf_town_city]" id="tf_town_city" data-required="1"/>
+												<div class="error-text" data-error-for="tf_town_city"></div>
+											</div>
+											<div class="traveller-single-info tf-confirm-fields">
+												<label for="tf_state_country"><?php esc_html_e( 'State / County', 'tourfic' ); ?></label>
+												<input type="text" name="booking_confirm[tf_state_country]" id="tf_state_country" data-required="1"/>
+												<div class="error-text" data-error-for="tf_state_country"></div>
+											</div>
+											<div class="traveller-single-info tf-confirm-fields">
+												<label for="tf_postcode"><?php esc_html_e( 'Postcode / ZIP', 'tourfic' ); ?></label>
+												<input type="text" name="booking_confirm[tf_postcode]" id="tf_postcode" data-required="1"/>
+												<div class="error-text" data-error-for="tf_postcode"></div>
+											</div>
+										<?php } else {
+											foreach ( $confirm_book_fields as $field ) {
+												$reg_field_required = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : 0;
+												if ( "text" == $field['reg-fields-type'] || "number" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) { ?>
+													<div class="traveller-single-info tf-confirm-fields">
+														<label for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"><?php echo esc_html( $field['reg-field-label'] ); ?></label>
+														<input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>]"
+															   id="<?php echo esc_attr( $field['reg-field-name'] ); ?>" data-required="<?php echo esc_attr( $reg_field_required ); ?>" <?php echo $field['reg-fields-type'] == "number" ? 'min="0"' : ''; ?> />
+														<div class="error-text" data-error-for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"></div>
+													</div>
+												<?php }
+												if ( "select" == $field['reg-fields-type'] && ! empty( $field['reg-options'] ) ) { ?>
+													<div class="traveller-single-info tf-confirm-fields">
+														<label for="<?php echo esc_attr( $field['reg-field-name'] ); ?>">
+															<?php echo esc_html( $field['reg-field-label'] ); ?>
+														</label>
+														<select name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>]" id="<?php echo esc_attr( $field['reg-field-name'] ); ?>"
+																data-required="<?php echo esc_attr( $reg_field_required ); ?>">
+															<option value=""><?php esc_html_e( 'Select One', 'tourfic' ); ?></option>
+															<?php
+															foreach ( $field['reg-options'] as $sfield ) {
+																if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) { ?>
+																	<option value="<?php echo esc_attr( $sfield['option-value'] ); ?>"><?php echo esc_html( $sfield['option-label'] ); ?></option>
+																<?php }
+															} ?>
+														</select>
+														<div class="error-text" data-error-for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"></div>
+													</div>
+												<?php }
+												if ( ( "checkbox" == $field['reg-fields-type'] || "radio" == $field['reg-fields-type'] ) && ! empty( $field['reg-options'] ) ) { ?>
+													<div class="traveller-single-info tf-confirm-fields">
+														<label for="<?php echo esc_attr( $field['reg-field-name'] ); ?>">
+															<?php echo esc_html( $field['reg-field-label'] ); ?>
+														</label>
+														<?php
+														foreach ( $field['reg-options'] as $sfield ) {
+															if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) { ?>
+																<div class="tf-single-checkbox">
+																	<input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>][]"
+																		   id="<?php echo esc_attr( $sfield['option-value'] ); ?>" value="<?php echo esc_attr( $sfield['option-value'] ); ?>"
+																		   data-required="<?php echo esc_attr( $reg_field_required ); ?>"/>
+																	<label for="<?php echo esc_attr( $sfield['option-value'] ); ?>">
+																		<?php echo esc_html( $sfield['option-label'] ); ?>
+																	</label>
+																</div>
+															<?php }
+														} ?>
+														<div class="error-text" data-error-for="<?php echo esc_attr( $field['reg-field-name'] ); ?>"></div>
+													</div>
+												<?php }
+											}
+										} ?>
+									</div>
+								</div>
+							</div>
+						</div>
+					<?php } ?>
+					<div class="tf-booking-summery" <?php echo $show_booking_info_step ? '' : 'style="width: 100%;"'; ?>>
+						<div class="tf-booking-fixed-summery">
+							<h5><?php echo esc_html__( 'Booking Summary', 'tourfic' ); ?></h5>
+							<h4><?php echo esc_html( get_the_title( $post_id ) ); ?></h4>
+						</div>
+						<div class="tf-booking-traveller-info tf-apartment-popup-summary"></div>
+					</div>
+				</div>
+				<div class="tf-booking-pagination">
+					<?php if ( ! empty( $meta['is_taxable'] ) ) { ?>
+						<div class="tf-tax-notice">
+							<span>"<?php esc_html_e( 'Taxes will be calculated during checkout', 'tourfic' ); ?>"</span>
+						</div>
+					<?php } ?>
+					<?php if ( $show_popup_deposit_option ) { ?>
+						<div class="tf-diposit-switcher tf-apartment-popup-deposit-wrap">
+							<label class="switch">
+								<input type="checkbox" name="tf_apartment_popup_deposit" value="1" class="diposit-status-switcher tf-apartment-popup-deposit-switch">
+								<span class="switcher round"></span>
+							</label>
+							<div class="tooltip-box">
+								<?php if ( ! empty( $partial_payment_label ) ) { ?>
+									<h4><?php echo wp_kses_post( str_replace( array_keys( $tf_deposit_amount ), array_values( $tf_deposit_amount ), $partial_payment_label ) ); ?></h4>
+								<?php } ?>
+								<?php if ( ! empty( $partial_payment_description ) ) { ?>
+									<div class="tf-info-btn">
+										<i class="fa fa-circle-exclamation tooltip-title-box" style="padding-left: 5px; padding-top: 5px" title=""></i>
+										<div class="tf-tooltip"><?php echo wp_kses_post( $partial_payment_description ); ?></div>
+									</div>
+								<?php } ?>
+							</div>
+						</div>
+					<?php } ?>
+					<?php if ( $show_booking_info_step ) { ?>
+						<div class="tf-control-pagination tf-pagination-content-1 show">
+							<a href="#" class="tf-next-control tf-tabs-control tf_btn" data-step="1"><?php echo esc_html__( 'Continue', 'tourfic' ); ?></a>
+						</div>
+						<div class="tf-control-pagination tf-pagination-content-2">
+							<a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo esc_html__( 'Back', 'tourfic' ); ?></a>
+							<button type="button" class="tf-book-confirm-error tf_btn tf-apartment-popup-continue"><?php echo esc_html__( 'Continue', 'tourfic' ); ?></button>
+						</div>
+					<?php } else { ?>
+						<div class="tf-control-pagination show">
+							<button type="button" class="tf_btn tf-apartment-popup-continue"><?php echo esc_html__( 'Continue', 'tourfic' ); ?></button>
+						</div>
+					<?php } ?>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+
 	public static function tf_apartment_archive_single_item( array $data = [ 1, 0, 0, '' ], $settings = [] ): void {
 
 		$post_id  = get_the_ID();
@@ -2042,9 +2215,7 @@ class Apartment {
 
 		// Get apartment meta options
 		$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
-		if ( empty( $meta ) ) {
-			return;
-		}
+		$meta = is_array( $meta ) ? $meta : array();
 
 		// Location
 		$map = ! empty( $meta['map'] ) ? $meta['map'] : '';
@@ -2599,9 +2770,9 @@ class Apartment {
 					$avail_searching_date[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
 				}
 
-				//skip apartment if min stay is grater than selected days
-				if ( ! empty( $meta['min_stay'] ) && intval( $meta['min_stay'] ) <= $days && $meta['min_stay'] != 0 ) {
-					if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
+				// Skip only when configured min/max limits are violated; empty values mean no limit.
+				if ( empty( $meta['min_stay'] ) || 0 === intval( $meta['min_stay'] ) || intval( $meta['min_stay'] ) <= $days ) {
+					if ( empty( $meta['max_adults'] ) || 0 === intval( $meta['max_adults'] ) || intval( $meta['max_adults'] ) >= intval( $adults ) ) {
 						if ( ! empty( $child ) && ! empty( $meta['max_children'] ) ) {
 							if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
 
@@ -3519,7 +3690,7 @@ class Apartment {
 						}
 					}
 				}else{
-					if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
+					if ( empty( $meta['max_adults'] ) || 0 === intval( $meta['max_adults'] ) || intval( $meta['max_adults'] ) >= intval( $adults ) ) {
 						if ( ! empty( $child ) && ! empty( $meta['max_children'] ) ) {
 							if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
 
@@ -4441,6 +4612,17 @@ class Apartment {
 			}
 		}
 
+		if ( $has_apartment && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$range_start = (float) $startprice;
+			$range_end   = (float) $endprice;
+			$min_price   = Pricing::instance( get_the_ID() )->get_min_price( $period );
+			$card_price  = ! empty( $min_price['min_sale_price'] ) ? (float) $min_price['min_sale_price'] : ( ! empty( $min_price['min_regular_price'] ) ? (float) $min_price['min_regular_price'] : 0 );
+
+			if ( $card_price <= 0 || $card_price < $range_start || $card_price > $range_end ) {
+				$has_apartment = false;
+			}
+		}
+
 		// Conditional apartment showing
 		if ( $has_apartment ) {
 			$not_found[] = array(
@@ -4467,79 +4649,67 @@ class Apartment {
 
 		// Get apartment meta options
 		$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+		$meta = is_array( $meta ) ? $meta : array();
 
-		// Set initial status
-		$has_apartment = false;
+		$max_adults   = ! empty( $meta['max_adults'] ) ? intval( $meta['max_adults'] ) : 0;
+		$max_children = ! empty( $meta['max_children'] ) ? intval( $meta['max_children'] ) : 0;
+		$max_infants  = ! empty( $meta['max_infants'] ) ? intval( $meta['max_infants'] ) : 0;
 
-		if ( ! empty( $meta['max_adults'] ) && $meta['max_adults'] >= $adults && $meta['max_adults'] != 0 ) {
-			if ( ! empty( $child ) && ! empty( $meta['max_children'] ) ) {
-				if ( ! empty( $meta['max_children'] ) && $meta['max_children'] >= $child && $meta['max_children'] != 0 ) {
+		$has_apartment = true;
 
-					if ( ! empty( $infant ) && ! empty( $meta['max_infants'] ) ) {
-						if ( ! empty( $meta['max_infants'] ) && $meta['max_infants'] >= $infant && $meta['max_infants'] != 0 ) {
-							if ( ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-								if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
-									$has_apartment = true;
-								}
-							} else {
-								$has_apartment = true;
-							}
-						}
-					} else {
-						if ( !empty($meta['pricing_type']) && $meta['pricing_type']== 'per_night' && ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-							if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
-								$has_apartment = true;
-							}
-						} else {
+		// Empty guest limits mean "no limit" and should not exclude apartments.
+		if ( 0 !== $max_adults && intval( $adults ) > $max_adults ) {
+			$has_apartment = false;
+		}
+
+		if ( $has_apartment && ! empty( $child ) && 0 !== $max_children && intval( $child ) > $max_children ) {
+			$has_apartment = false;
+		}
+
+		if ( $has_apartment && ! empty( $infant ) && 0 !== $max_infants && intval( $infant ) > $max_infants ) {
+			$has_apartment = false;
+		}
+
+		if ( $has_apartment && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$startprice_value = floatval( $startprice );
+			$endprice_value   = floatval( $endprice );
+			$pricing_type     = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
+
+			$has_apartment = false;
+
+			if ( 'per_person' === $pricing_type ) {
+				$price_keys = array( 'adult_price', 'child_price', 'infant_price' );
+
+				foreach ( $price_keys as $price_key ) {
+					if ( isset( $meta[ $price_key ] ) && '' !== (string) $meta[ $price_key ] ) {
+						$price = floatval( $meta[ $price_key ] );
+
+						if ( $startprice_value <= $price && $price <= $endprice_value ) {
 							$has_apartment = true;
-						}
-						if ( !empty($meta['pricing_type']) && $meta['pricing_type']== 'per_person' && ! empty( $meta['adult_price'] ) && $startprice <= $meta['adult_price'] && $meta['adult_price'] <= $endprice ) {
-							$has_apartment = true;
-						} else {
-							$has_apartment = true;
-						}
-		
-						if ( !empty($meta['pricing_type']) && $meta['pricing_type']== 'per_person' && ! empty( $meta['child_price'] ) && $startprice <= $meta['child_price'] && $meta['child_price'] <= $endprice ) {
-							$has_apartment = true;
-						} else {
-							$has_apartment = true;
-						}
-		
-						if ( !empty($meta['pricing_type']) && $meta['pricing_type']== 'per_person' && ! empty( $meta['infant_price'] ) && $startprice <= $meta['infant_price'] && $meta['infant_price'] <= $endprice ) {
-							$has_apartment = true;
-						} else {
-							$has_apartment = true;
+							break;
 						}
 					}
 				}
 			} else {
-				if ( !empty($meta['pricing_type']) && $meta['pricing_type']== 'per_night' && ! empty( $meta['price_per_night'] ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-					if ( $startprice <= $meta['price_per_night'] && $meta['price_per_night'] <= $endprice ) {
-						$has_apartment = true;
-					}
-				} else {
-					$has_apartment = true;
-				}
-				if ( !empty($meta['pricing_type']) && $meta['pricing_type']== 'per_person' && ! empty( $meta['adult_price'] ) && $startprice <= $meta['adult_price'] && $meta['adult_price'] <= $endprice ) {
-					$has_apartment = true;
-				} else {
-					$has_apartment = true;
-				}
+				$price = isset( $meta['price_per_night'] ) ? floatval( $meta['price_per_night'] ) : 0;
 
-				if ( !empty($meta['pricing_type']) && $meta['pricing_type']== 'per_person' && ! empty( $meta['child_price'] ) && $startprice <= $meta['child_price'] && $meta['child_price'] <= $endprice ) {
-					$has_apartment = true;
-				} else {
-					$has_apartment = true;
-				}
-
-				if ( !empty($meta['pricing_type']) && $meta['pricing_type']== 'per_person' && ! empty( $meta['infant_price'] ) && $startprice <= $meta['infant_price'] && $meta['infant_price'] <= $endprice ) {
-					$has_apartment = true;
-				} else {
+				if ( $price > 0 && $startprice_value <= $price && $price <= $endprice_value ) {
 					$has_apartment = true;
 				}
 			}
 		}
 
+
+		if ( $has_apartment && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$range_start = (float) $startprice;
+			$range_end   = (float) $endprice;
+			$min_price   = Pricing::instance( get_the_ID() )->get_min_price( $period );
+			$card_price  = ! empty( $min_price['min_sale_price'] ) ? (float) $min_price['min_sale_price'] : ( ! empty( $min_price['min_regular_price'] ) ? (float) $min_price['min_regular_price'] : 0 );
+
+			if ( $card_price <= 0 || $card_price < $range_start || $card_price > $range_end ) {
+				$has_apartment = false;
+			}
+		}
 
 		// Conditional apartment showing
 		if ( $has_apartment ) {
@@ -4647,21 +4817,21 @@ class Apartment {
 
 	static function template( $type = 'archive', $post_id = '' ) {
 		$apartment_template = '';
-		$post_id        = ! empty( $post_id ) ? $post_id : '';
+		$post_id            = ! empty( $post_id ) ? $post_id : '';
 
 		if ( $type == 'archive' ) {
-			$apartment_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] : 'design-1';
+			$apartment_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] : 'default';
 		} elseif ( $type == 'single' && $post_id ) {
-			$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+			$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
 
 			$layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
 			if ( "single" == $layout_conditions ) {
-				$single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'design-1';
+				$single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'default';
 			}
-			$global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'design-1';
-			$apartment_template  = ! empty( $single_template ) ? $single_template : $global_template;
+			$global_template    = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'default';
+			$apartment_template = ! empty( $single_template ) ? $single_template : $global_template;
 		} elseif ( $type == 'single' ) {
-			$apartment_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'design-1';
+			$apartment_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'default';
 		}
 
 		return $apartment_template;

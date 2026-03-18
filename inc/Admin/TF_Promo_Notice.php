@@ -114,6 +114,27 @@ class TF_Promo_Notice {
        
     }
 
+    private function tf_promo_nonce_action() {
+        return 'tf_promo_notice_nonce';
+    }
+
+    private function tf_validate_promo_admin_ajax_request() {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_send_json_error(
+                array( 'message' => esc_html__( 'Unauthorized request.', 'tourfic' ) ),
+                403
+            );
+        }
+
+        $nonce = isset( $_REQUEST['nonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ) : '';
+        if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, $this->tf_promo_nonce_action() ) ) {
+            wp_send_json_error(
+                array( 'message' => esc_html__( 'Invalid security token.', 'tourfic' ) ),
+                403
+            );
+        }
+    }
+
 
     public function register_dashboard_notice_widget() {
 
@@ -330,10 +351,12 @@ class TF_Promo_Notice {
 
 
     public function tf_dashboard_widget_dismiss() {
+        $this->tf_validate_promo_admin_ajax_request();
+
         // Dismiss control - 7 days
-		update_option('ins_dashboard_widget_dismissed', time() + (86400 * 7));
-		wp_die();
-	}
+        update_option('ins_dashboard_widget_dismissed', time() + (86400 * 7));
+        wp_die();
+    }
 
     public function tf_get_api_response(){
         $query_params = array(
@@ -429,17 +452,19 @@ class TF_Promo_Notice {
                 <a href="<?php echo esc_attr( $deal_link ); ?>" style="display: block; line-height: 0;" target="_blank" >
                     <img  style="width: 100%;" src="<?php echo esc_attr($image_url) ?>" alt="">
                 </a> 
-                <?php if( isset($dashboard_banner['dismiss_status']) && $dashboard_banner['dismiss_status'] == true): ?>
-                <button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text"><?php echo esc_html__('Dismiss this notice.', 'tourfic' ) ?></span></button>
-                <?php  endif; ?>
-            </div>
-            <script>
-                jQuery(document).ready(function($) {
-                    $(document).on('click', '.tf_black_friday_notice_dismiss', function( event ) {
-                        jQuery('.tf_black_friday_20222_admin_notice').css('display', 'none')
-                        data = {
-                            action : 'tf_promo_dashboard_admin_notice_dismiss_callback',
-                        };
+	            <?php if( isset($dashboard_banner['dismiss_status']) && $dashboard_banner['dismiss_status'] == true): ?>
+	                <button type="button" class="notice-dismiss tf_black_friday_notice_dismiss"><span class="screen-reader-text"><?php echo esc_html__('Dismiss this notice.', 'tourfic' ) ?></span></button>
+	                <?php  endif; ?>
+	            </div>
+	            <script>
+					const tfPromoNoticeNonce = '<?php echo esc_js( wp_create_nonce( $this->tf_promo_nonce_action() ) ); ?>';
+	                jQuery(document).ready(function($) {
+	                    $(document).on('click', '.tf_black_friday_notice_dismiss', function( event ) {
+	                        jQuery('.tf_black_friday_20222_admin_notice').css('display', 'none')
+	                        data = {
+	                            action : 'tf_promo_dashboard_admin_notice_dismiss_callback',
+								nonce : tfPromoNoticeNonce,
+	                        };
 
                         $.ajax({
                             url: ajaxurl,
@@ -461,6 +486,7 @@ class TF_Promo_Notice {
 
 
     public function tf_promo_dashboard_admin_notice_dismiss_callback() {  
+        $this->tf_validate_promo_admin_ajax_request();
 
         $tf_promo_option = get_option( 'tf_promo__schudle_option' );
         $restart = isset($tf_promo_option['dashboard_banner']['restart']) && $tf_promo_option['dashboard_banner']['restart'] != false ? $tf_promo_option['dashboard_banner']['restart'] : false; 
@@ -549,14 +575,16 @@ class TF_Promo_Notice {
                 <button type="button" class="notice-dismiss tf_promo_notice_dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
             <?php  endif; ?>
           
-			<script>
-                jQuery(document).ready(function($) {
-                    $(document).on('click', '.tf_promo_notice_dismiss', function( event ) {  
-                        jQuery('.tf_promo_notice_side_preview').css('display', 'none');
-                        data = {
-                            action : 'tf_promo_notice_custom_post_meta_callback',
-                            post_type : 'tf_hotel',
-                        };
+				<script>
+					const tfPromoSideNoticeNonce = '<?php echo esc_js( wp_create_nonce( $this->tf_promo_nonce_action() ) ); ?>';
+	                jQuery(document).ready(function($) {
+	                    $(document).on('click', '.tf_promo_notice_dismiss', function( event ) {  
+	                        jQuery('.tf_promo_notice_side_preview').css('display', 'none');
+	                        data = {
+	                            action : 'tf_promo_notice_custom_post_meta_callback',
+	                            post_type : 'tf_hotel',
+								nonce : tfPromoSideNoticeNonce,
+	                        };
 
                         $.ajax({
                             url: ajaxurl,
@@ -611,14 +639,16 @@ class TF_Promo_Notice {
             <?php  endif; ?>
         </div>
 
-		<script>
-		jQuery(document).ready(function($) {
-			$(document).on('click', '.tf_promo_notice_dismiss', function( event ) { 
-				jQuery('.tf_promo_notice_side_preview').css('display', 'none')
-                data = {
-                    action : 'tf_promo_notice_custom_post_meta_callback',
-                    post_type : 'tf_tour',
-                };
+			<script>
+			const tfPromoSideNoticeNonce = '<?php echo esc_js( wp_create_nonce( $this->tf_promo_nonce_action() ) ); ?>';
+			jQuery(document).ready(function($) {
+				$(document).on('click', '.tf_promo_notice_dismiss', function( event ) { 
+					jQuery('.tf_promo_notice_side_preview').css('display', 'none')
+	                data = {
+	                    action : 'tf_promo_notice_custom_post_meta_callback',
+	                    post_type : 'tf_tour',
+						nonce : tfPromoSideNoticeNonce,
+	                };
 
                 $.ajax({
                     url: ajaxurl,
@@ -670,14 +700,16 @@ class TF_Promo_Notice {
             <?php  endif; ?>
         </div>
 
-		<script>
-		jQuery(document).ready(function($) {
-			$(document).on('click', '.tf_promo_notice_dismiss', function( event ) { 
-				jQuery('.tf_promo_notice_side_preview').css('display', 'none');
-                data = {
-                    action : 'tf_promo_notice_custom_post_meta_callback',
-                    post_type : 'tf_apartment',
-                };
+			<script>
+			const tfPromoSideNoticeNonce = '<?php echo esc_js( wp_create_nonce( $this->tf_promo_nonce_action() ) ); ?>';
+			jQuery(document).ready(function($) {
+				$(document).on('click', '.tf_promo_notice_dismiss', function( event ) { 
+					jQuery('.tf_promo_notice_side_preview').css('display', 'none');
+	                data = {
+	                    action : 'tf_promo_notice_custom_post_meta_callback',
+	                    post_type : 'tf_apartment',
+						nonce : tfPromoSideNoticeNonce,
+	                };
 
                 $.ajax({
                     url: ajaxurl,
@@ -729,14 +761,16 @@ class TF_Promo_Notice {
             <?php  endif; ?>
         </div>
 
-		<script>
-		jQuery(document).ready(function($) {
-			$(document).on('click', '.tf_promo_notice_dismiss', function( event ) { 
-				jQuery('.tf_promo_notice_side_preview').css('display', 'none');
-                data = {
-                    action : 'tf_promo_notice_custom_post_meta_callback',
-                    post_type : 'tf_room',
-                };
+			<script>
+			const tfPromoSideNoticeNonce = '<?php echo esc_js( wp_create_nonce( $this->tf_promo_nonce_action() ) ); ?>';
+			jQuery(document).ready(function($) {
+				$(document).on('click', '.tf_promo_notice_dismiss', function( event ) { 
+					jQuery('.tf_promo_notice_side_preview').css('display', 'none');
+	                data = {
+	                    action : 'tf_promo_notice_custom_post_meta_callback',
+	                    post_type : 'tf_room',
+						nonce : tfPromoSideNoticeNonce,
+	                };
 
                 $.ajax({
                     url: ajaxurl,
@@ -754,25 +788,27 @@ class TF_Promo_Notice {
 	}
 
     public  function tf_promo_notice_custom_post_meta_callback() {   
+        $this->tf_validate_promo_admin_ajax_request();
          
         $tf_promo_option = get_option( 'tf_promo__schudle_option' );
-        $start_date = isset($tf_promo_option['start_date']) ? strtotime($tf_promo_option['start_date']) : time();
         $restart = isset($tf_promo_option['side_restart']) && $tf_promo_option['side_restart'] != false ? $tf_promo_option['side_restart'] : 5;
-        if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == 'tf_hotel'){ 
-            update_option( 'tf_hotel_promo_sidebar_notice', time() + (86400 * $restart) );  
+
+        $post_type = isset( $_REQUEST['post_type'] ) ? sanitize_key( wp_unslash( $_REQUEST['post_type'] ) ) : '';
+
+        if ( 'tf_hotel' === $post_type ) {
+            update_option( 'tf_hotel_promo_sidebar_notice', time() + ( 86400 * $restart ) );
         }
 
-        if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == 'tf_tour'){ 
-            update_option( 'tf_tour_promo_sidebar_notice', time() + (86400 * $restart) );  
-        }
-        
-
-        if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == 'tf_apartment'){ 
-            update_option( 'tf_apartment_promo_sidebar_notice', time() + (86400 * $restart) );  
+        if ( 'tf_tour' === $post_type ) {
+            update_option( 'tf_tour_promo_sidebar_notice', time() + ( 86400 * $restart ) );
         }
 
-        if(isset($_REQUEST['post_type']) && $_REQUEST['post_type'] == 'tf_room'){ 
-            update_option( 'tf_room_promo_sidebar_notice', time() + (86400 * $restart) );  
+        if ( 'tf_apartment' === $post_type ) {
+            update_option( 'tf_apartment_promo_sidebar_notice', time() + ( 86400 * $restart ) );
+        }
+
+        if ( 'tf_room' === $post_type ) {
+            update_option( 'tf_room_promo_sidebar_notice', time() + ( 86400 * $restart ) );
         }
         
         wp_die();

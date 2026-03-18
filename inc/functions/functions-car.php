@@ -28,6 +28,69 @@ if ( Helper::tf_is_woo_active() ) {
 
 add_action( 'wp_ajax_nopriv_tf_extra_add_to_booking', 'tf_extra_add_to_booking_callback' );
 add_action( 'wp_ajax_tf_extra_add_to_booking', 'tf_extra_add_to_booking_callback' );
+
+if ( ! function_exists( 'tf_normalize_car_meta' ) ) {
+	/**
+	 * Normalize car meta between legacy and modern key variants.
+	 *
+	 * @param array $meta Raw car meta.
+	 * @return array
+	 */
+	function tf_normalize_car_meta( $meta ) {
+		if ( ! is_array( $meta ) ) {
+			return array();
+		}
+
+		if ( empty( $meta['passengers'] ) && isset( $meta['passenger'] ) ) {
+			$meta['passengers'] = $meta['passenger'];
+		}
+
+		if ( empty( $meta['baggage'] ) && isset( $meta['bags'] ) ) {
+			$meta['baggage'] = $meta['bags'];
+		}
+
+		if ( empty( $meta['car_rent'] ) && isset( $meta['regular_price'] ) ) {
+			$meta['car_rent'] = $meta['regular_price'];
+		}
+
+		if ( empty( $meta['map'] ) && ! empty( $meta['location'] ) && is_array( $meta['location'] ) ) {
+			$meta['map'] = $meta['location'];
+		}
+
+		if ( empty( $meta['price_by'] ) ) {
+			$pricing_by = isset( $meta['pricing_by'] ) ? strtolower( (string) $meta['pricing_by'] ) : '';
+			if ( in_array( $pricing_by, array( '2', 'hour' ), true ) ) {
+				$meta['price_by'] = 'hour';
+			} else {
+				$meta['price_by'] = 'day';
+			}
+		}
+
+		if ( ! isset( $meta['auto_transmission'] ) || '' === (string) $meta['auto_transmission'] ) {
+			$transmission = isset( $meta['transmission'] ) ? strtolower( (string) $meta['transmission'] ) : '';
+			if ( in_array( $transmission, array( 'auto', 'automatic' ), true ) ) {
+				$meta['auto_transmission'] = '1';
+			} elseif ( in_array( $transmission, array( 'manual' ), true ) ) {
+				$meta['auto_transmission'] = '0';
+			}
+		}
+
+		if ( empty( $meta['booking-by'] ) && isset( $meta['enable_inline_booking'] ) ) {
+			$meta['booking-by'] = ! empty( $meta['enable_inline_booking'] ) ? '1' : '2';
+		}
+
+		if ( empty( $meta['badge'] ) && ! empty( $meta['featured_text'] ) ) {
+			$meta['badge'] = array(
+				array(
+					'title' => $meta['featured_text'],
+				),
+			);
+		}
+
+		return $meta;
+	}
+}
+
 function tf_extra_add_to_booking_callback() {
 // Check nonce security
 if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
@@ -37,6 +100,7 @@ $response = [];
 $post_id = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
 // Get meta safely
 $meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
+$meta = tf_normalize_car_meta( $meta );
 
 $car_extra = !empty($meta['extras']) ? $meta['extras'] : '';
 // Extra key from POST
@@ -118,6 +182,7 @@ wp_die();
 function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = '', $dropoff_date = '', $pickup_time = '', $dropoff_time = '', $settings = []){
 	$post_id = get_the_ID();
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
+	$meta = tf_normalize_car_meta( $meta );
 	// Single link
 	$url = get_the_permalink();
 	$url = add_query_arg( array(
@@ -387,6 +452,40 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 <?php
 }
 
+if ( ! function_exists( 'tf_get_car_archive_search_context' ) ) {
+	/**
+	 * Build archive search context for car card rendering.
+	 *
+	 * Keeps initial template render aligned with AJAX filter context.
+	 *
+	 * @return array
+	 */
+	function tf_get_car_archive_search_context() {
+		$default_time_str = '10:00';
+		$disable_car_time_slot = ! empty( Helper::tfopt( 'disable-car-time-slots' ) ) ? (bool) Helper::tfopt( 'disable-car-time-slots' ) : false;
+
+		if ( $disable_car_time_slot ) {
+			$start_time_str = ! empty( Helper::tfopt( 'car_start_time' ) ) ? Helper::tfopt( 'car_start_time' ) : '00:00';
+			if ( strtotime( $start_time_str ) >= strtotime( '10:00' ) ) {
+				$default_time_str = $start_time_str;
+			}
+		}
+
+		$default_time = gmdate( 'g:i A', strtotime( $default_time_str ) );
+		$pickup_date  = ! empty( $_GET['pickup-date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash( $_GET['pickup-date'] ) ) ) : gmdate( 'Y/m/d', strtotime( '+1 day' ) );
+		$dropoff_date = ! empty( $_GET['dropoff-date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash( $_GET['dropoff-date'] ) ) ) : gmdate( 'Y/m/d', strtotime( '+2 day' ) );
+
+		return array(
+			'pickup'       => ! empty( $_GET['pickup'] ) ? sanitize_text_field( wp_unslash( $_GET['pickup'] ) ) : '',
+			'dropoff'      => ! empty( $_GET['dropoff'] ) ? sanitize_text_field( wp_unslash( $_GET['dropoff'] ) ) : '',
+			'pickup_date'  => $pickup_date,
+			'dropoff_date' => $dropoff_date,
+			'pickup_time'  => ! empty( $_GET['pickup-time'] ) ? sanitize_text_field( wp_unslash( $_GET['pickup-time'] ) ) : $default_time,
+			'dropoff_time' => ! empty( $_GET['dropoff-time'] ) ? sanitize_text_field( wp_unslash( $_GET['dropoff-time'] ) ) : $default_time,
+		);
+	}
+}
+
 
 /**
  * Car Filter 
@@ -394,8 +493,9 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
  * @include
  */
 
-function tf_car_availability_response($car_meta, array &$not_found, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_startprice='', $tf_endprice='') {
+function tf_car_availability_response($car_meta, array &$not_found, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_startprice='', $tf_endprice='', $tf_min_seat='', $tf_max_seat='', $tf_driver_age='', $car_driver_min_age=18, $car_driver_max_age=40) {
 
+	$car_meta = tf_normalize_car_meta( $car_meta );
 	$has_car = false;
 	$pricing_type = !empty($car_meta["pricing_type"]) ? $car_meta["pricing_type"] : 'day_hour';
 	$price_by = !empty($car_meta["price_by"]) ? $car_meta["price_by"] : 'day';
@@ -442,9 +542,41 @@ function tf_car_availability_response($car_meta, array &$not_found, $pickup='', 
 
 		if ( ! empty( $tf_startprice ) && ! empty( $tf_endprice ) ) {
 
-			if($tf_startprice <= $entry['price'] && $entry['price'] <= $tf_endprice){
+			$matched_price = (float) $base_price;
+			if ( is_array( $day_pricing ) ) {
+				$pickup_time = ! empty( $tf_pickup_time ) ? $tf_pickup_time : '00:00';
+				$dropoff_time = ! empty( $tf_dropoff_time ) ? $tf_dropoff_time : '00:00';
+				$pickup_datetime = new \DateTime( "$tf_pickup_date $pickup_time" );
+				$dropoff_datetime = new \DateTime( "$tf_dropoff_date $dropoff_time" );
+				$interval = $pickup_datetime->diff( $dropoff_datetime );
+				$total_hours = ( $interval->days * 24 ) + $interval->h + ( $interval->i / 60 );
+
+				foreach ( $day_pricing as $entry ) {
+					$entry_price = ! empty( $entry['price'] ) ? (float) $entry['price'] : 0;
+					$entry_type  = ! empty( $entry['type'] ) ? $entry['type'] : 'day';
+					$from_day    = isset( $entry['from_day'] ) ? (float) $entry['from_day'] : 0;
+					$to_day      = isset( $entry['to_day'] ) ? (float) $entry['to_day'] : 0;
+
+					if ( 'day' === $entry_type ) {
+						$total_days = $interval->days;
+						if ( $interval->h > 0 || $interval->i > 0 ) {
+							$total_days += 1;
+						}
+						$duration_value = $total_days;
+					} else {
+						$duration_value = $total_hours;
+					}
+
+					if ( $from_day <= $duration_value && $duration_value <= $to_day ) {
+						$matched_price = $entry_price;
+						break;
+					}
+				}
+			}
+
+			if ( $tf_startprice <= $matched_price && $matched_price <= $tf_endprice ) {
 				$has_car = true;
-			}else{
+			} else {
 				$has_car = false;
 			}
 
@@ -454,6 +586,20 @@ function tf_car_availability_response($car_meta, array &$not_found, $pickup='', 
 
 	}else{
 		$has_car = true;
+	}
+
+	if ( $has_car && ! empty( $tf_min_seat ) && ! empty( $tf_max_seat ) ) {
+		$passengers = ! empty( $car_meta['passengers'] ) ? (int) $car_meta['passengers'] : 0;
+		if ( ! empty( $passengers ) && ( $passengers < (int) $tf_min_seat || $passengers > (int) $tf_max_seat ) ) {
+			$has_car = false;
+		}
+	}
+
+	if ( $has_car && 'on' === $tf_driver_age ) {
+		$driver_age = ! empty( $car_meta['driver_age'] ) ? (int) $car_meta['driver_age'] : 0;
+		if ( ! empty( $driver_age ) && ( $driver_age < (int) $car_driver_min_age || $driver_age > (int) $car_driver_max_age ) ) {
+			$has_car = false;
+		}
 	}
 
 	// Conditional hotel showing
@@ -498,6 +644,7 @@ if ( ! function_exists( 'get_cars_min_max_price' ) ) {
 			while ( $tf_car_min_max_query->have_posts() ) : $tf_car_min_max_query->the_post();
 
 				$meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
+				$meta = tf_normalize_car_meta( $meta );
 				
 				if ( ! empty( $meta['passengers'] ) ) {
 					$tf_car_min_max_seat[] = $meta['passengers'];
