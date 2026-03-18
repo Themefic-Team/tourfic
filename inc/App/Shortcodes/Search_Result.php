@@ -50,6 +50,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		// Price Range
 		$startprice = isset( $_GET['from'] ) ? absint( sanitize_text_field( $_GET['from'] ) ) : '';
 		$endprice   = isset( $_GET['to'] ) ? absint( sanitize_text_field( $_GET['to'] ) ) : '';
+		$tf_min_seat = isset( $_GET['min_seat'] ) ? absint( sanitize_text_field( $_GET['min_seat'] ) ) : '';
+		$tf_max_seat = isset( $_GET['max_seat'] ) ? absint( sanitize_text_field( $_GET['max_seat'] ) ) : '';
+		$tf_driver_age = isset( $_GET['driver_age'] ) ? sanitize_text_field( wp_unslash( $_GET['driver_age'] ) ) : '';
 
 		// Cars Data Start
 		$pickup   = isset( $_GET['pickup'] ) ? sanitize_text_field( $_GET['pickup'] ) : '';
@@ -190,32 +193,8 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 			);
 		}
 
-		if(!empty($startprice) && !empty($endprice) && $post_type == 'tf_carrental'){
-			$args['meta_query'] = array(
-				array(
-					'key' => 'tf_search_car_rent',
-					'value'    => [$startprice, $endprice],
-					'compare'    => 'BETWEEN',
-					'type' => 'DECIMAL(10,3)'
-				),
-			);
-		}
 		$car_driver_min_age = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] : 18;
         $car_driver_max_age = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] : 40;
-		if(!empty($_GET['driver_age']) && 'on'==$_GET['driver_age'] && $post_type == 'tf_carrental'){
-			$args['meta_query'] = array(
-				array(
-					'key' => 'tf_search_driver_age',
-					'value'    => [$car_driver_min_age, $car_driver_max_age],
-					'compare'    => 'BETWEEN',
-					'type' => 'DECIMAL(10,3)'
-				),
-			);
-		}
-
-		if (!empty($args['meta_query']) && count($args['meta_query']) > 1) {
-			$args['meta_query']['relation'] = 'AND';
-		}
 		// Car Data Filter End
 
 		$loop        = new \WP_Query( $args );
@@ -388,13 +367,13 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 											if ( ! empty( $data ) ) {
 												if ( isset( $data[4] ) && isset( $data[5] ) ) {
 													[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
-													if( $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
+													if( Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
 												} else {
 													[ $adults, $child, $room, $check_in_out ] = $data;
-													if( $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
+													if( Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
 												}
 											} else {
-												if( $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item();
+												if( Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item();
 											}
 
 										} elseif ( $post_type == 'tf_tours' ) {
@@ -425,6 +404,8 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 									}
 									// Other Posts
+									$result_query->rewind_posts();
+
 									while ( $result_query->have_posts() ) {
 										$result_query->the_post();
 
@@ -433,13 +414,13 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 											if ( ! empty( $data ) ) {
 												if ( isset( $data[4] ) && isset( $data[5] ) ) {
 													[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
-													if( ! $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
+													if( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
 												} else {
 													[ $adults, $child, $room, $check_in_out ] = $data;
-													if( ! $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
+													if( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
 												}
 											} else {
-												if( ! $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item();
+												if( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item();
 											}
 
 										} elseif ( $post_type == 'tf_tours' ) {
@@ -622,13 +603,13 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										if ( ! empty( $data ) ) {
 											if ( isset( $data[4] ) && isset( $data[5] ) ) {
 												[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
-												if( $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
+												if( Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
 											} else {
 												[ $adults, $child, $room, $check_in_out ] = $data;
-												if( $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
+												if( Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
 											}
 										} else {
-											if( $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item();
+											if( Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item();
 										}
 
 									} elseif ( $post_type == 'tf_tours' ) {
@@ -659,6 +640,8 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 								}
 								// Other Posts
+								$result_query->rewind_posts();
+
 								while ( $result_query->have_posts() ) {
 									$result_query->the_post();
 
@@ -667,13 +650,13 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										if ( ! empty( $data ) ) {
 											if ( isset( $data[4] ) && isset( $data[5] ) ) {
 												[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
-												if( ! $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
+												if( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
 											} else {
 												[ $adults, $child, $room, $check_in_out ] = $data;
-												if( ! $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
+												if( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
 											}
 										} else {
-											if( ! $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item();
+											if( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item();
 										}
 
 									} elseif ( $post_type == 'tf_tours' ) {
@@ -783,7 +766,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 									$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
 									$car_inventory = Availability::tf_car_inventory(get_the_ID(), $car_meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 									if($car_inventory){
-										tf_car_availability_response($car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $startprice, $endprice);
+										tf_car_availability_response( $car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $startprice, $endprice, $tf_min_seat, $tf_max_seat, $tf_driver_age, $car_driver_min_age, $car_driver_max_age );
 									}
 								}
 							}
@@ -814,30 +797,33 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 									'post__in'       => $displayed_results,
 								);
 
-								$result_query  = new \WP_Query( $filter_args );
-								$result_query2 = $result_query;
-								if ( $result_query->have_posts() ) {
-									while ( $result_query->have_posts() ) {
-										$result_query->the_post();
+									$result_query  = new \WP_Query( $filter_args );
+									if ( $result_query->have_posts() ) {
+										while ( $result_query->have_posts() ) {
+											$result_query->the_post();
 
-										if ( $post_type == 'tf_carrental' ) {
-											$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
-											if ( $car_meta["car_as_featured"] ) {
-												tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+											if ( $post_type == 'tf_carrental' ) {
+												$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
+												$is_car_featured = is_array( $car_meta ) && ! empty( $car_meta['car_as_featured'] );
+												if ( $is_car_featured ) {
+													tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+												}
 											}
+
 										}
 
-									}
+										$result_query->rewind_posts();
 
-									while ( $result_query2->have_posts() ) {
-										$result_query2->the_post();
+										while ( $result_query->have_posts() ) {
+											$result_query->the_post();
 
-										if ( $post_type == 'tf_carrental' ) {
-											$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
-											if ( ! $car_meta["car_as_featured"] ) {
-												tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+											if ( $post_type == 'tf_carrental' ) {
+												$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
+												$is_car_featured = is_array( $car_meta ) && ! empty( $car_meta['car_as_featured'] );
+												if ( ! $is_car_featured ) {
+													tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+												}
 											}
-										}
 
 									}
 								}
@@ -1144,12 +1130,12 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 								if ( $post_type == 'tf_hotel' ) {
 									$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
-									if ( ! $hotel_meta["featured"] ) {
+									if ( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 										continue;
 									}
 
 									$count ++;
-									$map  = ! empty( $hotel_meta['map'] ) ? Helper::tf_data_types( $hotel_meta['map'] ) : '';
+									$map  = Hotel::get_hotel_map_data( $hotel_meta );
 
 									$min_price_arr = hotelPricing::instance(get_the_ID())->get_min_price();
 									$min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
@@ -1393,16 +1379,18 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 							}
 							// Other Posts
+							$result_query->rewind_posts();
+
 							while ( $result_query->have_posts() ) {
 								$result_query->the_post();
 
 								if ( $post_type == 'tf_hotel' ) {
 									$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
-									if ( $hotel_meta["featured"] ) {
+									if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 										continue;
 									}
 									$count ++;
-									$map  = ! empty( $hotel_meta['map'] ) ? Helper::tf_data_types( $hotel_meta['map'] ) : '';
+									$map  = Hotel::get_hotel_map_data( $hotel_meta );
 
 									$min_price_arr = hotelPricing::instance(get_the_ID())->get_min_price();
 									$min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
@@ -1773,13 +1761,13 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										if ( ! empty( $data ) ) {
 											if ( isset( $data[4] ) && isset( $data[5] ) ) {
 												[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
-												if( $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
+												if( Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
 											} else {
 												[ $adults, $child, $room, $check_in_out ] = $data;
-												if( $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
+												if( Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
 											}
 										} else {
-											if( $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item();
+											if( Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item();
 										}
 
 									} elseif ( $post_type == 'tf_tours' ) {
@@ -1810,6 +1798,8 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 								}
 								// Other Posts
+								$result_query->rewind_posts();
+
 								while ( $result_query->have_posts() ) {
 									$result_query->the_post();
 
@@ -1818,13 +1808,13 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 										if ( ! empty( $data ) ) {
 											if ( isset( $data[4] ) && isset( $data[5] ) ) {
 												[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
-												if( ! $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
+												if( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
 											} else {
 												[ $adults, $child, $room, $check_in_out ] = $data;
-												if( ! $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
+												if( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out );
 											}
 										} else {
-											if( ! $hotel_meta["featured"] ) Hotel::tf_hotel_archive_single_item();
+											if( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) Hotel::tf_hotel_archive_single_item();
 										}
 
 									} elseif ( $post_type == 'tf_tours' ) {
