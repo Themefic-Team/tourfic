@@ -193,6 +193,9 @@
         //documentation link open in new tab
         $('.tf-go-docs').parent().attr('target', '_blank');
 
+        //pricing link open in new tab
+        $('#toplevel_page_tf_settings a[href*="tourfic.com/pricing"]').attr('target', '_blank');
+
         /*
         * Author @Jahid
         * Tour Booking Status

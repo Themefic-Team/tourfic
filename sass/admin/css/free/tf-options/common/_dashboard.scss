@@ -487,6 +487,10 @@
                             &:hover{
                                 box-shadow: 0 16px 8px 0 rgba(8, 20, 33, 0.04), 0 8px 16px 0 rgba(8, 20, 33, 0.08), 0 24px 20px 0 rgba(8, 20, 33, 0.08);
                             }
+                            &:focus{
+                                outline: none;
+                                box-shadow: none;
+                            }
                         }
                         p{
                             color: #27333F;

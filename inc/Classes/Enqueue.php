@@ -39,7 +39,7 @@ class Enqueue {
 		add_action( 'admin_head', function () {
 
 			$css = '
-			#adminmenu #toplevel_page_tf_settings a[href*="https://tourfic.com/go/upgrade"]{
+			#adminmenu #toplevel_page_tf_settings a[href*="https://tourfic.com/pricing"]{
 				border-radius: 6px;
 				background: radial-gradient(104% 50% at 50.21% 100%, #FFD24C 0%, rgba(220, 166, 4, 0.20) 100%), linear-gradient(180deg, #D7A613 0%, #FFC71F 100%);
 				box-shadow: 0 -4px 4px 0 rgba(236, 187, 39, 0.60) inset, 0 2px 4px 0 rgba(161, 121, 1, 0.40);

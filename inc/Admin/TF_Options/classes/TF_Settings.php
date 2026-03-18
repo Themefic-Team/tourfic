@@ -195,20 +195,20 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			if ( !function_exists('is_tf_pro') ) {
 				// Workspace submenu
-				add_submenu_page(
-					$this->option_id,
-					wp_kses_post( 'Workspace <span style="border-radius: 6px;background: #FCF1CF;color: #27333F;font-size: 10px;font-weight: 600;line-height: 16px;padding: 0 6px;"> Premium </span>' ),
-					wp_kses_post( 'Workspace <span style="border-radius: 6px;background: #FCF1CF;color: #27333F;font-size: 10px;font-weight: 600;line-height: 16px;padding: 0 6px;"> Premium </span>' ),
-					'manage_options',
-					'tf_workspace',
-					array( $this,'tf_workspace_callback'),
-				);
+				// add_submenu_page(
+				// 	$this->option_id,
+				// 	wp_kses_post( 'Workspace <span style="border-radius: 6px;background: #FCF1CF;color: #27333F;font-size: 10px;font-weight: 600;line-height: 16px;padding: 0 6px;"> Premium </span>' ),
+				// 	wp_kses_post( 'Workspace <span style="border-radius: 6px;background: #FCF1CF;color: #27333F;font-size: 10px;font-weight: 600;line-height: 16px;padding: 0 6px;"> Premium </span>' ),
+				// 	'manage_options',
+				// 	'tf_workspace',
+				// 	array( $this,'tf_workspace_callback'),
+				// );
 				add_submenu_page(
 					$this->option_id,
 					esc_html__('Upgrade', 'tourfic'),
 					esc_html__('Upgrade', 'tourfic'),
 					'manage_options',
-					esc_url('https://tourfic.com/go/upgrade')
+					esc_url('https://tourfic.com/pricing')
 				);
 			}
 			// remove first submenu
@@ -472,7 +472,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						</ul>
 					</div>
 					<div class="premium-box-button">
-						<a href="<?php echo esc_url( 'https://tourfic.com/' ) ?>" target="_blank">
+						<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://tourfic.com/pricing/', array( 'utm_medium' => 'sidebar_tourfic_premium' ) ) ) ?>" target="_blank">
 							<?php echo esc_html__('Buy Now', 'tourfic');  ?>
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M18 8L22 12L18 16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

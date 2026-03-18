@@ -2297,6 +2297,10 @@ Steps
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-button a:hover {
   box-shadow: 0 16px 8px 0 rgba(8, 20, 33, 0.04), 0 8px 16px 0 rgba(8, 20, 33, 0.08), 0 24px 20px 0 rgba(8, 20, 33, 0.08);
 }
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-button a:focus {
+  outline: none;
+  box-shadow: none;
+}
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-button p {
   color: #27333F;
   text-align: center;
