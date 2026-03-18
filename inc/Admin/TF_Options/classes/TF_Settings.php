@@ -449,7 +449,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
-								<?php echo esc_html__('Ical Synchronisation', 'tourfic'); ?>
+								<?php echo esc_html__('iCal Synchronization', 'tourfic'); ?>
 							</li>
 							<li>
 								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
