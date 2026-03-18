@@ -197,19 +197,27 @@ class Helper {
 		}
 	}
 
-    static function is_all_unavailable($tour_availability) {
-        if (empty($tour_availability) || !is_object($tour_availability)) {
-            return false;
-        }
-    
-        foreach ($tour_availability as $availability) {
-            if (!isset($availability->status) || $availability->status !== 'unavailable') {
-                return false;
-            }
-        }
-    
-        return true;
-    }
+	static function is_all_unavailable( $tour_availability ) {
+		if ( empty( $tour_availability ) || ! is_iterable( $tour_availability ) ) {
+			return false;
+		}
+
+		foreach ( $tour_availability as $availability ) {
+			$status = '';
+
+			if ( is_array( $availability ) && isset( $availability['status'] ) ) {
+				$status = $availability['status'];
+			} elseif ( is_object( $availability ) && isset( $availability->status ) ) {
+				$status = $availability->status;
+			}
+
+			if ( 'unavailable' !== $status ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
     
 
     static function tf_hotel_extras_title_price( $post_id, $adult, $child, $key ) {

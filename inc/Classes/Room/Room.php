@@ -32,14 +32,67 @@ class Room {
 
 		$hotel_rooms = array();
 		foreach ( $rooms as $room ) {
-			$room_meta = get_post_meta( $room->ID, 'tf_room_opt', true );
-			if ( ! empty( $room_meta['tf_hotel'] ) && $room_meta['tf_hotel'] == $hotel_id ) {
+			$room_meta = self::get_normalized_room_meta( $room->ID, true );
+			if ( ! empty( $room_meta['tf_hotel'] ) && intval( $room_meta['tf_hotel'] ) === intval( $hotel_id ) ) {
 				$hotel_rooms[] = $room;
 			}
 		}
 
 		return $hotel_rooms;
 
+	}
+
+	static function get_normalized_room_meta( $room_id, $sync_legacy = false ) {
+		$room_meta = get_post_meta( $room_id, 'tf_room_opt', true );
+		$room_meta = is_array( $room_meta ) ? $room_meta : array();
+		$has_changes = false;
+
+		$parent_hotel_id = absint( get_post_meta( $room_id, '_tf_room_parent_hotel', true ) );
+
+		if ( empty( $room_meta['tf_hotel'] ) && $parent_hotel_id > 0 ) {
+			$room_meta['tf_hotel'] = $parent_hotel_id;
+			$has_changes           = true;
+		}
+
+		$pricing_by = '';
+		if ( isset( $room_meta['pricing-by'] ) && '' !== (string) $room_meta['pricing-by'] ) {
+			$pricing_by = (string) $room_meta['pricing-by'];
+		} elseif ( isset( $room_meta['pricing_by'] ) && '' !== (string) $room_meta['pricing_by'] ) {
+			$pricing_by            = (string) $room_meta['pricing_by'];
+			$room_meta['pricing-by'] = $pricing_by;
+			$has_changes           = true;
+		}
+
+		if ( '1' === $pricing_by && empty( $room_meta['price'] ) && ( ! empty( $room_meta['adult_price'] ) || ! empty( $room_meta['child_price'] ) ) ) {
+			$room_meta['pricing-by'] = '2';
+			$has_changes             = true;
+		}
+
+		if ( ! isset( $room_meta['avil_by_date'] ) && isset( $room_meta['avail_by_date'] ) ) {
+			$room_meta['avil_by_date'] = $room_meta['avail_by_date'];
+			$has_changes               = true;
+		}
+
+		if ( ! isset( $room_meta['adult'] ) && isset( $room_meta['max_adult'] ) ) {
+			$room_meta['adult'] = $room_meta['max_adult'];
+			$has_changes        = true;
+		}
+
+		if ( ! isset( $room_meta['child'] ) && isset( $room_meta['max_child'] ) ) {
+			$room_meta['child'] = $room_meta['max_child'];
+			$has_changes        = true;
+		}
+
+		if ( ! isset( $room_meta['num-room'] ) && isset( $room_meta['room_number'] ) ) {
+			$room_meta['num-room'] = $room_meta['room_number'];
+			$has_changes           = true;
+		}
+
+		if ( $sync_legacy && $has_changes ) {
+			update_post_meta( $room_id, 'tf_room_opt', $room_meta );
+		}
+
+		return $room_meta;
 	}
 
 	static function get_hotel_id_for_assigned_room( $room_id ) {
@@ -58,10 +111,13 @@ class Room {
 				}
 			}
 		}
+
+		$room_meta = self::get_normalized_room_meta( $room_id, false );
+		return ! empty( $room_meta['tf_hotel'] ) ? intval( $room_meta['tf_hotel'] ) : 0;
 	}
 
 	static function get_hotel_id_by_room_id( $room_id ) {
-		$meta = get_post_meta( $room_id, 'tf_room_opt', true );
+		$meta = self::get_normalized_room_meta( $room_id, false );
 		return ! empty( $meta['tf_hotel'] ) ? $meta['tf_hotel'] : '';
 	}
 
@@ -829,6 +885,17 @@ class Room {
 
 		}
 
+		if ( $has_room && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$range_start = (float) $startprice;
+			$range_end   = (float) $endprice;
+			$min_price   = Pricing::instance( get_the_ID() )->get_min_price( $period );
+			$card_price  = ! empty( $min_price['min_sale_price'] ) ? (float) $min_price['min_sale_price'] : ( ! empty( $min_price['min_regular_price'] ) ? (float) $min_price['min_regular_price'] : 0 );
+
+			if ( $card_price <= 0 || $card_price < $range_start || $card_price > $range_end ) {
+				$has_room = false;
+			}
+		}
+
 		// Conditional hotel showing
 		if ( $has_room ) {
 
@@ -983,6 +1050,17 @@ class Room {
 				}
 			} else {
 				$has_room = true; // Show that hotel
+			}
+		}
+
+		if ( $has_room && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$range_start = (float) $startprice;
+			$range_end   = (float) $endprice;
+			$min_price   = Pricing::instance( get_the_ID() )->get_min_price( $period );
+			$card_price  = ! empty( $min_price['min_sale_price'] ) ? (float) $min_price['min_sale_price'] : ( ! empty( $min_price['min_regular_price'] ) ? (float) $min_price['min_regular_price'] : 0 );
+
+			if ( $card_price <= 0 || $card_price < $range_start || $card_price > $range_end ) {
+				$has_room = false;
 			}
 		}
 

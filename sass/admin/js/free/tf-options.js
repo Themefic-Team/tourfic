@@ -1674,12 +1674,12 @@
                     } else {
                         if(event.extendedProps.options_count != 0) {
                             for (var i = 0; i <= event.extendedProps.options_count - 1; i++) {
-                                $("[name='tf_option_min_person_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_min_person_" + i]);
-                                $("[name='tf_option_max_person_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_max_person_" + i]);
-                                $("[name='tf_option_group_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_group_price_" + i]);
-                                $("[name='tf_option_adult_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_adult_price_" + i]);
-                                $("[name='tf_option_child_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_child_price_" + i]);
-                                $("[name='tf_option_infant_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_infant_price_" + i]);
+                                $("[name='tf_option_min_person_" + i + "']", self.tourCalData).val(event.extendedProps["tf_option_min_person_" + i]);
+                                $("[name='tf_option_max_person_" + i + "']", self.tourCalData).val(event.extendedProps["tf_option_max_person_" + i]);
+                                $("[name='tf_option_group_price_" + i + "']", self.tourCalData).val(event.extendedProps["tf_option_group_price_" + i]);
+                                $("[name='tf_option_adult_price_" + i + "']", self.tourCalData).val(event.extendedProps["tf_option_adult_price_" + i]);
+                                $("[name='tf_option_child_price_" + i + "']", self.tourCalData).val(event.extendedProps["tf_option_child_price_" + i]);
+                                $("[name='tf_option_infant_price_" + i + "']", self.tourCalData).val(event.extendedProps["tf_option_infant_price_" + i]);
 
                                 const discountData = event.extendedProps["tf_option_group_discount_" + i];
                                 let allGroupDiscountRepeaterHTML = '';
@@ -1801,7 +1801,7 @@
                 self.container = jQuery(container);
                 self.calendar = container.querySelector('.tf-tour-cal');
                 self.tourCalData = $('.tf-tour-cal-field', self.container);
-                setTourCheckInOut('', '', self.tourCalData);
+                setTourCurrentAvailabilityState(self.tourCalData);
                 self.initCalendar();
             }
             this.initCalendar = function () {
@@ -1815,6 +1815,72 @@
         function setTourCheckInOut(check_in, check_out, tourCalData) {
             $('.tf_tour_check_in', tourCalData).val(check_in);
             $('.tf_tour_check_out', tourCalData).val(check_out);
+        }
+
+        function getTourAvailabilityEntry(tourCalData) {
+            const tourWrap = $(tourCalData).closest('.tf-tour-cal-wrap');
+            const availabilityRaw = tourWrap.find('.tour_availability').val();
+            if (!availabilityRaw) {
+                return null;
+            }
+
+            let availabilityData;
+            try {
+                availabilityData = JSON.parse(availabilityRaw);
+            } catch (error) {
+                return null;
+            }
+
+            if (!availabilityData || typeof availabilityData !== 'object') {
+                return null;
+            }
+
+            const getTimestamp = (dateString) => {
+                const parsed = Date.parse(String(dateString || '').replace(/\//g, '-'));
+                return Number.isNaN(parsed) ? 0 : parsed;
+            };
+
+            const entries = Object.values(availabilityData).filter((item) => {
+                return item && item.check_in && item.check_out;
+            }).sort((a, b) => {
+                const aStart = getTimestamp(a.check_in);
+                const aEnd = getTimestamp(a.check_out);
+                const bStart = getTimestamp(b.check_in);
+                const bEnd = getTimestamp(b.check_out);
+                const aDuration = Math.max(aEnd - aStart, 0);
+                const bDuration = Math.max(bEnd - bStart, 0);
+
+                if (bDuration !== aDuration) {
+                    return bDuration - aDuration;
+                }
+
+                if (aStart !== bStart) {
+                    return aStart - bStart;
+                }
+
+                return bEnd - aEnd;
+            });
+
+            if (!entries.length) {
+                return null;
+            }
+
+            return entries[0];
+        }
+
+        function setTourCurrentAvailabilityState(tourCalData) {
+            const selectedEntry = getTourAvailabilityEntry(tourCalData);
+
+            if (!selectedEntry) {
+                setTourCheckInOut('', '', tourCalData);
+                return;
+            }
+
+            setTourCheckInOut(selectedEntry.check_in, selectedEntry.check_out, tourCalData);
+
+            if (selectedEntry.status) {
+                $("[name='tf_tour_status']", tourCalData).val(selectedEntry.status);
+            }
         }
 
         function tourResetForm(tourCalData) {

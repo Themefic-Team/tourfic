@@ -56,8 +56,10 @@ class Car_Fueltype_Filter extends \WP_Widget {
             $taxonomy = array(
                 'hide_empty' => $hide_empty,
                 'taxonomy'   => 'carrental_fuel_type',
-                'include'    => $terms,
             );
+            if ( ! empty( $terms ) && 'all' !== $terms ) {
+                $taxonomy['include'] = is_array( $terms ) ? $terms : array_map( 'absint', explode( ',', $terms ) );
+            }
 
             $get_terms = get_terms( $taxonomy );
 
