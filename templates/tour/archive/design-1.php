@@ -4,7 +4,6 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 use Tourfic\Classes\Tour\Components\Archive\Listings;
-use Tourfic\Classes\Tour\Tour;
 ?>
 
 <div class="tf-archive-page tf-archive-design-1 tf-archive-template__one">

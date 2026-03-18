@@ -27,15 +27,12 @@ class Listings {
 		}
 
         $post_count = $query->post_count;
-
-        // if($builder == 'elementor'){
         $show_total_result = Helper::get_switcher_value( $settings, 'show_total_result', 'yes', $builder );
         $show_sorting = Helper::get_switcher_value( $settings, 'show_sorting', 'yes', $builder );
         $show_sidebar = Helper::get_switcher_value( $settings, 'show_sidebar', 'yes', $builder );
         $show_pagination = Helper::get_switcher_value( $settings, 'show_pagination', 'yes', $builder );
 		$pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
 		$pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
-        // }
         ?>
         <div class="tf-archive-room-details">
             <?php echo empty($builder) ? '<div class="tf-container">' : ''; ?>

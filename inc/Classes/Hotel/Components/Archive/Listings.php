@@ -201,7 +201,6 @@ class Listings {
         $pagination_prev_label  = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
         $pagination_next_label  = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
         ?>
-
         <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
             <div class="tf-archive-available-rooms-head tf-available-rooms-head">
                 <?php if ( 'yes' == $show_total_result ) : ?>
@@ -336,7 +335,7 @@ class Listings {
         $pagination_prev_label  = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
         $pagination_next_label  = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
 
-        $hotels_name = esc_html__( 'Hotels', 'tourfic' );
+        $hotels_name = apply_filters( 'tf_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
 
         if ( $query->have_posts() ) : ?>
             <div class="tf-archive-details-wrap">
@@ -707,8 +706,6 @@ class Listings {
         $pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
         $pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
         ?>
-
-        <!-- Start Content -->
         <div class="tf-search-left">
             <div class="tf-action-top">
                 <?php if ( 'yes' == $show_total_result ) : ?>
