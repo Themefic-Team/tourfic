@@ -35,9 +35,10 @@ $taxonomy_name = $term->name;
 $taxonomy_slug = $term->slug;
 $max = '8';
 
-$tf_location_meta      = get_term_meta( $term->term_id, 'tf_hotel_location', true );
+$tf_term_meta = get_term_meta( $term->term_id, $taxonomy, true );
+
 $tf_hotel_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] : '';
-$tf_location_image = ! empty( $tf_location_meta['image'] ) ? $tf_location_meta['image'] : $tf_hotel_arc_banner;
+$tf_term_image = ! empty( $tf_term_meta['image'] ) ? $tf_term_meta['image'] : $tf_hotel_arc_banner;
 
 $tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
 
@@ -50,7 +51,18 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
 		<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
 		<!-- SideBar-->
 		<div class="tf-sidebar tf-archive-right">
-			<?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
+			<?php 
+            if($taxonomy == 'hotel_location'){
+                Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug);
+            } else {
+                Helper::tf_archive_sidebar_search_form($post_type, '', '', '');
+            }
+            ?>
+            <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
+                <div id="tf__booking_sidebar">
+                    <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
+                </div>
+            <?php } ?>
 		</div>
 		</div>
 	</div>
@@ -59,7 +71,7 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
 
 <div class="tf-archive-template__two">
     <!--Hero section start -->
-    <div class="tf-hero-section-wrap" style="<?php echo !empty($tf_location_image) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url($tf_location_image).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
+    <div class="tf-hero-section-wrap" style="<?php echo !empty($tf_term_image) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url($tf_term_image).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
         <div class="tf-container">
             <div class="tf-hero-content tf-archive-hero-content">
                 <div class="tf-head-title">
@@ -81,7 +93,13 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
                     <span class="tf-modify-search-btn">
                         <?php esc_html_e("Modify search", "tourfic"); ?>
                     </span>
-                    <?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?> 
+                    <?php 
+                    if($taxonomy == 'hotel_location'){
+                        Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug);
+                    } else {
+                        Helper::tf_archive_sidebar_search_form($post_type, '', '', '');
+                    }
+                    ?>
 					<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
@@ -133,7 +151,13 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
 
             <div class="tf-archive-search-form tf-booking-form-wrapper">
                 <div class="tf-container">
-                    <?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
+                    <?php 
+                    if($taxonomy == 'hotel_location'){
+                        Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug);
+                    } else {
+                        Helper::tf_archive_sidebar_search_form($post_type, '', '', '');
+                    }
+                    ?>
                 </div>
             </div>
 
@@ -159,7 +183,13 @@ ob_start();
             </div>
 
             <div class="tf-search-right">
-                <?php Helper::tf_archive_sidebar_search_form( $post_type, $taxonomy, $taxonomy_name, $taxonomy_slug ); ?>
+                <?php 
+                if($taxonomy == 'hotel_location'){
+                    Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug);
+                } else {
+                    Helper::tf_archive_sidebar_search_form($post_type, '', '', '');
+                }
+                ?>
                 <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
                     <div id="tf__booking_sidebar">
                         <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>

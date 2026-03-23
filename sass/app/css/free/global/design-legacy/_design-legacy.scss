@@ -322,6 +322,7 @@
 .post-type-archive-tf_carrental,
 .tax-carrental_location,
 .tax-carrental_brand,
+.tax-carrental_category,
 .page-template-tf-search{
     .tf-archive-template{
         &__one{
@@ -346,6 +347,7 @@
 .post-type-archive-tf_carrental .tf-archive-template,
 .tax-carrental_location .tf-archive-template,
 .tax-carrental_brand .tf-archive-template,
+.tax-carrental_category .tf-archive-template,
 .page-template-tf-search .tf-archive-template,
 .single-tf_carrental .tf-single-template{
     &__one{

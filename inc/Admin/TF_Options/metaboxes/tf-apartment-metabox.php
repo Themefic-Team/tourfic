@@ -34,7 +34,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'apartment-general-heading',
 					'type'  => 'heading',
-					'title' => 'General Settings ',
+					'title' => esc_html__( 'General Settings', 'tourfic' ),
 					'content' => esc_html__( 'These are some common settings specific to this Apartment.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/add-new-apartment/general-settings/')
 				),
@@ -103,7 +103,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'apartment-location-heading',
 					'type'  => 'heading',
-					'title' => 'Location Settings',
+					'title' => esc_html__( 'Location Settings', 'tourfic' ),
 					'content' => esc_html__( 'The location of an apartment is a crucial element for every apartment. Set your apartment locations in this section.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/add-new-apartment/location-settings/')
 				),
@@ -145,7 +145,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'apartment-booking-heading',
 					'type'  => 'heading',
-					'title' => 'Booking Settings',
+					'title' => esc_html__( 'Booking Settings', 'tourfic' ),
 					'content' => esc_html__( 'This section offer the options to customize the booking process for this apartment.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/add-new-apartment/booking-settings/')
 				),
@@ -316,7 +316,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'apartment-room-heading',
 					'type'  => 'heading',
-					'title' => 'Create & Manage Your Apartment Rooms',
+					'title' => esc_html__( 'Create & Manage Your Apartment Rooms', 'tourfic' ),
 					'content' => esc_html__( 'In this section, you are provided with the tools to create and manage your apartment room offerings.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/add-new-apartment/room-management/')
 				),

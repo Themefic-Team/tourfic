@@ -68,6 +68,32 @@ class TF_Options {
 	}
 
 	/**
+	 * Get total day count for a month/year pair.
+	 *
+	 * Supports environments where PHP `ext-calendar` is unavailable.
+	 *
+	 * @param int|string $month Month number.
+	 * @param int|string $year  Year number.
+	 * @return int
+	 */
+	private function tf_get_days_in_month( $month, $year ) {
+		$month = (int) $month;
+		$year  = (int) $year;
+
+		if ( $month < 1 || $month > 12 || $year < 1 ) {
+			return 0;
+		}
+
+		if ( function_exists( 'cal_days_in_month' ) ) {
+			return (int) cal_days_in_month( CAL_GREGORIAN, $month, $year );
+		}
+
+		$month_start = strtotime( sprintf( '%04d-%02d-01', $year, $month ) );
+
+		return $month_start ? (int) gmdate( 't', $month_start ) : 0;
+	}
+
+	/**
 	 * Load files
 	 * @author Foysal
 	 */
@@ -1050,7 +1076,7 @@ class TF_Options {
 							// Date Day wise
 							if(!empty($tf_tour_repeat_week)){
 								$month = str_pad($month, 2, '0', STR_PAD_LEFT);
-								$days_in_month = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+								$days_in_month = $this->tf_get_days_in_month( $month, $year );
 
 								for ($day = 1; $day <= $days_in_month; $day++) {
 									$day = str_pad($day, 2, '0', STR_PAD_LEFT);
@@ -1111,7 +1137,7 @@ class TF_Options {
 
 							if(empty($tf_tour_repeat_day) && empty($tf_tour_repeat_week)){
 								// Get the total days in the month
-								$total_days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+								$total_days = $this->tf_get_days_in_month( $month, $year );
 
 								// Create the array of day numbers
 								$tf_tour_repeat_day = range(1, $total_days);

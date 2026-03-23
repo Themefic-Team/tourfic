@@ -46,6 +46,7 @@ while ( have_posts() ) : the_post();
 	 * Get car meta values
 	 */
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
+	$meta = function_exists( 'tf_normalize_car_meta' ) ? tf_normalize_car_meta( $meta ) : $meta;
 
 	$disable_share_opt    = ! empty( $meta['c-share'] ) ? $meta['c-share'] : '';
 	$disable_wishlist_sec = ! empty( $meta['c-wishlist'] ) ? $meta['c-wishlist'] : 0;

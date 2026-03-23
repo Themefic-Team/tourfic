@@ -37,16 +37,17 @@ class Tour_Price {
 
         $pricing_rule = !empty($meta['pricing']) ? $meta['pricing'] : 'person';
 
-        $tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
 		
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+		$package_pricing_values = ! empty( $package_pricing ) && is_array( $package_pricing ) ? array_values( $package_pricing ) : [];
 
         $adult_price = null;
         $child_price = null;
         $infant_price = null;
         $price = null;
         
-		if(!empty($tour_availability_data) && Helper::is_all_unavailable($tour_availability_data)){
+		if ( ! empty( $tour_availability_data ) && ! Helper::is_all_unavailable( $tour_availability_data ) ) {
             $adult_price = null;
             $child_price = null;
             $infant_price = null;
@@ -59,7 +60,7 @@ class Tour_Price {
 				if($pricing_rule == 'person' && $data['pricing_type'] == 'person'){
 					// Adult Price
                     if (is_null($adult_price) || $data['adult_price'] < $adult_price) {
-						$tour_price[] = $data['adult_price'];
+						$adult_price = $data['adult_price'];
 					}
 
 					// Child Price
@@ -78,31 +79,61 @@ class Tour_Price {
 				if( $pricing_rule == 'package' && $data['pricing_type'] == 'package'){
 					if(!empty($data['options_count'])){
 						for($i = 0; $i < $data['options_count']; $i++){
+							$package_option = ! empty( $package_pricing_values[ $i ] ) ? $package_pricing_values[ $i ] : [];
+							$option_type = ! empty( $data['tf_option_pricing_type_'.$i] ) ? $data['tf_option_pricing_type_'.$i] : '';
+							$option_type = ! empty( $option_type ) ? $option_type : ( ! empty( $package_option['pricing_type'] ) ? $package_option['pricing_type'] : '' );
 
-							if (!empty($data['tf_option_adult_price_'.$i])) {
-                                if (is_null($adult_price) || $data['tf_option_adult_price_'.$i] < $adult_price) {
-                                    $adult_price = $data['tf_option_adult_price_'.$i];
-                                }
+							if ( $option_type == 'person' ) {
+								$option_adult_price = ! empty( $data['tf_option_adult_price_'.$i] ) ? $data['tf_option_adult_price_'.$i] : ( ! empty( $package_option['adult_tabs'][1]['adult_price'] ) ? $package_option['adult_tabs'][1]['adult_price'] : '' );
+								$option_child_price = ! empty( $data['tf_option_child_price_'.$i] ) ? $data['tf_option_child_price_'.$i] : ( ! empty( $package_option['child_tabs'][1]['child_price'] ) ? $package_option['child_tabs'][1]['child_price'] : '' );
+								$option_infant_price = ! empty( $data['tf_option_infant_price_'.$i] ) ? $data['tf_option_infant_price_'.$i] : ( ! empty( $package_option['infant_tabs'][1]['infant_price'] ) ? $package_option['infant_tabs'][1]['infant_price'] : '' );
+
+								if ( ! empty( $option_adult_price ) && ( is_null($adult_price) || $option_adult_price < $adult_price ) ) {
+									$adult_price = $option_adult_price;
+								}
+								if ( ! empty( $option_child_price ) && ( is_null($child_price) || $option_child_price < $child_price ) ) {
+									$child_price = $option_child_price;
+								}
+								if ( ! empty( $option_infant_price ) && ( is_null($infant_price) || $option_infant_price < $infant_price ) ) {
+									$infant_price = $option_infant_price;
+								}
 							}
 
-							if (!empty($data['tf_option_child_price_'.$i])) {
-                                if (is_null($child_price) || $data['tf_option_child_price_'.$i] < $child_price) {
-                                    $child_price = $data['tf_option_child_price_'.$i];
-                                }
+							if ( $option_type == 'group' ) {
+								$option_group_price = ! empty( $data['tf_option_group_price_'.$i] ) ? $data['tf_option_group_price_'.$i] : ( ! empty( $package_option['group_tabs'][1]['group_price'] ) ? $package_option['group_tabs'][1]['group_price'] : '' );
+								if ( ! empty( $option_group_price ) && ( is_null($price) || $option_group_price < $price ) ) {
+									$price = $option_group_price;
+								}
 							}
 
-							if (!empty($data['tf_option_infant_price_'.$i])) {
-								if (is_null($infant_price) || $data['tf_option_infant_price_'.$i] < $infant_price) {
-                                    $infant_price = $data['tf_option_infant_price_'.$i];
-                                }
-							}
+						}
+					}
+				}
+			}
 
-							if (!empty($data['tf_option_group_price_'.$i])) {
-								if (is_null($price) || $data['tf_option_group_price_'.$i] < $price) {
-                                    $price = $data['tf_option_group_price_'.$i];
-                                }
-							}
+			if($pricing_rule == 'package' && is_null($adult_price) && is_null($child_price) && is_null($infant_price) && is_null($price) && !empty($package_pricing)){
+				foreach($package_pricing as $package){
+					if (!empty($package['adult_tabs'][1]['adult_price'])) {
+						if (is_null($adult_price) || $package['adult_tabs'][1]['adult_price'] < $adult_price) {
+							$adult_price = $package['adult_tabs'][1]['adult_price'];
+						}
+					}
 
+					if (!empty($package['child_tabs'][1]['child_price'])) {
+						if (is_null($child_price) || $package['child_tabs'][1]['child_price'] < $child_price) {
+							$child_price = $package['child_tabs'][1]['child_price'];
+						}
+					}
+
+					if (!empty($package['infant_tabs'][1]['infant_price'])) {
+						if (is_null($infant_price) || $package['infant_tabs'][1]['infant_price'] < $infant_price) {
+							$infant_price = $package['infant_tabs'][1]['infant_price'];
+						}
+					}
+
+					if (!empty($package['group_tabs'][1]['group_price'])) {
+						if (is_null($price) || $package['group_tabs'][1]['group_price'] < $price) {
+							$price = $package['group_tabs'][1]['group_price'];
 						}
 					}
 				}
