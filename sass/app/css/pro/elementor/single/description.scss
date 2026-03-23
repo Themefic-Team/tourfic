@@ -1,0 +1,9 @@
+.tf-single-description{
+    span.tf-see-description,
+    span.tf-see-less-description{
+        cursor: pointer;
+    }
+    .tf-full-description{
+        display: none;
+    }
+}

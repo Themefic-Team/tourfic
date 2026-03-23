@@ -13,6 +13,7 @@ class Helper {
 	use \Tourfic\Traits\Action_Helper;
 
 	public function __construct() {
+        add_action( 'admin_bar_menu', array( $this, 'tf_add_admin_bar_links'), 100 );
 		add_action( 'admin_footer', array( $this, 'tf_admin_footer' ) );
 		add_action( 'wp_footer', array($this, 'tf_ask_question_modal') );
 		add_filter( 'rest_prepare_taxonomy', array( $this, 'tf_remove_metabox_gutenburg' ), 10, 3 );
@@ -93,6 +94,91 @@ class Helper {
 
 	}
 
+    function tf_add_admin_bar_links( $admin_bar ) {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
+
+        // Parent item
+        $admin_bar->add_menu( array(
+            'id'    => 'tf-quick-links',
+            'title' => esc_html__( 'Tourfic', 'tourfic' ),
+            'href'  => admin_url( 'admin.php?page=tf_dashboard' ),
+            'meta'  => array(
+                'title' => esc_html__( 'Tourfic Dashboard', 'tourfic' ),
+            ),
+        ) );
+
+        // Dashboard
+        $admin_bar->add_menu( array(
+            'id'     => 'tf-quick-dashboard',
+            'parent' => 'tf-quick-links',
+            'title'  => esc_html__( 'Dashboard', 'tourfic' ),
+            'href'   => admin_url( 'admin.php?page=tf_dashboard' ),
+        ) );
+
+        // Settings
+        $admin_bar->add_menu( array(
+            'id'     => 'tf-quick-settings',
+            'parent' => 'tf-quick-links',
+            'title'  => esc_html__( 'Settings', 'tourfic' ),
+            'href'   => admin_url( 'admin.php?page=tf_settings#tab=general' ),
+        ) );
+
+        // Get Help
+        $admin_bar->add_menu( array(
+            'id'     => 'tf-quick-get-help',
+            'parent' => 'tf-quick-links',
+            'title'  => esc_html__( 'Get Help', 'tourfic' ),
+            'href'   => admin_url( 'admin.php?page=tf_get_help' ),
+        ) );
+
+        // Shortcodes
+        $admin_bar->add_menu( array(
+            'id'     => 'tf-quick-shortcodes',
+            'parent' => 'tf-quick-links',
+            'title'  => esc_html__( 'Shortcodes', 'tourfic' ),
+            'href'   => admin_url( 'admin.php?page=tf_shortcodes' ),
+        ) );
+
+        // Template Library (if plugin active)
+        if ( is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ) {
+            $admin_bar->add_menu( array(
+                'id'     => 'tf-quick-library',
+                'parent' => 'tf-quick-links',
+                'title'  => esc_html__( 'Template Library', 'tourfic' ),
+                'href'   => admin_url( 'admin.php?page=travelfic-template-list' ),
+            ) );
+        }
+
+        // Template Builder (if Elementor or TF Pro)
+        if ( did_action( 'elementor/loaded' ) && function_exists( 'is_tf_pro' ) ) {
+            $admin_bar->add_menu( array(
+                'id'     => 'tf-quick-builder',
+                'parent' => 'tf-quick-links',
+                'title'  => esc_html__( 'Template Builder', 'tourfic' ),
+                'href'   => admin_url( 'edit.php?post_type=tf_template_builder' ),
+            ) );
+        } elseif ( function_exists( 'is_tf_pro' ) ) {
+            $admin_bar->add_menu( array(
+                'id'     => 'tf-quick-builder',
+                'parent' => 'tf-quick-links',
+                'title'  => esc_html__( 'Template Builder', 'tourfic' ),
+                'href'   => admin_url( 'admin.php?page=tf_template_builder' ),
+            ) );
+        }
+
+        // License Info (TF Pro only)
+        if ( function_exists( 'is_tf_pro' ) ) {
+            $admin_bar->add_menu( array(
+                'id'     => 'tf-quick-license',
+                'parent' => 'tf-quick-links',
+                'title'  => esc_html__( 'License Info', 'tourfic' ),
+                'href'   => admin_url( 'admin.php?page=tf_license_info' ),
+            ) );
+        }
+    }
+
 	static function tfopt( $option = '', $default = null ) {
 		$options = get_option( 'tf_settings' );
 
@@ -111,19 +197,27 @@ class Helper {
 		}
 	}
 
-    static function is_all_unavailable($tour_availability) {
-        if (empty($tour_availability) || !is_object($tour_availability)) {
-            return false;
-        }
-    
-        foreach ($tour_availability as $availability) {
-            if (!isset($availability->status) || $availability->status !== 'unavailable') {
-                return false;
-            }
-        }
-    
-        return true;
-    }
+	static function is_all_unavailable( $tour_availability ) {
+		if ( empty( $tour_availability ) || ! is_iterable( $tour_availability ) ) {
+			return false;
+		}
+
+		foreach ( $tour_availability as $availability ) {
+			$status = '';
+
+			if ( is_array( $availability ) && isset( $availability['status'] ) ) {
+				$status = $availability['status'];
+			} elseif ( is_object( $availability ) && isset( $availability->status ) ) {
+				$status = $availability->status;
+			}
+
+			if ( 'unavailable' !== $status ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
     
 
     static function tf_hotel_extras_title_price( $post_id, $adult, $child, $key ) {
@@ -146,7 +240,7 @@ class Helper {
 							$adult,
 							wp_strip_all_tags( wc_price( $hotel_extras[$key]['price'] ) )
 						),
-						'price' => $hotel_extras[$key]['price'] * $adult
+						'price' => $hotel_extras[$key]['price'] * (int) $adult
 					);
 				}
 			}
@@ -319,41 +413,7 @@ class Helper {
                 <span>v<?php echo esc_html( TF_VERSION ); ?></span>
             </div>
             <div class="other-document">
-                <svg width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg"
-                     style="color: #003c79;">
-                    <path d="M19.2106 0H6.57897C2.7895 0 0.263184 2.52632 0.263184 6.31579V13.8947C0.263184 17.6842 2.7895 20.2105 6.57897 20.2105V22.9011C6.57897 23.9116 7.70318 24.5179 8.53687 23.9495L14.1579 20.2105H19.2106C23 20.2105 25.5263 17.6842 25.5263 13.8947V6.31579C25.5263 2.52632 23 0 19.2106 0ZM12.8948 15.3726C12.3642 15.3726 11.9474 14.9432 11.9474 14.4253C11.9474 13.9074 12.3642 13.4779 12.8948 13.4779C13.4253 13.4779 13.8421 13.9074 13.8421 14.4253C13.8421 14.9432 13.4253 15.3726 12.8948 15.3726ZM14.4863 10.1305C13.9937 10.4589 13.8421 10.6737 13.8421 11.0274V11.2926C13.8421 11.8105 13.4127 12.24 12.8948 12.24C12.3769 12.24 11.9474 11.8105 11.9474 11.2926V11.0274C11.9474 9.56211 13.0211 8.84211 13.4253 8.56421C13.8927 8.24842 14.0442 8.03368 14.0442 7.70526C14.0442 7.07368 13.5263 6.55579 12.8948 6.55579C12.2632 6.55579 11.7453 7.07368 11.7453 7.70526C11.7453 8.22316 11.3158 8.65263 10.7979 8.65263C10.28 8.65263 9.85055 8.22316 9.85055 7.70526C9.85055 6.02526 11.2148 4.66105 12.8948 4.66105C14.5748 4.66105 15.939 6.02526 15.939 7.70526C15.939 9.14526 14.8779 9.86526 14.4863 10.1305Z"
-                          fill="#003c79"></path>
-                </svg>
-
-                <div class="dropdown">
-                    <div class="list-item">
-                        <a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/support/', array( 'utm_medium' => 'settings_header_menu_support' ) ) ); ?>" target="_blank">
-                            <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10.0482 4.37109H4.30125C4.06778 4.37109 3.84329 4.38008 3.62778 4.40704C1.21225 4.6137 0 6.04238 0 8.6751V12.2693C0 15.8634 1.43674 16.5733 4.30125 16.5733H4.66044C4.85799 16.5733 5.1184 16.708 5.23514 16.8608L6.3127 18.2985C6.78862 18.9364 7.56087 18.9364 8.03679 18.2985L9.11435 16.8608C9.24904 16.6811 9.46456 16.5733 9.68905 16.5733H10.0482C12.6793 16.5733 14.107 15.3692 14.3136 12.9432C14.3405 12.7275 14.3495 12.5029 14.3495 12.2693V8.6751C14.3495 5.80876 12.9127 4.37109 10.0482 4.37109ZM4.04084 11.5594C3.53798 11.5594 3.14288 11.1551 3.14288 10.6609C3.14288 10.1667 3.54696 9.76233 4.04084 9.76233C4.53473 9.76233 4.93881 10.1667 4.93881 10.6609C4.93881 11.1551 4.53473 11.5594 4.04084 11.5594ZM7.17474 11.5594C6.67188 11.5594 6.27678 11.1551 6.27678 10.6609C6.27678 10.1667 6.68086 9.76233 7.17474 9.76233C7.66862 9.76233 8.07271 10.1667 8.07271 10.6609C8.07271 11.1551 7.6776 11.5594 7.17474 11.5594ZM10.3176 11.5594C9.81476 11.5594 9.41966 11.1551 9.41966 10.6609C9.41966 10.1667 9.82374 9.76233 10.3176 9.76233C10.8115 9.76233 11.2156 10.1667 11.2156 10.6609C11.2156 11.1551 10.8115 11.5594 10.3176 11.5594Z"
-                                      fill="#003c79"></path>
-                                <path d="M17.9423 5.08086V8.67502C17.9423 10.4721 17.3855 11.6941 16.272 12.368C16.0026 12.5298 15.6884 12.3141 15.6884 11.9996L15.6973 8.67502C15.6973 5.08086 13.641 3.0232 10.0491 3.0232L4.58048 3.03219C4.26619 3.03219 4.05067 2.7177 4.21231 2.44814C4.88578 1.33395 6.10702 0.776855 7.89398 0.776855H13.641C16.5055 0.776855 17.9423 2.21452 17.9423 5.08086Z"
-                                      fill="#003c79"></path>
-                            </svg>
-                            <span><?php esc_html_e( "Need Help?", "tourfic" ); ?></span>
-                        </a>
-                        <a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://themefic.com/docs/tourfic/', array( 'utm_medium' => 'settings_header_menu_doc' ) ) ); ?>" target="_blank">
-                            <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16.1896 7.57803H13.5902C11.4586 7.57803 9.72274 5.84103 9.72274 3.70803V1.10703C9.72274 0.612031 9.318 0.207031 8.82332 0.207031H5.00977C2.23956 0.207031 0 2.00703 0 5.22003V13.194C0 16.407 2.23956 18.207 5.00977 18.207H12.0792C14.8494 18.207 17.089 16.407 17.089 13.194V8.47803C17.089 7.98303 16.6843 7.57803 16.1896 7.57803ZM8.09478 14.382H4.4971C4.12834 14.382 3.82254 14.076 3.82254 13.707C3.82254 13.338 4.12834 13.032 4.4971 13.032H8.09478C8.46355 13.032 8.76935 13.338 8.76935 13.707C8.76935 14.076 8.46355 14.382 8.09478 14.382ZM9.89363 10.782H4.4971C4.12834 10.782 3.82254 10.476 3.82254 10.107C3.82254 9.73803 4.12834 9.43203 4.4971 9.43203H9.89363C10.2624 9.43203 10.5682 9.73803 10.5682 10.107C10.5682 10.476 10.2624 10.782 9.89363 10.782Z"
-                                      fill="#003c79"></path>
-                            </svg>
-                            <span><?php esc_html_e( "Documentation", "tourfic" ); ?></span>
-
-                        </a>
-                        <a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/support/', array( 'utm_medium' => 'settings_header_menu_request' ) ) ); ?>" target="_blank">
-                            <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                      d="M13.5902 7.57803H16.1896C16.6843 7.57803 17.089 7.98303 17.089 8.47803V13.194C17.089 16.407 14.8494 18.207 12.0792 18.207H5.00977C2.23956 18.207 0 16.407 0 13.194V5.22003C0 2.00703 2.23956 0.207031 5.00977 0.207031H8.82332C9.318 0.207031 9.72274 0.612031 9.72274 1.10703V3.70803C9.72274 5.84103 11.4586 7.57803 13.5902 7.57803ZM11.9613 0.396012C11.5926 0.0270125 10.954 0.279013 10.954 0.792013V3.93301C10.954 5.24701 12.0693 6.33601 13.4274 6.33601C14.2818 6.34501 15.4689 6.34501 16.4852 6.34501H16.4854C16.998 6.34501 17.2679 5.74201 16.9081 5.38201C16.4894 4.96018 15.9637 4.42927 15.3988 3.85888L15.3932 3.85325L15.3913 3.85133L15.3905 3.8505L15.3902 3.85016C14.2096 2.65803 12.86 1.29526 11.9613 0.396012ZM3.0145 12.0732C3.0145 11.7456 3.28007 11.48 3.60768 11.48H5.32132V9.76639C5.32132 9.43879 5.58689 9.17321 5.9145 9.17321C6.2421 9.17321 6.50768 9.43879 6.50768 9.76639V11.48H8.22131C8.54892 11.48 8.8145 11.7456 8.8145 12.0732C8.8145 12.4008 8.54892 12.6664 8.22131 12.6664H6.50768V14.38C6.50768 14.7076 6.2421 14.9732 5.9145 14.9732C5.58689 14.9732 5.32132 14.7076 5.32132 14.38V12.6664H3.60768C3.28007 12.6664 3.0145 12.4008 3.0145 12.0732Z"
-                                      fill="#003c79"></path>
-                            </svg>
-                            <span><?php esc_html_e( "Feature Request", "tourfic" ); ?></span>
-                        </a>
-                    </div>
-                </div>
+                <span><?php esc_html_e( "Having troubles?", "tourfic" ); ?> <a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/support/', array( 'utm_medium' => 'settings_header_menu_request' ) ) ); ?>" target="_blank"><?php esc_html_e( "Get help", "tourfic" ); ?></a></span>
             </div>
         </div>
         <!-- dashboard-top-section -->
@@ -680,7 +740,7 @@ class Helper {
 		$select = '';
 		//output the select field
 		if ( ! empty( $terms ) && is_array( $terms ) ) {
-			$select .= '<select data-placeholder=" Select from Dropdown" id="' . $id . '" data-term="' . $attribute . '" name="' . $term . '" class="tf-shortcode-select2 ' . $class . '" ' . $multiple . '>';
+			$select .= '<select  data-placeholder="' . esc_attr__( 'Select from Dropdown', 'tourfic' ) . '" id="' . $id . '" data-term="' . $attribute . '" name="' . $term . '" class="tf-shortcode-select2 ' . $class . '" ' . $multiple . '>';
 			$select .= '<option value="\'all\'">' . esc_html__( 'All', 'tourfic' ) . '</option>';
 			foreach ( $terms as $term ) {
 				$select .= '<option value="' . $term->term_id . '">' . $term->name . '</option>';
@@ -999,7 +1059,7 @@ class Helper {
                         <div class="tf-booking-date-wrap">
                             <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                             <span class="tf-booking-month">
-                                <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+                                <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                 <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                 </svg>
@@ -1016,7 +1076,7 @@ class Helper {
                         <div class="tf-booking-date-wrap">
                             <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                             <span class="tf-booking-month">
-                                <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+                                <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                 <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                 </svg>
@@ -1032,7 +1092,7 @@ class Helper {
                             <div class="tf-booking-date-wrap tf-tour-start-date">
                                 <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                 <span class="tf-booking-month">
-							<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+							<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
 						</span>
                             </div>
                             <div class="tf-duration">
@@ -1041,7 +1101,7 @@ class Helper {
                             <div class="tf-booking-date-wrap tf-tour-end-date">
                                 <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                 <span class="tf-booking-month">
-							<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+							<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 							<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 							</svg>
@@ -1233,7 +1293,7 @@ class Helper {
                             });
 
                             function dateSetToFields(selectedDates, instance) {
-                                if (selectedDates.length === 2) {
+                                if (selectedDates.length >= 1) {
                                     const monthNames = [
                                         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1243,8 +1303,8 @@ class Helper {
                                         $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
                                         $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                     }
-                                    if (selectedDates[1]) {
-                                        const endDate = selectedDates[1];
+                                    const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                    if (endDate) {
                                         $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
                                         $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                     }
@@ -1307,7 +1367,7 @@ class Helper {
                             });
 
                             function dateSetToFields(selectedDates, instance) {
-                                if (selectedDates.length === 2) {
+                                if (selectedDates.length >= 1) {
                                     const monthNames = [
                                         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1317,8 +1377,8 @@ class Helper {
                                         $(".tf-archive-template__two .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
                                         $(".tf-archive-template__two .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                     }
-                                    if (selectedDates[1]) {
-                                        const endDate = selectedDates[1];
+                                    const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                    if (endDate) {
                                         $(".tf-archive-template__two .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
                                         $(".tf-archive-template__two .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                     }
@@ -1594,14 +1654,15 @@ class Helper {
 
                             function dateSetToFields(selectedDates, instance) {
                                 const format = '<?php echo esc_html( $date_format_for_users ); ?>';
-                                if (selectedDates.length === 2) {
+                                if (selectedDates.length >= 1) {
                                     if (selectedDates[0]) {
                                         let checkInDate = instance.formatDate(selectedDates[0], format);
                                         $(".tf-archive-template__three #tf-check-in").val(checkInDate);
                                     }
 
-                                    if (selectedDates[1]) {
-                                        let checkOutDate = instance.formatDate(selectedDates[1], format);
+                                    const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                    if (endDate) {
+                                        let checkOutDate = instance.formatDate(endDate, format);
                                         $(".tf-archive-template__three #tf-check-out").val(checkOutDate);
                                     }
                                 }
@@ -1842,6 +1903,7 @@ class Helper {
  		$tf_hotel_arc_selected_template     = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['hotel-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
  		$tf_apartment_arc_selected_template = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['apartment-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['apartment-archive'] : 'default';
  		$tf_car_arc_selected_template       = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car-archive'] : 'design-1';
+        $tf_room_arc_selected_template = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['room-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['room-archive'] : 'design-1';
 
 		$hotel_location_field_required      = ! empty( self::tfopt( "required_location_hotel_search" ) ) ? self::tfopt( "required_location_hotel_search" ) : 0;
 		$tour_location_field_required       = ! empty( self::tfopt( "required_location_tour_search" ) ) ? self::tfopt( "required_location_tour_search" ) : 0;
@@ -1855,6 +1917,7 @@ class Helper {
 		$disable_apartment_infant_search = ! empty( self::tfopt( 'disable_apartment_infant_search' ) ) ? self::tfopt( 'disable_apartment_infant_search' ) : '';
         $adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
+        $tf_current_date = date( 'd-m-Y' );
 
         // Pull options from settings or set fallback values
         $disable_car_time_slot = !empty(Helper::tfopt('disable-car-time-slots')) ? boolval(Helper::tfopt('disable-car-time-slots')) : false;
@@ -2048,7 +2111,7 @@ class Helper {
                                 <div class="tf-booking-date-wrap">
                                     <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                     <span class="tf-booking-month">
-                                        <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+                                        <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                         <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                         </svg>
@@ -2062,7 +2125,7 @@ class Helper {
                                 <div class="tf-booking-date-wrap">
                                     <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                     <span class="tf-booking-month">
-                                <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+                                <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                 <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                 </svg>
@@ -2079,7 +2142,7 @@ class Helper {
                                     <div class="tf-booking-date-wrap tf-tour-start-date">
                                         <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                         <span class="tf-booking-month">
-                                    <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+                                    <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
                                 </span>
                                     </div>
                                     <div class="tf-duration">
@@ -2088,7 +2151,7 @@ class Helper {
                                     <div class="tf-booking-date-wrap tf-tour-end-date">
                                         <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                         <span class="tf-booking-month">
-                                    <span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+                                    <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                     <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                     </svg>
@@ -2285,7 +2348,7 @@ class Helper {
                                     });
 
                                     function dateSetToFields(selectedDates, instance) {
-                                        if (selectedDates.length === 2) {
+                                        if (selectedDates.length >= 1) {
                                             const monthNames = [
                                                 "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -2295,8 +2358,8 @@ class Helper {
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                             }
-                                            if (selectedDates[1]) {
-                                                const endDate = selectedDates[1];
+                                            const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                            if (endDate) {
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                             }
@@ -2360,7 +2423,7 @@ class Helper {
                                     });
 
                                     function dateSetToFields(selectedDates, instance) {
-                                        if (selectedDates.length === 2) {
+                                        if (selectedDates.length >= 1) {
                                             const monthNames = [
                                                 "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -2370,8 +2433,8 @@ class Helper {
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                             }
-                                            if (selectedDates[1]) {
-                                                const endDate = selectedDates[1];
+                                            const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                            if (endDate) {
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
                                                 $(".tf-archive-booking-form__style-2 .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                             }
@@ -2406,7 +2469,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-									<input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-name']) ) ) : '' ?>" />
+									<input type="text" placeholder="<?php echo esc_attr__("Pick Up Location", "tourfic"); ?>" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-name']) ) ) : '' ?>" />
 									<input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : '' ?>" />
 								</div>
 							</div>
@@ -2427,7 +2490,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-									<input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-name']) )) : '' ?>" />
+									<input type="text" placeholder="<?php echo esc_attr__("Drop Off Location", "tourfic"); ?>" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-name']) )) : '' ?>" />
 									<input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : '' ?>" />
 								</div>
 							</div>
@@ -2626,14 +2689,15 @@ class Helper {
 
                                 function dateSetToFields(selectedDates, instance) {
                                     const format = '<?php echo esc_html( $date_format_for_users ); ?>';
-                                    if (selectedDates.length === 2) {
+                                    if (selectedDates.length >= 1) {
                                         if (selectedDates[0]) {
                                             const startDate = flatpickr.formatDate(selectedDates[0], format);
                                             $(".tf-archive-template__one .tf_pickup_date").val(startDate);
                                         }
-                                        if (selectedDates[1]) {
-                                            const endDate = flatpickr.formatDate(selectedDates[1], format);
-                                            $(".tf-archive-template__one .tf-select-date #tf_dropoff_date").val(endDate);
+                                        const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                        if (endDate) {
+                                            const formattedEndDate = flatpickr.formatDate(endDate, format);
+                                            $(".tf-archive-template__one .tf-select-date #tf_dropoff_date").val(formattedEndDate);
                                         }
                                     }
                                 }
@@ -2645,6 +2709,186 @@ class Helper {
 				</div>
 			</div>
 		</div>
+        <?php } elseif ( $post_type == 'tf_room' && $tf_room_arc_selected_template == "design-1" ) { 
+            
+			$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '1';
+			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '0';
+			$room = ! empty( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : '1';
+			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+            $check_in_out_arr = explode( ' - ', $check_in_out ); 
+            $check_in = !empty($check_in_out_arr[0]) ? $check_in_out_arr[0] : ''; 
+            $check_out = !empty($check_in_out_arr[1]) ? $check_in_out_arr[1] : ''; 
+            ?>
+            <div class="tf-archive-search-box">
+                <form action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                    <div class="tf-archive-search-box-wrapper tf-flex tf-flex-space-bttn tf-flex-align-center">
+                        <div class="tf-select-date">
+                            <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
+                                <label for="tf-checkin-date"><?php esc_html_e("Check in", "tourfic"); ?></label>
+                                <div class="info-select tf-booking-date-wrap tf-search-field tf-flex tf-flex-space-bttn tf-flex-align-center">
+                                    <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo !empty($check_in) ? esc_html(sanitize_text_field( wp_unslash($check_in) )) : esc_attr(gmdate($date_format_for_users, strtotime('+1 day'))) ?>" readonly>
+                                    <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo !empty($check_in_out) ? esc_html(sanitize_text_field( wp_unslash($check_in_out) )) : esc_attr(gmdate('Y/m/d', strtotime('+1 day')) . ' - ' . gmdate('Y/m/d', strtotime('+2 day'))); ?>" style="display: none;">
+                                    <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tf-select-date">
+                            <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
+                                <label for="tf-checkout-date">
+                                    <?php esc_html_e("Check out", "tourfic"); ?>
+                                </label>
+                                <div class="info-select tf-booking-date-wrap tf-search-field tf-flex tf-flex-space-bttn tf-flex-align-center">
+                                    <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo !empty($check_out) ? esc_html(sanitize_text_field( wp_unslash($check_out) )) : esc_attr(gmdate($date_format_for_users, strtotime('+2 day'))); ?>">
+                                    <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tf-form-bottom-left">
+                            <div class="tf-select-room">
+                                <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
+                                    <label for="tf-rooms-number">
+                                        <?php esc_html_e("Rooms", "tourfic"); ?>
+                                    </label>
+                                
+                                    <div class="tf_acrselection tf-search-field">
+                                        <div class="acr-select">
+                                            <div class="acr-dec">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.16602 10H15.8327" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
+                                            <input type="tel" name="room" id="room" min="1" value="<?php echo esc_attr($room); ?>" readonly="">
+                                            <div class="acr-inc">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.16699 10.0001H15.8337M10.0003 4.16675V15.8334" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tf-select-guests">
+                                <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
+                                    <label for="guests">
+                                        <?php esc_html_e("Guests", "tourfic"); ?>
+                                    </label>
+                                    <div class="tf_acrselection tf-search-field tf-booking-adult-child-infant">
+                                        <div class="acr-select">
+                                            <span class="tf-guest"><?php esc_html_e( "1", "tourfic" ); ?></span>
+                                            <div class="tf-archive-guest-info">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M5 7.5L10 12.5L15 7.5" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tf_acrselection-wrap">
+                                    <div class="tf_acrselection-inner">
+                                        <div class="tf_acrselection">
+                                            <div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
+                                            <div class="acr-select">
+                                                <div class="acr-dec">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                        <path d="M4.16666 10H15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                                <input type="tel" name="adults" id="adults" min="1" value="<?php echo esc_attr($adults); ?>" readonly>
+                                                <div class="acr-inc">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                        <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="tf_acrselection">
+                                            <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
+                                            <div class="acr-select">
+                                                <div class="acr-dec">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                        <path d="M4.16666 10H15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                                <input type="tel" name="childrens" id="children" min="0" value="<?php echo esc_attr($child); ?>" readonly>
+                                                <div class="acr-inc">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                        <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tf-submit-button">
+                            <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
+                            <button class="tf-filter-rooms tf_btn tf_btn_rounded tf-flex-align-center"><?php esc_html_e("Modify search", "tourfic"); ?></button>
+                        </div>
+
+                        <script>
+                            (function ($) {
+                                $(document).ready(function () {
+
+                                    // flatpickr locale first day of Week
+                                    <?php self::tf_flatpickr_locale( "root" ); ?>
+
+                                    $(".tf-archive-template__one #tf-check-out, .tf-archive-template__one .tf-booking-date-wrap svg").on('click', function () {
+                                        $(".tf-search-input.form-control").click();
+                                    });
+                                    $("#check-in-out-date").flatpickr({
+                                        enableTime: false,
+                                        mode: "range",
+                                        dateFormat: "Y/m/d",
+                                        minDate: "today",
+                                        altInput: true,
+                                        altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
+                                        showMonths: $(window).width() >= 1240 ? 2 : 1,
+
+                                        // flatpickr locale
+                                        <?php self::tf_flatpickr_locale(); ?>
+
+                                        onReady: function (selectedDates, dateStr, instance) {
+                                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                                            dateSetToFields(selectedDates, instance);
+                                        },
+                                        onChange: function (selectedDates, dateStr, instance) {
+                                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                                            dateSetToFields(selectedDates, instance);
+                                        },
+                                        defaultDate: <?php echo ! empty( $check_in_out ) ? wp_json_encode( explode( '-', $check_in_out ) ) : '[' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+1 day' ) ) ) . ', ' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+2 day' ) ) ) . ']' ; ?>,
+                                    });
+
+                                    function dateSetToFields(selectedDates, instance) {
+                                        const format = '<?php echo esc_html( $date_format_for_users ); ?>';
+                                        if (selectedDates.length >= 1) {
+                                            if (selectedDates[0]) {
+                                                let checkInDate = instance.formatDate(selectedDates[0], format);
+                                                $(".tf-archive-template__one #tf-check-in").val(checkInDate);
+                                            }
+
+                                            const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                            if (endDate) {
+                                                let checkOutDate = instance.formatDate(endDate, format);
+                                                $(".tf-archive-template__one #tf-check-out").val(checkOutDate);
+                                            }
+                                        }
+                                    }
+                                });
+                            })(jQuery);
+
+                        </script>
+                    </div>
+                </form>
+            </div>
         <?php } elseif (
             ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
             ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
@@ -2915,14 +3159,15 @@ class Helper {
 
                                 function dateSetToFields(selectedDates, instance) {
                                     const format = '<?php echo esc_html( $date_format_for_users ); ?>';
-                                    if (selectedDates.length === 2) {
+                                    if (selectedDates.length >= 1) {
                                         if (selectedDates[0]) {
                                             let checkInDate = instance.formatDate(selectedDates[0], format);
                                             $(".tf-archive-booking-form__style-3 #tf-check-in").val(checkInDate);
                                         }
 
-                                        if (selectedDates[1]) {
-                                            let checkOutDate = instance.formatDate(selectedDates[1], format);
+                                        const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                        if (endDate) {
+                                            let checkOutDate = instance.formatDate(endDate, format);
                                             $(".tf-archive-booking-form__style-3 #tf-check-out").val(checkOutDate);
                                         }
                                     }
@@ -3041,7 +3286,7 @@ class Helper {
                             <div class="tf_form-inner">
                                 <i class="far fa-calendar-alt"></i>
                                 <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                       placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" required value="">
+                                       placeholder="<?php echo esc_attr__( 'Select Date', 'tourfic' ); ?>" required value="">
                             </div>
                         </label>
                     </div>
@@ -3052,7 +3297,6 @@ class Helper {
                     <button class="tf_btn tf_btn_full tf-submit"
                             type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
                 </div>
-
             </form>
 
             <script>

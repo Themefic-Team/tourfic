@@ -113,6 +113,7 @@ use \Tourfic\Classes\Apartment\Apartment;
 								?>
                                 <a class="tf-wishlist-button" title="<?php esc_html_e( 'Click to toggle wishlist', 'tourfic' ); ?>">
                                     <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?> "
+                                       data-icon="far fa-heart-o" data-active-icon="fas fa-heart" 
                                        data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>"
                                        data-id="<?php echo esc_attr( $post_id ) ?>"
                                        data-type="<?php echo esc_attr( $post_type ) ?>" <?php echo Helper::tfopt( 'wl-page' ) ? 'data-page-title="' . esc_attr( get_the_title( Helper::tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( Helper::tfopt( 'wl-page' ) ) ) . '"' : ''; ?>></i>
@@ -126,6 +127,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                                 <a class="tf-wishlist-button"
                                    title="<?php esc_html_e( 'Click to toggle wishlist', 'tourfic' ); ?>"><i
                                             class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far add-wishlist fa-heart-o' ?> "
+                                            data-icon="far fa-heart-o" data-active-icon="fas fa-heart" 
                                             data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>"
                                             data-id="<?php echo esc_attr( $post_id ) ?>"
                                             data-type="<?php echo esc_attr( $post_type ) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
@@ -138,7 +140,8 @@ use \Tourfic\Classes\Apartment\Apartment;
                         ?>
                         <a class="tf-wishlist-button" title="<?php esc_html_e( 'Click to toggle wishlist', 'tourfic' ); ?>">
                             <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>"
-                               data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>"
+                               data-icon="far fa-heart-o" data-active-icon="fas fa-heart" 
+                                data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>"
                                data-id="<?php echo esc_attr( $post_id ) ?>"
                                data-type="<?php echo esc_attr( $post_type ) ?>" <?php echo Helper::tfopt( 'wl-page' ) ? 'data-page-title="' . esc_attr( get_the_title( Helper::tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( Helper::tfopt( 'wl-page' ) ) ) . '"' : ''; ?>></i>
                             <span><?php esc_html_e( 'Save', 'tourfic' ); ?></span>
@@ -408,7 +411,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                             <img src="<?php echo esc_url( get_avatar_url( $post_author_id ) ); ?>" alt="">
                             <div class="host-meta">
 								<?php echo sprintf( '<h4>%s %s</h4>', esc_html__( 'Hosted by', 'tourfic' ), esc_html( $author_info->display_name ) ); ?>
-								<?php echo sprintf( '<span class="tf-apartment-joined-text">%s <span>:</span> <span>%s</span></span>', esc_html__( 'Joined', 'tourfic' ), wp_kses_post( gmdate( 'F Y', strtotime( $author_info->user_registered ) ) ) ); ?>
+								<?php echo sprintf( '<span class="tf-apartment-joined-text">%s <span>:</span> <span>%s</span></span>', esc_html__( 'Joined', 'tourfic' ), wp_kses_post( wp_date( 'F Y', strtotime( $author_info->user_registered ) ) ) ); ?>
 								<?php Apartment::tf_apartment_host_rating( $post_author_id ) ?>
 
                             </div>

@@ -1,0 +1,36 @@
+.tf-wishlist-icon.tf-icon {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+
+    i {
+        transition: all .3s ease;
+        height: 50px;
+        width: 50px;
+        background: var(--tf-filling-foreground);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        color: var(--tf-primary);
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        i {
+            transform: scale(1.2);
+        }
+    }
+}
+.tf-wishlist-icon{
+    i {
+        color: var(--tf-primary);
+        &.tf-text-red {
+            color: #ff6055;
+        }
+    }
+}

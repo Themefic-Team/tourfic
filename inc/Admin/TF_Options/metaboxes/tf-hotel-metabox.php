@@ -373,7 +373,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'    => 'hotel-extras-heading',
 					'type'  => 'heading',
-					'title' => 'Offer Hotel Extras',
+					'title' => esc_html__('Offer Hotel Extras', 'tourfic'),
 					'content' => esc_html__( 'If you wish to provide additional services that are not included in your current hotel package, you can list them here.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-extra/')
 				),
@@ -634,13 +634,13 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'subtitle' => sprintf(esc_html__( 'These are some additional settings specific to this %s. Note that some of these settings may override the global settings.', 'tourfic' ),
 						$hotel_name
 					),
-				),		
+				),
 				array(
 					'id'    => 'hotel-settings-docs',
 					'type'  => 'heading',
 					'title' => esc_html__( 'Settings', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/hotel-settings/')
-				),		
+				),
 				array(
 					'id'        => 'h-review',
 					'type'      => 'switch',

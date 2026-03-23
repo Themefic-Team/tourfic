@@ -1,0 +1,183 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-single-amenities-style1.tf-facilities-wrapper {
+    @media #{$max768}{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    h2{
+        color: $color-heading;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        @media #{$max1024}{
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+    }
+    .tf-facilities {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 24px 0;
+        margin-bottom: 0;
+        .tf-facility-item {
+            width: 25%;
+            @media #{$max1024}{
+                width: 50%;
+            }
+            span.single-facilities-title {
+                font-weight: 600;
+                margin-bottom: 10px;
+                display: block;
+                i {
+                    margin-right: 8px;
+                    width: 20px;
+                }
+            }
+            ul {
+                margin: 0;
+                padding: 0;
+                padding-left: 34px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                list-style: none;
+            }
+        }
+    }
+}
+
+.tf-single-hotel-amenities-style2.tf-hotel-facilities-section{
+    .section-heading {
+        margin-bottom: 15px;
+        font-size: 1.875rem;
+        line-height: 1.5;
+        color: var(--tf-text-heading);
+    }
+    h2.section-heading {
+        margin: 0px;
+        color: $color-heading;
+    }
+
+    .tf-hotel-facilities-content-area {
+        margin-top: 24px;
+        .hotel-facility-item {
+            margin-bottom: 24px;
+            .hotel-single-facility-title {
+                color: $color-heading;
+                font-size: 1.25rem;
+                font-weight: 400;
+                margin-bottom: 16px;
+            }
+
+            ul {
+                display: flex;
+                list-style: none;
+                flex-wrap: wrap;
+                vertical-align: baseline;
+                gap: 16px;
+                margin: 0px;
+                padding: 0px;
+
+                @media #{$max768} {
+                    flex-direction: column;
+                }
+
+                li {
+                    display: flex;
+                    color: $color-text;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    line-height: 1.2;
+                    vertical-align: baseline;
+
+                    span {
+                        margin-right: 8px;
+
+                        @media #{$max768} {
+                            min-width: 16px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tf-single-apartment-amenities-style2.tf-apartment-amenities-section {
+
+    .tf-apartment-amenities-inner {
+        border-radius: 8px;
+        background: $color-filling-fg;
+        padding: 24px;
+        @media #{$max575}{
+            padding: 16px;
+        }
+    }
+
+    .tf-apartment-amenities {
+        @include flexbox();
+        @include flex-wrap(wrap);
+        gap: 16px;
+
+        .tf-apt-amenity {
+            @include flex(0 0 calc(100% / 2 - 11px));
+            @include flexbox();
+            gap: 16px;
+            @media #{$max575}{
+                gap: 8px;
+            }
+            .tf-apt-amenity-icon {
+                @include flexbox();
+                @include align-items(center);
+                @include flex(0 0 24px);
+                height: 24px;
+                @media #{$max575}{
+                    @include flex(initial);
+
+                }
+                i {
+                    font-size: 1.5rem;
+                    color: $color-text;
+                }
+            }
+        }
+    }
+
+    .tf-apartment-amenities-more {
+        .tf-modal-btn {
+            @include flexbox();
+            @include align-items(center);
+            @include justify-content(flex-end);
+            gap: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: $color-heading;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    }
+
+    #tf-amenities-modal {
+        h2.section-heading{
+            margin-bottom: 24px;
+        }
+        .tf-apartment-amenity-cat {
+            border-bottom: 1px solid $color-gray;
+            margin-bottom: 24px;
+
+            &:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+                color: $color-heading;
+                margin-bottom: 16px;
+            }
+        }
+    }
+}

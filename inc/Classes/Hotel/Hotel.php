@@ -42,6 +42,149 @@ class Hotel {
 	}
 
 	/**
+	 * Get normalized hotel meta for mixed schema support.
+	 *
+	 * @param int  $hotel_id     Hotel post ID.
+	 * @param bool $sync_legacy  Persist fallback legacy keys when true.
+	 *
+	 * @return array
+	 */
+	public static function get_normalized_hotel_meta( $hotel_id, $sync_legacy = false ) {
+
+		$hotel_meta = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
+		$hotel_meta = is_array( $hotel_meta ) ? $hotel_meta : array();
+		$changed    = false;
+
+		$map_data = self::get_hotel_map_data( $hotel_meta );
+		if ( ! empty( $map_data ) && empty( $hotel_meta['map'] ) ) {
+			$hotel_meta['map'] = $map_data;
+			$changed           = true;
+		}
+
+		$missing_featured_key = ! isset( $hotel_meta['featured'] ) || '' === $hotel_meta['featured'];
+		if ( $missing_featured_key && isset( $hotel_meta['hotel_as_featured'] ) ) {
+			$hotel_meta['featured'] = $hotel_meta['hotel_as_featured'];
+			$changed                = true;
+		}
+
+		if ( $sync_legacy && $changed ) {
+			update_post_meta( $hotel_id, 'tf_hotels_opt', $hotel_meta );
+		}
+
+		return $hotel_meta;
+	}
+
+	/**
+	 * Check featured status from hotel meta with mixed schema support.
+	 *
+	 * @param array $hotel_meta Hotel meta array.
+	 *
+	 * @return bool
+	 */
+	public static function is_featured_hotel_meta( $hotel_meta ) {
+
+		if ( ! is_array( $hotel_meta ) ) {
+			return false;
+		}
+
+		if ( ! empty( $hotel_meta['featured'] ) ) {
+			return true;
+		}
+
+		return ! empty( $hotel_meta['hotel_as_featured'] );
+	}
+
+	/**
+	 * Get map data from hotel meta with location fallback support.
+	 *
+	 * @param array $hotel_meta Hotel meta array.
+	 *
+	 * @return array
+	 */
+	public static function get_hotel_map_data( $hotel_meta ) {
+
+		if ( ! is_array( $hotel_meta ) ) {
+			return array();
+		}
+
+		$map_data = array();
+
+		if ( ! empty( $hotel_meta['map'] ) ) {
+			$map_data = Helper::tf_data_types( $hotel_meta['map'] );
+		}
+
+		if ( empty( $map_data ) && ! empty( $hotel_meta['location'] ) ) {
+			$map_data = Helper::tf_data_types( $hotel_meta['location'] );
+		}
+
+		if ( is_object( $map_data ) ) {
+			$map_data = (array) $map_data;
+		}
+
+		return is_array( $map_data ) ? $map_data : array();
+	}
+
+	/**
+	 * Get hotel archive features with facilities fallback for new schema.
+	 *
+	 * @param int   $post_id    Hotel post ID.
+	 * @param array $hotel_meta Hotel meta array.
+	 *
+	 * @return array
+	 */
+	private static function get_archive_feature_items( $post_id, $hotel_meta ) {
+
+		$features = get_the_terms( $post_id, 'hotel_feature' );
+		if ( is_array( $features ) && ! empty( $features ) ) {
+			return $features;
+		}
+
+		$fallback_features = array();
+		$seen_features     = array();
+		$facilities        = ! empty( $hotel_meta['facilities'] ) && is_array( $hotel_meta['facilities'] ) ? $hotel_meta['facilities'] : array();
+
+		foreach ( $facilities as $facility ) {
+			$facility_term = false;
+			$feature_name  = '';
+
+			if ( is_numeric( $facility ) ) {
+				$facility_term = get_term( absint( $facility ), 'hotel_feature' );
+			} else {
+				$facility_slug = sanitize_title( wp_strip_all_tags( (string) $facility ) );
+				if ( ! empty( $facility_slug ) ) {
+					$facility_term = get_term_by( 'slug', $facility_slug, 'hotel_feature' );
+				}
+				$feature_name = ucwords( str_replace( array( '-', '_' ), ' ', sanitize_text_field( (string) $facility ) ) );
+			}
+
+			if ( $facility_term && ! is_wp_error( $facility_term ) ) {
+				$feature_name = $facility_term->name;
+			}
+
+			if ( empty( $feature_name ) ) {
+				continue;
+			}
+
+			$feature_key = sanitize_title( $feature_name );
+			if ( isset( $seen_features[ $feature_key ] ) ) {
+				continue;
+			}
+			$seen_features[ $feature_key ] = true;
+
+			if ( $facility_term && ! is_wp_error( $facility_term ) ) {
+				$fallback_features[] = $facility_term;
+			} else {
+				$fallback_features[] = (object) array(
+					'name'             => $feature_name,
+					'term_taxonomy_id' => 0,
+				);
+			}
+		}
+
+		return $fallback_features;
+	}
+
+	/**
 	 * Ajax hotel room availability
 	 *
 	 * @author fida
@@ -61,6 +204,7 @@ class Hotel {
         $form_child        = ! empty( $_POST['child'] ) ? sanitize_text_field( $_POST['child'] ) : 0;
         $children_ages     = ! empty( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '';
         $form_check_in_out = ! empty( $_POST['check_in_out'] ) ? sanitize_text_field( $_POST['check_in_out'] ) : '';
+        $design = ! empty( $_POST['design'] ) ? sanitize_text_field( $_POST['design'] ) : '';
 
 
         $form_total_person = $form_adult + $form_child;
@@ -114,7 +258,7 @@ class Hotel {
 
         $tf_hotel_selected_check = !empty($tf_hotel_single_template_check) ? $tf_hotel_single_template_check : $tf_hotel_global_template_check;
 
-        $tf_hotel_selected_template_check = $tf_hotel_selected_check;
+        $tf_hotel_selected_template_check = !empty($design) ? $design : $tf_hotel_selected_check;
 
         if( $tf_hotel_selected_template_check == "design-1" ){
         ?>
@@ -571,7 +715,13 @@ class Hotel {
 
 		if ( ! empty( $rooms_meta ) ):
 			$rooms_meta = array_filter( $rooms_meta, function ( $value ) {
-				return ! empty( $value ) && empty( $value['enable'] ) ? $value['enable'] : '' != '0';
+				if ( empty( $value ) || ! is_array( $value ) ) {
+					return false;
+				}
+				if ( isset( $value['enable'] ) && (string) $value['enable'] === '0' ) {
+					return false;
+				}
+				return true;
 			} );
 		endif;
 
@@ -621,9 +771,10 @@ class Hotel {
 		}
 
 		$room_result = array_filter( $back_rooms );
+		$room_validation = ( ! empty( $room_result ) && $room_counter > 0 ) || ( empty( $room_result ) && ! empty( $rooms_meta ) );
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && $room_validation ) {
 
 			// Check custom date range status of room
 			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
@@ -795,7 +946,7 @@ class Hotel {
 		}
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $child_counter == 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $child_counter == 0 && $room_validation ) {
 
 			// Check custom date range status of room
 			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
@@ -968,6 +1119,17 @@ class Hotel {
 
 		}
 
+		if ( $has_hotel && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$range_start = (float) $startprice;
+			$range_end   = (float) $endprice;
+			$min_price   = Pricing::instance( get_the_ID() )->get_min_price( $period );
+			$card_price  = ! empty( $min_price['min_sale_price'] ) ? (float) $min_price['min_sale_price'] : ( ! empty( $min_price['min_regular_price'] ) ? (float) $min_price['min_regular_price'] : 0 );
+
+			if ( $card_price <= 0 || $card_price < $range_start || $card_price > $range_end ) {
+				$has_hotel = false;
+			}
+		}
+
 		// Conditional hotel showing
 		if ( $has_hotel ) {
 
@@ -1023,7 +1185,13 @@ class Hotel {
 		// Remove disabled rooms
 		if ( ! empty( $rooms_meta ) ):
 			$rooms_meta = array_filter( $rooms_meta, function ( $value ) {
-				return ! empty( $value ) && empty( $value['enable'] ) ? $value['enable'] : '' != '0';
+				if ( empty( $value ) || ! is_array( $value ) ) {
+					return false;
+				}
+				if ( isset( $value['enable'] ) && (string) $value['enable'] === '0' ) {
+					return false;
+				}
+				return true;
 			} );
 		endif;
 
@@ -1073,9 +1241,10 @@ class Hotel {
 		}
 
 		$room_result = array_filter( $back_rooms );
+		$room_validation = ( ! empty( $room_result ) && $room_counter > 0 ) || ( empty( $room_result ) && ! empty( $rooms_meta ) );
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && $room_validation ) {
 
 			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 				foreach ( $rooms as $_room ) {
@@ -1129,7 +1298,7 @@ class Hotel {
 			}
 
 		}
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $room_validation ) {
 			if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
 				foreach ( $rooms as $_room ) {
 					$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
@@ -1179,6 +1348,17 @@ class Hotel {
 				}
 			} else {
 				$has_hotel = true; // Show that hotel
+			}
+		}
+
+		if ( $has_hotel && ! empty( $startprice ) && ! empty( $endprice ) ) {
+			$range_start = (float) $startprice;
+			$range_end   = (float) $endprice;
+			$min_price   = Pricing::instance( get_the_ID() )->get_min_price( $period );
+			$card_price  = ! empty( $min_price['min_sale_price'] ) ? (float) $min_price['min_sale_price'] : ( ! empty( $min_price['min_regular_price'] ) ? (float) $min_price['min_regular_price'] : 0 );
+
+			if ( $card_price <= 0 || $card_price < $range_start || $card_price > $range_end ) {
+				$has_hotel = false;
 			}
 		}
 
@@ -1638,9 +1818,9 @@ class Hotel {
                                     <span class="tf-label"><?php esc_html_e( 'Check in', 'tourfic' ); ?></span>
                                     <div class="tf_form_inners">
                                         <div class="tf_checkin_dates">
-                                            <span class="date"><?php echo esc_html( gmdate( 'd' ) ); ?></span>
+                                            <span class="date"><?php echo esc_html( wp_date( 'd' ) ); ?></span>
                                             <span class="month">
-											<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+											<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -1661,9 +1841,9 @@ class Hotel {
                                     <span class="tf-label"><?php esc_html_e( 'Check Out', 'tourfic' ); ?></span>
                                     <div class="tf_form_inners">
                                         <div class="tf_checkout_dates">
-                                            <span class="date"><?php echo esc_html( gmdate( 'd' ) ); ?></span>
+                                            <span class="date"><?php echo esc_html( wp_date( 'd' ) ); ?></span>
                                             <span class="month">
-											<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+											<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
 											<div class="tf_check_arrow">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 												<path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4"/>
@@ -1838,11 +2018,18 @@ class Hotel {
                         $(".tf_check_inout_dates").on("click", function () {
                             $(".tf-check-in-out-date").trigger("click");
                         });
+
+						// today + tomorrow
+						const today = new Date();
+						const tomorrow = new Date();
+						tomorrow.setDate(today.getDate() + 1);
+
                         $(".tf-check-in-out-date").flatpickr({
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
                             minDate: "today",
+							defaultDate: [today, tomorrow],
 
                             // flatpickr locale
 							<?php Helper::tf_flatpickr_locale(); ?>
@@ -1858,7 +2045,7 @@ class Hotel {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1868,8 +2055,8 @@ class Hotel {
                                     $(".tf_hotel_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
                                     $(".tf_hotel_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf_hotel_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
                                     $(".tf_hotel_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
                                 }
@@ -1949,7 +2136,7 @@ class Hotel {
 										<div class="tf_acrselection-wrap">
 											<div class="tf_acrselection-inner">
 												<div class="tf_acrselection">
-													<div class="acr-label"><?php esc_html( $adults_name . 's', 'tourfic' ); ?></div>
+													<div class="acr-label"><?php echo esc_html( $adults_name . 's', 'tourfic' ); ?></div>
 													<div class="acr-select">
 														<div class="acr-dec">-</div>
 														<input type="number" name="adults" id="adults" min="1" value="1" readonly>
@@ -2177,10 +2364,10 @@ class Hotel {
                                         </svg>
                                     </div>
                                     <div class="tf_checkin_dates tf-flex tf-flex-align-center">
-                                        <span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+                                        <span class="date field--title"><?php echo esc_html(date_i18n('d')); ?></span>
                                         <div class="tf-search__form__field__mthyr">
-                                            <span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
-                                            <span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+                                            <span class="month form--span"><?php echo esc_html(date_i18n('M')); ?></span>
+                                            <span class="year form--span"><?php echo esc_html(date_i18n('Y')); ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -2210,10 +2397,10 @@ class Hotel {
                                     </svg>
                                 </div>
                                 <div class="tf_checkout_dates tf-flex tf-flex-align-center">
-                                    <span class="date field--title"><?php echo esc_html(gmdate('d', strtotime('+1 day'))); ?></span>
+                                    <span class="date field--title"><?php echo esc_html(wp_date('d', strtotime('+1 day'))); ?></span>
                                     <div class="tf-search__form__field__mthyr">
-                                        <span class="month form--span"><?php echo esc_html(gmdate('M'), strtotime('+1 day')); ?></span>
-                                        <span class="year form--span"><?php echo esc_html(gmdate('Y'), strtotime('+1 day')); ?></span>
+                                        <span class="month form--span"><?php echo esc_html(wp_date('M'), strtotime('+1 day')); ?></span>
+                                        <span class="year form--span"><?php echo esc_html(wp_date('Y'), strtotime('+1 day')); ?></span>
                                     </div>
                                 </div>
 
@@ -2239,8 +2426,8 @@ class Hotel {
                         // flatpickr locale first day of Week
                         <?php Helper::tf_flatpickr_locale("root"); ?>
 
-                        $(".tf_check_inout_dates").on("click", function() {
-                            $(".tf-check-in-out-date").trigger("click");
+                        $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_check_inout_dates").on("click", function() {
+                            $(".tf-shortcode-design-4#tf_hotel_aval_check .tf-check-in-out-date").trigger("click");
                         });
 
 						// today + tomorrow
@@ -2248,7 +2435,7 @@ class Hotel {
 						const tomorrow = new Date();
 						tomorrow.setDate(today.getDate() + 1);
 
-                        $(".tf-check-in-out-date").flatpickr({
+                        $(".tf-shortcode-design-4#tf_hotel_aval_check .tf-check-in-out-date").flatpickr({
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
@@ -2268,22 +2455,22 @@ class Hotel {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
                                 ];
                                 if (selectedDates[0]) {
                                     const startDate = selectedDates[0];
-                                    $(".tf_checkin_dates span.date").html(startDate.getDate());
-                                    $(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
-                                    $(".tf_checkin_dates span.year").html(startDate.getFullYear());
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkin_dates span.date").html(startDate.getDate());
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkin_dates span.year").html(startDate.getFullYear());
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
-                                    $(".tf_checkout_dates span.date").html(endDate.getDate());
-                                    $(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
-                                    $(".tf_checkout_dates span.year").html(endDate.getFullYear());
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.date").html(endDate.getDate());
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
+                                    $(".tf-shortcode-design-4#tf_hotel_aval_check .tf_checkout_dates span.year").html(endDate.getFullYear());
                                 }
                             }
                         }
@@ -2550,7 +2737,7 @@ class Hotel {
 	/**
 	 * Single Hotel Sidebar Booking Form
 	 */
-	static function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
+	static function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '', $design = '' ) {
 
 		//get children ages
 		$children_ages = isset( $_GET['children_ages'] ) ? sanitize_text_field($_GET['children_ages']) : '';
@@ -2647,9 +2834,9 @@ class Hotel {
 
 		$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
-		$tf_hotel_selected_template = $tf_hotel_selected_check;
+		$tf_hotel_selected_template = !empty($design) ? $design : $tf_hotel_selected_check;
 
-		$tf_hotel_book_avaibality_button_text = ! empty( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ) : "Booking Availability";
+		$tf_hotel_book_avaibality_button_text = ! empty( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ) : __( 'Booking Availability', 'tourfic' );
 		$hotel_location_field_required        = ! empty( Helper::tfopt( "required_location_hotel_search" ) ) ? Helper::tfopt( "required_location_hotel_search" ) : 1;
 		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 		$child_field_hidden = apply_filters( 'tf_hotel_child_field_hidden', 1 );
@@ -2734,7 +2921,7 @@ class Hotel {
                             <span class="tf-booking-date"><?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'd' ) ) : esc_html__( '00', 'tourfic' ); ?></span>
                             <span class="tf-booking-month">
 								<span>
-									<?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'M' ) ) : esc_html( gmdate( 'M' ) ); ?>
+									<?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'M' ) ) : esc_html( wp_date( 'M' ) ); ?>
 								</span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
@@ -2749,7 +2936,7 @@ class Hotel {
                         <div class="tf-booking-date-wrap">
                             <span class="tf-booking-date"><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'd' ) ) : esc_html__( '00', 'tourfic' ); ?></span>
                             <span class="tf-booking-month">
-								<span><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'M' ) ) : esc_html( gmdate( 'M' ) ); ?></span>
+								<span><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'M' ) ) : esc_html( wp_date( 'M' ) ); ?></span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 								</svg>
@@ -2903,7 +3090,7 @@ class Hotel {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -2913,8 +3100,8 @@ class Hotel {
                                     $(".tf-single-template__two .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
                                     $(".tf-single-template__two .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
                                     $(".tf-single-template__two .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
                                     $(".tf-single-template__two .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                 }
@@ -3153,14 +3340,13 @@ class Hotel {
 		$room_book_url            = ! empty( $meta['booking-url'] ) ? $meta['booking-url'] : '';
 		$room_allow_deposit       = ! empty( $room_meta['allow_deposit'] ) ? $room_meta['allow_deposit'] : '';
 		$room_deposit_type       = ! empty( $room_meta['deposit_type'] ) ? $room_meta['deposit_type'] : '';
-		$room_deposit_amount       = ! empty( $room_meta['deposit_amount'] ) ? $room_meta['deposit_amount'] : 0;
+		$room_deposit_amount      = ! empty( $room_meta['deposit_amount'] ) ? $room_meta['deposit_amount'] : 0;
 		$airport_service_type     = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $enable_airport_service ) && ! empty( $airport_service_type ) ? $airport_service_type : null;
 		$hotel_extras     = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $hotel_extra_option ) && ! empty( $hotel_extras ) ? $hotel_extras : null;
 		$enable_guest_info_global = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'enable_guest_info' ) ) ? Helper::tfopt( 'enable_guest_info' ) : 0;
 		$enable_guest_info        = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['enable_guest_info'] ) ? $meta['enable_guest_info'] : $enable_guest_info_global;
 		$hotel_guest_details_text = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'hotel_guest_details_text' ) ) ? Helper::tfopt( 'hotel_guest_details_text' ) : '';
 		?>
-        <!-- Loader Image -->
         <div id="tour_room_details_loader">
             <div id="tour-room-details-loader-img">
                 <img src="<?php echo esc_url(TF_ASSETS_APP_URL . 'images/loader.gif') ?>" alt="Loader">
@@ -3191,9 +3377,9 @@ class Hotel {
                 <div class="tf-booking-tabs">
                     <div class="tf-booking-tab-menu">
                         <ul>
-							<?php 
-							$active_steps = []; 
-							if ( ($airport_service_type || $hotel_extras) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) { 
+							<?php
+							$active_steps = [];
+							if ( ($airport_service_type || $hotel_extras) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 								$active_steps[1] = 1;
 								?>
                                 <li class="tf-booking-step tf-booking-step-1 active">
@@ -3256,7 +3442,7 @@ class Hotel {
 											}
 											?>
 
-											<?php echo esc_html($airport_service['title']); ?> = <?php echo wp_kses_post(wc_price( $airport_service['price'] )); ?>
+											<?php echo wp_kses_post($airport_service['title']); ?> = <?php echo wp_kses_post(wc_price( $airport_service['price'] )); ?>
 										</option>
 									<?php } ?>
 									</select>
@@ -3403,7 +3589,7 @@ class Hotel {
                                                                            id="<?php echo esc_attr( $sfield['option-value'] ); ?>" value="<?php echo esc_html( $sfield['option-value'] ); ?>"
                                                                            data-required="<?php echo esc_attr($field['reg-field-required']); ?>"/>
                                                                     <label for="<?php echo esc_attr( $sfield['option-value'] ); ?>">
-																	<?php 
+																	<?php
 																	// Output the field label safely without translation, since it's dynamic content
 																	echo esc_html( $sfield['option-label'] );
 																	?>
@@ -3498,7 +3684,7 @@ class Hotel {
 				if ( "per_person" == $airport_pickup_price['airport_pickup_price_type'] ) {
 					$service_adult_fee           = ! empty( $airport_pickup_price['airport_service_fee_adult'] ) ? $airport_pickup_price['airport_service_fee_adult'] : 0;
 					$service_child_fee           = ! empty( $airport_pickup_price['airport_service_fee_children'] ) ? $airport_pickup_price['airport_service_fee_children'] : 0;
-					$airport_service_price_total = ( $adult * $service_adult_fee ) + ( $child * $service_child_fee );
+					$airport_service_price_total = ( (int) $adult * $service_adult_fee ) + ( (int) $child * $service_child_fee );
 					$airport_service_total       += $airport_service_price_total;
 
 					if ( $child != 0 ) {
@@ -3521,7 +3707,7 @@ class Hotel {
 							),
 							'price' => $airport_service_price_total,
 						);
-					}					
+					}
 				}
 				if ( "fixed" == $airport_pickup_price['airport_pickup_price_type'] ) {
 					$airport_service_price_total = ! empty( $airport_pickup_price['airport_service_fee_fixed'] ) ? $airport_pickup_price['airport_service_fee_fixed'] : 0;
@@ -3644,7 +3830,6 @@ class Hotel {
 		return !empty( $airport_service_arr ) ? $airport_service_arr : array( 'title' => '', 'price' => 0 );
 	}
 
-
 	/**
 	 * Hotel Archive Single Item Layout
 	 */
@@ -3652,13 +3837,14 @@ class Hotel {
 
 		// get post id
 		$post_id = get_the_ID();
-		//Get hotel_feature
-		$features = ! empty( get_the_terms( $post_id, 'hotel_feature' ) ) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
-		$meta     = get_post_meta( $post_id, 'tf_hotels_opt', true );
+		$meta    = self::get_normalized_hotel_meta( $post_id );
+		$features = self::get_archive_feature_items( $post_id, $meta );
 
 		// Location
-		if ( ! empty( $meta['map'] ) && Helper::tf_data_types( $meta['map'] ) ) {
-			$address = ! empty( Helper::tf_data_types( $meta['map'] )['address'] ) ? Helper::tf_data_types( $meta['map'] )['address'] : '';
+		$address = '';
+		$map     = self::get_hotel_map_data( $meta );
+		if ( ! empty( $map['address'] ) ) {
+			$address = $map['address'];
 		}
 		// Rooms
 		$b_rooms = Room::get_hotel_rooms( $post_id );
@@ -3672,7 +3858,7 @@ class Hotel {
 		$archive_page_price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'hotel_archive_price_minimum_settings' ) : 'all';
 
 		// Featured
-		$featured            = ! empty( $meta['featured'] ) ? $meta['featured'] : '';
+		$featured            = self::is_featured_hotel_meta( $meta );
 		$hotel_multiple_tags = isset($meta['tf-hotel-tags']) && is_array($meta['tf-hotel-tags']) ? Helper::tf_data_types($meta['tf-hotel-tags']) : array();
 		/**
 		 * All values from URL
@@ -3845,7 +4031,7 @@ class Hotel {
 											<span class="tf-multiple-tag">' . esc_html( $hotel_tag_name ) . '</span>
 										</div>'
 									);
-								}								
+								}
 							}
 						}
 						?>
@@ -3890,23 +4076,29 @@ class Hotel {
                         <div class="tf-archive-features tf-mt-16">
                             <ul>
 								<?php foreach ( $features as $tfkey => $feature ) {
-									$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
-									if ( ! empty( $feature_meta ) ) {
-										$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+									$feature_icon = '';
+									$f_icon_type  = '';
+									$feature_name = ! empty( $feature->name ) ? $feature->name : '';
+									$feature_id   = ! empty( $feature->term_taxonomy_id ) ? absint( $feature->term_taxonomy_id ) : 0;
+									if ( ! empty( $feature_id ) ) {
+										$feature_meta = get_term_meta( $feature_id, 'tf_hotel_feature', true );
+										if ( ! empty( $feature_meta ) ) {
+											$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+										}
 									}
 									if ( ! empty( $f_icon_type ) && $f_icon_type == 'fa' ) {
 										$feature_icon = ! empty( $feature_meta['icon-fa'] ) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '';
 									} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
 										$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
 									}
-									if ( $tfkey < $features_count ) {
+									if ( $tfkey < $features_count && ! empty( $feature_name ) ) {
 										?>
                                         <li class="tf-feature-lists">
 											<?php
 											if ( ! empty( $feature_icon ) ) {
 												echo wp_kses_post( $feature_icon );
 											} ?>
-											<?php echo esc_html( $feature->name ); ?>
+											<?php echo esc_html( $feature_name ); ?>
                                         </li>
 									<?php }
 								} ?>
@@ -4000,7 +4192,7 @@ class Hotel {
 									echo '<span class="tf-multiple-tag" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . '">'
 										. wp_kses_post( $hotel_tag_name ) .
 									'</span>';
-								}								
+								}
 							}
 						}
 						?>
@@ -4059,22 +4251,28 @@ class Hotel {
 						<?php if ( $show_features == 'yes' && $features ) : ?>
                             <ul class="features">
 								<?php foreach ( $features as $tfkey => $feature ) {
-									$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
-									if ( ! empty( $feature_meta ) ) {
-										$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+									$feature_icon = '';
+									$f_icon_type  = '';
+									$feature_name = ! empty( $feature->name ) ? $feature->name : '';
+									$feature_id   = ! empty( $feature->term_taxonomy_id ) ? absint( $feature->term_taxonomy_id ) : 0;
+									if ( ! empty( $feature_id ) ) {
+										$feature_meta = get_term_meta( $feature_id, 'tf_hotel_feature', true );
+										if ( ! empty( $feature_meta ) ) {
+											$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+										}
 									}
 									if ( ! empty( $f_icon_type ) && $f_icon_type == 'fa' ) {
 										$feature_icon = ! empty( $feature_meta['icon-fa'] ) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '';
 									} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
 										$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
 									}
-									if ( $tfkey < $features_count ) { ?>
+									if ( $tfkey < $features_count && ! empty( $feature_name ) ) { ?>
                                         <li>
 											<?php
 											if ( ! empty( $feature_icon ) ) {
 												echo wp_kses_post( $feature_icon );
 											} ?>
-											<?php echo esc_html( $feature->name ); ?>
+											<?php echo esc_html( $feature_name ); ?>
                                         </li>
 									<?php } ?>
 								<?php } ?>
@@ -4153,7 +4351,7 @@ class Hotel {
 									echo '<div class="tf-tag-item tf-multiple-tag" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . '">'
 										. wp_kses_post( $hotel_tag_name ) .
 									'</div>';
-								}								
+								}
 							}
 						}
 						?>
@@ -4185,9 +4383,15 @@ class Hotel {
 						<?php if ( $show_features == 'yes' && $features ) : ?>
                             <ul class="features">
 								<?php foreach ( array_slice( $features, 0, $features_count ) as $tfkey => $feature ) :
-									$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
-									if ( ! empty( $feature_meta ) ) {
-										$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+									$feature_icon = '';
+									$f_icon_type  = '';
+									$feature_name = ! empty( $feature->name ) ? $feature->name : '';
+									$feature_id   = ! empty( $feature->term_taxonomy_id ) ? absint( $feature->term_taxonomy_id ) : 0;
+									if ( ! empty( $feature_id ) ) {
+										$feature_meta = get_term_meta( $feature_id, 'tf_hotel_feature', true );
+										if ( ! empty( $feature_meta ) ) {
+											$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+										}
 									}
 									if ( ! empty( $f_icon_type ) && $f_icon_type == 'fa' ) {
 										$feature_icon = ! empty( $feature_meta['icon-fa'] ) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '';
@@ -4199,7 +4403,7 @@ class Hotel {
 									if ( ! empty( $feature_icon ) ) {
 										echo wp_kses_post( $feature_icon );
 									}
-									echo esc_html( $feature->name );
+									echo esc_html( $feature_name );
 									//add comma after each feature except last one, if only 1/2 exists then don't add comma to last one
 									if ( count( $features ) > 1 && $tfkey != count( array_slice( $features, 0, $features_count ) ) - 1 ) {
 										echo ',';
@@ -4256,7 +4460,7 @@ class Hotel {
 											. wp_kses_post( $hotel_tag_name ) .
 										'</span>';
 									}
-									
+
 								}
 							}
 							?>
@@ -4321,9 +4525,15 @@ class Hotel {
                                                     <div class="roomName_flex">
                                                         <ul class="tf-archive-desc">
 															<?php foreach ( array_slice( $features, 0, $features_count ) as $feature ) {
-																$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
-																if ( ! empty( $feature_meta ) ) {
-																	$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+																$feature_icon = '';
+																$f_icon_type  = '';
+																$feature_name = ! empty( $feature->name ) ? $feature->name : '';
+																$feature_id   = ! empty( $feature->term_taxonomy_id ) ? absint( $feature->term_taxonomy_id ) : 0;
+																if ( ! empty( $feature_id ) ) {
+																	$feature_meta = get_term_meta( $feature_id, 'tf_hotel_feature', true );
+																	if ( ! empty( $feature_meta ) ) {
+																		$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+																	}
 																}
 																if ( ! empty( $f_icon_type ) && $f_icon_type == 'fa' ) {
 																	$feature_icon = ! empty( $feature_meta['icon-fa'] ) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '<i class="fas fa-bread-slice"></i>';
@@ -4339,7 +4549,7 @@ class Hotel {
 																		echo wp_kses_post( $feature_icon );
 																	} ?>
                                                                     <div class="tf-top">
-																		<?php echo esc_html( $feature->name ); ?>
+																		<?php echo esc_html( $feature_name ); ?>
                                                                         <i class="tool-i"></i>
                                                                     </div>
                                                                 </li>
@@ -4384,6 +4594,7 @@ class Hotel {
 			return;
 		}
 		$post_id = isset( $_POST['post_id'] ) ? intval( wp_unslash( $_POST['post_id'] ) ) : 0;
+		$design = isset( $_POST['design'] ) ? sanitize_text_field( wp_unslash( $_POST['design'] ) ) : '';
 		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 
 		// Single Template Style
@@ -4395,7 +4606,7 @@ class Hotel {
 
 		$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
-		$tf_hotel_selected_template = $tf_hotel_selected_check;
+		$tf_hotel_selected_template = !empty($design) ? $design : $tf_hotel_selected_check;
 		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
 		$rooms                       = Room::get_hotel_rooms( $post_id );
@@ -4462,7 +4673,7 @@ class Hotel {
 										breakpoint: 640,
 										settings: {
 											arrows: false
-										}	
+										}
 									}]
                                 });
 
@@ -4996,7 +5207,6 @@ class Hotel {
 
 		wp_die();
 	}
-
 
 	/*
      * Hotel search ajax

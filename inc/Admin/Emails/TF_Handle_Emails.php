@@ -98,6 +98,7 @@ class TF_Handle_Emails {
         $order_billing_country  = $order->get_billing_country();
         $order_billing_postcode = $order->get_billing_postcode();
         $payment_method_title   = $order->get_payment_method_title();
+        $shipping_method_title   = $order->get_shipping_method();
         $order_status           = $order->get_status();
         $order_date_created     = $order->get_date_created();
         //payment method
@@ -249,17 +250,27 @@ class TF_Handle_Emails {
         }
 
         $replacements = array(
+            '{order_id}'       => $order_id,
             '{booking_id}'       => $order_id,
+            '{booking_date}'     => $order_date_created,
             '{booking_url}'      => $order_url,
             '{booking_details}'  => $booking_details,
             '{fullname}'         => $order_data['billing']['first_name'] . ' ' . $order_data['billing']['last_name'],
             '{user_email}'       => $order_data['billing']['email'],
+            '{address}'          => $order_data['billing']['address_1'] . ' ' . $order_data['billing']['address_2'],
             '{billing_address}'  => $order_data['billing']['address_1'] . ' ' . $order_data['billing']['address_2'],
             '{city}'             => $order_data['billing']['city'],
             '{billing_state}'    => $order_data['billing']['state'],
             '{billing_zip}'      => $order_data['billing']['postcode'],
+            '{zip}'              => $order_data['billing']['postcode'],
             '{country}'          => $order_data['billing']['country'],
             '{phone}'            => $order_data['billing']['phone'],
+            '{shipping_address}' => $order_data['shipping']['address_1'] . ' ' . $order_data['shipping']['address_2'],
+            '{shipping_city}'    => $order_data['shipping']['city'],
+            '{shipping_state}'   => $order_data['shipping']['state'],
+            '{shipping_zip}'     => $order_data['shipping']['postcode'],
+            '{shipping_country}' => $order_data['shipping']['country'],
+            '{shipping_method}'  => $shipping_method_title,
             '{payment_method}'   => $order_data['payment_method_title'],
             '{order_total}'      => wc_price($order_total),
             '{order_subtotal}'   => wc_price($order_subtotal),

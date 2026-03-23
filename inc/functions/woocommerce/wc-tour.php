@@ -977,6 +977,7 @@ function tf_tours_booking_function() {
 			'infants'     => $infant,
 			'total_price' => $without_payment_price + $tour_extra_total,
 			'due_price'   => wc_price($without_payment_price + $tour_extra_total),
+			'unique_id'   => wp_rand(),
 			'visitor_details' => wp_json_encode($tf_visitor_details)
 		];
 
@@ -1128,11 +1129,15 @@ function tf_tours_booking_function() {
 				$response['redirect_to'] = html_entity_decode($tf_booking_url);
 			}else{
 				// Add product to cart with the custom cart item data
-				WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_tours_data );
-
-				$response['product_id']  = $product_id;
-				$response['add_to_cart'] = 'true';
-				$response['redirect_to'] = $instantio_is_active == 1 ? ($quick_checkout == 0 ? wc_get_checkout_url() : '') : wc_get_checkout_url();
+				$added_to_cart = WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_tours_data );
+				if ( ! $added_to_cart ) {
+					$response['status']   = 'error';
+					$response['errors'][] = esc_html__( 'Unable to add this tour booking to cart. Please try again.', 'tourfic' );
+				} else {
+					$response['product_id']  = $product_id;
+					$response['add_to_cart'] = 'true';
+					$response['redirect_to'] = $instantio_is_active == 1 ? ( $quick_checkout == 0 ? wc_get_checkout_url() : '' ) : wc_get_checkout_url();
+				}
 			}
 
 		} else {
