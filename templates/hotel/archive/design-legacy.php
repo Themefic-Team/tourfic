@@ -30,8 +30,8 @@ use \Tourfic\Classes\Hotel\Hotel;
 						<span><?php echo ')'; ?> </span>
 					</div>
 					<div class="tf-list-grid">
-		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
-		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
+		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_attr_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
+		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_attr_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
 						<div class="tf-sorting-selection-warper">
                             <form class="tf-archive-ordering" method="get">
                                 <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
@@ -48,24 +48,29 @@ use \Tourfic\Classes\Hotel\Hotel;
                         </div>
 		            </div>
 		        </div>
-				<div class="archive_ajax_result <?php echo $tf_defult_views=="grid" ? esc_attr('tours-grid') : '' ?>">
-					<?php
-					if ( have_posts() ) {
-						while ( have_posts() ) {
-							the_post();
-							$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
-							if ( !empty( $hotel_meta[ "featured" ] ) && $hotel_meta[ "featured" ] == 1 ) {
-								Hotel::tf_hotel_archive_single_item();
+					<div class="archive_ajax_result <?php echo $tf_defult_views=="grid" ? esc_attr('tours-grid') : '' ?>">
+						<?php
+						if ( have_posts() ) {
+							while ( have_posts() ) {
+								the_post();
+								$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
+								$is_hotel_featured = Hotel::is_featured_hotel_meta( $hotel_meta );
+								if ( $is_hotel_featured ) {
+									Hotel::tf_hotel_archive_single_item();
+								}
 							}
-						}
-						while ( have_posts() ) {
-							the_post();
-							$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
-							if ( empty($hotel_meta[ "featured" ]) ) {
-								Hotel::tf_hotel_archive_single_item();
+
+							rewind_posts();
+
+							while ( have_posts() ) {
+								the_post();
+								$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
+								$is_hotel_featured = Hotel::is_featured_hotel_meta( $hotel_meta );
+								if ( ! $is_hotel_featured ) {
+									Hotel::tf_hotel_archive_single_item();
+								}
 							}
-						}
-					} else {
+						} else {
 						echo '<div class="tf-nothing-found" data-post-count="0">' .esc_html__("No Hotels Found!", "tourfic"). '</div>';
 					}
 					?>

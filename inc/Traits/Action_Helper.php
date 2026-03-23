@@ -1248,42 +1248,8 @@ trait Action_Helper {
 			);
 		}
 
-		if(!empty($tf_min_seat) && !empty($tf_max_seat)){
-			$args['meta_query'] = array(
-				array(
-					'key' => 'tf_search_passengers',
-					'value'    => [$tf_min_seat, $tf_max_seat],
-					'compare'    => 'BETWEEN',
-					'type' => 'DECIMAL(10,3)'
-				),
-			);
-		}
-
-		if(!empty($tf_startprice) && !empty($tf_endprice) && $posttype == 'tf_carrental'){
-			$args['meta_query'] = array(
-				array(
-					'key' => 'tf_search_car_rent',
-					'value'    => [$tf_startprice, $tf_endprice],
-					'compare'    => 'BETWEEN',
-					'type' => 'DECIMAL(10,3)'
-				),
-			);
-		}
-
-		if(!empty($tf_driver_age) && 'on'==$tf_driver_age && $posttype == 'tf_carrental'){
-			$args['meta_query'] = array(
-				array(
-					'key' => 'tf_search_driver_age',
-					'value'    => [$car_driver_min_age, $car_driver_max_age],
-					'compare'    => 'BETWEEN',
-					'type' => 'DECIMAL(10,3)'
-				),
-			);
-		}
-
-		if (!empty($args['meta_query']) && count($args['meta_query']) > 1) {
-			$args['meta_query']['relation'] = 'AND';
-		}
+		// NOTE: Car seat/price/driver-age filtering is handled by tf_car_availability_response()
+		// to keep behavior consistent across legacy and modern car meta schemas.
 
 		if ( $category ) {
 			$args['tax_query']['relation'] = $relation;
@@ -1395,7 +1361,7 @@ trait Action_Helper {
 
 					$car_inventory = Availability::tf_car_inventory(get_the_ID(), $car_meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 					if($car_inventory){
-						tf_car_availability_response($car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice);
+						tf_car_availability_response( $car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice, $tf_min_seat, $tf_max_seat, $tf_driver_age, $car_driver_min_age, $car_driver_max_age );
 					}
 				} elseif ( $posttype == 'tf_room' ) {
 					
@@ -1467,7 +1433,6 @@ trait Action_Helper {
 				}
 
 				$result_query  = new \WP_Query( $filter_args );
-				$result_query2 = $result_query;
 				if ( $result_query->have_posts() ) {
 					$count     = 0;
 					$locations = [];
@@ -1477,13 +1442,13 @@ trait Action_Helper {
 
 						if ( $posttype == 'tf_hotel' ) {
 							$hotel_meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
-							if ( ! $hotel_meta["featured"] ) {
+							if ( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
                                 continue;
 							}
 
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 								$count ++;
-								$map                 = ! empty( $hotel_meta['map'] ) ? Helper::tf_data_types( $hotel_meta['map'] ) : '';
+								$map                 = Hotel::get_hotel_map_data( $hotel_meta );
 								$min_price_arr       = Hotel_Pricing::instance( get_the_ID() )->get_min_price();
 								$min_sale_price      = ! empty( $min_price_arr['min_sale_price'] ) ? $min_price_arr['min_sale_price'] : 0;
 								$min_regular_price   = ! empty( $min_price_arr['min_regular_price'] ) ? $min_price_arr['min_regular_price'] : 0;
@@ -1556,17 +1521,17 @@ trait Action_Helper {
 								if ( isset( $data[4] ) && isset( $data[5] ) ) {
 									[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
 
-									if ( $hotel_meta["featured"] ) {
+									if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice, $elSettings );
 									}
 								} else {
 									[ $adults, $child, $room, $check_in_out ] = $data;
-									if ( $hotel_meta["featured"] ) {
+									if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, '', '', $elSettings );
 									}
 								}
 							} else {
-								if ( $hotel_meta["featured"] ) {
+								if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 									Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $elSettings );
 								}
 							}
@@ -1786,17 +1751,19 @@ trait Action_Helper {
 
 					}
 
-					while ( $result_query2->have_posts() ) {
-						$result_query2->the_post();
+					$result_query->rewind_posts();
+
+					while ( $result_query->have_posts() ) {
+						$result_query->the_post();
 
 						if ( $posttype == 'tf_hotel' ) {
 							$hotel_meta = get_post_meta( get_the_ID(), 'tf_hotels_opt', true );
-							if ( $hotel_meta["featured"] ) {
+							if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 								continue;
 							}
 							if (function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 								$count ++;
-								$map                 = ! empty( $hotel_meta['map'] ) ? Helper::tf_data_types( $hotel_meta['map'] ) : '';
+								$map                 = Hotel::get_hotel_map_data( $hotel_meta );
 								$min_price_arr       = Hotel_Pricing::instance( get_the_ID() )->get_min_price();
 								$min_sale_price      = ! empty( $min_price_arr['min_sale_price'] ) ? $min_price_arr['min_sale_price'] : 0;
 								$min_regular_price   = ! empty( $min_price_arr['min_regular_price'] ) ? $min_price_arr['min_regular_price'] : 0;
@@ -1871,18 +1838,18 @@ trait Action_Helper {
 								if ( isset( $data[4] ) && isset( $data[5] ) ) {
 									[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
 
-									if ( ! $hotel_meta["featured"] ) {
+									if ( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice, $elSettings );
 									}
 								} else {
 									[ $adults, $child, $room, $check_in_out ] = $data;
 
-									if ( ! $hotel_meta["featured"] ) {
+									if ( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, '', '', $elSettings );
 									}
 								}
 							} else {
-								if ( ! $hotel_meta["featured"] ) {
+								if ( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 									Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $elSettings );
 								}
 							}
@@ -2257,13 +2224,30 @@ trait Action_Helper {
 	 *
 	 * @author Jahid
 	 */
+	private function tf_get_days_in_month( $month, $year ) {
+		$month = (int) $month;
+		$year  = (int) $year;
+
+		if ( $month < 1 || $month > 12 || $year < 1 ) {
+			return 0;
+		}
+
+		if ( function_exists( 'cal_days_in_month' ) ) {
+			return (int) cal_days_in_month( CAL_GREGORIAN, $month, $year );
+		}
+
+		$month_start = strtotime( sprintf( '%04d-%02d-01', $year, $month ) );
+
+		return $month_start ? (int) gmdate( 't', $month_start ) : 0;
+	}
+
 	function tf_month_chart_filter_callback() {
 		//Verify Nonce
 		check_ajax_referer( 'updates', '_nonce' );
 
 		$search_month = sanitize_key( $_POST['month'] );
 		$search_year  = sanitize_key( $_POST['year'] );
-		$month_dates  = cal_days_in_month( CAL_GREGORIAN, $search_month, $search_year );
+		$month_dates  = $this->tf_get_days_in_month( $search_month, $search_year );
 
 		//Order Data Retrive
 		$tf_old_order_limit = new \WC_Order_Query( array(

@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.20.6
+Stable tag: 2.21.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -417,27 +417,34 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.20.6 – February 21, 2026 =
+= 2.21.4 – Mar 18, 2026 =
 
-- New: Added room archive, search, and taxonomy archive support.
-- New: Added Room Type taxonomy.
-- New: Added shortcodes – Search Form, Reviews, Rooms, Recent Rooms, and Room Types.
-- New: Added Elementor Template Builder support.
-- New: Added House Rules section on single room pages.
-- New: Added Review section on single room pages.
-- New: Added Cancellation Policy section on single room pages.
-- Improvement: Updated Room Options design.
-- Improvement: License Stability has been improved.
+- New: Apartment deposit settings with partial payment support
+- New: Apartment booking without payment option
+- New: Dynamic frontend availability for services
+- New: Sidebar details added to Tourfic settings page
+- Improved: Booking and pricing for tours, hotels, apartments, and cars
+- Improved: Archive filtering, listing accuracy, and widget rendering
+- Improved: System stability, AJAX handling, and experience
+- Tweak: Apartment template alignment and popup UI
+- Tweak: Booking step visibility for no-payment mode
+- Tweak: Archive listing structure and featured loop behavior
+- Tweak: Car and tour filter compatibility and price range display
+- Fixed: Tour package pricing fallback in backend booking
+- Fixed: Zero-price handling and checkout-related issues
 
-= 2.20.5 – February 10, 2026 =
+= 2.21.3 – March 16, 2026 =
 
-- Improvement: Added Forgot Password to the login form.
-- Improvement: String Translation support.
-- Fixed: Search form date issue has been resolved.
-- Fixed: Tour Google Maps issue has been resolved.
-- Fixed: Tour starting price display issue has been resolved.
-- Fixed: Tour date on mobile issue has been resolved.
-- Fixed: Backend tour booking voucher generation issue resolved.
+- Improved: System stability has been improved.
+- Compatibility: Compatible with WordPress (v6.9.4).
+
+= 2.21.2 – March 12, 2026 =
+
+- New: Pre-built template for single room booking.
+- Added: Travelfic theme support for the room booking template.
+- Added: New design for single and archive pages for rooms.
+- Added: Customization settings for the demo template.
+- Improved: System stability has been improved.
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 

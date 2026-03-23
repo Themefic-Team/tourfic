@@ -155,7 +155,7 @@ class Search_Form extends \Tourfic\Core\Shortcodes
 							}
 							if (! in_array('hotel', $disable_services) && Helper::tf_is_search_form_tab_type('room', $type)) {
 							?>
-								<div id="tf-room-booking-form" class="tf-tabcontent <?php echo Helper::tf_is_search_form_single_tab($type) ? 'style="display:block"' : '' ?> <?php echo esc_attr($child_age_limit); ?>">
+								<div id="tf-room-booking-form" class="tf-tabcontent <?php echo esc_attr($child_age_limit); ?>" <?php echo Helper::tf_is_search_form_single_tab($type) ? 'style="display:block"' : '' ?>>
 									<?php
 									Room::tf_room_search_form_horizontal($classes, $title, $subtitle, $author, $advanced, $design);
 									?>

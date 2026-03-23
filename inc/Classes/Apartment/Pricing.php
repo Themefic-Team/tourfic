@@ -33,7 +33,35 @@ class Pricing {
 
 	public function __construct($apt_id) {
 		$this->apt_id = $apt_id;
-		$this->meta = get_post_meta( $this->apt_id, 'tf_apartment_opt', true );
+		$this->meta = self::get_normalized_meta( $this->apt_id );
+	}
+
+	private static function get_normalized_meta( $apt_id ) {
+		$meta = get_post_meta( $apt_id, 'tf_apartment_opt', true );
+		$meta = is_array( $meta ) ? $meta : array();
+
+		$legacy_meta = get_post_meta( $apt_id, 'tf_apartments_opt', true );
+		if ( ! is_array( $legacy_meta ) || empty( $legacy_meta ) ) {
+			return $meta;
+		}
+
+		if ( empty( $meta['pricing_type'] ) && isset( $legacy_meta['pricing_by'] ) ) {
+			$meta['pricing_type'] = '1' === (string) $legacy_meta['pricing_by'] ? 'per_night' : 'per_person';
+		}
+
+		if ( empty( $meta['price_per_night'] ) && isset( $legacy_meta['per_night_price'] ) && '' !== (string) $legacy_meta['per_night_price'] ) {
+			$meta['price_per_night'] = $legacy_meta['per_night_price'];
+		}
+
+		if ( empty( $meta['adult_price'] ) && isset( $legacy_meta['adult_price'] ) && '' !== (string) $legacy_meta['adult_price'] ) {
+			$meta['adult_price'] = $legacy_meta['adult_price'];
+		}
+
+		if ( empty( $meta['pricing_type'] ) ) {
+			$meta['pricing_type'] = 'per_night';
+		}
+
+		return $meta;
 	}
 	
 
@@ -372,7 +400,7 @@ class Pricing {
 		if( $query->have_posts() ) {
 			while( $query->have_posts() ) {
 				$query->the_post();
-				$meta                = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+				$meta                = self::get_normalized_meta( get_the_ID() );
 				$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
 				$adult_price         = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
 				$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';

@@ -6,6 +6,14 @@ use \Tourfic\Classes\Helper;
 $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] : 'grid';
 
 $tf_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_design_1_bannar'] : '';
+$tf_car_search_context = function_exists( 'tf_get_car_archive_search_context' ) ? tf_get_car_archive_search_context() : array(
+	'pickup'       => '',
+	'dropoff'      => '',
+	'pickup_date'  => '',
+	'dropoff_date' => '',
+	'pickup_time'  => '',
+	'dropoff_time' => '',
+);
 
 ?>
 <div class="tf-archive-template__one">
@@ -64,25 +72,44 @@ $tf_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template'
 
                     <div class="tf-car-archive-result">
                         <?php do_action("tf_car_archive_card_items_before"); ?>
-                        <div class="tf-car-result archive_ajax_result tf-flex tf-flex-gap-32 <?php echo $tf_defult_views=="list" ? esc_attr('list-view') : esc_attr('grid-view'); ?>">
-                            
-                            <?php
-                            if ( have_posts() ) {
-                                while ( have_posts() ) {
-                                    the_post();
-                                    $car_meta = get_post_meta( get_the_ID() , 'tf_carrental_opt', true );
-                                    if ( !empty( $car_meta[ "car_as_featured" ] ) && $car_meta[ "car_as_featured" ] == 1 ) {
-                                        tf_car_archive_single_item();
-                                    }
-                                }
-                                while ( have_posts() ) {
-                                    the_post();
-                                    $car_meta = get_post_meta( get_the_ID() , 'tf_carrental_opt', true );
-                                    if ( empty($car_meta[ "car_as_featured" ]) ) {
-                                        tf_car_archive_single_item();
-                                    }
-                                }
-                            } else {
+	                        <div class="tf-car-result archive_ajax_result tf-flex tf-flex-gap-32 <?php echo $tf_defult_views=="list" ? esc_attr('list-view') : esc_attr('grid-view'); ?>">
+	                            
+	                            <?php
+	                            if ( have_posts() ) {
+	                                while ( have_posts() ) {
+	                                    the_post();
+	                                    $car_meta = get_post_meta( get_the_ID() , 'tf_carrental_opt', true );
+	                                    $is_car_featured = is_array( $car_meta ) && ! empty( $car_meta['car_as_featured'] );
+	                                    if ( $is_car_featured ) {
+	                                        tf_car_archive_single_item(
+												$tf_car_search_context['pickup'],
+												$tf_car_search_context['dropoff'],
+												$tf_car_search_context['pickup_date'],
+												$tf_car_search_context['dropoff_date'],
+												$tf_car_search_context['pickup_time'],
+												$tf_car_search_context['dropoff_time']
+											);
+	                                    }
+	                                }
+
+	                                rewind_posts();
+
+	                                while ( have_posts() ) {
+	                                    the_post();
+	                                    $car_meta = get_post_meta( get_the_ID() , 'tf_carrental_opt', true );
+	                                    $is_car_featured = is_array( $car_meta ) && ! empty( $car_meta['car_as_featured'] );
+	                                    if ( ! $is_car_featured ) {
+	                                        tf_car_archive_single_item(
+												$tf_car_search_context['pickup'],
+												$tf_car_search_context['dropoff'],
+												$tf_car_search_context['pickup_date'],
+												$tf_car_search_context['dropoff_date'],
+												$tf_car_search_context['pickup_time'],
+												$tf_car_search_context['dropoff_time']
+											);
+	                                    }
+	                                }
+	                            } else {
                                 echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Cars Found!", "tourfic"). '</div>';
                             }
                             ?>

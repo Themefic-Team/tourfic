@@ -60,7 +60,10 @@ function tf_car_booking_callback() {
 	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 	
 
-	$total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
+	$total_prices = ! empty( $get_prices['sale_price'] ) ? (float) $get_prices['sale_price'] : 0;
+	if ( $total_prices <= 0 && ! empty( $get_prices['regular_price'] ) ) {
+		$total_prices = (float) $get_prices['regular_price'];
+	}
 
 	$response      = array();
 	$tf_cars_data = array();
@@ -266,11 +269,15 @@ function tf_car_booking_callback() {
 				$response['add_to_cart'] = 'true';
 				$response['redirect_to'] = $tf_booking_url;
 			}else{
-				WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_cars_data );
-
-				$response['product_id']  = $product_id;
-				$response['add_to_cart'] = 'true';
-				$response['redirect_to'] = wc_get_checkout_url();
+				$added_to_cart = WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_cars_data );
+				if ( ! $added_to_cart ) {
+					$response['status']   = 'error';
+					$response['errors'][] = esc_html__( 'Unable to add this car booking to cart. Please try again.', 'tourfic' );
+				} else {
+					$response['product_id']  = $product_id;
+					$response['add_to_cart'] = 'true';
+					$response['redirect_to'] = wc_get_checkout_url();
+				}
 			}
 			$response['without_payment'] = 'false';
 		}
