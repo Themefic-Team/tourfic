@@ -11973,6 +11973,14 @@ msgstr ""
 msgid "Fuel Type"
 msgstr ""
 
+#: inc/Classes/Car_Rental/Pricing.php:223
+msgid "day"
+msgstr ""
+
+#: inc/Classes/Car_Rental/Pricing.php:223
+msgid "night"
+msgstr ""
+
 #: inc/Classes/Car_Rental/Pricing.php:233
 msgid "With Taxes"
 msgstr ""
