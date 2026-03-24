@@ -3,15 +3,11 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
-use \Tourfic\Classes\Hotel\Hotel;
 use Tourfic\Classes\Hotel\Components\Archive\Listings;
 ?>
 
 <div class="tf-main-wrapper tf-archive-template__legacy" data-fullwidth="true">
-	<?php
-		do_action( 'tf_before_container' );
-		$post_count = $GLOBALS['wp_query']->post_count;
-	?>
+	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf-container">
 		<div class="search-result-inner">
 

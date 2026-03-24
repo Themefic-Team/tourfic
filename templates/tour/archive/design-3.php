@@ -5,7 +5,6 @@ defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use Tourfic\Classes\Tour\Components\Archive\Listings;
 
-$post_count = $GLOBALS['wp_query']->post_count;
 $tf_tour_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_3_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_3_bannar'] : '';
 ?>
 

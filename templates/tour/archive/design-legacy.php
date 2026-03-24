@@ -5,16 +5,9 @@ defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use Tourfic\Classes\Tour\Components\Archive\Listings;
 ?>
-
-
 <div class="tf-main-wrapper tf-archive-template__legacy" data-fullwidth="true">
-	<?php
-		do_action( 'tf_before_container' );
-	?>
+	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf-container">
-		<?php 
-		$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_view'] : 'list';
-		?>
 		<div class="search-result-inner">
 			<?php Listings::render_design_legacy(); ?>
 

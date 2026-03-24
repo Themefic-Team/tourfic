@@ -7,8 +7,7 @@ defined( 'ABSPATH' ) || exit;
 
     <?php 
     use \Tourfic\Classes\Helper;
-use Tourfic\Classes\Hotel\Components\Archive\Listings;
-use \Tourfic\Classes\Hotel\Hotel;
+    use Tourfic\Classes\Hotel\Components\Archive\Listings;
     
     $tf_hotel_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] : '';
     ?>
@@ -27,10 +26,7 @@ use \Tourfic\Classes\Hotel\Hotel;
 
     <!--Content section end -->
     <div class="tf-content-wrapper">
-        <?php
-            do_action( 'tf_before_container' );
-            $post_count = $GLOBALS['wp_query']->post_count;
-        ?>
+        <?php do_action( 'tf_before_container' ); ?>
         <div class="tf-container">
         
             <!-- Hotel details Srart -->
@@ -59,11 +55,7 @@ use \Tourfic\Classes\Hotel\Hotel;
                             <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
                         </div>
                         <?php } ?>
-        
-                    </div> 
-
-                    
-    
+                    </div>
                 </div>        
             </div>        
             <!-- Hotel details End -->

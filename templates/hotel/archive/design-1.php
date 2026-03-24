@@ -4,17 +4,13 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 use Tourfic\Classes\Hotel\Components\Archive\Listings;
-use \Tourfic\Classes\Hotel\Hotel;
 ?>
 
 <div class="tf-archive-page tf-archive-design-1 tf-archive-template__one">
     <div class="tf-container">
         <div class="tf-row tf-archive-inner tf-flex">
             <div class="tf-page-content tf-archive-left tf-result-previews">
-                <?php
-                    do_action( 'tf_before_container' );
-                    $post_count = $GLOBALS['wp_query']->post_count;
-                ?>
+                <?php do_action( 'tf_before_container' ); ?>
                 <?php Listings::render_design_1(); ?>
             </div>
 

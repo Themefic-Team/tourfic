@@ -913,7 +913,7 @@ trait Action_Helper {
         $car_driver_max_age = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] : 40;
 		// Cars Data End
 		
-		$elSettings = !empty($_POST['elSettings']) ? json_decode(stripslashes($_POST['elSettings']), true) : [];
+		$builderSettings = !empty($_POST['builderSettings']) ? json_decode(stripslashes($_POST['builderSettings']), true) : [];
 
 		// Author ID if any (single value)
 		$tf_author_ids = isset( $_POST['tf_author'] ) ? intval( $_POST['tf_author'] ) : '';
@@ -1397,9 +1397,9 @@ trait Action_Helper {
 			$post_per_page = self::tfopt( 'posts_per_page' ) ? absint( wp_unslash(self::tfopt( 'posts_per_page' ))) : 10;
 
 			//elementor settigns
-			$post_per_page = !empty($elSettings['posts_per_page']) ? absint( wp_unslash($elSettings['posts_per_page'])) : $post_per_page;
-			$el_orderby = !empty($elSettings['orderby'] ) ? $elSettings['orderby'] : '';
-			$el_order = !empty($elSettings['order']) ? $elSettings['order'] : '';
+			$post_per_page = !empty($builderSettings['posts_per_page']) ? absint( wp_unslash($builderSettings['posts_per_page'])) : $post_per_page;
+			$el_orderby = !empty($builderSettings['orderby'] ) ? $builderSettings['orderby'] : '';
+			$el_order = !empty($builderSettings['order']) ? $builderSettings['order'] : '';
 
 			$total_filtered_results = count( $tf_total_filters );
 			$current_page           = ! empty( $_POST['page'] ) ? absint( $_POST['page'] ) : 1;
@@ -1522,17 +1522,17 @@ trait Action_Helper {
 									[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
 
 									if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
-										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice, $elSettings );
+										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice, $builderSettings );
 									}
 								} else {
 									[ $adults, $child, $room, $check_in_out ] = $data;
 									if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
-										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, '', '', $elSettings );
+										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, '', '', $builderSettings );
 									}
 								}
 							} else {
 								if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
-									Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $elSettings );
+									Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $builderSettings );
 								}
 							}
 						} elseif ( $posttype == 'tf_tours' ) {
@@ -1619,18 +1619,18 @@ trait Action_Helper {
 								if ( isset( $data[3] ) && isset( $data[4] ) ) {
 									[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
 									if ( $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice, $elSettings );
+										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice, $builderSettings );
 									}
 								} else {
 									[ $adults, $child, $check_in_out ] = $data;
 
 									if ( $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, '', '', $elSettings );
+										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, '', '', $builderSettings );
 									}
 								}
 							} else {
 								if ( $tour_meta["tour_as_featured"] ) {
-									Tour::tf_tour_archive_single_item('', '', '', '', '', $elSettings );
+									Tour::tf_tour_archive_single_item('', '', '', '', '', $builderSettings );
 								}
 							}
 						} elseif ( $posttype == 'tf_apartment' ) {
@@ -1716,16 +1716,16 @@ trait Action_Helper {
 							if ( ! empty( $data ) ) {
 								if ( isset( $data[4] ) && isset( $data[5] ) ) {
 									if ( $apartment_meta["apartment_as_featured"] ) {
-										Apartment::tf_apartment_archive_single_item( $data, $elSettings );
+										Apartment::tf_apartment_archive_single_item( $data, $builderSettings );
 									}
 								} else {
 									if ( $apartment_meta["apartment_as_featured"] ) {
-										Apartment::tf_apartment_archive_single_item( $data, $elSettings );
+										Apartment::tf_apartment_archive_single_item( $data, $builderSettings );
 									}
 								}
 							} else {
 								if ( $apartment_meta["apartment_as_featured"] ) {
-									Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $elSettings);
+									Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $builderSettings);
 								}
 							}
 						} elseif ( $posttype == 'tf_carrental' ) {
@@ -1737,13 +1737,13 @@ trait Action_Helper {
 							if ( ! empty( $data ) ) {
 								if ( isset( $data[4] ) && isset( $data[5] ) ) {
 									[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
-									Room::tf_room_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice, $elSettings );
+									Room::tf_room_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice, $builderSettings );
 								} else {
 									[ $adults, $child, $room, $check_in_out ] = $data;
-									Room::tf_room_archive_single_item( $adults, $child, $room, $check_in_out, '', '', $elSettings );
+									Room::tf_room_archive_single_item( $adults, $child, $room, $check_in_out, '', '', $builderSettings );
 								}
 							} else {
-								Room::tf_room_archive_single_item('', '', '', '', '', '', $elSettings );
+								Room::tf_room_archive_single_item('', '', '', '', '', '', $builderSettings );
 							}
 						}else{
 
@@ -1839,18 +1839,18 @@ trait Action_Helper {
 									[ $adults, $child, $room, $check_in_out, $startprice, $endprice ] = $data;
 
 									if ( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
-										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice, $elSettings );
+										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice, $builderSettings );
 									}
 								} else {
 									[ $adults, $child, $room, $check_in_out ] = $data;
 
 									if ( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
-										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, '', '', $elSettings );
+										Hotel::tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, '', '', $builderSettings );
 									}
 								}
 							} else {
 								if ( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
-									Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $elSettings );
+									Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $builderSettings );
 								}
 							}
 						} elseif ( $posttype == 'tf_tours' ) {
@@ -1936,17 +1936,17 @@ trait Action_Helper {
 								if ( isset( $data[3] ) && isset( $data[4] ) ) {
 									[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
 									if ( ! $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice, $elSettings );
+										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice, $builderSettings );
 									}
 								} else {
 									[ $adults, $child, $check_in_out ] = $data;
 									if ( ! $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, '', '', $elSettings );
+										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, '', '', $builderSettings );
 									}
 								}
 							} else {
 								if ( ! $tour_meta["tour_as_featured"] ) {
-									Tour::tf_tour_archive_single_item('', '', '', '', '', $elSettings );
+									Tour::tf_tour_archive_single_item('', '', '', '', '', $builderSettings );
 								}
 							}
 						} elseif ( $posttype == 'tf_apartment' ) {
@@ -2027,16 +2027,16 @@ trait Action_Helper {
 							if ( ! empty( $data ) ) {
 								if ( isset( $data[4] ) && isset( $data[5] ) ) {
 									if ( ! $apartment_meta["apartment_as_featured"] ) {
-										Apartment::tf_apartment_archive_single_item( $data, $elSettings );
+										Apartment::tf_apartment_archive_single_item( $data, $builderSettings );
 									}
 								} else {
 									if ( ! $apartment_meta["apartment_as_featured"] ) {
-										Apartment::tf_apartment_archive_single_item( $data, $elSettings );
+										Apartment::tf_apartment_archive_single_item( $data, $builderSettings );
 									}
 								}
 							} else {
 								if ( ! $apartment_meta["apartment_as_featured"] ) {
-									Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $elSettings);
+									Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $builderSettings);
 								}
 							}
 						} elseif ( $posttype == 'tf_carrental' ) {
