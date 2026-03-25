@@ -103,7 +103,7 @@ $tf_cars_slug = get_option('car_slug');
                         <?php if(!empty(Helper::get_status_by_label('Include/Exclude', 'car')) && (!empty($includes) || !empty($excludes))){ ?>
                         <li data-menu="<?php echo esc_attr('tf-inc-exc'); ?>">
                             <a class="tf-hashlink" href="#tf-inc-exc">
-                                <?php esc_html_e("Include/Excluce", "tourfic"); ?>
+                                <?php esc_html_e("Include/Exclude", "tourfic"); ?>
                             </a>
                         </li>
                         <?php } ?>
@@ -320,7 +320,7 @@ $tf_cars_slug = get_option('car_slug');
                             <?php if(!empty(Helper::get_status_by_label('Include/Exclude', 'car')) && (!empty($includes) || !empty($excludes))){ ?>
                             <li data-menu="<?php echo esc_attr('tf-inc-exc'); ?>">
                                 <a class="tf-hashlink" href="#tf-inc-exc">
-                                    <?php esc_html_e("Include/Excluce", "tourfic"); ?>
+                                    <?php esc_html_e("Include/Exclude", "tourfic"); ?>
                                 </a>
                             </li>
                             <?php } ?>
