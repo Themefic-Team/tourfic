@@ -108,8 +108,8 @@ $car_extra_pass = !empty( $_POST['extra_key'] ) ? $_POST['extra_key'] : '';
 
 // Quantity from POST
 $extra_qty = !empty( $_POST['qty'] ) ? $_POST['qty'] : 0;
-$pickup_date = !empty($_POST['pickup_date']) ? sanitize_text_field($_POST['pickup_date']) : '';
-$dropoff_date = !empty($_POST['dropoff_date']) ? sanitize_text_field($_POST['dropoff_date']) : '';
+$pickup_date = !empty($_POST['pickup_date']) ? tf_normalize_date( sanitize_text_field($_POST['pickup_date']) ) : '';
+$dropoff_date = !empty($_POST['dropoff_date']) ? tf_normalize_date( sanitize_text_field($_POST['dropoff_date']) ) : '';
 $pickup_time = !empty($_POST['pickup_time']) ? sanitize_text_field($_POST['pickup_time']) : '';
 $dropoff_time = !empty($_POST['dropoff_time']) ? sanitize_text_field($_POST['dropoff_time']) : '';
 
@@ -126,18 +126,20 @@ $response['total_price'] = sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_p
 $total_days = 1;
 if( !empty($pickup_date) && !empty($dropoff_date) && !empty($pickup_time) && !empty($dropoff_time) ){
 	// Combine date and time
-	$pickup_datetime = new \DateTime("$pickup_date $pickup_time");
-	$dropoff_datetime = new \DateTime("$dropoff_date $dropoff_time");
+	$pickup_datetime = tf_car_create_datetime( $pickup_date, $pickup_time );
+	$dropoff_datetime = tf_car_create_datetime( $dropoff_date, $dropoff_time );
 
-	// Calculate the difference
-	$interval = $pickup_datetime->diff($dropoff_datetime);
+	if ( $pickup_datetime && $dropoff_datetime ) {
+		// Calculate the difference
+		$interval = $pickup_datetime->diff($dropoff_datetime);
 
-	// Get total days
-	$total_days = $interval->days;
-	
-	// If there are leftover hours that count as a partial day
-	if ($interval->h > 0 || $interval->i > 0) {
-		$total_days += 1;  // Add an extra day for any remaining hours
+		// Get total days
+		$total_days = $interval->days;
+
+		// If there are leftover hours that count as a partial day
+		if ($interval->h > 0 || $interval->i > 0) {
+			$total_days += 1;  // Add an extra day for any remaining hours
+		}
 	}
 }
 ob_start();
@@ -795,6 +797,54 @@ if ( ! function_exists( 'tf_car_search_ajax_callback' ) ) {
  * @author Jahid
  */
 
+if ( ! function_exists( 'tf_car_create_datetime' ) ) {
+	/**
+	 * Create DateTime from car booking date/time input safely.
+	 *
+	 * @param string             $date     Date string.
+	 * @param string             $time     Time string.
+	 * @param DateTimeZone|false $timezone Optional timezone.
+	 * @return DateTime|false
+	 */
+	function tf_car_create_datetime( $date, $time, $timezone = false ) {
+		$date = ! empty( $date ) ? tf_normalize_date( sanitize_text_field( $date ) ) : '';
+		$time = ! empty( $time ) ? sanitize_text_field( $time ) : '';
+
+		if ( empty( $date ) || empty( $time ) ) {
+			return false;
+		}
+
+		$datetime_string = $date . ' ' . $time;
+		$formats = array(
+			'Y/m/d H:i',
+			'Y/m/d h:i A',
+			'Y/m/d g:i A',
+		);
+
+		foreach ( $formats as $format ) {
+			$datetime = $timezone instanceof DateTimeZone
+				? DateTime::createFromFormat( $format, $datetime_string, $timezone )
+				: DateTime::createFromFormat( $format, $datetime_string );
+
+			if ( false !== $datetime ) {
+				return $datetime;
+			}
+		}
+
+		$timestamp = strtotime( $datetime_string );
+		if ( false === $timestamp ) {
+			return false;
+		}
+
+		$datetime = new DateTime( '@' . $timestamp );
+		if ( $timezone instanceof DateTimeZone ) {
+			$datetime->setTimezone( $timezone );
+		}
+
+		return $datetime;
+	}
+}
+
 function tf_getBestRefundPolicy($cancellations, $pickup_date, $pickup_time) {
     $bestPolicy = null;
 
@@ -802,9 +852,11 @@ function tf_getBestRefundPolicy($cancellations, $pickup_date, $pickup_time) {
 	$timezone = new DateTimeZone($tf_default_time_zone);
 
 	$today = new DateTime('now', $timezone);
-	$pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $pickup_date . ' ' . $pickup_time, $timezone);
+	$pickupDateTime = tf_car_create_datetime( $pickup_date, $pickup_time, $timezone );
+	$days = 0;
+	$hours = 0;
 
-	if($today < $pickupDateTime){
+	if( $pickupDateTime && $today < $pickupDateTime ){
 		$interval = $today->diff($pickupDateTime);
 		// Get days and hours separately
 		$days = $interval->days;
@@ -872,10 +924,10 @@ function tf_car_booking_pupup_callback() {
 	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
 	$car_protection_tab_title = ! empty( $meta['protection_tab_title'] ) ? esc_html($meta['protection_tab_title']) : __('Protection', 'tourfic');
 
-	$pickup_date = ! empty( $_POST['pickup_date'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_date']) ) : '';
+	$pickup_date = ! empty( $_POST['pickup_date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash($_POST['pickup_date']) ) ) : '';
 	$pickup_time = ! empty( $_POST['pickup_time'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_time']) ) : '';
 
-	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_date']) ) : '';
+	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash($_POST['dropoff_date']) ) ) : '';
 	$dropoff_time = ! empty( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
 
 	$booking_btn_text = !empty(Helper::tfopt('car_booking_form_button_text')) ? Helper::tfopt('car_booking_form_button_text') : __('Continue', 'tourfic');
@@ -911,24 +963,28 @@ function tf_car_booking_pupup_callback() {
 					<tr>
 						<th>
 							<?php
-							if( 'day' == $protection['price_by'] ){
-								// Combine date and time
-								$pickup_datetime = new \DateTime("$pickup_date $pickup_time");
-								$dropoff_datetime = new \DateTime("$dropoff_date $dropoff_time");
-				
-								// Calculate the difference
-								$interval = $pickup_datetime->diff($dropoff_datetime);
-				
-								// Get total days
-								$total_days = $interval->days;
-											
-								// If there are leftover hours that count as a partial day
-								if ($interval->h > 0 || $interval->i > 0) {
-									$total_days += 1;  // Add an extra day for any remaining hours
+								if( 'day' == $protection['price_by'] ){
+									// Combine date and time
+									$pickup_datetime = tf_car_create_datetime( $pickup_date, $pickup_time );
+									$dropoff_datetime = tf_car_create_datetime( $dropoff_date, $dropoff_time );
+
+									if ( $pickup_datetime && $dropoff_datetime ) {
+										// Calculate the difference
+										$interval = $pickup_datetime->diff($dropoff_datetime);
+
+										// Get total days
+										$total_days = $interval->days;
+
+										// If there are leftover hours that count as a partial day
+										if ($interval->h > 0 || $interval->i > 0) {
+											$total_days += 1;  // Add an extra day for any remaining hours
+										}
+									} else {
+										$total_days = 1;
+									}
+								}else{
+									$total_days = 1;
 								}
-							}else{
-								$total_days = 1;
-							}
 							?>
 							<div class="tf-flex tf-flex-align-center">
 								<div class="tf-protection-select">
@@ -1091,15 +1147,17 @@ function tf_getRefundPolicy($cancellations, $pickup_date, $pickup_time) {
     $tf_default_time_zone = !empty(Helper::tfopt('cancellation_time_zone')) ? Helper::tfopt('cancellation_time_zone') : 'America/New_York';
     $timezone = new DateTimeZone($tf_default_time_zone);
 
-    $today = new DateTime('now', $timezone);
-    $pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $pickup_date . ' ' . $pickup_time, $timezone);
+	$today = new DateTime('now', $timezone);
+	$pickupDateTime = tf_car_create_datetime( $pickup_date, $pickup_time, $timezone );
+	$days = 0;
+	$hours = 0;
 
-    if ($today < $pickupDateTime) {
-        $interval = $today->diff($pickupDateTime);
-        // Get days and hours separately
-        $days = $interval->days;
-        $hours = $interval->h;
-    }
+	if ( $pickupDateTime && $today < $pickupDateTime ) {
+		$interval = $today->diff($pickupDateTime);
+		// Get days and hours separately
+		$days = $interval->days;
+		$hours = $interval->h;
+	}
 
 	if(!empty($cancellations)){
 		foreach ($cancellations as $cancellation) {
@@ -1193,34 +1251,39 @@ function tf_car_price_calculation_callback() {
 
 	$today = new DateTime('now', $timezone);
 	$less_current_day = false;
+	$beforeDate = '';
+	$beforeTime = '';
 
 	// Combine pickup date and time into a single string and convert it to a DateTime object
-	$pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $tf_pickup_date . ' ' . $tf_pickup_time, $timezone);
+	$pickupDateTime = tf_car_create_datetime( $tf_pickup_date, $tf_pickup_time, $timezone );
 
 	// Extract the "before_cancel_time" and "cancellation-times" (hours, days, etc.)
 	$beforeCancelTime = !empty($bestRefundPolicy['before_cancel_time']) ? (int) $bestRefundPolicy['before_cancel_time'] : 0;
 	$cancelTimeUnit = !empty($bestRefundPolicy['cancellation-times']) ? $bestRefundPolicy['cancellation-times'] : '';// Could be 'hour', 'day', etc.
 
-	// Adjust the pickup date and time based on the policy
-	switch ($cancelTimeUnit) {
-		case 'hour':
-			$pickupDateTime->modify("-{$beforeCancelTime} hours");
-			break;
-		case 'day':
-			$pickupDateTime->modify("-{$beforeCancelTime} days");
-			break;
-		// Add other cases as necessary (e.g., weeks, minutes, etc.)
-	}
-
-	// Compare calculated before date with the current day
-	if ($pickupDateTime < $today) {
+	if ( ! $pickupDateTime ) {
 		$less_current_day = true;
+	} else {
+		// Adjust the pickup date and time based on the policy
+		switch ($cancelTimeUnit) {
+			case 'hour':
+				$pickupDateTime->modify("-{$beforeCancelTime} hours");
+				break;
+			case 'day':
+				$pickupDateTime->modify("-{$beforeCancelTime} days");
+				break;
+			// Add other cases as necessary (e.g., weeks, minutes, etc.)
+		}
+
+		// Compare calculated before date with the current day
+		if ($pickupDateTime < $today) {
+			$less_current_day = true;
+		}
+
+		// Get the final "before" date and time (ensured to not be before today)
+		$beforeDate = $pickupDateTime->format('Y/m/d');
+		$beforeTime = $pickupDateTime->format('H:i');
 	}
-
-
-	// Get the final "before" date and time (ensured to not be before today)
-	$beforeDate = $pickupDateTime->format('Y/m/d');
-	$beforeTime = $pickupDateTime->format('H:i');
 
 
 	$cancellation = '';
