@@ -14127,6 +14127,12 @@ div#tf-destinationautocomplete-list div:before {
   font-weight: 600;
   margin: 0;
 }
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 del,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 del {
+  color: var(--tf-text-paragraph);
+  font-size: 0.875rem;
+  font-weight: 400;
+}
 .tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small,
 .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small {
   color: var(--tf-text-paragraph);

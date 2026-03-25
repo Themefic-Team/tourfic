@@ -31,6 +31,11 @@
                             font-size: 1.313rem;
                             font-weight: 700;
                             margin: 0;
+                            del{
+                                color: $color-text;
+                                font-size: 0.6565rem;
+                                font-weight: 400;
+                            }
                         }
                         p{
                             color: $color-text;
