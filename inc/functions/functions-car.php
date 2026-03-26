@@ -91,6 +91,38 @@ if ( ! function_exists( 'tf_normalize_car_meta' ) ) {
 	}
 }
 
+if ( ! function_exists( 'tf_car_get_total_price_display_html' ) ) {
+	/**
+	 * Format car total price HTML with optional strike-through regular amount.
+	 *
+	 * @param float $sale_total Sale/discounted total amount.
+	 * @param float $regular_total Regular total amount before discount.
+	 * @return string
+	 */
+	function tf_car_get_total_price_display_html( $sale_total, $regular_total = 0 ) {
+		$sale_total    = max( 0, (float) $sale_total );
+		$regular_total = max( 0, (float) $regular_total );
+
+		if ( $sale_total <= 0 && $regular_total > 0 ) {
+			$sale_total = $regular_total;
+		}
+		if ( $regular_total <= 0 ) {
+			$regular_total = $sale_total;
+		}
+
+		$show_regular  = $regular_total > $sale_total && $sale_total > 0;
+		$display_total = $sale_total > 0 ? $sale_total : $regular_total;
+
+		$total_html = esc_html__( 'Total:', 'tourfic' ) . ' ';
+		if ( $show_regular ) {
+			$total_html .= '<del>' . wp_kses_post( wc_price( $regular_total ) ) . '</del> ';
+		}
+		$total_html .= wp_kses_post( wc_price( $display_total ) );
+
+		return $total_html;
+	}
+}
+
 function tf_extra_add_to_booking_callback() {
 // Check nonce security
 if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
@@ -114,14 +146,23 @@ $pickup_time = !empty($_POST['pickup_time']) ? sanitize_text_field($_POST['picku
 $dropoff_time = !empty($_POST['dropoff_time']) ? sanitize_text_field($_POST['dropoff_time']) : '';
 
 $get_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time);
-$total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
+$sale_price = ! empty( $get_prices['sale_price'] ) ? (float) $get_prices['sale_price'] : 0;
+$regular_price = ! empty( $get_prices['regular_price'] ) ? (float) $get_prices['regular_price'] : 0;
+if ( $sale_price <= 0 && $regular_price > 0 ) {
+	$sale_price = $regular_price;
+}
+if ( $regular_price <= 0 ) {
+	$regular_price = $sale_price;
+}
+$total_prices = $sale_price;
+$total_regular_prices = $regular_price;
 
 if(!empty($car_extra_pass)){
 	$total_extra = Pricing::set_extra_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time, $car_extra_pass, $extra_qty);
 	$total_prices = $total_prices + $total_extra['price'];
+	$total_regular_prices = $total_regular_prices + $total_extra['price'];
 }
-/* translators: %1$s will return total price */
-$response['total_price'] = sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price($total_prices) );
+$response['total_price'] = tf_car_get_total_price_display_html( $total_prices, $total_regular_prices );
 
 $total_days = 1;
 if( !empty($pickup_date) && !empty($dropoff_date) && !empty($pickup_time) && !empty($dropoff_time) ){
@@ -435,13 +476,19 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 			</div>
 			<!-- Price -->
 			<?php if($show_price == 'yes') : ?>
-			<div class="tf-price-info">
-				<?php
-				$total_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time, $tf_archive = true);
-				?>
-				<h3><?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <small>/ <?php echo esc_html($total_prices['type']); ?></small></h3>
-			</div>
-			<?php endif; ?>
+				<div class="tf-price-info">
+					<?php
+					$total_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time, $tf_archive = true);
+					$show_regular_price = !empty($total_prices['regular_price']) && (float) $total_prices['regular_price'] > (float) $total_prices['sale_price'];
+					$display_price = !empty($total_prices['sale_price']) ? $total_prices['sale_price'] : (!empty($total_prices['regular_price']) ? $total_prices['regular_price'] : 0);
+					?>
+					<h3>
+						<?php if($show_regular_price){ ?><del><?php echo wp_kses_post(wc_price($total_prices['regular_price'])); ?></del><?php } ?>
+						<?php echo !empty($display_price) ? wp_kses_post(wc_price($display_price)) : ''; ?>
+						<small>/ <?php echo esc_html($total_prices['type']); ?></small>
+					</h3>
+				</div>
+				<?php endif; ?>
 
 			<!-- View Details -->
 			<a class="view-more" href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $view_details_text ); ?></a>
@@ -1177,11 +1224,21 @@ function tf_car_price_calculation_callback() {
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 
-	$total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
+	$sale_price = ! empty( $get_prices['sale_price'] ) ? (float) $get_prices['sale_price'] : 0;
+	$regular_price = ! empty( $get_prices['regular_price'] ) ? (float) $get_prices['regular_price'] : 0;
+	if ( $sale_price <= 0 && $regular_price > 0 ) {
+		$sale_price = $regular_price;
+	}
+	if ( $regular_price <= 0 ) {
+		$regular_price = $sale_price;
+	}
+	$total_prices = $sale_price;
+	$total_regular_prices = $regular_price;
 
 	if(!empty($extra_ids)){
 		$total_extra = Pricing::set_extra_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $extra_ids, $extra_qty);
 		$total_prices = $total_prices + $total_extra['price'];
+		$total_regular_prices = $total_regular_prices + $total_extra['price'];
 	}
 	
 	$car_calcellation_policy = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['calcellation_policy'] ) ? $meta['calcellation_policy'] : '';
@@ -1293,12 +1350,13 @@ function tf_car_price_calculation_callback() {
 		</div>';
 	}
 
-    // Send response
-    wp_send_json_success( [
-		/* translators: %s will return total price */
-        'total_price' => sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price( $total_prices ) ),
-        'cancellation' => $cancellation,
-    ] );
+	// Send response
+	wp_send_json_success(
+		array(
+			'total_price'  => tf_car_get_total_price_display_html( $total_prices, $total_regular_prices ),
+			'cancellation' => $cancellation,
+		)
+	);
 
 	wp_die();
 }

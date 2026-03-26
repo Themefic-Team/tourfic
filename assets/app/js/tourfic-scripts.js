@@ -1750,7 +1750,7 @@
             handleBookingInputChange();
         });
 
-        function handleBookingInputChange() {
+        function handleBookingInputChange(showLoader = true) {
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
                 return $(this).val();
             }).get();
@@ -1789,7 +1789,9 @@
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
-                    $('.tf-date-select-box').addClass('tf-box-loading');
+                    if (showLoader) {
+                        $('.tf-date-select-box').addClass('tf-box-loading');
+                    }
                 },
                 success: function (response) {
                     $('.tf-cancellation-box').html('');
@@ -1802,11 +1804,21 @@
                             $('.tf-cancellation-box').html(response.data.cancellation);
                             $('.tf-cancellation-box').show();
                         }
+                    }
+                },
+                complete: function () {
+                    if (showLoader) {
                         $('.tf-date-select-box').removeClass('tf-box-loading');
                     }
                 }
             });
         };
+
+        $(win).on('load', function () {
+            if ($('.tf-car-booking-form').length) {
+                handleBookingInputChange(false);
+            }
+        });
 
         /*
         * Car menu scroll
