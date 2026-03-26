@@ -244,6 +244,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 	$mileage_type = ! empty( $meta['mileage_type'] ) ? $meta['mileage_type'] : 'Km';
 	$total_mileage = ! empty( $meta['mileage'] ) ? $meta['mileage'] : '';
 	$auto_transmission = ! empty( $meta['auto_transmission'] ) ? $meta['auto_transmission'] : '';
+	$carplay_android_auto = ! empty( $meta['carplay_android_auto'] ) ? $meta['carplay_android_auto'] : '';
 
 	// Fuel Type
 	$fuel_type_terms = wp_get_post_terms($post_id, 'carrental_fuel_type');
@@ -280,7 +281,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 	$title_length = isset($settings['title_length']) ? absint($settings['title_length']) : 55;
 	$show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';
 	$show_price = isset($settings['show_price']) ? $settings['show_price'] : 'yes';
-	$car_infos = isset($settings['car_infos']) ? $settings['car_infos'] : ['mileage', 'fuel_type', 'engine_year', 'transmission_type', 'passenger_capacity', 'luggage_capacity'];
+	$car_infos = isset($settings['car_infos']) ? $settings['car_infos'] : ['mileage', 'fuel_type', 'engine_year', 'transmission_type', 'carplay_android_auto', 'passenger_capacity', 'luggage_capacity'];
 	$show_view_details = isset($settings['show_view_details']) ? $settings['show_view_details'] : 'yes';
 	$view_details_text = esc_html__('Details', 'tourfic');
 
@@ -427,6 +428,13 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 				</li>
 				<?php endif; ?>
 
+				<?php if(!empty($car_infos) && is_array($car_infos) && in_array('carplay_android_auto', $car_infos)) : ?>
+				<li class="list">
+				<i class="ri-smartphone-line"></i>
+				<p><?php echo $carplay_android_auto ? esc_html__("CarPlay / Android Auto", "tourfic") : esc_html__("No CarPlay / Android Auto", "tourfic"); ?></p>
+				</li>
+				<?php endif; ?>
+
 				<?php if(!empty($passengers) && !empty($car_infos) && is_array($car_infos) && in_array('passenger_capacity', $car_infos)){ ?>
 				<li class="list">
 				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -535,6 +543,31 @@ if ( ! function_exists( 'tf_get_car_archive_search_context' ) ) {
 	}
 }
 
+if ( ! function_exists( 'tf_normalize_car_binary_filter_values' ) ) {
+	/**
+	 * Normalize binary car filter values.
+	 *
+	 * @param mixed $raw_values Filter raw values.
+	 * @return array
+	 */
+	function tf_normalize_car_binary_filter_values( $raw_values ) {
+		if ( '' === $raw_values || null === $raw_values ) {
+			return array();
+		}
+
+		$values = is_array( $raw_values ) ? $raw_values : explode( ',', (string) $raw_values );
+		$normalized_values = array();
+
+		foreach ( $values as $value ) {
+			$value = sanitize_text_field( wp_unslash( (string) $value ) );
+			if ( in_array( $value, array( '0', '1' ), true ) ) {
+				$normalized_values[] = $value;
+			}
+		}
+
+		return array_values( array_unique( $normalized_values ) );
+	}
+}
 
 /**
  * Car Filter 
@@ -542,7 +575,7 @@ if ( ! function_exists( 'tf_get_car_archive_search_context' ) ) {
  * @include
  */
 
-function tf_car_availability_response($car_meta, array &$not_found, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_startprice='', $tf_endprice='', $tf_min_seat='', $tf_max_seat='', $tf_driver_age='', $car_driver_min_age=18, $car_driver_max_age=40) {
+function tf_car_availability_response($car_meta, array &$not_found, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_startprice='', $tf_endprice='', $tf_min_seat='', $tf_max_seat='', $tf_driver_age='', $car_driver_min_age=18, $car_driver_max_age=40, $tf_transmission = '', $tf_carplay_android_auto = '') {
 
 	$car_meta = tf_normalize_car_meta( $car_meta );
 	$has_car = false;
@@ -647,6 +680,22 @@ function tf_car_availability_response($car_meta, array &$not_found, $pickup='', 
 	if ( $has_car && 'on' === $tf_driver_age ) {
 		$driver_age = ! empty( $car_meta['driver_age'] ) ? (int) $car_meta['driver_age'] : 0;
 		if ( ! empty( $driver_age ) && ( $driver_age < (int) $car_driver_min_age || $driver_age > (int) $car_driver_max_age ) ) {
+			$has_car = false;
+		}
+	}
+
+	$selected_transmission = tf_normalize_car_binary_filter_values( $tf_transmission );
+	if ( $has_car && 1 === count( $selected_transmission ) ) {
+		$auto_transmission = isset( $car_meta['auto_transmission'] ) ? (string) absint( $car_meta['auto_transmission'] ) : '0';
+		if ( $selected_transmission[0] !== $auto_transmission ) {
+			$has_car = false;
+		}
+	}
+
+	$selected_carplay_android_auto = tf_normalize_car_binary_filter_values( $tf_carplay_android_auto );
+	if ( $has_car && 1 === count( $selected_carplay_android_auto ) ) {
+		$carplay_android_auto = isset( $car_meta['carplay_android_auto'] ) ? (string) absint( $car_meta['carplay_android_auto'] ) : '0';
+		if ( $selected_carplay_android_auto[0] !== $carplay_android_auto ) {
 			$has_car = false;
 		}
 	}
