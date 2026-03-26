@@ -2680,11 +2680,18 @@ class Helper {
                                         instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                                         dateSetToFields(selectedDates, instance);
                                     },
-                                    <?php if(! empty( $check_in_out )){ ?>
-                                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-                                    <?php } else { ?>
+                                    <?php
+                                    $pickup_date  = ! empty($_GET['pickup-date']) ? gmdate('Y-m-d', strtotime(sanitize_text_field( wp_unslash($_GET['pickup-date']) ))) : '';
+                                    $dropoff_date = ! empty($_GET['dropoff-date']) ? gmdate('Y-m-d', strtotime(sanitize_text_field( wp_unslash($_GET['dropoff-date']) ))) : '';
+                                    ?>
+
+                                    <?php if ( $pickup_date && $dropoff_date ) : ?>
+                                        defaultDate: <?php echo wp_json_encode( [ $pickup_date, $dropoff_date ] ); ?>,
+                                    <?php elseif ( ! empty( $check_in_out ) ) : ?>
+                                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ); ?>,
+                                    <?php else : ?>
                                         defaultDate: [tomorrow, dayAfter],
-                                    <?php } ?>
+                                    <?php endif; ?>
                                 });
 
                                 function dateSetToFields(selectedDates, instance) {
@@ -3620,43 +3627,82 @@ class Helper {
 	 * Archive Gallery Popup
     */
     function tf_archive_gallery_popup_qv_callback() {
-		// Check nonce security
-		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
-			return;
-		}
-
-		if ( ! empty( $_POST['post_type'] ) && "tf_hotel" == $_POST['post_type'] ) {
-			$meta    = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
-			$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
-			if ( $gallery ) {
-				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+			// Check nonce security
+			if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
+				wp_die();
 			}
-		}
 
-		if ( ! empty( $_POST['post_type'] ) && "tf_tours" == $_POST['post_type'] ) {
-			$meta    = get_post_meta( $_POST['post_id'], 'tf_tours_opt', true );
-			$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : '';
-			if ( $gallery ) {
-				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+			$post_id   = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
+			$post_type = isset( $_POST['post_type'] ) ? sanitize_key( wp_unslash( $_POST['post_type'] ) ) : '';
+
+			$allowed_post_types = array(
+				'tf_hotel'     => array(
+					'meta_key'    => 'tf_hotels_opt',
+					'gallery_key' => 'gallery',
+				),
+				'tf_tours'     => array(
+					'meta_key'    => 'tf_tours_opt',
+					'gallery_key' => 'tour_gallery',
+				),
+				'tf_apartment' => array(
+					'meta_key'    => 'tf_apartment_opt',
+					'gallery_key' => 'apartment_gallery',
+				),
+			);
+
+			if ( empty( $post_id ) || empty( $post_type ) || ! isset( $allowed_post_types[ $post_type ] ) ) {
+				wp_die();
 			}
-		}
 
-		if ( ! empty( $_POST['post_type'] ) && "tf_apartment" == $_POST['post_type'] ) {
-			$meta    = get_post_meta( $_POST['post_id'], 'tf_apartment_opt', true );
-			$gallery = ! empty( $meta['apartment_gallery'] ) ? $meta['apartment_gallery'] : '';
-			if ( $gallery ) {
-				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+			$post = get_post( $post_id );
+			if ( empty( $post ) || $post_type !== $post->post_type ) {
+				wp_die();
 			}
-		}
 
-		if ( ! empty( $gallery_ids ) ) {
-			foreach ( $gallery_ids as $key => $gallery_item_id ) {
-				$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+			// Allow public access only to publicly readable published posts.
+			if ( ! $this->tf_is_publicly_readable_archive_gallery_post( $post ) && ! current_user_can( 'read_post', $post_id ) ) {
+				wp_die();
+			}
+
+			$meta_key    = $allowed_post_types[ $post_type ]['meta_key'];
+			$gallery_key = $allowed_post_types[ $post_type ]['gallery_key'];
+			$meta        = get_post_meta( $post_id, $meta_key, true );
+			$gallery     = ( is_array( $meta ) && ! empty( $meta[ $gallery_key ] ) ) ? $meta[ $gallery_key ] : '';
+			$gallery_ids = array_filter( array_map( 'absint', explode( ',', (string) $gallery ) ) );
+
+			if ( empty( $gallery_ids ) ) {
+				wp_die();
+			}
+
+			foreach ( $gallery_ids as $gallery_item_id ) {
+				$image_url = wp_get_attachment_url( $gallery_item_id );
+				if ( empty( $image_url ) ) {
+					continue;
+				}
 				?>
-                <img src="<?php echo esc_url( $image_url ); ?>" alt="" class="tf-popup-image">
-			<?php }
+				<img src="<?php echo esc_url( $image_url ); ?>" alt="" class="tf-popup-image">
+			<?php
+			}
+			wp_die();
 		}
-		wp_die();
+
+	/**
+	 * Validate whether post content can be shown to unauthenticated archive popup requests.
+	 *
+	 * @param WP_Post $post Post object.
+	 * @return bool
+	 */
+	private function tf_is_publicly_readable_archive_gallery_post( $post ) {
+		if ( empty( $post ) || 'publish' !== $post->post_status || post_password_required( $post ) ) {
+			return false;
+		}
+
+		$post_type_object = get_post_type_object( $post->post_type );
+		if ( empty( $post_type_object ) || empty( $post_type_object->publicly_queryable ) ) {
+			return false;
+		}
+
+		return true;
 	}
 
 

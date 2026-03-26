@@ -230,12 +230,21 @@ class Pricing {
             }
         }
 
+        $base_sale_price = !empty($all_prices['sale_price']) ? (float) $all_prices['sale_price'] : 0;
         if('fixed'==$discount_type && !empty($discount_price)){
-            $all_prices['sale_price'] = $all_prices['sale_price'] - $discount_price;
+            $discount_amount = (float) $discount_price;
+            if($discount_amount > 0 && $base_sale_price > 0){
+                $all_prices['regular_price'] = $base_sale_price;
+                $all_prices['sale_price'] = max(0, $base_sale_price - $discount_amount);
+            }
         }
         if('percent'==$discount_type && !empty($discount_price)){
-            $discount_price = ($all_prices['sale_price'] * $discount_price)/100;
-            $all_prices['sale_price'] = $all_prices['sale_price'] - $discount_price;
+            $discount_percent = (float) $discount_price;
+            if($discount_percent > 0 && $base_sale_price > 0){
+                $all_prices['regular_price'] = $base_sale_price;
+                $discount_amount = ($base_sale_price * $discount_percent)/100;
+                $all_prices['sale_price'] = max(0, $base_sale_price - $discount_amount);
+            }
         }
 
         $all_prices['type'] = esc_html__($price_type, 'tourfic');

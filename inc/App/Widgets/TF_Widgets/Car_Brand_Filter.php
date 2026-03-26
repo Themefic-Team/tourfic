@@ -1,0 +1,163 @@
+<?php
+
+namespace Tourfic\App\Widgets\TF_Widgets;
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+use \Tourfic\Classes\Helper;
+
+/**
+ * Car filter by brand.
+ */
+class Car_Brand_Filter extends \WP_Widget {
+
+    use \Tourfic\Traits\Singleton;
+
+    /**
+     * Register widget with WordPress.
+     */
+    public function __construct() {
+
+        parent::__construct(
+            'tf_car_brand_filter',
+            esc_html__( 'Tourfic - Car Filters by Brand', 'tourfic' ),
+            array( 'description' => esc_html__( 'Filter search result by car brand', 'tourfic' ) )
+        );
+    }
+
+    /**
+     * Front-end display of widget.
+     *
+     * @see WP_Widget::widget()
+     *
+     * @param array $args     Widget arguments.
+     * @param array $instance Saved values from database.
+     */
+    public function widget( $args, $instance ) {
+
+        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type();
+
+        if ( is_admin() || 'tf_carrental' === $posttype ) {
+            extract( $args );
+            $title      = apply_filters( 'widget_title', isset( $instance['title'] ) ? $instance['title'] : esc_html__( 'Brand', 'tourfic' ) );
+            $terms      = isset( $instance['terms'] ) ? $instance['terms'] : 'all';
+            $show_count = isset( $instance['show_count'] ) ? $instance['show_count'] : null;
+            $hide_empty = ! empty( $instance['hide_empty'] ) && 'on' === $instance['hide_empty'];
+
+            $selected_brands = ! empty( $_GET['car_brand'] ) ? array_map( 'absint', (array) wp_unslash( $_GET['car_brand'] ) ) : array();
+
+            echo wp_kses_post( $before_widget );
+            if ( ! empty( $title ) ) {
+                echo wp_kses_post( $before_title . $title . $after_title );
+            }
+
+            $taxonomy = array(
+                'hide_empty' => $hide_empty,
+                'taxonomy'   => 'carrental_brand',
+            );
+
+            if ( ! empty( $terms ) && 'all' !== $terms ) {
+                $taxonomy['include'] = is_array( $terms ) ? $terms : array_map( 'absint', explode( ',', $terms ) );
+            }
+
+            $get_terms = get_terms( $taxonomy );
+
+            echo "<div class='tf-category-lists'><ul>";
+            foreach ( $get_terms as $term ) {
+                $id            = $term->term_id;
+                $name          = $term->name;
+                $default_count = $term->count;
+                $count         = $show_count ? '<span>(' . $default_count . ')</span>' : '';
+                $checked       = checked( true, in_array( (int) $id, $selected_brands, true ), false );
+
+                echo wp_kses( "<li class='tf-filter-item'><label><input type='checkbox' name='car_brand[]' value='{$id}' {$checked}/><span class='tf-checkmark'></span> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags() );
+            }
+            echo "</ul><a href='#' class='see-more btn-link'>" . esc_html__( 'See more', 'tourfic' ) . "</a><a href='#' class='see-less btn-link'>" . esc_html__( 'See Less', 'tourfic' ) . '</a></div>';
+
+            echo wp_kses_post( $after_widget );
+        }
+    }
+
+    /**
+     * Back-end widget form.
+     *
+     * @see WP_Widget::form()
+     *
+     * @param array $instance Previously saved values from database.
+     */
+    public function form( $instance ) {
+
+        $title      = isset( $instance['title'] ) ? $instance['title'] : esc_html__( 'Brand', 'tourfic' );
+        $terms      = isset( $instance['terms'] ) && is_array( $instance['terms'] ) ? implode( ',', $instance['terms'] ) : 'all';
+        $show_count = isset( $instance['show_count'] ) ? $instance['show_count'] : '';
+        $hide_empty = isset( $instance['hide_empty'] ) ? $instance['hide_empty'] : '';
+
+        ?>
+        <p class="tf-widget-field">
+            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'tourfic' ); ?></label>
+            <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+        </p>
+
+        <p class="tf-widget-field">
+            <label for="<?php echo esc_attr( $this->get_field_id( 'terms' ) ); ?>"><?php esc_html_e( 'Select Terms:', 'tourfic' ); ?></label>
+            <br>
+            <?php
+            wp_dropdown_categories(
+                array(
+                    'taxonomy'     => 'carrental_brand',
+                    'hierarchical' => false,
+                    'name'         => $this->get_field_name( 'terms' ),
+                    'id'           => $this->get_field_id( 'terms' ),
+                    'selected'     => $terms,
+                    'multiple'     => true,
+                    'class'        => 'widefat',
+                    'show_count'   => true,
+                )
+            );
+            ?>
+            <br>
+            <span><?php esc_html_e( 'Leave this field empty if you want to show all terms.', 'tourfic' ); ?></span>
+        </p>
+        <p class="tf-widget-field">
+            <label for="<?php echo esc_attr( $this->get_field_id( 'show_count' ) ); ?>"><?php esc_html_e( 'Show Count:', 'tourfic' ); ?></label>
+            <input id="<?php echo esc_attr( $this->get_field_id( 'show_count' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_count' ) ); ?>" type="checkbox" <?php checked( 'on', $show_count ); ?>>
+        </p>
+        <p class="tf-widget-field">
+            <label for="<?php echo esc_attr( $this->get_field_id( 'hide_empty' ) ); ?>"><?php esc_html_e( 'Hide Empty Categories:', 'tourfic' ); ?></label>
+            <input id="<?php echo esc_attr( $this->get_field_id( 'hide_empty' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'hide_empty' ) ); ?>" type="checkbox" <?php checked( 'on', $hide_empty ); ?>>
+        </p>
+        <style>
+            .tf-widget-field label {
+                font-weight: 600;
+            }
+        </style>
+        <script>
+            jQuery('#<?php echo esc_attr( $this->get_field_id( 'terms' ) ); ?>').select2({
+                width: '100%'
+            });
+            jQuery(document).trigger('tf_select2');
+        </script>
+        <?php
+    }
+
+    /**
+     * Sanitize widget form values as they are saved.
+     *
+     * @see WP_Widget::update()
+     *
+     * @param array $new_instance Values just sent to be saved.
+     * @param array $old_instance Previously saved values from database.
+     *
+     * @return array Updated safe values to be saved.
+     */
+    public function update( $new_instance, $old_instance ) {
+        $instance               = array();
+        $instance['title']      = ! empty( $new_instance['title'] ) ? wp_strip_all_tags( $new_instance['title'] ) : '';
+        $instance['terms']      = ! empty( $new_instance['terms'] ) ? $new_instance['terms'] : 'all';
+        $instance['show_count'] = ! empty( $new_instance['show_count'] ) ? wp_strip_all_tags( $new_instance['show_count'] ) : '';
+        $instance['hide_empty'] = ! empty( $new_instance['hide_empty'] ) ? wp_strip_all_tags( $new_instance['hide_empty'] ) : '';
+
+        return $instance;
+    }
+}
