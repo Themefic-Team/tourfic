@@ -1005,6 +1005,9 @@ Steps
 
 .tf-setup-step-container {
   display: none;
+  /*
+  Ajax Loader
+  */
 }
 .tf-setup-step-container.active {
   display: block;
@@ -1504,11 +1507,6 @@ Steps
 .tf-setup-step-container .tf-auto-publish-field {
   margin-top: 8px;
 }
-.tf-setup-step-container {
-  /*
-  Ajax Loader
-  */
-}
 .tf-setup-step-container .tf-btn-loading {
   padding-right: 40px;
   position: relative;
@@ -1609,15 +1607,13 @@ Steps
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  padding: 24px;
+  box-sizing: border-box;
 }
 @media only screen and (max-width: 1024px) {
   .tf-admin-meta-box .tf-admin-tab {
     display: none;
   }
-}
-.tf-admin-meta-box .tf-admin-tab {
-  padding: 24px;
-  box-sizing: border-box;
 }
 .tf-admin-meta-box .tf-admin-tab a.tf-tablinks {
   font-style: normal;
@@ -2222,6 +2218,10 @@ Steps
 .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a:hover svg path {
   stroke: #fff;
 }
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar {
+  /* Loader */
+  /* Customization */
+}
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box {
   border-radius: 8px;
   border: 0.5px solid #238DFB;
@@ -2440,9 +2440,6 @@ Steps
     transform: rotate(360deg);
   }
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar {
-  /* Loader */
-}
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-button:not(.active):not(.active-pro) {
   display: inline-flex;
   align-items: center;
@@ -2471,9 +2468,6 @@ Steps
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-button.loading .loader {
   display: inline-block;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar {
-  /* Customization */
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-customization-quote {
   background: #fff;
@@ -5444,6 +5438,8 @@ a.tf-import-btn, a.tf-export-btn {
   max-height: 500px;
   overflow-y: auto;
   scroll-behavior: smooth;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  scrollbar-width: thin;
 }
 @media only screen and (max-width: 768px) {
   .tf-bulk-popup .bulk-popup-content .bulk-popup-content-box,
@@ -5465,11 +5461,6 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 4px;
-}
-.tf-bulk-popup .bulk-popup-content .bulk-popup-content-box,
-.tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box {
-  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
-  scrollbar-width: thin;
 }
 .tf-bulk-popup .bulk-popup-content .bulk-popup-content-box .tf-date-time-selection,
 .tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box .tf-date-time-selection {
@@ -5777,6 +5768,8 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
 .tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller {
   scroll-behavior: smooth;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  scrollbar-width: thin;
 }
 .tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
 .tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
@@ -5813,18 +5806,6 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 4px;
-}
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
-.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
-.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
-.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
-.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
-.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
-.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
-.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
-.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller {
-  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
-  scrollbar-width: thin;
 }
 .tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
 .tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
@@ -7555,6 +7536,10 @@ a.tf-import-btn, a.tf-export-btn {
   display: flex;
   justify-content: right;
 }
+.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tfoot tr th .tf-booking-details-pagination li {
+  border-right: 1px solid #F0F0F1;
+  background: #ffffff;
+}
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tfoot tr th .tf-booking-details-pagination li a {
   display: flex;
   padding: 10px;
@@ -7568,10 +7553,6 @@ a.tf-import-btn, a.tf-export-btn {
   min-width: 20px;
   text-align: center;
   justify-content: center;
-}
-.tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tfoot tr th .tf-booking-details-pagination li {
-  border-right: 1px solid #F0F0F1;
-  background: #ffffff;
 }
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tfoot tr th .tf-booking-details-pagination li:last-child {
   border-right: 0px solid;
@@ -7727,13 +7708,13 @@ a.tf-import-btn, a.tf-export-btn {
     display: flow-root;
   }
 }
+.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details {
+  width: calc(100% - 260px);
+}
 @media only screen and (max-width: 768px) {
   .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details {
     width: auto;
   }
-}
-.tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details {
-  width: calc(100% - 260px);
 }
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box {
   border-radius: 8px;
@@ -8065,14 +8046,12 @@ a.tf-import-btn, a.tf-export-btn {
 .visitor-details-edit-form .visitor-details-edit-popup .visitor-details-popup .tf-single-tour-traveller .traveller-info {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 @media only screen and (max-width: 575.98px) {
   .visitor-details-edit-form .visitor-details-edit-popup .visitor-details-popup .tf-single-tour-traveller .traveller-info {
     grid-template-columns: repeat(1, 1fr);
   }
-}
-.visitor-details-edit-form .visitor-details-edit-popup .visitor-details-popup .tf-single-tour-traveller .traveller-info {
-  gap: 10px;
 }
 .visitor-details-edit-form .visitor-details-edit-popup .visitor-details-popup .tf-single-tour-traveller .traveller-info .traveller-single-info {
   width: 100%;

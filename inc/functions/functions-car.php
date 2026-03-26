@@ -91,6 +91,38 @@ if ( ! function_exists( 'tf_normalize_car_meta' ) ) {
 	}
 }
 
+if ( ! function_exists( 'tf_car_get_total_price_display_html' ) ) {
+	/**
+	 * Format car total price HTML with optional strike-through regular amount.
+	 *
+	 * @param float $sale_total Sale/discounted total amount.
+	 * @param float $regular_total Regular total amount before discount.
+	 * @return string
+	 */
+	function tf_car_get_total_price_display_html( $sale_total, $regular_total = 0 ) {
+		$sale_total    = max( 0, (float) $sale_total );
+		$regular_total = max( 0, (float) $regular_total );
+
+		if ( $sale_total <= 0 && $regular_total > 0 ) {
+			$sale_total = $regular_total;
+		}
+		if ( $regular_total <= 0 ) {
+			$regular_total = $sale_total;
+		}
+
+		$show_regular  = $regular_total > $sale_total && $sale_total > 0;
+		$display_total = $sale_total > 0 ? $sale_total : $regular_total;
+
+		$total_html = esc_html__( 'Total:', 'tourfic' ) . ' ';
+		if ( $show_regular ) {
+			$total_html .= '<del>' . wp_kses_post( wc_price( $regular_total ) ) . '</del> ';
+		}
+		$total_html .= wp_kses_post( wc_price( $display_total ) );
+
+		return $total_html;
+	}
+}
+
 function tf_extra_add_to_booking_callback() {
 // Check nonce security
 if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
@@ -108,36 +140,47 @@ $car_extra_pass = !empty( $_POST['extra_key'] ) ? $_POST['extra_key'] : '';
 
 // Quantity from POST
 $extra_qty = !empty( $_POST['qty'] ) ? $_POST['qty'] : 0;
-$pickup_date = !empty($_POST['pickup_date']) ? sanitize_text_field($_POST['pickup_date']) : '';
-$dropoff_date = !empty($_POST['dropoff_date']) ? sanitize_text_field($_POST['dropoff_date']) : '';
+$pickup_date = !empty($_POST['pickup_date']) ? tf_normalize_date( sanitize_text_field($_POST['pickup_date']) ) : '';
+$dropoff_date = !empty($_POST['dropoff_date']) ? tf_normalize_date( sanitize_text_field($_POST['dropoff_date']) ) : '';
 $pickup_time = !empty($_POST['pickup_time']) ? sanitize_text_field($_POST['pickup_time']) : '';
 $dropoff_time = !empty($_POST['dropoff_time']) ? sanitize_text_field($_POST['dropoff_time']) : '';
 
 $get_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time);
-$total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
+$sale_price = ! empty( $get_prices['sale_price'] ) ? (float) $get_prices['sale_price'] : 0;
+$regular_price = ! empty( $get_prices['regular_price'] ) ? (float) $get_prices['regular_price'] : 0;
+if ( $sale_price <= 0 && $regular_price > 0 ) {
+	$sale_price = $regular_price;
+}
+if ( $regular_price <= 0 ) {
+	$regular_price = $sale_price;
+}
+$total_prices = $sale_price;
+$total_regular_prices = $regular_price;
 
 if(!empty($car_extra_pass)){
 	$total_extra = Pricing::set_extra_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time, $car_extra_pass, $extra_qty);
 	$total_prices = $total_prices + $total_extra['price'];
+	$total_regular_prices = $total_regular_prices + $total_extra['price'];
 }
-/* translators: %1$s will return total price */
-$response['total_price'] = sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price($total_prices) );
+$response['total_price'] = tf_car_get_total_price_display_html( $total_prices, $total_regular_prices );
 
 $total_days = 1;
 if( !empty($pickup_date) && !empty($dropoff_date) && !empty($pickup_time) && !empty($dropoff_time) ){
 	// Combine date and time
-	$pickup_datetime = new \DateTime("$pickup_date $pickup_time");
-	$dropoff_datetime = new \DateTime("$dropoff_date $dropoff_time");
+	$pickup_datetime = tf_car_create_datetime( $pickup_date, $pickup_time );
+	$dropoff_datetime = tf_car_create_datetime( $dropoff_date, $dropoff_time );
 
-	// Calculate the difference
-	$interval = $pickup_datetime->diff($dropoff_datetime);
+	if ( $pickup_datetime && $dropoff_datetime ) {
+		// Calculate the difference
+		$interval = $pickup_datetime->diff($dropoff_datetime);
 
-	// Get total days
-	$total_days = $interval->days;
-	
-	// If there are leftover hours that count as a partial day
-	if ($interval->h > 0 || $interval->i > 0) {
-		$total_days += 1;  // Add an extra day for any remaining hours
+		// Get total days
+		$total_days = $interval->days;
+
+		// If there are leftover hours that count as a partial day
+		if ($interval->h > 0 || $interval->i > 0) {
+			$total_days += 1;  // Add an extra day for any remaining hours
+		}
 	}
 }
 ob_start();
@@ -201,6 +244,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 	$mileage_type = ! empty( $meta['mileage_type'] ) ? $meta['mileage_type'] : 'Km';
 	$total_mileage = ! empty( $meta['mileage'] ) ? $meta['mileage'] : '';
 	$auto_transmission = ! empty( $meta['auto_transmission'] ) ? $meta['auto_transmission'] : '';
+	$carplay_android_auto = ! empty( $meta['carplay_android_auto'] ) ? $meta['carplay_android_auto'] : '';
 
 	// Fuel Type
 	$fuel_type_terms = wp_get_post_terms($post_id, 'carrental_fuel_type');
@@ -237,7 +281,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 	$title_length = isset($settings['title_length']) ? absint($settings['title_length']) : 55;
 	$show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';
 	$show_price = isset($settings['show_price']) ? $settings['show_price'] : 'yes';
-	$car_infos = isset($settings['car_infos']) ? $settings['car_infos'] : ['mileage', 'fuel_type', 'engine_year', 'transmission_type', 'passenger_capacity', 'luggage_capacity'];
+	$car_infos = isset($settings['car_infos']) ? $settings['car_infos'] : ['mileage', 'fuel_type', 'engine_year', 'transmission_type', 'carplay_android_auto', 'passenger_capacity', 'luggage_capacity'];
 	$show_view_details = isset($settings['show_view_details']) ? $settings['show_view_details'] : 'yes';
 	$view_details_text = esc_html__('Details', 'tourfic');
 
@@ -384,6 +428,13 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 				</li>
 				<?php endif; ?>
 
+				<?php if(!empty($car_infos) && is_array($car_infos) && in_array('carplay_android_auto', $car_infos)) : ?>
+				<li class="list">
+				<i class="ri-smartphone-line"></i>
+				<p><?php echo $carplay_android_auto ? esc_html__("CarPlay / Android Auto", "tourfic") : esc_html__("No CarPlay / Android Auto", "tourfic"); ?></p>
+				</li>
+				<?php endif; ?>
+
 				<?php if(!empty($passengers) && !empty($car_infos) && is_array($car_infos) && in_array('passenger_capacity', $car_infos)){ ?>
 				<li class="list">
 				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -435,13 +486,19 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 			</div>
 			<!-- Price -->
 			<?php if($show_price == 'yes') : ?>
-			<div class="tf-price-info">
-				<?php
-				$total_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time, $tf_archive = true);
-				?>
-				<h3><?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <small>/ <?php echo esc_html($total_prices['type']); ?></small></h3>
-			</div>
-			<?php endif; ?>
+				<div class="tf-price-info">
+					<?php
+					$total_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time, $tf_archive = true);
+					$show_regular_price = !empty($total_prices['regular_price']) && (float) $total_prices['regular_price'] > (float) $total_prices['sale_price'];
+					$display_price = !empty($total_prices['sale_price']) ? $total_prices['sale_price'] : (!empty($total_prices['regular_price']) ? $total_prices['regular_price'] : 0);
+					?>
+					<h3>
+						<?php if($show_regular_price){ ?><del><?php echo wp_kses_post(wc_price($total_prices['regular_price'])); ?></del><?php } ?>
+						<?php echo !empty($display_price) ? wp_kses_post(wc_price($display_price)) : ''; ?>
+						<small>/ <?php echo esc_html($total_prices['type']); ?></small>
+					</h3>
+				</div>
+				<?php endif; ?>
 
 			<!-- View Details -->
 			<a class="view-more" href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $view_details_text ); ?></a>
@@ -486,6 +543,31 @@ if ( ! function_exists( 'tf_get_car_archive_search_context' ) ) {
 	}
 }
 
+if ( ! function_exists( 'tf_normalize_car_binary_filter_values' ) ) {
+	/**
+	 * Normalize binary car filter values.
+	 *
+	 * @param mixed $raw_values Filter raw values.
+	 * @return array
+	 */
+	function tf_normalize_car_binary_filter_values( $raw_values ) {
+		if ( '' === $raw_values || null === $raw_values ) {
+			return array();
+		}
+
+		$values = is_array( $raw_values ) ? $raw_values : explode( ',', (string) $raw_values );
+		$normalized_values = array();
+
+		foreach ( $values as $value ) {
+			$value = sanitize_text_field( wp_unslash( (string) $value ) );
+			if ( in_array( $value, array( '0', '1' ), true ) ) {
+				$normalized_values[] = $value;
+			}
+		}
+
+		return array_values( array_unique( $normalized_values ) );
+	}
+}
 
 /**
  * Car Filter 
@@ -493,7 +575,7 @@ if ( ! function_exists( 'tf_get_car_archive_search_context' ) ) {
  * @include
  */
 
-function tf_car_availability_response($car_meta, array &$not_found, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_startprice='', $tf_endprice='', $tf_min_seat='', $tf_max_seat='', $tf_driver_age='', $car_driver_min_age=18, $car_driver_max_age=40) {
+function tf_car_availability_response($car_meta, array &$not_found, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_startprice='', $tf_endprice='', $tf_min_seat='', $tf_max_seat='', $tf_driver_age='', $car_driver_min_age=18, $car_driver_max_age=40, $tf_transmission = '', $tf_carplay_android_auto = '') {
 
 	$car_meta = tf_normalize_car_meta( $car_meta );
 	$has_car = false;
@@ -598,6 +680,22 @@ function tf_car_availability_response($car_meta, array &$not_found, $pickup='', 
 	if ( $has_car && 'on' === $tf_driver_age ) {
 		$driver_age = ! empty( $car_meta['driver_age'] ) ? (int) $car_meta['driver_age'] : 0;
 		if ( ! empty( $driver_age ) && ( $driver_age < (int) $car_driver_min_age || $driver_age > (int) $car_driver_max_age ) ) {
+			$has_car = false;
+		}
+	}
+
+	$selected_transmission = tf_normalize_car_binary_filter_values( $tf_transmission );
+	if ( $has_car && 1 === count( $selected_transmission ) ) {
+		$auto_transmission = isset( $car_meta['auto_transmission'] ) ? (string) absint( $car_meta['auto_transmission'] ) : '0';
+		if ( $selected_transmission[0] !== $auto_transmission ) {
+			$has_car = false;
+		}
+	}
+
+	$selected_carplay_android_auto = tf_normalize_car_binary_filter_values( $tf_carplay_android_auto );
+	if ( $has_car && 1 === count( $selected_carplay_android_auto ) ) {
+		$carplay_android_auto = isset( $car_meta['carplay_android_auto'] ) ? (string) absint( $car_meta['carplay_android_auto'] ) : '0';
+		if ( $selected_carplay_android_auto[0] !== $carplay_android_auto ) {
 			$has_car = false;
 		}
 	}
@@ -795,6 +893,54 @@ if ( ! function_exists( 'tf_car_search_ajax_callback' ) ) {
  * @author Jahid
  */
 
+if ( ! function_exists( 'tf_car_create_datetime' ) ) {
+	/**
+	 * Create DateTime from car booking date/time input safely.
+	 *
+	 * @param string             $date     Date string.
+	 * @param string             $time     Time string.
+	 * @param DateTimeZone|false $timezone Optional timezone.
+	 * @return DateTime|false
+	 */
+	function tf_car_create_datetime( $date, $time, $timezone = false ) {
+		$date = ! empty( $date ) ? tf_normalize_date( sanitize_text_field( $date ) ) : '';
+		$time = ! empty( $time ) ? sanitize_text_field( $time ) : '';
+
+		if ( empty( $date ) || empty( $time ) ) {
+			return false;
+		}
+
+		$datetime_string = $date . ' ' . $time;
+		$formats = array(
+			'Y/m/d H:i',
+			'Y/m/d h:i A',
+			'Y/m/d g:i A',
+		);
+
+		foreach ( $formats as $format ) {
+			$datetime = $timezone instanceof DateTimeZone
+				? DateTime::createFromFormat( $format, $datetime_string, $timezone )
+				: DateTime::createFromFormat( $format, $datetime_string );
+
+			if ( false !== $datetime ) {
+				return $datetime;
+			}
+		}
+
+		$timestamp = strtotime( $datetime_string );
+		if ( false === $timestamp ) {
+			return false;
+		}
+
+		$datetime = new DateTime( '@' . $timestamp );
+		if ( $timezone instanceof DateTimeZone ) {
+			$datetime->setTimezone( $timezone );
+		}
+
+		return $datetime;
+	}
+}
+
 function tf_getBestRefundPolicy($cancellations, $pickup_date, $pickup_time) {
     $bestPolicy = null;
 
@@ -802,9 +948,11 @@ function tf_getBestRefundPolicy($cancellations, $pickup_date, $pickup_time) {
 	$timezone = new DateTimeZone($tf_default_time_zone);
 
 	$today = new DateTime('now', $timezone);
-	$pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $pickup_date . ' ' . $pickup_time, $timezone);
+	$pickupDateTime = tf_car_create_datetime( $pickup_date, $pickup_time, $timezone );
+	$days = 0;
+	$hours = 0;
 
-	if($today < $pickupDateTime){
+	if( $pickupDateTime && $today < $pickupDateTime ){
 		$interval = $today->diff($pickupDateTime);
 		// Get days and hours separately
 		$days = $interval->days;
@@ -872,10 +1020,10 @@ function tf_car_booking_pupup_callback() {
 	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
 	$car_protection_tab_title = ! empty( $meta['protection_tab_title'] ) ? esc_html($meta['protection_tab_title']) : __('Protection', 'tourfic');
 
-	$pickup_date = ! empty( $_POST['pickup_date'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_date']) ) : '';
+	$pickup_date = ! empty( $_POST['pickup_date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash($_POST['pickup_date']) ) ) : '';
 	$pickup_time = ! empty( $_POST['pickup_time'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_time']) ) : '';
 
-	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_date']) ) : '';
+	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash($_POST['dropoff_date']) ) ) : '';
 	$dropoff_time = ! empty( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
 
 	$booking_btn_text = !empty(Helper::tfopt('car_booking_form_button_text')) ? Helper::tfopt('car_booking_form_button_text') : __('Continue', 'tourfic');
@@ -911,24 +1059,28 @@ function tf_car_booking_pupup_callback() {
 					<tr>
 						<th>
 							<?php
-							if( 'day' == $protection['price_by'] ){
-								// Combine date and time
-								$pickup_datetime = new \DateTime("$pickup_date $pickup_time");
-								$dropoff_datetime = new \DateTime("$dropoff_date $dropoff_time");
-				
-								// Calculate the difference
-								$interval = $pickup_datetime->diff($dropoff_datetime);
-				
-								// Get total days
-								$total_days = $interval->days;
-											
-								// If there are leftover hours that count as a partial day
-								if ($interval->h > 0 || $interval->i > 0) {
-									$total_days += 1;  // Add an extra day for any remaining hours
+								if( 'day' == $protection['price_by'] ){
+									// Combine date and time
+									$pickup_datetime = tf_car_create_datetime( $pickup_date, $pickup_time );
+									$dropoff_datetime = tf_car_create_datetime( $dropoff_date, $dropoff_time );
+
+									if ( $pickup_datetime && $dropoff_datetime ) {
+										// Calculate the difference
+										$interval = $pickup_datetime->diff($dropoff_datetime);
+
+										// Get total days
+										$total_days = $interval->days;
+
+										// If there are leftover hours that count as a partial day
+										if ($interval->h > 0 || $interval->i > 0) {
+											$total_days += 1;  // Add an extra day for any remaining hours
+										}
+									} else {
+										$total_days = 1;
+									}
+								}else{
+									$total_days = 1;
 								}
-							}else{
-								$total_days = 1;
-							}
 							?>
 							<div class="tf-flex tf-flex-align-center">
 								<div class="tf-protection-select">
@@ -1091,15 +1243,17 @@ function tf_getRefundPolicy($cancellations, $pickup_date, $pickup_time) {
     $tf_default_time_zone = !empty(Helper::tfopt('cancellation_time_zone')) ? Helper::tfopt('cancellation_time_zone') : 'America/New_York';
     $timezone = new DateTimeZone($tf_default_time_zone);
 
-    $today = new DateTime('now', $timezone);
-    $pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $pickup_date . ' ' . $pickup_time, $timezone);
+	$today = new DateTime('now', $timezone);
+	$pickupDateTime = tf_car_create_datetime( $pickup_date, $pickup_time, $timezone );
+	$days = 0;
+	$hours = 0;
 
-    if ($today < $pickupDateTime) {
-        $interval = $today->diff($pickupDateTime);
-        // Get days and hours separately
-        $days = $interval->days;
-        $hours = $interval->h;
-    }
+	if ( $pickupDateTime && $today < $pickupDateTime ) {
+		$interval = $today->diff($pickupDateTime);
+		// Get days and hours separately
+		$days = $interval->days;
+		$hours = $interval->h;
+	}
 
 	if(!empty($cancellations)){
 		foreach ($cancellations as $cancellation) {
@@ -1177,11 +1331,21 @@ function tf_car_price_calculation_callback() {
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 
-	$total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
+	$sale_price = ! empty( $get_prices['sale_price'] ) ? (float) $get_prices['sale_price'] : 0;
+	$regular_price = ! empty( $get_prices['regular_price'] ) ? (float) $get_prices['regular_price'] : 0;
+	if ( $sale_price <= 0 && $regular_price > 0 ) {
+		$sale_price = $regular_price;
+	}
+	if ( $regular_price <= 0 ) {
+		$regular_price = $sale_price;
+	}
+	$total_prices = $sale_price;
+	$total_regular_prices = $regular_price;
 
 	if(!empty($extra_ids)){
 		$total_extra = Pricing::set_extra_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $extra_ids, $extra_qty);
 		$total_prices = $total_prices + $total_extra['price'];
+		$total_regular_prices = $total_regular_prices + $total_extra['price'];
 	}
 	
 	$car_calcellation_policy = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['calcellation_policy'] ) ? $meta['calcellation_policy'] : '';
@@ -1193,34 +1357,39 @@ function tf_car_price_calculation_callback() {
 
 	$today = new DateTime('now', $timezone);
 	$less_current_day = false;
+	$beforeDate = '';
+	$beforeTime = '';
 
 	// Combine pickup date and time into a single string and convert it to a DateTime object
-	$pickupDateTime = DateTime::createFromFormat('Y/m/d H:i', $tf_pickup_date . ' ' . $tf_pickup_time, $timezone);
+	$pickupDateTime = tf_car_create_datetime( $tf_pickup_date, $tf_pickup_time, $timezone );
 
 	// Extract the "before_cancel_time" and "cancellation-times" (hours, days, etc.)
 	$beforeCancelTime = !empty($bestRefundPolicy['before_cancel_time']) ? (int) $bestRefundPolicy['before_cancel_time'] : 0;
 	$cancelTimeUnit = !empty($bestRefundPolicy['cancellation-times']) ? $bestRefundPolicy['cancellation-times'] : '';// Could be 'hour', 'day', etc.
 
-	// Adjust the pickup date and time based on the policy
-	switch ($cancelTimeUnit) {
-		case 'hour':
-			$pickupDateTime->modify("-{$beforeCancelTime} hours");
-			break;
-		case 'day':
-			$pickupDateTime->modify("-{$beforeCancelTime} days");
-			break;
-		// Add other cases as necessary (e.g., weeks, minutes, etc.)
-	}
-
-	// Compare calculated before date with the current day
-	if ($pickupDateTime < $today) {
+	if ( ! $pickupDateTime ) {
 		$less_current_day = true;
+	} else {
+		// Adjust the pickup date and time based on the policy
+		switch ($cancelTimeUnit) {
+			case 'hour':
+				$pickupDateTime->modify("-{$beforeCancelTime} hours");
+				break;
+			case 'day':
+				$pickupDateTime->modify("-{$beforeCancelTime} days");
+				break;
+			// Add other cases as necessary (e.g., weeks, minutes, etc.)
+		}
+
+		// Compare calculated before date with the current day
+		if ($pickupDateTime < $today) {
+			$less_current_day = true;
+		}
+
+		// Get the final "before" date and time (ensured to not be before today)
+		$beforeDate = $pickupDateTime->format('Y/m/d');
+		$beforeTime = $pickupDateTime->format('H:i');
 	}
-
-
-	// Get the final "before" date and time (ensured to not be before today)
-	$beforeDate = $pickupDateTime->format('Y/m/d');
-	$beforeTime = $pickupDateTime->format('H:i');
 
 
 	$cancellation = '';
@@ -1293,12 +1462,13 @@ function tf_car_price_calculation_callback() {
 		</div>';
 	}
 
-    // Send response
-    wp_send_json_success( [
-		/* translators: %s will return total price */
-        'total_price' => sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price( $total_prices ) ),
-        'cancellation' => $cancellation,
-    ] );
+	// Send response
+	wp_send_json_success(
+		array(
+			'total_price'  => tf_car_get_total_price_display_html( $total_prices, $total_regular_prices ),
+			'cancellation' => $cancellation,
+		)
+	);
 
 	wp_die();
 }

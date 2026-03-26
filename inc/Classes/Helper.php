@@ -2680,11 +2680,18 @@ class Helper {
                                         instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                                         dateSetToFields(selectedDates, instance);
                                     },
-                                    <?php if(! empty( $check_in_out )){ ?>
-                                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-                                    <?php } else { ?>
+                                    <?php
+                                    $pickup_date  = ! empty($_GET['pickup-date']) ? gmdate('Y-m-d', strtotime(sanitize_text_field( wp_unslash($_GET['pickup-date']) ))) : '';
+                                    $dropoff_date = ! empty($_GET['dropoff-date']) ? gmdate('Y-m-d', strtotime(sanitize_text_field( wp_unslash($_GET['dropoff-date']) ))) : '';
+                                    ?>
+
+                                    <?php if ( $pickup_date && $dropoff_date ) : ?>
+                                        defaultDate: <?php echo wp_json_encode( [ $pickup_date, $dropoff_date ] ); ?>,
+                                    <?php elseif ( ! empty( $check_in_out ) ) : ?>
+                                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ); ?>,
+                                    <?php else : ?>
                                         defaultDate: [tomorrow, dayAfter],
-                                    <?php } ?>
+                                    <?php endif; ?>
                                 });
 
                                 function dateSetToFields(selectedDates, instance) {
