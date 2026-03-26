@@ -139,7 +139,7 @@ defined( 'ABSPATH' ) || exit;
             </svg>    
             <?php echo 'paid'==$shuttle_car_fee_type && !empty($shuttle_car_fee) ? wp_kses_post(wc_price($shuttle_car_fee)) : esc_html__('Free', 'tourfic'); ?>
             <div class="tf-car-info-tooltip">
-                <span><?php esc_html_e("Shuttle", "tourfic"); ?> <?php echo 'paid'==$shuttle_car_fee_type && !empty($shuttle_car_fee) ? esc_html__('Fee:', 'tourfic'). esc_html(wc_price($shuttle_car_fee)) : esc_html__('Fee: Free', 'tourfic'); ?></span>
+                <span><?php esc_html_e("Shuttle", "tourfic"); ?> <?php echo 'paid'==$shuttle_car_fee_type && !empty($shuttle_car_fee) ? esc_html__('Fee:', 'tourfic'). wp_kses_post(wc_price($shuttle_car_fee)) : esc_html__('Fee: Free', 'tourfic'); ?></span>
             </div>
         </li>
         <?php } ?>
