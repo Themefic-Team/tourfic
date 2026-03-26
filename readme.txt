@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.21.4
+Stable tag: 2.21.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -417,6 +417,14 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 1.16.5 – Mar 26, 2026  =
+
+- New: CarPlay / Android Auto support and dynamic car filters.
+- Improved: Simplified connectivity filter and optimized assets.
+- Fixed: Date handling, booking popup, pricing sync, and tooltip display issues.
+- Fixed: Minor UI issues, including labels and pricing display.
+- Security: Restricted gallery access for non-public posts.
+
 = 2.21.4 – Mar 18, 2026 =
 
 - New: Apartment deposit settings with partial payment support
@@ -432,19 +440,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Tweak: Car and tour filter compatibility and price range display
 - Fixed: Tour package pricing fallback in backend booking
 - Fixed: Zero-price handling and checkout-related issues
-
-= 2.21.3 – March 16, 2026 =
-
-- Improved: System stability has been improved.
-- Compatibility: Compatible with WordPress (v6.9.4).
-
-= 2.21.2 – March 12, 2026 =
-
-- New: Pre-built template for single room booking.
-- Added: Travelfic theme support for the room booking template.
-- Added: New design for single and archive pages for rooms.
-- Added: Customization settings for the demo template.
-- Improved: System stability has been improved.
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 
