@@ -230,34 +230,57 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 	$car_protection_content = ! empty( $meta['protection_content'] ) ? $meta['protection_content'] : '';
 	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
 
-	//elementor settings
-	$show_image = isset($settings['show_image']) ? $settings['show_image'] : 'yes';
-	$promotional_tags = isset($settings['promotional_tags']) ? $settings['promotional_tags'] : 'yes';
-	$show_title = isset($settings['show_title']) ? $settings['show_title'] : 'yes';
-	$title_length = isset($settings['title_length']) ? absint($settings['title_length']) : 55;
-	$show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';
-	$show_price = isset($settings['show_price']) ? $settings['show_price'] : 'yes';
-	$car_infos = isset($settings['car_infos']) ? $settings['car_infos'] : ['mileage', 'fuel_type', 'engine_year', 'transmission_type', 'passenger_capacity', 'luggage_capacity'];
-	$show_view_details = isset($settings['show_view_details']) ? $settings['show_view_details'] : 'yes';
-	$view_details_text = esc_html__('Details', 'tourfic');
+	$builder = isset( $settings['builder'] ) ? $settings['builder'] : 'elementor';
+
+	// Switcher fields
+	$show_image         = Helper::get_switcher_value( $settings, 'show_image', 'yes', $builder );
+	$show_fallback_img  = Helper::get_switcher_value( $settings, 'show_fallback_img', 'no', $builder );
+	$promotional_tags   = Helper::get_switcher_value( $settings, 'promotional_tags', 'yes', $builder );
+	$show_title         = Helper::get_switcher_value( $settings, 'show_title', 'yes', $builder );
+	$show_review        = Helper::get_switcher_value( $settings, 'show_review', 'yes', $builder );
+	$show_price         = Helper::get_switcher_value( $settings, 'show_price', 'yes', $builder );
+	$show_view_details  = Helper::get_switcher_value( $settings, 'show_view_details', 'yes', $builder );
+
+	// Number/text fields
+	$title_length       = isset( $settings['title_length'] ) ? absint( $settings['title_length'] ) : 55;
+	$car_infos          = isset( $settings['car_infos'] ) ? $settings['car_infos'] : ['mileage', 'fuel_type', 'engine_year', 'transmission_type', 'passenger_capacity', 'luggage_capacity'];
+	$view_details_text  = isset( $settings['view_details_text'] ) ? sanitize_text_field( $settings['view_details_text'] ) : esc_html__( 'Details', 'tourfic' );
 
 	// Thumbnail
 	$thumbnail_html = '';
-	if ( !empty($settings) && $show_image == 'yes' ) {
-		$settings[ 'image_size_customize' ] = [
-			'id' => get_post_thumbnail_id(),
-		];
-		$settings['image_size_customize_size'] = $settings['image_size'];
-		$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
-
-		if ( "" === $thumbnail_html && 'yes' === $settings['show_fallback_img'] && !empty( $settings['fallback_img']['url'] ) ) {
-			$settings[ 'image_size_customize' ] = [
-				'id' => $settings['fallback_img']['id'],
+	if ( ! empty( $settings ) && 'yes' === $show_image ) {
+		if ( 'elementor' === $builder && class_exists( '\Elementor\Group_Control_Image_Size' ) ) {
+			$settings['image_size_customize'] = [
+				'id' => get_post_thumbnail_id(),
 			];
-			$settings['image_size_customize_size'] = $settings['image_size'];
-			$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
-		} elseif("" === $thumbnail_html && 'yes' !== $settings['show_fallback_img']) {
-			$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL ) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+			$settings['image_size_customize_size'] = isset( $settings['image_size'] ) ? $settings['image_size'] : 'full';
+
+			$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size_customize' );
+
+			if ( '' === $thumbnail_html && 'yes' === $show_fallback_img && ! empty( $settings['fallback_img']['url'] ) ) {
+				$settings['image_size_customize'] = [
+					'id' => $settings['fallback_img']['id'],
+				];
+				$settings['image_size_customize_size'] = isset( $settings['image_size'] ) ? $settings['image_size'] : 'full';
+
+				$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size_customize' );
+			} elseif ( '' === $thumbnail_html && 'yes' !== $show_fallback_img ) {
+				$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+			}
+		} else {
+			$image_size = isset( $settings['image_size'] ) ? $settings['image_size'] : 'full';
+
+			if ( has_post_thumbnail() ) {
+				$thumbnail_html = get_the_post_thumbnail( get_the_ID(), $image_size );
+			} elseif ( 'yes' === $show_fallback_img && ! empty( $settings['fallback_img']['url'] ) ) {
+				$fallback_img_src = wp_get_attachment_image_url( $settings['fallback_img']['id'], $image_size );
+				if ( ! $fallback_img_src ) {
+					$fallback_img_src = $settings['fallback_img']['url'];
+				}
+				$thumbnail_html = '<img src="' . esc_url( $fallback_img_src ) . '" class="attachment-' . esc_attr( $image_size ) . ' size-' . esc_attr( $image_size ) . ' wp-post-image">';
+			} else {
+				$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+			}
 		}
 	}
 ?>
@@ -444,7 +467,9 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 			<?php endif; ?>
 
 			<!-- View Details -->
+			<?php if($show_view_details == 'yes') : ?>   
 			<a class="view-more" href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $view_details_text ); ?></a>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>

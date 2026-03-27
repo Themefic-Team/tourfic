@@ -3984,10 +3984,16 @@ class Hotel {
 					$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
 				}
 			} else {
+				$image_size = isset( $settings['image_size'] ) ? $settings['image_size'] : 'full';
+
 				if ( has_post_thumbnail() ) {
-					$thumbnail_html = get_the_post_thumbnail( get_the_ID(), 'full' );
+					$thumbnail_html = get_the_post_thumbnail( get_the_ID(), $image_size );
 				} elseif ( 'yes' === $show_fallback_img && ! empty( $settings['fallback_img']['url'] ) ) {
-					$thumbnail_html = '<img src="' . esc_url( $settings['fallback_img']['url'] ) . '" class="attachment-full size-full wp-post-image">';
+					$fallback_img_src = wp_get_attachment_image_url( $settings['fallback_img']['id'], $image_size );
+					if ( ! $fallback_img_src ) {
+						$fallback_img_src = $settings['fallback_img']['url'];
+					}
+					$thumbnail_html = '<img src="' . esc_url( $fallback_img_src ) . '" class="attachment-' . esc_attr( $image_size ) . ' size-' . esc_attr( $image_size ) . ' wp-post-image">';
 				} else {
 					$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
 				}

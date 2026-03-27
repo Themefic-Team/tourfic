@@ -21,9 +21,6 @@ const proAdminJs = [
     './sass/admin/js/pro/template-builder.js',
     './sass/admin/js/pro/admin.js'
 ];
-const proBricksAdminJs = [
-    './sass/admin/js/pro/tf-bricks-element-controls.js',
-];
 
 //tourfic free
 entryPoints['tourfic/assets/app/js/tourfic-scripts'] = freeAppJs;
@@ -35,8 +32,6 @@ entryPoints['tourfic-pro/assets/app/js/tourfic-pro'] = proAppJs;
 minEntryPoints['tourfic-pro/assets/app/js/tourfic-pro.min'] = proAppJs;
 entryPoints['tourfic-pro/assets/admin/js/tourfic-pro-admin'] = proAdminJs;
 minEntryPoints['tourfic-pro/assets/admin/js/tourfic-pro-admin.min'] = proAdminJs;
-entryPoints['tourfic-pro/assets/admin/js/tf-bricks-element-controls'] = proBricksAdminJs;
-minEntryPoints['tourfic-pro/assets/admin/js/tf-bricks-element-controls.min'] = proBricksAdminJs;
 
 //tourfic vendor addon
 entryPoints['tourfic-vendor/admin/assets/js/tourfic-vendor-admin'] = vendorAdminJs;
