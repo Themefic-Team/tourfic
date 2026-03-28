@@ -310,22 +310,24 @@ class TF_Handle_Emails {
         $order_billing_postcode = !empty($order_data['billing_details']['billing_postcode']) ? $order_data['billing_details']['billing_postcode'] : '';
         $order_billing_state = !empty($order_data['billing_details']['billing_state']) ? $order_data['billing_details']['billing_state'] : '';
         $payment_method_title   = $order_data['payment_method'];
-        $order_status           = $order_data['status'];
+        $order_status           = ! empty( $order_data['status'] ) ? $order_data['status'] : ( ! empty( $order_data['ostatus'] ) ? $order_data['ostatus'] : '' );
         $order_date_created     = $order_data['order_date'];
 
         //Booking URL
         global $wpdb;
         $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE order_id = %s",sanitize_key( $order_id ) ) );
 
-        if('tour'==$order_data['post_type']){
-            $order_url = esc_url(admin_url() . 'edit.php?post_type=tf_tours&page=tf_tours_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
-        }elseif('car'==$order_data['post_type']){
-            $order_url = esc_url(admin_url() . 'edit.php?post_type=tf_carrental&page=tf_carrental_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
-        }elseif('hotel'==$order_data['post_type']){
-            $order_url = esc_url(admin_url() . 'edit.php?post_type=tf_hotel&page=tf_hotel_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
-        }else{
-            $order_url = '#';
-        }
+		if('tour'==$order_data['post_type']){
+			$order_url = esc_url(admin_url() . 'edit.php?post_type=tf_tours&page=tf_tours_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
+		}elseif('car'==$order_data['post_type']){
+			$order_url = esc_url(admin_url() . 'edit.php?post_type=tf_carrental&page=tf_carrental_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
+		}elseif('hotel'==$order_data['post_type']){
+			$order_url = esc_url(admin_url() . 'edit.php?post_type=tf_hotel&page=tf_hotel_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
+		}elseif('apartment'==$order_data['post_type']){
+			$order_url = esc_url(admin_url() . 'edit.php?post_type=tf_apartment&page=tf_apartment_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
+		}else{
+			$order_url = '#';
+		}
 
         $booking_details = '<table width="100%" style="max-width: 600px;border-collapse: collapse; color: #5A5A5A; font-family: Inter,sans-serif;"><thead><tr><th align="left" style="color:#0209AF;">Item Name</th><th align="center" style="color:#0209AF;">Quantity</th><th align="right" style="color:#0209AF;">Price</th></tr></thead><tbody style="border-bottom: 1px solid #D9D9D9">';
         $booking_details .= '<tr>';
@@ -647,9 +649,11 @@ class TF_Handle_Emails {
             $meta_data = $item->get_meta_data();
             foreach ( $meta_data as $meta ) {
                 if ( $meta->key == '_post_author' ) {
-                    $vendor_id       = $meta->value;
-                    $vendor          = get_userdata( $vendor_id );
-                    $vendor_emails[] = $vendor->user_email;
+                    $vendor_id = $meta->value;
+                    $vendor    = get_userdata( $vendor_id );
+                    if ( $vendor && ! empty( $vendor->user_email ) ) {
+                        $vendor_emails[] = $vendor->user_email;
+                    }
                 }
             }
         }
