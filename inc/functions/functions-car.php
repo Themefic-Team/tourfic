@@ -431,7 +431,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 				<?php if(!empty($car_infos) && is_array($car_infos) && in_array('carplay_android_auto', $car_infos)) : ?>
 				<li class="list">
 				<i class="ri-smartphone-line"></i>
-				<p><?php echo $carplay_android_auto ? esc_html__("CarPlay / Android Auto", "tourfic") : esc_html__("No CarPlay / Android Auto", "tourfic"); ?></p>
+				<p><?php echo $carplay_android_auto ? esc_html__("CarPlay / Android", "tourfic") : esc_html__("No CarPlay / Android", "tourfic"); ?></p>
 				</li>
 				<?php endif; ?>
 
