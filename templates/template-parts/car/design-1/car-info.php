@@ -125,7 +125,7 @@ defined( 'ABSPATH' ) || exit;
         </li>
         <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
             <i class="ri-smartphone-line"></i>
-            <?php echo $carplay_android_auto ? esc_html__("CarPlay / Android Auto", "tourfic") : esc_html__("No CarPlay / Android Auto", "tourfic"); ?>
+            <?php echo $carplay_android_auto ? esc_html__("CarPlay / Android", "tourfic") : esc_html__("No CarPlay / Android", "tourfic"); ?>
             <div class="tf-car-info-tooltip">
                 <span><?php echo $carplay_android_auto ? esc_html__("This car has Apple CarPlay / Android Auto.", "tourfic") : esc_html__("This car does not have Apple CarPlay / Android Auto.", "tourfic"); ?></span>
             </div>
