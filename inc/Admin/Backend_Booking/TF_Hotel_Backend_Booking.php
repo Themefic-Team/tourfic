@@ -547,6 +547,9 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 			);
 
 			$order_id = Helper::tf_set_order( $order_data );
+			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $order_id ) ) {
+				do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
+			}
 
 			$rooms     = Room::get_hotel_rooms( intval( $field['tf_available_hotels'] ) );
 			if ( ! empty( $rooms ) ) {
