@@ -360,6 +360,9 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			);
 			if ( ! array_key_exists( 'errors', $res['response'] ) || count( $res['response']['errors'] ) == 0 ) {
 				$order_id = Helper::tf_set_order( $order_data );
+				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $order_id ) ) {
+					do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
+				}
 
 				if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
 
