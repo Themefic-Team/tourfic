@@ -907,6 +907,30 @@
             },
         });
 
+        let carPartialPaymentSelection = 'no';
+
+        function setCarPartialPayment(trigger) {
+            if (!trigger || !trigger.attr('data-partial')) {
+                return;
+            }
+
+            carPartialPaymentSelection = trigger.attr('data-partial');
+
+            if ($('#tf_partial_payment').length) {
+                $('#tf_partial_payment').val(carPartialPaymentSelection);
+            }
+        }
+
+        function getCarPartialPayment(trigger) {
+            if (trigger && trigger.attr('data-partial')) {
+                setCarPartialPayment(trigger);
+            } else if ($('#tf_partial_payment').length && $('#tf_partial_payment').val()) {
+                carPartialPaymentSelection = $('#tf_partial_payment').val();
+            }
+
+            return carPartialPaymentSelection || 'no';
+        }
+
         
         // FAQ Accordion
         $('.tf-car-faq-section .tf-faq-head').on("click", function () {
@@ -1140,9 +1164,7 @@
                 return;
             }
 
-            if($this.attr('data-partial')){
-                $('#tf_partial_payment').val($this.attr('data-partial'));
-            }
+            setCarPartialPayment($this);
 
             var data = {
                 action: 'tf_car_booking_pupup',
@@ -1322,6 +1344,7 @@
                 $(this).off('click');
             }
             let $this = $(this);
+            setCarPartialPayment($this);
             
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
                 return $(this).val();
@@ -1405,7 +1428,7 @@
                 return;
             }
 
-            let partial_payment = $('#tf_partial_payment').val();
+            let partial_payment = getCarPartialPayment($this);
 
             var data = {
                 action: 'tf_car_booking',
@@ -1650,7 +1673,7 @@
     
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
-            let partial_payment = $('#tf_partial_payment').val();
+            let partial_payment = getCarPartialPayment($this);
             let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
             let dropoff_date = $this.closest('.tf-booking-btn').find('#dropoff_date').val();
             let pickup_time = $this.closest('.tf-booking-btn').find('#pickup_time').val();
