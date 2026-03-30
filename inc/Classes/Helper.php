@@ -869,6 +869,29 @@ class Helper {
 		$startprice = ! empty( $_GET['from'] ) ? sanitize_text_field( wp_unslash( $_GET['from'] ) ) : '';
 		$endprice   = ! empty( $_GET['to'] ) ? sanitize_text_field( wp_unslash( $_GET['to'] ) ) : '';
 
+		$search_current_timestamp = current_time( 'timestamp' );
+		$search_default_check_in  = wp_date( 'Y/m/d', $search_current_timestamp );
+		$search_default_check_out = wp_date( 'Y/m/d', strtotime( '+1 day', $search_current_timestamp ) );
+		$date                     = ! empty( $date ) ? $date : $search_default_check_in . ' - ' . $search_default_check_out;
+		$check_in_out             = $date;
+
+		$search_check_in_out_parts = array_map( 'trim', explode( '-', $date ) );
+		$search_check_in_date      = ! empty( $search_check_in_out_parts[0] ) ? $search_check_in_out_parts[0] : $search_default_check_in;
+		$search_check_out_date     = ! empty( $search_check_in_out_parts[1] ) ? $search_check_in_out_parts[1] : $search_default_check_out;
+		$search_default_date_range = wp_json_encode( array_map( 'trim', explode( '-', $date ) ) );
+
+		$search_check_in_timestamp  = strtotime( $search_check_in_date );
+		$search_check_out_timestamp = strtotime( $search_check_out_date );
+
+		$search_check_in_day = false !== $search_check_in_timestamp ? wp_date( 'd', $search_check_in_timestamp ) : wp_date( 'd', $search_current_timestamp );
+		$search_check_in_mon = false !== $search_check_in_timestamp ? wp_date( 'M', $search_check_in_timestamp ) : wp_date( 'M', $search_current_timestamp );
+
+		$search_check_out_day = false !== $search_check_out_timestamp ? wp_date( 'd', $search_check_out_timestamp ) : wp_date( 'd', strtotime( '+1 day', $search_current_timestamp ) );
+		$search_check_out_mon = false !== $search_check_out_timestamp ? wp_date( 'M', $search_check_out_timestamp ) : wp_date( 'M', strtotime( '+1 day', $search_current_timestamp ) );
+
+		$search_check_in_display  = false !== $search_check_in_timestamp ? wp_date( $date_format_for_users, $search_check_in_timestamp ) : wp_date( $date_format_for_users, $search_current_timestamp );
+		$search_check_out_display = false !== $search_check_out_timestamp ? wp_date( $date_format_for_users, $search_check_out_timestamp ) : wp_date( $date_format_for_users, strtotime( '+1 day', $search_current_timestamp ) );
+
 		$tf_tour_arc_selected_template      = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['tour-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
 		$tf_hotel_arc_selected_template     = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['hotel-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
 		$tf_apartment_arc_selected_template = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['apartment-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['apartment-archive'] : 'default';
@@ -1011,7 +1034,7 @@ class Helper {
                                     return `${d1} - ${d2}`;
                                 })
                             },
-                            defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
+                            defaultDate: <?php echo $search_default_date_range; ?>,
                         });
 
                     });
@@ -1057,9 +1080,9 @@ class Helper {
                     <div class="tf-booking-form-checkin">
                         <span class="tf-booking-form-title"><?php esc_html_e( "Check in", "tourfic" ); ?></span>
                         <div class="tf-booking-date-wrap">
-                            <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
+                            <span class="tf-booking-date"><?php echo esc_html( $search_check_in_day ); ?></span>
                             <span class="tf-booking-month">
-                                <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
+                                <span><?php echo esc_html( $search_check_in_mon ); ?></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                 <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                 </svg>
@@ -1074,9 +1097,9 @@ class Helper {
                     <div class="tf-booking-form-checkout">
                         <span class="tf-booking-form-title"><?php esc_html_e( "Check out", "tourfic" ); ?></span>
                         <div class="tf-booking-date-wrap">
-                            <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
+                            <span class="tf-booking-date"><?php echo esc_html( $search_check_out_day ); ?></span>
                             <span class="tf-booking-month">
-                                <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
+                                <span><?php echo esc_html( $search_check_out_mon ); ?></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                 <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                 </svg>
@@ -1090,25 +1113,25 @@ class Helper {
                         <span class="tf-booking-form-title"><?php esc_html_e( "Date", "tourfic" ); ?></span>
                         <div class="tf-tour-searching-date-block">
                             <div class="tf-booking-date-wrap tf-tour-start-date">
-                                <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
+                                <span class="tf-booking-date"><?php echo esc_html( $search_check_in_day ); ?></span>
                                 <span class="tf-booking-month">
-							<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
-						</span>
+								<span><?php echo esc_html( $search_check_in_mon ); ?></span>
+							</span>
                             </div>
                             <div class="tf-duration">
                                 <span>-</span>
                             </div>
                             <div class="tf-booking-date-wrap tf-tour-end-date">
-                                <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
+                                <span class="tf-booking-date"><?php echo esc_html( $search_check_out_day ); ?></span>
                                 <span class="tf-booking-month">
-							<span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-							<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
-							</svg>
-						</span>
+								<span><?php echo esc_html( $search_check_out_mon ); ?></span>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+								</svg>
+							</span>
                             </div>
                             <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                   placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $date ) ? 'value="' . esc_attr( $date ) . '"' : '' ?> required>
+                                   placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr( $date ); ?>" required>
                         </div>
                     </div>
 				<?php } ?>
@@ -1286,10 +1309,7 @@ class Helper {
                                     });
                                     dateSetToFields(selectedDates, instance);
                                 },
-								<?php
-								if(! empty( $date )){ ?>
-                                defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
-								<?php } ?>
+                                defaultDate: <?php echo $search_default_date_range; ?>,
                             });
 
                             function dateSetToFields(selectedDates, instance) {
@@ -1363,7 +1383,7 @@ class Helper {
                                     });
                                     dateSetToFields(selectedDates, instance);
                                 },
-                                defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
+                                defaultDate: <?php echo $search_default_date_range; ?>,
                             });
 
                             function dateSetToFields(selectedDates, instance) {
@@ -1426,7 +1446,7 @@ class Helper {
                             </div>
                             <div class="tf-search-field-content">
                                 <span class="tf-search-field-label"><?php esc_html_e( "Check in", "tourfic" ); ?></span>
-                                <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
+                                <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr( $search_check_in_display ); ?>" readonly>
                                 <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr( $date ) ?>">
                             </div>
                         </div>
@@ -1442,7 +1462,7 @@ class Helper {
                             </div>
                             <div class="tf-search-field-content">
                                 <span class="tf-search-field-label"><?php esc_html_e( "Check out", "tourfic" ); ?></span>
-                                <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="">
+                                <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr( $search_check_out_display ); ?>">
                             </div>
                         </div>
                     </div>
@@ -1459,7 +1479,7 @@ class Helper {
                             </div>
                             <label class="tf-search-field-content" for="check-in-out-date">
                                 <span class="tf-search-field-label"><?php esc_html_e( "Select Date", "tourfic" ); ?></span>
-                                <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr($check_in_out) . '"' : '' ?>>
+                                <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr( $date ); ?>">
                             </label>
                         </div>
                     </div>
@@ -1647,9 +1667,7 @@ class Helper {
                                     instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                                     dateSetToFields(selectedDates, instance);
                                 },
-								<?php if(! empty( $date )){ ?>
-                                defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
-								<?php } ?>
+                                defaultDate: <?php echo $search_default_date_range; ?>,
                             });
 
                             function dateSetToFields(selectedDates, instance) {
@@ -1870,7 +1888,7 @@ class Helper {
                                     return `${d1} - ${d2}`;
                                 });
                             },
-                            defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
+                            defaultDate: <?php echo $search_default_date_range; ?>,
                         });
 
                     });
@@ -1917,7 +1935,28 @@ class Helper {
 		$disable_apartment_infant_search = ! empty( self::tfopt( 'disable_apartment_infant_search' ) ) ? self::tfopt( 'disable_apartment_infant_search' ) : '';
         $adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
-        $tf_current_date = date( 'd-m-Y' );
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : '';
+
+		$archive_current_timestamp = current_time( 'timestamp' );
+		$archive_default_check_in  = wp_date( 'Y/m/d', $archive_current_timestamp );
+		$archive_default_check_out = wp_date( 'Y/m/d', strtotime( '+1 day', $archive_current_timestamp ) );
+		$archive_check_in_out      = ! empty( $check_in_out ) ? $check_in_out : $archive_default_check_in . ' - ' . $archive_default_check_out;
+
+		$archive_check_in_out_parts = array_map( 'trim', explode( '-', $archive_check_in_out ) );
+		$archive_check_in_date      = ! empty( $archive_check_in_out_parts[0] ) ? $archive_check_in_out_parts[0] : $archive_default_check_in;
+		$archive_check_out_date     = ! empty( $archive_check_in_out_parts[1] ) ? $archive_check_in_out_parts[1] : $archive_default_check_out;
+
+		$archive_check_in_timestamp  = strtotime( $archive_check_in_date );
+		$archive_check_out_timestamp = strtotime( $archive_check_out_date );
+
+		$archive_check_in_day = false !== $archive_check_in_timestamp ? wp_date( 'd', $archive_check_in_timestamp ) : wp_date( 'd', $archive_current_timestamp );
+		$archive_check_in_mon = false !== $archive_check_in_timestamp ? wp_date( 'M', $archive_check_in_timestamp ) : wp_date( 'M', $archive_current_timestamp );
+
+		$archive_check_out_day = false !== $archive_check_out_timestamp ? wp_date( 'd', $archive_check_out_timestamp ) : wp_date( 'd', strtotime( '+1 day', $archive_current_timestamp ) );
+		$archive_check_out_mon = false !== $archive_check_out_timestamp ? wp_date( 'M', $archive_check_out_timestamp ) : wp_date( 'M', strtotime( '+1 day', $archive_current_timestamp ) );
+
+		$archive_check_in_display  = false !== $archive_check_in_timestamp ? wp_date( $date_format_for_users, $archive_check_in_timestamp ) : wp_date( $date_format_for_users, $archive_current_timestamp );
+		$archive_check_out_display = false !== $archive_check_out_timestamp ? wp_date( $date_format_for_users, $archive_check_out_timestamp ) : wp_date( $date_format_for_users, strtotime( '+1 day', $archive_current_timestamp ) );
 
         // Pull options from settings or set fallback values
         $disable_car_time_slot = !empty(Helper::tfopt('disable-car-time-slots')) ? boolval(Helper::tfopt('disable-car-time-slots')) : false;
@@ -2017,7 +2056,7 @@ class Helper {
                     <div class="tf-field-group tf-mt-8">
                         <i class="fa-solid fa-calendar-days"></i>
                         <input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                               placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" required value="">
+                               placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" required value="<?php echo esc_attr( $archive_check_in_out ); ?>">
                     </div>
                     <div class="tf_booking-dates">
                         <div class="tf_label-row"></div>
@@ -2065,6 +2104,7 @@ class Helper {
                                         return `${d1} - ${d2}`;
                                     });
                                 },
+                                defaultDate: <?php echo wp_json_encode( array_map( 'trim', explode( '-', $archive_check_in_out ) ) ); ?>,
                             });
 
                             // open flatpickr on focus
@@ -2109,23 +2149,23 @@ class Helper {
                             <div class="tf-booking-form-checkin">
                                 <span class="tf-booking-form-title"><?php esc_html_e( "Check in", "tourfic" ); ?></span>
                                 <div class="tf-booking-date-wrap">
-                                    <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
+                                    <span class="tf-booking-date"><?php echo esc_html( $archive_check_in_day ); ?></span>
                                     <span class="tf-booking-month">
-                                        <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
+                                        <span><?php echo esc_html( $archive_check_in_mon ); ?></span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                         <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                         </svg>
                                     </span>
                                 </div>
                                 <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                    placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required>
+                                    placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr( $archive_check_in_out ); ?>" required>
                             </div>
                             <div class="tf-booking-form-checkout">
                                 <span class="tf-booking-form-title"><?php esc_html_e( "Check out", "tourfic" ); ?></span>
                                 <div class="tf-booking-date-wrap">
-                                    <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
+                                    <span class="tf-booking-date"><?php echo esc_html( $archive_check_out_day ); ?></span>
                                     <span class="tf-booking-month">
-                                <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
+                                <span><?php echo esc_html( $archive_check_out_mon ); ?></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                 <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                 </svg>
@@ -2140,25 +2180,25 @@ class Helper {
                                 <span class="tf-booking-form-title"><?php esc_html_e( "Date", "tourfic" ); ?></span>
                                 <div class="tf-tour-searching-date-block">
                                     <div class="tf-booking-date-wrap tf-tour-start-date">
-                                        <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
+                                        <span class="tf-booking-date"><?php echo esc_html( $archive_check_in_day ); ?></span>
                                         <span class="tf-booking-month">
-                                    <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
+                                    <span><?php echo esc_html( $archive_check_in_mon ); ?></span>
                                 </span>
                                     </div>
                                     <div class="tf-duration">
                                         <span>-</span>
                                     </div>
                                     <div class="tf-booking-date-wrap tf-tour-end-date">
-                                        <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
+                                        <span class="tf-booking-date"><?php echo esc_html( $archive_check_out_day ); ?></span>
                                         <span class="tf-booking-month">
-                                    <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
+                                    <span><?php echo esc_html( $archive_check_out_mon ); ?></span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                     <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                     </svg>
                                 </span>
                                     </div>
                                     <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                        placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required>
+                                        placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr( $archive_check_in_out ); ?>" required>
                                 </div>
                             </div>
                         <?php } ?>
@@ -2341,10 +2381,7 @@ class Helper {
                                             });
                                             dateSetToFields(selectedDates, instance);
                                         },
-                                        <?php
-                                        if(! empty( $check_in_out )){ ?>
-                                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-                                        <?php } ?>
+                                        defaultDate: <?php echo wp_json_encode( array_map( 'trim', explode( '-', $archive_check_in_out ) ) ); ?>,
                                     });
 
                                     function dateSetToFields(selectedDates, instance) {
@@ -2416,10 +2453,7 @@ class Helper {
                                             });
                                             dateSetToFields(selectedDates, instance);
                                         },
-                                        <?php
-                                        if(! empty( $check_in_out )){ ?>
-                                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-                                        <?php } ?>
+                                        defaultDate: <?php echo wp_json_encode( array_map( 'trim', explode( '-', $archive_check_in_out ) ) ); ?>,
                                     });
 
                                     function dateSetToFields(selectedDates, instance) {
@@ -2940,8 +2974,8 @@ class Helper {
                                 </div>
                                 <label class="tf-search-field-content" for='tf-check-out'>
                                     <span class="tf-search-field-label"><?php esc_html_e( "Check in", "tourfic" ); ?></span>
-                                    <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
-                                    <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="">
+                                    <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr( $archive_check_in_display ); ?>" readonly>
+                                    <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr( $archive_check_in_out ); ?>">
                                 </label>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
@@ -2956,7 +2990,7 @@ class Helper {
                                 </div>
                                 <label class="tf-search-field-content" for='tf-check-out'>
                                     <span class="tf-search-field-label"><?php esc_html_e( "Check out", "tourfic" ); ?></span>
-                                    <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
+                                    <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr( $archive_check_out_display ); ?>" readonly>
                                 </label>
                             </div>
                         </div>
@@ -2973,7 +3007,7 @@ class Helper {
                                 </div>
                                 <label class="tf-search-field-content" for="check-in-out-date">
                                     <span class="tf-search-field-label"><?php esc_html_e( "Select Date", "tourfic" ); ?></span>
-                                    <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr($check_in_out) . '"' : '' ?>>
+                                    <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo esc_attr( $archive_check_in_out ); ?>">
                                 </label>
                             </div>
                         </div>
@@ -3159,9 +3193,7 @@ class Helper {
                                         instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                                         dateSetToFields(selectedDates, instance);
                                     },
-                                    <?php if(! empty( $check_in_out )){ ?>
-                                    defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-                                    <?php } ?>
+                                    defaultDate: <?php echo wp_json_encode( array_map( 'trim', explode( '-', $archive_check_in_out ) ) ); ?>,
                                 });
 
                                 function dateSetToFields(selectedDates, instance) {
@@ -3293,7 +3325,7 @@ class Helper {
                             <div class="tf_form-inner">
                                 <i class="far fa-calendar-alt"></i>
                                 <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                       placeholder="<?php echo esc_attr__( 'Select Date', 'tourfic' ); ?>" required value="">
+                                       placeholder="<?php echo esc_attr__( 'Select Date', 'tourfic' ); ?>" required value="<?php echo esc_attr( $archive_check_in_out ); ?>">
                             </div>
                         </label>
                     </div>
@@ -3343,6 +3375,7 @@ class Helper {
                                         return `${d1} - ${d2}`;
                                     })
                                 },
+                                defaultDate: <?php echo wp_json_encode( array_map( 'trim', explode( '-', $archive_check_in_out ) ) ); ?>,
                             });
                         });
                     });
