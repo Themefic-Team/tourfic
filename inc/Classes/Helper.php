@@ -1942,21 +1942,88 @@ class Helper {
 	}
 
 	/**
+	 * Render icon HTML based on builder and icon settings
+	 * Global method for all icon rendering across builders
+	 *
+	 * @param array  $settings      Settings array (usually widget settings)
+	 * @param string $icon_key      Settings key for the icon (e.g., 'location_icon', 'adult_icon')
+	 * @param string $fallback_icon Fallback icon HTML if no settings found
+	 * @param string $builder       Builder identifier (e.g., 'elementor', 'bricks')
+	 * @return string Icon HTML
+	 */
+	static function tf_render_builder_icon_html( $settings = array(), $icon_key = '', $fallback_icon = '<i class="fa-solid fa-location-dot"></i>', $builder = 'elementor' ) {
+		$icon_html = $fallback_icon;
+
+		if ( empty( $settings ) || empty( $icon_key ) ) {
+			return $icon_html;
+		}
+
+		if ( 'elementor' === $builder && class_exists( '\Elementor\Icons_Manager' ) ) {
+			$icon_migrated = isset( $settings['__fa4_migrated'][ $icon_key ] );
+			$icon_is_new   = empty( $settings[ $icon_key . '_comp' ] );
+
+			if ( $icon_is_new || $icon_migrated ) {
+				ob_start();
+				\Elementor\Icons_Manager::render_icon( $settings[ $icon_key ], [ 'aria-hidden' => 'true' ] );
+				$icon_html = ob_get_clean();
+			} elseif ( ! empty( $settings[ $icon_key . '_comp' ] ) ) {
+				$icon_html = '<i class="' . esc_attr( $settings[ $icon_key . '_comp' ] ) . '"></i>';
+			}
+		} elseif ( 'bricks' === $builder ) {
+			if ( ! empty( $settings[ $icon_key ]['library'] ) && ! empty( $settings[ $icon_key ]['icon'] ) ) {
+				$icon_html = '<i class="' . esc_attr( $settings[ $icon_key ]['icon'] ) . '" aria-hidden="true"></i>';
+			} elseif ( ! empty( $settings[ $icon_key ]['class'] ) ) {
+				$icon_html = '<i class="' . esc_attr( $settings[ $icon_key ]['class'] ) . '" aria-hidden="true"></i>';
+			} elseif ( ! empty( $settings[ $icon_key ] ) && is_string( $settings[ $icon_key ] ) ) {
+				$icon_html = '<i class="' . esc_attr( $settings[ $icon_key ] ) . '" aria-hidden="true"></i>';
+			}
+		}
+
+		return $icon_html;
+	}
+
+	/**
 	 * Archive Sidebar Search Form
 	 */
-	static function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_name = '', $taxonomy_slug = '' ) {
+	static function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_name = '', $taxonomy_slug = '', $settings = array() ) {
+		// Set builder from settings or default to elementor
+		$builder = isset( $settings['builder'] ) ? $settings['builder'] : 'elementor';
+
 		$place = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
 		if ( $post_type == 'tf_apartment' ) {
 			$place = 'tf-apartment-location';
 		}
-		$place_text            = $post_type == 'tf_hotel' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Enter Destination', 'tourfic' );
+		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
+		// Extract widget settings for customizable labels and placeholders
+		$place_text  = ! empty( $settings['loc_placeholder_text'] ) ? $settings['loc_placeholder_text'] : ( $post_type == 'tf_hotel' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Enter Destination', 'tourfic' ) );
+		$loc_label             = ! empty( $settings['loc_label'] ) ? $settings['loc_label'] : esc_html__( 'Location', 'tourfic' );
+		$adult_label           = ! empty( $settings['adult_label'] ) ? $settings['adult_label'] : esc_html( $adults_name . 's' );
+		$children_label        = ! empty( $settings['children_label'] ) ? $settings['children_label'] : esc_html__( 'Children', 'tourfic' );
+		$infant_label          = ! empty( $settings['infant_label'] ) ? $settings['infant_label'] : esc_html__( 'Infant', 'tourfic' );
+		$room_label            = ! empty( $settings['room_label'] ) ? $settings['room_label'] : esc_html__( 'Room', 'tourfic' );
+		$checkin_label         = ! empty( $settings['checkin_label'] ) ? $settings['checkin_label'] : esc_html__( 'Check in', 'tourfic' );
+		$checkout_label        = ! empty( $settings['checkout_label'] ) ? $settings['checkout_label'] : esc_html__( 'Check out', 'tourfic' );
+		$date_label            = ! empty( $settings['date_label'] ) ? $settings['date_label'] : esc_html__( 'Select Date', 'tourfic' );
+		$guests_rooms_label    = ! empty( $settings['guests_rooms_label'] ) ? $settings['guests_rooms_label'] : esc_html__( 'Guests & rooms', 'tourfic' );
+		$persons_label         = ! empty( $settings['persons_label'] ) ? $settings['persons_label'] : esc_html__( 'Persons', 'tourfic' );
+		$pickup_location_placeholder = ! empty( $settings['pickup_location_placeholder'] ) ? $settings['pickup_location_placeholder'] : esc_html__( 'Pick Up Location', 'tourfic' );
+		$dropoff_location_placeholder = ! empty( $settings['dropoff_location_placeholder'] ) ? $settings['dropoff_location_placeholder'] : esc_html__( 'Drop Off Location', 'tourfic' );
+		$pickup_date_placeholder     = ! empty( $settings['pickup_date_placeholder'] ) ? $settings['pickup_date_placeholder'] : esc_html__( 'Pick Up Date', 'tourfic' );
+		$dropoff_date_placeholder    = ! empty( $settings['dropoff_date_placeholder'] ) ? $settings['dropoff_date_placeholder'] : esc_html__( 'Drop Off Date', 'tourfic' );
+		$pickup_label                = ! empty( $settings['pickup_label'] ) ? $settings['pickup_label'] : esc_html__( 'Pick-up', 'tourfic' );
+		$dropoff_label               = ! empty( $settings['dropoff_label'] ) ? $settings['dropoff_label'] : esc_html__( 'Drop-off', 'tourfic' );
+		$pickup_date_label           = ! empty( $settings['pickup_date_label'] ) ? $settings['pickup_date_label'] : esc_html__( 'Pick-up date', 'tourfic' );
+		$pickup_time_label           = ! empty( $settings['pickup_time_label'] ) ? $settings['pickup_time_label'] : esc_html__( 'Time', 'tourfic' );
+		$dropoff_time_label          = ! empty( $settings['dropoff_time_label'] ) ? $settings['dropoff_time_label'] : esc_html__( 'Time', 'tourfic' );
+		$dropoff_date_label          = ! empty( $settings['dropoff_date_label'] ) ? $settings['dropoff_date_label'] : esc_html__( 'Drop-off date', 'tourfic' );
 		$date_format_for_users = ! empty( self::tfopt( "tf-date-format-for-users" ) ) ? self::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
-		$tf_tour_arc_selected_template      = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['tour-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
- 		$tf_hotel_arc_selected_template     = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['hotel-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
- 		$tf_apartment_arc_selected_template = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['apartment-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['apartment-archive'] : 'default';
- 		$tf_car_arc_selected_template       = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car-archive'] : 'design-1';
-        $tf_room_arc_selected_template = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['room-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['room-archive'] : 'design-1';
+		// Get design from settings or fallback to global template options
+		$design_hotel     = ! empty( $settings['design_hotel'] ) ? $settings['design_hotel'] : ( ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['hotel-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1' );
+		$design_tours     = ! empty( $settings['design_tours'] ) ? $settings['design_tours'] : ( ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['tour-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1' );
+		$design_apartment = ! empty( $settings['design_apartment'] ) ? $settings['design_apartment'] : ( ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['apartment-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['apartment-archive'] : 'default' );
+		$design_car       = ! empty( $settings['design_carrental'] ) ? $settings['design_carrental'] : ( ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car-archive'] : 'design-1' );
+		$design_room      = ! empty( $settings['design_room'] ) ? $settings['design_room'] : ( ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['room-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['room-archive'] : 'design-1' );
 
 		$hotel_location_field_required      = ! empty( self::tfopt( "required_location_hotel_search" ) ) ? self::tfopt( "required_location_hotel_search" ) : 0;
 		$tour_location_field_required       = ! empty( self::tfopt( "required_location_tour_search" ) ) ? self::tfopt( "required_location_tour_search" ) : 0;
@@ -1968,7 +2035,6 @@ class Helper {
 		$disable_hotel_child_search      = ! empty( self::tfopt( 'disable_hotel_child_search' ) ) ? self::tfopt( 'disable_hotel_child_search' ) : '';
 		$disable_apartment_child_search  = ! empty( self::tfopt( 'disable_apartment_child_search' ) ) ? self::tfopt( 'disable_apartment_child_search' ) : '';
 		$disable_apartment_infant_search = ! empty( self::tfopt( 'disable_apartment_infant_search' ) ) ? self::tfopt( 'disable_apartment_infant_search' ) : '';
-        $adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
         $tf_current_date = date( 'd-m-Y' );
 
@@ -1995,16 +2061,16 @@ class Helper {
         // Use selected time from GET or fall back to default
         $selected_pickup_time = !empty($_GET['pickup-time']) ? sanitize_text_field( wp_unslash($_GET['pickup-time']) ) : $default_time;
         $selected_dropoff_time = !empty($_GET['dropoff-time']) ? sanitize_text_field( wp_unslash($_GET['dropoff-time']) ) : $default_time;
-
-		if ( ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-1" ) ||
-             ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-1" ) ||
-             ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-1" ) ||
-             ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-1" ) ) {
+        
+		if ( ( is_post_type_archive( 'tf_hotel' ) && $design_hotel == "design-1" ) ||
+             ( is_post_type_archive( 'tf_tours' ) && $design_tours == "design-1" ) ||
+             ( $post_type == 'tf_hotel' && $design_hotel == "design-1" ) ||
+             ( $post_type == 'tf_tours' && $design_tours == "design-1" ) ) {
 			?>
             <div class="tf-archive-booking-form__style-1 tf-box-wrapper tf-box">
                 <form action="<?php echo esc_url( self::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking">
                     <div class="tf-field-group tf-destination-box" <?php echo ( $post_type == 'tf_hotel' && self::tfopt( "hide_hotel_location_search" ) == 1 && self::tfopt( "required_location_hotel_search" ) != 1 ) || ( $post_type == 'tf_tours' && self::tfopt( "hide_tour_location_search" ) == 1 && self::tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : '' ?>>
-                        <i class="fa-solid fa-location-dot"></i>
+                        <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'location_icon', '<i class="fa-solid fa-location-dot"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 
 						<?php if ( is_post_type_archive( "tf_hotel" ) ) { ?>
                             <input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class="tf-field"
@@ -2022,8 +2088,8 @@ class Helper {
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
-                                <i class="fa-regular fa-user"></i>
-								<?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's' ) : esc_html__( 'Adults', 'tourfic' ); ?>
+                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'adult_icon', '<i class="fa-solid fa-person"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+								<?php echo esc_html( $adult_label ); ?>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
@@ -2038,8 +2104,8 @@ class Helper {
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
-                                <i class="fa-solid fa-child"></i>
-								<?php esc_html_e( 'Children', 'tourfic' ); ?>
+                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'children_icon', '<i class="fa-solid fa-child"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+								<?php echo esc_html( $children_label ); ?>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
@@ -2055,8 +2121,8 @@ class Helper {
                         <div class="tf-field-group tf-mt-16 tf_acrselection">
                             <div class="tf-field tf-flex">
                                 <div class="acr-label tf-flex">
-                                    <i class="fa fa-building"></i>
-									<?php esc_html_e( 'Room', 'tourfic' ); ?>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'room_icon', '<i class="fa-solid fa-door-open"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+									<?php echo esc_html( $room_label ); ?>
                                 </div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
@@ -2068,16 +2134,16 @@ class Helper {
 					<?php } ?>
 
                     <div class="tf-field-group tf-mt-8">
-                        <i class="fa-solid fa-calendar-days"></i>
+                        <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', '<i class="fa-solid fa-calendar-days"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                         <input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                               placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" required value="">
+                               placeholder="<?php echo !empty($settings['date_placeholder_text']) ? esc_attr($settings['date_placeholder_text']) : esc_html__( 'Select Date', 'tourfic' ); ?>" required value="">
                     </div>
                     <div class="tf_booking-dates">
                         <div class="tf_label-row"></div>
                     </div>
                     <div class="tf-booking-bttns tf-mt-24">
                         <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
-                        <button class="tf_btn tf_btn_full tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
+                        <button class="tf_btn tf_btn_full tf-submit"><?php echo !empty($settings['btn_text']) ? esc_html($settings['btn_text']) : esc_html__( 'Check Availability', 'tourfic' ); ?></button>
                     </div>
                 </form>
             </div>
@@ -2127,23 +2193,24 @@ class Helper {
                 })(jQuery);
             </script>
 			<?php
-		} elseif ( ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-2" ) ||
-                   ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-2" ) ||
-                   ( is_post_type_archive( 'tf_apartment' ) && $tf_apartment_arc_selected_template == "design-1" ) ||
-                   ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-2" ) ||
-                   ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-2" ) ||
-                   ( $post_type == 'tf_apartment' && $tf_apartment_arc_selected_template == "design-1" )
+		} elseif ( ( is_post_type_archive( 'tf_hotel' ) && $design_hotel == "design-2" ) ||
+                   ( is_post_type_archive( 'tf_tours' ) && $design_tours == "design-2" ) ||
+                   ( is_post_type_archive( 'tf_apartment' ) && $design_apartment == "design-1" ) ||
+                   ( $post_type == 'tf_hotel' && $design_hotel == "design-2" ) ||
+                   ( $post_type == 'tf_tours' && $design_tours == "design-2" ) ||
+                   ( $post_type == 'tf_apartment' && $design_apartment == "design-1" )
         ) { ?>
             <div class="tf-archive-booking-form__style-2 tf-archive-search-form tf-booking-form-wrapper">
                 <form action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
                     <div class="tf-booking-form-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
                         <div class="tf-booking-form-location" <?php echo ( $post_type == 'tf_hotel' && self::tfopt( "hide_hotel_location_search" ) == 1 && self::tfopt( "required_location_hotel_search" ) != 1 ) || ( $post_type == 'tf_tours' && self::tfopt( "hide_tour_location_search" ) == 1 && self::tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : '' ?>>
-                            <span class="tf-booking-form-title"><?php esc_html_e( "Location", "tourfic" ); ?></span>
+                            <span class="tf-booking-form-title"><?php echo esc_html( $loc_label ); ?></span>
                             <label for="tf-search-location" class="tf-booking-location-wrap">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                <?php $localtion_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
                                     <path d="M8.5 13.9317L11.7998 10.6318C13.6223 8.80943 13.6223 5.85464 11.7998 4.0322C9.9774 2.20975 7.02261 2.20975 5.20017 4.0322C3.37772 5.85464 3.37772 8.80943 5.20017 10.6318L8.5 13.9317ZM8.5 15.8173L4.25736 11.5747C1.91421 9.2315 1.91421 5.43254 4.25736 3.08939C6.60051 0.746245 10.3995 0.746245 12.7427 3.08939C15.0858 5.43254 15.0858 9.2315 12.7427 11.5747L8.5 15.8173ZM8.5 8.66536C9.2364 8.66536 9.83333 8.06843 9.83333 7.33203C9.83333 6.59565 9.2364 5.9987 8.5 5.9987C7.7636 5.9987 7.16667 6.59565 7.16667 7.33203C7.16667 8.06843 7.7636 8.66536 8.5 8.66536ZM8.5 9.9987C7.02724 9.9987 5.83333 8.80476 5.83333 7.33203C5.83333 5.85927 7.02724 4.66536 8.5 4.66536C9.97273 4.66536 11.1667 5.85927 11.1667 7.33203C11.1667 8.80476 9.97273 9.9987 8.5 9.9987Z"
                                         fill="#595349"/>
-                                </svg>
+                                </svg>'; ?>
+                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'location_icon', $localtion_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 <?php if ( is_post_type_archive( "tf_hotel" ) ) { ?>
                                     <input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class="tf-field"
                                         placeholder="<?php echo esc_attr( $place_text ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr( $taxonomy_name ) : ''; ?>">
@@ -2160,7 +2227,7 @@ class Helper {
 
                         <?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ) { ?>
                             <div class="tf-booking-form-checkin">
-                                <span class="tf-booking-form-title"><?php esc_html_e( "Check in", "tourfic" ); ?></span>
+                                <span class="tf-booking-form-title"><?php echo !empty($settings['checkin_label']) ? esc_html($settings['checkin_label']) : esc_html__( "Check in", "tourfic" ); ?></span>
                                 <div class="tf-booking-date-wrap">
                                     <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                     <span class="tf-booking-month">
@@ -2174,15 +2241,15 @@ class Helper {
                                     placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required>
                             </div>
                             <div class="tf-booking-form-checkout">
-                                <span class="tf-booking-form-title"><?php esc_html_e( "Check out", "tourfic" ); ?></span>
+                                <span class="tf-booking-form-title"><?php echo !empty($settings['checkout_label']) ? esc_html($settings['checkout_label']) : esc_html__( "Check out", "tourfic" ); ?></span>
                                 <div class="tf-booking-date-wrap">
                                     <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                     <span class="tf-booking-month">
-                                <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                                <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
-                                </svg>
-                            </span>
+                                        <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                                        <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+                                        </svg>
+                                    </span>
                                 </div>
 
                             </div>
@@ -2190,13 +2257,13 @@ class Helper {
 
                         <?php if ( $post_type == 'tf_tours' ) { ?>
                             <div class="tf-booking-form-checkin">
-                                <span class="tf-booking-form-title"><?php esc_html_e( "Date", "tourfic" ); ?></span>
+                                <span class="tf-booking-form-title"><?php echo !empty($settings['date_label']) ? esc_html($settings['date_label']) : esc_html__( "Date", "tourfic" ); ?></span>
                                 <div class="tf-tour-searching-date-block">
                                     <div class="tf-booking-date-wrap tf-tour-start-date">
                                         <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                         <span class="tf-booking-month">
-                                    <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
-                                </span>
+                                            <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
+                                        </span>
                                     </div>
                                     <div class="tf-duration">
                                         <span>-</span>
@@ -2204,11 +2271,11 @@ class Helper {
                                     <div class="tf-booking-date-wrap tf-tour-end-date">
                                         <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                                         <span class="tf-booking-month">
-                                    <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                                    <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
-                                    </svg>
-                                </span>
+                                            <span><?php echo esc_html( wp_date( 'M' ) ); ?></span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                                            <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+                                            </svg>
+                                        </span>
                                     </div>
                                     <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
                                         placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required>
@@ -2218,7 +2285,7 @@ class Helper {
                         <div class="tf-booking-form-guest-and-room">
                             <?php if ( $post_type == 'tf_hotel' ) { ?>
                                 <div class="tf-booking-form-guest-and-room-inner">
-                                    <span class="tf-booking-form-title"><?php echo $post_type == "tf_hotel" ? esc_html( apply_filters("tf_hotel_guest_name_change", "Guest") . "s & rooms", "tourfic" ) : esc_html__( "Guests & rooms", "tourfic" ); ?></span>
+                                    <span class="tf-booking-form-title"><?php echo !empty($settings['selector_label']) ? esc_html($settings['selector_label']) : esc_html__('Guests & rooms', 'tourfic'); ?></span>
                                     <div class="tf-booking-guest-and-room-wrap tf-archive-guest-info">
                                         <span class="tf-guest"><?php esc_html_e( "00", "tourfic" ); ?></span> 
                                         <?php 
@@ -2239,17 +2306,17 @@ class Helper {
                                 </div>
                             <?php } else { ?>
                                 <div class="tf-booking-form-guest-and-room-inner">
-                                    <span class="tf-booking-form-title"><?php echo $post_type == "tf_hotel" ? esc_html( $adults_name . 's') : esc_html__( "Guests", "tourfic" ); ?></span>
+                                    <span class="tf-booking-form-title"><?php echo !empty($settings['selector_label']) ? esc_html($settings['selector_label']) : esc_html__('Guests', 'tourfic'); ?></span>
                                     <div class="tf-booking-guest-and-room-wrap">
-                                <span class="tf-guest tf-booking-date">
-                                    <?php esc_html_e( "00", "tourfic" ); ?>
-                                </span>
+                                        <span class="tf-guest tf-booking-date">
+                                            <?php esc_html_e( "00", "tourfic" ); ?>
+                                        </span>
                                         <span class="tf-booking-month">
-                                    <span><?php echo $post_type == "tf_hotel" ? esc_html( $adults_name . 's') : esc_html__( "guest", "tourfic" ); ?></span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                                    <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
-                                    </svg>
-                                </span>
+                                            <span><?php echo $post_type == "tf_hotel" ? esc_html( $adults_name . 's') : esc_html__( "guest", "tourfic" ); ?></span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                                            <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+                                            </svg>
+                                        </span>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -2257,7 +2324,7 @@ class Helper {
                             <div class="tf_acrselection-wrap">
                                 <div class="tf_acrselection-inner">
                                     <div class="tf_acrselection">
-                                        <div class="acr-label"><?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's' ) : esc_html__( 'Adults', 'tourfic' ); ?></div>
+                                        <div class="acr-label"><?php echo esc_html( $adult_label ); ?></div>
                                         <div class="acr-select">
                                             <div class="acr-dec">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2291,7 +2358,7 @@ class Helper {
                                             ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
                                     ) { ?>
                                     <div class="tf_acrselection">
-                                        <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
+                                        <div class="acr-label"><?php echo esc_html( $children_label ); ?></div>
                                         <div class="acr-select">
                                             <div class="acr-dec">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2323,7 +2390,7 @@ class Helper {
                                     <?php } ?>
                                     <?php if ( $post_type == 'tf_hotel' ) { ?>
                                         <div class="tf_acrselection">
-                                            <div class="acr-label"><?php esc_html_e( "Rooms", "tourfic" ); ?></div>
+                                            <div class="acr-label"><?php echo esc_html( $room_label ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2359,7 +2426,7 @@ class Helper {
                     </div>
                     <div class="tf-booking-form-submit">
                         <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
-                        <button class="tf_btn tf_btn_large tf_btn_sharp tf-submit"><?php echo esc_html__( 'Check Availability', 'tourfic' ); ?></button>
+                        <button class="tf_btn tf_btn_large tf_btn_sharp tf-submit"><?php echo !empty($settings['btn_text']) ? esc_html($settings['btn_text']) : esc_html__( 'Check Availability', 'tourfic' ); ?></button>
                     </div>
 
                     <?php if ( $post_type == 'tf_tours' ) { ?>
@@ -2501,7 +2568,59 @@ class Helper {
                 </form>
             </div>
 		<?php
-		} elseif ( $post_type == 'tf_carrental' && $tf_car_arc_selected_template == "design-1" ) { ?>
+		} elseif ( $post_type == 'tf_carrental' && $design_car == "design-1" ) { 
+            $pickup_location_icon_html = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_257_3711)">
+                                            <path d="M7.36246 11.6666H4.16663C3.99707 11.6759 3.83438 11.7367 3.70034 11.8409C3.56631 11.9452 3.46732 12.0879 3.41663 12.25L1.74996 17.25C1.66663 17.3333 1.66663 17.4166 1.66663 17.5C1.66663 18 1.99996 18.3333 2.49996 18.3333H17.5C18 18.3333 18.3333 18 18.3333 17.5C18.3333 17.4166 18.3333 17.3333 18.25 17.25L16.5833 12.25C16.5326 12.0879 16.4336 11.9452 16.2996 11.8409C16.1655 11.7367 16.0028 11.6759 15.8333 11.6666H12.6375M15 6.66663C15 10.4166 9.99996 14.1666 9.99996 14.1666C9.99996 14.1666 4.99996 10.4166 4.99996 6.66663C4.99996 5.34054 5.52674 4.06877 6.46442 3.13109C7.40211 2.19341 8.67388 1.66663 9.99996 1.66663C11.326 1.66663 12.5978 2.19341 13.5355 3.13109C14.4732 4.06877 15 5.34054 15 6.66663ZM11.6666 6.66663C11.6666 7.5871 10.9204 8.33329 9.99996 8.33329C9.07948 8.33329 8.33329 7.5871 8.33329 6.66663C8.33329 5.74615 9.07948 4.99996 9.99996 4.99996C10.9204 4.99996 11.6666 5.74615 11.6666 6.66663Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_257_3711">
+                                            <rect width="20" height="20" fill="white"/>
+                                            </clipPath>
+                                        </defs>
+                                        </svg>';
+
+            $dropoff_location_icon_html = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_257_3711)">
+                                            <path d="M7.36246 11.6666H4.16663C3.99707 11.6759 3.83438 11.7367 3.70034 11.8409C3.56631 11.9452 3.46732 12.0879 3.41663 12.25L1.74996 17.25C1.66663 17.3333 1.66663 17.4166 1.66663 17.5C1.66663 18 1.99996 18.3333 2.49996 18.3333H17.5C18 18.3333 18.3333 18 18.3333 17.5C18.3333 17.4166 18.3333 17.3333 18.25 17.25L16.5833 12.25C16.5326 12.0879 16.4336 11.9452 16.2996 11.8409C16.1655 11.7367 16.0028 11.6759 15.8333 11.6666H12.6375M15 6.66663C15 10.4166 9.99996 14.1666 9.99996 14.1666C9.99996 14.1666 4.99996 10.4166 4.99996 6.66663C4.99996 5.34054 5.52674 4.06877 6.46442 3.13109C7.40211 2.19341 8.67388 1.66663 9.99996 1.66663C11.326 1.66663 12.5978 2.19341 13.5355 3.13109C14.4732 4.06877 15 5.34054 15 6.66663ZM11.6666 6.66663C11.6666 7.5871 10.9204 8.33329 9.99996 8.33329C9.07948 8.33329 8.33329 7.5871 8.33329 6.66663C8.33329 5.74615 9.07948 4.99996 9.99996 4.99996C10.9204 4.99996 11.6666 5.74615 11.6666 6.66663Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_257_3711">
+                                            <rect width="20" height="20" fill="white"/>
+                                            </clipPath>
+                                        </defs>
+                                        </svg>';
+
+            $pickup_date_icon_html = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>';
+                                        
+            $pickup_time_icon_html = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g clip-path="url(#clip0_257_3728)">
+                                                <path d="M9.99996 4.99996V9.99996L13.3333 11.6666M18.3333 9.99996C18.3333 14.6023 14.6023 18.3333 9.99996 18.3333C5.39759 18.3333 1.66663 14.6023 1.66663 9.99996C1.66663 5.39759 5.39759 1.66663 9.99996 1.66663C14.6023 1.66663 18.3333 5.39759 18.3333 9.99996Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_257_3728">
+                                                <rect width="20" height="20" fill="white"/>
+                                                </clipPath>
+                                            </defs>
+                                            </svg>';
+                                            
+            $dropoff_date_icon_html = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>';
+                                        
+            $dropoff_time_icon_html = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_257_3728)">
+                                            <path d="M9.99996 4.99996V9.99996L13.3333 11.6666M18.3333 9.99996C18.3333 14.6023 14.6023 18.3333 9.99996 18.3333C5.39759 18.3333 1.66663 14.6023 1.66663 9.99996C1.66663 5.39759 5.39759 1.66663 9.99996 1.66663C14.6023 1.66663 18.3333 5.39759 18.3333 9.99996Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_257_3728">
+                                            <rect width="20" height="20" fill="white"/>
+                                            </clipPath>
+                                        </defs>
+                                        </svg>';                            
+            ?>
 		<div class="tf-archive-search-box">
 			<div class="tf-archive-search-box-wrapper">
 				<div class="tf-date-select-box tf-flex tf-flex-gap-8">
@@ -2509,20 +2628,11 @@ class Helper {
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
 								<div class="icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_257_3711)">
-                                        <path d="M7.36246 11.6666H4.16663C3.99707 11.6759 3.83438 11.7367 3.70034 11.8409C3.56631 11.9452 3.46732 12.0879 3.41663 12.25L1.74996 17.25C1.66663 17.3333 1.66663 17.4166 1.66663 17.5C1.66663 18 1.99996 18.3333 2.49996 18.3333H17.5C18 18.3333 18.3333 18 18.3333 17.5C18.3333 17.4166 18.3333 17.3333 18.25 17.25L16.5833 12.25C16.5326 12.0879 16.4336 11.9452 16.2996 11.8409C16.1655 11.7367 16.0028 11.6759 15.8333 11.6666H12.6375M15 6.66663C15 10.4166 9.99996 14.1666 9.99996 14.1666C9.99996 14.1666 4.99996 10.4166 4.99996 6.66663C4.99996 5.34054 5.52674 4.06877 6.46442 3.13109C7.40211 2.19341 8.67388 1.66663 9.99996 1.66663C11.326 1.66663 12.5978 2.19341 13.5355 3.13109C14.4732 4.06877 15 5.34054 15 6.66663ZM11.6666 6.66663C11.6666 7.5871 10.9204 8.33329 9.99996 8.33329C9.07948 8.33329 8.33329 7.5871 8.33329 6.66663C8.33329 5.74615 9.07948 4.99996 9.99996 4.99996C10.9204 4.99996 11.6666 5.74615 11.6666 6.66663Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_257_3711">
-                                        <rect width="20" height="20" fill="white"/>
-                                        </clipPath>
-                                    </defs>
-                                    </svg>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'pickup_location_icon', $pickup_location_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 								</div>
 								<div class="info-select">
-									<h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-									<input type="text" placeholder="<?php echo esc_attr__("Pick Up Location", "tourfic"); ?>" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-name']) ) ) : '' ?>" />
+									<h5><?php echo esc_html( $pickup_label ); ?></h5>
+									<input type="text" placeholder="<?php echo esc_attr( $pickup_location_placeholder ); ?>" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-name']) ) ) : '' ?>" />
 									<input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : '' ?>" />
 								</div>
 							</div>
@@ -2530,20 +2640,11 @@ class Helper {
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
 								<div class="icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_257_3711)">
-                                        <path d="M7.36246 11.6666H4.16663C3.99707 11.6759 3.83438 11.7367 3.70034 11.8409C3.56631 11.9452 3.46732 12.0879 3.41663 12.25L1.74996 17.25C1.66663 17.3333 1.66663 17.4166 1.66663 17.5C1.66663 18 1.99996 18.3333 2.49996 18.3333H17.5C18 18.3333 18.3333 18 18.3333 17.5C18.3333 17.4166 18.3333 17.3333 18.25 17.25L16.5833 12.25C16.5326 12.0879 16.4336 11.9452 16.2996 11.8409C16.1655 11.7367 16.0028 11.6759 15.8333 11.6666H12.6375M15 6.66663C15 10.4166 9.99996 14.1666 9.99996 14.1666C9.99996 14.1666 4.99996 10.4166 4.99996 6.66663C4.99996 5.34054 5.52674 4.06877 6.46442 3.13109C7.40211 2.19341 8.67388 1.66663 9.99996 1.66663C11.326 1.66663 12.5978 2.19341 13.5355 3.13109C14.4732 4.06877 15 5.34054 15 6.66663ZM11.6666 6.66663C11.6666 7.5871 10.9204 8.33329 9.99996 8.33329C9.07948 8.33329 8.33329 7.5871 8.33329 6.66663C8.33329 5.74615 9.07948 4.99996 9.99996 4.99996C10.9204 4.99996 11.6666 5.74615 11.6666 6.66663Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_257_3711">
-                                        <rect width="20" height="20" fill="white"/>
-                                        </clipPath>
-                                    </defs>
-                                    </svg>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'dropoff_location_icon', $dropoff_location_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 								</div>
 								<div class="info-select">
-									<h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-									<input type="text" placeholder="<?php echo esc_attr__("Drop Off Location", "tourfic"); ?>" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-name']) )) : '' ?>" />
+									<h5><?php echo esc_html( $dropoff_label ); ?></h5>
+									<input type="text" placeholder="<?php echo esc_attr( $dropoff_location_placeholder ); ?>" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-name']) )) : '' ?>" />
 									<input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : '' ?>" />
 								</div>
 							</div>
@@ -2554,13 +2655,11 @@ class Helper {
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
 								<div class="icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'pickup_date_icon', $pickup_date_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 								</div>
 								<div class="info-select">
-									<h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-									<input type="text" placeholder="Pick Up Date" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup-date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-date']) )) : esc_attr(gmdate($date_format_for_users, strtotime('+1 day'))); ?>" />
+									<h5><?php echo esc_html( $pickup_date_label ); ?></h5>
+									<input type="text" placeholder="<?php echo esc_attr( $pickup_date_placeholder ); ?>" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup-date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-date']) )) : esc_attr(gmdate($date_format_for_users, strtotime('+1 day'))); ?>" />
 								</div>
 							</div>
 						</div>
@@ -2568,19 +2667,10 @@ class Helper {
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
                                 <div class="icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_257_3728)">
-                                        <path d="M9.99996 4.99996V9.99996L13.3333 11.6666M18.3333 9.99996C18.3333 14.6023 14.6023 18.3333 9.99996 18.3333C5.39759 18.3333 1.66663 14.6023 1.66663 9.99996C1.66663 5.39759 5.39759 1.66663 9.99996 1.66663C14.6023 1.66663 18.3333 5.39759 18.3333 9.99996Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_257_3728">
-                                        <rect width="20" height="20" fill="white"/>
-                                        </clipPath>
-                                    </defs>
-                                    </svg>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'pickup_time_icon', $pickup_time_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
 								<div class="info-select">
-                                    <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
+                                    <h5><?php echo esc_html( $pickup_time_label ); ?></h5>
                                     <div class="selected-pickup-time">
                                         <div class="text">
                                             <?php echo esc_html($selected_pickup_time); ?>
@@ -2612,13 +2702,11 @@ class Helper {
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
 								<div class="icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'dropoff_date_icon', $dropoff_date_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 								</div>
 								<div class="info-select">
-									<h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-									<input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-date']) )) : esc_attr(gmdate($date_format_for_users, strtotime('+2 day'))); ?>" readonly='' />
+									<h5><?php echo esc_html( $dropoff_date_label ); ?></h5>
+									<input type="text" placeholder="<?php echo esc_attr( $dropoff_date_placeholder ); ?>" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-date']) )) : esc_attr(gmdate($date_format_for_users, strtotime('+2 day'))); ?>" readonly='' />
 								</div>
 							</div>
 						</div>
@@ -2626,19 +2714,10 @@ class Helper {
 						<div class="tf-select-date">
                             <div class="tf-flex tf-flex-gap-4">
                                 <div class="icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_257_3728)">
-                                        <path d="M9.99996 4.99996V9.99996L13.3333 11.6666M18.3333 9.99996C18.3333 14.6023 14.6023 18.3333 9.99996 18.3333C5.39759 18.3333 1.66663 14.6023 1.66663 9.99996C1.66663 5.39759 5.39759 1.66663 9.99996 1.66663C14.6023 1.66663 18.3333 5.39759 18.3333 9.99996Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_257_3728">
-                                        <rect width="20" height="20" fill="white"/>
-                                        </clipPath>
-                                    </defs>
-                                    </svg>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'dropoff_time_icon', $dropoff_time_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
 								<div class="info-select">
-                                    <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
+                                    <h5><?php echo esc_html( $dropoff_time_label ); ?></h5>
                                     <div class="selected-dropoff-time">
                                         <div class="text">
                                             <?php echo esc_html($selected_dropoff_time); ?>
@@ -2671,14 +2750,12 @@ class Helper {
 					<div class="tf-driver-location">
                         <?php
                         $car_driver_min_age      = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] : 18;
-
                         $car_driver_max_age      = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] : 40;
-
                         ?>
 						<ul>
 							<li>
 								<label>
-                                    <?php esc_html_e("Return in the same location", "tourfic"); ?>
+                                    <?php echo !empty($settings['return_same_location_text']) ? esc_attr($settings['return_same_location_text']) : esc_html__( 'Return in the same location', 'tourfic' ); ?>
                                     <input type="checkbox" name="same_location" <?php echo !isset($_GET['same_location']) || $_GET['same_location'] === 'on' ? esc_attr('checked') : ''; ?>>
                                     <span class="tf-checkmark"></span>
                                 </label>
@@ -2695,7 +2772,7 @@ class Helper {
 					</div>
 					<div class="tf-submit-button">
 						<input type="hidden" class="tf-post-type" value="<?php echo esc_attr("tf_carrental"); ?>">
-						<button class="tf-filter-cars"><?php esc_html_e("Search", "tourfic"); ?> <i class="ri-search-line"></i></button>
+						<button class="tf-filter-cars"><?php echo !empty($settings['btn_text']) ? esc_html($settings['btn_text']) : esc_html__( 'Search', 'tourfic' ); ?> <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_icon', '<i class="ri-search-line"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?></button>
 					</div>
 
 					<script>
@@ -2762,7 +2839,7 @@ class Helper {
 				</div>
 			</div>
 		</div>
-        <?php } elseif ( $post_type == 'tf_room' && $tf_room_arc_selected_template == "design-1" ) { 
+        <?php } elseif ( $post_type == 'tf_room' && $design_room == "design-1" ) { 
             
 			$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '1';
 			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '0';
@@ -2804,7 +2881,7 @@ class Helper {
                             <div class="tf-select-room">
                                 <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
                                     <label for="tf-rooms-number">
-                                        <?php esc_html_e("Rooms", "tourfic"); ?>
+                                        <?php echo esc_html( $room_label ); ?>
                                     </label>
                                 
                                     <div class="tf_acrselection tf-search-field">
@@ -2843,7 +2920,7 @@ class Helper {
                                 <div class="tf_acrselection-wrap">
                                     <div class="tf_acrselection-inner">
                                         <div class="tf_acrselection">
-                                            <div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
+                                            <div class="acr-label"><?php echo esc_html( $adult_label ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2860,7 +2937,7 @@ class Helper {
                                         </div>
                                     
                                         <div class="tf_acrselection">
-                                            <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
+                                            <div class="acr-label"><?php echo esc_html( $children_label ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2882,7 +2959,7 @@ class Helper {
 
                         <div class="tf-submit-button">
                             <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
-                            <button class="tf-filter-rooms tf_btn tf_btn_rounded tf-flex-align-center"><?php esc_html_e("Modify search", "tourfic"); ?></button>
+                            <button class="tf-filter-rooms tf_btn tf_btn_rounded tf-flex-align-center"><?php echo !empty($settings['btn_text']) ? esc_html($settings['btn_text']) : esc_html__( 'Modify search', 'tourfic' ); ?></button>
                         </div>
 
                         <script>
@@ -2943,12 +3020,12 @@ class Helper {
                 </form>
             </div>
         <?php } elseif (
-            ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-            ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-            ( is_post_type_archive( 'tf_apartment' ) && $tf_apartment_arc_selected_template == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-            ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-            ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-            ( $post_type == 'tf_apartment' && $tf_apartment_arc_selected_template == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro())
+            ( is_post_type_archive( 'tf_hotel' ) && $design_hotel == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
+            ( is_post_type_archive( 'tf_tours' ) && $design_tours == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
+            ( is_post_type_archive( 'tf_apartment' ) && $design_apartment == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
+            ( $post_type == 'tf_hotel' && $design_hotel == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
+            ( $post_type == 'tf_tours' && $design_tours == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
+            ( $post_type == 'tf_apartment' && $design_apartment == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro())
         ){
             ?>
             <form class="tf-archive-booking-form__style-3 tf_archive_search_result tf-hotel-side-booking tf-booking-form" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off">
@@ -2968,9 +3045,9 @@ class Helper {
                             </svg>
                         </div>
                         <label for="<?php echo esc_attr($place); ?>" class="tf-search-field-content">
-                            <span class="tf-search-field-label"><?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Location', 'tourfic' ) : esc_html__( 'Destination', 'tourfic' ); ?></span>
+                            <span class="tf-search-field-label"><?php echo esc_html( $loc_label ); ?></span>
 
-                            <input type="text" required="" id="<?php echo esc_attr($place); ?>" class="tf-search-input" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr($taxonomy_name) : ''; ?>">
+                            <input type="text" required="" id="<?php echo esc_attr($place); ?>" class="tf-search-input" placeholder="<?php echo esc_attr( $place_text ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr($taxonomy_name) : ''; ?>">
                             <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? esc_attr($taxonomy_slug) : ''; ?>"/>
                         </label>
                     </div>
@@ -2985,7 +3062,7 @@ class Helper {
                                     </svg>
                                 </div>
                                 <label class="tf-search-field-content" for='tf-check-out'>
-                                    <span class="tf-search-field-label"><?php esc_html_e( "Check in", "tourfic" ); ?></span>
+                                    <span class="tf-search-field-label"><?php echo esc_html( $checkin_label ); ?></span>
                                     <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
                                     <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="">
                                 </label>
@@ -3001,7 +3078,7 @@ class Helper {
                                     </svg>
                                 </div>
                                 <label class="tf-search-field-content" for='tf-check-out'>
-                                    <span class="tf-search-field-label"><?php esc_html_e( "Check out", "tourfic" ); ?></span>
+                                    <span class="tf-search-field-label"><?php echo esc_html( $checkout_label ); ?></span>
                                     <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
                                 </label>
                             </div>
@@ -3018,7 +3095,7 @@ class Helper {
                                     </svg>
                                 </div>
                                 <label class="tf-search-field-content" for="check-in-out-date">
-                                    <span class="tf-search-field-label"><?php esc_html_e( "Select Date", "tourfic" ); ?></span>
+                                    <span class="tf-search-field-label"><?php echo esc_html( $date_label ); ?></span>
                                     <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr($check_in_out) . '"' : '' ?>>
                                 </label>
                             </div>
@@ -3035,7 +3112,7 @@ class Helper {
                                     </svg>
                                 </div>
                                 <div class="tf-search-field-content">
-                                    <span class="tf-search-field-label"><?php esc_html_e( "Guests & rooms", "tourfic" ); ?></span>
+                                    <span class="tf-search-field-label"><?php echo esc_html( $guests_rooms_label ); ?></span>
                                     <div class="tf-archive-guest-info">
                                         <span class="tf-guest"><?php esc_html_e( "00", "tourfic" ); ?></span> <?php echo esc_html( apply_filters("tf_hotel_guest_name_change", "guest") ); ?>
                                         <span class="tf-room"><?php esc_html_e( "00", "tourfic" ); ?></span> <?php esc_html_e( "rooms", "tourfic" ); ?>
@@ -3052,7 +3129,7 @@ class Helper {
                                 </div>
 
                                 <div class="tf-search-field-content">
-                                    <span class="tf-search-field-label"><?php esc_html_e( "Persons", "tourfic" ); ?></span>
+                                    <span class="tf-search-field-label"><?php echo esc_html( $persons_label ); ?></span>
                                     <div class="tf-archive-guest-info">
                                         <span class="tf-adult"><?php esc_html_e( "0", "tourfic" ); ?></span> <?php echo $post_type == "tf_hotels" ? esc_html( $adults_name ) : esc_html__( "adult", "tourfic" ) ; ?>
                                         <?php if ( ($post_type == 'tf_tours' && empty( $disable_child_search )) ||
@@ -3068,7 +3145,7 @@ class Helper {
                         <div class="tf_acrselection-wrap">
                             <div class="tf_acrselection-inner">
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's' ) : esc_html__( 'Adults', 'tourfic' ); ?></div>
+                                    <div class="acr-label"><?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's' ) : esc_html( $adult_label . 's' ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -3102,7 +3179,7 @@ class Helper {
                                         ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
                                 ) { ?>
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
+                                    <div class="acr-label"><?php echo esc_html( $children_label ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -3170,7 +3247,7 @@ class Helper {
                 </div>
                 <div class="tf-booking-form-submit">
                     <input type="hidden" name="type" value="<?php echo esc_attr($post_type); ?>" class="tf-post-type"/>
-                    <button class="tf_btn tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
+                    <button class="tf_btn tf-submit"><?php echo !empty($settings['btn_text']) ? esc_html($settings['btn_text']) : esc_html__( 'Search Now', 'tourfic' ); ?></button>
                 </div>
 
                 <?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_tours' || $post_type == 'tf_apartment' ) : ?>
@@ -3347,8 +3424,7 @@ class Helper {
 
                 <div class="tf_form-row">
                     <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
-                    <button class="tf_btn tf_btn_full tf-submit"
-                            type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
+                    <button class="tf_btn tf_btn_full tf-submit" type="submit"><?php echo !empty($settings['btn_text']) ? esc_html($settings['btn_text']) : esc_html__( 'Check Availability', 'tourfic' ); ?></button>
                 </div>
             </form>
 
