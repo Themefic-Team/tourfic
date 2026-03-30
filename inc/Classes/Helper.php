@@ -2070,7 +2070,7 @@ class Helper {
             <div class="tf-archive-booking-form__style-1 tf-box-wrapper tf-box">
                 <form action="<?php echo esc_url( self::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking">
                     <div class="tf-field-group tf-destination-box" <?php echo ( $post_type == 'tf_hotel' && self::tfopt( "hide_hotel_location_search" ) == 1 && self::tfopt( "required_location_hotel_search" ) != 1 ) || ( $post_type == 'tf_tours' && self::tfopt( "hide_tour_location_search" ) == 1 && self::tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : '' ?>>
-                        <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'location_icon', '<i class="fa-solid fa-location-dot"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                        <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_location_icon', '<i class="fa-solid fa-location-dot"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 
 						<?php if ( is_post_type_archive( "tf_hotel" ) ) { ?>
                             <input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class="tf-field"
@@ -2088,7 +2088,7 @@ class Helper {
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
-                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'adult_icon', '<i class="fa-solid fa-person"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_adult_icon', '<i class="fa-solid fa-person"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 								<?php echo esc_html( $adult_label ); ?>
                             </div>
                             <div class="acr-select">
@@ -2104,7 +2104,7 @@ class Helper {
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
-                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'children_icon', '<i class="fa-solid fa-child"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_children_icon', '<i class="fa-solid fa-child"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 								<?php echo esc_html( $children_label ); ?>
                             </div>
                             <div class="acr-select">
@@ -2121,7 +2121,7 @@ class Helper {
                         <div class="tf-field-group tf-mt-16 tf_acrselection">
                             <div class="tf-field tf-flex">
                                 <div class="acr-label tf-flex">
-                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'room_icon', '<i class="fa-solid fa-door-open"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_room_icon', '<i class="fa-solid fa-door-open"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 									<?php echo esc_html( $room_label ); ?>
                                 </div>
                                 <div class="acr-select">
@@ -2134,7 +2134,7 @@ class Helper {
 					<?php } ?>
 
                     <div class="tf-field-group tf-mt-8">
-                        <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', '<i class="fa-solid fa-calendar-days"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                        <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_date_icon', '<i class="fa-solid fa-calendar-days"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                         <input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
                                placeholder="<?php echo esc_attr( $date_placeholder ); ?>" required value="">
                     </div>
@@ -2210,7 +2210,7 @@ class Helper {
                                     <path d="M8.5 13.9317L11.7998 10.6318C13.6223 8.80943 13.6223 5.85464 11.7998 4.0322C9.9774 2.20975 7.02261 2.20975 5.20017 4.0322C3.37772 5.85464 3.37772 8.80943 5.20017 10.6318L8.5 13.9317ZM8.5 15.8173L4.25736 11.5747C1.91421 9.2315 1.91421 5.43254 4.25736 3.08939C6.60051 0.746245 10.3995 0.746245 12.7427 3.08939C15.0858 5.43254 15.0858 9.2315 12.7427 11.5747L8.5 15.8173ZM8.5 8.66536C9.2364 8.66536 9.83333 8.06843 9.83333 7.33203C9.83333 6.59565 9.2364 5.9987 8.5 5.9987C7.7636 5.9987 7.16667 6.59565 7.16667 7.33203C7.16667 8.06843 7.7636 8.66536 8.5 8.66536ZM8.5 9.9987C7.02724 9.9987 5.83333 8.80476 5.83333 7.33203C5.83333 5.85927 7.02724 4.66536 8.5 4.66536C9.97273 4.66536 11.1667 5.85927 11.1667 7.33203C11.1667 8.80476 9.97273 9.9987 8.5 9.9987Z"
                                         fill="#595349"/>
                                 </svg>'; ?>
-                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'location_icon', $localtion_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_location_icon', $localtion_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 <?php if ( is_post_type_archive( "tf_hotel" ) ) { ?>
                                     <input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class="tf-field"
                                         placeholder="<?php echo esc_attr( $place_text ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr( $taxonomy_name ) : ''; ?>">
@@ -2628,7 +2628,7 @@ class Helper {
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
 								<div class="icon">
-                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'pickup_location_icon', $pickup_location_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_pickup_location_icon', $pickup_location_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 								</div>
 								<div class="info-select">
 									<h5><?php echo esc_html( $pickup_label ); ?></h5>
@@ -2640,7 +2640,7 @@ class Helper {
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
 								<div class="icon">
-                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'dropoff_location_icon', $dropoff_location_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_dropoff_location_icon', $dropoff_location_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 								</div>
 								<div class="info-select">
 									<h5><?php echo esc_html( $dropoff_label ); ?></h5>
@@ -2655,7 +2655,7 @@ class Helper {
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
 								<div class="icon">
-                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'pickup_date_icon', $pickup_date_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_pickup_date_icon', $pickup_date_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 								</div>
 								<div class="info-select">
 									<h5><?php echo esc_html( $pickup_date_label ); ?></h5>
@@ -2667,7 +2667,7 @@ class Helper {
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
                                 <div class="icon">
-                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'pickup_time_icon', $pickup_time_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_pickup_time_icon', $pickup_time_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
 								<div class="info-select">
                                     <h5><?php echo esc_html( $pickup_time_label ); ?></h5>
@@ -2702,7 +2702,7 @@ class Helper {
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
 								<div class="icon">
-                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'dropoff_date_icon', $dropoff_date_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_dropoff_date_icon', $dropoff_date_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 								</div>
 								<div class="info-select">
 									<h5><?php echo esc_html( $dropoff_date_label ); ?></h5>
@@ -2714,7 +2714,7 @@ class Helper {
 						<div class="tf-select-date">
                             <div class="tf-flex tf-flex-gap-4">
                                 <div class="icon">
-                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'dropoff_time_icon', $dropoff_time_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_dropoff_time_icon', $dropoff_time_icon_html, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
 								<div class="info-select">
                                     <h5><?php echo esc_html( $dropoff_time_label ); ?></h5>
@@ -2772,7 +2772,7 @@ class Helper {
 					</div>
 					<div class="tf-submit-button">
 						<input type="hidden" class="tf-post-type" value="<?php echo esc_attr("tf_carrental"); ?>">
-						<button class="tf-filter-cars"><?php echo !empty($settings['btn_text']) ? esc_html($settings['btn_text']) : esc_html__( 'Search', 'tourfic' ); ?> <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_icon', '<i class="ri-search-line"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?></button>
+						<button class="tf-filter-cars"><?php echo !empty($settings['btn_text']) ? esc_html($settings['btn_text']) : esc_html__( 'Search', 'tourfic' ); ?> <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'tf_search_icon', '<i class="ri-search-line"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?></button>
 					</div>
 
 					<script>
@@ -2873,7 +2873,7 @@ class Helper {
                                             <div class="info-select tf-booking-date-wrap tf-search-field tf-flex tf-flex-space-bttn tf-flex-align-center">
                                                 <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="<?php echo !empty($check_in) ? esc_html(sanitize_text_field( wp_unslash($check_in) )) : esc_attr(gmdate($date_format_for_users, strtotime('+1 day'))) ?>" readonly>
                                                 <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="<?php echo !empty($check_in_out) ? esc_html(sanitize_text_field( wp_unslash($check_in_out) )) : esc_attr(gmdate('Y/m/d', strtotime('+1 day')) . ' - ' . gmdate('Y/m/d', strtotime('+2 day'))); ?>" style="display: none;">
-                                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', $room_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_date_icon', $room_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -2882,7 +2882,7 @@ class Helper {
                                             <label for="tf-checkout-date"><?php echo esc_html( $checkout_label ); ?></label>
                                             <div class="info-select tf-booking-date-wrap tf-search-field tf-flex tf-flex-space-bttn tf-flex-align-center">
                                                 <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="<?php echo !empty($check_out) ? esc_html(sanitize_text_field( wp_unslash($check_out) )) : esc_attr(gmdate($date_format_for_users, strtotime('+2 day'))); ?>">
-                                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', $room_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_date_icon', $room_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -3063,7 +3063,7 @@ class Helper {
                 <div class="tf-search-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
                     <div class="tf-search-field">
                         <div class="tf-search-field-icon">
-                            <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'location_icon', $design3_location_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                            <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_location_icon', $design3_location_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                         </div>
                         <label for="<?php echo esc_attr($place); ?>" class="tf-search-field-content">
                             <span class="tf-search-field-label"><?php echo esc_html( $loc_label ); ?></span>
@@ -3077,7 +3077,7 @@ class Helper {
                         <div class="tf-search-field-checkinout">
                             <div class="tf-search-field tf-search-field-checkin">
                                 <div class="tf-search-field-icon">
-                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', $design3_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_date_icon', $design3_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
                                 <label class="tf-search-field-content" for='tf-check-out'>
                                     <span class="tf-search-field-label"><?php echo esc_html( $checkin_label ); ?></span>
@@ -3090,7 +3090,7 @@ class Helper {
                             </svg>
                             <div class="tf-search-field tf-search-field-checkout">
                                 <div class="tf-search-field-icon">
-                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', $design3_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_date_icon', $design3_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
                                 <label class="tf-search-field-content" for='tf-check-out'>
                                     <span class="tf-search-field-label"><?php echo esc_html( $checkout_label ); ?></span>
@@ -3104,7 +3104,7 @@ class Helper {
                         <div class="tf-search-field-checkinout">
                             <div class="tf-search-field">
                                 <div class="tf-search-field-icon">
-                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', $design3_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_date_icon', $design3_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
                                 <label class="tf-search-field-content" for="check-in-out-date">
                                     <span class="tf-search-field-label"><?php echo esc_html( $date_label ); ?></span>
@@ -3118,7 +3118,7 @@ class Helper {
                         <?php if ( $post_type == 'tf_hotel' ) { ?>
                             <div class="tf-search-field">
                                 <div class="tf-search-field-icon">
-                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'selector_icon', $design3_selector_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_selector_icon', $design3_selector_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
                                 <div class="tf-search-field-content">
                                     <span class="tf-search-field-label"><?php echo esc_html( $selector_label ); ?></span>
@@ -3131,7 +3131,7 @@ class Helper {
                         <?php } else { ?>
                             <div class="tf-search-field">
                                 <div class="tf-search-field-icon">
-                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'selector_icon', $design3_selector_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_selector_icon', $design3_selector_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
 
                                 <div class="tf-search-field-content">
@@ -3321,7 +3321,7 @@ class Helper {
                 <div class="tf_form-row">
                     <label class="tf_label-row">
                         <div class="tf_form-inner" <?php echo ( $post_type == 'tf_hotel' && self::tfopt( "hide_hotel_location_search" ) == 1 && self::tfopt( "required_location_hotel_search" ) != 1 ) || ( $post_type == 'tf_tours' && self::tfopt( "hide_tour_location_search" ) == 1 && self::tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : '' ?>>
-                            <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'location_icon', '<i class="fas fa-map-marker-alt"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                            <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_location_icon', '<i class="fas fa-map-marker-alt"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 
 							<?php if ( is_post_type_archive( "tf_hotel" ) ) { ?>
                                 <input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class=""
@@ -3342,7 +3342,7 @@ class Helper {
                 <div class="tf_form-row">
                     <label class="tf_label-row">
                         <div class="tf_form-inner">
-                            <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'adult_icon', '<i class="fas fa-user-friends"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                            <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_adult_icon', '<i class="fas fa-user-friends"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                             <select name="adults" id="adults" class="">
 								<?php
 								echo '<option value="0">0 ' .  esc_html($adult_label) . '</option>';
@@ -3364,7 +3364,7 @@ class Helper {
                 <div class="tf_form-row">
                     <label class="tf_label-row">
                         <div class="tf_form-inner">
-                            <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'children_icon', '<i class="fas fa-child"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                            <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_children_icon', '<i class="fas fa-child"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                             <select name="children" id="children" class="">
 								<?php
 								echo '<option value="0">0 ' . esc_html( $children_label ) . '</option>';
@@ -3383,7 +3383,7 @@ class Helper {
                     <div class="tf_form-row">
                         <label class="tf_label-row">
                             <div class="tf_form-inner">
-                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'infant_icon', '<i class="fas fa-child"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_infant_icon', '<i class="fas fa-child"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 <select name="infant" id="infant" class="">
                                     <option value="0">0 <?php echo esc_html( $infant_label ); ?></option>
 									<?php foreach ( range( 1, 8 ) as $value ) {
@@ -3401,7 +3401,7 @@ class Helper {
                     <div class="tf_form-row">
                         <label class="tf_label-row">
                             <div class="tf_form-inner">
-                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'room_icon', '<i class="fas fa-couch"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_room_icon', '<i class="fas fa-couch"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 <select name="room" id="room" class="">
 									<?php
 									echo '<option value="0">0 ' . esc_html( $room_label ) . '</option>';
@@ -3420,7 +3420,7 @@ class Helper {
                     <div class="tf_form-row">
                         <label class="tf_label-row">
                             <div class="tf_form-inner">
-                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', '<i class="far fa-calendar-alt"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
+                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_date_icon', '<i class="far fa-calendar-alt"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
                                        placeholder="<?php echo esc_attr( $date_placeholder ); ?>" required value="">
                             </div>
