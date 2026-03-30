@@ -2010,8 +2010,8 @@ class Helper {
 		$dropoff_location_placeholder = ! empty( $settings['dropoff_location_placeholder'] ) ? $settings['dropoff_location_placeholder'] : esc_html__( 'Drop Off Location', 'tourfic' );
 		$pickup_date_placeholder     = ! empty( $settings['pickup_date_placeholder'] ) ? $settings['pickup_date_placeholder'] : esc_html__( 'Pick Up Date', 'tourfic' );
 		$dropoff_date_placeholder    = ! empty( $settings['dropoff_date_placeholder'] ) ? $settings['dropoff_date_placeholder'] : esc_html__( 'Drop Off Date', 'tourfic' );
-		$pickup_label                = ! empty( $settings['pickup_label'] ) ? $settings['pickup_label'] : esc_html__( 'Pick-up', 'tourfic' );
-		$dropoff_label               = ! empty( $settings['dropoff_label'] ) ? $settings['dropoff_label'] : esc_html__( 'Drop-off', 'tourfic' );
+		$pickup_label                = ! empty( $settings['pickup_loc_label'] ) ? $settings['pickup_loc_label'] : esc_html__( 'Pick-up', 'tourfic' );
+		$dropoff_label               = ! empty( $settings['dropoff_loc_label'] ) ? $settings['dropoff_loc_label'] : esc_html__( 'Drop-off', 'tourfic' );
 		$pickup_date_label           = ! empty( $settings['pickup_date_label'] ) ? $settings['pickup_date_label'] : esc_html__( 'Pick-up date', 'tourfic' );
 		$pickup_time_label           = ! empty( $settings['pickup_time_label'] ) ? $settings['pickup_time_label'] : esc_html__( 'Time', 'tourfic' );
 		$dropoff_time_label          = ! empty( $settings['dropoff_time_label'] ) ? $settings['dropoff_time_label'] : esc_html__( 'Time', 'tourfic' );
@@ -2847,177 +2847,186 @@ class Helper {
 			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
             $check_in_out_arr = explode( ' - ', $check_in_out ); 
             $check_in = !empty($check_in_out_arr[0]) ? $check_in_out_arr[0] : ''; 
-            $check_out = !empty($check_in_out_arr[1]) ? $check_in_out_arr[1] : ''; 
+            $check_out = !empty($check_in_out_arr[1]) ? $check_in_out_arr[1] : '';
+
+            $term = is_tax() ? get_queried_object() : null;
+            $taxonomy_name = $term ? $term->name : '';
+            $tf_room_arc_banner = ! empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar']) ?  Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar'] : '';
+            $tf_room_arc_banner = !empty($tf_room_arc_banner) ? $tf_room_arc_banner : TF_ASSETS_APP_URL . '/images/room-hero-banner.png';
+            $room_banner_title = !empty($taxonomy_name) ? $taxonomy_name : ( !empty($settings['room_banner_title']) ? esc_html($settings['room_banner_title']) : esc_html__( 'Rooms', 'tourfic' ) );
+            
+            $room_date_svg = '<svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>';
             ?>
-            <div class="tf-archive-search-box">
-                <form action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
-                    <div class="tf-archive-search-box-wrapper tf-flex tf-flex-space-bttn tf-flex-align-center">
-                        <div class="tf-select-date">
-                            <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
-                                <label for="tf-checkin-date"><?php esc_html_e("Check in", "tourfic"); ?></label>
-                                <div class="info-select tf-booking-date-wrap tf-search-field tf-flex tf-flex-space-bttn tf-flex-align-center">
-                                    <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="<?php echo !empty($check_in) ? esc_html(sanitize_text_field( wp_unslash($check_in) )) : esc_attr(gmdate($date_format_for_users, strtotime('+1 day'))) ?>" readonly>
-                                    <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="<?php echo !empty($check_in_out) ? esc_html(sanitize_text_field( wp_unslash($check_in_out) )) : esc_attr(gmdate('Y/m/d', strtotime('+1 day')) . ' - ' . gmdate('Y/m/d', strtotime('+2 day'))); ?>" style="display: none;">
-                                    <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tf-select-date">
-                            <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
-                                <label for="tf-checkout-date">
-                                    <?php esc_html_e("Check out", "tourfic"); ?>
-                                </label>
-                                <div class="info-select tf-booking-date-wrap tf-search-field tf-flex tf-flex-space-bttn tf-flex-align-center">
-                                    <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="<?php echo !empty($check_out) ? esc_html(sanitize_text_field( wp_unslash($check_out) )) : esc_attr(gmdate($date_format_for_users, strtotime('+2 day'))); ?>">
-                                    <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tf-form-bottom-left">
-                            <div class="tf-select-room">
-                                <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
-                                    <label for="tf-rooms-number">
-                                        <?php echo esc_html( $room_label ); ?>
-                                    </label>
-                                
-                                    <div class="tf_acrselection tf-search-field">
-                                        <div class="acr-select">
-                                            <div class="acr-dec">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M4.16602 10H15.8327" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                            </div>
-                                            <input type="tel" name="room" id="room" min="1" value="<?php echo esc_attr($room); ?>" readonly="">
-                                            <div class="acr-inc">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M4.16699 10.0001H15.8337M10.0003 4.16675V15.8334" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
+            <div class="tf-archive-template__one sp-0">
+            <div class="tf-archive-room-banner" style="<?php echo !empty($tf_room_arc_banner) ? 'background-image: url(' . esc_url($tf_room_arc_banner) . ')' : ''; ?>">
+                <div class="tf-container">
+                    <div class="tf-banner-content tf-flex tf-flex-justify-center tf-flex-direction-column">
+                        <h1><?php echo esc_html($room_banner_title); ?></h1>
+                        <div class="tf-archive-search-box">
+                            <form action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                                <div class="tf-archive-search-box-wrapper tf-flex tf-flex-space-bttn tf-flex-align-center">
+                                    <div class="tf-select-date">
+                                        <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
+                                            <label for="tf-checkin-date"><?php echo esc_html( $checkin_label ); ?></label>
+                                            <div class="info-select tf-booking-date-wrap tf-search-field tf-flex tf-flex-space-bttn tf-flex-align-center">
+                                                <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="<?php echo !empty($check_in) ? esc_html(sanitize_text_field( wp_unslash($check_in) )) : esc_attr(gmdate($date_format_for_users, strtotime('+1 day'))) ?>" readonly>
+                                                <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="<?php echo !empty($check_in_out) ? esc_html(sanitize_text_field( wp_unslash($check_in_out) )) : esc_attr(gmdate('Y/m/d', strtotime('+1 day')) . ' - ' . gmdate('Y/m/d', strtotime('+2 day'))); ?>" style="display: none;">
+                                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', $room_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="tf-select-guests">
-                                <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
-                                    <label for="guests">
-                                        <?php esc_html_e("Guests", "tourfic"); ?>
-                                    </label>
-                                    <div class="tf_acrselection tf-search-field tf-booking-adult-child-infant">
-                                        <div class="acr-select">
-                                            <span class="tf-guest"><?php esc_html_e( "1", "tourfic" ); ?></span>
-                                            <div class="tf-archive-guest-info">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M5 7.5L10 12.5L15 7.5" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
+                                    <div class="tf-select-date">
+                                        <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
+                                            <label for="tf-checkout-date"><?php echo esc_html( $checkout_label ); ?></label>
+                                            <div class="info-select tf-booking-date-wrap tf-search-field tf-flex tf-flex-space-bttn tf-flex-align-center">
+                                                <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="<?php echo !empty($check_out) ? esc_html(sanitize_text_field( wp_unslash($check_out) )) : esc_attr(gmdate($date_format_for_users, strtotime('+2 day'))); ?>">
+                                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', $room_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tf_acrselection-wrap">
-                                    <div class="tf_acrselection-inner">
-                                        <div class="tf_acrselection">
-                                            <div class="acr-label"><?php echo esc_html( $adult_label ); ?></div>
-                                            <div class="acr-select">
-                                                <div class="acr-dec">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                        <path d="M4.16666 10H15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    </svg>
-                                                </div>
-                                                <input type="tel" name="adults" id="adults" min="1" value="<?php echo esc_attr($adults); ?>" readonly>
-                                                <div class="acr-inc">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                        <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    </svg>
+                                    <div class="tf-form-bottom-left">
+                                        <div class="tf-select-room">
+                                            <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
+                                                <label for="tf-rooms-number"><?php echo esc_html( $room_label ); ?></label>
+                                            
+                                                <div class="tf_acrselection tf-search-field">
+                                                    <div class="acr-select">
+                                                        <div class="acr-dec">
+                                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M4.16602 10H15.8327" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </svg>
+                                                        </div>
+                                                        <input type="tel" name="room" id="room" min="1" value="<?php echo esc_attr($room); ?>" readonly="">
+                                                        <div class="acr-inc">
+                                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M4.16699 10.0001H15.8337M10.0003 4.16675V15.8334" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    
-                                        <div class="tf_acrselection">
-                                            <div class="acr-label"><?php echo esc_html( $children_label ); ?></div>
-                                            <div class="acr-select">
-                                                <div class="acr-dec">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                        <path d="M4.16666 10H15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    </svg>
+                                        <div class="tf-select-guests">
+                                            <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
+                                                <label for="guests"><?php echo !empty($settings['selector_label']) ? esc_html($settings['selector_label']) : esc_html__('Guests', 'tourfic'); ?></label>
+                                                <div class="tf_acrselection tf-search-field tf-booking-adult-child-infant">
+                                                    <div class="acr-select">
+                                                        <span class="tf-guest"><?php esc_html_e( "1", "tourfic" ); ?></span>
+                                                        <div class="tf-archive-guest-info">
+                                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M5 7.5L10 12.5L15 7.5" stroke="#F8FDFD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <input type="tel" name="childrens" id="children" min="0" value="<?php echo esc_attr($child); ?>" readonly>
-                                                <div class="acr-inc">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                        <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    </svg>
+                                            </div>
+                                            <div class="tf_acrselection-wrap">
+                                                <div class="tf_acrselection-inner">
+                                                    <div class="tf_acrselection">
+                                                        <div class="acr-label"><?php echo esc_html( $adult_label ); ?></div>
+                                                        <div class="acr-select">
+                                                            <div class="acr-dec">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                    <path d="M4.16666 10H15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                </svg>
+                                                            </div>
+                                                            <input type="tel" name="adults" id="adults" min="1" value="<?php echo esc_attr($adults); ?>" readonly>
+                                                            <div class="acr-inc">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                    <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <div class="tf_acrselection">
+                                                        <div class="acr-label"><?php echo esc_html( $children_label ); ?></div>
+                                                        <div class="acr-select">
+                                                            <div class="acr-dec">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                    <path d="M4.16666 10H15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                </svg>
+                                                            </div>
+                                                            <input type="tel" name="childrens" id="children" min="0" value="<?php echo esc_attr($child); ?>" readonly>
+                                                            <div class="acr-inc">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                                    <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="tf-submit-button">
+                                        <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
+                                        <button class="tf-filter-rooms tf_btn tf_btn_rounded tf-flex-align-center"><?php echo !empty($settings['btn_text']) ? esc_html($settings['btn_text']) : esc_html__( 'Modify search', 'tourfic' ); ?></button>
+                                    </div>
+
+                                    <script>
+                                        (function ($) {
+                                            $(document).ready(function () {
+
+                                                // flatpickr locale first day of Week
+                                                <?php self::tf_flatpickr_locale( "root" ); ?>
+
+                                                $(".tf-archive-template__one #tf-check-out, .tf-archive-template__one .tf-booking-date-wrap svg").on('click', function () {
+                                                    $(".tf-search-input.form-control").click();
+                                                });
+                                                $("#check-in-out-date").flatpickr({
+                                                    enableTime: false,
+                                                    mode: "range",
+                                                    dateFormat: "Y/m/d",
+                                                    minDate: "today",
+                                                    altInput: true,
+                                                    altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
+                                                    showMonths: $(window).width() >= 1240 ? 2 : 1,
+
+                                                    // flatpickr locale
+                                                    <?php self::tf_flatpickr_locale(); ?>
+
+                                                    onReady: function (selectedDates, dateStr, instance) {
+                                                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                                        instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                                                        dateSetToFields(selectedDates, instance);
+                                                    },
+                                                    onChange: function (selectedDates, dateStr, instance) {
+                                                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                                        instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                                                        dateSetToFields(selectedDates, instance);
+                                                    },
+                                                    defaultDate: <?php echo ! empty( $check_in_out ) ? wp_json_encode( explode( '-', $check_in_out ) ) : '[' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+1 day' ) ) ) . ', ' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+2 day' ) ) ) . ']' ; ?>,
+                                                });
+
+                                                function dateSetToFields(selectedDates, instance) {
+                                                    const format = '<?php echo esc_html( $date_format_for_users ); ?>';
+                                                    if (selectedDates.length >= 1) {
+                                                        if (selectedDates[0]) {
+                                                            let checkInDate = instance.formatDate(selectedDates[0], format);
+                                                            $(".tf-archive-template__one #tf-check-in").val(checkInDate);
+                                                        }
+
+                                                        const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                                        if (endDate) {
+                                                            let checkOutDate = instance.formatDate(endDate, format);
+                                                            $(".tf-archive-template__one #tf-check-out").val(checkOutDate);
+                                                        }
+                                                    }
+                                                }
+                                            });
+                                        })(jQuery);
+
+                                    </script>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-
-                        <div class="tf-submit-button">
-                            <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
-                            <button class="tf-filter-rooms tf_btn tf_btn_rounded tf-flex-align-center"><?php echo !empty($settings['btn_text']) ? esc_html($settings['btn_text']) : esc_html__( 'Modify search', 'tourfic' ); ?></button>
-                        </div>
-
-                        <script>
-                            (function ($) {
-                                $(document).ready(function () {
-
-                                    // flatpickr locale first day of Week
-                                    <?php self::tf_flatpickr_locale( "root" ); ?>
-
-                                    $(".tf-archive-template__one #tf-check-out, .tf-archive-template__one .tf-booking-date-wrap svg").on('click', function () {
-                                        $(".tf-search-input.form-control").click();
-                                    });
-                                    $("#check-in-out-date").flatpickr({
-                                        enableTime: false,
-                                        mode: "range",
-                                        dateFormat: "Y/m/d",
-                                        minDate: "today",
-                                        altInput: true,
-                                        altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
-                                        showMonths: $(window).width() >= 1240 ? 2 : 1,
-
-                                        // flatpickr locale
-                                        <?php self::tf_flatpickr_locale(); ?>
-
-                                        onReady: function (selectedDates, dateStr, instance) {
-                                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                                            dateSetToFields(selectedDates, instance);
-                                        },
-                                        onChange: function (selectedDates, dateStr, instance) {
-                                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                            instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                                            dateSetToFields(selectedDates, instance);
-                                        },
-                                        defaultDate: <?php echo ! empty( $check_in_out ) ? wp_json_encode( explode( '-', $check_in_out ) ) : '[' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+1 day' ) ) ) . ', ' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+2 day' ) ) ) . ']' ; ?>,
-                                    });
-
-                                    function dateSetToFields(selectedDates, instance) {
-                                        const format = '<?php echo esc_html( $date_format_for_users ); ?>';
-                                        if (selectedDates.length >= 1) {
-                                            if (selectedDates[0]) {
-                                                let checkInDate = instance.formatDate(selectedDates[0], format);
-                                                $(".tf-archive-template__one #tf-check-in").val(checkInDate);
-                                            }
-
-                                            const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
-                                            if (endDate) {
-                                                let checkOutDate = instance.formatDate(endDate, format);
-                                                $(".tf-archive-template__one #tf-check-out").val(checkOutDate);
-                                            }
-                                        }
-                                    }
-                                });
-                            })(jQuery);
-
-                        </script>
                     </div>
-                </form>
+                </div>
+            </div>
             </div>
         <?php } elseif (
             ( is_post_type_archive( 'tf_hotel' ) && $design_hotel == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
