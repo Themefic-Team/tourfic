@@ -2004,8 +2004,8 @@ class Helper {
 		$checkin_label         = ! empty( $settings['checkin_label'] ) ? $settings['checkin_label'] : esc_html__( 'Check in', 'tourfic' );
 		$checkout_label        = ! empty( $settings['checkout_label'] ) ? $settings['checkout_label'] : esc_html__( 'Check out', 'tourfic' );
 		$date_label            = ! empty( $settings['date_label'] ) ? $settings['date_label'] : esc_html__( 'Select Date', 'tourfic' );
-		$guests_rooms_label    = ! empty( $settings['guests_rooms_label'] ) ? $settings['guests_rooms_label'] : esc_html__( 'Guests & rooms', 'tourfic' );
-		$persons_label         = ! empty( $settings['persons_label'] ) ? $settings['persons_label'] : esc_html__( 'Persons', 'tourfic' );
+		$date_placeholder      = !empty($settings['date_placeholder_text']) ? esc_attr($settings['date_placeholder_text']) : esc_html__( 'Select Date', 'tourfic' );
+		$selector_label        = ! empty( $settings['selector_label'] ) ? $settings['selector_label'] : esc_html__( 'Guests & rooms', 'tourfic' );
 		$pickup_location_placeholder = ! empty( $settings['pickup_location_placeholder'] ) ? $settings['pickup_location_placeholder'] : esc_html__( 'Pick Up Location', 'tourfic' );
 		$dropoff_location_placeholder = ! empty( $settings['dropoff_location_placeholder'] ) ? $settings['dropoff_location_placeholder'] : esc_html__( 'Drop Off Location', 'tourfic' );
 		$pickup_date_placeholder     = ! empty( $settings['pickup_date_placeholder'] ) ? $settings['pickup_date_placeholder'] : esc_html__( 'Pick Up Date', 'tourfic' );
@@ -2136,7 +2136,7 @@ class Helper {
                     <div class="tf-field-group tf-mt-8">
                         <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', '<i class="fa-solid fa-calendar-days"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                         <input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                               placeholder="<?php echo !empty($settings['date_placeholder_text']) ? esc_attr($settings['date_placeholder_text']) : esc_html__( 'Select Date', 'tourfic' ); ?>" required value="">
+                               placeholder="<?php echo esc_attr( $date_placeholder ); ?>" required value="">
                     </div>
                     <div class="tf_booking-dates">
                         <div class="tf_label-row"></div>
@@ -2238,7 +2238,7 @@ class Helper {
                                     </span>
                                 </div>
                                 <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                    placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required>
+                                    placeholder="<?php echo esc_attr( $date_placeholder ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required>
                             </div>
                             <div class="tf-booking-form-checkout">
                                 <span class="tf-booking-form-title"><?php echo !empty($settings['checkout_label']) ? esc_html($settings['checkout_label']) : esc_html__( "Check out", "tourfic" ); ?></span>
@@ -2278,14 +2278,14 @@ class Helper {
                                         </span>
                                     </div>
                                     <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                        placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required>
+                                        placeholder="<?php echo esc_attr( $date_placeholder ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required>
                                 </div>
                             </div>
                         <?php } ?>
                         <div class="tf-booking-form-guest-and-room">
                             <?php if ( $post_type == 'tf_hotel' ) { ?>
                                 <div class="tf-booking-form-guest-and-room-inner">
-                                    <span class="tf-booking-form-title"><?php echo !empty($settings['selector_label']) ? esc_html($settings['selector_label']) : esc_html__('Guests & rooms', 'tourfic'); ?></span>
+                                    <span class="tf-booking-form-title"><?php echo esc_html($selector_label); ?></span>
                                     <div class="tf-booking-guest-and-room-wrap tf-archive-guest-info">
                                         <span class="tf-guest"><?php esc_html_e( "00", "tourfic" ); ?></span> 
                                         <?php 
@@ -2856,8 +2856,8 @@ class Helper {
                             <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
                                 <label for="tf-checkin-date"><?php esc_html_e("Check in", "tourfic"); ?></label>
                                 <div class="info-select tf-booking-date-wrap tf-search-field tf-flex tf-flex-space-bttn tf-flex-align-center">
-                                    <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo !empty($check_in) ? esc_html(sanitize_text_field( wp_unslash($check_in) )) : esc_attr(gmdate($date_format_for_users, strtotime('+1 day'))) ?>" readonly>
-                                    <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo !empty($check_in_out) ? esc_html(sanitize_text_field( wp_unslash($check_in_out) )) : esc_attr(gmdate('Y/m/d', strtotime('+1 day')) . ' - ' . gmdate('Y/m/d', strtotime('+2 day'))); ?>" style="display: none;">
+                                    <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="<?php echo !empty($check_in) ? esc_html(sanitize_text_field( wp_unslash($check_in) )) : esc_attr(gmdate($date_format_for_users, strtotime('+1 day'))) ?>" readonly>
+                                    <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="<?php echo !empty($check_in_out) ? esc_html(sanitize_text_field( wp_unslash($check_in_out) )) : esc_attr(gmdate('Y/m/d', strtotime('+1 day')) . ' - ' . gmdate('Y/m/d', strtotime('+2 day'))); ?>" style="display: none;">
                                     <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -2870,7 +2870,7 @@ class Helper {
                                     <?php esc_html_e("Check out", "tourfic"); ?>
                                 </label>
                                 <div class="info-select tf-booking-date-wrap tf-search-field tf-flex tf-flex-space-bttn tf-flex-align-center">
-                                    <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="<?php echo !empty($check_out) ? esc_html(sanitize_text_field( wp_unslash($check_out) )) : esc_attr(gmdate($date_format_for_users, strtotime('+2 day'))); ?>">
+                                    <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="<?php echo !empty($check_out) ? esc_html(sanitize_text_field( wp_unslash($check_out) )) : esc_attr(gmdate($date_format_for_users, strtotime('+2 day'))); ?>">
                                     <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -3027,12 +3027,8 @@ class Helper {
             ( $post_type == 'tf_tours' && $design_tours == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
             ( $post_type == 'tf_apartment' && $design_apartment == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro())
         ){
-            ?>
-            <form class="tf-archive-booking-form__style-3 tf_archive_search_result tf-hotel-side-booking tf-booking-form" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off">
-                <div class="tf-search-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
-                    <div class="tf-search-field">
-                        <div class="tf-search-field-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+
+            $design3_location_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
                                 <g clip-path="url(#clip0_1327_100053)">
                                     <path d="M15.8033 14.97L10.5 20.2733L5.1967 14.97C2.26777 12.041 2.26777 7.29232 5.1967 4.36339C8.12563 1.43445 12.8743 1.43445 15.8033 4.36339C18.7323 7.29232 18.7323 12.041 15.8033 14.97ZM10.5 13C12.3409 13 13.8333 11.5076 13.8333 9.66669C13.8333 7.82574 12.3409 6.33335 10.5 6.33335C8.65905 6.33335 7.16667 7.82574 7.16667 9.66669C7.16667 11.5076 8.65905 13 10.5 13ZM10.5 11.3334C9.5795 11.3334 8.83333 10.5872 8.83333 9.66669C8.83333 8.74621 9.5795 8.00002 10.5 8.00002C11.4205 8.00002 12.1667 8.74621 12.1667 9.66669C12.1667 10.5872 11.4205 11.3334 10.5 11.3334Z"
                                         fill="#6E655E"/>
@@ -3042,7 +3038,23 @@ class Helper {
                                         <rect width="20" height="20" fill="white" transform="translate(0.5 0.5)"/>
                                     </clipPath>
                                 </defs>
-                            </svg>
+                            </svg>';
+
+            $design3_date_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                                        <path d="M14.668 2.99992H18.0013C18.4616 2.99992 18.8346 3.37302 18.8346 3.83325V17.1666C18.8346 17.6268 18.4616 17.9999 18.0013 17.9999H3.0013C2.54107 17.9999 2.16797 17.6268 2.16797 17.1666V3.83325C2.16797 3.37302 2.54107 2.99992 3.0013 2.99992H6.33464V1.33325H8.0013V2.99992H13.0013V1.33325H14.668V2.99992ZM3.83464 7.99992V16.3333H17.168V7.99992H3.83464ZM5.5013 9.66658H7.16797V11.3333H5.5013V9.66658ZM5.5013 12.9999H7.16797V14.6666H5.5013V12.9999ZM8.83464 9.66658H15.5013V11.3333H8.83464V9.66658ZM8.83464 12.9999H13.0013V14.6666H8.83464V12.9999Z"
+                                            fill="#6E655E"/>
+                                    </svg>'; 
+                                    
+            $design3_selector_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                                        <path d="M10.5013 8.83341C12.3422 8.83341 13.8346 7.34103 13.8346 5.50008C13.8346 3.65913 12.3422 2.16675 10.5013 2.16675C8.66035 2.16675 7.16797 3.65913 7.16797 5.50008C7.16797 7.34103 8.66035 8.83341 10.5013 8.83341ZM5.08464 11.3334C6.23523 11.3334 7.16797 10.4007 7.16797 9.25008C7.16797 8.09949 6.23523 7.16675 5.08464 7.16675C3.93404 7.16675 3.0013 8.09949 3.0013 9.25008C3.0013 10.4007 3.93404 11.3334 5.08464 11.3334ZM18.0013 9.25008C18.0013 10.4007 17.0686 11.3334 15.918 11.3334C14.7674 11.3334 13.8346 10.4007 13.8346 9.25008C13.8346 8.09949 14.7674 7.16675 15.918 7.16675C17.0686 7.16675 18.0013 8.09949 18.0013 9.25008ZM10.5013 9.66675C12.8025 9.66675 14.668 11.5322 14.668 13.8334V18.8334H6.33464V13.8334C6.33464 11.5322 8.20012 9.66675 10.5013 9.66675ZM4.66797 13.8333C4.66797 13.2559 4.75186 12.6981 4.90812 12.1714L4.76684 12.1837C3.30549 12.3421 2.16797 13.5799 2.16797 15.0833V18.8333H4.66797V13.8333ZM18.8346 18.8333V15.0833C18.8346 13.5316 17.6229 12.2628 16.0945 12.1714C16.2507 12.6981 16.3346 13.2559 16.3346 13.8333V18.8333H18.8346Z"
+                                            fill="#6E655E"/>
+                                    </svg>';
+            ?>
+            <form class="tf-archive-booking-form__style-3 tf_archive_search_result tf-hotel-side-booking tf-booking-form" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off">
+                <div class="tf-search-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
+                    <div class="tf-search-field">
+                        <div class="tf-search-field-icon">
+                            <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'location_icon', $design3_location_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                         </div>
                         <label for="<?php echo esc_attr($place); ?>" class="tf-search-field-content">
                             <span class="tf-search-field-label"><?php echo esc_html( $loc_label ); ?></span>
@@ -3056,15 +3068,12 @@ class Helper {
                         <div class="tf-search-field-checkinout">
                             <div class="tf-search-field tf-search-field-checkin">
                                 <div class="tf-search-field-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-                                        <path d="M14.668 2.99992H18.0013C18.4616 2.99992 18.8346 3.37302 18.8346 3.83325V17.1666C18.8346 17.6268 18.4616 17.9999 18.0013 17.9999H3.0013C2.54107 17.9999 2.16797 17.6268 2.16797 17.1666V3.83325C2.16797 3.37302 2.54107 2.99992 3.0013 2.99992H6.33464V1.33325H8.0013V2.99992H13.0013V1.33325H14.668V2.99992ZM3.83464 7.99992V16.3333H17.168V7.99992H3.83464ZM5.5013 9.66658H7.16797V11.3333H5.5013V9.66658ZM5.5013 12.9999H7.16797V14.6666H5.5013V12.9999ZM8.83464 9.66658H15.5013V11.3333H8.83464V9.66658ZM8.83464 12.9999H13.0013V14.6666H8.83464V12.9999Z"
-                                            fill="#6E655E"/>
-                                    </svg>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', $design3_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
                                 <label class="tf-search-field-content" for='tf-check-out'>
                                     <span class="tf-search-field-label"><?php echo esc_html( $checkin_label ); ?></span>
-                                    <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
-                                    <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="">
+                                    <input type="text" class="tf-search-input" name="tf-check-in" id="tf-check-in" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="" readonly>
+                                    <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="">
                                 </label>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
@@ -3072,14 +3081,11 @@ class Helper {
                             </svg>
                             <div class="tf-search-field tf-search-field-checkout">
                                 <div class="tf-search-field-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-                                        <path d="M14.668 2.99992H18.0013C18.4616 2.99992 18.8346 3.37302 18.8346 3.83325V17.1666C18.8346 17.6268 18.4616 17.9999 18.0013 17.9999H3.0013C2.54107 17.9999 2.16797 17.6268 2.16797 17.1666V3.83325C2.16797 3.37302 2.54107 2.99992 3.0013 2.99992H6.33464V1.33325H8.0013V2.99992H13.0013V1.33325H14.668V2.99992ZM3.83464 7.99992V16.3333H17.168V7.99992H3.83464ZM5.5013 9.66658H7.16797V11.3333H5.5013V9.66658ZM5.5013 12.9999H7.16797V14.6666H5.5013V12.9999ZM8.83464 9.66658H15.5013V11.3333H8.83464V9.66658ZM8.83464 12.9999H13.0013V14.6666H8.83464V12.9999Z"
-                                            fill="#6E655E"/>
-                                    </svg>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', $design3_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
                                 <label class="tf-search-field-content" for='tf-check-out'>
                                     <span class="tf-search-field-label"><?php echo esc_html( $checkout_label ); ?></span>
-                                    <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" value="" readonly>
+                                    <input type="text" class="tf-search-input" name="tf-check-out" id="tf-check-out" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" value="" readonly>
                                 </label>
                             </div>
                         </div>
@@ -3089,14 +3095,11 @@ class Helper {
                         <div class="tf-search-field-checkinout">
                             <div class="tf-search-field">
                                 <div class="tf-search-field-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-                                        <path d="M14.668 2.99992H18.0013C18.4616 2.99992 18.8346 3.37302 18.8346 3.83325V17.1666C18.8346 17.6268 18.4616 17.9999 18.0013 17.9999H3.0013C2.54107 17.9999 2.16797 17.6268 2.16797 17.1666V3.83325C2.16797 3.37302 2.54107 2.99992 3.0013 2.99992H6.33464V1.33325H8.0013V2.99992H13.0013V1.33325H14.668V2.99992ZM3.83464 7.99992V16.3333H17.168V7.99992H3.83464ZM5.5013 9.66658H7.16797V11.3333H5.5013V9.66658ZM5.5013 12.9999H7.16797V14.6666H5.5013V12.9999ZM8.83464 9.66658H15.5013V11.3333H8.83464V9.66658ZM8.83464 12.9999H13.0013V14.6666H8.83464V12.9999Z"
-                                            fill="#6E655E"/>
-                                    </svg>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', $design3_date_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
                                 <label class="tf-search-field-content" for="check-in-out-date">
                                     <span class="tf-search-field-label"><?php echo esc_html( $date_label ); ?></span>
-                                    <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr($check_in_out) . '"' : '' ?>>
+                                    <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php echo esc_attr( $date_placeholder ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr($check_in_out) . '"' : '' ?>>
                                 </label>
                             </div>
                         </div>
@@ -3106,13 +3109,10 @@ class Helper {
                         <?php if ( $post_type == 'tf_hotel' ) { ?>
                             <div class="tf-search-field">
                                 <div class="tf-search-field-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-                                        <path d="M10.5013 8.83341C12.3422 8.83341 13.8346 7.34103 13.8346 5.50008C13.8346 3.65913 12.3422 2.16675 10.5013 2.16675C8.66035 2.16675 7.16797 3.65913 7.16797 5.50008C7.16797 7.34103 8.66035 8.83341 10.5013 8.83341ZM5.08464 11.3334C6.23523 11.3334 7.16797 10.4007 7.16797 9.25008C7.16797 8.09949 6.23523 7.16675 5.08464 7.16675C3.93404 7.16675 3.0013 8.09949 3.0013 9.25008C3.0013 10.4007 3.93404 11.3334 5.08464 11.3334ZM18.0013 9.25008C18.0013 10.4007 17.0686 11.3334 15.918 11.3334C14.7674 11.3334 13.8346 10.4007 13.8346 9.25008C13.8346 8.09949 14.7674 7.16675 15.918 7.16675C17.0686 7.16675 18.0013 8.09949 18.0013 9.25008ZM10.5013 9.66675C12.8025 9.66675 14.668 11.5322 14.668 13.8334V18.8334H6.33464V13.8334C6.33464 11.5322 8.20012 9.66675 10.5013 9.66675ZM4.66797 13.8333C4.66797 13.2559 4.75186 12.6981 4.90812 12.1714L4.76684 12.1837C3.30549 12.3421 2.16797 13.5799 2.16797 15.0833V18.8333H4.66797V13.8333ZM18.8346 18.8333V15.0833C18.8346 13.5316 17.6229 12.2628 16.0945 12.1714C16.2507 12.6981 16.3346 13.2559 16.3346 13.8333V18.8333H18.8346Z"
-                                            fill="#6E655E"/>
-                                    </svg>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'selector_icon', $design3_selector_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
                                 <div class="tf-search-field-content">
-                                    <span class="tf-search-field-label"><?php echo esc_html( $guests_rooms_label ); ?></span>
+                                    <span class="tf-search-field-label"><?php echo esc_html( $selector_label ); ?></span>
                                     <div class="tf-archive-guest-info">
                                         <span class="tf-guest"><?php esc_html_e( "00", "tourfic" ); ?></span> <?php echo esc_html( apply_filters("tf_hotel_guest_name_change", "guest") ); ?>
                                         <span class="tf-room"><?php esc_html_e( "00", "tourfic" ); ?></span> <?php esc_html_e( "rooms", "tourfic" ); ?>
@@ -3122,14 +3122,11 @@ class Helper {
                         <?php } else { ?>
                             <div class="tf-search-field">
                                 <div class="tf-search-field-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-                                        <path d="M10.5013 8.83341C12.3422 8.83341 13.8346 7.34103 13.8346 5.50008C13.8346 3.65913 12.3422 2.16675 10.5013 2.16675C8.66035 2.16675 7.16797 3.65913 7.16797 5.50008C7.16797 7.34103 8.66035 8.83341 10.5013 8.83341ZM5.08464 11.3334C6.23523 11.3334 7.16797 10.4007 7.16797 9.25008C7.16797 8.09949 6.23523 7.16675 5.08464 7.16675C3.93404 7.16675 3.0013 8.09949 3.0013 9.25008C3.0013 10.4007 3.93404 11.3334 5.08464 11.3334ZM18.0013 9.25008C18.0013 10.4007 17.0686 11.3334 15.918 11.3334C14.7674 11.3334 13.8346 10.4007 13.8346 9.25008C13.8346 8.09949 14.7674 7.16675 15.918 7.16675C17.0686 7.16675 18.0013 8.09949 18.0013 9.25008ZM10.5013 9.66675C12.8025 9.66675 14.668 11.5322 14.668 13.8334V18.8334H6.33464V13.8334C6.33464 11.5322 8.20012 9.66675 10.5013 9.66675ZM4.66797 13.8333C4.66797 13.2559 4.75186 12.6981 4.90812 12.1714L4.76684 12.1837C3.30549 12.3421 2.16797 13.5799 2.16797 15.0833V18.8333H4.66797V13.8333ZM18.8346 18.8333V15.0833C18.8346 13.5316 17.6229 12.2628 16.0945 12.1714C16.2507 12.6981 16.3346 13.2559 16.3346 13.8333V18.8333H18.8346Z"
-                                            fill="#6E655E"/>
-                                    </svg>
+                                    <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'selector_icon', $design3_selector_svg, $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
 
                                 <div class="tf-search-field-content">
-                                    <span class="tf-search-field-label"><?php echo esc_html( $persons_label ); ?></span>
+                                    <span class="tf-search-field-label"><?php echo !empty($settings['selector_label']) ? esc_html($settings['selector_label']) : esc_html__('Persons', 'tourfic'); ?></span>
                                     <div class="tf-archive-guest-info">
                                         <span class="tf-adult"><?php esc_html_e( "0", "tourfic" ); ?></span> <?php echo $post_type == "tf_hotels" ? esc_html( $adults_name ) : esc_html__( "adult", "tourfic" ) ; ?>
                                         <?php if ( ($post_type == 'tf_tours' && empty( $disable_child_search )) ||
@@ -3145,7 +3142,7 @@ class Helper {
                         <div class="tf_acrselection-wrap">
                             <div class="tf_acrselection-inner">
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's' ) : esc_html( $adult_label . 's' ); ?></div>
+                                    <div class="acr-label"><?php echo esc_html( $adult_label ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -3211,7 +3208,7 @@ class Helper {
                                 <?php } ?>
                                 <?php if ( $post_type == 'tf_hotel' ) { ?>
                                     <div class="tf_acrselection">
-                                        <div class="acr-label"><?php esc_html_e( "Rooms", "tourfic" ); ?></div>
+                                        <div class="acr-label"><?php echo esc_html( $room_label ); ?></div>
                                         <div class="acr-select">
                                             <div class="acr-dec">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -3315,7 +3312,7 @@ class Helper {
                 <div class="tf_form-row">
                     <label class="tf_label-row">
                         <div class="tf_form-inner" <?php echo ( $post_type == 'tf_hotel' && self::tfopt( "hide_hotel_location_search" ) == 1 && self::tfopt( "required_location_hotel_search" ) != 1 ) || ( $post_type == 'tf_tours' && self::tfopt( "hide_tour_location_search" ) == 1 && self::tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : '' ?>>
-                            <i class="fas fa-map-marker-alt"></i>
+                            <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'location_icon', '<i class="fas fa-map-marker-alt"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 
 							<?php if ( is_post_type_archive( "tf_hotel" ) ) { ?>
                                 <input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class=""
@@ -3336,13 +3333,13 @@ class Helper {
                 <div class="tf_form-row">
                     <label class="tf_label-row">
                         <div class="tf_form-inner">
-                            <i class="fas fa-user-friends"></i>
+                            <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'adult_icon', '<i class="fas fa-user-friends"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                             <select name="adults" id="adults" class="">
 								<?php
-								echo '<option value="0">0 ' .  esc_html($adults_name) . '</option>';
-								echo '<option value="1">1 ' .  esc_html($adults_name) . '</option>';
+								echo '<option value="0">0 ' .  esc_html($adult_label) . '</option>';
+								echo '<option value="1">1 ' .  esc_html($adult_label) . '</option>';
 								foreach ( range( 2, 8 ) as $value ) {
-									echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html( $adults_name . "s" ) . '</option>';
+									echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html( $adult_label ) . '</option>';
 								}
 								?>
                             </select>
@@ -3358,12 +3355,12 @@ class Helper {
                 <div class="tf_form-row">
                     <label class="tf_label-row">
                         <div class="tf_form-inner">
-                            <i class="fas fa-child"></i>
+                            <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'children_icon', '<i class="fas fa-child"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                             <select name="children" id="children" class="">
 								<?php
-								echo '<option value="0">0 ' . esc_html__( "Children", "tourfic" ) . '</option>';
+								echo '<option value="0">0 ' . esc_html( $children_label ) . '</option>';
 								foreach ( range( 1, 8 ) as $value ) {
-									echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Children", "tourfic" ) . '</option>';
+									echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html( $children_label ) . '</option>';
 								}
 								?>
                             </select>
@@ -3377,11 +3374,11 @@ class Helper {
                     <div class="tf_form-row">
                         <label class="tf_label-row">
                             <div class="tf_form-inner">
-                                <i class="fas fa-child"></i>
+                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'infant_icon', '<i class="fas fa-child"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 <select name="infant" id="infant" class="">
-                                    <option value="0">0 <?php esc_html_e( 'Infant', 'tourfic' ); ?></option>
+                                    <option value="0">0 <?php echo esc_html( $infant_label ); ?></option>
 									<?php foreach ( range( 1, 8 ) as $value ) {
-										echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Infant", "tourfic" ) . '</option>';
+										echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html( $infant_label ) . '</option>';
 									} ?>
 
                                 </select>
@@ -3395,13 +3392,13 @@ class Helper {
                     <div class="tf_form-row">
                         <label class="tf_label-row">
                             <div class="tf_form-inner">
-                                <i class="fas fa-couch"></i>
+                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'room_icon', '<i class="fas fa-couch"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 <select name="room" id="room" class="">
 									<?php
-									echo '<option value="0">0 ' . esc_html__( "Room", "tourfic" ) . '</option>';
-									echo '<option value="1">1 ' . esc_html__( "Room", "tourfic" ) . '</option>';
+									echo '<option value="0">0 ' . esc_html( $room_label ) . '</option>';
+									echo '<option value="1">1 ' . esc_html( $room_label ) . '</option>';
 									foreach ( range( 2, 8 ) as $value ) {
-										echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Rooms", "tourfic" ) . '</option>';
+										echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html( $room_label ) . '</option>';
 									}
 									?>
                                 </select>
@@ -3414,9 +3411,9 @@ class Helper {
                     <div class="tf_form-row">
                         <label class="tf_label-row">
                             <div class="tf_form-inner">
-                                <i class="far fa-calendar-alt"></i>
+                                <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'date_icon', '<i class="far fa-calendar-alt"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
                                 <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                                       placeholder="<?php echo esc_attr__( 'Select Date', 'tourfic' ); ?>" required value="">
+                                       placeholder="<?php echo esc_attr( $date_placeholder ); ?>" required value="">
                             </div>
                         </label>
                     </div>
