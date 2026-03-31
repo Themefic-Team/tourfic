@@ -1873,6 +1873,125 @@
 .single-tf_apartment .tf-single-template__two #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf_label-row .tf-err-msg {
   color: #ff6055;
 }
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking .tf-withoutpayment-popup,
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup, .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking .tf-withoutpayment-popup,
+.single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup {
+  background-color: #ffffff;
+  box-shadow: 0px 3px 60px 0px rgba(0, 0, 0, 0.1);
+}
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs,
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs, .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs,
+.single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs {
+  background-color: #ffffff;
+  border-bottom: 0.3px solid #CCCED1;
+}
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul,
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul, .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul,
+.single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul {
+  background-color: var(--tf-text-paragraph);
+}
+@media only screen and (max-width: 768px) {
+  .single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul,
+  .single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul, .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul,
+  .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul {
+    background: transparent;
+  }
+}
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li,
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li, .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li,
+.single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li {
+  color: #ffffff;
+}
+@media only screen and (max-width: 768px) {
+  .single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li,
+  .single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li, .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li,
+  .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li {
+    color: var(--tf-text-paragraph);
+  }
+}
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active,
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active, .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active,
+.single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active {
+  background-color: var(--tf-primary);
+}
+@media only screen and (max-width: 768px) {
+  .single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active,
+  .single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active, .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active,
+  .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active {
+    color: #ffffff;
+  }
+}
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before,
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before, .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before,
+.single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before {
+  background-color: transparent;
+}
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done,
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done, .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done,
+.single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done {
+  background-color: var(--tf-brand-lite);
+}
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination button,
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination button, .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination button,
+.single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination button {
+  background-color: var(--tf-primary);
+}
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a.tf-back-control,
+.single-tf_apartment .tf-single-template__legacy .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a.tf-back-control, .single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a.tf-back-control,
+.single-tf_apartment .tf-single-template__two .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a.tf-back-control {
+  background-color: transparent;
+  color: var(--tf-primary);
+  padding: 0;
+  border: 0;
+}
+
+.tf-apartment-booking-popup .tf-withoutpayment-popup {
+  background-color: #ffffff;
+  box-shadow: 0px 3px 60px 0px rgba(0, 0, 0, 0.1);
+}
+.tf-apartment-booking-popup .tf-withoutpayment-popup .tf-booking-tabs {
+  background-color: #ffffff;
+  border-bottom: 0.3px solid #CCCED1;
+}
+.tf-apartment-booking-popup .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul {
+  background-color: var(--tf-text-paragraph);
+}
+@media only screen and (max-width: 768px) {
+  .tf-apartment-booking-popup .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul {
+    background: transparent;
+  }
+}
+.tf-apartment-booking-popup .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li {
+  color: #ffffff;
+}
+@media only screen and (max-width: 768px) {
+  .tf-apartment-booking-popup .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li {
+    color: var(--tf-text-paragraph);
+  }
+}
+.tf-apartment-booking-popup .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active {
+  background-color: var(--tf-primary);
+}
+@media only screen and (max-width: 768px) {
+  .tf-apartment-booking-popup .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active {
+    color: #ffffff;
+  }
+}
+.tf-apartment-booking-popup .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before {
+  background-color: transparent;
+}
+.tf-apartment-booking-popup .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done {
+  background-color: var(--tf-brand-lite);
+}
+.tf-apartment-booking-popup .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination button {
+  background-color: var(--tf-primary);
+}
+.tf-apartment-booking-popup .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a.tf-back-control {
+  background-color: transparent;
+  color: var(--tf-primary);
+  padding: 0;
+  border: 0;
+}
 
 .single-tf_apartment .tf-single-template__legacy .apartment-question {
   background: transparent;

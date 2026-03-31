@@ -248,6 +248,11 @@
   font-weight: 700;
   margin: 0;
 }
+.single-tf_carrental .tf-single-template__one .tf-single-booking-bar .tf-top-bar-booking .tf-price-header h2 del {
+  color: var(--tf-text-paragraph);
+  font-size: 0.6565rem;
+  font-weight: 400;
+}
 .single-tf_carrental .tf-single-template__one .tf-single-booking-bar .tf-top-bar-booking .tf-price-header p {
   color: var(--tf-text-paragraph);
   margin: 0;
@@ -1060,6 +1065,7 @@
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-price-header h2 del {
   color: var(--tf-text-paragraph);
   text-decoration-line: strikethrough;
+  font-size: 0.875rem;
   font-weight: 400;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-price-header h2 small.pricing-type {
@@ -1387,6 +1393,11 @@
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-mobile-booking-btn .tf-price-header h2 {
   font-size: 1.25rem;
   margin-bottom: 0;
+}
+.single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-mobile-booking-btn .tf-price-header h2 del {
+  color: var(--tf-text-paragraph);
+  font-size: 0.625rem;
+  font-weight: 400;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-mobile-booking-btn button {
   padding: 16px 32px;

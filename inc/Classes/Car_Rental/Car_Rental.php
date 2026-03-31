@@ -56,7 +56,7 @@ class Car_Rental
         $check_in_out = ! empty($_GET['check-in-out-date']) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : '';
 
         // date format for apartments
-        $date_format_change_apartments = ! empty(Helper::tfopt("tf-date-format-for-users")) ? Helper::tfopt("tf-date-format-for-users") : "Y/m/d";
+        $date_format = ! empty(Helper::tfopt("tf-date-format-for-users")) ? Helper::tfopt("tf-date-format-for-users") : "Y/m/d";
 
         $disable_apartment_child_search  = ! empty(Helper::tfopt('disable_apartment_child_search')) ? Helper::tfopt('disable_apartment_child_search') : '';
         $disable_apartment_infant_search  = ! empty(Helper::tfopt('disable_apartment_infant_search')) ? Helper::tfopt('disable_apartment_infant_search') : '';
@@ -130,9 +130,9 @@ class Car_Rental
                                     <div class="tf_form_inners">
                                         <div class="tf_checkin_dates">
                                             <div class="tf-select-date tf-car-search-pickup-date">
-                                                <span class="date"><?php echo esc_html( gmdate('d', strtotime('+1 day')) ); ?></span>
+                                                <span class="date"><?php echo esc_html( wp_date('d', strtotime('+1 day')) ); ?></span>
                                                 <span class="month">
-                                                    <span><?php echo esc_html( gmdate('M', strtotime('+1 day')) ); ?></span>
+                                                    <span><?php echo esc_html( wp_date('M', strtotime('+1 day')) ); ?></span>
                                                     <div class="tf_check_arrow">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                             <path d="M8 10.668L4 6.66797H12L8 10.668Z" fill="#FDF9F4" />
@@ -269,13 +269,13 @@ class Car_Rental
                                 const startDate = selectedDates[0];
                                 $(".tf-car-search-pickup-date span.date").html(startDate.getDate());
                                 $(".tf-car-search-pickup-date span.month span").html(monthNames[startDate.getMonth()]);
-                                $('.tf_search_pickup_date').val(flatpickr.formatDate(startDate, "Y/m/d"));
+                                $('.tf_search_pickup_date').val(flatpickr.formatDate(startDate, "<?php echo esc_js( $date_format ); ?>"));
                             }
-                            if (selectedDates[1]) {
-                                const endDate = selectedDates[1];
+                            const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                            if (endDate) {
                                 $(".tf-car-search-dropoff-date span.date").html(endDate.getDate());
                                 $(".tf-car-search-dropoff-date span.month span").html(monthNames[endDate.getMonth()]);
-                                $(".tf_search_dropoff_date").val(flatpickr.formatDate(endDate, "Y/m/d"));
+                                $(".tf_search_dropoff_date").val(flatpickr.formatDate(endDate, "<?php echo esc_js( $date_format ); ?>"));
                             }
                         }
 
@@ -302,7 +302,7 @@ class Car_Rental
                                 </div>
                                 <div class="info-select">
                                     <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-                                    <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" name="pickup-name" />
+                                    <input type="text" placeholder="<?php echo esc_attr__( 'Pick Up Location', 'tourfic' ); ?>" id="tf_pickup_location" name="pickup-name" />
                                     <input type="hidden" name="pickup" class="tf-place-input">
                                 </div>
                             </div>
@@ -324,7 +324,7 @@ class Car_Rental
                                 </div>
                                 <div class="info-select">
                                     <h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-                                    <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" name="dropoff-name" />
+                                    <input type="text" placeholder="<?php echo esc_attr__( 'Drop Off Location', 'tourfic' ); ?>" id="tf_dropoff_location" name="dropoff-name" />
                                     <input type="hidden" name="dropoff" class="tf-place-input">
                                 </div>
                             </div>
@@ -341,7 +341,7 @@ class Car_Rental
                                 </div>
                                 <div class="info-select">
                                     <h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-                                    <input type="text" name="pickup-date" class="tf_pickup_date" placeholder="<?php esc_html_e('Pickup date', 'tourfic'); ?>" value="<?php echo esc_attr(gmdate('Y/m/d', strtotime('+1 day'))); ?>">
+                                    <input type="text" name="pickup-date" class="tf_pickup_date" placeholder="<?php esc_html_e('Pickup date', 'tourfic'); ?>" value="<?php echo esc_attr( date_i18n( $date_format, strtotime('+1 day') ) ); ?>">
                                 </div>
                             </div>
                         </div>
@@ -487,6 +487,8 @@ class Car_Rental
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
+                            altInput: true,
+							altFormat: '<?php echo esc_html( $date_format ); ?>',
                             minDate: "today",
                             showMonths: $(window).width() >= 1240 ? 2 : 1,
                             // flatpickr locale
@@ -505,14 +507,15 @@ class Car_Rental
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 if (selectedDates[0]) {
-                                    const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
+                                    const startDate = flatpickr.formatDate(selectedDates[0], "<?php echo esc_js( $date_format ); ?>");
                                     $(".tf_pickup_date").val(startDate);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
-                                    $(".tf-select-date .tf_dropoff_date").val(endDate);
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
+                                    const formattedEndDate = flatpickr.formatDate(endDate, "<?php echo esc_js( $date_format ); ?>");
+                                    $(".tf-select-date .tf_dropoff_date").val(formattedEndDate);
                                 }
                             }
                         }
@@ -545,7 +548,7 @@ class Car_Rental
                                 <?php echo esc_html_e("Drop-off", "tourfic"); ?>
                             </label>
                             <div class="tf-search__form__field">
-                                <input type="text" id="tf_dropoff_location" class="tf-search__form__input" name="dropoff-name" placeholder="<?php esc_html_e('Dropoff Location', 'tourfic'); ?>" />
+                                <input type="text" id="tf_dropoff_location" class="tf-search__form__input" name="dropoff-name" placeholder="<?php echo esc_attr__( 'Dropoff Location', 'tourfic' ); ?>" />
                                 <input type="hidden" name="dropoff" class="tf-place-input">
                                 <span class="tf-search__form__field__icon icon--location">
                                     <svg width="12" height="17" viewBox="0 0 12 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -580,10 +583,10 @@ class Car_Rental
                                         </svg>
                                     </div>
                                     <div class="tf_pickup_dates tf-flex tf-flex-align-center">
-                                        <span class="date field--title"><?php echo esc_html(gmdate('d', strtotime('+1 day'))); ?></span>
+                                        <span class="date field--title"><?php echo esc_html(wp_date('d', strtotime('+1 day'))); ?></span>
                                         <div class="tf-search__form__field__mthyr">
-                                            <span class="month form--span"><?php echo esc_html(gmdate('M', strtotime('+1 day'))); ?></span>
-                                            <span class="year form--span"><?php echo esc_html(gmdate('Y', strtotime('+1 day'))); ?></span>
+                                            <span class="month form--span"><?php echo esc_html(wp_date('M', strtotime('+1 day'))); ?></span>
+                                            <span class="year form--span"><?php echo esc_html(wp_date('Y', strtotime('+1 day'))); ?></span>
                                         </div>
                                     </div>
                                     <input type="hidden" name="pickup-date" class="tf_pickup_date_input tf-check-inout-hidden" value="<?php echo esc_attr(gmdate('Y/m/d', strtotime('+1 day'))); ?>">
@@ -637,10 +640,10 @@ class Car_Rental
                                         </svg>
                                     </div>
                                     <div class="tf_dropoff_dates tf-flex tf-flex-align-center">
-                                        <span class="date field--title"><?php echo esc_html(gmdate('d', strtotime('+2 day'))); ?></span>
+                                        <span class="date field--title"><?php echo esc_html(wp_date('d', strtotime('+2 day'))); ?></span>
                                         <div class="tf-search__form__field__mthyr">
-                                            <span class="month form--span"><?php echo esc_html(gmdate('M', strtotime('+2 day'))); ?></span>
-                                            <span class="year form--span"><?php echo esc_html(gmdate('Y', strtotime('+2 day'))); ?></span>
+                                            <span class="month form--span"><?php echo esc_html(wp_date('M', strtotime('+2 day'))); ?></span>
+                                            <span class="year form--span"><?php echo esc_html(wp_date('Y', strtotime('+2 day'))); ?></span>
                                         </div>
                                     </div>
                                     <input type="hidden" placeholder="Drop Off Date" name="dropoff-date" class="tf_dropoff_date_input tf-check-inout-hidden" />
@@ -765,8 +768,8 @@ class Car_Rental
                                 $(".tf_pickup_date .year").html(startDate.getFullYear());
                                 $(".tf_pickup_date_input").val(flatpickr.formatDate(startDate, "Y/m/d"));
                             }
-                            if (selectedDates[1]) {
-                                const endDate = selectedDates[1];
+                            const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                            if (endDate) {
                                 $(".tf_dropoff_date .date").html(endDate.getDate());
                                 $(".tf_dropoff_date .month").html(monthNames[endDate.getMonth()]);
                                 $(".tf_dropoff_date .year").html(endDate.getFullYear());
@@ -823,7 +826,7 @@ class Car_Rental
                                         <div class="tf-search-form-field-icon">
                                             <i class="fa-solid fa-calendar-days"></i>
                                         </div>
-                                        <input type="text" name="pickup-date" class="tf_pickup_date" placeholder="<?php esc_html_e('Enter Pickup date', 'tourfic'); ?>" value="<?php echo esc_attr(gmdate('Y/m/d', strtotime('+1 day'))); ?>">
+                                        <input type="text" name="pickup-date" class="tf_pickup_date" placeholder="<?php esc_html_e('Enter Pickup date', 'tourfic'); ?>" value="<?php echo esc_attr( date_i18n( $date_format, strtotime('+1 day') ) ); ?>">
                                     </div>
                                 </label>
                             </div>
@@ -876,7 +879,7 @@ class Car_Rental
                                         <div class="tf-search-form-field-icon">
                                             <i class="fa-solid fa-calendar-days"></i>
                                         </div>
-                                        <input type="text" name="dropoff-date" class="tf_dropoff_date" placeholder="<?php esc_html_e('Enter Dropoff date', 'tourfic'); ?>" value="<?php echo esc_attr(gmdate('Y/m/d', strtotime('+2 day'))); ?>">
+                                        <input type="text" name="dropoff-date" class="tf_dropoff_date" placeholder="<?php esc_html_e('Enter Dropoff date', 'tourfic'); ?>" value="<?php echo esc_attr( date_i18n( $date_format, strtotime('+2 day') ) ); ?>">
                                     </div>
                                 </label>
                             </div>
@@ -922,7 +925,7 @@ class Car_Rental
 
                     <div class="tf_submit-wrap">
                         <input type="hidden" name="type" value="tf_carrental" class="tf-post-type" />
-                        <button class="tf_btn tf-submit" type="submit"><?php echo esc_html(apply_filters("tf_car_search_form_submit_button_text", 'Search')); ?></button>
+                        <button class="tf_btn tf-submit" type="submit"><?php echo esc_html(apply_filters("tf_car_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
                     </div>
 
                 </div>
@@ -944,6 +947,8 @@ class Car_Rental
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
+                            altInput: true,
+							altFormat: '<?php echo esc_html( $date_format ); ?>',
                             minDate: "today",
                             showMonths: $(window).width() >= 1240 ? 2 : 1,
 
@@ -962,25 +967,22 @@ class Car_Rental
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
+                            if (selectedDates.length >= 1) {
                                 if (selectedDates[0]) {
-                                    const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
+                                    const startDate = flatpickr.formatDate(selectedDates[0], "<?php echo esc_js( $date_format ); ?>");
                                     $("#tf-car-booking-form .tf_pickup_date").val(startDate);
                                 }
-                                if (selectedDates[1]) {
-                                    const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
-                                    $("#tf-car-booking-form .tf_dropoff_date").val(endDate);
+                                const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
+                                if (endDate) {
+                                    const formattedEndDate = flatpickr.formatDate(endDate, "<?php echo esc_js( $date_format ); ?>");
+                                    $("#tf-car-booking-form .tf_dropoff_date").val(formattedEndDate);
                                 }
                             }
                         }
-
-                    
-                       
-
                     });
                 })(jQuery);
             </script>
-<?php
+            <?php
         }
     }
 }

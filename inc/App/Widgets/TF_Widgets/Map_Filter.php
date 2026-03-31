@@ -236,12 +236,12 @@ class Map_Filter extends \WP_Widget {
 
                                                 if ( $post_type == 'tf_hotel' ) {
                                                     $hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
-                                                    if ( ! $hotel_meta["featured"] ) {
+                                                    if ( ! Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
                                                         continue;
                                                     }
 
                                                     $count ++;
-                                                    $map  = ! empty( $hotel_meta['map'] ) ? Helper::tf_data_types( $hotel_meta['map'] ) : '';
+                                                    $map  = Hotel::get_hotel_map_data( $hotel_meta );
 
                                                     $min_price_arr = hotelPricing::instance(get_the_ID())->get_min_price();
                                                     $min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
@@ -451,17 +451,19 @@ class Map_Filter extends \WP_Widget {
                                                     echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                                 }
                                             }
+                                            $loop->rewind_posts();
+
                                             while ( $loop->have_posts() ) {
                                                 $loop->the_post();
 
                                                 if ( $post_type == 'tf_hotel' ) {
                                                     $hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
-                                                    if ( !empty($hotel_meta["featured"]) && $hotel_meta["featured"] ) {
+                                                    if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
                                                         continue;
                                                     }
 
                                                     $count ++;
-                                                    $map  = ! empty( $hotel_meta['map'] ) ? Helper::tf_data_types( $hotel_meta['map'] ) : '';
+                                                    $map  = Hotel::get_hotel_map_data( $hotel_meta );
 
                                                     $min_price_arr = hotelPricing::instance(get_the_ID())->get_min_price();
                                                     $min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;

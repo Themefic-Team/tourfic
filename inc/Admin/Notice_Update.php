@@ -54,6 +54,7 @@ class Notice_Update extends \Tourfic\Core\TF_Notice {
                         $(document).on('click', '.tf-critical-update-notice .notice-dismiss', function( event ) {
                             data = {
                                 action : 'tf_disable_critical_update_admin_notice',
+                                nonce : '<?php echo esc_js( wp_create_nonce( $this->tf_notice_ajax_nonce_action() ) ); ?>',
                             };
 
                             $.post(ajaxurl, data, function (response) {

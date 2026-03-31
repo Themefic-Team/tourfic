@@ -41,6 +41,7 @@ class Room_Notice extends \Tourfic\Core\TF_Notice {
                         $(document).on('click', '.tf-critical-update-notice .notice-dismiss', function( event ) {
                             data = {
                                 action : 'tf_disable_critical_update_admin_notice',
+                                nonce : '<?php echo esc_js( wp_create_nonce( $this->tf_notice_ajax_nonce_action() ) ); ?>',
                             };
 
                             $.post(ajaxurl, data, function (response) {
@@ -53,9 +54,11 @@ class Room_Notice extends \Tourfic\Core\TF_Notice {
 	}
 
 	function tf_disable_critical_update_admin_notice() {
-        update_option( $this->notice_id, 1 );
-        wp_die();
-    }
+		$this->tf_validate_notice_ajax_request();
+
+		update_option( $this->notice_id, 1 );
+		wp_die();
+	}
 
 	function tf_in_plugin_update_message( $data, $response ){}
 }

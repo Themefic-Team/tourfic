@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.20.3
+Stable tag: 2.21.7
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -35,6 +35,9 @@ As a comprehensive solution for travel booking on WordPress, Tourfic encompasses
 Our team has released two dedicated WordPress themes, [Travelfic & Hotel Booking](https://theme-demo.themefic.com/), exclusively for Tourfic users. They offer multiple demo versions for free. Check it [here](https://wordpress.org/themes/travelfic/) & [here](https://wordpress.org/themes/ultimate-hotel-booking/).
 
 = 🎉  HOTEL BOOKING & ROOM MANAGEMENT =
+* Find a Single Room
+* Reserve a Single Room
+* House Rules Setup
 * Add Unlimited Hotels
 * Add Unlimited Rooms (Up to 5 on Free Version)
 * Set room price per Room
@@ -193,12 +196,14 @@ In short, Tourfic includes all the features for a multi-vendor hotel, travel, Ap
 * TravelPayouts Affiliate Program
 
 = 🎉 PAGE BUILDER SUPPORT (PRO) =
+* Added: Elementor support for Room Archive pages.
 * Added: Elementor support for Tour Archive pages.
 * Added: Elementor support for Hotel Archive pages.
 * Added: Elementor support for Apartment Archive pages.
 * Added: Elementor support for Car Archive pages.
 * Added: Elementor support for single Tour pages.
 * Added: Elementor support for single Hotel pages.
+* Added: Elementor support for single Room pages.
 * Added: Elementor support for single Apartment pages.
 * Added: Elementor support for single Car pages.
 
@@ -412,38 +417,39 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.20.3 – January 22, 2026 =
+= 2.21.7 – Mar 29, 2026 =
 
-- Fixed: Issue with enquiry modal display.
-- Fixed: Tour itinerary map not rendering correctly.
-- Fixed: Incorrect apartment pricing issue.
+- Tweak: Backend booking and email functionality.
+- Improved: Hooks and overall system stability.
 
-= 2.20.2 – January 16, 2026 =
+= 2.21.6 – Mar 28, 2026 =
 
-- Added: Enhanced security feature.
+- Improved: UI/UX updated for the car rental.
+- Improved: UI/UX updated for the car discount price.
 
-= 2.20.1 – January 16, 2026 =
+= 2.21.5 – Mar 26, 2026 =
 
-- Updated: readme.txt updated
+- New: CarPlay / Android Auto support and dynamic car filters.
+- Improved: Simplified connectivity filter and optimized assets.
+- Fixed: Date handling, booking popup, pricing sync, and tooltip display issues.
+- Fixed: Minor UI issues, including labels and pricing display.
+- Security: Restricted gallery access for non-public posts.
 
-= 2.20.0 – January 16, 2026 =
+= 2.21.4 – Mar 18, 2026 =
 
-- Info: System stability has been improved.
-
-= 2.19.0 – January 13, 2026 =
-
-- Improved: Taxonomy archives are now enabled for taxonomies.
-- Fixed: Switcher issue resolved.
-
-= 2.18.12 – January 05, 2026 =
-
-- Tweak: Improved apartment search functionality.
-- Tweak: Booking email sending functionality.
-- Fixed: Migrator fatal error. 
-- Fixed: Tour price calculation issue.
-- Fixed: Offline payment tour voucher issue.
-- Fixed: Wishlist issue for logged-out users.
-- Fixed: Enquiry disable option issue.
+- New: Apartment deposit settings with partial payment support
+- New: Apartment booking without payment option
+- New: Dynamic frontend availability for services
+- New: Sidebar details added to Tourfic settings page
+- Improved: Booking and pricing for tours, hotels, apartments, and cars
+- Improved: Archive filtering, listing accuracy, and widget rendering
+- Improved: System stability, AJAX handling, and experience
+- Tweak: Apartment template alignment and popup UI
+- Tweak: Booking step visibility for no-payment mode
+- Tweak: Archive listing structure and featured loop behavior
+- Tweak: Car and tour filter compatibility and price range display
+- Fixed: Tour package pricing fallback in backend booking
+- Fixed: Zero-price handling and checkout-related issues
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 

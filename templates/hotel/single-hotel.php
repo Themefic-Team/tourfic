@@ -7,6 +7,7 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\Wishlist;
+use \Tourfic\Classes\Hotel\Hotel;
 
 if(wp_is_block_theme()){
     wp_head();
@@ -49,7 +50,7 @@ while ( have_posts() ) : the_post();
 	/**
 	 * Get hotel meta values
 	 */
-	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+	$meta = Hotel::get_normalized_hotel_meta( $post_id );
 
 	$disable_share_opt    = ! empty( $meta['h-share'] ) ? $meta['h-share'] : '';
 	$disable_review_sec   = ! empty( $meta['h-review'] ) ? $meta['h-review'] : '';
@@ -101,15 +102,18 @@ while ( have_posts() ) : the_post();
 	$features = ! empty( get_the_terms( $post_id, 'hotel_feature' ) ) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
 
 	// Location
+	$address           = '';
+	$address_latitude  = '';
+	$address_longitude = '';
+	$address_zoom      = '';
 
-	if( !empty($meta['map']) && Helper::tf_data_types($meta['map'])){
-		$address = !empty( Helper::tf_data_types($meta['map'])['address'] ) ? Helper::tf_data_types($meta['map'])['address'] : '';
-
-		$address_latitude = !empty( Helper::tf_data_types($meta['map'])['latitude'] ) ? Helper::tf_data_types($meta['map'])['latitude'] : '';
-		$address_longitude = !empty( Helper::tf_data_types($meta['map'])['longitude'] ) ? Helper::tf_data_types($meta['map'])['longitude'] : '';
-		$address_zoom = !empty( Helper::tf_data_types($meta['map'])['zoom'] ) ? Helper::tf_data_types($meta['map'])['zoom'] : '';
-
-    }
+	$map = Hotel::get_hotel_map_data( $meta );
+	if ( ! empty( $map ) ) {
+		$address           = ! empty( $map['address'] ) ? $map['address'] : '';
+		$address_latitude  = ! empty( $map['latitude'] ) ? $map['latitude'] : '';
+		$address_longitude = ! empty( $map['longitude'] ) ? $map['longitude'] : '';
+		$address_zoom      = ! empty( $map['zoom'] ) ? $map['zoom'] : '';
+	}
 
 	// Hotel Detail
 	$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';

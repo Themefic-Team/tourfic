@@ -130,7 +130,8 @@ defined( 'ABSPATH' ) || exit;
                                             the_post();
 
                                             $meta = get_post_meta(get_the_ID(), 'tf_apartment_opt', true);
-                                            if (!$meta["apartment_as_featured"]) {
+                                            $is_apartment_featured = is_array( $meta ) && ! empty( $meta['apartment_as_featured'] );
+                                            if ( ! $is_apartment_featured ) {
                                                 continue;
                                             }
 
@@ -202,11 +203,15 @@ defined( 'ABSPATH' ) || exit;
                                             }
                                             echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                         }
+
+                                        rewind_posts();
+
                                         while (have_posts()) {
                                             the_post();
 
                                             $meta = get_post_meta(get_the_ID(), 'tf_apartment_opt', true);
-                                            if ($meta["apartment_as_featured"]) {
+                                            $is_apartment_featured = is_array( $meta ) && ! empty( $meta['apartment_as_featured'] );
+                                            if ( $is_apartment_featured ) {
                                                 continue;
                                             }
 
