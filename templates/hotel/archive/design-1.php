@@ -104,21 +104,26 @@ use \Tourfic\Classes\Hotel\Hotel;
                     <div class="archive_ajax_result tf-item-cards tf-flex <?php echo $tf_defult_views=="list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?>">
 
                     <?php
-					if ( have_posts() ) {
-						while ( have_posts() ) {
-							the_post();
-							$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
-							if ( !empty( $hotel_meta[ "featured" ] ) && $hotel_meta[ "featured" ] == 1 ) {
-								Hotel::tf_hotel_archive_single_item();
+						if ( have_posts() ) {
+							while ( have_posts() ) {
+								the_post();
+								$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
+								$is_hotel_featured = Hotel::is_featured_hotel_meta( $hotel_meta );
+								if ( $is_hotel_featured ) {
+									Hotel::tf_hotel_archive_single_item();
+								}
 							}
-						}
-						while ( have_posts() ) {
-							the_post();
-							$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
-							if ( empty($hotel_meta[ "featured" ]) ) {
-								Hotel::tf_hotel_archive_single_item();
+
+							rewind_posts();
+
+							while ( have_posts() ) {
+								the_post();
+								$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
+								$is_hotel_featured = Hotel::is_featured_hotel_meta( $hotel_meta );
+								if ( ! $is_hotel_featured ) {
+									Hotel::tf_hotel_archive_single_item();
+								}
 							}
-						}
 					} else {
 						echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Tours Found!", "tourfic"). '</div>';
 					}

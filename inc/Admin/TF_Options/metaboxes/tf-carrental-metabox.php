@@ -130,6 +130,12 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'label'    => esc_html__( 'Auto Transmission', 'tourfic' ),
 					'subtitle' => esc_html__( 'Enable if your car has automatic transmission.', 'tourfic' ),
 				),
+				array(
+					'id'       => 'carplay_android_auto',
+					'type'     => 'switch',
+					'label'    => esc_html__( 'Apple CarPlay / Android Auto', 'tourfic' ),
+					'subtitle' => esc_html__( 'Enable if this car supports Apple CarPlay or Android Auto.', 'tourfic' ),
+				),
 				
 				array(
 					'id'         => 'brands',

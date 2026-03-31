@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.21.1
+Stable tag: 2.21.7
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -417,38 +417,39 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.21.1 – March 03, 2026 =
+= 2.21.7 – Mar 29, 2026 =
 
-- Fix: Design-4 room form spacing issue. (room-search)
-- Fix: Archive view titles escaping.
-- Fix: Apartment search excludes unavailable custom dates.
-- Fix: Same-day flatpickr range selections across booking.
-- Fix: Restore price filters on taxonomy pages.
-- Fix: Car rental pricing and validation messages translatable.
-- Tweak: Tour tab date labels updated to "Start & End Dates". (tour-search)
-- Tweak: Room options inner layout width. (design-2)
+- Tweak: Backend booking and email functionality.
+- Improved: Hooks and overall system stability.
 
-= 2.21.0 – February 23, 2026 =
+= 2.21.6 – Mar 28, 2026 =
 
-- New: Added room archive, search, and taxonomy archive support.
-- New: Added Room Type taxonomy.
-- New: Added shortcodes – Search Form, Reviews, Rooms, Recent Rooms, and Room Types.
-- New: Added Elementor Template Builder support.
-- New: Added House Rules section on single room pages.
-- New: Added Review section on single room pages.
-- New: Added Cancellation Policy section on single room pages.
-- Improvement: Updated Room Options design.
-- Improvement: License Stability has been improved.
+- Improved: UI/UX updated for the car rental.
+- Improved: UI/UX updated for the car discount price.
 
-= 2.20.5 – February 10, 2026 =
+= 2.21.5 – Mar 26, 2026 =
 
-- Improvement: Added Forgot Password to the login form.
-- Improvement: String Translation support.
-- Fixed: Search form date issue has been resolved.
-- Fixed: Tour Google Maps issue has been resolved.
-- Fixed: Tour starting price display issue has been resolved.
-- Fixed: Tour date on mobile issue has been resolved.
-- Fixed: Backend tour booking voucher generation issue resolved.
+- New: CarPlay / Android Auto support and dynamic car filters.
+- Improved: Simplified connectivity filter and optimized assets.
+- Fixed: Date handling, booking popup, pricing sync, and tooltip display issues.
+- Fixed: Minor UI issues, including labels and pricing display.
+- Security: Restricted gallery access for non-public posts.
+
+= 2.21.4 – Mar 18, 2026 =
+
+- New: Apartment deposit settings with partial payment support
+- New: Apartment booking without payment option
+- New: Dynamic frontend availability for services
+- New: Sidebar details added to Tourfic settings page
+- Improved: Booking and pricing for tours, hotels, apartments, and cars
+- Improved: Archive filtering, listing accuracy, and widget rendering
+- Improved: System stability, AJAX handling, and experience
+- Tweak: Apartment template alignment and popup UI
+- Tweak: Booking step visibility for no-payment mode
+- Tweak: Archive listing structure and featured loop behavior
+- Tweak: Car and tour filter compatibility and price range display
+- Fixed: Tour package pricing fallback in backend booking
+- Fixed: Zero-price handling and checkout-related issues
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 

@@ -394,5 +394,128 @@
                 }
             }
         }
+
+        &__legacy,
+        &__two{
+            .tf-withoutpayment-booking,
+            .tf-withoutpayment-booking-confirm{
+                .tf-withoutpayment-popup{
+                    background-color: $color-white;
+                    box-shadow: 0px 3px 60px 0px rgba(0, 0, 0, 0.10);
+
+                    .tf-booking-tabs{
+                        background-color: $color-white;
+                        border-bottom: 0.3px solid #CCCED1;
+
+                        .tf-booking-tab-menu{
+                            ul{
+                                background-color: $color-text;
+                                @media #{$max768}{
+                                    background: transparent;
+                                }
+
+                                li{
+                                    color: $color-white;
+                                    @media #{$max768}{
+                                        color: $color-text;
+                                    }
+
+                                    &.active{
+                                        background-color: $color-primary;
+                                        @media #{$max768}{
+                                            color: $color-white;
+                                        }
+
+                                        &::before{
+                                            background-color: transparent;
+                                        }
+                                    }
+
+                                    &.done{
+                                        background-color: $color-brand-lite;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .tf-booking-pagination{
+                        .tf-control-pagination{
+                            button{
+                                background-color: $color-primary;
+                            }
+
+                            a.tf-back-control{
+                                background-color: transparent;
+                                color: $color-primary;
+                                padding: 0;
+                                border: 0;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+// Ensure apartment popup gets the current Tour popup look regardless of parent template wrapper.
+.tf-apartment-booking-popup{
+    .tf-withoutpayment-popup{
+        background-color: $color-white;
+        box-shadow: 0px 3px 60px 0px rgba(0, 0, 0, 0.10);
+
+        .tf-booking-tabs{
+            background-color: $color-white;
+            border-bottom: 0.3px solid #CCCED1;
+
+            .tf-booking-tab-menu{
+                ul{
+                    background-color: $color-text;
+                    @media #{$max768}{
+                        background: transparent;
+                    }
+
+                    li{
+                        color: $color-white;
+                        @media #{$max768}{
+                            color: $color-text;
+                        }
+
+                        &.active{
+                            background-color: $color-primary;
+                            @media #{$max768}{
+                                color: $color-white;
+                            }
+
+                            &::before{
+                                background-color: transparent;
+                            }
+                        }
+
+                        &.done{
+                            background-color: $color-brand-lite;
+                        }
+                    }
+                }
+            }
+        }
+
+        .tf-booking-pagination{
+            .tf-control-pagination{
+                button{
+                    background-color: $color-primary;
+                }
+
+                a.tf-back-control{
+                    background-color: transparent;
+                    color: $color-primary;
+                    padding: 0;
+                    border: 0;
+                }
+            }
+        }
+
     }
 }

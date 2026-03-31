@@ -145,13 +145,167 @@
          * Ajax apartment booking
          * @author Foysal
          */
-        $('body').on('submit', 'form#tf-apartment-booking', function (e) {
-            e.preventDefault();
+        let activeApartmentBookingForm = null;
 
-            var $this = $(this);
+        function showApartmentBookingErrors(errors) {
+            if (errors && Array.isArray(errors)) {
+                errors.forEach(function (text) {
+                    notyf.error(text);
+                });
+            }
+        }
 
-            var formData = new FormData(this);
+        function setApartmentDepositValue($form, isDeposit) {
+            const value = isDeposit ? '1' : '0';
+            if ($form.find('.tf-apartment-deposit-value').length) {
+                $form.find('.tf-apartment-deposit-value').val(value);
+            } else {
+                $form.append('<input type="hidden" name="deposit" value="' + value + '" class="tf-apartment-deposit-value" />');
+            }
+        }
+
+        function showApartmentPopupLoader() {
+            const $loader = $('#tour_room_details_loader');
+            if ($loader.length) {
+                $loader.show();
+            }
+        }
+
+        function hideApartmentPopupLoader() {
+            const $loader = $('#tour_room_details_loader');
+            if ($loader.length) {
+                $loader.hide();
+            }
+        }
+
+        function resetApartmentPopupSteps($popup) {
+            if (!$popup.length) {
+                return;
+            }
+
+            $popup.find('.tf-booking-step').removeClass('active done');
+            $popup.find('.tf-booking-step:first').addClass('active');
+            $popup.find('.tf-booking-content').hide();
+            $popup.find('.tf-booking-content.show').show();
+            $popup.find('.tf-control-pagination').hide();
+            $popup.find('.tf-control-pagination.show').show();
+        }
+
+        function clearApartmentBookingConfirmFields($popup) {
+            if (!$popup.length) {
+                return;
+            }
+
+            $popup.find('[name^="booking_confirm["]').each(function () {
+                const $field = $(this);
+                const type = ($field.attr('type') || '').toLowerCase();
+
+                if (type === 'checkbox' || type === 'radio') {
+                    $field.prop('checked', false);
+                    return;
+                }
+
+                if ($field.is('select')) {
+                    $field.prop('selectedIndex', 0);
+                    return;
+                }
+
+                $field.val('');
+            });
+
+            $popup.find('.error-text').text('').removeClass('error-visible');
+        }
+
+        function validateApartmentBookingConfirmFields($popup) {
+            let hasErrors = false;
+            let firstErrorElement = null;
+            const requiredText = tf_params.field_required || 'This field is required.';
+            const checkedMap = {};
+
+            const $visibleContainer = $popup.find('.tf-booking-content:visible');
+            if (!$visibleContainer.length || !$visibleContainer.find('.tf-confirm-fields').length) {
+                return true;
+            }
+
+            $visibleContainer.find('.error-text').text('').removeClass('error-visible');
+
+            $visibleContainer.find('.tf-confirm-fields').each(function () {
+                $(this).find('input, select, textarea').each(function () {
+                    const $field = $(this);
+                    const required = String($field.attr('data-required') || '0') === '1';
+                    if (!required) {
+                        return;
+                    }
+
+                    const type = ($field.attr('type') || '').toLowerCase();
+                    if (type === 'radio' || type === 'checkbox') {
+                        const name = $field.attr('name') || '';
+                        if (!name || checkedMap[name]) {
+                            return;
+                        }
+                        checkedMap[name] = true;
+
+                        if ($visibleContainer.find(`input[name="${name}"]:checked`).length === 0) {
+                            hasErrors = true;
+                            const $errorContainer = $field.closest('.tf-confirm-fields').find('.error-text').first();
+                            $errorContainer.text(requiredText).addClass('error-visible');
+                            if (!firstErrorElement) {
+                                firstErrorElement = $field;
+                            }
+                        }
+                    } else if ($field.val() === '') {
+                        hasErrors = true;
+                        const $errorContainer = $field.siblings('.error-text');
+                        $errorContainer.text(requiredText).addClass('error-visible');
+                        if (!firstErrorElement) {
+                            firstErrorElement = $field;
+                        }
+                    }
+                });
+            });
+
+            if (hasErrors && firstErrorElement) {
+                $('html, body').animate({
+                    scrollTop: firstErrorElement.offset().top - 100
+                }, 300);
+                firstErrorElement.trigger('focus');
+                return false;
+            }
+
+            return true;
+        }
+
+        function appendApartmentBookingConfirmationData(formData, $popup) {
+            if (!$popup.length) {
+                return;
+            }
+
+            $popup.find('[name^="booking_confirm["]').each(function () {
+                const $field = $(this);
+                const name = $field.attr('name');
+                if (!name) {
+                    return;
+                }
+
+                const type = ($field.attr('type') || '').toLowerCase();
+                if ((type === 'checkbox' || type === 'radio') && !$field.is(':checked')) {
+                    return;
+                }
+
+                formData.append(name, $field.val());
+            });
+        }
+
+        function submitApartmentBooking($form, options = {}) {
+            const settings = $.extend({
+                fromPopup: false
+            }, options);
+            let keepPopupLoading = false;
+
+            const $popup = $('.tf-apartment-booking-popup');
+            const formData = new FormData($form[0]);
             formData.append('action', 'tf_apartment_booking');
+            appendApartmentBookingConfirmationData(formData, $popup);
 
             $.ajax({
                 type: 'post',
@@ -159,48 +313,191 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                beforeSend: function (data) {
-                    $this.block({
-                        message: null,
-                        overlayCSS: {
-                            background: "#fff",
-                            opacity: .5
-                        }
-                    });
-
-                    $('.tf-notice-wrapper').html("").hide();
+                beforeSend: function () {
+                    if (settings.fromPopup) {
+                        showApartmentPopupLoader();
+                        $popup.addClass('tf-is-processing');
+                    } else {
+                        $form.block({
+                            message: null,
+                            overlayCSS: {
+                                background: '#fff',
+                                opacity: 0.5
+                            }
+                        });
+                    }
+                    $('.tf-notice-wrapper').html('').hide();
                 },
-                complete: function (data) {
-                    $this.unblock();
+                complete: function () {
+                    if (settings.fromPopup) {
+                        if (keepPopupLoading) {
+                            return;
+                        }
+                        hideApartmentPopupLoader();
+                        $popup.removeClass('tf-is-processing');
+                    } else {
+                        $form.unblock();
+                    }
                 },
                 success: function (data) {
-                    $this.unblock();
-
-                    var response = JSON.parse(data);
+                    let response = {};
+                    try {
+                        response = JSON.parse(data);
+                    } catch (error) {
+                        response = { status: 'error', errors: [tf_params.something_went_wrong || 'Something went wrong.'] };
+                    }
 
                     if (response.status === 'error') {
-                        if (response.errors) {
-                            response.errors.forEach(function (text) {
-                                notyf.error(text);
-                            });
-                        }
-
+                        showApartmentBookingErrors(response.errors);
                         return false;
-                    } else {
+                    }
 
-                        if (response.redirect_to) {
-                            window.location.replace(response.redirect_to);
-                        } else {
-                            jQuery(document.body).trigger('added_to_cart');
+                    if (response.without_payment == 'true') {
+                        if (settings.fromPopup) {
+                            $popup.removeClass('show tf-is-processing');
                         }
+                        $('.tf-apartment-withoutpayment-booking-confirm').addClass('show');
+                        return;
+                    }
 
+                    if (response.redirect_to) {
+                        if (settings.fromPopup) {
+                            keepPopupLoading = true;
+                            showApartmentPopupLoader();
+                            $popup.addClass('tf-is-processing');
+                        }
+                        window.location.replace(response.redirect_to);
+                        return;
+                    } else {
+                        jQuery(document.body).trigger('added_to_cart');
+                        if (settings.fromPopup) {
+                            $popup.removeClass('show');
+                        }
                     }
                 },
                 error: function (data) {
                     console.log(data);
                 },
-
             });
+        }
+
+        function loadApartmentBookingPopupSummary($form) {
+            const $popup = $('.tf-apartment-booking-popup');
+            const formData = new FormData($form[0]);
+            formData.append('action', 'tf_apartment_booking_popup');
+            formData.append('_nonce', tf_params.nonce);
+
+            $.ajax({
+                type: 'post',
+                url: tf_params.ajax_url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    showApartmentPopupLoader();
+                },
+                complete: function () {
+                    hideApartmentPopupLoader();
+                },
+                success: function (data) {
+                    let response = {};
+                    try {
+                        response = JSON.parse(data);
+                    } catch (error) {
+                        response = { status: 'error', errors: [tf_params.something_went_wrong || 'Something went wrong.'] };
+                    }
+
+                    if (response.status === 'error') {
+                        showApartmentBookingErrors(response.errors);
+                        return false;
+                    }
+
+                    if (response.booking_summary && $popup.find('.tf-apartment-popup-summary').length) {
+                        $popup.find('.tf-apartment-popup-summary').html(response.booking_summary);
+                    }
+
+                    $popup.addClass('show');
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
+        function openApartmentBookingPopup($form) {
+            const $popup = $('.tf-apartment-booking-popup');
+
+            if (!$popup.length) {
+                submitApartmentBooking($form);
+                return;
+            }
+
+            activeApartmentBookingForm = $form;
+            resetApartmentPopupSteps($popup);
+            clearApartmentBookingConfirmFields($popup);
+
+            const isDeposit = $form.find('.tf-apartment-deposit-value').val() === '1';
+            if ($popup.find('.tf-apartment-popup-deposit-switch').length) {
+                $popup.find('.tf-apartment-popup-deposit-switch').prop('checked', isDeposit);
+            }
+
+            loadApartmentBookingPopupSummary($form);
+        }
+
+        $('body').on('submit', 'form#tf-apartment-booking', function (e) {
+            e.preventDefault();
+            openApartmentBookingPopup($(this));
+        });
+
+        $('body').on('change', '.tf-apartment-popup-deposit-switch', function () {
+            if (!activeApartmentBookingForm || !activeApartmentBookingForm.length) {
+                return;
+            }
+
+            setApartmentDepositValue(activeApartmentBookingForm, $(this).is(':checked'));
+            loadApartmentBookingPopupSummary(activeApartmentBookingForm);
+        });
+
+        $('body').on('click', '.tf-apartment-popup-continue', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if ($('.tf-apartment-booking-popup').hasClass('tf-is-processing')) {
+                return;
+            }
+
+            if (!activeApartmentBookingForm || !activeApartmentBookingForm.length) {
+                return;
+            }
+
+            const $popup = $('.tf-apartment-booking-popup');
+            if (!validateApartmentBookingConfirmFields($popup)) {
+                return;
+            }
+
+            const isDeposit = $('.tf-apartment-popup-deposit-switch').is(':checked');
+            setApartmentDepositValue(activeApartmentBookingForm, isDeposit);
+            submitApartmentBooking(activeApartmentBookingForm, {
+                fromPopup: true
+            });
+        });
+
+        $('body').on('click touchstart', '.tf-apartment-booking-popup .tf-booking-times span', function (e) {
+            e.preventDefault();
+            const $popup = $('.tf-apartment-booking-popup');
+            $popup.removeClass('show tf-is-processing');
+            $('.tf-apartment-withoutpayment-booking-confirm').removeClass('show');
+            resetApartmentPopupSteps($popup);
+            clearApartmentBookingConfirmFields($popup);
+        });
+
+        $('body').on('click touchstart', '.tf-apartment-withoutpayment-booking-confirm .tf-booking-times span', function (e) {
+            e.preventDefault();
+            $('.tf-apartment-withoutpayment-booking-confirm').removeClass('show');
+            const $popup = $('.tf-apartment-booking-popup');
+            $popup.removeClass('show tf-is-processing');
+            resetApartmentPopupSteps($popup);
+            clearApartmentBookingConfirmFields($popup);
         });
 
 
@@ -591,6 +888,7 @@
     });
 
 })(jQuery, window);
+
 })();
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
@@ -1011,9 +1309,9 @@
 
             if( response.includes(true) ){
                 if( attrCount > 1 ){
-                    notyf.error('( * ) fields are required');
+                    notyf.error(tf_params.fields_required_msg);
                 } else {
-                    notyf.error('( * ) field is required');
+                    notyf.error(tf_params.field_required);
                 }
                 return true;
             }
@@ -1452,7 +1750,7 @@
             handleBookingInputChange();
         });
 
-        function handleBookingInputChange() {
+        function handleBookingInputChange(showLoader = true) {
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
                 return $(this).val();
             }).get();
@@ -1491,7 +1789,9 @@
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
-                    $('.tf-date-select-box').addClass('tf-box-loading');
+                    if (showLoader) {
+                        $('.tf-date-select-box').addClass('tf-box-loading');
+                    }
                 },
                 success: function (response) {
                     $('.tf-cancellation-box').html('');
@@ -1504,11 +1804,21 @@
                             $('.tf-cancellation-box').html(response.data.cancellation);
                             $('.tf-cancellation-box').show();
                         }
+                    }
+                },
+                complete: function () {
+                    if (showLoader) {
                         $('.tf-date-select-box').removeClass('tf-box-loading');
                     }
                 }
             });
         };
+
+        $(win).on('load', function () {
+            if ($('.tf-car-booking-form').length) {
+                handleBookingInputChange(false);
+            }
+        });
 
         /*
         * Car menu scroll
@@ -3238,6 +3548,9 @@ function convertTo24HourFormat(timeStr) {
                         if($('.tf-search-date-wrapper')){
                             $('.tf-search-date-wrapper').removeClass('tf-box-loading');
                         }
+                        if($('.tf-max-capacity-count')){
+                            $('.tf-max-capacity-count').html(response.data.max_capacity); 
+                        }
                     }
                 }
             });
@@ -3695,6 +4008,7 @@ function convertTo24HourFormat(timeStr) {
     });
 
 })(jQuery, window);
+
 })();
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
@@ -3734,7 +4048,7 @@ function convertTo24HourFormat(timeStr) {
         */
        
         if( $(".widget_tf_price_filters").length > 0 || $("#tf-booking-search-tabs").length > 0 ){
-console.log('fsdd');
+
             let urlParams = new URLSearchParams(window.location.search);
             let post_type = urlParams.get('type');
             if(!post_type){
@@ -3753,7 +4067,6 @@ console.log('fsdd');
                         post_type: post_type
                     },
                     success: function (response) {
-                        console.log($(".tf-room-filter-range").length);
                         if (response.success) {
                             if( $(".tf-tour-filter-range").length > 0 || $(".tf-tour-result-price-range").length > 0 ){
                                 let tf_tour_range_options = {
@@ -3809,10 +4122,6 @@ console.log('fsdd');
                                     min: parseInt(response.data?.tf_tours?.min),
                                     max: parseInt(response.data?.tf_tours?.max)
                                 };
-                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
-                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
-                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
-                                }
                             }
                             if( $(".tf-hotel-filter-range").length > 0 || $(".tf-hotel-result-price-range").length > 0 ){
                                 let tf_hotel_range_options = {
@@ -3868,10 +4177,6 @@ console.log('fsdd');
                                     min: parseInt(response.data?.tf_hotel?.min),
                                     max: parseInt(response.data?.tf_hotel?.max)
                                 };
-                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
-                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
-                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
-                                }
                             }
                             if( $(".tf-apartment-filter-range").length > 0 || $(".tf-apartment-result-price-range").length > 0 ){
                                 let tf_apartment_range_options = {
@@ -3921,10 +4226,6 @@ console.log('fsdd');
                                     min: parseInt(response.data?.tf_apartment?.min),
                                     max: parseInt(response.data?.tf_apartment?.max)
                                 };
-                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
-                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
-                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
-                                }
                             }
                             if( $(".tf-car-result-price-range").length > 0 || $(".tf-car-result-seat-range").length > 0 ){
                                 var tf_search_page_params = new window.URLSearchParams(window.location.search);
@@ -3956,10 +4257,6 @@ console.log('fsdd');
                                     min: parseInt(response.data?.tf_carrental?.min),
                                     max: parseInt(response.data?.tf_carrental?.max)
                                 };
-                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
-                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
-                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
-                                }
                 
                                 var tf_search_page_params = new window.URLSearchParams(window.location.search);
                                 let tf_car_search_seat_range = {
@@ -4010,8 +4307,7 @@ console.log('fsdd');
                                         makeFilter();
                                     }
                                 };
-                                console.log(response.data?.tf_room?.min);
-                                console.log(response.data?.tf_room?.max);
+                                
                                 if ( response.data?.tf_room?.min != 0 && response.data?.tf_room?.max != 0) {
                                     $('.tf-room-filter-range').alRangeSlider(tf_room_range_options);
                                 }
@@ -4046,10 +4342,6 @@ console.log('fsdd');
                                     min: parseInt(response.data?.tf_room?.min),
                                     max: parseInt(response.data?.tf_room?.max)
                                 };
-                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
-                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
-                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
-                                }
                             }
                         }
                     }
@@ -4086,7 +4378,6 @@ console.log('fsdd');
         var filter_xhr;
         // Creating a function for reuse this filter in any where we needs.
         const makeFilter = (page = 1, mapCoordinates = []) => {
-            console.log($('#check-in-out-date').val());
             var dest = $('#tf-place').val();
             var page = page;
             var adults = $('#adults').val();
@@ -4118,6 +4409,9 @@ console.log('fsdd');
             let category = termIdsByFeildName('car_category');
             let fuel_type = termIdsByFeildName('car_fueltype');
             let engine_year = termIdsByFeildName('car_engine_year');
+            let car_brand = termIdsByFeildName('car_brand');
+            let car_transmission = termIdsByFeildName('car_transmission');
+            let carplay_android_auto = termIdsByFeildName('carplay_android_auto_filter');
             let min_seat = $('.widget_tf_seat_filters input[name="from"]').val();
             let max_seat = $('.widget_tf_seat_filters input[name="to"]').val();
             let same_location = $('input[name="same_location"]:checked').val();
@@ -4156,6 +4450,9 @@ console.log('fsdd');
             formData.append('category', category);
             formData.append('fuel_type', fuel_type);
             formData.append('engine_year', engine_year);
+            formData.append('car_brand', car_brand);
+            formData.append('car_transmission', car_transmission);
+            formData.append('carplay_android_auto', carplay_android_auto);
             formData.append('pickup', pickup_slug);
             formData.append('dropoff', dropoff_slug);
             formData.append('pickup_date', pickup_date);
@@ -4292,7 +4589,7 @@ console.log('fsdd');
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '.widget_tf_price_filters input[name="from"], .widget_tf_price_filters input[name="to"], [name*=tf_filters],[name*=tf_hotel_types],[name*=tf_room_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year]', function () {
+        $(document).on('change', '.widget_tf_price_filters input[name="from"], .widget_tf_price_filters input[name="to"], [name*=tf_filters],[name*=tf_hotel_types],[name*=tf_room_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year],[name*=car_brand],[name*=car_transmission],[name*=carplay_android_auto_filter]', function () {
             if ($(".filter-reset-btn").length > 0) {
                 $(".filter-reset-btn").show();
             }
@@ -4354,7 +4651,8 @@ console.log('fsdd');
             e.preventDefault();
 
             // Reset checkboxes
-            $('[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year]').prop('checked', false);
+            $('[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year],[name*=car_brand],[name*=car_transmission],[name*=carplay_android_auto_filter]').prop('checked', false);
+            $('[name*=car_brand],[name*=car_transmission],[name*=carplay_android_auto_filter]').closest('.tf-filter-item').removeClass('active');
             
             // Reset price sliders
             if ($('.tf-hotel-filter-range').length > 0) {
@@ -5644,9 +5942,19 @@ console.log('fsdd');
 
         /* see more checkbox filter end */
 
-        //active checkbox bg
-        $('.tf_widget input').on('click', function () {
-            $(this).parent().parent().toggleClass('active');
+        // Sync item active state with checked inputs.
+        $(document).on('change', '.tf_widget input', function () {
+            let $input = $(this);
+            if ($input.is(':radio')) {
+                let name = $input.attr('name');
+                if (name) {
+                    $(`.tf_widget input[name="${name}"]`).each(function () {
+                        $(this).closest('.tf-filter-item').toggleClass('active', $(this).is(':checked'));
+                    });
+                }
+            } else {
+                $input.closest('.tf-filter-item').toggleClass('active', $input.is(':checked'));
+            }
         });
 
         /**
@@ -5801,34 +6109,44 @@ console.log('fsdd');
             if (tf_hasErrorsFlag) {
                 return false;
             }
-            let active_steps = $('.tf_popup_stpes').val();
-            let stepsArray = active_steps.split(',').map(Number);
-            let currentStep = parseInt($(this).attr("data-step"));
+            const $popup = $(this).closest('.tf-withoutpayment-popup');
+            if (!$popup.length) {
+                return false;
+            }
+
+            let active_steps = $popup.find('.tf_popup_stpes').first().val() || '';
+            let stepsArray = active_steps.split(',').map(Number).filter(Boolean);
+            let currentStep = parseInt($(this).attr("data-step"), 10);
 
             let currentIndex = stepsArray.indexOf(currentStep);
             let step = stepsArray[currentIndex + 1];
 
-            if (step > 1) {
+            if (step && step > 1) {
                 for (let i = 1; i <= step; i++) {
-                    $('.tf-booking-step-' + i).removeClass("active");
-                    $('.tf-booking-step-' + (i - 1)).addClass("done");
+                    $popup.find('.tf-booking-step-' + i).removeClass("active");
+                    $popup.find('.tf-booking-step-' + (i - 1)).addClass("done");
                 }
-                $('.tf-booking-step-' + step).addClass("active");
-                $('.tf-booking-content').hide();
-                $('.tf-booking-content-' + step).fadeIn(300);
+                $popup.find('.tf-booking-step-' + step).addClass("active");
+                $popup.find('.tf-booking-content').hide();
+                $popup.find('.tf-booking-content-' + step).fadeIn(300);
 
-                $('.tf-control-pagination').hide();
-                $('.tf-pagination-content-' + step).fadeIn(300);
+                $popup.find('.tf-control-pagination').hide();
+                $popup.find('.tf-pagination-content-' + step).fadeIn(300);
             }
         });
 
         // Navigation Back
         $('body').on('click', '.tf-step-back', function (e) {
             e.preventDefault();
-            
-            let active_steps = $('.tf_popup_stpes').val();
-            let stepsArray = active_steps.split(',').map(Number);
-            let currentStep = parseInt($(this).attr("data-step"));
+
+            const $popup = $(this).closest('.tf-withoutpayment-popup');
+            if (!$popup.length) {
+                return false;
+            }
+
+            let active_steps = $popup.find('.tf_popup_stpes').first().val() || '';
+            let stepsArray = active_steps.split(',').map(Number).filter(Boolean);
+            let currentStep = parseInt($(this).attr("data-step"), 10);
 
             // Find the previous available step from active_steps
             let currentIndex = stepsArray.indexOf(currentStep);
@@ -5836,26 +6154,26 @@ console.log('fsdd');
             
             // let step = $(this).attr("data-step");
             if (step == 1) {
-                $('.tf-booking-step').removeClass("active");
-                $('.tf-booking-step').removeClass("done");
-                $('.tf-booking-step-' + step).addClass("active");
-                $('.tf-booking-content').hide();
-                $('.tf-booking-content-' + step).fadeIn(300);
+                $popup.find('.tf-booking-step').removeClass("active");
+                $popup.find('.tf-booking-step').removeClass("done");
+                $popup.find('.tf-booking-step-' + step).addClass("active");
+                $popup.find('.tf-booking-content').hide();
+                $popup.find('.tf-booking-content-' + step).fadeIn(300);
 
-                $('.tf-control-pagination').hide();
-                $('.tf-pagination-content-' + step).fadeIn(300);
+                $popup.find('.tf-control-pagination').hide();
+                $popup.find('.tf-pagination-content-' + step).fadeIn(300);
             }
             if (step > 1) {
                 let next_step = parseInt(step) + 1;
-                $('.tf-booking-step-' + next_step).removeClass("active");
-                $('.tf-booking-step-' + step).addClass("active");
-                $('.tf-booking-step-' + step).removeClass("done");
-                $('.tf-booking-step-' + next_step).removeClass("done");
+                $popup.find('.tf-booking-step-' + next_step).removeClass("active");
+                $popup.find('.tf-booking-step-' + step).addClass("active");
+                $popup.find('.tf-booking-step-' + step).removeClass("done");
+                $popup.find('.tf-booking-step-' + next_step).removeClass("done");
 
-                $('.tf-booking-content').hide();
-                $('.tf-booking-content-' + step).fadeIn(300);
-                $('.tf-control-pagination').hide();
-                $('.tf-pagination-content-' + step).fadeIn(300);
+                $popup.find('.tf-booking-content').hide();
+                $popup.find('.tf-booking-content-' + step).fadeIn(300);
+                $popup.find('.tf-control-pagination').hide();
+                $popup.find('.tf-pagination-content-' + step).fadeIn(300);
             }
         });
 
@@ -6325,7 +6643,7 @@ console.log('fsdd');
 
             let guest = adults + children + infant;
 
-            guest = guest < 10 ? '0' + guest : guest;
+            guest = guest < 10 ? guest : guest;
 
             $form.find('span.tf-room-guest').text(guest);
 
@@ -6347,7 +6665,7 @@ console.log('fsdd');
 
                 let guest = adults + children + infant;
 
-                guest = guest < 10 ? '0' + guest : guest;
+                guest = guest < 10 ? guest : guest;
 
                 $form.find('span.tf-room-guest').text(guest);
             });
@@ -6356,13 +6674,13 @@ console.log('fsdd');
 
 
         $(document).on("mouseup", function (e) {
-            var container = $(".tf-single-template__two .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap");
+            var container = $(".tf-single-template__two .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap, .tf-shortcode-design-5 .tf_acrselection-wrap");
             if (!container.is(e.target) && container.has(e.target).length === 0) {
-                $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap").removeClass("tf-show");
+                $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap,.tf-shortcode-design-5 .tf_acrselection-wrap").removeClass("tf-show");
             }
         });
-        $(".tf-single-template__two .tf-booking-form-guest-and-room, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room, .tf-archive-template__one .tf-booking-adult-child-infant").on("click", function () {
-            $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap").addClass("tf-show");
+        $(".tf-single-template__two .tf-booking-form-guest-and-room, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room, .tf-archive-template__one .tf-booking-adult-child-infant, .tf-shortcode-design-5 .tf-booking-adult-child-infant").on("click", function () {
+            $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-booking-form__style-2 .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap, .tf-shortcode-design-5 .tf_acrselection-wrap").addClass("tf-show");
         });
 
         $(".tf-single-template__two .tf-review-open").on("click", function () {
@@ -6973,6 +7291,7 @@ jQuery(".acr-dec").on("click", function() {
     let inputField = jQuery(".tf-search__form__field__input");
     inputField.trigger("input");
 });
+
 })();
 
 /******/ })()

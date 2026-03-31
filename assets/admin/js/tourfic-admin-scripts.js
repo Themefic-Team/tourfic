@@ -196,6 +196,9 @@
         //documentation link open in new tab
         $('.tf-go-docs').parent().attr('target', '_blank');
 
+        //pricing link open in new tab
+        $('#toplevel_page_tf_settings a[href*="tourfic.com/pricing"]').attr('target', '_blank');
+
         /*
         * Author @Jahid
         * Tour Booking Status
@@ -4146,12 +4149,12 @@ jQuery(function ($) {
                     } else {
                         if(event.extendedProps.options_count != 0) {
                             for (var i = 0; i <= event.extendedProps.options_count - 1; i++) {
-                                $("[name='tf_option_min_person_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_min_person_" + i]);
-                                $("[name='tf_option_max_person_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_max_person_" + i]);
-                                $("[name='tf_option_group_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_group_price_" + i]);
-                                $("[name='tf_option_adult_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_adult_price_" + i]);
-                                $("[name='tf_option_child_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_child_price_" + i]);
-                                $("[name='tf_option_infant_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_infant_price_" + i]);
+                                $("[name='tf_option_min_person_" + i + "']", self.tourCalData).val(event.extendedProps["tf_option_min_person_" + i]);
+                                $("[name='tf_option_max_person_" + i + "']", self.tourCalData).val(event.extendedProps["tf_option_max_person_" + i]);
+                                $("[name='tf_option_group_price_" + i + "']", self.tourCalData).val(event.extendedProps["tf_option_group_price_" + i]);
+                                $("[name='tf_option_adult_price_" + i + "']", self.tourCalData).val(event.extendedProps["tf_option_adult_price_" + i]);
+                                $("[name='tf_option_child_price_" + i + "']", self.tourCalData).val(event.extendedProps["tf_option_child_price_" + i]);
+                                $("[name='tf_option_infant_price_" + i + "']", self.tourCalData).val(event.extendedProps["tf_option_infant_price_" + i]);
 
                                 const discountData = event.extendedProps["tf_option_group_discount_" + i];
                                 let allGroupDiscountRepeaterHTML = '';
@@ -4273,7 +4276,7 @@ jQuery(function ($) {
                 self.container = jQuery(container);
                 self.calendar = container.querySelector('.tf-tour-cal');
                 self.tourCalData = $('.tf-tour-cal-field', self.container);
-                setTourCheckInOut('', '', self.tourCalData);
+                setTourCurrentAvailabilityState(self.tourCalData);
                 self.initCalendar();
             }
             this.initCalendar = function () {
@@ -4287,6 +4290,72 @@ jQuery(function ($) {
         function setTourCheckInOut(check_in, check_out, tourCalData) {
             $('.tf_tour_check_in', tourCalData).val(check_in);
             $('.tf_tour_check_out', tourCalData).val(check_out);
+        }
+
+        function getTourAvailabilityEntry(tourCalData) {
+            const tourWrap = $(tourCalData).closest('.tf-tour-cal-wrap');
+            const availabilityRaw = tourWrap.find('.tour_availability').val();
+            if (!availabilityRaw) {
+                return null;
+            }
+
+            let availabilityData;
+            try {
+                availabilityData = JSON.parse(availabilityRaw);
+            } catch (error) {
+                return null;
+            }
+
+            if (!availabilityData || typeof availabilityData !== 'object') {
+                return null;
+            }
+
+            const getTimestamp = (dateString) => {
+                const parsed = Date.parse(String(dateString || '').replace(/\//g, '-'));
+                return Number.isNaN(parsed) ? 0 : parsed;
+            };
+
+            const entries = Object.values(availabilityData).filter((item) => {
+                return item && item.check_in && item.check_out;
+            }).sort((a, b) => {
+                const aStart = getTimestamp(a.check_in);
+                const aEnd = getTimestamp(a.check_out);
+                const bStart = getTimestamp(b.check_in);
+                const bEnd = getTimestamp(b.check_out);
+                const aDuration = Math.max(aEnd - aStart, 0);
+                const bDuration = Math.max(bEnd - bStart, 0);
+
+                if (bDuration !== aDuration) {
+                    return bDuration - aDuration;
+                }
+
+                if (aStart !== bStart) {
+                    return aStart - bStart;
+                }
+
+                return bEnd - aEnd;
+            });
+
+            if (!entries.length) {
+                return null;
+            }
+
+            return entries[0];
+        }
+
+        function setTourCurrentAvailabilityState(tourCalData) {
+            const selectedEntry = getTourAvailabilityEntry(tourCalData);
+
+            if (!selectedEntry) {
+                setTourCheckInOut('', '', tourCalData);
+                return;
+            }
+
+            setTourCheckInOut(selectedEntry.check_in, selectedEntry.check_out, tourCalData);
+
+            if (selectedEntry.status) {
+                $("[name='tf_tour_status']", tourCalData).val(selectedEntry.status);
+            }
         }
 
         function tourResetForm(tourCalData) {
@@ -6058,7 +6127,19 @@ var frame, gframe;
 * Report Chart
 */
 
+const legendSpacingPlugin = {
+    id: 'legendSpacing',
+    beforeInit(chart) {
+        const fit = chart.legend.fit;
+        chart.legend.fit = function fitWithSpacing() {
+            fit.bind(chart.legend)();
+            this.height += 20;
+        };
+    }
+};
+
 (function ($) {
+    let tfChart = null;
     $(document).ready(function () {
         if (tf_options.tf_chart_enable == 1) {
             var ctx = document.getElementById('tf_months'); // node
@@ -6066,21 +6147,27 @@ var frame, gframe;
             var ctx = $('#tf_months'); // jQuery instance
             var ctx = 'tf_months'; // element id
 
-            var chart = new Chart(ctx, {
+            if (tfChart) {
+                tfChart.destroy();
+            }
+
+            tfChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: tf_options.months,
                     // Information about the dataset
                     datasets: [{
-                        label: tf_options.completed,
-                        borderColor: '#003C79',
+                        label: "Complete Booking",
+                        backgroundColor: '#0185FF',
+                        borderColor: '#0185FF',
                         tension: 0.1,
                         data: tf_options.tf_complete_order,
                         fill: false
                     },
                         {
-                            label: tf_options.cancelled,
-                            borderColor: 'red',
+                            label: "Cancel Booking",
+                            borderColor: '#E7000B',
+                            backgroundColor: '#E7000B',
                             tension: 0.1,
                             data: tf_options.tf_cancel_orders,
                             fill: false
@@ -6090,17 +6177,25 @@ var frame, gframe;
 
                 // Configuration options
                 options: {
-                    layout: {
-                        padding: 10,
-                    },
-                    legend: {
-                        display: true
+                    plugins:{
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            align: 'start',
+                            labels: {
+                                usePointStyle: true,
+                                pointStyle: 'circle',
+                                fontSize: 10,    
+                                fontStyle: '400',
+                                fontColor: '#242B31',
+                            },
+                        },
                     },
                     title: {
-                        display: true,
-                        text: ""
+                        display: false,
                     }
-                }
+                },
+                plugins: [legendSpacingPlugin]
 
             });
         }
@@ -6127,21 +6222,27 @@ var frame, gframe;
                         var ctx = $('#tf_months'); // jQuery instance
                         var ctx = 'tf_months'; // element id
 
-                        var chart = new Chart(ctx, {
+                        if (tfChart) {
+                            tfChart.destroy();
+                        }
+
+                        tfChart = new Chart(ctx, {
                             type: 'line',
                             data: {
                                 labels: response.months_day_number,
                                 // Information about the dataset
                                 datasets: [{
-                                    label: "Completed Booking",
-                                    borderColor: '#003C79',
+                                    label: "Complete Booking",
+                                    backgroundColor: '#0185FF',
+                                    borderColor: '#0185FF',
                                     tension: 0.1,
                                     data: response.tf_complete_orders,
                                     fill: false
                                 },
                                     {
-                                        label: "Cancelled Booking",
-                                        borderColor: 'red',
+                                        label: "Cancel Booking",
+                                        borderColor: '#E7000B',
+                                        backgroundColor: '#E7000B',
                                         tension: 0.1,
                                         data: response.tf_cancel_orders,
                                         fill: false
@@ -6151,17 +6252,27 @@ var frame, gframe;
 
                             // Configuration options
                             options: {
-                                layout: {
-                                    padding: 10,
-                                },
-                                legend: {
-                                    display: true
+                                plugins:{
+                                    legend: {
+                                        display: true,
+                                        position: 'top',
+                                        align: 'start',
+                                        labels: {
+                                            usePointStyle: true,
+                                            pointStyle: 'circle',
+                                            fontSize: 10,    
+                                            fontStyle: '400',
+                                            fontColor: '#242B31',
+                                        },
+                                    },
                                 },
                                 title: {
                                     display: true,
-                                    text: response.tf_search_month
+                                    text: ''
                                 }
-                            }
+                            },
+
+                            plugins: [legendSpacingPlugin]
 
                         });
                         $("#tf-report-loader").removeClass('show');
@@ -6193,21 +6304,27 @@ var frame, gframe;
                         var ctx = $('#tf_months'); // jQuery instance
                         var ctx = 'tf_months'; // element id
 
-                        var chart = new Chart(ctx, {
+                        if (tfChart) {
+                            tfChart.destroy();
+                        }
+
+                        tfChart = new Chart(ctx, {
                             type: 'line',
                             data: {
                                 labels: response.months_day_number,
                                 // Information about the dataset
                                 datasets: [{
-                                    label: "Completed Booking",
-                                    borderColor: '#003C79',
+                                    label: "Complete Booking",
+                                    backgroundColor: '#0185FF',
+                                    borderColor: '#0185FF',
                                     tension: 0.1,
                                     data: response.tf_complete_orders,
                                     fill: false
                                 },
                                     {
-                                        label: "Cancelled Booking",
-                                        borderColor: 'red',
+                                        label: "Cancel Booking",
+                                        borderColor: '#E7000B',
+                                        backgroundColor: '#E7000B',
                                         tension: 0.1,
                                         data: response.tf_cancel_orders,
                                         fill: false
@@ -6217,17 +6334,27 @@ var frame, gframe;
 
                             // Configuration options
                             options: {
-                                layout: {
-                                    padding: 10,
-                                },
-                                legend: {
-                                    display: true
+                                plugins:{
+                                    legend: {
+                                        display: true,
+                                        position: 'top',
+                                        align: 'start',
+                                        labels: {
+                                            usePointStyle: true,
+                                            pointStyle: 'circle',
+                                            fontSize: 10,    
+                                            fontStyle: '400',
+                                            fontColor: '#242B31',
+                                        },
+                                    },
                                 },
                                 title: {
                                     display: true,
                                     text: response.tf_search_month
                                 }
-                            }
+                            },
+
+                            plugins: [legendSpacingPlugin]
 
                         });
                         $("#tf-report-loader").removeClass('show');
@@ -6680,6 +6807,7 @@ var frame, gframe;
         });
     });
 })(jQuery);
+
 })();
 
 /******/ })()

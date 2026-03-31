@@ -124,19 +124,20 @@ defined( 'ABSPATH' ) || exit;
                                     <!--Available rooms start -->
                                     <div class="tf-archive-hotels archive_ajax_result <?php echo $tf_defult_views == "list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?>">
 
-                                        <?php
-                                        $count = 0;
-                                        $locations = [];
-                                        while (have_posts()) {
-                                            the_post();
+	                                        <?php
+	                                        $count = 0;
+	                                        $locations = [];
+	                                        while (have_posts()) {
+	                                            the_post();
 
-                                            $meta = get_post_meta(get_the_ID(), 'tf_hotels_opt', true);
-                                            if (!$meta["featured"]) {
-                                                continue;
-                                            }
+	                                            $meta = get_post_meta(get_the_ID(), 'tf_hotels_opt', true);
+	                                            $is_hotel_featured = Hotel::is_featured_hotel_meta( $meta );
+	                                            if ( ! $is_hotel_featured ) {
+	                                                continue;
+	                                            }
 
                                             $count++;
-                                            $map = !empty($meta['map']) ? Helper::tf_data_types($meta['map']) : '';
+                                            $map = Hotel::get_hotel_map_data( $meta );
 
                                             $min_price_arr = Pricing::instance(get_the_ID())->get_min_price();
                                             $min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
@@ -197,19 +198,23 @@ defined( 'ABSPATH' ) || exit;
                                                     'price' => base64_encode($price_html),
                                                     'content' => base64_encode($infoWindowtext)
                                                 ];
-                                            }
-                                            Hotel::tf_hotel_archive_single_item();
-                                        }
-                                        while (have_posts()) {
-                                            the_post();
+	                                            }
+	                                            Hotel::tf_hotel_archive_single_item();
+	                                        }
 
-                                            $meta = get_post_meta(get_the_ID(), 'tf_hotels_opt', true);
-                                            if ($meta["featured"]) {
-                                                continue;
-                                            }
+	                                        rewind_posts();
+
+	                                        while (have_posts()) {
+	                                            the_post();
+
+	                                            $meta = get_post_meta(get_the_ID(), 'tf_hotels_opt', true);
+	                                            $is_hotel_featured = Hotel::is_featured_hotel_meta( $meta );
+	                                            if ( $is_hotel_featured ) {
+	                                                continue;
+	                                            }
 
                                             $count++;
-                                            $map = !empty($meta['map']) ? Helper::tf_data_types($meta['map']) : '';
+                                            $map = Hotel::get_hotel_map_data( $meta );
 
                                             $min_price_arr = Pricing::instance(get_the_ID())->get_min_price();
                                             $min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;

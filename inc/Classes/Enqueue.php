@@ -35,6 +35,25 @@ class Enqueue {
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_custom_css_conflicts_resolve' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_elementor_widget_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_required_taxonomies' ) );
+
+		add_action( 'admin_head', function () {
+
+			$css = '
+			#adminmenu #toplevel_page_tf_settings a[href*="https://tourfic.com/pricing"]{
+				border-radius: 6px;
+				background: radial-gradient(104% 50% at 50.21% 100%, #FFD24C 0%, rgba(220, 166, 4, 0.20) 100%), linear-gradient(180deg, #D7A613 0%, #FFC71F 100%);
+				box-shadow: 0 -4px 4px 0 rgba(236, 187, 39, 0.60) inset, 0 2px 4px 0 rgba(161, 121, 1, 0.40);
+				color: #22292F !important;
+				text-align: center;
+				font-size: 13px;
+				font-weight: 600;
+				line-height: 20px;
+				margin: 8px;
+				box-shadow: 0 -2px 2px 0 rgba(178, 159, 102, 0.12) inset;
+			}';
+		
+			echo '<style id="tf-upgrade-menu-style">' . $css . '</style>';
+		});		
 	}
 
 	/**
@@ -320,25 +339,25 @@ class Enqueue {
 			$single_tour_form_data['select_time_text'] = esc_html__( "Select Time", "tourfic" );
 			$single_tour_form_data['date_format']      = esc_html( $tour_date_format_for_users );
 			$single_tour_form_data['flatpickr_locale'] = ! empty( get_locale() ) ? get_locale() : 'en_US';
-			if($tour_type=='fixed'){
-				$tour_availability          = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
+				if($tour_type=='fixed'){
+					$tour_availability          = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
 
-				$expanded = [];
-				if ( !empty($tour_availability) && is_array( $tour_availability ) ) {
-					foreach ( $tour_availability as $range_key => $data ) {
-						if ( empty( $data['check_in'] ) || empty( $data['check_out'] ) ) {
-							continue;
+					$normalized = [];
+					if ( !empty($tour_availability) && is_array( $tour_availability ) ) {
+						foreach ( $tour_availability as $range_key => $data ) {
+							if ( empty( $data['check_in'] ) || empty( $data['check_out'] ) ) {
+								continue;
+							}
+							// Normalize key format while preserving full date range for frontend flatpickr.
+							$entry = $data;
+							$key = $data['check_in'] . ' - ' . $data['check_out'];
+							$entry['check_in']  = $data['check_in'];
+							$entry['check_out'] = $data['check_out'];
+							$normalized[ $key ] = $entry;
 						}
-						// copy original data and set check_in/check_out to the single date
-						$entry = $data;
-						$key = $data['check_in'].' - '.$data['check_in'];
-						$entry['check_in']  = $data['check_in'];
-						$entry['check_out'] = $data['check_in'];
-						$expanded[ $key ] = $entry;
 					}
+					$tour_availability =  $normalized;
 				}
-				$tour_availability =  $expanded;
-			}
 			$single_tour_form_data['disable_same_day'] = $disable_same_day;
 			$single_tour_form_data['tour_availability'] = $tour_availability;
 			$single_tour_form_data['is_all_unavailable'] = Helper::is_all_unavailable($tour_availability);
@@ -657,6 +676,7 @@ class Enqueue {
 			'tourfic-settings_page_tf_license_info',
 			'tourfic-settings_page_tf_dashboard',
 			'tourfic-settings_page_tf_shortcodes',
+			'tourfic-settings_page_tf_workspace',
 			'tourfic-vendor_page_tf_vendor_reports',
 			'tourfic-vendor_page_tf_vendor_list',
 			'tourfic-vendor_page_tf_vendor_commissions',

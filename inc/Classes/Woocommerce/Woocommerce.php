@@ -266,6 +266,7 @@ class Woocommerce {
 				$adult             = $item->get_meta( 'adults', true );
 				$child             = $item->get_meta( 'children', true );
 				$infants           = $item->get_meta( 'infant', true );
+				$due               = $item->get_meta( '_due_price', true );
 	
 				if ( $check_in_out_date ) {
 					list( $check_in, $check_out ) = explode( ' - ', $check_in_out_date );
@@ -278,6 +279,7 @@ class Woocommerce {
 					'child'          => $child,
 					'infants'        => $infants,
 					'total_price'    => $price,
+					'due_price'      => $due,
 				];
 	
 				$tf_integration_order_status = [

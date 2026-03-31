@@ -263,13 +263,18 @@
         * Vendor Dashboard Chart
         */
 
+        let tfVendorChart = null;
         if (tf_vendor_params.tf_vendor_chart_enable == 1) {
             var ctx = document.getElementById('tf_month_vendor_info'); // node
             var ctx = document.getElementById('tf_month_vendor_info').getContext('2d'); // 2d context
             var ctx = $('#tf_month_vendor_info'); // jQuery instance
             var ctx = 'tf_month_vendor_info'; // element id
 
-            var chart = new Chart(ctx, {
+            if (tfVendorChart) {
+                tfVendorChart.destroy();
+            }
+
+            tfVendorChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: tf_vendor_params.tf_current_months_days,
@@ -350,8 +355,11 @@
                     var ctx = document.getElementById('tf_month_vendor_info').getContext('2d'); // 2d context
                     var ctx = $('#tf_month_vendor_info'); // jQuery instance
                     var ctx = 'tf_month_vendor_info'; // element id
-
-                    var chart = new Chart(ctx, {
+                    
+                    if (tfVendorChart) {
+                        tfVendorChart.destroy();
+                    }
+                    tfVendorChart = new Chart(ctx, {
                         type: 'line',
                         data: {
                             labels: response.tf_current_months_days,

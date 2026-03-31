@@ -54,14 +54,19 @@ defined( 'ABSPATH' ) || exit;
 						while ( have_posts() ) {
 							the_post();
 							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
-							if (!empty($apartment_meta[ "apartment_as_featured" ])) {
+							$is_apartment_featured = is_array( $apartment_meta ) && ! empty( $apartment_meta['apartment_as_featured'] );
+							if ( $is_apartment_featured ) {
 								Apartment::tf_apartment_archive_single_item();
 							}
 						}
+
+						rewind_posts();
+
 						while ( have_posts() ) {
 							the_post();
 							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
-							if ( empty($apartment_meta[ "apartment_as_featured" ])) {
+							$is_apartment_featured = is_array( $apartment_meta ) && ! empty( $apartment_meta['apartment_as_featured'] );
+							if ( ! $is_apartment_featured ) {
 								Apartment::tf_apartment_archive_single_item();
 							}
 						}

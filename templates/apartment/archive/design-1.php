@@ -82,14 +82,19 @@ defined( 'ABSPATH' ) || exit;
                                 while ( have_posts() ) {
                                     the_post();
                                     $apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
-                                    if ( !empty($apartment_meta[ "apartment_as_featured" ] )) {
+                                    $is_apartment_featured = is_array( $apartment_meta ) && ! empty( $apartment_meta['apartment_as_featured'] );
+                                    if ( $is_apartment_featured ) {
                                         echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                     }
-                                } 
+                                }
+
+                                rewind_posts();
+
                                 while ( have_posts() ) {
                                     the_post();
                                     $apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
-                                    if ( empty($apartment_meta[ "apartment_as_featured" ] )) {
+                                    $is_apartment_featured = is_array( $apartment_meta ) && ! empty( $apartment_meta['apartment_as_featured'] );
+                                    if ( ! $is_apartment_featured ) {
                                         echo wp_kses(apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                     }
                                 }
