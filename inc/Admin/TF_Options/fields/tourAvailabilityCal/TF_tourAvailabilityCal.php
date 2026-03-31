@@ -574,6 +574,28 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                                 <?php echo esc_html__('You can add, customize any packages from here.', 'tourfic'); ?>
                                             </div>
                                         </div>
+                                        <div class="tf-field tf-field-checkbox tf-availability-package-selector" style="padding-top: 0;">
+                                            <label class="tf-field-label"><?php echo esc_html__( 'Apply to packages', 'tourfic' ); ?></label>
+                                            <div class="tf-fieldset">
+                                                <ul class="tf-checkbox-group tf-inline" style="margin-bottom: 0;">
+                                                    <?php
+                                                    if ( ! empty( $tour_package_options ) ) {
+                                                        foreach ( $tour_package_options as $key => $item ) {
+                                                            if ( empty( $item['pack_status'] ) || empty( $item['pack_title'] ) ) {
+                                                                continue;
+                                                            }
+                                                            ?>
+                                                            <li>
+                                                                <input type="checkbox" id="tf_selected_package_<?php echo esc_attr( $key ); ?>" class="tf-group-checkbox tf-availability-package-checkbox" name="selected_packages[]" value="<?php echo esc_attr( $key ); ?>" checked>
+                                                                <label for="tf_selected_package_<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $item['pack_title'] ); ?></label>
+                                                            </li>
+                                                            <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                </ul>
+                                            </div>
+                                        </div>
                                         <div class="tf-repeater-wrap">
                                         <?php
                                         if ( ! empty( $tour_package_options ) ) {
@@ -584,7 +606,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                                 $option_pricing_type = ! empty( $item['pricing_type'] ) ? $item['pricing_type'] : 'person';
                                                 ?>
 
-                                                <div class="tf-single-repeater">
+                                                <div class="tf-single-repeater" data-package-index="<?php echo esc_attr( $key ); ?>">
                                                     <div class="tf-repeater-header">
                                                         <div class="tf-repeater-header-info">
                                                             <span class="tf-repeater-title tf-avail-repeater-title"><?php echo esc_html( $item['pack_title'] ); ?></span>

@@ -442,6 +442,7 @@ class Enqueue {
 				'required' => esc_html__( 'This field is required.', 'tourfic'),
 				'fields_required_msg' => esc_html__( 'Fill up the all fields', 'tourfic'),
 				'no_camera_msg' => esc_html__( 'No camera found', 'tourfic'),
+				'package_unavailable_msg' => esc_html__( 'Selected package is unavailable for this date.', 'tourfic' ),
 			)
 		);
 

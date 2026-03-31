@@ -2162,10 +2162,132 @@
             }
         });
 
+        let lastAvailablePackage = null;
+        const getFirstAvailablePackageRadio = () => {
+            return $('.tf-booking-content-package .tf-single-package').not('.tf-package-unavailable').find('input[name="tf_package"]').first();
+        };
+        const ensureTourDateSelected = (showMessage = false, $trigger = null) => {
+            let $dateField = $('#check-in-out-date');
+            if ($trigger && $trigger.length) {
+                const $scopedDateField = $trigger.closest('.tf-booking-form').find('input[name="check-in-out-date"], #check-in-out-date').first();
+                if ($scopedDateField.length) {
+                    $dateField = $scopedDateField;
+                }
+            }
+
+            const selectedDate = ($dateField.val() || '').toString().trim();
+            if (selectedDate.length) {
+                $('.tf_booking-dates .tf_label-row').find('#tf-required').remove();
+                $('.tf_booking-dates .tf_label-row').removeClass('tf-date-required');
+                return true;
+            }
+
+            if (showMessage) {
+                let hasInlineHint = false;
+                if ($('#tf-required').length === 0) {
+                    if ($('.tf_booking-dates .tf_label-row').length >= 1) {
+                        $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required"><b>' + tf_params.field_required + '</b></span>');
+                        $('.tf_booking-dates .tf_label-row').addClass('tf-date-required');
+                        hasInlineHint = true;
+                    } else {
+                        $dateField.trigger('click');
+                    }
+                } else {
+                    hasInlineHint = true;
+                    $dateField.trigger('click');
+                }
+
+                if (!hasInlineHint) {
+                    notyf.error(tf_params.tf_tour_date_required_msg || tf_params.field_required || 'Please select a date');
+                }
+            }
+
+            return false;
+        };
+        const showUnavailablePackageMessage = () => {
+            const message = tf_params.package_unavailable_msg || 'Selected package is unavailable for this date.';
+            notyf.error(message);
+        };
+
+        const applyPackageAvailability = (packageStatuses = {}) => {
+            const $packageList = $('.tf-booking-content-package .tf-single-package');
+            if (!$packageList.length) {
+                return true;
+            }
+
+            let hasAvailablePackage = false;
+            $packageList.each(function () {
+                const $package = $(this);
+                const $radio = $package.find('input[name="tf_package"]');
+                const packageKey = String($radio.val());
+                const status = packageStatuses[packageKey] || 'available';
+                const isUnavailable = status === 'unavailable';
+
+                if (!isUnavailable) {
+                    hasAvailablePackage = true;
+                }
+
+                $package.toggleClass('tf-package-unavailable', isUnavailable);
+                $radio.prop('disabled', false);
+                $radio.attr('aria-disabled', isUnavailable ? 'true' : 'false');
+
+                if (isUnavailable) {
+                    $package.find('input[type="number"], select[name="package_start_time"]').prop('disabled', true);
+                    $package.find('.tf-pacakge-times').hide();
+                }
+            });
+
+            const $currentSelection = $('.tf-booking-content-package input[name="tf_package"]:checked');
+            if ($currentSelection.length && $currentSelection.closest('.tf-single-package').hasClass('tf-package-unavailable')) {
+                const $firstAvailable = getFirstAvailablePackageRadio();
+                if ($firstAvailable.length) {
+                    $firstAvailable.prop('checked', true);
+                    lastAvailablePackage = String($firstAvailable.val());
+                }
+            } else if (!$currentSelection.length) {
+                const $firstAvailable = getFirstAvailablePackageRadio();
+                if ($firstAvailable.length) {
+                    $firstAvailable.prop('checked', true);
+                    lastAvailablePackage = String($firstAvailable.val());
+                }
+            } else {
+                lastAvailablePackage = String($currentSelection.val());
+            }
+
+            return hasAvailablePackage;
+        };
+
+        const toggleTourPackageStepControls = (hasAvailablePackage = true) => {
+            const $controls = $('.tf-withoutpayment-booking .tf-pagination-content-1 .tf_btn');
+
+            $controls.each(function () {
+                const $control = $(this);
+                if ($control.is('button')) {
+                    $control.prop('disabled', !hasAvailablePackage);
+                    return;
+                }
+
+                $control.toggleClass('disabled', !hasAvailablePackage);
+                $control.attr('aria-disabled', hasAvailablePackage ? 'false' : 'true');
+            });
+        };
+
+        $('body').on('click', '.tf-withoutpayment-booking .tf-pagination-content-1 .tf_btn.disabled', function (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+        });
+
         // Popup Open
-        const tourPopupBooking = () => {
+        const tourPopupBooking = (options = {}) => {
+            const settings = $.extend({
+                showDateError: false
+            }, options);
             var $this = $(this);
             let check_in_date = $('#check-in-out-date').val();
+            if (!ensureTourDateSelected(settings.showDateError)) {
+                return false;
+            }
+
             let adults = $('#adults').val();
             let children = $('#children').val();
             let infant = $('#infant').val();
@@ -2240,14 +2362,23 @@
                     $this.unblock();
 
                     var response = JSON.parse(data);
+                    const packageStatuses = response.package_statuses || {};
+                    const hasPackageStatuses = Object.keys(packageStatuses).length > 0;
+                    const hasPackageUI = $('.tf-booking-content-package .tf-single-package').length > 0;
+                    const hasAvailablePackage = hasPackageStatuses ? applyPackageAvailability(packageStatuses) : true;
+                    toggleTourPackageStepControls(hasAvailablePackage);
 
                     if (response.status == 'error') {
+                        if (hasPackageStatuses || hasPackageUI) {
+                            $('.tf-withoutpayment-booking').addClass('show');
+                            return false;
+                        }
+
                         if (response.errors) {
                             response.errors.forEach(function (text) {
                                 notyf.error(text);
                             });
                         }
-
                         return false;
                     } else {
                         if ($('.tf-traveller-info-box').length > 0) {
@@ -2260,16 +2391,20 @@
                         if ($('.tf-booking-traveller-info').length > 0) {
                             $('.tf-booking-traveller-info').html(response.traveller_summery);
                         }
+                        if ($('.tf-booking-content-package').length) {
+                            $('.tf-booking-content-package .tf-pacakge-times').hide();
+                            $('.tf-booking-content-package select[name="package_start_time"]').each(function () {
+                                $(this).empty();
+                            });
+                        }
+
                         if (response.pacakge_times && typeof response.pacakge_times === 'object') {
                             Object.entries(response.pacakge_times).forEach(([key, times]) => {
                                 const wrapper = $(`.tf-package-times-${key}`);
                                 wrapper.css('display', 'flex');
                                 const select = wrapper.find('select[name="package_start_time"]');
-                                if (select.length && select.children('option').length === 0) {                        
-                                    // Add placeholder option first
+                                if (select.length) {
                                     select.append(`<option value="" disabled selected>Time</option>`);
-
-                                    // Then add time options
                                     times.forEach((time) => {
                                         select.append(`<option value="${time}">${time}</option>`);
                                     });
@@ -2296,6 +2431,11 @@
         }
         $('body').on('click', '.tf-booking-popup-btn', function (e) {
             e.preventDefault();
+            const $trigger = $(this);
+            if (!ensureTourDateSelected(true, $trigger)) {
+                return false;
+            }
+
             $(".tf-withoutpayment-booking input[type='text'], .tf-withoutpayment-booking input[type='email'], .tf-withoutpayment-booking input[type='date'], .tf-withoutpayment-booking select, .tf-withoutpayment-booking textarea").val("");
 
             $('.tf-booking-content-extra input[type="checkbox"]').each(function () {
@@ -2303,13 +2443,23 @@
                     $(this).prop('checked', false);
                 }
             });
-            tourPopupBooking();
+            tourPopupBooking({
+                showDateError: true
+            });
+        });
+
+        $(document).on('change', 'input[name="check-in-out-date"], #check-in-out-date', function () {
+            const selectedDate = ($(this).val() || '').toString().trim();
+            if (selectedDate.length) {
+                $('.tf_booking-dates .tf_label-row').find('#tf-required').remove();
+                $('.tf_booking-dates .tf_label-row').removeClass('tf-date-required');
+            }
         });
 
         $(document).on('change', '[name*=tf-tour-extra], input[name="extra-quantity"]', function () {
             tourPopupBooking();
         });
-        $(document).on('change', '[name=deposit], [name=tf_package]', function () {
+        $(document).on('change', '[name=deposit]', function () {
             tourPopupBooking();
         });
 
@@ -2317,17 +2467,65 @@
             tourPopupBooking();
         });
 
-        $('input[name="tf_package"]').on('change', function () {
-            var selectedKey = $(this).val();
+        $(document).on('click', 'input[name="tf_package"]', function (e) {
+            var $selectedRadio = $(this);
+            var $selectedPackage = $selectedRadio.closest('.tf-single-package');
+            if ($selectedPackage.hasClass('tf-package-unavailable')) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                showUnavailablePackageMessage();
+
+                const $fallbackPackage = getFirstAvailablePackageRadio();
+                if ($fallbackPackage.length) {
+                    $fallbackPackage.prop('checked', true);
+                    lastAvailablePackage = String($fallbackPackage.val());
+                } else {
+                    $selectedRadio.prop('checked', false);
+                }
+                return false;
+            }
+        });
+
+        $(document).on('change', 'input[name="tf_package"]', function (e) {
+            var $selectedRadio = $(this);
+            var $selectedPackage = $selectedRadio.closest('.tf-single-package');
+
+            if ($selectedPackage.hasClass('tf-package-unavailable')) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                showUnavailablePackageMessage();
+
+                if (lastAvailablePackage !== null) {
+                    $('input[name="tf_package"][value="' + lastAvailablePackage + '"]').prop('checked', true);
+                } else {
+                    const $fallbackPackage = getFirstAvailablePackageRadio();
+                    if ($fallbackPackage.length) {
+                        $fallbackPackage.prop('checked', true);
+                        lastAvailablePackage = String($fallbackPackage.val());
+                    } else {
+                        $selectedRadio.prop('checked', false);
+                    }
+                }
+                return false;
+            }
+
+            var selectedKey = $selectedRadio.val();
+            lastAvailablePackage = String(selectedKey);
             $('.tf-single-package').each(function () {
                 var $package = $(this);
+                if ($package.hasClass('tf-package-unavailable')) {
+                    $package.find('input[type="number"], select[name="package_start_time"]').prop('disabled', true);
+                    return;
+                }
+
                 if ($package.find('input[name="tf_package"]').val() !== selectedKey) {
                     $package.find('input[type="number"]').prop('disabled', true);
                 } else {
                     $package.find('input[type="number"]').prop('disabled', false);
                 }
             });
-        });        
+            tourPopupBooking();
+        });
 
         // Popup Close
         $('body').on('click touchstart', '.tf-booking-times span', function (e) {
