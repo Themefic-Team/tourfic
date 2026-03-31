@@ -11,6 +11,87 @@ class Pricing {
 
 	}
 
+	private static function get_duration_data( $pickup_date, $dropoff_date, $pickup_time, $dropoff_time ) {
+		$duration_data = array(
+			'hours'    => 1,
+			'days'     => 1,
+			'raw_days' => 0,
+			'valid'    => false,
+		);
+
+		$pickup_datetime = self::create_datetime( $pickup_date, $pickup_time );
+		$dropoff_datetime = self::create_datetime( $dropoff_date, $dropoff_time );
+
+		if ( ! $pickup_datetime || ! $dropoff_datetime ) {
+			return $duration_data;
+		}
+
+		$interval = $pickup_datetime->diff( $dropoff_datetime );
+
+		$total_hours = ( $interval->days * 24 ) + $interval->h + ( $interval->i / 60 );
+		if ( $total_hours < 1 ) {
+			$total_hours = 1;
+		}
+
+		$total_days = $interval->days;
+		if ( $interval->h > 0 || $interval->i > 0 ) {
+			$total_days += 1;
+		}
+		if ( $total_days < 1 ) {
+			$total_days = 1;
+		}
+
+		$duration_data['hours'] = $total_hours;
+		$duration_data['days'] = $total_days;
+		$duration_data['raw_days'] = (int) $interval->days;
+		$duration_data['valid'] = true;
+
+		return $duration_data;
+	}
+
+	private static function create_datetime( $date, $time ) {
+		if ( function_exists( 'tf_car_create_datetime' ) ) {
+			$datetime = \tf_car_create_datetime( $date, $time );
+			if ( $datetime instanceof \DateTime ) {
+				return $datetime;
+			}
+		}
+
+		$date = ! empty( $date ) ? sanitize_text_field( (string) $date ) : '';
+		$time = ! empty( $time ) ? sanitize_text_field( (string) $time ) : '00:00';
+
+		if ( function_exists( 'tf_normalize_date' ) ) {
+			$date = tf_normalize_date( $date );
+		}
+
+		if ( empty( $date ) ) {
+			return false;
+		}
+
+		$datetime_string = trim( $date . ' ' . $time );
+		$formats = array(
+			'Y/m/d H:i',
+			'Y/m/d h:i A',
+			'Y/m/d g:i A',
+			'Y/m/d h:i a',
+			'Y/m/d g:i a',
+		);
+
+		foreach ( $formats as $format ) {
+			$datetime = \DateTime::createFromFormat( $format, $datetime_string );
+			if ( false !== $datetime ) {
+				return $datetime;
+			}
+		}
+
+		$timestamp = strtotime( $datetime_string );
+		if ( false === $timestamp ) {
+			return false;
+		}
+
+		return new \DateTime( '@' . $timestamp );
+	}
+
 	// all price will be calculate here
 	static function set_total_price( $meta, $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_archive='' ) {
 		if ( function_exists( 'tf_normalize_car_meta' ) ) {
@@ -79,24 +160,12 @@ class Pricing {
                 $all_prices['regular_price'] = $totalPrice;
             }
 
-        }
-        elseif( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'day_hour'==$pricing_type && !empty($day_pricing) ){
-          
+        } elseif( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'day_hour'==$pricing_type && !empty($day_pricing) ){
 
-            // Combine date and time
-            $pickup_datetime = new \DateTime("$tf_pickup_date $tf_pickup_time");
-            $dropoff_datetime = new \DateTime("$tf_dropoff_date $tf_dropoff_time");
-
-     
-
-            // Calculate the difference
-            $interval = $pickup_datetime->diff($dropoff_datetime);
-
-            // Convert the difference to total hours
-            $total_hours = ($interval->days * 24) + $interval->h + ($interval->i / 60);
-            if ( $total_hours < 1 ) {
-                $total_hours = 1;
-            }
+            $duration_data = self::get_duration_data( $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time );
+            $total_hours = $duration_data['hours'];
+            $total_days = $duration_data['days'];
+            $raw_total_days = $duration_data['raw_days'];
 
             $all_prices = [];
             $result = array();
@@ -108,17 +177,7 @@ class Pricing {
 
                 $price_type = $day_type;
 
-                if('day'==$day_type && $interval->days > 0){
-                    // Get total days
-                    $total_days = $interval->days;
-                    
-                    // If there are leftover hours that count as a partial day
-                    if ($interval->h > 0 || $interval->i > 0) {
-                        $total_days += 1;  // Add an extra day for any remaining hours
-                    }
-                    if ( $total_days < 1 ) {
-                        $total_days = 1;
-                    }
+                if('day'==$day_type && $raw_total_days > 0){
                     if(!empty($tf_archive)){
                         $total_multiply = 1;
                     }else{
@@ -151,23 +210,11 @@ class Pricing {
                     }
                 }
                 if('day'==$pricing_by){
-                    
-                    // Get total days
-                    $total_days = $interval->days;
-                    
-                    // If there are leftover hours that count as a partial day
-                    if ($interval->h > 0 || $interval->i > 0) {
-                        $total_days += 1;  // Add an extra day for any remaining hours
-                    }
-                    if ( $total_days < 1 ) {
-                        $total_days = 1;
-                    }
                     if(!empty($tf_archive)){
                         $total_multiply = 1;
                     }else{
                         $total_multiply = $total_days;
                     }
-                    
                 }
             }
 
@@ -180,19 +227,10 @@ class Pricing {
         }else{
             $all_prices = [];
             if(!empty($tf_pickup_date) && !empty($tf_dropoff_date)){
-                // Combine date and time
-                $pickup_datetime = new \DateTime("$tf_pickup_date $tf_pickup_time");
-                $dropoff_datetime = new \DateTime("$tf_dropoff_date $tf_dropoff_time");
+                $duration_data = self::get_duration_data( $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time );
+                $total_hours = $duration_data['hours'];
+                $total_days = $duration_data['days'];
 
-                // Calculate the difference
-                $interval = $pickup_datetime->diff($dropoff_datetime);
-
-                // Convert the difference to total hours
-                $total_hours = ($interval->days * 24) + $interval->h + ($interval->i / 60);
-                if ( $total_hours < 1 ) {
-                    $total_hours = 1;
-                }
-                
                 if('hour'==$pricing_by){
                     if(!empty($tf_archive)){
                         $total_multiply = 1;
@@ -201,23 +239,11 @@ class Pricing {
                     }
                 }
                 if('day'==$pricing_by){
-                    
-                    // Get total days
-                    $total_days = $interval->days;
-                    
-                    // If there are leftover hours that count as a partial day
-                    if ($interval->h > 0 || $interval->i > 0) {
-                        $total_days += 1;  // Add an extra day for any remaining hours
-                    }
-                    if ( $total_days < 1 ) {
-                        $total_days = 1;
-                    }
                     if(!empty($tf_archive)){
                         $total_multiply = 1;
                     }else{
                         $total_multiply = $total_days;
                     }
-                    
                 }
             }else{
                 $total_multiply = 1;
@@ -230,12 +256,21 @@ class Pricing {
             }
         }
 
+        $base_sale_price = !empty($all_prices['sale_price']) ? (float) $all_prices['sale_price'] : 0;
         if('fixed'==$discount_type && !empty($discount_price)){
-            $all_prices['sale_price'] = $all_prices['sale_price'] - $discount_price;
+            $discount_amount = (float) $discount_price;
+            if($discount_amount > 0 && $base_sale_price > 0){
+                $all_prices['regular_price'] = $base_sale_price;
+                $all_prices['sale_price'] = max(0, $base_sale_price - $discount_amount);
+            }
         }
         if('percent'==$discount_type && !empty($discount_price)){
-            $discount_price = ($all_prices['sale_price'] * $discount_price)/100;
-            $all_prices['sale_price'] = $all_prices['sale_price'] - $discount_price;
+            $discount_percent = (float) $discount_price;
+            if($discount_percent > 0 && $base_sale_price > 0){
+                $all_prices['regular_price'] = $base_sale_price;
+                $discount_amount = ($base_sale_price * $discount_percent)/100;
+                $all_prices['sale_price'] = max(0, $base_sale_price - $discount_amount);
+            }
         }
 
         $all_prices['type'] = esc_html__($price_type, 'tourfic');
@@ -265,26 +300,11 @@ class Pricing {
                 if(!empty($singleqty)){
                     $extra_key = $extra_ids[$key];
                     $single_extra_info = !empty($car_extra[$extra_key]) ? $car_extra[$extra_key] : '';
-                    if(!empty($single_extra_info)){ 
+                    if(!empty($single_extra_info)){
                         $price_type = $single_extra_info['price_type'];
                         if('day'==$price_type){
-                            // Combine date and time
-                            $pickup_datetime = new \DateTime("$tf_pickup_date $tf_pickup_time");
-                            $dropoff_datetime = new \DateTime("$tf_dropoff_date $tf_dropoff_time");
-
-                            // Calculate the difference
-                            $interval = $pickup_datetime->diff($dropoff_datetime);
-
-                            // Get total days
-                            $total_days = $interval->days;
-                            
-                            // If there are leftover hours that count as a partial day
-                            if ($interval->h > 0 || $interval->i > 0) {
-                                $total_days += 1;  // Add an extra day for any remaining hours
-                            }
-                            if ( $total_days < 1 ) {
-                                $total_days = 1;
-                            }
+                            $duration_data = self::get_duration_data( $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time );
+                            $total_days = $duration_data['days'];
 
                             $price = $single_extra_info['price'] * $total_days;
 
@@ -313,23 +333,8 @@ class Pricing {
             $tf_single_protection = $car_protections[$protection];
 
             if( 'day' == $tf_single_protection['price_by'] ){
-                // Combine date and time
-                $pickup_datetime = new \DateTime("$tf_pickup_date $tf_pickup_time");
-                $dropoff_datetime = new \DateTime("$tf_dropoff_date $tf_dropoff_time");
-
-                // Calculate the difference
-                $interval = $pickup_datetime->diff($dropoff_datetime);
-
-                // Get total days
-                $total_days = $interval->days;
-                            
-                // If there are leftover hours that count as a partial day
-                if ($interval->h > 0 || $interval->i > 0) {
-                    $total_days += 1;  // Add an extra day for any remaining hours
-                }
-                if ( $total_days < 1 ) {
-                    $total_days = 1;
-                }
+                $duration_data = self::get_duration_data( $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time );
+                $total_days = $duration_data['days'];
             }else{
                 $total_days = 1;
             }

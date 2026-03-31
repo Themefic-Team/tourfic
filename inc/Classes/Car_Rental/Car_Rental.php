@@ -56,7 +56,7 @@ class Car_Rental
         $check_in_out = ! empty($_GET['check-in-out-date']) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : '';
 
         // date format for apartments
-        $date_format_change_apartments = ! empty(Helper::tfopt("tf-date-format-for-users")) ? Helper::tfopt("tf-date-format-for-users") : "Y/m/d";
+        $date_format = ! empty(Helper::tfopt("tf-date-format-for-users")) ? Helper::tfopt("tf-date-format-for-users") : "Y/m/d";
 
         $disable_apartment_child_search  = ! empty(Helper::tfopt('disable_apartment_child_search')) ? Helper::tfopt('disable_apartment_child_search') : '';
         $disable_apartment_infant_search  = ! empty(Helper::tfopt('disable_apartment_infant_search')) ? Helper::tfopt('disable_apartment_infant_search') : '';
@@ -269,13 +269,13 @@ class Car_Rental
                                 const startDate = selectedDates[0];
                                 $(".tf-car-search-pickup-date span.date").html(startDate.getDate());
                                 $(".tf-car-search-pickup-date span.month span").html(monthNames[startDate.getMonth()]);
-                                $('.tf_search_pickup_date').val(flatpickr.formatDate(startDate, "Y/m/d"));
+                                $('.tf_search_pickup_date').val(flatpickr.formatDate(startDate, "<?php echo esc_js( $date_format ); ?>"));
                             }
                             const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
                             if (endDate) {
                                 $(".tf-car-search-dropoff-date span.date").html(endDate.getDate());
                                 $(".tf-car-search-dropoff-date span.month span").html(monthNames[endDate.getMonth()]);
-                                $(".tf_search_dropoff_date").val(flatpickr.formatDate(endDate, "Y/m/d"));
+                                $(".tf_search_dropoff_date").val(flatpickr.formatDate(endDate, "<?php echo esc_js( $date_format ); ?>"));
                             }
                         }
 
@@ -341,7 +341,7 @@ class Car_Rental
                                 </div>
                                 <div class="info-select">
                                     <h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-                                    <input type="text" name="pickup-date" class="tf_pickup_date" placeholder="<?php esc_html_e('Pickup date', 'tourfic'); ?>" value="<?php echo esc_attr(gmdate('Y/m/d', strtotime('+1 day'))); ?>">
+                                    <input type="text" name="pickup-date" class="tf_pickup_date" placeholder="<?php esc_html_e('Pickup date', 'tourfic'); ?>" value="<?php echo esc_attr( date_i18n( $date_format, strtotime('+1 day') ) ); ?>">
                                 </div>
                             </div>
                         </div>
@@ -487,6 +487,8 @@ class Car_Rental
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
+                            altInput: true,
+							altFormat: '<?php echo esc_html( $date_format ); ?>',
                             minDate: "today",
                             showMonths: $(window).width() >= 1240 ? 2 : 1,
                             // flatpickr locale
@@ -507,12 +509,12 @@ class Car_Rental
                         function dateSetToFields(selectedDates, instance) {
                             if (selectedDates.length >= 1) {
                                 if (selectedDates[0]) {
-                                    const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
+                                    const startDate = flatpickr.formatDate(selectedDates[0], "<?php echo esc_js( $date_format ); ?>");
                                     $(".tf_pickup_date").val(startDate);
                                 }
                                 const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
                                 if (endDate) {
-                                    const formattedEndDate = flatpickr.formatDate(endDate, "Y/m/d");
+                                    const formattedEndDate = flatpickr.formatDate(endDate, "<?php echo esc_js( $date_format ); ?>");
                                     $(".tf-select-date .tf_dropoff_date").val(formattedEndDate);
                                 }
                             }
@@ -824,7 +826,7 @@ class Car_Rental
                                         <div class="tf-search-form-field-icon">
                                             <i class="fa-solid fa-calendar-days"></i>
                                         </div>
-                                        <input type="text" name="pickup-date" class="tf_pickup_date" placeholder="<?php esc_html_e('Enter Pickup date', 'tourfic'); ?>" value="<?php echo esc_attr(gmdate('Y/m/d', strtotime('+1 day'))); ?>">
+                                        <input type="text" name="pickup-date" class="tf_pickup_date" placeholder="<?php esc_html_e('Enter Pickup date', 'tourfic'); ?>" value="<?php echo esc_attr( date_i18n( $date_format, strtotime('+1 day') ) ); ?>">
                                     </div>
                                 </label>
                             </div>
@@ -877,7 +879,7 @@ class Car_Rental
                                         <div class="tf-search-form-field-icon">
                                             <i class="fa-solid fa-calendar-days"></i>
                                         </div>
-                                        <input type="text" name="dropoff-date" class="tf_dropoff_date" placeholder="<?php esc_html_e('Enter Dropoff date', 'tourfic'); ?>" value="<?php echo esc_attr(gmdate('Y/m/d', strtotime('+2 day'))); ?>">
+                                        <input type="text" name="dropoff-date" class="tf_dropoff_date" placeholder="<?php esc_html_e('Enter Dropoff date', 'tourfic'); ?>" value="<?php echo esc_attr( date_i18n( $date_format, strtotime('+2 day') ) ); ?>">
                                     </div>
                                 </label>
                             </div>
@@ -945,6 +947,8 @@ class Car_Rental
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
+                            altInput: true,
+							altFormat: '<?php echo esc_html( $date_format ); ?>',
                             minDate: "today",
                             showMonths: $(window).width() >= 1240 ? 2 : 1,
 
@@ -965,24 +969,20 @@ class Car_Rental
                         function dateSetToFields(selectedDates, instance) {
                             if (selectedDates.length >= 1) {
                                 if (selectedDates[0]) {
-                                    const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
+                                    const startDate = flatpickr.formatDate(selectedDates[0], "<?php echo esc_js( $date_format ); ?>");
                                     $("#tf-car-booking-form .tf_pickup_date").val(startDate);
                                 }
                                 const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
                                 if (endDate) {
-                                    const formattedEndDate = flatpickr.formatDate(endDate, "Y/m/d");
+                                    const formattedEndDate = flatpickr.formatDate(endDate, "<?php echo esc_js( $date_format ); ?>");
                                     $("#tf-car-booking-form .tf_dropoff_date").val(formattedEndDate);
                                 }
                             }
                         }
-
-                    
-                       
-
                     });
                 })(jQuery);
             </script>
-<?php
+            <?php
         }
     }
 }

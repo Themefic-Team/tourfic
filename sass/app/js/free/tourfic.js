@@ -394,6 +394,9 @@
             let category = termIdsByFeildName('car_category');
             let fuel_type = termIdsByFeildName('car_fueltype');
             let engine_year = termIdsByFeildName('car_engine_year');
+            let car_brand = termIdsByFeildName('car_brand');
+            let car_transmission = termIdsByFeildName('car_transmission');
+            let carplay_android_auto = termIdsByFeildName('carplay_android_auto_filter');
             let min_seat = $('.widget_tf_seat_filters input[name="from"]').val();
             let max_seat = $('.widget_tf_seat_filters input[name="to"]').val();
             let same_location = $('input[name="same_location"]:checked').val();
@@ -432,6 +435,9 @@
             formData.append('category', category);
             formData.append('fuel_type', fuel_type);
             formData.append('engine_year', engine_year);
+            formData.append('car_brand', car_brand);
+            formData.append('car_transmission', car_transmission);
+            formData.append('carplay_android_auto', carplay_android_auto);
             formData.append('pickup', pickup_slug);
             formData.append('dropoff', dropoff_slug);
             formData.append('pickup_date', pickup_date);
@@ -568,7 +574,7 @@
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '.widget_tf_price_filters input[name="from"], .widget_tf_price_filters input[name="to"], [name*=tf_filters],[name*=tf_hotel_types],[name*=tf_room_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year]', function () {
+        $(document).on('change', '.widget_tf_price_filters input[name="from"], .widget_tf_price_filters input[name="to"], [name*=tf_filters],[name*=tf_hotel_types],[name*=tf_room_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year],[name*=car_brand],[name*=car_transmission],[name*=carplay_android_auto_filter]', function () {
             if ($(".filter-reset-btn").length > 0) {
                 $(".filter-reset-btn").show();
             }
@@ -630,7 +636,8 @@
             e.preventDefault();
 
             // Reset checkboxes
-            $('[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year]').prop('checked', false);
+            $('[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year],[name*=car_brand],[name*=car_transmission],[name*=carplay_android_auto_filter]').prop('checked', false);
+            $('[name*=car_brand],[name*=car_transmission],[name*=carplay_android_auto_filter]').closest('.tf-filter-item').removeClass('active');
             
             // Reset price sliders
             if ($('.tf-hotel-filter-range').length > 0) {
@@ -1920,9 +1927,19 @@
 
         /* see more checkbox filter end */
 
-        //active checkbox bg
-        $('.tf_widget input').on('click', function () {
-            $(this).parent().parent().toggleClass('active');
+        // Sync item active state with checked inputs.
+        $(document).on('change', '.tf_widget input', function () {
+            let $input = $(this);
+            if ($input.is(':radio')) {
+                let name = $input.attr('name');
+                if (name) {
+                    $(`.tf_widget input[name="${name}"]`).each(function () {
+                        $(this).closest('.tf-filter-item').toggleClass('active', $(this).is(':checked'));
+                    });
+                }
+            } else {
+                $input.closest('.tf-filter-item').toggleClass('active', $input.is(':checked'));
+            }
         });
 
         /**

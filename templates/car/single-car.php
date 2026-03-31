@@ -117,6 +117,7 @@ while ( have_posts() ) : the_post();
 	$mileage_type = ! empty( $meta['mileage_type'] ) ? $meta['mileage_type'] : 'Km';
 	$total_mileage = ! empty( $meta['mileage'] ) ? $meta['mileage'] : '';
 	$auto_transmission = ! empty( $meta['auto_transmission'] ) ? $meta['auto_transmission'] : '';
+	$carplay_android_auto = ! empty( $meta['carplay_android_auto'] ) ? $meta['carplay_android_auto'] : '';
 	$fuel_included = ! empty( $meta['fuel_included'] ) ? $meta['fuel_included'] : '';
 	$shuttle_car = ! empty( $meta['shuttle_car'] ) ? $meta['shuttle_car'] : '';
 	$shuttle_car_fee_type = ! empty( $meta['shuttle_car_fee_type'] ) ? $meta['shuttle_car_fee_type'] : 'free';

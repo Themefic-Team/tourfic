@@ -265,6 +265,22 @@ function tf_hotel_booking_callback() {
 	 */
 	if ( ! array_key_exists( 'errors', $response ) || count( $response['errors'] ) == 0 ) {
 
+		/**
+		 * Hook: tf_hotel_booking_after_validation
+		 * Fires after validation passes and before processing the booking.
+		 *
+		 * @since 2.3.0
+		 * @hook tf_hotel_booking_after_validation
+		 * @param int $post_id The hotel post ID.
+		 * @param int $room_id The room post ID.
+		 * @param string $check_in Check-in date.
+		 * @param string $check_out Check-out date.
+		 * @param int $adult Number of adults.
+		 * @param int $child Number of children.
+		 * @param int $room_selected Number of rooms selected.
+		 */
+		do_action( 'tf_hotel_booking_after_validation', $post_id, $room_id, $check_in, $check_out, $adult, $child, $room_selected );
+
 		if (3 == $tf_booking_type) {
 			$tf_hotel_booking_fields = !empty(Helper::tfopt( 'hotel-book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'hotel-book-confirm-field' )) : '';
 
@@ -799,12 +815,39 @@ function tf_hotel_booking_callback() {
 				}
 			}
 		} else {
+			/**
+			 * Hook: tf_hotel_before_booking_added_to_cart
+			 * Fires before a hotel booking is added to the WooCommerce cart.
+			 *
+			 * @since 2.3.0
+			 * @hook tf_hotel_before_booking_added_to_cart
+			 * @param int $post_id The hotel post ID.
+			 * @param array $tf_room_data The room booking data array.
+			 * @param int $post_id The hotel post ID.
+			 * @param int $product_id The WooCommerce product ID.
+			 */
+			do_action( 'tf_hotel_before_booking_added_to_cart', $post_id, $tf_room_data, $post_id, $product_id );
+
 			# Add product to cart with the custom cart item data
 			$added_to_cart = WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
 			if ( ! $added_to_cart ) {
 				$response['status']   = 'error';
 				$response['errors'][] = esc_html__( 'Unable to add this hotel booking to cart. Please try again.', 'tourfic' );
 			} else {
+				/**
+				 * Hook: tf_hotel_after_booking_added_to_cart
+				 * Fires after a hotel booking is successfully added to the WooCommerce cart.
+				 *
+				 * @since 2.3.0
+				 * @hook tf_hotel_after_booking_added_to_cart
+				 * @param int $post_id The hotel post ID.
+				 * @param array $tf_room_data The room booking data array.
+				 * @param int $post_id The hotel post ID.
+				 * @param int $product_id The WooCommerce product ID.
+				 * @param string $added_to_cart The cart item key or false.
+				 */
+				do_action( 'tf_hotel_after_booking_added_to_cart', $post_id, $tf_room_data, $post_id, $product_id, $added_to_cart );
+
 				$response['product_id']  = $product_id;
 				$response['add_to_cart'] = 'true';
 				$response['redirect_to'] = $instantio_is_active == 1 ? ( $quick_checkout == 0 ? wc_get_checkout_url() : '' ) : wc_get_checkout_url();
@@ -1305,6 +1348,22 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 					)
 				)
 			);
+
+			/**
+			 * Hook: tf_hotel_booking_processed
+			 * Fires when a hotel booking is processed (WooCommerce order is placed).
+			 *
+			 * @since 2.3.0
+			 * @hook tf_hotel_booking_processed
+			 * @param int $order_id The WooCommerce order ID.
+			 * @param WC_Order $order The WooCommerce order object.
+			 * @param int $item_id The item ID.
+			 * @param array $item The item data.
+			 * @param array $billinginfo The billing information.
+			 * @param array $shippinginfo The shipping information.
+			 * @param array $iteminfo The item information.
+			 */
+			do_action( 'tf_hotel_booking_processed', $order_id, $order, $item_id, $item, $billinginfo, $shippinginfo, $iteminfo );
 		}
 
 	}
@@ -1540,6 +1599,22 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 					)
 				)
 			);
+
+			/**
+			 * Hook: tf_hotel_booking_processed
+			 * Fires when a hotel booking is processed (WooCommerce order is placed).
+			 *
+			 * @since 2.3.0
+			 * @hook tf_hotel_booking_processed
+			 * @param int $order_id The WooCommerce order ID.
+			 * @param WC_Order $order The WooCommerce order object.
+			 * @param int $item_id The item ID.
+			 * @param array $item The item data.
+			 * @param array $billinginfo The billing information.
+			 * @param array $shippinginfo The shipping information.
+			 * @param array $iteminfo The item information.
+			 */
+			do_action( 'tf_hotel_booking_processed', $order_id, $order, $item_id, $item, $billinginfo, $shippinginfo, $iteminfo );
 		}
 
 	}

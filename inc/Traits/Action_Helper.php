@@ -903,6 +903,14 @@ trait Action_Helper {
 		$fuel_type = !empty( $tf_fuel_type ) ? explode( ',', $tf_fuel_type ) : null;
 		$tf_engine_year = !empty( $_POST['engine_year'] ) ? sanitize_text_field( $_POST['engine_year'] ) : null;
 		$engine_year = !empty( $tf_engine_year ) ? explode( ',', $tf_engine_year ) : null;
+		$tf_car_brand = ! empty( $_POST['car_brand'] ) ? sanitize_text_field( wp_unslash( $_POST['car_brand'] ) ) : null;
+		$car_brand = ! empty( $tf_car_brand ) ? explode( ',', $tf_car_brand ) : null;
+		$tf_car_transmission = isset( $_POST['car_transmission'] ) && function_exists( 'tf_normalize_car_binary_filter_values' )
+			? tf_normalize_car_binary_filter_values( wp_unslash( $_POST['car_transmission'] ) )
+			: array();
+		$tf_carplay_android_auto = isset( $_POST['carplay_android_auto'] ) && function_exists( 'tf_normalize_car_binary_filter_values' )
+			? tf_normalize_car_binary_filter_values( wp_unslash( $_POST['carplay_android_auto'] ) )
+			: array();
 
 		$tf_startprice  = isset( $_POST['startprice'] ) ? sanitize_text_field( $_POST['startprice'] ) : '';
 		$tf_endprice  = isset( $_POST['endprice'] ) ? sanitize_text_field( $_POST['endprice'] ) : '';
@@ -1248,7 +1256,7 @@ trait Action_Helper {
 			);
 		}
 
-		// NOTE: Car seat/price/driver-age filtering is handled by tf_car_availability_response()
+		// NOTE: Car seat/price/driver-age/transmission/CarPlay filtering is handled by tf_car_availability_response()
 		// to keep behavior consistent across legacy and modern car meta schemas.
 
 		if ( $category ) {
@@ -1302,6 +1310,25 @@ trait Action_Helper {
 				foreach ( $engine_year as $key => $term_id ) {
 					$args['tax_query']['tf_engine_year'][] = array(
 						'taxonomy' => 'carrental_engine_year',
+						'terms'    => array( $term_id ),
+					);
+				}
+			}
+		}
+
+		if ( $car_brand ) {
+			$args['tax_query']['relation'] = $relation;
+			if ( $filter_relation == "OR" ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => 'carrental_brand',
+					'terms'    => $car_brand,
+				);
+			} else {
+				$args['tax_query']['tf_car_brand']['relation'] = 'AND';
+
+				foreach ( $car_brand as $term_id ) {
+					$args['tax_query']['tf_car_brand'][] = array(
+						'taxonomy' => 'carrental_brand',
 						'terms'    => array( $term_id ),
 					);
 				}
@@ -1361,7 +1388,7 @@ trait Action_Helper {
 
 					$car_inventory = Availability::tf_car_inventory(get_the_ID(), $car_meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 					if($car_inventory){
-						tf_car_availability_response( $car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice, $tf_min_seat, $tf_max_seat, $tf_driver_age, $car_driver_min_age, $car_driver_max_age );
+						tf_car_availability_response( $car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice, $tf_min_seat, $tf_max_seat, $tf_driver_age, $car_driver_min_age, $car_driver_max_age, $tf_car_transmission, $tf_carplay_android_auto );
 					}
 				} elseif ( $posttype == 'tf_room' ) {
 					
