@@ -106,7 +106,15 @@ class Pricing {
 		$children_price = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
 		$infant_price   = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
 
-		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+		$tour_availability_data = [];
+		if ( isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ) {
+			if ( is_array( $meta['tour_availability'] ) ) {
+				$tour_availability_data = $meta['tour_availability'];
+			} elseif ( is_string( $meta['tour_availability'] ) ) {
+				$decoded = json_decode( $meta['tour_availability'], true );
+				$tour_availability_data = is_array( $decoded ) ? $decoded : [];
+			}
+		}
 		
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		$package_pricing_values = ! empty( $package_pricing ) && is_array( $package_pricing ) ? array_values( $package_pricing ) : [];
@@ -274,7 +282,15 @@ class Pricing {
 		$tour_price                       = [];
 		$meta                             = $this->meta;
 		$pricing_rule                     = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+		$tour_availability_data = [];
+		if ( isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ) {
+			if ( is_array( $meta['tour_availability'] ) ) {
+				$tour_availability_data = $meta['tour_availability'];
+			} elseif ( is_string( $meta['tour_availability'] ) ) {
+				$decoded = json_decode( $meta['tour_availability'], true );
+				$tour_availability_data = is_array( $decoded ) ? $decoded : [];
+			}
+		}
 
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		$package_pricing_values = ! empty( $package_pricing ) && is_array( $package_pricing ) ? array_values( $package_pricing ) : [];
@@ -503,7 +519,15 @@ class Pricing {
 		$tour_price                       = [];
 		$meta                             = $this->meta;
 		$pricing_rule                     = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+		$tour_availability_data = [];
+		if ( isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ) {
+			if ( is_array( $meta['tour_availability'] ) ) {
+				$tour_availability_data = $meta['tour_availability'];
+			} elseif ( is_string( $meta['tour_availability'] ) ) {
+				$decoded = json_decode( $meta['tour_availability'], true );
+				$tour_availability_data = is_array( $decoded ) ? $decoded : [];
+			}
+		}
 		
 		$min_person = null;
 		$max_person = null;
@@ -632,7 +656,15 @@ class Pricing {
 		$tour_date = $this->date;
 		$tour_time = $this->time;
 
-		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+		$tour_availability_data = [];
+		if ( isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ) {
+			if ( is_array( $meta['tour_availability'] ) ) {
+				$tour_availability_data = $meta['tour_availability'];
+			} elseif ( is_string( $meta['tour_availability'] ) ) {
+				$decoded = json_decode( $meta['tour_availability'], true );
+				$tour_availability_data = is_array( $decoded ) ? $decoded : [];
+			}
+		}
 
 		$matched_availability = null;
 		if ( $tour_date && is_array($tour_availability) ) {
@@ -710,7 +742,15 @@ class Pricing {
 				}
 				
 				$pricing_rule = !empty( $meta['pricing'] ) ? $meta['pricing'] : 'person';
-				$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+				$tour_availability_data = [];
+				if ( isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ) {
+					if ( is_array( $meta['tour_availability'] ) ) {
+						$tour_availability_data = $meta['tour_availability'];
+					} elseif ( is_string( $meta['tour_availability'] ) ) {
+						$decoded = json_decode( $meta['tour_availability'], true );
+						$tour_availability_data = is_array( $decoded ) ? $decoded : [];
+					}
+				}
 
 				if(!empty($tour_availability_data)){
 					foreach ($tour_availability_data as $data) {
@@ -808,7 +848,15 @@ class Pricing {
 		$adult_price    = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
 		$children_price = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
 
-		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+		$tour_availability_data = [];
+		if ( isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ) {
+			if ( is_array( $meta['tour_availability'] ) ) {
+				$tour_availability_data = $meta['tour_availability'];
+			} elseif ( is_string( $meta['tour_availability'] ) ) {
+				$decoded = json_decode( $meta['tour_availability'], true );
+				$tour_availability_data = is_array( $decoded ) ? $decoded : [];
+			}
+		}
 
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
