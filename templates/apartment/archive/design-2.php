@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) || exit;
 
         <?php
         use \Tourfic\Classes\Helper;
-        use Tourfic\Classes\Apartment\Components\Archive\Listings;
+        use Tourfic\App\Templates\Components\Apartment\Archive\Listings;
 
         do_action('tf_before_container');
         $tf_apartment_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_2_bannar'] : '';

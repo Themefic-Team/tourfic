@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\Classes\Car_Rental\Components\Archive;
+namespace Tourfic\App\Templates\Components\Car_Rental\Archive;
 
 defined( 'ABSPATH' ) || exit;
 

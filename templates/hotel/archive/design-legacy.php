@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
-use Tourfic\Classes\Hotel\Components\Archive\Listings;
+use Tourfic\App\Templates\Components\Hotel\Archive\Listings;
 ?>
 
 <div class="tf-main-wrapper tf-archive-template__legacy" data-fullwidth="true">

@@ -6,7 +6,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
-use \Tourfic\Classes\Room\Components\Archive\Listings;
+use \Tourfic\App\Templates\Components\Room\Archive\Listings;
 
 if(wp_is_block_theme()){
     wp_head();

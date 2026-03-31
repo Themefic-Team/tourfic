@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
-use Tourfic\Classes\Tour\Components\Archive\Listings;
+use Tourfic\App\Templates\Components\Tour\Archive\Listings;
 ?>
 <div class="tf-main-wrapper tf-archive-template__legacy" data-fullwidth="true">
 	<?php do_action( 'tf_before_container' ); ?>

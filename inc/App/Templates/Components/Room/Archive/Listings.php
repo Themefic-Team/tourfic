@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\Classes\Room\Components\Archive;
+namespace Tourfic\App\Templates\Components\Room\Archive;
 
 defined( 'ABSPATH' ) || exit;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\App;
+namespace Tourfic\App\Templates;
 
 // don't load directly
 defined( 'ABSPATH' ) || exit;

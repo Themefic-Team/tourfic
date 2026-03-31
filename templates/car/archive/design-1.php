@@ -2,7 +2,7 @@
 // Don't load directly
 defined( 'ABSPATH' ) || exit;
 
-use Tourfic\Classes\Car_Rental\Components\Archive\Listings;
+use Tourfic\App\Templates\Components\Car_Rental\Archive\Listings;
 use \Tourfic\Classes\Helper;
 
 $tf_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_design_1_bannar'] : '';

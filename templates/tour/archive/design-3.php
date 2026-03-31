@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
-use Tourfic\Classes\Tour\Components\Archive\Listings;
+use Tourfic\App\Templates\Components\Tour\Archive\Listings;
 
 $tf_tour_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_3_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_3_bannar'] : '';
 ?>

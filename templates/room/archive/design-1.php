@@ -1,7 +1,7 @@
 <?php
 
 use \Tourfic\Classes\Helper;
-use Tourfic\Classes\Room\Components\Archive\Listings;
+use Tourfic\App\Templates\Components\Room\Archive\Listings;
 ?>
 
 <div class="tf-archive-template__one sp-0">
