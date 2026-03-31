@@ -33,7 +33,7 @@ class Template_Builder {
         
         if ( function_exists( 'bricks_is_builder' ) || defined( 'BRICKS_VERSION' ) ) {
             add_action('init', [$this, 'setup_bricks_editor_post_data']);
-            // add_action( 'wp_enqueue_scripts', [ $this, 'prepare_bricks_frontend_assets' ], 1 ); //for inline css
+            add_action( 'wp_enqueue_scripts', [ $this, 'prepare_bricks_frontend_assets' ], 1 ); //for inline css
             add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_bricks_template_css' ] );
             // add_action( 'wp_head', [ $this, 'print_bricks_archive_inline_css' ], 20 );
             add_action( 'admin_bar_menu', [ $this, 'add_bricks_admin_bar_link' ], 100 );
