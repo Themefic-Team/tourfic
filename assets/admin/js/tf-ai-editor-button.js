@@ -38,7 +38,36 @@
 		if (!header) return;
 
 		var btn = createButton();
-		header.insertBefore(btn, header.firstChild);
+
+		// Prefer placing the button immediately to the left of the Preview control.
+		// This keeps the button visually grouped with the Preview/Publish actions.
+		var previewChild = null;
+		var children = header.children ? Array.prototype.slice.call(header.children) : [];
+		for (var i = 0; i < children.length; i++) {
+			var el = children[i];
+			if (!el) continue;
+
+			if (
+				el.classList.contains('editor-post-preview') ||
+				el.classList.contains('editor-post-preview__dropdown') ||
+				el.querySelector('.editor-post-preview, .editor-post-preview__dropdown')
+			) {
+				previewChild = el;
+				break;
+			}
+
+			var aria = (el.getAttribute && el.getAttribute('aria-label')) ? el.getAttribute('aria-label') : '';
+			if (aria && aria.toLowerCase().indexOf('preview') !== -1) {
+				previewChild = el;
+				break;
+			}
+		}
+
+		if (previewChild) {
+			header.insertBefore(btn, previewChild);
+		} else {
+			header.insertBefore(btn, header.firstChild);
+		}
 	}
 
 	// Use MutationObserver to wait until the editor header is rendered.
