@@ -8,21 +8,10 @@ defined( 'ABSPATH' ) || exit;
     <?php
     use \Tourfic\Classes\Helper;
     use Tourfic\App\Templates\Components\Apartment\Archive\Listings;
+    use Tourfic\App\Templates\Components\Global\Archive\Banner;
 
-    $tf_apartment_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] : '';
+    Banner::render();
     ?>
-    <!--Hero section start -->
-    <div class="tf-hero-section-wrap" style="<?php echo !empty($tf_apartment_arc_banner) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url($tf_apartment_arc_banner).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
-        <div class="tf-container">
-            <div class="tf-hero-content tf-archive-hero-content">
-                <div class="tf-head-title">
-                    <h1><?php esc_html_e("Apartment", "tourfic"); ?></h1>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Hero section End -->
-
 
     <!--Content section end -->
     <div class="tf-content-wrapper">
