@@ -1269,7 +1269,7 @@ class TF_Options {
 			] );
 		}
 		if ( $new_post != 'true' ) {
-			$tour_availability = !empty($tour_data['tour_availability']) ? ( is_array($tour_data['tour_availability']) ? $tour_data['tour_availability'] : json_decode( $tour_data['tour_availability'], true ) ) : [];
+			$tour_availability = !empty($tour_data['tour_availability']) ? json_decode( $tour_data['tour_availability'], true ) : [];
 
 			if ( isset( $tour_availability ) && ! empty( $tour_availability ) ) {
 				$tour_availability_data = array_merge( $tour_availability, $tour_availability_data );
@@ -1318,7 +1318,7 @@ class TF_Options {
 		$tour_data        = get_post_meta( $tour_id, 'tf_tours_opt', true );
 		$pricing_by = ! empty( $tour_data['pricing'] ) ? $tour_data['pricing'] : 'person';
 		if ( $new_post != 'true' ) {
-			$tour_availability_data = isset( $tour_data['tour_availability'] ) && ! empty( $tour_data['tour_availability'] ) ? ( is_array($tour_data['tour_availability']) ? $tour_data['tour_availability'] : json_decode( $tour_data['tour_availability'], true ) ) : [];
+			$tour_availability_data = isset( $tour_data['tour_availability'] ) && ! empty( $tour_data['tour_availability'] ) ? json_decode( $tour_data['tour_availability'], true ) : [];
 		} else {
 			$tour_availability_data = json_decode( stripslashes( $tour_availability ), true );
 		}

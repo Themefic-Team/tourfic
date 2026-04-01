@@ -72,9 +72,6 @@ class Base {
 			\Tourfic\Admin\Notice_Update::instance();
 			// Room_Notice::instance();
 			Plugin_Page_Notice::instance();
-
-			// AI Submenu (shows upsell for free users; skips when Pro is active)
-			\Tourfic\Admin\TF_AI_Submenu::instance();
 		}
 		// Promo Notice
 		TF_Promo_Notice::instance();
@@ -118,6 +115,10 @@ class Base {
 		\Tourfic\App\Shortcodes\Hotel_Locations::instance();
 		\Tourfic\App\Shortcodes\Recent_Hotel::instance();
 		\Tourfic\App\Shortcodes\Hotel_External_Listings::instance();
+
+		\Tourfic\App\Shortcodes\Rooms::instance();
+		\Tourfic\App\Shortcodes\Room_Types::instance();
+		\Tourfic\App\Shortcodes\Recent_Room::instance();
 
 		\Tourfic\App\Shortcodes\Tours::instance();
 		\Tourfic\App\Shortcodes\Tour_Destinations::instance();

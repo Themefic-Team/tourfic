@@ -88,7 +88,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 				echo '<div class="tf-popup-box">
 					<div class="tf-add-category-box">
 					<div class="tf-add-category-box-header">
-						<h3>'.(!empty($args['add_button_text']) ? esc_html($args['add_button_text']) : 'Add New').'</h3>
+						<h3>'.(!empty($args['add_button_text']) ? esc_html($args['add_button_text']) : esc_html__('Add New', 'tourfic')).'</h3>
 						<span class="tf-add-category-box-close">
 							<i class="fa-solid fa-xmark"></i>
 						</span>
@@ -100,14 +100,14 @@ if ( ! class_exists( 'TF_select2' ) ) {
 
 					<div class="tf-add-category-box-content">
 						<div class="tf-single-category-box">
-							<label>Name</label>
+							<label>'.esc_html__('Name', 'tourfic').'</label>
 							<input type="text" id="category_title">
 						</div>
 
 						<div class="tf-single-category-box">
-							<label>Parent</label>
+							<label>'.esc_html__('Parent', 'tourfic').'</label>
 							<select id="parent_category">
-							<option value="">--Select--</option>';
+							<option value="">'.esc_html__('--select--', 'tourfic').'</option>';
 								
 							// Loop through the query_args to populate the select options
 							foreach($args['options'] as $value => $label){
@@ -117,7 +117,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 						echo '</select>
 						</div>
 
-						<button class="tf-admin-btn tf-btn-secondary tf-category-button">'.(!empty($args['add_button_text']) ? esc_html($args['add_button_text']) : 'Add New').'</button>
+						<button class="tf-admin-btn tf-btn-secondary tf-category-button">'.(!empty($args['add_button_text']) ? esc_html($args['add_button_text']) : esc_html__('Add New', 'tourfic')).'</button>
 					</div>
 				</div>
 				</div>';
@@ -149,7 +149,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 
 						<div class="tf-add-category-box-content">
 							<div class="tf-single-category-box">
-								<label><?php echo esc_html('Title', 'tourfic'); ?></label>
+								<label><?php echo esc_html__('Title', 'tourfic'); ?></label>
 								<input type="text" class="post_title" placeholder="<?php echo esc_attr__('Add title', 'tourfic'); ?>">
 							</div>
 

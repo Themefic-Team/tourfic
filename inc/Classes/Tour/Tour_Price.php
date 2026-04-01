@@ -37,15 +37,7 @@ class Tour_Price {
 
         $pricing_rule = !empty($meta['pricing']) ? $meta['pricing'] : 'person';
 
-        $tour_availability_data = [];
-        if ( isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ) {
-            if ( is_array( $meta['tour_availability'] ) ) {
-                $tour_availability_data = $meta['tour_availability'];
-            } elseif ( is_string( $meta['tour_availability'] ) ) {
-                $decoded = json_decode( $meta['tour_availability'], true );
-                $tour_availability_data = is_array( $decoded ) ? $decoded : [];
-            }
-        }
+		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
 		
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		$package_pricing_values = ! empty( $package_pricing ) && is_array( $package_pricing ) ? array_values( $package_pricing ) : [];

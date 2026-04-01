@@ -326,12 +326,7 @@ class Enqueue {
 			$tour_type                  = ! empty( $meta['type'] ) ? $meta['type'] : '';
 			$tour_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
-			$tour_availability = '';
-			if ( ! empty( $meta['tour_availability'] ) ) {
-				$tour_availability = is_string( $meta['tour_availability'] )
-					? json_decode( $meta['tour_availability'] )
-					: $meta['tour_availability'];
-			}
+			$tour_availability          = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability']) : '';
 			
 			// Same Day Booking
 			$disable_same_day = ! empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
@@ -345,12 +340,7 @@ class Enqueue {
 			$single_tour_form_data['date_format']      = esc_html( $tour_date_format_for_users );
 			$single_tour_form_data['flatpickr_locale'] = ! empty( get_locale() ) ? get_locale() : 'en_US';
 				if($tour_type=='fixed'){
-					$tour_availability = '';
-					if ( ! empty( $meta['tour_availability'] ) ) {
-						$tour_availability = is_string( $meta['tour_availability'] )
-							? json_decode( $meta['tour_availability'], true )
-							: $meta['tour_availability'];
-					}
+					$tour_availability          = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
 
 					$normalized = [];
 					if ( !empty($tour_availability) && is_array( $tour_availability ) ) {

@@ -86,7 +86,7 @@ function tf_tours_booking_function() {
 		return;
 	}
 
-	$tour_availability = ! empty( $meta['tour_availability'] ) ? ( is_array($meta['tour_availability']) ? $meta['tour_availability'] : json_decode($meta['tour_availability'], true) ) : '';
+	$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
 
 	$matched_availability = null;
 	if ( $tour_date && is_array($tour_availability) ) {

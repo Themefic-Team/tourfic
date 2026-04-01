@@ -211,25 +211,10 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			}
 		}
 
-		$tour_availability = '';
-		if ( ! empty( $meta['tour_availability'] ) ) {
-			if ( is_array( $meta['tour_availability'] ) ) {
-				$tour_availability = $meta['tour_availability'];
-			} elseif ( is_string( $meta['tour_availability'] ) ) {
-				$tour_availability = json_decode( $meta['tour_availability'] );
-			}
-		}
+		$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability']) : '';
 
 			if($tour_type=='fixed'){
-				$tour_availability = [];
-				if ( ! empty( $meta['tour_availability'] ) ) {
-					if ( is_array( $meta['tour_availability'] ) ) {
-						$tour_availability = $meta['tour_availability'];
-					} elseif ( is_string( $meta['tour_availability'] ) ) {
-						$decoded = json_decode( $meta['tour_availability'], true );
-						$tour_availability = is_array( $decoded ) ? $decoded : [];
-					}
-				}
+				$tour_availability          = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
 
 				$normalized = [];
 				if ( !empty($tour_availability) && is_array( $tour_availability ) ) {
@@ -432,15 +417,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			return;
 		}
 
-		$tour_availability = [];
-		if ( ! empty( $meta['tour_availability'] ) ) {
-			if ( is_array( $meta['tour_availability'] ) ) {
-				$tour_availability = $meta['tour_availability'];
-			} elseif ( is_string( $meta['tour_availability'] ) ) {
-				$decoded = json_decode( $meta['tour_availability'], true );
-				$tour_availability = is_array( $decoded ) ? $decoded : [];
-			}
-		}
+		$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
 
 		$matched_availability = null;
 		if ( $tour_date && is_array($tour_availability) ) {

@@ -83,7 +83,8 @@ class TF_Widget_Base {
             TF_Widgets\Car_Transmission_Filter::instance(),
             TF_Widgets\Car_Connectivity_Filter::instance(),
             TF_Widgets\Car_Seat_Range_Filter::instance(),
-            TF_Widgets\Car_Engine_Filter::instance()
+            TF_Widgets\Car_Engine_Filter::instance(),
+            TF_Widgets\Room_Type_Filter::instance(),
         );
         foreach ( $custom_widgets as $key => $widget ) {
             register_widget( $widget );
