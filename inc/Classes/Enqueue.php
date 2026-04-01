@@ -528,6 +528,13 @@ class Enqueue {
 		wp_enqueue_style( 'notyf', TF_ASSETS_URL . 'app/libs/notyf/notyf.min.css', '', TF_VERSION );
 		wp_enqueue_script( 'notyf', TF_ASSETS_URL . 'app/libs/notyf/notyf.min.js', array( 'jquery' ), TF_VERSION, true );
 
+		/**
+		 * Admin Dashboard CSS
+		 */
+		if ( $screen == 'index.php' ) {
+			wp_enqueue_style( 'tf-admin-dashboard', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin-dashboard.css', '', TF_VERSION );
+		}
+
 		if ( ($screen == "widgets.php" && function_exists( 'is_woocommerce' )) || 
 			$screen == 'tf_hotel_page_tf_export_hotels' ||
 			$screen == 'tf_tours_page_tf_export_tours' ||
@@ -564,6 +571,7 @@ class Enqueue {
 			wp_add_inline_script( 'select2', $output );
 
 		}
+
 
 	}
 
