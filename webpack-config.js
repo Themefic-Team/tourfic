@@ -74,6 +74,7 @@ elementorScssFiles.forEach(file => {
 StyleEntryPoints['tourfic/assets/app/css/tourfic-style'] = appScss;
 StyleEntryPoints['tourfic-pro/assets/app/css/tourfic-pro'] = proAppScss;
 StyleEntryPoints['tourfic/assets/admin/css/tourfic-admin'] = adminScss;
+StyleEntryPoints['tourfic/assets/admin/css/tourfic-admin-dashboard'] = glob.sync('./sass/admin/css/free/tourfic-dashboard.scss');
 StyleEntryPoints['tourfic-pro/assets/admin/css/tourfic-pro-admin'] = proAdminScss;
 StyleEntryPoints['/tourfic-vendor/public/assets/css/tourfic-vendor'] = addonAppScss;
 StyleEntryPoints['/tourfic-vendor/admin/assets/css/tourfic-vendor-admin'] = addonAdminScss;
