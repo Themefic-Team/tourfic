@@ -28,7 +28,15 @@ use Tourfic\Classes\Helper;
 				<?php }
 
 					
-				$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+				$tour_availability_data = [];
+				if ( isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ) {
+					if ( is_array( $meta['tour_availability'] ) ) {
+						$tour_availability_data = $meta['tour_availability'];
+					} elseif ( is_string( $meta['tour_availability'] ) ) {
+						$decoded = json_decode( $meta['tour_availability'], true );
+						$tour_availability_data = is_array( $decoded ) ? $decoded : [];
+					}
+				}
 				$tf_package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
 				$tf_max_people = [];
