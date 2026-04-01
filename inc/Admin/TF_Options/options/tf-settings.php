@@ -2011,6 +2011,77 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
+		//AI Settings
+		'tf-ai-settings'    => array(
+			'title'  => esc_html__( 'AI Settings', 'tourfic' ),
+			'parent' => 'pro_options',
+			'icon'   => 'fa fa-microchip',
+			'fields' => array(
+				array(
+					'id'      => 'tf-ai-settings-heading',
+					'type'    => 'heading',
+					'title'   => esc_html__( 'AI Settings', 'tourfic' ),
+					'content' => esc_html__( 'Configure AI features for content generation and image creation.', 'tourfic' ),
+					'is_pro'  => true,
+				),
+				array(
+					'id'          => 'tf-openai-api-key',
+					'type'        => 'text',
+					'label'       => esc_html__( 'OpenAI API Key', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Enter your OpenAI API key to enable AI-powered features. You can get your API key from OpenAI dashboard.', 'tourfic' ),
+					'placeholder' => esc_html__( 'sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 'tourfic' ),
+					'attributes'  => array(
+						'type' => 'password',
+					),
+					'is_pro'      => true,
+				),
+				array(
+					'id'       => 'tf-ai-image-generation',
+					'type'     => 'radio',
+					'label'    => esc_html__( 'AI Image Generation', 'tourfic' ),
+					'subtitle' => esc_html__( 'Enable or disable AI-powered image generation using DALL-E. When enabled, the system can automatically generate images for your content.', 'tourfic' ),
+					'options'  => array(
+						'enabled'  => esc_html__( 'Enabled', 'tourfic' ),
+						'disabled' => esc_html__( 'Disabled', 'tourfic' ),
+					),
+					'default'  => 'disabled',
+					'is_pro'   => true,
+				),
+				array(
+					'id'         => 'tf-ai-image-model',
+					'type'       => 'select',
+					'label'      => esc_html__( 'AI Image Model', 'tourfic' ),
+					'subtitle'   => esc_html__( 'Select the DALL-E model version for image generation.', 'tourfic' ),
+					'options'    => array(
+						'dall-e-2' => esc_html__( 'DALL-E 2', 'tourfic' ),
+						'dall-e-3' => esc_html__( 'DALL-E 3', 'tourfic' ),
+					),
+					'default'    => 'dall-e-3',
+					'dependency' => array(
+						array( 'tf-ai-image-generation', '==', 'enabled' ),
+					),
+					'is_pro'     => true,
+				),
+				array(
+					'id'         => 'tf-ai-image-size',
+					'type'       => 'select',
+					'label'      => esc_html__( 'Image Size', 'tourfic' ),
+					'subtitle'   => esc_html__( 'Select the default size for generated images.', 'tourfic' ),
+					'options'    => array(
+						'256x256'   => esc_html__( '256x256', 'tourfic' ),
+						'512x512'   => esc_html__( '512x512', 'tourfic' ),
+						'1024x1024' => esc_html__( '1024x1024', 'tourfic' ),
+						'1792x1024' => esc_html__( '1792x1024 (DALL-E 3 only)', 'tourfic' ),
+						'1024x1792' => esc_html__( '1024x1792 (DALL-E 3 only)', 'tourfic' ),
+					),
+					'default'    => '1024x1024',
+					'dependency' => array(
+						array( 'tf-ai-image-generation', '==', 'enabled' ),
+					),
+					'is_pro'     => true,
+				),
+			),
+		),
 		//user options
 		'user_options'          => array(
 			'title'  => esc_html__( 'User Options', 'tourfic' ),
