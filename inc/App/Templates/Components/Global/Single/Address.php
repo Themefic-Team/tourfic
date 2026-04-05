@@ -26,7 +26,7 @@ class Address {
 	public static function render( $settings = [], $builder = 'elementor' ) {
 		$post_id       = get_the_ID();
 		$post_type     = get_post_type();
-		$show_location = ! empty( $settings['show_location'] );
+		$show_location = Helper::get_switcher_value( $settings, 'show_location', 'yes', $builder );
         $design  = ! empty( $settings['design'] ) ? $settings['design'] : 'design-1';
 		$address       = '';
 		$first_location_url  = '';
@@ -64,7 +64,7 @@ class Address {
 		//Address icon
         $address_icon_html = $design == 'design-1' ? '<i class="fa-solid fa-location-dot"></i>' : '<i class="ri-map-pin-line"></i>';
         
-		if ( ! empty( $settings ) && $show_location ) {
+		if ( ! empty( $settings ) && 'yes' == $show_location ) {
 			if ( 'elementor' === $builder && class_exists( '\Elementor\Icons_Manager' ) ) {
 				$address_icon_migrated = isset($settings['__fa4_migrated']['address_icon']);
                 $address_icon_is_new = empty($settings['address_icon_comp']);
@@ -94,7 +94,7 @@ class Address {
 				echo wp_kses_post( $address );
 				echo '</div>';
 			} ?>
-			<?php if ( 'tf_hotel' === $post_type && $show_location && ! empty( $first_location_url ) ) : ?>
+			<?php if ( 'tf_hotel' === $post_type && 'yes' ==$show_location && ! empty( $first_location_url ) ) : ?>
 				<a href="<?php echo esc_url( $first_location_url ); ?>" class="more-hotel tf-d-ib">
 					<?php
 					/* translators: %s location name */
