@@ -3,6 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
+use Tourfic\App\Templates\Components\Global\Archive\Sidebar;
 use Tourfic\App\Templates\Components\Tour\Archive\Listings;
 ?>
 <div class="tf-main-wrapper tf-archive-template__legacy" data-fullwidth="true">
@@ -14,11 +15,7 @@ use Tourfic\App\Templates\Components\Tour\Archive\Listings;
 			<!-- Start Sidebar -->
 			<div class="tf-search-right">
 				<?php Helper::tf_archive_sidebar_search_form('tf_tours'); ?>
-				<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
-                    <div id="tf__booking_sidebar">
-                        <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
-                    </div>
-                <?php } ?>
+				<?php Sidebar::render( ['design' => 'design-1'] ); ?>
 			</div>
 			<!-- End Sidebar -->
 		</div>

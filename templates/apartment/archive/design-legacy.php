@@ -7,7 +7,8 @@ defined( 'ABSPATH' ) || exit;
 
 	use \Tourfic\Classes\Helper;
 	use Tourfic\App\Templates\Components\Apartment\Archive\Listings;
-	
+	use Tourfic\App\Templates\Components\Global\Archive\Sidebar;
+
     do_action( 'tf_before_container' ); 
     ?>
 	<div class="tf-container">
@@ -17,11 +18,7 @@ defined( 'ABSPATH' ) || exit;
 			<!-- Start Sidebar -->
 			<div class="tf-search-right">
 				<?php Helper::tf_archive_sidebar_search_form('tf_apartment');?>
-				<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
-                    <div id="tf__booking_sidebar">
-                        <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
-                    </div>
-                <?php } ?>
+				<?php Sidebar::render( ['design' => 'design-1'] ); ?>
 			</div>
 			<!-- End Sidebar -->
 		</div>

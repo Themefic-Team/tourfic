@@ -2166,6 +2166,10 @@ class Helper {
                    ( $post_type == 'tf_tours' && $design_tours == "design-2" ) ||
                    ( $post_type == 'tf_apartment' && $design_apartment == "design-1" )
         ) { ?>
+        <div class="tf-archive-template__two" style="padding: 0;">
+            <span class="tf-modify-search-btn">
+                <?php esc_html_e("Modify search", "tourfic"); ?>
+            </span>
             <div class="tf-archive-booking-form__style-2 tf-archive-search-form tf-booking-form-wrapper">
                 <form action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
                     <div class="tf-booking-form-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
@@ -2533,6 +2537,7 @@ class Helper {
                     <?php } ?>
                 </form>
             </div>
+        </div>
 		<?php
 		} elseif ( $post_type == 'tf_carrental' && $design_car == "design-1" ) { 
             $pickup_location_icon_html = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

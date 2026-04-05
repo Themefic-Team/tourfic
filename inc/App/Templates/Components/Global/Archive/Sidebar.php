@@ -2,6 +2,8 @@
 
 namespace Tourfic\App\Templates\Components\Global\Archive;
 
+use Mpdf\Tag\Em;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -18,7 +20,7 @@ class Sidebar {
 	 */
 	public static function render( $settings = [], $builder = '' ) {
 		$design  = ! empty( $settings['design'] ) ? $settings['design'] : 'design-1';
-		$sidebar = ! empty( $settings['sidebar'] ) ? $settings['sidebar'] : '';
+		$sidebar = ! empty( $settings['sidebar'] ) ? $settings['sidebar'] : 'tf_archive_booking_sidebar';
 
 		if ( 'design-1' === $design ) :
 			?>
@@ -51,19 +53,22 @@ class Sidebar {
 			<?php
 		elseif ( 'design-2' === $design ) :
 			?>
-			<div class="tf-sidebar__design-2">
-				<div class="tf-details-right tf-sitebar-widgets tf-archive-right">
-					<div class="tf-filter-wrapper">
-						<div class="tf-filter-title">
-							<h2 class="tf-section-title"><?php esc_html_e( 'Filter', 'tourfic' ); ?></h2>
-							<button class="filter-reset-btn"><?php esc_html_e( 'Reset', 'tourfic' ); ?></button>
+			<div class="tf-details-right tf-sitebar-widgets tf-archive-right">
+				<div class="tf-filter-wrapper">
+					<?php if(empty( $builder )) : ?>
+						<div class="tf-close-sidebar">
+							<i class="fa-solid fa-xmark"></i>
 						</div>
-						<?php if ( is_active_sidebar( $sidebar ) ) { ?>
-							<div id="tf__booking_sidebar">
-								<?php dynamic_sidebar( $sidebar ); ?>
-							</div>
-						<?php } ?>
+					<?php endif; ?>
+					<div class="tf-filter-title">
+						<h2 class="tf-section-title"><?php esc_html_e( 'Filter', 'tourfic' ); ?></h2>
+						<button class="filter-reset-btn"><?php esc_html_e( 'Reset', 'tourfic' ); ?></button>
 					</div>
+					<?php if ( is_active_sidebar( $sidebar ) ) { ?>
+						<div id="tf__booking_sidebar">
+							<?php dynamic_sidebar( $sidebar ); ?>
+						</div>
+					<?php } ?>
 				</div>
 			</div>
 			<?php
