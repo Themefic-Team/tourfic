@@ -130,13 +130,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                 <div class="tf-hero-bottom-area">
                     <div class="tf-head-title">
                         <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
-						<?php
-						if ( ! empty( $location ) ) { ?>
-                            <div class="tf-title-meta">
-                                <i class="ri-map-pin-line"></i>
-                                <a href="#tour-location"><?php echo esc_html( $location ); ?></a>
-                            </div>
-						<?php } ?>
+						<?php \Tourfic\App\Templates\Components\Global\Single\Address::render(['design' => 'design-2']); ?>
                     </div>
                     <div class="tf-hero-gallery-videos">
 						<?php

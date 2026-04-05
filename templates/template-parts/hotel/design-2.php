@@ -86,12 +86,7 @@ use \Tourfic\App\TF_Review;
             <div class="tf-hero-bottom-area">
                 <div class="tf-head-title">
                     <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
-                    <?php if(!empty($address)) { ?>
-                    <div class="tf-title-meta">
-                        <i class="ri-map-pin-line"></i>
-                        <a href="#hotel-map-location"><?php echo esc_html( $address ); ?></a>
-                    </div>
-                    <?php } ?>
+                    <?php \Tourfic\App\Templates\Components\Global\Single\Address::render(['design' => 'design-2']); ?>
                 </div>
                 <div class="tf-hero-gallery-videos">
                     <?php
