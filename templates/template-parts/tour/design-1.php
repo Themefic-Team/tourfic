@@ -40,7 +40,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 <div class="tf-section tf-single-head">
                     <div class="tf-head-info tf-flex tf-flex-space-bttn tf-flex-gap-24">
                         <div class="tf-head-title">
-                            <h1><?php the_title(); ?></h1>
+                            <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
                             <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                                 <?php if ( !empty($location) ) { ?>
                                     <i class="fa-solid fa-location-dot"></i>

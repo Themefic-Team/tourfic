@@ -25,7 +25,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                 <div class="tf-section tf-single-head">
                     <div class="tf-head-info tf-flex tf-flex-space-bttn tf-flex-gap-24">
                         <div class="tf-head-title">
-                            <h1><?php the_title(); ?></h1>
+                            <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
                             <?php if( !empty($locations )) : ?>
                                 <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                                 <?php if ( $locations ) { ?>

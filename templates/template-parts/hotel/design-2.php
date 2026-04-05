@@ -85,7 +85,7 @@ use \Tourfic\App\TF_Review;
             </div>
             <div class="tf-hero-bottom-area">
                 <div class="tf-head-title">
-                    <h1><?php the_title(); ?></h1>
+                    <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
                     <?php if(!empty($address)) { ?>
                     <div class="tf-title-meta">
                         <i class="ri-map-pin-line"></i>

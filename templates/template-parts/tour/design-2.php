@@ -129,7 +129,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                 </div>
                 <div class="tf-hero-bottom-area">
                     <div class="tf-head-title">
-                        <h1><?php the_title(); ?></h1>
+                        <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
 						<?php
 						if ( ! empty( $location ) ) { ?>
                             <div class="tf-title-meta">

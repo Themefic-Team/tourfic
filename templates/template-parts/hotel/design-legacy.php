@@ -47,7 +47,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
             <div class="tf-title-wrap">
                 <div class="tf-title-left">
                     <span class="post-type"><?php esc_html_e( 'Hotel', 'tourfic' ) ?></span>
-                    <h1><?php the_title(); ?></h1>
+                    <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
                     <!-- Start map link -->
 					<?php if ( $locations ) { ?>
                         <div class="tf-map-link">

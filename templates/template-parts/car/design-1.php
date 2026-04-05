@@ -159,18 +159,7 @@ $tf_cars_slug = get_option('car_slug');
         <div class="tf-container-inner">
             <div class="tf-single-car-details-warper">
                 <div class="tf-car-details-column">
-                    <div class="tf-car-title">
-                        <h1><?php the_title(); ?></h1>
-                        <div class="breadcrumb">
-                            <ul>
-                                <li><a href="<?php echo esc_url(site_url()); ?>"><?php esc_html_e( "Home", "tourfic" ) ?></a></li>
-                                <li>/</li>
-                                <li><a href="<?php echo esc_url(site_url()); ?>/<?php echo esc_attr($tf_cars_slug); ?>"><?php esc_html_e( "Cars", "tourfic" ) ?></a></li>
-                                <li>/</li>
-                                <li><?php the_title(); ?></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
                     <div class="tf-car-hero-gallery">
                         <div class="tf-featured-car">
                             <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Car Image', 'tourfic' ); ?>">

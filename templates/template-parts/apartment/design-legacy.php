@@ -14,7 +14,7 @@ use \Tourfic\Classes\Apartment\Apartment;
         <div class="tf-container">
             <div class="tf-title-wrap">
                 <div class="tf-title-left">
-                    <h1><?php the_title(); ?></h1>
+                    <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
                     <div class="tf-title-left-bottom">
 						<?php if ( ! empty( $address ) ) { ?>
                             <div class="tf-map-link">

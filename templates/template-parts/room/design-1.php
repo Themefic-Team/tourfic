@@ -17,7 +17,7 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
             <div class="tf-hero-content">
                 <div class="tf-hero-bottom-area">
                     <div class="tf-head-title">
-                        <h1><?php the_title(); ?></h1>
+                        <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
                     </div>
                     <div class="tf-hero-gallery-videos">
                         <?php if ( ! empty( $gallery_ids ) ) { ?>

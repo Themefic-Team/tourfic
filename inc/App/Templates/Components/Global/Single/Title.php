@@ -50,17 +50,11 @@ class Title {
 			</div>
 			<?php
 		else :
-			?>
-			<div class="tf-head-title">
-				<?php
-				printf(
-					'<%1$s class="tf-post-title">%2$s</%1$s>',
-					esc_attr( $title_tag ),
-					esc_html( get_the_title() )
-				);
-				?>
-			</div>
-			<?php
+			printf(
+				'<%1$s class="tf-post-title">%2$s</%1$s>',
+				esc_attr( $title_tag ),
+				esc_html( get_the_title() )
+			);
 		endif;
 	}
 }

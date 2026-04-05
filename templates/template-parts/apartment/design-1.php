@@ -88,7 +88,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
             </div>
             <div class="tf-hero-bottom-area">
                 <div class="tf-head-title">
-                    <h1><?php echo esc_html( get_the_title() ); ?></h1>
+                    <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
                     <?php if(!empty($address)) { ?>
                     <div class="tf-title-meta">
                         <i class="ri-map-pin-line"></i>

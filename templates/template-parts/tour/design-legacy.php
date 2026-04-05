@@ -168,7 +168,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         <div class="tf-container">
             <div class="tf-title-wrap">
                 <div class="tf-title-left">
-                    <h1><?php the_title(); ?></h1>
+                    <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
                     <!-- Start map link -->
                     <div class="tf-map-link" id="tf-map-location" data-location="<?php echo esc_attr( $location ) ?>">
                         <?php if ( !empty($location) ) {
