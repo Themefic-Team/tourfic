@@ -4,7 +4,7 @@ namespace Tourfic\Admin;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Adds "Create With AI" buttons to the Hotels and Tours sidebar submenus.
+ * Adds "Create With AI" buttons to the Hotels, Tours, Apartments, and Car Rental sidebar submenus.
  * When Tourfic Pro is active, this class does nothing (Pro handles its own AI submenu).
  * When Pro is NOT active, this shows the buttons with an upsell prompt on click.
  */
@@ -22,7 +22,7 @@ class TF_AI_Submenu {
 	}
 
 	/**
-	 * Register visible "Create With AI" submenu items under Hotels and Tours.
+	 * Register visible "Create With AI" submenu items under supported post types.
 	 * Skips when Pro is active (Pro registers its own with full modal functionality).
 	 */
 	public function register_ai_submenu() {
@@ -46,6 +46,24 @@ class TF_AI_Submenu {
 			'tf_ai_generate_tour',
 			'__return_null'
 		);
+
+		add_submenu_page(
+			'edit.php?post_type=tf_apartment',
+			__( 'Create With AI', 'tourfic' ),
+			'<span class="tf-ai-submenu-item" data-post-type="tf_apartment">' . esc_html__( 'Create With AI', 'tourfic' ) . '</span>',
+			'manage_options',
+			'tf_ai_generate_apartment',
+			'__return_null'
+		);
+
+		add_submenu_page(
+			'edit.php?post_type=tf_carrental',
+			__( 'Create With AI', 'tourfic' ),
+			'<span class="tf-ai-submenu-item" data-post-type="tf_carrental">' . esc_html__( 'Create With AI', 'tourfic' ) . '</span>',
+			'manage_options',
+			'tf_ai_generate_carrental',
+			'__return_null'
+		);
 	}
 
 	/**
@@ -58,7 +76,7 @@ class TF_AI_Submenu {
 
 		global $submenu;
 
-		$menus = array( 'edit.php?post_type=tf_hotel', 'edit.php?post_type=tf_tours' );
+		$menus = array( 'edit.php?post_type=tf_hotel', 'edit.php?post_type=tf_tours', 'edit.php?post_type=tf_apartment', 'edit.php?post_type=tf_carrental' );
 
 		foreach ( $menus as $parent ) {
 			if ( empty( $submenu[ $parent ] ) ) {
@@ -149,7 +167,7 @@ class TF_AI_Submenu {
 				</div>
 				<div class="tf-ai-upsell-badge"><?php esc_html_e( 'Pro Feature', 'tourfic' ); ?></div>
 				<h2><?php esc_html_e( 'Create With AI', 'tourfic' ); ?></h2>
-				<p><?php esc_html_e( 'Generate complete tours and hotels in minutes with AI. Upgrade to Tourfic Pro to unlock this powerful feature.', 'tourfic' ); ?></p>
+				<p><?php esc_html_e( 'Generate complete tours, hotels, apartments, and car rentals in minutes with AI. Upgrade to Tourfic Pro to unlock this powerful feature.', 'tourfic' ); ?></p>
 				<ul class="tf-ai-upsell-features">
 					<li>
 						<svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="#3b82f6" opacity=".1"/><path d="M5.5 9.5l2 2 5-5" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -180,7 +198,7 @@ class TF_AI_Submenu {
 
 	/**
 	 * Enqueue CSS/JS for the AI button on post list and classic editor screens.
-	 * Only loads on tf_hotel / tf_tours edit screens.
+	 * Only loads on supported post type edit screens.
 	 */
 	public function enqueue_ai_list_button_assets() {
 		if ( defined( 'TF_PRO' ) ) {
@@ -192,7 +210,7 @@ class TF_AI_Submenu {
 			return;
 		}
 
-		$valid_post_types = array( 'tf_hotel', 'tf_tours' );
+		$valid_post_types = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental' );
 
 		if ( ! in_array( $screen->post_type, $valid_post_types, true ) ) {
 			return;
@@ -236,7 +254,7 @@ class TF_AI_Submenu {
 
 	/**
 	 * Enqueue CSS/JS for the AI button inside the Gutenberg block editor header.
-	 * Only loads on tf_hotel / tf_tours block editor screens.
+	 * Only loads on supported post type block editor screens.
 	 */
 	public function enqueue_ai_editor_button_assets() {
 		if ( defined( 'TF_PRO' ) ) {
@@ -248,7 +266,7 @@ class TF_AI_Submenu {
 			return;
 		}
 
-		$valid_post_types = array( 'tf_hotel', 'tf_tours' );
+		$valid_post_types = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental' );
 
 		if ( ! in_array( $screen->post_type, $valid_post_types, true ) ) {
 			return;
