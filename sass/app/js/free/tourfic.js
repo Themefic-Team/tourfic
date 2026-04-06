@@ -1979,12 +1979,155 @@
         */
         let tf_hasErrorsFlag = false;
         let tf_firstErrorElement = null; // track the first error field
+        const tfTravelerCompliance = tf_params.traveler_compliance || {};
+
+        function tfGetTravelerPassengerType(travelerIndex) {
+            let remaining = travelerIndex;
+            const adultCount = parseInt($('#adults').val() || '0', 10);
+            const childCount = parseInt($('#children').val() || '0', 10);
+            const infantCount = parseInt($('#infant').val() || '0', 10);
+
+            if (remaining <= adultCount) {
+                return 'adult';
+            }
+
+            remaining -= adultCount;
+            if (remaining <= childCount) {
+                return 'child';
+            }
+
+            remaining -= childCount;
+            if (remaining <= infantCount) {
+                return 'infant';
+            }
+
+            return '';
+        }
+
+        function tfParseTravelerDate(value) {
+            if (!value) {
+                return null;
+            }
+
+            const dateFormat = tfTravelerCompliance.date_format || 'Y/m/d';
+            const normalizedValue = String(value).split(' - ')[0].trim();
+            const separatorMatch = dateFormat.match(/[^A-Za-z]/);
+            const separator = separatorMatch ? separatorMatch[0] : '/';
+            const formatParts = dateFormat.split(separator);
+            const valueParts = normalizedValue.split(separator);
+            const parts = {};
+
+            if (formatParts.length !== valueParts.length) {
+                return null;
+            }
+
+            formatParts.forEach(function (part, index) {
+                parts[part] = parseInt(valueParts[index], 10);
+            });
+
+            if (!parts.Y || !parts.m || !parts.d) {
+                return null;
+            }
+
+            const parsedDate = new Date(parts.Y, parts.m - 1, parts.d);
+
+            if (
+                Number.isNaN(parsedDate.getTime()) ||
+                parsedDate.getFullYear() !== parts.Y ||
+                parsedDate.getMonth() !== parts.m - 1 ||
+                parsedDate.getDate() !== parts.d
+            ) {
+                return null;
+            }
+
+            return parsedDate;
+        }
+
+        function tfCalculateTravelerAge(dobValue, referenceDate) {
+            const dob = tfParseTravelerDate(dobValue);
+            const reference = referenceDate ? tfParseTravelerDate(referenceDate) : new Date();
+
+            if (!dob || !reference || Number.isNaN(dob.getTime()) || Number.isNaN(reference.getTime()) || reference < dob) {
+                return null;
+            }
+
+            let age = reference.getFullYear() - dob.getFullYear();
+            const monthDiff = reference.getMonth() - dob.getMonth();
+
+            if (monthDiff < 0 || (monthDiff === 0 && reference.getDate() < dob.getDate())) {
+                age -= 1;
+            }
+
+            return age;
+        }
+
+        function tfTravelerAgeMatchesPassengerType(passengerType, age) {
+            if (typeof age !== 'number') {
+                return false;
+            }
+
+            const adultMinAge = parseInt(tfTravelerCompliance.adult_min_age || '12', 10);
+            const childMinAge = parseInt(tfTravelerCompliance.child_min_age || '2', 10);
+            const infantMaxAge = parseInt(tfTravelerCompliance.infant_max_age || '2', 10);
+
+            if (passengerType === 'adult') {
+                return age >= adultMinAge;
+            }
+
+            if (passengerType === 'child') {
+                return age >= childMinAge && age < adultMinAge;
+            }
+
+            if (passengerType === 'infant') {
+                return age < infantMaxAge;
+            }
+
+            return true;
+        }
+
+        function tfValidateTravelerAgeField($field, travelerIndex, referenceDate) {
+            if (!tfTravelerCompliance.enabled || String($field.attr('data-age-validation') || '0') !== '1') {
+                return false;
+            }
+
+            const totalPeople = parseInt($('#adults').val() || '0', 10) + parseInt($('#children').val() || '0', 10) + parseInt($('#infant').val() || '0', 10);
+            if (tfTravelerCompliance.collection_mode === 'single' && totalPeople > 1) {
+                return false;
+            }
+
+            const passengerType = tfGetTravelerPassengerType(travelerIndex);
+            if (!passengerType || !$field.val()) {
+                return false;
+            }
+
+            const age = tfCalculateTravelerAge($field.val(), referenceDate);
+            if (tfTravelerAgeMatchesPassengerType(passengerType, age)) {
+                return false;
+            }
+
+            const errorContainer = $field.siblings('.error-text');
+            errorContainer.text(tf_params.traveler_age_mismatch || 'The entered date of birth does not match the selected passenger type.');
+
+            if (errorContainer.text() !== '') {
+                errorContainer.addClass('error-visible');
+            } else {
+                errorContainer.removeClass('error-visible');
+            }
+
+            if (!tf_firstErrorElement) {
+                tf_firstErrorElement = $field;
+            }
+
+            return true;
+        }
+
         $('body').on('click', '.tf-traveller-error', function (e) {
             let hasErrors = [];
             tf_firstErrorElement = null; // reset before validation
             let $this = $(this).closest('.tf-withoutpayment-booking');
-            $('.error-text').text("");
-            $this.find('.tf-single-travel').each(function () {
+            const referenceDate = $('#check-in-out-date').val() || '';
+            $('.error-text').text("").removeClass('error-visible');
+            $this.find('.tf-single-travel').each(function (travelerIndex) {
                 $(this).find('input, select').each(function () {
                     if ($(this).attr('data-required') && $(this).attr('data-required') == 1) {
                         if ($(this).val() == "") {
@@ -1998,6 +2141,10 @@
                             }
                             if (!tf_firstErrorElement) tf_firstErrorElement = $(this); // save first invalid field
                         }
+                    }
+
+                    if (tfValidateTravelerAgeField($(this), travelerIndex + 1, referenceDate)) {
+                        hasErrors.push(true);
                     }
                 });
                 $(this).find('input[type="radio"], input[type="checkbox"]').each(function () {

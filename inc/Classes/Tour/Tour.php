@@ -4768,6 +4768,7 @@ class Tour {
                 <h4>' . esc_html( $traveller_title ) . '</h4>
                 <div class="traveller-info">';
 				if ( empty( $traveller_info_fields ) ) {
+					$default_age_validation = function_exists( 'tf_tour_get_age_validation_field_names' ) && in_array( 'tf_dob', tf_tour_get_age_validation_field_names(), true ) ? '1' : '0';
 					$response['traveller_info'] .= '<div class="traveller-single-info">
                         <label for="tf_full_name' . $traveller_in . '">' . sprintf( esc_html__( 'Full Name', 'tourfic' ) ) . '</label>
                         <input type="text" name="traveller[' . $traveller_in . '][tf_full_name]" id="tf_full_name' . $traveller_in . '" data-required="1" />
@@ -4779,6 +4780,7 @@ class Tour {
 							name="traveller[' . $traveller_in . '][tf_dob]" 
 							id="tf_dob' . $traveller_in . '" 
 							data-required="1" 
+							data-age-validation="' . esc_attr( $default_age_validation ) . '"
 							placeholder="' . esc_attr( $placeholder ) . '" 
 							data-format="' . esc_attr( $date_format ) . '" />
                         <div class="error-text" data-error-for="tf_dob' . $traveller_in . '"></div>
@@ -4801,11 +4803,21 @@ class Tour {
                             </div>';
 						}
 						if ( "date" == $field['reg-fields-type'] ) {
+							$reg_field_required       = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
+							$age_validation_required = ! empty( $field['reg-field-age-validation'] ) && function_exists( 'tf_tour_get_age_validation_settings' ) && ! empty( tf_tour_get_age_validation_settings()['enabled'] ) ? '1' : '0';
+							$response['traveller_info'] .= '
+                            <div class="traveller-single-info">
+                                <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
+                                <input type="text" class="tf-date-picker" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" data-age-validation="' . esc_attr( $age_validation_required ) . '" id="' . $field['reg-field-name'] . $traveller_in . '" placeholder="' . esc_attr( $placeholder ) . '" data-format="' . esc_attr( $date_format ) . '" />
+                                <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
+                            </div>';
+						}
+						if ( "file" == $field['reg-fields-type'] ) {
 							$reg_field_required         = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
 							$response['traveller_info'] .= '
                             <div class="traveller-single-info">
                                 <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
-                                <input type="text" class="tf-date-picker" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $traveller_in . '" placeholder="' . esc_attr( $placeholder ) . '" data-format="' . esc_attr( $date_format ) . '" />
+                                <input type="file" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $traveller_in . '" accept=".pdf,.jpg,.jpeg,.png" />
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
                             </div>';
 						}
