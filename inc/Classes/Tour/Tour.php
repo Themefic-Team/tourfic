@@ -3902,6 +3902,17 @@ class Tour {
 		wp_die();
 	}
 
+	/**
+	 * Get traveler info collection mode for tour booking flow.
+	 *
+	 * @return string
+	 */
+	private static function tf_get_traveler_info_collection_mode() {
+		$collection_mode = ! empty( Helper::tfopt( 'tour_traveler_info_collection_mode' ) ) ? sanitize_key( Helper::tfopt( 'tour_traveler_info_collection_mode' ) ) : 'all';
+
+		return in_array( $collection_mode, array( 'all', 'single' ), true ) ? $collection_mode : 'all';
+	}
+
 	/*
      * Tour search ajax
      * @since 2.9.7
@@ -4747,9 +4758,14 @@ class Tour {
 			$placeholder = isset( $placeholders[ $date_format ] ) ? $placeholders[ $date_format ] : 'YYYY/MM/DD';
 
 			$response['tour_packages'] = '';
-			for ( $traveller_in = 1; $traveller_in <= $total_people; $traveller_in ++ ) {
+			$traveler_info_collection_mode = self::tf_get_traveler_info_collection_mode();
+			$traveller_info_total_people   = 'single' === $traveler_info_collection_mode ? 1 : $total_people;
+
+			for ( $traveller_in = 1; $traveller_in <= $traveller_info_total_people; $traveller_in ++ ) {
+				$traveller_title = 'single' === $traveler_info_collection_mode ? esc_html__( 'Traveler Information', 'tourfic' ) : esc_html__( 'Traveler', 'tourfic' ) . ' ' . $traveller_in;
+
 				$response['traveller_info'] .= '<div class="tf-single-tour-traveller tf-single-travel">
-                <h4>' . sprintf( esc_html__( 'Traveler ', 'tourfic' ) ) . $traveller_in . '</h4>
+                <h4>' . esc_html( $traveller_title ) . '</h4>
                 <div class="traveller-info">';
 				if ( empty( $traveller_info_fields ) ) {
 					$response['traveller_info'] .= '<div class="traveller-single-info">

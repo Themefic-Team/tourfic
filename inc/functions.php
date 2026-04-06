@@ -24,6 +24,58 @@ function tf_file_missing( $files = '' ) {
 add_action( 'admin_notices', 'tf_file_missing' );
 add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );
 
+if ( ! function_exists( 'tf_tour_traveler_info_mode_settings' ) ) {
+	/**
+	 * Inject tour traveler info collection mode under Tour Options -> Extras.
+	 *
+	 * @param array $sections Settings sections.
+	 * @return array
+	 */
+	function tf_tour_traveler_info_mode_settings( $sections ) {
+		if ( empty( $sections['tour_booking_settings']['fields'] ) || ! is_array( $sections['tour_booking_settings']['fields'] ) ) {
+			return $sections;
+		}
+
+		foreach ( $sections['tour_booking_settings']['fields'] as $field ) {
+			if ( ! empty( $field['id'] ) && 'tour_traveler_info_collection_mode' === $field['id'] ) {
+				return $sections;
+			}
+		}
+
+		$mode_field = array(
+			'id'         => 'tour_traveler_info_collection_mode',
+			'type'       => 'select',
+			'label'      => esc_html__( 'Traveler Info Collection Mode', 'tourfic' ),
+			'subtitle'   => esc_html__( 'Choose whether to collect traveler details for all travelers or only one traveler.', 'tourfic' ),
+			'options'    => array(
+				'all'    => esc_html__( 'All Travelers', 'tourfic' ),
+				'single' => esc_html__( 'One Traveler', 'tourfic' ),
+			),
+			'default'    => 'all',
+			'dependency' => array(
+				array( 'disable_traveller_info', '==', 'true' ),
+			),
+		);
+
+		$insert_index = null;
+		foreach ( $sections['tour_booking_settings']['fields'] as $index => $field ) {
+			if ( ! empty( $field['id'] ) && 'disable_traveller_info' === $field['id'] ) {
+				$insert_index = $index + 1;
+				break;
+			}
+		}
+
+		if ( null === $insert_index ) {
+			$sections['tour_booking_settings']['fields'][] = $mode_field;
+		} else {
+			array_splice( $sections['tour_booking_settings']['fields'], $insert_index, 0, array( $mode_field ) );
+		}
+
+		return $sections;
+	}
+}
+add_filter( 'tf_settings_sections', 'tf_tour_traveler_info_mode_settings', 30 );
+
 /**
  * Car Functions
  */
