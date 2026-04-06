@@ -4760,103 +4760,161 @@ class Tour {
 			$response['tour_packages'] = '';
 			$traveler_info_collection_mode = self::tf_get_traveler_info_collection_mode();
 			$traveller_info_total_people   = 'single' === $traveler_info_collection_mode ? 1 : $total_people;
+			$default_age_validation        = function_exists( 'tf_tour_get_age_validation_field_names' ) && in_array( 'tf_dob', tf_tour_get_age_validation_field_names(), true ) ? '1' : '0';
 
-			for ( $traveller_in = 1; $traveller_in <= $traveller_info_total_people; $traveller_in ++ ) {
-				$traveller_title = 'single' === $traveler_info_collection_mode ? esc_html__( 'Traveler Information', 'tourfic' ) : esc_html__( 'Traveler', 'tourfic' ) . ' ' . $traveller_in;
+			$render_traveller_fields = function( $traveller_in ) use ( $traveller_info_fields, $default_age_validation, $placeholder, $date_format ) {
+				$traveller_fields_html = '';
 
-				$response['traveller_info'] .= '<div class="tf-single-tour-traveller tf-single-travel">
-                <h4>' . esc_html( $traveller_title ) . '</h4>
-                <div class="traveller-info">';
 				if ( empty( $traveller_info_fields ) ) {
-					$default_age_validation = function_exists( 'tf_tour_get_age_validation_field_names' ) && in_array( 'tf_dob', tf_tour_get_age_validation_field_names(), true ) ? '1' : '0';
-					$response['traveller_info'] .= '<div class="traveller-single-info">
-                        <label for="tf_full_name' . $traveller_in . '">' . sprintf( esc_html__( 'Full Name', 'tourfic' ) ) . '</label>
+					$traveller_fields_html .= '<div class="traveller-single-info">
+                        <label for="tf_full_name' . $traveller_in . '">' . esc_html__( 'Full Name', 'tourfic' ) . '</label>
                         <input type="text" name="traveller[' . $traveller_in . '][tf_full_name]" id="tf_full_name' . $traveller_in . '" data-required="1" />
                         <div class="error-text" data-error-for="tf_full_name' . $traveller_in . '"></div>
                     </div>
                     <div class="traveller-single-info">
-                        <label for="tf_dob' . $traveller_in . '">' . sprintf( esc_html__( 'Date of birth', 'tourfic' ) ) . '</label>
-                        <input type="text" class="tf-date-picker" 
-							name="traveller[' . $traveller_in . '][tf_dob]" 
-							id="tf_dob' . $traveller_in . '" 
-							data-required="1" 
+                        <label for="tf_dob' . $traveller_in . '">' . esc_html__( 'Date of birth', 'tourfic' ) . '</label>
+                        <input type="text" class="tf-date-picker"
+							name="traveller[' . $traveller_in . '][tf_dob]"
+							id="tf_dob' . $traveller_in . '"
+							data-required="1"
 							data-age-validation="' . esc_attr( $default_age_validation ) . '"
-							placeholder="' . esc_attr( $placeholder ) . '" 
+							placeholder="' . esc_attr( $placeholder ) . '"
 							data-format="' . esc_attr( $date_format ) . '" />
                         <div class="error-text" data-error-for="tf_dob' . $traveller_in . '"></div>
                     </div>
                     <div class="traveller-single-info">
-                        <label for="tf_nid' . $traveller_in . '">' . sprintf( esc_html__( 'NID', 'tourfic' ) ) . '</label>
+                        <label for="tf_nid' . $traveller_in . '">' . esc_html__( 'NID', 'tourfic' ) . '</label>
                         <input type="text" name="traveller[' . $traveller_in . '][tf_nid]" id="tf_nid' . $traveller_in . '" data-required="1" />
                         <div class="error-text" data-error-for="tf_nid' . $traveller_in . '"></div>
-                    </div>
-                    ';
-				} else {
-					foreach ( $traveller_info_fields as $field ) {
-						if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] ) {
-							$reg_field_required         = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
-							$response['traveller_info'] .= '
+                    </div>';
+
+					return $traveller_fields_html;
+				}
+
+				foreach ( $traveller_info_fields as $field ) {
+					if ( 'text' === $field['reg-fields-type'] || 'email' === $field['reg-fields-type'] ) {
+						$reg_field_required   = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
+						$traveller_fields_html .= '
                             <div class="traveller-single-info">
                                 <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
                                 <input type="' . $field['reg-fields-type'] . '" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $traveller_in . '" />
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
                             </div>';
-						}
-						if ( "date" == $field['reg-fields-type'] ) {
-							$reg_field_required       = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
-							$age_validation_required = ! empty( $field['reg-field-age-validation'] ) && function_exists( 'tf_tour_get_age_validation_settings' ) && ! empty( tf_tour_get_age_validation_settings()['enabled'] ) ? '1' : '0';
-							$response['traveller_info'] .= '
+					}
+
+					if ( 'date' === $field['reg-fields-type'] ) {
+						$reg_field_required     = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
+						$age_validation_enabled = function_exists( 'tf_tour_get_age_validation_settings' ) ? tf_tour_get_age_validation_settings() : array();
+						$age_validation_required = ! empty( $field['reg-field-age-validation'] ) && ! empty( $age_validation_enabled['enabled'] ) ? '1' : '0';
+						$traveller_fields_html  .= '
                             <div class="traveller-single-info">
                                 <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
                                 <input type="text" class="tf-date-picker" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" data-age-validation="' . esc_attr( $age_validation_required ) . '" id="' . $field['reg-field-name'] . $traveller_in . '" placeholder="' . esc_attr( $placeholder ) . '" data-format="' . esc_attr( $date_format ) . '" />
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
                             </div>';
-						}
-						if ( "file" == $field['reg-fields-type'] ) {
-							$reg_field_required         = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
-							$response['traveller_info'] .= '
+					}
+
+					if ( 'file' === $field['reg-fields-type'] ) {
+						$reg_field_required   = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
+						$traveller_fields_html .= '
                             <div class="traveller-single-info">
                                 <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
                                 <input type="file" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $traveller_in . '" accept=".pdf,.jpg,.jpeg,.png" />
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
                             </div>';
-						}
-						if ( "select" == $field['reg-fields-type'] && ! empty( $field['reg-options'] ) ) {
-							$response['traveller_info'] .= '
+					}
+
+					if ( 'select' === $field['reg-fields-type'] && ! empty( $field['reg-options'] ) ) {
+						$traveller_fields_html .= '
                             <div class="traveller-single-info">
                                 <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
-                                <select id="' . $field['reg-field-name'] . $traveller_in . '" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $field['reg-field-required'] . '"><option value="">' . sprintf( esc_html__( 'Select One', 'tourfic' ) ) . '</option>';
-							foreach ( $field['reg-options'] as $sfield ) {
-								if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) {
-									$response['traveller_info'] .= '<option value="' . $sfield['option-value'] . '">' . $sfield['option-label'] . '</option>';
-								}
+                                <select id="' . $field['reg-field-name'] . $traveller_in . '" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $field['reg-field-required'] . '"><option value="">' . esc_html__( 'Select One', 'tourfic' ) . '</option>';
+						foreach ( $field['reg-options'] as $sfield ) {
+							if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) {
+								$traveller_fields_html .= '<option value="' . $sfield['option-value'] . '">' . $sfield['option-label'] . '</option>';
 							}
-							$response['traveller_info'] .= '</select>
+						}
+						$traveller_fields_html .= '</select>
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
                             </div>';
-						}
-						if ( ( "checkbox" == $field['reg-fields-type'] || "radio" == $field['reg-fields-type'] ) && ! empty( $field['reg-options'] ) ) {
-							$response['traveller_info'] .= '
+					}
+
+					if ( ( 'checkbox' === $field['reg-fields-type'] || 'radio' === $field['reg-fields-type'] ) && ! empty( $field['reg-options'] ) ) {
+						$traveller_fields_html .= '
                             <div class="traveller-single-info">
                             <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
                             ';
-							foreach ( $field['reg-options'] as $sfield ) {
-								if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) {
-									$response['traveller_info'] .= '
+						foreach ( $field['reg-options'] as $sfield ) {
+							if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) {
+								$traveller_fields_html .= '
                                         <div class="tf-single-checkbox">
                                         <input type="' . esc_attr( $field['reg-fields-type'] ) . '" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . '][]" id="' . $sfield['option-value'] . $traveller_in . '" value="' . $sfield['option-value'] . '" data-required="' . $field['reg-field-required'] . '" />
                                         <label for="' . $sfield['option-value'] . $traveller_in . '">' . esc_html( $sfield['option-label'] ) . '</label></div>';
-								}
 							}
-							$response['traveller_info'] .= '
+						}
+						$traveller_fields_html .= '
                             <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
                             </div>';
-						}
 					}
 				}
 
-				$response['traveller_info'] .= '</div>
+				return $traveller_fields_html;
+			};
+
+			$render_traveller_block = function( $traveller_in, $traveller_title ) use ( $render_traveller_fields ) {
+				return '<div class="tf-single-tour-traveller tf-single-travel">
+                <h4>' . esc_html( $traveller_title ) . '</h4>
+                <div class="traveller-info">' . $render_traveller_fields( $traveller_in ) . '</div>
             </div>';
+			};
+
+			if ( 'single' === $traveler_info_collection_mode ) {
+				$response['traveller_info'] .= $render_traveller_block( 1, esc_html__( 'Traveler Information', 'tourfic' ) );
+			} else {
+				$passenger_type_map = function_exists( 'tf_tour_get_passenger_type_map' ) ? tf_tour_get_passenger_type_map( $adults, $children, $infant ) : array();
+				$traveller_groups   = array(
+					'adult'  => array(
+						'title' => esc_html__( 'Adults', 'tourfic' ),
+						'label' => esc_html__( 'Adult', 'tourfic' ),
+						'items' => array(),
+					),
+					'child'  => array(
+						'title' => esc_html__( 'Children', 'tourfic' ),
+						'label' => esc_html__( 'Child', 'tourfic' ),
+						'items' => array(),
+					),
+					'infant' => array(
+						'title' => esc_html__( 'Infants', 'tourfic' ),
+						'label' => esc_html__( 'Infant', 'tourfic' ),
+						'items' => array(),
+					),
+				);
+
+				for ( $traveller_in = 1; $traveller_in <= $traveller_info_total_people; $traveller_in++ ) {
+					$passenger_type = ! empty( $passenger_type_map[ $traveller_in ] ) ? $passenger_type_map[ $traveller_in ] : 'adult';
+					if ( ! isset( $traveller_groups[ $passenger_type ] ) ) {
+						continue;
+					}
+
+					$traveller_groups[ $passenger_type ]['items'][] = $traveller_in;
+				}
+
+				foreach ( $traveller_groups as $traveller_group ) {
+					if ( empty( $traveller_group['items'] ) ) {
+						continue;
+					}
+
+					$response['traveller_info'] .= '<div class="tf-traveller-group">
+                    <h4 class="tf-traveller-group-title">' . esc_html( $traveller_group['title'] ) . '</h4>';
+
+					$group_index = 1;
+					foreach ( $traveller_group['items'] as $traveller_in ) {
+						$response['traveller_info'] .= $render_traveller_block( $traveller_in, $traveller_group['label'] . ' ' . $group_index );
+						$group_index++;
+					}
+
+					$response['traveller_info'] .= '</div>';
+				}
 			}
 			$tour_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 			$response['traveller_summery'] .= '<h6>' . esc_html__("On ", 'tourfic') . self::tf_date_format_user( $tour_date, $tour_date_format_for_users ) . '</h6>';
