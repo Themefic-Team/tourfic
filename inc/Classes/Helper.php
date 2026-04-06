@@ -358,7 +358,7 @@ class Helper {
 			}
 
 			$selected_packages = ! empty( $availability['selected_packages'] ) && is_array( $availability['selected_packages'] ) ? array_map( 'strval', $availability['selected_packages'] ) : array();
-			if ( ! empty( $selected_packages ) && ! in_array( $package_key, $selected_packages, true ) ) {
+			if ( ! empty( $selected_packages ) && ! in_array( $package_key, $selected_packages, true ) && ! self::tf_tour_availability_has_explicit_package_data( $availability, $package_key ) ) {
 				$index++;
 				continue;
 			}
@@ -387,6 +387,66 @@ class Helper {
 		}
 
 		return $matched;
+	}
+
+	/**
+	 * Check whether an availability row contains explicit data for a package.
+	 *
+	 * This keeps package matching resilient for pre-fix rows where same-date
+	 * package saves preserved package-specific fields but overwrote
+	 * `selected_packages` with only the latest package.
+	 *
+	 * @param array  $availability Availability row.
+	 * @param string $package_key  Package index.
+	 * @return bool
+	 */
+	private static function tf_tour_availability_has_explicit_package_data( $availability, $package_key ) {
+		$package_key = (string) $package_key;
+		$field_keys  = array(
+			'tf_option_title_' . $package_key,
+			'tf_option_pricing_type_' . $package_key,
+			'tf_option_group_price_' . $package_key,
+			'tf_option_adult_price_' . $package_key,
+			'tf_option_child_price_' . $package_key,
+			'tf_option_infant_price_' . $package_key,
+			'tf_option_times_' . $package_key,
+		);
+
+		foreach ( $field_keys as $field_key ) {
+			if ( ! array_key_exists( $field_key, $availability ) ) {
+				continue;
+			}
+
+			if ( self::tf_tour_availability_has_meaningful_value( $availability[ $field_key ] ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Determine whether a nested availability field contains meaningful data.
+	 *
+	 * @param mixed $value Field value.
+	 * @return bool
+	 */
+	private static function tf_tour_availability_has_meaningful_value( $value ) {
+		if ( is_array( $value ) ) {
+			foreach ( $value as $nested_value ) {
+				if ( self::tf_tour_availability_has_meaningful_value( $nested_value ) ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		if ( is_scalar( $value ) ) {
+			return '' !== trim( (string) $value );
+		}
+
+		return false;
 	}
     
 
