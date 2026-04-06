@@ -4423,6 +4423,7 @@ function convertTo24HourFormat(timeStr) {
             let pickup_slug = $('#tf_pickup_location_id').val();
             let dropoff_slug = $('#tf_dropoff_location_id').val();
             let elSettings = $('#tf-elementor-settings').text();
+            let car_unlimited_mileage = $('input[name="car_unlimited_mileage"]:checked').val();
             
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
@@ -4465,6 +4466,7 @@ function convertTo24HourFormat(timeStr) {
             formData.append("tf_ordering", tf_ordering);
             formData.append("elSettings", elSettings);
             formData.append('page', page);
+            formData.append('car_unlimited_mileage', car_unlimited_mileage);
 
             if (startprice) {
                 formData.append('startprice', startprice);
@@ -4589,7 +4591,7 @@ function convertTo24HourFormat(timeStr) {
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '.widget_tf_price_filters input[name="from"], .widget_tf_price_filters input[name="to"], [name*=tf_filters],[name*=tf_hotel_types],[name*=tf_room_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year],[name*=car_brand],[name*=car_transmission],[name*=carplay_android_auto_filter]', function () {
+        $(document).on('change', '.widget_tf_price_filters input[name="from"], .widget_tf_price_filters input[name="to"], [name*=tf_filters],[name*=tf_hotel_types],[name*=tf_room_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year],[name*=car_brand],[name*=car_transmission],[name*=carplay_android_auto_filter], [name*=car_unlimited_mileage]', function () {
             if ($(".filter-reset-btn").length > 0) {
                 $(".filter-reset-btn").show();
             }

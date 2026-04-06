@@ -912,6 +912,8 @@ trait Action_Helper {
 			? tf_normalize_car_binary_filter_values( wp_unslash( $_POST['carplay_android_auto'] ) )
 			: array();
 
+		$car_unlimited_mileage  = isset( $_POST['car_unlimited_mileage'] ) ? sanitize_text_field( $_POST['car_unlimited_mileage'] ) : '';
+
 		$tf_startprice  = isset( $_POST['startprice'] ) ? sanitize_text_field( $_POST['startprice'] ) : '';
 		$tf_endprice  = isset( $_POST['endprice'] ) ? sanitize_text_field( $_POST['endprice'] ) : '';
 		$tf_min_seat  = isset( $_POST['min_seat'] ) ? sanitize_text_field( $_POST['min_seat'] ) : '';
@@ -1388,7 +1390,7 @@ trait Action_Helper {
 
 					$car_inventory = Availability::tf_car_inventory(get_the_ID(), $car_meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 					if($car_inventory){
-						tf_car_availability_response( $car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice, $tf_min_seat, $tf_max_seat, $tf_driver_age, $car_driver_min_age, $car_driver_max_age, $tf_car_transmission, $tf_carplay_android_auto );
+						tf_car_availability_response( $car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice, $tf_min_seat, $tf_max_seat, $tf_driver_age, $car_driver_min_age, $car_driver_max_age, $tf_car_transmission, $tf_carplay_android_auto, $car_unlimited_mileage );
 					}
 				} elseif ( $posttype == 'tf_room' ) {
 					

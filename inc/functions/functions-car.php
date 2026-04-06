@@ -431,7 +431,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 				<?php if(!empty($car_infos) && is_array($car_infos) && in_array('carplay_android_auto', $car_infos)) : ?>
 				<li class="list">
 				<i class="ri-smartphone-line"></i>
-				<p><?php echo $carplay_android_auto ? esc_html__("CarPlay / Android", "tourfic") : esc_html__("No CarPlay / Android", "tourfic"); ?></p>
+				<p><?php echo $carplay_android_auto ? esc_html__("CarPlay", "tourfic") : esc_html__("No CarPlay", "tourfic"); ?></p>
 				</li>
 				<?php endif; ?>
 
@@ -575,7 +575,7 @@ if ( ! function_exists( 'tf_normalize_car_binary_filter_values' ) ) {
  * @include
  */
 
-function tf_car_availability_response($car_meta, array &$not_found, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_startprice='', $tf_endprice='', $tf_min_seat='', $tf_max_seat='', $tf_driver_age='', $car_driver_min_age=18, $car_driver_max_age=40, $tf_transmission = '', $tf_carplay_android_auto = '') {
+function tf_car_availability_response($car_meta, array &$not_found, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_startprice='', $tf_endprice='', $tf_min_seat='', $tf_max_seat='', $tf_driver_age='', $car_driver_min_age=18, $car_driver_max_age=40, $tf_transmission = '', $tf_carplay_android_auto = '', $car_unlimited_mileage = '') {
 
 	$car_meta = tf_normalize_car_meta( $car_meta );
 	$has_car = false;
@@ -696,6 +696,13 @@ function tf_car_availability_response($car_meta, array &$not_found, $pickup='', 
 	if ( $has_car && 1 === count( $selected_carplay_android_auto ) ) {
 		$carplay_android_auto = isset( $car_meta['carplay_android_auto'] ) ? (string) absint( $car_meta['carplay_android_auto'] ) : '0';
 		if ( $selected_carplay_android_auto[0] !== $carplay_android_auto ) {
+			$has_car = false;
+		}
+	}
+
+	if ( $has_car && !empty($car_unlimited_mileage) && '1' === $car_unlimited_mileage ) {
+		$unlimited_mileage = isset( $car_meta['unlimited_mileage'] ) ? (string) absint( $car_meta['unlimited_mileage'] ) : '0';
+		if ( '1' !== $unlimited_mileage ) {
 			$has_car = false;
 		}
 	}
