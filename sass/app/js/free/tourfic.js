@@ -1981,11 +1981,17 @@
         let tf_firstErrorElement = null; // track the first error field
         const tfTravelerCompliance = tf_params.traveler_compliance || {};
 
-        function tfGetTravelerPassengerType(travelerIndex) {
+        function tfGetTravelerCount($context, selectors) {
+            const $input = ($context && $context.length ? $context : $(document)).find(selectors).first();
+
+            return parseInt($input.val() || '0', 10);
+        }
+
+        function tfGetTravelerPassengerType(travelerIndex, $context) {
             let remaining = travelerIndex;
-            const adultCount = parseInt($('#adults').val() || '0', 10);
-            const childCount = parseInt($('#children').val() || '0', 10);
-            const infantCount = parseInt($('#infant').val() || '0', 10);
+            const adultCount = tfGetTravelerCount($context, '[name="adults"], #adults');
+            const childCount = tfGetTravelerCount($context, '[name="childrens"], [name="children"], #children, #childs');
+            const infantCount = tfGetTravelerCount($context, '[name="infants"], [name="infant"], #infant');
 
             if (remaining <= adultCount) {
                 return 'adult';
@@ -2085,17 +2091,20 @@
             return true;
         }
 
-        function tfValidateTravelerAgeField($field, travelerIndex, referenceDate) {
+        function tfValidateTravelerAgeField($field, travelerIndex, referenceDate, $context) {
             if (!tfTravelerCompliance.enabled || String($field.attr('data-age-validation') || '0') !== '1') {
                 return false;
             }
 
-            const totalPeople = parseInt($('#adults').val() || '0', 10) + parseInt($('#children').val() || '0', 10) + parseInt($('#infant').val() || '0', 10);
+            const adultCount = tfGetTravelerCount($context, '[name="adults"], #adults');
+            const childCount = tfGetTravelerCount($context, '[name="childrens"], [name="children"], #children, #childs');
+            const infantCount = tfGetTravelerCount($context, '[name="infants"], [name="infant"], #infant');
+            const totalPeople = adultCount + childCount + infantCount;
             if (tfTravelerCompliance.collection_mode === 'single' && totalPeople > 1) {
                 return false;
             }
 
-            const passengerType = tfGetTravelerPassengerType(travelerIndex);
+            const passengerType = tfGetTravelerPassengerType(travelerIndex, $context);
             if (!passengerType || !$field.val()) {
                 return false;
             }
@@ -2125,7 +2134,7 @@
             let hasErrors = [];
             tf_firstErrorElement = null; // reset before validation
             let $this = $(this).closest('.tf-withoutpayment-booking');
-            const referenceDate = $('#check-in-out-date').val() || '';
+            const referenceDate = $this.find('[name="check-in-out-date"], #check-in-out-date').first().val() || '';
             $('.error-text').text("").removeClass('error-visible');
             $this.find('.tf-single-travel').each(function (travelerIndex) {
                 $(this).find('input, select').each(function () {
@@ -2143,7 +2152,7 @@
                         }
                     }
 
-                    if (tfValidateTravelerAgeField($(this), travelerIndex + 1, referenceDate)) {
+                    if (tfValidateTravelerAgeField($(this), travelerIndex + 1, referenceDate, $this)) {
                         hasErrors.push(true);
                     }
                 });
