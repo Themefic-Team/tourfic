@@ -13,15 +13,17 @@ if ( ! class_exists( 'TF_editor' ) ) {
             $tf_editor_unique_id = str_replace( array("[","]"),"_",esc_attr( $this->field_name() ) );
             
             $parent_class = ( ! empty( $this->parent_field ) ) ? 'parent_wp_editor' : 'wp_editor'; 
-            $parent_class = ( isset( $this->field['wp_editor'] ) ) ? 'wp_editor' : $parent_class ;  
+            $parent_class = ( isset( $this->field['wp_editor'] ) ) ? 'wp_editor' : $parent_class ;
+            $editor_value = is_array( $this->value ) ? implode( "\n", $this->value ) : (string) $this->value;
         ?>
         <div class="tf-field-textarea">
-            <textarea name="<?php echo esc_attr($this->field_name()); ?>" id="<?php echo esc_attr($tf_editor_unique_id); ?>" class="<?php echo esc_attr( $parent_class )  ?> tf_wp_editor" cols="30" data-count-id=""><?php echo wp_kses_post($this->value); ?></textarea>
+            <textarea name="<?php echo esc_attr($this->field_name()); ?>" id="<?php echo esc_attr($tf_editor_unique_id); ?>" class="<?php echo esc_attr( $parent_class )  ?> tf_wp_editor" cols="30" data-count-id=""><?php echo wp_kses_post($editor_value); ?></textarea>
         </div>
        <?php
 		} 
         public function sanitize() {
-			return wp_kses_post($this->value);
+            $value = is_array( $this->value ) ? implode( "\n", $this->value ) : (string) $this->value;
+			return wp_kses_post($value);
 		}
 	}
 }
