@@ -3,6 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $tc = !empty($meta['terms_and_conditions']) ? $meta['terms_and_conditions'] : '';
+$tc = is_array($tc) ? implode('\n', $tc) : $tc;
 if ( $tc ) { ?>
 <!-- apartment Policies Starts -->        
 <div class="tf-policies-wrapper tf-section" id="tf-apartment-policies">            
