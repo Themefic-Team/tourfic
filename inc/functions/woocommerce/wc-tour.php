@@ -56,6 +56,26 @@ function tf_tours_booking_function() {
 	// Visitor Details
 	$tf_visitor_details = !empty($_POST['traveller']) ? wp_unslash( $_POST['traveller'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
+	if ( function_exists( 'tf_tour_process_traveler_document_fields' ) ) {
+		$tf_visitor_details = tf_tour_process_traveler_document_fields( $tf_visitor_details, $post_id );
+		if ( is_wp_error( $tf_visitor_details ) ) {
+			$response['errors'][] = $tf_visitor_details->get_error_message();
+			$response['status']   = 'error';
+			echo wp_json_encode( $response );
+			die();
+		}
+	}
+
+	if ( function_exists( 'tf_tour_validate_traveler_age_limits' ) ) {
+		$traveler_age_validation = tf_tour_validate_traveler_age_limits( $tf_visitor_details, $adults, $children, $infant, $tour_date );
+		if ( is_wp_error( $traveler_age_validation ) ) {
+			$response['errors'][] = $traveler_age_validation->get_error_message();
+			$response['status']   = 'error';
+			echo wp_json_encode( $response );
+			die();
+		}
+	}
+
 	// Booking Confirmation Details
 	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? wp_unslash( $_POST['booking_confirm'] ) : ""; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 

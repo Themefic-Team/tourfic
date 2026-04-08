@@ -1038,7 +1038,20 @@ abstract Class TF_Booking_Details {
                                             <td>:</td>
                                             <td><?php
                                             $field_key = $field['reg-field-name'];
-                                            if("array"!=gettype($visitor->$field_key)){
+                                            if ( ! empty( $field['reg-fields-type'] ) && 'file' === $field['reg-fields-type'] ) {
+                                                $file_value = ! empty( $visitor->$field_key ) ? tf_tour_normalize_file_field_value( $visitor->$field_key ) : array();
+                                                if ( ! empty( $file_value['attachment_id'] ) ) {
+                                                    $download_url = function_exists( 'tf_tour_get_traveler_document_download_url' ) ? tf_tour_get_traveler_document_download_url( $file_value['attachment_id'] ) : '';
+                                                    $file_name    = ! empty( $file_value['filename'] ) ? $file_value['filename'] : get_the_title( $file_value['attachment_id'] );
+                                                    if ( ! empty( $download_url ) ) {
+                                                        echo '<a href="' . esc_url( $download_url ) . '">' . esc_html( $file_name ) . '</a>';
+                                                    } else {
+                                                        echo esc_html( $file_name );
+                                                    }
+                                                } else {
+                                                    echo esc_html__( 'No file uploaded', 'tourfic' );
+                                                }
+                                            } elseif("array"!=gettype($visitor->$field_key)){
                                                 echo esc_html( $visitor->$field_key );
                                             }else{
                                                 echo esc_html( implode(",", $visitor->$field_key ) );
@@ -1277,6 +1290,7 @@ abstract Class TF_Booking_Details {
                                 }
                                 if("date"==$field['reg-fields-type']){
                                     $field_keys = $field['reg-field-name'];
+                                    $age_validation_required = ! empty( $field['reg-field-age-validation'] ) && function_exists( 'tf_tour_get_age_validation_settings' ) && ! empty( tf_tour_get_age_validation_settings()['enabled'] ) ? '1' : '0';
                                     ?>
                                     <div class="traveller-single-info">
                                         <label for="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>"><?php echo esc_html( $field['reg-field-label'] ); ?></label>
@@ -1285,10 +1299,29 @@ abstract Class TF_Booking_Details {
                                             name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]" 
                                             id="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in); ?>" 
                                             value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{$field_keys} ) : '' ?>" 
+                                            data-age-validation="<?php echo esc_attr( $age_validation_required ); ?>"
                                             placeholder="<?php echo esc_attr( $placeholder ); ?>" 
                                             data-format="<?php echo esc_attr( $date_format ); ?>"
                                             class="tf-date-picker"
                                             />
+                                    </div>
+                                <?php
+                                }
+                                if("file"==$field['reg-fields-type']){
+                                    $field_keys = $field['reg-field-name'];
+                                    $file_value = !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? tf_tour_normalize_file_field_value( $tf_visitors_details->{$traveller_in}->{$field_keys} ) : array();
+                                    $download_url = !empty($file_value['attachment_id']) && function_exists( 'tf_tour_get_traveler_document_download_url' ) ? tf_tour_get_traveler_document_download_url( $file_value['attachment_id'] ) : '';
+                                    ?>
+                                    <div class="traveller-single-info">
+                                        <label for="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>"><?php echo esc_html( $field['reg-field-label'] ); ?></label>
+                                        <?php if ( ! empty( $download_url ) ) { ?>
+                                            <div class="tf-uploaded-file-link">
+                                                <a href="<?php echo esc_url( $download_url ); ?>"><?php echo esc_html( !empty($file_value['filename']) ? $file_value['filename'] : get_the_title( $file_value['attachment_id'] ) ); ?></a>
+                                            </div>
+                                        <?php } ?>
+                                        <input type="hidden" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>][attachment_id]" value="<?php echo !empty($file_value['attachment_id']) ? esc_attr( $file_value['attachment_id'] ) : ''; ?>" />
+                                        <input type="hidden" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>][filename]" value="<?php echo !empty($file_value['filename']) ? esc_attr( $file_value['filename'] ) : ''; ?>" />
+                                        <input type="file" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]" id="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in); ?>" accept=".pdf,.jpg,.jpeg,.png" />
                                     </div>
                                 <?php
                                 }
@@ -1467,7 +1500,14 @@ abstract Class TF_Booking_Details {
         $tf_visitor_details = isset( $_POST['traveller'] ) ? wp_unslash( $_POST['traveller'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
     
         global $wpdb;
-        $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id,order_details FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
+        $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, post_id, order_details FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
+        if ( function_exists( 'tf_tour_process_traveler_document_fields' ) && ! empty( $tf_order->post_id ) ) {
+            $tf_visitor_details = tf_tour_process_traveler_document_fields( $tf_visitor_details, absint( $tf_order->post_id ) );
+            if ( is_wp_error( $tf_visitor_details ) ) {
+                wp_send_json_error( $tf_visitor_details->get_error_message() );
+                return;
+            }
+        }
         $tf_order_details = json_decode($tf_order->order_details);
         $tf_order_details->visitor_details = wp_json_encode($tf_visitor_details);
     
