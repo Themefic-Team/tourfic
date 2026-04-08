@@ -1572,6 +1572,9 @@ h3.section-heading {
   margin-bottom: 5px;
   display: inline-block;
 }
+.tf-title-area .tf-title-wrap .tf-title-left .tf-map-link i, .tf-title-area .tf-title-wrap .tf-title-left .tf-map-link svg {
+  margin-right: 4px;
+}
 .tf-title-area .tf-title-wrap .tf-title-left .tf-map-link .tf-d-ib {
   overflow: hidden;
   text-overflow: ellipsis;

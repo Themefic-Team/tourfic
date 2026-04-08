@@ -31,9 +31,12 @@ class Description {
 			$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
 			$description_title = ! empty( $meta['description_title'] ) ? esc_html( $meta['description_title'] ) : '';
 			echo '<h2 class="section-heading">' . esc_html( $description_title ) . '</h2>';
+		} elseif ( 'tf_tours' === $post_type ) {
+			$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
+			echo '<h2 class="tf-title tf-section-title">' . ( ! empty( $meta['description-section-title'] ) ? esc_html( $meta['description-section-title'] ) : '' ) . '</h2>';
 		}
 		
-        if ( $limit_content ) : ?>
+        if ( $limit_content == 'yes' ) : ?>
 			<div class="tf-short-description tf-post-content">
 				<?php
 				$content = get_the_content();

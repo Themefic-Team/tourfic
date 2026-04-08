@@ -48,22 +48,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                 <div class="tf-title-left">
                     <span class="post-type"><?php esc_html_e( 'Hotel', 'tourfic' ) ?></span>
                     <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
-                    <!-- Start map link -->
-					<?php if ( $locations ) { ?>
-                        <div class="tf-map-link">
-							<?php if ( $address ) {
-								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . esc_html( $address ) . ' – </span>';
-							} ?>
-
-                            <a href="<?php echo esc_url( $first_location_url ); ?>" class="more-hotel tf-d-ib">
-								<?php
-								/* translators: %s location name */
-								printf( esc_html__( 'Show more hotels in %s', 'tourfic' ), esc_html( $first_location_name ) );
-								?>
-                            </a>
-                        </div>
-					<?php } ?>
-                    <!-- End map link -->
+                    <?php \Tourfic\App\Templates\Components\Global\Single\Address::render(); ?>
                 </div>
 
                 <div class="tf-title-right">
@@ -264,8 +249,8 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 					<?php } ?>
                     <!-- End gallery-->
 
-                    <div class="desc-wrap">
-						<?php the_content(); ?>
+                    <div class="tf-mt-16">
+                        <?php \Tourfic\App\Templates\Components\Global\Single\Description::render(['limit_content' => 'no']); ?>
                     </div>
                     <!-- Start features -->
 					<?php if ( $features && count( $features ) > 0 ) { ?>

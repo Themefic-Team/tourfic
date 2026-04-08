@@ -26,21 +26,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                     <div class="tf-head-info tf-flex tf-flex-space-bttn tf-flex-gap-24">
                         <div class="tf-head-title">
                             <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
-                            <?php if( !empty($locations )) : ?>
-                                <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
-                                <?php if ( $locations ) { ?>
-                                    <?php if ( !empty( $address ) ) {
-                                        echo '<div class="tf-address"><i class="fa-solid fa-location-dot"></i>' . wp_kses_post($address) . ' –</div>';
-                                    } ?>
-                                    <a href="<?php echo esc_url($first_location_url); ?>" class="more-hotel tf-d-ib">
-                                        <?php
-                                        /* translators: %s location name */
-                                        printf( esc_html__( 'Show more hotels in %s', 'tourfic' ), esc_html($first_location_name) );
-                                        ?>
-                                    </a>
-                            <?php } ?>
-                            </div>
-                        <?php endif; ?>
+                            <?php \Tourfic\App\Templates\Components\Global\Single\Address::render(); ?>
                         </div>
                         <div class="tf-head-social tf-flex tf-flex-gap-8 tf-flex-align-center">
                             <?php

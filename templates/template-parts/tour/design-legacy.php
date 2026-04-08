@@ -169,13 +169,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
             <div class="tf-title-wrap">
                 <div class="tf-title-left">
                     <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
-                    <!-- Start map link -->
-                    <div class="tf-map-link" id="tf-map-location" data-location="<?php echo esc_attr( $location ) ?>">
-                        <?php if ( !empty($location) ) {
-                            echo '<a href="#tour-map"><span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . wp_kses_post($location) . '.</span></a>';
-                        } ?>
-                    </div>
-                    <!-- End map link -->
+                    <?php \Tourfic\App\Templates\Components\Global\Single\Address::render(); ?>
                 </div>
 
                 <div class="tf-title-right" style="align-items: flex-end">
@@ -262,8 +256,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <!-- Start description -->
     <div class="description-section sp-30">
         <div class="tf-container">
-            <div class="desc-wrap">
-                <?php the_content(); ?>
+            <div class="tf-mt-16">
+                <?php \Tourfic\App\Templates\Components\Global\Single\Description::render(['limit_content' => 'no']); ?>
             </div>
 
             <!-- Square block section Start -->

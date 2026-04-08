@@ -16,11 +16,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                 <div class="tf-title-left">
                     <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
                     <div class="tf-title-left-bottom">
-						<?php if ( ! empty( $address ) ) { ?>
-                            <div class="tf-map-link">
-								<?php echo wp_kses_post( $address ); ?>
-                            </div>
-						<?php } ?>
+						<?php \Tourfic\App\Templates\Components\Global\Single\Address::render(); ?>
 						<?php if ( $comments && ! $disable_review_sec == '1' ): ?>
                             <div class="tf-top-review">
                                 <a href="#tf-review">
@@ -247,10 +243,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                         </div>
 					<?php endif; ?>
 
-                    <h2 class="section-heading"><?php echo ! empty( $meta['description_title'] ) ? esc_html( $meta['description_title'] ) : ''; ?></h2>
-                    <div class="apt-description">
-						<?php the_content(); ?>
-                    </div>
+                    <?php \Tourfic\App\Templates\Components\Global\Single\Description::render(['limit_content' => 'no']); ?>
 
 					<?php if ( isset( $meta['rooms'] ) && ! empty( Helper::tf_data_types( $meta['rooms'] ) ) ) : ?>
                         <!-- Apartment Rooms -->

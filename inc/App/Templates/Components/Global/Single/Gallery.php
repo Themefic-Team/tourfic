@@ -94,7 +94,7 @@ class Gallery {
 			<div class="tf-gallery-featured <?php echo empty( $gallery_ids ) ? esc_attr( 'tf-without-gallery-featured' ) : ''; ?>">
 				<img src="<?php echo ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>" alt="<?php echo get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ); ?>">
 
-				<?php if ( $show_review && '1' !== $disable_review_sec ) : ?>
+				<?php if ( $show_review == 'yes' && '1' !== $disable_review_sec ) : ?>
 					<div class="tf-single-review-box">
 						<?php if ( $comments ) : ?>
 							<a href="#tf-review" class="tf-single-rating">
@@ -184,7 +184,7 @@ class Gallery {
 	private static function render_style_2( $post_id, $post_type, $show_review, $disable_review_sec, $comments, $gallery_ids ) {
 		?>
 		<div class="tf-single-gallery__style-2 tf-hero-gallery">
-			<?php if ( $show_review && $comments && '1' !== $disable_review_sec ) { ?>
+			<?php if ( $show_review == 'yes' && $comments && '1' !== $disable_review_sec ) { ?>
 				<div class="tf-top-review">
 					<a href="#tf-review">
 						<div class="tf-single-rating">
