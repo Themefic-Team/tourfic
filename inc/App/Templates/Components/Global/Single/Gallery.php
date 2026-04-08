@@ -24,7 +24,7 @@ class Gallery {
 	 *
 	 * @return void
 	 */
-	public static function render( $settings = [], $builder = 'elementor' ) {
+	public static function render( $settings = [], $builder = '' ) {
 		$post_id = get_the_ID();
 		$post_type = get_post_type();
 		$style = ! empty( $settings['gallery_style'] ) ? $settings['gallery_style'] : 'style1';
@@ -40,7 +40,7 @@ class Gallery {
 		$comments       = $comments_query->comments;
 
 		// Get gallery data based on post type
-		$gallery = $disable_review_sec = $s_review = '';
+		$gallery = $disable_review_sec = $s_review = $video = '';
 		$gallery_ids = [];
 
 		if ( 'tf_hotel' === $post_type ) {
@@ -48,16 +48,19 @@ class Gallery {
 			$s_review = ! empty( Helper::tfopt( 'h-review' ) ) ? Helper::tfopt( 'h-review' ) : 0;
 			$disable_review_sec = ! empty( $meta['h-review'] ) ? $meta['h-review'] : '';
 			$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
+			$video = ! empty( $meta['video'] ) ? $meta['video'] : '';
 		} elseif ( 'tf_tours' === $post_type ) {
 			$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
 			$s_review = ! empty( Helper::tfopt( 't-review' ) ) ? Helper::tfopt( 't-review' ) : '';
 			$disable_review_sec = ! empty( $meta['t-review'] ) ? $meta['t-review'] : '';
 			$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : '';
+			$video = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
 		} elseif ( 'tf_apartment' === $post_type ) {
 			$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
 			$s_review = ! empty( Helper::tfopt( 'disable-apartment-review' ) ) ? Helper::tfopt( 'disable-apartment-review' ) : 0;
 			$disable_review_sec = ! empty( $meta['disable-apartment-review'] ) ? $meta['disable-apartment-review'] : '';
 			$gallery = ! empty( $meta['apartment_gallery'] ) ? $meta['apartment_gallery'] : '';
+			$video = ! empty( $meta['video'] ) ? $meta['video'] : '';
 		} elseif ( 'tf_carrental' === $post_type ) {
 			$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 			$s_review = ! empty( Helper::tfopt( 'disable-apartment-review' ) ) ? Helper::tfopt( 'disable-apartment-review' ) : 0;
@@ -75,24 +78,44 @@ class Gallery {
 
 		// Style 1: Bottom Nav
 		if ( 'style1' === $style && 'tf_carrental' !== $post_type ) {
-			self::render_style_1( $post_id, $post_type, $show_review, $disable_review_sec, $comments, $gallery_ids );
+			self::render_style_1( $post_id, $post_type, $show_review, $disable_review_sec, $comments, $gallery_ids, $video, $builder );
 		} elseif ( 'style1' === $style && 'tf_carrental' === $post_type ) {
-			self::render_style_1_carrental( $post_id, $post_type, $show_review, $disable_review_sec, $comments, $gallery_ids );
+			self::render_style_1_carrental( $post_id, $post_type, $show_review, $disable_review_sec, $comments, $gallery_ids, $builder );
 		} elseif ( 'style2' === $style ) {
-			self::render_style_2( $post_id, $post_type, $show_review, $disable_review_sec, $comments, $gallery_ids );
+			self::render_style_2( $post_id, $post_type, $show_review, $disable_review_sec, $comments, $gallery_ids, $builder );
 		} elseif ( 'style3' === $style ) {
-			self::render_style_3( $post_id, $post_type, $gallery_ids );
+			self::render_style_3( $post_id, $post_type, $gallery_ids, $builder );
 		}
 	}
 
 	/**
 	 * Render Style 1 (Bottom Nav)
 	 */
-	private static function render_style_1( $post_id, $post_type, $show_review, $disable_review_sec, $comments, $gallery_ids ) {
+	private static function render_style_1( $post_id, $post_type, $show_review, $disable_review_sec, $comments, $gallery_ids, $video, $builder ) {
 		?>
 		<div class="tf-single-gallery__style-1 tf-hero-gallery">
 			<div class="tf-gallery-featured <?php echo empty( $gallery_ids ) ? esc_attr( 'tf-without-gallery-featured' ) : ''; ?>">
 				<img src="<?php echo ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>" alt="<?php echo get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ); ?>">
+				
+				<?php if(empty($builder)): ?>
+					<div class="featured-meta-gallery-videos">
+						<div class="featured-column tf-gallery-box">
+							<?php if ( ! empty( $gallery_ids ) ) {?>
+							<a id="featured-gallery" href="#" class="tf-tour-gallery">
+								<i class="fa-solid fa-camera-retro"></i><?php echo esc_html__("Gallery","tourfic"); ?>
+							</a>
+							<?php } ?>
+
+						</div>
+						<?php if ( !empty($video) ) { ?>
+						<div class="featured-column tf-video-box">
+							<a class="tf-tour-video" id="featured-video" data-fancybox="tour-video" href="<?php echo esc_url($video); ?>">
+								<i class="fa-solid fa-video"></i> <?php echo esc_html__("Video","tourfic"); ?>
+							</a>
+						</div>
+						<?php } ?>
+					</div>
+				<?php endif; ?>
 
 				<?php if ( $show_review == 'yes' && '1' !== $disable_review_sec ) : ?>
 					<div class="tf-single-review-box">

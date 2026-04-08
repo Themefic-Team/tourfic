@@ -139,59 +139,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                 <div class="tf-single-details-wrapper tf-mt-30 tf-mb-40">
                     <div class="tf-single-details-inner tf-flex">
                         <div class="tf-tour-details-left">
-                            <!-- Hotel Gallery Section -->
-                            <div class="tf-hero-gallery">
-                            <div class="tf-gallery-featured <?php echo empty($gallery_ids) ? esc_attr('tf-without-gallery-featured') : ''; ?>">
-                                <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'images/feature-default.jpg'); ?>" alt="<?php echo get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true); ?>">
-                                <div class="featured-meta-gallery-videos">
-                                    <div class="featured-column tf-gallery-box">
-                                        <?php 
-                                        if ( ! empty( $gallery_ids ) ) {
-                                        ?>
-                                        <a id="featured-gallery" href="#" class="tf-tour-gallery">
-                                            <i class="fa-solid fa-camera-retro"></i><?php echo esc_html__("Gallery","tourfic"); ?>
-                                        </a>
-                                        <?php 
-                                        }
-                                        ?>
-
-                                    </div>
-                                    <?php
-                                    $hotel_video = ! empty( $meta['video'] ) ? $meta['video'] : '';
-                                    if ( !empty($hotel_video) ) { ?>
-                                    <div class="featured-column tf-video-box">
-                                        <a class="tf-tour-video" id="featured-video" data-fancybox="tour-video" href="<?php echo esc_url($hotel_video); ?>">
-                                            <i class="fa-solid fa-video"></i> <?php echo esc_html__("Video","tourfic"); ?>
-                                        </a>
-                                    </div>
-                                    <?php } ?>
-                                </div>
-                                <div class="tf-single-review-box">
-                                <?php if ( ! $disable_review_sec == '1' ) { ?>
-                                    <?php
-                                    if($comments){ ?>
-                                    <a href="#tf-review" class="tf-single-rating">
-                                        <span><?php echo wp_kses_post( TF_Review::tf_total_avg_rating( $comments )); ?></span> (<?php TF_Review::tf_based_on_text( count( $comments ) ); ?>)
-                                    </a>
-                                    <?php }else{ ?>
-                                        <a href="#tf-review" class="tf-single-rating">
-                                            <span><?php esc_html_e( "0.0", "tourfic" ) ?></span> (<?php esc_html_e( "0 review", "tourfic" ) ?>)
-                                        </a>
-                                    <?php } ?>
-                                <?php } ?>
-                                </div>
-                            </div>
-                            <div class="tf-gallery">
-                                <?php 
-                                $gallery_count = 1;
-                                    if ( ! empty( $gallery_ids ) ) {
-                                    foreach ( $gallery_ids as $key => $gallery_item_id ) {
-                                    $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-                                ?>
-                                <a class="<?php echo $gallery_count==5 ? esc_attr( 'tf-gallery-more' ) : ''; ?> " id="tour-gallery" href="<?php echo esc_url($image_url); ?>" data-fancybox="tour-gallery"><img src="<?php echo esc_url($image_url); ?>"></a>
-                                <?php $gallery_count++; } } ?>
-                            </div>
-                            </div>
+                            <?php \Tourfic\App\Templates\Components\Global\Single\Gallery::render(['gallery_style' => 'style1']); ?>
                         </div>
 
                         <!-- SIdebar Tour single -->
