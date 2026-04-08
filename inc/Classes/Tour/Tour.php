@@ -3246,7 +3246,14 @@ class Tour {
 		$tour_found = [];
 		$all_days_available = true;
 
-		$tour_availability = !empty($meta['tour_availability']) ? json_decode($meta['tour_availability']) : null;
+		$tour_availability = null;
+		if ( ! empty( $meta['tour_availability'] ) ) {
+			if ( is_array( $meta['tour_availability'] ) ) {
+				$tour_availability = json_decode( wp_json_encode( $meta['tour_availability'] ) );
+			} elseif ( is_string( $meta['tour_availability'] ) ) {
+				$tour_availability = json_decode( $meta['tour_availability'] );
+			}
+		}
 		$pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 
 		if (!empty($check_in_out) && !empty($tour_availability)) {
@@ -3594,7 +3601,15 @@ class Tour {
 		$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
 		$pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 		$package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
-		$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
+		$tour_availability = '';
+		if ( ! empty( $meta['tour_availability'] ) ) {
+			if ( is_array( $meta['tour_availability'] ) ) {
+				$tour_availability = $meta['tour_availability'];
+			} elseif ( is_string( $meta['tour_availability'] ) ) {
+				$decoded = json_decode( $meta['tour_availability'], true );
+				$tour_availability = is_array( $decoded ) ? $decoded : '';
+			}
+		}
 
 		$allow_discount    = ! empty( $meta['allow_discount'] ) ? $meta['allow_discount'] : '';
         # Get discounts
@@ -4107,7 +4122,15 @@ class Tour {
 			return;
 		}
 
-		$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
+		$tour_availability = '';
+		if ( ! empty( $meta['tour_availability'] ) ) {
+			if ( is_array( $meta['tour_availability'] ) ) {
+				$tour_availability = $meta['tour_availability'];
+			} elseif ( is_string( $meta['tour_availability'] ) ) {
+				$decoded = json_decode( $meta['tour_availability'], true );
+				$tour_availability = is_array( $decoded ) ? $decoded : '';
+			}
+		}
 
 		$matched_availability = Helper::tf_get_tour_matched_availability( $tour_availability, $tour_date, '' );
 		$is_date_unavailable  = ! empty( $tour_availability ) && (

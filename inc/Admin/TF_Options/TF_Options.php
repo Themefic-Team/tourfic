@@ -346,6 +346,32 @@ class TF_Options {
 	}
 
 	/**
+	 * Safely decode JSON that may already be an array.
+	 *
+	 * Availability fields can be stored as JSON strings or as arrays
+	 * (e.g. when updated/reset by older code paths).
+	 *
+	 * @param mixed $value Raw value.
+	 * @return array
+	 */
+	private function tf_safe_json_decode_assoc( $value ) {
+		if ( empty( $value ) ) {
+			return [];
+		}
+
+		if ( is_array( $value ) ) {
+			return $value;
+		}
+
+		if ( is_string( $value ) ) {
+			$decoded = json_decode( $value, true );
+			return is_array( $decoded ) ? $decoded : [];
+		}
+
+		return [];
+	}
+
+	/**
 	 * Load files
 	 * @author Foysal
 	 */
@@ -761,14 +787,14 @@ class TF_Options {
 		}
 
 		if ( $new_post != 'true' ) {
-			$avail_date = json_decode( $room_meta['avail_date'], true );
+			$avail_date = $this->tf_safe_json_decode_assoc( $room_meta['avail_date'] ?? [] );
 			if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
 				$room_avail_data = array_merge( $avail_date, $room_avail_data );
 			}
 			$room_meta['avail_date'] = wp_json_encode( $room_avail_data );
 			update_post_meta( $room_id, 'tf_room_opt', $room_meta );
 		} else {
-			$avail_date = json_decode( stripslashes( $avail_date ), true );
+			$avail_date = $this->tf_safe_json_decode_assoc( is_array( $avail_date ) ? $avail_date : (string) $avail_date );
 			if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
 				$room_avail_data = array_merge( $avail_date, $room_avail_data );
 			}
@@ -799,14 +825,14 @@ class TF_Options {
 
 		$new_post   = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$room_id    = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
-		$avail_date = isset( $_POST['avail_date'] ) && ! empty( $_POST['avail_date'] ) ? sanitize_text_field( $_POST['avail_date'] ) : '';
+		$avail_date = isset( $_POST['avail_date'] ) && ! empty( $_POST['avail_date'] ) ? wp_unslash( $_POST['avail_date'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$option_arr = isset( $_POST['option_arr'] ) && ! empty( $_POST['option_arr'] ) ? wp_unslash( $_POST['option_arr'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$room_meta  = get_post_meta( $room_id, 'tf_room_opt', true );
         $pricing_by = ! empty( $room_meta['pricing-by'] ) ? $room_meta['pricing-by'] : '1';
 		if ( $new_post != 'true' ) {
-			$room_avail_data = isset( $room_meta['avail_date'] ) && ! empty( $room_meta['avail_date'] ) ? json_decode( $room_meta['avail_date'], true ) : [];
+			$room_avail_data = isset( $room_meta['avail_date'] ) && ! empty( $room_meta['avail_date'] ) ? $this->tf_safe_json_decode_assoc( $room_meta['avail_date'] ) : [];
 		} else {
-			$room_avail_data = json_decode( stripslashes( $avail_date ), true );
+			$room_avail_data = $this->tf_safe_json_decode_assoc( $avail_date );
 		}
 
 		if ( ! empty( $room_avail_data ) && is_array( $room_avail_data ) ) {
@@ -915,7 +941,7 @@ class TF_Options {
 			$avil_by_date = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : '';
 
 			if ( $avil_by_date === '1' && ! empty( $room['avail_date'] ) ) {
-				$room_avail_data = json_decode( $room['avail_date'], true );
+				$room_avail_data = $this->tf_safe_json_decode_assoc( $room['avail_date'] );
 
 				if ( isset( $room_avail_data ) && ! empty( $room_avail_data ) ) {
 
@@ -975,13 +1001,13 @@ class TF_Options {
 			] );
 		}
 
-		$room_data['avail_date'] = [];
+		$room_data['avail_date'] = wp_json_encode( [] );
 
 		update_post_meta( $room_id, 'tf_room_opt', $room_data );
 		wp_send_json_success( [
 			'status'     => true,
 			'message'    => __( 'Availability Reset Successfully.', 'tourfic' ),
-			'avail_date' => [],
+			'avail_date' => wp_json_encode( [] ),
 		] );
 		wp_die();
 	}
@@ -1014,7 +1040,7 @@ class TF_Options {
 		$tf_apt_adult_price  = isset( $_POST['tf_apt_adult_price'] ) && ! empty( $_POST['tf_apt_adult_price'] ) ? sanitize_text_field( $_POST['tf_apt_adult_price'] ) : '';
 		$tf_apt_child_price  = isset( $_POST['tf_apt_child_price'] ) && ! empty( $_POST['tf_apt_child_price'] ) ? sanitize_text_field( $_POST['tf_apt_child_price'] ) : '';
 		$tf_apt_infant_price = isset( $_POST['tf_apt_infant_price'] ) && ! empty( $_POST['tf_apt_infant_price'] ) ? sanitize_text_field( $_POST['tf_apt_infant_price'] ) : '';
-		$apt_availability    = isset( $_POST['apt_availability'] ) && ! empty( $_POST['apt_availability'] ) ? sanitize_text_field( $_POST['apt_availability'] ) : '';
+		$apt_availability    = isset( $_POST['apt_availability'] ) && ! empty( $_POST['apt_availability'] ) ? wp_unslash( $_POST['apt_availability'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		$apartment_meta = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
 		if(empty($apartment_meta)){
@@ -1066,7 +1092,7 @@ class TF_Options {
 		}
 
 		if ( $new_post != 'true' ) {
-			$apt_availability = !empty($apartment_meta['apt_availability']) ? json_decode( $apartment_meta['apt_availability'], true ) : [];
+			$apt_availability = ! empty( $apartment_meta['apt_availability'] ) ? $this->tf_safe_json_decode_assoc( $apartment_meta['apt_availability'] ) : [];
 
 			if ( isset( $apt_availability ) && ! empty( $apt_availability ) ) {
 				$apt_availability_data = array_merge( $apt_availability, $apt_availability_data );
@@ -1074,7 +1100,7 @@ class TF_Options {
 			$apartment_meta['apt_availability'] = wp_json_encode( $apt_availability_data );
 			update_post_meta( $apartment_id, 'tf_apartment_opt', $apartment_meta );
 		} else {
-			$apt_availability = json_decode( stripslashes( $apt_availability ), true );
+			$apt_availability = $this->tf_safe_json_decode_assoc( $apt_availability );
 			if ( isset( $apt_availability ) && ! empty( $apt_availability ) ) {
 				$apt_availability_data = array_merge( $apt_availability, $apt_availability_data );
 			}
@@ -1107,13 +1133,13 @@ class TF_Options {
 
 		$new_post         = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$apartment_id     = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
-		$apt_availability = isset( $_POST['apt_availability'] ) && ! empty( $_POST['apt_availability'] ) ? sanitize_text_field( $_POST['apt_availability'] ) : '';
+		$apt_availability = isset( $_POST['apt_availability'] ) && ! empty( $_POST['apt_availability'] ) ? wp_unslash( $_POST['apt_availability'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		if ( $new_post != 'true' ) {
 			$apartment_data        = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
-			$apt_availability_data = isset( $apartment_data['apt_availability'] ) && ! empty( $apartment_data['apt_availability'] ) ? json_decode( $apartment_data['apt_availability'], true ) : [];
+			$apt_availability_data = isset( $apartment_data['apt_availability'] ) && ! empty( $apartment_data['apt_availability'] ) ? $this->tf_safe_json_decode_assoc( $apartment_data['apt_availability'] ) : [];
 		} else {
-			$apt_availability_data = json_decode( stripslashes( $apt_availability ), true );
+			$apt_availability_data = $this->tf_safe_json_decode_assoc( $apt_availability );
 		}
 
 		if ( ! empty( $apt_availability_data ) && is_array( $apt_availability_data ) ) {
@@ -1155,13 +1181,13 @@ class TF_Options {
 			] );
 		}
 		
-		$apartment_data['apt_availability'] = [];
+		$apartment_data['apt_availability'] = wp_json_encode( [] );
 
 		update_post_meta( $apartment_id, 'tf_apartment_opt', $apartment_data );
 		wp_send_json_success( [
 			'status'     => true,
 			'message'    => __( 'Availability Reset Successfully.', 'tourfic' ),
-			'apt_availability' => [],
+			'apt_availability' => wp_json_encode( [] ),
 		] );
 		wp_die();
 	}
@@ -1194,7 +1220,7 @@ class TF_Options {
 		$tf_tour_adult_price  = isset( $_POST['tf_tour_adult_price'] ) && ! empty( $_POST['tf_tour_adult_price'] ) ? sanitize_text_field( $_POST['tf_tour_adult_price'] ) : '';
 		$tf_tour_child_price  = isset( $_POST['tf_tour_child_price'] ) && ! empty( $_POST['tf_tour_child_price'] ) ? sanitize_text_field( $_POST['tf_tour_child_price'] ) : '';
 		$tf_tour_infant_price = isset( $_POST['tf_tour_infant_price'] ) && ! empty( $_POST['tf_tour_infant_price'] ) ? sanitize_text_field( $_POST['tf_tour_infant_price'] ) : '';
-		$tour_availability    = isset( $_POST['tour_availability'] ) && ! empty( $_POST['tour_availability'] ) ? sanitize_text_field( $_POST['tour_availability'] ) : '';
+		$tour_availability    = isset( $_POST['tour_availability'] ) && ! empty( $_POST['tour_availability'] ) ? wp_unslash( $_POST['tour_availability'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$options_count       = isset( $_POST['options_count'] ) && ! empty( $_POST['options_count'] ) ? sanitize_text_field( $_POST['options_count'] ) : '';
 		$selected_packages   = isset( $_POST['selected_packages'] ) ? (array) wp_unslash( $_POST['selected_packages'] ) : array();
 
@@ -1363,7 +1389,7 @@ class TF_Options {
 			] );
 		}
 		if ( $new_post != 'true' ) {
-			$tour_availability = !empty($tour_data['tour_availability']) ? json_decode( $tour_data['tour_availability'], true ) : [];
+			$tour_availability = ! empty( $tour_data['tour_availability'] ) ? $this->tf_safe_json_decode_assoc( $tour_data['tour_availability'] ) : [];
 
 			if ( isset( $tour_availability ) && ! empty( $tour_availability ) ) {
 				$tour_availability_data = array_merge( $tour_availability, $tour_availability_data );
@@ -1371,7 +1397,7 @@ class TF_Options {
 			$tour_data['tour_availability'] = wp_json_encode( $tour_availability_data );
 			update_post_meta( $tour_id, 'tf_tours_opt', $tour_data );
 		} else {
-			$tour_availability = json_decode( stripslashes( $tour_availability ), true );
+			$tour_availability = $this->tf_safe_json_decode_assoc( $tour_availability );
 			if ( isset( $tour_availability ) && ! empty( $tour_availability ) ) {
 				$tour_availability_data = array_merge( $tour_availability, $tour_availability_data );
 			}
@@ -1405,16 +1431,16 @@ class TF_Options {
 
 		$new_post         = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$tour_id     = isset( $_POST['tour_id'] ) && ! empty( $_POST['tour_id'] ) ? sanitize_text_field( $_POST['tour_id'] ) : '';
-		$tour_availability = isset( $_POST['tour_availability'] ) && ! empty( $_POST['tour_availability'] ) ? sanitize_text_field( $_POST['tour_availability'] ) : '';
+		$tour_availability = isset( $_POST['tour_availability'] ) && ! empty( $_POST['tour_availability'] ) ? wp_unslash( $_POST['tour_availability'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$option_arr = isset( $_POST['option_arr'] ) && ! empty( $_POST['option_arr'] ) ? $_POST['option_arr'] : [];
 		$group_option_arr = isset( $_POST['group_option_arr'] ) && ! empty( $_POST['group_option_arr'] ) ? $_POST['group_option_arr'] : [];
 
 		$tour_data        = get_post_meta( $tour_id, 'tf_tours_opt', true );
 		$pricing_by = ! empty( $tour_data['pricing'] ) ? $tour_data['pricing'] : 'person';
 		if ( $new_post != 'true' ) {
-			$tour_availability_data = isset( $tour_data['tour_availability'] ) && ! empty( $tour_data['tour_availability'] ) ? json_decode( $tour_data['tour_availability'], true ) : [];
+			$tour_availability_data = isset( $tour_data['tour_availability'] ) && ! empty( $tour_data['tour_availability'] ) ? $this->tf_safe_json_decode_assoc( $tour_data['tour_availability'] ) : [];
 		} else {
-			$tour_availability_data = json_decode( stripslashes( $tour_availability ), true );
+			$tour_availability_data = $this->tf_safe_json_decode_assoc( $tour_availability );
 		}
 
 		$group_package_option = ! empty( $tour_data['allow_package_pricing'] ) ? $tour_data['allow_package_pricing'] : '';
@@ -2041,12 +2067,12 @@ class TF_Options {
 			] );
 		}
 		
-		$tour_data['tour_availability'] = [];
+		$tour_data['tour_availability'] = wp_json_encode( [] );
 		update_post_meta( $tour_id, 'tf_tours_opt', $tour_data );
 		wp_send_json_success( [
 			'status'           => true,
 			'message'          => __( 'Availability Reset Successfully.', 'tourfic' ),
-			'tour_availability' => [],
+			'tour_availability' => wp_json_encode( [] ),
 		] );
 		wp_die();
 	}
@@ -2065,7 +2091,7 @@ class TF_Options {
 			$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 
 			if ( $enable_availability === '1' && ! empty( $meta['apt_availability'] ) ) {
-				$apt_availability_data = json_decode( $meta['apt_availability'], true );
+				$apt_availability_data = $this->tf_safe_json_decode_assoc( $meta['apt_availability'] );
 
 				if ( isset( $apt_availability_data ) && ! empty( $apt_availability_data ) ) {
 
