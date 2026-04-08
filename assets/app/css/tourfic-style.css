@@ -18012,8 +18012,8 @@ div#tf-destinationautocomplete-list div:before {
     margin-top: 16px;
   }
 }
-.tf-single-template__two .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.tf-share-toggle,
-.tf-single-template__two .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.tf-wishlist {
+.tf-single-template__two .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share-toggle,
+.tf-single-template__two .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-wishlist {
   margin: 0;
   padding: 0;
   height: 32px;
@@ -18029,8 +18029,8 @@ div#tf-destinationautocomplete-list div:before {
   font-size: 1rem;
   text-decoration: none;
 }
-.tf-single-template__two .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.tf-share-toggle.actives,
-.tf-single-template__two .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.tf-wishlist.actives {
+.tf-single-template__two .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-share-toggle.actives,
+.tf-single-template__two .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-wishlist.actives {
   background: var(--tf-primary);
 }
 .tf-single-template__two .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share .tf-off-canvas-share-box {

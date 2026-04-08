@@ -2401,8 +2401,8 @@
                             margin-top: 16px;
                         }
 
-                        a.tf-share-toggle,
-                        a.tf-wishlist {
+                        .tf-share-toggle,
+                        .tf-wishlist {
                             margin: 0;
                             padding: 0;
                             height: 32px;
@@ -2418,8 +2418,8 @@
                             font-size: 1rem;
                             text-decoration: none;
                         }
-                        a.tf-share-toggle.actives,
-                        a.tf-wishlist.actives {
+                        .tf-share-toggle.actives,
+                        .tf-wishlist.actives {
                             background: $color-primary;
                         }
 
