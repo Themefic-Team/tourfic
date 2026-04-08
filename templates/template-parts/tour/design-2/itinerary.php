@@ -46,19 +46,9 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 
 </div>
 <?php } ?>
-	<?php if ( $location && $itinerary_map != 1 ): ?>
-        <!-- Map start -->
-        <div id="tf-map" class="tf-itinerary-map">
-			<?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) && empty($tf_google_map_key) ) {  ?>
-                <div id="tour-location" style="height: 450px;"></div>
-			<?php } ?>
-			<?php if ( $tf_openstreet_map=="default" && (empty($location_latitude) || empty($location_longitude)) && empty($tf_google_map_key) ) {  ?>
-                <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $location ) ); ?>&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-			<?php } ?>
-			<?php if( $tf_openstreet_map!="default" && !empty($tf_google_map_key) ){ ?>
-                <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $location ) ); ?>&output=embed" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-			<?php } ?>
-        </div>
-        <!-- Map End -->
-	<?php endif; ?>
+<?php if ( $location && $itinerary_map != 1 ): ?>
+    <div class="tf-mt-16 tf-mb-30">
+        <?php \Tourfic\App\Templates\Components\Global\Single\Map::render('', '', '450px', false); ?> 
+    </div>
+<?php endif; ?>
 <?php } ?>

@@ -72,7 +72,9 @@ use \Tourfic\Classes\Apartment\Apartment;
                         </div>
 					<?php endif; ?>
 
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Description::render(['limit_content' => 'no']); ?>
+                    <div class="tf-mb-50">
+                        <?php \Tourfic\App\Templates\Components\Global\Single\Description::render(['limit_content' => 'no']); ?>
+                    </div>
 
 					<?php if ( isset( $meta['rooms'] ) && ! empty( Helper::tf_data_types( $meta['rooms'] ) ) ) : ?>
                         <!-- Apartment Rooms -->
@@ -266,19 +268,7 @@ use \Tourfic\Classes\Apartment\Apartment;
             <div class="tf-container">
                 <div class="tf-row">
                     <div class="tf-map-content-wrapper <?php echo empty( $map['address'] ) || empty( $meta['surroundings_places'] ) ? 'tf-map-content-full' : ''; ?> <?php echo ! function_exists( 'is_tf_pro' ) ? 'tf-map-content-full' : '' ?>">
-						<?php if ( ! empty( $map['address'] ) ): ?>
-                            <div class="tf-apartment-map">
-                                <h2 class="section-heading"><?php echo ! empty( $meta['location_title'] ) ? esc_html( $meta['location_title'] ) : ''; ?></h2>
-
-								<?php if ( $tf_openstreet_map == "default" && ! empty( $map["latitude"] ) && ! empty( $map["longitude"] ) ) { ?>
-                                    <div id="apartment-location" style="height: 500px;"></div>
-								<?php } elseif ( $tf_openstreet_map != "default" && ! empty( $tf_google_map_key ) ){ ?>
-                                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $map["address"] ) ); ?>&output=embed" width="100%" height="600" style="border:0;"
-                                            allowfullscreen=""
-                                            loading="lazy"></iframe>
-								<?php } ?>
-                            </div>
-						<?php endif; ?>
+						<?php \Tourfic\App\Templates\Components\Global\Single\Map::render(['design' => 'design-2'], '', '600px'); ?>
 
 						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
                             <div class="about-location">

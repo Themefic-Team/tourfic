@@ -155,9 +155,10 @@ class Gallery {
 	/**
 	 * Render Style 1 for Car Rental
 	 */
-	private static function render_style_1_carrental( $post_id, $post_type, $show_review, $disable_review_sec, $comments, $gallery_ids ) {
+	private static function render_style_1_carrental( $post_id, $post_type, $show_review, $disable_review_sec, $comments, $gallery_ids, $builder ) {
+		
+		echo !empty($builder) ? '<div class="tf-single-car-gallery-style-1 tf-single-template__one">' : '';
 		?>
-		<div class="tf-single-template__one tf-single-car-gallery-style-1">
 			<div class="tf-car-hero-gallery">
 				<div class="tf-featured-car">
 					<img src="<?php echo ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>" alt="<?php esc_attr_e( 'Car Image', 'tourfic' ); ?>">
@@ -178,6 +179,13 @@ class Gallery {
 							</span> (<?php echo wp_kses_post( Pricing::get_total_trips( $post_id ) ); ?> <?php esc_html_e( 'trips', 'tourfic' ); ?>)
 						</a>
 					</div>
+
+					<?php if(empty($builder)): ?>
+					<div class="tf-wish-and-share">
+						<?php \Tourfic\App\Templates\Components\Global\Single\Wishlist::render(['icon_type' => 'simple', 'design' => 'design-2']); ?>
+						<?php \Tourfic\App\Templates\Components\Global\Single\Share::render(['share_style' => 'style1', 'icon_type' => 'simple']); ?>
+					</div>
+					<?php endif; ?>
 				</div>
 
 				<div class="tf-gallery tf-flex tf-flex-gap-16">
@@ -197,14 +205,14 @@ class Gallery {
 					?>
 				</div>
 			</div>
-		</div>
 		<?php
+		echo !empty($builder) ? '</div>' : '';
 	}
 
 	/**
 	 * Render Style 2 (Slider)
 	 */
-	private static function render_style_2( $post_id, $post_type, $show_review, $disable_review_sec, $comments, $gallery_ids ) {
+	private static function render_style_2( $post_id, $post_type, $show_review, $disable_review_sec, $comments, $gallery_ids, $builder ) {
 		?>
 		<div class="tf-single-gallery__style-2 tf-hero-gallery">
 			<?php if ( $show_review == 'yes' && $comments && '1' !== $disable_review_sec ) { ?>
@@ -251,7 +259,36 @@ class Gallery {
 				</div>
 			<?php } ?>
 		</div>
-		<?php
+		<?php if ( 'elementor' === $builder && \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
+			<script>
+				jQuery(document).ready(function ($) {
+					'use strict';
+				
+					var sbp = $('.swiper-button-prev'),
+						sbn = $('.swiper-button-next');
+
+					$('.single-slider-wrapper .tf_slider-for').slick({
+						slide: '.slick-slide-item',
+						slidesToShow: 1,
+						slidesToScroll: 1,
+						arrows: false,
+						fade: false,
+						dots: false,
+						centerMode: false,
+						variableWidth: false,
+						adaptiveHeight: true
+					});
+
+					sbp.on("click", function () {
+						$(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickPrev');
+					});
+
+					sbn.on("click", function () {
+						$(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickNext');
+					});
+				});	
+			</script>
+		<?php endif;
 	}
 
 	/**

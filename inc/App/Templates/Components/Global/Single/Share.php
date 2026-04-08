@@ -89,12 +89,12 @@ class Share {
 			// Style 1: Dropdown with icons only
 			if ( 'style1' === $style ) {
 				?>
-				<div class="tf-share">
-					<a href="#dropdown-share-center" class="share-toggle tf-icon tf-social-box tf-icon-type-<?php echo esc_attr( $icon_type ); ?>" data-toggle="true">
+				<div class="tf-share <?php echo 'tf_carrental' === $post_type ? esc_attr( 'tf-off-canvas-share-box' ) : ''; ?>">
+					<a href="#dropdown-share-center" class="<?php echo 'tf_carrental' === $post_type ? esc_attr( 'tf-share-toggle' ) : esc_attr('share-toggle'); ?> tf-icon tf-social-box tf-icon-type-<?php echo esc_attr( $icon_type ); ?>" data-toggle="true">
 						<?php echo wp_kses( $share_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
 					</a>
 
-					<div id="dropdown-share-center" class="share-tour-content">
+					<div id="dropdown-share-center" class="<?php echo 'tf_carrental' === $post_type ? esc_attr( 'share-car-content' ) : esc_attr( 'share-tour-content' ); ?>">
 						<div class="tf-dropdown-share-content">
 							<h4><?php esc_html_e( 'Share with friends', 'tourfic' ); ?></h4>
 							<ul>
