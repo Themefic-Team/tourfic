@@ -218,6 +218,236 @@ class Helper {
 
 		return true;
 	}
+
+	/**
+	 * Return the most specific tour availability item for a date.
+	 *
+	 * Matching priority:
+	 * 1) Shorter date range wins (more specific rule)
+	 * 2) If same range, newer/later-starting rule wins
+	 *
+	 * @param array  $tour_availability Tour availability data.
+	 * @param string $tour_date         Selected tour date (Y/m/d).
+	 * @param string $status            Optional status filter.
+	 * @return array|null
+	 */
+	static function tf_get_tour_matched_availability( $tour_availability, $tour_date, $status = 'available' ) {
+		if ( is_object( $tour_availability ) ) {
+			$tour_availability = (array) $tour_availability;
+		}
+
+		if ( empty( $tour_availability ) || ! is_array( $tour_availability ) || empty( $tour_date ) ) {
+			return null;
+		}
+
+		$input_date = strtotime( trim( (string) $tour_date ) );
+		if ( false === $input_date ) {
+			return null;
+		}
+
+		$matched                 = null;
+		$matched_range_days      = null;
+		$matched_start_timestamp = null;
+		$matched_index           = -1;
+		$index                   = 0;
+
+		foreach ( $tour_availability as $details ) {
+			$availability = is_array( $details ) ? $details : (array) $details;
+			if ( empty( $availability['check_in'] ) || empty( $availability['check_out'] ) || ! isset( $availability['status'] ) ) {
+				$index++;
+				continue;
+			}
+
+			$check_in  = strtotime( trim( (string) $availability['check_in'] ) );
+			$check_out = strtotime( trim( (string) $availability['check_out'] ) );
+			if ( false === $check_in || false === $check_out || $check_in > $check_out ) {
+				$index++;
+				continue;
+			}
+
+			if ( $input_date < $check_in || $input_date > $check_out ) {
+				$index++;
+				continue;
+			}
+
+			if ( '' !== $status && $status !== $availability['status'] ) {
+				$index++;
+				continue;
+			}
+
+			$range_days = (int) floor( ( $check_out - $check_in ) / DAY_IN_SECONDS );
+
+			$should_replace = false;
+			if ( null === $matched ) {
+				$should_replace = true;
+			} elseif ( $range_days < $matched_range_days ) {
+				$should_replace = true;
+			} elseif ( $range_days === $matched_range_days && $check_in > $matched_start_timestamp ) {
+				$should_replace = true;
+			} elseif ( $range_days === $matched_range_days && $check_in === $matched_start_timestamp && $index > $matched_index ) {
+				$should_replace = true;
+			}
+
+			if ( $should_replace ) {
+				$matched                 = $availability;
+				$matched_range_days      = $range_days;
+				$matched_start_timestamp = $check_in;
+				$matched_index           = $index;
+			}
+
+			$index++;
+		}
+
+		return $matched;
+	}
+
+	/**
+	 * Return the most specific tour availability item for a date and package.
+	 *
+	 * If an availability row contains selected_packages, that row applies only to
+	 * those package indexes. Rows that do not apply to the requested package are
+	 * skipped so broader rules can still be used as fallback.
+	 *
+	 * @param array  $tour_availability Tour availability data.
+	 * @param string $tour_date         Selected tour date (Y/m/d).
+	 * @param string $package_key       Selected package index.
+	 * @return array|null
+	 */
+	static function tf_get_tour_matched_availability_for_package( $tour_availability, $tour_date, $package_key ) {
+		if ( is_object( $tour_availability ) ) {
+			$tour_availability = (array) $tour_availability;
+		}
+
+		if ( empty( $tour_availability ) || ! is_array( $tour_availability ) || empty( $tour_date ) ) {
+			return null;
+		}
+
+		$package_key = (string) $package_key;
+		if ( '' === $package_key ) {
+			return self::tf_get_tour_matched_availability( $tour_availability, $tour_date, '' );
+		}
+
+		$input_date = strtotime( trim( (string) $tour_date ) );
+		if ( false === $input_date ) {
+			return null;
+		}
+
+		$matched                 = null;
+		$matched_range_days      = null;
+		$matched_start_timestamp = null;
+		$matched_index           = -1;
+		$index                   = 0;
+
+		foreach ( $tour_availability as $details ) {
+			$availability = is_array( $details ) ? $details : (array) $details;
+			if ( empty( $availability['check_in'] ) || empty( $availability['check_out'] ) ) {
+				$index++;
+				continue;
+			}
+
+			$check_in  = strtotime( trim( (string) $availability['check_in'] ) );
+			$check_out = strtotime( trim( (string) $availability['check_out'] ) );
+			if ( false === $check_in || false === $check_out || $check_in > $check_out ) {
+				$index++;
+				continue;
+			}
+
+			if ( $input_date < $check_in || $input_date > $check_out ) {
+				$index++;
+				continue;
+			}
+
+			$selected_packages = ! empty( $availability['selected_packages'] ) && is_array( $availability['selected_packages'] ) ? array_map( 'strval', $availability['selected_packages'] ) : array();
+			if ( ! empty( $selected_packages ) && ! in_array( $package_key, $selected_packages, true ) && ! self::tf_tour_availability_has_explicit_package_data( $availability, $package_key ) ) {
+				$index++;
+				continue;
+			}
+
+			$range_days = (int) floor( ( $check_out - $check_in ) / DAY_IN_SECONDS );
+
+			$should_replace = false;
+			if ( null === $matched ) {
+				$should_replace = true;
+			} elseif ( $range_days < $matched_range_days ) {
+				$should_replace = true;
+			} elseif ( $range_days === $matched_range_days && $check_in > $matched_start_timestamp ) {
+				$should_replace = true;
+			} elseif ( $range_days === $matched_range_days && $check_in === $matched_start_timestamp && $index > $matched_index ) {
+				$should_replace = true;
+			}
+
+			if ( $should_replace ) {
+				$matched                 = $availability;
+				$matched_range_days      = $range_days;
+				$matched_start_timestamp = $check_in;
+				$matched_index           = $index;
+			}
+
+			$index++;
+		}
+
+		return $matched;
+	}
+
+	/**
+	 * Check whether an availability row contains explicit data for a package.
+	 *
+	 * This keeps package matching resilient for pre-fix rows where same-date
+	 * package saves preserved package-specific fields but overwrote
+	 * `selected_packages` with only the latest package.
+	 *
+	 * @param array  $availability Availability row.
+	 * @param string $package_key  Package index.
+	 * @return bool
+	 */
+	private static function tf_tour_availability_has_explicit_package_data( $availability, $package_key ) {
+		$package_key = (string) $package_key;
+		$field_keys  = array(
+			'tf_option_title_' . $package_key,
+			'tf_option_pricing_type_' . $package_key,
+			'tf_option_group_price_' . $package_key,
+			'tf_option_adult_price_' . $package_key,
+			'tf_option_child_price_' . $package_key,
+			'tf_option_infant_price_' . $package_key,
+			'tf_option_times_' . $package_key,
+		);
+
+		foreach ( $field_keys as $field_key ) {
+			if ( ! array_key_exists( $field_key, $availability ) ) {
+				continue;
+			}
+
+			if ( self::tf_tour_availability_has_meaningful_value( $availability[ $field_key ] ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Determine whether a nested availability field contains meaningful data.
+	 *
+	 * @param mixed $value Field value.
+	 * @return bool
+	 */
+	private static function tf_tour_availability_has_meaningful_value( $value ) {
+		if ( is_array( $value ) ) {
+			foreach ( $value as $nested_value ) {
+				if ( self::tf_tour_availability_has_meaningful_value( $nested_value ) ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		if ( is_scalar( $value ) ) {
+			return '' !== trim( (string) $value );
+		}
+
+		return false;
+	}
     
 
     static function tf_hotel_extras_title_price( $post_id, $adult, $child, $key ) {

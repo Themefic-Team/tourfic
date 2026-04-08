@@ -3601,26 +3601,7 @@ class Tour {
         $discount_type    = !empty($meta['discount_type']) ? $meta['discount_type'] : 'none';
         $discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : 0;
 
-		$matched_availability = null;
-		if ( $tour_date && is_array($tour_availability) ) {
-			$input_date = strtotime($tour_date);
-
-			foreach ( $tour_availability as $date_range => $details ) {
-				if ( !isset($details['check_in'], $details['check_out'], $details['status']) ) {
-					continue;
-				}
-
-				$check_in  = strtotime(trim($details['check_in']));
-				$check_out = strtotime(trim($details['check_out']));
-				$status    = $details['status'];
-
-				if ( $status === 'available' && $input_date >= $check_in && $input_date <= $check_out ) {
-					$matched_availability = $details;
-					break; // Stop loop after first match
-				}
-			}
-
-		}
+		$matched_availability = Helper::tf_get_tour_matched_availability( $tour_availability, $tour_date, 'available' );
 		if (! empty($matched_availability) ) {
 			if($pricing_rule == 'person'){
 				$adult_price    = ! empty( $matched_availability['adult_price'] ) ? $matched_availability['adult_price'] : '';
@@ -4098,7 +4079,7 @@ class Tour {
 		// Tour date
 		$tour_date = ! empty( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
 		$tour_time = isset( $_POST['check_in_time'] ) ? sanitize_text_field( $_POST['check_in_time'] ) : null;
-		$selectedPackage = ! empty( $_POST['selectedPackage'] ) ? $_POST['selectedPackage'] : '';
+		$selectedPackage = ! empty( $_POST['selectedPackage'] ) ? sanitize_text_field( wp_unslash( $_POST['selectedPackage'] ) ) : '';
 		// var_dump($tour_time);
 
 		$post_id              = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : '';
@@ -4128,27 +4109,48 @@ class Tour {
 
 		$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
 
-		$matched_availability = null;
-		if ( $tour_date && is_array($tour_availability) ) {
-			$input_date = strtotime($tour_date);
+		$matched_availability = Helper::tf_get_tour_matched_availability( $tour_availability, $tour_date, '' );
+		$is_date_unavailable  = ! empty( $tour_availability ) && (
+			empty( $matched_availability ) ||
+			( ! empty( $matched_availability['status'] ) && 'unavailable' === $matched_availability['status'] )
+		);
+		$selected_package_key = (string) $selectedPackage;
 
-			foreach ( $tour_availability as $date_range => $details ) {
-				if ( !isset($details['check_in'], $details['check_out'], $details['status']) ) {
-					continue;
+		if ( 'package' === $pricing_rule && '' !== $selected_package_key ) {
+			$matched_availability = Helper::tf_get_tour_matched_availability_for_package( $tour_availability, $tour_date, $selected_package_key );
+			$is_date_unavailable  = ! empty( $tour_availability ) && (
+				empty( $matched_availability ) ||
+				( ! empty( $matched_availability['status'] ) && 'unavailable' === $matched_availability['status'] )
+			);
+		}
+
+		if ( 'package' === $pricing_rule ) {
+			$package_is_unavailable = false;
+
+			if ( '' === $selectedPackage ) {
+				$response['errors'][] = esc_html__( 'Please select a package.', 'tourfic' );
+			}
+
+			if ( ! empty( $matched_availability ) && '' !== $selected_package_key ) {
+				$status_key           = 'tf_option_status_' . $selected_package_key;
+				$package_status       = ! empty( $matched_availability[ $status_key ] ) ? $matched_availability[ $status_key ] : '';
+
+				if ( 'unavailable' === $package_status || ( ! empty( $matched_availability['status'] ) && 'unavailable' === $matched_availability['status'] ) ) {
+					$package_is_unavailable = true;
+					$response['errors'][] = esc_html__( 'Selected package is unavailable for this date.', 'tourfic' );
 				}
+			}
 
-				$check_in  = strtotime(trim($details['check_in']));
-				$check_out = strtotime(trim($details['check_out']));
-				$status    = $details['status'];
-
-				if ( $status === 'available' && $input_date >= $check_in && $input_date <= $check_out ) {
-					$matched_availability = $details;
-					break; // Stop loop after first match
-				}
+			if ( $is_date_unavailable && ! $package_is_unavailable ) {
+				$response['errors'][] = esc_html__( 'This tour is unavailable for the selected date.', 'tourfic' );
 			}
 		}
 
-		if ( $tour_type == 'fixed' && !empty($matched_availability) ) {
+		if ( 'package' !== $pricing_rule && $is_date_unavailable ) {
+			$response['errors'][] = esc_html__( 'This tour is unavailable for the selected date.', 'tourfic' );
+		}
+
+		if ( $tour_type == 'fixed' && ! empty( $matched_availability ) && ! $is_date_unavailable ) {
 
 			$start_date            = ! empty( $matched_availability['check_in'] ) ? $matched_availability['check_in'] : '';
 			$end_date              = ! empty( $matched_availability['check_out'] ) ? $matched_availability['check_out'] : '';
@@ -4205,7 +4207,7 @@ class Tour {
 				}
 			}
 
-		} elseif ( $tour_type == 'continuous' && !empty($matched_availability) ) {
+		} elseif ( $tour_type == 'continuous' && ! empty( $matched_availability ) && ! $is_date_unavailable ) {
 
 			// $pricing_rule = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
 
@@ -5039,20 +5041,59 @@ class Tour {
 
 		}
 
-		if(!empty($matched_availability['options_count'])){
-			$filtered_times = [];
+			if ( 'package' === $pricing_rule ) {
+				$filtered_times     = array();
+				$package_status_map = array();
+				$package_indexes    = array();
 
-			foreach ($matched_availability as $key => $value) {
-				if (strpos($key, 'tf_option_times_') === 0 && is_array($value)) {
-					$index = str_replace('tf_option_times_', '', $key);
-
-					// Check if 'time' exists and contains at least one non-empty value
-					if (!empty($value['time']) && array_filter($value['time'])) {
-						$filtered_times[$index] = array_values(array_filter($value['time']));
+				if ( is_array( $tf_package_pricing ) ) {
+					foreach ( $tf_package_pricing as $package_index => $package_data ) {
+						$package_indexes[] = (string) $package_index;
 					}
+
+					$package_indexes = array_values( array_unique( $package_indexes ) );
+				}
+
+			if ( empty( $package_indexes ) && ! empty( $matched_availability['options_count'] ) ) {
+				for ( $i = 0; $i <= (int) $matched_availability['options_count'] - 1; $i++ ) {
+					$package_indexes[] = (string) $i;
 				}
 			}
-			if(!empty($filtered_times)){
+
+			foreach ( $package_indexes as $index ) {
+				$status_key = 'tf_option_status_' . $index;
+				$times_key  = 'tf_option_times_' . $index;
+				$package_status = 'available';
+
+				$package_matched_availability = Helper::tf_get_tour_matched_availability_for_package( $tour_availability, $tour_date, $index );
+				if ( ! empty( $package_matched_availability ) ) {
+					if ( ! empty( $package_matched_availability['status'] ) && 'unavailable' === $package_matched_availability['status'] ) {
+						$package_status = 'unavailable';
+					} elseif ( ! empty( $package_matched_availability[ $status_key ] ) ) {
+						$package_status = $package_matched_availability[ $status_key ];
+					}
+				} elseif ( ! empty( $tour_availability ) ) {
+					$package_status = 'unavailable';
+				}
+
+				$package_status_map[ $index ] = $package_status;
+
+				if ( 'unavailable' === $package_status ) {
+					continue;
+				}
+
+				if (
+					! empty( $package_matched_availability[ $times_key ] ) &&
+					is_array( $package_matched_availability[ $times_key ] ) &&
+					! empty( $package_matched_availability[ $times_key ]['time'] ) &&
+					array_filter( $package_matched_availability[ $times_key ]['time'] )
+				) {
+					$filtered_times[ $index ] = array_values( array_filter( $package_matched_availability[ $times_key ]['time'] ) );
+				}
+			}
+
+			$response['package_statuses'] = $package_status_map;
+			if ( ! empty( $filtered_times ) ) {
 				$response['pacakge_times'] = $filtered_times;
 			}
 		}

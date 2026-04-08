@@ -634,25 +634,7 @@ class Pricing {
 
 		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
 
-		$matched_availability = null;
-		if ( $tour_date && is_array($tour_availability) ) {
-			$input_date = strtotime($tour_date);
-
-			foreach ( $tour_availability as $date_range => $details ) {
-				if ( !isset($details['check_in'], $details['check_out'], $details['status']) ) {
-					continue;
-				}
-
-				$check_in  = strtotime(trim($details['check_in']));
-				$check_out = strtotime(trim($details['check_out']));
-				$status    = $details['status'];
-
-				if ( $status === 'available' && $input_date >= $check_in && $input_date <= $check_out ) {
-					$matched_availability = $details;
-					break; // Stop loop after first match
-				}
-			}
-		}
+		$matched_availability = Helper::tf_get_tour_matched_availability( $tour_availability_data, $tour_date, 'available' );
 
 
 		if (! empty($matched_availability) ) {
