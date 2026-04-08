@@ -125,7 +125,7 @@ class Share {
 			// Style 2: Off-canvas style
 			elseif ( 'style2' === $style ) {
 				?>
-				<div class="tf-share tf-off-canvas-share-box tf-single-template__two">
+				<div class="tf-share tf-off-canvas-share-box <?php echo !empty( $builder ) ? 'tf-single-template__two' : ''; ?>">
 					<ul class="tf-off-canvas-share">
 						<?php foreach ( [ 'facebook', 'twitter', 'linkedin', 'pinterest' ] as $network ) : ?>
 						<li>
@@ -162,6 +162,9 @@ class Share {
 				<div class="tf-share">
 					<a href="#dropdown-share-center" class="share-toggle tf-icon-type-<?php echo esc_attr( $icon_type ); ?>" data-toggle="true">
 						<?php echo wp_kses( $share_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
+                        <?php if( $post_type == 'tf_apartment' ) : ?>
+                            <span class="share-text"><?php esc_html_e( 'Share', 'tourfic' ); ?></span>
+                        <?php endif; ?>
 					</a>
 					<div id="dropdown-share-center" class="share-tour-content">
 						<ul class="tf-dropdown-content">

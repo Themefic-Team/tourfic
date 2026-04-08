@@ -15,60 +15,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
         <div class="tf-hero-content">
             <div class="tf-wish-and-share">
                 <?php \Tourfic\App\Templates\Components\Global\Single\Wishlist::render(['design' => 'design-2']); ?>
-                
-                <!-- Share Section -->
-                <?php if ( ! $disable_share_opt == '1' ) { ?>
-                <div class="tf-share tf-off-canvas-share-box">
-                    <ul class="tf-off-canvas-share">
-                        <li>
-                            <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
-                            class="tf-dropdown-item" target="_blank">
-                        <span class="tf-dropdown-item-content">
-                            <i class="fab fa-facebook"></i>
-                        </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://twitter.com/share?text=<?php echo esc_attr( $share_text ); ?>&url=<?php echo esc_url( $share_link ); ?>"
-                            class="tf-dropdown-item" target="_blank">
-                        <span class="tf-dropdown-item-content">
-                            <i class="fab fa-twitter"></i>
-                        </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/cws/share?url=<?php echo esc_url( $share_link ); ?>"
-                            class="tf-dropdown-item" target="_blank">
-                        <span class="tf-dropdown-item-content">
-                            <i class="fab fa-linkedin"></i>
-                        </span>
-                            </a>
-                        </li>
-                        <?php $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' ); ?>
-                        <li>
-                            <a href="http://pinterest.com/pin/create/button/?url=<?php echo esc_url( $share_link ); ?>&media=<?php echo esc_url( get_the_post_thumbnail_url() ); ?>&description=<?php echo esc_attr( $share_text ); ?>"
-                            class="tf-dropdown-item" target="_blank">
-                        <span class="tf-dropdown-item-content">
-                            <i class="fab fa-pinterest"></i>
-                        </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" id="share_link_button" class="share-center-copy-cta">
-                            <i class="ri-links-line"></i>
-                                <span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
-                            </a>
-                            <input type="text" id="share_link_input" class="share-center-url share-center-url-input" value="<?php echo esc_attr( $share_link ); ?>" readonly>
-                        </li>
-                    </ul>
-                    <a href="#dropdown-share-center" class="tf-share-toggle tf-icon tf-social-box"
-                    data-toggle="true">
-                        <i class="ri-share-line"></i>
-                    </a>
-                </div>
-                <?php } ?>
-                <!-- End Share Section -->
-
+                <?php \Tourfic\App\Templates\Components\Global\Single\Share::render(['share_style' => 'style2']); ?>
             </div>
             <div class="tf-hero-bottom-area">
                 <div class="tf-head-title">

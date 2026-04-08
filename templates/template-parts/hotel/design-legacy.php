@@ -53,71 +53,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 
                 <div class="tf-title-right">
 					<?php \Tourfic\App\Templates\Components\Global\Single\Wishlist::render(['icon_type' => 'simple']); ?>
-
-                    <!-- Share Section -->
-					<?php if ( ! $disable_share_opt == '1' ) { ?>
-                        <div class="tf-share">
-                            <a href="#dropdown-share-center" class="share-toggle"
-                               data-toggle="true"><i class="ri-share-line"></i></a>
-                            <div id="dropdown-share-center" class="share-tour-content">
-                                <ul class="tf-dropdown-content">
-                                    <li>
-                                        <a href="http://www.facebook.com/share.php?u=<?php echo esc_url( $share_link ); ?>"
-                                           class="tf-dropdown-item" target="_blank">
-                                    <span class="tf-dropdown-item-content">
-                                        <i class="fab fa-facebook-square"></i>
-                                        <?php esc_html_e( 'Share on Facebook', 'tourfic' ); ?>
-                                    </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://twitter.com/share?text=<?php echo esc_attr( $share_text ); ?>&url=<?php echo esc_url( $share_link ); ?>"
-                                           class="tf-dropdown-item" target="_blank">
-                                    <span class="tf-dropdown-item-content">
-                                        <i class="fab fa-twitter-square"></i>
-                                        <?php esc_html_e( 'Share on Twitter', 'tourfic' ); ?>
-                                    </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.linkedin.com/cws/share?url=<?php echo esc_url( $share_link ); ?>"
-                                           class="tf-dropdown-item" target="_blank">
-                                    <span class="tf-dropdown-item-content">
-                                        <i class="fab fa-linkedin"></i>
-                                        <?php esc_html_e( 'Share on Linkedin', 'tourfic' ); ?>
-                                    </span>
-                                        </a>
-                                    </li>
-									<?php $share_image_link = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' ); ?>
-                                    <li>
-                                        <a href="http://pinterest.com/pin/create/button/?url=<?php echo esc_url( $share_link ); ?>&media=<?php echo isset( $share_image_link[0] ) ? esc_url( $share_image_link[0] ) : ''; ?>&description=<?php echo esc_attr( $share_text ); ?>"
-                                           class="tf-dropdown-item" target="_blank">
-                                            <span class="tf-dropdown-item-content">
-                                                <i class="fab fa-pinterest"></i>
-                                                <?php esc_html_e( 'Share on Pinterest', 'tourfic' ); ?>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="share-center-copy-form tf-dropdown-item" title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>"
-                                             aria-controls="share_link_button">
-                                            <label class="share-center-copy-label"
-                                                   for="share_link_input"><?php esc_html_e( 'Share this link', 'tourfic' ); ?></label>
-                                            <input type="text" id="share_link_input"
-                                                   class="share-center-url share-center-url-input"
-                                                   value="<?php echo esc_attr( $share_link ); ?>" readonly>
-                                            <button id="share_link_button" class="tf_btn tf_btn_small share-center-copy-cta" tabindex="0"
-                                                    role="button">
-                                                <span class="tf-button-text share-center-copy-message"><?php esc_html_e( 'Copy link', 'tourfic' ); ?></span>
-                                                <span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
-                                            </button>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-					<?php } ?>
-                    <!-- End Share Section -->
+                    <?php \Tourfic\App\Templates\Components\Global\Single\Share::render(['share_style' => 'style3']); ?>
 
                     <div class="reserve-button">
                         <a href="#rooms" class="tf-btn-flip" data-back="<?php esc_attr_e( 'View Rooms', 'tourfic' ); ?>" data-front="<?php esc_attr_e( 'Reserve Now', 'tourfic' ); ?>"></a>
