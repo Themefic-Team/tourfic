@@ -232,8 +232,8 @@ class Gallery {
 								}
 								?>
 							</div>
-							<div class="swiper-button-prev sw-btn"></div>
-							<div class="swiper-button-next sw-btn"></div>
+							<div class="swiper-button-prev sw-btn"><i class="fa fa-angle-left"></i></div>
+							<div class="swiper-button-next sw-btn"><i class="fa fa-angle-right"></i></div>
 						</div>
 					</div>
 				</div>
@@ -257,9 +257,10 @@ class Gallery {
 	/**
 	 * Render Style 3 (Grid)
 	 */
-	private static function render_style_3( $post_id, $post_type, $gallery_ids ) {
+	private static function render_style_3( $post_id, $post_type, $gallery_ids, $builder ) {
 		?>
 		<div class="tf-apt-hero-section tf-single-gallery__style-3">
+			<?php echo empty( $builder ) ? '<div class="tf-container">' : ''; ?>
 			<div class="tf-apt-hero-wrapper">
 				<?php if ( ! empty( $gallery_ids ) ) :
 					$first_image = ! empty( $gallery_ids[0] ) ? wp_get_attachment_image( $gallery_ids[0], 'tf_apartment_gallery_large' ) : '';
@@ -312,6 +313,7 @@ class Gallery {
 					?>
 				<?php endif; ?>
 			</div>
+			<?php echo empty( $builder ) ? '</div>' : ''; ?>
 		</div>
 		<?php
 	}

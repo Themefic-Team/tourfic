@@ -187,67 +187,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
         <div class="tf-container">
             <div class="hero-section-wrap">
                 <div class="hero-left">
-                    <div class="tf-top-review">
-						<?php if ( $comments && ! $disable_review_sec == '1' ) { ?>
-                            <a href="#tf-review">
-                                <div class="tf-single-rating">
-                                    <i class="fas fa-star"></i> <span><?php echo wp_kses_post( TF_Review::tf_total_avg_rating( $comments ) ); ?></span> (<?php TF_Review::tf_based_on_text( count( $comments ) ); ?>)
-                                </div>
-                            </a>
-						<?php } ?>
-                    </div>
-                    <!-- Start Gallery -->
-					<?php if ( ! empty( $gallery_ids ) ) { ?>
-                        <div class="tf-gallery-wrap">
-                            <div class="list-single-main-media fl-wrap" id="sec1">
-                                <div class="single-slider-wrapper fl-wrap">
-                                    <div class="tf_slider-for fl-wrap tf-slick-slider">
-										<?php foreach ( $gallery_ids as $attachment_id ) {
-											echo '<div class="slick-slide-item">';
-											echo '<a href="' . esc_url( wp_get_attachment_url( $attachment_id, 'tf_gallery_thumb' ) ) . '" class="slick-slide-item-link" data-fancybox="hotel-gallery">';
-											echo wp_get_attachment_image( $attachment_id, 'tf_gallery_thumb' );
-											echo '</a>';
-											echo '</div>';
-										} ?>
-                                    </div>
-                                    <div class="swiper-button-prev sw-btn"><i class="fa fa-angle-left"></i></div>
-                                    <div class="swiper-button-next sw-btn"><i class="fa fa-angle-right"></i></div>
-
-									<?php
-									/**
-									 * Hotel video section in the hero
-									 */
-									Helper::tf_hotel_gallery_video( $meta );
-									?>
-                                </div>
-                            </div>
-                        </div>
-					<?php } else { ?>
-                        <div class="tf-gallery-wrap">
-                            <div class="list-single-main-media fl-wrap" id="sec1">
-                                <div class="single-slider-wrapper fl-wrap">
-                                    <div class="tf_slider-for fl-wrap tf-slick-slider">
-
-                                        <a href="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) : esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>"
-                                           class="slick-slide-item-link" data-fancybox="hotel-gallery">
-                                            <img src="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) : esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>"
-                                                 alt="">
-                                        </a>
-
-                                    </div>
-
-									<?php
-									/**
-									 * Hotel video section in the hero
-									 */
-									Helper::tf_hotel_gallery_video( $meta );
-									?>
-
-                                </div>
-                            </div>
-                        </div>
-					<?php } ?>
-                    <!-- End gallery-->
+                    <?php \Tourfic\App\Templates\Components\Global\Single\Gallery::render(['gallery_style' => 'style2']); ?>
 
                     <div class="tf-mt-16">
                         <?php \Tourfic\App\Templates\Components\Global\Single\Description::render(['limit_content' => 'no']); ?>
