@@ -49,46 +49,8 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 						<?php \Tourfic\App\Templates\Components\Global\Single\Address::render(['design' => 'design-2']); ?>
                     </div>
                     <div class="tf-hero-gallery-videos">
-						<?php
-						$tours_video = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
-						if ( ! empty( $tours_video ) ) { ?>
-                            <div class="tf-hero-video tf-popup-buttons">
-                                <a class="tf-tour-video" id="featured-video" href="<?php echo esc_url( $tours_video ); ?>" data-fancybox="tour-video">
-                                    <svg width="23" height="18" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g id="content">
-                                            <path id="Vector 3570" d="M10.5 5L12.5 5" stroke="#FDF9F4" stroke-width="1.5" stroke-linecap="round"/>
-                                            <path id="Rectangle 368"
-                                                  d="M1.5 8C1.5 4.70017 1.5 3.05025 2.52513 2.02513C3.55025 1 5.20017 1 8.5 1H9.5C12.7998 1 14.4497 1 15.4749 2.02513C16.5 3.05025 16.5 4.70017 16.5 8V10C16.5 13.2998 16.5 14.9497 15.4749 15.9749C14.4497 17 12.7998 17 9.5 17H8.5C5.20017 17 3.55025 17 2.52513 15.9749C1.5 14.9497 1.5 13.2998 1.5 10V8Z"
-                                                  stroke="#FDF9F4" stroke-width="1.5"/>
-                                            <path id="Rectangle 369"
-                                                  d="M16.5 5.90585L16.6259 5.80196C18.7417 4.05623 19.7996 3.18336 20.6498 3.60482C21.5 4.02628 21.5 5.42355 21.5 8.21808V9.78192C21.5 12.5765 21.5 13.9737 20.6498 14.3952C19.7996 14.8166 18.7417 13.9438 16.6259 12.198L16.5 12.0941"
-                                                  stroke="#FDF9F4" stroke-width="1.5" stroke-linecap="round"/>
-                                        </g>
-                                    </svg>
-                                </a>
-                            </div>
-						<?php } ?>
-						<?php
-						if ( ! empty( $gallery_ids ) ) {
-							?>
-                            <div class="tf-hero-hotel tf-popup-buttons">
-                                <a href="#">
-                                    <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g id="content">
-                                            <path id="Rectangle 2111"
-                                                  d="M5.5 16.9745C5.6287 18.2829 5.91956 19.1636 6.57691 19.8209C7.75596 21 9.65362 21 13.4489 21C17.2442 21 19.1419 21 20.3209 19.8209C21.5 18.6419 21.5 16.7442 21.5 12.9489C21.5 9.15362 21.5 7.25596 20.3209 6.07691C19.6636 5.41956 18.7829 5.1287 17.4745 5"
-                                                  stroke="#FDF9F4" stroke-width="1.5"/>
-                                            <path id="Rectangle 2109"
-                                                  d="M1.5 9C1.5 5.22876 1.5 3.34315 2.67157 2.17157C3.84315 1 5.72876 1 9.5 1C13.2712 1 15.1569 1 16.3284 2.17157C17.5 3.34315 17.5 5.22876 17.5 9C17.5 12.7712 17.5 14.6569 16.3284 15.8284C15.1569 17 13.2712 17 9.5 17C5.72876 17 3.84315 17 2.67157 15.8284C1.5 14.6569 1.5 12.7712 1.5 9Z"
-                                                  stroke="#FDF9F4" stroke-width="1.5"/>
-                                            <path id="Vector" d="M1.5 10.1185C2.11902 10.0398 2.74484 10.001 3.37171 10.0023C6.02365 9.9533 8.61064 10.6763 10.6711 12.0424C12.582 13.3094 13.9247 15.053 14.5 17"
-                                                  stroke="#FDF9F4" stroke-width="1.5" stroke-linejoin="round"/>
-                                            <path id="Vector_2" d="M12.4998 6H12.5088" stroke="#FDF9F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </g>
-                                    </svg>
-                                </a>
-                            </div>
-						<?php } ?>
+						<?php \Tourfic\App\Templates\Components\Global\Single\Video_Button::render(['design' => 'design-2'], '', false); ?>
+                    	<?php \Tourfic\App\Templates\Components\Global\Single\Gallery_Button::render(['style' => 'style2']); ?>
                     </div>
                 </div>
             </div>

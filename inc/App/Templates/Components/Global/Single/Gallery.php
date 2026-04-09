@@ -99,21 +99,8 @@ class Gallery {
 				
 				<?php if(empty($builder)): ?>
 					<div class="featured-meta-gallery-videos">
-						<div class="featured-column tf-gallery-box">
-							<?php if ( ! empty( $gallery_ids ) ) {?>
-							<a id="featured-gallery" href="#" class="tf-tour-gallery">
-								<i class="fa-solid fa-camera-retro"></i><?php echo esc_html__("Gallery","tourfic"); ?>
-							</a>
-							<?php } ?>
-
-						</div>
-						<?php if ( !empty($video) ) { ?>
-						<div class="featured-column tf-video-box">
-							<a class="tf-tour-video" id="featured-video" data-fancybox="tour-video" href="<?php echo esc_url($video); ?>">
-								<i class="fa-solid fa-video"></i> <?php echo esc_html__("Video","tourfic"); ?>
-							</a>
-						</div>
-						<?php } ?>
+						<?php \Tourfic\App\Templates\Components\Global\Single\Gallery_Button::render(); ?>
+						<?php \Tourfic\App\Templates\Components\Global\Single\Video_Button::render(); ?>
 					</div>
 				<?php endif; ?>
 
