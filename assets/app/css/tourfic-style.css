@@ -1430,6 +1430,14 @@ body {
   }
 }
 
+.tf-pt-4 {
+  padding-top: 4px;
+}
+
+.tf-pb-30 {
+  padding-bottom: 30px;
+}
+
 .sp-0 {
   padding: 0;
 }

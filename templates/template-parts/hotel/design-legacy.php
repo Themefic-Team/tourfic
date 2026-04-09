@@ -74,32 +74,9 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                     <div class="tf-mt-16">
                         <?php \Tourfic\App\Templates\Components\Global\Single\Description::render(['limit_content' => 'no']); ?>
                     </div>
-                    <!-- Start features -->
-					<?php if ( $features && count( $features ) > 0 ) { ?>
-                        <div class="tf_features">
-                            <?php if( !empty( $meta['popular-section-title'] ) ): ?>
-                                <h2 class="section-heading"><?php echo esc_html($meta['popular-section-title']); ?></h2>
-                            <?php endif; ?>
-
-                            <div class="tf-feature-list">
-                                <?php foreach ( $features as $feature ) {
-                                    $feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
-                                    $f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-                                    if ( $f_icon_type == 'fa' ) {
-                                        $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
-                                    } elseif ( $f_icon_type == 'c' ) {
-                                        $feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
-                                    } ?>
-
-                                    <div class="single-feature-box">
-                                    <?php echo !empty($feature_meta) && !empty($feature_icon) ? wp_kses_post($feature_icon) : ''; ?>
-                                        <span class="feature-list-title"><?php echo esc_html($feature->name); ?></span>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    <!-- End features -->
+                    <div class="tf-pt-16 tf-pb-30">
+                        <?php \Tourfic\App\Templates\Components\Global\Single\Feature::render(); ?>
+                    </div>
                 </div>
                 <div class="hero-right">
                     <?php \Tourfic\App\Templates\Components\Global\Single\Map::render(['show_icon' => 'no', 'design' => 'design-2']); ?>
