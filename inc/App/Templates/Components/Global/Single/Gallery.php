@@ -29,6 +29,8 @@ class Gallery {
 		$post_type = get_post_type();
 		$style = ! empty( $settings['gallery_style'] ) ? $settings['gallery_style'] : 'style1';
 		$show_review = Helper::get_switcher_value( $settings, 'show_review', 'yes', $builder );
+		$wrapper_open = ! empty( $settings['wrapper_open'] ) ? $settings['wrapper_open'] : '';
+		$wrapper_close = ! empty( $settings['wrapper_close'] ) ? $settings['wrapper_close'] : '';
 
 		// Query reviews/comments
 		$args           = [
@@ -76,7 +78,8 @@ class Gallery {
 
 		$disable_review_sec = ! empty( $disable_review_sec ) ? $disable_review_sec : $s_review;
 
-		// Style 1: Bottom Nav
+		echo ! empty( $wrapper_open ) ? wp_kses_post( $wrapper_open ) : '';
+
 		if ( 'style1' === $style && 'tf_carrental' !== $post_type ) {
 			self::render_style_1( $post_id, $post_type, $show_review, $disable_review_sec, $comments, $gallery_ids, $video, $builder );
 		} elseif ( 'style1' === $style && 'tf_carrental' === $post_type ) {
@@ -86,6 +89,8 @@ class Gallery {
 		} elseif ( 'style3' === $style ) {
 			self::render_style_3( $post_id, $post_type, $gallery_ids, $builder );
 		}
+
+		echo ! empty( $wrapper_close ) ? wp_kses_post( $wrapper_close ) : '';
 	}
 
 	/**
