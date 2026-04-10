@@ -1,8 +1,8 @@
 <?php
 // Don't load directly
 defined( 'ABSPATH' ) || exit;
-?>
 
-<div id="tf-description">
-    <?php \Tourfic\App\Templates\Components\Global\Single\Description::render(); ?>
-</div>
+\Tourfic\App\Templates\Components\Global\Single\Description::render([
+    'wrapper_open' => '<div id="tf-description">',
+    'wrapper_close' => '</div>'
+]);

@@ -71,9 +71,13 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                 <div class="hero-left">
                     <?php \Tourfic\App\Templates\Components\Global\Single\Gallery::render(['gallery_style' => 'style2']); ?>
 
-                    <div class="tf-mt-16">
-                        <?php \Tourfic\App\Templates\Components\Global\Single\Description::render(['limit_content' => 'no']); ?>
-                    </div>
+                    <?php 
+                        \Tourfic\App\Templates\Components\Global\Single\Description::render([
+                            'limit_content' => 'no',
+                            'wrapper_open' => '<div class="tf-mt-16">',
+                            'wrapper_close' => '</div>'
+                        ]); 
+                    ?>
                     <div class="tf-pt-16 tf-pb-30">
                         <?php \Tourfic\App\Templates\Components\Global\Single\Feature::render(); ?>
                     </div>

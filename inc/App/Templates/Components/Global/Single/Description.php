@@ -22,18 +22,28 @@ class Description {
 	 *
 	 * @return void
 	 */
-	public static function render( $settings = [], $builder = 'elementor' ) {
+	public static function render( $settings = [], $builder = '' ) {
 		$post_type = get_post_type();
+		$show_title = Helper::get_switcher_value( $settings, 'show_title', 'no', $builder );
 		$limit_content = Helper::get_switcher_value( $settings, 'limit_content', 'yes', $builder );
 		$content_length = ! empty( $settings['content_length'] ) ? $settings['content_length'] : 300;
+		$wrapper_open = ! empty( $settings['wrapper_open'] ) ? $settings['wrapper_open'] : '';
+		$wrapper_close = ! empty( $settings['wrapper_close'] ) ? $settings['wrapper_close'] : '';
+		
+		echo ! empty( $wrapper_open ) ? wp_kses_post( $wrapper_open ) : '';
 		
 		if ( 'tf_apartment' === $post_type ) {
 			$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
 			$description_title = ! empty( $meta['description_title'] ) ? esc_html( $meta['description_title'] ) : '';
-			echo '<h2 class="section-heading">' . esc_html( $description_title ) . '</h2>';
+			if ( $show_title === 'yes' ) {
+				echo '<h2 class="section-heading">' . esc_html( $description_title ) . '</h2>';
+			}
 		} elseif ( 'tf_tours' === $post_type ) {
 			$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
-			echo '<h2 class="tf-title tf-section-title">' . ( ! empty( $meta['description-section-title'] ) ? esc_html( $meta['description-section-title'] ) : '' ) . '</h2>';
+			$description_title = ! empty( $meta['description-section-title'] ) ? esc_html( $meta['description-section-title'] ) : '';
+			if ( $show_title === 'yes' ) {
+				echo '<h2 class="tf-title tf-section-title">' . $description_title . '</h2>';
+			}
 		}
 		
         if ( $limit_content == 'yes' ) : ?>
@@ -58,5 +68,7 @@ class Description {
 				<?php the_content(); ?>
 			</div>
 		<?php endif;
+		
+		echo ! empty( $wrapper_close ) ? wp_kses_post( $wrapper_close ) : '';
 	}
 }

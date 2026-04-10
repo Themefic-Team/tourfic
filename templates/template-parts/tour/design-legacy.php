@@ -220,9 +220,13 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <!-- Start description -->
     <div class="description-section sp-30">
         <div class="tf-container">
-            <div class="tf-mt-16">
-                <?php \Tourfic\App\Templates\Components\Global\Single\Description::render(['limit_content' => 'no']); ?>
-            </div>
+            <?php 
+                \Tourfic\App\Templates\Components\Global\Single\Description::render([
+                    'limit_content' => 'no',
+                    'wrapper_open' => '<div class="tf-mt-16">',
+                    'wrapper_close' => '</div>'
+                ]); 
+            ?>
 
             <!-- Square block section Start -->
             <?php if ( $tour_duration || $info_tour_type || $group_size || $language ) { ?>
