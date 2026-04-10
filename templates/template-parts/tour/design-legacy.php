@@ -418,7 +418,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 </div>
             </div>
             <?php if ( $location && $itinerary_map != 1){
-                \Tourfic\App\Templates\Components\Global\Single\Map::render('', '', '600px', false);
+                \Tourfic\App\Templates\Components\Global\Single\Map::render([], '', '600px', false);
             } ?>
         <?php
         }

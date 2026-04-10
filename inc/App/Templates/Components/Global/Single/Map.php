@@ -25,7 +25,11 @@ class Map {
 	 */
 	public static function render( $settings = [], $builder = '', $height = '', $title = true ) {
 		$post_type = get_post_type();
+        $wrapper_open          = ! empty( $settings['wrapper_open'] ) ? $settings['wrapper_open'] : '';
+		$wrapper_close         = ! empty( $settings['wrapper_close'] ) ? $settings['wrapper_close'] : '';
 
+        echo ! empty( $wrapper_open ) ? wp_kses_post( $wrapper_open ) : '';
+        
 		if ( 'tf_hotel' === $post_type ) {
 			self::tf_hotel_map( $settings, $builder, $height, $title );
 		} elseif ( 'tf_tours' === $post_type ) {
@@ -37,6 +41,8 @@ class Map {
 		} else {
 			return;
 		}
+
+        echo ! empty( $wrapper_close ) ? wp_kses_post( $wrapper_close ) : '';
 	}
 
 	private static function tf_hotel_map( $settings, $builder, $height = '', $title = true ) {

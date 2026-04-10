@@ -46,9 +46,12 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 
 </div>
 <?php } ?>
-<?php if ( $location && $itinerary_map != 1 ): ?>
-    <div class="tf-mt-16 tf-mb-30">
-        <?php \Tourfic\App\Templates\Components\Global\Single\Map::render('', '', '450px', false); ?> 
-    </div>
-<?php endif; ?>
+<?php 
+if ( $location && $itinerary_map != 1 ){
+    \Tourfic\App\Templates\Components\Global\Single\Map::render([
+        'wrapper_open' => '<div class="tf-mt-16 tf-mb-30">',
+        'wrapper_close' => '</div>'
+    ], '', '450px', false);
+} 
+?>
 <?php } ?>
