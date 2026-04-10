@@ -93,8 +93,12 @@ if ( $tour_duration || $info_tour_type || $group_size || $language ) {
     </div>
 <?php } ?>
 
-<?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) : ?> 
-    <div class="tf-mb-40">
-        <?php \Tourfic\App\Templates\Components\Global\Single\Feature::render( ['wrapper' => 'no'] ); ?>
-    </div>
-<?php endif; ?>
+<?php 
+if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+    \Tourfic\App\Templates\Components\Global\Single\Feature::render([
+        'wrapper' => 'no',
+        'wrapper_open' => '<div class="tf-mb-40">', 
+        'wrapper_close' => '</div>'
+    ]); 
+}        
+?>

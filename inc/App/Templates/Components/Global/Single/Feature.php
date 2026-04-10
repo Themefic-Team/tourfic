@@ -23,16 +23,16 @@ class Feature {
 
 		switch ( $post_type ) {
 			case 'tf_hotel':
-				self::render_hotel_features( $settings, $post_id );
+				self::render_hotel_features( $settings, $post_id, $builder );
 				break;
 			case 'tf_room':
-				self::render_room_features( $settings, $post_id );
+				self::render_room_features( $settings, $post_id, $builder );
 				break;
 			case 'tf_tours':
-				self::render_tour_features( $settings, $post_id );
+				self::render_tour_features( $settings, $post_id, $builder );
 				break;
 			case 'tf_apartment':
-				self::render_apartment_features( $settings, $post_id );
+				self::render_apartment_features( $settings, $post_id, $builder );
 				break;
 		}
 	}
@@ -40,12 +40,16 @@ class Feature {
 	/**
 	 * Render hotel features
 	 */
-	private static function render_hotel_features( $settings, $post_id ) {
+	private static function render_hotel_features( $settings, $post_id, $builder = '' ) {
 		$style = ! empty( $settings['feature_style'] ) ? $settings['feature_style'] : 'style1';
 		$meta  = get_post_meta( $post_id, 'tf_hotels_opt', true );
-        $wrapper = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';
+		$wrapper = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';
+        $wrapper_open = ! empty( $settings['wrapper_open'] ) ? $settings['wrapper_open'] : '';
+		$wrapper_close = ! empty( $settings['wrapper_close'] ) ? $settings['wrapper_close'] : '';
 		$feature_title = ! empty( $meta['popular-section-title'] ) ? esc_html( $meta['popular-section-title'] ) : '';
 		$features      = ! empty( get_the_terms( $post_id, 'hotel_feature' ) ) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
+
+		echo ! empty( $wrapper_open ) ? wp_kses_post( $wrapper_open ) : '';
 
 		if ( 'style1' === $style && $features ) {
             echo ($wrapper === 'yes') ? '<div class="tf-single-template__one tf-single-feature-style1 sp-0">' : '';
@@ -106,17 +110,23 @@ class Feature {
 			<?php
             echo ($wrapper === 'yes') ? '</div>' : '';
 		}
+
+		echo ! empty( $wrapper_close ) ? wp_kses_post( $wrapper_close ) : '';
 	}
 
 	/**
 	 * Render room features
 	 */
-	private static function render_room_features( $settings, $post_id ) {
+	private static function render_room_features( $settings, $post_id, $builder = '' ) {
 		$style = ! empty( $settings['feature_style'] ) ? $settings['feature_style'] : 'style1';
 		$meta  = get_post_meta( $post_id, 'tf_room_opt', true );
-        $wrapper = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';
+		$wrapper = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';
+        $wrapper_open = ! empty( $settings['wrapper_open'] ) ? $settings['wrapper_open'] : '';
+		$wrapper_close = ! empty( $settings['wrapper_close'] ) ? $settings['wrapper_close'] : '';
 		$feature_title = ! empty( $meta['room-feature-section-title'] ) ? esc_html( $meta['room-feature-section-title'] ) : '';
 		$features      = ! empty( $meta['features'] ) ? $meta['features'] : '';
+
+		echo ! empty( $wrapper_open ) ? wp_kses_post( $wrapper_open ) : '';
 
 		if ( 'style1' === $style && $features ) {
             echo ($wrapper === 'yes') ? '<div class="tf-single-template__one tf-single-feature-style1">' : '';
@@ -177,17 +187,23 @@ class Feature {
 			<?php
             echo ($wrapper === 'yes') ? '</div>' : '';
 		}
+
+		echo ! empty( $wrapper_close ) ? wp_kses_post( $wrapper_close ) : '';
 	}
 
 	/**
 	 * Render tour features
 	 */
-	private static function render_tour_features( $settings, $post_id ) {
+	private static function render_tour_features( $settings, $post_id, $builder = '' ) {
 		$style = ! empty( $settings['feature_style'] ) ? $settings['feature_style'] : 'style1';
 		$meta  = get_post_meta( $post_id, 'tf_tours_opt', true );
         $wrapper = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';
+		$wrapper_open = ! empty( $settings['wrapper_open'] ) ? $settings['wrapper_open'] : '';
+		$wrapper_close = ! empty( $settings['wrapper_close'] ) ? $settings['wrapper_close'] : '';
 		$feature_title = ! empty( $meta['tour-features-section-title'] ) ? esc_html( $meta['tour-features-section-title'] ) : '';
 		$features      = ! empty( get_the_terms( $post_id, 'tour_features' ) ) ? get_the_terms( $post_id, 'tour_features' ) : '';
+
+		echo ! empty( $wrapper_open ) ? wp_kses_post( $wrapper_open ) : '';
 
 		if ( 'style1' === $style && $features ) {
             echo ($wrapper === 'yes') ? '<div class="tf-single-template__one tf-single-feature-style1 sp-0">' : '';
@@ -250,22 +266,24 @@ class Feature {
 			<?php
             echo ($wrapper === 'yes') ? '</div>' : '';
 		}
+
+		echo ! empty( $wrapper_close ) ? wp_kses_post( $wrapper_close ) : '';
 	}
 
 	/**
 	 * Render apartment features/amenities
 	 */
-	private static function render_apartment_features( $settings, $post_id ) {
+	private static function render_apartment_features( $settings, $post_id, $builder = '' ) {
 		$style = ! empty( $settings['feature_style'] ) ? $settings['feature_style'] : 'style1';
 		$meta  = get_post_meta( $post_id, 'tf_apartment_opt', true );
-        $wrapper = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';
+		$wrapper = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';
+		$wrapper_open = ! empty( $settings['wrapper_open'] ) ? $settings['wrapper_open'] : '';
+		$wrapper_close = ! empty( $settings['wrapper_close'] ) ? $settings['wrapper_close'] : '';
+		$amenities = \Tourfic\Classes\Helper::tf_data_types( $meta['amenities'] ?? [] );
 
-		if ( 'style1' === $style ) {
-			$amenities = \Tourfic\Classes\Helper::tf_data_types( $meta['amenities'] ?? [] );
+		echo ! empty( $wrapper_open ) ? wp_kses_post( $wrapper_open ) : '';
 
-			if ( ! $amenities ) {
-				return;
-			}
+		if ( 'style1' === $style && $amenities ) {
 
 			$fav_amenities = [];
 			foreach ( $amenities as $amenity ) {
@@ -304,5 +322,7 @@ class Feature {
 				<?php
 			}
 		}
+
+		echo ! empty( $wrapper_close ) ? wp_kses_post( $wrapper_close ) : '';
 	}
 }

@@ -330,13 +330,14 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <!-- Highlight section end -->
     <?php endif; ?>
 
-    <?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) : ?> 
-        <div class="sp-50">
-            <div class="tf-container">
-                <?php \Tourfic\App\Templates\Components\Global\Single\Feature::render(); ?>
-            </div>
-        </div>
-    <?php endif; ?>
+    <?php 
+    if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+        \Tourfic\App\Templates\Components\Global\Single\Feature::render([
+            'wrapper_open' => '<div class="sp-50"><div class="tf-container">', 
+            'wrapper_close' => '</div></div>'
+        ]);
+    }
+    ?>
     
     <!-- Include-Exclude section Start -->
     <?php
