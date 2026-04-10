@@ -16,15 +16,12 @@ class Terms_And_Conditions {
 	 *
 	 * @param array  $settings Widget settings
 	 * @param string $builder  'bricks' or 'elementor'
-	 * @param string $wrapper_open Opening wrapper HTML (multi-line supported)
-	 * @param string $wrapper_close Closing wrapper HTML (multi-line supported)
 	 */
-	public static function render( $settings = [], $builder = '', $wrapper_open = '', $wrapper_close = '' ) {
+	public static function render( $settings = [], $builder = '') {
 		$post_id   = get_the_ID();
 		$post_type = get_post_type();
-
-		// Determine if wrapper should be shown (only in templates, not in builder widgets)
-		$show_wrapper = empty( $builder ) ? true : false;
+        $wrapper_open  = ! empty( $settings['wrapper_open'] ) ? $settings['wrapper_open'] : '';
+        $wrapper_close = ! empty( $settings['wrapper_close'] ) ? $settings['wrapper_close'] : '';
 
 		if ( 'tf_hotel' === $post_type ) {
 			$meta     = get_post_meta( $post_id, 'tf_hotels_opt', true );
@@ -51,9 +48,7 @@ class Terms_And_Conditions {
         }
 
 		// Render wrapper open if provided and should be shown
-		if ( $show_wrapper && ! empty( $wrapper_open ) ) {
-			echo wp_kses_post( $wrapper_open );
-		}
+		echo ! empty( $wrapper_open ) ? wp_kses_post( $wrapper_open ) : '';
 
 		// Render car rental format (table)
 		if ( 'tf_carrental' === $post_type ) {
@@ -89,8 +84,6 @@ class Terms_And_Conditions {
 		}
 
 		// Render wrapper close if provided and should be shown
-		if ( $show_wrapper && ! empty( $wrapper_close ) ) {
-			echo wp_kses_post( $wrapper_close );
-		}
+		echo ! empty( $wrapper_close ) ? wp_kses_post( $wrapper_close ) : '';
     }
 }

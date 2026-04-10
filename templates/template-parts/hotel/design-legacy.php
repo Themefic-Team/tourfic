@@ -600,13 +600,14 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 	<?php } ?>
     <!-- End Review Section -->
 
+    
 	<?php
-        \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render( 
-            [],
-            '',
-            '<div class="toc-section sp-50"><div class="tf-container">', 
-            '</div></div>'
-        );
+    \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render(
+        [
+            'wrapper_open' => '<div class="toc-section sp-50"><div class="tf-container">',
+            'wrapper_close' => '</div></div>',
+        ]
+    );
 	?>
 
 	<?php do_action( 'tf_after_container' ); ?>

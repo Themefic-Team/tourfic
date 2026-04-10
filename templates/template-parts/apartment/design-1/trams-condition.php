@@ -3,8 +3,8 @@
 defined( 'ABSPATH' ) || exit;
 
 \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render(
-    [],
-    '',
-    '<div class="tf-policies-wrapper tf-section" id="tf-apartment-policies">',
-    '</div>'
+    [
+        'wrapper_open' => '<div class="tf-policies-wrapper tf-section" id="tf-apartment-policies">',
+        'wrapper_close' => '</div>',
+    ]
 );

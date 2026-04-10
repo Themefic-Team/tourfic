@@ -705,7 +705,7 @@ $tf_cars_slug = get_option('car_slug');
                 <?php do_action("tf_car_after_single_booking_form"); ?>
             </div>
             
-            <?php \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render([], ''); ?>
+            <?php \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render(); ?>
 
             <?php
             global $current_user;

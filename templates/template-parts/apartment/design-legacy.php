@@ -334,10 +334,10 @@ use \Tourfic\Classes\Apartment\Apartment;
 
     <?php
     \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render(
-        [],
-        '',
-        '<div class="toc-section apartment-toc"><div class="tf-container">',
-        '</div></div>'
+        [
+            'wrapper_open' => '<div class="toc-section apartment-toc"><div class="tf-container">',
+            'wrapper_close' => '</div></div>',
+        ]
     );
     ?>
 
