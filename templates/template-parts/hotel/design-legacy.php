@@ -600,20 +600,14 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 	<?php } ?>
     <!-- End Review Section -->
 
-    <!-- Start TOC Content -->
-	<?php if ( $tc ) { ?>
-        <div class="toc-section sp-50">
-            <div class="tf-container">
-                <div class="tf-toc-wrap">
-                    <h2 class="section-heading"><?php echo ! empty( $meta['tc-section-title'] ) ? esc_html( $meta['tc-section-title'] ) : ''; ?></h2>
-                    <div class="tf-toc-inner">
-						<?php echo wp_kses_post( wpautop( $tc ) ); ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-	<?php } ?>
-    <!-- End TOC Content -->
+	<?php
+        \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render( 
+            [],
+            '',
+            '<div class="toc-section sp-50"><div class="tf-container">', 
+            '</div></div>'
+        );
+	?>
 
 	<?php do_action( 'tf_after_container' ); ?>
 </div>

@@ -494,20 +494,14 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <?php endif; ?>
     <!-- FAQ section end -->
 
-    <!-- Start TOC Content -->
-    <?php if ( $terms_and_conditions ) : ?>
-        <div class="toc-section sp-50">
-            <div class="tf-container">
-                <div class="tf-toc-wrap">
-                    <h2 class="section-heading"><?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : ''; ?></h2>
-                    <div class="tf-toc-inner">
-                        <?php echo wp_kses_post(wpautop( $terms_and_conditions )); ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
-    <!-- End TOC Content -->
+    <?php
+    \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render( 
+        [],
+        '',
+        '<div class="toc-section sp-50"><div class="tf-container">', 
+        '</div></div>'
+    );
+	?>
 
     <!-- Start Review Section -->
     <?php if ( ! $disable_review_sec == 1 ) { ?>

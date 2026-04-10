@@ -704,23 +704,8 @@ $tf_cars_slug = get_option('car_slug');
                 </div>
                 <?php do_action("tf_car_after_single_booking_form"); ?>
             </div>
-            <?php 
-            if(!empty($tc)){ ?>
-            <div class="tf-car-conditions-section" id="tf-tc">
-                <?php if(!empty($tc_title)){ ?>
-                <h3><?php echo esc_html($tc_title); ?></h3>
-                <?php } ?>
-                <table>
-                    <?php 
-                    foreach($tc as $singletc){ ?>
-                    <tr>
-                        <th><?php echo !empty($singletc['title']) ? esc_html($singletc['title']) : ''; ?></th>
-                        <td><?php echo !empty($singletc['content']) ? wp_kses_post($singletc['content']) : ''; ?></td>
-                    </tr>
-                    <?php } ?>
-                </table>
-            </div>
-            <?php } ?>
+            
+            <?php \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render([], ''); ?>
 
             <?php
             global $current_user;

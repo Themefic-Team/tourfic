@@ -16,7 +16,6 @@ class Feature {
 	 *
 	 * @param array  $settings Widget settings
 	 * @param string $builder  'bricks' or 'elementor'
-	 * @param int    $post_id  Post ID
 	 */
 	public static function render( $settings = [], $builder = '' ) {
 		$post_id = get_the_ID();

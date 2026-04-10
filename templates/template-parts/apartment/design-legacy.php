@@ -332,20 +332,14 @@ use \Tourfic\Classes\Apartment\Apartment;
         </div>
 	<?php endif; ?>
 
-	<?php if ( ! empty( $meta['terms_and_conditions'] ) ) : ?>
-        <div class="toc-section apartment-toc">
-            <div class="tf-container">
-                <div class="tf-toc-wrap">
-					<?php echo ! empty( $meta['terms_title'] ) ? '<h2 class="section-heading">' . esc_html( $meta['terms_title'] ) . '</h2>' : ''; ?>
-                    <div class="tf-toc-inner">
-						<?php echo wp_kses_post( $meta['terms_and_conditions'] ); ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-	<?php endif; ?>
-
-
+    <?php
+    \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render(
+        [],
+        '',
+        '<div class="toc-section apartment-toc"><div class="tf-container">',
+        '</div></div>'
+    );
+    ?>
 
 	<?php
 	$args              = array(
