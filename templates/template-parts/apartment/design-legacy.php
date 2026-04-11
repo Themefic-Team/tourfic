@@ -127,38 +127,8 @@ use \Tourfic\Classes\Apartment\Apartment;
                     <div class="apartment-booking-form">
 						<?php Apartment::tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
                     </div>
-					<?php
-					$post_author_id = get_post_field( 'post_author', get_the_ID() );
-					$author_info    = get_userdata( $post_author_id );
-					?>
-                    <div class="host-details">
-                        <div class="host-top">
-                            <img src="<?php echo esc_url( get_avatar_url( $post_author_id ) ); ?>" alt="">
-                            <div class="host-meta">
-								<?php echo sprintf( '<h4>%s %s</h4>', esc_html__( 'Hosted by', 'tourfic' ), esc_html( $author_info->display_name ) ); ?>
-								<?php echo sprintf( '<span class="tf-apartment-joined-text">%s <span>:</span> <span>%s</span></span>', esc_html__( 'Joined', 'tourfic' ), wp_kses_post( wp_date( 'F Y', strtotime( $author_info->user_registered ) ) ) ); ?>
-								<?php Apartment::tf_apartment_host_rating( $post_author_id ) ?>
 
-                            </div>
-                        </div>
-                        <div class="host-bottom">
-                            <?php if(!empty( get_the_author_meta( 'description', $post_author_id ))) : ?>
-                                <h5><?php echo esc_html__( "During Your Stay", 'tourfic' ); ?></h5>
-                                <p class="host-desc">
-                                    <?php echo wp_kses_post( get_the_author_meta( 'description', $post_author_id ) ); ?>
-                                </p>
-                            <?php endif; ?>
-
-                            <ul>
-								<?php
-								if ( ! empty( get_the_author_meta( 'language', $post_author_id ) ) ) {
-									echo sprintf( '<li>%s <span>%s</span></li>', esc_html__( 'Language: ', 'tourfic' ), wp_kses_post( get_the_author_meta( 'language', $post_author_id ) ) );
-								}
-								?>
-                            </ul>
-                            <a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_white tf_btn_full"><i class="fas fa-phone"></i><?php esc_html_e( 'Contact Host', 'tourfic' ) ?></a>
-                        </div>
-                    </div>
+					<?php \Tourfic\App\Templates\Components\Global\Single\Host_Info::render(); ?>
                 </div>
             </div>
         </div>
