@@ -436,50 +436,10 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 </div>
 
                 <div class="tf-section-flex tf-flex">
-                    <?php 
-                    $tf_enquiry_section_status = !empty($meta['t-enquiry-section']) ? $meta['t-enquiry-section'] : '';
-                    $tf_enquiry_section_icon = !empty($meta['t-enquiry-option-icon']) ? esc_html($meta['t-enquiry-option-icon']) : '';
-                    $tf_enquiry_section_title = !empty($meta['t-enquiry-option-title']) ? esc_html($meta['t-enquiry-option-title']) : '';
-                    $tf_enquiry_section_des = !empty($meta['t-enquiry-option-content']) ? esc_html($meta['t-enquiry-option-content']) : '';
-                    $enquery_button_text = !empty($meta['t-enquiry-option-btn']) ? esc_html($meta['t-enquiry-option-btn']) : '';
-
-                    if(!empty($tf_enquiry_section_status) && ( !empty($tf_enquiry_section_icon) || !empty($tf_enquiry_section_title) || !empty($enquery_button_text))){
-                    ?>
-                    <div class="tf-tour-enquiry">
-                        <div class="tf-ask-enquiry">
-                            <div class="default-enquiry-title-section">
-                                <?php
-                                if(!empty($tf_enquiry_section_icon)) {
-                                    ?>
-                                    <i class="<?php echo esc_attr($tf_enquiry_section_icon) ?>" aria-hidden="true"></i>
-                                    <?php
-                                }
-                                if(!empty($tf_enquiry_section_title)) {
-                                    ?>
-                                    <h3><?php echo esc_html($tf_enquiry_section_title) ?></h3>
-                                    <?php
-                                }
-                                ?>
-                            </div>
-                            <?php
-                            if(!empty($tf_enquiry_section_des)) {
-                                ?>
-                                    <p><?php echo wp_kses_post($tf_enquiry_section_des); ?></p>
-                                <?php
-                                }
-                                ?>
-                            <?php 
-                            if(!empty($enquery_button_text)) {
-                                ?>
-                                <div class="tf-btn-wrap"><a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn">
-                                    <span><?php echo esc_html($enquery_button_text); ?>
-                                </span></a></div>
-                                <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <?php } ?>
+                    <?php \Tourfic\App\Templates\Components\Global\Single\Enquiry::render([
+                        'wrapper_open' => '<div class="tf-tour-enquiry">',
+                        'wrapper_close' => '</div>',
+                    ]); ?>
                     <div class="tf-faq-items-wrapper">
                         <?php foreach ( $faqs as $key => $faq ): ?>
                             <div id="tf-faq-item">

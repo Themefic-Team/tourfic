@@ -246,40 +246,12 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
                 <?php } } } ?>
                 <?php endif; ?>
 
-                <!-- Enquery Section -->
                 <?php
-                $tf_enquiry_section_status = !empty($meta['enquiry-section']) ? $meta['enquiry-section'] : "";
-                $tf_enquiry_section_icon = !empty($meta['apartment-enquiry-icon']) ? esc_html($meta['apartment-enquiry-icon']) : '';
-                $tf_enquiry_section_title = !empty($meta['enquiry-title']) ? esc_html($meta['enquiry-title']) : '';
-                $tf_enquiry_section_cont = !empty($meta['enquiry-content']) ? esc_html($meta['enquiry-content']) : '';
-                $tf_enquiry_section_button = !empty($meta['enquiry-btn']) ? esc_html($meta['enquiry-btn']) : '';
-                if(!empty($tf_enquiry_section_status) && ( !empty($tf_enquiry_section_icon) || !empty($tf_enquiry_section_title) || !empty($enquery_button_text))){
+                    \Tourfic\App\Templates\Components\Global\Single\Enquiry::render([
+                        'icon_type' => 'simple',
+                        'wrapper_class' => 'tf-send-inquiry',
+                    ]);
                 ?>
-                <div class="tf-send-inquiry">
-                    <?php
-                    if (!empty($tf_enquiry_section_icon)) {
-                        ?>
-                        <i class="<?php echo esc_attr( $tf_enquiry_section_icon ); ?>" aria-hidden="true"></i>
-                        <?php
-                    }
-                    if(!empty($tf_enquiry_section_title)) {
-                        ?>
-                        <h3><?php echo  esc_html( $tf_enquiry_section_title ); ?></h3>
-                        <?php
-                    }
-                    if(!empty($tf_enquiry_section_cont)) {
-                        ?>
-                        <p><?php echo esc_html( $tf_enquiry_section_cont );  ?></p>
-                        <?php
-                    }
-                    if( !empty( $tf_enquiry_section_button )) {
-                        ?>
-                        <div class="tf-btn-wrap"><a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn"><span><?php echo esc_html( $tf_enquiry_section_button ); ?></span></a></div>
-                        <?php
-                    }
-                    ?>
-                </div>
-                <?php } ?>
             </div>
         </div>
     </div>

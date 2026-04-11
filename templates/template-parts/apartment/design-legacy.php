@@ -297,53 +297,18 @@ use \Tourfic\Classes\Apartment\Apartment;
 	<?php endif; ?>
 
 	<?php
-	$enquiry_section        = ! empty( $meta['enquiry-section'] ) ? $meta['enquiry-section'] : '';
-	$enquiry_section_icon   = ! empty( $meta['apartment-enquiry-icon'] ) ? $meta['apartment-enquiry-icon'] : '';
-	$enquiry_section_title  = ! empty( $meta['enquiry-title'] ) ? $meta['enquiry-title'] : '';
-	$enquiry_section_des    = ! empty( $meta['enquiry-content'] ) ? $meta['enquiry-content'] : '';
-	$enquiry_section_button = ! empty( $meta['enquiry-btn'] ) ? $meta['enquiry-btn'] : '';
-
-	if ( $enquiry_section === '1' && ( ! empty( $enquiry_section_icon ) || ! empty( $enquiry_section_title ) || ! empty( $enquiry_section_button ) ) ):
-		?>
-        <div class="tf-ask-question apartment-question">
-            <div class="tf-container">
-                <div class="apartment-qa-wrapper">
-                    <div class="tf-question-left">
-                        <?php if ( ! empty( $enquiry_section_icon ) ) : ?>
-                            <div class="tf-apartment-question-icon">
-                                <i class="<?php echo esc_attr( $enquiry_section_icon ); ?>" aria-hidden="true"></i>
-                            </div>
-                        <?php endif; ?>
-                        <div class="tf-question-left-inner">
-                            <div class="default-enquiry-title-section">
-                                <?php if ( ! empty( $enquiry_section_title ) ) {?>
-                                    <h2><?php echo esc_html( $enquiry_section_title ) ?></h2>
-                                <?php } ?>
-                            </div>
-                            <?php if ( ! empty( $enquiry_section_des ) ) {?>
-                                <p><?php echo wp_kses_post( $enquiry_section_des ); ?></p>
-                            <?php } ?>
-                        </div>
-                    </div>
-					<?php if ( ! empty( $enquiry_section_button ) ) {?>
-                        <div class="tf-btn-wrap">
-                            <a href="#" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_large">
-                                <span><?php echo wp_kses_post( $enquiry_section_button ) ?></span>
-                            </a>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
-	<?php endif; ?>
+    \Tourfic\App\Templates\Components\Global\Single\Enquiry::render([
+        'icon_type' => 'simple',
+        'enquiry_style' => 'style2',
+        'container' => 'yes',
+    ]);
+	?>
 
     <?php
-    \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render(
-        [
-            'wrapper_open' => '<div class="toc-section apartment-toc"><div class="tf-container">',
-            'wrapper_close' => '</div></div>',
-        ]
-    );
+    \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render([
+        'wrapper_open' => '<div class="toc-section apartment-toc"><div class="tf-container">',
+        'wrapper_close' => '</div></div>',
+    ]);
     ?>
 
 	<?php

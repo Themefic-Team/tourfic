@@ -454,49 +454,10 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
             <div class="tf-container">
                 <h2 class="section-heading tf-section-title"><?php echo ! empty( $meta['faq-section-title'] ) ? esc_html( $meta['faq-section-title'] ) : ''; ?></h2>
                 <div class="tf-section-flex tf-flex">
-					<?php
-					$tf_enquiry_section_status = ! empty( $meta['h-enquiry-section'] ) ? $meta['h-enquiry-section'] : "";
-					$tf_enquiry_section_icon   = ! empty( $meta['h-enquiry-option-icon'] ) ? esc_html( $meta['h-enquiry-option-icon'] ) : '';
-					$tf_enquiry_section_title  = ! empty( $meta['h-enquiry-option-title'] ) ? esc_html( $meta['h-enquiry-option-title'] ) : '';
-					$tf_enquiry_section_des    = ! empty( $meta['h-enquiry-option-content'] ) ? esc_html( $meta['h-enquiry-option-content'] ) : '';
-					$tf_enquiry_section_button = ! empty( $meta['h-enquiry-option-btn'] ) ? esc_html( $meta['h-enquiry-option-btn'] ) : '';
-
-					if ( ! empty( $tf_enquiry_section_status ) && ( ! empty( $tf_enquiry_section_icon ) || ! empty( $tf_enquiry_section_title ) || ! empty( $enquery_button_text ) ) ) {
-						?>
-                        <div class="tf-hotel-enquiry">
-                            <div class="tf-ask-enquiry">
-                                <div class="default-enquiry-title-section">
-                                    <?php
-                                    if ( ! empty( $tf_enquiry_section_icon ) ) {
-                                        ?>
-                                        <i class="<?php echo esc_attr( $tf_enquiry_section_icon ); ?>" aria-hidden="true"></i>
-                                        <?php
-                                    }
-                                    if ( ! empty( $tf_enquiry_section_title ) ) {
-                                        ?>
-                                        <h3><?php echo esc_html( $tf_enquiry_section_title ); ?></h3>
-                                        <?php
-                                    }
-                                    ?>
-
-                                </div>
-                                <?php
-                                if ( ! empty( $tf_enquiry_section_des ) ) {
-                                    ?>
-                                    <p><?php echo wp_kses_post( $tf_enquiry_section_des ); ?></p>
-                                    <?php
-                                }
-                                if ( ! empty( $tf_enquiry_section_button ) ) {
-                                    ?>
-                                    <div class="tf-btn-wrap"><a href="https://www.google.com/maps/search/<?php echo esc_attr( $address ); ?>" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_full"><span><?php echo esc_html( $tf_enquiry_section_button ); ?></span></a></div>
-                                    <?php
-                                }
-                                ?>
-
-                            </div>
-                        </div>
-
-					<?php } ?>
+					<?php \Tourfic\App\Templates\Components\Global\Single\Enquiry::render([
+                        'wrapper_open' => '<div class="tf-hotel-enquiry">',
+                        'wrapper_close' => '</div>',
+                    ]); ?>
                     <div class="tf-faq-items-wrapper">
 						<?php foreach ( $faqs as $key => $faq ): ?>
                             <div id="tf-faq-item">

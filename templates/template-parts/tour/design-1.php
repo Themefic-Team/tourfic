@@ -223,44 +223,14 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     </div>
                                 </div>
 							<?php } ?>
+                            
 							<?php
-							$tf_enquiry_section_status = ! empty( $meta['t-enquiry-section'] ) ? $meta['t-enquiry-section'] : '';
-                            $tf_enquiry_section_icon = ! empty( $meta['t-enquiry-option-icon'] ) ? esc_html( $meta['t-enquiry-option-icon'] ) : '';
-                            $tf_enquiry_section_title = ! empty( $meta['t-enquiry-option-title'] ) ? esc_html( $meta['t-enquiry-option-title'] ) : '';
-                            $tf_enquiry_section_des = ! empty( $meta['t-enquiry-option-content'] ) ? esc_html( $meta['t-enquiry-option-content'] ) : '';
-                            $tf_enquiry_section_button = ! empty( $meta['t-enquiry-option-btn'] ) ? esc_html( $meta['t-enquiry-option-btn'] ) : '';
-
-							if ( ! empty( $tf_enquiry_section_status ) ) {
-								?>
-                                <!-- Enquiry box -->
-                                <div class="tf-tour-booking-advantages tf-box tf-mt-30">
-                                    <div class="tf-ask-enquiry">
-                                        <?php 
-                                        if(!empty($tf_enquiry_section_icon)) {
-                                            ?>
-                                            <i class="<?php echo esc_attr($tf_enquiry_section_icon); ?>" aria-hidden="true"></i>
-                                            <?php
-                                        }
-                                        if(!empty($tf_enquiry_section_title)) {
-                                            ?>
-                                            <h3><?php echo esc_html($tf_enquiry_section_title); ?></h3>
-                                            <?php
-                                        }
-                                        if(!empty($tf_enquiry_section_des)) {
-                                            ?>
-                                            <p><?php echo wp_kses_post($tf_enquiry_section_des); ?></p>
-                                            <?php
-                                        }
-                                        if(!empty($tf_enquiry_section_button)) {
-                                            ?>
-                                            <div class="tf-btn-wrap"><a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_full"><span><?php echo esc_html($tf_enquiry_section_button); ?></span></a></div>
-                                        <?php 
-                                        }
-                                        ?>
-                                        
-                                    </div>
-                                </div>
-							<?php } ?>
+                            \Tourfic\App\Templates\Components\Global\Single\Enquiry::render([
+                                'icon_type' => 'simple',
+                                'wrapper_open' => '<div class="tf-tour-booking-advantages tf-box tf-mt-30">',
+                                'wrapper_close' => '</div>',
+                            ]);
+							?>
                         </div>
 
                         <!-- Responsive booking Modal -->
