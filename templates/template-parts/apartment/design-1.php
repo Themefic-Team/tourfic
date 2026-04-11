@@ -123,30 +123,12 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
                 <?php Apartment::tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
             </div>
 
-            <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
-            <div class="tf-whats-around tf-single-widgets">
-                <?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
-                    <h3 class="tf-section-title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h3>
-                <?php endif; ?>
-                <ul>
-                    <?php foreach ( Helper::tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
-                    <?php if ( isset( $surroundings_place['places'] ) && ! empty( Helper::tf_data_types( $surroundings_place['places'] ) ) ): ?>
-                    <?php foreach ( Helper::tf_data_types( $surroundings_place['places'] ) as $place ): ?>
-                    <li>
-                        <span>
-                        <?php if(!empty($surroundings_place['place_criteria_icon'])){ ?>
-                        <i class="<?php echo esc_attr( $surroundings_place['place_criteria_icon'] ); ?>"></i>
-                        <?php } ?>
-                        <?php echo esc_html( $surroundings_place['place_criteria_label'] ); ?>
-                        </span>
-                        <span><?php echo esc_html( $place['place_name'] ) ?> (<?php echo esc_html( $place['place_distance'] ) ?>)</span>
-                    </li>
-                    <?php endforeach; ?>
-                    <?php endif; ?>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <?php endif; ?>
+            <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ){
+                \Tourfic\App\Templates\Components\Global\Single\Nearby_Places::render([
+                    'wrapper_open' => '<div class="tf-single-widgets">', 
+                    'wrapper_close' => '</div>'
+                ]);
+            } ?>
 
             <?php 
             \Tourfic\App\Templates\Components\Global\Single\Map::render([

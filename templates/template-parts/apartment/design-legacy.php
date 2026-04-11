@@ -141,40 +141,11 @@ use \Tourfic\Classes\Apartment\Apartment;
                     <div class="tf-map-content-wrapper <?php echo empty( $map['address'] ) || empty( $meta['surroundings_places'] ) ? 'tf-map-content-full' : ''; ?> <?php echo ! function_exists( 'is_tf_pro' ) ? 'tf-map-content-full' : '' ?>">
 						<?php \Tourfic\App\Templates\Components\Global\Single\Map::render(['design' => 'design-2'], '', '600px'); ?>
 
-						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
-                            <div class="about-location">
-								<?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
-                                    <h3 class="surroundings_sec_title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h3>
-								<?php endif; ?>
-								<?php if ( ! empty( $meta['surroundings_subtitle'] ) ): ?>
-                                    <p class="surroundings_subtitle"><?php echo esc_html( $meta['surroundings_subtitle'] ); ?></p>
-								<?php endif; ?>
-
-                                <div class="tf-apartment-surronding-wrapper">
-									<?php foreach ( Helper::tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
-                                        <div class="tf-apartment-surronding-criteria">
-                                            <div class="tf-apartment-surronding-criteria-label">
-												<?php if ( ! empty( $surroundings_place['place_criteria_icon'] ) ) { ?>
-                                                    <i class="<?php echo esc_attr( $surroundings_place['place_criteria_icon'] ); ?>"></i>
-												<?php } ?>
-												<?php echo esc_html( $surroundings_place['place_criteria_label'] ); ?>
-                                            </div>
-
-											<?php if ( isset( $surroundings_place['places'] ) && ! empty( Helper::tf_data_types( $surroundings_place['places'] ) ) ): ?>
-                                                <ul class="tf-apartment-surronding-places">
-													<?php foreach ( Helper::tf_data_types( $surroundings_place['places'] ) as $place ): ?>
-                                                        <li>
-                                                            <span class="tf-place-name"><?php echo esc_html( $place['place_name'] ) ?></span>
-                                                            <span class="tf-place-distance"><?php echo esc_html( $place['place_distance'] ) ?></span>
-                                                        </li>
-													<?php endforeach; ?>
-                                                </ul>
-											<?php endif; ?>
-                                        </div>
-									<?php endforeach; ?>
-                                </div>
-                            </div>
-						<?php endif; ?>
+						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ){
+                            \Tourfic\App\Templates\Components\Global\Single\Nearby_Places::render([
+                                'nearby_places_style' => 'style2',
+                            ]);
+                        } ?>
                     </div>
                 </div>
             </div>
