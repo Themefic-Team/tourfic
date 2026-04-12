@@ -104,37 +104,14 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                         </div>
 					<?php endif; ?>
 
-                    <!-- Contact info - Start -->
-					<?php if ( $email || $phone || $fax || $website ) : ?>
-                        <div class="tf-tour-contact-informations tf-single-widgets">
-							<?php if ( ! empty( $meta['contact-info-section-title'] ) ) : ?>
-                                <div class="tf-contact-details-title">
-                                    <h3 class="tf-section-title"><?php echo esc_html( $meta['contact-info-section-title'] ) ?></h3>
-                                </div>
-							<?php endif; ?>
-
-                            <div class="tf-contact-details-items">
-                                <ul class="tf-list">
-									<?php
-									if ( ! empty( $phone ) ) { ?>
-                                        <li><i class="ri-customer-service-fill"></i> <a href="tel:<?php echo esc_html( $phone ) ?>"><?php echo esc_html( $phone ) ?></a></li>
-									<?php } ?>
-									<?php
-									if ( ! empty( $email ) ) { ?>
-                                        <li><i class="ri-mail-open-line"></i> <a href="mailto:<?php echo esc_html( $email ) ?>"><?php echo esc_html( $email ) ?></a></li>
-									<?php } ?>
-									<?php
-									if ( ! empty( $website ) ) { ?>
-                                        <li><i class="ri-global-line"></i> <a target="_blank" href="<?php echo esc_html( $website ) ?>"><?php echo esc_html( $website ) ?></a></li>
-									<?php } ?>
-									<?php
-									if ( ! empty( $fax ) ) { ?>
-                                        <li><i class="ri-printer-fill"></i> <a href="tel:<?php echo esc_html( $fax ) ?>"><?php echo esc_html( $fax ) ?></a></li>
-									<?php } ?>
-                                </ul>
-                            </div>
-                        </div>
-					<?php endif; ?>
+					<?php
+					\Tourfic\App\Templates\Components\Tour\Single\Tour_Contact_Information::render([
+						'icon_style' => 'style2',
+						'wrapper_open' => '<div class="tf-single-widgets">',
+						'wrapper_close' => '</div>',
+					]);
+					?>
+					
 					<?php if ( $disable_review_sec != 1 ): ?>
                         <div class="tf-reviews tf-single-widgets">
 							<?php

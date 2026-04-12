@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\App\Templates\Components\Global\Single;
+namespace Tourfic\App\Templates\Components\Apartment\Single;
 
 use Tourfic\Classes\Helper;
 use \Tourfic\Classes\Apartment\Apartment;
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Global Single Host Info Component
+ * Single Host Info Component
  * Shared markup for Elementor and Bricks Host Info widgets
  */
 class Host_Info {

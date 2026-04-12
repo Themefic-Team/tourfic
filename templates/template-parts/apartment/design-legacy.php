@@ -106,7 +106,7 @@ use \Tourfic\Classes\Apartment\Apartment;
 						<?php Apartment::tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
                     </div>
 
-					<?php \Tourfic\App\Templates\Components\Global\Single\Host_Info::render(); ?>
+					<?php \Tourfic\App\Templates\Components\Apartment\Single\Host_Info::render(); ?>
                 </div>
             </div>
         </div>

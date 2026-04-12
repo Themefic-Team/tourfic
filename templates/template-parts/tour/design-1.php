@@ -195,36 +195,11 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                 </div>
                             </div>
 							<?php
-							if ( $email || $phone || $fax || $website ) {
-								?>
-                                <div class="tf-tour-booking-advantages tf-box tf-mt-30">
-                                    <div class="tf-head-title">
-                                        <h3><?php echo ! empty( $meta['contact-info-section-title'] ) ? esc_html( $meta['contact-info-section-title'] ) : ''; ?></h3>
-                                    </div>
-                                    <div class="tf-booking-advantage-items">
-                                        <ul class="tf-list">
-											<?php
-											if ( ! empty( $phone ) ) { ?>
-                                                <li><i class="fa-solid fa-headphones"></i> <a href="tel:<?php echo esc_html( $phone ) ?>"><?php echo esc_html( $phone ) ?></a></li>
-											<?php } ?>
-											<?php
-											if ( ! empty( $email ) ) { ?>
-                                                <li><i class="fa-solid fa-envelope"></i> <a href="mailto:<?php echo esc_html( $email ) ?>"><?php echo esc_html( $email ) ?></a></li>
-											<?php } ?>
-											<?php
-											if ( ! empty( $website ) ) { ?>
-                                                <li><i class="fa-solid fa-link"></i> <a target="_blank" href="<?php echo esc_html( $website ) ?>"><?php echo esc_html( $website ) ?></a></li>
-											<?php } ?>
-											<?php
-											if ( ! empty( $fax ) ) { ?>
-                                                <li><i class="fa-solid fa-fax"></i> <a href="tel:<?php echo esc_html( $fax ) ?>"><?php echo esc_html( $fax ) ?></a></li>
-											<?php } ?>
-                                        </ul>
-                                    </div>
-                                </div>
-							<?php } ?>
-                            
-							<?php
+							\Tourfic\App\Templates\Components\Tour\Single\Tour_Contact_Information::render([
+                                'wrapper_open' => '<div class="tf-mt-30">',
+                                'wrapper_close' => '</div>',
+                            ]);
+
                             \Tourfic\App\Templates\Components\Global\Single\Enquiry::render([
                                 'icon_type' => 'simple',
                                 'wrapper_open' => '<div class="tf-tour-booking-advantages tf-box tf-mt-30">',
