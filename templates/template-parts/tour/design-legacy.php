@@ -226,84 +226,13 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                     'wrapper_open' => '<div class="tf-mt-16">',
                     'wrapper_close' => '</div>'
                 ]); 
+
+                \Tourfic\App\Templates\Components\Tour\Single\Tour_Info_Cards::render([
+                    'info_cards_style' => 'style2',
+                    'wrapper_open' => '<div class="sp-20">', 
+                    'wrapper_close' => '</div>'
+                ]); 
             ?>
-
-            <!-- Square block section Start -->
-            <?php if ( $tour_duration || $info_tour_type || $group_size || $language ) { ?>
-                <div class="tf-square-block sp-20">
-                    <div class="tf-square-block-content">
-                        <?php if ( $tour_duration ) { ?>
-                            <div class="tf-single-square-block first">
-                                <i class="<?php echo esc_attr($tour_duration_icon); ?>"></i>
-                                <h4><?php echo esc_html__( 'Duration', 'tourfic' ); ?></h4>
-                                <p><?php echo esc_html( $tour_duration ); ?>
-                                <span> 
-                                    <?php
-                                    if( $tour_duration > 1  ){
-                                        $dur_string = 's';
-                                        $duration_time_html = $duration_time . $dur_string;
-                                    }else{
-                                        $duration_time_html = $duration_time;
-                                    }
-                                        echo " " . esc_html( $duration_time_html )?>
-                                </span></p>
-                                <?php if( $night ){ ?>
-                                <p>
-                                    <?php echo esc_html( $night_count ); ?>
-                                    <span>
-                                        <?php
-                                        if(!empty($night_count)){
-                                            if( $night_count > 1  ){
-                                                echo esc_html__( 'Nights', 'tourfic' );
-                                            }else{
-                                                echo esc_html__( 'Night', 'tourfic'  );
-                                            }	
-                                        }										
-                                        ?>
-                                    </span>
-                                </p>
-                                <?php } ?>
-                            </div>
-                        <?php } ?>
-                        <?php if ( $info_tour_type ) {
-
-	                        if ( gettype( $info_tour_type ) === 'string' ) {
-		                        $info_tour_type = ucfirst( esc_html( $info_tour_type ) );
-	                        } else if ( gettype( $info_tour_type ) === 'array' ) {
-		                        $tour_types =[];
-		                        $types = ! empty( get_the_terms( $post_id, 'tour_type' ) ) ? get_the_terms( $post_id, 'tour_type' ) : '';
-		                        if ( ! empty( $types ) ) {
-			                        foreach ( $types as $type ) {
-				                        $tour_types[] = $type->name;
-			                        }
-		                        }
-                                $info_tour_type = implode( ', ', $tour_types );
-	                        }
-                            ?>
-                            <div class="tf-single-square-block second">
-                                <i class="<?php echo esc_attr($tour_type_icon); ?>"></i>
-                                <h4><?php echo esc_html__( 'Tour Type', 'tourfic' ); ?></h4>
-                                <p><?php echo esc_html( $info_tour_type ); ?></p>
-                            </div>
-                        <?php } ?>
-                        <?php if ( $group_size ) { ?>
-                            <div class="tf-single-square-block third">
-                                <i class="<?php echo esc_attr($tour_group_icon); ?>"></i>
-                                <h4><?php echo esc_html__( 'Group Size', 'tourfic' ); ?></h4>
-                                <p><?php echo esc_html( $group_size ) ?></p>
-                            </div>
-                        <?php } ?>
-                        <?php if ( $language ) { ?>
-                            <div class="tf-single-square-block fourth">
-                                <i class="<?php echo esc_attr($tour_lang_icon); ?>"></i>
-                                <h4><?php echo esc_html__( 'Language', 'tourfic' ); ?></h4>
-                                <p><?php echo esc_html( $language ) ?></p>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
-            <?php } ?>
-            <!-- Square block section End -->
         </div>
     </div>
     <!-- End description -->

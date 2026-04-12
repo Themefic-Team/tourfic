@@ -2,98 +2,12 @@
 <?php 
 // Don't load directly
 defined( 'ABSPATH' ) || exit;
-if ( $tour_duration || $info_tour_type || $group_size || $language ) {  
-    ?>
-    <div class="tf-trip-feature-blocks tf-mb-56 tf-template-section">
-        <div class="tf-features-block-inner tf-flex tf-flex-space-bttn tf-flex-gap-16">
-			<?php if ( $tour_duration ) { ?>
-                <div class="tf-feature-block tf-flex tf-flex-gap-8 tf-first">
-                    <div class="tf-feature-block-icon">
-                        <i class="<?php echo esc_attr($tour_duration_icon); ?>"></i>
-                    </div>
-                    <div class="tf-feature-block-details">
-                        <h5><?php echo esc_html__( 'Duration', 'tourfic' ); ?></h5>
-                        <p><?php echo esc_html( $tour_duration ); ?>
-                            <?php
-                            if ( $tour_duration > 1 ) {
-                                $dur_string         = 's';
-                                $_duration_time = $duration_time . $dur_string;
-                            } else {
-                                $_duration_time = $duration_time;
-                            }
-                            echo " " . esc_html( $_duration_time );
 
-                            if ( $night ) {
-                                echo '<span>';
-                                    echo esc_html(', '. $night_count );
-                                    if ( ! empty( $night_count ) ) {
-                                        if ( $night_count > 1 ) {
-                                            echo esc_html__( ' Nights', 'tourfic' );
-                                        } else {
-                                            echo esc_html__( ' Night', 'tourfic' );
-                                        }
-                                    }
-                                echo '</span>';
-                            }
-                            ?>
-                        </p>
+\Tourfic\App\Templates\Components\Tour\Single\Tour_Info_Cards::render([
+    'wrapper_open' => '<div class="tf-mb-56">', 
+    'wrapper_close' => '</div>'
+]); 
 
-                    </div>
-                </div>
-			<?php } ?>
-            
-			<?php 
-           if ( is_array( $info_tour_type ) && array_filter( $info_tour_type ) ) {
-				if ( gettype( $info_tour_type ) === 'string' ) {
-					$info_tour_type = ucfirst( esc_html( $info_tour_type ) );
-				} else if ( gettype( $info_tour_type ) === 'array' ) {
-					$tour_types =[];
-					$types = ! empty( get_the_terms( $post_id, 'tour_type' ) ) ? get_the_terms( $post_id, 'tour_type' ) : '';
-					if ( ! empty( $types ) ) {
-						foreach ( $types as $type ) {
-							$tour_types[] = $type->name;
-						}
-					}
-					$info_tour_type = implode( ', ', $tour_types );
-				}
-				?>
-                <div class="tf-feature-block tf-flex tf-flex-gap-8  tf-second">
-                    <div class="tf-feature-block-icon">
-                    <i class="<?php echo esc_attr($tour_type_icon); ?>"></i>
-                    </div>
-                    <div class="tf-feature-block-details">
-                        <h5><?php echo esc_html__( 'Tour Type', 'tourfic' ); ?></h5>
-                        <p><?php echo esc_html( $info_tour_type ) ?></p>
-                    </div>
-                </div>
-			<?php } ?>
-			<?php if ( $group_size ) { ?>
-                <div class="tf-feature-block tf-flex tf-flex-gap-8  tf-third">
-                    <div class="tf-feature-block-icon">
-                    <i class="<?php echo esc_attr($tour_group_icon); ?>"></i>
-                    </div>
-                    <div class="tf-feature-block-details">
-                        <h5><?php echo esc_html__( 'Group Size', 'tourfic' ); ?></h5>
-                        <p><?php echo esc_html( $group_size ) ?></p>
-                    </div>
-                </div>
-			<?php } ?>
-			<?php if ( $language ) { ?>
-                <div class="tf-feature-block tf-flex tf-flex-gap-8  tf-tourth">
-                    <div class="tf-feature-block-icon">
-                    <i class="<?php echo esc_attr($tour_lang_icon); ?>"></i>
-                    </div>
-                    <div class="tf-feature-block-details">
-                        <h5><?php echo esc_html__( 'Language', 'tourfic' ); ?></h5>
-                        <p><?php echo esc_html( $language ) ?></p>
-                    </div>
-                </div>
-			<?php } ?>
-        </div>
-    </div>
-<?php } ?>
-
-<?php 
 if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
     \Tourfic\App\Templates\Components\Global\Single\Feature::render([
         'wrapper' => 'no',
