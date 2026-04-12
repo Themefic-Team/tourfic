@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Global Single Tour Info Cards Component
+ * Single Tour Info Cards Component
  * Shared markup for Elementor and Bricks Tour Info Cards widgets
  */
 class Tour_Info_Cards {
