@@ -106,7 +106,15 @@ function tf_tours_booking_function() {
 		return;
 	}
 
-	$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
+	$tour_availability = '';
+	if ( ! empty( $meta['tour_availability'] ) ) {
+		if ( is_array( $meta['tour_availability'] ) ) {
+			$tour_availability = $meta['tour_availability'];
+		} elseif ( is_string( $meta['tour_availability'] ) ) {
+			$decoded = json_decode( $meta['tour_availability'], true );
+			$tour_availability = is_array( $decoded ) ? $decoded : '';
+		}
+	}
 
 	$matched_availability = Helper::tf_get_tour_matched_availability( $tour_availability, $tour_date, '' );
 	$is_date_unavailable  = ! empty( $tour_availability ) && (

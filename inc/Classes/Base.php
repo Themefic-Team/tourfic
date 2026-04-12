@@ -73,6 +73,9 @@ class Base {
 			\Tourfic\Admin\Notice_Update::instance();
 			// Room_Notice::instance();
 			Plugin_Page_Notice::instance();
+
+			// AI Submenu (shows upsell for free users; skips when Pro is active)
+			\Tourfic\Admin\TF_AI_Submenu::instance();
 		}
 
 		// Promo Notice
