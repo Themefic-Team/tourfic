@@ -308,29 +308,13 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     </div>
     <!-- End description -->
     
-    <?php if ( $highlights ) : ?>
-    <!-- Highlight section Start -->
-    <div class="tf-highlight-wrapper sp-50">
-        <div class="tf-container">
-            <div class="tf-highlight-content">
-                <div class="tf-highlight-item">
-                    <div class="tf-highlight-text">
-                        <h2 class="section-heading"><?php echo !empty($meta['highlights-section-title']) ? esc_html($meta['highlights-section-title']) : ''; ?></h2>
-                        <?php echo wp_kses_post($highlights); ?>
-                    </div>
-                    <?php if ( ! empty( $meta['hightlights_thumbnail'] ) ): ?>
-                        <div class="tf-highlight-image">
-                            <img src="<?php echo esc_url( $meta['hightlights_thumbnail'] ); ?>" alt="">
-                        </div>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Highlight section end -->
-    <?php endif; ?>
-
-    <?php 
+    <?php
+    \Tourfic\App\Templates\Components\Global\Single\Highlights::render([
+        'highlights_style' => 'style2',
+        'container' => 'yes',
+        'wrapper_class' => 'sp-50',
+    ]);
+    
     if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
         \Tourfic\App\Templates\Components\Global\Single\Feature::render([
             'wrapper_open' => '<div class="sp-50"><div class="tf-container">', 

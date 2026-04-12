@@ -46,33 +46,11 @@ use \Tourfic\Classes\Apartment\Apartment;
             <div class="tf-apartment-content-wrapper">
                 <div class="tf-apartment-left">
 
-					<?php if ( isset( $meta['highlights'] ) && ! empty( Helper::tf_data_types( $meta['highlights'] ) ) ) : ?>
-                        <!-- Start highlights Section -->
-                        <div class="tf-apt-highlights-wrapper">
-							<?php if ( ! empty( $meta['highlights_title'] ) ): ?>
-                                <h2 class="section-heading"><?php echo esc_html( $meta['highlights_title'] ) ?></h2>
-							<?php endif; ?>
+					<?php 
+                        \Tourfic\App\Templates\Components\Global\Single\Highlights::render([
+                            'highlights_style' => 'style2'
+                        ]);
 
-                            <div class="tf-apt-highlights <?php echo count( Helper::tf_data_types( $meta['highlights'] ) ) > 3 ? 'tf-apt-highlights-slider tf-slick-slider' : ''; ?>">
-								<?php
-								foreach ( Helper::tf_data_types( $meta['highlights'] ) as $highlight ) :
-									if ( empty( $highlight['title'] ) ) {
-										continue;
-									}
-									?>
-                                    <div class="tf-apt-highlight">
-                                        <div class="tf-apt-highlight-top">
-											<?php echo ! empty( $highlight['icon'] ) ? "<div class='tf-apt-highlight-icon'><i class='" . esc_attr( $highlight['icon'] ) . "'></i></div>" : ''; ?>
-                                            <h4><?php echo esc_html( $highlight['title'] ); ?></h4>
-                                        </div>
-										<?php echo ! empty( $highlight['subtitle'] ) ? '<p>' . esc_html( $highlight['subtitle'] ) . '</p>' : ''; ?>
-                                    </div>
-								<?php endforeach; ?>
-                            </div>
-                        </div>
-					<?php endif; ?>
-
-                    <?php 
                         \Tourfic\App\Templates\Components\Global\Single\Description::render([
                             'show_title' => 'yes',
                             'limit_content' => 'no',
