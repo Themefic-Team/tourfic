@@ -55,48 +55,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
     <!-- Hotel details Srart -->
     <div class="tf-details" id="tf-apartment-overview">
         <div class="tf-details-left">
-            <!-- menu section Start -->
-            <div class="tf-details-menu">
-                <ul>
-                    <?php if( !empty(Helper::get_status_by_label('Description', 'apartment')) ){ ?>
-                    <li><a class="tf-hashlink" href="#tf-apartment-overview">
-                        <?php esc_html_e("Overview", "tourfic"); ?>
-                    </a></li>
-                    <?php } ?>
-
-                    <?php if( !empty(Helper::get_status_by_label('Apartment Rooms', 'apartment')) && !empty( $meta["rooms"])) : ?>
-                        <li><a href="#tf-apartment-rooms">
-                            <?php esc_html_e("Rooms", "tourfic"); ?>
-                        </a></li>
-                    <?php endif; ?>
-
-                    <?php if( !empty(Helper::get_status_by_label('House Rules', 'apartment')) && !empty( $meta["house_rules"])) : ?>
-                        <li><a href="#tf-apartment-rules">
-                            <?php esc_html_e("House Rules", "tourfic"); ?>
-                        </a></li>
-                    <?php endif; ?>
-
-                    <?php if(!empty(Helper::get_status_by_label('FAQ', 'apartment')) && !empty( $meta["faq"])) : ?>
-                        <li><a href="#tf-apartment-faq">
-                            <?php esc_html_e("FAQ's", "tourfic"); ?>
-                        </a></li>
-                    <?php endif; ?>
-
-                    <?php if( !empty(Helper::get_status_by_label('Review', 'apartment')) && !empty($comments) ) : ?>
-                        <li><a href="#tf-apartment-reviews">
-                            <?php esc_html_e("Reviews", "tourfic"); ?>
-                        </a></li>
-                    <?php endif; ?>
-
-                    <?php if( !empty(Helper::get_status_by_label('Terms & Conditions', 'apartment')) && !empty( $meta["terms_and_conditions"]) ) : ?>
-                        <li><a href="#tf-apartment-policies">
-                            <?php esc_html_e("Policies", "tourfic"); ?>
-                        </a></li>
-                    <?php endif; ?>
-                </ul>
-            </div>
-            <!-- menu section End -->
-
+            <?php \Tourfic\App\Templates\Components\Global\Single\Sticky_Nav::render(); ?>
 
             <?php
             if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1']) ){

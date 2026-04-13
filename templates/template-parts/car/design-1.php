@@ -77,66 +77,8 @@ $tf_cars_slug = get_option('car_slug');
     <div class="tf-single-booking-bar">
         <div class="tf-container">
             <div class="tf-top-booking-bar tf-flex tf-flex-space-bttn tf-flex-align-center">
-                <div class="tf-details-menu">
-                    <ul>
-                    <?php if( !empty(Helper::get_status_by_label('Description', 'car')) ){ ?>
-                        <li class="active" data-menu="<?php echo esc_attr('tf-description'); ?>">
-                            <a class="tf-hashlink" href="#tf-description">
-                                <?php esc_html_e("Description", "tourfic"); ?>
-                            </a>
-                        </li>
-                        <?php } ?>
-                        <?php if( !empty(Helper::get_status_by_label('Car info', 'car')) ){ ?>
-                        <li data-menu="<?php echo esc_attr('tf-car-info'); ?>">
-                            <a class="tf-hashlink" href="#tf-car-info">
-                                <?php esc_html_e("Car info", "tourfic"); ?>
-                            </a>
-                        </li>
-                        <?php } ?>
-                        <?php if(!empty(Helper::get_status_by_label('Benefits', 'car')) && !empty($benefits)){ ?>
-                        <li data-menu="<?php echo esc_attr('tf-benefits'); ?>">
-                            <a class="tf-hashlink" href="#tf-benefits">
-                                <?php esc_html_e("Benefits", "tourfic"); ?>
-                            </a>
-                        </li>
-                        <?php } ?>
-                        <?php if(!empty(Helper::get_status_by_label('Include/Exclude', 'car')) && (!empty($includes) || !empty($excludes))){ ?>
-                        <li data-menu="<?php echo esc_attr('tf-inc-exc'); ?>">
-                            <a class="tf-hashlink" href="#tf-inc-exc">
-                                <?php esc_html_e("Include/Exclude", "tourfic"); ?>
-                            </a>
-                        </li>
-                        <?php } ?>
-                        <?php if(!empty(Helper::get_status_by_label('Location', 'car')) && !empty($address)){ ?>
-                        <li data-menu="<?php echo esc_attr('tf-location'); ?>">
-                            <a class="tf-hashlink" href="#tf-location">
-                                <?php esc_html_e("Location", "tourfic"); ?>
-                            </a>
-                        </li>
-                        <?php } ?>
-                        <?php if(!empty(Helper::get_status_by_label('Review', 'car')) ){ ?>
-                        <li data-menu="<?php echo esc_attr('tf-reviews'); ?>">
-                            <a class="tf-hashlink" href="#tf-reviews">
-                                <?php esc_html_e("Reviews", "tourfic"); ?>
-                            </a>
-                        </li>
-                        <?php } ?>
-                        <?php if(!empty(Helper::get_status_by_label('FAQs', 'car')) && !empty($faqs)){ ?>
-                        <li data-menu="<?php echo esc_attr('tf-faq'); ?>">
-                            <a class="tf-hashlink" href="#tf-faq">
-                                <?php esc_html_e("FAQ's", "tourfic"); ?>
-                            </a>
-                        </li>
-                        <?php } ?>
-                        <?php if(!empty(Helper::get_status_by_label('Terms & Conditions', 'car')) && !empty($tc)){ ?>
-                        <li data-menu="<?php echo esc_attr('tf-tc'); ?>">
-                            <a class="tf-hashlink" href="#tf-tc">
-                                <?php esc_html_e("Terms & Conditions", "tourfic"); ?>
-                            </a>
-                        </li>
-                        <?php } ?>
-                    </ul>
-                </div>
+                <?php \Tourfic\App\Templates\Components\Global\Single\Sticky_Nav::render(); ?>
+                
                 <div class="tf-top-bar-booking tf-flex tf-flex-gap-32">
                     <div class="tf-price-header">
                         <h2><?php esc_html_e("Total:", "tourfic"); ?> 
@@ -162,66 +104,8 @@ $tf_cars_slug = get_option('car_slug');
                     <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
                     <?php \Tourfic\App\Templates\Components\Global\Single\Gallery::render(); ?>
 
-                    <div class="tf-details-menu">
-                        <ul>
-                            <?php if( !empty(Helper::get_status_by_label('Description', 'car')) ){ ?>
-                            <li class="active" data-menu="<?php echo esc_attr('tf-description'); ?>">
-                                <a class="tf-hashlink" href="#tf-description">
-                                    <?php esc_html_e("Description", "tourfic"); ?>
-                                </a>
-                            </li>
-                            <?php } ?>
-                            <?php if( !empty(Helper::get_status_by_label('Car info', 'car')) ){ ?>
-                            <li data-menu="<?php echo esc_attr('tf-car-info'); ?>">
-                                <a class="tf-hashlink" href="#tf-car-info">
-                                    <?php esc_html_e("Car info", "tourfic"); ?>
-                                </a>
-                            </li>
-                            <?php } ?>
-                            <?php if(!empty(Helper::get_status_by_label('Benefits', 'car')) && !empty($benefits)){ ?>
-                            <li data-menu="<?php echo esc_attr('tf-benefits'); ?>">
-                                <a class="tf-hashlink" href="#tf-benefits">
-                                    <?php esc_html_e("Benefits", "tourfic"); ?>
-                                </a>
-                            </li>
-                            <?php } ?>
-                            <?php if(!empty(Helper::get_status_by_label('Include/Exclude', 'car')) && (!empty($includes) || !empty($excludes))){ ?>
-                            <li data-menu="<?php echo esc_attr('tf-inc-exc'); ?>">
-                                <a class="tf-hashlink" href="#tf-inc-exc">
-                                    <?php esc_html_e("Include/Exclude", "tourfic"); ?>
-                                </a>
-                            </li>
-                            <?php } ?>
-                            <?php if(!empty(Helper::get_status_by_label('Location', 'car')) && !empty($address)){ ?>
-                            <li data-menu="<?php echo esc_attr('tf-location'); ?>">
-                                <a class="tf-hashlink" href="#tf-location">
-                                    <?php esc_html_e("Location", "tourfic"); ?>
-                                </a>
-                            </li>
-                            <?php } ?>
-                            <?php if(!empty(Helper::get_status_by_label('Review', 'car')) ){ ?>
-                            <li data-menu="<?php echo esc_attr('tf-reviews'); ?>">
-                                <a class="tf-hashlink" href="#tf-reviews">
-                                    <?php esc_html_e("Reviews", "tourfic"); ?>
-                                </a>
-                            </li>
-                            <?php } ?>
-                            <?php if(!empty(Helper::get_status_by_label('FAQs', 'car')) && !empty($faqs)){ ?>
-                            <li data-menu="<?php echo esc_attr('tf-faq'); ?>">
-                                <a class="tf-hashlink" href="#tf-faq">
-                                    <?php esc_html_e("FAQ's", "tourfic"); ?>
-                                </a>
-                            </li>
-                            <?php } ?>
-                            <?php if(!empty(Helper::get_status_by_label('Terms & Conditions', 'car')) && !empty($tc)){ ?>
-                            <li data-menu="<?php echo esc_attr('tf-tc'); ?>">
-                                <a class="tf-hashlink" href="#tf-tc">
-                                    <?php esc_html_e("Terms & Conditions", "tourfic"); ?>
-                                </a>
-                            </li>
-                            <?php } ?>
-                        </ul>
-                    </div>
+                    <?php \Tourfic\App\Templates\Components\Global\Single\Sticky_Nav::render(); ?>
+                    
                     <div class="tf-template-part tf-flex tf-flex-gap-32 tf-flex-direction-column">
                         <?php
                         if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-car-layout'] ) ) {
