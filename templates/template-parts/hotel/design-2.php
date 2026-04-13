@@ -54,9 +54,6 @@ use \Tourfic\App\TF_Review;
                 include TF_TEMPLATE_PART_PATH . 'hotel/design-2/rooms.php';
             }
             ?>
-
-
-
         </div>
         <div class="tf-details-right tf-sitebar-widgets">
             <?php
@@ -164,41 +161,16 @@ use \Tourfic\App\TF_Review;
                 </div>
                 <?php } } } ?>
                 <?php endif; ?>
-
-                <!-- Enquery Section -->
-                <?php 
-                $tf_enquiry_section_status = !empty($meta['h-enquiry-section']) ? $meta['h-enquiry-section'] : "";
-                $tf_enquiry_section_icon = !empty($meta['h-enquiry-option-icon']) ? esc_html($meta['h-enquiry-option-icon']) : '';
-                $tf_enquiry_section_title = !empty($meta['h-enquiry-option-title']) ? esc_html($meta['h-enquiry-option-title']) : '';
-                $tf_enquiry_section_cont = !empty($meta['h-enquiry-option-content']) ? esc_html($meta['h-enquiry-option-content']) : '';
-                $tf_enquiry_section_button = !empty($meta['h-enquiry-option-btn']) ? esc_html($meta['h-enquiry-option-btn']) : '';
-                if(!empty($tf_enquiry_section_status) && ( !empty($tf_enquiry_section_icon) || !empty($tf_enquiry_section_title) || !empty($enquery_button_text))){
-                ?>
-                <div class="tf-send-inquiry tf-single-widgets">
-                    <?php 
-                    if (!empty($tf_enquiry_section_icon)) { ?>
-                        <i class="<?php echo wp_kses_post($tf_enquiry_section_icon); ?>" aria-hidden="true"></i>
-                    <?php
-                    }
-                    if(!empty($tf_enquiry_section_title)) {
-                        ?>
-                        <h3><?php echo wp_kses_post($tf_enquiry_section_title); ?></h3>
-                        <?php
-                    }
-                    if(!empty($tf_enquiry_section_cont)) {
-                        ?>
-                        <p><?php echo wp_kses_post($tf_enquiry_section_cont);  ?></p>
-                        <?php
-                    }
-                    if( !empty( $tf_enquiry_section_button )) {
-                        ?>
-                        <div class="tf-btn-wrap"><a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_full tf_btn_large tf_btn_sharp"><span><?php echo esc_html($tf_enquiry_section_button); ?></span></a></div>
-                        <?php
-                    }
-                    ?>
-                </div>
-                <?php } ?>
             </div>
+            
+            <?php
+            \Tourfic\App\Templates\Components\Global\Single\Enquiry::render([
+                'icon_type' => 'simple',
+                'wrapper_class' => 'tf-send-inquiry tf-single-widgets',
+                'button_class' => 'tf_btn_large tf_btn_sharp',
+            ]);
+            ?>
+            
             <!-- Hotel Single Widget Hook are - start -->
             <div class="tf-hotel-single-custom-widget-wrap">
                 <?php do_action( "tf_hotel_single_widgets" ); ?>
@@ -230,7 +202,6 @@ use \Tourfic\App\TF_Review;
     <!-- Hotel PopUp Starts -->       
     <div class="tf-popup-wrapper tf-hotel-popup">
         <div class="tf-popup-inner">
-            
             <div class="tf-popup-body">
                 <?php 
                     if ( ! empty( $gallery_ids ) ) {
@@ -250,9 +221,7 @@ use \Tourfic\App\TF_Review;
 
 
     <!-- Room PopUp Starts -->        
-    <div class="tf-popup-wrapper tf-room-popup">
-        
-    </div>
+    <div class="tf-popup-wrapper tf-room-popup"></div>
     <!-- Room PopUp end --> 
 
 

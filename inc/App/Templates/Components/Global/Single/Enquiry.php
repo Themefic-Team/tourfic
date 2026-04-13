@@ -30,6 +30,7 @@ class Enquiry {
         $wrapper_open = ! empty( $settings['wrapper_open'] ) ? $settings['wrapper_open'] : '';
 		$wrapper_close = ! empty( $settings['wrapper_close'] ) ? $settings['wrapper_close'] : '';
         $wrapper_class = ! empty( $settings['wrapper_class'] ) ? $settings['wrapper_class'] : '';
+        $button_class = ! empty( $settings['button_class'] ) ? $settings['button_class'] : '';
         $container = ! empty( $settings['container'] ) ? $settings['container'] : 'no';
 
 		if ( 'tf_hotel' === $post_type ) {
@@ -79,7 +80,7 @@ class Enquiry {
 				if ( ! empty( $tf_enquiry_section_button ) ) {
 					?>
 					<div class="tf-btn-wrap">
-						<a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn">
+						<a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn <?php echo esc_attr( $button_class ); ?>">
 							<span><?php echo esc_html( $tf_enquiry_section_button ); ?></span>
 						</a>
 					</div>

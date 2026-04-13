@@ -73,9 +73,6 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
                 include TF_TEMPLATE_PART_PATH . 'apartment/design-1/facilities.php';
             }
             ?>
-
-
-
         </div>
         <div class="tf-details-right tf-sitebar-widgets">
             <div class="tf-search-date-wrapper tf-single-widgets">
@@ -238,9 +235,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
 
 
     <!-- Room PopUp Starts -->
-    <div class="tf-popup-wrapper tf-room-popup">
-
-    </div>
+    <div class="tf-popup-wrapper tf-room-popup"></div>
     <!-- Room PopUp end -->
 
 
@@ -248,80 +243,5 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
 </div>
 <!--Content section end -->
 
-<?php
-if ( $disable_related_sec !== '1' ) {
-    $args              = array(
-        'post_type'      => 'tf_apartment',
-        'post_status'    => 'publish',
-        'posts_per_page' => 8,
-        'orderby'        => 'title',
-        'order'          => 'ASC',
-        'tax_query'      => array( // WPCS: slow query ok.
-            array(
-                'taxonomy' => 'apartment_location',
-                'field'    => 'term_id',
-                'terms'    => wp_list_pluck( $locations, 'term_id' ),
-            ),
-        ),
-    );
-    $related_apartment = new WP_Query( $args );
-    if ( $related_apartment->have_posts() ) { ?>
-        <!-- Tourfic related -->
-        <div class="tf-related-items-section">
-            <div class="tf-container">
-                <div class="tf-container-inner">
-                    <div class="section-title">
-                        <h2 class="tf-title"><?php echo ! empty( $meta['related_apartment_title'] ) ? esc_html( $meta['related_apartment_title'] ) : ''; ?></h2>
-                    </div>
-                    <div class="tf-design-3-slider-items-wrapper tf-slick-slider tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
-                        <?php
-                        while ( $related_apartment->have_posts() ) {
-                            $related_apartment->the_post();
-
-                            $selected_design_post_id = get_the_ID();
-                            $destinations           = get_the_terms( $selected_design_post_id, 'apartment_location' );
-                            $first_destination_name = $destinations[0]->name;
-                            $meta                   = get_post_meta( $selected_design_post_id, 'tf_apartment_opt', true );
-                            $apartment_min_price = Apt_Pricing::instance( $selected_design_post_id )->get_min_max_price();
-
-                            $pricing_type = ! empty( $meta['pricing_type'] ) && "per_person" == $meta['pricing_type'] ? esc_html__("Person", "tourfic") : esc_html__("Night", "tourfic");
-                            if(!in_array($selected_design_post_id, array($post_id))){
-                            ?>
-                                <div class="tf-slider-item tf-post-box-lists">
-                                    <div class="tf-post-single-box">
-                                        <div class="tf-image-data">
-                                            <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $selected_design_post_id, 'full' )  ): esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg'); ?>" alt="">
-                                        </div>
-                                        <div class="tf-meta-info">
-                                            <div class="meta-content">
-                                                <div class="tf-meta-title">
-                                                    <h2><a href="<?php echo esc_url( get_permalink($selected_design_post_id) ) ?>">
-                                                    <?php echo esc_html( Helper::tourfic_character_limit_callback(get_the_title($selected_design_post_id), 35) ); ?>
-                                                    </a></h2>
-                                                    <div class="tf-meta-data-price">
-                                                        <span><?php echo !empty($apartment_min_price["min"]) ? wp_kses_post(wc_price($apartment_min_price["min"])) : wp_kses_post(wc_price(0));
-                                                        ?></span><span class="pricing_calc_type">/<?php echo esc_html( $pricing_type ); ?></span>
-                                                    </div>
-                                                </div>
-                                                <div class="tf-meta-location">
-                                                    <i class="fa-solid fa-location-dot"></i> <?php echo esc_html( $first_destination_name ); ?>
-                                                </div>
-                                            </div>
-                                            <a class="see-details" href="<?php echo esc_url( get_permalink($selected_design_post_id) ) ?>">
-                                                <?php esc_html_e("See details", "tourfic"); ?>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                        <?php }
-                        wp_reset_postdata();
-                        ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php } ?>
-<?php } ?>
-
+<?php \Tourfic\App\Templates\Components\Global\Single\Related_Post::render(['container' => 'yes']); ?>
 </div>

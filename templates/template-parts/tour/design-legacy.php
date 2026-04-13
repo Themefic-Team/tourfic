@@ -270,12 +270,10 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <!-- FAQ section end -->
 
     <?php
-    \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render(
-        [
-            'wrapper_open' => '<div class="toc-section sp-50"><div class="tf-container">',
-            'wrapper_close' => '</div></div>',
-        ]
-    );
+    \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render([
+        'wrapper_open' => '<div class="toc-section sp-50"><div class="tf-container">',
+        'wrapper_close' => '</div></div>',
+    ]);
 	?>
 
     <!-- Start Review Section -->
@@ -291,139 +289,13 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <?php } ?>
     <!-- End Review Section -->
 
-    <!-- Tours suggestion section Start -->
-    <?php if ( ! $disable_related_tour == '1' ) {
-
-        $related_tour_type = Helper::tfopt('rt_display');
-        $args  = array(
-            'post_type'      => 'tf_tours',
-            'post_status'    => 'publish',
-            'posts_per_page' => 8,
-            'orderby'        => 'title',
-            'order'          => 'ASC',
-            'tax_query'      => array(
-                array(
-                    'taxonomy' => 'tour_destination',
-                    'field'    => 'slug',
-                    'terms'    => $first_destination_slug,
-                ),
-            ),
-        );
-        //show related tour based on selected tours
-        $selected_ids = !empty(Helper::tfopt( 'tf-related-tours' )) ? Helper::tfopt( 'tf-related-tours' ) : array();
-
-        if ( $related_tour_type == 'selected') {
-            if(in_array($post_id, $selected_ids)) {
-                $index = array_search($post_id, $selected_ids);
-
-	            $current_post_id = array($selected_ids[$index]);
-
-                unset($selected_ids[$index]);
-            } else{
-                $current_post_id = array($post_id);
-            }
-
-            if(count($selected_ids) > 0) {
-                $args['post__in'] = $selected_ids;
-            } else {
-                $args['post__in'] = array(-1);
-            }
-        } else {
-	        $current_post_id = array($post_id);
-        }
-
-        $tours = new WP_Query( $args );
-
-        $all_tour_ids = array_filter( wp_list_pluck( $tours->posts, 'ID' ), function($id) use ($current_post_id) {
-			return $id != $current_post_id[0];
-		});
-
-        if ( $tours->have_posts() ) {
-            ?>
-            <div class="tf-suggestion-wrapper sp-50">
-                <div class="tf-container">
-                    <div class="tf-slider-content-wrapper">
-                        <div class="tf-suggestion-sec-head">
-                            <?php 
-                            if( !empty( Helper::tfopt('rt-title') ) ){ ?>
-                                <h2 class="section-heading"><?php echo esc_html( Helper::tfopt('rt-title') ) ?></h2>
-                            <?php } ?>
-                            <?php 
-                            if( !empty( Helper::tfopt('rt-description') ) ){ ?>
-                                <p><?php echo wp_kses_post( Helper::tfopt('rt-description') ) ?></p>
-                            <?php } ?>
-                        </div>
-
-                        <div class="tf-slider-items-wrapper tf-slick-slider">
-                            <?php
-                            while ( $tours->have_posts() ) {
-                                $tours->the_post();
-
-                                if( is_array( $all_tour_ids ) && in_array(get_the_ID(), $all_tour_ids) ):
-
-                                    $selected_post_id       = get_the_ID();
-                                    $destinations           = get_the_terms( $selected_post_id, 'tour_destination' );
-                                    $first_destination_name = $destinations[0]->name;
-                                    $related_comments       = get_comments( array( 'post_id' => $selected_post_id ) );
-                                    $meta                   = get_post_meta( $selected_post_id, 'tf_tours_opt', true );
-                                    $pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-                                    $disable_adult          = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
-                                    $disable_child          = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
-                                    $tour_price             = new Tour_Price( $meta );
-                                    ?>
-                                    <div class="tf-slider-item" style="background-image: url(<?php echo esc_url(get_the_post_thumbnail_url( $selected_post_id, 'full' )); ?>);">
-                                        <div class="tf-slider-content">
-                                            <div class="tf-slider-desc">
-                                                <h3>
-                                                    <a href="<?php the_permalink($selected_post_id) ?>"><?php echo wp_kses_post( Helper::tourfic_character_limit_callback( html_entity_decode(get_the_title( $selected_post_id )), 35 ) ); ?></a>
-                                                    <span><?php echo esc_html($first_destination_name); ?></span>
-                                                </h3>
-                                            </div>
-                                            <div class="tf-suggestion-rating">
-                                                <div class="tf-suggestion-price">
-                                        <span>
-                                        <?php if ( $pricing_rule == 'group' ) {
-                                            echo !empty( $tour_price->wc_sale_group ) ? wp_kses_post($tour_price->wc_sale_group) : wp_kses_post($tour_price->wc_group);
-                                        } else if ( $pricing_rule == 'person' ) {
-                                            if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
-                                                echo !empty($tour_price->wc_sale_adult) ? wp_kses_post($tour_price->wc_sale_adult) : wp_kses_post($tour_price->wc_adult);
-                                            } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
-                                                echo !empty( $tour_price->wc_sale_child ) ? wp_kses_post($tour_price->wc_sale_child) : wp_kses_post($tour_price->wc_child);
-
-                                            }
-                                        } else if ( $pricing_rule == 'package' ) {
-                                            if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
-                                                echo !empty($tour_price->wc_sale_adult) ? wp_kses_post($tour_price->wc_sale_adult) : wp_kses_post($tour_price->wc_adult);
-                                            } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
-                                                echo !empty( $tour_price->wc_sale_child ) ? wp_kses_post($tour_price->wc_sale_child) : wp_kses_post($tour_price->wc_child);
-
-                                            }
-                                        }
-                                        ?>
-                                        </span>
-                                                </div>
-                                                <?php
-                                                if ( $related_comments ) {
-                                                    ?>
-                                                    <div class="tf-slider-rating-star">
-                                                        <i class="fas fa-star"></i> <span style="color:#fff;"><?php echo wp_kses_post( TF_Review::tf_total_avg_rating( $related_comments )); ?></span>
-                                                    </div>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php endif; ?>
-                            <?php } ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php }
-        wp_reset_postdata();
-        ?>
-    <?php } ?>
-    <!-- Tours suggestion section End -->
+    <?php 
+	\Tourfic\App\Templates\Components\Global\Single\Related_Post::render([
+		'related_post_style' => 'style3', 
+		'container' => 'yes',
+        'wrapper' => 'no',
+        'wrapper_class' => 'sp-50',
+	]); 
+	?>
     <?php do_action( 'tf_after_container' ); ?>
 </div>

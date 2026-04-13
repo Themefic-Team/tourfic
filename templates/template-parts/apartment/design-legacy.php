@@ -152,67 +152,18 @@ use \Tourfic\Classes\Apartment\Apartment;
         'enquiry_style' => 'style2',
         'container' => 'yes',
     ]);
-	?>
-
-    <?php
+	
     \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render([
         'wrapper_open' => '<div class="toc-section apartment-toc"><div class="tf-container">',
         'wrapper_close' => '</div></div>',
     ]);
+
+	\Tourfic\App\Templates\Components\Global\Single\Related_Post::render([
+		'related_post_style' => 'style2', 
+		'container' => 'yes',
+        'wrapper' => 'no',
+	]); 
+    
+    do_action( 'tf_after_container' ); 
     ?>
-
-	<?php
-	$args              = array(
-		'post_type'      => 'tf_apartment',
-		'post_status'    => 'publish',
-		'posts_per_page' => 8,
-		'orderby'        => 'title',
-		'order'          => 'ASC',
-		'tax_query'      => array( // WPCS: slow query ok.
-			array(
-				'taxonomy' => 'apartment_location',
-				'field'    => 'term_id',
-				'terms'    => wp_list_pluck( $locations, 'term_id' ),
-			),
-		),
-	);
-    $related_args = array_merge( $args, array( 'post__not_in' => array( $post_id ) ) );
-	$related_apartment = new WP_Query( $args );
-	$related_apartment_check = new WP_Query( $related_args );
-
-	if ( $disable_related_sec !== '1' && $related_apartment_check->have_posts() ) : ?>
-        <div class="tf-related-apartment">
-            <div class="tf-container">
-                <h2 class="section-heading"><?php echo ! empty( $meta['related_apartment_title'] ) ? esc_html( $meta['related_apartment_title'] ) : ''; ?></h2>
-                <div class="tf-related-apartment-slider tf-slick-slider">
-					<?php while ( $related_apartment->have_posts() ) : $related_apartment->the_post();
-						if ( ! in_array( get_the_ID(), array( $post_id ) ) ):
-							?>
-                            <div class="tf-apartment-item">
-                                <div class="tf-apartment-item-thumb">
-									<?php if ( has_post_thumbnail() ) { ?>
-                                        <a href="<?php the_permalink(); ?>">
-											<?php the_post_thumbnail( 'tourfic-370x250' ); ?>
-                                        </a>
-									<?php } else { ?>
-                                        <a href="<?php the_permalink(); ?>">
-                                            <img src="<?php echo esc_url( TF_ASSETS_APP_URL ) . "images/feature-default.jpg"; ?>"/>
-                                        </a>
-									<?php } ?>
-                                </div>
-                                <div class="tf-related-apartment-content">
-                                    <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                    <span><?php echo get_the_date( 'F j, Y' ); ?></span>
-                                </div>
-                            </div>
-						<?php
-						endif;
-					endwhile;
-					wp_reset_query(); ?>
-                </div>
-            </div>
-        </div>
-	<?php endif; ?>
-
-	<?php do_action( 'tf_after_container' ); ?>
 </div>
