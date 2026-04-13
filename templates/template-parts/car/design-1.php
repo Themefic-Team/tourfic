@@ -557,7 +557,8 @@ $tf_cars_slug = get_option('car_slug');
                     \Tourfic\App\Templates\Components\Car_Rental\Single\Car_Driver_Info::render([
                         'wrapper_open' => '<div class="tf-mb-30">',
                         'wrapper_close' => '</div>'
-                    ]); 
+                    ]);
+                    
                     \Tourfic\App\Templates\Components\Car_Rental\Single\Car_Contact_Info::render(); 
                     ?>
 

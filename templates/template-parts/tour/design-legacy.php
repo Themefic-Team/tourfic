@@ -181,45 +181,11 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
             'wrapper_close' => '</div></div>'
         ]);
     }
+
+    \Tourfic\App\Templates\Components\Global\Single\Included_Excluded::render([
+        'included_excluded_style' => 'style3'
+    ]);
     ?>
-    
-    <!-- Include-Exclude section Start -->
-    <?php
-    if ( $inc || $exc ) :
-        $inc_exc_bg = ! empty( $meta['include-exclude-bg'] ) ? $meta['include-exclude-bg'] : '';
-        ?>
-        <div class="tf-inc-exc-wrapper sp-70" style="background-image: url(<?php echo esc_url( $inc_exc_bg ) ?>);">
-            <div class="tf-container">
-                <div class="tf-inc-exc-content">
-                    <?php if ( $inc ) { ?>
-                        <div class="tf-include-section <?php echo esc_attr( $custom_inc_icon ); ?>">
-                            <h2><?php esc_html_e( 'Included', 'tourfic' ); ?></h2>
-                            <ul>
-                                <?php
-                                foreach ( $inc as $key => $val ) {
-                                    echo "<li><i class='" . esc_attr( $inc_icon ) . "'></i>" . wp_kses_post($val['inc']) . "</li>";
-                                }
-                                ?>
-                            </ul>
-                        </div>
-                    <?php } ?>
-                    <?php if ( $exc ) { ?>
-                        <div class="tf-exclude-section <?php echo esc_attr( $custom_exc_icon ); ?>">
-                            <h2><?php esc_html_e( 'Excluded', 'tourfic' ); ?></h2>
-                            <ul>
-                                <?php
-                                foreach ( $exc as $key => $val ) {
-                                    echo "<li><i class='" . esc_attr( $exc_icon ) . "'></i>" . wp_kses_post($val['exc']) . "</li>";
-                                }
-                                ?>
-                            </ul>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
-    <!-- Include-Exclude section End -->
 
     <!-- Travel Itinerary section Start -->
     <?php
