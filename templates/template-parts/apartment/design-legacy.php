@@ -59,44 +59,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                         ]); 
                     ?>
 
-					<?php if ( isset( $meta['rooms'] ) && ! empty( Helper::tf_data_types( $meta['rooms'] ) ) ) : ?>
-                        <!-- Apartment Rooms -->
-                        <div class="tf-apartment-rooms">
-							<?php if ( ! empty( $meta['room_details_title'] ) ): ?>
-                                <h2 class="section-heading"><?php echo esc_html( $meta['room_details_title'] ) ?></h2>
-							<?php endif; ?>
-                            <div class="tf-apartment-default-design-room-slider tf-slick-slider">
-								<?php foreach ( Helper::tf_data_types( $meta['rooms'] ) as $key => $room ) : ?>
-                                    <div class="tf-apartment-room-item">
-                                        <div class="tf-apartment-room-item-thumb">
-                                            <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
-                                                <img src="<?php echo ! empty( $room['thumbnail'] ) ? esc_url( $room['thumbnail'] ) : esc_url( TF_ASSETS_APP_URL . "images/feature-default.jpg" ) ?>" alt="room-thumbnail">
-                                            </a>
-                                        </div>
-                                        <div class="tf-apartment-room-item-content">
-                                            <?php if(!empty($room['title'])){ ?>
-                                            <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
-                                                <h3><?php echo esc_html( $room['title'] ) ?></h3>
-                                            </a>
-                                            <?php } ?>
-                                            <p class="tf-apartment-room-item-price">
-												<?php echo ! empty( $room['price'] ) ? '<span>' . esc_html( $room['price'] ) . '</span>' : ''; ?>
-												<?php echo ! empty( $room['price_label'] ) ? '<span>' . esc_html( $room['price_label'] ) . '</span>' : ''; ?>
-                                            </p>
-											<?php echo ! empty( $room['subtitle'] ) ? '<p>' . esc_html( $room['subtitle'] ) . '</p>' : ''; ?>
-                                        </div>
-                                    </div>
-								<?php endforeach; ?>
-                            </div>
-                            <div id="tf_apt_room_details_qv" class=""></div>
-                            <!-- Loader Image -->
-                            <div id="tour_room_details_loader">
-                                <div id="tour-room-details-loader-img">
-                                    <img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/loader.gif" alt="">
-                                </div>
-                            </div>
-                        </div>
-					<?php endif; ?>
+					<?php \Tourfic\App\Templates\Components\Global\Single\Rooms::render(['room_style' => 'style2', 'wrapper' => 'no']); ?>
 
                     <?php \Tourfic\App\Templates\Components\Global\Single\Amenities::render(['amenities_style' => 'style2']); ?>
                 </div>
