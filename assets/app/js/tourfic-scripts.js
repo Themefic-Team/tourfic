@@ -1982,6 +1982,33 @@
             $('.tf-withoutpayment-booking-confirm').removeClass('show');
         })
 
+        function tfFormatCarProtectionPrice(amount) {
+            const decimals = parseInt(tf_params.wc_price_num_decimals, 10) || 0;
+            const decimalSeparator = typeof tf_params.wc_price_decimal_sep === 'string' ? tf_params.wc_price_decimal_sep : '.';
+            const thousandSeparator = typeof tf_params.wc_price_thousand_sep === 'string' ? tf_params.wc_price_thousand_sep : ',';
+            const currencySymbol = typeof tf_params.wc_currency_symbol === 'string' ? tf_params.wc_currency_symbol : '';
+            const currencyPosition = typeof tf_params.wc_currency_pos === 'string' ? tf_params.wc_currency_pos : 'left';
+            const absoluteAmount = Math.abs(Number(amount) || 0);
+            const fixedAmount = absoluteAmount.toFixed(decimals);
+            const amountParts = fixedAmount.split('.');
+            const wholeAmount = amountParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator);
+            const decimalAmount = amountParts[1] ? decimalSeparator + amountParts[1] : '';
+            const formattedAmount = wholeAmount + decimalAmount;
+            const priceValue = amount < 0 ? '-' + formattedAmount : formattedAmount;
+
+            switch (currencyPosition) {
+                case 'left_space':
+                    return currencySymbol + ' ' + priceValue;
+                case 'right':
+                    return priceValue + currencySymbol;
+                case 'right_space':
+                    return priceValue + ' ' + currencySymbol;
+                case 'left':
+                default:
+                    return currencySymbol + priceValue;
+            }
+        }
+
         // Showing Total into a protections
         $('body').on('change', '.protection-checkbox', function (e) {
             let total_price = 0;
@@ -1996,7 +2023,7 @@
         
             // Update total and display it
             $('#tf_total_proteciton_price').val(total_price.toFixed(2)); // Format as float with 2 decimal places
-            $('#tf_proteciton_subtotal').text(total_price.toFixed(2)); // Display formatted total
+            $('#tf_proteciton_subtotal').text(tfFormatCarProtectionPrice(total_price));
         });
 
         /*
