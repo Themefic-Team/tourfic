@@ -111,42 +111,16 @@ use \Tourfic\Classes\Apartment\Apartment;
     ]); 
     ?>
 
-	<?php if ( isset( $meta['faq'] ) && ! empty( Helper::tf_data_types( $meta['faq'] ) ) ): ?>
-        <!-- FAQ section Start -->
-        <div class="tf-faq-wrapper tf-apartment-faq">
-            <div class="tf-container">
-                <div class="tf-faq-sec-title">
-					<?php echo ! empty( $meta['faq_title'] ) ? '<h2 class="section-heading">' . esc_html( $meta['faq_title'] ) . '</h2>' : ''; ?>
-					<?php echo ! empty( $meta['faq_desc'] ) ? '<p>' . wp_kses_post( $meta['faq_desc'] ) . '</p>' : ''; ?>
-                </div>
-
-                <div class="tf-faq-content-wrapper">
-                    <div class="tf-faq-items-wrapper">
-						<?php foreach ( Helper::tf_data_types( $meta['faq'] ) as $key => $faq ): ?>
-                            <div id="tf-faq-item">
-                                <div class="tf-faq-title <?php echo $key === 0 ? esc_attr( 'active' ) : ''; ?>">
-                                    <svg class="tf-faq-minus" xmlns="http://www.w3.org/2000/svg" width="19" height="1" viewBox="0 0 19 1" fill="none">
-                                        <rect width="19" height="1" fill="#2979FF"/>
-                                    </svg>
-                                    <svg class="tf-faq-plus" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
-                                        <rect y="9" width="19" height="1" fill="#2979FF"/>
-                                        <rect x="9" width="1" height="19" fill="#2979FF"/>
-                                    </svg>
-                                    <h4><?php echo esc_html( $faq['title'] ); ?></h4>
-                                </div>
-                                <div class="tf-faq-desc" <?php echo $key === 0 ? 'style="display: block;"' : ''; ?>>
-									<?php echo wp_kses_post( $faq['description'] ); ?>
-                                </div>
-                            </div>
-						<?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- FAQ section end -->
-	<?php endif; ?>
-
-	<?php
+	<?php 
+    \Tourfic\App\Templates\Components\Global\Single\FAQ::render([
+        'wrapper_open' => '<div class="tf-faq-wrapper tf-apartment-faq">',
+        'wrapper_close' => '</div>',
+        'wrapper' => 'no',
+        'container' => 'yes',
+        'tf_faq_icon_postion' => 'left',
+        'faq_style' => 'style4',
+    ]);
+    
     \Tourfic\App\Templates\Components\Global\Single\Enquiry::render([
         'icon_type' => 'simple',
         'enquiry_style' => 'style2',

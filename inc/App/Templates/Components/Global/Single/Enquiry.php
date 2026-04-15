@@ -112,7 +112,7 @@ class Enquiry {
 				</div>
 				<?php if ( ! empty( $tf_enquiry_section_button ) ) { ?>
 					<div class="tf-btn-wrap">
-						<a href="#" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_large">
+						<a href="#" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_large <?php echo esc_attr( $button_class ); ?>">
 							<span><?php echo wp_kses_post( $tf_enquiry_section_button ); ?></span>
 						</a>
 					</div>

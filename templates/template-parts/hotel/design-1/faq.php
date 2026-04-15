@@ -13,26 +13,11 @@ if ( $faqs ): ?>
         ]); ?>
 
         <div class="tf-hotel-faqs" style="<?php echo empty($tf_enquiry_section_status) ? "flex-basis: 100%;" : ''; ?>">
-            <!-- tourfic FAQ -->
-            <div class="tf-faq-wrapper">
-                <div class="tf-faq-inner">
-                    <?php 
-                    $faq_key = 1;    
-                    foreach ( $faqs as $key => $faq ): ?>
-                    <div class="tf-faq-single <?php echo $faq_key==1 ? esc_attr( 'active' ) : ''; ?>">
-                        <div class="tf-faq-single-inner">
-                            <div class="tf-faq-collaps tf-flex tf-flex-align-center tf-flex-space-bttn <?php echo $faq_key==1 ? esc_attr( 'active' ) : ''; ?>">
-                                <h4><?php echo esc_html( $faq['title'] ); ?></h4> 
-                                <div class="faq-icon"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-minus"></i></div>
-                            </div>
-                            <div class="tf-faq-content" style="<?php echo $faq_key==1 ? esc_attr( 'display: block;' ) : ''; ?>">
-                            <p><?php echo wp_kses_post( $faq['description'] ); ?></p>
-                            </div>
-                        </div>
-                    </div>
-                    <?php $faq_key++; endforeach; ?>
-                </div>
-            </div>
+            <?php \Tourfic\App\Templates\Components\Global\Single\FAQ::render([
+                'wrapper_class' => 'tf-faq-wrapper',
+                'show_title' => 'no',
+                'show_description' => 'no',
+            ]); ?>
         </div>
     </div>
 </div>
