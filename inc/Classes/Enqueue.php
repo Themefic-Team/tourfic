@@ -28,6 +28,7 @@ class Enqueue {
 		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'elementor_editor_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_enqueue_admin_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_dequeue_theplus_script_on_settings_page' ), 9999 );
+		add_action( 'enqueue_block_assets', array( $this, 'tf_enqueue_block_editor_iframe_styles' ) );
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_admin_enqueue_scripts' ), 9 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_options_wp_enqueue_scripts' ) );
@@ -54,6 +55,36 @@ class Enqueue {
 		
 			echo '<style id="tf-upgrade-menu-style">' . $css . '</style>';
 		});		
+	}
+
+	/**
+	 * Ensure Tourfic admin styles are enqueued for the block editor iframe using
+	 * the supported mechanism.
+	 *
+	 * WordPress' iframe-based editor warns when styles are injected into the
+	 * iframe from the wrong context. Enqueueing the stylesheet on
+	 * `enqueue_block_assets` allows WordPress to load it correctly.
+	 */
+	public function tf_enqueue_block_editor_iframe_styles() {
+		if ( ! is_admin() || ! function_exists( 'get_current_screen' ) ) {
+			return;
+		}
+
+		$screen = get_current_screen();
+		if ( ! $screen || empty( $screen->post_type ) ) {
+			return;
+		}
+
+		if ( method_exists( $screen, 'is_block_editor' ) && ! $screen->is_block_editor() ) {
+			return;
+		}
+
+		$tf_post_types = array( 'tf_tours', 'tf_hotel', 'tf_room', 'tf_apartment', 'tf_carrental', 'tf_email_templates' );
+		if ( ! in_array( $screen->post_type, $tf_post_types, true ) ) {
+			return;
+		}
+
+		wp_enqueue_style( 'tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css', array(), TF_VERSION );
 	}
 
 	/**
@@ -326,7 +357,15 @@ class Enqueue {
 			$tour_type                  = ! empty( $meta['type'] ) ? $meta['type'] : '';
 			$tour_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
-			$tour_availability          = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability']) : '';
+			$raw_tour_availability = $meta['tour_availability'] ?? '';
+			if ( is_array( $raw_tour_availability ) ) {
+				$tour_availability = $raw_tour_availability;
+			} elseif ( is_string( $raw_tour_availability ) && $raw_tour_availability !== '' ) {
+				$decoded = json_decode( $raw_tour_availability, true );
+				$tour_availability = is_array( $decoded ) ? $decoded : [];
+			} else {
+				$tour_availability = [];
+			}
 			
 			// Same Day Booking
 			$disable_same_day = ! empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
@@ -340,7 +379,7 @@ class Enqueue {
 			$single_tour_form_data['date_format']      = esc_html( $tour_date_format_for_users );
 			$single_tour_form_data['flatpickr_locale'] = ! empty( get_locale() ) ? get_locale() : 'en_US';
 				if($tour_type=='fixed'){
-					$tour_availability          = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
+					$tour_availability = is_array( $tour_availability ) ? $tour_availability : [];
 
 					$normalized = [];
 					if ( !empty($tour_availability) && is_array( $tour_availability ) ) {
@@ -390,6 +429,7 @@ class Enqueue {
 				'wishlist_removed'       => esc_html__( 'Item removed from wishlist', 'tourfic' ),
 				'wishlist_remove_error'  => esc_html__( 'Failed to remove from wishlist!', 'tourfic' ),
 				'field_required'         => esc_html__( 'This field is required!', 'tourfic' ),
+				'traveler_age_mismatch'  => esc_html__( 'The entered date of birth does not match the selected passenger type.', 'tourfic' ),
 				'adult'                  => apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ),
 				'children'               => esc_html__( 'Children', 'tourfic' ),
 				'infant'                 => esc_html__( 'Infant', 'tourfic' ),
@@ -417,6 +457,7 @@ class Enqueue {
 				'tf_apartment_max_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['max'] : 0,
 				'tf_apartment_min_price' => isset( $tf_apartment_min_max_price ) ? $tf_apartment_min_max_price['min'] : 0,
 				'tour_form_data'         => isset( $single_tour_form_data ) ? $single_tour_form_data : array(),
+				'traveler_compliance'   => function_exists( 'tf_tour_get_frontend_compliance_config' ) ? tf_tour_get_frontend_compliance_config() : array(),
 				'hotel_archive_template' => Hotel::template(),
 				'hotel_single_template' => $post_type == 'tf_hotel' ? Hotel::template('single', $post_id) : '',
 				'tour_archive_template' => Tour::template(),
@@ -434,6 +475,11 @@ class Enqueue {
 				'single_hotel_data' => isset( $single_hotel_data ) ? $single_hotel_data : array(),
 				'single_apartment_data' => isset( $single_apartment_data ) ? $single_apartment_data : array(),
 				'single_car_data' => isset( $single_car_data ) ? $single_car_data : array(),
+				'wc_currency_symbol' => html_entity_decode( get_woocommerce_currency_symbol() ),
+				'wc_currency_pos' => get_option( 'woocommerce_currency_pos' ),
+				'wc_price_num_decimals' => wc_get_price_decimals(),
+				'wc_price_decimal_sep' => wc_get_price_decimal_separator(),
+				'wc_price_thousand_sep' => wc_get_price_thousand_separator(),
 				'car_mobile_button_hide' => esc_html__( 'Hide', 'tourfic' ),
 				'car_mobile_button_book_now' => esc_html__( 'Book Now', 'tourfic' ),
 				'car_location_required_msg' => esc_html__( 'Select Pickup & Dropoff Location', 'tourfic' ),
@@ -442,6 +488,7 @@ class Enqueue {
 				'required' => esc_html__( 'This field is required.', 'tourfic'),
 				'fields_required_msg' => esc_html__( 'Fill up the all fields', 'tourfic'),
 				'no_camera_msg' => esc_html__( 'No camera found', 'tourfic'),
+				'package_unavailable_msg' => esc_html__( 'Selected package is unavailable for this date.', 'tourfic' ),
 			)
 		);
 

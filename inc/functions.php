@@ -24,6 +24,793 @@ function tf_file_missing( $files = '' ) {
 add_action( 'admin_notices', 'tf_file_missing' );
 add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );
 
+if ( ! function_exists( 'tf_tour_traveler_info_mode_settings' ) ) {
+	/**
+	 * Inject tour traveler info collection mode under Tour Options -> Extras.
+	 *
+	 * @param array $sections Settings sections.
+	 * @return array
+	 */
+	function tf_tour_traveler_info_mode_settings( $sections ) {
+		if ( empty( $sections['tour_booking_settings']['fields'] ) || ! is_array( $sections['tour_booking_settings']['fields'] ) ) {
+			return $sections;
+		}
+
+		foreach ( $sections['tour_booking_settings']['fields'] as $field ) {
+			if ( ! empty( $field['id'] ) && 'tour_traveler_info_collection_mode' === $field['id'] ) {
+				return $sections;
+			}
+		}
+
+		$mode_field = array(
+			'id'         => 'tour_traveler_info_collection_mode',
+			'type'       => 'select',
+			'label'      => esc_html__( 'Traveler Info Collection Mode', 'tourfic' ),
+			'subtitle'   => esc_html__( 'Choose whether to collect traveler details for all travelers or only one traveler.', 'tourfic' ),
+			'options'    => array(
+				'all'    => esc_html__( 'All Travelers', 'tourfic' ),
+				'single' => esc_html__( 'One Traveler', 'tourfic' ),
+			),
+			'default'    => 'all',
+			'dependency' => array(
+				array( 'disable_traveller_info', '==', 'true' ),
+			),
+		);
+
+		$insert_index = null;
+		foreach ( $sections['tour_booking_settings']['fields'] as $index => $field ) {
+			if ( ! empty( $field['id'] ) && 'disable_traveller_info' === $field['id'] ) {
+				$insert_index = $index + 1;
+				break;
+			}
+		}
+
+		if ( null === $insert_index ) {
+			$sections['tour_booking_settings']['fields'][] = $mode_field;
+		} else {
+			array_splice( $sections['tour_booking_settings']['fields'], $insert_index, 0, array( $mode_field ) );
+		}
+
+		return $sections;
+	}
+}
+add_filter( 'tf_settings_sections', 'tf_tour_traveler_info_mode_settings', 30 );
+
+if ( ! function_exists( 'tf_tour_traveler_compliance_settings' ) ) {
+	/**
+	 * Inject traveler compliance settings into Tour options.
+	 *
+	 * @param array $sections Settings sections.
+	 * @return array
+	 */
+	function tf_tour_traveler_compliance_settings( $sections ) {
+		if ( empty( $sections['tour_booking_settings']['fields'] ) || ! is_array( $sections['tour_booking_settings']['fields'] ) ) {
+			return $sections;
+		}
+
+		$fields = $sections['tour_booking_settings']['fields'];
+
+		$has_age_validation_setting = false;
+		foreach ( $fields as $field ) {
+			if ( ! empty( $field['id'] ) && 'tour_traveler_age_validation' === $field['id'] ) {
+				$has_age_validation_setting = true;
+				break;
+			}
+		}
+
+		if ( ! $has_age_validation_setting ) {
+			$age_validation_fields = array(
+				array(
+					'id'         => 'tour_traveler_age_validation',
+					'type'       => 'switch',
+					'label'      => esc_html__( 'Enable Traveler Age Validation', 'tourfic' ),
+					'subtitle'   => esc_html__( 'Validate configured traveler date fields against adult, child, and infant age limits during booking.', 'tourfic' ),
+					'label_on'   => esc_html__( 'Yes', 'tourfic' ),
+					'label_off'  => esc_html__( 'No', 'tourfic' ),
+					'default'    => '0',
+					'dependency' => array(
+						array( 'disable_traveller_info', '==', 'true' ),
+					),
+				),
+				array(
+					'id'         => 'tour_traveler_adult_min_age',
+					'type'       => 'number',
+					'label'      => esc_html__( 'Adult Minimum Age', 'tourfic' ),
+					'subtitle'   => esc_html__( 'Travelers at or above this age are treated as adults.', 'tourfic' ),
+					'default'    => 12,
+					'dependency' => array(
+						array( 'disable_traveller_info', '==', 'true' ),
+						array( 'tour_traveler_age_validation', '==', 'true' ),
+					),
+				),
+				array(
+					'id'         => 'tour_traveler_child_min_age',
+					'type'       => 'number',
+					'label'      => esc_html__( 'Child Minimum Age', 'tourfic' ),
+					'subtitle'   => esc_html__( 'Travelers from this age up to the adult minimum age are treated as children.', 'tourfic' ),
+					'default'    => 2,
+					'dependency' => array(
+						array( 'disable_traveller_info', '==', 'true' ),
+						array( 'tour_traveler_age_validation', '==', 'true' ),
+					),
+				),
+				array(
+					'id'         => 'tour_traveler_infant_max_age',
+					'type'       => 'number',
+					'label'      => esc_html__( 'Infant Maximum Age', 'tourfic' ),
+					'subtitle'   => esc_html__( 'Travelers below this age are treated as infants.', 'tourfic' ),
+					'default'    => 2,
+					'dependency' => array(
+						array( 'disable_traveller_info', '==', 'true' ),
+						array( 'tour_traveler_age_validation', '==', 'true' ),
+					),
+				),
+			);
+
+			$insert_index = null;
+			foreach ( $fields as $index => $field ) {
+				if ( ! empty( $field['id'] ) && 'tour_traveler_info_collection_mode' === $field['id'] ) {
+					$insert_index = $index + 1;
+					break;
+				}
+			}
+
+			if ( null === $insert_index ) {
+				$fields = array_merge( $fields, $age_validation_fields );
+			} else {
+				array_splice( $fields, $insert_index, 0, $age_validation_fields );
+			}
+		}
+
+		foreach ( $fields as &$field ) {
+			if ( empty( $field['id'] ) || 'without-payment-field' !== $field['id'] || empty( $field['fields'] ) || ! is_array( $field['fields'] ) ) {
+				continue;
+			}
+
+			$has_age_validation_toggle = false;
+			foreach ( $field['fields'] as $sub_field ) {
+				if ( ! empty( $sub_field['id'] ) && 'reg-field-age-validation' === $sub_field['id'] ) {
+					$has_age_validation_toggle = true;
+					break;
+				}
+			}
+
+			foreach ( $field['fields'] as $sub_index => &$sub_field ) {
+				if ( ! empty( $sub_field['id'] ) && 'reg-fields-type' === $sub_field['id'] && ! empty( $sub_field['options'] ) && is_array( $sub_field['options'] ) ) {
+					if ( ! array_key_exists( 'file', $sub_field['options'] ) ) {
+						$sub_field['options']['file'] = esc_html__( 'File Upload', 'tourfic' );
+					}
+				}
+
+				if ( ! $has_age_validation_toggle && ! empty( $sub_field['id'] ) && 'reg-field-required' === $sub_field['id'] ) {
+					array_splice(
+						$field['fields'],
+						$sub_index + 1,
+						0,
+						array(
+							array(
+								'id'         => 'reg-field-age-validation',
+								'type'       => 'switch',
+								'label'      => esc_html__( 'Validate Age Limit?', 'tourfic' ),
+								'label_on'   => esc_html__( 'Yes', 'tourfic' ),
+								'label_off'  => esc_html__( 'No', 'tourfic' ),
+								'default'    => '0',
+								'dependency' => array(
+									array( 'reg-fields-type', '==', 'date' ),
+								),
+								'class'      => 'tf_hidden_fields',
+							),
+						)
+					);
+					$has_age_validation_toggle = true;
+				}
+			}
+			unset( $sub_field );
+		}
+		unset( $field );
+
+		$sections['tour_booking_settings']['fields'] = $fields;
+
+		return $sections;
+	}
+}
+add_filter( 'tf_settings_sections', 'tf_tour_traveler_compliance_settings', 35 );
+
+if ( ! function_exists( 'tf_tour_get_traveler_info_fields' ) ) {
+	/**
+	 * Get configured tour traveler info fields.
+	 *
+	 * @return array
+	 */
+	function tf_tour_get_traveler_info_fields() {
+		$fields = Helper::tfopt( 'without-payment-field' );
+		$fields = ! empty( $fields ) ? Helper::tf_data_types( $fields ) : array();
+
+		return is_array( $fields ) ? $fields : array();
+	}
+}
+
+if ( ! function_exists( 'tf_tour_get_age_validation_settings' ) ) {
+	/**
+	 * Get traveler age validation settings.
+	 *
+	 * @return array
+	 */
+	function tf_tour_get_age_validation_settings() {
+		$adult_min_age  = Helper::tfopt( 'tour_traveler_adult_min_age' );
+		$child_min_age  = Helper::tfopt( 'tour_traveler_child_min_age' );
+		$infant_max_age = Helper::tfopt( 'tour_traveler_infant_max_age' );
+
+		return array(
+			'enabled'         => ! empty( Helper::tfopt( 'tour_traveler_age_validation' ) ),
+			'adult_min_age'   => '' !== (string) $adult_min_age ? max( 1, absint( $adult_min_age ) ) : 12,
+			'child_min_age'   => '' !== (string) $child_min_age ? absint( $child_min_age ) : 2,
+			'infant_max_age'  => '' !== (string) $infant_max_age ? max( 1, absint( $infant_max_age ) ) : 2,
+			'date_format'     => tf_tour_get_user_date_format(),
+			'collection_mode' => ! empty( Helper::tfopt( 'tour_traveler_info_collection_mode' ) ) ? sanitize_key( Helper::tfopt( 'tour_traveler_info_collection_mode' ) ) : 'all',
+		);
+	}
+}
+
+if ( ! function_exists( 'tf_tour_get_user_date_format' ) ) {
+	/**
+	 * Get configured user-facing date format.
+	 *
+	 * @return string
+	 */
+	function tf_tour_get_user_date_format() {
+		$date_format = ! empty( Helper::tfopt( 'tf-date-format-for-users' ) ) ? sanitize_text_field( Helper::tfopt( 'tf-date-format-for-users' ) ) : 'Y/m/d';
+		$allowed     = array( 'Y/m/d', 'd/m/Y', 'm/d/Y', 'Y-m-d', 'd-m-Y', 'm-d-Y', 'Y.m.d', 'd.m.Y', 'm.d.Y' );
+
+		return in_array( $date_format, $allowed, true ) ? $date_format : 'Y/m/d';
+	}
+}
+
+if ( ! function_exists( 'tf_tour_get_age_validation_field_names' ) ) {
+	/**
+	 * Get traveler date field names that should be age-validated.
+	 *
+	 * @return array
+	 */
+	function tf_tour_get_age_validation_field_names() {
+		$settings = tf_tour_get_age_validation_settings();
+		if ( empty( $settings['enabled'] ) ) {
+			return array();
+		}
+
+		$field_names = array();
+		$fields      = tf_tour_get_traveler_info_fields();
+
+		if ( empty( $fields ) ) {
+			return array( 'tf_dob' );
+		}
+
+		foreach ( $fields as $field ) {
+			if ( empty( $field['reg-fields-type'] ) || 'date' !== $field['reg-fields-type'] || empty( $field['reg-field-age-validation'] ) || empty( $field['reg-field-name'] ) ) {
+				continue;
+			}
+
+			$field_names[] = sanitize_key( $field['reg-field-name'] );
+		}
+
+		return array_values( array_unique( array_filter( $field_names ) ) );
+	}
+}
+
+if ( ! function_exists( 'tf_tour_get_file_upload_fields' ) ) {
+	/**
+	 * Get configured traveler file upload fields.
+	 *
+	 * @return array
+	 */
+	function tf_tour_get_file_upload_fields() {
+		$file_fields = array();
+
+		foreach ( tf_tour_get_traveler_info_fields() as $field ) {
+			if ( empty( $field['reg-fields-type'] ) || 'file' !== $field['reg-fields-type'] || empty( $field['reg-field-name'] ) ) {
+				continue;
+			}
+
+			$field_name = sanitize_key( $field['reg-field-name'] );
+			$file_fields[ $field_name ] = array(
+				'name'     => $field_name,
+				'label'    => ! empty( $field['reg-field-label'] ) ? sanitize_text_field( $field['reg-field-label'] ) : $field_name,
+				'required' => ! empty( $field['reg-field-required'] ),
+			);
+		}
+
+		return $file_fields;
+	}
+}
+
+if ( ! function_exists( 'tf_tour_get_frontend_compliance_config' ) ) {
+	/**
+	 * Get traveler compliance config for localized frontend JS.
+	 *
+	 * @return array
+	 */
+	function tf_tour_get_frontend_compliance_config() {
+		$settings = tf_tour_get_age_validation_settings();
+
+		return array(
+			'enabled'         => ! empty( $settings['enabled'] ),
+			'field_names'     => tf_tour_get_age_validation_field_names(),
+			'adult_min_age'   => max( 1, absint( $settings['adult_min_age'] ) ),
+			'child_min_age'   => absint( $settings['child_min_age'] ),
+			'infant_max_age'  => max( 1, absint( $settings['infant_max_age'] ) ),
+			'date_format'     => $settings['date_format'],
+			'collection_mode' => $settings['collection_mode'],
+		);
+	}
+}
+
+if ( ! function_exists( 'tf_tour_parse_user_date' ) ) {
+	/**
+	 * Parse a date using Tourfic's configured date format.
+	 *
+	 * @param string $date_string Date string.
+	 * @return DateTimeImmutable|null
+	 */
+	function tf_tour_parse_user_date( $date_string ) {
+		$date_string = sanitize_text_field( (string) $date_string );
+		if ( '' === $date_string ) {
+			return null;
+		}
+
+		if ( false !== strpos( $date_string, ' - ' ) ) {
+			$date_parts  = explode( ' - ', $date_string );
+			$date_string = isset( $date_parts[0] ) ? trim( $date_parts[0] ) : $date_string;
+		}
+
+		$timezone    = wp_timezone();
+		$date_format = tf_tour_get_user_date_format();
+		$date        = DateTimeImmutable::createFromFormat( '!' . $date_format, $date_string, $timezone );
+
+		if ( $date instanceof DateTimeImmutable ) {
+			return $date;
+		}
+
+		$fallback_timestamp = strtotime( str_replace( '/', '-', $date_string ) );
+		if ( false === $fallback_timestamp ) {
+			return null;
+		}
+
+		return ( new DateTimeImmutable( '@' . $fallback_timestamp ) )->setTimezone( $timezone );
+	}
+}
+
+if ( ! function_exists( 'tf_tour_get_reference_timestamp' ) ) {
+	/**
+	 * Get booking reference timestamp from selected tour date.
+	 *
+	 * @param string $tour_date Tour date.
+	 * @return int
+	 */
+	function tf_tour_get_reference_timestamp( $tour_date ) {
+		$date = tf_tour_parse_user_date( $tour_date );
+
+		return $date instanceof DateTimeImmutable ? $date->getTimestamp() : current_time( 'timestamp' );
+	}
+}
+
+if ( ! function_exists( 'tf_tour_calculate_age' ) ) {
+	/**
+	 * Calculate traveler age.
+	 *
+	 * @param string   $date_string    Date string.
+	 * @param int|null $reference_time Reference timestamp.
+	 * @return int|null
+	 */
+	function tf_tour_calculate_age( $date_string, $reference_time = null ) {
+		$dob_date = tf_tour_parse_user_date( $date_string );
+		if ( ! $dob_date instanceof DateTimeImmutable ) {
+			return null;
+		}
+
+		if ( is_numeric( $reference_time ) ) {
+			$reference_date = ( new DateTimeImmutable( '@' . (int) $reference_time ) )->setTimezone( wp_timezone() );
+		} else {
+			$reference_date = new DateTimeImmutable( 'now', wp_timezone() );
+		}
+
+		if ( $reference_date < $dob_date ) {
+			return null;
+		}
+
+		return (int) $dob_date->diff( $reference_date )->y;
+	}
+}
+
+if ( ! function_exists( 'tf_tour_get_passenger_type_map' ) ) {
+	/**
+	 * Get traveler index to passenger type map.
+	 *
+	 * @param int $adults   Adults.
+	 * @param int $children Children.
+	 * @param int $infants  Infants.
+	 * @return array
+	 */
+	function tf_tour_get_passenger_type_map( $adults, $children, $infants ) {
+		$map   = array();
+		$index = 1;
+
+		for ( $count = 0; $count < $adults; $count++, $index++ ) {
+			$map[ $index ] = 'adult';
+		}
+
+		for ( $count = 0; $count < $children; $count++, $index++ ) {
+			$map[ $index ] = 'child';
+		}
+
+		for ( $count = 0; $count < $infants; $count++, $index++ ) {
+			$map[ $index ] = 'infant';
+		}
+
+		return $map;
+	}
+}
+
+if ( ! function_exists( 'tf_tour_age_matches_passenger_type' ) ) {
+	/**
+	 * Check if age matches passenger type.
+	 *
+	 * @param string $passenger_type Passenger type.
+	 * @param int    $age            Traveler age.
+	 * @return bool
+	 */
+	function tf_tour_age_matches_passenger_type( $passenger_type, $age ) {
+		$settings      = tf_tour_get_age_validation_settings();
+		$adult_min_age = max( 1, absint( $settings['adult_min_age'] ) );
+		$child_min_age = absint( $settings['child_min_age'] );
+		$infant_max_age = max( 1, absint( $settings['infant_max_age'] ) );
+
+		if ( 'adult' === $passenger_type ) {
+			return $age >= $adult_min_age;
+		}
+
+		if ( 'child' === $passenger_type ) {
+			return $age >= $child_min_age && $age < $adult_min_age;
+		}
+
+		if ( 'infant' === $passenger_type ) {
+			return $age < $infant_max_age;
+		}
+
+		return true;
+	}
+}
+
+if ( ! function_exists( 'tf_tour_normalize_file_field_value' ) ) {
+	/**
+	 * Normalize stored file field value.
+	 *
+	 * @param mixed $value Raw value.
+	 * @return array
+	 */
+	function tf_tour_normalize_file_field_value( $value ) {
+		if ( is_object( $value ) ) {
+			$value = (array) $value;
+		}
+
+		if ( ! is_array( $value ) ) {
+			return array();
+		}
+
+		return array(
+			'attachment_id' => ! empty( $value['attachment_id'] ) ? absint( $value['attachment_id'] ) : 0,
+			'filename'      => ! empty( $value['filename'] ) ? sanitize_file_name( $value['filename'] ) : '',
+		);
+	}
+}
+
+if ( ! function_exists( 'tf_tour_get_uploaded_traveler_file' ) ) {
+	/**
+	 * Get nested traveler file upload from request.
+	 *
+	 * @param int    $traveler_index Traveler index.
+	 * @param string $field_name     Field name.
+	 * @param array  $files          Files array.
+	 * @return array|null
+	 */
+	function tf_tour_get_uploaded_traveler_file( $traveler_index, $field_name, $files = array() ) {
+		$files = ! empty( $files ) ? $files : $_FILES; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		if ( empty( $files['traveller']['name'][ $traveler_index ][ $field_name ] ) ) {
+			return null;
+		}
+
+		return array(
+			'name'     => $files['traveller']['name'][ $traveler_index ][ $field_name ],
+			'type'     => $files['traveller']['type'][ $traveler_index ][ $field_name ],
+			'tmp_name' => $files['traveller']['tmp_name'][ $traveler_index ][ $field_name ],
+			'error'    => $files['traveller']['error'][ $traveler_index ][ $field_name ],
+			'size'     => $files['traveller']['size'][ $traveler_index ][ $field_name ],
+		);
+	}
+}
+
+if ( ! function_exists( 'tf_tour_validate_traveler_document_upload' ) ) {
+	/**
+	 * Validate uploaded traveler document.
+	 *
+	 * @param array $file Uploaded file.
+	 * @return true|WP_Error
+	 */
+	function tf_tour_validate_traveler_document_upload( $file ) {
+		if ( ! empty( $file['error'] ) ) {
+			return new WP_Error( 'tf_traveler_file_upload_error', esc_html__( 'The traveler document upload failed. Please try again.', 'tourfic' ) );
+		}
+
+		$check     = wp_check_filetype_and_ext( $file['tmp_name'], $file['name'] );
+		$extension = ! empty( $check['ext'] ) ? strtolower( $check['ext'] ) : '';
+
+		if ( ! in_array( $extension, array( 'pdf', 'jpg', 'jpeg', 'png' ), true ) ) {
+			return new WP_Error( 'tf_traveler_invalid_file_type', esc_html__( 'Only PDF, JPG, JPEG, and PNG files are allowed.', 'tourfic' ) );
+		}
+
+		if ( ! empty( $file['size'] ) && (int) $file['size'] > wp_max_upload_size() ) {
+			return new WP_Error( 'tf_traveler_file_too_large', esc_html__( 'The uploaded traveler document exceeds the allowed file size.', 'tourfic' ) );
+		}
+
+		return true;
+	}
+}
+
+if ( ! function_exists( 'tf_tour_unique_traveler_document_filename' ) ) {
+	/**
+	 * Generate a unique traveler document filename.
+	 *
+	 * @param string $dir  Upload dir.
+	 * @param string $name Original name.
+	 * @param string $ext  Extension.
+	 * @return string
+	 */
+	function tf_tour_unique_traveler_document_filename( $dir, $name, $ext ) {
+		unset( $dir, $name );
+
+		return 'tf-traveler-' . wp_generate_password( 16, false, false ) . $ext;
+	}
+}
+
+if ( ! function_exists( 'tf_tour_store_traveler_document_upload' ) ) {
+	/**
+	 * Upload and attach a traveler document.
+	 *
+	 * @param array  $file           Uploaded file.
+	 * @param int    $post_id        Tour post ID.
+	 * @param string $field_name     Field name.
+	 * @param int    $traveler_index Traveler index.
+	 * @return array|WP_Error
+	 */
+	function tf_tour_store_traveler_document_upload( $file, $post_id, $field_name, $traveler_index ) {
+		$validation = tf_tour_validate_traveler_document_upload( $file );
+		if ( is_wp_error( $validation ) ) {
+			return $validation;
+		}
+
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		require_once ABSPATH . 'wp-admin/includes/media.php';
+		require_once ABSPATH . 'wp-admin/includes/image.php';
+
+		$upload = wp_handle_upload(
+			$file,
+			array(
+				'test_form'                => false,
+				'mimes'                    => array(
+					'pdf'  => 'application/pdf',
+					'jpg'  => 'image/jpeg',
+					'jpeg' => 'image/jpeg',
+					'png'  => 'image/png',
+				),
+				'unique_filename_callback' => 'tf_tour_unique_traveler_document_filename',
+			)
+		);
+
+		if ( ! empty( $upload['error'] ) ) {
+			return new WP_Error( 'tf_traveler_upload_error', sanitize_text_field( $upload['error'] ) );
+		}
+
+		$attachment = array(
+			'post_mime_type' => $upload['type'],
+			'post_title'     => sanitize_file_name( wp_basename( $file['name'] ) ),
+			'post_content'   => '',
+			'post_status'    => 'private',
+		);
+
+		$attachment_id = wp_insert_attachment( $attachment, $upload['file'], $post_id );
+		if ( is_wp_error( $attachment_id ) || ! $attachment_id ) {
+			return new WP_Error( 'tf_traveler_attachment_error', esc_html__( 'Unable to save the uploaded traveler document.', 'tourfic' ) );
+		}
+
+		$attachment_data = wp_generate_attachment_metadata( $attachment_id, $upload['file'] );
+		wp_update_attachment_metadata( $attachment_id, $attachment_data );
+
+		update_post_meta( $attachment_id, '_tf_traveler_document_original_filename', sanitize_file_name( $file['name'] ) );
+		update_post_meta( $attachment_id, '_tf_traveler_document_field_name', sanitize_key( $field_name ) );
+		update_post_meta( $attachment_id, '_tf_traveler_document_index', absint( $traveler_index ) );
+		update_post_meta( $attachment_id, '_tf_traveler_document_post_id', absint( $post_id ) );
+
+		return array(
+			'attachment_id' => absint( $attachment_id ),
+			'filename'      => sanitize_file_name( $file['name'] ),
+		);
+	}
+}
+
+if ( ! function_exists( 'tf_tour_process_traveler_document_fields' ) ) {
+	/**
+	 * Process traveler document uploads and preserve existing values.
+	 *
+	 * @param array $traveler_details Traveler details.
+	 * @param int   $post_id          Tour post ID.
+	 * @param array $files            Files array.
+	 * @return array|WP_Error
+	 */
+	function tf_tour_process_traveler_document_fields( $traveler_details, $post_id, $files = array() ) {
+		$file_fields = tf_tour_get_file_upload_fields();
+		if ( empty( $file_fields ) ) {
+			return $traveler_details;
+		}
+
+		foreach ( $traveler_details as $traveler_index => $traveler_data ) {
+			if ( ! is_array( $traveler_data ) ) {
+				continue;
+			}
+
+			foreach ( $file_fields as $field_name => $field ) {
+				$uploaded_file = tf_tour_get_uploaded_traveler_file( $traveler_index, $field_name, $files );
+				$existing_file = ! empty( $traveler_data[ $field_name ] ) ? tf_tour_normalize_file_field_value( $traveler_data[ $field_name ] ) : array();
+
+				if ( ! empty( $uploaded_file ) ) {
+					$stored_file = tf_tour_store_traveler_document_upload( $uploaded_file, $post_id, $field_name, $traveler_index );
+					if ( is_wp_error( $stored_file ) ) {
+						return $stored_file;
+					}
+
+					$traveler_details[ $traveler_index ][ $field_name ] = $stored_file;
+					continue;
+				}
+
+				if ( ! empty( $existing_file ) ) {
+					$traveler_details[ $traveler_index ][ $field_name ] = $existing_file;
+					continue;
+				}
+
+				if ( ! empty( $field['required'] ) ) {
+					return new WP_Error( 'tf_traveler_required_file_missing', esc_html__( 'Please upload the required traveler document before continuing.', 'tourfic' ) );
+				}
+			}
+		}
+
+		return $traveler_details;
+	}
+}
+
+if ( ! function_exists( 'tf_tour_validate_traveler_age_limits' ) ) {
+	/**
+	 * Validate traveler ages against passenger types.
+	 *
+	 * @param array  $traveler_details Traveler details.
+	 * @param int    $adults           Adult count.
+	 * @param int    $children         Child count.
+	 * @param int    $infants          Infant count.
+	 * @param string $tour_date        Tour date.
+	 * @return true|WP_Error
+	 */
+	function tf_tour_validate_traveler_age_limits( $traveler_details, $adults, $children, $infants, $tour_date ) {
+		$settings    = tf_tour_get_age_validation_settings();
+		$field_names = tf_tour_get_age_validation_field_names();
+
+		if ( empty( $settings['enabled'] ) || empty( $field_names ) || empty( $traveler_details ) ) {
+			return true;
+		}
+
+		if ( 'single' === $settings['collection_mode'] && ( $adults + $children + $infants ) > 1 ) {
+			return true;
+		}
+
+		$reference_time = tf_tour_get_reference_timestamp( $tour_date );
+		$type_map       = tf_tour_get_passenger_type_map( $adults, $children, $infants );
+
+		foreach ( $traveler_details as $traveler_index => $traveler_data ) {
+			if ( ! is_array( $traveler_data ) ) {
+				continue;
+			}
+
+			$traveler_index = absint( $traveler_index );
+			$passenger_type = ! empty( $type_map[ $traveler_index ] ) ? $type_map[ $traveler_index ] : '';
+			if ( '' === $passenger_type ) {
+				continue;
+			}
+
+			foreach ( $field_names as $field_name ) {
+				if ( empty( $traveler_data[ $field_name ] ) || is_array( $traveler_data[ $field_name ] ) ) {
+					continue;
+				}
+
+				$age = tf_tour_calculate_age( $traveler_data[ $field_name ], $reference_time );
+				if ( null === $age || ! tf_tour_age_matches_passenger_type( $passenger_type, $age ) ) {
+					return new WP_Error( 'tf_traveler_age_mismatch', esc_html__( 'The entered date of birth does not match the selected passenger type.', 'tourfic' ) );
+				}
+			}
+		}
+
+		return true;
+	}
+}
+
+if ( ! function_exists( 'tf_tour_user_can_manage_traveler_documents' ) ) {
+	/**
+	 * Check if current user can manage traveler documents.
+	 *
+	 * @return bool
+	 */
+	function tf_tour_user_can_manage_traveler_documents() {
+		return current_user_can( 'manage_options' ) || current_user_can( 'tf_manager_options' ) || current_user_can( 'tf_vendor_options' );
+	}
+}
+
+if ( ! function_exists( 'tf_tour_get_traveler_document_download_url' ) ) {
+	/**
+	 * Get secure download URL for traveler document.
+	 *
+	 * @param int $attachment_id Attachment ID.
+	 * @return string
+	 */
+	function tf_tour_get_traveler_document_download_url( $attachment_id ) {
+		$attachment_id = absint( $attachment_id );
+		if ( $attachment_id <= 0 ) {
+			return '';
+		}
+
+		return wp_nonce_url(
+			admin_url( 'admin-post.php?action=tf_download_traveler_document&attachment_id=' . $attachment_id ),
+			'tf_download_traveler_document_' . $attachment_id
+		);
+	}
+}
+
+if ( ! function_exists( 'tf_download_traveler_document' ) ) {
+	/**
+	 * Download a traveler document.
+	 *
+	 * @return void
+	 */
+	function tf_download_traveler_document() {
+		if ( ! tf_tour_user_can_manage_traveler_documents() ) {
+			wp_die( esc_html__( 'You do not have permission to download this file.', 'tourfic' ) );
+		}
+
+		$attachment_id = isset( $_GET['attachment_id'] ) ? absint( wp_unslash( $_GET['attachment_id'] ) ) : 0;
+		$nonce         = isset( $_GET['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
+
+		if ( $attachment_id <= 0 || ! wp_verify_nonce( $nonce, 'tf_download_traveler_document_' . $attachment_id ) ) {
+			wp_die( esc_html__( 'Invalid download request.', 'tourfic' ) );
+		}
+
+		$file_path = get_attached_file( $attachment_id );
+		if ( empty( $file_path ) || ! file_exists( $file_path ) ) {
+			wp_die( esc_html__( 'The requested file is no longer available.', 'tourfic' ) );
+		}
+
+		$file_name = get_post_meta( $attachment_id, '_tf_traveler_document_original_filename', true );
+		$file_name = $file_name ? sanitize_file_name( $file_name ) : sanitize_file_name( wp_basename( $file_path ) );
+		$file_type = wp_check_filetype( $file_path );
+		$mime_type = ! empty( $file_type['type'] ) ? $file_type['type'] : 'application/octet-stream';
+
+		nocache_headers();
+		header( 'Content-Description: File Transfer' );
+		header( 'X-Content-Type-Options: nosniff' );
+		header( 'Content-Type: ' . $mime_type );
+		header( 'Content-Disposition: attachment; filename="' . $file_name . '"' );
+		header( 'Content-Length: ' . filesize( $file_path ) );
+
+		readfile( $file_path );
+		exit;
+	}
+}
+add_action( 'admin_post_tf_download_traveler_document', 'tf_download_traveler_document' );
+
 /**
  * Car Functions
  */

@@ -641,6 +641,10 @@ class Room {
 					if ( ! empty( $date ) && gettype( $date ) == "string" ) {
 						$date = json_decode( $date, true );
 						foreach ( $date as $sdate ) {
+							$date_status = ! empty( $sdate['status'] ) ? $sdate['status'] : 'available';
+							if ( 'unavailable' === $date_status ) {
+								continue;
+							}
 							if ( $tf_check_in_date == $sdate['check_in'] ) {
 								$tf_check_in_date_price['price']       = $sdate['price'];
 								$tf_check_in_date_price['adult_price'] = $sdate['adult_price'];
@@ -808,6 +812,10 @@ class Room {
 					if ( ! empty( $date ) && gettype( $date ) == "string" ) {
 						$date = json_decode( $date, true );
 						foreach ( $date as $sdate ) {
+							$date_status = ! empty( $sdate['status'] ) ? $sdate['status'] : 'available';
+							if ( 'unavailable' === $date_status ) {
+								continue;
+							}
 							if ( $tf_check_in_date == $sdate['check_in'] ) {
 								$tf_check_in_date_price['price']       = $sdate['price'];
 								$tf_check_in_date_price['adult_price'] = $sdate['adult_price'];
@@ -838,7 +846,7 @@ class Room {
 				}
 
 				// If any date range matches show hotel
-				if ( ! in_array( 0, $show_hotel ) ) {
+				if ( ! empty( $show_hotel ) && ! in_array( 0, $show_hotel ) ) {
 					if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
 						
 						$room_options = ! empty( $room_meta['room-options'] ) ? $room_meta['room-options'] : [];
