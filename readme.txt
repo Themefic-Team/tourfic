@@ -425,8 +425,8 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.22.0 – April 16, 2026 =
 
-- New: AI integrations with Tourfic.
-- New: Create tour, hotel, car, and apartment listings with AI 
+- New: AI integrations with Tourfic (Pro).
+- New: Create tour, hotel, car, and apartment listings with AI (Pro).
 - Added: File upload support in traveller information.
 - Improved: Traveller details handling and overall experience.
 - Fixed: iCal sync, availability calendar, and car rental date range issues.
