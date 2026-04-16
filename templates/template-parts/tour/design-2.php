@@ -67,7 +67,6 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
             <!-- Hotel details Srart -->
             <div class="tf-details" id="tf-tour-overview">
                 <div class="tf-details-left">
-
 					<?php
 					if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout-part-1'] ) ) {
 						foreach ( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout-part-1'] as $section ) {
@@ -83,28 +82,11 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 						include TF_TEMPLATE_PART_PATH . 'tour/design-2/itinerary.php';
 					}
 					?>
-
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets">
-					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
-                        <div class="tf-search-date-wrapper tf-single-widgets">
-                            <h3 class="tf-section-title"><?php echo ! empty( $meta["booking-section-title"] ) ? esc_html( $meta["booking-section-title"] ) : ''; ?></h3>
-							<?php echo wp_kses( Tour::tf_single_tour_booking_form( $post->ID ), Helper::tf_custom_wp_kses_allow_tags() ); ?>
-                        </div>
-					<?php endif; ?>
-
-                    <!-- Tour External Booking From -->
-					<?php if ( $tf_booking_type == 2 && $tf_hide_booking_form == 1 ): ?>
-                        <div class="tour-external-booking-form tf-single-widgets">
-                            <h2 class="tf-section-title"><?php esc_html_e( "Book This Tour", "tourfic" ); ?></h2>
-                            <div class="tf-btn-wrap">
-                                <a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf_btn tf_btn_full tf_btn_sharp tf-tour-external-booking-button"
-                                   style="margin-top: 10px;"><?php echo esc_html( $tf_tour_single_book_now_text ); ?></a>
-                            </div>
-                        </div>
-					<?php endif; ?>
-
-					<?php
+					<?php 
+					\Tourfic\App\Templates\Components\Global\Single\Booking_Form::render(['booking_form_style' => 'style2']);
+					
 					\Tourfic\App\Templates\Components\Tour\Single\Tour_Contact_Information::render([
 						'icon_style' => 'style2',
 						'wrapper_open' => '<div class="tf-single-widgets">',

@@ -16,6 +16,7 @@ class Included_Excluded {
 	public static function render( $settings = [], $builder = '' ) {
 		$post_id       = get_the_ID();
 		$post_type     = get_post_type();
+		$wrapper  = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';
 		$wrapper_open  = ! empty( $settings['wrapper_open'] ) ? $settings['wrapper_open'] : '';
 		$wrapper_close = ! empty( $settings['wrapper_close'] ) ? $settings['wrapper_close'] : '';
 		$style         = ! empty( $settings['included_excluded_style'] ) ? $settings['included_excluded_style'] : 'style1';
@@ -46,7 +47,7 @@ class Included_Excluded {
 
 		if ( 'tf_tours' === $post_type && 'style1' === $style && ( $inc || $exc ) ) {
 			?>
-			<div class="tf-single-template__one tf-single-tour-inc-exc-style1 sp-0">
+			<?php echo 'yes' === $wrapper ? '<div class="tf-single-template__one tf-single-tour-inc-exc-style1 sp-0">' : ''; ?>
 				<div class="tf-inex-wrapper tf-template-section">
 					<div class="tf-inex-inner tf-flex tf-flex-gap-24">
 						<?php if ( $inc ) : ?>
@@ -77,11 +78,11 @@ class Included_Excluded {
 						<?php endif; ?>
 					</div>
 				</div>
-			</div>
+			<?php echo 'yes' === $wrapper ? '</div>' : ''; ?>
 			<?php
 		} elseif ( 'tf_tours' === $post_type && 'style2' === $style && ( $inc || $exc ) ) {
 			?>
-			<div class="tf-single-template__two tf-single-tour-inc-exc-style2">
+			<?php echo 'yes' === $wrapper ? '<div class="tf-single-template__two tf-single-tour-inc-exc-style2">' : ''; ?>
 				<div class="tf-include-exclude-wrapper">
 					<h2 class="tf-section-title"><?php esc_html_e( 'Include/Exclude', 'tourfic' ); ?></h2>
 					<div class="tf-include-exclude-innter">
@@ -111,11 +112,11 @@ class Included_Excluded {
 						<?php endif; ?>
 					</div>
 				</div>
-			</div>
+			<?php echo 'yes' === $wrapper ? '</div>' : ''; ?>
 			<?php
 		} elseif ( 'tf_tours' === $post_type && 'style3' === $style && ( $inc || $exc ) ) {
 			?>
-			<div class="tf-single-template__legacy tf-single-tour-inc-exc-legacy">
+			<?php echo 'yes' === $wrapper ? '<div class="tf-single-template__legacy tf-single-tour-inc-exc-legacy">' : ''; ?>
 				<div class="tf-inc-exc-wrapper sp-70" style="background-image: url(<?php echo esc_url( $inc_exc_bg ); ?>);">
 					<div class="tf-container">
 						<div class="tf-inc-exc-content">
@@ -142,11 +143,11 @@ class Included_Excluded {
 						</div>
 					</div>
 				</div>
-			</div>
+			<?php echo 'yes' === $wrapper ? '</div>' : ''; ?>
 			<?php
 		} elseif ( 'tf_carrental' === $post_type && 'style1' === $style && ! empty( $inc_exc_status ) && ( $includes || $excludes ) ) {
 			?>
-			<div class="tf-car-inc-exc-section" id="tf-inc-exc">
+			<?php echo 'yes' === $wrapper ? '<div class="tf-car-inc-exc-section" id="tf-inc-exc">' : ''; ?>
 				<div class="tf-inc-exe tf-flex tf-flex-gap-16">
 					<?php if ( ! empty( $includes ) ) : ?>
 						<div class="tf-inc-list">
@@ -179,7 +180,7 @@ class Included_Excluded {
 						</div>
 					<?php endif; ?>
 				</div>
-			</div>
+			<?php echo 'yes' === $wrapper ? '</div>' : ''; ?>
 			<?php
 		}
 

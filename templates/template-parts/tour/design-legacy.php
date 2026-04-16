@@ -51,11 +51,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                     <?php \Tourfic\App\Templates\Components\Global\Single\Wishlist::render(['design' => 'design-3']); ?>
                     
                 </div>
-	            <?php if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
-                    <div class="tf-tours-form-wrap">
-                        <?php echo wp_kses(Tour::tf_single_tour_booking_form( $post->ID ), Helper::tf_custom_wp_kses_allow_tags()); ?>
-                    </div>
-                <?php endif; ?>
+	            <?php \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render(['booking_form_style' => 'style3']); ?>
                 <div class="tf-hero-bottom-area">
                     <?php
                     $tour_video = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
@@ -183,7 +179,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     }
 
     \Tourfic\App\Templates\Components\Global\Single\Included_Excluded::render([
-        'included_excluded_style' => 'style3'
+        'included_excluded_style' => 'style3',
+        'wrapper' => 'no',
     ]);
     ?>
 

@@ -75,11 +75,10 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
             ?>
         </div>
         <div class="tf-details-right tf-sitebar-widgets">
-            <div class="tf-search-date-wrapper tf-single-widgets">
-                <?php Apartment::tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
-            </div>
+            <?php 
+            \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render();
 
-            <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ){
+            if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ){
                 \Tourfic\App\Templates\Components\Global\Single\Nearby_Places::render([
                     'wrapper_open' => '<div class="tf-single-widgets">', 
                     'wrapper_close' => '</div>'

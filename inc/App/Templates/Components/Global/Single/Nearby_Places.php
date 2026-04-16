@@ -89,7 +89,7 @@ class Nearby_Places {
 					<?php foreach ( $places as $place ) { ?>
 						<li>
 							<span class="tf-place">
-								<span class="tf-icon">
+								<span>
 									<?php if ( ! empty( $place['place-icon'] ) ) { ?>
 										<i class="<?php echo esc_attr( $place['place-icon'] ); ?>"></i>
 									<?php } ?>

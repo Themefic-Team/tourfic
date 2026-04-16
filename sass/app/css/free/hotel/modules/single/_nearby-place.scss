@@ -24,6 +24,10 @@
                         justify-content: space-between;
                         padding: 8px 0;
                         text-transform: capitalize;
+
+                        .tf-place{
+                            display: flex;
+                        }
                         i {
                             padding-right: 5px;
                             font-size: 0.875rem;

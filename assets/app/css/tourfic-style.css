@@ -19003,6 +19003,10 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-inner {
   display: flex;
   flex-wrap: wrap;
+  gap: 24px;
+}
+.tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-inner.tf-flex-gap-16 {
+  gap: 16px;
 }
 .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-inner.tf-grid-1 .tf-feature-block {
   flex-basis: 100%;

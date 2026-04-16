@@ -65,11 +65,13 @@ use \Tourfic\Classes\Apartment\Apartment;
                 </div>
                 <!-- Host details -->
                 <div class="tf-apartment-right">
-                    <div class="apartment-booking-form">
-						<?php Apartment::tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
-                    </div>
-
-					<?php \Tourfic\App\Templates\Components\Apartment\Single\Host_Info::render(); ?>
+					<?php 
+                    \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render([
+                        'booking_form_style' => 'style2',
+                        'wrapper' => 'no',
+                    ]);
+                    \Tourfic\App\Templates\Components\Apartment\Single\Host_Info::render(); 
+                    ?>
                 </div>
             </div>
         </div>

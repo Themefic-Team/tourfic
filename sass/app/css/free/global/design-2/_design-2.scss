@@ -3356,6 +3356,10 @@
                             flex-wrap: wrap;
                             gap: 24px;
 
+                            &.tf-flex-gap-16{
+                                gap: 16px;
+                            }
+
                             &.tf-grid-1{
                                 .tf-feature-block {
                                     flex-basis: 100%;

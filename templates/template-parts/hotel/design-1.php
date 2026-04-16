@@ -45,16 +45,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
                         <!-- SIdebar Tour single -->
                         <div class="tf-tour-details-right">
-	                        <?php if(($tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1) || ($tf_booking_type == 1) || $tf_booking_type == 3) :?>
-                                <div class="tf-tour-booking-box tf-box">
-                                    <?php Hotel::tf_hotel_sidebar_booking_form(); ?>
-                                </div>
-                            <?php endif; ?>
-                            <?php if( !empty($tf_ext_booking_code) && $tf_ext_booking_type == 2 ) : ?>
-                                <div id="tf-external-booking-embaded-form" class="tf-tour-booking-box tf-box">
-                                    <?php echo wp_kses( $tf_ext_booking_code, Helper::tf_custom_wp_kses_allow_tags()); ?>
-                                </div>
-                            <?php endif; ?>
+                            <?php \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render(['wrapper' => 'no']); ?>
                             <?php \Tourfic\App\Templates\Components\Global\Single\Map::render(); ?>
                             
                             <!-- Hotel Single Widget Hook are - start -->

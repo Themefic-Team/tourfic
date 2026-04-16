@@ -4,8 +4,6 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
-use Tourfic\Classes\Room\Pricing;
-use Tourfic\Classes\Room\Room;
 
 $meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
 $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
@@ -46,12 +44,7 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
                 <div class="tf-details-left">
                     <?php if(wp_is_mobile()): ?>
                     <div class="tf-room-single-mobile-booking-form-wrap">
-                        <?php if ( $pricing_by != '3' ) : ?>
-                            <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( '', 'design-2' ); ?></div>
-                        <?php endif; ?>
-                        <div class="tf-room-booking-box">
-                            <?php Room::tf_room_sidebar_booking_form(); ?>
-                        </div>
+                        <?php \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render(); ?>
                     </div>
                     <?php endif; ?>
 
@@ -75,12 +68,7 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
                 <div class="tf-details-right tf-sitebar-widgets">
                     <?php if(!wp_is_mobile()): ?>
                     <div class="tf-room-single-booking-form-wrap">
-                        <?php if ( $pricing_by != '3' ) : ?>
-                            <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( '', 'design-2' ); ?></div>
-                        <?php endif; ?>
-                        <div class="tf-room-booking-box">
-                            <?php Room::tf_room_sidebar_booking_form(); ?>
-                        </div>
+                        <?php \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render(); ?>
                     </div>
                     <?php endif; ?>
                     

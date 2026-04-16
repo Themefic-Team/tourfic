@@ -3,40 +3,6 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
-use \Tourfic\App\TF_Review;
-use \Tourfic\Classes\Hotel\Pricing;
-use \Tourfic\Classes\Hotel\Hotel;
-
-$tf_booking_type = '1';
-$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = $tf_ext_booking_code = '';
-if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
-	$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
-	$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
-	$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
-	$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
-	$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
-    $tf_ext_booking_type = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
-    $tf_ext_booking_code = !empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
-}
-if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
-	$external_search_info = array(
-		'{adult}'    => ! empty( $adult ) ? $adult : 1,
-		'{child}'    => ! empty( $child ) ? $child : 0,
-		'{checkin}'  => ! empty( $check_in ) ? $check_in : gmdate( 'Y-m-d' ),
-		'{checkout}' => ! empty( $check_out ) ? $check_out : gmdate( 'Y-m-d', strtotime( '+1 day' ) ),
-		'{room}'     => ! empty( $room_selected ) ? $room_selected : 1,
-	);
-	if ( ! empty( $tf_booking_attribute ) ) {
-		$tf_booking_query_url = str_replace( array_keys( $external_search_info ), array_values( $external_search_info ), $tf_booking_query_url );
-		if ( ! empty( $tf_booking_query_url ) ) {
-			$tf_booking_url = $tf_booking_url . '/?' . $tf_booking_query_url;
-		}
-	}
-}
-
-$total_room_option_count = Tourfic\Classes\Room\Room::get_room_options_count($rooms);
-$price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'hotel_archive_price_minimum_settings' ) : 'all';
 ?>
 <div class="tf-single-template__legacy">
 	<?php do_action( 'tf_before_container' ); ?>
@@ -85,45 +51,23 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                     ?>
                 </div>
                 <div class="hero-right">
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Map::render(['show_icon' => 'no', 'design' => 'design-2']); ?>
-					
-					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ||  $tf_booking_type == 3 ) : ?>
-                        <div class="tf-hero-booking">
-							<?php Hotel::tf_hotel_sidebar_booking_form(); ?>
-                        </div>
-					<?php endif; ?>
-                    <?php if( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && !empty( $tf_ext_booking_code )) : ?>
-                        <div id="tf-external-booking-embaded-form" class="tf-hero-booking">
-                            <?php echo wp_kses( $tf_ext_booking_code, Helper::tf_custom_wp_kses_allow_tags() ) ?>
-                        </div>
-                    <?php endif; ?>
-					<?php
-					$places_section_title = ! empty( $meta["section-title"] ) ? $meta["section-title"] : __( "What's around?", 'tourfic' );
-					$places_meta          = ! empty( $meta["nearby-places"] ) ? Helper::tf_data_types($meta["nearby-places"]) : array();
-					?>
-					<?php if ( count( $places_meta ) > 0 ) : ?> <!-- nearby places - start -->
-                        <div class="nearby-container">
-                            <div class="nearby-container-inner">
-								<?php if ( ! empty( $places_section_title ) ): ?>
-                                    <h3 class="section-heading"><?php echo esc_html( $places_section_title ); ?></h3>
-								<?php endif; ?>
-                                <ul>
-									<?php foreach ( $places_meta as $place ) {
-										$place_icon = '<i class="' . $place['place-icon'] . '"></i>';
-										?>
-                                        <li>
-                                            <span>
-                                                <?php echo wp_kses_post( $place_icon ); ?><?php echo esc_html( $place["place-title"] ); ?>
-                                            </span>
-                                            <span>
-                                                <?php echo esc_html( $place["place-dist"] ); ?>
-                                            </span>
-                                        </li>
-									<?php }; ?>
-                                </ul>
-                            </div>
-                        </div>
-					<?php endif; ?> <!-- nearby places - end -->
+                    <?php 
+                    \Tourfic\App\Templates\Components\Global\Single\Map::render([
+                        'show_icon' => 'no', 
+                        'design' => 'design-2'
+                    ]); 
+                    
+                    \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render([
+                        'booking_form_style' => 'style3',
+                        'wrapper' => 'no',
+                    ]);
+
+                    \Tourfic\App\Templates\Components\Global\Single\Nearby_Places::render([
+                        'nearby_places_style' => 'style2',
+                        'wrapper_open' => '<div class="nearby-container"><div class="nearby-container-inner">',
+                        'wrapper_close' => '</div></div>',
+                    ]);
+                    ?>
 
                     <!-- Hotel Single Widget Hook are - start -->
                     <div class="tf-hotel-single-custom-widget-wrap tf-single-widgets">
