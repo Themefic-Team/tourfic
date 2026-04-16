@@ -25,6 +25,25 @@ class Pricing {
 		$this->meta    = get_post_meta( $post_id, 'tf_tours_opt', true );
 	}
 
+	protected static function normalize_tour_availability( $meta ): array {
+		if ( ! is_array( $meta ) ) {
+			return [];
+		}
+
+		$raw = $meta['tour_availability'] ?? null;
+
+		if ( is_array( $raw ) ) {
+			return $raw;
+		}
+
+		if ( is_string( $raw ) && $raw !== '' ) {
+			$decoded = json_decode( $raw, true );
+			return is_array( $decoded ) ? $decoded : [];
+		}
+
+		return [];
+	}
+
 	/*
 	 * Set date
 	 */
@@ -106,7 +125,7 @@ class Pricing {
 		$children_price = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
 		$infant_price   = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
 
-		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+		$tour_availability_data = self::normalize_tour_availability( $meta );
 		
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		$package_pricing_values = ! empty( $package_pricing ) && is_array( $package_pricing ) ? array_values( $package_pricing ) : [];
@@ -274,7 +293,7 @@ class Pricing {
 		$tour_price                       = [];
 		$meta                             = $this->meta;
 		$pricing_rule                     = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+		$tour_availability_data = self::normalize_tour_availability( $meta );
 
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		$package_pricing_values = ! empty( $package_pricing ) && is_array( $package_pricing ) ? array_values( $package_pricing ) : [];
@@ -503,7 +522,7 @@ class Pricing {
 		$tour_price                       = [];
 		$meta                             = $this->meta;
 		$pricing_rule                     = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+		$tour_availability_data = self::normalize_tour_availability( $meta );
 		
 		$min_person = null;
 		$max_person = null;
@@ -632,27 +651,9 @@ class Pricing {
 		$tour_date = $this->date;
 		$tour_time = $this->time;
 
-		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+		$tour_availability_data = self::normalize_tour_availability( $meta );
 
-		$matched_availability = null;
-		if ( $tour_date && is_array($tour_availability) ) {
-			$input_date = strtotime($tour_date);
-
-			foreach ( $tour_availability as $date_range => $details ) {
-				if ( !isset($details['check_in'], $details['check_out'], $details['status']) ) {
-					continue;
-				}
-
-				$check_in  = strtotime(trim($details['check_in']));
-				$check_out = strtotime(trim($details['check_out']));
-				$status    = $details['status'];
-
-				if ( $status === 'available' && $input_date >= $check_in && $input_date <= $check_out ) {
-					$matched_availability = $details;
-					break; // Stop loop after first match
-				}
-			}
-		}
+		$matched_availability = Helper::tf_get_tour_matched_availability( $tour_availability_data, $tour_date, 'available' );
 
 
 		if (! empty($matched_availability) ) {
@@ -710,7 +711,7 @@ class Pricing {
 				}
 				
 				$pricing_rule = !empty( $meta['pricing'] ) ? $meta['pricing'] : 'person';
-				$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+				$tour_availability_data = self::normalize_tour_availability( $meta );
 
 				if(!empty($tour_availability_data)){
 					foreach ($tour_availability_data as $data) {
@@ -808,7 +809,7 @@ class Pricing {
 		$adult_price    = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
 		$children_price = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
 
-		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+		$tour_availability_data = self::normalize_tour_availability( $meta );
 
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 

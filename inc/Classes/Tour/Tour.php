@@ -3246,7 +3246,14 @@ class Tour {
 		$tour_found = [];
 		$all_days_available = true;
 
-		$tour_availability = !empty($meta['tour_availability']) ? json_decode($meta['tour_availability']) : null;
+		$tour_availability = null;
+		if ( ! empty( $meta['tour_availability'] ) ) {
+			if ( is_array( $meta['tour_availability'] ) ) {
+				$tour_availability = json_decode( wp_json_encode( $meta['tour_availability'] ) );
+			} elseif ( is_string( $meta['tour_availability'] ) ) {
+				$tour_availability = json_decode( $meta['tour_availability'] );
+			}
+		}
 		$pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 
 		if (!empty($check_in_out) && !empty($tour_availability)) {
@@ -3594,33 +3601,22 @@ class Tour {
 		$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
 		$pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 		$package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
-		$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
+		$tour_availability = '';
+		if ( ! empty( $meta['tour_availability'] ) ) {
+			if ( is_array( $meta['tour_availability'] ) ) {
+				$tour_availability = $meta['tour_availability'];
+			} elseif ( is_string( $meta['tour_availability'] ) ) {
+				$decoded = json_decode( $meta['tour_availability'], true );
+				$tour_availability = is_array( $decoded ) ? $decoded : '';
+			}
+		}
 
 		$allow_discount    = ! empty( $meta['allow_discount'] ) ? $meta['allow_discount'] : '';
         # Get discounts
         $discount_type    = !empty($meta['discount_type']) ? $meta['discount_type'] : 'none';
         $discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : 0;
 
-		$matched_availability = null;
-		if ( $tour_date && is_array($tour_availability) ) {
-			$input_date = strtotime($tour_date);
-
-			foreach ( $tour_availability as $date_range => $details ) {
-				if ( !isset($details['check_in'], $details['check_out'], $details['status']) ) {
-					continue;
-				}
-
-				$check_in  = strtotime(trim($details['check_in']));
-				$check_out = strtotime(trim($details['check_out']));
-				$status    = $details['status'];
-
-				if ( $status === 'available' && $input_date >= $check_in && $input_date <= $check_out ) {
-					$matched_availability = $details;
-					break; // Stop loop after first match
-				}
-			}
-
-		}
+		$matched_availability = Helper::tf_get_tour_matched_availability( $tour_availability, $tour_date, 'available' );
 		if (! empty($matched_availability) ) {
 			if($pricing_rule == 'person'){
 				$adult_price    = ! empty( $matched_availability['adult_price'] ) ? $matched_availability['adult_price'] : '';
@@ -3902,6 +3898,17 @@ class Tour {
 		wp_die();
 	}
 
+	/**
+	 * Get traveler info collection mode for tour booking flow.
+	 *
+	 * @return string
+	 */
+	private static function tf_get_traveler_info_collection_mode() {
+		$collection_mode = ! empty( Helper::tfopt( 'tour_traveler_info_collection_mode' ) ) ? sanitize_key( Helper::tfopt( 'tour_traveler_info_collection_mode' ) ) : 'all';
+
+		return in_array( $collection_mode, array( 'all', 'single' ), true ) ? $collection_mode : 'all';
+	}
+
 	/*
      * Tour search ajax
      * @since 2.9.7
@@ -4087,7 +4094,7 @@ class Tour {
 		// Tour date
 		$tour_date = ! empty( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
 		$tour_time = isset( $_POST['check_in_time'] ) ? sanitize_text_field( $_POST['check_in_time'] ) : null;
-		$selectedPackage = ! empty( $_POST['selectedPackage'] ) ? $_POST['selectedPackage'] : '';
+		$selectedPackage = ! empty( $_POST['selectedPackage'] ) ? sanitize_text_field( wp_unslash( $_POST['selectedPackage'] ) ) : '';
 		// var_dump($tour_time);
 
 		$post_id              = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : '';
@@ -4115,29 +4122,58 @@ class Tour {
 			return;
 		}
 
-		$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
-
-		$matched_availability = null;
-		if ( $tour_date && is_array($tour_availability) ) {
-			$input_date = strtotime($tour_date);
-
-			foreach ( $tour_availability as $date_range => $details ) {
-				if ( !isset($details['check_in'], $details['check_out'], $details['status']) ) {
-					continue;
-				}
-
-				$check_in  = strtotime(trim($details['check_in']));
-				$check_out = strtotime(trim($details['check_out']));
-				$status    = $details['status'];
-
-				if ( $status === 'available' && $input_date >= $check_in && $input_date <= $check_out ) {
-					$matched_availability = $details;
-					break; // Stop loop after first match
-				}
+		$tour_availability = '';
+		if ( ! empty( $meta['tour_availability'] ) ) {
+			if ( is_array( $meta['tour_availability'] ) ) {
+				$tour_availability = $meta['tour_availability'];
+			} elseif ( is_string( $meta['tour_availability'] ) ) {
+				$decoded = json_decode( $meta['tour_availability'], true );
+				$tour_availability = is_array( $decoded ) ? $decoded : '';
 			}
 		}
 
-		if ( $tour_type == 'fixed' && !empty($matched_availability) ) {
+		$matched_availability = Helper::tf_get_tour_matched_availability( $tour_availability, $tour_date, '' );
+		$is_date_unavailable  = ! empty( $tour_availability ) && (
+			empty( $matched_availability ) ||
+			( ! empty( $matched_availability['status'] ) && 'unavailable' === $matched_availability['status'] )
+		);
+		$selected_package_key = (string) $selectedPackage;
+
+		if ( 'package' === $pricing_rule && '' !== $selected_package_key ) {
+			$matched_availability = Helper::tf_get_tour_matched_availability_for_package( $tour_availability, $tour_date, $selected_package_key );
+			$is_date_unavailable  = ! empty( $tour_availability ) && (
+				empty( $matched_availability ) ||
+				( ! empty( $matched_availability['status'] ) && 'unavailable' === $matched_availability['status'] )
+			);
+		}
+
+		if ( 'package' === $pricing_rule ) {
+			$package_is_unavailable = false;
+
+			if ( '' === $selectedPackage ) {
+				$response['errors'][] = esc_html__( 'Please select a package.', 'tourfic' );
+			}
+
+			if ( ! empty( $matched_availability ) && '' !== $selected_package_key ) {
+				$status_key           = 'tf_option_status_' . $selected_package_key;
+				$package_status       = ! empty( $matched_availability[ $status_key ] ) ? $matched_availability[ $status_key ] : '';
+
+				if ( 'unavailable' === $package_status || ( ! empty( $matched_availability['status'] ) && 'unavailable' === $matched_availability['status'] ) ) {
+					$package_is_unavailable = true;
+					$response['errors'][] = esc_html__( 'Selected package is unavailable for this date.', 'tourfic' );
+				}
+			}
+
+			if ( $is_date_unavailable && ! $package_is_unavailable ) {
+				$response['errors'][] = esc_html__( 'This tour is unavailable for the selected date.', 'tourfic' );
+			}
+		}
+
+		if ( 'package' !== $pricing_rule && $is_date_unavailable ) {
+			$response['errors'][] = esc_html__( 'This tour is unavailable for the selected date.', 'tourfic' );
+		}
+
+		if ( $tour_type == 'fixed' && ! empty( $matched_availability ) && ! $is_date_unavailable ) {
 
 			$start_date            = ! empty( $matched_availability['check_in'] ) ? $matched_availability['check_in'] : '';
 			$end_date              = ! empty( $matched_availability['check_out'] ) ? $matched_availability['check_out'] : '';
@@ -4194,7 +4230,7 @@ class Tour {
 				}
 			}
 
-		} elseif ( $tour_type == 'continuous' && !empty($matched_availability) ) {
+		} elseif ( $tour_type == 'continuous' && ! empty( $matched_availability ) && ! $is_date_unavailable ) {
 
 			// $pricing_rule = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
 
@@ -4747,88 +4783,163 @@ class Tour {
 			$placeholder = isset( $placeholders[ $date_format ] ) ? $placeholders[ $date_format ] : 'YYYY/MM/DD';
 
 			$response['tour_packages'] = '';
-			for ( $traveller_in = 1; $traveller_in <= $total_people; $traveller_in ++ ) {
-				$response['traveller_info'] .= '<div class="tf-single-tour-traveller tf-single-travel">
-                <h4>' . sprintf( esc_html__( 'Traveler ', 'tourfic' ) ) . $traveller_in . '</h4>
-                <div class="traveller-info">';
+			$traveler_info_collection_mode = self::tf_get_traveler_info_collection_mode();
+			$traveller_info_total_people   = 'single' === $traveler_info_collection_mode ? 1 : $total_people;
+			$default_age_validation        = function_exists( 'tf_tour_get_age_validation_field_names' ) && in_array( 'tf_dob', tf_tour_get_age_validation_field_names(), true ) ? '1' : '0';
+
+			$render_traveller_fields = function( $traveller_in ) use ( $traveller_info_fields, $default_age_validation, $placeholder, $date_format ) {
+				$traveller_fields_html = '';
+
 				if ( empty( $traveller_info_fields ) ) {
-					$response['traveller_info'] .= '<div class="traveller-single-info">
-                        <label for="tf_full_name' . $traveller_in . '">' . sprintf( esc_html__( 'Full Name', 'tourfic' ) ) . '</label>
+					$traveller_fields_html .= '<div class="traveller-single-info">
+                        <label for="tf_full_name' . $traveller_in . '">' . esc_html__( 'Full Name', 'tourfic' ) . '</label>
                         <input type="text" name="traveller[' . $traveller_in . '][tf_full_name]" id="tf_full_name' . $traveller_in . '" data-required="1" />
                         <div class="error-text" data-error-for="tf_full_name' . $traveller_in . '"></div>
                     </div>
                     <div class="traveller-single-info">
-                        <label for="tf_dob' . $traveller_in . '">' . sprintf( esc_html__( 'Date of birth', 'tourfic' ) ) . '</label>
-                        <input type="text" class="tf-date-picker" 
-							name="traveller[' . $traveller_in . '][tf_dob]" 
-							id="tf_dob' . $traveller_in . '" 
-							data-required="1" 
-							placeholder="' . esc_attr( $placeholder ) . '" 
+                        <label for="tf_dob' . $traveller_in . '">' . esc_html__( 'Date of birth', 'tourfic' ) . '</label>
+                        <input type="text" class="tf-date-picker"
+							name="traveller[' . $traveller_in . '][tf_dob]"
+							id="tf_dob' . $traveller_in . '"
+							data-required="1"
+							data-age-validation="' . esc_attr( $default_age_validation ) . '"
+							placeholder="' . esc_attr( $placeholder ) . '"
 							data-format="' . esc_attr( $date_format ) . '" />
                         <div class="error-text" data-error-for="tf_dob' . $traveller_in . '"></div>
                     </div>
                     <div class="traveller-single-info">
-                        <label for="tf_nid' . $traveller_in . '">' . sprintf( esc_html__( 'NID', 'tourfic' ) ) . '</label>
+                        <label for="tf_nid' . $traveller_in . '">' . esc_html__( 'NID', 'tourfic' ) . '</label>
                         <input type="text" name="traveller[' . $traveller_in . '][tf_nid]" id="tf_nid' . $traveller_in . '" data-required="1" />
                         <div class="error-text" data-error-for="tf_nid' . $traveller_in . '"></div>
-                    </div>
-                    ';
-				} else {
-					foreach ( $traveller_info_fields as $field ) {
-						if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] ) {
-							$reg_field_required         = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
-							$response['traveller_info'] .= '
+                    </div>';
+
+					return $traveller_fields_html;
+				}
+
+				foreach ( $traveller_info_fields as $field ) {
+					if ( 'text' === $field['reg-fields-type'] || 'email' === $field['reg-fields-type'] ) {
+						$reg_field_required   = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
+						$traveller_fields_html .= '
                             <div class="traveller-single-info">
                                 <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
                                 <input type="' . $field['reg-fields-type'] . '" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $traveller_in . '" />
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
                             </div>';
-						}
-						if ( "date" == $field['reg-fields-type'] ) {
-							$reg_field_required         = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
-							$response['traveller_info'] .= '
+					}
+
+					if ( 'date' === $field['reg-fields-type'] ) {
+						$reg_field_required     = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
+						$age_validation_enabled = function_exists( 'tf_tour_get_age_validation_settings' ) ? tf_tour_get_age_validation_settings() : array();
+						$age_validation_required = ! empty( $field['reg-field-age-validation'] ) && ! empty( $age_validation_enabled['enabled'] ) ? '1' : '0';
+						$traveller_fields_html  .= '
                             <div class="traveller-single-info">
                                 <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
-                                <input type="text" class="tf-date-picker" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $traveller_in . '" placeholder="' . esc_attr( $placeholder ) . '" data-format="' . esc_attr( $date_format ) . '" />
+                                <input type="text" class="tf-date-picker" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" data-age-validation="' . esc_attr( $age_validation_required ) . '" id="' . $field['reg-field-name'] . $traveller_in . '" placeholder="' . esc_attr( $placeholder ) . '" data-format="' . esc_attr( $date_format ) . '" />
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
                             </div>';
-						}
-						if ( "select" == $field['reg-fields-type'] && ! empty( $field['reg-options'] ) ) {
-							$response['traveller_info'] .= '
+					}
+
+					if ( 'file' === $field['reg-fields-type'] ) {
+						$reg_field_required   = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
+						$traveller_fields_html .= '
                             <div class="traveller-single-info">
                                 <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
-                                <select id="' . $field['reg-field-name'] . $traveller_in . '" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $field['reg-field-required'] . '"><option value="">' . sprintf( esc_html__( 'Select One', 'tourfic' ) ) . '</option>';
-							foreach ( $field['reg-options'] as $sfield ) {
-								if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) {
-									$response['traveller_info'] .= '<option value="' . $sfield['option-value'] . '">' . $sfield['option-label'] . '</option>';
-								}
+                                <input type="file" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $traveller_in . '" accept=".pdf,.jpg,.jpeg,.png" />
+                                <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
+                            </div>';
+					}
+
+					if ( 'select' === $field['reg-fields-type'] && ! empty( $field['reg-options'] ) ) {
+						$traveller_fields_html .= '
+                            <div class="traveller-single-info">
+                                <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
+                                <select id="' . $field['reg-field-name'] . $traveller_in . '" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $field['reg-field-required'] . '"><option value="">' . esc_html__( 'Select One', 'tourfic' ) . '</option>';
+						foreach ( $field['reg-options'] as $sfield ) {
+							if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) {
+								$traveller_fields_html .= '<option value="' . $sfield['option-value'] . '">' . $sfield['option-label'] . '</option>';
 							}
-							$response['traveller_info'] .= '</select>
+						}
+						$traveller_fields_html .= '</select>
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
                             </div>';
-						}
-						if ( ( "checkbox" == $field['reg-fields-type'] || "radio" == $field['reg-fields-type'] ) && ! empty( $field['reg-options'] ) ) {
-							$response['traveller_info'] .= '
+					}
+
+					if ( ( 'checkbox' === $field['reg-fields-type'] || 'radio' === $field['reg-fields-type'] ) && ! empty( $field['reg-options'] ) ) {
+						$traveller_fields_html .= '
                             <div class="traveller-single-info">
                             <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
                             ';
-							foreach ( $field['reg-options'] as $sfield ) {
-								if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) {
-									$response['traveller_info'] .= '
+						foreach ( $field['reg-options'] as $sfield ) {
+							if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) {
+								$traveller_fields_html .= '
                                         <div class="tf-single-checkbox">
                                         <input type="' . esc_attr( $field['reg-fields-type'] ) . '" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . '][]" id="' . $sfield['option-value'] . $traveller_in . '" value="' . $sfield['option-value'] . '" data-required="' . $field['reg-field-required'] . '" />
                                         <label for="' . $sfield['option-value'] . $traveller_in . '">' . esc_html( $sfield['option-label'] ) . '</label></div>';
-								}
 							}
-							$response['traveller_info'] .= '
+						}
+						$traveller_fields_html .= '
                             <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
                             </div>';
-						}
 					}
 				}
 
-				$response['traveller_info'] .= '</div>
+				return $traveller_fields_html;
+			};
+
+			$render_traveller_block = function( $traveller_in, $traveller_title ) use ( $render_traveller_fields ) {
+				return '<div class="tf-single-tour-traveller tf-single-travel">
+                <h4>' . esc_html( $traveller_title ) . '</h4>
+                <div class="traveller-info">' . $render_traveller_fields( $traveller_in ) . '</div>
             </div>';
+			};
+
+			if ( 'single' === $traveler_info_collection_mode ) {
+				$response['traveller_info'] .= $render_traveller_block( 1, esc_html__( 'Traveler Information', 'tourfic' ) );
+			} else {
+				$passenger_type_map = function_exists( 'tf_tour_get_passenger_type_map' ) ? tf_tour_get_passenger_type_map( $adults, $children, $infant ) : array();
+				$traveller_groups   = array(
+					'adult'  => array(
+						'title' => esc_html__( 'Adults', 'tourfic' ),
+						'label' => esc_html__( 'Adult', 'tourfic' ),
+						'items' => array(),
+					),
+					'child'  => array(
+						'title' => esc_html__( 'Children', 'tourfic' ),
+						'label' => esc_html__( 'Child', 'tourfic' ),
+						'items' => array(),
+					),
+					'infant' => array(
+						'title' => esc_html__( 'Infants', 'tourfic' ),
+						'label' => esc_html__( 'Infant', 'tourfic' ),
+						'items' => array(),
+					),
+				);
+
+				for ( $traveller_in = 1; $traveller_in <= $traveller_info_total_people; $traveller_in++ ) {
+					$passenger_type = ! empty( $passenger_type_map[ $traveller_in ] ) ? $passenger_type_map[ $traveller_in ] : 'adult';
+					if ( ! isset( $traveller_groups[ $passenger_type ] ) ) {
+						continue;
+					}
+
+					$traveller_groups[ $passenger_type ]['items'][] = $traveller_in;
+				}
+
+				foreach ( $traveller_groups as $traveller_group ) {
+					if ( empty( $traveller_group['items'] ) ) {
+						continue;
+					}
+
+					$response['traveller_info'] .= '<div class="tf-traveller-group">
+                    <h4 class="tf-traveller-group-title">' . esc_html( $traveller_group['title'] ) . '</h4>';
+
+					$group_index = 1;
+					foreach ( $traveller_group['items'] as $traveller_in ) {
+						$response['traveller_info'] .= $render_traveller_block( $traveller_in, $traveller_group['label'] . ' ' . $group_index );
+						$group_index++;
+					}
+
+					$response['traveller_info'] .= '</div>';
+				}
 			}
 			$tour_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 			$response['traveller_summery'] .= '<h6>' . esc_html__("On ", 'tourfic') . self::tf_date_format_user( $tour_date, $tour_date_format_for_users ) . '</h6>';
@@ -4953,20 +5064,59 @@ class Tour {
 
 		}
 
-		if(!empty($matched_availability['options_count'])){
-			$filtered_times = [];
+			if ( 'package' === $pricing_rule ) {
+				$filtered_times     = array();
+				$package_status_map = array();
+				$package_indexes    = array();
 
-			foreach ($matched_availability as $key => $value) {
-				if (strpos($key, 'tf_option_times_') === 0 && is_array($value)) {
-					$index = str_replace('tf_option_times_', '', $key);
-
-					// Check if 'time' exists and contains at least one non-empty value
-					if (!empty($value['time']) && array_filter($value['time'])) {
-						$filtered_times[$index] = array_values(array_filter($value['time']));
+				if ( is_array( $tf_package_pricing ) ) {
+					foreach ( $tf_package_pricing as $package_index => $package_data ) {
+						$package_indexes[] = (string) $package_index;
 					}
+
+					$package_indexes = array_values( array_unique( $package_indexes ) );
+				}
+
+			if ( empty( $package_indexes ) && ! empty( $matched_availability['options_count'] ) ) {
+				for ( $i = 0; $i <= (int) $matched_availability['options_count'] - 1; $i++ ) {
+					$package_indexes[] = (string) $i;
 				}
 			}
-			if(!empty($filtered_times)){
+
+			foreach ( $package_indexes as $index ) {
+				$status_key = 'tf_option_status_' . $index;
+				$times_key  = 'tf_option_times_' . $index;
+				$package_status = 'available';
+
+				$package_matched_availability = Helper::tf_get_tour_matched_availability_for_package( $tour_availability, $tour_date, $index );
+				if ( ! empty( $package_matched_availability ) ) {
+					if ( ! empty( $package_matched_availability['status'] ) && 'unavailable' === $package_matched_availability['status'] ) {
+						$package_status = 'unavailable';
+					} elseif ( ! empty( $package_matched_availability[ $status_key ] ) ) {
+						$package_status = $package_matched_availability[ $status_key ];
+					}
+				} elseif ( ! empty( $tour_availability ) ) {
+					$package_status = 'unavailable';
+				}
+
+				$package_status_map[ $index ] = $package_status;
+
+				if ( 'unavailable' === $package_status ) {
+					continue;
+				}
+
+				if (
+					! empty( $package_matched_availability[ $times_key ] ) &&
+					is_array( $package_matched_availability[ $times_key ] ) &&
+					! empty( $package_matched_availability[ $times_key ]['time'] ) &&
+					array_filter( $package_matched_availability[ $times_key ]['time'] )
+				) {
+					$filtered_times[ $index ] = array_values( array_filter( $package_matched_availability[ $times_key ]['time'] ) );
+				}
+			}
+
+			$response['package_statuses'] = $package_status_map;
+			if ( ! empty( $filtered_times ) ) {
 				$response['pacakge_times'] = $filtered_times;
 			}
 		}

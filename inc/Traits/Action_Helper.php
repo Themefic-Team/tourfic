@@ -712,7 +712,7 @@ trait Action_Helper {
 	 */
 	function tf_admin_role_caps() {
 
-		if ( get_option( 'tf_admin_caps' ) < 7 ) {
+		if ( get_option( 'tf_admin_caps' ) < 8 ) {
 			$admin_role  = get_role( 'administrator' );
 			$editor_role = get_role( 'editor' );
 
@@ -801,7 +801,7 @@ trait Action_Helper {
 				$editor_role->add_cap( $cap );
 			}
 
-			update_option( 'tf_admin_caps', 7 );
+			update_option( 'tf_admin_caps', 8 );
 		}
 	}
 

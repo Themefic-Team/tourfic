@@ -1,9 +1,9 @@
 === Tourfic – Travel Booking, Hotel Booking & Car Rental WordPress Plugin ===
-Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi, hasanet
+Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, hellokhoyer, mainulsunvi, hasanet
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.21.8
+Stable tag: 2.22.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -189,7 +189,13 @@ Tourfic offers many important features and works smoothly with WooCommerce to ha
 * Email verification for vendors
 * Frontend Dashboard for Vendors
 
-In short, Tourfic includes all the features for a multi-vendor hotel, travel, Apartment and car rental booking system in WordPress.
+= 🎉 AI INTEGRATION (PRO) =
+* Create hotel listings with AI
+* Create tour listings with AI 
+* Create car listings with AI 
+* Create apartment listings with AI 
+
+In short, Tourfic includes all the features for a multi-vendor hotel, travel, apartment, and car rental booking system in WordPress.
 
 = 🎉 API BASED AFFILIATE INTEGRATION (PRO) =
 * Booking.com Affiliate Program
@@ -417,6 +423,16 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.22.0 – April 16, 2026 =
+
+- New: AI integrations with Tourfic (Pro).
+- New: Create tour, hotel, car, and apartment listings with AI (Pro).
+- Added: File upload support in traveller information.
+- Improved: Traveller details handling and overall experience.
+- Fixed: iCal sync, availability calendar, and car rental date range issues.
+- Fixed: Deposit calculation issue in car rental bookings.
+- Tweak: Added age validation in traveller details.
+
 = 2.21.8 – April 01, 2026 =
 
 - Added Tourfic Overview widget to the dashboard.
@@ -425,35 +441,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 - Tweak: Backend booking and email functionality.
 - Improved: Hooks and overall system stability.
-
-= 2.21.6 – Mar 28, 2026 =
-
-- Improved: UI/UX updated for the car rental.
-- Improved: UI/UX updated for the car discount price.
-
-= 2.21.5 – Mar 26, 2026 =
-
-- New: CarPlay / Android Auto support and dynamic car filters.
-- Improved: Simplified connectivity filter and optimized assets.
-- Fixed: Date handling, booking popup, pricing sync, and tooltip display issues.
-- Fixed: Minor UI issues, including labels and pricing display.
-- Security: Restricted gallery access for non-public posts.
-
-= 2.21.4 – Mar 18, 2026 =
-
-- New: Apartment deposit settings with partial payment support
-- New: Apartment booking without payment option
-- New: Dynamic frontend availability for services
-- New: Sidebar details added to Tourfic settings page
-- Improved: Booking and pricing for tours, hotels, apartments, and cars
-- Improved: Archive filtering, listing accuracy, and widget rendering
-- Improved: System stability, AJAX handling, and experience
-- Tweak: Apartment template alignment and popup UI
-- Tweak: Booking step visibility for no-payment mode
-- Tweak: Archive listing structure and featured loop behavior
-- Tweak: Car and tour filter compatibility and price range display
-- Fixed: Tour package pricing fallback in backend booking
-- Fixed: Zero-price handling and checkout-related issues
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 

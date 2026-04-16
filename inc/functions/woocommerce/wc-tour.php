@@ -50,11 +50,31 @@ function tf_tours_booking_function() {
 	$make_deposit = ! empty( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 
 	// Tour Package
-	$selectedPackage = ! empty( $_POST['selectedPackage'] ) ? $_POST['selectedPackage'] : '';
+	$selectedPackage = ! empty( $_POST['selectedPackage'] ) ? sanitize_text_field( wp_unslash( $_POST['selectedPackage'] ) ) : '';
 	$tf_package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
 	// Visitor Details
 	$tf_visitor_details = !empty($_POST['traveller']) ? wp_unslash( $_POST['traveller'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+	if ( function_exists( 'tf_tour_process_traveler_document_fields' ) ) {
+		$tf_visitor_details = tf_tour_process_traveler_document_fields( $tf_visitor_details, $post_id );
+		if ( is_wp_error( $tf_visitor_details ) ) {
+			$response['errors'][] = $tf_visitor_details->get_error_message();
+			$response['status']   = 'error';
+			echo wp_json_encode( $response );
+			die();
+		}
+	}
+
+	if ( function_exists( 'tf_tour_validate_traveler_age_limits' ) ) {
+		$traveler_age_validation = tf_tour_validate_traveler_age_limits( $tf_visitor_details, $adults, $children, $infant, $tour_date );
+		if ( is_wp_error( $traveler_age_validation ) ) {
+			$response['errors'][] = $traveler_age_validation->get_error_message();
+			$response['status']   = 'error';
+			echo wp_json_encode( $response );
+			die();
+		}
+	}
 
 	// Booking Confirmation Details
 	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? wp_unslash( $_POST['booking_confirm'] ) : ""; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
@@ -86,29 +106,58 @@ function tf_tours_booking_function() {
 		return;
 	}
 
-	$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
-
-	$matched_availability = null;
-	if ( $tour_date && is_array($tour_availability) ) {
-		$input_date = strtotime($tour_date);
-
-		foreach ( $tour_availability as $date_range => $details ) {
-			if ( !isset($details['check_in'], $details['check_out'], $details['status']) ) {
-				continue;
-			}
-
-			$check_in  = strtotime(trim($details['check_in']));
-			$check_out = strtotime(trim($details['check_out']));
-			$status    = $details['status'];
-
-			if ( $status === 'available' && $input_date >= $check_in && $input_date <= $check_out ) {
-				$matched_availability = $details;
-				break; // Stop loop after first match
-			}
+	$tour_availability = '';
+	if ( ! empty( $meta['tour_availability'] ) ) {
+		if ( is_array( $meta['tour_availability'] ) ) {
+			$tour_availability = $meta['tour_availability'];
+		} elseif ( is_string( $meta['tour_availability'] ) ) {
+			$decoded = json_decode( $meta['tour_availability'], true );
+			$tour_availability = is_array( $decoded ) ? $decoded : '';
 		}
 	}
 
-	if ( $tour_type == 'fixed' && !empty($matched_availability) ) {
+	$matched_availability = Helper::tf_get_tour_matched_availability( $tour_availability, $tour_date, '' );
+	$is_date_unavailable  = ! empty( $tour_availability ) && (
+		empty( $matched_availability ) ||
+		( ! empty( $matched_availability['status'] ) && 'unavailable' === $matched_availability['status'] )
+	);
+	$selected_package_key = (string) $selectedPackage;
+
+	if ( 'package' === $pricing_rule && '' !== $selected_package_key ) {
+		$matched_availability = Helper::tf_get_tour_matched_availability_for_package( $tour_availability, $tour_date, $selected_package_key );
+		$is_date_unavailable  = ! empty( $tour_availability ) && (
+			empty( $matched_availability ) ||
+			( ! empty( $matched_availability['status'] ) && 'unavailable' === $matched_availability['status'] )
+		);
+	}
+
+	if ( 'package' === $pricing_rule ) {
+		$package_is_unavailable = false;
+
+		if ( '' === $selectedPackage ) {
+			$response['errors'][] = esc_html__( 'Please select a package.', 'tourfic' );
+		}
+
+		if ( ! empty( $matched_availability ) && '' !== $selected_package_key ) {
+			$status_key           = 'tf_option_status_' . $selected_package_key;
+			$package_status       = ! empty( $matched_availability[ $status_key ] ) ? $matched_availability[ $status_key ] : '';
+
+			if ( 'unavailable' === $package_status || ( ! empty( $matched_availability['status'] ) && 'unavailable' === $matched_availability['status'] ) ) {
+				$package_is_unavailable = true;
+				$response['errors'][] = esc_html__( 'Selected package is unavailable for this date.', 'tourfic' );
+			}
+		}
+
+		if ( $is_date_unavailable && ! $package_is_unavailable ) {
+			$response['errors'][] = esc_html__( 'This tour is unavailable for the selected date.', 'tourfic' );
+		}
+	}
+
+	if ( 'package' !== $pricing_rule && $is_date_unavailable ) {
+		$response['errors'][] = esc_html__( 'This tour is unavailable for the selected date.', 'tourfic' );
+	}
+
+	if ( $tour_type == 'fixed' && ! empty( $matched_availability ) && ! $is_date_unavailable ) {
 
 		$start_date            = ! empty( $matched_availability['check_in'] ) ? $matched_availability['check_in'] : '';
 		$end_date              = ! empty( $matched_availability['check_out'] ) ? $matched_availability['check_out'] : '';
@@ -207,7 +256,7 @@ function tf_tours_booking_function() {
 			}
 		}
 
-	} elseif ( $tour_type == 'continuous' && !empty($matched_availability) ) {
+	} elseif ( $tour_type == 'continuous' && ! empty( $matched_availability ) && ! $is_date_unavailable ) {
 
 		// $pricing_rule = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
 		$min_people = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : '';
