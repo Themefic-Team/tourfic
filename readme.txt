@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.21.8
+Stable tag: 2.22.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -416,6 +416,15 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 23. Elementor Page Builder support.
 
 == Changelog ==
+
+= 2.22.0 – April 16, 2026 =
+
+- New: AI integrations for tours, hotels, car rentals, and apartments.
+- Added: File upload support in traveller information.
+- Improved: Traveller details handling and overall experience.
+- Fixed: iCal sync, availability calendar, and car rental date range issues.
+- Fixed: Deposit calculation issue in car rental bookings.
+- Tweak: Added age validation in traveller details.
 
 = 2.21.8 – April 01, 2026 =
 
