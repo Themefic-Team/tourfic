@@ -420,7 +420,6 @@ class Booking_Form {
             </div>
             <?php } ?>
 
-
             <div class="tf-date-select-box">
 
                 <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn">

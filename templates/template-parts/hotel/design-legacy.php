@@ -206,20 +206,15 @@ use \Tourfic\Classes\Helper;
         </div>
     <?php } ?>
 
-    <!-- Start Review Section -->
-	<?php if ( ! $disable_review_sec == 1 ) { ?>
-        <div id="tf-review" class="review-section sp-50">
-            <div class="tf-container">
-                <div class="reviews">
-                    <h2 class="section-heading"><?php echo ! empty( $meta['review-section-title'] ) ? esc_html( $meta['review-section-title'] ) : ''; ?></h2>
-					<?php comments_template(); ?>
-                </div>
-            </div>
-        </div>
-	<?php } ?>
-    <!-- End Review Section -->
-
-	<?php
+	<?php 
+    \Tourfic\App\Templates\Components\Global\Single\Review::render([
+        'review_style' => 'design-3',
+        'container' => 'yes',
+        'wrapper' => 'no',
+        'wrapper_open' => '<div class="sp-50">',
+        'wrapper_close' => '</div>',
+    ]);
+    
     \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render([
         'wrapper_open' => '<div class="toc-section sp-50"><div class="tf-container">',
         'wrapper_close' => '</div></div>',
