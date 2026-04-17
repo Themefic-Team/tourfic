@@ -3,7 +3,6 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
-use \Tourfic\App\TF_Review;
 ?>
 
 <div class="tf-single-template__two">

@@ -4,7 +4,6 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
-use \Tourfic\Classes\Apartment\Apartment;
 ?>
 
 <div class="tf-single-template__legacy">
@@ -47,9 +46,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                 <div class="tf-apartment-left">
 
 					<?php 
-                        \Tourfic\App\Templates\Components\Global\Single\Highlights::render([
-                            'highlights_style' => 'style2'
-                        ]);
+                        \Tourfic\App\Templates\Components\Global\Single\Highlights::render(['highlights_style' => 'style2']);
 
                         \Tourfic\App\Templates\Components\Global\Single\Description::render([
                             'show_title' => 'yes',
@@ -57,11 +54,14 @@ use \Tourfic\Classes\Apartment\Apartment;
                             'wrapper_open' => '<div class="tf-mb-50">',
                             'wrapper_close' => '</div>'
                         ]); 
-                    ?>
 
-					<?php \Tourfic\App\Templates\Components\Global\Single\Rooms::render(['room_style' => 'style2', 'wrapper' => 'no']); ?>
+                        \Tourfic\App\Templates\Components\Global\Single\Rooms::render([
+                            'room_style' => 'style2', 
+                            'wrapper' => 'no'
+                        ]);
 
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Amenities::render(['amenities_style' => 'style2']); ?>
+                        \Tourfic\App\Templates\Components\Global\Single\Amenities::render(['amenities_style' => 'style2']); 
+                        ?>
                 </div>
                 <!-- Host details -->
                 <div class="tf-apartment-right">
@@ -70,6 +70,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                         'booking_form_style' => 'style2',
                         'wrapper' => 'no',
                     ]);
+
                     \Tourfic\App\Templates\Components\Apartment\Single\Host_Info::render(); 
                     ?>
                 </div>
@@ -95,25 +96,20 @@ use \Tourfic\Classes\Apartment\Apartment;
         </div>
 	<?php endif; ?>
 
-	<?php if ( $disable_review_sec !== '1' ) : ?>
-        <div id="tf-review" class="review-section tf-apartment-review">
-            <div class="tf-container">
-                <div class="reviews">
-                    <h2 class="section-heading"><?php echo ! empty( $meta['review-section-title'] ) ? esc_html( $meta['review-section-title'] ) : ''; ?></h2>
-					<?php comments_template(); ?>
-                </div>
-            </div>
-        </div>
-	<?php endif; ?>
-
 	<?php 
+    \Tourfic\App\Templates\Components\Global\Single\Review::render([
+        'review_style' => 'design-1',
+        'container' => 'yes',
+        'wrapper' => 'no',
+        'wrapper_open' => '<div class="tf-apartment-review">',
+        'wrapper_close' => '</div>',
+    ]);
+ 
     \Tourfic\App\Templates\Components\Global\Single\House_Rules::render([
         'house_rules_style' => 'style2', 
         'container' => 'yes',
     ]); 
-    ?>
-
-	<?php 
+   
     \Tourfic\App\Templates\Components\Global\Single\FAQ::render([
         'wrapper_open' => '<div class="tf-faq-wrapper tf-apartment-faq">',
         'wrapper_close' => '</div>',

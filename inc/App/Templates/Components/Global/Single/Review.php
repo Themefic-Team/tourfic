@@ -264,7 +264,7 @@ class Review {
 		if ( $style === 'design-2' && $disable_review_sec != 1 ) {
 			?>
 			<?php echo 'yes' === $wrapper ? '<div class="tf-single-template__two tf-room-single-review__style-2">' : ''; ?>
-				<div class="tf-sitebar-widgets tf-single-widgets">
+				<?php echo ($show_review_states == 'yes' || $show_review_form == 'yes') ? '<div class="tf-sitebar-widgets tf-single-widgets">' : ''; ?>
 					<?php
 					global $current_user;
 					$is_user_logged_in = $current_user->exists();
@@ -356,7 +356,7 @@ class Review {
 						}
 					endif;
 					?>
-				</div>
+                <?php echo ($show_review_states == 'yes' || $show_review_form == 'yes') ? '</div>' : ''; ?>
 
 				<?php if ( $comments && $show_reviews == 'yes' ) { ?>
 				<div class="tf-reviews-wrapper" id="tf-hotel-reviews">
@@ -437,7 +437,13 @@ class Review {
 							</div>
 						</div>
 					<?php endif; ?>
-					<?php static::review_template( $settings, $post_id ); ?>
+					<?php 
+                        if(!empty($builder)){
+                            static::review_template( $settings, $post_id );
+                        } else {
+                            comments_template();
+                        }
+                    ?>
 				</div>
 			<?php echo 'yes' === $wrapper ? '</div>' : ''; ?>
 			<?php
@@ -580,7 +586,13 @@ class Review {
                     <?php echo 'yes' === $container ? '<div class="tf-container">' : ''; ?>
                         <div class="reviews">
                             <h2 class="section-heading"><?php echo ! empty( $meta['review-section-title'] ) ? esc_html( $meta['review-section-title'] ) : ''; ?></h2>
-                            <?php static::review_template( $settings, $post_id ); ?>
+                            <?php 
+                                if(!empty($builder)){
+                                    static::review_template( $settings, $post_id );
+                                } else {
+                                    comments_template();
+                                }
+                            ?>
                         </div>
                     <?php echo 'yes' === $container ? '</div>' : ''; ?>
 				</div>
@@ -747,10 +759,18 @@ class Review {
 			?>
 			<?php echo 'yes' === $wrapper ? '<div class="tf-single-template__legacy tf-single-review__style-legacy">' : ''; ?>
 				<div id="tf-review" class="review-section">
+                    <?php echo 'yes' === $container ? '<div class="tf-container">' : ''; ?>
 					<div class="reviews">
 						<h2 class="section-heading"><?php echo ! empty( $meta['review-section-title'] ) ? esc_html( $meta['review-section-title'] ) : ''; ?></h2>
-						<?php static::review_template( $settings, $post_id ); ?>
+						<?php 
+                            if(!empty($builder)){
+                                static::review_template( $settings, $post_id );
+                            } else {
+                                comments_template();
+                            }
+                        ?>
 					</div>
+                    <?php echo 'yes' === $container ? '</div>' : ''; ?>
 				</div>
 			<?php echo 'yes' === $wrapper ? '</div>' : ''; ?>
 			<?php
@@ -786,7 +806,7 @@ class Review {
 
 		if ( $style === 'design-1' ) {
 			?>
-			<?php echo 'yes' === $wrapper ? '<div class="tf-single-template__one tf-car-single-review__style-1">' : ''; ?>
+			<?php echo 'yes' === $wrapper ? '<div class="tf-single-template__one tf-car-single-review__style-1 sp-0">' : ''; ?>
 				<div class="tf-review-section" id="tf-reviews">
 					<?php if ( $comments ) {
 						$tf_overall_rate = [];
