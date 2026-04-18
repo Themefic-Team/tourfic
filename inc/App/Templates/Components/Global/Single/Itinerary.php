@@ -30,22 +30,16 @@ class Itinerary {
 
 		$itinerary_map = ! empty( Helper::tfopt( 'itinerary_map' ) ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ? Helper::tfopt( 'itinerary_map' ) : 0;
 		$style         = ! empty( $settings['itinerary_style'] ) ? $settings['itinerary_style'] : 'style1';
-		$itinerary_status          = ! empty( Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) )['itinerary-status'] ) ? Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) )['itinerary-status'] : '';
-		$itinerary_chart           = ! empty( Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) )['itinerary-chart'] ) ? Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) )['itinerary-chart'] : '';
-		$tf_itinearay_downloader   = isset( $meta['itinerary-downloader'] ) ? $meta['itinerary-downloader'] : '';
 		$tf_openstreet_map         = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : 'default';
 		$tf_google_map_key         = ! empty( Helper::tfopt( 'tf-googlemapapi' ) ) ? Helper::tfopt( 'tf-googlemapapi' ) : '';
-		$itinary_download_global_opt = ! empty( Helper::tfopt( 'itinerary-builder-setings' )['itinerary-downloader'] ) ? Helper::tfopt( 'itinerary-builder-setings' )['itinerary-downloader'] : 0;
 
 		$location            = '';
 		$location_latitude   = '';
 		$location_longitude  = '';
-		$location_zoom       = 2;
 		if ( ! empty( $meta['location'] ) && Helper::tf_data_types( $meta['location'] ) ) {
 			$location           = ! empty( Helper::tf_data_types( $meta['location'] )['address'] ) ? Helper::tf_data_types( $meta['location'] )['address'] : $location;
 			$location_latitude  = ! empty( Helper::tf_data_types( $meta['location'] )['latitude'] ) ? Helper::tf_data_types( $meta['location'] )['latitude'] : '';
 			$location_longitude = ! empty( Helper::tf_data_types( $meta['location'] )['longitude'] ) ? Helper::tf_data_types( $meta['location'] )['longitude'] : '';
-			$location_zoom      = ! empty( Helper::tf_data_types( $meta['location'] )['zoom'] ) ? Helper::tf_data_types( $meta['location'] )['zoom'] : 2;
 		}
 
 		if ( 'style1' === $style ) {
