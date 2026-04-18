@@ -38,23 +38,30 @@ class Template_Builder {
             add_filter( 'bricks/get_builder_edit_link', [ $this, 'add_template_params_to_bricks_edit_link' ], 10, 2 );
             add_filter( 'bricks/dynamic_data/filter_tag', [ $this, 'bricks_filter_dynamic_post_context' ], 10, 3 );
             add_filter( 'wp_insert_post_data', [ $this, 'bricks_save_to_template_post' ], 10, 2 );
+            add_action( 'init', [ $this, 'ensure_bricks_template_builder_support' ], 30 );
+        }
+	}
+
+    /**
+     * Ensure Bricks editor is enabled for our template builder CPT.
+     */
+    public function ensure_bricks_template_builder_support() {
+        // Bricks stores enabled post types in this option.
+        $settings = get_option( 'bricks_global_settings', [] );
+
+        if ( ! is_array( $settings ) ) {
+            $settings = [];
         }
 
-        // add_action('init', function() {
-        //     if ( !function_exists( 'bricks_is_builder' ) || !defined( 'BRICKS_VERSION' ) ) {
-        //         $settings = get_option('bricks_settings');
+        if ( empty( $settings['postTypes'] ) || ! is_array( $settings['postTypes'] ) ) {
+            $settings['postTypes'] = [];
+        }
 
-        //         if (!isset($settings['postTypes'])) {
-        //             $settings['postTypes'] = [];
-        //         }
-
-        //         if (!in_array('tf_template_builder', $settings['postTypes'])) {
-        //             $settings['postTypes'][] = 'tf_template_builder';
-        //             update_option('bricks_settings', $settings);
-        //         }
-        //     }
-        // }, 20);
-	}
+        if ( ! in_array( 'tf_template_builder', $settings['postTypes'], true ) ) {
+            $settings['postTypes'][] = 'tf_template_builder';
+            update_option( 'bricks_global_settings', $settings );
+        }
+    }
 
     /*public function add_bricks_admin_bar_link( $wp_admin_bar ) {
         if ( ! is_admin_bar_showing() || ! current_user_can( 'edit_posts' ) ) {
