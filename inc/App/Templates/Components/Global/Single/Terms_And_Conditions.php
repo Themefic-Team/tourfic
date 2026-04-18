@@ -53,7 +53,7 @@ class Terms_And_Conditions {
 		// Render car rental format (table)
 		if ( 'tf_carrental' === $post_type ) {
 			?>
-			<div class="tf-single-template__one tf-single-car-terms-and-conditions-style-1">
+			<div class="tf-single-template__one tf-single-car-terms-and-conditions-style-1 sp-0">
 				<div class="tf-car-conditions-section" id="tf-tc">
 					<?php if ( ! empty( $tc_title ) ) { ?>
 						<h3><?php echo esc_html( $tc_title ); ?></h3>

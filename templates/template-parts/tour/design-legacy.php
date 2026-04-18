@@ -182,56 +182,12 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         'included_excluded_style' => 'style3',
         'wrapper' => 'no',
     ]);
+    
+    \Tourfic\App\Templates\Components\Global\Single\Itinerary::render([
+        'itinerary_style' => 'style3',
+        'wrapper' => 'no',
+    ]); 
     ?>
-
-    <!-- Travel Itinerary section Start -->
-    <?php
-    if ( function_exists('is_tf_pro') && is_tf_pro() ) {
-        do_action( 'after_itinerary_builder', $itineraries, $itinerary_map );
-    } else {
-        ?>
-        <!-- Travel Itinerary section Start -->
-        <?php if ( $itineraries ) { ?>
-            <div class="tf-travel-itinerary-wrapper sp-50">
-                <div class="tf-container">
-                    <div class="tf-travel-itinerary-content">
-                        <h2 class="section-heading"><?php echo !empty($meta['itinerary-section-title']) ? esc_html($meta['itinerary-section-title']) : ''; ?></h2>
-                        <div class="tf-travel-itinerary-items-wrapper">
-                            <?php 
-                            foreach ( $itineraries as $itinerary ) {
-                            ?>
-                                <div id="tf-accordion-wrapper">
-                                    <div class="tf-accordion-head">
-                                        <div class="tf-travel-time">
-                                            <span><?php echo esc_html( $itinerary['time'] ) ?></span>
-                                        </div>
-                                        <h4><?php echo esc_html( $itinerary['title'] ); ?></h4>
-                                        <i class="fas fa-angle-down arrow"></i>
-                                    </div>
-                                    <div class="tf-accordion-content">
-                                        <div class="tf-travel-desc">
-                                            <?php if ( $itinerary['image'] ) {
-                                                echo '<div class="tf-ititnerary-img"><a class="tf-itinerary-gallery" href="' . esc_url( $itinerary['image'] ) . '"><img src="' . esc_url( $itinerary['image'] ) . '"></a></div>';
-                                            } ?>
-                                            <div class="trav-cont tf-travel-description">
-                                                <p><?php echo wp_kses_post( $itinerary['desc'] ); ?></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php if ( $location && $itinerary_map != 1){
-                \Tourfic\App\Templates\Components\Global\Single\Map::render([], '', '600px', false);
-            } ?>
-        <?php
-        }
-    } 
-    ?>
-    <!-- Travel Itinerary section End -->
 
     <!-- FAQ section Start -->
     <?php if ( $faqs ): ?>
