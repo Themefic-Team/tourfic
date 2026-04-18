@@ -311,31 +311,46 @@ class Template_Builder {
         <div class="wrap">
             <h1><?php echo esc_html__('Template Builder', 'tourfic'); ?></h1>
             <div class="notice notice-error" style="margin-top: 20px;">
-                <p><?php esc_html_e('Please install and activate Elementor to use the Template Builder.', 'tourfic'); ?></p>
+                <p><?php esc_html_e('Please install and activate Elementor or Bricks Builder to use the Template Builder.', 'tourfic'); ?></p>
 
                 <?php
-                $plugin_slug = 'elementor/elementor.php';
+                $elementor_slug = 'elementor/elementor.php';
+                $elementor_installed = file_exists( WP_PLUGIN_DIR . '/elementor/elementor.php' );
+                $elementor_active    = $elementor_installed && is_plugin_active( $elementor_slug );
 
-                // Elementor not installed
-                if ( ! file_exists( WP_PLUGIN_DIR . '/elementor/elementor.php' ) ) {
-                    $install_url = wp_nonce_url(
-                        self_admin_url( 'update.php?action=install-plugin&plugin=elementor' ),
-                        'install-plugin_elementor'
-                    );
-                    echo '<p><a href="' . esc_url( $install_url ) . '" class="button button-primary">';
-                    esc_html_e( 'Install Elementor', 'tourfic' );
-                    echo '</a></p>';
-                }
-                // Elementor installed but inactive
-                elseif ( current_user_can( 'activate_plugins' ) && ! is_plugin_active( $plugin_slug ) ) {
+                $bricks_installed = wp_get_theme( 'bricks' )->exists();
+                $bricks_active    = ( get_stylesheet() === 'bricks' || get_template() === 'bricks' );
+
+                if ( ! $elementor_active ) :
+                    if ( ! $elementor_installed ) :
+                        $install_url = wp_nonce_url(
+                            self_admin_url( 'update.php?action=install-plugin&plugin=elementor' ),
+                            'install-plugin_elementor'
+                        );
+                        echo '<p><a href="' . esc_url( $install_url ) . '" class="button button-primary">';
+                        esc_html_e( 'Install Elementor', 'tourfic' );
+                        echo '</a></p>';
+                    elseif ( current_user_can( 'activate_plugins' ) ) :
+                        $activate_url = wp_nonce_url(
+                            self_admin_url( 'plugins.php?action=activate&plugin=' . $elementor_slug ),
+                            'activate-plugin_' . $elementor_slug
+                        );
+                        echo '<p><a href="' . esc_url( $activate_url ) . '" class="button button-primary">';
+                        esc_html_e( 'Activate Elementor', 'tourfic' );
+                        echo '</a></p>';
+                    endif;
+                endif;
+
+                // Bricks is a premium theme — show activate link only if installed but not active
+                if ( ! $bricks_active && $bricks_installed && current_user_can( 'switch_themes' ) ) :
                     $activate_url = wp_nonce_url(
-                        self_admin_url( 'plugins.php?action=activate&plugin=' . $plugin_slug ),
-                        'activate-plugin_' . $plugin_slug
+                        admin_url( 'themes.php?action=activate&stylesheet=bricks' ),
+                        'switch-theme_bricks'
                     );
-                    echo '<p><a href="' . esc_url( $activate_url ) . '" class="button button-primary">';
-                    esc_html_e( 'Activate Elementor', 'tourfic' );
+                    echo '<p><a href="' . esc_url( $activate_url ) . '" class="button button-secondary">';
+                    esc_html_e( 'Activate Bricks Theme', 'tourfic' );
                     echo '</a></p>';
-                }
+                endif;
                 ?>
             </div>
         </div>
@@ -705,25 +720,61 @@ class Template_Builder {
                                 </div>
                                 
                                 <div class="tf-form-actions">
-                                    <button type="button" id="tf-edit-with-elementor" class="tf-admin-btn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <mask id="mask0_747_79" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="29" height="29">
-                                            <path d="M28.5 0.5V28.5H0.5V0.5H28.5Z" fill="white" stroke="white"/>
-                                        </mask>
-                                        <g mask="url(#mask0_747_79)">
-                                            <path d="M12 0C5.37193 0 0 5.37193 0 12C0 18.6259 5.37193 24 12 24C18.6281 24 24 18.6281 24 12C23.9978 5.37193 18.6259 0 12 0ZM9.00054 16.9984H7.00164V6.99948H9.00054V16.9984ZM16.9984 16.9984H10.9994V14.9995H16.9984V16.9984ZM16.9984 12.9983H10.9994V10.9994H16.9984V12.9983ZM16.9984 8.99838H10.9994V6.99948H16.9984V8.99838Z" fill="#003C79"/>
-                                        </g>
-                                        </svg>
-                                        <?php echo esc_html__('Edit With Elementor', 'tourfic'); ?>
-                                    </button>
-                                    <?php if ( function_exists( 'bricks_is_builder' ) || defined( 'BRICKS_VERSION' ) ) : ?>
-                                        <button type="button" id="tf-edit-with-bricks" class="tf-admin-btn">
+                                    <?php
+                                    $elementor_active = did_action( 'elementor/loaded' );
+                                    $bricks_active    = ( function_exists( 'bricks_is_builder' ) || defined( 'BRICKS_VERSION' ) );
+
+                                    $elementor_installed = file_exists( WP_PLUGIN_DIR . '/elementor/elementor.php' );
+                                    $bricks_theme_installed = wp_get_theme( 'bricks' )->exists();
+                                    ?>
+                                    <div class="tf-builder-btn-wrap">
+                                        <button type="button" id="tf-edit-with-elementor" class="tf-admin-btn<?php echo $elementor_active ? '' : ' tf-btn-disabled'; ?>"<?php echo $elementor_active ? '' : ' disabled'; ?>>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <mask id="mask0_747_79" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="29" height="29">
+                                                <path d="M28.5 0.5V28.5H0.5V0.5H28.5Z" fill="white" stroke="white"/>
+                                            </mask>
+                                            <g mask="url(#mask0_747_79)">
+                                                <path d="M12 0C5.37193 0 0 5.37193 0 12C0 18.6259 5.37193 24 12 24C18.6281 24 24 18.6281 24 12C23.9978 5.37193 18.6259 0 12 0ZM9.00054 16.9984H7.00164V6.99948H9.00054V16.9984ZM16.9984 16.9984H10.9994V14.9995H16.9984V16.9984ZM16.9984 12.9983H10.9994V10.9994H16.9984V12.9983ZM16.9984 8.99838H10.9994V6.99948H16.9984V8.99838Z" fill="#003C79"/>
+                                            </g>
+                                            </svg>
+                                            <?php echo esc_html__('Edit With Elementor', 'tourfic'); ?>
+                                        </button><br>
+                                        <?php if ( ! $elementor_active ) : ?>
+                                            <span class="tf-builder-notice">
+                                                <?php if ( ! $elementor_installed ) : ?>
+                                                    <?php esc_html_e( 'Elementor is required.', 'tourfic' ); ?>
+                                                    <a href="<?php echo esc_url( wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=elementor' ), 'install-plugin_elementor' ) ); ?>">
+                                                        <?php esc_html_e( 'Install Elementor', 'tourfic' ); ?>
+                                                    </a>
+                                                <?php elseif ( current_user_can( 'activate_plugins' ) ) : ?>
+                                                    <?php esc_html_e( 'Elementor is inactive.', 'tourfic' ); ?>
+                                                    <a href="<?php echo esc_url( wp_nonce_url( self_admin_url( 'plugins.php?action=activate&plugin=elementor/elementor.php' ), 'activate-plugin_elementor/elementor.php' ) ); ?>">
+                                                        <?php esc_html_e( 'Activate Elementor', 'tourfic' ); ?>
+                                                    </a>
+                                                <?php endif; ?>
+                                            </span>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="tf-builder-btn-wrap">
+                                        <button type="button" id="tf-edit-with-bricks" class="tf-admin-btn<?php echo $bricks_active ? '' : ' tf-btn-disabled'; ?>"<?php echo $bricks_active ? '' : ' disabled'; ?>>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <rect x="3" y="3" width="18" height="18" rx="2" fill="currentColor" />
                                             </svg>
                                             <?php echo esc_html__('Edit With Bricks', 'tourfic'); ?>
-                                        </button>
-                                    <?php endif; ?>
+                                        </button><br>
+                                        <?php if ( ! $bricks_active ) : ?>
+                                            <span class="tf-builder-notice">
+                                                <?php if ( $bricks_theme_installed && current_user_can( 'switch_themes' ) ) : ?>
+                                                    <?php esc_html_e( 'Bricks theme is inactive.', 'tourfic' ); ?>
+                                                    <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'themes.php?action=activate&stylesheet=bricks' ), 'switch-theme_bricks' ) ); ?>">
+                                                        <?php esc_html_e( 'Activate Bricks', 'tourfic' ); ?>
+                                                    </a>
+                                                <?php else : ?>
+                                                    <?php esc_html_e( 'Bricks theme is required.', 'tourfic' ); ?>
+                                                <?php endif; ?>
+                                            </span>
+                                        <?php endif; ?>
+                                    </div>
                                     <button type="submit" id="tf-save-template" class="tf-admin-btn tf-btn-secondary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <path d="M17 21V14C17 13.7348 16.8946 13.4804 16.7071 13.2929C16.5196 13.1054 16.2652 13 16 13H8C7.73478 13 7.48043 13.1054 7.29289 13.2929C7.10536 13.4804 7 13.7348 7 14V21M7 3V7C7 7.26522 7.10536 7.51957 7.29289 7.70711C7.48043 7.89464 7.73478 8 8 8H15M15.2 3C15.7275 3.00751 16.2307 3.22317 16.6 3.6L20.4 7.4C20.7768 7.76926 20.9925 8.27246 21 8.8V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H15.2Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
