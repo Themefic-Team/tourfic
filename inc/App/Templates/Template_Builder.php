@@ -749,7 +749,7 @@ class Template_Builder {
                                                 <?php elseif ( current_user_can( 'activate_plugins' ) ) : ?>
                                                     <?php esc_html_e( 'Elementor is inactive.', 'tourfic' ); ?>
                                                     <a href="<?php echo esc_url( wp_nonce_url( self_admin_url( 'plugins.php?action=activate&plugin=elementor/elementor.php' ), 'activate-plugin_elementor/elementor.php' ) ); ?>">
-                                                        <?php esc_html_e( 'Activate Elementor', 'tourfic' ); ?>
+                                                        <?php esc_html_e( 'Activate', 'tourfic' ); ?>
                                                     </a>
                                                 <?php endif; ?>
                                             </span>
@@ -767,7 +767,7 @@ class Template_Builder {
                                                 <?php if ( $bricks_theme_installed && current_user_can( 'switch_themes' ) ) : ?>
                                                     <?php esc_html_e( 'Bricks theme is inactive.', 'tourfic' ); ?>
                                                     <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'themes.php?action=activate&stylesheet=bricks' ), 'switch-theme_bricks' ) ); ?>">
-                                                        <?php esc_html_e( 'Activate Bricks', 'tourfic' ); ?>
+                                                        <?php esc_html_e( 'Activate', 'tourfic' ); ?>
                                                     </a>
                                                 <?php else : ?>
                                                     <?php esc_html_e( 'Bricks theme is required.', 'tourfic' ); ?>
