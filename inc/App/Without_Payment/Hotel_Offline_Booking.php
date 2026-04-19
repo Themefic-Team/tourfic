@@ -38,7 +38,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		 */
 		$post_id         = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
 		$room_id         = isset( $_POST['room_id'] ) ? intval( sanitize_text_field( $_POST['room_id'] ) ) : null;
-		$unique_id       = isset( $_POST['unique_id'] ) ? intval( sanitize_text_field( $_POST['unique_id'] ) ) : null;
+		$unique_id       = isset( $_POST['unique_id'] ) ? sanitize_text_field( $_POST['unique_id'] ) : null;
 		$option_id       = isset( $_POST['option_id'] ) ? sanitize_text_field( $_POST['option_id'] ) : null;
 		$location        = isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : '';
 		$adult           = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
