@@ -33,14 +33,133 @@ class Template_Builder {
         
         if ( function_exists( 'bricks_is_builder' ) || defined( 'BRICKS_VERSION' ) ) {
             add_action( 'wp_enqueue_scripts', [ $this, 'prepare_bricks_frontend_assets' ], 1 ); //for inline css
-            add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_bricks_template_css' ] );
-            add_action( 'wp_enqueue_scripts', [ $this, 'setup_bricks_editor_post_data' ], 10 ); // Run before prepare_bricks_frontend_assets
+            // add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_bricks_template_css' ] );
+            // add_action( 'wp_enqueue_scripts', [ $this, 'setup_bricks_editor_post_data' ], 10 );
+            add_filter( 'bricks/element/render', [ $this, 'bricks_force_preview_context_for_element' ], 1, 2 );
+            // add_filter( 'bricks/frontend/render_element', [ $this, 'bricks_restore_preview_context_after_element' ], 999, 2 );
             add_filter( 'bricks/get_builder_edit_link', [ $this, 'add_template_params_to_bricks_edit_link' ], 10, 2 );
-            add_filter( 'bricks/dynamic_data/filter_tag', [ $this, 'bricks_filter_dynamic_post_context' ], 10, 3 );
-            add_filter( 'wp_insert_post_data', [ $this, 'bricks_save_to_template_post' ], 10, 2 );
             add_action( 'init', [ $this, 'ensure_bricks_template_builder_support' ], 30 );
         }
 	}
+
+    private function get_bricks_preview_post_from_request() {
+        if ( empty( $_GET['tf_preview_post_id'] ) ) {
+            return false;
+        }
+
+        $preview_post_id = absint( wp_unslash( $_GET['tf_preview_post_id'] ) );
+
+        if ( ! $preview_post_id ) {
+            return false;
+        }
+
+        return get_post( $preview_post_id );
+    }
+
+    private function should_force_bricks_preview_context( $element_instance ) {
+        if ( ! isset( $_GET['bricks'] ) || 'run' !== $_GET['bricks'] ) {
+            return false;
+        }
+
+        if ( empty( $_GET['tf_preview_post_id'] ) ) {
+            return false;
+        }
+
+        if ( ! is_object( $element_instance ) || empty( $element_instance->name ) ) {
+            return false;
+        }
+
+        if ( class_exists( '\Bricks\Query' ) && \Bricks\Query::is_looping() ) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function bricks_force_preview_context_for_element( $render_element, $element_instance ) {
+        if ( ! $render_element || ! $this->should_force_bricks_preview_context( $element_instance ) ) {
+            return $render_element;
+        }
+
+        $preview_post = $this->get_bricks_preview_post_from_request();
+
+        if ( ! $preview_post ) {
+            return $render_element;
+        }
+
+        global $post, $wp_query;
+
+        if ( empty( $GLOBALS['tf_bricks_element_context_stack'] ) || ! is_array( $GLOBALS['tf_bricks_element_context_stack'] ) ) {
+            $GLOBALS['tf_bricks_element_context_stack'] = [];
+        }
+
+        $context = [
+            'post' => $post,
+        ];
+
+        if ( $wp_query instanceof \WP_Query ) {
+            $context['wp_query'] = [
+                'post'              => $wp_query->post ?? null,
+                'posts'             => $wp_query->posts ?? null,
+                'post_count'        => $wp_query->post_count ?? null,
+                'found_posts'       => $wp_query->found_posts ?? null,
+                'max_num_pages'     => $wp_query->max_num_pages ?? null,
+                'queried_object'    => $wp_query->queried_object ?? null,
+                'queried_object_id' => $wp_query->queried_object_id ?? null,
+            ];
+        }
+
+        $GLOBALS['tf_bricks_element_context_stack'][] = $context;
+
+        $post = $preview_post;
+        setup_postdata( $post );
+
+        if ( $wp_query instanceof \WP_Query ) {
+            $wp_query->post              = $preview_post;
+            $wp_query->posts             = [ $preview_post ];
+            $wp_query->post_count        = 1;
+            $wp_query->found_posts       = 1;
+            $wp_query->max_num_pages     = 1;
+            $wp_query->queried_object    = $preview_post;
+            $wp_query->queried_object_id = $preview_post->ID;
+        }
+
+        return $render_element;
+    }
+
+    public function bricks_restore_preview_context_after_element( $element_html, $element_instance ) {
+        if ( ! $this->should_force_bricks_preview_context( $element_instance ) ) {
+            return $element_html;
+        }
+
+        if ( empty( $GLOBALS['tf_bricks_element_context_stack'] ) || ! is_array( $GLOBALS['tf_bricks_element_context_stack'] ) ) {
+            return $element_html;
+        }
+
+        $context = array_pop( $GLOBALS['tf_bricks_element_context_stack'] );
+
+        global $post, $wp_query;
+
+        $post = $context['post'] ?? null;
+
+        if ( $post ) {
+            setup_postdata( $post );
+        } else {
+            wp_reset_postdata();
+        }
+
+        if ( isset( $context['wp_query'] ) && $wp_query instanceof \WP_Query ) {
+            $wp_query->post              = $context['wp_query']['post'];
+            $wp_query->posts             = $context['wp_query']['posts'];
+            $wp_query->post_count        = $context['wp_query']['post_count'];
+            $wp_query->found_posts       = $context['wp_query']['found_posts'];
+            $wp_query->max_num_pages     = $context['wp_query']['max_num_pages'];
+            $wp_query->queried_object    = $context['wp_query']['queried_object'];
+            $wp_query->queried_object_id = $context['wp_query']['queried_object_id'];
+        }
+
+        return $element_html;
+    }
 
     /**
      * Ensure Bricks editor is enabled for our template builder CPT.
@@ -1932,144 +2051,6 @@ class Template_Builder {
             }
         }
     }
-
-    /**
-     * Temporarily switch to preview post context when rendering Bricks elements
-     * This allows dynamic content (like ACF fields, post title) to pull from the preview post
-     */
-    public function bricks_setup_preview_post_context() {
-        // Only in Bricks builder editor mode with preview post
-        if ( ! isset( $_GET['bricks'] ) || 'run' !== $_GET['bricks'] ) {
-            return;
-        }
-
-        if ( empty( $GLOBALS['tf_bricks_preview_post'] ) ) {
-            return;
-        }
-
-        global $post, $wp_query;
-
-        // Store original post
-        $GLOBALS['tf_original_post'] = $post;
-
-        // Switch to preview post
-        $post = $GLOBALS['tf_bricks_preview_post'];
-        setup_postdata( $post );
-
-        if ( $wp_query instanceof \WP_Query ) {
-            $GLOBALS['tf_original_wp_query'] = $wp_query;
-            $wp_query->post                   = $post;
-        }
-    }
-
-    /**
-     * Restore original post context after rendering Bricks elements
-     * This ensures the template post is used for saving
-     */
-    public function bricks_restore_original_post_context() {
-        // Only in Bricks builder editor mode
-        if ( ! isset( $_GET['bricks'] ) || 'run' !== $_GET['bricks'] ) {
-            return;
-        }
-
-        if ( empty( $GLOBALS['tf_original_post'] ) ) {
-            return;
-        }
-
-        global $post, $wp_query;
-
-        // Restore original post (the template post)
-        $post = $GLOBALS['tf_original_post'];
-        setup_postdata( $post );
-
-        if ( ! empty( $GLOBALS['tf_original_wp_query'] ) && $wp_query instanceof \WP_Query ) {
-            $wp_query = $GLOBALS['tf_original_wp_query'];
-        }
-
-        // Clean up
-        unset( $GLOBALS['tf_original_post'] );
-        unset( $GLOBALS['tf_original_wp_query'] );
-    }
-
-    /**
-     * Filter Bricks dynamic data to use preview post context when available
-     * This ensures ACF fields, post meta, and other dynamic content comes from the preview post
-     */
-    public function bricks_filter_dynamic_post_context( $value, $tag, $field ) {
-        // Only apply in Bricks editor with preview post
-        if ( ! isset( $_GET['bricks'] ) || 'run' !== $_GET['bricks'] ) {
-            return $value;
-        }
-
-        if ( empty( $GLOBALS['tf_bricks_preview_post'] ) ) {
-            return $value;
-        }
-
-        // Only for post-specific dynamic tags
-        if ( ! in_array( $tag, [ 'post_meta', 'acf', 'post_title', 'post_excerpt', 'post_content' ], true ) ) {
-            return $value;
-        }
-
-        $preview_post = $GLOBALS['tf_bricks_preview_post'];
-
-        // Temporarily set up preview post context
-        global $post;
-        $original_post = $post;
-        $post          = $preview_post;
-        setup_postdata( $post );
-
-        // Re-fetch the value with preview post context
-        if ( 'post_meta' === $tag ) {
-            $value = get_post_meta( $preview_post->ID, $field, true );
-        } elseif ( 'acf' === $tag ) {
-            if ( function_exists( 'get_field' ) ) {
-                $value = get_field( $field, $preview_post->ID );
-            }
-        } elseif ( 'post_title' === $tag ) {
-            $value = $preview_post->post_title;
-        } elseif ( 'post_excerpt' === $tag ) {
-            $value = $preview_post->post_excerpt;
-        } elseif ( 'post_content' === $tag ) {
-            $value = $preview_post->post_content;
-        }
-
-        // Restore original post
-        $post = $original_post;
-        setup_postdata( $post );
-
-        return $value;
-    }
-
-    /**
-     * Ensure Bricks saves data to the template post, not the preview post
-     * When in Bricks editor with a preview post, we need to redirect saves to the template post
-     */
-    public function bricks_save_to_template_post( $data, $postarr ) {
-        // Only apply in Bricks editor with preview post
-        if ( ! isset( $_GET['bricks'] ) || 'run' !== $_GET['bricks'] ) {
-            return $data;
-        }
-
-        // Only if we have a template post stored
-        if ( empty( $GLOBALS['tf_bricks_template_post_id'] ) ) {
-            return $data;
-        }
-
-        $template_post_id = absint( $GLOBALS['tf_bricks_template_post_id'] );
-        $preview_post_id  = absint( $GLOBALS['tf_bricks_preview_post_id'] ?? 0 );
-
-        // If trying to save to preview post, redirect to template post
-        if ( $preview_post_id && ! empty( $postarr['ID'] ) && absint( $postarr['ID'] ) === $preview_post_id ) {
-            $data['post_ID'] = $template_post_id;
-            if ( isset( $postarr['ID'] ) ) {
-                $postarr['ID'] = $template_post_id;
-            }
-        }
-
-        return $data;
-    }
-
-    
 
     public function prepare_bricks_frontend_assets() {
         if ( is_admin() || wp_doing_ajax() ) {
