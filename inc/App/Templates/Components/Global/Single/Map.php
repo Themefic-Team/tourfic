@@ -191,6 +191,12 @@ class Map {
 			$address_longitude  = ! empty( Helper::tf_data_types( $meta['location'] )['longitude'] ) ? Helper::tf_data_types( $meta['location'] )['longitude'] : '';
 			$address_zoom       = ! empty( Helper::tf_data_types( $meta['location'] )['zoom'] ) ? Helper::tf_data_types( $meta['location'] )['zoom'] : '';
 		}
+		$itinerary_map = ! empty( Helper::tfopt('itinerary_map') ) && function_exists('is_tf_pro') && is_tf_pro() ? Helper::tfopt('itinerary_map') : 0;
+		$itineraries     = !empty($meta['itinerary']) ? Helper::tf_data_types( $meta['itinerary'] ) : null;
+
+		// if ( $itinerary_map == 1 && $itineraries ){
+		// 	return;
+		// }
 		?>
 		<?php if ( ! empty( $meta['location'] ) ) : ?>
 			<div class="tf-trip-map-wrapper tf-single-map" id="tf-tour-map">

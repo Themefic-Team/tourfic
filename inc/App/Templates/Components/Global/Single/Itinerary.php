@@ -42,6 +42,11 @@ class Itinerary {
 			$location_longitude = ! empty( Helper::tf_data_types( $meta['location'] )['longitude'] ) ? Helper::tf_data_types( $meta['location'] )['longitude'] : '';
 		}
 
+		$wrapper_open          = ! empty( $settings['wrapper_open'] ) ? $settings['wrapper_open'] : '';
+		$wrapper_close         = ! empty( $settings['wrapper_close'] ) ? $settings['wrapper_close'] : '';
+
+        echo ! empty( $wrapper_open ) ? wp_kses_post( $wrapper_open ) : '';
+
 		if ( 'style1' === $style ) {
 			self::render_style1( $settings, $style, $itineraries, $itinerary_map, $tf_openstreet_map, $tf_google_map_key, $location, $location_latitude, $location_longitude );
 		} elseif ( 'style2' === $style ) {
@@ -49,6 +54,8 @@ class Itinerary {
 		} elseif ( 'style3' === $style ) {
 			self::render_style3( $settings, $style, $itineraries, $itinerary_map, $tf_openstreet_map, $tf_google_map_key, $location, $location_latitude, $location_longitude );
 		}
+
+		echo ! empty( $wrapper_close ) ? wp_kses_post( $wrapper_close ) : '';
 	}
 
 	private static function render_style1( $settings, $style, $itineraries, $itinerary_map, $tf_openstreet_map, $tf_google_map_key, $location, $location_latitude, $location_longitude ) {
