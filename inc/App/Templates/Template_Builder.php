@@ -1349,7 +1349,7 @@ class Template_Builder {
                         'tf_carrental' => 'carrental'
                     );
                     
-                    $template_path = TF_ASSETS_PATH . "demo/{$service[$tf_template_service]}/{$tf_template_type}/{$tf_template_design}.json";
+                    $template_path = TF_ASSETS_PATH . "demo/elementor/{$service[$tf_template_service]}/{$tf_template_type}/{$tf_template_design}.json";
         
                     if ( is_file( $template_path ) ) {
                         require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
@@ -1389,6 +1389,37 @@ class Template_Builder {
                 delete_post_meta($post_id, '_elementor_edit_mode');
                 delete_post_meta($post_id, '_elementor_data');
                 delete_post_meta($post_id, '_wp_page_template');
+
+                // Template import for Bricks
+                if ( !empty( $tf_template_design ) && $tf_template_design !== 'blank' ) {
+                    $service = array(
+                        'tf_hotel' => 'hotel',
+                        'tf_room' => 'room',
+                        'tf_tours' => 'tour',
+                        'tf_apartment' => 'apartment',
+                        'tf_carrental' => 'carrental'
+                    );
+                    
+                    $template_path = TF_ASSETS_PATH . "demo/bricks/{$service[$tf_template_service]}/{$tf_template_type}/{$tf_template_design}.json";
+        
+                    if ( is_file( $template_path ) ) {
+                        require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
+                        require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+        
+                        $wp_filesystem = new \WP_Filesystem_Direct(null);
+                        $fileContent = $wp_filesystem->get_contents($template_path);
+        
+                        if ( !is_null( $fileContent ) ) {
+                            // Bricks export JSON wraps elements inside a "content" key.
+                            // _bricks_page_content_2 must store only the elements array.
+                            $template_data = json_decode( $fileContent, true );
+
+                            if ( is_array( $template_data ) && ! empty( $template_data['content'] ) && is_array( $template_data['content'] ) ) {
+                                update_post_meta( $post_id, '_bricks_page_content_2', $template_data['content'] );
+                            }
+                        }
+                    }
+                }
 
                 $this->set_bricks_template_preview_settings($post_id, $tf_template_service, $tf_template_type, $tf_taxonomy_type, $tf_taxonomy_term);
                 
