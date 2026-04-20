@@ -24,10 +24,10 @@ class FAQ {
 		$wrapper_open     = ! empty( $settings['wrapper_open'] ) ? $settings['wrapper_open'] : '';
 		$wrapper_close    = ! empty( $settings['wrapper_close'] ) ? $settings['wrapper_close'] : '';
         $wrapper_class    = ! empty( $settings['wrapper_class'] ) ? $settings['wrapper_class'] : '';
-        $wrapper        = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';
+        $wrapper          = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';
         $container        = ! empty( $settings['container'] ) ? $settings['container'] : 'no';
-        $show_title       = Helper::get_switcher_value( $settings, 'show_title', 'yes', $builder );
-        $show_description = Helper::get_switcher_value( $settings, 'show_description', 'yes', $builder );
+        $show_title       = ! empty( $settings['show_title'] ) ? $settings['show_title'] : 'yes';
+        $show_description = ! empty( $settings['show_description'] ) ? $settings['show_description'] : 'yes';
 		$label_tag		 = ! empty( $settings['label_tag'] ) ? $settings['label_tag'] : 'span';
 
 		$faqs = [];
