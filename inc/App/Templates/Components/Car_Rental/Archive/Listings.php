@@ -84,7 +84,7 @@ class Listings {
         </div>
 
         <div class="tf-car-details-column tf-flex tf-flex-gap-32">
-            <?php if ( 'yes' === $show_sidebar ) : ?>
+            <?php if ( empty($builder) && 'yes' === $show_sidebar ) : ?>
                 <div class="tf-car-archive-sidebar">
                     <div class="tf-sidebar-header tf-flex tf-flex-space-bttn tf-flex-align-center">
                         <div class="tf-close-sidebar">
@@ -100,7 +100,7 @@ class Listings {
                 </div>
             <?php endif; ?>
 
-            <div class="tf-car-archive-result">
+            <div class="tf-car-archive-result" <?php echo !empty( $builder ) ? 'style="width: 100%;"' : ''; ?>>
                 <?php do_action( 'tf_car_archive_card_items_before' ); ?>
 
                 <div class="tf-car-result archive_ajax_result tf-flex tf-flex-gap-32 <?php echo 'list' === $listing_layout ? esc_attr( 'list-view' ) : esc_attr( 'grid-view' ); ?> tf-grid-<?php echo esc_attr( $grid_column ); ?>">
