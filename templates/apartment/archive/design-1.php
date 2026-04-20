@@ -23,9 +23,6 @@ defined( 'ABSPATH' ) || exit;
             <div class="tf-archive-details tf-details" id="tf-hotel-overview">
 
                 <div class="tf-details-left tf-result-previews">
-                    <span class="tf-modify-search-btn">
-                        <?php esc_html_e("Modify search", "tourfic"); ?>
-                    </span>
                     <?php Helper::tf_archive_sidebar_search_form('tf_apartment'); ?> 
                     <?php Listings::render_design_1(); ?>
                 </div>
