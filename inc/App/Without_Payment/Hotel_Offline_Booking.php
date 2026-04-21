@@ -6,6 +6,7 @@ use Tourfic\Core\Without_Payment_Booking;
 use Tourfic\Classes\Hotel\Hotel;
 use Tourfic\Classes\Helper;
 use Tourfic\Classes\Hotel\Pricing;
+use Tourfic\Classes\Room\Availability;
 
 // don't call the file directly
 defined( 'ABSPATH' ) || exit;
@@ -271,6 +272,10 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 			} else {
 				$response['errors'][] = esc_html__( 'No rooms available for the selected date.', 'tourfic' );
 			}
+		}
+
+		if ( ! Availability::check_availability( $room_id, $check_in, $check_out ) ) {
+			$response['errors'][] = esc_html__( 'This room is unavailable for the selected date.', 'tourfic' );
 		}
 
 		/**

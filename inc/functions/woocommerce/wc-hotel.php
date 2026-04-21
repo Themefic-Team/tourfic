@@ -2,6 +2,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Room\Room;
+use Tourfic\Classes\Room\Availability;
 use Tourfic\Classes\Hotel\Pricing;
 use Tourfic\Classes\Helper;
 
@@ -258,6 +259,10 @@ function tf_hotel_booking_callback() {
 		} else {
 			$response['errors'][] = esc_html__( 'No rooms available for the selected date.', 'tourfic' );
 		}
+	}
+
+	if ( ! Availability::check_availability( $room_id, $check_in, $check_out ) ) {
+		$response['errors'][] = esc_html__( 'This room is unavailable for the selected date.', 'tourfic' );
 	}
 
 	/**
