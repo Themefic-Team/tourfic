@@ -61,14 +61,12 @@ use \Tourfic\Classes\Helper;
                 'wrapper_open' => '<div class="tf-single-widgets">', 
                 'wrapper_close' => '</div>'
             ]);
-            ?>
-            
-            <div id="hotel-map-location" class="tf-location tf-single-widgets">
-                <h3 class="tf-section-title"><?php esc_html_e("Location", "tourfic"); ?></h3>
-                <?php \Tourfic\App\Templates\Components\Global\Single\Map::render(['show_icon' => 'no']); ?>
-            </div>
-            
-            <?php 
+
+            \Tourfic\App\Templates\Components\Global\Single\Map::render([
+                'show_icon' => 'no',
+                'wrapper' => 'yes',
+            ]);
+
             \Tourfic\App\Templates\Components\Global\Single\Review::render([
                 'review_style' => 'design-2',
                 'show_review_states' => 'yes',

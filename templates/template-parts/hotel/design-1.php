@@ -46,7 +46,9 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                         <!-- SIdebar Tour single -->
                         <div class="tf-tour-details-right">
                             <?php \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render(['wrapper' => 'no']); ?>
-                            <?php \Tourfic\App\Templates\Components\Global\Single\Map::render(); ?>
+                            <?php \Tourfic\App\Templates\Components\Global\Single\Map::render([
+                                'show_title' => 'no',
+                            ]); ?>
                             
                             <!-- Hotel Single Widget Hook are - start -->
                             <div class="tf-hotel-single-custom-widget-wrap">

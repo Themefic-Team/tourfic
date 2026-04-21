@@ -75,7 +75,7 @@ class Video_Button {
 			}
 		}
 
-		$label = ! empty( $settings['label'] ) ? $settings['label'] : esc_html__( 'Video', 'tourfic' );
+		$label = isset( $settings['label'] ) ? $settings['label'] : esc_html__( 'Video', 'tourfic' );
 		?>
 		<div class="tf-single-action-btns featured-column tf-video-box">
 			<a class="tf-tour-video" id="featured-video" data-fancybox="tour-video" href="<?php echo esc_url( $video ); ?>">

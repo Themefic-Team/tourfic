@@ -88,7 +88,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
             <?php 
             \Tourfic\App\Templates\Components\Global\Single\Map::render([
                 'wrapper_open' => '<div class="tf-location tf-single-widgets">',
-                'wrapper_close' => '</div>'
+                'wrapper_close' => '</div>',
             ], '', '250px'); 
 
             \Tourfic\App\Templates\Components\Global\Single\Review::render([

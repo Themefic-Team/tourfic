@@ -174,8 +174,9 @@ class Itinerary {
 				if ( $location && $itinerary_map != 1 ){
 					\Tourfic\App\Templates\Components\Global\Single\Map::render([
 						'wrapper_open' => '<div class="tf-mt-16 tf-mb-30">',
-						'wrapper_close' => '</div>'
-					], '', '450px', false);
+						'wrapper_close' => '</div>',
+						'show_title' => 'no',
+					], '', '450px');
 				} 
 			}
 			?>
@@ -227,7 +228,9 @@ class Itinerary {
 						</div>
 					</div>
 					<?php if ( $location && $itinerary_map != 1){
-						\Tourfic\App\Templates\Components\Global\Single\Map::render([], '', '600px', false);
+						\Tourfic\App\Templates\Components\Global\Single\Map::render([
+							'show_title' => 'no',
+						], '', '600px');
 					} ?>
 				<?php
 				}

@@ -18425,12 +18425,12 @@ div#tf-destinationautocomplete-list div:before {
   flex: 1;
   align-items: center;
 }
-.tf-single-template__two .tf-whats-around ul li span.tf-place .tf-icon {
+.tf-single-template__two .tf-whats-around ul li span.tf-place span {
   width: auto;
   height: auto;
   line-height: auto;
 }
-.tf-single-template__two .tf-whats-around ul li span.tf-place .tf-icon i {
+.tf-single-template__two .tf-whats-around ul li span.tf-place span i {
   margin-right: 8px;
   width: 20px;
   font-size: 1.25rem;

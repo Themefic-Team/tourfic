@@ -53,7 +53,8 @@ use \Tourfic\Classes\Helper;
                 <div class="hero-right">
                     <?php 
                     \Tourfic\App\Templates\Components\Global\Single\Map::render([
-                        'show_icon' => 'no', 
+                        'show_icon' => 'no',
+                        'show_title' => 'no',
                         'design' => 'design-2'
                     ]); 
                     
