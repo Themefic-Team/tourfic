@@ -213,13 +213,15 @@ class FAQ {
 	}
 
 	private static function tf_faq_toggle_icon( $settings, $default_open_icon = '', $default_close_icon = '', $wrapper = 'yes' ) {
-		echo 'yes' === $wrapper ? '<span class="tf-faq-open-icon">' : '';
-		echo self::render_icon_html( ! empty( $settings['open_icon'] ) ? $settings['open_icon'] : [], $default_open_icon );
-		echo 'yes' === $wrapper ? '</span>' : '';
+		$builder = !empty( $settings['builder'] ) ? $settings['builder'] : '';
 
-		echo 'yes' === $wrapper ? '<span class="tf-faq-close-icon">' : '';
+		echo ('yes' === $wrapper || !empty( $builder )) ? '<span class="tf-faq-open-icon">' : '';
+		echo self::render_icon_html( ! empty( $settings['open_icon'] ) ? $settings['open_icon'] : [], $default_open_icon );
+		echo ('yes' === $wrapper || !empty( $builder )) ? '</span>' : '';
+
+		echo ('yes' === $wrapper || !empty( $builder )) ? '<span class="tf-faq-close-icon">' : '';
 		echo self::render_icon_html( ! empty( $settings['close_icon'] ) ? $settings['close_icon'] : [], $default_close_icon );
-		echo 'yes' === $wrapper ? '</span>' : '';
+		echo ('yes' === $wrapper || !empty( $builder )) ? '</span>' : '';
 	}
 
 	private static function render_icon_html( $icon_setting, $default_icon = '' ) {

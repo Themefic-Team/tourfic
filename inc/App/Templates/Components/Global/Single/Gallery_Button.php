@@ -85,8 +85,7 @@ class Gallery_Button {
 				$icon_html = '<i class="' . esc_attr( $settings['icon'] ) . '" aria-hidden="true"></i>';
 			}
 		}
-
-		$label = ! empty( $settings['label'] ) ? $settings['label'] : esc_html__( 'Gallery', 'tourfic' );
+		$label = isset( $settings['label'] ) ? $settings['label'] : esc_html__( 'Gallery', 'tourfic' );
 
 		if ( 'style1' === $style ) {
 			?>

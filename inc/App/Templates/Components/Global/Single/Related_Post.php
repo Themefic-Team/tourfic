@@ -182,6 +182,7 @@ class Related_Post {
 			'posts_per_page' => 8,
 			'orderby'        => 'title',
 			'order'          => 'ASC',
+			'post__not_in'   => [ $post_id ],
 			'tax_query'      => [
 				[
 					'taxonomy' => 'tour_destination',
@@ -439,6 +440,7 @@ class Related_Post {
 			'posts_per_page' => 8,
 			'orderby'        => 'title',
 			'order'          => 'ASC',
+			'post__not_in'   => [ $post_id ],
 			'tax_query'      => [
 				[
 					'taxonomy' => 'apartment_location',
@@ -513,6 +515,7 @@ class Related_Post {
 			'posts_per_page' => 8,
 			'orderby'        => 'title',
 			'order'          => 'ASC',
+			'post__not_in'   => [ $post_id ],
 			'tax_query'      => [
 				[
 					'taxonomy' => 'apartment_location',

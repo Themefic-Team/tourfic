@@ -162,7 +162,7 @@ class Share {
 				<div class="tf-share">
 					<a href="#dropdown-share-center" class="share-toggle tf-icon-type-<?php echo esc_attr( $icon_type ); ?>" data-toggle="true">
 						<?php echo wp_kses( $share_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
-                        <?php if( $post_type == 'tf_apartment' ) : ?>
+                        <?php if( $post_type == 'tf_apartment' && empty( $builder ) ) : ?>
                             <span class="share-text"><?php esc_html_e( 'Share', 'tourfic' ); ?></span>
                         <?php endif; ?>
 					</a>

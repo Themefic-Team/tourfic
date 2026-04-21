@@ -23,7 +23,7 @@ class Wishlist {
 	 *
 	 * @return void
 	 */
-	public static function render( $settings = [], $builder = 'elementor' ) {
+	public static function render( $settings = [], $builder = '' ) {
 		$post_id            = get_the_ID();
 		$post_type          = get_post_type();
 		$has_in_wishlist    = Wishlist_Class::tf_has_item_in_wishlist( $post_id );
@@ -91,7 +91,7 @@ class Wishlist {
 			if ( $design === 'design-1' && ( $show_for_logged_in || $show_for_logged_out ) ) {
 				echo '<div class="' . esc_attr( $icon_class ) . '">';
 				echo wp_kses( $wishlist_icon_html, Helper::tf_custom_wp_kses_allow_tags() );
-                echo $post_type == 'tf_apartment' ? '<span class="tf-wishlist-text">' . esc_html__( 'Save', 'tourfic' ) . '</span>' : '';
+                echo ($post_type == 'tf_apartment' && empty( $builder )) ? '<span class="tf-wishlist-text">' . esc_html__( 'Save', 'tourfic' ) . '</span>' : '';
 				echo '</div>';
 			} elseif ( $design === 'design-2' && ( $show_for_logged_in || $show_for_logged_out ) ) {
                 echo '<a class="' . esc_attr( $icon_class ) . ' tf-wishlist">';
