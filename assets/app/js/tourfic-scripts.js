@@ -907,6 +907,30 @@
             },
         });
 
+        let carPartialPaymentSelection = 'no';
+
+        function setCarPartialPayment(trigger) {
+            if (!trigger || !trigger.attr('data-partial')) {
+                return;
+            }
+
+            carPartialPaymentSelection = trigger.attr('data-partial');
+
+            if ($('#tf_partial_payment').length) {
+                $('#tf_partial_payment').val(carPartialPaymentSelection);
+            }
+        }
+
+        function getCarPartialPayment(trigger) {
+            if (trigger && trigger.attr('data-partial')) {
+                setCarPartialPayment(trigger);
+            } else if ($('#tf_partial_payment').length && $('#tf_partial_payment').val()) {
+                carPartialPaymentSelection = $('#tf_partial_payment').val();
+            }
+
+            return carPartialPaymentSelection || 'no';
+        }
+
         
         // FAQ Accordion
         $('.tf-car-faq-section .tf-faq-head').on("click", function () {
@@ -1140,9 +1164,7 @@
                 return;
             }
 
-            if($this.attr('data-partial')){
-                $('#tf_partial_payment').val($this.attr('data-partial'));
-            }
+            setCarPartialPayment($this);
 
             var data = {
                 action: 'tf_car_booking_pupup',
@@ -1322,6 +1344,7 @@
                 $(this).off('click');
             }
             let $this = $(this);
+            setCarPartialPayment($this);
             
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
                 return $(this).val();
@@ -1405,7 +1428,7 @@
                 return;
             }
 
-            let partial_payment = $('#tf_partial_payment').val();
+            let partial_payment = getCarPartialPayment($this);
 
             var data = {
                 action: 'tf_car_booking',
@@ -1650,7 +1673,7 @@
     
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
-            let partial_payment = $('#tf_partial_payment').val();
+            let partial_payment = getCarPartialPayment($this);
             let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
             let dropoff_date = $this.closest('.tf-booking-btn').find('#dropoff_date').val();
             let pickup_time = $this.closest('.tf-booking-btn').find('#pickup_time').val();
@@ -1959,6 +1982,33 @@
             $('.tf-withoutpayment-booking-confirm').removeClass('show');
         })
 
+        function tfFormatCarProtectionPrice(amount) {
+            const decimals = parseInt(tf_params.wc_price_num_decimals, 10) || 0;
+            const decimalSeparator = typeof tf_params.wc_price_decimal_sep === 'string' ? tf_params.wc_price_decimal_sep : '.';
+            const thousandSeparator = typeof tf_params.wc_price_thousand_sep === 'string' ? tf_params.wc_price_thousand_sep : ',';
+            const currencySymbol = typeof tf_params.wc_currency_symbol === 'string' ? tf_params.wc_currency_symbol : '';
+            const currencyPosition = typeof tf_params.wc_currency_pos === 'string' ? tf_params.wc_currency_pos : 'left';
+            const absoluteAmount = Math.abs(Number(amount) || 0);
+            const fixedAmount = absoluteAmount.toFixed(decimals);
+            const amountParts = fixedAmount.split('.');
+            const wholeAmount = amountParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator);
+            const decimalAmount = amountParts[1] ? decimalSeparator + amountParts[1] : '';
+            const formattedAmount = wholeAmount + decimalAmount;
+            const priceValue = amount < 0 ? '-' + formattedAmount : formattedAmount;
+
+            switch (currencyPosition) {
+                case 'left_space':
+                    return currencySymbol + ' ' + priceValue;
+                case 'right':
+                    return priceValue + currencySymbol;
+                case 'right_space':
+                    return priceValue + ' ' + currencySymbol;
+                case 'left':
+                default:
+                    return currencySymbol + priceValue;
+            }
+        }
+
         // Showing Total into a protections
         $('body').on('change', '.protection-checkbox', function (e) {
             let total_price = 0;
@@ -1973,7 +2023,7 @@
         
             // Update total and display it
             $('#tf_total_proteciton_price').val(total_price.toFixed(2)); // Format as float with 2 decimal places
-            $('#tf_proteciton_subtotal').text(total_price.toFixed(2)); // Display formatted total
+            $('#tf_proteciton_subtotal').text(tfFormatCarProtectionPrice(total_price));
         });
 
         /*
@@ -5994,12 +6044,164 @@ function convertTo24HourFormat(timeStr) {
         */
         let tf_hasErrorsFlag = false;
         let tf_firstErrorElement = null; // track the first error field
+        const tfTravelerCompliance = tf_params.traveler_compliance || {};
+
+        function tfGetTravelerCount($context, selectors) {
+            const $input = ($context && $context.length ? $context : $(document)).find(selectors).first();
+
+            return parseInt($input.val() || '0', 10);
+        }
+
+        function tfGetTravelerPassengerType(travelerIndex, $context) {
+            let remaining = travelerIndex;
+            const adultCount = tfGetTravelerCount($context, '[name="adults"], #adults');
+            const childCount = tfGetTravelerCount($context, '[name="childrens"], [name="children"], #children, #childs');
+            const infantCount = tfGetTravelerCount($context, '[name="infants"], [name="infant"], #infant');
+
+            if (remaining <= adultCount) {
+                return 'adult';
+            }
+
+            remaining -= adultCount;
+            if (remaining <= childCount) {
+                return 'child';
+            }
+
+            remaining -= childCount;
+            if (remaining <= infantCount) {
+                return 'infant';
+            }
+
+            return '';
+        }
+
+        function tfParseTravelerDate(value) {
+            if (!value) {
+                return null;
+            }
+
+            const dateFormat = tfTravelerCompliance.date_format || 'Y/m/d';
+            const normalizedValue = String(value).split(' - ')[0].trim();
+            const separatorMatch = dateFormat.match(/[^A-Za-z]/);
+            const separator = separatorMatch ? separatorMatch[0] : '/';
+            const formatParts = dateFormat.split(separator);
+            const valueParts = normalizedValue.split(separator);
+            const parts = {};
+
+            if (formatParts.length !== valueParts.length) {
+                return null;
+            }
+
+            formatParts.forEach(function (part, index) {
+                parts[part] = parseInt(valueParts[index], 10);
+            });
+
+            if (!parts.Y || !parts.m || !parts.d) {
+                return null;
+            }
+
+            const parsedDate = new Date(parts.Y, parts.m - 1, parts.d);
+
+            if (
+                Number.isNaN(parsedDate.getTime()) ||
+                parsedDate.getFullYear() !== parts.Y ||
+                parsedDate.getMonth() !== parts.m - 1 ||
+                parsedDate.getDate() !== parts.d
+            ) {
+                return null;
+            }
+
+            return parsedDate;
+        }
+
+        function tfCalculateTravelerAge(dobValue, referenceDate) {
+            const dob = tfParseTravelerDate(dobValue);
+            const reference = referenceDate ? tfParseTravelerDate(referenceDate) : new Date();
+
+            if (!dob || !reference || Number.isNaN(dob.getTime()) || Number.isNaN(reference.getTime()) || reference < dob) {
+                return null;
+            }
+
+            let age = reference.getFullYear() - dob.getFullYear();
+            const monthDiff = reference.getMonth() - dob.getMonth();
+
+            if (monthDiff < 0 || (monthDiff === 0 && reference.getDate() < dob.getDate())) {
+                age -= 1;
+            }
+
+            return age;
+        }
+
+        function tfTravelerAgeMatchesPassengerType(passengerType, age) {
+            if (typeof age !== 'number') {
+                return false;
+            }
+
+            const adultMinAge = parseInt(tfTravelerCompliance.adult_min_age || '12', 10);
+            const childMinAge = parseInt(tfTravelerCompliance.child_min_age || '2', 10);
+            const infantMaxAge = parseInt(tfTravelerCompliance.infant_max_age || '2', 10);
+
+            if (passengerType === 'adult') {
+                return age >= adultMinAge;
+            }
+
+            if (passengerType === 'child') {
+                return age >= childMinAge && age < adultMinAge;
+            }
+
+            if (passengerType === 'infant') {
+                return age < infantMaxAge;
+            }
+
+            return true;
+        }
+
+        function tfValidateTravelerAgeField($field, travelerIndex, referenceDate, $context) {
+            if (!tfTravelerCompliance.enabled || String($field.attr('data-age-validation') || '0') !== '1') {
+                return false;
+            }
+
+            const adultCount = tfGetTravelerCount($context, '[name="adults"], #adults');
+            const childCount = tfGetTravelerCount($context, '[name="childrens"], [name="children"], #children, #childs');
+            const infantCount = tfGetTravelerCount($context, '[name="infants"], [name="infant"], #infant');
+            const totalPeople = adultCount + childCount + infantCount;
+            if (tfTravelerCompliance.collection_mode === 'single' && totalPeople > 1) {
+                return false;
+            }
+
+            const passengerType = tfGetTravelerPassengerType(travelerIndex, $context);
+            if (!passengerType || !$field.val()) {
+                return false;
+            }
+
+            const age = tfCalculateTravelerAge($field.val(), referenceDate);
+            if (tfTravelerAgeMatchesPassengerType(passengerType, age)) {
+                return false;
+            }
+
+            const errorContainer = $field.siblings('.error-text');
+            errorContainer.text(tf_params.traveler_age_mismatch || 'The entered date of birth does not match the selected passenger type.');
+
+            if (errorContainer.text() !== '') {
+                errorContainer.addClass('error-visible');
+            } else {
+                errorContainer.removeClass('error-visible');
+            }
+
+            if (!tf_firstErrorElement) {
+                tf_firstErrorElement = $field;
+            }
+
+            return true;
+        }
+
         $('body').on('click', '.tf-traveller-error', function (e) {
             let hasErrors = [];
             tf_firstErrorElement = null; // reset before validation
             let $this = $(this).closest('.tf-withoutpayment-booking');
-            $('.error-text').text("");
-            $this.find('.tf-single-travel').each(function () {
+            const referenceDate = $this.find('[name="check-in-out-date"], #check-in-out-date').first().val() || '';
+            $('.error-text').text("").removeClass('error-visible');
+            $this.find('.tf-single-travel').each(function (travelerIndex) {
                 $(this).find('input, select').each(function () {
                     if ($(this).attr('data-required') && $(this).attr('data-required') == 1) {
                         if ($(this).val() == "") {
@@ -6013,6 +6215,10 @@ function convertTo24HourFormat(timeStr) {
                             }
                             if (!tf_firstErrorElement) tf_firstErrorElement = $(this); // save first invalid field
                         }
+                    }
+
+                    if (tfValidateTravelerAgeField($(this), travelerIndex + 1, referenceDate, $this)) {
+                        hasErrors.push(true);
                     }
                 });
                 $(this).find('input[type="radio"], input[type="checkbox"]').each(function () {
@@ -6177,10 +6383,132 @@ function convertTo24HourFormat(timeStr) {
             }
         });
 
+        let lastAvailablePackage = null;
+        const getFirstAvailablePackageRadio = () => {
+            return $('.tf-booking-content-package .tf-single-package').not('.tf-package-unavailable').find('input[name="tf_package"]').first();
+        };
+        const ensureTourDateSelected = (showMessage = false, $trigger = null) => {
+            let $dateField = $('#check-in-out-date');
+            if ($trigger && $trigger.length) {
+                const $scopedDateField = $trigger.closest('.tf-booking-form').find('input[name="check-in-out-date"], #check-in-out-date').first();
+                if ($scopedDateField.length) {
+                    $dateField = $scopedDateField;
+                }
+            }
+
+            const selectedDate = ($dateField.val() || '').toString().trim();
+            if (selectedDate.length) {
+                $('.tf_booking-dates .tf_label-row').find('#tf-required').remove();
+                $('.tf_booking-dates .tf_label-row').removeClass('tf-date-required');
+                return true;
+            }
+
+            if (showMessage) {
+                let hasInlineHint = false;
+                if ($('#tf-required').length === 0) {
+                    if ($('.tf_booking-dates .tf_label-row').length >= 1) {
+                        $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required"><b>' + tf_params.field_required + '</b></span>');
+                        $('.tf_booking-dates .tf_label-row').addClass('tf-date-required');
+                        hasInlineHint = true;
+                    } else {
+                        $dateField.trigger('click');
+                    }
+                } else {
+                    hasInlineHint = true;
+                    $dateField.trigger('click');
+                }
+
+                if (!hasInlineHint) {
+                    notyf.error(tf_params.tf_tour_date_required_msg || tf_params.field_required || 'Please select a date');
+                }
+            }
+
+            return false;
+        };
+        const showUnavailablePackageMessage = () => {
+            const message = tf_params.package_unavailable_msg || 'Selected package is unavailable for this date.';
+            notyf.error(message);
+        };
+
+        const applyPackageAvailability = (packageStatuses = {}) => {
+            const $packageList = $('.tf-booking-content-package .tf-single-package');
+            if (!$packageList.length) {
+                return true;
+            }
+
+            let hasAvailablePackage = false;
+            $packageList.each(function () {
+                const $package = $(this);
+                const $radio = $package.find('input[name="tf_package"]');
+                const packageKey = String($radio.val());
+                const status = packageStatuses[packageKey] || 'available';
+                const isUnavailable = status === 'unavailable';
+
+                if (!isUnavailable) {
+                    hasAvailablePackage = true;
+                }
+
+                $package.toggleClass('tf-package-unavailable', isUnavailable);
+                $radio.prop('disabled', false);
+                $radio.attr('aria-disabled', isUnavailable ? 'true' : 'false');
+
+                if (isUnavailable) {
+                    $package.find('input[type="number"], select[name="package_start_time"]').prop('disabled', true);
+                    $package.find('.tf-pacakge-times').hide();
+                }
+            });
+
+            const $currentSelection = $('.tf-booking-content-package input[name="tf_package"]:checked');
+            if ($currentSelection.length && $currentSelection.closest('.tf-single-package').hasClass('tf-package-unavailable')) {
+                const $firstAvailable = getFirstAvailablePackageRadio();
+                if ($firstAvailable.length) {
+                    $firstAvailable.prop('checked', true);
+                    lastAvailablePackage = String($firstAvailable.val());
+                }
+            } else if (!$currentSelection.length) {
+                const $firstAvailable = getFirstAvailablePackageRadio();
+                if ($firstAvailable.length) {
+                    $firstAvailable.prop('checked', true);
+                    lastAvailablePackage = String($firstAvailable.val());
+                }
+            } else {
+                lastAvailablePackage = String($currentSelection.val());
+            }
+
+            return hasAvailablePackage;
+        };
+
+        const toggleTourPackageStepControls = (hasAvailablePackage = true) => {
+            const $controls = $('.tf-withoutpayment-booking .tf-pagination-content-1 .tf_btn');
+
+            $controls.each(function () {
+                const $control = $(this);
+                if ($control.is('button')) {
+                    $control.prop('disabled', !hasAvailablePackage);
+                    return;
+                }
+
+                $control.toggleClass('disabled', !hasAvailablePackage);
+                $control.attr('aria-disabled', hasAvailablePackage ? 'false' : 'true');
+            });
+        };
+
+        $('body').on('click', '.tf-withoutpayment-booking .tf-pagination-content-1 .tf_btn.disabled', function (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+        });
+
         // Popup Open
-        const tourPopupBooking = () => {
+        const tourPopupBooking = (options = {}) => {
+            const settings = $.extend({
+                showDateError: false
+            }, options);
             var $this = $(this);
             let check_in_date = $('#check-in-out-date').val();
+            if (!ensureTourDateSelected(settings.showDateError)) {
+                return false;
+            }
+
             let adults = $('#adults').val();
             let children = $('#children').val();
             let infant = $('#infant').val();
@@ -6255,14 +6583,23 @@ function convertTo24HourFormat(timeStr) {
                     $this.unblock();
 
                     var response = JSON.parse(data);
+                    const packageStatuses = response.package_statuses || {};
+                    const hasPackageStatuses = Object.keys(packageStatuses).length > 0;
+                    const hasPackageUI = $('.tf-booking-content-package .tf-single-package').length > 0;
+                    const hasAvailablePackage = hasPackageStatuses ? applyPackageAvailability(packageStatuses) : true;
+                    toggleTourPackageStepControls(hasAvailablePackage);
 
                     if (response.status == 'error') {
+                        if (hasPackageStatuses || hasPackageUI) {
+                            $('.tf-withoutpayment-booking').addClass('show');
+                            return false;
+                        }
+
                         if (response.errors) {
                             response.errors.forEach(function (text) {
                                 notyf.error(text);
                             });
                         }
-
                         return false;
                     } else {
                         if ($('.tf-traveller-info-box').length > 0) {
@@ -6275,16 +6612,20 @@ function convertTo24HourFormat(timeStr) {
                         if ($('.tf-booking-traveller-info').length > 0) {
                             $('.tf-booking-traveller-info').html(response.traveller_summery);
                         }
+                        if ($('.tf-booking-content-package').length) {
+                            $('.tf-booking-content-package .tf-pacakge-times').hide();
+                            $('.tf-booking-content-package select[name="package_start_time"]').each(function () {
+                                $(this).empty();
+                            });
+                        }
+
                         if (response.pacakge_times && typeof response.pacakge_times === 'object') {
                             Object.entries(response.pacakge_times).forEach(([key, times]) => {
                                 const wrapper = $(`.tf-package-times-${key}`);
                                 wrapper.css('display', 'flex');
                                 const select = wrapper.find('select[name="package_start_time"]');
-                                if (select.length && select.children('option').length === 0) {                        
-                                    // Add placeholder option first
+                                if (select.length) {
                                     select.append(`<option value="" disabled selected>Time</option>`);
-
-                                    // Then add time options
                                     times.forEach((time) => {
                                         select.append(`<option value="${time}">${time}</option>`);
                                     });
@@ -6311,6 +6652,11 @@ function convertTo24HourFormat(timeStr) {
         }
         $('body').on('click', '.tf-booking-popup-btn', function (e) {
             e.preventDefault();
+            const $trigger = $(this);
+            if (!ensureTourDateSelected(true, $trigger)) {
+                return false;
+            }
+
             $(".tf-withoutpayment-booking input[type='text'], .tf-withoutpayment-booking input[type='email'], .tf-withoutpayment-booking input[type='date'], .tf-withoutpayment-booking select, .tf-withoutpayment-booking textarea").val("");
 
             $('.tf-booking-content-extra input[type="checkbox"]').each(function () {
@@ -6318,13 +6664,23 @@ function convertTo24HourFormat(timeStr) {
                     $(this).prop('checked', false);
                 }
             });
-            tourPopupBooking();
+            tourPopupBooking({
+                showDateError: true
+            });
+        });
+
+        $(document).on('change', 'input[name="check-in-out-date"], #check-in-out-date', function () {
+            const selectedDate = ($(this).val() || '').toString().trim();
+            if (selectedDate.length) {
+                $('.tf_booking-dates .tf_label-row').find('#tf-required').remove();
+                $('.tf_booking-dates .tf_label-row').removeClass('tf-date-required');
+            }
         });
 
         $(document).on('change', '[name*=tf-tour-extra], input[name="extra-quantity"]', function () {
             tourPopupBooking();
         });
-        $(document).on('change', '[name=deposit], [name=tf_package]', function () {
+        $(document).on('change', '[name=deposit]', function () {
             tourPopupBooking();
         });
 
@@ -6332,17 +6688,65 @@ function convertTo24HourFormat(timeStr) {
             tourPopupBooking();
         });
 
-        $('input[name="tf_package"]').on('change', function () {
-            var selectedKey = $(this).val();
+        $(document).on('click', 'input[name="tf_package"]', function (e) {
+            var $selectedRadio = $(this);
+            var $selectedPackage = $selectedRadio.closest('.tf-single-package');
+            if ($selectedPackage.hasClass('tf-package-unavailable')) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                showUnavailablePackageMessage();
+
+                const $fallbackPackage = getFirstAvailablePackageRadio();
+                if ($fallbackPackage.length) {
+                    $fallbackPackage.prop('checked', true);
+                    lastAvailablePackage = String($fallbackPackage.val());
+                } else {
+                    $selectedRadio.prop('checked', false);
+                }
+                return false;
+            }
+        });
+
+        $(document).on('change', 'input[name="tf_package"]', function (e) {
+            var $selectedRadio = $(this);
+            var $selectedPackage = $selectedRadio.closest('.tf-single-package');
+
+            if ($selectedPackage.hasClass('tf-package-unavailable')) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                showUnavailablePackageMessage();
+
+                if (lastAvailablePackage !== null) {
+                    $('input[name="tf_package"][value="' + lastAvailablePackage + '"]').prop('checked', true);
+                } else {
+                    const $fallbackPackage = getFirstAvailablePackageRadio();
+                    if ($fallbackPackage.length) {
+                        $fallbackPackage.prop('checked', true);
+                        lastAvailablePackage = String($fallbackPackage.val());
+                    } else {
+                        $selectedRadio.prop('checked', false);
+                    }
+                }
+                return false;
+            }
+
+            var selectedKey = $selectedRadio.val();
+            lastAvailablePackage = String(selectedKey);
             $('.tf-single-package').each(function () {
                 var $package = $(this);
+                if ($package.hasClass('tf-package-unavailable')) {
+                    $package.find('input[type="number"], select[name="package_start_time"]').prop('disabled', true);
+                    return;
+                }
+
                 if ($package.find('input[name="tf_package"]').val() !== selectedKey) {
                     $package.find('input[type="number"]').prop('disabled', true);
                 } else {
                     $package.find('input[type="number"]').prop('disabled', false);
                 }
             });
-        });        
+            tourPopupBooking();
+        });
 
         // Popup Close
         $('body').on('click touchstart', '.tf-booking-times span', function (e) {

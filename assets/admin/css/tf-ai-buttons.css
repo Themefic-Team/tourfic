@@ -1,0 +1,75 @@
+/* AI Generate Button – Post list & Classic editor */
+.tf-generate-ai-pro-btn {
+	position: relative;
+	top: -1px !important;
+	display: inline-flex !important;
+	align-items: center;
+	gap: 6px;
+	background: linear-gradient(271deg, #0051A2 1.03%, #0077F1 50%, #0051A2 98.97%) !important;
+	box-shadow:
+		-4px 2px 4px 0 rgba(132, 185, 255, 0.25) inset,
+		4px 2px 4px 0 rgba(132, 185, 255, 0.25) inset,
+		0 4px 4px 0 rgba(108, 191, 255, 0.25) inset,
+		4px 12px 8px 0 rgba(71, 0, 107, 0.04),
+		4px 12px 8px 0 rgba(123, 45, 142, 0.08);
+	color: #fff !important;
+	border: none !important;
+	cursor: pointer;
+	text-decoration: none;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+    margin-left: 8px !important;
+}
+.tf-generate-ai-pro-btn:hover,
+.tf-generate-ai-pro-btn:focus {
+	color: #fff;
+	opacity: 0.92;
+}
+.tf-generate-ai-pro-btn:active {
+	transform: scale(0.97);
+}
+.tf-generate-ai-pro-btn svg {
+	flex-shrink: 0;
+	transition: transform 0.3s ease;
+}
+.tf-generate-ai-pro-btn:hover svg {
+	transform: scale(1.2);
+}
+
+/* AI Generate Button – Block editor header */
+.tf-ai-editor-btn {
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 6px !important;
+	background: linear-gradient(271deg, #0051A2 1.03%, #0077F1 50%, #0051A2 98.97%) !important;
+	box-shadow:
+		-4px 2px 4px 0 rgba(132, 185, 255, 0.25) inset,
+		4px 2px 4px 0 rgba(132, 185, 255, 0.25) inset,
+		0 4px 4px 0 rgba(108, 191, 255, 0.25) inset,
+		4px 12px 8px 0 rgba(71, 0, 107, 0.04),
+		4px 12px 8px 0 rgba(123, 45, 142, 0.08) !important;
+	color: #fff !important;
+	border: none !important;
+	border-radius: 6px !important;
+	padding: 0 12px !important;
+	height: 32px !important;
+	font-size: 13px !important;
+	font-weight: 400;
+	cursor: pointer !important;
+	white-space: nowrap !important;
+	transition: opacity 0.2s ease, transform 0.2s ease !important;
+	margin-right: 4px !important;
+}
+.tf-ai-editor-btn:hover {
+	opacity: 0.92 !important;
+	color: #fff !important;
+}
+.tf-ai-editor-btn:active {
+	transform: scale(0.97) !important;
+}
+.tf-ai-editor-btn svg {
+	flex-shrink: 0;
+	transition: transform 0.3s ease;
+}
+.tf-ai-editor-btn:hover svg {
+	transform: scale(1.15);
+}

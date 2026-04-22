@@ -12,6 +12,30 @@
             },
         });
 
+        let carPartialPaymentSelection = 'no';
+
+        function setCarPartialPayment(trigger) {
+            if (!trigger || !trigger.attr('data-partial')) {
+                return;
+            }
+
+            carPartialPaymentSelection = trigger.attr('data-partial');
+
+            if ($('#tf_partial_payment').length) {
+                $('#tf_partial_payment').val(carPartialPaymentSelection);
+            }
+        }
+
+        function getCarPartialPayment(trigger) {
+            if (trigger && trigger.attr('data-partial')) {
+                setCarPartialPayment(trigger);
+            } else if ($('#tf_partial_payment').length && $('#tf_partial_payment').val()) {
+                carPartialPaymentSelection = $('#tf_partial_payment').val();
+            }
+
+            return carPartialPaymentSelection || 'no';
+        }
+
         
         // FAQ Accordion
         $('.tf-car-faq-section .tf-faq-head').on("click", function () {
@@ -245,9 +269,7 @@
                 return;
             }
 
-            if($this.attr('data-partial')){
-                $('#tf_partial_payment').val($this.attr('data-partial'));
-            }
+            setCarPartialPayment($this);
 
             var data = {
                 action: 'tf_car_booking_pupup',
@@ -427,6 +449,7 @@
                 $(this).off('click');
             }
             let $this = $(this);
+            setCarPartialPayment($this);
             
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
                 return $(this).val();
@@ -510,7 +533,7 @@
                 return;
             }
 
-            let partial_payment = $('#tf_partial_payment').val();
+            let partial_payment = getCarPartialPayment($this);
 
             var data = {
                 action: 'tf_car_booking',
@@ -755,7 +778,7 @@
     
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
-            let partial_payment = $('#tf_partial_payment').val();
+            let partial_payment = getCarPartialPayment($this);
             let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
             let dropoff_date = $this.closest('.tf-booking-btn').find('#dropoff_date').val();
             let pickup_time = $this.closest('.tf-booking-btn').find('#pickup_time').val();
@@ -1064,6 +1087,33 @@
             $('.tf-withoutpayment-booking-confirm').removeClass('show');
         })
 
+        function tfFormatCarProtectionPrice(amount) {
+            const decimals = parseInt(tf_params.wc_price_num_decimals, 10) || 0;
+            const decimalSeparator = typeof tf_params.wc_price_decimal_sep === 'string' ? tf_params.wc_price_decimal_sep : '.';
+            const thousandSeparator = typeof tf_params.wc_price_thousand_sep === 'string' ? tf_params.wc_price_thousand_sep : ',';
+            const currencySymbol = typeof tf_params.wc_currency_symbol === 'string' ? tf_params.wc_currency_symbol : '';
+            const currencyPosition = typeof tf_params.wc_currency_pos === 'string' ? tf_params.wc_currency_pos : 'left';
+            const absoluteAmount = Math.abs(Number(amount) || 0);
+            const fixedAmount = absoluteAmount.toFixed(decimals);
+            const amountParts = fixedAmount.split('.');
+            const wholeAmount = amountParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator);
+            const decimalAmount = amountParts[1] ? decimalSeparator + amountParts[1] : '';
+            const formattedAmount = wholeAmount + decimalAmount;
+            const priceValue = amount < 0 ? '-' + formattedAmount : formattedAmount;
+
+            switch (currencyPosition) {
+                case 'left_space':
+                    return currencySymbol + ' ' + priceValue;
+                case 'right':
+                    return priceValue + currencySymbol;
+                case 'right_space':
+                    return priceValue + ' ' + currencySymbol;
+                case 'left':
+                default:
+                    return currencySymbol + priceValue;
+            }
+        }
+
         // Showing Total into a protections
         $('body').on('change', '.protection-checkbox', function (e) {
             let total_price = 0;
@@ -1078,7 +1128,7 @@
         
             // Update total and display it
             $('#tf_total_proteciton_price').val(total_price.toFixed(2)); // Format as float with 2 decimal places
-            $('#tf_proteciton_subtotal').text(total_price.toFixed(2)); // Display formatted total
+            $('#tf_proteciton_subtotal').text(tfFormatCarProtectionPrice(total_price));
         });
 
         /*

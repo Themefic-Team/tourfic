@@ -11,6 +11,7 @@ use Tourfic\Admin\Booking_Details\Hotel_Booking_Details;
 use Tourfic\Admin\Booking_Details\Tour_Booking_Details;
 use Tourfic\Admin\Booking_Details\Car_Booking_Details;
 use Tourfic\Admin\TF_Promo_Notice;
+use Tourfic\Admin\TF_Dashboard_Widget;
 use Tourfic\App\Widgets\TF_Widget_Base;
 use Tourfic\Admin\Notice\Room_Notice;
 use Tourfic\Admin\Notice\Plugin_Page_Notice;
@@ -72,9 +73,17 @@ class Base {
 			\Tourfic\Admin\Notice_Update::instance();
 			// Room_Notice::instance();
 			Plugin_Page_Notice::instance();
+
+			// AI Submenu (shows upsell for free users; skips when Pro is active)
+			\Tourfic\Admin\TF_AI_Submenu::instance();
 		}
+
 		// Promo Notice
 		TF_Promo_Notice::instance();
+		
+		// Dashboard Widget
+		TF_Dashboard_Widget::instance();
+
 		if ( Helper::tf_is_woo_active() ) {
 			TF_Widget_Base::instance();
 		}
