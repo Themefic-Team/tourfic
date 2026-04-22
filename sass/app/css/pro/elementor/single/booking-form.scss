@@ -1241,14 +1241,14 @@
 .tf-single-car-booking-form__style-1{
     padding: 0;
 
-    .tf-car-booking-form{
-        width: 440px;
-        @media #{$max1024}{
-            width: 370px;
-        }
-        @media #{$max768}{
-            width: 100%;
-        }
+    // .tf-car-booking-form{
+        // width: 440px;
+        // @media #{$max1024}{
+        //     width: 370px;
+        // }
+        // @media #{$max768}{
+        //     width: 100%;
+        // }
         .tf-price-header{
             margin-bottom: 38px;
             h2{
@@ -1756,7 +1756,7 @@
                 }
             }
         }
-    }
+    // }
 
     .tf-car-booking-popup{
         position: fixed;

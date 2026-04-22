@@ -89,34 +89,36 @@ class Share {
 			// Style 1: Dropdown with icons only
 			if ( 'style1' === $style ) {
 				?>
-				<div class="tf-share <?php echo 'tf_carrental' === $post_type ? esc_attr( 'tf-off-canvas-share-box' ) : ''; ?>">
-					<a href="#dropdown-share-center" class="<?php echo 'tf_carrental' === $post_type ? esc_attr( 'tf-share-toggle' ) : esc_attr('share-toggle'); ?> tf-icon tf-social-box tf-icon-type-<?php echo esc_attr( $icon_type ); ?>" data-toggle="true">
-						<?php echo wp_kses( $share_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
-					</a>
+				<div class="tf-single-template__one sp-0">
+					<div class="tf-share <?php echo 'tf_carrental' === $post_type ? esc_attr( 'tf-off-canvas-share-box' ) : ''; ?>">
+						<a href="#dropdown-share-center" class="<?php echo 'tf_carrental' === $post_type ? esc_attr( 'tf-share-toggle' ) : esc_attr('share-toggle'); ?> tf-icon tf-social-box tf-icon-type-<?php echo esc_attr( $icon_type ); ?>" data-toggle="true">
+							<?php echo wp_kses( $share_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
+						</a>
 
-					<div id="dropdown-share-center" class="<?php echo 'tf_carrental' === $post_type ? esc_attr( 'share-car-content' ) : esc_attr( 'share-tour-content' ); ?>">
-						<div class="tf-dropdown-share-content">
-							<h4><?php esc_html_e( 'Share with friends', 'tourfic' ); ?></h4>
-							<ul>
-								<?php foreach ( [ 'facebook', 'twitter', 'linkedin', 'pinterest' ] as $network ) : ?>
-								<li>
-									<a href="<?php echo esc_url( $social_links[ $network ] ); ?>" class="tf-dropdown-item" target="_blank">
-										<span class="tf-dropdown-item-content">
-											<i class="fab fa-<?php echo esc_attr( $network ); ?>"></i>
-										</span>
-									</a>
-								</li>
-								<?php endforeach; ?>
-								<li>
-									<div title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>" aria-controls="share_link_button">
-										<button id="share_link_button" class="tf_btn tf_btn_small share-center-copy-cta" tabindex="0" role="button">
-											<i class="fa fa-link" aria-hidden="true"></i>
-											<span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
-										</button>
-										<input type="text" id="share_link_input" class="share-center-url share-center-url-input" value="<?php echo esc_attr( $share_link ); ?>" readonly>
-									</div>
-								</li>
-							</ul>
+						<div id="dropdown-share-center" class="<?php echo 'tf_carrental' === $post_type ? esc_attr( 'share-car-content' ) : esc_attr( 'share-tour-content' ); ?>">
+							<div class="tf-dropdown-share-content">
+								<h4><?php esc_html_e( 'Share with friends', 'tourfic' ); ?></h4>
+								<ul>
+									<?php foreach ( [ 'facebook', 'twitter', 'linkedin', 'pinterest' ] as $network ) : ?>
+									<li>
+										<a href="<?php echo esc_url( $social_links[ $network ] ); ?>" class="tf-dropdown-item" target="_blank">
+											<span class="tf-dropdown-item-content">
+												<i class="fab fa-<?php echo esc_attr( $network ); ?>"></i>
+											</span>
+										</a>
+									</li>
+									<?php endforeach; ?>
+									<li>
+										<div title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>" aria-controls="share_link_button">
+											<button id="share_link_button" class="tf_btn tf_btn_small share-center-copy-cta" tabindex="0" role="button">
+												<i class="fa fa-link" aria-hidden="true"></i>
+												<span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
+											</button>
+											<input type="text" id="share_link_input" class="share-center-url share-center-url-input" value="<?php echo esc_attr( $share_link ); ?>" readonly>
+										</div>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
