@@ -1,14 +1,14 @@
-=== Tourfic – Travel Booking, Hotel Booking & Car Rental WordPress Plugin ===
+=== Tourfic – AI Powered Travel Booking, Hotel Booking & Car Rental WordPress Plugin ===
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, hellokhoyer, mainulsunvi, hasanet
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.22.0
+Stable tag: 2.22.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Hotel, Travel, Car Rental & Tour Booking WordPress plugin. Build a website like Agoda, Booking.com, Airbnb, Enterprise, Avis with WooCommerce
+Hotel, Car Rental & Tour Booking WordPress plugin. Build a website like Booking.com, Airbnb, Enterprise, Avis. WooCommerce and Elementor Supported.
 
 == Description ==
 
@@ -422,6 +422,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 23. Elementor Page Builder support.
 
 == Changelog ==
+
+= 2.22.1 – April 26, 2026 =
+
+- Updated: README.txt with improved information.
+- Fixed: Compatibility issues with WooCommerce.
 
 = 2.22.0 – April 16, 2026 =
 
