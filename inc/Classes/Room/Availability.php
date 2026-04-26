@@ -448,6 +448,35 @@ class Availability {
 	}
 
 	/**
+	 * Get all date keys covered by rules with a specific status.
+	 *
+	 * @param mixed  $room_availability Raw or normalized availability rules.
+	 * @param string $status            Rule status to collect.
+	 * @return array
+	 */
+	public static function get_rule_dates_by_status( $room_availability, $status ) {
+		$room_availability = self::normalize_availability_rules( $room_availability );
+		$status            = function_exists( 'sanitize_key' ) ? sanitize_key( $status ) : preg_replace( '/[^a-z0-9_\-]/', '', strtolower( (string) $status ) );
+		$date_keys         = array();
+
+		foreach ( $room_availability as $availability_rule ) {
+			$rule_status = self::get_rule_status( $availability_rule );
+
+			if ( 'available' === $status && 'unavailable' === $rule_status ) {
+				continue;
+			}
+
+			if ( 'available' !== $status && $status !== $rule_status ) {
+				continue;
+			}
+
+			$date_keys = array_merge( $date_keys, self::get_rule_date_keys( $availability_rule ) );
+		}
+
+		return array_values( array_unique( $date_keys ) );
+	}
+
+	/**
 	 * Determine whether an availability rule targets a specific date.
 	 *
 	 * @param array  $availability_rule Availability rule.
@@ -468,6 +497,37 @@ class Availability {
 		}
 
 		return $rule_date >= $rule_from && $rule_date <= $rule_to;
+	}
+
+	/**
+	 * Expand an availability rule into individual date keys.
+	 *
+	 * @param array $availability_rule Availability rule.
+	 * @return array
+	 */
+	private static function get_rule_date_keys( array $availability_rule ) {
+		if ( empty( $availability_rule['check_in'] ) || empty( $availability_rule['check_out'] ) ) {
+			return array();
+		}
+
+		$rule_from = strtotime( $availability_rule['check_in'] . ' 00:00' );
+		$rule_to   = strtotime( $availability_rule['check_out'] . ' 00:00' );
+
+		if ( false === $rule_from || false === $rule_to ) {
+			return array();
+		}
+
+		if ( $rule_to < $rule_from ) {
+			$rule_to = $rule_from;
+		}
+
+		$date_keys = array();
+
+		for ( $day = $rule_from; $day <= $rule_to; $day = strtotime( '+1 day', $day ) ) {
+			$date_keys[] = date( 'Y/m/d', $day );
+		}
+
+		return $date_keys;
 	}
 
 	/**

@@ -1118,16 +1118,13 @@ class Room {
 		if ( $enable_availability === '1' && ! empty( $room_availability ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			$room_availability_arr = Availability::normalize_availability_rules( $room_availability );
 			$room_has_explicit_available_dates = Availability::has_explicit_available_rules( $room_availability_arr );
-			//iterate all the available disabled dates
-			if ( ! empty( $room_availability_arr ) && is_array( $room_availability_arr ) ) {
-				foreach ( $room_availability_arr as $date ) {
-					if ( $date['status'] === 'unavailable' ) {
-						$room_disable_dates[$date['check_in']] = $date['check_in'];
-					}
-					if ( $date['status'] === 'available' ) {
-						$room_enable_dates[$date['check_in']] = $date['check_in'];
-					}
-				}
+
+			$room_rule_disable_dates = Availability::get_rule_dates_by_status( $room_availability_arr, 'unavailable' );
+			$room_disable_dates      = ! empty( $room_rule_disable_dates ) ? array_combine( $room_rule_disable_dates, $room_rule_disable_dates ) : array();
+
+			if ( $room_has_explicit_available_dates ) {
+				$room_rule_enable_dates = Availability::get_rule_dates_by_status( $room_availability_arr, 'available' );
+				$room_enable_dates      = ! empty( $room_rule_enable_dates ) ? array_combine( $room_rule_enable_dates, $room_rule_enable_dates ) : array();
 			}
 		}
 
@@ -1337,7 +1334,7 @@ class Room {
 									minDate: "today",
 									altInput: true,
 									altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
-									showMonths: $(window).width() >= 1240 ? 2 : 1,
+									showMonths: $(window).width() >= 1240 && $(".tf-room-booking-box").width() >= 560 ? 2 : 1,
 
 									// flatpickr locale
 									<?php Helper::tf_flatpickr_locale(); ?>
