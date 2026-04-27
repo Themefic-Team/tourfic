@@ -272,7 +272,9 @@
   background: #111827;
   border-radius: 10px;
   color: #f9fafb;
+  max-height: 250px;
   overflow-x: auto;
+  overflow-y: auto;
   white-space: pre-wrap;
   word-break: break-word;
 }

@@ -302,7 +302,9 @@ $tf-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
 	background: #111827;
 	border-radius: 10px;
 	color: #f9fafb;
+	max-height: 250px;
 	overflow-x: auto;
+	overflow-y: auto;
 	white-space: pre-wrap;
 	word-break: break-word;
 }
