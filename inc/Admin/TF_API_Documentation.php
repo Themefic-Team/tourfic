@@ -88,6 +88,8 @@ class TF_API_Documentation {
 			<?php $this->render_endpoint_section( esc_html__( 'Apartment Management', 'tourfic' ), $this->get_apartment_endpoints() ); ?>
 			<?php $this->render_endpoint_section( esc_html__( 'Car Rental Management', 'tourfic' ), $this->get_car_rental_endpoints() ); ?>
 			<?php $this->render_endpoint_section( esc_html__( 'Taxonomy Management', 'tourfic' ), $this->get_taxonomy_endpoints() ); ?>
+			<?php $this->render_endpoint_section( esc_html__( 'Booking Management', 'tourfic' ), $this->get_booking_endpoints() ); ?>
+			<?php $this->render_endpoint_section( esc_html__( 'Enquiry Management', 'tourfic' ), $this->get_enquiry_endpoints() ); ?>
 		</div>
 		<?php
 	}
@@ -1142,6 +1144,85 @@ class TF_API_Documentation {
 				),
 				'example_request'  => 'DELETE /wp-json/tf/v1/hotel_location/55\nX-API-Key: your-api-key',
 				'example_response' => '{\n    "status": "success",\n    "message": "Dhaka City has been deleted successfully."\n}',
+			),
+		);
+	}
+
+	private function get_booking_endpoints() {
+		return array(
+			array(
+				'method'      => 'GET',
+				'url'         => '/orders',
+				'description' => __( 'Get booking orders list with optional filtering and calendar event data.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'user_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Target user ID. Defaults to current user.', 'tourfic' ) ),
+					array( 'name' => 'checkinout', 'type' => 'string', 'required' => false, 'description' => __( 'Check-in status filter (in, out, not).', 'tourfic' ) ),
+					array( 'name' => 'post_type', 'type' => 'string', 'required' => false, 'description' => __( 'Booking type filter (tf_hotel, tf_tours, tf_apartment, tf_carrental).', 'tourfic' ) ),
+					array( 'name' => 'post_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Filter bookings for a specific post ID.', 'tourfic' ) ),
+					array( 'name' => 'order_status', 'type' => 'string', 'required' => false, 'description' => __( 'Order status filter.', 'tourfic' ) ),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/orders?post_type=tf_hotel&order_status=completed\nX-API-Key: your-api-key',
+				'example_response' => '{\n    "data": [],\n    "events": []\n}',
+			),
+			array(
+				'method'      => 'GET',
+				'url'         => '/order/{id}',
+				'description' => __( 'Get booking order details by internal order row ID.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'Order row ID from tf_order_data table.', 'tourfic' ) ),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/order/1001\nX-API-Key: your-api-key',
+				'example_response' => '{\n    "id": 1001,\n    "order_id": 2345\n}',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/update-order-status/{id}',
+				'description' => __( 'Update order status in Tourfic order table and related WooCommerce order.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'Order row ID (path parameter).', 'tourfic' ) ),
+					array( 'name' => 'order_status', 'type' => 'string', 'required' => true, 'description' => __( 'New order status (for example: pending, processing, completed, cancelled).', 'tourfic' ) ),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/update-order-status/1001\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "order_status": "completed"\n}',
+				'example_response' => '{\n    "status": true\n}',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/update-visitor-details/{id}',
+				'description' => __( 'Update visitor details inside order_details payload.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'Order row ID (path parameter).', 'tourfic' ) ),
+					array( 'name' => 'visitorDetails', 'type' => 'array', 'required' => true, 'description' => __( 'Visitor details array to store in order details.', 'tourfic' ) ),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/update-visitor-details/1001\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "visitorDetails": [\n        {\n            "name": "John Doe",\n            "age": 32\n        }\n    ]\n}',
+				'example_response' => '{\n    "status": true\n}',
+			),
+		);
+	}
+
+	private function get_enquiry_endpoints() {
+		return array(
+			array(
+				'method'      => 'GET',
+				'url'         => '/enquiries',
+				'description' => __( 'Get enquiry list by user role context with optional filters.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'user_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Target user ID. Defaults to current user.', 'tourfic' ) ),
+					array( 'name' => 'post_type', 'type' => 'string', 'required' => true, 'description' => __( 'Post type for enquiries (tf_hotel, tf_tours, tf_apartment, tf_carrental).', 'tourfic' ) ),
+					array( 'name' => 'post_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Filter by specific post ID.', 'tourfic' ) ),
+					array( 'name' => 'filters', 'type' => 'string', 'required' => false, 'description' => __( 'Status filter (for example: replied, responded, not-replied, not-responded).', 'tourfic' ) ),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/enquiries?post_type=tf_hotel&filters=not-replied\nX-API-Key: your-api-key',
+				'example_response' => '[\n    {\n        "id": 1,\n        "post_id": 321,\n        "post_title": "Hotel Sunrise"\n    }\n]',
+			),
+			array(
+				'method'      => 'GET',
+				'url'         => '/enquiries/{id}',
+				'description' => __( 'Get single enquiry details by enquiry ID.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'Enquiry ID (path parameter).', 'tourfic' ) ),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/enquiries/1\nX-API-Key: your-api-key',
+				'example_response' => '{\n    "id": 1,\n    "formatted_date": "Apr 27, 2026",\n    "formatted_time": "10:20:15 AM"\n}',
 			),
 		);
 	}
