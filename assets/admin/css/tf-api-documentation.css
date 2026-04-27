@@ -60,12 +60,42 @@
 	margin-bottom: 16px;
 }
 
+.tf-api-copy-btn {
+	padding: 6px 12px;
+	background: #f6f7f7;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	margin-left: auto;
+	font-size: 13px;
+	font-weight: 500;
+	color: #444;
+	white-space: nowrap;
+}
+
+.tf-api-copy-btn:hover {
+	background: #e1e4e8;
+	border-color: #a0aeb3;
+}
+
+.tf-api-copy-btn:active {
+	transform: scale(0.95);
+}
+
+.tf-api-copy-btn.copied {
+	background: #d4edda;
+	border-color: #28a745;
+	color: #28a745;
+}
+
 .tf-api-route {
 	font-size: 14px;
-	padding: 6px 10px;
+	padding: 8px 12px;
 	background: #f6f7f7;
 	border-radius: 8px;
 	word-break: break-all;
+	flex-grow: 1;
 }
 
 .tf-api-method {

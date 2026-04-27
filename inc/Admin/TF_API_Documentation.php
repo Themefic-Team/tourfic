@@ -6,23 +6,6 @@ defined( 'ABSPATH' ) || exit;
 class TF_API_Documentation {
 	use \Tourfic\Traits\Singleton;
 
-	private $group_order = array(
-		'General',
-		'Hotels',
-		'Rooms',
-		'Tours',
-		'Apartments',
-		'Car Rentals',
-		'Taxonomies',
-		'Users',
-		'Vendors & Finance',
-		'Orders & Booking Management',
-		'Hotel Backend Booking',
-		'Tour Backend Booking',
-		'Enquiries',
-		'Integrations',
-	);
-
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'register_menu' ), 220 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
@@ -70,76 +53,82 @@ class TF_API_Documentation {
 	}
 
 	public function render_page() {
-		$base_url = untrailingslashit( rest_url( 'tf/v1' ) );
-		$groups   = $this->get_route_groups();
 		?>
 		<div class="wrap tf-api-documentation">
 			<h1><?php esc_html_e( 'Tourfic REST API Documentation', 'tourfic' ); ?></h1>
 
 			<?php $this->render_api_key_manager(); ?>
 
-			<?php if ( empty( $groups ) ) : ?>
-				<div class="notice notice-warning inline">
-					<p><?php esc_html_e( 'No Tourfic REST routes were found beyond authentication endpoints. If you expect the vendor dashboard API, make sure Tourfic Pro and its frontend dashboard module are active.', 'tourfic' ); ?></p>
-				</div>
-			<?php else : ?>
-				<?php foreach ( $groups as $group_title => $endpoints ) : ?>
-					<div class="tf-api-section">
-						<h2><?php echo esc_html( $group_title ); ?></h2>
-						<div class="tf-api-endpoints">
-							<?php foreach ( $endpoints as $endpoint ) : ?>
-								<div class="tf-api-endpoint-card">
-									<div class="tf-api-endpoint-header">
-										<span class="tf-api-method tf-api-method-<?php echo esc_attr( strtolower( $endpoint['method'] ) ); ?>">
-											<?php echo esc_html( $endpoint['method'] ); ?>
-										</span>
-										<code class="tf-api-route"><?php echo esc_html( $endpoint['relative_route'] ); ?></code>
-									</div>
+			<?php $this->render_endpoint_section( 'Hotel Management', $this->get_hotel_endpoints() ); ?>
+		</div>
+		<?php
+	}
 
-									<p class="tf-api-endpoint-description"><?php echo esc_html( $endpoint['description'] ); ?></p>
+	private function render_endpoint_section( $title, $endpoints ) {
+		?>
+		<div class="tf-api-section">
+			<h2><?php echo esc_html( $title ); ?></h2>
+			<div class="tf-api-endpoints">
+				<?php foreach ( $endpoints as $endpoint ) : ?>
+					<?php $full_url = rest_url( 'tf/v1' ) . $endpoint['url']; ?>
+					<div class="tf-api-endpoint-card">
+						<div class="tf-api-endpoint-header">
+							<span class="tf-api-method tf-api-method-<?php echo esc_attr( strtolower( $endpoint['method'] ) ); ?>">
+								<?php echo esc_html( $endpoint['method'] ); ?>
+							</span>
+							<code class="tf-api-route"><?php echo esc_html( $endpoint['url'] ); ?></code>
+							<button type="button" class="tf-api-copy-btn" data-url="<?php echo esc_attr( $full_url ); ?>"><?php esc_html_e( 'Copy', 'tourfic' ); ?></button>
+						</div>
 
-									<?php if ( ! empty( $endpoint['parameters'] ) ) : ?>
-										<div class="tf-api-parameters">
-											<h3><?php esc_html_e( 'Parameters', 'tourfic' ); ?></h3>
-											<table class="widefat striped tf-api-table">
-												<thead>
-													<tr>
-														<th><?php esc_html_e( 'Name', 'tourfic' ); ?></th>
-														<th><?php esc_html_e( 'In', 'tourfic' ); ?></th>
-														<th><?php esc_html_e( 'Type', 'tourfic' ); ?></th>
-														<th><?php esc_html_e( 'Required', 'tourfic' ); ?></th>
-														<th><?php esc_html_e( 'Description', 'tourfic' ); ?></th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php foreach ( $endpoint['parameters'] as $parameter ) : ?>
-														<tr>
-															<td><code><?php echo esc_html( $parameter['name'] ); ?></code></td>
-															<td><?php echo esc_html( $parameter['location'] ); ?></td>
-															<td><?php echo esc_html( $parameter['type'] ); ?></td>
-															<td><?php echo ! empty( $parameter['required'] ) ? esc_html__( 'Yes', 'tourfic' ) : esc_html__( 'No', 'tourfic' ); ?></td>
-															<td><?php echo esc_html( $parameter['description'] ); ?></td>
-														</tr>
-													<?php endforeach; ?>
-												</tbody>
-											</table>
-										</div>
-									<?php endif; ?>
+						<p class="tf-api-endpoint-description"><?php echo esc_html( $endpoint['description'] ); ?></p>
 
-									<div class="tf-api-example-grid">
-										<div>
-											<h3><?php esc_html_e( 'Example Request', 'tourfic' ); ?></h3>
-											<pre class="tf-api-code-example"><?php echo esc_html( $endpoint['example_request'] ); ?></pre>
-										</div>
-									</div>
+						<?php if ( ! empty( $endpoint['parameters'] ) ) : ?>
+							<div class="tf-api-parameters">
+								<h3><?php esc_html_e( 'Parameters', 'tourfic' ); ?></h3>
+								<table class="widefat striped tf-api-table">
+									<thead>
+										<tr>
+											<th><?php esc_html_e( 'Parameter', 'tourfic' ); ?></th>
+											<th><?php esc_html_e( 'Type', 'tourfic' ); ?></th>
+											<th><?php esc_html_e( 'Required', 'tourfic' ); ?></th>
+											<th><?php esc_html_e( 'Description', 'tourfic' ); ?></th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php foreach ( $endpoint['parameters'] as $parameter ) : ?>
+											<tr>
+												<td><code><?php echo esc_html( $parameter['name'] ); ?></code></td>
+												<td><?php echo esc_html( $parameter['type'] ); ?></td>
+												<td><?php echo ! empty( $parameter['required'] ) ? esc_html__( 'Yes', 'tourfic' ) : esc_html__( 'No', 'tourfic' ); ?></td>
+												<td><?php echo esc_html( $parameter['description'] ); ?></td>
+											</tr>
+										<?php endforeach; ?>
+									</tbody>
+								</table>
+							</div>
+						<?php endif; ?>
+
+						<div class="tf-api-example-grid">
+							<div>
+								<h3><?php esc_html_e( 'Example Request', 'tourfic' ); ?></h3>
+								<pre class="tf-api-code-example"><?php echo esc_html( $this->format_example_text( $endpoint['example_request'] ) ); ?></pre>
+							</div>
+							<?php if ( ! empty( $endpoint['example_response'] ) ) : ?>
+								<div>
+									<h3><?php esc_html_e( 'Example Response', 'tourfic' ); ?></h3>
+									<pre class="tf-api-code-example"><?php echo esc_html( $this->format_example_text( $endpoint['example_response'] ) ); ?></pre>
 								</div>
-							<?php endforeach; ?>
+							<?php endif; ?>
 						</div>
 					</div>
 				<?php endforeach; ?>
-			<?php endif; ?>
+			</div>
 		</div>
 		<?php
+	}
+
+	private function format_example_text( $text ) {
+		return str_replace( array( '\\r\\n', '\\n', '\\r' ), array( "\n", "\n", "\r" ), (string) $text );
 	}
 
 	private function render_api_key_manager() {
@@ -154,7 +143,7 @@ class TF_API_Documentation {
 							<tbody>
 								<tr>
 									<th><label for="tf-api-key-name"><?php esc_html_e( 'Key Name', 'tourfic' ); ?></label></th>
-									<td><input type="text" id="tf-api-key-name" name="name" class="regular-text" required placeholder="<?php esc_attr_e( 'My Mobile App', 'tourfic' ); ?>"></td>
+									<td><input type="text" id="tf-api-key-name" name="name" class="regular-text" required placeholder="<?php esc_attr_e( 'e.g. Application XYZ', 'tourfic' ); ?>"></td>
 								</tr>
 								<tr>
 									<th><?php esc_html_e( 'Permissions', 'tourfic' ); ?></th>
@@ -179,352 +168,267 @@ class TF_API_Documentation {
 		<?php
 	}
 
-	private function get_route_groups() {
-		$grouped_routes = array();
-		$server         = rest_get_server();
-		$routes         = $server->get_routes();
-
-		foreach ( $routes as $route => $handlers ) {
-			if ( 0 !== strpos( $route, '/tf/v1' ) ) {
-				continue;
-			}
-
-			foreach ( $handlers as $handler ) {
-				if ( empty( $handler['callback'] ) || ! is_array( $handler['callback'] ) ) {
-					continue;
-				}
-
-				$endpoint = $this->build_endpoint_data( $route, $handler );
-				if ( empty( $endpoint ) ) {
-					continue;
-				}
-
-				$grouped_routes[ $endpoint['group'] ][] = $endpoint;
-			}
-		}
-
-		foreach ( $grouped_routes as &$endpoints ) {
-			usort(
-				$endpoints,
-				static function( $left, $right ) {
-					return strcmp( $left['relative_route'] . $left['method'], $right['relative_route'] . $right['method'] );
-				}
-			);
-		}
-
-		uksort( $grouped_routes, array( $this, 'sort_groups' ) );
-
-		return $grouped_routes;
-	}
-
-	private function build_endpoint_data( $route, $handler ) {
-		$callback = $handler['callback'];
-		if ( ! isset( $callback[0], $callback[1] ) || ! is_object( $callback[0] ) ) {
-			return array();
-		}
-
-		try {
-			$reflection = new \ReflectionMethod( $callback[0], $callback[1] );
-		} catch ( \ReflectionException $exception ) {
-			return array();
-		}
-
-		$methods = $this->normalize_methods( $handler['methods'] );
-		if ( empty( $methods ) ) {
-			return array();
-		}
-
-		$method           = $methods[0];
-		$relative_route   = $this->normalize_relative_route( $route );
-		$parameters       = $this->extract_parameters( $route, $reflection, $method );
-		$description      = $this->get_method_summary( $reflection );
-		$example_request  = $this->build_example_request( $method, $relative_route, $parameters );
-		$group            = $this->get_group_title( get_class( $callback[0] ) );
-
+	private function get_hotel_endpoints() {
 		return array(
-			'group'            => $group,
-			'method'           => $method,
-			'relative_route'   => $relative_route,
-			'description'      => $description,
-			'parameters'       => $parameters,
-			'example_request'  => $example_request,
+			array(
+				'method'      => 'GET',
+				'url'         => '/hotels',
+				'description' => 'Get list of hotels for the current user or a target user.',
+				'parameters'  => array(
+					array(
+						'name'        => 'per_page',
+						'type'        => 'integer',
+						'required'    => false,
+						'description' => 'Number of hotels to return (default: 10).',
+					),
+					array(
+						'name'        => 'page',
+						'type'        => 'integer',
+						'required'    => false,
+						'description' => 'Page number for pagination (default: 1).',
+					),
+					array(
+						'name'        => 'user',
+						'type'        => 'integer',
+						'required'    => false,
+						'description' => 'User ID to scope results (admins/managers can view all).',
+					),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/hotels?page=1&per_page=10\nX-API-Key: your-api-key',
+				'example_response' => '{\n    "hotels": [],\n    "total": 0\n}',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/add-hotel',
+				'description' => 'Create a new hotel post.',
+				'parameters'  => array(
+					array(
+						'name'        => 'title',
+						'type'        => 'string',
+						'required'    => true,
+						'description' => 'Hotel title.',
+					),
+					array(
+						'name'        => 'content',
+						'type'        => 'string',
+						'required'    => true,
+						'description' => 'Hotel description/content.',
+					),
+					array(
+						'name'        => 'featured_media',
+						'type'        => 'integer',
+						'required'    => false,
+						'description' => 'Attachment ID for featured image.',
+					),
+					array(
+						'name'        => 'hotelLocations',
+						'type'        => 'array',
+						'required'    => false,
+						'description' => 'Hotel location term IDs.',
+					),
+					array(
+						'name'        => 'hotelFeatures',
+						'type'        => 'array',
+						'required'    => false,
+						'description' => 'Hotel feature term IDs.',
+					),
+					array(
+						'name'        => 'hotelTypes',
+						'type'        => 'array',
+						'required'    => false,
+						'description' => 'Hotel type term IDs.',
+					),
+					array(
+						'name'        => 'tf_hotels_opt',
+						'type'        => 'object',
+						'required'    => false,
+						'description' => 'Hotel settings payload stored in post meta.',
+					),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/add-hotel\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "title": "Hotel Sunrise",\n    "content": "Ocean view hotel",\n    "hotelLocations": [12],\n    "hotelFeatures": [5, 8]\n}',
+				'example_response' => '{\n    "id": 321\n}',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/update-hotel',
+				'description' => 'Update an existing hotel post.',
+				'parameters'  => array(
+					array(
+						'name'        => 'id',
+						'type'        => 'integer',
+						'required'    => true,
+						'description' => 'Hotel post ID.',
+					),
+					array(
+						'name'        => 'title',
+						'type'        => 'string',
+						'required'    => true,
+						'description' => 'Updated hotel title.',
+					),
+					array(
+						'name'        => 'content',
+						'type'        => 'string',
+						'required'    => true,
+						'description' => 'Updated hotel content.',
+					),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/update-hotel\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "id": 321,\n    "title": "Hotel Sunrise Deluxe",\n    "content": "Updated description"\n}',
+				'example_response' => '{\n    "id": 321\n}',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/update-hotel-status/{id}',
+				'description' => 'Update hotel post status.',
+				'parameters'  => array(
+					array(
+						'name'        => 'id',
+						'type'        => 'integer',
+						'required'    => true,
+						'description' => 'Hotel post ID (path parameter).',
+					),
+					array(
+						'name'        => 'hotel_status',
+						'type'        => 'string',
+						'required'    => true,
+						'description' => 'New status (publish, pending, draft, etc.).',
+					),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/update-hotel-status/321\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "hotel_status": "publish"\n}',
+				'example_response' => '{\n    "status": true,\n    "message": "Hotel status updated successfully."\n}',
+			),
+			array(
+				'method'      => 'GET',
+				'url'         => '/hotel-orders',
+				'description' => 'Get hotel orders for the current user/vendor.',
+				'parameters'  => array(
+					array(
+						'name'        => 'user_id',
+						'type'        => 'integer',
+						'required'    => false,
+						'description' => 'Optional user ID context for order listing.',
+					),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/hotel-orders\nX-API-Key: your-api-key',
+				'example_response' => '{\n    "orders": [],\n    "total": 0\n}',
+			),
+			array(
+				'method'      => 'GET',
+				'url'         => '/hotel-order/{id}',
+				'description' => 'Get a single hotel order details record by ID.',
+				'parameters'  => array(
+					array(
+						'name'        => 'id',
+						'type'        => 'integer',
+						'required'    => true,
+						'description' => 'Order ID from tf_order_data table.',
+					),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/hotel-order/1001\nX-API-Key: your-api-key',
+				'example_response' => '{\n    "id": 1001\n}',
+			),
+			array(
+				'method'      => 'GET',
+				'url'         => '/hotel-room-availability',
+				'description' => 'Get room availability calendar data.',
+				'parameters'  => array(
+					array(
+						'name'        => 'id',
+						'type'        => 'integer',
+						'required'    => false,
+						'description' => 'Room ID to fetch availability for.',
+					),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/hotel-room-availability?id=555\nX-API-Key: your-api-key',
+				'example_response' => '[\n    {\n        "check_in": "2026/04/27",\n        "status": "available"\n    }\n]',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/hotel-room-availability',
+				'description' => 'Create or update room availability range.',
+				'parameters'  => array(
+					array(
+						'name'        => 'id',
+						'type'        => 'integer',
+						'required'    => true,
+						'description' => 'Room ID.',
+					),
+					array(
+						'name'        => 'price_by',
+						'type'        => 'string',
+						'required'    => true,
+						'description' => 'Pricing mode for availability entries.',
+					),
+					array(
+						'name'        => 'check_in',
+						'type'        => 'date string',
+						'required'    => true,
+						'description' => 'Start date.',
+					),
+					array(
+						'name'        => 'check_out',
+						'type'        => 'date string',
+						'required'    => true,
+						'description' => 'End date.',
+					),
+					array(
+						'name'        => 'status',
+						'type'        => 'string',
+						'required'    => true,
+						'description' => 'Availability status (available/unavailable).',
+					),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/hotel-room-availability\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "id": 555,\n    "price_by": "1",\n    "check_in": "2026-05-01",\n    "check_out": "2026-05-05",\n    "price": "120",\n    "status": "available"\n}',
+				'example_response' => '{\n    "status": true,\n    "message": "Availability updated successfully."\n}',
+			),
+			array(
+				'method'      => 'DELETE',
+				'url'         => '/hotel-room-availability/{id}',
+				'description' => 'Reset all availability for a room.',
+				'parameters'  => array(
+					array(
+						'name'        => 'id',
+						'type'        => 'integer',
+						'required'    => true,
+						'description' => 'Room ID.',
+					),
+				),
+				'example_request'  => 'DELETE /wp-json/tf/v1/hotel-room-availability/555\nX-API-Key: your-api-key',
+				'example_response' => '{\n    "status": true,\n    "message": "Availability reset successfully."\n}',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/hotel-ical-import',
+				'description' => 'Import iCal events and mark unavailable dates.',
+				'parameters'  => array(
+					array(
+						'name'        => 'ical_url',
+						'type'        => 'string',
+						'required'    => true,
+						'description' => 'Public iCal URL.',
+					),
+					array(
+						'name'        => 'hotel_id',
+						'type'        => 'integer',
+						'required'    => true,
+						'description' => 'Hotel post ID.',
+					),
+					array(
+						'name'        => 'room_index',
+						'type'        => 'integer',
+						'required'    => true,
+						'description' => 'Index of room in hotel options.',
+					),
+					array(
+						'name'        => 'pricing_by',
+						'type'        => 'string',
+						'required'    => false,
+						'description' => 'Pricing mode to apply to imported blocked dates.',
+					),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/hotel-ical-import\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "ical_url": "https://example.com/calendar.ics",\n    "hotel_id": 321,\n    "room_index": 0,\n    "pricing_by": "1"\n}',
+				'example_response' => '{\n    "status": true,\n    "message": "iCal imported successfully."\n}',
+			),
 		);
 	}
 
-	private function normalize_methods( $methods ) {
-		if ( is_array( $methods ) ) {
-			$normalized = array();
-			foreach ( $methods as $method => $allowed ) {
-				if ( $allowed ) {
-					$normalized[] = strtoupper( $method );
-				}
-			}
-
-			return array_values( array_diff( $normalized, array( 'HEAD' ) ) );
-		}
-
-		if ( is_string( $methods ) ) {
-			return array_map( 'trim', explode( ',', strtoupper( $methods ) ) );
-		}
-
-		return array();
-	}
-
-	private function normalize_relative_route( $route ) {
-		$route = preg_replace( '#^/tf/v1#', '', $route );
-
-		return empty( $route ) ? '/' : $route;
-	}
-
-	private function get_method_summary( \ReflectionMethod $reflection ) {
-		$doc_comment = $reflection->getDocComment();
-
-		if ( $doc_comment ) {
-			$lines = preg_split( '/\R/', $doc_comment );
-			foreach ( $lines as $line ) {
-				$line = trim( trim( $line ), "/*\t\n\r\0\x0B" );
-				if ( '' === $line || 0 === strpos( $line, '@' ) ) {
-					continue;
-				}
-
-				return $line;
-			}
-		}
-
-		return ucwords( str_replace( '_', ' ', preg_replace( '/^tf_fd_/', '', $reflection->getName() ) ) );
-	}
-
-	private function extract_parameters( $route, \ReflectionMethod $reflection, $http_method ) {
-		$parameters = array();
-
-		preg_match_all( '/\(\?P<([^>]+)>[^)]+\)/', $route, $path_matches );
-		if ( ! empty( $path_matches[1] ) ) {
-			foreach ( array_unique( $path_matches[1] ) as $path_param ) {
-				$parameters[ $path_param ] = array(
-					'name'     => $path_param,
-					'location' => 'path',
-					'type'     => $this->guess_parameter_type( $path_param, $route ),
-					'required' => true,
-					'description' => $this->get_parameter_description( $path_param, $route, $http_method ),
-				);
-			}
-		}
-
-		$file_name = $reflection->getFileName();
-		if ( empty( $file_name ) || ! is_readable( $file_name ) ) {
-			return array_values( $parameters );
-		}
-
-		$file_lines = file( $file_name );
-		if ( false === $file_lines ) {
-			return array_values( $parameters );
-		}
-
-		$source = implode( '', array_slice( $file_lines, $reflection->getStartLine() - 1, $reflection->getEndLine() - $reflection->getStartLine() + 1 ) );
-
-		preg_match_all( '/->get_param\(\s*[\'\"]([^\'\"]+)[\'\"]\s*\)/', $source, $request_param_matches );
-		preg_match_all( '/\$request\s*\[\s*[\'\"]([^\'\"]+)[\'\"]\s*\]/', $source, $request_array_matches );
-
-		$method_parameters = array_merge(
-			! empty( $request_param_matches[1] ) ? $request_param_matches[1] : array(),
-			! empty( $request_array_matches[1] ) ? $request_array_matches[1] : array()
-		);
-
-		foreach ( array_unique( $method_parameters ) as $parameter_name ) {
-			if ( isset( $parameters[ $parameter_name ] ) ) {
-				continue;
-			}
-
-			$parameters[ $parameter_name ] = array(
-				'name'     => $parameter_name,
-				'location' => 'GET' === $http_method ? 'query' : 'body',
-				'type'     => $this->guess_parameter_type( $parameter_name, $route ),
-				'required' => false,
-				'description' => $this->get_parameter_description( $parameter_name, $route, $http_method ),
-			);
-		}
-
-		return array_values( $parameters );
-	}
-
-	private function guess_parameter_type( $parameter_name, $route ) {
-		if ( false !== strpos( $route, '(?P<' . $parameter_name . '>\\d+)' ) ) {
-			return 'integer';
-		}
-
-		$integer_names = array( 'id', 'page', 'per_page', 'user', 'user_id', 'post_id', 'hotel_id', 'room_id', 'tour_id' );
-		$array_names   = array( 'roles', 'filters', 'permissions', 'apartmentLocations', 'apartmentFeatures', 'apartmentTypes', 'hotelLocations', 'hotelFeatures', 'hotelTypes', 'carRentalLocations', 'carRentalCategories', 'repeat_days', 'repeat_weeks' );
-
-		if ( in_array( $parameter_name, $integer_names, true ) || preg_match( '/(_id|_count|adults|children|infants|hours)$/', $parameter_name ) ) {
-			return 'integer';
-		}
-
-		if ( in_array( $parameter_name, $array_names, true ) || preg_match( '/(items|types|dates|extras|packages)$/', $parameter_name ) ) {
-			return 'array';
-		}
-
-		if ( preg_match( '/(price|amount|total|distance)$/', $parameter_name ) ) {
-			return 'number';
-		}
-
-		if ( preg_match( '/(date)$/', $parameter_name ) ) {
-			return 'date string';
-		}
-
-		if ( preg_match( '/(time)$/', $parameter_name ) ) {
-			return 'time string';
-		}
-
-		return 'string';
-	}
-
-	private function build_example_request( $http_method, $relative_route, $parameters ) {
-		$path     = preg_replace( '/\(\?P<([^>]+)>[^)]+\)/', '<$1>', $relative_route );
-		$url_path = '/wp-json/tf/v1' . $path;
-
-		$query_parameters = array();
-		$body_parameters  = array();
-
-		foreach ( $parameters as $parameter ) {
-			if ( 'path' === $parameter['location'] ) {
-				continue;
-			}
-
-			$placeholder = $this->get_example_placeholder( $parameter['type'], $parameter['name'] );
-			if ( 'query' === $parameter['location'] ) {
-				$query_parameters[] = $parameter['name'] . '=' . $placeholder;
-			} else {
-				$body_parameters[ $parameter['name'] ] = $placeholder;
-			}
-		}
-
-		if ( ! empty( $query_parameters ) ) {
-			$url_path .= '?' . implode( '&', array_slice( $query_parameters, 0, 4 ) );
-		}
-
-		$lines   = array();
-		$lines[] = $http_method . ' ' . $url_path;
-		$lines[] = 'X-API-Key: your-api-key';
-
-		if ( in_array( $http_method, array( 'POST', 'PUT', 'PATCH', 'DELETE' ), true ) && ! empty( $body_parameters ) ) {
-			$lines[] = 'Content-Type: application/json';
-			$lines[] = '';
-			$lines[] = wp_json_encode( $body_parameters, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
-		}
-
-		return implode( "\n", $lines );
-	}
-
-	private function get_parameter_description( $parameter_name, $route, $http_method ) {
-		$known_descriptions = array(
-			'id' => 'Unique ID of the target resource.',
-			'page' => 'Page number for paginated results.',
-			'per_page' => 'Number of items per page.',
-			'status' => 'Filter or set the current status.',
-			'user' => 'User ID used to scope the request.',
-			'user_id' => 'User ID used to scope the request.',
-			'post_id' => 'Post ID used to scope the request.',
-			'hotel_id' => 'Hotel post ID.',
-			'room_id' => 'Room identifier.',
-			'tour_id' => 'Tour post ID.',
-			'query' => 'Search text used for filtering or autocomplete.',
-			'filters' => 'Filter rules applied to the result set.',
-			'roles' => 'List of user roles to include.',
-			'permissions' => 'Permission list for this API key.',
-			'name' => 'Human-readable name for the resource or API key.',
-			'api_key' => 'API key used for authentication.',
-			'api_secret' => 'Legacy field, no longer required for API key authentication.',
-			'key_id' => 'ID of the API key record.',
-			'checkinout' => 'Check-in/check-out state filter.',
-			'order_status' => 'Order status filter.',
-			'post_type' => 'Target content type.',
-			'from' => 'Start date/time value.',
-			'to' => 'End date/time value.',
-		);
-
-		if ( isset( $known_descriptions[ $parameter_name ] ) ) {
-			return $known_descriptions[ $parameter_name ];
-		}
-
-		if ( false !== strpos( $route, '(?P<' . $parameter_name . '>\\d+)' ) ) {
-			return 'Numeric path parameter used to identify the resource.';
-		}
-
-		if ( preg_match( '/(_date|date)$/', $parameter_name ) ) {
-			return 'Date value used by this request.';
-		}
-
-		if ( preg_match( '/(_time|time)$/', $parameter_name ) ) {
-			return 'Time value used by this request.';
-		}
-
-		if ( preg_match( '/(_id|Id)$/', $parameter_name ) ) {
-			return 'Identifier used to reference a related record.';
-		}
-
-		if ( 'GET' === $http_method ) {
-			return 'Optional query parameter used to filter or shape the response.';
-		}
-
-		return 'Request field used by this endpoint.';
-	}
-
-	private function get_example_placeholder( $type, $parameter_name ) {
-		switch ( $type ) {
-			case 'integer':
-				return '1';
-			case 'number':
-				return '99.99';
-			case 'array':
-				return '[' . $parameter_name . ']';
-			case 'date string':
-				return '2026-04-26';
-			case 'time string':
-				return '10:30';
-			default:
-				return '<' . $parameter_name . '>';
-		}
-	}
-
-	private function get_group_title( $class_name ) {
-		$group_map = array(
-			'TF_FD_Rest_API'                       => 'General',
-			'TF_FD_Hotel_Rest_API'                 => 'Hotels',
-			'TF_FD_Room_Rest_API'                  => 'Rooms',
-			'TF_FD_Tour_Rest_API'                  => 'Tours',
-			'TF_FD_Apartment_Rest_API'             => 'Apartments',
-			'TF_FD_Rental_Rest_API'                => 'Car Rentals',
-			'TF_FD_Taxonomy_Rest_API'              => 'Taxonomies',
-			'TF_FD_User_Rest_API'                  => 'Users',
-			'TF_FD_Vendor_Rest_API'                => 'Vendors & Finance',
-			'TF_FD_Booking_Rest_API'               => 'Orders & Booking Management',
-			'TF_FD_Hotel_Backend_Booking_Rest_API' => 'Hotel Backend Booking',
-			'TF_FD_Tour_Backend_Booking_Rest_API'  => 'Tour Backend Booking',
-			'TF_FD_Enquiry_Rest_API'               => 'Enquiries',
-			'TF_FD_Integration_Rest_API'           => 'Integrations',
-		);
-
-		$class_name = ltrim( $class_name, '\\' );
-		$class_name = false !== strrpos( $class_name, '\\' ) ? substr( $class_name, strrpos( $class_name, '\\' ) + 1 ) : $class_name;
-
-		return isset( $group_map[ $class_name ] ) ? $group_map[ $class_name ] : esc_html__( 'Other', 'tourfic' );
-	}
-
-	private function route_uses_session_auth( $relative_route ) {
-		return in_array( $relative_route, array( '/auth/generate-key', '/auth/revoke-key', '/auth/keys' ), true );
-	}
-
-	private function sort_groups( $left, $right ) {
-		$left_index  = array_search( $left, $this->group_order, true );
-		$right_index = array_search( $right, $this->group_order, true );
-
-		$left_index  = false === $left_index ? PHP_INT_MAX : $left_index;
-		$right_index = false === $right_index ? PHP_INT_MAX : $right_index;
-
-		if ( $left_index === $right_index ) {
-			return strcmp( $left, $right );
-		}
-
-		return $left_index - $right_index;
-	}
 }

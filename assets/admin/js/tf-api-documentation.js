@@ -92,5 +92,40 @@ jQuery(function($) {
 		});
 	});
 
+	$(document).on('click', '.tf-api-copy-btn', function() {
+		const $btn = $(this);
+		const url = $btn.data('url');
+
+		if (!url) {
+			return;
+		}
+
+		// Use modern clipboard API if available, fallback to older method
+		if (navigator.clipboard && navigator.clipboard.writeText) {
+			navigator.clipboard.writeText(url).then(function() {
+				$btn.addClass('copied').text('Copied!');
+				setTimeout(function() {
+					$btn.removeClass('copied').text('Copy');
+				}, 2000);
+			}).catch(function() {
+				window.alert('Failed to copy URL to clipboard.');
+			});
+		} else {
+			// Fallback for older browsers
+			const $temp = $('<textarea />').text(url).appendTo('body');
+			$temp.select();
+			try {
+				document.execCommand('copy');
+				$btn.addClass('copied').text('Copied!');
+				setTimeout(function() {
+					$btn.removeClass('copied').text('Copy');
+				}, 2000);
+			} catch(err) {
+				window.alert('Failed to copy URL to clipboard.');
+			}
+			$temp.remove();
+		}
+	});
+
 	loadKeys();
 });
