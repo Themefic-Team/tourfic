@@ -3,6 +3,61 @@
 	margin-top: 24px;
 }
 
+/* ── Sticky top nav ── */
+.tf-api-docs-nav {
+	position: sticky;
+	top: 32px; /* WP admin bar height */
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 12px;
+	padding: 8px 12px;
+	margin-bottom: 24px;
+	box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+	scrollbar-width: none;
+}
+
+.tf-api-docs-nav::-webkit-scrollbar {
+	display: none;
+}
+
+.tf-api-docs-nav__item {
+	display: inline-flex;
+	align-items: center;
+	flex-shrink: 0;
+	padding: 6px 14px;
+	border-radius: 999px;
+	font-size: 13px;
+	font-weight: 500;
+	color: #374151;
+	text-decoration: none;
+	white-space: nowrap;
+	transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tf-api-docs-nav__item:hover,
+.tf-api-docs-nav__item:focus-visible {
+	background: #f3f4f6;
+	color: #111827;
+	text-decoration: none;
+}
+
+.tf-api-docs-nav__item.is-active {
+	background: #1d4ed8;
+	color: #fff;
+}
+
+/* Offset anchor targets so they clear the sticky nav */
+.tf-api-section,
+#tf-api-key-manager {
+	scroll-margin-top: 80px;
+}
+
 .tf-api-docs-intro {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -29,7 +84,10 @@
 .tf-api-endpoint-card h3 {
 	margin-top: 0;
 }
-
+.tf-api-key-manager h2 {
+	margin-top: 0;
+	margin-bottom: 16px;
+}
 .tf-api-docs-summary-card ul {
 	margin: 0;
 	padding-left: 18px;

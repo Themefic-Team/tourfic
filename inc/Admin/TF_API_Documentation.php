@@ -80,8 +80,26 @@ class TF_API_Documentation {
 		<div class="wrap tf-api-documentation">
 			<h1><?php esc_html_e( 'Tourfic REST API Documentation', 'tourfic' ); ?></h1>
 
-			<?php $this->render_api_key_manager(); ?>
+			<nav class="tf-api-docs-nav" aria-label="<?php esc_attr_e( 'API sections', 'tourfic' ); ?>">
+				<a href="#tf-api-key-manager" class="tf-api-docs-nav__item"><?php esc_html_e( 'API Keys', 'tourfic' ); ?></a>
+				<a href="#tf-section-general" class="tf-api-docs-nav__item"><?php esc_html_e( 'General', 'tourfic' ); ?></a>
+				<a href="#tf-section-hotel-management" class="tf-api-docs-nav__item"><?php esc_html_e( 'Hotel', 'tourfic' ); ?></a>
+				<a href="#tf-section-room-management" class="tf-api-docs-nav__item"><?php esc_html_e( 'Room', 'tourfic' ); ?></a>
+				<a href="#tf-section-tour-management" class="tf-api-docs-nav__item"><?php esc_html_e( 'Tour', 'tourfic' ); ?></a>
+				<a href="#tf-section-apartment-management" class="tf-api-docs-nav__item"><?php esc_html_e( 'Apartment', 'tourfic' ); ?></a>
+				<a href="#tf-section-car-rental-management" class="tf-api-docs-nav__item"><?php esc_html_e( 'Car Rental', 'tourfic' ); ?></a>
+				<a href="#tf-section-taxonomy-management" class="tf-api-docs-nav__item"><?php esc_html_e( 'Taxonomy', 'tourfic' ); ?></a>
+				<a href="#tf-section-booking-management" class="tf-api-docs-nav__item"><?php esc_html_e( 'Booking', 'tourfic' ); ?></a>
+				<a href="#tf-section-enquiry-management" class="tf-api-docs-nav__item"><?php esc_html_e( 'Enquiry', 'tourfic' ); ?></a>
+				<a href="#tf-section-user-management" class="tf-api-docs-nav__item"><?php esc_html_e( 'Users', 'tourfic' ); ?></a>
+				<a href="#tf-section-vendor-reports" class="tf-api-docs-nav__item"><?php esc_html_e( 'Vendor &amp; Reports', 'tourfic' ); ?></a>
+			</nav>
 
+			<div id="tf-api-key-manager">
+			<?php $this->render_api_key_manager(); ?>
+			</div>
+
+			<?php $this->render_endpoint_section( esc_html__( 'General', 'tourfic' ), $this->get_general_endpoints() ); ?>
 			<?php $this->render_endpoint_section( esc_html__( 'Hotel Management', 'tourfic' ), $this->get_hotel_endpoints() ); ?>
 			<?php $this->render_endpoint_section( esc_html__( 'Room Management', 'tourfic' ), $this->get_room_endpoints() ); ?>
 			<?php $this->render_endpoint_section( esc_html__( 'Tour Management', 'tourfic' ), $this->get_tour_endpoints() ); ?>
@@ -97,8 +115,9 @@ class TF_API_Documentation {
 	}
 
 	private function render_endpoint_section( $title, $endpoints ) {
+		$section_id = 'tf-section-' . sanitize_title( $title );
 		?>
-		<div class="tf-api-section tf-api-section-collapsible is-expanded">
+		<div id="<?php echo esc_attr( $section_id ); ?>" class="tf-api-section tf-api-section-collapsible is-expanded">
 			<div class="tf-api-section-header">
 				<h2><?php echo esc_html( $title ); ?></h2>
 				<button type="button" class="tf-api-section-toggle" aria-expanded="true" aria-label="<?php echo esc_attr__( 'Collapse endpoint group', 'tourfic' ); ?>"></button>
@@ -170,7 +189,7 @@ class TF_API_Documentation {
 
 	private function render_api_key_manager() {
 		?>
-		<div class="tf-api-section">
+		<div class="tf-api-section tf-api-key-manager">
 			<h2><?php esc_html_e( 'API Key Management', 'tourfic' ); ?></h2>
 			<div class="tf-api-key-manager-grid">
 				<div class="tf-api-endpoint-card">
@@ -203,6 +222,19 @@ class TF_API_Documentation {
 			</div>
 		</div>
 		<?php
+	}
+
+	private function get_general_endpoints() {
+		return array(
+			array(
+				'method'      => 'GET',
+				'url'         => '/tf-settings',
+				'description' => __( 'Retrieve the full Tourfic plugin settings. Requires the requesting user to be logged in.', 'tourfic' ),
+				'parameters'  => array(),
+				'example_request'  => 'GET /wp-json/tf/v1/tf-settings' . "\n" . 'X-API-Key: your-api-key',
+				'example_response' => '{' . "\n" . '    "currency": "USD",' . "\n" . '    "date_format": "Y-m-d",' . "\n" . '    "timezone": "America/New_York",' . "\n" . '    ...' . "\n" . '}',
+			),
+		);
 	}
 
 	private function get_hotel_endpoints() {

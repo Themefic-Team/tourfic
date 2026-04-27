@@ -161,5 +161,79 @@ jQuery(function($) {
 		$btn.attr('aria-label', collapsedAriaLabel);
 	});
 
+	// ── Sticky nav: active link highlighting ──
+	(function() {
+		var $nav     = $('.tf-api-docs-nav');
+		var $items   = $nav.find('.tf-api-docs-nav__item');
+		if (!$items.length) { return; }
+
+		// Map each nav item to its target element
+		var targets = [];
+		$items.each(function() {
+			var id = ($(this).attr('href') || '').replace(/^#/, '');
+			var el = id ? document.getElementById(id) : null;
+			if (el) { targets.push({ el: el, $item: $(this) }); }
+		});
+		if (!targets.length) { return; }
+
+		var THRESHOLD = 100; // px from top of viewport
+
+		// Scroll the nav bar horizontally so the active pill is centred
+		function centreInNav($item) {
+			if (!$item.length) { return; }
+			var nav   = $nav[0];
+			var left  = $item[0].offsetLeft;
+			var width = $item[0].offsetWidth;
+			nav.scrollLeft = left - nav.offsetWidth / 2 + width / 2;
+		}
+
+		function markActive($item) {
+			$items.removeClass('is-active');
+			$item.addClass('is-active');
+			centreInNav($item);
+		}
+
+		function calcActive() {
+			// Last section whose top edge has passed the threshold
+			var best = -1;
+			for (var i = 0; i < targets.length; i++) {
+				if (targets[i].el.getBoundingClientRect().top <= THRESHOLD) {
+					best = i;
+				}
+			}
+			// Nothing has passed yet → highlight first item (top of page)
+			markActive(best < 0 ? targets[0].$item : targets[best].$item);
+		}
+
+		// Click: scroll programmatically so we control the entire flow
+		$items.on('click', function(e) {
+			e.preventDefault();
+			var href = $(this).attr('href') || '';
+			var id   = href.replace(/^#/, '');
+			var el   = id ? document.getElementById(id) : null;
+			if (!el) { return; }
+
+			// Set active immediately so there is never a flash
+			markActive($(this));
+
+			// Scroll — use scrollTo with offset so sticky nav doesn't cover target
+			var targetTop = el.getBoundingClientRect().top + window.pageYOffset - (THRESHOLD - 10);
+			window.scrollTo({ top: targetTop, behavior: 'smooth' });
+		});
+
+		// Debounced scroll listener — reliable in both directions
+		var rafPending = false;
+		$(window).on('scroll.tfApiNav', function() {
+			if (rafPending) { return; }
+			rafPending = true;
+			requestAnimationFrame(function() {
+				rafPending = false;
+				calcActive();
+			});
+		});
+
+		calcActive();
+	}());
+
 	loadKeys();
 });
