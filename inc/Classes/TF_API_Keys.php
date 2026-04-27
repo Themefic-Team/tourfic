@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 class TF_API_Keys {
 	use \Tourfic\Traits\Singleton;
 
-	const TABLE_VERSION = '1.0.0';
+	const TABLE_VERSION = '1.0.1';
 
 	private $last_auth_error = null;
 	private $headers_present = false;
@@ -41,7 +41,7 @@ class TF_API_Keys {
 			user_id BIGINT UNSIGNED NOT NULL,
 			name VARCHAR(200) NOT NULL,
 			api_key_hash CHAR(64) NOT NULL,
-			api_key_preview VARCHAR(32) NOT NULL,
+			api_key_preview VARCHAR(80) NOT NULL,
 			api_secret_hash CHAR(64) NOT NULL,
 			permissions TEXT NOT NULL,
 			status VARCHAR(20) NOT NULL DEFAULT 'active',
@@ -111,16 +111,11 @@ class TF_API_Keys {
 		}
 
 		$credentials = $this->get_api_credentials_from_request();
-		if ( empty( $credentials['api_key'] ) && empty( $credentials['api_secret'] ) ) {
+		if ( empty( $credentials['api_key'] ) ) {
 			return $user_id;
 		}
 
 		$this->headers_present = true;
-
-		if ( empty( $credentials['api_key'] ) || empty( $credentials['api_secret'] ) ) {
-			$this->last_auth_error = new \WP_Error( 'tf_api_auth_missing_headers', esc_html__( 'Both X-API-Key and X-API-Secret are required.', 'tourfic' ), array( 'status' => 401 ) );
-			return $user_id;
-		}
 
 		$record = $this->get_key_record_by_key( $credentials['api_key'] );
 		if ( empty( $record ) ) {
@@ -135,11 +130,6 @@ class TF_API_Keys {
 
 		if ( ! empty( $record->expires_at ) && strtotime( $record->expires_at ) < current_time( 'timestamp', true ) ) {
 			$this->last_auth_error = new \WP_Error( 'tf_api_auth_expired_key', esc_html__( 'This API key has expired.', 'tourfic' ), array( 'status' => 403 ) );
-			return $user_id;
-		}
-
-		if ( ! hash_equals( $record->api_secret_hash, $this->hash_value( $credentials['api_secret'] ) ) ) {
-			$this->last_auth_error = new \WP_Error( 'tf_api_auth_invalid_secret', esc_html__( 'The API secret is invalid.', 'tourfic' ), array( 'status' => 401 ) );
 			return $user_id;
 		}
 
@@ -207,15 +197,14 @@ class TF_API_Keys {
 	}
 
 	public function validate_api_key_endpoint( $request ) {
-		$api_key    = sanitize_text_field( (string) $request->get_param( 'api_key' ) );
-		$api_secret = sanitize_text_field( (string) $request->get_param( 'api_secret' ) );
+		$api_key = sanitize_text_field( (string) $request->get_param( 'api_key' ) );
 
-		if ( empty( $api_key ) || empty( $api_secret ) ) {
-			return new \WP_Error( 'tf_api_key_credentials_required', esc_html__( 'API key and API secret are required.', 'tourfic' ), array( 'status' => 400 ) );
+		if ( empty( $api_key ) ) {
+			return new \WP_Error( 'tf_api_key_required', esc_html__( 'API key is required.', 'tourfic' ), array( 'status' => 400 ) );
 		}
 
 		$record = $this->get_key_record_by_key( $api_key );
-		if ( empty( $record ) || ! hash_equals( $record->api_secret_hash, $this->hash_value( $api_secret ) ) ) {
+		if ( empty( $record ) ) {
 			return rest_ensure_response( array( 'success' => true, 'valid' => false ) );
 		}
 
@@ -288,7 +277,7 @@ class TF_API_Keys {
 		$created_at  = current_time( 'mysql', true );
 		$api_key     = 'tf_' . strtolower( wp_generate_password( 32, false, false ) );
 		$api_secret  = wp_generate_password( 40, false, false );
-		$key_preview = substr( $api_key, 0, 10 ) . '...' . substr( $api_key, -4 );
+		$key_preview = $api_key;
 		$table_name  = $this->get_table_name();
 
 		$wpdb->insert(
@@ -414,24 +403,21 @@ class TF_API_Keys {
 	}
 
 	private function get_api_credentials_from_request() {
-		$api_key    = $this->get_request_header( 'X-API-Key' );
-		$api_secret = $this->get_request_header( 'X-API-Secret' );
+		$api_key = $this->get_request_header( 'X-API-Key' );
 
-		if ( empty( $api_key ) || empty( $api_secret ) ) {
+		if ( empty( $api_key ) ) {
 			$authorization = $this->get_request_header( 'Authorization' );
 			if ( $authorization && 0 === stripos( $authorization, 'Basic ' ) ) {
 				$decoded = base64_decode( substr( $authorization, 6 ), true );
 				if ( $decoded && false !== strpos( $decoded, ':' ) ) {
-					list( $basic_key, $basic_secret ) = explode( ':', $decoded, 2 );
-					$api_key    = $api_key ? $api_key : trim( $basic_key );
-					$api_secret = $api_secret ? $api_secret : trim( $basic_secret );
+					list( $basic_key ) = explode( ':', $decoded, 2 );
+					$api_key = $api_key ? $api_key : trim( $basic_key );
 				}
 			}
 		}
 
 		return array(
-			'api_key'    => sanitize_text_field( (string) $api_key ),
-			'api_secret' => sanitize_text_field( (string) $api_secret ),
+			'api_key' => sanitize_text_field( (string) $api_key ),
 		);
 	}
 

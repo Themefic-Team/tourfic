@@ -433,7 +433,7 @@ class TF_API_Documentation {
 			'permissions' => 'Permission list for this API key.',
 			'name' => 'Human-readable name for the resource or API key.',
 			'api_key' => 'API key used for authentication.',
-			'api_secret' => 'API secret paired with the API key.',
+			'api_secret' => 'Legacy field, no longer required for API key authentication.',
 			'key_id' => 'ID of the API key record.',
 			'checkinout' => 'Check-in/check-out state filter.',
 			'order_status' => 'Order status filter.',
@@ -488,20 +488,20 @@ class TF_API_Documentation {
 
 	private function get_group_title( $class_name ) {
 		$group_map = array(
-			'TF_FD_Rest_API'                               => 'General',
-			'TF_FD_Hotel_Rest_API'                         => 'Hotels',
-			'TF_FD_Room_Rest_API'                          => 'Rooms',
-			'TF_FD_Tour_Rest_API'                          => 'Tours',
-			'TF_FD_Apartment_Rest_API'                     => 'Apartments',
-			'TF_FD_Rental_Rest_API'                        => 'Car Rentals',
-			'TF_FD_Taxonomy_Rest_API'                      => 'Taxonomies',
-			'TF_FD_User_Rest_API'                          => 'Users',
-			'TF_FD_Vendor_Rest_API'                        => 'Vendors & Finance',
-			'TF_FD_Booking_Rest_API'                       => 'Orders & Booking Management',
-			'TF_FD_Hotel_Backend_Booking_Rest_API'         => 'Hotel Backend Booking',
-			'TF_FD_Tour_Backend_Booking_Rest_API'          => 'Tour Backend Booking',
-			'TF_FD_Enquiry_Rest_API'                       => 'Enquiries',
-			'TF_FD_Integration_Rest_API'                   => 'Integrations',
+			'TF_FD_Rest_API'                       => 'General',
+			'TF_FD_Hotel_Rest_API'                 => 'Hotels',
+			'TF_FD_Room_Rest_API'                  => 'Rooms',
+			'TF_FD_Tour_Rest_API'                  => 'Tours',
+			'TF_FD_Apartment_Rest_API'             => 'Apartments',
+			'TF_FD_Rental_Rest_API'                => 'Car Rentals',
+			'TF_FD_Taxonomy_Rest_API'              => 'Taxonomies',
+			'TF_FD_User_Rest_API'                  => 'Users',
+			'TF_FD_Vendor_Rest_API'                => 'Vendors & Finance',
+			'TF_FD_Booking_Rest_API'               => 'Orders & Booking Management',
+			'TF_FD_Hotel_Backend_Booking_Rest_API' => 'Hotel Backend Booking',
+			'TF_FD_Tour_Backend_Booking_Rest_API'  => 'Tour Backend Booking',
+			'TF_FD_Enquiry_Rest_API'               => 'Enquiries',
+			'TF_FD_Integration_Rest_API'           => 'Integrations',
 		);
 
 		$class_name = ltrim( $class_name, '\\' );

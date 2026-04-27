@@ -1,7 +1,6 @@
 jQuery(function($) {
 	const config = window.tfApiDocs || {};
 	const $list = $('#tf-api-keys-container');
-	const $result = $('#tf-api-generated-credentials');
 
 	function esc(value) {
 		return $('<div />').text(value == null ? '' : String(value)).html();
@@ -13,26 +12,27 @@ jQuery(function($) {
 			return;
 		}
 
-		let rows = keys.map(function(key) {
+		let cards = keys.map(function(key) {
 			const permissions = Array.isArray(key.permissions) ? key.permissions.join(', ') : '';
 			const revokeDisabled = key.status !== 'active' ? 'disabled' : '';
-			return '<tr>' +
-				'<td>' + esc(key.name) + '</td>' +
-				'<td><code>' + esc(key.api_key_preview) + '</code></td>' +
-				'<td>' + esc(permissions) + '</td>' +
-				'<td>' + esc(key.status) + '</td>' +
-				'<td>' + esc(key.last_used || 'Never') + '</td>' +
-				'<td>' + esc(key.created_at || '') + '</td>' +
-				'<td><button type="button" class="button tf-revoke-api-key" data-key-id="' + esc(key.id) + '" ' + revokeDisabled + '>Revoke</button></td>' +
-			'</tr>';
+			return '<article class="tf-api-key-item">' +
+				'<div class="tf-api-key-item__head">' +
+					'<h4 class="tf-api-key-item__title">' + esc(key.name || 'Untitled Key') + '</h4>' +
+					'<span class="tf-api-key-item__status tf-api-key-item__status-' + esc((key.status || '').toLowerCase()) + '">' + esc(key.status || 'unknown') + '</span>' +
+				'</div>' +
+				'<div class="tf-api-key-item__meta">' +
+					'<p><strong>API Key:</strong> <code>' + esc(key.api_key_preview) + '</code></p>' +
+					'<p><strong>Permissions:</strong> ' + esc(permissions || 'None') + '</p>' +
+					'<p><strong>Last Used:</strong> ' + esc(key.last_used || 'Never') + '</p>' +
+					'<p><strong>Created:</strong> ' + esc(key.created_at || 'Unknown') + '</p>' +
+				'</div>' +
+				'<div class="tf-api-key-item__actions">' +
+					'<button type="button" class="button tf-revoke-api-key" data-key-id="' + esc(key.id) + '" ' + revokeDisabled + '>Revoke</button>' +
+				'</div>' +
+			'</article>';
 		}).join('');
 
-		$list.html(
-			'<table class="widefat striped tf-api-table tf-api-keys-table">' +
-				'<thead><tr><th>Name</th><th>API Key</th><th>Permissions</th><th>Status</th><th>Last Used</th><th>Created</th><th>Action</th></tr></thead>' +
-				'<tbody>' + rows + '</tbody>' +
-			'</table>'
-		);
+		$list.html('<div class="tf-api-key-list">' + cards + '</div>');
 	}
 
 	function loadKeys() {
@@ -62,11 +62,6 @@ jQuery(function($) {
 				window.alert(response.data || 'Unable to generate API key.');
 				return;
 			}
-
-			const key = response.data || {};
-			$result.html(
-				'<div class="notice notice-success inline"><p><strong>API Key:</strong> <code>' + esc(key.api_key) + '</code><br><strong>API Secret:</strong> <code>' + esc(key.api_secret) + '</code><br>Store the secret now. It will not be shown again.</p></div>'
-			).show();
 
 			$('#tf-generate-api-key-form')[0].reset();
 			loadKeys();

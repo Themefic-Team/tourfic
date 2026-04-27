@@ -152,6 +152,69 @@
 	white-space: nowrap;
 }
 
+.tf-api-key-list {
+	display: grid;
+	gap: 14px;
+}
+
+.tf-api-key-item {
+	border: 1px solid #dcdcde;
+	border-radius: 10px;
+	padding: 14px;
+	background: #fff;
+}
+
+.tf-api-key-item__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.tf-api-key-item__title {
+	margin: 0;
+	font-size: 15px;
+}
+
+.tf-api-key-item__status {
+	display: inline-flex;
+	align-items: center;
+	padding: 2px 8px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: capitalize;
+	background: #e5e7eb;
+	color: #1f2937;
+}
+
+.tf-api-key-item__status-active {
+	background: #dcfce7;
+	color: #166534;
+}
+
+.tf-api-key-item__status-revoked,
+.tf-api-key-item__status-inactive {
+	background: #fee2e2;
+	color: #991b1b;
+}
+
+.tf-api-key-item__meta p {
+	margin: 0 0 8px;
+	font-size: 13px;
+	line-height: 1.5;
+	word-break: break-word;
+}
+
+.tf-api-key-item__meta p:last-child {
+	margin-bottom: 0;
+}
+
+.tf-api-key-item__actions {
+	margin-top: 12px;
+}
+
 @media (max-width: 782px) {
 	.tf-api-endpoint-card {
 		padding: 18px;
