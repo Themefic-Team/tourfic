@@ -1,13 +1,12 @@
-@charset "UTF-8";
 .tf-api-documentation {
   max-width: 1320px;
   margin-top: 24px;
 }
 
-/* ── Sticky top nav ── */
+/* Sticky top nav */
 .tf-api-docs-nav {
   position: sticky;
-  top: 32px; /* WP admin bar height */
+  top: 32px;
   z-index: 100;
   display: flex;
   align-items: center;
@@ -22,7 +21,6 @@
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
   scrollbar-width: none;
 }
-
 .tf-api-docs-nav::-webkit-scrollbar {
   display: none;
 }
@@ -40,14 +38,11 @@
   white-space: nowrap;
   transition: background 0.15s ease, color 0.15s ease;
 }
-
-.tf-api-docs-nav__item:hover,
-.tf-api-docs-nav__item:focus-visible {
+.tf-api-docs-nav__item:hover, .tf-api-docs-nav__item:focus-visible {
   background: #f3f4f6;
   color: #111827;
   text-decoration: none;
 }
-
 .tf-api-docs-nav__item.is-active {
   background: #1d4ed8;
   color: #fff;
@@ -77,21 +72,9 @@
 .tf-api-docs-summary-card {
   padding: 24px;
 }
-
-.tf-api-docs-summary-card h2,
-.tf-api-section h2 {
+.tf-api-docs-summary-card h2 {
   margin: 0;
 }
-
-.tf-api-endpoint-card h3 {
-  margin-top: 0;
-}
-
-.tf-api-key-manager h2 {
-  margin-top: 0;
-  margin-bottom: 16px;
-}
-
 .tf-api-docs-summary-card ul {
   margin: 0;
   padding-left: 18px;
@@ -104,6 +87,21 @@
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+}
+.tf-api-section h2 {
+  margin: 0;
+}
+
+.tf-api-endpoint-card {
+  padding: 24px;
+}
+.tf-api-endpoint-card h3 {
+  margin-top: 0;
+}
+
+.tf-api-key-manager h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
 }
 
 .tf-api-section-header {
@@ -125,7 +123,6 @@
   transition: all 0.2s ease;
   color: #444;
 }
-
 .tf-api-section-toggle::before {
   content: "\f343";
   display: block;
@@ -135,18 +132,16 @@
   text-align: center;
   color: #374151;
 }
-
-.tf-api-section-collapsible.is-collapsed .tf-api-section-toggle::before {
-  content: "\f347";
-}
-
 .tf-api-section-toggle:hover {
   background: #e1e4e8;
   border-color: #a0aeb3;
 }
-
 .tf-api-section-toggle:active {
   transform: scale(0.98);
+}
+
+.tf-api-section-collapsible.is-collapsed .tf-api-section-toggle::before {
+  content: "\f347";
 }
 
 .tf-api-section-content {
@@ -162,10 +157,6 @@
 .tf-api-endpoints {
   display: grid;
   gap: 20px;
-}
-
-.tf-api-endpoint-card {
-  padding: 24px;
 }
 
 .tf-api-endpoint-header {
@@ -189,16 +180,13 @@
   color: #444;
   white-space: nowrap;
 }
-
 .tf-api-copy-btn:hover {
   background: #e1e4e8;
   border-color: #a0aeb3;
 }
-
 .tf-api-copy-btn:active {
   transform: scale(0.95);
 }
-
 .tf-api-copy-btn.copied {
   background: #d4edda;
   border-color: #28a745;
@@ -226,20 +214,15 @@
   letter-spacing: 0.04em;
   color: #fff;
 }
-
 .tf-api-method-get {
   background: #0f766e;
 }
-
 .tf-api-method-post {
   background: #1d4ed8;
 }
-
-.tf-api-method-put,
-.tf-api-method-patch {
+.tf-api-method-put, .tf-api-method-patch {
   background: #b45309;
 }
-
 .tf-api-method-delete {
   background: #b91c1c;
 }
@@ -309,7 +292,6 @@
   padding: 14px;
   background: #fff;
 }
-
 .tf-api-key-item__head {
   display: flex;
   align-items: center;
@@ -317,12 +299,10 @@
   gap: 10px;
   margin-bottom: 10px;
 }
-
 .tf-api-key-item__title {
   margin: 0;
   font-size: 15px;
 }
-
 .tf-api-key-item__status {
   display: inline-flex;
   align-items: center;
@@ -334,29 +314,23 @@
   background: #e5e7eb;
   color: #1f2937;
 }
-
 .tf-api-key-item__status-active {
   background: #dcfce7;
   color: #166534;
 }
-
-.tf-api-key-item__status-revoked,
-.tf-api-key-item__status-inactive {
+.tf-api-key-item__status-revoked, .tf-api-key-item__status-inactive {
   background: #fee2e2;
   color: #991b1b;
 }
-
 .tf-api-key-item__meta p {
   margin: 0 0 8px;
   font-size: 13px;
   line-height: 1.5;
   word-break: break-word;
 }
-
 .tf-api-key-item__meta p:last-child {
   margin-bottom: 0;
 }
-
 .tf-api-key-item__actions {
   margin-top: 12px;
 }

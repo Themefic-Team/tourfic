@@ -8,7 +8,6 @@ class TF_API_Documentation {
 
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'register_menu' ), 220 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 	}
 
 	public function register_menu() {
@@ -19,59 +18,6 @@ class TF_API_Documentation {
 			'manage_options',
 			'tf_api_docs',
 			array( $this, 'render_page' )
-		);
-	}
-
-	public function enqueue_assets( $hook ) {
-		if ( false === strpos( $hook, 'tf_api_docs' ) ) {
-			return;
-		}
-
-		// wp_enqueue_style(
-		// 	'tf-api-documentation',
-		// 	TF_ASSETS_ADMIN_URL . 'css/tf-api-documentation.css',
-		// 	array(),
-		// 	TF_VERSION
-		// );
-
-		wp_enqueue_script(
-			'tf-api-documentation',
-			TF_ASSETS_ADMIN_URL . 'js/tf-api-documentation.js',
-			array( 'jquery' ),
-			TF_VERSION,
-			true
-		);
-
-		wp_localize_script(
-			'tf-api-documentation',
-			'tfApiDocs',
-			array(
-				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-				'nonce'   => wp_create_nonce( 'tf_api_nonce' ),
-				'i18n'    => array(
-					'noApiKeys'           => esc_html__( 'No API keys found for this user.', 'tourfic' ),
-					'untitledKey'         => esc_html__( 'Untitled Key', 'tourfic' ),
-					'unknown'             => esc_html__( 'unknown', 'tourfic' ),
-					'apiKey'              => esc_html__( 'API Key:', 'tourfic' ),
-					'permissions'         => esc_html__( 'Permissions:', 'tourfic' ),
-					'none'                => esc_html__( 'None', 'tourfic' ),
-					'lastUsed'            => esc_html__( 'Last Used:', 'tourfic' ),
-					'never'               => esc_html__( 'Never', 'tourfic' ),
-					'created'             => esc_html__( 'Created:', 'tourfic' ),
-					'unknownDate'         => esc_html__( 'Unknown', 'tourfic' ),
-					'revoke'              => esc_html__( 'Revoke', 'tourfic' ),
-					'unableGenerateKey'   => esc_html__( 'Unable to generate API key.', 'tourfic' ),
-					'confirmRevoke'       => esc_html__( 'Revoke this API key?', 'tourfic' ),
-					'unableRevokeKey'     => esc_html__( 'Unable to revoke API key.', 'tourfic' ),
-					'copied'              => esc_html__( 'Copied!', 'tourfic' ),
-					'copy'                => esc_html__( 'Copy', 'tourfic' ),
-					'copyFailed'          => esc_html__( 'Failed to copy URL to clipboard.', 'tourfic' ),
-					'expandGroup'         => esc_html__( 'Expand', 'tourfic' ),
-					'collapseGroup'       => esc_html__( 'Collapse', 'tourfic' ),
-					'expandGroupLabel'    => esc_html__( 'Expand endpoint group', 'tourfic' ),
-					'collapseGroupLabel'  => esc_html__( 'Collapse endpoint group', 'tourfic' ),
-				),
-			)
 		);
 	}
 

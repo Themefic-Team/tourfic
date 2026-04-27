@@ -27,6 +27,8 @@ entryPoints['tourfic/assets/app/js/tourfic-scripts'] = freeAppJs;
 minEntryPoints['tourfic/assets/app/js/tourfic-scripts.min'] = freeAppJs;
 entryPoints['tourfic/assets/admin/js/tourfic-admin-scripts'] = freeAdminJs;
 minEntryPoints['tourfic/assets/admin/js/tourfic-admin-scripts.min'] = freeAdminJs;
+entryPoints['tourfic/assets/admin/js/tourfic-admin-api'] = glob.sync('./sass/admin/js/free/tf-api-doc.js');
+minEntryPoints['tourfic/assets/admin/js/tourfic-admin-api.min'] = glob.sync('./sass/admin/js/free/tf-api-doc.js');
 //tourfic pro
 entryPoints['tourfic-pro/assets/app/js/tourfic-pro'] = proAppJs;
 minEntryPoints['tourfic-pro/assets/app/js/tourfic-pro.min'] = proAppJs;
