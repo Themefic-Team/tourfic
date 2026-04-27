@@ -567,7 +567,6 @@ class Enqueue {
 	 * @since 1.0
 	 */
 	function tf_enqueue_admin_scripts( $screen ) {
-
 		/**
 		 * Notyf
 		 * v3.0
@@ -579,7 +578,14 @@ class Enqueue {
 		 * Admin Dashboard CSS
 		 */
 		if ( $screen == 'index.php' ) {
-			wp_enqueue_style( 'tf-admin-dashboard', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin-dashboard.css', '', TF_VERSION );
+			wp_enqueue_style( 'tf-admin-dashboard', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin-dashboard.min.css', '', TF_VERSION );
+		}
+
+		/**
+		 * Admin API CSS
+		 */
+		if ( is_string( $screen ) && false !== strpos( $screen, 'tf_api_docs' ) ) {
+			wp_enqueue_style( 'tf-admin-api', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin-api.min.css', '', TF_VERSION );
 		}
 
 		if ( ($screen == "widgets.php" && function_exists( 'is_woocommerce' )) || 

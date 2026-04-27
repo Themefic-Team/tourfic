@@ -27,12 +27,12 @@ class TF_API_Documentation {
 			return;
 		}
 
-		wp_enqueue_style(
-			'tf-api-documentation',
-			TF_ASSETS_ADMIN_URL . 'css/tf-api-documentation.css',
-			array(),
-			TF_VERSION
-		);
+		// wp_enqueue_style(
+		// 	'tf-api-documentation',
+		// 	TF_ASSETS_ADMIN_URL . 'css/tf-api-documentation.css',
+		// 	array(),
+		// 	TF_VERSION
+		// );
 
 		wp_enqueue_script(
 			'tf-api-documentation',
