@@ -90,6 +90,8 @@ class TF_API_Documentation {
 			<?php $this->render_endpoint_section( esc_html__( 'Taxonomy Management', 'tourfic' ), $this->get_taxonomy_endpoints() ); ?>
 			<?php $this->render_endpoint_section( esc_html__( 'Booking Management', 'tourfic' ), $this->get_booking_endpoints() ); ?>
 			<?php $this->render_endpoint_section( esc_html__( 'Enquiry Management', 'tourfic' ), $this->get_enquiry_endpoints() ); ?>
+			<?php $this->render_endpoint_section( esc_html__( 'User Management', 'tourfic' ), $this->get_user_endpoints() ); ?>
+			<?php $this->render_endpoint_section( esc_html__( 'Vendor &amp; Reports', 'tourfic' ), $this->get_vendor_endpoints() ); ?>
 		</div>
 		<?php
 	}
@@ -1223,6 +1225,216 @@ class TF_API_Documentation {
 				),
 				'example_request'  => 'GET /wp-json/tf/v1/enquiries/1\nX-API-Key: your-api-key',
 				'example_response' => '{\n    "id": 1,\n    "formatted_date": "Apr 27, 2026",\n    "formatted_time": "10:20:15 AM"\n}',
+			),
+		);
+	}
+
+	private function get_user_endpoints() {
+		return array(
+			array(
+				'method'      => 'GET',
+				'url'         => '/users',
+				'description' => __( 'Get list of users. Admin-only. Optionally filter by role.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'roles', 'type' => 'array', 'required' => false, 'description' => __( 'Array of roles to filter users by (for example: tf_vendor, customer).', 'tourfic' ) ),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/users?roles[]=tf_vendor\nX-API-Key: your-api-key',
+				'example_response' => '[\n    {\n        "id": 5,\n        "username": "johndoe",\n        "email": "john@example.com",\n        "roles": ["tf_vendor"]\n    }\n]',
+			),
+			array(
+				'method'      => 'GET',
+				'url'         => '/user/{id}',
+				'description' => __( 'Get single user details by user ID. Vendors get extra fields including earning and integration data.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'User ID (path parameter).', 'tourfic' ) ),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/user/5\nX-API-Key: your-api-key',
+				'example_response' => '{\n    "id": 5,\n    "username": "johndoe",\n    "email": "john@example.com",\n    "roles": ["tf_vendor"]\n}',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/user',
+				'description' => __( 'Create a new user. Admin-only.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'username', 'type' => 'string', 'required' => true, 'description' => __( 'Username for the new account.', 'tourfic' ) ),
+					array( 'name' => 'email', 'type' => 'string', 'required' => true, 'description' => __( 'Email address.', 'tourfic' ) ),
+					array( 'name' => 'password', 'type' => 'string', 'required' => true, 'description' => __( 'Account password.', 'tourfic' ) ),
+					array( 'name' => 'confirm_password', 'type' => 'string', 'required' => true, 'description' => __( 'Must match password.', 'tourfic' ) ),
+					array( 'name' => 'role', 'type' => 'string', 'required' => false, 'description' => __( 'WordPress user role (for example: tf_vendor, customer).', 'tourfic' ) ),
+					array( 'name' => 'first_name', 'type' => 'string', 'required' => false, 'description' => __( 'First name.', 'tourfic' ) ),
+					array( 'name' => 'last_name', 'type' => 'string', 'required' => false, 'description' => __( 'Last name.', 'tourfic' ) ),
+					array( 'name' => 'avatar', 'type' => 'integer', 'required' => false, 'description' => __( 'Attachment ID for profile picture.', 'tourfic' ) ),
+					array( 'name' => 'cover_pic', 'type' => 'integer', 'required' => false, 'description' => __( 'Attachment ID for cover photo.', 'tourfic' ) ),
+					array( 'name' => 'tf_vendor_enabled', 'type' => 'string', 'required' => false, 'description' => __( 'Vendor approval status (1 = enabled, 0 = disabled).', 'tourfic' ) ),
+					array( 'name' => 'tf_vendor_posts', 'type' => 'string', 'required' => false, 'description' => __( 'Require post approval (1 = yes, 0 = auto-publish).', 'tourfic' ) ),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/user\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "username": "newvendor",\n    "email": "vendor@example.com",\n    "password": "secret",\n    "confirm_password": "secret",\n    "role": "tf_vendor"\n}',
+				'example_response' => '{\n    "status": true,\n    "message": "User created successfully."\n}',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/user/{id}',
+				'description' => __( 'Update user profile, password, and vendor settings.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'User ID (path parameter).', 'tourfic' ) ),
+					array( 'name' => 'first_name', 'type' => 'string', 'required' => false, 'description' => __( 'Updated first name.', 'tourfic' ) ),
+					array( 'name' => 'last_name', 'type' => 'string', 'required' => false, 'description' => __( 'Updated last name.', 'tourfic' ) ),
+					array( 'name' => 'email', 'type' => 'string', 'required' => false, 'description' => __( 'Updated email.', 'tourfic' ) ),
+					array( 'name' => 'description', 'type' => 'string', 'required' => false, 'description' => __( 'Updated bio/description.', 'tourfic' ) ),
+					array( 'name' => 'profile_edit', 'type' => 'boolean', 'required' => false, 'description' => __( 'Set true to update profile only; omit or false to update password too.', 'tourfic' ) ),
+					array( 'name' => 'current_password', 'type' => 'string', 'required' => false, 'description' => __( 'Current password (required with profile_edit for password change).', 'tourfic' ) ),
+					array( 'name' => 'new_password', 'type' => 'string', 'required' => false, 'description' => __( 'New password.', 'tourfic' ) ),
+					array( 'name' => 'confirm_password', 'type' => 'string', 'required' => false, 'description' => __( 'Confirm new password.', 'tourfic' ) ),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/user/5\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "first_name": "John",\n    "last_name": "Doe",\n    "profile_edit": true\n}',
+				'example_response' => '{\n    "status": true,\n    "message": "Profile updated successfully."\n}',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/user-status/{id}',
+				'description' => __( 'Update vendor approval status for a user. Admin-only.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'User ID (path parameter).', 'tourfic' ) ),
+					array( 'name' => 'user_status', 'type' => 'string', 'required' => true, 'description' => __( 'New vendor status (enabled or disabled).', 'tourfic' ) ),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/user-status/5\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "user_status": "enabled"\n}',
+				'example_response' => '{\n    "status": true,\n    "message": "User status updated successfully."\n}',
+			),
+			array(
+				'method'      => 'DELETE',
+				'url'         => '/user/{id}',
+				'description' => __( 'Delete a user by ID. Admin-only.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'User ID (path parameter).', 'tourfic' ) ),
+				),
+				'example_request'  => 'DELETE /wp-json/tf/v1/user/5\nX-API-Key: your-api-key',
+				'example_response' => '{\n    "status": true,\n    "message": "User deleted successfully."\n}',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/auth/logout',
+				'description' => __( 'Logout the currently authenticated user.', 'tourfic' ),
+				'parameters'  => array(),
+				'example_request'  => 'POST /wp-json/tf/v1/auth/logout\nX-API-Key: your-api-key',
+				'example_response' => '{\n    "success": true,\n    "message": "You are logged out successfully.",\n    "redirect_url": "https://example.com/login"\n}',
+			),
+			array(
+				'method'      => 'GET',
+				'url'         => '/user-bookings',
+				'description' => __( 'Get bookings for a customer user.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'user_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Target user ID. Defaults to current user.', 'tourfic' ) ),
+					array( 'name' => 'booking_type', 'type' => 'string', 'required' => false, 'description' => __( 'Booking type filter: all, hotel, tour, apartment, car. Defaults to all.', 'tourfic' ) ),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/user-bookings?booking_type=hotel\nX-API-Key: your-api-key',
+				'example_response' => '[\n    {\n        "id": 10,\n        "post_type": "tf_hotel",\n        "total_price": "$200.00"\n    }\n]',
+			),
+			array(
+				'method'      => 'GET',
+				'url'         => '/user-wishlist',
+				'description' => __( 'Get or update the wishlist for a customer user.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'user_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Target user ID. Defaults to current user.', 'tourfic' ) ),
+					array( 'name' => 'remove', 'type' => 'boolean', 'required' => false, 'description' => __( 'Set true to remove a post from the wishlist.', 'tourfic' ) ),
+					array( 'name' => 'post_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Post ID to remove from wishlist (used with remove=true).', 'tourfic' ) ),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/user-wishlist\nX-API-Key: your-api-key',
+				'example_response' => '[\n    {\n        "ID": 321,\n        "post_title": "Hotel Sunrise",\n        "post_type": "tf_hotel"\n    }\n]',
+			),
+		);
+	}
+
+	private function get_vendor_endpoints() {
+		return array(
+			array(
+				'method'      => 'GET',
+				'url'         => '/reports',
+				'description' => __( 'Get summary report data for current admin or vendor (total payouts, monthly earnings, commissions).', 'tourfic' ),
+				'parameters'  => array(),
+				'example_request'  => 'GET /wp-json/tf/v1/reports\nX-API-Key: your-api-key',
+				'example_response' => '{\n    "total_payouts": "$500.00",\n    "total_payouts_this_month": "$100.00",\n    "total_order_amount_this_month": "$1200.00",\n    "total_earnings_this_month": "$120.00"\n}',
+			),
+			array(
+				'method'      => 'GET',
+				'url'         => '/vendor-reports',
+				'description' => __( 'Get detailed earning reports for a specific vendor.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'user_id', 'type' => 'integer', 'required' => true, 'description' => __( 'Vendor user ID.', 'tourfic' ) ),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/vendor-reports?user_id=5\nX-API-Key: your-api-key',
+				'example_response' => '{\n    "earning": "$800.00",\n    "paid_earning": "$300.00",\n    "unpaid_earning": "$500.00",\n    "avg_earning": "$80.00"\n}',
+			),
+			array(
+				'method'      => 'GET',
+				'url'         => '/commissions',
+				'description' => __( 'Get commission history grouped by order. Optionally scoped to a vendor.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'user_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Vendor user ID to filter commissions. Omit for all commissions (admin).', 'tourfic' ) ),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/commissions?user_id=5\nX-API-Key: your-api-key',
+				'example_response' => '[\n    {\n        "order_id": 2001,\n        "admin_commission": "$20.00",\n        "vendor_earning": "$180.00"\n    }\n]',
+			),
+			array(
+				'method'      => 'GET',
+				'url'         => '/payouts',
+				'description' => __( 'Get list of vendor payout records. Optionally scoped to a vendor.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'user_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Vendor user ID to filter payouts. Omit for all payouts (admin).', 'tourfic' ) ),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/payouts?user_id=5\nX-API-Key: your-api-key',
+				'example_response' => '[\n    {\n        "id": 1,\n        "amount": "$200.00",\n        "payment_status": "completed"\n    }\n]',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/add-payout',
+				'description' => __( 'Create a new vendor payout record.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'vendor_id', 'type' => 'integer', 'required' => true, 'description' => __( 'Vendor user ID.', 'tourfic' ) ),
+					array( 'name' => 'payment_amount', 'type' => 'number', 'required' => true, 'description' => __( 'Payout amount.', 'tourfic' ) ),
+					array( 'name' => 'payment_date', 'type' => 'string', 'required' => true, 'description' => __( 'Payment date (YYYY-MM-DD).', 'tourfic' ) ),
+					array( 'name' => 'release_date', 'type' => 'string', 'required' => false, 'description' => __( 'Release/settlement date (YYYY-MM-DD).', 'tourfic' ) ),
+					array( 'name' => 'payment_method', 'type' => 'string', 'required' => true, 'description' => __( 'Payment method (for example: paypal, bank).', 'tourfic' ) ),
+					array( 'name' => 'payment_note', 'type' => 'string', 'required' => false, 'description' => __( 'Optional note for this payout.', 'tourfic' ) ),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/add-payout\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "vendor_id": 5,\n    "payment_amount": 200,\n    "payment_date": "2026-04-27",\n    "payment_method": "paypal"\n}',
+				'example_response' => '{\n    "status": true,\n    "message": "Payout added successfully"\n}',
+			),
+			array(
+				'method'      => 'GET',
+				'url'         => '/payout/{id}',
+				'description' => __( 'Get a single payout record by ID.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'Payout record ID (path parameter).', 'tourfic' ) ),
+				),
+				'example_request'  => 'GET /wp-json/tf/v1/payout/1\nX-API-Key: your-api-key',
+				'example_response' => '{\n    "id": 1,\n    "vendor_id": 5,\n    "payment_amount": "200",\n    "payment_status": "pending"\n}',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/update-payout/{id}',
+				'description' => __( 'Update an existing payout record.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'Payout record ID (path parameter).', 'tourfic' ) ),
+					array( 'name' => 'vendor_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Vendor user ID.', 'tourfic' ) ),
+					array( 'name' => 'payment_amount', 'type' => 'number', 'required' => false, 'description' => __( 'Updated payout amount.', 'tourfic' ) ),
+					array( 'name' => 'payment_date', 'type' => 'string', 'required' => false, 'description' => __( 'Updated payment date (YYYY-MM-DD).', 'tourfic' ) ),
+					array( 'name' => 'release_date', 'type' => 'string', 'required' => false, 'description' => __( 'Updated release date (YYYY-MM-DD).', 'tourfic' ) ),
+					array( 'name' => 'payment_method', 'type' => 'string', 'required' => false, 'description' => __( 'Updated payment method.', 'tourfic' ) ),
+					array( 'name' => 'payment_note', 'type' => 'string', 'required' => false, 'description' => __( 'Updated note.', 'tourfic' ) ),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/update-payout/1\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "payment_amount": 250,\n    "payment_method": "bank"\n}',
+				'example_response' => '{\n    "status": true,\n    "message": "Payout updated successfully"\n}',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/update-payout-status/{id}',
+				'description' => __( 'Update payout status. Completing a payout deducts the amount from vendor balance.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'Payout record ID (path parameter).', 'tourfic' ) ),
+					array( 'name' => 'payment_status', 'type' => 'string', 'required' => true, 'description' => __( 'New status (pending, completed, cancelled).', 'tourfic' ) ),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/update-payout-status/1\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "payment_status": "completed"\n}',
+				'example_response' => '{\n    "status": true,\n    "message": "Payout status updated successfully"\n}',
 			),
 		);
 	}
