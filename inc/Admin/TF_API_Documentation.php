@@ -48,6 +48,25 @@ class TF_API_Documentation {
 			array(
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 				'nonce'   => wp_create_nonce( 'tf_api_nonce' ),
+				'i18n'    => array(
+					'noApiKeys'           => esc_html__( 'No API keys found for this user.', 'tourfic' ),
+					'untitledKey'         => esc_html__( 'Untitled Key', 'tourfic' ),
+					'unknown'             => esc_html__( 'unknown', 'tourfic' ),
+					'apiKey'              => esc_html__( 'API Key:', 'tourfic' ),
+					'permissions'         => esc_html__( 'Permissions:', 'tourfic' ),
+					'none'                => esc_html__( 'None', 'tourfic' ),
+					'lastUsed'            => esc_html__( 'Last Used:', 'tourfic' ),
+					'never'               => esc_html__( 'Never', 'tourfic' ),
+					'created'             => esc_html__( 'Created:', 'tourfic' ),
+					'unknownDate'         => esc_html__( 'Unknown', 'tourfic' ),
+					'revoke'              => esc_html__( 'Revoke', 'tourfic' ),
+					'unableGenerateKey'   => esc_html__( 'Unable to generate API key.', 'tourfic' ),
+					'confirmRevoke'       => esc_html__( 'Revoke this API key?', 'tourfic' ),
+					'unableRevokeKey'     => esc_html__( 'Unable to revoke API key.', 'tourfic' ),
+					'copied'              => esc_html__( 'Copied!', 'tourfic' ),
+					'copy'                => esc_html__( 'Copy', 'tourfic' ),
+					'copyFailed'          => esc_html__( 'Failed to copy URL to clipboard.', 'tourfic' ),
+				),
 			)
 		);
 	}
@@ -59,7 +78,7 @@ class TF_API_Documentation {
 
 			<?php $this->render_api_key_manager(); ?>
 
-			<?php $this->render_endpoint_section( 'Hotel Management', $this->get_hotel_endpoints() ); ?>
+			<?php $this->render_endpoint_section( esc_html__( 'Hotel Management', 'tourfic' ), $this->get_hotel_endpoints() ); ?>
 		</div>
 		<?php
 	}
@@ -149,7 +168,7 @@ class TF_API_Documentation {
 									<th><?php esc_html_e( 'Permissions', 'tourfic' ); ?></th>
 									<td>
 										<label><input type="checkbox" name="permissions[]" value="read" checked> <?php esc_html_e( 'Read', 'tourfic' ); ?></label><br>
-										<label><input type="checkbox" name="permissions[]" value="write"> <?php esc_html_e( 'Write', 'tourfic' ); ?></label>
+										<label><input type="checkbox" name="permissions[]" value="write" checked> <?php esc_html_e( 'Write', 'tourfic' ); ?></label>
 									</td>
 								</tr>
 							</tbody>
@@ -173,25 +192,25 @@ class TF_API_Documentation {
 			array(
 				'method'      => 'GET',
 				'url'         => '/hotels',
-				'description' => 'Get list of hotels for the current user or a target user.',
+				'description' => __( 'Get list of hotels for the current user or a target user.', 'tourfic' ),
 				'parameters'  => array(
 					array(
 						'name'        => 'per_page',
 						'type'        => 'integer',
 						'required'    => false,
-						'description' => 'Number of hotels to return (default: 10).',
+						'description' => __( 'Number of hotels to return (default: 10).', 'tourfic' ),
 					),
 					array(
 						'name'        => 'page',
 						'type'        => 'integer',
 						'required'    => false,
-						'description' => 'Page number for pagination (default: 1).',
+						'description' => __( 'Page number for pagination (default: 1).', 'tourfic' ),
 					),
 					array(
 						'name'        => 'user',
 						'type'        => 'integer',
 						'required'    => false,
-						'description' => 'User ID to scope results (admins/managers can view all).',
+						'description' => __( 'User ID to scope results (admins/managers can view all).', 'tourfic' ),
 					),
 				),
 				'example_request'  => 'GET /wp-json/tf/v1/hotels?page=1&per_page=10\nX-API-Key: your-api-key',
@@ -200,49 +219,49 @@ class TF_API_Documentation {
 			array(
 				'method'      => 'POST',
 				'url'         => '/add-hotel',
-				'description' => 'Create a new hotel post.',
+				'description' => __( 'Create a new hotel post.', 'tourfic' ),
 				'parameters'  => array(
 					array(
 						'name'        => 'title',
 						'type'        => 'string',
 						'required'    => true,
-						'description' => 'Hotel title.',
+						'description' => __( 'Hotel title.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'content',
 						'type'        => 'string',
 						'required'    => true,
-						'description' => 'Hotel description/content.',
+						'description' => __( 'Hotel description/content.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'featured_media',
 						'type'        => 'integer',
 						'required'    => false,
-						'description' => 'Attachment ID for featured image.',
+						'description' => __( 'Attachment ID for featured image.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'hotelLocations',
 						'type'        => 'array',
 						'required'    => false,
-						'description' => 'Hotel location term IDs.',
+						'description' => __( 'Hotel location term IDs.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'hotelFeatures',
 						'type'        => 'array',
 						'required'    => false,
-						'description' => 'Hotel feature term IDs.',
+						'description' => __( 'Hotel feature term IDs.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'hotelTypes',
 						'type'        => 'array',
 						'required'    => false,
-						'description' => 'Hotel type term IDs.',
+						'description' => __( 'Hotel type term IDs.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'tf_hotels_opt',
 						'type'        => 'object',
 						'required'    => false,
-						'description' => 'Hotel settings payload stored in post meta.',
+						'description' => __( 'Hotel settings payload stored in post meta.', 'tourfic' ),
 					),
 				),
 				'example_request'  => 'POST /wp-json/tf/v1/add-hotel\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "title": "Hotel Sunrise",\n    "content": "Ocean view hotel",\n    "hotelLocations": [12],\n    "hotelFeatures": [5, 8]\n}',
@@ -251,25 +270,25 @@ class TF_API_Documentation {
 			array(
 				'method'      => 'POST',
 				'url'         => '/update-hotel',
-				'description' => 'Update an existing hotel post.',
+				'description' => __( 'Update an existing hotel post.', 'tourfic' ),
 				'parameters'  => array(
 					array(
 						'name'        => 'id',
 						'type'        => 'integer',
 						'required'    => true,
-						'description' => 'Hotel post ID.',
+						'description' => __( 'Hotel post ID.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'title',
 						'type'        => 'string',
 						'required'    => true,
-						'description' => 'Updated hotel title.',
+						'description' => __( 'Updated hotel title.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'content',
 						'type'        => 'string',
 						'required'    => true,
-						'description' => 'Updated hotel content.',
+						'description' => __( 'Updated hotel content.', 'tourfic' ),
 					),
 				),
 				'example_request'  => 'POST /wp-json/tf/v1/update-hotel\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "id": 321,\n    "title": "Hotel Sunrise Deluxe",\n    "content": "Updated description"\n}',
@@ -278,19 +297,19 @@ class TF_API_Documentation {
 			array(
 				'method'      => 'POST',
 				'url'         => '/update-hotel-status/{id}',
-				'description' => 'Update hotel post status.',
+				'description' => __( 'Update hotel post status.', 'tourfic' ),
 				'parameters'  => array(
 					array(
 						'name'        => 'id',
 						'type'        => 'integer',
 						'required'    => true,
-						'description' => 'Hotel post ID (path parameter).',
+						'description' => __( 'Hotel post ID (path parameter).', 'tourfic' ),
 					),
 					array(
 						'name'        => 'hotel_status',
 						'type'        => 'string',
 						'required'    => true,
-						'description' => 'New status (publish, pending, draft, etc.).',
+						'description' => __( 'New status (publish, pending, draft, etc.).', 'tourfic' ),
 					),
 				),
 				'example_request'  => 'POST /wp-json/tf/v1/update-hotel-status/321\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "hotel_status": "publish"\n}',
@@ -299,13 +318,13 @@ class TF_API_Documentation {
 			array(
 				'method'      => 'GET',
 				'url'         => '/hotel-orders',
-				'description' => 'Get hotel orders for the current user/vendor.',
+				'description' => __( 'Get hotel orders for the current user/vendor.', 'tourfic' ),
 				'parameters'  => array(
 					array(
 						'name'        => 'user_id',
 						'type'        => 'integer',
 						'required'    => false,
-						'description' => 'Optional user ID context for order listing.',
+						'description' => __( 'Optional user ID context for order listing.', 'tourfic' ),
 					),
 				),
 				'example_request'  => 'GET /wp-json/tf/v1/hotel-orders\nX-API-Key: your-api-key',
@@ -314,28 +333,28 @@ class TF_API_Documentation {
 			array(
 				'method'      => 'GET',
 				'url'         => '/hotel-order/{id}',
-				'description' => 'Get a single hotel order details record by ID.',
+				'description' => __( 'Get a single hotel order details record by ID.', 'tourfic' ),
 				'parameters'  => array(
 					array(
 						'name'        => 'id',
 						'type'        => 'integer',
 						'required'    => true,
-						'description' => 'Order ID from tf_order_data table.',
+						'description' => __( 'Order ID from tf_order_data table.', 'tourfic' ),
 					),
 				),
 				'example_request'  => 'GET /wp-json/tf/v1/hotel-order/1001\nX-API-Key: your-api-key',
-				'example_response' => '{\n    "id": 1001\n}',
+
 			),
 			array(
 				'method'      => 'GET',
 				'url'         => '/hotel-room-availability',
-				'description' => 'Get room availability calendar data.',
+				'description' => __( 'Get room availability calendar data.', 'tourfic' ),
 				'parameters'  => array(
 					array(
 						'name'        => 'id',
 						'type'        => 'integer',
 						'required'    => false,
-						'description' => 'Room ID to fetch availability for.',
+						'description' => __( 'Room ID to fetch availability for.', 'tourfic' ),
 					),
 				),
 				'example_request'  => 'GET /wp-json/tf/v1/hotel-room-availability?id=555\nX-API-Key: your-api-key',
@@ -344,37 +363,37 @@ class TF_API_Documentation {
 			array(
 				'method'      => 'POST',
 				'url'         => '/hotel-room-availability',
-				'description' => 'Create or update room availability range.',
+				'description' => __( 'Create or update room availability range.', 'tourfic' ),
 				'parameters'  => array(
 					array(
 						'name'        => 'id',
 						'type'        => 'integer',
 						'required'    => true,
-						'description' => 'Room ID.',
+						'description' => __( 'Room ID.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'price_by',
 						'type'        => 'string',
 						'required'    => true,
-						'description' => 'Pricing mode for availability entries.',
+						'description' => __( 'Pricing mode for availability entries.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'check_in',
 						'type'        => 'date string',
 						'required'    => true,
-						'description' => 'Start date.',
+						'description' => __( 'Start date.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'check_out',
 						'type'        => 'date string',
 						'required'    => true,
-						'description' => 'End date.',
+						'description' => __( 'End date.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'status',
 						'type'        => 'string',
 						'required'    => true,
-						'description' => 'Availability status (available/unavailable).',
+						'description' => __( 'Availability status (available/unavailable).', 'tourfic' ),
 					),
 				),
 				'example_request'  => 'POST /wp-json/tf/v1/hotel-room-availability\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "id": 555,\n    "price_by": "1",\n    "check_in": "2026-05-01",\n    "check_out": "2026-05-05",\n    "price": "120",\n    "status": "available"\n}',
@@ -383,13 +402,13 @@ class TF_API_Documentation {
 			array(
 				'method'      => 'DELETE',
 				'url'         => '/hotel-room-availability/{id}',
-				'description' => 'Reset all availability for a room.',
+				'description' => __( 'Reset all availability for a room.', 'tourfic' ),
 				'parameters'  => array(
 					array(
 						'name'        => 'id',
 						'type'        => 'integer',
 						'required'    => true,
-						'description' => 'Room ID.',
+						'description' => __( 'Room ID.', 'tourfic' ),
 					),
 				),
 				'example_request'  => 'DELETE /wp-json/tf/v1/hotel-room-availability/555\nX-API-Key: your-api-key',
@@ -398,31 +417,31 @@ class TF_API_Documentation {
 			array(
 				'method'      => 'POST',
 				'url'         => '/hotel-ical-import',
-				'description' => 'Import iCal events and mark unavailable dates.',
+				'description' => __( 'Import iCal events and mark unavailable dates.', 'tourfic' ),
 				'parameters'  => array(
 					array(
 						'name'        => 'ical_url',
 						'type'        => 'string',
 						'required'    => true,
-						'description' => 'Public iCal URL.',
+						'description' => __( 'Public iCal URL.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'hotel_id',
 						'type'        => 'integer',
 						'required'    => true,
-						'description' => 'Hotel post ID.',
+						'description' => __( 'Hotel post ID.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'room_index',
 						'type'        => 'integer',
 						'required'    => true,
-						'description' => 'Index of room in hotel options.',
+						'description' => __( 'Index of room in hotel options.', 'tourfic' ),
 					),
 					array(
 						'name'        => 'pricing_by',
 						'type'        => 'string',
 						'required'    => false,
-						'description' => 'Pricing mode to apply to imported blocked dates.',
+						'description' => __( 'Pricing mode to apply to imported blocked dates.', 'tourfic' ),
 					),
 				),
 				'example_request'  => 'POST /wp-json/tf/v1/hotel-ical-import\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "ical_url": "https://example.com/calendar.ics",\n    "hotel_id": 321,\n    "room_index": 0,\n    "pricing_by": "1"\n}',

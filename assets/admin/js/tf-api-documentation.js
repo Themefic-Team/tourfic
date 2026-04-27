@@ -1,6 +1,11 @@
 jQuery(function($) {
 	const config = window.tfApiDocs || {};
+	const i18n = config.i18n || {};
 	const $list = $('#tf-api-keys-container');
+
+	function t(key, fallback) {
+		return Object.prototype.hasOwnProperty.call(i18n, key) ? i18n[key] : fallback;
+	}
 
 	function esc(value) {
 		return $('<div />').text(value == null ? '' : String(value)).html();
@@ -8,7 +13,7 @@ jQuery(function($) {
 
 	function renderKeys(keys) {
 		if (!Array.isArray(keys) || !keys.length) {
-			$list.html('<p class="description">No API keys found for this user.</p>');
+			$list.html('<p class="description">' + esc(t('noApiKeys', 'No API keys found for this user.')) + '</p>');
 			return;
 		}
 
@@ -17,17 +22,17 @@ jQuery(function($) {
 			const revokeDisabled = key.status !== 'active' ? 'disabled' : '';
 			return '<article class="tf-api-key-item">' +
 				'<div class="tf-api-key-item__head">' +
-					'<h4 class="tf-api-key-item__title">' + esc(key.name || 'Untitled Key') + '</h4>' +
-					'<span class="tf-api-key-item__status tf-api-key-item__status-' + esc((key.status || '').toLowerCase()) + '">' + esc(key.status || 'unknown') + '</span>' +
+					'<h4 class="tf-api-key-item__title">' + esc(key.name || t('untitledKey', 'Untitled Key')) + '</h4>' +
+					'<span class="tf-api-key-item__status tf-api-key-item__status-' + esc((key.status || '').toLowerCase()) + '">' + esc(key.status || t('unknown', 'unknown')) + '</span>' +
 				'</div>' +
 				'<div class="tf-api-key-item__meta">' +
-					'<p><strong>API Key:</strong> <code>' + esc(key.api_key_preview) + '</code></p>' +
-					'<p><strong>Permissions:</strong> ' + esc(permissions || 'None') + '</p>' +
-					'<p><strong>Last Used:</strong> ' + esc(key.last_used || 'Never') + '</p>' +
-					'<p><strong>Created:</strong> ' + esc(key.created_at || 'Unknown') + '</p>' +
+					'<p><strong>' + esc(t('apiKey', 'API Key:')) + '</strong> <code>' + esc(key.api_key_preview) + '</code></p>' +
+					'<p><strong>' + esc(t('permissions', 'Permissions:')) + '</strong> ' + esc(permissions || t('none', 'None')) + '</p>' +
+					'<p><strong>' + esc(t('lastUsed', 'Last Used:')) + '</strong> ' + esc(key.last_used || t('never', 'Never')) + '</p>' +
+					'<p><strong>' + esc(t('created', 'Created:')) + '</strong> ' + esc(key.created_at || t('unknownDate', 'Unknown')) + '</p>' +
 				'</div>' +
 				'<div class="tf-api-key-item__actions">' +
-					'<button type="button" class="button tf-revoke-api-key" data-key-id="' + esc(key.id) + '" ' + revokeDisabled + '>Revoke</button>' +
+					'<button type="button" class="button tf-revoke-api-key" data-key-id="' + esc(key.id) + '" ' + revokeDisabled + '>' + esc(t('revoke', 'Revoke')) + '</button>' +
 				'</div>' +
 			'</article>';
 		}).join('');
@@ -59,7 +64,7 @@ jQuery(function($) {
 			}
 
 			if (!response.success) {
-				window.alert(response.data || 'Unable to generate API key.');
+				window.alert(response.data || t('unableGenerateKey', 'Unable to generate API key.'));
 				return;
 			}
 
@@ -74,7 +79,7 @@ jQuery(function($) {
 			return;
 		}
 
-		if (!window.confirm('Revoke this API key?')) {
+		if (!window.confirm(t('confirmRevoke', 'Revoke this API key?'))) {
 			return;
 		}
 
@@ -84,7 +89,7 @@ jQuery(function($) {
 			key_id: keyId
 		}).done(function(response) {
 			if (!response || !response.success) {
-				window.alert((response && response.data) || 'Unable to revoke API key.');
+				window.alert((response && response.data) || t('unableRevokeKey', 'Unable to revoke API key.'));
 				return;
 			}
 
@@ -103,12 +108,12 @@ jQuery(function($) {
 		// Use modern clipboard API if available, fallback to older method
 		if (navigator.clipboard && navigator.clipboard.writeText) {
 			navigator.clipboard.writeText(url).then(function() {
-				$btn.addClass('copied').text('Copied!');
+				$btn.addClass('copied').text(t('copied', 'Copied!'));
 				setTimeout(function() {
-					$btn.removeClass('copied').text('Copy');
+					$btn.removeClass('copied').text(t('copy', 'Copy'));
 				}, 2000);
 			}).catch(function() {
-				window.alert('Failed to copy URL to clipboard.');
+				window.alert(t('copyFailed', 'Failed to copy URL to clipboard.'));
 			});
 		} else {
 			// Fallback for older browsers
@@ -116,12 +121,12 @@ jQuery(function($) {
 			$temp.select();
 			try {
 				document.execCommand('copy');
-				$btn.addClass('copied').text('Copied!');
+				$btn.addClass('copied').text(t('copied', 'Copied!'));
 				setTimeout(function() {
-					$btn.removeClass('copied').text('Copy');
+					$btn.removeClass('copied').text(t('copy', 'Copy'));
 				}, 2000);
 			} catch(err) {
-				window.alert('Failed to copy URL to clipboard.');
+				window.alert(t('copyFailed', 'Failed to copy URL to clipboard.'));
 			}
 			$temp.remove();
 		}
