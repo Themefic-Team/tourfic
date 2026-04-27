@@ -23,7 +23,9 @@
 }
 
 .tf-api-docs-summary-card h2,
-.tf-api-section h2,
+.tf-api-section h2{
+	margin: 0;
+}
 .tf-api-endpoint-card h3 {
 	margin-top: 0;
 }
@@ -35,6 +37,58 @@
 
 .tf-api-section {
 	margin-bottom: 32px;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 12px;
+	padding: 20px;
+	box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+}
+
+.tf-api-section-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.tf-api-section-toggle {
+	position: relative;
+	width: 34px;
+	height: 34px;
+	padding: 0;
+	background: #f6f7f7;
+	border: 1px solid #dcdcde;
+	border-radius: 999px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	color: #444;
+}
+
+.tf-api-section-toggle::before {
+	content: "\f343";
+	display: block;
+	font-family: dashicons;
+	font-size: 18px;
+	line-height: 34px;
+	text-align: center;
+	color: #374151;
+}
+
+.tf-api-section-collapsible.is-collapsed .tf-api-section-toggle::before {
+	content: "\f347";
+}
+
+.tf-api-section-toggle:hover {
+	background: #e1e4e8;
+	border-color: #a0aeb3;
+}
+
+.tf-api-section-toggle:active {
+	transform: scale(0.98);
+}
+
+.tf-api-section-content {
+	margin-top: 16px;
 }
 
 .tf-api-key-manager-grid {
@@ -246,6 +300,11 @@
 }
 
 @media (max-width: 782px) {
+	.tf-api-section-header {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
 	.tf-api-endpoint-card {
 		padding: 18px;
 	}

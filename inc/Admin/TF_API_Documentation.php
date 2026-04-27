@@ -66,6 +66,10 @@ class TF_API_Documentation {
 					'copied'              => esc_html__( 'Copied!', 'tourfic' ),
 					'copy'                => esc_html__( 'Copy', 'tourfic' ),
 					'copyFailed'          => esc_html__( 'Failed to copy URL to clipboard.', 'tourfic' ),
+					'expandGroup'         => esc_html__( 'Expand', 'tourfic' ),
+					'collapseGroup'       => esc_html__( 'Collapse', 'tourfic' ),
+					'expandGroupLabel'    => esc_html__( 'Expand endpoint group', 'tourfic' ),
+					'collapseGroupLabel'  => esc_html__( 'Collapse endpoint group', 'tourfic' ),
 				),
 			)
 		);
@@ -89,9 +93,13 @@ class TF_API_Documentation {
 
 	private function render_endpoint_section( $title, $endpoints ) {
 		?>
-		<div class="tf-api-section">
-			<h2><?php echo esc_html( $title ); ?></h2>
-			<div class="tf-api-endpoints">
+		<div class="tf-api-section tf-api-section-collapsible is-expanded">
+			<div class="tf-api-section-header">
+				<h2><?php echo esc_html( $title ); ?></h2>
+				<button type="button" class="tf-api-section-toggle" aria-expanded="true" aria-label="<?php echo esc_attr__( 'Collapse endpoint group', 'tourfic' ); ?>"></button>
+			</div>
+			<div class="tf-api-section-content">
+				<div class="tf-api-endpoints">
 				<?php foreach ( $endpoints as $endpoint ) : ?>
 					<?php $full_url = rest_url( 'tf/v1' ) . $endpoint['url']; ?>
 					<div class="tf-api-endpoint-card">
@@ -145,6 +153,7 @@ class TF_API_Documentation {
 						</div>
 					</div>
 				<?php endforeach; ?>
+				</div>
 			</div>
 		</div>
 		<?php

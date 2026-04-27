@@ -132,5 +132,34 @@ jQuery(function($) {
 		}
 	});
 
+	$(document).on('click', '.tf-api-section-toggle', function() {
+		const $btn = $(this);
+		const $section = $btn.closest('.tf-api-section-collapsible');
+		const $content = $section.find('.tf-api-section-content').first();
+
+		if (!$section.length || !$content.length) {
+			return;
+		}
+
+		const wasCollapsed = $section.hasClass('is-collapsed');
+		const expandedAriaLabel = String(t('collapseGroupLabel', 'Collapse endpoint group'));
+		const collapsedAriaLabel = String(t('expandGroupLabel', 'Expand endpoint group'));
+
+		$content.stop(true, true);
+
+		if (wasCollapsed) {
+			$section.removeClass('is-collapsed');
+			$content.slideDown(500);
+			$btn.attr('aria-expanded', 'true');
+			$btn.attr('aria-label', expandedAriaLabel);
+			return;
+		}
+
+		$section.addClass('is-collapsed');
+		$content.slideUp(500);
+		$btn.attr('aria-expanded', 'false');
+		$btn.attr('aria-label', collapsedAriaLabel);
+	});
+
 	loadKeys();
 });
