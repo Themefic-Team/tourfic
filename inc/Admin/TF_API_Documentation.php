@@ -87,6 +87,7 @@ class TF_API_Documentation {
 			<?php $this->render_endpoint_section( esc_html__( 'Tour Management', 'tourfic' ), $this->get_tour_endpoints() ); ?>
 			<?php $this->render_endpoint_section( esc_html__( 'Apartment Management', 'tourfic' ), $this->get_apartment_endpoints() ); ?>
 			<?php $this->render_endpoint_section( esc_html__( 'Car Rental Management', 'tourfic' ), $this->get_car_rental_endpoints() ); ?>
+			<?php $this->render_endpoint_section( esc_html__( 'Taxonomy Management', 'tourfic' ), $this->get_taxonomy_endpoints() ); ?>
 		</div>
 		<?php
 	}
@@ -1092,6 +1093,55 @@ class TF_API_Documentation {
 				),
 				'example_request'  => 'GET /wp-json/tf/v1/rental-order/1001\nX-API-Key: your-api-key',
 				'example_response' => '{\n    "id": 1001\n}',
+			),
+		);
+	}
+
+	private function get_taxonomy_endpoints() {
+		$supported_taxonomies = 'hotel_location, hotel_feature, hotel_type, tour_destination, tour_attraction, tour_activities, tour_features, tour_type, apartment_location, apartment_feature, apartment_type, carrental_location, carrental_brand, carrental_fuel_type, carrental_category, carrental_engine_year';
+
+		return array(
+			array(
+				'method'      => 'POST',
+				'url'         => '/{taxonomy}',
+				'description' => __( 'Create a new term for a supported taxonomy.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'taxonomy', 'type' => 'string', 'required' => true, 'description' => sprintf( __( 'Taxonomy route segment. Supported: %s.', 'tourfic' ), $supported_taxonomies ) ),
+					array( 'name' => 'name', 'type' => 'string', 'required' => true, 'description' => __( 'Term name.', 'tourfic' ) ),
+					array( 'name' => 'slug', 'type' => 'string', 'required' => false, 'description' => __( 'Term slug.', 'tourfic' ) ),
+					array( 'name' => 'description', 'type' => 'string', 'required' => false, 'description' => __( 'Term description.', 'tourfic' ) ),
+					array( 'name' => 'parent', 'type' => 'integer', 'required' => false, 'description' => __( 'Parent term ID.', 'tourfic' ) ),
+					array( 'name' => 'meta', 'type' => 'object', 'required' => false, 'description' => __( 'Key/value term meta payload.', 'tourfic' ) ),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/hotel_location\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "name": "Dhaka",\n    "slug": "dhaka",\n    "description": "Capital city",\n    "meta": {\n        "icon": "map-pin"\n    }\n}',
+				'example_response' => '{\n    "status": "success",\n    "message": "Term added successfully!",\n    "term_id": 55,\n    "name": "Dhaka"\n}',
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/{taxonomy}/{id}',
+				'description' => __( 'Update an existing taxonomy term.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'taxonomy', 'type' => 'string', 'required' => true, 'description' => sprintf( __( 'Taxonomy route segment. Supported: %s.', 'tourfic' ), $supported_taxonomies ) ),
+					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'Term ID (path parameter).', 'tourfic' ) ),
+					array( 'name' => 'name', 'type' => 'string', 'required' => false, 'description' => __( 'Updated term name.', 'tourfic' ) ),
+					array( 'name' => 'slug', 'type' => 'string', 'required' => false, 'description' => __( 'Updated term slug.', 'tourfic' ) ),
+					array( 'name' => 'description', 'type' => 'string', 'required' => false, 'description' => __( 'Updated term description.', 'tourfic' ) ),
+					array( 'name' => 'parent', 'type' => 'integer', 'required' => false, 'description' => __( 'Updated parent term ID.', 'tourfic' ) ),
+					array( 'name' => 'meta', 'type' => 'object', 'required' => false, 'description' => __( 'Term meta values to update.', 'tourfic' ) ),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/hotel_location/55\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "name": "Dhaka City",\n    "description": "Updated description",\n    "meta": {\n        "icon": "location"\n    }\n}',
+				'example_response' => '{\n    "term_id": 55,\n    "name": "Dhaka City",\n    "slug": "dhaka",\n    "taxonomy": "hotel_location"\n}',
+			),
+			array(
+				'method'      => 'DELETE',
+				'url'         => '/{taxonomy}/{id}',
+				'description' => __( 'Delete a taxonomy term. Admins can delete any term; vendors can delete only terms created by themselves.', 'tourfic' ),
+				'parameters'  => array(
+					array( 'name' => 'taxonomy', 'type' => 'string', 'required' => true, 'description' => sprintf( __( 'Taxonomy route segment. Supported: %s.', 'tourfic' ), $supported_taxonomies ) ),
+					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'Term ID (path parameter).', 'tourfic' ) ),
+				),
+				'example_request'  => 'DELETE /wp-json/tf/v1/hotel_location/55\nX-API-Key: your-api-key',
+				'example_response' => '{\n    "status": "success",\n    "message": "Dhaka City has been deleted successfully."\n}',
 			),
 		);
 	}
