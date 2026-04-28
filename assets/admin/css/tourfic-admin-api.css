@@ -261,6 +261,9 @@
   margin-bottom: 20px;
 }
 
+.tf-api-table {
+  width: 100%;
+}
 .tf-api-table th,
 .tf-api-table td {
   vertical-align: top;
@@ -338,12 +341,45 @@
 }
 
 @media (max-width: 782px) {
-  .tf-api-section-header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
   .tf-api-endpoint-card {
     padding: 18px;
+  }
+  table.tf-api-table {
+    border: none;
+  }
+  table.tf-api-table thead {
+    display: none;
+  }
+  .tf-api-table,
+  .tf-api-table tbody,
+  .tf-api-table tr,
+  .tf-api-table td {
+    display: block;
+    width: 100%;
+  }
+  .tf-api-table tr {
+    margin-bottom: 12px;
+    border: 1px solid #dcdcde;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .tf-api-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #dcdcde;
+  }
+  .tf-api-table td:last-child {
+    border-bottom: 0;
+  }
+  .tf-api-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #50575e;
   }
 }
 

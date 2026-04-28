@@ -99,10 +99,10 @@ class TF_API_Documentation {
 									<tbody>
 										<?php foreach ( $endpoint['parameters'] as $parameter ) : ?>
 											<tr>
-												<td><code><?php echo esc_html( $parameter['name'] ); ?></code></td>
-												<td><?php echo esc_html( $parameter['type'] ); ?></td>
-												<td><?php echo ! empty( $parameter['required'] ) ? esc_html__( 'Yes', 'tourfic' ) : esc_html__( 'No', 'tourfic' ); ?></td>
-												<td><?php echo esc_html( $parameter['description'] ); ?></td>
+												<td data-label="<?php esc_attr_e( 'Parameter', 'tourfic' ); ?>"><code><?php echo esc_html( $parameter['name'] ); ?></code></td>
+												<td data-label="<?php esc_attr_e( 'Type', 'tourfic' ); ?>"><?php echo esc_html( $parameter['type'] ); ?></td>
+												<td data-label="<?php esc_attr_e( 'Required', 'tourfic' ); ?>"><?php echo ! empty( $parameter['required'] ) ? esc_html__( 'Yes', 'tourfic' ) : esc_html__( 'No', 'tourfic' ); ?></td>
+												<td data-label="<?php esc_attr_e( 'Description', 'tourfic' ); ?>"><?php echo esc_html( $parameter['description'] ); ?></td>
 											</tr>
 										<?php endforeach; ?>
 									</tbody>
