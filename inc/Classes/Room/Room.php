@@ -610,8 +610,13 @@ class Room {
 		// Set initial room availability status
 		$has_room = false;
 
+		// Distribute adults/children across requested rooms for per-room capacity check
+		$requested_rooms = max( 1, intval( $room ) );
+		$adults_per_room = empty( $adults ) ? 0 : ceil( intval( $adults ) / $requested_rooms );
+		$childs_per_room = empty( $child ) ? 0 : ceil( intval( $child ) / $requested_rooms );
+
 		// If adult and child number validation is true proceed
-		if ( ! empty( $room_meta['adult'] ) && $room_meta['adult'] >= $adults && ! empty( $room_meta['child'] ) && $room_meta['child'] >= $child && ! empty( $room_meta['num-room'] ) && $room_meta['num-room'] >= $room ) {
+		if ( ( empty( $adults ) || ( ! empty( $room_meta['adult'] ) && $room_meta['adult'] >= $adults_per_room ) ) && ( empty( $child ) || ( ! empty( $room_meta['child'] ) && $room_meta['child'] >= $childs_per_room ) ) && ! empty( $room_meta['num-room'] ) && $room_meta['num-room'] >= 1 ) {
 
 			// Check custom date range status of room
 			$avil_by_date = !empty( $room_meta['avail_date'] ) ? json_decode($room_meta['avail_date'], true) : [];
@@ -741,9 +746,9 @@ class Room {
 
 		}
 
-		// If adult and child number validation is true proceed
-		if ( ! empty( $room_meta['adult'] ) && $room_meta['adult'] >= $adults && empty( $room_meta['child'] ) && $room_meta['child'] >= $child && ! empty( $room_meta['num-room'] ) && $room_meta['num-room'] >= $room ) {
-		
+		// If adult-only validation is true proceed (room has no child capacity)
+		if ( ( empty( $adults ) || ( ! empty( $room_meta['adult'] ) && $room_meta['adult'] >= $adults_per_room ) ) && empty( $room_meta['child'] ) && $room_meta['child'] >= $child && ! empty( $room_meta['num-room'] ) && $room_meta['num-room'] >= 1 ) {
+
 			// Check custom date range status of room
 			$avil_by_date = !empty( $room_meta['avail_date'] ) ? json_decode($room_meta['avail_date'], true) : [];
 
@@ -938,8 +943,13 @@ class Room {
 		// Set initial room availability status
 		$has_room = false;
 
+		// Distribute adults/children across requested rooms for per-room capacity check
+		$requested_rooms = max( 1, intval( $room ) );
+		$adults_per_room = empty( $adults ) ? 0 : ceil( intval( $adults ) / $requested_rooms );
+		$childs_per_room = empty( $child ) ? 0 : ceil( intval( $child ) / $requested_rooms );
+
 		// If adult and child number validation is true proceed
-		if ( ! empty( $room_meta['adult'] ) && $room_meta['adult'] >= $adults && ! empty( $room_meta['child'] ) && $room_meta['child'] >= $child && ! empty( $room_meta['num-room'] ) && $room_meta['num-room'] >= $room ) {
+		if ( ( empty( $adults ) || ( ! empty( $room_meta['adult'] ) && $room_meta['adult'] >= $adults_per_room ) ) && ( empty( $child ) || ( ! empty( $room_meta['child'] ) && $room_meta['child'] >= $childs_per_room ) ) && ! empty( $room_meta['num-room'] ) && $room_meta['num-room'] >= 1 ) {
 
 			if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
 				if ( ! empty( $room_meta['adult_price'] ) ) {
@@ -990,7 +1000,7 @@ class Room {
 			}
 
 		}
-		if ( ! empty( $room_meta['adult'] ) && $room_meta['adult'] >= $adults && empty( $room_meta['child'] ) && $room_meta['child'] >= $child && ! empty( $room_meta['num-room'] ) && $room_meta['num-room'] >= $room ) {
+		if ( ( empty( $adults ) || ( ! empty( $room_meta['adult'] ) && $room_meta['adult'] >= $adults_per_room ) ) && empty( $room_meta['child'] ) && $room_meta['child'] >= $child && ! empty( $room_meta['num-room'] ) && $room_meta['num-room'] >= 1 ) {
 			if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
 				
 				if ( ! empty( $room_meta['adult_price'] ) ) {

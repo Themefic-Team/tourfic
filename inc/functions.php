@@ -1281,47 +1281,35 @@ if(!function_exists('tf_filter_hotel_by_date')) {
 		// Set initial room availability status
 		$has_hotel = false;
 
-		/**
-		 * Adult Number Validation
-		 */
-		$back_adults   = array_column( $rooms_meta, 'adult' );
-		$adult_counter = 0;
-		foreach ( $back_adults as $back_adult ) {
-			if ( ! empty( $back_adult ) && $back_adult >= $adults ) {
-				$adult_counter ++;
-			}
+		$requested_rooms = max( 1, intval( $room ) );
+
+		// Adult capacity: Top-N greedy — sum highest N room capacities
+		$adult_capacities = array_filter( array_column( $rooms_meta, 'adult' ) );
+		$adult_capacity_pass = true;
+		if ( ! empty( $adults ) && ! empty( $adult_capacities ) ) {
+			rsort( $adult_capacities, SORT_NUMERIC );
+			$adult_capacity_pass = array_sum( array_slice( $adult_capacities, 0, $requested_rooms ) ) >= intval( $adults );
 		}
+		$adult_result = ! empty( $adult_capacities );
 
-		$adult_result = array_filter( $back_adults );
-
-		/**
-		 * Child Number Validation
-		 */
-		$back_childs   = array_column( $rooms_meta, 'child' );
-		$child_counter = 0;
-		foreach ( $back_childs as $back_child ) {
-			if ( ! empty( $back_child ) && $back_child >= $child ) {
-				$child_counter ++;
-			}
+		// Child capacity: same Top-N pattern
+		$child_capacities = array_filter( array_column( $rooms_meta, 'child' ) );
+		$child_capacity_pass = true;
+		if ( ! empty( $child ) && ! empty( $child_capacities ) ) {
+			rsort( $child_capacities, SORT_NUMERIC );
+			$child_capacity_pass = array_sum( array_slice( $child_capacities, 0, $requested_rooms ) ) >= intval( $child );
 		}
+		$childs_result = ! empty( $child_capacities );
 
-		$childs_result = array_filter( $back_childs );
-
-		/**
-		 * Room Number Validation
-		 */
-		$back_rooms   = array_column( $rooms_meta, 'num-room' );
-		$room_counter = 0;
-		foreach ( $back_rooms as $back_room ) {
-			if ( ! empty( $back_room ) && $back_room >= $room ) {
-				$room_counter ++;
-			}
+		// Room inventory: total units across all room types
+		$total_room_units = 0;
+		foreach ( $rooms_meta as $rm ) {
+			$total_room_units += ! empty( $rm['num-room'] ) ? intval( $rm['num-room'] ) : 1;
 		}
-
-		$room_result = array_filter( $back_rooms );
+		$room_validation = $total_room_units >= $requested_rooms;
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( $adult_result && $adult_capacity_pass && $childs_result && $child_capacity_pass && $room_validation ) {
 
 			// Check custom date range status of room
 			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
@@ -1419,7 +1407,7 @@ if(!function_exists('tf_filter_hotel_by_date')) {
 		}
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $child_counter == 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( $adult_result && $adult_capacity_pass && empty( $childs_result ) && $room_validation ) {
 
 			// Check custom date range status of room
 			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
