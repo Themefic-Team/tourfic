@@ -782,7 +782,7 @@ class TF_API_Documentation {
 					),
 				),
 				'example_request'  => 'POST /wp-json/tf/v1/hotel-room-availability\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "id": 555,\n    "price_by": "1",\n    "check_in": "2026-05-01",\n    "check_out": "2026-05-05",\n    "price": "120",\n    "adult_price": "",\n    "child_price": "",\n    "status": "available",\n    "avail_date": "",\n    "options_count": 0\n}',
-				'example_response' => '{\n    "status": true,\n    "message": "Availability updated successfully."\n}',
+				'example_response' => $this->get_hotel_room_availability_update_example_response(),
 			),
 			array(
 				'method'      => 'DELETE',
@@ -837,6 +837,44 @@ class TF_API_Documentation {
 
 	private function get_hotel_room_availability_example_response() {
 		return wp_json_encode( $this->get_hotel_room_availability_example_payload(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+	}
+
+	private function get_hotel_room_availability_update_example_response() {
+		return wp_json_encode( $this->get_hotel_room_availability_update_example_payload(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+	}
+
+	private function get_hotel_room_availability_update_example_payload() {
+		return array(
+			'status'            => true,
+			'message'           => 'Availability updated successfully.',
+			'avail_date'        => array(
+				array(
+					'check_in'    => '2026/05/01',
+					'check_out'   => '2026/05/01',
+					'price_by'    => '1',
+					'price'       => '200',
+					'adult_price' => '',
+					'child_price' => '',
+					'status'      => '',
+					'editable'    => false,
+					'start'       => '2026-05-01',
+					'title'       => 'Price: <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>200.00</bdi></span>',
+				),
+				array(
+					'check_in'    => '2026/05/02',
+					'check_out'   => '2026/05/02',
+					'price_by'    => '1',
+					'price'       => '20',
+					'adult_price' => '',
+					'child_price' => '',
+					'status'      => 'available',
+					'editable'    => false,
+					'start'       => '2026-05-02',
+					'title'       => 'Price: <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>20.00</bdi></span>',
+				),
+			),
+			'avail_date_encoded' => '{"2026\\/05\\/01":{"check_in":"2026\\/05\\/01","check_out":"2026\\/05\\/01","price_by":"1","price":"200","adult_price":"","child_price":"","status":""},"2026\\/05\\/02":{"check_in":"2026\\/05\\/02","check_out":"2026\\/05\\/02","price_by":"1","price":"20","adult_price":"","child_price":"","status":"available"}}',
+		);
 	}
 
 	private function get_hotel_room_availability_example_payload() {
