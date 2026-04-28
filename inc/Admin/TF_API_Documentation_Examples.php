@@ -841,4 +841,487 @@ trait TF_API_Documentation_Examples {
 			'total' => 6,
 		);
 	}
+
+	private function get_tour_opt_example_payload() {
+		return array(
+			'tour_as_featured'                => '0',
+			'featured_text'                   => 'Hot Deal',
+			'is_taxable'                      => '0',
+			'taxable_class'                   => 'standard',
+			'tf_single_tour_layout_opt'       => 'global',
+			'tf_single_tour_template'         => 'design-1',
+			'tour_gallery'                    => '50,51,53',
+			'tour_video'                      => 'https://youtu.be/sample',
+			'location'                        => array(
+				'address'   => 'Example City, Country',
+				'latitude'  => '37.9755648',
+				'longitude' => '23.7348324',
+				'zoom'      => 5,
+			),
+			'duration'                        => '3',
+			'duration_time'                   => 'Day',
+			'tour_types'                      => array(),
+			'night'                           => '0',
+			'night_count'                     => '',
+			'group_size'                      => '14',
+			'language'                        => 'English',
+			'refund_des'                      => '',
+			'highlights-section-title'        => 'Highlights',
+			'additional_information'          => '',
+			'hightlights_thumbnail'           => '',
+			'features'                        => array(),
+			'contact-info-section-title'      => 'Contact Information',
+			'tour-extra'                      => array(),
+			'pricing'                         => 'person',
+			'adult_price'                     => '90',
+			'child_price'                     => '80',
+			'infant_price'                    => '40',
+			'group_price'                     => '',
+			'package_pricing'                 => array(),
+			'min_person'                      => '',
+			'max_person'                      => '',
+			'allow_discount'                  => '0',
+			'discount_type'                   => 'none',
+			'discount_price'                  => '',
+			'disable_adult_price'             => '0',
+			'disable_child_price'             => '0',
+			'disable_infant_price'            => '0',
+			'allow_deposit'                   => '0',
+			'deposit_type'                    => 'none',
+			'deposit_amount'                  => '',
+			'type'                            => 'continuous',
+			'custom_avail'                    => '0',
+			'custom_pricing_by'               => 'person',
+			'cont_custom_date'                => array(),
+			'cont_min_people'                 => '',
+			'cont_max_people'                 => '',
+			'cont_max_capacity'               => '',
+			'allowed_time'                    => array(),
+			'disabled_day'                    => array(),
+			'disable_range'                   => array(),
+			'disable_specific'                => '',
+			'fixed_availability'              => array(
+				'date'     => array( 'from' => '', 'to' => '' ),
+				'min_seat' => '',
+				'max_seat' => '',
+			),
+			'min_days_before_book'            => '',
+			'disable_same_day'                => '0',
+			'tour-traveler-info'              => '0',
+			'booking-by'                      => '1',
+			'booking-url'                     => '',
+			'booking-attribute'               => '',
+			'booking-query'                   => '',
+			'inc'                             => array(
+				array( 'inc' => 'Specialized bilingual guide' ),
+				array( 'inc' => 'Entrance fees' ),
+			),
+			'inc_icon'                        => 'fa fa-check',
+			'exc'                             => array(
+				array( 'exc' => 'Travel insurance' ),
+				array( 'exc' => 'Personal expenses' ),
+			),
+			'exc_icon'                        => 'fa fa-times',
+			'include-exclude-bg'              => '',
+			'itinerary-section-title'         => 'Travel Itinerary',
+			'itinerary'                       => array(),
+			'itenary_download_glbal_settings' => 'custom',
+			'itinerary-downloader'            => '0',
+			'itinerary-downloader-title'      => 'Want to read it later?',
+			'itinerary-downloader-desc'       => 'Download this tour\'s PDF brochure and start your planning offline.',
+			'itinerary-downloader-button'     => 'Download Now',
+			'tour_thumbnail_height'           => '',
+			'tour_thumbnail_width'            => '',
+			'company_logo'                    => '',
+			'company_desc'                    => '',
+			'company_email'                   => '',
+			'company_address'                 => '',
+			'company_phone'                   => '',
+			'itinerary-expert'                => '0',
+			'expert_label'                    => '',
+			'expert_name'                     => '',
+			'expert_email'                    => '',
+			'expert_phone'                    => '',
+			'expert_logo'                     => '',
+			'itinerary-expert-viber'          => '0',
+			'itinerary-expert-whatsapp'       => '0',
+			'faq-section-title'               => 'Frequently Asked Questions',
+			'faqs'                            => array(),
+			'tc-section-title'                => 'Tour Terms & Conditions',
+			'terms_conditions'                => '',
+			't-review'                        => '0',
+			't-share'                         => '0',
+			't-related'                       => '0',
+			'booking-section-title'           => 'Book This Tour',
+			'description-section-title'       => 'Description',
+			'map-section-title'               => 'Maps',
+			'review-section-title'            => 'Average Guest Reviews',
+			't-enquiry-section'               => '0',
+			't-enquiry-option-title'          => 'Have a question in mind',
+			't-enquiry-option-content'        => 'Looking for more info? Send a question to find out more.',
+			't-enquiry-option-btn'            => 'Ask a Question',
+		);
+	}
+
+	private function get_add_tour_example_request() {
+		$payload = array(
+			'title'           => 'City Walking Tour',
+			'content'         => 'Explore the city on foot with our guided walking tour.',
+			'featured_media'  => 43,
+			'tourDestination' => array( 10, 12 ),
+			'tourAttraction'  => array( 5 ),
+			'tourActivities'  => array( 3 ),
+			'tf_tours_opt'    => $this->get_tour_opt_example_payload(),
+		);
+		return 'POST /wp-json/tf/v1/add-tour' . "\n" . 'X-API-Key: your-api-key' . "\n" . 'Content-Type: application/json' . "\n\n" . wp_json_encode( $payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+	}
+
+	private function get_update_tour_example_request() {
+		$payload = array(
+			'id'              => 777,
+			'title'           => 'City Walking Tour Updated',
+			'content'         => 'Updated tour description with all new details.',
+			'featured_media'  => 43,
+			'tourDestination' => array( 10, 12 ),
+			'tourAttraction'  => array( 5 ),
+			'tourActivities'  => array( 3 ),
+			'tf_tours_opt'    => $this->get_tour_opt_example_payload(),
+		);
+		return 'POST /wp-json/tf/v1/update-tour' . "\n" . 'X-API-Key: your-api-key' . "\n" . 'Content-Type: application/json' . "\n\n" . wp_json_encode( $payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+	}
+
+	private function get_apartment_opt_example_payload() {
+		return array(
+			'apartment_gallery'         => '60,61,62',
+			'apartment_as_featured'     => '0',
+			'featured_text'             => 'Hot Deal',
+			'is_taxable'                => '0',
+			'taxable_class'             => 'standard',
+			'location_title'            => '',
+			'map'                       => array(
+				'address'   => '123 Main Street, New York, USA',
+				'latitude'  => '40.7128',
+				'longitude' => '-74.0060',
+				'zoom'      => 15,
+			),
+			'surroundings_sec_title'    => '',
+			'surroundings_subtitle'     => '',
+			'surroundings_places'       => array(),
+			'booking_form_title'        => '',
+			'pricing_type'              => 'per_night',
+			'price_per_night'           => '120',
+			'adult_price'               => '',
+			'child_price'               => '',
+			'infant_price'              => '',
+			'min_stay'                  => '',
+			'max_adults'                => '',
+			'max_children'              => '',
+			'max_infants'               => '',
+			'additional_fees'           => array(),
+			'discount_type'             => 'none',
+			'discount'                  => '',
+			'booking-by'                => '1',
+			'allow_deposit'             => '0',
+			'deposit_type'              => 'percent',
+			'deposit_amount'            => '',
+			'booking-url'               => '',
+			'booking-attribute'         => '',
+			'booking-query'             => '',
+			'enable_availability'       => '0',
+			'apt_availability'          => '',
+			'ical_url'                  => '',
+			'room_details_title'        => '',
+			'rooms'                     => array(),
+			'highlights_title'          => '',
+			'highlights'                => array(),
+			'amenities_title'           => '',
+			'amenities'                 => array(),
+			'house_rules_title'         => '',
+			'house_rules'               => array(),
+			'faq_title'                 => '',
+			'faq_desc'                  => '',
+			'faq'                       => array(),
+			'terms_title'               => '',
+			'terms_and_conditions'      => '',
+			'disable-apartment-review'  => '0',
+			'disable-apartment-share'   => '0',
+			'disable-related-apartment' => '0',
+			'description_title'         => '',
+			'review-section-title'      => '',
+			'related_apartment_title'   => '',
+			'enquiry-section'           => '1',
+			'enquiry-title'             => '',
+			'enquiry-content'           => '',
+			'enquiry-btn'               => '',
+		);
+	}
+
+	private function get_apartments_example_response() {
+		return wp_json_encode( $this->get_apartments_example_payload(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+	}
+
+	private function get_apartments_example_payload() {
+		return array(
+			'apartments' => array(
+				array(
+					'id'                 => 88,
+					'permalink'          => 'https://example.com/apartments/city-center-apartment/',
+					'title'              => 'City Center Apartment',
+					'content'            => 'Apartment description content.',
+					'status'             => 'publish',
+					'author'             => 'admin',
+					'apartment_location' => 'New York',
+					'apartment_type'     => 'Studio',
+					'date'               => 'January 15, 2024',
+					'featured_image'     => 'https://example.com/uploads/apartment-featured.jpg',
+					'tf_apartment_opt'   => $this->get_apartment_opt_example_payload(),
+					'reviews'            => array(
+						'apartment_reviews' => 0,
+						'review_text'       => '',
+					),
+					'start_price'        => '<span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>120.00</bdi></span>',
+				),
+			),
+			'total' => 3,
+		);
+	}
+
+	private function get_add_apartment_example_request() {
+		$payload = array(
+			'title'              => 'City Center Apartment',
+			'content'            => 'Modern 2-bedroom apartment in city center.',
+			'featured_media'     => 60,
+			'apartmentLocations' => array( 12 ),
+			'apartmentTypes'     => array( 4 ),
+			'tf_apartment_opt'   => $this->get_apartment_opt_example_payload(),
+		);
+		return 'POST /wp-json/tf/v1/add-apartment' . "\n" . 'X-API-Key: your-api-key' . "\n" . 'Content-Type: application/json' . "\n\n" . wp_json_encode( $payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+	}
+
+	private function get_update_apartment_example_request() {
+		$payload = array(
+			'id'                 => 888,
+			'title'              => 'City Center Apartment Updated',
+			'content'            => 'Updated apartment description.',
+			'featured_media'     => 60,
+			'apartmentLocations' => array( 12 ),
+			'apartmentTypes'     => array( 4 ),
+			'tf_apartment_opt'   => $this->get_apartment_opt_example_payload(),
+		);
+		return 'POST /wp-json/tf/v1/update-apartment' . "\n" . 'X-API-Key: your-api-key' . "\n" . 'Content-Type: application/json' . "\n\n" . wp_json_encode( $payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+	}
+
+	private function get_carrental_opt_example_payload() {
+		return array(
+			'car_gallery'            => '70,71,72',
+			'tf_single_car_layout_opt' => 'global',
+			'tf_single_car_template' => 'design-1',
+			'location_title'         => 'Location',
+			'map'                    => array(
+				'address'   => 'Dhaka, Bangladesh',
+				'latitude'  => '23.8103',
+				'longitude' => '90.4125',
+			),
+			'car_info_sec_title'     => 'Car info',
+			'car_as_featured'        => '0',
+			'featured_text'          => 'Hot Deal',
+			'passengers'             => '5',
+			'baggage'                => '3',
+			'auto_transmission'      => '0',
+			'unlimited_mileage'      => '0',
+			'mileage_type'           => 'km',
+			'mileage'                => '',
+			'brands'                 => '',
+			'fuel_types'             => '',
+			'engine_year'            => '',
+			'pay_pickup'             => '0',
+			'shuttle_car'            => '0',
+			'shuttle_car_fee_type'   => 'free',
+			'shuttle_car_fee'        => '',
+			'fuel_included'          => '',
+			'driver_included'        => '0',
+			'car_driverinfo_section' => '0',
+			'driver_sec_title'       => 'Driver details',
+			'driver_name'            => '',
+			'driver_email'           => '',
+			'driver_phone'           => '',
+			'driver_age'             => '',
+			'driver_address'         => '',
+			'driver_image'           => '',
+			'car_custom_info'        => array(),
+			'benefits_section'       => '0',
+			'benefits_sec_title'     => 'Benefits',
+			'benefits'               => array(),
+			'inc_exc_section'        => '0',
+			'inc_sec_title'          => 'Include',
+			'inc'                    => array(),
+			'inc_icon'               => '',
+			'exc_sec_title'          => 'Exclude',
+			'exc'                    => array(),
+			'exc_icon'               => '',
+			'badge'                  => array(),
+			'information_section'    => '0',
+			'owner_sec_title'        => 'Renters Information',
+			'owner_name'             => '',
+			'email'                  => '',
+			'phone'                  => '',
+			'website'                => '',
+			'fax'                    => '',
+			'owner_image'            => '',
+			'price_by'               => 'day',
+			'car_rent'               => '75',
+			'custom_availability'    => '0',
+			'pricing_type'           => 'day_hour',
+			'day_prices'             => array(),
+			'date_prices'            => array(),
+			'discount_type'          => 'none',
+			'discount_price'         => '',
+			'car_numbers'            => '',
+			'allow_deposit'          => '0',
+			'deposit_type'           => 'none',
+			'deposit_amount'         => '',
+			'car_extra_sec_title'    => 'Add extras',
+			'extras'                 => array(),
+			'protection_section'     => '0',
+			'protection_tab_title'   => 'Protection',
+			'protection_content'     => '',
+			'protections'            => array(),
+			'instructions_section'   => '0',
+			'instructions_content'   => '',
+			'cancellation_section'   => '0',
+			'calcellation_policy'    => array(),
+			'booking-by'             => '1',
+			'booking-url'            => '',
+			'booking-attribute'      => '',
+			'booking-query'          => 'pickup={pickup}&dropoff={dropoff}&pickup_date={pickup_date}&dropoff_date={dropoff_date}',
+			'is_taxable'             => '0',
+			'taxable_class'          => 'standard',
+			'faq_sec_title'          => 'FAQs',
+			'faq'                    => array(),
+			'car-tc-section-title'   => '',
+			'terms_conditions'       => array(),
+			'review_sec_title'       => 'Review Scores',
+			'c-share'                => '0',
+			'c-wishlist'             => '0',
+		);
+	}
+
+	private function get_car_rentals_example_response() {
+		return wp_json_encode( $this->get_car_rentals_example_payload(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+	}
+
+	private function get_car_rentals_example_payload() {
+		return array(
+			'rentals' => array(
+				array(
+					'id'                 => 99,
+					'permalink'          => 'https://example.com/car-rentals/toyota-suv/',
+					'title'              => 'Toyota SUV',
+					'content'            => 'Comfortable Toyota SUV available for daily rental.',
+					'status'             => 'publish',
+					'author'             => 'admin',
+					'carrental_location' => 'Dhaka',
+					'carrental_brand'    => 'Toyota',
+					'date'               => 'January 15, 2024',
+					'featured_image'     => 'https://example.com/uploads/car-featured.jpg',
+					'tf_carrental_opt'   => $this->get_carrental_opt_example_payload(),
+					'reviews'            => array(
+						'car_reviews' => 0,
+						'review_text' => '',
+					),
+					'start_price'        => '<span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>75.00</bdi></span>',
+				),
+			),
+			'total' => 4,
+		);
+	}
+
+	private function get_add_rental_example_request() {
+		$payload = array(
+			'title'               => 'Toyota SUV',
+			'content'             => 'Comfortable Toyota SUV available for daily rental.',
+			'featured_media'      => 70,
+			'carRentalLocations'  => array( 9 ),
+			'carRentalCategories' => array( 3 ),
+			'tf_carrental_opt'    => $this->get_carrental_opt_example_payload(),
+		);
+		return 'POST /wp-json/tf/v1/add-rental' . "\n" . 'X-API-Key: your-api-key' . "\n" . 'Content-Type: application/json' . "\n\n" . wp_json_encode( $payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+	}
+
+	private function get_update_rental_example_request() {
+		$payload = array(
+			'id'                  => 999,
+			'title'               => 'Toyota SUV Updated',
+			'content'             => 'Updated rental description.',
+			'featured_media'      => 70,
+			'carRentalLocations'  => array( 9 ),
+			'carRentalCategories' => array( 3 ),
+			'tf_carrental_opt'    => $this->get_carrental_opt_example_payload(),
+		);
+		return 'POST /wp-json/tf/v1/update-rental' . "\n" . 'X-API-Key: your-api-key' . "\n" . 'Content-Type: application/json' . "\n\n" . wp_json_encode( $payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+	}
+
+	private function get_tour_availability_example_response() {
+		return wp_json_encode( $this->get_tour_availability_example_payload(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+	}
+
+	private function get_tour_availability_example_payload() {
+		return array(
+			array(
+				'check_in'           => '2026/05/01',
+				'check_out'          => '2026/05/02',
+				'pricing_type'       => 'person',
+				'price'              => '',
+				'adult_price'        => '30',
+				'child_price'        => '20',
+				'infant_price'       => '10',
+				'min_person'         => '1',
+				'max_person'         => '10',
+				'max_capacity'       => '100',
+				'allowed_time'       => array(
+					'time'               => array( '' ),
+					'cont_max_capacity'  => array( '' ),
+				),
+				'status'             => 'available',
+				'title'              => 'Adult: $30.00, Child: $20.00, Infant: $10.00',
+				'start'              => '2026-05-01',
+				'end'                => '2026-05-03',
+			),
+		);
+	}
+
+	private function get_apartment_availability_example_response() {
+		return wp_json_encode( $this->get_apartment_availability_example_payload(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+	}
+
+	private function get_apartment_availability_example_payload() {
+		return array(
+			array(
+				'check_in'      => '2026/05/01',
+				'check_out'     => '2026/05/01',
+				'pricing_type'  => 'per_night',
+				'price'         => '50',
+				'adult_price'   => '',
+				'child_price'   => '',
+				'infant_price'  => '',
+				'status'        => 'available',
+				'editable'      => false,
+				'start'         => '2026-05-01',
+				'title'         => 'Price: $50.00',
+			),
+			array(
+				'check_in'      => '2026/05/02',
+				'check_out'     => '2026/05/02',
+				'pricing_type'  => 'per_night',
+				'price'         => '50',
+				'adult_price'   => '',
+				'child_price'   => '',
+				'infant_price'  => '',
+				'status'        => 'available',
+				'editable'      => false,
+				'start'         => '2026-05-02',
+				'title'         => 'Price: $50.00',
+			),
+		);
+	}
 }

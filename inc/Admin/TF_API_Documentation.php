@@ -659,7 +659,7 @@ class TF_API_Documentation {
 					array( 'name' => 'tourActivities', 'type' => 'array', 'required' => false, 'description' => __( 'Activities term IDs.', 'tourfic' ) ),
 					array( 'name' => 'tf_tours_opt', 'type' => 'object', 'required' => false, 'description' => __( 'Tour options/settings payload.', 'tourfic' ) ),
 				),
-				'example_request'  => 'POST /wp-json/tf/v1/add-tour\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "title": "City Walking Tour",\n    "content": "Guided city tour",\n    "tourDestination": [10],\n    "tourActivities": [3, 5]\n}',
+				'example_request'  => $this->get_add_tour_example_request(),
 				'example_response' => '{\n    "id": 777\n}',
 			),
 			array(
@@ -676,7 +676,7 @@ class TF_API_Documentation {
 					array( 'name' => 'tourActivities', 'type' => 'array', 'required' => false, 'description' => __( 'Activities term IDs.', 'tourfic' ) ),
 					array( 'name' => 'tf_tours_opt', 'type' => 'object', 'required' => false, 'description' => __( 'Updated tour options/settings payload.', 'tourfic' ) ),
 				),
-				'example_request'  => 'POST /wp-json/tf/v1/update-tour\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "id": 777,\n    "title": "City Walking Tour Updated",\n    "content": "Updated details"\n}',
+				'example_request'  => $this->get_update_tour_example_request(),
 				'example_response' => '{\n    "id": 777\n}',
 			),
 			array(
@@ -698,7 +698,7 @@ class TF_API_Documentation {
 					array( 'name' => 'id', 'type' => 'integer', 'required' => false, 'description' => __( 'Tour post ID to load availability.', 'tourfic' ) ),
 				),
 				'example_request'  => 'GET /wp-json/tf/v1/tour-availability?id=777\nX-API-Key: your-api-key',
-				'example_response' => '[\n    {\n        "check_in": "2026/05/01",\n        "status": "available"\n    }\n]',
+				'example_response' => $this->get_tour_availability_example_response(),
 			),
 			array(
 				'method'      => 'POST',
@@ -754,8 +754,8 @@ class TF_API_Documentation {
 					array( 'name' => 'page', 'type' => 'integer', 'required' => false, 'description' => __( 'Page number for pagination.', 'tourfic' ) ),
 					array( 'name' => 'user', 'type' => 'integer', 'required' => false, 'description' => __( 'User ID to scope results.', 'tourfic' ) ),
 				),
-				'example_request'  => 'GET /wp-json/tf/v1/apartments?page=1&per_page=10\nX-API-Key: your-api-key',
-				'example_response' => '{\n    "apartments": [],\n    "total": 0\n}',
+				'example_request'  => 'GET /wp-json/tf/v1/apartments?page=1&per_page=10&user=1' . "\n" . 'X-API-Key: your-api-key',
+				'example_response' => $this->get_apartments_example_response(),
 			),
 			array(
 				'method'      => 'POST',
@@ -770,7 +770,7 @@ class TF_API_Documentation {
 					array( 'name' => 'apartmentTypes', 'type' => 'array', 'required' => false, 'description' => __( 'Apartment type term IDs.', 'tourfic' ) ),
 					array( 'name' => 'tf_apartment_opt', 'type' => 'object', 'required' => false, 'description' => __( 'Apartment options/settings payload.', 'tourfic' ) ),
 				),
-				'example_request'  => 'POST /wp-json/tf/v1/add-apartment\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "title": "City Apartment",\n    "content": "2 bedroom apartment",\n    "apartmentLocations": [12],\n    "apartmentFeatures": [5, 8]\n}',
+				'example_request'  => $this->get_add_apartment_example_request(),
 				'example_response' => '{\n    "id": 888\n}',
 			),
 			array(
@@ -787,7 +787,7 @@ class TF_API_Documentation {
 					array( 'name' => 'apartmentTypes', 'type' => 'array', 'required' => false, 'description' => __( 'Apartment type term IDs.', 'tourfic' ) ),
 					array( 'name' => 'tf_apartment_opt', 'type' => 'object', 'required' => false, 'description' => __( 'Updated apartment options/settings payload.', 'tourfic' ) ),
 				),
-				'example_request'  => 'POST /wp-json/tf/v1/update-apartment\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "id": 888,\n    "title": "City Apartment Updated",\n    "content": "Updated details"\n}',
+				'example_request'  => $this->get_update_apartment_example_request(),
 				'example_response' => '{\n    "id": 888\n}',
 			),
 			array(
@@ -809,7 +809,7 @@ class TF_API_Documentation {
 					array( 'name' => 'apartment_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Apartment post ID to load availability.', 'tourfic' ) ),
 				),
 				'example_request'  => 'GET /wp-json/tf/v1/apartment-availability?apartment_id=888\nX-API-Key: your-api-key',
-				'example_response' => '[\n    {\n        "check_in": "2026/05/01",\n        "status": "available"\n    }\n]',
+				'example_response' => $this->get_apartment_availability_example_response(),
 			),
 			array(
 				'method'      => 'POST',
@@ -866,8 +866,8 @@ class TF_API_Documentation {
 					array( 'name' => 'page', 'type' => 'integer', 'required' => false, 'description' => __( 'Page number for pagination.', 'tourfic' ) ),
 					array( 'name' => 'author', 'type' => 'integer', 'required' => false, 'description' => __( 'Author/user ID to scope results.', 'tourfic' ) ),
 				),
-				'example_request'  => 'GET /wp-json/tf/v1/rentals?page=1&per_page=10\nX-API-Key: your-api-key',
-				'example_response' => '{\n    "rentals": [],\n    "total": 0\n}',
+				'example_request'  => 'GET /wp-json/tf/v1/rentals?page=1&per_page=10&author=1' . "\n" . 'X-API-Key: your-api-key',
+				'example_response' => $this->get_car_rentals_example_response(),
 			),
 			array(
 				'method'      => 'POST',
@@ -881,7 +881,7 @@ class TF_API_Documentation {
 					array( 'name' => 'carRentalCategories', 'type' => 'array', 'required' => false, 'description' => __( 'Rental category term IDs.', 'tourfic' ) ),
 					array( 'name' => 'tf_carrental_opt', 'type' => 'object', 'required' => false, 'description' => __( 'Car rental options/settings payload.', 'tourfic' ) ),
 				),
-				'example_request'  => 'POST /wp-json/tf/v1/add-rental\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "title": "SUV Rental",\n    "content": "Comfortable SUV",\n    "carRentalLocations": [9],\n    "carRentalCategories": [3]\n}',
+				'example_request'  => $this->get_add_rental_example_request(),
 				'example_response' => '{\n    "id": 999\n}',
 			),
 			array(
@@ -897,7 +897,7 @@ class TF_API_Documentation {
 					array( 'name' => 'carRentalCategories', 'type' => 'array', 'required' => false, 'description' => __( 'Rental category term IDs.', 'tourfic' ) ),
 					array( 'name' => 'tf_carrental_opt', 'type' => 'object', 'required' => false, 'description' => __( 'Updated rental options/settings payload.', 'tourfic' ) ),
 				),
-				'example_request'  => 'POST /wp-json/tf/v1/update-rental\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "id": 999,\n    "title": "SUV Rental Updated",\n    "content": "Updated rental details"\n}',
+				'example_request'  => $this->get_update_rental_example_request(),
 				'example_response' => '{\n    "id": 999\n}',
 			),
 			array(
@@ -910,34 +910,6 @@ class TF_API_Documentation {
 				),
 				'example_request'  => 'POST /wp-json/tf/v1/update-rental-status/999\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "rental_status": "publish"\n}',
 				'example_response' => '{\n    "status": true,\n    "message": "Car Rental status updated successfully."\n}',
-			),
-			array(
-				'method'      => 'GET',
-				'url'         => '/rental-enquiries',
-				'description' => __( 'Get car rental enquiries for current user role context.', 'tourfic' ),
-				'parameters'  => array(),
-				'example_request'  => 'GET /wp-json/tf/v1/rental-enquiries\nX-API-Key: your-api-key',
-				'example_response' => '[\n    {\n        "id": 1,\n        "post_type": "tf_carrental"\n    }\n]',
-			),
-			array(
-				'method'      => 'GET',
-				'url'         => '/rental-orders',
-				'description' => __( 'Get car rental orders for current user or vendor context.', 'tourfic' ),
-				'parameters'  => array(
-					array( 'name' => 'user_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Optional user ID context for order listing.', 'tourfic' ) ),
-				),
-				'example_request'  => 'GET /wp-json/tf/v1/rental-orders\nX-API-Key: your-api-key',
-				'example_response' => '{\n    "orders": [],\n    "total": 0\n}',
-			),
-			array(
-				'method'      => 'GET',
-				'url'         => '/rental-order/{id}',
-				'description' => __( 'Get single car rental order details by order ID.', 'tourfic' ),
-				'parameters'  => array(
-					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'Order ID from tf_order_data table.', 'tourfic' ) ),
-				),
-				'example_request'  => 'GET /wp-json/tf/v1/rental-order/1001\nX-API-Key: your-api-key',
-				'example_response' => '{\n    "id": 1001\n}',
 			),
 		);
 	}
