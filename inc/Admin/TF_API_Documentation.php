@@ -702,36 +702,6 @@ class TF_API_Documentation {
 			),
 			array(
 				'method'      => 'GET',
-				'url'         => '/hotel-orders',
-				'description' => __( 'Get hotel orders for the current user/vendor.', 'tourfic' ),
-				'parameters'  => array(
-					array(
-						'name'        => 'user_id',
-						'type'        => 'integer',
-						'required'    => false,
-						'description' => __( 'Optional user ID context for order listing.', 'tourfic' ),
-					),
-				),
-				'example_request'  => 'GET /wp-json/tf/v1/hotel-orders\nX-API-Key: your-api-key',
-				'example_response' => '{\n    "orders": [],\n    "total": 0\n}',
-			),
-			array(
-				'method'      => 'GET',
-				'url'         => '/hotel-order/{id}',
-				'description' => __( 'Get a single hotel order details record by ID.', 'tourfic' ),
-				'parameters'  => array(
-					array(
-						'name'        => 'id',
-						'type'        => 'integer',
-						'required'    => true,
-						'description' => __( 'Order ID from tf_order_data table.', 'tourfic' ),
-					),
-				),
-				'example_request'  => 'GET /wp-json/tf/v1/hotel-order/1001\nX-API-Key: your-api-key',
-
-			),
-			array(
-				'method'      => 'GET',
 				'url'         => '/hotel-room-availability',
 				'description' => __( 'Get room availability calendar data.', 'tourfic' ),
 				'parameters'  => array(
@@ -743,7 +713,7 @@ class TF_API_Documentation {
 					),
 				),
 				'example_request'  => 'GET /wp-json/tf/v1/hotel-room-availability?id=555\nX-API-Key: your-api-key',
-				'example_response' => '[\n    {\n        "check_in": "2026/04/27",\n        "status": "available"\n    }\n]',
+				'example_response' => $this->get_hotel_room_availability_example_response(),
 			),
 			array(
 				'method'      => 'POST',
@@ -775,13 +745,43 @@ class TF_API_Documentation {
 						'description' => __( 'End date.', 'tourfic' ),
 					),
 					array(
+						'name'        => 'price',
+						'type'        => 'string',
+						'required'    => false,
+						'description' => __( 'Base room price when price_by is set to 1.', 'tourfic' ),
+					),
+					array(
+						'name'        => 'adult_price',
+						'type'        => 'string',
+						'required'    => false,
+						'description' => __( 'Adult price when price_by uses per-person pricing.', 'tourfic' ),
+					),
+					array(
+						'name'        => 'child_price',
+						'type'        => 'string',
+						'required'    => false,
+						'description' => __( 'Child price when price_by uses per-person pricing.', 'tourfic' ),
+					),
+					array(
 						'name'        => 'status',
 						'type'        => 'string',
 						'required'    => true,
 						'description' => __( 'Availability status (available/unavailable).', 'tourfic' ),
 					),
+					array(
+						'name'        => 'avail_date',
+						'type'        => 'string|array',
+						'required'    => false,
+						'description' => __( 'Existing availability payload used when updating unsaved room data.', 'tourfic' ),
+					),
+					array(
+						'name'        => 'options_count',
+						'type'        => 'integer',
+						'required'    => false,
+						'description' => __( 'Number of pricing options when price_by is set to option-based pricing.', 'tourfic' ),
+					),
 				),
-				'example_request'  => 'POST /wp-json/tf/v1/hotel-room-availability\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "id": 555,\n    "price_by": "1",\n    "check_in": "2026-05-01",\n    "check_out": "2026-05-05",\n    "price": "120",\n    "status": "available"\n}',
+				'example_request'  => 'POST /wp-json/tf/v1/hotel-room-availability\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "id": 555,\n    "price_by": "1",\n    "check_in": "2026-05-01",\n    "check_out": "2026-05-05",\n    "price": "120",\n    "adult_price": "",\n    "child_price": "",\n    "status": "available",\n    "avail_date": "",\n    "options_count": 0\n}',
 				'example_response' => '{\n    "status": true,\n    "message": "Availability updated successfully."\n}',
 			),
 			array(
@@ -831,6 +831,39 @@ class TF_API_Documentation {
 				),
 				'example_request'  => 'POST /wp-json/tf/v1/hotel-ical-import\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "ical_url": "https://example.com/calendar.ics",\n    "hotel_id": 321,\n    "room_index": 0,\n    "pricing_by": "1"\n}',
 				'example_response' => '{\n    "status": true,\n    "message": "iCal imported successfully."\n}',
+			),
+		);
+	}
+
+	private function get_hotel_room_availability_example_response() {
+		return wp_json_encode( $this->get_hotel_room_availability_example_payload(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+	}
+
+	private function get_hotel_room_availability_example_payload() {
+		return array(
+			array(
+				'check_in'    => '2026/05/01',
+				'check_out'   => '2026/05/01',
+				'price_by'    => '1',
+				'price'       => '20',
+				'adult_price' => '',
+				'child_price' => '',
+				'status'      => 'available',
+				'editable'    => false,
+				'start'       => '2026-05-01',
+				'title'       => 'Price: <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>20.00</bdi></span>',
+			),
+			array(
+				'check_in'    => '2026/05/02',
+				'check_out'   => '2026/05/02',
+				'price_by'    => '1',
+				'price'       => '20',
+				'adult_price' => '',
+				'child_price' => '',
+				'status'      => 'available',
+				'editable'    => false,
+				'start'       => '2026-05-02',
+				'title'       => 'Price: <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>20.00</bdi></span>',
 			),
 		);
 	}
