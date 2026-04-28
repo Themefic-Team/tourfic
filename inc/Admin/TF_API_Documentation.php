@@ -797,7 +797,7 @@ class TF_API_Documentation {
 					),
 				),
 				'example_request'  => 'DELETE /wp-json/tf/v1/hotel-room-availability/555\nX-API-Key: your-api-key',
-				'example_response' => '{\n    "status": true,\n    "message": "Availability reset successfully."\n}',
+				'example_response' => '{\n    "status": true,\n    "message": "Availability reset successfully.",\n    "avail_date": [],\n    "avail_date_encoded": "[]"\n}',
 			),
 			array(
 				'method'      => 'POST',
@@ -904,6 +904,74 @@ class TF_API_Documentation {
 				'title'       => 'Price: <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#36;</span>20.00</bdi></span>',
 			),
 		);
+	}
+
+	private function get_room_opt_example_payload() {
+		return array(
+			'unique_id'                 => '1703067301412',
+			'order_id'                  => '',
+			'enable'                    => '1',
+			'tf_single_rom_layout_opt'  => 'global',
+			'tf_single_room_template'   => 'design-1',
+			'num-room'                  => '',
+			'reduce_num_room'           => '0',
+			'gallery'                   => '',
+			'bed'                       => '',
+			'adult'                     => '',
+			'child'                     => '',
+			'children_age_limit'        => '',
+			'footage'                   => '',
+			'features'                  => array(),
+			'house_rules_title'         => '',
+			'house_rules'               => array(),
+			'minimum_stay_requirement'  => '',
+			'maximum_stay_requirement'  => '',
+			'pricing-by'                => '1',
+			'price'                     => '',
+			'adult_price'               => '',
+			'child_price'               => '',
+			'room-options'              => array(),
+			'discount_hotel_type'       => 'none',
+			'discount_hotel_price'      => '',
+			'price_multi_day'           => '',
+			'allow_deposit'             => '0',
+			'deposit_type'              => 'none',
+			'deposit_amount'            => '',
+			'cancelation-section-title' => '',
+			'calcellation_policy'       => array(),
+			'ical_url'                  => '',
+			'avil_by_date'              => '0',
+			'avail_date'                => '',
+			'booking-by'                => '1',
+			'booking-url'               => '',
+			'booking-attribute'         => '0',
+			'booking-query'             => '',
+		);
+	}
+
+	private function get_add_room_example_request() {
+		$body = wp_json_encode(
+			array(
+				'title'       => 'Deluxe Room',
+				'content'     => 'Sea view room description.',
+				'tf_room_opt' => $this->get_room_opt_example_payload(),
+			),
+			JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+		);
+		return "POST /wp-json/tf/v1/add-room\nX-API-Key: your-api-key\nContent-Type: application/json\n\n" . $body;
+	}
+
+	private function get_update_room_example_request() {
+		$body = wp_json_encode(
+			array(
+				'id'          => 654,
+				'title'       => 'Deluxe Room Updated',
+				'content'     => 'Updated room description.',
+				'tf_room_opt' => $this->get_room_opt_example_payload(),
+			),
+			JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+		);
+		return "POST /wp-json/tf/v1/update-room\nX-API-Key: your-api-key\nContent-Type: application/json\n\n" . $body;
 	}
 
 	private function get_hotels_example_response() {
@@ -1124,7 +1192,7 @@ class TF_API_Documentation {
 					),
 				),
 				'example_request'  => 'GET /wp-json/tf/v1/rooms?page=1&per_page=10\nX-API-Key: your-api-key',
-				'example_response' => '{\n    "rooms": [],\n    "total": 0\n}',
+				'example_response' => '{\n    "rooms": [\n        {\n            "id": 82,\n            "permalink": "https://example.com/rooms/premium-deluxe-twin/",\n            "title": "Premium Deluxe Twin",\n            "content": "Room description content.",\n            "status": "publish",\n            "author": "admin",\n            "date": "April 27, 2026",\n            "featured_image": "https://example.com/uploads/room-featured.jpg",\n            "tf_room_opt": {\n                "hotel-room-heading": "",\n                "tf_single_room_layout_opt": "global",\n                "tf_single_room_template": "design-1",\n                "tf_hotel": "68",\n                "unique_id": "1703067301412",\n                "order_id": "",\n                "enable": "1",\n                "gallery": "46,46,46,46,46",\n                "Details": "",\n                "bed": "2",\n                "adult": "2",\n                "child": "1",\n                "children_age_limit": "",\n                "footage": "250 sqr",\n                "features": [\n                    "24",\n                    "28",\n                    "35",\n                    "36",\n                    "37",\n                    "38"\n                ],\n                "house_rules_heading": "",\n                "house_rules_title": "House Rules",\n                "house_rules": "",\n                "minimum_maximum_stay_requirements": "",\n                "minimum_stay_requirement": "1",\n                "maximum_stay_requirement": "10",\n                "room-cancellation-heading": "",\n                "cancelation-section-title": "Cancelation Policy",\n                "calcellation_policy": "",\n                "Room Pricing": "",\n                "pricing-by": "1",\n                "price": "79",\n                "adult_price": "",\n                "child_price": "",\n                "discount_hotel_type": "none",\n                "discount_hotel_price": "",\n                "price_multi_day": "1",\n                "room-options-heading": "",\n                "room-options": "",\n                "Deposit": "",\n                "allow_deposit": "0",\n                "deposit_type": "none",\n                "deposit_amount": "",\n                "Availability": "",\n                "num-room": "10",\n                "reduce_num_room": "1",\n                "avil_by_date": "1",\n                "avail_date": [],\n                "tf-others-heading": "",\n                "tf-callback": "",\n                "ical": "",\n                "ical_notice": "",\n                "room-settings-docs": "",\n                "disable-room-review": "0",\n                "different-sections": "",\n                "room-feature-section-title": "Amenities",\n                "review-section-title": "Guest Reviews"\n            },\n            "hotel_id": "68",\n            "hotel_title": "Sample Resort Hotel"\n        }\n    ],\n    "total": 12\n}',
 			),
 			array(
 				'method'      => 'POST',
@@ -1156,7 +1224,7 @@ class TF_API_Documentation {
 						'description' => __( 'Room options/settings stored in post meta.', 'tourfic' ),
 					),
 				),
-				'example_request'  => 'POST /wp-json/tf/v1/add-room\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "title": "Deluxe Room",\n    "content": "Sea view room",\n    "tf_room_opt": {"tf_hotel": 321}\n}',
+				'example_request'  => $this->get_add_room_example_request(),
 				'example_response' => '{\n    "id": 654\n}',
 			),
 			array(
@@ -1195,7 +1263,7 @@ class TF_API_Documentation {
 						'description' => __( 'Updated room options/settings payload.', 'tourfic' ),
 					),
 				),
-				'example_request'  => 'POST /wp-json/tf/v1/update-room\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "id": 654,\n    "title": "Deluxe Room Updated",\n    "content": "Updated room details"\n}',
+				'example_request'  => $this->get_update_room_example_request(),
 				'example_response' => '{\n    "id": 654\n}',
 			),
 			array(
@@ -1218,123 +1286,6 @@ class TF_API_Documentation {
 				),
 				'example_request'  => 'POST /wp-json/tf/v1/update-room-status/654\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "room_status": "publish"\n}',
 				'example_response' => '{\n    "status": true,\n    "message": "Room status updated successfully."\n}',
-			),
-			array(
-				'method'      => 'GET',
-				'url'         => '/room-availability',
-				'description' => __( 'Get room availability calendar data.', 'tourfic' ),
-				'parameters'  => array(
-					array(
-						'name'        => 'room_id',
-						'type'        => 'integer',
-						'required'    => false,
-						'description' => __( 'Room ID to load availability data.', 'tourfic' ),
-					),
-				),
-				'example_request'  => 'GET /wp-json/tf/v1/room-availability?room_id=654\nX-API-Key: your-api-key',
-				'example_response' => '[\n    {\n        "check_in": "2026/05/01",\n        "status": "available"\n    }\n]',
-			),
-			array(
-				'method'      => 'POST',
-				'url'         => '/room-availability',
-				'description' => __( 'Create or update room availability for date range.', 'tourfic' ),
-				'parameters'  => array(
-					array(
-						'name'        => 'hotel_id',
-						'type'        => 'integer',
-						'required'    => false,
-						'description' => __( 'Hotel ID when updating availability from hotel room set.', 'tourfic' ),
-					),
-					array(
-						'name'        => 'room_index',
-						'type'        => 'integer',
-						'required'    => false,
-						'description' => __( 'Room index inside hotel room configuration.', 'tourfic' ),
-					),
-					array(
-						'name'        => 'price_by',
-						'type'        => 'string',
-						'required'    => true,
-						'description' => __( 'Pricing mode.', 'tourfic' ),
-					),
-					array(
-						'name'        => 'check_in',
-						'type'        => 'date string',
-						'required'    => true,
-						'description' => __( 'Start date.', 'tourfic' ),
-					),
-					array(
-						'name'        => 'check_out',
-						'type'        => 'date string',
-						'required'    => true,
-						'description' => __( 'End date.', 'tourfic' ),
-					),
-					array(
-						'name'        => 'price',
-						'type'        => 'number',
-						'required'    => false,
-						'description' => __( 'Base room price.', 'tourfic' ),
-					),
-					array(
-						'name'        => 'adult_price',
-						'type'        => 'number',
-						'required'    => false,
-						'description' => __( 'Adult pricing value.', 'tourfic' ),
-					),
-					array(
-						'name'        => 'child_price',
-						'type'        => 'number',
-						'required'    => false,
-						'description' => __( 'Child pricing value.', 'tourfic' ),
-					),
-					array(
-						'name'        => 'status',
-						'type'        => 'string',
-						'required'    => true,
-						'description' => __( 'Availability status (available/unavailable).', 'tourfic' ),
-					),
-					array(
-						'name'        => 'avail_date',
-						'type'        => 'array',
-						'required'    => false,
-						'description' => __( 'Existing availability data to merge.', 'tourfic' ),
-					),
-				),
-				'example_request'  => 'POST /wp-json/tf/v1/room-availability\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "hotel_id": 321,\n    "room_index": 0,\n    "price_by": "1",\n    "check_in": "2026-05-01",\n    "check_out": "2026-05-05",\n    "price": "120",\n    "status": "available"\n}',
-				'example_response' => '{\n    "status": true,\n    "message": "Availability updated successfully."\n}',
-			),
-			array(
-				'method'      => 'POST',
-				'url'         => '/room-ical-import',
-				'description' => __( 'Import iCal feed and update room unavailable dates.', 'tourfic' ),
-				'parameters'  => array(
-					array(
-						'name'        => 'ical_url',
-						'type'        => 'string',
-						'required'    => true,
-						'description' => __( 'Public iCal URL.', 'tourfic' ),
-					),
-					array(
-						'name'        => 'hotel_id',
-						'type'        => 'integer',
-						'required'    => true,
-						'description' => __( 'Hotel post ID.', 'tourfic' ),
-					),
-					array(
-						'name'        => 'room_index',
-						'type'        => 'integer',
-						'required'    => true,
-						'description' => __( 'Room index in hotel room options.', 'tourfic' ),
-					),
-					array(
-						'name'        => 'pricing_by',
-						'type'        => 'string',
-						'required'    => false,
-						'description' => __( 'Pricing mode for imported unavailable dates.', 'tourfic' ),
-					),
-				),
-				'example_request'  => 'POST /wp-json/tf/v1/room-ical-import\nX-API-Key: your-api-key\nContent-Type: application/json\n\n{\n    "ical_url": "https://example.com/room.ics",\n    "hotel_id": 321,\n    "room_index": 0,\n    "pricing_by": "1"\n}',
-				'example_response' => '{\n    "status": true,\n    "message": "iCal imported successfully."\n}',
 			),
 		);
 	}
