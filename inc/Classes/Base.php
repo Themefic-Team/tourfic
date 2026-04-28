@@ -46,6 +46,7 @@ class Base {
 		\Tourfic\Classes\Activator::instance();
 		\Tourfic\Classes\Deactivator::instance();
 		\Tourfic\Classes\TF_API_Keys::instance();
+		\Tourfic\Classes\TF_API_Bootstrap::instance();
 
 		//Enquiry
 		\Tourfic\Admin\Enquiry\Hotel_Enquiry::instance();
