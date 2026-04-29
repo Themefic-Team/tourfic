@@ -42,10 +42,6 @@ class TF_API_Routes {
 			'booking'       => TF_Booking_Rest_API::get_instance(),
 			'enquiry'       => TF_Enquiry_Rest_API::get_instance(),
 			'user'          => TF_User_Rest_API::get_instance(),
-			'vendor'        => TF_Vendor_Rest_API::get_instance(),
-			'hotel_booking' => TF_Hotel_Backend_Booking_Rest_API::get_instance(),
-			'tour_booking'  => TF_Tour_Backend_Booking_Rest_API::get_instance(),
-			'integration'   => TF_Integration_Rest_API::get_instance(),
 		);
 
 		add_action( 'rest_api_init', array( $this, 'register_get_routes' ) );
@@ -61,10 +57,6 @@ class TF_API_Routes {
 		$this->register_booking_routes();
 		$this->register_enquiry_routes();
 		$this->register_user_routes();
-		$this->register_vendor_routes();
-		$this->register_hotel_booking_routes();
-		$this->register_tour_booking_routes();
-		$this->register_integration_routes();
 	}
 
 	private function register_base_routes() {
@@ -205,82 +197,6 @@ class TF_API_Routes {
 		register_rest_route( 'tf/v1', '/user-wishlist', array(
 			'methods'             => 'GET',
 			'callback'            => array( $api, 'tf_user_wishlist' ),
-			'permission_callback' => array( $api, 'tf_permission_callback' ),
-		) );
-	}
-
-	private function register_vendor_routes() {
-		$api = $this->api_classes['vendor'];
-
-		register_rest_route( 'tf/v1', '/reports', array(
-			'methods'             => 'GET',
-			'callback'            => array( $api, 'tf_get_tf_reports' ),
-			'permission_callback' => array( $api, 'tf_permission_callback' ),
-		) );
-
-		register_rest_route( 'tf/v1', '/vendor-reports', array(
-			'methods'             => 'GET',
-			'callback'            => array( $api, 'tf_get_tf_vendor_reports' ),
-			'permission_callback' => array( $api, 'tf_permission_callback' ),
-		) );
-
-		register_rest_route( 'tf/v1', '/commissions', array(
-			'methods'             => 'GET',
-			'callback'            => array( $api, 'tf_get_commissions' ),
-			'permission_callback' => array( $api, 'tf_permission_callback' ),
-		) );
-
-		register_rest_route( 'tf/v1', '/payouts', array(
-			'methods'             => 'GET',
-			'callback'            => array( $api, 'tf_get_payouts' ),
-			'permission_callback' => array( $api, 'tf_permission_callback' ),
-		) );
-
-		register_rest_route( 'tf/v1', '/payout/(?P<id>\\d+)', array(
-			'methods'             => 'GET',
-			'callback'            => array( $api, 'tf_get_payout' ),
-			'permission_callback' => array( $api, 'tf_permission_callback' ),
-		) );
-	}
-
-	private function register_hotel_booking_routes() {
-		$api = $this->api_classes['hotel_booking'];
-
-		register_rest_route( 'tf/v1', '/hotel/available', array(
-			'methods'             => 'GET',
-			'callback'            => array( $api, 'tf_available_hotel' ),
-			'permission_callback' => array( $api, 'tf_permission_callback' ),
-		) );
-
-		register_rest_route( 'tf/v1', '/hotel/available/room/service', array(
-			'methods'             => 'GET',
-			'callback'            => array( $api, 'tf_available_hotel_room_and_service_type' ),
-			'permission_callback' => array( $api, 'tf_permission_callback' ),
-		) );
-
-		register_rest_route( 'tf/v1', '/hotel/available/room/number', array(
-			'methods'             => 'GET',
-			'callback'            => array( $api, 'tf_available_hotel_room_number' ),
-			'permission_callback' => array( $api, 'tf_permission_callback' ),
-		) );
-	}
-
-	private function register_tour_booking_routes() {
-		$api = $this->api_classes['tour_booking'];
-
-		register_rest_route( 'tf/v1', '/tour/available/date/time', array(
-			'methods'             => 'GET',
-			'callback'            => array( $api, 'tf_available_tour_date_time' ),
-			'permission_callback' => array( $api, 'tf_permission_callback' ),
-		) );
-	}
-
-	private function register_integration_routes() {
-		$api = $this->api_classes['integration'];
-
-		register_rest_route( 'tf/v1', '/get-google-access-token-url', array(
-			'methods'             => 'GET',
-			'callback'            => array( $api, 'tf_get_google_access_token_url' ),
 			'permission_callback' => array( $api, 'tf_permission_callback' ),
 		) );
 	}

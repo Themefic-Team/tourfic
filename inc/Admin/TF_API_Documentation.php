@@ -18,7 +18,8 @@ class TF_API_Documentation {
 			esc_html__( 'API Documentation', 'tourfic' ),
 			'manage_options',
 			'tf_api_docs',
-			array( $this, 'render_page' )
+			array( $this, 'render_page' ),
+			function_exists( 'is_tf_pro' ) && is_tf_pro() ? 6 : 5
 		);
 	}
 
@@ -73,7 +74,11 @@ class TF_API_Documentation {
 				<div class="tf-api-endpoints">
 				<?php foreach ( $endpoints as $endpoint ) : ?>
 					<?php $full_url = rest_url( 'tf/v1' ) . $endpoint['url']; ?>
+					<?php $show_pro_badge = !function_exists( 'is_tf_pro' ) && 'GET' !== strtoupper( $endpoint['method'] ); ?>
 					<div class="tf-api-endpoint-card">
+						<?php if ( $show_pro_badge ) : ?>
+							<span class="tf-api-pro-badge"><?php esc_html_e( 'PRO', 'tourfic' ); ?></span>
+						<?php endif; ?>
 						<div class="tf-api-endpoint-header">
 							<span class="tf-api-method tf-api-method-<?php echo esc_attr( strtolower( $endpoint['method'] ) ); ?>">
 								<?php echo esc_html( $endpoint['method'] ); ?>

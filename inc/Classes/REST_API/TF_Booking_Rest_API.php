@@ -279,52 +279,6 @@ if ( ! class_exists( 'TF_Booking_Rest_API' ) ) {
 
 			return $order;
 		}
-
-        /* 
-         * Update order status
-         * @author Foysal
-         */
-        public function tf_update_order_status( $request ){
-			$id              = ! empty( $request->get_param( 'id' ) ) ? $request->get_param( 'id' ) : '';
-			$order_status    = ! empty( $request->get_param( 'order_status' ) ) ? $request->get_param( 'order_status' ) : '';
-        
-            global $wpdb;
-            $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, order_id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $id ) ) );
-        
-            // Order Status Update into Database
-            if(!empty($tf_order)){
-                $wpdb->query(
-                $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET ostatus=%s WHERE id=%s", sanitize_title( $order_status ), sanitize_key($id))
-                );
-        
-                // Woocommerce status
-                $order = wc_get_order($tf_order->order_id);
-                if (!empty($order)) {
-                    $order->update_status( sanitize_key($order_status), '', true );
-                }
-            }
-        }
-
-        /* 
-         * Update visitor details
-         * @author Foysal
-         */
-        public function tf_update_visitor_details( $request ){
-            $id              = ! empty( $request->get_param( 'id' ) ) ? $request->get_param( 'id' ) : '';
-			$visitorDetails    = ! empty( $request->get_param( 'visitorDetails' ) ) ? $request->get_param( 'visitorDetails' ) : '';
-        
-            global $wpdb;
-            $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id,order_details FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $id ) ) );
-            $tf_order_details = json_decode($tf_order->order_details);
-            $tf_order_details->visitor_details = wp_json_encode($visitorDetails);
-        
-            // Visitor Details Update
-            if(!empty($tf_order)){
-                $wpdb->query(
-                    $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET order_details=%s WHERE id=%s", wp_json_encode($tf_order_details), sanitize_key($id))
-                );
-            }
-        }
 	}
 }
 

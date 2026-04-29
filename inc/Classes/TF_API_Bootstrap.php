@@ -30,10 +30,6 @@ class TF_API_Bootstrap {
 			'TF_Booking_Rest_API.php',
 			'TF_Enquiry_Rest_API.php',
 			'TF_User_Rest_API.php',
-			'TF_Vendor_Rest_API.php',
-			'TF_Hotel_Backend_Booking_Rest_API.php',
-			'TF_Tour_Backend_Booking_Rest_API.php',
-			'TF_Integration_Rest_API.php',
 			'TF_API_Routes.php',
 		);
 
