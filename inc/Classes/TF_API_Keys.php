@@ -381,11 +381,19 @@ class TF_API_Keys {
 		$permissions = array_filter( array_map( 'sanitize_key', $permissions ) );
 		$permissions = array_values( array_intersect( $permissions, array( 'read', 'write' ) ) );
 
+		if ( ! $this->is_write_permission_available() ) {
+			$permissions = array_values( array_diff( $permissions, array( 'write' ) ) );
+		}
+
 		if ( empty( $permissions ) ) {
 			$permissions = array( 'read' );
 		}
 
 		return $permissions;
+	}
+
+	private function is_write_permission_available() {
+		return function_exists( 'is_tf_pro' ) && is_tf_pro();
 	}
 
 	private function decode_permissions( $permissions ) {

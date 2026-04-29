@@ -140,6 +140,7 @@ class TF_API_Documentation {
 	}
 
 	private function render_api_key_manager() {
+		$is_write_allowed = function_exists( 'is_tf_pro' ) && is_tf_pro();
 		?>
 		<div class="tf-api-section tf-api-key-manager">
 			<h2><?php esc_html_e( 'API Key Management', 'tourfic' ); ?></h2>
@@ -157,7 +158,13 @@ class TF_API_Documentation {
 									<th><?php esc_html_e( 'Permissions', 'tourfic' ); ?></th>
 									<td>
 										<label><input type="checkbox" name="permissions[]" value="read" checked> <?php esc_html_e( 'Read', 'tourfic' ); ?></label><br>
-										<label><input type="checkbox" name="permissions[]" value="write" checked> <?php esc_html_e( 'Write', 'tourfic' ); ?></label>
+										<label>
+											<input type="checkbox" name="permissions[]" value="write" <?php checked( $is_write_allowed ); ?> <?php disabled( ! $is_write_allowed ); ?>>
+											<?php esc_html_e( 'Write', 'tourfic' ); ?>
+										</label>
+										<?php if ( ! $is_write_allowed ) : ?>
+											<p class="description"><?php esc_html_e( 'Write permission is available in Tourfic PRO only.', 'tourfic' ); ?></p>
+										<?php endif; ?>
 									</td>
 								</tr>
 							</tbody>
@@ -185,6 +192,21 @@ class TF_API_Documentation {
 				'parameters'  => array(),
 				'example_request'  => 'GET /wp-json/tf/v1/tf-settings' . "\n" . 'X-API-Key: your-api-key',
 				'example_response' => $this->get_general_settings_example_response(),
+			),
+			array(
+				'method'      => 'POST',
+				'url'         => '/tf-settings',
+				'description' => __( 'Update Tourfic plugin settings. Merges the supplied key-value pairs into the existing settings. Requires administrator or tf_manager role. Available in Tourfic PRO.', 'tourfic' ),
+				'parameters'  => array(
+					array(
+						'name'        => '(any setting key)',
+						'type'        => 'mixed',
+						'required'    => true,
+						'description' => __( 'One or more tf_settings keys with their new values. Send as a JSON object in the request body.', 'tourfic' ),
+					),
+				),
+				'example_request'  => 'POST /wp-json/tf/v1/tf-settings' . "\n" . 'X-API-Key: your-api-key' . "\n" . 'Content-Type: application/json' . "\n\n" . $this->get_general_settings_example_response(),
+				'example_response' => '{' . "\n" . '  "success": true,' . "\n" . '  "message": "Settings updated successfully.",' . "\n" . '  "settings": ' . $this->get_general_settings_example_response() . "\n" . '}',
 			),
 		);
 	}
