@@ -4590,7 +4590,7 @@ function convertTo24HourFormat(timeStr) {
                     if ($('.tf-details-right').length > 0) {
                         $('.tf-details-right').removeClass('tf-filter-show');
                     }
-                    if($('#tf-hotel-archive-map').length) {
+                    if($('#tf-hotel-archive-map').length && typeof googleMapInit === 'function') {
 
                         // GOOGLE MAP INITIALIZE
                         var mapLocations = $('#map-datas').html();
@@ -7422,13 +7422,17 @@ function convertTo24HourFormat(timeStr) {
 
         var zoomLvl = 5;
         var zoomChangeEnabled = false;
-        var centerLvl = new google.maps.LatLng(23.8697847, 90.4219536);
+        var centerLvl;
         var markersById = {};
         var markers = [];
         var mapChanged = false;
         var hotelMap;
+        var googleMapInit;
 
-        const googleMapInit = (mapLocations, mapLat = 23.8697847, mapLng = 90.4219536) => {
+        if (typeof google !== 'undefined' && google.maps) {
+        centerLvl = new google.maps.LatLng(23.8697847, 90.4219536);
+
+        googleMapInit = (mapLocations, mapLat = 23.8697847, mapLng = 90.4219536) => {
             // Clear existing markers
             clearMarkers();
 
@@ -7600,6 +7604,7 @@ function convertTo24HourFormat(timeStr) {
                 markersById[id].setAnimation(null);
             }
         });
+        } // end Google Maps guard
 
         /*
         * Map toggle btn for mobile
