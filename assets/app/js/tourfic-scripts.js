@@ -2151,6 +2151,7 @@ function convertTo24HourFormat(timeStr) {
             //var features = $('input[name=features]').filter(':checked').val();
             var children_ages = $('input[name=children_ages]').val();
             var check_in_out = $('input[name=check-in-out-date]').val();
+            var room = $('#tf-single-hotel-avail').find('[name=room]').val() || 1;
 
             var data = {
                 action: 'tf_room_availability',
@@ -2160,6 +2161,7 @@ function convertTo24HourFormat(timeStr) {
                 child: child,
                 features: features,
                 children_ages: children_ages,
+                room: room,
                 check_in_out: check_in_out,
                 design: $('input[name=design]').val(),
             };
@@ -2989,6 +2991,7 @@ function convertTo24HourFormat(timeStr) {
     });
 
 })(jQuery, window);
+
 })();
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
