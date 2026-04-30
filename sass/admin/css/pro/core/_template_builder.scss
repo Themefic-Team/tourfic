@@ -551,6 +551,16 @@ Modal
                 }
             }
 
+            &#tf-edit-with-bricks{
+                &:hover{
+                    svg rect{
+                        fill: #fff;
+                    }
+                    svg path{
+                        fill: #003C79;
+                    }
+                }
+            }
             &#tf-edit-with-elementor{
                 &:hover{
                     svg path{

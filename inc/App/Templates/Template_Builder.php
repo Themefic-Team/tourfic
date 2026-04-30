@@ -795,8 +795,11 @@ class Template_Builder {
                                     </div>
                                     <div class="tf-builder-btn-wrap">
                                         <button type="button" id="tf-edit-with-bricks" class="tf-admin-btn<?php echo $bricks_active ? '' : ' tf-btn-disabled'; ?>"<?php echo $bricks_active ? '' : ' disabled'; ?>>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect x="3" y="3" width="18" height="18" rx="2" fill="currentColor" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 5120 5120">
+                                            <rect width="5120" height="5120" rx="600" fill="#003C79"/>
+                                            <g transform="translate(0,5120) scale(1,-1)">
+                                                <path fill="white" d="M1600 4191 l-315 -36 -3 -1597 -2 -1598 315 0 315 0 0 131 c0 151 -12 145 104 48 129 -109 310 -191 483 -220 97 -16 312 -13 417 6 233 41 424 142 596 315 53 52 117 125 143 162 94 134 166 304 204 488 27 128 25 431 -4 561 -29 129 -56 208 -108 312 -60 118 -109 188 -202 287 -202 216 -449 334 -750 360 -247 21 -454 -21 -670 -135 l-103 -54 0 489 0 489 -22 15 c-29 20 -25 20 -398 -23z m1145 -1433 c129 -37 236 -117 310 -232 134 -210 136 -522 4 -726 -114 -177 -273 -261 -489 -261 -180 0 -295 46 -415 166 -122 122 -169 250 -169 455 0 140 14 211 66 319 57 119 194 236 330 280 100 33 248 32 363 -1z"/>
+                                            </g>
                                             </svg>
                                             <?php echo esc_html__('Edit With Bricks', 'tourfic'); ?>
                                         </button><br>
