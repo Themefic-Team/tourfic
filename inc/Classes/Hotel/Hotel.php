@@ -574,7 +574,17 @@ class Hotel {
 						$num_room_available = max($num_room_available, 0);
                     }
 
-                    if ( $avil_by_date == '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+					$use_explicit_availability_pricing = false;
+					if ( '1' === (string) $avil_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+						$use_explicit_availability_pricing = Room_Availability::has_explicit_available_rules( $avail_date );
+
+						if ( ! $use_explicit_availability_pricing && ! Room_Availability::are_dates_available_for_rules( $avail_date, array_values( $tf_durationdate ) ) ) {
+							$error = esc_html__( 'No Room Available within this Date Range!', 'tourfic' );
+							continue;
+						}
+					}
+
+					if ( $use_explicit_availability_pricing ) {
 
                         if(!$multi_by_date_ck){
                             if ( $tf_startdate && $tf_enddate ) {
