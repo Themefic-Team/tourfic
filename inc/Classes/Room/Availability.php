@@ -309,20 +309,11 @@ class Availability {
 	 * @return bool True if date range is available according to rules, false otherwise
 	 */
 	private function passes_availability_rules() {
-		$room_availability = ! empty( $this->room_meta['avail_date'] ) ? $this->room_meta['avail_date'] : '';
+		$room_availability_arr = self::normalize_availability_rules( $this->room_meta['avail_date'] ?? '' );
 
-		if ( empty( $room_availability ) ) {
+		if ( empty( $room_availability_arr ) ) {
 			return true;
 		}
-
-		$room_availability_arr = json_decode( $room_availability, true );
-
-		if ( empty( $room_availability_arr ) || ! is_array( $room_availability_arr ) ) {
-			return true;
-		}
-
-		$check_in_time  = strtotime( $this->check_in );
-		$check_out_time = strtotime( $this->check_out );
 
 		// Check each day in the requested period
 		$check_period = new \DatePeriod(
@@ -333,31 +324,240 @@ class Availability {
 
 		foreach ( $check_period as $date ) {
 			$date_string = $date->format( 'Y/m/d' );
-			$is_available = false;
 
-			// Check if this date matches any availability rule
-			foreach ( $room_availability_arr as $availability_rule ) {
-				$rule_from = strtotime( $availability_rule['check_in'] . ' 00:00' );
-				$rule_to   = strtotime( $availability_rule['check_out'] . ' 23:59' );
-				$rule_date = strtotime( $date_string );
-
-				// Check if date falls within this rule's range
-				if ( $rule_date >= $rule_from && $rule_date <= $rule_to ) {
-					// If rule status is available, mark as available
-					if ( $availability_rule['status'] === 'available' ) {
-						$is_available = true;
-						break;
-					}
-				}
-			}
-
-			// If any day in the period is not available, return false
-			if ( ! $is_available ) {
+			if ( ! self::is_date_available_for_rules( $room_availability_arr, $date_string ) ) {
 				return false;
 			}
 		}
 
 		return true;
+	}
+
+	/**
+	 * Normalize mixed availability storage into a flat array of rule arrays.
+	 *
+	 * @param mixed $room_availability Raw availability payload.
+	 * @return array
+	 */
+	public static function normalize_availability_rules( $room_availability ) {
+		if ( is_string( $room_availability ) ) {
+			$decoded_rules = json_decode( $room_availability, true );
+			$room_availability = is_array( $decoded_rules ) ? $decoded_rules : array();
+		}
+
+		if ( ! is_array( $room_availability ) ) {
+			return array();
+		}
+
+		$normalized_rules = array();
+
+		foreach ( $room_availability as $availability_rule ) {
+			if ( is_string( $availability_rule ) ) {
+				$decoded_rule = json_decode( $availability_rule, true );
+
+				if ( is_array( $decoded_rule ) ) {
+					if ( self::is_associative_rule( $decoded_rule ) ) {
+						$normalized_rules[] = $decoded_rule;
+					} else {
+						foreach ( $decoded_rule as $nested_rule ) {
+							if ( is_array( $nested_rule ) ) {
+								$normalized_rules[] = $nested_rule;
+							}
+						}
+					}
+				}
+
+				continue;
+			}
+
+			if ( is_array( $availability_rule ) ) {
+				$normalized_rules[] = $availability_rule;
+			}
+		}
+
+		return $normalized_rules;
+	}
+
+	/**
+	 * Check whether the rules contain explicit available dates.
+	 *
+	 * @param mixed $room_availability Raw or normalized availability rules.
+	 * @return bool
+	 */
+	public static function has_explicit_available_rules( $room_availability ) {
+		$room_availability = self::normalize_availability_rules( $room_availability );
+
+		foreach ( $room_availability as $availability_rule ) {
+			if ( 'unavailable' !== self::get_rule_status( $availability_rule ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check whether a specific date is available under the current rule set.
+	 *
+	 * @param mixed  $room_availability Raw or normalized availability rules.
+	 * @param string $date_string       Date in `Y/m/d` format.
+	 * @return bool
+	 */
+	public static function is_date_available_for_rules( $room_availability, $date_string ) {
+		$room_availability = self::normalize_availability_rules( $room_availability );
+
+		if ( empty( $room_availability ) ) {
+			return true;
+		}
+
+		$has_explicit_available_rules = self::has_explicit_available_rules( $room_availability );
+		$has_available_match          = false;
+
+		foreach ( $room_availability as $availability_rule ) {
+			if ( ! self::rule_matches_date( $availability_rule, $date_string ) ) {
+				continue;
+			}
+
+			if ( 'unavailable' === self::get_rule_status( $availability_rule ) ) {
+				return false;
+			}
+
+			$has_available_match = true;
+		}
+
+		return $has_explicit_available_rules ? $has_available_match : true;
+	}
+
+	/**
+	 * Check whether every requested day is available under the current rule set.
+	 *
+	 * @param mixed $room_availability Raw or normalized availability rules.
+	 * @param array $date_strings      Array of dates in `Y/m/d` format.
+	 * @return bool
+	 */
+	public static function are_dates_available_for_rules( $room_availability, array $date_strings ) {
+		$date_strings = array_values( array_filter( array_map( 'sanitize_text_field', $date_strings ) ) );
+
+		foreach ( $date_strings as $date_string ) {
+			if ( ! self::is_date_available_for_rules( $room_availability, $date_string ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Get all date keys covered by rules with a specific status.
+	 *
+	 * @param mixed  $room_availability Raw or normalized availability rules.
+	 * @param string $status            Rule status to collect.
+	 * @return array
+	 */
+	public static function get_rule_dates_by_status( $room_availability, $status ) {
+		$room_availability = self::normalize_availability_rules( $room_availability );
+		$status            = function_exists( 'sanitize_key' ) ? sanitize_key( $status ) : preg_replace( '/[^a-z0-9_\-]/', '', strtolower( (string) $status ) );
+		$date_keys         = array();
+
+		foreach ( $room_availability as $availability_rule ) {
+			$rule_status = self::get_rule_status( $availability_rule );
+
+			if ( 'available' === $status && 'unavailable' === $rule_status ) {
+				continue;
+			}
+
+			if ( 'available' !== $status && $status !== $rule_status ) {
+				continue;
+			}
+
+			$date_keys = array_merge( $date_keys, self::get_rule_date_keys( $availability_rule ) );
+		}
+
+		return array_values( array_unique( $date_keys ) );
+	}
+
+	/**
+	 * Determine whether an availability rule targets a specific date.
+	 *
+	 * @param array  $availability_rule Availability rule.
+	 * @param string $date_string       Date in `Y/m/d` format.
+	 * @return bool
+	 */
+	private static function rule_matches_date( array $availability_rule, $date_string ) {
+		if ( empty( $availability_rule['check_in'] ) || empty( $availability_rule['check_out'] ) ) {
+			return false;
+		}
+
+		$rule_from = strtotime( $availability_rule['check_in'] . ' 00:00' );
+		$rule_to   = strtotime( $availability_rule['check_out'] . ' 23:59' );
+		$rule_date = strtotime( $date_string );
+
+		if ( false === $rule_from || false === $rule_to || false === $rule_date ) {
+			return false;
+		}
+
+		return $rule_date >= $rule_from && $rule_date <= $rule_to;
+	}
+
+	/**
+	 * Expand an availability rule into individual date keys.
+	 *
+	 * @param array $availability_rule Availability rule.
+	 * @return array
+	 */
+	private static function get_rule_date_keys( array $availability_rule ) {
+		if ( empty( $availability_rule['check_in'] ) || empty( $availability_rule['check_out'] ) ) {
+			return array();
+		}
+
+		$rule_from = strtotime( $availability_rule['check_in'] . ' 00:00' );
+		$rule_to   = strtotime( $availability_rule['check_out'] . ' 00:00' );
+
+		if ( false === $rule_from || false === $rule_to ) {
+			return array();
+		}
+
+		if ( $rule_to < $rule_from ) {
+			$rule_to = $rule_from;
+		}
+
+		$date_keys = array();
+
+		for ( $day = $rule_from; $day <= $rule_to; $day = strtotime( '+1 day', $day ) ) {
+			$date_keys[] = date( 'Y/m/d', $day );
+		}
+
+		return $date_keys;
+	}
+
+	/**
+	 * Get the normalized status for a rule.
+	 *
+	 * @param array $availability_rule Availability rule.
+	 * @return string
+	 */
+	private static function get_rule_status( array $availability_rule ) {
+		if ( empty( $availability_rule['status'] ) ) {
+			return 'available';
+		}
+
+		$status = strtolower( (string) $availability_rule['status'] );
+
+		if ( function_exists( 'sanitize_key' ) ) {
+			return sanitize_key( $status );
+		}
+
+		return preg_replace( '/[^a-z0-9_\-]/', '', $status );
+	}
+
+	/**
+	 * Determine whether a decoded rule array is associative.
+	 *
+	 * @param array $availability_rule Availability rule.
+	 * @return bool
+	 */
+	private static function is_associative_rule( array $availability_rule ) {
+		return array_keys( $availability_rule ) !== range( 0, count( $availability_rule ) - 1 );
 	}
 
 	/**

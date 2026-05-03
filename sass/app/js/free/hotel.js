@@ -65,6 +65,7 @@
             //var features = $('input[name=features]').filter(':checked').val();
             var children_ages = $('input[name=children_ages]').val();
             var check_in_out = $('input[name=check-in-out-date]').val();
+            var room = $('#tf-single-hotel-avail').find('[name=room]').val() || 1;
 
             var data = {
                 action: 'tf_room_availability',
@@ -74,6 +75,7 @@
                 child: child,
                 features: features,
                 children_ages: children_ages,
+                room: room,
                 check_in_out: check_in_out,
                 design: $('input[name=design]').val(),
             };

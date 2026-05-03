@@ -3,6 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
+use Tourfic\Classes\Room\Availability;
 use Tourfic\Classes\Room\Room;
 
 /**
@@ -1243,6 +1244,69 @@ function tf_remove_order_ids_from_room() {
 }
 
 
+if ( ! function_exists( 'tf_get_room_unit_capacity_values' ) ) {
+	function tf_get_room_unit_capacity_values( array $rooms_meta, $capacity_key ) {
+		$capacity_values = array();
+
+		foreach ( $rooms_meta as $room_meta ) {
+			if ( empty( $room_meta[ $capacity_key ] ) ) {
+				continue;
+			}
+
+			$room_units = ! empty( $room_meta['num-room'] ) ? max( 1, intval( $room_meta['num-room'] ) ) : 1;
+			for ( $i = 0; $i < $room_units; $i ++ ) {
+				$capacity_values[] = intval( $room_meta[ $capacity_key ] );
+			}
+		}
+
+		return $capacity_values;
+	}
+}
+
+if ( ! function_exists( 'tf_get_total_room_units' ) ) {
+	function tf_get_total_room_units( array $rooms_meta ) {
+		$total_room_units = 0;
+
+		foreach ( $rooms_meta as $room_meta ) {
+			$total_room_units += ! empty( $room_meta['num-room'] ) ? max( 1, intval( $room_meta['num-room'] ) ) : 1;
+		}
+
+		return $total_room_units;
+	}
+}
+
+if ( ! function_exists( 'tf_room_unit_capacity_passes' ) ) {
+	function tf_room_unit_capacity_passes( array $capacity_values, $requested_people, $requested_rooms ) {
+		if ( empty( $requested_people ) ) {
+			return true;
+		}
+
+		if ( empty( $capacity_values ) ) {
+			return false;
+		}
+
+		rsort( $capacity_values, SORT_NUMERIC );
+
+		return array_sum( array_slice( $capacity_values, 0, max( 1, intval( $requested_rooms ) ) ) ) >= intval( $requested_people );
+	}
+}
+
+if ( ! function_exists( 'tf_filter_room_metas_available_for_period' ) ) {
+	function tf_filter_room_metas_available_for_period( array $rooms_meta, array $date_strings ) {
+		if ( empty( $date_strings ) ) {
+			return $rooms_meta;
+		}
+
+		return array_filter( $rooms_meta, function( $room_meta ) use ( $date_strings ) {
+			if ( empty( $room_meta['avil_by_date'] ) || empty( $room_meta['avail_date'] ) ) {
+				return true;
+			}
+
+			return Availability::are_dates_available_for_rules( $room_meta['avail_date'], $date_strings );
+		} );
+	}
+}
+
 if(!function_exists('tf_filter_hotel_by_date')) {
 	function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] ): void {
 
@@ -1280,47 +1344,28 @@ if(!function_exists('tf_filter_hotel_by_date')) {
 		// Set initial room availability status
 		$has_hotel = false;
 
-		/**
-		 * Adult Number Validation
-		 */
-		$back_adults   = array_column( $rooms_meta, 'adult' );
-		$adult_counter = 0;
-		foreach ( $back_adults as $back_adult ) {
-			if ( ! empty( $back_adult ) && $back_adult >= $adults ) {
-				$adult_counter ++;
+		$requested_rooms = max( 1, intval( $room ) );
+		$searching_period = [];
+		if ( ! empty( $period ) ) {
+			foreach ( $period as $date ) {
+				$searching_period[] = $date->format( 'Y/m/d' );
 			}
 		}
 
-		$adult_result = array_filter( $back_adults );
+		$capacity_rooms_meta = tf_filter_room_metas_available_for_period( $rooms_meta, $searching_period );
+		$adult_capacities = tf_get_room_unit_capacity_values( $capacity_rooms_meta, 'adult' );
+		$adult_capacity_pass = tf_room_unit_capacity_passes( $adult_capacities, $adults, $requested_rooms );
+		$adult_result = ! empty( $adult_capacities );
 
-		/**
-		 * Child Number Validation
-		 */
-		$back_childs   = array_column( $rooms_meta, 'child' );
-		$child_counter = 0;
-		foreach ( $back_childs as $back_child ) {
-			if ( ! empty( $back_child ) && $back_child >= $child ) {
-				$child_counter ++;
-			}
-		}
+		$child_capacities = tf_get_room_unit_capacity_values( $capacity_rooms_meta, 'child' );
+		$child_capacity_pass = tf_room_unit_capacity_passes( $child_capacities, $child, $requested_rooms );
+		$childs_result = ! empty( $child_capacities );
 
-		$childs_result = array_filter( $back_childs );
-
-		/**
-		 * Room Number Validation
-		 */
-		$back_rooms   = array_column( $rooms_meta, 'num-room' );
-		$room_counter = 0;
-		foreach ( $back_rooms as $back_room ) {
-			if ( ! empty( $back_room ) && $back_room >= $room ) {
-				$room_counter ++;
-			}
-		}
-
-		$room_result = array_filter( $back_rooms );
+		$total_room_units = tf_get_total_room_units( $capacity_rooms_meta );
+		$room_validation = $total_room_units >= $requested_rooms;
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && ! empty( $childs_result ) && $child_counter > 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( $adult_result && $adult_capacity_pass && $childs_result && $child_capacity_pass && $room_validation ) {
 
 			// Check custom date range status of room
 			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
@@ -1396,38 +1441,21 @@ if(!function_exists('tf_filter_hotel_by_date')) {
 					}
 				}
 
-				$tf_common_dates = array_intersect( $availability_dates, $searching_period );
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
 
-				//Initial matching date array
-				$show_hotel = [];
+					if ( empty( $room['avail_date'] ) || ! Availability::are_dates_available_for_rules( $room['avail_date'], array_values( $searching_period ) ) ) {
+						continue;
+					}
 
-				if ( count( $tf_common_dates ) === count( $searching_period ) ) {
-					$show_hotel[] = 1;
-				}
-
-				// If any date range matches show hotel
-				if ( ! empty( $show_hotel ) && ! in_array( 0, $show_hotel ) ) {
 					if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-						foreach ( $rooms as $_room ) {
-							$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
-							if ( ! empty( $tf_check_in_date_price['adult_price'] ) ) {
-								if ( $startprice <= $tf_check_in_date_price['adult_price'] && $tf_check_in_date_price['adult_price'] <= $endprice ) {
-									$has_hotel = true;
-								}
-							}
-							if ( ! empty( $tf_check_in_date_price['child_price'] ) ) {
-								if ( $startprice <= $tf_check_in_date_price['child_price'] && $tf_check_in_date_price['child_price'] <= $endprice ) {
-									$has_hotel = true;
-								}
-							}
-							if ( ! empty( $tf_check_in_date_price['price'] ) ) {
-								if ( $startprice <= $tf_check_in_date_price['price'] && $tf_check_in_date_price['price'] <= $endprice ) {
-									$has_hotel = true;
-								}
-							}
+						if ( Room::room_matches_price_range( $room, $startprice, $endprice, $tf_check_in_date_price ) ) {
+							$has_hotel = true;
+							break;
 						}
 					} else {
 						$has_hotel = true;
+						break;
 					}
 				}
 			}
@@ -1435,7 +1463,7 @@ if(!function_exists('tf_filter_hotel_by_date')) {
 		}
 
 		// If adult and child number validation is true proceed
-		if ( ! empty( $adult_result ) && $adult_counter > 0 && empty( $childs_result ) && $child_counter == 0 && ! empty( $room_result ) && $room_counter > 0 ) {
+		if ( $adult_result && $adult_capacity_pass && empty( $childs_result ) && $room_validation ) {
 
 			// Check custom date range status of room
 			$avil_by_date = array_column( $rooms_meta, 'avil_by_date' );
@@ -1512,38 +1540,21 @@ if(!function_exists('tf_filter_hotel_by_date')) {
 					}
 				}
 
-				$tf_common_dates = array_intersect( $availability_dates, $searching_period );
+				foreach ( $rooms as $_room ) {
+					$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
 
-				//Initial matching date array
-				$show_hotel = [];
+					if ( empty( $room['avail_date'] ) || ! Availability::are_dates_available_for_rules( $room['avail_date'], array_values( $searching_period ) ) ) {
+						continue;
+					}
 
-				if ( count( $tf_common_dates ) === count( $searching_period ) ) {
-					$show_hotel[] = 1;
-				}
-
-				// If any date range matches show hotel
-				if ( ! in_array( 0, $show_hotel ) ) {
 					if ( ! empty( $rooms ) && ! empty( $startprice ) && ! empty( $endprice ) ) {
-						foreach ( $rooms as $_room ) {
-							$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
-							if ( ! empty( $tf_check_in_date_price['adult_price'] ) ) {
-								if ( $startprice <= $tf_check_in_date_price['adult_price'] && $tf_check_in_date_price['adult_price'] <= $endprice ) {
-									$has_hotel = true;
-								}
-							}
-							if ( ! empty( $tf_check_in_date_price['child_price'] ) ) {
-								if ( $startprice <= $tf_check_in_date_price['child_price'] && $tf_check_in_date_price['child_price'] <= $endprice ) {
-									$has_hotel = true;
-								}
-							}
-							if ( ! empty( $tf_check_in_date_price['price'] ) ) {
-								if ( $startprice <= $tf_check_in_date_price['price'] && $tf_check_in_date_price['price'] <= $endprice ) {
-									$has_hotel = true;
-								}
-							}
+						if ( Room::room_matches_price_range( $room, $startprice, $endprice, $tf_check_in_date_price ) ) {
+							$has_hotel = true;
+							break;
 						}
 					} else {
 						$has_hotel = true;
+						break;
 					}
 				}
 

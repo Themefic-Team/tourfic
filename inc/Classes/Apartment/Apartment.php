@@ -1466,16 +1466,14 @@ class Apartment {
 		$apt_disable_dates = [];
 		$tf_apt_enable_dates = [];
 		if ( $enable_availability === '1' && ! empty( $apt_availability ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			$apt_availability_arr = json_decode( $apt_availability, true );
-			//iterate all the available disabled dates
+			$apt_availability_arr = Availability::normalize_availability_rules( $apt_availability );
+
 			if ( ! empty( $apt_availability_arr ) && is_array( $apt_availability_arr ) ) {
-				foreach ( $apt_availability_arr as $date ) {
-					if ( $date['status'] === 'unavailable' ) {
-						$apt_disable_dates[] = $date['check_in'];
-					}
-					if ( $date['status'] === 'available' ) {
-						$tf_apt_enable_dates[] = $date['check_in'];
-					}
+				$apt_has_explicit_available_dates = Availability::has_explicit_available_rules( $apt_availability_arr );
+				$apt_disable_dates                 = Availability::get_rule_dates_by_status( $apt_availability_arr, 'unavailable' );
+
+				if ( $apt_has_explicit_available_dates ) {
+					$tf_apt_enable_dates = Availability::get_rule_dates_by_status( $apt_availability_arr, 'available' );
 				}
 			}
 		}
@@ -1496,13 +1494,11 @@ class Apartment {
 				}
 			}
 		}
-
 		$only_booked_dates = !empty( $only_booked_dates ) ? array_unique($only_booked_dates) : array();
-		
 
 		if( is_array( $tf_apt_enable_dates ) && !empty( $tf_apt_enable_dates ) ) {
-			$checked_enable_dates = array_filter( $tf_apt_enable_dates, function($date) use($only_booked_dates) {
-				return !in_array($date, $only_booked_dates);
+			$checked_enable_dates = array_filter( $tf_apt_enable_dates, function($date) use($only_booked_dates, $apt_disable_dates) {
+				return !in_array($date, $only_booked_dates) && !in_array($date, $apt_disable_dates);
 			});
 		}
 		
