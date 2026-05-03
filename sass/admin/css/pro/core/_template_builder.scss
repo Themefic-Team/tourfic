@@ -491,6 +491,7 @@ Modal
         .tf-form-actions{
             display: flex;
             justify-content: flex-end;
+            align-items: flex-start;
             gap: 16px;
 
             .tf-admin-btn{
