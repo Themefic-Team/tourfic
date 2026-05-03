@@ -520,6 +520,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 			$order_details    = [
 				'order_by'             => $field['tf_hotel_booked_by'],
 				'room'                 => $field['tf_hotel_rooms_number'],
+				'room_unique_id'       => $field['tf_available_rooms'],
 				'check_in'             => $field['tf_hotel_date']['from'],
 				'check_out'            => $field['tf_hotel_date']['to'],
 				'room_name'            => $room_data['title'],
@@ -536,6 +537,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 				'post_id'          => intval( $field['tf_available_hotels'] ),
 				'post_type'        => 'hotel',
 				'room_number'      => intval( $field['tf_hotel_rooms_number'] ),
+				'room_id'          => $field['tf_available_rooms'],
 				'check_in'         => $field['tf_hotel_date']['from'],
 				'check_out'        => $field['tf_hotel_date']['to'],
 				'billing_details'  => $billing_details,
