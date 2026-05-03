@@ -426,7 +426,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 = 2.22.2 – May 03, 2026 =
 
 - Added: stronger server-side capacity validation to prevent overbooking.
-- Added: Connectivity widget for car sidebar filter.
 - Improved: Traveler DOB validation in booking flow.
 - Improved: booking calendar handling and fallback logic.
 - Fixed: iCal room linkage and availability issues (hotel & apartment).
