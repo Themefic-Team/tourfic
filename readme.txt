@@ -427,7 +427,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 - Added: stronger server-side capacity validation to prevent overbooking.
 - Improved: Traveler DOB validation in booking flow.
-- Improved: booking calendar handling and fallback logic.
+- Improved: Booking calendar handling and fallback logic.
 - Fixed: iCal room linkage and availability issues (hotel & apartment).
 - Fixed: multi-room capacity calculation for hotel searches.
 - Optimized: Google Maps loading (only when needed).
