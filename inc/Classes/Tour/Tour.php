@@ -4886,17 +4886,19 @@ class Tour {
 				return $traveller_fields_html;
 			};
 
-			$render_traveller_block = function( $traveller_in, $traveller_title ) use ( $render_traveller_fields ) {
-				return '<div class="tf-single-tour-traveller tf-single-travel">
+			$render_traveller_block = function( $traveller_in, $traveller_title, $passenger_type = '', $passenger_title = '' ) use ( $render_traveller_fields ) {
+				return '<div class="tf-single-tour-traveller tf-single-travel" data-traveler-index="' . esc_attr( $traveller_in ) . '" data-passenger-type="' . esc_attr( $passenger_type ) . '" data-passenger-title="' . esc_attr( $passenger_title ) . '">
                 <h4>' . esc_html( $traveller_title ) . '</h4>
                 <div class="traveller-info">' . $render_traveller_fields( $traveller_in ) . '</div>
             </div>';
 			};
 
+			$passenger_type_map = function_exists( 'tf_tour_get_passenger_type_map' ) ? tf_tour_get_passenger_type_map( $adults, $children, $infant ) : array();
+
 			if ( 'single' === $traveler_info_collection_mode ) {
-				$response['traveller_info'] .= $render_traveller_block( 1, esc_html__( 'Traveler Information', 'tourfic' ) );
+				$single_passenger_type = ! empty( $passenger_type_map[1] ) ? $passenger_type_map[1] : 'adult';
+				$response['traveller_info'] .= $render_traveller_block( 1, esc_html__( 'Traveler Information', 'tourfic' ), $single_passenger_type, esc_html__( 'Traveler', 'tourfic' ) );
 			} else {
-				$passenger_type_map = function_exists( 'tf_tour_get_passenger_type_map' ) ? tf_tour_get_passenger_type_map( $adults, $children, $infant ) : array();
 				$traveller_groups   = array(
 					'adult'  => array(
 						'title' => esc_html__( 'Adults', 'tourfic' ),
@@ -4934,7 +4936,7 @@ class Tour {
 
 					$group_index = 1;
 					foreach ( $traveller_group['items'] as $traveller_in ) {
-						$response['traveller_info'] .= $render_traveller_block( $traveller_in, $traveller_group['label'] . ' ' . $group_index );
+						$response['traveller_info'] .= $render_traveller_block( $traveller_in, $traveller_group['label'] . ' ' . $group_index, strtolower( $traveller_group['label'] ), $traveller_group['label'] . ' ' . $group_index );
 						$group_index++;
 					}
 

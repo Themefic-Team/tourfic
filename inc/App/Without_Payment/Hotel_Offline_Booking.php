@@ -6,6 +6,7 @@ use Tourfic\Core\Without_Payment_Booking;
 use Tourfic\Classes\Hotel\Hotel;
 use Tourfic\Classes\Helper;
 use Tourfic\Classes\Hotel\Pricing;
+use Tourfic\Classes\Room\Availability;
 
 // don't call the file directly
 defined( 'ABSPATH' ) || exit;
@@ -38,7 +39,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		 */
 		$post_id         = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
 		$room_id         = isset( $_POST['room_id'] ) ? intval( sanitize_text_field( $_POST['room_id'] ) ) : null;
-		$unique_id       = isset( $_POST['unique_id'] ) ? intval( sanitize_text_field( $_POST['unique_id'] ) ) : null;
+		$unique_id       = isset( $_POST['unique_id'] ) ? sanitize_text_field( $_POST['unique_id'] ) : null;
 		$option_id       = isset( $_POST['option_id'] ) ? sanitize_text_field( $_POST['option_id'] ) : null;
 		$location        = isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : '';
 		$adult           = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
@@ -100,6 +101,16 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		$room_name       = get_the_title( $room_id );
 		$pricing_by      = $room_meta['pricing-by'];
 		$price_multi_day = ! empty( $room_meta['price_multi_day'] ) ? $room_meta['price_multi_day'] : false;
+		$adults_per_room = empty( $adult ) ? 0 : ceil( intval( $adult ) / max( 1, intval( $room_selected ) ) );
+		$childs_per_room = empty( $child ) ? 0 : ceil( intval( $child ) / max( 1, intval( $room_selected ) ) );
+
+		if ( ! empty( $adult ) && ( empty( $room_meta['adult'] ) || intval( $room_meta['adult'] ) < $adults_per_room ) ) {
+			$response['errors'][] = esc_html__( 'Total person number exceeds the selected room capacity.', 'tourfic' );
+		}
+
+		if ( ! empty( $child ) && ( empty( $room_meta['child'] ) || intval( $room_meta['child'] ) < $childs_per_room ) ) {
+			$response['errors'][] = esc_html__( 'Total child number exceeds the selected room capacity.', 'tourfic' );
+		}
 
 		$room_stay_requirements = array();
         $room_stay_requirements[] = array(
@@ -271,6 +282,10 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 			} else {
 				$response['errors'][] = esc_html__( 'No rooms available for the selected date.', 'tourfic' );
 			}
+		}
+
+		if ( ! Availability::check_availability( $room_id, $check_in, $check_out ) ) {
+			$response['errors'][] = esc_html__( 'This room is unavailable for the selected date.', 'tourfic' );
 		}
 
 		/**
