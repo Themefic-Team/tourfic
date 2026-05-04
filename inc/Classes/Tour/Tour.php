@@ -2527,7 +2527,7 @@ class Tour {
 
 
 		if ( ! empty( $check_in_out ) ) {
-			list( $tf_form_start, $tf_form_end ) = explode( ' - ', $check_in_out );
+			list( $tf_form_start, $tf_form_end ) = tf_split_date_range( $check_in_out );
 		}
 
 		if ( ! empty( $check_in_out ) ) {
@@ -3257,7 +3257,7 @@ class Tour {
 		$pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 
 		if (!empty($check_in_out) && !empty($tour_availability)) {
-			[$input_start, $input_end] = array_map('trim', explode(' - ', $check_in_out));
+			[$input_start, $input_end] = tf_split_date_range( $check_in_out );
 			if(empty($input_end)){
 				$input_end = $input_start;
 			}
@@ -3275,7 +3275,7 @@ class Tour {
 						continue;
 					}
 
-					[$range_start, $range_end] = array_map('trim', explode(' - ', $range));
+					[$range_start, $range_end] = tf_split_date_range( $range );
 					$range_start_ts = strtotime($range_start);
 					$range_end_ts   = strtotime($range_end);
 
@@ -4200,7 +4200,7 @@ class Tour {
 					$tour_id       = $order['post_id'];
 					$order_details = json_decode( $order['order_details'] );
 					$tf_tour_date  = ! empty( $order_details->tour_date ) ? $order_details->tour_date : '';
-					list( $tf_booking_start, $tf_booking_end ) = explode( " - ", $tf_tour_date );
+					list( $tf_booking_start, $tf_booking_end ) = tf_split_date_range( $tf_tour_date );
 					if ( ! empty( $tour_id ) && $tour_id == $post_id && ! empty( $tf_booking_start ) && $start_date == $tf_booking_start && ! empty( $tf_booking_end ) && $end_date == $tf_booking_end ) {
 						$book_adult = ! empty( $order_details->adult ) ? $order_details->adult : '';
 						if ( ! empty( $book_adult ) ) {
@@ -5129,8 +5129,8 @@ class Tour {
 
     static function tf_date_format_user( $date, $format ) {
 	    if ( ! empty( $date ) && ! empty( $format ) ) {
-		    if ( str_contains( $date, " - " ) == true ) {
-			    list( $first_date, $last_date ) = explode( " - ", $date );
+		    list( $first_date, $last_date ) = tf_split_date_range( $date, false );
+		    if ( ! empty( $last_date ) ) {
 			    $first_date = gmdate( $format, strtotime( $first_date ) );
 			    $last_date  = gmdate( $format, strtotime( $last_date ) );
 

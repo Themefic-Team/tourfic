@@ -18,6 +18,23 @@
                 y: 'bottom',
             },
         });
+
+        function tfSplitDateRange(value, singleDateAsRange = true) {
+            const normalizedValue = String(value || '').trim().replace(/\s+/g, ' ');
+            if (!normalizedValue) {
+                return ['', ''];
+            }
+
+            const dates = normalizedValue.match(/\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2}|\d{1,2}[\/.-]\d{1,2}[\/.-]\d{4}/g);
+            if (dates && dates.length >= 2) {
+                return [dates[0].trim(), dates[1].trim()];
+            }
+            if (dates && dates.length === 1) {
+                return [dates[0].trim(), singleDateAsRange ? dates[0].trim() : ''];
+            }
+
+            return [normalizedValue, singleDateAsRange ? normalizedValue : ''];
+        }
         
         // Add the classes to the body element
         if (tf_params.body_classes && tf_params.body_classes.length > 0) {
@@ -374,7 +391,7 @@
             var endprice = $('.widget_tf_price_filters input[name="to"]').val();
             var tf_author = $('#tf_author').val();
             // split date range into dates
-            var checkedArr = checked ? checked.split(' - ') : '';
+            var checkedArr = checked ? tfSplitDateRange(checked) : '';
             var checkin = checkedArr[0];
             var checkout = checkedArr[1];
             var posttype = $('.tf-post-type').val();
@@ -586,7 +603,7 @@
             e.preventDefault();
 
             checked = $('#check-in-out-date').val();
-            var checkedArr = checked.split(' - ');
+            var checkedArr = tfSplitDateRange(checked);
             var checkin = checkedArr[0];
             var checkout = checkedArr[1];
             var posttype = $('.tf-post-type').val();
@@ -2079,7 +2096,7 @@
             }
 
             const dateFormat = tfTravelerCompliance.date_format || 'Y/m/d';
-            const normalizedValue = String(value).split(' - ')[0].trim();
+            const normalizedValue = tfSplitDateRange(value, false)[0];
             const separatorMatch = dateFormat.match(/[^A-Za-z]/);
             const separator = separatorMatch ? separatorMatch[0] : '/';
             const formatParts = dateFormat.split(separator);

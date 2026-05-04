@@ -232,11 +232,7 @@ class Woocommerce {
 				$infants    = $item->get_meta( 'Infants', true );
 	
 				if ( $tour_date ) {
-					if ( str_contains( $tour_date, ' - ' ) ) {
-						list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
-					} else {
-						$tour_in = $tour_date;
-					}
+					list( $tour_in, $tour_out ) = tf_split_date_range( $tour_date, false );
 				}
 	
 				$tf_integration_order_data[] = [
@@ -269,7 +265,7 @@ class Woocommerce {
 				$due               = $item->get_meta( '_due_price', true );
 	
 				if ( $check_in_out_date ) {
-					list( $check_in, $check_out ) = explode( ' - ', $check_in_out_date );
+					list( $check_in, $check_out ) = tf_split_date_range( $check_in_out_date );
 				}
 	
 				$tf_integration_order_data[] = [

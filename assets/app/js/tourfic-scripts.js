@@ -2098,6 +2098,23 @@ function convertTo24HourFormat(timeStr) {
             },
         });
 
+        function tfSplitDateRange(value, singleDateAsRange = true) {
+            const normalizedValue = String(value || '').trim().replace(/\s+/g, ' ');
+            if (!normalizedValue) {
+                return ['', ''];
+            }
+
+            const dates = normalizedValue.match(/\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2}|\d{1,2}[\/.-]\d{1,2}[\/.-]\d{4}/g);
+            if (dates && dates.length >= 2) {
+                return [dates[0].trim(), dates[1].trim()];
+            }
+            if (dates && dates.length === 1) {
+                return [dates[0].trim(), singleDateAsRange ? dates[0].trim() : ''];
+            }
+
+            return [normalizedValue, singleDateAsRange ? normalizedValue : ''];
+        }
+
         /**
          * Hotel room availability ajax filter
          * @author Fida
@@ -2282,8 +2299,7 @@ function convertTo24HourFormat(timeStr) {
             var children_ages = $('input[name=children_ages]').val();
             if(single_room == 1){
                 var check_in_out_date = $(this).closest('.tf-booking-form').find('input[name=check-in-out-date]').val();
-                var check_in_date = check_in_out_date.split(' - ')[0];
-                var check_out_date = check_in_out_date.split(' - ')[1];
+                var [check_in_date, check_out_date] = tfSplitDateRange(check_in_out_date);
                 var adult = $(this).closest('.tf-booking-form').find('input[name=adult]').val();
                 var child = $(this).closest('.tf-booking-form').find('input[name=childrens]').val();
                 var room = $(this).closest('.tf-booking-form').find('[name=room]').val();
@@ -2738,8 +2754,7 @@ function convertTo24HourFormat(timeStr) {
             var post_id = $('input[name=post_id]').val();
             if(single_room == 1){
                 var check_in_out_date = $this.closest('.tf-booking-form').find('input[name=check-in-out-date]').val();
-                var check_in_date = check_in_out_date.split(' - ')[0];
-                var check_out_date = check_in_out_date.split(' - ')[1];
+                var [check_in_date, check_out_date] = tfSplitDateRange(check_in_out_date);
                 var adult = $this.closest('.tf-booking-form').find('input[name=adult]').val();
                 var child = $this.closest('.tf-booking-form').find('input[name=childrens]').val();
                 var room = $this.closest('.tf-booking-form').find('[name=room]').val();
@@ -3109,6 +3124,29 @@ function convertTo24HourFormat(timeStr) {
         // let locale_zone = tf_flatpickr_locale();
 
         window.flatpickr.l10ns[tf_flatpickr_locale()].firstDayOfWeek = tf_params.tour_form_data.first_day_of_week;
+        window.flatpickr.l10ns[tf_flatpickr_locale()].rangeSeparator = ' - ';
+
+        function tfSplitDateRange(value, singleDateAsRange = true) {
+            const normalizedValue = String(value || '').trim().replace(/\s+/g, ' ');
+            if (!normalizedValue) {
+                return ['', ''];
+            }
+
+            const dates = normalizedValue.match(/\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2}|\d{1,2}[\/.-]\d{1,2}[\/.-]\d{4}/g);
+            if (dates && dates.length >= 2) {
+                return [dates[0].trim(), dates[1].trim()];
+            }
+            if (dates && dates.length === 1) {
+                return [dates[0].trim(), singleDateAsRange ? dates[0].trim() : ''];
+            }
+
+            return [normalizedValue, singleDateAsRange ? normalizedValue : ''];
+        }
+
+        function tfNormalizeDateRange(value) {
+            const [startDate, endDate] = tfSplitDateRange(value, false);
+            return endDate ? `${startDate} - ${endDate}` : startDate;
+        }
 
         // Create an instance of Notyf
         const notyf = new Notyf({
@@ -3872,15 +3910,15 @@ function convertTo24HourFormat(timeStr) {
             locale: tf_flatpickr_locale(),
             
             onReady: function (selectedDates, dateStr, instance) {
-                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                instance.element.value = tfNormalizeDateRange(dateStr);
+                instance.altInput.value = tfNormalizeDateRange(instance.altInput.value);
             },
 
             onChange: function (selectedDates, dateStr, instance) {
 
-                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                instance.altInput.value = tfNormalizeDateRange(instance.altInput.value);
                 $(".tours-check-in-out").val(instance.altInput.value);
-                $('.tours-check-in-out[type="hidden"]').val(dateStr.replace(/[a-z]+/g, '-'));
+                $('.tours-check-in-out[type="hidden"]').val(tfNormalizeDateRange(dateStr));
                 
                 // Initialize empty object for times
                 let times = {};
@@ -3934,7 +3972,7 @@ function convertTo24HourFormat(timeStr) {
             tour_date_options.enable = Object.entries(tf_params.tour_form_data.tour_availability)
             .filter(([dateRange, data]) => data.status === "available")
             .map(([dateRange, data]) => {
-                const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
+                const [fromRaw, toRaw] = tfSplitDateRange(dateRange);
 
                 const today = new Date();
                 const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
@@ -3954,7 +3992,7 @@ function convertTo24HourFormat(timeStr) {
             tour_date_options.disable = Object.entries(tf_params.tour_form_data.tour_availability)
             .filter(([dateRange, data]) => data.status === "unavailable")
             .map(([dateRange, data]) => {
-                const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
+                const [fromRaw, toRaw] = tfSplitDateRange(dateRange);
 
                 const today = new Date();
                 const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
@@ -4086,6 +4124,23 @@ function convertTo24HourFormat(timeStr) {
                 y: 'bottom',
             },
         });
+
+        function tfSplitDateRange(value, singleDateAsRange = true) {
+            const normalizedValue = String(value || '').trim().replace(/\s+/g, ' ');
+            if (!normalizedValue) {
+                return ['', ''];
+            }
+
+            const dates = normalizedValue.match(/\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2}|\d{1,2}[\/.-]\d{1,2}[\/.-]\d{4}/g);
+            if (dates && dates.length >= 2) {
+                return [dates[0].trim(), dates[1].trim()];
+            }
+            if (dates && dates.length === 1) {
+                return [dates[0].trim(), singleDateAsRange ? dates[0].trim() : ''];
+            }
+
+            return [normalizedValue, singleDateAsRange ? normalizedValue : ''];
+        }
         
         // Add the classes to the body element
         if (tf_params.body_classes && tf_params.body_classes.length > 0) {
@@ -4442,7 +4497,7 @@ function convertTo24HourFormat(timeStr) {
             var endprice = $('.widget_tf_price_filters input[name="to"]').val();
             var tf_author = $('#tf_author').val();
             // split date range into dates
-            var checkedArr = checked ? checked.split(' - ') : '';
+            var checkedArr = checked ? tfSplitDateRange(checked) : '';
             var checkin = checkedArr[0];
             var checkout = checkedArr[1];
             var posttype = $('.tf-post-type').val();
@@ -4654,7 +4709,7 @@ function convertTo24HourFormat(timeStr) {
             e.preventDefault();
 
             checked = $('#check-in-out-date').val();
-            var checkedArr = checked.split(' - ');
+            var checkedArr = tfSplitDateRange(checked);
             var checkin = checkedArr[0];
             var checkout = checkedArr[1];
             var posttype = $('.tf-post-type').val();
@@ -6147,7 +6202,7 @@ function convertTo24HourFormat(timeStr) {
             }
 
             const dateFormat = tfTravelerCompliance.date_format || 'Y/m/d';
-            const normalizedValue = String(value).split(' - ')[0].trim();
+            const normalizedValue = tfSplitDateRange(value, false)[0];
             const separatorMatch = dateFormat.match(/[^A-Za-z]/);
             const separator = separatorMatch ? separatorMatch[0] : '/';
             const formatParts = dateFormat.split(separator);

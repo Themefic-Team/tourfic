@@ -226,7 +226,7 @@ function tf_tours_booking_function() {
 				$tour_id   = $order['post_id'];
 				$order_details = json_decode($order['order_details']);
 				$tf_tour_date = !empty($order_details->tour_date) ? $order_details->tour_date : '';
-				list( $tf_booking_start, $tf_booking_end ) = explode( " - ", $tf_tour_date );
+				list( $tf_booking_start, $tf_booking_end ) = tf_split_date_range( $tf_tour_date );
 				if( !empty($tour_id) && $tour_id==$post_id && !empty($tf_booking_start) && $start_date==$tf_booking_start && !empty($tf_booking_end) && $end_date==$tf_booking_end ){
 					$book_adult     = !empty( $order_details->adult ) ? $order_details->adult : '';
 					if(!empty($book_adult)){
@@ -1513,12 +1513,7 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 			$visitor_details = $item->get_meta( '_visitor_details', true );
 			
 			if ( $tour_date ) {
-				if (str_contains($tour_date, " - ")) {
-					list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
-				} else {
-					$tour_in = $tour_date;
-					$tour_out = '';
-				}
+				list( $tour_in, $tour_out ) = tf_split_date_range( $tour_date, false );
 			}
 
 			$iteminfo = [
@@ -1738,12 +1733,7 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 			$visitor_details = $item->get_meta( '_visitor_details', true );
 
 			if ( $tour_date ) {
-				if( str_contains($tour_date, " - ") ){
-					list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
-				} else {
-					$tour_in = $tour_date;
-					$tour_out = '';
-				}
+				list( $tour_in, $tour_out ) = tf_split_date_range( $tour_date, false );
 			}
 
 			$iteminfo = [

@@ -26,8 +26,7 @@ function tf_apartment_parse_check_in_out_date( $check_in_out_date ) {
 	$days       = 0;
 
 	if ( ! empty( $check_in_out_date ) ) {
-		$date_parts = array_map( 'trim', explode( ' - ', $check_in_out_date ) );
-		$date_parts = array_pad( $date_parts, 2, '' );
+		$date_parts = tf_split_date_range( $check_in_out_date );
 
 		$check_in_stt  = ! empty( $date_parts[0] ) ? strtotime( $date_parts[0] ) : 0;
 		$check_out_stt = ! empty( $date_parts[1] ) ? strtotime( $date_parts[1] ) : 0;
@@ -826,7 +825,7 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 			$due               = $item->get_meta( '_due_price', true );
 
 			if ( $check_in_out_date ) {
-				list( $check_in, $check_out ) = explode( ' - ', $check_in_out_date );
+				list( $check_in, $check_out ) = tf_split_date_range( $check_in_out_date );
 			}
 
 			$iteminfo = [
@@ -1010,7 +1009,7 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 			$due               = $item->get_meta( '_due_price', true );
 
 			if ( $check_in_out_date ) {
-				list( $check_in, $check_out ) = explode( ' - ', $check_in_out_date );
+				list( $check_in, $check_out ) = tf_split_date_range( $check_in_out_date );
 			}
 
 			$iteminfo = [

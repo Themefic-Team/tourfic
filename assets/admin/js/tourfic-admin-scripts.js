@@ -361,6 +361,28 @@
             },
         });
 
+        function tfSplitDateRange(value, singleDateAsRange = true) {
+            const normalizedValue = String(value || '').trim().replace(/\s+/g, ' ');
+            if (!normalizedValue) {
+                return ['', ''];
+            }
+
+            const dates = normalizedValue.match(/\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2}|\d{1,2}[\/.-]\d{1,2}[\/.-]\d{4}/g);
+            if (dates && dates.length >= 2) {
+                return [dates[0].trim(), dates[1].trim()];
+            }
+            if (dates && dates.length === 1) {
+                return [dates[0].trim(), singleDateAsRange ? dates[0].trim() : ''];
+            }
+
+            return [normalizedValue, singleDateAsRange ? normalizedValue : ''];
+        }
+
+        function tfNormalizeDateRange(value) {
+            const [startDate, endDate] = tfSplitDateRange(value, false);
+            return endDate ? `${startDate} - ${endDate}` : startDate;
+        }
+
         const alert_popup = {
             success: function (message) {
                 $.confirm({
@@ -702,7 +724,7 @@
                                 flatpickerObj.enable = Object.entries(obj.tour_availability)
                                 .filter(([dateRange, data]) => data.status === "available")
                                 .map(([dateRange, data]) => {
-                                    const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
+                                    const [fromRaw, toRaw] = tfSplitDateRange(dateRange);
                     
                                     const today = new Date();
                                     const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
@@ -758,7 +780,7 @@
 
                                 populateTimeSelect(times);
                                 
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                instance.element.value = tfNormalizeDateRange(dateStr);
                             }
 
                             $("[name='tf_tour_date']").flatpickr(flatpickerObj);
@@ -1098,6 +1120,7 @@
     });
 
 })(jQuery);
+
 })();
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.

@@ -358,9 +358,9 @@ if ( ! function_exists( 'tf_tour_parse_user_date' ) ) {
 			return null;
 		}
 
-		if ( false !== strpos( $date_string, ' - ' ) ) {
-			$date_parts  = explode( ' - ', $date_string );
-			$date_string = isset( $date_parts[0] ) ? trim( $date_parts[0] ) : $date_string;
+		$date_parts = tf_split_date_range( $date_string, false );
+		if ( ! empty( $date_parts[0] ) ) {
+			$date_string = $date_parts[0];
 		}
 
 		$timezone    = wp_timezone();
@@ -1170,6 +1170,64 @@ if(!function_exists('tf_custom_wp_kses_allow_tags')){
 		$allowed_tags['code']     = true;
 
 		return $allowed_tags;
+	}
+}
+
+if ( ! function_exists( 'tf_split_date_range' ) ) {
+	/**
+	 * Split a Tourfic date range into start and end dates.
+	 *
+	 * Flatpickr uses locale-specific range separators unless overridden. Older
+	 * orders/search URLs may therefore contain separators such as em dash, t/m,
+	 * 至, or إلى instead of Tourfic's canonical ` - ` separator.
+	 *
+	 * @param string $date_range           Date range string.
+	 * @param bool   $single_date_as_range Whether a single date should be returned as both start and end.
+	 * @return array{0:string,1:string}
+	 */
+	function tf_split_date_range( $date_range, $single_date_as_range = true ) {
+		$date_range = sanitize_text_field( (string) $date_range );
+		$date_range = trim( preg_replace( '/\s+/u', ' ', $date_range ) );
+
+		if ( '' === $date_range ) {
+			return array( '', '' );
+		}
+
+		$separator_patterns = array(
+			'/\s+-\/-\s+/u',
+			'/\s+-\s+/u',
+			'/\s+[–—]\s+/u',
+			'/\s+t\/m\s+/iu',
+			'/\s+to\s+/iu',
+			'/\s+bis\s+/iu',
+			'/\s+au\s+/iu',
+			'/\s+a\s+/iu',
+			'/\s+al\s+/iu',
+			'/\s+至\s+/u',
+			'/\s+إلى\s+/u',
+		);
+
+		foreach ( $separator_patterns as $pattern ) {
+			$date_parts = preg_split( $pattern, $date_range, 2 );
+			if ( is_array( $date_parts ) && 2 === count( $date_parts ) ) {
+				return array(
+					trim( $date_parts[0] ),
+					trim( $date_parts[1] ),
+				);
+			}
+		}
+
+		if ( preg_match_all( '/\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2}|\d{1,2}[\/.-]\d{1,2}[\/.-]\d{4}/u', $date_range, $matches ) ) {
+			$dates = array_values( array_filter( array_map( 'trim', $matches[0] ) ) );
+			if ( 2 <= count( $dates ) ) {
+				return array( $dates[0], $dates[1] );
+			}
+			if ( 1 === count( $dates ) ) {
+				return array( $dates[0], $single_date_as_range ? $dates[0] : '' );
+			}
+		}
+
+		return array( $date_range, $single_date_as_range ? $date_range : '' );
 	}
 }
 

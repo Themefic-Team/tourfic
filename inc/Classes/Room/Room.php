@@ -263,7 +263,7 @@ class Room {
 		}
 
 		if ( ! empty( $check_in_out ) ) {
-			list( $tf_form_start, $tf_form_end ) = explode( ' - ', $check_in_out );
+			list( $tf_form_start, $tf_form_end ) = tf_split_date_range( $check_in_out );
 		}
 
 		if ( ! empty( $check_in_out ) ) {
@@ -1090,7 +1090,7 @@ class Room {
 		$room_option = ! empty( $_GET['room-option'] ) ? sanitize_text_field( $_GET['room-option'] ) : '';
 		// Check-in & out date
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
-		$check_in_out_dates = ! empty( $check_in_out ) ? array_map( 'trim', explode( '-', $check_in_out ) ) : [];
+		$check_in_out_dates = ! empty( $check_in_out ) ? tf_split_date_range( $check_in_out ) : [];
 		
 		//get features
 		$features = ! empty( $_GET['features'] ) ? sanitize_text_field( $_GET['features'] ) : '';
@@ -1375,7 +1375,7 @@ class Room {
 									<?php endif; ?>
 
 									<?php if(! empty( $check_in_out )){ ?>
-									defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+									defaultDate: <?php echo wp_json_encode( tf_split_date_range( $check_in_out ) ) ?>,
 									<?php } ?>
 								});
 
@@ -2090,7 +2090,7 @@ class Room {
 				$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '0';
 				$room = ! empty( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : '1';
 				$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
-				$check_in_out_arr = explode( ' - ', $check_in_out ); 
+					$check_in_out_arr = tf_split_date_range( $check_in_out );
 				$check_in = !empty($check_in_out_arr[0]) ? $check_in_out_arr[0] : ''; 
 				$check_out = !empty($check_in_out_arr[1]) ? $check_in_out_arr[1] : ''; 
 				$date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
@@ -2238,7 +2238,7 @@ class Room {
 										instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
 										dateSetToFields(selectedDates, instance);
 									},
-									defaultDate: <?php echo ! empty( $check_in_out ) ? wp_json_encode( explode( '-', $check_in_out ) ) : '[' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+1 day' ) ) ) . ', ' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+2 day' ) ) ) . ']' ; ?>,
+									defaultDate: <?php echo ! empty( $check_in_out ) ? wp_json_encode( tf_split_date_range( $check_in_out ) ) : '[' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+1 day' ) ) ) . ', ' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+2 day' ) ) ) . ']' ; ?>,
 								});
 
 								function dateSetToFields(selectedDates, instance) {

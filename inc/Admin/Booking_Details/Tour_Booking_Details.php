@@ -60,7 +60,7 @@ class Tour_Booking_Details extends \Tourfic\Core\TF_Booking_Details
                             // Tour Date
                             $tour_date = !empty($tf_tour_details->tour_date) ? $tf_tour_details->tour_date : '';
                             if ( $tour_date ) {
-                                $tour_date_duration = explode( ' - ', $tour_date );
+                                $tour_date_duration = tf_split_date_range( $tour_date );
                                 if(!empty($tour_date_duration[0])){
                                     $tour_in = $tour_date_duration[0];
                                 }
@@ -185,7 +185,7 @@ class Tour_Booking_Details extends \Tourfic\Core\TF_Booking_Details
             // Tour Date
             $tour_date = !empty($tf_tour_details->tour_date) ? $tf_tour_details->tour_date : '';
             if ( $tour_date ) {
-                $tour_date_duration = explode( ' - ', $tour_date );
+                $tour_date_duration = tf_split_date_range( $tour_date );
                 if(!empty($tour_date_duration[0])){
                     $tour_in = $tour_date_duration[0];
                 }
