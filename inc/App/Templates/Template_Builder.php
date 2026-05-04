@@ -1449,7 +1449,7 @@ class Template_Builder {
                 update_post_meta($post_id, '_bricks_template_type', 'content');
                 update_post_meta($post_id, '_bricks_editor_mode', 'bricks');
 
-                // $this->ensure_tourfic_bricks_theme_style();
+                $this->ensure_tourfic_bricks_theme_style();
 
                 // Remove Elementor meta if exists
                 delete_post_meta($post_id, '_elementor_edit_mode');
