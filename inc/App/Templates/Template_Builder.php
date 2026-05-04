@@ -284,6 +284,44 @@ class Template_Builder {
     }
 
     /**
+     * Ensure Tourfic Bricks theme style exists with base typography.
+     */
+    private function ensure_tourfic_bricks_theme_style() {
+        $option_name = defined( 'BRICKS_DB_THEME_STYLES' ) ? BRICKS_DB_THEME_STYLES : 'bricks_theme_styles';
+        $styles      = get_option( $option_name, [] );
+
+        if ( ! is_array( $styles ) ) {
+            $styles = [];
+        }
+
+        $style_id = 'tourfic-style';
+        $style    = isset( $styles[ $style_id ] ) && is_array( $styles[ $style_id ] ) ? $styles[ $style_id ] : [];
+        $settings = isset( $style['settings'] ) && is_array( $style['settings'] ) ? $style['settings'] : [];
+        $typography = isset( $settings['typography'] ) && is_array( $settings['typography'] ) ? $settings['typography'] : [];
+
+        $conditions = isset( $settings['conditions'] ) && is_array( $settings['conditions'] ) ? $settings['conditions'] : [];
+        $rules      = isset( $conditions['conditions'] ) && is_array( $conditions['conditions'] ) ? $conditions['conditions'] : [];
+
+        // Bricks only applies theme styles that have at least one matching condition.
+        if ( empty( $rules ) ) {
+            $conditions['conditions'] = [
+                [
+                    'main' => 'any',
+                ],
+            ];
+        }
+
+        $style['label']             = 'tourfic-style';
+        $typography['typographyHtml'] = '100%';
+        $settings['typography']     = $typography;
+        $settings['conditions']     = $conditions;
+        $style['settings']          = $settings;
+        $styles[ $style_id ]        = $style;
+
+        update_option( $option_name, $styles );
+    }
+
+    /**
      * Add template parameters to Bricks builder edit link
      * Hooks into 'bricks/get_builder_edit_link' to add tf_archive_service and tf_preview_post_id
      *
@@ -1410,6 +1448,8 @@ class Template_Builder {
                 update_post_meta($post_id, 'tf_builder_type', 'bricks');
                 update_post_meta($post_id, '_bricks_template_type', 'content');
                 update_post_meta($post_id, '_bricks_editor_mode', 'bricks');
+
+                // $this->ensure_tourfic_bricks_theme_style();
 
                 // Remove Elementor meta if exists
                 delete_post_meta($post_id, '_elementor_edit_mode');
