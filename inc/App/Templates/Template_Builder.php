@@ -766,17 +766,45 @@ class Template_Builder {
                                     $bricks_theme_installed = wp_get_theme( 'bricks' )->exists();
                                     ?>
                                     <div class="tf-builder-btn-wrap">
-                                        <button type="button" id="tf-edit-with-elementor" class="tf-admin-btn<?php echo $elementor_active ? '' : ' tf-btn-disabled'; ?>"<?php echo $elementor_active ? '' : ' disabled'; ?>>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <mask id="mask0_747_79" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="29" height="29">
-                                                <path d="M28.5 0.5V28.5H0.5V0.5H28.5Z" fill="white" stroke="white"/>
-                                            </mask>
-                                            <g mask="url(#mask0_747_79)">
-                                                <path d="M12 0C5.37193 0 0 5.37193 0 12C0 18.6259 5.37193 24 12 24C18.6281 24 24 18.6281 24 12C23.9978 5.37193 18.6259 0 12 0ZM9.00054 16.9984H7.00164V6.99948H9.00054V16.9984ZM16.9984 16.9984H10.9994V14.9995H16.9984V16.9984ZM16.9984 12.9983H10.9994V10.9994H16.9984V12.9983ZM16.9984 8.99838H10.9994V6.99948H16.9984V8.99838Z" fill="#003C79"/>
-                                            </g>
-                                            </svg>
-                                            <?php echo esc_html__('Edit With Elementor', 'tourfic'); ?>
-                                        </button><br>
+                                        <div class="tf-builder-dropdown" id="tf-builder-dropdown">
+                                            <button type="button" id="tf-builder-dropdown-trigger" class="tf-admin-btn tf-builder-dropdown-trigger" aria-haspopup="listbox" aria-expanded="false">
+                                                <span class="tf-builder-dropdown-icon" id="tf-builder-dropdown-icon"></span>
+                                                <span class="tf-builder-dropdown-label" id="tf-builder-dropdown-label"></span>
+                                                <span class="tf-builder-dropdown-caret">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </span>
+                                            </button>
+
+                                            <div class="tf-builder-dropdown-menu" id="tf-builder-dropdown-menu" role="listbox">
+                                                <button type="button" class="tf-builder-dropdown-option" data-value="elementor" role="option"<?php echo $elementor_active ? '' : ' disabled'; ?>>
+                                                    <span class="tf-builder-option-icon" aria-hidden="true">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M12 0C5.37193 0 0 5.37193 0 12C0 18.6259 5.37193 24 12 24C18.6281 24 24 18.6281 24 12C23.9978 5.37193 18.6259 0 12 0ZM9.00054 16.9984H7.00164V6.99948H9.00054V16.9984ZM16.9984 16.9984H10.9994V14.9995H16.9984V16.9984ZM16.9984 12.9983H10.9994V10.9994H16.9984V12.9983ZM16.9984 8.99838H10.9994V6.99948H16.9984V8.99838Z" fill="#003C79"/>
+                                                        </svg>
+                                                    </span>
+                                                    <span class="tf-builder-option-label"><?php echo esc_html__( 'Edit with Elementor', 'tourfic' ); ?></span>
+                                                </button>
+
+                                                <button type="button" class="tf-builder-dropdown-option" data-value="bricks" role="option"<?php echo $bricks_active ? '' : ' disabled'; ?>>
+                                                    <span class="tf-builder-option-icon" aria-hidden="true">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 5120 5120">
+                                                        <rect width="5120" height="5120" rx="600" fill="#003C79"/>
+                                                        <g transform="translate(0,5120) scale(1,-1)">
+                                                            <path fill="white" d="M1600 4191 l-315 -36 -3 -1597 -2 -1598 315 0 315 0 0 131 c0 151 -12 145 104 48 129 -109 310 -191 483 -220 97 -16 312 -13 417 6 233 41 424 142 596 315 53 52 117 125 143 162 94 134 166 304 204 488 27 128 25 431 -4 561 -29 129 -56 208 -108 312 -60 118 -109 188 -202 287 -202 216 -449 334 -750 360 -247 21 -454 -21 -670 -135 l-103 -54 0 489 0 489 -22 15 c-29 20 -25 20 -398 -23z m1145 -1433 c129 -37 236 -117 310 -232 134 -210 136 -522 4 -726 -114 -177 -273 -261 -489 -261 -180 0 -295 46 -415 166 -122 122 -169 250 -169 455 0 140 14 211 66 319 57 119 194 236 330 280 100 33 248 32 363 -1z"/>
+                                                        </g>
+                                                        </svg>
+                                                    </span>
+                                                    <span class="tf-builder-option-label"><?php echo esc_html__( 'Edit with Bricks', 'tourfic' ); ?></span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <select id="tf-edit-with-builder" class="tf-builder-select-native" aria-hidden="true" tabindex="-1" data-default-builder="<?php echo esc_attr( $elementor_active ? 'elementor' : ( $bricks_active ? 'bricks' : '' ) ); ?>">
+                                            <option value="elementor"<?php echo $elementor_active ? ' selected' : ''; ?><?php disabled( ! $elementor_active ); ?>><?php echo esc_html__( 'Edit with Elementor', 'tourfic' ); ?></option>
+                                            <option value="bricks"<?php echo ( ! $elementor_active && $bricks_active ) ? ' selected' : ''; ?><?php disabled( ! $bricks_active ); ?>><?php echo esc_html__( 'Edit with Bricks', 'tourfic' ); ?></option>
+                                        </select>
                                         <?php if ( ! $elementor_active ) : ?>
                                             <span class="tf-builder-notice">
                                                 <?php if ( ! $elementor_installed ) : ?>
@@ -792,17 +820,6 @@ class Template_Builder {
                                                 <?php endif; ?>
                                             </span>
                                         <?php endif; ?>
-                                    </div>
-                                    <div class="tf-builder-btn-wrap">
-                                        <button type="button" id="tf-edit-with-bricks" class="tf-admin-btn<?php echo $bricks_active ? '' : ' tf-btn-disabled'; ?>"<?php echo $bricks_active ? '' : ' disabled'; ?>>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 5120 5120">
-                                            <rect width="5120" height="5120" rx="600" fill="#003C79"/>
-                                            <g transform="translate(0,5120) scale(1,-1)">
-                                                <path fill="white" d="M1600 4191 l-315 -36 -3 -1597 -2 -1598 315 0 315 0 0 131 c0 151 -12 145 104 48 129 -109 310 -191 483 -220 97 -16 312 -13 417 6 233 41 424 142 596 315 53 52 117 125 143 162 94 134 166 304 204 488 27 128 25 431 -4 561 -29 129 -56 208 -108 312 -60 118 -109 188 -202 287 -202 216 -449 334 -750 360 -247 21 -454 -21 -670 -135 l-103 -54 0 489 0 489 -22 15 c-29 20 -25 20 -398 -23z m1145 -1433 c129 -37 236 -117 310 -232 134 -210 136 -522 4 -726 -114 -177 -273 -261 -489 -261 -180 0 -295 46 -415 166 -122 122 -169 250 -169 455 0 140 14 211 66 319 57 119 194 236 330 280 100 33 248 32 363 -1z"/>
-                                            </g>
-                                            </svg>
-                                            <?php echo esc_html__('Edit With Bricks', 'tourfic'); ?>
-                                        </button><br>
                                         <?php if ( ! $bricks_active ) : ?>
                                             <span class="tf-builder-notice">
                                                 <?php if ( $bricks_theme_installed && current_user_can( 'switch_themes' ) ) : ?>
@@ -1274,10 +1291,16 @@ class Template_Builder {
         </div>
         <?php
         $fields_markup = ob_get_clean();
+        $builder_type  = $this->tf_get_builder_type( $post_id );
+
+        if ( ! in_array( $builder_type, [ 'elementor', 'bricks' ], true ) ) {
+            $builder_type = '';
+        }
         
         wp_send_json_success([
             'ID' => $post->ID,
             'fields_markup' => $fields_markup,
+            'builder_type' => $builder_type,
         ]);
     }
 
