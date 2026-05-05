@@ -267,6 +267,27 @@ if ( ! function_exists( 'tf_tour_get_user_date_format' ) ) {
 	}
 }
 
+if ( ! function_exists( 'tf_tour_get_supported_date_formats' ) ) {
+	/**
+	 * Get date formats supported by traveler age validation.
+	 *
+	 * @return array
+	 */
+	function tf_tour_get_supported_date_formats() {
+		return array(
+			'Y/m/d',
+			'Y-m-d',
+			'Y.m.d',
+			'd/m/Y',
+			'd-m-Y',
+			'd.m.Y',
+			'm/d/Y',
+			'm-d-Y',
+			'm.d.Y',
+		);
+	}
+}
+
 if ( ! function_exists( 'tf_tour_get_age_validation_field_names' ) ) {
 	/**
 	 * Get traveler date field names that should be age-validated.
@@ -345,9 +366,63 @@ if ( ! function_exists( 'tf_tour_get_frontend_compliance_config' ) ) {
 	}
 }
 
+if ( ! function_exists( 'tf_tour_parse_date_by_format' ) ) {
+	/**
+	 * Parse a date string by a strict Tourfic date format.
+	 *
+	 * @param string $date_string Date string.
+	 * @param string $date_format Date format.
+	 * @return DateTimeImmutable|null
+	 */
+	function tf_tour_parse_date_by_format( $date_string, $date_format ) {
+		$date_string = trim( (string) $date_string );
+		$date_format = trim( (string) $date_format );
+		if ( '' === $date_string || '' === $date_format ) {
+			return null;
+		}
+
+		if ( ! preg_match( '/[^A-Za-z]/', $date_format, $separator_match ) ) {
+			return null;
+		}
+
+		$separator    = $separator_match[0];
+		$format_parts = explode( $separator, $date_format );
+		if ( 3 !== count( $format_parts ) ) {
+			return null;
+		}
+
+		$pattern_parts = array();
+		foreach ( $format_parts as $part ) {
+			if ( 'Y' === $part ) {
+				$pattern_parts[] = '(?P<Y>\d{4})';
+			} elseif ( 'm' === $part ) {
+				$pattern_parts[] = '(?P<m>\d{1,2})';
+			} elseif ( 'd' === $part ) {
+				$pattern_parts[] = '(?P<d>\d{1,2})';
+			} else {
+				return null;
+			}
+		}
+
+		$pattern = '/^' . implode( preg_quote( $separator, '/' ), $pattern_parts ) . '$/';
+		if ( ! preg_match( $pattern, $date_string, $matches ) ) {
+			return null;
+		}
+
+		$year  = absint( $matches['Y'] );
+		$month = absint( $matches['m'] );
+		$day   = absint( $matches['d'] );
+		if ( ! checkdate( $month, $day, $year ) ) {
+			return null;
+		}
+
+		return new DateTimeImmutable( sprintf( '%04d-%02d-%02d 00:00:00', $year, $month, $day ), wp_timezone() );
+	}
+}
+
 if ( ! function_exists( 'tf_tour_parse_user_date' ) ) {
 	/**
-	 * Parse a date using Tourfic's configured date format.
+	 * Parse a date using Tourfic's configured date format and canonical fallbacks.
 	 *
 	 * @param string $date_string Date string.
 	 * @return DateTimeImmutable|null
@@ -363,20 +438,23 @@ if ( ! function_exists( 'tf_tour_parse_user_date' ) ) {
 			$date_string = $date_parts[0];
 		}
 
-		$timezone    = wp_timezone();
-		$date_format = tf_tour_get_user_date_format();
-		$date        = DateTimeImmutable::createFromFormat( '!' . $date_format, $date_string, $timezone );
+		$date_formats = array_values(
+			array_unique(
+				array_merge(
+					array( tf_tour_get_user_date_format() ),
+					tf_tour_get_supported_date_formats()
+				)
+			)
+		);
+		foreach ( $date_formats as $date_format ) {
+			$date = tf_tour_parse_date_by_format( $date_string, $date_format );
 
-		if ( $date instanceof DateTimeImmutable ) {
-			return $date;
+			if ( $date instanceof DateTimeImmutable ) {
+				return $date;
+			}
 		}
 
-		$fallback_timestamp = strtotime( str_replace( '/', '-', $date_string ) );
-		if ( false === $fallback_timestamp ) {
-			return null;
-		}
-
-		return ( new DateTimeImmutable( '@' . $fallback_timestamp ) )->setTimezone( $timezone );
+		return null;
 	}
 }
 

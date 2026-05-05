@@ -6196,15 +6196,35 @@ function convertTo24HourFormat(timeStr) {
             return '';
         }
 
-        function tfParseTravelerDate(value) {
-            if (!value) {
+        const tfTravelerSupportedDateFormats = [
+            'Y/m/d',
+            'Y-m-d',
+            'Y.m.d',
+            'd/m/Y',
+            'd-m-Y',
+            'd.m.Y',
+            'm/d/Y',
+            'm-d-Y',
+            'm.d.Y'
+        ];
+
+        function tfGetTravelerDateFormats() {
+            const configuredFormat = tfTravelerCompliance.date_format || 'Y/m/d';
+
+            return [configuredFormat].concat(tfTravelerSupportedDateFormats).filter(function (dateFormat, index, formats) {
+                return dateFormat && formats.indexOf(dateFormat) === index;
+            });
+        }
+
+        function tfParseTravelerDateByFormat(value, dateFormat) {
+            const normalizedValue = String(value || '').trim();
+            const separatorMatch = String(dateFormat || '').match(/[^A-Za-z]/);
+            const separator = separatorMatch ? separatorMatch[0] : '';
+
+            if (!normalizedValue || !separator) {
                 return null;
             }
 
-            const dateFormat = tfTravelerCompliance.date_format || 'Y/m/d';
-            const normalizedValue = tfSplitDateRange(value, false)[0];
-            const separatorMatch = dateFormat.match(/[^A-Za-z]/);
-            const separator = separatorMatch ? separatorMatch[0] : '/';
             const formatParts = dateFormat.split(separator);
             const valueParts = normalizedValue.split(separator);
             const parts = {};
@@ -6214,14 +6234,32 @@ function convertTo24HourFormat(timeStr) {
             }
 
             formatParts.forEach(function (part, index) {
-                parts[part] = parseInt(valueParts[index], 10);
+                const partValue = valueParts[index];
+
+                if (part === 'Y' && /^\d{4}$/.test(partValue)) {
+                    parts.Y = parseInt(partValue, 10);
+                } else if (part === 'm' && /^\d{1,2}$/.test(partValue)) {
+                    parts.m = parseInt(partValue, 10);
+                } else if (part === 'd' && /^\d{1,2}$/.test(partValue)) {
+                    parts.d = parseInt(partValue, 10);
+                }
             });
 
-            if (!parts.Y || !parts.m || !parts.d) {
+            if (
+                !parts.Y ||
+                !parts.m ||
+                !parts.d ||
+                parts.m < 1 ||
+                parts.m > 12 ||
+                parts.d < 1 ||
+                parts.d > 31
+            ) {
                 return null;
             }
 
-            const parsedDate = new Date(parts.Y, parts.m - 1, parts.d);
+            const parsedDate = new Date(0);
+            parsedDate.setFullYear(parts.Y, parts.m - 1, parts.d);
+            parsedDate.setHours(0, 0, 0, 0);
 
             if (
                 Number.isNaN(parsedDate.getTime()) ||
@@ -6233,6 +6271,21 @@ function convertTo24HourFormat(timeStr) {
             }
 
             return parsedDate;
+        }
+
+        function tfParseTravelerDate(value) {
+            const normalizedValue = tfSplitDateRange(value, false)[0];
+            const dateFormats = tfGetTravelerDateFormats();
+
+            for (let index = 0; index < dateFormats.length; index++) {
+                const parsedDate = tfParseTravelerDateByFormat(normalizedValue, dateFormats[index]);
+
+                if (parsedDate) {
+                    return parsedDate;
+                }
+            }
+
+            return null;
         }
 
         function tfCalculateTravelerAge(dobValue, referenceDate) {
