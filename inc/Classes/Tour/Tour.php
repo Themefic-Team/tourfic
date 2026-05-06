@@ -2625,58 +2625,91 @@ class Tour {
 		$tf_discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 		$tf_discount_amount = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
 
-		//elementor settings
-		$show_image = isset($settings['show_image']) ? $settings['show_image'] : 'yes';
-		$featured_badge = isset($settings['featured_badge']) ? $settings['featured_badge'] : 'yes';
-		$discount_tag = isset($settings['discount_tag']) ? $settings['discount_tag'] : 'yes';
-		$promotional_tags = isset($settings['promotional_tags']) ? $settings['promotional_tags'] : 'yes';
-		$gallery_switch = isset($settings['gallery']) ? $settings['gallery'] : 'yes';
-		$show_title = isset($settings['show_title']) ? $settings['show_title'] : 'yes';
-		$title_length = isset($settings['title_length']) ? absint($settings['title_length']) : 55;
-		$show_excerpt = isset($settings['show_excerpt']) ? $settings['show_excerpt'] : 'yes';
-		$excerpt_length = isset($settings['excerpt_length']) ? absint($settings['excerpt_length']) : 100;
-		$show_location = isset($settings['show_location']) ? $settings['show_location'] : 'yes';
-		$location_length = isset($settings['location_length']) ? absint($settings['location_length']) : 120;
-		$show_features = isset($settings['show_features']) ? $settings['show_features'] : 'yes';
-		$features_count = isset($settings['features_count']) ? absint($settings['features_count']) : 4;
-		$show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';
-		$show_price = isset($settings['show_price']) ? $settings['show_price'] : 'yes';
-		$tour_infos = isset($settings['tour_infos']) ? $settings['tour_infos'] : 'yes';
-		$show_view_details = isset($settings['show_view_details']) ? $settings['show_view_details'] : 'yes';
-		$view_details_text = isset($settings['view_details_text']) ? sanitize_text_field($settings['view_details_text']) : esc_html__('View Details', 'tourfic');
+		$builder = isset( $settings['builder'] ) ? $settings['builder'] : 'elementor';
+
+		// Switcher fields
+		$show_image         = Helper::get_switcher_value( $settings, 'show_image', 'yes', $builder );
+		$show_fallback_img  = Helper::get_switcher_value( $settings, 'show_fallback_img', 'no', $builder );
+		$featured_badge     = Helper::get_switcher_value( $settings, 'featured_badge', 'yes', $builder );
+		$discount_tag       = Helper::get_switcher_value( $settings, 'discount_tag', 'yes', $builder );
+		$promotional_tags   = Helper::get_switcher_value( $settings, 'promotional_tags', 'yes', $builder );
+		$gallery_switch     = Helper::get_switcher_value( $settings, 'gallery', 'yes', $builder );
+		$show_title         = Helper::get_switcher_value( $settings, 'show_title', 'yes', $builder );
+		$show_excerpt       = Helper::get_switcher_value( $settings, 'show_excerpt', 'yes', $builder );
+		$show_location      = Helper::get_switcher_value( $settings, 'show_location', 'yes', $builder );
+		$show_features      = Helper::get_switcher_value( $settings, 'show_features', 'yes', $builder );
+		$show_review        = Helper::get_switcher_value( $settings, 'show_review', 'yes', $builder );
+		$show_price         = Helper::get_switcher_value( $settings, 'show_price', 'yes', $builder );
+		$tour_infos         = Helper::get_switcher_value( $settings, 'tour_infos', 'yes', $builder );
+		$show_view_details  = Helper::get_switcher_value( $settings, 'show_view_details', 'yes', $builder );
+
+		// Number/text fields
+		$title_length       = isset( $settings['title_length'] ) ? absint( $settings['title_length'] ) : 55;
+		$excerpt_length     = isset( $settings['excerpt_length'] ) ? absint( $settings['excerpt_length'] ) : 100;
+		$location_length    = isset( $settings['location_length'] ) ? absint( $settings['location_length'] ) : 120;
+		$features_count     = isset( $settings['features_count'] ) ? absint( $settings['features_count'] ) : 4;
+		$view_details_text  = isset( $settings['view_details_text'] ) ? sanitize_text_field( $settings['view_details_text'] ) : esc_html__( 'View Details', 'tourfic' );
 
 		// Thumbnail
 		$thumbnail_html = '';
-		if ( !empty($settings) && $show_image == 'yes' ) {
-			$settings[ 'image_size_customize' ] = [
-				'id' => get_post_thumbnail_id(),
-			];
-			$settings['image_size_customize_size'] = $settings['image_size'];
-			$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
-			
-			if ( "" === $thumbnail_html && 'yes' === $settings['show_fallback_img'] && !empty( $settings['fallback_img']['url'] ) ) {
-				$settings[ 'image_size_customize' ] = [
-					'id' => $settings['fallback_img']['id'],
+		if ( ! empty( $settings ) && 'yes' === $show_image ) {
+			if ( 'elementor' === $builder && class_exists( '\Elementor\Group_Control_Image_Size' ) ) {
+				$settings['image_size_customize'] = [
+					'id' => get_post_thumbnail_id(),
 				];
-				$settings['image_size_customize_size'] = $settings['image_size'];
-				$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
-			} elseif("" === $thumbnail_html && 'yes' !== $settings['show_fallback_img']) {
-				$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL ) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+				$settings['image_size_customize_size'] = isset( $settings['image_size'] ) ? $settings['image_size'] : 'full';
+
+				$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size_customize' );
+
+				if ( '' === $thumbnail_html && 'yes' === $show_fallback_img && ! empty( $settings['fallback_img']['url'] ) ) {
+					$settings['image_size_customize'] = [
+						'id' => $settings['fallback_img']['id'],
+					];
+					$settings['image_size_customize_size'] = isset( $settings['image_size'] ) ? $settings['image_size'] : 'full';
+
+					$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size_customize' );
+				} elseif ( '' === $thumbnail_html && 'yes' !== $show_fallback_img ) {
+					$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+				}
+			} else {
+				$image_size = isset( $settings['image_size'] ) ? $settings['image_size'] : 'full';
+
+				if ( has_post_thumbnail() ) {
+					$thumbnail_html = get_the_post_thumbnail( get_the_ID(), $image_size );
+				} elseif ( 'yes' === $show_fallback_img && ! empty( $settings['fallback_img']['url'] ) ) {
+					$fallback_img_src = wp_get_attachment_image_url( $settings['fallback_img']['id'], $image_size );
+					if ( ! $fallback_img_src ) {
+						$fallback_img_src = $settings['fallback_img']['url'];
+					}
+					$thumbnail_html = '<img src="' . esc_url( $fallback_img_src ) . '" class="attachment-' . esc_attr( $image_size ) . ' size-' . esc_attr( $image_size ) . ' wp-post-image">';
+				} else {
+					$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+				}
 			}
 		}
 
 		//Location icon
 		$location_icon_html = '<i class="fa-solid fa-location-dot"></i>';
-		if(!empty($settings) && $show_location == 'yes'){
-			$location_icon_migrated = isset($settings['__fa4_migrated']['location_icon']);
-			$location_icon_is_new = empty($settings['location_icon_comp']);
+		if ( ! empty( $settings ) && 'yes' === $show_location ) {
+			if ( 'elementor' === $builder && class_exists( '\Elementor\Icons_Manager' ) ) {
+				$location_icon_migrated = isset( $settings['__fa4_migrated']['location_icon'] );
+				$location_icon_is_new   = empty( $settings['location_icon_comp'] );
 
-			if ( $location_icon_is_new || $location_icon_migrated ) {
-				ob_start();
-				Icons_Manager::render_icon( $settings['location_icon'], [ 'aria-hidden' => 'true' ] );
-				$location_icon_html = ob_get_clean();
-			} else{
-				$location_icon_html = '<i class="' . esc_attr( $settings['location_icon_comp'] ) . '"></i>';
+				if ( $location_icon_is_new || $location_icon_migrated ) {
+					ob_start();
+					Icons_Manager::render_icon( $settings['location_icon'], [ 'aria-hidden' => 'true' ] );
+					$location_icon_html = ob_get_clean();
+				} elseif ( ! empty( $settings['location_icon_comp'] ) ) {
+					$location_icon_html = '<i class="' . esc_attr( $settings['location_icon_comp'] ) . '"></i>';
+				}
+			} elseif ( 'bricks' === $builder ) {
+				if ( ! empty( $settings['location_icon']['library'] ) && ! empty( $settings['location_icon']['icon'] ) ) {
+					$location_icon_html = '<i class="' . esc_attr( $settings['location_icon']['icon'] ) . '" aria-hidden="true"></i>';
+				} elseif ( ! empty( $settings['location_icon']['class'] ) ) {
+					$location_icon_html = '<i class="' . esc_attr( $settings['location_icon']['class'] ) . '" aria-hidden="true"></i>';
+				} elseif ( ! empty( $settings['location_icon'] ) && is_string( $settings['location_icon'] ) ) {
+					$location_icon_html = '<i class="' . esc_attr( $settings['location_icon'] ) . '" aria-hidden="true"></i>';
+				}
 			}
 		}
 

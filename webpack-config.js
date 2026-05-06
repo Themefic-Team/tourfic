@@ -27,6 +27,8 @@ entryPoints['tourfic/assets/app/js/tourfic-scripts'] = freeAppJs;
 minEntryPoints['tourfic/assets/app/js/tourfic-scripts.min'] = freeAppJs;
 entryPoints['tourfic/assets/admin/js/tourfic-admin-scripts'] = freeAdminJs;
 minEntryPoints['tourfic/assets/admin/js/tourfic-admin-scripts.min'] = freeAdminJs;
+entryPoints['tourfic/assets/admin/js/tourfic-admin-api'] = glob.sync('./sass/admin/js/free/tf-api-doc.js');
+minEntryPoints['tourfic/assets/admin/js/tourfic-admin-api.min'] = glob.sync('./sass/admin/js/free/tf-api-doc.js');
 //tourfic pro
 entryPoints['tourfic-pro/assets/app/js/tourfic-pro'] = proAppJs;
 minEntryPoints['tourfic-pro/assets/app/js/tourfic-pro.min'] = proAppJs;
@@ -75,6 +77,7 @@ StyleEntryPoints['tourfic/assets/app/css/tourfic-style'] = appScss;
 StyleEntryPoints['tourfic-pro/assets/app/css/tourfic-pro'] = proAppScss;
 StyleEntryPoints['tourfic/assets/admin/css/tourfic-admin'] = adminScss;
 StyleEntryPoints['tourfic/assets/admin/css/tourfic-admin-dashboard'] = glob.sync('./sass/admin/css/free/tourfic-dashboard.scss');
+StyleEntryPoints['tourfic/assets/admin/css/tourfic-admin-api'] = glob.sync('./sass/admin/css/free/tourfic-api.scss');
 StyleEntryPoints['tourfic-pro/assets/admin/css/tourfic-pro-admin'] = proAdminScss;
 StyleEntryPoints['/tourfic-vendor/public/assets/css/tourfic-vendor'] = addonAppScss;
 StyleEntryPoints['/tourfic-vendor/admin/assets/css/tourfic-vendor-admin'] = addonAdminScss;

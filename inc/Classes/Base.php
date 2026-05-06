@@ -45,6 +45,8 @@ class Base {
 		\Tourfic\Classes\Enqueue::instance();
 		\Tourfic\Classes\Activator::instance();
 		\Tourfic\Classes\Deactivator::instance();
+		\Tourfic\Classes\TF_API_Keys::instance();
+		\Tourfic\Classes\TF_API_Bootstrap::instance();
 
 		//Enquiry
 		\Tourfic\Admin\Enquiry\Hotel_Enquiry::instance();
@@ -54,6 +56,7 @@ class Base {
 		if(is_admin()) {
 			\Tourfic\Admin\TF_Setup_Wizard::instance();
 			\Tourfic\Admin\TF_Options\TF_Options::instance();
+			\Tourfic\Admin\TF_API_Documentation::instance();
 
 			// Backend Bookings
 			TF_Apartment_Backend_Booking::instance();
@@ -115,7 +118,7 @@ class Base {
 
 		//Template Builder
 		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
-			\Tourfic\App\Template_Builder::instance();
+			\Tourfic\App\Templates\Template_Builder::instance();
 		}
 	}
 

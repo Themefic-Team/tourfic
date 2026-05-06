@@ -334,289 +334,299 @@
             }
         }
     }
+}
 
-    &__design-2{
-        .tf-archive-right{
-            background-color: $color-filling-fg;
-            padding: 32px;
+.tf-sitebar-widgets{
+    &.tf-archive-right{
+        background-color: $color-filling-fg;
+        padding: 32px;
+    }
+
+    .tf-filter-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        @media #{$max1024}{
+            gap: 16px;
         }
-
-        .tf-filter-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
+        .tf-close-sidebar {
+            display: none;
             @media #{$max1024}{
-                gap: 16px;
-            }
-            .tf-filter-title {
-                display: flex;
-                justify-content: space-between;
-                .tf-section-title {
-                    margin: 0;
-                    padding: 0;
-                    font-weight: 700;
-                    font-size: 1.875rem;
-                    @media #{$max1024}{
-                        font-size: 1.25rem;
-                    }
-                }
-                button {
-                    margin: 0;
-                    padding: 0;
-                    border: none;
-                    background: unset;
-                    color: $color-text;
-                    font-size: 1rem;
-                    font-weight: 700;
-                    transition: .3s all ease;
-                    @media #{$max1024}{
-                        font-size: 0.75rem;
-                    }
-                    &:hover{
-                        color: $color-primary;
-                    }
-                }
-                button.filter-reset-btn{
-                    display: none;
-                }
-            }
-            .tf-filter-list-item {
-                h4 {
-                    margin-bottom: 12px;
-                    font-size: 1rem;
-                    font-weight: 600;
-                    line-height: 1.5;
-                    color: $color-heading;
-                }
-                label.tf-filter-location {
-                    display: flex;
-                    background: $color-white;
-                    padding: 12px;
-                    gap: 6px;
-                    input {
-                        width: -webkit-fill-available;
-                        border: none;
-                        outline: none;
-                    }
-                }
-                &.tf-filter-rating i {
-                    color: $color-primary;
-                }
-                .tf-filter-pricing-range {
-                    input.al-range-slider__input {
-                        display: none;
-                    }
-                    .al-range-slider__track {
-                        box-shadow: none;
-                        background: $color-brand-lite;
-                        height: 8px;
-                        margin: 10px 0 40px 0;
-                    }
-                    .al-range-slider__bar {
-                        border: none;
-                        box-shadow: none;
-                        background: $color-gray;
-                    }
-                    .al-range-slider__knob {
-                        display: flex;
-                        width: 24px;
-                        height: 24px;
-                        border-radius: 12px;
-                        border: 1.5px solid $color-border;
-                        background: $color-filling-bg;
-                        box-shadow: none;
-                        &:hover {
-                            border-color: none;
-                            box-shadow: none;
-                        }
-                    }
-                    .al-range-slider__tooltip {
-                        background: none;
-                        border-radius: none;
-                        bottom: -150%;
-                        box-shadow: none;
-                        font-size: 1rem;
-                        padding: 0;
-                        color: $color-text;
-                    }
-                    .al-range-slider {
-                        padding: 0;
-                    }
-                }
-                ul {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 8px;
-                    margin: 0;
-                    padding: 0;
-                    li {
-                        input {
-                            padding: 0;
-                            height: initial;
-                            width: initial;
-                            margin-bottom: 0;
-                            display: none;
-                            cursor: pointer;
-                        }
-                        input:checked+label:before {
-                            background: $color-primary
-                        }
-                        label {
-                            position: relative;
-                            cursor: pointer;
-                            color: $color-text;
-                        }
-                        label:before {
-                            content: '';
-                            background-color: transparent;
-                            display: inline-block;
-                            border-radius: 2px;
-                            border: 0.794px solid $color-primary;
-                            background: $color-brand-lite;
-                            height: 12px;
-                            width: 12px;
-                            margin-right: 8px;
-                        }
-                        a.tf-filter-list-see-less {
-                            color: $color-primary;
-                            text-decoration: none;
-                        }
-                    }
-                }
+                position: absolute;
+                right: 17px;
+                top: 12px;
+                display: block;
+                color: $color-danger;
             }
         }
-
-        .tf_widget{
-            background-color: transparent;
-            border: 0px solid;
-            margin-bottom: 32px;
-            &:last-child{
-                margin-bottom: 0px;
-            }
-            .tf-widget-title{
-                padding: 0px;
-                height: auto;
-                background: transparent;
-                border: 0px solid;
-                border-radius: 8px 8px 0px 0px;
-                pointer-events: none;
-                span{
-                    margin-bottom: 10px;
-                    font-size: 1rem;
-                    font-weight: 600;
-                    color: $color-text;
-                    @media #{$max1024}{
-                        font-size: 0.75rem;
-                    }
-                }
-                i{
-                    display: none;
-                }
-            }
-            .tf-filter{
+        .tf-filter-title {
+            display: flex;
+            justify-content: space-between;
+            .tf-section-title {
+                margin: 0;
                 padding: 0;
-                ul{
-                    li{
-                        margin: 0px;
-                        padding-left: 0px;
-                        font-size: 1rem;
-                        font-weight: 400;
-                        color: $color-text;
-                        background: transparent;
-                        @media #{$max1024}{
-                            font-size: 0.75rem;
-                        }
-                        label{
-                            padding-left: 30px;
-                            .tf-checkmark{
-                                border-radius: 4px;
-                                border: 1px solid $color-primary;
-                                background: $color-yellow-light;
-                                height: 16px;
-                                width: 16px;
-                                &:hover{
-                                    border-color: $color-brand-dark;
-                                }
-                                &::after{
-                                    top: 1px;
-                                    left: 4px;
-                                    border-color: $color-primary;
-                                    width: 6px;
-                                    height: 9px;
-                                }
-                            }
-                        }
-                        label input:checked~.tf-checkmark {
-                            background-color: transparent !important;
-                            border-color: $color-primary;
-                        }
-                    }
-                }
-                a.see-more.btn-link,
-                a.see-less.btn-link{
-                    text-align: left;
-                    text-decoration: none;
-                    text-transform: capitalize;
-                    color: $color-primary;
-                    font-size: 1rem;
-                    font-weight: 400;
-                    margin-top: 6px;
-                    span{
-                        display: none;
-                    }
-                    @media #{$max1024}{
-                        font-size: 0.75rem;
-                    }
+                font-weight: 700;
+                font-size: 1.875rem;
+                @media #{$max1024}{
+                    font-size: 1.25rem;
                 }
             }
-            .tf-hotel-result-price-range,
-            .tf-tour-result-price-range,
-            .tf-apartment-result-price-range{
-                padding-left: 14px;
-                padding-right: 14px;
-                margin-top: 10px;
-            }
-            .al-range-slider__track {
-                background: $color-brand-lite;
-                height: 10px;
-                box-shadow: none;
-                margin: 0px 0px 10px 0px;
-            }
-            .al-range-slider_dark {
-                padding: 0px;
-                .al-range-slider__bar {
-                    background: $color-gray;
-                    box-shadow: none;
-                }
-            }
-            .al-range-slider__knob {
-                background: $color-filling-bg;
-                height: 24px;
-                width: 24px;
-                box-shadow: none;
-                border: 1.5px solid $color-border;
-                &:first-child {
-                    span {
-                        left: 10px;
-                    }
-                }
-            }
-            .al-range-slider__tooltip {
-                background: transparent;
-                box-shadow: none;
-                padding: 3px 10px;
-                margin-bottom: 0px;
-                bottom: -40px;
+            button {
+                margin: 0;
+                padding: 0;
+                border: none;
+                background: unset;
                 color: $color-text;
                 font-size: 1rem;
-                font-weight: 400;
+                font-weight: 700;
+                transition: .3s all ease;
+                @media #{$max1024}{
+                    font-size: 0.75rem;
+                }
+                &:hover{
+                    color: $color-primary;
+                }
             }
-            .al-range-slider__input.js-al-range-slider__input {
+            button.filter-reset-btn{
                 display: none;
             }
         }
-        .tf_widget.widget_tf_price_filters{
-            margin-bottom: 54px;
+        .tf-filter-list-item {
+            h4 {
+                margin-bottom: 12px;
+                font-size: 1rem;
+                font-weight: 600;
+                line-height: 1.5;
+                color: $color-heading;
+            }
+            label.tf-filter-location {
+                display: flex;
+                background: $color-white;
+                padding: 12px;
+                gap: 6px;
+                input {
+                    width: -webkit-fill-available;
+                    border: none;
+                    outline: none;
+                }
+            }
+            &.tf-filter-rating i {
+                color: $color-primary;
+            }
+            .tf-filter-pricing-range {
+                input.al-range-slider__input {
+                    display: none;
+                }
+                .al-range-slider__track {
+                    box-shadow: none;
+                    background: $color-brand-lite;
+                    height: 8px;
+                    margin: 10px 0 40px 0;
+                }
+                .al-range-slider__bar {
+                    border: none;
+                    box-shadow: none;
+                    background: $color-gray;
+                }
+                .al-range-slider__knob {
+                    display: flex;
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 12px;
+                    border: 1.5px solid $color-border;
+                    background: $color-filling-bg;
+                    box-shadow: none;
+                    &:hover {
+                        border-color: none;
+                        box-shadow: none;
+                    }
+                }
+                .al-range-slider__tooltip {
+                    background: none;
+                    border-radius: none;
+                    bottom: -150%;
+                    box-shadow: none;
+                    font-size: 1rem;
+                    padding: 0;
+                    color: $color-text;
+                }
+                .al-range-slider {
+                    padding: 0;
+                }
+            }
+            ul {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin: 0;
+                padding: 0;
+                li {
+                    input {
+                        padding: 0;
+                        height: initial;
+                        width: initial;
+                        margin-bottom: 0;
+                        display: none;
+                        cursor: pointer;
+                    }
+                    input:checked+label:before {
+                        background: $color-primary
+                    }
+                    label {
+                        position: relative;
+                        cursor: pointer;
+                        color: $color-text;
+                    }
+                    label:before {
+                        content: '';
+                        background-color: transparent;
+                        display: inline-block;
+                        border-radius: 2px;
+                        border: 0.794px solid $color-primary;
+                        background: $color-brand-lite;
+                        height: 12px;
+                        width: 12px;
+                        margin-right: 8px;
+                    }
+                    a.tf-filter-list-see-less {
+                        color: $color-primary;
+                        text-decoration: none;
+                    }
+                }
+            }
         }
+    }
+
+    .tf_widget{
+        background-color: transparent;
+        border: 0px solid;
+        margin-bottom: 32px;
+        &:last-child{
+            margin-bottom: 0px;
+        }
+        .tf-widget-title{
+            padding: 0px;
+            height: auto;
+            background: transparent;
+            border: 0px solid;
+            border-radius: 8px 8px 0px 0px;
+            pointer-events: none;
+            span{
+                margin-bottom: 10px;
+                font-size: 1rem;
+                font-weight: 600;
+                color: $color-text;
+                @media #{$max1024}{
+                    font-size: 0.75rem;
+                }
+            }
+            i{
+                display: none;
+            }
+        }
+        .tf-filter{
+            padding: 0;
+            ul{
+                li{
+                    margin: 0px;
+                    padding-left: 0px;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    color: $color-text;
+                    background: transparent;
+                    @media #{$max1024}{
+                        font-size: 0.75rem;
+                    }
+                    label{
+                        padding-left: 30px;
+                        .tf-checkmark{
+                            border-radius: 4px;
+                            border: 1px solid $color-primary;
+                            background: $color-yellow-light;
+                            height: 16px;
+                            width: 16px;
+                            &:hover{
+                                border-color: $color-brand-dark;
+                            }
+                            &::after{
+                                top: 1px;
+                                left: 4px;
+                                border-color: $color-primary;
+                                width: 6px;
+                                height: 9px;
+                            }
+                        }
+                    }
+                    label input:checked~.tf-checkmark {
+                        background-color: transparent !important;
+                        border-color: $color-primary;
+                    }
+                }
+            }
+            a.see-more.btn-link,
+            a.see-less.btn-link{
+                text-align: left;
+                text-decoration: none;
+                text-transform: capitalize;
+                color: $color-primary;
+                font-size: 1rem;
+                font-weight: 400;
+                margin-top: 6px;
+                span{
+                    display: none;
+                }
+                @media #{$max1024}{
+                    font-size: 0.75rem;
+                }
+            }
+        }
+        .tf-hotel-result-price-range,
+        .tf-tour-result-price-range,
+        .tf-apartment-result-price-range{
+            padding-left: 14px;
+            padding-right: 14px;
+            margin-top: 10px;
+        }
+        .al-range-slider__track {
+            background: $color-brand-lite;
+            height: 10px;
+            box-shadow: none;
+            margin: 0px 0px 10px 0px;
+        }
+        .al-range-slider_dark {
+            padding: 0px;
+            .al-range-slider__bar {
+                background: $color-gray;
+                box-shadow: none;
+            }
+        }
+        .al-range-slider__knob {
+            background: $color-filling-bg;
+            height: 24px;
+            width: 24px;
+            box-shadow: none;
+            border: 1.5px solid $color-border;
+            &:first-child {
+                span {
+                    left: 10px;
+                }
+            }
+        }
+        .al-range-slider__tooltip {
+            background: transparent;
+            box-shadow: none;
+            padding: 3px 10px;
+            margin-bottom: 0px;
+            bottom: -40px;
+            color: $color-text;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+        .al-range-slider__input.js-al-range-slider__input {
+            display: none;
+        }
+    }
+    .tf_widget.widget_tf_price_filters{
+        margin-bottom: 54px;
     }
 }

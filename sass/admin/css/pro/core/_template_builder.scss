@@ -491,11 +491,161 @@ Modal
         .tf-form-actions{
             display: flex;
             justify-content: flex-end;
+            align-items: flex-start;
             gap: 16px;
 
             .tf-admin-btn{
                 i{
                     margin-right: 8px;
+                }
+            }
+
+            .tf-builder-btn-wrap {
+                position: relative;
+                min-width: 260px;
+
+                .tf-builder-select-native {
+                    display: none;
+                }
+
+                .tf-builder-dropdown {
+                    position: relative;
+                }
+
+                .tf-builder-dropdown-trigger {
+                    width: 100%;
+                    justify-content: space-between;
+                    gap: 12px;
+                    padding: 10px 14px;
+                    background: #F8FBFF;
+                    border: 1px solid #D9E6F5;
+                    color: #003C79;
+                    box-shadow: none;
+
+                    .tf-builder-dropdown-icon {
+                        width: 24px;
+                        height: 24px;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+
+                        svg {
+                            width: 24px;
+                            height: 24px;
+                            margin-right: 0;
+                        }
+                    }
+
+                    .tf-builder-dropdown-label {
+                        flex: 1;
+                        text-align: left;
+                        font-size: 14px;
+                        font-weight: 500;
+                        line-height: 20px;
+                    }
+
+                    .tf-builder-dropdown-caret {
+                        width: 18px;
+                        height: 18px;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: #5D738A;
+                        transition: transform 0.2s ease;
+
+                        svg {
+                            width: 16px;
+                            height: 16px;
+                            margin-right: 0;
+                        }
+                    }
+
+                    &:hover {
+                        background: #F0F7FF;
+                        color: #003C79;
+                    }
+                }
+
+                .tf-builder-dropdown.is-open {
+                    .tf-builder-dropdown-trigger {
+                        border-color: #8FB9E6;
+                        background: #EEF6FF;
+
+                        .tf-builder-dropdown-caret {
+                            transform: rotate(180deg);
+                        }
+                    }
+                }
+
+                .tf-builder-dropdown-menu {
+                    position: absolute;
+                    top: calc(100% + 8px);
+                    left: 0;
+                    right: 0;
+                    z-index: 10;
+                    display: none;
+                    flex-direction: column;
+                    gap: 4px;
+                    padding: 8px;
+                    border-radius: 10px;
+                    border: 1px solid #D9E6F5;
+                    background: #FFFFFF;
+                    box-shadow: 0 12px 30px rgba(8, 20, 33, 0.14);
+                }
+
+                .tf-builder-dropdown.is-open .tf-builder-dropdown-menu {
+                    display: flex;
+                }
+
+                .tf-builder-dropdown-option {
+                    width: 100%;
+                    border: 0;
+                    border-radius: 8px;
+                    background: transparent;
+                    color: #27333F;
+                    padding: 10px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    text-align: left;
+                    cursor: pointer;
+                    transition: background-color .2s ease, color .2s ease;
+
+                    .tf-builder-option-icon {
+                        width: 24px;
+                        height: 24px;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+
+                        svg {
+                            width: 24px;
+                            height: 24px;
+                            margin-right: 0;
+                        }
+                    }
+
+                    .tf-builder-option-label {
+                        font-size: 14px;
+                        line-height: 20px;
+                        font-weight: 500;
+                    }
+
+                    &:hover {
+                        background: #EEF6FF;
+                    }
+
+                    &.is-selected {
+                        background: #E4F0FF;
+                        color: #003C79;
+                    }
+
+                    &:disabled {
+                        opacity: .45;
+                        cursor: not-allowed;
+                    }
                 }
             }
         }
@@ -551,6 +701,16 @@ Modal
                 }
             }
 
+            &#tf-edit-with-bricks{
+                &:hover{
+                    svg rect{
+                        fill: #fff;
+                    }
+                    svg path{
+                        fill: #003C79;
+                    }
+                }
+            }
             &#tf-edit-with-elementor{
                 &:hover{
                     svg path{

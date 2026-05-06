@@ -1065,7 +1065,7 @@
         });     
 
         // Social Share
-        $('.single-tf_carrental .tf-single-template__one .tf-share-toggle').on("click", function (e) {
+        $('.tf-single-template__one .tf-share-toggle').on("click", function (e) {
             e.preventDefault();
             $('.tf-share-toggle').toggleClass('actives');
             $('.share-car-content').toggleClass('show');

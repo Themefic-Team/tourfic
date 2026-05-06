@@ -192,6 +192,89 @@
         .tf-off-canvas-share.show{
             display: inline-flex;
         }
+
+        .share-car-content{
+            display: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            list-style: none;
+            &.show{
+                display: block;
+            }
+            @media #{$max768}{
+                left: auto;
+                right: 0px;
+            }
+            @media #{$max575}{
+                left: 0;
+                right: auto;
+            }
+            .tf-dropdown-share-content{
+                background: $color-filling-fg;
+                border-radius: 8px;
+                padding: 16px 10px;
+                width: 280px;
+                text-align: center;
+                position: absolute;
+                min-width: 100%;
+                top: 100%;
+                transform: translateY(8px);
+                z-index: 9999;
+                left: auto;
+                right: 0;
+                h4{
+                    font-size: 0.875rem;
+                    color: $color-primary;
+                    font-weight: 600;
+                    margin-bottom: 10px;
+                    display: block;
+                }
+                ul{
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    li{
+                        display: inline-block;
+                        a{
+                            display: inline-block;
+                            padding: 10px 9px;
+                            margin: 0;
+                            i{
+                                font-size: 1.375rem;
+                            }
+                            color: $color-primary;
+                            &:hover{
+                                background: transparent;
+                            }
+                        }
+                        .tf_btn{
+                            padding: 10px 8px;
+                            background-color: transparent;
+                            border: 0px solid;
+                            font-size: 1.375rem;
+                            cursor: pointer;
+                            color: $color-primary;
+                            box-shadow: none;
+                            span{
+                                color: $color-primary;
+                            }
+                            .share-center-copied-message {
+                                display: none;
+                            }
+                        }
+                        
+                        input{
+                            @media #{$max768}{
+                                display: contents;
+                            }
+                            padding: 0;
+                            width: 0;
+                        }
+                    }
+                }
+            }
+        }
     }
     .share-tour-content {
         display: none;

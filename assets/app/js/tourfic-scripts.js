@@ -1960,7 +1960,7 @@
         });     
 
         // Social Share
-        $('.single-tf_carrental .tf-single-template__one .tf-share-toggle').on("click", function (e) {
+        $('.tf-single-template__one .tf-share-toggle').on("click", function (e) {
             e.preventDefault();
             $('.tf-share-toggle').toggleClass('actives');
             $('.share-car-content').toggleClass('show');
@@ -4492,7 +4492,7 @@ function convertTo24HourFormat(timeStr) {
             let dropoff_time = $('.tf_dropoff_time').val();
             let pickup_slug = $('#tf_pickup_location_id').val();
             let dropoff_slug = $('#tf_dropoff_location_id').val();
-            let elSettings = $('#tf-elementor-settings').text();
+            let builderSettings = $('#tf-builder-settings').text();
             
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
@@ -4533,7 +4533,7 @@ function convertTo24HourFormat(timeStr) {
             formData.append('driver_age', driver_age);
             formData.append('dropoff_time', dropoff_time);
             formData.append("tf_ordering", tf_ordering);
-            formData.append("elSettings", elSettings);
+            formData.append("builderSettings", builderSettings);
             formData.append('page', page);
 
             if (startprice) {
