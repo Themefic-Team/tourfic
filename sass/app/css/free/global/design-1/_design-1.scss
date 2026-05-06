@@ -334,6 +334,13 @@
                 svg{
                     cursor: pointer;
                     z-index: 2;
+                    height: 24px;
+                    width: 24px;
+
+                    rect,
+                    path{
+                        stroke: $color-white;
+                    }
                 }
 
                 .tf-search-input.form-control{

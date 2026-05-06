@@ -115,7 +115,7 @@ class Base {
 
 		//Template Builder
 		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
-			\Tourfic\App\Template_Builder::instance();
+			\Tourfic\App\Templates\Template_Builder::instance();
 		}
 	}
 

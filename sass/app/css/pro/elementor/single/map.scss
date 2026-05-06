@@ -1,6 +1,9 @@
 @import '../../../../../common/variable';
 @import '../../../../../common/mixin';
 
+#hotel-map-location .tf-section-title{
+    margin-bottom: 16px;
+}
 .tf-hotel-location-map{
     #hotel-location{
         height: 258px;

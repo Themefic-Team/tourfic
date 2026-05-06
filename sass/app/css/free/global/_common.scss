@@ -65,6 +65,9 @@ h3.section-heading {
                 display: inline-block;
             }
             .tf-map-link{
+                i,svg{
+                    margin-right: 4px;
+                }
                 .tf-d-ib{
                     overflow: hidden;
                     text-overflow: ellipsis;

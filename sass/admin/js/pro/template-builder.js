@@ -30,15 +30,52 @@
             e.preventDefault();
             tf_save_template();
         });
-        
-        // Edit with Elementor button
-        $(document).on('click', '#tf-edit-with-elementor', function(e) {
-            e.preventDefault();
-            tf_save_template(true);
-        });
+
+        initBuilderDropdown();
 
         $(document).on("click", '.tf-modal-close', function () {
             tf_close_template_popup();
+        });
+
+        $(document).on('click', '#tf-builder-dropdown-trigger', function(e) {
+            e.preventDefault();
+
+            if ($(this).is(':disabled')) {
+                return;
+            }
+
+            const $dropdown = $('#tf-builder-dropdown');
+            const isOpen = $dropdown.hasClass('is-open');
+            $dropdown.toggleClass('is-open', !isOpen);
+            $(this).attr('aria-expanded', isOpen ? 'false' : 'true');
+
+            if (!isOpen) {
+                const $menu = $dropdown.find('.tf-builder-dropdown-menu');
+              
+                $menu.css({ top: 'auto', bottom: 'calc(100% + 8px)' });
+                
+                // $menu.css({ top: 'calc(100% + 8px)', bottom: 'auto' });
+                
+            }
+        });
+
+        $(document).on('click', '.tf-builder-dropdown-option', function(e) {
+            e.preventDefault();
+
+            if ($(this).is(':disabled')) {
+                return;
+            }
+
+            const selectedValue = $(this).data('value');
+            $('#tf-edit-with-builder').val(selectedValue);
+            syncBuilderDropdown();
+            closeBuilderDropdown();
+        });
+
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('#tf-builder-dropdown').length) {
+                closeBuilderDropdown();
+            }
         });
         $(document).on("click", function (event) {
             if (!$(event.target).closest(".tf-modal-content,.page-title-action").length) {
@@ -66,7 +103,8 @@
                     $('select[name="tf_taxonomy_type"]').attr('disabled', 'disabled');
                     $('select[name="tf_taxonomy_term"]').attr('disabled', 'disabled');
                     $('#tf-save-template').attr('disabled', 'disabled');
-                    $('#tf-edit-with-elementor').attr('disabled', 'disabled');
+                    $('#tf-edit-with-builder').attr('disabled', 'disabled');
+                    $('#tf-builder-dropdown-trigger').attr('disabled', 'disabled');
                 },
                 success: function(response) {
                     $('.tf-template-preview-loader').hide();
@@ -75,18 +113,12 @@
                     $('select[name="tf_taxonomy_term"]').removeAttr('disabled');
                     $('select[name="tf_taxonomy_term"]').html('');
                     $('#tf-save-template').removeAttr('disabled');
-                    $('#tf-edit-with-elementor').removeAttr('disabled');
+                    $('#tf-builder-dropdown-trigger').removeAttr('disabled');
+                    $('#tf-edit-with-builder').removeAttr('disabled');
                     if (response.success) {
                         // Update the template options markup
                         $('.tf-field-imageselect').html(response.data.markup);
                         $('.tf-field-taxonomy').html(response.data.taxonomy_markup);
-                        
-                        // Add subtitle if single template
-                        // if (type === 'single') {
-                        //     $('.tf-field-imageselect').append('<p class="tf-field-subtitle">You have the option to override this from the settings specific to each individual page.</p>');
-                        // } else {
-                        //     $('.tf-field-imageselect .tf-field-subtitle').remove();
-                        // }
                     }
                 },
                 error: function(xhr, status, error) {
@@ -96,6 +128,9 @@
                     $('.tf-field-term').hide();
                     $('select[name="tf_taxonomy_term"]').removeAttr('disabled');
                     $('select[name="tf_taxonomy_term"]').html('');
+                    $('#tf-save-template').removeAttr('disabled');
+                    $('#tf-edit-with-builder').removeAttr('disabled');
+                    $('#tf-builder-dropdown-trigger').removeAttr('disabled');
                     // Fallback to blank option
                     $('.tf-field-imageselect').html(`
                         <label class="tf-field-label">${type == 'single' ? 'Single Template' : 'Archive Template'}</label>
@@ -159,6 +194,46 @@
             });
         });
         
+        function initBuilderDropdown() {
+            syncBuilderDropdown();
+        }
+
+        function syncBuilderDropdown() {
+            const selectedValue = $('#tf-edit-with-builder').val();
+            const $selectedOption = $('.tf-builder-dropdown-option[data-value="' + selectedValue + '"]');
+            const $label = $('#tf-builder-dropdown-label');
+            const $icon = $('#tf-builder-dropdown-icon');
+
+            if (!$selectedOption.length) {
+                return;
+            }
+
+            $label.text($selectedOption.find('.tf-builder-option-label').text());
+            $icon.html($selectedOption.find('.tf-builder-option-icon').html());
+            $('.tf-builder-dropdown-option').removeClass('is-selected');
+            $selectedOption.addClass('is-selected');
+        }
+
+        function setBuilderSelection(builderType) {
+            const $select = $('#tf-edit-with-builder');
+
+            if (!builderType) {
+                return;
+            }
+
+            const $option = $select.find('option[value="' + builderType + '"]:not(:disabled)');
+
+            if ($option.length) {
+                $select.val(builderType);
+                syncBuilderDropdown();
+            }
+        }
+
+        function closeBuilderDropdown() {
+            $('#tf-builder-dropdown').removeClass('is-open');
+            $('#tf-builder-dropdown-trigger').attr('aria-expanded', 'false');
+        }
+
         function tf_load_template_data(post_id) {
             $.ajax({
                 url: tf_pro_params.ajax_url,
@@ -177,44 +252,50 @@
                         var data = response.data;
                         $('#tf-post-id').val(data.ID);
                         $('#tf-template-builder-form .tf-fields').html(data.fields_markup);
+                        setBuilderSelection(data.builder_type);
                         $('.tf-template-preview').hide();
                         tf_open_template_popup();
                     }
                 },
                 error: function(xhr, status, error) {
                     $(".tf-template-builder-loader").hide();
+                    $('#tf-builder-dropdown-trigger').removeAttr('disabled');
+                    syncBuilderDropdown();
                     // Handle error
                     notyf.error('Error loading template data: ' + error);
                 }
             });
         }
         
-        function tf_save_template(editWithElementor = false) {
+        function tf_save_template() {
+            var selectedBuilder = $('#tf-edit-with-builder').val();
+            var editWithElementor = selectedBuilder === 'elementor';
+            var editWithBricks = selectedBuilder === 'bricks';
             var form_data = $('#tf-template-builder-form').serialize();
-            
+            var extra = '&nonce=' + tf_pro_params.tf_pro_nonce + '&edit_with_elementor=' + editWithElementor + '&edit_with_bricks=' + editWithBricks;
+
             $.ajax({
                 url: tf_pro_params.ajax_url,
                 type: 'POST',
-                data: form_data + '&nonce=' + tf_pro_params.tf_pro_nonce + '&edit_with_elementor=' + editWithElementor,
+                data: form_data + extra,
                 beforeSend: function() {
-                    if(editWithElementor) {
-                        $('#tf-edit-with-elementor').addClass('tf-btn-loading');
-                    } else {
-                        $('#tf-save-template').addClass('tf-btn-loading');
-                    }
+                    $('#tf-save-template').addClass('tf-btn-loading').attr('disabled', 'disabled');
+                    $('#tf-edit-with-builder').attr('disabled', 'disabled');
+                    $('#tf-builder-dropdown-trigger').attr('disabled', 'disabled');
                 },
                 success: function(response) {
                     tf_close_template_popup();
-                    if(editWithElementor) {
-                        $('#tf-edit-with-elementor').removeClass('tf-btn-loading');
-                        if (response.success) {
-                            notyf.success(response.data.message);
-                            window.location.href = response.data.edit_url; // Redirect to Elementor editor
-                        }
-                    } else {
-                        $('#tf-save-template').removeClass('tf-btn-loading');
-                        if (response.success) {
-                            notyf.success(response.data.message);
+                    $('#tf-save-template').removeClass('tf-btn-loading').removeAttr('disabled');
+                    $('#tf-edit-with-builder').removeAttr('disabled');
+                    $('#tf-builder-dropdown-trigger').removeAttr('disabled');
+                    syncBuilderDropdown();
+
+                    if (response.success) {
+                        notyf.success(response.data.message);
+
+                        if ((editWithElementor || editWithBricks) && response.data && response.data.edit_url) {
+                            window.location.href = response.data.edit_url;
+                        } else {
                             window.location.reload();
                         }
                     }
@@ -222,7 +303,10 @@
                 error: function(xhr, status, error) {
                     // Handle error
                     notyf.error('Error saving template: ' + error);
-                    $('#tf-save-template').removeClass('tf-btn-loading');
+                    $('#tf-save-template').removeClass('tf-btn-loading').removeAttr('disabled');
+                    $('#tf-edit-with-builder').removeAttr('disabled');
+                    $('#tf-builder-dropdown-trigger').removeAttr('disabled');
+                    syncBuilderDropdown();
                 }
             });
         }
@@ -243,6 +327,9 @@
             $('#tf-template-type').val($('#tf-template-type option:first').val());
             $('#tf-taxonomy-type').val($('#tf-taxonomy-type option:first').val());
             $('#tf-taxonomy-term').val($('#tf-taxonomy-term option:first').val());
+            $('#tf-edit-with-builder').val($('#tf-edit-with-builder').data('default-builder') || '');
+            closeBuilderDropdown();
+            syncBuilderDropdown();
             $('.tf-field-term').hide();
             $('#tf-template-active').prop('checked', false);
             $('.tf-template-preview').show();

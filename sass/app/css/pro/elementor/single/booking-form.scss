@@ -329,6 +329,10 @@
 .tf-single-tour-booking-form__style-2{
     padding: 0;
 
+    .tf-single-widgets{
+        margin-bottom: 0;
+    }
+
     .tf-bottom-booking-bar {
         position: fixed;
         bottom: 0;
@@ -1237,14 +1241,14 @@
 .tf-single-car-booking-form__style-1{
     padding: 0;
 
-    .tf-car-booking-form{
-        width: 440px;
-        @media #{$max1024}{
-            width: 370px;
-        }
-        @media #{$max768}{
-            width: 100%;
-        }
+    // .tf-car-booking-form{
+        // width: 440px;
+        // @media #{$max1024}{
+        //     width: 370px;
+        // }
+        // @media #{$max768}{
+        //     width: 100%;
+        // }
         .tf-price-header{
             margin-bottom: 38px;
             h2{
@@ -1724,10 +1728,10 @@
             }
         }
 
-        .tf-mobile-booking-btn{
+       .tf-mobile-booking-btn{
             display: none;
-            background: $color-brand-lite;
-            padding: 8px;
+            background: $color-light-grayish;
+            padding:8px;
             @media #{$max768}{
                 display: block;
                 position: fixed;
@@ -1735,6 +1739,27 @@
                 bottom: 0;
                 right: 0;
                 z-index: 9999;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                padding:16px;
+            }
+            @media (max-width: 420px) {
+                padding: 16px 8px;
+            }
+            .tf-price-header{
+                margin-bottom: 0;
+                display: block;
+                h2{
+                    font-size: 1.25rem;
+                    margin-bottom: 0;
+                    del{
+                        color: $color-text;
+                        font-size: 0.625rem;
+                        font-weight: 400;
+                    }
+                }
             }
             button{
                 padding: 16px 32px;
@@ -1750,9 +1775,13 @@
                 &:hover{
                     background: $color-brand-dark;
                 }
+                @media #{$max768}{
+                    width: fit-content;
+                    padding: 20px 35px;
+                }
             }
         }
-    }
+    // }
 
     .tf-car-booking-popup{
         position: fixed;
