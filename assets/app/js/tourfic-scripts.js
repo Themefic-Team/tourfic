@@ -3168,6 +3168,11 @@ function convertTo24HourFormat(timeStr) {
             e.preventDefault();
 
             var $this = $(this);
+            var travelerValidation = { hasErrors: false };
+            $this.trigger('tf_validate_tour_traveler_fields', [travelerValidation]);
+            if (travelerValidation.hasErrors) {
+                return false;
+            }
 
             var formData = new FormData(this);
             formData.append('action', 'tf_tours_booking');
@@ -6396,13 +6401,18 @@ function convertTo24HourFormat(timeStr) {
             return true;
         }
 
-        $('body').on('click', '.tf-traveller-error', function (e) {
+        function tfValidateTourTravelerFields($trigger) {
             let hasErrors = [];
             tf_firstErrorElement = null; // reset before validation
-            const $button = $(this);
+            const $button = $trigger && $trigger.length ? $trigger : $();
             const bookingState = tfGetTourBookingState($button);
             const $popup = tfResolveTourPopup($button);
             const referenceDate = bookingState.checkInDate || '';
+
+            if (!$popup.length) {
+                tf_hasErrorsFlag = false;
+                return false;
+            }
 
             $popup.find('.error-text').text("").removeClass('error-visible');
             $popup.find('.tf-single-travel').each(function (travelerIndex) {
@@ -6455,9 +6465,27 @@ function convertTo24HourFormat(timeStr) {
                         tf_firstErrorElement.focus(); // focus after scrolling
                     });
                 }
-                return false;
+                return true;
             }
             tf_hasErrorsFlag = false;
+            return false;
+        }
+
+        $('body').on('click', '.tf-traveller-error', function (e) {
+            if (tfValidateTourTravelerFields($(this))) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                return false;
+            }
+        });
+
+        $('body').on('tf_validate_tour_traveler_fields', 'form.tf_tours_booking', function (e, validationResult) {
+            const $form = $(this);
+            const $trigger = $form.find('.tf-traveller-error').first();
+
+            if (validationResult) {
+                validationResult.hasErrors = tfValidateTourTravelerFields($trigger.length ? $trigger : $form);
+            }
         });
 
         // Booking Confirmation Form Validation

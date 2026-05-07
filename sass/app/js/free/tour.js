@@ -91,6 +91,11 @@
             e.preventDefault();
 
             var $this = $(this);
+            var travelerValidation = { hasErrors: false };
+            $this.trigger('tf_validate_tour_traveler_fields', [travelerValidation]);
+            if (travelerValidation.hasErrors) {
+                return false;
+            }
 
             var formData = new FormData(this);
             formData.append('action', 'tf_tours_booking');

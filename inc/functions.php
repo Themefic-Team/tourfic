@@ -765,34 +765,74 @@ if ( ! function_exists( 'tf_tour_process_traveler_document_fields' ) ) {
 	}
 }
 
+if ( ! function_exists( 'tf_tour_get_traveler_field_value' ) ) {
+	/**
+	 * Get a traveler field value by normalized field name.
+	 *
+	 * @param array  $traveler_data Traveler data.
+	 * @param string $field_name     Normalized field name.
+	 * @return mixed|null
+	 */
+	function tf_tour_get_traveler_field_value( $traveler_data, $field_name ) {
+		if ( ! is_array( $traveler_data ) ) {
+			return null;
+		}
+
+		if ( array_key_exists( $field_name, $traveler_data ) ) {
+			return $traveler_data[ $field_name ];
+		}
+
+		foreach ( $traveler_data as $posted_field_name => $posted_value ) {
+			if ( sanitize_key( $posted_field_name ) === $field_name ) {
+				return $posted_value;
+			}
+		}
+
+		return null;
+	}
+}
+
 if ( ! function_exists( 'tf_tour_validate_traveler_age_limits' ) ) {
 	/**
 	 * Validate traveler ages against passenger types.
 	 *
-	 * @param array  $traveler_details Traveler details.
-	 * @param int    $adults           Adult count.
-	 * @param int    $children         Child count.
-	 * @param int    $infants          Infant count.
-	 * @param string $tour_date        Tour date.
+	 * @param array  $traveler_details        Traveler details.
+	 * @param int    $adults                  Adult count.
+	 * @param int    $children                Child count.
+	 * @param int    $infants                 Infant count.
+	 * @param string $tour_date               Tour date.
+	 * @param bool   $require_traveler_fields Whether expected traveler fields must be present.
 	 * @return true|WP_Error
 	 */
-	function tf_tour_validate_traveler_age_limits( $traveler_details, $adults, $children, $infants, $tour_date ) {
+	function tf_tour_validate_traveler_age_limits( $traveler_details, $adults, $children, $infants, $tour_date, $require_traveler_fields = false ) {
 		$settings    = tf_tour_get_age_validation_settings();
 		$field_names = tf_tour_get_age_validation_field_names();
 
-		if ( empty( $settings['enabled'] ) || empty( $field_names ) || empty( $traveler_details ) ) {
+		if ( empty( $settings['enabled'] ) || empty( $field_names ) ) {
 			return true;
 		}
 
-		if ( 'single' === $settings['collection_mode'] && ( $adults + $children + $infants ) > 1 ) {
+		$total_people = $adults + $children + $infants;
+		if ( 'single' === $settings['collection_mode'] && $total_people > 1 ) {
 			return true;
 		}
 
 		$reference_time = tf_tour_get_reference_timestamp( $tour_date );
 		$type_map       = tf_tour_get_passenger_type_map( $adults, $children, $infants );
+		$traveler_details = is_array( $traveler_details ) ? $traveler_details : array();
 
-		foreach ( $traveler_details as $traveler_index => $traveler_data ) {
+		if ( empty( $traveler_details ) && ! $require_traveler_fields ) {
+			return true;
+		}
+
+		$traveler_indexes = $require_traveler_fields ? array_keys( $type_map ) : array_keys( $traveler_details );
+		foreach ( $traveler_indexes as $traveler_index ) {
+			$traveler_data = ! empty( $traveler_details[ $traveler_index ] ) ? $traveler_details[ $traveler_index ] : array();
 			if ( ! is_array( $traveler_data ) ) {
+				if ( $require_traveler_fields ) {
+					return new WP_Error( 'tf_traveler_age_mismatch', esc_html__( 'The entered date of birth does not match the selected passenger type.', 'tourfic' ) );
+				}
+
 				continue;
 			}
 
@@ -803,11 +843,16 @@ if ( ! function_exists( 'tf_tour_validate_traveler_age_limits' ) ) {
 			}
 
 			foreach ( $field_names as $field_name ) {
-				if ( empty( $traveler_data[ $field_name ] ) || is_array( $traveler_data[ $field_name ] ) ) {
+				$field_value = tf_tour_get_traveler_field_value( $traveler_data, $field_name );
+				if ( empty( $field_value ) || is_array( $field_value ) ) {
+					if ( $require_traveler_fields ) {
+						return new WP_Error( 'tf_traveler_age_mismatch', esc_html__( 'The entered date of birth does not match the selected passenger type.', 'tourfic' ) );
+					}
+
 					continue;
 				}
 
-				$age = tf_tour_calculate_age( $traveler_data[ $field_name ], $reference_time );
+				$age = tf_tour_calculate_age( $field_value, $reference_time );
 				if ( null === $age || ! tf_tour_age_matches_passenger_type( $passenger_type, $age ) ) {
 					return new WP_Error( 'tf_traveler_age_mismatch', esc_html__( 'The entered date of birth does not match the selected passenger type.', 'tourfic' ) );
 				}
