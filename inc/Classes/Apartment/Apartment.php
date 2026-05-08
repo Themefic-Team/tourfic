@@ -1459,7 +1459,7 @@ class Apartment {
 		$child        = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
 		$infant       = ! empty( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : '';
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : '';
-        $check_in_out_arr = explode(" - ", $check_in_out);
+        $check_in_out_arr = tf_split_date_range( $check_in_out );
         $check_in = ! empty( $check_in_out_arr[0] ) ? $check_in_out_arr[0] : '';
         $check_out = ! empty( $check_in_out_arr[1] ) ? $check_in_out_arr[1] : '';
 
@@ -1894,7 +1894,7 @@ class Apartment {
                         altInput: true,
                         altFormat: '<?php echo esc_html( $date_format_change_appartments ); ?>',
                         dateFormat: "Y/m/d",
-                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+                        defaultDate: <?php echo wp_json_encode( tf_split_date_range( $check_in_out ) ) ?>,
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
 								return `${date1} - ${date2}`;
@@ -2782,7 +2782,7 @@ class Apartment {
 
 		if ( ! empty( $check_in_out ) ) {
 			$booked_dates   = self::tf_apartment_booked_days( get_the_ID() );
-			$checkInOutDate = explode( ' - ', $check_in_out );
+			$checkInOutDate = tf_split_date_range( $check_in_out );
 			if ( $checkInOutDate[0] && $checkInOutDate[1] ) {
 				$check_in_stt  = strtotime( $checkInOutDate[0] . ' +1 day' );
 				$check_out_stt = strtotime( $checkInOutDate[1] );
@@ -4771,7 +4771,7 @@ class Apartment {
 					$check_in_out_date = wc_get_order_item_meta( $item_id, 'check_in_out_date', true );
 
 					if ( ! empty( $check_in_out_date ) ) {
-						$check_in_out_date = explode( ' - ', $check_in_out_date );
+						$check_in_out_date = tf_split_date_range( $check_in_out_date );
 						$booked_days[]     = array(
 							'check_in'  => $check_in_out_date[0],
 							'check_out' => $check_in_out_date[1],

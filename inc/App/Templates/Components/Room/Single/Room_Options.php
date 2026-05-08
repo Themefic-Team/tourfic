@@ -45,7 +45,7 @@ class Room_Options {
 		$post_id = get_the_ID();
 		$meta    = get_post_meta( $post_id, 'tf_room_opt', true );
 
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : '';
 
 		if ( $check_in_out ) {
 			$form_check_in      = substr( $check_in_out, 0, 10 );
@@ -55,7 +55,7 @@ class Room_Options {
 		}
 
 		if ( ! empty( $check_in_out ) ) {
-			list( $tf_form_start, $tf_form_end ) = explode( ' - ', $check_in_out );
+			list( $tf_form_start, $tf_form_end ) = tf_split_date_range( $check_in_out );
 		}
 
 		if ( ! empty( $check_in_out ) ) {

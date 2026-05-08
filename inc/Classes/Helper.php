@@ -1124,10 +1124,10 @@ class Helper {
 		$date                     = ! empty( $date ) ? $date : $search_default_check_in . ' - ' . $search_default_check_out;
 		$check_in_out             = $date;
 
-		$search_check_in_out_parts = array_map( 'trim', explode( '-', $date ) );
+		$search_check_in_out_parts = tf_split_date_range( $date );
 		$search_check_in_date      = ! empty( $search_check_in_out_parts[0] ) ? $search_check_in_out_parts[0] : $search_default_check_in;
 		$search_check_out_date     = ! empty( $search_check_in_out_parts[1] ) ? $search_check_in_out_parts[1] : $search_default_check_out;
-		$search_default_date_range = wp_json_encode( array_map( 'trim', explode( '-', $date ) ) );
+		$search_default_date_range = wp_json_encode( tf_split_date_range( $date ) );
 
 		$search_check_in_timestamp  = strtotime( $search_check_in_date );
 		$search_check_out_timestamp = strtotime( $search_check_out_date );
@@ -2257,7 +2257,7 @@ class Helper {
 		$archive_default_check_out = wp_date( 'Y/m/d', strtotime( '+1 day', $archive_current_timestamp ) );
 		$archive_check_in_out      = ! empty( $check_in_out ) ? $check_in_out : $archive_default_check_in . ' - ' . $archive_default_check_out;
 
-		$archive_check_in_out_parts = array_map( 'trim', explode( '-', $archive_check_in_out ) );
+		$archive_check_in_out_parts = tf_split_date_range( $archive_check_in_out );
 		$archive_check_in_date      = ! empty( $archive_check_in_out_parts[0] ) ? $archive_check_in_out_parts[0] : $archive_default_check_in;
 		$archive_check_out_date     = ! empty( $archive_check_in_out_parts[1] ) ? $archive_check_in_out_parts[1] : $archive_default_check_out;
 
@@ -2419,7 +2419,7 @@ class Helper {
                                         return `${d1} - ${d2}`;
                                     });
                                 },
-                                defaultDate: <?php echo wp_json_encode( array_map( 'trim', explode( '-', $archive_check_in_out ) ) ); ?>,
+                                defaultDate: <?php echo wp_json_encode( tf_split_date_range( $archive_check_in_out ) ); ?>,
                             });
 
                             // open flatpickr on focus
@@ -2701,7 +2701,7 @@ class Helper {
                                             });
                                             dateSetToFields(selectedDates, instance);
                                         },
-                                        defaultDate: <?php echo wp_json_encode( array_map( 'trim', explode( '-', $archive_check_in_out ) ) ); ?>,
+                                        defaultDate: <?php echo wp_json_encode( tf_split_date_range( $archive_check_in_out ) ); ?>,
                                     });
 
                                     function dateSetToFields(selectedDates, instance) {
@@ -2773,7 +2773,7 @@ class Helper {
                                             });
                                             dateSetToFields(selectedDates, instance);
                                         },
-                                        defaultDate: <?php echo wp_json_encode( array_map( 'trim', explode( '-', $archive_check_in_out ) ) ); ?>,
+                                        defaultDate: <?php echo wp_json_encode( tf_split_date_range( $archive_check_in_out ) ); ?>,
                                     });
 
                                     function dateSetToFields(selectedDates, instance) {
@@ -3053,7 +3053,7 @@ class Helper {
                                     <?php if ( $pickup_date && $dropoff_date ) : ?>
                                         defaultDate: <?php echo wp_json_encode( [ $pickup_date, $dropoff_date ] ); ?>,
                                     <?php elseif ( ! empty( $check_in_out ) ) : ?>
-                                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ); ?>,
+                                        defaultDate: <?php echo wp_json_encode( tf_split_date_range( $check_in_out ) ); ?>,
                                     <?php else : ?>
                                         defaultDate: [tomorrow, dayAfter],
                                     <?php endif; ?>
@@ -3087,7 +3087,7 @@ class Helper {
 			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '0';
 			$room = ! empty( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : '1';
 			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
-            $check_in_out_arr = explode( ' - ', $check_in_out ); 
+            $check_in_out_arr = tf_split_date_range( $check_in_out );
             $check_in = !empty($check_in_out_arr[0]) ? $check_in_out_arr[0] : ''; 
             $check_out = !empty($check_in_out_arr[1]) ? $check_in_out_arr[1] : '';
 
@@ -3241,7 +3241,7 @@ class Helper {
                                                         instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                                                         dateSetToFields(selectedDates, instance);
                                                     },
-                                                    defaultDate: <?php echo ! empty( $check_in_out ) ? wp_json_encode( explode( '-', $check_in_out ) ) : '[' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+1 day' ) ) ) . ', ' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+2 day' ) ) ) . ']' ; ?>,
+                                                    defaultDate: <?php echo ! empty( $check_in_out ) ? wp_json_encode( tf_split_date_range( $check_in_out ) ) : '[' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+1 day' ) ) ) . ', ' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+2 day' ) ) ) . ']' ; ?>,
                                                 });
 
                                                 function dateSetToFields(selectedDates, instance) {
@@ -3530,7 +3530,7 @@ class Helper {
                                         instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                                         dateSetToFields(selectedDates, instance);
                                     },
-                                    defaultDate: <?php echo wp_json_encode( array_map( 'trim', explode( '-', $archive_check_in_out ) ) ); ?>,
+                                    defaultDate: <?php echo wp_json_encode( tf_split_date_range( $archive_check_in_out ) ); ?>,
                                 });
 
                                 function dateSetToFields(selectedDates, instance) {
@@ -3711,7 +3711,7 @@ class Helper {
                                         return `${d1} - ${d2}`;
                                     })
                                 },
-                                defaultDate: <?php echo wp_json_encode( array_map( 'trim', explode( '-', $archive_check_in_out ) ) ); ?>,
+                                defaultDate: <?php echo wp_json_encode( tf_split_date_range( $archive_check_in_out ) ); ?>,
                             });
                         });
                     });
@@ -3861,10 +3861,11 @@ class Helper {
 
 		if ( ! empty( $placement ) && ! empty( $flatpickr_locale ) && $placement == "root" ) {
 
-			echo esc_html( "window.flatpickr.l10ns.$flatpickr_locale.firstDayOfWeek = $tf_first_day_of_week");
+			echo 'window.flatpickr.l10ns.' . esc_js( $flatpickr_locale ) . '.firstDayOfWeek = ' . absint( $tf_first_day_of_week ) . ';';
+			echo 'window.flatpickr.l10ns.' . esc_js( $flatpickr_locale ) . ".rangeSeparator = ' - ';";
 
 		} else {
-			echo 'locale: "' . esc_html( $flatpickr_locale ) . '",';
+			echo 'locale: Object.assign({}, window.flatpickr.l10ns["' . esc_js( $flatpickr_locale ) . '"], { rangeSeparator: " - " }),';
 		}
 	}
 

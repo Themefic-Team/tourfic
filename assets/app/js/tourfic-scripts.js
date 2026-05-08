@@ -18,7 +18,7 @@
         // Apartment Location Autocomplete
         function tourfic_autocomplete(inp, arr) {
             var currentFocus;
-        
+
             // Show autocomplete suggestions on focus
             inp.addEventListener("focus", function () {
                 closeAllLists();
@@ -26,7 +26,7 @@
                 a.setAttribute("id", this.id + "-autocomplete-list");
                 a.classList.add("autocomplete-items");
                 this.parentNode.appendChild(a);
-        
+
                 for (const [key, value] of Object.entries(arr)) {
                     let b = document.createElement("DIV");
                     b.innerHTML = value;
@@ -42,20 +42,20 @@
                     a.appendChild(b);
                 }
             });
-        
+
             // Filter suggestions on keyup
             inp.addEventListener("keyup", function (e) {
                 var val = this.value.toLowerCase();
                 closeAllLists();
                 currentFocus = -1;
-                
+
                 if (!val) return false;
-        
+
                 let a = document.createElement("DIV");
                 a.setAttribute("id", this.id + "-autocomplete-list");
                 a.setAttribute("class", "autocomplete-items");
                 this.parentNode.appendChild(a);
-        
+
                 var found = false;
                 for (const [key, value] of Object.entries(arr)) {
                     if (value.toLowerCase().startsWith(val)) {
@@ -67,13 +67,13 @@
                             let source = this.getElementsByTagName("input")[0];
                             inp.value = source.value;
                             inp.closest('input').nextElementSibling.value = source.dataset.slug;
-                
+
                             closeAllLists();
                         });
                         a.appendChild(b);
                     }
                 }
-        
+
                 // If no match found, show "No results found"
                 if (!found) {
                     let b = document.createElement("DIV");
@@ -86,12 +86,12 @@
                     a.appendChild(b);
                 }
             });
-        
+
             // Handle keyboard navigation
             inp.addEventListener("keydown", function (e) {
                 var x = document.getElementById(this.id + "-autocomplete-list");
                 if (x) x = x.getElementsByTagName("div");
-        
+
                 if (e.keyCode == 40) {
                     // Arrow DOWN
                     currentFocus++;
@@ -108,7 +108,7 @@
                     }
                 }
             });
-        
+
             function addActive(x) {
                 if (!x) return false;
                 removeActive(x);
@@ -116,13 +116,13 @@
                 if (currentFocus < 0) currentFocus = x.length - 1;
                 x[currentFocus].classList.add("autocomplete-active");
             }
-        
+
             function removeActive(x) {
                 for (var i = 0; i < x.length; i++) {
                     x[i].classList.remove("autocomplete-active");
                 }
             }
-        
+
             function closeAllLists(elmnt) {
                 var x = document.getElementsByClassName("autocomplete-items");
                 for (var i = 0; i < x.length; i++) {
@@ -131,7 +131,7 @@
                     }
                 }
             }
-        
+
             // Close when clicking outside
             $(document).on('click', function (event) {
                 if (!$(event.target).closest("#tf-apartment-location").length) {
@@ -139,7 +139,7 @@
                 }
             });
         }
-        
+
 
         /**
          * Ajax apartment booking
@@ -619,7 +619,7 @@
         if (apartment_location_input) {
             tourfic_autocomplete(apartment_location_input, apartment_locations);
         }
-       
+
         /**
          * Apartment Min and Max Range
          * @author Foysal
@@ -850,7 +850,7 @@
                 $(this).addClass('tf-apartment-show-less');
             }
         });
-        
+
         $('body').on('click', '.tf-apartment-show-less', function (e) {
             if ($(this).siblings('.tf-full-description')) {
                 $(this).siblings('.tf-full-description').hide();
@@ -859,14 +859,14 @@
                 $(this).removeClass('tf-apartment-show-less');
             }
         });
-        
+
         $('.tf-single-review.tf_apartment .tf-single-details').each(function (index, val) {
             if (index > 1) {
                 $(this).hide();
             }
         });
 
-        $(".tf-apaartment-show-all").on('click', function (e) { 
+        $(".tf-apaartment-show-all").on('click', function (e) {
             $('.tf-single-review.tf_apartment .tf-single-details').each(function (index, val) {
                 $(val).show();
             });
@@ -895,7 +895,7 @@
 (() => {
 (function ($, win) {
     $(document).ready(function () {
-       
+
         // Create an instance of Notyf
         const notyf = new Notyf({
             ripple: true,
@@ -931,7 +931,7 @@
             return carPartialPaymentSelection || 'no';
         }
 
-        
+
         // FAQ Accordion
         $('.tf-car-faq-section .tf-faq-head').on("click", function () {
             var $this = $(this);
@@ -962,7 +962,7 @@
                 return String( $(this).data('menu') || $(this).attr('data-menu') ).trim() === key;
             }).addClass('active');
         });
-        
+
         // Car Location Autocomplete
 
         function tourfic_car_autocomplete(inp, arr) {
@@ -1128,13 +1128,13 @@
         if (car_dropoff_input) {
             tourfic_car_autocomplete(car_dropoff_input, car_locations);
         }
-        
+
         $(".tf-booking-popup-header .tf-close-popup").on("click", function (e) {
             e.preventDefault();
             $('.tf-car-booking-popup').hide();
         });
 
-       
+
 
 
         /*
@@ -1266,7 +1266,7 @@
 
         const BookingVallidation = (booking) => {
             let hasErrors = [];
-            
+
             $('.error-text').text("");
             booking.find('.tf-single-field').each(function () {
                 $(this).find('input, select').each(function () {
@@ -1316,11 +1316,11 @@
                     return a.nodeName.startsWith('data-required');
                 }).length
             })
-            
+
             protections.each(function (i, protection) {
 
                 if ( $(protection).data("required") ) {
-                    
+
                     if (! $(protection).is(':checked')) {
                         response.push(true);
                     } else {
@@ -1339,13 +1339,13 @@
             }
         };
         $('body').on('click touchstart', '.booking-process', function (e) {
-            
+
             if (e.type === 'touchstart') {
                 $(this).off('click');
             }
             let $this = $(this);
             setCarPartialPayment($this);
-            
+
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
                 return $(this).val();
             }).get();
@@ -1383,7 +1383,7 @@
                 });
 
             }
-    
+
             if($this.hasClass('tf-final-step')){
                 var pickup = $('#tf_pickup_location').val();
                 let dropoff = $('#tf_dropoff_location').val();
@@ -1421,7 +1421,7 @@
 
             let protections = $('input[name="protections[]"]');
 
-            
+
             let validationProtections = protectionValidation(protections);
 
             if( validationProtections ){
@@ -1670,7 +1670,7 @@
                     travellerData[name].push($(this).val());
                 });
             }
-    
+
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
             let partial_payment = getCarPartialPayment($this);
@@ -1685,7 +1685,7 @@
             }).get();
 
             let protections = $('input[name="protections[]"]');
-            
+
             let validationProtections = protectionValidation(protections);
 
             if( validationProtections ){
@@ -1706,7 +1706,7 @@
                 partial_payment: partial_payment,
                 travellerData: travellerData
             };
-            
+
             $.ajax({
                 url: tf_params.ajax_url,
                 type: 'POST',
@@ -1905,7 +1905,7 @@
                 var $wpAdminBar = $('#wpadminbar');
                 var $header = $('header');
                 var $desktopHeader = $('.tft-header-desktop');
-                
+
                 var targetOffset = $target.offset().top;
                 var targetHeight = $target.outerHeight();
                 var targetBottom = targetOffset + targetHeight;
@@ -1915,17 +1915,17 @@
                 // Calculate heights
                 var wpAdminBarHeight = $wpAdminBar.length ? $wpAdminBar.outerHeight() : 0;
                 var headerHeight = $header.length ? $header.outerHeight() : 0;
-                
+
                 if($header.hasClass('tf-navbar-shrink')) {
                     headerHeight = $header.outerHeight();
                 }else {
                     headerHeight = 0;
                 }
-                
+
                 // Total offset is admin bar + header heights
                 var totalOffset = wpAdminBarHeight + headerHeight;
                 $bookingBar.css('top', totalOffset + 'px');
-                
+
                 // Adjust scroll position check to account for the total offset
                 if (scrollPosition + totalOffset > targetBottom) {
                     $bookingBar.fadeIn(function () {
@@ -1936,7 +1936,7 @@
                     });
                 } else {
                     $bookingBar.fadeOut(function () {
-                        $header.css("box-shadow", ""); 
+                        $header.css("box-shadow", "");
                         $desktopHeader.css("box-shadow", "");
                     });
                 }
@@ -1945,7 +1945,7 @@
 
         // Back to Booking Form
         $('body').on('click', '.tf-back-to-booking', function (e) {
-            e.preventDefault(); 
+            e.preventDefault();
             $('.tf-single-booking-bar').fadeOut();
             var bookingBarHeight = $('.tf-single-booking-bar').outerHeight() || 0;
             var $wpAdminBar = $('#wpadminbar');
@@ -1953,11 +1953,11 @@
             var wpAdminBarHeight = $wpAdminBar.length ? $wpAdminBar.outerHeight() : 0;
             var headerHeight = $header.length ? $header.outerHeight() : 0;
             var totalOffset = wpAdminBarHeight + headerHeight;
-            
+
             $('html, body').animate({
                 scrollTop: $('.tf-date-select-box').offset().top - totalOffset
-            }, 1000); 
-        });     
+            }, 1000);
+        });
 
         // Social Share
         $('.tf-single-template__one .tf-share-toggle').on("click", function (e) {
@@ -1969,7 +1969,7 @@
         // Instructions showing
         $('body').on('click', '.tf-instraction-showing', function (e) {
             $('.tf-car-instraction-popup').css('display', 'flex');
-        });   
+        });
 
         // Instructions Popup Close
         $(".tf-instraction-popup-header .tf-close-popup").on("click touchstart", function (e) {
@@ -2014,13 +2014,13 @@
             let total_price = 0;
             let prev_total = parseFloat($("#tf_total_proteciton_price").val()) || 0; // Parse as float, default to 0 if empty
             let single_price = parseFloat($(this).parent().parent().find('#tf_single_protection_price').val()) || 0; // Parse as float
-        
+
             if ($(this).is(':checked')) {
                 total_price = prev_total + single_price;
             } else {
                 total_price = prev_total - single_price;
             }
-        
+
             // Update total and display it
             $('#tf_total_proteciton_price').val(total_price.toFixed(2)); // Format as float with 2 decimal places
             $('#tf_proteciton_subtotal').text(tfFormatCarProtectionPrice(total_price));
@@ -2064,11 +2064,11 @@
 function convertTo24HourFormat(timeStr) {
     const date = new Date("1970-01-01T" + timeStr);
     if (!isNaN(date.getTime())) {
-        return date.toTimeString().split(' ')[0].substring(0, 5); 
+        return date.toTimeString().split(' ')[0].substring(0, 5);
     }
 
     const parts = timeStr.match(/(\d{1,2}):(\d{2})\s?(AM|PM)/i);
-    if (!parts) return timeStr; 
+    if (!parts) return timeStr;
 
     let hour = parseInt(parts[1], 10);
     const minute = parts[2];
@@ -2097,6 +2097,23 @@ function convertTo24HourFormat(timeStr) {
                 y: 'bottom',
             },
         });
+
+        function tfSplitDateRange(value, singleDateAsRange = true) {
+            const normalizedValue = String(value || '').trim().replace(/\s+/g, ' ');
+            if (!normalizedValue) {
+                return ['', ''];
+            }
+
+            const dates = normalizedValue.match(/\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2}|\d{1,2}[\/.-]\d{1,2}[\/.-]\d{4}/g);
+            if (dates && dates.length >= 2) {
+                return [dates[0].trim(), dates[1].trim()];
+            }
+            if (dates && dates.length === 1) {
+                return [dates[0].trim(), singleDateAsRange ? dates[0].trim() : ''];
+            }
+
+            return [normalizedValue, singleDateAsRange ? normalizedValue : ''];
+        }
 
         /**
          * Hotel room availability ajax filter
@@ -2282,13 +2299,12 @@ function convertTo24HourFormat(timeStr) {
             var children_ages = $('input[name=children_ages]').val();
             if(single_room == 1){
                 var check_in_out_date = $(this).closest('.tf-booking-form').find('input[name=check-in-out-date]').val();
-                var check_in_date = check_in_out_date.split(' - ')[0];
-                var check_out_date = check_in_out_date.split(' - ')[1];
+                var [check_in_date, check_out_date] = tfSplitDateRange(check_in_out_date);
                 var adult = $(this).closest('.tf-booking-form').find('input[name=adult]').val();
                 var child = $(this).closest('.tf-booking-form').find('input[name=childrens]').val();
                 var room = $(this).closest('.tf-booking-form').find('[name=room]').val();
                 var deposit = $(this).closest('.tf-room').find('input[name=make_deposit]').is(':checked');
-                
+
             } else {
                 var adult = $('input[name=adult]').val();
                 var child = $('input[name=child]').val();
@@ -2302,7 +2318,7 @@ function convertTo24HourFormat(timeStr) {
                     var deposit = $this.closest('.tf-room').find('input[name=make_deposit]').is(':checked');
                 }
             }
-            
+
             var airport_service = $this.closest('.tf-withoutpayment-popup').find('[name="airport_service"]').val();
 
             let selectedExtras = [];
@@ -2395,7 +2411,7 @@ function convertTo24HourFormat(timeStr) {
          * Fancybox
          */
 
-   
+
         $('[data-fancybox="hotel-vide"]').fancybox({
             loop: true,
             buttons: [
@@ -2431,8 +2447,8 @@ function convertTo24HourFormat(timeStr) {
         $('[data-fancybox="hotel-gallery"]').fancybox({
             loop: true,
             touch: false
-        }); 
-  
+        });
+
 
         /**
          * Hotel slider
@@ -2491,7 +2507,7 @@ function convertTo24HourFormat(timeStr) {
             let form = $(this),
                 submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
-            
+
             formData.append('action', 'tf_hotel_search');
             formData.append('_nonce', tf_params.nonce);
 
@@ -2689,29 +2705,29 @@ function convertTo24HourFormat(timeStr) {
         $('#tf-destination-adv').on("click", function (e) {
             $(".tf-hotel-locations").addClass('tf-locations-show');
         });
-    
+
         $('#tf-destination-adv').on("keyup", function (e) {
             var location = $(this).val();
             $("#tf-place-destination").val(location);
         });
-    
+
         $('#tf-location').on("keyup", function (e) {
             var tf_location = $(this).val();
             $("#tf-search-hotel").val(tf_location);
         });
 
-    
+
         $('#ui-id-1').on("click", "li", function (e) {
-    
+
             var dest_name = $(this).attr("data-name");
             var dest_slug = $(this).attr("data-slug");
-    
+
             $(".tf-preview-destination").val(dest_name);
             $("#tf-place-destination").val(dest_slug);
-    
+
             setTimeout(function () {
                 $(".tf-hotel-locations").removeClass('tf-locations-show');
-            }, 100); 
+            }, 100);
         });
         $('body').on('click', function (event) {
             if (!$(event.target).closest("#tf-destination-adv, #ui-id-1").length) {
@@ -2738,13 +2754,12 @@ function convertTo24HourFormat(timeStr) {
             var post_id = $('input[name=post_id]').val();
             if(single_room == 1){
                 var check_in_out_date = $this.closest('.tf-booking-form').find('input[name=check-in-out-date]').val();
-                var check_in_date = check_in_out_date.split(' - ')[0];
-                var check_out_date = check_in_out_date.split(' - ')[1];
+                var [check_in_date, check_out_date] = tfSplitDateRange(check_in_out_date);
                 var adult = $this.closest('.tf-booking-form').find('input[name=adult]').val();
                 var child = $this.closest('.tf-booking-form').find('input[name=childrens]').val();
                 var room = $this.closest('.tf-booking-form').find('[name=room]').val();
                 var deposit = $this.closest('.tf-room').find('input[name=make_deposit]').is(':checked');
-                
+
             } else {
                 var roomnumber = $this.closest('.reserve').find('select[name=hotel_room_selected]').val();
                 if (roomnumber == 0) {
@@ -2769,7 +2784,7 @@ function convertTo24HourFormat(timeStr) {
                     var deposit = $this.closest('.tf-room').find("input[name=hotel_room_depo]").val();
                 }
             }
-            
+
             var room_id = $this.closest('.tf-room').find('input[name=room_id]').val();
             var unique_id = $this.closest('.tf-room').find('input[name=unique_id]').val();
             var option_id = $this.closest('.tf-room').find('[name=option_id]').val();
@@ -3020,7 +3035,7 @@ function convertTo24HourFormat(timeStr) {
             let form = $(this),
                 submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
-            
+
             formData.append('action', 'tf_room_search');
             formData.append('_nonce', tf_params.nonce);
 
@@ -3069,7 +3084,7 @@ function convertTo24HourFormat(timeStr) {
             let allowed_locales = ['ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN' ];
 
             if( jQuery.inArray(locale, allowed_locales) !== -1 ) {
-                
+
                 switch (locale) {
                     case "bn_BD":
                         locale = 'bn';
@@ -3109,6 +3124,29 @@ function convertTo24HourFormat(timeStr) {
         // let locale_zone = tf_flatpickr_locale();
 
         window.flatpickr.l10ns[tf_flatpickr_locale()].firstDayOfWeek = tf_params.tour_form_data.first_day_of_week;
+        window.flatpickr.l10ns[tf_flatpickr_locale()].rangeSeparator = ' - ';
+
+        function tfSplitDateRange(value, singleDateAsRange = true) {
+            const normalizedValue = String(value || '').trim().replace(/\s+/g, ' ');
+            if (!normalizedValue) {
+                return ['', ''];
+            }
+
+            const dates = normalizedValue.match(/\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2}|\d{1,2}[\/.-]\d{1,2}[\/.-]\d{4}/g);
+            if (dates && dates.length >= 2) {
+                return [dates[0].trim(), dates[1].trim()];
+            }
+            if (dates && dates.length === 1) {
+                return [dates[0].trim(), singleDateAsRange ? dates[0].trim() : ''];
+            }
+
+            return [normalizedValue, singleDateAsRange ? normalizedValue : ''];
+        }
+
+        function tfNormalizeDateRange(value) {
+            const [startDate, endDate] = tfSplitDateRange(value, false);
+            return endDate ? `${startDate} - ${endDate}` : startDate;
+        }
 
         // Create an instance of Notyf
         const notyf = new Notyf({
@@ -3130,6 +3168,11 @@ function convertTo24HourFormat(timeStr) {
             e.preventDefault();
 
             var $this = $(this);
+            var travelerValidation = { hasErrors: false };
+            $this.trigger('tf_validate_tour_traveler_fields', [travelerValidation]);
+            if (travelerValidation.hasErrors) {
+                return false;
+            }
 
             var formData = new FormData(this);
             formData.append('action', 'tf_tours_booking');
@@ -3263,7 +3306,7 @@ function convertTo24HourFormat(timeStr) {
             e.stopPropagation();
             var id = $(this).attr("id");
             $(".tour-itinerary-sleep").each(function () {
-                var elementId = $(this).attr("id"); 
+                var elementId = $(this).attr("id");
                 if (id === elementId) {
                     $(this).fadeIn();
                 } else {
@@ -3271,8 +3314,8 @@ function convertTo24HourFormat(timeStr) {
                 }
             });
         });
-        
-    
+
+
         // Hide when clicking outside
         $(document).on("click", function (e) {
             if (!$(e.target).closest(".tour-itinerary-sleep, .ininerary-other-info li .fa-info-circle, .tf-itinerary-single-meta li .fa-info-circle").length) {
@@ -3602,7 +3645,7 @@ function convertTo24HourFormat(timeStr) {
                             $('.tf-search-date-wrapper').removeClass('tf-box-loading');
                         }
                         if($('.tf-max-capacity-count')){
-                            $('.tf-max-capacity-count').html(response.data.max_capacity); 
+                            $('.tf-max-capacity-count').html(response.data.max_capacity);
                         }
                     }
                 }
@@ -3690,7 +3733,7 @@ function convertTo24HourFormat(timeStr) {
             var tf_location = $(this).val();
             $("#tf-search-tour").val(tf_location);
         });
-    
+
         $('#ui-id-2 li').on("click", function (e) {
             var dest_name = $(this).attr("data-name");
             var dest_slug = $(this).attr("data-slug");
@@ -3721,17 +3764,17 @@ function convertTo24HourFormat(timeStr) {
             var sticky = $('.tf-tour-booking-wrap'),
                 scroll = $(window).scrollTop(),
                 footer = $('footer');
-        
+
             if (footer.length === 0) {
-                return; 
+                return;
             }
-        
+
             var footerOffset = footer.offset().top,
                 windowHeight = $(window).height();
-        
+
             if (scroll >= 800) {
                 if (scroll + windowHeight >= footerOffset) {
-                    sticky.removeClass('tf-tours-fixed'); 
+                    sticky.removeClass('tf-tours-fixed');
                 } else {
                     sticky.addClass('tf-tours-fixed');
                 }
@@ -3750,17 +3793,17 @@ function convertTo24HourFormat(timeStr) {
                 var sticky = $('.tf-single-template__one .tf_tours_bottom_booking .tf-bottom-booking-bar'),
                     scroll = $(window).scrollTop(),
                     footer = $('footer');
-            
+
                 if (footer.length === 0 || bookingBox.length === 0 || sticky.length === 0) {
-                    return; 
+                    return;
                 }
                 let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
                 var footerOffset = footer.offset().top,
                     windowHeight = $(window).height();
-            
+
                 if (scroll >= boxOffset) {
                     if (scroll + windowHeight >= footerOffset) {
-                        sticky.removeClass('active'); 
+                        sticky.removeClass('active');
                     } else {
                         sticky.addClass('active');
                     }
@@ -3779,17 +3822,17 @@ function convertTo24HourFormat(timeStr) {
                 var sticky = $('.tf-single-template__two .tf_tours_bottom_booking .tf-bottom-booking-bar'),
                     scroll = $(window).scrollTop(),
                     footer = $('footer');
-            
+
                 if (footer.length === 0) {
-                    return; 
+                    return;
                 }
                 let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
                 var footerOffset = footer.offset().top,
                     windowHeight = $(window).height();
-            
+
                 if (scroll >= boxOffset) {
                     if (scroll + windowHeight >= footerOffset) {
-                        sticky.removeClass('active'); 
+                        sticky.removeClass('active');
                     } else {
                         sticky.addClass('active');
                     }
@@ -3815,10 +3858,10 @@ function convertTo24HourFormat(timeStr) {
                 }
             }
           }
-        
+
           // Run on page load
           applyResponsiveClass();
-        
+
           // Run on window resize
           $(window).resize(function () {
             applyResponsiveClass();
@@ -3870,18 +3913,18 @@ function convertTo24HourFormat(timeStr) {
             altInput: true,
             altFormat: tf_params.tour_form_data.date_format,
             locale: tf_flatpickr_locale(),
-            
+
             onReady: function (selectedDates, dateStr, instance) {
-                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                instance.element.value = tfNormalizeDateRange(dateStr);
+                instance.altInput.value = tfNormalizeDateRange(instance.altInput.value);
             },
 
             onChange: function (selectedDates, dateStr, instance) {
 
-                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                instance.altInput.value = tfNormalizeDateRange(instance.altInput.value);
                 $(".tours-check-in-out").val(instance.altInput.value);
-                $('.tours-check-in-out[type="hidden"]').val(dateStr.replace(/[a-z]+/g, '-'));
-                
+                $('.tours-check-in-out[type="hidden"]').val(tfNormalizeDateRange(dateStr));
+
                 // Initialize empty object for times
                 let times = {};
                 const selectedDate = selectedDates[0];
@@ -3919,22 +3962,22 @@ function convertTo24HourFormat(timeStr) {
 
                 populateTimeSelect(times);
 
-                
+
                 if(tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
                     dateSetToFields(selectedDates, instance);
                 }
             },
 
         };
-        
-        
+
+
         if (!tf_params.tour_form_data.is_all_unavailable && typeof tf_params.tour_form_data.tour_availability === 'object' && tf_params.tour_form_data.tour_availability && Object.keys(tf_params.tour_form_data.tour_availability).length > 0) {
             tour_date_options.minDate = "today";
             tour_date_options.disableMobile = "true";
             tour_date_options.enable = Object.entries(tf_params.tour_form_data.tour_availability)
             .filter(([dateRange, data]) => data.status === "available")
             .map(([dateRange, data]) => {
-                const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
+                const [fromRaw, toRaw] = tfSplitDateRange(dateRange);
 
                 const today = new Date();
                 const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
@@ -3954,7 +3997,7 @@ function convertTo24HourFormat(timeStr) {
             tour_date_options.disable = Object.entries(tf_params.tour_form_data.tour_availability)
             .filter(([dateRange, data]) => data.status === "unavailable")
             .map(([dateRange, data]) => {
-                const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
+                const [fromRaw, toRaw] = tfSplitDateRange(dateRange);
 
                 const today = new Date();
                 const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
@@ -4048,7 +4091,7 @@ function convertTo24HourFormat(timeStr) {
 
         if ($('#tour-location').length) {
             const map = L.map('tour-location').setView([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], tf_params.tour_form_data.location_zoom);
-            
+
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
@@ -4103,20 +4146,20 @@ function convertTo24HourFormat(timeStr) {
 
             return [normalizedValue, singleDateAsRange ? normalizedValue : ''];
         }
-        
+
         // Add the classes to the body element
         if (tf_params.body_classes && tf_params.body_classes.length > 0) {
             $.each(tf_params.body_classes, function(index, className) {
                 $('body').addClass(className);
             });
         }
-        
+
 
         /*
          * AJAX load for range filter to prevent performance issue.
          * @author Sunvi
         */
-       
+
         if( $(".widget_tf_price_filters").length > 0 || $("#tf-booking-search-tabs").length > 0 ){
 
             let urlParams = new URLSearchParams(window.location.search);
@@ -4161,7 +4204,7 @@ function convertTo24HourFormat(timeStr) {
                                 if ( parseInt( response.data?.tf_tours?.max ) > 0 ) {
                                     $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
                                 }
-                        
+
                                 // Tours Min and Max Range in Search Result
                                 var tf_search_page_params = new window.URLSearchParams(window.location.search);
                                 let tf_tours_search_range = {
@@ -4216,7 +4259,7 @@ function convertTo24HourFormat(timeStr) {
                                 if ( parseInt( response.data?.tf_hotel?.max ) > 0 ) {
                                     $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
                                 }
-                        
+
                                 // Hotel Min and Max Range in Search Result
                                 var tf_search_page_params = new window.URLSearchParams(window.location.search);
                                 let tf_hotel_search_range = {
@@ -4327,7 +4370,7 @@ function convertTo24HourFormat(timeStr) {
                                     min: parseInt(response.data?.tf_carrental?.min),
                                     max: parseInt(response.data?.tf_carrental?.max)
                                 };
-                
+
                                 var tf_search_page_params = new window.URLSearchParams(window.location.search);
                                 let tf_car_search_seat_range = {
                                     range: {
@@ -4377,11 +4420,11 @@ function convertTo24HourFormat(timeStr) {
                                         makeFilter();
                                     }
                                 };
-                                
+
                                 if ( response.data?.tf_room?.min != 0 && response.data?.tf_room?.max != 0) {
                                     $('.tf-room-filter-range').alRangeSlider(tf_room_range_options);
                                 }
-                        
+
                                 // room Min and Max Range in Search Result
                                 var tf_search_page_params = new window.URLSearchParams(window.location.search);
                                 let tf_room_search_range = {
@@ -4493,7 +4536,7 @@ function convertTo24HourFormat(timeStr) {
             let pickup_slug = $('#tf_pickup_location_id').val();
             let dropoff_slug = $('#tf_dropoff_location_id').val();
             let builderSettings = $('#tf-builder-settings').text();
-            
+
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
             formData.append('_nonce', tf_params.nonce);
@@ -4644,8 +4687,8 @@ function convertTo24HourFormat(timeStr) {
             e.preventDefault();
             page = tf_page_pagination_number($(this).clone());
             makeFilter(page);
-        }); 
-        
+        });
+
 
         // Search Result Ajax pagination
         $(document).on('click', 'tf_tax_posts_navigation a.page-numbers', function (e) {
@@ -4723,7 +4766,7 @@ function convertTo24HourFormat(timeStr) {
             // Reset checkboxes
             $('[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year],[name*=car_brand],[name*=car_transmission],[name*=carplay_android_auto_filter]').prop('checked', false);
             $('[name*=car_brand],[name*=car_transmission],[name*=carplay_android_auto_filter]').closest('.tf-filter-item').removeClass('active');
-            
+
             // Reset price sliders
             if ($('.tf-hotel-filter-range').length > 0) {
                 $('.tf-hotel-filter-range').alRangeSlider('update', {
@@ -4759,7 +4802,7 @@ function convertTo24HourFormat(timeStr) {
                     values: { from: window.tf_price_ranges.min_seat, to: window.tf_price_ranges.max_seat },
                 });
             }
-            
+
             makeFilter();
             $(".filter-reset-btn").hide();
 
@@ -5171,7 +5214,7 @@ function convertTo24HourFormat(timeStr) {
                 const inactiveClasses = inactiveIcon.split(' ');
                 targetNode.removeClass(inactiveClasses.join(' '));
             }
-            
+
             // Add active icon classes
             const activeIcon = targetNode.data('active-icon');
             if (activeIcon) {
@@ -5190,7 +5233,7 @@ function convertTo24HourFormat(timeStr) {
                 const activeClasses = activeIcon.split(' ');
                 targetNode.removeClass(activeClasses.join(' '));
             }
-            
+
             // Add inactive icon classes
             const inactiveIcon = targetNode.data('icon');
             if (inactiveIcon) {
@@ -5236,7 +5279,7 @@ function convertTo24HourFormat(timeStr) {
                                 notyf.success({
                                     message: response.data,
                                 });
-                            }, 400); 
+                            }, 400);
                         }
                     }
                 });
@@ -5248,7 +5291,7 @@ function convertTo24HourFormat(timeStr) {
                         message: tf_params.wishlist_add
                     });
                     wishIconFill(targetNode);
-                    
+
                     setTimeout(function() {
                         if (window.wishlistNotification) {
                             notyf.dismiss(window.wishlistNotification);
@@ -6390,13 +6433,18 @@ function convertTo24HourFormat(timeStr) {
             return true;
         }
 
-        $('body').on('click', '.tf-traveller-error', function (e) {
+        function tfValidateTourTravelerFields($trigger) {
             let hasErrors = [];
             tf_firstErrorElement = null; // reset before validation
-            const $button = $(this);
+            const $button = $trigger && $trigger.length ? $trigger : $();
             const bookingState = tfGetTourBookingState($button);
             const $popup = tfResolveTourPopup($button);
             const referenceDate = bookingState.checkInDate || '';
+
+            if (!$popup.length) {
+                tf_hasErrorsFlag = false;
+                return false;
+            }
 
             $popup.find('.error-text').text("").removeClass('error-visible');
             $popup.find('.tf-single-travel').each(function (travelerIndex) {
@@ -6449,9 +6497,27 @@ function convertTo24HourFormat(timeStr) {
                         tf_firstErrorElement.focus(); // focus after scrolling
                     });
                 }
-                return false;
+                return true;
             }
             tf_hasErrorsFlag = false;
+            return false;
+        }
+
+        $('body').on('click', '.tf-traveller-error', function (e) {
+            if (tfValidateTourTravelerFields($(this))) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                return false;
+            }
+        });
+
+        $('body').on('tf_validate_tour_traveler_fields', 'form.tf_tours_booking', function (e, validationResult) {
+            const $form = $(this);
+            const $trigger = $form.find('.tf-traveller-error').first();
+
+            if (validationResult) {
+                validationResult.hasErrors = tfValidateTourTravelerFields($trigger.length ? $trigger : $form);
+            }
         });
 
         // Booking Confirmation Form Validation
@@ -6556,7 +6622,7 @@ function convertTo24HourFormat(timeStr) {
             // Find the previous available step from active_steps
             let currentIndex = stepsArray.indexOf(currentStep);
             let step = (currentIndex > 0) ? stepsArray[currentIndex - 1] : 1;
-            
+
             // let step = $(this).attr("data-step");
             if (step == 1) {
                 $popup.find('.tf-booking-step').removeClass("active");
@@ -7103,10 +7169,10 @@ function convertTo24HourFormat(timeStr) {
 
         // Copy button
         $('a#share_link_button').on("click", function (e) {
-    
+
             e.preventDefault();
             $(this).addClass('copied');
-           
+
             setTimeout(function () {
                 $('a#share_link_button').removeClass('copied');
             }, 3000);
@@ -7124,7 +7190,7 @@ function convertTo24HourFormat(timeStr) {
                 document.execCommand("copy");
                 document.body.removeChild(tempInput);
             }
-       
+
         });
 
         /*
@@ -7423,7 +7489,7 @@ function convertTo24HourFormat(timeStr) {
         */
         function adjustPadding() {
             var hotelsContainer = $('.tf-archive-template__three .tf-archive-hotels, .tf-archive-details-wrap .tf-archive-hotels');
-        
+
             if (window.innerWidth > 768) {
                 if (hotelsContainer[0].scrollHeight > hotelsContainer.height()) {
                     hotelsContainer.css('padding-right', '16px');
@@ -7434,7 +7500,7 @@ function convertTo24HourFormat(timeStr) {
                 hotelsContainer.css('padding-right', '0px');
             }
         }
-        
+
         if ($('.tf-archive-template__three .tf-archive-hotels').length) {
             adjustPadding();
             $(window).on('resize', adjustPadding);
@@ -7902,7 +7968,7 @@ function updateMaxWidth(inputField) {
 
     // Get the window width
     let windowWidth = jQuery(window).width();
-    
+
     // Adjust max width based on window width
     let newMaxWidth;
     if (windowWidth < 1025) {

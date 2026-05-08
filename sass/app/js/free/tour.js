@@ -47,6 +47,29 @@
         // let locale_zone = tf_flatpickr_locale();
 
         window.flatpickr.l10ns[tf_flatpickr_locale()].firstDayOfWeek = tf_params.tour_form_data.first_day_of_week;
+        window.flatpickr.l10ns[tf_flatpickr_locale()].rangeSeparator = ' - ';
+
+        function tfSplitDateRange(value, singleDateAsRange = true) {
+            const normalizedValue = String(value || '').trim().replace(/\s+/g, ' ');
+            if (!normalizedValue) {
+                return ['', ''];
+            }
+
+            const dates = normalizedValue.match(/\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2}|\d{1,2}[\/.-]\d{1,2}[\/.-]\d{4}/g);
+            if (dates && dates.length >= 2) {
+                return [dates[0].trim(), dates[1].trim()];
+            }
+            if (dates && dates.length === 1) {
+                return [dates[0].trim(), singleDateAsRange ? dates[0].trim() : ''];
+            }
+
+            return [normalizedValue, singleDateAsRange ? normalizedValue : ''];
+        }
+
+        function tfNormalizeDateRange(value) {
+            const [startDate, endDate] = tfSplitDateRange(value, false);
+            return endDate ? `${startDate} - ${endDate}` : startDate;
+        }
 
         // Create an instance of Notyf
         const notyf = new Notyf({
@@ -68,6 +91,11 @@
             e.preventDefault();
 
             var $this = $(this);
+            var travelerValidation = { hasErrors: false };
+            $this.trigger('tf_validate_tour_traveler_fields', [travelerValidation]);
+            if (travelerValidation.hasErrors) {
+                return false;
+            }
 
             var formData = new FormData(this);
             formData.append('action', 'tf_tours_booking');
@@ -810,15 +838,15 @@
             locale: tf_flatpickr_locale(),
             
             onReady: function (selectedDates, dateStr, instance) {
-                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                instance.element.value = tfNormalizeDateRange(dateStr);
+                instance.altInput.value = tfNormalizeDateRange(instance.altInput.value);
             },
 
             onChange: function (selectedDates, dateStr, instance) {
 
-                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                instance.altInput.value = tfNormalizeDateRange(instance.altInput.value);
                 $(".tours-check-in-out").val(instance.altInput.value);
-                $('.tours-check-in-out[type="hidden"]').val(dateStr.replace(/[a-z]+/g, '-'));
+                $('.tours-check-in-out[type="hidden"]').val(tfNormalizeDateRange(dateStr));
                 
                 // Initialize empty object for times
                 let times = {};
@@ -872,7 +900,7 @@
             tour_date_options.enable = Object.entries(tf_params.tour_form_data.tour_availability)
             .filter(([dateRange, data]) => data.status === "available")
             .map(([dateRange, data]) => {
-                const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
+                const [fromRaw, toRaw] = tfSplitDateRange(dateRange);
 
                 const today = new Date();
                 const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
@@ -892,7 +920,7 @@
             tour_date_options.disable = Object.entries(tf_params.tour_form_data.tour_availability)
             .filter(([dateRange, data]) => data.status === "unavailable")
             .map(([dateRange, data]) => {
-                const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
+                const [fromRaw, toRaw] = tfSplitDateRange(dateRange);
 
                 const today = new Date();
                 const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();

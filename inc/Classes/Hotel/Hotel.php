@@ -316,7 +316,7 @@ class Hotel {
         $adults_per_room  = empty( $form_adult ) ? 0 : ceil( intval( $form_adult ) / $requested_rooms );
         $childs_per_room  = empty( $form_child ) ? 0 : ceil( intval( $form_child ) / $requested_rooms );
         if ( $form_check_in_out ) {
-            list( $form_start, $form_end ) = explode( ' - ', $form_check_in_out );
+            list( $form_start, $form_end ) = tf_split_date_range( $form_check_in_out );
         }
 
         // Custom avail
@@ -2818,7 +2818,7 @@ class Hotel {
             </form>
 		<?php } elseif ( $tf_hotel_selected_template == "design-2" ) { ?>
 			<?php
-			$check_in_out_dates = ! empty( $check_in_out ) ? array_map( 'trim', explode( '-', $check_in_out ) ) : [];
+			$check_in_out_dates = ! empty( $check_in_out ) ? tf_split_date_range( $check_in_out ) : [];
 			$default_check_in_date = ! empty( $check_in_out_dates[0] ) ? \DateTime::createFromFormat( 'Y/m/d', $check_in_out_dates[0] ) : null;
 			$default_check_out_date = ! empty( $check_in_out_dates[1] ) ? \DateTime::createFromFormat( 'Y/m/d', $check_in_out_dates[1] ) : null;
 			?>
@@ -2998,7 +2998,7 @@ class Hotel {
 								});
                                 dateSetToFields(selectedDates, instance);
                             },
-                            defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+                            defaultDate: <?php echo wp_json_encode( tf_split_date_range( $check_in_out ) ) ?>,
                         });
 
                         function dateSetToFields(selectedDates, instance) {
@@ -3227,7 +3227,7 @@ class Hotel {
 								return `${d1} - ${d2}`;
 							});
                         },
-                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+                        defaultDate: <?php echo wp_json_encode( tf_split_date_range( $check_in_out ) ) ?>,
 						<?php
 						// Flatpickr locale for translation
 						Helper::tf_flatpickr_locale();
@@ -3818,7 +3818,7 @@ class Hotel {
 		}
 
 		if ( ! empty( $check_in_out ) ) {
-			list( $tf_form_start, $tf_form_end ) = explode( ' - ', $check_in_out );
+			list( $tf_form_start, $tf_form_end ) = tf_split_date_range( $check_in_out );
 		}
 
 		if ( ! empty( $check_in_out ) ) {

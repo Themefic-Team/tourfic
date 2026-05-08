@@ -1055,7 +1055,7 @@ class Migrator {
 						$infants        = wc_get_order_item_meta( $item_key, 'Infants', true );
 						$datatype_check = preg_match( "/-/", $tour_date );
 						if ( ! empty( $tour_date ) && ! empty( $datatype_check ) ) {
-							list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
+							list( $tour_in, $tour_out ) = tf_split_date_range( $tour_date );
 						}
 						if ( ! empty( $tour_date ) && empty( $datatype_check ) ) {
 							$tour_in  = gmdate( "Y-m-d", strtotime( $tour_date ) );
