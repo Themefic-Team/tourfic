@@ -25,6 +25,10 @@ class Template_Builder {
         add_filter('template_include', array($this, 'tf_template_builder_custom_template'));
         add_action('save_post_tf_template_builder', [$this, 'enforce_template_on_save'], 20, 3);
         
+        // List table filters
+        add_action('restrict_manage_posts', array($this, 'tf_template_builder_filter_dropdowns'));
+        add_action('parse_query', array($this, 'tf_template_builder_filter_query'));
+        
         // Elementor-specific hooks
         if ( did_action( 'elementor/loaded' ) ) {
             add_filter('elementor/document/urls/edit', [$this, 'modify_elementor_edit_url'], 10, 2);
@@ -2203,6 +2207,145 @@ class Template_Builder {
         }
 
         return false;
+    }
+
+    public function tf_template_builder_filter_dropdowns() {
+        global $typenow;
+
+        if ($typenow === 'tf_template_builder') {
+            // Get all template builder posts to extract existing values and display only used filters
+            $args = array(
+                'post_type'      => 'tf_template_builder',
+                'posts_per_page' => -1,
+                'post_status'    => array('publish', 'draft', 'pending', 'future', 'private'),
+                'fields'         => 'ids',
+            );
+            $post_ids = get_posts($args);
+
+            $services       = array();
+            $types          = array();
+            $builders       = array();
+
+            $service_labels = [
+                'tf_hotel'     => esc_html__('Hotel', 'tourfic'),
+                'tf_tours'     => esc_html__('Tour', 'tourfic'),
+                'tf_apartment' => esc_html__('Apartment', 'tourfic'),
+                'tf_carrental' => esc_html__('Car Rental', 'tourfic'),
+                'tf_room'      => esc_html__('Room', 'tourfic'),
+            ];
+
+            $builder_labels = [
+                'bricks'    => esc_html__('Bricks', 'tourfic'),
+                'elementor' => esc_html__('Elementor', 'tourfic'),
+                'default'   => esc_html__('Default', 'tourfic'),
+            ];
+
+            foreach ($post_ids as $pid) {
+                $service = get_post_meta($pid, 'tf_template_service', true);
+                $type    = get_post_meta($pid, 'tf_template_type', true);
+                $builder = $this->tf_get_builder_type($pid);
+
+                if (!empty($service)) {
+                    $services[$service] = isset($service_labels[$service]) ? $service_labels[$service] : ucfirst($service);
+                }
+
+                if (!empty($type)) {
+                    $types[$type] = ucfirst($type);
+                }
+
+                if (!empty($builder)) {
+                    $builders[$builder] = isset($builder_labels[$builder]) ? $builder_labels[$builder] : ucfirst($builder);
+                }
+            }
+
+            // Output filter dropdowns
+            $this->render_filter_select('tf_template_service', esc_html__('Filter by Service', 'tourfic'), $services);
+            $this->render_filter_select('tf_template_type', esc_html__('Filter by Type', 'tourfic'), $types);
+            $this->render_filter_select('tf_template_builder_type', esc_html__('Filter by Builder', 'tourfic'), $builders);
+        }
+    }
+
+    private function render_filter_select($name, $placeholder, $options) {
+        $selected = isset($_GET[$name]) ? sanitize_text_field(wp_unslash($_GET[$name])) : '';
+        echo '<select name="' . esc_attr($name) . '">';
+        echo '<option value="">' . esc_html($placeholder) . '</option>';
+        foreach ($options as $value => $label) {
+            echo '<option value="' . esc_attr($value) . '" ' . selected($selected, $value, false) . '>' . esc_html($label) . '</option>';
+        }
+        echo '</select>';
+    }
+
+    public function tf_template_builder_filter_query($query) {
+        global $pagenow;
+
+        if (is_admin() && $pagenow === 'edit.php' && $query->is_main_query() && $query->get('post_type') === 'tf_template_builder') {
+            $meta_query = array();
+
+            $filters = array(
+                'tf_template_service',
+                'tf_template_type',
+            );
+
+            foreach ($filters as $filter) {
+                if (!empty($_GET[$filter])) {
+                    $meta_query[] = array(
+                        'key'     => $filter,
+                        'value'   => sanitize_text_field(wp_unslash($_GET[$filter])),
+                        'compare' => '=',
+                    );
+                }
+            }
+
+            // Builder type filter
+            if (!empty($_GET['tf_template_builder_type'])) {
+                $builder = sanitize_text_field(wp_unslash($_GET['tf_template_builder_type']));
+                if ($builder === 'bricks') {
+                    $meta_query[] = array(
+                        'key'   => '_bricks_editor_mode',
+                        'value' => 'bricks',
+                        'compare' => '=',
+                    );
+                } elseif ($builder === 'elementor') {
+                    $meta_query[] = array(
+                        'key'   => '_elementor_edit_mode',
+                        'value' => 'builder',
+                        'compare' => '=',
+                    );
+                } elseif ($builder === 'default') {
+                    $meta_query[] = array(
+                        'relation' => 'AND',
+                        array(
+                            'relation' => 'OR',
+                            array(
+                                'key' => '_bricks_editor_mode',
+                                'compare' => 'NOT EXISTS',
+                            ),
+                            array(
+                                'key' => '_bricks_editor_mode',
+                                'value' => 'bricks',
+                                'compare' => '!=',
+                            ),
+                        ),
+                        array(
+                            'relation' => 'OR',
+                            array(
+                                'key' => '_elementor_edit_mode',
+                                'compare' => 'NOT EXISTS',
+                            ),
+                            array(
+                                'key' => '_elementor_edit_mode',
+                                'value' => 'builder',
+                                'compare' => '!=',
+                            ),
+                        ),
+                    );
+                }
+            }
+
+            if (!empty($meta_query)) {
+                $query->set('meta_query', $meta_query);
+            }
+        }
     }
 
     private function tf_get_builder_type($post_id) {
