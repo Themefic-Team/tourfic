@@ -11728,6 +11728,7 @@ div#tf-destinationautocomplete-list div:before {
   font-size: 1rem;
   font-weight: 600;
   height: 48px;
+  line-height: inherit;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;

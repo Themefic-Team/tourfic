@@ -396,6 +396,7 @@
                     font-size: 1rem;
                     font-weight: 600;
                     height: 48px;
+                    line-height: inherit;
                     @include flexbox();
                     align-items: center;
                     justify-content: center;
