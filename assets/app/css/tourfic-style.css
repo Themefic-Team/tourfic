@@ -12852,9 +12852,6 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__one .tf-review-wrapper .tf-review-data p, .tf-single-template__one .tf-review-wrapper .tf-review-data li {
   text-transform: capitalize;
 }
-.tf-single-template__one .tf-review-wrapper .tf-review-data .tf-review-data-average {
-  background-color: var(--tf-filling-foreground);
-}
 .tf-single-template__one .tf-review-wrapper .tf-review-data .tf-review-data-average p {
   text-align: center;
   font-size: 1.875rem;
