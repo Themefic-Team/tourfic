@@ -117,6 +117,7 @@ use \Tourfic\App\TF_Review;
         'container' => 'yes',
         'tf_faq_icon_postion' => 'left',
         'faq_style' => 'style4',
+        'show_description' => 'yes',
     ]);
     
     \Tourfic\App\Templates\Components\Global\Single\Enquiry::render([

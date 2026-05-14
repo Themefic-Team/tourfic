@@ -27,7 +27,7 @@ class FAQ {
         $wrapper          = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';
         $container        = ! empty( $settings['container'] ) ? $settings['container'] : 'no';
         $show_title       = ! empty( $settings['show_title'] ) ? $settings['show_title'] : 'yes';
-        $show_description = ! empty( $settings['show_description'] ) ? $settings['show_description'] : 'yes';
+        $show_description = ! empty( $settings['show_description'] ) ? $settings['show_description'] : 'no';
 		$label_tag		 = ! empty( $settings['label_tag'] ) ? $settings['label_tag'] : 'span';
 
 		$faqs = [];
