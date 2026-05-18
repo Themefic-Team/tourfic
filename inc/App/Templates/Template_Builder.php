@@ -77,17 +77,38 @@ class Template_Builder {
     }
 
     private function get_bricks_preview_post_from_request() {
-        if ( empty( $_GET['tf_preview_post_id'] ) ) {
-            return false;
+        if ( ! empty( $_GET['tf_preview_post_id'] ) ) {
+            $preview_post_id = absint( wp_unslash( $_GET['tf_preview_post_id'] ) );
+            if ( $preview_post_id ) {
+                return get_post( $preview_post_id );
+            }
         }
 
-        $preview_post_id = absint( wp_unslash( $_GET['tf_preview_post_id'] ) );
-
-        if ( ! $preview_post_id ) {
-            return false;
+        if ( ! empty( $_GET['tf_archive_service'] ) ) {
+            $post_type = sanitize_key( $_GET['tf_archive_service'] );
+            
+            // Try to get a real post of this type for realistic preview
+            $args = [
+                'post_type'      => $post_type,
+                'posts_per_page' => 1,
+                'fields'         => 'ids',
+            ];
+            
+            $posts = get_posts( $args );
+            
+            if ( ! empty( $posts ) ) {
+                return get_post( $posts[0] );
+            }
+            
+            // Fallback to a mock post
+            $mock_post            = new \stdClass();
+            $mock_post->ID        = 0;
+            $mock_post->post_type = $post_type;
+            
+            return new \WP_Post( $mock_post );
         }
 
-        return get_post( $preview_post_id );
+        return false;
     }
 
     private function should_force_bricks_preview_context( $element_instance ) {
@@ -95,7 +116,7 @@ class Template_Builder {
             return false;
         }
 
-        if ( empty( $_GET['tf_preview_post_id'] ) ) {
+        if ( empty( $_GET['tf_preview_post_id'] ) && empty( $_GET['tf_archive_service'] ) ) {
             return false;
         }
 
