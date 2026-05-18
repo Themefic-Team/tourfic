@@ -720,20 +720,45 @@ if ( ! function_exists( 'tf_tour_process_traveler_document_fields' ) ) {
 	/**
 	 * Process traveler document uploads and preserve existing values.
 	 *
-	 * @param array $traveler_details Traveler details.
-	 * @param int   $post_id          Tour post ID.
-	 * @param array $files            Files array.
+	 * @param array $traveler_details          Traveler details.
+	 * @param int   $post_id                   Tour post ID.
+	 * @param array $files                     Files array.
+	 * @param array $expected_traveler_indexes Traveler indexes expected to have upload fields.
 	 * @return array|WP_Error
 	 */
-	function tf_tour_process_traveler_document_fields( $traveler_details, $post_id, $files = array() ) {
+	function tf_tour_process_traveler_document_fields(
+		$traveler_details,
+		$post_id,
+		$files = array(),
+		$expected_traveler_indexes = array()
+	) {
 		$file_fields = tf_tour_get_file_upload_fields();
 		if ( empty( $file_fields ) ) {
 			return $traveler_details;
 		}
 
-		foreach ( $traveler_details as $traveler_index => $traveler_data ) {
-			if ( ! is_array( $traveler_data ) ) {
-				continue;
+		$traveler_details = is_array( $traveler_details ) ? $traveler_details : array();
+		$files            = ! empty( $files ) ? $files : $_FILES; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$file_indexes     = ! empty( $files['traveller']['name'] ) && is_array( $files['traveller']['name'] )
+			? array_keys( $files['traveller']['name'] )
+			: array();
+		$traveler_indexes = array_values(
+			array_filter(
+				array_unique(
+					array_map(
+						'absint',
+						array_merge( array_keys( $traveler_details ), $file_indexes, $expected_traveler_indexes )
+					)
+				)
+			)
+		);
+
+		foreach ( $traveler_indexes as $traveler_index ) {
+			$traveler_data = ! empty( $traveler_details[ $traveler_index ] ) && is_array( $traveler_details[ $traveler_index ] )
+				? $traveler_details[ $traveler_index ]
+				: array();
+			if ( empty( $traveler_details[ $traveler_index ] ) || ! is_array( $traveler_details[ $traveler_index ] ) ) {
+				$traveler_details[ $traveler_index ] = array();
 			}
 
 			foreach ( $file_fields as $field_name => $field ) {

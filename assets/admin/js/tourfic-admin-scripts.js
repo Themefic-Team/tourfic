@@ -313,7 +313,7 @@
         * Author @Jahid
         * Hotel, Tour, Apartment Duplicator
         */
-
+       
         $('.tf-post-data-duplicate').on('click', function(e) {
             e.preventDefault();
             var postID = $(this).data('postid');
@@ -407,7 +407,7 @@
                 })
             },
 
-            error: function (message) {
+            error: function (message) { 
                 $.confirm({
                     icon: 'fa fa-times',
                     theme: 'modern',
@@ -575,7 +575,7 @@
                         } else {
                             var select = $('[name="tf_hotel_rooms_number"]');
                             select.empty();
-
+                            
                             if(response.data.rooms > 0 ){
                                 for (var i = 1; i <= response.data.rooms; i++) {
                                     if (i === 1) {
@@ -584,7 +584,7 @@
                                         select.append('<option value="' + i + '">' + i + ' Rooms</option>');
                                     }
                                 }
-
+                                
                                 $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                             } else {
                                 select.append('<option value="" selected>No Room Available</option>');
@@ -725,11 +725,11 @@
                                 .filter(([dateRange, data]) => data.status === "available")
                                 .map(([dateRange, data]) => {
                                     const [fromRaw, toRaw] = tfSplitDateRange(dateRange);
-
+                    
                                     const today = new Date();
                                     const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
                                     let fromDate = fromRaw;
-
+                    
                                     return {
                                         from: fromDate,
                                         to: toRaw
@@ -779,7 +779,7 @@
                                 }
 
                                 populateTimeSelect(times);
-
+                                
                                 instance.element.value = tfNormalizeDateRange(dateStr);
                             }
 
@@ -789,14 +789,14 @@
                                 let extras = $('[name="tf_tour_extras[]"]');
                                 extras.removeAttr('disabled');
                                 extras.empty();
-
+                            
                                 $.each(obj.tour_extras_array, function (key, value) {
                                     extras.append($('<option>', {
                                         value: key,
                                         html: value // Use html to parse entities like &#36;
                                     }));
                                 });
-
+                            
                                 extras.select2();
                             } else {
                                 let extras = $('[name="tf_tour_extras[]"]');
@@ -914,7 +914,7 @@
         /**
          * Backend Apartments Booking
         */
-
+        
         // Chekck Available Apartment by Date
 
         $(document).on('change', '[name="tf_apartment_date[from]"], [name="tf_apartment_date[to]"]', function (e) {
@@ -964,7 +964,7 @@
                 });
             }
         })
-
+        
         // Available Additional Fees
 
         $(document).on('change', '[name="tf_available_apartments"]', function (e) {
@@ -1167,7 +1167,7 @@
                 placeholder: "Bulk Action",
             });
         }
-
+        
         if ( $('.tf-filter-bulk-option-enquiry').length > 0 ) {
             $('.tf-filter-bulk-option-enquiry').select2({
                 dropdownCssClass: 'tf-booking-filter-modal',
@@ -1182,7 +1182,7 @@
                 allowClear: true
             });
         }
-
+        
         if ( $('.tf-enquiry-filter-apartment-name').length > 0 ) {
             $('.tf-enquiry-filter-apartment-name').select2({
                 dropdownCssClass: 'tf-booking-filter-modal',
@@ -1205,7 +1205,7 @@
                 minimumResultsForSearch: -1,
             });
         }
-
+        
         // Tour Post Section
         if( $('.tf-post-id-filter-options, .tf-booking-post-id-filter-options').length > 0 ) {
             $('.tf-post-id-filter-options, .tf-booking-post-id-filter-options').select2({
@@ -1214,7 +1214,7 @@
                 allowClear: true
             });
         }
-
+        
         // Hotel Post Section
         if ( $('.tf-hotel-id-filter-options, .tf-booking-hotel-id-filter-options').length > 0 ) {
             $('.tf-hotel-id-filter-options, .tf-booking-hotel-id-filter-options').select2({
@@ -1223,7 +1223,7 @@
                 allowClear: true
             });
         }
-
+        
         // Apartment Post Section
         if ( $('.tf-apartment-id-filter-options, .tf-booking-apartment-id-filter-options').length > 0 ) {
             $('.tf-apartment-id-filter-options, .tf-booking-apartment-id-filter-options').select2({
@@ -1241,7 +1241,7 @@
                 allowClear: true
             });
         }
-
+        
 
         // Checked Section
         if ( $('.tf-tour-checkinout-options, .tf-booking-checkinout-options').length > 0 ) {
@@ -1292,7 +1292,7 @@
                     $('.tf-preloader-box').show();
                 },
                 complete: function (data) {
-
+                    
                 },
                 success: function (data) {
                     location.reload();
@@ -1310,7 +1310,7 @@
          * tf_checkinout_details_edit
          */
         $('.tf-order-checkinout-status ul li').on("click", function() {
-
+            
             let selected_value = $(this).attr('data-value');
             let order_id = $('.tf_single_order_id').val();
 
@@ -1327,7 +1327,7 @@
                     $('.tf-preloader-box').show();
                 },
                 complete: function (data) {
-
+                    
                 },
                 success: function (data) {
                     location.reload();
@@ -1345,7 +1345,7 @@
          * tf_order_status_edit
          */
         $('.tf-order-ostatus ul li').on("click", function() {
-
+            
             let selected_value = $(this).attr('data-value');
             let order_id = $('.tf_single_order_id').val();
 
@@ -1362,7 +1362,7 @@
                     $('.tf-preloader-box').show();
                 },
                 complete: function (data) {
-
+                    
                 },
                 success: function (data) {
                     location.reload();
@@ -1380,7 +1380,7 @@
          * tf_order_status_email_resend
          */
         $('.tf-order-email-resend ul li').on("click", function() {
-
+            
             let selected_value = $(this).attr('data-value');
             let order_id = $('#tf_email_order_id').val();
             let db_id = $('.tf_single_order_id').val();
@@ -1399,7 +1399,7 @@
                     $('.tf-preloader-box').show();
                 },
                 complete: function (data) {
-
+                    
                 },
                 success: function (data) {
                     $('.tf-preloader-box').hide();
@@ -1444,13 +1444,13 @@
          * tf_order_bulk_action_edit
          */
         $('.tf-order-status-filter-btn').on("click", function() {
-
+            
             let order_list = [];
             let bulk_action = $('.tf-filter-bulk-option').val();
             $('.tf_booking_details_wrap input[name="order_id[]"]:checked').each(function() {
                 order_list.push($(this).val());
             });
-
+            
             if(order_list.length > 0 && bulk_action!==''){
                 $.ajax({
                     type: 'post',
@@ -1465,7 +1465,7 @@
                         $('.tf-preloader-box').show();
                     },
                     complete: function (data) {
-
+                        
                     },
                     success: function (data) {
                         location.reload();
@@ -1590,7 +1590,7 @@
                 let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
                 window.location.href = updatedUrl;
             }
-
+            
             //Nonce
             if (!currentURLParams.has("nonce")) {
                 currentURLParams.set("nonce", tf_admin_params.tf_nonce);
@@ -1612,10 +1612,10 @@
                 $('#tf-booking-calendar').css('padding', '24px');
                 $('.tf-calendar-booking-header-filter').css('display', 'flex');
                 $('#tf-booking-calendar').show();
-
+                
                 // Re-render the calendar
                 initializeCalendar();
-
+                
             }
             if('list'==view){
                 $('#tf-booking-calendar').hide();
@@ -1649,7 +1649,7 @@
                     $('.tf-preloader-box').show();
                 },
                 complete: function (data) {
-
+                    
                 },
                 success: function (data) {
                     $('.tf-calendar-popup-box').html(data);
@@ -1669,7 +1669,7 @@
             let ostatus = $('.tf-calendar-order-payment-status').val();
             let checkinout = $('.tf-booking-checkinout-options').val();
             let post_id = $('.tf-filter-by-post').val();
-
+            
             $.ajax({
                 type: 'post',
                 url: tf_admin_params.ajax_url,
@@ -1685,7 +1685,7 @@
                     $('.tf-preloader-box').show();
                 },
                 complete: function (data) {
-
+                    
                 },
                 success: function (response) {
                     let data = JSON.parse(response);
@@ -1757,14 +1757,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (tfcalendarEl) {
         var eventsSource;
-
+        
         if (tfcalendarEl.dataset.set) {
             initializeCalendar(eventsSource);
             tfcalendarEl.style.display = 'none';
         } else {
             initializeCalendar(eventsSource);
         }
-    }
+    } 
 });
 
 })();
@@ -1822,10 +1822,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else if (data.status == "error") {
                         notyf.error(data.msg);
                     }
-
+                    
                 }
             });
-
+            
         });
 
         $(".tf-enquiry-filter-hotel-name, .tf-enquiry-filter-tour-name, .tf-enquiry-filter-apartment-name").on('change', function() {
@@ -1927,7 +1927,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     $("#tf-enquiry-status-loader").removeClass("show");
 
                     let data = JSON.parse(response);
-
+                    
                     if(data.status == "success") {
                         notyf.success(data.msg);
                         window.location.reload();
@@ -1948,14 +1948,14 @@ document.addEventListener('DOMContentLoaded', function() {
             let select_option = $(".tf-filter-hotel-name option");
             var values = $.map(select_option ,function(option) {
                 return option.value;
-              });
+              }); 
 
             if( $.inArray(post_id, values) !== -1 ) {
                 $('.tf-filter-hotel-name').val(post_id).trigger('change');
             } else {
                 notyf.error(tf_admin_params.no_data_found_with_id);
             }
-
+            
         })
 
         $(document).on("click", ".tf-single-enquiry-copy-btn", function (e) {
@@ -1963,7 +1963,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 copy_text = $this.closest(".tf-single-enquiry-details-value").data("enquiry-copy-text"),
                 $temp = $("<input>"),
                 copy_ip_addr = $(this).parent().parent().find(".tf-single-enquiry-log-details-single-value").data("enquiry-copy-text");
-
+            
             copy_text = copy_text ? copy_text : copy_ip_addr;
 
             $("body").append($temp);
@@ -1973,7 +1973,7 @@ document.addEventListener('DOMContentLoaded', function() {
             notyf.success("Copied to clipboard");
         });
 
-        $(document).on("click", '.tf-single-enquiry-reply-mail-button', function (e) {
+        $(document).on("click", '.tf-single-enquiry-reply-mail-button', function (e) { 
             $(".tf-single-enquiry-reply-wrapper").slideDown();
             $(this).hide();
         });
@@ -2306,7 +2306,7 @@ jQuery(function ($) {
 
         $(document).on('click', '.tf-setup-travelfic-theme-btn', function (e) {
             e.preventDefault();
-
+            
             if(tf_admin_params.current_active_theme && "travelfic"!=tf_admin_params.current_active_theme && "ultimate-hotel-booking"!=tf_admin_params.current_active_theme){
                 let theme_slug = $('.tf-template-selection input[name="tf_theme_select"]:checked').val();
                 if("travelfic"==theme_slug){
@@ -2328,7 +2328,7 @@ jQuery(function ($) {
             }else{
                 $('.tf-setup-travelfic-toolkit-btn').trigger("click");
             }
-
+            
         });
 
         /*
@@ -2364,7 +2364,7 @@ jQuery(function ($) {
                     }
                 },
                 error: function(error) {
-
+                    
                 }
             });
 
@@ -2374,7 +2374,7 @@ jQuery(function ($) {
         * Travelfic Toolkit Installing
         * @author: Jahid
         */
-
+       
         $(document).on('click', '.tf-setup-travelfic-toolkit-btn', function (e) {
             e.preventDefault();
             var $this = $(this);
@@ -2419,7 +2419,7 @@ jQuery(function ($) {
                     window.location.replace(tf_admin_params.toolkit_page_url);
                 },
                 error: function(error) {
-
+                    
                 }
             });
         });
@@ -2763,13 +2763,13 @@ jQuery(function($) {
             if (!hash) {
                 hash = window.location.hash;
             }
-
+    
             let slug = hash.replace('#tab=', '').split('&')[0];
-
+    
             if (slug) {
                 let selectedTab = $('.tf-tablinks[data-tab="' + slug + '"]');
                 let selectedContent = $('#' + slug);
-
+    
                 if (selectedTab.length && selectedContent.length) {
                     $('.tf-admin-tab .tf-tablinks').removeClass('active');
                     $('.tf-tab-wrapper .tf-tab-content').removeClass('active');
@@ -2778,12 +2778,12 @@ jQuery(function($) {
                 }
             }
         }
-
+    
         // Save current tab hash before post update
         $('.post-type-tf_tours #post, .post-type-tf_hotel #post, .post-type-tf_room #post, .post-type-tf_apartment #post, .post-type-tf_carrental #post, .post-type-tf_email_templates #post').on('submit', function () {
             localStorage.setItem('tf_saved_tab_hash', window.location.hash);
         });
-
+    
         // Restore saved hash and activate tab
         let savedHash = localStorage.getItem('tf_saved_tab_hash');
         if (savedHash) {
@@ -2795,8 +2795,8 @@ jQuery(function($) {
             activateTabFromHash();
         }
 
-
-
+        
+        
         $(window).on('hashchange load', function () {
             let hash = window.location.hash;
             let query = window.location.search;
@@ -3276,14 +3276,14 @@ jQuery(function($) {
                                 success: function (response) {
 
                                     let data = JSON.parse(response)
-
+                                    
                                     if (data.status === 'success') {
                                         notyf.success(data.message);
                                         window.location.reload();
                                     } else {
                                         notyf.error(data.message);
                                     }
-
+                                    
                                     $('.tf-setting-save-btn .tf-reset-btn').removeClass('tf-btn-loading');
                                 },
                                 error: function (xhr, status, error) {
@@ -3366,11 +3366,11 @@ jQuery(function($) {
                             }
                         }
                     })
-
+                    
                 } else {
                     $(".tf-search-results").hide();
                 }
-            }, 700
+            }, 700 
         ));
 
         $(document).on('click', function (e) {
@@ -3396,7 +3396,7 @@ jQuery(function($) {
             $('html, body').animate({
                 scrollTop: $(document).find(selector).closest('.tf-field').offset().top
             }, 100);
-
+        
         });
 
         $(document).on('submit', '.tf-option-form.tf-ajax-save', function (e) {
@@ -3439,7 +3439,7 @@ jQuery(function($) {
                 success: function (response) {
                     let obj = JSON.parse(response);
                     if (obj.status === 'success') {
-
+                        
                         notyf.success(obj.message);
 
                         if(tf_import_option == true ){
@@ -3493,7 +3493,7 @@ jQuery(function($) {
                         if (!state.id) {
                             return state.text;
                         }
-
+                
                         // Get the edit URL from the option's data attribute
                         var editUrl = $(state.element).data('edit-url');
                         if(editUrl){
@@ -3502,7 +3502,7 @@ jQuery(function($) {
                             );
                             return $state;
                         }
-
+                
                         return state.text;
                     }
                 });
@@ -3514,7 +3514,7 @@ jQuery(function($) {
                         if (!state.id) {
                             return state.text;
                         }
-
+                
                         // Get the edit URL from the option's data attribute
                         var editUrl = $(state.element).data('edit-url');
                         if(editUrl){
@@ -3523,12 +3523,12 @@ jQuery(function($) {
                             );
                             return $state;
                         }
-
+                
                         return state.text;
                     }
                 });
             }
-
+        
         }
         $('select.tf-select2').each(function () {
             var $this = $(this);
@@ -3546,7 +3546,7 @@ jQuery(function($) {
            var $option = $(
               '<span style="display: flex; justify-content: space-between;">' + option.text + '<span class="tf-remove-button" data-id="' + option.id + '">Remove</span></span>'
             );
-
+    
             return $option;
         }
         $(document).on('select2:selecting', '.tf-select2', function (e) {
@@ -3583,7 +3583,7 @@ jQuery(function($) {
                             $selectField.select2('close');
 
                         } else {
-
+                            
                         }
                     }
                 });
@@ -3596,7 +3596,7 @@ jQuery(function($) {
             let id = $this.attr("id");
             tfSelect2Int($this);
 
-            $(this).on("select2:select", function (e) {
+            $(this).on("select2:select", function (e) { 
                 var select_val = $(e.currentTarget).val();
                 if(select_val && select_val.includes("'all'")) {
                     $(this).val(["'all'"]).trigger('change.select2');
@@ -4398,7 +4398,7 @@ jQuery(function($) {
                             container.removeChild(container.firstChild);
                         }
 
-
+                        
                         if(times.length > 0){
                             times.forEach((time, index) => {
                                 if (!time) return;
@@ -4483,7 +4483,7 @@ jQuery(function($) {
                                                 <input type="hidden" name="tf_parent_field" value="[group_tabs]">
                                                 <input type="hidden" name="tf_repeater_count" value="${index + 1}">
                                                 <input type="hidden" name="tf_current_field" value="group_discount_package">
-
+                                                
                                                 <div class="tf-repeater-content-wrap">
                                                     <div class="tf-field tf-field-number" style="width:calc(66% - 10px);">
                                                         <div class="tf-fieldset">
@@ -4956,7 +4956,7 @@ jQuery(function($) {
                     } else {
                         notyf.error(response.data.message);
                     }
-
+                    
                     $('.tf-reset-confirmation-box').hide();
                     container.css({'pointer-events': 'auto', 'opacity': '1'})
                     cal.removeClass('tf-content-loading');
@@ -5010,7 +5010,7 @@ jQuery(function($) {
                     } else {
                         notyf.error(response.data.message);
                     }
-
+                    
                     $('.tf-reset-confirmation-box').hide();
                     container.css({'pointer-events': 'auto', 'opacity': '1'})
                     cal.removeClass('tf-content-loading');
@@ -5049,7 +5049,7 @@ jQuery(function($) {
         // Save Package
         $(document).on('click', ".tf_tour_package_save", function(e) {
             e.preventDefault();
-
+            
             var $repeater = $(this).closest('.tf-single-repeater-package_pricing');
             var data = {};
             var packageIndex = null;
@@ -5085,7 +5085,7 @@ jQuery(function($) {
             $repeater.find('input, select, textarea').each(function() {
                 var $el = $(this);
                 var name = $el.attr('name');
-
+                
                 // Skip system fields
                 if (name === 'tf_parent_field' || name === 'tf_repeater_count' || name === 'tf_current_field') {
                     return;
@@ -5095,17 +5095,17 @@ jQuery(function($) {
                 var path = name.replace(/^tf_tours_opt\[package_pricing\]\[\d+\]/, '')
                             .replace(/^\[|\]$/g, '')
                             .split('][');
-
+                
                 // Build the nested structure
                 var current = packageData;
                 for (var i = 0; i < path.length; i++) {
                     var key = path[i];
-
+                    
                     // Handle numeric array indexes
                     if (!isNaN(key) && i > 0) {
                         key = parseInt(key);
                     }
-
+                    
                     if (i === path.length - 1) {
                         // Set the value
                         if ($el.attr('type') === 'checkbox') {
@@ -5129,20 +5129,20 @@ jQuery(function($) {
                 var $repeaterItem = $(this);
                 var discountData = {};
                 var hasValidDiscount = false;
-
+                
                 $repeaterItem.find('input[type="number"]').each(function() {
                     var name = $(this).attr('name').match(/\[group_discount_package\]\[(\d+)\]\[([^\]]+)\]/);
                     if (name && name[1] && name[2]) {
                         var val = $(this).val();
                         discountData[name[2]] = val;
-
+                        
                         // Check if this is a discount_price with a valid value
                         if (name[2] === 'discount_price' && val && parseFloat(val) > 0) {
                             hasValidDiscount = true;
                         }
                     }
                 });
-
+                
                 // Only include discounts with valid discount_price
                 if (hasValidDiscount && Object.keys(discountData).length > 0) {
                     discountRepeaters.push(discountData);
@@ -5159,7 +5159,7 @@ jQuery(function($) {
                 packageData.group_tabs[5] = [];
             }
 
-
+    
             // Prepare AJAX data
             var ajaxData = {
                 action: 'save_tour_package_pricing',
@@ -5169,11 +5169,11 @@ jQuery(function($) {
                 package_data: packageData,
                 nonce: tf_admin_params.tf_nonce
             };
-
+    
             // UI feedback
             var $button = $(this);
             $button.text('Saving...').prop('disabled', true);
-
+    
             $.post(tf_options.ajax_url, ajaxData, function(response) {
                 if (response.success) {
                     if(packageData.pack_title){
@@ -5239,8 +5239,8 @@ jQuery(function($) {
 
             $.post(tf_options.ajax_url, ajaxData, function(response) {
                 if (response.success) {
-
-                }
+                    
+                } 
             }).fail(function(xhr, status, error) {
             });
         });
@@ -5314,10 +5314,10 @@ jQuery(function($) {
         $('textarea.wp_editor, textarea.tf_wp_editor').each(function () {
             let $id = $(this).attr('id');
 
-            setTimeout(function() {
+            setTimeout(function() { 
                 TF_wp_editor($id);
             }, 1000);
-
+            
         });
 
         /*
@@ -5408,7 +5408,7 @@ jQuery(function($) {
             let repeatColorField = add_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
                 repeatColorField.find('input.tf-color').each(function () {
-                    var color_field =  $(this).clone();
+                    var color_field =  $(this).clone(); 
                     if($(this).closest('li').length > 0){
                         $(this).closest('li').append(color_field);
                     }else{
@@ -5573,7 +5573,7 @@ jQuery(function($) {
             let repeatColorField = clone_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
                 repeatColorField.find('input.tf-color').each(function () {
-                    var color_field =  $(this).clone();
+                    var color_field =  $(this).clone(); 
                     if($(this).closest('li').length > 0){
                         $(this).closest('li').append(color_field);
                     }else{
@@ -5742,10 +5742,10 @@ jQuery(function($) {
         // Discount Repeater Add
         $(document).on('click', '.tf-repeater-add-group_discount_package', function (e) {
             e.preventDefault();
-
+        
             // Find the closest repeater container
             var $repeater = $(this).closest('.tf-repeater');
-
+            
             // Find the clone template
             var $clone = $repeater.find('.tf-repeater-wrap-group_discount_package .tf-single-repeater .tf-repeater-content-wrap').show();
         });
@@ -5753,10 +5753,10 @@ jQuery(function($) {
         // Package Time Repeater Add
         $(document).on('click', '.tf-package-add-allowed-time', function (e) {
             e.preventDefault();
-
+        
             // Find the closest repeater container
             var $repeater = $(this).closest('.tf-repeater');
-
+            
             // Find the clone template
             var $clone = $repeater.find('.tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap').show();
         });
@@ -5770,7 +5770,7 @@ jQuery(function($) {
                     $(this).css('display', 'flex');
                 }
             });
-
+            
         });
 
         // Repeater Pacakge Cancel
@@ -5809,7 +5809,7 @@ jQuery(function($) {
         });
 
         // Select 2 add new category
-        $(document).on('click', '.tf-add-category span', function (event) {
+        $(document).on('click', '.tf-add-category span', function (event) { 
             event.preventDefault();
             var $this = $(this);
             var parentDiv = $this.closest('.tf-fieldset');
@@ -5817,13 +5817,13 @@ jQuery(function($) {
         });
 
         // Close Popup
-        $(document).on('click', '.tf-add-category-box-close', function (event) {
+        $(document).on('click', '.tf-add-category-box-close', function (event) { 
             event.preventDefault();
             $('.tf-popup-box').hide();
         });
 
         // Create Category
-        $(document).on('click', '.tf-category-button', function (event) {
+        $(document).on('click', '.tf-category-button', function (event) { 
             event.preventDefault();
             var $this = $(this);
             var parentDiv = $this.closest('.tf-add-category-box');
@@ -5862,7 +5862,7 @@ jQuery(function($) {
         });
 
         // Create Post
-        $(document).on('click', '.tf-add-new-post-button', function (event) {
+        $(document).on('click', '.tf-add-new-post-button', function (event) { 
             event.preventDefault();
             var $this = $(this);
             var parentDiv = $this.closest('.tf-add-category-box');
@@ -5892,11 +5892,11 @@ jQuery(function($) {
                         if (data.insert_post) {
                             // Store to List and Selected
                             var newOption = new Option(data.insert_post.title, data.insert_post.id, true, true);
-
+                            
                             if(fieldId == 'tf_rooms'){
                                 $(newOption).attr('data-edit-url', data.insert_post.edit_url);
                             }
-
+                            
                             $('#'+postSelect).append(newOption).trigger('change');
                         }
                         $this.removeClass('tf-btn-loading');
@@ -6518,7 +6518,7 @@ const legendSpacingPlugin = {
                             labels: {
                                 usePointStyle: true,
                                 pointStyle: 'circle',
-                                fontSize: 10,
+                                fontSize: 10,    
                                 fontStyle: '400',
                                 fontColor: '#242B31',
                             },
@@ -6593,7 +6593,7 @@ const legendSpacingPlugin = {
                                         labels: {
                                             usePointStyle: true,
                                             pointStyle: 'circle',
-                                            fontSize: 10,
+                                            fontSize: 10,    
                                             fontStyle: '400',
                                             fontColor: '#242B31',
                                         },
@@ -6675,7 +6675,7 @@ const legendSpacingPlugin = {
                                         labels: {
                                             usePointStyle: true,
                                             pointStyle: 'circle',
-                                            fontSize: 10,
+                                            fontSize: 10,    
                                             fontStyle: '400',
                                             fontColor: '#242B31',
                                         },
@@ -6794,7 +6794,7 @@ const legendSpacingPlugin = {
             });
         });
     });
-
+    
     $(document).ready(function () {
         // $('.tf-import-btn').on('click', function (event) {
         //     event.preventDefault();
@@ -6837,9 +6837,9 @@ const legendSpacingPlugin = {
         //         });
         //     }
         // })
-        $(document).on('click', '.tf-import-btn', function (event) {
+        $(document).on('click', '.tf-import-btn', function (event) { 
             event.preventDefault();
-            var textarea = $('textarea[name="tf_import_option"]');
+            var textarea = $('textarea[name="tf_import_option"]'); 
             var importData = textarea.val().trim();
             if (importData == '') {
                 alert(tf_options.tf_export_import_msg.import_empty);
@@ -6847,9 +6847,9 @@ const legendSpacingPlugin = {
                 importField.focus();
                 importField.css('border', '1px solid red');
                 return;
-            }
+            } 
             // Triger the form submit
-            $(".tf-option-form").submit();
+            $(".tf-option-form").submit(); 
         });
 
         $(document).on('click', '.tf-export-btn', function (event) {
@@ -6903,7 +6903,7 @@ const legendSpacingPlugin = {
         });
 
         // Select 2 add new category
-        $(document).on('click', '.tf-add-category i', function (event) {
+        $(document).on('click', '.tf-add-category i', function (event) { 
             event.preventDefault();
             $this = $(this);
             parentDiv = $this.closest('.tf-fieldset');
@@ -6911,7 +6911,7 @@ const legendSpacingPlugin = {
         });
 
         // Close Popup
-        $(document).on('click', '.tf-add-category-box-close', function (event) {
+        $(document).on('click', '.tf-add-category-box-close', function (event) { 
             event.preventDefault();
             $('#tf-popup-box').hide();
         });
@@ -6929,7 +6929,7 @@ const legendSpacingPlugin = {
         function getSelectedDesign() {
             return $('input[name="tf_settings\\[color-palette-template\\]"]:checked').val();
         }
-
+        
         const designDefault = {
             'd1': {
                 brand: {
@@ -7012,24 +7012,24 @@ const legendSpacingPlugin = {
                 },
             },
         };
-
+    
         // Function to update custom colors based on the selected design
         function updateCustomColors(selectedDesign) {
             if (!selectedDesign) return;
-
+    
             const colorPalettes = {
                 'design-1': 'tf-d1',
                 'design-2': 'tf-d2',
                 'design-3': 'tf-d3',
                 'design-4': 'tf-d4'
             };
-
+    
             const selectedPalette = colorPalettes[selectedDesign];
             if (!selectedPalette) return;
-
+    
             // Define the fields to be updated
             const fields = ['brand', 'text', 'border', 'filling'];
-
+    
             fields.forEach(field => {
                 $(`input[name^="tf_settings[${selectedPalette}-${field}]"]`).each(function () {
                     let fieldName = $(this).attr('name').split('[')[2].replace(']', ''); // Extract the sub-field (e.g., 'default', 'dark', 'lite')
@@ -7041,8 +7041,8 @@ const legendSpacingPlugin = {
                     }
                 });
             });
-        }
-
+        }     
+    
         // Initialize wpColorPicker for all relevant inputs
         $('input[name^="tf_settings[tf-d"]').wpColorPicker({
             change: function (event, ui) {
@@ -7051,26 +7051,26 @@ const legendSpacingPlugin = {
                 let newValue = ui.color.toString();
 
                 updateCustomColors(getSelectedDesign());
-
+    
                 if (newValue !== originalValue) {
                     // Switch to custom palette
                     $('#tf_settings\\[color-palette-template\\]\\[custom\\]').prop("checked", true);
                     $('.tf-field.tf-field-color.tf-depend-hidden').addClass('tf-depend-on');
                     $('.tf-field.tf-field-color.tf-depend-hidden[data-value="custom"]').removeClass('tf-depend-on');
-
+    
                     // Extract the field type and sub-field name
                     let nameAttr = $colorField.attr('name');
                     let match = nameAttr.match(/\[tf-(d\d+)-(brand|text|border|filling)]\[(.*?)\]/);
                     if (!match) return;
-
+    
                     let design = match[1]; // e.g., 'd1', 'd2', etc.
                     let fieldType = match[2]; // e.g., 'brand', 'text', etc.
                     let fieldName = match[3]; // e.g., 'default', 'dark', 'lite', etc.
-
+    
                     // Update the corresponding custom field
                     let $customColorField = $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`);
                     if ($customColorField.length) {
-
+                        
                         let value = $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val();
                         $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`).val(value).trigger('change');
                         $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val(designDefault[design][fieldType][fieldName]).trigger('change');
@@ -7080,7 +7080,7 @@ const legendSpacingPlugin = {
             }
         });
     });
-
+    
     /* Plugin insatall from dashboard sidebar */
     jQuery(document).ready(function($) {
         $('.tf-plugin-button').not('.pro').on('click', function(e) {

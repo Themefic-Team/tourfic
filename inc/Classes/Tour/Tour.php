@@ -1047,7 +1047,7 @@ class Tour {
 		ob_start();
 		if ( $tf_tour_selected_template == "design-1" ) {
 			if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
-                <form class="tf_tours_booking tf_tours_main_booking">
+                <form class="tf_tours_booking tf_tours_main_booking" enctype="multipart/form-data">
 
 					<?php
 					// if ( self::tf_booking_popup( $post_id ) ) {
@@ -1139,7 +1139,7 @@ class Tour {
                 </form>
 
 
-				<form class="tf_tours_booking tf_tours_bottom_booking">
+				<form class="tf_tours_booking tf_tours_bottom_booking" enctype="multipart/form-data">
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( $post_id ); ?>">
                     <!-- bottom bar -->
                     <div class="tf-bottom-booking-bar">
@@ -1254,7 +1254,7 @@ class Tour {
 
 		<?php } elseif ( $tf_tour_selected_template == "design-2" ) { ?>
 			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
-                <form class="tf_tours_booking tf_tours_main_booking">
+                <form class="tf_tours_booking tf_tours_main_booking" enctype="multipart/form-data">
 
 					<?php
 					// if ( self::tf_booking_popup( $post_id ) ) {
@@ -1591,7 +1591,7 @@ class Tour {
 
                 </form>
 
-				<form class="tf_tours_booking tf_tours_bottom_booking">
+				<form class="tf_tours_booking tf_tours_bottom_booking" enctype="multipart/form-data">
                     
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( $post_id ); ?>">
                     
@@ -1780,7 +1780,7 @@ class Tour {
 		<?php } else { ?>
             <div class="tf-tour-booking-wrap">
 				<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
-                    <form class="tf_tours_booking">
+                    <form class="tf_tours_booking" enctype="multipart/form-data">
 						<?php if($pricing_rule != 'package') { ?>
                         <div class="tf_selectperson-wrap">
                             <div class="tf_input-inner">

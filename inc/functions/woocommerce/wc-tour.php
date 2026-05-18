@@ -57,9 +57,23 @@ function tf_tours_booking_function() {
 	$tf_visitor_details = !empty($_POST['traveller']) ? wp_unslash( $_POST['traveller'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 	$traveller_info_coll_global = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'disable_traveller_info' ) ) ? Helper::tfopt( 'disable_traveller_info' ) : '';
 	$traveller_info_coll        = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['tour-traveler-info'] ) ? $meta['tour-traveler-info'] : $traveller_info_coll_global;
+	$traveller_info_collection  = function_exists( 'tf_tour_get_age_validation_settings' ) ? tf_tour_get_age_validation_settings() : array();
+	$expected_traveler_indexes  = array();
+	if ( ! empty( $traveller_info_coll ) && $total_people > 0 ) {
+		$traveler_collection_mode  = ! empty( $traveller_info_collection['collection_mode'] )
+			? $traveller_info_collection['collection_mode']
+			: 'all';
+		$traveler_count            = 'single' === $traveler_collection_mode ? 1 : $total_people;
+		$expected_traveler_indexes = range( 1, $traveler_count );
+	}
 
 	if ( function_exists( 'tf_tour_process_traveler_document_fields' ) ) {
-		$tf_visitor_details = tf_tour_process_traveler_document_fields( $tf_visitor_details, $post_id );
+		$tf_visitor_details = tf_tour_process_traveler_document_fields(
+			$tf_visitor_details,
+			$post_id,
+			array(),
+			$expected_traveler_indexes
+		);
 		if ( is_wp_error( $tf_visitor_details ) ) {
 			$response['errors'][] = $tf_visitor_details->get_error_message();
 			$response['status']   = 'error';
@@ -823,6 +837,12 @@ function tf_tours_booking_function() {
 	 * Store custom data in array
 	 * Add to cart with custom data
 	 */
+	if ( ! empty( $tf_booking_type ) && 3 == $tf_booking_type && ! empty( $response['errors'] ) ) {
+		$response['status']          = 'error';
+		$response['without_payment'] = 'false';
+		echo wp_json_encode( $response );
+		die();
+	}
 
 	if( !empty($tf_booking_type) && 3==$tf_booking_type ){
 
