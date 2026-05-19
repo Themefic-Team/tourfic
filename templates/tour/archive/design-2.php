@@ -6,8 +6,8 @@ defined( 'ABSPATH' ) || exit;
 
     <?php
     use \Tourfic\Classes\Helper;
-    use Tourfic\App\Templates\Components\Global\Archive\Banner;
-    use Tourfic\App\Templates\Components\Global\Archive\Sidebar;
+    use Tourfic\App\Templates\Components\Shared\Archive\Banner;
+    use Tourfic\App\Templates\Components\Shared\Archive\Sidebar;
     use Tourfic\App\Templates\Components\Tour\Archive\Listings;
     
     Banner::render();

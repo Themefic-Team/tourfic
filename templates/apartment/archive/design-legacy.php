@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) || exit;
 
 	use \Tourfic\Classes\Helper;
 	use Tourfic\App\Templates\Components\Apartment\Archive\Listings;
-	use Tourfic\App\Templates\Components\Global\Archive\Sidebar;
+	use Tourfic\App\Templates\Components\Shared\Archive\Sidebar;
 
     do_action( 'tf_before_container' ); 
     ?>

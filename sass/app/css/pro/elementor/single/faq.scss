@@ -227,6 +227,10 @@
             font-size: 1rem;
             font-weight: 400;
             flex-wrap: nowrap;
+
+            span.tf-flex{
+                width: 100%;
+            }
             
             &.tf-faq-icon-right{
                 @include justify-content(space-between);

@@ -11,17 +11,17 @@ use \Tourfic\Classes\Helper;
     <div class="tf-container">
         <div class="tf-hero-content">
             <div class="tf-wish-and-share">
-                <?php \Tourfic\App\Templates\Components\Global\Single\Wishlist::render(['design' => 'design-2']); ?>
-                <?php \Tourfic\App\Templates\Components\Global\Single\Share::render(['share_style' => 'style2']); ?>
+                <?php \Tourfic\App\Templates\Components\Shared\Single\Wishlist::render(['design' => 'design-2']); ?>
+                <?php \Tourfic\App\Templates\Components\Shared\Single\Share::render(['share_style' => 'style2']); ?>
             </div>
             <div class="tf-hero-bottom-area">
                 <div class="tf-head-title">
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Address::render(['design' => 'design-2']); ?>
+                    <?php \Tourfic\App\Templates\Components\Shared\Single\Title::render(); ?>
+                    <?php \Tourfic\App\Templates\Components\Shared\Single\Address::render(['design' => 'design-2']); ?>
                 </div>
                 <div class="tf-hero-gallery-videos">
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Video_Button::render(['design' => 'design-2'], '', false); ?>
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Gallery_Button::render(['style' => 'style2']); ?>
+                    <?php \Tourfic\App\Templates\Components\Shared\Single\Video_Button::render(['design' => 'design-2'], '', false); ?>
+                    <?php \Tourfic\App\Templates\Components\Shared\Single\Gallery_Button::render(['style' => 'style2']); ?>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@ use \Tourfic\Classes\Helper;
     <!-- Hotel details Srart -->
     <div class="tf-details" id="tf-hotel-overview">
         <div class="tf-details-left">
-            <?php \Tourfic\App\Templates\Components\Global\Single\Sticky_Nav::render(); ?>
+            <?php \Tourfic\App\Templates\Components\Shared\Single\Sticky_Nav::render(); ?>
 
             <?php 
             if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1']) ){
@@ -56,25 +56,25 @@ use \Tourfic\Classes\Helper;
         </div>
         <div class="tf-details-right tf-sitebar-widgets">
             <?php
-            \Tourfic\App\Templates\Components\Global\Single\Nearby_Places::render([
+            \Tourfic\App\Templates\Components\Shared\Single\Nearby_Places::render([
                 'nearby_places_style' => 'style2',
                 'wrapper_open' => '<div class="tf-single-widgets">', 
                 'wrapper_close' => '</div>'
             ]);
 
-            \Tourfic\App\Templates\Components\Global\Single\Map::render([
+            \Tourfic\App\Templates\Components\Shared\Single\Map::render([
                 'show_icon' => 'no',
                 'wrapper' => 'yes',
             ]);
 
-            \Tourfic\App\Templates\Components\Global\Single\Review::render([
+            \Tourfic\App\Templates\Components\Shared\Single\Review::render([
                 'review_style' => 'design-2',
                 'show_review_states' => 'yes',
                 'show_reviews' => 'no',
                 'show_review_form' => 'yes',
             ]);
             
-            \Tourfic\App\Templates\Components\Global\Single\Enquiry::render([
+            \Tourfic\App\Templates\Components\Shared\Single\Enquiry::render([
                 'icon_type' => 'simple',
                 'wrapper_class' => 'tf-send-inquiry tf-single-widgets',
                 'button_class' => 'tf_btn_large tf_btn_sharp',

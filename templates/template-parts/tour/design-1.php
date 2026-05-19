@@ -40,12 +40,12 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 <div class="tf-section tf-single-head">
                     <div class="tf-head-info tf-flex tf-flex-space-bttn tf-flex-gap-24">
                         <div class="tf-head-title">
-                            <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
-                            <?php \Tourfic\App\Templates\Components\Global\Single\Address::render(); ?>
+                            <?php \Tourfic\App\Templates\Components\Shared\Single\Title::render(); ?>
+                            <?php \Tourfic\App\Templates\Components\Shared\Single\Address::render(); ?>
                         </div>
                         <div class="tf-head-social tf-flex tf-flex-gap-8 tf-flex-align-center">
-							<?php \Tourfic\App\Templates\Components\Global\Single\Wishlist::render(); ?>
-                            <?php \Tourfic\App\Templates\Components\Global\Single\Share::render(); ?>
+							<?php \Tourfic\App\Templates\Components\Shared\Single\Wishlist::render(); ?>
+                            <?php \Tourfic\App\Templates\Components\Shared\Single\Share::render(); ?>
                         </div>
                     </div>
                 </div>
@@ -82,14 +82,14 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         <!-- SIdebar Tour single -->
                         <div class="tf-tour-details-right">
 							<?php
-                            \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render(['wrapper' => 'no']);
+                            \Tourfic\App\Templates\Components\Shared\Single\Booking_Form::render(['wrapper' => 'no']);
                             
 							\Tourfic\App\Templates\Components\Tour\Single\Tour_Contact_Information::render([
                                 'wrapper_open' => '<div class="tf-mt-30">',
                                 'wrapper_close' => '</div>',
                             ]);
 
-                            \Tourfic\App\Templates\Components\Global\Single\Enquiry::render([
+                            \Tourfic\App\Templates\Components\Shared\Single\Enquiry::render([
                                 'icon_type' => 'simple',
                                 'wrapper_open' => '<div class="tf-tour-booking-advantages tf-box tf-mt-30">',
                                 'wrapper_close' => '</div>',
@@ -105,7 +105,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         <a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
                                     </div>
                                     <div class="tf-modal-body">
-                                        <?php \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render(['wrapper' => 'no']); ?>
+                                        <?php \Tourfic\App\Templates\Components\Shared\Single\Booking_Form::render(['wrapper' => 'no']); ?>
                                     </div>
                                 </div>
                             </div>
@@ -116,6 +116,6 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
             </div>
         </div>
 
-        <?php \Tourfic\App\Templates\Components\Global\Single\Related_Post::render(['container' => 'yes']); ?>
+        <?php \Tourfic\App\Templates\Components\Shared\Single\Related_Post::render(['container' => 'yes']); ?>
     </div>
 </div>

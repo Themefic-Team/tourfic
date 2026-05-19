@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\App\Templates\Components\Global\Single;
+namespace Tourfic\App\Templates\Components\Shared\Single;
 
 use Tourfic\Classes\Helper;
 use Tourfic\App\TF_Review;
@@ -104,8 +104,8 @@ class Gallery {
 				
 				<?php if(empty($builder)): ?>
 					<div class="featured-meta-gallery-videos">
-						<?php \Tourfic\App\Templates\Components\Global\Single\Gallery_Button::render(); ?>
-						<?php \Tourfic\App\Templates\Components\Global\Single\Video_Button::render(); ?>
+						<?php \Tourfic\App\Templates\Components\Shared\Single\Gallery_Button::render(); ?>
+						<?php \Tourfic\App\Templates\Components\Shared\Single\Video_Button::render(); ?>
 					</div>
 				<?php endif; ?>
 
@@ -174,8 +174,8 @@ class Gallery {
 
 					<?php if(empty($builder)): ?>
 					<div class="tf-wish-and-share">
-						<?php \Tourfic\App\Templates\Components\Global\Single\Wishlist::render(['icon_type' => 'simple', 'design' => 'design-2']); ?>
-						<?php \Tourfic\App\Templates\Components\Global\Single\Share::render(['share_style' => 'style1', 'icon_type' => 'simple']); ?>
+						<?php \Tourfic\App\Templates\Components\Shared\Single\Wishlist::render(['icon_type' => 'simple', 'design' => 'design-2']); ?>
+						<?php \Tourfic\App\Templates\Components\Shared\Single\Share::render(['share_style' => 'style1', 'icon_type' => 'simple']); ?>
 					</div>
 					<?php endif; ?>
 				</div>

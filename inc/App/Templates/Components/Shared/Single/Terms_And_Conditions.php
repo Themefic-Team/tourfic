@@ -1,5 +1,5 @@
 <?php
-namespace Tourfic\App\Templates\Components\Global\Single;
+namespace Tourfic\App\Templates\Components\Shared\Single;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

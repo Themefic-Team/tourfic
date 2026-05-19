@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\App\Templates\Components\Global\Single;
+namespace Tourfic\App\Templates\Components\Shared\Single;
 
 use Elementor\Icons_Manager;
 use Tourfic\Classes\Helper;

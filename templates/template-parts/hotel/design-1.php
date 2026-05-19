@@ -25,12 +25,12 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                 <div class="tf-section tf-single-head">
                     <div class="tf-head-info tf-flex tf-flex-space-bttn tf-flex-gap-24">
                         <div class="tf-head-title">
-                            <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
-                            <?php \Tourfic\App\Templates\Components\Global\Single\Address::render(); ?>
+                            <?php \Tourfic\App\Templates\Components\Shared\Single\Title::render(); ?>
+                            <?php \Tourfic\App\Templates\Components\Shared\Single\Address::render(); ?>
                         </div>
                         <div class="tf-head-social tf-flex tf-flex-gap-8 tf-flex-align-center">
-                            <?php \Tourfic\App\Templates\Components\Global\Single\Wishlist::render(); ?>
-                            <?php \Tourfic\App\Templates\Components\Global\Single\Share::render(); ?>
+                            <?php \Tourfic\App\Templates\Components\Shared\Single\Wishlist::render(); ?>
+                            <?php \Tourfic\App\Templates\Components\Shared\Single\Share::render(); ?>
                         </div>
                     </div>
                 </div>
@@ -40,13 +40,13 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                 <div class="tf-single-details-wrapper tf-mt-30 tf-mb-40">
                     <div class="tf-single-details-inner tf-flex">
                         <div class="tf-tour-details-left">
-                            <?php \Tourfic\App\Templates\Components\Global\Single\Gallery::render(['gallery_style' => 'style1']); ?>
+                            <?php \Tourfic\App\Templates\Components\Shared\Single\Gallery::render(['gallery_style' => 'style1']); ?>
                         </div>
 
                         <!-- SIdebar Tour single -->
                         <div class="tf-tour-details-right">
-                            <?php \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render(['wrapper' => 'no']); ?>
-                            <?php \Tourfic\App\Templates\Components\Global\Single\Map::render([
+                            <?php \Tourfic\App\Templates\Components\Shared\Single\Booking_Form::render(['wrapper' => 'no']); ?>
+                            <?php \Tourfic\App\Templates\Components\Shared\Single\Map::render([
                                 'show_title' => 'no',
                             ]); ?>
                             

@@ -14,7 +14,7 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
             <div class="tf-hero-content">
                 <div class="tf-hero-bottom-area">
                     <div class="tf-head-title">
-                        <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
+                        <?php \Tourfic\App\Templates\Components\Shared\Single\Title::render(); ?>
                     </div>
                     <div class="tf-hero-gallery-videos">
                         <?php if ( ! empty( $gallery_ids ) ) { ?>
@@ -43,7 +43,7 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
                 <div class="tf-details-left">
                     <?php if(wp_is_mobile()): ?>
                     <div class="tf-room-single-mobile-booking-form-wrap">
-                        <?php \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render(); ?>
+                        <?php \Tourfic\App\Templates\Components\Shared\Single\Booking_Form::render(); ?>
                     </div>
                     <?php endif; ?>
 
@@ -67,12 +67,12 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
                 <div class="tf-details-right tf-sitebar-widgets">
                     <?php if(!wp_is_mobile()): ?>
                     <div class="tf-room-single-booking-form-wrap">
-                        <?php \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render(); ?>
+                        <?php \Tourfic\App\Templates\Components\Shared\Single\Booking_Form::render(); ?>
                     </div>
                     <?php endif; ?>
 
                     <?php
-                    \Tourfic\App\Templates\Components\Global\Single\Review::render([
+                    \Tourfic\App\Templates\Components\Shared\Single\Review::render([
                         'review_style' => 'design-2',
                         'show_review_states' => 'yes',
                         'show_reviews' => 'no',

@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 ]); 
 
 if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-    \Tourfic\App\Templates\Components\Global\Single\Feature::render([
+    \Tourfic\App\Templates\Components\Shared\Single\Feature::render([
         'wrapper' => 'no',
         'wrapper_open' => '<div class="tf-mb-40">', 
         'wrapper_close' => '</div>'

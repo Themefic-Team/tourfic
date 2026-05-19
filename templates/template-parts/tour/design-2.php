@@ -40,17 +40,17 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
         <div class="tf-container">
             <div class="tf-hero-content">
                 <div class="tf-wish-and-share">
-					<?php \Tourfic\App\Templates\Components\Global\Single\Wishlist::render(['design' => 'design-2']); ?>
-					<?php \Tourfic\App\Templates\Components\Global\Single\Share::render(['share_style' => 'style2']); ?>
+					<?php \Tourfic\App\Templates\Components\Shared\Single\Wishlist::render(['design' => 'design-2']); ?>
+					<?php \Tourfic\App\Templates\Components\Shared\Single\Share::render(['share_style' => 'style2']); ?>
                 </div>
                 <div class="tf-hero-bottom-area">
                     <div class="tf-head-title">
-                        <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
-						<?php \Tourfic\App\Templates\Components\Global\Single\Address::render(['design' => 'design-2']); ?>
+                        <?php \Tourfic\App\Templates\Components\Shared\Single\Title::render(); ?>
+						<?php \Tourfic\App\Templates\Components\Shared\Single\Address::render(['design' => 'design-2']); ?>
                     </div>
                     <div class="tf-hero-gallery-videos">
-						<?php \Tourfic\App\Templates\Components\Global\Single\Video_Button::render(['design' => 'design-2'], '', false); ?>
-                    	<?php \Tourfic\App\Templates\Components\Global\Single\Gallery_Button::render(['style' => 'style2']); ?>
+						<?php \Tourfic\App\Templates\Components\Shared\Single\Video_Button::render(['design' => 'design-2'], '', false); ?>
+                    	<?php \Tourfic\App\Templates\Components\Shared\Single\Gallery_Button::render(['style' => 'style2']); ?>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets">
 					<?php 
-					\Tourfic\App\Templates\Components\Global\Single\Booking_Form::render(['booking_form_style' => 'style2']);
+					\Tourfic\App\Templates\Components\Shared\Single\Booking_Form::render(['booking_form_style' => 'style2']);
 					
 					\Tourfic\App\Templates\Components\Tour\Single\Tour_Contact_Information::render([
 						'icon_style' => 'style2',
@@ -93,14 +93,14 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 						'wrapper_close' => '</div>',
 					]);
 
-					\Tourfic\App\Templates\Components\Global\Single\Review::render([
+					\Tourfic\App\Templates\Components\Shared\Single\Review::render([
 						'review_style' => 'design-2',
 						'show_review_states' => 'yes',
 						'show_reviews' => 'no',
 						'show_review_form' => 'yes',
 					]);
 					
-					\Tourfic\App\Templates\Components\Global\Single\Enquiry::render([
+					\Tourfic\App\Templates\Components\Shared\Single\Enquiry::render([
 						'icon_type' => 'simple',
 						'wrapper_class' => 'tf-send-inquiry tf-single-widgets',
 						'button_class' => 'tf_btn_large tf_btn_sharp',
@@ -148,7 +148,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
     <!--Content section end -->
 
 	<?php 
-	\Tourfic\App\Templates\Components\Global\Single\Related_Post::render([
+	\Tourfic\App\Templates\Components\Shared\Single\Related_Post::render([
 		'related_post_style' => 'style2', 
 		'container' => 'yes'
 	]); 

@@ -2,7 +2,7 @@
 // Don't load directly
 defined( 'ABSPATH' ) || exit;
 
-use Tourfic\App\Templates\Components\Global\Archive\Banner;
+use Tourfic\App\Templates\Components\Shared\Archive\Banner;
 use \Tourfic\Classes\Helper;
 
 get_header();
