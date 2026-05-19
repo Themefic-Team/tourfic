@@ -55,9 +55,25 @@ function tf_tours_booking_function() {
 
 	// Visitor Details
 	$tf_visitor_details = !empty($_POST['traveller']) ? wp_unslash( $_POST['traveller'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$traveller_info_coll_global = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'disable_traveller_info' ) ) ? Helper::tfopt( 'disable_traveller_info' ) : '';
+	$traveller_info_coll        = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['tour-traveler-info'] ) ? $meta['tour-traveler-info'] : $traveller_info_coll_global;
+	$traveller_info_collection  = function_exists( 'tf_tour_get_age_validation_settings' ) ? tf_tour_get_age_validation_settings() : array();
+	$expected_traveler_indexes  = array();
+	if ( ! empty( $traveller_info_coll ) && $total_people > 0 ) {
+		$traveler_collection_mode  = ! empty( $traveller_info_collection['collection_mode'] )
+			? $traveller_info_collection['collection_mode']
+			: 'all';
+		$traveler_count            = 'single' === $traveler_collection_mode ? 1 : $total_people;
+		$expected_traveler_indexes = range( 1, $traveler_count );
+	}
 
 	if ( function_exists( 'tf_tour_process_traveler_document_fields' ) ) {
-		$tf_visitor_details = tf_tour_process_traveler_document_fields( $tf_visitor_details, $post_id );
+		$tf_visitor_details = tf_tour_process_traveler_document_fields(
+			$tf_visitor_details,
+			$post_id,
+			array(),
+			$expected_traveler_indexes
+		);
 		if ( is_wp_error( $tf_visitor_details ) ) {
 			$response['errors'][] = $tf_visitor_details->get_error_message();
 			$response['status']   = 'error';
@@ -67,7 +83,7 @@ function tf_tours_booking_function() {
 	}
 
 	if ( function_exists( 'tf_tour_validate_traveler_age_limits' ) ) {
-		$traveler_age_validation = tf_tour_validate_traveler_age_limits( $tf_visitor_details, $adults, $children, $infant, $tour_date );
+		$traveler_age_validation = tf_tour_validate_traveler_age_limits( $tf_visitor_details, $adults, $children, $infant, $tour_date, ! empty( $traveller_info_coll ) );
 		if ( is_wp_error( $traveler_age_validation ) ) {
 			$response['errors'][] = $traveler_age_validation->get_error_message();
 			$response['status']   = 'error';
@@ -226,7 +242,7 @@ function tf_tours_booking_function() {
 				$tour_id   = $order['post_id'];
 				$order_details = json_decode($order['order_details']);
 				$tf_tour_date = !empty($order_details->tour_date) ? $order_details->tour_date : '';
-				list( $tf_booking_start, $tf_booking_end ) = explode( " - ", $tf_tour_date );
+				list( $tf_booking_start, $tf_booking_end ) = tf_split_date_range( $tf_tour_date );
 				if( !empty($tour_id) && $tour_id==$post_id && !empty($tf_booking_start) && $start_date==$tf_booking_start && !empty($tf_booking_end) && $end_date==$tf_booking_end ){
 					$book_adult     = !empty( $order_details->adult ) ? $order_details->adult : '';
 					if(!empty($book_adult)){
@@ -821,6 +837,12 @@ function tf_tours_booking_function() {
 	 * Store custom data in array
 	 * Add to cart with custom data
 	 */
+	if ( ! empty( $tf_booking_type ) && 3 == $tf_booking_type && ! empty( $response['errors'] ) ) {
+		$response['status']          = 'error';
+		$response['without_payment'] = 'false';
+		echo wp_json_encode( $response );
+		die();
+	}
 
 	if( !empty($tf_booking_type) && 3==$tf_booking_type ){
 
@@ -1513,12 +1535,7 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 			$visitor_details = $item->get_meta( '_visitor_details', true );
 			
 			if ( $tour_date ) {
-				if (str_contains($tour_date, " - ")) {
-					list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
-				} else {
-					$tour_in = $tour_date;
-					$tour_out = '';
-				}
+				list( $tour_in, $tour_out ) = tf_split_date_range( $tour_date, false );
 			}
 
 			$iteminfo = [
@@ -1738,12 +1755,7 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 			$visitor_details = $item->get_meta( '_visitor_details', true );
 
 			if ( $tour_date ) {
-				if( str_contains($tour_date, " - ") ){
-					list( $tour_in, $tour_out ) = explode( ' - ', $tour_date );
-				} else {
-					$tour_in = $tour_date;
-					$tour_out = '';
-				}
+				list( $tour_in, $tour_out ) = tf_split_date_range( $tour_date, false );
 			}
 
 			$iteminfo = [

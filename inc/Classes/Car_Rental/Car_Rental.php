@@ -256,7 +256,7 @@ class Car_Rental
                                 dateSetToFields(selectedDates, instance);
                             },
                             <?php if(! empty( $check_in_out )){ ?>
-                                defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+                                defaultDate: <?php echo wp_json_encode( tf_split_date_range( $check_in_out ) ) ?>,
                             <?php } ?>
                         });
 
@@ -502,7 +502,7 @@ class Car_Rental
                                 dateSetToFields(selectedDates, instance);
                             },
                             <?php if(! empty( $check_in_out )){ ?>
-                                defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+                                defaultDate: <?php echo wp_json_encode( tf_split_date_range( $check_in_out ) ) ?>,
                             <?php } ?>
                         });
 
@@ -752,7 +752,7 @@ class Car_Rental
                                 dateSetToFields(selectedDates, instance);
                             },
                             <?php if(! empty( $check_in_out )){ ?>
-                                defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+                                defaultDate: <?php echo wp_json_encode( tf_split_date_range( $check_in_out ) ) ?>,
                             <?php } ?>
                         });
 
@@ -962,7 +962,7 @@ class Car_Rental
                                 dateSetToFields(selectedDates, instance);
                             },
                             <?php if(! empty( $check_in_out )){ ?>
-                                defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+                                defaultDate: <?php echo wp_json_encode( tf_split_date_range( $check_in_out ) ) ?>,
                             <?php } ?>
                         });
 

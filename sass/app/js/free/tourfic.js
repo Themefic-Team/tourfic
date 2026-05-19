@@ -18,6 +18,23 @@
                 y: 'bottom',
             },
         });
+
+        function tfSplitDateRange(value, singleDateAsRange = true) {
+            const normalizedValue = String(value || '').trim().replace(/\s+/g, ' ');
+            if (!normalizedValue) {
+                return ['', ''];
+            }
+
+            const dates = normalizedValue.match(/\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2}|\d{1,2}[\/.-]\d{1,2}[\/.-]\d{4}/g);
+            if (dates && dates.length >= 2) {
+                return [dates[0].trim(), dates[1].trim()];
+            }
+            if (dates && dates.length === 1) {
+                return [dates[0].trim(), singleDateAsRange ? dates[0].trim() : ''];
+            }
+
+            return [normalizedValue, singleDateAsRange ? normalizedValue : ''];
+        }
         
         // Add the classes to the body element
         if (tf_params.body_classes && tf_params.body_classes.length > 0) {
@@ -374,7 +391,7 @@
             var endprice = $('.widget_tf_price_filters input[name="to"]').val();
             var tf_author = $('#tf_author').val();
             // split date range into dates
-            var checkedArr = checked ? checked.split(' - ') : '';
+            var checkedArr = checked ? tfSplitDateRange(checked) : '';
             var checkin = checkedArr[0];
             var checkout = checkedArr[1];
             var posttype = $('.tf-post-type').val();
@@ -407,7 +424,7 @@
             let dropoff_time = $('.tf_dropoff_time').val();
             let pickup_slug = $('#tf_pickup_location_id').val();
             let dropoff_slug = $('#tf_dropoff_location_id').val();
-            let elSettings = $('#tf-elementor-settings').text();
+            let builderSettings = $('#tf-builder-settings').text();
             
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
@@ -448,7 +465,7 @@
             formData.append('driver_age', driver_age);
             formData.append('dropoff_time', dropoff_time);
             formData.append("tf_ordering", tf_ordering);
-            formData.append("elSettings", elSettings);
+            formData.append("builderSettings", builderSettings);
             formData.append('page', page);
 
             if (startprice) {
@@ -586,7 +603,7 @@
             e.preventDefault();
 
             checked = $('#check-in-out-date').val();
-            var checkedArr = checked.split(' - ');
+            var checkedArr = tfSplitDateRange(checked);
             var checkin = checkedArr[0];
             var checkout = checkedArr[1];
             var posttype = $('.tf-post-type').val();
@@ -1980,21 +1997,53 @@
         let tf_hasErrorsFlag = false;
         let tf_firstErrorElement = null; // track the first error field
         const tfTravelerCompliance = tf_params.traveler_compliance || {};
+        const tfTourDateFieldSelector = 'input[name="check-in-out-date"], #check-in-out-date, input.tours-check-in-out';
         const tfResolveTourBookingForm = ($context = null) => {
             const $source = $context && $context.length ? $context : $();
-            const $form = $source.closest('form.tf_tours_booking');
+            let $form = $source.closest('form.tf_tours_booking');
 
             if ($form.length) {
                 return $form.first();
             }
 
+            const $bookingWrapper = $source.closest('.tf-withoutpayment-booking');
+            if ($bookingWrapper.length) {
+                $form = $bookingWrapper.find('form.tf_tours_booking');
+                if ($form.length) {
+                    return $form.first();
+                }
+            }
+
             return $('form.tf_tours_booking').first();
+        };
+
+        const tfResolveTourDateField = ($context = null) => {
+            const $form = tfResolveTourBookingForm($context);
+            const $fields = $form.find(tfTourDateFieldSelector);
+
+            if (!$fields.length) {
+                return $(tfTourDateFieldSelector).first();
+            }
+
+            const $filledField = $fields.filter(function () {
+                return ($(this).val() || '').toString().trim().length > 0;
+            }).first();
+
+            return $filledField.length ? $filledField : $fields.first();
         };
 
         const tfResolveTourPopup = ($context = null) => {
             const $form = tfResolveTourBookingForm($context);
+            let $popup = $form.find('.tf-withoutpayment-booking').first();
 
-            return $form.find('.tf-withoutpayment-booking').first();
+            if (!$popup.length && $context && $context.length) {
+                $popup = $context.closest('.tf-withoutpayment-booking').first();
+            }
+            if (!$popup.length) {
+                $popup = $('.tf-withoutpayment-booking').first();
+            }
+
+            return $popup;
         };
 
         const tfResolveTourPackageList = ($context = null) => {
@@ -2017,7 +2066,7 @@
             let children = parseInt($form.find('input[name="childrens"], [name="children"], #children, #childs').first().val() || '0', 10);
             let infant = parseInt($form.find('input[name="infants"], [name="infant"], #infant').first().val() || '0', 10);
             let checkInTime = $form.find('select[name="check-in-time"]').first().val() || '';
-            const checkInDate = ($form.find('input[name="check-in-out-date"], #check-in-out-date').first().val() || '').toString().trim();
+            const checkInDate = (tfResolveTourDateField($form).val() || '').toString().trim();
             const postId = $form.find('input[name="post_id"]').first().val() || '';
             const deposit = $form.find('input[name="deposit"]').is(':checked');
             let selectedPackage = '';
@@ -2073,15 +2122,35 @@
             return '';
         }
 
-        function tfParseTravelerDate(value) {
-            if (!value) {
+        const tfTravelerSupportedDateFormats = [
+            'Y/m/d',
+            'Y-m-d',
+            'Y.m.d',
+            'd/m/Y',
+            'd-m-Y',
+            'd.m.Y',
+            'm/d/Y',
+            'm-d-Y',
+            'm.d.Y'
+        ];
+
+        function tfGetTravelerDateFormats() {
+            const configuredFormat = tfTravelerCompliance.date_format || 'Y/m/d';
+
+            return [configuredFormat].concat(tfTravelerSupportedDateFormats).filter(function (dateFormat, index, formats) {
+                return dateFormat && formats.indexOf(dateFormat) === index;
+            });
+        }
+
+        function tfParseTravelerDateByFormat(value, dateFormat) {
+            const normalizedValue = String(value || '').trim();
+            const separatorMatch = String(dateFormat || '').match(/[^A-Za-z]/);
+            const separator = separatorMatch ? separatorMatch[0] : '';
+
+            if (!normalizedValue || !separator) {
                 return null;
             }
 
-            const dateFormat = tfTravelerCompliance.date_format || 'Y/m/d';
-            const normalizedValue = String(value).split(' - ')[0].trim();
-            const separatorMatch = dateFormat.match(/[^A-Za-z]/);
-            const separator = separatorMatch ? separatorMatch[0] : '/';
             const formatParts = dateFormat.split(separator);
             const valueParts = normalizedValue.split(separator);
             const parts = {};
@@ -2091,14 +2160,32 @@
             }
 
             formatParts.forEach(function (part, index) {
-                parts[part] = parseInt(valueParts[index], 10);
+                const partValue = valueParts[index];
+
+                if (part === 'Y' && /^\d{4}$/.test(partValue)) {
+                    parts.Y = parseInt(partValue, 10);
+                } else if (part === 'm' && /^\d{1,2}$/.test(partValue)) {
+                    parts.m = parseInt(partValue, 10);
+                } else if (part === 'd' && /^\d{1,2}$/.test(partValue)) {
+                    parts.d = parseInt(partValue, 10);
+                }
             });
 
-            if (!parts.Y || !parts.m || !parts.d) {
+            if (
+                !parts.Y ||
+                !parts.m ||
+                !parts.d ||
+                parts.m < 1 ||
+                parts.m > 12 ||
+                parts.d < 1 ||
+                parts.d > 31
+            ) {
                 return null;
             }
 
-            const parsedDate = new Date(parts.Y, parts.m - 1, parts.d);
+            const parsedDate = new Date(0);
+            parsedDate.setFullYear(parts.Y, parts.m - 1, parts.d);
+            parsedDate.setHours(0, 0, 0, 0);
 
             if (
                 Number.isNaN(parsedDate.getTime()) ||
@@ -2110,6 +2197,21 @@
             }
 
             return parsedDate;
+        }
+
+        function tfParseTravelerDate(value) {
+            const normalizedValue = tfSplitDateRange(value, false)[0];
+            const dateFormats = tfGetTravelerDateFormats();
+
+            for (let index = 0; index < dateFormats.length; index++) {
+                const parsedDate = tfParseTravelerDateByFormat(normalizedValue, dateFormats[index]);
+
+                if (parsedDate) {
+                    return parsedDate;
+                }
+            }
+
+            return null;
         }
 
         function tfCalculateTravelerAge(dobValue, referenceDate) {
@@ -2220,13 +2322,18 @@
             return true;
         }
 
-        $('body').on('click', '.tf-traveller-error', function (e) {
+        function tfValidateTourTravelerFields($trigger) {
             let hasErrors = [];
             tf_firstErrorElement = null; // reset before validation
-            const $button = $(this);
+            const $button = $trigger && $trigger.length ? $trigger : $();
             const bookingState = tfGetTourBookingState($button);
             const $popup = tfResolveTourPopup($button);
             const referenceDate = bookingState.checkInDate || '';
+
+            if (!$popup.length) {
+                tf_hasErrorsFlag = false;
+                return false;
+            }
 
             $popup.find('.error-text').text("").removeClass('error-visible');
             $popup.find('.tf-single-travel').each(function (travelerIndex) {
@@ -2279,9 +2386,27 @@
                         tf_firstErrorElement.focus(); // focus after scrolling
                     });
                 }
-                return false;
+                return true;
             }
             tf_hasErrorsFlag = false;
+            return false;
+        }
+
+        $('body').on('click', '.tf-traveller-error', function (e) {
+            if (tfValidateTourTravelerFields($(this))) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                return false;
+            }
+        });
+
+        $('body').on('tf_validate_tour_traveler_fields', 'form.tf_tours_booking', function (e, validationResult) {
+            const $form = $(this);
+            const $trigger = $form.find('.tf-traveller-error').first();
+
+            if (validationResult) {
+                validationResult.hasErrors = tfValidateTourTravelerFields($trigger.length ? $trigger : $form);
+            }
         });
 
         // Booking Confirmation Form Validation
@@ -2418,7 +2543,7 @@
         };
         const ensureTourDateSelected = (showMessage = false, $trigger = null) => {
             const $form = tfResolveTourBookingForm($trigger);
-            const $dateField = $form.find('input[name="check-in-out-date"], #check-in-out-date').first();
+            const $dateField = tfResolveTourDateField($form);
             const $dateWrapper = $form.find('.tf_booking-dates .tf_label-row').first();
 
             const selectedDate = ($dateField.val() || '').toString().trim();
@@ -2628,9 +2753,21 @@
                         }
                         return false;
                     } else {
-                        const $travelerInfoBox = $form.find('.tf-traveller-info-box');
-                        const $travelerSummary = $form.find('.tf-booking-traveller-info');
-                        const $packageContent = $form.find('.tf-booking-content-package');
+                        let $travelerInfoBox = $form.find('.tf-traveller-info-box');
+                        let $travelerSummary = $form.find('.tf-booking-traveller-info');
+                        let $packageContent = $form.find('.tf-booking-content-package');
+
+                        if ($popup.length) {
+                            if (!$travelerInfoBox.length) {
+                                $travelerInfoBox = $popup.find('.tf-traveller-info-box');
+                            }
+                            if (!$travelerSummary.length) {
+                                $travelerSummary = $popup.find('.tf-booking-traveller-info');
+                            }
+                            if (!$packageContent.length) {
+                                $packageContent = $popup.find('.tf-booking-content-package');
+                            }
+                        }
 
                         if ($travelerInfoBox.length > 0) {
                             $travelerInfoBox.html(response.traveller_info);
@@ -2686,6 +2823,10 @@
                 return false;
             }
 
+            if (!$popup.length) {
+                return false;
+            }
+
             $popup.find("input[type='text'], input[type='email'], input[type='date'], select, textarea").val("");
 
             $form.find('.tf-booking-content-extra input[type="checkbox"]').each(function () {
@@ -2699,7 +2840,7 @@
             });
         });
 
-        $(document).on('change', 'input[name="check-in-out-date"], #check-in-out-date', function () {
+        $(document).on('change', tfTourDateFieldSelector, function () {
             const $form = tfResolveTourBookingForm($(this));
             const $dateWrapper = $form.find('.tf_booking-dates .tf_label-row').first();
             const selectedDate = ($(this).val() || '').toString().trim();

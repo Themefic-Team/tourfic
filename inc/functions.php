@@ -267,6 +267,27 @@ if ( ! function_exists( 'tf_tour_get_user_date_format' ) ) {
 	}
 }
 
+if ( ! function_exists( 'tf_tour_get_supported_date_formats' ) ) {
+	/**
+	 * Get date formats supported by traveler age validation.
+	 *
+	 * @return array
+	 */
+	function tf_tour_get_supported_date_formats() {
+		return array(
+			'Y/m/d',
+			'Y-m-d',
+			'Y.m.d',
+			'd/m/Y',
+			'd-m-Y',
+			'd.m.Y',
+			'm/d/Y',
+			'm-d-Y',
+			'm.d.Y',
+		);
+	}
+}
+
 if ( ! function_exists( 'tf_tour_get_age_validation_field_names' ) ) {
 	/**
 	 * Get traveler date field names that should be age-validated.
@@ -345,9 +366,63 @@ if ( ! function_exists( 'tf_tour_get_frontend_compliance_config' ) ) {
 	}
 }
 
+if ( ! function_exists( 'tf_tour_parse_date_by_format' ) ) {
+	/**
+	 * Parse a date string by a strict Tourfic date format.
+	 *
+	 * @param string $date_string Date string.
+	 * @param string $date_format Date format.
+	 * @return DateTimeImmutable|null
+	 */
+	function tf_tour_parse_date_by_format( $date_string, $date_format ) {
+		$date_string = trim( (string) $date_string );
+		$date_format = trim( (string) $date_format );
+		if ( '' === $date_string || '' === $date_format ) {
+			return null;
+		}
+
+		if ( ! preg_match( '/[^A-Za-z]/', $date_format, $separator_match ) ) {
+			return null;
+		}
+
+		$separator    = $separator_match[0];
+		$format_parts = explode( $separator, $date_format );
+		if ( 3 !== count( $format_parts ) ) {
+			return null;
+		}
+
+		$pattern_parts = array();
+		foreach ( $format_parts as $part ) {
+			if ( 'Y' === $part ) {
+				$pattern_parts[] = '(?P<Y>\d{4})';
+			} elseif ( 'm' === $part ) {
+				$pattern_parts[] = '(?P<m>\d{1,2})';
+			} elseif ( 'd' === $part ) {
+				$pattern_parts[] = '(?P<d>\d{1,2})';
+			} else {
+				return null;
+			}
+		}
+
+		$pattern = '/^' . implode( preg_quote( $separator, '/' ), $pattern_parts ) . '$/';
+		if ( ! preg_match( $pattern, $date_string, $matches ) ) {
+			return null;
+		}
+
+		$year  = absint( $matches['Y'] );
+		$month = absint( $matches['m'] );
+		$day   = absint( $matches['d'] );
+		if ( ! checkdate( $month, $day, $year ) ) {
+			return null;
+		}
+
+		return new DateTimeImmutable( sprintf( '%04d-%02d-%02d 00:00:00', $year, $month, $day ), wp_timezone() );
+	}
+}
+
 if ( ! function_exists( 'tf_tour_parse_user_date' ) ) {
 	/**
-	 * Parse a date using Tourfic's configured date format.
+	 * Parse a date using Tourfic's configured date format and canonical fallbacks.
 	 *
 	 * @param string $date_string Date string.
 	 * @return DateTimeImmutable|null
@@ -358,25 +433,28 @@ if ( ! function_exists( 'tf_tour_parse_user_date' ) ) {
 			return null;
 		}
 
-		if ( false !== strpos( $date_string, ' - ' ) ) {
-			$date_parts  = explode( ' - ', $date_string );
-			$date_string = isset( $date_parts[0] ) ? trim( $date_parts[0] ) : $date_string;
+		$date_parts = tf_split_date_range( $date_string, false );
+		if ( ! empty( $date_parts[0] ) ) {
+			$date_string = $date_parts[0];
 		}
 
-		$timezone    = wp_timezone();
-		$date_format = tf_tour_get_user_date_format();
-		$date        = DateTimeImmutable::createFromFormat( '!' . $date_format, $date_string, $timezone );
+		$date_formats = array_values(
+			array_unique(
+				array_merge(
+					array( tf_tour_get_user_date_format() ),
+					tf_tour_get_supported_date_formats()
+				)
+			)
+		);
+		foreach ( $date_formats as $date_format ) {
+			$date = tf_tour_parse_date_by_format( $date_string, $date_format );
 
-		if ( $date instanceof DateTimeImmutable ) {
-			return $date;
+			if ( $date instanceof DateTimeImmutable ) {
+				return $date;
+			}
 		}
 
-		$fallback_timestamp = strtotime( str_replace( '/', '-', $date_string ) );
-		if ( false === $fallback_timestamp ) {
-			return null;
-		}
-
-		return ( new DateTimeImmutable( '@' . $fallback_timestamp ) )->setTimezone( $timezone );
+		return null;
 	}
 }
 
@@ -642,20 +720,45 @@ if ( ! function_exists( 'tf_tour_process_traveler_document_fields' ) ) {
 	/**
 	 * Process traveler document uploads and preserve existing values.
 	 *
-	 * @param array $traveler_details Traveler details.
-	 * @param int   $post_id          Tour post ID.
-	 * @param array $files            Files array.
+	 * @param array $traveler_details          Traveler details.
+	 * @param int   $post_id                   Tour post ID.
+	 * @param array $files                     Files array.
+	 * @param array $expected_traveler_indexes Traveler indexes expected to have upload fields.
 	 * @return array|WP_Error
 	 */
-	function tf_tour_process_traveler_document_fields( $traveler_details, $post_id, $files = array() ) {
+	function tf_tour_process_traveler_document_fields(
+		$traveler_details,
+		$post_id,
+		$files = array(),
+		$expected_traveler_indexes = array()
+	) {
 		$file_fields = tf_tour_get_file_upload_fields();
 		if ( empty( $file_fields ) ) {
 			return $traveler_details;
 		}
 
-		foreach ( $traveler_details as $traveler_index => $traveler_data ) {
-			if ( ! is_array( $traveler_data ) ) {
-				continue;
+		$traveler_details = is_array( $traveler_details ) ? $traveler_details : array();
+		$files            = ! empty( $files ) ? $files : $_FILES; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$file_indexes     = ! empty( $files['traveller']['name'] ) && is_array( $files['traveller']['name'] )
+			? array_keys( $files['traveller']['name'] )
+			: array();
+		$traveler_indexes = array_values(
+			array_filter(
+				array_unique(
+					array_map(
+						'absint',
+						array_merge( array_keys( $traveler_details ), $file_indexes, $expected_traveler_indexes )
+					)
+				)
+			)
+		);
+
+		foreach ( $traveler_indexes as $traveler_index ) {
+			$traveler_data = ! empty( $traveler_details[ $traveler_index ] ) && is_array( $traveler_details[ $traveler_index ] )
+				? $traveler_details[ $traveler_index ]
+				: array();
+			if ( empty( $traveler_details[ $traveler_index ] ) || ! is_array( $traveler_details[ $traveler_index ] ) ) {
+				$traveler_details[ $traveler_index ] = array();
 			}
 
 			foreach ( $file_fields as $field_name => $field ) {
@@ -687,34 +790,74 @@ if ( ! function_exists( 'tf_tour_process_traveler_document_fields' ) ) {
 	}
 }
 
+if ( ! function_exists( 'tf_tour_get_traveler_field_value' ) ) {
+	/**
+	 * Get a traveler field value by normalized field name.
+	 *
+	 * @param array  $traveler_data Traveler data.
+	 * @param string $field_name     Normalized field name.
+	 * @return mixed|null
+	 */
+	function tf_tour_get_traveler_field_value( $traveler_data, $field_name ) {
+		if ( ! is_array( $traveler_data ) ) {
+			return null;
+		}
+
+		if ( array_key_exists( $field_name, $traveler_data ) ) {
+			return $traveler_data[ $field_name ];
+		}
+
+		foreach ( $traveler_data as $posted_field_name => $posted_value ) {
+			if ( sanitize_key( $posted_field_name ) === $field_name ) {
+				return $posted_value;
+			}
+		}
+
+		return null;
+	}
+}
+
 if ( ! function_exists( 'tf_tour_validate_traveler_age_limits' ) ) {
 	/**
 	 * Validate traveler ages against passenger types.
 	 *
-	 * @param array  $traveler_details Traveler details.
-	 * @param int    $adults           Adult count.
-	 * @param int    $children         Child count.
-	 * @param int    $infants          Infant count.
-	 * @param string $tour_date        Tour date.
+	 * @param array  $traveler_details        Traveler details.
+	 * @param int    $adults                  Adult count.
+	 * @param int    $children                Child count.
+	 * @param int    $infants                 Infant count.
+	 * @param string $tour_date               Tour date.
+	 * @param bool   $require_traveler_fields Whether expected traveler fields must be present.
 	 * @return true|WP_Error
 	 */
-	function tf_tour_validate_traveler_age_limits( $traveler_details, $adults, $children, $infants, $tour_date ) {
+	function tf_tour_validate_traveler_age_limits( $traveler_details, $adults, $children, $infants, $tour_date, $require_traveler_fields = false ) {
 		$settings    = tf_tour_get_age_validation_settings();
 		$field_names = tf_tour_get_age_validation_field_names();
 
-		if ( empty( $settings['enabled'] ) || empty( $field_names ) || empty( $traveler_details ) ) {
+		if ( empty( $settings['enabled'] ) || empty( $field_names ) ) {
 			return true;
 		}
 
-		if ( 'single' === $settings['collection_mode'] && ( $adults + $children + $infants ) > 1 ) {
+		$total_people = $adults + $children + $infants;
+		if ( 'single' === $settings['collection_mode'] && $total_people > 1 ) {
 			return true;
 		}
 
 		$reference_time = tf_tour_get_reference_timestamp( $tour_date );
 		$type_map       = tf_tour_get_passenger_type_map( $adults, $children, $infants );
+		$traveler_details = is_array( $traveler_details ) ? $traveler_details : array();
 
-		foreach ( $traveler_details as $traveler_index => $traveler_data ) {
+		if ( empty( $traveler_details ) && ! $require_traveler_fields ) {
+			return true;
+		}
+
+		$traveler_indexes = $require_traveler_fields ? array_keys( $type_map ) : array_keys( $traveler_details );
+		foreach ( $traveler_indexes as $traveler_index ) {
+			$traveler_data = ! empty( $traveler_details[ $traveler_index ] ) ? $traveler_details[ $traveler_index ] : array();
 			if ( ! is_array( $traveler_data ) ) {
+				if ( $require_traveler_fields ) {
+					return new WP_Error( 'tf_traveler_age_mismatch', esc_html__( 'The entered date of birth does not match the selected passenger type.', 'tourfic' ) );
+				}
+
 				continue;
 			}
 
@@ -725,11 +868,16 @@ if ( ! function_exists( 'tf_tour_validate_traveler_age_limits' ) ) {
 			}
 
 			foreach ( $field_names as $field_name ) {
-				if ( empty( $traveler_data[ $field_name ] ) || is_array( $traveler_data[ $field_name ] ) ) {
+				$field_value = tf_tour_get_traveler_field_value( $traveler_data, $field_name );
+				if ( empty( $field_value ) || is_array( $field_value ) ) {
+					if ( $require_traveler_fields ) {
+						return new WP_Error( 'tf_traveler_age_mismatch', esc_html__( 'The entered date of birth does not match the selected passenger type.', 'tourfic' ) );
+					}
+
 					continue;
 				}
 
-				$age = tf_tour_calculate_age( $traveler_data[ $field_name ], $reference_time );
+				$age = tf_tour_calculate_age( $field_value, $reference_time );
 				if ( null === $age || ! tf_tour_age_matches_passenger_type( $passenger_type, $age ) ) {
 					return new WP_Error( 'tf_traveler_age_mismatch', esc_html__( 'The entered date of birth does not match the selected passenger type.', 'tourfic' ) );
 				}
@@ -1170,6 +1318,64 @@ if(!function_exists('tf_custom_wp_kses_allow_tags')){
 		$allowed_tags['code']     = true;
 
 		return $allowed_tags;
+	}
+}
+
+if ( ! function_exists( 'tf_split_date_range' ) ) {
+	/**
+	 * Split a Tourfic date range into start and end dates.
+	 *
+	 * Flatpickr uses locale-specific range separators unless overridden. Older
+	 * orders/search URLs may therefore contain separators such as em dash, t/m,
+	 * 至, or إلى instead of Tourfic's canonical ` - ` separator.
+	 *
+	 * @param string $date_range           Date range string.
+	 * @param bool   $single_date_as_range Whether a single date should be returned as both start and end.
+	 * @return array{0:string,1:string}
+	 */
+	function tf_split_date_range( $date_range, $single_date_as_range = true ) {
+		$date_range = sanitize_text_field( (string) $date_range );
+		$date_range = trim( preg_replace( '/\s+/u', ' ', $date_range ) );
+
+		if ( '' === $date_range ) {
+			return array( '', '' );
+		}
+
+		$separator_patterns = array(
+			'/\s+-\/-\s+/u',
+			'/\s+-\s+/u',
+			'/\s+[–—]\s+/u',
+			'/\s+t\/m\s+/iu',
+			'/\s+to\s+/iu',
+			'/\s+bis\s+/iu',
+			'/\s+au\s+/iu',
+			'/\s+a\s+/iu',
+			'/\s+al\s+/iu',
+			'/\s+至\s+/u',
+			'/\s+إلى\s+/u',
+		);
+
+		foreach ( $separator_patterns as $pattern ) {
+			$date_parts = preg_split( $pattern, $date_range, 2 );
+			if ( is_array( $date_parts ) && 2 === count( $date_parts ) ) {
+				return array(
+					trim( $date_parts[0] ),
+					trim( $date_parts[1] ),
+				);
+			}
+		}
+
+		if ( preg_match_all( '/\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2}|\d{1,2}[\/.-]\d{1,2}[\/.-]\d{4}/u', $date_range, $matches ) ) {
+			$dates = array_values( array_filter( array_map( 'trim', $matches[0] ) ) );
+			if ( 2 <= count( $dates ) ) {
+				return array( $dates[0], $dates[1] );
+			}
+			if ( 1 === count( $dates ) ) {
+				return array( $dates[0], $single_date_as_range ? $dates[0] : '' );
+			}
+		}
+
+		return array( $date_range, $single_date_as_range ? $date_range : '' );
 	}
 }
 

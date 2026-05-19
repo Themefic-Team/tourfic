@@ -5,7 +5,8 @@
 // Don't load directly
 defined( 'ABSPATH' ) || exit;
 
- use \Tourfic\Classes\Helper;
+use Tourfic\App\Templates\Components\Shared\Archive\Banner;
+use \Tourfic\Classes\Helper;
 
  if(wp_is_block_theme()){
     wp_head();
@@ -33,10 +34,6 @@ $taxonomy_name = $term->name;
 $taxonomy_slug = $term->slug;
 $max = '2';
 
-$tf_term_meta = get_term_meta( $term->term_id, $taxonomy, true );
-$tf_tour_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] : '';
-$tf_term_image = ! empty( $tf_term_meta['image'] ) ? $tf_term_meta['image'] : $tf_tour_arc_banner;
-
 $tf_tour_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
 
 if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
@@ -62,17 +59,7 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
 <?php } elseif( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-2" ){ ?>
 
 <div class="tf-archive-template__two">
-    <!--Hero section start -->
-    <div class="tf-hero-section-wrap" style="<?php echo !empty($tf_term_image) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url($tf_term_image).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
-        <div class="tf-container">
-            <div class="tf-hero-content tf-archive-hero-content">
-                <div class="tf-head-title">
-                    <h1><?php echo esc_html($taxonomy_name); ?></h1>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Hero section End -->
+    <?php Banner::render(); ?>
 
     <!--Content section end -->
     <div class="tf-content-wrapper">

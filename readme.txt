@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, hellokhoyer,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.9
-Stable tag: 2.22.2
+Stable tag: 2.22.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -423,6 +423,21 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.22.3 – May 19, 2026 =
+
+- Added: Native Bricks Builder support for Hotel, Tour, Apartment, and Car templates (Pro).
+- Added: Built-in REST API Documentation and new API endpoints.
+- Added: Welcome emails for customer registrations (Pro).
+- Fixed: PHP 8.x deprecated warnings and string handling issues.
+- Fixed: Hotel room capacity and iCal/custom availability validation issues.
+- Fixed: Frontend dashboard iCal import availability syncing (Pro).
+- Fixed: CSV import handling and validation issues (Pro).
+- Optimized: Google Maps assets now load only when required.
+- Improved: Email verification and registration flow handling (Pro).
+- Improved: Traveler document upload, DOB, and age validation flow.
+- Improved: Fallback iCal metabox UI behavior (Pro).
+- Improved: Booking date-range consistency across frontend and backend flows.
+
 = 2.22.2 – May 03, 2026 =
 
 - Added: stronger server-side capacity validation to prevent overbooking.
@@ -431,30 +446,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: iCal room linkage and availability issues (hotel & apartment).
 - Fixed: multi-room capacity calculation for hotel searches.
 - Optimized: Google Maps loading (only when needed).
-
-= 2.22.1 – April 26, 2026 =
-
-- Updated: README.txt with improved information.
-- Fixed: Compatibility issues with WooCommerce.
-
-= 2.22.0 – April 16, 2026 =
-
-- New: AI integrations with Tourfic (Pro).
-- New: Create tour, hotel, car, and apartment listings with AI (Pro).
-- Added: File upload support in traveller information.
-- Improved: Traveller details handling and overall experience.
-- Fixed: iCal sync, availability calendar, and car rental date range issues.
-- Fixed: Deposit calculation issue in car rental bookings.
-- Tweak: Added age validation in traveller details.
-
-= 2.21.8 – April 01, 2026 =
-
-- Added Tourfic Overview widget to the dashboard.
-
-= 2.21.7 – Mar 29, 2026 =
-
-- Tweak: Backend booking and email functionality.
-- Improved: Hooks and overall system stability.
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 

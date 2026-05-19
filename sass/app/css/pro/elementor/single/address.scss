@@ -1,3 +1,6 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
 .tf-title-meta{
     display: flex;
     align-items: center;
@@ -10,6 +13,14 @@
         path{
             fill: var(--tf-primary);
         }
+    }
+    i{
+        color: $color-primary;
+        margin-right: 5px;
+    }
+    a{
+        text-decoration: none;
+        color: $color-primary;
     }
 
     .more-hotel {

@@ -334,6 +334,13 @@
                 svg{
                     cursor: pointer;
                     z-index: 2;
+                    height: 24px;
+                    width: 24px;
+
+                    rect,
+                    path{
+                        stroke: $color-white;
+                    }
                 }
 
                 .tf-search-input.form-control{
@@ -389,6 +396,7 @@
                     font-size: 1rem;
                     font-weight: 600;
                     height: 48px;
+                    line-height: inherit;
                     @include flexbox();
                     align-items: center;
                     justify-content: center;
@@ -1358,7 +1366,7 @@
         // Review Section
         .tf-review-wrapper{
             .tf-review-data {
-                @include bd-radius(5px);;
+                @include bd-radius(5px);
                 flex-basis: 20%;
 
                 @media #{$max1024}{
@@ -1374,13 +1382,13 @@
                     text-transform: capitalize;
                 }
                 .tf-review-data-average {
-                    background-color: $color-filling-fg;
+                    // background-color: $color-filling-fg;
                     p {
                         text-align: center;
                         font-size: 1.875rem;
                         color: $color-primary;
                         font-weight: 500;
-                        @include bd-radius(5px);;
+                        @include bd-radius(5px);
                         width: 100px;
                         height: 75px;
                         display: flex;

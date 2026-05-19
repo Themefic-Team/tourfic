@@ -2401,8 +2401,8 @@
                             margin-top: 16px;
                         }
 
-                        a.tf-share-toggle,
-                        a.tf-wishlist {
+                        .tf-share-toggle,
+                        .tf-wishlist {
                             margin: 0;
                             padding: 0;
                             height: 32px;
@@ -2418,8 +2418,8 @@
                             font-size: 1rem;
                             text-decoration: none;
                         }
-                        a.tf-share-toggle.actives,
-                        a.tf-wishlist.actives {
+                        .tf-share-toggle.actives,
+                        .tf-wishlist.actives {
                             background: $color-primary;
                         }
 
@@ -2778,7 +2778,7 @@
                             display: flex;
                             flex: 1;
                             align-items: center;
-                            .tf-icon{
+                            span{
                                 width: auto;
                                 height: auto;
                                 line-height: auto;
@@ -3348,6 +3348,47 @@
                                         margin-right: 8px;
                                         font-size: 1.25rem;
                                     }
+                                }
+                            }
+                        }
+                        .tf-features-block-inner {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 24px;
+
+                            &.tf-flex-gap-16{
+                                gap: 16px;
+                            }
+
+                            &.tf-grid-1{
+                                .tf-feature-block {
+                                    flex-basis: 100%;
+                                }
+                            }
+                            &.tf-grid-2{
+                                .tf-feature-block {
+                                    flex-basis: calc(50% - 8px);
+                                }
+                            }
+                            &.tf-grid-3{
+                                .tf-feature-block {
+                                    flex-basis: calc(33.3333% - 10.6666px);
+                                }
+                            }
+                            &.tf-grid-4{
+                                .tf-feature-block {
+                                    flex-basis: calc(25% - 12px);
+                                }
+                            }
+                            
+                            .tf-feature-block {
+                                width: 100%;
+                                flex-basis: auto;
+                                @media #{$max1024}{
+                                    flex-basis: calc(50% - 16px);
+                                }
+                                @media #{$max575}{
+                                    flex-basis: 100%;
                                 }
                             }
                         }

@@ -2,6 +2,7 @@
 // Don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\App\Templates\Components\Shared\Archive\Banner;
 use \Tourfic\Classes\Helper;
 
 get_header();
@@ -25,15 +26,6 @@ $taxonomy_name = $term->name;
 $taxonomy_slug = $term->slug;
 $max = '2';
 
-if($taxonomy !== 'carrental_category'){
-    $tf_term_meta = get_term_meta( $term->term_id, $taxonomy, true );
-}
-$tf_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_design_1_bannar'] : '';
-
-if($taxonomy !== 'carrental_category'){
-    $tf_car_arc_banner = ! empty( $tf_term_meta['image'] ) ? $tf_term_meta['image'] : $tf_car_arc_banner;
-}
-
 $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] : 'grid';
 $tf_car_search_context = function_exists( 'tf_get_car_archive_search_context' ) ? tf_get_car_archive_search_context() : array(
 	'pickup'       => '',
@@ -46,11 +38,7 @@ $tf_car_search_context = function_exists( 'tf_get_car_archive_search_context' ) 
 
 ?>
 <div class="tf-archive-template__one">
-    <div class="tf-archive-car-banner" style="<?php echo !empty($tf_car_arc_banner) ? 'background-image: url('.esc_url($tf_car_arc_banner).')' : ''; ?>">
-        <div class="tf-banner-content tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-direction-column">
-            <h1><?php echo esc_html($taxonomy_name); ?></h1>
-        </div>
-    </div>
+    <?php Banner::render(); ?>
 
     <div class="tf-container">
         <div class="tf-container-inner">

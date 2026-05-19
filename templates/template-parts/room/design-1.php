@@ -3,9 +3,6 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
-use \Tourfic\App\TF_Review;
-use Tourfic\Classes\Room\Pricing;
-use Tourfic\Classes\Room\Room;
 
 $meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
 $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
@@ -17,7 +14,7 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
             <div class="tf-hero-content">
                 <div class="tf-hero-bottom-area">
                     <div class="tf-head-title">
-                        <h1><?php the_title(); ?></h1>
+                        <?php \Tourfic\App\Templates\Components\Shared\Single\Title::render(); ?>
                     </div>
                     <div class="tf-hero-gallery-videos">
                         <?php if ( ! empty( $gallery_ids ) ) { ?>
@@ -46,12 +43,7 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
                 <div class="tf-details-left">
                     <?php if(wp_is_mobile()): ?>
                     <div class="tf-room-single-mobile-booking-form-wrap">
-                        <?php if ( $pricing_by != '3' ) : ?>
-                            <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( '', 'design-2' ); ?></div>
-                        <?php endif; ?>
-                        <div class="tf-room-booking-box">
-                            <?php Room::tf_room_sidebar_booking_form(); ?>
-                        </div>
+                        <?php \Tourfic\App\Templates\Components\Shared\Single\Booking_Form::render(); ?>
                     </div>
                     <?php endif; ?>
 
@@ -75,111 +67,18 @@ $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
                 <div class="tf-details-right tf-sitebar-widgets">
                     <?php if(!wp_is_mobile()): ?>
                     <div class="tf-room-single-booking-form-wrap">
-                        <?php if ( $pricing_by != '3' ) : ?>
-                            <div class="tf-room-price"><?php Pricing::instance( get_the_ID() )->get_per_price_html( '', 'design-2' ); ?></div>
-                        <?php endif; ?>
-                        <div class="tf-room-booking-box">
-                            <?php Room::tf_room_sidebar_booking_form(); ?>
-                        </div>
+                        <?php \Tourfic\App\Templates\Components\Shared\Single\Booking_Form::render(); ?>
                     </div>
                     <?php endif; ?>
-                    
-                    <div class="tf-review-widget tf-single-widgets ">
-                        <?php
-                        if($disable_review_sec != 1) :
-                        global $current_user;
-                        // Check if user is logged in
-                        $is_user_logged_in = $current_user->exists();
-                        $post_id           = $post->ID;
-                        // Get settings value
-                        $tf_ratings_for = Helper::tfopt( 'r-for' ) ?? [ 'li', 'lo' ];
-                        $tf_settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
-                        if ( $comments ) {
-                            $tf_overall_rate        = [];
-                            TF_Review::tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
-                            TF_Review::tf_get_review_fields( $fields );
-                        ?>
-                        <h2 class="tf-section-title"><?php esc_html_e("Overall reviews", "tourfic"); ?></h2>
-                        <div class="tf-review-data-inner">
-                            <div class="tf-review-data">
-                                <div class="tf-review-data-average">
-                                    <h3 class="avg-review"><span>
-                                        <?php echo esc_html(sprintf( '%.1f', $total_rating )); ?>
-                                    </span>/ <?php echo wp_kses_post($tf_settings_base); ?></h3>
-                                </div>
-                                <div class="tf-review-all-info">
-                                    <p><?php esc_html_e("Excellent", "tourfic"); ?> <span><?php esc_html_e("Total ", "tourfic"); ?> <?php TF_Review::tf_based_on_text( count( $comments ) ); ?></span></p>
-                                </div>
-                            </div>
-                            <div class="tf-review-data-features">
-                                <div class="tf-percent-progress">
-                                <?php 
-                                if ( $tf_overall_rate ) {
-                                foreach ( $tf_overall_rate as $key => $value ) {
-                                if ( empty( $value ) || ! in_array( $key, $fields ) ) {
-                                    continue;
-                                }
-                                $value = TF_Review::tf_average_ratings( $value );
-                                ?>
-                                    <div class="tf-progress-item">                                    
-                                        <div class="tf-review-feature-label">
-                                            <p class="feature-label"><?php echo esc_html( $key ); ?></p>
-                                            <p class="feature-rating"> <?php echo wp_kses_post($value); ?></p>
-                                        </div>
-                                        <div class="tf-progress-bar">
-                                            <span class="percent-progress" style="width: <?php echo wp_kses_post( TF_Review::tf_average_rating_percent( $value, Helper::tfopt( 'r-base' ) )); ?>%"></span>
-                                        </div>
-                                    </div>
-                                    <?php } } ?>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="tf-all-reviews" href="#tf-hotel-reviews"><?php esc_html_e("See all reviews", "tourfic"); ?></a>
-                        <?php } ?>
 
-                        <?php
-                        $tf_comment_counts = get_comments( array(
-                            'post_id' => $post_id,
-                            'user_id' => $current_user->ID,
-                            'count'   => true,
-                        ) );
-                        ?>
-                        <?php if( empty($tf_comment_counts) && $tf_comment_counts == 0 ) : ?>
-                            <button class="tf_btn tf_btn_outline tf_btn_full tf-review-open">
-                                <?php esc_html_e("Leave your review", "tourfic"); ?>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 12H19M12 5V19" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                        <?php endif; ?>
-                        <?php
-                        // Review moderation notice
-                        echo wp_kses_post( TF_Review::tf_pending_review_notice( $post_id ) ?? '');
-                        ?>
-                        <?php
-                        if ( ! empty( $tf_ratings_for ) ) {
-                            if ( $is_user_logged_in ) {
-                            if ( in_array( 'li', $tf_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
-                            ?>
-                        <div class="tf-review-form-wrapper" action="">
-                            <h3><?php esc_html_e("Leave your review", "tourfic"); ?></h3>
-                            <p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
-                            <?php TF_Review::tf_review_form(); ?>
-                        </div>
-                        <?php
-                            }
-                        } else {
-                        if ( in_array( 'lo', $tf_ratings_for ) ) {
-                        ?>
-                        <div class="tf-review-form-wrapper" action="">
-                            <h3><?php esc_html_e("Leave your review", "tourfic"); ?></h3>
-                            <p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
-                            <?php TF_Review::tf_review_form(); ?>
-                        </div>
-                        <?php } } } ?>
-                        <?php endif; ?>
-                    </div>
-                    
+                    <?php
+                    \Tourfic\App\Templates\Components\Shared\Single\Review::render([
+                        'review_style' => 'design-2',
+                        'show_review_states' => 'yes',
+                        'show_reviews' => 'no',
+                        'show_review_form' => 'yes',
+                    ]);
+                    ?>
                 </div>        
             </div>        
             <!-- Hotel details End -->

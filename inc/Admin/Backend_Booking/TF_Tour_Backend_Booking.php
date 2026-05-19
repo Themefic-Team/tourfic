@@ -336,9 +336,9 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 				'tf_email'            => $field['tf_customer_email'],
 			);
 
-			if ( $field['tf_tour_date'] ) {
-				list( $tour_in, $tour_out ) = explode( ' - ', $field['tf_tour_date'] );
-			}
+				if ( $field['tf_tour_date'] ) {
+					list( $tour_in, $tour_out ) = tf_split_date_range( $field['tf_tour_date'] );
+				}
 
 			$tf_package_title = '';
 			if ( '' !== (string) $selected_package ) {
@@ -470,7 +470,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 					$tour_id       = $order['post_id'];
 					$order_details = json_decode( $order['order_details'] );
 					$tf_tour_date  = ! empty( $order_details->tour_date ) ? $order_details->tour_date : '';
-					list( $tf_booking_start, $tf_booking_end ) = explode( " - ", $tf_tour_date );
+					list( $tf_booking_start, $tf_booking_end ) = tf_split_date_range( $tf_tour_date );
 					if ( ! empty( $tour_id ) && $tour_id == $post_id && ! empty( $tf_booking_start ) && $start_date == $tf_booking_start && ! empty( $tf_booking_end ) && $end_date == $tf_booking_end ) {
 						$book_adult = ! empty( $order_details->adult ) ? $order_details->adult : '';
 						if ( ! empty( $book_adult ) ) {

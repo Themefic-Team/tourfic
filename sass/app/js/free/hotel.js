@@ -12,6 +12,23 @@
             },
         });
 
+        function tfSplitDateRange(value, singleDateAsRange = true) {
+            const normalizedValue = String(value || '').trim().replace(/\s+/g, ' ');
+            if (!normalizedValue) {
+                return ['', ''];
+            }
+
+            const dates = normalizedValue.match(/\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2}|\d{1,2}[\/.-]\d{1,2}[\/.-]\d{4}/g);
+            if (dates && dates.length >= 2) {
+                return [dates[0].trim(), dates[1].trim()];
+            }
+            if (dates && dates.length === 1) {
+                return [dates[0].trim(), singleDateAsRange ? dates[0].trim() : ''];
+            }
+
+            return [normalizedValue, singleDateAsRange ? normalizedValue : ''];
+        }
+
         /**
          * Hotel room availability ajax filter
          * @author Fida
@@ -196,8 +213,7 @@
             var children_ages = $('input[name=children_ages]').val();
             if(single_room == 1){
                 var check_in_out_date = $(this).closest('.tf-booking-form').find('input[name=check-in-out-date]').val();
-                var check_in_date = check_in_out_date.split(' - ')[0];
-                var check_out_date = check_in_out_date.split(' - ')[1];
+                var [check_in_date, check_out_date] = tfSplitDateRange(check_in_out_date);
                 var adult = $(this).closest('.tf-booking-form').find('input[name=adult]').val();
                 var child = $(this).closest('.tf-booking-form').find('input[name=childrens]').val();
                 var room = $(this).closest('.tf-booking-form').find('[name=room]').val();
@@ -652,8 +668,7 @@
             var post_id = $('input[name=post_id]').val();
             if(single_room == 1){
                 var check_in_out_date = $this.closest('.tf-booking-form').find('input[name=check-in-out-date]').val();
-                var check_in_date = check_in_out_date.split(' - ')[0];
-                var check_out_date = check_in_out_date.split(' - ')[1];
+                var [check_in_date, check_out_date] = tfSplitDateRange(check_in_out_date);
                 var adult = $this.closest('.tf-booking-form').find('input[name=adult]').val();
                 var child = $this.closest('.tf-booking-form').find('input[name=childrens]').val();
                 var room = $this.closest('.tf-booking-form').find('[name=room]').val();

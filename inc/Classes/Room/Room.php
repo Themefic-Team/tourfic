@@ -263,7 +263,7 @@ class Room {
 		}
 
 		if ( ! empty( $check_in_out ) ) {
-			list( $tf_form_start, $tf_form_end ) = explode( ' - ', $check_in_out );
+			list( $tf_form_start, $tf_form_end ) = tf_split_date_range( $check_in_out );
 		}
 
 		if ( ! empty( $check_in_out ) ) {
@@ -321,37 +321,60 @@ class Room {
 		$tfopt_disable_review 			  = !empty(Helper::tfopt("disable-room-review")) ? Helper::tfopt("disable-room-review") : 0;
 		$disable_review 				  = $tfopt_disable_review == 1 || $meta_disable_review == 1 ? true : $tfopt_disable_review;
 
-		//elementor settings
-		$show_image = isset($settings['show_image']) ? $settings['show_image'] : 'yes';
-		$discount_tag = isset($settings['discount_tag']) ? $settings['discount_tag'] : 'yes';
-		$show_title = isset($settings['show_title']) ? $settings['show_title'] : 'yes';
-		$title_length = isset($settings['title_length']) ? absint($settings['title_length']) : 55;
-		$show_excerpt = isset($settings['show_excerpt']) ? $settings['show_excerpt'] : 'yes';
-		$excerpt_length = isset($settings['excerpt_length']) ? absint($settings['excerpt_length']) : 100;
-		$show_features = isset($settings['show_features']) ? $settings['show_features'] : 'yes';
-		$features_count = isset($settings['features_count']) ? absint($settings['features_count']) : 4;
-		$show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';
-		$show_price = isset($settings['show_price']) ? $settings['show_price'] : 'yes';
-		$show_view_details = isset($settings['show_view_details']) ? $settings['show_view_details'] : 'yes';
-		$view_details_text = isset($settings['view_details_text']) ? sanitize_text_field($settings['view_details_text']) : esc_html__('Book Now', 'tourfic');
+		$builder = isset( $settings['builder'] ) ? $settings['builder'] : 'elementor';
+
+		// Switcher fields
+		$show_image         = Helper::get_switcher_value( $settings, 'show_image', 'yes', $builder );
+		$show_fallback_img  = Helper::get_switcher_value( $settings, 'show_fallback_img', 'no', $builder );
+		$discount_tag       = Helper::get_switcher_value( $settings, 'discount_tag', 'yes', $builder );
+		$show_title         = Helper::get_switcher_value( $settings, 'show_title', 'yes', $builder );
+		$show_excerpt       = Helper::get_switcher_value( $settings, 'show_excerpt', 'yes', $builder );
+		$show_features      = Helper::get_switcher_value( $settings, 'show_features', 'yes', $builder );
+		$show_review        = Helper::get_switcher_value( $settings, 'show_review', 'yes', $builder );
+		$show_price         = Helper::get_switcher_value( $settings, 'show_price', 'yes', $builder );
+		$show_view_details  = Helper::get_switcher_value( $settings, 'show_view_details', 'yes', $builder );
+
+		// Number/text fields
+		$title_length       = isset( $settings['title_length'] ) ? absint( $settings['title_length'] ) : 55;
+		$excerpt_length     = isset( $settings['excerpt_length'] ) ? absint( $settings['excerpt_length'] ) : 100;
+		$features_count     = isset( $settings['features_count'] ) ? absint( $settings['features_count'] ) : 4;
+		$view_details_text  = isset( $settings['view_details_text'] ) ? sanitize_text_field( $settings['view_details_text'] ) : esc_html__( 'Book Now', 'tourfic' );
 
 		// Thumbnail
 		$thumbnail_html = '';
-		if ( !empty($settings) && $show_image == 'yes' ) {
-			$settings[ 'image_size_customize' ] = [
-				'id' => get_post_thumbnail_id(),
-			];
-			$settings['image_size_customize_size'] = $settings['image_size'];
-			$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
-
-			if ( "" === $thumbnail_html && 'yes' === $settings['show_fallback_img'] && !empty( $settings['fallback_img']['url'] ) ) {
-				$settings[ 'image_size_customize' ] = [
-					'id' => $settings['fallback_img']['id'],
+		if ( ! empty( $settings ) && 'yes' === $show_image ) {
+			if ( 'elementor' === $builder && class_exists( '\Elementor\Group_Control_Image_Size' ) ) {
+				$settings['image_size_customize'] = [
+					'id' => get_post_thumbnail_id(),
 				];
-				$settings['image_size_customize_size'] = $settings['image_size'];
-				$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
-			} elseif("" === $thumbnail_html && 'yes' !== $settings['show_fallback_img']) {
-				$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL ) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+				$settings['image_size_customize_size'] = isset( $settings['image_size'] ) ? $settings['image_size'] : 'full';
+
+				$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size_customize' );
+
+				if ( '' === $thumbnail_html && 'yes' === $show_fallback_img && ! empty( $settings['fallback_img']['url'] ) ) {
+					$settings['image_size_customize'] = [
+						'id' => $settings['fallback_img']['id'],
+					];
+					$settings['image_size_customize_size'] = isset( $settings['image_size'] ) ? $settings['image_size'] : 'full';
+
+					$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size_customize' );
+				} elseif ( '' === $thumbnail_html && 'yes' !== $show_fallback_img ) {
+					$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+				}
+			} else {
+				$image_size = isset( $settings['image_size'] ) ? $settings['image_size'] : 'full';
+
+				if ( has_post_thumbnail() ) {
+					$thumbnail_html = get_the_post_thumbnail( get_the_ID(), $image_size );
+				} elseif ( 'yes' === $show_fallback_img && ! empty( $settings['fallback_img']['url'] ) ) {
+					$fallback_img_src = wp_get_attachment_image_url( $settings['fallback_img']['id'], $image_size );
+					if ( ! $fallback_img_src ) {
+						$fallback_img_src = $settings['fallback_img']['url'];
+					}
+					$thumbnail_html = '<img src="' . esc_url( $fallback_img_src ) . '" class="attachment-' . esc_attr( $image_size ) . ' size-' . esc_attr( $image_size ) . ' wp-post-image">';
+				} else {
+					$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+				}
 			}
 		}
 
@@ -1090,7 +1113,7 @@ class Room {
 		$room_option = ! empty( $_GET['room-option'] ) ? sanitize_text_field( $_GET['room-option'] ) : '';
 		// Check-in & out date
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
-		$check_in_out_dates = ! empty( $check_in_out ) ? array_map( 'trim', explode( '-', $check_in_out ) ) : [];
+		$check_in_out_dates = ! empty( $check_in_out ) ? tf_split_date_range( $check_in_out ) : [];
 		
 		//get features
 		$features = ! empty( $_GET['features'] ) ? sanitize_text_field( $_GET['features'] ) : '';
@@ -1375,7 +1398,7 @@ class Room {
 									<?php endif; ?>
 
 									<?php if(! empty( $check_in_out )){ ?>
-									defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+									defaultDate: <?php echo wp_json_encode( tf_split_date_range( $check_in_out ) ) ?>,
 									<?php } ?>
 								});
 
@@ -2090,7 +2113,7 @@ class Room {
 				$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '0';
 				$room = ! empty( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : '1';
 				$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
-				$check_in_out_arr = explode( ' - ', $check_in_out ); 
+					$check_in_out_arr = tf_split_date_range( $check_in_out );
 				$check_in = !empty($check_in_out_arr[0]) ? $check_in_out_arr[0] : ''; 
 				$check_out = !empty($check_in_out_arr[1]) ? $check_in_out_arr[1] : ''; 
 				$date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
@@ -2238,7 +2261,7 @@ class Room {
 										instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
 										dateSetToFields(selectedDates, instance);
 									},
-									defaultDate: <?php echo ! empty( $check_in_out ) ? wp_json_encode( explode( '-', $check_in_out ) ) : '[' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+1 day' ) ) ) . ', ' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+2 day' ) ) ) . ']' ; ?>,
+									defaultDate: <?php echo ! empty( $check_in_out ) ? wp_json_encode( tf_split_date_range( $check_in_out ) ) : '[' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+1 day' ) ) ) . ', ' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+2 day' ) ) ) . ']' ; ?>,
 								});
 
 								function dateSetToFields(selectedDates, instance) {
