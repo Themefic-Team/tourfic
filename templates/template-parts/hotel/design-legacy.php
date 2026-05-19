@@ -13,13 +13,13 @@ use \Tourfic\Classes\Helper;
             <div class="tf-title-wrap">
                 <div class="tf-title-left">
                     <span class="post-type"><?php esc_html_e( 'Hotel', 'tourfic' ) ?></span>
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Address::render(); ?>
+                    <?php \Tourfic\App\Templates\Components\Shared\Single\Title::render(); ?>
+                    <?php \Tourfic\App\Templates\Components\Shared\Single\Address::render(); ?>
                 </div>
 
                 <div class="tf-title-right">
-					<?php \Tourfic\App\Templates\Components\Global\Single\Wishlist::render(['icon_type' => 'simple']); ?>
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Share::render(['share_style' => 'style3']); ?>
+					<?php \Tourfic\App\Templates\Components\Shared\Single\Wishlist::render(['icon_type' => 'simple']); ?>
+                    <?php \Tourfic\App\Templates\Components\Shared\Single\Share::render(['share_style' => 'style3']); ?>
 
                     <div class="reserve-button">
                         <a href="#rooms" class="tf-btn-flip" data-back="<?php esc_attr_e( 'View Rooms', 'tourfic' ); ?>" data-front="<?php esc_attr_e( 'Reserve Now', 'tourfic' ); ?>"></a>
@@ -36,15 +36,15 @@ use \Tourfic\Classes\Helper;
             <div class="hero-section-wrap">
                 <div class="hero-left">
                     <?php 
-                        \Tourfic\App\Templates\Components\Global\Single\Gallery::render(['gallery_style' => 'style2']); 
+                        \Tourfic\App\Templates\Components\Shared\Single\Gallery::render(['gallery_style' => 'style2']); 
                         
-                        \Tourfic\App\Templates\Components\Global\Single\Description::render([
+                        \Tourfic\App\Templates\Components\Shared\Single\Description::render([
                             'limit_content' => 'no',
                             'wrapper_open' => '<div class="tf-mt-16">',
                             'wrapper_close' => '</div>'
                         ]); 
                         
-                        \Tourfic\App\Templates\Components\Global\Single\Feature::render([
+                        \Tourfic\App\Templates\Components\Shared\Single\Feature::render([
                             'wrapper_open' => '<div class="tf-pt-16 tf-pb-30">', 
                             'wrapper_close' => '</div>'
                         ]); 
@@ -52,18 +52,18 @@ use \Tourfic\Classes\Helper;
                 </div>
                 <div class="hero-right">
                     <?php 
-                    \Tourfic\App\Templates\Components\Global\Single\Map::render([
+                    \Tourfic\App\Templates\Components\Shared\Single\Map::render([
                         'show_icon' => 'no',
                         'show_title' => 'no',
                         'design' => 'design-2'
                     ]); 
                     
-                    \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render([
+                    \Tourfic\App\Templates\Components\Shared\Single\Booking_Form::render([
                         'booking_form_style' => 'style3',
                         'wrapper' => 'no',
                     ]);
 
-                    \Tourfic\App\Templates\Components\Global\Single\Nearby_Places::render([
+                    \Tourfic\App\Templates\Components\Shared\Single\Nearby_Places::render([
                         'nearby_places_style' => 'style2',
                         'wrapper_open' => '<div class="nearby-container"><div class="nearby-container-inner">',
                         'wrapper_close' => '</div></div>',
@@ -87,7 +87,7 @@ use \Tourfic\Classes\Helper;
     </div>
 
     <?php 
-    \Tourfic\App\Templates\Components\Global\Single\Rooms::render([
+    \Tourfic\App\Templates\Components\Shared\Single\Rooms::render([
         'room_style' => 'style3',
         'container'  => 'yes',
         'wrapper'    => 'no',
@@ -95,7 +95,7 @@ use \Tourfic\Classes\Helper;
         'wrapper_close' => '</div>'
     ]); 
     
-    \Tourfic\App\Templates\Components\Global\Single\Amenities::render([
+    \Tourfic\App\Templates\Components\Shared\Single\Amenities::render([
         'amenities_style' => 'style2', 
         'container' => 'yes'
     ]); 
@@ -107,7 +107,7 @@ use \Tourfic\Classes\Helper;
             <div class="tf-container">
                 <h2 class="section-heading tf-section-title"><?php echo ! empty( $meta['faq-section-title'] ) ? esc_html( $meta['faq-section-title'] ) : ''; ?></h2>
                 <div class="tf-section-flex tf-flex">
-					<?php \Tourfic\App\Templates\Components\Global\Single\Enquiry::render([
+					<?php \Tourfic\App\Templates\Components\Shared\Single\Enquiry::render([
                         'wrapper_open' => '<div class="tf-hotel-enquiry">',
                         'wrapper_close' => '</div>',
                     ]); ?>
@@ -208,7 +208,7 @@ use \Tourfic\Classes\Helper;
     <?php } ?>
 
 	<?php 
-    \Tourfic\App\Templates\Components\Global\Single\Review::render([
+    \Tourfic\App\Templates\Components\Shared\Single\Review::render([
         'review_style' => 'design-3',
         'container' => 'yes',
         'wrapper' => 'no',
@@ -216,7 +216,7 @@ use \Tourfic\Classes\Helper;
         'wrapper_close' => '</div>',
     ]);
     
-    \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render([
+    \Tourfic\App\Templates\Components\Shared\Single\Terms_And_Conditions::render([
         'wrapper_open' => '<div class="toc-section sp-50"><div class="tf-container">',
         'wrapper_close' => '</div></div>',
     ]);

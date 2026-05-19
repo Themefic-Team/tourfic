@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
     get_header();
 }
 
-use Tourfic\App\Templates\Components\Global\Archive\Banner;
+use Tourfic\App\Templates\Components\Shared\Archive\Banner;
 use \Tourfic\Classes\Helper;
 
 if ( !Helper::tf_is_woo_active() ) {

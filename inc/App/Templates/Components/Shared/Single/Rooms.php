@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\App\Templates\Components\Global\Single;
+namespace Tourfic\App\Templates\Components\Shared\Single;
 
 use Tourfic\Classes\Helper;
 use Tourfic\Classes\Hotel\Pricing;

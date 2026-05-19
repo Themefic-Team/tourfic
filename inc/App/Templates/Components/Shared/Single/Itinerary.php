@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\App\Templates\Components\Global\Single;
+namespace Tourfic\App\Templates\Components\Shared\Single;
 
 use Tourfic\Classes\Helper;
 
@@ -172,7 +172,7 @@ class Itinerary {
 				<?php 
 				} 
 				if ( $location && $itinerary_map != 1 ){
-					\Tourfic\App\Templates\Components\Global\Single\Map::render([
+					\Tourfic\App\Templates\Components\Shared\Single\Map::render([
 						'wrapper_open' => '<div class="tf-mt-16 tf-mb-30">',
 						'wrapper_close' => '</div>',
 						'show_title' => 'no',
@@ -228,7 +228,7 @@ class Itinerary {
 						</div>
 					</div>
 					<?php if ( $location && $itinerary_map != 1){
-						\Tourfic\App\Templates\Components\Global\Single\Map::render([
+						\Tourfic\App\Templates\Components\Shared\Single\Map::render([
 							'show_title' => 'no',
 						], '', '600px');
 					} ?>

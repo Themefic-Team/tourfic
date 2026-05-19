@@ -1,4 +1,4 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-\Tourfic\App\Templates\Components\Global\Single\Itinerary::render(['itinerary_style' => 'style2']);
+\Tourfic\App\Templates\Components\Shared\Single\Itinerary::render(['itinerary_style' => 'style2']);

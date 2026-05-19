@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
-use Tourfic\App\Templates\Components\Global\Archive\Sidebar;
+use Tourfic\App\Templates\Components\Shared\Archive\Sidebar;
 use Tourfic\App\Templates\Components\Tour\Archive\Listings;
 ?>
 

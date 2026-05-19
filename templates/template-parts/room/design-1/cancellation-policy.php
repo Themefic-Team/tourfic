@@ -3,4 +3,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-\Tourfic\App\Templates\Components\Global\Single\Cancelation_Policy::render();
+\Tourfic\App\Templates\Components\Shared\Single\Cancelation_Policy::render();

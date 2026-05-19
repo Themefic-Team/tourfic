@@ -2,4 +2,4 @@
 // Don't load directly
 defined( 'ABSPATH' ) || exit;
 
-\Tourfic\App\Templates\Components\Global\Single\Highlights::render();
+\Tourfic\App\Templates\Components\Shared\Single\Highlights::render();

@@ -77,7 +77,7 @@ $tf_cars_slug = get_option('car_slug');
     <div class="tf-single-booking-bar">
         <div class="tf-container">
             <div class="tf-top-booking-bar tf-flex tf-flex-space-bttn tf-flex-align-center">
-                <?php \Tourfic\App\Templates\Components\Global\Single\Sticky_Nav::render(); ?>
+                <?php \Tourfic\App\Templates\Components\Shared\Single\Sticky_Nav::render(); ?>
                 
                 <div class="tf-top-bar-booking tf-flex tf-flex-gap-32">
                     <div class="tf-price-header">
@@ -101,10 +101,10 @@ $tf_cars_slug = get_option('car_slug');
         <div class="tf-container-inner">
             <div class="tf-single-car-details-warper">
                 <div class="tf-car-details-column">
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Gallery::render(); ?>
+                    <?php \Tourfic\App\Templates\Components\Shared\Single\Title::render(); ?>
+                    <?php \Tourfic\App\Templates\Components\Shared\Single\Gallery::render(); ?>
 
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Sticky_Nav::render(); ?>
+                    <?php \Tourfic\App\Templates\Components\Shared\Single\Sticky_Nav::render(); ?>
                     
                     <div class="tf-template-part tf-flex tf-flex-gap-32 tf-flex-direction-column">
                         <?php
@@ -128,7 +128,7 @@ $tf_cars_slug = get_option('car_slug');
                 <?php do_action("tf_car_before_single_booking_form"); ?>
                 <div class="tf-car-booking-form">
                     <?php 
-                    \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render(['wrapper' => 'no']);
+                    \Tourfic\App\Templates\Components\Shared\Single\Booking_Form::render(['wrapper' => 'no']);
                     
                     \Tourfic\App\Templates\Components\Car_Rental\Single\Car_Driver_Info::render([
                         'wrapper_open' => '<div class="tf-mb-30">',
@@ -141,9 +141,9 @@ $tf_cars_slug = get_option('car_slug');
                 <?php do_action("tf_car_after_single_booking_form"); ?>
             </div>
             
-            <?php \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render(); ?>
+            <?php \Tourfic\App\Templates\Components\Shared\Single\Terms_And_Conditions::render(); ?>
 
-            <?php \Tourfic\App\Templates\Components\Global\Single\Review::render(); ?>
+            <?php \Tourfic\App\Templates\Components\Shared\Single\Review::render(); ?>
         </div>
     </div>
 </div>

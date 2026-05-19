@@ -48,10 +48,10 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                             </a>
                         <?php } ?>
                     </div>
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Wishlist::render(['design' => 'design-3']); ?>
+                    <?php \Tourfic\App\Templates\Components\Shared\Single\Wishlist::render(['design' => 'design-3']); ?>
                     
                 </div>
-	            <?php \Tourfic\App\Templates\Components\Global\Single\Booking_Form::render(['booking_form_style' => 'style3']); ?>
+	            <?php \Tourfic\App\Templates\Components\Shared\Single\Booking_Form::render(['booking_form_style' => 'style3']); ?>
                 <div class="tf-hero-bottom-area">
                     <?php
                     $tour_video = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
@@ -128,8 +128,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         <div class="tf-container">
             <div class="tf-title-wrap">
                 <div class="tf-title-left">
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Title::render(); ?>
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Address::render(); ?>
+                    <?php \Tourfic\App\Templates\Components\Shared\Single\Title::render(); ?>
+                    <?php \Tourfic\App\Templates\Components\Shared\Single\Address::render(); ?>
                 </div>
 
                 <div class="tf-title-right" style="align-items: flex-end">
@@ -148,7 +148,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <div class="description-section sp-30">
         <div class="tf-container">
             <?php 
-                \Tourfic\App\Templates\Components\Global\Single\Description::render([
+                \Tourfic\App\Templates\Components\Shared\Single\Description::render([
                     'limit_content' => 'no',
                     'wrapper_open' => '<div class="tf-mt-16">',
                     'wrapper_close' => '</div>'
@@ -165,25 +165,25 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <!-- End description -->
     
     <?php
-    \Tourfic\App\Templates\Components\Global\Single\Highlights::render([
+    \Tourfic\App\Templates\Components\Shared\Single\Highlights::render([
         'highlights_style' => 'style2',
         'container' => 'yes',
         'wrapper_class' => 'sp-50',
     ]);
     
     if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-        \Tourfic\App\Templates\Components\Global\Single\Feature::render([
+        \Tourfic\App\Templates\Components\Shared\Single\Feature::render([
             'wrapper_open' => '<div class="sp-50"><div class="tf-container">', 
             'wrapper_close' => '</div></div>'
         ]);
     }
 
-    \Tourfic\App\Templates\Components\Global\Single\Included_Excluded::render([
+    \Tourfic\App\Templates\Components\Shared\Single\Included_Excluded::render([
         'included_excluded_style' => 'style3',
         'wrapper' => 'no',
     ]);
     
-    \Tourfic\App\Templates\Components\Global\Single\Itinerary::render([
+    \Tourfic\App\Templates\Components\Shared\Single\Itinerary::render([
         'itinerary_style' => 'style3',
         'wrapper' => 'no',
     ]); 
@@ -199,7 +199,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 </div>
 
                 <div class="tf-section-flex tf-flex">
-                    <?php \Tourfic\App\Templates\Components\Global\Single\Enquiry::render([
+                    <?php \Tourfic\App\Templates\Components\Shared\Single\Enquiry::render([
                         'wrapper_open' => '<div class="tf-tour-enquiry">',
                         'wrapper_close' => '</div>',
                     ]); ?>
@@ -223,12 +223,12 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <!-- FAQ section end -->
 
     <?php
-    \Tourfic\App\Templates\Components\Global\Single\Terms_And_Conditions::render([
+    \Tourfic\App\Templates\Components\Shared\Single\Terms_And_Conditions::render([
         'wrapper_open' => '<div class="toc-section sp-50"><div class="tf-container">',
         'wrapper_close' => '</div></div>',
     ]);
 
-    \Tourfic\App\Templates\Components\Global\Single\Review::render([
+    \Tourfic\App\Templates\Components\Shared\Single\Review::render([
         'review_style' => 'design-3',
         'container' => 'yes',
         'wrapper' => 'no',
@@ -236,7 +236,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         'wrapper_close' => '</div>',
     ]);
 	
-	\Tourfic\App\Templates\Components\Global\Single\Related_Post::render([
+	\Tourfic\App\Templates\Components\Shared\Single\Related_Post::render([
 		'related_post_style' => 'style3', 
 		'container' => 'yes',
         'wrapper' => 'no',
