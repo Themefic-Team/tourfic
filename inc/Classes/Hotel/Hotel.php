@@ -2656,7 +2656,13 @@ class Hotel {
 		// room
 		$room_selected = ! empty( $_GET['room'] ) ? absint( wp_unslash( $_GET['room'] ) ) : 1;
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : '';
+		if ( empty( $check_in_out ) ) {
+			$hotel_current_timestamp = current_time( 'timestamp' );
+			$hotel_default_check_in  = wp_date( 'Y/m/d', $hotel_current_timestamp );
+			$hotel_default_check_out = wp_date( 'Y/m/d', strtotime( '+1 day', $hotel_current_timestamp ) );
+			$check_in_out            = $hotel_default_check_in . ' - ' . $hotel_default_check_out;
+		}
 		//get features
 		$features = ! empty( $_GET['features'] ) ? sanitize_text_field( $_GET['features'] ) : '';
 
@@ -4160,7 +4166,7 @@ class Hotel {
                             <div class="tf-section-title-and-location">
 								<!-- Title -->
 								<?php if( $show_title == 'yes' ): ?>
-                                <h2 class="tf-section-title"><a href="<?php echo esc_url( get_the_permalink() ); ?>"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title(), $title_length ) ); ?></a></h2>
+                                <h2 class="tf-section-title"><a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title(), $title_length ) ); ?></a></h2>
 								<?php endif; ?>
 
 								<!-- Location -->
