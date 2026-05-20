@@ -392,7 +392,8 @@ class Hotel {
         <tbody>
         <?php
         echo wp_kses_post( ob_get_clean() );
-        $error    = $rows = null;
+        $error    = esc_html__( 'No rooms available for the selected date.', 'tourfic' );
+        $rows     = null;
         $has_room = false;
 
         // generate table rows
