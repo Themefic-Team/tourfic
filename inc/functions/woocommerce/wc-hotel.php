@@ -838,10 +838,9 @@ function tf_hotel_booking_callback() {
 			 * @hook tf_hotel_before_booking_added_to_cart
 			 * @param int $post_id The hotel post ID.
 			 * @param array $tf_room_data The room booking data array.
-			 * @param int $post_id The hotel post ID.
 			 * @param int $product_id The WooCommerce product ID.
 			 */
-			do_action( 'tf_hotel_before_booking_added_to_cart', $post_id, $tf_room_data, $post_id, $product_id );
+			do_action( 'tf_hotel_before_booking_added_to_cart', $post_id, $tf_room_data, $product_id );
 
 			# Add product to cart with the custom cart item data
 			$added_to_cart = WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_room_data );
@@ -857,11 +856,10 @@ function tf_hotel_booking_callback() {
 				 * @hook tf_hotel_after_booking_added_to_cart
 				 * @param int $post_id The hotel post ID.
 				 * @param array $tf_room_data The room booking data array.
-				 * @param int $post_id The hotel post ID.
 				 * @param int $product_id The WooCommerce product ID.
 				 * @param string $added_to_cart The cart item key or false.
 				 */
-				do_action( 'tf_hotel_after_booking_added_to_cart', $post_id, $tf_room_data, $post_id, $product_id, $added_to_cart );
+				do_action( 'tf_hotel_after_booking_added_to_cart', $post_id, $tf_room_data, $product_id, $added_to_cart );
 
 				$response['product_id']  = $product_id;
 				$response['add_to_cart'] = 'true';
