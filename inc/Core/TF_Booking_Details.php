@@ -64,18 +64,18 @@ abstract Class TF_Booking_Details {
 
 				// Filter Perameters
 				$checkinout_perms = ! empty( $_GET['checkinout'] ) ? sanitize_text_field( wp_unslash( $_GET['checkinout'] ) ) : '';
-				$tf_post_perms    = ! empty( $_GET['post'] ) ? sanitize_text_field( wp_unslash( $_GET['post'] ) ) : '';
-				$tf_payment_perms = ! empty( $_GET['payment'] ) ? sanitize_text_field( wp_unslash( $_GET['payment'] ) ) : '';
+				$tf_post_perms    = ! empty( $_GET['post'] ) ? absint( wp_unslash( $_GET['post'] ) ) : '';
+				$tf_payment_perms = ! empty( $_GET['payment'] ) ? sanitize_key( wp_unslash( $_GET['payment'] ) ) : '';
 
-				$tf_filter_query = "";
+				$tf_order_filters = array();
 				if ( $checkinout_perms ) {
-					$tf_filter_query .= " AND checkinout = '$checkinout_perms'";
+					$tf_order_filters['checkinout'] = $checkinout_perms;
 				}
 				if ( $tf_post_perms ) {
-					$tf_filter_query .= " AND post_id = '$tf_post_perms'";
+					$tf_order_filters['post_id'] = $tf_post_perms;
 				}
 				if ( $tf_payment_perms ) {
-					$tf_filter_query .= " AND ostatus = '$tf_payment_perms'";
+					$tf_order_filters['ostatus'] = $tf_payment_perms;
 				}
 
 				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
@@ -92,7 +92,9 @@ abstract Class TF_Booking_Details {
 					$tf_booking_details_select = array(
 						'select'    => "*",
 						'post_type' => $booking_type,
-						'query'     => " $tf_filter_query ORDER BY id DESC"
+						'where'     => $tf_order_filters,
+						'orderby'   => 'id',
+						'order'     => 'DESC'
 					);
 
 					$tf_hotel_booking_result = Helper::tourfic_order_table_data( $tf_booking_details_select );
@@ -102,7 +104,13 @@ abstract Class TF_Booking_Details {
 					$tf_orders_select = array(
 						'select'    => "*",
 						'post_type' => $booking_type,
-						'query'     => " $tf_filter_query ORDER BY id DESC LIMIT $offset, $no_of_booking_per_page"
+						'where'     => $tf_order_filters,
+						'orderby'   => 'id',
+						'order'     => 'DESC',
+						'limit'     => array(
+							'offset'   => $offset,
+							'per_page' => $no_of_booking_per_page,
+						),
 					);
 
 					$tf_order_details_result = Helper::tourfic_order_table_data( $tf_orders_select );
@@ -111,7 +119,13 @@ abstract Class TF_Booking_Details {
 					$tf_orders_select        = array(
 						'select'    => "*",
 						'post_type' => $booking_type,
-						'query'     => " $tf_filter_query ORDER BY id DESC LIMIT 15"
+						'where'     => $tf_order_filters,
+						'orderby'   => 'id',
+						'order'     => 'DESC',
+						'limit'     => array(
+							'offset'   => 0,
+							'per_page' => 15,
+						),
 					);
 					$tf_order_details_result = Helper::tourfic_order_table_data( $tf_orders_select );
                     $total_pages = 1;
@@ -1842,21 +1856,23 @@ abstract Class TF_Booking_Details {
         $tf_post_perms = ! empty( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : '';
         $booking_type = ! empty( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : '';
 
-        $tf_filter_query = "";
+        $tf_order_filters = array();
         if ( $checkinout_perms ) {
-            $tf_filter_query .= " AND checkinout = '$checkinout_perms'";
+            $tf_order_filters['checkinout'] = $checkinout_perms;
         }
         if ( $tf_post_perms ) {
-            $tf_filter_query .= " AND post_id = '$tf_post_perms'";
+            $tf_order_filters['post_id'] = $tf_post_perms;
         }
         if ( $tf_payment_perms ) {
-            $tf_filter_query .= " AND ostatus = '$tf_payment_perms'";
+            $tf_order_filters['ostatus'] = $tf_payment_perms;
         }
 
         $tf_booking_details_select = array(
             'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
             'post_type' => $booking_type,
-            'query'     => " $tf_filter_query ORDER BY id DESC"
+            'where'     => $tf_order_filters,
+            'orderby'   => 'id',
+            'order'     => 'DESC'
         );
 
         $tf_booking_filter_result = Helper::tourfic_order_table_data( $tf_booking_details_select );

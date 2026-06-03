@@ -25,43 +25,57 @@ if ( ! class_exists( 'TF_Booking_Rest_API' ) ) {
 		 * @author Foysal
 		 */
 		public function tf_get_orders( $request ) {
-			$current_user_id = $request->get_param( 'user_id' ) ? $request->get_param( 'user_id' ) : get_current_user_id();
-			$checkinout = $request->get_param( 'checkinout' ) ? $request->get_param( 'checkinout' ) : '';
-			$post_type = $request->get_param( 'post_type' ) ? $request->get_param( 'post_type' ) : '';
-			$post_id = $request->get_param( 'post_id' ) ? $request->get_param( 'post_id' ) : '';
-			$order_status = $request->get_param( 'order_status' ) ? $request->get_param( 'order_status' ) : '';
+			$current_user_id = get_current_user_id();
+			$post_type       = $this->tf_validate_allowed_param( $request, 'post_type', $this->tf_order_post_types(), true );
+			$post_id         = $this->tf_get_rest_absint_param( $request, 'post_id' );
+			$checkinout      = $this->tf_validate_allowed_param( $request, 'checkinout', $this->tf_checkinout_statuses() );
+			$order_status    = $this->tf_validate_allowed_param( $request, 'order_status', $this->tf_order_statuses() );
 
-            $tf_filter_query = "";
-            if ( $checkinout ) {
-                $tf_filter_query .= " AND checkinout = '$checkinout'";
-            }
-            if ( $post_id ) {
-                $tf_filter_query .= " AND post_id = '$post_id'";
-            }
-            if ( $order_status ) {
-                $tf_filter_query .= " AND ostatus = '$order_status'";
-            }
-			if ( $this->user_has_role( $current_user_id, 'administrator' ) || $this->user_has_role( $current_user_id, 'tf_manager' ) ) {
+			foreach ( array( $post_type, $post_id, $checkinout, $order_status ) as $validation_error ) {
+				if ( is_wp_error( $validation_error ) ) {
+					return $validation_error;
+				}
+			}
+			$post_type = $this->tf_normalize_order_post_type( $post_type );
+
+			$filters = array();
+			if ( ! empty( $checkinout ) ) {
+				$filters['checkinout'] = $checkinout;
+			}
+			if ( ! empty( $post_id ) ) {
+				$filters['post_id'] = $post_id;
+			}
+			if ( ! empty( $order_status ) ) {
+				$filters['ostatus'] = $order_status;
+			}
+
+			$orders_result = array();
+			if ( $this->tf_current_user_can_manage_records() ) {
 
 				$tf_orders_select = array(
 					'select'    => "*",
 					'post_type' => $post_type,
-					'query'     => " $tf_filter_query ORDER BY order_date DESC"
+					'where'     => $filters,
+					'orderby'   => 'order_date',
+					'order'     => 'DESC'
 				);
 
 				$orders_result = Helper::tourfic_order_table_data( $tf_orders_select );
-			}
-			if ( $this->user_has_role( $current_user_id, 'tf_vendor' ) ) {
+			} elseif ( $this->user_has_role( $current_user_id, 'tf_vendor' ) ) {
 
 				$tf_orders_select = array(
 					'select'    => "*",
 					'post_type' => $post_type,
 					'author'    => $current_user_id,
-                    'query'     => " $tf_filter_query ORDER BY order_date DESC",
+					'where'     => $filters,
+					'orderby'   => 'order_date',
+					'order'     => 'DESC',
 					'limit'     => ""
 				);
                 
 				$orders_result = tourfic_vendor_order_table_data( $tf_orders_select );
+			} else {
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
 			}
             $events = array();
 			$orders_data = array();
@@ -150,8 +164,15 @@ if ( ! class_exists( 'TF_Booking_Rest_API' ) ) {
 		 */
 		public function tf_get_order_details( $request ) {
 			global $wpdb;
-			$id    = $request->get_param( 'id' );
+			$id    = absint( $request->get_param( 'id' ) );
 			$order = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %d", $id ), ARRAY_A );
+			if ( empty( $order ) ) {
+				return new WP_Error( 'tf_order_not_found', esc_html__( 'Order not found.', 'tourfic' ), array( 'status' => 404 ) );
+			}
+			if ( ! $this->tf_current_user_can_access_order( $order ) ) {
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this order.', 'tourfic' ), array( 'status' => 403 ) );
+			}
+
 			$order_details = json_decode( $order['order_details'] );
 			
             //post title
@@ -162,11 +183,11 @@ if ( ! class_exists( 'TF_Booking_Rest_API' ) ) {
             //order date
             if ( ! empty( $order['order_date'] ) ) {
 				$order['order_detail']['order_date'] = esc_html(gmdate('F d, Y',strtotime($order['order_date'])));
-			}
+            }
 
             //booked by
-            $tf_booking_by = get_user_by('id', $order->customer_id);
-            if("offline"==$order->payment_method && empty($tf_booking_by)){
+            $tf_booking_by = get_user_by('id', $order['customer_id']);
+            if("offline"==$order['payment_method'] && empty($tf_booking_by)){
                 $order['order_detail']['booked_by'] = "Administrator";
             }else{
                 $order['order_detail']['booked_by'] = !empty($tf_booking_by->roles[0]) ? esc_html($tf_booking_by->roles[0]) : 'Administrator';
@@ -260,6 +281,9 @@ if ( ! class_exists( 'TF_Booking_Rest_API' ) ) {
 
             //total person
             $total_person = 0;
+			$adult_count  = array();
+			$child_count  = array();
+			$infant_count = array();
             if(!empty($order_details->adult)){
                 $adult_count = explode( " × ", $order_details->adult );
                 $total_person += $adult_count[0] ? $adult_count[0] : 0;
@@ -272,9 +296,9 @@ if ( ! class_exists( 'TF_Booking_Rest_API' ) ) {
                 $infant_count = explode( " × ", $order_details->infants );
                 $total_person += $infant_count[0] ? $infant_count[0] : 0;
             }
-            $order['adult_count'] = $adult_count[0] ? $adult_count[0] : '';
-            $order['child_count'] = $child_count[0] ? $child_count[0] : '';
-            $order['infant_count'] = $infant_count[0] ? $infant_count[0] : '';
+            $order['adult_count'] = ! empty( $adult_count[0] ) ? $adult_count[0] : '';
+            $order['child_count'] = ! empty( $child_count[0] ) ? $child_count[0] : '';
+            $order['infant_count'] = ! empty( $infant_count[0] ) ? $infant_count[0] : '';
             $order['total_person'] = $total_person;
 
 			return $order;

@@ -1033,11 +1033,47 @@ function tourfic_template_settings() {
 
 if(!function_exists('tourfic_order_table_data')){
 	function tourfic_order_table_data( $query ) {
+		if ( class_exists( '\Tourfic\Classes\Helper' ) && is_callable( array( '\Tourfic\Classes\Helper', 'tourfic_order_table_data' ) ) ) {
+			return \Tourfic\Classes\Helper::tourfic_order_table_data( $query );
+		}
+
 		global $wpdb;
-		$query_type          = $query['post_type'];
-		$query_select        = $query['select'];
-		$query_where         = $query['query'];
-		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $query_type ), ARRAY_A );
+		$query_type          = sanitize_key( $query['post_type'] );
+		$query_select        = '*' === trim( $query['select'] ) ? '*' : preg_replace( '/[^a-zA-Z0-9_, ]/', '', $query['select'] );
+		$values              = array( $query_type );
+		$query_where         = ! empty( $query['query'] ) ? $query['query'] : '';
+
+		if ( isset( $query['where'] ) && is_array( $query['where'] ) ) {
+			$query_where = '';
+			$allowed_columns = array(
+				'order_id'    => '%d',
+				'post_id'     => '%d',
+				'customer_id' => '%d',
+				'room_id'     => '%s',
+				'ostatus'     => '%s',
+				'checkinout'  => '%s',
+			);
+
+			foreach ( $query['where'] as $column => $value ) {
+				if ( ! isset( $allowed_columns[ $column ] ) || '' === $value || null === $value ) {
+					continue;
+				}
+
+				$query_where .= " AND {$column} = {$allowed_columns[ $column ]}";
+				$values[]     = '%d' === $allowed_columns[ $column ] ? absint( $value ) : sanitize_text_field( $value );
+			}
+
+			if ( ! empty( $query['orderby'] ) ) {
+				$allowed_orderby = array( 'id', 'order_id', 'order_date', 'check_in', 'check_out' );
+				$orderby         = sanitize_key( $query['orderby'] );
+				if ( in_array( $orderby, $allowed_orderby, true ) ) {
+					$order        = ! empty( $query['order'] ) && 'ASC' === strtoupper( $query['order'] ) ? 'ASC' : 'DESC';
+					$query_where .= " ORDER BY {$orderby} {$order}";
+				}
+			}
+		}
+
+		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $values ), ARRAY_A );
 
 		return $tf_tour_book_orders;
 	}

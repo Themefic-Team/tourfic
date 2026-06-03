@@ -1038,6 +1038,82 @@ class Helper {
 		return $template;
 	}
 
+	private static function tf_order_table_select_sql( $select ) {
+		$select          = '*' === trim( $select ) ? '*' : $select;
+		$allowed_columns = array(
+			'id',
+			'order_id',
+			'post_id',
+			'post_type',
+			'room_number',
+			'room_id',
+			'check_in',
+			'check_out',
+			'billing_details',
+			'shipping_details',
+			'order_details',
+			'customer_id',
+			'payment_method',
+			'ostatus',
+			'order_date',
+			'checkinout',
+			'checkinout_by',
+		);
+
+		if ( '*' === $select ) {
+			return '*';
+		}
+
+		$columns = array_map( 'trim', explode( ',', $select ) );
+		$columns = array_values( array_intersect( $columns, $allowed_columns ) );
+
+		return ! empty( $columns ) ? implode( ', ', $columns ) : '*';
+	}
+
+	private static function tf_order_table_structured_sql( $query, &$values ) {
+		$sql             = '';
+		$allowed_columns = array(
+			'order_id'    => '%d',
+			'post_id'     => '%d',
+			'customer_id' => '%d',
+			'room_id'     => '%s',
+			'ostatus'     => '%s',
+			'checkinout'  => '%s',
+		);
+
+		if ( ! empty( $query['where'] ) && is_array( $query['where'] ) ) {
+			foreach ( $query['where'] as $column => $value ) {
+				if ( ! isset( $allowed_columns[ $column ] ) || '' === $value || null === $value ) {
+					continue;
+				}
+
+				$sql     .= " AND {$column} = {$allowed_columns[ $column ]}";
+				$values[] = '%d' === $allowed_columns[ $column ] ? absint( $value ) : sanitize_text_field( $value );
+			}
+		}
+
+		if ( ! empty( $query['orderby'] ) ) {
+			$allowed_orderby = array( 'id', 'order_id', 'order_date', 'check_in', 'check_out' );
+			$orderby         = sanitize_key( $query['orderby'] );
+			if ( in_array( $orderby, $allowed_orderby, true ) ) {
+				$order = ! empty( $query['order'] ) && 'ASC' === strtoupper( $query['order'] ) ? 'ASC' : 'DESC';
+				$sql  .= " ORDER BY {$orderby} {$order}";
+			}
+		}
+
+		if ( ! empty( $query['limit'] ) && is_array( $query['limit'] ) ) {
+			$offset   = ! empty( $query['limit']['offset'] ) ? absint( $query['limit']['offset'] ) : 0;
+			$per_page = ! empty( $query['limit']['per_page'] ) ? absint( $query['limit']['per_page'] ) : 0;
+			if ( ! empty( $per_page ) ) {
+				$sql     .= ' LIMIT %d, %d';
+				$values[] = $offset;
+				$values[] = $per_page;
+			}
+		}
+
+		return $sql;
+	}
+
 	/*
      * Retrive Orders Data
      *
@@ -1048,10 +1124,14 @@ class Helper {
      */
 	static function tourfic_order_table_data( $query ) {
 		global $wpdb;
-		$query_type          = $query['post_type'];
-		$query_select        = $query['select'];
-		$query_where         = $query['query'];
-		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $query_type ), ARRAY_A );
+		$query_type   = sanitize_key( $query['post_type'] );
+		$query_select = self::tf_order_table_select_sql( $query['select'] );
+		$values       = array( $query_type );
+		$query_where  = isset( $query['where'] ) && is_array( $query['where'] )
+			? self::tf_order_table_structured_sql( $query, $values )
+			: $query['query'];
+
+		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $values ), ARRAY_A );
 
 		return $tf_tour_book_orders;
 	}
