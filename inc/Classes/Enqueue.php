@@ -485,6 +485,18 @@ class Enqueue {
 				'car_mobile_button_hide' => esc_html__( 'Hide', 'tourfic' ),
 				'car_mobile_button_book_now' => esc_html__( 'Book Now', 'tourfic' ),
 				'car_location_required_msg' => esc_html__( 'Select Pickup & Dropoff Location', 'tourfic' ),
+				'car_location_invalid_msg' => esc_html__(
+					'Please select supported Pick-up and Drop-off locations from the suggestions.',
+					'tourfic'
+				),
+				'car_pickup_location_invalid_msg' => esc_html__(
+					'Please select a supported Pick-up location from the suggestions.',
+					'tourfic'
+				),
+				'car_dropoff_location_invalid_msg' => esc_html__(
+					'Please select a supported Drop-off location from the suggestions.',
+					'tourfic'
+				),
 				'car_date_required_msg' => esc_html__( 'Select Pickup & Dropoff Date', 'tourfic' ),
 				'open_street_map_text' => esc_html__( 'OpenStreetMap', 'tourfic' ),
 				'required' => esc_html__( 'This field is required.', 'tourfic'),
