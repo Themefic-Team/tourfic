@@ -1007,9 +1007,14 @@ abstract Class TF_Booking_Details {
                         </div>
                     </div>
 
-                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tf_order_details->post_type == 'tour' ||  $tf_order_details->post_type == 'hotel' ) { ?>
-                    <!-- Visitor Details -->
-                    <div class="customers-order-date details-box">
+	                    <?php
+	                    $tf_visitors_details = !empty($tf_tour_details->visitor_details) ? json_decode($tf_tour_details->visitor_details) : '';
+	                    $traveler_fields = !empty(Helper::tfopt('without-payment-field')) ? Helper::tf_data_types(Helper::tfopt('without-payment-field')) : '';
+	                    $tf_show_tour_visitor_details = $tf_order_details->post_type == 'tour' && ( ! empty( $tf_visitors_details ) || ( function_exists( 'tf_tour_is_global_traveler_info_enabled' ) && tf_tour_is_global_traveler_info_enabled() ) );
+	                    $tf_show_visitor_details = ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tf_show_tour_visitor_details ) || $tf_order_details->post_type == 'hotel';
+	                    if ( $tf_show_visitor_details ) { ?>
+	                    <!-- Visitor Details -->
+	                    <div class="customers-order-date details-box">
                         <h4>
                             <?php apply_filters( 'tf_' . $this->booking_args["booking_type"] . 'booking_details_visitor_section_title_change',  $tf_order_details->post_type == 'tour' ? esc_html_e("Visitor details", "tourfic") : esc_html_e("Guest details", "tourfic") ); ?>
                             <div class="others-button visitor_edit">
@@ -1021,11 +1026,9 @@ abstract Class TF_Booking_Details {
                                 </span>
                             </div>
                         </h4>
-                        <div class="tf-grid-box tf-visitor-grid-box">
-                            <?php 
-                            $tf_visitors_details = !empty($tf_tour_details->visitor_details) ? json_decode($tf_tour_details->visitor_details) : '';
-                            $traveler_fields = !empty(Helper::tfopt('without-payment-field')) ? Helper::tf_data_types(Helper::tfopt('without-payment-field')) : '';
-                            if(!empty($tf_visitors_details)){
+	                        <div class="tf-grid-box tf-visitor-grid-box">
+	                            <?php
+	                            if(!empty($tf_visitors_details)){
                                 $visitor_count = 1;
                                 foreach($tf_visitors_details as $visitor){
                             ?>

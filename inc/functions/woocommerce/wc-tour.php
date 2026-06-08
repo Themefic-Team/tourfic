@@ -55,8 +55,7 @@ function tf_tours_booking_function() {
 
 	// Visitor Details
 	$tf_visitor_details = !empty($_POST['traveller']) ? wp_unslash( $_POST['traveller'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-	$traveller_info_coll_global = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'disable_traveller_info' ) ) ? Helper::tfopt( 'disable_traveller_info' ) : '';
-	$traveller_info_coll        = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['tour-traveler-info'] ) ? $meta['tour-traveler-info'] : $traveller_info_coll_global;
+	$traveller_info_coll        = function_exists( 'tf_tour_is_traveler_info_enabled' ) ? tf_tour_is_traveler_info_enabled( $meta ) : false;
 	$traveller_info_collection  = function_exists( 'tf_tour_get_age_validation_settings' ) ? tf_tour_get_age_validation_settings() : array();
 	$expected_traveler_indexes  = array();
 	if ( ! empty( $traveller_info_coll ) && $total_people > 0 ) {
@@ -67,7 +66,11 @@ function tf_tours_booking_function() {
 		$expected_traveler_indexes = range( 1, $traveler_count );
 	}
 
-	if ( function_exists( 'tf_tour_process_traveler_document_fields' ) ) {
+	if ( empty( $traveller_info_coll ) ) {
+		$tf_visitor_details = array();
+	}
+
+	if ( ! empty( $traveller_info_coll ) && function_exists( 'tf_tour_process_traveler_document_fields' ) ) {
 		$tf_visitor_details = tf_tour_process_traveler_document_fields(
 			$tf_visitor_details,
 			$post_id,
@@ -82,7 +85,7 @@ function tf_tours_booking_function() {
 		}
 	}
 
-	if ( function_exists( 'tf_tour_validate_traveler_age_limits' ) ) {
+	if ( ! empty( $traveller_info_coll ) && function_exists( 'tf_tour_validate_traveler_age_limits' ) ) {
 		$traveler_age_validation = tf_tour_validate_traveler_age_limits( $tf_visitor_details, $adults, $children, $infant, $tour_date, ! empty( $traveller_info_coll ) );
 		if ( is_wp_error( $traveler_age_validation ) ) {
 			$response['errors'][] = $traveler_age_validation->get_error_message();
@@ -921,7 +924,7 @@ function tf_tours_booking_function() {
 		$discounted_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
 
 		if ( $tour_type == 'continuous' ) {
-			$tf_tours_data['tf_tours_data']['tour_time'] = $tour_time_title;
+			$tf_tours_data['tf_tours_data']['tour_time'] = ! empty( $tour_time_title ) ? $tour_time_title : '';
 		}
 
 		# Calculate discounted price

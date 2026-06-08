@@ -217,6 +217,37 @@ if ( ! function_exists( 'tf_tour_traveler_compliance_settings' ) ) {
 }
 add_filter( 'tf_settings_sections', 'tf_tour_traveler_compliance_settings', 35 );
 
+if ( ! function_exists( 'tf_tour_is_global_traveler_info_enabled' ) ) {
+	/**
+	 * Check whether global tour traveler info is enabled.
+	 *
+	 * @return bool
+	 */
+	function tf_tour_is_global_traveler_info_enabled() {
+		return function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'disable_traveller_info' ) );
+	}
+}
+
+if ( ! function_exists( 'tf_tour_is_traveler_info_enabled' ) ) {
+	/**
+	 * Check whether traveler info should be collected for a tour.
+	 *
+	 * @param array $tour_meta Tour meta settings.
+	 * @return bool
+	 */
+	function tf_tour_is_traveler_info_enabled( $tour_meta = array() ) {
+		if ( ! tf_tour_is_global_traveler_info_enabled() ) {
+			return false;
+		}
+
+		if ( ! is_array( $tour_meta ) ) {
+			return true;
+		}
+
+		return ! empty( $tour_meta['tour-traveler-info'] ) ? (bool) $tour_meta['tour-traveler-info'] : true;
+	}
+}
+
 if ( ! function_exists( 'tf_tour_get_traveler_info_fields' ) ) {
 	/**
 	 * Get configured tour traveler info fields.
