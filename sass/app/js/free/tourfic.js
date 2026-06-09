@@ -2034,10 +2034,16 @@
 
         const tfResolveTourPopup = ($context = null) => {
             const $form = tfResolveTourBookingForm($context);
-            let $popup = $form.find('.tf-withoutpayment-booking').first();
+            let $popup = $context && $context.length ? $context.closest('.tf-withoutpayment-booking').first() : $();
 
-            if (!$popup.length && $context && $context.length) {
-                $popup = $context.closest('.tf-withoutpayment-booking').first();
+            if (!$popup.length) {
+                $popup = $form.find('.tf-withoutpayment-booking.show').first();
+            }
+            if (!$popup.length) {
+                $popup = $form.find('.tf-withoutpayment-booking').first();
+            }
+            if (!$popup.length) {
+                $popup = $('.tf-withoutpayment-booking.show').first();
             }
             if (!$popup.length) {
                 $popup = $('.tf-withoutpayment-booking').first();
@@ -2047,14 +2053,29 @@
         };
 
         const tfResolveTourPackageList = ($context = null) => {
+            const $popup = tfResolveTourPopup($context);
+            if ($popup.length) {
+                const $packages = $popup.find('.tf-booking-content-package .tf-single-package');
+                if ($packages.length) {
+                    return $packages;
+                }
+            }
+
             const $form = tfResolveTourBookingForm($context);
 
             return $form.find('.tf-booking-content-package .tf-single-package');
         };
 
         const tfResolveSelectedTourPackage = ($context = null) => {
-            const $form = tfResolveTourBookingForm($context);
-            const $selectedPackage = $form.find('.tf-booking-content-package input[name="tf_package"]:checked').first();
+            const $source = $context && $context.length ? $context : $();
+            let $selectedPackage = $source.closest('.tf-single-package');
+
+            if ($selectedPackage.length && $selectedPackage.find('input[name="tf_package"]:checked').length) {
+                return $selectedPackage;
+            }
+
+            const $packages = tfResolveTourPackageList($context);
+            $selectedPackage = $packages.find('input[name="tf_package"]:checked').first().closest('.tf-single-package');
 
             return $selectedPackage.length ? $selectedPackage.closest('.tf-single-package') : $();
         };
@@ -2610,7 +2631,7 @@
                 }
             });
 
-            const $currentSelection = tfResolveTourBookingForm($context).find('.tf-booking-content-package input[name="tf_package"]:checked').first();
+            const $currentSelection = tfResolveTourPackageList($context).find('input[name="tf_package"]:checked').first();
             if ($currentSelection.length && $currentSelection.closest('.tf-single-package').hasClass('tf-package-unavailable')) {
                 const $firstAvailable = getFirstAvailablePackageRadio($context);
                 if ($firstAvailable.length) {
@@ -2755,7 +2776,7 @@
                     } else {
                         let $travelerInfoBox = $form.find('.tf-traveller-info-box');
                         let $travelerSummary = $form.find('.tf-booking-traveller-info');
-                        let $packageContent = $form.find('.tf-booking-content-package');
+                        let $packageContent = $popup.length ? $popup.find('.tf-booking-content-package') : $();
 
                         if ($popup.length) {
                             if (!$travelerInfoBox.length) {
@@ -2764,9 +2785,9 @@
                             if (!$travelerSummary.length) {
                                 $travelerSummary = $popup.find('.tf-booking-traveller-info');
                             }
-                            if (!$packageContent.length) {
-                                $packageContent = $popup.find('.tf-booking-content-package');
-                            }
+                        }
+                        if (!$packageContent.length) {
+                            $packageContent = $form.find('.tf-booking-content-package');
                         }
 
                         if ($travelerInfoBox.length > 0) {
@@ -2775,7 +2796,17 @@
                         if ($travelerSummary.length > 0) {
                             $travelerSummary.html(response.traveller_summery);
                         }
+                        const selectedPackageTimes = {};
                         if ($packageContent.length) {
+                            $packageContent.find('.tf-single-package').each(function () {
+                                const $package = $(this);
+                                const packageKey = String($package.find('input[name="tf_package"]').first().val() || '');
+                                const selectedTime = $package.find('select[name="package_start_time"]').first().val() || '';
+
+                                if (packageKey && selectedTime) {
+                                    selectedPackageTimes[packageKey] = selectedTime;
+                                }
+                            });
                             $packageContent.find('.tf-pacakge-times').hide();
                             $packageContent.find('select[name="package_start_time"]').each(function () {
                                 $(this).empty();
@@ -2784,14 +2815,26 @@
 
                         if (response.pacakge_times && typeof response.pacakge_times === 'object') {
                             Object.entries(response.pacakge_times).forEach(([key, times]) => {
-                                const wrapper = $form.find(`.tf-package-times-${key}`);
+                                const wrapper = $packageContent.find(`.tf-package-times-${key}`);
                                 wrapper.css('display', 'flex');
                                 const select = wrapper.find('select[name="package_start_time"]');
                                 if (select.length) {
-                                    select.append(`<option value="" disabled selected>Time</option>`);
+                                    const selectedTime = selectedPackageTimes[key] || '';
+                                    const hasSelectedTime = selectedTime && times.some((time) => time === selectedTime);
+                                    select.append($('<option>', {
+                                        value: '',
+                                        text: 'Time',
+                                        disabled: true,
+                                        selected: !hasSelectedTime
+                                    }));
                                     times.forEach((time) => {
-                                        select.append(`<option value="${time}">${time}</option>`);
+                                        select.append($('<option>', {
+                                            value: time,
+                                            text: time,
+                                            selected: hasSelectedTime && selectedTime === time
+                                        }));
                                     });
+                                    select.val(hasSelectedTime ? selectedTime : '');
                                 }
                             });
                         }

@@ -1059,7 +1059,7 @@ class Tour {
                         <input type='text' name='check-in-out-date' id='check-in-out-date' class='tf-field tours-check-in-out' onkeypress="return false;" placeholder='<?php esc_html_e( "Select Date", "tourfic" ); ?>'
                                value='' required/>
                     </div>
-					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' ) { ?>
+					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' && 'package' !== $pricing_rule ) { ?>
                         <div class="tf-field-group check-in-time-div tf-mt-8" id="" style="display: none;">
                             <i class="fa-regular fa-clock"></i>
                             <select class="tf-field" name="check-in-time" id="" style="min-width: 100px;"></select>
@@ -1225,7 +1225,7 @@ class Tour {
                                 <input type="text" class="tf-field tours-check-in-out" placeholder="<?php esc_html_e( "Select Date", "tourfic" ); ?>" value="" required/>
                             </div>
 
-							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' ) { ?>
+							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' && 'package' !== $pricing_rule ) { ?>
                                 <div class="tf-bottom-booking-field check-in-time-div" id="" style="display: none;">
                                     <div class="tf-bottom-booking-field-icon">
                                         <i class="ri-time-line"></i>
@@ -1266,7 +1266,7 @@ class Tour {
                         <input type='text' name='check-in-out-date' id='check-in-out-date' class='tf-field tours-check-in-out' onkeypress="return false;" placeholder='<?php esc_html_e( "Select Date", "tourfic" ); ?>'
                                value='' required/>
                     </div>
-					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed') { ?>
+					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' && 'package' !== $pricing_rule ) { ?>
                         <div class="tf-field-group check-in-time-div tf-mt-8 tf-field-calander" id="" style="display: none;">
                             <i class="fa-regular fa-clock"></i>
                             <select class="tf-field" name="check-in-time" id="" style="min-width: 100px;"></select>
@@ -1454,7 +1454,7 @@ class Tour {
                                 <input type="text" class="tf-field tours-check-in-out" placeholder="<?php esc_html_e( "Select Date", "tourfic" ); ?>" value="" required/>
 
                             </div>
-							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' && !empty($allowed_times)) { ?>
+							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' && 'package' !== $pricing_rule && !empty($allowed_times)) { ?>
                                 <div class="tf-bottom-booking-field check-in-time-div" id="" style="display: none;">
                                     <select class="tf-field" name="check-in-time" id=""></select>
                                 </div>
@@ -1623,7 +1623,7 @@ class Tour {
                                 <input type="text" class="tf-field tours-check-in-out" placeholder="<?php esc_html_e( "Select Date", "tourfic" ); ?>" value="" required/>
 
                             </div>
-							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' && !empty($allowed_times)) { ?>
+							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' && 'package' !== $pricing_rule && !empty($allowed_times)) { ?>
                                 <div class="tf-bottom-booking-field check-in-time-div" id="" style="display: none;">
                                     <select class="tf-field" name="check-in-time" id=""></select>
                                 </div>
@@ -1850,7 +1850,7 @@ class Tour {
                             </label>
                         </div>
 
-						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' ) { ?>
+						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' && 'package' !== $pricing_rule ) { ?>
                             <div class='tf_form-row check-in-time-div' id="" style="display: none;">
                                 <label class='tf_label-row'>
                                     <div class='tf_form-inner'>
@@ -4140,6 +4140,8 @@ class Tour {
 		$disable_child_price  = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
 		$disable_infant_price = ! empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
 		$tf_package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+		$default_min_people  = ! empty( $meta['min_person'] ) ? absint( $meta['min_person'] ) : 0;
+		$default_max_people  = ! empty( $meta['max_person'] ) ? absint( $meta['max_person'] ) : 0;
 
 		/**
 		 * If fixed is selected but pro is not activated
@@ -4212,8 +4214,8 @@ class Tour {
 
 			$start_date            = ! empty( $matched_availability['check_in'] ) ? $matched_availability['check_in'] : '';
 			$end_date              = ! empty( $matched_availability['check_out'] ) ? $matched_availability['check_out'] : '';
-			$min_people            = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : '';
-			$max_people            = ! empty( $matched_availability['max_person'] ) ? $matched_availability['max_person'] : '';
+			$min_people            = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : $default_min_people;
+			$max_people            = ! empty( $matched_availability['max_person'] ) ? $matched_availability['max_person'] : $default_max_people;
 			$tf_tour_booking_limit = ! empty( $matched_availability['max_capacity'] ) ? $matched_availability['max_capacity'] : 0;
 			// Fixed tour maximum capacity limit
 
@@ -4269,8 +4271,8 @@ class Tour {
 
 			// $pricing_rule = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
 
-			$min_people = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : '';
-			$max_people = ! empty( $matched_availability['max_person'] ) ? $matched_availability['max_person'] : '';
+			$min_people = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : $default_min_people;
+			$max_people = ! empty( $matched_availability['max_person'] ) ? $matched_availability['max_person'] : $default_max_people;
 			$allowed_times_field = ! empty( $matched_availability['allowed_time'] ) ? $matched_availability['allowed_time'] : [''];
 
 
@@ -4424,8 +4426,8 @@ class Tour {
 			// frontend selected date value
 			$front_date = strtotime( str_replace( '/', '-', $tour_date ) );
 			// Backend continuous min/max people values
-			$min_people = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : '';
-			$max_people = ! empty( $matched_availability['max_person'] ) ? $matched_availability['max_person'] : '';
+			$min_people = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : $default_min_people;
+			$max_people = ! empty( $matched_availability['max_person'] ) ? $matched_availability['max_person'] : $default_max_people;
 			/* translators: %s: minimum number of people */
 			$min_text = sprintf( _n( '%s person', '%s people', $min_people, 'tourfic' ), $min_people );
 			/* translators: %s: maximum number of people */

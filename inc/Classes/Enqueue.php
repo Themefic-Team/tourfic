@@ -357,6 +357,7 @@ class Enqueue {
 			$tf_tour_global_template    = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
 			$tf_tour_selected_template  = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
 			$tour_type                  = ! empty( $meta['type'] ) ? $meta['type'] : '';
+			$pricing_rule               = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 			$tour_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 			$raw_tour_availability = $meta['tour_availability'] ?? '';
@@ -376,6 +377,7 @@ class Enqueue {
 
 			$single_tour_form_data['tf_tour_selected_template'] = $tf_tour_selected_template;
 			$single_tour_form_data['tour_type']                 = $tour_type;
+			$single_tour_form_data['pricing_rule']              = $pricing_rule;
 			$single_tour_form_data['first_day_of_week'] = !empty(Helper::tfopt("tf-week-day-flatpickr")) ? Helper::tfopt("tf-week-day-flatpickr") : 0;
 			$single_tour_form_data['select_time_text'] = esc_html__( "Select Time", "tourfic" );
 			$single_tour_form_data['date_format']      = esc_html( $tour_date_format_for_users );
