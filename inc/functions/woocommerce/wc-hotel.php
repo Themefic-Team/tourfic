@@ -73,8 +73,14 @@ function tf_hotel_booking_callback() {
 	if ( ! $adult ) {
 		$response['errors'][] = esc_html__( 'Select Adult(s).', 'tourfic' );
 	}
+	if ( 0 > $adult || 0 > $child ) {
+		$response['errors'][] = esc_html__( 'Guest count cannot be negative.', 'tourfic' );
+	}
 	if ( ! $room_selected ) {
 		$response['errors'][] = esc_html__( 'Select Room(s).', 'tourfic' );
+	}
+	if ( 0 > $room_selected ) {
+		$response['errors'][] = esc_html__( 'Room count cannot be negative.', 'tourfic' );
 	}
 	if ( ! $post_id ) {
 		$response['errors'][] = esc_html__( 'Unknown Error! Please try again.', 'tourfic' );
@@ -894,7 +900,7 @@ function tf_hotel_set_order_price( $cart ) {
 	foreach ( $cart->get_cart() as $cart_item ) {
 
 		if ( isset( $cart_item['tf_hotel_data']['price_total'] ) ) {
-			$cart_item['data']->set_price( $cart_item['tf_hotel_data']['price_total'] );
+			$cart_item['data']->set_price( max( 0, $cart_item['tf_hotel_data']['price_total'] ) );
 		}
 	}
 

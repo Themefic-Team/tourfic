@@ -156,6 +156,15 @@ function tf_car_booking_callback() {
 	$response      = array();
 	$tf_cars_data = array();
 
+	if ( is_array( $extra_qty ) ) {
+		foreach ( $extra_qty as $single_extra_qty ) {
+			if ( 0 > intval( $single_extra_qty ) ) {
+				$response['errors'][] = esc_html__( 'Extra quantity cannot be negative.', 'tourfic' );
+				break;
+			}
+		}
+	}
+
 	// Deposit
 	$car_allow_deposit = ! empty( $meta['allow_deposit'] ) ? $meta['allow_deposit'] : '';
 	$car_deposit_type = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : 'none';
@@ -394,7 +403,7 @@ function tf_car_set_order_price( $cart ) {
 
 	foreach ( $cart->get_cart() as $cart_item ) {
 		if ( isset( $cart_item['tf_car_data']['price_total'] ) ) {
-			$cart_item['data']->set_price( $cart_item['tf_car_data']['price_total'] );
+			$cart_item['data']->set_price( max( 0, $cart_item['tf_car_data']['price_total'] ) );
 		}
 	}
 

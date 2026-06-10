@@ -44,6 +44,9 @@ function tf_tours_booking_function() {
 	$infant       = isset( $_POST['infants'] ) ? intval( sanitize_text_field( $_POST['infants'] ) ) : 0;
 	$total_people = $adults + $children + $infant;
 	$total_people_booking = $adults + $children;
+	if ( 0 > $adults || 0 > $children || 0 > $infant ) {
+		$response['errors'][] = esc_html__( 'Traveler count cannot be negative.', 'tourfic' );
+	}
 	// Tour date
 	$tour_date    = ! empty( $_POST['check-in-out-date'] ) ? sanitize_text_field( $_POST['check-in-out-date'] ) : '';
 	$tour_time    = isset( $_POST['check-in-time'] ) ? sanitize_text_field( $_POST['check-in-time'] ) : null;
@@ -1245,9 +1248,10 @@ function tf_tours_set_order_price( $cart ) {
 	foreach ( $cart->get_cart() as $cart_item ) {
 
 		if ( isset( $cart_item['tf_tours_data']['price'] ) && ! empty( $cart_item['tf_tours_data']['tour_extra_total'] ) ) {
-			$cart_item['data']->set_price( $cart_item['tf_tours_data']['price'] + $cart_item['tf_tours_data']['tour_extra_total'] );
+			$tour_price = $cart_item['tf_tours_data']['price'] + $cart_item['tf_tours_data']['tour_extra_total'];
+			$cart_item['data']->set_price( max( 0, $tour_price ) );
 		} elseif ( isset( $cart_item['tf_tours_data']['price'] ) && empty( $cart_item['tf_tours_data']['tour_extra_total'] ) ) {
-			$cart_item['data']->set_price( $cart_item['tf_tours_data']['price'] );
+			$cart_item['data']->set_price( max( 0, $cart_item['tf_tours_data']['price'] ) );
 		}
 
 	}
