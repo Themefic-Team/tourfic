@@ -3957,7 +3957,7 @@ class Helper {
 		$has_deposit = ! empty( $room['allow_deposit'] ) && $room['allow_deposit'] == true;
 		if ( $has_deposit == true ) {
 			if ( $room['deposit_type'] == 'percent' ) {
-				$deposit_amount = $price * ( intval( $room['deposit_amount'] ) / 100 );
+				$deposit_amount = $price * ( floatval( $room['deposit_amount'] ) / 100 );
 			} else {
 				$deposit_amount = $room['deposit_amount'];
 			}
