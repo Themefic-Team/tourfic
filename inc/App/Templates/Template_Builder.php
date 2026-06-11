@@ -1505,18 +1505,8 @@ class Template_Builder {
                             // _bricks_page_content_2 must store only the elements array.
                             $template_data = json_decode( $fileContent, true );
 
-                            $elements = [];
-                            if ( is_array( $template_data ) ) {
-                                foreach ( [ 'content', 'header', 'footer', 'archive', 'single' ] as $key ) {
-                                    if ( ! empty( $template_data[$key] ) && is_array( $template_data[$key] ) ) {
-                                        $elements = $template_data[$key];
-                                        break;
-                                    }
-                                }
-                            }
-
-                            if ( ! empty( $elements ) ) {
-                                update_post_meta( $post_id, '_bricks_page_content_2', $elements );
+                            if ( is_array( $template_data ) && ! empty( $template_data['content'] ) && is_array( $template_data['content'] ) ) {
+                                update_post_meta( $post_id, '_bricks_page_content_2', $template_data['content'] );
                             }
                         }
                     }
