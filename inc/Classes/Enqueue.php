@@ -269,9 +269,23 @@ class Enqueue {
 		/**
 		 * Google Map
 		 */
-		if ( 'googlemap' === $tf_openstreet_map ) {
+		$tf_should_enqueue_google_map = 'googlemap' === $tf_openstreet_map;
+		if ( is_singular( array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental' ) ) ) {
+			$tf_should_enqueue_google_map = false;
+		}
+
+		if ( $tf_should_enqueue_google_map ) {
 			$tf_map_api_key = ! empty( Helper::tfopt( 'tf-googlemapapi' ) ) ? Helper::tfopt( 'tf-googlemapapi' ) : '';
-			wp_enqueue_script( 'googleapis', '//maps.googleapis.com/maps/api/js?key=' . $tf_map_api_key . '&sensor=false&amp;libraries=places', array(), TOURFIC, true );
+			$tf_google_map_url = add_query_arg(
+				array(
+					'key'       => $tf_map_api_key,
+					'libraries' => 'places',
+					'loading'   => 'async',
+				),
+				'https://maps.googleapis.com/maps/api/js'
+			);
+
+			wp_enqueue_script( 'googleapis', $tf_google_map_url, array(), TOURFIC, true );
 			wp_enqueue_script( 'markerclusterer', TF_ASSETS_URL . 'app/libs/markerclusterer.min.js', array(), TOURFIC, true );
 			wp_enqueue_script('map-marker-label', TF_ASSETS_URL . 'app/libs/markerwithlabel.js', array(), TOURFIC, true);
 		}
