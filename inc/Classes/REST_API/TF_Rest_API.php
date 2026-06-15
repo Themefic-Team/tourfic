@@ -120,6 +120,18 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 			}
 		}
 
+		public function tf_user_permission_callback( WP_REST_Request $request ) {
+			if ( ! is_user_logged_in() ) {
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
+			}
+
+			if ( $this->tf_current_user_can_access_user( $request->get_param( 'id' ) ) ) {
+				return true;
+			}
+
+			return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this user.', 'tourfic' ), array( 'status' => 403 ) );
+		}
+
 		public function tf_order_permission_callback( WP_REST_Request $request ) {
 			return $this->tf_admin_vendor_permission_callback();
 		}
@@ -149,6 +161,23 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 			$current_user_id = get_current_user_id();
 
 			return $this->user_has_role( $current_user_id, 'administrator' ) || $this->user_has_role( $current_user_id, 'tf_manager' );
+		}
+
+		protected function tf_current_user_can_access_user( $user_id ) {
+			$user_id         = absint( $user_id );
+			$current_user_id = get_current_user_id();
+
+			if ( empty( $user_id ) || empty( $current_user_id ) ) {
+				return false;
+			}
+
+			if ( $user_id === $current_user_id ) {
+				return true;
+			}
+
+			return $this->tf_current_user_can_manage_records()
+				|| current_user_can( 'list_users' )
+				|| current_user_can( 'edit_user', $user_id );
 		}
 
 		protected function tf_current_user_can_manage_vendor_record( $post_id = 0, $author_id = 0 ) {

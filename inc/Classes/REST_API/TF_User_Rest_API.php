@@ -93,6 +93,10 @@ if ( ! class_exists( 'TF_User_Rest_API' ) ) {
 				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.' ), array( 'status' => 403 ) );
 			}
 
+			if ( ! $this->tf_current_user_can_access_user( $user->ID ) ) {
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this user.', 'tourfic' ), array( 'status' => 403 ) );
+			}
+
 			$user_data = array(
 				'id'                 => $user->ID,
 				'username'           => $user->user_login,

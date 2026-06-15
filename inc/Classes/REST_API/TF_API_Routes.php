@@ -233,7 +233,7 @@ class TF_API_Routes {
 		register_rest_route( 'tf/v1', '/user/(?P<id>\\d+)', array(
 			'methods'             => 'GET',
 			'callback'            => array( $api, 'tf_get_user' ),
-			'permission_callback' => array( $api, 'tf_permission_callback' ),
+			'permission_callback' => array( $api, 'tf_user_permission_callback' ),
 		) );
 
 		register_rest_route( 'tf/v1', '/user-bookings', array(
