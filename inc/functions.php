@@ -241,10 +241,10 @@ if ( ! function_exists( 'tf_tour_is_traveler_info_enabled' ) ) {
 		}
 
 		if ( ! is_array( $tour_meta ) ) {
-			return true;
+			return false;
 		}
 
-		return ! empty( $tour_meta['tour-traveler-info'] ) ? (bool) $tour_meta['tour-traveler-info'] : true;
+		return ! empty( $tour_meta['tour-traveler-info'] );
 	}
 }
 
