@@ -1,6 +1,49 @@
 (function ($) {
     "use strict";
+
+    function tfProGoogleMapsIsReady() {
+        return 'undefined' !== typeof window.google &&
+            window.google.maps &&
+            window.google.maps.Map &&
+            window.google.maps.Marker &&
+            window.google.maps.LatLng &&
+            window.google.maps.Geocoder &&
+            window.google.maps.Circle &&
+            window.google.maps.MapTypeId &&
+            window.google.maps.MapTypeId.ROADMAP &&
+            window.google.maps.event &&
+            window.google.maps.places &&
+            window.google.maps.places.Autocomplete &&
+            $.fn.locationpicker;
+    }
+
+    function tfProWhenGoogleMapsReady(callback) {
+        var retries = 50;
+        var resolved = false;
+        var resolve = function () {
+            if (resolved) {
+                return;
+            }
+
+            if (tfProGoogleMapsIsReady()) {
+                resolved = true;
+                callback();
+                return;
+            }
+
+            if (0 < retries) {
+                retries--;
+                setTimeout(resolve, 100);
+            }
+        };
+
+        window.tfProGoogleMapsQueue = window.tfProGoogleMapsQueue || [];
+        window.tfProGoogleMapsQueue.push(resolve);
+        resolve();
+    }
+
     if(tf_pro_params.map_option === 'googlemap') {
+        tfProWhenGoogleMapsReady(function () {
         $(".gmaps .tf--map-osm-wrap").css("height", "300px");
         var tf_location_lat = $(".tf--latitude").val();
         var tf_location_long = $(".tf--longitude").val();
@@ -59,5 +102,6 @@
 
             });
         }
+        });
     }
 }(jQuery));
