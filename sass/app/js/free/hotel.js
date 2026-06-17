@@ -29,6 +29,32 @@
             return [normalizedValue, singleDateAsRange ? normalizedValue : ''];
         }
 
+        function tfGetHotelSelectedExtras($container) {
+            let selectedExtras = [];
+            let selectedExtraQuantities = [];
+
+            $container.find('.tf-single-hotel-service').each(function () {
+                let $extra = $(this);
+                let $checkbox = $extra.find('input[name="extra_service"]');
+
+                if ($checkbox.is(':checked')) {
+                    let quantity = parseInt($extra.find('input[name="extra-quantity"]').val(), 10);
+
+                    selectedExtras.push($checkbox.val());
+                    selectedExtraQuantities.push(quantity > 0 ? quantity : 1);
+                }
+            });
+
+            return {
+                extras: selectedExtras,
+                quantities: selectedExtraQuantities
+            };
+        }
+
+        function tfIsHotelExtraQuantityControl($element) {
+            return $element.closest('.tf-single-hotel-service').closest('.tf-hotel-withoutpayment-booking, .tf-room-booking-popup').length > 0;
+        }
+
         /**
          * Hotel room availability ajax filter
          * @author Fida
@@ -201,23 +227,28 @@
             var $this = $(this);
 
             var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
-            var post_id = $('input[name=post_id]').val();
-            var unique_id = $this.closest('.tf-room').find('input[name=unique_id]').val();
-            var room_id = $this.closest('.tf-room').find('input[name=room_id]').val();
-            var option_id = $this.closest('.tf-room').find('[name=option_id]').val();
-            var single_room = $this.closest('.tf-room').find('[name=single_room]').val();
+            var $roomForm = $this.closest('.tf-room');
+            var post_id = $roomForm.find('input[name=post_id]').val() || $('input[name=post_id]').val();
+            var unique_id = $roomForm.find('input[name=unique_id]').val();
+            var room_id = $roomForm.find('input[name=room_id]').val();
+            var option_id = $roomForm.find('[name=option_id]').val();
+            var single_room = $roomForm.find('[name=single_room]').val();
 
             var location = $('input[name=place]').val();
             // var adult = $('input[name=adult]').val();
             // var child = $('input[name=child]').val();
             var children_ages = $('input[name=children_ages]').val();
             if(single_room == 1){
-                var check_in_out_date = $(this).closest('.tf-booking-form').find('input[name=check-in-out-date]').val();
-                var [check_in_date, check_out_date] = tfSplitDateRange(check_in_out_date);
-                var adult = $(this).closest('.tf-booking-form').find('input[name=adult]').val();
-                var child = $(this).closest('.tf-booking-form').find('input[name=childrens]').val();
-                var room = $(this).closest('.tf-booking-form').find('[name=room]').val();
-                var deposit = $(this).closest('.tf-room').find('input[name=make_deposit]').is(':checked');
+                var check_in_date = $roomForm.find('input[name=check_in_date]').val();
+                var check_out_date = $roomForm.find('input[name=check_out_date]').val();
+                if (!check_in_date || !check_out_date) {
+                    var check_in_out_date = $('#tf-single-hotel-avail').find('input[name=check-in-out-date]').val();
+                    [check_in_date, check_out_date] = tfSplitDateRange(check_in_out_date);
+                }
+                var adult = $roomForm.find('input[name=adult]').val() || $('#tf-single-hotel-avail').find('[name=adults]').val();
+                var child = $roomForm.find('input[name=child]').val() || $('#tf-single-hotel-avail').find('[name=children]').val() || 0;
+                var room = $roomForm.find('select[name=hotel_room_selected]').val() || $roomForm.find('[name=room]').val() || $('#tf-single-hotel-avail').find('[name=room]').val() || 1;
+                var deposit = $roomForm.find('input[name=make_deposit]').is(':checked');
                 
             } else {
                 var adult = $('input[name=adult]').val();
@@ -226,19 +257,16 @@
                 var check_out_date = $('input[name=check_out_date]').val();
                 if ($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
                     var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-                    var deposit = $(this).closest('.tf-room').find('input[name=make_deposit]').is(':checked');
+                    var deposit = $roomForm.find('input[name=make_deposit]').is(':checked');
                 } else {
                     var room = $("#hotel_room_number").val();
-                    var deposit = $this.closest('.tf-room').find('input[name=make_deposit]').is(':checked');
+                    var deposit = $roomForm.find('input[name=make_deposit]').is(':checked');
                 }
             }
             
             var airport_service = $this.closest('.tf-withoutpayment-popup').find('[name="airport_service"]').val();
 
-            let selectedExtras = [];
-            $($this.closest('.tf-withoutpayment-popup').find('input[name="extra_service"]:checked')).each(function() {
-                selectedExtras.push($(this).val());
-            });
+            let selectedExtraData = tfGetHotelSelectedExtras($this.closest('.tf-withoutpayment-popup'));
             var data = {
                 action: 'tf_hotel_booking',
                 tf_room_booking_nonce: tf_room_booking_nonce,
@@ -255,7 +283,8 @@
                 room: room,
                 deposit: deposit,
                 airport_service: airport_service,
-                extra_service: selectedExtras
+                extra_service: selectedExtraData.extras,
+                hotel_extra_quantity: selectedExtraData.quantities
             };
             $this.closest(".tf-booking-pagination").siblings(".tf-booking-content-summery").find( '.traveller-single-info input' ).each(function (index, element) {
                 var element_name = $(element).attr("name");
@@ -663,16 +692,21 @@
         */
         const hotelPopupBooking = ($this) => {
 
-            var single_room = $this.closest('.tf-room').find('[name=single_room]').val();
+            var $roomForm = $this.closest('.tf-room');
+            var single_room = $roomForm.find('[name=single_room]').val();
             var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
-            var post_id = $('input[name=post_id]').val();
+            var post_id = $roomForm.find('input[name=post_id]').val() || $('input[name=post_id]').val();
             if(single_room == 1){
-                var check_in_out_date = $this.closest('.tf-booking-form').find('input[name=check-in-out-date]').val();
-                var [check_in_date, check_out_date] = tfSplitDateRange(check_in_out_date);
-                var adult = $this.closest('.tf-booking-form').find('input[name=adult]').val();
-                var child = $this.closest('.tf-booking-form').find('input[name=childrens]').val();
-                var room = $this.closest('.tf-booking-form').find('[name=room]').val();
-                var deposit = $this.closest('.tf-room').find('input[name=make_deposit]').is(':checked');
+                var check_in_date = $roomForm.find('input[name=check_in_date]').val();
+                var check_out_date = $roomForm.find('input[name=check_out_date]').val();
+                if (!check_in_date || !check_out_date) {
+                    var check_in_out_date = $('#tf-single-hotel-avail').find('input[name=check-in-out-date]').val();
+                    [check_in_date, check_out_date] = tfSplitDateRange(check_in_out_date);
+                }
+                var adult = $roomForm.find('input[name=adult]').val() || $('#tf-single-hotel-avail').find('[name=adults]').val();
+                var child = $roomForm.find('input[name=child]').val() || $('#tf-single-hotel-avail').find('[name=children]').val() || 0;
+                var room = $roomForm.find('select[name=hotel_room_selected]').val() || $roomForm.find('[name=room]').val() || $('#tf-single-hotel-avail').find('[name=room]').val() || 1;
+                var deposit = $roomForm.find('input[name=make_deposit]').is(':checked');
                 
             } else {
                 var roomnumber = $this.closest('.reserve').find('select[name=hotel_room_selected]').val();
@@ -699,18 +733,15 @@
                 }
             }
             
-            var room_id = $this.closest('.tf-room').find('input[name=room_id]').val();
-            var unique_id = $this.closest('.tf-room').find('input[name=unique_id]').val();
-            var option_id = $this.closest('.tf-room').find('[name=option_id]').val();
-            var hotel_deposit = $this.closest('.tf-room').find('input[name=make_deposit]').is(':checked');
+            var room_id = $roomForm.find('input[name=room_id]').val();
+            var unique_id = $roomForm.find('input[name=unique_id]').val();
+            var option_id = $roomForm.find('[name=option_id]').val();
+            var hotel_deposit = $roomForm.find('input[name=make_deposit]').is(':checked');
             var location = $('input[name=place]').val();
             var children_ages = $('input[name=children_ages]').val();
-            var airport_service = $this.closest('.tf-room').find('[name="airport_service"]').val();
+            var airport_service = $roomForm.find('[name="airport_service"]').val();
 
-            let selectedExtras = [];
-            $($this.closest('.tf-room').find('input[name="extra_service"]:checked')).each(function() {
-                selectedExtras.push($(this).val());
-            });
+            let selectedExtraData = tfGetHotelSelectedExtras($roomForm);
             var data = {
                 action: 'tf_hotel_booking_popup',
                 tf_room_booking_nonce: tf_room_booking_nonce,
@@ -727,7 +758,8 @@
                 room: room,
                 deposit: deposit,
                 airport_service: airport_service,
-                extras: selectedExtras
+                extras: selectedExtraData.extras,
+                hotel_extra_quantity: selectedExtraData.quantities
             };
 
             $.ajax({
@@ -819,15 +851,13 @@
             // }
             var deposit = $this.find("input[name=hotel_room_depo]").val();
             var airport_service = $this.find('[name="airport_service"]').val();
-            let selectedExtras = [];
-            $($this.find('input[name="extra_service"]:checked')).each(function() {
-                selectedExtras.push($(this).val());
-            });
+            let selectedExtraData = tfGetHotelSelectedExtras($this);
             formData.append('action', 'tf_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
             formData.append('deposit', deposit);
             formData.append('airport_service', airport_service);
-            formData.append('extras', selectedExtras);
+            formData.append('extras', selectedExtraData.extras);
+            formData.append('hotel_extra_quantity', selectedExtraData.quantities);
 
 
             $.ajax({
@@ -873,8 +903,51 @@
             }
         });
 
-        $(document).on("change", "[name='airport_service'], [name='extra_service']", function (e) {
+        $(document).on("change", "input[name='extra_service']", function (e) {
+            var $extra = $(this).closest('.tf-single-hotel-service');
+
+            if ($(this).is(':checked')) {
+                $extra.find(".tf_quantity-acrselection").addClass('quantity-active');
+            } else {
+                $extra.find(".tf_quantity-acrselection").removeClass('quantity-active');
+            }
+        });
+
+        $(document).on("click", ".tf-single-hotel-service .quanity-acr-inc, .tf-single-hotel-service .quanity-acr-dec", function (e) {
+            if (!tfIsHotelExtraQuantityControl($(this))) {
+                return;
+            }
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            var $input = $(this).parent().find('input');
+            var min = $input.attr('min') ? parseInt($input.attr('min'), 10) : 1;
+            var max = $input.attr('max') ? parseInt($input.attr('max'), 10) : 999;
+            var step = $input.attr('step') ? parseInt($input.attr('step'), 10) : 1;
+            var value = parseInt($input.val(), 10);
+
+            if (!value) {
+                value = min;
+            }
+
+            if ($(this).hasClass('quanity-acr-inc') && value < max) {
+                value += step;
+            }
+
+            if ($(this).hasClass('quanity-acr-dec') && value > min) {
+                value -= step;
+            }
+
+            $input.val(value).change().blur();
+        });
+
+        $(document).on("change", "[name='airport_service'], [name='extra_service'], input[name='extra-quantity']", function (e) {
             var $this = $(this);
+
+            if ($this.is("input[name='extra-quantity']") && !tfIsHotelExtraQuantityControl($this)) {
+                return;
+            }
 
             hotelPopupBooking($this);
         });

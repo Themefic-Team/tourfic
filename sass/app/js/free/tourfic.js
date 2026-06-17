@@ -1407,8 +1407,16 @@
         /**
          * Number/text change horizontal search form
          */
+        function tfIsHotelExtraQuantityControl($element) {
+            return $element.closest('.tf-single-hotel-service').closest('.tf-hotel-withoutpayment-booking, .tf-room-booking-popup').length > 0;
+        }
+
         // Number Increment
         $('.acr-inc, .quanity-acr-inc').on('click', function (e) {
+            if (tfIsHotelExtraQuantityControl($(this))) {
+                return;
+            }
+
             var input = $(this).parent().find('input');
             var max = input.attr('max') ? input.attr('max') : 999;
             if(input.attr('data-max')){
@@ -1434,6 +1442,9 @@
 
         // Number Decrement
         $('.acr-dec, .quanity-acr-dec').on('click', function (e) {
+            if (tfIsHotelExtraQuantityControl($(this))) {
+                return;
+            }
 
             var input = $(this).parent().find('input');
             var min = input.attr('min') ? input.attr('min') : 0;
@@ -2894,6 +2905,10 @@
         });
 
         $(document).on('change', '[name*=tf-tour-extra], input[name="extra-quantity"]', function () {
+            if (tfIsHotelExtraQuantityControl($(this))) {
+                return;
+            }
+
             tourPopupBooking({
                 trigger: $(this)
             });

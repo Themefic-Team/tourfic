@@ -469,33 +469,63 @@ class Helper {
 	}
 
 
-    static function tf_hotel_extras_title_price( $post_id, $adult, $child, $key ) {
+	static function tf_hotel_extras_title_price( $post_id, $adult, $child, $key, $quantity = 1 ) {
 		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 		$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
 
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $hotel_extras[$key] ) ) {
 			if ( !empty($hotel_extras[$key]['price']) ) {
+				$extra_price = $hotel_extras[$key]['price'];
+				$extra_quantity = 0 < intval( $quantity ) ? intval( $quantity ) : 1;
+				$extra_price_type = ! empty( $hotel_extras[$key]['price_type'] ) ? $hotel_extras[$key]['price_type'] : 'fixed';
 				
-				if ( "fixed" == $hotel_extras[$key]['price_type'] ) {
+				if ( "fixed" == $extra_price_type ) {
 					$airport_service_arr = array(
 						'title' => __( 'Fixed Price', 'tourfic' ),
-						'price' => $hotel_extras[$key]['price']
+						'price' => $extra_price
 					);
 				}
-				if ( "person" == $hotel_extras[$key]['price_type'] ) {
+				if ( "person" == $extra_price_type ) {
 					$airport_service_arr = array(
                         /* translators: %1$s: number of adult and %2$s: extra price */
 						'title' => sprintf( __( 'Adult ( %1$s × %2$s )', 'tourfic' ),
 							$adult,
-							wp_strip_all_tags( wc_price( $hotel_extras[$key]['price'] ) )
+							wp_strip_all_tags( wc_price( $extra_price ) )
 						),
-						'price' => $hotel_extras[$key]['price'] * (int) $adult
+						'price' => $extra_price * (int) $adult
+					);
+				}
+				if ( "quantity" == $extra_price_type ) {
+					$airport_service_arr = array(
+						/* translators: %1$s: extra quantity and %2$s: extra price */
+						'title' => sprintf( __( 'Quantity ( %1$s × %2$s )', 'tourfic' ),
+							$extra_quantity,
+							wp_strip_all_tags( wc_price( $extra_price ) )
+						),
+						'price' => $extra_price * $extra_quantity
 					);
 				}
 			}
 		}
 
 		return !empty( $airport_service_arr ) ? $airport_service_arr : array( 'title' => '', 'price' => 0 );
+	}
+
+	static function tf_sanitize_extra_quantities( $quantities ) {
+		if ( is_string( $quantities ) ) {
+			$quantities = explode( ',', sanitize_text_field( $quantities ) );
+		}
+
+		if ( ! is_array( $quantities ) ) {
+			return [];
+		}
+
+		return array_map(
+			function( $quantity ) {
+				return 0 < intval( $quantity ) ? intval( $quantity ) : 1;
+			},
+			$quantities
+		);
 	}
     
     /**

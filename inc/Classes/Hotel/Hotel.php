@@ -3378,11 +3378,13 @@ class Hotel {
 							<div class="tf-booking-content-service">
 								<?php foreach ( $hotel_extras as $key => $extra ) {
 									$extra_service = Helper::tf_hotel_extras_title_price( $post_id, $adult, $child, $key );
+									$hotel_extra_pricetype = ! empty( $extra['price_type'] ) ? $extra['price_type'] : 'fixed';
 									?>
 									<div class="tf-single-hotel-service tour-extra-single">
 										<label for="service-<?php echo esc_attr( $key ) . '_' . esc_attr($room_id); ?>">
 											<div class="tf-service-radio">
 												<input type="checkbox" value="<?php echo esc_attr( $key ); ?>" id="service-<?php echo esc_attr( $key) . '_' . esc_attr($room_id); ?>" name="extra_service">
+												<span class="tf-checkmark"></span>
 											</div>
 											<div class="tf-service-content">
 												<h5>
@@ -3391,6 +3393,20 @@ class Hotel {
 												<p><?php echo esc_html($extra_service['title']); ?> = <?php echo wp_kses_post(wc_price( $extra_service['price'] )); ?></p>
 											</div>
 										</label>
+										<?php if ( "quantity" == $hotel_extra_pricetype ) : ?>
+											<div class="tf-field-group tf-mt-16 tf_quantity-acrselection">
+												<div class="tf-field quanity-acr-fields">
+													<div class="quanity-acr-label">
+														<?php echo esc_html__( "Select Quantity", "tourfic" ); ?>
+													</div>
+													<div class="quanity-acr-select tf-flex">
+														<div class="quanity-acr-dec">-</div>
+														<input type="number" name="extra-quantity" min="1" value="1">
+														<div class="quanity-acr-inc">+</div>
+													</div>
+												</div>
+											</div>
+										<?php endif; ?>
 									</div>
 								<?php } ?>
                             </div>
