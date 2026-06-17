@@ -1756,6 +1756,7 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 			$price = $item->get_subtotal();
 			$due = $item->get_meta( 'Due', true );
 			$tour_extra = $item->get_meta( 'Tour Extra', true );
+			$package = $item->get_meta( 'Package', true );
 			$adult = $item->get_meta( 'Adults', true );
 			$child = $item->get_meta( 'Children', true );
 			$infants = $item->get_meta( 'Infants', true );
@@ -1769,6 +1770,7 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 				'tour_date' => $tour_date,
 				'tour_time' => $tour_time,
 				'tour_extra' => $tour_extra,
+				'package' => $package,
 				'adult' => $adult,
 				'child' => $child,
 				'infants' => $infants,
