@@ -269,9 +269,23 @@ class Enqueue {
 		/**
 		 * Google Map
 		 */
-		if ( 'googlemap' === $tf_openstreet_map ) {
+		$tf_should_enqueue_google_map = 'googlemap' === $tf_openstreet_map;
+		if ( is_singular( array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental' ) ) ) {
+			$tf_should_enqueue_google_map = false;
+		}
+
+		if ( $tf_should_enqueue_google_map ) {
 			$tf_map_api_key = ! empty( Helper::tfopt( 'tf-googlemapapi' ) ) ? Helper::tfopt( 'tf-googlemapapi' ) : '';
-			wp_enqueue_script( 'googleapis', '//maps.googleapis.com/maps/api/js?key=' . $tf_map_api_key . '&sensor=false&amp;libraries=places', array(), TOURFIC, true );
+			$tf_google_map_url = add_query_arg(
+				array(
+					'key'       => $tf_map_api_key,
+					'libraries' => 'places',
+					'loading'   => 'async',
+				),
+				'https://maps.googleapis.com/maps/api/js'
+			);
+
+			wp_enqueue_script( 'googleapis', $tf_google_map_url, array(), TOURFIC, true );
 			wp_enqueue_script( 'markerclusterer', TF_ASSETS_URL . 'app/libs/markerclusterer.min.js', array(), TOURFIC, true );
 			wp_enqueue_script('map-marker-label', TF_ASSETS_URL . 'app/libs/markerwithlabel.js', array(), TOURFIC, true);
 		}
@@ -357,6 +371,7 @@ class Enqueue {
 			$tf_tour_global_template    = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
 			$tf_tour_selected_template  = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
 			$tour_type                  = ! empty( $meta['type'] ) ? $meta['type'] : '';
+			$pricing_rule               = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 			$tour_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 			$raw_tour_availability = $meta['tour_availability'] ?? '';
@@ -376,6 +391,7 @@ class Enqueue {
 
 			$single_tour_form_data['tf_tour_selected_template'] = $tf_tour_selected_template;
 			$single_tour_form_data['tour_type']                 = $tour_type;
+			$single_tour_form_data['pricing_rule']              = $pricing_rule;
 			$single_tour_form_data['first_day_of_week'] = !empty(Helper::tfopt("tf-week-day-flatpickr")) ? Helper::tfopt("tf-week-day-flatpickr") : 0;
 			$single_tour_form_data['select_time_text'] = esc_html__( "Select Time", "tourfic" );
 			$single_tour_form_data['date_format']      = esc_html( $tour_date_format_for_users );
@@ -485,6 +501,18 @@ class Enqueue {
 				'car_mobile_button_hide' => esc_html__( 'Hide', 'tourfic' ),
 				'car_mobile_button_book_now' => esc_html__( 'Book Now', 'tourfic' ),
 				'car_location_required_msg' => esc_html__( 'Select Pickup & Dropoff Location', 'tourfic' ),
+				'car_location_invalid_msg' => esc_html__(
+					'Please select supported Pick-up and Drop-off locations from the suggestions.',
+					'tourfic'
+				),
+				'car_pickup_location_invalid_msg' => esc_html__(
+					'Please select a supported Pick-up location from the suggestions.',
+					'tourfic'
+				),
+				'car_dropoff_location_invalid_msg' => esc_html__(
+					'Please select a supported Drop-off location from the suggestions.',
+					'tourfic'
+				),
 				'car_date_required_msg' => esc_html__( 'Select Pickup & Dropoff Date', 'tourfic' ),
 				'open_street_map_text' => esc_html__( 'OpenStreetMap', 'tourfic' ),
 				'required' => esc_html__( 'This field is required.', 'tourfic'),

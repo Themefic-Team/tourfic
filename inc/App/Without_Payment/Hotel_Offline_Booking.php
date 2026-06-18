@@ -50,7 +50,18 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		$check_out       = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
 		$deposit         = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 		$airport_service = isset( $_POST['airport_service'] ) ? sanitize_text_field( $_POST['airport_service'] ) : '';
-		$extras = isset( $_POST['extras'] ) ? $_POST['extras'] : [];
+		$extras = isset( $_POST['extras'] ) ? wp_unslash( $_POST['extras'] ) : [];
+		$hotel_extra_quantities = isset( $_POST['hotel_extra_quantity'] ) ? Helper::tf_sanitize_extra_quantities( wp_unslash( $_POST['hotel_extra_quantity'] ) ) : [];
+
+		if ( is_string( $extras ) ) {
+			$extras = explode( ',', sanitize_text_field( $extras ) );
+		}
+
+		if ( is_array( $extras ) ) {
+			$extras = array_map( 'sanitize_text_field', $extras );
+		} else {
+			$extras = [];
+		}
 
 		$total_people    = $adult + $child;
 
@@ -98,6 +109,10 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		if ( $avail_by_date ) {
 			$avail_date = ! empty( $room_meta['avail_date'] ) ? json_decode( $room_meta['avail_date'], true ) : [];
 		}
+		$use_explicit_availability_pricing = false;
+		if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+			$use_explicit_availability_pricing = Availability::has_explicit_available_rules( $avail_date );
+		}
 		$room_name       = get_the_title( $room_id );
 		$pricing_by      = $room_meta['pricing-by'];
 		$price_multi_day = ! empty( $room_meta['price_multi_day'] ) ? $room_meta['price_multi_day'] : false;
@@ -125,8 +140,13 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		if(function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($hotel_extra_option)){
 			$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? Helper::tf_data_types($meta['hotel-extra']) : [];
 			foreach ( $extras as $key => $extra ) {
-				$extra_service = Helper::tf_hotel_extras_title_price( $post_id, $adult, $child, $extra );
-				$total_extras_title[] = $hotel_extras[$extra]['title'];
+				if ( empty( $hotel_extras[ $extra ] ) ) {
+					continue;
+				}
+				$extra_quantity = ! empty( $hotel_extra_quantities[ $key ] ) ? $hotel_extra_quantities[ $key ] : 1;
+				$extra_service = Helper::tf_hotel_extras_title_price( $post_id, $adult, $child, $extra, $extra_quantity );
+				$extra_price_type = ! empty( $hotel_extras[ $extra ]['price_type'] ) ? $hotel_extras[ $extra ]['price_type'] : 'fixed';
+				$total_extras_title[] = 'quantity' === $extra_price_type && ! empty( $extra_service['title'] ) ? $hotel_extras[$extra]['title'] . ' (' . wp_strip_all_tags( $extra_service['title'] ) . ')' : $hotel_extras[$extra]['title'];
 				$total_extras_price += $extra_service['price'];
 			}
 		}
@@ -315,7 +335,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 			/**
 			 * Calculate Pricing
 			 */
-			if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+			if ( $use_explicit_availability_pricing ) {
 
 				// Check availability by date option
 				$period = new \DatePeriod(

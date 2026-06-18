@@ -59,6 +59,9 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 				return false;
 			}
 			$user_meta  = get_userdata( $user_id );
+			if ( empty( $user_meta ) || empty( $user_meta->roles ) ) {
+				return false;
+			}
 			$user_roles = $user_meta->roles;
 
 			return in_array( $role_name, $user_roles );
@@ -110,11 +113,206 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 		 */
 		public function tf_admin_permission_callback( WP_REST_Request $request ) {
 			$current_user_id = get_current_user_id();
-			if ( is_user_logged_in() && $this->user_has_role( $current_user_id, 'administrator' ) || $this->user_has_role( $current_user_id, 'tf_manager' ) ) {
+			if ( is_user_logged_in() && ( $this->user_has_role( $current_user_id, 'administrator' ) || $this->user_has_role( $current_user_id, 'tf_manager' ) ) ) {
 				return true;
 			} else {
 				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.' ), array( 'status' => 403 ) );
 			}
+		}
+
+		public function tf_user_permission_callback( WP_REST_Request $request ) {
+			if ( ! is_user_logged_in() ) {
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
+			}
+
+			if ( $this->tf_current_user_can_access_user( $request->get_param( 'id' ) ) ) {
+				return true;
+			}
+
+			return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this user.', 'tourfic' ), array( 'status' => 403 ) );
+		}
+
+		public function tf_order_permission_callback( WP_REST_Request $request ) {
+			return $this->tf_admin_vendor_permission_callback();
+		}
+
+		public function tf_enquiry_permission_callback( WP_REST_Request $request ) {
+			return $this->tf_admin_vendor_permission_callback();
+		}
+
+		protected function tf_admin_vendor_permission_callback() {
+			$current_user_id = get_current_user_id();
+
+			if (
+				is_user_logged_in()
+				&& (
+					$this->user_has_role( $current_user_id, 'administrator' )
+					|| $this->user_has_role( $current_user_id, 'tf_manager' )
+					|| $this->user_has_role( $current_user_id, 'tf_vendor' )
+				)
+			) {
+				return true;
+			}
+
+			return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
+		}
+
+		protected function tf_current_user_can_manage_records() {
+			$current_user_id = get_current_user_id();
+
+			return $this->user_has_role( $current_user_id, 'administrator' ) || $this->user_has_role( $current_user_id, 'tf_manager' );
+		}
+
+		protected function tf_current_user_can_access_user( $user_id ) {
+			$user_id         = absint( $user_id );
+			$current_user_id = get_current_user_id();
+
+			if ( empty( $user_id ) || empty( $current_user_id ) ) {
+				return false;
+			}
+
+			if ( $user_id === $current_user_id ) {
+				return true;
+			}
+
+			return $this->tf_current_user_can_manage_records()
+				|| current_user_can( 'list_users' )
+				|| current_user_can( 'edit_user', $user_id );
+		}
+
+		protected function tf_current_user_can_manage_vendor_record( $post_id = 0, $author_id = 0 ) {
+			$current_user_id = get_current_user_id();
+
+			if ( ! $this->user_has_role( $current_user_id, 'tf_vendor' ) ) {
+				return false;
+			}
+
+			if ( ! empty( $author_id ) && absint( $author_id ) === $current_user_id ) {
+				return true;
+			}
+
+			return ! empty( $post_id ) && absint( get_post_field( 'post_author', absint( $post_id ) ) ) === $current_user_id;
+		}
+
+		protected function tf_current_user_can_access_order( $order ) {
+			if ( $this->tf_current_user_can_manage_records() ) {
+				return true;
+			}
+
+			return ! empty( $order['post_id'] ) && $this->tf_current_user_can_manage_vendor_record( $order['post_id'] );
+		}
+
+		protected function tf_current_user_can_access_enquiry( $enquiry ) {
+			if ( $this->tf_current_user_can_manage_records() ) {
+				return true;
+			}
+
+			$post_id   = ! empty( $enquiry['post_id'] ) ? $enquiry['post_id'] : 0;
+			$author_id = ! empty( $enquiry['author_id'] ) ? $enquiry['author_id'] : 0;
+
+			return $this->tf_current_user_can_manage_vendor_record( $post_id, $author_id );
+		}
+
+		protected function tf_order_post_types() {
+			return array_keys( $this->tf_order_post_type_map() );
+		}
+
+		protected function tf_order_post_type_map() {
+			return array(
+				'hotel'        => 'hotel',
+				'tf_hotel'     => 'hotel',
+				'tour'         => 'tour',
+				'tf_tours'     => 'tour',
+				'apartment'    => 'apartment',
+				'tf_apartment' => 'apartment',
+				'car'          => 'car',
+				'tf_carrental' => 'car',
+			);
+		}
+
+		protected function tf_normalize_order_post_type( $post_type ) {
+			$post_type = sanitize_key( $post_type );
+			$post_map  = $this->tf_order_post_type_map();
+
+			return ! empty( $post_map[ $post_type ] ) ? $post_map[ $post_type ] : $post_type;
+		}
+
+		protected function tf_enquiry_post_types() {
+			return array( 'tf_hotel', 'tf_tours', 'tf_apartment' );
+		}
+
+		protected function tf_checkinout_statuses() {
+			return array( 'in', 'out', 'not' );
+		}
+
+		protected function tf_order_statuses() {
+			return array( 'pending', 'processing', 'on-hold', 'completed', 'cancelled', 'refunded', 'failed', 'trash' );
+		}
+
+		protected function tf_enquiry_status_filters() {
+			return array( 'read', 'unread', 'replied', 'responded', 'not-replied', 'not-responded' );
+		}
+
+		protected function tf_validate_allowed_param( WP_REST_Request $request, $param, $allowed, $required = false ) {
+			$value = $request->get_param( $param );
+
+			if ( '' === $value || null === $value ) {
+				if ( $required ) {
+					return new WP_Error(
+						'tf_rest_invalid_param',
+						sprintf( esc_html__( '%s is required.', 'tourfic' ), esc_html( $param ) ),
+						array( 'status' => 400 )
+					);
+				}
+
+				return '';
+			}
+
+			if ( ! is_scalar( $value ) ) {
+				return new WP_Error(
+					'tf_rest_invalid_param',
+					sprintf( esc_html__( 'Invalid %s value.', 'tourfic' ), esc_html( $param ) ),
+					array( 'status' => 400 )
+				);
+			}
+
+			$value = sanitize_key( $value );
+			if ( ! in_array( $value, $allowed, true ) ) {
+				return new WP_Error(
+					'tf_rest_invalid_param',
+					sprintf( esc_html__( 'Invalid %s value.', 'tourfic' ), esc_html( $param ) ),
+					array( 'status' => 400 )
+				);
+			}
+
+			return $value;
+		}
+
+		protected function tf_get_rest_absint_param( WP_REST_Request $request, $param ) {
+			$value = $request->get_param( $param );
+
+			if ( '' === $value || null === $value ) {
+				return 0;
+			}
+
+			if ( ! is_scalar( $value ) || ! is_numeric( $value ) ) {
+				return new WP_Error(
+					'tf_rest_invalid_param',
+					sprintf( esc_html__( 'Invalid %s value.', 'tourfic' ), esc_html( $param ) ),
+					array( 'status' => 400 )
+				);
+			}
+
+			$value = absint( $value );
+			if ( empty( $value ) ) {
+				return new WP_Error(
+					'tf_rest_invalid_param',
+					sprintf( esc_html__( 'Invalid %s value.', 'tourfic' ), esc_html( $param ) ),
+					array( 'status' => 400 )
+				);
+			}
+
+			return $value;
 		}
 
 

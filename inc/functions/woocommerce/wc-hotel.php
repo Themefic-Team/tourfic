@@ -43,7 +43,8 @@ function tf_hotel_booking_callback() {
 	$check_out       = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
 	$deposit         = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 	$airport_service = isset( $_POST['airport_service'] ) ? sanitize_text_field( $_POST['airport_service'] ) : '';
-	$extras = isset( $_POST['extra_service'] ) ? $_POST['extra_service'] : '';
+	$extras = isset( $_POST['extra_service'] ) ? wp_unslash( $_POST['extra_service'] ) : [];
+	$hotel_extra_quantities = isset( $_POST['hotel_extra_quantity'] ) ? Helper::tf_sanitize_extra_quantities( wp_unslash( $_POST['hotel_extra_quantity'] ) ) : [];
 	$quick_checkout = !empty(Helper::tfopt( 'tf-quick-checkout' )) ? Helper::tfopt( 'tf-quick-checkout' ) : 0;
 	$instantio_is_active = 0;
 
@@ -52,7 +53,17 @@ function tf_hotel_booking_callback() {
 	}
 
 	if(!empty($_POST['extras'])){
-		$extras = explode( ',', $_POST['extras'] );
+		$extras = wp_unslash( $_POST['extras'] );
+	}
+
+	if ( is_string( $extras ) ) {
+		$extras = explode( ',', sanitize_text_field( $extras ) );
+	}
+
+	if ( is_array( $extras ) ) {
+		$extras = array_map( 'sanitize_text_field', $extras );
+	} else {
+		$extras = [];
 	}
 
 
@@ -73,8 +84,14 @@ function tf_hotel_booking_callback() {
 	if ( ! $adult ) {
 		$response['errors'][] = esc_html__( 'Select Adult(s).', 'tourfic' );
 	}
+	if ( 0 > $adult || 0 > $child ) {
+		$response['errors'][] = esc_html__( 'Guest count cannot be negative.', 'tourfic' );
+	}
 	if ( ! $room_selected ) {
 		$response['errors'][] = esc_html__( 'Select Room(s).', 'tourfic' );
+	}
+	if ( 0 > $room_selected ) {
+		$response['errors'][] = esc_html__( 'Room count cannot be negative.', 'tourfic' );
 	}
 	if ( ! $post_id ) {
 		$response['errors'][] = esc_html__( 'Unknown Error! Please try again.', 'tourfic' );
@@ -95,6 +112,10 @@ function tf_hotel_booking_callback() {
 	$avail_by_date = ! empty( $room_meta['avil_by_date'] ) && $room_meta['avil_by_date'];
 	if ( $avail_by_date ) {
 		$avail_date = ! empty( $room_meta['avail_date'] ) ? json_decode( $room_meta['avail_date'], true ) : [];
+	}
+	$use_explicit_availability_pricing = false;
+	if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		$use_explicit_availability_pricing = Availability::has_explicit_available_rules( $avail_date );
 	}
 	$room_name       = get_the_title( $room_id );
 	$pricing_by      = $room_meta['pricing-by'];
@@ -375,8 +396,13 @@ function tf_hotel_booking_callback() {
 		if(function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($hotel_extra_option)){
 			$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
 			foreach ( $extras as $key => $extra ) {
-				$extra_service = Helper::tf_hotel_extras_title_price( $post_id, $adult, $child, $extra );
-				$total_extras_title[] = $hotel_extras[$extra]['title'];
+				if ( empty( $hotel_extras[ $extra ] ) ) {
+					continue;
+				}
+				$extra_quantity = ! empty( $hotel_extra_quantities[ $key ] ) ? $hotel_extra_quantities[ $key ] : 1;
+				$extra_service = Helper::tf_hotel_extras_title_price( $post_id, $adult, $child, $extra, $extra_quantity );
+				$extra_price_type = ! empty( $hotel_extras[ $extra ]['price_type'] ) ? $hotel_extras[ $extra ]['price_type'] : 'fixed';
+				$total_extras_title[] = 'quantity' === $extra_price_type && ! empty( $extra_service['title'] ) ? $hotel_extras[$extra]['title'] . ' (' . wp_strip_all_tags( $extra_service['title'] ) . ')' : $hotel_extras[$extra]['title'];
 				$total_extras_price += $extra_service['price'];
 			}
 		}
@@ -403,7 +429,7 @@ function tf_hotel_booking_callback() {
 		/**
 		 * Calculate Pricing
 		 */
-		if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		if ( $use_explicit_availability_pricing ) {
 
 			if ( ! $price_multi_day ) {
 				if ( $check_in && $check_out ) {
@@ -892,7 +918,7 @@ function tf_hotel_set_order_price( $cart ) {
 	foreach ( $cart->get_cart() as $cart_item ) {
 
 		if ( isset( $cart_item['tf_hotel_data']['price_total'] ) ) {
-			$cart_item['data']->set_price( $cart_item['tf_hotel_data']['price_total'] );
+			$cart_item['data']->set_price( max( 0, $cart_item['tf_hotel_data']['price_total'] ) );
 		}
 	}
 

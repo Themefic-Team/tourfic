@@ -25,30 +25,47 @@ if ( ! class_exists( 'TF_Enquiry_Rest_API' ) ) {
 		 * @author Foysal
 		 */
 		public function tf_get_enquiries( $request ) {
-			$current_user_id = $request->get_param( 'user_id' ) ? $request->get_param( 'user_id' ) : get_current_user_id();
-			$post_type = $request->get_param( 'post_type' ) ? $request->get_param( 'post_type' ) : '';
-			$post_id = $request->get_param( 'post_id' ) ? $request->get_param( 'post_id' ) : '';
-			$filters = $request->get_param( 'filters' ) ? $request->get_param( 'filters' ) : '';
+			$current_user_id = get_current_user_id();
+			$post_type       = $this->tf_validate_allowed_param( $request, 'post_type', $this->tf_enquiry_post_types(), true );
+			$post_id         = $this->tf_get_rest_absint_param( $request, 'post_id' );
+			$filters         = $this->tf_validate_allowed_param( $request, 'filters', $this->tf_enquiry_status_filters() );
 
-            $tf_filter_query = "";
-            if ( $post_id ) {
-                $tf_filter_query .= " AND post_id = '$post_id'";
-            }
-			if( !empty($filters) ) {
-				if( $filters == 'not-replied') {
-					$tf_filter_query .= sprintf(' AND enquiry_status != "%s"', 'replied' );
-				} elseif( $filters == 'not-responded') {
-					$tf_filter_query .= sprintf(' AND enquiry_status != "%s"', 'responded' );
-				} else {
-					$tf_filter_query .= sprintf(' AND enquiry_status = "%s"', $filters );
+			foreach ( array( $post_type, $post_id, $filters ) as $validation_error ) {
+				if ( is_wp_error( $validation_error ) ) {
+					return $validation_error;
 				}
 			}
 
 			global $wpdb;
-			if ( $this->user_has_role( $current_user_id, 'administrator' ) || $this->user_has_role( $current_user_id, 'tf_manager' ) ) {
-				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE post_type = %s {$tf_filter_query} ORDER BY id DESC", $post_type ), ARRAY_A );
+			$where  = array( 'post_type = %s' );
+			$values = array( $post_type );
+
+			if ( ! empty( $post_id ) ) {
+				$where[]  = 'post_id = %d';
+				$values[] = $post_id;
+			}
+
+			if ( ! empty( $filters ) ) {
+				if ( 'not-replied' === $filters ) {
+					$where[]  = 'enquiry_status != %s';
+					$values[] = 'replied';
+				} elseif ( 'not-responded' === $filters ) {
+					$where[]  = 'enquiry_status != %s';
+					$values[] = 'responded';
+				} else {
+					$where[]  = 'enquiry_status = %s';
+					$values[] = $filters;
+				}
+			}
+
+			if ( $this->tf_current_user_can_manage_records() ) {
+				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . " ORDER BY id DESC", $values ), ARRAY_A );
 			} elseif ( $this->user_has_role( $current_user_id, 'tf_vendor' ) ) {
-				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE post_type = %s {$tf_filter_query} AND author_id = %d ORDER BY id DESC", $post_type, $current_user_id ), ARRAY_A );
+				$where[]  = 'author_id = %d';
+				$values[] = $current_user_id;
+				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . " ORDER BY id DESC", $values ), ARRAY_A );
+			} else {
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
 			}
 
 			$enquirys_data = array();
@@ -68,8 +85,15 @@ if ( ! class_exists( 'TF_Enquiry_Rest_API' ) ) {
          */
         public function tf_get_enquiry_details( $request ){
             global $wpdb;
-			$id    = $request->get_param( 'id' );
+			$id    = absint( $request->get_param( 'id' ) );
 			$enquiry = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %d", $id ), ARRAY_A );
+			if ( empty( $enquiry ) ) {
+				return new WP_Error( 'tf_enquiry_not_found', esc_html__( 'Enquiry not found.', 'tourfic' ), array( 'status' => 404 ) );
+			}
+			if ( ! $this->tf_current_user_can_access_enquiry( $enquiry ) ) {
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this enquiry.', 'tourfic' ), array( 'status' => 403 ) );
+			}
+
 			$reply_data = !empty( $enquiry["reply_data"] ) ? json_decode($enquiry["reply_data"], true) : array();
 
 			if(class_exists('\Tourfic\Core\Enquiry')){

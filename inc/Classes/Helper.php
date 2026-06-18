@@ -469,33 +469,63 @@ class Helper {
 	}
 
 
-    static function tf_hotel_extras_title_price( $post_id, $adult, $child, $key ) {
+	static function tf_hotel_extras_title_price( $post_id, $adult, $child, $key, $quantity = 1 ) {
 		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 		$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
 
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $hotel_extras[$key] ) ) {
 			if ( !empty($hotel_extras[$key]['price']) ) {
+				$extra_price = $hotel_extras[$key]['price'];
+				$extra_quantity = 0 < intval( $quantity ) ? intval( $quantity ) : 1;
+				$extra_price_type = ! empty( $hotel_extras[$key]['price_type'] ) ? $hotel_extras[$key]['price_type'] : 'fixed';
 				
-				if ( "fixed" == $hotel_extras[$key]['price_type'] ) {
+				if ( "fixed" == $extra_price_type ) {
 					$airport_service_arr = array(
 						'title' => __( 'Fixed Price', 'tourfic' ),
-						'price' => $hotel_extras[$key]['price']
+						'price' => $extra_price
 					);
 				}
-				if ( "person" == $hotel_extras[$key]['price_type'] ) {
+				if ( "person" == $extra_price_type ) {
 					$airport_service_arr = array(
                         /* translators: %1$s: number of adult and %2$s: extra price */
 						'title' => sprintf( __( 'Adult ( %1$s × %2$s )', 'tourfic' ),
 							$adult,
-							wp_strip_all_tags( wc_price( $hotel_extras[$key]['price'] ) )
+							wp_strip_all_tags( wc_price( $extra_price ) )
 						),
-						'price' => $hotel_extras[$key]['price'] * (int) $adult
+						'price' => $extra_price * (int) $adult
+					);
+				}
+				if ( "quantity" == $extra_price_type ) {
+					$airport_service_arr = array(
+						/* translators: %1$s: extra quantity and %2$s: extra price */
+						'title' => sprintf( __( 'Quantity ( %1$s × %2$s )', 'tourfic' ),
+							$extra_quantity,
+							wp_strip_all_tags( wc_price( $extra_price ) )
+						),
+						'price' => $extra_price * $extra_quantity
 					);
 				}
 			}
 		}
 
 		return !empty( $airport_service_arr ) ? $airport_service_arr : array( 'title' => '', 'price' => 0 );
+	}
+
+	static function tf_sanitize_extra_quantities( $quantities ) {
+		if ( is_string( $quantities ) ) {
+			$quantities = explode( ',', sanitize_text_field( $quantities ) );
+		}
+
+		if ( ! is_array( $quantities ) ) {
+			return [];
+		}
+
+		return array_map(
+			function( $quantity ) {
+				return 0 < intval( $quantity ) ? intval( $quantity ) : 1;
+			},
+			$quantities
+		);
 	}
     
     /**
@@ -1038,6 +1068,82 @@ class Helper {
 		return $template;
 	}
 
+	private static function tf_order_table_select_sql( $select ) {
+		$select          = '*' === trim( $select ) ? '*' : $select;
+		$allowed_columns = array(
+			'id',
+			'order_id',
+			'post_id',
+			'post_type',
+			'room_number',
+			'room_id',
+			'check_in',
+			'check_out',
+			'billing_details',
+			'shipping_details',
+			'order_details',
+			'customer_id',
+			'payment_method',
+			'ostatus',
+			'order_date',
+			'checkinout',
+			'checkinout_by',
+		);
+
+		if ( '*' === $select ) {
+			return '*';
+		}
+
+		$columns = array_map( 'trim', explode( ',', $select ) );
+		$columns = array_values( array_intersect( $columns, $allowed_columns ) );
+
+		return ! empty( $columns ) ? implode( ', ', $columns ) : '*';
+	}
+
+	private static function tf_order_table_structured_sql( $query, &$values ) {
+		$sql             = '';
+		$allowed_columns = array(
+			'order_id'    => '%d',
+			'post_id'     => '%d',
+			'customer_id' => '%d',
+			'room_id'     => '%s',
+			'ostatus'     => '%s',
+			'checkinout'  => '%s',
+		);
+
+		if ( ! empty( $query['where'] ) && is_array( $query['where'] ) ) {
+			foreach ( $query['where'] as $column => $value ) {
+				if ( ! isset( $allowed_columns[ $column ] ) || '' === $value || null === $value ) {
+					continue;
+				}
+
+				$sql     .= " AND {$column} = {$allowed_columns[ $column ]}";
+				$values[] = '%d' === $allowed_columns[ $column ] ? absint( $value ) : sanitize_text_field( $value );
+			}
+		}
+
+		if ( ! empty( $query['orderby'] ) ) {
+			$allowed_orderby = array( 'id', 'order_id', 'order_date', 'check_in', 'check_out' );
+			$orderby         = sanitize_key( $query['orderby'] );
+			if ( in_array( $orderby, $allowed_orderby, true ) ) {
+				$order = ! empty( $query['order'] ) && 'ASC' === strtoupper( $query['order'] ) ? 'ASC' : 'DESC';
+				$sql  .= " ORDER BY {$orderby} {$order}";
+			}
+		}
+
+		if ( ! empty( $query['limit'] ) && is_array( $query['limit'] ) ) {
+			$offset   = ! empty( $query['limit']['offset'] ) ? absint( $query['limit']['offset'] ) : 0;
+			$per_page = ! empty( $query['limit']['per_page'] ) ? absint( $query['limit']['per_page'] ) : 0;
+			if ( ! empty( $per_page ) ) {
+				$sql     .= ' LIMIT %d, %d';
+				$values[] = $offset;
+				$values[] = $per_page;
+			}
+		}
+
+		return $sql;
+	}
+
 	/*
      * Retrive Orders Data
      *
@@ -1048,10 +1154,14 @@ class Helper {
      */
 	static function tourfic_order_table_data( $query ) {
 		global $wpdb;
-		$query_type          = $query['post_type'];
-		$query_select        = $query['select'];
-		$query_where         = $query['query'];
-		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $query_type ), ARRAY_A );
+		$query_type   = sanitize_key( $query['post_type'] );
+		$query_select = self::tf_order_table_select_sql( $query['select'] );
+		$values       = array( $query_type );
+		$query_where  = isset( $query['where'] ) && is_array( $query['where'] )
+			? self::tf_order_table_structured_sql( $query, $values )
+			: $query['query'];
+
+		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $values ), ARRAY_A );
 
 		return $tf_tour_book_orders;
 	}
@@ -3877,7 +3987,7 @@ class Helper {
 		$has_deposit = ! empty( $room['allow_deposit'] ) && $room['allow_deposit'] == true;
 		if ( $has_deposit == true ) {
 			if ( $room['deposit_type'] == 'percent' ) {
-				$deposit_amount = $price * ( intval( $room['deposit_amount'] ) / 100 );
+				$deposit_amount = $price * ( floatval( $room['deposit_amount'] ) / 100 );
 			} else {
 				$deposit_amount = $room['deposit_amount'];
 			}

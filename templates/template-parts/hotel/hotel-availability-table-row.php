@@ -23,6 +23,11 @@ $room_book_by                   = ! empty( $room['booking-by'] ) ? $room['bookin
 $room_book_url                  = ! empty( $room['booking-url'] ) ? $room['booking-url'] : '';
 $tf_hotel_reserve_button_text   = ! empty( Helper::tfopt( 'hotel_booking_form_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_form_button_text' ) ) ) : esc_html__( "Reserve Now", 'tourfic' );
 $room_options                   = ! empty( $room['room-options'] ) ? $room['room-options'] : [];
+$room_select_max                = (int) $num_room_available;
+
+if ( $room_select_max < 1 ) {
+	return;
+}
 
 if ( $tf_hotel_selected_template_check == "design-1" ) {
 	if ( empty( $tf_room_disable_date ) || !empty($tf_room_disable_date[$tf_enddate]) ) {
@@ -340,7 +345,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         <div class="room-selection-wrap tf-field-group">
                             <select name="hotel_room_selected" class="tf-field" id="hotel-room-selected">
 								<?php
-								foreach ( range( 0, $num_room_available ) as $value ) {
+								foreach ( range( 1, $room_select_max ) as $value ) {
 									echo '<option>' . esc_html( $value ) . '</option>';
 								}
 								?>
@@ -481,7 +486,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                     <div class="room-selection-wrap tf-field-group">
                         <select name="hotel_room_selected" class="tf-field" id="hotel-room-selected">
 							<?php
-							foreach ( range( 0, $num_room_available ) as $value ) {
+							foreach ( range( 1, $room_select_max ) as $value ) {
 								echo '<option>' . esc_html( $value ) . '</option>';
 							}
 							?>
@@ -874,7 +879,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                 <span><?php esc_html_e( "Select your Room", "tourfic" ); ?></span>
                                 <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
                                     <?php
-                                    foreach ( range( 0, $num_room_available ) as $value ) {
+                                    foreach ( range( 1, $room_select_max ) as $value ) {
                                         echo '<option>' . esc_html( $value ) . '</option>';
                                     }
                                     ?>
@@ -1087,7 +1092,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         <span><?php esc_html_e( "Select your Room", "tourfic" ); ?></span>
                         <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
 							<?php
-							foreach ( range( 0, $num_room_available ) as $value ) {
+							foreach ( range( 1, $room_select_max ) as $value ) {
 								echo '<option>' . esc_html( $value ) . '</option>';
 							}
 							?>
@@ -1360,7 +1365,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         <span><?php esc_html_e( "Select your Room", "tourfic" ); ?></span>
                         <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
 							<?php
-							foreach ( range( 0, $num_room_available ) as $value ) {
+							foreach ( range( 1, $room_select_max ) as $value ) {
 								echo '<option>' . esc_html( $value ) . '</option>';
 							}
 							?>
@@ -1662,7 +1667,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                 <div class="tf-available-room-select">
                                     <span><?php esc_html_e( "Select Room", "tourfic" ); ?></span>
                                     <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
-				                        <?php foreach ( range( 0, $num_room_available ) as $value ) {
+				                        <?php foreach ( range( 1, $room_select_max ) as $value ) {
 					                        echo '<option>' . esc_html( $value ) . '</option>';
 				                        } ?>
                                     </select>
@@ -1867,7 +1872,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                 <span><?php esc_html_e( "Select Room", "tourfic" ); ?></span>
                                 <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
 			                        <?php
-			                        foreach ( range( 0, $num_room_available ) as $value ) {
+			                        foreach ( range( 1, $room_select_max ) as $value ) {
 				                        echo '<option>' . esc_html( $value ) . '</option>';
 			                        }
 			                        ?>
@@ -2230,7 +2235,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                         <div class="room-selection-wrap">
                             <select name="hotel_room_selected" id="hotel-room-selected">
 								<?php
-								foreach ( range( 0, $num_room_available ) as $value ) {
+								foreach ( range( 1, $room_select_max ) as $value ) {
 									echo '<option>' . esc_html( $value ) . '</option>';
 								}
 								?>
@@ -2376,7 +2381,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                     <div class="room-selection-wrap">
                         <select name="hotel_room_selected" id="hotel-room-selected">
 							<?php
-							foreach ( range( 0, $num_room_available ) as $value ) {
+							foreach ( range( 1, $room_select_max ) as $value ) {
 								echo '<option>' . esc_html( $value ) . '</option>';
 							}
 							?>

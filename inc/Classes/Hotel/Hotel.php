@@ -392,7 +392,8 @@ class Hotel {
         <tbody>
         <?php
         echo wp_kses_post( ob_get_clean() );
-        $error    = $rows = null;
+        $error    = esc_html__( 'No rooms available for the selected date.', 'tourfic' );
+        $rows     = null;
         $has_room = false;
 
         // generate table rows
@@ -2656,7 +2657,13 @@ class Hotel {
 		// room
 		$room_selected = ! empty( $_GET['room'] ) ? absint( wp_unslash( $_GET['room'] ) ) : 1;
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : '';
+		if ( empty( $check_in_out ) ) {
+			$hotel_current_timestamp = current_time( 'timestamp' );
+			$hotel_default_check_in  = wp_date( 'Y/m/d', $hotel_current_timestamp );
+			$hotel_default_check_out = wp_date( 'Y/m/d', strtotime( '+1 day', $hotel_current_timestamp ) );
+			$check_in_out            = $hotel_default_check_in . ' - ' . $hotel_default_check_out;
+		}
 		//get features
 		$features = ! empty( $_GET['features'] ) ? sanitize_text_field( $_GET['features'] ) : '';
 
@@ -3371,11 +3378,13 @@ class Hotel {
 							<div class="tf-booking-content-service">
 								<?php foreach ( $hotel_extras as $key => $extra ) {
 									$extra_service = Helper::tf_hotel_extras_title_price( $post_id, $adult, $child, $key );
+									$hotel_extra_pricetype = ! empty( $extra['price_type'] ) ? $extra['price_type'] : 'fixed';
 									?>
 									<div class="tf-single-hotel-service tour-extra-single">
 										<label for="service-<?php echo esc_attr( $key ) . '_' . esc_attr($room_id); ?>">
 											<div class="tf-service-radio">
 												<input type="checkbox" value="<?php echo esc_attr( $key ); ?>" id="service-<?php echo esc_attr( $key) . '_' . esc_attr($room_id); ?>" name="extra_service">
+												<span class="tf-checkmark"></span>
 											</div>
 											<div class="tf-service-content">
 												<h5>
@@ -3384,6 +3393,20 @@ class Hotel {
 												<p><?php echo esc_html($extra_service['title']); ?> = <?php echo wp_kses_post(wc_price( $extra_service['price'] )); ?></p>
 											</div>
 										</label>
+										<?php if ( "quantity" == $hotel_extra_pricetype ) : ?>
+											<div class="tf-field-group tf-mt-16 tf_quantity-acrselection">
+												<div class="tf-field quanity-acr-fields">
+													<div class="quanity-acr-label">
+														<?php echo esc_html__( "Select Quantity", "tourfic" ); ?>
+													</div>
+													<div class="quanity-acr-select tf-flex">
+														<div class="quanity-acr-dec">-</div>
+														<input type="number" name="extra-quantity" min="1" value="1">
+														<div class="quanity-acr-inc">+</div>
+													</div>
+												</div>
+											</div>
+										<?php endif; ?>
 									</div>
 								<?php } ?>
                             </div>
@@ -4160,7 +4183,7 @@ class Hotel {
                             <div class="tf-section-title-and-location">
 								<!-- Title -->
 								<?php if( $show_title == 'yes' ): ?>
-                                <h2 class="tf-section-title"><a href="<?php echo esc_url( get_the_permalink() ); ?>"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title(), $title_length ) ); ?></a></h2>
+                                <h2 class="tf-section-title"><a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title(), $title_length ) ); ?></a></h2>
 								<?php endif; ?>
 
 								<!-- Location -->

@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, hellokhoyer,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 7.0
-Stable tag: 2.22.5
+Stable tag: 2.22.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -423,6 +423,23 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.22.6 – Jun 18, 2026 =
+
+- Improved: Security for booking forms and booking workflows.
+- Fixed: Deposit rate calculations during booking.
+- Improved: Performance through optimized script loading.
+- Fixed: Tour package selection reliability during booking.
+- Improved: Tour booking labels and customer guidance.
+- Improved: Traveler information validation and data collection.
+- Improved: Car rental booking validation and reliability.
+- Improved: Security for booking and enquiry systems.
+- Fixed: Hotel booking availability and date selection reliability.
+- Fixed: Itinerary map loading issues (Pro).
+- Fixed: PDF invoice styling and display issues (Pro).
+- Improved: REST API security for booking and enquiry endpoints (Pro).
+- Fixed: Date range compatibility with international locales (Pro).
+- Improved: Traveler information settings and admin usability (Pro).
+
 = 2.22.5 – Jun 04, 2026 =
 
 - Added missing parameters to hotel booking cart hooks.
@@ -445,15 +462,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Improved: Traveler document upload, DOB, and age validation flow.
 - Improved: Fallback iCal metabox UI behavior (Pro).
 - Improved: Booking date-range consistency across frontend and backend flows.
-
-= 2.22.2 – May 03, 2026 =
-
-- Added: stronger server-side capacity validation to prevent overbooking.
-- Improved: Traveler DOB validation in booking flow.
-- Improved: Booking calendar handling and fallback logic.
-- Fixed: iCal room linkage and availability issues (hotel & apartment).
-- Fixed: multi-room capacity calculation for hotel searches.
-- Optimized: Google Maps loading (only when needed).
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 

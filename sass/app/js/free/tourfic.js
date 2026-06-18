@@ -1407,8 +1407,16 @@
         /**
          * Number/text change horizontal search form
          */
+        function tfIsHotelExtraQuantityControl($element) {
+            return $element.closest('.tf-single-hotel-service').closest('.tf-hotel-withoutpayment-booking, .tf-room-booking-popup').length > 0;
+        }
+
         // Number Increment
         $('.acr-inc, .quanity-acr-inc').on('click', function (e) {
+            if (tfIsHotelExtraQuantityControl($(this))) {
+                return;
+            }
+
             var input = $(this).parent().find('input');
             var max = input.attr('max') ? input.attr('max') : 999;
             if(input.attr('data-max')){
@@ -1434,6 +1442,9 @@
 
         // Number Decrement
         $('.acr-dec, .quanity-acr-dec').on('click', function (e) {
+            if (tfIsHotelExtraQuantityControl($(this))) {
+                return;
+            }
 
             var input = $(this).parent().find('input');
             var min = input.attr('min') ? input.attr('min') : 0;
@@ -2034,10 +2045,16 @@
 
         const tfResolveTourPopup = ($context = null) => {
             const $form = tfResolveTourBookingForm($context);
-            let $popup = $form.find('.tf-withoutpayment-booking').first();
+            let $popup = $context && $context.length ? $context.closest('.tf-withoutpayment-booking').first() : $();
 
-            if (!$popup.length && $context && $context.length) {
-                $popup = $context.closest('.tf-withoutpayment-booking').first();
+            if (!$popup.length) {
+                $popup = $form.find('.tf-withoutpayment-booking.show').first();
+            }
+            if (!$popup.length) {
+                $popup = $form.find('.tf-withoutpayment-booking').first();
+            }
+            if (!$popup.length) {
+                $popup = $('.tf-withoutpayment-booking.show').first();
             }
             if (!$popup.length) {
                 $popup = $('.tf-withoutpayment-booking').first();
@@ -2047,16 +2064,70 @@
         };
 
         const tfResolveTourPackageList = ($context = null) => {
+            const $popup = tfResolveTourPopup($context);
+            if ($popup.length) {
+                const $packages = $popup.find('.tf-booking-content-package .tf-single-package');
+                if ($packages.length) {
+                    return $packages;
+                }
+            }
+
             const $form = tfResolveTourBookingForm($context);
 
             return $form.find('.tf-booking-content-package .tf-single-package');
         };
 
         const tfResolveSelectedTourPackage = ($context = null) => {
-            const $form = tfResolveTourBookingForm($context);
-            const $selectedPackage = $form.find('.tf-booking-content-package input[name="tf_package"]:checked').first();
+            const $source = $context && $context.length ? $context : $();
+            let $selectedPackage = $source.closest('.tf-single-package');
+
+            if ($selectedPackage.length && $selectedPackage.find('input[name="tf_package"]:checked').length) {
+                return $selectedPackage;
+            }
+
+            const $packages = tfResolveTourPackageList($context);
+            $selectedPackage = $packages.find('input[name="tf_package"]:checked').first().closest('.tf-single-package');
 
             return $selectedPackage.length ? $selectedPackage.closest('.tf-single-package') : $();
+        };
+
+        const tfPackageTimeStateKey = 'tfPackageSelectedTimes';
+        const tfGetTourPackageTimeState = ($form) => {
+            if (!$form || !$form.length) {
+                return {};
+            }
+
+            let state = $form.data(tfPackageTimeStateKey);
+            if (!state || typeof state !== 'object') {
+                state = {};
+                $form.data(tfPackageTimeStateKey, state);
+            }
+
+            return state;
+        };
+        const tfStoreTourPackageTime = ($package, $form = null) => {
+            if (!$package || !$package.length) {
+                return;
+            }
+
+            const packageKey = String($package.find('input[name="tf_package"]').first().val() || '');
+            if (!packageKey) {
+                return;
+            }
+
+            const selectedTime = String($package.find('select[name="package_start_time"]').first().val() || '');
+            const $bookingForm = $form && $form.length ? $form : tfResolveTourBookingForm($package);
+            const state = tfGetTourPackageTimeState($bookingForm);
+
+            if (selectedTime) {
+                state[packageKey] = selectedTime;
+            }
+        };
+        const tfStoreTourPackageTimes = ($context = null) => {
+            const $form = tfResolveTourBookingForm($context);
+            tfResolveTourPackageList($form).each(function () {
+                tfStoreTourPackageTime($(this), $form);
+            });
         };
 
         const tfGetTourBookingState = ($context = null) => {
@@ -2610,7 +2681,7 @@
                 }
             });
 
-            const $currentSelection = tfResolveTourBookingForm($context).find('.tf-booking-content-package input[name="tf_package"]:checked').first();
+            const $currentSelection = tfResolveTourPackageList($context).find('input[name="tf_package"]:checked').first();
             if ($currentSelection.length && $currentSelection.closest('.tf-single-package').hasClass('tf-package-unavailable')) {
                 const $firstAvailable = getFirstAvailablePackageRadio($context);
                 if ($firstAvailable.length) {
@@ -2673,6 +2744,11 @@
 
             if (!ensureTourDateSelected(settings.showDateError, $trigger.length ? $trigger : $form)) {
                 return false;
+            }
+
+            tfStoreTourPackageTimes($form);
+            if (selectedPackage && check_in_time) {
+                tfGetTourPackageTimeState($form)[selectedPackage] = check_in_time;
             }
 
             if (bookingState.$selectedPackage.length) {
@@ -2755,7 +2831,7 @@
                     } else {
                         let $travelerInfoBox = $form.find('.tf-traveller-info-box');
                         let $travelerSummary = $form.find('.tf-booking-traveller-info');
-                        let $packageContent = $form.find('.tf-booking-content-package');
+                        let $packageContent = $popup.length ? $popup.find('.tf-booking-content-package') : $();
 
                         if ($popup.length) {
                             if (!$travelerInfoBox.length) {
@@ -2764,9 +2840,9 @@
                             if (!$travelerSummary.length) {
                                 $travelerSummary = $popup.find('.tf-booking-traveller-info');
                             }
-                            if (!$packageContent.length) {
-                                $packageContent = $popup.find('.tf-booking-content-package');
-                            }
+                        }
+                        if (!$packageContent.length) {
+                            $packageContent = $form.find('.tf-booking-content-package');
                         }
 
                         if ($travelerInfoBox.length > 0) {
@@ -2775,7 +2851,17 @@
                         if ($travelerSummary.length > 0) {
                             $travelerSummary.html(response.traveller_summery);
                         }
+                        const selectedPackageTimes = $.extend({}, tfGetTourPackageTimeState($form));
                         if ($packageContent.length) {
+                            $packageContent.find('.tf-single-package').each(function () {
+                                const $package = $(this);
+                                const packageKey = String($package.find('input[name="tf_package"]').first().val() || '');
+                                const selectedTime = $package.find('select[name="package_start_time"]').first().val() || '';
+
+                                if (packageKey && selectedTime) {
+                                    selectedPackageTimes[packageKey] = selectedTime;
+                                }
+                            });
                             $packageContent.find('.tf-pacakge-times').hide();
                             $packageContent.find('select[name="package_start_time"]').each(function () {
                                 $(this).empty();
@@ -2784,14 +2870,31 @@
 
                         if (response.pacakge_times && typeof response.pacakge_times === 'object') {
                             Object.entries(response.pacakge_times).forEach(([key, times]) => {
-                                const wrapper = $form.find(`.tf-package-times-${key}`);
+                                const wrapper = $packageContent.find(`.tf-package-times-${key}`);
                                 wrapper.css('display', 'flex');
                                 const select = wrapper.find('select[name="package_start_time"]');
                                 if (select.length) {
-                                    select.append(`<option value="" disabled selected>Time</option>`);
-                                    times.forEach((time) => {
-                                        select.append(`<option value="${time}">${time}</option>`);
+                                    const packageTimes = Array.isArray(times) ? times : Object.values(times || {});
+                                    const normalizedTimes = packageTimes.map((time) => String(time || '')).filter((time) => time.length > 0);
+                                    const selectedTime = selectedPackageTimes[key] || '';
+                                    const hasSelectedTime = selectedTime && normalizedTimes.some((time) => time === selectedTime);
+                                    select.append($('<option>', {
+                                        value: '',
+                                        text: 'Time',
+                                        disabled: true,
+                                        selected: !hasSelectedTime
+                                    }));
+                                    normalizedTimes.forEach((time) => {
+                                        select.append($('<option>', {
+                                            value: time,
+                                            text: time,
+                                            selected: hasSelectedTime && selectedTime === time
+                                        }));
                                     });
+                                    select.val(hasSelectedTime ? selectedTime : '');
+                                    if (hasSelectedTime) {
+                                        tfGetTourPackageTimeState($form)[key] = selectedTime;
+                                    }
                                 }
                             });
                         }
@@ -2851,9 +2954,16 @@
         });
 
         $(document).on('change', '[name*=tf-tour-extra], input[name="extra-quantity"]', function () {
+            if (tfIsHotelExtraQuantityControl($(this))) {
+                return;
+            }
+
             tourPopupBooking({
                 trigger: $(this)
             });
+        });
+        $(document).on('change', 'select[name="package_start_time"]', function () {
+            tfStoreTourPackageTime($(this).closest('.tf-single-package'));
         });
         $(document).on('change', '[name=deposit]', function () {
             tourPopupBooking({
