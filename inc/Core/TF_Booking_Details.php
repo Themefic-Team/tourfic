@@ -24,6 +24,10 @@ abstract Class TF_Booking_Details {
         add_action( 'wp_ajax_tf_booking_calendar_filter', array( $this, 'tf_booking_calendar_filter_function' ) );
     }
 
+    protected function tf_format_order_detail_text( $value ) {
+        return wp_strip_all_tags( html_entity_decode( (string) $value, ENT_QUOTES, get_bloginfo( 'charset' ) ) );
+    }
+
     public function tf_add_booking_details_submenu() {
         $booking_args = $this->booking_args;
 
@@ -879,7 +883,7 @@ abstract Class TF_Booking_Details {
                                                 <th><?php esc_html_e("Extra Service", "tourfic"); ?></th>
                                                 <td>:</td>
                                                 <td>
-                                                    <?php echo esc_html($hotel_extra); ?>
+                                                    <?php echo esc_html( $this->tf_format_order_detail_text( $hotel_extra ) ); ?>
                                                 </td>
                                             </tr>
                                        <?php } ?>
@@ -1837,6 +1841,16 @@ abstract Class TF_Booking_Details {
                         <div class="tf-single-content">
                             <h5><?php esc_html_e("Dropoff Time", "tourfic"); ?></h5>
                             <p><?php echo esc_html($dropoff_time); ?></p>
+                        </div>
+                    <?php } ?>
+
+                    <?php
+                    $hotel_extra = ! empty( $tf_tour_details->hotel_extra ) ? $tf_tour_details->hotel_extra : '';
+                    if ( ! empty( $hotel_extra ) && $hotel_extra != 'undefined' && $hotel_extra != 'null' ) {
+                        ?>
+                        <div class="tf-single-content">
+                            <h5><?php esc_html_e("Extra Service", "tourfic"); ?></h5>
+                            <p><?php echo esc_html( $this->tf_format_order_detail_text( $hotel_extra ) ); ?></p>
                         </div>
                     <?php } ?>
 
