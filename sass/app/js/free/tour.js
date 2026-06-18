@@ -820,6 +820,11 @@
             let timeSelectDiv = $(".check-in-time-div");
             timeSelect.empty();
 
+            if (tf_params.tour_form_data.pricing_rule === 'package') {
+                timeSelectDiv.hide();
+                return;
+            }
+
             if (Object.keys(times).length > 0) {
                 timeSelect.append(`<option value="" selected hidden>${tf_params.tour_form_data.select_time_text}</option>`);
                 // Use the keys and values from the object to populate the options

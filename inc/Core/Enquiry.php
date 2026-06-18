@@ -717,25 +717,35 @@ abstract class Enquiry {
 		 global $wpdb;
 		 $enquiry_data = array();
  
-		$tf_filter_query = "";
+		$where  = array( 'post_type = %s' );
+		$values = array( sanitize_key( $post_type ) );
+
 		if ( $post_id ) {
-			$tf_filter_query .= " AND post_id = '$post_id'";
+			$where[]  = 'post_id = %d';
+			$values[] = absint( $post_id );
 		}
 		if( !empty($status) ) {
+			$status = sanitize_key( $status );
 			if( $status == 'not-replied') {
-				$tf_filter_query .= sprintf(' AND enquiry_status != "%s"', 'replied' );
+				$where[]  = 'enquiry_status != %s';
+				$values[] = 'replied';
 			} elseif( $status == 'not-responded') {
-				$tf_filter_query .= sprintf(' AND enquiry_status != "%s"', 'responded' );
+				$where[]  = 'enquiry_status != %s';
+				$values[] = 'responded';
 			} else {
-				$tf_filter_query .= sprintf(' AND enquiry_status = "%s"', $status );
+				$where[]  = 'enquiry_status = %s';
+				$values[] = $status;
 			}
 		}
 
+		$query_limit = '';
 		if( !empty( $offset ) && !empty( $per_page ) ) {
-			$tf_filter_query .= sprintf(' LIMIT %d, %d', $offset, $per_page);
+			$query_limit = ' LIMIT %d, %d';
+			$values[]    = absint( $offset );
+			$values[]    = absint( $per_page );
 		}
 
-		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE post_type = %s {$tf_filter_query} ORDER BY id DESC", $post_type ), ARRAY_A );
+		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . " ORDER BY id DESC{$query_limit}", $values ), ARRAY_A );
 
 		if( !empty($results) ) {
 			foreach( $results as $result ) {

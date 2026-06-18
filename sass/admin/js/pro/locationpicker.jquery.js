@@ -1,5 +1,46 @@
 (function ( $ ) {
+    function tfProGoogleMapsIsReady() {
+        return 'undefined' !== typeof window.google &&
+            window.google.maps &&
+            window.google.maps.Map &&
+            window.google.maps.Marker &&
+            window.google.maps.LatLng &&
+            window.google.maps.Geocoder &&
+            window.google.maps.Circle &&
+            window.google.maps.MapTypeId &&
+            window.google.maps.MapTypeId.ROADMAP &&
+            window.google.maps.event &&
+            window.google.maps.places &&
+            window.google.maps.places.Autocomplete;
+    }
+
+    function tfProWhenGoogleMapsReady(callback) {
+        var retries = 50;
+        var resolved = false;
+        var resolve = function () {
+            if (resolved) {
+                return;
+            }
+
+            if (tfProGoogleMapsIsReady()) {
+                resolved = true;
+                callback();
+                return;
+            }
+
+            if (0 < retries) {
+                retries--;
+                setTimeout(resolve, 100);
+            }
+        };
+
+        window.tfProGoogleMapsQueue = window.tfProGoogleMapsQueue || [];
+        window.tfProGoogleMapsQueue.push(resolve);
+        resolve();
+    }
+
     if(tf_pro_params.map_option === 'googlemap') {
+        tfProWhenGoogleMapsReady(function () {
         /**
          * Holds google map object and related utility entities.
          * @constructor
@@ -481,5 +522,6 @@
             markerDraggable: true,
             markerVisible: true
         }
+        });
     }
 }( jQuery ));

@@ -13,6 +13,55 @@ use \Tourfic\Classes\Car_Rental\Availability;
 add_action( 'wp_ajax_tf_car_booking', 'tf_car_booking_callback' );
 add_action( 'wp_ajax_nopriv_tf_car_booking', 'tf_car_booking_callback' );
 
+if ( ! function_exists( 'tf_car_get_supported_booking_location' ) ) {
+	/**
+	 * Get a supported car booking location by exact name or matching slug/name pair.
+	 *
+	 * @since 2.12.10
+	 *
+	 * @param string $location_name Location display name.
+	 * @param string $location_slug Optional location slug.
+	 * @return WP_Term|false
+	 */
+	function tf_car_get_supported_booking_location( $location_name, $location_slug = '' ) {
+		$location_name = trim( $location_name );
+		$location_slug = trim( $location_slug );
+
+		if ( '' === $location_name ) {
+			return false;
+		}
+
+		if ( '' !== $location_slug ) {
+			$term = get_term_by( 'slug', $location_slug, 'carrental_location' );
+
+			if ( $term && ! is_wp_error( $term ) && $location_name === $term->name ) {
+				return $term;
+			}
+
+			return false;
+		}
+
+		$terms = get_terms(
+			array(
+				'taxonomy'   => 'carrental_location',
+				'hide_empty' => false,
+			)
+		);
+
+		if ( empty( $terms ) || is_wp_error( $terms ) ) {
+			return false;
+		}
+
+		foreach ( $terms as $term ) {
+			if ( $location_name === $term->name ) {
+				return $term;
+			}
+		}
+
+		return false;
+	}
+}
+
 /**
  * Handles AJAX for Booking
  *
@@ -32,8 +81,10 @@ function tf_car_booking_callback() {
 	 * Get car meta values
 	 */
 	$post_id   = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
-	$pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( $_POST['pickup'] ) : '';
-	$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( $_POST['dropoff'] ) : '';
+	$pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( wp_unslash( $_POST['pickup'] ) ) : '';
+	$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( wp_unslash( $_POST['dropoff'] ) ) : '';
+	$pickup_slug = isset( $_POST['pickup_slug'] ) ? sanitize_text_field( wp_unslash( $_POST['pickup_slug'] ) ) : '';
+	$dropoff_slug = isset( $_POST['dropoff_slug'] ) ? sanitize_text_field( wp_unslash( $_POST['dropoff_slug'] ) ) : '';
 	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? tf_normalize_date(sanitize_text_field( $_POST['pickup_date'] )) : '';
 	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? tf_normalize_date(sanitize_text_field( $_POST['dropoff_date'] )) : '';
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
@@ -45,6 +96,43 @@ function tf_car_booking_callback() {
 
 	// Booking Confirmation Details
 	$tf_confirmation_details = isset( $_POST['travellerData'] ) && is_array( $_POST['travellerData'] ) ? wp_unslash( $_POST['travellerData'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+	$should_validate_pickup = '' !== trim( $pickup ) || '' !== trim( $pickup_slug );
+	$should_validate_dropoff = '' !== trim( $dropoff ) || '' !== trim( $dropoff_slug );
+	$pickup_location = $should_validate_pickup ? tf_car_get_supported_booking_location( $pickup, $pickup_slug ) : false;
+	$dropoff_location = $should_validate_dropoff ? tf_car_get_supported_booking_location( $dropoff, $dropoff_slug ) : false;
+
+	if ( ( $should_validate_pickup && ! $pickup_location ) || ( $should_validate_dropoff && ! $dropoff_location ) ) {
+		$response = array(
+			'status' => 'error',
+			'errors' => array(),
+		);
+
+		if ( $should_validate_pickup && ! $pickup_location ) {
+			$response['errors'][] = esc_html__(
+				'Please select a supported Pick-up location from the suggestions.',
+				'tourfic'
+			);
+		}
+
+		if ( $should_validate_dropoff && ! $dropoff_location ) {
+			$response['errors'][] = esc_html__(
+				'Please select a supported Drop-off location from the suggestions.',
+				'tourfic'
+			);
+		}
+
+		echo wp_json_encode( $response );
+		wp_die();
+	}
+
+	if ( $pickup_location ) {
+		$pickup = $pickup_location->name;
+	}
+
+	if ( $dropoff_location ) {
+		$dropoff = $dropoff_location->name;
+	}
 
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	$post_author   = get_post_field( 'post_author', $post_id );
@@ -67,6 +155,15 @@ function tf_car_booking_callback() {
 
 	$response      = array();
 	$tf_cars_data = array();
+
+	if ( is_array( $extra_qty ) ) {
+		foreach ( $extra_qty as $single_extra_qty ) {
+			if ( 0 > intval( $single_extra_qty ) ) {
+				$response['errors'][] = esc_html__( 'Extra quantity cannot be negative.', 'tourfic' );
+				break;
+			}
+		}
+	}
 
 	// Deposit
 	$car_allow_deposit = ! empty( $meta['allow_deposit'] ) ? $meta['allow_deposit'] : '';
@@ -306,7 +403,7 @@ function tf_car_set_order_price( $cart ) {
 
 	foreach ( $cart->get_cart() as $cart_item ) {
 		if ( isset( $cart_item['tf_car_data']['price_total'] ) ) {
-			$cart_item['data']->set_price( $cart_item['tf_car_data']['price_total'] );
+			$cart_item['data']->set_price( max( 0, $cart_item['tf_car_data']['price_total'] ) );
 		}
 	}
 

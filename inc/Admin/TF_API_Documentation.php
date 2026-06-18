@@ -997,9 +997,8 @@ class TF_API_Documentation {
 				'url'         => '/orders',
 				'description' => __( 'Get booking orders list with optional filtering and calendar event data.', 'tourfic' ),
 				'parameters'  => array(
-					array( 'name' => 'user_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Target user ID. Defaults to current user.', 'tourfic' ) ),
 					array( 'name' => 'checkinout', 'type' => 'string', 'required' => false, 'description' => __( 'Check-in status filter (in, out, not).', 'tourfic' ) ),
-					array( 'name' => 'post_type', 'type' => 'string', 'required' => false, 'description' => __( 'Booking type filter (tf_hotel, tf_tours, tf_apartment, tf_carrental).', 'tourfic' ) ),
+					array( 'name' => 'post_type', 'type' => 'string', 'required' => true, 'description' => __( 'Booking type filter (hotel, tour, apartment, car). CPT aliases are also accepted: tf_hotel, tf_tours, tf_apartment, tf_carrental.', 'tourfic' ) ),
 					array( 'name' => 'post_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Filter bookings for a specific post ID.', 'tourfic' ) ),
 					array( 'name' => 'order_status', 'type' => 'string', 'required' => false, 'description' => __( 'Order status filter.', 'tourfic' ) ),
 				),
@@ -1048,8 +1047,7 @@ class TF_API_Documentation {
 				'url'         => '/enquiries',
 				'description' => __( 'Get enquiry list by user role context with optional filters.', 'tourfic' ),
 				'parameters'  => array(
-					array( 'name' => 'user_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Target user ID. Defaults to current user.', 'tourfic' ) ),
-					array( 'name' => 'post_type', 'type' => 'string', 'required' => true, 'description' => __( 'Post type for enquiries (tf_hotel, tf_tours, tf_apartment, tf_carrental).', 'tourfic' ) ),
+					array( 'name' => 'post_type', 'type' => 'string', 'required' => true, 'description' => __( 'Post type for enquiries (tf_hotel, tf_tours, tf_apartment).', 'tourfic' ) ),
 					array( 'name' => 'post_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Filter by specific post ID.', 'tourfic' ) ),
 					array( 'name' => 'filters', 'type' => 'string', 'required' => false, 'description' => __( 'Status filter (for example: replied, responded, not-replied, not-responded).', 'tourfic' ) ),
 				),

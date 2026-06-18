@@ -80,6 +80,9 @@ function tf_apartment_get_booking_validation_errors( $post_id, $adults, $childre
 	if ( empty( $adults ) ) {
 		$errors[] = esc_html__( 'Select Adult(s).', 'tourfic' );
 	}
+	if ( 0 > $adults || 0 > $children || 0 > $infant ) {
+		$errors[] = esc_html__( 'Guest count cannot be negative.', 'tourfic' );
+	}
 	if ( 0 === $max_adults && $adults > 0 ) {
 		$errors[] = esc_html__( 'Adult not allowed.', 'tourfic' );
 	} elseif ( $max_adults && $adults > $max_adults ) {
@@ -599,7 +602,7 @@ function tf_aprtment_set_order_price( $cart ) {
 	foreach ( $cart->get_cart() as $cart_item ) {
 
 		if ( isset( $cart_item['tf_apartment_data']['total_price'] ) ) {
-			$cart_item['data']->set_price( $cart_item['tf_apartment_data']['total_price'] );
+			$cart_item['data']->set_price( max( 0, $cart_item['tf_apartment_data']['total_price'] ) );
 		}
 	}
 

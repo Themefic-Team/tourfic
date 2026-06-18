@@ -93,6 +93,10 @@ if ( ! class_exists( 'TF_User_Rest_API' ) ) {
 				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.' ), array( 'status' => 403 ) );
 			}
 
+			if ( ! $this->tf_current_user_can_access_user( $user->ID ) ) {
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this user.', 'tourfic' ), array( 'status' => 403 ) );
+			}
+
 			$user_data = array(
 				'id'                 => $user->ID,
 				'username'           => $user->user_login,
@@ -173,9 +177,14 @@ if ( ! class_exists( 'TF_User_Rest_API' ) ) {
 		 * @auther Foysal
 		 */
 		public function tf_user_bookings( $request ) {
-			$current_user_id = $request->get_param( 'user_id' ) ? $request->get_param( 'user_id' ) : get_current_user_id();
-			$booking_type    = $request->get_param( 'booking_type' ) ? $request->get_param( 'booking_type' ) : 'all';
+			$current_user_id = get_current_user_id();
+			$booking_type    = $request->get_param( 'booking_type' ) ? sanitize_key( $request->get_param( 'booking_type' ) ) : 'all';
 			$disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+			$user_hotel_orders_result = array();
+
+			if ( ! in_array( $booking_type, array( 'all', 'hotel', 'tour', 'apartment', 'car' ), true ) ) {
+				return new WP_Error( 'tf_rest_invalid_param', esc_html__( 'Invalid booking_type value.', 'tourfic' ), array( 'status' => 400 ) );
+			}
 
 			if ( $this->user_has_role( $current_user_id, 'customer' ) ) {
 
@@ -239,7 +248,7 @@ if ( ! class_exists( 'TF_User_Rest_API' ) ) {
 		 * @auther Foysal
 		 */
 		public function tf_user_wishlist( $request ) {
-			$current_user_id = $request->get_param( 'user_id' ) ? $request->get_param( 'user_id' ) : get_current_user_id();
+			$current_user_id = get_current_user_id();
 			$remove          = $request->get_param( 'remove' ) ? $request->get_param( 'remove' ) : false;
 			$postId          = $request->get_param( 'post_id' ) ? $request->get_param( 'post_id' ) : '';
 			$wishlist_data = array();

@@ -70,6 +70,86 @@
         
         // Car Location Autocomplete
 
+        function getCarLocationSlug(locationName) {
+            var locations = tf_params.car_locations || {};
+            var normalizedLocation = $.trim(locationName || '');
+
+            for (const [key, value] of Object.entries(locations)) {
+                if ($.trim(value) === normalizedLocation) {
+                    return key;
+                }
+            }
+
+            return '';
+        }
+
+        function setCarLocationError($input, message) {
+            let $field = $input.closest('.info-select, .tf_form-inner, .tf-search__form__field');
+
+            if (!$field.length) {
+                $field = $input.parent();
+            }
+
+            $field.find('.tf-car-location-error').remove();
+            $('<span class="tf-car-location-error error-text error-visible"></span>').text(message).appendTo($field);
+        }
+
+        function closeCarLocationSuggestions() {
+            $('#tf_pickup_location-autocomplete-list, #tf_dropoff_location-autocomplete-list').remove();
+            $('#tf_pickup_locationautocomplete-list, #tf_dropoff_locationautocomplete-list').remove();
+        }
+
+        function clearCarLocationError($input) {
+            let $field = $input.closest('.info-select, .tf_form-inner, .tf-search__form__field');
+
+            if (!$field.length) {
+                $field = $input.parent();
+            }
+
+            $field.find('.tf-car-location-error').remove();
+        }
+
+        function validateCarLocationField(selector, message) {
+            let $input = $(selector);
+
+            if (!$input.length) {
+                return true;
+            }
+
+            let locationName = $.trim($input.val());
+            let locationSlug = getCarLocationSlug(locationName);
+
+            if (!locationName || !locationSlug) {
+                setCarLocationError($input, message);
+                return false;
+            }
+
+            $input.val(locationName);
+            $input.next('input[type="hidden"]').val(locationSlug);
+            clearCarLocationError($input);
+
+            return true;
+        }
+
+        function validateCarBookingLocations() {
+            closeCarLocationSuggestions();
+
+            let validPickup = validateCarLocationField(
+                '#tf_pickup_location',
+                tf_params.car_pickup_location_invalid_msg
+            );
+            let validDropoff = validateCarLocationField(
+                '#tf_dropoff_location',
+                tf_params.car_dropoff_location_invalid_msg
+            );
+
+            if (!validPickup || !validDropoff) {
+                return false;
+            }
+
+            return true;
+        }
+
         function tourfic_car_autocomplete(inp, arr) {
             /*the autocomplete function takes two arguments,
             the text field element and an array of possible autocompleted values:*/
@@ -102,6 +182,7 @@
             /*execute a function when someone writes in the text field:*/
             inp.addEventListener("keyup", function (e) {
                 var a, b, i, val = this.value;
+                inp.closest('input').nextElementSibling.value = '';
                 /*close any already open lists of autocompleted values*/
                 closeAllLists();
                 currentFocus = -1;
@@ -227,11 +308,19 @@
         var car_locations = tf_params.car_locations;
         if (car_pickup_input) {
             tourfic_car_autocomplete(car_pickup_input, car_locations);
+            $(car_pickup_input).on('input', function () {
+                this.nextElementSibling.value = getCarLocationSlug(this.value);
+                clearCarLocationError($(this));
+            });
         }
 
         var car_dropoff_input = document.getElementById("tf_dropoff_location");
         if (car_dropoff_input) {
             tourfic_car_autocomplete(car_dropoff_input, car_locations);
+            $(car_dropoff_input).on('input', function () {
+                this.nextElementSibling.value = getCarLocationSlug(this.value);
+                clearCarLocationError($(this));
+            });
         }
         
         $(".tf-booking-popup-header .tf-close-popup").on("click", function (e) {
@@ -266,6 +355,10 @@
             if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
                 $('.error-notice').show();
                 $('.error-notice').text(tf_params.fields_required_msg);
+                return;
+            }
+
+            if( !validateCarBookingLocations() ){
                 return;
             }
 
@@ -505,6 +598,10 @@
                     $('.error-notice').text(tf_params.fields_required_msg);
                     return;
                 }
+
+                if( !validateCarBookingLocations() ){
+                    return;
+                }
             }
 
             $('.error-notice').hide();
@@ -541,6 +638,8 @@
                 post_id: post_id,
                 pickup: pickup,
                 dropoff: dropoff,
+                pickup_slug: $('#tf_pickup_location_id').val(),
+                dropoff_slug: $('#tf_dropoff_location_id').val(),
                 pickup_date: pickup_date,
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,
@@ -687,6 +786,14 @@
 
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
+
+            if( !validateCarBookingLocations() ){
+                return;
+            }
+
+            pickup = $('#tf_pickup_location').val();
+            dropoff = $('#tf_dropoff_location').val();
+
             let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
             let dropoff_date = $this.closest('.tf-booking-btn').find('#dropoff_date').val();
             let pickup_time = $this.closest('.tf-booking-btn').find('#pickup_time').val();
@@ -699,6 +806,8 @@
                 post_id: post_id,
                 pickup: pickup,
                 dropoff: dropoff,
+                pickup_slug: $('#tf_pickup_location_id').val(),
+                dropoff_slug: $('#tf_dropoff_location_id').val(),
                 pickup_date: pickup_date,
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,
@@ -778,6 +887,14 @@
     
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
+
+            if( !validateCarBookingLocations() ){
+                return;
+            }
+
+            pickup = $('#tf_pickup_location').val();
+            dropoff = $('#tf_dropoff_location').val();
+
             let partial_payment = getCarPartialPayment($this);
             let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
             let dropoff_date = $this.closest('.tf-booking-btn').find('#dropoff_date').val();
@@ -803,6 +920,8 @@
                 post_id: post_id,
                 pickup: pickup,
                 dropoff: dropoff,
+                pickup_slug: $('#tf_pickup_location_id').val(),
+                dropoff_slug: $('#tf_dropoff_location_id').val(),
                 pickup_date: pickup_date,
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,
