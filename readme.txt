@@ -423,7 +423,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.22.6 – Jun 18, 2026 =
+= 2.22.6 – Jun 21, 2026 =
 
 - Improved: Security for booking forms and booking workflows.
 - Fixed: Deposit rate calculations during booking.
