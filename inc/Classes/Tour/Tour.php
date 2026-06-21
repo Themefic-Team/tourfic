@@ -4654,9 +4654,9 @@ class Tour {
 		$tour_extra_title_arr = [];
 		$tour_extra_meta      = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
 		if ( ! empty( $tour_extra_meta ) ) {
-			$tf_tour_extra = !empty($_POST['tour_extra']) ? sanitize_text_field($_POST['tour_extra']) : '';
+			$tf_tour_extra = !empty($_POST['tour_extra']) ? sanitize_text_field( wp_unslash( $_POST['tour_extra'] ) ) : '';
 			$tours_extra         = !empty($tf_tour_extra) ? explode( ',', $tf_tour_extra ) : [];
-			$tf_tour_extra_quantity = !empty($_POST['tour_extra_quantity']) ? sanitize_text_field($_POST['tour_extra_quantity']) : '';
+			$tf_tour_extra_quantity = !empty($_POST['tour_extra_quantity']) ? sanitize_text_field( wp_unslash( $_POST['tour_extra_quantity'] ) ) : '';
 			$tour_extra_quantity = !empty($tf_tour_extra_quantity) ? explode( ',', $tf_tour_extra_quantity ) : [];
 
 			if(!empty($tours_extra)){
@@ -4672,10 +4672,11 @@ class Tour {
 						}
 					} else if ( $tour_extra_pricetype == "quantity" ) {
 						if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-							$tour_extra_total       += $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ];
+							$extra_quantity          = isset( $tour_extra_quantity[ $extra_key ] ) ? max( 0, intval( $tour_extra_quantity[ $extra_key ] ) ) : 0;
+							$tour_extra_total       += $tour_extra_meta[ $extra ]['price'] * $extra_quantity;
 							$tour_extra_title_arr[] = array(
-								'title' => $tour_extra_meta[ $extra ]['title'] . " x " . $tour_extra_quantity[ $extra_key ],
-								'price' => $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ]
+								'title' => $tour_extra_meta[ $extra ]['title'] . " x " . $extra_quantity,
+								'price' => $tour_extra_meta[ $extra ]['price'] * $extra_quantity
 							);
 						}
 					} else {
@@ -4688,6 +4689,7 @@ class Tour {
 						}
 					}
 				}
+				$tour_extra_total = max( 0, $tour_extra_total );
 			}
 		}
 
