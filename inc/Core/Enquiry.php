@@ -709,10 +709,167 @@ abstract class Enquiry {
 			return 'Invalid date';
 		}
 	}
-	
-	
-	
-	public function enquiry_table_data( $post_type = '', $post_id = '', $status = '', $offset = 0, $per_page = 0 ) {
+
+	protected function tf_enquiry_post_type_capabilities() {
+		return array(
+			'tf_hotel'     => 'edit_tf_hotels',
+			'tf_tours'     => 'edit_tf_tourss',
+			'tf_apartment' => 'edit_tf_apartments',
+		);
+	}
+
+	protected function tf_enquiry_view_permission_keys() {
+		return array(
+			'tf_hotel'     => 'view_hotel_enquiry',
+			'tf_tours'     => 'view_tour_enquiry',
+			'tf_apartment' => 'view_apartment_enquiry',
+		);
+	}
+
+	protected function tf_enquiry_status_filters() {
+		return array( 'read', 'unread', 'replied', 'responded', 'not-replied', 'not-responded' );
+	}
+
+	protected function tf_get_requested_enquiry_post_type() {
+		$post_type = isset( $_POST['post_type'] ) ? sanitize_key( wp_unslash( $_POST['post_type'] ) ) : '';
+
+		return array_key_exists( $post_type, $this->tf_enquiry_post_type_capabilities() ) ? $post_type : '';
+	}
+
+	protected function tf_get_requested_enquiry_filter() {
+		$filter = isset( $_POST['filter'] ) ? sanitize_key( wp_unslash( $_POST['filter'] ) ) : '';
+
+		return in_array( $filter, $this->tf_enquiry_status_filters(), true ) ? $filter : '';
+	}
+
+	protected function tf_get_user_permission_list( $permission_group ) {
+		$user_permission = Helper::tf_data_types( Helper::tfopt( 'tf_user_permission' ) );
+
+		return isset( $user_permission[ $permission_group ] ) && is_array( $user_permission[ $permission_group ] ) ? $user_permission[ $permission_group ] : array();
+	}
+
+	protected function tf_current_user_has_role( $role ) {
+		$user = wp_get_current_user();
+
+		return in_array( $role, (array) $user->roles, true );
+	}
+
+	protected function tf_role_permission_allows( $permission_group, $permission ) {
+		$permissions = $this->tf_get_user_permission_list( $permission_group );
+
+		return empty( $permissions ) || in_array( $permission, $permissions, true );
+	}
+
+	protected function tf_current_user_can_manage_enquiry_post_type( $post_type ) {
+		$capabilities = $this->tf_enquiry_post_type_capabilities();
+		if ( empty( $post_type ) || ! isset( $capabilities[ $post_type ] ) ) {
+			return false;
+		}
+
+		if ( current_user_can( 'manage_options' ) ) {
+			return true;
+		}
+
+		$permission_keys = $this->tf_enquiry_view_permission_keys();
+		$permission_key  = $permission_keys[ $post_type ];
+
+		if ( $this->tf_current_user_has_role( 'tf_manager' ) ) {
+			return current_user_can( 'tf_manager_options' )
+				&& current_user_can( $capabilities[ $post_type ] )
+				&& $this->tf_role_permission_allows( 'manager_can_manage', $permission_key );
+		}
+
+		if ( $this->tf_current_user_has_role( 'tf_vendor' ) ) {
+			return current_user_can( 'tf_vendor_options' )
+				&& current_user_can( $capabilities[ $post_type ] )
+				&& $this->tf_role_permission_allows( 'vendor_can_manage', $permission_key );
+		}
+
+		return current_user_can( $capabilities[ $post_type ] );
+	}
+
+	protected function tf_current_user_can_manage_all_enquiries( $post_type ) {
+		if ( current_user_can( 'manage_options' ) ) {
+			return true;
+		}
+
+		return $this->tf_current_user_has_role( 'tf_manager' )
+			&& current_user_can( 'tf_manager_options' )
+			&& $this->tf_current_user_can_manage_enquiry_post_type( $post_type );
+	}
+
+	protected function tf_current_user_can_access_enquiry_post( $post_type, $post_id = 0 ) {
+		if ( ! $this->tf_current_user_can_manage_enquiry_post_type( $post_type ) ) {
+			return false;
+		}
+
+		if ( $this->tf_current_user_can_manage_all_enquiries( $post_type ) ) {
+			return true;
+		}
+
+		if ( ! $this->tf_current_user_has_role( 'tf_vendor' ) ) {
+			return true;
+		}
+
+		return empty( $post_id ) || absint( get_post_field( 'post_author', $post_id ) ) === get_current_user_id();
+	}
+
+	protected function tf_current_user_can_access_enquiry( $enquiry ) {
+		if ( empty( $enquiry['post_type'] ) ) {
+			return false;
+		}
+
+		$post_type = sanitize_key( $enquiry['post_type'] );
+		$post_id   = ! empty( $enquiry['post_id'] ) ? absint( $enquiry['post_id'] ) : 0;
+
+		if ( ! $this->tf_current_user_can_access_enquiry_post( $post_type, $post_id ) ) {
+			return false;
+		}
+
+		if ( $this->tf_current_user_can_manage_all_enquiries( $post_type ) ) {
+			return true;
+		}
+
+		if ( $this->tf_current_user_has_role( 'tf_vendor' ) ) {
+			$author_id = ! empty( $enquiry['author_id'] ) ? absint( $enquiry['author_id'] ) : 0;
+
+			return $author_id === get_current_user_id() || absint( get_post_field( 'post_author', $post_id ) ) === get_current_user_id();
+		}
+
+		return true;
+	}
+
+	protected function tf_current_user_can_reply_to_enquiry( $enquiry ) {
+		if ( ! $this->tf_current_user_can_access_enquiry( $enquiry ) ) {
+			return false;
+		}
+
+		if ( current_user_can( 'manage_options' ) ) {
+			return true;
+		}
+
+		if ( $this->tf_current_user_has_role( 'tf_manager' ) ) {
+			return $this->tf_role_permission_allows( 'manager_can_manage', 'enquiry_email' );
+		}
+
+		if ( $this->tf_current_user_has_role( 'tf_vendor' ) ) {
+			return $this->tf_role_permission_allows( 'vendor_can_manage', 'enquiry_email' );
+		}
+
+		return false;
+	}
+
+	protected function tf_send_enquiry_json_error( $message, $status_code = 403 ) {
+		wp_send_json(
+			array(
+				'status' => 'error',
+				'msg'    => $message,
+			),
+			$status_code
+		);
+	}
+
+	public function enquiry_table_data( $post_type = '', $post_id = '', $status = '', $offset = 0, $per_page = 0, $author_id = 0 ) {
 
 		 global $wpdb;
 		 $enquiry_data = array();
@@ -723,6 +880,11 @@ abstract class Enquiry {
 		if ( $post_id ) {
 			$where[]  = 'post_id = %d';
 			$values[] = absint( $post_id );
+		}
+
+		if ( $author_id ) {
+			$where[]  = 'author_id = %d';
+			$values[] = absint( $author_id );
 		}
 		if( !empty($status) ) {
 			$status = sanitize_key( $status );
@@ -949,6 +1111,23 @@ abstract class Enquiry {
 
 		global $wpdb;
 
+		foreach ( $enquiry_ids as $enquiry_id ) {
+			$enquiry = $wpdb->get_row(
+				$wpdb->prepare(
+					"SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %d",
+					$enquiry_id
+				),
+				ARRAY_A
+			);
+
+			if ( empty( $enquiry ) || ! $this->tf_current_user_can_access_enquiry( $enquiry ) ) {
+				$response['status'] = 'error';
+				$response['msg']    = esc_html__( 'You do not have permission to perform this action.', 'tourfic' );
+				echo wp_json_encode( $response );
+				wp_die();
+			}
+		}
+
 		if ( 'trash' == $bulk_action ) {
 			foreach ( $enquiry_ids as $enquiry_id ) {
 				$wpdb->query(
@@ -973,11 +1152,21 @@ abstract class Enquiry {
 
 	function tf_enquiry_filter_post_callback() {
 
-		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
-		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : '';
-		$filter = isset( $_POST['filter'] ) ? sanitize_text_field ( $_POST['filter'] ) : '';
+		if ( ! check_ajax_referer( 'updates', '_ajax_nonce', false ) ) {
+			$this->tf_send_enquiry_json_error( esc_html__( 'Security error! Reload the page and try again.', 'tourfic' ), 403 );
+		}
 
-		$enquiry_data = $this->enquiry_table_data( $post_type, $post_id, $filter );
+		$post_id   = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
+		$post_type = $this->tf_get_requested_enquiry_post_type();
+		$filter    = $this->tf_get_requested_enquiry_filter();
+
+		if ( empty( $post_type ) || ! $this->tf_current_user_can_access_enquiry_post( $post_type, $post_id ) ) {
+			$this->tf_send_enquiry_json_error( esc_html__( 'You do not have permission to perform this action.', 'tourfic' ), 403 );
+		}
+
+		$author_id = $this->tf_current_user_can_manage_all_enquiries( $post_type ) ? 0 : get_current_user_id();
+
+		$enquiry_data = $this->enquiry_table_data( $post_type, $post_id, $filter, 0, 0, $author_id );
 
 		$this->enquiry_details_list( $enquiry_data );
 
@@ -993,26 +1182,54 @@ abstract class Enquiry {
 		global $current_user;
 		$reply_data = array();
 
-		if ( isset( $_POST['enquiry_id'] ) ) {
-			$enquiry_id = absint( wp_unslash( $_POST['enquiry_id'] ) ); // sanitize as integer
-
-			$reply_data = $wpdb->get_results( 
-				$wpdb->prepare(
-					"SELECT reply_data FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %d",
-					$enquiry_id
-				)
-			);
+		if ( ! check_ajax_referer( 'updates', '_ajax_nonce', false ) ) {
+			$this->tf_send_enquiry_json_error( esc_html__( 'Security error! Reload the page and try again.', 'tourfic' ), 403 );
 		}
 
-		$reply_data = json_decode( $reply_data[0]->reply_data, true );
+		$enquiry_id = isset( $_POST['enquiry_id'] ) ? absint( wp_unslash( $_POST['enquiry_id'] ) ) : 0;
+		$post_id    = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
 
-		check_ajax_referer('updates', '_ajax_nonce');
+		if ( empty( $enquiry_id ) ) {
+			$response['status'] = 'error';
+			$response['msg']    = esc_html__( 'Invalid enquiry selected.', 'tourfic' );
+			echo wp_json_encode( $response );
+			wp_die();
+		}
 
-		$reply_mail = isset( $_POST['reply_mail'] ) ? sanitize_text_field( $_POST['reply_mail'] ) : '';
-		$reply_message = isset( $_POST['reply_message'] ) ? wp_kses_post( $_POST['reply_message'] ) : '';
-		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
-		$post_type = !empty( $post_id ) ? get_post_type( $post_id ) : '';
-		$enquiry_id = isset( $_POST['enquiry_id'] ) ? sanitize_text_field( $_POST['enquiry_id'] ) : '';
+		$enquiry = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %d",
+				$enquiry_id
+			),
+			ARRAY_A
+		);
+
+		if ( empty( $enquiry ) ) {
+			$response['status'] = 'error';
+			$response['msg']    = esc_html__( 'Enquiry not found.', 'tourfic' );
+			echo wp_json_encode( $response );
+			wp_die();
+		}
+
+		if ( ! empty( $post_id ) && absint( $enquiry['post_id'] ) !== $post_id ) {
+			$response['status'] = 'error';
+			$response['msg']    = esc_html__( 'Invalid enquiry selected.', 'tourfic' );
+			echo wp_json_encode( $response );
+			wp_die();
+		}
+
+		$post_id = absint( $enquiry['post_id'] );
+
+		if ( ! $this->tf_current_user_can_reply_to_enquiry( $enquiry ) ) {
+			$this->tf_send_enquiry_json_error( esc_html__( 'You do not have permission to perform this action.', 'tourfic' ), 403 );
+		}
+
+		$decoded_reply_data = ! empty( $enquiry['reply_data'] ) ? json_decode( $enquiry['reply_data'], true ) : array();
+		$reply_data         = is_array( $decoded_reply_data ) ? $decoded_reply_data : array();
+
+		$reply_mail    = isset( $_POST['reply_mail'] ) ? sanitize_email( wp_unslash( $_POST['reply_mail'] ) ) : '';
+		$reply_message = isset( $_POST['reply_message'] ) ? wp_kses_post( wp_unslash( $_POST['reply_message'] ) ) : '';
+		$post_type     = !empty( $post_id ) ? get_post_type( $post_id ) : '';
 
 		$connection_type = !empty( Helper::tfopt("tf-email-piping")["connection_type"]) ? Helper::tfopt("tf-email-piping")["connection_type"] : 'imap';
 		$connection_mail = $enquiry_mail_setting = '';
@@ -1045,13 +1262,13 @@ abstract class Enquiry {
 		if( empty( $reply_message ) ) {
 			$response['status'] = 'error';
 			$response['msg']    = esc_html__( 'Reply Message is Required!', 'tourfic' );
-
 		}
 
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! is_email( $reply_mail ) ) {
 			$response['status'] = 'error';
-			$response['msg']    = esc_html__( 'You do not have permission to perform this action.', 'tourfic' );
-			$response['msg']    = esc_html__( 'You do not have permission to perform this action.', 'tourfic' );
+			$response['msg']    = esc_html__( 'Invalid reply email address.', 'tourfic' );
+			echo wp_json_encode( $response );
+			wp_die();
 		}
 
 		if( !empty( $reply_mail ) && !empty( $reply_message ) ) {
@@ -1116,19 +1333,24 @@ abstract class Enquiry {
 	}
 
 	function tf_enquiry_filter_mail_callback() {
-		$filter = isset( $_POST['filter'] ) ? sanitize_text_field( $_POST['filter'] )  : '';
-		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : '';
-		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
+		if ( ! check_ajax_referer( 'updates', '_ajax_nonce', false ) ) {
+			$this->tf_send_enquiry_json_error( esc_html__( 'Security error! Reload the page and try again.', 'tourfic' ), 403 );
+		}
 
-		$enquiry_data = $this->enquiry_table_data( $post_type, $post_id, $filter );
-		$total_data = !empty(count( $enquiry_data )) ? count( $enquiry_data ) : 0;
-		$per_page = 20;
+		$filter    = $this->tf_get_requested_enquiry_filter();
+		$post_type = $this->tf_get_requested_enquiry_post_type();
+		$post_id   = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
+
+		if ( empty( $post_type ) || ! $this->tf_current_user_can_access_enquiry_post( $post_type, $post_id ) ) {
+			$this->tf_send_enquiry_json_error( esc_html__( 'You do not have permission to perform this action.', 'tourfic' ), 403 );
+		}
+
+		$author_id    = $this->tf_current_user_can_manage_all_enquiries( $post_type ) ? 0 : get_current_user_id();
+		$enquiry_data = $this->enquiry_table_data( $post_type, $post_id, $filter, 0, 0, $author_id );
 
 		$this->enquiry_details_list( $enquiry_data );
 
 		wp_reset_postdata();
-
-		wp_die();
 
 		wp_die();
 	}

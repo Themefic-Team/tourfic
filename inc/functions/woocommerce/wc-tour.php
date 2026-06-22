@@ -415,6 +415,7 @@ function tf_tours_booking_function() {
 
 	// Tour extra
 	$tour_extra_total = 0;
+	$tour_extra_title = '';
 	$tour_extra_title_arr = [];
 	
 	$tour_extra_meta = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
@@ -422,7 +423,7 @@ function tf_tours_booking_function() {
 		$tf_tours_extra = isset( $_POST['tour_extra'] ) && ! empty( $_POST['tour_extra'] ) ?  sanitize_text_field(wp_unslash( $_POST['tour_extra'] )) : [];
 		$tours_extra = ! empty( $tf_tours_extra ) ? explode( ',', $tf_tours_extra ) : [];
 
-		$tf_tour_extra_quantity = isset( $_POST['tour_extra_quantity'] ) && ! empty( $_POST['tour_extra_quantity'] ) ? sanitize_text_field( wp_unslash( $_POST['tour_extra_quantity'] ) ) : [];
+		$tf_tour_extra_quantity = isset( $_POST['tour_extra_quantity'] ) && ! empty( $_POST['tour_extra_quantity'] ) ? sanitize_text_field( wp_unslash( $_POST['tour_extra_quantity'] ) ) : '';
 		$tour_extra_quantity = ! empty( $tf_tour_extra_quantity ) ? explode( ',', $tf_tour_extra_quantity ) : [];
 
 		foreach($tours_extra as $extra_key => $extra){
@@ -434,8 +435,9 @@ function tf_tours_booking_function() {
 				}
 			} else if($tour_extra_pricetype == "quantity") {
 				if(!empty($tour_extra_meta[$extra]['title']) && !empty($tour_extra_meta[$extra]['price'])){
-					$tour_extra_total += $tour_extra_meta[$extra]['price'] * $tour_extra_quantity[$extra_key];
-					$tour_extra_title_arr[] = $tour_extra_meta[$extra]['title']." (Per Unit: ".wc_price($tour_extra_meta[$extra]['price']).'*'.$tour_extra_quantity[$extra_key]."=".wc_price($tour_extra_meta[$extra]['price']*$tour_extra_quantity[$extra_key]).")";
+					$extra_quantity = isset( $tour_extra_quantity[$extra_key] ) ? max( 0, intval( $tour_extra_quantity[$extra_key] ) ) : 0;
+					$tour_extra_total += $tour_extra_meta[$extra]['price'] * $extra_quantity;
+					$tour_extra_title_arr[] = $tour_extra_meta[$extra]['title']." (Per Unit: ".wc_price($tour_extra_meta[$extra]['price']).'*'.$extra_quantity."=".wc_price($tour_extra_meta[$extra]['price']*$extra_quantity).")";
 				}
 			}else{
 				if(!empty($tour_extra_meta[$extra]['price']) && !empty($tour_extra_meta[$extra]['title'])){
@@ -444,9 +446,11 @@ function tf_tours_booking_function() {
 				}
 			}
 		}
-	}
 
-	$tour_extra_title = ! empty( $tour_extra_title_arr ) ? implode(",",$tour_extra_title_arr) : '';
+		$tour_extra_total = max( 0, $tour_extra_total );
+
+		$tour_extra_title = ! empty( $tour_extra_title_arr ) ? implode(",",$tour_extra_title_arr) : '';
+	}
 
 	/**
 	 * People 0 number validation
