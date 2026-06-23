@@ -302,13 +302,18 @@ class Hotel {
         /**
          * Form data
          */
-        $hotel_id          = ! empty( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
-        $form_adult        = ! empty( $_POST['adult'] ) ? sanitize_text_field( $_POST['adult'] ) : 0;
-        $form_child        = ! empty( $_POST['child'] ) ? sanitize_text_field( $_POST['child'] ) : 0;
+        $hotel_id          = ! empty( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
+        $form_adult        = ! empty( $_POST['adult'] ) ? absint( wp_unslash( $_POST['adult'] ) ) : 0;
+        $form_child        = ! empty( $_POST['child'] ) ? absint( wp_unslash( $_POST['child'] ) ) : 0;
         $form_room         = ! empty( $_POST['room'] ) ? absint( wp_unslash( $_POST['room'] ) ) : 1;
-        $children_ages     = ! empty( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '';
-        $form_check_in_out = ! empty( $_POST['check_in_out'] ) ? sanitize_text_field( $_POST['check_in_out'] ) : '';
-        $design = ! empty( $_POST['design'] ) ? sanitize_text_field( $_POST['design'] ) : '';
+        $children_ages     = ! empty( $_POST['children_ages'] ) ? sanitize_text_field( wp_unslash( $_POST['children_ages'] ) ) : '';
+        $form_check_in_out = ! empty( $_POST['check_in_out'] ) ? sanitize_text_field( wp_unslash( $_POST['check_in_out'] ) ) : '';
+        $design = ! empty( $_POST['design'] ) ? sanitize_text_field( wp_unslash( $_POST['design'] ) ) : '';
+
+        $hotel_post = ! empty( $hotel_id ) ? get_post( $hotel_id ) : null;
+        if ( ! $hotel_post || 'tf_hotel' !== $hotel_post->post_type || ( 'publish' !== $hotel_post->post_status && ! current_user_can( 'read_post', $hotel_id ) ) ) {
+            wp_send_json_error( array( 'message' => esc_html__( 'Invalid hotel selected.', 'tourfic' ) ), 400 );
+        }
 
 
         $form_total_person = $form_adult + $form_child;
@@ -335,10 +340,11 @@ class Hotel {
         $meta  = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
 		// Get the original (default language) post ID using WPML
 		if (function_exists('wpml_get_default_language')) {
-			$original_hotel_id = apply_filters('wpml_object_id', $hotel_id, 'tf_hotel', false, wpml_get_default_language());
+			$original_hotel_id = absint( apply_filters('wpml_object_id', $hotel_id, 'tf_hotel', false, wpml_get_default_language()) );
 		} else {
 			$original_hotel_id = $hotel_id;
 		}
+		$original_hotel_id = ! empty( $original_hotel_id ) ? $original_hotel_id : $hotel_id;
         $rooms = Room::get_hotel_rooms( $original_hotel_id );
         $locations           = get_the_terms( $hotel_id, 'hotel_location' );
         $first_location_name = ! empty( $locations ) ? $locations[0]->name : '';
@@ -504,10 +510,11 @@ class Hotel {
 
 					// Get the original (default language) post ID using WPML
 					if ( function_exists( 'wpml_get_default_language' ) ) {
-						$original_hotel_id = apply_filters( 'wpml_object_id', $hotel_id, 'tf_hotel', false, wpml_get_default_language() );
+						$original_hotel_id = absint( apply_filters( 'wpml_object_id', $hotel_id, 'tf_hotel', false, wpml_get_default_language() ) );
 					} else {
 						$original_hotel_id = $hotel_id;
 					}
+					$original_hotel_id = ! empty( $original_hotel_id ) ? $original_hotel_id : $hotel_id;
 					//room inventory manage
                     if ( ! empty( $order_ids ) && $reduce_num_room == true ) {
 
@@ -535,12 +542,20 @@ class Hotel {
 							$room_booked_today = 0;
 
 							foreach ($order_ids as $order_id) {
+								$order_id = absint( $order_id );
+								if ( empty( $order_id ) ) {
+									continue;
+								}
 
 								# Get completed orders
 								$tf_orders_select = array(
 									'select' => "post_id,order_details",
 									'post_type' => 'hotel',
-									'query' => " AND ostatus = 'completed' AND order_id = ".$order_id." AND post_id = ".$original_hotel_id
+									'where' => array(
+										'ostatus'  => 'completed',
+										'order_id' => $order_id,
+										'post_id'  => $original_hotel_id,
+									),
 								);
 								$tf_hotel_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
@@ -5452,14 +5467,21 @@ class Hotel {
 	}
 
 	static function tf_hotel_without_payment_inventory_data($order_id) {
+		$order_id = absint( $order_id );
+		if ( empty( $order_id ) ) {
+			return;
+		}
 
-        # Get completed orders
-        $tf_orders_select = array(
-            'select' => "post_id,order_details,room_id,post_type",
-            'post_type' => 'hotel',
-            'query' => " AND ostatus = 'completed' AND order_id = ".$order_id,
-        );
-        $order_data = Helper::tourfic_order_table_data($tf_orders_select);
+		# Get completed orders
+		$tf_orders_select = array(
+			'select' => "post_id,order_details,room_id,post_type",
+			'post_type' => 'hotel',
+			'where' => array(
+				'ostatus'  => 'completed',
+				'order_id' => $order_id,
+			),
+		);
+		$order_data = Helper::tourfic_order_table_data($tf_orders_select);
 
         if ( !empty($order_data[0]["post_type"]) && "hotel" == $order_data[0]["post_type"] ) {
 			$post_id   = $order_data[0]["post_id"];

@@ -369,14 +369,21 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 	
 								$room_booked_today = 0;
 	
-								foreach ($order_ids as $order_id) {
-	
-									# Get completed orders
-									$tf_orders_select = array(
-										'select' => "post_id,order_details",
-										'post_type' => 'hotel',
-										'query' => " AND ostatus = 'completed' AND order_id = ".$order_id
-									);
+									foreach ($order_ids as $order_id) {
+										$order_id = absint( $order_id );
+											if ( empty( $order_id ) ) {
+												continue;
+											}
+
+											# Get completed orders
+										$tf_orders_select = array(
+											'select' => "post_id,order_details",
+											'post_type' => 'hotel',
+											'where' => array(
+												'ostatus'  => 'completed',
+												'order_id' => $order_id,
+											),
+										);
 									$tf_hotel_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 	
 									foreach ($tf_hotel_book_orders as $item) {

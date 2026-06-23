@@ -967,7 +967,8 @@ class Enqueue {
 		$tf_tour_orders_select = array(
 			'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
 			'post_type' => 'tour',
-			'query'     => " ORDER BY id DESC"
+				'orderby'   => 'id',
+				'order'     => 'DESC',
 		);
 		$tf_tour_order_result = Helper::tourfic_order_table_data( $tf_tour_orders_select );
 		$tf_tours_orders = [];
@@ -990,7 +991,8 @@ class Enqueue {
 		$tf_hotel_orders_select = array(
 			'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
 			'post_type' => 'hotel',
-			'query'     => " ORDER BY id DESC"
+				'orderby'   => 'id',
+				'order'     => 'DESC',
 		);
 		$tf_hotel_order_result = Helper::tourfic_order_table_data( $tf_hotel_orders_select );
 		$tf_hotels_orders = [];
@@ -1013,7 +1015,8 @@ class Enqueue {
 		$tf_apartment_orders_select = array(
 			'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
 			'post_type' => 'apartment',
-			'query'     => " ORDER BY id DESC"
+				'orderby'   => 'id',
+				'order'     => 'DESC',
 		);
 		$tf_apartment_order_result = Helper::tourfic_order_table_data( $tf_apartment_orders_select );
 		$tf_apartments_orders = [];
@@ -1036,7 +1039,8 @@ class Enqueue {
 		$tf_car_orders_select = array(
 			'select'    => "id, order_id, post_id, check_in, check_out, ostatus",
 			'post_type' => 'car',
-			'query'     => " ORDER BY id DESC"
+				'orderby'   => 'id',
+				'order'     => 'DESC',
 		);
 		$tf_car_order_result = Helper::tourfic_order_table_data( $tf_car_orders_select );
 		$tf_cars_orders = [];

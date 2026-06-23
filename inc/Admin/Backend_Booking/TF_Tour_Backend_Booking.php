@@ -459,7 +459,11 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 				$tf_orders_select    = array(
 					'select'    => "post_id,order_details",
 					'post_type' => 'tour',
-					'query'     => " AND ostatus = 'completed' ORDER BY order_id DESC"
+					'where'     => array(
+						'ostatus' => 'completed',
+					),
+					'orderby'   => 'order_id',
+					'order'     => 'DESC',
 				);
 				$tf_tour_book_orders = Helper::tourfic_order_table_data( $tf_orders_select );
 
@@ -512,7 +516,11 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			$tf_orders_select = array(
 				'select' => "post_id,order_details",
 				'post_type' => 'tour',
-				'query' => " AND ostatus = 'completed' ORDER BY order_id DESC"
+				'where' => array(
+					'ostatus' => 'completed',
+				),
+				'orderby' => 'order_id',
+				'order' => 'DESC',
 			);
 			$tf_tour_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
@@ -704,7 +712,11 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 				$tf_orders_select    = array(
 					'select'    => "post_id,order_details",
 					'post_type' => 'tour',
-					'query'     => " AND ostatus = 'completed' ORDER BY order_id DESC"
+					'where'     => array(
+						'ostatus' => 'completed',
+					),
+					'orderby'   => 'order_id',
+					'order'     => 'DESC',
 				);
 				$tf_tour_book_orders = Helper::tourfic_order_table_data( $tf_orders_select );
 

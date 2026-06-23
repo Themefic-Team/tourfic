@@ -206,12 +206,13 @@ function tf_hotel_booking_callback() {
 		$avail_durationdate[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
 	}
 
-	// Get the original (default language) post ID using WPML
-	if ( function_exists( 'wpml_get_default_language' ) ) {
-		$original_hotel_id = apply_filters( 'wpml_object_id', $post_id, 'tf_hotel', false, wpml_get_default_language() );
-	} else {
-		$original_hotel_id = $post_id;
-	}
+		// Get the original (default language) post ID using WPML
+		if ( function_exists( 'wpml_get_default_language' ) ) {
+			$original_hotel_id = absint( apply_filters( 'wpml_object_id', $post_id, 'tf_hotel', false, wpml_get_default_language() ) );
+		} else {
+			$original_hotel_id = $post_id;
+		}
+		$original_hotel_id = ! empty( $original_hotel_id ) ? $original_hotel_id : $post_id;
 	//room inventory manage
 	if ( ! empty( $order_ids ) && $reduce_num_room == true ) {
 
@@ -238,14 +239,22 @@ function tf_hotel_booking_callback() {
 
 			$room_booked_today = 0;
 
-			foreach ($order_ids as $order_id) {
+				foreach ($order_ids as $order_id) {
+					$order_id = absint( $order_id );
+					if ( empty( $order_id ) ) {
+						continue;
+					}
 
-				# Get completed orders
-				$tf_orders_select = array(
-					'select' => "post_id,order_details",
-					'post_type' => 'hotel',
-					'query' => " AND ostatus = 'completed' AND order_id = ".$order_id." AND post_id = ".$original_hotel_id
-				);
+					# Get completed orders
+					$tf_orders_select = array(
+						'select' => "post_id,order_details",
+						'post_type' => 'hotel',
+						'where' => array(
+							'ostatus'  => 'completed',
+							'order_id' => $order_id,
+							'post_id'  => $original_hotel_id,
+						),
+					);
 				$tf_hotel_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
 				foreach ($tf_hotel_book_orders as $item) {

@@ -1154,12 +1154,10 @@ class Helper {
      */
 	static function tourfic_order_table_data( $query ) {
 		global $wpdb;
-		$query_type   = sanitize_key( $query['post_type'] );
-		$query_select = self::tf_order_table_select_sql( $query['select'] );
-		$values       = array( $query_type );
-		$query_where  = isset( $query['where'] ) && is_array( $query['where'] )
-			? self::tf_order_table_structured_sql( $query, $values )
-			: $query['query'];
+		$query_type             = ! empty( $query['post_type'] ) ? sanitize_key( $query['post_type'] ) : '';
+		$query_select           = self::tf_order_table_select_sql( $query['select'] );
+		$values                 = array( $query_type );
+		$query_where            = self::tf_order_table_structured_sql( $query, $values );
 
 		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $values ), ARRAY_A );
 
