@@ -19,7 +19,12 @@ $files = array(
 	'pro_rest'          => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Rest_API.php',
 	'pro_booking'       => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Booking_Rest_API.php',
 	'pro_enquiry'       => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Enquiry_Rest_API.php',
+	'pro_hotel_booking' => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Hotel_Backend_Booking_Rest_API.php',
+	'pro_integration'   => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Integration_Rest_API.php',
+	'pro_room'          => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Room_Rest_API.php',
+	'pro_tour_booking'  => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Tour_Backend_Booking_Rest_API.php',
 	'pro_user'          => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_User_Rest_API.php',
+	'pro_vendor'        => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Vendor_Rest_API.php',
 	'pro_vendor_helper' => dirname( $root ) . '/tourfic-pro/inc/functions.php',
 );
 
@@ -76,6 +81,18 @@ tf_security_assert( false !== strpos( $pro_routes, 'tf_fd_order_permission_callb
 tf_security_assert( false !== strpos( $pro_routes, 'tf_fd_enquiry_permission_callback' ), 'Pro enquiries route must use enquiry permission callback.' );
 tf_security_assert( false !== strpos( $pro_routes, 'tf_fd_user_permission_callback' ), 'Pro user detail route must use user-object permission callback.' );
 tf_security_assert( false !== strpos( $pro_routes, 'tf_fd_admin_permission_callback' ), 'Pro users route must stay admin-gated.' );
+tf_security_assert( false !== strpos( $pro_routes, "'callback'            => array( \$api, 'tf_fd_update_user' )" ), 'Pro update-user route must remain registered.' );
+tf_security_assert( false !== strpos( $pro_routes, "'callback'            => array( \$api, 'tf_fd_update_user' ),\n\t\t\t'permission_callback' => array( \$api, 'tf_fd_user_permission_callback' )" ), 'Pro update-user route must use user-object permission callback.' );
+tf_security_assert( false !== strpos( $pro_routes, "'callback'            => array( \$api, 'tf_fd_update_visitor_details' ),\n\t\t\t'permission_callback' => array( \$api, 'tf_fd_order_permission_callback' )" ), 'Pro visitor-detail updates must use order permission callback.' );
+tf_security_assert( false !== strpos( $pro_routes, 'tf_fd_payout_permission_callback' ), 'Pro payout routes must use payout-object permission callback.' );
+tf_security_assert( false !== strpos( $pro_routes, "'callback'            => array( \$api, 'tf_fd_update_payout_status' ),\n\t\t\t'permission_callback' => array( \$api, 'tf_fd_admin_permission_callback' )" ), 'Pro payout status updates must stay admin-gated.' );
+tf_security_assert( false !== strpos( $pro_routes, "'callback'            => array( \$api, 'tf_fd_get_google_access_token_url' ),\n\t\t\t'permission_callback' => array( \$api, 'tf_fd_integration_permission_callback' )" ), 'Pro Google token URL route must use integration object permission callback.' );
+tf_security_assert( false !== strpos( $pro_routes, "'callback'            => array( \$api, 'tf_fd_reset_google_access_token' ),\n\t\t\t'permission_callback' => array( \$api, 'tf_fd_integration_permission_callback' )" ), 'Pro Google token reset route must use integration object permission callback.' );
+tf_security_assert( false !== strpos( $pro_routes, "'callback'            => array( \$api, 'tf_fd_available_hotel_room_and_service_type' ),\n\t\t\t'permission_callback' => array( \$api, 'tf_fd_post_permission_callback' )" ), 'Pro hotel room/service availability must use post-object permission callback.' );
+tf_security_assert( false !== strpos( $pro_routes, "'callback'            => array( \$api, 'tf_fd_available_hotel_room_number' ),\n\t\t\t'permission_callback' => array( \$api, 'tf_fd_post_permission_callback' )" ), 'Pro hotel room-number availability must use post-object permission callback.' );
+tf_security_assert( false !== strpos( $pro_routes, "'callback'            => array( \$api, 'tf_fd_hotel_add_booking' ),\n\t\t\t'permission_callback' => array( \$api, 'tf_fd_post_permission_callback' )" ), 'Pro backend hotel booking must use post-object permission callback.' );
+tf_security_assert( false !== strpos( $pro_routes, "'callback'            => array( \$api, 'tf_fd_available_tour_date_time' ),\n\t\t\t'permission_callback' => array( \$api, 'tf_fd_post_permission_callback' )" ), 'Pro tour date/time availability must use post-object permission callback.' );
+tf_security_assert( false !== strpos( $pro_routes, "'callback'            => array( \$api, 'tf_fd_tour_add_booking' ),\n\t\t\t'permission_callback' => array( \$api, 'tf_fd_post_permission_callback' )" ), 'Pro backend tour booking must use post-object permission callback.' );
 tf_security_assert( false !== strpos( $free_routes, "'tf_hotel'" ), 'Free orders route must accept documented CPT aliases.' );
 tf_security_assert( false !== strpos( $pro_routes, "'tf_hotel'" ), 'Pro orders route must accept documented CPT aliases.' );
 
@@ -129,6 +146,41 @@ foreach ( array( 'free_user' => 'tf_get_user', 'pro_user' => 'tf_fd_get_user' ) 
 	tf_security_assert( false !== $data_offset, "{$method} must still build a user data response." );
 	tf_security_assert( $access_offset < $data_offset, "{$method} must authorize before building the user data response." );
 }
+
+$pro_update_user = tf_security_method_body( tf_security_file( $files['pro_user'] ), 'tf_fd_update_user' );
+tf_security_assert( false !== strpos( $pro_update_user, 'tf_fd_current_user_can_access_user' ), 'Pro update-user handler must verify requested user ownership.' );
+tf_security_assert( false !== strpos( $pro_update_user, 'wp_check_password( $current_password' ), 'Pro update-user handler must verify current password before self password changes.' );
+tf_security_assert( false !== strpos( $pro_update_user, "user_args['user_pass']" ), 'Pro update-user handler must still support authorized password updates.' );
+
+$pro_update_order_status = tf_security_method_body( tf_security_file( $files['pro_booking'] ), 'tf_fd_update_order_status' );
+tf_security_assert( false !== strpos( $pro_update_order_status, 'tf_fd_current_user_can_access_order' ), 'Pro update-order-status handler must verify order ownership.' );
+$pro_update_visitor_details = tf_security_method_body( tf_security_file( $files['pro_booking'] ), 'tf_fd_update_visitor_details' );
+tf_security_assert( false !== strpos( $pro_update_visitor_details, 'tf_fd_current_user_can_access_order' ), 'Pro update-visitor-details handler must verify order ownership.' );
+
+foreach ( array( 'tf_fd_get_payout', 'tf_fd_update_payout' ) as $method ) {
+	$body = tf_security_method_body( tf_security_file( $files['pro_vendor'] ), $method );
+	tf_security_assert( false !== strpos( $body, 'tf_fd_current_user_can_access_payout' ), "{$method} must verify payout ownership." );
+}
+
+$pro_integration_permission = tf_security_method_body( tf_security_file( $files['pro_integration'] ), 'tf_fd_integration_permission_callback' );
+tf_security_assert( false !== strpos( $pro_integration_permission, 'tf_fd_admin_vendor_permission_callback' ), 'Pro integration permission must require dashboard admin/vendor access.' );
+tf_security_assert( false !== strpos( $pro_integration_permission, 'tf_fd_get_authorized_integration_user_id' ), 'Pro integration permission must authorize the requested user id.' );
+
+foreach ( array( 'tf_fd_get_google_access_token_url', 'tf_fd_reset_google_access_token' ) as $method ) {
+	$body          = tf_security_method_body( tf_security_file( $files['pro_integration'] ), $method );
+	$access_offset = strpos( $body, 'tf_fd_get_authorized_integration_user_id' );
+	tf_security_assert( false !== $access_offset, "{$method} must verify integration user ownership." );
+}
+
+$pro_integration_user = tf_security_method_body( tf_security_file( $files['pro_integration'] ), 'tf_fd_get_authorized_integration_user_id' );
+tf_security_assert( false !== strpos( $pro_integration_user, 'tf_fd_current_user_can_access_user' ), 'Pro integration user helper must delegate to user-object authorization.' );
+tf_security_assert( false !== strpos( $pro_integration_user, 'get_current_user_id()' ), 'Pro integration user helper must default to current user.' );
+
+$pro_room_list = tf_security_method_body( tf_security_file( $files['pro_room'] ), 'tf_fd_get_rooms' );
+tf_security_assert( false !== strpos( $pro_room_list, 'tf_fd_get_dashboard_author_id' ), 'Pro rooms list must clamp requested author for non-managers.' );
+
+$pro_available_hotel = tf_security_method_body( tf_security_file( $files['pro_hotel_booking'] ), 'tf_fd_available_hotel' );
+tf_security_assert( false !== strpos( $pro_available_hotel, "tf_fd_get_dashboard_author_id( \$request, 'user_id' )" ), 'Pro available-hotel route must clamp requested user_id for non-managers.' );
 
 $free_helper       = tf_security_file( $files['free_helper'] );
 $pro_vendor_helper = tf_security_file( $files['pro_vendor_helper'] );
