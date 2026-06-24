@@ -237,7 +237,11 @@ function tf_tours_booking_function() {
 			$tf_orders_select = array(
 				'select' => "post_id,order_details",
 				'post_type' => 'tour',
-				'query' => " AND ostatus = 'completed' ORDER BY order_id DESC"
+				'where' => array(
+					'ostatus' => 'completed',
+				),
+				'orderby' => 'order_id',
+				'order' => 'DESC',
 			);
 			$tf_tour_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
@@ -290,7 +294,11 @@ function tf_tours_booking_function() {
 		$tf_orders_select = array(
 			'select' => "post_id,order_details",
 			'post_type' => 'tour',
-			'query' => " AND ostatus = 'completed' ORDER BY order_id DESC"
+			'where' => array(
+				'ostatus' => 'completed',
+			),
+			'orderby' => 'order_id',
+			'order' => 'DESC',
 		);
 		$tf_tour_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
@@ -519,7 +527,11 @@ function tf_tours_booking_function() {
 			$tf_orders_select = array(
 				'select' => "post_id,order_details",
 				'post_type' => 'tour',
-				'query' => " AND ostatus = 'completed' ORDER BY order_id DESC"
+					'where' => array(
+						'ostatus' => 'completed',
+					),
+					'orderby' => 'order_id',
+					'order' => 'DESC',
 			);
 			$tf_tour_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 

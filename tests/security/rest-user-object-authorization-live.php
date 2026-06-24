@@ -56,8 +56,30 @@ function tf_security_live_low_privilege_user() {
 	return ! empty( $users[0] ) ? $users[0] : null;
 }
 
+function tf_security_live_vendor_user() {
+	$vendors = get_users(
+		array(
+			'role'   => 'tf_vendor',
+			'number' => 1,
+			'fields' => 'all',
+		)
+	);
+
+	return ! empty( $vendors[0] ) ? $vendors[0] : null;
+}
+
 function tf_security_live_rest_get( $route, $params = array() ) {
 	$request = new WP_REST_Request( 'GET', $route );
+
+	foreach ( $params as $key => $value ) {
+		$request->set_param( $key, $value );
+	}
+
+	return rest_do_request( $request );
+}
+
+function tf_security_live_rest_post( $route, $params = array() ) {
+	$request = new WP_REST_Request( 'POST', $route );
 
 	foreach ( $params as $key => $value ) {
 		$request->set_param( $key, $value );
@@ -186,6 +208,19 @@ tf_security_live_assert_status(
 	'Reported case failed: low-privilege REST request must not read the administrator user object.'
 );
 
+$admin_user_update_response = tf_security_live_rest_post(
+	'/tf/v1/user/' . $admin_user->ID,
+	array(
+		'id'           => $admin_user->ID,
+		'new_password' => 'tourfic-security-regression-password',
+	)
+);
+tf_security_live_assert_status(
+	$admin_user_update_response,
+	403,
+	'Reported case failed: low-privilege REST request must not update the administrator user object.'
+);
+
 $self_user_response = tf_security_live_rest_get( '/tf/v1/user/' . $low_user->ID, array( 'id' => $low_user->ID ) );
 tf_security_live_assert_status(
 	$self_user_response,
@@ -217,6 +252,60 @@ tf_security_live_assert_status(
 	403,
 	'Reported case failed: low-privilege REST request must not pass enquiry detail authorization.'
 );
+
+$vendor_user = tf_security_live_vendor_user();
+if ( $vendor_user ) {
+	wp_set_current_user( $vendor_user->ID );
+
+	tf_security_live_assert_status(
+		tf_security_live_rest_get( '/tf/v1/get-google-access-token-url', array( 'user_id' => $admin_user->ID ) ),
+		403,
+		'Vendor REST request must not generate a Google access URL for an administrator user_id.'
+	);
+
+	$original_admin_integration_settings = get_user_meta( $admin_user->ID, '_tf_integration_settings', true );
+	$sentinel_admin_integration_settings = array( 'tourfic_security_probe' => 'preserve-admin-integration-meta' );
+	update_user_meta( $admin_user->ID, '_tf_integration_settings', $sentinel_admin_integration_settings );
+
+	$admin_reset_response = tf_security_live_rest_post(
+		'/tf/v1/reset-google-access-token',
+		array(
+			'user_id' => $admin_user->ID,
+		)
+	);
+	$admin_integration_settings_after_reset = get_user_meta( $admin_user->ID, '_tf_integration_settings', true );
+
+	if ( '' === $original_admin_integration_settings ) {
+		delete_user_meta( $admin_user->ID, '_tf_integration_settings' );
+	} else {
+		update_user_meta( $admin_user->ID, '_tf_integration_settings', $original_admin_integration_settings );
+	}
+
+	tf_security_live_assert_status(
+		$admin_reset_response,
+		403,
+		'Vendor REST request must not reset administrator Google integration settings.'
+	);
+	tf_security_live_assert(
+		$admin_integration_settings_after_reset === $sentinel_admin_integration_settings,
+		'Forbidden administrator Google integration reset must not delete administrator integration metadata.'
+	);
+
+	tf_security_live_assert_status(
+		tf_security_live_rest_get( '/tf/v1/get-google-access-token-url' ),
+		200,
+		'Vendor REST request without user_id must still generate the current vendor Google access URL.'
+	);
+
+	wp_set_current_user( $admin_user->ID );
+	tf_security_live_assert_status(
+		tf_security_live_rest_get( '/tf/v1/get-google-access-token-url', array( 'user_id' => $vendor_user->ID ) ),
+		200,
+		'Administrator REST request must still generate a delegated vendor Google access URL.'
+	);
+}
+
+wp_set_current_user( $low_user->ID );
 
 $bookings_response = tf_security_live_rest_get(
 	'/tf/v1/user-bookings',

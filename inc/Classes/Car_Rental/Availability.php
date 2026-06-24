@@ -7,10 +7,11 @@ use \Tourfic\Classes\Helper;
 class Availability {
 
     // Car Available or Not
-    static function tf_car_inventory($post_id, $meta, $tf_pickup_date = '', $tf_dropoff_date = '', $tf_pickup_time = '', $tf_dropoff_time = '') {
-        if ( function_exists( 'tf_normalize_car_meta' ) ) {
-            $meta = tf_normalize_car_meta( $meta );
-        }
+	    static function tf_car_inventory($post_id, $meta, $tf_pickup_date = '', $tf_dropoff_date = '', $tf_pickup_time = '', $tf_dropoff_time = '') {
+	        $post_id = absint( $post_id );
+	        if ( function_exists( 'tf_normalize_car_meta' ) ) {
+	            $meta = tf_normalize_car_meta( $meta );
+	        }
 
         $pricing_by = !empty($meta["price_by"]) ? $meta["price_by"] : 'day';
         $car_numbers = !empty($meta["car_numbers"]) ? $meta["car_numbers"] : 0;
@@ -19,12 +20,15 @@ class Availability {
         $requested_start = strtotime("$tf_pickup_date $tf_pickup_time");
         $requested_end = strtotime("$tf_dropoff_date $tf_dropoff_time");
 
-        if (!empty($car_numbers)) {
-            $tf_orders_select = array(
-                'select' => "post_id,order_details",
-                'post_type' => 'car',
-                'query' => " AND ostatus = 'completed' AND post_id = " . $post_id
-            );
+	        if (!empty($post_id) && !empty($car_numbers)) {
+	            $tf_orders_select = array(
+	                'select' => "post_id,order_details",
+	                'post_type' => 'car',
+	                'where' => array(
+	                    'ostatus' => 'completed',
+	                    'post_id' => $post_id,
+	                ),
+	            );
             $tf_car_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
             if (!empty($tf_car_book_orders)) {
