@@ -1072,10 +1072,9 @@ if(!function_exists('tourfic_order_table_data')){
 		$query_type          = sanitize_key( $query['post_type'] );
 		$query_select        = '*' === trim( $query['select'] ) ? '*' : preg_replace( '/[^a-zA-Z0-9_, ]/', '', $query['select'] );
 		$values              = array( $query_type );
-		$query_where         = ! empty( $query['query'] ) ? $query['query'] : '';
+		$query_where         = '';
 
 		if ( isset( $query['where'] ) && is_array( $query['where'] ) ) {
-			$query_where = '';
 			$allowed_columns = array(
 				'order_id'    => '%d',
 				'post_id'     => '%d',
@@ -1093,14 +1092,14 @@ if(!function_exists('tourfic_order_table_data')){
 				$query_where .= " AND {$column} = {$allowed_columns[ $column ]}";
 				$values[]     = '%d' === $allowed_columns[ $column ] ? absint( $value ) : sanitize_text_field( $value );
 			}
+		}
 
-			if ( ! empty( $query['orderby'] ) ) {
-				$allowed_orderby = array( 'id', 'order_id', 'order_date', 'check_in', 'check_out' );
-				$orderby         = sanitize_key( $query['orderby'] );
-				if ( in_array( $orderby, $allowed_orderby, true ) ) {
-					$order        = ! empty( $query['order'] ) && 'ASC' === strtoupper( $query['order'] ) ? 'ASC' : 'DESC';
-					$query_where .= " ORDER BY {$orderby} {$order}";
-				}
+		if ( ! empty( $query['orderby'] ) ) {
+			$allowed_orderby = array( 'id', 'order_id', 'order_date', 'check_in', 'check_out' );
+			$orderby         = sanitize_key( $query['orderby'] );
+			if ( in_array( $orderby, $allowed_orderby, true ) ) {
+				$order        = ! empty( $query['order'] ) && 'ASC' === strtoupper( $query['order'] ) ? 'ASC' : 'DESC';
+				$query_where .= " ORDER BY {$orderby} {$order}";
 			}
 		}
 
