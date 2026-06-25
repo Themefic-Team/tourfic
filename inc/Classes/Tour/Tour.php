@@ -4670,10 +4670,12 @@ class Tour {
 		$tour_extra_title_arr = [];
 		$tour_extra_meta      = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
 		if ( ! empty( $tour_extra_meta ) ) {
-			$tf_tour_extra = !empty($_POST['tour_extra']) ? sanitize_text_field( wp_unslash( $_POST['tour_extra'] ) ) : '';
-			$tours_extra         = !empty($tf_tour_extra) ? explode( ',', $tf_tour_extra ) : [];
-			$tf_tour_extra_quantity = !empty($_POST['tour_extra_quantity']) ? sanitize_text_field( wp_unslash( $_POST['tour_extra_quantity'] ) ) : '';
-			$tour_extra_quantity = !empty($tf_tour_extra_quantity) ? explode( ',', $tf_tour_extra_quantity ) : [];
+			$tour_extra_selection = Helper::tf_sanitize_tour_extra_selection(
+				isset( $_POST['tour_extra'] ) ? wp_unslash( $_POST['tour_extra'] ) : [],
+				isset( $_POST['tour_extra_quantity'] ) ? wp_unslash( $_POST['tour_extra_quantity'] ) : []
+			);
+			$tours_extra          = $tour_extra_selection['extras'];
+			$tour_extra_quantity  = $tour_extra_selection['quantities'];
 
 			if(!empty($tours_extra)){
 				foreach ( $tours_extra as $extra_key => $extra ) {

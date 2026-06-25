@@ -417,6 +417,8 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		// People number
 		$total_people         = $adults + $children + $infant;
 		$total_people_booking = $adults + $children;
+		$tour_extra_selection = Helper::tf_sanitize_tour_extra_selection( $tours_extra );
+		$tours_extra          = $tour_extra_selection['extras'];
 
 		/**
 		 * If fixed is selected but pro is not activated

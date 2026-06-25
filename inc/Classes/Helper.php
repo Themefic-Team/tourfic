@@ -527,8 +527,56 @@ class Helper {
 			$quantities
 		);
 	}
-    
-    /**
+
+	/**
+	 * Sanitize selected tour extra IDs and aligned quantities.
+	 *
+	 * @param string|array $extras     Selected extra IDs.
+	 * @param string|array $quantities Selected extra quantities.
+	 * @return array
+	 */
+	static function tf_sanitize_tour_extra_selection( $extras, $quantities = [] ) {
+		if ( is_string( $extras ) ) {
+			$extras = explode( ',', sanitize_text_field( $extras ) );
+		}
+
+		if ( is_string( $quantities ) ) {
+			$quantities = explode( ',', sanitize_text_field( $quantities ) );
+		}
+
+		if ( ! is_array( $extras ) ) {
+			return [
+				'extras'     => [],
+				'quantities' => [],
+			];
+		}
+
+		$sanitized_extras     = [];
+		$sanitized_quantities = [];
+
+		foreach ( $extras as $key => $extra ) {
+			if ( is_array( $extra ) || is_object( $extra ) ) {
+				continue;
+			}
+
+			$extra = trim( sanitize_text_field( (string) $extra ) );
+			if ( '' === $extra ) {
+				continue;
+			}
+
+			$quantity = is_array( $quantities ) && isset( $quantities[ $key ] ) ? intval( $quantities[ $key ] ) : 1;
+
+			$sanitized_extras[]     = $extra;
+			$sanitized_quantities[] = 0 < $quantity ? $quantity : 1;
+		}
+
+		return [
+			'extras'     => $sanitized_extras,
+			'quantities' => $sanitized_quantities,
+		];
+	}
+
+	/**
 	 * Template 3 Compatible to others Themes
 	 *
 	 * @since 2.10.8
