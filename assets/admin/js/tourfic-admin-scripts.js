@@ -2307,17 +2307,8 @@ jQuery(function ($) {
         $(document).on('click', '.tf-setup-travelfic-theme-btn', function (e) {
             e.preventDefault();
             
-            if(tf_admin_params.current_active_theme && "travelfic"!=tf_admin_params.current_active_theme && "ultimate-hotel-booking"!=tf_admin_params.current_active_theme && "bricks"!=tf_admin_params.current_active_theme){
+            if(tf_admin_params.current_active_theme && "travelfic"!=tf_admin_params.current_active_theme && "ultimate-hotel-booking"!=tf_admin_params.current_active_theme){
                 let theme_slug = $('.tf-template-selection input[name="tf_theme_select"]:checked').val();
-
-                // Bricks is a premium theme (already installed), skip wp.org install and activate directly
-                if("bricks"==theme_slug){
-                    $('.tf-setup-travelfic-theme-btn').text("Bricks Activating...");
-                    $('.tf-setup-travelfic-theme-btn').addClass('tf-btn-loading');
-                    $('.tf-setup-travelfic-theme-active').trigger("click");
-                    return;
-                }
-
                 if("travelfic"==theme_slug){
                     $('.tf-setup-travelfic-theme-btn').text("Travelfic Installing...");
                 }
@@ -2355,9 +2346,6 @@ jQuery(function ($) {
             }
             if("ultimate-hotel-booking"==theme_slug){
                 $('.tf-setup-travelfic-theme-btn').text("Hotel Booking Activate...");
-            }
-            if("bricks"==theme_slug){
-                $('.tf-setup-travelfic-theme-btn').text("Bricks Activate...");
             }
 
             $.ajax({

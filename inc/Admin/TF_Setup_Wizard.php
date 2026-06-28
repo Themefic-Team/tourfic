@@ -286,7 +286,7 @@ class TF_Setup_Wizard {
                         <?php
                         $tf_current_active_theme = !empty(get_option('stylesheet')) ? get_option('stylesheet') : 'No'; 
 
-                        if ( $tf_current_active_theme != 'travelfic' && $tf_current_active_theme != 'travelfic-child' && $tf_current_active_theme != 'ultimate-hotel-booking' && $tf_current_active_theme != 'ultimate-hotel-booking-child' && $tf_current_active_theme != 'bricks' ) {
+                        if ( $tf_current_active_theme != 'travelfic' && $tf_current_active_theme != 'travelfic-child' && $tf_current_active_theme != 'ultimate-hotel-booking' && $tf_current_active_theme != 'ultimate-hotel-booking-child' ) {
                         ?>
                             <button type="button" class="tf-setup-skip-btn tf-link-skip-btn"><?php esc_html_e( 'Skip', 'tourfic' ) ?></button>
                             <button type="button" class="tf-setup-next-btn tf-quick-setup-btn">
@@ -319,9 +319,6 @@ class TF_Setup_Wizard {
 	 * Travelfic Theme
 	 */
 	private function tf_setup_step_three() {
-		$bricks_installed    = file_exists( get_theme_root() . '/bricks/style.css' );
-		$bricks_license_key  = get_option( 'bricks_license_key', false );
-		$bricks_licensed     = $bricks_installed && ! empty( $bricks_license_key );
 		?>
         <div class="tf-setup-step-container tf-setup-step-3 <?php echo self::$current_step == 'step_3' ? 'active' : ''; ?>" data-step="3">
             <div class="back-to-dashboard">
@@ -390,21 +387,6 @@ class TF_Setup_Wizard {
                             <h4><?php esc_html_e("Ultimate Hotel Booking ", "tourfic"); ?></h4>
                         </label>
                     </div>
-                    <?php if ( $bricks_licensed ) : ?>
-                    <div class="tf-single-theme">
-                        <label>
-                            <input type="radio" value="<?php echo esc_attr('bricks'); ?>" name="tf_theme_select">
-                            <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ) . 'images/bricks-theme.png' ?>" alt="<?php esc_attr_e( 'Bricks Theme', 'tourfic' ) ?>">
-                            <div class="checked-svg">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="#E6FAEE" stroke="#21A159" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M9 12L11 14L15 10" stroke="#21A159" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <h4><?php esc_html_e("Bricks", "tourfic"); ?></h4>
-                        </label>
-                    </div>
-                    <?php endif; ?>
                 </div>
 
                 <div class="tf-setup-action-btn-wrapper">
