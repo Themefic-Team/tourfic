@@ -74,6 +74,257 @@ class TF_Handle_Emails {
         return $email_body_close;
     }
 
+	/**
+	 * Normalize email rendering context.
+	 *
+	 * @param array $context Email rendering context.
+	 * @return array
+	 */
+	private function normalize_email_context( $context = array() ) {
+		$context = is_array( $context ) ? $context : array();
+
+		return array(
+			'recipient'                 => ! empty( $context['recipient'] ) ? sanitize_key( $context['recipient'] ) : '',
+			'vendor_id'                 => ! empty( $context['vendor_id'] ) ? absint( $context['vendor_id'] ) : 0,
+			'include_traveler_details'  => ! empty( $context['include_traveler_details'] ),
+		);
+	}
+
+	/**
+	 * Check if traveler details should be rendered for this email.
+	 *
+	 * @param array $context Email rendering context.
+	 * @return bool
+	 */
+	private function should_include_traveler_details( $context ) {
+		return ! empty( $context['include_traveler_details'] )
+			&& 'vendor' === $context['recipient']
+			&& ! empty( $context['vendor_id'] );
+	}
+
+	/**
+	 * Check whether an order item belongs to the vendor email recipient.
+	 *
+	 * @param array $item_meta_data Order item meta data.
+	 * @param int   $vendor_id      Vendor user ID.
+	 * @return bool
+	 */
+	private function email_item_belongs_to_vendor( $item_meta_data, $vendor_id ) {
+		foreach ( $item_meta_data as $meta_data ) {
+			if ( '_post_author' === $meta_data['key'] && absint( $meta_data['value'] ) === absint( $vendor_id ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get a meta value from a normalized order item meta array.
+	 *
+	 * @param array  $item_meta_data Order item meta data.
+	 * @param string $key            Meta key.
+	 * @return mixed
+	 */
+	private function get_email_item_meta_value( $item_meta_data, $key ) {
+		foreach ( $item_meta_data as $meta_data ) {
+			if ( $key === $meta_data['key'] ) {
+				return $meta_data['value'];
+			}
+		}
+
+		return '';
+	}
+
+	/**
+	 * Normalize stored traveler details into a list of traveler records.
+	 *
+	 * @param mixed $traveler_details Stored traveler details.
+	 * @return array
+	 */
+	private function normalize_email_traveler_details( $traveler_details ) {
+		if ( empty( $traveler_details ) ) {
+			return array();
+		}
+
+		$decoded = $traveler_details;
+		for ( $i = 0; $i < 2 && is_string( $decoded ); $i++ ) {
+			$maybe_decoded = json_decode( $decoded, true );
+			if ( JSON_ERROR_NONE !== json_last_error() ) {
+				return array();
+			}
+			$decoded = $maybe_decoded;
+		}
+
+		if ( is_object( $decoded ) ) {
+			$decoded = json_decode( wp_json_encode( $decoded ), true );
+		}
+
+		if ( ! is_array( $decoded ) ) {
+			return array();
+		}
+
+		$decoded_keys     = array_keys( $decoded );
+		$has_field_keys  = array_intersect( $decoded_keys, array( 'tf_full_name', 'tf_dob', 'tf_nid' ) );
+		$has_string_keys = ! empty( array_filter( $decoded_keys, 'is_string' ) );
+		if ( ! empty( $has_field_keys ) || $has_string_keys ) {
+			return array( $decoded );
+		}
+
+		$travelers = array();
+		foreach ( $decoded as $traveler ) {
+			if ( is_object( $traveler ) ) {
+				$traveler = json_decode( wp_json_encode( $traveler ), true );
+			}
+			if ( is_array( $traveler ) && ! empty( $traveler ) ) {
+				$travelers[] = $traveler;
+			}
+		}
+
+		return $travelers;
+	}
+
+	/**
+	 * Get configured traveler field labels.
+	 *
+	 * @return array
+	 */
+	private function get_email_traveler_field_labels() {
+		$field_labels = array(
+			'tf_full_name' => esc_html__( 'Full Name', 'tourfic' ),
+			'tf_dob'       => esc_html__( 'Date of birth', 'tourfic' ),
+			'tf_nid'       => esc_html__( 'NID', 'tourfic' ),
+		);
+
+		$traveler_fields = ! empty( Helper::tfopt( 'without-payment-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'without-payment-field' ) ) : array();
+		if ( ! empty( $traveler_fields ) && is_array( $traveler_fields ) ) {
+			foreach ( $traveler_fields as $field ) {
+				if ( ! empty( $field['reg-field-name'] ) && ! empty( $field['reg-field-label'] ) ) {
+					$field_labels[ $field['reg-field-name'] ] = $field['reg-field-label'];
+				}
+			}
+		}
+
+		return $field_labels;
+	}
+
+	/**
+	 * Get configured traveler file field names.
+	 *
+	 * @return array
+	 */
+	private function get_email_traveler_file_fields() {
+		$file_fields     = array();
+		$traveler_fields = ! empty( Helper::tfopt( 'without-payment-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'without-payment-field' ) ) : array();
+
+		if ( empty( $traveler_fields ) || ! is_array( $traveler_fields ) ) {
+			return $file_fields;
+		}
+
+		foreach ( $traveler_fields as $field ) {
+			if ( ! empty( $field['reg-field-name'] ) && ! empty( $field['reg-fields-type'] ) && 'file' === $field['reg-fields-type'] ) {
+				$file_fields[] = $field['reg-field-name'];
+			}
+		}
+
+		return $file_fields;
+	}
+
+	/**
+	 * Get a human-readable label for an unknown traveler field key.
+	 *
+	 * @param string $field_key Field key.
+	 * @return string
+	 */
+	private function get_email_traveler_fallback_label( $field_key ) {
+		$field_key = preg_replace( '/^tf_/', '', sanitize_key( $field_key ) );
+		$field_key = str_replace( array( '_', '-' ), ' ', $field_key );
+
+		return ucwords( $field_key );
+	}
+
+	/**
+	 * Format a traveler field value for email output.
+	 *
+	 * @param mixed  $value       Field value.
+	 * @param bool   $is_file     Whether this field stores a file upload.
+	 * @param string $empty_label Empty file label.
+	 * @return string
+	 */
+	private function format_email_traveler_field_value( $value, $is_file = false, $empty_label = '' ) {
+		if ( $is_file ) {
+			$file_value = function_exists( 'tf_tour_normalize_file_field_value' ) ? tf_tour_normalize_file_field_value( $value ) : $value;
+			$file_value = is_array( $file_value ) ? $file_value : array();
+
+			$file_name = ! empty( $file_value['filename'] ) ? $file_value['filename'] : '';
+			if ( empty( $file_value['attachment_id'] ) ) {
+				return ! empty( $file_name ) ? esc_html( $file_name ) : esc_html( $empty_label );
+			}
+
+			$download_url = function_exists( 'tf_tour_get_traveler_document_download_url' ) ? tf_tour_get_traveler_document_download_url( $file_value['attachment_id'] ) : '';
+			$file_name    = ! empty( $file_name ) ? $file_name : get_the_title( $file_value['attachment_id'] );
+
+			if ( ! empty( $download_url ) ) {
+				return '<a href="' . esc_url( $download_url ) . '">' . esc_html( $file_name ) . '</a>';
+			}
+
+			return esc_html( $file_name );
+		}
+
+		if ( is_array( $value ) ) {
+			$values = array();
+			foreach ( $value as $item ) {
+				$values[] = is_scalar( $item ) ? $item : wp_json_encode( $item );
+			}
+			$value = implode( ', ', array_map( 'sanitize_text_field', $values ) );
+		} elseif ( ! is_scalar( $value ) ) {
+			$value = wp_json_encode( $value );
+		}
+
+		return esc_html( $value );
+	}
+
+	/**
+	 * Render traveler details for vendor emails.
+	 *
+	 * @param mixed   $traveler_details Stored traveler details.
+	 * @param string  $order_type       Booking type.
+	 * @return string
+	 */
+	private function render_email_traveler_details( $traveler_details, $order_type = '' ) {
+		$travelers = $this->normalize_email_traveler_details( $traveler_details );
+		if ( empty( $travelers ) ) {
+			return '';
+		}
+
+		$field_labels = $this->get_email_traveler_field_labels();
+		$file_fields  = $this->get_email_traveler_file_fields();
+		$title        = 'hotel' === $order_type ? esc_html__( 'Guest Details', 'tourfic' ) : esc_html__( 'Traveler Details', 'tourfic' );
+		$item_label   = 'hotel' === $order_type ? esc_html__( 'Guest', 'tourfic' ) : esc_html__( 'Traveler', 'tourfic' );
+		$output       = '<div style="margin-top:15px;"><strong>' . esc_html( $title ) . '</strong>';
+		$count        = 1;
+
+		foreach ( $travelers as $traveler ) {
+			$output .= '<div style="margin-top:10px;"><strong>' . esc_html( $item_label . ' ' . $count ) . '</strong>';
+			foreach ( $traveler as $field_key => $field_value ) {
+				$is_file = in_array( $field_key, $file_fields, true );
+				if ( ! $is_file && ( '' === $field_value || null === $field_value || array() === $field_value ) ) {
+					continue;
+				}
+
+				$label  = ! empty( $field_labels[ $field_key ] ) ? $field_labels[ $field_key ] : $this->get_email_traveler_fallback_label( $field_key );
+				$value  = $this->format_email_traveler_field_value( $field_value, $is_file, esc_html__( 'No file uploaded', 'tourfic' ) );
+				$output .= '<br><strong>' . esc_html( $label ) . ':</strong> ' . $value;
+			}
+			$output .= '</div>';
+			$count++;
+		}
+
+		$output .= '</div>';
+
+		return $output;
+	}
+
 
     /**
      * Replace all available mail tags
@@ -82,14 +333,18 @@ class TF_Handle_Emails {
      * @return string
      * @since  2.9.17
      */
-    public function replace_mail_tags( $template, $order_id ) {
+    public function replace_mail_tags( $template, $order_id, $context = array() ) {
 
+		$context                  = $this->normalize_email_context( $context );
+		$include_traveler_details = $this->should_include_traveler_details( $context );
         $order                  = wc_get_order( $order_id );
         $order_data             = $order->get_data();
         $order_items            = $order->get_items();
         $order_items_data       = array();
         $order_subtotal         = $order->get_subtotal();
         $order_total            = $order->get_total();
+		$booking_subtotal       = 0;
+		$booking_total          = 0;
         $order_billing_name     = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
         $order_billing_address  = $order->get_billing_address_1() . ' ' . $order->get_billing_address_2();
         $order_billing_email    = $order->get_billing_email();
@@ -121,6 +376,10 @@ class TF_Handle_Emails {
                     'value' => $meta_data->value,
                 );
             }
+			if ( $include_traveler_details && ! $this->email_item_belongs_to_vendor( $item_meta_data_array, $context['vendor_id'] ) ) {
+				continue;
+			}
+
             $order_items_data[] = array(
                 'item_name'         => $item_name,
                 'item_quantity'     => $item_quantity,
@@ -128,8 +387,14 @@ class TF_Handle_Emails {
                 'item_subtotal'     => $item_subtotal,
                 'item_meta_data'    => $item_meta_data_array,
             );
+			$booking_subtotal += $item_subtotal;
+			$booking_total    += $item_total;
 
         }
+		if ( ! $include_traveler_details ) {
+			$booking_subtotal = $order_subtotal;
+			$booking_total    = $order_total;
+		}
        
 
         global $wpdb;
@@ -190,6 +455,11 @@ class TF_Handle_Emails {
                     $booking_details .= '<br><strong>' . $tf_email_key . '</strong>: ' . $meta_data['value'];
                 }
             }
+			if ( $include_traveler_details ) {
+				$visitor_details = $this->get_email_item_meta_value( $item['item_meta_data'], '_visitor_details' );
+				$order_type      = $this->get_email_item_meta_value( $item['item_meta_data'], '_order_type' );
+				$booking_details .= $this->render_email_traveler_details( $visitor_details, $order_type );
+			}
 
             $booking_details .= '</td>';
             $booking_details .= '<td align="center">' . $item['item_quantity'] . '</td>';
@@ -199,18 +469,18 @@ class TF_Handle_Emails {
         }
         $booking_details .= '</tbody>';
         $booking_details .= '<tfoot><tr><th colspan="2" align="left" style="padding-bottom:10px;padding-top:10px;">Sub-Total</th>';
-        $booking_details .= '<td align="right"><b>' . wc_price( $order_subtotal ) . '</b></td></tr>';
+        $booking_details .= '<td align="right"><b>' . wc_price( $booking_subtotal ) . '</b></td></tr>';
         //payment method
         $booking_details .= '<tr style="border-bottom: 1px solid #D9D9D9;"><th colspan="2" align="left" style="padding-bottom:10px">Payment Method</th>';
         $booking_details .= '<td align="right"><b>' . $payment_method_title . '</b></td></tr>';
         //Tax
-        if(!empty($taxs_summations)){
+        if(!empty($taxs_summations) && ! $include_traveler_details ){
             $booking_details .= '<tr style="border-bottom: 1px solid #D9D9D9;"><th colspan="2" align="left" style="padding-bottom:10px">Tax</th>';
             $booking_details .= '<td align="right"><b>' . wc_price($taxs_summations) . '</b></td></tr>';
         }
         //total
         $booking_details .= '<tr><th colspan="2" align="left" style="padding-bottom:10px; font-weight: 900;">Total Amount</th>';
-        $booking_details .= '<td align="right"><b style="font-weight: 900;">' . wc_price( $order_total ) . '</b></td></tr>';
+        $booking_details .= '<td align="right"><b style="font-weight: 900;">' . wc_price( $booking_total ) . '</b></td></tr>';
         $booking_details .= '</tfoot>';
 
         $booking_details .= '</table>';
@@ -294,8 +564,10 @@ class TF_Handle_Emails {
      * @return string
      * @since  2.9.17
      */
-    public function offline_replace_mail_tags( $template, $order_id, $order_data ) {
+    public function offline_replace_mail_tags( $template, $order_id, $order_data, $context = array() ) {
 
+		$context                  = $this->normalize_email_context( $context );
+		$include_traveler_details = $this->should_include_traveler_details( $context );
         $order_items    = !empty($order_data['order_details']) ? $order_data['order_details'] : '';
         $order                  = wc_get_order( $order_id );
         $order_subtotal         = $order_items['total_price'];
@@ -402,6 +674,9 @@ class TF_Handle_Emails {
         if ( !empty($order_items['due_price']) ) {
             $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Due Amount:</strong> ' . wc_price($order_items['due_price']);
         }
+		if ( $include_traveler_details && ! empty( $order_items['visitor_details'] ) ) {
+			$booking_details .= $this->render_email_traveler_details( $order_items['visitor_details'], $order_data['post_type'] );
+		}
 
         $booking_details .= '</td>';
         $booking_details .= '<td align="center">1</td>';
@@ -641,7 +916,23 @@ class TF_Handle_Emails {
      * @return array
      */
     public function tf_get_vendor_emails( $order_id ) {
+		$vendor_recipients = $this->tf_get_vendor_recipients( $order_id );
+
+		return array_values( $vendor_recipients );
+    }
+
+	/**
+	 * Get vendor recipients keyed by vendor ID.
+	 *
+	 * @param int $order_id Order ID.
+	 * @return array
+	 */
+	public function tf_get_vendor_recipients( $order_id ) {
         $order         = wc_get_order( $order_id );
+		if ( empty( $order ) ) {
+			return array();
+		}
+
         $order_items   = $order->get_items();
         $vendor_emails = array();
     
@@ -649,17 +940,17 @@ class TF_Handle_Emails {
             $meta_data = $item->get_meta_data();
             foreach ( $meta_data as $meta ) {
                 if ( $meta->key == '_post_author' ) {
-                    $vendor_id = $meta->value;
+                    $vendor_id = absint( $meta->value );
                     $vendor    = get_userdata( $vendor_id );
-                    if ( $vendor && ! empty( $vendor->user_email ) ) {
-                        $vendor_emails[] = $vendor->user_email;
+                    if ( $vendor && ! empty( $vendor->user_email ) && in_array( 'tf_vendor', (array) $vendor->roles, true ) ) {
+                        $vendor_emails[ $vendor_id ] = $vendor->user_email;
                     }
                 }
             }
         }
     
         return $vendor_emails;
-    }
+	}
     
     /**
      * Send Email
@@ -756,15 +1047,18 @@ class TF_Handle_Emails {
             $vendor_from_email             = !empty( $email_settings['vendor_from_email'] ) ? $email_settings['vendor_from_email'] : '';
             $vendor_booking_email_template = !empty( $email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : $this->get_email_template( 'order_confirmation', '', 'vendor');;
 
-            //replace mail tags to actual value
-            $vendor_booking_email_template  = $this->replace_mail_tags( $vendor_booking_email_template , $order_id );
-            $vendor_email_booking_body_full = $email_body_open . $vendor_booking_email_template . $email_body_close;
-            
             if ( !empty( $vendor_booking_email_template ) ) {
                 //send mail to vendor
-                $vendors_email = $this->tf_get_vendor_emails( $order_id );
+                $vendors_email = $this->tf_get_vendor_recipients( $order_id );
                 if ( !empty( $vendors_email ) ) {
-                    foreach ( $vendors_email as $key => $vendor_email ) {
+                    foreach ( $vendors_email as $vendor_id => $vendor_email ) {
+						$vendor_context                 = array(
+							'recipient'                => 'vendor',
+							'vendor_id'                => $vendor_id,
+							'include_traveler_details' => true,
+						);
+						$vendor_email_content          = $this->replace_mail_tags( $vendor_booking_email_template, $order_id, $vendor_context );
+						$vendor_email_booking_body_full = $email_body_open . $vendor_email_content . $email_body_close;
                         wp_mail( $vendor_email, $vendor_email_subject, wp_kses_post($vendor_email_booking_body_full), $headers );
                     }
                 }
@@ -779,11 +1073,16 @@ class TF_Handle_Emails {
                 $default_mail .= esc_html__( 'Regards', 'tourfic' ) . '</br>';
                 $default_mail .= esc_html__( '{site_name}', 'tourfic' ) . '</br>';
 
-                $default_mail = $this->replace_mail_tags( $default_mail , $order_id );
-                $vendors_email = $this->tf_get_vendor_emails( $order_id );
+                $vendors_email = $this->tf_get_vendor_recipients( $order_id );
                 if ( !empty( $vendors_email ) ) {
-                    foreach ( $vendors_email as $key => $vendor_email ) {
-                        wp_mail( $vendor_email, $vendor_email_subject, $default_mail, $headers );
+                    foreach ( $vendors_email as $vendor_id => $vendor_email ) {
+						$vendor_context       = array(
+							'recipient'                => 'vendor',
+							'vendor_id'                => $vendor_id,
+							'include_traveler_details' => true,
+						);
+						$vendor_default_mail  = $this->replace_mail_tags( $default_mail, $order_id, $vendor_context );
+                        wp_mail( $vendor_email, $vendor_email_subject, $vendor_default_mail, $headers );
                     }
                 }
             }
@@ -915,7 +1214,6 @@ class TF_Handle_Emails {
                         //get the mail template content   
                         $vendor_confirmation_email_template   = get_post( $vendor_confirmation_template_id );
                         $vendor_confirmation_template_content = !empty( $vendor_confirmation_email_template->post_content ) ? $vendor_confirmation_email_template->post_content : ' ';
-                        $vendor_confirmation_template_content = $this->replace_mail_tags( $vendor_confirmation_template_content, $order_id );
                         
                         $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
                         $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
@@ -936,21 +1234,19 @@ class TF_Handle_Emails {
                         //email body open
                         $email_body_open                      = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg );
                         $email_body_open                      = str_replace( '{booking_id}', $order_id, $email_body_open );
-                        $vendor_confirmation_template_content = $this->replace_mail_tags( $vendor_confirmation_template_content, $order_id );
                         $email_body_close                     = $this->email_body_close();
-                        $vendor_email_booking_body_full       = $email_body_open . $vendor_confirmation_template_content . $email_body_close;
-                        $vendors_email  = $this->tf_get_vendor_emails( $order_id );
+                        $vendors_email  = $this->tf_get_vendor_recipients( $order_id );
                         //send mail to vendor
                         if ( !empty( $vendors_email ) ) {
-                            foreach ( $vendors_email as $key => $vendor_email ) {
-                               //get user role by email
-                                $user = get_user_by( 'email', $vendor_email );
-                                $user_role = !empty( $user->roles[0] ) ? $user->roles[0] : '';
-                                //check if user role is vendor
-                                if( $user_role == 'tf_vendor' ){
-                                    wp_mail( $vendor_email, $email_subject, $vendor_email_booking_body_full, $headers );
-                                }
-                               
+                            foreach ( $vendors_email as $vendor_id => $vendor_email ) {
+								$vendor_context                       = array(
+									'recipient'                => 'vendor',
+									'vendor_id'                => $vendor_id,
+									'include_traveler_details' => true,
+								);
+								$vendor_email_content                 = $this->replace_mail_tags( $vendor_confirmation_template_content, $order_id, $vendor_context );
+								$vendor_email_booking_body_full       = $email_body_open . $vendor_email_content . $email_body_close;
+                                wp_mail( $vendor_email, $email_subject, $vendor_email_booking_body_full, $headers );
                             }
                         }
                     }
@@ -1069,7 +1365,6 @@ class TF_Handle_Emails {
                     //get the mail template content   
                     $vendor_cancellation_email_template   = get_post( $vendor_cancellation_template_id );
                     $vendor_cancellation_template_content = !empty( $vendor_cancellation_email_template->post_content ) ? $vendor_cancellation_email_template->post_content : $this->get_email_template( 'cancellation','','vendor' );
-                    $vendor_cancellation_template_content = $this->replace_mail_tags( $vendor_cancellation_template_content, $order_id );
                     
                     $meta                    = get_post_meta( $vendor_cancellation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
@@ -1092,11 +1387,16 @@ class TF_Handle_Emails {
                     //email body open
                     $email_body_open                      = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg );
                     $email_body_open                      = str_replace( '{booking_id}', $order_id, $email_body_open );
-                    $vendor_cancellation_template_content = $this->replace_mail_tags( $vendor_cancellation_template_content, $order_id );
                     $email_body_close                     = $this->email_body_close();
-                    $vendor_email_cancellation_body_full  = $email_body_open . $vendor_cancellation_template_content . $email_body_close;   //send mail to vendor
-                    $vendors_email                        = $this->tf_get_vendor_emails( $order_id );
-                    foreach( $vendors_email as $key => $vendor_email ){
+                    $vendors_email                        = $this->tf_get_vendor_recipients( $order_id );
+                    foreach( $vendors_email as $vendor_id => $vendor_email ){
+						$vendor_context                      = array(
+							'recipient'                => 'vendor',
+							'vendor_id'                => $vendor_id,
+							'include_traveler_details' => true,
+						);
+						$vendor_email_content                = $this->replace_mail_tags( $vendor_cancellation_template_content, $order_id, $vendor_context );
+						$vendor_email_cancellation_body_full = $email_body_open . $vendor_email_content . $email_body_close;
                         wp_mail( $vendor_email, $email_subject, $vendor_email_cancellation_body_full, $headers );
                     }
                 }
@@ -1236,10 +1536,6 @@ class TF_Handle_Emails {
                     //email body open
                     $email_body_open                      = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg );
                     $email_body_open                      = str_replace( '{booking_id}', $order_id, $email_body_open );
-                    $vendor_confirmation_template_content = $this->offline_replace_mail_tags( $vendor_confirmation_template_content, $order_id, $order_data );
-                    $email_body_close                     = $this->email_body_close();
-                    $vendor_email_booking_body_full       = $email_body_open . $vendor_confirmation_template_content . $email_body_close;
-
                     //send mail to vendor
                     $author_id = get_post_field ('post_author', $order_data['post_id']);
                     //get user role by id
@@ -1247,6 +1543,14 @@ class TF_Handle_Emails {
                     $user_role = !empty( $user->roles[0] ) ? $user->roles[0] : '';
                     //check if user role is vendor
                     if( $user_role == 'tf_vendor' ){
+						$vendor_context                 = array(
+							'recipient'                => 'vendor',
+							'vendor_id'                => $author_id,
+							'include_traveler_details' => true,
+						);
+						$vendor_email_content          = $this->offline_replace_mail_tags( $vendor_confirmation_template_content, $order_id, $order_data, $vendor_context );
+						$email_body_close              = $this->email_body_close();
+						$vendor_email_booking_body_full = $email_body_open . $vendor_email_content . $email_body_close;
                         wp_mail( $user->user_email, $email_subject, $vendor_email_booking_body_full, $headers );
                     }
                 }
@@ -1367,10 +1671,6 @@ class TF_Handle_Emails {
                         //email body open
                         $email_body_open                      = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg );
                         $email_body_open                      = str_replace( '{booking_id}', $order_id, $email_body_open );
-                        $vendor_confirmation_template_content = $this->offline_replace_mail_tags( $vendor_confirmation_template_content, $order_id, $tf_db_order_arr );
-                        $email_body_close                     = $this->email_body_close();
-                        $vendor_email_booking_body_full       = $email_body_open . $vendor_confirmation_template_content . $email_body_close;
-
                         //send mail to vendor
                         $author_id = get_post_field ('post_author', $tf_db_order_arr['post_id']);
                         //get user role by id
@@ -1378,6 +1678,14 @@ class TF_Handle_Emails {
                         $user_role = !empty( $user->roles[0] ) ? $user->roles[0] : '';
                         //check if user role is vendor
                         if( $user_role == 'tf_vendor' ){
+							$vendor_context                 = array(
+								'recipient'                => 'vendor',
+								'vendor_id'                => $author_id,
+								'include_traveler_details' => true,
+							);
+							$vendor_email_content          = $this->offline_replace_mail_tags( $vendor_confirmation_template_content, $order_id, $tf_db_order_arr, $vendor_context );
+							$email_body_close              = $this->email_body_close();
+							$vendor_email_booking_body_full = $email_body_open . $vendor_email_content . $email_body_close;
                             wp_mail( $user->user_email, $email_subject, $vendor_email_booking_body_full, $headers );
                         }
                                 
@@ -1443,7 +1751,6 @@ class TF_Handle_Emails {
                         //get the mail template content   
                         $vendor_confirmation_email_template   = get_post( $vendor_confirmation_template_id );
                         $vendor_confirmation_template_content = !empty( $vendor_confirmation_email_template->post_content ) ? $vendor_confirmation_email_template->post_content : ' ';
-                        $vendor_confirmation_template_content = $this->replace_mail_tags( $vendor_confirmation_template_content, $order_id );
                         
                         $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
                         $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
@@ -1463,21 +1770,19 @@ class TF_Handle_Emails {
                         //email body open
                         $email_body_open                      = $this->email_body_open( $brand_logo, $order_email_heading, $email_header_bg );
                         $email_body_open                      = str_replace( '{booking_id}', $order_id, $email_body_open );
-                        $vendor_confirmation_template_content = $this->replace_mail_tags( $vendor_confirmation_template_content, $order_id );
                         $email_body_close                     = $this->email_body_close();
-                        $vendor_email_booking_body_full       = $email_body_open . $vendor_confirmation_template_content . $email_body_close;
-                        $vendors_email  = $this->tf_get_vendor_emails( $order_id );
+                        $vendors_email  = $this->tf_get_vendor_recipients( $order_id );
                         //send mail to vendor
                         if ( !empty( $vendors_email ) ) {
-                            foreach ( $vendors_email as $key => $vendor_email ) {
-                            //get user role by email
-                                $user = get_user_by( 'email', $vendor_email );
-                                $user_role = !empty( $user->roles[0] ) ? $user->roles[0] : '';
-                                //check if user role is vendor
-                                if( $user_role == 'tf_vendor' ){
-                                    wp_mail( $vendor_email, $email_subject, $vendor_email_booking_body_full, $headers );
-                                }
-                            
+                            foreach ( $vendors_email as $vendor_id => $vendor_email ) {
+								$vendor_context                 = array(
+									'recipient'                => 'vendor',
+									'vendor_id'                => $vendor_id,
+									'include_traveler_details' => true,
+								);
+								$vendor_email_content          = $this->replace_mail_tags( $vendor_confirmation_template_content, $order_id, $vendor_context );
+								$vendor_email_booking_body_full = $email_body_open . $vendor_email_content . $email_body_close;
+                                wp_mail( $vendor_email, $email_subject, $vendor_email_booking_body_full, $headers );
                             }
                         }
                     }
@@ -1561,15 +1866,18 @@ class TF_Handle_Emails {
                     $vendor_email_subject          = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] :  esc_html__( 'Your email subject','tourfic' );;
                     $vendor_booking_email_template = !empty( $email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : $this->get_email_template( 'order_confirmation', '', 'vendor');;
 
-                    //replace mail tags to actual value
-                    $vendor_booking_email_template  = $this->replace_mail_tags( $vendor_booking_email_template , $order_id );
-                    $vendor_email_booking_body_full = $email_body_open . $vendor_booking_email_template . $email_body_close;
-                    
                     if ( !empty( $vendor_booking_email_template ) ) {
                         //send mail to vendor
-                        $vendors_email = $this->tf_get_vendor_emails( $order_id );
+                        $vendors_email = $this->tf_get_vendor_recipients( $order_id );
                         if ( !empty( $vendors_email ) ) {
-                            foreach ( $vendors_email as $key => $vendor_email ) {
+                            foreach ( $vendors_email as $vendor_id => $vendor_email ) {
+								$vendor_context                 = array(
+									'recipient'                => 'vendor',
+									'vendor_id'                => $vendor_id,
+									'include_traveler_details' => true,
+								);
+								$vendor_email_content          = $this->replace_mail_tags( $vendor_booking_email_template, $order_id, $vendor_context );
+								$vendor_email_booking_body_full = $email_body_open . $vendor_email_content . $email_body_close;
                                 wp_mail( $vendor_email, $vendor_email_subject, wp_kses_post($vendor_email_booking_body_full), $headers );
                             }
                         }
@@ -1584,11 +1892,16 @@ class TF_Handle_Emails {
                         $default_mail .= esc_html__( 'Regards', 'tourfic' ) . '</br>';
                         $default_mail .= esc_html__( '{site_name}', 'tourfic' ) . '</br>';
 
-                        $default_mail = $this->replace_mail_tags( $default_mail , $order_id );
-                        $vendors_email = $this->tf_get_vendor_emails( $order_id );
+                        $vendors_email = $this->tf_get_vendor_recipients( $order_id );
                         if ( !empty( $vendors_email ) ) {
-                            foreach ( $vendors_email as $key => $vendor_email ) {
-                                wp_mail( $vendor_email, $vendor_email_subject, $default_mail, $headers );
+                            foreach ( $vendors_email as $vendor_id => $vendor_email ) {
+								$vendor_context      = array(
+									'recipient'                => 'vendor',
+									'vendor_id'                => $vendor_id,
+									'include_traveler_details' => true,
+								);
+								$vendor_default_mail = $this->replace_mail_tags( $default_mail, $order_id, $vendor_context );
+                                wp_mail( $vendor_email, $vendor_email_subject, $vendor_default_mail, $headers );
                             }
                         }
                     }
