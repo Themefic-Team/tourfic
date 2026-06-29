@@ -1712,6 +1712,7 @@ class Hotel {
 		// date format for users output
 		$hotel_date_format_for_users   = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$hotel_location_field_required = ! empty( Helper::tfopt( "required_location_hotel_search" ) ) ? Helper::tfopt( "required_location_hotel_search" ) : 0;
+		$show_hotel_location_field     = Helper::tfopt( 'hide_hotel_location_search' ) != 1 || $hotel_location_field_required == 1;
 		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
 		$disable_hotel_child_search = ! empty( Helper::tfopt( 'disable_hotel_child_search' ) ) ? Helper::tfopt( 'disable_hotel_child_search' ) : '';
@@ -1722,6 +1723,7 @@ class Hotel {
                 <div class="tf_hotel_searching">
                     <div class="tf_form_innerbody">
                         <div class="tf_form_fields">
+							<?php if ( $show_hotel_location_field ) : ?>
                             <div class="tf_destination_fields">
                                 <label class="tf_label_location">
                                     <span class="tf-label"><?php esc_html_e( 'Location', 'tourfic' ); ?></span>
@@ -1736,6 +1738,7 @@ class Hotel {
                                     </div>
                                 </label>
                             </div>
+							<?php endif; ?>
 
                             <div class="tf_checkin_date">
                                 <label class="tf_label_checkin tf_check_inout_dates tf_hotel_check_in_out_date">
@@ -1994,6 +1997,7 @@ class Hotel {
 			<form class="tf-archive-search-box-wrapper <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
 				<div class="tf-date-selection-form">
 				<div class="tf-date-select-box tf-flex tf-flex-gap-8">
+					<?php if ( $show_hotel_location_field ) : ?>
 					<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location full-width">
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
@@ -2018,6 +2022,7 @@ class Hotel {
 						</div>
 
 					</div>
+					<?php endif; ?>
 
 					<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn full-width">
 						<div class="tf-select-date">
@@ -2156,6 +2161,7 @@ class Hotel {
             <form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
                 <fieldset class="tf-search__form__fieldset">
                     <!-- Destination -->
+					<?php if ( $show_hotel_location_field ) : ?>
                     <div class="tf-search__form__fieldset__left">
                         <label for="tf-search__form-destination" class="tf-search__form__label">
                             <?php echo esc_html_e("Locations", "tourfic"); ?>
@@ -2170,6 +2176,7 @@ class Hotel {
 						</span>
                         </div>
                     </div>
+					<?php endif; ?>
 
                     <div class="tf-search__form__fieldset__middle">
 
@@ -2404,7 +2411,7 @@ class Hotel {
         <?php } else { ?>
             <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
                 <div class="tf_homepage-booking">
-					<?php if ( Helper::tfopt( 'hide_hotel_location_search' ) != 1 || Helper::tfopt( 'required_location_hotel_search' ) ): ?>
+					<?php if ( $show_hotel_location_field ): ?>
                         <div class="tf_destination-wrap">
                             <div class="tf_input-inner">
                                 <div class="tf_form-row">
