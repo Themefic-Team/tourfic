@@ -212,6 +212,9 @@ class TF_Setup_Wizard {
 	 * Service Type
 	 */
 	private function tf_setup_step_two() {
+		$bricks_installed    = file_exists( get_theme_root() . '/bricks/style.css' );
+		$bricks_license_key  = get_option( 'bricks_license_key', false );
+		$bricks_licensed     = $bricks_installed && ! empty( $bricks_license_key );
 		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : '';
 		?>
         <div class="tf-setup-step-container tf-setup-step-2 <?php echo self::$current_step == 'step_2' ? 'active' : ''; ?>" data-step="2">
@@ -286,7 +289,10 @@ class TF_Setup_Wizard {
                         <?php
                         $tf_current_active_theme = !empty(get_option('stylesheet')) ? get_option('stylesheet') : 'No'; 
 
-                        if ( $tf_current_active_theme != 'travelfic' && $tf_current_active_theme != 'travelfic-child' && $tf_current_active_theme != 'ultimate-hotel-booking' && $tf_current_active_theme != 'ultimate-hotel-booking-child' && $tf_current_active_theme != 'bricks' ) {
+                        $is_supported_theme = in_array( $tf_current_active_theme, [ 'travelfic', 'travelfic-child', 'ultimate-hotel-booking', 'ultimate-hotel-booking-child' ], true );
+                        $is_bricks_licensed = ( $tf_current_active_theme === 'bricks' && $bricks_licensed );
+
+                        if ( ! $is_supported_theme && ! $is_bricks_licensed ) {
                         ?>
                             <button type="button" class="tf-setup-skip-btn tf-link-skip-btn"><?php esc_html_e( 'Skip', 'tourfic' ) ?></button>
                             <button type="button" class="tf-setup-next-btn tf-quick-setup-btn">
