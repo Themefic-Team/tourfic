@@ -873,13 +873,19 @@ if ( ! function_exists( 'tf_tour_validate_traveler_age_limits' ) ) {
 			return true;
 		}
 
-		$reference_time = tf_tour_get_reference_timestamp( $tour_date );
 		$type_map       = tf_tour_get_passenger_type_map( $adults, $children, $infants );
 		$traveler_details = is_array( $traveler_details ) ? $traveler_details : array();
 
 		if ( empty( $traveler_details ) && ! $require_traveler_fields ) {
 			return true;
 		}
+
+		$reference_date = tf_tour_parse_user_date( $tour_date );
+		if ( ! $reference_date instanceof DateTimeImmutable ) {
+			return new WP_Error( 'tf_traveler_booking_date_required', esc_html__( 'You must select booking date', 'tourfic' ) );
+		}
+
+		$reference_time = $reference_date->getTimestamp();
 
 		$traveler_indexes = $require_traveler_fields ? array_keys( $type_map ) : array_keys( $traveler_details );
 		foreach ( $traveler_indexes as $traveler_index ) {
