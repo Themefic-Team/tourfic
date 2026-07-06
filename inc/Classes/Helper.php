@@ -511,6 +511,22 @@ class Helper {
 		return !empty( $airport_service_arr ) ? $airport_service_arr : array( 'title' => '', 'price' => 0 );
 	}
 
+	/**
+	 * Translate a saved widget value only when it still matches the default text.
+	 *
+	 * @param string $text                    Saved widget text.
+	 * @param string $default_text            Original default text.
+	 * @param string $translated_default_text Translated default text.
+	 * @return string
+	 */
+	static function tf_translate_default_widget_text( $text, $default_text, $translated_default_text ) {
+		if ( $default_text === $text ) {
+			return $translated_default_text;
+		}
+
+		return $text;
+	}
+
 	static function tf_sanitize_extra_quantities( $quantities ) {
 		if ( is_string( $quantities ) ) {
 			$quantities = explode( ',', sanitize_text_field( $quantities ) );

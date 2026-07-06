@@ -3919,7 +3919,12 @@ class Hotel {
 		$excerpt_length     = isset( $settings['excerpt_length'] ) ? absint( $settings['excerpt_length'] ) : 100;
 		$location_length    = isset( $settings['location_length'] ) ? absint( $settings['location_length'] ) : 120;
 		$features_count     = isset( $settings['features_count'] ) ? absint( $settings['features_count'] ) : 4;
-		$view_details_text  = isset( $settings['view_details_text'] ) ? sanitize_text_field( $settings['view_details_text'] ) : esc_html__( 'View Details', 'tourfic' );
+		$view_details_text  = isset( $settings['view_details_text'] ) ? sanitize_text_field( $settings['view_details_text'] ) : 'View Details';
+		$view_details_text  = Helper::tf_translate_default_widget_text(
+			$view_details_text,
+			'View Details',
+			esc_html__( 'View Details', 'tourfic' )
+		);
 
 		// Thumbnail
 		$thumbnail_html = '';
