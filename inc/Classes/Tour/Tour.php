@@ -59,13 +59,15 @@ class Tour {
 		$tour_date_format_for_users   = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$disable_child_search         = ! empty( Helper::tfopt( 'disable_child_search' ) ) ? Helper::tfopt( 'disable_child_search' ) : '';
 		$disable_infant_search        = ! empty( Helper::tfopt( 'disable_infant_search' ) ) ? Helper::tfopt( 'disable_infant_search' ) : '';
-		$tour_location_field_required = ! empty( Helper::tfopt( 'tour_location_field_required' ) ) ? Helper::tfopt( 'tour_location_field_required' ) : '';
+		$tour_location_field_required = ! empty( Helper::tfopt( 'required_location_tour_search' ) ) ? Helper::tfopt( 'required_location_tour_search' ) : '';
+		$show_tour_location_field     = Helper::tfopt( 'hide_tour_location_search' ) != 1 || $tour_location_field_required == 1;
 		if ( ! empty( $design ) && 2 == $design ) {
 			?>
             <form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
                 <div class="tf_hotel_searching">
                     <div class="tf_form_innerbody">
                         <div class="tf_form_fields">
+							<?php if ( $show_tour_location_field ) : ?>
                             <div class="tf_destination_fields">
                                 <label class="tf_label_location">
                                     <span class="tf-label"><?php esc_html_e( 'Destination', 'tourfic' ); ?></span>
@@ -80,6 +82,7 @@ class Tour {
                                     </div>
                                 </label>
                             </div>
+							<?php endif; ?>
 
                             <div class="tf_checkin_date">
                                 <label class="tf_label_checkin tf_tour_check_in_out_date">
@@ -323,6 +326,7 @@ class Tour {
 
 				<div class="tf-date-selection-form">
 				<div class="tf-date-select-box tf-flex tf-flex-gap-8">
+					<?php if ( $show_tour_location_field ) : ?>
 					<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location full-width">
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
@@ -347,6 +351,7 @@ class Tour {
 						</div>
 
 					</div>
+					<?php endif; ?>
 
 					<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn full-width">
 						<div class="tf-select-date">
@@ -477,6 +482,7 @@ class Tour {
 			<form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
 				<fieldset class="tf-search__form__fieldset">
 					<!-- Destination -->
+					<?php if ( $show_tour_location_field ) : ?>
 					<div class="tf-search__form__fieldset__left">
 						<label for="tf-search__form-destination" class="tf-search__form__label">
 							<?php echo esc_html_e("Destinations", "tourfic"); ?>
@@ -491,6 +497,7 @@ class Tour {
 							</span>
 						</div>
 					</div>
+					<?php endif; ?>
 
 					<div class="tf-search__form__fieldset__middle">
 						<!-- Adult Person -->
@@ -734,7 +741,7 @@ class Tour {
 		<?php } else { ?>
             <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
                 <div class="tf_homepage-booking">
-					<?php if ( Helper::tfopt( 'hide_tour_location_search' ) != 1 || Helper::tfopt( 'required_location_tour_search' ) ): ?>
+					<?php if ( $show_tour_location_field ): ?>
                         <div class="tf_destination-wrap">
                             <div class="tf_input-inner">
                                 <div class="tf_form-row">
@@ -2650,7 +2657,12 @@ class Tour {
 		$excerpt_length     = isset( $settings['excerpt_length'] ) ? absint( $settings['excerpt_length'] ) : 100;
 		$location_length    = isset( $settings['location_length'] ) ? absint( $settings['location_length'] ) : 120;
 		$features_count     = isset( $settings['features_count'] ) ? absint( $settings['features_count'] ) : 4;
-		$view_details_text  = isset( $settings['view_details_text'] ) ? sanitize_text_field( $settings['view_details_text'] ) : esc_html__( 'View Details', 'tourfic' );
+		$view_details_text  = isset( $settings['view_details_text'] ) ? sanitize_text_field( $settings['view_details_text'] ) : 'View Details';
+		$view_details_text  = Helper::tf_translate_default_widget_text(
+			$view_details_text,
+			'View Details',
+			esc_html__( 'View Details', 'tourfic' )
+		);
 
 		// Thumbnail
 		$thumbnail_html = '';
@@ -4670,10 +4682,12 @@ class Tour {
 		$tour_extra_title_arr = [];
 		$tour_extra_meta      = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
 		if ( ! empty( $tour_extra_meta ) ) {
-			$tf_tour_extra = !empty($_POST['tour_extra']) ? sanitize_text_field( wp_unslash( $_POST['tour_extra'] ) ) : '';
-			$tours_extra         = !empty($tf_tour_extra) ? explode( ',', $tf_tour_extra ) : [];
-			$tf_tour_extra_quantity = !empty($_POST['tour_extra_quantity']) ? sanitize_text_field( wp_unslash( $_POST['tour_extra_quantity'] ) ) : '';
-			$tour_extra_quantity = !empty($tf_tour_extra_quantity) ? explode( ',', $tf_tour_extra_quantity ) : [];
+			$tour_extra_selection = Helper::tf_sanitize_tour_extra_selection(
+				isset( $_POST['tour_extra'] ) ? wp_unslash( $_POST['tour_extra'] ) : [],
+				isset( $_POST['tour_extra_quantity'] ) ? wp_unslash( $_POST['tour_extra_quantity'] ) : []
+			);
+			$tours_extra          = $tour_extra_selection['extras'];
+			$tour_extra_quantity  = $tour_extra_selection['quantities'];
 
 			if(!empty($tours_extra)){
 				foreach ( $tours_extra as $extra_key => $extra ) {

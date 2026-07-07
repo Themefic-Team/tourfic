@@ -1954,61 +1954,151 @@ li.tf-filter-item {
                             }
                         }
                     }
-                    .tf-single-tour-traveller{
-                        padding-bottom: 16px;
-                        h4{
+                }
+                .tf-booking-content-traveller{
+                        height: auto;
+                        max-height: 320px;
+                        @media #{$max768}{
+                            max-height: none;
+                        }
+                        .tf-traveller-info-box{
+                            display: flex;
+                            flex-direction: column;
+                            gap: 18px;
+                        }
+                        .tf-traveller-group{
+                            display: flex;
+                            flex-direction: column;
+                            gap: 12px;
+                        }
+                        .tf-traveller-group-title{
                             color: $color-heading;
-                            font-size: 1rem;
-                            font-weight: 500;
-                            line-height: 1.2;
+                            font-size: 1.125rem;
+                            font-weight: 700;
+                            line-height: 1.25;
+                            margin: 0;
                         }
-                        .traveller-info{
-                            display: grid;
-                            grid-template-columns: repeat(3, 1fr);
-                            @media #{$max575}{
-                                grid-template-columns: repeat(1, 1fr);
+                        .tf-single-tour-traveller{
+                            padding: 16px;
+                            border: 1px solid $color-border-lite;
+                            border-radius: 8px;
+                            background: $color-white;
+                            box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+                            h4{
+                                color: $color-heading;
+                                font-size: 1rem;
+                                font-weight: 600;
+                                line-height: 1.25;
+                                margin: 0 0 14px;
                             }
-                            gap: 10px;
-                            .traveller-single-info{
-                                width: 100%;
-                                label{
-                                    color: $color-text;
-                                    font-size: 0.875rem;
-                                    font-weight: 500;
+                            .traveller-info{
+                                display: grid;
+                                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                                gap: 14px;
+                                @media #{$max575}{
+                                    grid-template-columns: repeat(1, 1fr);
                                 }
-                                input[type="text"],
-                                input[type="email"],
-                                input[type="date"],
-                                select{
-                                    border-radius: 4px;
-                                    border: 0.5px solid $color-gray;
-                                    background: transparent;
-                                    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-                                    height: 32px;
+                                .traveller-single-info{
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 7px;
                                     width: 100%;
-                                    padding: 0 8px;
+                                    min-width: 0;
+                                    > label{
+                                        color: $color-text;
+                                        font-size: 0.875rem;
+                                        font-weight: 600;
+                                        line-height: 1.35;
+                                        margin: 0;
+                                    }
+                                    input[type="text"],
+                                    input[type="email"],
+                                    input[type="date"],
+                                    input[type="file"],
+                                    select{
+                                        width: 100%;
+                                        min-height: 44px;
+                                        padding: 10px 12px;
+                                        border: 1px solid $color-border-lite;
+                                        border-radius: 6px;
+                                        background: $color-filling-bg;
+                                        color: $color-heading;
+                                        box-shadow: none;
+                                        font-size: 0.938rem;
+                                        line-height: 1.35;
+                                        transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+                                    }
+                                    input[type="text"]::placeholder,
+                                    input[type="email"]::placeholder{
+                                        color: $color-text-lite;
+                                    }
+                                    input[type="text"]:focus,
+                                    input[type="email"]:focus,
+                                    input[type="date"]:focus,
+                                    input[type="file"]:focus,
+                                    select:focus{
+                                        border-color: $color-primary;
+                                        background: $color-white;
+                                        box-shadow: 0px 0px 0px 3px color-mix(in srgb, $color-primary 16%, transparent);
+                                        outline: none;
+                                    }
+                                    input[type="date"]{
+                                        text-transform: uppercase;
+                                    }
+                                    input[type="file"]{
+                                        padding: 8px;
+                                        color: $color-text;
+                                    }
+                                    input[type="file"]::file-selector-button{
+                                        min-height: 28px;
+                                        margin-right: 10px;
+                                        padding: 5px 10px;
+                                        border: 1px solid $color-primary;
+                                        border-radius: 4px;
+                                        background: $color-white;
+                                        color: $color-primary;
+                                        font-size: 0.813rem;
+                                        font-weight: 600;
+                                        line-height: 1.2;
+                                        cursor: pointer;
+                                    }
+                                    .tf-single-checkbox{
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 8px;
+                                        min-height: 30px;
+                                        label{
+                                            color: $color-text;
+                                            font-size: 0.875rem;
+                                            font-weight: 500;
+                                            line-height: 1.35;
+                                            margin: 0;
+                                        }
+                                    }
+                                    input[type="checkbox"],
+                                    input[type="radio"]{
+                                        width: 16px;
+                                        height: 16px;
+                                        margin: 0;
+                                        flex: 0 0 auto;
+                                        accent-color: $color-primary;
+                                    }
+                                    .error-text{
+                                        min-height: 0;
+                                        color: $color-danger;
+                                        font-size: 0.813rem;
+                                        font-weight: 500;
+                                        line-height: 1.35;
+                                    }
                                 }
-                                input[type="date"]{
-                                    text-transform: uppercase;
-                                    font-size: 0.813rem;
-                                }
-                                input[type="checkbox"],
-                                input[type="radio"]{
-                                    margin: 0;
-                                }
-                                .error-text.error-visible {
-                                    color: $color-danger;
-                                    font-size: 0.813rem;
+                            }
+                            .billing-details{
+                                grid-template-columns: repeat(2, 1fr);
+                                @media #{$max575}{
+                                    grid-template-columns: repeat(1, 1fr);
                                 }
                             }
                         }
-                        .billing-details{
-                            grid-template-columns: repeat(2, 1fr);
-                            @media #{$max575}{
-                                grid-template-columns: repeat(1, 1fr);
-                            }
-                        }
-                    }
                 }
                 .tf-booking-content-package{
                     display: flex;
