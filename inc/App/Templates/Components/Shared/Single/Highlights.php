@@ -111,16 +111,20 @@ class Highlights {
 	 */
 	private static function tf_apartment_highlight( $post_id, $settings, $builder ) {
 		$meta                 = get_post_meta( $post_id, 'tf_apartment_opt', true );
+		$meta                 = is_array( $meta ) ? $meta : [];
 		$style                = ! empty( $settings['highlights_style'] ) ? $settings['highlights_style'] : 'style1';
-		$tf_highlights_count  = count( Helper::tf_data_types( $meta['highlights'] ) );
+		$highlights           = ! empty( $meta['highlights'] ) ? $meta['highlights'] : [];
+		$highlights           = is_string( $highlights ) && 0 === strpos( ltrim( $highlights ), 'a:' ) ? Helper::tf_data_types( $highlights ) : $highlights;
+		$highlights           = is_array( $highlights ) ? $highlights : [];
+		$tf_highlights_count  = count( $highlights );
 
-		if ( 'style1' === $style && ! empty( Helper::tf_data_types( $meta['highlights'] ) ) ) {
+		if ( 'style1' === $style && ! empty( $highlights ) ) {
 			?>
 			<div class="tf-single-template__two tf-apartment-highlights-style1">
 				<div class="tf-overview-wrapper">
 					<div class="<?php echo $tf_highlights_count > 4 ? esc_attr( 'tf-features-block-slides tf-slick-slider' ) : esc_attr( 'tf-features-block-wrapper' ); ?> tf-informations-secations">
 						<?php
-						foreach ( Helper::tf_data_types( $meta['highlights'] ) as $highlight ) :
+						foreach ( $highlights as $highlight ) :
 							if ( empty( $highlight['title'] ) ) {
 								continue;
 							}
@@ -139,7 +143,7 @@ class Highlights {
 				</div>
 			</div>
 			<?php
-		} elseif ( 'style2' === $style && ! empty( Helper::tf_data_types( $meta['highlights'] ) ) ) {
+		} elseif ( 'style2' === $style && ! empty( $highlights ) ) {
 			?>
 			<?php echo !empty($builder) ? '<div class="tf-single-template__legacy tf-apartment-highlights-style2 sp-0">' : ''; ?>
 				<div class="tf-apt-highlights-wrapper">
@@ -147,9 +151,9 @@ class Highlights {
 						<h2 class="section-heading"><?php echo esc_html( $meta['highlights_title'] ); ?></h2>
 					<?php endif; ?>
 
-					<div class="tf-apt-highlights <?php echo count( Helper::tf_data_types( $meta['highlights'] ) ) > 3 ? 'tf-apt-highlights-slider tf-slick-slider' : ''; ?>">
+					<div class="tf-apt-highlights <?php echo $tf_highlights_count > 3 ? 'tf-apt-highlights-slider tf-slick-slider' : ''; ?>">
 						<?php
-						foreach ( Helper::tf_data_types( $meta['highlights'] ) as $highlight ) :
+						foreach ( $highlights as $highlight ) :
 							if ( empty( $highlight['title'] ) ) {
 								continue;
 							}

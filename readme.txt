@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, hellokhoyer,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 7.0
-Stable tag: 2.22.8
+Stable tag: 2.23.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -114,13 +114,13 @@ Plus, a range of key features that make Tourfic an Excellent Travel Booking Word
 Moreover, it offers a comprehensive suite of key features that make it an excellent car rental WordPress plugin. You can also use this function to build a website for Cab booking, Bike rental, and Bus booking.
 
 = 🎉  APARTMENT BOOKING & VACATION RENTAL =
-* Add Unlimited Apartment
+* Add Unlimited Apartments
 * Photo Gallery
 * Set Apartment as featured
 * Location and Dynamic Location Search (OpenStreetMap)
 * Apartment Booking Management
 * Booking per night pricing, Minimum Night Stay
-* Apartment Pricing for Adults, Children, and Infant
+* Apartment Pricing for Adults, Children, and Infants
 * Additional Fee
 * Discount Type (Fixed, Percentage)
 * Room management
@@ -164,11 +164,11 @@ Tourfic offers many important features and works smoothly with WooCommerce to ha
 * Tourfic Custom Booking: Customer Information (Pro)
 
 = 🎉 DATA IMPORT EXPORT =
-* Settings Panel import export
-* Hotel Data import export (Pro)
-* Tour Data import export (Pro)
-* Apartment Data import export (Pro)
-* Car Data import export (Pro)
+* Settings Panel import/export
+* Hotel Data import/export (Pro)
+* Tour Data import/export (Pro)
+* Apartment Data import/export (Pro)
+* Car Data import/export (Pro)
 
 = 🎉 BACKEND/ADMIN BOOKING (PRO) =
 * Backend/Admin booking for Hotel
@@ -202,16 +202,16 @@ In short, Tourfic includes all the features for a multi-vendor hotel, travel, ap
 * TravelPayouts Affiliate Program
 
 = 🎉 PAGE BUILDER SUPPORT (PRO) =
-* Added: Elementor support for Room Archive pages.
-* Added: Elementor support for Tour Archive pages.
-* Added: Elementor support for Hotel Archive pages.
-* Added: Elementor support for Apartment Archive pages.
-* Added: Elementor support for Car Archive pages.
-* Added: Elementor support for single Tour pages.
-* Added: Elementor support for single Hotel pages.
-* Added: Elementor support for single Room pages.
-* Added: Elementor support for single Apartment pages.
-* Added: Elementor support for single Car pages.
+* Added: Elementor and Bricks Builder support for Room Archive pages.
+* Added: Elementor and Bricks Builder support for Tour Archive pages.
+* Added: Elementor and Bricks Builder support for Hotel Archive pages.
+* Added: Elementor and Bricks Builder support for Apartment Archive pages.
+* Added: Elementor and Bricks Builder support for Car Archive pages.
+* Added: Elementor and Bricks Builder support for single Tour pages.
+* Added: Elementor and Bricks Builder support for single Hotel pages.
+* Added: Elementor and Bricks Builder support for single Room pages.
+* Added: Elementor and Bricks Builder support for single Apartment pages.
+* Added: Elementor and Bricks Builder support for single Car pages.
 
 = 🎉  MISCELLANEOUS =
 * Email piping for customer inquiries
@@ -422,6 +422,19 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 23. Elementor Page Builder support.
 
 == Changelog ==
+
+= 2.23.0 – Jul 07, 2026 =
+
+- Added: Pre-built Bricks template import.
+- Added: Landing page support for Bricks Builder.
+- Added: Traveler/guest details in vendor emails.
+- Added: 18+ Bricks Builder widgets with Tourfic Toolkit plugin.
+- Added: Regression tests for traveler booking and vendor email functionality.
+- Improved: Traveler booking validation, AJAX error handling, and DOB verification.
+- Improved: Translation for the default "View Details" archive card text.
+- Fixed: Tour extra pricing across checkout, booking summary, backend, and Pro vendor dashboard.
+- Fixed: Hidden location settings in TravelFic hero and search shortcodes.
+- Fixed: PHP 8 compatibility issue with malformed apartment highlight data.
 
 = 2.22.8 – Jun 24, 2026 =
  

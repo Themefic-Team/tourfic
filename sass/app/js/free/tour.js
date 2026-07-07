@@ -82,6 +82,30 @@
             },
         });
 
+        function tfShowTourBookingErrors(errors) {
+            const bookingErrors = Array.isArray(errors) && errors.length ? errors : [tf_params.something_went_wrong || 'Something went wrong. Please try again.'];
+
+            bookingErrors.forEach(function (text) {
+                notyf.error(text);
+            });
+        }
+
+        function tfParseTourBookingResponse(data) {
+            if (typeof data === 'object' && data !== null) {
+                return data;
+            }
+
+            try {
+                return JSON.parse(data);
+            } catch (error) {
+                return {
+                    status: 'error',
+                    without_payment: 'false',
+                    errors: [tf_params.something_went_wrong || 'Something went wrong. Please try again.']
+                };
+            }
+        }
+
         /**
          * Ajax tour booking
          *
@@ -106,31 +130,16 @@
             var tour_extra_total = [];
             var tour_extra_quantity = [];
 
-            /*
-            jQuery('.tour-extra-single input:checkbox:checked').each(function () {
-                tour_extra_total.push(jQuery(this).val());
+            $this.find('.tour-extra-single').each(function(e) {
+                let $extra = jQuery(this);
 
-                    if ($this.find('.tf_quantity-acrselection').hasClass('quantity-active')) {
-                        let qty = $this.find('input[name="extra-quantity"]').val();
+                if($extra.find('input[name="tf-tour-extra"]').is(':checked')){
 
-                        tour_extra_quantity.push(qty)
-                    } else {
-                        tour_extra_quantity.push(1)
-                    }
-                }
-            });
-            */
-
-            jQuery('.tour-extra-single').each(function(e) {
-                let $this = jQuery(this);
-
-                if($this.find('input[name="tf-tour-extra"]').is(':checked')){
-
-                   let tour_extras = $this.find('input[name="tf-tour-extra"]').val();
+                   let tour_extras = $extra.find('input[name="tf-tour-extra"]').val();
                    tour_extra_total.push(tour_extras);
 
-                   if($this.find('.tf_quantity-acrselection').hasClass('quantity-active')){
-                       let qty = $this.find('input[name="extra-quantity"]').val();
+                   if($extra.find('.tf_quantity-acrselection').hasClass('quantity-active')){
+                       let qty = $extra.find('input[name="extra-quantity"]').val();
 
                        tour_extra_quantity.push(qty)
                    }else{
@@ -142,10 +151,11 @@
             formData.append('tour_extra', tour_extra_total);
             formData.append('tour_extra_quantity', tour_extra_quantity);
 
-            var selectedPackage = $('.tf-booking-content-package input[name="tf_package"]:checked').val();
+            var $selectedPackage = $this.find('.tf-booking-content-package input[name="tf_package"]:checked').first();
+            var selectedPackage = $selectedPackage.val();
             if (selectedPackage !== undefined) {
                 formData.append('selectedPackage', selectedPackage);
-                var $selectedDiv = $('#package-' + selectedPackage).closest('.tf-single-package');
+                var $selectedDiv = $selectedPackage.closest('.tf-single-package');
                 var check_in_time = $selectedDiv.find('select[name=package_start_time] option').filter(':selected').val();
                 formData.append('check-in-time', check_in_time);
             }
@@ -172,17 +182,13 @@
                 success: function (data) {
                     $this.unblock();
 
-                    var response = JSON.parse(data);
+                    var response = tfParseTourBookingResponse(data);
 
                     if (response.without_payment == 'false') {
                         if (response.status == 'error') {
                             $.fancybox.close();
                             $('#tour_room_details_loader').hide();
-                            if (response.errors) {
-                                response.errors.forEach(function (text) {
-                                    notyf.error(text);
-                                });
-                            }
+                            tfShowTourBookingErrors(response.errors);
 
                             return false;
                         } else {
@@ -203,7 +209,9 @@
                     }
                 },
                 error: function (data) {
-                    console.log(data);
+                    $('#tour_room_details_loader').hide();
+                    const response = data && data.responseJSON ? data.responseJSON : tfParseTourBookingResponse(data && data.responseText ? data.responseText : '');
+                    tfShowTourBookingErrors(response.errors);
                 },
 
             });
