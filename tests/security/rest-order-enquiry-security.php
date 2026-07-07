@@ -95,6 +95,7 @@ tf_security_assert( false !== strpos( $pro_routes, "'callback'            => arr
 tf_security_assert( false !== strpos( $pro_routes, "'callback'            => array( \$api, 'tf_fd_tour_add_booking' ),\n\t\t\t'permission_callback' => array( \$api, 'tf_fd_post_permission_callback' )" ), 'Pro backend tour booking must use post-object permission callback.' );
 tf_security_assert( false !== strpos( $free_routes, "'tf_hotel'" ), 'Free orders route must accept documented CPT aliases.' );
 tf_security_assert( false !== strpos( $pro_routes, "'tf_hotel'" ), 'Pro orders route must accept documented CPT aliases.' );
+tf_security_assert( false !== strpos( $pro_routes, "'order_id'" ), 'Pro orders route must accept booking ID search filters.' );
 
 foreach ( array( 'free_rest' => 'tf_user_permission_callback', 'pro_rest' => 'tf_fd_user_permission_callback' ) as $label => $method ) {
 	$body = tf_security_method_body( tf_security_file( $files[ $label ] ), $method );
@@ -117,6 +118,10 @@ foreach ( array( 'free_booking' => 'tf_get_orders', 'pro_booking' => 'tf_fd_get_
 	tf_security_assert( false !== strpos( $body, "'where'" ), "{$method} must pass structured filters to the order helper." );
 	tf_security_assert( false !== strpos( $body, 'normalize_order_post_type' ), "{$method} must normalize CPT aliases before querying." );
 }
+
+$pro_orders = tf_security_method_body( tf_security_file( $files['pro_booking'] ), 'tf_fd_get_orders' );
+tf_security_assert( false !== strpos( $pro_orders, "tf_fd_get_rest_absint_param( \$request, 'order_id' )" ), 'Pro orders handler must sanitize booking ID search filters.' );
+tf_security_assert( false !== strpos( $pro_orders, "\$filters['order_id']" ), 'Pro orders handler must pass booking ID filters to the order helper.' );
 
 foreach ( array( 'free_enquiry' => 'tf_get_enquiries', 'pro_enquiry' => 'tf_fd_get_enquiries' ) as $label => $method ) {
 	$body = tf_security_method_body( tf_security_file( $files[ $label ] ), $method );
@@ -186,6 +191,7 @@ $free_helper       = tf_security_file( $files['free_helper'] );
 $pro_vendor_helper = tf_security_file( $files['pro_vendor_helper'] );
 
 tf_security_assert( false !== strpos( $free_helper, 'tf_order_table_structured_sql' ), 'Free order helper must support structured prepared filters.' );
+tf_security_assert( 1 === preg_match( "/'order_id'\\s*=>\\s*'%d'/", $free_helper ), 'Free order helper must allow prepared booking ID filters.' );
 tf_security_assert( false !== strpos( $pro_vendor_helper, "isset( \$query['where'] )" ), 'Pro vendor helper must support structured prepared filters.' );
 
 echo "REST user/order/enquiry security regression checks passed.\n";
