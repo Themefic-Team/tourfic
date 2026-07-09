@@ -2077,9 +2077,18 @@ class Tour {
 									if ($tf_first_key === '') {
 										$tf_first_key = $key;
 									}
+									$tf_package_max_person     = '';
+									$tf_package_person_limits  = '';
+									if ( ! empty( $pack['pricing_type'] ) && 'group' === $pack['pricing_type'] ) {
+										$tf_package_max_person = ! empty( $pack['group_tabs'][3]['max_person'] ) ? $pack['group_tabs'][3]['max_person'] : '';
+										$tf_package_person_limits = sprintf(
+											' data-package-max-person="%s"',
+											esc_attr( $tf_package_max_person )
+										);
+									}
 
 									?>
-									<div class="tf-single-package">
+									<div class="tf-single-package"<?php echo $tf_package_person_limits; ?>>
 										<div class="tf-package-select">
 											<input type="radio" id="package-<?php echo esc_attr($key); ?>" name="tf_package" value="<?php echo esc_attr($key); ?>" class="tf-package-radio" <?php echo $tf_first_key==$key ? esc_attr('checked') : ''; ?> />
 										</div>
@@ -2144,7 +2153,7 @@ class Tour {
 															<h3><?php echo esc_html__( "Adult", "tourfic" ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
-																<input type="number" name="adults" id="adults" value="1" />
+																<input type="number" name="adults" id="adults" value="1" max="<?php echo esc_attr( $tf_package_max_person ); ?>" data-max="<?php echo esc_attr( $tf_package_max_person ); ?>" />
 																<div class="acr-inc">+</div>
 															</div>
 														</div>
@@ -2153,7 +2162,7 @@ class Tour {
 															<h3><?php echo esc_html__( "Child", "tourfic" ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
-																<input type="number" name="childrens" id="childs" value="0" />
+																<input type="number" name="childrens" id="childs" value="0" max="<?php echo esc_attr( $tf_package_max_person ); ?>" data-max="<?php echo esc_attr( $tf_package_max_person ); ?>" />
 																<div class="acr-inc">+</div>
 															</div>
 														</div>
@@ -2162,7 +2171,7 @@ class Tour {
 															<h3><?php echo esc_html__( "Infant", "tourfic" ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
-																<input type="number" name="infants" id="infant" value="0" />
+																<input type="number" name="infants" id="infant" value="0" max="<?php echo esc_attr( $tf_package_max_person ); ?>" data-max="<?php echo esc_attr( $tf_package_max_person ); ?>" />
 																<div class="acr-inc">+</div>
 															</div>
 														</div>

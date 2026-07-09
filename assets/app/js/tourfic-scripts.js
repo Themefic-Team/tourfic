@@ -5727,6 +5727,54 @@ function convertTo24HourFormat(timeStr) {
             return $element.closest('.tf-single-hotel-service').closest('.tf-hotel-withoutpayment-booking, .tf-room-booking-popup').length > 0;
         }
 
+        function tfGetTourPackageMaxPeople($package) {
+            const maxPeople = parseInt($package.attr('data-package-max-person') || '0', 10);
+            return Number.isNaN(maxPeople) ? 0 : maxPeople;
+        }
+
+        function tfGetTourPackagePeopleTotal($package) {
+            let totalPeople = 0;
+            $package.find('input[name="adults"], input[name="childrens"], input[name="infants"]').each(function () {
+                const count = parseInt($(this).val() || '0', 10);
+                totalPeople += Number.isNaN(count) ? 0 : count;
+            });
+
+            return totalPeople;
+        }
+
+        function tfRefreshTourPackageLimitControls($package) {
+            const maxPeople = tfGetTourPackageMaxPeople($package);
+            if (!maxPeople) {
+                return;
+            }
+
+            const totalPeople = tfGetTourPackagePeopleTotal($package);
+            const $incrementButtons = $package.find('.tf-single-person .acr-inc');
+
+            if (totalPeople >= maxPeople) {
+                $incrementButtons.addClass('disable');
+            } else {
+                $incrementButtons.removeClass('disable');
+            }
+        }
+
+        function tfClampTourPackagePeople($input) {
+            const $package = $input.closest('.tf-single-package[data-package-max-person]');
+            const maxPeople = tfGetTourPackageMaxPeople($package);
+            if (!$package.length || !maxPeople) {
+                return;
+            }
+
+            const totalPeople = tfGetTourPackagePeopleTotal($package);
+            if (totalPeople > maxPeople) {
+                const currentValue = parseInt($input.val() || '0', 10);
+                const overflow = totalPeople - maxPeople;
+                $input.val(Math.max(0, (Number.isNaN(currentValue) ? 0 : currentValue) - overflow));
+            }
+
+            tfRefreshTourPackageLimitControls($package);
+        }
+
         // Number Increment
         $('.acr-inc, .quanity-acr-inc').on('click', function (e) {
             if (tfIsHotelExtraQuantityControl($(this))) {
@@ -5734,6 +5782,19 @@ function convertTo24HourFormat(timeStr) {
             }
 
             var input = $(this).parent().find('input');
+            var $package = input.closest('.tf-single-package[data-package-max-person]');
+            var packageMaxPeople = tfGetTourPackageMaxPeople($package);
+            if (
+                $(this).hasClass('acr-inc') &&
+                $package.length &&
+                packageMaxPeople &&
+                tfGetTourPackagePeopleTotal($package) >= packageMaxPeople
+            ) {
+                $(this).addClass('disable');
+                input.blur();
+                return;
+            }
+
             var max = input.attr('max') ? input.attr('max') : 999;
             if(input.attr('data-max')){
                 max = input.attr('data-max');
@@ -5752,6 +5813,7 @@ function convertTo24HourFormat(timeStr) {
             }else{
                 $(this).parent().find('.acr-dec').removeClass('disable');
             }
+            tfClampTourPackagePeople(input);
             // input focus disable
             input.blur();
         });
@@ -5780,6 +5842,11 @@ function convertTo24HourFormat(timeStr) {
             }else{
                 $(this).parent().find('.acr-inc').removeClass('disable');
             }
+            tfRefreshTourPackageLimitControls(input.closest('.tf-single-package[data-package-max-person]'));
+        });
+
+        $(document).on('change', '.tf-single-package[data-package-max-person] input[type="number"]', function () {
+            tfClampTourPackagePeople($(this));
         });
 
         // Adults change trigger
