@@ -3849,10 +3849,18 @@ jQuery(function($) {
             });
         }
 
+        function refetchRoomCalendar(container) {
+            var room = $(container).data('tfRoomCalendar');
+            if (room && room.fullCalendar) {
+                room.fullCalendar.refetchEvents();
+            }
+        }
+
         const tfHotelCalendar = () => {
             $('.tf-room-cal-wrap').each(function (index, el) {
                 var room = new roomCal(el);
                 room.init();
+                $(el).data('tfRoomCalendar', room);
             });
         }
         tfHotelCalendar();
@@ -3884,7 +3892,6 @@ jQuery(function($) {
 
             let btn = $(this);
             let container = btn.closest('.tf-room-cal-wrap');
-            let containerEl = btn.closest('.tf-room-cal-wrap')[0];
             let cal = container.find('.tf-room-cal');
             let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
             let priceBy = $('.tf_room_pricing_by').val();
@@ -3911,11 +3918,7 @@ jQuery(function($) {
                             notyf.success(response.data.message);
                             roomResetForm(container);
 
-                            var room = new roomCal(containerEl);
-                            room.init();
-                            if (room.fullCalendar) {
-                                room.fullCalendar.refetchEvents();
-                            }
+                            refetchRoomCalendar(container);
                         } else {
                             notyf.error(response.data.message);
                         }
@@ -4919,7 +4922,6 @@ jQuery(function($) {
             e.preventDefault();
             let btn = $(this);
             let container = btn.closest('.tf-room-cal-wrap');
-            let containerEl = btn.closest('.tf-room-cal-wrap')[0];
             let cal = container.find('.tf-room-cal');
             let roomAvailability = container.find('avail_date');
             $.ajax({
@@ -4941,11 +4943,7 @@ jQuery(function($) {
                         notyf.success(response.data.message);
                         roomResetForm(container);
 
-                        var room_cal = new roomCal(containerEl);
-                        room_cal.init();
-                        if (room_cal.fullCalendar) {
-                            room_cal.fullCalendar.refetchEvents();
-                        }
+                        refetchRoomCalendar(container);
                     } else {
                         notyf.error(response.data.message);
                     }
