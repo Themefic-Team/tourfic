@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, hellokhoyer,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 7.0
-Stable tag: 2.23.0
+Stable tag: 2.23.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -394,7 +394,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 =  =
 
-
 == Screenshots ==
 
 1. Hotel Booking (Front Side 1)
@@ -423,6 +422,10 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.23.1 – July 27, 2026 =
+
+- Compatibility: Added compatibility with Elementor 4.2.
+
 = 2.23.0 – Jul 07, 2026 =
 
 - Added: Pre-built Bricks template import.
@@ -435,55 +438,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Tour extra pricing across checkout, booking summary, backend, and Pro vendor dashboard.
 - Fixed: Hidden location settings in TravelFic hero and search shortcodes.
 - Fixed: PHP 8 compatibility issue with malformed apartment highlight data.
-
-= 2.22.8 – Jun 24, 2026 =
- 
-- Improved: Security enhancements across the plugin.
-
-= 2.22.7 – Jun 22, 2026 =
-
-- Improved: Overall system stability and reliability.
-- Improved: Security enhancements across the plugin.
-
-= 2.22.6 – Jun 21, 2026 =
-
-- Improved: Security for booking forms and booking workflows.
-- Fixed: Deposit rate calculations during booking.
-- Improved: Performance through optimized script loading.
-- Fixed: Tour package selection reliability during booking.
-- Improved: Tour booking labels and customer guidance.
-- Improved: Traveler information validation and data collection.
-- Improved: Car rental booking validation and reliability.
-- Improved: Security for booking and enquiry systems.
-- Fixed: Hotel booking availability and date selection reliability.
-- Fixed: Itinerary map loading issues (Pro).
-- Fixed: PDF invoice styling and display issues (Pro).
-- Improved: REST API security for booking and enquiry endpoints (Pro).
-- Fixed: Date range compatibility with international locales (Pro).
-- Improved: Traveler information settings and admin usability (Pro).
-
-= 2.22.5 – Jun 04, 2026 =
-
-- Added missing parameters to hotel booking cart hooks.
-
-= 2.22.4 – May 27, 2026 =
-
-- Compatibility: Fully compatible with WordPress v7.0.
-
-= 2.22.3 – May 19, 2026 =
-
-- Added: Native Bricks Builder support for Hotel, Tour, Apartment, and Car templates (Pro).
-- Added: Built-in REST API Documentation and new API endpoints.
-- Added: Welcome emails for customer registrations (Pro).
-- Fixed: PHP 8.x deprecated warnings and string handling issues.
-- Fixed: Hotel room capacity and iCal/custom availability validation issues.
-- Fixed: Frontend dashboard iCal import availability syncing (Pro).
-- Fixed: CSV import handling and validation issues (Pro).
-- Optimized: Google Maps assets now load only when required.
-- Improved: Email verification and registration flow handling (Pro).
-- Improved: Traveler document upload, DOB, and age validation flow.
-- Improved: Fallback iCal metabox UI behavior (Pro).
-- Improved: Booking date-range consistency across frontend and backend flows.
 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 
