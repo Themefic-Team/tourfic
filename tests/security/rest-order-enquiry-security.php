@@ -13,6 +13,7 @@ $files = array(
 	'free_rest'         => $root . '/inc/Classes/REST_API/TF_Rest_API.php',
 	'free_booking'      => $root . '/inc/Classes/REST_API/TF_Booking_Rest_API.php',
 	'free_enquiry'      => $root . '/inc/Classes/REST_API/TF_Enquiry_Rest_API.php',
+	'free_hotel'        => $root . '/inc/Classes/REST_API/TF_Hotel_Rest_API.php',
 	'free_user'         => $root . '/inc/Classes/REST_API/TF_User_Rest_API.php',
 	'free_helper'       => $root . '/inc/Classes/Helper.php',
 	'pro_routes'        => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_API_Routes.php',
@@ -75,6 +76,22 @@ $pro_routes  = tf_security_file( $files['pro_routes'] );
 
 tf_security_assert( false !== strpos( $free_routes, 'tf_order_permission_callback' ), 'Free orders route must use order permission callback.' );
 tf_security_assert( false !== strpos( $free_routes, 'tf_enquiry_permission_callback' ), 'Free enquiries route must use enquiry permission callback.' );
+tf_security_assert(
+	false !== strpos(
+		$free_routes,
+		"'callback'            => array( \$this->api_classes['rest'], 'tf_get_tf_settings' ),\n"
+			. "\t\t\t'permission_callback' => array( \$this->api_classes['rest'], 'tf_settings_permission_callback' )"
+	),
+	'Free settings route must use the settings capability callback.'
+);
+tf_security_assert(
+	false !== strpos(
+		$free_routes,
+		"'callback'            => array( \$api, 'tf_get_hotels' ),\n"
+			. "\t\t\t'permission_callback' => array( \$api, 'tf_hotel_permission_callback' )"
+	),
+	'Free hotels route must use the hotel capability callback.'
+);
 tf_security_assert( false !== strpos( $free_routes, 'tf_user_permission_callback' ), 'Free user detail route must use user-object permission callback.' );
 tf_security_assert( false !== strpos( $free_routes, 'tf_admin_permission_callback' ), 'Free users route must stay admin-gated.' );
 tf_security_assert( false !== strpos( $pro_routes, 'tf_fd_order_permission_callback' ), 'Pro orders route must use order permission callback.' );
@@ -95,6 +112,7 @@ tf_security_assert( false !== strpos( $pro_routes, "'callback'            => arr
 tf_security_assert( false !== strpos( $pro_routes, "'callback'            => array( \$api, 'tf_fd_tour_add_booking' ),\n\t\t\t'permission_callback' => array( \$api, 'tf_fd_post_permission_callback' )" ), 'Pro backend tour booking must use post-object permission callback.' );
 tf_security_assert( false !== strpos( $free_routes, "'tf_hotel'" ), 'Free orders route must accept documented CPT aliases.' );
 tf_security_assert( false !== strpos( $pro_routes, "'tf_hotel'" ), 'Pro orders route must accept documented CPT aliases.' );
+tf_security_assert( false !== strpos( $pro_routes, "'order_id'" ), 'Pro orders route must accept booking ID search filters.' );
 
 foreach ( array( 'free_rest' => 'tf_user_permission_callback', 'pro_rest' => 'tf_fd_user_permission_callback' ) as $label => $method ) {
 	$body = tf_security_method_body( tf_security_file( $files[ $label ] ), $method );
@@ -102,6 +120,63 @@ foreach ( array( 'free_rest' => 'tf_user_permission_callback', 'pro_rest' => 'tf
 	tf_security_assert( false !== strpos( $body, "get_param( 'id' )" ), "{$method} must authorize the requested user id." );
 	tf_security_assert( false !== strpos( $body, 'current_user_can_access_user' ), "{$method} must delegate to object-level user authorization." );
 }
+
+$free_settings_permission = tf_security_method_body(
+	tf_security_file( $files['free_rest'] ),
+	'tf_settings_permission_callback'
+);
+tf_security_assert(
+	false !== strpos( $free_settings_permission, "current_user_can( 'manage_options' )" ),
+	'Free settings permission must require the administrator capability.'
+);
+
+$free_settings = tf_security_method_body( tf_security_file( $files['free_rest'] ), 'tf_get_tf_settings' );
+$settings_permission_offset = strpos( $free_settings, 'tf_settings_permission_callback' );
+$settings_read_offset       = strpos( $free_settings, "get_option( 'tf_settings' )" );
+tf_security_assert( false !== $settings_permission_offset, 'Free settings handler must repeat its capability check.' );
+tf_security_assert(
+	false !== $settings_read_offset,
+	'Free settings handler must read the settings option after authorization.'
+);
+tf_security_assert(
+	$settings_permission_offset < $settings_read_offset,
+	'Free settings handler must authorize before reading secrets.'
+);
+
+$free_hotel_permission = tf_security_method_body(
+	tf_security_file( $files['free_hotel'] ),
+	'tf_hotel_permission_callback'
+);
+tf_security_assert(
+	false !== strpos( $free_hotel_permission, "current_user_can( 'edit_tf_hotels' )" ),
+	'Free hotels permission must require the hotel editing capability.'
+);
+
+$free_hotels = tf_security_method_body( tf_security_file( $files['free_hotel'] ), 'tf_get_hotels' );
+$hotel_permission_offset = strpos( $free_hotels, 'tf_hotel_permission_callback' );
+$hotel_query_offset      = strpos( $free_hotels, 'new WP_Query' );
+tf_security_assert( false !== $hotel_permission_offset, 'Free hotels handler must repeat its capability check.' );
+tf_security_assert( false !== $hotel_query_offset, 'Free hotels handler must retain its hotel query.' );
+tf_security_assert(
+	$hotel_permission_offset < $hotel_query_offset,
+	'Free hotels handler must authorize before querying inventory.'
+);
+tf_security_assert(
+	false !== strpos( $free_hotels, "current_user_can( 'edit_others_tf_hotels' )" ),
+	'Free hotels handler must check whether the caller can target another author.'
+);
+tf_security_assert(
+	false !== strpos( $free_hotels, "absint( \$request->get_param( 'user' ) )" ),
+	'Free hotels handler must sanitize the requested author ID.'
+);
+tf_security_assert(
+	false !== strpos( $free_hotels, 'get_current_user_id()' ),
+	'Free hotels handler must clamp non-privileged requests to the current author.'
+);
+tf_security_assert(
+	false === strpos( $free_hotels, 'user_has_role( $author' ),
+	'Free hotels handler must not derive authorization from the requested user role.'
+);
 
 foreach ( array( 'free_rest' => 'tf_current_user_can_access_user', 'pro_rest' => 'tf_fd_current_user_can_access_user' ) as $label => $method ) {
 	$body = tf_security_method_body( tf_security_file( $files[ $label ] ), $method );
@@ -117,6 +192,10 @@ foreach ( array( 'free_booking' => 'tf_get_orders', 'pro_booking' => 'tf_fd_get_
 	tf_security_assert( false !== strpos( $body, "'where'" ), "{$method} must pass structured filters to the order helper." );
 	tf_security_assert( false !== strpos( $body, 'normalize_order_post_type' ), "{$method} must normalize CPT aliases before querying." );
 }
+
+$pro_orders = tf_security_method_body( tf_security_file( $files['pro_booking'] ), 'tf_fd_get_orders' );
+tf_security_assert( false !== strpos( $pro_orders, "tf_fd_get_rest_absint_param( \$request, 'order_id' )" ), 'Pro orders handler must sanitize booking ID search filters.' );
+tf_security_assert( false !== strpos( $pro_orders, "\$filters['order_id']" ), 'Pro orders handler must pass booking ID filters to the order helper.' );
 
 foreach ( array( 'free_enquiry' => 'tf_get_enquiries', 'pro_enquiry' => 'tf_fd_get_enquiries' ) as $label => $method ) {
 	$body = tf_security_method_body( tf_security_file( $files[ $label ] ), $method );
@@ -186,6 +265,7 @@ $free_helper       = tf_security_file( $files['free_helper'] );
 $pro_vendor_helper = tf_security_file( $files['pro_vendor_helper'] );
 
 tf_security_assert( false !== strpos( $free_helper, 'tf_order_table_structured_sql' ), 'Free order helper must support structured prepared filters.' );
+tf_security_assert( 1 === preg_match( "/'order_id'\\s*=>\\s*'%d'/", $free_helper ), 'Free order helper must allow prepared booking ID filters.' );
 tf_security_assert( false !== strpos( $pro_vendor_helper, "isset( \$query['where'] )" ), 'Pro vendor helper must support structured prepared filters.' );
 
 echo "REST user/order/enquiry security regression checks passed.\n";

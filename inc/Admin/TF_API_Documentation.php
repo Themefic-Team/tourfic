@@ -188,7 +188,10 @@ class TF_API_Documentation {
 			array(
 				'method'      => 'GET',
 				'url'         => '/tf-settings',
-				'description' => __( 'Retrieve the full Tourfic plugin settings. These settings are global and shared across all users; the response is not user-specific.', 'tourfic' ),
+				'description' => __(
+					'Retrieve the full Tourfic plugin settings. Access is restricted to authorized Tourfic management users.',
+					'tourfic'
+				),
 				'parameters'  => array(),
 				'example_request'  => 'GET /wp-json/tf/v1/tf-settings' . "\n" . 'X-API-Key: your-api-key',
 				'example_response' => $this->get_general_settings_example_response(),
@@ -234,7 +237,10 @@ class TF_API_Documentation {
 						'name'        => 'user',
 						'type'        => 'integer',
 						'required'    => false,
-						'description' => __( 'User ID to scope results (admins/managers can view all).', 'tourfic' ),
+						'description' => __(
+							'User ID to scope results. Only authorized callers may target another user\'s hotel inventory.',
+							'tourfic'
+						),
 					),
 				),
 				'example_request'  => 'GET /wp-json/tf/v1/hotels?page=1&per_page=10&user=1\nX-API-Key: your-api-key',

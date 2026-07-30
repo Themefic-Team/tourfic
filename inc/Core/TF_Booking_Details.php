@@ -69,6 +69,7 @@ abstract Class TF_Booking_Details {
 				// Filter Perameters
 				$checkinout_perms = ! empty( $_GET['checkinout'] ) ? sanitize_text_field( wp_unslash( $_GET['checkinout'] ) ) : '';
 				$tf_post_perms    = ! empty( $_GET['post'] ) ? absint( wp_unslash( $_GET['post'] ) ) : '';
+				$tf_order_perms   = ! empty( $_GET['order_id'] ) ? absint( wp_unslash( $_GET['order_id'] ) ) : '';
 				$tf_payment_perms = ! empty( $_GET['payment'] ) ? sanitize_key( wp_unslash( $_GET['payment'] ) ) : '';
 
 				$tf_order_filters = array();
@@ -77,6 +78,9 @@ abstract Class TF_Booking_Details {
 				}
 				if ( $tf_post_perms ) {
 					$tf_order_filters['post_id'] = $tf_post_perms;
+				}
+				if ( $tf_order_perms ) {
+					$tf_order_filters['order_id'] = $tf_order_perms;
 				}
 				if ( $tf_payment_perms ) {
 					$tf_order_filters['ostatus'] = $tf_payment_perms;
@@ -378,7 +382,7 @@ abstract Class TF_Booking_Details {
                 </div>
             </div>
             <form class="tf-right-search-filter">
-                <input type="number" value="<?php echo ! empty( $_GET['post'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['post'] ) ) ) : ''; ?>" placeholder="Search by <?php echo esc_html( $this->booking_args['booking_title'] ); ?> ID"
+                <input type="number" value="<?php echo ! empty( $_GET['order_id'] ) ? esc_attr( absint( wp_unslash( $_GET['order_id'] ) ) ) : ''; ?>" placeholder="<?php esc_attr_e( 'Search by Booking ID', 'tourfic' ); ?>"
                        id="tf-searching-key">
                 <button class="tf-search-by-id" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

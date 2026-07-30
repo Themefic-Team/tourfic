@@ -362,20 +362,13 @@
             let id = $("#tf-searching-key").val();
             if(id!==""){
                 $('.tf-preloader-box').show();
-                let currentURL = window.location.href;
-                let BaseURL = currentURL.split('?')[0];
-                let queryString = currentURL.split('?')[1];
-
-                let currentURLParams= new URLSearchParams(queryString);
-                currentURLParams.delete("paged");
-                if (currentURLParams.has("post")) {
-                    currentURLParams.set("post", id);
-                    let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                    window.location.href = updatedUrl;
-                }else{
-                    let updatedUrl = currentURL + "&post=" + id;
-                    window.location.href = updatedUrl;
+                let currentURL = new URL(window.location.href);
+                currentURL.searchParams.delete("paged");
+                currentURL.searchParams.set("order_id", id);
+                if (!currentURL.searchParams.has("nonce")) {
+                    currentURL.searchParams.set("nonce", tf_admin_params.tf_nonce);
                 }
+                window.location.href = currentURL.toString();
             }
         });
 

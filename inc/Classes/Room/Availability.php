@@ -379,6 +379,43 @@ class Availability {
 	}
 
 	/**
+	 * Preserve existing prices when a calendar update omits price values.
+	 *
+	 * @param array $submitted_rule Submitted availability rule.
+	 * @param array $existing_rule  Existing availability rule for the same date.
+	 * @return array
+	 */
+	public static function merge_rule_prices( $submitted_rule, $existing_rule = array() ) {
+		if ( ! is_array( $submitted_rule ) ) {
+			return array();
+		}
+
+		if ( ! is_array( $existing_rule ) ) {
+			$existing_rule = array();
+		}
+
+		$price_fields = array( 'price', 'adult_price', 'child_price' );
+		$rule_fields  = array_unique( array_merge( array_keys( $submitted_rule ), array_keys( $existing_rule ) ) );
+
+		foreach ( $rule_fields as $rule_field ) {
+			if ( preg_match( '/^tf_option_(?:room|adult|child)_price_\d+$/', $rule_field ) ) {
+				$price_fields[] = $rule_field;
+			}
+		}
+
+		foreach ( array_unique( $price_fields ) as $price_field ) {
+			$has_submitted_price = array_key_exists( $price_field, $submitted_rule )
+				&& '' !== (string) $submitted_rule[ $price_field ];
+
+			if ( ! $has_submitted_price && array_key_exists( $price_field, $existing_rule ) ) {
+				$submitted_rule[ $price_field ] = $existing_rule[ $price_field ];
+			}
+		}
+
+		return $submitted_rule;
+	}
+
+	/**
 	 * Check whether the rules contain explicit available dates.
 	 *
 	 * @param mixed $room_availability Raw or normalized availability rules.

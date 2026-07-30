@@ -1489,20 +1489,13 @@
             let id = $("#tf-searching-key").val();
             if(id!==""){
                 $('.tf-preloader-box').show();
-                let currentURL = window.location.href;
-                let BaseURL = currentURL.split('?')[0];
-                let queryString = currentURL.split('?')[1];
-
-                let currentURLParams= new URLSearchParams(queryString);
-                currentURLParams.delete("paged");
-                if (currentURLParams.has("post")) {
-                    currentURLParams.set("post", id);
-                    let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                    window.location.href = updatedUrl;
-                }else{
-                    let updatedUrl = currentURL + "&post=" + id;
-                    window.location.href = updatedUrl;
+                let currentURL = new URL(window.location.href);
+                currentURL.searchParams.delete("paged");
+                currentURL.searchParams.set("order_id", id);
+                if (!currentURL.searchParams.has("nonce")) {
+                    currentURL.searchParams.set("nonce", tf_admin_params.tf_nonce);
                 }
+                window.location.href = currentURL.toString();
             }
         });
 
@@ -3868,10 +3861,18 @@ jQuery(function($) {
             });
         }
 
+        function refetchRoomCalendar(container) {
+            var room = $(container).data('tfRoomCalendar');
+            if (room && room.fullCalendar) {
+                room.fullCalendar.refetchEvents();
+            }
+        }
+
         const tfHotelCalendar = () => {
             $('.tf-room-cal-wrap').each(function (index, el) {
                 var room = new roomCal(el);
                 room.init();
+                $(el).data('tfRoomCalendar', room);
             });
         }
         tfHotelCalendar();
@@ -3903,7 +3904,6 @@ jQuery(function($) {
 
             let btn = $(this);
             let container = btn.closest('.tf-room-cal-wrap');
-            let containerEl = btn.closest('.tf-room-cal-wrap')[0];
             let cal = container.find('.tf-room-cal');
             let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
             let priceBy = $('.tf_room_pricing_by').val();
@@ -3930,11 +3930,7 @@ jQuery(function($) {
                             notyf.success(response.data.message);
                             roomResetForm(container);
 
-                            var room = new roomCal(containerEl);
-                            room.init();
-                            if (room.fullCalendar) {
-                                room.fullCalendar.refetchEvents();
-                            }
+                            refetchRoomCalendar(container);
                         } else {
                             notyf.error(response.data.message);
                         }
@@ -4938,7 +4934,6 @@ jQuery(function($) {
             e.preventDefault();
             let btn = $(this);
             let container = btn.closest('.tf-room-cal-wrap');
-            let containerEl = btn.closest('.tf-room-cal-wrap')[0];
             let cal = container.find('.tf-room-cal');
             let roomAvailability = container.find('avail_date');
             $.ajax({
@@ -4960,11 +4955,7 @@ jQuery(function($) {
                         notyf.success(response.data.message);
                         roomResetForm(container);
 
-                        var room_cal = new roomCal(containerEl);
-                        room_cal.init();
-                        if (room_cal.fullCalendar) {
-                            room_cal.fullCalendar.refetchEvents();
-                        }
+                        refetchRoomCalendar(container);
                     } else {
                         notyf.error(response.data.message);
                     }

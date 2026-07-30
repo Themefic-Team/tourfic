@@ -138,7 +138,107 @@ if ( ! $admin_user || ! $low_user ) {
 	return;
 }
 
+$free_rest_path  = WP_PLUGIN_DIR . '/tourfic/inc/Classes/REST_API/TF_Rest_API.php';
+$free_hotel_path = WP_PLUGIN_DIR . '/tourfic/inc/Classes/REST_API/TF_Hotel_Rest_API.php';
+
+if ( ! class_exists( 'TF_Rest_API' ) && is_readable( $free_rest_path ) ) {
+	require_once $free_rest_path;
+}
+
+if ( class_exists( 'TF_Rest_API' ) && ! class_exists( 'TF_Hotel_Rest_API' ) && is_readable( $free_hotel_path ) ) {
+	require_once $free_hotel_path;
+}
+
 $checked = 0;
+
+if ( class_exists( 'TF_Rest_API' ) && class_exists( 'TF_Hotel_Rest_API' ) ) {
+	$free_settings_api = TF_Rest_API::get_instance();
+	$free_hotel_api    = TF_Hotel_Rest_API::get_instance();
+	$settings_request  = tf_security_live_request( '/tf/v1/tf-settings' );
+	$hotel_request     = tf_security_live_request( '/tf/v1/hotels' );
+	$hotel_request->set_param( 'user', $admin_user->ID );
+	$hotel_request->set_param( 'per_page', 1 );
+
+	wp_set_current_user( 0 );
+	tf_security_live_assert(
+		tf_security_live_is_denied( $free_settings_api->tf_settings_permission_callback( $settings_request ) ),
+		'Free unauthenticated user must not pass settings permission.'
+	);
+	tf_security_live_assert(
+		tf_security_live_is_denied( $free_hotel_api->tf_hotel_permission_callback( $hotel_request ) ),
+		'Free unauthenticated user must not pass hotel collection permission.'
+	);
+
+	wp_set_current_user( $low_user->ID );
+	tf_security_live_assert(
+		tf_security_live_is_denied( $free_settings_api->tf_settings_permission_callback( $settings_request ) ),
+		'TF-REST-02 failed: Subscriber must not pass settings permission.'
+	);
+	tf_security_live_assert(
+		tf_security_live_is_denied( $free_settings_api->tf_get_tf_settings( $settings_request ) ),
+		'TF-REST-02 failed: Subscriber must not receive the settings payload from the handler.'
+	);
+	tf_security_live_assert(
+		tf_security_live_is_denied( $free_hotel_api->tf_hotel_permission_callback( $hotel_request ) ),
+		'TF-REST-01 failed: Subscriber must not pass hotel collection permission.'
+	);
+	tf_security_live_assert(
+		tf_security_live_is_denied( $free_hotel_api->tf_get_hotels( $hotel_request ) ),
+		'TF-REST-01 failed: Subscriber must not receive administrator hotel inventory from the handler.'
+	);
+
+	wp_set_current_user( $admin_user->ID );
+	tf_security_live_assert(
+		true === $free_settings_api->tf_settings_permission_callback( $settings_request ),
+		'Administrator must retain settings permission.'
+	);
+	$admin_settings = $free_settings_api->tf_get_tf_settings( $settings_request );
+	tf_security_live_assert(
+		! is_wp_error( $admin_settings ) && is_array( $admin_settings ),
+		'Administrator must retain the Tourfic settings response.'
+	);
+	tf_security_live_assert(
+		true === $free_hotel_api->tf_hotel_permission_callback( $hotel_request ),
+		'Administrator must retain hotel collection permission.'
+	);
+	$admin_hotels = $free_hotel_api->tf_get_hotels( $hotel_request );
+	tf_security_live_assert(
+		! is_wp_error( $admin_hotels )
+			&& isset( $admin_hotels['hotels'], $admin_hotels['total'] )
+			&& is_array( $admin_hotels['hotels'] ),
+		'Administrator must retain the hotel collection response.'
+	);
+	foreach ( $admin_hotels['hotels'] as $hotel ) {
+		tf_security_live_assert(
+			absint( get_post_field( 'post_author', $hotel['id'] ?? 0 ) ) === absint( $admin_user->ID ),
+			'Administrator author filter must return only the requested author inventory.'
+		);
+	}
+
+	$limited_hotel_user = tf_security_live_vendor_user();
+	if (
+		$limited_hotel_user
+		&& user_can( $limited_hotel_user, 'edit_tf_hotels' )
+		&& ! user_can( $limited_hotel_user, 'edit_others_tf_hotels' )
+	) {
+		wp_set_current_user( $limited_hotel_user->ID );
+		$limited_hotels = $free_hotel_api->tf_get_hotels( $hotel_request );
+
+		tf_security_live_assert(
+			! is_wp_error( $limited_hotels ) && isset( $limited_hotels['hotels'] ),
+			'Limited hotel editor must retain access to their own collection.'
+		);
+		foreach ( $limited_hotels['hotels'] as $hotel ) {
+			tf_security_live_assert(
+				absint( get_post_field( 'post_author', $hotel['id'] ?? 0 ) )
+					=== absint( $limited_hotel_user->ID ),
+				'Limited hotel editor must not escape their own author scope.'
+			);
+		}
+	}
+
+	$checked++;
+}
 
 if ( class_exists( 'TF_User_Rest_API' ) ) {
 	$free_api = TF_User_Rest_API::get_instance();
@@ -200,6 +300,17 @@ tf_security_live_assert( $checked > 0, 'No Tourfic REST user API class was loade
 
 wp_set_current_user( $low_user->ID );
 rest_get_server();
+
+tf_security_live_assert_status(
+	tf_security_live_rest_get( '/tf/v1/tf-settings' ),
+	403,
+	'TF-REST-02 failed: Subscriber REST request must not read Tourfic settings.'
+);
+tf_security_live_assert_status(
+	tf_security_live_rest_get( '/tf/v1/hotels', array( 'user' => $admin_user->ID ) ),
+	403,
+	'TF-REST-01 failed: Subscriber REST request must not target administrator hotel inventory.'
+);
 
 $admin_user_response = tf_security_live_rest_get( '/tf/v1/user/' . $admin_user->ID, array( 'id' => $admin_user->ID ) );
 tf_security_live_assert_status(
