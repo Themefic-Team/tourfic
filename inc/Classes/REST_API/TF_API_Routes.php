@@ -63,7 +63,7 @@ class TF_API_Routes {
 		register_rest_route( 'tf/v1', '/tf-settings', array(
 			'methods'             => 'GET',
 			'callback'            => array( $this->api_classes['rest'], 'tf_get_tf_settings' ),
-			'permission_callback' => array( $this->api_classes['rest'], 'tf_permission_callback' ),
+			'permission_callback' => array( $this->api_classes['rest'], 'tf_settings_permission_callback' ),
 		) );
 	}
 
@@ -115,7 +115,7 @@ class TF_API_Routes {
 		register_rest_route( 'tf/v1', '/hotels', array(
 			'methods'             => 'GET',
 			'callback'            => array( $api, 'tf_get_hotels' ),
-			'permission_callback' => array( $api, 'tf_permission_callback' ),
+			'permission_callback' => array( $api, 'tf_hotel_permission_callback' ),
 		) );
 
 		register_rest_route( 'tf/v1', '/hotel-room-availability', array(

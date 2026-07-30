@@ -31,15 +31,22 @@ if ( ! class_exists( 'TF_Hotel_Rest_API' ) ) {
 		 * @author Foysal
 		 */
 		public function tf_get_hotels( $request ) {
+			$permission = $this->tf_hotel_permission_callback( $request );
+			if ( is_wp_error( $permission ) ) {
+				return $permission;
+			}
+
 			$per_page = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 10;
 			$page     = $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1;
-			$author   = $request->get_param( 'user' ) ? $request->get_param( 'user' ) : get_current_user_id();
+			$author   = current_user_can( 'edit_others_tf_hotels' )
+				? absint( $request->get_param( 'user' ) )
+				: get_current_user_id();
 
 			$query_hotels = new WP_Query( array(
 				'post_type'      => 'tf_hotel',
 				'posts_per_page' => $per_page,
 				'post_status'    => array( 'publish', 'pending', 'draft' ),
-				'author'         => $this->user_has_role( $author, 'administrator' ) || $this->user_has_role( $author, 'tf_manager' ) ? '' : $author,
+				'author'         => $author,
 				'paged'          => $page,
 			) );
 			$hotels       = array();
@@ -80,6 +87,24 @@ if ( ! class_exists( 'TF_Hotel_Rest_API' ) ) {
 			);
 
 			return $hotels;
+		}
+
+		/**
+		 * Check whether the current user can read the hotel management collection.
+		 *
+		 * @param WP_REST_Request $request REST request.
+		 * @return true|WP_Error
+		 */
+		public function tf_hotel_permission_callback( WP_REST_Request $request ) {
+			if ( current_user_can( 'edit_tf_hotels' ) ) {
+				return true;
+			}
+
+			return new WP_Error(
+				'rest_forbidden',
+				esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ),
+				array( 'status' => 403 )
+			);
 		}
 
 		/*

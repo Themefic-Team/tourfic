@@ -5,6 +5,7 @@ namespace Tourfic\Admin\TF_Options;
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
+use Tourfic\Classes\Room\Availability;
 use Tourfic\Classes\Room\Room;
 
 class TF_Options {
@@ -719,9 +720,15 @@ class TF_Options {
 		$check_out           = isset( $_POST['tf_room_check_out'] ) && ! empty( $_POST['tf_room_check_out'] ) ? sanitize_text_field( $_POST['tf_room_check_out'] ) : '';
 		$status              = isset( $_POST['tf_room_status'] ) && ! empty( $_POST['tf_room_status'] ) ? sanitize_text_field( $_POST['tf_room_status'] ) : '';
 		$price_by            = isset( $_POST['price_by'] ) && ! empty( $_POST['price_by'] ) ? sanitize_text_field( $_POST['price_by'] ) : '';
-		$tf_room_price       = isset( $_POST['tf_room_price'] ) && ! empty( $_POST['tf_room_price'] ) ? sanitize_text_field( $_POST['tf_room_price'] ) : '';
-		$tf_room_adult_price = isset( $_POST['tf_room_adult_price'] ) && ! empty( $_POST['tf_room_adult_price'] ) ? sanitize_text_field( $_POST['tf_room_adult_price'] ) : '';
-		$tf_room_child_price = isset( $_POST['tf_room_child_price'] ) && ! empty( $_POST['tf_room_child_price'] ) ? sanitize_text_field( $_POST['tf_room_child_price'] ) : '';
+		$tf_room_price       = isset( $_POST['tf_room_price'] ) && '' !== wp_unslash( $_POST['tf_room_price'] )
+			? sanitize_text_field( wp_unslash( $_POST['tf_room_price'] ) )
+			: '';
+		$tf_room_adult_price = isset( $_POST['tf_room_adult_price'] ) && '' !== wp_unslash( $_POST['tf_room_adult_price'] )
+			? sanitize_text_field( wp_unslash( $_POST['tf_room_adult_price'] ) )
+			: '';
+		$tf_room_child_price = isset( $_POST['tf_room_child_price'] ) && '' !== wp_unslash( $_POST['tf_room_child_price'] )
+			? sanitize_text_field( wp_unslash( $_POST['tf_room_child_price'] ) )
+			: '';
 		$avail_date          = isset( $_POST['avail_date'] ) && ! empty( $_POST['avail_date'] ) ? sanitize_text_field( $_POST['avail_date'] ) : '';
 		$options_count       = isset( $_POST['options_count'] ) && '' !== $_POST['options_count'] ? intval( $_POST['options_count'] ) : 0;
 		$selected_packages   = isset( $_POST['selected_packages'] ) ? (array) wp_unslash( $_POST['selected_packages'] ) : array();
@@ -751,6 +758,12 @@ class TF_Options {
 		}
 
 
+		if ( $new_post != 'true' ) {
+			$existing_avail_data = $this->tf_safe_json_decode_assoc( $room_meta['avail_date'] ?? array() );
+		} else {
+			$existing_avail_data = $this->tf_safe_json_decode_assoc( is_array( $avail_date ) ? $avail_date : (string) $avail_date );
+		}
+
 		$room_avail_data = [];
 		for ( $i = $check_in; $i <= $check_out; $i = strtotime( '+1 day', $i ) ) {
 			$tf_room_date = gmdate( 'Y/m/d', $i );
@@ -773,9 +786,18 @@ class TF_Options {
 			            $options_data[ 'tf_room_option_' . $j ]         = isset( $_POST[ 'tf_room_option_' . $j ] ) && ! empty( $_POST[ 'tf_room_option_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_room_option_' . $j ] ) : '';
 			            $options_data[ 'tf_option_title_' . $j ]        = isset( $_POST[ 'tf_option_title_' . $j ] ) && ! empty( $_POST[ 'tf_option_title_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_title_' . $j ] ) : '';
 			            $options_data[ 'tf_option_pricing_type_' . $j ] = isset( $_POST[ 'tf_option_pricing_type_' . $j ] ) && ! empty( $_POST[ 'tf_option_pricing_type_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_pricing_type_' . $j ] ) : '';
-			            $options_data[ 'tf_option_room_price_' . $j ]   = isset( $_POST[ 'tf_option_room_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_room_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_room_price_' . $j ] ) : '';
-			            $options_data[ 'tf_option_adult_price_' . $j ]  = isset( $_POST[ 'tf_option_adult_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_adult_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_adult_price_' . $j ] ) : '';
-			            $options_data[ 'tf_option_child_price_' . $j ]  = isset( $_POST[ 'tf_option_child_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_child_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_child_price_' . $j ] ) : '';
+			            $options_data[ 'tf_option_room_price_' . $j ] = isset( $_POST[ 'tf_option_room_price_' . $j ] )
+			                && '' !== wp_unslash( $_POST[ 'tf_option_room_price_' . $j ] )
+				            ? sanitize_text_field( wp_unslash( $_POST[ 'tf_option_room_price_' . $j ] ) )
+				            : '';
+			            $options_data[ 'tf_option_adult_price_' . $j ] = isset( $_POST[ 'tf_option_adult_price_' . $j ] )
+			                && '' !== wp_unslash( $_POST[ 'tf_option_adult_price_' . $j ] )
+				            ? sanitize_text_field( wp_unslash( $_POST[ 'tf_option_adult_price_' . $j ] ) )
+				            : '';
+			            $options_data[ 'tf_option_child_price_' . $j ] = isset( $_POST[ 'tf_option_child_price_' . $j ] )
+			                && '' !== wp_unslash( $_POST[ 'tf_option_child_price_' . $j ] )
+				            ? sanitize_text_field( wp_unslash( $_POST[ 'tf_option_child_price_' . $j ] ) )
+				            : '';
 		            }
 	            }
 	            if ( ! empty( $options_data ) ) {
@@ -783,20 +805,21 @@ class TF_Options {
 	            }
             }
 
-			$room_avail_data[ $tf_room_date ] = $tf_room_data;
+			$room_avail_data[ $tf_room_date ] = Availability::merge_rule_prices(
+				$tf_room_data,
+				$existing_avail_data[ $tf_room_date ] ?? array()
+			);
 		}
 
 		if ( $new_post != 'true' ) {
-			$avail_date = $this->tf_safe_json_decode_assoc( $room_meta['avail_date'] ?? [] );
-			if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
-				$room_avail_data = array_merge( $avail_date, $room_avail_data );
+			if ( ! empty( $existing_avail_data ) ) {
+				$room_avail_data = array_merge( $existing_avail_data, $room_avail_data );
 			}
 			$room_meta['avail_date'] = wp_json_encode( $room_avail_data );
 			update_post_meta( $room_id, 'tf_room_opt', $room_meta );
 		} else {
-			$avail_date = $this->tf_safe_json_decode_assoc( is_array( $avail_date ) ? $avail_date : (string) $avail_date );
-			if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
-				$room_avail_data = array_merge( $avail_date, $room_avail_data );
+			if ( ! empty( $existing_avail_data ) ) {
+				$room_avail_data = array_merge( $existing_avail_data, $room_avail_data );
 			}
 		}
 

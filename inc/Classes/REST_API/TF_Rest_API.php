@@ -29,6 +29,11 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 		 * @author Foysal
 		 */
 		public function tf_get_tf_settings( $request ) {
+			$permission = $this->tf_settings_permission_callback( $request );
+			if ( is_wp_error( $permission ) ) {
+				return $permission;
+			}
+
 			$options           = get_option( 'tf_settings' );
 			$unserialize_array = array( 'itinerary-builder-setings', 'amenities_cats' );
 			foreach ( $unserialize_array as $item ) {
@@ -105,6 +110,24 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 			} else {
 				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.' ), array( 'status' => 403 ) );
 			}
+		}
+
+		/**
+		 * Check whether the current user can read Tourfic settings.
+		 *
+		 * @param WP_REST_Request $request REST request.
+		 * @return true|WP_Error
+		 */
+		public function tf_settings_permission_callback( WP_REST_Request $request ) {
+			if ( current_user_can( 'manage_options' ) ) {
+				return true;
+			}
+
+			return new WP_Error(
+				'rest_forbidden',
+				esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ),
+				array( 'status' => 403 )
+			);
 		}
 
 		/*
