@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, hellokhoyer,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 7.0
-Stable tag: 2.23.1
+Stable tag: 2.23.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -422,23 +422,10 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.23.1 – July 27, 2026 =
+= 2.23.2 – July 30, 2026 =
 
-- Compatibility: Added compatibility with Elementor 4.2.
-
-= 2.23.0 – Jul 07, 2026 =
-
-- Added: Pre-built Bricks template import.
-- Added: Landing page support for Bricks Builder.
-- Added: Traveler/guest details in vendor emails.
-- Added: 18+ Bricks Builder widgets with Tourfic Toolkit plugin.
-- Added: Regression tests for traveler booking and vendor email functionality.
-- Improved: Traveler booking validation, AJAX error handling, and DOB verification.
-- Improved: Translation for the default "View Details" archive card text.
-- Fixed: Tour extra pricing across checkout, booking summary, backend, and Pro vendor dashboard.
-- Fixed: Hidden location settings in TravelFic hero and search shortcodes.
-- Fixed: PHP 8 compatibility issue with malformed apartment highlight data.
-
+- Improved: System stability and security.
+ 
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 
 = 1.0.0 - 23/03/2021 =
