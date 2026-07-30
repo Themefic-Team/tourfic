@@ -61,7 +61,7 @@ if ( ! class_exists( 'TF_Booking_Rest_API' ) ) {
 				);
 
 				$orders_result = Helper::tourfic_order_table_data( $tf_orders_select );
-			} elseif ( $this->user_has_role( $current_user_id, 'tf_vendor' ) ) {
+			} elseif ( current_user_can( 'tf_vendor_options' ) ) {
 
 				$tf_orders_select = array(
 					'select'    => "*",

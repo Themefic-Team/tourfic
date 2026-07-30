@@ -135,8 +135,7 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 		 * @auther Foysal
 		 */
 		public function tf_admin_permission_callback( WP_REST_Request $request ) {
-			$current_user_id = get_current_user_id();
-			if ( is_user_logged_in() && ( $this->user_has_role( $current_user_id, 'administrator' ) || $this->user_has_role( $current_user_id, 'tf_manager' ) ) ) {
+			if ( is_user_logged_in() && ( current_user_can( 'manage_options' ) || current_user_can( 'tf_manager_options' ) ) ) {
 				return true;
 			} else {
 				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.' ), array( 'status' => 403 ) );
@@ -164,14 +163,12 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 		}
 
 		protected function tf_admin_vendor_permission_callback() {
-			$current_user_id = get_current_user_id();
-
 			if (
 				is_user_logged_in()
 				&& (
-					$this->user_has_role( $current_user_id, 'administrator' )
-					|| $this->user_has_role( $current_user_id, 'tf_manager' )
-					|| $this->user_has_role( $current_user_id, 'tf_vendor' )
+					current_user_can( 'manage_options' )
+					|| current_user_can( 'tf_manager_options' )
+					|| current_user_can( 'tf_vendor_options' )
 				)
 			) {
 				return true;
@@ -181,9 +178,7 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 		}
 
 		protected function tf_current_user_can_manage_records() {
-			$current_user_id = get_current_user_id();
-
-			return $this->user_has_role( $current_user_id, 'administrator' ) || $this->user_has_role( $current_user_id, 'tf_manager' );
+			return current_user_can( 'manage_options' ) || current_user_can( 'tf_manager_options' );
 		}
 
 		protected function tf_current_user_can_access_user( $user_id ) {
@@ -206,7 +201,7 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 		protected function tf_current_user_can_manage_vendor_record( $post_id = 0, $author_id = 0 ) {
 			$current_user_id = get_current_user_id();
 
-			if ( ! $this->user_has_role( $current_user_id, 'tf_vendor' ) ) {
+			if ( ! current_user_can( 'tf_vendor_options' ) ) {
 				return false;
 			}
 
@@ -318,7 +313,7 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 				return 0;
 			}
 
-			if ( ! is_scalar( $value ) || ! is_numeric( $value ) ) {
+			if ( ! is_scalar( $value ) || 1 !== preg_match( '/^[1-9][0-9]*$/', (string) $value ) ) {
 				return new WP_Error(
 					'tf_rest_invalid_param',
 					sprintf( esc_html__( 'Invalid %s value.', 'tourfic' ), esc_html( $param ) ),
@@ -326,16 +321,7 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 				);
 			}
 
-			$value = absint( $value );
-			if ( empty( $value ) ) {
-				return new WP_Error(
-					'tf_rest_invalid_param',
-					sprintf( esc_html__( 'Invalid %s value.', 'tourfic' ), esc_html( $param ) ),
-					array( 'status' => 400 )
-				);
-			}
-
-			return $value;
+			return absint( $value );
 		}
 
 

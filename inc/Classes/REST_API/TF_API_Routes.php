@@ -151,24 +151,22 @@ class TF_API_Routes {
 			'args'                => array(
 				'post_type'    => array(
 					'required'          => true,
+					'type'              => 'string',
 					'sanitize_callback' => 'sanitize_key',
 					'validate_callback' => function( $value ) {
 						return in_array( $value, array( 'hotel', 'tf_hotel', 'tour', 'tf_tours', 'apartment', 'tf_apartment', 'car', 'tf_carrental' ), true );
 					},
 				),
-				'post_id'      => array(
-					'sanitize_callback' => 'absint',
-					'validate_callback' => function( $value ) {
-						return '' === $value || null === $value || ( is_numeric( $value ) && absint( $value ) > 0 );
-					},
-				),
+				'post_id'      => $this->get_positive_integer_arg(),
 				'checkinout'   => array(
+					'type'              => 'string',
 					'sanitize_callback' => 'sanitize_key',
 					'validate_callback' => function( $value ) {
 						return '' === $value || null === $value || in_array( $value, array( 'in', 'out', 'not' ), true );
 					},
 				),
 				'order_status' => array(
+					'type'              => 'string',
 					'sanitize_callback' => 'sanitize_key',
 					'validate_callback' => function( $value ) {
 						return '' === $value || null === $value || in_array( $value, array( 'pending', 'processing', 'on-hold', 'completed', 'cancelled', 'refunded', 'failed', 'trash' ), true );
@@ -181,6 +179,9 @@ class TF_API_Routes {
 			'methods'             => 'GET',
 			'callback'            => array( $api, 'tf_get_order_details' ),
 			'permission_callback' => array( $api, 'tf_order_permission_callback' ),
+			'args'                => array(
+				'id' => $this->get_positive_integer_arg( true ),
+			),
 		) );
 	}
 
@@ -194,18 +195,15 @@ class TF_API_Routes {
 			'args'                => array(
 				'post_type' => array(
 					'required'          => true,
+					'type'              => 'string',
 					'sanitize_callback' => 'sanitize_key',
 					'validate_callback' => function( $value ) {
 						return in_array( $value, array( 'tf_hotel', 'tf_tours', 'tf_apartment' ), true );
 					},
 				),
-				'post_id'   => array(
-					'sanitize_callback' => 'absint',
-					'validate_callback' => function( $value ) {
-						return '' === $value || null === $value || ( is_numeric( $value ) && absint( $value ) > 0 );
-					},
-				),
+				'post_id'   => $this->get_positive_integer_arg(),
 				'filters'   => array(
+					'type'              => 'string',
 					'sanitize_callback' => 'sanitize_key',
 					'validate_callback' => function( $value ) {
 						return '' === $value || null === $value || in_array( $value, array( 'read', 'unread', 'replied', 'responded', 'not-replied', 'not-responded' ), true );
@@ -218,7 +216,25 @@ class TF_API_Routes {
 			'methods'             => 'GET',
 			'callback'            => array( $api, 'tf_get_enquiry_details' ),
 			'permission_callback' => array( $api, 'tf_enquiry_permission_callback' ),
+			'args'                => array(
+				'id' => $this->get_positive_integer_arg( true ),
+			),
 		) );
+	}
+
+	private function get_positive_integer_arg( $required = false ) {
+		return array(
+			'required'          => $required,
+			'type'              => 'integer',
+			'sanitize_callback' => 'absint',
+			'validate_callback' => function( $value ) use ( $required ) {
+				if ( '' === $value || null === $value ) {
+					return ! $required;
+				}
+
+				return is_scalar( $value ) && 1 === preg_match( '/^[1-9][0-9]*$/', (string) $value );
+			},
+		);
 	}
 
 	private function register_user_routes() {

@@ -60,7 +60,7 @@ if ( ! class_exists( 'TF_Enquiry_Rest_API' ) ) {
 
 			if ( $this->tf_current_user_can_manage_records() ) {
 				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . " ORDER BY id DESC", $values ), ARRAY_A );
-			} elseif ( $this->user_has_role( $current_user_id, 'tf_vendor' ) ) {
+			} elseif ( current_user_can( 'tf_vendor_options' ) ) {
 				$where[]  = 'author_id = %d';
 				$values[] = $current_user_id;
 				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . " ORDER BY id DESC", $values ), ARRAY_A );

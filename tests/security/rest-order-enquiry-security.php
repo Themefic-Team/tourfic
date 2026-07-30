@@ -20,8 +20,10 @@ $files = array(
 	'pro_rest'          => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Rest_API.php',
 	'pro_booking'       => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Booking_Rest_API.php',
 	'pro_enquiry'       => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Enquiry_Rest_API.php',
+	'pro_hotel'         => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Hotel_Rest_API.php',
 	'pro_hotel_booking' => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Hotel_Backend_Booking_Rest_API.php',
 	'pro_integration'   => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Integration_Rest_API.php',
+	'pro_rental'        => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Rental_Rest_API.php',
 	'pro_room'          => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Room_Rest_API.php',
 	'pro_tour_booking'  => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_Tour_Backend_Booking_Rest_API.php',
 	'pro_user'          => dirname( $root ) . '/tourfic-pro/inc/frontend-dashboard/classes/TF_FD_User_Rest_API.php',
@@ -114,6 +116,13 @@ tf_security_assert( false !== strpos( $free_routes, "'tf_hotel'" ), 'Free orders
 tf_security_assert( false !== strpos( $pro_routes, "'tf_hotel'" ), 'Pro orders route must accept documented CPT aliases.' );
 tf_security_assert( false !== strpos( $pro_routes, "'order_id'" ), 'Pro orders route must accept booking ID search filters.' );
 
+foreach ( array( 'free_routes' => $free_routes, 'pro_routes' => $pro_routes ) as $label => $source ) {
+	$body = tf_security_method_body( $source, 'get_positive_integer_arg' );
+	tf_security_assert( false !== strpos( $body, "'type'              => 'integer'" ), "{$label} numeric args must declare the integer type." );
+	tf_security_assert( false !== strpos( $body, "/^[1-9][0-9]*$/" ), "{$label} numeric args must accept positive decimal digits only." );
+	tf_security_assert( false !== strpos( $source, "'id' => \$this->get_positive_integer_arg( true )" ), "{$label} object IDs must use strict route validation." );
+}
+
 foreach ( array( 'free_rest' => 'tf_user_permission_callback', 'pro_rest' => 'tf_fd_user_permission_callback' ) as $label => $method ) {
 	$body = tf_security_method_body( tf_security_file( $files[ $label ] ), $method );
 	tf_security_assert( false !== strpos( $body, 'is_user_logged_in()' ), "{$method} must require an authenticated user." );
@@ -185,12 +194,36 @@ foreach ( array( 'free_rest' => 'tf_current_user_can_access_user', 'pro_rest' =>
 	tf_security_assert( false !== strpos( $body, 'current_user_can( \'edit_user\', $user_id )' ), "{$method} must allow users who can edit the requested user." );
 }
 
+foreach (
+	array(
+		'free_rest' => array( 'tf_admin_vendor_permission_callback', 'tf_current_user_can_manage_records', 'tf_current_user_can_manage_vendor_record' ),
+		'pro_rest'  => array( 'tf_fd_admin_vendor_permission_callback', 'tf_fd_current_user_can_manage_records', 'tf_fd_current_user_can_manage_vendor_record' ),
+	) as $label => $methods
+) {
+	$source            = tf_security_file( $files[ $label ] );
+	$permission_body   = tf_security_method_body( $source, $methods[0] );
+	$manager_body      = tf_security_method_body( $source, $methods[1] );
+	$vendor_owner_body = tf_security_method_body( $source, $methods[2] );
+
+	tf_security_assert( false !== strpos( $permission_body, "current_user_can( 'manage_options' )" ), "{$methods[0]} must use the administrator capability." );
+	tf_security_assert( false !== strpos( $permission_body, "current_user_can( 'tf_manager_options' )" ), "{$methods[0]} must use the manager capability." );
+	tf_security_assert( false !== strpos( $permission_body, "current_user_can( 'tf_vendor_options' )" ), "{$methods[0]} must use the vendor capability." );
+	tf_security_assert( false !== strpos( $manager_body, "current_user_can( 'manage_options' )" ), "{$methods[1]} must use capabilities for global record access." );
+	tf_security_assert( false !== strpos( $vendor_owner_body, "current_user_can( 'tf_vendor_options' )" ), "{$methods[2]} must require the vendor capability." );
+}
+
 foreach ( array( 'free_booking' => 'tf_get_orders', 'pro_booking' => 'tf_fd_get_orders' ) as $label => $method ) {
 	$body = tf_security_method_body( tf_security_file( $files[ $label ] ), $method );
 	tf_security_assert( false === strpos( $body, "get_param( 'user_id' )" ), "{$method} must not trust client user_id." );
 	tf_security_assert( false === strpos( $body, '$tf_filter_query' ), "{$method} must not build raw SQL filter strings." );
 	tf_security_assert( false !== strpos( $body, "'where'" ), "{$method} must pass structured filters to the order helper." );
 	tf_security_assert( false !== strpos( $body, 'normalize_order_post_type' ), "{$method} must normalize CPT aliases before querying." );
+}
+
+foreach ( array( 'free_rest' => 'tf_get_rest_absint_param', 'pro_rest' => 'tf_fd_get_rest_absint_param' ) as $label => $method ) {
+	$body = tf_security_method_body( tf_security_file( $files[ $label ] ), $method );
+	tf_security_assert( false !== strpos( $body, "/^[1-9][0-9]*$/" ), "{$method} must reject signed, decimal, and exponent numeric input." );
+	tf_security_assert( false === strpos( $body, 'is_numeric' ), "{$method} must not accept PHP's broad numeric-string grammar." );
 }
 
 $pro_orders = tf_security_method_body( tf_security_file( $files['pro_booking'] ), 'tf_fd_get_orders' );
@@ -233,6 +266,8 @@ tf_security_assert( false !== strpos( $pro_update_user, "user_args['user_pass']"
 
 $pro_update_order_status = tf_security_method_body( tf_security_file( $files['pro_booking'] ), 'tf_fd_update_order_status' );
 tf_security_assert( false !== strpos( $pro_update_order_status, 'tf_fd_current_user_can_access_order' ), 'Pro update-order-status handler must verify order ownership.' );
+tf_security_assert( false !== strpos( $pro_update_order_status, 'tf_fd_validate_allowed_param' ), 'Pro update-order-status handler must allowlist status values.' );
+tf_security_assert( false === strpos( $pro_update_order_status, 'sanitize_title( $order_status )' ), 'Pro update-order-status handler must not accept arbitrary sanitized statuses.' );
 $pro_update_visitor_details = tf_security_method_body( tf_security_file( $files['pro_booking'] ), 'tf_fd_update_visitor_details' );
 tf_security_assert( false !== strpos( $pro_update_visitor_details, 'tf_fd_current_user_can_access_order' ), 'Pro update-visitor-details handler must verify order ownership.' );
 
@@ -240,6 +275,10 @@ foreach ( array( 'tf_fd_get_payout', 'tf_fd_update_payout' ) as $method ) {
 	$body = tf_security_method_body( tf_security_file( $files['pro_vendor'] ), $method );
 	tf_security_assert( false !== strpos( $body, 'tf_fd_current_user_can_access_payout' ), "{$method} must verify payout ownership." );
 }
+
+$pro_update_payout_status = tf_security_method_body( tf_security_file( $files['pro_vendor'] ), 'tf_fd_update_payout_status' );
+tf_security_assert( false !== strpos( $pro_update_payout_status, 'tf_fd_validate_allowed_param' ), 'Pro payout status updates must allowlist status values.' );
+tf_security_assert( false === strpos( $pro_update_payout_status, 'sanitize_title( $payment_status )' ), 'Pro payout status updates must not accept arbitrary sanitized statuses.' );
 
 $pro_integration_permission = tf_security_method_body( tf_security_file( $files['pro_integration'] ), 'tf_fd_integration_permission_callback' );
 tf_security_assert( false !== strpos( $pro_integration_permission, 'tf_fd_admin_vendor_permission_callback' ), 'Pro integration permission must require dashboard admin/vendor access.' );
@@ -260,6 +299,20 @@ tf_security_assert( false !== strpos( $pro_room_list, 'tf_fd_get_dashboard_autho
 
 $pro_available_hotel = tf_security_method_body( tf_security_file( $files['pro_hotel_booking'] ), 'tf_fd_available_hotel' );
 tf_security_assert( false !== strpos( $pro_available_hotel, "tf_fd_get_dashboard_author_id( \$request, 'user_id' )" ), 'Pro available-hotel route must clamp requested user_id for non-managers.' );
+
+foreach (
+	array(
+		'pro_hotel'  => array( 'tf_fd_get_hotel_orders', 'tf_fd_get_hotel_order_details' ),
+		'pro_rental' => array( 'tf_fd_get_rental_orders', 'tf_fd_get_rental_order_details' ),
+	) as $label => $methods
+) {
+	$collection = tf_security_method_body( tf_security_file( $files[ $label ] ), $methods[0] );
+	$detail     = tf_security_method_body( tf_security_file( $files[ $label ] ), $methods[1] );
+
+	tf_security_assert( false === strpos( $collection, "get_param( 'user_id' )" ), "{$methods[0]} must not trust client user_id." );
+	tf_security_assert( false !== strpos( $collection, 'get_current_user_id()' ), "{$methods[0]} must use the authenticated user." );
+	tf_security_assert( false !== strpos( $detail, 'current_user_can_access_order' ), "{$methods[1]} must enforce order ownership." );
+}
 
 $free_helper       = tf_security_file( $files['free_helper'] );
 $pro_vendor_helper = tf_security_file( $files['pro_vendor_helper'] );
