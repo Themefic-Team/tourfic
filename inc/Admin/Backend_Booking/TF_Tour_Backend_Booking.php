@@ -185,15 +185,14 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 
 		$tour_extras_select_array = [];
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_extras ) {
-			if (
-				( ! empty( $tour_extras[0]['title'] ) && ! empty( $tour_extras[0]['desc'] ) && ! empty( $tour_extras[0]['price'] ) ) ||
-				( ! empty( $tour_extras[1]['title'] ) && ! empty( $tour_extras[1]['desc'] ) && ! empty( $tour_extras[1]['price'] ) )
-			) {
-				foreach ( $tour_extras as $extrakey => $tour_extra ) {
-					$pricetype                             = ! empty( $tour_extra['price_type'] ) ? $tour_extra['price_type'] : 'fixed';
-					$tour_extra_pricetype                  = $pricetype === "fixed" ? esc_html( "(Fixed Price)" ) : esc_html( "(Per Person Price)" );
-					$tour_extras_select_array[ $extrakey ] = $tour_extra['title'] . $tour_extra_pricetype . ' - ' . wp_strip_all_tags( wc_price( $tour_extra['price'] ) );
+			foreach ( $tour_extras as $extrakey => $tour_extra ) {
+				if ( ! Helper::tf_tour_extra_is_valid( $tour_extra ) ) {
+					continue;
 				}
+
+				$pricetype                             = ! empty( $tour_extra['price_type'] ) ? $tour_extra['price_type'] : 'fixed';
+				$tour_extra_pricetype                  = $pricetype === "fixed" ? esc_html( "(Fixed Price)" ) : esc_html( "(Per Person Price)" );
+				$tour_extras_select_array[ $extrakey ] = $tour_extra['title'] . $tour_extra_pricetype . ' - ' . wp_strip_all_tags( wc_price( $tour_extra['price'] ) );
 			}
 		}
 
@@ -634,17 +633,18 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		$tour_extra_meta      = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
 		if ( ! empty( $tour_extra_meta ) ) {
 			foreach ( $tours_extra as $extra ) {
-				$tour_extra_pricetype = ! empty( $tour_extra_meta[ $extra ]['price_type'] ) ? $tour_extra_meta[ $extra ]['price_type'] : 'fixed';
+				$tour_extra = isset( $tour_extra_meta[ $extra ] ) ? $tour_extra_meta[ $extra ] : array();
+				if ( ! Helper::tf_tour_extra_is_valid( $tour_extra ) ) {
+					continue;
+				}
+
+				$tour_extra_pricetype = ! empty( $tour_extra['price_type'] ) ? $tour_extra['price_type'] : 'fixed';
 				if ( $tour_extra_pricetype == "fixed" ) {
-					if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-						$tour_extra_total       += $tour_extra_meta[ $extra ]['price'];
-						$tour_extra_title_arr[] = $tour_extra_meta[ $extra ]['title'] . " (Fixed: " . wp_strip_all_tags( wc_price( $tour_extra_meta[ $extra ]['price'] ) ) . ")";
-					}
+					$tour_extra_total       += $tour_extra['price'];
+					$tour_extra_title_arr[] = $tour_extra['title'] . " (Fixed: " . wp_strip_all_tags( wc_price( $tour_extra['price'] ) ) . ")";
 				} else {
-					if ( ! empty( $tour_extra_meta[ $extra ]['price'] ) && ! empty( $tour_extra_meta[ $extra ]['title'] ) ) {
-						$tour_extra_total       += ( $tour_extra_meta[ $extra ]['price'] * $total_people );
-						$tour_extra_title_arr[] = $tour_extra_meta[ $extra ]['title'] . " (Per Person: " . wp_strip_all_tags( wc_price( $tour_extra_meta[ $extra ]['price'] ) ) . '*' . $total_people . "=" . wp_strip_all_tags( wc_price( $tour_extra_meta[ $extra ]['price'] * $total_people ) ) . ")";
-					}
+					$tour_extra_total       += ( $tour_extra['price'] * $total_people );
+					$tour_extra_title_arr[] = $tour_extra['title'] . " (Per Person: " . wp_strip_all_tags( wc_price( $tour_extra['price'] ) ) . '*' . $total_people . "=" . wp_strip_all_tags( wc_price( $tour_extra['price'] * $total_people ) ) . ")";
 				}
 			}
 		}

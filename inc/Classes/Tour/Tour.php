@@ -2005,6 +2005,9 @@ class Tour {
 								$tour_extras          = unserialize( $tour_extras_unserial );
 
 							}
+							$tour_extras = is_array( $tour_extras )
+								? array_filter( $tour_extras, array( Helper::class, 'tf_tour_extra_is_valid' ) )
+								: array();
 							$traveller_info_coll = function_exists( 'tf_tour_is_traveler_info_enabled' ) ? tf_tour_is_traveler_info_enabled( $meta ) : false;
 							$tf_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 							$pricing_type = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
@@ -2195,12 +2198,9 @@ class Tour {
                             <p><?php echo esc_html( $tour_popup_extra_text ); ?></p>
                             <div class="tf-booking-content-extra">
 								<?php
-								if ( ( ! empty( $tour_extras[0]['title'] ) && ! empty( $tour_extras[0]['price'] ) ) || ! empty( $tour_extras[1]['title'] ) && ! empty( $tour_extras[1]['price'] ) ) {
+								foreach ( $tour_extras as $extrakey => $tour_extra ) {
+									$tour_extra_pricetype = ! empty( $tour_extra['price_type'] ) ? $tour_extra['price_type'] : 'fixed';
 									?>
-									<?php foreach ( $tour_extras as $extrakey => $tour_extra ) {
-										if ( ! empty( $tour_extra['title'] ) && ! empty( $tour_extra['price'] ) ) {
-											$tour_extra_pricetype = ! empty( $tour_extra['price_type'] ) ? $tour_extra['price_type'] : 'fixed';
-											?>
                                             <div class="tf-single-tour-extra tour-extra-single">
                                                 <label for="extra<?php echo esc_attr( $extrakey ); ?>">
                                                     <div class="tf-extra-check-box">
@@ -2237,8 +2237,6 @@ class Tour {
                                                     </div>
 												<?php endif; ?>
                                             </div>
-										<?php }
-									} ?>
 								<?php } ?>
 
                             </div>
@@ -4698,34 +4696,33 @@ class Tour {
 			$tours_extra          = $tour_extra_selection['extras'];
 			$tour_extra_quantity  = $tour_extra_selection['quantities'];
 
-			if(!empty($tours_extra)){
+			if ( ! empty( $tours_extra ) ) {
 				foreach ( $tours_extra as $extra_key => $extra ) {
-					$tour_extra_pricetype = ! empty( $tour_extra_meta[ $extra ]['price_type'] ) ? $tour_extra_meta[ $extra ]['price_type'] : 'fixed';
+					$tour_extra = isset( $tour_extra_meta[ $extra ] ) ? $tour_extra_meta[ $extra ] : array();
+					if ( ! Helper::tf_tour_extra_is_valid( $tour_extra ) ) {
+						continue;
+					}
+
+					$tour_extra_pricetype = ! empty( $tour_extra['price_type'] ) ? $tour_extra['price_type'] : 'fixed';
 					if ( $tour_extra_pricetype == "fixed" ) {
-						if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-							$tour_extra_total       += $tour_extra_meta[ $extra ]['price'];
-							$tour_extra_title_arr[] = array(
-								'title' => $tour_extra_meta[ $extra ]['title'],
-								'price' => $tour_extra_meta[ $extra ]['price']
-							);
-						}
+						$tour_extra_total       += $tour_extra['price'];
+						$tour_extra_title_arr[] = array(
+							'title' => $tour_extra['title'],
+							'price' => $tour_extra['price']
+						);
 					} else if ( $tour_extra_pricetype == "quantity" ) {
-						if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-							$extra_quantity          = isset( $tour_extra_quantity[ $extra_key ] ) ? max( 0, intval( $tour_extra_quantity[ $extra_key ] ) ) : 0;
-							$tour_extra_total       += $tour_extra_meta[ $extra ]['price'] * $extra_quantity;
-							$tour_extra_title_arr[] = array(
-								'title' => $tour_extra_meta[ $extra ]['title'] . " x " . $extra_quantity,
-								'price' => $tour_extra_meta[ $extra ]['price'] * $extra_quantity
-							);
-						}
+						$extra_quantity          = isset( $tour_extra_quantity[ $extra_key ] ) ? max( 0, intval( $tour_extra_quantity[ $extra_key ] ) ) : 0;
+						$tour_extra_total       += $tour_extra['price'] * $extra_quantity;
+						$tour_extra_title_arr[] = array(
+							'title' => $tour_extra['title'] . " x " . $extra_quantity,
+							'price' => $tour_extra['price'] * $extra_quantity
+						);
 					} else {
-						if ( ! empty( $tour_extra_meta[ $extra ]['price'] ) && ! empty( $tour_extra_meta[ $extra ]['title'] ) ) {
-							$tour_extra_total       += ( $tour_extra_meta[ $extra ]['price'] * $total_people );
-							$tour_extra_title_arr[] = array(
-								'title' => $tour_extra_meta[ $extra ]['title'],
-								'price' => $tour_extra_meta[ $extra ]['price'] * $total_people
-							);
-						}
+						$tour_extra_total       += ( $tour_extra['price'] * $total_people );
+						$tour_extra_title_arr[] = array(
+							'title' => $tour_extra['title'],
+							'price' => $tour_extra['price'] * $total_people
+						);
 					}
 				}
 				$tour_extra_total = max( 0, $tour_extra_total );
@@ -5098,7 +5095,7 @@ class Tour {
 			}
 			if ( ! empty( $tour_extra_title_arr ) ) {
 				foreach ( $tour_extra_title_arr as $extra_info ) {
-					if ( ! empty( $extra_info['title'] ) && ! empty( $extra_info['price'] ) ) {
+					if ( Helper::tf_tour_extra_is_valid( $extra_info ) ) {
 						$response['traveller_summery'] .= '<tr>
 						<td align="left">' . esc_html( $extra_info['title'] ) . '</td>
 						<td align="right">' . wc_price( $extra_info['price'] ) . '</td>

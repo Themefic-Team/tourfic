@@ -545,6 +545,25 @@ class Helper {
 	}
 
 	/**
+	 * Check whether a tour extra has the values required for booking.
+	 *
+	 * @param mixed $tour_extra Tour extra configuration.
+	 * @return bool
+	 */
+	static function tf_tour_extra_is_valid( $tour_extra ) {
+		if (
+			! is_array( $tour_extra ) ||
+			empty( $tour_extra['title'] ) ||
+			! array_key_exists( 'price', $tour_extra ) ||
+			! is_numeric( $tour_extra['price'] )
+		) {
+			return false;
+		}
+
+		return 0 <= (float) $tour_extra['price'];
+	}
+
+	/**
 	 * Sanitize selected tour extra IDs and aligned quantities.
 	 *
 	 * @param string|array $extras     Selected extra IDs.

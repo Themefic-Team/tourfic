@@ -444,24 +444,23 @@ function tf_tours_booking_function() {
 		$tours_extra          = $tour_extra_selection['extras'];
 		$tour_extra_quantity  = $tour_extra_selection['quantities'];
 
-		foreach($tours_extra as $extra_key => $extra){
-			$tour_extra_pricetype = !empty( $tour_extra_meta[$extra]['price_type'] ) ? $tour_extra_meta[$extra]['price_type'] : 'fixed';
-			if( $tour_extra_pricetype=="fixed" ){
-				if(!empty($tour_extra_meta[$extra]['title']) && !empty($tour_extra_meta[$extra]['price'])){
-					$tour_extra_total += $tour_extra_meta[$extra]['price'];
-					$tour_extra_title_arr[] =  $tour_extra_meta[$extra]['title']." (Fixed: ".wc_price($tour_extra_meta[$extra]['price']).")";
-				}
-			} else if($tour_extra_pricetype == "quantity") {
-				if(!empty($tour_extra_meta[$extra]['title']) && !empty($tour_extra_meta[$extra]['price'])){
-					$extra_quantity = isset( $tour_extra_quantity[$extra_key] ) ? max( 0, intval( $tour_extra_quantity[$extra_key] ) ) : 0;
-					$tour_extra_total += $tour_extra_meta[$extra]['price'] * $extra_quantity;
-					$tour_extra_title_arr[] = $tour_extra_meta[$extra]['title']." (Per Unit: ".wc_price($tour_extra_meta[$extra]['price']).'*'.$extra_quantity."=".wc_price($tour_extra_meta[$extra]['price']*$extra_quantity).")";
-				}
-			}else{
-				if(!empty($tour_extra_meta[$extra]['price']) && !empty($tour_extra_meta[$extra]['title'])){
-					$tour_extra_total += ($tour_extra_meta[$extra]['price']*$total_people);
-					$tour_extra_title_arr[] =  $tour_extra_meta[$extra]['title']." (Per Person: ".wc_price($tour_extra_meta[$extra]['price']).'*'.$total_people."=".wc_price($tour_extra_meta[$extra]['price']*$total_people).")";
-				}
+		foreach ( $tours_extra as $extra_key => $extra ) {
+			$tour_extra = isset( $tour_extra_meta[ $extra ] ) ? $tour_extra_meta[ $extra ] : array();
+			if ( ! Helper::tf_tour_extra_is_valid( $tour_extra ) ) {
+				continue;
+			}
+
+			$tour_extra_pricetype = ! empty( $tour_extra['price_type'] ) ? $tour_extra['price_type'] : 'fixed';
+			if ( "fixed" == $tour_extra_pricetype ) {
+				$tour_extra_total       += $tour_extra['price'];
+				$tour_extra_title_arr[] = $tour_extra['title'] . " (Fixed: " . wc_price( $tour_extra['price'] ) . ")";
+			} else if ( "quantity" == $tour_extra_pricetype ) {
+				$extra_quantity         = isset( $tour_extra_quantity[ $extra_key ] ) ? max( 0, intval( $tour_extra_quantity[$extra_key] ) ) : 0;
+				$tour_extra_total       += $tour_extra['price'] * $extra_quantity;
+				$tour_extra_title_arr[] = $tour_extra['title'] . " (Per Unit: " . wc_price( $tour_extra['price'] ) . '*' . $extra_quantity . "=" . wc_price( $tour_extra['price'] * $extra_quantity ) . ")";
+			} else {
+				$tour_extra_total       += ( $tour_extra['price'] * $total_people );
+				$tour_extra_title_arr[] = $tour_extra['title'] . " (Per Person: " . wc_price( $tour_extra['price'] ) . '*' . $total_people . "=" . wc_price( $tour_extra['price'] * $total_people ) . ")";
 			}
 		}
 
