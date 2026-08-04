@@ -81,6 +81,9 @@ function tf_hotel_booking_callback() {
 	if ( ! $check_out ) {
 		$response['errors'][] = esc_html__( 'Check-out date missing.', 'tourfic' );
 	}
+	if ( $check_in && $check_out && ! tf_is_valid_accommodation_date_range( $check_in, $check_out ) ) {
+		$response['errors'][] = esc_html__( 'Check-out date must be at least one day after check-in.', 'tourfic' );
+	}
 	if ( ! $adult ) {
 		$response['errors'][] = esc_html__( 'Select Adult(s).', 'tourfic' );
 	}

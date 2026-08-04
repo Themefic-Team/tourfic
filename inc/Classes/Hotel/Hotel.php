@@ -2680,12 +2680,18 @@ class Hotel {
 		$room_selected = ! empty( $_GET['room'] ) ? absint( wp_unslash( $_GET['room'] ) ) : 1;
 		// Check-in & out date
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : '';
-		if ( empty( $check_in_out ) ) {
-			$hotel_current_timestamp = current_time( 'timestamp' );
-			$hotel_default_check_in  = wp_date( 'Y/m/d', $hotel_current_timestamp );
-			$hotel_default_check_out = wp_date( 'Y/m/d', strtotime( '+1 day', $hotel_current_timestamp ) );
-			$check_in_out            = $hotel_default_check_in . ' - ' . $hotel_default_check_out;
+		$check_in_out_dates = tf_split_date_range( $check_in_out, false );
+		$default_check_in   = tf_parse_accommodation_date( $check_in_out_dates[0] );
+		$default_check_out  = tf_parse_accommodation_date( $check_in_out_dates[1] );
+
+		if ( ! $default_check_in instanceof \DateTimeImmutable ) {
+			$default_check_in = new \DateTimeImmutable( 'today', wp_timezone() );
 		}
+		if ( ! $default_check_out instanceof \DateTimeImmutable || $default_check_out <= $default_check_in ) {
+			$default_check_out = $default_check_in->modify( '+1 day' );
+		}
+
+		$check_in_out = $default_check_in->format( 'Y/m/d' ) . ' - ' . $default_check_out->format( 'Y/m/d' );
 		//get features
 		$features = ! empty( $_GET['features'] ) ? sanitize_text_field( $_GET['features'] ) : '';
 
@@ -2847,9 +2853,9 @@ class Hotel {
             </form>
 		<?php } elseif ( $tf_hotel_selected_template == "design-2" ) { ?>
 			<?php
-			$check_in_out_dates = ! empty( $check_in_out ) ? tf_split_date_range( $check_in_out ) : [];
-			$default_check_in_date = ! empty( $check_in_out_dates[0] ) ? \DateTime::createFromFormat( 'Y/m/d', $check_in_out_dates[0] ) : null;
-			$default_check_out_date = ! empty( $check_in_out_dates[1] ) ? \DateTime::createFromFormat( 'Y/m/d', $check_in_out_dates[1] ) : null;
+			$check_in_out_dates    = tf_split_date_range( $check_in_out, false );
+			$default_check_in_date  = tf_parse_accommodation_date( $check_in_out_dates[0] );
+			$default_check_out_date = tf_parse_accommodation_date( $check_in_out_dates[1] );
 			?>
 			<div class="tf-archive-booking-form__style-2">
             <form id="tf-single-hotel-avail" class="tf-booking-form" method="get" autocomplete="off">
@@ -2858,10 +2864,10 @@ class Hotel {
                     <div class="tf-booking-form-checkin">
                         <span class="tf-booking-form-title"><?php esc_html_e( "Check in", "tourfic" ); ?></span>
                         <div class="tf-booking-date-wrap">
-                            <span class="tf-booking-date"><?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'd' ) ) : esc_html__( '00', 'tourfic' ); ?></span>
+                            <span class="tf-booking-date"><?php echo esc_html( $default_check_in_date->format( 'd' ) ); ?></span>
                             <span class="tf-booking-month">
 								<span>
-									<?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'M' ) ) : esc_html( wp_date( 'M' ) ); ?>
+									<?php echo esc_html( $default_check_in_date->format( 'M' ) ); ?>
 								</span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
@@ -2874,9 +2880,9 @@ class Hotel {
                     <div class="tf-booking-form-checkout">
                         <span class="tf-booking-form-title"><?php esc_html_e( "Check out", "tourfic" ); ?></span>
                         <div class="tf-booking-date-wrap">
-                            <span class="tf-booking-date"><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'd' ) ) : esc_html__( '00', 'tourfic' ); ?></span>
+                            <span class="tf-booking-date"><?php echo esc_html( $default_check_out_date->format( 'd' ) ); ?></span>
                             <span class="tf-booking-month">
-								<span><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'M' ) ) : esc_html( wp_date( 'M' ) ); ?></span>
+								<span><?php echo esc_html( $default_check_out_date->format( 'M' ) ); ?></span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 								</svg>

@@ -77,6 +77,13 @@ function tf_apartment_get_booking_validation_errors( $post_id, $adults, $childre
 	if ( empty( $date_parts[1] ) ) {
 		$errors[] = esc_html__( 'Check-out date missing.', 'tourfic' );
 	}
+	if (
+		! empty( $date_parts[0] )
+		&& ! empty( $date_parts[1] )
+		&& ! tf_is_valid_accommodation_date_range( $date_parts[0], $date_parts[1] )
+	) {
+		$errors[] = esc_html__( 'Check-out date must be at least one day after check-in.', 'tourfic' );
+	}
 	if ( empty( $adults ) ) {
 		$errors[] = esc_html__( 'Select Adult(s).', 'tourfic' );
 	}

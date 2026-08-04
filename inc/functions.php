@@ -1451,6 +1451,50 @@ if ( ! function_exists( 'tf_split_date_range' ) ) {
 	}
 }
 
+if ( ! function_exists( 'tf_parse_accommodation_date' ) ) {
+	/**
+	 * Parse an accommodation date using the configured or canonical format.
+	 *
+	 * @param string $date_string Date string to parse.
+	 * @return DateTimeImmutable|null
+	 */
+	function tf_parse_accommodation_date( $date_string ) {
+		$date_string = sanitize_text_field( (string) $date_string );
+		$date_format = function_exists( 'tf_tour_get_user_date_format' ) ? tf_tour_get_user_date_format() : 'Y/m/d';
+		$formats     = array_unique( array( $date_format, 'Y/m/d', 'Y-m-d', 'Y.m.d' ) );
+
+		foreach ( $formats as $format ) {
+			$date     = DateTimeImmutable::createFromFormat( '!' . $format, $date_string, wp_timezone() );
+			$errors   = DateTimeImmutable::getLastErrors();
+			$is_valid = false === $errors || ( 0 === $errors['warning_count'] && 0 === $errors['error_count'] );
+
+			if ( $date instanceof DateTimeImmutable && $is_valid && $date_string === $date->format( $format ) ) {
+				return $date;
+			}
+		}
+
+		return null;
+	}
+}
+
+if ( ! function_exists( 'tf_is_valid_accommodation_date_range' ) ) {
+	/**
+	 * Check that an accommodation checkout is after its check-in date.
+	 *
+	 * @param string $check_in  Check-in date.
+	 * @param string $check_out Check-out date.
+	 * @return bool
+	 */
+	function tf_is_valid_accommodation_date_range( $check_in, $check_out ) {
+		$check_in_date  = tf_parse_accommodation_date( $check_in );
+		$check_out_date = tf_parse_accommodation_date( $check_out );
+
+		return $check_in_date instanceof DateTimeImmutable
+			&& $check_out_date instanceof DateTimeImmutable
+			&& $check_out_date > $check_in_date;
+	}
+}
+
 if(!function_exists('tf_convert_date_format')) {
 	function tf_convert_date_format( $date, $currentFormat ) {
 		$dateTime = DateTime::createFromFormat( $currentFormat, $date );
