@@ -86,16 +86,14 @@ abstract Class TF_Booking_Details {
 					$tf_order_filters['ostatus'] = $tf_payment_perms;
 				}
 
-				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				if ( isset( $_GET['paged'] ) ) {
+					$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) );
+				} else {
+					$paged = 1;
+				}
 
-					if ( isset( $_GET['paged'] ) ) {
-						$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) );
-					} else {
-						$paged = 1;
-					}
-
-					$no_of_booking_per_page = 15;
-					$offset                 = ( $paged - 1 ) * $no_of_booking_per_page;
+				$no_of_booking_per_page = 15;
+				$offset                 = ( $paged - 1 ) * $no_of_booking_per_page;
 
 					$tf_booking_details_select = array(
 						'select'    => "*",
@@ -122,22 +120,6 @@ abstract Class TF_Booking_Details {
 					);
 
 					$tf_order_details_result = Helper::tourfic_order_table_data( $tf_orders_select );
-
-				} else {
-					$tf_orders_select        = array(
-						'select'    => "*",
-						'post_type' => $booking_type,
-						'where'     => $tf_order_filters,
-						'orderby'   => 'id',
-						'order'     => 'DESC',
-						'limit'     => array(
-							'offset'   => 0,
-							'per_page' => 15,
-						),
-					);
-					$tf_order_details_result = Helper::tourfic_order_table_data( $tf_orders_select );
-                    $total_pages = 1;
-				}
 			?>
             <div class="wrap tf_booking_details_wrap" style="margin-right: 20px;">
                 <div id="tf-booking-status-loader">
@@ -151,7 +133,7 @@ abstract Class TF_Booking_Details {
                     <div class="tf_header_wrap_button">
                         <?php
                         $_tf_integration_settings = get_option( '_tf_integration_settings' ) ? get_option( '_tf_integration_settings' ) : array();
-                        if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($_tf_integration_settings['google_calendar']['tf_google_calendar']['refresh_token']) && !empty( Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1" ){ ?>
+                        if ( !empty($_tf_integration_settings['google_calendar']['tf_google_calendar']['refresh_token']) && !empty( Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1" ){ ?>
                         <div class="tf-google-sync-button">
                             <button class="tf-google-calendar-sync" data-bookingtype="<?php echo esc_attr($this->booking_args["booking_type"]); ?>"><?php esc_html_e("Sync Booking", "tourfic"); ?></button>
                         </div>
@@ -497,15 +479,6 @@ abstract Class TF_Booking_Details {
                         </td>
                     </tr>
 					<?php
-					if ( ! defined( 'TF_PRO' ) && $tf_key == 15 ) { ?>
-                        <tr class="pro-row" style="text-align: center; background-color: #ededf8">
-                            <td colspan="8" style="text-align: center;">
-                                <a href="https://tourfic.com/" target="_blank">
-                                    <h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;"><?php esc_html_e( 'Upgrade to Pro Version to See More', 'tourfic' ); ?></h3>
-                                </a>
-                            </td>
-                        </tr>
-					<?php }
 					$tf_key ++;
 				} ?>
                 </tbody>
@@ -513,8 +486,7 @@ abstract Class TF_Booking_Details {
                     <tr>
                         <th colspan="8">
                             <ul class="tf-booking-details-pagination">
-                                <?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
-                                    <?php if ( ! empty( $paged ) && $paged >= 2 ) { ?>
+	                                <?php if ( ! empty( $paged ) && $paged >= 2 ) { ?>
                                         <li><a href="<?php echo esc_url($this->tf_booking_details_pagination( $paged - 1 )); ?>">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                                     <path d="M15.8333 10.0001H4.16663M4.16663 10.0001L9.99996 15.8334M4.16663 10.0001L9.99996 4.16675" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round"
@@ -543,8 +515,7 @@ abstract Class TF_Booking_Details {
                                                 </svg>
                                             </a></li>
                                     <?php } ?>
-                                <?php endif; ?>
-                            </ul>
+	                        </ul>
                         </th>
                     </tr>
                 </tfoot>
@@ -1019,7 +990,7 @@ abstract Class TF_Booking_Details {
 	                    $tf_visitors_details = !empty($tf_tour_details->visitor_details) ? json_decode($tf_tour_details->visitor_details) : '';
 	                    $traveler_fields = !empty(Helper::tfopt('without-payment-field')) ? Helper::tf_data_types(Helper::tfopt('without-payment-field')) : '';
 	                    $tf_show_tour_visitor_details = $tf_order_details->post_type == 'tour' && ( ! empty( $tf_visitors_details ) || ( function_exists( 'tf_tour_is_global_traveler_info_enabled' ) && tf_tour_is_global_traveler_info_enabled() ) );
-	                    $tf_show_visitor_details = ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tf_show_tour_visitor_details ) || $tf_order_details->post_type == 'hotel';
+	                    $tf_show_visitor_details = ( $tf_show_tour_visitor_details ) || $tf_order_details->post_type == 'hotel';
 	                    if ( $tf_show_visitor_details ) { ?>
 	                    <!-- Visitor Details -->
 	                    <div class="customers-order-date details-box">
@@ -1115,11 +1086,7 @@ abstract Class TF_Booking_Details {
                     <?php $this->check_in_out_status( $tf_order_details ); ?>
                     
                     <!-- Voucher details -->
-                    <?php 
-                    if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-                        $this->voucher_details( $tf_tour_details, $tf_order_details, $tf_billing_details );
-                    }
-                    ?>
+					<?php $this->voucher_details( $tf_tour_details, $tf_order_details, $tf_billing_details ); ?>
 
                 </div>
                 <div class="tf-booking-actions">

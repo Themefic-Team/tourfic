@@ -40,7 +40,7 @@ class Cancelation_Policy {
 		$post_id                  = get_the_ID();
 		$meta                     = get_post_meta( $post_id, 'tf_room_opt', true );
 		$cancelation_policy_title = ! empty( $meta['cancelation-section-title'] ) ? esc_html( $meta['cancelation-section-title'] ) : esc_html__( 'Cancelation Policy', 'tourfic' );
-		$cancelation_policy       = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['calcellation_policy'] ) ? (array) $meta['calcellation_policy'] : [];
+		$cancelation_policy       = ! empty( $meta['calcellation_policy'] ) ? (array) $meta['calcellation_policy'] : [];
 
 		if ( empty( $cancelation_policy ) ) {
 			return;
@@ -66,7 +66,7 @@ class Cancelation_Policy {
 											echo esc_html( $policy['refund_amount'] ) . '% ' . esc_html__( 'Deduction', 'tourfic' );
 										}
 										if ( ! empty( $policy['refund_amount'] ) && 'fixed' === $policy['refund_amount_type'] ) {
-											echo wc_price( $policy['refund_amount'] ) . ' ' . esc_html__( 'Deduction', 'tourfic' );
+											echo wp_kses_post( wc_price( $policy['refund_amount'] ) ) . ' ' . esc_html__( 'Deduction', 'tourfic' );
 										}
 									}
 									?>

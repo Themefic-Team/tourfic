@@ -10,9 +10,9 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Tour\Tour_Price;
 use \Tourfic\App\Wishlist;
 
-if(wp_is_block_theme()){
+if(tf_is_block_theme()){
     wp_head();
-    block_header_area();
+    tf_render_block_header_area();
 }else{
     get_header();
 }
@@ -151,7 +151,7 @@ while ( have_posts() ) : the_post();
 	$phone         = ! empty( $meta['phone'] ) ? $meta['phone'] : '';
 	$fax           = ! empty( $meta['fax'] ) ? $meta['fax'] : '';
 	$website       = ! empty( $meta['website'] ) ? $meta['website'] : '';
-	$itinerary_map = ! empty( Helper::tfopt('itinerary_map') ) && function_exists('is_tf_pro') && is_tf_pro() ? Helper::tfopt('itinerary_map') : 0;
+	$itinerary_map = ! empty( Helper::tfopt( 'itinerary_map' ) ) ? Helper::tfopt( 'itinerary_map' ) : 0;
 	$vendor_contact_info = !empty(Helper::tfopt("multi-vendor-setings")["vendor-contact-info"]) ? Helper::tfopt("multi-vendor-setings")["vendor-contact-info"] : 0;
 	$author = !empty(get_userdata( get_post()->post_author )) ? get_userdata( get_post()->post_author) : array();
 
@@ -265,9 +265,9 @@ while ( have_posts() ) : the_post();
 	?>
 <?php
 endwhile;
-if(wp_is_block_theme()){
+if(tf_is_block_theme()){
     wp_footer();
-    block_footer_area();
+    tf_render_block_footer_area();
  }else{
 	get_footer();
 }

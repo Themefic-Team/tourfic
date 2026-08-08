@@ -74,14 +74,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 						),
 						'field_width' => 33.33,
 					),
-					array(
-						'id'      => 'tf-pro-notice',
-						'type'    => 'notice',
-						'class'   => 'tf-pro-notice',
-						'notice'  => 'info',
-						'icon'    => 'ri-information-fill',
-						'content' => wp_kses_post( __( 'We\'re offering some extra booking features like <b>tour time</b> and <b>tour extra features</b> in our pro plan. <a href="https://tourfic.com/" target="_blank"> Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
-					),
 				),
 			),
 		);
@@ -119,11 +111,8 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			'field_width' => 50,
 		);
 
-		if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			array_pop( $this->settings['tf_booking_fields']['fields']);
-			array_push( $this->settings['tf_booking_fields']['fields'], $tf_tour_time );
-			array_push( $this->settings['tf_booking_fields']['fields'], $tf_tour_extras );array_push( $this->settings['tf_booking_fields']['fields'], $tf_tour_packages );
-		}
+		array_push( $this->settings['tf_booking_fields']['fields'], $tf_tour_time );
+		array_push( $this->settings['tf_booking_fields']['fields'], $tf_tour_extras );array_push( $this->settings['tf_booking_fields']['fields'], $tf_tour_packages );
 
 
 		$this->set_settings( $this->settings);
@@ -184,7 +173,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		$tf_tour_selected_template = $tf_tour_selected_check;
 
 		$tour_extras_select_array = [];
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_extras ) {
+		if ( $tour_extras ) {
 			if (
 				( ! empty( $tour_extras[0]['title'] ) && ! empty( $tour_extras[0]['desc'] ) && ! empty( $tour_extras[0]['price'] ) ) ||
 				( ! empty( $tour_extras[1]['title'] ) && ! empty( $tour_extras[1]['desc'] ) && ! empty( $tour_extras[1]['price'] ) )
@@ -375,7 +364,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			);
 			if ( ! array_key_exists( 'errors', $res['response'] ) || count( $res['response']['errors'] ) == 0 ) {
 				$order_id = Helper::tf_set_order( $order_data );
-				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $order_id ) ) {
+				if ( ! empty( $order_id ) ) {
 					do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
 				}
 
@@ -420,20 +409,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		$tour_extra_selection = Helper::tf_sanitize_tour_extra_selection( $tours_extra );
 		$tours_extra          = $tour_extra_selection['extras'];
 
-		/**
-		 * If fixed is selected but pro is not activated
-		 * show error
-		 * @return
-		 */
-		if ( $tour_type == 'fixed' && function_exists( 'is_tf_pro' ) && ! is_tf_pro() ) {
-			$response['errors'][] = esc_html__( 'Fixed Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
-			$response['status']   = 'error';
-			echo wp_json_encode( $response );
-			die();
-
-			return;
-		}
-
 		$tour_availability = '';
 		if ( ! empty( $meta['tour_availability'] ) ) {
 			if ( is_array( $meta['tour_availability'] ) ) {
@@ -455,7 +430,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			$tf_tour_booking_limit = ! empty( $matched_availability['max_capacity'] ) ? $matched_availability['max_capacity'] : 0;
 
 			// Fixed tour maximum capacity limit
-			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $start_date ) && ! empty( $end_date ) ) {
+			if ( ! empty( $start_date ) && ! empty( $end_date ) ) {
 
 				// Tour Order retrieve from Tourfic Order Table
 				$tf_orders_select    = array(
@@ -606,23 +581,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			}
 
 		}
-
-		/**
-		 * If continuous custom availability is selected but pro is not activated
-		 *
-		 * Show error
-		 *
-		 * @return
-		 */
-		if ( $tour_type == 'continuous' && function_exists( 'is_tf_pro' ) && ! is_tf_pro() ) {
-			$response['errors'][] = esc_html__( 'Custom Continous Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
-			$response['status']   = 'error';
-			echo wp_json_encode( $response );
-			die();
-
-			return;
-		}
-
 
 		if ( $tour_type == 'continuous' ) {
 			$start_date = $end_date = $tour_date;
@@ -945,7 +903,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			}
 		}
 
-		if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_type == 'continuous' && !empty($allowed_times_field['time']) ) {
+		if ( $tour_type == 'continuous' && !empty($allowed_times_field['time']) ) {
 			$has_valid_time = !empty(array_filter($allowed_times_field['time'], function($t) {
 				return trim($t) !== '';
 			}));

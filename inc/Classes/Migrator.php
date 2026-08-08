@@ -908,29 +908,6 @@ class Migrator {
 			update_option( 'tf_migrate_data_204_210_2022', 2 );
 		}
 
-
-		if ( empty( get_option( 'tf_license_data_migrate_data_204_210_2022' ) ) ) {
-
-			/** License Migrate */
-
-			$old_setting_option = get_option( 'tourfic_opt' );
-			if ( ! empty( $old_setting_option['license-key'] ) && ! empty( $old_setting_option['license-email'] ) ) {
-				$tf_settings['license-key']   = $old_setting_option['license-key'];
-				$tf_settings['license-email'] = $old_setting_option['license-email'];
-				update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
-			} else {
-				$tf_setting_option            = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
-				$tf_settings['license-key']   = ! empty( $tf_setting_option['license-key'] ) ? $tf_setting_option['license-key'] : '';
-				$tf_settings['license-email'] = ! empty( $tf_setting_option['license-email'] ) ? $tf_setting_option['license-email'] : '';
-				update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
-			}
-
-			wp_cache_flush();
-			flush_rewrite_rules( true );
-			update_option( 'tf_license_data_migrate_data_204_210_2022', 2 );
-		}
-
-
 	}
 
 	function tf_admin_order_data_migration() {
@@ -1387,21 +1364,20 @@ class Migrator {
 
 	private function add_enquiry_new_columns() {
 		global $wpdb;
-		$enquiry_table = $wpdb->prefix . 'tf_enquiry_data';
 
-		$columns = $wpdb->get_results("SHOW COLUMNS FROM $enquiry_table", ARRAY_A);
-    	$existing_columns = wp_list_pluck($columns, 'Field');
+		$columns          = $wpdb->get_results( "SHOW COLUMNS FROM {$wpdb->prefix}tf_enquiry_data", ARRAY_A );
+		$existing_columns = wp_list_pluck( $columns, 'Field' );
 
 		if (!in_array('enquiry_status', $existing_columns)) {
-			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `enquiry_status` VARCHAR(255) NOT NULL DEFAULT 'read' AFTER `author_roles`");
+			$wpdb->query( "ALTER TABLE {$wpdb->prefix}tf_enquiry_data ADD COLUMN `enquiry_status` VARCHAR(255) NOT NULL DEFAULT 'read' AFTER `author_roles`" );
 		}
 
 		if (!in_array('server_data', $existing_columns)) {
-			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `server_data` VARCHAR(255) NOT NULL DEFAULT '' AFTER `enquiry_status`");
+			$wpdb->query( "ALTER TABLE {$wpdb->prefix}tf_enquiry_data ADD COLUMN `server_data` VARCHAR(255) NOT NULL DEFAULT '' AFTER `enquiry_status`" );
 		}
 		
 		if (!in_array('reply_data', $existing_columns)) {
-			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `reply_data` LONGTEXT NOT NULL DEFAULT '' AFTER `server_data`");
+			$wpdb->query( "ALTER TABLE {$wpdb->prefix}tf_enquiry_data ADD COLUMN `reply_data` LONGTEXT NOT NULL DEFAULT '' AFTER `server_data`" );
 		}
 	}
 

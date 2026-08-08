@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, hellokhoyer,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 7.0
-Stable tag: 2.23.2
+Stable tag: 2.23.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -14,7 +14,7 @@ Hotel, Car Rental & Tour Booking WordPress plugin. Build a website like Booking.
 
 ## HOTEL BOOKING, TRAVEL BOOKING, CAR RENTAL, TOUR BOOKING & VACATION RENTAL PLUGIN FOR WORDPRESS – TOURFIC
 
-Unlock all features with [Tourfic Pro](https://tourfic.com/pricing/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=pro_link)
+[Tourfic Pro](https://tourfic.com/pricing/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=pro_link) is a separate companion plugin with additional features.
 
 👉 Our Official Website: [Click Here](https://tourfic.com/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=website)
 👉 Live Demo Link: [Click Here](https://tourfic-demo.themefic.com/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=demo_link)
@@ -39,7 +39,7 @@ Our team has released two dedicated WordPress themes, [Travelfic & Hotel Booking
 * Reserve a Single Room
 * House Rules Setup
 * Add Unlimited Hotels
-* Add Unlimited Rooms (Up to 5 on Free Version)
+* Add Unlimited Rooms
 * Set room price per Room
 * Room Availability Options
 * Room Inventory Management
@@ -59,7 +59,7 @@ Our team has released two dedicated WordPress themes, [Travelfic & Hotel Booking
 * Advanced Room Inventory Management (Pro)
 * Advanced / Partial Payment (Pro)
 * Dynamic Location Search based Google Maps (Pro)
-* Airport Pickup & Dropoff Service (Pro)
+* Airport Pickup & Dropoff Service
 * iCal Two Way sync (Booking.com) (Pro)
 * Show Hotel Location on Map with Popup (coming soon)
 
@@ -214,20 +214,20 @@ In short, Tourfic includes all the features for a multi-vendor hotel, travel, ap
 * Added: Elementor and Bricks Builder support for single Car pages.
 
 = 🎉  MISCELLANEOUS =
-* Email piping for customer inquiries
+* Compatible with the separately installed Tourfic Email Piping add-on
 * Compatible with Woocommerce Tax settings
 * Complete Style Panel
 * Easy to use Option Panel
 * Disable Hotel, Tour, Apartment Features Completely
 * Change Permalinks of Hotel, Tour, Apartment
 * Shortcodes & Elementor Widgets
-* Speed Optimization (Minification of Tourfic CSS, JS & Use of CDN service for 3rd Party asset files) (Pro)
+* Speed Optimization through CSS and JavaScript minification
 
 In short, Tourfic is a WordPress tour booking plugin designed for hotel booking, tour operators, and travel agency websites.
 
-**Pro Version**
+**Separate Pro Companion**
 
-We believe the free version meets the needs of most businesses. However, we have a **Pro version** with more advanced features.
+We believe the free version meets the needs of most businesses. A separate **Tourfic Pro** companion plugin is available from our website with additional features.
 
 > Upscale your Travel Business with Advanced Features of [Tourfic Pro](https://tourfic.com/pricing/).
 
@@ -306,29 +306,72 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == External Services ==
 
-Google Maps (maps.google.com)
-Use: Display interactive maps on listing and single pages.
-Data sent & when: Location address and/or latitude/longitude are sent when a map is displayed.
-Terms: https://maps.google.com/help/terms_maps
+Google Maps Platform (maps.googleapis.com)
+Use: Display interactive maps and provide location search when the site administrator selects Google Maps and supplies an API key.
+Data sent & when: Map coordinates, location searches, the visitor or administrator IP address, browser details, and the current/referring page may be sent when a Google map or location search is loaded.
+Terms: https://cloud.google.com/maps-platform/terms
 Privacy: https://policies.google.com/privacy
 
-OpenStreetMap Tiles (openstreetmap.org)
-Use: Alternative map tiles for displaying maps on listing and single pages.
-Data sent & when: Location address and/or latitude/longitude are used when a map is displayed.
+OpenStreetMap Tiles (tile.openstreetmap.org)
+Use: Display the default map tiles on listing, single, and administration pages.
+Data sent & when: Requested tile coordinates, the visitor or administrator IP address, browser details, and the current/referring page may be sent when a map is displayed.
 Terms: https://wiki.osmfoundation.org/wiki/Terms_of_Use
-Privacy: https://wiki.osmfoundation.org/wiki/Privacy_Policy
+Privacy: https://osmfoundation.org/wiki/Privacy_Policy
 
-QuickChart (quickchart.io)
-Use: Generate QR codes for booking details.
-Data sent & when: Booking URL or identifier is sent when generating a QR code image.
-Terms: https://quickchart.io/terms/
-Privacy: https://quickchart.io/privacy/
+OpenStreetMap Nominatim (nominatim.openstreetmap.org)
+Use: Search for locations and reverse-geocode selected coordinates in Tourfic administration screens.
+Data sent & when: The location text or selected latitude/longitude, administrator IP address, browser details, and the current/referring page are sent when an administrator searches for or selects a location.
+Terms and usage policy: https://operations.osmfoundation.org/policies/nominatim/
+Privacy: https://osmfoundation.org/wiki/Privacy_Policy
 
-Themefic API (api.themefic.com)
-Use: Show promotional notices and retrieve plugin-related information.
-Data sent & when: Site URL, plugin name/version, and related metadata may be sent when checking for notices or plugin information.
+Google Fonts (fonts.googleapis.com)
+Use: Load the Lato and Inter font families in Tourfic administration screens.
+Data sent & when: The administrator IP address, browser details, and the current/referring page may be sent when a Tourfic administration screen loads these fonts.
+Terms: https://policies.google.com/terms
+Privacy: https://policies.google.com/privacy
+
+Appsero (appsero.com)
+Use: Collect opt-in diagnostic and usage data so the Tourfic team can troubleshoot compatibility issues and improve the plugin. No telemetry is sent unless an administrator explicitly accepts the Appsero notice.
+Data sent & when: After consent, Appsero may receive the site URL, WordPress/PHP/MySQL/server versions, administrator name and email, public IP address, locale, multisite status, active theme details, Tourfic version and activation state, and an optional deactivation reason.
+Service information: https://appsero.com/
+Privacy: https://appsero.com/privacy-policy/
+
+YouTube (youtube.com and img.youtube.com)
+Use: Display a video and its thumbnail when a site administrator adds a YouTube video URL to a Tourfic listing.
+Data sent & when: The video identifier, visitor IP address, browser details, and the current/referring page may be sent when the configured video is viewed.
+Terms: https://www.youtube.com/t/terms
+Privacy: https://policies.google.com/privacy
+
+Vimeo (vimeo.com and player.vimeo.com)
+Use: Display a video when a site administrator adds a Vimeo video URL to a Tourfic listing.
+Data sent & when: The video identifier, visitor IP address, browser details, and the current/referring page may be sent when the configured video is viewed.
+Terms: https://vimeo.com/terms
+Privacy: https://vimeo.com/privacy
+
+Tourfic Demo Content Servers (tourfic.site and themefic.com)
+Use: Download the images referenced by the bundled sample CSV files when an administrator explicitly runs the Tourfic demo importer.
+Data sent & when: The WordPress server IP address and normal HTTP request headers are sent only while the administrator imports the selected sample content.
 Terms: https://themefic.com/terms/
 Privacy: https://themefic.com/privacy-policy/
+
+== Source Code and Build Instructions ==
+
+The human-readable JavaScript and SCSS source for Tourfic is included in the `sass/` directory and is also maintained in the public [Tourfic source repository](https://github.com/Themefic-Team/tourfic).
+
+The reported generated bundles map to these included sources:
+
+* `assets/admin/js/tourfic-admin-api.js` is built from `sass/admin/js/free/tf-api-doc.js`.
+* `assets/admin/js/tourfic-admin-scripts.js` is built from `sass/admin/js/free/*.js`.
+* `assets/app/js/tourfic-scripts.js` is built from `sass/app/js/free/*.js`.
+* Generated Tourfic CSS is built from the SCSS entry files under `sass/admin/css/free/` and `sass/app/css/free/`.
+
+To rebuild the distributed JavaScript and CSS files:
+
+1. Install a current Node.js LTS release.
+2. Run `npm ci` in the plugin directory.
+3. Run `npm run build`.
+
+The build uses `webpack-config.js` and writes the generated bundles to the local `assets/` directory. PHP dependencies can be reproduced by running `composer install --no-dev` from the plugin directory.
 
 == Frequently Asked Questions ==
 
@@ -349,7 +392,7 @@ Tourfic is a WordPress plugin for Hotel, Travel, and Vacation Rental bookings. I
 
 = Is the Free version fully free? =
 
-Yes, Tourfic is 100% free on WordPress.org. A Pro version with advanced features is also available on our [website](https://tourfic.com/pricing/).
+Yes. The plugin distributed on WordPress.org is free and fully functional. A separate Tourfic Pro companion plugin is also available from our [website](https://tourfic.com/pricing/).
 
 = Can I build a Hotel Booking system with Tourfic? =
 
@@ -381,7 +424,7 @@ Yes, Tourfic supports multi-vendor hotel booking websites.
 
 = Can I create a Travel or Hotel Marketplace? =
 
-Yes, with Tourfic Pro, you can build hotel, tour, and car rental marketplaces.
+The separately installed Tourfic Pro and Tourfic Vendor plugins provide multi-vendor marketplace functionality.
 
 = Can Tourfic be used as a Bus Booking plugin? =
 
@@ -421,6 +464,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 23. Elementor Page Builder support.
 
 == Changelog ==
+
+= 2.23.3 – August 6, 2026 =
+
+- Fixed: WordPress.org directory compliance and security issues.
+- Improved: Source-code transparency, compatibility, and bundled third-party libraries.
 
 = 2.23.2 – July 30, 2026 =
 

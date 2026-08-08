@@ -198,10 +198,6 @@ class TF_Dashboard_Widget {
 					<?php esc_html_e( 'Help', 'tourfic' ); ?>
 					<span aria-hidden="true" class="dashicons dashicons-external"></span>
 				</a>
-				<a href="<?php echo esc_url( 'https://tourfic.com/pricing/' ); ?>" target="_blank" class="go-pro">
-					<?php esc_html_e( 'Go Pro', 'tourfic' ); ?>
-					<span aria-hidden="true" class="dashicons dashicons-external"></span>
-				</a>
 			</div>
 
 		</div>
@@ -211,5 +207,4 @@ class TF_Dashboard_Widget {
 
 
 }
-
 

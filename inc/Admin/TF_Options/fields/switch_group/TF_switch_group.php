@@ -42,7 +42,7 @@ if ( ! class_exists( 'TF_Switch_Group' ) ) {
 						<div class="tf-switch-column ui-state-default">
 							<?php if(!empty($single_value['label'])) : ?> 
 								<label class="tf-switch-group-label" for="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][status]'; ?>">
-									<?php echo esc_html__($single_value['label'], 'tourfic'); // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?>  
+									<?php echo esc_html( $single_value['label'] ); ?>
 								</label> 
 								<input 
 									type="hidden"

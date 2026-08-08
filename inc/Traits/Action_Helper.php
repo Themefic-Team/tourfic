@@ -286,34 +286,9 @@ trait Action_Helper {
 	 * Go to Documentaion Metabox
 	 */
 	function tf_hotel_tour_docs() {
-		$tf_promo_option = get_option( 'tf_promo__schudle_option' );
-		$tf_hotel_promo_sidebar_notice = get_option( 'tf_hotel_promo_sidebar_notice' );  
-		$tf_apartment_promo_sidebar_notice = get_option( 'tf_apartment_promo_sidebar_notice' );  
-		$tf_tour_promo_sidebar_notice = get_option( 'tf_tour_promo_sidebar_notice' );  
-		$service_banner = isset($tf_promo_option['service_banner']) ? $tf_promo_option['service_banner'] : array();
-        $promo_banner = isset($tf_promo_option['promo_banner']) ? $tf_promo_option['promo_banner'] : array();
-		$tf_promo__schudle_start_from = !empty(get_option( 'tf_promo__schudle_start_from' )) ? get_option( 'tf_promo__schudle_start_from' ) : 0;
-
-		if((!empty($service_banner) && $service_banner['enable_status']  == true) || ( !empty($promo_banner) && $promo_banner['enable_status'] == true ) ) {
-			$side_banaer_status = true;
-		}else{
-			$side_banaer_status = false;
-		}
-
-		if ( ($tf_hotel_promo_sidebar_notice != 1  && time() <  $tf_hotel_promo_sidebar_notice) || $side_banaer_status == false || ($tf_promo__schudle_start_from  != 0 && $tf_promo__schudle_start_from > time()) ) {  // Check if the notice is not dismissed or promo is not exicuted
-			add_meta_box( 'tfhotel_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array( $this, 'tf_hotel_docs_callback' ), 'tf_hotel', 'side', 'high' );
-		}
-
-		if ( ($tf_apartment_promo_sidebar_notice != 1  && time() <  $tf_apartment_promo_sidebar_notice) || $side_banaer_status == false || ($tf_promo__schudle_start_from  != 0 && $tf_promo__schudle_start_from > time())) {  // Check if the notice is not dismissed or promo is not exicuted
-			add_meta_box( 'tfapartment_docs', esc_html__( 'Tourfic Documantation', 'tourfic' ), array( $this, 'tf_apartment_docs_callback' ), 'tf_apartment', 'side', 'high' );
-		}
-
-
-		if ( ($tf_tour_promo_sidebar_notice != 1  && time() <  $tf_tour_promo_sidebar_notice) || $side_banaer_status == false || ($tf_promo__schudle_start_from  != 0 && $tf_promo__schudle_start_from > time())) { // Check if the notice is not dismissed or promo is not exicuted
-			add_meta_box( 'tftour_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array( $this, 'tf_tour_docs_callback' ), 'tf_tours', 'side', 'high' ); 
-		}
-		
-		
+		add_meta_box( 'tfhotel_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array( $this, 'tf_hotel_docs_callback' ), 'tf_hotel', 'side', 'high' );
+		add_meta_box( 'tfapartment_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array( $this, 'tf_apartment_docs_callback' ), 'tf_apartment', 'side', 'high' );
+		add_meta_box( 'tftour_docs', esc_html__( 'Tourfic Documentation', 'tourfic' ), array( $this, 'tf_tour_docs_callback' ), 'tf_tours', 'side', 'high' );
 
 		add_filter( 'get_user_option_meta-box-order_tf_tours', array( $this, 'tour_metabox_order' ) );
 		add_filter( 'get_user_option_meta-box-order_tf_apartment', array( $this, 'apartment_metabox_order' ) );
@@ -419,16 +394,6 @@ trait Action_Helper {
 
 	}
 
-	//  Plugin Page Action Links for Tourfic Pro
-	function tf_pro_plugin_licence_action_links( $links ) {
-
-		$active_licence_link = array(
-			'<a href="'.admin_url().'admin.php?page=tf_license_info" style="color:#cc0000;font-weight: bold;text-shadow: 0px 1px 1px hsl(0deg 0% 0% / 28%);">' . esc_html__( 'Activate the Licence', 'tourfic' ) . '</a>',
-		);
-
-		return array_merge( $links, $active_licence_link );
-	}
-
 	//  Plugin Page Action Links for Tourfic
 	function tf_plugin_action_links( $links ) {
 
@@ -436,15 +401,15 @@ trait Action_Helper {
 			'<a href="admin.php?page=tf_dashboard">' . esc_html__( 'Settings', 'tourfic' ) . '</a>',
 		);
 
-		if ( !is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) ) {
-			$gopro_link = array(
-				'<a href="https://tourfic.com/go/upgrade" target="_blank" style="color:#cc0000;font-weight: bold;text-shadow: 0px 1px 1px hsl(0deg 0% 0% / 28%);">' . esc_html__( 'GO PRO', 'tourfic' ) . '</a>',
-			);
+		$action_links = array_merge(
+			$settings_link,
+			$links,
+			array(
+				'upgrade' => '<a href="https://tourfic.com/go/upgrade" target="_blank" style="color:#cc0000;font-weight: bold;text-shadow: 0px 1px 1px hsl(0deg 0% 0% / 28%);">' . esc_html__( 'GO PRO', 'tourfic' ) . '</a>',
+			)
+		);
 
-			return array_merge( $settings_link, $links, $gopro_link );
-		} else {
-			return array_merge( $settings_link, $links );
-		}
+		return apply_filters( 'tourfic_plugin_action_links', $action_links );
 	}
 
 	function tf_image_sizes() {
@@ -1411,8 +1376,7 @@ trait Action_Helper {
 			}
 
 			if ( empty( $tf_total_filters ) ) {
-				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() &&
-                     (Hotel::template( 'archive' ) == 'design-3' ||
+				if ( (Hotel::template( 'archive' ) == 'design-3' ||
                       Tour::template( 'archive' ) == 'design-3' ||
                       Apartment::template( 'archive' ) == 'design-2' ) ) {
 					?>
@@ -1473,7 +1437,7 @@ trait Action_Helper {
                                 continue;
 							}
 
-							if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+							if ( apply_filters( 'tourfic_include_archive_map_data', true, get_the_ID(), $posttype ) ) {
 								$count ++;
 								$map                 = Hotel::get_hotel_map_data( $hotel_meta );
 								$min_price_arr       = Hotel_Pricing::instance( get_the_ID() )->get_min_price();
@@ -1568,7 +1532,7 @@ trait Action_Helper {
                                 continue;
 							}
 
-							if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+							if ( apply_filters( 'tourfic_include_archive_map_data', true, get_the_ID(), $posttype ) ) {
                                 $count ++;
                                 $map            = ! empty( $tour_meta['location'] ) ? Helper::tf_data_types( $tour_meta['location'] ) : '';
 								$allow_discount    = ! empty( $tour_meta['allow_discount'] ) ? $tour_meta['allow_discount'] : '';
@@ -1666,7 +1630,7 @@ trait Action_Helper {
 								continue;
 							}
 
-							if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+							if ( apply_filters( 'tourfic_include_archive_map_data', true, get_the_ID(), $posttype ) ) {
 								$count ++;
 								$map  = ! empty( $apartment_meta['map'] ) ? Helper::tf_data_types( $apartment_meta['map'] ) : '';
 								$discount_type  = ! empty( $apartment_meta['discount_type'] ) ? $apartment_meta['discount_type'] : '';
@@ -1788,7 +1752,7 @@ trait Action_Helper {
 							if ( Hotel::is_featured_hotel_meta( $hotel_meta ) ) {
 								continue;
 							}
-							if (function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+							if ( apply_filters( 'tourfic_include_archive_map_data', true, get_the_ID(), $posttype ) ) {
 								$count ++;
 								$map                 = Hotel::get_hotel_map_data( $hotel_meta );
 								$min_price_arr       = Hotel_Pricing::instance( get_the_ID() )->get_min_price();
@@ -1886,7 +1850,7 @@ trait Action_Helper {
 								continue;
 							}
 
-							if (function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+							if ( apply_filters( 'tourfic_include_archive_map_data', true, get_the_ID(), $posttype ) ) {
 								$count ++;
 								$map            = ! empty( $tour_meta['location'] ) ? Helper::tf_data_types( $tour_meta['location'] ) : '';
 								$allow_discount    = ! empty( $tour_meta['allow_discount'] ) ? $tour_meta['allow_discount'] : '';
@@ -1982,7 +1946,7 @@ trait Action_Helper {
 								continue;
 							}
 
-							if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+							if ( apply_filters( 'tourfic_include_archive_map_data', true, get_the_ID(), $posttype ) ) {
 								$count ++;
 								$map  = ! empty( $apartment_meta['map'] ) ? Helper::tf_data_types( $apartment_meta['map'] ) : '';
 								$discount_type  = ! empty( $apartment_meta['discount_type'] ) ? $apartment_meta['discount_type'] : '';
@@ -2114,8 +2078,7 @@ trait Action_Helper {
 
 			}
 		} else {
-			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() &&
-				( ($posttype == 'tf_hotel' && Hotel::template( 'archive' ) == 'design-3') ||
+			if ( ( ($posttype == 'tf_hotel' && Hotel::template( 'archive' ) == 'design-3') ||
 				($posttype == 'tf_tours' && Tour::template( 'archive' ) == 'design-3') ||
 				($posttype == 'tf_apartment' && Apartment::template( 'archive' ) == 'design-2') ) ) {
 				?>
@@ -2379,29 +2342,29 @@ trait Action_Helper {
 	 * @author Abu Hena
 	 */
 	function tf_update_email_template_default_content() {
-
 		$tf_settings = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
-		if ( isset( $tf_settings['email-settings'] ) ) {
-			$tf_settings = $tf_settings['email-settings'];
+		if ( empty( $tf_settings['email-settings'] ) || ! is_array( $tf_settings['email-settings'] ) ) {
+			return;
+		}
 
-			if ( ! is_array( $tf_settings ) ) {
-				return;
+		$email_templates = array(
+			'admin_booking_email_template'    => 'admin',
+			'vendor_booking_email_template'   => 'vendor',
+			'customer_confirm_email_template' => 'customer',
+		);
+		$updated = false;
+
+		foreach ( $email_templates as $setting_key => $recipient ) {
+			if ( ! empty( $tf_settings['email-settings'][ $setting_key ] ) ) {
+				continue;
 			}
 
-			//update email template for admin
-			if ( empty( $tf_settings['admin_booking_email_template'] ) ) {
-				update_option( $tf_settings['admin_booking_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ) );
-			}
-			//update email template for vendor
-			if ( empty( $tf_settings['vendor_booking_email_template'] ) ) {
-				if ( array_key_exists( 'vendor_booking_email_template', $tf_settings ) ) {
-					update_option( $tf_settings['vendor_booking_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'vendor' ) );
-				}
-			}
-			//update email template for customer
-			if ( empty( $tf_settings['customer_confirm_email_template'] ) ) {
-				update_option( $tf_settings['customer_confirm_email_template'], TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'customer' ) );
-			}
+			$tf_settings['email-settings'][ $setting_key ] = TF_Handle_Emails::get_email_template( 'order_confirmation', '', $recipient );
+			$updated = true;
+		}
+
+		if ( $updated ) {
+			update_option( 'tf_settings', $tf_settings );
 		}
 	}
 
@@ -2533,34 +2496,6 @@ trait Action_Helper {
 		}
 
 		return $response;
-	}
-
-	public function tf_admin_bar_dashboard_link( $wp_admin_bar ) {
-
-		if ( ! is_admin() || ! is_admin_bar_showing() ) {
-            return;
-        }
-
-		if ( ! is_user_member_of_blog() && ! is_super_admin() ) {
-            return;
-        }
-
-		if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			$tf_dashboard_page_link = !empty( get_option( 'tf_dashboard_page_id' ) ) ? get_permalink( get_option( 'tf_dashboard_page_id' ) )  : get_home_url();
-
-			$wp_admin_bar->add_node(
-				array(
-					'parent' => 'site-name',
-					'id'     => 'view-vendor-dashboard-link',
-					'title'  => esc_html__( 'Visit Vendor Dashboard', 'tourfic' ),
-					'href'   => $tf_dashboard_page_link,
-				)
-			);
-
-		} else {
-
-			return;
-		}
 	}
 
 	function tourfic_booking_set_search_result( $url ) {

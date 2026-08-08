@@ -223,7 +223,7 @@ class Availability {
 
 			// Loop through each day in the booking period
 			for ( $day = $booking_check_in; $day < $booking_check_out; $day = strtotime( '+1 day', $day ) ) {
-				$date = date( 'Y-m-d', $day );
+					$date = gmdate( 'Y-m-d', $day );
 
 				if ( ! isset( $room_booked_per_day[ $date ] ) ) {
 					$room_booked_per_day[ $date ] = 0;
@@ -300,7 +300,7 @@ class Availability {
 	private function has_availability_rules() {
 		$enable_availability = ! empty( $this->room_meta['avil_by_date'] ) ? $this->room_meta['avil_by_date'] : false;
 
-		return $enable_availability && function_exists( 'is_tf_pro' ) && is_tf_pro();
+		return $enable_availability;
 	}
 
 	/**
@@ -561,7 +561,7 @@ class Availability {
 		$date_keys = array();
 
 		for ( $day = $rule_from; $day <= $rule_to; $day = strtotime( '+1 day', $day ) ) {
-			$date_keys[] = date( 'Y/m/d', $day );
+				$date_keys[] = gmdate( 'Y/m/d', $day );
 		}
 
 		return $date_keys;
@@ -622,7 +622,7 @@ class Availability {
 
 			// Loop through each day in the booking period
 			for ( $day = $booking_check_in; $day < $booking_check_out; $day = strtotime( '+1 day', $day ) ) {
-				$date = date( 'Y-m-d', $day );
+					$date = gmdate( 'Y-m-d', $day );
 
 				if ( ! isset( $room_booked_per_day[ $date ] ) ) {
 					$room_booked_per_day[ $date ] = 0;

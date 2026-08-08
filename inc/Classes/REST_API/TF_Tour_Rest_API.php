@@ -32,13 +32,13 @@ if ( ! class_exists( 'TF_Tour_Rest_API' ) ) {
 		public function tf_get_tours( $request ) {
 			$per_page = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 10;
 			$page     = $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1;
-			$author   = $request->get_param( 'user' ) ? $request->get_param( 'user' ) : get_current_user_id();
+			$author   = $this->tf_management_author( $request, 'user', 'edit_others_tf_tourss' );
 
 			$query_tours = new WP_Query( array(
 				'post_type'      => 'tf_tours',
 				'posts_per_page' => $per_page,
 				'post_status'    => array( 'publish', 'pending', 'draft' ),
-				'author'         => $this->user_has_role( $author, 'administrator' ) || $this->user_has_role( $author, 'tf_manager' ) ? '' : $author,
+				'author'         => $author,
 				'paged'          => $page,
 			) );
 			$tours       = array();
@@ -79,6 +79,10 @@ if ( ! class_exists( 'TF_Tour_Rest_API' ) ) {
 			);
 
 			return $tours;
+		}
+
+		public function tf_tour_permission_callback( WP_REST_Request $request ) {
+			return $this->tf_management_permission_callback( $request, 'edit_tf_tourss', 'edit_others_tf_tourss', 'tf_tours', 'id' );
 		}
 
 		/*
@@ -252,7 +256,7 @@ if ( ! class_exists( 'TF_Tour_Rest_API' ) ) {
 				$tour_avail_data = array_values( $tour_avail_data );
 				$tour_avail_data = array_map( function ( $item ) {
 					$item['editable'] = false;
-					$item['start']    = date( 'Y-m-d', strtotime( $item['check_in'] ) );
+					$item['start']    = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
 					if ( $item['pricing_type'] == 'group' ) {
 						$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] );
 

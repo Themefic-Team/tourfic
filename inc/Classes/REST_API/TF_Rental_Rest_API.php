@@ -32,13 +32,13 @@ if ( ! class_exists( 'TF_Rental_Rest_API' ) ) {
 		public function tf_get_rentals( $request ) {
 			$per_page = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 10;
 			$page     = $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1;
-			$author   = $request->get_param( 'author' ) ? $request->get_param( 'author' ) : get_current_user_id();
+			$author   = $this->tf_management_author( $request, 'author', 'edit_others_tf_carrentals' );
 
 			$query_rentals = new \WP_Query( array(
 				'post_type'      => 'tf_carrental',
 				'posts_per_page' => $per_page,
 				'post_status'    => array( 'publish', 'pending', 'draft' ),
-				'author'         => $this->user_has_role( $author, 'administrator' ) || $this->user_has_role( $author, 'tf_manager' ) ? '' : $author,
+				'author'         => $author,
 				'paged'          => $page,
 			) );
 			$rentals       = array();
@@ -73,6 +73,10 @@ if ( ! class_exists( 'TF_Rental_Rest_API' ) ) {
 			);
 
 			return $rentals;
+		}
+
+		public function tf_rental_permission_callback( WP_REST_Request $request ) {
+			return $this->tf_management_permission_callback( $request, 'edit_tf_carrentals', 'edit_others_tf_carrentals', 'tf_carrental' );
 		}
 
 		/*

@@ -7,13 +7,14 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	fwrite( STDERR, "This check must run inside WordPress.\n" );
+	echo "This check must run inside WordPress.\n";
 	exit( 1 );
 }
 
 function tf_security_live_assert( $condition, $message ) {
 	if ( ! $condition ) {
-		fwrite( STDERR, "FAIL: {$message}\n" );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI-only test diagnostics.
+		echo "FAIL: {$message}\n";
 		exit( 1 );
 	}
 }

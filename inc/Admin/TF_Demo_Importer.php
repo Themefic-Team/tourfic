@@ -59,7 +59,7 @@ class TF_Demo_Importer {
 
 		// Get content type to verify this is actually an image
 		$content_type = wp_remote_retrieve_header($response, 'content-type');
-		if (!str_contains($content_type, 'image/')) {
+		if ( false === strpos( $content_type, 'image/' ) ) {
 			error_log('URL does not point to an image (Content-Type: ' . $content_type . ')');
 			return false;
 		}
@@ -583,10 +583,6 @@ class TF_Demo_Importer {
 
 					}
 					//update or insert hotels
-					if ( ! function_exists( 'post_exists' ) ) {
-						require_once ABSPATH . 'wp-includes/post.php';
-					}
-
 					// Create an array to store the post data for the current row
 					$post_data = array(
 						'post_type'    => 'tf_hotel',
@@ -1283,10 +1279,6 @@ class TF_Demo_Importer {
 
 				}
 
-				if ( ! function_exists( 'post_exists' ) ) {
-					require_once ABSPATH . 'wp-includes/post.php';
-				}
-
 				// Create an array to store the post data for the current row
 				$post_data = array(
 					'post_type'    => 'tf_tours',
@@ -1924,10 +1916,6 @@ class TF_Demo_Importer {
 
 					}
 					//update or insert hotels
-					if ( ! function_exists( 'post_exists' ) ) {
-						require_once ABSPATH . 'wp-includes/post.php';
-					}
-
 					// Create an array to store the post data for the current row
 					$post_data = array(
 						'post_type'    => 'tf_apartment',
@@ -2523,10 +2511,6 @@ class TF_Demo_Importer {
 					
 				}
 	
-				if ( ! function_exists( 'post_exists' ) ) {
-					require_once ABSPATH . 'wp-includes/post.php';
-				}
-				
 				// Create an array to store the post data for the current row
 				$post_data = array(
 					'post_type'    => 'tf_carrental',

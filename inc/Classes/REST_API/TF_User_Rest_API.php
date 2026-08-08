@@ -60,7 +60,7 @@ if ( ! class_exists( 'TF_User_Rest_API' ) ) {
 					'slug'               => $user->user_nicename,
 					'roles'              => $user->roles,
 					'status'             => $vendor_status === 'enabled' ? esc_html__( 'Approved', 'tourfic' ) : esc_html__( 'Pending', 'tourfic' ),
-					'registered_date'    => date( "M d, Y", strtotime( $user->user_registered ) ),
+					'registered_date'    => wp_date( 'M d, Y', strtotime( $user->user_registered ) ),
 					'total_earning_int'  => $total_earning_int,
 					'total_earning'      => $total_earning,
 					'total_withdraw'     => $total_withdraw,
@@ -90,7 +90,7 @@ if ( ! class_exists( 'TF_User_Rest_API' ) ) {
 			$user    = get_user_by( 'id', $user_id );
 
 			if ( ! $user ) {
-				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.' ), array( 'status' => 403 ) );
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
 			}
 
 			if ( ! $this->tf_current_user_can_access_user( $user->ID ) ) {

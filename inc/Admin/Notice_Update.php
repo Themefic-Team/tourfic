@@ -23,23 +23,8 @@ class Notice_Update extends \Tourfic\Core\TF_Notice {
         $this->type = 'admin_notice';
     }
 
-    // License activation notice for Tourfic Pro
-    function tf_plugin_admin_notice( ) { 
-        if ( is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) && function_exists( 'is_tf_pro' ) && !is_tf_pro() ) {
-            ?>
-                <div class="tf-critical-update-notice notice notice-error" style="background: #FFECEC; padding: 20px 12px;">
-                    <p>
-                        <?php
-                        /* translators: %s: URL */
-                        echo sprintf( wp_kses_post( __('<b style="color:#d63638;">NOTICE: </b> Please <a href="%s"><b>Activate</b></a> your Tourfic Pro license. You can get your license key from our Client Portal -> Support -> License Keys.','tourfic') ),
-                        esc_url( admin_url() ).'admin.php?page=tf_license_info'
-                        );
-                        ?>
-                    </p>
-                </div>
-            <?php
-        }
-    }
+	function tf_plugin_admin_notice() {
+	}
 
     // Turned off for now, will be used in future
     function tf_critical_update_admin_notice() {

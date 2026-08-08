@@ -1,4 +1,7 @@
 <?php
+
+defined( 'ABSPATH' ) || exit;
+
 function fontawesome_six_icons() {
 	$icons = array(
 		'fa-solid fa-fill-drip',

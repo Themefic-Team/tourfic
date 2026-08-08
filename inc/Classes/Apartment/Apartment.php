@@ -1422,38 +1422,25 @@ class Apartment {
 		$booked_dates        = self::tf_apartment_booked_days( get_the_ID() );
 		$apt_reserve_button_text = !empty(Helper::tfopt('apartment_booking_form_button_text')) ? stripslashes(sanitize_text_field(Helper::tfopt('apartment_booking_form_button_text'))) : esc_html__("Reserve", 'tourfic');
 
-		$tf_booking_type      = '1';
-		$tf_booking_url       = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = $tf_booking_code = '';
-		$tf_allow_deposit     = $tf_deposit_type = $tf_deposit_amount = '';
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
-			$tf_ext_booking_type  = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : 1;
-			$tf_booking_code      = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
-			$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
-			$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
-			$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
-			$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
-			$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
-			$tf_allow_deposit     = ! empty( $meta['allow_deposit'] ) ? $meta['allow_deposit'] : '';
-			$tf_deposit_type      = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : '';
-			$tf_deposit_amount    = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : '';
-		}
+		$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+		$tf_ext_booking_type  = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : 1;
+		$tf_booking_code      = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
+		$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
+		$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
+		$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
+		$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+		$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
+		$tf_allow_deposit     = ! empty( $meta['allow_deposit'] ) ? $meta['allow_deposit'] : '';
+		$tf_deposit_type      = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : '';
+		$tf_deposit_amount    = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : '';
 		$tf_show_internal_booking_form = ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3;
 		$tf_has_valid_deposit_type     = in_array( $tf_deposit_type, array( 'percent', 'fixed' ), true );
-		$tf_show_deposit_option        = function_exists( 'is_tf_pro' ) && is_tf_pro() && '1' == $tf_booking_type && '1' == $tf_allow_deposit && ! empty( $tf_deposit_amount ) && $tf_has_valid_deposit_type;
+		$tf_show_deposit_option        = '1' == $tf_booking_type && '1' == $tf_allow_deposit && ! empty( $tf_deposit_amount ) && $tf_has_valid_deposit_type;
 		$tf_partial_payment_label      = ! empty( Helper::tfopt( 'deposit-title' ) ) ? Helper::tfopt( 'deposit-title' ) : 'Partial payment of {amount} on total';
 		$tf_partial_payment_description = ! empty( Helper::tfopt( 'deposit-subtitle' ) ) ? Helper::tfopt( 'deposit-subtitle' ) : '';
 
 		// date format for apartment
 		$date_format_change_appartments = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
-
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			$additional_fees = ! empty( $meta['additional_fees'] ) ? Helper::tf_data_types( $meta['additional_fees'] ) : array();
-		} else {
-			$additional_fee_label = ! empty( $meta['additional_fee_label'] ) ? $meta['additional_fee_label'] : '';
-			$additional_fee       = ! empty( $meta['additional_fee'] ) ? $meta['additional_fee'] : 0;
-			$fee_type             = ! empty( $meta['fee_type'] ) ? $meta['fee_type'] : '';
-		}
 
 		$adults       = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
 		$child        = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
@@ -1465,7 +1452,7 @@ class Apartment {
 
 		$apt_disable_dates = [];
 		$tf_apt_enable_dates = [];
-		if ( $enable_availability === '1' && ! empty( $apt_availability ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		if ( $enable_availability === '1' && ! empty( $apt_availability ) ) {
 			$apt_availability_arr = Availability::normalize_availability_rules( $apt_availability );
 
 			if ( ! empty( $apt_availability_arr ) && is_array( $apt_availability_arr ) ) {
@@ -1967,7 +1954,7 @@ class Apartment {
 		$tf_deposit_amount = array(
 			'{amount}' => 'fixed' === $deposit_type ? wp_kses_post( wc_price( $deposit_amount ) ) : $deposit_amount . '%',
 		);
-		$is_without_payment_booking  = function_exists( 'is_tf_pro' ) && is_tf_pro() && '3' == $booking_type;
+		$is_without_payment_booking  = '3' == $booking_type;
 		$show_popup_deposit_option   = ! $is_without_payment_booking && $show_deposit_option;
 		$show_booking_info_step      = $is_without_payment_booking;
 		$traveler_details_text       = ! empty( Helper::tfopt( 'tour_traveler_details_text' ) ) ? Helper::tfopt( 'tour_traveler_details_text' ) : '';
@@ -2387,7 +2374,7 @@ class Apartment {
 					<span class="tf-available-labels-featured"><?php echo esc_html( $featured_badge_text ); ?></span>
 					<?php endif; ?>
 					<?php
-					if($promotional_tags == 'yes' && sizeof($apartment_multiple_tags) > 0) {
+					if($promotional_tags == 'yes' && count($apartment_multiple_tags) > 0) {
 						foreach($apartment_multiple_tags as $tag) {
 							$apartment_tag_name = !empty($tag['apartment-tag-title']) ? esc_html( $tag['apartment-tag-title'] ) : '';
 							$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? esc_attr($tag["apartment-tag-color-settings"]["background"]) : "#003162";
@@ -2507,7 +2494,7 @@ class Apartment {
 				</div>
 			</div>
 		</div>
-        <?php } elseif ( $tf_apartment_arc_selected_template == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro()) { ?>
+        <?php } elseif ( $tf_apartment_arc_selected_template == "design-2") { ?>
             <div class="tf-archive-hotel" data-id="<?php echo esc_attr(get_the_ID()); ?>">
             	<!-- Thumbnail -->
 				<?php if($show_image == 'yes'): ?>    
@@ -2536,7 +2523,7 @@ class Apartment {
 						<?php endif; ?>
 
 						<?php
-						if($promotional_tags == 'yes' && sizeof($apartment_multiple_tags) > 0) {
+						if($promotional_tags == 'yes' && count($apartment_multiple_tags) > 0) {
 							foreach($apartment_multiple_tags as $tag) {
 								$apartment_tag_name = !empty($tag['apartment-tag-title']) ? esc_html( $tag['apartment-tag-title'] ) : '';
 								$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? esc_attr($tag["apartment-tag-color-settings"]["background"]) : "#003162";
@@ -2638,7 +2625,7 @@ class Apartment {
                 <div class="tourfic-single-left">
                 	<div class="default-tags-container">
 						<?php
-						if($promotional_tags == 'yes' && sizeof($apartment_multiple_tags) > 0) {
+						if($promotional_tags == 'yes' && count($apartment_multiple_tags) > 0) {
 							foreach($apartment_multiple_tags as $tag) {
 								$tag_title = !empty($tag["apartment-tag-title"]) ? esc_html( $tag["apartment-tag-title"], 'tourfic') : '';
 								$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? esc_attr( $tag["apartment-tag-color-settings"]["background"] ) : "#003162";

@@ -1,4 +1,7 @@
 <?php
+
+defined( 'ABSPATH' ) || exit;
+
 function fontawesome_four_icons() {
 	$icons = array(
 		'fa fa-glass',

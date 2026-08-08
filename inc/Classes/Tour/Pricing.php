@@ -127,7 +127,7 @@ class Pricing {
 
 		$tour_availability_data = self::normalize_tour_availability( $meta );
 		
-		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+		$package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		$package_pricing_values = ! empty( $package_pricing ) && is_array( $package_pricing ) ? array_values( $package_pricing ) : [];
 
 		if ( ! empty( $tour_availability_data ) && ! Helper::is_all_unavailable( $tour_availability_data ) ) {
@@ -295,7 +295,7 @@ class Pricing {
 		$pricing_rule                     = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 		$tour_availability_data = self::normalize_tour_availability( $meta );
 
-		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+		$package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		$package_pricing_values = ! empty( $package_pricing ) && is_array( $package_pricing ) ? array_values( $package_pricing ) : [];
 
 		$group_price    = ! empty( $meta['group_price'] ) ? $meta['group_price'] : 0;
@@ -548,7 +548,7 @@ class Pricing {
 			}
 		}
 
-		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+		$package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		if(!empty($package_pricing) && $pricing_rule=='package'){
 			foreach($package_pricing as $package){
 				if (!empty($package['adult_tabs'][2]['min_adult'])) {
@@ -811,7 +811,7 @@ class Pricing {
 
 		$tour_availability_data = self::normalize_tour_availability( $meta );
 
-		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+		$package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
 		if(!empty($tour_availability_data)){
 			foreach ($tour_availability_data as $data) {

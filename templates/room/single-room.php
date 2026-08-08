@@ -8,9 +8,9 @@ defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use Tourfic\Classes\Room\Room;
 
-if(wp_is_block_theme()){
+if(tf_is_block_theme()){
     wp_head();
-    block_header_area();
+    tf_render_block_header_area();
 }else{
     get_header();
 }
@@ -62,8 +62,8 @@ while ( have_posts() ) : the_post();
 		$gallery_ids = explode( ',', $gallery );
 	}
 
-	$calcellation_policy_title = function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($meta['cancelation-section-title']) ? esc_html($meta['cancelation-section-title']) : '';
-	$calcellation_policy = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['calcellation_policy'] ) ? (array) $meta['calcellation_policy'] : [];
+	$calcellation_policy_title = ! empty( $meta['cancelation-section-title'] ) ? esc_html( $meta['cancelation-section-title'] ) : '';
+	$calcellation_policy       = ! empty( $meta['calcellation_policy'] ) ? (array) $meta['calcellation_policy'] : array();
 	
 	// Single Template Style
 	$tf_room_layout_conditions = ! empty( $meta['tf_single_room_layout_opt'] ) ? $meta['tf_single_room_layout_opt'] : 'global';
@@ -79,9 +79,9 @@ while ( have_posts() ) : the_post();
 	}
 endwhile;
 
-if(wp_is_block_theme()){
+if(tf_is_block_theme()){
     wp_footer();
-    block_footer_area();
+    tf_render_block_footer_area();
  }else{
 	get_footer();
  }

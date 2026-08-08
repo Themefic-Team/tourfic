@@ -1274,7 +1274,7 @@
 
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
             }).addTo(map);
 
             const marker = L.marker([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], {alt: tf_params.single_car_data.address}).addTo(map)

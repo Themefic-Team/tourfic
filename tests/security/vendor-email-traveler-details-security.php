@@ -6,17 +6,27 @@
  * php tests/security/vendor-email-traveler-details-security.php
  */
 
-$root = dirname( __DIR__, 2 );
-$file = $root . '/inc/Admin/Emails/TF_Handle_Emails.php';
+if ( 'cli' === PHP_SAPI && ! defined( 'ABSPATH' ) ) {
+	define( 'ABSPATH', dirname( __DIR__, 2 ) . '/' );
+}
+defined( 'ABSPATH' ) || exit;
 
-if ( ! is_readable( $file ) ) {
-	fwrite( STDERR, "Missing email handler: {$file}\n" );
-	exit( 1 );
+$root = dirname( __DIR__, 2 );
+$file     = $root . '/inc/Admin/Emails/TF_Handle_Emails.php';
+$pro_file = dirname( $root ) . '/tourfic-pro/inc/classes/Advanced_Email_Handler.php';
+
+foreach ( array( $file, $pro_file ) as $email_file ) {
+	if ( ! is_readable( $email_file ) ) {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI-only test diagnostics.
+		echo "Missing email handler: {$email_file}\n";
+		exit( 1 );
+	}
 }
 
 function tf_vendor_email_assert( $condition, $message ) {
 	if ( ! $condition ) {
-		fwrite( STDERR, "FAIL: {$message}\n" );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI-only test diagnostics.
+		echo "FAIL: {$message}\n";
 		exit( 1 );
 	}
 }
@@ -44,7 +54,8 @@ function tf_vendor_email_method_body( $source, $method ) {
 	tf_vendor_email_assert( false, "Method {$method} body is not balanced." );
 }
 
-$source = file_get_contents( $file );
+$source     = file_get_contents( $file );
+$pro_source = file_get_contents( $pro_file );
 
 tf_vendor_email_assert(
 	false !== strpos( $source, 'public function replace_mail_tags( $template, $order_id, $context = array() )' ),
@@ -112,12 +123,23 @@ tf_vendor_email_assert(
 );
 
 tf_vendor_email_assert(
-	substr_count( $source, "'include_traveler_details' => true" ) >= 7,
+	substr_count( $source, "'include_traveler_details' => true" ) >= 3,
+	'Every core vendor send and resend path must opt into traveler details explicitly.'
+);
+tf_vendor_email_assert(
+	2 === substr_count( $pro_source, "'include_traveler_details' => true" ),
+	'Centralized companion WooCommerce and offline vendor paths must opt into traveler details explicitly.'
+);
+tf_vendor_email_assert(
+	false !== strpos( tf_vendor_email_method_body( $pro_source, 'send_woocommerce_recipient' ), "'include_traveler_details' => true" )
+		&& false !== strpos( tf_vendor_email_method_body( $pro_source, 'send_offline_recipient' ), "'include_traveler_details' => true" ),
 	'Every vendor send and resend path must opt into traveler details explicitly.'
 );
 tf_vendor_email_assert(
 	false === strpos( $source, "recipient'                => 'admin',\n" )
-		&& false === strpos( $source, "recipient'                => 'customer',\n" ),
+		&& false === strpos( $source, "recipient'                => 'customer',\n" )
+		&& false === strpos( $pro_source, "recipient'                => 'admin',\n" )
+		&& false === strpos( $pro_source, "recipient'                => 'customer',\n" ),
 	'Admin and customer email paths must not opt into traveler details.'
 );
 

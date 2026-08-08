@@ -28,7 +28,8 @@ class Itinerary {
 			return;
 		}
 
-		$itinerary_map = ! empty( Helper::tfopt( 'itinerary_map' ) ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ? Helper::tfopt( 'itinerary_map' ) : 0;
+		$has_itinerary_renderer = has_action( 'after_itinerary_builder' );
+		$itinerary_map          = $has_itinerary_renderer && ! empty( Helper::tfopt( 'itinerary_map' ) ) ? Helper::tfopt( 'itinerary_map' ) : 0;
 		$style         = ! empty( $settings['itinerary_style'] ) ? $settings['itinerary_style'] : 'style1';
 		$tf_openstreet_map         = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : 'default';
 		$tf_google_map_key         = ! empty( Helper::tfopt( 'tf-googlemapapi' ) ) ? Helper::tfopt( 'tf-googlemapapi' ) : '';
@@ -64,7 +65,7 @@ class Itinerary {
 		?>
 		<div class="tf-single-template__one tf-single-itinerary-style1 sp-0">
 			<?php
-			if ( function_exists('is_tf_pro') && is_tf_pro() ) {
+			if ( has_action( 'after_itinerary_builder' ) ) {
 				do_action( 'after_itinerary_builder', $itineraries, $itinerary_map, $settings, $style );
 			} else {
 				if ( $itineraries ) { ?>
@@ -131,7 +132,7 @@ class Itinerary {
 		?>
 		<div class="tf-single-template__two tf-single-itinerary-style2">
 			<?php
-			if ( function_exists('is_tf_pro') && is_tf_pro() ) {
+			if ( has_action( 'after_itinerary_builder' ) ) {
 				do_action( 'after_itinerary_builder', $itineraries, $itinerary_map, $settings, $style );
 			} else {
 				if ( $itineraries ) { ?>
@@ -191,7 +192,7 @@ class Itinerary {
 		?>
 		<?php echo 'yes' === $wrapper ? '<div class="tf-single-template__legacy tf-single-itinerary-legacy sp-0">' : ''; ?>
 			<?php
-			if ( function_exists('is_tf_pro') && is_tf_pro() ) {
+			if ( has_action( 'after_itinerary_builder' ) ) {
 				do_action( 'after_itinerary_builder', $itineraries, $itinerary_map, $settings, $style );
 			} else {
 				if ( $itineraries ) { ?>

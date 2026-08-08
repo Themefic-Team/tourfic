@@ -111,32 +111,16 @@ function tf_tours_booking_function() {
 	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? wp_unslash( $_POST['booking_confirm'] ) : ""; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 	// Booking Type
-	$tf_booking_type = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1 ) : 1;
-	$tf_booking_url = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-url'] ) ? esc_url($meta['booking-url']) : '' ) : '';
-	$tf_booking_query_url = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}' ) : '';
-	$tf_booking_attribute = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '' ) : '';
+	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+	$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
+	$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
+	$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 
 	$group_price    = ! empty( $meta['group_price'] ) ? $meta['group_price'] : 0;
 	$adult_price    = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
 	$children_price = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
 	$infant_price   = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
 	
-	/**
-	 * If fixed is selected but pro is not activated
-	 *
-	 * show error
-	 *
-	 * @return
-	 */
-	if ( $tour_type == 'fixed' && function_exists('is_tf_pro') && ! is_tf_pro() ) {
-		$response['errors'][] = esc_html__( 'Fixed Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
-		$response['status']   = 'error';
-		echo wp_json_encode( $response );
-		die();
-
-		return;
-	}
-
 	$tour_availability = '';
 	if ( ! empty( $meta['tour_availability'] ) ) {
 		if ( is_array( $meta['tour_availability'] ) ) {
@@ -212,7 +196,7 @@ function tf_tours_booking_function() {
 		if(!function_exists("end_date_calculation")) {
 			function end_date_calculation ($start_date, $difference) {
 				if(!empty($start_date) && !empty($difference)) {
-					if(str_contains($start_date, ' - ')) {
+					if ( false !== strpos( $start_date, ' - ' ) ) {
 						return $start_date;
 
 					} else {
@@ -240,7 +224,7 @@ function tf_tours_booking_function() {
 
 		// Fixed tour maximum capacity limit
 	
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($start_date) && !empty($end_date) ) {
+		if ( !empty($start_date) && !empty($end_date) ) {
 			
 			// Tour Order retrive from Tourfic Order Table
 			$tf_orders_select = array(
@@ -408,23 +392,6 @@ function tf_tours_booking_function() {
 		}
 
 	}
-
-	/**
-	 * If continuous custom availability is selected but pro is not activated
-	 *
-	 * Show error
-	 *
-	 * @return
-	 */
-	if ( $tour_type == 'continuous' && function_exists('is_tf_pro') && ! is_tf_pro() ) {
-		$response['errors'][] = esc_html__( 'Custom Continous Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
-		$response['status']   = 'error';
-		echo wp_json_encode( $response );
-		die();
-
-		return;
-	}
-
 
 	if ( $tour_type == 'continuous' ) {
 		$start_date = $end_date = $tour_date;
@@ -803,7 +770,7 @@ function tf_tours_booking_function() {
 		}
 	}
 
-	if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_type == 'continuous' && !empty($allowed_times_field['time']) && $pricing_rule!='package') {
+	if ( $tour_type == 'continuous' && !empty($allowed_times_field['time']) && $pricing_rule!='package') {
 		$has_valid_time = !empty(array_filter($allowed_times_field['time'], function($t) {
 			return trim($t) !== '';
 		}));
@@ -813,7 +780,7 @@ function tf_tours_booking_function() {
 		}
 	}
 
-	if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_type == 'continuous' && $pricing_rule=='package' && !empty($matched_availability)) {
+	if ( $tour_type == 'continuous' && $pricing_rule=='package' && !empty($matched_availability)) {
 		
 		$index = 'tf_option_times_' . $selectedPackage;
 		$has_valid_time = false;
@@ -1100,7 +1067,7 @@ function tf_tours_booking_function() {
 		);
 		$response['without_payment'] = 'true';
 		$order_id = Helper::tf_set_order( $order_data );
-		if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($order_id) ) {
+		if ( ! empty( $order_id ) ) {
 			do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
 
 			if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
@@ -1193,7 +1160,7 @@ function tf_tours_booking_function() {
 
 			# Deposit information
 			Helper::tf_get_deposit_amount( $meta, $tf_tours_data['tf_tours_data']['price'], $deposit_amount, $has_deposit );
-			if ( function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true && $make_deposit == true ) {
+			if ( $has_deposit == true && $make_deposit == true ) {
 				$tf_tours_data['tf_tours_data']['due']   = $tf_tours_data['tf_tours_data']['price'] - $deposit_amount;
 				$tf_tours_data['tf_tours_data']['price'] = $deposit_amount;
 			}
@@ -1646,7 +1613,7 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 	 * @author Jahid
 	 */
 
-	if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($tf_integration_order_status) ) {
+	if ( ! empty( $tf_integration_order_status ) ) {
 		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
 		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
 	} 
@@ -1867,7 +1834,7 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 	 * @author Jahid
 	 */
 
-	if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($tf_integration_order_status) ) {
+	if ( ! empty( $tf_integration_order_status ) ) {
 		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
 		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
 	}

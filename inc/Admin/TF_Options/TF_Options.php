@@ -69,6 +69,147 @@ class TF_Options {
 	}
 
 	/**
+	 * Get the Free airport-service controls for hotel administration.
+	 *
+	 * @return array
+	 */
+	public static function hotel_airport_service_fields() {
+		return array(
+			array(
+				'id'       => 'airport_service',
+				'type'     => 'switch',
+				'label'    => esc_html__( 'Airport Pickup Service', 'tourfic' ),
+				'subtitle' => esc_html__(
+					'Activate this feature to provide airport pickup services as an added convenience for your guests.',
+					'tourfic'
+				),
+				'default'  => false,
+			),
+			array(
+				'id'         => 'airport_service_type',
+				'type'       => 'checkbox',
+				'label'      => esc_html__( 'Service Type', 'tourfic' ),
+				'inline'     => true,
+				'dependency' => array(
+					array( 'airport_service', '==', '1' ),
+				),
+				'options'    => array(
+					'pickup'  => esc_html__( 'Pickup', 'tourfic' ),
+					'dropoff' => esc_html__( 'Drop-off', 'tourfic' ),
+					'both'    => esc_html__( 'Pickup & Drop-off', 'tourfic' ),
+				),
+			),
+			self::hotel_airport_service_pricing_field(
+				'airport_pickup_price',
+				esc_html__( 'Pickup Service', 'tourfic' ),
+				'pickup',
+				esc_html__( 'Pickup', 'tourfic' ),
+				esc_html__( 'Pickup Pricing Type', 'tourfic' )
+			),
+			self::hotel_airport_service_pricing_field(
+				'airport_dropoff_price',
+				esc_html__( 'Drop-off Service', 'tourfic' ),
+				'dropoff',
+				esc_html__( 'Drop-off', 'tourfic' ),
+				esc_html__( 'Drop-off Pricing Type', 'tourfic' )
+			),
+			self::hotel_airport_service_pricing_field(
+				'airport_pickup_dropoff_price',
+				esc_html__( 'Pickup & Drop-off Service', 'tourfic' ),
+				'both',
+				esc_html__( 'Pickup & Drop-off', 'tourfic' ),
+				esc_html__( 'Pickup & Drop-off Pricing Type', 'tourfic' )
+			),
+		);
+	}
+
+	/**
+	 * Build one airport-service pricing tab.
+	 *
+	 * @param string $field_id          Stored field ID.
+	 * @param string $title             Field title.
+	 * @param string $service_type      Service dependency value.
+	 * @param string $tab_title         Pricing tab title.
+	 * @param string $pricing_type_label Pricing type label.
+	 * @return array
+	 */
+	private static function hotel_airport_service_pricing_field(
+		$field_id,
+		$title,
+		$service_type,
+		$tab_title,
+		$pricing_type_label
+	) {
+		return array(
+			'id'         => $field_id,
+			'type'       => 'tab',
+			'title'      => $title,
+			'dependency' => array(
+				array( 'airport_service_type', 'any', $service_type ),
+				array( 'airport_service', '==', '1' ),
+			),
+			'tabs'       => array(
+				array(
+					'id'     => 'tab-1',
+					'title'  => $tab_title,
+					'icon'   => 'fa fa-heart',
+					'fields' => array(
+						array(
+							'id'      => 'airport_pickup_price_type',
+							'type'    => 'select',
+							'label'   => $pricing_type_label,
+							'options' => array(
+								'per_person' => esc_html__( 'Per Person', 'tourfic' ),
+								'fixed'      => esc_html__( 'Fixed Price', 'tourfic' ),
+								'free'       => esc_html__( 'Free / Complimentary', 'tourfic' ),
+							),
+							'default' => 'per_person',
+						),
+						array(
+							'id'          => 'airport_service_fee_adult',
+							'type'        => 'number',
+							'dependency'  => array(
+								array( 'airport_pickup_price_type', '==', 'per_person' ),
+							),
+							'label'       => esc_html__( 'Adult Price', 'tourfic' ),
+							'subtitle'    => esc_html__( 'Price per adult. Insert number only (No currency sign needed).', 'tourfic' ),
+							'attributes'  => array(
+								'min' => '0',
+							),
+							'field_width' => 50,
+						),
+						array(
+							'id'          => 'airport_service_fee_children',
+							'type'        => 'number',
+							'dependency'  => array(
+								array( 'airport_pickup_price_type', '==', 'per_person' ),
+							),
+							'label'       => esc_html__( 'Children Price', 'tourfic' ),
+							'subtitle'    => esc_html__( 'Price per child. Insert number only (No currency sign needed).', 'tourfic' ),
+							'attributes'  => array(
+								'min' => '0',
+							),
+							'field_width' => 50,
+						),
+						array(
+							'id'         => 'airport_service_fee_fixed',
+							'type'       => 'number',
+							'dependency' => array(
+								array( 'airport_pickup_price_type', '==', 'fixed' ),
+							),
+							'label'      => esc_html__( 'Fixed Price', 'tourfic' ),
+							'subtitle'   => esc_html__( 'Insert number only (No currency sign needed).', 'tourfic' ),
+							'attributes' => array(
+								'min' => '0',
+							),
+						),
+					),
+				),
+			),
+		);
+	}
+
+	/**
 	 * Get total day count for a month/year pair.
 	 *
 	 * Supports environments where PHP `ext-calendar` is unavailable.
@@ -397,15 +538,11 @@ class TF_Options {
 	 * @author Foysal
 	 */
 	public function load_metaboxes() {
-		if ( $this->is_tf_pro_active() ) {
-			$metaboxes = glob( TF_PRO_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
-		} else {
-			$metaboxes = glob( $this->tf_options_file_path( 'metaboxes/*.php' ) );
-		}
+		$metaboxes = apply_filters(
+			'tourfic_admin_metabox_files',
+			glob( $this->tf_options_file_path( 'metaboxes/*.php' ) )
+		);
 
-		/*if( !empty( $pro_metaboxes ) ) {
-			$metaboxes = array_merge( $metaboxes, $pro_metaboxes );
-		}*/
 		if ( ! empty( $metaboxes ) ) {
 			foreach ( $metaboxes as $metabox ) {
 				if ( file_exists( $metabox ) ) {
@@ -420,11 +557,10 @@ class TF_Options {
 	 * @author Foysal
 	 */
 	public function load_options() {
-		if ( $this->is_tf_pro_active() ) {
-			$options = glob( TF_PRO_ADMIN_PATH . 'tf-options/options/*.php' );
-		} else {
-			$options = glob( $this->tf_options_file_path( 'options/*.php' ) );
-		}
+		$options = apply_filters(
+			'tourfic_admin_option_files',
+			glob( $this->tf_options_file_path( 'options/*.php' ) )
+		);
 
 		if ( ! empty( $options ) ) {
 			foreach ( $options as $option ) {
@@ -440,11 +576,10 @@ class TF_Options {
 	 * @author Foysal
 	 */
 	public function load_taxonomy() {
-		if ( $this->is_tf_pro_active() ) {
-			$taxonomies = glob( TF_PRO_ADMIN_PATH . 'tf-options/taxonomies/*.php' );
-		} else {
-			$taxonomies = glob( $this->tf_options_file_path( 'taxonomies/*.php' ) );
-		}
+		$taxonomies = apply_filters(
+			'tourfic_admin_taxonomy_files',
+			glob( $this->tf_options_file_path( 'taxonomies/*.php' ) )
+		);
 
 		if ( ! empty( $taxonomies ) ) {
 			foreach ( $taxonomies as $taxonomy ) {
@@ -468,18 +603,6 @@ class TF_Options {
 
 		$class = isset( $field['class'] ) ? $field['class'] : '';
 
-		$is_pro   = isset( $field['is_pro'] ) ? $field['is_pro'] : '';
-		$badge_up = isset( $field['badge_up'] ) ? $field['badge_up'] : '';
-
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			$is_pro = false;
-		}
-		if ( $is_pro == true ) {
-			$class .= ' tf-field-disable tf-field-pro';
-		}
-		if ( $badge_up == true ) {
-			$class .= ' tf-field-disable tf-field-upcoming';
-		}
 		$tf_meta_box_dep_value = get_post_meta( get_the_ID(), $settings_id, true );
 
 
@@ -547,13 +670,7 @@ class TF_Options {
 						</div>
 					</span>
 					<?php endif; ?>
-					<?php if ( $is_pro ): ?>
-                        <div class="tf-csf-badge"><span class="tf-pro"><?php esc_html_e( "Pro", "tourfic" ); ?></span></div>
-					<?php endif; ?>
-					<?php if ( $badge_up ): ?>
-                        <div class="tf-csf-badge"><span class="tf-upcoming"><?php esc_html_e( "Upcoming", "tourfic" ); ?></span></div>
-					<?php endif; ?>
-                </label>
+				</label>
 				<?php if ( $field['type']=='repeater' ){ ?>
 				<?php if ( ! empty( $field['description'] ) ): ?>
 					<span class="tf-field-sub-title tf-field-repeater-desc"><?php echo wp_kses_post( $field['description'] ) ?></span>
@@ -578,14 +695,6 @@ class TF_Options {
 			<?php endif; } ?>
         </div>
 		<?php
-	}
-
-	public function is_tf_pro_active() {
-		if ( is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) && defined( 'TF_PRO' ) ) {
-			return true;
-		}
-
-		return false;
 	}
 
 	function get_icon_list() {
@@ -1613,7 +1722,7 @@ class TF_Options {
 		$options_html = '';
 
 		ob_start();
-        if($pricing_by == 'package' && function_exists( 'is_tf_pro' ) && is_tf_pro()){ ?>
+        if($pricing_by == 'package'){ ?>
 			<div class="tf-repeater">
 			<div class="tf-field" style="padding-top: 0px">
 				<label class="tf-field-label"><?php echo esc_html__('Packages', 'tourfic'); ?></label>

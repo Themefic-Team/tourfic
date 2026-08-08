@@ -19,7 +19,7 @@ class TF_API_Documentation {
 			'manage_options',
 			'tf_api_docs',
 			array( $this, 'render_page' ),
-			function_exists( 'is_tf_pro' ) && is_tf_pro() ? 6 : 5
+			5
 		);
 	}
 
@@ -74,11 +74,7 @@ class TF_API_Documentation {
 				<div class="tf-api-endpoints">
 				<?php foreach ( $endpoints as $endpoint ) : ?>
 					<?php $full_url = rest_url( 'tf/v1' ) . $endpoint['url']; ?>
-					<?php $show_pro_badge = !function_exists( 'is_tf_pro' ) && 'GET' !== strtoupper( $endpoint['method'] ); ?>
 					<div class="tf-api-endpoint-card">
-						<?php if ( $show_pro_badge ) : ?>
-							<span class="tf-api-pro-badge"><?php esc_html_e( 'PRO', 'tourfic' ); ?></span>
-						<?php endif; ?>
 						<div class="tf-api-endpoint-header">
 							<span class="tf-api-method tf-api-method-<?php echo esc_attr( strtolower( $endpoint['method'] ) ); ?>">
 								<?php echo esc_html( $endpoint['method'] ); ?>
@@ -140,7 +136,6 @@ class TF_API_Documentation {
 	}
 
 	private function render_api_key_manager() {
-		$is_write_allowed = function_exists( 'is_tf_pro' ) && is_tf_pro();
 		?>
 		<div class="tf-api-section tf-api-key-manager">
 			<h2><?php esc_html_e( 'API Key Management', 'tourfic' ); ?></h2>
@@ -159,12 +154,9 @@ class TF_API_Documentation {
 									<td>
 										<label><input type="checkbox" name="permissions[]" value="read" checked> <?php esc_html_e( 'Read', 'tourfic' ); ?></label><br>
 										<label>
-											<input type="checkbox" name="permissions[]" value="write" <?php checked( $is_write_allowed ); ?> <?php disabled( ! $is_write_allowed ); ?>>
+											<input type="checkbox" name="permissions[]" value="write">
 											<?php esc_html_e( 'Write', 'tourfic' ); ?>
 										</label>
-										<?php if ( ! $is_write_allowed ) : ?>
-											<p class="description"><?php esc_html_e( 'Write permission is available in Tourfic PRO only.', 'tourfic' ); ?></p>
-										<?php endif; ?>
 									</td>
 								</tr>
 							</tbody>
@@ -199,7 +191,7 @@ class TF_API_Documentation {
 			array(
 				'method'      => 'POST',
 				'url'         => '/tf-settings',
-				'description' => __( 'Update Tourfic plugin settings. Merges the supplied key-value pairs into the existing settings. Requires administrator or tf_manager role. Available in Tourfic PRO.', 'tourfic' ),
+				'description' => __( 'Update Tourfic plugin settings. Merges the supplied key-value pairs into the existing settings. Requires administrator or tf_manager role.', 'tourfic' ),
 				'parameters'  => array(
 					array(
 						'name'        => '(any setting key)',
@@ -949,6 +941,8 @@ class TF_API_Documentation {
 
 	private function get_taxonomy_endpoints() {
 		$supported_taxonomies = 'hotel_location, hotel_feature, hotel_type, tour_destination, tour_attraction, tour_activities, tour_features, tour_type, apartment_location, apartment_feature, apartment_type, carrental_location, carrental_brand, carrental_fuel_type, carrental_category, carrental_engine_year';
+		/* translators: %s: Comma-separated list of supported taxonomy route names. */
+		$supported_taxonomies_description = sprintf( __( 'Taxonomy route segment. Supported: %s.', 'tourfic' ), $supported_taxonomies );
 
 		return array(
 			array(
@@ -956,7 +950,7 @@ class TF_API_Documentation {
 				'url'         => '/{taxonomy}',
 				'description' => __( 'Create a new term for a supported taxonomy.', 'tourfic' ),
 				'parameters'  => array(
-					array( 'name' => 'taxonomy', 'type' => 'string', 'required' => true, 'description' => sprintf( __( 'Taxonomy route segment. Supported: %s.', 'tourfic' ), $supported_taxonomies ) ),
+					array( 'name' => 'taxonomy', 'type' => 'string', 'required' => true, 'description' => $supported_taxonomies_description ),
 					array( 'name' => 'name', 'type' => 'string', 'required' => true, 'description' => __( 'Term name.', 'tourfic' ) ),
 					array( 'name' => 'slug', 'type' => 'string', 'required' => false, 'description' => __( 'Term slug.', 'tourfic' ) ),
 					array( 'name' => 'description', 'type' => 'string', 'required' => false, 'description' => __( 'Term description.', 'tourfic' ) ),
@@ -971,7 +965,7 @@ class TF_API_Documentation {
 				'url'         => '/{taxonomy}/{id}',
 				'description' => __( 'Update an existing taxonomy term.', 'tourfic' ),
 				'parameters'  => array(
-					array( 'name' => 'taxonomy', 'type' => 'string', 'required' => true, 'description' => sprintf( __( 'Taxonomy route segment. Supported: %s.', 'tourfic' ), $supported_taxonomies ) ),
+					array( 'name' => 'taxonomy', 'type' => 'string', 'required' => true, 'description' => $supported_taxonomies_description ),
 					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'Term ID (path parameter).', 'tourfic' ) ),
 					array( 'name' => 'name', 'type' => 'string', 'required' => false, 'description' => __( 'Updated term name.', 'tourfic' ) ),
 					array( 'name' => 'slug', 'type' => 'string', 'required' => false, 'description' => __( 'Updated term slug.', 'tourfic' ) ),
@@ -987,7 +981,7 @@ class TF_API_Documentation {
 				'url'         => '/{taxonomy}/{id}',
 				'description' => __( 'Delete a taxonomy term. Admins can delete any term; vendors can delete only terms created by themselves.', 'tourfic' ),
 				'parameters'  => array(
-					array( 'name' => 'taxonomy', 'type' => 'string', 'required' => true, 'description' => sprintf( __( 'Taxonomy route segment. Supported: %s.', 'tourfic' ), $supported_taxonomies ) ),
+					array( 'name' => 'taxonomy', 'type' => 'string', 'required' => true, 'description' => $supported_taxonomies_description ),
 					array( 'name' => 'id', 'type' => 'integer', 'required' => true, 'description' => __( 'Term ID (path parameter).', 'tourfic' ) ),
 				),
 				'example_request'  => 'DELETE /wp-json/tf/v1/hotel_location/55\nX-API-Key: your-api-key',

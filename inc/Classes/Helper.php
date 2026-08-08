@@ -49,10 +49,6 @@ class Helper {
         add_filter( 'excerpt_more', array( $this, 'tf_tours_excerpt_more' ) );
 
 		is_admin() ? add_filter( 'plugin_action_links_' . 'tourfic/tourfic.php', array( $this, 'tf_plugin_action_links' ) ) : '';
-		is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) && function_exists( 'is_tf_pro' ) && ! is_tf_pro() ? add_filter( 'plugin_action_links_' . 'tourfic-pro/tourfic-pro.php', array(
-			$this,
-			'tf_pro_plugin_licence_action_links'
-		) ) : '';
 		add_action( 'admin_menu', array( $this, 'tf_documentation_page_integration' ), 999 );
 		add_action( 'add_meta_boxes', array( $this, 'tf_hotel_tour_docs' ) );
 		add_action( 'admin_menu', array( $this, 'tf_documentation_page_integration' ), 999 );
@@ -65,9 +61,6 @@ class Helper {
 		add_action( 'admin_menu', array( $this, 'tourfic_admin_menu_seperator' ) );
 		add_filter( 'menu_order', array( $this, 'tourfic_admin_menu_order_change' ) );
 		add_filter( 'custom_menu_order', '__return_true' );
-
-		// Add dashboard link to admin menu bar
-		add_action( 'admin_bar_menu', array( $this, 'tf_admin_bar_dashboard_link' ), 999 );
 
 		// redirect non admin user
 		// add_action( 'admin_init', array( $this, 'redirect_non_admin_users' ), 9 );
@@ -151,32 +144,7 @@ class Helper {
             ) );
         }
 
-        // Template Builder (if Elementor or TF Pro)
-        if ( did_action( 'elementor/loaded' ) && function_exists( 'is_tf_pro' ) ) {
-            $admin_bar->add_menu( array(
-                'id'     => 'tf-quick-builder',
-                'parent' => 'tf-quick-links',
-                'title'  => esc_html__( 'Template Builder', 'tourfic' ),
-                'href'   => admin_url( 'edit.php?post_type=tf_template_builder' ),
-            ) );
-        } elseif ( function_exists( 'is_tf_pro' ) ) {
-            $admin_bar->add_menu( array(
-                'id'     => 'tf-quick-builder',
-                'parent' => 'tf-quick-links',
-                'title'  => esc_html__( 'Template Builder', 'tourfic' ),
-                'href'   => admin_url( 'admin.php?page=tf_template_builder' ),
-            ) );
-        }
-
-        // License Info (TF Pro only)
-        if ( function_exists( 'is_tf_pro' ) ) {
-            $admin_bar->add_menu( array(
-                'id'     => 'tf-quick-license',
-                'parent' => 'tf-quick-links',
-                'title'  => esc_html__( 'License Info', 'tourfic' ),
-                'href'   => admin_url( 'admin.php?page=tf_license_info' ),
-            ) );
-        }
+		do_action( 'tourfic_admin_bar_quick_links', $admin_bar );
     }
 
 	static function tfopt( $option = '', $default = null ) {
@@ -473,7 +441,7 @@ class Helper {
 		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 		$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $hotel_extras[$key] ) ) {
+		if ( ! empty( $hotel_extras[$key] ) ) {
 			if ( !empty($hotel_extras[$key]['price']) ) {
 				$extra_price = $hotel_extras[$key]['price'];
 				$extra_quantity = 0 < intval( $quantity ) ? intval( $quantity ) : 1;
@@ -1223,7 +1191,8 @@ class Helper {
 		$values                 = array( $query_type );
 		$query_where            = self::tf_order_table_structured_sql( $query, $values );
 
-		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $values ), ARRAY_A );
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Identifiers and clauses come only from the private allowlists above.
+			$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $values ), ARRAY_A );
 
 		return $tf_tour_book_orders;
 	}
@@ -1299,7 +1268,6 @@ class Helper {
 		$search_check_in_out_parts = tf_split_date_range( $date );
 		$search_check_in_date      = ! empty( $search_check_in_out_parts[0] ) ? $search_check_in_out_parts[0] : $search_default_check_in;
 		$search_check_out_date     = ! empty( $search_check_in_out_parts[1] ) ? $search_check_in_out_parts[1] : $search_default_check_out;
-		$search_default_date_range = wp_json_encode( tf_split_date_range( $date ) );
 
 		$search_check_in_timestamp  = strtotime( $search_check_in_date );
 		$search_check_out_timestamp = strtotime( $search_check_out_date );
@@ -1455,7 +1423,7 @@ class Helper {
                                     return `${d1} - ${d2}`;
                                 })
                             },
-                            defaultDate: <?php echo $search_default_date_range; ?>,
+							defaultDate: <?php echo wp_json_encode( tf_split_date_range( $date ) ); ?>,
                         });
 
                     });
@@ -1730,7 +1698,7 @@ class Helper {
                                     });
                                     dateSetToFields(selectedDates, instance);
                                 },
-                                defaultDate: <?php echo $search_default_date_range; ?>,
+								defaultDate: <?php echo wp_json_encode( tf_split_date_range( $date ) ); ?>,
                             });
 
                             function dateSetToFields(selectedDates, instance) {
@@ -1804,7 +1772,7 @@ class Helper {
                                     });
                                     dateSetToFields(selectedDates, instance);
                                 },
-                                defaultDate: <?php echo $search_default_date_range; ?>,
+								defaultDate: <?php echo wp_json_encode( tf_split_date_range( $date ) ); ?>,
                             });
 
                             function dateSetToFields(selectedDates, instance) {
@@ -1830,9 +1798,9 @@ class Helper {
                     })(jQuery);
                 </script>
 			<?php } ?>
-		<?php } elseif ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-		                 ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-		                 ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ) { ?>
+		<?php } elseif ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-3") ||
+		                 ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-3") ||
+		                 ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-2") ) { ?>
             <div class="tf-search-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
                 <div class="tf-search-field">
                     <div class="tf-search-field-icon">
@@ -2088,7 +2056,7 @@ class Helper {
                                     instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                                     dateSetToFields(selectedDates, instance);
                                 },
-                                defaultDate: <?php echo $search_default_date_range; ?>,
+								defaultDate: <?php echo wp_json_encode( tf_split_date_range( $date ) ); ?>,
                             });
 
                             function dateSetToFields(selectedDates, instance) {
@@ -2309,7 +2277,7 @@ class Helper {
                                     return `${d1} - ${d2}`;
                                 });
                             },
-                            defaultDate: <?php echo $search_default_date_range; ?>,
+							defaultDate: <?php echo wp_json_encode( tf_split_date_range( $date ) ); ?>,
                         });
 
                     });
@@ -3443,12 +3411,12 @@ class Helper {
             </div>
             </div>
         <?php } elseif (
-            ( is_post_type_archive( 'tf_hotel' ) && $design_hotel == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-            ( is_post_type_archive( 'tf_tours' ) && $design_tours == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-            ( is_post_type_archive( 'tf_apartment' ) && $design_apartment == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-            ( $post_type == 'tf_hotel' && $design_hotel == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-            ( $post_type == 'tf_tours' && $design_tours == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-            ( $post_type == 'tf_apartment' && $design_apartment == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro())
+            ( is_post_type_archive( 'tf_hotel' ) && $design_hotel == "design-3") ||
+            ( is_post_type_archive( 'tf_tours' ) && $design_tours == "design-3") ||
+            ( is_post_type_archive( 'tf_apartment' ) && $design_apartment == "design-2") ||
+            ( $post_type == 'tf_hotel' && $design_hotel == "design-3") ||
+            ( $post_type == 'tf_tours' && $design_tours == "design-3") ||
+            ( $post_type == 'tf_apartment' && $design_apartment == "design-2")
         ){
 
             $design3_location_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
@@ -4078,22 +4046,7 @@ class Helper {
 
 	}
 
-	function redirect_non_admin_users() {
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-
-			$user = wp_get_current_user();
-
-			if ( ! defined( 'DOING_AJAX' ) && (in_array( 'tf_vendor', (array) $user->roles ) || in_array( 'tf_manager', (array) $user->roles ) || in_array( 'customer', (array) $user->roles )) ) {
-				$tf_dashboard_page_link = ! empty( get_option( 'tf_dashboard_page_id' ) ) ? get_permalink( get_option( 'tf_dashboard_page_id' ) ) : get_home_url();
-				wp_redirect( $tf_dashboard_page_link );
-				exit;
-			} else {
-				return;
-			}
-		}
-	}
-
-    function tf_filetype_and_ext_check_support($data, $file, $filename, $mimes, $real_mime) {
+	function tf_filetype_and_ext_check_support($data, $file, $filename, $mimes, $real_mime) {
         if (!empty($data['ext']) && !empty($data['type'])) {
             return $data;
         }

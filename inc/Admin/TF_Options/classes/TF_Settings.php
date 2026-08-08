@@ -172,38 +172,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				);
 			}
 
-			// Template Builder
-			$has_supported_builder = did_action( 'elementor/loaded' ) || function_exists( 'bricks_is_builder' ) || defined( 'BRICKS_VERSION' );
-			if ( $has_supported_builder && function_exists('is_tf_pro')) {
-				add_submenu_page(
-					'tf_settings',
-					esc_html__('Template Builder', 'tourfic'),
-					esc_html__('Template Builder', 'tourfic'),
-					'manage_options',
-					'edit.php?post_type=tf_template_builder',
-				);
-			} elseif (function_exists('is_tf_pro')) {
-				add_submenu_page(
-					'tf_settings',
-					esc_html__('Template Builder', 'tourfic'),
-					esc_html__('Template Builder', 'tourfic'),
-					'manage_options',
-					'tf_template_builder',
-					array( '\Tourfic\App\Templates\Template_Builder', 'tf_template_builder_elementor_check' )
-				);
-			}
-
-
-			if ( !function_exists('is_tf_pro') ) {
-				// Workspace submenu
-				// add_submenu_page(
-				// 	$this->option_id,
-				// 	wp_kses_post( 'Workspace <span style="border-radius: 6px;background: #FCF1CF;color: #27333F;font-size: 10px;font-weight: 600;line-height: 16px;padding: 0 6px;"> Premium </span>' ),
-				// 	wp_kses_post( 'Workspace <span style="border-radius: 6px;background: #FCF1CF;color: #27333F;font-size: 10px;font-weight: 600;line-height: 16px;padding: 0 6px;"> Premium </span>' ),
-				// 	'manage_options',
-				// 	'tf_workspace',
-				// 	array( $this,'tf_workspace_callback'),
-				// );
 				add_submenu_page(
 					$this->option_id,
 					esc_html__('Upgrade', 'tourfic'),
@@ -211,7 +179,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					'manage_options',
 					esc_url('https://tourfic.com/pricing')
 				);
-			}
 			// remove first submenu
 			remove_submenu_page( $this->option_id, $this->option_id );
 
@@ -409,7 +376,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<?php endif; ?>
 						</div>
 						<div class="tf-settings-sidebar">
-							<?php echo $this->tf_settings_sidebar(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized ?>
+							<?php $this->tf_settings_sidebar(); ?>
 						</div>
 					</div>
 				</div>
@@ -419,80 +386,14 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		}
 
 		public function tf_settings_sidebar() {
-			ob_start();
 			?>
 			<div class="tf-sidebar-content">
-
-				<div class="tf-premium-box">
-					<div class="premium-box-header">
-						<div class="premium-logo">
-							<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL.'images/tourfic.png'); ?>" alt="tourfic">
-						</div>
-						<h3><?php echo esc_html__('Tourfic Premium', 'tourfic');  ?></h3>
-						<h4><?php echo esc_html__('Build a Booking Website', 'tourfic');  ?></h4>
-						<p><?php echo esc_html__('Manage bookings, payments, vendors, and availability from WP Dashboard.', 'tourfic');  ?></p>
-					</div>
-					<div class="premium-box-features">
-						<ul>
-							<li>
-								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								</svg>
-								<?php echo esc_html__('Multivendor Booking Support', 'tourfic'); ?>
-							</li>
-							<li>
-								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								</svg>
-								<?php echo esc_html__('Backend Booking System', 'tourfic'); ?>
-							</li>
-							<li>
-								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								</svg>
-								<?php echo esc_html__('iCal Synchronization', 'tourfic'); ?>
-							</li>
-							<li>
-								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								</svg>
-								<?php echo esc_html__('Dynamic Pricing Logic', 'tourfic'); ?>
-							</li>
-							<li>
-								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								</svg>
-								<?php echo esc_html__('Data Import Export', 'tourfic'); ?>
-							</li>
-							<li>
-								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								</svg>
-								<?php echo esc_html__('Advance Room Inventory Management', 'tourfic'); ?>
-							</li>
-						</ul>
-					</div>
-					<div class="premium-box-button">
-						<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://tourfic.com/pricing/', array( 'utm_medium' => 'sidebar_tourfic_premium' ) ) ) ?>" target="_blank">
-							<?php echo esc_html__('Buy Now', 'tourfic');  ?>
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M18 8L22 12L18 16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-								<path d="M2 12H22" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</a>
-						<p><?php echo esc_html__( 'Less friction. Faster publishing.', 'tourfic' ); ?></p>
-					</div>
-					<div class="premium-moneyback-notice">
-						<h2><?php echo esc_html__( '30-day money back guarantee', 'tourfic' ); ?></h2>
-						<h2><?php echo esc_html__( '24/7 support', 'tourfic' ); ?></h2>
-					</div>
-				</div>
 
 				<?php if( !empty($_GET['page']) && $_GET['page']!='tf_dashboard' ) { ?>
 				<div class="tf-plugin-lists">
 					<h3>Power up your website</h3>
 					<div class="tf-others-plugin">
-						<?php echo $this->tf_get_sidebar_plugin_list(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized ?>
+						<?php $this->tf_get_sidebar_plugin_list(); ?>
 					</div>
 				</div>
 
@@ -568,8 +469,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			</div>
 			<?php
-			return ob_get_clean();
-		}
+			}
 
 		public function tf_get_sidebar_plugin_list(){
 			$plugins = [
@@ -610,14 +510,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					$installed = file_exists(WP_PLUGIN_DIR . '/' . $plugin_path);
 					$activated = $installed && is_plugin_active($plugin_path);
 
-					$pro_installed = false;
-					$pro_activated = false;
-					
-					if (!empty($plugin['pro'])) {
-						$pro_path = $plugin['pro']['slug'] . '/' . $plugin['pro']['file_name'] . '.php';
-						$pro_installed = file_exists(WP_PLUGIN_DIR . '/' . $pro_path);
-						$pro_activated = $pro_installed && is_plugin_active($pro_path);
-					}
 					?>
 
 					<li class="tf-plugin-item <?php echo esc_attr($plugin['slug'] == 'instantio' ? 'featured' : ''); ?>" data-plugin-slug="<?php echo esc_attr($plugin['slug']); ?>">
@@ -648,18 +540,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 											</button>
 										<?php else: ?>
 											<span class="tf-plugin-button tf-plugin-status active">Activated</span>
-										<?php endif; ?>
-
-										<?php if (!empty($plugin['pro'])): ?>
-											<?php if (!$pro_installed): ?>
-												<a href="<?php echo esc_url($plugin['pro']['url']); ?>" class="tf-plugin-button pro" target="_blank">Get Pro</a>
-											<?php elseif (!$pro_activated): ?>
-												<button class="tf-plugin-button activate-pro" data-action="activate" data-plugin="<?php echo esc_attr($plugin['pro']['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['pro']['file_name']); ?>">
-													Activate Pro <span class="loader"></span>
-												</button>
-											<?php else: ?>
-												<span class="tf-plugin-button tf-plugin-status active-pro">Pro Activated</span>
-											<?php endif; ?>
 										<?php endif; ?>
 									</div>
 								</div>
@@ -862,7 +742,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									</div>
 									<div class="tf-faq-desc">
 										<p>
-										<?php esc_html_e("Yes, Tourfic is fully free which is available on WordPress.org. This free version will always be free. It also has a pro version with additional features which you can purchase from our official website.","tourfic"); ?>
+										<?php esc_html_e( 'Yes. The WordPress.org version of Tourfic is free and fully functional.', 'tourfic' ); ?>
 										</p>
 									</div>
 								</div>
@@ -937,312 +817,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				</div>
 			</div>
 			<?php
-		}
-
-		/**
-		 * Workspace Page
-		 * @author Jahid
-		 */
-		public function tf_workspace_callback(){
-		?>
-		<div class="tf-setting-dashboard">
-				<!-- dashboard-header-include -->
-				<?php \Tourfic\Classes\Helper::tf_dashboard_header(); ?>
-
-				<div class="tf-setting-preview">
-
-					<div class="tf-setting-performace-section">
-						<div class="tf-report-wrapper">
-							<div class="tf-workspace-box">
-								<h2><?php esc_html_e("Tourfic workspace","tourfic"); ?></h2>
-								<div class="tf-workspace-boxs">
-
-									<div class="tf-single-workspace">
-										<span class="pro"><?php esc_html_e("PRO","tourfic"); ?></span>
-										<div class="workspace-content">
-											<h3><?php esc_html_e("Design Your Way","tourfic"); ?></h3>
-											<ul>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Elementor Page Build Support","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Fully Customisable Email Template","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Flexible Pricing Options (Group, Per Person, Package)","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Intuitive Itinerary Builder","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Multiple Booking Option","tourfic"); ?>
-												</li>
-											</ul>
-										</div>
-										<a href="<?php echo esc_url( 'https://tourfic.com/' ) ?>" target="_blank">
-											<?php esc_html_e("Upgrade to unlock","tourfic"); ?>
-											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M18 8L22 12L18 16" stroke="#0464C8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											<path d="M2 12H22" stroke="#0464C8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											</svg>
-										</a>
-									</div>
-
-									<div class="tf-single-workspace">
-										<span class="pro"><?php esc_html_e("PRO","tourfic"); ?></span>
-										<div class="workspace-content">
-											<h3><?php esc_html_e("Auto Communication","tourfic"); ?></h3>
-											<ul>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Webhook Based Enquiry Option","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Automation Communication with Pabbly and Zapier integration","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Email Piping for Managing Inquiry Emails","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Automatic Booking Update Mail","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Automatic Inquiry Response Emails","tourfic"); ?>
-												</li>
-											</ul>
-										</div>
-										<a href="<?php echo esc_url( 'https://tourfic.com/' ) ?>" target="_blank">
-											<?php esc_html_e("Upgrade to unlock","tourfic"); ?>
-											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M18 8L22 12L18 16" stroke="#0464C8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											<path d="M2 12H22" stroke="#0464C8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											</svg>
-										</a>
-									</div>
-
-									<div class="tf-single-workspace">
-										<span class="pro"><?php esc_html_e("PRO","tourfic"); ?></span>
-										<div class="workspace-content">
-											<h3><?php esc_html_e("Build Own Marketplace","tourfic"); ?></h3>
-											<ul>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Multivendor Support for all Services","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Separate Dashboard for Vendors and Managers","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Separate User Role and Management","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Vendor Access Control","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Intuitive Shortcode for Frontend","tourfic"); ?>
-												</li>
-											</ul>
-										</div>
-										<a href="<?php echo esc_url( 'https://tourfic.com/' ) ?>" target="_blank">
-											<?php esc_html_e("Upgrade to unlock","tourfic"); ?>
-											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M18 8L22 12L18 16" stroke="#0464C8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											<path d="M2 12H22" stroke="#0464C8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											</svg>
-										</a>
-									</div>
-
-									<div class="tf-single-workspace">
-										<span class="pro"><?php esc_html_e("PRO","tourfic"); ?></span>
-										<div class="workspace-content">
-											<h3><?php esc_html_e("Connect & Automation","tourfic"); ?></h3>
-											<ul>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Booking.com integration","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("TravelPayouts Integration","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Affiliate WP Support","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Booking.com Search API Support","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("WooCommere Payment Support","tourfic"); ?>
-												</li>
-											</ul>
-										</div>
-										<a href="<?php echo esc_url( 'https://tourfic.com/' ) ?>" target="_blank">
-											<?php esc_html_e("Upgrade to unlock","tourfic"); ?>
-											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M18 8L22 12L18 16" stroke="#0464C8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											<path d="M2 12H22" stroke="#0464C8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											</svg>
-										</a>
-									</div>
-
-									<div class="tf-single-workspace">
-										<span class="pro"><?php esc_html_e("PRO","tourfic"); ?></span>
-										<div class="workspace-content">
-											<h3><?php esc_html_e("Calender Sync","tourfic"); ?></h3>
-											<ul>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Ical Two Way Sync for all Services","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Google Calendar Sync","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Booking Sync with Google","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Booking Calander Import","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Intuitive Booking Calendar and list","tourfic"); ?>
-												</li>
-											</ul>
-										</div>
-										<a href="<?php echo esc_url( 'https://tourfic.com/' ) ?>" target="_blank">
-											<?php esc_html_e("Upgrade to unlock","tourfic"); ?>
-											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M18 8L22 12L18 16" stroke="#0464C8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											<path d="M2 12H22" stroke="#0464C8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											</svg>
-										</a>
-									</div>
-
-									<div class="tf-single-workspace">
-										<span class="pro"><?php esc_html_e("PRO","tourfic"); ?></span>
-										<div class="workspace-content">
-											<h3><?php esc_html_e("Booking Tools","tourfic"); ?></h3>
-											<ul>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("QR Code Scanner","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Tour Extras","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Hotel Services","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Map Based Itinerary","tourfic"); ?>
-												</li>
-												<li>
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-												<?php esc_html_e("Map Based Search","tourfic"); ?>
-												</li>
-											</ul>
-										</div>
-										<a href="<?php echo esc_url( 'https://tourfic.com/' ) ?>" target="_blank">
-											<?php esc_html_e("Upgrade to unlock","tourfic"); ?>
-											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M18 8L22 12L18 16" stroke="#0464C8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											<path d="M2 12H22" stroke="#0464C8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											</svg>
-										</a>
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="tf-settings-sidebar">
-							<?php echo $this->tf_settings_sidebar(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized ?>
-						</div>
-					</div>
-				</div>
-			</div>
-		<?php
 		}
 
 		/**
@@ -1410,7 +984,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				wp_die( 'You do not have sufficient permissions to access this page.' );
 			}
 
-			$tf_option_value = array();
+			$existing_option = get_option( $this->option_id, array() );
+			$tf_option_value = is_array( $existing_option ) ? $existing_option : array();
 			$option_request  = ( ! empty( $_POST[ $this->option_id ] ) ) ? $_POST[ $this->option_id ] : array();
 
 			if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) ))){
@@ -1516,8 +1091,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			if ( ! empty( $tf_option_value ) ) {
 				update_option( $this->option_id, $tf_option_value );
-			} else {
-				delete_option( $this->option_id );
 			}
 		}
 

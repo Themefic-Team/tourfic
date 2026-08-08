@@ -29,6 +29,6 @@ MarkerLabel_.prototype=new google.maps.OverlayView();MarkerLabel_.getSharedCross
     if(typeof opt_options.clickable==="undefined"){opt_options.clickable=true;}
     if(typeof opt_options.draggable==="undefined"){opt_options.draggable=false;}
     if(typeof opt_options.optimized==="undefined"){opt_options.optimized=false;}
-    opt_options.crossImage=opt_options.crossImage||"http"+(document.location.protocol==="https:"?"s":"")+"://maps.gstatic.com/intl/en_us/mapfiles/drag_cross_67_16.png";opt_options.handCursor=opt_options.handCursor||"http"+(document.location.protocol==="https:"?"s":"")+"://maps.gstatic.com/intl/en_us/mapfiles/closedhand_8_8.cur";opt_options.optimized=false;return opt_options;}
+    opt_options.crossImage=opt_options.crossImage||"data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";opt_options.handCursor=opt_options.handCursor||"data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";opt_options.optimized=false;return opt_options;}
 function MarkerWithLabel(opt_options){opt_options=prepareOptionsForMarkerWithLabel(opt_options);this.label=new MarkerLabel_(this,opt_options.crossImage,opt_options.handCursor);google.maps.Marker.apply(this,arguments);}
 MarkerWithLabel.prototype=new google.maps.Marker();MarkerWithLabel.prototype.setMap=function(theMap){google.maps.Marker.prototype.setMap.apply(this,arguments);this.label.setMap(theMap);};

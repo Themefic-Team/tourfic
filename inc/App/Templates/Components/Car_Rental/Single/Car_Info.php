@@ -220,7 +220,7 @@ class Car_Info {
 					</li>
 				<?php } ?>
 
-				<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $car_custom_info ) ) {
+				<?php if ( ! empty( $car_custom_info ) ) {
 					foreach ( $car_custom_info as $info ) {
 						if ( ! empty( $info['title'] ) ) { ?>
 							<li class="tf-flex tf-flex-align-center tf-flex-gap-6">

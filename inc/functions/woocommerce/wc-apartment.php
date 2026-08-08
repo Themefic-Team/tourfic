@@ -125,7 +125,7 @@ function tf_apartment_get_booking_total_price( $post_id, $check_in, $check_out, 
 		return 0;
 	}
 
-	if ( '1' === $enable_availability && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+	if ( '1' === $enable_availability ) {
 		return (float) Apt_Pricing::instance( $post_id )->set_dates( $check_in, $check_out )->set_persons( $adults, $children, $infant )->get_availability();
 	}
 
@@ -145,7 +145,7 @@ function tf_apartment_get_booking_payable_and_due( $meta, $total_price, $make_de
 	$payable = (float) $total_price;
 	$due     = 0;
 
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && '1' == $booking_type && '1' === $make_deposit && $payable > 0 ) {
+	if ( '1' == $booking_type && '1' === $make_deposit && $payable > 0 ) {
 		$deposit_type   = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : '';
 		$deposit_amount = null;
 		$has_deposit    = false;
@@ -306,22 +306,11 @@ function tf_apartment_booking_callback() {
 		$instantio_is_active = 1;
 	}
 
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-		$additional_fees = ! empty( $meta['additional_fees'] ) ? $meta['additional_fees'] : array();
-	} else {
-		$additional_fee = ! empty( $meta['additional_fee'] ) ? $meta['additional_fee'] : 0;
-		$fee_type       = ! empty( $meta['fee_type'] ) ? $meta['fee_type'] : '';
-	}
-
 	// Booking Type
-	$tf_booking_type = 1;
-	$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = '';
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-		$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
-		$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
-		$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
-		$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
-	}
+	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+	$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
+	$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
+	$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 
 	$date_data    = tf_apartment_parse_check_in_out_date( $check_in_out_date );
 	$check_in_out = $date_data['date_parts'];
@@ -397,7 +386,7 @@ function tf_apartment_booking_callback() {
 				$response['product_id']      = $product_id;
 				$response['add_to_cart']     = 'true';
 
-				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				if ( ! empty( $order_id ) ) {
 					do_action( 'tf_offline_payment_booking_confirmation', $order_id, $without_payment_order_data );
 					if (
 						! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) &&
@@ -479,11 +468,7 @@ function tf_apartment_booking_popup_callback() {
 	$child_price         = ! empty( $meta['child_price'] ) ? (float) $meta['child_price'] : 0;
 	$infant_price        = ! empty( $meta['infant_price'] ) ? (float) $meta['infant_price'] : 0;
 	$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
-	$tf_booking_type     = 1;
-
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-		$tf_booking_type = ! empty( $meta['booking-by'] ) ? intval( $meta['booking-by'] ) : 1;
-	}
+	$tf_booking_type     = ! empty( $meta['booking-by'] ) ? intval( $meta['booking-by'] ) : 1;
 
 	$date_data    = tf_apartment_parse_check_in_out_date( $check_in_out_date );
 	$check_in_out = $date_data['date_parts'];
@@ -902,7 +887,7 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 	 * @author Jahid
 	 */
 
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tf_integration_order_status ) ) {
+	if ( ! empty( $tf_integration_order_status ) ) {
 		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
 		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
 	}
@@ -1085,7 +1070,7 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 	 * New Order Pabbly Integration
 	 * @author Jahid
 	 */
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tf_integration_order_status ) ) {
+	if ( ! empty( $tf_integration_order_status ) ) {
 		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
 		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
 	}

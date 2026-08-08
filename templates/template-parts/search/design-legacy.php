@@ -49,5 +49,5 @@ if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_carrental" && $tf_car_ar
         </div>
         <?php do_action( 'tf_after_container' ); ?>
     </div>
-<?php echo apply_filters( 'tf_search_result_legacy_template', ob_get_clean() ); ?>
+<?php echo wp_kses( apply_filters( 'tf_search_result_legacy_template', ob_get_clean() ), tf_custom_wp_kses_allow_tags() ); ?>
 <?php endif; ?>

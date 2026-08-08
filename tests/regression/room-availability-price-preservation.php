@@ -18,10 +18,8 @@ use Tourfic\Classes\Room\Availability;
 
 function tf_room_price_assert_same( $expected, $actual, $message ) {
 	if ( $expected !== $actual ) {
-		fwrite(
-			STDERR,
-			"FAIL: {$message}\nExpected: " . var_export( $expected, true ) . "\nActual: " . var_export( $actual, true ) . "\n"
-		);
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI-only test diagnostics.
+		echo "FAIL: {$message}\nExpected: " . var_export( $expected, true ) . "\nActual: " . var_export( $actual, true ) . "\n";
 		exit( 1 );
 	}
 }

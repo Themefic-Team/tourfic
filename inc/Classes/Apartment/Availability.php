@@ -64,7 +64,7 @@ class Availability {
 		$pricing_type = !empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
 		$total_price = 0;
 		
-		if ( $enable_availability === '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		if ( $enable_availability === '1' ) {
 			$apt_availability = ! empty( $meta['apt_availability'] ) ? json_decode( $meta['apt_availability'], true ) : [];
 
 			if ( ! empty( $apt_availability ) && is_array( $apt_availability ) ) {
@@ -286,7 +286,7 @@ class Availability {
 		$date_keys = array();
 
 		for ( $day = $rule_from; $day <= $rule_to; $day = strtotime( '+1 day', $day ) ) {
-			$date_keys[] = date( 'Y/m/d', $day );
+				$date_keys[] = gmdate( 'Y/m/d', $day );
 		}
 
 		return $date_keys;

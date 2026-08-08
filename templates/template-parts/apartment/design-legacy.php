@@ -82,14 +82,14 @@ use \Tourfic\App\TF_Review;
         <div id="apartment-map" class="tf-apartment-map-wrapper">
             <div class="tf-container">
                 <div class="tf-row">
-                    <div class="tf-map-content-wrapper <?php echo empty( $map['address'] ) || empty( $meta['surroundings_places'] ) ? 'tf-map-content-full' : ''; ?> <?php echo ! function_exists( 'is_tf_pro' ) ? 'tf-map-content-full' : '' ?>">
+					<div class="tf-map-content-wrapper <?php echo empty( $map['address'] ) || empty( $meta['surroundings_places'] ) ? 'tf-map-content-full' : ''; ?>">
 						<?php \Tourfic\App\Templates\Components\Shared\Single\Map::render(['design' => 'design-2'], '', '600px'); ?>
 
-						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ){
-                            \Tourfic\App\Templates\Components\Shared\Single\Nearby_Places::render([
-                                'nearby_places_style' => 'style2',
-                            ]);
-                        } ?>
+						<?php
+						\Tourfic\App\Templates\Components\Shared\Single\Nearby_Places::render([
+							'nearby_places_style' => 'style2',
+						]);
+						?>
                     </div>
                 </div>
             </div>

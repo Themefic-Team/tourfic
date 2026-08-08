@@ -1,4 +1,7 @@
 <?php
+
+defined( 'ABSPATH' ) || exit;
+
 function fontawesome_five_icons() {
 	$icons = array(
 		'fab fa-500px',

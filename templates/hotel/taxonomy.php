@@ -10,9 +10,9 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Hotel\Hotel;
 use \Tourfic\Classes\Hotel\Pricing;
 
- if(wp_is_block_theme()){
+ if(tf_is_block_theme()){
     wp_head();
-    block_header_area();
+    tf_render_block_header_area();
 }else{
     get_header();
 }
@@ -191,11 +191,11 @@ ob_start();
 <?php
 // Get the output and apply filter
 $template_output = ob_get_clean();
-echo apply_filters( 'tf_hotel_location_archive_legacy_template', $template_output, $post_type, $taxonomy, $taxonomy_name, $taxonomy_slug );
+echo wp_kses( apply_filters( 'tf_hotel_location_archive_legacy_template', $template_output, $post_type, $taxonomy, $taxonomy_name, $taxonomy_slug ), tf_custom_wp_kses_allow_tags() );
 }
-if(wp_is_block_theme()){
+if(tf_is_block_theme()){
     wp_footer();
-    block_footer_area();
+    tf_render_block_footer_area();
  }else{
 	get_footer();
  }

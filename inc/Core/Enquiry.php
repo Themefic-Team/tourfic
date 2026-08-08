@@ -20,13 +20,6 @@ abstract class Enquiry {
 		add_action( 'wp_ajax_tf_enquiry_reply_email', array($this, 'tf_enquiry_reply_email_callback') );
 		add_action( 'wp_ajax_tf_enquiry_filter_mail', array($this, 'tf_enquiry_filter_mail_callback') );
 
-		if( is_plugin_active( 'tourfic-email-piping/tourfic-email-piping.php' ) ) {
-			add_filter( 'cron_schedules', array($this, 'tf_enquiry_response_schedule') );
-			add_action( 'init', array($this, 'tf_enquiry_response_schedule_event') );
-			add_action( 'tf_enquiry_response_schedule', array($this, 'tf_enquiry_response_schedule_callback') );
-		} else {
-			self::tf_enquiry_update_response_unschedule();
-		}
 }
 
 	abstract public function add_submenu();
@@ -95,20 +88,22 @@ abstract class Enquiry {
 
 						<div class="tf-filter-options">
 							<div class="tf-order-status-filter">
+							<?php
+							$status_filters = apply_filters(
+								'tourfic_enquiry_status_filters',
+								array(
+									''            => esc_html__( 'Filters', 'tourfic' ),
+									'unread'      => esc_html__( 'Unread', 'tourfic' ),
+									'replied'     => esc_html__( 'Replied', 'tourfic' ),
+									'not-replied' => esc_html__( 'Not Replied', 'tourfic' ),
+								)
+							);
+							?>
 							<select class="tf-tour-filter-options tf-filter-mail-option-enquiry">
-									<option value=""><?php esc_html_e( "Filters", "tourfic" ); ?></option>
-									<option value="unread"><?php esc_html_e( "Unread", "tourfic" ); ?></option>
-									<?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
-										<option value="replied"><?php esc_html_e( "Replied", "tourfic" ); ?></option>
-										<option value="not-replied"><?php esc_html_e( "Not Replied", "tourfic" ); ?></option>
-										
-										<?php if( is_plugin_active( 'tourfic-email-piping/tourfic-email-piping.php' ) ) : ?>
-											<option value="responded"><?php esc_html_e( "Responded", "tourfic" ); ?></option>
-											<option value="not-responded"><?php esc_html_e( "Not Responded", "tourfic" ); ?></option>
-										<?php endif; ?>
-
-									<?php endif; ?>
-								</select>
+								<?php foreach ( $status_filters as $status => $label ) : ?>
+									<option value="<?php echo esc_attr( $status ); ?>"><?php echo esc_html( $label ); ?></option>
+								<?php endforeach; ?>
+							</select>
 							</div>
 						</div>
 
@@ -133,13 +128,10 @@ abstract class Enquiry {
 
 		$post_type = !empty($data) ? $data[0]["post_type"] : '';
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-
-			if ( isset( $_GET['paged'] ) ) {
-				$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) );
-			} else {
-				$paged = 1;
-			}
+		if ( isset( $_GET['paged'] ) ) {
+			$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) );
+		} else {
+			$paged = 1;
 		}
 		?>
 		<div class="<?php echo esc_attr(apply_filters( $post_type . '_booking_oder_table_class', "tf-order-table-responsive")) ?> tf-enquiry-table">
@@ -175,7 +167,7 @@ abstract class Enquiry {
 				if( !empty( $data )) :
 					foreach ( $data as $enquiry ) { ?>
 						<?php 
-							$tr_unread_class = $enquiry["status"] == 'unread' ? 'tf-enquiry-unread' : ( $enquiry["status"] == 'responded' && function_exists( 'is_tf_pro' ) && is_tf_pro() ? 'tf-enquiry-responded' : '' );
+							$tr_unread_class = $enquiry["status"] == 'unread' ? 'tf-enquiry-unread' : ( $enquiry["status"] == 'responded' ? 'tf-enquiry-responded' : '' );
 							$submit_time = self::convert_to_wp_timezone($enquiry["submit_time"]);
 						
 						?>
@@ -221,49 +213,7 @@ abstract class Enquiry {
 								?>
 							</td>
 						</tr>
-						<?php if ( ! defined( 'TF_PRO' ) && $tf_key == 15 ) { ?>
-							<tr class="pro-row" style="text-align: center; background-color: #ededf8">
-								<td colspan="8" style="text-align: center;">
-									<a href="https://tourfic.com/" target="_blank">
-										<h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;"><?php esc_html_e( 'Upgrade to Pro Version to See More', 'tourfic' ); ?></h3>
-									</a>
-								</td>
-							</tr>
-							<tr class="pro-row pro-notice-row" style="text-align: center; background-color: #ededf8">
-								<td colspan="8" style="text-align: center;">
-									<div class="tf-field tf-field-notice tf-pro-notice " style="width:100%;">
-										<div class="tf-fieldset">
-											<div class="tf-field-notice-inner tf-notice-info">
-												<div class="tf-field-notice-icon">
-													<i class="ri-information-fill"></i>
-												</div>
-												<div class="tf-field-notice-content has-content">
-												<?php
-												// translators: 1: opening <b> tag, 2: closing </b> tag, 3: opening <b> tag, 4: closing </b> tag, 5: opening <b> tag, 6: closing </b> tag, 7: opening <b> tag, 8: closing </b> tag.
-												echo wp_kses_post( sprintf(
-														esc_html__(
-															"We're offering some extra filter features like %1\$s replied %2\$s, %3\$s not replied %4\$s, %5\$s not responded %6\$s, and %7\$s not responded %8\$s in our pro plan.",
-															'tourfic'
-														),
-														'<b>', '</b>',
-														'<b>', '</b>',
-														'<b>', '</b>',
-														'<b>', '</b>'
-													)
-												);
-												?>
-												<a href="https://themefic.com/tourfic/pricing" target="_blank">
-													<?php esc_html_e( 'Upgrade to our pro package today to take advantage of these fantastic options!', 'tourfic' ); ?>
-												</a>
-											</div>
-
-											</div>
-										</div>
-									</div>
-								</td>
-							</tr>
-						<?php break;}
-						$tf_key ++;
+							<?php $tf_key ++;
 					} ?>
 				<?php else: ?>
 					<tr class="no-result-found" style="text-align: center">
@@ -278,7 +228,6 @@ abstract class Enquiry {
 					<tr>
 						<th colspan="8">
 							<ul class="tf-booking-details-pagination">
-								<?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
 									<?php if ( ! empty( $paged ) && $paged >= 2 ) { ?>
 									<li><a href="<?php echo esc_url($this->enquiry_details_pagination( $paged - 1 )); ?>">
 											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -308,7 +257,6 @@ abstract class Enquiry {
 												</svg>
 											</a></li>
 									<?php } ?>
-								<?php endif; ?>
 							</ul>
 						</th>
 					</tr>
@@ -378,11 +326,7 @@ abstract class Enquiry {
 				<div class="tf-enquiry-single-back-button">
 					<a href="<?php echo esc_url(admin_url('edit.php?post_type=' . $data["post_type"] . '&page=' . $data["post_type"] . '_enquiry')); ?>" class="tf-enquiry-back-btn"><i class="ri-arrow-left-line"></i><?php esc_html_e('Back', 'tourfic'); ?></a>
 				</div>
-				<?php if( is_plugin_active( 'tourfic-email-piping/tourfic-email-piping.php' ) ) : ?>
-					<div class="tf-enquiry-single-back-button tf-enquiry-single-sync">
-						<div class="tf-enquiry-single-sync-button" data-button-name="tf-enquiry-single-sysnc-button"><?php echo esc_html__("Sync Mail", 'tourfic'); ?></div>
-					</div>
-				<?php endif; ?>
+				<?php do_action( 'tourfic_enquiry_header_actions', $data ); ?>
 			</div>
 			<!-- Back Button - End -->
 			<!-- Enquiry Details - Start -->
@@ -408,7 +352,6 @@ abstract class Enquiry {
 							</div>
 						</div>
 					</div> <!-- Enquiry mail Details Wrapper - End -->
-					<?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
 						<?php if( count($reply_data) == 0 ): ?>
 							<div class="tf-single-enquiry-reply-mail-button">
 								<span> <?php esc_html_e( "Reply to Email", 'tourfic') ?> </span>
@@ -538,35 +481,6 @@ abstract class Enquiry {
 								</form>
 							</div>
 						</div> <!-- Enquiry mail Reply Wrapper - End -->
-					<?php else: ?>
-						<div class="tf-field tf-field-notice tf-pro-notice " style="width:100%;">
-							<div class="tf-fieldset">
-				            	<div class="tf-field-notice-inner tf-notice-info">
-									<div class="tf-field-notice-icon">
-										<i class="ri-information-fill"></i>
-									</div>
-                					<div class="tf-field-notice-content has-content">
-									<?php
-									// translators: 1: opening <b> tag, 2: closing </b> tag, 3: opening <b> tag, 4: closing </b> tag.
-									echo wp_kses_post( sprintf(
-											esc_html__(
-												"We're offering some exiting features like %1\$s sending reply from enquiry details page %2\$s and %3\$s get replies using email piping %4\$s in our pro plan.",
-												'tourfic'
-											),
-											'<b>', '</b>',
-											'<b>', '</b>'
-										)
-									);
-									?>
-									<a href="https://themefic.com/tourfic/pricing" target="_blank">
-										<?php esc_html_e( 'Upgrade to our pro package today to take advantage of these fantastic options!', 'tourfic' ); ?>
-									</a>
-             
-									</div>
-            					</div>
-			            	</div>
-			        	</div>
-					<?php endif; ?>
 				</div> <!-- Enquiry Details Left - End -->
 				<div class="tf-single-enquiry-right"> <!-- Enquiry Details Right - Start -->
 					<div class="tf-enquiry-single-log-details">
@@ -907,6 +821,7 @@ abstract class Enquiry {
 			$values[]    = absint( $per_page );
 		}
 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared,PluginCheck.Security.DirectDB.UnescapedDBParameter -- Clauses are fixed above and all values use placeholders.
 		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . " ORDER BY id DESC{$query_limit}", $values ), ARRAY_A );
 
 		if( !empty($results) ) {
@@ -978,10 +893,8 @@ abstract class Enquiry {
 		 * Enquiry Pabbly Integration
 		 * @author Jahid
 		 */
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			do_action( 'enquiry_pabbly_form_trigger', $post_id, $name, $email, $question );
-			do_action( 'enquiry_zapier_form_trigger', $post_id, $name, $email, $question );
-		}
+		do_action( 'enquiry_pabbly_form_trigger', $post_id, $name, $email, $question );
+		do_action( 'enquiry_zapier_form_trigger', $post_id, $name, $email, $question );
 
 		if ( "tf_hotel" == get_post_type( $post_id ) ) {
 			$send_email_to[] = ! empty( Helper::tfopt( 'h-enquiry-email' ) ) ? sanitize_email( Helper::tfopt( 'h-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
@@ -994,7 +907,7 @@ abstract class Enquiry {
 		$tf_vendor_email_enable_setting = ! empty( Helper::tfopt( 'email_template_settings' )['enable_vendor_enquiry_email'] ) ? Helper::tfopt( 'email_template_settings' )['enable_vendor_enquiry_email'] : 0;
 
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $tf_vendor_email_enable_setting == 1 ) ) {
+		if ( ( $tf_vendor_email_enable_setting == 1 ) ) {
 			if ( in_array( "tf_vendor", $tf_user_roles ) ) {
 				if ( "tf_hotel" == get_post_type( $post_id ) ) {
 					$send_email_to[] = ! empty( $author_mail ) ? $author_mail : '';
@@ -1060,7 +973,7 @@ abstract class Enquiry {
 			$response['msg']    = esc_html__( 'Message sent failed!', 'tourfic' );
 		}
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tf_vendor_email_enable_setting != 1 ) {
+		if ( $tf_vendor_email_enable_setting != 1 ) {
 			if ( in_array( "tf_vendor", $tf_user_roles ) ) {
 				if( self::tf_vendor_default_enquiry_mail( $author_mail, $post_id, $name, $question, $this->last_id ) ) {
 				} else {
@@ -1289,11 +1202,7 @@ abstract class Enquiry {
 				$headers[] = 'References: ' . $reply_data[$replay_data_last_index]["references"];
 			}
 
-			$reply_footer = '';
-
-			if( is_plugin_active( 'tourfic-email-piping/tourfic-email-piping.php' ) ) {
-				$reply_footer = "<br><p>" . esc_html__("Please reply to this email to update your enquiry.",'tourfic') . "</p>";
-			}
+			$reply_footer = apply_filters( 'tourfic_enquiry_reply_footer', '', $enquiry_id, $post_id );
 
 			$send_mail = wp_mail( $to, $subject, $reply_message . $reply_footer, $headers );
 			
@@ -1424,82 +1333,5 @@ abstract class Enquiry {
 		}
 		return 'Unknown';
 	}
-
-	function tf_enquiry_response_schedule( $schedules ) {
-		$interval = 60;
-
-		$schedules['tf_enquiry_response_schedule'] = array(
-            'interval' => $interval,
-            'display' => esc_attr__( 'Tourfic Response Scheduler', 'tourfic' )
-        );
-
-		return $schedules;
-
-	}
-
-	function tf_enquiry_response_schedule_event() {
-		if ( ! wp_next_scheduled( 'tf_enquiry_response_schedule' ) ) {
-            wp_schedule_event( time(), 'tf_enquiry_response_schedule', 'tf_enquiry_response_schedule' );
-        }
-	}
-
-	function tf_enquiry_response_schedule_callback() {
-
-		if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-		} else {
-			self::tf_enquiry_update_response_unschedule();
-		}
-
-
-		if( empty( get_option("tfep_enquiry_update_response") )) {
-			return;
-		}
-
-		global $wpdb;
-
-		$response_data = get_option("tfep_enquiry_update_response");
-
-		$enquiry_id = $response_data["enquiry_id"];
-		$enquiry_details = $wpdb->get_results( 
-			$wpdb->prepare("SELECT * FROM {$wpdb->prefix}tf_enquiry_data where id= %s", $enquiry_id), 
-			ARRAY_A 
-		);
-		$enquiry_details = !empty($enquiry_details) ? $enquiry_details[0] : array();
-
-		if( $enquiry_details["author_roles"] != "tf_vendor" ) {
-			return;
-		}
-
-		if( $enquiry_details["enquiry_status"] == "unread" && $enquiry_details["enquiry_status"] == "read" ) {
-			return;
-		}
-
-		if( empty( $enquiry_details["reply_data"] ) ) {
-			return;
-		}
-
-		$reply_data = json_decode( $enquiry_details["reply_data"], true );
-
-		$last_reply = end($reply_data);
-
-		$vendor_mail = get_the_author_meta("user_email", $enquiry_details["author_id"]);
-		$post_id = $enquiry_details["post_id"];
-		$name = !empty( $last_reply["name"] ) ? $last_reply["name"] : '';
-		$body = !empty( $last_reply["reply_message_html"] ) ? $last_reply["reply_message_html"] : '';
-
-		if( $response_data["notified"] == "false") {
-			$reply_to_vendor = self::tf_vendor_default_enquiry_mail($vendor_mail, $post_id, $name, $body, $enquiry_id, 'reply');
-			if( $reply_to_vendor ) {
-				update_option("tfep_enquiry_update_response", '');
-			}
-		}
-	}
-
-	public static function tf_enquiry_update_response_unschedule() {
-        $timestamp = wp_next_scheduled( 'tf_enquiry_response_schedule' );
-        if( $timestamp ) {
-            wp_unschedule_event( $timestamp, 'tf_enquiry_response_schedule' );
-        }
-    }
 
 }

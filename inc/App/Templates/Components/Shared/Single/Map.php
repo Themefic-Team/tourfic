@@ -46,7 +46,6 @@ class Map {
 	}
 
 	private static function tf_hotel_map( $settings, $builder, $height = '' ) {
-        $design  	           = ! empty( $settings['design'] ) ? $settings['design'] : 'design-1';
 		$show_icon             = Helper::get_switcher_value( $settings, 'show_icon', 'yes', $builder );
 		$show_title 		   = Helper::get_switcher_value( $settings, 'show_title', 'yes', $builder );
 		$wrapper 			   = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'no';
@@ -90,33 +89,12 @@ class Map {
 		<div id="hotel-map-location" class="tf-location tf-single-widgets">
             <?php if ( $show_title == 'yes' ) : ?>
                 <h3 class="tf-section-title"><?php esc_html_e("Location", "tourfic"); ?></h3>
-            <?php endif; ?>
-			<div class="tf-hotel-location-map tf-single-map">
-				<?php if(!defined( 'TF_PRO' ) && $design == 'design-2') : ?>
-					<div class="show-on-map">
-						<div class="tf-btn-wrap"><a href="https://www.google.com/maps/search/<?php echo esc_attr( $address ); ?>" target="_blank" class="tf_btn tf_btn_full"><span><i class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a></div>
-					</div>
-				<?php else: ?>
-					<?php if ( !defined( 'TF_PRO' ) && !empty( $address ) && $tf_openstreet_map!="default" && (empty($address_latitude) || empty($address_longitude)) ) { ?>
-						<div class="tf-hotel-location-preview show-on-map">
-							<iframe src="https://maps.google.com/maps?q=<?php echo wp_kses_post($address); ?>&output=embed" width="100%" height="<?php echo esc_attr( $height ); ?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-							<?php if ( $show_icon == 'yes' ) : ?>
-								<a href="https://www.google.com/maps/search/<?php echo wp_kses_post($address); ?>" class="map-pre" target="_blank"><i class="fa-solid fa-location-dot"></i></a>
-							<?php endif; ?>
-						</div>
-					<?php } elseif ( !defined( 'TF_PRO' ) && !empty( $address ) && $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude)) {  ?>
-						<div class="tf-hotel-location-preview show-on-map">
-							<div id="hotel-location" style="height: <?php echo esc_attr( $height ); ?>;"></div>
-						</div>
-					<?php } elseif ( !defined( 'TF_PRO' ) && !empty( $address ) && $tf_openstreet_map=="default" && (empty($address_latitude) || empty($address_longitude)) ) {  ?>
-						<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="<?php echo esc_attr( $height ); ?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-					<?php } ?>
-				<?php endif; ?>
-
-				<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( ! empty( $address ) || ( ! empty( $address_latitude ) && ! empty( $address_longitude ) ) ) ) { ?>
-					<?php if ( 'default' !== $tf_openstreet_map ) { ?>
-						<div class="tf-hotel-location-preview show-on-map">
-							<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="<?php echo esc_attr( $height ); ?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+			<?php endif; ?>
+				<div class="tf-hotel-location-map tf-single-map">
+					<?php if ( ! empty( $address ) || ( ! empty( $address_latitude ) && ! empty( $address_longitude ) ) ) { ?>
+						<?php if ( 'default' !== $tf_openstreet_map ) { ?>
+							<div class="tf-hotel-location-preview show-on-map">
+								<iframe src="https://maps.google.com/maps?q=<?php echo ! empty( $address ) ? esc_attr( str_replace( '#', '', $address ) ) : esc_attr( $address_latitude . ',' . $address_longitude ); ?>&output=embed" width="100%" height="<?php echo esc_attr( $height ); ?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
 							<?php if ( $show_icon == 'yes' ) : ?>
 							<a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="https://www.google.com/maps/search/<?php echo wp_kses_post( $address ); ?>">
@@ -138,9 +116,9 @@ class Map {
 						</div>
 					<?php } ?>
 
-					<?php if ( 'default' === $tf_openstreet_map && ( empty( $address_latitude ) || empty( $address_longitude ) ) ) { ?>
-						<div class="tf-hotel-location-preview show-on-map">
-							<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="<?php echo esc_attr( $height ); ?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+						<?php if ( 'default' === $tf_openstreet_map && ! empty( $address ) && ( empty( $address_latitude ) || empty( $address_longitude ) ) ) { ?>
+							<div class="tf-hotel-location-preview show-on-map">
+								<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( '#', '', $address ) ); ?>&output=embed" width="100%" height="<?php echo esc_attr( $height ); ?>" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
 							<?php if ( $show_icon == 'yes' ) : ?>
 							<a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="https://www.google.com/maps/search/<?php echo wp_kses_post( $address ); ?>">
@@ -173,7 +151,7 @@ class Map {
 
 					const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 						maxZoom: 20,
-						attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+						attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 					}).addTo(map);
 
 					const marker = L.marker([<?php echo esc_attr( $address_latitude ); ?>, <?php echo esc_attr( $address_longitude ); ?>]).addTo(map);
@@ -199,12 +177,6 @@ class Map {
 			$address_longitude  = ! empty( Helper::tf_data_types( $meta['location'] )['longitude'] ) ? Helper::tf_data_types( $meta['location'] )['longitude'] : '';
 			$address_zoom       = ! empty( Helper::tf_data_types( $meta['location'] )['zoom'] ) ? Helper::tf_data_types( $meta['location'] )['zoom'] : '';
 		}
-		$itinerary_map = ! empty( Helper::tfopt('itinerary_map') ) && function_exists('is_tf_pro') && is_tf_pro() ? Helper::tfopt('itinerary_map') : 0;
-		$itineraries     = !empty($meta['itinerary']) ? Helper::tf_data_types( $meta['itinerary'] ) : null;
-
-		// if ( $itinerary_map == 1 && $itineraries ){
-		// 	return;
-		// }
 		?>
 		<?php if ( ! empty( $meta['location'] ) ) : ?>
 			<div class="tf-trip-map-wrapper tf-single-map" id="tf-tour-map">
@@ -235,7 +207,7 @@ class Map {
 					
 					const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 						maxZoom: 20,
-						attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+						attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 					}).addTo(map);
 
 					const marker = L.marker([<?php echo esc_attr( $address_latitude ); ?>, <?php echo esc_attr( $address_longitude ); ?>]).addTo(map);
@@ -292,7 +264,7 @@ class Map {
 
 					const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 						maxZoom: 20,
-						attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+						attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 					}).addTo(map);
 
 					const marker = L.marker([<?php echo esc_attr( $address_latitude ); ?>, <?php echo esc_attr( $address_longitude ); ?>]).addTo(map);
@@ -344,7 +316,7 @@ class Map {
 
 					const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 						maxZoom: 20,
-						attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+						attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 					}).addTo(map);
 
 					const marker = L.marker([<?php echo esc_attr( $address_latitude ); ?>, <?php echo esc_attr( $address_longitude ); ?>]).addTo(map);

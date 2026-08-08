@@ -63,6 +63,8 @@ if ( ! class_exists( 'TF_Room_Rest_API' ) ) {
 			$args     = array(
 				'post_type'      => 'tf_room',
 				'posts_per_page' => - 1,
+				'post_status'    => array( 'publish', 'pending', 'draft' ),
+				'author'         => current_user_can( 'edit_others_tf_rooms' ) ? 0 : get_current_user_id(),
 			);
 
 			$rooms = get_posts( $args );
@@ -88,13 +90,13 @@ if ( ! class_exists( 'TF_Room_Rest_API' ) ) {
 		public function tf_get_rooms( $request ) {
 			$per_page = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 10;
 			$page     = $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1;
-			$author   = $request->get_param( 'user' ) ? $request->get_param( 'user' ) : get_current_user_id();
+			$author   = $this->tf_management_author( $request, 'user', 'edit_others_tf_rooms' );
 
 			$query_rooms = new WP_Query( array(
 				'post_type'      => 'tf_room',
 				'posts_per_page' => $per_page,
 				'post_status'    => array( 'publish', 'pending', 'draft' ),
-				'author'         => $this->user_has_role( $author, 'administrator' ) || $this->user_has_role( $author, 'tf_manager' ) ? '' : $author,
+				'author'         => $author,
 				'paged'          => $page,
 			) );
 			$rooms       = array();
@@ -127,6 +129,12 @@ if ( ! class_exists( 'TF_Room_Rest_API' ) ) {
 			);
 
 			return $rooms;
+		}
+
+		public function tf_room_permission_callback( WP_REST_Request $request ) {
+			$id_param = null !== $request->get_param( 'id' ) ? 'id' : '';
+
+			return $this->tf_management_permission_callback( $request, 'edit_tf_rooms', 'edit_others_tf_rooms', 'tf_room', $id_param );
 		}
 	}
 }

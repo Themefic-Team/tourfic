@@ -7,9 +7,9 @@ defined( 'ABSPATH' ) || exit;
  * @author Foysal
  */
 
- if(wp_is_block_theme()){
+ if(tf_is_block_theme()){
     wp_head();
-    block_header_area();
+    tf_render_block_header_area();
 }else{
     get_header();
 }
@@ -157,9 +157,9 @@ if( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template=="design
 </div>
 <?php
 }
-if(wp_is_block_theme()){
+if(tf_is_block_theme()){
     wp_footer();
-    block_footer_area();
+    tf_render_block_footer_area();
  }else{
 	get_footer();
  }

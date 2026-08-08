@@ -7,7 +7,7 @@ class TF_API_Bootstrap {
 	use \Tourfic\Traits\Singleton;
 
 	public function __construct() {
-		if ( ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) || class_exists( 'TF_FD_API_Routes' ) ) {
+		if ( ! apply_filters( 'tourfic_register_core_api_routes', true ) || class_exists( 'TF_FD_API_Routes' ) ) {
 			return;
 		}
 

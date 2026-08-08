@@ -42,7 +42,7 @@ class Description {
 			$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
 			$description_title = ! empty( $meta['description-section-title'] ) ? esc_html( $meta['description-section-title'] ) : '';
 			if ( $show_title === 'yes' ) {
-				echo '<h2 class="tf-title tf-section-title">' . $description_title . '</h2>';
+					echo '<h2 class="tf-title tf-section-title">' . esc_html( $description_title ) . '</h2>';
 			}
 		} elseif ( 'tf_room' === $post_type ) {
 			//$meta = get_post_meta( get_the_ID(), 'tf_rooms_opt', true );

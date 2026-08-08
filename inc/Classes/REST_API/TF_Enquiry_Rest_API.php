@@ -59,10 +59,12 @@ if ( ! class_exists( 'TF_Enquiry_Rest_API' ) ) {
 			}
 
 			if ( $this->tf_current_user_can_manage_records() ) {
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Clauses are fixed above and all values use placeholders.
 				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . " ORDER BY id DESC", $values ), ARRAY_A );
 			} elseif ( $this->user_has_role( $current_user_id, 'tf_vendor' ) ) {
 				$where[]  = 'author_id = %d';
 				$values[] = $current_user_id;
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Clauses are fixed above and all values use placeholders.
 				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . " ORDER BY id DESC", $values ), ARRAY_A );
 			} else {
 				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
@@ -103,8 +105,8 @@ if ( ! class_exists( 'TF_Enquiry_Rest_API' ) ) {
 			}
 
             list($date, $time) = explode(" ", $date_time_format);
-            $formatted_date = date( "M d, Y", strtotime($date));
-            $formatted_time = date( "h:i:s A", strtotime($time));
+			$formatted_date = wp_date( 'M d, Y', strtotime( $date ) );
+			$formatted_time = wp_date( 'h:i:s A', strtotime( $time ) );
 
             $enquiry['formatted_date'] = $formatted_date;
             $enquiry['formatted_time'] = $formatted_time;

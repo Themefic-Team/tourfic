@@ -2628,20 +2628,11 @@
             var $this = $(this);
             var $this_parent = $this.parent().parent();
             var id = $(this).attr("data-repeater-id");
-            var max = $(this).attr("data-repeater-max");
             var add_value = $this_parent.find('.tf-single-repeater-clone-' + id + ' .tf-single-repeater-' + id + '').clone();
-            var count = $this_parent.find('.tf-repeater-wrap-' + id + ' .tf-single-repeater-' + id + '').length;
             var parent_field = add_value.find(':input[name="tf_parent_field"]').val();
             var current_field = add_value.find(':input[name="tf_current_field"]').val();
             var maxIndex = parseInt($(this).closest('.tf-repeater').attr("data-max-index")) + 1;
             $(this).closest('.tf-repeater').attr("data-max-index", maxIndex);
-
-            $this_parent.find('.tf-repeater-wrap .tf-field-notice-inner').remove();
-            // Chacked maximum repeater
-            if (!tf_admin_params.is_pro && max != '' && count >= max) {
-                $this_parent.find('.tf-repeater-wrap').append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');
-                return false;
-            }
 
             // Repeater Count Add Value
             add_value.find(':input[name="tf_repeater_count"]').val(maxIndex);
@@ -2777,7 +2768,6 @@
 
         // Repeater Delete Value
         $(document).on('click', '.tf-repeater-icon-delete', function () {
-            var max = $(this).attr("data-repeater-max");
             var $this_parent = $(this).closest('.tf-repeater-wrap');
             var count = $this_parent.find('.tf-single-repeater').length;
             // Chacked maximum repeater
@@ -2800,16 +2790,8 @@
             var parent_field = clone_value.find('input[name="tf_parent_field"]').val();
             var current_field = clone_value.find('input[name="tf_current_field"]').val();
             var repeater_count = clone_value.find('input[name="tf_repeater_count"]').val();
-            var count = $this_parent.find('.tf-single-repeater-' + current_field + '').length;
             var maxIndex = parseInt($(this).closest('.tf-repeater').attr("data-max-index")) + 1;
             $(this).closest('.tf-repeater').attr("data-max-index", maxIndex);
-
-            $this_parent.find('.tf-field-notice-inner').remove();
-            // Chacked maximum repeater
-            if (!tf_admin_params.is_pro && max != '' && count >= max) {
-                $this_parent.append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');
-                return false;
-            }
 
             let repeatDateField = clone_value.find('.tf-field-date');
 
@@ -4340,7 +4322,7 @@ const legendSpacingPlugin = {
     
     /* Plugin insatall from dashboard sidebar */
     jQuery(document).ready(function($) {
-        $('.tf-plugin-button').not('.pro').on('click', function(e) {
+        $('.tf-plugin-button').on('click', function(e) {
             e.preventDefault();
 
             let button = $(this);

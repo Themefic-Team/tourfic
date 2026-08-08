@@ -47,7 +47,7 @@ class Tour_Price {
             $tour_availability_data = [];
         }
 		
-		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+		$package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		$package_pricing_values = ! empty( $package_pricing ) && is_array( $package_pricing ) ? array_values( $package_pricing ) : [];
 
         $adult_price = null;

@@ -12,59 +12,6 @@
 .tf-depend-hidden {
   display: block;
 }
-.csf-section {
-  .csf-field.tf-csf-disable {
-    opacity: 1;
-    user-select: none;
-    border-top: 1px solid #eee;
-    .clear {
-      &:before {
-        content: "";
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        position: absolute;
-        background-color: #eee;
-        opacity: 0.25;
-        z-index: 10;
-      }
-    }
-  }
-  .csf-field.tf-csf-pro {
-    cursor: pointer;
-  }
-}
-.tf-csf-disable.tf-csf-pro {
-  z-index: 9999999999;
-}
-.tf-csf-badge {
-  .tf-upcoming {
-    display: inline-block;
-    color: #ffffff;
-    padding: 3px 10px 3px 10px;
-    border-radius: 3px;
-    text-align: center;
-    margin: 5px 0 0 0;
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 13px;
-    background: #006600;
-    margin-right: 5px;
-  }
-  .tf-pro {
-    display: inline-block;
-    color: #ffffff;
-    padding: 3px 10px 3px 10px;
-    border-radius: 3px;
-    text-align: center;
-    margin: 5px 0 0 0;
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 13px;
-    background: #b30000;
-  }
-}
 #tf_room_opt {
   .unique-id {
     display: none;
@@ -181,32 +128,6 @@ button.tf-order-remove {
 .tf-notice.tf-notice-danger {
   color: red;
   font-size: 1rem;
-}
-.tf-license-activate {
-  display: inline-block;
-  p.submit {
-    margin: 0px !important;
-    input {
-      background-color: #003C79 !important;
-      border-color: #003C79 !important;
-      color: #ffffff;
-      padding: 4px 25px;
-      font-size: 1rem;
-    }
-  }
-}
-.el-license-active-btn {
-  display: inline-block;
-  p.submit {
-    margin: 0px !important;
-    input {
-      background-color: #003C79 !important;
-      border-color: #003C79 !important;
-      color: #ffffff;
-      padding: 4px 25px;
-      font-size: 1rem;
-    }
-  }
 }
 input.select2-search__field {
   width: 100% !important;

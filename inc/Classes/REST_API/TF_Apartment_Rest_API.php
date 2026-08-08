@@ -32,13 +32,13 @@ if ( ! class_exists( 'TF_Apartment_Rest_API' ) ) {
 		public function tf_get_apartments( $request ) {
 			$per_page = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 10;
 			$page     = $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1;
-			$author   = $request->get_param( 'user' ) ? $request->get_param( 'user' ) : get_current_user_id();
+			$author   = $this->tf_management_author( $request, 'user', 'edit_others_tf_apartments' );
 
 			$query_apartments = new WP_Query( array(
 				'post_type'      => 'tf_apartment',
 				'posts_per_page' => $per_page,
 				'post_status'    => array( 'publish', 'pending', 'draft' ),
-				'author'         => $this->user_has_role( $author, 'administrator' ) ? '' : $author,
+				'author'         => $author,
 				'paged'          => $page,
 			) );
 			$apartments       = array();
@@ -69,6 +69,12 @@ if ( ! class_exists( 'TF_Apartment_Rest_API' ) ) {
 			);
 
 			return $apartments;
+		}
+
+		public function tf_apartment_permission_callback( WP_REST_Request $request ) {
+			$id_param = null !== $request->get_param( 'apartment_id' ) ? 'apartment_id' : '';
+
+			return $this->tf_management_permission_callback( $request, 'edit_tf_apartments', 'edit_others_tf_apartments', 'tf_apartment', $id_param );
 		}
 
 		/*
@@ -175,7 +181,7 @@ if ( ! class_exists( 'TF_Apartment_Rest_API' ) ) {
 				$apt_availability_data = array_values( $apt_availability_data );
 				$apt_availability_data = array_map( function ( $item ) {
 					$item['editable'] = false;
-					$item['start']    = date( 'Y-m-d', strtotime( $item['check_in'] ) );
+					$item['start']    = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
 					$item['title']    = $item['pricing_type'] == 'per_night' ? esc_html__( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : esc_html__( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . esc_html__( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] ) . '<br>' . esc_html__( 'Infant: ', 'tourfic' ) . wc_price( $item['infant_price'] );
 
 					if ( $item['status'] == 'unavailable' ) {

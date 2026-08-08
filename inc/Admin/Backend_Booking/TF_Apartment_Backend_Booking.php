@@ -121,7 +121,7 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		$additional_fees = ! empty( $meta["additional_fees"] ) ? $meta["additional_fees"] : array();
 
 		$all_fees = [];
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $additional_fees ) ) {
+		if ( ! empty( $additional_fees ) ) {
 			if ( count( $additional_fees ) > 0 ) {
 				foreach ( $additional_fees as $fees ) {
 					$all_fees[] = array(
@@ -205,7 +205,7 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 
 		$apartment_pricing = 0;
 
-		if ( $availability_switch === '1' && ! empty( $apt_availability ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		if ( $availability_switch === '1' && ! empty( $apt_availability ) ) {
 			$apartment_avail = json_decode( $apt_availability, true );
 
 			if ( ! empty( $apartment_avail ) ) {
@@ -373,16 +373,6 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		$check_to     = ! empty( $field['tf_apartment_date']['to'] ) ? $field['tf_apartment_date']['to'] : '';
 		$apt_data     = get_post_meta( $apt_id, 'tf_apartment_opt', true );
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			$additional_fees = ! empty( $apt_data['additional_fees'] ) ? $apt_data['additional_fees'] : array();
-		} else {
-			$additional_fees [] = array(
-				"additional_fee_label" => ! empty( $apt_data['additional_fee_label'] ) ? $apt_data['additional_fee_label'] : '',
-				"additional_fee"       => ! empty( $apt_data['additional_fee'] ) ? $apt_data['additional_fee'] : 0,
-				"fee_type"             => ! empty( $apt_data['fee_type'] ) ? $apt_data['fee_type'] : '',
-			);
-		}
-
 		if( !empty( $apt_data["enable_availability"]) && $apt_data["enable_availability"] == 1 ) {
 			// $total_price = $this->get_total_apartment_price( $apt_id, $check_from, $check_to, $adult_count, $child_count, $infant_count, $additional_fees );
 			$total_price = APT_Price::instance( $apt_id )->set_dates( $check_from, $check_to)->set_persons( $adult_count, $child_count, $infant_count )->get_availability();
@@ -458,7 +448,7 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 			);
 
 			$order_id = Helper::tf_set_order( $order_data );
-			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $order_id ) ) {
+			if ( ! empty( $order_id ) ) {
 				do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
 			}
 

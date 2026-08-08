@@ -2,6 +2,8 @@
 
 use \Tourfic\Classes\Helper;
 use Tourfic\App\Templates\Components\Room\Archive\Listings;
+
+defined( 'ABSPATH' ) || exit;
 ?>
 
 <div class="tf-archive-template__one sp-0">

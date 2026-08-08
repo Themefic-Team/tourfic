@@ -484,7 +484,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 		<div class="tf-modal-dialog">
 			<div class="tf-modal-content">
 				<div class="tf-modal-header">
-					<?php echo apply_filters( 'tf_rating_modal_header_content', '' );?>
+						<?php echo wp_kses( apply_filters( 'tf_rating_modal_header_content', '' ), tf_custom_wp_kses_allow_tags() ); ?>
 					<a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
 				</div>
 				<div class="tf-modal-body">

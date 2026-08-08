@@ -265,14 +265,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					],
 					'field_width' => 50
 				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'Are you interested in enriching your car offerings with exciting services? With our Pro package, you can easily add more car-related information, through our <b>Car More information</b>.<a href="https://tourfic.com/" target="_blank">Upgrade to our Pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
-				),				
                 array(
 					'id'    => 'car-driverinfo-heading',
 					'type'  => 'heading',
@@ -662,14 +654,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'is_search_able' => true
 				),
 				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>custom availability</b>, <b>custom package</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
-				),
-				array(
 					'id'       => 'discount_type',
 					'type'     => 'select',
 					'label'    => esc_html__( 'Discount Type', 'tourfic' ),
@@ -711,14 +695,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'    => 'heading',
 					'title' => esc_html__( 'Deposit', 'tourfic' ),
 				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'Are you interested in collecting upfront or partial payments for your cars? Our <b>deposit option</b> allows you to set an upfront payment, either as a <b>percentage</b> or a <b>fixed</b> amount, which travelers can pay at the time of booking. <a href="https://tourfic.com/" target="_blank">Upgrade to our Pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
-				)
 			),
 		),
 
@@ -732,14 +708,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'type'  => 'heading',
 					'title' => esc_html__('Rental Extras', 'tourfic'),
 					'content' => esc_html__( 'Include the extras you want to sell with this package. e.g. Baby child seat, navigation system, etc.', 'tourfic' ),
-				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'Are you interested in enriching your car offerings with exciting services? With our Pro package, you can easily add exciting activities such as paragliding, along with meals and hotel accommodations, through our <b>Car Extra Services</b>. This feature allows you to customize and expand your services as much as you want, providing a better experience for your customers. <a href="https://tourfic.com/" target="_blank">Upgrade to our Pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
 				),
 			),
 		),
@@ -855,14 +823,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'title' => esc_html__( 'Cancellation Condition', 'tourfic' ),
 					'content' => esc_html__( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
 				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>booking cancellation</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
-				),
 			),
 		),
 
@@ -888,14 +848,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 						'1' => esc_html__( 'Default Booking (WooCommerce)', 'tourfic' ),
 					),
 					'default' => '1'
-				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>minimum days for booking</b>, <b>enable traveler info</b>, <b>external booking</b>, <b>booking without payment</b>, <b>taxable car</b>, <b>tax class for Woocommerce</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
 				),
 			),
 		),

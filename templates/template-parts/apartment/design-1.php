@@ -78,12 +78,10 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
             <?php 
             \Tourfic\App\Templates\Components\Shared\Single\Booking_Form::render();
 
-            if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ){
-                \Tourfic\App\Templates\Components\Shared\Single\Nearby_Places::render([
-                    'wrapper_open' => '<div class="tf-single-widgets">', 
-                    'wrapper_close' => '</div>'
-                ]);
-            } ?>
+			\Tourfic\App\Templates\Components\Shared\Single\Nearby_Places::render([
+				'wrapper_open' => '<div class="tf-single-widgets">',
+				'wrapper_close' => '</div>',
+			]); ?>
 
             <?php 
             \Tourfic\App\Templates\Components\Shared\Single\Map::render([

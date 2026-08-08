@@ -37,7 +37,10 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			// Fields Class
 			require_once TF_ADMIN_PATH . 'TF_Options/fields/TF_Fields.php';
 
-			$fields = glob( TF_ADMIN_PATH . 'TF_Options/fields/*/TF_*.php' );
+			$fields = apply_filters(
+				'tourfic_admin_field_files',
+				glob( TF_ADMIN_PATH . 'TF_Options/fields/*/TF_*.php' )
+			);
 
 			if ( ! empty( $fields ) ) {
 				foreach ( $fields as $field ) {
@@ -150,7 +153,8 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 				return;
 			}
 
-			$tf_meta_box_value = array();
+			$existing_meta_value = get_post_meta( $post_id, $this->metabox_id, true );
+			$tf_meta_box_value   = is_array( $existing_meta_value ) ? $existing_meta_value : array();
 			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array();
 
 			if ( ! empty( $metabox_request ) && ! empty( $this->metabox_sections ) ) {
@@ -198,8 +202,6 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 
 			if ( ! empty( $tf_meta_box_value ) ) {
 				update_post_meta( $post_id, $this->metabox_id, $tf_meta_box_value );
-			} else {
-				delete_post_meta( $post_id, $this->metabox_id );
 			}
 
 			/**
@@ -226,15 +228,11 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 				'post_thumbnail' => !empty( get_the_post_thumbnail_url($post_id,'full') ) ?  get_the_post_thumbnail_url($post_id,'full') : '',
 				'post_date' => get_the_date( 'Y-m-d H:i:s', $post_id )
 			);
-			if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 				if( (!empty($_POST['post_type']) && $_POST['post_type']=="tf_hotel") || (!empty($_POST['post_type']) && $_POST['post_type']=="tf_tours") || (!empty($_POST['post_type']) && $_POST['post_type']=="tf_apartment") ){
-				do_action( 'tf_services_pabbly_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
-				do_action( 'tf_services_zapier_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
+					do_action( 'tf_services_pabbly_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
+					do_action( 'tf_services_zapier_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
 				}
-			}
 		}
 
 	}
 }
-
-

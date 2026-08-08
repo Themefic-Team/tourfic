@@ -879,7 +879,7 @@
 
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
             }).addTo(map);
 
             const marker = L.marker([tf_params.single_apartment_data.address_latitude, tf_params.single_apartment_data.address_longitude], {alt: tf_params.single_apartment_data.address}).addTo(map)
@@ -2169,7 +2169,7 @@
 
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
             }).addTo(map);
 
             const marker = L.marker([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], {alt: tf_params.single_car_data.address}).addTo(map)
@@ -2916,7 +2916,7 @@ function convertTo24HourFormat(timeStr) {
             } else {
                 var roomnumber = $this.closest('.reserve').find('select[name=hotel_room_selected]').val();
                 if (roomnumber == 0) {
-                    $this.closest('.tf-room').find('.roomselectissue').html('<span style="color:red">' + tf_pro_params.select_room + '</span>');
+					$this.closest('.tf-room').find('.roomselectissue').html('<span style="color:red">' + tf_params.select_room + '</span>');
                 } else {
                     $this.closest('.tf-room').find('.roomselectissue').html('');
                     $("#hotel_room_number").val(roomnumber);
@@ -3177,7 +3177,7 @@ function convertTo24HourFormat(timeStr) {
 
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
             }).addTo(map);
 
             const marker = L.marker([tf_params.single_hotel_data.address_latitude, tf_params.single_hotel_data.address_longitude], {alt: tf_params.single_hotel_data.address}).addTo(map)
@@ -3189,7 +3189,7 @@ function convertTo24HourFormat(timeStr) {
 
             const tilesMobile = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
             }).addTo(mapMobile);
 
             const markerMobile = L.marker([tf_params.single_hotel_data.address_latitude, tf_params.single_hotel_data.address_longitude], {alt: tf_params.single_hotel_data.address}).addTo(map)
@@ -4299,7 +4299,7 @@ function convertTo24HourFormat(timeStr) {
             
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
             }).addTo(map);
 
             const marker = L.marker([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], {alt: tf_params.tour_form_data.location}).addTo(map)

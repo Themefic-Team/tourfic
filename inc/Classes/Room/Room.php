@@ -287,14 +287,11 @@ class Room {
 
 		$design = !empty($settings['design_room']) ? $settings['design_room'] : '';
 		$tf_room_arc_selected_template = !empty($design) ? $design : (! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['room-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['room-archive'] : 'design-1');
-		$tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = $tf_booking_type = '';
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			$tf_booking_type      = ! empty( $hotel_meta['booking-by'] ) ? $hotel_meta['booking-by'] : 1;
-			$tf_booking_url       = ! empty( $hotel_meta['booking-url'] ) ? esc_url( $hotel_meta['booking-url'] ) : '';
-			$tf_booking_query_url = ! empty( $hotel_meta['booking-query'] ) ? $hotel_meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
-			$tf_booking_attribute = ! empty( $hotel_meta['booking-attribute'] ) ? $hotel_meta['booking-attribute'] : '';
-			$tf_hide_price        = ! empty( $hotel_meta['hide_price'] ) ? $hotel_meta['hide_price'] : '';
-		}
+		$tf_booking_type      = ! empty( $hotel_meta['booking-by'] ) ? $hotel_meta['booking-by'] : 1;
+		$tf_booking_url       = ! empty( $hotel_meta['booking-url'] ) ? esc_url( $hotel_meta['booking-url'] ) : '';
+		$tf_booking_query_url = ! empty( $hotel_meta['booking-query'] ) ? $hotel_meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
+		$tf_booking_attribute = ! empty( $hotel_meta['booking-attribute'] ) ? $hotel_meta['booking-attribute'] : '';
+		$tf_hide_price        = ! empty( $hotel_meta['hide_price'] ) ? $hotel_meta['hide_price'] : '';
 		if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 			$external_search_info = array(
 				'{adult}'    => ! empty( $adult ) ? $adult : 1,
@@ -1148,7 +1145,7 @@ class Room {
 		$room_disable_dates = [];
 		$room_enable_dates = [];
 		$room_has_explicit_available_dates = false;
-		if ( $enable_availability === '1' && ! empty( $room_availability ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		if ( $enable_availability === '1' && ! empty( $room_availability ) ) {
 			$room_availability_arr = Availability::normalize_availability_rules( $room_availability );
 			$room_has_explicit_available_dates = Availability::has_explicit_available_rules( $room_availability_arr );
 
@@ -1178,7 +1175,7 @@ class Room {
 				// Loop day by day (checkout excluded)
 				for ( $day = $check_in; $day < $check_out; $day = strtotime('+1 day', $day) ) {
 
-					$date = date('Y/m/d', $day);
+						$date = gmdate( 'Y/m/d', $day );
 
 					if ( ! isset( $room_booked_per_day[ $date ] ) ) {
 						$room_booked_per_day[ $date ] = 0;
@@ -1341,11 +1338,7 @@ class Room {
 							<button class="tf-hotel-booking-popup-btn" type="submit" style="display: none;"></button>
 							<input type="hidden" name="option_id" value=""/>
 						<?php else: ?>
-							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) : ?>
-								<button class="tf_btn tf_btn_full tf_btn_rounded tf-submit tf-hotel-booking-popup-btn" href="javascript:;"><?php echo esc_html( $tf_room_book_button_text ); ?></button>
-							<?php else: ?>
-								<button class="tf_btn tf_btn_full tf_btn_rounded tf-submit hotel-room-book" type="submit"><?php echo esc_html( $tf_room_book_button_text ); ?></button>
-							<?php endif; ?>
+							<button class="tf_btn tf_btn_full tf_btn_rounded tf-submit tf-hotel-booking-popup-btn" href="javascript:;"><?php echo esc_html( $tf_room_book_button_text ); ?></button>
 						<?php endif; ?>
 					</div>
 					<div class="tf-room-booking-popup"></div>
@@ -1454,6 +1447,7 @@ class Room {
 			$like
 		);
 
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- The query is prepared immediately above.
 		return (int) $wpdb->get_var( $sql );
 	}
 

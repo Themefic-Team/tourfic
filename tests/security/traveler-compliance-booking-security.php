@@ -6,6 +6,11 @@
  * php tests/security/traveler-compliance-booking-security.php
  */
 
+if ( 'cli' === PHP_SAPI && ! defined( 'ABSPATH' ) ) {
+	define( 'ABSPATH', dirname( __DIR__, 2 ) . '/' );
+}
+defined( 'ABSPATH' ) || exit;
+
 $root = dirname( __DIR__, 2 );
 
 $files = array(
@@ -17,14 +22,16 @@ $files = array(
 
 foreach ( $files as $label => $file ) {
 	if ( ! is_readable( $file ) ) {
-		fwrite( STDERR, "Missing fixture {$label}: {$file}\n" );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI-only test diagnostics.
+		echo "Missing fixture {$label}: {$file}\n";
 		exit( 1 );
 	}
 }
 
 function tf_traveler_compliance_assert( $condition, $message ) {
 	if ( ! $condition ) {
-		fwrite( STDERR, "FAIL: {$message}\n" );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI-only test diagnostics.
+		echo "FAIL: {$message}\n";
 		exit( 1 );
 	}
 }

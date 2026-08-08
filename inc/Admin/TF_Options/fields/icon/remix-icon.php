@@ -1,4 +1,7 @@
 <?php
+
+defined( 'ABSPATH' ) || exit;
+
 function remix_icon() {
 	$remix_icons = array(
 		'ri-24-hours-fill',

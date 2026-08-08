@@ -54,20 +54,15 @@ class Rooms {
             }
         }
 
-        $tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = $tf_ext_booking_code = '';
-        $tf_hide_external_price = "1";
-        if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-            $tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
-            $tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
-            $tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
-            $tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
-            $tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
-            $tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
-            $tf_hide_external_price = !empty( $meta["booking-by"] ) && $meta["booking-by"] == 2 ? ( !empty( $meta["hide_external_price"] ) ? $meta["hide_external_price"] : true ) : true;
-            $tf_ext_booking_type  = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
-            $tf_ext_booking_code  = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
-            $adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
-        }
+		$tf_booking_type        = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+		$tf_booking_url         = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
+		$tf_booking_query_url   = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
+		$tf_booking_attribute   = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
+		$tf_hide_booking_form   = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+		$tf_hide_price          = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
+		$tf_hide_external_price = ! empty( $meta['booking-by'] ) && 2 == $meta['booking-by'] ? ( ! empty( $meta['hide_external_price'] ) ? $meta['hide_external_price'] : true ) : true;
+		$tf_ext_booking_type    = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
+		$tf_ext_booking_code    = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
         if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
             $external_search_info = array(
                 '{adult}'    => ! empty( $adult ) ? $adult : 1,

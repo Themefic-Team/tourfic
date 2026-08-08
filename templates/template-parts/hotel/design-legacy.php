@@ -130,23 +130,7 @@ use \Tourfic\Classes\Helper;
 	<?php endif; ?>
     <!-- FAQ section end -->
 
-    <?php if ( ! defined( 'TF_PRO' ) && ( $address ) ) { ?>
-        <div class="map-for-mobile">
-            <div class="show-on-map">
-                <div class="tf-container">
-                    <div class="tf-btn-wrap">
-                        <a href="https://www.google.com/maps/search/<?php echo esc_attr( $address ); ?>" target="_blank" class="tf_btn tf_btn_full">
-                            <span>
-                                <i class="fas fa-map-marker-alt"></i>
-                                <?php esc_html_e( 'Show on map', 'tourfic' ); ?>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php } ?>
-    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( ! empty( $address ) || ( ! empty( $address_latitude ) && ! empty( $address_longitude ) ) ) ) { ?>
+	<?php if ( ! empty( $address ) || ( ! empty( $address_latitude ) && ! empty( $address_longitude ) ) ) { ?>
         <div class="popupmap-for-mobile">
             <div class="tf-container">
                 <?php

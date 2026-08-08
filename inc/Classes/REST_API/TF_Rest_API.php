@@ -50,10 +50,13 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 			$ratting         = 0;
 			$review_text     = '';
 			$comments        = get_comments( [ 'post_id' => $post_id, 'status' => 'approve' ] );
+			$total_rate      = 0;
 			TF_Review::tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rate );
 			if ( $comments ) {
-				$ratting     = TF_Review::tf_average_ratings( array_values( $tf_overall_rate ?? [] ) );
-				$review_text = sprintf( esc_html( _nx( '%1$s review', '%1$s reviews', count( $comments ), 'comments title', 'tourfic' ) ), number_format_i18n( count( $comments ) ) );
+				$ratting = TF_Review::tf_average_ratings( array_values( $tf_overall_rate ?? [] ) );
+				/* translators: %1$s: Number of approved reviews. */
+				$review_label = _nx( '%1$s review', '%1$s reviews', count( $comments ), 'comments title', 'tourfic' );
+				$review_text  = sprintf( esc_html( $review_label ), number_format_i18n( count( $comments ) ) );
 			}
 
 			return array( 'post_reviews' => $ratting, 'review_text' => $review_text );
@@ -108,8 +111,60 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 			if ( is_user_logged_in() ) {
 				return true;
 			} else {
-				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.' ), array( 'status' => 403 ) );
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
 			}
+		}
+
+		/**
+		 * Check access to a Tourfic management collection or object.
+		 *
+		 * @param WP_REST_Request $request         REST request.
+		 * @param string          $edit_capability Collection edit capability.
+		 * @param string          $others_capability Edit-others capability.
+		 * @param string          $post_type       Expected post type for object requests.
+		 * @param string          $id_param        Optional object ID parameter.
+		 * @return true|WP_Error
+		 */
+		protected function tf_management_permission_callback( WP_REST_Request $request, $edit_capability, $others_capability, $post_type, $id_param = '' ) {
+			if ( ! current_user_can( $edit_capability ) ) {
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
+			}
+
+			if ( empty( $id_param ) ) {
+				return true;
+			}
+
+			$post_id = $request->get_param( $id_param );
+			if ( empty( $post_id ) || 'undefined' === $post_id ) {
+				return true;
+			}
+
+			$post = get_post( absint( $post_id ) );
+			if ( ! $post || $post_type !== $post->post_type ) {
+				return new WP_Error( 'rest_not_found', esc_html__( 'The requested record was not found.', 'tourfic' ), array( 'status' => 404 ) );
+			}
+
+			if ( get_current_user_id() === (int) $post->post_author || current_user_can( $others_capability ) ) {
+				return true;
+			}
+
+			return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this record.', 'tourfic' ), array( 'status' => 403 ) );
+		}
+
+		/**
+		 * Resolve the author scope for a management collection.
+		 *
+		 * @param WP_REST_Request $request           REST request.
+		 * @param string          $author_param      Author parameter name.
+		 * @param string          $others_capability Edit-others capability.
+		 * @return int
+		 */
+		protected function tf_management_author( WP_REST_Request $request, $author_param, $others_capability ) {
+			if ( current_user_can( $others_capability ) ) {
+				return absint( $request->get_param( $author_param ) );
+			}
+
+			return get_current_user_id();
 		}
 
 		/**
@@ -139,7 +194,7 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 			if ( is_user_logged_in() && ( $this->user_has_role( $current_user_id, 'administrator' ) || $this->user_has_role( $current_user_id, 'tf_manager' ) ) ) {
 				return true;
 			} else {
-				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.' ), array( 'status' => 403 ) );
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
 			}
 		}
 
@@ -281,9 +336,10 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 
 			if ( '' === $value || null === $value ) {
 				if ( $required ) {
-					return new WP_Error(
-						'tf_rest_invalid_param',
-						sprintf( esc_html__( '%s is required.', 'tourfic' ), esc_html( $param ) ),
+						return new WP_Error(
+							'tf_rest_invalid_param',
+							/* translators: %s: REST API parameter name. */
+							sprintf( esc_html__( '%s is required.', 'tourfic' ), esc_html( $param ) ),
 						array( 'status' => 400 )
 					);
 				}
@@ -292,18 +348,20 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 			}
 
 			if ( ! is_scalar( $value ) ) {
-				return new WP_Error(
-					'tf_rest_invalid_param',
-					sprintf( esc_html__( 'Invalid %s value.', 'tourfic' ), esc_html( $param ) ),
+					return new WP_Error(
+						'tf_rest_invalid_param',
+						/* translators: %s: REST API parameter name. */
+						sprintf( esc_html__( 'Invalid %s value.', 'tourfic' ), esc_html( $param ) ),
 					array( 'status' => 400 )
 				);
 			}
 
 			$value = sanitize_key( $value );
 			if ( ! in_array( $value, $allowed, true ) ) {
-				return new WP_Error(
-					'tf_rest_invalid_param',
-					sprintf( esc_html__( 'Invalid %s value.', 'tourfic' ), esc_html( $param ) ),
+					return new WP_Error(
+						'tf_rest_invalid_param',
+						/* translators: %s: REST API parameter name. */
+						sprintf( esc_html__( 'Invalid %s value.', 'tourfic' ), esc_html( $param ) ),
 					array( 'status' => 400 )
 				);
 			}
@@ -319,18 +377,20 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 			}
 
 			if ( ! is_scalar( $value ) || ! is_numeric( $value ) ) {
-				return new WP_Error(
-					'tf_rest_invalid_param',
-					sprintf( esc_html__( 'Invalid %s value.', 'tourfic' ), esc_html( $param ) ),
+					return new WP_Error(
+						'tf_rest_invalid_param',
+						/* translators: %s: REST API parameter name. */
+						sprintf( esc_html__( 'Invalid %s value.', 'tourfic' ), esc_html( $param ) ),
 					array( 'status' => 400 )
 				);
 			}
 
 			$value = absint( $value );
 			if ( empty( $value ) ) {
-				return new WP_Error(
-					'tf_rest_invalid_param',
-					sprintf( esc_html__( 'Invalid %s value.', 'tourfic' ), esc_html( $param ) ),
+					return new WP_Error(
+						'tf_rest_invalid_param',
+						/* translators: %s: REST API parameter name. */
+						sprintf( esc_html__( 'Invalid %s value.', 'tourfic' ), esc_html( $param ) ),
 					array( 'status' => 400 )
 				);
 			}
@@ -370,6 +430,7 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 				} elseif ($minutes == 1) {
 					return '1 minute ago';
 				} else {
+					/* translators: %s: Number of minutes elapsed. */
 					return sprintf(esc_html__('%s minutes ago', 'tourfic'), $minutes);
 				}
 			}

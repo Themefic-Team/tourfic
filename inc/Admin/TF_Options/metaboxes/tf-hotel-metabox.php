@@ -4,9 +4,6 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
 
-$badge_up     = '<div class="tf-csf-badge"><span class="tf-upcoming">' . esc_html__( "Upcoming", "tourfic" ) . '</span></div>';
-$badge_pro    = '<div class="tf-csf-badge"><span class="tf-pro">' . esc_html__( "Pro Feature", "tourfic" ) . '</span></div>';
-$badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' . esc_html__( "Upcoming", "tourfic" ) . '</span><span class="tf-pro">' . esc_html__( "Pro Feature", "tourfic" ) . '</span></div>';
 
 $hotel_name = apply_filters( 'tf_hotel_post_type_name_change_singular', esc_html__( 'Hotel', 'tourfic' ) );
 $hotels_name = apply_filters( 'tf_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
@@ -121,14 +118,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						'1' => esc_html__( 'Default Booking (WooCommerce)', 'tourfic' ),
 					),
 					'default' => '1',
-				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some additional features like <b>external booking</b>, <b>taxable hotel</b>, <b>tax class for Woocommerce</b> in our pro plan. The external booking option provides seamless integration with external booking systems, enhancing your booking capabilities significantly. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
 				),
 			),
 		),
@@ -325,40 +314,28 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 			),
 
 			'icon'   => 'fa-solid fa-van-shuttle',
-			'fields' => array(
+			'fields' => array_merge(
 				array(
-					'id'    => 'hotel-service-heading',
-					'type'  => 'heading',
-					// translators: %s is the hotel name.
-					'title' => sprintf(esc_html__( 'Additional %s Services', 'tourfic' ),
-						$hotel_name
-					),
-					// translators: %s is the hotel name in lowercase.
-					'content' => sprintf(esc_html__( 'This section includes additional services which your %s may offer. You may offer these services for free, or opt to charge your guests for them.', 'tourfic' ),
-						strtolower( $hotel_name )
-					),
-				),				
-				array(
-					'id'      => 'hotel-service-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/hotel-services/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'     => 'tf-pro-notice',
-					'type'   => 'notice',
-					'class'  => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon'   => 'ri-information-fill',
-				
-					/* translators: 1: lowercased hotel name, 2: lowercased hotel name again. */
-					'content' => wp_kses_post( sprintf(__( 'Do you need to add %1$s airport services such as pickup, dropoff, or both? Our Pro plan includes the <b>%2$s service</b> feature, allowing you to easily add these services with pricing options <b>per person</b>, <b>fixed</b>, or <b>complimentary</b>. Enhance your guest experience by integrating these convenient services seamlessly into your offerings. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic' ),
-							strtolower( $hotel_name ),
+					array(
+						'id'    => 'hotel-service-heading',
+						'type'  => 'heading',
+						// translators: %s is the hotel name.
+						'title' => sprintf(esc_html__( 'Additional %s Services', 'tourfic' ),
+							$hotel_name
+						),
+						// translators: %s is the hotel name in lowercase.
+						'content' => sprintf(esc_html__( 'This section includes additional services which your %s may offer. You may offer these services for free, or opt to charge your guests for them.', 'tourfic' ),
 							strtolower( $hotel_name )
-						)
+						),
+					),
+					array(
+						'id'      => 'hotel-service-docs',
+						'type'    => 'notice',
+						'style'   => 'success',
+						'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/hotel-services/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 					),
 				),
-				
+				\Tourfic\Admin\TF_Options\TF_Options::hotel_airport_service_fields()
 			),
 		),
 
@@ -376,14 +353,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'title' => esc_html__('Offer Hotel Extras', 'tourfic'),
 					'content' => esc_html__( 'If you wish to provide additional services that are not included in your current hotel package, you can list them here.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-extra/')
-				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'Are you interested in enriching your hotel offerings with exciting services? With our Pro package, you can easily add exciting activities such as paragliding, along with meals and hotel accommodations, through our <b>Hotel Extra Services</b>. This feature allows you to customize and expand your services as much as you want, providing a better experience for your customers. <a href="https://tourfic.com/" target="_blank">Upgrade to our Pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
 				),
 			),
 		),
@@ -426,18 +395,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'add_button_text' => esc_html__( 'Add New Room', 'tourfic' ),
 				),
 				
-				array(
-					'id'     => 'tf-pro-notice',
-					'type'   => 'notice',
-					'class'  => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon'   => 'ri-information-fill',
-					/* translators: %s is the lowercased hotel name. */
-					'content' => wp_kses_post(sprintf(__( 'We\'re offering some extra features in every room like <b>child age limit</b>, <b>%s room custom availability</b>, <b>deposit</b>, <b>ical sync</b> and <b>per person basis pricing</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ),
-							strtolower( $hotel_name )
-						)
-					),
-				),				
 			),
 		),
 		// FAQ Details

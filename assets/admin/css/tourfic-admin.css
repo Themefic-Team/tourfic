@@ -252,19 +252,6 @@ body.tf-modal-open:after {
   }
 }
 
-.tf-field-disable {
-  user-select: none;
-  opacity: 0.6;
-}
-
-.tf-field-disable.tf-field-upcoming {
-  user-select: none;
-  cursor: default;
-}
-.tf-field-disable.tf-field-upcoming * {
-  cursor: default !important;
-}
-
 /*
 Fontawesome
 */
@@ -391,56 +378,6 @@ Fontawesome
   display: block;
 }
 
-.csf-section .csf-field.tf-csf-disable {
-  opacity: 1;
-  user-select: none;
-  border-top: 1px solid #eee;
-}
-.csf-section .csf-field.tf-csf-disable .clear:before {
-  content: "";
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  position: absolute;
-  background-color: #eee;
-  opacity: 0.25;
-  z-index: 10;
-}
-.csf-section .csf-field.tf-csf-pro {
-  cursor: pointer;
-}
-
-.tf-csf-disable.tf-csf-pro {
-  z-index: 9999999999;
-}
-
-.tf-csf-badge .tf-upcoming {
-  display: inline-block;
-  color: #ffffff;
-  padding: 3px 10px 3px 10px;
-  border-radius: 3px;
-  text-align: center;
-  margin: 5px 0 0 0;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 13px;
-  background: #006600;
-  margin-right: 5px;
-}
-.tf-csf-badge .tf-pro {
-  display: inline-block;
-  color: #ffffff;
-  padding: 3px 10px 3px 10px;
-  border-radius: 3px;
-  text-align: center;
-  margin: 5px 0 0 0;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 13px;
-  background: #b30000;
-}
-
 #tf_room_opt .unique-id {
   display: none;
 }
@@ -540,34 +477,6 @@ button.tf-order-remove {
 
 .tf-notice.tf-notice-danger {
   color: red;
-  font-size: 1rem;
-}
-
-.tf-license-activate {
-  display: inline-block;
-}
-.tf-license-activate p.submit {
-  margin: 0px !important;
-}
-.tf-license-activate p.submit input {
-  background-color: #003C79 !important;
-  border-color: #003C79 !important;
-  color: #ffffff;
-  padding: 4px 25px;
-  font-size: 1rem;
-}
-
-.el-license-active-btn {
-  display: inline-block;
-}
-.el-license-active-btn p.submit {
-  margin: 0px !important;
-}
-.el-license-active-btn p.submit input {
-  background-color: #003C79 !important;
-  border-color: #003C79 !important;
-  color: #ffffff;
-  padding: 4px 25px;
   font-size: 1rem;
 }
 
@@ -2105,221 +2014,6 @@ Steps
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter select:focus {
   box-shadow: none;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 12px;
-}
-@media only screen and (max-width: 1650px) {
-  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-@media only screen and (max-width: 1320px) {
-  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media only screen and (max-width: 1024px) {
-  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs {
-    grid-template-columns: 1fr;
-  }
-}
-@media only screen and (max-width: 991.98px) {
-  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media only screen and (max-width: 640px) {
-  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs {
-    grid-template-columns: 1fr;
-  }
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace {
-  padding: 24px;
-  border-radius: 12px;
-  border: 1px solid #F2F5F7;
-  background: #FFF;
-  box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace span.pro {
-  border-radius: 6px;
-  background: #F0FDF4;
-  padding: 4px 6px;
-  color: #16A34A;
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 16px;
-  width: fit-content;
-  position: absolute;
-  right: 16px;
-  top: 16px;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace h3 {
-  color: #27333F;
-  font-size: 19px;
-  font-weight: 600;
-  line-height: 150%;
-  margin: 0;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace ul {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 16px 0 32px 0;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace ul li {
-  color: #27333F;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 20px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a {
-  border-radius: 8px;
-  border: 1px solid #0352A0;
-  color: #0464C8;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 24px;
-  padding: 12px 32px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  gap: 8px;
-  margin-top: auto;
-  width: fit-content;
-  transition: 0.3s all ease;
-}
-@media only screen and (max-width: 1650px) {
-  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a {
-    padding: 12px 15px;
-  }
-}
-@media only screen and (max-width: 1320px) {
-  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a {
-    padding: 12px 20px;
-  }
-}
-@media only screen and (max-width: 991.98px) {
-  .tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a {
-    padding: 12px 20px;
-  }
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a svg path {
-  transition: 0.3s all ease;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a:hover {
-  background: linear-gradient(180deg, #0352A0 0%, #0464C8 100%);
-  color: #fff;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-workspace-box .tf-workspace-boxs .tf-single-workspace a:hover svg path {
-  stroke: #fff;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box {
-  border-radius: 8px;
-  border: 0.5px solid #238DFB;
-  background: #FFF;
-  box-shadow: 0 32px 56px 0 rgba(125, 168, 212, 0.08), 0 16px 40px 0 rgba(125, 168, 212, 0.04), 0 32px 32px 0 rgba(125, 168, 212, 0.02);
-  padding: 0 24px 24px 24px;
-  margin-bottom: 32px;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header .premium-logo {
-  text-align: center;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header .premium-logo img {
-  margin-top: -32px;
-  margin-bottom: 14px;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header h3 {
-  color: #0464C8;
-  font-size: 19px;
-  font-weight: 600;
-  line-height: 150%;
-  margin: 0 0 8px 0;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header h4 {
-  color: #27333F;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 150%;
-  letter-spacing: -0.25px;
-  margin: 0 0 8px 0;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-header p {
-  color: #414D59;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 24px;
-  margin: 0 0 16px 0;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-features ul {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  gap: 8px;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-features ul li {
-  display: flex;
-  gap: 8px;
-  margin: 0;
-  color: #27333F;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 20px;
-  align-items: center;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-button {
-  padding: 16px 0;
-  border-bottom: 1px solid #F2F5F7;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-button a {
-  padding: 12px 32px;
-  border-radius: 8px;
-  background: linear-gradient(180deg, #0352A0 0%, #0464C8 100%);
-  color: #FFF;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 24px;
-  text-decoration: navajowhite;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 16px;
-  transition: 0.3s all ease;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-button a:hover {
-  box-shadow: 0 16px 8px 0 rgba(8, 20, 33, 0.04), 0 8px 16px 0 rgba(8, 20, 33, 0.08), 0 24px 20px 0 rgba(8, 20, 33, 0.08);
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-button a:focus {
-  outline: none;
-  box-shadow: none;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-box-button p {
-  color: #27333F;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 24px;
-  margin: 0;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-moneyback-notice {
-  padding-top: 8px;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-premium-box .premium-moneyback-notice h2 {
-  color: #27333F;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 24px;
-  margin: 0;
-}
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content .tf-plugin-lists h3 {
   color: #27333F;
   font-size: 17px;
@@ -2417,19 +2111,8 @@ Steps
   color: #0464C8;
   cursor: pointer;
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn .tf-plugin-button.pro, .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn .tf-plugin-button.activate-pro {
-  color: #ff9800;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn .tf-plugin-button.activate-pro {
-  color: #ff5722;
-  cursor: pointer;
-}
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn .tf-plugin-status.active {
   color: #0464C8;
-  opacity: 0.8;
-}
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info-wrapper .tf-plugin-content .tf-plugin-title .tf-plugin-btn .tf-plugin-status.active-pro {
-  color: #ff5722;
   opacity: 0.8;
 }
 @keyframes spin {
@@ -2443,7 +2126,7 @@ Steps
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar {
   /* Loader */
 }
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-button:not(.active):not(.active-pro) {
+.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-button:not(.active) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2702,60 +2385,6 @@ Steps
   font-size: 0.938rem;
   color: #566676;
   margin: 0;
-}
-
-.tf-setting-license {
-  margin: 40px 40px 40px 20px;
-}
-.tf-setting-license .tf-setting-license-tabs ul {
-  margin: 0;
-  margin-left: 40px;
-}
-.tf-setting-license .tf-setting-license-tabs ul li.active {
-  display: inline-block;
-  border: none;
-  margin: 0;
-  line-height: 18px;
-  text-decoration: none;
-  font-weight: 600;
-  position: relative;
-  background-color: #ffffff;
-  border-radius: 5px 5px 0px 0px;
-}
-.tf-setting-license .tf-setting-license-tabs ul li.active:before {
-  position: absolute;
-  content: "";
-  width: 16px;
-  height: 16px;
-  background-color: #ffffff;
-  bottom: -8px;
-  left: -5px;
-  transform: rotate(45deg);
-}
-.tf-setting-license .tf-setting-license-tabs ul li.active:after {
-  position: absolute;
-  content: "";
-  width: 16px;
-  height: 16px;
-  background-color: #ffffff;
-  bottom: -8px;
-  right: -5px;
-  transform: rotate(45deg);
-}
-.tf-setting-license .tf-setting-license-tabs ul li.active span {
-  display: inline-block;
-  padding: 14px 22px;
-  color: #000;
-  font-size: 1.125rem;
-  text-decoration: none;
-}
-.tf-setting-license .tf-setting-license-tabs ul li.active span i {
-  margin-right: 5px;
-}
-.tf-setting-license .tf-setting-license-field {
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 0px 20px;
 }
 
 .tf-swal-settings-reset-alert #swal2-title {
@@ -3456,17 +3085,6 @@ Steps
 }
 .tf-field .tf-field-label .tf-desc-tooltip svg {
   cursor: pointer;
-}
-.tf-field .tf-field-label .tf-csf-badge {
-  margin-left: 13px;
-}
-.tf-field .tf-field-label .tf-csf-badge .tf-pro {
-  background-color: #F44336 !important;
-  margin: 0;
-}
-.tf-field .tf-field-label .tf-csf-badge .tf-upcoming {
-  background-color: #006600 !important;
-  margin: 0;
 }
 .tf-field .tf-label-field .tf-fieldset .tf-inline li {
   background: #ededf8 !important;
@@ -4214,29 +3832,6 @@ Steps
   line-height: 1.5;
 }
 
-.tf-pro-notice .tf-field-notice-inner {
-  background-color: #EBEFFF;
-  border: 1.5px solid #295BFF;
-}
-.tf-pro-notice .tf-field-notice-inner .tf-field-notice-icon {
-  font-size: 1.5rem;
-  color: #295BFF;
-  margin-right: 8px;
-}
-.tf-pro-notice .tf-field-notice-inner .tf-field-notice-content {
-  color: #000;
-  font-size: 0.875rem;
-  line-height: 1.6;
-  align-self: center;
-  font-weight: 400;
-}
-.tf-pro-notice .tf-field-notice-inner .tf-field-notice-content b {
-  font-weight: 600;
-}
-.tf-pro-notice .tf-field-notice-inner .tf-field-notice-content a {
-  color: #295BFF;
-}
-
 .tf-field-switch .tf-inline-switch {
   display: flex;
   gap: 8px;
@@ -4597,10 +4192,6 @@ Steps
 }
 .tf-field-repeater .tf-repeater .tf-field-notice-inner {
   margin-bottom: 24px;
-}
-
-.tf-field-disable .tf-repeater {
-  pointer-events: none;
 }
 
 .car_time_slots .tf-repeater-icon-absulate,
@@ -5205,26 +4796,6 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-image-radio-group li a.tf-image-checkbox-footer:hover {
   text-decoration: underline;
   color: #2979ff;
-}
-.tf-image-radio-group li.tf-pro-item {
-  position: relative;
-}
-.tf-image-radio-group li.tf-pro-item .tf-image-checkbox-pro-badge {
-  position: absolute;
-  top: -1px;
-  right: -2px;
-  background-color: #295BFF;
-  padding: 3px 10px;
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 13px;
-  border-radius: 3px;
-  z-index: 9;
-}
-.tf-image-radio-group li.tf-pro-item img {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .tf-apt-cal-wrap .fc-view-harness,
@@ -8470,22 +8041,6 @@ a.tf-import-btn, a.tf-export-btn {
   font-style: normal;
   font-weight: 400;
   line-height: 1.12;
-}
-.tf-enquiry-table .pro-notice-row {
-  border-top: none;
-}
-.tf-enquiry-table .pro-notice-row .tf-pro-notice {
-  padding: 0px 0px;
-}
-.tf-enquiry-table .pro-notice-row .tf-pro-notice .tf-fieldset {
-  margin-top: 0px;
-}
-.tf-enquiry-table .pro-notice-row .tf-pro-notice .tf-field-notice-inner {
-  justify-content: center;
-}
-.tf-enquiry-table .pro-notice-row .tf-pro-notice .tf-field-notice-inner a {
-  text-decoration: underline;
-  color: #295BFF;
 }
 
 .tf-enquiry-details-header-filter {

@@ -6,6 +6,11 @@
  * php tests/security/rest-order-enquiry-security.php
  */
 
+if ( 'cli' === PHP_SAPI && ! defined( 'ABSPATH' ) ) {
+	define( 'ABSPATH', dirname( __DIR__, 2 ) . '/' );
+}
+defined( 'ABSPATH' ) || exit;
+
 $root = dirname( __DIR__, 2 );
 
 $files = array(
@@ -31,14 +36,16 @@ $files = array(
 
 foreach ( $files as $label => $file ) {
 	if ( ! is_readable( $file ) ) {
-		fwrite( STDERR, "Missing fixture {$label}: {$file}\n" );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI-only test diagnostics.
+		echo "Missing fixture {$label}: {$file}\n";
 		exit( 1 );
 	}
 }
 
 function tf_security_assert( $condition, $message ) {
 	if ( ! $condition ) {
-		fwrite( STDERR, "FAIL: {$message}\n" );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI-only test diagnostics.
+		echo "FAIL: {$message}\n";
 		exit( 1 );
 	}
 }
@@ -148,8 +155,17 @@ $free_hotel_permission = tf_security_method_body(
 	'tf_hotel_permission_callback'
 );
 tf_security_assert(
-	false !== strpos( $free_hotel_permission, "current_user_can( 'edit_tf_hotels' )" ),
+	false !== strpos( $free_hotel_permission, "tf_management_permission_callback( \$request, 'edit_tf_hotels', 'edit_others_tf_hotels', 'tf_hotel' )" ),
 	'Free hotels permission must require the hotel editing capability.'
+);
+
+$free_management_permission = tf_security_method_body(
+	tf_security_file( $files['free_rest'] ),
+	'tf_management_permission_callback'
+);
+tf_security_assert(
+	false !== strpos( $free_management_permission, 'current_user_can( $edit_capability )' ),
+	'Free management permissions must enforce the delegated capability.'
 );
 
 $free_hotels = tf_security_method_body( tf_security_file( $files['free_hotel'] ), 'tf_get_hotels' );

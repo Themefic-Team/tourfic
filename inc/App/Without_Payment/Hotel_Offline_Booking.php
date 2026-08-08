@@ -110,7 +110,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 			$avail_date = ! empty( $room_meta['avail_date'] ) ? json_decode( $room_meta['avail_date'], true ) : [];
 		}
 		$use_explicit_availability_pricing = false;
-		if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		if ( $avail_by_date ) {
 			$use_explicit_availability_pricing = Availability::has_explicit_available_rules( $avail_date );
 		}
 		$room_name       = get_the_title( $room_id );
@@ -137,7 +137,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		$total_extras_title = [];
 		$total_extras_price = 0;
 		$hotel_extra_option     = ! empty( $meta['hotel_extra_option'] ) ? $meta['hotel_extra_option'] : '';
-		if(function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($hotel_extra_option)){
+		if(!empty($hotel_extra_option)){
 			$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? Helper::tf_data_types($meta['hotel-extra']) : [];
 			foreach ( $extras as $key => $extra ) {
 				if ( empty( $hotel_extras[ $extra ] ) ) {
@@ -303,8 +303,8 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		if ( $room_selected > $num_room_available ) {
 
 			if ( $num_room_available > 0 ) {
-				/* translators: %1$s Available rooms */
 				$response['errors'][] = sprintf(
+					/* translators: %1$s: Number of available rooms. */
 					esc_html__( 'Only %1$s room(s) available for the selected date.', 'tourfic' ),
 					$num_room_available
 				);
@@ -473,7 +473,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 			if ( $deposit == "true" ) {
 
 				Helper::tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
-				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) {
+				if ( $has_deposit == true && ! empty( $deposit_amount ) ) {
 						if ( ! empty( $airport_service ) || ! empty( $total_extras_price ) ) {
 							$tf_due_amount = ( $price_total + $airport_service_arr['price'] + $total_extras_price ) - $deposit_amount;
 						} else {

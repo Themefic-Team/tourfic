@@ -158,23 +158,6 @@
         });
 
         /**
-         * Pro Feature button link
-         */
-        $(document).on('click', '.tf-pro', function (e) {
-            e.preventDefault();
-            window.open('https://tourfic.com/');
-        });
-
-        $(window).on('load', function () {
-            $('.tf-field-disable').find('input, select, textarea, button, div, span').attr('disabled', 'disabled');
-        });
-
-        $(document).on('click', '.tf-field-pro', function (e) {
-            e.preventDefault();
-            window.open('https://tourfic.com/');
-        });
-
-        /**
          * Generate & set unique id for hotel rooms
          */
         $(document).on('click', '.room-repeater > div.csf-fieldset > a.csf-repeater-add', function (e) {

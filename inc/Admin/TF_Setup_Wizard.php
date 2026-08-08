@@ -914,8 +914,7 @@ class TF_Setup_Wizard {
                                             </span>
                                         </label>
                                     </li>
-                                    <?php if(function_exists( 'is_tf_pro' ) && is_tf_pro()): ?>
-                                    <li>
+									<li>
                                         <label class="tf-image-checkbox">
                                             <input type="radio" name="tf_hotel_archive"
                                                    value="design-3" <?php echo ! empty( $tf_hotel_archive_template ) && $tf_hotel_archive_template == "design-3" ? esc_attr( 'checked' ) : ''; ?> >
@@ -926,8 +925,7 @@ class TF_Setup_Wizard {
                                                 <span class="tf-template-title"><?php echo esc_html__('Design 3', 'tourfic'); ?></span>
                                             </span>
                                         </label>
-                                    </li>
-                                    <?php endif; ?>
+									</li>
                                     <li>
                                         <label class="tf-image-checkbox">
                                             <input type="radio" name="tf_hotel_archive"
@@ -1030,8 +1028,7 @@ class TF_Setup_Wizard {
                                             </span>
                                         </label>
                                     </li>
-                                    <?php if(function_exists( 'is_tf_pro' ) && is_tf_pro()): ?>
-                                    <li>
+									<li>
                                         <label class="tf-image-checkbox">
                                             <input type="radio" name="tf_tour_archive"
                                                    value="design-3" <?php echo ! empty( $tf_tour_archive_template ) && $tf_tour_archive_template == "design-3" ? esc_attr( 'checked' ) : ''; ?> >
@@ -1042,8 +1039,7 @@ class TF_Setup_Wizard {
                                                 <span class="tf-template-title"><?php echo esc_html__('Design 3', 'tourfic'); ?></span>
                                             </span>
                                         </label>
-                                    </li>
-                                    <?php endif; ?>
+									</li>
                                     <li>
                                         <label class="tf-image-checkbox">
                                             <input type="radio" name="tf_tour_archive"
@@ -1122,8 +1118,7 @@ class TF_Setup_Wizard {
                                             </span>
                                         </label>
                                     </li>
-                                    <?php if(function_exists( 'is_tf_pro' ) && is_tf_pro()): ?>
-                                    <li>
+									<li>
                                         <label class="tf-image-checkbox">
                                             <input type="radio" name="tf_apartment_archive"
                                                    value="design-2" <?php echo ! empty( $tf_apartment_archive_template ) && $tf_apartment_archive_template == "design-2" ? esc_attr( 'checked' ) : ''; ?> >
@@ -1134,8 +1129,7 @@ class TF_Setup_Wizard {
                                                 <span class="tf-template-title"><?php echo esc_html__('Design 2', 'tourfic'); ?></span>
                                             </span>
                                         </label>
-                                    </li>
-                                    <?php endif; ?>
+									</li>
                                     <li>
                                         <label class="tf-image-checkbox">
                                             <input type="radio" name="tf_apartment_archive"
@@ -1179,17 +1173,6 @@ class TF_Setup_Wizard {
                                             </a>
                                         </label>
                                     </li>
-                                    <li>
-                                        <label class="tf-image-checkbox">
-                                            <input type="radio" name="tf_single_car" value="design-1" disabled="" >
-                                            <div class="select-image-box">
-                                                <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ); ?>images/template/preview-coming-soon.png" alt="Design 1">
-                                            </div>
-                                            <span class="tf-image-checkbox-footer">
-                                                <span class="tf-template-title"><?php echo esc_html__('Design 2', 'tourfic'); ?></span>
-                                            </span>
-                                        </label>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -1208,18 +1191,6 @@ class TF_Setup_Wizard {
                                             </div>
                                             <span class="tf-image-checkbox-footer">
                                                 <span class="tf-template-title"><?php echo esc_html__('Design 1', 'tourfic'); ?></span>
-                                            </span>
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="tf-image-checkbox">
-                                            <input type="radio" name="tf_car_archive"
-                                                   value="design-1" disabled="">
-                                            <div class="select-image-box">
-                                                <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ); ?>images/template/preview-coming-soon.png" alt="Design 1">
-                                            </div>
-                                            <span class="tf-image-checkbox-footer">
-                                                <span class="tf-template-title"><?php echo esc_html__('Design 2', 'tourfic'); ?></span>
                                             </span>
                                         </label>
                                     </li>
@@ -1293,7 +1264,7 @@ class TF_Setup_Wizard {
 	public function tf_activation_redirect() {
 		if ( ! get_option( 'TF_Setup_Wizard' ) ) {
 			update_option( 'TF_Setup_Wizard', 'active' );
-			wp_redirect( admin_url( 'admin.php?page=tf-setup-wizard' ) );
+			wp_safe_redirect( admin_url( 'admin.php?page=tf-setup-wizard' ) );
 			exit;
 		}
 	}
@@ -1423,9 +1394,9 @@ class TF_Setup_Wizard {
         $tf_car_single  = isset( $_POST['tf_single_car'] ) ? sanitize_text_field( wp_unslash($_POST['tf_single_car']) ) : 'design-1';
 		$tf_car_archive = isset( $_POST['tf_car_archive'] ) ? sanitize_text_field( wp_unslash($_POST['tf_car_archive']) ) : 'design-1';
 
-		//skip steps
-        $skip_steps = isset( $_POST['tf-skip-steps'] ) ? $_POST['tf-skip-steps'] : [];
-		$skip_steps = explode( ',', $skip_steps );
+		// Skip completed setup steps.
+		$skip_steps = isset( $_POST['tf-skip-steps'] ) ? sanitize_text_field( wp_unslash( $_POST['tf-skip-steps'] ) ) : '';
+		$skip_steps = array_map( 'absint', explode( ',', $skip_steps ) );
 
 		if ( ! in_array( 2, $skip_steps ) ) {
 			$services = array_diff( $tf_services, $services );
@@ -1568,7 +1539,7 @@ class TF_Setup_Wizard {
 			wp_send_json_error( 'User does not have permission to switch themes.' );
 		}
 
-		$theme_slug = isset( $_POST['slug'] ) ? sanitize_text_field( $_POST['slug'] ) : '';
+		$theme_slug = isset( $_POST['slug'] ) ? sanitize_key( wp_unslash( $_POST['slug'] ) ) : '';
 
 		if ( ! wp_get_theme( $theme_slug )->exists() ) {
 			wp_send_json_error( 'Theme does not exist.' );

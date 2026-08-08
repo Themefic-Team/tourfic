@@ -12,9 +12,9 @@ defined( 'ABSPATH' ) || exit;
  use \Tourfic\Classes\Helper;
 
 
-if(wp_is_block_theme()){
+if(tf_is_block_theme()){
     wp_head();
-    block_header_area();
+    tf_render_block_header_area();
 }else{
     get_header();
 }
@@ -27,7 +27,7 @@ if ( Helper::tf_is_woo_active() ) {
 		include TF_TEMPLATE_PATH . 'hotel/archive/design-1.php';
 	} elseif ( $tf_hotel_arc_selected_template == "design-2" ) {
 		include TF_TEMPLATE_PATH . 'hotel/archive/design-2.php';
-	} elseif( $tf_hotel_arc_selected_template=="design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()){
+	} elseif ( $tf_hotel_arc_selected_template == "design-3" ) {
 		include TF_TEMPLATE_PATH . 'hotel/archive/design-3.php';
 	} else {
 		$template = apply_filters( 'tf_hotel_archive_legacy_template', TF_TEMPLATE_PATH . 'hotel/archive/design-legacy.php' );
@@ -43,9 +43,9 @@ if ( Helper::tf_is_woo_active() ) {
 <?php
 }
 
-if(wp_is_block_theme()){
+if(tf_is_block_theme()){
     wp_footer();
-    block_footer_area();
+    tf_render_block_footer_area();
  }else{
 	get_footer('tourfic');
  }

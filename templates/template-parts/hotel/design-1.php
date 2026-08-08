@@ -6,16 +6,10 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Hotel\Hotel;
 
-$tf_booking_type = '1';
-$tf_hide_booking_form = '';
-$tf_ext_booking_type = '';
-$tf_ext_booking_code = '';
-if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
-	$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
-	$tf_ext_booking_type = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
-    $tf_ext_booking_code = !empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
-}
+$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+$tf_ext_booking_type  = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
+$tf_ext_booking_code  = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
 ?>
 <div class="tf-single-template__one">
     <div class="tf-tour-single">

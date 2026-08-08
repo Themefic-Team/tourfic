@@ -47,14 +47,10 @@ class Booking_Form {
 	private static function tf_hotel_booking_form( $post_id, $settings ) {
 		$style                = ! empty( $settings['booking_form_style'] ) ? $settings['booking_form_style'] : 'style1';
 		$meta                 = get_post_meta( $post_id, 'tf_hotels_opt', true );
-        $tf_booking_type = '1';
-        $tf_hide_booking_form = $tf_ext_booking_type = $tf_ext_booking_code = '';
-        if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-            $tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
-            $tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
-            $tf_ext_booking_type = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
-            $tf_ext_booking_code = !empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
-        }
+		$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+		$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+		$tf_ext_booking_type  = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
+		$tf_ext_booking_code  = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
         $wrapper = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';
 
 		if ( 'style1' === $style ) {
@@ -142,16 +138,12 @@ class Booking_Form {
 		$tour_date                     = ! empty( $_GET['tour_date'] ) ? sanitize_text_field( wp_unslash( $_GET['tour_date'] ) ) : '';
         $wrapper                        = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';
 
-		$tf_booking_type = '1';
-        $tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
-        if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-            $tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
-            $tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
-            $tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
-            $tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
-            $tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
-            $tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
-        }
+		$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+		$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
+		$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
+		$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
+		$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+		$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
         if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
             $external_search_info = array(
                 '{adult}'        => ! empty( $adults ) ? $adults : 1,
@@ -409,16 +401,14 @@ class Booking_Form {
                 <p><?php echo wp_kses_post(carPricing::is_taxable($meta)); ?></p>
             </div>
 
-            <?php if(function_exists( 'is_tf_pro' ) && is_tf_pro()){ ?>
-            <div class="tf-extra-added-info">
+			<div class="tf-extra-added-info">
                 <div class="tf-extra-added-box tf-flex tf-flex-gap-16 tf-flex-direction-column">
                     <h3><?php esc_html_e("Extras added", "tourfic"); ?></h3>
                     <div class="tf-added-extra tf-flex tf-flex-gap-16 tf-flex-direction-column">
                         
                     </div>
-                </div>
-            </div>
-            <?php } ?>
+				</div>
+			</div>
 
             <div class="tf-date-select-box">
 
@@ -593,7 +583,7 @@ class Booking_Form {
                     if($car_deposit_type=='percent'){
                         $due_amount = ($total_prices['sale_price'] * $car_deposit_amount)/100;
                     }
-                    if( function_exists( 'is_tf_pro' ) && is_tf_pro() && '2'==$car_booking_by ){ ?>
+					if ( '2' == $car_booking_by ) { ?>
                         <button class="tf_btn tf-flex tf-flex-align-center tf-flex-justify-center booking-process tf-final-step tf-flex-gap-8">
                             <?php echo esc_html( apply_filters("tf_car_booking_form_submit_button_text", $booking_btn_text ), 'tourfic' ); ?>
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -601,7 +591,7 @@ class Booking_Form {
                             </svg>
                         </button>
                     <?php }else{ ?>
-                        <?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($car_allow_deposit) && $car_deposit_type!='none' && !empty($car_deposit_amount) ){  ?>
+						<?php if ( ! empty( $car_allow_deposit ) && 'none' != $car_deposit_type && ! empty( $car_deposit_amount ) ) { ?>
                             <div class="tf-partial-payment-button tf-flex tf-flex-direction-column tf-flex-gap-16">
                                 <button class="tf_btn tf-flex tf-flex-align-center tf-partial-button tf-flex-justify-center tf-flex-gap-8 <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>" data-partial="<?php echo esc_attr('yes'); ?>">
                                     <?php esc_html_e( 'Part Pay', 'tourfic' ); ?> <?php echo wp_kses_post(wc_price($due_amount)); ?>

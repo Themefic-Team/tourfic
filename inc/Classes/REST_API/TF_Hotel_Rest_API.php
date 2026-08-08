@@ -96,15 +96,7 @@ if ( ! class_exists( 'TF_Hotel_Rest_API' ) ) {
 		 * @return true|WP_Error
 		 */
 		public function tf_hotel_permission_callback( WP_REST_Request $request ) {
-			if ( current_user_can( 'edit_tf_hotels' ) ) {
-				return true;
-			}
-
-			return new WP_Error(
-				'rest_forbidden',
-				esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ),
-				array( 'status' => 403 )
-			);
+			return $this->tf_management_permission_callback( $request, 'edit_tf_hotels', 'edit_others_tf_hotels', 'tf_hotel' );
 		}
 
 		/*
@@ -209,7 +201,7 @@ if ( ! class_exists( 'TF_Hotel_Rest_API' ) ) {
 				$room_avail_data = array_values( $room_avail_data );
 				$room_avail_data = array_map( function ( $item ) {
 					$item['editable'] = false;
-					$item['start']    = date( 'Y-m-d', strtotime( $item['check_in'] ) );
+					$item['start']    = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
 					if ( $item['price_by'] == '1' ) {
 						$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] );
 					} elseif ( $item['price_by'] == '2' ) {

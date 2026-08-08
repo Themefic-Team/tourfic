@@ -325,7 +325,7 @@ class TF_API_Keys {
 		$results = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT id, name, api_key_preview, permissions, status, last_used, expires_at, created_at
-				 FROM {$this->get_table_name()}
+					 FROM {$wpdb->prefix}tf_api_keys
 				 WHERE user_id = %d
 				 ORDER BY created_at DESC",
 				absint( $user_id )
@@ -350,7 +350,7 @@ class TF_API_Keys {
 
 		return $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM {$this->get_table_name()} WHERE api_key_hash = %s LIMIT 1",
+				"SELECT * FROM {$wpdb->prefix}tf_api_keys WHERE api_key_hash = %s LIMIT 1",
 				$this->hash_value( $api_key )
 			)
 		);
@@ -393,7 +393,7 @@ class TF_API_Keys {
 	}
 
 	private function is_write_permission_available() {
-		return function_exists( 'is_tf_pro' ) && is_tf_pro();
+		return true;
 	}
 
 	private function decode_permissions( $permissions ) {

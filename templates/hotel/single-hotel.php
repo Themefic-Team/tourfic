@@ -9,9 +9,9 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\App\Wishlist;
 use \Tourfic\Classes\Hotel\Hotel;
 
-if(wp_is_block_theme()){
+if(tf_is_block_theme()){
     wp_head();
-    block_header_area();
+    tf_render_block_header_area();
 }else{
     get_header();
 }
@@ -169,9 +169,9 @@ while ( have_posts() ) : the_post();
 	}
 endwhile;
 
-if(wp_is_block_theme()){
+if(tf_is_block_theme()){
     wp_footer();
-    block_footer_area();
+    tf_render_block_footer_area();
  }else{
 	get_footer();
  }

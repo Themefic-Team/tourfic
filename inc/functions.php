@@ -6,6 +6,47 @@ use Tourfic\Classes\Helper;
 use Tourfic\Classes\Room\Availability;
 use Tourfic\Classes\Room\Room;
 
+if ( ! function_exists( 'tf_is_block_theme' ) ) {
+	/**
+	 * Check for a block theme without breaking WordPress versions before 5.9.
+	 *
+	 * @return bool
+	 */
+	function tf_is_block_theme() {
+		$block_theme_check = 'wp_is_block_theme';
+
+		return function_exists( $block_theme_check ) && $block_theme_check();
+	}
+}
+
+if ( ! function_exists( 'tf_render_block_header_area' ) ) {
+	/**
+	 * Render the block-theme header area when the API is available.
+	 *
+	 * @return void
+	 */
+	function tf_render_block_header_area() {
+		$header_renderer = 'block_header_area';
+		if ( function_exists( $header_renderer ) ) {
+			$header_renderer();
+		}
+	}
+}
+
+if ( ! function_exists( 'tf_render_block_footer_area' ) ) {
+	/**
+	 * Render the block-theme footer area when the API is available.
+	 *
+	 * @return void
+	 */
+	function tf_render_block_footer_area() {
+		$footer_renderer = 'block_footer_area';
+		if ( function_exists( $footer_renderer ) ) {
+			$footer_renderer();
+		}
+	}
+}
+
 /**
  * Show admin warning if a required file is missing
  */
@@ -224,7 +265,7 @@ if ( ! function_exists( 'tf_tour_is_global_traveler_info_enabled' ) ) {
 	 * @return bool
 	 */
 	function tf_tour_is_global_traveler_info_enabled() {
-		return function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'disable_traveller_info' ) );
+		return ! empty( Helper::tfopt( 'disable_traveller_info' ) );
 	}
 }
 
@@ -699,8 +740,6 @@ if ( ! function_exists( 'tf_tour_store_traveler_document_upload' ) ) {
 		}
 
 		require_once ABSPATH . 'wp-admin/includes/file.php';
-		require_once ABSPATH . 'wp-admin/includes/media.php';
-		require_once ABSPATH . 'wp-admin/includes/image.php';
 
 		$upload = wp_handle_upload(
 			$file,
@@ -732,6 +771,7 @@ if ( ! function_exists( 'tf_tour_store_traveler_document_upload' ) ) {
 			return new WP_Error( 'tf_traveler_attachment_error', esc_html__( 'Unable to save the uploaded traveler document.', 'tourfic' ) );
 		}
 
+		require_once ABSPATH . 'wp-admin/includes/image.php';
 		$attachment_data = wp_generate_attachment_metadata( $attachment_id, $upload['file'] );
 		wp_update_attachment_metadata( $attachment_id, $attachment_data );
 
@@ -979,6 +1019,15 @@ if ( ! function_exists( 'tf_download_traveler_document' ) ) {
 			wp_die( esc_html__( 'The requested file is no longer available.', 'tourfic' ) );
 		}
 
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		WP_Filesystem();
+
+		global $wp_filesystem;
+		$file_contents = $wp_filesystem->get_contents( $file_path );
+		if ( false === $file_contents ) {
+			wp_die( esc_html__( 'The requested file could not be read.', 'tourfic' ) );
+		}
+
 		$file_name = get_post_meta( $attachment_id, '_tf_traveler_document_original_filename', true );
 		$file_name = $file_name ? sanitize_file_name( $file_name ) : sanitize_file_name( wp_basename( $file_path ) );
 		$file_type = wp_check_filetype( $file_path );
@@ -989,9 +1038,10 @@ if ( ! function_exists( 'tf_download_traveler_document' ) ) {
 		header( 'X-Content-Type-Options: nosniff' );
 		header( 'Content-Type: ' . $mime_type );
 		header( 'Content-Disposition: attachment; filename="' . $file_name . '"' );
-		header( 'Content-Length: ' . filesize( $file_path ) );
+		header( 'Content-Length: ' . strlen( $file_contents ) );
 
-		readfile( $file_path );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Binary file contents must be sent unchanged.
+		echo $file_contents;
 		exit;
 	}
 }
@@ -1074,67 +1124,41 @@ if(!function_exists('tourfic_order_table_data')){
 			return \Tourfic\Classes\Helper::tourfic_order_table_data( $query );
 		}
 
-		global $wpdb;
-		$query_type          = sanitize_key( $query['post_type'] );
-		$query_select        = '*' === trim( $query['select'] ) ? '*' : preg_replace( '/[^a-zA-Z0-9_, ]/', '', $query['select'] );
-		$values              = array( $query_type );
-		$query_where         = '';
-
-		if ( isset( $query['where'] ) && is_array( $query['where'] ) ) {
-			$allowed_columns = array(
-				'order_id'    => '%d',
-				'post_id'     => '%d',
-				'customer_id' => '%d',
-				'room_id'     => '%s',
-				'ostatus'     => '%s',
-				'checkinout'  => '%s',
-			);
-
-			foreach ( $query['where'] as $column => $value ) {
-				if ( ! isset( $allowed_columns[ $column ] ) || '' === $value || null === $value ) {
-					continue;
-				}
-
-				$query_where .= " AND {$column} = {$allowed_columns[ $column ]}";
-				$values[]     = '%d' === $allowed_columns[ $column ] ? absint( $value ) : sanitize_text_field( $value );
-			}
-		}
-
-		if ( ! empty( $query['orderby'] ) ) {
-			$allowed_orderby = array( 'id', 'order_id', 'order_date', 'check_in', 'check_out' );
-			$orderby         = sanitize_key( $query['orderby'] );
-			if ( in_array( $orderby, $allowed_orderby, true ) ) {
-				$order        = ! empty( $query['order'] ) && 'ASC' === strtoupper( $query['order'] ) ? 'ASC' : 'DESC';
-				$query_where .= " ORDER BY {$orderby} {$order}";
-			}
-		}
-
-		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $values ), ARRAY_A );
-
-		return $tf_tour_book_orders;
+		return array();
 	}
 }
 
 if ( ! function_exists( 'tourfic_get_user_order_table_data' ) ) {
 	function tourfic_get_user_order_table_data( $query ) {
 		global $wpdb;
-		$query_select   = $query['select'];
-		$query_type     = $query['post_type'];
-		$query_customer = $query['customer_id']; // Change from 'author' to 'customer_id'
-		$query_limit    = $query['limit'];
+		$allowed_post_types = array( 'hotel', 'tour', 'apartment', 'car', 'room' );
+		$query_types        = array_map( 'sanitize_key', (array) ( $query['post_type'] ?? array() ) );
+		$query_types        = array_values( array_intersect( $query_types, $allowed_post_types ) );
+		$query_customer     = absint( $query['customer_id'] ?? 0 );
+		$orders_result      = array();
 
-		// Adjust the query to use customer_id instead of post_author
-		if ( ! is_array( $query_type ) ) {
-			$orders_result = $wpdb->get_results($wpdb->prepare(
-				"SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s AND customer_id = %d ORDER BY order_id DESC $query_limit",
-				$query_type, $query_customer
-			), ARRAY_A );
-		} else {
-			$orders_result = $wpdb->get_results($wpdb->prepare(
-				"SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type IN (" . implode( ',', array_fill( 0, count( $query_type ), '%s' ) ) . ") AND customer_id = %d ORDER BY order_id DESC $query_limit",
-				array_merge( $query_type, array( $query_customer ) ) // Add customer_id to the array
-			), ARRAY_A );
+		if ( empty( $query_types ) || empty( $query_customer ) ) {
+			return $orders_result;
 		}
+
+		foreach ( $query_types as $query_type ) {
+			$type_orders   = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s AND customer_id = %d ORDER BY order_id DESC",
+					$query_type,
+					$query_customer
+				),
+				ARRAY_A
+			);
+			$orders_result = array_merge( $orders_result, $type_orders );
+		}
+
+		usort(
+			$orders_result,
+			function ( $first_order, $second_order ) {
+				return absint( $second_order['order_id'] ) <=> absint( $first_order['order_id'] );
+			}
+		);
 
 		return $orders_result;
 	}
@@ -1500,25 +1524,24 @@ function tf_normalize_date( $date ) {
  * Remove room order ids
  */
 function tf_remove_order_ids_from_room() {
-    $title = esc_html__( "Reset Room Availability", "tourfic" );
+	$title = esc_html__( 'Reset Room Availability', 'tourfic' );
     $subtitle = wp_kses_post(
         sprintf(
             __( 'Remove order ids linked with this room.<br><b style="color: red;">Be aware! It is irreversible!</b>', 'tourfic' ),
         )
     );
 
-    $button_text = esc_html__( "Reset", "tourfic" );
-
-    echo '
-    <div class="csf-title">
-        <h4>' . $title . '</h4>
-        <div class="csf-subtitle-text">' . $subtitle . '</div>
-    </div>
-    <div class="csf-fieldset">
-        <button type="button" class="button button-large tf-order-remove remove-order-ids">' . $button_text . '</button>
-    </div>
-    <div class="clear"></div>
-    ';
+	$button_text = esc_html__( 'Reset', 'tourfic' );
+	?>
+	<div class="csf-title">
+		<h4><?php echo esc_html( $title ); ?></h4>
+		<div class="csf-subtitle-text"><?php echo wp_kses_post( $subtitle ); ?></div>
+	</div>
+	<div class="csf-fieldset">
+		<button type="button" class="button button-large tf-order-remove remove-order-ids"><?php echo esc_html( $button_text ); ?></button>
+	</div>
+	<div class="clear"></div>
+	<?php
 }
 
 

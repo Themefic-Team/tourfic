@@ -4,9 +4,9 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 
-if(wp_is_block_theme()){
+if(tf_is_block_theme()){
     wp_head();
-    block_header_area();
+    tf_render_block_header_area();
 }else{
     get_header('tourfic');
 }
@@ -52,9 +52,9 @@ while ( have_posts() ) :
 
 	the_content();
 endwhile;
-if(wp_is_block_theme()){
+if(tf_is_block_theme()){
     wp_footer();
-    block_footer_area();
+    tf_render_block_footer_area();
  }else{
 	get_footer('tourfic');
  }
