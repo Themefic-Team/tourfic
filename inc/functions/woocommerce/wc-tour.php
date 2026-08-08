@@ -836,14 +836,14 @@ function tf_tours_booking_function() {
 	 * Store custom data in array
 	 * Add to cart with custom data
 	 */
-	if ( ! empty( $tf_booking_type ) && 3 == $tf_booking_type && ! empty( $response['errors'] ) ) {
+	if ( apply_filters( 'tf_tour_is_query_booking', false, $tf_booking_type ) && ! empty( $response['errors'] ) ) {
 		$response['status']          = 'error';
 		$response['without_payment'] = 'false';
 		echo wp_json_encode( $response );
 		die();
 	}
 
-	if( !empty($tf_booking_type) && 3==$tf_booking_type ){
+	if( apply_filters( 'tf_tour_is_query_booking', false, $tf_booking_type ) ){
 
 		$tf_booking_fields = !empty(Helper::tfopt( 'book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'book-confirm-field' )) : '';
 		if(empty($tf_booking_fields)){
@@ -1165,7 +1165,7 @@ function tf_tours_booking_function() {
 				$tf_tours_data['tf_tours_data']['price'] = $deposit_amount;
 			}
 
-			if( 2==$tf_booking_type && !empty($tf_booking_url) ){
+			if( apply_filters( 'tf_tour_is_external_booking', false, $tf_booking_type, $tf_booking_url ) ){
 				$external_search_info = array(
 					'{adult}'    => $adults,
 					'{child}'    => $children,

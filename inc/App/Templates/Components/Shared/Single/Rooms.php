@@ -116,7 +116,7 @@ class Rooms {
                                     $adult_number            = ! empty( $room['adult'] ) ? $room['adult'] : '0';
                                     $child_number            = ! empty( $room['child'] ) ? $room['child'] : '0';
                                     $total_person            = $adult_number + $child_number;
-                                    $pricing_by              = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
+                                    $pricing_by              = apply_filters( 'tf_room_pricing_mode', 1, $room );
                                     $avil_by_date            = ! empty( $room['avil_by_date'] ) ? ! empty( $room['avil_by_date'] ) : false;
                                     $multi_by_date           = ! empty( $room['price_multi_day'] ) ? ! empty( $room['price_multi_day'] ) : false;
                                     $child_age_limit         = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
@@ -423,7 +423,7 @@ class Rooms {
                                     $adult_number    = ! empty( $room['adult'] ) ? $room['adult'] : '0';
                                     $child_number    = ! empty( $room['child'] ) ? $room['child'] : '0';
                                     $total_person    = $adult_number + $child_number;
-                                    $pricing_by      = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
+                                    $pricing_by      = apply_filters( 'tf_room_pricing_mode', 1, $room );
                                     $avil_by_date    = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : false;
                                     $multi_by_date   = ! empty( $room['price_multi_day'] ) ? $room['price_multi_day'] : false;
                                     $child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
@@ -1008,7 +1008,7 @@ class Rooms {
                                         $adult_number    = ! empty( $room['adult'] ) ? $room['adult'] : '0';
                                         $child_number    = ! empty( $room['child'] ) ? $room['child'] : '0';
                                         $total_person    = $adult_number + $child_number;
-                                        $pricing_by      = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : '';
+                                        $pricing_by      = apply_filters( 'tf_room_pricing_mode', 1, $room );
                                         $avil_by_date    = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : false;
                                         $multi_by_date   = ! empty( $room['price_multi_day'] ) ?  $room['price_multi_day'] : false;
                                         $child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";

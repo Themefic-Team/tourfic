@@ -131,7 +131,7 @@ class Pricing {
 	function get_min_max_price() {
 		$room_price = [];
 		$meta     = get_post_meta( $this->post_id, 'tf_room_opt', true );
-		$pricing_by    = $meta['pricing-by'] ?? 1;
+		$pricing_by    = apply_filters( 'tf_room_pricing_mode', 1, $meta );
 		$avail_by_date = $meta['avil_by_date'] ?? 1;
 		$current_date  = strtotime( "today" );
 
@@ -379,7 +379,7 @@ class Pricing {
 		}
 
 		//room price
-		$pricing_by = ! empty( $meta['pricing-by'] ) ? $meta['pricing-by'] : 1;
+		$pricing_by = apply_filters( 'tf_room_pricing_mode', 1, $meta );
 		$avail_by_date = !empty($meta['avil_by_date']) ? $meta['avil_by_date'] : false;
 
 		if ( $avail_by_date ) {
@@ -889,7 +889,7 @@ class Pricing {
 	function get_per_price( $option_key = '' ) {
 		$meta     = $this->meta;
 		$avail_by_date = ! empty( $meta["avil_by_date"] ) ? $meta["avil_by_date"] : false;
-		$pricing_by    = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
+		$pricing_by    = apply_filters( 'tf_room_pricing_mode', 1, $meta );
 		$current_date  = strtotime( "today" );
 		$hotel_discount_type   = ! empty( $meta["discount_hotel_type"] ) ? $meta["discount_hotel_type"] : "none";
 		$hotel_discount_amount = ! empty( $meta["discount_hotel_price"] ) ? $meta["discount_hotel_price"] : 0;
@@ -1102,7 +1102,7 @@ class Pricing {
 		$price          = $price_arr['price'];
 		$discount_price = $price_arr['discount_price'];
 
-		$pricing_by          = $meta['pricing-by'] ?? 1;
+		$pricing_by          = apply_filters( 'tf_room_pricing_mode', 1, $meta );
 		$multi_by_date       = $meta['price_multi_day'] ?? 0;
 		$hotel_discount_type = $meta['discount_hotel_type'] ?? 'none';
 
@@ -1198,7 +1198,7 @@ class Pricing {
 		$meta = $this->meta;
 		$period    = $this->period;
 
-		$pricing_by    = $meta['pricing-by'] ?? 1;
+		$pricing_by    = apply_filters( 'tf_room_pricing_mode', 1, $meta );
 		$avail_by_date = $meta['avil_by_date'] ?? 1;
 
 		// Total person calculation
@@ -1269,7 +1269,7 @@ class Pricing {
 	function get_availability_total_price() {
 		$meta  = $this->meta;
 		$period     = $this->period;
-		$pricing_by = $meta['pricing-by'] ?? 1;
+		$pricing_by = apply_filters( 'tf_room_pricing_mode', 1, $meta );
 
 		// Total person calculation
 		$persons     = ! empty( $this->persons ) ? $this->persons : array();
@@ -1353,7 +1353,7 @@ class Pricing {
 		if ( $room_query->have_posts() ):
 			while ( $room_query->have_posts() ) : $room_query->the_post();
 				$room_meta     = get_post_meta( get_the_ID(), 'tf_room_opt', true );
-				$pricing_by    = $room_meta['pricing-by'] ?? 1;
+				$pricing_by    = apply_filters( 'tf_room_pricing_mode', 1, $room_meta );
 				$avail_by_date = $room_meta['avil_by_date'] ?? 1;
 				$room_options  = $room_meta['room-options'] ?? [];
 

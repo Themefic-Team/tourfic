@@ -168,7 +168,7 @@ if ( ! class_exists( 'TF_Hotel_Rest_API' ) ) {
 			if ( ! empty( $rooms ) ):
 				foreach ( $rooms as $_room ) {
 					$room       = get_post_meta( $_room->ID, 'tf_room_opt', true );
-					$pricing_by = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : 1;
+					$pricing_by = apply_filters( 'tf_room_pricing_mode', 1, $room );
 					if ( $pricing_by == 1 ) {
 						$price        = ! empty( $room['price'] ) ? $room['price'] : '';
 						$room_price[] = $price;

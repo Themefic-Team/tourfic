@@ -1049,7 +1049,7 @@ class Tour {
 
 		ob_start();
 		if ( $tf_tour_selected_template == "design-1" ) {
-			if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
+			if ( apply_filters( 'tf_show_tour_booking_form', $tf_booking_type == 1, $post_id, $meta ) ) : ?>
                 <form class="tf_tours_booking tf_tours_main_booking" enctype="multipart/form-data">
 
 					<?php
@@ -1126,6 +1126,7 @@ class Tour {
 
                     </div>
 					<?php } ?>
+					<?php do_action( 'tf_tour_booking_form_after_person_info', $post_id, $meta ); ?>
                     <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
 						<?php if ( ! empty( $tf_tour_book_now_text ) ) : ?>
                             <div class="tf-btn-wrap">
@@ -1250,13 +1251,13 @@ class Tour {
                 </form>
 
 			<?php endif; ?>
-			<?php if ( $tf_booking_type == 2 && $tf_ext_booking_type == '2' && ! empty( $tf_booking_code ) ) :
+			<?php if ( apply_filters( 'tf_show_tour_external_code', false, $post_id, $meta ) ) :
 				echo wp_kses( $tf_booking_code, Helper::tf_custom_wp_kses_allow_tags() );
 			endif; ?>
 
 
 		<?php } elseif ( $tf_tour_selected_template == "design-2" ) { ?>
-			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
+			<?php if ( apply_filters( 'tf_show_tour_booking_form', $tf_booking_type == 1, $post_id, $meta ) ) : ?>
                 <form class="tf_tours_booking tf_tours_main_booking" enctype="multipart/form-data">
 
 					<?php
@@ -1288,7 +1289,7 @@ class Tour {
                                     <div class="acr-label tf-flex">
 										<?php esc_html_e( 'Adults', 'tourfic' ); ?>
 										<?php
-										$tf_hide_external_price = ! empty( $meta["booking-by"] ) && $meta["booking-by"] == 2 ? ! $meta["hide_price"] : true;
+										$tf_hide_external_price = apply_filters( 'tf_tour_hide_external_price', ! empty( $meta["booking-by"] ) && $meta["booking-by"] == 2 ? ! $meta["hide_price"] : true, $meta );
 
 										if ( $tf_hide_external_price ) : ?>
                                             <div class="acr-adult-price">
@@ -1764,10 +1765,10 @@ class Tour {
                 </form>
 			<?php endif; ?>
 
-			<?php if ( $tf_booking_type == 2 && $tf_ext_booking_type == '2' && ! empty( $tf_booking_code ) ) :
+			<?php if ( apply_filters( 'tf_show_tour_external_code', false, $post_id, $meta ) ) :
 				echo wp_kses( $tf_booking_code, Helper::tf_custom_wp_kses_allow_tags() );
 			endif; ?>
-			<?php if ( $tf_booking_type == 2 && $tf_hide_booking_form == 1 ): ?>
+			<?php if ( apply_filters( 'tf_show_tour_external_url_btn', false, $post_id, $meta ) ): ?>
                 <div class="tf-btn-wrap">
                     <a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf_btn tf_btn_full tf_btn_sharp tf-tour-external-booking-button" style="margin-top: 10px;"><?php echo esc_html( $tf_tour_single_book_now_text); ?></a>
                 </div>
@@ -1782,7 +1783,7 @@ class Tour {
 			<?php endif; ?>
 		<?php } else { ?>
             <div class="tf-tour-booking-wrap">
-				<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
+				<?php if ( apply_filters( 'tf_show_tour_booking_form', $tf_booking_type == 1, $post_id, $meta ) ) : ?>
                     <form class="tf_tours_booking" enctype="multipart/form-data">
 						<?php if($pricing_rule != 'package') { ?>
                         <div class="tf_selectperson-wrap">
@@ -1879,7 +1880,7 @@ class Tour {
 						?>
                     </form>
 				<?php endif; ?>
-				<?php if ( $tf_booking_type == 2 && $tf_ext_booking_type == '2' && ! empty( $tf_booking_code ) ) :
+				<?php if ( apply_filters( 'tf_show_tour_external_code', false, $post_id, $meta ) ) :
 					echo wp_kses( $tf_booking_code, Helper::tf_custom_wp_kses_allow_tags() );
 				endif; ?>
 				<div class="tf-booking-mobile-btn">

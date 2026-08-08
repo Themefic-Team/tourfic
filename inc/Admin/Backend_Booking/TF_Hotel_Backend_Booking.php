@@ -617,7 +617,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		if ( $avail_by_date ) {
 			$avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
 		}
-		$pricing_by      = $room_data['pricing-by'];
+		$pricing_by      = apply_filters( 'tf_room_pricing_mode', 1, $room_data );
 		$price_multi_day = ! empty( $room_data['price_multi_day'] ) ? $room_data['price_multi_day'] : false;
 
 		# Calculate night number

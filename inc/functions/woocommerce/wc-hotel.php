@@ -118,7 +118,7 @@ function tf_hotel_booking_callback() {
 		$use_explicit_availability_pricing = Availability::has_explicit_available_rules( $avail_date );
 	}
 	$room_name       = get_the_title( $room_id );
-	$pricing_by      = $room_meta['pricing-by'];
+	$pricing_by      = apply_filters( 'tf_room_pricing_mode', 1, $room_meta );
 	$price_multi_day = ! empty( $room_meta['price_multi_day'] ) ? $room_meta['price_multi_day'] : false;
 	$adults_per_room = empty( $adult ) ? 0 : ceil( intval( $adult ) / max( 1, intval( $room_selected ) ) );
 	$childs_per_room = empty( $child ) ? 0 : ceil( intval( $child ) / max( 1, intval( $room_selected ) ) );

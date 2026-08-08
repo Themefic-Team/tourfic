@@ -44,7 +44,7 @@ class Tour_Price {
 		$avail_prices = Pricing::instance( $post_id )->get_avail_price();
 
         echo ! empty( $wrapper_open ) ? wp_kses_post( $wrapper_open ) : '';
-        if(($tf_booking_type == 2 && $tf_hide_price !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
+        if( apply_filters( 'tf_tour_show_price', ( ($tf_booking_type == 2 && $tf_hide_price !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3 ), $tf_booking_type, $meta ) ) : ?>
             <div class="tf-single-tour-pricing">
                 <?php if ( $pricing_rule == 'group' ) { ?>
 

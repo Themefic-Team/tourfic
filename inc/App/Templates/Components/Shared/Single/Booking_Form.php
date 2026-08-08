@@ -106,7 +106,7 @@ class Booking_Form {
 
 	private static function tf_room_booking_form( $post_id, $settings ) {
         $meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
-        $pricing_by = ! empty( $meta["pricing-by"] ) ? $meta["pricing-by"] : 1;
+        $pricing_by = apply_filters( 'tf_room_pricing_mode', 1, $meta );
 		$style       = ! empty( $settings['booking_form_style'] ) ? $settings['booking_form_style'] : 'style1';
 		$room_option = ! empty( $_GET['room-option'] ) ? sanitize_text_field( wp_unslash( $_GET['room-option'] ) ) : '';
         $wrapper     = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';

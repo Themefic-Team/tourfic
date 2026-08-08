@@ -148,7 +148,7 @@ if ( ! class_exists( 'TF_Apartment_Rest_API' ) ) {
 			}
 			if ( ! empty( $rooms ) ):
 				foreach ( $rooms as $room ) {
-					$pricing_by = ! empty( $room['pricing-by'] ) ? $room['pricing-by'] : 1;
+					$pricing_by = apply_filters( 'tf_room_pricing_mode', 1, $room );
 					if ( $pricing_by == 1 ) {
 						$price        = ! empty( $room['price'] ) ? $room['price'] : '';
 						$room_price[] = $price;

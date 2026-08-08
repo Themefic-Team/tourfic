@@ -162,7 +162,7 @@ class Tour_Information {
                     </ul>
                 </div>
 
-                <?php if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : 
+                <?php if ( apply_filters( 'tf_tour_show_price', ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ), $tf_booking_type, $meta ) ) : 
                     $adult_price = !empty($avail_prices['adult_price']) ? $avail_prices['adult_price'] : $adult_price;
                     $child_price = !empty($avail_prices['child_price']) ? $avail_prices['child_price'] : $children_price;
                     $infant_price = !empty($avail_prices['infant_price']) ? $avail_prices['infant_price'] : $infant_price;

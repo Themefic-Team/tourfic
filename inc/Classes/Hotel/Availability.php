@@ -19,7 +19,7 @@ class Availability extends Pricing {
 	function get_availability_total_price() {
 		$room_meta     = $this->room_meta;
 		$period        = $this->period;
-		$pricing_by    = $room_meta['pricing-by'] ?? 1;
+		$pricing_by    = apply_filters( 'tf_room_pricing_mode', 1, $room_meta );
 		$avail_by_date = $room_meta['avil_by_date'] ?? 1;
 
 		// Total person calculation
