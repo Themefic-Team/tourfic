@@ -239,13 +239,13 @@ class TF_API_Routes {
 		register_rest_route( 'tf/v1', '/user-bookings', array(
 			'methods'             => 'GET',
 			'callback'            => array( $api, 'tf_user_bookings' ),
-			'permission_callback' => array( $api, 'tf_permission_callback' ),
+			'permission_callback' => array( $api, 'tf_user_self_permission_callback' ),
 		) );
 
 		register_rest_route( 'tf/v1', '/user-wishlist', array(
 			'methods'             => 'GET',
 			'callback'            => array( $api, 'tf_user_wishlist' ),
-			'permission_callback' => array( $api, 'tf_permission_callback' ),
+			'permission_callback' => array( $api, 'tf_user_self_permission_callback' ),
 		) );
 	}
 }

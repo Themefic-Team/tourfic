@@ -131,9 +131,6 @@ final class Tourfic {
 		// autoloader
 		require_once TF_PATH . 'autoloader.php';
 
-		// Initialize the appsero
-		$this->appsero_init_tracker_tourfic();
-
 		if ( class_exists( "\Tourfic\Classes\Base" ) ) {
 			\Tourfic\Classes\Base::instance();
 		} else {
@@ -248,23 +245,6 @@ final class Tourfic {
 		}
 	}
 
-	/**
-	 * Initialize the plugin tracker
-	 *
-	 * @return void
-	 */
-	public function appsero_init_tracker_tourfic() {
-
-		$client = new Appsero\Client( '19134f1b-2838-4a45-ac05-772b7dfc9850', 'Travel and Hotel Booking Solution for WooCommerce - Tourfic', __FILE__ );
-
-		// Change Admin notice text
-		$notice = sprintf( $client->__trans( 'Want to help make <strong>%1$s</strong> even more awesome? Allow %1$s to collect non-sensitive diagnostic data and usage information. I agree to get Important Product Updates & Discount related information on my email from  %1$s (I can unsubscribe anytime).' ), $client->name );
-		$client->insights()->notice( $notice );
-
-		// Active insights
-		$client->insights()->init();
-
-	}
 }
 
 Tourfic::instance();

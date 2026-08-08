@@ -186,7 +186,7 @@ if ( ! class_exists( 'TF_User_Rest_API' ) ) {
 				return new WP_Error( 'tf_rest_invalid_param', esc_html__( 'Invalid booking_type value.', 'tourfic' ), array( 'status' => 400 ) );
 			}
 
-			if ( $this->user_has_role( $current_user_id, 'customer' ) ) {
+			if ( ! empty( $current_user_id ) ) {
 
 				if($booking_type == 'all'){
 					$post_types = array();
@@ -253,7 +253,7 @@ if ( ! class_exists( 'TF_User_Rest_API' ) ) {
 			$postId          = $request->get_param( 'post_id' ) ? $request->get_param( 'post_id' ) : '';
 			$wishlist_data = array();
 			
-			if ( $this->user_has_role( $current_user_id, 'customer' ) ) {
+			if ( ! empty( $current_user_id ) ) {
 				$wishlist_items = get_user_meta( $current_user_id, 'wishlist_item', false );
 
 				if ( $remove == true && ! empty( $postId ) ) {
@@ -269,6 +269,20 @@ if ( ! class_exists( 'TF_User_Rest_API' ) ) {
 			}
 
 			return $wishlist_data;
+		}
+
+		/**
+		 * Permission callback for user self-service endpoints (bookings, wishlist).
+		 *
+		 * @param WP_REST_Request $request REST request.
+		 * @return true|WP_Error
+		 */
+		public function tf_user_self_permission_callback( WP_REST_Request $request ) {
+			if ( is_user_logged_in() && current_user_can( 'read' ) ) {
+				return true;
+			}
+
+			return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
 		}
 	}
 }
