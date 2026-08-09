@@ -3273,10 +3273,10 @@ function convertTo24HourFormat(timeStr) {
 
         function tf_flatpickr_locale() {
             let locale = tf_params.tour_form_data.flatpickr_locale;
-            let allowed_locales = ['ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN' ];
+            let allowed_locales = ['ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN'];
 
-            if( jQuery.inArray(locale, allowed_locales) !== -1 ) {
-                
+            if (jQuery.inArray(locale, allowed_locales) !== -1) {
+
                 switch (locale) {
                     case "bn_BD":
                         locale = 'bn';
@@ -3399,23 +3399,23 @@ function convertTo24HourFormat(timeStr) {
             var tour_extra_total = [];
             var tour_extra_quantity = [];
 
-            $this.find('.tour-extra-single').each(function(e) {
+            $this.find('.tour-extra-single').each(function (e) {
                 let $extra = jQuery(this);
 
-                if($extra.find('input[name="tf-tour-extra"]').is(':checked')){
+                if ($extra.find('input[name="tf-tour-extra"]').is(':checked')) {
 
-                   let tour_extras = $extra.find('input[name="tf-tour-extra"]').val();
-                   tour_extra_total.push(tour_extras);
+                    let tour_extras = $extra.find('input[name="tf-tour-extra"]').val();
+                    tour_extra_total.push(tour_extras);
 
-                   if($extra.find('.tf_quantity-acrselection').hasClass('quantity-active')){
-                       let qty = $extra.find('input[name="extra-quantity"]').val();
+                    if ($extra.find('.tf_quantity-acrselection').hasClass('quantity-active')) {
+                        let qty = $extra.find('input[name="extra-quantity"]').val();
 
-                       tour_extra_quantity.push(qty)
-                   }else{
-                    tour_extra_quantity.push(1)
-                   }
-               }
-           });
+                        tour_extra_quantity.push(qty)
+                    } else {
+                        tour_extra_quantity.push(1)
+                    }
+                }
+            });
 
             formData.append('tour_extra', tour_extra_total);
             formData.append('tour_extra_quantity', tour_extra_quantity);
@@ -3506,7 +3506,7 @@ function convertTo24HourFormat(timeStr) {
             e.stopPropagation();
             var id = $(this).attr("id");
             $(".tour-itinerary-sleep").each(function () {
-                var elementId = $(this).attr("id"); 
+                var elementId = $(this).attr("id");
                 if (id === elementId) {
                     $(this).fadeIn();
                 } else {
@@ -3514,8 +3514,8 @@ function convertTo24HourFormat(timeStr) {
                 }
             });
         });
-        
-    
+
+
         // Hide when clicking outside
         $(document).on("click", function (e) {
             if (!$(e.target).closest(".tour-itinerary-sleep, .ininerary-other-info li .fa-info-circle, .tf-itinerary-single-meta li .fa-info-circle").length) {
@@ -3623,12 +3623,12 @@ function convertTo24HourFormat(timeStr) {
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    form.css({'pointer-events': 'none'});
+                    form.css({ 'pointer-events': 'none' });
                     submitBtn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
-                    form.css({'pointer-events': 'all'});
+                    form.css({ 'pointer-events': 'all' });
                     submitBtn.removeClass('tf-btn-loading');
                     if (obj.status === 'error') {
                         notyf.error(obj.message);
@@ -3650,25 +3650,25 @@ function convertTo24HourFormat(timeStr) {
             // Executes when some one click in the search form location
             inp.addEventListener("focus", function () {
                 // if (this.value == '' || !this.value) {
-                    closeAllLists();
-                    let a = document.createElement("DIV");
-                    a.setAttribute("id", this.id + "autocomplete-list");
-                    a.classList.add("autocomplete-items")
-                    this.parentNode.appendChild(a);
-                    for (const [key, value] of Object.entries(arr)) {
-                        let b = document.createElement("DIV");
-                        b.innerHTML = value;
-                        b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'>`;
-                        b.addEventListener("click", function (e) {
-                            let source = this.getElementsByTagName("input")[0];
-                            inp.value = source.value;
-                            inp.closest('input').nextElementSibling.value = source.dataset.slug;
-                            setTimeout(() => {
-                                closeAllLists();
-                            },100);
-                        });
-                        a.appendChild(b);
-                    }
+                closeAllLists();
+                let a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.classList.add("autocomplete-items")
+                this.parentNode.appendChild(a);
+                for (const [key, value] of Object.entries(arr)) {
+                    let b = document.createElement("DIV");
+                    b.innerHTML = value;
+                    b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'>`;
+                    b.addEventListener("click", function (e) {
+                        let source = this.getElementsByTagName("input")[0];
+                        inp.value = source.value;
+                        inp.closest('input').nextElementSibling.value = source.dataset.slug;
+                        setTimeout(() => {
+                            closeAllLists();
+                        }, 100);
+                    });
+                    a.appendChild(b);
+                }
                 // }
             })
 
@@ -3788,8 +3788,8 @@ function convertTo24HourFormat(timeStr) {
                 }
             }
 
-             // Close when clicking outside
-             $('body').on('click', function (event) {
+            // Close when clicking outside
+            $('body').on('click', function (event) {
                 if (!$(event.target).closest("#tf-destination").length) {
                     $("#tf-destinationautocomplete-list").hide();
                 }
@@ -3802,7 +3802,7 @@ function convertTo24HourFormat(timeStr) {
             var date = $(this).val();
             let post_id = $('input[name="post_id"]').val();
 
-            if( !date ){
+            if (!date) {
                 return;
             }
             var data = {
@@ -3817,35 +3817,35 @@ function convertTo24HourFormat(timeStr) {
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
-                    if($('.tf-tour-booking-box')){
+                    if ($('.tf-tour-booking-box')) {
                         $('.tf-tour-booking-box').addClass('tf-box-loading');
                     }
-                    if($('.tf-search-date-wrapper')){
+                    if ($('.tf-search-date-wrapper')) {
                         $('.tf-search-date-wrapper').addClass('tf-box-loading');
                     }
                 },
                 success: function (response) {
-                    if(response){
-                        if(response.data.min_price){
+                    if (response) {
+                        if (response.data.min_price) {
                             $('.tf-tour-booking-box .tf-booking-price p').html(response.data.min_price);
                         }
-                        if($('.acr-adult-price') && response.data.adult){
+                        if ($('.acr-adult-price') && response.data.adult) {
                             $('.acr-adult-price').html(response.data.adult);
                         }
-                        if($('.acr-child-price') && response.data.child){
+                        if ($('.acr-child-price') && response.data.child) {
                             $('.acr-child-price').html(response.data.child);
                         }
-                        if($('.acr-infant-price') && response.data.infant){
+                        if ($('.acr-infant-price') && response.data.infant) {
                             $('.acr-infant-price').html(response.data.infant);
                         }
-                        if($('.tf-tour-booking-box')){
+                        if ($('.tf-tour-booking-box')) {
                             $('.tf-tour-booking-box').removeClass('tf-box-loading');
                         }
-                        if($('.tf-search-date-wrapper')){
+                        if ($('.tf-search-date-wrapper')) {
                             $('.tf-search-date-wrapper').removeClass('tf-box-loading');
                         }
-                        if($('.tf-max-capacity-count')){
-                            $('.tf-max-capacity-count').html(response.data.max_capacity); 
+                        if ($('.tf-max-capacity-count')) {
+                            $('.tf-max-capacity-count').html(response.data.max_capacity);
                         }
                     }
                 }
@@ -3933,7 +3933,7 @@ function convertTo24HourFormat(timeStr) {
             var tf_location = $(this).val();
             $("#tf-search-tour").val(tf_location);
         });
-    
+
         $('#ui-id-2 li').on("click", function (e) {
             var dest_name = $(this).attr("data-name");
             var dest_slug = $(this).attr("data-slug");
@@ -3962,24 +3962,33 @@ function convertTo24HourFormat(timeStr) {
          */
         $(window).on("scroll", function () {
             var sticky = $('.tf-tour-booking-wrap'),
-                scroll = $(window).scrollTop(),
-                footer = $('footer');
-        
-            if (footer.length === 0) {
-                return; 
+                scroll = $(window).scrollTop();
+
+            if (sticky.length === 0) {
+                return;
             }
-        
-            var footerOffset = footer.offset().top,
-                windowHeight = $(window).height();
-        
-            if (scroll >= 800) {
-                if (scroll + windowHeight >= footerOffset) {
-                    sticky.removeClass('tf-tours-fixed'); 
+
+            let windowHeight = $(window).height();
+            let footer = $('footer');
+            let isBlockTheme = $('body').hasClass('wp-is-block-theme') || $('.wp-site-blocks').length > 0;
+
+            if (!isBlockTheme && footer.length > 0) {
+                let footerOffset = footer.offset().top;
+                if (scroll >= 800) {
+                    if (scroll + windowHeight >= footerOffset) {
+                        sticky.removeClass('tf-tours-fixed');
+                    } else {
+                        sticky.addClass('tf-tours-fixed');
+                    }
                 } else {
-                    sticky.addClass('tf-tours-fixed');
+                    sticky.removeClass('tf-tours-fixed');
                 }
             } else {
-                sticky.removeClass('tf-tours-fixed');
+                if (scroll >= 800) {
+                    sticky.addClass('tf-tours-fixed');
+                } else {
+                    sticky.removeClass('tf-tours-fixed');
+                }
             }
         });
 
@@ -3991,24 +4000,33 @@ function convertTo24HourFormat(timeStr) {
             $(window).on("scroll", function () {
                 let bookingBox = $('.tf-single-template__one .tf_tours_main_booking');
                 var sticky = $('.tf-single-template__one .tf_tours_bottom_booking .tf-bottom-booking-bar'),
-                    scroll = $(window).scrollTop(),
-                    footer = $('footer');
-            
-                if (footer.length === 0 || bookingBox.length === 0 || sticky.length === 0) {
-                    return; 
+                    scroll = $(window).scrollTop();
+
+                if (bookingBox.length === 0 || sticky.length === 0) {
+                    return;
                 }
                 let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
-                var footerOffset = footer.offset().top,
-                    windowHeight = $(window).height();
-            
-                if (scroll >= boxOffset) {
-                    if (scroll + windowHeight >= footerOffset) {
-                        sticky.removeClass('active'); 
+                let windowHeight = $(window).height();
+                let footer = $('footer');
+                let isBlockTheme = $('body').hasClass('wp-is-block-theme') || $('.wp-site-blocks').length > 0;
+
+                if (!isBlockTheme && footer.length > 0) {
+                    let footerOffset = footer.offset().top;
+                    if (scroll >= boxOffset) {
+                        if (scroll + windowHeight >= footerOffset) {
+                            sticky.removeClass('active');
+                        } else {
+                            sticky.addClass('active');
+                        }
                     } else {
-                        sticky.addClass('active');
+                        sticky.removeClass('active');
                     }
                 } else {
-                    sticky.removeClass('active');
+                    if (scroll >= boxOffset) {
+                        sticky.addClass('active');
+                    } else {
+                        sticky.removeClass('active');
+                    }
                 }
             });
         }
@@ -4020,24 +4038,33 @@ function convertTo24HourFormat(timeStr) {
             $(window).on("scroll", function () {
                 let bookingBox = $('.tf-single-template__two .tf_tours_main_booking');
                 var sticky = $('.tf-single-template__two .tf_tours_bottom_booking .tf-bottom-booking-bar'),
-                    scroll = $(window).scrollTop(),
-                    footer = $('footer');
-            
-                if (footer.length === 0) {
-                    return; 
+                    scroll = $(window).scrollTop();
+
+                if (bookingBox.length === 0) {
+                    return;
                 }
                 let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
-                var footerOffset = footer.offset().top,
-                    windowHeight = $(window).height();
-            
-                if (scroll >= boxOffset) {
-                    if (scroll + windowHeight >= footerOffset) {
-                        sticky.removeClass('active'); 
+                let windowHeight = $(window).height();
+                let footer = $('footer');
+                let isBlockTheme = $('body').hasClass('wp-is-block-theme') || $('.wp-site-blocks').length > 0;
+
+                if (!isBlockTheme && footer.length > 0) {
+                    let footerOffset = footer.offset().top;
+                    if (scroll >= boxOffset) {
+                        if (scroll + windowHeight >= footerOffset) {
+                            sticky.removeClass('active');
+                        } else {
+                            sticky.addClass('active');
+                        }
                     } else {
-                        sticky.addClass('active');
+                        sticky.removeClass('active');
                     }
                 } else {
-                    sticky.removeClass('active');
+                    if (scroll >= boxOffset) {
+                        sticky.addClass('active');
+                    } else {
+                        sticky.removeClass('active');
+                    }
                 }
             });
         }
@@ -4050,22 +4077,22 @@ function convertTo24HourFormat(timeStr) {
         });
 
         function applyResponsiveClass() {
-            if($('.tf-single-template__legacy .tf-tour-booking-wrap').length > 0){
+            if ($('.tf-single-template__legacy .tf-tour-booking-wrap').length > 0) {
                 if ($(window).width() <= 768) {
-                $('.tf-single-template__legacy .tf-tour-booking-wrap').addClass('tf-tours-fixed-default');
+                    $('.tf-single-template__legacy .tf-tour-booking-wrap').addClass('tf-tours-fixed-default');
                 } else {
-                $('.tf-single-template__legacy .tf-tour-booking-wrap').removeClass('tf-tours-fixed-default');
+                    $('.tf-single-template__legacy .tf-tour-booking-wrap').removeClass('tf-tours-fixed-default');
                 }
             }
-          }
-        
-          // Run on page load
-          applyResponsiveClass();
-        
-          // Run on window resize
-          $(window).resize(function () {
+        }
+
+        // Run on page load
+        applyResponsiveClass();
+
+        // Run on window resize
+        $(window).resize(function () {
             applyResponsiveClass();
-          });
+        });
 
         //Template 2 Mobile Booking Btn
         $('.tf-single-template__one .tf-booking-mobile-btn').on('click', function (e) {
@@ -4118,7 +4145,7 @@ function convertTo24HourFormat(timeStr) {
             altInput: true,
             altFormat: tf_params.tour_form_data.date_format,
             locale: tf_flatpickr_locale(),
-            
+
             onReady: function (selectedDates, dateStr, instance) {
                 instance.element.value = tfNormalizeDateRange(dateStr);
                 instance.altInput.value = tfNormalizeDateRange(instance.altInput.value);
@@ -4129,7 +4156,7 @@ function convertTo24HourFormat(timeStr) {
                 instance.altInput.value = tfNormalizeDateRange(instance.altInput.value);
                 $(".tours-check-in-out").val(instance.altInput.value);
                 $('.tours-check-in-out[type="hidden"]').val(tfNormalizeDateRange(dateStr));
-                
+
                 // Initialize empty object for times
                 let times = {};
                 const selectedDate = selectedDates[0];
@@ -4143,7 +4170,7 @@ function convertTo24HourFormat(timeStr) {
                     if (availability.status !== 'available') continue;
 
                     const from = new Date(availability.check_in.trim()).getTime();
-                    const to   = new Date(availability.check_out.trim()).getTime();
+                    const to = new Date(availability.check_out.trim()).getTime();
 
                     if (timestamp >= from && timestamp <= to) {
                         const allowedTime = availability.allowed_time?.time || [];
@@ -4167,59 +4194,59 @@ function convertTo24HourFormat(timeStr) {
 
                 populateTimeSelect(times);
 
-                
-                if(tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
+
+                if (tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
                     dateSetToFields(selectedDates, instance);
                 }
             },
 
         };
-        
-        
+
+
         if (!tf_params.tour_form_data.is_all_unavailable && typeof tf_params.tour_form_data.tour_availability === 'object' && tf_params.tour_form_data.tour_availability && Object.keys(tf_params.tour_form_data.tour_availability).length > 0) {
             tour_date_options.minDate = "today";
             tour_date_options.disableMobile = "true";
             tour_date_options.enable = Object.entries(tf_params.tour_form_data.tour_availability)
-            .filter(([dateRange, data]) => data.status === "available")
-            .map(([dateRange, data]) => {
-                const [fromRaw, toRaw] = tfSplitDateRange(dateRange);
+                .filter(([dateRange, data]) => data.status === "available")
+                .map(([dateRange, data]) => {
+                    const [fromRaw, toRaw] = tfSplitDateRange(dateRange);
 
-                const today = new Date();
-                const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
-                let fromDate = fromRaw;
+                    const today = new Date();
+                    const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+                    let fromDate = fromRaw;
 
-                return {
-                    from: fromDate,
-                    to: toRaw
-                };
-            });
-        }else{
+                    return {
+                        from: fromDate,
+                        to: toRaw
+                    };
+                });
+        } else {
             tour_date_options.minDate = "today";
         }
 
         tour_date_options.disable = [];
         if (tf_params.tour_form_data.is_all_unavailable && typeof tf_params.tour_form_data.tour_availability === 'object' && tf_params.tour_form_data.tour_availability && Object.keys(tf_params.tour_form_data.tour_availability).length > 0) {
             tour_date_options.disable = Object.entries(tf_params.tour_form_data.tour_availability)
-            .filter(([dateRange, data]) => data.status === "unavailable")
-            .map(([dateRange, data]) => {
-                const [fromRaw, toRaw] = tfSplitDateRange(dateRange);
+                .filter(([dateRange, data]) => data.status === "unavailable")
+                .map(([dateRange, data]) => {
+                    const [fromRaw, toRaw] = tfSplitDateRange(dateRange);
 
-                const today = new Date();
-                const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
-                let fromDate = fromRaw;
+                    const today = new Date();
+                    const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+                    let fromDate = fromRaw;
 
-                return {
-                    from: fromDate,
-                    to: toRaw
-                };
-            });
+                    return {
+                        from: fromDate,
+                        to: toRaw
+                    };
+                });
         }
 
         if (tf_params.tour_form_data.disable_same_day) {
             tour_date_options.disable.push("today");
         }
 
-        if(tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
+        if (tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
             tour_date_options.disableMobile = "true";
             $(".tours-check-in-out").flatpickr(tour_date_options);
 
@@ -4237,10 +4264,10 @@ function convertTo24HourFormat(timeStr) {
             });
         }
 
-        if(tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
+        if (tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
             tour_date_options.disableMobile = "true";
             $(".tours-check-in-out").flatpickr(tour_date_options);
-            if(tour_date_options.defaultDate){
+            if (tour_date_options.defaultDate) {
                 const monthNames = [
                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -4256,7 +4283,7 @@ function convertTo24HourFormat(timeStr) {
                         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
                     ];
                     const endDate = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];
-                    if(endDate){
+                    if (endDate) {
                         $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-date").html(endDate.getDate());
                         $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                     }
@@ -4277,7 +4304,7 @@ function convertTo24HourFormat(timeStr) {
             });
         }
 
-        if(tf_params.tour_form_data.tf_tour_selected_template === 'default') {
+        if (tf_params.tour_form_data.tf_tour_selected_template === 'default') {
             tour_date_options.disableMobile = "true";
             $("#check-in-out-date").flatpickr(tour_date_options);
         }
@@ -4296,13 +4323,13 @@ function convertTo24HourFormat(timeStr) {
 
         if ($('#tour-location').length) {
             const map = L.map('tour-location').setView([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], tf_params.tour_form_data.location_zoom);
-            
+
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
             }).addTo(map);
 
-            const marker = L.marker([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], {alt: tf_params.tour_form_data.location}).addTo(map)
+            const marker = L.marker([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], { alt: tf_params.tour_form_data.location }).addTo(map)
                 .bindPopup(tf_params.tour_form_data.location);
         }
 
