@@ -273,7 +273,20 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'    => 'heading',
 					'title' => esc_html__( 'Availability', 'tourfic' ),
 				),
-
+				array(
+					'id'         => 'enable_availability',
+					'type'       => 'switch',
+					'label'      => esc_html__( 'Enable Availability by Date', 'tourfic' ),
+					'default'    => false,
+					'attributes' => array(
+						'class' => 'tf_apartment_availability_by_date',
+					),
+				),
+				array(
+					'id'         => 'apt_availability',
+					'type'       => 'aptAvailabilityCal',
+					'dependency' => array( 'enable_availability', '!=', 'false' ),
+				),
 			),
 		),
 		//Room Management

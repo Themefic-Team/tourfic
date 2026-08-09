@@ -6,6 +6,11 @@
  * php tests/security/wordpress-org-airport-service-compliance.php
  */
 
+if ( 'cli' === PHP_SAPI && ! defined( 'ABSPATH' ) ) {
+	define( 'ABSPATH', dirname( __DIR__, 2 ) . '/' );
+}
+defined( 'ABSPATH' ) || exit;
+
 $root = dirname( __DIR__, 2 );
 
 function tf_airport_compliance_assert( $condition, $message ) {

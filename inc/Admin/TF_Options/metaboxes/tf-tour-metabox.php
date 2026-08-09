@@ -482,11 +482,16 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'class'    => 'tour-type',
 					'options'  => [
 						'continuous' => esc_html__( 'Continuous', 'tourfic' ),
+						'fixed'      => esc_html__( 'Fixed', 'tourfic' ),
 					],
 					'default'  => 'continuous',
 					'attributes' => array(
 						'class' => 'tf_tour_avail_type',
 					),
+				),
+				array(
+					'id'   => 'tour_availability',
+					'type' => 'tourAvailabilityCal',
 				),
 			),
 		),
