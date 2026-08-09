@@ -171,14 +171,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					''
 				);
 			}
-
-				add_submenu_page(
-					$this->option_id,
-					esc_html__('Upgrade', 'tourfic'),
-					esc_html__('Upgrade', 'tourfic'),
-					'manage_options',
-					esc_url('https://tourfic.com/pricing')
-				);
 			// remove first submenu
 			remove_submenu_page( $this->option_id, $this->option_id );
 

@@ -403,10 +403,7 @@ trait Action_Helper {
 
 		$action_links = array_merge(
 			$settings_link,
-			$links,
-			array(
-				'upgrade' => '<a href="https://tourfic.com/go/upgrade" target="_blank" style="color:#cc0000;font-weight: bold;text-shadow: 0px 1px 1px hsl(0deg 0% 0% / 28%);">' . esc_html__( 'GO PRO', 'tourfic' ) . '</a>',
-			)
+			$links
 		);
 
 		return apply_filters( 'tourfic_plugin_action_links', $action_links );
