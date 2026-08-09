@@ -1,15 +1,16 @@
-.single-tf_apartment{
-    .tf-single-template{
-        &__legacy{
+.single-tf_apartment {
+    .tf-single-template {
+        &__legacy {
             #tf-apartment-booking {
                 background-color: $color-filling-fg;
                 border-radius: 8px;
                 padding: 32px;
                 margin-bottom: 40px;
-                @media #{$max320}{
+
+                @media #{$max320} {
                     padding: 16px;
                 }
-            
+
                 h5 {
                     color: $color-heading;
                     font-weight: 500;
@@ -17,16 +18,16 @@
                     line-height: 1.5;
                     margin: 0 0 16px 0;
                 }
-            
+
                 .tf-apartment-form-header {
                     @include flexbox();
                     @include justify-content(space-between);
                     @include align-items(center);
                     margin-bottom: 16px;
-            
+
                     .tf-apartment-price-per-night {
                         margin: 0;
-            
+
                         span.tf-apartment-base-price,
                         span.tf-apartment-base-price span {
                             color: $color-heading;
@@ -34,7 +35,7 @@
                             line-height: 1.5;
                             font-weight: 600;
                         }
-            
+
                         span {
                             color: $color-text;
                             font-size: 1rem;
@@ -42,11 +43,11 @@
                             letter-spacing: 0.2px;
                         }
                     }
-            
+
                     .tf-top-review a {
                         text-decoration: none;
                     }
-            
+
                     .tf-single-rating {
                         color: $color-gray;
                         background-color: transparent;
@@ -54,13 +55,13 @@
                         font-size: 0.625rem;
                         @include flexbox();
                         @include align-items(center);
-            
+
                         i {
                             color: $color-warning;
                             font-size: 1rem;
                             margin-top: -3px;
                         }
-            
+
                         span {
                             font-size: 0.875rem;
                             font-weight: 500;
@@ -69,27 +70,27 @@
                         }
                     }
                 }
-            
+
                 .tf-apartment-form-fields {
                     background: $color-filling-bg;
                     border: 1px solid $color-border-lite;
                     border-radius: 8px;
                     margin-bottom: 16px;
-            
+
                     .tf_booking-dates {
                         @include flexbox();
                         @include flex-wrap(wrap);
-            
+
                         * {
                             box-sizing: border-box;
                         }
-            
+
                         .tf-check-in-date,
                         .tf-check-out-date {
                             @include flex(0 0 50%);
                             padding: 8px 16px;
                             text-align: left;
-            
+
                             .tf-label {
                                 text-transform: uppercase;
                                 display: inline-block;
@@ -101,14 +102,14 @@
                                 letter-spacing: 0.2px;
                             }
                         }
-            
+
                         .tf-err-msg {
                             @include flex(0 0 100%);
                             text-align: center;
                             font-size: 0.875rem;
                             color: $color-danger;
                         }
-            
+
                         .form-control,
                         #check-in-date,
                         #check-out-date {
@@ -123,17 +124,17 @@
                             letter-spacing: 0.2px;
                             cursor: pointer;
                             text-align: left;
-            
+
                             &:focus {
                                 outline: none;
                             }
                         }
-            
+
                         .tf-check-out-date {
                             .tf_label-row {
                                 position: relative;
                             }
-            
+
                             .form-control {
                                 opacity: 0;
                                 position: absolute;
@@ -141,11 +142,11 @@
                                 left: 0;
                             }
                         }
-            
+
                         .tf-check-in-date {
                             border-right: 1px solid $color-border-lite;
                         }
-            
+
                         #check-in-out-date {
                             width: 100%;
                             opacity: 0;
@@ -153,15 +154,15 @@
                             bottom: 0;
                         }
                     }
-            
+
                     .tf-apartment-guest-row {
                         border-top: 1px solid $color-border-lite;
                         padding: 8px 16px;
-            
+
                         label {
                             margin-bottom: 0;
                         }
-            
+
                         .tf-label {
                             text-transform: uppercase;
                             display: inline-block;
@@ -171,19 +172,19 @@
                             line-height: 1.5;
                             letter-spacing: 0.2px;
                         }
-            
+
                         .tf_selectperson-wrap {
                             padding: 0;
                             border: none;
                             width: 100%;
                             // color: $color-gray-light;
-            
+
                             .tf_acrselection-wrap {
                                 left: 0;
                                 right: 0;
                                 width: auto;
                             }
-            
+
                             .tf_input-inner {
                                 color: $color-text;
                                 font-size: 1rem;
@@ -193,13 +194,13 @@
                             }
                         }
                     }
-            
+
                     .tf-err-msg {
                         color: $color-danger;
                         font-weight: 500;
                     }
                 }
-            
+
                 .tf_btn {
                     height: auto;
                     border-radius: 8px;
@@ -214,21 +215,21 @@
                 .tf-apartment-price-list {
                     margin: 15px 0 0;
                     padding: 0;
-            
+
                     li {
                         @include flexbox();
                         @include justify-content(space-between);
                         margin-bottom: 8px;
                         color: $color-text;
-            
+
                         .tf-price-list-label {
                             color: $color-text;
                         }
-            
+
                         .tf-price-list-price {
                             font-weight: 500;
                         }
-            
+
                         &.total-price-wrap {
                             padding-top: 10px;
                             margin-top: 16px;
@@ -236,7 +237,7 @@
                             font-weight: 500;
                             color: $color-text;
                         }
-            
+
                         &:last-child {
                             margin-bottom: 0px;
                         }
@@ -244,73 +245,85 @@
                 }
             }
         }
-        &__two{
-            #tf-apartment-booking{
+
+        &__two {
+            #tf-apartment-booking {
                 box-shadow: none;
                 padding: 0px;
                 margin: 0;
                 border: none;
                 border-radius: none;
-                .tf-apartment-form-header{
-                    h3{
-                        span{
+
+                .tf-apartment-form-header {
+                    h3 {
+                        span {
                             color: $color-primary;
                             font-size: 2rem;
                             font-weight: 700;
-                            @media #{$max768}{
+
+                            @media #{$max768} {
                                 font-size: 1.25rem;
                             }
-                            bdi{
+
+                            bdi {
                                 font-size: 2rem;
-                                @media #{$max768}{
+
+                                @media #{$max768} {
                                     font-size: 1.25rem;
                                 }
                             }
                         }
-                        span.per-pricing-type{
+
+                        span.per-pricing-type {
                             font-size: 1.125rem;
                         }
                     }
                 }
-                .tf-apartment-form-fields{
+
+                .tf-apartment-form-fields {
                     background-color: transparent;
                     border: 0px solid;
                     margin: 0;
                     border-radius: none;
-                    .tf_booking-dates{
-                        .tf-check-in-out-date{
+
+                    .tf_booking-dates {
+                        .tf-check-in-out-date {
                             height: 53px;
                             padding: 16px 32px 16px 16px;
                             background: $color-white;
                             margin-bottom: 32px;
-                            .tf_label-row{
+
+                            .tf_label-row {
                                 display: flex;
                                 align-items: center;
                                 gap: 8px;
                             }
                         }
-                        .tf-aprtment-check-in-out-date{
+
+                        .tf-aprtment-check-in-out-date {
                             padding: 6px 16px;
                             background: $color-filling-bg;
                             width: 100%;
                             box-sizing: border-box;
-            
-                            .tf_label_rows{
+
+                            .tf_label_rows {
                                 display: flex;
                                 align-items: center;
                                 gap: 8px;
                                 line-height: 1;
-                                input{
+
+                                input {
                                     border: none;
-                                    background-color: rgba(0,0,0,0);
+                                    background-color: rgba(0, 0, 0, 0);
                                     padding: 0;
                                     width: 100%;
                                     color: $color-text;
                                     font-size: 1rem;
                                     text-align: left;
                                     height: auto;
-            
-                                    &:focus{
+                                    box-shadow: none;
+
+                                    &:focus {
                                         outline: none;
                                         box-shadow: none;
                                     }
@@ -318,56 +331,63 @@
                             }
                         }
                     }
-                    .tf-apartment-guest-row{
+
+                    .tf-apartment-guest-row {
                         border-top: 0px solid $color-border;
                         padding: 0px;
-                        .tf_selectperson-wrap{
+
+                        .tf_selectperson-wrap {
                             display: block;
                             border-right: 0px solid;
-                            @media #{$max575}{
+
+                            @media #{$max575} {
                                 padding-top: 0;
                             }
-                            .tf-form-title{
+
+                            .tf-form-title {
                                 margin-bottom: 24px;
-                                h3.tf-person-info-title{
+
+                                h3.tf-person-info-title {
                                     color: $color-heading;
                                     font-size: 2rem;
                                     font-weight: 700;
                                     margin: 0px;
-                                    @media #{$max1024}{
+
+                                    @media #{$max1024} {
                                         font-size: 1.25rem;
                                     }
                                 }
                             }
-            
-                            .tf_acrselection{
+
+                            .tf_acrselection {
                                 margin-bottom: 24px;
-            
-                                &:last-child{
+
+                                &:last-child {
                                     margin-bottom: 0px;
                                 }
                             }
                         }
                     }
                 }
+
                 .tf-apartment-price-list {
                     margin: 15px 0 0;
                     padding: 0;
-            
+
                     li {
                         @include flexbox();
                         @include justify-content(space-between);
                         margin-bottom: 8px;
                         color: $color-text;
-            
+
                         .tf-price-list-label {
                             color: $color-text;
                         }
-            
+
                         .tf-price-list-price {
                             font-weight: 500;
                         }
-            
+
                         &.total-price-wrap {
                             padding-top: 10px;
                             margin-top: 16px;
@@ -375,20 +395,22 @@
                             font-weight: 500;
                             color: $color-text;
                         }
-            
+
                         &:last-child {
                             margin-bottom: 0px;
                         }
                     }
                 }
             }
+
             #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates {
                 flex-wrap: wrap;
                 margin-bottom: 32px;
-        
+
                 .tf_label-row {
                     margin-top: 8px;
-                    .tf-err-msg{
+
+                    .tf-err-msg {
                         color: $color-danger;
                     }
                 }
@@ -396,42 +418,46 @@
         }
 
         &__legacy,
-        &__two{
+        &__two {
+
             .tf-withoutpayment-booking,
-            .tf-withoutpayment-booking-confirm{
-                .tf-withoutpayment-popup{
+            .tf-withoutpayment-booking-confirm {
+                .tf-withoutpayment-popup {
                     background-color: $color-white;
                     box-shadow: 0px 3px 60px 0px rgba(0, 0, 0, 0.10);
 
-                    .tf-booking-tabs{
+                    .tf-booking-tabs {
                         background-color: $color-white;
                         border-bottom: 0.3px solid #CCCED1;
 
-                        .tf-booking-tab-menu{
-                            ul{
+                        .tf-booking-tab-menu {
+                            ul {
                                 background-color: $color-text;
-                                @media #{$max768}{
+
+                                @media #{$max768} {
                                     background: transparent;
                                 }
 
-                                li{
+                                li {
                                     color: $color-white;
-                                    @media #{$max768}{
+
+                                    @media #{$max768} {
                                         color: $color-text;
                                     }
 
-                                    &.active{
+                                    &.active {
                                         background-color: $color-primary;
-                                        @media #{$max768}{
+
+                                        @media #{$max768} {
                                             color: $color-white;
                                         }
 
-                                        &::before{
+                                        &::before {
                                             background-color: transparent;
                                         }
                                     }
 
-                                    &.done{
+                                    &.done {
                                         background-color: $color-brand-lite;
                                     }
                                 }
@@ -439,13 +465,13 @@
                         }
                     }
 
-                    .tf-booking-pagination{
-                        .tf-control-pagination{
-                            button{
+                    .tf-booking-pagination {
+                        .tf-control-pagination {
+                            button {
                                 background-color: $color-primary;
                             }
 
-                            a.tf-back-control{
+                            a.tf-back-control {
                                 background-color: transparent;
                                 color: $color-primary;
                                 padding: 0;
@@ -461,40 +487,43 @@
 }
 
 // Ensure apartment popup gets the current Tour popup look regardless of parent template wrapper.
-.tf-apartment-booking-popup{
-    .tf-withoutpayment-popup{
+.tf-apartment-booking-popup {
+    .tf-withoutpayment-popup {
         background-color: $color-white;
         box-shadow: 0px 3px 60px 0px rgba(0, 0, 0, 0.10);
 
-        .tf-booking-tabs{
+        .tf-booking-tabs {
             background-color: $color-white;
             border-bottom: 0.3px solid #CCCED1;
 
-            .tf-booking-tab-menu{
-                ul{
+            .tf-booking-tab-menu {
+                ul {
                     background-color: $color-text;
-                    @media #{$max768}{
+
+                    @media #{$max768} {
                         background: transparent;
                     }
 
-                    li{
+                    li {
                         color: $color-white;
-                        @media #{$max768}{
+
+                        @media #{$max768} {
                             color: $color-text;
                         }
 
-                        &.active{
+                        &.active {
                             background-color: $color-primary;
-                            @media #{$max768}{
+
+                            @media #{$max768} {
                                 color: $color-white;
                             }
 
-                            &::before{
+                            &::before {
                                 background-color: transparent;
                             }
                         }
 
-                        &.done{
+                        &.done {
                             background-color: $color-brand-lite;
                         }
                     }
@@ -502,13 +531,13 @@
             }
         }
 
-        .tf-booking-pagination{
-            .tf-control-pagination{
-                button{
+        .tf-booking-pagination {
+            .tf-control-pagination {
+                button {
                     background-color: $color-primary;
                 }
 
-                a.tf-back-control{
+                a.tf-back-control {
                     background-color: transparent;
                     color: $color-primary;
                     padding: 0;

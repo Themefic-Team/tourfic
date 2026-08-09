@@ -654,27 +654,21 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'is_search_able' => true
 				),
 				array(
-					'id'       => 'discount_type',
-					'type'     => 'select',
-					'label'    => esc_html__( 'Discount Type', 'tourfic' ),
-					'subtitle' => esc_html__( 'Set a discount for this tour to incentivize bookings. Choose between a fixed amount off or a percentage-based reduction.', 'tourfic' ),
-					'options'  => array(
+					'id'          => 'discount_price',
+					'label'       => __( 'Discount Pricing', 'tourfic' ),
+					'subtitle'    => __( 'Set a discount for this car to incentivize bookings. Choose between a fixed amount off or a percentage-based reduction.', 'tourfic' ),
+					'type'        => 'number',
+					'description' => esc_html__( 'Enter value (e.g., ‘30’ for 30% or $100 fixed)', 'tourfic' ),
+					'attributes'  => array(
+						'min' => '0',
+					),
+					'placeholder' => esc_html__('Amount', 'tourfic'),
+					'related'   => true,
+					'related_name' => 'discount_type',
+					'related_options'  => array(
 						'none'    => esc_html__( 'None', 'tourfic' ),
 						'percent' => esc_html__( 'Percent', 'tourfic' ),
 						'fixed'   => esc_html__( 'Fixed', 'tourfic' ),
-					),
-					'default'  => 'none',
-				),
-				array(
-					'id'         => 'discount_price',
-					'type'       => 'number',
-					'label'      => esc_html__( 'Discount Price', 'tourfic' ),
-					'subtitle'   => esc_html__( 'Insert amount only', 'tourfic' ),
-					'attributes' => array(
-						'min' => '0',
-					),
-					'dependency' => array(
-						array( 'discount_type', '!=', 'none' ),
 					),
 				),
 				array(

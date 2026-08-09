@@ -8,7 +8,7 @@
 .page-template-tf-search,
 .single-tf_apartment,
 .single-tf_hotel,
-.single-tf_tours{
+.single-tf_tours {
     background-color: $color-white;
 }
 
@@ -18,13 +18,14 @@
     font-weight: 600;
     color: $color-heading;
 }
+
 h3.section-heading {
     font-size: 1.75rem;
     color: $color-heading;
 }
 
-.fancybox-navigation .fancybox-button--arrow_left > div,
-.fancybox-navigation .fancybox-button--arrow_right > div{
+.fancybox-navigation .fancybox-button--arrow_left>div,
+.fancybox-navigation .fancybox-button--arrow_right>div {
     background-color: $color-heading;
 }
 
@@ -39,7 +40,8 @@ h3.section-heading {
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
-        @media #{$max768}{
+
+        @media #{$max768} {
             font-size: 1.75rem;
             line-height: 1.3;
         }
@@ -49,12 +51,14 @@ h3.section-heading {
         display: flex;
         justify-content: space-between;
         gap: 20px;
-        @media #{$max768}{
+
+        @media #{$max768} {
             display: block;
         }
-    
+
         .tf-title-left {
             flex: 1;
+
             span.post-type {
                 background: $color-primary;
                 color: $color-white;
@@ -64,30 +68,37 @@ h3.section-heading {
                 margin-bottom: 5px;
                 display: inline-block;
             }
-            .tf-map-link{
-                i,svg{
+
+            .tf-map-link {
+
+                i,
+                svg {
                     margin-right: 4px;
                 }
-                .tf-d-ib{
+
+                .tf-d-ib {
                     overflow: hidden;
                     text-overflow: ellipsis;
                     display: -webkit-box;
                     -webkit-line-clamp: 2;
                     -webkit-box-orient: vertical;
                 }
-                a{
+
+                a {
                     color: $color-primary;
                 }
             }
         }
-    
+
         .tf-title-right {
             display: flex;
             align-items: center;
             column-gap: 5px;
-            @media #{$max768}{
+
+            @media #{$max768} {
                 margin-top: 15px;
             }
+
             .tf-wishlist-button {
                 font-size: 1.5rem;
                 cursor: pointer;
@@ -112,7 +123,7 @@ h3.section-heading {
     border-radius: 4px;
     position: relative;
 
-    @media #{$max768}{
+    @media #{$max768} {
         font-size: 0.875rem;
         padding: 6px;
     }
@@ -121,19 +132,22 @@ h3.section-heading {
         font-size: 0.875rem;
         color: $color-primary;
     }
+
     span {
         margin: 0 3px 0 5px;
         font-weight: 700;
         font-size: 1.125rem;
 
-        @media #{$max768}{
+        @media #{$max768} {
             font-size: 0.875rem;
         }
     }
 }
+
 .tf_room_name_inner {
     padding-top: 20px;
 }
+
 .tf-slick-slider {
     position: relative;
     display: block;
@@ -146,6 +160,7 @@ h3.section-heading {
     -khtml-user-select: none;
     touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
+
     .slick-track {
         transform: translate3d(0, 0, 0);
         position: relative;
@@ -154,16 +169,19 @@ h3.section-heading {
         display: block;
         margin-left: auto;
         margin-right: auto;
+
         &:before {
             display: table;
             content: "";
         }
+
         &:after {
             display: table;
             content: "";
             clear: both;
         }
     }
+
     .slick-list {
         transform: translate3d(0, 0, 0);
         position: relative;
@@ -173,6 +191,7 @@ h3.section-heading {
         padding: 0;
         margin-left: -5px !important;
         margin-right: -5px !important;
+
         &:focus {
             outline: none;
         }
@@ -181,7 +200,7 @@ h3.section-heading {
     .slick-slide {
         margin-left: 5px;
         margin-right: 5px;
-        
+
         img {
             display: block;
         }
@@ -190,7 +209,8 @@ h3.section-heading {
     &.slick-initialized {
         .slick-slide {
             display: block;
-            @media #{$max768}{
+
+            @media #{$max768} {
                 margin: 0px !important;
             }
         }
@@ -202,23 +222,27 @@ h3.section-heading {
         display: -webkit-box !important;
         display: -ms-flexbox !important;
         display: flex !important;
+
         @media #{$max768} {
             margin-bottom: 15px !important;
         }
+
         >div {
-            height:auto;
+            height: auto;
             min-height: -webkit-fill-available !important;
             display: -webkit-box !important;
             display: -ms-flexbox !important;
             display: flex !important;
             -webkit-box-align: end !important;
-                -ms-flex-align: end !important;
-                    align-items: flex-end !important;
+            -ms-flex-align: end !important;
+            align-items: flex-end !important;
         }
+
         .tf-slider-content {
             margin-top: 200px !important;
         }
     }
+
     .tf-slider-item {
         height: auto;
     }
@@ -229,12 +253,14 @@ h3.section-heading {
         margin-bottom: 15px;
         display: block;
     }
+
     .tf_form-inner {
-        svg{
+        svg {
             width: 20px;
             height: 20px;
         }
-        i{
+
+        i {
             font-size: 18px;
         }
 
@@ -245,12 +271,14 @@ h3.section-heading {
             box-shadow: none;
             height: 45px;
             margin: 0px;
+
             &:focus {
                 background: transparent;
                 border: 0;
                 outline: 0;
             }
         }
+
         select {
             width: 100%;
             background: transparent;
@@ -263,6 +291,7 @@ h3.section-heading {
             cursor: pointer;
             font-size: 0.875rem;
             color: $color-text;
+
             &:focus {
                 background: transparent;
                 border: 0;
@@ -271,9 +300,11 @@ h3.section-heading {
         }
     }
 }
+
 .tf-hotel-deposit-hide {
     display: none;
 }
+
 .tf-hotel-side-booking {
     .tf_form-inner {
         position: relative;
@@ -284,15 +315,18 @@ h3.section-heading {
         @include align-items(center);
         justify-items: center;
         padding-left: 5px;
+
         i {
             color: $color-text;
             font-size: 1rem;
+
             &:last-child {
                 position: absolute;
                 right: 12px;
             }
         }
     }
+
     #check-in-out-date {
         min-width: 150px;
     }
@@ -311,6 +345,7 @@ h3.section-heading {
     width: 100%;
     display: none;
 }
+
 .tf_acrselection {
     @include flexbox();
     @include align-items(center);
@@ -365,11 +400,13 @@ h3.section-heading {
         font-size: 0.875rem;
         font-weight: 500;
         line-height: 1.5;
+
         &:hover {
             color: $color-text;
             border-color: $color-text;
         }
     }
+
     .acr-inc {
         width: 30px;
         height: 30px;
@@ -396,15 +433,18 @@ h3.section-heading {
         font-size: 0.875rem;
         font-weight: 500;
         line-height: 1.5;
+
         &:hover {
             color: $color-text;
             border-color: $color-text;
         }
     }
 }
+
 .tf-search-form-field-icon {
     margin-right: 8px;
 }
+
 .tf_destination-wrap {
     border-right: 1px solid $color-border-lite;
     border-left: 0;
@@ -413,7 +453,7 @@ h3.section-heading {
     min-width: 150px;
     width: 25%;
 
-    @media #{$max768}{
+    @media #{$max768} {
         width: 100%;
         display: block;
         padding: 10px;
@@ -422,10 +462,12 @@ h3.section-heading {
 
     .tf_input-inner {
         padding: 0 15px;
-        @media #{$max768}{
+
+        @media #{$max768} {
             padding: 0 10px;
         }
     }
+
     .ui-menu-item {
         &:before {
             content: "\f3c5";
@@ -438,30 +480,35 @@ h3.section-heading {
         }
     }
 }
-#tf_car_booking{
-    .tf_homepage-booking{
-        @media #{$max991}{
+
+#tf_car_booking {
+    .tf_homepage-booking {
+        @media #{$max991} {
             display: inherit;
             height: auto;
         }
     }
+
     .tf_destination-wrap {
         width: auto;
-        @media #{$max991}{
+
+        @media #{$max991} {
             padding: 10px 5px;
             width: 100%;
             display: block;
             border-bottom: 1px solid gray;
         }
     }
+
     .tf_submit-wrap {
-        @media #{$max991}{
+        @media #{$max991} {
             width: 100%;
             display: block;
             border-radius: 0 0 8px 8px;
         }
     }
 }
+
 .tf_selectdate-wrap {
     border-right: 1px solid $color-border-lite;
     display: table-cell;
@@ -473,7 +520,7 @@ h3.section-heading {
     -ms-user-select: none;
     user-select: none;
 
-    @media #{$max768}{
+    @media #{$max768} {
         width: 100%;
         display: block;
         padding: 10px 20px;
@@ -492,6 +539,7 @@ h3.section-heading {
         cursor: pointer;
     }
 }
+
 .tf_selectperson-wrap {
     border-right: 1px solid $color-border-lite;
     display: table-cell;
@@ -503,7 +551,7 @@ h3.section-heading {
     -ms-user-select: none;
     user-select: none;
 
-    @media #{$max768}{
+    @media #{$max768} {
         width: 100%;
         display: block;
         padding: 20px 0;
@@ -515,10 +563,12 @@ h3.section-heading {
         @include align-items(center);
         cursor: pointer;
     }
+
     .person-sep {
         padding: 0 8px;
         position: relative;
         white-space: nowrap;
+
         &:after {
             content: "";
             position: absolute;
@@ -533,19 +583,24 @@ h3.section-heading {
             margin: 0 auto;
         }
     }
+
     .adults-text {
         white-space: nowrap;
     }
+
     .child-text {
         white-space: nowrap;
     }
+
     .room-text {
         white-space: nowrap;
     }
+
     .infant-text {
         white-space: nowrap;
     }
 }
+
 .tf_submit-wrap {
     border-right: 0;
     border-radius: 0 8px 8px 0;
@@ -573,15 +628,19 @@ h3.section-heading {
     padding: 0;
     margin: 0;
     background: $color-white;
-    @media #{$max1024}{
+
+    @media #{$max1024} {
         min-width: 500px;
     }
-    @media #{$max768}{
+
+    @media #{$max768} {
         min-width: auto;
     }
+
     .logged-in-as {
         display: none;
     }
+
     .tf-rating-wrapper {
         display: grid;
         grid-template-columns: calc(50% - 20px) calc(50% - 20px);
@@ -589,15 +648,17 @@ h3.section-heading {
         row-gap: 15px;
         margin: 0 0 80px 0;
 
-        @media #{$max768}{
+        @media #{$max768} {
             grid-template-columns: 100%;
         }
+
         .tf-form-single-rating {
             display: grid;
             grid-template-columns: auto auto;
             justify-content: space-between;
             align-items: center;
             column-gap: 15px;
+
             label {
                 color: $color-text;
                 font-weight: 500;
@@ -607,14 +668,17 @@ h3.section-heading {
             }
         }
     }
+
     .tf-form-single-rating {
         .error {
             color: $color-danger;
         }
+
         .ratings-container {
             line-height: 1;
             unicode-bidi: bidi-override;
             direction: rtl;
+
             label {
                 padding: 0;
                 margin: 0;
@@ -622,17 +686,21 @@ h3.section-heading {
                 line-height: 1;
                 color: transparent;
             }
+
             >input {
                 display: none;
             }
         }
+
         .ratings-container.star10 {
             width: 220px;
         }
+
         .ratings-container.star5 {
             width: 110px;
         }
     }
+
     .ratings-container {
         >input+label {
             text-indent: -9999px;
@@ -643,14 +711,16 @@ h3.section-heading {
             white-space: nowrap;
             cursor: pointer;
             color: transparent;
+
             &:before {
                 text-indent: 9999px;
                 display: inline-block;
                 content: "\f005";
                 color: $color-warning;
                 font-size: 1rem;
-                font-weight: 400;   
+                font-weight: 400;
             }
+
             &:hover~label {
                 &:before {
                     content: "\f005";
@@ -658,17 +728,20 @@ h3.section-heading {
                     font-weight: 900;
                 }
             }
-           
+
         }
+
         >.star-cb-clear+label {
             text-indent: 9999px;
             text-indent: -9999px;
             width: 0.5em;
             margin-left: -0.5em;
+
             &:before {
                 width: 0.5em;
             }
         }
+
         >input {
             &:checked~label {
                 &:before {
@@ -678,9 +751,10 @@ h3.section-heading {
                 }
             }
         }
+
         &:hover {
             >input+label {
-               
+
                 &:hover~label {
                     &:before {
                         content: "\f005";
@@ -688,6 +762,7 @@ h3.section-heading {
                         font-weight: 900;
                     }
                 }
+
                 &:hover {
                     &:before {
                         content: "\f005";
@@ -698,6 +773,7 @@ h3.section-heading {
             }
         }
     }
+
     .review-desc {
         textarea {
             background: $color-gray-light;
@@ -709,16 +785,19 @@ h3.section-heading {
             color: $color-text;
             box-shadow: none;
             width: 100%;
+
             &::placeholder {
                 color: $color-text;
             }
         }
     }
+
     .tf-visitor-info {
         display: grid;
         grid-template-columns: calc(50% - 20px) calc(50% - 20px);
         column-gap: 40px;
         margin: 16px 0 0 0;
+
         input {
             background: $color-gray-light;
             border: 1px solid $color-border-lite;
@@ -731,42 +810,51 @@ h3.section-heading {
             box-shadow: none;
             width: 100%;
         }
+
         .error {
             color: $color-danger;
         }
     }
+
     .tf-review-submit {
         margin: 25px 0 0 0;
     }
+
     form.tf-review-form {
-        @media #{$max1024}{
+        @media #{$max1024} {
             gap: 20px;
         }
     }
 }
+
 #tf-rating-modal {
-    .tf-modal-content{
+    .tf-modal-content {
         padding: 40px;
     }
+
     .logged-in-as {
         text-align: center;
         margin-bottom: 25px;
     }
 }
+
 .tf-review-container {
     .no-comments {
         display: none;
     }
+
     .tf-total-review {
         display: grid;
         grid-template-columns: auto auto;
         justify-content: space-between;
         align-items: center;
         margin: 0 0 25px 0;
+
         .tf-total-average {
             display: grid;
             grid-template-columns: auto auto;
             align-items: center;
+
             div {
                 width: 60px;
                 height: 60px;
@@ -782,6 +870,7 @@ h3.section-heading {
                 font-size: 1.5rem;
                 line-height: 1.3;
             }
+
             span {
                 color: $color-text;
                 font-weight: 400;
@@ -791,6 +880,7 @@ h3.section-heading {
             }
         }
     }
+
     .tf-review-progress-bar {
         background: $color-filling-fg;
         display: grid;
@@ -806,13 +896,16 @@ h3.section-heading {
         @media (min-width: 768px) and (max-width: 991px) {
             grid-template-columns: auto;
         }
-        @media #{$max768}{
+
+        @media #{$max768} {
             grid-template-columns: auto;
         }
+
         .tf-single {
             display: grid;
             grid-template-columns: calc(50% - 15px) calc(50% - 15px) 30px;
             align-items: center;
+
             .tf-text {
                 text-align: left;
                 color: $color-text;
@@ -821,6 +914,7 @@ h3.section-heading {
                 line-height: 1;
                 text-transform: capitalize;
             }
+
             .tf-p-bar {
                 width: 100%;
                 height: 7px;
@@ -828,6 +922,7 @@ h3.section-heading {
                 border-radius: 4px;
                 position: relative;
                 overflow: hidden;
+
                 .percent-progress {
                     position: absolute;
                     width: 0;
@@ -836,7 +931,8 @@ h3.section-heading {
                     transition: width 1s ease-in-out;
                 }
             }
-            .tf-p-b-rating { 
+
+            .tf-p-b-rating {
                 text-align: right;
                 font-weight: 500;
                 font-size: 0.875rem;
@@ -845,6 +941,7 @@ h3.section-heading {
             }
         }
     }
+
     .no-review {
         h4 {
             text-align: center;
@@ -852,11 +949,13 @@ h3.section-heading {
             margin-bottom: 10px;
             font-size: 1.25rem;
         }
+
         .btn-styled {
             padding: 18px 20px;
         }
     }
 }
+
 .tf-single-review {
     display: grid;
     grid-template-columns: calc(50% - 10px) calc(50% - 10px);
@@ -866,7 +965,8 @@ h3.section-heading {
     @media (min-width: 768px) and (max-width: 991px) {
         grid-template-columns: auto;
     }
-    @media #{$max768}{
+
+    @media #{$max768} {
         grid-template-columns: auto;
     }
 
@@ -882,12 +982,14 @@ h3.section-heading {
         padding: 25px 25px 35px;
         border-radius: 4px;
     }
+
     .tf-review-avatar {
         width: 56px;
         height: 56px;
         border-radius: 50%;
         overflow: hidden;
     }
+
     .tf-review-details {
         .tf-name {
             font-weight: 500;
@@ -897,6 +999,7 @@ h3.section-heading {
             margin: 0 0 8px 0;
             text-transform: capitalize;
         }
+
         .tf-date {
             font-weight: 400;
             font-size: 0.75rem;
@@ -905,6 +1008,7 @@ h3.section-heading {
             letter-spacing: 0.2px;
             margin: 0 0 8px;
         }
+
         .tf-rating-stars {
             display: grid;
             grid-template-columns: auto auto;
@@ -912,24 +1016,28 @@ h3.section-heading {
             align-items: center;
             justify-content: start;
             line-height: 1;
+
             i {
                 color: $color-primary;
                 font-size: 0.625rem;
                 height: 14px;
             }
         }
+
         .tf-description {
             font-weight: 400;
             font-size: 0.875rem;
             line-height: 1.5;
             color: $color-text;
             margin: 8px 0 0 0;
-            p{
+
+            p {
                 margin-bottom: 0;
             }
         }
     }
 }
+
 .tf-review-pending {
     text-align: center;
     font-size: 1rem;
@@ -947,10 +1055,12 @@ h3.section-heading {
     border-radius: 4px;
     flex: 2;
     text-align: center;
-    @media #{$max768}{
+
+    @media #{$max768} {
         max-width: 450px;
         margin: auto;
     }
+
     .default-enquiry-title-section {
         @include flexbox();
         justify-content: center;
@@ -961,6 +1071,7 @@ h3.section-heading {
             color: $color-heading;
             margin-bottom: 10px;
         }
+
         i {
             font-weight: 900;
             padding-right: 10px;
@@ -982,13 +1093,15 @@ h3.section-heading {
     background-size: cover;
     background-position: center center;
     margin-left: 0;
+
     @media only screen and (min-width: 768px) and (max-width: 970px) {
         border: 7px solid $color-white;
         height: 300px;
         padding: 15px;
         margin: 0 7px 15px;
     }
-    @media #{$max768}{
+
+    @media #{$max768} {
         border: 7px solid $color-white;
         height: 250px;
         padding: 15px;
@@ -1010,12 +1123,15 @@ h3.section-heading {
         h3 {
             font-size: 1.25rem;
             color: $color-white;
-            @media #{$max1024}{
+
+            @media #{$max1024} {
                 font-size: 1.125rem;
             }
-            @media #{$max575}{
+
+            @media #{$max575} {
                 font-size: 1rem;
             }
+
             span {
                 font-size: 0.938rem;
                 line-height: 1.5;
@@ -1024,9 +1140,11 @@ h3.section-heading {
                 font-weight: 400;
             }
         }
+
         a {
             color: $color-white;
             text-decoration: none;
+
             &:hover {
                 color: $color-brand-dark;
             }
@@ -1063,18 +1181,22 @@ h3.section-heading {
     margin: 0 5px 0 0;
     line-height: 1;
     color: $color-text;
+
     &:hover {
         color: $color-primary;
     }
 }
+
 .tf-wishlist {
     text-align: right;
     margin-bottom: 20px;
 }
+
 .single-tour-wish-bt {
     color: $color-text;
     font-size: 1.5rem;
     cursor: pointer;
+
     i {
         background: rgba(26, 43, 72, .6);
         border-radius: 50%;
@@ -1082,17 +1204,21 @@ h3.section-heading {
         font-size: 1.125rem;
         padding: 10px 9px 7px 10px;
         transition: 0.3s;
-        &.tf-text-red{
+
+        &.tf-text-red {
             color: red;
         }
     }
 }
+
 .tf-text-red {
     color: $color-danger;
 }
+
 .tf-filter {
     padding: 10px 10px;
 }
+
 .tf-checkmark {
     position: absolute;
     top: 2px;
@@ -1103,6 +1229,7 @@ h3.section-heading {
     border-radius: 2px;
     border: 1px solid $color-border-lite;
 }
+
 .tf-filter-item {
     label {
         position: relative;
@@ -1110,9 +1237,10 @@ h3.section-heading {
         width: 100%;
         display: inline-block;
         padding-left: 25px;
-        line-height: 1.3;        
+        line-height: 1.3;
     }
 }
+
 li.tf-filter-item {
     @include flexbox();
     justify-content: space-between;
@@ -1121,6 +1249,7 @@ li.tf-filter-item {
     border-radius: 4px;
     margin: 5px;
 }
+
 .tf-widget-title {
     @include flexbox();
     align-items: center;
@@ -1131,12 +1260,14 @@ li.tf-filter-item {
     border-radius: 8px 8px 0px 0px;
     justify-content: space-between;
 }
+
 .tf-product-total {
     @include flexbox();
     @include justify-content(flex-end);
     gap: 15px;
 }
-.tf-refund-confirmation-box{
+
+.tf-refund-confirmation-box {
     background-color: rgba(0, 0, 0, 0.4);
     position: fixed;
     left: 0;
@@ -1148,30 +1279,36 @@ li.tf-filter-item {
     align-items: center;
     justify-content: center;
     display: none;
-    .tf-refund-box-content{
+
+    .tf-refund-box-content {
         width: 450px;
         background-color: $color-white;
         padding: 24px;
         border-radius: 8px;
         text-align: center;
-        i{
+
+        i {
             font-size: 2rem;
         }
-        h3{
+
+        h3 {
             margin: 10px 0;
             color: $color-heading;
             font-size: 1.25rem;
         }
-        p{
+
+        p {
             color: $color-text;
             font-size: 1rem;
             margin: 0 0 20px 0;
         }
-        .tf-refund-confirmation-button{
+
+        .tf-refund-confirmation-button {
             display: flex;
             gap: 24px;
             justify-content: center;
-            button{
+
+            button {
                 border-radius: 8px;
                 background: $color-primary;
                 padding: 8px 30px;
@@ -1182,13 +1319,16 @@ li.tf-filter-item {
                 cursor: pointer;
                 color: $color-white;
                 transition: .3s all ease;
-                &:hover{
+
+                &:hover {
                     background: $color-brand-dark;
                 }
-                &.tf-refund-cancel{
+
+                &.tf-refund-cancel {
                     background: $color-brand-lite;
                     color: $color-text;
-                    &:hover{
+
+                    &:hover {
                         background: $color-primary;
                         color: $color-white;
                     }
@@ -1197,40 +1337,48 @@ li.tf-filter-item {
         }
     }
 }
+
 .tf-box-wrapper {
-    h4{
+    h4 {
         margin-bottom: 20px;
         font-size: 1rem;
     }
+
     .al-range-slider__track {
         background: $color-brand-lite;
         height: 10px;
         box-shadow: none;
         margin: 30px 0px 10px 0px;
-        .al-range-slider__grid{
+
+        .al-range-slider__grid {
             pointer-events: inherit;
         }
     }
+
     .al-range-slider_dark {
         padding: 0px;
+
         .al-range-slider__bar {
             background: $color-text;
             box-shadow: none;
             pointer-events: none;
         }
     }
+
     .al-range-slider__knob {
         background: $color-primary;
         height: 15px;
         width: 15px;
         box-shadow: none;
         border: 3px solid $color-primary;
+
         &:first-child {
             span {
                 left: 10px;
             }
         }
     }
+
     .al-range-slider__tooltip {
         background: $color-primary;
         border-radius: 5px;
@@ -1241,6 +1389,7 @@ li.tf-filter-item {
         margin-bottom: 0px;
         bottom: 30px;
     }
+
     .al-range-slider__input.js-al-range-slider__input {
         display: none;
     }
@@ -1248,6 +1397,7 @@ li.tf-filter-item {
 
 .tf-share {
     position: relative;
+
     a {
         line-height: 1;
         font-size: 1.375rem;
@@ -1255,10 +1405,12 @@ li.tf-filter-item {
         margin: 0 10px 0 0;
         outline: none;
         color: $color-text;
+
         &:hover {
             color: $color-primary;
         }
     }
+
     .share-tour-content {
         display: none;
         position: absolute;
@@ -1268,9 +1420,11 @@ li.tf-filter-item {
         z-index: 9999;
         left: auto;
         right: 0;
+
         @media #{$max575} {
             left: 50px;
         }
+
         .tf-dropdown-content {
             margin: 0;
             background: $color-filling-fg;
@@ -1278,43 +1432,51 @@ li.tf-filter-item {
             overflow: hidden;
             min-width: 200px;
             z-index: 100;
+
             @media #{$max575} {
                 min-width: 270px;
                 margin-left: -170px;
             }
+
             li {
                 display: inline-block;
-                a{
-                    i{
+
+                a {
+                    i {
                         color: #1D75E3;
                         font-size: calc(var(--tf-base-font-size) + 3px);
                     }
                 }
-                &:nth-child(2){
-                    a{
-                        i{
+
+                &:nth-child(2) {
+                    a {
+                        i {
                             color: #1D9BF0;
                         }
                     }
                 }
-                &:nth-child(3){
-                    a{
-                        i{
+
+                &:nth-child(3) {
+                    a {
+                        i {
                             color: #0A66C2;
                         }
                     }
                 }
-                &:nth-child(4){
-                    a{
-                        i{
+
+                &:nth-child(4) {
+                    a {
+                        i {
                             color: #CC0000;
                         }
                     }
                 }
+
                 @media #{$max575} {
                     display: block;
                 }
             }
+
             .tf-dropdown-item-content {
                 white-space: nowrap;
                 display: flex;
@@ -1322,6 +1484,7 @@ li.tf-filter-item {
                 column-gap: 5px;
             }
         }
+
         .tf-dropdown-item {
             border: 0;
             margin: 0;
@@ -1335,38 +1498,47 @@ li.tf-filter-item {
             align-items: center;
             font-weight: 400;
             font-size: 0.875rem;
+
             &:hover {
                 background-color: #f5f5f5;
             }
         }
+
         .share-center-copy-form {
             display: flex;
             align-items: center;
             padding: 12px 16px;
+
             @media #{$max575} {
                 display: block;
             }
         }
+
         .share-center-copy-label {
             white-space: nowrap;
         }
+
         .share-center-copied-message {
             display: none;
         }
+
         .share-center-copy-cta.copied {
             .share-center-copied-message {
                 display: inline-block;
                 font-weight: bold;
             }
+
             .share-center-copy-message {
                 display: none;
             }
         }
+
         #share_link_button {
             white-space: nowrap;
             font-size: 0.813rem;
             padding: 5px 12px;
         }
+
         input#share_link_input {
             width: auto;
             flex-grow: 1;
@@ -1386,7 +1558,7 @@ li.tf-filter-item {
 }
 
 // UNFOLD Theme Compatibily
-#commentform label{
+#commentform label {
     position: static;
     display: inline-block;
 }
@@ -1396,7 +1568,7 @@ li.tf-filter-item {
     width: 100%;
 }
 
-@media #{$max768}{
+@media #{$max768} {
 
     .tours-check-in-out.flatpickr-input.flatpickr-mobile {
         width: 200px;
@@ -1413,7 +1585,7 @@ li.tf-filter-item {
 
 // Without Payment Booking Popup
 .tf-withoutpayment-booking,
-.tf-withoutpayment-booking-confirm{
+.tf-withoutpayment-booking-confirm {
     background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
     top: 0;
@@ -1424,10 +1596,12 @@ li.tf-filter-item {
     display: none;
     align-items: center;
     justify-content: center;
-    &.show{
+
+    &.show {
         display: flex;
     }
-    .tf-confirm-popup{
+
+    .tf-confirm-popup {
         min-height: 400px;
         display: flex;
         align-items: center;
@@ -1436,14 +1610,17 @@ li.tf-filter-item {
         width: 776px;
         background-color: $color-brand-lite;
         border-radius: 24px;
-        @media #{$max768}{
+
+        @media #{$max768} {
             width: 100%;
         }
-        img{
+
+        img {
             width: 320px;
             padding-top: 8px;
         }
-        h2{
+
+        h2 {
             text-align: center;
             color: $color-heading;
             font-size: 3rem;
@@ -1455,35 +1632,43 @@ li.tf-filter-item {
                 font-size: 1.5rem;
             }
         }
+
         .tf-tour-without-payment-booking-confirm-msg-container {
             padding: 16px;
             color: $color-heading;
         }
+
         .tf-booking-times {
             position: absolute;
             right: 24px;
             top: 24px;
-            span{
+
+            span {
                 cursor: pointer;
             }
         }
     }
-    .tf-withoutpayment-popup{
+
+    .tf-withoutpayment-popup {
         width: 776px;
-        @media #{$max768}{
+
+        @media #{$max768} {
             width: 100%;
             margin: 0 10px;
         }
+
         background-color: $color-gray-info;
         border-radius: 16px;
         text-align: left;
+
         .tf-single-hotel-service label {
             display: flex;
             align-items: baseline;
             justify-content: flex-start;
             gap: 8px;
         }
-        .tf-booking-tabs{
+
+        .tf-booking-tabs {
             padding: 16px;
             border-bottom: 0.3px solid $color-gray;
             border-radius: 16px 16px 0 0;
@@ -1491,29 +1676,34 @@ li.tf-filter-item {
             display: flex;
             justify-content: space-between;
             margin-bottom: 24px;
-            @media #{$max768}{
+
+            @media #{$max768} {
                 padding-top: 12px;
                 padding-bottom: 12px;
                 align-items: center;
             }
-            .tf-booking-tab-menu{
-                ul{
+
+            .tf-booking-tab-menu {
+                ul {
                     margin: 0;
                     padding: 0;
                     list-style: none;
                     border-radius: 10px;
                     background: $color-gray-info;
                     display: flex;
-                    @media #{$max768}{
+
+                    @media #{$max768} {
                         display: inline-block;
                         background-color: transparent;
                     }
-                    li{
+
+                    li {
                         display: inline-block;
                         padding: 8px 32px;
                         cursor: pointer;
                         color: $color-text;
-                        @media #{$max768}{
+
+                        @media #{$max768} {
                             padding: 8px;
                             border-radius: 16px;
                             border: 1px solid $color-gray;
@@ -1521,35 +1711,44 @@ li.tf-filter-item {
                             margin: 5px 0px;
                         }
                     }
-                    li.done{
-                        background-color: $color-brand-lite; 
+
+                    li.done {
+                        background-color: $color-brand-lite;
                         color: $color-white;
-                        @media #{$max768}{
+
+                        @media #{$max768} {
                             border-color: $color-border-lite;
                         }
-                        &:first-child{
+
+                        &:first-child {
                             border-radius: 8px 0px 0px 8px;
-                            @media #{$max768}{
+
+                            @media #{$max768} {
                                 border-radius: 16px;
                             }
                         }
                     }
-                    li.active{
+
+                    li.active {
                         position: relative;
                         background-color: $color-primary;
                         color: $color-white;
                         padding-right: 50px;
-                        @media #{$max768}{
+
+                        @media #{$max768} {
                             padding-right: 8px;
                             border: 1px solid $color-primary;
                         }
-                        &:first-child{
+
+                        &:first-child {
                             border-radius: 8px 0px 0px 8px;
-                            @media #{$max768}{
+
+                            @media #{$max768} {
                                 border-radius: 16px;
                             }
                         }
-                        &::before{
+
+                        &::before {
                             content: "";
                             position: absolute;
                             background: transparent;
@@ -1561,32 +1760,40 @@ li.tf-filter-item {
                             border-top: 20px solid transparent;
                             border-left: 20px solid $color-primary;
                             border-bottom: 20px solid transparent;
-                            @media #{$max768}{
+
+                            @media #{$max768} {
                                 position: static;
                                 display: none;
                             }
                         }
-                        &:last-child{
+
+                        &:last-child {
                             border-radius: 0px 8px 8px 0px;
-                            &::before{
+
+                            &::before {
                                 position: static;
                                 border: 0;
                             }
-                            @media #{$max768}{
+
+                            @media #{$max768} {
                                 border-radius: 16px;
                                 border: 1px solid $color-primary;
                             }
                         }
+
                         &:only-child {
                             border-radius: 8px;
+
                             @media #{$max768} {
                                 border-radius: 16px;
                             }
                         }
                     }
-                    li.done{
+
+                    li.done {
                         position: relative;
-                        &::before{
+
+                        &::before {
                             content: "";
                             position: absolute;
                             background: transparent;
@@ -1600,26 +1807,31 @@ li.tf-filter-item {
                             border-bottom: 20px solid transparent;
                             z-index: 9;
                         }
-                      
+
                     }
                 }
             }
-            .tf-booking-times{
-                span{
+
+            .tf-booking-times {
+                span {
                     cursor: pointer;
                 }
             }
         }
-        .tf-booking-content-summery{
+
+        .tf-booking-content-summery {
             display: flex;
-            @media #{$max768}{
+
+            @media #{$max768} {
                 display: flow-root;
                 max-height: 360px;
                 overflow-y: auto;
             }
-            @media #{$max575}{
+
+            @media #{$max575} {
                 max-height: 280px;
             }
+
             padding: 0px 16px;
             align-items: flex-start;
             align-content: flex-start;
@@ -1627,21 +1839,26 @@ li.tf-filter-item {
             align-self: stretch;
             flex-wrap: wrap;
             justify-content: space-between;
+
             .tf-booking-content {
                 display: none;
                 width: calc(62% - 24px);
-                @media #{$max768}{
+
+                @media #{$max768} {
                     width: calc(100% - 0px);
                 }
-                &.tf-booking-content-1{
+
+                &.tf-booking-content-1 {
                     max-height: 380px;
                     overflow-y: auto;
-                    @media #{$max768}{
+
+                    @media #{$max768} {
                         max-height: none;
                         overflow: hidden;
                     }
                 }
-                p{
+
+                p {
                     color: $color-text;
                     font-size: 1rem;
                     font-weight: 400;
@@ -1649,8 +1866,9 @@ li.tf-filter-item {
                     margin-top: 0px;
                     margin-bottom: 24px;
                 }
-                .tf-booking-content-service{
-                    select[name="airport_service"]{
+
+                .tf-booking-content-service {
+                    select[name="airport_service"] {
                         width: 100%;
                         height: 45px;
                         border: 1px solid var(--tf-border-lite);
@@ -1659,39 +1877,46 @@ li.tf-filter-item {
                         border-radius: 5px;
                         margin-bottom: 24px;
                     }
-                    .tf-single-hotel-service{
+
+                    .tf-single-hotel-service {
                         margin-bottom: 16px;
                         padding-bottom: 16px;
                         border-bottom: 1px solid $color-gray;
-                        &:last-child{
+
+                        &:last-child {
                             margin-bottom: 0;
                             padding-bottom: 0;
                             border-bottom: 0;
                         }
-                        label{
+
+                        label {
                             display: flex;
                             align-items: flex-start;
                             gap: 10px;
                             margin: 0;
                             cursor: pointer;
                         }
-                        .tf-service-radio{
+
+                        .tf-service-radio {
                             position: relative;
                             flex: 0 0 18px;
                             width: 18px;
                             height: 18px;
                             margin-top: 2px;
-                            input{
+
+                            input {
                                 display: none;
                             }
-                            .tf-checkmark{
+
+                            .tf-checkmark {
                                 position: absolute;
                                 inset: 0;
                                 border-radius: 4px;
                                 border: 1px solid $color-gray;
                                 background: $color-white;
                                 cursor: pointer;
-                                &::after{
+
+                                &::after {
                                     content: "";
                                     position: absolute;
                                     display: none;
@@ -1704,22 +1929,26 @@ li.tf-filter-item {
                                     transform: rotate(45deg);
                                 }
                             }
-                            input:checked ~ .tf-checkmark{
+
+                            input:checked~.tf-checkmark {
                                 border-color: $color-primary;
-                                &::after{
+
+                                &::after {
                                     display: block;
                                 }
                             }
                         }
-                        .tf-service-content{
-                            h5{
+
+                        .tf-service-content {
+                            h5 {
                                 color: $color-heading;
                                 font-size: 1rem;
                                 font-weight: 600;
                                 line-height: 1.2;
                                 margin: 0;
                             }
-                            p{
+
+                            p {
                                 color: $color-text;
                                 font-size: 0.875rem;
                                 font-weight: 500;
@@ -1727,19 +1956,23 @@ li.tf-filter-item {
                                 margin: 4px 0 0;
                             }
                         }
-                        .tf_quantity-acrselection{
+
+                        .tf_quantity-acrselection {
                             display: none;
                             width: auto;
                             max-width: 280px;
                             margin: 10px 0 0 28px;
-                            &.quantity-active{
+
+                            &.quantity-active {
                                 display: block;
                             }
-                            @media #{$max575}{
+
+                            @media #{$max575} {
                                 max-width: none;
                                 margin-left: 0;
                             }
-                            .quanity-acr-fields{
+
+                            .quanity-acr-fields {
                                 display: flex;
                                 align-items: center;
                                 justify-content: space-between;
@@ -1748,20 +1981,23 @@ li.tf-filter-item {
                                 border-radius: 6px;
                                 background: $color-brand-lite;
                             }
-                            .quanity-acr-label{
+
+                            .quanity-acr-label {
                                 color: $color-heading;
                                 font-size: 0.875rem;
                                 font-weight: 500;
                                 line-height: 1.2;
                             }
-                            .quanity-acr-select{
+
+                            .quanity-acr-select {
                                 display: flex;
                                 align-items: center;
                                 gap: 8px;
                                 flex: 0 0 auto;
                             }
+
                             .quanity-acr-dec,
-                            .quanity-acr-inc{
+                            .quanity-acr-inc {
                                 display: inline-flex;
                                 align-items: center;
                                 justify-content: center;
@@ -1778,7 +2014,8 @@ li.tf-filter-item {
                                 cursor: pointer;
                                 user-select: none;
                             }
-                            input[type=number]{
+
+                            input[type=number] {
                                 width: 40px;
                                 height: 32px;
                                 padding: 0;
@@ -1792,6 +2029,7 @@ li.tf-filter-item {
                                 font-weight: 600;
                                 text-align: center;
                             }
+
                             input::-webkit-outer-spin-button,
                             input::-webkit-inner-spin-button {
                                 -webkit-appearance: none;
@@ -1800,43 +2038,51 @@ li.tf-filter-item {
                         }
                     }
                 }
+
                 .tf-booking-content-extra,
-                .tf-booking-content-traveller{
+                .tf-booking-content-traveller {
                     height: 240px;
                     overflow-y: auto;
                     scrollbar-width: thin;
                     scrollbar-color: $scrollbar-color;
                     margin-bottom: 20px;
                     padding-right: 10px;
-                    @media #{$max768}{
+
+                    @media #{$max768} {
                         padding-right: 0px;
                         height: auto;
                     }
+
                     scrollbar {
-                        width: 5px; 
+                        width: 5px;
                     }
+
                     scrollbar-thumb {
                         background-color: $scrollbar-thumb-color;
                         border-radius: 4px;
                     }
-                    .tf-single-tour-extra{
-                        label{
+
+                    .tf-single-tour-extra {
+                        label {
                             display: flex;
                             padding-bottom: 15px;
                             align-items: baseline;
-                            .tf-extra-check-box{
+
+                            .tf-extra-check-box {
                                 position: relative;
                                 height: 13px;
                                 width: 20px;
                                 margin-right: 5px;
-                                .tf-checkmark{
+
+                                .tf-checkmark {
                                     position: absolute;
                                     top: 0px;
                                     left: 0px;
                                     border-radius: 5px;
                                     border: 1px solid $color-gray;
                                     cursor: pointer;
-                                    &::after{
+
+                                    &::after {
                                         content: "";
                                         position: absolute;
                                         display: none;
@@ -1852,12 +2098,13 @@ li.tf-filter-item {
                                         transform: rotate(45deg);
                                     }
                                 }
-                                input{
+
+                                input {
                                     margin-right: 10px;
                                     display: none;
                                 }
-                                
-                                input:checked ~ .tf-checkmark {
+
+                                input:checked~.tf-checkmark {
                                     border-color: $color-primary;
 
                                     &::after {
@@ -1865,41 +2112,50 @@ li.tf-filter-item {
                                     }
                                 }
                             }
-                            .tf-extra-content{
+
+                            .tf-extra-content {
                                 padding-left: 5px;
-                                h5{
+
+                                h5 {
                                     color: $color-heading;
                                     font-size: 1rem;
                                     font-weight: 500;
                                     line-height: 1.2;
                                     margin: 0;
-                                    span{
+
+                                    span {
                                         font-weight: 700;
                                     }
                                 }
-                                p{
+
+                                p {
                                     margin: 0;
                                 }
                             }
                         }
+
                         .quantity-active {
                             display: block;
                         }
+
                         .tf_quantity-acrselection {
                             width: 80%;
                             display: none;
                             margin-left: 5px;
                             margin-bottom: 20px;
-                            @media #{$max575}{
+
+                            @media #{$max575} {
                                 width: 90%;
                             }
 
-                            &.quantity-active{
+                            &.quantity-active {
                                 display: block;
                             }
+
                             .quanity-acr-label {
                                 width: 100%;
-                                @media #{$max575}{
+
+                                @media #{$max575} {
                                     font-size: 14px;
                                 }
                             }
@@ -1914,7 +2170,8 @@ li.tf-filter-item {
                                 justify-content: flex-end;
                             }
 
-                            .quanity-acr-dec, .quanity-acr-inc {
+                            .quanity-acr-dec,
+                            .quanity-acr-inc {
                                 padding: 10px;
                                 user-select: none;
                                 height: auto;
@@ -1940,7 +2197,7 @@ li.tf-filter-item {
                                 margin: 0px;
                                 border: 0px;
                                 box-shadow: none;
-                                background: rgba(0,0,0,0);
+                                background: rgba(0, 0, 0, 0);
                                 text-align: center;
                                 font-size: 1rem;
                                 font-weight: 600;
@@ -1955,202 +2212,243 @@ li.tf-filter-item {
                         }
                     }
                 }
-                .tf-booking-content-traveller{
-                        height: auto;
-                        max-height: 320px;
-                        @media #{$max768}{
-                            max-height: none;
-                        }
-                        .tf-traveller-info-box{
-                            display: flex;
-                            flex-direction: column;
-                            gap: 18px;
-                        }
-                        .tf-traveller-group{
-                            display: flex;
-                            flex-direction: column;
-                            gap: 12px;
-                        }
-                        .tf-traveller-group-title{
+
+                .tf-booking-content-traveller {
+                    height: auto;
+                    max-height: 320px;
+
+                    @media #{$max768} {
+                        max-height: none;
+                    }
+
+                    .tf-traveller-info-box {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 18px;
+                    }
+
+                    .tf-traveller-group {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 12px;
+                    }
+
+                    .tf-traveller-group-title {
+                        color: $color-heading;
+                        font-size: 1.125rem;
+                        font-weight: 700;
+                        line-height: 1.25;
+                        margin: 0;
+                    }
+
+                    .tf-single-tour-traveller {
+                        padding: 16px;
+                        border: 1px solid $color-border-lite;
+                        border-radius: 8px;
+                        background: $color-white;
+                        box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+
+                        h4 {
                             color: $color-heading;
-                            font-size: 1.125rem;
-                            font-weight: 700;
+                            font-size: 1rem;
+                            font-weight: 600;
                             line-height: 1.25;
-                            margin: 0;
+                            margin: 0 0 14px;
                         }
-                        .tf-single-tour-traveller{
-                            padding: 16px;
-                            border: 1px solid $color-border-lite;
-                            border-radius: 8px;
-                            background: $color-white;
-                            box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-                            h4{
-                                color: $color-heading;
-                                font-size: 1rem;
-                                font-weight: 600;
-                                line-height: 1.25;
-                                margin: 0 0 14px;
+
+                        .traveller-info {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                            gap: 14px;
+
+                            @media #{$max575} {
+                                grid-template-columns: repeat(1, 1fr);
                             }
-                            .traveller-info{
-                                display: grid;
-                                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-                                gap: 14px;
-                                @media #{$max575}{
-                                    grid-template-columns: repeat(1, 1fr);
+
+                            .traveller-single-info {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 7px;
+                                width: 100%;
+                                min-width: 0;
+
+                                >label {
+                                    color: $color-text;
+                                    font-size: 0.875rem;
+                                    font-weight: 600;
+                                    line-height: 1.35;
+                                    margin: 0;
                                 }
-                                .traveller-single-info{
-                                    display: flex;
-                                    flex-direction: column;
-                                    gap: 7px;
+
+                                input[type="text"],
+                                input[type="email"],
+                                input[type="date"],
+                                input[type="file"],
+                                select {
                                     width: 100%;
-                                    min-width: 0;
-                                    > label{
+                                    min-height: 44px;
+                                    padding: 10px 12px;
+                                    border: 1px solid $color-border-lite;
+                                    border-radius: 6px;
+                                    background: $color-filling-bg;
+                                    color: $color-heading;
+                                    box-shadow: none;
+                                    font-size: 0.938rem;
+                                    line-height: 1.35;
+                                    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+                                }
+
+                                input[type="text"]::placeholder,
+                                input[type="email"]::placeholder {
+                                    color: $color-text-lite;
+                                }
+
+                                .tf-date-picker.flatpickr-input {
+                                    &::placeholder {
+                                        color: $color-heading !important;
+                                    }
+                                }
+
+                                input[type="text"]:focus,
+                                input[type="email"]:focus,
+                                input[type="date"]:focus,
+                                input[type="file"]:focus,
+                                select:focus {
+                                    border-color: $color-primary;
+                                    background: $color-white;
+                                    box-shadow: 0px 0px 0px 3px color-mix(in srgb, $color-primary 16%, transparent);
+                                    outline: none;
+                                }
+
+                                input[type="date"] {
+                                    text-transform: uppercase;
+                                }
+
+                                input[type="file"] {
+                                    padding: 8px;
+                                    color: $color-text;
+                                }
+
+                                input[type="file"]::file-selector-button {
+                                    min-height: 28px;
+                                    margin-right: 10px;
+                                    padding: 5px 10px;
+                                    border: 1px solid $color-primary;
+                                    border-radius: 4px;
+                                    background: $color-white;
+                                    color: $color-primary;
+                                    font-size: 0.813rem;
+                                    font-weight: 600;
+                                    line-height: 1.2;
+                                    cursor: pointer;
+                                }
+
+                                .tf-single-checkbox {
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 8px;
+                                    min-height: 30px;
+
+                                    label {
                                         color: $color-text;
                                         font-size: 0.875rem;
-                                        font-weight: 600;
-                                        line-height: 1.35;
-                                        margin: 0;
-                                    }
-                                    input[type="text"],
-                                    input[type="email"],
-                                    input[type="date"],
-                                    input[type="file"],
-                                    select{
-                                        width: 100%;
-                                        min-height: 44px;
-                                        padding: 10px 12px;
-                                        border: 1px solid $color-border-lite;
-                                        border-radius: 6px;
-                                        background: $color-filling-bg;
-                                        color: $color-heading;
-                                        box-shadow: none;
-                                        font-size: 0.938rem;
-                                        line-height: 1.35;
-                                        transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-                                    }
-                                    input[type="text"]::placeholder,
-                                    input[type="email"]::placeholder{
-                                        color: $color-text-lite;
-                                    }
-                                    input[type="text"]:focus,
-                                    input[type="email"]:focus,
-                                    input[type="date"]:focus,
-                                    input[type="file"]:focus,
-                                    select:focus{
-                                        border-color: $color-primary;
-                                        background: $color-white;
-                                        box-shadow: 0px 0px 0px 3px color-mix(in srgb, $color-primary 16%, transparent);
-                                        outline: none;
-                                    }
-                                    input[type="date"]{
-                                        text-transform: uppercase;
-                                    }
-                                    input[type="file"]{
-                                        padding: 8px;
-                                        color: $color-text;
-                                    }
-                                    input[type="file"]::file-selector-button{
-                                        min-height: 28px;
-                                        margin-right: 10px;
-                                        padding: 5px 10px;
-                                        border: 1px solid $color-primary;
-                                        border-radius: 4px;
-                                        background: $color-white;
-                                        color: $color-primary;
-                                        font-size: 0.813rem;
-                                        font-weight: 600;
-                                        line-height: 1.2;
-                                        cursor: pointer;
-                                    }
-                                    .tf-single-checkbox{
-                                        display: flex;
-                                        align-items: center;
-                                        gap: 8px;
-                                        min-height: 30px;
-                                        label{
-                                            color: $color-text;
-                                            font-size: 0.875rem;
-                                            font-weight: 500;
-                                            line-height: 1.35;
-                                            margin: 0;
-                                        }
-                                    }
-                                    input[type="checkbox"],
-                                    input[type="radio"]{
-                                        width: 16px;
-                                        height: 16px;
-                                        margin: 0;
-                                        flex: 0 0 auto;
-                                        accent-color: $color-primary;
-                                    }
-                                    .error-text{
-                                        min-height: 0;
-                                        color: $color-danger;
-                                        font-size: 0.813rem;
                                         font-weight: 500;
                                         line-height: 1.35;
+                                        margin: 0;
                                     }
                                 }
-                            }
-                            .billing-details{
-                                grid-template-columns: repeat(2, 1fr);
-                                @media #{$max575}{
-                                    grid-template-columns: repeat(1, 1fr);
+
+                                input[type="checkbox"],
+                                input[type="radio"] {
+                                    width: 16px;
+                                    height: 16px;
+                                    margin: 0;
+                                    flex: 0 0 auto;
+                                    accent-color: $color-primary;
+                                }
+
+                                .error-text {
+                                    min-height: 0;
+                                    color: $color-danger;
+                                    font-size: 0.813rem;
+                                    font-weight: 500;
+                                    line-height: 1.35;
                                 }
                             }
                         }
+
+                        .billing-details {
+                            grid-template-columns: repeat(2, 1fr);
+
+                            @media #{$max575} {
+                                grid-template-columns: repeat(1, 1fr);
+                            }
+                        }
+                    }
                 }
-                .tf-booking-content-package{
+
+                .tf-booking-content-package {
                     display: flex;
                     gap: 16px;
                     flex-direction: column;
-                    .tf-single-package{
+
+                    .tf-single-package {
                         border-radius: 4px;
                         background: #EBF5FF;
                         display: flex;
                         gap: 8px;
                         padding: 8px 12px;
-                        .tf-package-select{
-                            input{
+
+                        .tf-package-select {
+                            input {
                                 accent-color: $color-brand-dark;
                             }
                         }
-                        .tf-package-content{
+
+                        .tf-package-content {
                             width: calc(100% - 20px);
-                            h3{
+
+                            h3 {
                                 color: $color-heading;
                                 font-size: 1rem;
                                 font-weight: 500;
                                 margin: 0;
                             }
-                            .tf-pacakge-persons{
+
+                            .tf-pacakge-persons {
                                 display: none;
-                                p{
+
+                                p {
                                     color: $color-text;
                                     font-size: 0.875rem;
                                     margin: 0;
                                 }
-                                .tf-pacakge-times{
+
+                                .tf-pacakge-times {
                                     display: none;
                                     gap: 16px;
                                     justify-content: space-between;
                                     align-items: center;
                                     margin-top: 8px;
-                                    h5{
+
+                                    h5 {
                                         color: $color-heading;
                                         font-size: 16px;
                                         font-weight: 500;
-                                        line-height: 20px; /* 125% */
+                                        line-height: 20px;
+                                        /* 125% */
                                         margin: 0;
                                     }
-                                    .tf-package-time{
+
+                                    .tf-package-time {
                                         border-radius: 4px;
                                         background: $tf_fill_white;
                                         padding: 8px 24px;
                                         display: flex;
                                         gap: 4px;
                                         align-items: center;
-                                        select{
+
+                                        select {
                                             border: 0px solid;
                                             width: 72px;
                                             height: 20px;
@@ -2164,38 +2462,46 @@ li.tf-filter-item {
                                         }
                                     }
                                 }
-                                .tf-select-persons{
+
+                                .tf-select-persons {
                                     border-radius: 4px;
                                     background: $color-white;
                                     padding: 8px 16px;
                                     margin-top: 8px;
-                                    .tf-single-person{
+
+                                    .tf-single-person {
                                         display: flex;
                                         justify-content: space-between;
                                         padding: 8px 0px;
                                         border-bottom: .5px solid $color-border;
-                                        &:first-child{
+
+                                        &:first-child {
                                             padding-bottom: 16px;
                                         }
-                                        &:nth-child(2){
+
+                                        &:nth-child(2) {
                                             padding: 16px 0;
                                         }
-                                        &:last-child{
+
+                                        &:last-child {
                                             border: 0px solid;
                                             padding-top: 16px;
                                         }
-                                        h3{
+
+                                        h3 {
                                             color: $color-heading;
                                             font-size: 1rem;
                                             font-weight: 500;
                                             margin: 0;
                                         }
-                                        .inc-dec{
+
+                                        .inc-dec {
                                             display: flex;
                                             gap: 8px;
                                             align-items: center;
+
                                             .acr-dec,
-                                            .acr-inc{
+                                            .acr-inc {
                                                 border-radius: 4px;
                                                 border: 1px solid $color-border;
                                                 background: $color-white;
@@ -2206,12 +2512,14 @@ li.tf-filter-item {
                                                 justify-content: center;
                                                 font-size: 1rem;
                                                 cursor: pointer;
-                                                &.disable{
+
+                                                &.disable {
                                                     pointer-events: none;
                                                     opacity: .5;
                                                 }
                                             }
-                                            input{
+
+                                            input {
                                                 height: 20px;
                                                 width: 20px;
                                                 padding: 0;
@@ -2221,13 +2529,15 @@ li.tf-filter-item {
                                                 font-size: 1rem;
                                                 font-weight: 500;
                                                 border: 0px solid;
-                                                -webkit-appearance : textfield;
-                                                -moz-appearance : textfield;
+                                                -webkit-appearance: textfield;
+                                                -moz-appearance: textfield;
                                                 accent-color: $color-brand-dark;
-                                                &:focus{
+
+                                                &:focus {
                                                     outline: none;
                                                 }
                                             }
+
                                             input::-webkit-outer-spin-button,
                                             input::-webkit-inner-spin-button {
                                                 -webkit-appearance: none;
@@ -2239,28 +2549,34 @@ li.tf-filter-item {
                             }
                         }
                     }
+
                     .tf-single-package:has(.tf-package-radio:checked) .tf-pacakge-persons {
                         display: block;
                     }
                 }
             }
-            .tf-booking-content.show{
+
+            .tf-booking-content.show {
                 display: block;
             }
+
             .tf-booking-summery {
                 width: calc(38% - 24px);
-                @media #{$max768}{
+
+                @media #{$max768} {
                     width: calc(100% - 0px);
                 }
-                .tf-booking-fixed-summery{
-                    h5{
+
+                .tf-booking-fixed-summery {
+                    h5 {
                         color: $color-heading;
                         font-size: 1rem;
                         font-weight: 500;
-                        line-height: 1.2; 
+                        line-height: 1.2;
                         margin-bottom: 16px;
                     }
-                    h4{
+
+                    h4 {
                         color: $color-heading;
                         font-size: 1.25rem;
                         font-weight: 500;
@@ -2269,36 +2585,44 @@ li.tf-filter-item {
                         margin-bottom: 15px;
                     }
                 }
-                .tf-booking-traveller-info{
+
+                .tf-booking-traveller-info {
                     max-height: 230px;
                     overflow-y: auto;
                     scrollbar-width: thin;
                     scrollbar-color: $scrollbar-color;
-                    @media #{$max768}{
+
+                    @media #{$max768} {
                         padding-right: 0px;
                         height: auto;
                     }
+
                     scrollbar {
-                        width: 5px; 
+                        width: 5px;
                     }
+
                     scrollbar-thumb {
                         background-color: $scrollbar-thumb-color;
                         border-radius: 4px;
                     }
-                    h6{
+
+                    h6 {
                         color: $color-heading;
                         font-size: 1rem;
                         font-weight: 400;
                         line-height: 1.2;
                         margin-bottom: 16px;
                     }
-                    table{
+
+                    table {
                         border: 0px solid;
                         margin-bottom: 0px;
-                        thead{
+
+                        thead {
                             background-color: transparent;
-                            tr{
-                                th{
+
+                            tr {
+                                th {
                                     color: $color-text;
                                     font-size: 0.875rem;
                                     font-weight: 600;
@@ -2308,9 +2632,10 @@ li.tf-filter-item {
                                 }
                             }
                         }
-                        tbody{
-                            tr{
-                                td{
+
+                        tbody {
+                            tr {
+                                td {
                                     color: $color-text;
                                     font-size: 0.875rem;
                                     font-weight: 400;
@@ -2318,11 +2643,12 @@ li.tf-filter-item {
                                     border: 0px solid;
                                     padding: 0px;
                                 }
-                            } 
+                            }
                         }
-                        tfoot{
-                            tr{
-                                th{
+
+                        tfoot {
+                            tr {
+                                th {
                                     color: $color-text;
                                     font-size: 1rem;
                                     font-weight: 700;
@@ -2333,26 +2659,31 @@ li.tf-filter-item {
                                     padding-left: 0px;
                                     padding-right: 0px;
                                 }
-                            } 
+                            }
                         }
                     }
                 }
             }
         }
-        .tf-booking-pagination{
+
+        .tf-booking-pagination {
             padding: 0 16px;
             margin-top: 32px;
-            .tf-tax-notice{
+
+            .tf-tax-notice {
                 padding-bottom: 16px;
-                span{
+
+                span {
                     font-size: 1rem;
                 }
             }
-            .tf-diposit-switcher{
+
+            .tf-diposit-switcher {
                 padding-bottom: 16px;
                 display: flex;
                 align-items: center;
-                h4{
+
+                h4 {
                     margin: 0;
                     display: inline-block;
                     color: $color-heading;
@@ -2360,18 +2691,22 @@ li.tf-filter-item {
                     font-weight: 500;
                     line-height: 1.5;
                 }
+
                 .tooltip-box {
                     top: 11px;
                     display: flex;
                     padding-left: 10px;
-                    .tf-info-btn{
+
+                    .tf-info-btn {
                         width: 40px;
                         text-align: center;
                         position: relative;
-                        i{
+
+                        i {
                             padding: 0px;
                             font-weight: 400;
                         }
+
                         .tf-tooltip {
                             padding: 10px 10px;
                             color: $color-white;
@@ -2395,18 +2730,21 @@ li.tf-filter-item {
                             margin-left: -110px;
                             bottom: 30px;
                         }
+
                         .tooltip-title-box {
                             margin-top: 0;
                             font-weight: 900;
                         }
                     }
                 }
-                .tooltip-box{ 
-                    .tooltip-title-box:hover + .tf-tooltip{
+
+                .tooltip-box {
+                    .tooltip-title-box:hover+.tf-tooltip {
                         visibility: visible;
                         display: block;
                     }
-                }   
+                }
+
                 .tooltip-box .tf-tooltip::before {
                     content: "";
                     height: 12px;
@@ -2418,16 +2756,19 @@ li.tf-filter-item {
                     margin-left: -6px;
                     transform: rotate(45deg);
                 }
+
                 .switch {
                     position: relative;
                     display: inline-block;
                     width: 48px;
                     height: 20px;
-                    input{
+
+                    input {
                         opacity: 0;
                         width: 0;
                         height: 0;
                     }
+
                     .switcher {
                         position: absolute;
                         cursor: pointer;
@@ -2437,7 +2778,8 @@ li.tf-filter-item {
                         bottom: 0;
                         background-color: $color-gray;
                         transition: .4s;
-                        &::before{
+
+                        &::before {
                             position: absolute;
                             content: "";
                             height: 14px;
@@ -2449,46 +2791,55 @@ li.tf-filter-item {
                             transition: .4s;
                         }
                     }
+
                     .switcher.round {
                         border-radius: 20px;
-                        &::before{
+
+                        &::before {
                             border-radius: 50%;
                         }
                     }
                 }
             }
-            .tf-diposit-switcher input:checked + .switcher {
+
+            .tf-diposit-switcher input:checked+.switcher {
                 background-color: $color-primary;
             }
-            
-            .tf-diposit-switcher input:checked + .switcher::before {
+
+            .tf-diposit-switcher input:checked+.switcher::before {
                 -webkit-transform: translateX(26px);
                 -ms-transform: translateX(26px);
                 transform: translateX(26px);
             }
-            .tf-control-pagination{
+
+            .tf-control-pagination {
                 padding: 0px 0px 24px 0px;
                 align-items: end;
                 display: none;
-                a.tf_btn{
+
+                a.tf_btn {
                     border-radius: 5px;
                 }
-                a{
+
+                a {
                     text-decoration: none;
                     display: inline-block;
                 }
-                a.tf-back-control{
+
+                a.tf-back-control {
                     color: $color-primary;
                     font-size: 0.875rem;
                     font-weight: 700;
                     line-height: 1.4;
                     margin-right: 24px;
-                    i{
+
+                    i {
                         margin-right: 10px;
                     }
                 }
             }
-            .tf-control-pagination.show{
+
+            .tf-control-pagination.show {
                 display: flex;
             }
         }
@@ -2496,10 +2847,11 @@ li.tf-filter-item {
 }
 
 // Select Time
-.info-select{
+.info-select {
     position: relative;
+
     .selected-pickup-time,
-    .selected-dropoff-time{
+    .selected-dropoff-time {
         min-width: auto;
         width: 100%;
         color: $color-text;
@@ -2512,36 +2864,43 @@ li.tf-filter-item {
         cursor: pointer;
         position: relative;
         min-width: 110px;
-        @media #{$max575}{
+
+        @media #{$max575} {
             font-size: 0.875rem;
         }
-        &:focus{
+
+        &:focus {
             outline: none;
             box-shadow: none;
         }
-        &::placeholder{
+
+        &::placeholder {
             color: $color-text;
         }
-        .icon{
-            svg{
+
+        .icon {
+            svg {
                 position: absolute;
                 right: 0;
                 top: 50%;
                 transform: translateY(-50%);
                 transition: transform 0.3s ease;
-                path{
+
+                path {
                     stroke: $color-text;
                 }
             }
         }
-        &.active{
-            svg{
+
+        &.active {
+            svg {
                 transform: translateY(-50%) rotate(180deg);
                 transition: transform 0.3s ease;
             }
         }
     }
-    .tf-select-time{
+
+    .tf-select-time {
         position: absolute;
         top: 44px;
         left: -40px;
@@ -2549,14 +2908,17 @@ li.tf-filter-item {
         border-radius: 8px;
         min-width: 212px;
         background: #F8FAFC;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         z-index: 999;
-        @media #{$max768}{
+
+        @media #{$max768} {
             min-width: 180px;
         }
-        @media #{$max575}{
+
+        @media #{$max575} {
             min-width: 150px;
         }
+
         .time-options-list {
             max-height: 258px;
             overflow-y: auto;
@@ -2564,12 +2926,15 @@ li.tf-filter-item {
             padding: 4px 8px 4px 4px;
             list-style: none;
             margin-right: 4px;
-            @media #{$max768}{
+
+            @media #{$max768} {
                 padding-right: 10px;
             }
+
             &::-webkit-scrollbar {
                 width: 4px;
             }
+
             &::-webkit-scrollbar-thumb {
                 background: #566676;
                 border-radius: 16px;
@@ -2579,6 +2944,7 @@ li.tf-filter-item {
                 background: transparent;
                 margin-right: 4px;
             }
+
             li {
                 padding: 8px 12px;
                 font-size: 1rem;
@@ -2586,10 +2952,12 @@ li.tf-filter-item {
                 cursor: pointer;
                 background: $color-white;
                 margin-bottom: 2px;
+
                 &:hover {
                     background: #f3f3f3;
                 }
-                &:last-child{
+
+                &:last-child {
                     margin-bottom: 0;
                 }
             }
@@ -2603,97 +2971,120 @@ li.tf-filter-item {
         border-radius: 4px;
         padding: 30px;
         cursor: auto;
-        @media #{$max768}{
+
+        @media #{$max768} {
             max-height: 80%;
             padding: 20px;
         }
-        .tf-hotel-quick-view{
+
+        .tf-hotel-quick-view {
             @include flexbox();
-            @media #{$max768}{
+
+            @media #{$max768} {
                 flex-direction: column;
             }
-            .tf-hotel-details-qc-gallelry{
+
+            .tf-hotel-details-qc-gallelry {
                 width: 545px;
+
                 @media #{$max1024} {
                     width: 55%;
                 }
-                @media #{$max768}{
+
+                @media #{$max768} {
                     width: 100%;
                 }
-                img{
+
+                img {
                     width: 100%;
                 }
-                .tf-details-qc-slider-nav{
-                    .tf-details-qcs{
-                        &.is-active{
-                            img{
+
+                .tf-details-qc-slider-nav {
+                    .tf-details-qcs {
+                        &.is-active {
+                            img {
                                 border: 2px solid $color-primary;
                             }
                         }
                     }
-                    img{
+
+                    img {
                         cursor: pointer;
                     }
                 }
-                .slick-arrow{
+
+                .slick-arrow {
                     z-index: 1;
-                    &.slick-prev{
+
+                    &.slick-prev {
                         @media #{$max1024} {
                             left: -5px;
                         }
-                        @media #{$max768}{
+
+                        @media #{$max768} {
                             left: -10px;
                         }
                     }
-                    &.slick-next{
-                        @media #{$max1024}{
+
+                    &.slick-next {
+                        @media #{$max1024} {
                             right: -5px;
                         }
-                        @media #{$max768}{
+
+                        @media #{$max768} {
                             right: -10px;
                         }
                     }
                 }
-            }  
-            .tf-hotel-details-info{
+            }
+
+            .tf-hotel-details-info {
                 width: 440px;
                 padding-left: 35px;
                 max-height: 470px;
                 padding-top: 0;
                 overflow-y: auto;
-                @media #{$max1024}{
-                max-width: 550px;
-                padding-left: 0;
-                margin-top: 30px;
-                width: 100%;
-                @media #{$max1024}{
-                    padding-left: 16px;
-                    padding-right: 16px;
-                    max-width: 100%;
-                    margin-top: 0;
-                }
-                @media #{$max768}{
-                   margin-top: 16px;
-                   padding: 0;
-                }
-                }
-                .tf-room-title.description{
-                    .tf-tooltip{
-                        margin-left: 15px;
-                        &:first-child{
-                            margin-left: 0;
-                        }   
+
+                @media #{$max1024} {
+                    max-width: 550px;
+                    padding-left: 0;
+                    margin-top: 30px;
+                    width: 100%;
+
+                    @media #{$max1024} {
+                        padding-left: 16px;
+                        padding-right: 16px;
+                        max-width: 100%;
+                        margin-top: 0;
                     }
-                    .room-features{
+
+                    @media #{$max768} {
+                        margin-top: 16px;
+                        padding: 0;
+                    }
+                }
+
+                .tf-room-title.description {
+                    .tf-tooltip {
+                        margin-left: 15px;
+
+                        &:first-child {
+                            margin-left: 0;
+                        }
+                    }
+
+                    .room-features {
                         margin: 10px 0;
                     }
                 }
-                .pax{
-                    .tf-tooltip{
+
+                .pax {
+                    .tf-tooltip {
                         margin-right: 15px;
-                        &:last-child{
+
+                        &:last-child {
                             margin-right: 0;
-                        }   
+                        }
                     }
                 }
             }
@@ -2708,31 +3099,35 @@ li.tf-filter-item {
     }
 }
 
-#tf_room_aval_check{
-    .tf_selectperson-wrap{
-        width: 40%;
-    }
-    .tf_selectdate-wrap{
+#tf_room_aval_check {
+    .tf_selectperson-wrap {
         width: 40%;
     }
 
-    &.tf-advanced-search-enabled{
-        .tf_selectperson-wrap{
+    .tf_selectdate-wrap {
+        width: 40%;
+    }
+
+    &.tf-advanced-search-enabled {
+        .tf_selectperson-wrap {
             width: 30%;
         }
-        .tf_selectdate-wrap{
+
+        .tf_selectdate-wrap {
             width: 30%;
         }
-        .tf_selectdate-wrap.tf_more_info_selections{
+
+        .tf_selectdate-wrap.tf_more_info_selections {
             width: 20%;
         }
     }
 
-    &.tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date{
+    &.tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date {
         width: 30%;
     }
+
     &.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select:first-child,
-    &.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select{
+    &.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select {
         width: 50%;
     }
 }

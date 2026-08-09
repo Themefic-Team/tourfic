@@ -483,7 +483,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 				}
 			}
 
-			$hotel_guest_info_fields = ! empty( tfopt( 'hotel_guest_info_fields' ) ) ? tf_data_types( tfopt( 'hotel_guest_info_fields' ) ) : '';
+			$hotel_guest_info_fields = ! empty( Helper::tfopt( 'hotel_guest_info_fields' ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel_guest_info_fields' ) ) : '';
 
 			$response['guest_info']            = '';
 			$response['hotel_booking_summery'] = '';
@@ -586,7 +586,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 
 				$response['guest_info'] .= '</div>
             </div>';
-				$date_format_for_users  = ! empty( tfopt( "tf-date-format-for-users" ) ) ? tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+				$date_format_for_users  = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 			}
 

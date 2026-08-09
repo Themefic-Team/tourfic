@@ -295,29 +295,22 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 ),
 
                 array(
-                    'id'       => 'discount_hotel_type',
-                    'type'     => 'select',
-                    'label'    => esc_html__( 'Discount Type', 'tourfic' ),
-                    'subtitle' => esc_html__( 'Set a discount for this room to incentivize bookings. Choose between a fixed amount off or a percentage-based reduction.', 'tourfic' ),
-                    'options'  => array(
-                        'none'    => esc_html__( 'None', 'tourfic' ),
-                        'percent' => esc_html__( 'Percent', 'tourfic' ),
-                        'fixed'   => esc_html__( 'Fixed', 'tourfic' ),
-                    ),
-                    'default'  => 'none',
-                ),
-                array(
-                    'id'         => 'discount_hotel_price',
-                    'type'       => 'number',
-                    'label'      => esc_html__( 'Discount Price', 'tourfic' ),
-                    'subtitle'   => esc_html__( 'Insert amount only', 'tourfic' ),
-                    'attributes' => array(
-                        'min' => '0',
-                    ),
-                    'dependency' => array(
-                        array( 'discount_hotel_type', '!=', 'none' ),
-                    ),
-                ),
+					'id'          => 'discount_hotel_price',
+					'type'        => 'number',
+					'label'       => __( 'Discount Pricing', 'tourfic' ),
+					'subtitle'    => __( 'Set a discount for this room to incentivize bookings. Choose between a fixed amount off or a percentage-based reduction.', 'tourfic' ),
+					'attributes'  => array(
+						'min' => '0',
+					),
+					'placeholder' => esc_html__('Amount', 'tourfic'),
+					'related'   => true,
+					'related_name' => 'discount_hotel_type',
+					'related_options'  => array(
+						'none'    => esc_html__( 'None', 'tourfic' ),
+						'percent' => esc_html__( 'Percent', 'tourfic' ),
+						'fixed'   => esc_html__( 'Fixed', 'tourfic' ),
+					),
+				),
                 array(
                     'id'        => 'price_multi_day',
                     'type'      => 'switch',
