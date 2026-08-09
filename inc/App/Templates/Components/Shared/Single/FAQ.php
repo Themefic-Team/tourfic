@@ -57,6 +57,10 @@ class FAQ {
 			return;
 		}
 
+		if ( empty( $faqs ) ) {
+			return;
+		}
+
 		echo ! empty( $wrapper_open ) ? wp_kses_post( $wrapper_open ) : '';
 
 		if ( 'style1' === $style && ! empty( $faqs ) ) {
