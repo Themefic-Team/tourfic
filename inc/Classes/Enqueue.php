@@ -337,7 +337,7 @@ class Enqueue {
 			// Same Day Booking
 			$disable_same_day = ! empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
 
-			$tour_extras = isset( $meta['tour-extra'] ) ? Helper::tf_data_types($meta['tour-extra']) : null;
+			$tour_extras = apply_filters( 'tf_tour_extras_for_script', null, $post_id, $meta );
 
 			$single_tour_form_data['tf_tour_selected_template'] = $tf_tour_selected_template;
 			$single_tour_form_data['tour_type']                 = $tour_type;

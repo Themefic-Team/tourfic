@@ -1011,17 +1011,8 @@ class Tour {
 		$adult_price            = ! empty( $avail_prices['adult_price'] ) ? $avail_prices['adult_price'] : $adult_price;
 		$child_price            = ! empty( $avail_prices['child_price'] ) ? $avail_prices['child_price'] : $children_price;
 		$infant_price           = ! empty( $avail_prices['infant_price'] ) ? $avail_prices['infant_price'] : $infant_price;
-		$tour_extras            = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
+		$tour_extras            = apply_filters( 'tf_tour_extra_meta', null, $post_id, $meta );
 		$tf_hide_external_price = true;
-
-		if ( ! empty( $tour_extras ) && gettype( $tour_extras ) == "string" ) {
-
-			$tour_extras_unserial = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-				return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-			}, $tour_extras );
-			$tour_extras          = unserialize( $tour_extras_unserial );
-
-		}
 
 		// Single Template Check
 		$tf_tour_layout_conditions = ! empty( $meta['tf_single_tour_layout_opt'] ) ? $meta['tf_single_tour_layout_opt'] : 'global';
@@ -1993,15 +1984,8 @@ class Tour {
                         <ul>
 							<?php
 							$meta        = get_post_meta( $post_id, 'tf_tours_opt', true );
-							$tour_extras = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
-							if ( ! empty( $tour_extras ) && gettype( $tour_extras ) == "string" ) {
+							$tour_extras = apply_filters( 'tf_tour_extra_meta', null, $post_id, $meta );
 
-								$tour_extras_unserial = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-									return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-								}, $tour_extras );
-								$tour_extras          = unserialize( $tour_extras_unserial );
-
-							}
 							$traveller_info_coll = function_exists( 'tf_tour_is_traveler_info_enabled' ) ? tf_tour_is_traveler_info_enabled( $meta ) : false;
 							$tf_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 							$pricing_type = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
@@ -2178,64 +2162,7 @@ class Tour {
 						</div>
 					<?php } ?>
                     <!-- Popup Tour Extra -->
-					<?php
-					// $popup_extra_default_text = "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural";
-					$tour_popup_extra_text = ! empty( Helper::tfopt( 'tour_popup_extras_text' ) ) ? Helper::tfopt( 'tour_popup_extras_text' ) : '';
-					$traveler_details_text = ! empty( Helper::tfopt( 'tour_traveler_details_text' ) ) ? Helper::tfopt( 'tour_traveler_details_text' ) : '';
-					if ( $tour_extras ) { ?>
-                        <div class="tf-booking-content tf-booking-content-2 <?php echo ($pricing_type!='package' || empty( $package_pricing )) ? esc_attr( 'show' ) : ''; ?>">
-                            <p><?php echo esc_html( $tour_popup_extra_text ); ?></p>
-                            <div class="tf-booking-content-extra">
-								<?php
-								if ( ( ! empty( $tour_extras[0]['title'] ) && ! empty( $tour_extras[0]['price'] ) ) || ! empty( $tour_extras[1]['title'] ) && ! empty( $tour_extras[1]['price'] ) ) {
-									?>
-									<?php foreach ( $tour_extras as $extrakey => $tour_extra ) {
-										if ( ! empty( $tour_extra['title'] ) && ! empty( $tour_extra['price'] ) ) {
-											$tour_extra_pricetype = ! empty( $tour_extra['price_type'] ) ? $tour_extra['price_type'] : 'fixed';
-											?>
-                                            <div class="tf-single-tour-extra tour-extra-single">
-                                                <label for="extra<?php echo esc_attr( $extrakey ); ?>">
-                                                    <div class="tf-extra-check-box">
-                                                        <input type="checkbox" value="<?php echo esc_attr( $extrakey ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>"
-                                                               id="extra<?php echo esc_attr( $extrakey ); ?>" name="tf-tour-extra">
-                                                        <span class="tf-checkmark"></span>
-                                                    </div>
-                                                    <div class="tf-extra-content">
-                                                        <h5><?php echo esc_html( $tour_extra['title'] ); ?> <?php echo $tour_extra_pricetype == "fixed" ? esc_html( "(Fixed Price)" ) : ( $tour_extra_pricetype == "person" ? esc_html( "(Per Person Price)" ) : esc_html( "(Per unit Price)" ) ); ?>
-                                                            <span><?php echo wp_kses_post( wc_price( $tour_extra['price'] ) ); ?></span></h5>
-														<?php
-														if ( ! empty( $tour_extra['desc'] ) ) { ?>
-                                                            <p><?php echo esc_html( $tour_extra['desc'] ); ?></p>
-														<?php } ?>
-
-                                                    </div>
-                                                </label>
-												<?php if ( $tour_extra_pricetype == "quantity" ) : ?>
-                                                    <div class="tf-field-group tf-mt-16 tf_quantity-acrselection">
-                                                        <div class="tf-field quanity-acr-fields">
-
-                                                            <div class="quanity-acr-label">
-																<?php echo esc_html__( "Select Quantity", "tourfic" ); ?>
-                                                            </div>
-
-                                                            <div class="quanity-acr-select tf-flex">
-                                                                <div class="quanity-acr-dec">-</div>
-                                                                <input type="number" name="extra-quantity" id="extra-quantity" min="1" value="1">
-                                                                <div class="quanity-acr-inc">+</div>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-												<?php endif; ?>
-                                            </div>
-										<?php }
-									} ?>
-								<?php } ?>
-
-                            </div>
-                        </div>
-					<?php }
+					<?php do_action( 'tf_tour_render_extras_tab', $post_id, $meta, $pricing_type, $package_pricing, $tour_extras );
 					if ( $traveller_info_coll ) {
 						?>
 
@@ -4648,7 +4575,7 @@ class Tour {
 		// Tour extra
 		$tour_extra_total     = 0;
 		$tour_extra_title_arr = [];
-		$tour_extra_meta      = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
+		$tour_extra_meta      = apply_filters( 'tf_tour_extra_meta', null, $post_id, $meta );
 		if ( ! empty( $tour_extra_meta ) ) {
 			$tour_extra_selection = Helper::tf_sanitize_tour_extra_selection(
 				isset( $_POST['tour_extra'] ) ? wp_unslash( $_POST['tour_extra'] ) : [],

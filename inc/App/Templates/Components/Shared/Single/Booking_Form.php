@@ -349,8 +349,8 @@ class Booking_Form {
 		$car_booking_by                  = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : '1';
 		$car_instructions_section_status = ! empty( $meta['instructions_section'] ) ? $meta['instructions_section'] : '';
 		$car_instructions_content        = ! empty( $meta['instructions_content'] ) ? $meta['instructions_content'] : '';
-		$car_extra_sec_title             = ! empty( $meta['car_extra_sec_title'] ) ? $meta['car_extra_sec_title'] : '';
-		$car_extras                      = ! empty( $meta['extras'] ) ? $meta['extras'] : '';
+		$car_extra_sec_title             = apply_filters( 'tf_car_extra_sec_title', '', $post_id, $meta );
+		$car_extras                      = apply_filters( 'tf_car_extra_meta', null, $post_id, $meta );
 		$tf_pickup_date                  = ! empty( $_GET['pickup_date'] ) ? sanitize_text_field( wp_unslash( $_GET['pickup_date'] ) ) : '';
 		$tf_dropoff_date                 = ! empty( $_GET['dropoff_date'] ) ? sanitize_text_field( wp_unslash( $_GET['dropoff_date'] ) ) : '';
 		$check_in_out                    = '';

@@ -292,7 +292,7 @@ class Pricing {
     // Return Tour Extras Price
     static function set_extra_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $extra_ids=[], $extra_qty=[]){
 
-        $car_extra = !empty($meta['extras']) ? $meta['extras'] : '';
+        $car_extra = apply_filters( 'tf_car_extra_meta', null, null, $meta );
         $prices = 0;
         $extra_title = [];
         if(!empty($extra_qty)){

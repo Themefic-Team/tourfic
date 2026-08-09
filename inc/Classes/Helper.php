@@ -439,7 +439,7 @@ class Helper {
 
 	static function tf_hotel_extras_title_price( $post_id, $adult, $child, $key, $quantity = 1 ) {
 		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
-		$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
+		$hotel_extras     = apply_filters( 'tf_hotel_extra_meta', null, $post_id, $meta );
 
 		if ( ! empty( $hotel_extras[$key] ) ) {
 			if ( !empty($hotel_extras[$key]['price']) ) {

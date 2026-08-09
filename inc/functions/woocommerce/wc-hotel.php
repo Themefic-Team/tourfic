@@ -401,9 +401,8 @@ function tf_hotel_booking_callback() {
 		// Hotel Extra
 		$total_extras_title = [];
 		$total_extras_price = 0;
-		$hotel_extra_option     = ! empty( $meta['hotel_extra_option'] ) ? $meta['hotel_extra_option'] : '';
-		if(!empty($hotel_extra_option)){
-			$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
+		$hotel_extras       = apply_filters( 'tf_hotel_extra_meta', null, $post_id, $meta );
+		if ( ! empty( $hotel_extras ) ) {
 			foreach ( $extras as $key => $extra ) {
 				if ( empty( $hotel_extras[ $extra ] ) ) {
 					continue;

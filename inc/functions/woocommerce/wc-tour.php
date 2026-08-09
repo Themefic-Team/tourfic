@@ -402,7 +402,7 @@ function tf_tours_booking_function() {
 	$tour_extra_title = '';
 	$tour_extra_title_arr = [];
 	
-	$tour_extra_meta = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
+	$tour_extra_meta = apply_filters( 'tf_tour_extra_meta', null, $post_id, $meta );
 	if(!empty($tour_extra_meta)){
 		$tour_extra_selection = Helper::tf_sanitize_tour_extra_selection(
 			isset( $_POST['tour_extra'] ) ? wp_unslash( $_POST['tour_extra'] ) : [],

@@ -327,12 +327,8 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						'content' => sprintf(esc_html__( 'This section includes additional services which your %s may offer. You may offer these services for free, or opt to charge your guests for them.', 'tourfic' ),
 							strtolower( $hotel_name )
 						),
-					),
-					array(
-						'id'      => 'hotel-service-docs',
-						'type'    => 'notice',
-						'style'   => 'success',
-						'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/hotel-services/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+						'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/hotel-services/')
+
 					),
 				),
 				\Tourfic\Admin\TF_Options\TF_Options::hotel_airport_service_fields()

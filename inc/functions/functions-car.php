@@ -134,7 +134,7 @@ $post_id = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) 
 $meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 $meta = tf_normalize_car_meta( $meta );
 
-$car_extra = !empty($meta['extras']) ? $meta['extras'] : '';
+$car_extra = apply_filters( 'tf_car_extra_meta', null, $post_id, $meta );
 // Extra key from POST
 $car_extra_pass = !empty( $_POST['extra_key'] ) ? $_POST['extra_key'] : '';
 

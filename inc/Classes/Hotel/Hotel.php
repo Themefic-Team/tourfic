@@ -3277,15 +3277,14 @@ class Hotel {
 		$room_meta                    = get_post_meta( $room_id, 'tf_room_opt', true );
 		$enable_airport_service   = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 		$airport_service_type     = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
-		$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
-		$hotel_extra_option     = ! empty( $meta['hotel_extra_option'] ) ? $meta['hotel_extra_option'] : '';
+		$hotel_extras             = apply_filters( 'tf_hotel_extra_meta', null, $post_id, $meta );
 		$room_book_by             = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 		$room_book_url            = ! empty( $meta['booking-url'] ) ? $meta['booking-url'] : '';
 		$room_allow_deposit       = ! empty( $room_meta['allow_deposit'] ) ? $room_meta['allow_deposit'] : '';
-		$room_deposit_type       = ! empty( $room_meta['deposit_type'] ) ? $room_meta['deposit_type'] : '';
+		$room_deposit_type        = ! empty( $room_meta['deposit_type'] ) ? $room_meta['deposit_type'] : '';
 		$room_deposit_amount      = ! empty( $room_meta['deposit_amount'] ) ? $room_meta['deposit_amount'] : 0;
 		$airport_service_type     = ! empty( $enable_airport_service ) && ! empty( $airport_service_type ) ? $airport_service_type : null;
-		$hotel_extras     = ! empty( $hotel_extra_option ) && ! empty( $hotel_extras ) ? $hotel_extras : null;
+
 		$enable_guest_info_global = ! empty( Helper::tfopt( 'enable_guest_info' ) ) ? Helper::tfopt( 'enable_guest_info' ) : 0;
 		$enable_guest_info        = ! empty( $meta['enable_guest_info'] ) ? $meta['enable_guest_info'] : $enable_guest_info_global;
 		$hotel_guest_details_text = ! empty( Helper::tfopt( 'hotel_guest_details_text' ) ) ? Helper::tfopt( 'hotel_guest_details_text' ) : '';
@@ -3392,47 +3391,7 @@ class Hotel {
 								</div>
 							<?php } ?>
 							<!-- Hotel Extra -->
-							<?php if ( ! empty( $hotel_extras ) ) { ?>
-							<div class="tf-hotel-services-text">
-                                <h3><?php echo !empty( tfopt( 'hotel_extra_popup_title' ) ) ? esc_html( tfopt( 'hotel_extra_popup_title' ) ) : '' ?></h3>
-                                <p><?php echo !empty( tfopt( 'hotel_extra_popup_subtile') ) ? esc_html( tfopt( 'hotel_extra_popup_subtile') ) : '' ; ?></p>
-                            </div>
-							<div class="tf-booking-content-service">
-								<?php foreach ( $hotel_extras as $key => $extra ) {
-									$extra_service = Helper::tf_hotel_extras_title_price( $post_id, $adult, $child, $key );
-									$hotel_extra_pricetype = ! empty( $extra['price_type'] ) ? $extra['price_type'] : 'fixed';
-									?>
-									<div class="tf-single-hotel-service tour-extra-single">
-										<label for="service-<?php echo esc_attr( $key ) . '_' . esc_attr($room_id); ?>">
-											<div class="tf-service-radio">
-												<input type="checkbox" value="<?php echo esc_attr( $key ); ?>" id="service-<?php echo esc_attr( $key) . '_' . esc_attr($room_id); ?>" name="extra_service">
-												<span class="tf-checkmark"></span>
-											</div>
-											<div class="tf-service-content">
-												<h5>
-													<?php echo esc_html($extra['title']);?>
-												</h5>
-												<p><?php echo esc_html($extra_service['title']); ?> = <?php echo wp_kses_post(wc_price( $extra_service['price'] )); ?></p>
-											</div>
-										</label>
-										<?php if ( "quantity" == $hotel_extra_pricetype ) : ?>
-											<div class="tf-field-group tf-mt-16 tf_quantity-acrselection">
-												<div class="tf-field quanity-acr-fields">
-													<div class="quanity-acr-label">
-														<?php echo esc_html__( "Select Quantity", "tourfic" ); ?>
-													</div>
-													<div class="quanity-acr-select tf-flex">
-														<div class="quanity-acr-dec">-</div>
-														<input type="number" name="extra-quantity" min="1" value="1">
-														<div class="quanity-acr-inc">+</div>
-													</div>
-												</div>
-											</div>
-										<?php endif; ?>
-									</div>
-								<?php } ?>
-                            </div>
-							<?php } ?>
+							<?php do_action( 'tf_hotel_render_extras', $post_id, $hotel_extras, $room_id, $adult, $child ); ?>
                         </div>
 					<?php }
 					if ( $enable_guest_info ) {

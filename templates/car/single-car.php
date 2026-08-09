@@ -188,8 +188,8 @@ while ( have_posts() ) : the_post();
 	$owner_sec_title  = ! empty( $meta['owner_sec_title'] ) ? $meta['owner_sec_title'] : '';
 
 	// Car Extras
-	$car_extra_sec_title  = ! empty( $meta['car_extra_sec_title'] ) ? $meta['car_extra_sec_title'] : '';
-	$car_extras = ! empty( $meta['extras'] ) ? $meta['extras'] : '';
+	$car_extra_sec_title  = apply_filters( 'tf_car_extra_sec_title', '', $post_id, $meta );
+	$car_extras = apply_filters( 'tf_car_extra_meta', null, $post_id, $meta );
 
 	// Car Deposit
 	$car_allow_deposit = ! empty( $meta['allow_deposit'] ) ? $meta['allow_deposit'] : '';
