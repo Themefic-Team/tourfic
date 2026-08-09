@@ -368,7 +368,21 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'default'   => false,
                     'is_search_able' => true
                 ),
-               
+                array(
+                    'id'      => 'avil_by_date',
+                    'type'    => 'switch',
+                    'label'   => esc_html__( 'Enable Availability by Date', 'tourfic' ),
+                    'default' => false,
+                    'attributes' => array(
+                        'class' => 'tf_room_availability_by_date',
+                    ),
+                ),
+                array(
+                    'id'            => 'avail_date',
+                    'type'          => 'room_availability',
+                    'dependency'    => array( 'avil_by_date', '!=', 'false' ),
+                    'is_search_able' => true,
+                ),
                 array(
                     'id'         => 'tf-others-heading',
                     'type'       => 'heading',

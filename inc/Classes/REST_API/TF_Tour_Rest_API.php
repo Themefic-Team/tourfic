@@ -98,8 +98,7 @@ if ( ! class_exists( 'TF_Tour_Rest_API' ) ) {
 				$tour_availability_data = isset( $tour_meta['tour_availability'] ) && ! empty( $tour_meta['tour_availability'] ) ? json_decode( $tour_meta['tour_availability'], true ) : [];
 				$package_pricing = ! empty( $tour_meta['package_pricing'] ) && is_array( $tour_meta['package_pricing'] ) ? $tour_meta['package_pricing'] : array();
 			} else {
-				$tour_availability_data = get_option( 'tf_tour_availability' );
-				delete_option( 'tf_tour_availability' );
+				$tour_availability_data = array();
 			}
 
 			if ( ! empty( $tour_availability_data ) && is_array( $tour_availability_data ) ) {

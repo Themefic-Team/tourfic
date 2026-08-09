@@ -193,8 +193,7 @@ if ( ! class_exists( 'TF_Hotel_Rest_API' ) ) {
 				$room_meta       = get_post_meta( $id, 'tf_room_opt', true );
 				$room_avail_data = isset( $room_meta['avail_date'] ) && ! empty( $room_meta['avail_date'] ) ? json_decode( $room_meta['avail_date'], true ) : [];
 			} else {
-				$room_avail_data = get_option( 'tf_hotel_avail_date' );
-				delete_option( 'tf_hotel_avail_date' );
+				$room_avail_data = array();
 			}
 
 			if ( ! empty( $room_avail_data ) && is_array( $room_avail_data ) ) {

@@ -173,8 +173,7 @@ if ( ! class_exists( 'TF_Apartment_Rest_API' ) ) {
 				$apartment_data        = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
 				$apt_availability_data = isset( $apartment_data['apt_availability'] ) && ! empty( $apartment_data['apt_availability'] ) ? json_decode( $apartment_data['apt_availability'], true ) : [];
 			} else {
-				$apt_availability_data = get_option( 'tf_apt_availability' );
-				delete_option( 'tf_apt_availability' );
+				$apt_availability_data = array();
 			}
 
 			if ( ! empty( $apt_availability_data ) && is_array( $apt_availability_data ) ) {

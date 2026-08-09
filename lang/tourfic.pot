@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Tourfic 2.23.3\n"
+"Project-Id-Version: Tourfic – Travel Booking, Hotel Booking & Car Rental WordPress Plugin 2.23.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tourfic\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-06T09:06:23+00:00\n"
+"POT-Creation-Date: 2026-08-09T05:27:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tourfic\n"
@@ -98,15 +98,15 @@ msgstr ""
 #: inc/Classes/Tour/Tour.php:149
 #: inc/Classes/Tour/Tour.php:402
 #: inc/Classes/Tour/Tour.php:815
-#: inc/Classes/Tour/Tour.php:1084
-#: inc/Classes/Tour/Tour.php:1165
-#: inc/Classes/Tour/Tour.php:1188
-#: inc/Classes/Tour/Tour.php:1289
-#: inc/Classes/Tour/Tour.php:1486
-#: inc/Classes/Tour/Tour.php:1655
-#: inc/Classes/Tour/Tour.php:1794
-#: inc/Classes/Tour/Tour.php:1811
-#: inc/Classes/Tour/Tour.php:4941
+#: inc/Classes/Tour/Tour.php:1075
+#: inc/Classes/Tour/Tour.php:1157
+#: inc/Classes/Tour/Tour.php:1180
+#: inc/Classes/Tour/Tour.php:1281
+#: inc/Classes/Tour/Tour.php:1478
+#: inc/Classes/Tour/Tour.php:1647
+#: inc/Classes/Tour/Tour.php:1786
+#: inc/Classes/Tour/Tour.php:1803
+#: inc/Classes/Tour/Tour.php:4869
 #: inc/Classes/Woocommerce/Woocommerce.php:101
 #: inc/functions/woocommerce/wc-apartment.php:606
 #: inc/functions/woocommerce/wc-tour.php:1280
@@ -142,7 +142,7 @@ msgstr ""
 #: inc/Classes/Hotel/Hotel.php:3102
 #: inc/Classes/Hotel/Hotel.php:3170
 #: inc/Classes/Hotel/Hotel.php:3174
-#: inc/Classes/Hotel/Hotel.php:4749
+#: inc/Classes/Hotel/Hotel.php:4708
 #: inc/Classes/Room/Room.php:1308
 #: inc/Classes/Room/Room.php:1623
 #: inc/Classes/Room/Room.php:1807
@@ -153,15 +153,15 @@ msgstr ""
 #: inc/Classes/Tour/Tour.php:413
 #: inc/Classes/Tour/Tour.php:539
 #: inc/Classes/Tour/Tour.php:826
-#: inc/Classes/Tour/Tour.php:1100
-#: inc/Classes/Tour/Tour.php:1172
-#: inc/Classes/Tour/Tour.php:1199
-#: inc/Classes/Tour/Tour.php:1336
-#: inc/Classes/Tour/Tour.php:1518
-#: inc/Classes/Tour/Tour.php:1687
-#: inc/Classes/Tour/Tour.php:1799
-#: inc/Classes/Tour/Tour.php:1822
-#: inc/Classes/Tour/Tour.php:4946
+#: inc/Classes/Tour/Tour.php:1091
+#: inc/Classes/Tour/Tour.php:1164
+#: inc/Classes/Tour/Tour.php:1191
+#: inc/Classes/Tour/Tour.php:1328
+#: inc/Classes/Tour/Tour.php:1510
+#: inc/Classes/Tour/Tour.php:1679
+#: inc/Classes/Tour/Tour.php:1791
+#: inc/Classes/Tour/Tour.php:1814
+#: inc/Classes/Tour/Tour.php:4874
 #: inc/Classes/Woocommerce/Woocommerce.php:102
 #: inc/functions/woocommerce/wc-apartment.php:613
 #: inc/functions/woocommerce/wc-tour.php:1287
@@ -169,7 +169,7 @@ msgid "Children"
 msgstr ""
 
 #: inc/Admin/Backend_Booking/TF_Apartment_Backend_Booking.php:93
-#: inc/Admin/TF_Options/TF_Options.php:1845
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:455
 #: inc/App/Templates/Components/Tour/Single/Tour_Information.php:190
 #: inc/App/Templates/Components/Tour/Single/Tour_Price.php:108
 #: inc/Classes/Apartment/Apartment.php:697
@@ -187,17 +187,17 @@ msgstr ""
 #: inc/Classes/Tour/Tour.php:424
 #: inc/Classes/Tour/Tour.php:571
 #: inc/Classes/Tour/Tour.php:837
-#: inc/Classes/Tour/Tour.php:1116
-#: inc/Classes/Tour/Tour.php:1179
-#: inc/Classes/Tour/Tour.php:1210
-#: inc/Classes/Tour/Tour.php:1379
-#: inc/Classes/Tour/Tour.php:1550
-#: inc/Classes/Tour/Tour.php:1719
-#: inc/Classes/Tour/Tour.php:1804
-#: inc/Classes/Tour/Tour.php:1833
-#: inc/Classes/Tour/Tour.php:2131
-#: inc/Classes/Tour/Tour.php:2162
-#: inc/Classes/Tour/Tour.php:4952
+#: inc/Classes/Tour/Tour.php:1107
+#: inc/Classes/Tour/Tour.php:1171
+#: inc/Classes/Tour/Tour.php:1202
+#: inc/Classes/Tour/Tour.php:1371
+#: inc/Classes/Tour/Tour.php:1542
+#: inc/Classes/Tour/Tour.php:1711
+#: inc/Classes/Tour/Tour.php:1796
+#: inc/Classes/Tour/Tour.php:1825
+#: inc/Classes/Tour/Tour.php:2116
+#: inc/Classes/Tour/Tour.php:2147
+#: inc/Classes/Tour/Tour.php:4880
 #: inc/Core/TF_Booking_Details.php:735
 #: inc/Core/TF_Booking_Details.php:1753
 #: inc/functions/woocommerce/wc-apartment.php:620
@@ -216,16 +216,8 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Settings.php:1167
 #: inc/Admin/TF_Options/classes/TF_Settings.php:1198
 #: inc/Admin/TF_Options/classes/TF_Settings.php:1334
-#: inc/Admin/TF_Options/TF_Options.php:731
-#: inc/Admin/TF_Options/TF_Options.php:768
-#: inc/Admin/TF_Options/TF_Options.php:811
-#: inc/Admin/TF_Options/TF_Options.php:945
-#: inc/Admin/TF_Options/TF_Options.php:1150
-#: inc/Admin/TF_Options/TF_Options.php:1253
-#: inc/Admin/TF_Options/TF_Options.php:1330
-#: inc/Admin/TF_Options/TF_Options.php:1551
-#: inc/Admin/TF_Options/TF_Options.php:2070
-#: inc/Admin/TF_Options/TF_Options.php:2113
+#: inc/Admin/TF_Options/TF_Options.php:640
+#: inc/Admin/TF_Options/TF_Options.php:677
 #: inc/Admin/TF_Setup_Wizard.php:1354
 #: inc/App/TF_Review.php:178
 #: inc/Classes/Room/Room.php:212
@@ -246,7 +238,7 @@ msgstr ""
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:465
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:468
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:472
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:291
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:285
 msgid "The field is required"
 msgstr ""
 
@@ -274,7 +266,7 @@ msgstr ""
 
 #: inc/Admin/Backend_Booking/TF_Apartment_Backend_Booking.php:468
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:584
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:383
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:377
 msgid "Your booking has been successfully submitted."
 msgstr ""
 
@@ -283,7 +275,7 @@ msgid "Available Hotels"
 msgstr ""
 
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:51
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:377
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:373
 msgid "Available Rooms"
 msgstr ""
 
@@ -320,31 +312,31 @@ msgid "5 Rooms"
 msgstr ""
 
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:97
-#: inc/Admin/TF_Options/TF_Options.php:88
+#: inc/Admin/TF_Options/TF_Options.php:89
 msgid "Service Type"
 msgstr ""
 
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:100
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:260
-#: inc/Admin/TF_Options/TF_Options.php:101
-#: inc/Classes/Hotel/Hotel.php:3378
-#: inc/Classes/Hotel/Hotel.php:3687
+#: inc/Admin/TF_Options/TF_Options.php:102
+#: inc/Classes/Hotel/Hotel.php:3377
+#: inc/Classes/Hotel/Hotel.php:3646
 msgid "Pickup Service"
 msgstr ""
 
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:101
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:263
-#: inc/Admin/TF_Options/TF_Options.php:108
-#: inc/Classes/Hotel/Hotel.php:3381
-#: inc/Classes/Hotel/Hotel.php:3736
+#: inc/Admin/TF_Options/TF_Options.php:109
+#: inc/Classes/Hotel/Hotel.php:3380
+#: inc/Classes/Hotel/Hotel.php:3695
 msgid "Drop-off Service"
 msgstr ""
 
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:102
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:266
-#: inc/Admin/TF_Options/TF_Options.php:115
-#: inc/Classes/Hotel/Hotel.php:3384
-#: inc/Classes/Hotel/Hotel.php:3785
+#: inc/Admin/TF_Options/TF_Options.php:116
+#: inc/Classes/Hotel/Hotel.php:3383
+#: inc/Classes/Hotel/Hotel.php:3744
 msgid "Pickup & Drop-off Service"
 msgstr ""
 
@@ -364,9 +356,9 @@ msgstr ""
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:710
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:761
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:812
-#: inc/functions/woocommerce/wc-hotel.php:634
-#: inc/functions/woocommerce/wc-hotel.php:685
-#: inc/functions/woocommerce/wc-hotel.php:736
+#: inc/functions/woocommerce/wc-hotel.php:633
+#: inc/functions/woocommerce/wc-hotel.php:684
+#: inc/functions/woocommerce/wc-hotel.php:735
 #, php-format
 msgid "Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s ) = %5$s"
 msgstr ""
@@ -376,9 +368,9 @@ msgstr ""
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:720
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:771
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:822
-#: inc/functions/woocommerce/wc-hotel.php:644
-#: inc/functions/woocommerce/wc-hotel.php:695
-#: inc/functions/woocommerce/wc-hotel.php:746
+#: inc/functions/woocommerce/wc-hotel.php:643
+#: inc/functions/woocommerce/wc-hotel.php:694
+#: inc/functions/woocommerce/wc-hotel.php:745
 #, php-format
 msgid "Adult ( %1$s × %2$s ) = %3$s"
 msgstr ""
@@ -388,9 +380,9 @@ msgstr ""
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:733
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:784
 #: inc/Admin/Backend_Booking/TF_Hotel_Backend_Booking.php:835
-#: inc/functions/woocommerce/wc-hotel.php:657
-#: inc/functions/woocommerce/wc-hotel.php:708
-#: inc/functions/woocommerce/wc-hotel.php:759
+#: inc/functions/woocommerce/wc-hotel.php:656
+#: inc/functions/woocommerce/wc-hotel.php:707
+#: inc/functions/woocommerce/wc-hotel.php:758
 #, php-format
 msgid "( Fixed ) = %1$s"
 msgstr ""
@@ -404,7 +396,7 @@ msgid "Select Tour"
 msgstr ""
 
 #: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:70
-#: inc/Classes/Tour/Tour.php:4951
+#: inc/Classes/Tour/Tour.php:4879
 #: inc/Classes/Woocommerce/Woocommerce.php:103
 msgid "Infants"
 msgstr ""
@@ -434,8 +426,8 @@ msgstr ""
 msgid "Select Package"
 msgstr ""
 
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:475
-#: inc/Classes/Tour/Tour.php:4265
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:469
+#: inc/Classes/Tour/Tour.php:4193
 #: inc/functions/woocommerce/wc-tour.php:269
 msgid "Booking limit is Reached this Tour"
 msgstr ""
@@ -443,17 +435,17 @@ msgstr ""
 #. translators: %1$s is the number of available seats
 #. translators: %1$s: available seats
 #. translators: %1$s Limit
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:479
-#: inc/Classes/Tour/Tour.php:4269
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:473
+#: inc/Classes/Tour/Tour.php:4197
 #: inc/functions/woocommerce/wc-tour.php:273
 #, php-format
 msgid "Only %1$s Adult/Children are available this Tour"
 msgstr ""
 
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:575
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:746
-#: inc/Classes/Tour/Tour.php:4366
-#: inc/Classes/Tour/Tour.php:4527
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:569
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:740
+#: inc/Classes/Tour/Tour.php:4294
+#: inc/Classes/Tour/Tour.php:4455
 #: inc/functions/woocommerce/wc-tour.php:386
 #: inc/functions/woocommerce/wc-tour.php:604
 msgid "Booking limit is Reached this Date"
@@ -463,18 +455,18 @@ msgstr ""
 #. translators: %1$s is the number of available seats
 #. translators: %1$s: available seats
 #. translators: %1$s Person Count
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:579
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:750
-#: inc/Classes/Tour/Tour.php:4370
-#: inc/Classes/Tour/Tour.php:4531
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:573
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:744
+#: inc/Classes/Tour/Tour.php:4298
+#: inc/Classes/Tour/Tour.php:4459
 #: inc/functions/woocommerce/wc-tour.php:390
 #: inc/functions/woocommerce/wc-tour.php:608
 #, php-format
 msgid "Only %1$s Adult/Children are available this Date"
 msgstr ""
 
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:616
-#: inc/Classes/Tour/Tour.php:4385
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:610
+#: inc/Classes/Tour/Tour.php:4313
 #: inc/functions/woocommerce/wc-tour.php:445
 msgid "Please Select Adults/Children/Infant required"
 msgstr ""
@@ -488,17 +480,17 @@ msgstr ""
 #. translators: %s: maximum number of person
 #. translators: %s: minimum number of person
 #. translators: %s Max Person
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:626
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:629
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:654
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:656
-#: inc/Classes/Tour/Tour.php:4395
-#: inc/Classes/Tour/Tour.php:4398
-#: inc/Classes/Tour/Tour.php:4423
-#: inc/Classes/Tour/Tour.php:4425
-#: inc/Classes/Tour/Tour.php:4543
-#: inc/Classes/Tour/Tour.php:4555
-#: inc/Classes/Tour/Tour.php:4561
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:620
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:623
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:648
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:650
+#: inc/Classes/Tour/Tour.php:4323
+#: inc/Classes/Tour/Tour.php:4326
+#: inc/Classes/Tour/Tour.php:4351
+#: inc/Classes/Tour/Tour.php:4353
+#: inc/Classes/Tour/Tour.php:4471
+#: inc/Classes/Tour/Tour.php:4483
+#: inc/Classes/Tour/Tour.php:4489
 #: inc/functions/woocommerce/wc-tour.php:455
 #: inc/functions/woocommerce/wc-tour.php:457
 #: inc/functions/woocommerce/wc-tour.php:482
@@ -516,9 +508,9 @@ msgstr[1] ""
 #. translators: %1$s: minimum number of people
 #. translators: %1$s: Minimum number of people, %2$s: start date, %3$s: end date
 #. translators: %s Min Required
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:633
-#: inc/Classes/Tour/Tour.php:4402
-#: inc/Classes/Tour/Tour.php:4564
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:627
+#: inc/Classes/Tour/Tour.php:4330
+#: inc/Classes/Tour/Tour.php:4492
 #: inc/functions/woocommerce/wc-tour.php:461
 #: inc/functions/woocommerce/wc-tour.php:644
 #, php-format
@@ -530,12 +522,12 @@ msgstr ""
 #. translators: %1$s: maximum number of people
 #. translators: %1$s: maximum number of people, %2$s: start date, %3$s: end date
 #. translators: %s Max Required
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:637
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:793
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:873
-#: inc/Classes/Tour/Tour.php:4406
-#: inc/Classes/Tour/Tour.php:4546
-#: inc/Classes/Tour/Tour.php:4558
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:631
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:787
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:867
+#: inc/Classes/Tour/Tour.php:4334
+#: inc/Classes/Tour/Tour.php:4474
+#: inc/Classes/Tour/Tour.php:4486
 #: inc/functions/woocommerce/wc-tour.php:465
 #: inc/functions/woocommerce/wc-tour.php:624
 #: inc/functions/woocommerce/wc-tour.php:638
@@ -546,8 +538,8 @@ msgstr ""
 #. translators: %1$s minimum people, %2$s date from, %3$s date to
 #. translators: %1$s: minimum number of people, %2$s: start date, %3$s: end date
 #. translators: %1$s Min Person, $2$s Date From, %3$s Date To
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:662
-#: inc/Classes/Tour/Tour.php:4432
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:656
+#: inc/Classes/Tour/Tour.php:4360
 #: inc/functions/woocommerce/wc-tour.php:491
 #, php-format
 msgid "Minimum %1$s required for date %2$s - %3$s"
@@ -556,8 +548,8 @@ msgstr ""
 #. translators: %1$s maximum people, %2$s date from, %3$s date to
 #. translators: %1$s: maximum number of people, %2$s: start date, %3$s: end date
 #. translators: %1$s Max Person, $2$s Date From, %3$s Date To
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:666
-#: inc/Classes/Tour/Tour.php:4437
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:660
+#: inc/Classes/Tour/Tour.php:4365
 #: inc/functions/woocommerce/wc-tour.php:496
 #, php-format
 msgid "Maximum %1$s allowed for date %2$s - %3$s"
@@ -566,8 +558,8 @@ msgstr ""
 #. translators: %s minimum days before booking
 #. translators: %s: minimum days to book before departure
 #. translators: %1$s Min Day Before Book
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:805
-#: inc/Classes/Tour/Tour.php:4575
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:799
+#: inc/Classes/Tour/Tour.php:4503
 #: inc/functions/woocommerce/wc-tour.php:655
 #, php-format
 msgid "%s day"
@@ -578,62 +570,62 @@ msgstr[1] ""
 #. translators: %1$s is the number of days
 #. translators: %1$s: minimum days to book before departure
 #. translators: %1$s Minimum Days Gap
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:813
-#: inc/Classes/Tour/Tour.php:4584
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:807
+#: inc/Classes/Tour/Tour.php:4512
 #: inc/functions/woocommerce/wc-tour.php:670
 #, php-format
 msgid "Present date to booking date required minimum %1$s gap"
 msgstr ""
 
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:816
-#: inc/Classes/Tour/Tour.php:4587
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:810
+#: inc/Classes/Tour/Tour.php:4515
 #: inc/functions.php:925
 #: inc/functions/woocommerce/wc-tour.php:673
 msgid "You must select booking date"
 msgstr ""
 
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:819
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:813
 #: inc/App/Without_Payment/Hotel_Offline_Booking.php:90
-#: inc/Classes/Tour/Tour.php:4590
+#: inc/Classes/Tour/Tour.php:4518
 #: inc/functions/woocommerce/wc-apartment.php:105
 #: inc/functions/woocommerce/wc-hotel.php:97
 #: inc/functions/woocommerce/wc-tour.php:676
 msgid "Unknown Error! Please try again."
 msgstr ""
 
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:912
-#: inc/Classes/Tour/Tour.php:4616
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:906
+#: inc/Classes/Tour/Tour.php:4544
 #: inc/functions/woocommerce/wc-tour.php:779
 #: inc/functions/woocommerce/wc-tour.php:801
 msgid "Please select time"
 msgstr ""
 
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:919
-#: inc/Classes/Tour/Tour.php:4623
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:913
+#: inc/Classes/Tour/Tour.php:4551
 #: inc/functions/woocommerce/wc-tour.php:809
 msgid "Adult price is blank!"
 msgstr ""
 
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:922
-#: inc/Classes/Tour/Tour.php:4626
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:916
+#: inc/Classes/Tour/Tour.php:4554
 #: inc/functions/woocommerce/wc-tour.php:812
 msgid "Childern price is blank!"
 msgstr ""
 
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:925
-#: inc/Classes/Tour/Tour.php:4629
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:919
+#: inc/Classes/Tour/Tour.php:4557
 #: inc/functions/woocommerce/wc-tour.php:815
 msgid "Infant price is blank!"
 msgstr ""
 
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:928
-#: inc/Classes/Tour/Tour.php:4632
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:922
+#: inc/Classes/Tour/Tour.php:4560
 #: inc/functions/woocommerce/wc-tour.php:818
 msgid "Infant without adults is not allowed!"
 msgstr ""
 
-#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:934
-#: inc/Classes/Tour/Tour.php:4642
+#: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:928
+#: inc/Classes/Tour/Tour.php:4570
 #: inc/functions/woocommerce/wc-tour.php:828
 msgid "Group price is blank!"
 msgstr ""
@@ -789,8 +781,8 @@ msgstr ""
 #: inc/Admin/Emails/templates/booking/notification.php:15
 #: inc/Admin/TF_List_Table.php:24
 #: inc/Classes/Apartment/Apartment.php:2044
-#: inc/Classes/Hotel/Hotel.php:3473
-#: inc/Classes/Tour/Tour.php:2274
+#: inc/Classes/Hotel/Hotel.php:3432
+#: inc/Classes/Tour/Tour.php:2202
 #: inc/Core/Enquiry.php:148
 #: inc/Core/Enquiry.php:346
 #: inc/Core/TF_Backend_Booking.php:59
@@ -815,8 +807,8 @@ msgstr ""
 #: inc/Admin/Emails/templates/booking/confirmation.php:15
 #: inc/Admin/Emails/templates/booking/notification.php:18
 #: inc/Classes/Apartment/Apartment.php:2054
-#: inc/Classes/Hotel/Hotel.php:3483
-#: inc/Classes/Tour/Tour.php:2284
+#: inc/Classes/Hotel/Hotel.php:3442
+#: inc/Classes/Tour/Tour.php:2212
 msgid "Country"
 msgstr ""
 
@@ -824,8 +816,8 @@ msgstr ""
 #: inc/Admin/Emails/templates/booking/confirmation.php:16
 #: inc/Admin/Emails/templates/booking/notification.php:19
 #: inc/Classes/Apartment/Apartment.php:2049
-#: inc/Classes/Hotel/Hotel.php:3478
-#: inc/Classes/Tour/Tour.php:2279
+#: inc/Classes/Hotel/Hotel.php:3437
+#: inc/Classes/Tour/Tour.php:2207
 #: inc/Core/TF_Backend_Booking.php:66
 msgid "Phone"
 msgstr ""
@@ -833,11 +825,15 @@ msgstr ""
 #: inc/Admin/Emails/templates/booking/cancellation.php:23
 #: inc/Admin/Emails/templates/booking/confirmation.php:20
 #: inc/Admin/Emails/templates/booking/notification.php:22
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:45
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:46
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:46
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:47
 #: inc/Admin/TF_Options/options/tf-settings.php:411
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:994
 #: inc/App/Without_Payment/Hotel_Offline_Booking.php:598
 #: inc/Classes/Hotel/Hotel.php:393
-#: inc/Classes/Tour/Tour.php:4991
+#: inc/Classes/Tour/Tour.php:4919
 #: inc/functions/woocommerce/wc-apartment.php:509
 msgid "Price"
 msgstr ""
@@ -851,13 +847,13 @@ msgstr ""
 #: inc/Admin/Emails/templates/booking/notification.php:24
 #: inc/App/Without_Payment/Hotel_Offline_Booking.php:628
 #: inc/Classes/REST_API/TF_User_Rest_API.php:235
-#: inc/Classes/Tour/Tour.php:5085
+#: inc/Classes/Tour/Tour.php:5013
 #: inc/Classes/Woocommerce/Woocommerce.php:99
 #: inc/Classes/Woocommerce/Woocommerce.php:107
 #: inc/functions/woocommerce/wc-apartment.php:552
 #: inc/functions/woocommerce/wc-apartment.php:634
 #: inc/functions/woocommerce/wc-car.php:455
-#: inc/functions/woocommerce/wc-hotel.php:1039
+#: inc/functions/woocommerce/wc-hotel.php:1038
 msgid "Due"
 msgstr ""
 
@@ -879,7 +875,7 @@ msgstr ""
 
 #: inc/Admin/Emails/TF_Handle_Emails.php:186
 #: inc/App/Without_Payment/Hotel_Offline_Booking.php:512
-#: inc/Classes/Tour/Tour.php:4832
+#: inc/Classes/Tour/Tour.php:4760
 #: inc/Core/TF_Booking_Details.php:1060
 #: inc/Core/TF_Booking_Details.php:1248
 msgid "Full Name"
@@ -887,7 +883,7 @@ msgstr ""
 
 #: inc/Admin/Emails/TF_Handle_Emails.php:187
 #: inc/App/Without_Payment/Hotel_Offline_Booking.php:517
-#: inc/Classes/Tour/Tour.php:4837
+#: inc/Classes/Tour/Tour.php:4765
 #: inc/Core/TF_Booking_Details.php:1065
 #: inc/Core/TF_Booking_Details.php:1253
 msgid "Date of birth"
@@ -895,7 +891,7 @@ msgstr ""
 
 #: inc/Admin/Emails/TF_Handle_Emails.php:188
 #: inc/App/Without_Payment/Hotel_Offline_Booking.php:528
-#: inc/Classes/Tour/Tour.php:4848
+#: inc/Classes/Tour/Tour.php:4776
 #: inc/Core/TF_Booking_Details.php:1070
 #: inc/Core/TF_Booking_Details.php:1267
 msgid "NID"
@@ -916,14 +912,14 @@ msgstr ""
 #: inc/Classes/Hotel/Hotel.php:1792
 #: inc/Classes/Hotel/Hotel.php:2892
 #: inc/Classes/Room/Room.php:1575
-#: inc/Classes/Tour/Tour.php:1474
-#: inc/Classes/Tour/Tour.php:1643
+#: inc/Classes/Tour/Tour.php:1466
+#: inc/Classes/Tour/Tour.php:1635
 #: templates/template-parts/search/design-2.php:32
 msgid "Guest"
 msgstr ""
 
 #: inc/Admin/Emails/TF_Handle_Emails.php:295
-#: inc/Classes/Tour/Tour.php:4937
+#: inc/Classes/Tour/Tour.php:4865
 msgid "Traveler"
 msgstr ""
 
@@ -956,7 +952,7 @@ msgid "Dear Vendor,"
 msgstr ""
 
 #: inc/Admin/Emails/TF_Handle_Emails.php:822
-#: inc/Classes/Hotel/Hotel.php:3343
+#: inc/Classes/Hotel/Hotel.php:3342
 msgid "Booking Confirmation"
 msgstr ""
 
@@ -1215,7 +1211,7 @@ msgstr ""
 #: inc/Classes/Room/Room_CPT.php:24
 #: inc/Core/TF_Booking_Details.php:671
 #: inc/Core/TF_Booking_Details.php:1709
-#: inc/functions/woocommerce/wc-hotel.php:940
+#: inc/functions/woocommerce/wc-hotel.php:939
 msgid "Room"
 msgstr ""
 
@@ -1251,15 +1247,15 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:86
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:831
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:229
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:496
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:501
 #: inc/functions/functions-car.php:1064
 msgid "Booking"
 msgstr ""
 
 #: inc/Admin/TF_API_Documentation.php:41
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:600
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:450
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:712
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:613
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:446
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:717
 msgid "Enquiry"
 msgstr ""
 
@@ -1277,8 +1273,8 @@ msgid "Hotel Management"
 msgstr ""
 
 #: inc/Admin/TF_API_Documentation.php:52
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:281
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:362
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:294
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:358
 msgid "Room Management"
 msgstr ""
 
@@ -1353,9 +1349,9 @@ msgstr ""
 
 #: inc/Admin/TF_API_Documentation.php:97
 #: inc/Admin/TF_API_Documentation.php:106
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:518
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:531
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:213
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:907
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:912
 #: inc/Admin/TF_Options/options/tf-settings.php:204
 #: inc/Admin/TF_Options/options/tf-settings.php:250
 #: inc/Admin/TF_Options/options/tf-settings.php:416
@@ -1381,30 +1377,30 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1517
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1868
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:51
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:484
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:524
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:613
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:711
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:719
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:727
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:497
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:537
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:626
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:724
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:732
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:740
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:962
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:970
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:52
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:271
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:465
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:605
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:614
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:623
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:461
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:601
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:610
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:619
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:219
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:326
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:366
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:416
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:511
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:725
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:854
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:862
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:870
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:878
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:430
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:516
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:730
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:859
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:867
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:875
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:883
 #: inc/Admin/TF_Options/options/tf-settings.php:1473
 #: inc/Admin/TF_Options/options/tf-settings.php:1480
 #: inc/Admin/TF_Options/options/tf-settings.php:1488
@@ -1459,30 +1455,30 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1516
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1867
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:52
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:485
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:525
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:614
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:712
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:720
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:728
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:498
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:538
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:627
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:725
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:733
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:741
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:963
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:971
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:53
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:272
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:466
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:606
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:615
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:624
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:462
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:602
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:611
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:620
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:220
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:327
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:367
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:417
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:512
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:726
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:855
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:863
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:871
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:879
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:431
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:517
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:731
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:860
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:868
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:876
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:884
 #: inc/Admin/TF_Options/options/tf-settings.php:1474
 #: inc/Admin/TF_Options/options/tf-settings.php:1481
 #: inc/Admin/TF_Options/options/tf-settings.php:1489
@@ -2691,13 +2687,13 @@ msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:135
 #: inc/Admin/TF_Options/classes/TF_Settings.php:136
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:697
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:710
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:941
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:583
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:598
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:403
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:409
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:840
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:579
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:594
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:417
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:423
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:845
 #: inc/App/Widgets/Elementor/Widgets/TF_Apartment_Grid_Slider.php:76
 #: inc/App/Widgets/Elementor/Widgets/TF_Hotel_Grid_Slider.php:78
 #: inc/App/Widgets/Elementor/Widgets/TF_Recent_Blog.php:78
@@ -2771,61 +2767,73 @@ msgid "Select Month"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:350
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:227
 #: inc/Classes/Enqueue.php:1081
 msgid "January"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:351
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:231
 #: inc/Classes/Enqueue.php:1082
 msgid "February"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:352
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:235
 #: inc/Classes/Enqueue.php:1083
 msgid "March"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:353
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:239
 #: inc/Classes/Enqueue.php:1084
 msgid "April"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:354
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:243
 #: inc/Classes/Enqueue.php:1085
 msgid "May"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:355
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:247
 #: inc/Classes/Enqueue.php:1086
 msgid "June"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:356
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:251
 #: inc/Classes/Enqueue.php:1087
 msgid "July"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:357
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:255
 #: inc/Classes/Enqueue.php:1088
 msgid "August"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:358
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:259
 #: inc/Classes/Enqueue.php:1089
 msgid "September"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:359
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:263
 #: inc/Classes/Enqueue.php:1090
 msgid "October"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:360
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:267
 #: inc/Classes/Enqueue.php:1091
 msgid "November"
 msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Settings.php:361
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:271
 #: inc/Classes/Enqueue.php:1092
 msgid "December"
 msgstr ""
@@ -2891,9 +2899,9 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Settings.php:523
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:205
 #: inc/App/Templates/Components/Car_Rental/Single/Car_Info.php:216
-#: inc/Classes/Hotel/Hotel.php:3682
-#: inc/Classes/Hotel/Hotel.php:3731
-#: inc/Classes/Hotel/Hotel.php:3780
+#: inc/Classes/Hotel/Hotel.php:3641
+#: inc/Classes/Hotel/Hotel.php:3690
+#: inc/Classes/Hotel/Hotel.php:3739
 msgid "Free"
 msgstr ""
 
@@ -3061,6 +3069,7 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Settings.php:939
 #: inc/Admin/TF_Options/fields/repeater/TF_repeater.php:196
 #: inc/Admin/TF_Options/fields/repeater/TF_repeater.php:303
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:556
 #: inc/App/Templates/Components/Shared/Single/Wishlist.php:94
 msgid "Save"
 msgstr ""
@@ -3241,8 +3250,8 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1920
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1959
 #: inc/Admin/TF_Options/fields/select2/TF_select2.php:152
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:425
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:513
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:438
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:526
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:400
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:522
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:885
@@ -3292,7 +3301,7 @@ msgstr ""
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1669
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1777
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1965
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:430
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:443
 #: inc/App/Widgets/Elementor/Widgets/TF_Search_advanced.php:106
 #: inc/App/Widgets/Elementor/Widgets/TF_Search_horizontal.php:107
 #: inc/App/Widgets/TF_Widgets/Ask_Question.php:90
@@ -3760,7 +3769,7 @@ msgstr ""
 #: inc/Classes/Hotel/Hotel.php:2089
 #: inc/Classes/Hotel/Hotel.php:2251
 #: inc/Classes/Hotel/Hotel.php:2500
-#: inc/Classes/Hotel/Hotel.php:4736
+#: inc/Classes/Hotel/Hotel.php:4695
 #: inc/Classes/Hotel/Hotel_CPT.php:89
 #: inc/Classes/Room/Room.php:1252
 #: inc/Classes/Room/Room.php:1653
@@ -3783,7 +3792,7 @@ msgstr ""
 
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1127
 #: inc/Admin/TF_Options/classes/TF_Shortcodes.php:1181
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:334
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:347
 msgid "Room Type"
 msgstr ""
 
@@ -3970,6 +3979,88 @@ msgstr ""
 msgid "Not Found"
 msgstr ""
 
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:29
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:32
+msgid "Check In"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:37
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:40
+#: inc/Classes/Apartment/Apartment.php:596
+#: inc/Classes/Hotel/Hotel.php:1768
+#: inc/Classes/Room/Room.php:1551
+msgid "Check Out"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:53
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:54
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:89
+msgid "Status"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:55
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:56
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:371
+msgid "Available"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:56
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:57
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:372
+#: inc/Classes/REST_API/TF_Tour_Rest_API.php:183
+#: inc/Classes/REST_API/TF_Tour_Rest_API.php:225
+msgid "Unavailable"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:63
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:64
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:537
+msgid "Are you sure you want to reset this calendar?"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:71
+#: inc/Admin/TF_Options/fields/repeater/TF_repeater.php:195
+#: inc/Admin/TF_Options/fields/repeater/TF_repeater.php:302
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:72
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:545
+msgid "Cancel"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:72
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:73
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:546
+msgid "Confirmed"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:80
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:81
+msgid "Save Calendar"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:81
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:82
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:558
+msgid "Reset Calendar"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/aptAvailabilityCal/TF_aptAvailabilityCal.php:93
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:93
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:582
+#: inc/Core/TF_Backend_Booking.php:146
+#: templates/apartment/archive-apartments.php:38
+#: templates/apartment/taxonomy.php:24
+#: templates/car/archive-cars.php:28
+#: templates/car/taxonomy.php:14
+#: templates/common/search-results.php:44
+#: templates/hotel/archive-hotels.php:40
+#: templates/hotel/taxonomy.php:24
+#: templates/room/archive-rooms.php:28
+#: templates/room/taxonomy.php:22
+#: templates/tour/archive-tours.php:73
+#: templates/tour/taxonomy.php:22
+msgid "Please install and activate WooCommerce plugin to use this feature."
+msgstr ""
+
 #: inc/Admin/TF_Options/fields/backup/TF_Backup.php:24
 msgid "Import"
 msgstr ""
@@ -3984,6 +4075,8 @@ msgid "Note: Exporting full data may take time depending on the data size. Pleas
 msgstr ""
 
 #: inc/Admin/TF_Options/fields/date/TF_date.php:19
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:30
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:33
 #: inc/App/Templates/Components/Shared/Single/Booking_Form.php:174
 #: inc/App/Templates/Components/Shared/Single/Related_Post.php:333
 #: inc/App/Templates/Components/Tour/Single/Tour_Information.php:198
@@ -3994,6 +4087,8 @@ msgid "From"
 msgstr ""
 
 #: inc/Admin/TF_Options/fields/date/TF_date.php:20
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:38
+#: inc/Admin/TF_Options/fields/room_availability/TF_room_availability.php:41
 #: inc/Classes/Apartment/Apartment.php:1106
 #: inc/Classes/Hotel/Hotel.php:2310
 #: inc/Classes/Room/Room.php:2002
@@ -4034,14 +4129,14 @@ msgstr ""
 #: inc/Classes/Tour/Tour.php:635
 #: inc/Classes/Tour/Tour.php:644
 #: inc/Classes/Tour/Tour.php:859
-#: inc/Classes/Tour/Tour.php:1062
-#: inc/Classes/Tour/Tour.php:1228
-#: inc/Classes/Tour/Tour.php:1269
-#: inc/Classes/Tour/Tour.php:1447
-#: inc/Classes/Tour/Tour.php:1457
-#: inc/Classes/Tour/Tour.php:1616
-#: inc/Classes/Tour/Tour.php:1626
-#: inc/Classes/Tour/Tour.php:1849
+#: inc/Classes/Tour/Tour.php:1053
+#: inc/Classes/Tour/Tour.php:1220
+#: inc/Classes/Tour/Tour.php:1261
+#: inc/Classes/Tour/Tour.php:1439
+#: inc/Classes/Tour/Tour.php:1449
+#: inc/Classes/Tour/Tour.php:1608
+#: inc/Classes/Tour/Tour.php:1618
+#: inc/Classes/Tour/Tour.php:1841
 msgid "Select Date"
 msgstr ""
 
@@ -4093,27 +4188,27 @@ msgid "Insert"
 msgstr ""
 
 #: inc/Admin/TF_Options/fields/icon/TF_icon.php:104
-#: inc/Admin/TF_Options/TF_Options.php:694
+#: inc/Admin/TF_Options/TF_Options.php:603
 msgid "All Icons"
 msgstr ""
 
 #: inc/Admin/TF_Options/fields/icon/TF_icon.php:109
-#: inc/Admin/TF_Options/TF_Options.php:699
+#: inc/Admin/TF_Options/TF_Options.php:608
 msgid "Font Awesome 4"
 msgstr ""
 
 #: inc/Admin/TF_Options/fields/icon/TF_icon.php:114
-#: inc/Admin/TF_Options/TF_Options.php:704
+#: inc/Admin/TF_Options/TF_Options.php:613
 msgid "Font Awesome 5"
 msgstr ""
 
 #: inc/Admin/TF_Options/fields/icon/TF_icon.php:119
-#: inc/Admin/TF_Options/TF_Options.php:709
+#: inc/Admin/TF_Options/TF_Options.php:618
 msgid "Font Awesome 6"
 msgstr ""
 
 #: inc/Admin/TF_Options/fields/icon/TF_icon.php:124
-#: inc/Admin/TF_Options/TF_Options.php:714
+#: inc/Admin/TF_Options/TF_Options.php:623
 msgid "Remix Icon"
 msgstr ""
 
@@ -4133,19 +4228,14 @@ msgstr ""
 msgid "Longitude"
 msgstr ""
 
-#: inc/Admin/TF_Options/fields/repeater/TF_repeater.php:195
-#: inc/Admin/TF_Options/fields/repeater/TF_repeater.php:302
-msgid "Cancel"
-msgstr ""
-
 #: inc/Admin/TF_Options/fields/select2/TF_select2.php:81
 #: inc/Admin/TF_Options/fields/select2/TF_select2.php:91
 #: inc/Admin/TF_Options/fields/select2/TF_select2.php:120
 #: inc/Admin/TF_Options/fields/select2/TF_select2.php:156
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:301
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:418
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:455
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:506
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:314
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:431
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:468
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:519
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:243
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:201
 #: inc/Admin/TF_Options/options/tf-settings.php:1656
@@ -4197,6 +4287,334 @@ msgstr ""
 #: inc/Admin/TF_Options/fields/switch_group/TF_switch_group.php:21
 #: inc/Admin/TF_Options/fields/switch_group/TF_switch_group.php:25
 msgid "Off"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:28
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:566
+msgid "Bulk Add"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:45
+msgid "Bulk price edit"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:54
+msgid "Days of Week"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:59
+#: inc/Admin/TF_Options/options/tf-settings.php:122
+msgid "Sunday"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:63
+#: inc/Admin/TF_Options/options/tf-settings.php:123
+msgid "Monday"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:67
+#: inc/Admin/TF_Options/options/tf-settings.php:124
+msgid "Tuesday"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:71
+#: inc/Admin/TF_Options/options/tf-settings.php:125
+msgid "Wednesday"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:75
+msgid "Thrusday"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:79
+#: inc/Admin/TF_Options/options/tf-settings.php:127
+msgid "Friday"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:83
+#: inc/Admin/TF_Options/options/tf-settings.php:128
+msgid "Saturday"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:89
+msgid "Days of Month"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:94
+#: inc/Classes/Apartment/Apartment.php:619
+#: inc/Classes/Helper.php:3298
+#: inc/Classes/Hotel/Hotel.php:1791
+#: inc/Classes/Hotel/Hotel.php:1795
+#: inc/Classes/Room/Room.php:1574
+#: inc/Classes/Room/Room.php:1578
+#: inc/Classes/Room/Room.php:2172
+#: inc/Classes/Tour/Tour.php:134
+msgid "1"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:98
+msgid "2"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:102
+msgid "3"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:106
+msgid "4"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:110
+#: inc/Admin/TF_Options/options/tf-settings.php:2326
+msgid "5"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:114
+msgid "6"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:118
+msgid "7"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:122
+msgid "8"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:126
+msgid "9"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:130
+#: inc/Admin/TF_Options/options/tf-settings.php:2327
+msgid "10"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:134
+msgid "11"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:138
+msgid "12"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:142
+msgid "13"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:146
+msgid "14"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:150
+msgid "15"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:154
+msgid "16"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:158
+msgid "17"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:162
+msgid "18"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:166
+msgid "19"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:170
+msgid "20"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:174
+msgid "21"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:178
+msgid "22"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:182
+msgid "23"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:186
+msgid "24"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:190
+msgid "25"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:194
+msgid "26"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:198
+msgid "27"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:202
+msgid "28"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:206
+msgid "29"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:210
+msgid "30"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:214
+msgid "31"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:222
+msgid "Months (*)"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:278
+msgid "Years (*)"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:283
+msgid "2025"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:287
+msgid "2026"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:291
+msgid "2027"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:300
+msgid "Tour starts"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:303
+msgid "Select tour start date"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:308
+msgid "Tour ends"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:311
+msgid "Select tour end date"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:335
+msgid "Maximum Capacity"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:361
+msgid "Add Start Time"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:369
+msgid "Booking status"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:383
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:6
+#: inc/Admin/TF_Options/options/tf-settings.php:1577
+#: inc/Admin/TF_Options/options/tf-settings.php:1647
+#: inc/App/Templates/Components/Shared/Single/Rooms.php:45
+#: inc/App/Templates/Components/Shared/Single/Rooms.php:563
+#: inc/App/Templates/Components/Shared/Single/Rooms.php:649
+#: inc/App/Templates/Components/Shared/Single/Rooms.php:825
+#: inc/App/Templates/Components/Shared/Single/Rooms.php:904
+#: inc/App/Templates/Components/Tour/Single/Tour_Information.php:182
+#: inc/App/Templates/Components/Tour/Single/Tour_Price.php:102
+#: inc/Classes/Enqueue.php:401
+#: inc/Classes/Helper.php:1293
+#: inc/Classes/Helper.php:2114
+#: inc/Classes/Helper.php:2350
+#: inc/Classes/Hotel/Hotel.php:1716
+#: inc/Classes/Hotel/Hotel.php:2780
+#: inc/Classes/Hotel/Hotel.php:4565
+#: inc/Classes/Hotel/Hotel.php:4958
+#: inc/Classes/Tour/Tour.php:2096
+#: inc/Classes/Tour/Tour.php:2129
+#: inc/Classes/Tour/Tour.php:4870
+#: inc/Core/TF_Booking_Details.php:695
+#: inc/Core/TF_Booking_Details.php:1727
+#: templates/template-parts/hotel/hotel-availability-table-row.php:272
+#: templates/template-parts/hotel/hotel-availability-table-row.php:414
+#: templates/template-parts/hotel/hotel-availability-table-row.php:765
+#: templates/template-parts/hotel/hotel-availability-table-row.php:935
+#: templates/template-parts/hotel/hotel-availability-table-row.php:1290
+#: templates/template-parts/hotel/hotel-availability-table-row.php:1589
+#: templates/template-parts/hotel/hotel-availability-table-row.php:1751
+#: templates/template-parts/hotel/hotel-availability-table-row.php:2162
+#: templates/template-parts/hotel/hotel-availability-table-row.php:2293
+msgid "Adult"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:391
+msgid "Price for Adult"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:404
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:440
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:476
+msgid "Insert amount only."
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:419
+#: inc/Admin/TF_Options/options/tf-settings.php:1578
+#: inc/Admin/TF_Options/options/tf-settings.php:1648
+#: inc/App/Templates/Components/Tour/Single/Tour_Information.php:186
+#: inc/App/Templates/Components/Tour/Single/Tour_Price.php:105
+#: inc/Classes/Tour/Tour.php:2106
+#: inc/Classes/Tour/Tour.php:2138
+#: inc/Classes/Tour/Tour.php:4875
+#: inc/Core/TF_Booking_Details.php:715
+#: inc/Core/TF_Booking_Details.php:1740
+msgid "Child"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:427
+msgid "Price for Child"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:463
+msgid "Price for Infant"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:493
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:430
+msgid "Min"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:499
+msgid "Minimum Person (Required for Search)"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:505
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:436
+#: inc/Classes/Tour/Tour.php:2877
+#: inc/Classes/Tour/Tour.php:3029
+msgid "Max"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:511
+msgid "Maximum Person (Required for Search)"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:517
+msgid "Capacity"
+msgstr ""
+
+#: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:523
+msgid "Maximum Capacity of this tour"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:18
@@ -4397,7 +4815,7 @@ msgstr ""
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:140
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:837
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:110
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:502
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:507
 msgid "Booking Settings"
 msgstr ""
 
@@ -4486,7 +4904,7 @@ msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:222
 #: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:363
-#: inc/Admin/TF_Options/TF_Options.php:153
+#: inc/Admin/TF_Options/TF_Options.php:160
 msgid "Per Person"
 msgstr ""
 
@@ -4515,6 +4933,7 @@ msgstr ""
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:664
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:305
 #: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:459
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:485
 msgid "Fixed"
 msgstr ""
 
@@ -4536,28 +4955,28 @@ msgstr ""
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:251
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:845
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:116
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:517
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:522
 msgid "Booking Type"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:253
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:848
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:118
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:520
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:525
 msgid "Default Booking (WooCommerce)"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:261
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:823
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:259
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:535
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:540
 msgid "Cancellation Condition"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:262
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:824
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:260
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:536
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:541
 msgid "Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds."
 msgstr ""
 
@@ -4569,135 +4988,140 @@ msgstr ""
 msgid "Availability"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:287
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:279
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:374
+msgid "Enable Availability by Date"
+msgstr ""
+
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:300
 msgid "Create & Manage Your Apartment Rooms"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:288
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:301
 msgid "In this section, you are provided with the tools to create and manage your apartment room offerings."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:294
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:411
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:448
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:499
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:547
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:585
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:307
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:424
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:461
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:512
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:560
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:598
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:912
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:415
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:567
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:411
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:563
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:194
 #: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:295
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:684
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:824
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:689
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:829
 msgid "Title of the Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:295
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:308
 msgid "This text will appear as the heading of the Rooms section on the frontend."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:296
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:309
 msgid "Where you'll sleep"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:302
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:315
 msgid "Create your apartment rooms "
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:308
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:321
 msgid "Room Title"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:313
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:326
 msgid "Room Subtitle"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:318
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:331
 msgid "Room Description"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:323
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:336
 msgid "Room Image Thumbnail "
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:328
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:341
 msgid "Room Gallery"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:329
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:342
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:99
 msgid "Upload all the images specific to this room."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:335
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:348
 msgid "Select the type of room you are offering."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:337
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:350
 msgid "Bedroom"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:338
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:351
 msgid "Common Room"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:339
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:352
 msgid "Kitchen"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:340
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:353
 msgid "Bathroom"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:347
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:360
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:165
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:1055
 #: inc/Classes/Apartment/Apartment.php:178
-#: inc/Classes/Hotel/Hotel.php:4807
-#: inc/Classes/Hotel/Hotel.php:5112
+#: inc/Classes/Hotel/Hotel.php:4766
+#: inc/Classes/Hotel/Hotel.php:5071
 #: templates/template-parts/hotel/hotel-availability-table-row.php:1979
 msgid "Room Footage"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:348
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:361
 msgid "Room footage (in sft)."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:354
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:367
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:117
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:1067
 #: inc/Classes/Apartment/Apartment.php:190
-#: inc/Classes/Hotel/Hotel.php:4819
-#: inc/Classes/Hotel/Hotel.php:5124
+#: inc/Classes/Hotel/Hotel.php:4778
+#: inc/Classes/Hotel/Hotel.php:5083
 #: templates/template-parts/hotel/hotel-availability-table-row.php:1991
 msgid "Number of Beds"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:355
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:368
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:118
 msgid "Number of beds available in the room."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:364
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:377
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:1137
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:1201
 #: inc/Classes/Apartment/Apartment.php:202
 msgid "Number of Adults"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:365
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:378
 msgid "Max number of adults allowed in the room."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:374
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:387
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:290
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:352
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:1154
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:1218
 #: inc/Classes/Apartment/Apartment.php:214
-#: inc/Classes/Hotel/Hotel.php:4885
-#: inc/Classes/Hotel/Hotel.php:5157
+#: inc/Classes/Hotel/Hotel.php:4844
+#: inc/Classes/Hotel/Hotel.php:5116
 #: templates/template-parts/hotel/hotel-availability-table-row.php:289
 #: templates/template-parts/hotel/hotel-availability-table-row.php:431
 #: templates/template-parts/hotel/hotel-availability-table-row.php:2179
@@ -4705,21 +5129,21 @@ msgstr ""
 msgid "Number of Children"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:375
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:388
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:141
 msgid "Max number of children allowed in the room."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:384
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:397
 #: inc/Classes/Apartment/Apartment.php:226
 msgid "Number of Infants"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:385
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:398
 msgid "Max number of infants allowed in the room."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:398
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:411
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:156
 #: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:142
 #: inc/Admin/TF_Options/options/tf-settings.php:421
@@ -4727,103 +5151,103 @@ msgstr ""
 msgid "Information"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:404
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:417
 msgid "Information Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:405
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:418
 msgid "Ensure to furnish customers with all the essential information they need to fully understand your apartment offer."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:412
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:425
 msgid "This text will appear as the heading of the Highlights section on the frontend."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:413
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:426
 msgid "Discover Our Top Features"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:419
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:432
 msgid "Add Highlights"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:435
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:448
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:405
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:532
 msgid "Icon"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:443
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:456
 #: inc/Admin/TF_Options/options/tf-settings.php:654
 #: inc/Admin/TF_Options/options/tf-settings.php:925
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:1075
-#: inc/Classes/Hotel/Hotel.php:4759
-#: inc/Classes/Hotel/Hotel.php:4827
-#: inc/Classes/Hotel/Hotel.php:5168
+#: inc/Classes/Hotel/Hotel.php:4718
+#: inc/Classes/Hotel/Hotel.php:4786
+#: inc/Classes/Hotel/Hotel.php:5127
 #: templates/template-parts/hotel/hotel-availability-table-row.php:1998
 msgid "Amenities"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:449
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:462
 msgid "This text will appear as the heading of the Amenities section on the frontend."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:450
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:463
 #: inc/App/Templates/Components/Shared/Single/Amenities.php:181
 msgid "What this place offers"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:456
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:469
 msgid "Add Amenities"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:461
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:474
 #: inc/Classes/Apartment/Apartment_CPT.php:43
 #: inc/Classes/Hotel/Hotel_CPT.php:46
 #: inc/Classes/Tour/Tour_CPT.php:67
 msgid "Feature"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:462
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:475
 msgid "Select feature"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:463
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:476
 msgid "Add new features from "
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:463
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:476
 #: inc/App/Widgets/TF_Widgets/Apartment_Features_Filter.php:112
 #: inc/Classes/Apartment/Apartment.php:1316
 msgid "Apartment Features"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:474
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:487
 #: inc/Classes/Car_Rental/Car_Rental_CPT.php:63
 #: inc/Classes/Car_Rental/Car_Rental_CPT.php:64
 msgid "Category"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:475
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:488
 msgid "Select category"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:477
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:490
 #: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:264
 msgid "Add new category from "
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:477
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:490
 #: inc/Admin/TF_Options/options/tf-settings.php:1793
 msgid "Amenities Categories"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:483
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:496
 msgid "Mark as favourite"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:494
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:501
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:507
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:514
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:189
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:196
 #: inc/Admin/TF_Options/options/tf-settings.php:649
@@ -4832,83 +5256,83 @@ msgstr ""
 msgid "House Rules"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:500
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:513
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:195
 msgid "This text will appear as the heading of the House Rules section on the frontend."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:507
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:520
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:202
 msgid "Add House Rules"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:523
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:536
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:218
 msgid "Allowed?"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:534
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:547
 msgid "FAQ and Terms"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:540
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:553
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:857
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:863
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:402
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:408
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:677
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:398
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:404
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:682
 msgid "FAQ Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:541
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:554
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:864
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:409
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:678
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:405
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:683
 msgid "This section is designed to help users find answers to common questions."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:548
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:416
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:685
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:561
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:412
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:690
 msgid "This text will appear as the heading of the FAQ section on the frontend."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:549
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:562
 msgid "Frequently Asked Questions"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:554
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:567
 msgid "Section Description"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:559
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:428
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:693
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:572
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:424
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:698
 msgid "Add New FAQ"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:560
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:422
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:691
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:573
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:418
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:696
 msgid "Add Your Questions"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:561
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:574
 msgid "Click the button below to add Frequently Asked Questions (FAQs) for your apartment. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:567
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:435
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:699
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:580
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:431
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:704
 msgid "Single FAQ Title"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:572
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:585
 msgid "Single FAQ Description "
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:579
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:587
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:592
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:600
 #: inc/Admin/TF_Options/options/tf-settings.php:234
 #: inc/Admin/TF_Options/options/tf-settings.php:290
 #: inc/Admin/TF_Options/options/tf-settings.php:451
@@ -4920,37 +5344,37 @@ msgstr ""
 msgid "Terms & Conditions"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:580
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:593
 msgid "Include your set of regulations and guidelines that guests must agree to in order to use the service provided in your apartment."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:586
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:568
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:825
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:599
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:564
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:830
 msgid "This text will appear as the heading of the T&C section on the frontend."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:592
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:605
 msgid "Apartment Terms & Conditions"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:593
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:606
 msgid "Enter your apartment's terms and conditions in the text editor provided below."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:606
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:619
 msgid "Apartment Enquiry Form"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:612
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:625
 msgid "Enable Apartment Enquiry Form Option"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:620
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:633
 msgid "Apartment Enquiry icon"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:621
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:634
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:406
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:454
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:491
@@ -4958,81 +5382,81 @@ msgstr ""
 #: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:219
 #: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:227
 #: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:235
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:571
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:592
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:733
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:576
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:597
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:738
 msgid "Choose icon"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:628
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:641
 msgid "Enquiry Title "
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:629
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:642
 msgid "Have a question in mind"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:635
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:648
 msgid "Enquiry Description "
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:636
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:649
 msgid "Looking for more info? Send a question to the property to find out more."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:642
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:655
 msgid "Enquiry Button Text "
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:643
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:656
 #: inc/App/Templates/Components/Apartment/Single/Host_Info.php:66
 msgid "Contact Host"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:651
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:663
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:504
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:517
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:763
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:775
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:664
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:676
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:500
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:513
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:768
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:780
 msgid "Promotional Tags"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:657
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:670
 msgid "Apartment tags"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:664
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:677
 msgid "Add some keywords that highlight your apartment's Unique Selling Point (USP). This tag will be displayed on both the Archive Page and the Search Results Page."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:665
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:522
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:777
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:678
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:518
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:782
 msgid "Add / Insert New Tag"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:671
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:529
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:784
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:684
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:525
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:789
 msgid "Tag Title"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:678
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:535
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:791
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:691
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:531
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:796
 msgid "Tag Colors"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:679
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:536
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:792
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:692
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:532
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:797
 msgid "Colors of Tag Background and Font"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:683
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:540
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:796
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:696
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:536
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:801
 #: inc/Admin/TF_Options/options/tf-settings.php:1149
 #: inc/Admin/TF_Options/options/tf-settings.php:1226
 #: inc/Admin/TF_Options/options/tf-settings.php:1303
@@ -5041,27 +5465,27 @@ msgstr ""
 msgid "Background"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:684
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:541
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:797
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:697
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:537
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:802
 msgid "Font"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:703
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:716
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:947
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:589
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:846
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:585
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:851
 msgid "Other Settings"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:704
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:717
 msgid "These are some additional settings specific to this Apartment. Note that some of these settings may override the global settings."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:710
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:604
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:415
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:853
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:723
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:600
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:429
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:858
 #: inc/Admin/TF_Options/options/tf-settings.php:1472
 #: inc/Admin/TF_Options/options/tf-settings.php:1612
 #: inc/Admin/TF_Options/options/tf-settings.php:1724
@@ -5069,10 +5493,10 @@ msgstr ""
 msgid "Disable Review Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:718
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:731
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:961
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:613
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:861
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:609
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:866
 #: inc/Admin/TF_Options/options/tf-settings.php:1479
 #: inc/Admin/TF_Options/options/tf-settings.php:1621
 #: inc/Admin/TF_Options/options/tf-settings.php:1822
@@ -5080,35 +5504,35 @@ msgstr ""
 msgid "Disable Share Option"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:726
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:739
 #: inc/Admin/TF_Options/options/tf-settings.php:1831
 msgid "Disable Related Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:735
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:631
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:424
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:894
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:748
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:627
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:438
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:899
 msgid "Titles / Heading of Different Sections"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:740
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:753
 msgid "Description Section Title"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:741
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:754
 msgid "About this place"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:747
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:760
 msgid "Reviews Section Title"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:754
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:767
 msgid "Related Apartment Section Title"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:755
+#: inc/Admin/TF_Options/metaboxes/tf-apartment-metabox.php:768
 #: inc/App/Templates/Components/Shared/Single/Related_Post.php:265
 msgid "You may also like"
 msgstr ""
@@ -5154,7 +5578,7 @@ msgstr ""
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:561
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:735
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:870
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:376
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:372
 msgid "Section Title"
 msgstr ""
 
@@ -5413,7 +5837,7 @@ msgid "Feel free to add as many as needed. Additionally, you can duplicate or re
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:413
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:548
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:553
 msgid "Include & Exclude Section"
 msgstr ""
 
@@ -5438,7 +5862,7 @@ msgid "Include"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:435
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:555
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:560
 msgid "Items Included"
 msgstr ""
 
@@ -5447,19 +5871,19 @@ msgid "Add all the items/features included in this package."
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:437
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:557
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:562
 msgid "Add New Include"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:446
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:480
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:563
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:584
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:568
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:589
 msgid "Insert your item"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:453
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:570
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:575
 msgid "Icon for Included Item"
 msgstr ""
 
@@ -5472,7 +5896,7 @@ msgid "Exclude"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:472
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:576
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:581
 msgid "Items Excluded"
 msgstr ""
 
@@ -5481,12 +5905,12 @@ msgid "List all the items/features excluded in this package."
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:474
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:578
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:583
 msgid "Add New Exclude"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:490
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:591
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:596
 msgid "Icon for Excluded item"
 msgstr ""
 
@@ -5714,7 +6138,7 @@ msgid "This section offer the options to customize the booking process for your 
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:846
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:518
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:523
 msgid "Choose the type of booking you would like to implement for this tour."
 msgstr ""
 
@@ -5739,15 +6163,15 @@ msgid "Feel free to add as many as needed. Additionally, you can duplicate or re
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:899
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:554
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:811
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:550
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:816
 #: inc/Admin/TF_Options/options/tf-settings.php:940
 msgid "Policy"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:905
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:560
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:817
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:556
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:822
 msgid "Terms & Conditions Section"
 msgstr ""
 
@@ -5760,7 +6184,7 @@ msgid "This will be the heading of the Terms & Conditions section."
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:914
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:826
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:831
 #: inc/App/Templates/Components/Shared/Single/Terms_And_Conditions.php:32
 msgid "Tour Terms & Conditions"
 msgstr ""
@@ -5806,8 +6230,8 @@ msgid "Review Scores"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-carrental-metabox.php:969
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:622
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:869
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:618
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:874
 msgid "Disable Wishlist Option"
 msgstr ""
 
@@ -6037,195 +6461,151 @@ msgstr ""
 msgid "This section includes additional services which your %s may offer. You may offer these services for free, or opt to charge your guests for them."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:335
-msgid "If anything is not clear, please"
-msgstr ""
-
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:335
-msgid "Check our Documentation"
-msgstr ""
-
 #. translators: %s is the hotel name.
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:345
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:341
 #, php-format
 msgid "%s Extras"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:353
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:349
 msgid "Offer Hotel Extras"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:354
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:350
 msgid "If you wish to provide additional services that are not included in your current hotel package, you can list them here."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:368
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:364
 msgid "Create & Manage Your Hotel Rooms"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:369
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:365
 msgid "In this section, you are provided with the tools to create and manage your hotel room offerings. "
 msgstr ""
 
 #. translators: %s is the lowercased hotel name.
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:383
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:379
 #, php-format
 msgid "Manage your %s rooms"
 msgstr ""
 
 #. translators: %1$s is the lowercased hotel name and %2$s is return hotel name.
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:385
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:381
 #, php-format
 msgid "Select an existing %1$s room, if available. Note: Rooms already assigned to a %2$s cannot be selected."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:386
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:382
 #: inc/Classes/Hotel/Hotel.php:394
 #: templates/template-parts/hotel/hotel-availability-table-row.php:344
 #: templates/template-parts/hotel/hotel-availability-table-row.php:485
 msgid "Select Rooms"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:395
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:391
 msgid "Add New Room"
 msgstr ""
 
 #. translators: %s is the lowercased hotel name.
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:424
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:420
 #, php-format
 msgid "Click the button below to add Frequently Asked Questions (FAQs) for your %s. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:441
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:704
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:437
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:709
 msgid "Single FAQ Description"
 msgstr ""
 
 #. translators: %s is the hotel name
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:457
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:453
 #, php-format
 msgid "%s Enquiry Form"
 msgstr ""
 
 #. translators: %s is the hotel name
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:464
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:460
 #, php-format
 msgid "Enable %s Enquiry Form Option"
 msgstr ""
 
 #. translators: %s is the hotel name
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:473
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:469
 #, php-format
 msgid "%s Enquiry icon"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:474
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:470
 msgid "Choose an Icon"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:481
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:740
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:477
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:745
 msgid "Enquiry Title"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:488
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:747
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:484
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:752
 msgid "Enquiry Description"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:495
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:754
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:491
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:759
 msgid "Enquiry Button Text"
 msgstr ""
 
 #. translators: %s is the hotel name
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:511
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:507
 #, php-format
 msgid "%s tags"
 msgstr ""
 
 #. translators: %s is the hotel name
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:519
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:515
 #, php-format
 msgid "Add some keywords that highlight your %s's Unique Selling Point (USP). This tag will be displayed on both the Archive Page and the Search Results Page."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:561
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:557
 msgid "Include your set of regulations and guidelines that guests must agree to in order to use the service provided in your hotel. "
 msgstr ""
 
 #. translators: %s is the hotel name
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:575
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:571
 #, php-format
 msgid "%s Terms & Conditions"
 msgstr ""
 
 #. translators: %s is the hotel name
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:577
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:573
 #, php-format
 msgid "Enter your %s's terms and conditions in the text editor provided below."
 msgstr ""
 
 #. translators: %s is the hotel name
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:591
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:587
 #, php-format
 msgid "These are some additional settings specific to this %s. Note that some of these settings may override the global settings."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:637
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:430
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:633
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:444
 msgid "Title for the Popular Features Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:638
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:431
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:634
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:445
 msgid "This text will appear as the heading of the Popular Features section on the frontend."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:645
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:438
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:641
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:452
 msgid "Title for the Reviews Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:646
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:439
+#: inc/Admin/TF_Options/metaboxes/tf-hotel-metabox.php:642
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:453
 msgid "This text will appear as the heading of the Reviews section on the frontend."
-msgstr ""
-
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:6
-#: inc/Admin/TF_Options/options/tf-settings.php:1577
-#: inc/Admin/TF_Options/options/tf-settings.php:1647
-#: inc/Admin/TF_Options/TF_Options.php:1773
-#: inc/App/Templates/Components/Shared/Single/Rooms.php:45
-#: inc/App/Templates/Components/Shared/Single/Rooms.php:563
-#: inc/App/Templates/Components/Shared/Single/Rooms.php:649
-#: inc/App/Templates/Components/Shared/Single/Rooms.php:825
-#: inc/App/Templates/Components/Shared/Single/Rooms.php:904
-#: inc/App/Templates/Components/Tour/Single/Tour_Information.php:182
-#: inc/App/Templates/Components/Tour/Single/Tour_Price.php:102
-#: inc/Classes/Enqueue.php:401
-#: inc/Classes/Helper.php:1293
-#: inc/Classes/Helper.php:2114
-#: inc/Classes/Helper.php:2350
-#: inc/Classes/Hotel/Hotel.php:1716
-#: inc/Classes/Hotel/Hotel.php:2780
-#: inc/Classes/Hotel/Hotel.php:4606
-#: inc/Classes/Hotel/Hotel.php:4999
-#: inc/Classes/Tour/Tour.php:2111
-#: inc/Classes/Tour/Tour.php:2144
-#: inc/Classes/Tour/Tour.php:4942
-#: inc/Core/TF_Booking_Details.php:695
-#: inc/Core/TF_Booking_Details.php:1727
-#: templates/template-parts/hotel/hotel-availability-table-row.php:272
-#: templates/template-parts/hotel/hotel-availability-table-row.php:414
-#: templates/template-parts/hotel/hotel-availability-table-row.php:765
-#: templates/template-parts/hotel/hotel-availability-table-row.php:935
-#: templates/template-parts/hotel/hotel-availability-table-row.php:1290
-#: templates/template-parts/hotel/hotel-availability-table-row.php:1589
-#: templates/template-parts/hotel/hotel-availability-table-row.php:1751
-#: templates/template-parts/hotel/hotel-availability-table-row.php:2162
-#: templates/template-parts/hotel/hotel-availability-table-row.php:2293
-msgid "Adult"
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:9
@@ -6272,10 +6652,6 @@ msgstr ""
 msgid "Order ID"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:89
-msgid "Status"
-msgstr ""
-
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:90
 msgid "Enable/disable this Room"
 msgstr ""
@@ -6297,7 +6673,7 @@ msgstr ""
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:111
 #: inc/Classes/Apartment/Apartment.php:1994
 #: inc/Classes/Apartment/Apartment.php:2001
-#: inc/Classes/Tour/Tour.php:2015
+#: inc/Classes/Tour/Tour.php:2000
 #: inc/Core/Enquiry.php:337
 #: inc/functions/functions-car.php:291
 msgid "Details"
@@ -6372,8 +6748,6 @@ msgid "Indicate the maximum number of nights a guest can book this room for."
 msgstr ""
 
 #: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:266
-#: inc/Admin/TF_Options/TF_Options.php:1020
-#: inc/Admin/TF_Options/TF_Options.php:1022
 msgid "Room Price"
 msgstr ""
 
@@ -6418,12 +6792,12 @@ msgstr ""
 msgid "Decrease the inventory count for each room booked to reflect current availability accurately."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:375
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:389
 msgid "Other"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:390
-#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:396
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:404
+#: inc/Admin/TF_Options/metaboxes/tf-room-metabox.php:410
 msgid "iCal Sync"
 msgstr ""
 
@@ -6698,16 +7072,6 @@ msgstr ""
 msgid "Number of Persons"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:430
-msgid "Min"
-msgstr ""
-
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:436
-#: inc/Classes/Tour/Tour.php:2949
-#: inc/Classes/Tour/Tour.php:3101
-msgid "Max"
-msgstr ""
-
 #: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:437
 msgid "Indicate the minimum and maximum number of persons this package can be booked for each booking."
 msgstr ""
@@ -6744,19 +7108,19 @@ msgstr ""
 msgid "Continuous"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:503
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:508
 msgid "This section offers the option to customize the booking process for your tours."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:509
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:514
 msgid "Do you want to disable same-day booking?"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:510
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:515
 msgid "If enabled,  the tour cannot be booked on the same day."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:527
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:532
 #: inc/Admin/TF_Options/options/tf-settings.php:1585
 #: inc/Admin/TF_Options/options/tf-settings.php:1674
 #: inc/Admin/TF_Options/options/tf-settings.php:1839
@@ -6764,11 +7128,11 @@ msgstr ""
 msgid "Change Booking Form Button Text"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:528
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:533
 msgid "With this option, you can change the text of the booking form button for this tour"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:529
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:534
 #: inc/Admin/TF_Options/options/tf-settings.php:1587
 #: inc/Admin/TF_Options/options/tf-settings.php:1734
 #: inc/App/Templates/Components/Room/Single/Room_Options.php:74
@@ -6780,111 +7144,111 @@ msgstr ""
 #: inc/Classes/Room/Room.php:338
 #: inc/Classes/Room/Room.php:1136
 #: inc/Classes/Tour/Tour.php:993
-#: inc/Classes/Tour/Tour.php:1037
-#: inc/Classes/Tour/Tour.php:1038
+#: inc/Classes/Tour/Tour.php:1028
+#: inc/Classes/Tour/Tour.php:1029
 #: inc/Core/TF_Backend_Booking.php:198
 #: templates/tour/single-tour.php:117
 msgid "Book Now"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:542
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:547
 #: inc/Admin/TF_Options/options/tf-settings.php:488
 msgid "Include & Exclude"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:549
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:554
 msgid "Each tour includes certain items, while others are not part of the package. Clearly define these inclusions and exclusions to prevent any misunderstandings during your tour."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:556
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:561
 msgid "Add all the items/features included in this tour package."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:577
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:582
 msgid "List all the items/features excluded in this tour package."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:597
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:602
 msgid "Background Image"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:598
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:603
 msgid "This will be added as the background image of this section."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:606
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:611
 msgid "Itenerary"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:612
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:617
 msgid "Tour Itinerary Builder"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:613
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:618
 msgid "Create a detailed schedule for a tour. This builder allows for the organization of various components of a tour into a coherent and structured timeline."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:619
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:624
 msgid "Title of the section"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:620
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:625
 msgid "This text will appear as the heading of the Tour Itinerary section on the frontend."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:621
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:626
 msgid "Travel Itinerary"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:626
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:631
 msgid "Add New Itinerary"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:627
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:632
 msgid "Create your Travel Itinerary"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:633
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:638
 msgid "Time or Day"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:634
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:639
 msgid "e.g. Day 1 or 9:00 am"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:640
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:645
 msgid "Itinerary Title"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:641
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:646
 msgid "Input the title here"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:647
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:652
 msgid "Upload Image for the Description"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:650
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:655
 msgid "Add Image"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:651
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:656
 msgid "Remove Image"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:656
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:661
 msgid "Itinerary Description"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:663
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:668
 msgid "Itinerary Downloader Settings"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:664
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:669
 msgid "These are some additional settings specific to the Itinerary PDF downloader. Note that some of these settings may override the global settings. "
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:671
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:676
 #: inc/Admin/TF_Options/options/tf-settings.php:224
 #: inc/Admin/TF_Options/options/tf-settings.php:285
 #: inc/Admin/TF_Options/options/tf-settings.php:446
@@ -6893,92 +7257,92 @@ msgstr ""
 msgid "FAQ"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:692
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:697
 msgid "Click the button below to add Frequently Asked Questions (FAQs) for your tour. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:718
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:723
 msgid "Tour Enquiry Form"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:724
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:729
 msgid "Enable Tour Enquiry"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:732
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:737
 msgid "Tour Enquiry icon"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:769
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:774
 msgid "Tour tags"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:776
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:781
 msgid "Add some keywords that highlight your tour's Unique Selling Point (USP). This tag will be displayed on both the Archive Page and the Search Results Page."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:818
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:823
 msgid "Include your set of regulations and guidelines that customers must agree to in order to use the service provided in your tour package. "
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:831
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:836
 msgid "Terms & Conditions of this tour"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:832
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:837
 msgid "Enter your tour's terms and conditions in the text editor provided below."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:847
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:852
 msgid "These are some additional settings specific to this Tour Package. Note that some of these settings may override the global settings. "
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:877
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:882
 #: inc/Admin/TF_Options/options/tf-settings.php:1487
 msgid "Disable Related Tour Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:885
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:890
 msgid "Adult Required for Child Booking"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:886
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:891
 msgid "By enabling this option, an adult will be required when booking a child. By default, an adult is required for infant bookings."
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:900
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:905
 msgid "Title of the Booking Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:901
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:906
 msgid "Book This Tour"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:906
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:911
 msgid "Title of the Description Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:913
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:918
 msgid "Title of the Features Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:914
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:919
 msgid "Popular Features"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:920
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:925
 msgid "Title of the Map Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:921
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:926
 msgid "Maps"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:926
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:931
 msgid "Title of the Reviews Section"
 msgstr ""
 
-#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:927
+#: inc/Admin/TF_Options/metaboxes/tf-tour-metabox.php:932
 msgid "Average Guest Reviews"
 msgstr ""
 
@@ -7050,32 +7414,8 @@ msgstr ""
 msgid "Select a Day, that will show in the DatePickr of Frontend"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:122
-msgid "Sunday"
-msgstr ""
-
-#: inc/Admin/TF_Options/options/tf-settings.php:123
-msgid "Monday"
-msgstr ""
-
-#: inc/Admin/TF_Options/options/tf-settings.php:124
-msgid "Tuesday"
-msgstr ""
-
-#: inc/Admin/TF_Options/options/tf-settings.php:125
-msgid "Wednesday"
-msgstr ""
-
 #: inc/Admin/TF_Options/options/tf-settings.php:126
 msgid "Thursday"
-msgstr ""
-
-#: inc/Admin/TF_Options/options/tf-settings.php:127
-msgid "Friday"
-msgstr ""
-
-#: inc/Admin/TF_Options/options/tf-settings.php:128
-msgid "Saturday"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:135
@@ -7618,19 +7958,6 @@ msgstr ""
 msgid "Show Minimum Price"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:1578
-#: inc/Admin/TF_Options/options/tf-settings.php:1648
-#: inc/Admin/TF_Options/TF_Options.php:1809
-#: inc/App/Templates/Components/Tour/Single/Tour_Information.php:186
-#: inc/App/Templates/Components/Tour/Single/Tour_Price.php:105
-#: inc/Classes/Tour/Tour.php:2121
-#: inc/Classes/Tour/Tour.php:2153
-#: inc/Classes/Tour/Tour.php:4947
-#: inc/Core/TF_Booking_Details.php:715
-#: inc/Core/TF_Booking_Details.php:1740
-msgid "Child"
-msgstr ""
-
 #: inc/Admin/TF_Options/options/tf-settings.php:1586
 msgid "With this option, you can change the text of the booking form button on the single tour pages."
 msgstr ""
@@ -8155,14 +8482,6 @@ msgstr ""
 msgid "Select the option to calculate reviews on a scale of either 5 or 10."
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:2326
-msgid "5"
-msgstr ""
-
-#: inc/Admin/TF_Options/options/tf-settings.php:2327
-msgid "10"
-msgstr ""
-
 #: inc/Admin/TF_Options/options/tf-settings.php:2337
 msgid "Review Fields for Hotels"
 msgstr ""
@@ -8569,21 +8888,21 @@ msgstr ""
 msgid "Upload destination photo"
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:81
+#: inc/Admin/TF_Options/TF_Options.php:79
 msgid "Airport Pickup Service"
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:82
+#: inc/Admin/TF_Options/TF_Options.php:80
 msgid "Activate this feature to provide airport pickup services as an added convenience for your guests."
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:94
-#: inc/Admin/TF_Options/TF_Options.php:103
+#: inc/Admin/TF_Options/TF_Options.php:95
+#: inc/Admin/TF_Options/TF_Options.php:104
 msgid "Pickup"
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:95
-#: inc/Admin/TF_Options/TF_Options.php:110
+#: inc/Admin/TF_Options/TF_Options.php:96
+#: inc/Admin/TF_Options/TF_Options.php:111
 #: inc/App/Templates/Components/Shared/Single/Booking_Form.php:453
 #: inc/Classes/Car_Rental/Car_Rental.php:115
 #: inc/Classes/Car_Rental/Car_Rental.php:326
@@ -8592,244 +8911,129 @@ msgstr ""
 msgid "Drop-off"
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:96
-#: inc/Admin/TF_Options/TF_Options.php:117
+#: inc/Admin/TF_Options/TF_Options.php:97
+#: inc/Admin/TF_Options/TF_Options.php:118
 msgid "Pickup & Drop-off"
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:104
+#: inc/Admin/TF_Options/TF_Options.php:105
 msgid "Pickup Pricing Type"
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:111
+#: inc/Admin/TF_Options/TF_Options.php:112
 msgid "Drop-off Pricing Type"
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:118
+#: inc/Admin/TF_Options/TF_Options.php:119
 msgid "Pickup & Drop-off Pricing Type"
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:154
-#: inc/Admin/TF_Options/TF_Options.php:191
+#: inc/Admin/TF_Options/TF_Options.php:161
+#: inc/Admin/TF_Options/TF_Options.php:198
 #: inc/Classes/Helper.php:452
-#: inc/Classes/Hotel/Hotel.php:3676
-#: inc/Classes/Hotel/Hotel.php:3725
-#: inc/Classes/Hotel/Hotel.php:3774
+#: inc/Classes/Hotel/Hotel.php:3635
+#: inc/Classes/Hotel/Hotel.php:3684
+#: inc/Classes/Hotel/Hotel.php:3733
 msgid "Fixed Price"
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:155
+#: inc/Admin/TF_Options/TF_Options.php:162
 msgid "Free / Complimentary"
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:165
-#: inc/Admin/TF_Options/TF_Options.php:1026
-#: inc/Admin/TF_Options/TF_Options.php:1028
+#: inc/Admin/TF_Options/TF_Options.php:172
 msgid "Adult Price"
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:166
+#: inc/Admin/TF_Options/TF_Options.php:173
 msgid "Price per adult. Insert number only (No currency sign needed)."
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:178
+#: inc/Admin/TF_Options/TF_Options.php:185
 msgid "Children Price"
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:179
+#: inc/Admin/TF_Options/TF_Options.php:186
 msgid "Price per child. Insert number only (No currency sign needed)."
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:192
+#: inc/Admin/TF_Options/TF_Options.php:199
 msgid "Insert number only (No currency sign needed)."
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:678
+#: inc/Admin/TF_Options/TF_Options.php:362
+msgid "You do not have permission to edit this availability."
+msgstr ""
+
+#: inc/Admin/TF_Options/TF_Options.php:587
 msgid "Field not found!"
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:840
-#: inc/Admin/TF_Options/TF_Options.php:1123
-msgid "Publish the Room First!"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:847
-#: inc/Admin/TF_Options/TF_Options.php:1179
-#: inc/Admin/TF_Options/TF_Options.php:1367
+#: inc/Admin/TF_Options/TF_Options.php:733
+#: inc/Admin/TF_Options/TF_Options.php:968
+#: inc/Admin/TF_Options/TF_Options.php:1244
 msgid "Please select check in and check out date."
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:856
-#: inc/Admin/TF_Options/TF_Options.php:1197
-#: inc/Admin/TF_Options/TF_Options.php:1408
-msgid "Check in date must be less than check out date."
+#: inc/Admin/TF_Options/TF_Options.php:745
+#: inc/Admin/TF_Options/TF_Options.php:980
+#: inc/Admin/TF_Options/TF_Options.php:1255
+msgid "Check in date must be less than or equal to check out date."
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:928
-#: inc/Admin/TF_Options/TF_Options.php:1236
-#: inc/Admin/TF_Options/TF_Options.php:1534
+#: inc/Admin/TF_Options/TF_Options.php:798
+#: inc/Admin/TF_Options/TF_Options.php:1031
+#: inc/Admin/TF_Options/TF_Options.php:1273
 msgid "Availability updated successfully."
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:966
-#: inc/Admin/TF_Options/TF_Options.php:975
-#: inc/Admin/TF_Options/TF_Options.php:1272
-#: inc/Admin/TF_Options/TF_Options.php:1588
-#: inc/Classes/REST_API/TF_Apartment_Rest_API.php:185
-#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:206
-#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:215
-#: inc/Classes/REST_API/TF_Tour_Rest_API.php:120
-#: inc/Classes/REST_API/TF_Tour_Rest_API.php:234
+#: inc/Admin/TF_Options/TF_Options.php:833
+#: inc/Admin/TF_Options/TF_Options.php:1064
+#: inc/Classes/REST_API/TF_Apartment_Rest_API.php:184
+#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:205
+#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:214
+#: inc/Classes/REST_API/TF_Tour_Rest_API.php:119
+#: inc/Classes/REST_API/TF_Tour_Rest_API.php:233
 msgid "Price: "
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:968
-#: inc/Admin/TF_Options/TF_Options.php:978
-#: inc/Admin/TF_Options/TF_Options.php:1272
-#: inc/Admin/TF_Options/TF_Options.php:1590
-#: inc/Admin/TF_Options/TF_Options.php:1674
-#: inc/Classes/REST_API/TF_Apartment_Rest_API.php:185
-#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:208
-#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:218
-#: inc/Classes/REST_API/TF_Tour_Rest_API.php:122
-#: inc/Classes/REST_API/TF_Tour_Rest_API.php:206
+#: inc/Admin/TF_Options/TF_Options.php:937
+#: inc/Admin/TF_Options/TF_Options.php:1103
+#: inc/Admin/TF_Options/TF_Options.php:1371
+msgid "Availability reset successfully."
+msgstr ""
+
+#: inc/Admin/TF_Options/TF_Options.php:1219
+msgid "Please select valid months and years."
+msgstr ""
+
+#: inc/Admin/TF_Options/TF_Options.php:1314
+#: inc/Classes/REST_API/TF_Apartment_Rest_API.php:184
+#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:207
+#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:217
+#: inc/Classes/REST_API/TF_Tour_Rest_API.php:121
+#: inc/Classes/REST_API/TF_Tour_Rest_API.php:205
 msgid "Adult: "
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:968
-#: inc/Admin/TF_Options/TF_Options.php:979
-#: inc/Admin/TF_Options/TF_Options.php:1272
-#: inc/Admin/TF_Options/TF_Options.php:1590
-#: inc/Admin/TF_Options/TF_Options.php:1675
-#: inc/Classes/REST_API/TF_Apartment_Rest_API.php:185
-#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:208
-#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:219
-#: inc/Classes/REST_API/TF_Tour_Rest_API.php:122
-#: inc/Classes/REST_API/TF_Tour_Rest_API.php:207
+#: inc/Admin/TF_Options/TF_Options.php:1315
+#: inc/Classes/REST_API/TF_Apartment_Rest_API.php:184
+#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:207
+#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:218
+#: inc/Classes/REST_API/TF_Tour_Rest_API.php:121
+#: inc/Classes/REST_API/TF_Tour_Rest_API.php:206
 msgid "Child: "
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:974
-#: inc/Admin/TF_Options/TF_Options.php:977
-#: inc/Admin/TF_Options/TF_Options.php:1649
-#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:214
-#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:217
-#: inc/Classes/REST_API/TF_Tour_Rest_API.php:181
-#: inc/Classes/REST_API/TF_Tour_Rest_API.php:233
-msgid "Title: "
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1013
-msgid "Enable"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1014
-msgid "Disable"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1032
-#: inc/Admin/TF_Options/TF_Options.php:1034
-msgid "Child Price"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1132
-#: inc/Admin/TF_Options/TF_Options.php:1312
-#: inc/Admin/TF_Options/TF_Options.php:2197
-msgid "Availability Reset Successfully."
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1172
-#: inc/Admin/TF_Options/TF_Options.php:1303
-msgid "Publish the Apartment First!"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1272
-#: inc/Admin/TF_Options/TF_Options.php:1590
-#: inc/Admin/TF_Options/TF_Options.php:1676
-#: inc/Classes/REST_API/TF_Apartment_Rest_API.php:185
-#: inc/Classes/REST_API/TF_Tour_Rest_API.php:122
-#: inc/Classes/REST_API/TF_Tour_Rest_API.php:208
+#: inc/Admin/TF_Options/TF_Options.php:1316
+#: inc/Classes/REST_API/TF_Apartment_Rest_API.php:184
+#: inc/Classes/REST_API/TF_Tour_Rest_API.php:121
+#: inc/Classes/REST_API/TF_Tour_Rest_API.php:207
 msgid "Infant: "
 msgstr ""
 
-#: inc/Admin/TF_Options/TF_Options.php:1374
-msgid "Please select the months."
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1381
-msgid "Please select the years."
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1511
-#: inc/Admin/TF_Options/TF_Options.php:2189
-msgid "Publish the Tour First!"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1652
-#: inc/Classes/REST_API/TF_Tour_Rest_API.php:184
-msgid "Status: "
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1652
-#: inc/Admin/TF_Options/TF_Options.php:1695
-#: inc/Classes/REST_API/TF_Tour_Rest_API.php:184
-#: inc/Classes/REST_API/TF_Tour_Rest_API.php:226
-msgid "Unavailable"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1658
-#: inc/Classes/REST_API/TF_Tour_Rest_API.php:190
-msgid "Group Price: "
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1719
-#: inc/Classes/Tour/Tour.php:2022
-msgid "Packages"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1721
-msgid "You can add, customize any packages from here."
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1725
-msgid "Apply to packages"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1781
-msgid "Price for Adult"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1794
-#: inc/Admin/TF_Options/TF_Options.php:1830
-#: inc/Admin/TF_Options/TF_Options.php:1866
-#: inc/Admin/TF_Options/TF_Options.php:1902
-msgid "Insert amount only."
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1817
-msgid "Price for Child"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1853
-msgid "Price for Infant"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1881
-#: inc/App/Templates/Components/Tour/Single/Tour_Information.php:177
-#: inc/App/Templates/Components/Tour/Single/Tour_Price.php:97
-msgid "Group"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:1889
-msgid "Price for Group"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:2005
-msgid "Maximum Capacity"
-msgstr ""
-
-#: inc/Admin/TF_Options/TF_Options.php:2031
-msgid "Add Start Time"
+#: inc/Admin/TF_Options/TF_Options.php:1319
+msgid "Time: "
 msgstr ""
 
 #: inc/Admin/TF_Setup_Wizard.php:58
@@ -8862,11 +9066,11 @@ msgstr ""
 #: inc/Admin/TF_Setup_Wizard.php:825
 #: inc/Admin/TF_Setup_Wizard.php:1234
 #: inc/Classes/Apartment/Apartment.php:2173
-#: inc/Classes/Hotel/Hotel.php:3608
-#: inc/Classes/Hotel/Hotel.php:3625
-#: inc/Classes/Tour/Tour.php:2436
-#: inc/Classes/Tour/Tour.php:2452
-#: inc/Classes/Tour/Tour.php:2468
+#: inc/Classes/Hotel/Hotel.php:3567
+#: inc/Classes/Hotel/Hotel.php:3584
+#: inc/Classes/Tour/Tour.php:2364
+#: inc/Classes/Tour/Tour.php:2380
+#: inc/Classes/Tour/Tour.php:2396
 #: inc/Core/Enquiry.php:327
 #: inc/Core/TF_Booking_Details.php:543
 msgid "Back"
@@ -9123,12 +9327,12 @@ msgstr ""
 #: inc/Classes/Room/Pricing.php:1118
 #: inc/Classes/Room/Pricing.php:1145
 #: inc/Classes/Tour/Pricing.php:622
-#: inc/Classes/Tour/Tour.php:2817
-#: inc/Classes/Tour/Tour.php:2935
-#: inc/Classes/Tour/Tour.php:3012
-#: inc/Classes/Tour/Tour.php:3014
-#: inc/Classes/Tour/Tour.php:3153
-#: inc/Classes/Tour/Tour.php:3259
+#: inc/Classes/Tour/Tour.php:2745
+#: inc/Classes/Tour/Tour.php:2863
+#: inc/Classes/Tour/Tour.php:2940
+#: inc/Classes/Tour/Tour.php:2942
+#: inc/Classes/Tour/Tour.php:3081
+#: inc/Classes/Tour/Tour.php:3187
 #: inc/functions/woocommerce/wc-apartment.php:500
 #: templates/template-parts/review.php:108
 msgid "From "
@@ -9221,7 +9425,7 @@ msgstr ""
 #: inc/App/Templates/Components/Tour/Archive/Listings.php:240
 #: inc/App/Without_Payment/Hotel_Offline_Booking.php:638
 #: inc/Classes/REST_API/TF_User_Rest_API.php:232
-#: inc/Classes/Tour/Tour.php:5093
+#: inc/Classes/Tour/Tour.php:5021
 #: inc/Core/TF_Booking_Details.php:956
 #: inc/functions/functions-car.php:1149
 #: inc/functions/woocommerce/wc-apartment.php:560
@@ -9428,11 +9632,11 @@ msgstr ""
 #: inc/App/Widgets/TF_Widgets/Map_Filter.php:645
 #: inc/Classes/Apartment/Apartment.php:2426
 #: inc/Classes/Apartment/Apartment.php:2518
-#: inc/Classes/Hotel/Hotel.php:4329
-#: inc/Classes/Tour/Tour.php:2742
-#: inc/Classes/Tour/Tour.php:2923
-#: inc/Classes/Tour/Tour.php:2997
-#: inc/Classes/Tour/Tour.php:3053
+#: inc/Classes/Hotel/Hotel.php:4288
+#: inc/Classes/Tour/Tour.php:2670
+#: inc/Classes/Tour/Tour.php:2851
+#: inc/Classes/Tour/Tour.php:2925
+#: inc/Classes/Tour/Tour.php:2981
 #: inc/Traits/Action_Helper.php:1482
 #: inc/Traits/Action_Helper.php:1579
 #: inc/Traits/Action_Helper.php:1678
@@ -9687,9 +9891,9 @@ msgstr ""
 
 #: inc/App/Templates/Components/Room/Single/Room_Options.php:105
 #: inc/Classes/Apartment/Apartment.php:2475
-#: inc/Classes/Hotel/Hotel.php:4006
-#: inc/Classes/Hotel/Hotel.php:4231
-#: inc/Classes/Hotel/Hotel.php:4288
+#: inc/Classes/Hotel/Hotel.php:3965
+#: inc/Classes/Hotel/Hotel.php:4190
+#: inc/Classes/Hotel/Hotel.php:4247
 #: inc/Classes/Room/Room.php:459
 #: inc/Classes/Room/Room.php:573
 msgid " Off "
@@ -9720,20 +9924,20 @@ msgstr ""
 #: inc/Classes/Apartment/Apartment.php:2170
 #: inc/Classes/Apartment/Apartment.php:2174
 #: inc/Classes/Apartment/Apartment.php:2178
-#: inc/Classes/Hotel/Hotel.php:3587
-#: inc/Classes/Hotel/Hotel.php:3595
-#: inc/Classes/Hotel/Hotel.php:3598
-#: inc/Classes/Hotel/Hotel.php:3612
-#: inc/Classes/Hotel/Hotel.php:3614
-#: inc/Classes/Hotel/Hotel.php:3627
-#: inc/Classes/Tour/Tour.php:2416
-#: inc/Classes/Tour/Tour.php:2424
-#: inc/Classes/Tour/Tour.php:2427
-#: inc/Classes/Tour/Tour.php:2439
-#: inc/Classes/Tour/Tour.php:2442
-#: inc/Classes/Tour/Tour.php:2456
-#: inc/Classes/Tour/Tour.php:2458
-#: inc/Classes/Tour/Tour.php:2470
+#: inc/Classes/Hotel/Hotel.php:3546
+#: inc/Classes/Hotel/Hotel.php:3554
+#: inc/Classes/Hotel/Hotel.php:3557
+#: inc/Classes/Hotel/Hotel.php:3571
+#: inc/Classes/Hotel/Hotel.php:3573
+#: inc/Classes/Hotel/Hotel.php:3586
+#: inc/Classes/Tour/Tour.php:2344
+#: inc/Classes/Tour/Tour.php:2352
+#: inc/Classes/Tour/Tour.php:2355
+#: inc/Classes/Tour/Tour.php:2367
+#: inc/Classes/Tour/Tour.php:2370
+#: inc/Classes/Tour/Tour.php:2384
+#: inc/Classes/Tour/Tour.php:2386
+#: inc/Classes/Tour/Tour.php:2398
 #: inc/functions/functions-car.php:1054
 #: templates/template-parts/car/design-1.php:10
 #: templates/template-parts/hotel/hotel-availability-table-row.php:908
@@ -9825,7 +10029,7 @@ msgid "Additional information"
 msgstr ""
 
 #: inc/App/Templates/Components/Shared/Single/Booking_Form.php:691
-#: inc/Classes/Hotel/Hotel.php:3312
+#: inc/Classes/Hotel/Hotel.php:3311
 msgid "Booked Successfully"
 msgstr ""
 
@@ -10046,8 +10250,8 @@ msgstr ""
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:755
 #: inc/Classes/Apartment/Apartment.php:261
 #: inc/Classes/Apartment/Apartment.php:266
-#: inc/Classes/Hotel/Hotel.php:4930
-#: inc/Classes/Hotel/Hotel.php:5083
+#: inc/Classes/Hotel/Hotel.php:4889
+#: inc/Classes/Hotel/Hotel.php:5042
 #: templates/template-parts/hotel/hotel-availability-table-row.php:52
 #: templates/template-parts/hotel/hotel-availability-table-row.php:55
 #: templates/template-parts/hotel/hotel-availability-table-row.php:550
@@ -10069,9 +10273,9 @@ msgstr ""
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:1052
 #: inc/Classes/Apartment/Apartment.php:175
 #: inc/Classes/Apartment/Apartment.php:276
-#: inc/Classes/Hotel/Hotel.php:4804
-#: inc/Classes/Hotel/Hotel.php:4938
-#: inc/Classes/Hotel/Hotel.php:5109
+#: inc/Classes/Hotel/Hotel.php:4763
+#: inc/Classes/Hotel/Hotel.php:4897
+#: inc/Classes/Hotel/Hotel.php:5068
 #: templates/template-parts/hotel/hotel-availability-table-row.php:82
 #: templates/template-parts/hotel/hotel-availability-table-row.php:758
 #: templates/template-parts/hotel/hotel-availability-table-row.php:927
@@ -10117,8 +10321,8 @@ msgstr ""
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:350
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:1152
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:1216
-#: inc/Classes/Hotel/Hotel.php:4883
-#: inc/Classes/Hotel/Hotel.php:5155
+#: inc/Classes/Hotel/Hotel.php:4842
+#: inc/Classes/Hotel/Hotel.php:5114
 #: templates/template-parts/hotel/hotel-availability-table-row.php:287
 #: templates/template-parts/hotel/hotel-availability-table-row.php:429
 #: templates/template-parts/hotel/hotel-availability-table-row.php:2177
@@ -10132,8 +10336,8 @@ msgstr ""
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:821
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:900
 #: inc/Classes/Apartment/Apartment.php:279
-#: inc/Classes/Hotel/Hotel.php:4742
-#: inc/Classes/Hotel/Hotel.php:4941
+#: inc/Classes/Hotel/Hotel.php:4701
+#: inc/Classes/Hotel/Hotel.php:4900
 #: templates/template-parts/hotel/hotel-availability-table-row.php:761
 #: templates/template-parts/hotel/hotel-availability-table-row.php:930
 #: templates/template-parts/hotel/hotel-availability-table-row.php:1285
@@ -10147,7 +10351,7 @@ msgstr ""
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:830
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:909
 #: inc/Classes/Apartment/Apartment.php:285
-#: inc/Classes/Hotel/Hotel.php:4947
+#: inc/Classes/Hotel/Hotel.php:4906
 #: templates/template-parts/hotel/hotel-availability-table-row.php:770
 #: templates/template-parts/hotel/hotel-availability-table-row.php:940
 #: templates/template-parts/hotel/hotel-availability-table-row.php:1295
@@ -10170,7 +10374,7 @@ msgstr ""
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:660
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:836
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:915
-#: inc/Classes/Hotel/Hotel.php:4951
+#: inc/Classes/Hotel/Hotel.php:4910
 #: templates/template-parts/hotel/hotel-availability-table-row.php:776
 #: templates/template-parts/hotel/hotel-availability-table-row.php:946
 #: templates/template-parts/hotel/hotel-availability-table-row.php:1301
@@ -10194,8 +10398,8 @@ msgstr ""
 
 #: inc/App/Templates/Components/Shared/Single/Rooms.php:992
 #: inc/Classes/Hotel/Hotel.php:392
-#: inc/Classes/Hotel/Hotel.php:4859
-#: inc/Classes/Hotel/Hotel.php:5131
+#: inc/Classes/Hotel/Hotel.php:4818
+#: inc/Classes/Hotel/Hotel.php:5090
 msgid "Pax"
 msgstr ""
 
@@ -10282,6 +10486,11 @@ msgstr ""
 
 #: inc/App/Templates/Components/Tour/Single/Tour_Information.php:150
 msgid "Maximum Allowed Per Booking: "
+msgstr ""
+
+#: inc/App/Templates/Components/Tour/Single/Tour_Information.php:177
+#: inc/App/Templates/Components/Tour/Single/Tour_Price.php:97
+msgid "Group"
 msgstr ""
 
 #: inc/App/Templates/Components/Tour/Single/Tour_Information.php:200
@@ -11299,9 +11508,9 @@ msgstr ""
 
 #: inc/App/Without_Payment/Hotel_Offline_Booking.php:557
 #: inc/Classes/Apartment/Apartment.php:2096
-#: inc/Classes/Hotel/Hotel.php:3526
-#: inc/Classes/Tour/Tour.php:2327
-#: inc/Classes/Tour/Tour.php:4893
+#: inc/Classes/Hotel/Hotel.php:3485
+#: inc/Classes/Tour/Tour.php:2255
+#: inc/Classes/Tour/Tour.php:4821
 #: inc/Core/TF_Booking_Details.php:1328
 msgid "Select One"
 msgstr ""
@@ -11347,7 +11556,7 @@ msgid "TF Wishlist"
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:270
-#: inc/Classes/Hotel/Hotel.php:4935
+#: inc/Classes/Hotel/Hotel.php:4894
 msgid "Room details"
 msgstr ""
 
@@ -11361,7 +11570,7 @@ msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:506
 #: inc/Classes/Enqueue.php:437
-#: inc/Classes/Tour/Tour.php:3981
+#: inc/Classes/Tour/Tour.php:3909
 msgid "Please select a date"
 msgstr ""
 
@@ -11409,12 +11618,6 @@ msgstr ""
 msgid "Check-in - Check-out"
 msgstr ""
 
-#: inc/Classes/Apartment/Apartment.php:596
-#: inc/Classes/Hotel/Hotel.php:1768
-#: inc/Classes/Room/Room.php:1551
-msgid "Check Out"
-msgstr ""
-
 #: inc/Classes/Apartment/Apartment.php:615
 #: inc/Classes/Apartment/Apartment.php:620
 #: inc/Classes/Apartment/Apartment.php:854
@@ -11427,20 +11630,9 @@ msgstr ""
 #: inc/Classes/Tour/Tour.php:130
 #: inc/Classes/Tour/Tour.php:135
 #: inc/Classes/Tour/Tour.php:383
-#: inc/Classes/Tour/Tour.php:1468
-#: inc/Classes/Tour/Tour.php:1637
+#: inc/Classes/Tour/Tour.php:1460
+#: inc/Classes/Tour/Tour.php:1629
 msgid "Guests"
-msgstr ""
-
-#: inc/Classes/Apartment/Apartment.php:619
-#: inc/Classes/Helper.php:3298
-#: inc/Classes/Hotel/Hotel.php:1791
-#: inc/Classes/Hotel/Hotel.php:1795
-#: inc/Classes/Room/Room.php:1574
-#: inc/Classes/Room/Room.php:1578
-#: inc/Classes/Room/Room.php:2172
-#: inc/Classes/Tour/Tour.php:134
-msgid "1"
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:734
@@ -11541,8 +11733,8 @@ msgid "Choose date"
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:1553
-#: inc/Classes/Tour/Tour.php:1076
-#: inc/Classes/Tour/Tour.php:1283
+#: inc/Classes/Tour/Tour.php:1067
+#: inc/Classes/Tour/Tour.php:1275
 msgid "Person Info"
 msgstr ""
 
@@ -11594,7 +11786,7 @@ msgid "Minimum stay is %s nights"
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:1997
-#: inc/Classes/Tour/Tour.php:2044
+#: inc/Classes/Tour/Tour.php:2029
 msgid "Booking info"
 msgstr ""
 
@@ -11603,72 +11795,72 @@ msgid "Review booking summary and continue to add billing details."
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:2027
-#: inc/Classes/Hotel/Hotel.php:3455
-#: inc/Classes/Tour/Tour.php:2257
+#: inc/Classes/Hotel/Hotel.php:3414
+#: inc/Classes/Tour/Tour.php:2185
 msgid "Billing details"
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:2034
-#: inc/Classes/Hotel/Hotel.php:3463
-#: inc/Classes/Tour/Tour.php:2264
+#: inc/Classes/Hotel/Hotel.php:3422
+#: inc/Classes/Tour/Tour.php:2192
 #: inc/Core/TF_Backend_Booking.php:45
 #: inc/functions/functions-car.php:1183
 msgid "First Name"
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:2039
-#: inc/Classes/Hotel/Hotel.php:3468
-#: inc/Classes/Tour/Tour.php:2269
+#: inc/Classes/Hotel/Hotel.php:3427
+#: inc/Classes/Tour/Tour.php:2197
 #: inc/Core/TF_Backend_Booking.php:52
 #: inc/functions/functions-car.php:1188
 msgid "Last Name"
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:2059
-#: inc/Classes/Hotel/Hotel.php:3488
-#: inc/Classes/Tour/Tour.php:2289
+#: inc/Classes/Hotel/Hotel.php:3447
+#: inc/Classes/Tour/Tour.php:2217
 msgid "Street address"
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:2064
-#: inc/Classes/Hotel/Hotel.php:3493
-#: inc/Classes/Tour/Tour.php:2294
+#: inc/Classes/Hotel/Hotel.php:3452
+#: inc/Classes/Tour/Tour.php:2222
 #: inc/Core/TF_Backend_Booking.php:94
 msgid "Town / City"
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:2069
-#: inc/Classes/Hotel/Hotel.php:3498
-#: inc/Classes/Tour/Tour.php:2299
+#: inc/Classes/Hotel/Hotel.php:3457
+#: inc/Classes/Tour/Tour.php:2227
 msgid "State / County"
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:2074
-#: inc/Classes/Hotel/Hotel.php:3503
-#: inc/Classes/Tour/Tour.php:2304
+#: inc/Classes/Hotel/Hotel.php:3462
+#: inc/Classes/Tour/Tour.php:2232
 #: inc/Core/TF_Backend_Booking.php:108
 msgid "Postcode / ZIP"
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:2137
-#: inc/Classes/Tour/Tour.php:2371
+#: inc/Classes/Tour/Tour.php:2299
 msgid "Booking Summary"
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:2146
-#: inc/Classes/Tour/Tour.php:2385
+#: inc/Classes/Tour/Tour.php:2313
 msgid "Taxes will be calculated during checkout"
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:2271
-#: inc/Classes/Hotel/Hotel.php:3926
-#: inc/Classes/Tour/Tour.php:2664
+#: inc/Classes/Hotel/Hotel.php:3885
+#: inc/Classes/Tour/Tour.php:2592
 msgid "View Details"
 msgstr ""
 
 #: inc/Classes/Apartment/Apartment.php:2464
 #: inc/Classes/Apartment/Apartment.php:2591
-#: inc/Classes/Hotel/Hotel.php:4276
+#: inc/Classes/Hotel/Hotel.php:4235
 msgid "View More"
 msgstr ""
 
@@ -11829,7 +12021,7 @@ msgstr ""
 
 #: inc/Classes/Enqueue.php:436
 #: inc/Classes/Hotel/Hotel.php:3131
-#: inc/Classes/Hotel/Hotel.php:5225
+#: inc/Classes/Hotel/Hotel.php:5184
 #: inc/Classes/Room/Room.php:2487
 msgid "Please select check in and check out date"
 msgstr ""
@@ -11877,7 +12069,7 @@ msgid "No camera found"
 msgstr ""
 
 #: inc/Classes/Enqueue.php:472
-#: inc/Classes/Tour/Tour.php:4200
+#: inc/Classes/Tour/Tour.php:4128
 #: inc/functions/woocommerce/wc-tour.php:162
 msgid "Selected package is unavailable for this date."
 msgstr ""
@@ -12084,9 +12276,9 @@ msgstr ""
 #. translators: %1$s: number of adult and %2$s: extra price
 #. translators: 1: adult count, 2: adult price.
 #: inc/Classes/Helper.php:459
-#: inc/Classes/Hotel/Hotel.php:3663
-#: inc/Classes/Hotel/Hotel.php:3712
-#: inc/Classes/Hotel/Hotel.php:3761
+#: inc/Classes/Hotel/Hotel.php:3622
+#: inc/Classes/Hotel/Hotel.php:3671
+#: inc/Classes/Hotel/Hotel.php:3720
 #, php-format
 msgid "Adult ( %1$s × %2$s )"
 msgstr ""
@@ -12200,10 +12392,10 @@ msgstr ""
 #: inc/Classes/Helper.php:3509
 #: inc/Classes/Hotel/Hotel.php:2861
 #: inc/Classes/Hotel/Hotel.php:2877
-#: inc/Classes/Tour/Tour.php:1449
-#: inc/Classes/Tour/Tour.php:1471
-#: inc/Classes/Tour/Tour.php:1618
-#: inc/Classes/Tour/Tour.php:1640
+#: inc/Classes/Tour/Tour.php:1441
+#: inc/Classes/Tour/Tour.php:1463
+#: inc/Classes/Tour/Tour.php:1610
+#: inc/Classes/Tour/Tour.php:1632
 msgid "00"
 msgstr ""
 
@@ -12398,51 +12590,46 @@ msgstr ""
 msgid "01"
 msgstr ""
 
-#: inc/Classes/Hotel/Hotel.php:3329
+#: inc/Classes/Hotel/Hotel.php:3328
 msgid "Hotel Service"
 msgstr ""
 
-#: inc/Classes/Hotel/Hotel.php:3336
+#: inc/Classes/Hotel/Hotel.php:3335
 #: inc/Core/TF_Booking_Details.php:998
 msgid "Guest details"
 msgstr ""
 
-#: inc/Classes/Hotel/Hotel.php:3371
+#: inc/Classes/Hotel/Hotel.php:3370
 msgid "- Select Service -"
 msgstr ""
 
-#: inc/Classes/Hotel/Hotel.php:3422
-#: inc/Classes/Tour/Tour.php:2217
-msgid "Select Quantity"
-msgstr ""
-
-#: inc/Classes/Hotel/Hotel.php:3574
+#: inc/Classes/Hotel/Hotel.php:3533
 msgid "Booking summery"
 msgstr ""
 
 #. translators: 1: adult count, 2: adult price, 3: child count, 4: child price.
-#: inc/Classes/Hotel/Hotel.php:3652
-#: inc/Classes/Hotel/Hotel.php:3701
-#: inc/Classes/Hotel/Hotel.php:3750
+#: inc/Classes/Hotel/Hotel.php:3611
+#: inc/Classes/Hotel/Hotel.php:3660
+#: inc/Classes/Hotel/Hotel.php:3709
 #, php-format
 msgid "Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )"
 msgstr ""
 
-#: inc/Classes/Hotel/Hotel.php:4739
+#: inc/Classes/Hotel/Hotel.php:4698
 msgid "Sft"
 msgstr ""
 
-#: inc/Classes/Hotel/Hotel.php:4795
-#: inc/Classes/Hotel/Hotel.php:5100
+#: inc/Classes/Hotel/Hotel.php:4754
+#: inc/Classes/Hotel/Hotel.php:5059
 msgid "Number of Room"
 msgstr ""
 
-#: inc/Classes/Hotel/Hotel.php:5223
-#: inc/Classes/Tour/Tour.php:3979
+#: inc/Classes/Hotel/Hotel.php:5182
+#: inc/Classes/Tour/Tour.php:3907
 msgid "Please enter your location"
 msgstr ""
 
-#: inc/Classes/Hotel/Hotel.php:5276
+#: inc/Classes/Hotel/Hotel.php:5235
 msgid "Filter Rooms based on features"
 msgstr ""
 
@@ -12527,6 +12714,7 @@ msgstr ""
 #: inc/Classes/REST_API/TF_Rest_API.php:203
 #: inc/Classes/REST_API/TF_Rest_API.php:235
 #: inc/Classes/REST_API/TF_User_Rest_API.php:93
+#: inc/Classes/REST_API/TF_User_Rest_API.php:285
 msgid "You are not authorized to access this endpoint."
 msgstr ""
 
@@ -12551,6 +12739,13 @@ msgstr ""
 
 #: inc/Classes/REST_API/TF_Enquiry_Rest_API.php:96
 msgid "You are not authorized to access this enquiry."
+msgstr ""
+
+#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:213
+#: inc/Classes/REST_API/TF_Hotel_Rest_API.php:216
+#: inc/Classes/REST_API/TF_Tour_Rest_API.php:180
+#: inc/Classes/REST_API/TF_Tour_Rest_API.php:232
+msgid "Title: "
 msgstr ""
 
 #: inc/Classes/REST_API/TF_Rest_API.php:144
@@ -12592,6 +12787,14 @@ msgstr ""
 #: inc/Core/Enquiry.php:596
 #, php-format
 msgid "%s minutes ago"
+msgstr ""
+
+#: inc/Classes/REST_API/TF_Tour_Rest_API.php:183
+msgid "Status: "
+msgstr ""
+
+#: inc/Classes/REST_API/TF_Tour_Rest_API.php:189
+msgid "Group Price: "
 msgstr ""
 
 #: inc/Classes/REST_API/TF_User_Rest_API.php:62
@@ -12686,105 +12889,109 @@ msgstr ""
 msgid "Tour Types"
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:1451
-#: inc/Classes/Tour/Tour.php:1620
+#: inc/Classes/Tour/Tour.php:1443
+#: inc/Classes/Tour/Tour.php:1612
 msgid "Month"
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:2029
+#: inc/Classes/Tour/Tour.php:2007
+msgid "Packages"
+msgstr ""
+
+#: inc/Classes/Tour/Tour.php:2014
 msgid "Tour extra"
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:2036
+#: inc/Classes/Tour/Tour.php:2021
 msgid "Traveler info"
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:2064
+#: inc/Classes/Tour/Tour.php:2049
 msgid "Choose package:"
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:2091
+#: inc/Classes/Tour/Tour.php:2076
 msgid "Choose time"
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:2949
-#: inc/Classes/Tour/Tour.php:3101
+#: inc/Classes/Tour/Tour.php:2877
+#: inc/Classes/Tour/Tour.php:3029
 msgid "people"
 msgstr ""
 
 #. translators: %s will return total price
-#: inc/Classes/Tour/Tour.php:3945
+#: inc/Classes/Tour/Tour.php:3873
 #, php-format
 msgid "<span>From</span> %1$s"
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:4077
+#: inc/Classes/Tour/Tour.php:4005
 msgctxt "post"
 msgid "Expired"
 msgstr ""
 
 #. translators: %s: number of posts
-#: inc/Classes/Tour/Tour.php:4079
+#: inc/Classes/Tour/Tour.php:4007
 #, php-format
 msgid "Expired <span class=\"count\">(%s)</span>"
 msgid_plural "Expired <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/Classes/Tour/Tour.php:4191
+#: inc/Classes/Tour/Tour.php:4119
 #: inc/functions/woocommerce/wc-tour.php:153
 msgid "Please select a package."
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:4205
-#: inc/Classes/Tour/Tour.php:4210
+#: inc/Classes/Tour/Tour.php:4133
+#: inc/Classes/Tour/Tour.php:4138
 #: inc/functions/woocommerce/wc-tour.php:167
 #: inc/functions/woocommerce/wc-tour.php:172
 msgid "This tour is unavailable for the selected date."
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:4636
+#: inc/Classes/Tour/Tour.php:4564
 #: inc/functions/woocommerce/wc-tour.php:822
 msgid "An adult is required for children booking!"
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:4937
+#: inc/Classes/Tour/Tour.php:4865
 msgid "Traveler Information"
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:4984
+#: inc/Classes/Tour/Tour.php:4912
 msgid "On "
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:4985
+#: inc/Classes/Tour/Tour.php:4913
 msgid "At "
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:4990
+#: inc/Classes/Tour/Tour.php:4918
 #: inc/functions/woocommerce/wc-apartment.php:508
 msgid "Traveller"
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:4998
-#: inc/Classes/Tour/Tour.php:5029
+#: inc/Classes/Tour/Tour.php:4926
+#: inc/Classes/Tour/Tour.php:4957
 msgid " adults"
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:5004
-#: inc/Classes/Tour/Tour.php:5035
+#: inc/Classes/Tour/Tour.php:4932
+#: inc/Classes/Tour/Tour.php:4963
 msgid " children"
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:5010
+#: inc/Classes/Tour/Tour.php:4938
 msgid " infants"
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:5019
-#: inc/Classes/Tour/Tour.php:5051
+#: inc/Classes/Tour/Tour.php:4947
+#: inc/Classes/Tour/Tour.php:4979
 msgid "Group Price"
 msgstr ""
 
-#: inc/Classes/Tour/Tour.php:5041
+#: inc/Classes/Tour/Tour.php:4969
 msgid " infant"
 msgstr ""
 
@@ -12815,12 +13022,12 @@ msgid "Room Name"
 msgstr ""
 
 #: inc/Classes/Woocommerce/Woocommerce.php:94
-#: inc/functions/woocommerce/wc-hotel.php:953
+#: inc/functions/woocommerce/wc-hotel.php:952
 msgid "Number of Room Booked"
 msgstr ""
 
 #: inc/Classes/Woocommerce/Woocommerce.php:95
-#: inc/functions/woocommerce/wc-hotel.php:960
+#: inc/functions/woocommerce/wc-hotel.php:959
 msgid "Adult Number"
 msgstr ""
 
@@ -13312,21 +13519,6 @@ msgstr ""
 msgid "Add New Booking"
 msgstr ""
 
-#: inc/Core/TF_Backend_Booking.php:146
-#: templates/apartment/archive-apartments.php:38
-#: templates/apartment/taxonomy.php:24
-#: templates/car/archive-cars.php:28
-#: templates/car/taxonomy.php:14
-#: templates/common/search-results.php:44
-#: templates/hotel/archive-hotels.php:40
-#: templates/hotel/taxonomy.php:24
-#: templates/room/archive-rooms.php:28
-#: templates/room/taxonomy.php:22
-#: templates/tour/archive-tours.php:73
-#: templates/tour/taxonomy.php:22
-msgid "Please install and activate WooCommerce plugin to use this feature."
-msgstr ""
-
 #. translators: %s Service Name.
 #: inc/Core/TF_Backend_Booking.php:156
 #, php-format
@@ -13449,7 +13641,7 @@ msgstr ""
 
 #: inc/Core/TF_Booking_Details.php:662
 #: inc/Core/TF_Booking_Details.php:1703
-#: inc/functions/woocommerce/wc-hotel.php:946
+#: inc/functions/woocommerce/wc-hotel.php:945
 msgid "Option"
 msgstr ""
 
@@ -13506,7 +13698,7 @@ msgid "Package"
 msgstr ""
 
 #: inc/Core/TF_Booking_Details.php:939
-#: inc/functions/woocommerce/wc-hotel.php:1018
+#: inc/functions/woocommerce/wc-hotel.php:1017
 msgid "Airport Service Fee"
 msgstr ""
 
@@ -13884,52 +14076,52 @@ msgstr ""
 msgid "Select Room Option."
 msgstr ""
 
-#: inc/functions/woocommerce/wc-hotel.php:881
+#: inc/functions/woocommerce/wc-hotel.php:880
 msgid "Unable to add this hotel booking to cart. Please try again."
 msgstr ""
 
-#: inc/functions/woocommerce/wc-hotel.php:967
+#: inc/functions/woocommerce/wc-hotel.php:966
 msgid "Child Number"
 msgstr ""
 
-#: inc/functions/woocommerce/wc-hotel.php:974
+#: inc/functions/woocommerce/wc-hotel.php:973
 msgid "Children Ages"
 msgstr ""
 
-#: inc/functions/woocommerce/wc-hotel.php:981
+#: inc/functions/woocommerce/wc-hotel.php:980
 msgid "Check-in"
 msgstr ""
 
-#: inc/functions/woocommerce/wc-hotel.php:988
+#: inc/functions/woocommerce/wc-hotel.php:987
 msgid "Check-out"
 msgstr ""
 
-#: inc/functions/woocommerce/wc-hotel.php:997
-#: inc/functions/woocommerce/wc-hotel.php:1003
-#: inc/functions/woocommerce/wc-hotel.php:1009
+#: inc/functions/woocommerce/wc-hotel.php:996
+#: inc/functions/woocommerce/wc-hotel.php:1002
+#: inc/functions/woocommerce/wc-hotel.php:1008
 msgid "Airport Service"
 msgstr ""
 
-#: inc/functions/woocommerce/wc-hotel.php:998
-#: inc/functions/woocommerce/wc-hotel.php:1144
+#: inc/functions/woocommerce/wc-hotel.php:997
+#: inc/functions/woocommerce/wc-hotel.php:1143
 msgid "Airport Pickup"
 msgstr ""
 
-#: inc/functions/woocommerce/wc-hotel.php:1004
-#: inc/functions/woocommerce/wc-hotel.php:1147
+#: inc/functions/woocommerce/wc-hotel.php:1003
+#: inc/functions/woocommerce/wc-hotel.php:1146
 msgid "Airport Dropoff"
 msgstr ""
 
-#: inc/functions/woocommerce/wc-hotel.php:1010
-#: inc/functions/woocommerce/wc-hotel.php:1150
+#: inc/functions/woocommerce/wc-hotel.php:1009
+#: inc/functions/woocommerce/wc-hotel.php:1149
 msgid "Airport Pickup & Dropoff"
 msgstr ""
 
-#: inc/functions/woocommerce/wc-hotel.php:1026
+#: inc/functions/woocommerce/wc-hotel.php:1025
 msgid "Hotel Extra Service"
 msgstr ""
 
-#: inc/functions/woocommerce/wc-hotel.php:1032
+#: inc/functions/woocommerce/wc-hotel.php:1031
 msgid "Hotel Extra Service Fee"
 msgstr ""
 
@@ -14025,7 +14217,7 @@ msgid "Instantio plugin is required for the %1$s\"QUICK CHECKOUT\"%2$s feature o
 msgstr ""
 
 #: inc/Traits/Action_Helper.php:2581
-#: tourfic.php:184
+#: tourfic.php:181
 msgid "Install Now"
 msgstr ""
 
@@ -14036,7 +14228,7 @@ msgid "The %1$sInstantio%2$s plugin is inactive. Please activate it to enable th
 msgstr ""
 
 #: inc/Traits/Action_Helper.php:2601
-#: tourfic.php:229
+#: tourfic.php:226
 msgid "Activate"
 msgstr ""
 
@@ -14222,20 +14414,20 @@ msgstr ""
 msgid "Please install and activate WooCommerce plugin to view tour details."
 msgstr ""
 
-#: tourfic.php:143
+#: tourfic.php:140
 msgid "Something went Wrong. Please Reinstall the Tourfic Plugin "
 msgstr ""
 
 #. translators: %1$s is return strong tag %2$s is return closeing of strong tag
 #. translators: %1$s: WooCommerce plugin url start, %2$s: WooCommerce plugin url end
-#: tourfic.php:178
-#: tourfic.php:226
+#: tourfic.php:175
+#: tourfic.php:223
 #, php-format
 msgid "Tourfic requires %1$s WooCommerce %2$s to be activated."
 msgstr ""
 
 #. translators: %1$s: strong tag start, %2$s: strong tag end, %3$s: plugin url start, %4$s: plugin url end
-#: tourfic.php:237
+#: tourfic.php:234
 #, php-format
 msgid "%1$sTourfic is inactive.%2$s This plugin requires WooCommerce 2.5 or newer. Please %3$supdate WooCommerce to version 2.5 or newer%4$s"
 msgstr ""

@@ -54,7 +54,7 @@ Our team has released two dedicated WordPress themes, [Travelfic & Hotel Booking
 * Per Room Gallery & Features
 * Number of Rooms based on the Date (Pro)
 * Room price by persons (Adult, Children) (Pro)
-* Room Availability by date (Pro)
+* Room Availability by date
 * Room Pricing Logic (Pro)
 * Advanced Room Inventory Management (Pro)
 * Advanced / Partial Payment (Pro)
@@ -80,9 +80,9 @@ Additionally, numerous vital features contribute to making Tourfic the ideal Hot
 * Enquiry / Ask a Question Form
 * Different Tour Types (Continuous, Fixed etc)
 * Tour Price per Group (Pro)
-* Custom Availability (Pro)
-* Availability based on Time & Dates (Pro)
-* Per day Availability (Pro)
+* Custom Availability
+* Availability based on Time & Dates
+* Per day Availability
 * Advanced / Partial Payment (Pro)
 * Sell Tours Extras (Pro)
 * Tours booking restrictions (Pro)
@@ -120,6 +120,7 @@ Moreover, it offers a comprehensive suite of key features that make it an excell
 * Location and Dynamic Location Search (OpenStreetMap)
 * Apartment Booking Management
 * Booking per night pricing, Minimum Night Stay
+* Apartment Availability by Date
 * Apartment Pricing for Adults, Children, and Infants
 * Additional Fee
 * Discount Type (Fixed, Percentage)
