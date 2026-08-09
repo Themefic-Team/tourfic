@@ -1430,12 +1430,12 @@ class Apartment {
 		$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 		$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
 		$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
-		$tf_allow_deposit     = ! empty( $meta['allow_deposit'] ) ? $meta['allow_deposit'] : '';
+		$tf_allow_deposit     = apply_filters( 'tf_allow_deposit_feature', false, $meta );
 		$tf_deposit_type      = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : '';
 		$tf_deposit_amount    = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : '';
 		$tf_show_internal_booking_form = ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3;
 		$tf_has_valid_deposit_type     = in_array( $tf_deposit_type, array( 'percent', 'fixed' ), true );
-		$tf_show_deposit_option        = '1' == $tf_booking_type && '1' == $tf_allow_deposit && ! empty( $tf_deposit_amount ) && $tf_has_valid_deposit_type;
+		$tf_show_deposit_option        = '1' == $tf_booking_type && $tf_allow_deposit && ! empty( $tf_deposit_amount ) && $tf_has_valid_deposit_type;
 		$tf_partial_payment_label      = ! empty( Helper::tfopt( 'deposit-title' ) ) ? Helper::tfopt( 'deposit-title' ) : 'Partial payment of {amount} on total';
 		$tf_partial_payment_description = ! empty( Helper::tfopt( 'deposit-subtitle' ) ) ? Helper::tfopt( 'deposit-subtitle' ) : '';
 

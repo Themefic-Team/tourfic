@@ -343,7 +343,7 @@ class Booking_Form {
 
 	private static function tf_car_booking_form( $post_id, $settings ) {
 		$meta                            = get_post_meta( $post_id, 'tf_carrental_opt', true );
-		$car_allow_deposit               = ! empty( $meta['allow_deposit'] ) ? $meta['allow_deposit'] : '';
+		$car_allow_deposit               = apply_filters( 'tf_allow_deposit_feature', false, $meta );
 		$car_deposit_type                = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : 'none';
 		$car_deposit_amount              = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : '';
 		$car_booking_by                  = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : '1';
@@ -591,7 +591,7 @@ class Booking_Form {
                             </svg>
                         </button>
                     <?php }else{ ?>
-						<?php if ( ! empty( $car_allow_deposit ) && 'none' != $car_deposit_type && ! empty( $car_deposit_amount ) ) { ?>
+						<?php if ( $car_allow_deposit && 'none' != $car_deposit_type && ! empty( $car_deposit_amount ) ) { ?>
                             <div class="tf-partial-payment-button tf-flex tf-flex-direction-column tf-flex-gap-16">
                                 <button class="tf_btn tf-flex tf-flex-align-center tf-partial-button tf-flex-justify-center tf-flex-gap-8 <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>" data-partial="<?php echo esc_attr('yes'); ?>">
                                     <?php esc_html_e( 'Part Pay', 'tourfic' ); ?> <?php echo wp_kses_post(wc_price($due_amount)); ?>

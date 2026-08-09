@@ -3280,7 +3280,7 @@ class Hotel {
 		$hotel_extras             = apply_filters( 'tf_hotel_extra_meta', null, $post_id, $meta );
 		$room_book_by             = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 		$room_book_url            = ! empty( $meta['booking-url'] ) ? $meta['booking-url'] : '';
-		$room_allow_deposit       = ! empty( $room_meta['allow_deposit'] ) ? $room_meta['allow_deposit'] : '';
+		$room_allow_deposit       = apply_filters( 'tf_allow_deposit_feature', false, $room_meta );
 		$room_deposit_type        = ! empty( $room_meta['deposit_type'] ) ? $room_meta['deposit_type'] : '';
 		$room_deposit_amount      = ! empty( $room_meta['deposit_amount'] ) ? $room_meta['deposit_amount'] : 0;
 		$airport_service_type     = ! empty( $enable_airport_service ) && ! empty( $airport_service_type ) ? $airport_service_type : null;

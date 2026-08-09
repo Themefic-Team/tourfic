@@ -62,8 +62,8 @@ while ( have_posts() ) : the_post();
 		$gallery_ids = explode( ',', $gallery );
 	}
 
-	$calcellation_policy_title = ! empty( $meta['cancelation-section-title'] ) ? esc_html( $meta['cancelation-section-title'] ) : '';
-	$calcellation_policy       = ! empty( $meta['calcellation_policy'] ) ? (array) $meta['calcellation_policy'] : array();
+	$calcellation_policy_title = apply_filters( 'tf_cancellation_policy_title_meta', '', $post_id, $meta );
+	$calcellation_policy       = apply_filters( 'tf_cancellation_policy_meta', [], $post_id, $meta );
 	
 	// Single Template Style
 	$tf_room_layout_conditions = ! empty( $meta['tf_single_room_layout_opt'] ) ? $meta['tf_single_room_layout_opt'] : 'global';

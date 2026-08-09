@@ -166,7 +166,7 @@ function tf_car_booking_callback() {
 	}
 
 	// Deposit
-	$car_allow_deposit = ! empty( $meta['allow_deposit'] ) ? $meta['allow_deposit'] : '';
+	$car_allow_deposit = apply_filters( 'tf_allow_deposit_feature', false, $meta );
 	$car_deposit_type = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : 'none';
 	$car_deposit_amount = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : 0;
 
@@ -209,7 +209,7 @@ function tf_car_booking_callback() {
 		$tf_cars_data['tf_car_data']['price_total']    	   = $total_prices;
 
 		# Deposit information
-		if ( !empty($car_allow_deposit) && 'none'!=$car_deposit_type && 'yes'==$partial_payment) {
+		if ( $car_allow_deposit && 'none'!=$car_deposit_type && 'yes'==$partial_payment) {
 			if( !empty($car_deposit_amount) ){
 				if ( 'percent'==$car_deposit_type ) {
 					$deposit_amount = ($tf_cars_data['tf_car_data']['price_total'] * $car_deposit_amount)/100;

@@ -4014,7 +4014,7 @@ class Helper {
 		if ( $discount > 0 ) {
 			$price = $discount;
 		}
-		$has_deposit = ! empty( $room['allow_deposit'] ) && $room['allow_deposit'] == true;
+		$has_deposit = apply_filters( 'tf_allow_deposit_feature', false, $room );
 		if ( $has_deposit == true ) {
 			if ( $room['deposit_type'] == 'percent' ) {
 				$deposit_amount = $price * ( floatval( $room['deposit_amount'] ) / 100 );

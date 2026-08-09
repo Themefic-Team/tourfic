@@ -1373,7 +1373,7 @@ function tf_car_price_calculation_callback() {
 		$total_regular_prices = $total_regular_prices + $total_extra['price'];
 	}
 	
-	$car_calcellation_policy = ! empty( $meta['calcellation_policy'] ) ? $meta['calcellation_policy'] : '';
+	$car_calcellation_policy = apply_filters( 'tf_cancellation_policy_meta', [], $post_id, $meta );
 	$bestRefundPolicy = tf_getBestRefundPolicy($car_calcellation_policy, $tf_pickup_date, $tf_pickup_time);
 	$twobestRefundPolicy = tf_getRefundPolicy($car_calcellation_policy, $tf_pickup_date, $tf_pickup_time);
 	

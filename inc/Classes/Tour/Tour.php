@@ -2313,7 +2313,7 @@ class Tour {
                             <span>"<?php esc_html_e( "Taxes will be calculated during checkout", "tourfic" ); ?>"</span>
                         </div>
 					<?php } ?>
-					<?php if ( ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) && 3 != $tf_booking_by ) {
+					<?php if ( apply_filters( 'tf_allow_deposit_feature', false, $meta ) && ! empty( $meta['deposit_amount'] ) && 3 != $tf_booking_by ) {
 						$tf_deposit_amount              = array(
 							"{amount}" => $meta['deposit_type'] == 'fixed' ? wp_kses_post( wc_price( $meta['deposit_amount'] ) ) : $meta['deposit_amount'] . '%'
 						);
@@ -4994,7 +4994,7 @@ class Tour {
 			}
 
 			if ( ! empty( $_POST['deposit'] ) && $_POST['deposit'] == "true" ) {
-				if ( ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) ) {
+				if ( apply_filters( 'tf_allow_deposit_feature', false, $meta ) && ! empty( $meta['deposit_amount'] ) ) {
 					
 					if ( ! empty( $meta['deposit_type'] ) && $meta['deposit_type'] == 'fixed' ) {
 						$tf_deposit_amount   = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : 0;

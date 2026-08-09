@@ -39,8 +39,8 @@ class Cancelation_Policy {
 	private static function render_room_cancelation_policy( $settings ) {
 		$post_id                  = get_the_ID();
 		$meta                     = get_post_meta( $post_id, 'tf_room_opt', true );
-		$cancelation_policy_title = ! empty( $meta['cancelation-section-title'] ) ? esc_html( $meta['cancelation-section-title'] ) : esc_html__( 'Cancelation Policy', 'tourfic' );
-		$cancelation_policy       = ! empty( $meta['calcellation_policy'] ) ? (array) $meta['calcellation_policy'] : [];
+		$cancelation_policy_title = apply_filters( 'tf_cancellation_policy_title_meta', esc_html__( 'Cancelation Policy', 'tourfic' ), $post_id, $meta );
+		$cancelation_policy       = apply_filters( 'tf_cancellation_policy_meta', [], $post_id, $meta );
 
 		if ( empty( $cancelation_policy ) ) {
 			return;
