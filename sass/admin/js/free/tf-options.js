@@ -22,13 +22,13 @@
             if (!hash) {
                 hash = window.location.hash;
             }
-    
+
             let slug = hash.replace('#tab=', '').split('&')[0];
-    
+
             if (slug) {
                 let selectedTab = $('.tf-tablinks[data-tab="' + slug + '"]');
                 let selectedContent = $('#' + slug);
-    
+
                 if (selectedTab.length && selectedContent.length) {
                     $('.tf-admin-tab .tf-tablinks').removeClass('active');
                     $('.tf-tab-wrapper .tf-tab-content').removeClass('active');
@@ -37,12 +37,12 @@
                 }
             }
         }
-    
+
         // Save current tab hash before post update
         $('.post-type-tf_tours #post, .post-type-tf_hotel #post, .post-type-tf_room #post, .post-type-tf_apartment #post, .post-type-tf_carrental #post, .post-type-tf_email_templates #post').on('submit', function () {
             localStorage.setItem('tf_saved_tab_hash', window.location.hash);
         });
-    
+
         // Restore saved hash and activate tab
         let savedHash = localStorage.getItem('tf_saved_tab_hash');
         if (savedHash) {
@@ -54,8 +54,8 @@
             activateTabFromHash();
         }
 
-        
-        
+
+
         $(window).on('hashchange load', function () {
             let hash = window.location.hash;
             let query = window.location.search;
@@ -289,7 +289,7 @@
             $('body').removeClass('tf-modal-open');
         });
         $(document).on('click', function (event) {
-            if(!$('.tf-map-modal').length) {
+            if (!$('.tf-map-modal').length) {
                 if (!$(event.target).closest(".tf-modal-content,.tf-modal-btn").length) {
                     $("body").removeClass("tf-modal-open");
                     $(".tf-modal").removeClass("tf-modal-show");
@@ -422,7 +422,7 @@
                     iconList.html('<div class="tf-icon-loading">Loading...</div>');
                 },
                 success: function (response) {
-                    if(!response.success){
+                    if (!response.success) {
                         notyf.error(response.data)
                     } else {
                         iconList.html(response.data.html);
@@ -467,12 +467,12 @@
                             $('.tf-icon-list').append('<div class="tf-icon-loading">Loading...</div>');
                         },
                         success: function (response) {
-                            if(!response.success){
+                            if (!response.success) {
                                 $('.tf-icon-loading').remove();
                                 notyf.error(response.data)
                             } else {
                                 loading = false;
-                                $('#tf-icon-tab-'+type+' .tf-icon-list').append(response.data);
+                                $('#tf-icon-tab-' + type + ' .tf-icon-list').append(response.data);
                                 $('.tf-icon-loading').remove();
                                 startIndex += 100;
                             }
@@ -533,14 +533,14 @@
                                 success: function (response) {
 
                                     let data = JSON.parse(response)
-                                    
+
                                     if (data.status === 'success') {
                                         notyf.success(data.message);
                                         window.location.reload();
                                     } else {
                                         notyf.error(data.message);
                                     }
-                                    
+
                                     $('.tf-setting-save-btn .tf-reset-btn').removeClass('tf-btn-loading');
                                 },
                                 error: function (xhr, status, error) {
@@ -558,14 +558,14 @@
                 }
             })
 
-            });
+        });
 
         $(document).find("#tf-settings-header-search-filed").on("keyup", debounce(
             function () {
                 var value = $(this).val().toLowerCase();
                 let div = document.createElement('div');
                 div.classList.add('tf-search-results');
-                if( value.length >= 3 ) {
+                if (value.length >= 3) {
                     $.ajax({
                         url: tf_options.ajax_url,
                         type: 'POST',
@@ -579,8 +579,8 @@
                             let notfound = 0;
                             let resultDiv = document.createElement('ul');
                             if (data.status === 'success') {
-                                $.each( data.message, function( key, obj ) {
-                                    if( obj.field_title.toLowerCase().indexOf(value) != -1 ) {
+                                $.each(data.message, function (key, obj) {
+                                    if (obj.field_title.toLowerCase().indexOf(value) != -1) {
                                         let textDiv = document.createElement('li');
                                         let titleDiv = document.createElement('div');
                                         titleDiv.classList.add('tf-search-result-title');
@@ -604,14 +604,14 @@
                                     } else {
                                         notfound = 1;
                                     }
-                                    if( $('.tf-search-results').length || value < 3 ) {
+                                    if ($('.tf-search-results').length || value < 3) {
                                         $('.tf-search-results').remove();
                                     } else {
                                         div.append(resultDiv);
                                     }
                                 });
 
-                                if( notfound == 1 ) {
+                                if (notfound == 1) {
                                     let not_found = document.createElement("p");
                                     not_found.classList.add('tf-search-not-found');
                                     not_found.innerHTML = tf_admin_params.setting_search_no_result;
@@ -623,22 +623,22 @@
                             }
                         }
                     })
-                    
+
                 } else {
                     $(".tf-search-results").hide();
                 }
-            }, 700 
+            }, 700
         ));
 
         $(document).on('click', function (e) {
-            if( e.target.id !== 'tf-settings-header-search-filed' && $('.tf-search-results').length ) {
+            if (e.target.id !== 'tf-settings-header-search-filed' && $('.tf-search-results').length) {
                 $('.tf-search-results').hide();
             }
         });
 
 
         $("#tf-settings-header-search-filed").on('focus', function (e) {
-            if( $('.tf-search-results').length ) {
+            if ($('.tf-search-results').length) {
                 $('.tf-search-results').show();
             }
         });
@@ -647,13 +647,13 @@
             let id = $(this).data('id');
             let selector = `label[for='tf_settings\\[${id}\\]']`;
             let tabId = $(this).closest('li').data('tab-id');
-            if( tabId ) {
-                $('.tf-tab-item[data-tab-id="'+tabId+'"]').trigger('click');
+            if (tabId) {
+                $('.tf-tab-item[data-tab-id="' + tabId + '"]').trigger('click');
             }
             $('html, body').animate({
                 scrollTop: $(document).find(selector).closest('.tf-field').offset().top
             }, 100);
-        
+
         });
 
         $(document).on('submit', '.tf-option-form.tf-ajax-save', function (e) {
@@ -668,7 +668,7 @@
                 }
             }
             // get tf_import_option from data
-            let tf_import_option =  false
+            let tf_import_option = false
             if (typeof data.get('tf_import_option') !== "undefined" && data.get('tf_import_option').trim() != '') {
 
                 //  confirm data before send
@@ -687,7 +687,7 @@
                 processData: false,
                 contentType: false,
                 beforeSend: function () {
-                    if(tf_import_option == true ){
+                    if (tf_import_option == true) {
                         $this.find('.tf-import-btn').addClass('tf-btn-loading');
                     }
                     submitBtn.addClass('tf-btn-loading');
@@ -696,10 +696,10 @@
                 success: function (response) {
                     let obj = JSON.parse(response);
                     if (obj.status === 'success') {
-                        
+
                         notyf.success(obj.message);
 
-                        if(tf_import_option == true ){
+                        if (tf_import_option == true) {
                             window.location.reload();;
                         }
                     } else {
@@ -707,7 +707,7 @@
                     }
                     submitBtn.removeClass('tf-btn-loading');
                     $(".tf-setting-save-btn .tf-submit-btn").removeClass('tf-btn-loading');
-                    if(tf_import_option == true ){
+                    if (tf_import_option == true) {
                         $this.find('.tf-import-btn').removeClass('tf-btn-loading');
                     }
                 },
@@ -715,7 +715,7 @@
                     submitBtn.removeClass('tf-btn-loading');
                     console.log(error['responseText']);
                     //if error msg contain max_input_vars then show a proper msg
-                    if(error['responseText'].includes('max_input_vars')) {
+                    if (error['responseText'].includes('max_input_vars')) {
                         notyf.error({
                             message: tf_admin_params.max_input_vars_notice,
                             duration: 15000,
@@ -741,7 +741,7 @@
                 placeholder = $this.data('placeholder'),
                 deleteData = $this.data('delete');
 
-            if(deleteData === 'yes'){
+            if (deleteData === 'yes') {
                 $('#' + id + '').select2({
                     placeholder: placeholder,
                     allowClear: true,
@@ -750,20 +750,20 @@
                         if (!state.id) {
                             return state.text;
                         }
-                
+
                         // Get the edit URL from the option's data attribute
                         var editUrl = $(state.element).data('edit-url');
-                        if(editUrl){
+                        if (editUrl) {
                             var $state = $(
-                                '<span>' + state.text + ' <a target="_blank" href="'+editUrl+'" class="tf-edit-room"><i class="fa-regular fa-pen-to-square"></i></a></span>'
+                                '<span>' + state.text + ' <a target="_blank" href="' + editUrl + '" class="tf-edit-room"><i class="fa-regular fa-pen-to-square"></i></a></span>'
                             );
                             return $state;
                         }
-                
+
                         return state.text;
                     }
                 });
-            }else{
+            } else {
                 $('#' + id + '').select2({
                     placeholder: placeholder,
                     allowClear: true,
@@ -771,21 +771,21 @@
                         if (!state.id) {
                             return state.text;
                         }
-                
+
                         // Get the edit URL from the option's data attribute
                         var editUrl = $(state.element).data('edit-url');
-                        if(editUrl){
+                        if (editUrl) {
                             var $state = $(
-                                '<span>' + state.text + ' <a target="_blank" href="'+editUrl+'" class="tf-edit-room"><i class="fa-regular fa-pen-to-square"></i></a></span>'
+                                '<span>' + state.text + ' <a target="_blank" href="' + editUrl + '" class="tf-edit-room"><i class="fa-regular fa-pen-to-square"></i></a></span>'
                             );
                             return $state;
                         }
-                
+
                         return state.text;
                     }
                 });
             }
-        
+
         }
         $('select.tf-select2').each(function () {
             var $this = $(this);
@@ -797,13 +797,13 @@
 
         function TfFormatOption(option) {
             if (!option.id) {
-              return option.text;
+                return option.text;
             }
 
-           var $option = $(
-              '<span style="display: flex; justify-content: space-between;">' + option.text + '<span class="tf-remove-button" data-id="' + option.id + '">Remove</span></span>'
+            var $option = $(
+                '<span style="display: flex; justify-content: space-between;">' + option.text + '<span class="tf-remove-button" data-id="' + option.id + '">Remove</span></span>'
             );
-    
+
             return $option;
         }
         $(document).on('select2:selecting', '.tf-select2', function (e) {
@@ -816,7 +816,7 @@
                 let parentDiv = $this.closest('.tf-fieldset');
                 let categoryName = parentDiv.find('#category_name').val();
                 let categorySelect = parentDiv.find('#category_select_field_name').val();
-                var termId=$(e.params.args.originalEvent.target).data("id");
+                var termId = $(e.params.args.originalEvent.target).data("id");
 
                 $.ajax({
                     url: tf_options.ajax_url,
@@ -840,7 +840,7 @@
                             $selectField.select2('close');
 
                         } else {
-                            
+
                         }
                     }
                 });
@@ -848,14 +848,14 @@
         });
 
 
-        $('select.tf-shortcode-select2').each(function(e) {
+        $('select.tf-shortcode-select2').each(function (e) {
             let $this = $(this);
             let id = $this.attr("id");
             tfSelect2Int($this);
 
-            $(this).on("select2:select", function (e) { 
+            $(this).on("select2:select", function (e) {
                 var select_val = $(e.currentTarget).val();
-                if(select_val && select_val.includes("'all'")) {
+                if (select_val && select_val.includes("'all'")) {
                     $(this).val(["'all'"]).trigger('change.select2');
                 }
             });
@@ -883,7 +883,7 @@
                 },
                 displayEventTime: true,
                 selectable: true,
-                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {
+                select: function ({ start, end, startStr, endStr, allDay, jsEvent, view, resource }) {
                     if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
                         self.fullCalendar.unselect();
                         setRoomCheckInOut("", "", self.roomCalData);
@@ -896,7 +896,7 @@
                         setRoomCheckInOut(check_in, check_out, self.roomCalData);
                     }
                 },
-                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
+                events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
                     let requestData = {
                         action: "tf_get_hotel_room_availability",
                         _nonce: tf_admin_params.tf_nonce,
@@ -912,7 +912,7 @@
                         type: "POST",
                         data: requestData,
                         beforeSend: function () {
-                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
+                            $(self.container).css({ 'pointer-events': 'none', 'opacity': '0.5' });
                             $(self.calendar).addClass('tf-content-loading');
                         },
                         success: function (doc) {
@@ -920,10 +920,10 @@
                                 successCallback(doc?.avail_data);
                             }
 
-							$(self.container).find('.tf-room-availability-extension-fields').html(doc?.options_html || '');
-							$(document).trigger('tourfic:room-availability:editor-updated', [self.roomCalData, doc]);
+                            $(self.container).find('.tf-room-availability-extension-fields').html(doc?.options_html || '');
+                            $(document).trigger('tourfic:room-availability:editor-updated', [self.roomCalData, doc]);
 
-                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
+                            $(self.container).css({ 'pointer-events': 'auto', 'opacity': '1' });
                             $(self.calendar).removeClass('tf-content-loading');
                         },
                         error: function (e) {
@@ -936,9 +936,9 @@
                     const eventTitleElement = document.createElement('div');
                     eventTitleElement.classList.add('fc-event-title');
                     eventTitleElement.innerHTML = title;
-                    return {domNodes: [eventTitleElement]};
+                    return { domNodes: [eventTitleElement] };
                 },
-                eventClick: function ({event, el, jsEvent, view}) {
+                eventClick: function ({ event, el, jsEvent, view }) {
                     let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
                         .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
                     let endTime;
@@ -982,7 +982,7 @@
             $('.tf_room_check_in', roomCalData).val('');
             $('.tf_room_check_out', roomCalData).val('');
             $('[name="tf_room_price"]', roomCalData).val('');
-			$(document).trigger('tourfic:room-availability:reset', [roomCalData]);
+            $(document).trigger('tourfic:room-availability:reset', [roomCalData]);
 
             // Destroy old flatpickr instances to avoid conflicts
             $(roomCalData).find('[name="tf_room_check_in"]').each(function () {
@@ -1064,17 +1064,17 @@
             let cal = container.find('.tf-room-cal');
             let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
             let avail_date = container.find('.avail_date');
-            data.push({name: 'action', value: 'tf_add_hotel_room_availability'});
-            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
-            data.push({name: 'avail_date', value: avail_date.val()});
-			$(document).trigger('tourfic:room-availability:prepare-request', [data, container]);
+            data.push({ name: 'action', value: 'tf_add_hotel_room_availability' });
+            data.push({ name: '_nonce', value: tf_admin_params.tf_nonce });
+            data.push({ name: 'avail_date', value: avail_date.val() });
+            $(document).trigger('tourfic:room-availability:prepare-request', [data, container]);
 
             $.ajax({
                 url: tf_options.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
-                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    container.css({ 'pointer-events': 'none', 'opacity': '0.5' })
                     cal.addClass('tf-content-loading');
                     btn.addClass('tf-btn-loading');
                 },
@@ -1090,19 +1090,19 @@
                             notyf.error(response.data.message);
                         }
 
-                        container.css({'pointer-events': 'auto', 'opacity': '1'})
+                        container.css({ 'pointer-events': 'auto', 'opacity': '1' })
                         cal.removeClass('tf-content-loading');
                         btn.removeClass('tf-btn-loading');
                     }
                 },
                 error: function (e) {
                     console.log(e);
-                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' })
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
                 complete: function () {
-                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' });
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
@@ -1121,10 +1121,10 @@
             if ($this.hasClass('tf_room_availability_by_date')) {
                 tfHotelCalendar();
             }
-            if ($this.hasClass('tf_apartment_availability_by_date')){
+            if ($this.hasClass('tf_apartment_availability_by_date')) {
                 tfApartmentCalendar();
             }
-            if ($this.hasClass('tf_tour_availability_by_date')){
+            if ($this.hasClass('tf_tour_availability_by_date')) {
                 tfTourCalendar();
             }
         });
@@ -1151,7 +1151,7 @@
                 },
                 displayEventTime: true,
                 selectable: true,
-                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {
+                select: function ({ start, end, startStr, endStr, allDay, jsEvent, view, resource }) {
                     if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
                         self.fullCalendar.unselect();
                         setAptCheckInOut("", "", self.apartmentCalData);
@@ -1164,7 +1164,7 @@
                         setAptCheckInOut(check_in, check_out, self.apartmentCalData);
                     }
                 },
-                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
+                events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
                     let requestData = {
                         action: "tf_get_apartment_availability",
                         _nonce: tf_admin_params.tf_nonce,
@@ -1180,7 +1180,7 @@
                         type: "POST",
                         data: requestData,
                         beforeSend: function () {
-                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
+                            $(self.container).css({ 'pointer-events': 'none', 'opacity': '0.5' });
                             $(self.calendar).addClass('tf-content-loading');
                         },
                         success: function (doc) {
@@ -1188,7 +1188,7 @@
                                 successCallback(doc);
                             }
 
-                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
+                            $(self.container).css({ 'pointer-events': 'auto', 'opacity': '1' });
                             $(self.calendar).removeClass('tf-content-loading');
                         },
                         error: function (e) {
@@ -1201,9 +1201,9 @@
                     const eventTitleElement = document.createElement('div');
                     eventTitleElement.classList.add('fc-event-title');
                     eventTitleElement.innerHTML = title;
-                    return {domNodes: [eventTitleElement]};
+                    return { domNodes: [eventTitleElement] };
                 },
-                eventClick: function ({event, el, jsEvent, view}) {
+                eventClick: function ({ event, el, jsEvent, view }) {
                     let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
                         .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
                     let endTime;
@@ -1247,7 +1247,7 @@
             $('.tf_apt_check_in', apartmentCalData).val('');
             $('.tf_apt_check_out', apartmentCalData).val('');
             $('[name="tf_apt_price"]', apartmentCalData).val('');
-			$(document).trigger('tourfic:apartment-availability:reset', [apartmentCalData]);
+            $(document).trigger('tourfic:apartment-availability:reset', [apartmentCalData]);
 
             // Destroy old flatpickr instances to avoid conflicts
             $(apartmentCalData).find('[name="tf_apt_check_in"]').each(function () {
@@ -1320,17 +1320,17 @@
             let cal = container.find('.tf-apt-cal');
             let data = $('input, select', container.find('.tf-apt-cal-field')).serializeArray();
             let aptAvailability = container.find('.apt_availability');
-            data.push({name: 'action', value: 'tf_add_apartment_availability'});
-            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
-            data.push({name: 'apt_availability', value: aptAvailability.val()});
-			$(document).trigger('tourfic:apartment-availability:prepare-request', [data, container]);
+            data.push({ name: 'action', value: 'tf_add_apartment_availability' });
+            data.push({ name: '_nonce', value: tf_admin_params.tf_nonce });
+            data.push({ name: 'apt_availability', value: aptAvailability.val() });
+            $(document).trigger('tourfic:apartment-availability:prepare-request', [data, container]);
 
             $.ajax({
                 url: tf_options.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
-                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    container.css({ 'pointer-events': 'none', 'opacity': '0.5' })
                     cal.addClass('tf-content-loading');
                     btn.addClass('tf-btn-loading');
                 },
@@ -1350,31 +1350,31 @@
                             notyf.error(response.data.message);
                         }
 
-                        container.css({'pointer-events': 'auto', 'opacity': '1'})
+                        container.css({ 'pointer-events': 'auto', 'opacity': '1' })
                         cal.removeClass('tf-content-loading');
                         btn.removeClass('tf-btn-loading');
                     }
                 },
                 error: function (e) {
                     console.log(e);
-                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' })
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
                 complete: function () {
-                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' });
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
             });
         });
 
-         /*
-        * Tour Availability Calendar
-        * @since 2.10.2
-        * @auther: Foysal
-        */
-         var tourCal = function (container) {
+        /*
+       * Tour Availability Calendar
+       * @since 2.10.2
+       * @auther: Foysal
+       */
+        var tourCal = function (container) {
             var self = this;
             this.container = container;
             this.calendar = null
@@ -1391,8 +1391,8 @@
                 },
                 displayEventTime: true,
                 selectable: true,
-                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {
-					tourResetForm(self.tourCalData);
+                select: function ({ start, end, startStr, endStr, allDay, jsEvent, view, resource }) {
+                    tourResetForm(self.tourCalData);
                     if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
                         self.fullCalendar.unselect();
                         setTourCheckInOut("", "", self.tourCalData);
@@ -1405,7 +1405,7 @@
                         setTourCheckInOut(check_in, check_out, self.tourCalData);
                     }
                 },
-                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
+                events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
                     let requestData = {
                         action: "tf_get_tour_availability",
                         _nonce: tf_admin_params.tf_nonce,
@@ -1421,16 +1421,16 @@
                         type: "POST",
                         data: requestData,
                         beforeSend: function () {
-                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
+                            $(self.container).css({ 'pointer-events': 'none', 'opacity': '0.5' });
                             $(self.calendar).addClass('tf-content-loading');
                         },
                         success: function (doc) {
                             if (typeof doc == "object") {
                                 successCallback(doc?.avail_data);
                             }
-							$(self.container).find('.tf-tour-availability-extension-fields').html(doc?.options_html || '');
-							$(document).trigger('tourfic:tour-availability:editor-updated', [self.tourCalData, doc]);
-                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
+                            $(self.container).find('.tf-tour-availability-extension-fields').html(doc?.options_html || '');
+                            $(document).trigger('tourfic:tour-availability:editor-updated', [self.tourCalData, doc]);
+                            $(self.container).css({ 'pointer-events': 'auto', 'opacity': '1' });
                             $(self.calendar).removeClass('tf-content-loading');
                         },
                         error: function (e) {
@@ -1443,15 +1443,15 @@
                     const eventTitleElement = document.createElement('div');
                     eventTitleElement.classList.add('fc-event-title');
                     eventTitleElement.innerHTML = title;
-                    return {domNodes: [eventTitleElement]};
+                    return { domNodes: [eventTitleElement] };
                 },
                 eventDidMount: function (arg) {
                     const customClass = arg.event.extendedProps.customClass || '';
-                    if(customClass){
+                    if (customClass) {
                         arg.el.classList.add(customClass);
                     }
                 },
-                eventClick: function ({event}) {
+                eventClick: function ({ event }) {
                     let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
                         .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
                     let endTime = event.end
@@ -1495,36 +1495,36 @@
             $('.tf_tour_check_out', tourCalData).val(check_out);
         }
 
-		function setTourAllowedTimes(allowedTime, tourCalData) {
-			const $scope = $(tourCalData).find('.tf-tour-core-availability-fields');
-			const $target = $scope.find('.tf_tour_saved_allowed_times').first();
-			const $template = $scope.find('.tf-single-repeater-clone-allowed_time .tf-single-repeater').first();
-			const times = allowedTime && allowedTime.time
-				? Object.values(allowedTime.time)
-				: [];
-			const capacities = allowedTime && allowedTime.cont_max_capacity
-				? Object.values(allowedTime.cont_max_capacity)
-				: [];
+        function setTourAllowedTimes(allowedTime, tourCalData) {
+            const $scope = $(tourCalData).find('.tf-tour-core-availability-fields');
+            const $target = $scope.find('.tf_tour_saved_allowed_times').first();
+            const $template = $scope.find('.tf-single-repeater-clone-allowed_time .tf-single-repeater').first();
+            const times = allowedTime && allowedTime.time
+                ? Object.values(allowedTime.time)
+                : [];
+            const capacities = allowedTime && allowedTime.cont_max_capacity
+                ? Object.values(allowedTime.cont_max_capacity)
+                : [];
 
-			$target.empty();
-			times.forEach(function (time, index) {
-				if (!time || !$template.length) {
-					return;
-				}
+            $target.empty();
+            times.forEach(function (time, index) {
+                if (!time || !$template.length) {
+                    return;
+                }
 
-				const $row = $template.clone();
-				$row.find('[name="tf_repeater_count"]').val(index + 1);
-				$row.find('[name="allowed_time[time][]"]').val(time);
-				$row.find('[name="allowed_time[cont_max_capacity][]"]').val(capacities[index] || '');
-				$target.append($row);
-			});
+                const $row = $template.clone();
+                $row.find('[name="tf_repeater_count"]').val(index + 1);
+                $row.find('[name="allowed_time[time][]"]').val(time);
+                $row.find('[name="allowed_time[cont_max_capacity][]"]').val(capacities[index] || '');
+                $target.append($row);
+            });
 
-			$target.find('.flatpickr-input').flatpickr({
-				enableTime: true,
-				noCalendar: true,
-				dateFormat: 'h:i K'
-			});
-		}
+            $target.find('.flatpickr-input').flatpickr({
+                enableTime: true,
+                noCalendar: true,
+                dateFormat: 'h:i K'
+            });
+        }
 
         function getTourAvailabilityEntry(tourCalData) {
             const tourWrap = $(tourCalData).closest('.tf-tour-cal-wrap');
@@ -1602,9 +1602,9 @@
             $('[name="tf_tour_max_person"]', tourCalData).val('');
             $('[name="tf_tour_max_capacity"]', tourCalData).val('');
             $('[name="tf_tour_repeat_day[]"], [name="tf_tour_repeat_month[]"], [name="tf_tour_repeat_year[]"], [name="tf_tour_repeat_week[]"]')
-            .prop('checked', false);
-			setTourAllowedTimes({}, tourCalData);
-			$(document).trigger('tourfic:tour-availability:reset', [tourCalData]);
+                .prop('checked', false);
+            setTourAllowedTimes({}, tourCalData);
+            $(document).trigger('tourfic:tour-availability:reset', [tourCalData]);
 
             // Destroy old flatpickr instances to avoid conflicts
             $(tourCalData).find('[name="tf_tour_check_in"]').each(function () {
@@ -1680,17 +1680,17 @@
             let data = $('input, select', $tourField).serializeArray();
 
             let tourAvailability = container.find('.tour_availability');
-            data.push({name: 'action', value: 'tf_add_tour_availability'});
-            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
-            data.push({name: 'tour_availability', value: tourAvailability.val()});
-			$(document).trigger('tourfic:tour-availability:prepare-request', [data, container]);
+            data.push({ name: 'action', value: 'tf_add_tour_availability' });
+            data.push({ name: '_nonce', value: tf_admin_params.tf_nonce });
+            data.push({ name: 'tour_availability', value: tourAvailability.val() });
+            $(document).trigger('tourfic:tour-availability:prepare-request', [data, container]);
 
             $.ajax({
                 url: tf_options.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
-                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    container.css({ 'pointer-events': 'none', 'opacity': '0.5' })
                     cal.addClass('tf-content-loading');
                     btn.addClass('tf-btn-loading');
                 },
@@ -1710,7 +1710,7 @@
                             notyf.error(response.data.message);
                         }
 
-                        container.css({'pointer-events': 'auto', 'opacity': '1'})
+                        container.css({ 'pointer-events': 'auto', 'opacity': '1' })
                         cal.removeClass('tf-content-loading');
                         btn.removeClass('tf-btn-loading');
                     }
@@ -1725,12 +1725,12 @@
                 },
                 error: function (e) {
                     console.log(e);
-                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' })
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
                 complete: function () {
-                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' });
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
 
@@ -1774,7 +1774,7 @@
                     'tour_id': $('#post_ID').val()
                 },
                 beforeSend: function () {
-                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    container.css({ 'pointer-events': 'none', 'opacity': '0.5' })
                     cal.addClass('tf-content-loading');
                     btn.addClass('tf-btn-loading');
                 },
@@ -1794,18 +1794,18 @@
                     }
 
                     $('.tf-reset-confirmation-box').hide();
-                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' })
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
 
                 },
                 error: function (e) {
-                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' })
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
                 complete: function () {
-                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' });
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                     $('.tf-tour-cal-field').removeClass('tf-bulk-popup');
@@ -1829,7 +1829,7 @@
                     'room_id': $('#post_ID').val()
                 },
                 beforeSend: function () {
-                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    container.css({ 'pointer-events': 'none', 'opacity': '0.5' })
                     cal.addClass('tf-content-loading');
                     btn.addClass('tf-btn-loading');
                 },
@@ -1843,19 +1843,19 @@
                     } else {
                         notyf.error(response.data.message);
                     }
-                    
+
                     $('.tf-reset-confirmation-box').hide();
-                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' })
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
                 error: function (e) {
-                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' })
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
                 complete: function () {
-                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' });
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
@@ -1879,7 +1879,7 @@
                     'apartment_id': $('#post_ID').val()
                 },
                 beforeSend: function () {
-                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    container.css({ 'pointer-events': 'none', 'opacity': '0.5' })
                     cal.addClass('tf-content-loading');
                     btn.addClass('tf-btn-loading');
                 },
@@ -1897,20 +1897,20 @@
                     } else {
                         notyf.error(response.data.message);
                     }
-                    
+
                     $('.tf-reset-confirmation-box').hide();
-                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' })
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
 
                 },
                 error: function (e) {
-                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' })
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                 },
                 complete: function () {
-                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    container.css({ 'pointer-events': 'auto', 'opacity': '1' });
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
                     $('.tf-tour-cal-field').removeClass('tf-bulk-popup');
@@ -1932,31 +1932,31 @@
         // Tour Map Initialize based on Tab
         $(document).on("click", "#tf_tours_opt .tf-tablinks", function (e) {
             var $this = $(this);
-            if ($this.attr('data-tab')=='availability'){
+            if ($this.attr('data-tab') == 'availability') {
                 tfTourCalendar();
             }
         });
 
         // Bulk Popup Open
         $(document).on("click", ".tf_tour_cal_bulk_edit", function (e) {
-			const $field = $(this).closest('.tf-tour-cal-wrap').find('.tf-tour-cal-field').first();
-			tourResetForm($field);
-			$field.addClass('tf-bulk-popup');
-			$field.find('.tf-bulk-repeater-section').show();
-			$field.find('.tf-check-dates').hide();
-			$field.find('.tf_tour_cal_bulk_edit, .tf_tour_cal_reset').hide();
-			$field.find('.tf-bulk-edit-header').css('display', 'flex');
-			$field.find('.tf_bulk_edit_option').val('1');
+            const $field = $(this).closest('.tf-tour-cal-wrap').find('.tf-tour-cal-field').first();
+            tourResetForm($field);
+            $field.addClass('tf-bulk-popup');
+            $field.find('.tf-bulk-repeater-section').show();
+            $field.find('.tf-check-dates').hide();
+            $field.find('.tf_tour_cal_bulk_edit, .tf_tour_cal_reset').hide();
+            $field.find('.tf-bulk-edit-header').css('display', 'flex');
+            $field.find('.tf_bulk_edit_option').val('1');
         });
 
         // Bulk Popup Close
         $(document).on("click", ".tf_tour_bulk_close", function (e) {
-			const $field = $(this).closest('.tf-tour-cal-wrap').find('.tf-tour-cal-field').first();
-			$field.removeClass('tf-bulk-popup');
-			$field.find('.tf-bulk-repeater-section').hide();
-			$field.find('.tf-check-dates, .tf_tour_cal_reset, .tf_tour_cal_bulk_edit').show();
-			$field.find('.tf-bulk-edit-header').hide();
-			$field.find('.tf_bulk_edit_option').val('');
+            const $field = $(this).closest('.tf-tour-cal-wrap').find('.tf-tour-cal-field').first();
+            $field.removeClass('tf-bulk-popup');
+            $field.find('.tf-bulk-repeater-section').hide();
+            $field.find('.tf-check-dates, .tf_tour_cal_reset, .tf_tour_cal_bulk_edit').show();
+            $field.find('.tf-bulk-edit-header').hide();
+            $field.find('.tf_bulk_edit_option').val('');
         });
 
         /*
@@ -1972,7 +1972,7 @@
                     toolbar2: 'styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
                     //   textarea_rows : 20
                 },
-                quicktags: {buttons: 'strong,em,link,block,del,ins,img,ul,ol,li,code,more,close'},
+                quicktags: { buttons: 'strong,em,link,block,del,ins,img,ul,ol,li,code,more,close' },
                 mediaButtons: false,
             });
         }
@@ -1980,10 +1980,10 @@
         $('textarea.wp_editor, textarea.tf_wp_editor').each(function () {
             let $id = $(this).attr('id');
 
-            setTimeout(function() { 
+            setTimeout(function () {
                 TF_wp_editor($id);
             }, 1000);
-            
+
         });
 
         /*
@@ -2065,14 +2065,14 @@
             let repeatColorField = add_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
                 repeatColorField.find('input.tf-color').each(function () {
-                    var color_field =  $(this).clone(); 
-                    if($(this).closest('li').length > 0){
+                    var color_field = $(this).clone();
+                    if ($(this).closest('li').length > 0) {
                         $(this).closest('li').append(color_field);
-                    }else{
+                    } else {
                         $(this).closest('.tf-fieldset').append(color_field);
                     }
                     $(this).closest('.wp-picker-container').remove();
-                 });
+                });
                 tfColorInt(repeatColorField);
             }
 
@@ -2221,14 +2221,14 @@
             let repeatColorField = clone_value.find('.tf-field-color');
             if (repeatColorField.length > 0) {
                 repeatColorField.find('input.tf-color').each(function () {
-                    var color_field =  $(this).clone(); 
-                    if($(this).closest('li').length > 0){
+                    var color_field = $(this).clone();
+                    if ($(this).closest('li').length > 0) {
                         $(this).closest('li').append(color_field);
-                    }else{
+                    } else {
                         $(this).closest('.tf-fieldset').append(color_field);
                     }
                     $(this).closest('.wp-picker-container').remove();
-                 });
+                });
                 tfColorInt(repeatColorField);
             }
 
@@ -2396,7 +2396,7 @@
                     $(this).css('display', 'flex');
                 }
             });
-            
+
         });
 
         // TAB jquery
@@ -2418,7 +2418,7 @@
         });
 
         // Select 2 add new category
-        $(document).on('click', '.tf-add-category span', function (event) { 
+        $(document).on('click', '.tf-add-category span', function (event) {
             event.preventDefault();
             var $this = $(this);
             var parentDiv = $this.closest('.tf-fieldset');
@@ -2426,13 +2426,13 @@
         });
 
         // Close Popup
-        $(document).on('click', '.tf-add-category-box-close', function (event) { 
+        $(document).on('click', '.tf-add-category-box-close', function (event) {
             event.preventDefault();
             $('.tf-popup-box').hide();
         });
 
         // Create Category
-        $(document).on('click', '.tf-category-button', function (event) { 
+        $(document).on('click', '.tf-category-button', function (event) {
             event.preventDefault();
             var $this = $(this);
             var parentDiv = $this.closest('.tf-add-category-box');
@@ -2456,7 +2456,7 @@
                     if (data.insert_category) {
                         // Store to List and Selected
                         var newOption = new Option(data.insert_category.title, data.insert_category.id, true, true);
-                        $('#'+categorySelect).append(newOption).trigger('change');
+                        $('#' + categorySelect).append(newOption).trigger('change');
 
                         // Store to Popup List
                         var newPopuOption = new Option(data.insert_category.title, data.insert_category.id, false, false);
@@ -2471,7 +2471,7 @@
         });
 
         // Create Post
-        $(document).on('click', '.tf-add-new-post-button', function (event) { 
+        $(document).on('click', '.tf-add-new-post-button', function (event) {
             event.preventDefault();
             var $this = $(this);
             var parentDiv = $this.closest('.tf-add-category-box');
@@ -2481,7 +2481,7 @@
             let fieldId = parentDiv.find('.field_id').val();
             let postId = parentDiv.find('.post_id').val();
 
-            if(postTitle){
+            if (postTitle) {
                 $.ajax({
                     url: tf_options.ajax_url,
                     method: 'POST',
@@ -2493,7 +2493,7 @@
                         fieldId: fieldId,
                         postId: postId
                     },
-                    beforeSend: function(){
+                    beforeSend: function () {
                         $this.addClass('tf-btn-loading');
                     },
                     success: function (response) {
@@ -2501,12 +2501,12 @@
                         if (data.insert_post) {
                             // Store to List and Selected
                             var newOption = new Option(data.insert_post.title, data.insert_post.id, true, true);
-                            
-                            if(fieldId == 'tf_rooms'){
+
+                            if (fieldId == 'tf_rooms') {
                                 $(newOption).attr('data-edit-url', data.insert_post.edit_url);
                             }
-                            
-                            $('#'+postSelect).append(newOption).trigger('change');
+
+                            $('#' + postSelect).append(newOption).trigger('change');
                         }
                         $this.removeClass('tf-btn-loading');
                         $('.tf-popup-box').hide();
@@ -2663,7 +2663,7 @@ var frame, gframe;
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(mapInit);
 
-                var mapMarker = L.marker(map_data.center, {draggable: true}).addTo(mapInit);
+                var mapMarker = L.marker(map_data.center, { draggable: true }).addTo(mapInit);
 
                 var update_latlng = function (data) {
                     $latitude.val(data.lat);
@@ -3106,20 +3106,20 @@ const legendSpacingPlugin = {
                         data: tf_options.tf_complete_order,
                         fill: false
                     },
-                        {
-                            label: "Cancel Booking",
-                            borderColor: '#E7000B',
-                            backgroundColor: '#E7000B',
-                            tension: 0.1,
-                            data: tf_options.tf_cancel_orders,
-                            fill: false
-                        }
+                    {
+                        label: "Cancel Booking",
+                        borderColor: '#E7000B',
+                        backgroundColor: '#E7000B',
+                        tension: 0.1,
+                        data: tf_options.tf_cancel_orders,
+                        fill: false
+                    }
                     ]
                 },
 
                 // Configuration options
                 options: {
-                    plugins:{
+                    plugins: {
                         legend: {
                             display: true,
                             position: 'top',
@@ -3127,7 +3127,7 @@ const legendSpacingPlugin = {
                             labels: {
                                 usePointStyle: true,
                                 pointStyle: 'circle',
-                                fontSize: 10,    
+                                fontSize: 10,
                                 fontStyle: '400',
                                 fontColor: '#242B31',
                             },
@@ -3181,20 +3181,20 @@ const legendSpacingPlugin = {
                                     data: response.tf_complete_orders,
                                     fill: false
                                 },
-                                    {
-                                        label: "Cancel Booking",
-                                        borderColor: '#E7000B',
-                                        backgroundColor: '#E7000B',
-                                        tension: 0.1,
-                                        data: response.tf_cancel_orders,
-                                        fill: false
-                                    }
+                                {
+                                    label: "Cancel Booking",
+                                    borderColor: '#E7000B',
+                                    backgroundColor: '#E7000B',
+                                    tension: 0.1,
+                                    data: response.tf_cancel_orders,
+                                    fill: false
+                                }
                                 ]
                             },
 
                             // Configuration options
                             options: {
-                                plugins:{
+                                plugins: {
                                     legend: {
                                         display: true,
                                         position: 'top',
@@ -3202,7 +3202,7 @@ const legendSpacingPlugin = {
                                         labels: {
                                             usePointStyle: true,
                                             pointStyle: 'circle',
-                                            fontSize: 10,    
+                                            fontSize: 10,
                                             fontStyle: '400',
                                             fontColor: '#242B31',
                                         },
@@ -3263,20 +3263,20 @@ const legendSpacingPlugin = {
                                     data: response.tf_complete_orders,
                                     fill: false
                                 },
-                                    {
-                                        label: "Cancel Booking",
-                                        borderColor: '#E7000B',
-                                        backgroundColor: '#E7000B',
-                                        tension: 0.1,
-                                        data: response.tf_cancel_orders,
-                                        fill: false
-                                    }
+                                {
+                                    label: "Cancel Booking",
+                                    borderColor: '#E7000B',
+                                    backgroundColor: '#E7000B',
+                                    tension: 0.1,
+                                    data: response.tf_cancel_orders,
+                                    fill: false
+                                }
                                 ]
                             },
 
                             // Configuration options
                             options: {
-                                plugins:{
+                                plugins: {
                                     legend: {
                                         display: true,
                                         position: 'top',
@@ -3284,7 +3284,7 @@ const legendSpacingPlugin = {
                                         labels: {
                                             usePointStyle: true,
                                             pointStyle: 'circle',
-                                            fontSize: 10,    
+                                            fontSize: 10,
                                             fontStyle: '400',
                                             fontColor: '#242B31',
                                         },
@@ -3342,22 +3342,22 @@ const legendSpacingPlugin = {
             if (section_title != undefined && section_title != '' && data.length) {
                 data = section_title + '=' + (data.length ? `"${data}"` : '""');
             }
-            if (section_subtitle != undefined && section_subtitle != '' && data.length ) {
+            if (section_subtitle != undefined && section_subtitle != '' && data.length) {
                 data = section_subtitle + '=' + (data.length ? `"${data}"` : '""');
             }
             if (tour_tab_title != undefined && tour_tab_title != '' && data.length) {
                 data = tour_tab_title + '=' + (data.length ? `"${data}"` : '""');
             }
-            if (hotel_tab_title != undefined && hotel_tab_title != '' && data.length ) {
+            if (hotel_tab_title != undefined && hotel_tab_title != '' && data.length) {
                 data = hotel_tab_title + '=' + (data.length ? `"${data}"` : '""');
             }
-            if (room_tab_title != undefined && room_tab_title != '' && data.length ) {
+            if (room_tab_title != undefined && room_tab_title != '' && data.length) {
                 data = room_tab_title + '=' + (data.length ? `"${data}"` : '""');
             }
-            if (apartment_tab_title != undefined && apartment_tab_title != '' && data.length ) {
+            if (apartment_tab_title != undefined && apartment_tab_title != '' && data.length) {
                 data = apartment_tab_title + '=' + (data.length ? `"${data}"` : '""');
             }
-            if (car_tab_title != undefined && car_tab_title != '' && data.length ) {
+            if (car_tab_title != undefined && car_tab_title != '' && data.length) {
                 data = car_tab_title + '=' + (data.length ? `"${data}"` : '""');
             }
             arr.push(data);
@@ -3397,13 +3397,13 @@ const legendSpacingPlugin = {
         }
         //show the copied message
         $(this).parents('.tf-copy-item').append('<div><span class="tf-copied-msg">Copied<span></div>');
-        $("span.tf-copied-msg").animate({opacity: 0}, 1000, function () {
+        $("span.tf-copied-msg").animate({ opacity: 0 }, 1000, function () {
             $(this).slideUp('slow', function () {
                 $(this).remove();
             });
         });
     });
-    
+
     $(document).ready(function () {
         // $('.tf-import-btn').on('click', function (event) {
         //     event.preventDefault();
@@ -3446,9 +3446,9 @@ const legendSpacingPlugin = {
         //         });
         //     }
         // })
-        $(document).on('click', '.tf-import-btn', function (event) { 
+        $(document).on('click', '.tf-import-btn', function (event) {
             event.preventDefault();
-            var textarea = $('textarea[name="tf_import_option"]'); 
+            var textarea = $('textarea[name="tf_import_option"]');
             var importData = textarea.val().trim();
             if (importData == '') {
                 alert(tf_options.tf_export_import_msg.import_empty);
@@ -3456,9 +3456,9 @@ const legendSpacingPlugin = {
                 importField.focus();
                 importField.css('border', '1px solid red');
                 return;
-            } 
+            }
             // Triger the form submit
-            $(".tf-option-form").submit(); 
+            $(".tf-option-form").submit();
         });
 
         $(document).on('click', '.tf-export-btn', function (event) {
@@ -3480,7 +3480,7 @@ const legendSpacingPlugin = {
 
                     if (obj.status === 'success') {
                         // Create a blob with the response value
-                        var blob = new Blob([obj.data], {type: 'text/plain'});
+                        var blob = new Blob([obj.data], { type: 'text/plain' });
 
                         // Create a temporary URL for the blob
                         var url = window.URL.createObjectURL(blob);
@@ -3512,7 +3512,7 @@ const legendSpacingPlugin = {
         });
 
         // Select 2 add new category
-        $(document).on('click', '.tf-add-category i', function (event) { 
+        $(document).on('click', '.tf-add-category i', function (event) {
             event.preventDefault();
             $this = $(this);
             parentDiv = $this.closest('.tf-fieldset');
@@ -3520,7 +3520,7 @@ const legendSpacingPlugin = {
         });
 
         // Close Popup
-        $(document).on('click', '.tf-add-category-box-close', function (event) { 
+        $(document).on('click', '.tf-add-category-box-close', function (event) {
             event.preventDefault();
             $('#tf-popup-box').hide();
         });
@@ -3538,7 +3538,7 @@ const legendSpacingPlugin = {
         function getSelectedDesign() {
             return $('input[name="tf_settings\\[color-palette-template\\]"]:checked').val();
         }
-        
+
         const designDefault = {
             'd1': {
                 brand: {
@@ -3621,24 +3621,24 @@ const legendSpacingPlugin = {
                 },
             },
         };
-    
+
         // Function to update custom colors based on the selected design
         function updateCustomColors(selectedDesign) {
             if (!selectedDesign) return;
-    
+
             const colorPalettes = {
                 'design-1': 'tf-d1',
                 'design-2': 'tf-d2',
                 'design-3': 'tf-d3',
                 'design-4': 'tf-d4'
             };
-    
+
             const selectedPalette = colorPalettes[selectedDesign];
             if (!selectedPalette) return;
-    
+
             // Define the fields to be updated
             const fields = ['brand', 'text', 'border', 'filling'];
-    
+
             fields.forEach(field => {
                 $(`input[name^="tf_settings[${selectedPalette}-${field}]"]`).each(function () {
                     let fieldName = $(this).attr('name').split('[')[2].replace(']', ''); // Extract the sub-field (e.g., 'default', 'dark', 'lite')
@@ -3650,8 +3650,8 @@ const legendSpacingPlugin = {
                     }
                 });
             });
-        }     
-    
+        }
+
         // Initialize wpColorPicker for all relevant inputs
         $('input[name^="tf_settings[tf-d"]').wpColorPicker({
             change: function (event, ui) {
@@ -3660,26 +3660,26 @@ const legendSpacingPlugin = {
                 let newValue = ui.color.toString();
 
                 updateCustomColors(getSelectedDesign());
-    
+
                 if (newValue !== originalValue) {
                     // Switch to custom palette
                     $('#tf_settings\\[color-palette-template\\]\\[custom\\]').prop("checked", true);
                     $('.tf-field.tf-field-color.tf-depend-hidden').addClass('tf-depend-on');
                     $('.tf-field.tf-field-color.tf-depend-hidden[data-value="custom"]').removeClass('tf-depend-on');
-    
+
                     // Extract the field type and sub-field name
                     let nameAttr = $colorField.attr('name');
                     let match = nameAttr.match(/\[tf-(d\d+)-(brand|text|border|filling)]\[(.*?)\]/);
                     if (!match) return;
-    
+
                     let design = match[1]; // e.g., 'd1', 'd2', etc.
                     let fieldType = match[2]; // e.g., 'brand', 'text', etc.
                     let fieldName = match[3]; // e.g., 'default', 'dark', 'lite', etc.
-    
+
                     // Update the corresponding custom field
                     let $customColorField = $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`);
                     if ($customColorField.length) {
-                        
+
                         let value = $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val();
                         $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`).val(value).trigger('change');
                         $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val(designDefault[design][fieldType][fieldName]).trigger('change');
@@ -3689,63 +3689,5 @@ const legendSpacingPlugin = {
             }
         });
     });
-    
-    /* Plugin insatall from dashboard sidebar */
-    jQuery(document).ready(function($) {
-        $('.tf-plugin-button').on('click', function(e) {
-            e.preventDefault();
 
-            let button = $(this);
-            let action = button.data('action');
-            let pluginSlug = button.data('plugin');
-            let pluginFileName = button.data('plugin_filename');
-
-            if (!action || !pluginSlug) return;
-
-            let loader = button.find('.loader');
-            let originalText = button.clone().children().remove().end().text().trim();
-
-            if (action === 'install') {
-                button.contents().first().replaceWith('Installing..');
-            } else if (action === 'activate') {
-                button.contents().first().replaceWith('Activating..');
-            }
-
-            button.addClass('loading').prop('disabled', true);
-            loader.show();
-
-            $.ajax({
-                url: ajaxurl,
-                type: 'POST',
-                data: {
-                    action: 'themefic_manage_plugin',
-                    security: tf_admin_params.tf_nonce,
-                    plugin_slug: pluginSlug,
-                    plugin_filename: pluginFileName,
-                    plugin_action: action
-                },
-                success: function(response) {
-                    button.removeClass('loading').prop('disabled', false);
-                    loader.hide();
-
-                    if (response.success) {
-                        if (action === 'install') {
-                            button.contents().first().replaceWith('Activate');
-                            button.data('action', 'activate').removeClass('install').addClass('activate');
-                        } else if (action === 'activate') {
-                            button.replaceWith('<span class="tf-plugin-button tf-plugin-status active">Activated</span>');
-                        }
-                    } else {
-                        button.contents().first().replaceWith(originalText);
-                        alert('Error: ' + response.data);
-                    }
-                },
-                error: function() {
-                    button.contents().first().replaceWith(originalText).removeClass('loading').prop('disabled', false);
-                    loader.hide();
-                    alert('An error occurred. Please try again.');
-                }
-            });
-        });
-    });
 })(jQuery);

@@ -41,7 +41,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
             add_action( 'wp_ajax_tf_export_data', array( $this, 'tf_export_data' ) );
 			
-			add_action('wp_ajax_themefic_manage_plugin', array( $this, 'themefic_manage_plugin' ) );
         }
 
         public static function option( $key, $params = array() ) {
@@ -546,61 +545,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			<?php 
 		}
 
-		public function themefic_manage_plugin() {
-			check_ajax_referer('updates', 'security');
-
-			if (!current_user_can('install_plugins')) {
-				wp_send_json_error('You do not have permission to perform this action.');
-			}
-
-			$plugin_slug = isset($_POST['plugin_slug']) ? sanitize_text_field($_POST['plugin_slug']) : '';
-			$plugin_filename = isset($_POST['plugin_filename']) ? sanitize_text_field($_POST['plugin_filename']) : '';
-			$plugin_action = isset($_POST['plugin_action']) ? sanitize_text_field($_POST['plugin_action']) : '';
-
-			if (!$plugin_slug || !$plugin_action) {
-				wp_send_json_error('Invalid request.');
-			}
-
-			include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-			include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-			include_once ABSPATH . 'wp-admin/includes/plugin.php';
-
-			if ($plugin_action === 'install') {
-				$api = plugins_api('plugin_information', ['slug' => $plugin_slug]);
-
-				if (is_wp_error($api)) {
-					wp_send_json_error($api->get_error_message());
-				}
-
-				$upgrader = new Plugin_Upgrader(new WP_Ajax_Upgrader_Skin());
-				$install_result = $upgrader->install($api->download_link);
-
-				if (is_wp_error($install_result)) {
-					wp_send_json_error($install_result->get_error_message());
-				}
-
-				wp_send_json_success(['message' => 'Installed successfully.']);
-			}
-
-			if ($plugin_action === 'activate') {
-				$plugin_path = WP_PLUGIN_DIR . '/' . $plugin_slug . '/' . $plugin_filename . '.php';
-
-				if (!file_exists($plugin_path)) {
-					wp_send_json_error('Plugin file not found.');
-				}
-
-				$activate_result = activate_plugin($plugin_path);
-
-				if (is_wp_error($activate_result)) {
-					wp_send_json_error($activate_result->get_error_message());
-				}
-
-				wp_send_json_success(['message' => 'Activated successfully.']);
-			}
-
-			wp_send_json_error('Invalid action.');
-		}
-
 		/**
 		 * Get Help Page
 		 * @author Jahid, Foysal
@@ -978,11 +922,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			$existing_option = get_option( $this->option_id, array() );
 			$tf_option_value = is_array( $existing_option ) ? $existing_option : array();
-			$option_request  = ( ! empty( $_POST[ $this->option_id ] ) ) ? $_POST[ $this->option_id ] : array();
+			$option_request  = ( ! empty( $_POST[ $this->option_id ] ) ) ? $_POST[ $this->option_id ] : array(); //phpcs:ignore
 
-			if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) ))){
+			if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) ))){ //phpcs:ignore
 
-				$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true );
+				$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true ); //phpcs:ignore
 
 				do_action( 'tf_setting_import_before_save', $tf_import_option );
 
@@ -1045,10 +989,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										// extension want to allow
 										$allowed_ext = array('ttf', 'otf', 'woff', 'woff2', 'eot');
 										$allowed_mime_types = array('application/octet-stream', 'font/ttf', 'font/otf', 'font/woff', 'font/woff2', 'application/vnd.ms-fontobject');
-										for($i = 0; $i < count($_FILES['file']['name']); $i++) {
+										for($i = 0; $i < count($_FILES['file']['name']); $i++) { //phpcs:ignore
 											
-											$tf_font_filename = sanitize_file_name( wp_unslash($_FILES['file']['name'][$i]) );
-											$uploaded_file_tmp = sanitize_file_name( wp_unslash($_FILES['file']['tmp_name'][$i]) );
+											$tf_font_filename = sanitize_file_name( wp_unslash($_FILES['file']['name'][$i]) ); //phpcs:ignore
+											$uploaded_file_tmp = sanitize_file_name( wp_unslash($_FILES['file']['tmp_name'][$i]) ); //phpcs:ignore
 											$checked = wp_check_filetype_and_ext( $uploaded_file_tmp, $tf_font_filename);
 											if (isset($checked['ext']) && in_array($checked["ext"], $allowed_ext) && in_array($checked['type'], $allowed_mime_types)) {
 												$destination_path = $tf_itinerary_fonts .'/'. $tf_font_filename;
@@ -1112,9 +1056,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                 die();
 	        }
 
-			if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) )) ){
+			if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) )) ){ //phpcs:ignore
 
-				$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true );
+				$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true ); //phpcs:ignore
 				if(empty($tf_import_option) || !is_array($tf_import_option)){
 					$response    = [
 						'status'  => 'error',

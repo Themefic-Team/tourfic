@@ -155,7 +155,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 
 			$existing_meta_value = get_post_meta( $post_id, $this->metabox_id, true );
 			$tf_meta_box_value   = is_array( $existing_meta_value ) ? $existing_meta_value : array();
-			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array();
+			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array(); //phpcs:ignore
 
 			if ( ! empty( $metabox_request ) && ! empty( $this->metabox_sections ) ) {
 				foreach ( $this->metabox_sections as $section ) {
@@ -209,22 +209,22 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			 * @author Jahid
 			 */
 			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_hotel" ){
-				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_hotels_opt' ] ) ) ? $_POST[ 'tf_hotels_opt' ] : array();
+				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_hotels_opt' ] ) ) ? $_POST[ 'tf_hotels_opt' ] : array();  //phpcs:ignore
 			}
 			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_tours" ){
-				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_tours_opt' ] ) ) ? $_POST[ 'tf_tours_opt' ] : array();
+				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_tours_opt' ] ) ) ? $_POST[ 'tf_tours_opt' ] : array();  //phpcs:ignore
 			}
 			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_apartment" ){
-				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_apartment_opt' ] ) ) ? $_POST[ 'tf_apartment_opt' ] : array();
+				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_apartment_opt' ] ) ) ? $_POST[ 'tf_apartment_opt' ] : array();  //phpcs:ignore
 			}
 			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_carrental" ){
-				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_carrental_opt' ] ) ) ? $_POST[ 'tf_carrental_opt' ] : array();
+				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_carrental_opt' ] ) ) ? $_POST[ 'tf_carrental_opt' ] : array();  //phpcs:ignore
 			}
 			$post_basic_info = array(
 				'post_id' => sanitize_key( $post_id ),
-				'post_title' => !empty($_POST['post_title']) ? sanitize_text_field( $_POST['post_title'] ) : '',
-				'post_content' => !empty($_POST['content']) ? sanitize_text_field( $_POST['content'] ) : '',
-				'post_status' => !empty($_POST['post_status']) ? sanitize_text_field( $_POST['post_status'] ) : '',
+				'post_title' => !empty($_POST['post_title']) ? sanitize_text_field( wp_unslash($_POST['post_title']) ) : '',
+				'post_content' => !empty($_POST['content']) ? sanitize_text_field( wp_unslash($_POST['content']) ) : '',
+				'post_status' => !empty($_POST['post_status']) ? sanitize_text_field( wp_unslash($_POST['post_status']) ) : '',
 				'post_thumbnail' => !empty( get_the_post_thumbnail_url($post_id,'full') ) ?  get_the_post_thumbnail_url($post_id,'full') : '',
 				'post_date' => get_the_date( 'Y-m-d H:i:s', $post_id )
 			);

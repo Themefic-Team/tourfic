@@ -41,7 +41,7 @@ class Apartment {
 			return;
 		}
 		$design = isset( $_POST['design'] ) ? sanitize_text_field( wp_unslash( $_POST['design'] ) ) : '';
-		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( wp_unslash( $_POST['post_id'] ) ) : '';
+		$post_id = !empty( $_POST['post_id'] ) ? sanitize_text_field( wp_unslash( $_POST['post_id'] ) ) : '';
 		$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
 		// Single Template Style
 		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
@@ -57,7 +57,7 @@ class Apartment {
 		?>
         <div class="tf-hotel-quick-view" style="display: flex">
 			<?php
-			$room_id_match = isset( $_POST['id'] ) ? sanitize_text_field( wp_unslash( $_POST['id'] ) ) : '';
+			$room_id_match = !empty( $_POST['id'] ) ? sanitize_text_field( wp_unslash( $_POST['id'] ) ) : '';
 			foreach ( Helper::tf_data_types( $meta['rooms'] ) as $key => $room ) :
 				if ( $key == $room_id_match ):
 					$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';

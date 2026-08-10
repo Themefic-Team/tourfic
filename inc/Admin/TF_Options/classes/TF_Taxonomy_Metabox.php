@@ -125,9 +125,7 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 	        }
 
 			$tf_taxonomy_value = array();
-			$taxonomy_request   = ( ! empty( $_POST[ $this->taxonomy_id ] ) ) ? $_POST[ $this->taxonomy_id ] : array();
-
-			// var_dump($taxonomy_request); exit;
+			$taxonomy_request   = ( ! empty( $_POST[ $this->taxonomy_id ] ) ) ? $_POST[ $this->taxonomy_id ] : array(); //phpcs:ignore
 
 			if ( ! empty( $taxonomy_request ) && ! empty( $this->taxonomy_fields ) ) {
 				foreach ( $this->taxonomy_fields as $field ) {
