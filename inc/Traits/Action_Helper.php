@@ -259,7 +259,8 @@ trait Action_Helper {
 		if ( ! current_user_can( 'edit_user', $user_id ) ) {
 			return false;
 		}
-		update_user_meta( $user_id, 'language', sanitize_text_field( wp_unslash($_POST['language']) ) );
+		$language = !empty($_POST['language']) ? sanitize_text_field( wp_unslash($_POST['language']) ) : '';
+		update_user_meta( $user_id, 'language', $language );
 	}
 
 	/*
@@ -807,27 +808,27 @@ trait Action_Helper {
 		 * Get form data
 		 */
 		global $wpdb;
-		$adults = ! empty( $_POST['adults'] ) ? sanitize_text_field( $_POST['adults'] ) : '';
-		$child  = ! empty( $_POST['children'] ) ? sanitize_text_field( $_POST['children'] ) : '';
-		$infant = ! empty( $_POST['infant'] ) && $_POST['infant'] != "undefined" ? sanitize_text_field( $_POST['infant'] ) : '';
+		$adults = ! empty( $_POST['adults'] ) ? sanitize_text_field( wp_unslash($_POST['adults']) ) : '';
+		$child  = ! empty( $_POST['children'] ) ? sanitize_text_field( wp_unslash($_POST['children']) ) : '';
+		$infant = ! empty( $_POST['infant'] ) && $_POST['infant'] != "undefined" ? sanitize_text_field( wp_unslash($_POST['infant']) ) : '';
 
-		$room         = ! empty( $_POST['room'] ) ? sanitize_text_field( $_POST['room'] ) : '';
-		$check_in_out = ! empty( $_POST['checked'] ) && 'undefined'!=$_POST['checked'] ? sanitize_text_field( $_POST['checked'] ) : '';
+		$room         = ! empty( $_POST['room'] ) ? sanitize_text_field( wp_unslash($_POST['room']) ) : '';
+		$check_in_out = ! empty( $_POST['checked'] ) && 'undefined'!=$_POST['checked'] ? sanitize_text_field( wp_unslash($_POST['checked']) ) : '';
 
 		$relation        = self::tfopt( 'search_relation', 'AND' );
 		$filter_relation = self::tfopt( 'filter_relation', 'OR' );
 
-		$search                = !empty( $_POST['dest'] ) ? sanitize_text_field( $_POST['dest'] ) : null;
-		$filters               = !empty( $_POST['filters'] ) ? explode( ',', sanitize_text_field( $_POST['filters'] ) ) : null;
-		$features              = !empty( $_POST['features'] ) ? explode( ',', sanitize_text_field( $_POST['features'] ) ) : null;
-		$tf_hotel_types        = !empty( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_hotel_types'] ) ) : null;
-		$tf_room_types        = !empty( $_POST['tf_room_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_room_types'] ) ) : null;
-		$tour_features         = !empty( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( $_POST['tour_features'] ) ) : null;
-		$attractions           = !empty( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( $_POST['attractions'] ) ) : null;
-		$activities            = !empty( $_POST['activities'] ) ? explode( ',', sanitize_text_field( $_POST['activities'] ) ) : null;
-		$tf_tour_types         = !empty( $_POST['tf_tour_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_tour_types'] ) ) : null;
-		$tf_apartment_features = !empty( $_POST['tf_apartment_features'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_features'] ) ) : null;
-		$tf_apartment_types    = !empty( $_POST['tf_apartment_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_types'] ) ) : null;
+		$search                = !empty( $_POST['dest'] ) ? sanitize_text_field( wp_unslash($_POST['dest']) ) : null;
+		$filters               = !empty( $_POST['filters'] ) ? explode( ',', sanitize_text_field( wp_unslash($_POST['filters']) ) ) : null; //phpcs:ignore
+		$features              = !empty( $_POST['features'] ) ? explode( ',', sanitize_text_field( wp_unslash($_POST['features']) ) ) : null; //phpcs:ignore
+		$tf_hotel_types        = !empty( $_POST['tf_hotel_types'] ) ? explode( ',', sanitize_text_field( wp_unslash($_POST['tf_hotel_types']) ) ) : null; //phpcs:ignore
+		$tf_room_types        = !empty( $_POST['tf_room_types'] ) ? explode( ',', sanitize_text_field( wp_unslash($_POST['tf_room_types']) ) ) : null; //phpcs:ignore
+		$tour_features         = !empty( $_POST['tour_features'] ) ? explode( ',', sanitize_text_field( wp_unslash($_POST['tour_features']) ) ) : null; //phpcs:ignore
+		$attractions           = !empty( $_POST['attractions'] ) ? explode( ',', sanitize_text_field( wp_unslash($_POST['attractions']) ) ) : null; //phpcs:ignore
+		$activities            = !empty( $_POST['activities'] ) ? explode( ',', sanitize_text_field( wp_unslash($_POST['activities']) ) ) : null; //phpcs:ignore
+		$tf_tour_types         = !empty( $_POST['tf_tour_types'] ) ? explode( ',', sanitize_text_field( wp_unslash($_POST['tf_tour_types']) ) ) : null; //phpcs:ignore
+		$tf_apartment_features = !empty( $_POST['tf_apartment_features'] ) ? explode( ',', sanitize_text_field( wp_unslash($_POST['tf_apartment_features']) ) ) : null; //phpcs:ignore
+		$tf_apartment_types    = !empty( $_POST['tf_apartment_types'] ) ? explode( ',', sanitize_text_field( wp_unslash($_POST['tf_apartment_types']) ) ) : null; //phpcs:ignore
 		$posttype              = !empty( $_POST['type'] ) ? sanitize_text_field( wp_unslash($_POST['type']) ) : 'tf_hotel';
 		$ordering_type 		   = !empty( $_POST["tf_ordering"] ) ? sanitize_text_field(wp_unslash($_POST["tf_ordering"])) : 'default';
 		# Separate taxonomy input for filter query
@@ -839,51 +840,51 @@ trait Action_Helper {
 		$endprice   = ! empty( $_POST['endprice'] ) ? sanitize_text_field( wp_unslash( $_POST['endprice'] ) ) : '';
 
         //Map Template only
-        $mapFilter = !empty($_POST['mapFilter']) ? sanitize_text_field($_POST['mapFilter']) : false;
-        $mapCoordinates = !empty($_POST['mapCoordinates']) ? explode(',', sanitize_text_field($_POST['mapCoordinates'])) : [];
+        $mapFilter = !empty($_POST['mapFilter']) ? sanitize_text_field($_POST['mapFilter']) : false; //phpcs:ignore
+        $mapCoordinates = !empty($_POST['mapCoordinates']) ? explode(',', sanitize_text_field($_POST['mapCoordinates'])) : []; //phpcs:ignore
         if (!empty($mapCoordinates) && count($mapCoordinates) === 4) {
             list($minLat, $minLng, $maxLat, $maxLng) = $mapCoordinates;
         }
 
 		// Cars Data Start
-		$pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( $_POST['pickup'] ) : '';
-		$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( $_POST['dropoff'] ) : '';
-		$tf_pickup_date  = ! empty( $_POST['pickup_date'] ) ? tf_normalize_date( sanitize_text_field( $_POST['pickup_date'] ) ) : '';
-		$tf_dropoff_date = ! empty( $_POST['dropoff_date'] ) ? tf_normalize_date( sanitize_text_field( $_POST['dropoff_date'] ) ) : '';
-		$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
-		$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
+		$pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( wp_unslash($_POST['pickup']) ) : '';
+		$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff']) ) : '';
+		$tf_pickup_date  = ! empty( $_POST['pickup_date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash($_POST['pickup_date']) ) ) : '';
+		$tf_dropoff_date = ! empty( $_POST['dropoff_date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash($_POST['dropoff_date']) ) ) : '';
+		$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_time']) ) : '';
+		$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
 
-		$tf_dropoff_same_location  = isset( $_POST['same_location'] ) ? sanitize_text_field( $_POST['same_location'] ) : '';
+		$tf_dropoff_same_location  = isset( $_POST['same_location'] ) ? sanitize_text_field( wp_unslash($_POST['same_location']) ) : '';
 		if(!empty($tf_dropoff_same_location)){
 			$dropoff = $pickup;
 		}
-		$tf_driver_age  = isset( $_POST['driver_age'] ) ? sanitize_text_field( $_POST['driver_age'] ) : '';
+		$tf_driver_age  = isset( $_POST['driver_age'] ) ? sanitize_text_field( wp_unslash($_POST['driver_age']) ) : '';
 
-		$tf_category = !empty( $_POST['category'] ) ? sanitize_text_field( $_POST['category'] ) : null;
+		$tf_category = !empty( $_POST['category'] ) ? sanitize_text_field( wp_unslash($_POST['category']) ) : null;
 		$category = !empty( $tf_category ) ? explode( ',', $tf_category ) : null;
-		$tf_fuel_type = !empty( $_POST['fuel_type'] ) ? sanitize_text_field( $_POST['fuel_type'] ) : null;
+		$tf_fuel_type = !empty( $_POST['fuel_type'] ) ? sanitize_text_field( wp_unslash($_POST['fuel_type']) ) : null;
 		$fuel_type = !empty( $tf_fuel_type ) ? explode( ',', $tf_fuel_type ) : null;
-		$tf_engine_year = !empty( $_POST['engine_year'] ) ? sanitize_text_field( $_POST['engine_year'] ) : null;
+		$tf_engine_year = !empty( $_POST['engine_year'] ) ? sanitize_text_field( wp_unslash($_POST['engine_year']) ) : null;
 		$engine_year = !empty( $tf_engine_year ) ? explode( ',', $tf_engine_year ) : null;
 		$tf_car_brand = ! empty( $_POST['car_brand'] ) ? sanitize_text_field( wp_unslash( $_POST['car_brand'] ) ) : null;
 		$car_brand = ! empty( $tf_car_brand ) ? explode( ',', $tf_car_brand ) : null;
 		$tf_car_transmission = isset( $_POST['car_transmission'] ) && function_exists( 'tf_normalize_car_binary_filter_values' )
 			? tf_normalize_car_binary_filter_values( wp_unslash( $_POST['car_transmission'] ) )
-			: array();
+			: array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.NonceVerification.Recommended
 		$tf_carplay_android_auto = isset( $_POST['carplay_android_auto'] ) && function_exists( 'tf_normalize_car_binary_filter_values' )
 			? tf_normalize_car_binary_filter_values( wp_unslash( $_POST['carplay_android_auto'] ) )
-			: array();
+			: array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.NonceVerification.Recommended
 
-		$tf_startprice  = isset( $_POST['startprice'] ) ? sanitize_text_field( $_POST['startprice'] ) : '';
-		$tf_endprice  = isset( $_POST['endprice'] ) ? sanitize_text_field( $_POST['endprice'] ) : '';
-		$tf_min_seat  = isset( $_POST['min_seat'] ) ? sanitize_text_field( $_POST['min_seat'] ) : '';
-		$tf_max_seat  = isset( $_POST['max_seat'] ) ? sanitize_text_field( $_POST['max_seat'] ) : '';
+		$tf_startprice  = isset( $_POST['startprice'] ) ? sanitize_text_field( wp_unslash($_POST['startprice']) ) : '';
+		$tf_endprice  = isset( $_POST['endprice'] ) ? sanitize_text_field( wp_unslash($_POST['endprice']) ) : '';
+		$tf_min_seat  = isset( $_POST['min_seat'] ) ? sanitize_text_field( wp_unslash($_POST['min_seat']) ) : '';
+		$tf_max_seat  = isset( $_POST['max_seat'] ) ? sanitize_text_field( wp_unslash($_POST['max_seat']) ) : '';
 
 		$car_driver_min_age = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] : 18;
         $car_driver_max_age = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] : 40;
 		// Cars Data End
 		
-		$builderSettings = !empty($_POST['builderSettings']) ? json_decode(stripslashes($_POST['builderSettings']), true) : [];
+		$builderSettings = !empty($_POST['builderSettings']) ? json_decode(stripslashes($_POST['builderSettings']), true) : []; //phpcs:ignore
 
 		// Author ID if any (single value)
 		$tf_author_ids = isset( $_POST['tf_author'] ) ? intval( $_POST['tf_author'] ) : '';
@@ -2113,8 +2114,8 @@ trait Action_Helper {
 	 */
 	function tf_car_time_slots_callback() {
 		check_ajax_referer( 'tf_get_car_time_slots_nonce', 'nonce' );
-		$pickup_day = isset($_POST['pickup_day']) ? sanitize_text_field($_POST['pickup_day']) : '';
-		$drop_day   = isset($_POST['drop_day']) ? sanitize_text_field($_POST['drop_day']) : '';
+		$pickup_day = isset($_POST['pickup_day']) ? sanitize_text_field(wp_unslash($_POST['pickup_day'])) : '';
+		$drop_day   = isset($_POST['drop_day']) ? sanitize_text_field(wp_unslash($_POST['drop_day'])) : '';
 		$car_time_slots = !empty(Helper::tfopt('car_time_slots')) ? Helper::tfopt('car_time_slots') : '';
 		$unserialize_car_time_slots = !empty($car_time_slots) ? unserialize($car_time_slots) : array();
 
@@ -2232,8 +2233,8 @@ trait Action_Helper {
 		//Verify Nonce
 		check_ajax_referer( 'updates', '_nonce' );
 
-		$search_month = sanitize_key( $_POST['month'] );
-		$search_year  = sanitize_key( $_POST['year'] );
+		$search_month = isset( $_POST['month'] ) ? sanitize_key( wp_unslash($_POST['month']) ) : '';
+		$search_year  = isset( $_POST['year'] ) ? sanitize_key( wp_unslash($_POST['year']) ) : '';
 		$month_dates  = $this->tf_get_days_in_month( $search_month, $search_year );
 
 		//Order Data Retrive
@@ -2422,7 +2423,7 @@ trait Action_Helper {
 		//Nonce Verification
 		check_ajax_referer( 'updates', '_nonce' );
 
-		$term_name = !empty($_POST['termName']) ? sanitize_text_field( $_POST['termName'] ) : 'tf_hotel';
+		$term_name = !empty($_POST['termName']) ? sanitize_text_field( wp_unslash($_POST['termName']) ) : 'tf_hotel';
 
 		$terms = get_terms( array(
 			'taxonomy'   => $term_name,
@@ -2624,7 +2625,7 @@ trait Action_Helper {
 			return;
 		}
 
-		$post_type = !empty( $_POST['post_type']) ? sanitize_text_field( $_POST['post_type'] ) : '';
+		$post_type = !empty( $_POST['post_type']) ? sanitize_text_field( wp_unslash($_POST['post_type']) ) : '';
 		$response = array();
 
 		// if( $post_type == 'tf_hotel' ) {

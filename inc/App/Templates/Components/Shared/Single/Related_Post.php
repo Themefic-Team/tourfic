@@ -551,7 +551,7 @@ class Related_Post {
 								</div>
 							<?php endif; ?>
 						<?php endwhile; ?>
-						<?php wp_reset_query(); ?>
+						<?php wp_reset_postdata(); ?>
 					</div>
                     <?php echo 'yes' === $container ? '</div>' : ''; ?>
 				</div>

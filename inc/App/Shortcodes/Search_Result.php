@@ -23,7 +23,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 	function render( $atts, $content = null ) {
 
 		// Get post type
-		$post_type = isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$post_type = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( empty( $post_type ) ) {
 			echo '<h3>' . esc_html__(" Please select fields from the search form! ", "tourfic") . '</h3>';
 
@@ -37,26 +37,26 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		} elseif($post_type == 'tf_apartment'){
 			$taxonomy = 'apartment_location';
 		}
-		$place        = isset( $_GET['place'] ) ? sanitize_text_field( $_GET['place'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$adults       = isset( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$child        = isset( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$infant       = isset( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$room         = isset( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$check_in_out = isset( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$place        = isset( $_GET['place'] ) ? sanitize_text_field( wp_unslash($_GET['place']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$adults       = isset( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$child        = isset( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$infant       = isset( $_GET['infant'] ) ? sanitize_text_field( wp_unslash($_GET['infant']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$room         = isset( $_GET['room'] ) ? sanitize_text_field( wp_unslash($_GET['room']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$check_in_out = isset( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		//get children ages
 		//$children_ages = isset( $_GET['children_ages'] ) ? sanitize_text_field($_GET['children_ages']) : '';
 
 
 		// Price Range
-		$startprice = isset( $_GET['from'] ) ? absint( sanitize_text_field( $_GET['from'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$endprice   = isset( $_GET['to'] ) ? absint( sanitize_text_field( $_GET['to'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$tf_min_seat = isset( $_GET['min_seat'] ) ? absint( sanitize_text_field( $_GET['min_seat'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$tf_max_seat = isset( $_GET['max_seat'] ) ? absint( sanitize_text_field( $_GET['max_seat'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$startprice = isset( $_GET['from'] ) ? absint( sanitize_text_field( wp_unslash($_GET['from']) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$endprice   = isset( $_GET['to'] ) ? absint( sanitize_text_field( wp_unslash($_GET['to']) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$tf_min_seat = isset( $_GET['min_seat'] ) ? absint( sanitize_text_field( wp_unslash($_GET['min_seat']) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$tf_max_seat = isset( $_GET['max_seat'] ) ? absint( sanitize_text_field( wp_unslash($_GET['max_seat']) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$tf_driver_age = isset( $_GET['driver_age'] ) ? sanitize_text_field( wp_unslash( $_GET['driver_age'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		// Cars Data Start
-		$pickup   = isset( $_GET['pickup'] ) ? sanitize_text_field( $_GET['pickup'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$dropoff = isset( $_GET['dropoff'] ) ? sanitize_text_field( $_GET['dropoff'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$pickup   = isset( $_GET['pickup'] ) ? sanitize_text_field( wp_unslash($_GET['pickup']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$dropoff = isset( $_GET['dropoff'] ) ? sanitize_text_field( wp_unslash($_GET['dropoff']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		$tf_pickup_date  = isset( $_GET['pickup-date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash( $_GET['pickup-date'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$tf_dropoff_date  = isset( $_GET['dropoff-date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash( $_GET['dropoff-date'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended

@@ -31,8 +31,8 @@ class Wishlist {
 
 				// data to save
 				$data = [
-					'post_type' => sanitize_text_field( wp_unslash( $_POST['type'] ) ),
-					'post_id'   => absint( wp_unslash( $_POST['post'] ) ),
+					'post_type' => isset( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : '',
+					'post_id'   => isset( $_POST['post'] ) ? absint( wp_unslash( $_POST['post'] ) ) : 0,
 				];
 
 				if (is_user_logged_in()) {
@@ -141,8 +141,8 @@ class Wishlist {
 		if ( isset( $_GET ) ) {
 			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 				global $wpdb;
-				$id                     = esc_attr( absint( wp_unslash( $_GET['id'] ) ) );
-				$type                   = esc_attr( sanitize_text_field( wp_unslash( $_GET['type'] ) ) );
+				$id                     = isset( $_GET['id'] ) ? esc_attr( absint( wp_unslash( $_GET['id'] ) ) ) : 0;
+				$type                   = isset( $_GET['type'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['type'] ) ) ) : '';
 				$user_id                = get_current_user_id();
 				$previous_wishlist_item = get_user_meta( $user_id, 'wishlist_item', false );
 				// search recursively through records returned from get_user_meta for the record you want to replace, as identified by `post_id` - credit: http://php.net/manual/en/function.array-search.php#116635

@@ -55,7 +55,15 @@ class Similar_Tours extends \WP_Widget {
         }
         ?>
 			<div class="ni-buttons">
-				<a href="<?php echo esc_url(Helper::tf_booking_search_action()) . '?destination=' . esc_attr( $terms[0]->name ) . '&adults=' . esc_attr(sanitize_text_field( wp_unslash($_GET['adults']) )) . '&children=' . esc_attr(sanitize_text_field( wp_unslash($_GET['children']) )) . '&room=' . esc_attr(sanitize_text_field( wp_unslash($_GET['room']) )) . '&check-in-date=' . esc_attr(sanitize_text_field( wp_unslash($_GET['check-in-date']) )) . '&check-out-date=' . esc_attr(sanitize_text_field( wp_unslash($_GET['check-out-date']) )); ?>" class="tf_btn tf_btn_outline"><?php echo esc_html( $btn_label ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?></a>
+				<?php
+				$adults         = isset( $_GET['adults'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['adults'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$children       = isset( $_GET['children'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['children'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$room           = isset( $_GET['room'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['room'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$check_in_date  = isset( $_GET['check-in-date'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['check-in-date'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$check_out_date = isset( $_GET['check-out-date'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['check-out-date'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$destination_name = ! empty( $terms[0]->name ) ? esc_attr( $terms[0]->name ) : '';
+				?>
+				<a href="<?php echo esc_url( Helper::tf_booking_search_action() ) . '?destination=' . $destination_name . '&adults=' . $adults . '&children=' . $children . '&room=' . $room . '&check-in-date=' . $check_in_date . '&check-out-date=' . $check_out_date; ?>" class="tf_btn tf_btn_outline"><?php echo esc_html( $btn_label ); ?></a>
 			</div>
 		</div>
 		<!-- End similar tour widget -->

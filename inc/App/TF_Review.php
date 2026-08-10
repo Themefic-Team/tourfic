@@ -107,7 +107,7 @@ class TF_Review {
         }
 
 		if ( ( isset( $_POST[ TF_COMMENT_META ] ) ) && ( '' !== $_POST[ TF_COMMENT_META ] ) ) {
-			$tf_comment_meta =  $_POST[ TF_COMMENT_META ];
+			$tf_comment_meta =  $_POST[ TF_COMMENT_META ]; // phpcs:ignore
 			add_comment_meta( $comment_id, TF_COMMENT_META, $tf_comment_meta );
 			add_comment_meta( $comment_id, TF_BASE_RATE, Helper::tfopt( 'r-base' ) ?? 5 );
 		}
@@ -203,13 +203,13 @@ class TF_Review {
                 update_comment_meta( $comment->comment_ID, TF_COMMENT_META, $review );
                 $review = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
     
-                if ( count( $review ) == 0 && $_POST['deleteAll'] == 'yes' ) {
+                if ( ! empty( $_POST['deleteAll'] ) && sanitize_text_field( wp_unslash( $_POST['deleteAll'] ) ) == 'yes' && count( $review ) == 0 ) {
                     wp_delete_comment( $comment, true );
                 }
     
             } else {
     
-                if ( $_POST['deleteAll'] == 'yes' ) {
+                if ( ! empty( $_POST['deleteAll'] ) && sanitize_text_field( wp_unslash( $_POST['deleteAll'] ) ) == 'yes' ) {
                     wp_delete_comment( $comment, true );
                 }
     

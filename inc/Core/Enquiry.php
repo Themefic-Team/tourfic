@@ -79,7 +79,7 @@ abstract class Enquiry {
 										<?php
 										endwhile;
 									endif;
-									wp_reset_query();
+									wp_reset_postdata();
 									?>
 
 								</select>
@@ -300,7 +300,7 @@ abstract class Enquiry {
 		$formateed_date = gmdate( "M d, Y", strtotime($date));
 		$formateed_time = gmdate( "h:i:s A", strtotime($time));
 		$reply_data = !empty( $data["reply_data"] ) ? json_decode($data["reply_data"], true) : array();
-		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( $_POST['user_name'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( wp_unslash($_POST['user_name']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$current_user = wp_get_current_user();
 		$_SESSION["WP"]["userId"] = $current_user->ID;
 		$email_body_setting = !empty( Helper::tfopt("tf-email-piping")["email_body_type"] ) ? Helper::tfopt("tf-email-piping")["email_body_type"] : 'text';
@@ -854,9 +854,9 @@ abstract class Enquiry {
 			wp_die();
 		}
 
-		$name     = isset( $_POST['your-name'] ) ? sanitize_text_field( $_POST['your-name'] ) : null;
-		$email    = isset( $_POST['your-email'] ) ? sanitize_email( $_POST['your-email'] ) : null;
-		$question = isset( $_POST['your-question'] ) ? sanitize_text_field( $_POST['your-question'] ) : null;
+		$name     = isset( $_POST['your-name'] ) ? sanitize_text_field( wp_unslash($_POST['your-name']) ) : null;
+		$email    = isset( $_POST['your-email'] ) ? sanitize_email( wp_unslash($_POST['your-email']) ) : null;
+		$question = isset( $_POST['your-question'] ) ? sanitize_text_field( wp_unslash($_POST['your-question']) ) : null;
 		$from = "From: " . get_option( 'blogname' ) . " <" . get_option( 'admin_email' ) . ">\r\n";
 
 		$post_id    = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : null;
