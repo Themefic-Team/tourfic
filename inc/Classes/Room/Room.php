@@ -1447,7 +1447,7 @@ class Room {
 			$like
 		);
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- The query is prepared immediately above.
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- The query is prepared immediately above.
 		return (int) $wpdb->get_var( $sql );
 	}
 

@@ -391,7 +391,7 @@ class TF_Handle_Emails {
 
         global $wpdb;
         $taxs_summations = 0;
-        $tf_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT order_details FROM {$wpdb->prefix}tf_order_data WHERE order_id = %s", $order_id ), ARRAY_A );
+        $tf_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT order_details FROM {$wpdb->prefix}tf_order_data WHERE order_id = %s", $order_id ), ARRAY_A ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         if(!empty($tf_book_orders)){
             foreach($tf_book_orders as $sbook){
                 $tf_order_details = !empty($sbook['order_details']) ? json_decode($sbook['order_details']) : '';
@@ -562,7 +562,7 @@ class TF_Handle_Emails {
 
         //Booking URL
         global $wpdb;
-        $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE order_id = %s",sanitize_key( $order_id ) ) );
+        $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE order_id = %s",sanitize_key( $order_id ) ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 
 		if('tour'==$order_data['post_type']){
 			$order_url = esc_url(admin_url() . 'edit.php?post_type=tf_tours&page=tf_tours_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
@@ -1153,7 +1153,7 @@ public function tf_offline_booking_confirmation_callback( $order_id, $order_data
         }
 
         global $wpdb;
-        $order_data = $wpdb->get_row(
+        $order_data = $wpdb->get_row( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $wpdb->prepare(
                 "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %d",
                 $db_id

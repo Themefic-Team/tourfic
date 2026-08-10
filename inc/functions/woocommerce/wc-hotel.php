@@ -1369,7 +1369,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			}
 
 			global $wpdb;
-			$wpdb->query(
+			$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->prepare(
 					"INSERT INTO {$wpdb->prefix}tf_order_data
 				( order_id, post_id, post_type, room_number, room_id, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
@@ -1620,7 +1620,7 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 			}
 
 			global $wpdb;
-			$wpdb->query(
+			$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->prepare(
 					"INSERT INTO {$wpdb->prefix}tf_order_data
 				( order_id, post_id, post_type, room_number, room_id, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )

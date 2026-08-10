@@ -165,7 +165,7 @@ if ( ! class_exists( 'TF_Booking_Rest_API' ) ) {
 		public function tf_get_order_details( $request ) {
 			global $wpdb;
 			$id    = absint( $request->get_param( 'id' ) );
-			$order = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %d", $id ), ARRAY_A );
+			$order = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %d", $id ), ARRAY_A ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			if ( empty( $order ) ) {
 				return new WP_Error( 'tf_order_not_found', esc_html__( 'Order not found.', 'tourfic' ), array( 'status' => 404 ) );
 			}

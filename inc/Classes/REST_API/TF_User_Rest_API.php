@@ -37,10 +37,10 @@ if ( ! class_exists( 'TF_User_Rest_API' ) ) {
 
 			foreach ( $users as $user ) {
 				global $wpdb;
-				$tf_vendor_order_earning = $wpdb->get_results( $wpdb->prepare( "SELECT SUM(amount) FROM {$wpdb->prefix}tf_vendor_balance_history WHERE wstatus = %s AND vendor_id = %s", "completed", $user->ID ), ARRAY_A );
+				$tf_vendor_order_earning = $wpdb->get_results( $wpdb->prepare( "SELECT SUM(amount) FROM {$wpdb->prefix}tf_vendor_balance_history WHERE wstatus = %s AND vendor_id = %s", "completed", $user->ID ), ARRAY_A ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$total_earning           = ! empty( $tf_vendor_order_earning ) ? wc_price( $tf_vendor_order_earning[0]['SUM(amount)'] ) : wc_price( 0 );
 
-				$tf_vendor_balace  = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_vendor_balance WHERE vendor_id = %s", $user->ID ) );
+				$tf_vendor_balace  = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_vendor_balance WHERE vendor_id = %s", $user->ID ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$total_earning_int = ! empty( $tf_vendor_balace->total_amount ) ? $tf_vendor_balace->total_amount : 0;
 				$total_withdraw    = ! empty( $tf_vendor_balace->total_withdraw ) ? wc_price( $tf_vendor_balace->total_withdraw ) : wc_price( 0 );
 				$vendor_status     = get_user_meta( $user->ID, 'tf_vendor_approval', true );
@@ -128,7 +128,7 @@ if ( ! class_exists( 'TF_User_Rest_API' ) ) {
 
 			if ( $this->user_has_role( $user_id, 'tf_vendor' ) ) {
 				global $wpdb;
-				$tf_vendor_balace  = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_vendor_balance WHERE vendor_id = %s", $user->ID ) );
+				$tf_vendor_balace  = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_vendor_balance WHERE vendor_id = %s", $user->ID ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$total_earning     = ! empty( $tf_vendor_balace->total_amount ) ? wc_price( $tf_vendor_balace->total_amount ) : wc_price( 0 );
 				$total_earning_int = ! empty( $tf_vendor_balace->total_amount ) ? $tf_vendor_balace->total_amount : 0;
 				$total_withdraw    = ! empty( $tf_vendor_balace->total_withdraw ) ? wc_price( $tf_vendor_balace->total_withdraw ) : wc_price( 0 );

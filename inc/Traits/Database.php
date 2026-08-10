@@ -66,9 +66,9 @@ trait Database {
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
 		// Check if the 'checkinout' & 'checkinout_by' column exists before attempting to add it
-		if ( !$wpdb->get_var("SHOW COLUMNS FROM {$wpdb->prefix}tf_order_data LIKE 'checkinout'") &&
-		     !$wpdb->get_var("SHOW COLUMNS FROM {$wpdb->prefix}tf_order_data LIKE 'checkinout_by'") ) {
-			$wpdb->query($wpdb->prepare(
+		if ( !$wpdb->get_var("SHOW COLUMNS FROM {$wpdb->prefix}tf_order_data LIKE 'checkinout'") && // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		     !$wpdb->get_var("SHOW COLUMNS FROM {$wpdb->prefix}tf_order_data LIKE 'checkinout_by'") ) { // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$wpdb->query($wpdb->prepare( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
 				"ALTER TABLE %s 
                 ADD COLUMN checkinout varchar(255) NULL,
                 ADD COLUMN checkinout_by varchar(255) NULL",
@@ -77,8 +77,8 @@ trait Database {
 		}
 
 		// Check if the 'room_id' column exists before attempting to add it
-		if ( !$wpdb->get_var("SHOW COLUMNS FROM {$wpdb->prefix}tf_order_data LIKE 'room_id'") ) {
-			$wpdb->query($wpdb->prepare(
+		if ( !$wpdb->get_var("SHOW COLUMNS FROM {$wpdb->prefix}tf_order_data LIKE 'room_id'") ) { // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$wpdb->query($wpdb->prepare( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
 				"ALTER TABLE %s 
                 ADD COLUMN room_id varchar(255) NULL",
 				$order_table_name

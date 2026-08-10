@@ -997,7 +997,7 @@ class Migrator {
 						$iteminfo = array_combine( $iteminfo_keys, $iteminfo_values );
 
 						global $wpdb;
-						$wpdb->query(
+						$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 							$wpdb->prepare(
 								"INSERT INTO {$wpdb->prefix}tf_order_data
 						( order_id, post_id, post_type, room_number, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
@@ -1060,7 +1060,7 @@ class Migrator {
 						$iteminfo = array_combine( $iteminfo_keys, $iteminfo_values );
 
 						global $wpdb;
-						$wpdb->query(
+						$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 							$wpdb->prepare(
 								"INSERT INTO {$wpdb->prefix}tf_order_data
 						( order_id, post_id, post_type, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
@@ -1365,19 +1365,19 @@ class Migrator {
 	private function add_enquiry_new_columns() {
 		global $wpdb;
 
-		$columns          = $wpdb->get_results( "SHOW COLUMNS FROM {$wpdb->prefix}tf_enquiry_data", ARRAY_A );
+		$columns          = $wpdb->get_results( "SHOW COLUMNS FROM {$wpdb->prefix}tf_enquiry_data", ARRAY_A ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$existing_columns = wp_list_pluck( $columns, 'Field' );
 
 		if (!in_array('enquiry_status', $existing_columns)) {
-			$wpdb->query( "ALTER TABLE {$wpdb->prefix}tf_enquiry_data ADD COLUMN `enquiry_status` VARCHAR(255) NOT NULL DEFAULT 'read' AFTER `author_roles`" );
+			$wpdb->query( "ALTER TABLE {$wpdb->prefix}tf_enquiry_data ADD COLUMN `enquiry_status` VARCHAR(255) NOT NULL DEFAULT 'read' AFTER `author_roles`" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
 		}
 
 		if (!in_array('server_data', $existing_columns)) {
-			$wpdb->query( "ALTER TABLE {$wpdb->prefix}tf_enquiry_data ADD COLUMN `server_data` VARCHAR(255) NOT NULL DEFAULT '' AFTER `enquiry_status`" );
+			$wpdb->query( "ALTER TABLE {$wpdb->prefix}tf_enquiry_data ADD COLUMN `server_data` VARCHAR(255) NOT NULL DEFAULT '' AFTER `enquiry_status`" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
 		}
 		
 		if (!in_array('reply_data', $existing_columns)) {
-			$wpdb->query( "ALTER TABLE {$wpdb->prefix}tf_enquiry_data ADD COLUMN `reply_data` LONGTEXT NOT NULL DEFAULT '' AFTER `server_data`" );
+			$wpdb->query( "ALTER TABLE {$wpdb->prefix}tf_enquiry_data ADD COLUMN `reply_data` LONGTEXT NOT NULL DEFAULT '' AFTER `server_data`" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
 		}
 	}
 

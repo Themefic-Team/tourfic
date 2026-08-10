@@ -1142,7 +1142,7 @@ if ( ! function_exists( 'tourfic_get_user_order_table_data' ) ) {
 		}
 
 		foreach ( $query_types as $query_type ) {
-			$type_orders   = $wpdb->get_results(
+			$type_orders   = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->prepare(
 					"SELECT * FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s AND customer_id = %d ORDER BY order_id DESC",
 					$query_type,
@@ -1192,7 +1192,7 @@ if(!function_exists('tf_affiliate_callback')){
 if(!function_exists('tf_set_order')){
 	function tf_set_order( $order_data ) {
 		global $wpdb;
-		$all_order_ids = $wpdb->get_col( "SELECT order_id FROM {$wpdb->prefix}tf_order_data" );
+		$all_order_ids = $wpdb->get_col( "SELECT order_id FROM {$wpdb->prefix}tf_order_data" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		do {
 			$order_id = wp_rand( 10000000, 99999999 );
 		} while ( in_array( $order_id, $all_order_ids ) );
@@ -1215,7 +1215,7 @@ if(!function_exists('tf_set_order')){
 
 		$order_data = wp_parse_args( $order_data, $defaults );
 
-		$wpdb->query(
+		$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->prepare(
 				"INSERT INTO {$wpdb->prefix}tf_order_data
 				( order_id, post_id, post_type, room_number, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )

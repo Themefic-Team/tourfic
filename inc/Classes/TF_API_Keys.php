@@ -280,7 +280,7 @@ class TF_API_Keys {
 		$key_preview = $api_key;
 		$table_name  = $this->get_table_name();
 
-		$wpdb->insert(
+		$wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
 			$table_name,
 			array(
 				'user_id'         => $user_id,
@@ -310,7 +310,7 @@ class TF_API_Keys {
 	private function revoke_api_key( $key_id, $user_id ) {
 		global $wpdb;
 
-		$wpdb->update(
+		$wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$this->get_table_name(),
 			array( 'status' => 'revoked', 'updated_at' => current_time( 'mysql', true ) ),
 			array( 'id' => absint( $key_id ), 'user_id' => absint( $user_id ) ),
@@ -322,7 +322,7 @@ class TF_API_Keys {
 	private function get_api_keys_for_user( $user_id ) {
 		global $wpdb;
 
-		$results = $wpdb->get_results(
+		$results = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->prepare(
 				"SELECT id, name, api_key_preview, permissions, status, last_used, expires_at, created_at
 					 FROM {$wpdb->prefix}tf_api_keys
@@ -348,7 +348,7 @@ class TF_API_Keys {
 	private function get_key_record_by_key( $api_key ) {
 		global $wpdb;
 
-		return $wpdb->get_row(
+		return $wpdb->get_row( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->prepare(
 				"SELECT * FROM {$wpdb->prefix}tf_api_keys WHERE api_key_hash = %s LIMIT 1",
 				$this->hash_value( $api_key )
@@ -359,7 +359,7 @@ class TF_API_Keys {
 	private function touch_key_last_used( $key_id ) {
 		global $wpdb;
 
-		$wpdb->update(
+		$wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$this->get_table_name(),
 			array( 'last_used' => current_time( 'mysql', true ), 'updated_at' => current_time( 'mysql', true ) ),
 			array( 'id' => absint( $key_id ) ),

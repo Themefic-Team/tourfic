@@ -1191,7 +1191,7 @@ class Helper {
 		$values                 = array( $query_type );
 		$query_where            = self::tf_order_table_structured_sql( $query, $values );
 
-			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Identifiers and clauses come only from the private allowlists above.
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Identifiers and clauses come only from the private allowlists above.
 			$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $values ), ARRAY_A );
 
 		return $tf_tour_book_orders;
@@ -3866,7 +3866,7 @@ class Helper {
 
 	static function tf_set_order( $order_data ) {
 		global $wpdb;
-		$all_order_ids = $wpdb->get_col( "SELECT order_id FROM {$wpdb->prefix}tf_order_data" );
+		$all_order_ids = $wpdb->get_col( "SELECT order_id FROM {$wpdb->prefix}tf_order_data" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		do {
 			$order_id = wp_rand( 10000000, 99999999 );
 		} while ( in_array( $order_id, $all_order_ids ) );
@@ -3890,7 +3890,7 @@ class Helper {
 
 		$order_data = wp_parse_args( $order_data, $defaults );
 
-		$wpdb->query(
+		$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->prepare(
 				"INSERT INTO {$wpdb->prefix}tf_order_data
 				( order_id, post_id, post_type, room_number, room_id, check_in, check_out, billing_details, shipping_details, order_details, customer_id, payment_method, ostatus, order_date )
