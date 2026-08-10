@@ -664,7 +664,7 @@ if ( ! function_exists( 'tf_tour_get_uploaded_traveler_file' ) ) {
 	 * @return array|null
 	 */
 	function tf_tour_get_uploaded_traveler_file( $traveler_index, $field_name, $files = array() ) {
-		$files = ! empty( $files ) ? $files : $_FILES; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$files = ! empty( $files ) ? $files : $_FILES; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized WordPress.Security.NonceVerification.Missing
 
 		if ( empty( $files['traveller']['name'][ $traveler_index ][ $field_name ] ) ) {
 			return null;
@@ -809,7 +809,7 @@ if ( ! function_exists( 'tf_tour_process_traveler_document_fields' ) ) {
 		}
 
 		$traveler_details = is_array( $traveler_details ) ? $traveler_details : array();
-		$files            = ! empty( $files ) ? $files : $_FILES; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$files            = ! empty( $files ) ? $files : $_FILES; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized WordPress.Security.NonceVerification.Missing
 		$file_indexes     = ! empty( $files['traveller']['name'] ) && is_array( $files['traveller']['name'] )
 			? array_keys( $files['traveller']['name'] )
 			: array();

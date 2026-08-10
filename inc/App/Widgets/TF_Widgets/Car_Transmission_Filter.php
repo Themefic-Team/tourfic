@@ -34,7 +34,7 @@ class Car_Transmission_Filter extends \WP_Widget {
      */
     public function widget( $args, $instance ) {
 
-        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type();
+        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
         if ( is_admin() || 'tf_carrental' === $posttype ) {
             extract( $args );
@@ -44,8 +44,8 @@ class Car_Transmission_Filter extends \WP_Widget {
             $manual_label    = ! empty( $instance['manual_label'] ) ? $instance['manual_label'] : esc_html__( 'Manual', 'tourfic' );
 
             $selected_values = array();
-            if ( isset( $_GET['car_transmission'] ) && function_exists( 'tf_normalize_car_binary_filter_values' ) ) {
-                $selected_values = tf_normalize_car_binary_filter_values( wp_unslash( $_GET['car_transmission'] ) );
+            if ( isset( $_GET['car_transmission'] ) && function_exists( 'tf_normalize_car_binary_filter_values' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $selected_values = tf_normalize_car_binary_filter_values( wp_unslash( $_GET['car_transmission'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             }
 
             echo wp_kses_post( $before_widget );

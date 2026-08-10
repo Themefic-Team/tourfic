@@ -36,7 +36,7 @@ class Car_Seat_Range_Filter extends \WP_Widget {
     public function widget( $args, $instance ) {
 
         //check if is Car
-        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type();
+        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
        
         if ( $posttype == 'tf_carrental' ) {
             extract( $args );
@@ -49,7 +49,7 @@ class Car_Seat_Range_Filter extends \WP_Widget {
             <?php 
             echo wp_kses_post($after_widget);
         }else{
-            if( !empty($_GET['type']) && $_GET['type']=="tf_carrental" && !empty($_GET['from']) && !empty($_GET['to'] ) ){
+            if( !empty($_GET['type']) && $_GET['type']=="tf_carrental" && !empty($_GET['from']) && !empty($_GET['to'] ) ){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             extract( $args );
             ?>
                 <div class="tf-widget-title">

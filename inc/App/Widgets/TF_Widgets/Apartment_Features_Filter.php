@@ -41,7 +41,7 @@ class Apartment_Features_Filter extends \WP_Widget {
 	public function widget( $args, $instance ) {
 
 		//check if is Apartment
-		$posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type();
+		$posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( is_admin() || 'tf_apartment' === $posttype ) {
 			extract( $args );
@@ -72,11 +72,11 @@ class Apartment_Features_Filter extends \WP_Widget {
 			}
 
 			$search_types_query = array();
-			if ( isset( $_GET['features'] ) ) {
-				if ( is_array( $_GET['features'] ) ) {
-					$search_types_query = array_map( 'sanitize_text_field', wp_unslash( $_GET['features'] ) );
+			if ( isset( $_GET['features'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				if ( is_array( $_GET['features'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					$search_types_query = array_map( 'sanitize_text_field', wp_unslash( $_GET['features'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				} else {
-					$search_types_query[] = sanitize_text_field( wp_unslash( $_GET['features'] ) );
+					$search_types_query[] = sanitize_text_field( wp_unslash( $_GET['features'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				}
 			}
 

@@ -97,14 +97,14 @@ class Map_Filter extends \WP_Widget {
         } else {
             extract($args);
             echo wp_kses_post($before_widget);
-            if (!empty($_GET['type']) && $_GET['type'] == "tf_tours" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) ));
+            if (!empty($_GET['type']) && $_GET['type'] == "tf_tours" && !empty($_GET['from']) && !empty($_GET['to'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) )); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             }
-            if (!empty($_GET['type']) && $_GET['type'] == "tf_hotel" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) ));
+            if (!empty($_GET['type']) && $_GET['type'] == "tf_hotel" && !empty($_GET['from']) && !empty($_GET['to'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) )); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             }
-            if (!empty($_GET['type']) && $_GET['type'] == "tf_apartment" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) ));
+            if (!empty($_GET['type']) && $_GET['type'] == "tf_apartment" && !empty($_GET['from']) && !empty($_GET['to'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) )); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             }
         } ?>
         <!-- End Price Range widget -->

@@ -40,7 +40,7 @@ class Hotel_Feature_Filter extends \WP_Widget {
     public function widget( $args, $instance ) {
 
         //check if is Hotel
-        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type();
+        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
         if ( is_admin() || $posttype == 'tf_hotel' || $posttype == 'tf_room' ) {
             extract( $args );
@@ -64,8 +64,8 @@ class Hotel_Feature_Filter extends \WP_Widget {
 
             $get_terms = get_terms( $taxonomy );
 
-            $destination_name = !empty( $_GET['destination'] ) ? sanitize_text_field( wp_unslash($_GET['destination']) ) : '';
-            $search_features_query = isset( $_GET['features'] ) ? wp_unslash( $_GET['features'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            $destination_name = !empty( $_GET['destination'] ) ? sanitize_text_field( wp_unslash($_GET['destination']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $search_features_query = isset( $_GET['features'] ) ? wp_unslash( $_GET['features'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized WordPress.Security.NonceVerification.Recommended
             echo "<div class='tf-filter'><ul>";
             foreach ( $get_terms as $key => $term ) {
                 $id = $term->term_id;

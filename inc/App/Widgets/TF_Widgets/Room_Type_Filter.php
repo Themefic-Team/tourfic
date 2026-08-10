@@ -41,7 +41,7 @@ class Room_Type_Filter extends \WP_Widget {
     public function widget( $args, $instance ) {
 
         //check if is Room
-        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type();
+        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
         if ( is_admin() || $posttype == 'tf_room' ) {
             extract( $args );
@@ -65,13 +65,13 @@ class Room_Type_Filter extends \WP_Widget {
 
             $get_terms = get_terms( $taxonomy );
 
-            $destination_name = !empty( $_GET['destination'] ) ? sanitize_text_field( wp_unslash($_GET['destination']) ) : '';
+            $destination_name = !empty( $_GET['destination'] ) ? sanitize_text_field( wp_unslash($_GET['destination']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             $search_types_query = array();
-            if ( isset( $_GET['room_types'] ) ) {
-                if ( is_array( $_GET['room_types'] ) ) {
-                    $search_types_query = array_map( 'sanitize_text_field', wp_unslash( $_GET['room_types'] ) );
+            if ( isset( $_GET['room_types'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                if ( is_array( $_GET['room_types'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                    $search_types_query = array_map( 'sanitize_text_field', wp_unslash( $_GET['room_types'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 } else {
-                    $search_types_query = array( sanitize_text_field( wp_unslash( $_GET['room_types'] ) ) );
+                    $search_types_query = array( sanitize_text_field( wp_unslash( $_GET['room_types'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 }
             }
 

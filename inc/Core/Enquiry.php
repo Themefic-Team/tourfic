@@ -75,7 +75,7 @@ abstract class Enquiry {
 									if ( $tf_posts_list_query->have_posts() ):
 										while ( $tf_posts_list_query->have_posts() ) : $tf_posts_list_query->the_post();
 											?>
-											<option value="<?php echo esc_attr(get_the_ID()); ?>" <?php echo ! empty( $_GET['post'] ) && get_the_ID() == $_GET['post'] ? esc_attr( 'selected' ) : ''; ?>><?php echo esc_html(get_the_title()); ?></option>
+											<option value="<?php echo esc_attr(get_the_ID()); ?>" <?php echo ! empty( $_GET['post'] ) && get_the_ID() == $_GET['post'] ? esc_attr( 'selected' ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>><?php echo esc_html(get_the_title()); ?></option>
 										<?php
 										endwhile;
 									endif;
@@ -128,8 +128,8 @@ abstract class Enquiry {
 
 		$post_type = !empty($data) ? $data[0]["post_type"] : '';
 
-		if ( isset( $_GET['paged'] ) ) {
-			$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) );
+		if ( isset( $_GET['paged'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		} else {
 			$paged = 1;
 		}
@@ -300,7 +300,7 @@ abstract class Enquiry {
 		$formateed_date = gmdate( "M d, Y", strtotime($date));
 		$formateed_time = gmdate( "h:i:s A", strtotime($time));
 		$reply_data = !empty( $data["reply_data"] ) ? json_decode($data["reply_data"], true) : array();
-		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( $_POST['user_name'] ) : '';
+		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( $_POST['user_name'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$current_user = wp_get_current_user();
 		$_SESSION["WP"]["userId"] = $current_user->ID;
 		$email_body_setting = !empty( Helper::tfopt("tf-email-piping")["email_body_type"] ) ? Helper::tfopt("tf-email-piping")["email_body_type"] : 'text';
@@ -645,13 +645,13 @@ abstract class Enquiry {
 	}
 
 	protected function tf_get_requested_enquiry_post_type() {
-		$post_type = isset( $_POST['post_type'] ) ? sanitize_key( wp_unslash( $_POST['post_type'] ) ) : '';
+		$post_type = isset( $_POST['post_type'] ) ? sanitize_key( wp_unslash( $_POST['post_type'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		return array_key_exists( $post_type, $this->tf_enquiry_post_type_capabilities() ) ? $post_type : '';
 	}
 
 	protected function tf_get_requested_enquiry_filter() {
-		$filter = isset( $_POST['filter'] ) ? sanitize_key( wp_unslash( $_POST['filter'] ) ) : '';
+		$filter = isset( $_POST['filter'] ) ? sanitize_key( wp_unslash( $_POST['filter'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		return in_array( $filter, $this->tf_enquiry_status_filters(), true ) ? $filter : '';
 	}
