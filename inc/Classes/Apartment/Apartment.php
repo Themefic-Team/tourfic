@@ -41,7 +41,8 @@ class Apartment {
 			return;
 		}
 		$design = isset( $_POST['design'] ) ? sanitize_text_field( wp_unslash( $_POST['design'] ) ) : '';
-		$meta = get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'tf_apartment_opt', true );
+		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( wp_unslash( $_POST['post_id'] ) ) : '';
+		$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
 		// Single Template Style
 		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
 		if("single"==$tf_apartment_layout_conditions){
@@ -56,9 +57,9 @@ class Apartment {
 		?>
         <div class="tf-hotel-quick-view" style="display: flex">
 			<?php
-
+			$room_id_match = isset( $_POST['id'] ) ? sanitize_text_field( wp_unslash( $_POST['id'] ) ) : '';
 			foreach ( Helper::tf_data_types( $meta['rooms'] ) as $key => $room ) :
-				if ( $key == sanitize_text_field( $_POST['id'] ) ):
+				if ( $key == $room_id_match ):
 					$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 					?>
                     <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
@@ -237,8 +238,9 @@ class Apartment {
         </div>
 		<?php } 
 		if('design-1'==$tf_apartment_selected_template){ 
+			$room_id_match = isset( $_POST['id'] ) ? sanitize_text_field( wp_unslash( $_POST['id'] ) ) : '';
 			foreach ( Helper::tf_data_types( $meta['rooms'] ) as $key => $room ) :
-				if ( $key == sanitize_text_field( $_POST['id'] ) ):
+				if ( $key == $room_id_match ):
 				$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 				$tf_room_gallery_ids = !empty($tf_room_gallery) ? explode( ',', $tf_room_gallery ) : '';
 				$footage       = ! empty( $room['footage'] ) ? $room['footage'] : '';
@@ -1442,9 +1444,9 @@ class Apartment {
 		// date format for apartment
 		$date_format_change_appartments = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
-		$adults       = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$child        = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$infant       = ! empty( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$adults       = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$child        = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$infant       = ! empty( $_GET['infant'] ) ? sanitize_text_field( wp_unslash($_GET['infant']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         $check_in_out_arr = tf_split_date_range( $check_in_out );
         $check_in = ! empty( $check_in_out_arr[0] ) ? $check_in_out_arr[0] : '';
