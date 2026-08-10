@@ -67,8 +67,8 @@ class Hotel_Type_Filter extends \WP_Widget {
 
             $destination_name = !empty( $_GET['destination'] ) ? sanitize_text_field( wp_unslash($_GET['destination']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             $search_types_query = array();
-            if ( isset( $_GET['types'] ) ) {
-                if ( is_array( $_GET['types'] ) ) {
+            if ( isset( $_GET['types'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                if ( is_array( $_GET['types'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                     $search_types_query = array_map( 'sanitize_text_field', wp_unslash( $_GET['types'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 } else {
                     $search_types_query = array( sanitize_text_field( wp_unslash( $_GET['types'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended

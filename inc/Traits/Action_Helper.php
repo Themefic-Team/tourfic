@@ -2112,9 +2112,9 @@ trait Action_Helper {
 	 * Ajax function
 	 */
 	function tf_car_time_slots_callback() {
+		check_ajax_referer( 'tf_get_car_time_slots_nonce', 'nonce' );
 		$pickup_day = isset($_POST['pickup_day']) ? sanitize_text_field($_POST['pickup_day']) : '';
 		$drop_day   = isset($_POST['drop_day']) ? sanitize_text_field($_POST['drop_day']) : '';
-
 		$car_time_slots = !empty(Helper::tfopt('car_time_slots')) ? Helper::tfopt('car_time_slots') : '';
 		$unserialize_car_time_slots = !empty($car_time_slots) ? unserialize($car_time_slots) : array();
 

@@ -207,7 +207,8 @@ $tf_cars_slug = get_option('car_slug');
                         data: {
                             action: 'get_car_time_slots',
                             pickup_day: startDay,
-                            drop_day: endDay
+                            drop_day: endDay,
+                            nonce: <?php echo wp_json_encode( wp_create_nonce( 'tf_get_car_time_slots_nonce' ) ); ?>
                         },
                         success: function(response) {
                         }

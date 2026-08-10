@@ -554,16 +554,16 @@ if ( ! function_exists( 'tf_get_car_archive_search_context' ) ) {
 		}
 
 		$default_time = gmdate( 'g:i A', strtotime( $default_time_str ) );
-		$pickup_date  = ! empty( $_GET['pickup-date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash( $_GET['pickup-date'] ) ) ) : gmdate( 'Y/m/d', strtotime( '+1 day' ) );
-		$dropoff_date = ! empty( $_GET['dropoff-date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash( $_GET['dropoff-date'] ) ) ) : gmdate( 'Y/m/d', strtotime( '+2 day' ) );
+		$pickup_date  = ! empty( $_GET['pickup-date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash( $_GET['pickup-date'] ) ) ) : gmdate( 'Y/m/d', strtotime( '+1 day' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$dropoff_date = ! empty( $_GET['dropoff-date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash( $_GET['dropoff-date'] ) ) ) : gmdate( 'Y/m/d', strtotime( '+2 day' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		return array(
-			'pickup'       => ! empty( $_GET['pickup'] ) ? sanitize_text_field( wp_unslash( $_GET['pickup'] ) ) : '',
-			'dropoff'      => ! empty( $_GET['dropoff'] ) ? sanitize_text_field( wp_unslash( $_GET['dropoff'] ) ) : '',
+			'pickup'       => ! empty( $_GET['pickup'] ) ? sanitize_text_field( wp_unslash( $_GET['pickup'] ) ) : '', // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			'dropoff'      => ! empty( $_GET['dropoff'] ) ? sanitize_text_field( wp_unslash( $_GET['dropoff'] ) ) : '', // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			'pickup_date'  => $pickup_date,
 			'dropoff_date' => $dropoff_date,
-			'pickup_time'  => ! empty( $_GET['pickup-time'] ) ? sanitize_text_field( wp_unslash( $_GET['pickup-time'] ) ) : $default_time,
-			'dropoff_time' => ! empty( $_GET['dropoff-time'] ) ? sanitize_text_field( wp_unslash( $_GET['dropoff-time'] ) ) : $default_time,
+			'pickup_time'  => ! empty( $_GET['pickup-time'] ) ? sanitize_text_field( wp_unslash( $_GET['pickup-time'] ) ) : $default_time, // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			'dropoff_time' => ! empty( $_GET['dropoff-time'] ) ? sanitize_text_field( wp_unslash( $_GET['dropoff-time'] ) ) : $default_time, // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		);
 	}
 }
