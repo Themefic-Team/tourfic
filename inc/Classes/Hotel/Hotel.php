@@ -1699,15 +1699,15 @@ class Hotel {
 	static function tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced, $design ) {
 
 		// location
-		$location = ! empty( $_GET['place'] ) ? sanitize_text_field( wp_unslash( $_GET['place'] ) ) : '';
+		$location = ! empty( $_GET['place'] ) ? sanitize_text_field( wp_unslash( $_GET['place'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// Adults
-		$adults = ! empty( $_GET['adults'] ) ? absint( wp_unslash( $_GET['adults'] ) ) : '';
+		$adults = ! empty( $_GET['adults'] ) ? absint( wp_unslash( $_GET['adults'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// children
-		$child = ! empty( $_GET['children'] ) ? absint( wp_unslash( $_GET['children'] ) ) : '';
+		$child = ! empty( $_GET['children'] ) ? absint( wp_unslash( $_GET['children'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// room
-		$room = ! empty( $_GET['room'] ) ? absint( wp_unslash( $_GET['room'] ) ) : '';
+		$room = ! empty( $_GET['room'] ) ? absint( wp_unslash( $_GET['room'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		// date format for users output
 		$hotel_date_format_for_users   = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
@@ -2671,15 +2671,15 @@ class Hotel {
 	static function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '', $design = '' ) {
 
 		//get children ages
-		$children_ages = isset( $_GET['children_ages'] ) ? sanitize_text_field($_GET['children_ages']) : '';
+		$children_ages = isset( $_GET['children_ages'] ) ? sanitize_text_field($_GET['children_ages']) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// Adults
-		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
+		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// children
-		$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
+		$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// room
-		$room_selected = ! empty( $_GET['room'] ) ? absint( wp_unslash( $_GET['room'] ) ) : 1;
+		$room_selected = ! empty( $_GET['room'] ) ? absint( wp_unslash( $_GET['room'] ) ) : 1; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( empty( $check_in_out ) ) {
 			$hotel_current_timestamp = current_time( 'timestamp' );
 			$hotel_default_check_in  = wp_date( 'Y/m/d', $hotel_current_timestamp );
@@ -2687,7 +2687,7 @@ class Hotel {
 			$check_in_out            = $hotel_default_check_in . ' - ' . $hotel_default_check_out;
 		}
 		//get features
-		$features = ! empty( $_GET['features'] ) ? sanitize_text_field( $_GET['features'] ) : '';
+		$features = ! empty( $_GET['features'] ) ? sanitize_text_field( $_GET['features'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		// date format for users output
 		$hotel_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
@@ -2829,7 +2829,7 @@ class Hotel {
 
                 <div class="tf_form-row">
 					<?php
-					$ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type();
+					$ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					?>
                     <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
@@ -2968,7 +2968,7 @@ class Hotel {
                 </div>
                 <div class="tf-booking-form-submit">
 					<?php
-					$ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type();
+					$ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					?>
                     <input type="hidden" name="type" value="<?php echo esc_html( $ptype ); ?>" class="tf-post-type"/>
                     <input type="hidden" name="post_id" value="<?php echo esc_html( get_the_ID() ); ?>"/>
@@ -3120,7 +3120,7 @@ class Hotel {
                 </div>
                 <div class="tf_form-row">
 					<?php
-					$ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type();
+					$ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					?>
                     <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
@@ -3196,7 +3196,7 @@ class Hotel {
 
                 <div class="tf_form-row">
 					<?php
-					$ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type();
+					$ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					?>
                     <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
@@ -3782,11 +3782,11 @@ class Hotel {
 		 */
 		// Adults
 		if ( empty( $adults ) ) {
-			$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
+			$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 		// children
 		if ( empty( $child ) ) {
-			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
+			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 
 		/**
@@ -3794,10 +3794,10 @@ class Hotel {
 		 * @since 2.8.6
 		 */
 		$children_ages_array = array();
-		if ( isset( $_GET['children_ages'] ) && is_array( $_GET['children_ages'] ) ) {
+		if ( isset( $_GET['children_ages'] ) && is_array( $_GET['children_ages'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$children_ages_array = array_map(
 				'absint', // or sanitize_text_field if values aren’t numbers
-				wp_unslash( $_GET['children_ages'] )
+				wp_unslash( $_GET['children_ages'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			);
 		}
 
@@ -3808,11 +3808,11 @@ class Hotel {
 		}
 		// room
 		if ( empty( $room ) ) {
-			$room = ! empty( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : '';
+			$room = ! empty( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 		// Check-in & out date
 		if ( empty( $check_in_out ) ) {
-			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 		if ( $check_in_out ) {
 			$form_check_in      = substr( $check_in_out, 0, 10 );

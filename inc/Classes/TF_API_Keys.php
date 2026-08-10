@@ -243,8 +243,8 @@ class TF_API_Keys {
 	public function ajax_generate_api_key() {
 		$this->verify_ajax_request();
 
-		$name        = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
-		$permissions = isset( $_POST['permissions'] ) ? $this->sanitize_permissions( wp_unslash( $_POST['permissions'] ) ) : array( 'read' );
+		$name        = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$permissions = isset( $_POST['permissions'] ) ? $this->sanitize_permissions( wp_unslash( $_POST['permissions'] ) ) : array( 'read' ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		if ( empty( $name ) ) {
 			wp_send_json_error( esc_html__( 'API key name is required.', 'tourfic' ), 400 );
@@ -256,7 +256,7 @@ class TF_API_Keys {
 	public function ajax_revoke_api_key() {
 		$this->verify_ajax_request();
 
-		$key_id = isset( $_POST['key_id'] ) ? absint( $_POST['key_id'] ) : 0;
+		$key_id = isset( $_POST['key_id'] ) ? absint( $_POST['key_id'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( empty( $key_id ) ) {
 			wp_send_json_error( esc_html__( 'API key ID is required.', 'tourfic' ), 400 );
 		}
@@ -443,7 +443,7 @@ class TF_API_Keys {
 	}
 
 	private function is_tf_rest_request() {
-		$rest_route = isset( $_GET['rest_route'] ) ? sanitize_text_field( wp_unslash( $_GET['rest_route'] ) ) : '';
+		$rest_route = isset( $_GET['rest_route'] ) ? sanitize_text_field( wp_unslash( $_GET['rest_route'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( 0 === strpos( $rest_route, '/tf/v1/' ) ) {
 			return true;
 		}

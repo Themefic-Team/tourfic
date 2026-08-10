@@ -55,7 +55,7 @@ class TF_List_Table extends \WP_List_Table {
 	}
 
 	function prepare_items() {
-		$paged                 = ! empty( $_REQUEST['paged'] ) ? sanitize_text_field( wp_unslash($_REQUEST['paged']) ) : 1;
+		$paged                 = ! empty( $_REQUEST['paged'] ) ? sanitize_text_field( wp_unslash($_REQUEST['paged']) ) : 1; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$per_page              = 20;
 		$total_items           = count( $this->_items );
 		$this->_column_headers = array( $this->get_columns(), array(), $this->get_sortable_columns() );

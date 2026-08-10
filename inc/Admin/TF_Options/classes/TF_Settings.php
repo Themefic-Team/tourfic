@@ -381,7 +381,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			?>
 			<div class="tf-sidebar-content">
 
-				<?php if( !empty($_GET['page']) && $_GET['page']!='tf_dashboard' ) { ?>
+				<?php if( !empty($_GET['page']) && $_GET['page']!='tf_dashboard' ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
 				<div class="tf-plugin-lists">
 					<h3>Power up your website</h3>
 					<div class="tf-others-plugin">

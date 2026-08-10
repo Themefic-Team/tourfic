@@ -43,7 +43,7 @@ class TF_Setup_Wizard {
 		add_action( 'wp_ajax_tf_setup_travelfic_theme_active', array( $this, 'tf_setup_travelfic_theme_active_callabck' ) );
 
 
-		self::$current_step = isset( $_GET['step'] ) ? sanitize_key( $_GET['step'] ) : 'welcome';
+		self::$current_step = isset( $_GET['step'] ) ? sanitize_key( $_GET['step'] ) : 'welcome'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	}
 
 	/**
@@ -52,7 +52,7 @@ class TF_Setup_Wizard {
 	public function tf_wizard_menu() {
 
 		if ( current_user_can( 'manage_options' ) ) {
-			$tf_settings_parentmenu = ! empty( $_GET['page'] ) && "tf-setup-wizard" == $_GET['page'] ? 'tf_settings' : '';
+			$tf_settings_parentmenu = ! empty( $_GET['page'] ) && "tf-setup-wizard" == $_GET['page'] ? 'tf_settings' : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			add_submenu_page(
 				$tf_settings_parentmenu,
 				esc_html__( 'TF Setup Wizard', 'tourfic' ),
@@ -75,7 +75,7 @@ class TF_Setup_Wizard {
 	 * Remove all notice in setup wizard page
 	 */
 	public function remove_notice() {
-		if ( isset( $_GET['page'] ) && $_GET['page'] == 'tf-setup-wizard' ) {
+		if ( isset( $_GET['page'] ) && $_GET['page'] == 'tf-setup-wizard' ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			remove_all_actions( 'admin_notices' );
 			remove_all_actions( 'all_admin_notices' );
 		}

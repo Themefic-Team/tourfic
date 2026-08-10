@@ -7,7 +7,7 @@ use Tourfic\Classes\Room\Room;
 
 $tf_room_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] : 'design-1';
 
-if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_room" && $tf_room_arc_selected_template == "design-1" ) ) :
+if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_room" && $tf_room_arc_selected_template == "design-1" ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended
     $tf_room_arc_banner = ! empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar']) ?  Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar'] : '';
     $tf_room_arc_banner = !empty($tf_room_arc_banner) ? $tf_room_arc_banner : TF_ASSETS_APP_URL . '/images/room-hero-banner.jpg';
     ?>
