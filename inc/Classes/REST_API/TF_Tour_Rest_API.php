@@ -103,22 +103,11 @@ if ( ! class_exists( 'TF_Tour_Rest_API' ) ) {
 
 			if ( ! empty( $tour_availability_data ) && is_array( $tour_availability_data ) ) {
 				$tour_availability_data = array_values( $tour_availability_data );
-				$tour_availability_data = array_map( function ( $item ) use ( $package_pricing ) {	
-
-					$time_string = '';
-					if($item['pricing_type'] == 'group' || $item['pricing_type'] == 'person'){
-						$active_times =  $item['allowed_time'] ? $item['allowed_time'] : ''; 
-						if(!empty($active_times["time"])){
-							$active_time = implode(', ', array_filter($active_times['time']));
-						}
-						if(!empty($active_time)){
-							$time_string = 'Time: '.$active_time;
-						}
-					}
+				$tour_availability_data = array_map( function ( $item ) use ( $package_pricing, $tour_meta, $id ) {
 					if ( $item['pricing_type'] == 'group' ) {
-						$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) . '<br>'. $time_string;
+						$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] );
 					} elseif ( $item['pricing_type'] == 'person' ) {
-						$item['title'] = __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] ). '<br>' . __( 'Infant: ', 'tourfic' ) . wc_price( $item['infant_price'] ). '<br>'. $time_string;
+						$item['title'] = __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] ). '<br>' . __( 'Infant: ', 'tourfic' ) . wc_price( $item['infant_price'] );
 						} elseif ( $item['pricing_type'] == 'package' ) {
 							$item['title']       = '';
 							$package_lines       = array();
@@ -156,7 +145,6 @@ if ( ! class_exists( 'TF_Tour_Rest_API' ) ) {
 								$adult_price_key   = 'tf_option_adult_price_' . $package_index;
 								$child_price_key   = 'tf_option_child_price_' . $package_index;
 								$infant_price_key  = 'tf_option_infant_price_' . $package_index;
-								$times_key         = 'tf_option_times_' . $package_index;
 								$package_base_data = ! empty( $package_pricing[ $package_index ] ) && is_array( $package_pricing[ $package_index ] ) ? $package_pricing[ $package_index ] : array();
 
 								$package_status = ! empty( $item[ $status_key ] ) ? sanitize_text_field( $item[ $status_key ] ) : '';
@@ -207,14 +195,6 @@ if ( ! class_exists( 'TF_Tour_Rest_API' ) ) {
 									$line .= __( 'Infant: ', 'tourfic' ) . wc_price( $infant_price ) . '<br>';
 								}
 
-								$package_active_time = '';
-								if ( ! empty( $item[ $times_key ] ) && is_array( $item[ $times_key ] ) && ! empty( $item[ $times_key ]['time'] ) ) {
-									$package_active_time = implode( ', ', array_filter( $item[ $times_key ]['time'] ) );
-								}
-								if ( ! empty( $package_active_time ) ) {
-									$line .= 'Time: ' . $package_active_time . '<br>';
-								}
-
 								$package_lines[] = $line;
 							}
 
@@ -234,8 +214,9 @@ if ( ! class_exists( 'TF_Tour_Rest_API' ) ) {
 								}
 							}
 						}
-						$item['title'] .=  $time_string;
 					}
+
+					$item = apply_filters( 'tourfic_tour_availability_calendar_event', $item, $tour_meta, $id );
 
 					if(!empty($item['title'])){
 						$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
@@ -320,7 +301,7 @@ if ( ! class_exists( 'TF_Tour_Rest_API' ) ) {
 			register_rest_field( 'tf_tours', 'tf_tours_opt', array(
 				'get_callback' => function ( $post_arr ) {
 					$tf_tours_opt      = get_post_meta( $post_arr['id'], 'tf_tours_opt', true );
-					$unserialize_array = array( 'location', 'fixed_availability' );
+					$unserialize_array = array( 'location' );
 					foreach ( $unserialize_array as $item ) {
 						if ( ! empty( $tf_tours_opt[ $item ] ) && is_serialized( $tf_tours_opt[ $item ] ) ) {
 							$tf_tours_opt[ $item ] = unserialize( $tf_tours_opt[ $item ] );

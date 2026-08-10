@@ -278,7 +278,7 @@
                     btn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
-                    const obj = JSON.parse(response);
+							const obj = typeof response === 'string' ? JSON.parse(response) : response;
                     if (!obj.success) {
                         if (obj.message) {
                             alert_popup.error(obj.message);
@@ -392,46 +392,9 @@
                                 populatePackageSelect(obj.tour_packages_array);
                             }
 
-                            flatpickerObj.onChange = function (selectedDates, dateStr, instance) {
-                                // Initialize empty object for times
-                                let times = {};
-                                const selectedDate = selectedDates[0];
-                                const timestamp = selectedDate.getTime();
-
-                                const tourAvailability = obj.tour_availability;
-
-                                for (const key in tourAvailability) {
-                                    const availability = tourAvailability[key];
-
-                                    if (availability.status !== 'available') continue;
-
-                                    const from = new Date(availability.check_in.trim()).getTime();
-                                    const to   = new Date(availability.check_out.trim()).getTime();
-
-                                    if (timestamp >= from && timestamp <= to) {
-                                        const allowedTime = availability.allowed_time?.time || [];
-
-                                        if (Array.isArray(allowedTime)) {
-                                            allowedTime.forEach((t) => {
-                                                if (t && t.trim() !== '') {
-                                                    times[t] = t;
-                                                }
-                                            });
-                                        } else if (typeof allowedTime === 'object' && allowedTime !== null) {
-                                            Object.values(allowedTime).forEach((t) => {
-                                                if (t && t.trim() !== '') {
-                                                    times[t] = t;
-                                                }
-                                            });
-                                        }
-
-                                        break; // stop after first match
-                                    }
-                                }
-
-                                populateTimeSelect(times);
-                                
-                                instance.element.value = tfNormalizeDateRange(dateStr);
+							flatpickerObj.onChange = function (selectedDates, dateStr, instance) {
+								$(document).trigger('tourfic:backend-tour-date-change', [obj, selectedDates, dateStr]);
+								instance.element.value = tfNormalizeDateRange(dateStr);
                             }
 
                             $("[name='tf_tour_date']").flatpickr(flatpickerObj);
@@ -473,22 +436,6 @@
             } else {
                 packSelect.append(`<option value="" selected>No Package Available</option>`);
                 packSelect.attr('disabled', 'disabled');
-            }
-
-        }
-
-        function populateTimeSelect(times) {
-            let timeSelect = $('[name="tf_tour_time"]');
-            timeSelect.empty();
-
-            if (Object.keys(times).length > 0) {
-                // Use the keys and values from the object to populate the options
-                $.each(times, function (key, value) {
-                    timeSelect.append(`<option value="${key}">${value}</option>`);
-                });
-            } else {
-                timeSelect.append(`<option value="" selected>No Time Available</option>`);
-                timeSelect.attr('disabled', 'disabled');
             }
 
         }

@@ -3424,10 +3424,8 @@ function convertTo24HourFormat(timeStr) {
             var selectedPackage = $selectedPackage.val();
             if (selectedPackage !== undefined) {
                 formData.append('selectedPackage', selectedPackage);
-                var $selectedDiv = $selectedPackage.closest('.tf-single-package');
-                var check_in_time = $selectedDiv.find('select[name=package_start_time] option').filter(':selected').val();
-                formData.append('check-in-time', check_in_time);
             }
+            $this.trigger('tourfic:tour-booking:form-data', [formData, $selectedPackage]);
             $.ajax({
                 type: 'post',
                 url: tf_params.ajax_url,
@@ -4119,26 +4117,6 @@ function convertTo24HourFormat(timeStr) {
         // First Day of Week
         //const first_day_of_week = tf_params.tour_form_data.flatpickr_locale;
 
-        function populateTimeSelect(times) {
-            let timeSelect = $('select[name="check-in-time"]');
-            let timeSelectDiv = $(".check-in-time-div");
-            timeSelect.empty();
-
-            if (tf_params.tour_form_data.pricing_rule === 'package') {
-                timeSelectDiv.hide();
-                return;
-            }
-
-            if (Object.keys(times).length > 0) {
-                timeSelect.append(`<option value="" selected hidden>${tf_params.tour_form_data.select_time_text}</option>`);
-                // Use the keys and values from the object to populate the options
-                $.each(times, function (key, value) {
-                    timeSelect.append(`<option value="${key}">${value}</option>`);
-                });
-                timeSelectDiv.css('display', 'flex');
-            } else timeSelectDiv.hide();
-        }
-
         var tour_date_options = {
             enableTime: false,
             dateFormat: "Y/m/d",
@@ -4157,42 +4135,7 @@ function convertTo24HourFormat(timeStr) {
                 $(".tours-check-in-out").val(instance.altInput.value);
                 $('.tours-check-in-out[type="hidden"]').val(tfNormalizeDateRange(dateStr));
 
-                // Initialize empty object for times
-                let times = {};
-                const selectedDate = selectedDates[0];
-                const timestamp = selectedDate.getTime();
-
-                const tourAvailability = tf_params.tour_form_data.tour_availability;
-
-                for (const key in tourAvailability) {
-                    const availability = tourAvailability[key];
-
-                    if (availability.status !== 'available') continue;
-
-                    const from = new Date(availability.check_in.trim()).getTime();
-                    const to = new Date(availability.check_out.trim()).getTime();
-
-                    if (timestamp >= from && timestamp <= to) {
-                        const allowedTime = availability.allowed_time?.time || [];
-                        if (Array.isArray(allowedTime)) {
-                            allowedTime.forEach((t) => {
-                                if (t && t.trim() !== '') {
-                                    times[t] = t;
-                                }
-                            });
-                        } else if (typeof allowedTime === 'object' && allowedTime !== null) {
-                            Object.values(allowedTime).forEach((t) => {
-                                if (t && t.trim() !== '') {
-                                    times[t] = t;
-                                }
-                            });
-                        }
-
-                        break; // stop after first match
-                    }
-                }
-
-                populateTimeSelect(times);
+                $(document).trigger('tourfic:tour-booking:date-change', [selectedDates, tf_params.tour_form_data]);
 
 
                 if (tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
@@ -4250,11 +4193,6 @@ function convertTo24HourFormat(timeStr) {
             tour_date_options.disableMobile = "true";
             $(".tours-check-in-out").flatpickr(tour_date_options);
 
-            $("select[name='check-in-time']").on("change", function () {
-                var selectedTime = $(this).val();
-                $("select[name='check-in-time']").not(this).val(selectedTime);
-            });
-
             $(".acr-select input[type='number']").on("change", function () {
                 var inputName = $(this).attr("name");
                 var selectedValue = $(this).val();
@@ -4289,11 +4227,6 @@ function convertTo24HourFormat(timeStr) {
                     }
                 }
             }
-
-            $("select[name='check-in-time']").on("change", function () {
-                var selectedTime = $(this).val();
-                $("select[name='check-in-time']").not(this).val(selectedTime);
-            });
 
             $(".acr-select input[type='tel']").on("change", function () {
                 var inputName = $(this).attr("name");
@@ -6501,44 +6434,6 @@ function convertTo24HourFormat(timeStr) {
             return $selectedPackage.length ? $selectedPackage.closest('.tf-single-package') : $();
         };
 
-        const tfPackageTimeStateKey = 'tfPackageSelectedTimes';
-        const tfGetTourPackageTimeState = ($form) => {
-            if (!$form || !$form.length) {
-                return {};
-            }
-
-            let state = $form.data(tfPackageTimeStateKey);
-            if (!state || typeof state !== 'object') {
-                state = {};
-                $form.data(tfPackageTimeStateKey, state);
-            }
-
-            return state;
-        };
-        const tfStoreTourPackageTime = ($package, $form = null) => {
-            if (!$package || !$package.length) {
-                return;
-            }
-
-            const packageKey = String($package.find('input[name="tf_package"]').first().val() || '');
-            if (!packageKey) {
-                return;
-            }
-
-            const selectedTime = String($package.find('select[name="package_start_time"]').first().val() || '');
-            const $bookingForm = $form && $form.length ? $form : tfResolveTourBookingForm($package);
-            const state = tfGetTourPackageTimeState($bookingForm);
-
-            if (selectedTime) {
-                state[packageKey] = selectedTime;
-            }
-        };
-        const tfStoreTourPackageTimes = ($context = null) => {
-            const $form = tfResolveTourBookingForm($context);
-            tfResolveTourPackageList($form).each(function () {
-                tfStoreTourPackageTime($(this), $form);
-            });
-        };
 
         const tfGetTourBookingState = ($context = null) => {
             const $form = tfResolveTourBookingForm($context);
@@ -6546,8 +6441,7 @@ function convertTo24HourFormat(timeStr) {
             let adults = parseInt($form.find('input[name="adults"], #adults').first().val() || '0', 10);
             let children = parseInt($form.find('input[name="childrens"], [name="children"], #children, #childs').first().val() || '0', 10);
             let infant = parseInt($form.find('input[name="infants"], [name="infant"], #infant').first().val() || '0', 10);
-            let checkInTime = $form.find('select[name="check-in-time"]').first().val() || '';
-            const checkInDate = (tfResolveTourDateField($form).val() || '').toString().trim();
+			const checkInDate = (tfResolveTourDateField($form).val() || '').toString().trim();
             const postId = $form.find('input[name="post_id"]').first().val() || '';
             const deposit = $form.find('input[name="deposit"]').is(':checked');
             let selectedPackage = '';
@@ -6557,21 +6451,22 @@ function convertTo24HourFormat(timeStr) {
                 adults = parseInt($selectedPackage.find('input[name="adults"]').first().val() || '0', 10);
                 children = parseInt($selectedPackage.find('input[name="childrens"], [name="children"]').first().val() || '0', 10);
                 infant = parseInt($selectedPackage.find('input[name="infants"], [name="infant"]').first().val() || '0', 10);
-                checkInTime = $selectedPackage.find('select[name="package_start_time"]').first().val() || '';
-            }
+			}
 
-            return {
-                $form,
+			const bookingState = {
+				$form,
                 $selectedPackage,
                 adults,
                 children,
                 infant,
                 checkInDate,
-                checkInTime,
                 postId,
                 deposit,
                 selectedPackage
-            };
+			};
+			$(document).trigger('tourfic:tour-booking:state', [bookingState]);
+
+			return bookingState;
         };
 
         function tfGetTravelerCount($context, selectors) {
@@ -7085,10 +6980,10 @@ function convertTo24HourFormat(timeStr) {
                 $radio.prop('disabled', false);
                 $radio.attr('aria-disabled', isUnavailable ? 'true' : 'false');
 
-                if (isUnavailable) {
-                    $package.find('input[type="number"], select[name="package_start_time"]').prop('disabled', true);
-                    $package.find('.tf-pacakge-times').hide();
-                }
+				if (isUnavailable) {
+					$package.find('input[type="number"]').prop('disabled', true);
+				}
+				$(document).trigger('tourfic:tour-package:availability', [$package, isUnavailable]);
             });
 
             const $currentSelection = tfResolveTourPackageList($context).find('input[name="tf_package"]:checked').first();
@@ -7146,7 +7041,6 @@ function convertTo24HourFormat(timeStr) {
             let infant = bookingState.infant;
             let check_in_date = bookingState.checkInDate;
             let post_id = bookingState.postId;
-            let check_in_time = bookingState.checkInTime;
             let deposit = bookingState.deposit;
             let selectedPackage = bookingState.selectedPackage;
             var extras = [];
@@ -7156,12 +7050,7 @@ function convertTo24HourFormat(timeStr) {
                 return false;
             }
 
-            tfStoreTourPackageTimes($form);
-            if (selectedPackage && check_in_time) {
-                tfGetTourPackageTimeState($form)[selectedPackage] = check_in_time;
-            }
-
-            if (bookingState.$selectedPackage.length) {
+			if (bookingState.$selectedPackage.length) {
                 tfResolveTourPackageList($form).each(function () {
                     var $package = $(this);
                     var currentKey = $package.find('input[name="tf_package"]').val();
@@ -7198,12 +7087,12 @@ function convertTo24HourFormat(timeStr) {
                 children: children,
                 infant: infant,
                 check_in_date: check_in_date,
-                check_in_time: check_in_time,
                 tour_extra: extras,
                 tour_extra_quantity: quantities,
                 deposit: deposit,
                 selectedPackage: selectedPackage
             };
+			$(document).trigger('tourfic:tour-booking:request-data', [data, bookingState]);
 
             $.ajax({
                 type: 'post',
@@ -7261,53 +7150,7 @@ function convertTo24HourFormat(timeStr) {
                         if ($travelerSummary.length > 0) {
                             $travelerSummary.html(response.traveller_summery);
                         }
-                        const selectedPackageTimes = $.extend({}, tfGetTourPackageTimeState($form));
-                        if ($packageContent.length) {
-                            $packageContent.find('.tf-single-package').each(function () {
-                                const $package = $(this);
-                                const packageKey = String($package.find('input[name="tf_package"]').first().val() || '');
-                                const selectedTime = $package.find('select[name="package_start_time"]').first().val() || '';
-
-                                if (packageKey && selectedTime) {
-                                    selectedPackageTimes[packageKey] = selectedTime;
-                                }
-                            });
-                            $packageContent.find('.tf-pacakge-times').hide();
-                            $packageContent.find('select[name="package_start_time"]').each(function () {
-                                $(this).empty();
-                            });
-                        }
-
-                        if (response.pacakge_times && typeof response.pacakge_times === 'object') {
-                            Object.entries(response.pacakge_times).forEach(([key, times]) => {
-                                const wrapper = $packageContent.find(`.tf-package-times-${key}`);
-                                wrapper.css('display', 'flex');
-                                const select = wrapper.find('select[name="package_start_time"]');
-                                if (select.length) {
-                                    const packageTimes = Array.isArray(times) ? times : Object.values(times || {});
-                                    const normalizedTimes = packageTimes.map((time) => String(time || '')).filter((time) => time.length > 0);
-                                    const selectedTime = selectedPackageTimes[key] || '';
-                                    const hasSelectedTime = selectedTime && normalizedTimes.some((time) => time === selectedTime);
-                                    select.append($('<option>', {
-                                        value: '',
-                                        text: 'Time',
-                                        disabled: true,
-                                        selected: !hasSelectedTime
-                                    }));
-                                    normalizedTimes.forEach((time) => {
-                                        select.append($('<option>', {
-                                            value: time,
-                                            text: time,
-                                            selected: hasSelectedTime && selectedTime === time
-                                        }));
-                                    });
-                                    select.val(hasSelectedTime ? selectedTime : '');
-                                    if (hasSelectedTime) {
-                                        tfGetTourPackageTimeState($form)[key] = selectedTime;
-                                    }
-                                }
-                            });
-                        }
+						$(document).trigger('tourfic:tour-popup:response', [response, $packageContent, $form]);
 
                         $popup.addClass('show');
                     }
@@ -7372,10 +7215,7 @@ function convertTo24HourFormat(timeStr) {
                 trigger: $(this)
             });
         });
-        $(document).on('change', 'select[name="package_start_time"]', function () {
-            tfStoreTourPackageTime($(this).closest('.tf-single-package'));
-        });
-        $(document).on('change', '[name=deposit]', function () {
+		$(document).on('change', '[name=deposit]', function () {
             tourPopupBooking({
                 trigger: $(this)
             });
@@ -7432,19 +7272,22 @@ function convertTo24HourFormat(timeStr) {
 
             var selectedKey = $selectedRadio.val();
             lastAvailablePackage = String(selectedKey);
-            $packageList.each(function () {
-                var $package = $(this);
-                if ($package.hasClass('tf-package-unavailable')) {
-                    $package.find('input[type="number"], select[name="package_start_time"]').prop('disabled', true);
-                    return;
-                }
+			$packageList.each(function () {
+				var $package = $(this);
+				if ($package.hasClass('tf-package-unavailable')) {
+					$package.find('input[type="number"]').prop('disabled', true);
+					$(document).trigger('tourfic:tour-package:selection', [$package, false, true]);
+					return;
+				}
 
-                if ($package.find('input[name="tf_package"]').val() !== selectedKey) {
-                    $package.find('input[type="number"]').prop('disabled', true);
-                } else {
-                    $package.find('input[type="number"]').prop('disabled', false);
-                }
-            });
+				const isSelected = $package.find('input[name="tf_package"]').val() === selectedKey;
+				if (!isSelected) {
+					$package.find('input[type="number"]').prop('disabled', true);
+				} else {
+					$package.find('input[type="number"]').prop('disabled', false);
+				}
+				$(document).trigger('tourfic:tour-package:selection', [$package, isSelected, false]);
+			});
             tourPopupBooking({
                 trigger: $selectedRadio
             });

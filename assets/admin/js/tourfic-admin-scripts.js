@@ -611,7 +611,7 @@
                     btn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
-                    const obj = JSON.parse(response);
+							const obj = typeof response === 'string' ? JSON.parse(response) : response;
                     if (!obj.success) {
                         if (obj.message) {
                             alert_popup.error(obj.message);
@@ -725,46 +725,9 @@
                                 populatePackageSelect(obj.tour_packages_array);
                             }
 
-                            flatpickerObj.onChange = function (selectedDates, dateStr, instance) {
-                                // Initialize empty object for times
-                                let times = {};
-                                const selectedDate = selectedDates[0];
-                                const timestamp = selectedDate.getTime();
-
-                                const tourAvailability = obj.tour_availability;
-
-                                for (const key in tourAvailability) {
-                                    const availability = tourAvailability[key];
-
-                                    if (availability.status !== 'available') continue;
-
-                                    const from = new Date(availability.check_in.trim()).getTime();
-                                    const to   = new Date(availability.check_out.trim()).getTime();
-
-                                    if (timestamp >= from && timestamp <= to) {
-                                        const allowedTime = availability.allowed_time?.time || [];
-
-                                        if (Array.isArray(allowedTime)) {
-                                            allowedTime.forEach((t) => {
-                                                if (t && t.trim() !== '') {
-                                                    times[t] = t;
-                                                }
-                                            });
-                                        } else if (typeof allowedTime === 'object' && allowedTime !== null) {
-                                            Object.values(allowedTime).forEach((t) => {
-                                                if (t && t.trim() !== '') {
-                                                    times[t] = t;
-                                                }
-                                            });
-                                        }
-
-                                        break; // stop after first match
-                                    }
-                                }
-
-                                populateTimeSelect(times);
-                                
-                                instance.element.value = tfNormalizeDateRange(dateStr);
+							flatpickerObj.onChange = function (selectedDates, dateStr, instance) {
+								$(document).trigger('tourfic:backend-tour-date-change', [obj, selectedDates, dateStr]);
+								instance.element.value = tfNormalizeDateRange(dateStr);
                             }
 
                             $("[name='tf_tour_date']").flatpickr(flatpickerObj);
@@ -806,22 +769,6 @@
             } else {
                 packSelect.append(`<option value="" selected>No Package Available</option>`);
                 packSelect.attr('disabled', 'disabled');
-            }
-
-        }
-
-        function populateTimeSelect(times) {
-            let timeSelect = $('[name="tf_tour_time"]');
-            timeSelect.empty();
-
-            if (Object.keys(times).length > 0) {
-                // Use the keys and values from the object to populate the options
-                $.each(times, function (key, value) {
-                    timeSelect.append(`<option value="${key}">${value}</option>`);
-                });
-            } else {
-                timeSelect.append(`<option value="" selected>No Time Available</option>`);
-                timeSelect.attr('disabled', 'disabled');
             }
 
         }
@@ -4197,8 +4144,7 @@ jQuery(function($) {
                         }
                     });
 
-                    setTourAllowedTimes(event.extendedProps.allowed_time, self.tourCalData);
-                    $(document).trigger('tourfic:tour-availability:event-click', [event, self.tourCalData]);
+					$(document).trigger('tourfic:tour-availability:event-click', [event, self.tourCalData]);
 
                     if (event.extendedProps.status) {
                         $("[name='tf_tour_status']", self.tourCalData).val(event.extendedProps.status);
@@ -4223,37 +4169,6 @@ jQuery(function($) {
         function setTourCheckInOut(check_in, check_out, tourCalData) {
             $('.tf_tour_check_in', tourCalData).val(check_in);
             $('.tf_tour_check_out', tourCalData).val(check_out);
-        }
-
-        function setTourAllowedTimes(allowedTime, tourCalData) {
-            const $scope = $(tourCalData).find('.tf-tour-core-availability-fields');
-            const $target = $scope.find('.tf_tour_saved_allowed_times').first();
-            const $template = $scope.find('.tf-single-repeater-clone-allowed_time .tf-single-repeater').first();
-            const times = allowedTime && allowedTime.time
-                ? Object.values(allowedTime.time)
-                : [];
-            const capacities = allowedTime && allowedTime.cont_max_capacity
-                ? Object.values(allowedTime.cont_max_capacity)
-                : [];
-
-            $target.empty();
-            times.forEach(function (time, index) {
-                if (!time || !$template.length) {
-                    return;
-                }
-
-                const $row = $template.clone();
-                $row.find('[name="tf_repeater_count"]').val(index + 1);
-                $row.find('[name="allowed_time[time][]"]').val(time);
-                $row.find('[name="allowed_time[cont_max_capacity][]"]').val(capacities[index] || '');
-                $target.append($row);
-            });
-
-            $target.find('.flatpickr-input').flatpickr({
-                enableTime: true,
-                noCalendar: true,
-                dateFormat: 'h:i K'
-            });
         }
 
         function getTourAvailabilityEntry(tourCalData) {
@@ -4332,9 +4247,8 @@ jQuery(function($) {
             $('[name="tf_tour_max_person"]', tourCalData).val('');
             $('[name="tf_tour_max_capacity"]', tourCalData).val('');
             $('[name="tf_tour_repeat_day[]"], [name="tf_tour_repeat_month[]"], [name="tf_tour_repeat_year[]"], [name="tf_tour_repeat_week[]"]')
-                .prop('checked', false);
-            setTourAllowedTimes({}, tourCalData);
-            $(document).trigger('tourfic:tour-availability:reset', [tourCalData]);
+            .prop('checked', false);
+			$(document).trigger('tourfic:tour-availability:reset', [tourCalData]);
 
             // Destroy old flatpickr instances to avoid conflicts
             $(tourCalData).find('[name="tf_tour_check_in"]').each(function () {

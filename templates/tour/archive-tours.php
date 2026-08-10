@@ -19,7 +19,6 @@ defined( 'ABSPATH' ) || exit;
 
 $meta = get_post_meta( get_the_ID(),'tf_tours_opt',true );
 $pricing_rule = !empty($meta['pricing']) ? $meta['pricing'] : null;
-$tour_type = !empty($meta['type']) ? $meta['type'] : null;
 if( $pricing_rule == 'group'){
 	$price = !empty($meta['group_price']) ? $meta['group_price'] : null;
 }else{

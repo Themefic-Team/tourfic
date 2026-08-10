@@ -70,43 +70,8 @@ while ( have_posts() ) : the_post();
 	$post_type       = substr( get_post_type(), 3, - 1 );
 	$has_in_wishlist = Wishlist::tf_has_item_in_wishlist( $post_id );
 
-	// tour type meta
-	$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
-
 	// date format for users
 	$tf_tour_date_format_for_users  = !empty(Helper::tfopt( "tf-date-format-for-users")) ? Helper::tfopt( "tf-date-format-for-users") : "Y/m/d";
-
-
-	if(!function_exists('tf_fixed_tour_start_date_changer')) {
-		function tf_fixed_tour_start_date_changer($date, $months) {
-			if( (count($months) > 0) && !empty($date)) {
-				preg_match('/(\d{4})\/(\d{2})\/(\d{2})/', $date, $matches);
-
-				$new_months[] = $matches[0];
-				
-				foreach($months as $month) {
-
-					if($month < gmdate('m')) {
-						$year = $matches[1] + 1;
-
-					} else $year = $matches[1];
-
-					$day_selected = gmdate('d', strtotime($date));
-					$last_day_of_month = gmdate('t', strtotime(gmdate('Y').'-'.$month.'-01'));
-					$matches[2] = $month;
-					$changed_date = sprintf("%s/%s/%s", $year, $matches[2], $matches[3]);
-
-					if(($day_selected == "31") && ($last_day_of_month != "31")) {
-						$new_months[] = gmdate('Y/m/d', strtotime($changed_date . ' -1 day'));
-					} else {
-						$new_months[] = $changed_date;
-					}
-				}
-				return $new_months;
-
-			} else return array();
-		}
-	}
 
 	//Social Share
 	$share_text = get_the_title();
@@ -227,7 +192,6 @@ while ( have_posts() ) : the_post();
 	 * Pricing
 	 */
 	$pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-	$tour_type    = ! empty( $meta['type'] ) ? $meta['type'] : '';
 	$discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : 'none';
 	$disable_adult  = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
 	$disable_child  = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;

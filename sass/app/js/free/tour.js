@@ -155,10 +155,8 @@
             var selectedPackage = $selectedPackage.val();
             if (selectedPackage !== undefined) {
                 formData.append('selectedPackage', selectedPackage);
-                var $selectedDiv = $selectedPackage.closest('.tf-single-package');
-                var check_in_time = $selectedDiv.find('select[name=package_start_time] option').filter(':selected').val();
-                formData.append('check-in-time', check_in_time);
             }
+            $this.trigger('tourfic:tour-booking:form-data', [formData, $selectedPackage]);
             $.ajax({
                 type: 'post',
                 url: tf_params.ajax_url,
@@ -850,26 +848,6 @@
         // First Day of Week
         //const first_day_of_week = tf_params.tour_form_data.flatpickr_locale;
 
-        function populateTimeSelect(times) {
-            let timeSelect = $('select[name="check-in-time"]');
-            let timeSelectDiv = $(".check-in-time-div");
-            timeSelect.empty();
-
-            if (tf_params.tour_form_data.pricing_rule === 'package') {
-                timeSelectDiv.hide();
-                return;
-            }
-
-            if (Object.keys(times).length > 0) {
-                timeSelect.append(`<option value="" selected hidden>${tf_params.tour_form_data.select_time_text}</option>`);
-                // Use the keys and values from the object to populate the options
-                $.each(times, function (key, value) {
-                    timeSelect.append(`<option value="${key}">${value}</option>`);
-                });
-                timeSelectDiv.css('display', 'flex');
-            } else timeSelectDiv.hide();
-        }
-
         var tour_date_options = {
             enableTime: false,
             dateFormat: "Y/m/d",
@@ -888,42 +866,7 @@
                 $(".tours-check-in-out").val(instance.altInput.value);
                 $('.tours-check-in-out[type="hidden"]').val(tfNormalizeDateRange(dateStr));
 
-                // Initialize empty object for times
-                let times = {};
-                const selectedDate = selectedDates[0];
-                const timestamp = selectedDate.getTime();
-
-                const tourAvailability = tf_params.tour_form_data.tour_availability;
-
-                for (const key in tourAvailability) {
-                    const availability = tourAvailability[key];
-
-                    if (availability.status !== 'available') continue;
-
-                    const from = new Date(availability.check_in.trim()).getTime();
-                    const to = new Date(availability.check_out.trim()).getTime();
-
-                    if (timestamp >= from && timestamp <= to) {
-                        const allowedTime = availability.allowed_time?.time || [];
-                        if (Array.isArray(allowedTime)) {
-                            allowedTime.forEach((t) => {
-                                if (t && t.trim() !== '') {
-                                    times[t] = t;
-                                }
-                            });
-                        } else if (typeof allowedTime === 'object' && allowedTime !== null) {
-                            Object.values(allowedTime).forEach((t) => {
-                                if (t && t.trim() !== '') {
-                                    times[t] = t;
-                                }
-                            });
-                        }
-
-                        break; // stop after first match
-                    }
-                }
-
-                populateTimeSelect(times);
+                $(document).trigger('tourfic:tour-booking:date-change', [selectedDates, tf_params.tour_form_data]);
 
 
                 if (tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
@@ -981,11 +924,6 @@
             tour_date_options.disableMobile = "true";
             $(".tours-check-in-out").flatpickr(tour_date_options);
 
-            $("select[name='check-in-time']").on("change", function () {
-                var selectedTime = $(this).val();
-                $("select[name='check-in-time']").not(this).val(selectedTime);
-            });
-
             $(".acr-select input[type='number']").on("change", function () {
                 var inputName = $(this).attr("name");
                 var selectedValue = $(this).val();
@@ -1020,11 +958,6 @@
                     }
                 }
             }
-
-            $("select[name='check-in-time']").on("change", function () {
-                var selectedTime = $(this).val();
-                $("select[name='check-in-time']").not(this).val(selectedTime);
-            });
 
             $(".acr-select input[type='tel']").on("change", function () {
                 var inputName = $(this).attr("name");
