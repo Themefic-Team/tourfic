@@ -27,9 +27,6 @@ class Tour_Price {
     
     function __construct($meta) {
     
-        # Get tour type
-        $tour_type = !empty($meta['type']) ? $meta['type'] : 'continuous';
-    
         $allow_discount    = ! empty( $meta['allow_discount'] ) ? $meta['allow_discount'] : '';
         # Get discounts
         $discount_type    = !empty($meta['discount_type']) ? $meta['discount_type'] : 'none';

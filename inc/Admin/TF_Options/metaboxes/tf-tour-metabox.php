@@ -475,21 +475,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-availability/')
 				),
 				array(
-					'id'       => 'type',
-					'type'     => 'select',
-					'label'    => esc_html__( 'How often does this Tour run?', 'tourfic' ),
-					'description' => esc_html__( "Continuous: runs regularly (e.g., daily whale watching). Fixed: Specific dates only (e.g., New Year's cruise)", 'tourfic' ),
-					'class'    => 'tour-type',
-					'options'  => [
-						'continuous' => esc_html__( 'Continuous', 'tourfic' ),
-						'fixed'      => esc_html__( 'Fixed', 'tourfic' ),
-					],
-					'default'  => 'continuous',
-					'attributes' => array(
-						'class' => 'tf_tour_avail_type',
-					),
-				),
-				array(
 					'id'   => 'tour_availability',
 					'type' => 'tourAvailabilityCal',
 				),

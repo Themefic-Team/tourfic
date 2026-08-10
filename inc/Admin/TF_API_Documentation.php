@@ -744,7 +744,6 @@ class TF_API_Documentation {
 					array( 'name' => 'min_person', 'type' => 'integer', 'required' => false, 'description' => __( 'Minimum person count.', 'tourfic' ) ),
 					array( 'name' => 'max_person', 'type' => 'integer', 'required' => false, 'description' => __( 'Maximum person count.', 'tourfic' ) ),
 					array( 'name' => 'max_capacity', 'type' => 'integer', 'required' => false, 'description' => __( 'Maximum capacity.', 'tourfic' ) ),
-					array( 'name' => 'allowed_time', 'type' => 'array', 'required' => false, 'description' => __( 'Allowed tour time slots.', 'tourfic' ) ),
 					array( 'name' => 'tf_tour_repeat_month', 'type' => 'array', 'required' => false, 'description' => __( 'Months for bulk edit.', 'tourfic' ) ),
 					array( 'name' => 'tf_tour_repeat_year', 'type' => 'array', 'required' => false, 'description' => __( 'Years for bulk edit.', 'tourfic' ) ),
 					array( 'name' => 'tf_tour_repeat_week', 'type' => 'array', 'required' => false, 'description' => __( 'Weekday selections for bulk edit.', 'tourfic' ) ),

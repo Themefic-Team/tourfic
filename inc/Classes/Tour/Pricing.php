@@ -641,7 +641,6 @@ class Pricing {
 		$total_people         = $adult_count + $child_count + $infant_count;
 		$total_people_booking = $adult_count + $child_count;
 
-		$tour_type            = ! empty( $meta['type'] ) ? $meta['type'] : '';
 		$pricing_rule         = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 		$disable_adult_price  = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
 		$disable_child_price  = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;

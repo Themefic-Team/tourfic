@@ -320,7 +320,6 @@ class Enqueue {
 			}
 			$tf_tour_global_template    = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
 			$tf_tour_selected_template  = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
-			$tour_type                  = ! empty( $meta['type'] ) ? $meta['type'] : '';
 			$pricing_rule               = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 			$tour_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
@@ -333,41 +332,28 @@ class Enqueue {
 			} else {
 				$tour_availability = [];
 			}
-			
+			$core_tour_availability = array();
+			$core_rule_keys          = array_flip( array( 'check_in', 'check_out', 'status' ) );
+			foreach ( $tour_availability as $availability_key => $availability_rule ) {
+				if ( is_array( $availability_rule ) ) {
+					$core_tour_availability[ $availability_key ] = array_intersect_key( $availability_rule, $core_rule_keys );
+				}
+			}
+
 			// Same Day Booking
 			$disable_same_day = ! empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
 
 			$tour_extras = apply_filters( 'tf_tour_extras_for_script', null, $post_id, $meta );
 
 			$single_tour_form_data['tf_tour_selected_template'] = $tf_tour_selected_template;
-			$single_tour_form_data['tour_type']                 = $tour_type;
 			$single_tour_form_data['pricing_rule']              = $pricing_rule;
-			$single_tour_form_data['first_day_of_week'] = !empty(Helper::tfopt("tf-week-day-flatpickr")) ? Helper::tfopt("tf-week-day-flatpickr") : 0;
-			$single_tour_form_data['select_time_text'] = esc_html__( "Select Time", "tourfic" );
-			$single_tour_form_data['date_format']      = esc_html( $tour_date_format_for_users );
-			$single_tour_form_data['flatpickr_locale'] = ! empty( get_locale() ) ? get_locale() : 'en_US';
-				if($tour_type=='fixed'){
-					$tour_availability = is_array( $tour_availability ) ? $tour_availability : [];
-
-					$normalized = [];
-					if ( !empty($tour_availability) && is_array( $tour_availability ) ) {
-						foreach ( $tour_availability as $range_key => $data ) {
-							if ( empty( $data['check_in'] ) || empty( $data['check_out'] ) ) {
-								continue;
-							}
-							// Normalize key format while preserving full date range for frontend flatpickr.
-							$entry = $data;
-							$key = $data['check_in'] . ' - ' . $data['check_out'];
-							$entry['check_in']  = $data['check_in'];
-							$entry['check_out'] = $data['check_out'];
-							$normalized[ $key ] = $entry;
-						}
-					}
-					$tour_availability =  $normalized;
-				}
-			$single_tour_form_data['disable_same_day'] = $disable_same_day;
-			$single_tour_form_data['tour_availability'] = $tour_availability;
-			$single_tour_form_data['is_all_unavailable'] = Helper::is_all_unavailable($tour_availability);
+			$single_tour_form_data['first_day_of_week']         = ! empty( Helper::tfopt( "tf-week-day-flatpickr" ) ) ? Helper::tfopt( "tf-week-day-flatpickr" ) : 0;
+			$single_tour_form_data['date_format']               = esc_html( $tour_date_format_for_users );
+			$single_tour_form_data['flatpickr_locale']          = ! empty( get_locale() ) ? get_locale() : 'en_US';
+			$single_tour_form_data['disable_same_day']          = $disable_same_day;
+			$single_tour_form_data['tour_availability']         = $core_tour_availability;
+			$single_tour_form_data['is_all_unavailable']        = Helper::is_all_unavailable( $core_tour_availability );
+			$single_tour_form_data = apply_filters( 'tourfic_tour_form_data', $single_tour_form_data, $post_id, $meta );
 
 		}
 
@@ -482,17 +468,10 @@ class Enqueue {
 		if ( ! is_404() && ! empty( $post ) && is_single() ) {
 			$meta = ! empty( get_post_meta( $post->ID, 'tf_tours_opt', true ) ) ? get_post_meta( $post->ID, 'tf_tours_opt', true ) : '';
 		}
-		$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
-
 		# Inline scripts
 		$inline_scripts = '';
 		// JS Start
 		$inline_scripts .= '(function ($) { $(document).ready(function () {';
-
-		if ( $tour_type == 'fixed' ) {
-			// Disable date selection in calendar
-			$inline_scripts .= '$(".flatpickr-day").css("pointer-events", "none"); ';
-		}
 
 		// JS end
 		$inline_scripts .= '}); })(jQuery);';

@@ -1467,8 +1467,7 @@
                         }
                     });
 
-                    setTourAllowedTimes(event.extendedProps.allowed_time, self.tourCalData);
-                    $(document).trigger('tourfic:tour-availability:event-click', [event, self.tourCalData]);
+					$(document).trigger('tourfic:tour-availability:event-click', [event, self.tourCalData]);
 
                     if (event.extendedProps.status) {
                         $("[name='tf_tour_status']", self.tourCalData).val(event.extendedProps.status);
@@ -1493,37 +1492,6 @@
         function setTourCheckInOut(check_in, check_out, tourCalData) {
             $('.tf_tour_check_in', tourCalData).val(check_in);
             $('.tf_tour_check_out', tourCalData).val(check_out);
-        }
-
-        function setTourAllowedTimes(allowedTime, tourCalData) {
-            const $scope = $(tourCalData).find('.tf-tour-core-availability-fields');
-            const $target = $scope.find('.tf_tour_saved_allowed_times').first();
-            const $template = $scope.find('.tf-single-repeater-clone-allowed_time .tf-single-repeater').first();
-            const times = allowedTime && allowedTime.time
-                ? Object.values(allowedTime.time)
-                : [];
-            const capacities = allowedTime && allowedTime.cont_max_capacity
-                ? Object.values(allowedTime.cont_max_capacity)
-                : [];
-
-            $target.empty();
-            times.forEach(function (time, index) {
-                if (!time || !$template.length) {
-                    return;
-                }
-
-                const $row = $template.clone();
-                $row.find('[name="tf_repeater_count"]').val(index + 1);
-                $row.find('[name="allowed_time[time][]"]').val(time);
-                $row.find('[name="allowed_time[cont_max_capacity][]"]').val(capacities[index] || '');
-                $target.append($row);
-            });
-
-            $target.find('.flatpickr-input').flatpickr({
-                enableTime: true,
-                noCalendar: true,
-                dateFormat: 'h:i K'
-            });
         }
 
         function getTourAvailabilityEntry(tourCalData) {
@@ -1602,9 +1570,8 @@
             $('[name="tf_tour_max_person"]', tourCalData).val('');
             $('[name="tf_tour_max_capacity"]', tourCalData).val('');
             $('[name="tf_tour_repeat_day[]"], [name="tf_tour_repeat_month[]"], [name="tf_tour_repeat_year[]"], [name="tf_tour_repeat_week[]"]')
-                .prop('checked', false);
-            setTourAllowedTimes({}, tourCalData);
-            $(document).trigger('tourfic:tour-availability:reset', [tourCalData]);
+            .prop('checked', false);
+			$(document).trigger('tourfic:tour-availability:reset', [tourCalData]);
 
             // Destroy old flatpickr instances to avoid conflicts
             $(tourCalData).find('[name="tf_tour_check_in"]').each(function () {

@@ -78,10 +78,11 @@ Additionally, numerous vital features contribute to making Tourfic the ideal Hot
 * Dedicated Customer Review System (See the Review section for breakdown)
 * Wishlist for Tours
 * Enquiry / Ask a Question Form
-* Different Tour Types (Continuous, Fixed etc)
+* Continuous Tour Scheduling
+* Fixed Tour Scheduling (Pro)
 * Tour Price per Group (Pro)
 * Custom Availability
-* Availability based on Time & Dates
+* Availability based on Time & Dates (Pro)
 * Per day Availability
 * Advanced / Partial Payment (Pro)
 * Sell Tours Extras (Pro)

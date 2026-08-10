@@ -1128,7 +1128,6 @@ class TF_Options {
 		$min_person        = $this->tf_sanitize_availability_number( $_POST['tf_tour_min_person'] ?? '' ); //phpcs:ignore
 		$max_person        = $this->tf_sanitize_availability_number( $_POST['tf_tour_max_person'] ?? '' ); //phpcs:ignore
 		$max_capacity      = $this->tf_sanitize_availability_number( $_POST['tf_tour_max_capacity'] ?? '' ); //phpcs:ignore
-		$allowed_time      = $this->tf_sanitize_availability_array( $_POST['allowed_time'] ?? array() ); //phpcs:ignore
 		$posted_rules      = isset( $_POST['tour_availability'] ) ? wp_unslash( $_POST['tour_availability'] ) : ''; //phpcs:ignore
 		$is_bulk_edit      = ! empty( $_POST['bulk_edit_option'] ); //phpcs:ignore
 		$meta              = get_post_meta( $tour_id, 'tf_tours_opt', true );
@@ -1152,7 +1151,6 @@ class TF_Options {
 		$updated_availability  = array();
 		$build_rule            = function( $start_date, $end_date ) use (
 			$adult_price,
-			$allowed_time,
 			$child_price,
 			$existing_availability,
 			$infant_price,
@@ -1179,7 +1177,6 @@ class TF_Options {
 				'min_person'   => $min_person,
 				'max_person'   => $max_person,
 				'max_capacity' => $max_capacity,
-				'allowed_time' => $allowed_time,
 				'status'       => $status,
 			);
 			$rule          = array_merge( $existing_rule, $core_rule );
@@ -1303,21 +1300,12 @@ class TF_Options {
 				continue;
 			}
 
-			$times = array();
-			if ( ! empty( $rule['allowed_time']['time'] ) && is_array( $rule['allowed_time']['time'] ) ) {
-				$times = array_values( array_filter( array_map( 'sanitize_text_field', $rule['allowed_time']['time'] ) ) );
-			}
-
 			$event          = $rule;
 			$event['start'] = gmdate( 'Y-m-d', strtotime( $rule['check_in'] ) );
 			$event['end']   = gmdate( 'Y-m-d', strtotime( $rule['check_out'] . ' +1 day' ) );
 			$event['title'] = esc_html__( 'Adult: ', 'tourfic' ) . wc_price( $rule['adult_price'] ?? '' )
 				. '<br>' . esc_html__( 'Child: ', 'tourfic' ) . wc_price( $rule['child_price'] ?? '' )
 				. '<br>' . esc_html__( 'Infant: ', 'tourfic' ) . wc_price( $rule['infant_price'] ?? '' );
-
-			if ( ! empty( $times ) ) {
-				$event['title'] .= '<br>' . esc_html__( 'Time: ', 'tourfic' ) . esc_html( implode( ', ', $times ) );
-			}
 
 			$event = apply_filters( 'tourfic_tour_availability_calendar_event', $event, $meta, $tour_id );
 			if ( ! is_array( $event ) ) {
