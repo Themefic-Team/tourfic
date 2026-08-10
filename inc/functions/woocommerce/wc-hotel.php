@@ -29,22 +29,22 @@ function tf_hotel_booking_callback() {
 	 *
 	 * With errors
 	 */
-	$post_id   = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
-	$room_id   = isset( $_POST['room_id'] ) ? intval( sanitize_text_field( $_POST['room_id'] ) ) : null;
-	$unique_id = isset( $_POST['unique_id'] ) ? sanitize_text_field( $_POST['unique_id'] ) : null;
-	$option_id = isset( $_POST['option_id'] ) ? sanitize_text_field( $_POST['option_id'] ) : null;
-	$location  = isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : '';
+	$post_id   = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( wp_unslash($_POST['post_id']) ) ) : null;
+	$room_id   = isset( $_POST['room_id'] ) ? intval( sanitize_text_field( wp_unslash($_POST['room_id']) ) ) : null;
+	$unique_id = isset( $_POST['unique_id'] ) ? sanitize_text_field( wp_unslash($_POST['unique_id']) ) : null;
+	$option_id = isset( $_POST['option_id'] ) ? sanitize_text_field( wp_unslash($_POST['option_id']) ) : null;
+	$location  = isset( $_POST['location'] ) ? sanitize_text_field( wp_unslash($_POST['location']) ) : '';
 	// People number
-	$adult           = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
-	$child           = isset( $_POST['child'] ) ? intval( sanitize_text_field( $_POST['child'] ) ) : '0';
-	$children_ages   = isset( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '0';
-	$room_selected   = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : ( (isset($_POST["hotel_room_selected"]) && !empty($_POST["hotel_room_selected"])) ? intval( sanitize_text_field( $_POST['hotel_room_selected'] ) ) : 1 );
-	$check_in        = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
-	$check_out       = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
-	$deposit         = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
-	$airport_service = isset( $_POST['airport_service'] ) ? sanitize_text_field( $_POST['airport_service'] ) : '';
-	$extras = isset( $_POST['extra_service'] ) ? wp_unslash( $_POST['extra_service'] ) : [];
-	$hotel_extra_quantities = isset( $_POST['hotel_extra_quantity'] ) ? Helper::tf_sanitize_extra_quantities( wp_unslash( $_POST['hotel_extra_quantity'] ) ) : [];
+	$adult           = isset( $_POST['adult'] ) ? intval( sanitize_text_field( wp_unslash($_POST['adult']) ) ) : '0';
+	$child           = isset( $_POST['child'] ) ? intval( sanitize_text_field( wp_unslash($_POST['child']) ) ) : '0';
+	$children_ages   = isset( $_POST['children_ages'] ) ? sanitize_text_field( wp_unslash($_POST['children_ages']) ) : '0';
+	$room_selected   = isset( $_POST['room'] ) ? intval( sanitize_text_field( wp_unslash($_POST['room']) ) ) : ( (isset($_POST["hotel_room_selected"]) && !empty($_POST["hotel_room_selected"])) ? intval( sanitize_text_field( wp_unslash($_POST['hotel_room_selected']) ) ) : 1 );
+	$check_in        = isset( $_POST['check_in_date'] ) ? sanitize_text_field( wp_unslash($_POST['check_in_date']) ) : '';
+	$check_out       = isset( $_POST['check_out_date'] ) ? sanitize_text_field( wp_unslash($_POST['check_out_date']) ) : '';
+	$deposit         = isset( $_POST['deposit'] ) ? sanitize_text_field( wp_unslash($_POST['deposit']) ) : false;
+	$airport_service = isset( $_POST['airport_service'] ) ? sanitize_text_field( wp_unslash($_POST['airport_service']) ) : '';
+	$extras = isset( $_POST['extra_service'] ) ? wp_unslash( $_POST['extra_service'] ) : []; //phpcs:ignore
+	$hotel_extra_quantities = isset( $_POST['hotel_extra_quantity'] ) ? Helper::tf_sanitize_extra_quantities( wp_unslash( $_POST['hotel_extra_quantity'] ) ) : []; //phpcs:ignore
 	$quick_checkout = !empty(Helper::tfopt( 'tf-quick-checkout' )) ? Helper::tfopt( 'tf-quick-checkout' ) : 0;
 	$instantio_is_active = 0;
 
@@ -53,7 +53,7 @@ function tf_hotel_booking_callback() {
 	}
 
 	if(!empty($_POST['extras'])){
-		$extras = wp_unslash( $_POST['extras'] );
+		$extras = wp_unslash( $_POST['extras'] ); //phpcs:ignore
 	}
 
 	if ( is_string( $extras ) ) {

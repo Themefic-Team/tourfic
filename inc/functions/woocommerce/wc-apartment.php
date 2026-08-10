@@ -286,11 +286,11 @@ function tf_apartment_booking_callback() {
 		return;
 	}
 
-	$post_id           = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
-	$adults            = isset( $_POST['adults'] ) ? intval( sanitize_text_field( $_POST['adults'] ) ) : '0';
-	$children          = isset( $_POST['children'] ) ? intval( sanitize_text_field( $_POST['children'] ) ) : '0';
-	$infant            = isset( $_POST['infant'] ) ? intval( sanitize_text_field( $_POST['infant'] ) ) : '0';
-	$check_in_out_date = isset( $_POST['check-in-out-date'] ) ? sanitize_text_field( $_POST['check-in-out-date'] ) : '';
+	$post_id           = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( wp_unslash($_POST['post_id']) ) ) : null;
+	$adults            = isset( $_POST['adults'] ) ? intval( sanitize_text_field( wp_unslash($_POST['adults']) ) ) : '0';
+	$children          = isset( $_POST['children'] ) ? intval( sanitize_text_field( wp_unslash($_POST['children']) ) ) : '0';
+	$infant            = isset( $_POST['infant'] ) ? intval( sanitize_text_field( wp_unslash($_POST['infant']) ) ) : '0';
+	$check_in_out_date = isset( $_POST['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_POST['check-in-out-date']) ) : '';
 	$make_deposit      = isset( $_POST['deposit'] ) ? sanitize_text_field( wp_unslash( $_POST['deposit'] ) ) : '0';
 	$tf_confirmation_details = ! empty( $_POST['booking_confirm'] ) ? wp_unslash( $_POST['booking_confirm'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 

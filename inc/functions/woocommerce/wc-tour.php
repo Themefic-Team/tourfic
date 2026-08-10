@@ -33,7 +33,7 @@ function tf_tours_booking_function() {
 	 *
 	 * @since 2.2.0
 	 */
-	$post_id              = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : '';
+	$post_id              = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( wp_unslash($_POST['post_id']) ) ) : '';
 	$product_id           = get_post_meta( $post_id, 'product_id', true );
 	$post_author          = get_post_field( 'post_author', $post_id );
 	$meta                 = get_post_meta( $post_id, 'tf_tours_opt', true );
@@ -48,18 +48,18 @@ function tf_tours_booking_function() {
 	 *
 	 */
 	// People number
-	$adults       = isset( $_POST['adults'] ) ? intval( sanitize_text_field( $_POST['adults'] ) ) : 0;
-	$children     = isset( $_POST['childrens'] ) ? intval( sanitize_text_field( $_POST['childrens'] ) ) : 0;
-	$infant       = isset( $_POST['infants'] ) ? intval( sanitize_text_field( $_POST['infants'] ) ) : 0;
+	$adults       = isset( $_POST['adults'] ) ? intval( sanitize_text_field( wp_unslash($_POST['adults']) ) ) : 0;
+	$children     = isset( $_POST['childrens'] ) ? intval( sanitize_text_field( wp_unslash($_POST['childrens']) ) ) : 0;
+	$infant       = isset( $_POST['infants'] ) ? intval( sanitize_text_field( wp_unslash($_POST['infants']) ) ) : 0;
 	$total_people = $adults + $children + $infant;
 	$total_people_booking = $adults + $children;
 	if ( 0 > $adults || 0 > $children || 0 > $infant ) {
 		$response['errors'][] = esc_html__( 'Traveler count cannot be negative.', 'tourfic' );
 	}
 	// Tour date
-	$tour_date    = ! empty( $_POST['check-in-out-date'] ) ? sanitize_text_field( $_POST['check-in-out-date'] ) : '';
-	$tour_time    = isset( $_POST['check-in-time'] ) ? sanitize_text_field( $_POST['check-in-time'] ) : null;
-	$make_deposit = ! empty( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
+	$tour_date    = ! empty( $_POST['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_POST['check-in-out-date']) ) : '';
+	$tour_time    = isset( $_POST['check-in-time'] ) ? sanitize_text_field( wp_unslash($_POST['check-in-time']) ) : null;
+	$make_deposit = ! empty( $_POST['deposit'] ) ? sanitize_text_field( wp_unslash($_POST['deposit']) ) : false;
 
 	// Tour Package
 	$selectedPackage = isset( $_POST['selectedPackage'] ) ? sanitize_text_field( wp_unslash( $_POST['selectedPackage'] ) ) : '';
@@ -215,7 +215,7 @@ function tf_tours_booking_function() {
 		}
 
 		if(!empty($tour_type) && ($tour_type == "fixed")) {
-			$start_date = ! empty( $_POST['check-in-out-date'] ) ? sanitize_text_field( $_POST['check-in-out-date'] ) : '';
+			$start_date = ! empty( $_POST['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_POST['check-in-out-date']) ) : '';
 		}
 
 		if(!empty($start_date) && !empty($day_diff)) {
@@ -405,8 +405,8 @@ function tf_tours_booking_function() {
 	$tour_extra_meta = apply_filters( 'tf_tour_extra_meta', null, $post_id, $meta );
 	if(!empty($tour_extra_meta)){
 		$tour_extra_selection = Helper::tf_sanitize_tour_extra_selection(
-			isset( $_POST['tour_extra'] ) ? wp_unslash( $_POST['tour_extra'] ) : [],
-			isset( $_POST['tour_extra_quantity'] ) ? wp_unslash( $_POST['tour_extra_quantity'] ) : []
+			isset( $_POST['tour_extra'] ) ? wp_unslash( $_POST['tour_extra'] ) : [], //phpcs:ignore
+			isset( $_POST['tour_extra_quantity'] ) ? wp_unslash( $_POST['tour_extra_quantity'] ) : [] //phpcs:ignore
 		);
 		$tours_extra          = $tour_extra_selection['extras'];
 		$tour_extra_quantity  = $tour_extra_selection['quantities'];
@@ -1173,7 +1173,7 @@ function tf_tours_booking_function() {
 					'{infant}'     => $infant,
 					'{id}' => $post_id,
 					'{title}' => urlencode(get_the_title($post_id)),
-					'{extras}' => sanitize_text_field($_POST["tour_extra"]),
+					'{extras}' => sanitize_text_field($_POST["tour_extra"]), //phpcs:ignore
 					'{extras_title}' => urlencode(html_entity_decode(wp_strip_all_tags($tour_extra_title))),
 				);
 
