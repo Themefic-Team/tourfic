@@ -975,13 +975,13 @@ class Tour {
 
 		// Value from URL
 		// Adults
-		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// children
-		$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$child = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// room
-		$infant = ! empty( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$infant = ! empty( $_GET['infant'] ) ? sanitize_text_field( wp_unslash($_GET['infant']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		$meta      = get_post_meta( $post_id, 'tf_tours_opt', true );
 		$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
@@ -2436,17 +2436,17 @@ class Tour {
 
 		// Adults
 		if ( empty( $adults ) ) {
-			$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 		// children
 		if ( empty( $child ) ) {
-			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 		// room
-		$infant = ! empty( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$infant = ! empty( $_GET['infant'] ) ? sanitize_text_field( wp_unslash($_GET['infant']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// Check-in & out date
 		if ( empty( $check_in_out ) ) {
-			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 
 		$disable_adult_price              = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
@@ -3569,8 +3569,8 @@ class Tour {
 			return;
 		}
 
-		$post_id = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : '';
-		$tour_date = ! empty( $_POST['date'] ) ? sanitize_text_field( $_POST['date'] ) : '';
+		$post_id = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( wp_unslash($_POST['post_id']) ) ) : '';
+		$tour_date = ! empty( $_POST['date'] ) ? sanitize_text_field( wp_unslash($_POST['date']) ) : '';
 
 		$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
 		$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
@@ -4065,18 +4065,18 @@ class Tour {
 			return;
 		}
 		$response             = array();
-		$adults               = isset( $_POST['adults'] ) ? intval( sanitize_text_field( $_POST['adults'] ) ) : 0;
-		$children             = isset( $_POST['children'] ) ? intval( sanitize_text_field( $_POST['children'] ) ) : 0;
-		$infant               = isset( $_POST['infant'] ) ? intval( sanitize_text_field( $_POST['infant'] ) ) : 0;
+		$adults               = isset( $_POST['adults'] ) ? intval( sanitize_text_field( wp_unslash($_POST['adults']) ) ) : 0;
+		$children             = isset( $_POST['children'] ) ? intval( sanitize_text_field( wp_unslash($_POST['children']) ) ) : 0;
+		$infant               = isset( $_POST['infant'] ) ? intval( sanitize_text_field( wp_unslash($_POST['infant']) ) ) : 0;
 		$total_people         = $adults + $children + $infant;
 		$total_people_booking = $adults + $children;
 		// Tour date
-		$tour_date = ! empty( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
-		$tour_time = isset( $_POST['check_in_time'] ) ? sanitize_text_field( $_POST['check_in_time'] ) : null;
+		$tour_date = ! empty( $_POST['check_in_date'] ) ? sanitize_text_field( wp_unslash($_POST['check_in_date']) ) : '';
+		$tour_time = isset( $_POST['check_in_time'] ) ? sanitize_text_field( wp_unslash($_POST['check_in_time']) ) : null;
 		$selectedPackage = isset( $_POST['selectedPackage'] ) ? sanitize_text_field( wp_unslash( $_POST['selectedPackage'] ) ) : '';
 		// var_dump($tour_time);
 
-		$post_id              = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : '';
+		$post_id              = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( wp_unslash($_POST['post_id']) ) ) : '';
 		$meta                 = get_post_meta( $post_id, 'tf_tours_opt', true );
 		$tour_type            = ! empty( $meta['type'] ) ? $meta['type'] : '';
 		$pricing_rule         = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';

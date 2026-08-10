@@ -1226,7 +1226,7 @@ class Helper {
 	static function tf_search_result_sidebar_form( $placement = 'single' ) {
 
 		// Get post type
-		$post_type                     = sanitize_text_field( wp_unslash($_GET['type']) ) ?? ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$post_type                     = !empty($_GET['type']) ? sanitize_text_field( wp_unslash($_GET['type']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$place_title                   = '';
 		$date_format_for_users         = ! empty( self::tfopt( "tf-date-format-for-users" ) ) ? self::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$hotel_location_field_required = ! empty( self::tfopt( "required_location_hotel_search" ) ) ? self::tfopt( "required_location_hotel_search" ) : 0;
@@ -1375,7 +1375,7 @@ class Helper {
 
                     <div class="tf-booking-bttns tf-mt-24">
 						<?php
-						$ptype = sanitize_text_field( wp_unslash( $_GET['type'] ) ) ?? get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+						$ptype = !empty($_GET['type']) ?  sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 						?>
                         <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                         <button class="tf_btn tf_btn_full tf-submit"
@@ -1662,7 +1662,7 @@ class Helper {
             </div>
             <div class="tf-booking-form-submit">
 				<?php
-				$ptype = sanitize_text_field( wp_unslash( $_GET['type'] ) ) ?? get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$ptype = !empty($_GET['type']) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                 <button class="tf_btn tf_btn_large tf_btn_sharp tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
@@ -2018,7 +2018,7 @@ class Helper {
                 </div>
             </div>
             <div class="tf-booking-form-submit">
-	            <?php $ptype = sanitize_text_field( wp_unslash( $_GET['type'] ) ) ?? get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+	            <?php $ptype = !empty($_GET['type']) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr($ptype); ?>" class="tf-post-type"/>
                 <button class="tf_btn tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
             </div>
@@ -2222,7 +2222,7 @@ class Helper {
                         <input type="hidden" id="tf_author" value="<?php echo esc_html(sanitize_text_field( wp_unslash( $_GET['tf-author'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>">
 					<?php } ?>
 					<?php
-					$ptype = sanitize_text_field( wp_unslash( $_GET['type'] ) ) ?? get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					$ptype = !empty($_GET['type']) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					?>
                     <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                     <button class="tf_btn tf_btn_full tf-submit"
@@ -3223,10 +3223,10 @@ class Helper {
 		</div>
         <?php } elseif ( $post_type == 'tf_room' && $design_room == "design-1" ) {
             
-			$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '1'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '0'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$room = ! empty( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : '1'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults']) ) : '1'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children']) ) : '0'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$room = ! empty( $_GET['room'] ) ? sanitize_text_field( wp_unslash($_GET['room']) ) : '1'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             $check_in_out_arr = tf_split_date_range( $check_in_out );
             $check_in = !empty($check_in_out_arr[0]) ? $check_in_out_arr[0] : ''; 
             $check_out = !empty($check_in_out_arr[1]) ? $check_in_out_arr[1] : '';
