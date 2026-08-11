@@ -10,7 +10,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$billing_details = array(
+$tourfic_billing_details = array(
 	'{fullname}'        => esc_html__( 'Name', 'tourfic' ),
 	'{user_email}'      => esc_html__( 'Email', 'tourfic' ),
 	'{billing_address}' => esc_html__( 'Billing Address', 'tourfic' ),
@@ -18,7 +18,7 @@ $billing_details = array(
 	'{country}'         => esc_html__( 'Country', 'tourfic' ),
 	'{phone}'         	=> esc_html__( 'Phone', 'tourfic' ),
 );
-$payment_details = array(
+$tourfic_payment_details = array(
 	'{price}'     => esc_html__( 'Price', 'tourfic' ),
 	'{total_cost}' => esc_html__( 'Total Cost', 'tourfic' ),
 	'{due}'        => esc_html__( 'Due', 'tourfic' ),
@@ -56,10 +56,10 @@ $payment_details = array(
 												<h3 class="alignleft"><?php echo esc_html__( 'Billing Details', 'tourfic' ); ?></h3>
 											</td>
 										</tr>
-										<?php foreach ( $billing_details as $tag => $label ) : ?>
+										<?php foreach ( $tourfic_billing_details as $tourfic_tag => $tourfic_label ) : ?>
 											<tr>
-												<td><?php echo esc_html( $label ); ?></td>
-												<td class="alignright"><?php echo esc_html( $tag ); ?></td>
+												<td><?php echo esc_html( $tourfic_label ); ?></td>
+												<td class="alignright"><?php echo esc_html( $tourfic_tag ); ?></td>
 											</tr>
 										<?php endforeach; ?>
 									</table>

@@ -6,10 +6,10 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Hotel\Hotel;
 
-$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
-$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
-$tf_ext_booking_type  = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
-$tf_ext_booking_code  = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
+$tourfic_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+$tourfic_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+$tourfic_ext_booking_type  = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
+$tourfic_ext_booking_code  = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
 ?>
 <div class="tf-single-template__one">
     <div class="tf-tour-single">
@@ -62,9 +62,9 @@ $tf_ext_booking_code  = ! empty( $meta['booking-code'] ) ? $meta['booking-code']
 
                 <?php 
                 if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout']) ){
-                    foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout'] as $section){
-                        if( !empty($section['status']) && $section['status']=="1" && !empty($section['slug']) ){
-                            include TF_TEMPLATE_PART_PATH . 'hotel/design-1/'.$section['slug'].'.php';
+                    foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout'] as $tourfic_section){
+                        if( !empty($tourfic_section['status']) && $tourfic_section['status']=="1" && !empty($tourfic_section['slug']) ){
+                            include TF_TEMPLATE_PART_PATH . 'hotel/design-1/'.$tourfic_section['slug'].'.php';
                         }
                     }
                 }else{

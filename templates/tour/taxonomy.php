@@ -27,36 +27,36 @@ if ( !Helper::tf_is_woo_active() ) {
 	return;
 }
 
-$term = get_queried_object();
-$post_type = 'tf_tours';
-$taxonomy = $term->taxonomy;
-$taxonomy_name = $term->name;
-$taxonomy_slug = $term->slug;
-$max = '2';
+$tourfic_term = get_queried_object();
+$tourfic_post_type = 'tf_tours';
+$tourfic_taxonomy = $tourfic_term->taxonomy;
+$tourfic_taxonomy_name = $tourfic_term->name;
+$tourfic_taxonomy_slug = $tourfic_term->slug;
+$tourfic_max = '2';
 
-$tf_tour_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
+$tourfic_tour_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
 
-if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
+if( $tourfic_post_type == "tf_tours" && $tourfic_tour_arc_selected_template=="design-1" ){
 ?>
 <div class="tf-archive-page tf-archive-design-1 tf-archive-template__one">
     <div class="tf-container">
-		<h3><?php echo esc_html($taxonomy_name); ?></h3>
+		<h3><?php echo esc_html($tourfic_taxonomy_name); ?></h3>
         <div class="tf-row tf-archive-inner tf-flex">
 		<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
 		<!-- SideBar-->
 		<div class="tf-sidebar tf-archive-right">
 			<?php 
-            if($taxonomy == 'tour_destination'){
-                Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug);
+            if($tourfic_taxonomy == 'tour_destination'){
+                Helper::tf_archive_sidebar_search_form($tourfic_post_type, $tourfic_taxonomy, $tourfic_taxonomy_name, $tourfic_taxonomy_slug);
             } else {
-                Helper::tf_archive_sidebar_search_form($post_type, '', '', '');
+                Helper::tf_archive_sidebar_search_form($tourfic_post_type, '', '', '');
             }
             ?>
 		</div>
 		</div>
 	</div>
 </div>
-<?php } elseif( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-2" ){ ?>
+<?php } elseif( $tourfic_post_type == "tf_tours" && $tourfic_tour_arc_selected_template=="design-2" ){ ?>
 
 <div class="tf-archive-template__two">
     <?php Banner::render(); ?>
@@ -73,10 +73,10 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
                         <?php esc_html_e("Modify search", "tourfic"); ?>
                     </span>
                     <?php 
-                    if($taxonomy == 'tour_destination'){
-                        Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug);
+                    if($tourfic_taxonomy == 'tour_destination'){
+                        Helper::tf_archive_sidebar_search_form($tourfic_post_type, $tourfic_taxonomy, $tourfic_taxonomy_name, $tourfic_taxonomy_slug);
                     } else {
-                        Helper::tf_archive_sidebar_search_form($post_type, '', '', '');
+                        Helper::tf_archive_sidebar_search_form($tourfic_post_type, '', '', '');
                     }
                     ?>
 					<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
@@ -118,24 +118,24 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
     <!-- Hotel PopUp end -->
 </div>
 
-<?php } elseif( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-3" ){ ?>
+<?php } elseif( $tourfic_post_type == "tf_tours" && $tourfic_tour_arc_selected_template=="design-3" ){ ?>
     <div class="tf-archive-template__three">
 
         <div class="tf-content-wrapper">
             <?php
             do_action('tf_before_container');
-            $post_count = $GLOBALS['wp_query']->post_count;
-            $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
-            $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
+            $tourfic_post_count = $GLOBALS['wp_query']->post_count;
+            $tourfic_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
+            $tourfic_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
             ?>
 
             <div class="tf-archive-search-form tf-booking-form-wrapper">
                 <div class="tf-container">                    
                     <?php 
-                    if($taxonomy == 'tour_destination'){
-                        Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug);
+                    if($tourfic_taxonomy == 'tour_destination'){
+                        Helper::tf_archive_sidebar_search_form($tourfic_post_type, $tourfic_taxonomy, $tourfic_taxonomy_name, $tourfic_taxonomy_slug);
                     } else {
-                        Helper::tf_archive_sidebar_search_form($post_type, '', '', '');
+                        Helper::tf_archive_sidebar_search_form($tourfic_post_type, '', '', '');
                     }
                     ?>
                 </div>
@@ -151,7 +151,7 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
 <div class="tf-main-wrapper tf-archive-template__legacy" data-fullwidth="true">
 	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf-container">
-		<h3><?php echo esc_html($taxonomy_name); ?></h3>
+		<h3><?php echo esc_html($tourfic_taxonomy_name); ?></h3>
 		<div class="search-result-inner">
 			<div class="tf-search-left">
 				<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
@@ -159,10 +159,10 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
 
 			<div class="tf-search-right">
 				<?php 
-                if($taxonomy == 'tour_destination'){
-                    Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug);
+                if($tourfic_taxonomy == 'tour_destination'){
+                    Helper::tf_archive_sidebar_search_form($tourfic_post_type, $tourfic_taxonomy, $tourfic_taxonomy_name, $tourfic_taxonomy_slug);
                 } else {
-                    Helper::tf_archive_sidebar_search_form($post_type, '', '', '');
+                    Helper::tf_archive_sidebar_search_form($tourfic_post_type, '', '', '');
                 }
                 ?>
                 <?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>

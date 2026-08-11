@@ -20,18 +20,18 @@ if(tf_is_block_theme()){
 }
 
 
-$tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
+$tourfic_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
 
 if ( Helper::tf_is_woo_active() ) {
-	if ( $tf_hotel_arc_selected_template == "design-1" ) {
+	if ( $tourfic_hotel_arc_selected_template == "design-1" ) {
 		include TF_TEMPLATE_PATH . 'hotel/archive/design-1.php';
-	} elseif ( $tf_hotel_arc_selected_template == "design-2" ) {
+	} elseif ( $tourfic_hotel_arc_selected_template == "design-2" ) {
 		include TF_TEMPLATE_PATH . 'hotel/archive/design-2.php';
-	} elseif ( $tf_hotel_arc_selected_template == "design-3" ) {
+	} elseif ( $tourfic_hotel_arc_selected_template == "design-3" ) {
 		include TF_TEMPLATE_PATH . 'hotel/archive/design-3.php';
 	} else {
-		$template = apply_filters( 'tf_hotel_archive_legacy_template', TF_TEMPLATE_PATH . 'hotel/archive/design-legacy.php' );
-		include $template;
+		$tourfic_template = apply_filters( 'tf_hotel_archive_legacy_template', TF_TEMPLATE_PATH . 'hotel/archive/design-legacy.php' );
+		include $tourfic_template;
 	}
 } else {
 	?>

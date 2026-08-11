@@ -3,12 +3,12 @@
 defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
-$tf_car_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] : 'design-1';
-$tf_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_design_1_bannar'] : '';
-if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_carrental" && $tf_car_arc_selected_template == "design-1" ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$tourfic_car_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] : 'design-1';
+$tourfic_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_design_1_bannar'] : '';
+if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_carrental" && $tourfic_car_arc_selected_template == "design-1" ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 ?>
 <div class="tf-archive-template__one">
-    <div class="tf-archive-car-banner" style="<?php echo !empty($tf_car_arc_banner) ? 'background-image: url('.esc_url($tf_car_arc_banner).')' : ''; ?>">
+    <div class="tf-archive-car-banner" style="<?php echo !empty($tourfic_car_arc_banner) ? 'background-image: url('.esc_url($tourfic_car_arc_banner).')' : ''; ?>">
         <div class="tf-banner-content tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-direction-column">
             <h1><?php esc_html_e("Search results", "tourfic"); ?></h1>
         </div>

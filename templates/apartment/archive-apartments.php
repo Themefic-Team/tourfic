@@ -21,12 +21,12 @@ defined( 'ABSPATH' ) || exit;
     get_header();
 }
 
-$tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
+$tourfic_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 
 if ( Helper::tf_is_woo_active() ) {
-	if ( $tf_apartment_arc_selected_template == "design-1" ) {
+	if ( $tourfic_apartment_arc_selected_template == "design-1" ) {
 		include TF_TEMPLATE_PATH . 'apartment/archive/design-1.php';
-	} elseif ( $tf_apartment_arc_selected_template == "design-2" ) {
+	} elseif ( $tourfic_apartment_arc_selected_template == "design-2" ) {
 		include TF_TEMPLATE_PATH . 'apartment/archive/design-2.php';
 	} else {
 		include TF_TEMPLATE_PATH . 'apartment/archive/design-legacy.php';

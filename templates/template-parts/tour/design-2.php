@@ -6,23 +6,23 @@ use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Tour\Tour_Price;
 
-$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
-$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
-$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
-$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
-$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
-$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
-if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
-	$external_search_info = array(
+$tourfic_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+$tourfic_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
+$tourfic_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
+$tourfic_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
+$tourfic_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+$tourfic_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
+if ( 2 == $tourfic_booking_type && ! empty( $tourfic_booking_url ) ) {
+	$tourfic_external_search_info = array(
 		'{adult}'        => ! empty( $adults ) ? $adults : 1,
 		'{child}'        => ! empty( $children ) ? $children : 0,
 		'{infant}'       => ! empty( $infant ) ? $infant : 0,
 		'{booking_date}' => ! empty( $tour_date ) ? $tour_date : '',
 	);
-	if ( ! empty( $tf_booking_attribute ) ) {
-		$tf_booking_query_url = str_replace( array_keys( $external_search_info ), array_values( $external_search_info ), $tf_booking_query_url );
-		if ( ! empty( $tf_booking_query_url ) ) {
-			$tf_booking_url = $tf_booking_url . '/?' . $tf_booking_query_url;
+	if ( ! empty( $tourfic_booking_attribute ) ) {
+		$tourfic_booking_query_url = str_replace( array_keys( $tourfic_external_search_info ), array_values( $tourfic_external_search_info ), $tourfic_booking_query_url );
+		if ( ! empty( $tourfic_booking_query_url ) ) {
+			$tourfic_booking_url = $tourfic_booking_url . '/?' . $tourfic_booking_query_url;
 		}
 	}
 }
@@ -65,9 +65,9 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                 <div class="tf-details-left">
 					<?php
 					if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout-part-1'] ) ) {
-						foreach ( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout-part-1'] as $section ) {
-							if ( ! empty( $section['status'] ) && $section['status'] == "1" && ! empty( $section['slug'] ) ) {
-								include TF_TEMPLATE_PART_PATH . 'tour/design-2/' . $section['slug'] . '.php';
+						foreach ( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout-part-1'] as $tourfic_section ) {
+							if ( ! empty( $tourfic_section['status'] ) && $tourfic_section['status'] == "1" && ! empty( $tourfic_section['slug'] ) ) {
+								include TF_TEMPLATE_PART_PATH . 'tour/design-2/' . $tourfic_section['slug'] . '.php';
 							}
 						}
 					} else {
@@ -107,9 +107,9 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
             <!-- Hotel details End -->
 			<?php
 			if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout-part-2'] ) ) {
-				foreach ( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout-part-2'] as $section ) {
-					if ( ! empty( $section['status'] ) && $section['status'] == "1" && ! empty( $section['slug'] ) ) {
-						include TF_TEMPLATE_PART_PATH . 'tour/design-2/' . $section['slug'] . '.php';
+				foreach ( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout-part-2'] as $tourfic_section ) {
+					if ( ! empty( $tourfic_section['status'] ) && $tourfic_section['status'] == "1" && ! empty( $tourfic_section['slug'] ) ) {
+						include TF_TEMPLATE_PART_PATH . 'tour/design-2/' . $tourfic_section['slug'] . '.php';
 					}
 				}
 			} else {
@@ -125,10 +125,10 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                     <div class="tf-popup-body">
 						<?php
 						if ( ! empty( $gallery_ids ) ) {
-							foreach ( $gallery_ids as $key => $gallery_item_id ) {
-								$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+							foreach ( $gallery_ids as $tourfic_key => $tourfic_gallery_item_id ) {
+								$tourfic_image_url = wp_get_attachment_url( $tourfic_gallery_item_id, 'full' );
 								?>
-                                <img src="<?php echo esc_url( $image_url ); ?>" alt="" class="tf-popup-image">
+                                <img src="<?php echo esc_url( $tourfic_image_url ); ?>" alt="" class="tf-popup-image">
 							<?php }
 						} ?>
                     </div>

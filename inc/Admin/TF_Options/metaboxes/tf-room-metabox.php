@@ -1,9 +1,9 @@
 <?php
 // don't load directly
 defined( 'ABSPATH' ) || exit;
-$hotel_name = apply_filters( 'tf_hotel_post_type_name_change_singular', esc_html__( 'Hotel', 'tourfic' ) );
-$hotels_name = apply_filters( 'tf_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
-$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
+$tourfic_hotel_name = apply_filters( 'tf_hotel_post_type_name_change_singular', esc_html__( 'Hotel', 'tourfic' ) );
+$tourfic_hotels_name = apply_filters( 'tf_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
+$tourfic_adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
 TF_Metabox::metabox( 'tf_room_opt', array(
 	'title'     => esc_html__( 'Room Settings', 'tourfic' ),
@@ -54,9 +54,9 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 					'type'        => 'select2',
 					'placeholder' => esc_html__( 'Select a Hotel', 'tourfic' ),
                     /* translators: %s is the hotel name */
-                    'label'       => sprintf( esc_html__( 'Select %s (Required)', 'tourfic' ), $hotel_name ),
+                    'label'       => sprintf( esc_html__( 'Select %s (Required)', 'tourfic' ), $tourfic_hotel_name ),
                     /* translators: %s is the lowercased hotel name */
-                    'subtitle'    => sprintf( esc_html__( 'Select the %s where this room will be added', 'tourfic' ), strtolower( $hotel_name ) ),
+                    'subtitle'    => sprintf( esc_html__( 'Select the %s where this room will be added', 'tourfic' ), strtolower( $tourfic_hotel_name ) ),
 					'options'     => 'posts',
 					'query_args'  => array(
 						'post_type'      => 'tf_hotel',
@@ -125,9 +125,9 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'id'          => 'adult',
                     'type'        => 'number',
                     /* translators: %s is the adults label/name */
-                    'label'       => sprintf( esc_html__( 'Number of %s', 'tourfic' ), $adults_name ),
+                    'label'       => sprintf( esc_html__( 'Number of %s', 'tourfic' ), $tourfic_adults_name ),
                     /* translators: %s is the lowercased adults label/name */
-                    'subtitle'    => sprintf( esc_html__( 'Max number of %s allowed in the room.', 'tourfic' ), strtolower( $adults_name ) ),
+                    'subtitle'    => sprintf( esc_html__( 'Max number of %s allowed in the room.', 'tourfic' ), strtolower( $tourfic_adults_name ) ),
                     'attributes'  => array(
                         'min' => '0',
                     ),

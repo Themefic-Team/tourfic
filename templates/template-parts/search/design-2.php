@@ -11,25 +11,25 @@ if ( ! isset( $_GET['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_uns
 	return;
 }
 if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
-	$tf_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] : '';
+	$tourfic_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] : '';
 }elseif( !empty($_GET['type']) && $_GET['type']=="tf_hotel" ){
-	$tf_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] : '';
+	$tourfic_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] : '';
 }else{
-    $tf_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] : '';
+    $tourfic_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] : '';
 }
 ?>
     <!--Hero section start -->
-    <div class="tf-hero-section-wrap" style="<?php echo !empty($tf_search_result_banner) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url($tf_search_result_banner).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
+    <div class="tf-hero-section-wrap" style="<?php echo !empty($tourfic_search_result_banner) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url($tourfic_search_result_banner).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
         <div class="tf-container">
             <div class="tf-hero-content tf-archive-hero-content">
                 <div class="tf-head-title">
                     <h1><?php echo !empty($_GET['place-name']) ? esc_html( sanitize_text_field( wp_unslash($_GET['place-name'])) ) : '' ?></h1>
                     <?php if( !empty($_GET['type']) && "tf_tours"==$_GET['type'] ){ 
-                    $tf_adults = !empty($_GET['adults']) ? absint( sanitize_key($_GET['adults']) ) : 0;
-                    $tf_children = !empty($_GET['children']) ? absint( sanitize_key($_GET['children']) ) : 0;
+                    $tourfic_adults = !empty($_GET['adults']) ? absint( sanitize_key($_GET['adults']) ) : 0;
+                    $tourfic_children = !empty($_GET['children']) ? absint( sanitize_key($_GET['children']) ) : 0;
                     ?>
                         <div class="tf-title-meta">
-                            <p>( <?php echo esc_html( $tf_adults + $tf_children ); ?> <?php esc_html_e("Guest", "tourfic"); ?>, <?php echo !empty($_GET['check-in-out-date']) ? esc_html( sanitize_text_field( wp_unslash($_GET['check-in-out-date'])) ) : '' ?> )</p>
+                            <p>( <?php echo esc_html( $tourfic_adults + $tourfic_children ); ?> <?php esc_html_e("Guest", "tourfic"); ?>, <?php echo !empty($_GET['check-in-out-date']) ? esc_html( sanitize_text_field( wp_unslash($_GET['check-in-out-date'])) ) : '' ?> )</p>
                         </div>
                     <?php } if( !empty($_GET['type']) && "tf_hotel"==$_GET['type'] ){ ?>
                     <div class="tf-title-meta">
@@ -47,7 +47,7 @@ if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
     <div class="tf-content-wrapper">
         <?php
             do_action( 'tf_before_container' );
-            $post_count = $GLOBALS['wp_query']->post_count;
+            $tourfic_post_count = $GLOBALS['wp_query']->post_count;
         ?>
         <div class="tf-container">
         

@@ -54,7 +54,7 @@ if ( ! function_exists( 'tf_wishlist_page_default') ) {
 
 TF_Settings::option( 'tf_settings', array(
 	'title'    => esc_html__( 'Tourfic Settings ', 'tourfic' ),
-	'icon'     => $menu_icon,
+	'icon'     => $tourfic_menu_icon,
 	'position' => 26,
 	'sections' => array(
 		'general'               => array(

@@ -27,12 +27,12 @@ if ( !Helper::tf_is_woo_active() ) {
 	return;
 }
 
-$post_type = 'tf_room';
-$max = '8';
+$tourfic_post_type = 'tf_room';
+$tourfic_max = '8';
 
-$tf_room_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] : 'design-1';
+$tourfic_room_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] : 'design-1';
 
-if( $post_type == "tf_room" && $tf_room_arc_selected_template=="design-1" ){
+if( $tourfic_post_type == "tf_room" && $tourfic_room_arc_selected_template=="design-1" ){
 ?>
 <div class="tf-archive-template__one sp-0">
     <?php Helper::tf_archive_sidebar_search_form('tf_room'); ?>

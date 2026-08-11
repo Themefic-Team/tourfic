@@ -7,23 +7,23 @@ use \Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Tour\Tour_Price;
 use \Tourfic\Classes\Tour\Pricing;
 
-$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
-$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
-$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
-$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
-$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
-$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
-if( 2==$tf_booking_type && !empty($tf_booking_url) ){
-	$external_search_info = array(
+$tourfic_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+$tourfic_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
+$tourfic_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
+$tourfic_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
+$tourfic_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+$tourfic_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
+if( 2==$tourfic_booking_type && !empty($tourfic_booking_url) ){
+	$tourfic_external_search_info = array(
 		'{adult}'    => !empty($adults) ? $adults : 1,
 		'{child}'    => !empty($children) ? $children : 0,
 		'{infant}'     => !empty($infant) ? $infant : 0,
 		'{booking_date}' => !empty($tour_date) ? $tour_date : '',
 	);
-	if(!empty($tf_booking_attribute)){
-		$tf_booking_query_url = str_replace(array_keys($external_search_info), array_values($external_search_info), $tf_booking_query_url);
-		if( !empty($tf_booking_query_url) ){
-			$tf_booking_url = $tf_booking_url.'/?'.$tf_booking_query_url;
+	if(!empty($tourfic_booking_attribute)){
+		$tourfic_booking_query_url = str_replace(array_keys($tourfic_external_search_info), array_values($tourfic_external_search_info), $tourfic_booking_query_url);
+		if( !empty($tourfic_booking_query_url) ){
+			$tourfic_booking_url = $tourfic_booking_url.'/?'.$tourfic_booking_query_url;
 		}
 	}
 }
@@ -50,24 +50,24 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 	            <?php \Tourfic\App\Templates\Components\Shared\Single\Booking_Form::render(['booking_form_style' => 'style3']); ?>
                 <div class="tf-hero-bottom-area">
                     <?php
-                    $tour_video = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
-                    if ( !empty($tour_video) ) {
+                    $tourfic_tour_video = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
+                    if ( !empty($tourfic_tour_video) ) {
                         ?>
-                        <div class="tf-hero-btm-icon tf-tour-video" data-fancybox="tour-video" href="<?php echo esc_url($tour_video); ?>">
+                        <div class="tf-hero-btm-icon tf-tour-video" data-fancybox="tour-video" href="<?php echo esc_url($tourfic_tour_video); ?>">
                             <i class="fab fa-youtube"></i>
                         </div>
                     <?php }
                     // Gallery
                     if ( ! empty( $gallery_ids ) ) {
-                        foreach ( $gallery_ids as $key => $gallery_item_id ) {
-                            $image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-                            if ( $key === array_key_first( $gallery_ids ) ) {
+                        foreach ( $gallery_ids as $tourfic_key => $tourfic_gallery_item_id ) {
+                            $tourfic_image_url = wp_get_attachment_url( $tourfic_gallery_item_id, 'full' );
+                            if ( $tourfic_key === array_key_first( $gallery_ids ) ) {
                                 ?>
-                                <div data-fancybox="tour-gallery" class="tf-hero-btm-icon tf-tour-gallery" data-src="<?php echo esc_url($image_url); ?>">
+                                <div data-fancybox="tour-gallery" class="tf-hero-btm-icon tf-tour-gallery" data-src="<?php echo esc_url($tourfic_image_url); ?>">
                                     <i class="far fa-image"></i>
                             </div>
                          <?php } else {
-                                echo '<a data-fancybox="tour-gallery" href="' . esc_url($image_url) . '" style="display:none;"></a>';
+                                echo '<a data-fancybox="tour-gallery" href="' . esc_url($tourfic_image_url) . '" style="display:none;"></a>';
                             }
                         }
                     }
@@ -198,14 +198,14 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         'wrapper_close' => '</div>',
                     ]); ?>
                     <div class="tf-faq-items-wrapper">
-                        <?php foreach ( $faqs as $key => $faq ): ?>
+                        <?php foreach ( $faqs as $tourfic_key => $tourfic_faq ): ?>
                             <div id="tf-faq-item">
                                 <div class="tf-faq-title">
-                                    <h4><?php echo esc_html( $faq['title'] ); ?></h4>
+                                    <h4><?php echo esc_html( $tourfic_faq['title'] ); ?></h4>
                                     <i class="fas fa-angle-down arrow"></i>
                                 </div>
                                 <div class="tf-faq-desc">
-                                    <?php echo wp_kses_post( $faq['desc'] ); ?>
+                                    <?php echo wp_kses_post( $tourfic_faq['desc'] ); ?>
                                 </div>
                             </div>
                         <?php endforeach; ?>

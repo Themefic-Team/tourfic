@@ -11,14 +11,14 @@ defined( 'ABSPATH' ) || exit;
         </thead>
         <tbody>
 		<?php
-		foreach ( $ids as $key => $id ) :
-			$post = get_post( $id );
-			if ( $post ):
+		foreach ( $ids as $tourfic_key => $tourfic_id ) :
+			$tourfic_post = get_post( $tourfic_id );
+			if ( $tourfic_post ):
 				?>
                 <tr>
                     <td>
-                        <a href="<?php the_permalink( $post->ID ) ?>" target="_blank"><?php echo esc_html($post->post_title) ?></a>
-                        <i title="<?php esc_attr_e( 'Remove from Wishlist', 'tourfic' ); ?>" class="fas fa-trash remove-wishlist" data-id="<?php echo esc_attr($post->ID) ?>"
+                        <a href="<?php the_permalink( $tourfic_post->ID ) ?>" target="_blank"><?php echo esc_html($tourfic_post->post_title) ?></a>
+                        <i title="<?php esc_attr_e( 'Remove from Wishlist', 'tourfic' ); ?>" class="fas fa-trash remove-wishlist" data-id="<?php echo esc_attr($tourfic_post->ID) ?>"
                            data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>"></i>
                     </td>
                 </tr>

@@ -29,37 +29,37 @@ if ( !Helper::tf_is_woo_active() ) {
 while ( have_posts() ) : the_post();
 
 	// get post id
-	$post_id = $post->ID;
+	$tourfic_post_id = $post->ID;
 
 	/**
 	 * Review query
 	 */
-	$args           = array(
-		'post_id' => $post_id,
+	$tourfic_args           = array(
+		'post_id' => $tourfic_post_id,
 		'status'  => 'approve',
 		'type'    => 'comment',
 	);
-	$comments_query = new WP_Comment_Query( $args );
-	$comments       = $comments_query->comments;
+	$tourfic_comments_query = new WP_Comment_Query( $tourfic_args );
+	$tourfic_comments       = $tourfic_comments_query->comments;
 
 	/**
 	 * Get car meta values
 	 */
-	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
-	$meta = function_exists( 'tf_normalize_car_meta' ) ? tf_normalize_car_meta( $meta ) : $meta;
+	$tourfic_meta = get_post_meta( $tourfic_post_id, 'tf_carrental_opt', true );
+	$tourfic_meta = function_exists( 'tf_normalize_car_meta' ) ? tf_normalize_car_meta( $tourfic_meta ) : $tourfic_meta;
 
-	$disable_share_opt    = ! empty( $meta['c-share'] ) ? $meta['c-share'] : '';
-	$disable_wishlist_sec = ! empty( $meta['c-wishlist'] ) ? $meta['c-wishlist'] : 0;
+	$tourfic_disable_share_opt    = ! empty( $tourfic_meta['c-share'] ) ? $tourfic_meta['c-share'] : '';
+	$tourfic_disable_wishlist_sec = ! empty( $tourfic_meta['c-wishlist'] ) ? $tourfic_meta['c-wishlist'] : 0;
 
 	/**
 	 * Get global settings value
 	 */
-	$s_share  = ! empty( Helper::tfopt( 'disable-car-share' ) ) ? Helper::tfopt( 'disable-car-share' ) : 0;
+	$tourfic_s_share  = ! empty( Helper::tfopt( 'disable-car-share' ) ) ? Helper::tfopt( 'disable-car-share' ) : 0;
 
 	/**
 	 * Disable Share Option
 	 */
-	$disable_share_opt = ! empty( $disable_share_opt ) ? $disable_share_opt : $s_share;
+	$tourfic_disable_share_opt = ! empty( $tourfic_disable_share_opt ) ? $tourfic_disable_share_opt : $tourfic_s_share;
 
 
 	/**
@@ -68,160 +68,160 @@ while ( have_posts() ) : the_post();
 	 */
 
 	// Wishlist
-	$post_type       = str_replace( 'tf_', '', get_post_type() );
-	$has_in_wishlist = Wishlist::tf_has_item_in_wishlist( $post_id );
+	$tourfic_post_type       = str_replace( 'tf_', '', get_post_type() );
+	$tourfic_has_in_wishlist = Wishlist::tf_has_item_in_wishlist( $tourfic_post_id );
 
 	/**
 	 * Get locations
 	 *
 	 * carrental_location
 	 */
-	$locations = ! empty( get_the_terms( $post_id, 'carrental_location' ) ) ? get_the_terms( $post_id, 'carrental_location' ) : '';
-	if ( $locations ) {
-		$first_location_id   = $locations[0]->term_id;
-		$first_location_term = get_term( $first_location_id );
-		$first_location_name = $locations[0]->name;
-		$first_location_slug = $locations[0]->slug;
-		$first_location_url  = get_term_link( $first_location_term );
+	$tourfic_locations = ! empty( get_the_terms( $tourfic_post_id, 'carrental_location' ) ) ? get_the_terms( $tourfic_post_id, 'carrental_location' ) : '';
+	if ( $tourfic_locations ) {
+		$tourfic_first_location_id   = $tourfic_locations[0]->term_id;
+		$tourfic_first_location_term = get_term( $tourfic_first_location_id );
+		$tourfic_first_location_name = $tourfic_locations[0]->name;
+		$tourfic_first_location_slug = $tourfic_locations[0]->slug;
+		$tourfic_first_location_url  = get_term_link( $tourfic_first_location_term );
 	}
 
 	/**
 	 * Get features
 	 * hotel_feature
 	 */
-	$features = ! empty( get_the_terms( $post_id, 'hotel_feature' ) ) ? get_the_terms( $post_id, 'hotel_feature' ) : '';
+	$tourfic_features = ! empty( get_the_terms( $tourfic_post_id, 'hotel_feature' ) ) ? get_the_terms( $tourfic_post_id, 'hotel_feature' ) : '';
 
 	// Location
-	$location_title = ! empty( $meta['location_title'] ) ? $meta['location_title'] : '';
-	if( !empty($meta['map']) && Helper::tf_data_types($meta['map'])){
-		$address = !empty( Helper::tf_data_types($meta['map'])['address'] ) ? Helper::tf_data_types($meta['map'])['address'] : '';
+	$tourfic_location_title = ! empty( $tourfic_meta['location_title'] ) ? $tourfic_meta['location_title'] : '';
+	if( !empty($tourfic_meta['map']) && Helper::tf_data_types($tourfic_meta['map'])){
+		$tourfic_address = !empty( Helper::tf_data_types($tourfic_meta['map'])['address'] ) ? Helper::tf_data_types($tourfic_meta['map'])['address'] : '';
 
-		$address_latitude = !empty( Helper::tf_data_types($meta['map'])['latitude'] ) ? Helper::tf_data_types($meta['map'])['latitude'] : '';
-		$address_longitude = !empty( Helper::tf_data_types($meta['map'])['longitude'] ) ? Helper::tf_data_types($meta['map'])['longitude'] : '';
-		$address_zoom = !empty( Helper::tf_data_types($meta['map'])['zoom'] ) ? Helper::tf_data_types($meta['map'])['zoom'] : '';
+		$tourfic_address_latitude = !empty( Helper::tf_data_types($tourfic_meta['map'])['latitude'] ) ? Helper::tf_data_types($tourfic_meta['map'])['latitude'] : '';
+		$tourfic_address_longitude = !empty( Helper::tf_data_types($tourfic_meta['map'])['longitude'] ) ? Helper::tf_data_types($tourfic_meta['map'])['longitude'] : '';
+		$tourfic_address_zoom = !empty( Helper::tf_data_types($tourfic_meta['map'])['zoom'] ) ? Helper::tf_data_types($tourfic_meta['map'])['zoom'] : '';
 
     }
 
 	// Car Detail
-	$gallery = ! empty( $meta['car_gallery'] ) ? $meta['car_gallery'] : '';
-	if ( $gallery ) {
-		$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+	$tourfic_gallery = ! empty( $tourfic_meta['car_gallery'] ) ? $tourfic_meta['car_gallery'] : '';
+	if ( $tourfic_gallery ) {
+		$tourfic_gallery_ids = explode( ',', $tourfic_gallery ); // Comma seperated list to array
 	}
 
 	// Car Info 
-	$car_info_title = ! empty( $meta['car_info_sec_title'] ) ? $meta['car_info_sec_title'] : '';
-	$passengers = ! empty( $meta['passengers'] ) ? $meta['passengers'] : '';
-	$baggage = ! empty( $meta['baggage'] ) ? $meta['baggage'] : '';
-	$car_custom_info = ! empty( $meta['car_custom_info'] ) ? $meta['car_custom_info'] : '';
-	$unlimited_mileage = ! empty( $meta['unlimited_mileage'] ) ? $meta['unlimited_mileage'] : 0;
-	$mileage_type = ! empty( $meta['mileage_type'] ) ? $meta['mileage_type'] : 'Km';
-	$total_mileage = ! empty( $meta['mileage'] ) ? $meta['mileage'] : '';
-	$auto_transmission = ! empty( $meta['auto_transmission'] ) ? $meta['auto_transmission'] : '';
-	$carplay_android_auto = ! empty( $meta['carplay_android_auto'] ) ? $meta['carplay_android_auto'] : '';
-	$fuel_included = ! empty( $meta['fuel_included'] ) ? $meta['fuel_included'] : '';
-	$shuttle_car = ! empty( $meta['shuttle_car'] ) ? $meta['shuttle_car'] : '';
-	$shuttle_car_fee_type = ! empty( $meta['shuttle_car_fee_type'] ) ? $meta['shuttle_car_fee_type'] : 'free';
-	$shuttle_car_fee = ! empty( $meta['shuttle_car_fee'] ) ? $meta['shuttle_car_fee'] : '';
+	$tourfic_car_info_title = ! empty( $tourfic_meta['car_info_sec_title'] ) ? $tourfic_meta['car_info_sec_title'] : '';
+	$tourfic_passengers = ! empty( $tourfic_meta['passengers'] ) ? $tourfic_meta['passengers'] : '';
+	$tourfic_baggage = ! empty( $tourfic_meta['baggage'] ) ? $tourfic_meta['baggage'] : '';
+	$tourfic_car_custom_info = ! empty( $tourfic_meta['car_custom_info'] ) ? $tourfic_meta['car_custom_info'] : '';
+	$tourfic_unlimited_mileage = ! empty( $tourfic_meta['unlimited_mileage'] ) ? $tourfic_meta['unlimited_mileage'] : 0;
+	$tourfic_mileage_type = ! empty( $tourfic_meta['mileage_type'] ) ? $tourfic_meta['mileage_type'] : 'Km';
+	$tourfic_total_mileage = ! empty( $tourfic_meta['mileage'] ) ? $tourfic_meta['mileage'] : '';
+	$tourfic_auto_transmission = ! empty( $tourfic_meta['auto_transmission'] ) ? $tourfic_meta['auto_transmission'] : '';
+	$tourfic_carplay_android_auto = ! empty( $tourfic_meta['carplay_android_auto'] ) ? $tourfic_meta['carplay_android_auto'] : '';
+	$tourfic_fuel_included = ! empty( $tourfic_meta['fuel_included'] ) ? $tourfic_meta['fuel_included'] : '';
+	$tourfic_shuttle_car = ! empty( $tourfic_meta['shuttle_car'] ) ? $tourfic_meta['shuttle_car'] : '';
+	$tourfic_shuttle_car_fee_type = ! empty( $tourfic_meta['shuttle_car_fee_type'] ) ? $tourfic_meta['shuttle_car_fee_type'] : 'free';
+	$tourfic_shuttle_car_fee = ! empty( $tourfic_meta['shuttle_car_fee'] ) ? $tourfic_meta['shuttle_car_fee'] : '';
 
 	// Fuel Type
-	$fuel_type_terms = wp_get_post_terms($post_id, 'carrental_fuel_type');
-	$fuel_types = '';
-	if (!is_wp_error($fuel_type_terms) && !empty($fuel_type_terms)) {
-		foreach ($fuel_type_terms as $term) {
-			$fuel_types = $term->name;
+	$tourfic_fuel_type_terms = wp_get_post_terms($tourfic_post_id, 'carrental_fuel_type');
+	$tourfic_fuel_types = '';
+	if (!is_wp_error($tourfic_fuel_type_terms) && !empty($tourfic_fuel_type_terms)) {
+		foreach ($tourfic_fuel_type_terms as $tourfic_term) {
+			$tourfic_fuel_types = $tourfic_term->name;
 		}
 	}
 	// Engine Year
-	$engine_year_terms = wp_get_post_terms($post_id, 'carrental_engine_year');
-	$engine_years = '';
-	if (!is_wp_error($engine_year_terms) && !empty($engine_year_terms)) {
-		foreach ($engine_year_terms as $term) {
-			$engine_years = $term->name;
+	$tourfic_engine_year_terms = wp_get_post_terms($tourfic_post_id, 'carrental_engine_year');
+	$tourfic_engine_years = '';
+	if (!is_wp_error($tourfic_engine_year_terms) && !empty($tourfic_engine_year_terms)) {
+		foreach ($tourfic_engine_year_terms as $tourfic_term) {
+			$tourfic_engine_years = $tourfic_term->name;
 		}
 	}
 
 	// Benefits 
-	$benefits_status = ! empty( $meta['benefits_section'] ) ? $meta['benefits_section'] : '';
-	$benefits = ! empty( $meta['benefits'] ) ? $meta['benefits'] : '';
+	$tourfic_benefits_status = ! empty( $tourfic_meta['benefits_section'] ) ? $tourfic_meta['benefits_section'] : '';
+	$tourfic_benefits = ! empty( $tourfic_meta['benefits'] ) ? $tourfic_meta['benefits'] : '';
 
 	// Include Exclude 
-	$inc_exc_status = ! empty( $meta['inc_exc_section'] ) ? $meta['inc_exc_section'] : '';
-	$includes = ! empty( $meta['inc'] ) ? $meta['inc'] : '';
-	$include_icon = ! empty( $meta['inc_icon'] ) ? $meta['inc_icon'] : '';
-	$excludes = ! empty( $meta['exc'] ) ? $meta['exc'] : '';
-	$exclude_icon = ! empty( $meta['exc_icon'] ) ? $meta['exc_icon'] : '';
-	$inc_sec_title = ! empty( $meta['inc_sec_title'] ) ? $meta['inc_sec_title'] : '';
-	$exc_sec_title = ! empty( $meta['exc_sec_title'] ) ? $meta['exc_sec_title'] : '';
+	$tourfic_inc_exc_status = ! empty( $tourfic_meta['inc_exc_section'] ) ? $tourfic_meta['inc_exc_section'] : '';
+	$tourfic_includes = ! empty( $tourfic_meta['inc'] ) ? $tourfic_meta['inc'] : '';
+	$tourfic_include_icon = ! empty( $tourfic_meta['inc_icon'] ) ? $tourfic_meta['inc_icon'] : '';
+	$tourfic_excludes = ! empty( $tourfic_meta['exc'] ) ? $tourfic_meta['exc'] : '';
+	$tourfic_exclude_icon = ! empty( $tourfic_meta['exc_icon'] ) ? $tourfic_meta['exc_icon'] : '';
+	$tourfic_inc_sec_title = ! empty( $tourfic_meta['inc_sec_title'] ) ? $tourfic_meta['inc_sec_title'] : '';
+	$tourfic_exc_sec_title = ! empty( $tourfic_meta['exc_sec_title'] ) ? $tourfic_meta['exc_sec_title'] : '';
 
 	// Driver Info 
-	$driver_sec_title = ! empty( $meta['driver_sec_title'] ) ? $meta['driver_sec_title'] : '';
-	$car_driver_incude = ! empty( $meta['driver_included'] ) ? $meta['driver_included'] : '';
-	$car_driverinfo_status = ! empty( $meta['car_driverinfo_section'] ) ? $meta['car_driverinfo_section'] : '';
-	$driver_name = ! empty( $meta['driver_name'] ) ? $meta['driver_name'] : '';
-	$driver_email = ! empty( $meta['driver_email'] ) ? $meta['driver_email'] : '';
-	$driver_phone = ! empty( $meta['driver_phone'] ) ? $meta['driver_phone'] : '';
-	$driver_age = ! empty( $meta['driver_age'] ) ? $meta['driver_age'] : '';
-	$driver_address = ! empty( $meta['driver_address'] ) ? $meta['driver_address'] : '';
-	$driver_image = ! empty( $meta['driver_image'] ) ? $meta['driver_image'] : '';
+	$tourfic_driver_sec_title = ! empty( $tourfic_meta['driver_sec_title'] ) ? $tourfic_meta['driver_sec_title'] : '';
+	$tourfic_car_driver_incude = ! empty( $tourfic_meta['driver_included'] ) ? $tourfic_meta['driver_included'] : '';
+	$tourfic_car_driverinfo_status = ! empty( $tourfic_meta['car_driverinfo_section'] ) ? $tourfic_meta['car_driverinfo_section'] : '';
+	$tourfic_driver_name = ! empty( $tourfic_meta['driver_name'] ) ? $tourfic_meta['driver_name'] : '';
+	$tourfic_driver_email = ! empty( $tourfic_meta['driver_email'] ) ? $tourfic_meta['driver_email'] : '';
+	$tourfic_driver_phone = ! empty( $tourfic_meta['driver_phone'] ) ? $tourfic_meta['driver_phone'] : '';
+	$tourfic_driver_age = ! empty( $tourfic_meta['driver_age'] ) ? $tourfic_meta['driver_age'] : '';
+	$tourfic_driver_address = ! empty( $tourfic_meta['driver_address'] ) ? $tourfic_meta['driver_address'] : '';
+	$tourfic_driver_image = ! empty( $tourfic_meta['driver_image'] ) ? $tourfic_meta['driver_image'] : '';
 
 	// Booking
-	$car_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : '1';
+	$tourfic_car_booking_by = ! empty( $tourfic_meta['booking-by'] ) ? $tourfic_meta['booking-by'] : '1';
 	
 	// Protection
-	$benefits_sec_title = ! empty( $meta['benefits_sec_title'] ) ? $meta['benefits_sec_title'] : '';
-	$car_protection_section_status = ! empty( $meta['protection_section'] ) ? $meta['protection_section'] : '';
-	$car_protection_content = ! empty( $meta['protection_content'] ) ? $meta['protection_content'] : '';
-	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
+	$tourfic_benefits_sec_title = ! empty( $tourfic_meta['benefits_sec_title'] ) ? $tourfic_meta['benefits_sec_title'] : '';
+	$tourfic_car_protection_section_status = ! empty( $tourfic_meta['protection_section'] ) ? $tourfic_meta['protection_section'] : '';
+	$tourfic_car_protection_content = ! empty( $tourfic_meta['protection_content'] ) ? $tourfic_meta['protection_content'] : '';
+	$tourfic_car_protections = ! empty( $tourfic_meta['protections'] ) ? $tourfic_meta['protections'] : '';
 
 	//instructions
-	$car_instructions_section_status = ! empty( $meta['instructions_section'] ) ? $meta['instructions_section'] : '';
-	$car_instructions_content = ! empty( $meta['instructions_content'] ) ? $meta['instructions_content'] : '';
+	$tourfic_car_instructions_section_status = ! empty( $tourfic_meta['instructions_section'] ) ? $tourfic_meta['instructions_section'] : '';
+	$tourfic_car_instructions_content = ! empty( $tourfic_meta['instructions_content'] ) ? $tourfic_meta['instructions_content'] : '';
 
 	// Information
-	$car_information_section_status = ! empty( $meta['information_section'] ) ? $meta['information_section'] : '';
-	$car_owner_name = ! empty( $meta['owner_name'] ) ? $meta['owner_name'] : '';
-	$car_owner_email = ! empty( $meta['email'] ) ? $meta['email'] : '';
-	$car_owner_phone = ! empty( $meta['phone'] ) ? $meta['phone'] : '';
-	$car_owner_website = ! empty( $meta['website'] ) ? $meta['website'] : '';
-	$car_owner_fax = ! empty( $meta['fax'] ) ? $meta['fax'] : '';
-	$car_owner_owner_image = ! empty( $meta['owner_image'] ) ? $meta['owner_image'] : '';
-	$owner_sec_title  = ! empty( $meta['owner_sec_title'] ) ? $meta['owner_sec_title'] : '';
+	$tourfic_car_information_section_status = ! empty( $tourfic_meta['information_section'] ) ? $tourfic_meta['information_section'] : '';
+	$tourfic_car_owner_name = ! empty( $tourfic_meta['owner_name'] ) ? $tourfic_meta['owner_name'] : '';
+	$tourfic_car_owner_email = ! empty( $tourfic_meta['email'] ) ? $tourfic_meta['email'] : '';
+	$tourfic_car_owner_phone = ! empty( $tourfic_meta['phone'] ) ? $tourfic_meta['phone'] : '';
+	$tourfic_car_owner_website = ! empty( $tourfic_meta['website'] ) ? $tourfic_meta['website'] : '';
+	$tourfic_car_owner_fax = ! empty( $tourfic_meta['fax'] ) ? $tourfic_meta['fax'] : '';
+	$tourfic_car_owner_owner_image = ! empty( $tourfic_meta['owner_image'] ) ? $tourfic_meta['owner_image'] : '';
+	$tourfic_owner_sec_title  = ! empty( $tourfic_meta['owner_sec_title'] ) ? $tourfic_meta['owner_sec_title'] : '';
 
 	// Car Extras
-	$car_extra_sec_title  = apply_filters( 'tf_car_extra_sec_title', '', $post_id, $meta );
-	$car_extras = apply_filters( 'tf_car_extra_meta', null, $post_id, $meta );
+	$tourfic_car_extra_sec_title  = apply_filters( 'tf_car_extra_sec_title', '', $tourfic_post_id, $tourfic_meta );
+	$tourfic_car_extras = apply_filters( 'tf_car_extra_meta', null, $tourfic_post_id, $tourfic_meta );
 
 	// Car Deposit
-	$car_allow_deposit = apply_filters( 'tf_allow_deposit_feature', false, $meta );
-	$car_deposit_type = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : 'none';
-	$car_deposit_amount = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : '';
+	$tourfic_car_allow_deposit = apply_filters( 'tf_allow_deposit_feature', false, $tourfic_meta );
+	$tourfic_car_deposit_type = ! empty( $tourfic_meta['deposit_type'] ) ? $tourfic_meta['deposit_type'] : 'none';
+	$tourfic_car_deposit_amount = ! empty( $tourfic_meta['deposit_amount'] ) ? $tourfic_meta['deposit_amount'] : '';
 
 	// FAQ
-	$faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';
-	$faq_sec_title  = ! empty( $meta['faq_sec_title'] ) ? $meta['faq_sec_title'] : '';
+	$tourfic_faqs = ! empty( $tourfic_meta['faq'] ) ? $tourfic_meta['faq'] : '';
+	$tourfic_faq_sec_title  = ! empty( $tourfic_meta['faq_sec_title'] ) ? $tourfic_meta['faq_sec_title'] : '';
 
 	// Terms & condition
-	$tc_title = ! empty( $meta['car-tc-section-title'] ) ? $meta['car-tc-section-title'] : '';
-	$tc = ! empty( $meta['terms_conditions'] ) ? $meta['terms_conditions'] : '';
+	$tourfic_tc_title = ! empty( $tourfic_meta['car-tc-section-title'] ) ? $tourfic_meta['car-tc-section-title'] : '';
+	$tourfic_tc = ! empty( $tourfic_meta['terms_conditions'] ) ? $tourfic_meta['terms_conditions'] : '';
 
-	$share_text = get_the_title();
-	$share_link = get_permalink( $post_id );
-	$review_sec_title  = ! empty( $meta['review_sec_title'] ) ? $meta['review_sec_title'] : '';
+	$tourfic_share_text = get_the_title();
+	$tourfic_share_link = get_permalink( $tourfic_post_id );
+	$tourfic_review_sec_title  = ! empty( $tourfic_meta['review_sec_title'] ) ? $tourfic_meta['review_sec_title'] : '';
 	// Map Type
-	$tf_openstreet_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "default";
+	$tourfic_openstreet_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "default";
 
 	// Single Template Style
-	$tf_car_layout_conditions = ! empty( $meta['tf_single_car_layout_opt'] ) ? $meta['tf_single_car_layout_opt'] : 'global';
-	if("single"==$tf_car_layout_conditions){
-		$tf_car_single_template = ! empty( $meta['tf_single_car_template'] ) ? $meta['tf_single_car_template'] : 'design-1';
+	$tourfic_car_layout_conditions = ! empty( $meta['tf_single_car_layout_opt'] ) ? $meta['tf_single_car_layout_opt'] : 'global';
+	if("single"==$tourfic_car_layout_conditions){
+		$tourfic_car_single_template = ! empty( $meta['tf_single_car_template'] ) ? $meta['tf_single_car_template'] : 'design-1';
 	}
-	$tf_car_global_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-car'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-car'] : 'design-1';
+	$tourfic_car_global_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-car'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-car'] : 'design-1';
 
-	$tf_car_selected_check = !empty($tf_car_single_template) ? $tf_car_single_template : $tf_car_global_template;
+	$tourfic_car_selected_check = !empty($tourfic_car_single_template) ? $tourfic_car_single_template : $tourfic_car_global_template;
 
-	$tf_car_selected_template = $tf_car_selected_check;
+	$tourfic_car_selected_template = $tourfic_car_selected_check;
 
-    if( $tf_car_selected_template == "design-1" ){
+    if( $tourfic_car_selected_template == "design-1" ){
 		include TF_TEMPLATE_PART_PATH . 'car/design-1.php';
 	}else{
 		include TF_TEMPLATE_PART_PATH . 'car/design-1.php';

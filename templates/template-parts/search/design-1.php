@@ -5,15 +5,15 @@ defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use Tourfic\Classes\Room\Room;
 
-$tf_room_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] : 'design-1';
+$tourfic_room_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] : 'design-1';
 
-if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_room" && $tf_room_arc_selected_template == "design-1" ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-    $tf_room_arc_banner = ! empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar']) ?  Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar'] : '';
-    $tf_room_arc_banner = !empty($tf_room_arc_banner) ? $tf_room_arc_banner : TF_ASSETS_APP_URL . '/images/room-hero-banner.jpg';
+if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_room" && $tourfic_room_arc_selected_template == "design-1" ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    $tourfic_room_arc_banner = ! empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar']) ?  Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar'] : '';
+    $tourfic_room_arc_banner = !empty($tourfic_room_arc_banner) ? $tourfic_room_arc_banner : TF_ASSETS_APP_URL . '/images/room-hero-banner.jpg';
     ?>
 
     <div class="tf-archive-template__one sp-0">
-        <div class="tf-archive-room-banner" style="<?php echo !empty($tf_room_arc_banner) ? 'background-image: url(' . esc_url($tf_room_arc_banner) . ')' : ''; ?>">
+        <div class="tf-archive-room-banner" style="<?php echo !empty($tourfic_room_arc_banner) ? 'background-image: url(' . esc_url($tourfic_room_arc_banner) . ')' : ''; ?>">
             <div class="tf-container">
                 <div class="tf-banner-content tf-flex tf-flex-justify-center tf-flex-direction-column">
                     <h1><?php esc_html_e("Rooms", "tourfic"); ?></h1>

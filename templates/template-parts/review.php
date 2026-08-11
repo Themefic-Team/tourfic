@@ -24,70 +24,70 @@ if ( post_password_required() ) {
 global $current_user;
 
 // Check if user is logged in
-$is_user_logged_in = $current_user->exists();
-$post_id           = $post->ID;
+$tourfic_is_user_logged_in = $current_user->exists();
+$tourfic_post_id           = $post->ID;
 // Get settings value
-$tf_ratings_for = Helper::tfopt( 'r-for' ) ?? [ 'li', 'lo' ];
+$tourfic_ratings_for = Helper::tfopt( 'r-for' ) ?? [ 'li', 'lo' ];
 
-if ( get_post_type( $post_id ) == 'tf_tours' ) {
+if ( get_post_type( $tourfic_post_id ) == 'tf_tours' ) {
 
-	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+	$tourfic_meta = get_post_meta( $tourfic_post_id, 'tf_tours_opt', true );
 	// Single Template Check
-	$tf_tour_layout_conditions = ! empty( $meta['tf_single_tour_layout_opt'] ) ? $meta['tf_single_tour_layout_opt'] : 'global';
-	if ( "single" == $tf_tour_layout_conditions ) {
-		$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
+	$tourfic_tour_layout_conditions = ! empty( $tourfic_meta['tf_single_tour_layout_opt'] ) ? $tourfic_meta['tf_single_tour_layout_opt'] : 'global';
+	if ( "single" == $tourfic_tour_layout_conditions ) {
+		$tourfic_tour_single_template = ! empty( $tourfic_meta['tf_single_tour_template'] ) ? $tourfic_meta['tf_single_tour_template'] : 'design-1';
 	}
-	$tf_tour_global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
+	$tourfic_tour_global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
 
-	$tf_tour_selected_check = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
+	$tourfic_tour_selected_check = ! empty( $tourfic_tour_single_template ) ? $tourfic_tour_single_template : $tourfic_tour_global_template;
 
-	$tf_tour_selected_template = $tf_tour_selected_check;
+	$tourfic_tour_selected_template = $tourfic_tour_selected_check;
 
 }
-if ( get_post_type( $post_id ) == 'tf_hotel' ) {
+if ( get_post_type( $tourfic_post_id ) == 'tf_hotel' ) {
 
-	$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+	$tourfic_meta = get_post_meta( $tourfic_post_id, 'tf_hotels_opt', true );
 	// Single Template Check
-	$tf_hotel_layout_conditions = ! empty( $meta['tf_single_hotel_layout_opt'] ) ? $meta['tf_single_hotel_layout_opt'] : 'global';
-	if ( "single" == $tf_hotel_layout_conditions ) {
-		$tf_hotel_single_template = ! empty( $meta['tf_single_hotel_template'] ) ? $meta['tf_single_hotel_template'] : 'design-1';
+	$tourfic_hotel_layout_conditions = ! empty( $tourfic_meta['tf_single_hotel_layout_opt'] ) ? $tourfic_meta['tf_single_hotel_layout_opt'] : 'global';
+	if ( "single" == $tourfic_hotel_layout_conditions ) {
+		$tourfic_hotel_single_template = ! empty( $tourfic_meta['tf_single_hotel_template'] ) ? $tourfic_meta['tf_single_hotel_template'] : 'design-1';
 	}
-	$tf_hotel_global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
+	$tourfic_hotel_global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
 
-	$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
+	$tourfic_hotel_selected_check = ! empty( $tourfic_hotel_single_template ) ? $tourfic_hotel_single_template : $tourfic_hotel_global_template;
 
-	$tf_hotel_selected_template = $tf_hotel_selected_check;
-
-}
-
-if ( get_post_type( $post_id ) == 'tf_apartment' ) {
-
-	$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
-	// Single Template Check
-	$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
-	if ( "single" == $tf_apartment_layout_conditions ) {
-		$tf_apartment_single_template = ! empty( $meta['tf_single_apartment_template'] ) ? $meta['tf_single_apartment_template'] : 'default';
-	}
-	$tf_apartment_global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'default';
-
-	$tf_apartment_selected_template = ! empty( $tf_apartment_single_template ) ? $tf_apartment_single_template : $tf_apartment_global_template;
+	$tourfic_hotel_selected_template = $tourfic_hotel_selected_check;
 
 }
 
-if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == "design-1" ) ||
-     ( get_post_type( $post_id ) == "tf_hotel" && $tf_hotel_selected_template == "design-1" ) ||
-     ( get_post_type( $post_id ) == "tf_hotel" && $tf_hotel_selected_template == "design-3" ) ||
-     ( get_post_type( $post_id ) == "tf_apartment" && $tf_apartment_selected_template != "default" ) ) {
+if ( get_post_type( $tourfic_post_id ) == 'tf_apartment' ) {
+
+	$tourfic_meta = get_post_meta( $tourfic_post_id, 'tf_apartment_opt', true );
+	// Single Template Check
+	$tourfic_apartment_layout_conditions = ! empty( $tourfic_meta['tf_single_apartment_layout_opt'] ) ? $tourfic_meta['tf_single_apartment_layout_opt'] : 'global';
+	if ( "single" == $tourfic_apartment_layout_conditions ) {
+		$tourfic_apartment_single_template = ! empty( $tourfic_meta['tf_single_apartment_template'] ) ? $tourfic_meta['tf_single_apartment_template'] : 'default';
+	}
+	$tourfic_apartment_global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'default';
+
+	$tourfic_apartment_selected_template = ! empty( $tourfic_apartment_single_template ) ? $tourfic_apartment_single_template : $tourfic_apartment_global_template;
+
+}
+
+if ( ( get_post_type( $tourfic_post_id ) == 'tf_tours' && $tourfic_tour_selected_template == "design-1" ) ||
+     ( get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template == "design-1" ) ||
+     ( get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template == "design-3" ) ||
+     ( get_post_type( $tourfic_post_id ) == "tf_apartment" && $tourfic_apartment_selected_template != "default" ) ) {
 
 	if ( $comments ) {
-		$tf_overall_rate = [];
-		TF_Review::tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
+		$tourfic_overall_rate = [];
+		TF_Review::tf_calculate_comments_rating( $comments, $tourfic_overall_rate, $total_rating );
 		TF_Review::tf_get_review_fields( $fields );
-		$tf_settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
+		$tourfic_settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
 		?>
         <div class="tf-review-data tf-box">
-            <?php if(get_post_type( $post_id ) == "tf_hotel" && $tf_hotel_selected_template == "design-3"): ?>
-                <h5 class="tf-section-title"><?php echo !empty($meta['review-section-title']) ? esc_html($meta['review-section-title']) : ''; ?></h5>
+            <?php if(get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template == "design-3"): ?>
+                <h5 class="tf-section-title"><?php echo !empty($tourfic_meta['review-section-title']) ? esc_html($tourfic_meta['review-section-title']) : ''; ?></h5>
             <?php endif; ?>
 
             <div class="tf-review-data-inner tf-flex tf-flex-gap-24">
@@ -95,13 +95,13 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
                     <div class="tf-review-data-average">
                         <p>
                             <?php echo esc_html( sprintf( '%.1f', $total_rating ) ); ?>
-	                        <?php if(get_post_type( $post_id ) == "tf_hotel" && $tf_hotel_selected_template == "design-3"): ?>
-                                <span>/<?php echo wp_kses_post($tf_settings_base); ?></span>
+	                        <?php if(get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template == "design-3"): ?>
+                                <span>/<?php echo wp_kses_post($tourfic_settings_base); ?></span>
 	                        <?php endif; ?>
                         </p>
                     </div>
                     <div class="tf-review-all-info">
-	                    <?php if(get_post_type( $post_id ) == "tf_hotel" && $tf_hotel_selected_template == "design-3"){
+	                    <?php if(get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template == "design-3"){
 		                    echo '<span>'. esc_html__("Wonderful", "tourfic") .'</span>';
 	                    } ?>
                         <ul class="tf-list">
@@ -112,20 +112,20 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
                 <div class="tf-review-data-features">
                     <div class="tf-percent-progress tf-flex tf-flex-space-bttn">
 						<?php
-						if ( $tf_overall_rate ) {
-							foreach ( $tf_overall_rate as $key => $value ) {
-								if ( empty( $value ) || ! in_array( $key, $fields ) ) {
+						if ( $tourfic_overall_rate ) {
+							foreach ( $tourfic_overall_rate as $tourfic_key => $tourfic_value ) {
+								if ( empty( $tourfic_value ) || ! in_array( $tourfic_key, $fields ) ) {
 									continue;
 								}
-								$value = TF_Review::Tf_average_ratings( $value );
+								$tourfic_value = TF_Review::Tf_average_ratings( $tourfic_value );
 								?>
                                 <div class="tf-progress-item">
                                     <div class="tf-progress-bar">
-                                        <span class="percent-progress" style="width: <?php echo esc_html( TF_Review::tf_average_rating_percent( $value, Helper::tfopt( 'r-base' ) ) ); ?>%"></span>
+                                        <span class="percent-progress" style="width: <?php echo esc_html( TF_Review::tf_average_rating_percent( $tourfic_value, Helper::tfopt( 'r-base' ) ) ); ?>%"></span>
                                     </div>
                                     <div class="tf-review-feature-label tf-flex tf-flex-space-bttn">
-                                        <p class="feature-label"><?php echo esc_html( $key ); ?></p>
-                                        <p class="feature-rating"> <?php echo esc_html( $value ); ?></p>
+                                        <p class="feature-label"><?php echo esc_html( $tourfic_key ); ?></p>
+                                        <p class="feature-rating"> <?php echo esc_html( $tourfic_value ); ?></p>
                                     </div>
                                 </div>
 							<?php }
@@ -138,7 +138,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
         <!-- Tourfic review reply -->
         <div class="tf-review-reply tf-mt-50 tf-mb-56">
             <div class="tf-section-head">
-                <?php if(get_post_type( $post_id ) == "tf_hotel" && $tf_hotel_selected_template == "design-3"): ?>
+                <?php if(get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template == "design-3"): ?>
                     <h5 class="tf-section-title"><?php esc_html_e( "Guest’s reviews", "tourfic" ); ?></h5>
                 <?php else : ?>
                     <h2 class="tf-title tf-section-title"><?php esc_html_e( "Showing", "tourfic" ); ?> <span><?php echo count( $comments ); ?></span> <?php esc_html_e( "Review", "tourfic" ); ?></h2>
@@ -148,43 +148,43 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 			foreach ( $comments as $comment ) {
 
 				// Get rating details
-				$tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
-				if ( $tf_overall_rate == false ) {
-					$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
-					$tf_overall_rate = TF_Review::Tf_average_ratings( $tf_comment_meta );
+				$tourfic_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+				if ( $tourfic_overall_rate == false ) {
+					$tourfic_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+					$tourfic_overall_rate = TF_Review::Tf_average_ratings( $tourfic_comment_meta );
 				}
-				$base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
-				$c_rating  = Tf_Review::tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
+				$tourfic_base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+				$tourfic_c_rating  = TF_Review::tf_single_rating_change_on_base( $tourfic_overall_rate, $tourfic_base_rate );
 
 				// Comment details
-				if(get_post_type( $post_id ) == "tf_hotel" && $tf_hotel_selected_template == "design-3") {
-					$c_avatar = get_avatar( $comment, '96' );
+				if(get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template == "design-3") {
+					$tourfic_c_avatar = get_avatar( $comment, '96' );
 				} else {
-					$c_avatar = get_avatar( $comment, '56' );
+					$tourfic_c_avatar = get_avatar( $comment, '56' );
 				}
-				$c_author_name = $comment->comment_author;
-				$c_date        = $comment->comment_date;
-				$c_content     = $comment->comment_content;
+				$tourfic_c_author_name = $comment->comment_author;
+				$tourfic_c_date        = $comment->comment_date;
+				$tourfic_c_content     = $comment->comment_content;
 				?>
                 <!-- reviews and replies -->
                 <div class="tf-review-reply-data tf-flex-gap-24 tf-flex">
                     <div class="tf-review-author">
-						<?php echo wp_kses_post( $c_avatar ); ?>
+						<?php echo wp_kses_post( $tourfic_c_avatar ); ?>
                     </div>
                     <div class="tf-review-details">
                         <div class="tf-review-author-name">
-                            <h3><?php echo esc_html( $c_author_name ); ?></h3>
-	                        <?php if(get_post_type( $post_id ) == "tf_hotel" && $tf_hotel_selected_template == "design-3"): ?>
-                                <div class="tf-review-date"><?php echo esc_html( wp_date( "F d, Y", strtotime( $c_date ) ) ); ?></div>
+                            <h3><?php echo esc_html( $tourfic_c_author_name ); ?></h3>
+	                        <?php if(get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template == "design-3"): ?>
+                                <div class="tf-review-date"><?php echo esc_html( wp_date( "F d, Y", strtotime( $tourfic_c_date ) ) ); ?></div>
 	                        <?php endif; ?>
                         </div>
                         <div class="tf-review-ratings tf-mt-8">
-							<?php echo wp_kses_post( $c_rating ); ?>
+							<?php echo wp_kses_post( $tourfic_c_rating ); ?>
                         </div>
                         <div class="tf-review-message">
-                            <p><?php echo wp_kses_post( $c_content ); ?></p>
+                            <p><?php echo wp_kses_post( $tourfic_c_content ); ?></p>
                         </div>
-				        <?php if(get_post_type( $post_id ) == "tf_hotel" && $tf_hotel_selected_template != "design-3"): ?>
+				        <?php if(get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template != "design-3"): ?>
                             <div class="tf-review-date">
                                 <ul class="tf-list">
                                     <li><i class="fa-regular fa-clock"></i> <?php echo esc_html( wp_date( "F d, Y", strtotime( $c_date ) ) ); ?></li>
@@ -198,11 +198,11 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 
 			?>
         </div>
-		<?php echo wp_kses_post( TF_Review::tf_pending_review_notice( $post_id ) ?? "" ); ?>
+		<?php echo wp_kses_post( TF_Review::tf_pending_review_notice( $tourfic_post_id ) ?? "" ); ?>
 		<?php
-		if ( ! empty( $tf_ratings_for ) ) {
-			if ( $is_user_logged_in ) {
-				if ( in_array( 'li', $tf_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
+		if ( ! empty( $tourfic_ratings_for ) ) {
+			if ( $tourfic_is_user_logged_in ) {
+				if ( in_array( 'li', $tourfic_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
 					?>
                     <!-- Replay form  -->
                     <div class="tf-review-form tf-mt-40">
@@ -215,7 +215,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 					<?php
 				}
 			} else {
-				if ( in_array( 'lo', $tf_ratings_for ) ) {
+				if ( in_array( 'lo', $tourfic_ratings_for ) ) {
 					?>
                     <!-- Replay form  -->
                     <div class="tf-review-form tf-mt-40">
@@ -230,20 +230,20 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 			}
 		}
 	} else {
-        if(get_post_type( $post_id ) == "tf_hotel" && $tf_hotel_selected_template == "design-3"){
+        if(get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template == "design-3"){
             echo '<div class="tf-review-box">';
-            echo '<h5 class="tf-section-title">'. esc_html($meta['review-section-title']) .'</h5>';
+            echo '<h5 class="tf-section-title">'. esc_html($tourfic_meta['review-section-title']) .'</h5>';
 	        echo '<h4>' . esc_html__( "No Review Available", "tourfic" ) . '</h4>';
             echo '</div>';
         }
 		echo '<div class="no-review">';
-		if(get_post_type( $post_id ) == "tf_hotel" && $tf_hotel_selected_template != "design-3") {
+		if(get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template != "design-3") {
 			echo '<h4>' . esc_html__( "No Review Available", "tourfic" ) . '</h4>';
 		}
-		if ( $is_user_logged_in ) {
+		if ( $tourfic_is_user_logged_in ) {
 
 			// Add Review button
-			if ( is_array( $tf_ratings_for ) && in_array( 'li', $tf_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
+			if ( is_array( $tourfic_ratings_for ) && in_array( 'li', $tourfic_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
 				?>
                 <!-- Replay form  -->
                 <div class="tf-review-form tf-mt-40">
@@ -258,7 +258,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 			}
 		} else {
 
-			if ( is_array( $tf_ratings_for ) && in_array( 'lo', $tf_ratings_for ) ) {
+			if ( is_array( $tourfic_ratings_for ) && in_array( 'lo', $tourfic_ratings_for ) ) {
 				?>
                 <!-- Replay form  -->
                 <div class="tf-review-form tf-mt-40">
@@ -272,7 +272,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 			}
 		}
 		// Pending review notice
-		echo wp_kses_post( TF_Review::tf_pending_review_notice( $post_id ) ?? "" );
+		echo wp_kses_post( TF_Review::tf_pending_review_notice( $tourfic_post_id ) ?? "" );
 		echo '</div>';
 	}
 } else {
@@ -280,47 +280,47 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
     <div class="tf-review-container">
 		<?php
 		// get post id
-		$post_id = $post->ID;
+		$tourfic_post_id = $post->ID;
 
-		if ( get_post_type( $post_id ) == "tf_apartment" && $tf_apartment_selected_template == "default" ) {
-			$btn_class = 'tf_btn tf_btn_full';
+		if ( get_post_type( $tourfic_post_id ) == "tf_apartment" && $tourfic_apartment_selected_template == "default" ) {
+			$tourfic_btn_class = 'tf_btn tf_btn_full';
 		} else {
-			$btn_class = 'tf_btn tf-submit';
+			$tourfic_btn_class = 'tf_btn tf-submit';
 		}
 
 		/**
 		 * Review query
 		 */
-		$args           = array(
-			'post_id' => $post_id,
+		$tourfic_args           = array(
+			'post_id' => $tourfic_post_id,
 			'status'  => 'approve',
 			'type'    => 'comment',
 		);
-		$comments_query = new WP_Comment_Query( $args );
-		$comments       = $comments_query->comments;
+		$tourfic_comments_query = new WP_Comment_Query( $tourfic_args );
+		$tourfic_comments       = $tourfic_comments_query->comments;
 
-		if ( $comments ) {
+		if ( $tourfic_comments ) {
 
-			$tf_rating_progress_bar = '';
-			$tf_overall_rate        = [];
-			TF_Review::tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
+			$tourfic_rating_progress_bar = '';
+			$tourfic_overall_rate        = [];
+			TF_Review::tf_calculate_comments_rating( $tourfic_comments, $tourfic_overall_rate, $total_rating );
 			TF_Review::tf_get_review_fields( $fields );
 
-			if ( $tf_overall_rate ) {
+			if ( $tourfic_overall_rate ) {
 
 
-				foreach ( $tf_overall_rate as $key => $value ) {
+				foreach ( $tourfic_overall_rate as $tourfic_key => $tourfic_value ) {
 
-					if ( empty( $value ) || ! in_array( $key, $fields ) ) {
+					if ( empty( $tourfic_value ) || ! in_array( $tourfic_key, $fields ) ) {
 						continue;
 					}
 
-					$value                  = TF_Review::Tf_average_ratings( $value );
-					$tf_rating_progress_bar .= '<div class="tf-single">';
-					$tf_rating_progress_bar .= '<div class="tf-text">' . $key . '</div>';
-					$tf_rating_progress_bar .= '<div class="tf-p-bar"><div class="percent-progress" data-width="' . TF_Review::tf_average_rating_percent( $value, Helper::tfopt( 'r-base' ) ) . '"></div></div>';
-					$tf_rating_progress_bar .= '<div class="tf-p-b-rating">' . $value . '</div>';
-					$tf_rating_progress_bar .= '</div>';
+					$tourfic_value                  = TF_Review::Tf_average_ratings( $tourfic_value );
+					$tourfic_rating_progress_bar .= '<div class="tf-single">';
+					$tourfic_rating_progress_bar .= '<div class="tf-text">' . $tourfic_key . '</div>';
+					$tourfic_rating_progress_bar .= '<div class="tf-p-bar"><div class="percent-progress" data-width="' . TF_Review::tf_average_rating_percent( $tourfic_value, Helper::tfopt( 'r-base' ) ) . '"></div></div>';
+					$tourfic_rating_progress_bar .= '<div class="tf-p-b-rating">' . $tourfic_value . '</div>';
+					$tourfic_rating_progress_bar .= '</div>';
 
 				}
 			}
@@ -329,15 +329,15 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
             <div class="tf-total-review">
                 <div class="tf-total-average">
                     <div><?php echo esc_html( sprintf( '%.1f', $total_rating ) ); ?></div>
-                    <span><?php TF_Review::tf_based_on_text( count( $comments ) ); ?></span>
+                    <span><?php TF_Review::tf_based_on_text( count( $tourfic_comments ) ); ?></span>
                 </div>
 				<?php
-				if ( ! empty( $tf_ratings_for ) ) {
-					if ( $is_user_logged_in ) {
-						if ( in_array( 'li', $tf_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
+				if ( ! empty( $tourfic_ratings_for ) ) {
+					if ( $tourfic_is_user_logged_in ) {
+						if ( in_array( 'li', $tourfic_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
 							?>
                             <div class="tf-btn-wrap">
-                                <button class="<?php echo esc_attr( $btn_class ); ?> tf-modal-btn" data-target="#tf-rating-modal">
+                                <button class="<?php echo esc_attr( $tourfic_btn_class ); ?> tf-modal-btn" data-target="#tf-rating-modal">
                                     <i class="fas fa-plus"></i> 
 									 <?php echo esc_html( apply_filters( 'tourfic_add_review_button_text', __( 'Add Review', 'tourfic' ) ) );?>
                                 </button>
@@ -345,10 +345,10 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 							<?php
 						}
 					} else {
-						if ( in_array( 'lo', $tf_ratings_for ) ) {
+						if ( in_array( 'lo', $tourfic_ratings_for ) ) {
 							?>
                             <div class="tf-btn-wrap">
-                                <button class="<?php echo esc_attr( $btn_class ); ?> tf-modal-btn" data-target="#tf-rating-modal">
+                                <button class="<?php echo esc_attr( $tourfic_btn_class ); ?> tf-modal-btn" data-target="#tf-rating-modal">
                                     <i class="fas fa-plus"></i> 
 									 <?php echo esc_html( apply_filters( 'tourfic_add_review_button_text', __( 'Add Review', 'tourfic' ) ) ); ?>
                                 </button>
@@ -359,61 +359,61 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 				}
 				?>
             </div>
-			<?php if ( ! empty( $tf_rating_progress_bar ) ) { ?>
+			<?php if ( ! empty( $tourfic_rating_progress_bar ) ) { ?>
                 <div class="tf-review-progress-bar">
-					<?php echo wp_kses_post( $tf_rating_progress_bar ); ?>
+					<?php echo wp_kses_post( $tourfic_rating_progress_bar ); ?>
                 </div>
 			<?php } ?>
 
-            <div class="tf-single-review <?php echo esc_attr( get_post_type( $post_id ) ) ?>">
+            <div class="tf-single-review <?php echo esc_attr( get_post_type( $tourfic_post_id ) ) ?>">
 				<?php
-				if ( $comments ) {
-					foreach ( $comments as $comment ) {
+				if ( $tourfic_comments ) {
+					foreach ( $tourfic_comments as $comment ) {
 
 						// Get rating details
-						$tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
-						if ( $tf_overall_rate == false ) {
-							$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
-							$tf_overall_rate = TF_Review::Tf_average_ratings( $tf_comment_meta );
+						$tourfic_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+						if ( $tourfic_overall_rate == false ) {
+							$tourfic_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+							$tourfic_overall_rate = TF_Review::Tf_average_ratings( $tourfic_comment_meta );
 						}
-						$base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
-						$c_rating  = TF_Review::tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
+						$tourfic_base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+						$tourfic_c_rating  = TF_Review::tf_single_rating_change_on_base( $tourfic_overall_rate, $tourfic_base_rate );
 
 						// Comment details
-						$c_avatar      = get_avatar( $comment, '56' );
-						$c_author_name = $comment->comment_author;
-						$c_date        = $comment->comment_date;
-						$c_content     = $comment->comment_content;
+						$tourfic_c_avatar      = get_avatar( $comment, '56' );
+						$tourfic_c_author_name = $comment->comment_author;
+						$tourfic_c_date        = $comment->comment_date;
+						$tourfic_c_content     = $comment->comment_content;
 						global $post_type;
 						?>
                         <div class="tf-single-details">
-                            <div class="tf-review-avatar"><?php echo wp_kses_post( $c_avatar ); ?></div>
+                            <div class="tf-review-avatar"><?php echo wp_kses_post( $tourfic_c_avatar ); ?></div>
                             <div class="tf-review-details">
-                                <div class="tf-name"><?php echo esc_html( $c_author_name ); ?></div>
-                                <div class="tf-date"><?php echo esc_html( $c_date ); ?></div>
+                                <div class="tf-name"><?php echo esc_html( $tourfic_c_author_name ); ?></div>
+                                <div class="tf-date"><?php echo esc_html( $tourfic_c_date ); ?></div>
                                 <div class="tf-rating-stars">
-									<?php echo wp_kses_post( $c_rating ); ?>
+									<?php echo wp_kses_post( $tourfic_c_rating ); ?>
                                 </div>
 								<?php if ( $post_type == 'apartment' ) {
-									if ( $tf_apartment_selected_template == "default" ) {
-										if ( strlen( $c_content ) > 120 ) { ?>
+									if ( $tourfic_apartment_selected_template == "default" ) {
+										if ( strlen( $tourfic_c_content ) > 120 ) { ?>
                                             <div class="tf-description">
-                                                <p><?php echo wp_kses_post( Helper::tourfic_character_limit_callback( $c_content, 120 ) ) ?></p>
+                                                <p><?php echo wp_kses_post( Helper::tourfic_character_limit_callback( $tourfic_c_content, 120 ) ) ?></p>
                                             </div>
                                             <div class="tf-full-description" style="display:none;">
-                                                <p><?php echo wp_kses_post( $c_content ) ?></p>
+                                                <p><?php echo wp_kses_post( $tourfic_c_content ) ?></p>
                                             </div>
 										<?php } else { ?>
                                             <div class="tf-description">
-                                                <p><?php echo wp_kses_post( $c_content ); ?></p>
+                                                <p><?php echo wp_kses_post( $tourfic_c_content ); ?></p>
                                             </div>
 											<?php
 										}
 									}
 								} else { ?>
-                                    <div class="tf-description"><p><?php echo wp_kses_post( $c_content ); ?></p></div>
+                                    <div class="tf-description"><p><?php echo wp_kses_post( $tourfic_c_content ); ?></p></div>
 								<?php } ?>
-								<?php if ( $post_type == 'apartment' && $tf_apartment_selected_template == "default" && strlen( $c_content ) > 120 ): ?>
+								<?php if ( $post_type == 'apartment' && $tourfic_apartment_selected_template == "default" && strlen( $tourfic_c_content ) > 120 ): ?>
                                     <div class="tf-apartment-show-more"><?php esc_html_e( "Show more", "tourfic" ) ?></div>
 
 								<?php endif; ?>
@@ -424,7 +424,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 				}
 				?>
             </div>
-			<?php if ( $post_type == "apartment" && $tf_apartment_selected_template == 'default' && count( $comments ) > 2 ): ?>
+			<?php if ( $post_type == "apartment" && $tourfic_apartment_selected_template == 'default' && count( $tourfic_comments ) > 2 ): ?>
                 <div class="show-all-review-wrap">
                     <div>
                         <div class="tf-apaartment-show-all">
@@ -436,7 +436,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 
 			<?php
 			// Review moderation notice
-			echo wp_kses_post( TF_Review::tf_pending_review_notice( $post_id ) ?? '' );
+			echo wp_kses_post( TF_Review::tf_pending_review_notice( $tourfic_post_id ) ?? '' );
 
 		} else {
 
@@ -444,13 +444,13 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 
 			echo '<h4>' . esc_html__( "No Review Available", "tourfic" ) . '</h4>';
 
-			if ( $is_user_logged_in ) {
+			if ( $tourfic_is_user_logged_in ) {
 
 				// Add Review button
-				if ( is_array( $tf_ratings_for ) && in_array( 'li', $tf_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
+				if ( is_array( $tourfic_ratings_for ) && in_array( 'li', $tourfic_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
 					?>
                     <div class="tf-btn-wrap">
-                        <button class="<?php echo esc_attr( $btn_class ); ?> tf-modal-btn" data-target="#tf-rating-modal">
+                        <button class="<?php echo esc_attr( $tourfic_btn_class ); ?> tf-modal-btn" data-target="#tf-rating-modal">
                             <i class="fas fa-plus"></i> 
 							 <?php echo esc_html( apply_filters( 'tourfic_add_review_button_text', __( 'Add Review', 'tourfic' ) ) );?>
                         </button>
@@ -461,10 +461,10 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 
 			} else {
 
-				if ( is_array( $tf_ratings_for ) && in_array( 'lo', $tf_ratings_for ) ) {
+				if ( is_array( $tourfic_ratings_for ) && in_array( 'lo', $tourfic_ratings_for ) ) {
 					?>
                     <div class="tf-btn-wrap">
-                        <button class="<?php echo esc_attr( $btn_class ); ?> tf-modal-btn" data-target="#tf-rating-modal">
+                        <button class="<?php echo esc_attr( $tourfic_btn_class ); ?> tf-modal-btn" data-target="#tf-rating-modal">
                             <i class="fas fa-plus"></i> 
 							 <?php echo esc_html( apply_filters( 'tourfic_add_review_button_text', __( 'Add Review', 'tourfic' ) ) ); ?>
                         </button>
@@ -473,7 +473,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 				}
 			}
 			// Pending review notice
-			echo wp_kses_post( TF_Review::tf_pending_review_notice( $post_id ) ?? '' );
+			echo wp_kses_post( TF_Review::tf_pending_review_notice( $tourfic_post_id ) ?? '' );
 
 			echo '</div>';
 		}

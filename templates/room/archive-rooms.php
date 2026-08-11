@@ -15,10 +15,10 @@ defined( 'ABSPATH' ) || exit;
 
 get_header();
 
-$tf_room_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] : 'design-1';
+$tourfic_room_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] : 'design-1';
 
 if (Helper::tf_is_woo_active()) {
-    if ( $tf_room_arc_selected_template == "design-1" ) {
+    if ( $tourfic_room_arc_selected_template == "design-1" ) {
 		include TF_TEMPLATE_PATH . 'room/archive/design-1.php';
 	}
 } else {

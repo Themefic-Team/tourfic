@@ -2,7 +2,7 @@
 // Don't load directly
 defined( 'ABSPATH' ) || exit;
 
-$tf_enquiry_section_status = !empty($meta['h-enquiry-section']) ? $meta['h-enquiry-section'] : "";
+$tourfic_enquiry_section_status = !empty($meta['h-enquiry-section']) ? $meta['h-enquiry-section'] : "";
 if ( $faqs ): ?>
 <div class="tf-hotel-faqs-section tf-mb-50 tf-template-section">
     <h2 class="tf-title tf-section-title" ><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : ''; ?></h2>
@@ -12,7 +12,7 @@ if ( $faqs ): ?>
             'wrapper_close' => '</div>',
         ]); ?>
 
-        <div class="tf-hotel-faqs" style="<?php echo empty($tf_enquiry_section_status) ? "flex-basis: 100%;" : ''; ?>">
+        <div class="tf-hotel-faqs" style="<?php echo empty($tourfic_enquiry_section_status) ? "flex-basis: 100%;" : ''; ?>">
             <?php \Tourfic\App\Templates\Components\Shared\Single\FAQ::render([
                 'wrapper_class' => 'tf-faq-wrapper',
                 'show_title' => 'no',
