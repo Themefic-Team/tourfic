@@ -10,7 +10,8 @@
   },
   "scripts": {
     "watch": "webpack --mode=development --watch --config webpack-config.js",
-    "build": "webpack --mode=production --config webpack-config.js"
+    "build": "webpack --mode=production --config webpack-config.js",
+    "package:release": "git archive --format=zip --prefix=tourfic/ --output=tourfic.zip HEAD"
   },
   "keywords": [
     "wordpress",

@@ -1,4 +1,4 @@
-=== Tourfic – AI Powered Travel Booking, Hotel Booking & Car Rental WordPress Plugin ===
+=== Tourfic – AI Powered Travel Booking, Hotel Booking & Car Rental ===
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, hellokhoyer, mainulsunvi, hasanet
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4

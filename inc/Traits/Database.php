@@ -12,7 +12,7 @@ trait Database {
 		$charset_collate = $wpdb->get_charset_collate();
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
-		$sql = "CREATE TABLE IF NOT EXISTS $table_name (
+		$sql = "CREATE TABLE $table_name (
         id bigint(20) NOT NULL AUTO_INCREMENT,
         post_id bigint(20) NOT NULL,
         post_type varchar(255),
@@ -37,7 +37,7 @@ trait Database {
 		$order_table_name = $wpdb->prefix.'tf_order_data';
 		$charset_collate = $wpdb->get_charset_collate();
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-		$sql = "CREATE TABLE IF NOT EXISTS $order_table_name (
+		$sql = "CREATE TABLE $order_table_name (
 		 id bigint(20) NOT NULL AUTO_INCREMENT,
 		 order_id bigint(20) NOT NULL,
 		 post_id bigint(20) NOT NULL,
@@ -58,31 +58,5 @@ trait Database {
 		 PRIMARY KEY  (id)
 	 ) $charset_collate;";
 		dbDelta( $sql );
-	}
-
-	function tf_admin_table_alter_order_data() {
-		global $wpdb;
-		$order_table_name = $wpdb->prefix . 'tf_order_data';
-		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
-		// Check if the 'checkinout' & 'checkinout_by' column exists before attempting to add it
-		if ( !$wpdb->get_var("SHOW COLUMNS FROM {$wpdb->prefix}tf_order_data LIKE 'checkinout'") && // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		     !$wpdb->get_var("SHOW COLUMNS FROM {$wpdb->prefix}tf_order_data LIKE 'checkinout_by'") ) { // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			$wpdb->query($wpdb->prepare( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
-				"ALTER TABLE %s 
-                ADD COLUMN checkinout varchar(255) NULL,
-                ADD COLUMN checkinout_by varchar(255) NULL",
-				$order_table_name
-			));
-		}
-
-		// Check if the 'room_id' column exists before attempting to add it
-		if ( !$wpdb->get_var("SHOW COLUMNS FROM {$wpdb->prefix}tf_order_data LIKE 'room_id'") ) { // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			$wpdb->query($wpdb->prepare( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
-				"ALTER TABLE %s 
-                ADD COLUMN room_id varchar(255) NULL",
-				$order_table_name
-			));
-		}
 	}
 }

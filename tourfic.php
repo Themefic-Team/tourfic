@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:     Tourfic – Travel Booking, Hotel Booking & Car Rental WordPress Plugin
+ * Plugin Name:     Tourfic – AI Powered Travel Booking, Hotel Booking & Car Rental
  * Plugin URI:      https://themefic.com/tourfic
  * Description:     The ultimate plugin for tour, travel, accommodation, and hotel bookings. Effortlessly manage your entire online travel booking system, including orders and any WooCommerce payment method.
  * Author:          Themefic
