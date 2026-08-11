@@ -1164,31 +1164,6 @@ if ( ! function_exists( 'tourfic_get_user_order_table_data' ) ) {
 	}
 }
 
-if(!function_exists('tf_affiliate_callback')){
-	function tf_affiliate_callback() {
-		if ( current_user_can( 'activate_plugins' ) ) {
-			?>
-			<div class="tf-field tf-field-notice" style="width:100%;">
-				<div class="tf-fieldset" style="margin: 0px;">
-					<div class="tf-field-notice-inner tf-notice-info">
-						<div class="tf-field-notice-content has-content">
-							<?php if ( ! is_plugin_active( 'tourfic-affiliate/tourfic-affiliate.php' ) && ! file_exists( WP_PLUGIN_DIR . '/tourfic-affiliate/tourfic-affiliate.php' ) ) : ?>
-								<span style="margin-right: 15px;"><?php echo esc_html__( "Tourfic affiliate addon is not installed. Please install and activate it to use this feature.", "tourfic" ); ?> </span>
-								<a target="_blank" href="https://portal.themefic.com/my-account/downloads" class="tf-admin-btn tf-btn-secondary tf-submit-btn"
-								   style="margin-top: 5px;"><?php echo esc_html__( "Download", "tourfic" ); ?></a>
-							<?php elseif ( ! is_plugin_active( 'tourfic-affiliate/tourfic-affiliate.php' ) && file_exists( WP_PLUGIN_DIR . '/tourfic-affiliate/tourfic-affiliate.php' ) ) : ?>
-								<span style="margin-right: 15px;"><?php echo esc_html__( "Tourfic affiliate addon is not activated. Please activate it to use this feature.", "tourfic" ); ?> </span>
-								<a href="#" class="tf-admin-btn tf-btn-secondary tf-affiliate-active" style="margin-top: 5px;"><?php echo esc_html__( 'Activate Tourfic Affiliate', 'tourfic' ); ?></a>
-							<?php endif; ?>
-						</div>
-					</div>
-				</div>
-			</div>
-			<?php
-		}
-	}
-}
-
 if(!function_exists('tf_set_order')){
 	function tf_set_order( $order_data ) {
 		global $wpdb;

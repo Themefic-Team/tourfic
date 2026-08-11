@@ -286,8 +286,6 @@ trait TF_API_Documentation_Examples {
 			'hotel-permalink-setting'        => 'hotels',
 			'apartment-permalink-setting'    => 'apartments',
 			'car-permalink-setting'          => 'cars',
-			'affiliate_heading'              => '',
-			'tf-affiliate'                   => '',
 			'email_template_settings'        => array(
 				'enable_admin_conf_email'             => '1',
 				'admin_confirmation_email_template'   => 89,

@@ -2574,10 +2574,6 @@ TF_Settings::option( 'tf_settings', array(
 			),
 		),
 
-		/**
-		 * Affiliate Options
-		 */
-
 		// Email Settings
 		'email-settings'          => array(
 			'title'  => esc_html__( 'Email Settings', 'tourfic' ),

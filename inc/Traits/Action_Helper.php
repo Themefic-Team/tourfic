@@ -2374,59 +2374,6 @@ trait Action_Helper {
 		}
 	}
 
-	/*
-     * Install and active Tourfic Affiliate
-     */
-	function tf_affiliate_install_callback() {
-		$response = [
-			'status'  => 'error',
-			'message' => esc_html__( 'Something went wrong. Please try again.', 'tourfic' )
-		];
-		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'tf_affiliate_install' ) ) {
-			wp_send_json_error( $response );
-		}
-		if ( current_user_can( 'activate_plugins' ) ) {
-			$plugin = 'tourfic-affiliate';
-			$result = install_plugin_install_status( $plugin );
-			if ( is_wp_error( $result ) ) {
-				$response['message'] = $result->get_error_message();
-			} else {
-				$response['status']  = 'success';
-				$response['message'] = esc_html__( 'Tourfic Affiliate installed successfully.', 'tourfic' );
-			}
-		}
-
-		echo wp_json_encode( $response );
-		die();
-	}
-
-	/*
-     * Activate Tourfic Affiliate
-     */
-	function tf_affiliate_active_callback() {
-		$response = [
-			'status'  => 'error',
-			'message' => esc_html__( 'Something went wrong. Please try again.', 'tourfic' )
-		];
-		//    $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
-		//    if ( ! wp_verify_nonce( $nonce, 'tf_affiliate_active' ) ) {
-		//        wp_send_json_error( $response );
-		//    }
-		if ( current_user_can( 'activate_plugins' ) ) {
-			$plugin = 'tourfic-affiliate/tourfic-affiliate.php';
-			$result = activate_plugin( $plugin );
-			if ( is_wp_error( $result ) ) {
-				$response['message'] = $result->get_error_message();
-			} else {
-				$response['status']  = 'success';
-				$response['message'] = esc_html__( 'Tourfic Affiliate activated successfully.', 'tourfic' );
-			}
-		}
-
-		echo wp_json_encode( $response );
-		die();
-	}
-
 	function tf_shortcode_type_to_location_callback() {
 		//Nonce Verification
 		check_ajax_referer( 'updates', '_nonce' );
