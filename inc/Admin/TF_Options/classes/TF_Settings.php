@@ -138,16 +138,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				array( $this, 'tf_options_page' ),
 			);
 
-			//Get Help submenu
-			add_submenu_page(
-				$this->option_id,
-				esc_html__('Get Help', 'tourfic'),
-				esc_html__('Get Help', 'tourfic'),
-				'manage_options',
-				'tf_get_help',
-				array( $this,'tf_get_help_callback'),
-			);
-
 			// Shortcode submenu
 			add_submenu_page(
 				$this->option_id,
@@ -156,6 +146,16 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				'manage_options',
 				'tf_shortcodes',
 				array( 'TF_Shortcodes','tf_shortcode_callback'),
+			);
+
+			//Get Help submenu
+			add_submenu_page(
+				$this->option_id,
+				esc_html__('Get Help', 'tourfic'),
+				esc_html__('Get Help', 'tourfic'),
+				'manage_options',
+				'tf_get_help',
+				array( $this,'tf_get_help_callback'),
 			);
 
 			// Library submenu
@@ -167,7 +167,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					esc_html__('Template Library', 'tourfic'),
 					'manage_options',
 					$library_url,
-					''
+					'',
+					3
 				);
 			}
 			// remove first submenu

@@ -196,6 +196,12 @@ tf_availability_ownership_assert(
 	false !== strpos( $pro_loader, "'tf-pro-availability'" ),
 	'Pro availability extension asset is not enqueued.'
 );
+$pro_availability_guard_pattern = "/if\s*\(\s*wp_script_is\(\s*'tf-admin'\s*,\s*'registered'\s*\)\s*\)\s*\{" .
+	"\s*wp_enqueue_script\(\s*'tf-pro-availability'/s";
+tf_availability_ownership_assert(
+	1 === preg_match( $pro_availability_guard_pattern, $pro_loader ),
+	'Pro availability assets must only load after Free registers tf-admin.'
+);
 tf_availability_ownership_assert(
 	false !== strpos( $pro_tour_metabox, 'How often does this Tour run?' )
 		&& false !== strpos( $pro_tour_metabox, 'tf_tour_avail_type' )

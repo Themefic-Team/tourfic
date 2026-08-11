@@ -8,10 +8,12 @@ class TF_API_Documentation {
 	use TF_API_Documentation_Examples;
 
 	public function __construct() {
-		add_action( 'admin_menu', array( $this, 'register_menu' ), 220 );
+		add_action( 'admin_menu', array( $this, 'register_menu' ), 80 );
 	}
 
 	public function register_menu() {
+		$position = is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ? 4 : 3;
+
 		add_submenu_page(
 			'tf_settings',
 			esc_html__( 'API Documentation', 'tourfic' ),
@@ -19,7 +21,7 @@ class TF_API_Documentation {
 			'manage_options',
 			'tf_api_docs',
 			array( $this, 'render_page' ),
-			5
+			$position
 		);
 	}
 
