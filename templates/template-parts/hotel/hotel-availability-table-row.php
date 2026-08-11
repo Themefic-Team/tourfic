@@ -382,7 +382,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 								?>
                                 <a class="tf_air_service tf_btn tf_btn_gray tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
 							<?php } else { ?>
-                                <button class="hotel-room-book tf_btn" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                                <button class="hotel-room-book tf_btn" type="submit"><?php echo esc_html( $tourfic_hotel_reserve_button_text ); ?></button>
 							<?php } ?>
                         </div>
                         <div class="tf_desc"></div>
@@ -522,7 +522,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                                 ?>
                                 <a class="tf_air_service tf_btn tf_btn_gray tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
 						<?php } else { ?>
-                                <button class="tf-hotel-booking-popup-btn tf-reserve-button tf_btn tf_btn_full tf-mt-16" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                                <button class="tf-hotel-booking-popup-btn tf-reserve-button tf_btn tf_btn_full tf-mt-16" type="submit"><?php echo esc_html( $tourfic_hotel_reserve_button_text ); ?></button>
 						<?php } ?>
                     </div>
                     <div class="tf_desc"></div>
@@ -907,7 +907,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                                     <div class="roomselectissue"></div>
                                     <a class="tf_air_service" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
                                 <?php } else { ?>
-                                    <button class="hotel-room-book tf_btn tf_btn_large tf_btn_sharp" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                                    <button class="hotel-room-book tf_btn tf_btn_large tf_btn_sharp" type="submit"><?php echo esc_html( $tourfic_hotel_reserve_button_text ); ?></button>
                                 <?php } ?>
                             </div>
                         </form>
@@ -1121,7 +1121,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                                 <a class="tf_air_service tf-hotel-booking-popup-btn tf_btn tf_btn_large tf_btn_sharp" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
 
 						<?php } else { ?>
-                                <button class="tf-hotel-booking-popup-btn tf-reserve-button tf_btn tf_btn_large tf_btn_sharp" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                                <button class="tf-hotel-booking-popup-btn tf-reserve-button tf_btn tf_btn_large tf_btn_sharp" type="submit"><?php echo esc_html( $tourfic_hotel_reserve_button_text ); ?></button>
 						<?php } ?>
                     </div>
                     <?php Hotel::hotel_booking_popup( $hotel_id, $room_id, $form_adult, $form_child ); ?>
@@ -1390,7 +1390,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                                 <a class="tf_air_service tf-hotel-booking-popup-btn tf_btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
 
 						<?php } else { ?>
-                                <button class="tf-hotel-booking-popup-btn tf-reserve-button tf_btn" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                                <button class="tf-hotel-booking-popup-btn tf-reserve-button tf_btn" type="submit"><?php echo esc_html( $tourfic_hotel_reserve_button_text ); ?></button>
 						<?php } ?>
                     </div>
                     <?php Hotel::hotel_booking_popup( $hotel_id, $room_id, $form_adult, $form_child ); ?>
@@ -1686,7 +1686,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                                         <div class="roomselectissue"></div>
                                         <a class="tf_air_service" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
 			                        <?php } else { ?>
-                                        <button class="hotel-room-book tf_btn tf_btn_large tf_btn_sharp" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                                        <button class="hotel-room-book tf_btn tf_btn_large tf_btn_sharp" type="submit"><?php echo esc_html( $tourfic_hotel_reserve_button_text ); ?></button>
 			                        <?php } ?>
                                 </div>
                             </form>
@@ -1892,7 +1892,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                                     <div class="roomselectissue"></div>
                                     <a class="tf_air_service" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
 		                        <?php } else { ?>
-                                    <button class="hotel-room-book tf_btn tf_btn_large tf_btn_sharp" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                                    <button class="hotel-room-book tf_btn tf_btn_large tf_btn_sharp" type="submit"><?php echo esc_html( $tourfic_hotel_reserve_button_text ); ?></button>
 		                        <?php } ?>
                             </div>
                         </form>
@@ -2259,9 +2259,9 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 
 							if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 								?>
-                                <a class="tf_air_service tf_btn tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></a>
+                                <a class="tf_air_service tf_btn tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php echo esc_html( $tourfic_hotel_reserve_button_text ); ?></a>
 							<?php } else { ?>
-                                <button class="tf-reserve-button tf_btn tf-hotel-booking-popup-btn" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                                <button class="tf-reserve-button tf_btn tf-hotel-booking-popup-btn" type="submit"><?php echo esc_html( $tourfic_hotel_reserve_button_text ); ?></button>
 							<?php } ?>
                         </div>
                         <div class="tf_desc"></div>
@@ -2404,10 +2404,10 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 
 						if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 							?>
-                                <a class="tf_air_service tf_btn tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></a>
+                                <a class="tf_air_service tf_btn tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php echo esc_html( $tourfic_hotel_reserve_button_text ); ?></a>
 
 						<?php } else { ?>
-                                <button class="tf-reserve-button tf_btn tf-hotel-booking-popup-btn" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                                <button class="tf-reserve-button tf_btn tf-hotel-booking-popup-btn" type="submit"><?php echo esc_html( $tourfic_hotel_reserve_button_text ); ?></button>
 						<?php } ?>
                     </div>
                     <div class="tf_desc"></div>
