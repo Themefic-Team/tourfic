@@ -1,4 +1,5 @@
 {
+    "license": "GPL-2.0-or-later",
     "require": {
         "appsero/client": "^2.0"
     }

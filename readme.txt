@@ -100,8 +100,9 @@ Plus, a range of key features that make Tourfic an Excellent Travel Booking Word
 * Detailed Car Information
 * Flexible Pricing and Booking Management
 * Inventory Management for Availability
-* Deposit Options for Secure Rentals
-* Multiple Booking Methods (WooCommerce, External, Without Payment)
+* Deposit Options for Secure Rentals (Pro)
+* WooCommerce and Without Payment booking methods
+* External Booking (Pro)
 * Taxable Rental Packages
 * Add Rental Extras (Baby Seats, Navigation, etc.)
 * Protection Plans (Damage, Theft, Accidents)
@@ -147,7 +148,7 @@ Tourfic offers many important features and works smoothly with WooCommerce to ha
 = 🎉  WISHLIST =
 * Wishlist for Hotels, Tours & Apartments
 * Dedicated Wishlist Page
-* Wishlist for logged-in and log-out users (Pro)
+* Wishlist for logged-in and logged-out users
 
 = 🎉  CUSTOMER REVIEW SYSTEM =
 * Review System for Hotels, Tours, Cars, and Apartments
@@ -162,8 +163,8 @@ Tourfic offers many important features and works smoothly with WooCommerce to ha
 = 🎉  BOOKING DATA ON DASHBOARD =
 * Default Analytics Tool Provided by WooCommerce
 * Tourfic Custom Booking: Order ID, Order Details, Order Date, Order Status
-* Tourfic Custom Booking: Payment Method Information(Free up to 20)
-* Tourfic Custom Booking: Customer Information (Pro)
+* Tourfic Custom Booking: Payment Method Information
+* Tourfic Custom Booking: Customer Information
 
 = 🎉 DATA IMPORT EXPORT =
 * Settings Panel import/export
@@ -172,7 +173,7 @@ Tourfic offers many important features and works smoothly with WooCommerce to ha
 * Apartment Data import/export (Pro)
 * Car Data import/export (Pro)
 
-= 🎉 BACKEND/ADMIN BOOKING (PRO) =
+= 🎉 BACKEND/ADMIN BOOKING =
 * Backend/Admin booking for Hotel
 * Backend/Admin booking for Tour
 * Backend/Admin booking for Apartment
@@ -374,6 +375,25 @@ To rebuild the distributed JavaScript and CSS files:
 3. Run `npm run build`.
 
 The build uses `webpack-config.js` and writes the generated bundles to the local `assets/` directory. PHP dependencies can be reproduced by running `composer install --no-dev` from the plugin directory.
+
+= Bundled third-party source and licenses =
+
+The distributed third-party JavaScript, CSS, fonts, and icons are copied from the following public sources:
+
+* [FullCalendar 6.1.9](https://github.com/fullcalendar/fullcalendar) - MIT.
+* [Chart.js 4.5.1](https://github.com/chartjs/Chart.js) - MIT.
+* [fancyBox 3.5.7](https://github.com/fancyapps/fancybox) - GPLv3.
+* [flatpickr 4.6.13](https://github.com/flatpickr/flatpickr) - MIT.
+* [Font Awesome 4.7.0, 5.15.4, and 6.5.1](https://github.com/FortAwesome/Font-Awesome) - icons: CC BY 4.0; fonts: SIL OFL 1.1; code: MIT.
+* [jquery-confirm 3.3.4](https://github.com/craftpip/jquery-confirm) - MIT.
+* [jQuery Validation 1.22.1](https://github.com/jquery-validation/jquery-validation) - MIT.
+* [Leaflet 1.9.4](https://github.com/Leaflet/Leaflet) - BSD-2-Clause.
+* [Google Maps JavaScript API utility libraries](https://github.com/googlemaps/v3-utility-library), including MarkerClusterer and MarkerWithLabel - Apache-2.0.
+* [Notyf](https://github.com/caroso1222/notyf) - MIT.
+* [AlRangeSlider](https://github.com/aleinbanger/al-range-slider) - MIT.
+* [Remix Icon 4.2.0](https://github.com/Remix-Design/RemixIcon) - Apache-2.0.
+* [Select2 4.1.0](https://github.com/select2/select2/tree/4.1.0) - MIT.
+* [Slick 1.8.1](https://github.com/kenwheeler/slick) - MIT.
 
 == Frequently Asked Questions ==
 
