@@ -244,7 +244,13 @@ class TF_API_Keys {
 		$this->verify_ajax_request();
 
 		$name        = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
-		$permissions = isset( $_POST['permissions'] ) ? $this->sanitize_permissions( wp_unslash( $_POST['permissions'] ) ) : array( 'read' ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$permissions = array( 'read' );
+		if ( isset( $_POST['permissions'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$permission_input = is_array( $_POST['permissions'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				? array_map( 'sanitize_text_field', wp_unslash( $_POST['permissions'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				: sanitize_text_field( wp_unslash( $_POST['permissions'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$permissions = $this->sanitize_permissions( $permission_input );
+		}
 
 		if ( empty( $name ) ) {
 			wp_send_json_error( esc_html__( 'API key name is required.', 'tourfic' ), 400 );
@@ -432,11 +438,11 @@ class TF_API_Keys {
 	private function get_request_header( $header_name ) {
 		$server_key = 'HTTP_' . strtoupper( str_replace( '-', '_', $header_name ) );
 		if ( isset( $_SERVER[ $server_key ] ) ) {
-			return wp_unslash( $_SERVER[ $server_key ] );
+			return sanitize_text_field( wp_unslash( $_SERVER[ $server_key ] ) );
 		}
 
 		if ( 'Authorization' === $header_name && isset( $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ) ) {
-			return wp_unslash( $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] );
+			return sanitize_text_field( wp_unslash( $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ) );
 		}
 
 		return '';
@@ -448,9 +454,13 @@ class TF_API_Keys {
 			return true;
 		}
 
-		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '';
+		$request_uri  = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+		$request_path = wp_parse_url( $request_uri, PHP_URL_PATH );
+		if ( ! is_string( $request_path ) ) {
+			return false;
+		}
 
-		return false !== strpos( $request_uri, '/' . rest_get_url_prefix() . '/tf/v1/' );
+		return false !== strpos( $request_path, '/' . rest_get_url_prefix() . '/tf/v1/' );
 	}
 
 	private function get_table_name() {

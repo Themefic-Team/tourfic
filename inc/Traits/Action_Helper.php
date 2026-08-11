@@ -868,12 +868,20 @@ trait Action_Helper {
 		$engine_year = !empty( $tf_engine_year ) ? explode( ',', $tf_engine_year ) : null;
 		$tf_car_brand = ! empty( $_POST['car_brand'] ) ? sanitize_text_field( wp_unslash( $_POST['car_brand'] ) ) : null;
 		$car_brand = ! empty( $tf_car_brand ) ? explode( ',', $tf_car_brand ) : null;
-		$tf_car_transmission = isset( $_POST['car_transmission'] ) && function_exists( 'tf_normalize_car_binary_filter_values' )
-			? tf_normalize_car_binary_filter_values( wp_unslash( $_POST['car_transmission'] ) )
-			: array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.NonceVerification.Recommended
-		$tf_carplay_android_auto = isset( $_POST['carplay_android_auto'] ) && function_exists( 'tf_normalize_car_binary_filter_values' )
-			? tf_normalize_car_binary_filter_values( wp_unslash( $_POST['carplay_android_auto'] ) )
-			: array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.NonceVerification.Recommended
+		$tf_car_transmission = array();
+		if ( isset( $_POST['car_transmission'] ) && function_exists( 'tf_normalize_car_binary_filter_values' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$car_transmission = is_array( $_POST['car_transmission'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				? array_map( 'sanitize_text_field', wp_unslash( $_POST['car_transmission'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				: sanitize_text_field( wp_unslash( $_POST['car_transmission'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$tf_car_transmission = tf_normalize_car_binary_filter_values( $car_transmission );
+		}
+		$tf_carplay_android_auto = array();
+		if ( isset( $_POST['carplay_android_auto'] ) && function_exists( 'tf_normalize_car_binary_filter_values' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$carplay_android_auto = is_array( $_POST['carplay_android_auto'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				? array_map( 'sanitize_text_field', wp_unslash( $_POST['carplay_android_auto'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				: sanitize_text_field( wp_unslash( $_POST['carplay_android_auto'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$tf_carplay_android_auto = tf_normalize_car_binary_filter_values( $carplay_android_auto );
+		}
 
 		$tf_startprice  = isset( $_POST['startprice'] ) ? sanitize_text_field( wp_unslash($_POST['startprice']) ) : '';
 		$tf_endprice  = isset( $_POST['endprice'] ) ? sanitize_text_field( wp_unslash($_POST['endprice']) ) : '';

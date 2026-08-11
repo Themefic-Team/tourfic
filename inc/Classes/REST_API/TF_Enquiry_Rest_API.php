@@ -37,38 +37,31 @@ if ( ! class_exists( 'TF_Enquiry_Rest_API' ) ) {
 			}
 
 			global $wpdb;
-			$where  = array( 'post_type = %s' );
-			$values = array( $post_type );
+			$where = array( $wpdb->prepare( 'post_type = %s', $post_type ) );
 
 			if ( ! empty( $post_id ) ) {
-				$where[]  = 'post_id = %d';
-				$values[] = $post_id;
+				$where[] = $wpdb->prepare( 'post_id = %d', $post_id );
 			}
 
 			if ( ! empty( $filters ) ) {
 				if ( 'not-replied' === $filters ) {
-					$where[]  = 'enquiry_status != %s';
-					$values[] = 'replied';
+					$where[] = $wpdb->prepare( 'enquiry_status != %s', 'replied' );
 				} elseif ( 'not-responded' === $filters ) {
-					$where[]  = 'enquiry_status != %s';
-					$values[] = 'responded';
+					$where[] = $wpdb->prepare( 'enquiry_status != %s', 'responded' );
 				} else {
-					$where[]  = 'enquiry_status = %s';
-					$values[] = $filters;
+					$where[] = $wpdb->prepare( 'enquiry_status = %s', $filters );
 				}
 			}
 
-			if ( $this->tf_current_user_can_manage_records() ) {
-				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Clauses are fixed above and all values use placeholders.
-				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . " ORDER BY id DESC", $values ), ARRAY_A );
-			} elseif ( $this->user_has_role( $current_user_id, 'tf_vendor' ) ) {
-				$where[]  = 'author_id = %d';
-				$values[] = $current_user_id;
-				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Clauses are fixed above and all values use placeholders.
-				$hotel_enquiry_result = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . " ORDER BY id DESC", $values ), ARRAY_A );
-			} else {
+			$can_manage_records = $this->tf_current_user_can_manage_records();
+			if ( ! $can_manage_records && $this->user_has_role( $current_user_id, 'tf_vendor' ) ) {
+				$where[] = $wpdb->prepare( 'author_id = %d', $current_user_id );
+			} elseif ( ! $can_manage_records ) {
 				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
 			}
+
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared,PluginCheck.Security.DirectDB.UnescapedDBParameter,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Every dynamic clause is prepared above.
+			$hotel_enquiry_result = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . ' ORDER BY id DESC', ARRAY_A );
 
 			$enquirys_data = array();
 			foreach ( $hotel_enquiry_result as $enquiry ) {		

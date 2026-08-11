@@ -788,41 +788,33 @@ abstract class Enquiry {
 		 global $wpdb;
 		 $enquiry_data = array();
  
-		$where  = array( 'post_type = %s' );
-		$values = array( sanitize_key( $post_type ) );
+		$where = array( $wpdb->prepare( 'post_type = %s', sanitize_key( $post_type ) ) );
 
 		if ( $post_id ) {
-			$where[]  = 'post_id = %d';
-			$values[] = absint( $post_id );
+			$where[] = $wpdb->prepare( 'post_id = %d', absint( $post_id ) );
 		}
 
 		if ( $author_id ) {
-			$where[]  = 'author_id = %d';
-			$values[] = absint( $author_id );
+			$where[] = $wpdb->prepare( 'author_id = %d', absint( $author_id ) );
 		}
 		if( !empty($status) ) {
 			$status = sanitize_key( $status );
 			if( $status == 'not-replied') {
-				$where[]  = 'enquiry_status != %s';
-				$values[] = 'replied';
+				$where[] = $wpdb->prepare( 'enquiry_status != %s', 'replied' );
 			} elseif( $status == 'not-responded') {
-				$where[]  = 'enquiry_status != %s';
-				$values[] = 'responded';
+				$where[] = $wpdb->prepare( 'enquiry_status != %s', 'responded' );
 			} else {
-				$where[]  = 'enquiry_status = %s';
-				$values[] = $status;
+				$where[] = $wpdb->prepare( 'enquiry_status = %s', $status );
 			}
 		}
 
 		$query_limit = '';
 		if( !empty( $offset ) && !empty( $per_page ) ) {
-			$query_limit = ' LIMIT %d, %d';
-			$values[]    = absint( $offset );
-			$values[]    = absint( $per_page );
+			$query_limit = $wpdb->prepare( ' LIMIT %d, %d', absint( $offset ), absint( $per_page ) );
 		}
 
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared,PluginCheck.Security.DirectDB.UnescapedDBParameter,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Clauses are fixed above and all values use placeholders.
-		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . " ORDER BY id DESC{$query_limit}", $values ), ARRAY_A );
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared,PluginCheck.Security.DirectDB.UnescapedDBParameter,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Every dynamic clause and limit value is prepared above.
+		$results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . " ORDER BY id DESC{$query_limit}", ARRAY_A );
 
 		if( !empty($results) ) {
 			foreach( $results as $result ) {

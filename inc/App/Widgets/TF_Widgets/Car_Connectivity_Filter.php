@@ -46,7 +46,10 @@ class Car_Connectivity_Filter extends \WP_Widget {
 
             $selected_values = array();
             if ( isset( $_GET['carplay_android_auto'] ) && function_exists( 'tf_normalize_car_binary_filter_values' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                $selected_values = tf_normalize_car_binary_filter_values( wp_unslash( $_GET['carplay_android_auto'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $carplay_android_auto = is_array( $_GET['carplay_android_auto'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                    ? array_map( 'sanitize_text_field', wp_unslash( $_GET['carplay_android_auto'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                    : sanitize_text_field( wp_unslash( $_GET['carplay_android_auto'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $selected_values = tf_normalize_car_binary_filter_values( $carplay_android_auto );
             }
 
             echo wp_kses_post( $before_widget );

@@ -4267,9 +4267,19 @@ class Tour {
 		$tour_extra_title_arr = [];
 		$tour_extra_meta      = apply_filters( 'tf_tour_extra_meta', null, $post_id, $meta );
 		if ( ! empty( $tour_extra_meta ) ) {
+			$tour_extra_input = isset( $_POST['tour_extra'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				? ( is_array( $_POST['tour_extra'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+					? array_map( 'sanitize_text_field', wp_unslash( $_POST['tour_extra'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+					: sanitize_text_field( wp_unslash( $_POST['tour_extra'] ) ) ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				: [];
+			$tour_extra_quantity_input = isset( $_POST['tour_extra_quantity'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				? ( is_array( $_POST['tour_extra_quantity'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+					? array_map( 'sanitize_text_field', wp_unslash( $_POST['tour_extra_quantity'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+					: sanitize_text_field( wp_unslash( $_POST['tour_extra_quantity'] ) ) ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				: [];
 			$tour_extra_selection = Helper::tf_sanitize_tour_extra_selection(
-				isset( $_POST['tour_extra'] ) ? wp_unslash( $_POST['tour_extra'] ) : [],
-				isset( $_POST['tour_extra_quantity'] ) ? wp_unslash( $_POST['tour_extra_quantity'] ) : []
+				$tour_extra_input,
+				$tour_extra_quantity_input
 			);
 			$tours_extra          = $tour_extra_selection['extras'];
 			$tour_extra_quantity  = $tour_extra_selection['quantities'];

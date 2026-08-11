@@ -39,28 +39,24 @@ class TF_Demo_Importer {
 
 		// Check for errors
 		if (is_wp_error($response)) {
-			error_log('Error downloading image: ' . $response->get_error_message());
 			return false;
 		}
 
 		// Check response code
 		$response_code = wp_remote_retrieve_response_code($response);
 		if (200 !== $response_code) {
-			error_log('Invalid response code when downloading image: ' . $response_code);
 			return false;
 		}
 
 		// Get the image data
 		$image_data = wp_remote_retrieve_body($response);
 		if (empty($image_data)) {
-			error_log('Empty image data received');
 			return false;
 		}
 
 		// Get content type to verify this is actually an image
 		$content_type = wp_remote_retrieve_header($response, 'content-type');
 		if ( false === strpos( $content_type, 'image/' ) ) {
-			error_log('URL does not point to an image (Content-Type: ' . $content_type . ')');
 			return false;
 		}
 
@@ -206,7 +202,7 @@ class TF_Demo_Importer {
 										if ( ! is_wp_error( $parent_result ) ) {
 											$parent_term_id = $parent_result['term_id'];
 										} else {
-											error_log( 'Error creating parent term: ' . $parent_result->get_error_message() );
+											continue;
 										}
 									} else {
 										$parent_term_id = $parent_term->term_id;
@@ -229,7 +225,7 @@ class TF_Demo_Importer {
 											if ( ! is_wp_error( $child_result ) ) {
 												$child_term_id = $child_result['term_id'];
 											} else {
-												error_log( 'Error creating child term: ' . $child_result->get_error_message() );
+												continue;
 											}
 										} else {
 											$child_term_id = $child_term->term_id;
@@ -254,7 +250,7 @@ class TF_Demo_Importer {
 											$term_id = $term_result['term_id'];
 											wp_set_post_terms( $post_id, $term_id, $taxonomy_name, true );
 										} else {
-											error_log( 'Error creating term: ' . $term_result->get_error_message() );
+											continue;
 										}
 									} else {
 										wp_set_post_terms( $post_id, $term->term_id, $taxonomy_name, true );
@@ -622,7 +618,7 @@ class TF_Demo_Importer {
 										if ( ! is_wp_error( $parent_result ) ) {
 											$parent_term_id = $parent_result['term_id'];
 										} else {
-											error_log( 'Error creating parent term: ' . $parent_result->get_error_message() );
+											continue;
 										}
 									} else {
 										$parent_term_id = $parent_term->term_id;
@@ -645,7 +641,7 @@ class TF_Demo_Importer {
 											if ( ! is_wp_error( $child_result ) ) {
 												$child_term_id = $child_result['term_id'];
 											} else {
-												error_log( 'Error creating child term: ' . $child_result->get_error_message() );
+												continue;
 											}
 										} else {
 											$child_term_id = $child_term->term_id;
@@ -670,7 +666,7 @@ class TF_Demo_Importer {
 											$term_id = $term_result['term_id'];
 											wp_set_post_terms( $post_id, $term_id, $taxonomy_name, true );
 										} else {
-											error_log( 'Error creating term: ' . $term_result->get_error_message() );
+											continue;
 										}
 									} else {
 										wp_set_post_terms( $post_id, $term->term_id, $taxonomy_name, true );
@@ -884,7 +880,7 @@ class TF_Demo_Importer {
 									if ( ! is_wp_error( $parent_result ) ) {
 										$parent_term_id = $parent_result['term_id'];
 									} else {
-										error_log( 'Error creating parent term: ' . $parent_result->get_error_message() );
+										continue;
 									}
 								} else {
 									$parent_term_id = $parent_term->term_id;
@@ -906,7 +902,7 @@ class TF_Demo_Importer {
 										if ( ! is_wp_error( $child_result ) ) {
 											$child_term_ids[] = $child_result['term_id'];
 										} else {
-											error_log( 'Error creating child term: ' . $child_result->get_error_message() );
+											continue;
 										}
 									} else {
 										$child_term_ids[] = $child_term->term_id;
@@ -931,7 +927,7 @@ class TF_Demo_Importer {
 										$term_id = $term_result['term_id'];
 										wp_set_post_terms( $post_id, $term_id, $taxonomy_name, true );
 									} else {
-										error_log( 'Error creating term: ' . $term_result->get_error_message() );
+										continue;
 									}
 								} else {
 									wp_set_post_terms( $post_id, $term->term_id, $taxonomy_name, true );
@@ -1319,7 +1315,7 @@ class TF_Demo_Importer {
 									if ( ! is_wp_error( $parent_result ) ) {
 										$parent_term_id = $parent_result['term_id'];
 									} else {
-										error_log( 'Error creating parent term: ' . $parent_result->get_error_message() );
+										continue;
 									}
 								} else {
 									$parent_term_id = $parent_term->term_id;
@@ -1341,7 +1337,7 @@ class TF_Demo_Importer {
 										if ( ! is_wp_error( $child_result ) ) {
 											$child_term_ids[] = $child_result['term_id'];
 										} else {
-											error_log( 'Error creating child term: ' . $child_result->get_error_message() );
+											continue;
 										}
 									} else {
 										$child_term_ids[] = $child_term->term_id;
@@ -1366,7 +1362,7 @@ class TF_Demo_Importer {
 										$term_id = $term_result['term_id'];
 										wp_set_post_terms( $post_id, $term_id, $taxonomy_name, true );
 									} else {
-										error_log( 'Error creating term: ' . $term_result->get_error_message() );
+										continue;
 									}
 								} else {
 									wp_set_post_terms( $post_id, $term->term_id, $taxonomy_name, true );

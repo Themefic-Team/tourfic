@@ -269,8 +269,8 @@ function tf_tours_booking_function() {
 			$max_text = sprintf( _n( '%s person', '%s people', $max_people, 'tourfic' ), $max_people );
 
 			if ( 0 < $min_people && $total_people < $min_people ) {
-				/* translators: 1: Minimum people, 2: Availability start date, 3: Availability end date. */
 				$response['errors'][] = sprintf(
+					/* translators: 1: Minimum people, 2: Availability start date, 3: Availability end date. */
 					esc_html__( 'Minimum %1$s required for date %2$s - %3$s', 'tourfic' ),
 					$min_text,
 					$back_date_from,
@@ -279,8 +279,8 @@ function tf_tours_booking_function() {
 			}
 
 			if ( 0 < $max_people && $total_people > $max_people ) {
-				/* translators: 1: Maximum people, 2: Availability start date, 3: Availability end date. */
 				$response['errors'][] = sprintf(
+					/* translators: 1: Maximum people, 2: Availability start date, 3: Availability end date. */
 					esc_html__( 'Maximum %1$s allowed for date %2$s - %3$s', 'tourfic' ),
 					$max_text,
 					$back_date_from,
@@ -325,8 +325,8 @@ function tf_tours_booking_function() {
 				if ( $booked_people >= $booking_limit ) {
 					$response['errors'][] = esc_html__( 'Booking limit is Reached this Date', 'tourfic' );
 				} elseif ( $remaining_people < $total_people_booking ) {
-					/* translators: %s: Remaining adult/child capacity. */
 					$response['errors'][] = sprintf(
+						/* translators: %s: Remaining adult/child capacity. */
 						esc_html__( 'Only %1$s Adult/Children are available this Date', 'tourfic' ),
 						$remaining_people
 					);

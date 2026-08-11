@@ -97,7 +97,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		}
 
 		$paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-		$checkInOutDate = ! empty( $_GET['check-in-out-date'] ) ? tf_split_date_range( wp_unslash( $_GET['check-in-out-date'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$checkInOutDate = ! empty( $_GET['check-in-out-date'] ) ? tf_split_date_range( sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( ! empty( $checkInOutDate ) ) {
 			$period = new \DatePeriod(
 				new \DateTime( $checkInOutDate[0] ),
