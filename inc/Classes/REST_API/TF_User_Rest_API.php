@@ -149,7 +149,7 @@ if ( ! class_exists( 'TF_User_Rest_API' ) ) {
 				$user_data['total_withdraw']                = $total_withdraw;
 				$user_data['status']                        = $vendor_status;
 
-				$vendor_fields = ! empty( Helper::tf_data_types( tfopt( 'log_reg_settings' ) )['vendor-registration'] ) ? Helper::tf_data_types( tfopt( 'log_reg_settings' ) )['vendor-registration'] : '';
+				$vendor_fields = ! empty( Helper::tf_data_types( Helper::tfopt( 'log_reg_settings' ) )['vendor-registration'] ) ? Helper::tf_data_types( Helper::tfopt( 'log_reg_settings' ) )['vendor-registration'] : '';
 				if ( is_array( $vendor_fields ) && ! empty( $vendor_fields ) ) {
 					foreach ( $vendor_fields as $field ) {
 						if ( $field['reg-fields-type'] == 'checkbox' ) {

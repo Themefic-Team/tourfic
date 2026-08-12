@@ -3362,8 +3362,8 @@ class Hotel {
                         <div class="tf-booking-content tf-hotel-booking-content tf-booking-content-1">
 							<?php if ( ! empty( $airport_service_type ) ) { ?>
 								<div class="tf-hotel-services-text">
-									<h3><?php echo !empty( tfopt( 'hotel_service_popup_title' ) ) ? esc_html( tfopt( 'hotel_service_popup_title' ) ) : '' ?></h3>
-									<p><?php echo !empty( tfopt( 'hotel_service_popup_subtile') ) ? esc_html( tfopt( 'hotel_service_popup_subtile') ) : '' ; ?></p>
+									<h3><?php echo !empty( Helper::tfopt( 'hotel_service_popup_title' ) ) ? esc_html( Helper::tfopt( 'hotel_service_popup_title' ) ) : '' ?></h3>
+									<p><?php echo !empty( Helper::tfopt( 'hotel_service_popup_subtile') ) ? esc_html( Helper::tfopt( 'hotel_service_popup_subtile') ) : '' ; ?></p>
 								</div>
 								<div class="tf-booking-content-service">
 									<select name="airport_service">
@@ -3551,10 +3551,10 @@ class Hotel {
                         <div class="tf-control-pagination show tf-pagination-content-1">
 							<?php
 							if ( 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
-                                <button type="submit" class="hotel-room-book tf_btn"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? esc_html(tfopt( 'hotel_service_popup_action' )) : esc_html__( "Continue", "tourfic" ); ?></button>
+                                <button type="submit" class="hotel-room-book tf_btn"><?php echo !empty( Helper::tfopt( 'hotel_service_popup_action' ) ) ? esc_html(Helper::tfopt( 'hotel_service_popup_action' )) : esc_html__( "Continue", "tourfic" ); ?></button>
 							<?php } else { ?>
                                 <a href="#" class="tf-next-control tf-tabs-control tf_btn"
-                                   data-step="<?php echo 3 == $room_book_by && empty( $enable_guest_info ) ? esc_attr( "2" ) : esc_attr( "1" ); ?>"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? esc_html(tfopt( 'hotel_service_popup_action' )) : esc_html__( "Continue", "tourfic" ); ?></a>
+                                   data-step="<?php echo 3 == $room_book_by && empty( $enable_guest_info ) ? esc_attr( "2" ) : esc_attr( "1" ); ?>"><?php echo !empty( Helper::tfopt( 'hotel_service_popup_action' ) ) ? esc_html(Helper::tfopt( 'hotel_service_popup_action' )) : esc_html__( "Continue", "tourfic" ); ?></a>
 							<?php } ?>
                         </div>
 					<?php }

@@ -365,7 +365,18 @@ class Enqueue {
 		/**
 		 * Custom
 		 */
-		wp_enqueue_script( 'tourfic', TF_ASSETS_APP_URL . 'js/tourfic-scripts' . $this->js_min . '.js','', TF_VERSION, true );
+		$tourfic_script_dependencies = array( 'jquery', 'tf-flatpickr', 'notyf' );
+		if ( 'default' === $tf_openstreet_map ) {
+			$tourfic_script_dependencies[] = 'tf-leaflet';
+		}
+
+		wp_enqueue_script(
+			'tourfic',
+			TF_ASSETS_APP_URL . 'js/tourfic-scripts' . $this->js_min . '.js',
+			$tourfic_script_dependencies,
+			TF_VERSION,
+			true
+		);
 		wp_localize_script( 'tourfic', 'tf_params',
 			array(
 				'nonce'                  => wp_create_nonce( 'tf_ajax_nonce' ),

@@ -27,7 +27,7 @@ class TF_List_Table extends \WP_List_Table {
 		);
 
 		$user = wp_get_current_user();
-		$user_permission = Helper::tf_data_types( tfopt( 'tf_user_permission' ) );
+		$user_permission = Helper::tf_data_types( Helper::tfopt( 'tf_user_permission' ) );
 		$vendor_access = isset( $user_permission['vendor_can_manage'] ) ? $user_permission['vendor_can_manage'] : array();
 		$manager_access = isset( $user_permission['manager_can_manage'] ) ? $user_permission['manager_can_manage'] : array();
 

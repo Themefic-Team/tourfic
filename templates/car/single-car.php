@@ -211,9 +211,9 @@ while ( have_posts() ) : the_post();
 	$tourfic_openstreet_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "default";
 
 	// Single Template Style
-	$tourfic_car_layout_conditions = ! empty( $meta['tf_single_car_layout_opt'] ) ? $meta['tf_single_car_layout_opt'] : 'global';
+	$tourfic_car_layout_conditions = ! empty( $tourfic_meta['tf_single_car_layout_opt'] ) ? $tourfic_meta['tf_single_car_layout_opt'] : 'global';
 	if("single"==$tourfic_car_layout_conditions){
-		$tourfic_car_single_template = ! empty( $meta['tf_single_car_template'] ) ? $meta['tf_single_car_template'] : 'design-1';
+		$tourfic_car_single_template = ! empty( $tourfic_meta['tf_single_car_template'] ) ? $tourfic_meta['tf_single_car_template'] : 'design-1';
 	}
 	$tourfic_car_global_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-car'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-car'] : 'design-1';
 

@@ -17,7 +17,7 @@ $tourfic_pricing_by = ! empty( $tourfic_meta["pricing-by"] ) ? $tourfic_meta["pr
                         <?php \Tourfic\App\Templates\Components\Shared\Single\Title::render(); ?>
                     </div>
                     <div class="tf-hero-gallery-videos">
-                        <?php if ( ! empty( $gallery_ids ) ) { ?>
+                        <?php if ( ! empty( $tourfic_gallery_ids ) ) { ?>
                             <div class="tf-hero-hotel tf-popup-buttons">
                                 <a href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -86,7 +86,7 @@ $tourfic_pricing_by = ! empty( $tourfic_meta["pricing-by"] ) ? $tourfic_meta["pr
             
 
             <?php 
-            if ( ! empty( $gallery_ids ) ) {
+            if ( ! empty( $tourfic_gallery_ids ) ) {
             ?>
             <!-- Hotel PopUp Starts -->       
             <div class="tf-popup-wrapper tf-hotel-popup">
@@ -94,8 +94,8 @@ $tourfic_pricing_by = ! empty( $tourfic_meta["pricing-by"] ) ? $tourfic_meta["pr
                     
                     <div class="tf-popup-body">
                         <?php 
-                            if ( ! empty( $gallery_ids ) ) {
-                            foreach ( $gallery_ids as $tourfic_key => $tourfic_gallery_item_id ) {
+                            if ( ! empty( $tourfic_gallery_ids ) ) {
+                            foreach ( $tourfic_gallery_ids as $tourfic_key => $tourfic_gallery_item_id ) {
                             $tourfic_image_url = wp_get_attachment_url( $tourfic_gallery_item_id, 'full' );
                         ?>
                         <img src="<?php echo esc_url($tourfic_image_url); ?>" alt="" class="tf-popup-image">

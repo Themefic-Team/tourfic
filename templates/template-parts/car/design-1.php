@@ -68,7 +68,7 @@ if ( empty( $tourfic_selected_dropoff_time ) ) {
 	$tourfic_selected_dropoff_time = $tourfic_default_time;
 }
 
-$tourfic_total_prices = Pricing::set_total_price($meta, $tourfic_pickup_date, $tourfic_dropoff_date, $tourfic_selected_pickup_time, $tourfic_selected_dropoff_time); 
+$tourfic_total_prices = Pricing::set_total_price($tourfic_meta, $tourfic_pickup_date, $tourfic_dropoff_date, $tourfic_selected_pickup_time, $tourfic_selected_dropoff_time);
 $tourfic_show_total_regular_price = ! empty( $tourfic_total_prices['regular_price'] ) && (float) $tourfic_total_prices['regular_price'] > (float) $tourfic_total_prices['sale_price'];
 $tourfic_display_total_price = ! empty( $tourfic_total_prices['sale_price'] ) ? $tourfic_total_prices['sale_price'] : ( ! empty( $tourfic_total_prices['regular_price'] ) ? $tourfic_total_prices['regular_price'] : 0 );
 $tourfic_cars_slug = get_option('car_slug');
@@ -84,7 +84,7 @@ $tourfic_cars_slug = get_option('car_slug');
                         <h2><?php esc_html_e("Total:", "tourfic"); ?> 
                         <?php if ( $tourfic_show_total_regular_price ) { ?><del><?php echo wp_kses_post( wc_price( $tourfic_total_prices['regular_price'] ) ); ?></del> <?php } ?>
                         <?php echo ! empty( $tourfic_display_total_price ) ? wp_kses_post( wc_price( $tourfic_display_total_price ) ) : ''; ?></h2>
-                        <p><?php echo wp_kses_post(Pricing::is_taxable($meta)); ?></p>
+                        <p><?php echo wp_kses_post(Pricing::is_taxable($tourfic_meta)); ?></p>
                     </div>
                     <button class="tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-gap-8 tf-back-to-booking">
                         <?php echo esc_html( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ) ); ?>
@@ -168,7 +168,7 @@ $tourfic_cars_slug = get_option('car_slug');
                 dateFormat: "Y/m/d",
                 minDate: "today",
                 altInput: true,
-                altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
+                altFormat: '<?php echo esc_html( $tourfic_date_format_for_users ); ?>',
                 // flatpickr locale
                 <?php Helper::tf_flatpickr_locale(); ?>
 
@@ -186,7 +186,7 @@ $tourfic_cars_slug = get_option('car_slug');
             });
 
             function dateSetToFields(selectedDates, instance) {
-                const format = '<?php echo esc_html( $date_format_for_users ); ?>';
+                const format = '<?php echo esc_html( $tourfic_date_format_for_users ); ?>';
                 if (selectedDates.length >= 1) {
                     const startDateObj = selectedDates[0];
                     const endDateObj = selectedDates.length === 2 ? selectedDates[1] : selectedDates[0];

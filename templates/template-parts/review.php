@@ -79,9 +79,9 @@ if ( ( get_post_type( $tourfic_post_id ) == 'tf_tours' && $tourfic_tour_selected
      ( get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template == "design-3" ) ||
      ( get_post_type( $tourfic_post_id ) == "tf_apartment" && $tourfic_apartment_selected_template != "default" ) ) {
 
-	if ( $comments ) {
+	if ( $tourfic_comments ) {
 		$tourfic_overall_rate = [];
-		TF_Review::tf_calculate_comments_rating( $comments, $tourfic_overall_rate, $total_rating );
+		TF_Review::tf_calculate_comments_rating( $tourfic_comments, $tourfic_overall_rate, $total_rating );
 		TF_Review::tf_get_review_fields( $fields );
 		$tourfic_settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
 		?>
@@ -105,7 +105,7 @@ if ( ( get_post_type( $tourfic_post_id ) == 'tf_tours' && $tourfic_tour_selected
 		                    echo '<span>'. esc_html__("Wonderful", "tourfic") .'</span>';
 	                    } ?>
                         <ul class="tf-list">
-                            <li><i class="fa-solid fa-circle-check"></i><?php esc_html_e( "From ", "tourfic" ); ?> <?php TF_Review::tf_based_on_text( count( $comments ) ); ?></li>
+                            <li><i class="fa-solid fa-circle-check"></i><?php esc_html_e( "From ", "tourfic" ); ?> <?php TF_Review::tf_based_on_text( count( $tourfic_comments ) ); ?></li>
                         </ul>
                     </div>
                 </div>
@@ -141,11 +141,11 @@ if ( ( get_post_type( $tourfic_post_id ) == 'tf_tours' && $tourfic_tour_selected
                 <?php if(get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template == "design-3"): ?>
                     <h5 class="tf-section-title"><?php esc_html_e( "Guest’s reviews", "tourfic" ); ?></h5>
                 <?php else : ?>
-                    <h2 class="tf-title tf-section-title"><?php esc_html_e( "Showing", "tourfic" ); ?> <span><?php echo count( $comments ); ?></span> <?php esc_html_e( "Review", "tourfic" ); ?></h2>
+                    <h2 class="tf-title tf-section-title"><?php esc_html_e( "Showing", "tourfic" ); ?> <span><?php echo count( $tourfic_comments ); ?></span> <?php esc_html_e( "Review", "tourfic" ); ?></h2>
                 <?php endif; ?>
             </div>
 			<?php
-			foreach ( $comments as $comment ) {
+			foreach ( $tourfic_comments as $comment ) {
 
 				// Get rating details
 				$tourfic_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
@@ -187,7 +187,7 @@ if ( ( get_post_type( $tourfic_post_id ) == 'tf_tours' && $tourfic_tour_selected
 				        <?php if(get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template != "design-3"): ?>
                             <div class="tf-review-date">
                                 <ul class="tf-list">
-                                    <li><i class="fa-regular fa-clock"></i> <?php echo esc_html( wp_date( "F d, Y", strtotime( $c_date ) ) ); ?></li>
+                                    <li><i class="fa-regular fa-clock"></i> <?php echo esc_html( wp_date( "F d, Y", strtotime( $tourfic_c_date ) ) ); ?></li>
                                 </ul>
                             </div>
                         <?php endif; ?>

@@ -76,6 +76,16 @@ class Gallery {
 			$gallery_ids = explode( ',', $gallery );
 		}
 
+		if (
+			'style3' === $style
+			&& 'tf_apartment' === $post_type
+			&& has_post_thumbnail( $post_id )
+		) {
+			$featured_image_id = (string) get_post_thumbnail_id( $post_id );
+			$gallery_ids       = array_values( array_diff( $gallery_ids, array( $featured_image_id ) ) );
+			array_unshift( $gallery_ids, $featured_image_id );
+		}
+
 		$disable_review_sec = ! empty( $disable_review_sec ) ? $disable_review_sec : $s_review;
 
 		echo ! empty( $wrapper_open ) ? wp_kses_post( $wrapper_open ) : '';

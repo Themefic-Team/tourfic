@@ -24,7 +24,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
                 </div>
                 <div class="tf-hero-gallery-videos">
                     <?php
-                    if ( ! empty( $gallery_ids ) ) {
+                    if ( ! empty( $tourfic_gallery_ids ) ) {
                     ?>
                     <div class="tf-hero-hotel tf-popup-buttons">
                         <a href="#">
@@ -115,7 +115,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
     ?>
 
     <?php
-    if ( ! empty( $gallery_ids ) ) {
+    if ( ! empty( $tourfic_gallery_ids ) ) {
     ?>
     <!-- Hotel PopUp Starts -->
     <div class="tf-popup-wrapper tf-hotel-popup">
@@ -123,8 +123,8 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
 
             <div class="tf-popup-body">
                 <?php
-                    if ( ! empty( $gallery_ids ) ) {
-                    foreach ( $gallery_ids as $tourfic_key => $tourfic_gallery_item_id ) {
+                    if ( ! empty( $tourfic_gallery_ids ) ) {
+                    foreach ( $tourfic_gallery_ids as $tourfic_key => $tourfic_gallery_item_id ) {
                     $tourfic_image_url = wp_get_attachment_url( $tourfic_gallery_item_id, 'full' );
                 ?>
                 <img src="<?php echo esc_url($tourfic_image_url); ?>" alt="" class="tf-popup-image">

@@ -21,14 +21,14 @@ if(!empty($tourfic_expired_tour_showing )){
 }
 
 $tourfic_args = array(
-    'post_type' => $post_type,
+    'post_type' => $tourfic_post_type,
     'orderby'   => apply_filters( 'tf_archive_post_orderby', 'date' ),
     'order'     => apply_filters( 'tf_archive_post_order', 'DESC' ),
     'tax_query' => array(
         array (
-            'taxonomy' => $taxonomy,
+            'taxonomy' => $tourfic_taxonomy,
             'field'    => 'slug',
-            'terms'    => $taxonomy_slug,
+            'terms'    => $tourfic_taxonomy_slug,
         )
     ),
     'post_status'    => $tourfic_tour_posts_status,
@@ -45,13 +45,13 @@ $tourfic_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tf
 $tourfic_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 
 // Gird or List View
-if($post_type == "tf_hotel"){
+if($tourfic_post_type == "tf_hotel"){
     $tourfic_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] : 'list';
-}elseif($post_type == "tf_apartment"){
+}elseif($tourfic_post_type == "tf_apartment"){
     $tourfic_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_view'] : 'list';
-}elseif($post_type == "tf_tours"){
+}elseif($tourfic_post_type == "tf_tours"){
     $tourfic_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_view'] : 'list';
-}elseif($post_type == "tf_carrental"){
+}elseif($tourfic_post_type == "tf_carrental"){
     $tourfic_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] : 'grid';
 }
 
@@ -59,7 +59,7 @@ $tourfic_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tf
 $tourfic_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
 $tourfic_map_marker = !empty(Helper::tfopt('map_template_marker')) ? Helper::tfopt('map_template_marker') : '';
 
-if( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="design-1" ) || ( $post_type == "tf_tours" && $tourfic_tour_arc_selected_template=="design-1" ) ){
+if( ( $tourfic_post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="design-1" ) || ( $tourfic_post_type == "tf_tours" && $tourfic_tour_arc_selected_template=="design-1" ) ){
 ?>
 <div class="tf-column tf-page-content tf-archive-left tf-result-previews">
 <!-- Search Head Section -->
@@ -139,9 +139,9 @@ if( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="design-
         if ( $tourfic_loop->have_posts() ) {
             while ( $tourfic_loop->have_posts() ) {
                 $tourfic_loop->the_post(); 
-                if( $post_type == 'tf_hotel' ){
+                if( $tourfic_post_type == 'tf_hotel' ){
 	                Hotel::tf_hotel_archive_single_item();
-                } elseif( $post_type == 'tf_tours' ) {
+                } elseif( $tourfic_post_type == 'tf_tours' ) {
                     Tour::tf_tour_archive_single_item();
                 }
             }
@@ -156,17 +156,17 @@ if( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="design-
     </div>
 </div>
 <?php }
-elseif( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="design-2" ) ||
-    ( $post_type == "tf_tours" && $tourfic_tour_arc_selected_template=="design-2" ) ||
-    ( $post_type == "tf_apartment" && $tourfic_apartment_arc_selected_template=="design-1" ) ){ ?>
+elseif( ( $tourfic_post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="design-2" ) ||
+    ( $tourfic_post_type == "tf_tours" && $tourfic_tour_arc_selected_template=="design-2" ) ||
+    ( $tourfic_post_type == "tf_apartment" && $tourfic_apartment_arc_selected_template=="design-1" ) ){ ?>
 
     <!--Available rooms start -->
     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
         <div class="tf-archive-available-rooms-head tf-available-rooms-head">
             <h3 class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html($tourfic_total_posts); ?></span>
-            <?php if($post_type == "tf_hotel"){
+            <?php if($tourfic_post_type == "tf_hotel"){
                 esc_html_e("hotels available", "tourfic");
-            }elseif($post_type == "tf_apartment"){
+            }elseif($tourfic_post_type == "tf_apartment"){
                 esc_html_e("apartments available", "tourfic");
             }else{
                 esc_html_e("tours available", "tourfic");
@@ -191,11 +191,11 @@ elseif( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="des
                 while ( $tourfic_loop->have_posts() ) {
                     $tourfic_loop->the_post(); 
 
-                    if( $post_type == 'tf_hotel' ){
+                    if( $tourfic_post_type == 'tf_hotel' ){
 	                    Hotel::tf_hotel_archive_single_item();
-                    } elseif( $post_type == 'tf_tours' ) {
+                    } elseif( $tourfic_post_type == 'tf_tours' ) {
                         Tour::tf_tour_archive_single_item();
-                    } elseif( $post_type == 'tf_apartment' ) {
+                    } elseif( $tourfic_post_type == 'tf_apartment' ) {
                         Apartment::tf_apartment_archive_single_item();
                     }
                 }
@@ -212,9 +212,9 @@ elseif( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="des
     </div>
     <!-- Available rooms end -->
 
-<?php } elseif( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="design-3" ) ||
-    ( $post_type == "tf_tours" && $tourfic_tour_arc_selected_template=="design-3" ) ||
-    ( $post_type == "tf_apartment" && $tourfic_apartment_arc_selected_template=="design-2" ) ){ ?>
+<?php } elseif( ( $tourfic_post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="design-3" ) ||
+    ( $tourfic_post_type == "tf_tours" && $tourfic_tour_arc_selected_template=="design-3" ) ||
+    ( $tourfic_post_type == "tf_apartment" && $tourfic_apartment_arc_selected_template=="design-2" ) ){ ?>
     <?php if ($tourfic_loop->have_posts()) : ?>
         <div class="tf-archive-details-wrap">
             <div class="tf-archive-details">
@@ -282,7 +282,7 @@ elseif( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="des
                                             <i class="ri-equalizer-line"></i>
                                             <span><?php esc_html_e("All Filter", "tourfic"); ?></span>
                                         </li>
-                                        <li class="tf-archive-view-item tf-archive-list-view <?php echo $tf_defult_views == "list" ? esc_attr('active') : ''; ?>" data-id="list-view">
+                                        <li class="tf-archive-view-item tf-archive-list-view <?php echo $tourfic_defult_views == "list" ? esc_attr('active') : ''; ?>" data-id="list-view">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                 <path d="M1.33398 7.59996C1.33398 6.82778 1.49514 6.66663 2.26732 6.66663H13.734C14.5062 6.66663 14.6673 6.82778 14.6673 7.59996V8.39996C14.6673 9.17214 14.5062 9.33329 13.734 9.33329H2.26732C1.49514 9.33329 1.33398 9.17214 1.33398 8.39996V7.59996Z"
                                                       stroke="#6E655E" stroke-linecap="round"/>
@@ -292,7 +292,7 @@ elseif( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="des
                                                       stroke="#6E655E" stroke-linecap="round"/>
                                             </svg>
                                         </li>
-                                        <li class="tf-archive-view-item tf-archive-grid-view <?php echo $tf_defult_views == "grid" ? esc_attr('active') : ''; ?>" data-id="grid-view">
+                                        <li class="tf-archive-view-item tf-archive-grid-view <?php echo $tourfic_defult_views == "grid" ? esc_attr('active') : ''; ?>" data-id="grid-view">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                 <path d="M1.33398 12C1.33398 10.973 1.33398 10.4595 1.56514 10.0823C1.69448 9.87127 1.87194 9.69381 2.08301 9.56447C2.46021 9.33331 2.97369 9.33331 4.00065 9.33331C5.02761 9.33331 5.54109 9.33331 5.9183 9.56447C6.12936 9.69381 6.30682 9.87127 6.43616 10.0823C6.66732 10.4595 6.66732 10.973 6.66732 12C6.66732 13.0269 6.66732 13.5404 6.43616 13.9176C6.30682 14.1287 6.12936 14.3062 5.9183 14.4355C5.54109 14.6666 5.02761 14.6666 4.00065 14.6666C2.97369 14.6666 2.46021 14.6666 2.08301 14.4355C1.87194 14.3062 1.69448 14.1287 1.56514 13.9176C1.33398 13.5404 1.33398 13.0269 1.33398 12Z"
                                                       stroke="#6E655E" stroke-width="1.2"/>
@@ -308,15 +308,15 @@ elseif( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="des
                                 </div>
 
                                 <!--Available rooms start -->
-                                <div class="tf-archive-hotels archive_ajax_result <?php echo $tf_defult_views == "list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?>">
+                                <div class="tf-archive-hotels archive_ajax_result <?php echo $tourfic_defult_views == "list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?>">
 
                                     <?php
                                     $tourfic_count = 0;
                                     $tourfic_locations = [];
-                                    while ( $loop->have_posts() ) {
-                                        $loop->the_post();
+                                    while ( $tourfic_loop->have_posts() ) {
+                                        $tourfic_loop->the_post();
 
-                                        if ( $post_type == 'tf_hotel' ) {
+                                        if ( $tourfic_post_type == 'tf_hotel' ) {
                                             $tourfic_hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
                                             if ( ! Hotel::is_featured_hotel_meta( $tourfic_hotel_meta ) ) {
                                                 continue;
@@ -388,7 +388,7 @@ elseif( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="des
                                             }
 
                                             Hotel::tf_hotel_archive_single_item();
-                                        } elseif($post_type == 'tf_tours'){
+                                        } elseif($tourfic_post_type == 'tf_tours'){
                                             $tourfic_tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
 
                                             if ( ! $tourfic_tour_meta["tour_as_featured"] ) {
@@ -461,7 +461,7 @@ elseif( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="des
                                             }
 
                                             Tour::tf_tour_archive_single_item();
-                                        } elseif($post_type == 'tf_apartment'){
+                                        } elseif($tourfic_post_type == 'tf_apartment'){
                                             $tourfic_meta = get_post_meta(get_the_ID(), 'tf_apartment_opt', true);
                                             $tourfic_is_apartment_featured = is_array( $tourfic_meta ) && ! empty( $tourfic_meta['apartment_as_featured'] );
                                             if ( ! $tourfic_is_apartment_featured ) {
@@ -536,12 +536,12 @@ elseif( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="des
                                         }
                                     }
 
-                                    $loop->rewind_posts();
+                                    $tourfic_loop->rewind_posts();
 
-                                    while ( $loop->have_posts() ) {
-                                        $loop->the_post();
+                                    while ( $tourfic_loop->have_posts() ) {
+                                        $tourfic_loop->the_post();
 
-                                        if ( $post_type == 'tf_hotel' ) {
+                                        if ( $tourfic_post_type == 'tf_hotel' ) {
                                             $tourfic_hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
                                             if ( Hotel::is_featured_hotel_meta( $tourfic_hotel_meta ) ) {
                                                 continue;
@@ -613,7 +613,7 @@ elseif( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="des
                                             }
 
                                             Hotel::tf_hotel_archive_single_item();
-                                        } elseif($post_type == 'tf_tours'){
+                                        } elseif($tourfic_post_type == 'tf_tours'){
                                             $tourfic_tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
 
                                             if ( !empty($tourfic_tour_meta["tour_as_featured"]) && $tourfic_tour_meta["tour_as_featured"] ) {
@@ -686,7 +686,7 @@ elseif( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="des
                                             }
 
                                             Tour::tf_tour_archive_single_item();
-                                        } elseif($post_type == 'tf_apartment'){
+                                        } elseif($tourfic_post_type == 'tf_apartment'){
                                             $tourfic_meta = get_post_meta(get_the_ID(), 'tf_apartment_opt', true);
                                             $tourfic_is_apartment_featured = is_array( $tourfic_meta ) && ! empty( $tourfic_meta['apartment_as_featured'] );
                                             if ( $tourfic_is_apartment_featured ) {
@@ -817,13 +817,13 @@ elseif( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="des
             <span class="tf-counter-title"><?php echo esc_html__( 'Total Results', 'tourfic' ); ?> </span>
             <span><?php echo '('; ?> </span>
             <div class="tf-total-results">
-                <span><?php echo esc_html($total_posts); ?> </span>
+                <span><?php echo esc_html($tourfic_total_posts); ?> </span>
             </div>
             <span><?php echo ')'; ?> </span>
         </div>
         <div class="tf-list-grid">
-            <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_attr_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
-            <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_attr_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
+            <a href="#list-view" data-id="list-view" class="change-view <?php echo $tourfic_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_attr_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
+            <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tourfic_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_attr_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
             <div class="tf-sorting-selection-warper">
                 <form class="tf-archive-ordering" method="get">
                     <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
@@ -840,18 +840,18 @@ elseif( ( $post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="des
             </div>
         </div>
     </div>
-    <div class="archive_ajax_result <?php echo $tf_defult_views=="grid" ? esc_attr('tours-grid') : '' ?>">
+    <div class="archive_ajax_result <?php echo $tourfic_defult_views=="grid" ? esc_attr('tours-grid') : '' ?>">
         <?php
-        if ( $loop->have_posts() ) {          
-            while ( $loop->have_posts() ) {
+        if ( $tourfic_loop->have_posts() ) {
+            while ( $tourfic_loop->have_posts() ) {
 
-                $loop->the_post(); 
+                $tourfic_loop->the_post();
 
-                if( $post_type == 'tf_hotel' ){
+                if( $tourfic_post_type == 'tf_hotel' ){
 	                Hotel::tf_hotel_archive_single_item();
-                } elseif( $post_type == 'tf_tours' ) {
+                } elseif( $tourfic_post_type == 'tf_tours' ) {
                     Tour::tf_tour_archive_single_item();
-                } elseif( $post_type == 'tf_apartment' ) {
+                } elseif( $tourfic_post_type == 'tf_apartment' ) {
                     Apartment::tf_apartment_archive_single_item();
                 }
                     

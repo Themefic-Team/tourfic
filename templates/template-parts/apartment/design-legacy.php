@@ -16,13 +16,13 @@ use \Tourfic\App\TF_Review;
                     <?php \Tourfic\App\Templates\Components\Shared\Single\Title::render(); ?>
                     <div class="tf-title-left-bottom">
 						<?php \Tourfic\App\Templates\Components\Shared\Single\Address::render(); ?>
-						<?php if ( $comments && ! $disable_review_sec == '1' ): ?>
+						<?php if ( $tourfic_comments && ! $tourfic_disable_review_sec == '1' ): ?>
                             <div class="tf-top-review">
                                 <a href="#tf-review">
                                     <div class="tf-single-rating">
                                         <i class="fas fa-star"></i>
-                                        <span><?php echo wp_kses_post( TF_Review::tf_total_avg_rating( $comments ) ); ?></span>
-                                        (<?php TF_Review::tf_based_on_text( count( $comments ) ); ?>)
+                                        <span><?php echo wp_kses_post( TF_Review::tf_total_avg_rating( $tourfic_comments ) ); ?></span>
+                                        (<?php TF_Review::tf_based_on_text( count( $tourfic_comments ) ); ?>)
                                     </div>
                                 </a>
                             </div>
@@ -78,11 +78,11 @@ use \Tourfic\App\TF_Review;
         </div>
     </div>
 
-	<?php if ( ! empty( $map['address'] ) || isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+	<?php if ( ! empty( $tourfic_map['address'] ) || isset( $tourfic_meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $tourfic_meta['surroundings_places'] ) ) ): ?>
         <div id="apartment-map" class="tf-apartment-map-wrapper">
             <div class="tf-container">
                 <div class="tf-row">
-					<div class="tf-map-content-wrapper <?php echo empty( $map['address'] ) || empty( $meta['surroundings_places'] ) ? 'tf-map-content-full' : ''; ?>">
+					<div class="tf-map-content-wrapper <?php echo empty( $tourfic_map['address'] ) || empty( $tourfic_meta['surroundings_places'] ) ? 'tf-map-content-full' : ''; ?>">
 						<?php \Tourfic\App\Templates\Components\Shared\Single\Map::render(['design' => 'design-2'], '', '600px'); ?>
 
 						<?php
