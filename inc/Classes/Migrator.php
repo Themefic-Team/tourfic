@@ -1377,7 +1377,7 @@ class Migrator {
 		}
 		
 		if (!in_array('reply_data', $existing_columns)) {
-			$wpdb->query( "ALTER TABLE {$wpdb->prefix}tf_enquiry_data ADD COLUMN `reply_data` LONGTEXT NOT NULL DEFAULT '' AFTER `server_data`" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
+			$wpdb->query( "ALTER TABLE {$wpdb->prefix}tf_enquiry_data ADD COLUMN `reply_data` LONGTEXT NULL AFTER `server_data`" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
 		}
 	}
 
