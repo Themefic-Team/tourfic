@@ -626,7 +626,7 @@
                     },
                     success: function (response) {
                         if(response){
-                            const obj = JSON.parse(response);
+                            const obj = typeof response === 'string' ? JSON.parse(response) : response;
 
                             let flatpickerObj = {
                                 enableTime: false,
