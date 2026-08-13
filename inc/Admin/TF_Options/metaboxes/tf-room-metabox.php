@@ -393,18 +393,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 			),
 		),
 
-        'room_ical'     => array(
-			'title'  => esc_html__( 'iCal Sync', 'tourfic' ),
-			'icon'   => 'fa-solid fa-calendar-days',
-			'fields' => array(
-                array(
-                    'id'      => 'ical',
-                    'type'    => 'heading',
-                    'title' => esc_html__( 'iCal Sync', 'tourfic' ),
-                ),
-			),
-		),
-
         // Settings
 		'settings'         => array(
 			'title'  => esc_html__( 'Settings', 'tourfic' ),

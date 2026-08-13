@@ -335,24 +335,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 			),
 		),
 
-		//  Hotel Extra
-		'hotel_extra'           => array(
-			// translators: %s is the hotel name.
-			'title' => sprintf(esc_html__( '%s Extras', 'tourfic' ),
-				$tourfic_hotel_name
-			),
-			'icon'   => 'fa-solid fa-route',
-			'fields' => array(
-				array(
-					'id'    => 'hotel-extras-heading',
-					'type'  => 'heading',
-					'title' => esc_html__('Offer Hotel Extras', 'tourfic'),
-					'content' => esc_html__( 'If you wish to provide additional services that are not included in your current hotel package, you can list them here.', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-extra/')
-				),
-			),
-		),
-
 		// Room Details
 		'room_details'     => array(
 			'title'  => esc_html__( 'Room Management', 'tourfic' ),

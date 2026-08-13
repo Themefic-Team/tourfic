@@ -692,20 +692,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			),
 		),
 
-		// Car Extra
-		'car_extra'         => array(
-			'title'  => esc_html__( 'Rental Extras', 'tourfic' ),
-			'icon'   => 'fa-solid fa-route',
-			'fields' => array(
-				array(
-					'id'    => 'car-extra-heading',
-					'type'  => 'heading',
-					'title' => esc_html__('Rental Extras', 'tourfic'),
-					'content' => esc_html__( 'Include the extras you want to sell with this package. e.g. Baby child seat, navigation system, etc.', 'tourfic' ),
-				),
-			),
-		),
-
 		// Protection
 		'protection'              => array(
 			'title'  => esc_html__( 'Protection Plan', 'tourfic' ),
@@ -802,21 +788,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					],
 				),
 				
-			),
-		),
-
-		//  Cancellation
-		'cancellation'              => array(
-			'title'  => esc_html__( 'Cancellation', 'tourfic' ),
-			'icon'   => 'fa-solid fa-arrow-rotate-left',
-			'fields' => array(
-			
-				array(
-					'id'    => 'car-cancellation-heading',
-					'type'  => 'heading',
-					'title' => esc_html__( 'Cancellation Condition', 'tourfic' ),
-					'content' => esc_html__( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
-				),
 			),
 		),
 

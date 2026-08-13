@@ -326,21 +326,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				),
 			),
 		),
-		// //  Tour Extra
-		'tour_extra'           => array(
-			'title'  => esc_html__( 'Tour Extras', 'tourfic' ),
-			'icon'   => 'fa-solid fa-route',
-			'fields' => array(
-				array(
-					'id'    => 'tour-extras-heading',
-					'type'  => 'heading',
-					'title' => esc_html__( 'Offer Tour Extras', 'tourfic' ),
-					'content' => esc_html__( 'If you wish to provide additional services that are not included in your current tour package, you can list them here.', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-extra/')
-				),
-			),
-		),
-
 		// // Price
 		'price'                => array(
 			'title'  => esc_html__( 'Pricing', 'tourfic' ),
