@@ -133,7 +133,7 @@ $apartment_price = tf_booking_security_function_body( $apartment_source, 'tf_apr
 $car_price       = tf_booking_security_function_body( $car_source, 'tf_car_set_order_price' );
 
 tf_booking_security_assert(
-	false !== strpos( $tour_price, 'max( 0, $tour_price )' ),
+	false !== strpos( $tour_price, "max( 0, \$cart_item['tf_tours_data']['price'] + \$adjustment_total )" ),
 	'Tour cart price setter must not apply negative totals.'
 );
 tf_booking_security_assert(

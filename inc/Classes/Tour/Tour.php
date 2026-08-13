@@ -1005,7 +1005,6 @@ class Tour {
 		$adult_price            = ! empty( $avail_prices['adult_price'] ) ? $avail_prices['adult_price'] : $adult_price;
 		$child_price            = ! empty( $avail_prices['child_price'] ) ? $avail_prices['child_price'] : $children_price;
 		$infant_price           = ! empty( $avail_prices['infant_price'] ) ? $avail_prices['infant_price'] : $infant_price;
-		$tour_extras            = apply_filters( 'tf_tour_extra_meta', null, $post_id, $meta );
 		$tf_hide_external_price = true;
 
 		// Single Template Check
@@ -1944,18 +1943,25 @@ class Tour {
                         <ul>
 							<?php
 							$meta        = get_post_meta( $post_id, 'tf_tours_opt', true );
-							$tour_extras = apply_filters( 'tf_tour_extra_meta', null, $post_id, $meta );
+							$booking_extension = apply_filters( 'tourfic_tour_booking_extension', array(), $post_id, $meta );
+							$has_booking_extension = ! empty( $booking_extension ) && is_array( $booking_extension );
+							$booking_extension_label = ! empty( $booking_extension['label'] )
+								? sanitize_text_field( $booking_extension['label'] )
+								: esc_html__( 'Options', 'tourfic' );
+							$booking_extension_icon = ! empty( $booking_extension['icon'] )
+								? sanitize_html_class( $booking_extension['icon'] )
+								: 'ri-price-tag-3-line';
 
 							$traveller_info_coll = function_exists( 'tf_tour_is_traveler_info_enabled' ) ? tf_tour_is_traveler_info_enabled( $meta ) : false;
 							$tf_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 							$pricing_type = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 							$package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 							$booking_info_step = ! empty( $traveller_info_coll ) ? 4 : 3;
-							if ( empty( $traveller_info_coll ) && $pricing_type == 'package' && $package_pricing && empty( $tour_extras ) ) {
+							if ( empty( $traveller_info_coll ) && $pricing_type == 'package' && $package_pricing && ! $has_booking_extension ) {
 								$booking_info_step = 2;
 							}
 							$active_steps = [];
-							if( ($pricing_type!='package' || empty($package_pricing)) && empty( $tour_extras ) && empty( $traveller_info_coll ) && 3 != $tf_booking_by ){ ?>
+							if( ($pricing_type!='package' || empty($package_pricing)) && ! $has_booking_extension && empty( $traveller_info_coll ) && 3 != $tf_booking_by ){ ?>
 								<li class="tf-booking-step tf-booking-step-1 active">
 									<i class="ri-box-3-line"></i> <?php echo esc_html__( "Details", "tourfic" ); ?>
 								</li>
@@ -1967,17 +1973,17 @@ class Tour {
 									<i class="ri-box-3-line"></i> <?php echo esc_html__( "Packages", "tourfic" ); ?>
 								</li>
 							<?php }
-							if ( $tour_extras ) {
+							if ( $has_booking_extension ) {
 							$active_steps[2] = 2;
 							?>
                                 <li class="tf-booking-step tf-booking-step-2 <?php echo ($pricing_type!='package' || empty( $package_pricing )) ? esc_attr( 'active' ) : ''; ?>">
-                                    <i class="ri-price-tag-3-line"></i> <?php echo esc_html__( "Tour extra", "tourfic" ); ?>
+									<i class="<?php echo esc_attr( $booking_extension_icon ); ?>"></i> <?php echo esc_html( $booking_extension_label ); ?>
                                 </li>
 							<?php }
 							if ( $traveller_info_coll ) {
 								$active_steps[3] = 3;
 								?>
-                                <li class="tf-booking-step tf-booking-step-3 <?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) ? esc_attr( 'active' ) : ''; ?> ">
+                                <li class="tf-booking-step tf-booking-step-3 <?php echo ($pricing_type!='package' || empty( $package_pricing )) && ! $has_booking_extension ? esc_attr( 'active' ) : ''; ?> ">
                                     <i class="ri-group-line"></i> <?php echo esc_html__( "Traveler info", "tourfic" ); ?>
                                 </li>
 							<?php }
@@ -1985,7 +1991,7 @@ class Tour {
 							if ( 3 == $tf_booking_by ) {
 								$active_steps[ $booking_info_step ] = $booking_info_step;
 								?>
-                                <li class="tf-booking-step tf-booking-step-<?php echo esc_attr( $booking_info_step ); ?> <?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( 'active' ) : ''; ?>">
+                                <li class="tf-booking-step tf-booking-step-<?php echo esc_attr( $booking_info_step ); ?> <?php echo ($pricing_type!='package' || empty( $package_pricing )) && ! $has_booking_extension && empty( $traveller_info_coll ) ? esc_attr( 'active' ) : ''; ?>">
                                     <i class="ri-calendar-check-line"></i> <?php echo esc_html__( "Booking info", "tourfic" ); ?>
                                 </li>
 							<?php } ?>
@@ -2105,13 +2111,13 @@ class Tour {
 							</div>
 						</div>
 					<?php } ?>
-                    <!-- Popup Tour Extra -->
-					<?php do_action( 'tf_tour_render_extras_tab', $post_id, $meta, $pricing_type, $package_pricing, $tour_extras );
+					<!-- Popup booking extension -->
+					<?php do_action( 'tourfic_tour_render_booking_extension_tab', $post_id, $meta, $pricing_type, $package_pricing, $booking_extension );
 					if ( $traveller_info_coll ) {
 						?>
 
                         <!-- Popup Traveler Info -->
-                        <div class="tf-booking-content tf-booking-content-3 <?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-booking-content tf-booking-content-3 <?php echo ($pricing_type!='package' || empty( $package_pricing )) && ! $has_booking_extension ? esc_attr( 'show' ) : ''; ?>">
                             <p><?php echo esc_html( $traveler_details_text ); ?></p>
                             <div class="tf-booking-content-traveller">
                                 <div class="tf-traveller-info-box"></div>
@@ -2122,7 +2128,7 @@ class Tour {
 						?>
 
                         <!-- Popup Booking Confirmation -->
-                        <div class="tf-booking-content tf-booking-content-<?php echo esc_attr( $booking_info_step ); ?> <?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-booking-content tf-booking-content-<?php echo esc_attr( $booking_info_step ); ?> <?php echo ($pricing_type!='package' || empty( $package_pricing )) && ! $has_booking_extension && empty( $traveller_info_coll ) ? esc_attr( 'show' ) : ''; ?>">
                             <p><?php echo esc_html( $traveler_details_text ); ?></p>
                             <div class="tf-booking-content-traveller">
                                 <div class="tf-single-tour-traveller">
@@ -2238,7 +2244,7 @@ class Tour {
 					<?php } ?>
 
                     <!-- Popup Booking Summary -->
-                    <div class="tf-booking-summery" style="<?php echo ($pricing_type!='package' || empty($package_pricing)) && empty( $tour_extras ) && empty( $traveller_info_coll ) && 3 != $tf_booking_by ? esc_attr( "width: 100%;" ) : ''; ?>">
+                    <div class="tf-booking-summery" style="<?php echo ($pricing_type!='package' || empty($package_pricing)) && ! $has_booking_extension && empty( $traveller_info_coll ) && 3 != $tf_booking_by ? esc_attr( "width: 100%;" ) : ''; ?>">
                         <div class="tf-booking-fixed-summery">
                             <h5><?php echo esc_html__( "Booking Summary", "tourfic" ); ?></h5>
                             <h4><?php echo esc_html( get_the_title( $post_id ) ); ?></h4>
@@ -2283,7 +2289,7 @@ class Tour {
                             </div>
                         </div>
 					<?php } ?>
-					<?php if ( ($pricing_type!='package' || empty($package_pricing)) && empty( $tour_extras ) && 3 != $tf_booking_by && empty( $traveller_info_coll ) ) { ?>
+					<?php if ( ($pricing_type!='package' || empty($package_pricing)) && ! $has_booking_extension && 3 != $tf_booking_by && empty( $traveller_info_coll ) ) { ?>
                         <div class="tf-control-pagination show">
                             <button type="submit" class="tf_btn"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
                         </div>
@@ -2292,7 +2298,7 @@ class Tour {
 					if ( $pricing_type=='package' && $package_pricing ) { ?>
                         <div class="tf-control-pagination show tf-pagination-content-1">
 							<?php
-							if ( empty( $tour_extras ) && 3 != $tf_booking_by && empty( $traveller_info_coll ) ) { ?>
+							if ( ! $has_booking_extension && 3 != $tf_booking_by && empty( $traveller_info_coll ) ) { ?>
                                 <button type="submit" class="tf_btn"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
 							<?php } else { ?>
                                 <a href="#" class="tf-next-control tf-tabs-control tf_btn"
@@ -2301,7 +2307,7 @@ class Tour {
                         </div>
 					<?php }
 
-					if ( ( $tour_extras ) ) { ?>
+					if ( $has_booking_extension ) { ?>
                         <div class="tf-control-pagination tf-pagination-content-2 <?php echo $pricing_type!='package' || empty( $package_pricing ) ? esc_attr( 'show' ) : ''; ?>">
 							<?php
 							if ( $pricing_type=='package' && $package_pricing ) { ?>
@@ -2318,9 +2324,9 @@ class Tour {
 					if ( $traveller_info_coll ) { ?>
 
                         <!-- Popup Traveler Info -->
-                        <div class="tf-control-pagination tf-pagination-content-3 <?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-control-pagination tf-pagination-content-3 <?php echo ($pricing_type!='package' || empty( $package_pricing )) && ! $has_booking_extension ? esc_attr( 'show' ) : ''; ?>">
 							<?php
-							if ( ($tour_extras || ($pricing_type=='package' && $package_pricing) ) ) { ?>
+							if ( ( $has_booking_extension || ($pricing_type=='package' && $package_pricing) ) ) { ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="3"><i class="fa fa-angle-left"></i><?php echo esc_html__( "Back", "tourfic" ); ?></a>
 							<?php }
 							if ( 3 == $tf_booking_by ) {
@@ -2334,9 +2340,9 @@ class Tour {
 					if ( 3 == $tf_booking_by ) {
 						?>
                         <!-- Popup Booking Confirmation -->
-                        <div class="tf-control-pagination tf-pagination-content-<?php echo esc_attr( $booking_info_step ); ?> <?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-control-pagination tf-pagination-content-<?php echo esc_attr( $booking_info_step ); ?> <?php echo ($pricing_type!='package' || empty( $package_pricing )) && ! $has_booking_extension && empty( $traveller_info_coll ) ? esc_attr( 'show' ) : ''; ?>">
 							<?php
-							if ( ( $tour_extras || $traveller_info_coll || ( $pricing_type == 'package' && $package_pricing ) ) ) { ?>
+							if ( ( $has_booking_extension || $traveller_info_coll || ( $pricing_type == 'package' && $package_pricing ) ) ) { ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="<?php echo esc_attr( $booking_info_step ); ?>"><i class="fa fa-angle-left"></i><?php echo esc_html__( "Back", "tourfic" ); ?></a>
 							<?php } ?>
                             <button type="submit" class="tf-book-confirm-error tf_btn"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
@@ -4262,60 +4268,16 @@ class Tour {
 
 		}
 
-		// Tour extra
-		$tour_extra_total     = 0;
-		$tour_extra_title_arr = [];
-		$tour_extra_meta      = apply_filters( 'tf_tour_extra_meta', null, $post_id, $meta );
-		if ( ! empty( $tour_extra_meta ) ) {
-			$tour_extra_input = isset( $_POST['tour_extra'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
-				? ( is_array( $_POST['tour_extra'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
-					? array_map( 'sanitize_text_field', wp_unslash( $_POST['tour_extra'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
-					: sanitize_text_field( wp_unslash( $_POST['tour_extra'] ) ) ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
-				: [];
-			$tour_extra_quantity_input = isset( $_POST['tour_extra_quantity'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
-				? ( is_array( $_POST['tour_extra_quantity'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
-					? array_map( 'sanitize_text_field', wp_unslash( $_POST['tour_extra_quantity'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
-					: sanitize_text_field( wp_unslash( $_POST['tour_extra_quantity'] ) ) ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
-				: [];
-			$tour_extra_selection = Helper::tf_sanitize_tour_extra_selection(
-				$tour_extra_input,
-				$tour_extra_quantity_input
-			);
-			$tours_extra          = $tour_extra_selection['extras'];
-			$tour_extra_quantity  = $tour_extra_selection['quantities'];
-
-			if(!empty($tours_extra)){
-				foreach ( $tours_extra as $extra_key => $extra ) {
-					$tour_extra_pricetype = ! empty( $tour_extra_meta[ $extra ]['price_type'] ) ? $tour_extra_meta[ $extra ]['price_type'] : 'fixed';
-					if ( $tour_extra_pricetype == "fixed" ) {
-						if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-							$tour_extra_total       += $tour_extra_meta[ $extra ]['price'];
-							$tour_extra_title_arr[] = array(
-								'title' => $tour_extra_meta[ $extra ]['title'],
-								'price' => $tour_extra_meta[ $extra ]['price']
-							);
-						}
-					} else if ( $tour_extra_pricetype == "quantity" ) {
-						if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-							$extra_quantity          = isset( $tour_extra_quantity[ $extra_key ] ) ? max( 0, intval( $tour_extra_quantity[ $extra_key ] ) ) : 0;
-							$tour_extra_total       += $tour_extra_meta[ $extra ]['price'] * $extra_quantity;
-							$tour_extra_title_arr[] = array(
-								'title' => $tour_extra_meta[ $extra ]['title'] . " x " . $extra_quantity,
-								'price' => $tour_extra_meta[ $extra ]['price'] * $extra_quantity
-							);
-						}
-					} else {
-						if ( ! empty( $tour_extra_meta[ $extra ]['price'] ) && ! empty( $tour_extra_meta[ $extra ]['title'] ) ) {
-							$tour_extra_total       += ( $tour_extra_meta[ $extra ]['price'] * $total_people );
-							$tour_extra_title_arr[] = array(
-								'title' => $tour_extra_meta[ $extra ]['title'],
-								'price' => $tour_extra_meta[ $extra ]['price'] * $total_people
-							);
-						}
-					}
-				}
-				$tour_extra_total = max( 0, $tour_extra_total );
-			}
+		$booking_adjustments = Helper::tf_get_tour_booking_adjustments(
+			array(
+				'source'       => 'popup',
+				'post_id'      => $post_id,
+				'meta'         => $meta,
+				'total_people' => $total_people,
+			)
+		);
+		if ( ! empty( $booking_adjustments['errors'] ) ) {
+			$response['errors'] = array_merge( $response['errors'] ?? array(), $booking_adjustments['errors'] );
 		}
 
 		if ( ! array_key_exists( 'errors', $response ) || count( $response['errors'] ) == 0 ) {
@@ -4682,12 +4644,12 @@ class Tour {
 					}
 				}
 			}
-			if ( ! empty( $tour_extra_title_arr ) ) {
-				foreach ( $tour_extra_title_arr as $extra_info ) {
-					if ( ! empty( $extra_info['title'] ) && ! empty( $extra_info['price'] ) ) {
+			if ( ! empty( $booking_adjustments['summary_rows'] ) ) {
+				foreach ( $booking_adjustments['summary_rows'] as $adjustment_row ) {
+					if ( ! empty( $adjustment_row['label'] ) && ! empty( $adjustment_row['amount'] ) ) {
 						$response['traveller_summery'] .= '<tr>
-						<td align="left">' . esc_html( $extra_info['title'] ) . '</td>
-						<td align="right">' . wc_price( $extra_info['price'] ) . '</td>
+						<td align="left">' . esc_html( $adjustment_row['label'] ) . '</td>
+						<td align="right">' . wc_price( $adjustment_row['amount'] ) . '</td>
 					</tr>';
 					}
 				}
@@ -4719,7 +4681,7 @@ class Tour {
             <tfoot>
                 <tr>
                     <th align="left">' . esc_html__( 'Total', 'tourfic' ) . '</th>
-                    <th align="right">' . wc_price( $tf_tours_data_price + $tour_extra_total ) . '</th>
+                    <th align="right">' . wc_price( $tf_tours_data_price + $booking_adjustments['total'] ) . '</th>
                 </tr>
             </tfoot>
         </table>';
@@ -4775,6 +4737,7 @@ class Tour {
 				$response['package_statuses'] = $package_status_map;
 			}
 
+			$response = array_merge( $response, $booking_adjustments['response_data'] );
 			$response = apply_filters(
 				'tourfic_tour_booking_response',
 				$response,

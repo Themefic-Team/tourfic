@@ -813,7 +813,6 @@ class TF_Demo_Importer {
 			'phone',
 			'fax',
 			'website',
-			'tour-extra',
 			'faqs',
 			'included',
 			'excluded',
@@ -825,6 +824,7 @@ class TF_Demo_Importer {
 			'terms_conditions',
 			'post_date',
 		);
+		$dummy_tours_fields = apply_filters( 'tourfic_demo_tour_import_fields', $dummy_tours_fields );
 		if ( isset( $dummy_tours_files ) ) {
 			$column_mapping_data = $dummy_tours_fields;
 			$csv_data            = array_map( 'str_getcsv', file( $dummy_tours_files ) );

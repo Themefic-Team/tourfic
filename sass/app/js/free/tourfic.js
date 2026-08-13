@@ -2767,9 +2767,6 @@
             let post_id = bookingState.postId;
             let deposit = bookingState.deposit;
             let selectedPackage = bookingState.selectedPackage;
-            var extras = [];
-            var quantity = [];
-
             if (!ensureTourDateSelected(settings.showDateError, $trigger.length ? $trigger : $form)) {
                 return false;
             }
@@ -2783,26 +2780,6 @@
                     $package.find('input[type="number"]').prop('disabled', !isSelected);
                 });
             }
-
-            $form.find('.tour-extra-single').each(function () {
-                let $extraItem = $(this);
-
-                if ($extraItem.find('input[name="tf-tour-extra"]').is(':checked')) {
-                    let tour_extras = $extraItem.find('input[name="tf-tour-extra"]').val();
-                    extras.push(tour_extras);
-
-                    if ($extraItem.find('.tf_quantity-acrselection').hasClass('quantity-active')) {
-                        let qty = $extraItem.find('input[name="extra-quantity"]').val();
-
-                        quantity.push(qty);
-                    } else {
-                        quantity.push(1);
-                    }
-                }
-            });
-
-            var extras = extras.join();
-            var quantities = quantity.join();
             var data = {
                 action: 'tf_tour_booking_popup',
                 _nonce: tf_params.nonce,
@@ -2811,8 +2788,6 @@
                 children: children,
                 infant: infant,
                 check_in_date: check_in_date,
-                tour_extra: extras,
-                tour_extra_quantity: quantities,
                 deposit: deposit,
                 selectedPackage: selectedPackage
             };
@@ -2929,16 +2904,11 @@
                 $dateWrapper.removeClass('tf-date-required');
             }
         });
-
-        $(document).on('change', '[name*=tf-tour-extra], input[name="extra-quantity"]', function () {
-            if (tfIsHotelExtraQuantityControl($(this))) {
-                return;
-            }
-
-            tourPopupBooking({
-                trigger: $(this)
-            });
-        });
+		$(document).on('tourfic:tour-booking:refresh', function (event, trigger) {
+			tourPopupBooking({
+				trigger: $(trigger)
+			});
+		});
 		$(document).on('change', '[name=deposit]', function () {
             tourPopupBooking({
                 trigger: $(this)
