@@ -739,8 +739,6 @@ if ( ! function_exists( 'tf_tour_store_traveler_document_upload' ) ) {
 			return $validation;
 		}
 
-		require_once ABSPATH . 'wp-admin/includes/file.php';
-
 		$upload = wp_handle_upload(
 			$file,
 			array(
@@ -771,7 +769,6 @@ if ( ! function_exists( 'tf_tour_store_traveler_document_upload' ) ) {
 			return new WP_Error( 'tf_traveler_attachment_error', esc_html__( 'Unable to save the uploaded traveler document.', 'tourfic' ) );
 		}
 
-		require_once ABSPATH . 'wp-admin/includes/image.php';
 		$attachment_data = wp_generate_attachment_metadata( $attachment_id, $upload['file'] );
 		wp_update_attachment_metadata( $attachment_id, $attachment_data );
 
@@ -1019,7 +1016,6 @@ if ( ! function_exists( 'tf_download_traveler_document' ) ) {
 			wp_die( esc_html__( 'The requested file is no longer available.', 'tourfic' ) );
 		}
 
-		require_once ABSPATH . 'wp-admin/includes/file.php';
 		WP_Filesystem();
 
 		global $wp_filesystem;
