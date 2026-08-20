@@ -1,3 +1,15 @@
 {
-    "license": "GPL-2.0-or-later"
+    "name": "themefic/tourfic",
+    "description": "Travel Booking, Hotel Booking & Car Rental plugin for WordPress.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Themefic",
+            "homepage": "https://themefic.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    }
 }
