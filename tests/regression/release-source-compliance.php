@@ -11,11 +11,12 @@ if ( 'cli' === PHP_SAPI && ! defined( 'ABSPATH' ) ) {
 }
 defined( 'ABSPATH' ) || exit;
 
-$root        = dirname( __DIR__, 2 );
-$readme      = file_get_contents( $root . '/readme.txt' );
-$select2_js  = $root . '/assets/app/libs/select2/select2.min.js';
-$select2_css = $root . '/assets/app/libs/select2/select2.min.css';
-$composer    = json_decode( file_get_contents( $root . '/composer.json' ), true );
+$root          = dirname( __DIR__, 2 );
+$readme        = file_get_contents( $root . '/readme.txt' );
+$select2_js    = $root . '/assets/app/libs/select2/select2.min.js';
+$select2_css   = $root . '/assets/app/libs/select2/select2.min.css';
+$composer      = json_decode( file_get_contents( $root . '/composer.json' ), true );
+$composer_lock = json_decode( file_get_contents( $root . '/composer.lock' ), true );
 
 function tf_release_source_assert( $condition, $message ) {
 	if ( ! $condition ) {
@@ -65,6 +66,26 @@ tf_release_source_assert(
 tf_release_source_assert(
 	'GPL-2.0-or-later' === ( $composer['license'] ?? '' ),
 	'Composer metadata must declare Tourfic\'s GPL-2.0-or-later license.'
+);
+tf_release_source_assert(
+	'themefic/tourfic' === ( $composer['name'] ?? '' ),
+	'Composer metadata must declare the Tourfic package name.'
+);
+tf_release_source_assert(
+	! empty( $composer['description'] ),
+	'Composer metadata must include a package description.'
+);
+tf_release_source_assert(
+	'wordpress-plugin' === ( $composer['type'] ?? '' ),
+	'Composer metadata must identify Tourfic as a WordPress plugin.'
+);
+tf_release_source_assert(
+	'>=7.4' === ( $composer['require']['php'] ?? '' ),
+	'Composer metadata must match Tourfic\'s PHP 7.4 minimum requirement.'
+);
+tf_release_source_assert(
+	'>=7.4' === ( $composer_lock['platform']['php'] ?? '' ),
+	'Composer lock metadata must match the manifest PHP requirement.'
 );
 
 foreach (
