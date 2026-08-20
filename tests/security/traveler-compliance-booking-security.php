@@ -149,6 +149,19 @@ tf_traveler_compliance_assert(
 	'Traveler age validation must derive the reference date from the selected date/range.'
 );
 
+$store_document_body = tf_traveler_compliance_function_body( $functions_source, 'tf_tour_store_traveler_document_upload' );
+$download_document_body = tf_traveler_compliance_function_body( $functions_source, 'tf_download_traveler_document' );
+tf_traveler_compliance_assert(
+	false === strpos( $store_document_body . $download_document_body, 'wp-admin/includes/' ),
+	'Traveler document handlers must use APIs loaded by their WordPress request entry points without directly loading core files.'
+);
+tf_traveler_compliance_assert(
+	false !== strpos( $store_document_body, 'wp_handle_upload(' )
+		&& false !== strpos( $store_document_body, 'wp_generate_attachment_metadata(' )
+		&& false !== strpos( $download_document_body, 'WP_Filesystem();' ),
+	'Traveler document handlers must retain the standard WordPress upload, metadata, and filesystem APIs.'
+);
+
 $validate_age_body = tf_traveler_compliance_function_body( $functions_source, 'tf_tour_validate_traveler_age_limits' );
 tf_traveler_compliance_assert(
 	false !== strpos( $validate_age_body, 'tf_tour_parse_user_date( $tour_date )' ),
