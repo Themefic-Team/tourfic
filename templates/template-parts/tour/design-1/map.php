@@ -1,5 +1,4 @@
-<!-- Tourfic Map -->
-<?php 
+<?php
 // Don't load directly
 defined( 'ABSPATH' ) || exit;
 
