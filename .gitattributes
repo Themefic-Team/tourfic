@@ -1,5 +1,10 @@
 /.gitattributes export-ignore
 /.gitignore export-ignore
 /.DS_Store export-ignore
+/README.md export-ignore
 /action-hook.md export-ignore
 /tests export-ignore
+/assets/admin/css/tourfic-admin.css.map export-ignore
+/assets/admin/css/tourfic-admin.min.css.map export-ignore
+/assets/app/css/tourfic-style.css.map export-ignore
+/assets/app/css/tourfic-style.min.css.map export-ignore

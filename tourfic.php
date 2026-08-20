@@ -75,8 +75,6 @@ final class Tourfic {
 		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		$this->define_constants();
 
-		require __DIR__ . '/vendor/autoload.php';
-
 		//Check if WooCommerce is active, and if it isn't, disable the plugin.
 		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 			add_action( 'admin_notices', array( $this, 'tf_is_woo' ) );

@@ -281,9 +281,6 @@ Join our [Facebook group](https://www.facebook.com/groups/tourfic) to stay infor
 
 We provide full support on the WordPress.org forums & [Our Website](https://portal.themefic.com/support/). Check our [Support Policy](https://themefic.com/support-policy/).
 
-### Privacy Policy
-Tourfic uses [Appsero](https://appsero.com/) SDK to collect some telemetry data. Appsero SDK does not gather any data by default. The SDK only starts gathering basic telemetry data when a user allows it via the admin notice. Appsero SDK DOES NOT IMMEDIATELY start gathering data, without confirmation from users in any case. We use this data to troubleshoot problems faster, make product improvements & ensure a great user experience for all our users.
-
 ### How can I report security bugs?
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/tourfic).
 
@@ -333,12 +330,6 @@ Data sent & when: The administrator IP address, browser details, and the current
 Terms: https://policies.google.com/terms
 Privacy: https://policies.google.com/privacy
 
-Appsero (appsero.com)
-Use: Collect opt-in diagnostic and usage data so the Tourfic team can troubleshoot compatibility issues and improve the plugin. No telemetry is sent unless an administrator explicitly accepts the Appsero notice.
-Data sent & when: After consent, Appsero may receive the site URL, WordPress/PHP/MySQL/server versions, administrator name and email, public IP address, locale, multisite status, active theme details, Tourfic version and activation state, and an optional deactivation reason.
-Service information: https://appsero.com/
-Privacy: https://appsero.com/privacy-policy/
-
 YouTube (youtube.com and img.youtube.com)
 Use: Display a video and its thumbnail when a site administrator adds a YouTube video URL to a Tourfic listing.
 Data sent & when: The video identifier, visitor IP address, browser details, and the current/referring page may be sent when the configured video is viewed.
@@ -374,7 +365,7 @@ To rebuild the distributed JavaScript and CSS files:
 2. Run `npm ci` in the plugin directory.
 3. Run `npm run build`.
 
-The build uses `webpack-config.js` and writes the generated bundles to the local `assets/` directory. PHP dependencies can be reproduced by running `composer install --no-dev` from the plugin directory.
+The build uses `webpack-config.js` and writes the generated bundles to the local `assets/` directory.
 
 = Bundled third-party source and licenses =
 
