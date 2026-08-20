@@ -90,6 +90,20 @@ tf_release_source_assert(
 
 foreach (
 	array(
+		'templates/template-parts/tour/design-1/include-exclude.php',
+		'templates/template-parts/tour/design-1/information.php',
+		'templates/template-parts/tour/design-1/itinerary.php',
+		'templates/template-parts/tour/design-1/map.php',
+	) as $php_first_template
+) {
+	tf_release_source_assert(
+		0 === strpos( file_get_contents( $root . '/' . $php_first_template ), '<?php' ),
+		'Template must begin with PHP before producing output: ' . $php_first_template . '.'
+	);
+}
+
+foreach (
+	array(
 		'assets/admin/images/ai-modal-bg.png',
 		'assets/admin/images/Ellipse_2009.png',
 		'sass/app/js/itinerary-map.js',
