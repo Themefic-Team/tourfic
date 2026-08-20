@@ -1,20 +1,20 @@
 <?php return array(
     'root' => array(
-        'name' => '__root__',
+        'name' => 'themefic/tourfic',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '60ef6a67bfb2c2256dfa9ef28b564c35af5f75ac',
-        'type' => 'library',
+        'reference' => 'cd649b741ab3ee16f1d5a6b551578bc2a55dc0de',
+        'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => false,
     ),
     'versions' => array(
-        '__root__' => array(
+        'themefic/tourfic' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '60ef6a67bfb2c2256dfa9ef28b564c35af5f75ac',
-            'type' => 'library',
+            'reference' => 'cd649b741ab3ee16f1d5a6b551578bc2a55dc0de',
+            'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
