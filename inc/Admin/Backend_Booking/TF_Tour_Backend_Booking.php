@@ -78,17 +78,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			),
 		);
 
-		$tf_tour_extras = array(
-			'id'          => 'tf_tour_extras',
-			'label'       => esc_html__( 'Tour Extras', 'tourfic' ),
-			'type'        => 'select2',
-			'multiple'    => true,
-			'options'     => 'posts',
-			'attributes'  => array(
-				'disabled' => 'disabled',
-			),
-			'field_width' => 50,
-		);
 		$tf_tour_packages = array(
 			'id'          => 'tf_tour_packages',
 			'label'       => esc_html__( 'Tour Packages', 'tourfic' ),
@@ -100,7 +89,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			'field_width' => 50,
 		);
 
-		array_push( $this->settings['tf_booking_fields']['fields'], $tf_tour_extras );
 		array_push( $this->settings['tf_booking_fields']['fields'], $tf_tour_packages );
 		$this->settings['tf_booking_fields']['fields'] = apply_filters(
 			'tourfic_tour_backend_booking_fields',
@@ -144,9 +132,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		$adult_price          = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : false;
 		$child_price          = ! empty( $meta['child_price'] ) ? $meta['child_price'] : false;
 		$infant_price         = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
-		$tour_extras          = apply_filters( 'tf_tour_extra_meta', null, $tour_id, $meta );
-
-
 		// Single Template Check
 		$tf_tour_layout_conditions = ! empty( $meta['tf_single_tour_layout_opt'] ) ? $meta['tf_single_tour_layout_opt'] : 'global';
 		if ( "single" == $tf_tour_layout_conditions ) {
@@ -157,20 +142,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		$tf_tour_selected_check = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
 
 		$tf_tour_selected_template = $tf_tour_selected_check;
-
-		$tour_extras_select_array = [];
-		if ( $tour_extras ) {
-			if (
-				( ! empty( $tour_extras[0]['title'] ) && ! empty( $tour_extras[0]['desc'] ) && ! empty( $tour_extras[0]['price'] ) ) ||
-				( ! empty( $tour_extras[1]['title'] ) && ! empty( $tour_extras[1]['desc'] ) && ! empty( $tour_extras[1]['price'] ) )
-			) {
-				foreach ( $tour_extras as $extrakey => $tour_extra ) {
-					$pricetype                             = ! empty( $tour_extra['price_type'] ) ? $tour_extra['price_type'] : 'fixed';
-					$tour_extra_pricetype                  = $pricetype === "fixed" ? esc_html( "(Fixed Price)" ) : esc_html( "(Per Person Price)" );
-					$tour_extras_select_array[ $extrakey ] = $tour_extra['title'] . $tour_extra_pricetype . ' - ' . wp_strip_all_tags( wc_price( $tour_extra['price'] ) );
-				}
-			}
-		}
 
 		$tour_packages_select_array = [];
 		if('package'==$pricing_rule){
@@ -229,7 +200,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			'adult_price'               => $adult_price,
 			'child_price'               => $child_price,
 			'infant_price'              => $infant_price,
-			'tour_extras_array'         => $tour_extras_select_array,
 			'tour_packages_array' 		=> $tour_packages_select_array,
 			'tf_tour_selected_template' => $tf_tour_selected_template,
 			'tour_availability'         => $core_availability,
@@ -279,7 +249,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			if ( '' === (string) $selected_package ) {
 				$selected_package = $this->tf_get_default_tour_package_id( intval( $field['tf_available_tours'] ) );
 			}
-			$res              = $this->tf_get_tour_total_price( intval( $field['tf_available_tours'] ), $field['tf_tour_date'], $field['tf_tour_time'] ?? '', $field['tf_tour_extras'] ?? '', intval( $field['tf_tour_adults_number'] ), intval( $field['tf_tour_children_number'] ), intval( $field['tf_tour_infants_number'] ), $selected_package );
+			$res              = $this->tf_get_tour_total_price( intval( $field['tf_available_tours'] ), $field['tf_tour_date'], $field['tf_tour_time'] ?? '', $field, intval( $field['tf_tour_adults_number'] ), intval( $field['tf_tour_children_number'] ), intval( $field['tf_tour_infants_number'] ), $selected_package );
 			$billing_details  = array(
 				'billing_first_name' => $field['tf_customer_first_name'],
 				'billing_last_name'  => $field['tf_customer_last_name'],
@@ -320,7 +290,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 				'order_by'    => $field['tf_tours_booked_by'],
 				'tour_date'   => $res['tour_date'],
 				'tour_time'   => $res['tf_tour_time_title'],
-				'tour_extra'  => $res['tf_tour_extra_title'],
 				'package'     => $tf_package_title,
 				'adult'       => $field['tf_tour_adults_number'],
 				'child'       => $field['tf_tour_children_number'],
@@ -329,6 +298,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 				'due_price'   => '',
 				'unique_id'   => wp_rand(),
 			];
+			$order_details = array_merge( $order_details, $res['order_details'] );
 
 			$order_data = array(
 				'post_id'          => intval( $field['tf_available_tours'] ),
@@ -371,7 +341,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		die();
 	}
 
-	public function tf_get_tour_total_price( $post_id, $tour_date, $tour_time, $tours_extra, $adults, $children, $infant, $selected_package = '' ) {
+	public function tf_get_tour_total_price( $post_id, $tour_date, $tour_time, $booking_data, $adults, $children, $infant, $selected_package = '' ) {
 		$response = array();
 		$tour_date = sanitize_text_field( $tour_date );
 		$tour_time = sanitize_text_field( $tour_time );
@@ -388,8 +358,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		// People number
 		$total_people         = $adults + $children + $infant;
 		$total_people_booking = $adults + $children;
-		$tour_extra_selection = Helper::tf_sanitize_tour_extra_selection( $tours_extra );
-		$tours_extra          = $tour_extra_selection['extras'];
 
 		$tour_availability = '';
 		if ( ! empty( $meta['tour_availability'] ) ) {
@@ -505,29 +473,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 					}
 				}
 			}
-
-		// Tour extra
-		$tour_extra_total     = 0;
-		$tour_extra_title_arr = [];
-		$tour_extra_meta      = apply_filters( 'tf_tour_extra_meta', null, $post_id, $meta );
-		if ( ! empty( $tour_extra_meta ) ) {
-			foreach ( $tours_extra as $extra ) {
-				$tour_extra_pricetype = ! empty( $tour_extra_meta[ $extra ]['price_type'] ) ? $tour_extra_meta[ $extra ]['price_type'] : 'fixed';
-				if ( $tour_extra_pricetype == "fixed" ) {
-					if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-						$tour_extra_total       += $tour_extra_meta[ $extra ]['price'];
-						$tour_extra_title_arr[] = $tour_extra_meta[ $extra ]['title'] . " (Fixed: " . wp_strip_all_tags( wc_price( $tour_extra_meta[ $extra ]['price'] ) ) . ")";
-					}
-				} else {
-					if ( ! empty( $tour_extra_meta[ $extra ]['price'] ) && ! empty( $tour_extra_meta[ $extra ]['title'] ) ) {
-						$tour_extra_total       += ( $tour_extra_meta[ $extra ]['price'] * $total_people );
-						$tour_extra_title_arr[] = $tour_extra_meta[ $extra ]['title'] . " (Per Person: " . wp_strip_all_tags( wc_price( $tour_extra_meta[ $extra ]['price'] ) ) . '*' . $total_people . "=" . wp_strip_all_tags( wc_price( $tour_extra_meta[ $extra ]['price'] * $total_people ) ) . ")";
-					}
-				}
-			}
-		}
-
-		$tour_extra_title = ! empty( $tour_extra_title_arr ) ? implode( ",", $tour_extra_title_arr ) : '';
 
 		/**
 		 * People 0 number validation
@@ -749,10 +694,23 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			$stored_tour_date = $start_date . ' - ' . $end_date;
 		}
 
+		$booking_adjustments = Helper::tf_get_tour_booking_adjustments(
+			array(
+				'source'       => 'backend',
+				'post_id'      => $post_id,
+				'meta'         => $meta,
+				'total_people' => $total_people,
+				'booking_data' => is_array( $booking_data ) ? $booking_data : array(),
+			)
+		);
+		if ( ! empty( $booking_adjustments['errors'] ) ) {
+			$response['errors'] = array_merge( $response['errors'] ?? array(), $booking_adjustments['errors'] );
+		}
+
 		return array(
 			'response'            => $response,
-			'tf_tour_price'       => !empty($tf_tour_price) ? $tf_tour_price + $tour_extra_total : 0,
-			'tf_tour_extra_title' => $tour_extra_title,
+			'tf_tour_price'       => !empty($tf_tour_price) ? $tf_tour_price + $booking_adjustments['total'] : 0,
+			'order_details'       => $booking_adjustments['order_details'],
 			'tf_tour_time_title'  => ! empty( $tour_time_title ) ? $tour_time_title : '',
 			'start_date'          => $start_date,
 			'end_date'            => $end_date,

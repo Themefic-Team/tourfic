@@ -343,8 +343,6 @@ class Enqueue {
 			// Same Day Booking
 			$disable_same_day = ! empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
 
-			$tour_extras = apply_filters( 'tf_tour_extras_for_script', null, $post_id, $meta );
-
 			$single_tour_form_data['tf_tour_selected_template'] = $tf_tour_selected_template;
 			$single_tour_form_data['pricing_rule']              = $pricing_rule;
 			$single_tour_form_data['first_day_of_week']         = ! empty( Helper::tfopt( "tf-week-day-flatpickr" ) ) ? Helper::tfopt( "tf-week-day-flatpickr" ) : 0;
@@ -994,7 +992,7 @@ class Enqueue {
 
 			wp_enqueue_script( 'tf-fullcalender', TF_ASSETS_ADMIN_URL . 'js/lib/fullcalender.min.js', array( 'jquery' ), TF_VERSION, true );
 
-			wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts'. $this->js_min .'.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post' ), TF_VERSION, true );
+		wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts'. $this->js_min .'.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post' ), TF_VERSION, true );
 			wp_localize_script( 'tf-admin', 'tf_admin_params',
 				array(
 					'tf_nonce'                         => wp_create_nonce( 'updates' ),

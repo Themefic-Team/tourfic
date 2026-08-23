@@ -86,12 +86,17 @@ tf_traveler_compliance_assert(
 );
 
 tf_traveler_compliance_assert(
-	false !== strpos( $tour_js_source, "\$this.find('.tour-extra-single')" ),
-	'Tour submit must collect extras from the submitted form only.'
+	false === strpos( $tour_js_source, 'tour-extra-single' ),
+	'Free tour submit must not implement Pro-owned Tour Extras collection.'
 );
 tf_traveler_compliance_assert(
-	false === strpos( $tour_js_source, "jQuery('.tour-extra-single" ),
-	'Tour submit must not read extras through a global selector.'
+	false !== strpos( $pro_tourfic_js_source, 'function collectTourExtras($form)' )
+		&& false !== strpos( $pro_tourfic_js_source, "\$form.find('.tour-extra-single')" ),
+	'Pro tour submit must collect Tour Extras from the submitted form only.'
+);
+tf_traveler_compliance_assert(
+	false === strpos( $pro_tourfic_js_source, "jQuery('.tour-extra-single" ),
+	'Pro tour submit must not read Tour Extras through a global selector.'
 );
 tf_traveler_compliance_assert(
 	false !== strpos( $tour_js_source, "\$this.find('.tf-booking-content-package input[name=\"tf_package\"]:checked').first()" ),

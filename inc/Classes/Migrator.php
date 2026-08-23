@@ -1026,7 +1026,6 @@ class Migrator {
 						$tour_time      = wc_get_order_item_meta( $item_key, 'Tour Time', true );
 						$price          = $itemmeta->get_subtotal();
 						$due            = wc_get_order_item_meta( $item_key, 'Due', true );
-						$tour_extra     = wc_get_order_item_meta( $item_key, 'Tour Extra', true );
 						$adult          = wc_get_order_item_meta( $item_key, 'Adults', true );
 						$child          = wc_get_order_item_meta( $item_key, 'Children', true );
 						$infants        = wc_get_order_item_meta( $item_key, 'Infants', true );
@@ -1043,13 +1042,13 @@ class Migrator {
 						$iteminfo = [
 							'tour_date'   => $tour_date,
 							'tour_time'   => $tour_time,
-							'tour_extra'  => $tour_extra,
 							'adult'       => $adult,
 							'child'       => $child,
 							'infants'     => $infants,
 							'total_price' => $price,
 							'due_price'   => $due,
 						];
+						$iteminfo = apply_filters( 'tourfic_migrated_tour_order_details', $iteminfo, $item_key, $itemmeta );
 
 						$iteminfo_keys = array_keys( $iteminfo );
 						$iteminfo_keys = array_map( 'sanitize_key', $iteminfo_keys );

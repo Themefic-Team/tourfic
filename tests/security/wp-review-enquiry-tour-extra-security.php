@@ -14,9 +14,12 @@ defined( 'ABSPATH' ) || exit;
 $root = dirname( __DIR__, 2 );
 
 $files = array(
-	'enquiry'  => $root . '/inc/Core/Enquiry.php',
-	'wc_tour'  => $root . '/inc/functions/woocommerce/wc-tour.php',
-	'tour_cls' => $root . '/inc/Classes/Tour/Tour.php',
+	'enquiry'      => $root . '/inc/Core/Enquiry.php',
+	'wc_tour'      => $root . '/inc/functions/woocommerce/wc-tour.php',
+	'tour_cls'     => $root . '/inc/Classes/Tour/Tour.php',
+	'backend_js'   => $root . '/sass/admin/js/free/backend-booking.js',
+	'pro_extras'   => dirname( $root ) . '/tourfic-pro/inc/classes/TF_Pro_Tour_Extras.php',
+	'pro_admin_js' => dirname( $root ) . '/tourfic-pro/sass/admin/js/pro/availability.js',
 );
 
 foreach ( $files as $label => $file ) {
@@ -72,9 +75,12 @@ function tf_wp_review_security_assert_order( $body, $first, $second, $message ) 
 	tf_wp_review_security_assert( $first_offset < $second_offset, $message );
 }
 
-$enquiry_source = tf_wp_review_security_file( $files['enquiry'] );
-$wc_tour_source = tf_wp_review_security_file( $files['wc_tour'] );
-$tour_cls_source = tf_wp_review_security_file( $files['tour_cls'] );
+$enquiry_source    = tf_wp_review_security_file( $files['enquiry'] );
+$wc_tour_source    = tf_wp_review_security_file( $files['wc_tour'] );
+$tour_cls_source   = tf_wp_review_security_file( $files['tour_cls'] );
+$backend_js_source = tf_wp_review_security_file( $files['backend_js'] );
+$pro_extras_source = tf_wp_review_security_file( $files['pro_extras'] );
+$pro_admin_js_source = tf_wp_review_security_file( $files['pro_admin_js'] );
 
 foreach ( array( 'tf_enquiry_filter_post_callback', 'tf_enquiry_filter_mail_callback' ) as $callback ) {
 	$body = tf_wp_review_security_function_body( $enquiry_source, $callback );
@@ -145,33 +151,43 @@ tf_wp_review_security_assert(
 	'Tour booking must remain publicly reachable for frontend bookings.'
 );
 tf_wp_review_security_assert(
-	false !== strpos( $wc_tour_booking, "\$tour_extra_title = '';" ),
-	'WooCommerce tour booking must keep tour_extra_title initialized for tours without extras.'
-);
-tf_wp_review_security_assert(
-	false !== strpos( $wc_tour_booking, 'max( 0, intval( $tour_extra_quantity[$extra_key] ) )' ),
-	'WooCommerce tour booking must normalize quantity-priced extras to non-negative integers.'
-);
-tf_wp_review_security_assert(
-	false !== strpos( $wc_tour_booking, '$tour_extra_total = max( 0, $tour_extra_total );' ),
-	'WooCommerce tour booking must floor computed tour extra total before storage.'
-);
-tf_wp_review_security_assert(
-	false === strpos( $wc_tour_booking, '* $tour_extra_quantity[$extra_key]' ),
-	'WooCommerce tour booking must not multiply directly by client-supplied extra quantity.'
+	false === strpos( $wc_tour_booking, 'tour_extra_quantity' )
+		&& false === strpos( $tour_cls_source, 'tour_extra_quantity' ),
+	'Tourfic Free must not process Pro-owned Tour Extra quantities.'
 );
 
+$sanitize_selection = tf_wp_review_security_function_body( $pro_extras_source, 'sanitize_selection' );
 tf_wp_review_security_assert(
-	false !== strpos( $tour_cls_source, 'max( 0, intval( $tour_extra_quantity[ $extra_key ] ) )' ),
-	'Tour details pricing must normalize quantity-priced extras to non-negative integers.'
+	false !== strpos( $sanitize_selection, 'absint( $quantities[ $key ] )' )
+		&& false !== strpos( $sanitize_selection, '0 < $quantity ? $quantity : 1' ),
+	'Pro Tour Extras must normalize submitted quantities to positive integers.'
+);
+
+$calculate_extras = tf_wp_review_security_function_body( $pro_extras_source, 'calculate' );
+tf_wp_review_security_assert(
+	false !== strpos( $calculate_extras, 'max( 1, absint( $quantities[ $key ] ?? 1 ) )' ),
+	'Pro Tour Extras must normalize quantity-priced calculations before multiplication.'
 );
 tf_wp_review_security_assert(
-	false !== strpos( $tour_cls_source, '$tour_extra_total = max( 0, $tour_extra_total );' ),
-	'Tour details pricing must floor computed tour extra total.'
+	false !== strpos( $calculate_extras, "'total'        => max( 0, \$total )" ),
+	'Pro Tour Extras must floor the computed adjustment total before returning it.'
 );
 tf_wp_review_security_assert(
-	false === strpos( $tour_cls_source, '* $tour_extra_quantity[ $extra_key ]' ),
-	'Tour details pricing must not multiply directly by client-supplied extra quantity.'
+	false === strpos( $calculate_extras, '* $quantities[ $key ]' ),
+	'Pro Tour Extras must not multiply directly by a client-supplied quantity.'
+);
+tf_wp_review_security_assert(
+	false !== strpos( $backend_js_source, "typeof response === 'string' ? JSON.parse(response) : response" ),
+	'Backend Tour selection must accept both text and WordPress-parsed JSON responses.'
+);
+tf_wp_review_security_assert(
+	false !== strpos( $backend_js_source, "$(document).trigger('tourfic:backend-tour-form-data', [obj])" ),
+	'Free backend booking must publish the neutral Tour form-data event.'
+);
+tf_wp_review_security_assert(
+	false !== strpos( $pro_admin_js_source, "$(document).on('tourfic:backend-tour-form-data'" )
+		&& false !== strpos( $pro_admin_js_source, "\$('[name=\"tf_tour_extras[]\"]')" ),
+	'Pro must own backend Tour Extras population through the neutral Free event.'
 );
 
 echo "WordPress review enquiry and tour-extra security regression checks passed.\n";

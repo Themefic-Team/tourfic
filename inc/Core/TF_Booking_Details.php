@@ -918,16 +918,8 @@ abstract Class TF_Booking_Details {
                                             ?>
                                             </td>
                                         </tr>
-                                        <?php 
-                                        if(!empty($tf_tour_details->tour_extra)){
-                                        ?>
-                                            <tr>
-                                                <th><?php esc_html_e("Extra", "tourfic"); ?></th>
-                                                <td>:</td>
-                                                <td><?php echo wp_kses_post($tf_tour_details->tour_extra); ?></td>
-                                            </tr>
-                                        <?php } ?>
-                                        <?php 
+										<?php
+										do_action( 'tourfic_tour_booking_detail_rows', $tf_tour_details, $tf_order_details );
                                         if(!empty($tf_tour_details->package)){
                                         ?>
                                             <tr>

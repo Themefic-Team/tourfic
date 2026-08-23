@@ -3393,33 +3393,6 @@ function convertTo24HourFormat(timeStr) {
             var formData = new FormData(this);
             formData.append('action', 'tf_tours_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
-
-
-            // Tour Extra
-            var tour_extra_total = [];
-            var tour_extra_quantity = [];
-
-            $this.find('.tour-extra-single').each(function (e) {
-                let $extra = jQuery(this);
-
-                if ($extra.find('input[name="tf-tour-extra"]').is(':checked')) {
-
-                    let tour_extras = $extra.find('input[name="tf-tour-extra"]').val();
-                    tour_extra_total.push(tour_extras);
-
-                    if ($extra.find('.tf_quantity-acrselection').hasClass('quantity-active')) {
-                        let qty = $extra.find('input[name="extra-quantity"]').val();
-
-                        tour_extra_quantity.push(qty)
-                    } else {
-                        tour_extra_quantity.push(1)
-                    }
-                }
-            });
-
-            formData.append('tour_extra', tour_extra_total);
-            formData.append('tour_extra_quantity', tour_extra_quantity);
-
             var $selectedPackage = $this.find('.tf-booking-content-package input[name="tf_package"]:checked').first();
             var selectedPackage = $selectedPackage.val();
             if (selectedPackage !== undefined) {
@@ -3483,21 +3456,6 @@ function convertTo24HourFormat(timeStr) {
 
             });
         });
-
-        $('input[name="tf-tour-extra"]').on("change", function (e) {
-
-            let parent = $(this).parent().parent().parent()
-
-            if ($(this).is(':checked')) {
-
-                parent.find(".tf_quantity-acrselection").addClass('quantity-active')
-
-            } else {
-
-                parent.find(".tf_quantity-acrselection").removeClass('quantity-active')
-
-            }
-        })
 
         $(".tf-itinerary-single-meta li a, .ininerary-other-info li a").on("click", function (e) {
             e.preventDefault();
@@ -3864,21 +3822,6 @@ function convertTo24HourFormat(timeStr) {
             $(this).closest('.tf-single-itinerary-item').toggleClass('active');
             $this.next().slideToggle();
         });
-
-        /*
-        * New Template Tour Extra
-        * @author: Jahid
-        */
-        $('.tf-form-title.tf-tour-extra').on("click", function () {
-            var $this = $(this);
-            if (!$this.hasClass("active")) {
-                $(".tf-tour-extra-box").slideUp(400);
-                $(".tf-form-title.tf-tour-extra").removeClass("active");
-            }
-            $this.toggleClass("active");
-            $this.next().slideToggle();
-        });
-
         // Itinerary Accordion
         $('.tf-accordion-head').on("click", function () {
             $(this).toggleClass('active');
@@ -7043,9 +6986,6 @@ function convertTo24HourFormat(timeStr) {
             let post_id = bookingState.postId;
             let deposit = bookingState.deposit;
             let selectedPackage = bookingState.selectedPackage;
-            var extras = [];
-            var quantity = [];
-
             if (!ensureTourDateSelected(settings.showDateError, $trigger.length ? $trigger : $form)) {
                 return false;
             }
@@ -7059,26 +6999,6 @@ function convertTo24HourFormat(timeStr) {
                     $package.find('input[type="number"]').prop('disabled', !isSelected);
                 });
             }
-
-            $form.find('.tour-extra-single').each(function () {
-                let $extraItem = $(this);
-
-                if ($extraItem.find('input[name="tf-tour-extra"]').is(':checked')) {
-                    let tour_extras = $extraItem.find('input[name="tf-tour-extra"]').val();
-                    extras.push(tour_extras);
-
-                    if ($extraItem.find('.tf_quantity-acrselection').hasClass('quantity-active')) {
-                        let qty = $extraItem.find('input[name="extra-quantity"]').val();
-
-                        quantity.push(qty);
-                    } else {
-                        quantity.push(1);
-                    }
-                }
-            });
-
-            var extras = extras.join();
-            var quantities = quantity.join();
             var data = {
                 action: 'tf_tour_booking_popup',
                 _nonce: tf_params.nonce,
@@ -7087,8 +7007,6 @@ function convertTo24HourFormat(timeStr) {
                 children: children,
                 infant: infant,
                 check_in_date: check_in_date,
-                tour_extra: extras,
-                tour_extra_quantity: quantities,
                 deposit: deposit,
                 selectedPackage: selectedPackage
             };
@@ -7205,16 +7123,11 @@ function convertTo24HourFormat(timeStr) {
                 $dateWrapper.removeClass('tf-date-required');
             }
         });
-
-        $(document).on('change', '[name*=tf-tour-extra], input[name="extra-quantity"]', function () {
-            if (tfIsHotelExtraQuantityControl($(this))) {
-                return;
-            }
-
-            tourPopupBooking({
-                trigger: $(this)
-            });
-        });
+		$(document).on('tourfic:tour-booking:refresh', function (event, trigger) {
+			tourPopupBooking({
+				trigger: $(trigger)
+			});
+		});
 		$(document).on('change', '[name=deposit]', function () {
             tourPopupBooking({
                 trigger: $(this)

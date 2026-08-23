@@ -511,51 +511,52 @@ class Helper {
 	}
 
 	/**
-	 * Sanitize selected tour extra IDs and aligned quantities.
+	 * Collect normalized price adjustments supplied by booking extensions.
 	 *
-	 * @param string|array $extras     Selected extra IDs.
-	 * @param string|array $quantities Selected extra quantities.
+	 * Extensions own their input validation and business rules. Core only merges
+	 * their normalized totals and display/storage data into the booking flow.
+	 *
+	 * @param array $context Booking context exposed to extension callbacks.
 	 * @return array
 	 */
-	static function tf_sanitize_tour_extra_selection( $extras, $quantities = [] ) {
-		if ( is_string( $extras ) ) {
-			$extras = explode( ',', sanitize_text_field( $extras ) );
+	static function tf_get_tour_booking_adjustments( $context ) {
+		$normalized = array(
+			'total'                 => 0.0,
+			'summary_rows'          => array(),
+			'cart_data'             => array(),
+			'order_details'         => array(),
+			'response_data'         => array(),
+			'external_placeholders' => array(),
+			'errors'                => array(),
+		);
+		$adjustments = apply_filters( 'tourfic_tour_booking_adjustments', array(), $context );
+
+		if ( ! is_array( $adjustments ) ) {
+			return $normalized;
 		}
 
-		if ( is_string( $quantities ) ) {
-			$quantities = explode( ',', sanitize_text_field( $quantities ) );
-		}
-
-		if ( ! is_array( $extras ) ) {
-			return [
-				'extras'     => [],
-				'quantities' => [],
-			];
-		}
-
-		$sanitized_extras     = [];
-		$sanitized_quantities = [];
-
-		foreach ( $extras as $key => $extra ) {
-			if ( is_array( $extra ) || is_object( $extra ) ) {
+		foreach ( $adjustments as $adjustment ) {
+			if ( ! is_array( $adjustment ) ) {
 				continue;
 			}
 
-			$extra = trim( sanitize_text_field( (string) $extra ) );
-			if ( '' === $extra ) {
-				continue;
+			$normalized['total'] += max( 0, (float) ( $adjustment['amount'] ?? 0 ) );
+			foreach ( array( 'summary_rows', 'errors' ) as $list_key ) {
+				if ( ! empty( $adjustment[ $list_key ] ) && is_array( $adjustment[ $list_key ] ) ) {
+					$normalized[ $list_key ] = array_merge( $normalized[ $list_key ], $adjustment[ $list_key ] );
+				}
 			}
 
-			$quantity = is_array( $quantities ) && isset( $quantities[ $key ] ) ? intval( $quantities[ $key ] ) : 1;
-
-			$sanitized_extras[]     = $extra;
-			$sanitized_quantities[] = 0 < $quantity ? $quantity : 1;
+			foreach ( array( 'cart_data', 'order_details', 'response_data', 'external_placeholders' ) as $map_key ) {
+				if ( ! empty( $adjustment[ $map_key ] ) && is_array( $adjustment[ $map_key ] ) ) {
+					$normalized[ $map_key ] = array_merge( $normalized[ $map_key ], $adjustment[ $map_key ] );
+				}
+			}
 		}
 
-		return [
-			'extras'     => $sanitized_extras,
-			'quantities' => $sanitized_quantities,
-		];
+		$normalized['total'] = max( 0, $normalized['total'] );
+
+		return $normalized;
 	}
 
 	/**

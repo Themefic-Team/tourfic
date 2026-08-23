@@ -160,7 +160,6 @@ trait TF_API_Documentation_Examples {
 			'disable_traveller_info'         => '',
 			'custom_fields_heading'          => '',
 			'without-payment-field'          => 'serialized string',
-			'tour_popup_extras_text'         => 'Popup text for tour extras.',
 			'tour_traveler_details_text'     => 'Traveler details privacy notice.',
 			'label_off_heading'              => '',
 			'hotel-option-notice-one'        => '',
@@ -621,7 +620,6 @@ trait TF_API_Documentation_Examples {
 						'phone'                       => '+1 (000) 000-0000',
 						'fax'                         => '',
 						'website'                     => 'https://example.com',
-						'tour-extra'                  => '',
 						'faqs'                        => '',
 						'inc'                         => array(
 							array( 'inc' => 'Specialized bilingual guide' ),
@@ -851,7 +849,6 @@ trait TF_API_Documentation_Examples {
 			'hightlights_thumbnail'           => '',
 			'features'                        => array(),
 			'contact-info-section-title'      => 'Contact Information',
-			'tour-extra'                      => array(),
 			'pricing'                         => 'person',
 			'adult_price'                     => '90',
 			'child_price'                     => '80',

@@ -103,8 +103,8 @@ class Woocommerce {
 		if ( 'Infants' === $meta->key ) { $key = esc_html__( 'Infants', 'tourfic'); }
 		if ( 'Tour Date' === $meta->key ) { $key = esc_html__( 'Tour Date', 'tourfic'); }
 		if ( 'Tour Time' === $meta->key ) { $key = esc_html__( 'Tour Time', 'tourfic'); }
-		if ( 'Tour Extra' === $meta->key ) { $key = esc_html__( 'Tour Extra', 'tourfic'); }
 		if ( 'Due' === $meta->key ) { $key = esc_html__( 'Due', 'tourfic'); }
+		$key = apply_filters( 'tourfic_order_item_meta_label', $key, $meta, $item );
 
 		return $key;
 	}
@@ -226,7 +226,6 @@ class Woocommerce {
 				$tour_time  = $item->get_meta( 'Tour Time', true );
 				$price      = $item->get_subtotal();
 				$due        = $item->get_meta( 'Due', true );
-				$tour_extra = $item->get_meta( 'Tour Extra', true );
 				$adult      = $item->get_meta( 'Adults', true );
 				$child      = $item->get_meta( 'Children', true );
 				$infants    = $item->get_meta( 'Infants', true );
@@ -235,16 +234,16 @@ class Woocommerce {
 					list( $tour_in, $tour_out ) = tf_split_date_range( $tour_date, false );
 				}
 	
-				$tf_integration_order_data[] = [
+				$integration_item = [
 					'tour_date'   => $tour_date,
 					'tour_time'   => $tour_time,
-					'tour_extra'  => $tour_extra,
 					'adult'       => $adult,
 					'child'       => $child,
 					'infants'     => $infants,
 					'total_price' => $price,
 					'due_price'   => $due,
 				];
+				$tf_integration_order_data[] = apply_filters( 'tourfic_tour_integration_order_item', $integration_item, $item, $order );
 	
 				$tf_integration_order_status = [
 					'customer_id'    => $order->get_customer_id(),

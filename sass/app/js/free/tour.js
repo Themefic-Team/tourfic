@@ -124,33 +124,6 @@
             var formData = new FormData(this);
             formData.append('action', 'tf_tours_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
-
-
-            // Tour Extra
-            var tour_extra_total = [];
-            var tour_extra_quantity = [];
-
-            $this.find('.tour-extra-single').each(function (e) {
-                let $extra = jQuery(this);
-
-                if ($extra.find('input[name="tf-tour-extra"]').is(':checked')) {
-
-                    let tour_extras = $extra.find('input[name="tf-tour-extra"]').val();
-                    tour_extra_total.push(tour_extras);
-
-                    if ($extra.find('.tf_quantity-acrselection').hasClass('quantity-active')) {
-                        let qty = $extra.find('input[name="extra-quantity"]').val();
-
-                        tour_extra_quantity.push(qty)
-                    } else {
-                        tour_extra_quantity.push(1)
-                    }
-                }
-            });
-
-            formData.append('tour_extra', tour_extra_total);
-            formData.append('tour_extra_quantity', tour_extra_quantity);
-
             var $selectedPackage = $this.find('.tf-booking-content-package input[name="tf_package"]:checked').first();
             var selectedPackage = $selectedPackage.val();
             if (selectedPackage !== undefined) {
@@ -214,21 +187,6 @@
 
             });
         });
-
-        $('input[name="tf-tour-extra"]').on("change", function (e) {
-
-            let parent = $(this).parent().parent().parent()
-
-            if ($(this).is(':checked')) {
-
-                parent.find(".tf_quantity-acrselection").addClass('quantity-active')
-
-            } else {
-
-                parent.find(".tf_quantity-acrselection").removeClass('quantity-active')
-
-            }
-        })
 
         $(".tf-itinerary-single-meta li a, .ininerary-other-info li a").on("click", function (e) {
             e.preventDefault();
@@ -595,21 +553,6 @@
             $(this).closest('.tf-single-itinerary-item').toggleClass('active');
             $this.next().slideToggle();
         });
-
-        /*
-        * New Template Tour Extra
-        * @author: Jahid
-        */
-        $('.tf-form-title.tf-tour-extra').on("click", function () {
-            var $this = $(this);
-            if (!$this.hasClass("active")) {
-                $(".tf-tour-extra-box").slideUp(400);
-                $(".tf-form-title.tf-tour-extra").removeClass("active");
-            }
-            $this.toggleClass("active");
-            $this.next().slideToggle();
-        });
-
         // Itinerary Accordion
         $('.tf-accordion-head').on("click", function () {
             $(this).toggleClass('active');

@@ -662,24 +662,7 @@
                             }
 
                             $("[name='tf_tour_date']").flatpickr(flatpickerObj);
-
-                            if (obj.tour_extras_array && Object.keys(obj.tour_extras_array).length > 0) {
-                                let extras = $('[name="tf_tour_extras[]"]');
-                                extras.removeAttr('disabled');
-                                extras.empty();
-                            
-                                $.each(obj.tour_extras_array, function (key, value) {
-                                    extras.append($('<option>', {
-                                        value: key,
-                                        html: value // Use html to parse entities like &#36;
-                                    }));
-                                });
-                            
-                                extras.select2();
-                            } else {
-                                let extras = $('[name="tf_tour_extras[]"]');
-                                extras.empty().attr('disabled', 'disabled');
-                            }
+							$(document).trigger('tourfic:backend-tour-form-data', [obj]);
 
                             $('#tf-backend-hotel-book-btn').removeAttr('disabled');
                         }

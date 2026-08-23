@@ -594,9 +594,7 @@ class TF_Handle_Emails {
         if ( !empty($order_items['tour_time']) ) {
             $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Tour Time:</strong> ' . $order_items['tour_time'];
         }
-        if ( !empty($order_items['tour_extra']) ) {
-            $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Tour Extra:</strong> ' . $order_items['tour_extra'];
-        }
+        $booking_details = apply_filters( 'tourfic_booking_email_item_details_html', $booking_details, $order_items, $order_data );
         if ( !empty($order_items['adult']) ) {
             $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Adult:</strong> ' . $order_items['adult'];
         }
