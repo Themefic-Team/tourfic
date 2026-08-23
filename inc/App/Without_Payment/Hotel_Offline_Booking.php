@@ -50,18 +50,6 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		$check_out       = isset( $_POST['check_out_date'] ) ? sanitize_text_field( wp_unslash($_POST['check_out_date']) ) : '';
 		$deposit         = isset( $_POST['deposit'] ) ? sanitize_text_field( wp_unslash($_POST['deposit']) ) : false;
 		$airport_service = isset( $_POST['airport_service'] ) ? sanitize_text_field( $_POST['airport_service'] ) : ''; //phpcs:ignore
-		$extras = isset( $_POST['extras'] ) ? wp_unslash( $_POST['extras'] ) : []; //phpcs:ignore
-		$hotel_extra_quantities = isset( $_POST['hotel_extra_quantity'] ) ? Helper::tf_sanitize_extra_quantities( wp_unslash( $_POST['hotel_extra_quantity'] ) ) : []; //phpcs:ignore
-
-		if ( is_string( $extras ) ) {
-			$extras = explode( ',', sanitize_text_field( $extras ) );
-		}
-
-		if ( is_array( $extras ) ) {
-			$extras = array_map( 'sanitize_text_field', $extras );
-		} else {
-			$extras = [];
-		}
 
 		$total_people    = $adult + $child;
 
@@ -99,6 +87,19 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		$post_author = get_post_field( 'post_author', $post_id );
 		$meta        = get_post_meta( $post_id, 'tf_hotels_opt', true );
 		$room_meta   = get_post_meta( $room_id, 'tf_room_opt', true );
+		$booking_adjustments = Helper::tf_get_hotel_booking_adjustments(
+			array(
+				'source'       => 'popup',
+				'post_id'      => $post_id,
+				'meta'         => $meta,
+				'adult'        => $adult,
+				'child'        => $child,
+				'total_people' => $total_people,
+			)
+		);
+		if ( ! empty( $booking_adjustments['errors'] ) ) {
+			$response['errors'] = array_merge( $response['errors'] ?? array(), $booking_adjustments['errors'] );
+		}
 		// if ( ! empty( $rooms ) && gettype( $rooms ) == "string" ) {
 		// 	$tf_hotel_rooms_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
 		// 		return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
@@ -133,24 +134,6 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
             'min_stay' => ! empty( $room_meta["minimum_stay_requirement"] ) ? $room_meta["minimum_stay_requirement"] : 0,
             "max_stay" => ! empty( $room_meta["maximum_stay_requirement"] ) ? $room_meta["maximum_stay_requirement"] : 0
         );
-
-		// Hotel Extra
-		$total_extras_title = [];
-		$total_extras_price = 0;
-		$hotel_extras       = apply_filters( 'tf_hotel_extra_meta', null, $post_id, $meta );
-		if ( ! empty( $hotel_extras ) ) {
-			foreach ( $extras as $key => $extra ) {
-				if ( empty( $hotel_extras[ $extra ] ) ) {
-					continue;
-				}
-				$extra_quantity = ! empty( $hotel_extra_quantities[ $key ] ) ? $hotel_extra_quantities[ $key ] : 1;
-				$extra_service = Helper::tf_hotel_extras_title_price( $post_id, $adult, $child, $extra, $extra_quantity );
-				$extra_price_type = ! empty( $hotel_extras[ $extra ]['price_type'] ) ? $hotel_extras[ $extra ]['price_type'] : 'fixed';
-				$total_extras_title[] = 'quantity' === $extra_price_type && ! empty( $extra_service['title'] ) ? $hotel_extras[$extra]['title'] . ' (' . wp_strip_all_tags( $extra_service['title'] ) . ')' : $hotel_extras[$extra]['title'];
-				$total_extras_price += $extra_service['price'];
-			}
-		}
-		$total_extras_titles = implode(',', $total_extras_title);
 
 		foreach ( $room_stay_requirements as $min_max_days ) {
 			if ( $day_difference < $min_max_days["min_stay"] && $min_max_days["min_stay"] > 0 ) {
@@ -474,8 +457,8 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 
 				Helper::tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
 				if ( $has_deposit == true && ! empty( $deposit_amount ) ) {
-						if ( ! empty( $airport_service ) || ! empty( $total_extras_price ) ) {
-							$tf_due_amount = ( $price_total + $airport_service_arr['price'] + $total_extras_price ) - $deposit_amount;
+						if ( ! empty( $airport_service ) || ! empty( $booking_adjustments['total'] ) ) {
+							$tf_due_amount = ( $price_total + $airport_service_arr['price'] + $booking_adjustments['total'] ) - $deposit_amount;
 						} else {
 							$tf_due_amount = $price_total - $deposit_amount;
 						}
@@ -616,21 +599,21 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 					</tr>';
 			}
 
-			if ( !empty($hotel_extra_option) && ! empty( $total_extras_titles ) ) {
+			foreach ( $booking_adjustments['summary_rows'] as $summary_row ) {
 				$response['hotel_booking_summery'] .= '<tr>
-						<td align="left">' . esc_html( $total_extras_titles ) . '</td>
-						<td align="right">' . wc_price( $total_extras_price ) . '</td>
+						<td align="left">' . esc_html( $summary_row['label'] ?? '' ) . '</td>
+						<td align="right">' . wc_price( $summary_row['amount'] ?? 0 ) . '</td>
 					</tr>';
 			}
 
 			if ( ! empty( $tf_due_amount ) ) {
 				$response['hotel_booking_summery'] .= '<tr>
                     <td align="left">' . sprintf( esc_html__( 'Due', 'tourfic' ) ) . '</td>
-                    <td align="right">' . wc_price( $tf_due_amount + $airport_service_arr['price'] + $total_extras_price ) . '</td>
-                </tr>';
+					<td align="right">' . wc_price( $tf_due_amount + $airport_service_arr['price'] + $booking_adjustments['total'] ) . '</td>
+				</tr>';
 			}
 
-			$total_price = ! empty( $tf_due_amount ) ? wc_price( $price_total - $tf_due_amount ) : ( !empty( $airport_service_arr['price'] ) || !empty( $total_extras_price ) ? wc_price( $price_total + $airport_service_arr['price'] + $total_extras_price ) : wc_price( $price_total ) );
+			$total_price = ! empty( $tf_due_amount ) ? wc_price( $price_total - $tf_due_amount ) : ( ! empty( $airport_service_arr['price'] ) || ! empty( $booking_adjustments['total'] ) ? wc_price( $price_total + $airport_service_arr['price'] + $booking_adjustments['total'] ) : wc_price( $price_total ) );
 
 			$response['hotel_booking_summery'] .= '</tbody>
             <tfoot>

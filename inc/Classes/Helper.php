@@ -434,49 +434,6 @@ class Helper {
 		return false;
 	}
 
-
-	static function tf_hotel_extras_title_price( $post_id, $adult, $child, $key, $quantity = 1 ) {
-		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
-		$hotel_extras     = apply_filters( 'tf_hotel_extra_meta', null, $post_id, $meta );
-
-		if ( ! empty( $hotel_extras[$key] ) ) {
-			if ( !empty($hotel_extras[$key]['price']) ) {
-				$extra_price = $hotel_extras[$key]['price'];
-				$extra_quantity = 0 < intval( $quantity ) ? intval( $quantity ) : 1;
-				$extra_price_type = ! empty( $hotel_extras[$key]['price_type'] ) ? $hotel_extras[$key]['price_type'] : 'fixed';
-				
-				if ( "fixed" == $extra_price_type ) {
-					$airport_service_arr = array(
-						'title' => __( 'Fixed Price', 'tourfic' ),
-						'price' => $extra_price
-					);
-				}
-				if ( "person" == $extra_price_type ) {
-					$airport_service_arr = array(
-                        /* translators: %1$s: number of adult and %2$s: extra price */
-						'title' => sprintf( __( 'Adult ( %1$s × %2$s )', 'tourfic' ),
-							$adult,
-							wp_strip_all_tags( wc_price( $extra_price ) )
-						),
-						'price' => $extra_price * (int) $adult
-					);
-				}
-				if ( "quantity" == $extra_price_type ) {
-					$airport_service_arr = array(
-						/* translators: %1$s: extra quantity and %2$s: extra price */
-						'title' => sprintf( __( 'Quantity ( %1$s × %2$s )', 'tourfic' ),
-							$extra_quantity,
-							wp_strip_all_tags( wc_price( $extra_price ) )
-						),
-						'price' => $extra_price * $extra_quantity
-					);
-				}
-			}
-		}
-
-		return !empty( $airport_service_arr ) ? $airport_service_arr : array( 'title' => '', 'price' => 0 );
-	}
-
 	/**
 	 * Translate a saved widget value only when it still matches the default text.
 	 *
@@ -493,25 +450,8 @@ class Helper {
 		return $text;
 	}
 
-	static function tf_sanitize_extra_quantities( $quantities ) {
-		if ( is_string( $quantities ) ) {
-			$quantities = explode( ',', sanitize_text_field( $quantities ) );
-		}
-
-		if ( ! is_array( $quantities ) ) {
-			return [];
-		}
-
-		return array_map(
-			function( $quantity ) {
-				return 0 < intval( $quantity ) ? intval( $quantity ) : 1;
-			},
-			$quantities
-		);
-	}
-
 	/**
-	 * Collect normalized price adjustments supplied by booking extensions.
+	 * Collect normalized Tour price adjustments supplied by booking extensions.
 	 *
 	 * Extensions own their input validation and business rules. Core only merges
 	 * their normalized totals and display/storage data into the booking flow.
@@ -520,6 +460,30 @@ class Helper {
 	 * @return array
 	 */
 	static function tf_get_tour_booking_adjustments( $context ) {
+		return self::tf_get_booking_adjustments( 'tourfic_tour_booking_adjustments', $context );
+	}
+
+	/**
+	 * Collect normalized Hotel price adjustments supplied by booking extensions.
+	 *
+	 * @param array $context Booking context exposed to extension callbacks.
+	 * @return array
+	 */
+	static function tf_get_hotel_booking_adjustments( $context ) {
+		return self::tf_get_booking_adjustments( 'tourfic_hotel_booking_adjustments', $context );
+	}
+
+	/**
+	 * Normalize price adjustments supplied by booking extensions.
+	 *
+	 * Extensions own their input validation and business rules. Core only merges
+	 * their normalized totals and display/storage data into the booking flow.
+	 *
+	 * @param string $filter  Booking-adjustment filter name.
+	 * @param array  $context Booking context exposed to extension callbacks.
+	 * @return array
+	 */
+	private static function tf_get_booking_adjustments( $filter, $context ) {
 		$normalized = array(
 			'total'                 => 0.0,
 			'summary_rows'          => array(),
@@ -529,7 +493,7 @@ class Helper {
 			'external_placeholders' => array(),
 			'errors'                => array(),
 		);
-		$adjustments = apply_filters( 'tourfic_tour_booking_adjustments', array(), $context );
+		$adjustments = apply_filters( $filter, array(), $context );
 
 		if ( ! is_array( $adjustments ) ) {
 			return $normalized;

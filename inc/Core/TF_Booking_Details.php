@@ -852,18 +852,7 @@ abstract Class TF_Booking_Details {
                                                 </td>
                                             </tr>
                                        <?php } ?>
-                                       <?php
-                                        $hotel_extra  = !empty( $tf_tour_details->hotel_extra ) ? $tf_tour_details->hotel_extra : '';
-                                        if(!empty($hotel_extra) && $hotel_extra != 'undefined' && $hotel_extra != 'null'){
-                                            ?>
-                                            <tr>
-                                                <th><?php esc_html_e("Extra Service", "tourfic"); ?></th>
-                                                <td>:</td>
-                                                <td>
-                                                    <?php echo esc_html( $this->tf_format_order_detail_text( $hotel_extra ) ); ?>
-                                                </td>
-                                            </tr>
-                                       <?php } ?>
+                                       <?php do_action( 'tourfic_hotel_booking_detail_rows', $tf_tour_details, $tf_order_details ); ?>
                                     <?php
                                     $tf_order = wc_get_order( intval( $_GET['order_id'] ) ); //phpcs:ignore WordPress.Security.NonceVerification.Recommended
                                     if($tf_order_details->payment_method!='offline'){
@@ -936,13 +925,7 @@ abstract Class TF_Booking_Details {
                                             </tr>
                                         <?php } ?>
                                         
-                                        <?php if(!empty($tf_tour_details->hotel_extra_fee)){ ?>
-                                            <tr>
-                                                <th><?php esc_html_e("Extra Service Fee", "tourfic"); ?></th>
-                                                <td>:</td>
-                                                <td><?php echo wp_kses_post($tf_tour_details->hotel_extra_fee); ?></td>
-                                            </tr>
-                                        <?php } ?>
+										<?php do_action( 'tourfic_hotel_booking_pricing_detail_rows', $tf_tour_details, $tf_order_details ); ?>
 
                                         <?php
                                         if(!empty($tf_tour_details->total_price)){ ?>
@@ -1815,15 +1798,7 @@ abstract Class TF_Booking_Details {
                         </div>
                     <?php } ?>
 
-                    <?php
-                    $hotel_extra = ! empty( $tf_tour_details->hotel_extra ) ? $tf_tour_details->hotel_extra : '';
-                    if ( ! empty( $hotel_extra ) && $hotel_extra != 'undefined' && $hotel_extra != 'null' ) {
-                        ?>
-                        <div class="tf-single-content">
-                            <h5><?php esc_html_e("Extra Service", "tourfic"); ?></h5>
-                            <p><?php echo esc_html( $this->tf_format_order_detail_text( $hotel_extra ) ); ?></p>
-                        </div>
-                    <?php } ?>
+                    <?php do_action( 'tourfic_hotel_booking_quick_detail_items', $tf_tour_details, $tf_order_details ); ?>
 
                 </div>
             </div>

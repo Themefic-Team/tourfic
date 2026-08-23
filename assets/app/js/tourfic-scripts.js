@@ -2234,32 +2234,6 @@ function convertTo24HourFormat(timeStr) {
             return [normalizedValue, singleDateAsRange ? normalizedValue : ''];
         }
 
-        function tfGetHotelSelectedExtras($container) {
-            let selectedExtras = [];
-            let selectedExtraQuantities = [];
-
-            $container.find('.tf-single-hotel-service').each(function () {
-                let $extra = $(this);
-                let $checkbox = $extra.find('input[name="extra_service"]');
-
-                if ($checkbox.is(':checked')) {
-                    let quantity = parseInt($extra.find('input[name="extra-quantity"]').val(), 10);
-
-                    selectedExtras.push($checkbox.val());
-                    selectedExtraQuantities.push(quantity > 0 ? quantity : 1);
-                }
-            });
-
-            return {
-                extras: selectedExtras,
-                quantities: selectedExtraQuantities
-            };
-        }
-
-        function tfIsHotelExtraQuantityControl($element) {
-            return $element.closest('.tf-single-hotel-service').closest('.tf-hotel-withoutpayment-booking, .tf-room-booking-popup').length > 0;
-        }
-
         /**
          * Hotel room availability ajax filter
          * @author Fida
@@ -2471,7 +2445,7 @@ function convertTo24HourFormat(timeStr) {
             
             var airport_service = $this.closest('.tf-withoutpayment-popup').find('[name="airport_service"]').val();
 
-            let selectedExtraData = tfGetHotelSelectedExtras($this.closest('.tf-withoutpayment-popup'));
+            var $bookingPopup = $this.closest('.tf-withoutpayment-popup');
             var data = {
                 action: 'tf_hotel_booking',
                 tf_room_booking_nonce: tf_room_booking_nonce,
@@ -2487,10 +2461,9 @@ function convertTo24HourFormat(timeStr) {
                 check_out_date: check_out_date,
                 room: room,
                 deposit: deposit,
-                airport_service: airport_service,
-                extra_service: selectedExtraData.extras,
-                hotel_extra_quantity: selectedExtraData.quantities
+                airport_service: airport_service
             };
+            $bookingPopup.trigger('tourfic:hotel-booking:request-data', [data]);
             $this.closest(".tf-booking-pagination").siblings(".tf-booking-content-summery").find( '.traveller-single-info input' ).each(function (index, element) {
                 var element_name = $(element).attr("name");
                 data[ element_name ] = $(element).val();
@@ -2946,7 +2919,6 @@ function convertTo24HourFormat(timeStr) {
             var children_ages = $('input[name=children_ages]').val();
             var airport_service = $roomForm.find('[name="airport_service"]').val();
 
-            let selectedExtraData = tfGetHotelSelectedExtras($roomForm);
             var data = {
                 action: 'tf_hotel_booking_popup',
                 tf_room_booking_nonce: tf_room_booking_nonce,
@@ -2962,10 +2934,9 @@ function convertTo24HourFormat(timeStr) {
                 check_out_date: check_out_date,
                 room: room,
                 deposit: deposit,
-                airport_service: airport_service,
-                extras: selectedExtraData.extras,
-                hotel_extra_quantity: selectedExtraData.quantities
+                airport_service: airport_service
             };
+            $roomForm.trigger('tourfic:hotel-booking:request-data', [data]);
 
             $.ajax({
                 type: 'post',
@@ -3056,13 +3027,11 @@ function convertTo24HourFormat(timeStr) {
             // }
             var deposit = $this.find("input[name=hotel_room_depo]").val();
             var airport_service = $this.find('[name="airport_service"]').val();
-            let selectedExtraData = tfGetHotelSelectedExtras($this);
             formData.append('action', 'tf_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
             formData.append('deposit', deposit);
             formData.append('airport_service', airport_service);
-            formData.append('extras', selectedExtraData.extras);
-            formData.append('hotel_extra_quantity', selectedExtraData.quantities);
+            $this.trigger('tourfic:hotel-booking:form-data', [formData]);
 
 
             $.ajax({
@@ -3108,53 +3077,12 @@ function convertTo24HourFormat(timeStr) {
             }
         });
 
-        $(document).on("change", "input[name='extra_service']", function (e) {
-            var $extra = $(this).closest('.tf-single-hotel-service');
-
-            if ($(this).is(':checked')) {
-                $extra.find(".tf_quantity-acrselection").addClass('quantity-active');
-            } else {
-                $extra.find(".tf_quantity-acrselection").removeClass('quantity-active');
-            }
+        $(document).on("change", "[name='airport_service']", function () {
+            hotelPopupBooking($(this));
         });
 
-        $(document).on("click", ".tf-single-hotel-service .quanity-acr-inc, .tf-single-hotel-service .quanity-acr-dec", function (e) {
-            if (!tfIsHotelExtraQuantityControl($(this))) {
-                return;
-            }
-
-            e.preventDefault();
-            e.stopPropagation();
-
-            var $input = $(this).parent().find('input');
-            var min = $input.attr('min') ? parseInt($input.attr('min'), 10) : 1;
-            var max = $input.attr('max') ? parseInt($input.attr('max'), 10) : 999;
-            var step = $input.attr('step') ? parseInt($input.attr('step'), 10) : 1;
-            var value = parseInt($input.val(), 10);
-
-            if (!value) {
-                value = min;
-            }
-
-            if ($(this).hasClass('quanity-acr-inc') && value < max) {
-                value += step;
-            }
-
-            if ($(this).hasClass('quanity-acr-dec') && value > min) {
-                value -= step;
-            }
-
-            $input.val(value).change().blur();
-        });
-
-        $(document).on("change", "[name='airport_service'], [name='extra_service'], input[name='extra-quantity']", function (e) {
-            var $this = $(this);
-
-            if ($this.is("input[name='extra-quantity']") && !tfIsHotelExtraQuantityControl($this)) {
-                return;
-            }
-
-            hotelPopupBooking($this);
+        $(document).on('tourfic:hotel-booking:refresh', function (event, trigger) {
+            hotelPopupBooking($(trigger));
         });
 
         // Design 1 - hotel Facilities
@@ -5626,8 +5554,8 @@ function convertTo24HourFormat(timeStr) {
         /**
          * Number/text change horizontal search form
          */
-        function tfIsHotelExtraQuantityControl($element) {
-            return $element.closest('.tf-single-hotel-service').closest('.tf-hotel-withoutpayment-booking, .tf-room-booking-popup').length > 0;
+        function tfIsHotelBookingExtensionQuantityControl($element) {
+            return $element.closest('[data-tourfic-hotel-booking-extension]').length > 0;
         }
 
         function tfGetTourPackageMaxPeople($package) {
@@ -5680,7 +5608,7 @@ function convertTo24HourFormat(timeStr) {
 
         // Number Increment
         $('.acr-inc, .quanity-acr-inc').on('click', function (e) {
-            if (tfIsHotelExtraQuantityControl($(this))) {
+            if (tfIsHotelBookingExtensionQuantityControl($(this))) {
                 return;
             }
 
@@ -5723,7 +5651,7 @@ function convertTo24HourFormat(timeStr) {
 
         // Number Decrement
         $('.acr-dec, .quanity-acr-dec').on('click', function (e) {
-            if (tfIsHotelExtraQuantityControl($(this))) {
+            if (tfIsHotelBookingExtensionQuantityControl($(this))) {
                 return;
             }
 

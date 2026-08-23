@@ -1407,8 +1407,8 @@
         /**
          * Number/text change horizontal search form
          */
-        function tfIsHotelExtraQuantityControl($element) {
-            return $element.closest('.tf-single-hotel-service').closest('.tf-hotel-withoutpayment-booking, .tf-room-booking-popup').length > 0;
+        function tfIsHotelBookingExtensionQuantityControl($element) {
+            return $element.closest('[data-tourfic-hotel-booking-extension]').length > 0;
         }
 
         function tfGetTourPackageMaxPeople($package) {
@@ -1461,7 +1461,7 @@
 
         // Number Increment
         $('.acr-inc, .quanity-acr-inc').on('click', function (e) {
-            if (tfIsHotelExtraQuantityControl($(this))) {
+            if (tfIsHotelBookingExtensionQuantityControl($(this))) {
                 return;
             }
 
@@ -1504,7 +1504,7 @@
 
         // Number Decrement
         $('.acr-dec, .quanity-acr-dec').on('click', function (e) {
-            if (tfIsHotelExtraQuantityControl($(this))) {
+            if (tfIsHotelBookingExtensionQuantityControl($(this))) {
                 return;
             }
 
