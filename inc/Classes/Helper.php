@@ -474,6 +474,16 @@ class Helper {
 	}
 
 	/**
+	 * Collect normalized Car price adjustments supplied by booking extensions.
+	 *
+	 * @param array $context Booking context exposed to extension callbacks.
+	 * @return array
+	 */
+	static function tf_get_car_booking_adjustments( $context ) {
+		return self::tf_get_booking_adjustments( 'tourfic_car_booking_adjustments', $context );
+	}
+
+	/**
 	 * Normalize price adjustments supplied by booking extensions.
 	 *
 	 * Extensions own their input validation and business rules. Core only merges

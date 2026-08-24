@@ -289,42 +289,6 @@ class Pricing {
         }
     }
 
-    // Return car rental extras price.
-    static function set_extra_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $extra_ids=[], $extra_qty=[]){
-
-        $car_extra = apply_filters( 'tf_car_extra_meta', null, null, $meta );
-        $prices = 0;
-        $extra_title = [];
-        if(!empty($extra_qty)){
-            foreach($extra_qty as $key => $singleqty){
-                if(!empty($singleqty)){
-                    $extra_key = $extra_ids[$key];
-                    $single_extra_info = !empty($car_extra[$extra_key]) ? $car_extra[$extra_key] : '';
-                    if(!empty($single_extra_info)){
-                        $price_type = $single_extra_info['price_type'];
-                        if('day'==$price_type){
-                            $duration_data = self::get_duration_data( $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time );
-                            $total_days = $duration_data['days'];
-
-                            $price = $single_extra_info['price'] * $total_days;
-
-                        }else{
-                            $price = $single_extra_info['price'];
-                        }
-                        $prices += $price * $singleqty;
-                        $extra_title[] = $single_extra_info['title'].'('.$price_type.') × '. $singleqty. ' = ' . wc_price($price * $singleqty);
-                    }
-                }
-            }
-        }
-        $extras = array(
-         'title' => implode(", ",$extra_title),
-         'price' => $prices
-        );
-
-        return $extras;
-    }
-
     static function set_protection_price($meta, $tf_protection, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time){
         $car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
         $selected_protection_title = [];

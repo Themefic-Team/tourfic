@@ -1439,14 +1439,6 @@
             let $this = $(this);
             setCarPartialPayment($this);
             
-            let extra_ids = $("input[name='selected_extra[]']").map(function() {
-                return $(this).val();
-            }).get();
-
-            let extra_qty = $("input[name='selected_qty[]']").map(function() {
-                return $(this).val();
-            }).get();
-
             var travellerData = {};
             if($this.hasClass('tf-offline-booking')){
                 let booking = $(this).closest('.tf-booking-form-fields');
@@ -1541,10 +1533,10 @@
                 dropoff_time: dropoff_time,
                 protection: protection,
                 partial_payment: partial_payment,
-                extra_ids: extra_ids,
-                extra_qty: extra_qty,
                 travellerData: travellerData
             };
+
+            $(document).trigger('tourfic:car-booking:request-data', [data]);
 
             $.ajax({
                 url: tf_params.ajax_url,
@@ -1893,14 +1885,6 @@
         });
 
         function handleBookingInputChange(showLoader = true) {
-            let extra_ids = $("input[name='selected_extra[]']").map(function() {
-                return $(this).val();
-            }).get();
-
-            let extra_qty = $("input[name='selected_qty[]']").map(function() {
-                return $(this).val();
-            }).get();
-
             let pickup_date = $('.tf_pickup_date').val();
             let dropoff_date = $('.tf_dropoff_date').val();
             let pickup_time = $('.tf_pickup_time').val();
@@ -1922,9 +1906,9 @@
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,
                 dropoff_time: dropoff_time,
-                extra_ids: extra_ids,
-                extra_qty: extra_qty,
             };
+
+            $(document).trigger('tourfic:car-booking:price-request-data', [data]);
 
             $.ajax({
                 url: tf_params.ajax_url,

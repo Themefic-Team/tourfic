@@ -2105,8 +2105,6 @@ class TF_Demo_Importer {
 			'allow_deposit',
 			'deposit_type',
 			'deposit_amount',
-			'car_extra_sec_title',
-			'extras',
 			'protection_section',
 			'protection_tab_title',
 			'protections',
@@ -2478,11 +2476,6 @@ class TF_Demo_Importer {
 					if( $field == 'badge' && ! empty( $row[$column_index] ) ){
 						$badge = json_decode( $row[$column_index], true );
 						$post_meta['tf_carrental_opt'][$field] = $badge;
-					}
-	
-					if( $field == 'extras' && ! empty( $row[$column_index] ) ){
-						$extras = json_decode( $row[$column_index], true );
-						$post_meta['tf_carrental_opt'][$field] = $extras;
 					}
 	
 					if( $field == 'protections' && ! empty( $row[$column_index] ) ){

@@ -296,21 +296,20 @@ class Woocommerce {
 				$tf_dropoff_date = $item->get_meta( 'Drop Off Date', true );
 				$tf_dropoff_time = $item->get_meta( 'Drop Off Time', true );
 				$tf_protection = $item->get_meta( 'Protection', true );
-				$tf_extra = $item->get_meta( 'Extra', true );
 				$tf_due = $item->get_meta( 'Due', true );
-	
-				$tf_integration_order_data[] = [
+
+				$integration_item = [
 					'pickup_location'   => $pickup,
 					'pickup_date'   => $tf_pickup_date,
 					'pickup_time'   => $tf_pickup_time,
 					'dropoff_location'   => $dropoff,
 					'dropoff_date'   => $tf_dropoff_date,
 					'dropoff_time'   => $tf_dropoff_time,
-					'extra' => !empty($tf_extra) ? $tf_extra : '',
 					'protection' => !empty($tf_protection) ? $tf_protection : '',
 					'due' => !empty($tf_due) ? $tf_due : '',
 					'total_price' => $price
 				];
+				$tf_integration_order_data[] = apply_filters( 'tourfic_car_integration_order_item', $integration_item, $item, $order );
 	
 				$tf_integration_order_status = [
 					'customer_id'    => $order->get_customer_id(),

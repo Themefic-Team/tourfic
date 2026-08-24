@@ -1083,7 +1083,7 @@ trait TF_API_Documentation_Examples {
 	}
 
 	private function get_carrental_opt_example_payload() {
-		return array(
+		$payload = array(
 			'car_gallery'            => '70,71,72',
 			'tf_single_car_layout_opt' => 'global',
 			'tf_single_car_template' => 'design-1',
@@ -1151,8 +1151,6 @@ trait TF_API_Documentation_Examples {
 			'allow_deposit'          => '0',
 			'deposit_type'           => 'none',
 			'deposit_amount'         => '',
-			'car_extra_sec_title'    => 'Add extras',
-			'extras'                 => array(),
 			'protection_section'     => '0',
 			'protection_tab_title'   => 'Protection',
 			'protection_content'     => '',
@@ -1175,6 +1173,8 @@ trait TF_API_Documentation_Examples {
 			'c-share'                => '0',
 			'c-wishlist'             => '0',
 		);
+
+		return apply_filters( 'tourfic_car_api_example_payload', $payload );
 	}
 
 	private function get_car_rentals_example_response() {

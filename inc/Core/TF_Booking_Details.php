@@ -827,18 +827,7 @@ abstract Class TF_Booking_Details {
                                        <?php } ?>
 
                                        
-                                       <?php
-                                        $car_extra  = !empty( $tf_tour_details->extra ) ? $tf_tour_details->extra : '';
-                                        if(!empty($car_extra) && $car_extra != 'undefined' && $car_extra != 'null'){
-                                            ?>
-                                            <tr>
-                                                <th><?php esc_html_e("Extra Service", "tourfic"); ?></th>
-                                                <td>:</td>
-                                                <td>
-                                                    <?php echo esc_html($car_extra); ?>
-                                                </td>
-                                            </tr>
-                                       <?php } ?>
+									<?php do_action( 'tourfic_car_booking_detail_rows', $tf_tour_details ); ?>
 
                                        <?php
                                         $airport_type  = !empty( $tf_tour_details->airport_service_type ) ? $tf_tour_details->airport_service_type : '';

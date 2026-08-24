@@ -20,15 +20,6 @@ if ( Helper::tf_is_woo_active() ) {
 	}
 }
 
-/**
- * Extra Adding Options
- *
- * @include
- */
-
-add_action( 'wp_ajax_nopriv_tf_extra_add_to_booking', 'tf_extra_add_to_booking_callback' );
-add_action( 'wp_ajax_tf_extra_add_to_booking', 'tf_extra_add_to_booking_callback' );
-
 if ( ! function_exists( 'tf_normalize_car_meta' ) ) {
 	/**
 	 * Normalize car meta between legacy and modern key variants.
@@ -121,105 +112,6 @@ if ( ! function_exists( 'tf_car_get_total_price_display_html' ) ) {
 
 		return $total_html;
 	}
-}
-
-function tf_extra_add_to_booking_callback() {
-// Check nonce security
-if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
-	return;
-}
-$response = [];
-$post_id = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
-// Get meta safely
-$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
-$meta = tf_normalize_car_meta( $meta );
-
-$car_extra = apply_filters( 'tf_car_extra_meta', null, $post_id, $meta );
-// Extra key from POST
-$car_extra_pass = !empty( $_POST['extra_key'] ) ? $_POST['extra_key'] : ''; //phpcs:ignore
-
-// Quantity from POST
-$extra_qty = !empty( $_POST['qty'] ) ? $_POST['qty'] : 0; //phpcs:ignore
-$pickup_date = !empty($_POST['pickup_date']) ? tf_normalize_date( sanitize_text_field($_POST['pickup_date']) ) : ''; //phpcs:ignore
-$dropoff_date = !empty($_POST['dropoff_date']) ? tf_normalize_date( sanitize_text_field($_POST['dropoff_date']) ) : ''; //phpcs:ignore
-$pickup_time = !empty($_POST['pickup_time']) ? sanitize_text_field(wp_unslash($_POST['pickup_time'])) : '';
-$dropoff_time = !empty($_POST['dropoff_time']) ? sanitize_text_field(wp_unslash($_POST['dropoff_time'])) : '';
-
-$get_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time);
-$sale_price = ! empty( $get_prices['sale_price'] ) ? (float) $get_prices['sale_price'] : 0;
-$regular_price = ! empty( $get_prices['regular_price'] ) ? (float) $get_prices['regular_price'] : 0;
-if ( $sale_price <= 0 && $regular_price > 0 ) {
-	$sale_price = $regular_price;
-}
-if ( $regular_price <= 0 ) {
-	$regular_price = $sale_price;
-}
-$total_prices = $sale_price;
-$total_regular_prices = $regular_price;
-
-if(!empty($car_extra_pass)){
-	$total_extra = Pricing::set_extra_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time, $car_extra_pass, $extra_qty);
-	$total_prices = $total_prices + $total_extra['price'];
-	$total_regular_prices = $total_regular_prices + $total_extra['price'];
-}
-$response['total_price'] = tf_car_get_total_price_display_html( $total_prices, $total_regular_prices );
-
-$total_days = 1;
-if( !empty($pickup_date) && !empty($dropoff_date) && !empty($pickup_time) && !empty($dropoff_time) ){
-	// Combine date and time
-	$pickup_datetime = tf_car_create_datetime( $pickup_date, $pickup_time );
-	$dropoff_datetime = tf_car_create_datetime( $dropoff_date, $dropoff_time );
-
-	if ( $pickup_datetime && $dropoff_datetime ) {
-		// Calculate the difference
-		$interval = $pickup_datetime->diff($dropoff_datetime);
-
-		// Get total days
-		$total_days = $interval->days;
-
-		// If there are leftover hours that count as a partial day
-		if ($interval->h > 0 || $interval->i > 0) {
-			$total_days += 1;  // Add an extra day for any remaining hours
-		}
-	}
-}
-ob_start();
-foreach($extra_qty as $key => $singleqty){
-	if(!empty($singleqty)){
-
-		$extra_key = $car_extra_pass[$key];
-		$single_extra_info = !empty($car_extra[$extra_key]) ? $car_extra[$extra_key] : '';
-		if(!empty($single_extra_info)){ ?>
-			<div class="tf-single-added-extra tf-flex tf-flex-align-center tf-flex-space-bttn">
-				<?php 
-					if( 'day'==$single_extra_info['price_type'] && !empty($pickup_date) && !empty($dropoff_date) && !empty($pickup_time) && !empty($dropoff_time) ){
-						$calday = $total_days;
-					}else{
-						$calday = 1;
-					}
-				?>
-				<h4><?php echo !empty($single_extra_info['title']) ? esc_html($single_extra_info['title']) : ''; ?></h4>
-				<div class="qty-price tf-flex tf-flex-space-bttn">
-					<div class="line-sum tf-flex tf-flex-align-center">
-						<i class="ri-close-line"></i> 
-						<span class="qty"><?php echo esc_attr($singleqty); ?></span> 
-						<span class="price"><?php echo !empty($single_extra_info['price']) ? wp_kses_post( wc_price( ($single_extra_info['price'] * $calday) * $singleqty) ) : ''; ?></span>
-						</div>
-					<span class="delete">
-						<input type="hidden" value="<?php echo esc_attr($extra_key); ?>" name="selected_extra[]" />
-						<input type="hidden" value="<?php echo esc_attr($singleqty); ?>" name="selected_qty[]" />
-						<i class="ri-delete-bin-line"></i>
-					</span>
-				</div>
-			</div>
-		<?php
-		}
-	}
-}
-
-$response['extra'] = ob_get_clean();
-wp_send_json( $response );
-wp_die();
 }
 
 function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = '', $dropoff_date = '', $pickup_time = '', $dropoff_time = '', $settings = []){
@@ -1345,14 +1237,6 @@ function tf_car_price_calculation_callback() {
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_time']) ) : '';
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
 
-
-	$extra_ids = isset( $_POST['extra_ids'] ) && is_array( $_POST['extra_ids'] )
-    ? array_map( 'sanitize_text_field', wp_unslash( $_POST['extra_ids'] ) )
-    : [];
-	$extra_qty = isset( $_POST['extra_qty'] ) && is_array( $_POST['extra_qty'] )
-    ? array_map( 'sanitize_text_field', wp_unslash( $_POST['extra_qty'] ) )
-    : [];
-
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 
@@ -1366,12 +1250,19 @@ function tf_car_price_calculation_callback() {
 	}
 	$total_prices = $sale_price;
 	$total_regular_prices = $regular_price;
-
-	if(!empty($extra_ids)){
-		$total_extra = Pricing::set_extra_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $extra_ids, $extra_qty);
-		$total_prices = $total_prices + $total_extra['price'];
-		$total_regular_prices = $total_regular_prices + $total_extra['price'];
-	}
+	$booking_adjustments = Helper::tf_get_car_booking_adjustments(
+		array(
+			'source'       => 'price',
+			'post_id'      => $post_id,
+			'meta'         => $meta,
+			'pickup_date'  => $tf_pickup_date,
+			'dropoff_date' => $tf_dropoff_date,
+			'pickup_time'  => $tf_pickup_time,
+			'dropoff_time' => $tf_dropoff_time,
+		)
+	);
+	$total_prices         += $booking_adjustments['total'];
+	$total_regular_prices += $booking_adjustments['total'];
 	
 	$car_calcellation_policy = apply_filters( 'tf_cancellation_policy_meta', [], $post_id, $meta );
 	$bestRefundPolicy = tf_getBestRefundPolicy($car_calcellation_policy, $tf_pickup_date, $tf_pickup_time);

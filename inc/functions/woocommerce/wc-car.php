@@ -90,8 +90,6 @@ function tf_car_booking_callback() {
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_time']) ) : '';
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
 	$tf_protection = isset( $_POST['protection'] ) && is_array( $_POST['protection'] ) ? wp_unslash( $_POST['protection'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-	$extra_ids  = isset( $_POST['extra_ids'] ) ? wp_unslash( $_POST['extra_ids'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-	$extra_qty  = isset( $_POST['extra_qty'] ) ? wp_unslash( $_POST['extra_qty'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 	$partial_payment  = isset( $_POST['partial_payment'] ) ? sanitize_text_field(wp_unslash($_POST['partial_payment'])) : 'no';
 
 	// Booking Confirmation Details
@@ -155,14 +153,26 @@ function tf_car_booking_callback() {
 
 	$response      = array();
 	$tf_cars_data = array();
-
-	if ( is_array( $extra_qty ) ) {
-		foreach ( $extra_qty as $single_extra_qty ) {
-			if ( 0 > intval( $single_extra_qty ) ) {
-				$response['errors'][] = esc_html__( 'Extra quantity cannot be negative.', 'tourfic' );
-				break;
-			}
-		}
+	$booking_adjustments = Helper::tf_get_car_booking_adjustments(
+		array(
+			'source'       => 'checkout',
+			'post_id'      => $post_id,
+			'meta'         => $meta,
+			'pickup_date'  => $tf_pickup_date,
+			'dropoff_date' => $tf_dropoff_date,
+			'pickup_time'  => $tf_pickup_time,
+			'dropoff_time' => $tf_dropoff_time,
+		)
+	);
+	$total_prices += $booking_adjustments['total'];
+	if ( ! empty( $booking_adjustments['errors'] ) ) {
+		$response['errors'] = array_merge( $response['errors'] ?? array(), $booking_adjustments['errors'] );
+	}
+	if ( ! empty( $booking_adjustments['cart_data'] ) ) {
+		$tf_cars_data['tf_car_data'] = array_merge(
+			$tf_cars_data['tf_car_data'] ?? array(),
+			$booking_adjustments['cart_data']
+		);
 	}
 
 	// Deposit
@@ -174,12 +184,6 @@ function tf_car_booking_callback() {
 	// Check Inventory
 	if ( ! $car_inventory ) {
 		$response['errors'][] = esc_html__( 'Car Not Available this Slot!', 'tourfic' );
-	}
-
-	if(!empty($extra_ids)){
-		$total_extra = Pricing::set_extra_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $extra_ids, $extra_qty);
-		$total_prices = $total_prices + $total_extra['price'];
-		$tf_cars_data['tf_car_data']['extras'] = $total_extra['title'];
 	}
 
 	if(!empty($tf_protection)){
@@ -309,10 +313,10 @@ function tf_car_booking_callback() {
 				'dropoff_location'   => $dropoff,
 				'dropoff_date'   => $tf_dropoff_date,
 				'dropoff_time'   => $tf_dropoff_time,
-				'extra' => !empty($tf_cars_data['tf_car_data']['extras']) ? $tf_cars_data['tf_car_data']['extras'] : '',
 				'protection' => !empty($tf_cars_data['tf_car_data']['protection']) ? $tf_cars_data['tf_car_data']['protection'] : '',
 				'total_price' => $total_prices
 			];
+			$order_details = array_merge( $order_details, $booking_adjustments['order_details'] );
 
 			$order_data = array(
 				'post_id'          => $post_id,
@@ -438,12 +442,6 @@ function car_display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 			'value' => $cart_item['tf_car_data']['tf_dropoff_date'].' - '. $cart_item['tf_car_data']['tf_dropoff_time'],
 		);
 	}
-	if ( isset( $cart_item['tf_car_data']['extras'] ) ) {
-		$item_data[] = array(
-			'key'   => esc_html__( 'Extra', 'tourfic' ),
-			'value' => $cart_item['tf_car_data']['extras'],
-		);
-	}
 	if ( isset( $cart_item['tf_car_data']['protection'] ) ) {
 		$item_data[] = array(
 			'key'   => esc_html__( 'Car Protection', 'tourfic' ),
@@ -457,7 +455,7 @@ function car_display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 		);
 	}
 
-	return $item_data;
+	return apply_filters( 'tourfic_car_cart_item_data', $item_data, $cart_item );
 
 }
 
@@ -479,7 +477,6 @@ function tf_car_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	$tf_dropoff_date = !empty($values['tf_car_data']['tf_dropoff_date']) ? $values['tf_car_data']['tf_dropoff_date'] : '';
 	$tf_pickup_time = !empty($values['tf_car_data']['tf_pickup_time']) ? $values['tf_car_data']['tf_pickup_time'] : '';
 	$tf_dropoff_time = !empty($values['tf_car_data']['tf_dropoff_time']) ? $values['tf_car_data']['tf_dropoff_time'] : '';
-	$extras = !empty($values['tf_car_data']['extras']) ? $values['tf_car_data']['extras'] : '';
 	$protection = !empty($values['tf_car_data']['protection']) ? $values['tf_car_data']['protection'] : '';
 	$due = !empty($values['tf_car_data']['due']) ? wc_price($values['tf_car_data']['due']) : '';
 	/**
@@ -517,10 +514,6 @@ function tf_car_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	if ( $tf_dropoff_time ) {
 		$item->update_meta_data( 'Drop Off Time', $tf_dropoff_time );
 	}
-	if ( $extras ) {
-		$item->update_meta_data( 'Extra', $extras );
-	}
-
 	if ( $protection ) {
 		$item->update_meta_data( 'Protection', $protection );
 	}
@@ -528,6 +521,8 @@ function tf_car_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	if ( $due ) {
 		$item->update_meta_data( 'Due', $due );
 	}
+
+	do_action( 'tourfic_car_checkout_create_order_line_item', $item, $values, $order, $cart_item_key );
 
 }
 
@@ -632,7 +627,6 @@ function tf_add_car_data_checkout_order_processed( $order_id, $posted_data, $ord
 			$tf_dropoff_date = $item->get_meta( 'Drop Off Date', true );
 			$tf_dropoff_time = $item->get_meta( 'Drop Off Time', true );
 			$tf_protection = $item->get_meta( 'Protection', true );
-			$tf_extra = $item->get_meta( 'Extra', true );
 			$tf_due = $item->get_meta( 'Due', true );
 
 			$iteminfo = [
@@ -642,21 +636,21 @@ function tf_add_car_data_checkout_order_processed( $order_id, $posted_data, $ord
 				'dropoff_location'   => $dropoff,
 				'dropoff_date'   => $tf_dropoff_date,
 				'dropoff_time'   => $tf_dropoff_time,
-				'extra' => !empty($tf_extra) ? $tf_extra : '',
 				'protection' => !empty($tf_protection) ? $tf_protection : '',
 				'due' => !empty($tf_due) ? $tf_due : '',
 				'total_price' => $price,
 				'tax_info' => wp_json_encode($fee_sums)
 			];
 
-			$tf_integration_order_data[] = [
+			$iteminfo = apply_filters( 'tourfic_car_order_item_details', $iteminfo, $item, $order );
+
+			$integration_item = [
 				'pickup_location'   => $pickup,
 				'pickup_date'   => $tf_pickup_date,
 				'pickup_time'   => $tf_pickup_time,
 				'dropoff_location'   => $dropoff,
 				'dropoff_date'   => $tf_dropoff_date,
 				'dropoff_time'   => $tf_dropoff_time,
-				'extra' => !empty($tf_extra) ? $tf_extra : '',
 				'protection' => !empty($tf_protection) ? $tf_protection : '',
 				'due' => !empty($tf_due) ? $tf_due : '',
 				'total_price' => $price,
@@ -665,6 +659,7 @@ function tf_add_car_data_checkout_order_processed( $order_id, $posted_data, $ord
 				'order_status'   => $order->get_status(),
 				'order_date'     => gmdate( 'Y-m-d H:i:s' )
 			];
+			$tf_integration_order_data[] = apply_filters( 'tourfic_car_integration_order_item', $integration_item, $item, $order );
 
 			$tf_integration_order_status = [
 				'customer_id'    => $order->get_customer_id(),
@@ -822,7 +817,6 @@ function tf_add_car_data_checkout_order_processed_block_checkout( $order ) {
 			$tf_dropoff_date = $item->get_meta( 'Drop Off Date', true );
 			$tf_dropoff_time = $item->get_meta( 'Drop Off Time', true );
 			$tf_protection = $item->get_meta( 'Protection', true );
-			$tf_extra = $item->get_meta( 'Extra', true );
 			$tf_due = $item->get_meta( 'Due', true );
 
 			$iteminfo = [
@@ -832,21 +826,21 @@ function tf_add_car_data_checkout_order_processed_block_checkout( $order ) {
 				'dropoff_location'   => $dropoff,
 				'dropoff_date'   => $tf_dropoff_date,
 				'dropoff_time'   => $tf_dropoff_time,
-				'extra' => !empty($tf_extra) ? $tf_extra : '',
 				'protection' => !empty($tf_protection) ? $tf_protection : '',
 				'due' => !empty($tf_due) ? $tf_due : '',
 				'total_price' => $price,
 				'tax_info' => wp_json_encode($fee_sums)
 			];
 
-			$tf_integration_order_data[] = [
+			$iteminfo = apply_filters( 'tourfic_car_order_item_details', $iteminfo, $item, $order );
+
+			$integration_item = [
 				'pickup_location'   => $pickup,
 				'pickup_date'   => $tf_pickup_date,
 				'pickup_time'   => $tf_pickup_time,
 				'dropoff_location'   => $dropoff,
 				'dropoff_date'   => $tf_dropoff_date,
 				'dropoff_time'   => $tf_dropoff_time,
-				'extra' => !empty($tf_extra) ? $tf_extra : '',
 				'protection' => !empty($tf_protection) ? $tf_protection : '',
 				'due' => !empty($tf_due) ? $tf_due : '',
 				'total_price' => $price,
@@ -855,6 +849,7 @@ function tf_add_car_data_checkout_order_processed_block_checkout( $order ) {
 				'order_status'   => $order->get_status(),
 				'order_date'     => gmdate( 'Y-m-d H:i:s' )
 			];
+			$tf_integration_order_data[] = apply_filters( 'tourfic_car_integration_order_item', $integration_item, $item, $order );
 
 			$tf_integration_order_status = [
 				'customer_id'    => $order->get_customer_id(),

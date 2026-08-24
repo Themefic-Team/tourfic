@@ -349,8 +349,8 @@ class Booking_Form {
 		$car_booking_by                  = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : '1';
 		$car_instructions_section_status = ! empty( $meta['instructions_section'] ) ? $meta['instructions_section'] : '';
 		$car_instructions_content        = ! empty( $meta['instructions_content'] ) ? $meta['instructions_content'] : '';
-		$car_extra_sec_title             = apply_filters( 'tf_car_extra_sec_title', '', $post_id, $meta );
-		$car_extras                      = apply_filters( 'tf_car_extra_meta', null, $post_id, $meta );
+		$car_booking_extensions          = apply_filters( 'tourfic_car_booking_extensions', array(), $post_id, $meta );
+		$car_booking_extensions          = is_array( $car_booking_extensions ) ? $car_booking_extensions : array();
 		$tf_pickup_date                  = ! empty( $_GET['pickup_date'] ) ? sanitize_text_field( wp_unslash( $_GET['pickup_date'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$tf_dropoff_date                 = ! empty( $_GET['dropoff_date'] ) ? sanitize_text_field( wp_unslash( $_GET['dropoff_date'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$check_in_out                    = '';
@@ -401,14 +401,9 @@ class Booking_Form {
                 <p><?php echo wp_kses_post(carPricing::is_taxable($meta)); ?></p>
             </div>
 
-			<div class="tf-extra-added-info">
-                <div class="tf-extra-added-box tf-flex tf-flex-gap-16 tf-flex-direction-column">
-                    <h3><?php esc_html_e("Extras added", "tourfic"); ?></h3>
-                    <div class="tf-added-extra tf-flex tf-flex-gap-16 tf-flex-direction-column">
-                        
-                    </div>
-				</div>
-			</div>
+			<?php foreach ( $car_booking_extensions as $car_booking_extension ) : ?>
+				<?php do_action( 'tourfic_car_render_booking_extension', $car_booking_extension, $post_id, $meta, 'summary' ); ?>
+			<?php endforeach; ?>
 
             <div class="tf-date-select-box">
 
@@ -695,7 +690,9 @@ class Booking_Form {
                 </div>
             </div>
 
-            <?php do_action( 'tf_car_extras', $car_extras, $post_id, $car_extra_sec_title ); ?>
+			<?php foreach ( $car_booking_extensions as $car_booking_extension ) : ?>
+				<?php do_action( 'tourfic_car_render_booking_extension', $car_booking_extension, $post_id, $meta, 'selection' ); ?>
+			<?php endforeach; ?>
 		<?php echo 'yes' === $wrapper ? '</div>' : ''; ?>
 		<script>
 			(function ($) {

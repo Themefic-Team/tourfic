@@ -12,12 +12,14 @@ if ( 'cli' === PHP_SAPI && ! defined( 'ABSPATH' ) ) {
 defined( 'ABSPATH' ) || exit;
 
 $root = dirname( __DIR__, 2 );
+$pro_root = dirname( $root ) . '/tourfic-pro';
 
 $files = array(
 	'hotel'     => $root . '/inc/functions/woocommerce/wc-hotel.php',
 	'tour'      => $root . '/inc/functions/woocommerce/wc-tour.php',
 	'apartment' => $root . '/inc/functions/woocommerce/wc-apartment.php',
 	'car'       => $root . '/inc/functions/woocommerce/wc-car.php',
+	'car_extras' => $pro_root . '/inc/classes/TF_Pro_Car_Extras.php',
 );
 
 foreach ( $files as $label => $file ) {
@@ -67,6 +69,7 @@ $tour_source      = tf_booking_security_file( $files['tour'] );
 $hotel_source     = tf_booking_security_file( $files['hotel'] );
 $apartment_source = tf_booking_security_file( $files['apartment'] );
 $car_source       = tf_booking_security_file( $files['car'] );
+$car_extras_source = tf_booking_security_file( $files['car_extras'] );
 
 $tour_booking = tf_booking_security_function_body( $tour_source, 'tf_tours_booking_function' );
 tf_booking_security_assert(
@@ -123,8 +126,12 @@ tf_booking_security_assert(
 	'Car booking must remain a public booking endpoint.'
 );
 tf_booking_security_assert(
-	false !== strpos( $car_booking, '0 > intval( $single_extra_qty )' ),
-	'Car booking must reject negative extra quantities.'
+	false === strpos( $car_booking, 'extra_qty' ),
+	'Free Car booking must not own paid Car Extras request validation.'
+);
+tf_booking_security_assert(
+	false !== strpos( $car_extras_source, 'Extra quantity cannot be negative.' ),
+	'Pro Car Extras must reject negative extra quantities.'
 );
 
 $tour_price      = tf_booking_security_function_body( $tour_source, 'tf_tours_set_order_price' );
