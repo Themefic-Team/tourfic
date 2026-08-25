@@ -1157,8 +1157,6 @@ trait TF_API_Documentation_Examples {
 			'protections'            => array(),
 			'instructions_section'   => '0',
 			'instructions_content'   => '',
-			'cancellation_section'   => '0',
-			'calcellation_policy'    => array(),
 			'booking-by'             => '1',
 			'booking-url'            => '',
 			'booking-attribute'      => '',

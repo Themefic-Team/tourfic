@@ -639,7 +639,7 @@ class Booking_Form {
                     </div>
                 <?php } ?>
 
-                <?php do_action( 'tf_car_cancellation', $post_id ); ?>
+                <?php do_action( 'tourfic_car_booking_after_fields', $post_id, $meta ); ?>
             </div>
             <div class="tf-mobile-booking-btn">
                 <div class="tf-price-header">

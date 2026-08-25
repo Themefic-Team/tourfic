@@ -9798,8 +9798,7 @@ div#tf-destinationautocomplete-list div:before {
 .single-tf_carrental .tf-single-template__one .tf-single-car-details-warper .tf-car-details-column .tf-template-part {
   width: 100%;
 }
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup {
+.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup {
   position: fixed;
   left: 0;
   top: 0;
@@ -9812,66 +9811,32 @@ div#tf-destinationautocomplete-list div:before {
   justify-content: center;
   display: none;
 }
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp {
+.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp {
   border-radius: 16px;
   background: #ffffff;
   padding: 16px 24px;
   width: 850px;
 }
 @media only screen and (max-width: 768px) {
-  .single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp,
-  .single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp,
-  .single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp,
-  .single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp {
+  .single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp {
     width: 100%;
   }
 }
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-popup-header,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-popup-header,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-popup-header,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-popup-header,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-popup-header,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header {
+.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header {
   margin-bottom: 24px;
   flex-wrap: nowrap;
 }
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header h3,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-popup-header h3,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-popup-header h3,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header h3,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-popup-header h3,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-popup-header h3,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-popup-header h3,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header h3 {
+.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header h3 {
   color: var(--tf-text-heading);
   font-size: 1.313rem;
   font-weight: 700;
   margin: 0;
   text-align: left;
 }
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header .tf-close-popup,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-popup-header .tf-close-popup,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-popup-header .tf-close-popup,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header .tf-close-popup,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-popup-header .tf-close-popup,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-popup-header .tf-close-popup,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-popup-header .tf-close-popup,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header .tf-close-popup {
+.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header .tf-close-popup {
   cursor: pointer;
 }
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper {
+.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper {
   text-align: left;
   color: var(--tf-text-paragraph);
   font-size: 1rem;
@@ -9882,57 +9847,22 @@ div#tf-destinationautocomplete-list div:before {
   scrollbar-color: #aaa #eee;
   /* Chrome, Edge, and Safari */
 }
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar {
+.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar {
   width: 5px;
 }
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track {
+.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track {
   background: #ffffff;
 }
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb {
+.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb {
   background-color: #aaa;
   border-radius: 5px;
   border: 3px solid #ffffff;
 }
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper p,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper p,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper p,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper p,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper p,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper p,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper p,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper p {
+.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper p {
   color: var(--tf-text-paragraph);
   font-size: 1rem;
 }
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper table,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper table,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper table,
-.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper table,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper table,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper table,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper table,
-.single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper table {
+.single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper table {
   margin-bottom: 0px;
 }
 

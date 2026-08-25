@@ -1025,16 +1025,12 @@
                     }
                 },
                 success: function (response) {
-                    $('.tf-cancellation-box').html('');
-                    $('.tf-cancellation-box').hide();
                     if(response){
                         if(response.data.total_price){
                             $('.tf-price-header h2').html(response.data.total_price);
                         }
-                        if(response.data.cancellation){
-                            $('.tf-cancellation-box').html(response.data.cancellation);
-                            $('.tf-cancellation-box').show();
-                        }
+
+                        $(document).trigger('tourfic:car-booking:price-response', [response.data]);
                     }
                 },
                 complete: function () {

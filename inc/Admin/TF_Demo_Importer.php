@@ -2110,8 +2110,6 @@ class TF_Demo_Importer {
 			'protections',
 			'instructions_section',
 			'instructions_content',
-			'cancellation_section',
-			'calcellation_policy',
 			'booking-by',
 			'booking-url',
 			'booking-attribute',

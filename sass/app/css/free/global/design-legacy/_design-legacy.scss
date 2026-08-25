@@ -205,8 +205,7 @@
                     }
                 }
             }
-            .tf-car-instraction-popup,
-            .tf-car-cancellation-popup{
+            .tf-car-instraction-popup{
                 position: fixed;
                 left: 0;
                 top: 0;
@@ -218,8 +217,7 @@
                 align-items: center;
                 justify-content: center;
                 display: none;
-                .tf-instraction-popup-warp,
-                .tf-cancellation-popup-warp{
+                .tf-instraction-popup-warp{
                     border-radius: 16px;
                     background: $color-white;
                     padding: 16px 24px;
@@ -227,8 +225,7 @@
                     @media #{$max768}{
                         width: 100%;
                     }
-                    .tf-instraction-popup-header,
-                    .tf-cancellation-popup-header{
+                    .tf-instraction-popup-header{
                         margin-bottom: 24px;
                         flex-wrap: nowrap;
                         h3{
@@ -242,8 +239,7 @@
                             cursor: pointer;
                         }
                     }
-                    .tf-instraction-content-wraper,
-                    .tf-cancellation-content-wraper{
+                    .tf-instraction-content-wraper{
                         text-align: left;
                         color: $color-text;
                         font-size: 1rem;
