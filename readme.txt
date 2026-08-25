@@ -478,7 +478,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.23.3 – August 20, 2026 =
+= 2.23.3 – August 25, 2026 =
 
 - Fixed: WordPress.org directory compliance and security issues.
 - Improved: Source-code transparency, compatibility, and bundled third-party libraries.
