@@ -734,8 +734,8 @@ class TF_Demo_Importer {
 			'map-section-title',
 			'review-section-title',
 			't-wishlist',
-			'type',
-			'pricing',
+			null,
+			null,
 			'discount_type',
 			'discount_price',
 			'disable_adult_price',
@@ -749,8 +749,8 @@ class TF_Demo_Importer {
 			'[location][latitude]',
 			'[location][longitude]',
 			'[location][zoom]',
-			'group_price',
-			'allowed_time',
+			null,
+			null,
 			'min_days_before_book',
 			'disable_same_day',
 			'disable_range',
@@ -759,13 +759,13 @@ class TF_Demo_Importer {
 			'cont_min_people',
 			'cont_max_people',
 			'custom_avail',
-			'custom_pricing_by',
+			null,
 			'cont_custom_date',
-			'min_seat',
-			'max_seat',
-			'[fixed_availability][date][from]',
-			'[fixed_availability][date][to]',
-			'max_capacity',
+			null,
+			null,
+			null,
+			null,
+			null,
 			'itinerary-downloader',
 			'itinerary-downloader-title',
 			'itinerary-downloader-desc',
@@ -1036,10 +1036,6 @@ class TF_Demo_Importer {
 						$post_meta['tf_tours_opt']['location'][ $field ] = $row[ $column_index ];
 					} else if ( $field == 'latitude' ) {
 						$post_meta['tf_tours_opt']['location'][ $field ] = $row[ $column_index ];
-					} else if ( $field == 'min_seat' ) {
-						$post_meta['tf_tours_opt']['fixed_availability'][ $field ] = $row[ $column_index ];
-					} else if ( $field == 'max_seat' ) {
-						$post_meta['tf_tours_opt']['fixed_availability'][ $field ] = $row[ $column_index ];
 					} else if ( $field === 'tour_gallery' && ! empty( $row[ $column_index ] ) ) {
 						// Extract the image URLs from the CSV row
 						$image_urls = explode( ',', $row[ $column_index ] );

@@ -34,6 +34,8 @@ $free_runtime = file_get_contents( $root . '/inc/Classes/Tour/Tour.php' );
 $free_checkout = file_get_contents( $root . '/inc/functions/woocommerce/wc-tour.php' );
 $free_backend_booking = file_get_contents( $root . '/inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php' );
 $free_frontend_js = file_get_contents( $root . '/sass/app/js/free/tourfic.js' );
+$free_migrator = file_get_contents( $root . '/inc/Classes/Migrator.php' );
+$free_demo_importer = file_get_contents( $root . '/inc/Admin/TF_Demo_Importer.php' );
 $readme      = file_get_contents( $root . '/readme.txt' );
 
 foreach (
@@ -106,6 +108,35 @@ foreach ( array( 'allowed_time', 'package_start_time', 'name="check-in-time"', '
 	tf_availability_ownership_assert(
 		false === strpos( $free_schedule_runtime, $marker ),
 		'Free runtime still implements Pro schedule marker ' . $marker . '.'
+	);
+}
+
+$free_legacy_migration = substr(
+	$free_migrator,
+	strpos( $free_migrator, 'public function tf_tours_availability_migrate' )
+);
+foreach ( array( 'fixed_availability', 'allowed_time', 'group_price', 'custom_pricing_by' ) as $marker ) {
+	tf_availability_ownership_assert(
+		false === strpos( $free_legacy_migration, $marker ),
+		'Free legacy availability migration still interprets Pro marker ' . $marker . '.'
+	);
+}
+foreach ( array( "'tourfic_tour_legacy_availability_data'", "'tf_tour_availability_core_migration'" ) as $marker ) {
+	tf_availability_ownership_assert(
+		false !== strpos( $free_legacy_migration, $marker ),
+		'Free legacy availability migration is missing neutral contract ' . $marker . '.'
+	);
+}
+$tour_demo_fields = substr(
+	$free_demo_importer,
+	strpos( $free_demo_importer, '$dummy_tours_fields' ),
+	strpos( $free_demo_importer, 'foreach', strpos( $free_demo_importer, '$dummy_tours_fields' ) )
+		- strpos( $free_demo_importer, '$dummy_tours_fields' )
+);
+foreach ( array( "'group_price'", "'allowed_time'", "'[fixed_availability][date][from]'", "'[fixed_availability][date][to]'" ) as $marker ) {
+	tf_availability_ownership_assert(
+		false === strpos( $tour_demo_fields, $marker ),
+		'Free Tour demo importer still maps Pro marker ' . $marker . '.'
 	);
 }
 foreach (
@@ -188,6 +219,19 @@ tf_availability_ownership_assert(
 	false !== strpos( $pro_server, "current_user_can( 'edit_post', \$post_id )" ),
 	'Pro availability mutations must authorize the concrete tour.'
 );
+foreach (
+	array(
+		'tourfic_tour_legacy_availability_data',
+		'tf_pro_tour_availability_migration',
+		'legacy_fixed_tour_availability',
+		'legacy_tour_times',
+	) as $marker
+) {
+	tf_availability_ownership_assert(
+		false !== strpos( $pro_server, $marker ),
+		'Pro legacy availability owner is missing ' . $marker . '.'
+	);
+}
 tf_availability_ownership_assert(
 	false !== strpos( $pro_loader, 'array_merge( $pro_fields ?: array(), $fields )' ),
 	'Pro enhanced renderers must load before matching Free renderer classes.'

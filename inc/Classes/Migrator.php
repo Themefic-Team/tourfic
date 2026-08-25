@@ -1276,20 +1276,16 @@ class Migrator {
 			$searchable_keys = [
 				'tour_as_featured',
 				'location',
-				'pricing',
 				'adult_price',
 				'child_price',
 				'infant_price',
-				'group_price',
-				'type',
 				'cont_min_people',
 				'cont_max_people',
 				'cont_max_capacity',
 				'disable_range',
 				'custom_avail',
 				'cont_custom_date',
-				'disable_specific',
-				'fixed_availability'
+				'disable_specific'
 			];
 			$args            = array(
 				'post_type'      => 'tf_tours',
@@ -1381,360 +1377,216 @@ class Migrator {
 	}
 
 	/**
-	 * Migrate Tour Availability data
-	*/
-	public function tf_tours_availability_migrate(){
-		if ( empty( get_option( 'tf_tour_availability_migration' ) ) ) {
-			$args = array(
+	 * Migrate Free continuous Tour availability data.
+	 */
+	public function tf_tours_availability_migrate() {
+		if ( ! empty( get_option( 'tf_tour_availability_migration' ) ) ) {
+			return;
+		}
+
+		$tour_loop = new \WP_Query(
+			array(
 				'post_type'      => 'tf_tours',
 				'post_status'    => 'publish',
-				'posts_per_page' => - 1,
+				'posts_per_page' => -1,
+			)
+		);
+
+		while ( $tour_loop->have_posts() ) {
+			$tour_loop->the_post();
+
+			$post_id = get_the_ID();
+			$meta    = get_post_meta( $post_id, 'tf_tours_opt', true );
+			$meta    = is_array( $meta ) ? $meta : array();
+
+			$tour_availability_data = $this->tf_migrate_continuous_tour_availability( $meta );
+			$tour_availability_data = apply_filters(
+				'tourfic_tour_legacy_availability_data',
+				$tour_availability_data,
+				$meta,
+				$post_id
 			);
-			$tour_loop = new \WP_Query( $args );
-			$date_format         = "Y/m/d";
-			while ( $tour_loop->have_posts() ) : $tour_loop->the_post();
-				$post_id = get_the_ID();
-				$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
-				$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
-				$pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-				$discount_type = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : 'none';
-				$tour_availability_data = [];
+			$tour_availability_data = is_array( $tour_availability_data ) ? $tour_availability_data : array();
 
+			$meta['tour_availability'] = wp_json_encode( $tour_availability_data );
+			if ( empty( $meta['custom_avail'] ) ) {
+				$meta['min_person'] = $meta['cont_min_people'] ?? '';
+				$meta['max_person'] = $meta['cont_max_people'] ?? '';
+			}
+			if ( 'none' !== ( $meta['discount_type'] ?? 'none' ) ) {
+				$meta['allow_discount'] = '1';
+			}
 
-				if ( $tour_type == 'fixed' ) {
-					$tf_start_date = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
-					$tf_end_date   = ! empty( $meta['fixed_availability']['date']['to'] ) ? $meta['fixed_availability']['date']['to'] : '';
-				
-					$min_seat     = ! empty( $meta['fixed_availability']['min_seat'] ) ? $meta['fixed_availability']['min_seat'] : '';
-					$max_seat     = ! empty( $meta['fixed_availability']['max_seat'] ) ? $meta['fixed_availability']['max_seat'] : '';
-					$max_capacity = ! empty( $meta['fixed_availability']['max_capacity'] ) ? $meta['fixed_availability']['max_capacity'] : '';
-				
-					$meta['min_person'] = $min_seat;
-					$meta['max_person'] = $max_seat;
-				
-					$tf_tour_adult_price  = $pricing_rule == 'person' && ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : '';
-					$tf_tour_child_price  = $pricing_rule == 'person' && ! empty( $meta['child_price'] ) ? $meta['child_price'] : '';
-					$tf_tour_infant_price = $pricing_rule == 'person' && ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : '';
-					$tf_tour_group_price  = $pricing_rule == 'group' && ! empty( $meta['group_price'] ) ? $meta['group_price'] : '';
-				
-					$tf_start_date = strtotime( $this->tf_convert_date_format( $tf_start_date, $date_format ) );
-					$tf_end_date   = strtotime( $this->tf_convert_date_format( $tf_end_date, $date_format ) );
-				
-					$repeat_years = ! empty( $meta['fixed_availability']['tf-repeat-months-switch'] ) ? $meta['fixed_availability']['tf-repeat-months-switch'] : '';
+			update_post_meta( $post_id, 'tf_tours_opt', $meta );
+		}
 
-					$repeat_months = ! empty( $meta['fixed_availability']['tf-repeat-months-checkbox'] )
-						? $meta['fixed_availability']['tf-repeat-months-checkbox']
-						: [];
-					
-					if ( !empty($tf_start_date) && ! in_array( gmdate('m', $tf_start_date), $repeat_months, true ) ) {
-						$repeat_months[] = gmdate('m', $tf_start_date);
-					}
-				
-					if ( ! empty( $tf_start_date ) && ! empty( $tf_end_date ) ) {
+		wp_reset_postdata();
+		update_option( 'tf_tour_availability_migration', 1 );
+		update_option( 'tf_tour_availability_core_migration', 1 );
+	}
 
-						$start_year = gmdate( 'Y', $tf_start_date );
-						if(!empty($repeat_years)){
-							$tf_tour_repeat_years = [ $start_year, $start_year + 1 ];
-						}else{
-							$tf_tour_repeat_years = [ $start_year ];
-						}
-				
-						// Extract original day values
-						$original_checkin_day  = gmdate( 'd', $tf_start_date );
-						$original_checkout_day = gmdate( 'd', $tf_end_date );
-				
-						foreach ( $tf_tour_repeat_years as $year ) {
-							foreach ( $repeat_months as $month ) {
-								$month = str_pad( $month, 2, '0', STR_PAD_LEFT );
-				
-								$new_check_in_str  = "$year-$month-$original_checkin_day";
-								$new_check_out_str = "$year-$month-$original_checkout_day";
-				
-								$new_check_in  = strtotime( $new_check_in_str );
-								$new_check_out = strtotime( $new_check_out_str );
-				
-								// Skip invalid dates
-								if ( ! $new_check_in || ! $new_check_out ) {
-									continue;
-								}
-				
-								$tf_checkin_date  = gmdate( 'Y/m/d', $new_check_in );
-								$tf_checkout_date = gmdate( 'Y/m/d', $new_check_out );
-				
-								$tf_tour_date = $tf_checkin_date . ' - ' . $tf_checkout_date;
-				
-								$tf_tour_data = [
-									'check_in'     => $tf_checkin_date,
-									'check_out'    => $tf_checkout_date,
-									'pricing_type' => $pricing_rule,
-									'price'        => $tf_tour_group_price,
-									'adult_price'  => $tf_tour_adult_price,
-									'child_price'  => $tf_tour_child_price,
-									'infant_price' => $tf_tour_infant_price,
-									'min_person'   => $min_seat,
-									'max_person'   => $max_seat,
-									'max_capacity' => $max_capacity,
-									'allowed_time' => '',
-									'status'       => 'available',
-								];
-				
-								$tour_availability_data[ $tf_tour_date ] = $tf_tour_data;
-							}
-						}
-					}
+	/**
+	 * Build legacy continuous availability using only Free-owned fields.
+	 *
+	 * @param array $meta Tour metadata.
+	 * @return array
+	 */
+	private function tf_migrate_continuous_tour_availability( $meta ) {
+		if ( ! empty( $meta['custom_avail'] ) ) {
+			return $this->tf_migrate_custom_tour_availability( $meta );
+		}
+
+		$tour_availability_data = array();
+		$disable_range          = is_array( $meta['disable_range'] ?? null ) ? $meta['disable_range'] : array();
+		$disable_specific       = ! empty( $meta['disable_specific'] )
+			? array_filter( array_map( 'trim', explode( ',', $meta['disable_specific'] ) ) )
+			: array();
+		$disabled_days          = is_array( $meta['disabled_day'] ?? null )
+			? array_map( 'strval', $meta['disabled_day'] )
+			: array();
+
+		if ( ! empty( $disable_range ) || ! empty( $disable_specific ) || ! empty( $disabled_days ) ) {
+			$end_timestamp = strtotime( '+1 year', strtotime( gmdate( 'Y-m-d' ) ) );
+			for ( $timestamp = strtotime( gmdate( 'Y-m-d' ) ); $timestamp <= $end_timestamp; $timestamp = strtotime( '+1 day', $timestamp ) ) {
+				$date                           = gmdate( 'Y/m/d', $timestamp );
+				$tour_availability_data[ $date . ' - ' . $date ] = $this->tf_tour_availability_rule(
+					$date,
+					'available',
+					$meta
+				);
+			}
+		}
+
+		foreach ( $disable_range as $disabled_range ) {
+			$from = $disabled_range['date']['from'] ?? '';
+			$to   = $disabled_range['date']['to'] ?? $from;
+			$this->tf_add_tour_unavailable_range( $tour_availability_data, $from, $to );
+		}
+
+		foreach ( $disable_specific as $disabled_date ) {
+			$key = $disabled_date . ' - ' . $disabled_date;
+			if ( ! isset( $tour_availability_data[ $key ] ) ) {
+				$tour_availability_data[ $key ] = $this->tf_tour_availability_rule( $disabled_date, 'unavailable' );
+			}
+		}
+
+		if ( ! empty( $disabled_days ) ) {
+			for ( $day_offset = 0; $day_offset <= 350; $day_offset++ ) {
+				$date       = gmdate( 'Y/m/d', strtotime( "+{$day_offset} day" ) );
+				$day_number = gmdate( 'w', strtotime( $date ) );
+				if ( in_array( $day_number, $disabled_days, true ) ) {
+					$tour_availability_data[ $date . ' - ' . $date ] = $this->tf_tour_availability_rule( $date, 'unavailable' );
 				}
+			}
+		}
 
-				if($tour_type=='continuous'){
-					$custom_avail = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : false;
-					if ( $custom_avail == true ) {
+		return $tour_availability_data;
+	}
 
-						$cont_custom_date = ! empty( $meta['cont_custom_date'] ) ? $meta['cont_custom_date'] : '';
-						if ( ! empty( $cont_custom_date ) && gettype( $cont_custom_date ) == "string" ) {
-							$cont_custom_date_unserial = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-								return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-							}, $cont_custom_date );
-							$cont_custom_date          = unserialize( $cont_custom_date_unserial );
-						}
+	/**
+	 * Build legacy custom-date availability using Free per-person pricing.
+	 *
+	 * @param array $meta Tour metadata.
+	 * @return array
+	 */
+	private function tf_migrate_custom_tour_availability( $meta ) {
+		$custom_dates = $meta['cont_custom_date'] ?? array();
+		if ( is_string( $custom_dates ) ) {
+			$custom_dates = preg_replace_callback(
+				'!s:(\d+):"(.*?)";!',
+				function ( $match ) {
+					return ( (int) $match[1] === strlen( $match[2] ) )
+						? $match[0]
+						: 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+				},
+				$custom_dates
+			);
+			$custom_dates = maybe_unserialize( $custom_dates );
+		}
+		if ( ! is_array( $custom_dates ) ) {
+			return array();
+		}
 
-						if(!empty($cont_custom_date)){
-							$custom_pricing_by = ! empty( $meta['custom_pricing_by'] ) ? $meta['custom_pricing_by'] : 'person';
-							foreach($cont_custom_date as $date){
-								$tf_start_date = ! empty( $date['date']['from'] ) ? $date['date']['from'] : '';
-								$tf_end_date = ! empty( $date['date']['to'] ) ? $date['date']['to'] : $tf_start_date;
+		$tour_availability_data = array();
+		foreach ( $custom_dates as $custom_date ) {
+			$from  = $custom_date['date']['from'] ?? '';
+			$to    = $custom_date['date']['to'] ?? $from;
+			$start = \DateTime::createFromFormat( 'Y/m/d', $from );
+			$end   = \DateTime::createFromFormat( 'Y/m/d', $to );
+			if ( ! $start || ! $end ) {
+				continue;
+			}
 
-								$min_seat = ! empty( $date['min_people'] ) ? $date['min_people'] : '';
-								$max_seat = ! empty( $date['max_people'] ) ? $date['max_people'] : '';
-								$total_capacity = ! empty( $date['max_capacity'] ) ? $date['max_capacity'] : '';
+			$end->modify( '+1 day' );
+			$period = new \DatePeriod( $start, new \DateInterval( 'P1D' ), $end );
+			foreach ( $period as $period_date ) {
+				$date = $period_date->format( 'Y/m/d' );
+				$tour_availability_data[ $date . ' - ' . $date ] = $this->tf_tour_availability_rule(
+					$date,
+					'available',
+					array(
+						'adult_price'      => $custom_date['adult_price'] ?? '',
+						'child_price'      => $custom_date['child_price'] ?? '',
+						'infant_price'     => $custom_date['infant_price'] ?? '',
+						'cont_min_people'  => $custom_date['min_people'] ?? '',
+						'cont_max_people'  => $custom_date['max_people'] ?? '',
+						'cont_max_capacity' => $custom_date['max_capacity'] ?? '',
+					)
+				);
+			}
+		}
 
-								$adult_price = ! empty( $date['adult_price'] ) ? $date['adult_price'] : '';
-								$child_price = ! empty( $date['child_price'] ) ? $date['child_price'] : '';
-								$infant_price = ! empty( $date['infant_price'] ) ? $date['infant_price'] : '';
-								$group_price = ! empty( $date['group_price'] ) ? $date['group_price'] : '';
+		return $tour_availability_data;
+	}
 
-								// Convert to DateTime objects
-								$start = \DateTime::createFromFormat('Y/m/d', $tf_start_date);
-								$end   = \DateTime::createFromFormat('Y/m/d', $tf_end_date);
+	/**
+	 * Add a disabled legacy date range.
+	 *
+	 * @param array  $availability Availability records.
+	 * @param string $from         First date.
+	 * @param string $to           Last date.
+	 */
+	private function tf_add_tour_unavailable_range( &$availability, $from, $to ) {
+		$start = \DateTime::createFromFormat( 'd/m/Y', $from );
+		$end   = \DateTime::createFromFormat( 'd/m/Y', $to );
+		if ( ! $start || ! $end ) {
+			return;
+		}
 
-								if ( $start && $end ) {
-									$end = $end->modify('+1 day');
-									$period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
-									foreach ( $period as $pdate ) {
-										$current_date = $pdate->format('Y/m/d');
-					
-										$tf_tour_date = trim($current_date) . ' - ' . trim($current_date);
-
-										$allowed_time = ! empty( $date['allowed_time'] ) ? $date['allowed_time'] : '';
-
-										$tf_tour_allowed_time = [];
-										if(!empty($allowed_time)){
-											$times = [];
-											$max_capacity = [];
-											foreach($allowed_time as $time){
-												$times[] = $time['time'];
-												$max_capacity[] = $time['max_capacity'];
-											}
-											$tf_tour_allowed_time = [
-												'time' => $times,
-												'cont_max_capacity' => $max_capacity
-											];
-										}
-										
-										$tf_tour_data = [
-											'check_in'     => $current_date,
-											'check_out'    => $current_date,
-											'pricing_type' => $custom_pricing_by,
-											'price'        => $group_price,
-											'adult_price'  => $adult_price,
-											'child_price'  => $child_price,
-											'infant_price' => $infant_price,
-											'min_person'   => $min_seat,
-											'max_person'   => $max_seat,
-											'max_capacity' => $total_capacity,
-											'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
-											'status'       => 'available'
-										];
-
-										$tour_availability_data[$tf_tour_date] = $tf_tour_data;
-									}
-								}
-
-							}
-						}
-					}else{
-						$cont_min_people = ! empty( $meta['cont_min_people'] ) ? $meta['cont_min_people'] : '';
-						$cont_max_people = ! empty( $meta['cont_max_people'] ) ? $meta['cont_max_people'] : '';
-						$cont_max_capacity = ! empty( $meta['cont_max_capacity'] ) ? $meta['cont_max_capacity'] : '';
-
-						$meta['min_person'] = $cont_min_people;
-						$meta['max_person'] = $cont_max_people;
-
-						$allowed_time = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
-						$tf_tour_allowed_time = [];
-						if(!empty($allowed_time)){
-							$times = [];
-							$max_capacity = [];
-							foreach($allowed_time as $time){
-								$times[] = $time['time'];
-								$max_capacity[] = $time['cont_max_capacity'];
-							}
-							$tf_tour_allowed_time = [
-								'time' => $times,
-								'cont_max_capacity' => $max_capacity
-							];
-						}
-
-						$disable_range = ! empty( $meta['disable_range'] ) ? $meta['disable_range'] : '';
-
-						$disable_specific = ! empty( $meta['disable_specific'] ) ? $meta['disable_specific'] : '';
-						$disable_specific = !empty($disable_specific) ? explode(",",$disable_specific) : [];
-
-						$disabled_day = ! empty( $meta['disabled_day'] ) ? $meta['disabled_day'] : '';
-
-						if( !empty($disable_range) || !empty($disable_specific) || !empty($disabled_day) ){
-							//add next 1 years availability
-							for ( $i = strtotime( gmdate( 'Y-m-d' ) ); $i <= strtotime( '+1 year', strtotime( gmdate( 'Y-m-d' ) ) ); $i = strtotime( '+1 day', $i ) ) {
-								$tf_tour_inc_date = gmdate( 'Y/m/d', $i );
-
-								$tf_tour_adult_price  = $pricing_rule == 'person' && ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : '';
-								$tf_tour_child_price  = $pricing_rule == 'person' && ! empty( $meta['child_price'] ) ? $meta['child_price'] : '';
-								$tf_tour_infant_price  = $pricing_rule == 'person' && ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : '';
-								$tf_tour_group_price  = $pricing_rule == 'group' && ! empty( $meta['group_price'] ) ? $meta['group_price'] : '';
-
-								$tf_tour_date = $tf_tour_inc_date . ' - ' . $tf_tour_inc_date;
-								$tf_tour_data = [
-									'check_in'    => $tf_tour_inc_date,
-									'check_out'   => $tf_tour_inc_date,
-									'pricing_type' => $pricing_rule,
-									'price'        => $tf_tour_group_price,
-									'adult_price'  => $tf_tour_adult_price,
-									'child_price'  => $tf_tour_child_price,
-									'infant_price' => $tf_tour_infant_price,
-									'min_person'   => $cont_min_people,
-									'max_person'   => $cont_max_people,
-									'max_capacity' => $cont_max_capacity,
-									'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
-									'status'       => 'available'
-								];
-								$tour_availability_data[ $tf_tour_date ] = $tf_tour_data;
-							}
-						}
-
-						if ( ! empty( $disable_range ) ) {
-							foreach ( $disable_range as $disable ) {
-								if ( ! empty( $disable['date']['from'] ) ) {
-									$tf_checkin_date  = $disable['date']['from'];
-									$tf_checkout_date = ! empty( $disable['date']['to'] ) ? $disable['date']['to'] : $disable['date']['from'];
-						
-									// Convert to DateTime objects
-									$start = \DateTime::createFromFormat('d/m/Y', $tf_checkin_date);
-									$end   = \DateTime::createFromFormat('d/m/Y', $tf_checkout_date);
-						
-									if ( $start && $end ) {
-						
-										$period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
-						
-										foreach ( $period as $date ) {
-											$current_date = $date->format('d/m/Y');
-						
-											$tf_tour_date = trim($current_date) . ' - ' . trim($current_date);
-											$tf_tour_data = [
-												'check_in'     => $current_date,
-												'check_out'    => $current_date,
-												'pricing_type' => $pricing_rule,
-												'price'        => '',
-												'adult_price'  => '',
-												'child_price'  => '',
-												'infant_price' => '',
-												'min_person'   => '',
-												'max_person'   => '',
-												'max_capacity' => '',
-												'allowed_time' => '',
-												'status'       => 'unavailable'
-											];
-						
-											if ( ! array_key_exists( $tf_tour_date, $tour_availability_data ) ) {
-												$tour_availability_data[ $tf_tour_date ] = $tf_tour_data;
-											}
-										}
-									}
-								}
-							}
-						}
-						
-						if(!empty($disable_specific)){
-							foreach($disable_specific as $disable){
-								$tf_tour_date = trim($disable) . ' - ' . trim($disable);
-								$tf_tour_data = [
-									'check_in'     => $disable,
-									'check_out'    => $disable,
-									'pricing_type' => $pricing_rule,
-									'price'        => '',
-									'adult_price'  => '',
-									'child_price'  => '',
-									'infant_price' => '',
-									'min_person'   => '',
-									'max_person'   => '',
-									'max_capacity' => '',
-									'allowed_time' => '',
-									'status'       => 'unavailable'
-								];
-								if ( ! array_key_exists( $tf_tour_date, $tour_availability_data ) ) {
-									$tour_availability_data[ $tf_tour_date ] = $tf_tour_data;
-								}
-							}
-						}
-
-						if(!empty($disabled_day)){
-							for ( $i = 0; $i <= 350; $i ++ ) {
-								$tf_room_date                     = gmdate( 'Y/m/d', strtotime( "+$i day" ) );
-								$day_number = gmdate( 'w', strtotime( $tf_room_date ) );
-								
-								if (in_array($day_number, $disabled_day)){
-									$tf_tour_date = trim($tf_room_date) . ' - ' . trim($tf_room_date);
-									$tf_tour_data = [
-										'check_in'    => $tf_room_date,
-										'check_out'   => $tf_room_date,
-										'pricing_type' => $pricing_rule,
-										'price'        => '',
-										'adult_price'  => '',
-										'child_price'  => '',
-										'infant_price' => '',
-										'min_person'   => '',
-										'max_person'   => '',
-										'max_capacity' => '',
-										'allowed_time' => '',
-										'status'       => 'unavailable'
-									];
-									$tour_availability_data[ $tf_tour_date ] = $tf_tour_data;
-								}
-							}
-						}
-					}
-				}
-
-				// If not an array, initialize it
-				if ( ! is_array( $meta ) ) {
-					$meta = [];
-				}
-				$meta['tour_availability'] = wp_json_encode( $tour_availability_data );
-				if($discount_type!='none'){
-					$meta['allow_discount'] = '1';
-				}
-
-				update_post_meta($post_id, 'tf_tours_opt', $meta);
-
-			endwhile;
-			wp_reset_postdata();
-
-			update_option( 'tf_tour_availability_migration', 1 );
+		$period = new \DatePeriod( $start, new \DateInterval( 'P1D' ), $end );
+		foreach ( $period as $period_date ) {
+			$date = $period_date->format( 'd/m/Y' );
+			$key  = $date . ' - ' . $date;
+			if ( ! isset( $availability[ $key ] ) ) {
+				$availability[ $key ] = $this->tf_tour_availability_rule( $date, 'unavailable' );
+			}
 		}
 	}
 
-	function tf_convert_date_format( $date, $currentFormat ) {
-		$dateTime = \DateTime::createFromFormat( $currentFormat, $date );
-		if ( $dateTime === false ) {
-			return false;
-		}
-		return $dateTime->format( 'Y/m/d' );
+	/**
+	 * Normalize a legacy Free availability record.
+	 *
+	 * @param string $date   Availability date.
+	 * @param string $status Availability status.
+	 * @param array  $values Legacy values.
+	 * @return array
+	 */
+	private function tf_tour_availability_rule( $date, $status, $values = array() ) {
+		$is_available = 'available' === $status;
+
+		return array(
+			'check_in'     => $date,
+			'check_out'    => $date,
+			'pricing_type' => 'person',
+			'price'        => '',
+			'adult_price'  => $is_available ? ( $values['adult_price'] ?? '' ) : '',
+			'child_price'  => $is_available ? ( $values['child_price'] ?? '' ) : '',
+			'infant_price' => $is_available ? ( $values['infant_price'] ?? '' ) : '',
+			'min_person'   => $is_available ? ( $values['cont_min_people'] ?? '' ) : '',
+			'max_person'   => $is_available ? ( $values['cont_max_people'] ?? '' ) : '',
+			'max_capacity' => $is_available ? ( $values['cont_max_capacity'] ?? '' ) : '',
+			'status'       => $status,
+		);
 	}
+
 }
