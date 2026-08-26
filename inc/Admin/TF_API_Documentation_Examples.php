@@ -122,8 +122,6 @@ trait TF_API_Documentation_Examples {
 			'tour_archive_price_minimum_settings' => 'all',
 			'tour_booking_form_button_text'   => '',
 			'tour-option-notice-two'          => '',
-			'deposit-title'                   => '',
-			'deposit-subtitle'                => 'Partial payment information.',
 			'notice_shortcode'                => '',
 			'itinerary-builder-setings'       => array(
 				'itinerary-field'              => array(
@@ -450,9 +448,6 @@ trait TF_API_Documentation_Examples {
 			'discount_hotel_type'       => 'none',
 			'discount_hotel_price'      => '',
 			'price_multi_day'           => '',
-			'allow_deposit'             => '0',
-			'deposit_type'              => 'none',
-			'deposit_amount'            => '',
 			'cancelation-section-title' => '',
 			'calcellation_policy'       => array(),
 			'ical_url'                  => '',
@@ -463,6 +458,29 @@ trait TF_API_Documentation_Examples {
 			'booking-attribute'         => '0',
 			'booking-query'             => '',
 		);
+	}
+
+	private function get_rooms_example_response() {
+		$payload = array(
+			'rooms' => array(
+				array(
+					'id'             => 82,
+					'permalink'      => 'https://example.com/rooms/premium-deluxe-twin/',
+					'title'          => 'Premium Deluxe Twin',
+					'content'        => 'Room description content.',
+					'status'         => 'publish',
+					'author'         => 'admin',
+					'date'           => 'April 27, 2026',
+					'featured_image' => 'https://example.com/uploads/room-featured.jpg',
+					'tf_room_opt'    => $this->get_room_opt_example_payload(),
+					'hotel_id'       => '68',
+					'hotel_title'    => 'Sample Resort Hotel',
+				),
+			),
+			'total' => 12,
+		);
+
+		return wp_json_encode( $payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 	}
 
 	private function get_add_room_example_request() {
@@ -556,9 +574,6 @@ trait TF_API_Documentation_Examples {
 						'disable_adult_price'         => '',
 						'disable_child_price'         => '',
 						'disable_infant_price'        => '',
-						'allow_deposit'               => 'off',
-						'deposit_type'                => '',
-						'deposit_amount'              => '',
 						'text_location'               => '',
 						'location'                    => array(
 							'address'   => 'Example City, Country',
@@ -713,9 +728,6 @@ trait TF_API_Documentation_Examples {
 								'discount_hotel_type'      => 'percent',
 								'discount_hotel_price'     => '10',
 								'price_multi_day'          => '1',
-								'allow_deposit'            => '',
-								'deposit_type'             => '',
-								'deposit_amount'           => '',
 								'avil_by_date'             => '',
 								'gallery'                  => '46,47,48',
 								'features'                 => array(
@@ -863,9 +875,6 @@ trait TF_API_Documentation_Examples {
 			'disable_adult_price'             => '0',
 			'disable_child_price'             => '0',
 			'disable_infant_price'            => '0',
-			'allow_deposit'                   => '0',
-			'deposit_type'                    => 'none',
-			'deposit_amount'                  => '',
 			'type'                            => 'continuous',
 			'custom_avail'                    => '0',
 			'custom_pricing_by'               => 'person',
@@ -992,9 +1001,6 @@ trait TF_API_Documentation_Examples {
 			'discount_type'             => 'none',
 			'discount'                  => '',
 			'booking-by'                => '1',
-			'allow_deposit'             => '0',
-			'deposit_type'              => 'percent',
-			'deposit_amount'            => '',
 			'booking-url'               => '',
 			'booking-attribute'         => '',
 			'booking-query'             => '',
@@ -1148,9 +1154,6 @@ trait TF_API_Documentation_Examples {
 			'discount_type'          => 'none',
 			'discount_price'         => '',
 			'car_numbers'            => '',
-			'allow_deposit'          => '0',
-			'deposit_type'           => 'none',
-			'deposit_amount'         => '',
 			'protection_section'     => '0',
 			'protection_tab_title'   => 'Protection',
 			'protection_content'     => '',

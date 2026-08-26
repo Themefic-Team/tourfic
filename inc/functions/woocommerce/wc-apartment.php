@@ -133,40 +133,6 @@ function tf_apartment_get_booking_total_price( $post_id, $check_in, $check_out, 
 }
 
 /**
- * Calculate payable amount and due for apartment partial payment.
- *
- * @param array   $meta          Apartment meta.
- * @param float   $total_price   Calculated total price.
- * @param string  $make_deposit  Deposit flag.
- * @param integer $booking_type  Booking type.
- * @return array<string, float>
- */
-function tf_apartment_get_booking_payable_and_due( $meta, $total_price, $make_deposit, $booking_type ) {
-	$payable = (float) $total_price;
-	$due     = 0;
-
-	if ( '1' == $booking_type && '1' === $make_deposit && $payable > 0 ) {
-		$deposit_type   = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : '';
-		$deposit_amount = null;
-		$has_deposit    = false;
-
-		Helper::tf_get_deposit_amount( $meta, $payable, $deposit_amount, $has_deposit );
-		if ( $has_deposit && in_array( $deposit_type, array( 'percent', 'fixed' ), true ) ) {
-			$deposit_amount = min( (float) $deposit_amount, $payable );
-			if ( $deposit_amount > 0 ) {
-				$due     = max( 0, $payable - $deposit_amount );
-				$payable = $deposit_amount;
-			}
-		}
-	}
-
-	return array(
-		'payable' => $payable,
-		'due'     => $due,
-	);
-}
-
-/**
  * Build billing/shipping details for apartment booking without payment.
  *
  * @param array $confirmation_details Confirmation fields from request.
@@ -291,7 +257,6 @@ function tf_apartment_booking_callback() {
 	$children          = isset( $_POST['children'] ) ? intval( sanitize_text_field( wp_unslash($_POST['children']) ) ) : '0';
 	$infant            = isset( $_POST['infant'] ) ? intval( sanitize_text_field( wp_unslash($_POST['infant']) ) ) : '0';
 	$check_in_out_date = isset( $_POST['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_POST['check-in-out-date']) ) : '';
-	$make_deposit      = isset( $_POST['deposit'] ) ? sanitize_text_field( wp_unslash( $_POST['deposit'] ) ) : '0';
 	$tf_confirmation_details = ! empty( $_POST['booking_confirm'] ) ? wp_unslash( $_POST['booking_confirm'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 	$product_id          = get_post_meta( $post_id, 'product_id', true );
@@ -345,13 +310,14 @@ function tf_apartment_booking_callback() {
 			$tf_apartment_data['tf_apartment_data']['total_price']  = $total_price;
 		}
 
-		if ( ! empty( $tf_apartment_data['tf_apartment_data']['total_price'] ) ) {
-			$payable_info = tf_apartment_get_booking_payable_and_due( $meta, $tf_apartment_data['tf_apartment_data']['total_price'], $make_deposit, $tf_booking_type );
-			if ( $payable_info['due'] > 0 ) {
-				$tf_apartment_data['tf_apartment_data']['due'] = $payable_info['due'];
-			}
-			$tf_apartment_data['tf_apartment_data']['total_price'] = $payable_info['payable'];
-		}
+		$tf_apartment_data['tf_apartment_data'] = apply_filters(
+			'tourfic_apartment_booking_data',
+			$tf_apartment_data['tf_apartment_data'],
+			array(
+				'meta'         => $meta,
+				'booking_type' => $tf_booking_type,
+			)
+		);
 
 		if ( 3 == $tf_booking_type ) {
 			$customer_details               = tf_apartment_get_without_payment_customer_details( $tf_confirmation_details );
@@ -363,7 +329,6 @@ function tf_apartment_booking_callback() {
 				'child'       => $children,
 				'infants'     => $infant,
 				'total_price' => ! empty( $tf_apartment_data['tf_apartment_data']['total_price'] ) ? $tf_apartment_data['tf_apartment_data']['total_price'] : 0,
-				'due_price'   => ! empty( $tf_apartment_data['tf_apartment_data']['due'] ) ? $tf_apartment_data['tf_apartment_data']['due'] : '',
 			);
 			$without_payment_order_data     = array(
 				'post_id'          => $post_id,
@@ -459,7 +424,6 @@ function tf_apartment_booking_popup_callback() {
 	$children          = isset( $_POST['children'] ) ? intval( sanitize_text_field( wp_unslash( $_POST['children'] ) ) ) : 0;
 	$infant            = isset( $_POST['infant'] ) ? intval( sanitize_text_field( wp_unslash( $_POST['infant'] ) ) ) : 0;
 	$check_in_out_date = isset( $_POST['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_POST['check-in-out-date'] ) ) : '';
-	$make_deposit      = isset( $_POST['deposit'] ) ? sanitize_text_field( wp_unslash( $_POST['deposit'] ) ) : '0';
 
 	$meta                = get_post_meta( $post_id, 'tf_apartment_opt', true );
 	$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
@@ -492,7 +456,17 @@ function tf_apartment_booking_popup_callback() {
 		die();
 	}
 
-	$payable_info = tf_apartment_get_booking_payable_and_due( $meta, $total_price, $make_deposit, $tf_booking_type );
+	$payment_summary = apply_filters(
+		'tourfic_apartment_booking_payment_summary',
+		array(
+			'payable' => $total_price,
+			'rows'    => array(),
+		),
+		array(
+			'meta'         => $meta,
+			'booking_type' => $tf_booking_type,
+		)
+	);
 	$date_format  = ! empty( Helper::tfopt( 'tf-date-format-for-users' ) ) ? Helper::tfopt( 'tf-date-format-for-users' ) : 'Y/m/d';
 	$summary      = '';
 
@@ -547,10 +521,10 @@ function tf_apartment_booking_popup_callback() {
 		<td align="right">' . wc_price( $total_price ) . '</td>
 	</tr>';
 
-	if ( ! empty( $payable_info['due'] ) ) {
+	foreach ( $payment_summary['rows'] as $payment_row ) {
 		$summary .= '<tr>
-			<td align="left">' . esc_html__( 'Due', 'tourfic' ) . '</td>
-			<td align="right">' . wc_price( $payable_info['due'] ) . '</td>
+			<td align="left">' . esc_html( $payment_row['label'] ) . '</td>
+			<td align="right">' . wc_price( $payment_row['amount'] ) . '</td>
 		</tr>';
 	}
 
@@ -558,7 +532,7 @@ function tf_apartment_booking_popup_callback() {
 			<tfoot>
 				<tr>
 					<th align="left">' . esc_html__( 'Total', 'tourfic' ) . '</th>
-					<th align="right">' . wc_price( $payable_info['payable'] ) . '</th>
+					<th align="right">' . wc_price( $payment_summary['payable'] ) . '</th>
 				</tr>
 			</tfoot>
 		</table>';
@@ -629,14 +603,7 @@ function tf_apartment_cart_item_custom_meta_data( $item_data, $cart_item ) {
 		);
 	}
 
-	if ( ! empty( $cart_item['tf_apartment_data']['due'] ) ) {
-		$item_data[] = array(
-			'key'   => esc_html__( 'Due', 'tourfic' ),
-			'value' => wp_strip_all_tags( wc_price( $cart_item['tf_apartment_data']['due'] ) ),
-		);
-	}
-
-	return $item_data;
+	return apply_filters( 'tourfic_apartment_cart_item_data', $item_data, $cart_item );
 
 }
 
@@ -673,7 +640,6 @@ function tf_apartment_custom_order_data( $item, $cart_item_key, $values, $order 
 	$children          = ! empty( $values['tf_apartment_data']['children'] ) ? $values['tf_apartment_data']['children'] : '';
 	$infant            = ! empty( $values['tf_apartment_data']['infant'] ) ? $values['tf_apartment_data']['infant'] : '';
 	$check_in_out_date = ! empty( $values['tf_apartment_data']['check_in_out_date'] ) ? $values['tf_apartment_data']['check_in_out_date'] : '';
-	$due               = ! empty( $values['tf_apartment_data']['due'] ) ? floatval( $values['tf_apartment_data']['due'] ) : null;
 
 	/**
 	 * Show data in order meta & email
@@ -706,10 +672,8 @@ function tf_apartment_custom_order_data( $item, $cart_item_key, $values, $order 
 		$item->update_meta_data( 'check_in_out_date', $check_in_out_date );
 	}
 
-	if ( ! empty( $due ) ) {
-		$item->update_meta_data( 'Due', wp_strip_all_tags( wc_price( $due ) ) );
-		$item->update_meta_data( '_due_price', $due );
-	}
+
+	do_action( 'tourfic_apartment_checkout_create_order_line_item', $item, $values );
 }
 
 add_action( 'woocommerce_checkout_create_order_line_item', 'tf_apartment_custom_order_data', 10, 4 );
@@ -810,7 +774,6 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 			$adult             = $item->get_meta( 'adults', true );
 			$child             = $item->get_meta( 'children', true );
 			$infants           = $item->get_meta( 'infant', true );
-			$due               = $item->get_meta( '_due_price', true );
 
 			if ( $check_in_out_date ) {
 				list( $check_in, $check_out ) = tf_split_date_range( $check_in_out_date );
@@ -823,23 +786,23 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 				'child'       => $child,
 				'infants'     => $infants,
 				'total_price' => $price,
-				'due_price'   => $due,
 				'tax_info' => wp_json_encode($fee_sums)
 			];
+			$iteminfo = apply_filters( 'tourfic_apartment_order_item_details', $iteminfo, $item );
 
-			$tf_integration_order_data[] = [
+			$integration_order_item = [
 				'check_in'       => $check_in,
 				'check_out'      => $check_out,
 				'adult'          => $adult,
 				'child'          => $child,
 				'infants'        => $infants,
 				'total_price'    => $price,
-				'due_price'      => $due,
 				'customer_id'    => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status'   => $order->get_status(),
 				'order_date'     => gmdate( 'Y-m-d H:i:s' )
 			];
+			$tf_integration_order_data[] = apply_filters( 'tourfic_apartment_integration_order_item', $integration_order_item, $item );
 
 			$tf_integration_order_status = [
 				'customer_id'    => $order->get_customer_id(),
@@ -994,7 +957,6 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 			$adult             = $item->get_meta( 'adults', true );
 			$child             = $item->get_meta( 'children', true );
 			$infants           = $item->get_meta( 'infant', true );
-			$due               = $item->get_meta( '_due_price', true );
 
 			if ( $check_in_out_date ) {
 				list( $check_in, $check_out ) = tf_split_date_range( $check_in_out_date );
@@ -1007,23 +969,23 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 				'child'       => $child,
 				'infants'     => $infants,
 				'total_price' => $price,
-				'due_price'   => $due,
 				'tax_info' => wp_json_encode($fee_sums)
 			];
+			$iteminfo = apply_filters( 'tourfic_apartment_order_item_details', $iteminfo, $item );
 
-			$tf_integration_order_data[] = [
+			$integration_order_item = [
 				'check_in'       => $check_in,
 				'check_out'      => $check_out,
 				'adult'          => $adult,
 				'child'          => $child,
 				'infants'        => $infants,
 				'total_price'    => $price,
-				'due_price'      => $due,
 				'customer_id'    => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
 				'order_status'   => $order->get_status(),
 				'order_date'     => gmdate( 'Y-m-d H:i:s' )
 			];
+			$tf_integration_order_data[] = apply_filters( 'tourfic_apartment_integration_order_item', $integration_order_item, $item );
 
 			$tf_integration_order_status = [
 				'customer_id'    => $order->get_customer_id(),

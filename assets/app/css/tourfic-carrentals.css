@@ -930,23 +930,6 @@
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-form-submit-btn button:hover {
   background: var(--tf-brand-dark);
 }
-.single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-form-submit-btn button.tf-partial-button {
-  border: 1px solid var(--tf-primary);
-  background: transparent;
-  color: var(--tf-primary);
-  transition: 0.3s all ease;
-}
-.single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-form-submit-btn button.tf-partial-button svg path {
-  stroke: var(--tf-primary);
-}
-.single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-form-submit-btn button.tf-partial-button:hover {
-  border: 1px solid var(--tf-brand-dark);
-  background: var(--tf-brand-dark);
-  color: #ffffff;
-}
-.single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-form-submit-btn button.tf-partial-button:hover svg path {
-  stroke: #ffffff;
-}
 @media only screen and (max-width: 768px) {
   .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-instraction-btn {
     display: none;

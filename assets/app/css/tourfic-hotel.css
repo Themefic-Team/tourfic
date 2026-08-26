@@ -328,9 +328,6 @@
 .single-tf_hotel .tf-single-template__legacy .tf-room-section .availability-table td.options ul li .room-extra-icon {
   margin-right: 5px;
 }
-.single-tf_hotel .tf-single-template__legacy .tf-room-section .availability-table td.price .tf-hotel-deposit-hide {
-  display: none;
-}
 .single-tf_hotel .tf-single-template__legacy .tf-room-section .availability-table td.price span.tf-price .amount {
   font-weight: bold;
 }

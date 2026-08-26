@@ -32,7 +32,7 @@ class Tour_Price {
 
 		$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
 
-		$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+		$tf_booking_type      = tf_get_tour_booking_type( $post_id, $meta );
 		$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
 		$pricing_rule         = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 		$disable_adult        = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;

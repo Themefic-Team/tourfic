@@ -1022,7 +1022,7 @@ class Tour {
 		$tf_tour_single_book_now_text = isset($meta['single_tour_booking_form_button_text']) && ! empty( $meta['single_tour_booking_form_button_text'] ) ? stripslashes( sanitize_text_field( $meta['single_tour_booking_form_button_text'] ) ) : esc_html__( "Book Now", 'tourfic' );
 		$tf_tour_book_now_text = isset($meta['single_tour_booking_form_button_text']) && !empty($tf_tour_single_book_now_text) ? $tf_tour_single_book_now_text : $tf_tour_global_book_now_text;
 
-		$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+		$tf_booking_type      = tf_get_tour_booking_type( $post_id, $meta );
 		$tf_ext_booking_type  = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
 		$tf_booking_code      = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
 		$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
@@ -1899,16 +1899,7 @@ class Tour {
 	    }
     }
 
-    static function partial_payment_tag_replacement( $text, $arr ) {
-	    if ( ! empty( $arr ) ) {
-		    $tag   = array_keys( $arr );
-		    $value = array_values( $arr );
-	    }
-
-	    return str_replace( $tag, $value, $text );
-    }
-
-	static function tf_booking_popup( $post_id ) {
+		static function tf_booking_popup( $post_id ) {
 		?>
         <!-- Loader Image -->
         <div id="tour_room_details_loader">
@@ -1953,7 +1944,7 @@ class Tour {
 								: 'ri-price-tag-3-line';
 
 							$traveller_info_coll = function_exists( 'tf_tour_is_traveler_info_enabled' ) ? tf_tour_is_traveler_info_enabled( $meta ) : false;
-							$tf_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+							$tf_booking_by = tf_get_tour_booking_type( $post_id, $meta );
 							$pricing_type = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 							$package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 							$booking_info_step = ! empty( $traveller_info_coll ) ? 4 : 3;
@@ -1987,7 +1978,6 @@ class Tour {
                                     <i class="ri-group-line"></i> <?php echo esc_html__( "Traveler info", "tourfic" ); ?>
                                 </li>
 							<?php }
-							$tf_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 							if ( 3 == $tf_booking_by ) {
 								$active_steps[ $booking_info_step ] = $booking_info_step;
 								?>
@@ -2255,7 +2245,7 @@ class Tour {
                     </div>
                 </div>
 
-                <!-- Popup Footer Control & Partial Payment -->
+					<!-- Popup footer controls -->
                 <div class="tf-booking-pagination">
 					<?php
 					if ( ! empty( $meta['is_taxable'] ) ) { ?>
@@ -2263,32 +2253,7 @@ class Tour {
                             <span>"<?php esc_html_e( "Taxes will be calculated during checkout", "tourfic" ); ?>"</span>
                         </div>
 					<?php } ?>
-					<?php if ( apply_filters( 'tf_allow_deposit_feature', false, $meta ) && ! empty( $meta['deposit_amount'] ) && 3 != $tf_booking_by ) {
-						$tf_deposit_amount              = array(
-							"{amount}" => $meta['deposit_type'] == 'fixed' ? wp_kses_post( wc_price( $meta['deposit_amount'] ) ) : $meta['deposit_amount'] . '%'
-						);
-						$tf_partial_payment_label       = ! empty( Helper::tfopt( "deposit-title" ) ) ? Helper::tfopt( "deposit-title" ) : 'Partial payment of {amount} on total';
-						$tf_partial_payment_description = ! empty( Helper::tfopt( "deposit-subtitle" ) ) ? Helper::tfopt( "deposit-subtitle" ) : '';
-						?>
-                        <div class="tf-diposit-switcher">
-                            <label class="switch">
-                                <input type="checkbox" name="deposit" class="diposit-status-switcher">
-                                <span class="switcher round"></span>
-                            </label>
-
-                            <div class="tooltip-box">
-								<?php if ( ! empty( $tf_partial_payment_label ) ) { ?>
-                                    <h4><?php echo wp_kses_post( self::partial_payment_tag_replacement( $tf_partial_payment_label, $tf_deposit_amount ) ) ?></h4>
-								<?php }
-								if ( ! empty( $tf_partial_payment_description ) ) { ?>
-                                    <div class="tf-info-btn">
-                                        <i class="fa fa-circle-exclamation tooltip-title-box" style="padding-left: 5px; padding-top: 5px" title=""></i>
-                                        <div class="tf-tooltip"><?php echo wp_kses_post( $tf_partial_payment_description ) ?></div>
-                                    </div>
-								<?php } ?>
-                            </div>
-                        </div>
-					<?php } ?>
+						<?php do_action( 'tourfic_tour_booking_payment_options', $post_id, $meta, $tf_booking_by ); ?>
 					<?php if ( ($pricing_type!='package' || empty($package_pricing)) && ! $has_booking_extension && 3 != $tf_booking_by && empty( $traveller_info_coll ) ) { ?>
                         <div class="tf-control-pagination show">
                             <button type="submit" class="tf_btn"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
@@ -4655,27 +4620,29 @@ class Tour {
 				}
 			}
 
-			if ( ! empty( $_POST['deposit'] ) && $_POST['deposit'] == "true" ) {
-				if ( apply_filters( 'tf_allow_deposit_feature', false, $meta ) && ! empty( $meta['deposit_amount'] ) ) {
-					
-					if ( ! empty( $meta['deposit_type'] ) && $meta['deposit_type'] == 'fixed' ) {
-						$tf_deposit_amount   = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : 0;
-						$tf_due_amount       = $tf_tours_data_price - $tf_deposit_amount;
-						$tf_tours_data_price = $tf_deposit_amount;
-					} else {
-						$tf_deposit_amount   = ! empty( $meta['deposit_amount'] ) ? ( $tf_tours_data_price * $meta['deposit_amount'] ) / 100 : 0;
-						$tf_due_amount       = $tf_tours_data_price - $tf_deposit_amount;
-						$tf_tours_data_price = $tf_deposit_amount;
+				$payment_summary = apply_filters(
+					'tourfic_tour_booking_payment_summary',
+					array(
+						'payable' => $tf_tours_data_price,
+						'rows'    => array(),
+					),
+					array(
+						'post_id' => $post_id,
+						'meta'    => $meta,
+					)
+				);
+				if ( ! empty( $payment_summary['rows'] ) && is_array( $payment_summary['rows'] ) ) {
+					foreach ( $payment_summary['rows'] as $payment_row ) {
+						if ( empty( $payment_row['label'] ) || ! isset( $payment_row['amount'] ) ) {
+							continue;
+						}
+						$response['traveller_summery'] .= '<tr>
+							<td align="left">' . esc_html( $payment_row['label'] ) . '</td>
+							<td align="right">' . wc_price( $payment_row['amount'] ) . '</td>
+						</tr>';
 					}
 				}
-			}
-
-			if ( ! empty( $tf_due_amount ) ) {
-				$response['traveller_summery'] .= '<tr>
-                    <td align="left">' . esc_html__( 'Due', 'tourfic' ) . '</td>
-                    <td align="right">' . wc_price( $tf_due_amount ) . '</td>
-                </tr>';
-			}
+				$tf_tours_data_price = isset( $payment_summary['payable'] ) ? (float) $payment_summary['payable'] : $tf_tours_data_price;
 
 			$response['traveller_summery'] .= '</tbody>
             <tfoot>

@@ -7,7 +7,7 @@ use \Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Tour\Tour_Price;
 use \Tourfic\Classes\Tour\Pricing;
 
-$tourfic_booking_type      = ! empty( $tourfic_meta['booking-by'] ) ? $tourfic_meta['booking-by'] : 1;
+$tourfic_booking_type      = tf_get_tour_booking_type( $tourfic_post_id, $tourfic_meta );
 $tourfic_booking_url       = ! empty( $tourfic_meta['booking-url'] ) ? esc_url( $tourfic_meta['booking-url'] ) : '';
 $tourfic_booking_query_url = ! empty( $tourfic_meta['booking-query'] ) ? $tourfic_meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
 $tourfic_booking_attribute = ! empty( $tourfic_meta['booking-attribute'] ) ? $tourfic_meta['booking-attribute'] : '';

@@ -187,11 +187,6 @@ while ( have_posts() ) : the_post();
 	$tourfic_car_owner_owner_image = ! empty( $tourfic_meta['owner_image'] ) ? $tourfic_meta['owner_image'] : '';
 	$tourfic_owner_sec_title  = ! empty( $tourfic_meta['owner_sec_title'] ) ? $tourfic_meta['owner_sec_title'] : '';
 
-	// Car Deposit
-	$tourfic_car_allow_deposit = apply_filters( 'tf_allow_deposit_feature', false, $tourfic_meta );
-	$tourfic_car_deposit_type = ! empty( $tourfic_meta['deposit_type'] ) ? $tourfic_meta['deposit_type'] : 'none';
-	$tourfic_car_deposit_amount = ! empty( $tourfic_meta['deposit_amount'] ) ? $tourfic_meta['deposit_amount'] : '';
-
 	// FAQ
 	$tourfic_faqs = ! empty( $tourfic_meta['faq'] ) ? $tourfic_meta['faq'] : '';
 	$tourfic_faq_sec_title  = ! empty( $tourfic_meta['faq_sec_title'] ) ? $tourfic_meta['faq_sec_title'] : '';

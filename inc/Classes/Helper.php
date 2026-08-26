@@ -3959,21 +3959,6 @@ class Helper {
 		}
 	}
 
-    static function tf_get_deposit_amount( $room, $price, &$deposit_amount, &$has_deposit, $discount = 0 ) {
-		$deposit_amount = null;
-		if ( $discount > 0 ) {
-			$price = $discount;
-		}
-		$has_deposit = apply_filters( 'tf_allow_deposit_feature', false, $room );
-		if ( $has_deposit == true ) {
-			if ( $room['deposit_type'] == 'percent' ) {
-				$deposit_amount = $price * ( floatval( $room['deposit_amount'] ) / 100 );
-			} else {
-				$deposit_amount = $room['deposit_amount'];
-			}
-		}
-	}
-
     static function tf_array_flatten( $array, $depth = INF ) {
 
 		$result = [];

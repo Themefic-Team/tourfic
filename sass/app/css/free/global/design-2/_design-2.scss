@@ -976,24 +976,6 @@
                         }
                     }
 
-                    .tf-deposit-content {
-                        text-align: right;
-
-                        .room-deposit-wrap {
-                            margin-bottom: 10px;
-                        }
-
-                        label {
-                            font-size: 0.75rem;
-                        }
-
-                        input[type=checkbox] {
-                            background: $color-primary;
-                            border-color: $color-primary;
-                            accent-color: $color-primary;
-                        }
-                    }
-
                     .roomselectissue {
                         text-align: right;
                     }
@@ -1866,10 +1848,6 @@
 
                             .room-submit-wrap {
                                 width: 100%;
-
-                                .tf-deposit-content {
-                                    text-align: left;
-                                }
                             }
                         }
                     }

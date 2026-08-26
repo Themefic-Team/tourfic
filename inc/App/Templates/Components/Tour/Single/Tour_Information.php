@@ -39,7 +39,7 @@ class Tour_Information {
         $adult_price    = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
         $children_price = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
         $infant_price   = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
-        $tf_booking_type = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+		$tf_booking_type = tf_get_tour_booking_type( $post_id, $meta );
         $tf_hide_price  = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
         $disable_adult  = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
         $disable_child  = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;

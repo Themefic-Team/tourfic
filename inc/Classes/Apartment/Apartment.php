@@ -1432,14 +1432,7 @@ class Apartment {
 		$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 		$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
 		$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
-		$tf_allow_deposit     = apply_filters( 'tf_allow_deposit_feature', false, $meta );
-		$tf_deposit_type      = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : '';
-		$tf_deposit_amount    = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : '';
 		$tf_show_internal_booking_form = ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3;
-		$tf_has_valid_deposit_type     = in_array( $tf_deposit_type, array( 'percent', 'fixed' ), true );
-		$tf_show_deposit_option        = '1' == $tf_booking_type && $tf_allow_deposit && ! empty( $tf_deposit_amount ) && $tf_has_valid_deposit_type;
-		$tf_partial_payment_label      = ! empty( Helper::tfopt( 'deposit-title' ) ) ? Helper::tfopt( 'deposit-title' ) : 'Partial payment of {amount} on total';
-		$tf_partial_payment_description = ! empty( Helper::tfopt( 'deposit-subtitle' ) ) ? Helper::tfopt( 'deposit-subtitle' ) : '';
 
 		// date format for apartment
 		$date_format_change_appartments = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
@@ -1655,7 +1648,7 @@ class Apartment {
 				<?php $ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                 <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
-				<input type="hidden" name="deposit" value="0" class="tf-apartment-deposit-value"/>
+				<?php do_action( 'tourfic_apartment_booking_payment_state', $meta, $tf_booking_type ); ?>
 
                 <div class="tf-btn-booking">
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
@@ -1798,7 +1791,7 @@ class Apartment {
 				<?php $ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype); ?>" class="tf-post-type"/>
                 <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
-				<input type="hidden" name="deposit" value="0" class="tf-apartment-deposit-value"/>
+				<?php do_action( 'tourfic_apartment_booking_payment_state', $meta, $tf_booking_type ); ?>
 
                 <div class="tf-btn-wrap">
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
@@ -1827,7 +1820,7 @@ class Apartment {
 		<?php } ?>
 		<?php
 		if ( $tf_show_internal_booking_form ) {
-			self::tf_apartment_booking_popup( get_the_ID(), $meta, $tf_show_deposit_option, $tf_deposit_type, $tf_deposit_amount, $tf_partial_payment_label, $tf_partial_payment_description, $tf_booking_type );
+			self::tf_apartment_booking_popup( get_the_ID(), $meta, $tf_booking_type );
 		}
 		?>
         <script>
@@ -1952,12 +1945,8 @@ class Apartment {
 		<?php
 	}
 
-	private static function tf_apartment_booking_popup( $post_id, $meta, $show_deposit_option, $deposit_type, $deposit_amount, $partial_payment_label, $partial_payment_description, $booking_type ) {
-		$tf_deposit_amount = array(
-			'{amount}' => 'fixed' === $deposit_type ? wp_kses_post( wc_price( $deposit_amount ) ) : $deposit_amount . '%',
-		);
+	private static function tf_apartment_booking_popup( $post_id, $meta, $booking_type ) {
 		$is_without_payment_booking  = '3' == $booking_type;
-		$show_popup_deposit_option   = ! $is_without_payment_booking && $show_deposit_option;
 		$show_booking_info_step      = $is_without_payment_booking;
 		$traveler_details_text       = ! empty( Helper::tfopt( 'tour_traveler_details_text' ) ) ? Helper::tfopt( 'tour_traveler_details_text' ) : '';
 		?>
@@ -2148,25 +2137,7 @@ class Apartment {
 							<span>"<?php esc_html_e( 'Taxes will be calculated during checkout', 'tourfic' ); ?>"</span>
 						</div>
 					<?php } ?>
-					<?php if ( $show_popup_deposit_option ) { ?>
-						<div class="tf-diposit-switcher tf-apartment-popup-deposit-wrap">
-							<label class="switch">
-								<input type="checkbox" name="tf_apartment_popup_deposit" value="1" class="diposit-status-switcher tf-apartment-popup-deposit-switch">
-								<span class="switcher round"></span>
-							</label>
-							<div class="tooltip-box">
-								<?php if ( ! empty( $partial_payment_label ) ) { ?>
-									<h4><?php echo wp_kses_post( str_replace( array_keys( $tf_deposit_amount ), array_values( $tf_deposit_amount ), $partial_payment_label ) ); ?></h4>
-								<?php } ?>
-								<?php if ( ! empty( $partial_payment_description ) ) { ?>
-									<div class="tf-info-btn">
-										<i class="fa fa-circle-exclamation tooltip-title-box" style="padding-left: 5px; padding-top: 5px" title=""></i>
-										<div class="tf-tooltip"><?php echo wp_kses_post( $partial_payment_description ); ?></div>
-									</div>
-								<?php } ?>
-							</div>
-						</div>
-					<?php } ?>
+					<?php do_action( 'tourfic_apartment_booking_payment_options', $post_id, $meta, $booking_type ); ?>
 					<?php if ( $show_booking_info_step ) { ?>
 						<div class="tf-control-pagination tf-pagination-content-1 show">
 							<a href="#" class="tf-next-control tf-tabs-control tf_btn" data-step="1"><?php echo esc_html__( 'Continue', 'tourfic' ); ?></a>
