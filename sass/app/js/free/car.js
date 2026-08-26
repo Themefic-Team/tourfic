@@ -12,30 +12,6 @@
             },
         });
 
-        let carPartialPaymentSelection = 'no';
-
-        function setCarPartialPayment(trigger) {
-            if (!trigger || !trigger.attr('data-partial')) {
-                return;
-            }
-
-            carPartialPaymentSelection = trigger.attr('data-partial');
-
-            if ($('#tf_partial_payment').length) {
-                $('#tf_partial_payment').val(carPartialPaymentSelection);
-            }
-        }
-
-        function getCarPartialPayment(trigger) {
-            if (trigger && trigger.attr('data-partial')) {
-                setCarPartialPayment(trigger);
-            } else if ($('#tf_partial_payment').length && $('#tf_partial_payment').val()) {
-                carPartialPaymentSelection = $('#tf_partial_payment').val();
-            }
-
-            return carPartialPaymentSelection || 'no';
-        }
-
         
         // FAQ Accordion
         $('.tf-car-faq-section .tf-faq-head').on("click", function () {
@@ -362,9 +338,7 @@
                 return;
             }
 
-            setCarPartialPayment($this);
-
-            var data = {
+			var data = {
                 action: 'tf_car_booking_pupup',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
@@ -542,8 +516,7 @@
                 $(this).off('click');
             }
             let $this = $(this);
-            setCarPartialPayment($this);
-            
+
             var travellerData = {};
             if($this.hasClass('tf-offline-booking')){
                 let booking = $(this).closest('.tf-booking-form-fields');
@@ -622,9 +595,7 @@
                 return;
             }
 
-            let partial_payment = getCarPartialPayment($this);
-
-            var data = {
+			var data = {
                 action: 'tf_car_booking',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
@@ -636,12 +607,11 @@
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,
                 dropoff_time: dropoff_time,
-                protection: protection,
-                partial_payment: partial_payment,
-                travellerData: travellerData
-            };
+				protection: protection,
+				travellerData: travellerData
+			};
 
-            $(document).trigger('tourfic:car-booking:request-data', [data]);
+			$(document).trigger('tourfic:car-booking:request-data', [data, $this]);
 
             $.ajax({
                 url: tf_params.ajax_url,
@@ -887,8 +857,7 @@
             pickup = $('#tf_pickup_location').val();
             dropoff = $('#tf_dropoff_location').val();
 
-            let partial_payment = getCarPartialPayment($this);
-            let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
+			let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
             let dropoff_date = $this.closest('.tf-booking-btn').find('#dropoff_date').val();
             let pickup_time = $this.closest('.tf-booking-btn').find('#pickup_time').val();
             let dropoff_time = $this.closest('.tf-booking-btn').find('#dropoff_time').val();
@@ -918,11 +887,12 @@
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,
                 dropoff_time: dropoff_time,
-                protection: protection,
-                partial_payment: partial_payment,
-                travellerData: travellerData
-            };
-            
+				protection: protection,
+				travellerData: travellerData
+			};
+
+			$(document).trigger('tourfic:car-booking:request-data', [data, $this]);
+
             $.ajax({
                 url: tf_params.ajax_url,
                 type: 'POST',

@@ -335,7 +335,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'    => 'tour-pricing-heading',
 					'type'  => 'heading',
 					'title' => esc_html__( 'Pricing', 'tourfic' ),
-					'content' => esc_html__( 'Smart pricing attracts more guests. Configure packages, discounts, and deposits below.', 'tourfic' ),
+					'content' => esc_html__( 'Smart pricing attracts more guests. Configure pricing packages and discounts below.', 'tourfic' ),
 					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tourfic-price-settings/')
 				),
 				array(

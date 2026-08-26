@@ -241,7 +241,11 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 					$tourfic_d_price = $tourfic_d_price_by_date * $days;
 				}
 
-                Helper::tf_get_deposit_amount( $room, $tourfic_price, $deposit_amount, $has_deposit, $tourfic_d_price );
+				$tourfic_payment_context = array(
+					'settings'         => $room,
+					'total'            => $tourfic_price,
+					'discounted_total' => $tourfic_d_price,
+				);
 				if ( ! in_array( 0, $tourfic_has_option ) ) {
 				?>
                 <td class="options">
@@ -334,10 +338,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                             </div>
 						<?php } ?>
 
-						<?php if ( $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                            <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
-                            <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
-						<?php } ?>
+							<?php do_action( 'tourfic_hotel_room_payment_price', $tourfic_payment_context, $room_id . '_' . $tourfic_room_option_key ); ?>
                     </div>
                     <form class="tf-room">
 						<?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' ); ?>
@@ -353,13 +354,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                         </div>
                         <div class="room-submit-wrap">
                             <div class="roomselectissue"></div>
-							<?php if ( $has_deposit == true && ! empty( $deposit_amount ) && ( $room["deposit_type"] != "none" ) ) { ?>
-
-                                <div class="room-deposit-wrap">
-                                    <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?>">
-                                    <label for="tf-make-deposit<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
-                                </div>
-							<?php } ?>
+								<?php do_action( 'tourfic_hotel_room_payment_control', $tourfic_payment_context, $room_id . '_' . $tourfic_room_option_key ); ?>
 
                             <input type="hidden" name="post_id" value="<?php echo esc_attr( $hotel_id ); ?>">
                             <input type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
@@ -374,7 +369,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                             <input type="hidden" id="hotel_roomid">
                             <input type="hidden" id="hotel_room_number">
                             <input type="hidden" id="hotel_room_uniqueid">
-                            <input type="hidden" name="hotel_room_depo" value="false">
+							<?php do_action( 'tourfic_hotel_room_payment_hidden_field', $tourfic_payment_context ); ?>
 							<?php
 							$tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 							$tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
@@ -475,10 +470,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                         </div>
 					<?php } ?>
 
-					<?php if ( $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                        <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
-                        <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
-					<?php } ?>
+					<?php do_action( 'tourfic_hotel_room_payment_price', $tourfic_payment_context, $room_id ); ?>
                 </div>
                 <form class="tf-room">
 					<?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' ); ?>
@@ -494,13 +486,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                     </div>
                     <div class="room-submit-wrap">
                         <div class="roomselectissue"></div>
-						<?php if ( $has_deposit == true && ! empty( $deposit_amount ) && ( $room["deposit_type"] != "none" ) ) { ?>
-
-                            <div class="room-deposit-wrap">
-                                <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id ) ?>">
-                                <label for="tf-make-deposit<?php echo esc_attr( $room_id ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
-                            </div>
-						<?php } ?>
+						<?php do_action( 'tourfic_hotel_room_payment_control', $tourfic_payment_context, $room_id ); ?>
 
                         <input type="hidden" name="post_id" value="<?php echo esc_attr( $hotel_id ); ?>">
                         <input type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
@@ -514,7 +500,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                         <input type="hidden" id="hotel_roomid">
                         <input type="hidden" id="hotel_room_number">
                         <input type="hidden" id="hotel_room_uniqueid">
-                        <input type="hidden" name="hotel_room_depo" value="false">
+						<?php do_action( 'tourfic_hotel_room_payment_hidden_field', $tourfic_payment_context ); ?>
 						<?php
 						$tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 						$tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
@@ -735,7 +721,11 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 					$tourfic_d_price = $tourfic_d_price_by_date * $days;
 				}
 
-				Helper::tf_get_deposit_amount( $room, $tourfic_price, $deposit_amount, $has_deposit, $tourfic_d_price );
+				$tourfic_payment_context = array(
+					'settings'         => $room,
+					'total'            => $tourfic_price,
+					'discounted_total' => $tourfic_d_price,
+				);
 				if ( ! in_array( 0, $tourfic_has_option ) ) {
 				?>
                 <div class="tf-available-room-content tf-room-options-content">
@@ -883,27 +873,13 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                             </div>
 
                             <div class="room-submit-wrap">
-                                <div class="tf-deposit-content">
-                                    <?php if ( $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                                        <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
-                                        <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?> tf-hotel-deposit-hide"
-                                             style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
-                                    <?php } ?>
-
-                                    <?php if ( $has_deposit == true && ! empty( $deposit_amount ) && ( $room["deposit_type"] != "none" ) ) { ?>
-
-                                        <div class="room-deposit-wrap">
-                                            <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?>">
-                                            <label for="tf-make-deposit<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
-                                        </div>
-                                    <?php } ?>
-                                </div>
+								<?php do_action( 'tourfic_hotel_room_payment_content', $tourfic_payment_context, $room_id . '_' . $tourfic_room_option_key ); ?>
                                 <?php
                                 $tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
                                 $tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
                                 if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
                                     ?>
-                                    <input type="hidden" name="hotel_room_depo" value="false">
+									<?php do_action( 'tourfic_hotel_room_payment_hidden_field', $tourfic_payment_context ); ?>
                                     <div class="roomselectissue"></div>
                                     <a class="tf_air_service" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
                                 <?php } else { ?>
@@ -1096,27 +1072,13 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                     </div>
 
                     <div class="room-submit-wrap">
-                        <div class="tf-deposit-content">
-							<?php if ( $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                                <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
-                                <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide"
-                                     style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
-							<?php } ?>
-
-							<?php if ( $has_deposit == true && ! empty( $deposit_amount ) && ( $room["deposit_type"] != "none" ) ) { ?>
-
-                                <div class="room-deposit-wrap">
-                                    <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id ) ?>">
-                                    <label for="tf-make-deposit<?php echo esc_attr( $room_id ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
-                                </div>
-							<?php } ?>
-                        </div>
+						<?php do_action( 'tourfic_hotel_room_payment_content', $tourfic_payment_context, $room_id ); ?>
 						<?php
 						$tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 						$tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
 						if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 							?>
-                                <input type="hidden" name="hotel_room_depo" value="false">
+	                                <?php do_action( 'tourfic_hotel_room_payment_hidden_field', $tourfic_payment_context ); ?>
                                 <div class="roomselectissue"></div>
                                 <a class="tf_air_service tf-hotel-booking-popup-btn tf_btn tf_btn_large tf_btn_sharp" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
 
@@ -1365,27 +1327,13 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                     </div>
 
                     <div class="room-submit-wrap">
-                        <div class="tf-deposit-content">
-							<?php if ( $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                                <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
-                                <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide"
-                                     style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
-							<?php } ?>
-
-							<?php if ( $has_deposit == true && ! empty( $deposit_amount ) && ( $room["deposit_type"] != "none" ) ) { ?>
-
-                                <div class="room-deposit-wrap">
-                                    <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id ) ?>">
-                                    <label for="tf-make-deposit<?php echo esc_attr( $room_id ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
-                                </div>
-							<?php } ?>
-                        </div>
+						<?php do_action( 'tourfic_hotel_room_payment_content', $tourfic_payment_context, $room_id ); ?>
 						<?php
 						$tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 						$tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
 						if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 							?>
-                                <input type="hidden" name="hotel_room_depo" value="false">
+	                                <?php do_action( 'tourfic_hotel_room_payment_hidden_field', $tourfic_payment_context ); ?>
                                 <div class="roomselectissue"></div>
                                 <a class="tf_air_service tf-hotel-booking-popup-btn tf_btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
 
@@ -1558,7 +1506,11 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 						$tourfic_d_price = $tourfic_d_price_by_date * $days;
 					}
 
-					Helper::tf_get_deposit_amount( $room, $tourfic_price, $deposit_amount, $has_deposit, $tourfic_d_price );
+					$tourfic_payment_context = array(
+						'settings'         => $room,
+						'total'            => $tourfic_price,
+						'discounted_total' => $tourfic_d_price,
+					);
 					if ( ! in_array( 0, $tourfic_has_option ) ) {
 					?>
                     <div class="tf-available-room-content tf-room-options-content">
@@ -1662,27 +1614,13 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                                 </div>
 
                                 <div class="room-submit-wrap">
-                                    <div class="tf-deposit-content">
-				                        <?php if ( $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                                            <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
-                                            <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?> tf-hotel-deposit-hide"
-                                                 style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
-				                        <?php } ?>
-
-				                        <?php if ( $has_deposit == true && ! empty( $deposit_amount ) && ( $room["deposit_type"] != "none" ) ) { ?>
-
-                                            <div class="room-deposit-wrap">
-                                                <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?>">
-                                                <label for="tf-make-deposit<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
-                                            </div>
-				                        <?php } ?>
-                                    </div>
+									<?php do_action( 'tourfic_hotel_room_payment_content', $tourfic_payment_context, $room_id . '_' . $tourfic_room_option_key ); ?>
 			                        <?php
 			                        $tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 			                        $tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
 			                        if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 				                        ?>
-                                        <input type="hidden" name="hotel_room_depo" value="false">
+	                                        <?php do_action( 'tourfic_hotel_room_payment_hidden_field', $tourfic_payment_context ); ?>
                                         <div class="roomselectissue"></div>
                                         <a class="tf_air_service" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
 			                        <?php } else { ?>
@@ -1868,27 +1806,13 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                             </div>
 
                             <div class="room-submit-wrap">
-                                <div class="tf-deposit-content">
-			                        <?php if ( $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                                        <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
-                                        <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide"
-                                             style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
-			                        <?php } ?>
-
-			                        <?php if ( $has_deposit == true && ! empty( $deposit_amount ) && ( $room["deposit_type"] != "none" ) ) { ?>
-
-                                        <div class="room-deposit-wrap">
-                                            <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id ) ?>">
-                                            <label for="tf-make-deposit<?php echo esc_attr( $room_id ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
-                                        </div>
-			                        <?php } ?>
-                                </div>
+								<?php do_action( 'tourfic_hotel_room_payment_content', $tourfic_payment_context, $room_id ); ?>
 		                        <?php
 		                        $tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 		                        $tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
 		                        if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 			                        ?>
-                                    <input type="hidden" name="hotel_room_depo" value="false">
+	                                    <?php do_action( 'tourfic_hotel_room_payment_hidden_field', $tourfic_payment_context ); ?>
                                     <div class="roomselectissue"></div>
                                     <a class="tf_air_service" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
 		                        <?php } else { ?>
@@ -2133,7 +2057,11 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 					$tourfic_d_price = $tourfic_d_price_by_date * $days;
 				}
 
-                Helper::tf_get_deposit_amount( $room, $tourfic_price, $deposit_amount, $has_deposit, $tourfic_d_price );
+				$tourfic_payment_context = array(
+					'settings'         => $room,
+					'total'            => $tourfic_price,
+					'discounted_total' => $tourfic_d_price,
+				);
 				if ( ! in_array( 0, $tourfic_has_option ) ) {
                 ?>
                 <td class="options">
@@ -2210,10 +2138,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                             ?>
                         </div>
 
-						<?php if ( $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                            <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
-                            <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?> tf-hotel-deposit-hide" style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
-						<?php } ?>
+							<?php do_action( 'tourfic_hotel_room_payment_price', $tourfic_payment_context, $room_id . '_' . $tourfic_room_option_key ); ?>
                     </div>
                 </td>
                 <td class="reserve">
@@ -2231,13 +2156,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                         </div>
                         <div class="room-submit-wrap">
                             <div class="roomselectissue"></div>
-							<?php if ( $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-
-                                <div class="room-deposit-wrap">
-                                    <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?>">
-                                    <label for="tf-make-deposit<?php echo esc_attr( $room_id.'_'.$tourfic_room_option_key ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
-                                </div>
-							<?php } ?>
+								<?php do_action( 'tourfic_hotel_room_payment_control', $tourfic_payment_context, $room_id . '_' . $tourfic_room_option_key ); ?>
 
                             <input type="hidden" name="post_id" value="<?php echo esc_attr( $hotel_id ); ?>">
                             <input type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
@@ -2252,7 +2171,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                             <input type="hidden" id="hotel_roomid">
                             <input type="hidden" id="hotel_room_number">
                             <input type="hidden" id="hotel_room_uniqueid">
-                            <input type="hidden" name="hotel_room_depo" value="false">
+							<?php do_action( 'tourfic_hotel_room_payment_hidden_field', $tourfic_payment_context ); ?>
 							<?php
 							$tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 							$tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
@@ -2356,10 +2275,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                         </div>
 					<?php } ?>
 
-					<?php if ( $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-                        <span class="tf-price tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php echo wp_kses_post( wc_price( $deposit_amount ) ); ?></span>
-                        <div class="price-per-night tf-deposit-amount-<?php echo esc_attr( $room_id ) ?> tf-hotel-deposit-hide" style="display: none;"><?php esc_html_e( 'Need to be deposited', 'tourfic' ) ?></div>
-					<?php } ?>
+					<?php do_action( 'tourfic_hotel_room_payment_price', $tourfic_payment_context, $room_id ); ?>
                 </div>
             </td>
             <td class="reserve">
@@ -2377,13 +2293,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                     </div>
                     <div class="room-submit-wrap">
                         <div class="roomselectissue"></div>
-						<?php if ( $has_deposit == true && ! empty( $deposit_amount ) ) { ?>
-
-                            <div class="room-deposit-wrap">
-                                <input type="checkbox" id="tf-make-deposit<?php echo esc_attr( $room_id ) ?>" name="make_deposit" value="<?php echo esc_attr( $room_id ) ?>">
-                                <label for="tf-make-deposit<?php echo esc_attr( $room_id ) ?>"><?php esc_html_e( "I'll make a Partial Payment", "tourfic" ) ?></label><br>
-                            </div>
-						<?php } ?>
+						<?php do_action( 'tourfic_hotel_room_payment_control', $tourfic_payment_context, $room_id ); ?>
 
                         <input type="hidden" name="post_id" value="<?php echo esc_attr( $hotel_id ); ?>">
                         <input type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
@@ -2397,7 +2307,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                         <input type="hidden" id="hotel_roomid">
                         <input type="hidden" id="hotel_room_number">
                         <input type="hidden" id="hotel_room_uniqueid">
-                        <input type="hidden" name="hotel_room_depo" value="false">
+						<?php do_action( 'tourfic_hotel_room_payment_hidden_field', $tourfic_payment_context ); ?>
 						<?php
 						$tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 						$tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';

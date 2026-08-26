@@ -48,7 +48,6 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		$room_selected   = isset( $_POST['room'] ) ? intval( sanitize_text_field( wp_unslash($_POST['room']) ) ) : '0';
 		$check_in        = isset( $_POST['check_in_date'] ) ? sanitize_text_field( wp_unslash($_POST['check_in_date']) ) : '';
 		$check_out       = isset( $_POST['check_out_date'] ) ? sanitize_text_field( wp_unslash($_POST['check_out_date']) ) : '';
-		$deposit         = isset( $_POST['deposit'] ) ? sanitize_text_field( wp_unslash($_POST['deposit']) ) : false;
 		$airport_service = isset( $_POST['airport_service'] ) ? sanitize_text_field( $_POST['airport_service'] ) : ''; //phpcs:ignore
 
 		$total_people    = $adult + $child;
@@ -452,19 +451,18 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 
 			$airport_service_arr = Hotel::tf_hotel_airport_service_title_price( $post_id, $adult, $child, $airport_service );
 
-			# check for deposit
-			if ( $deposit == "true" ) {
-
-				Helper::tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
-				if ( $has_deposit == true && ! empty( $deposit_amount ) ) {
-						if ( ! empty( $airport_service ) || ! empty( $booking_adjustments['total'] ) ) {
-							$tf_due_amount = ( $price_total + $airport_service_arr['price'] + $booking_adjustments['total'] ) - $deposit_amount;
-						} else {
-							$tf_due_amount = $price_total - $deposit_amount;
-						}
-					$tf_due_amount = $price_total - $deposit_amount;
-				}
-			}
+			$payment_summary = apply_filters(
+				'tourfic_hotel_booking_payment_summary',
+				array(
+					'active'  => false,
+					'payable' => $price_total,
+					'balance' => 0,
+				),
+				array(
+					'room_meta'  => $room_meta,
+					'base_total' => $price_total,
+				)
+			);
 
 			$hotel_guest_info_fields = ! empty( Helper::tfopt( 'hotel_guest_info_fields' ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel_guest_info_fields' ) ) : '';
 
@@ -606,14 +604,16 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 					</tr>';
 			}
 
-			if ( ! empty( $tf_due_amount ) ) {
+			if ( ! empty( $payment_summary['active'] ) && ! empty( $payment_summary['balance'] ) ) {
 				$response['hotel_booking_summery'] .= '<tr>
                     <td align="left">' . sprintf( esc_html__( 'Due', 'tourfic' ) ) . '</td>
-					<td align="right">' . wc_price( $tf_due_amount + $airport_service_arr['price'] + $booking_adjustments['total'] ) . '</td>
+					<td align="right">' . wc_price( $payment_summary['balance'] + $airport_service_arr['price'] + $booking_adjustments['total'] ) . '</td>
 				</tr>';
 			}
 
-			$total_price = ! empty( $tf_due_amount ) ? wc_price( $price_total - $tf_due_amount ) : ( ! empty( $airport_service_arr['price'] ) || ! empty( $booking_adjustments['total'] ) ? wc_price( $price_total + $airport_service_arr['price'] + $booking_adjustments['total'] ) : wc_price( $price_total ) );
+			$total_price = ! empty( $payment_summary['active'] )
+				? wc_price( $payment_summary['payable'] )
+				: ( ! empty( $airport_service_arr['price'] ) || ! empty( $booking_adjustments['total'] ) ? wc_price( $price_total + $airport_service_arr['price'] + $booking_adjustments['total'] ) : wc_price( $price_total ) );
 
 			$response['hotel_booking_summery'] .= '</tbody>
             <tfoot>

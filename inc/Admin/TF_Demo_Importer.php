@@ -741,9 +741,9 @@ class TF_Demo_Importer {
 			'disable_adult_price',
 			'disable_child_price',
 			'disable_infant_price',
-			'allow_deposit',
-			'deposit_type',
-			'deposit_amount',
+			null,
+			null,
+			null,
 			'text_location',
 			'[location][address]',
 			'[location][latitude]',
@@ -969,6 +969,10 @@ class TF_Demo_Importer {
 				}
 
 				foreach ( $column_mapping_data as $column_index => $field ) {
+					if ( null === $field ) {
+						continue;
+					}
+
 					if ( $field == 'id' ) {
 						$post_id = $row[ $column_index ];
 					}
@@ -2098,9 +2102,9 @@ class TF_Demo_Importer {
 			'discount_type',
 			'discount_price',
 			'car_numbers',
-			'allow_deposit',
-			'deposit_type',
-			'deposit_amount',
+			null,
+			null,
+			null,
 			'protection_section',
 			'protection_tab_title',
 			'protections',
@@ -2252,6 +2256,10 @@ class TF_Demo_Importer {
 				}     
 
 				foreach ( $column_mapping_data as $column_index => $field ) {
+					if ( null === $field ) {
+						continue;
+					}
+
 					if( $field == 'id' ){
 						$post_id = $row[$column_index];
 					}

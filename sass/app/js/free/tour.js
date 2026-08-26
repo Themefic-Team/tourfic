@@ -916,18 +916,6 @@
             $("#check-in-out-date").flatpickr(tour_date_options);
         }
 
-        $('body').on('click', "#tour-deposit > div > div.tf_button_group > button", function (e) {
-            e.preventDefault();
-            var form = $(document).find('form.tf_tours_booking');
-            var has_deposit = $(this).data('deposit');
-            if (has_deposit === true) {
-                form.find('input[name="deposit"]').val(1);
-            } else {
-                form.find('input[name="deposit"]').val(0);
-            }
-            form.submit();
-        });
-
         if ($('#tour-location').length) {
             const map = L.map('tour-location').setView([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], tf_params.tour_form_data.location_zoom);
 

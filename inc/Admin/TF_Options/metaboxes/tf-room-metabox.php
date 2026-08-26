@@ -320,13 +320,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'label_off' => esc_html__( 'No', 'tourfic' ),
                     'default'   => true,
                 ),
-
-                array(
-                    'id'      => 'Deposit',
-                    'type'    => 'heading',
-                    'title' => esc_html__( 'Deposit', 'tourfic' ),
-                    'class'   => 'tf-field-class',
-                ),
 			),
 		),
 

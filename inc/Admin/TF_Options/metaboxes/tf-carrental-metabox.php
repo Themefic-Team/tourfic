@@ -684,11 +684,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 						'min' => '0',
 					),
 				),
-				array(
-					'id'      => 'price_deposit',
-					'type'    => 'heading',
-					'title' => esc_html__( 'Deposit', 'tourfic' ),
-				),
 			),
 		),
 

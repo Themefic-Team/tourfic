@@ -90,7 +90,6 @@ function tf_car_booking_callback() {
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_time']) ) : '';
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
 	$tf_protection = isset( $_POST['protection'] ) && is_array( $_POST['protection'] ) ? wp_unslash( $_POST['protection'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-	$partial_payment  = isset( $_POST['partial_payment'] ) ? sanitize_text_field(wp_unslash($_POST['partial_payment'])) : 'no';
 
 	// Booking Confirmation Details
 	$tf_confirmation_details = isset( $_POST['travellerData'] ) && is_array( $_POST['travellerData'] ) ? wp_unslash( $_POST['travellerData'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
@@ -175,11 +174,6 @@ function tf_car_booking_callback() {
 		);
 	}
 
-	// Deposit
-	$car_allow_deposit = apply_filters( 'tf_allow_deposit_feature', false, $meta );
-	$car_deposit_type = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : 'none';
-	$car_deposit_amount = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : 0;
-
 	$car_inventory = Availability::tf_car_inventory($post_id, $meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 	// Check Inventory
 	if ( ! $car_inventory ) {
@@ -212,19 +206,14 @@ function tf_car_booking_callback() {
 		$tf_cars_data['tf_car_data']['tf_dropoff_time']    = $tf_dropoff_time;
 		$tf_cars_data['tf_car_data']['price_total']    	   = $total_prices;
 
-		# Deposit information
-		if ( $car_allow_deposit && 'none'!=$car_deposit_type && 'yes'==$partial_payment) {
-			if( !empty($car_deposit_amount) ){
-				if ( 'percent'==$car_deposit_type ) {
-					$deposit_amount = ($tf_cars_data['tf_car_data']['price_total'] * $car_deposit_amount)/100;
-				}
-				if ( 'fixed'==$car_deposit_type ) {
-					$deposit_amount = $car_deposit_amount;
-				}
-				$tf_cars_data['tf_car_data']['due']   = $tf_cars_data['tf_car_data']['price_total'] - $deposit_amount;
-				$tf_cars_data['tf_car_data']['price_total'] = $deposit_amount;
-			}
-		}
+		$tf_cars_data['tf_car_data'] = apply_filters(
+			'tourfic_car_booking_data',
+			$tf_cars_data['tf_car_data'],
+			array(
+				'meta'       => $meta,
+				'booking_by' => $car_booking_by,
+			)
+		);
 		
 		if( !empty($car_booking_by) && '3'==$car_booking_by ){
 
@@ -448,13 +437,6 @@ function car_display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 			'value' => $cart_item['tf_car_data']['protection'],
 		);
 	}
-	if ( isset( $cart_item['tf_car_data']['due'] ) ) {
-		$item_data[] = array(
-			'key'   => esc_html__( 'Due', 'tourfic' ),
-			'value' => wc_price($cart_item['tf_car_data']['due']),
-		);
-	}
-
 	return apply_filters( 'tourfic_car_cart_item_data', $item_data, $cart_item );
 
 }
@@ -478,7 +460,6 @@ function tf_car_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	$tf_pickup_time = !empty($values['tf_car_data']['tf_pickup_time']) ? $values['tf_car_data']['tf_pickup_time'] : '';
 	$tf_dropoff_time = !empty($values['tf_car_data']['tf_dropoff_time']) ? $values['tf_car_data']['tf_dropoff_time'] : '';
 	$protection = !empty($values['tf_car_data']['protection']) ? $values['tf_car_data']['protection'] : '';
-	$due = !empty($values['tf_car_data']['due']) ? wc_price($values['tf_car_data']['due']) : '';
 	/**
 	 * Show data in order meta & email
 	 *
@@ -516,10 +497,6 @@ function tf_car_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	}
 	if ( $protection ) {
 		$item->update_meta_data( 'Protection', $protection );
-	}
-
-	if ( $due ) {
-		$item->update_meta_data( 'Due', $due );
 	}
 
 	do_action( 'tourfic_car_checkout_create_order_line_item', $item, $values, $order, $cart_item_key );
@@ -627,7 +604,6 @@ function tf_add_car_data_checkout_order_processed( $order_id, $posted_data, $ord
 			$tf_dropoff_date = $item->get_meta( 'Drop Off Date', true );
 			$tf_dropoff_time = $item->get_meta( 'Drop Off Time', true );
 			$tf_protection = $item->get_meta( 'Protection', true );
-			$tf_due = $item->get_meta( 'Due', true );
 
 			$iteminfo = [
 				'pickup_location'   => $pickup,
@@ -637,7 +613,6 @@ function tf_add_car_data_checkout_order_processed( $order_id, $posted_data, $ord
 				'dropoff_date'   => $tf_dropoff_date,
 				'dropoff_time'   => $tf_dropoff_time,
 				'protection' => !empty($tf_protection) ? $tf_protection : '',
-				'due' => !empty($tf_due) ? $tf_due : '',
 				'total_price' => $price,
 				'tax_info' => wp_json_encode($fee_sums)
 			];
@@ -652,7 +627,6 @@ function tf_add_car_data_checkout_order_processed( $order_id, $posted_data, $ord
 				'dropoff_date'   => $tf_dropoff_date,
 				'dropoff_time'   => $tf_dropoff_time,
 				'protection' => !empty($tf_protection) ? $tf_protection : '',
-				'due' => !empty($tf_due) ? $tf_due : '',
 				'total_price' => $price,
 				'customer_id'    => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),
@@ -817,7 +791,6 @@ function tf_add_car_data_checkout_order_processed_block_checkout( $order ) {
 			$tf_dropoff_date = $item->get_meta( 'Drop Off Date', true );
 			$tf_dropoff_time = $item->get_meta( 'Drop Off Time', true );
 			$tf_protection = $item->get_meta( 'Protection', true );
-			$tf_due = $item->get_meta( 'Due', true );
 
 			$iteminfo = [
 				'pickup_location'   => $pickup,
@@ -827,7 +800,6 @@ function tf_add_car_data_checkout_order_processed_block_checkout( $order ) {
 				'dropoff_date'   => $tf_dropoff_date,
 				'dropoff_time'   => $tf_dropoff_time,
 				'protection' => !empty($tf_protection) ? $tf_protection : '',
-				'due' => !empty($tf_due) ? $tf_due : '',
 				'total_price' => $price,
 				'tax_info' => wp_json_encode($fee_sums)
 			];
@@ -842,7 +814,6 @@ function tf_add_car_data_checkout_order_processed_block_checkout( $order ) {
 				'dropoff_date'   => $tf_dropoff_date,
 				'dropoff_time'   => $tf_dropoff_time,
 				'protection' => !empty($tf_protection) ? $tf_protection : '',
-				'due' => !empty($tf_due) ? $tf_due : '',
 				'total_price' => $price,
 				'customer_id'    => $order->get_customer_id(),
 				'payment_method' => $order->get_payment_method(),

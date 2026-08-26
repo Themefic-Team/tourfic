@@ -1,6 +1,9 @@
 /******/ (() => { // webpackBootstrap
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
+/*!***************************************!*\
+  !*** ./sass/app/js/free/apartment.js ***!
+  \***************************************/
 (function ($, win) {
     $(document).ready(function () {
 
@@ -155,15 +158,6 @@
             }
         }
 
-        function setApartmentDepositValue($form, isDeposit) {
-            const value = isDeposit ? '1' : '0';
-            if ($form.find('.tf-apartment-deposit-value').length) {
-                $form.find('.tf-apartment-deposit-value').val(value);
-            } else {
-                $form.append('<input type="hidden" name="deposit" value="' + value + '" class="tf-apartment-deposit-value" />');
-            }
-        }
-
         function showApartmentPopupLoader() {
             const $loader = $('#tour_room_details_loader');
             if ($loader.length) {
@@ -306,6 +300,7 @@
             const formData = new FormData($form[0]);
             formData.append('action', 'tf_apartment_booking');
             appendApartmentBookingConfirmationData(formData, $popup);
+            $(document).trigger('tourfic:apartment-booking:form-data', [formData, $form, 'booking']);
 
             $.ajax({
                 type: 'post',
@@ -386,6 +381,7 @@
             const formData = new FormData($form[0]);
             formData.append('action', 'tf_apartment_booking_popup');
             formData.append('_nonce', tf_params.nonce);
+            $(document).trigger('tourfic:apartment-booking:form-data', [formData, $form, 'summary']);
 
             $.ajax({
                 type: 'post',
@@ -436,26 +432,20 @@
             resetApartmentPopupSteps($popup);
             clearApartmentBookingConfirmFields($popup);
 
-            const isDeposit = $form.find('.tf-apartment-deposit-value').val() === '1';
-            if ($popup.find('.tf-apartment-popup-deposit-switch').length) {
-                $popup.find('.tf-apartment-popup-deposit-switch').prop('checked', isDeposit);
-            }
+            $(document).trigger('tourfic:apartment-booking:popup-open', [$form, $popup]);
 
             loadApartmentBookingPopupSummary($form);
         }
 
+        $(document).on('tourfic:apartment-booking:refresh-summary', function (event, $form) {
+            if ($form && $form.length) {
+                loadApartmentBookingPopupSummary($form);
+            }
+        });
+
         $('body').on('submit', 'form#tf-apartment-booking', function (e) {
             e.preventDefault();
             openApartmentBookingPopup($(this));
-        });
-
-        $('body').on('change', '.tf-apartment-popup-deposit-switch', function () {
-            if (!activeApartmentBookingForm || !activeApartmentBookingForm.length) {
-                return;
-            }
-
-            setApartmentDepositValue(activeApartmentBookingForm, $(this).is(':checked'));
-            loadApartmentBookingPopupSummary(activeApartmentBookingForm);
         });
 
         $('body').on('click', '.tf-apartment-popup-continue', function (e) {
@@ -475,8 +465,6 @@
                 return;
             }
 
-            const isDeposit = $('.tf-apartment-popup-deposit-switch').is(':checked');
-            setApartmentDepositValue(activeApartmentBookingForm, isDeposit);
             submitApartmentBooking(activeApartmentBookingForm, {
                 fromPopup: true
             });
@@ -893,6 +881,9 @@
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
+/*!*********************************!*\
+  !*** ./sass/app/js/free/car.js ***!
+  \*********************************/
 (function ($, win) {
     $(document).ready(function () {
        
@@ -906,30 +897,6 @@
                 y: 'bottom',
             },
         });
-
-        let carPartialPaymentSelection = 'no';
-
-        function setCarPartialPayment(trigger) {
-            if (!trigger || !trigger.attr('data-partial')) {
-                return;
-            }
-
-            carPartialPaymentSelection = trigger.attr('data-partial');
-
-            if ($('#tf_partial_payment').length) {
-                $('#tf_partial_payment').val(carPartialPaymentSelection);
-            }
-        }
-
-        function getCarPartialPayment(trigger) {
-            if (trigger && trigger.attr('data-partial')) {
-                setCarPartialPayment(trigger);
-            } else if ($('#tf_partial_payment').length && $('#tf_partial_payment').val()) {
-                carPartialPaymentSelection = $('#tf_partial_payment').val();
-            }
-
-            return carPartialPaymentSelection || 'no';
-        }
 
         
         // FAQ Accordion
@@ -1257,9 +1224,7 @@
                 return;
             }
 
-            setCarPartialPayment($this);
-
-            var data = {
+			var data = {
                 action: 'tf_car_booking_pupup',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
@@ -1437,8 +1402,7 @@
                 $(this).off('click');
             }
             let $this = $(this);
-            setCarPartialPayment($this);
-            
+
             var travellerData = {};
             if($this.hasClass('tf-offline-booking')){
                 let booking = $(this).closest('.tf-booking-form-fields');
@@ -1517,9 +1481,7 @@
                 return;
             }
 
-            let partial_payment = getCarPartialPayment($this);
-
-            var data = {
+			var data = {
                 action: 'tf_car_booking',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
@@ -1531,12 +1493,11 @@
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,
                 dropoff_time: dropoff_time,
-                protection: protection,
-                partial_payment: partial_payment,
-                travellerData: travellerData
-            };
+				protection: protection,
+				travellerData: travellerData
+			};
 
-            $(document).trigger('tourfic:car-booking:request-data', [data]);
+			$(document).trigger('tourfic:car-booking:request-data', [data, $this]);
 
             $.ajax({
                 url: tf_params.ajax_url,
@@ -1782,8 +1743,7 @@
             pickup = $('#tf_pickup_location').val();
             dropoff = $('#tf_dropoff_location').val();
 
-            let partial_payment = getCarPartialPayment($this);
-            let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
+			let pickup_date = $this.closest('.tf-booking-btn').find('#pickup_date').val();
             let dropoff_date = $this.closest('.tf-booking-btn').find('#dropoff_date').val();
             let pickup_time = $this.closest('.tf-booking-btn').find('#pickup_time').val();
             let dropoff_time = $this.closest('.tf-booking-btn').find('#dropoff_time').val();
@@ -1813,11 +1773,12 @@
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,
                 dropoff_time: dropoff_time,
-                protection: protection,
-                partial_payment: partial_payment,
-                travellerData: travellerData
-            };
-            
+				protection: protection,
+				travellerData: travellerData
+			};
+
+			$(document).trigger('tourfic:car-booking:request-data', [data, $this]);
+
             $.ajax({
                 url: tf_params.ajax_url,
                 type: 'POST',
@@ -2183,6 +2144,9 @@ function convertTo24HourFormat(timeStr) {
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
+/*!***********************************!*\
+  !*** ./sass/app/js/free/hotel.js ***!
+  \***********************************/
 (function ($, win) {
     $(document).ready(function () {
 
@@ -2407,8 +2371,6 @@ function convertTo24HourFormat(timeStr) {
                 var adult = $roomForm.find('input[name=adult]').val() || $('#tf-single-hotel-avail').find('[name=adults]').val();
                 var child = $roomForm.find('input[name=child]').val() || $('#tf-single-hotel-avail').find('[name=children]').val() || 0;
                 var room = $roomForm.find('select[name=hotel_room_selected]').val() || $roomForm.find('[name=room]').val() || $('#tf-single-hotel-avail').find('[name=room]').val() || 1;
-                var deposit = $roomForm.find('input[name=make_deposit]').is(':checked');
-                
             } else {
                 var adult = $('input[name=adult]').val();
                 var child = $('input[name=child]').val();
@@ -2416,10 +2378,8 @@ function convertTo24HourFormat(timeStr) {
                 var check_out_date = $('input[name=check_out_date]').val();
                 if ($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
                     var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-                    var deposit = $roomForm.find('input[name=make_deposit]').is(':checked');
                 } else {
                     var room = $("#hotel_room_number").val();
-                    var deposit = $roomForm.find('input[name=make_deposit]').is(':checked');
                 }
             }
             
@@ -2440,7 +2400,6 @@ function convertTo24HourFormat(timeStr) {
                 check_in_date: check_in_date,
                 check_out_date: check_out_date,
                 room: room,
-                deposit: deposit,
                 airport_service: airport_service
             };
             $bookingPopup.trigger('tourfic:hotel-booking:request-data', [data]);
@@ -2864,8 +2823,6 @@ function convertTo24HourFormat(timeStr) {
                 var adult = $roomForm.find('input[name=adult]').val() || $('#tf-single-hotel-avail').find('[name=adults]').val();
                 var child = $roomForm.find('input[name=child]').val() || $('#tf-single-hotel-avail').find('[name=children]').val() || 0;
                 var room = $roomForm.find('select[name=hotel_room_selected]').val() || $roomForm.find('[name=room]').val() || $('#tf-single-hotel-avail').find('[name=room]').val() || 1;
-                var deposit = $roomForm.find('input[name=make_deposit]').is(':checked');
-                
             } else {
                 var roomnumber = $this.closest('.reserve').find('select[name=hotel_room_selected]').val();
                 if (roomnumber == 0) {
@@ -2875,7 +2832,6 @@ function convertTo24HourFormat(timeStr) {
                     $("#hotel_room_number").val(roomnumber);
                     $("#hotel_roomid").val(room_id);
                     $("#hotel_room_uniqueid").val(unique_id);
-                    $this.closest('.tf-room').find("input[name=hotel_room_depo]").val(hotel_deposit);
                 }
                 var adult = $('input[name=adult]').val();
                 var child = $('input[name=child]').val();
@@ -2884,17 +2840,14 @@ function convertTo24HourFormat(timeStr) {
 
                 if ($this.closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
                     var room = $this.closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-                    var deposit = $this.closest('.tf-room').find('input[name=make_deposit]').is(':checked');
                 } else {
                     var room = $("#hotel_room_number").val();
-                    var deposit = $this.closest('.tf-room').find("input[name=hotel_room_depo]").val();
                 }
             }
             
             var room_id = $roomForm.find('input[name=room_id]').val();
             var unique_id = $roomForm.find('input[name=unique_id]').val();
             var option_id = $roomForm.find('[name=option_id]').val();
-            var hotel_deposit = $roomForm.find('input[name=make_deposit]').is(':checked');
             var location = $('input[name=place]').val();
             var children_ages = $('input[name=children_ages]').val();
             var airport_service = $roomForm.find('[name="airport_service"]').val();
@@ -2913,7 +2866,6 @@ function convertTo24HourFormat(timeStr) {
                 check_in_date: check_in_date,
                 check_out_date: check_out_date,
                 room: room,
-                deposit: deposit,
                 airport_service: airport_service
             };
             $roomForm.trigger('tourfic:hotel-booking:request-data', [data]);
@@ -2999,17 +2951,9 @@ function convertTo24HourFormat(timeStr) {
             var $this = $(this);
             var formData = new FormData(this);
 
-            // if ($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
-            //     var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-            //     var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
-            // } else {
-            //     var room = $("#hotel_room_number").val();
-            // }
-            var deposit = $this.find("input[name=hotel_room_depo]").val();
             var airport_service = $this.find('[name="airport_service"]').val();
             formData.append('action', 'tf_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
-            formData.append('deposit', deposit);
             formData.append('airport_service', airport_service);
             $this.trigger('tourfic:hotel-booking:form-data', [formData]);
 
@@ -3111,6 +3055,9 @@ function convertTo24HourFormat(timeStr) {
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
+/*!**********************************!*\
+  !*** ./sass/app/js/free/room.js ***!
+  \**********************************/
 (function ($, win) {
     $(document).ready(function () {
 
@@ -3175,6 +3122,9 @@ function convertTo24HourFormat(timeStr) {
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
+/*!**********************************!*\
+  !*** ./sass/app/js/free/tour.js ***!
+  \**********************************/
 (function ($, win) {
     $(document).ready(function () {
 
@@ -4093,18 +4043,6 @@ function convertTo24HourFormat(timeStr) {
             $("#check-in-out-date").flatpickr(tour_date_options);
         }
 
-        $('body').on('click', "#tour-deposit > div > div.tf_button_group > button", function (e) {
-            e.preventDefault();
-            var form = $(document).find('form.tf_tours_booking');
-            var has_deposit = $(this).data('deposit');
-            if (has_deposit === true) {
-                form.find('input[name="deposit"]').val(1);
-            } else {
-                form.find('input[name="deposit"]').val(0);
-            }
-            form.submit();
-        });
-
         if ($('#tour-location').length) {
             const map = L.map('tour-location').setView([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], tf_params.tour_form_data.location_zoom);
 
@@ -4125,6 +4063,9 @@ function convertTo24HourFormat(timeStr) {
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
+/*!*************************************!*\
+  !*** ./sass/app/js/free/tourfic.js ***!
+  \*************************************/
 (function ($, win) {
     $(document).ready(function () {
 
@@ -6294,8 +6235,7 @@ function convertTo24HourFormat(timeStr) {
             let infant = parseInt($form.find('input[name="infants"], [name="infant"], #infant').first().val() || '0', 10);
 			const checkInDate = (tfResolveTourDateField($form).val() || '').toString().trim();
             const postId = $form.find('input[name="post_id"]').first().val() || '';
-            const deposit = $form.find('input[name="deposit"]').is(':checked');
-            let selectedPackage = '';
+			let selectedPackage = '';
 
             if ($selectedPackage.length) {
                 selectedPackage = String($selectedPackage.find('input[name="tf_package"]').first().val() || '');
@@ -6312,8 +6252,7 @@ function convertTo24HourFormat(timeStr) {
                 infant,
                 checkInDate,
                 postId,
-                deposit,
-                selectedPackage
+				selectedPackage
 			};
 			$(document).trigger('tourfic:tour-booking:state', [bookingState]);
 
@@ -6892,8 +6831,7 @@ function convertTo24HourFormat(timeStr) {
             let infant = bookingState.infant;
             let check_in_date = bookingState.checkInDate;
             let post_id = bookingState.postId;
-            let deposit = bookingState.deposit;
-            let selectedPackage = bookingState.selectedPackage;
+			let selectedPackage = bookingState.selectedPackage;
             if (!ensureTourDateSelected(settings.showDateError, $trigger.length ? $trigger : $form)) {
                 return false;
             }
@@ -6915,8 +6853,7 @@ function convertTo24HourFormat(timeStr) {
                 children: children,
                 infant: infant,
                 check_in_date: check_in_date,
-                deposit: deposit,
-                selectedPackage: selectedPackage
+				selectedPackage: selectedPackage
             };
 			$(document).trigger('tourfic:tour-booking:request-data', [data, bookingState]);
 
@@ -7036,12 +6973,6 @@ function convertTo24HourFormat(timeStr) {
 				trigger: $(trigger)
 			});
 		});
-		$(document).on('change', '[name=deposit]', function () {
-            tourPopupBooking({
-                trigger: $(this)
-            });
-        });
-
         $('.tf-single-person .acr-inc, .tf-single-person .acr-dec').on('click', function (e) {
             tourPopupBooking({
                 trigger: $(this)

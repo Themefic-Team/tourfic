@@ -965,7 +965,6 @@ class Migrator {
 						$check_in             = wc_get_order_item_meta( $item_key, 'check_in', true );
 						$check_out            = wc_get_order_item_meta( $item_key, 'check_out', true );
 						$price                = $itemmeta->get_subtotal();
-						$due                  = wc_get_order_item_meta( $item_key, 'due', true );
 						$room_name            = wc_get_order_item_meta( $item_key, 'room_name', true );
 						$adult                = wc_get_order_item_meta( $item_key, 'adult', true );
 						$child                = wc_get_order_item_meta( $item_key, 'child', true );
@@ -985,8 +984,8 @@ class Migrator {
 							'airport_service_type' => $airport_service_type,
 							'airport_service_fee'  => $airport_service_fee,
 							'total_price'          => $price,
-							'due_price'            => $due,
 						];
+						$iteminfo = apply_filters( 'tourfic_migrated_hotel_order_details', $iteminfo, $item_key, $itemmeta );
 
 						$iteminfo_keys = array_keys( $iteminfo );
 						$iteminfo_keys = array_map( 'sanitize_key', $iteminfo_keys );
@@ -1025,7 +1024,6 @@ class Migrator {
 						$tour_date      = wc_get_order_item_meta( $item_key, 'Tour Date', true );
 						$tour_time      = wc_get_order_item_meta( $item_key, 'Tour Time', true );
 						$price          = $itemmeta->get_subtotal();
-						$due            = wc_get_order_item_meta( $item_key, 'Due', true );
 						$adult          = wc_get_order_item_meta( $item_key, 'Adults', true );
 						$child          = wc_get_order_item_meta( $item_key, 'Children', true );
 						$infants        = wc_get_order_item_meta( $item_key, 'Infants', true );
@@ -1046,7 +1044,6 @@ class Migrator {
 							'child'       => $child,
 							'infants'     => $infants,
 							'total_price' => $price,
-							'due_price'   => $due,
 						];
 						$iteminfo = apply_filters( 'tourfic_migrated_tour_order_details', $iteminfo, $item_key, $itemmeta );
 

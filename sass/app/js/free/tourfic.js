@@ -2167,8 +2167,7 @@
             let infant = parseInt($form.find('input[name="infants"], [name="infant"], #infant').first().val() || '0', 10);
 			const checkInDate = (tfResolveTourDateField($form).val() || '').toString().trim();
             const postId = $form.find('input[name="post_id"]').first().val() || '';
-            const deposit = $form.find('input[name="deposit"]').is(':checked');
-            let selectedPackage = '';
+			let selectedPackage = '';
 
             if ($selectedPackage.length) {
                 selectedPackage = String($selectedPackage.find('input[name="tf_package"]').first().val() || '');
@@ -2185,8 +2184,7 @@
                 infant,
                 checkInDate,
                 postId,
-                deposit,
-                selectedPackage
+				selectedPackage
 			};
 			$(document).trigger('tourfic:tour-booking:state', [bookingState]);
 
@@ -2765,8 +2763,7 @@
             let infant = bookingState.infant;
             let check_in_date = bookingState.checkInDate;
             let post_id = bookingState.postId;
-            let deposit = bookingState.deposit;
-            let selectedPackage = bookingState.selectedPackage;
+			let selectedPackage = bookingState.selectedPackage;
             if (!ensureTourDateSelected(settings.showDateError, $trigger.length ? $trigger : $form)) {
                 return false;
             }
@@ -2788,8 +2785,7 @@
                 children: children,
                 infant: infant,
                 check_in_date: check_in_date,
-                deposit: deposit,
-                selectedPackage: selectedPackage
+				selectedPackage: selectedPackage
             };
 			$(document).trigger('tourfic:tour-booking:request-data', [data, bookingState]);
 
@@ -2909,12 +2905,6 @@
 				trigger: $(trigger)
 			});
 		});
-		$(document).on('change', '[name=deposit]', function () {
-            tourPopupBooking({
-                trigger: $(this)
-            });
-        });
-
         $('.tf-single-person .acr-inc, .tf-single-person .acr-dec').on('click', function (e) {
             tourPopupBooking({
                 trigger: $(this)

@@ -58,7 +58,6 @@ function tf_tours_booking_function() {
 	// Tour date
 	$tour_date    = ! empty( $_POST['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_POST['check-in-out-date'] ) ) : '';
 	$tour_time    = apply_filters( 'tourfic_tour_booking_schedule_time', '', $_POST, $post_id, $meta );
-	$make_deposit = ! empty( $_POST['deposit'] ) ? sanitize_text_field( wp_unslash( $_POST['deposit'] ) ) : false;
 
 	// Tour Package
 	$selectedPackage = isset( $_POST['selectedPackage'] ) ? sanitize_text_field( wp_unslash( $_POST['selectedPackage'] ) ) : '';
@@ -110,7 +109,7 @@ function tf_tours_booking_function() {
 	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? wp_unslash( $_POST['booking_confirm'] ) : ""; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 	// Booking Type
-	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+	$tf_booking_type      = tf_get_tour_booking_type( $post_id, $meta );
 	$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
 	$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
 	$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
@@ -817,12 +816,15 @@ function tf_tours_booking_function() {
 				}
 			}
 
-			# Deposit information
-			Helper::tf_get_deposit_amount( $meta, $tf_tours_data['tf_tours_data']['price'], $deposit_amount, $has_deposit );
-			if ( $has_deposit == true && $make_deposit == true ) {
-				$tf_tours_data['tf_tours_data']['due']   = $tf_tours_data['tf_tours_data']['price'] - $deposit_amount;
-				$tf_tours_data['tf_tours_data']['price'] = $deposit_amount;
-			}
+			$tf_tours_data['tf_tours_data'] = apply_filters(
+				'tourfic_tour_booking_data',
+				$tf_tours_data['tf_tours_data'],
+				array(
+					'source'  => 'checkout',
+					'post_id' => $post_id,
+					'meta'    => $meta,
+				)
+			);
 
 			if( apply_filters( 'tf_tour_is_external_booking', false, $tf_booking_type, $tf_booking_url ) ){
 				$external_search_info = array(
@@ -921,7 +923,6 @@ function tf_tours_cart_item_custom_data( $item_data, $cart_item ) {
 	$infants_number   = ! empty( $cart_item['tf_tours_data']['infants'] ) ? $cart_item['tf_tours_data']['infants'] : '';
 	$tour_date        = ! empty( $cart_item['tf_tours_data']['tour_date'] ) ? $cart_item['tf_tours_data']['tour_date'] : '';
 	$package_title    = ! empty( $cart_item['tf_tours_data']['package_title'] ) ? $cart_item['tf_tours_data']['package_title'] : '';
-	$due              = ! empty( $cart_item['tf_tours_data']['due'] ) ? $cart_item['tf_tours_data']['due'] : null;
 
 	/**
 	 * Show data in cart & checkout
@@ -967,13 +968,7 @@ function tf_tours_cart_item_custom_data( $item_data, $cart_item ) {
 		);
 	}
 
-	// Due amount from deposit
-	if ( ! empty( $due ) ) {
-		$item_data[] = [
-			'key'   => esc_html__( 'Due ', 'tourfic' ),
-			'value' => wp_strip_all_tags(wc_price( $due )),
-		];
-	}
+	$item_data = apply_filters( 'tourfic_tour_cart_item_data_after_core', $item_data, $cart_item );
 
 	return $item_data;
 
@@ -994,7 +989,6 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 	$infants_number   = ! empty( $values['tf_tours_data']['infants'] ) ? $values['tf_tours_data']['infants'] : '';
 	$tour_date        = ! empty( $values['tf_tours_data']['tour_date'] ) ? $values['tf_tours_data']['tour_date'] : '';
 	$package_title    = ! empty( $values['tf_tours_data']['package_title'] ) ? $values['tf_tours_data']['package_title'] : '';
-	$due              = ! empty( $values['tf_tours_data']['due'] ) ? $values['tf_tours_data']['due'] : null;
 	$visitor_details  = ! empty( $values['tf_tours_data']['visitor_details'] ) ? $values['tf_tours_data']['visitor_details'] : '';
 
 
@@ -1045,9 +1039,7 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 		$item->update_meta_data( 'Package', $package_title );
 	}
 
-	if ( ! empty( $due ) ) {
-		$item->update_meta_data( 'Due', wp_strip_all_tags(wc_price( $due ) ));
-	}
+	do_action( 'tourfic_tour_checkout_finalize_order_line_item', $item, $values, $order, $cart_item_key );
 
 	// Tour Unique ID 
 	$item->update_meta_data( '_tour_unique_id', wp_rand());
@@ -1154,7 +1146,6 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 			$tour_date = $item->get_meta( 'Tour Date', true );
 			$tour_time = $item->get_meta( 'Tour Time', true );
 			$price = $item->get_subtotal();
-			$due = $item->get_meta( 'Due', true );
 			$package = $item->get_meta( 'Package', true );
 			$adult = $item->get_meta( 'Adults', true );
 			$child = $item->get_meta( 'Children', true );
@@ -1173,7 +1164,6 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 				'child' => $child,
 				'infants' => $infants,
 				'total_price' => $price,
-				'due_price' => $due,
 				'unique_id' => $tour_ides,
 				'visitor_details' => $visitor_details,
 				'tax_info' => wp_json_encode($fee_sums)
@@ -1187,7 +1177,6 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 				'child' => $child,
 				'infants' => $infants,
 				'total_price' => $price,
-				'due_price' => $due,
 			];
 			$tf_integration_order_data[] = apply_filters( 'tourfic_tour_integration_order_item', $integration_item, $item, $order );
 
@@ -1374,7 +1363,6 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 			$tour_date = $item->get_meta( 'Tour Date', true );
 			$tour_time = $item->get_meta( 'Tour Time', true );
 			$price = $item->get_subtotal();
-			$due = $item->get_meta( 'Due', true );
 			$package = $item->get_meta( 'Package', true );
 			$adult = $item->get_meta( 'Adults', true );
 			$child = $item->get_meta( 'Children', true );
@@ -1393,7 +1381,6 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 				'child' => $child,
 				'infants' => $infants,
 				'total_price' => $price,
-				'due_price' => $due,
 				'unique_id' => $tour_ides,
 				'visitor_details' => $visitor_details,
 				'tax_info' => wp_json_encode($fee_sums)
@@ -1407,7 +1394,6 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 				'child' => $child,
 				'infants' => $infants,
 				'total_price' => $price,
-				'due_price' => $due,
 			];
 			$tf_integration_order_data[] = apply_filters( 'tourfic_tour_integration_order_item', $integration_item, $item, $order );
 

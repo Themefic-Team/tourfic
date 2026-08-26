@@ -1017,17 +1017,6 @@
             .tf-available-room-purchase-summery {
                 display: none;
             }
-            .tf-deposit-content{
-                text-align: right;
-                label{
-                    font-size: 0.75rem;
-                }
-                input[type=checkbox]{
-                    background: $color-primary;
-                    border-color: $color-primary;
-                    accent-color: $color-primary;
-                }
-            }
             .roomselectissue{
                 text-align: right;
             }
@@ -1164,9 +1153,6 @@
                 }
                 .room-submit-wrap{
                     width: 100%;
-                    .tf-deposit-content{
-                        text-align: left;
-                    }
                 }
 
                 .tf-available-room-price {

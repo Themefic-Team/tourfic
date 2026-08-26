@@ -58,9 +58,13 @@ class Enquiry {
 			return;
 		}
 
+		if ( '1' !== (string) $tf_enquiry_section_status ) {
+			return;
+		}
+
         echo ! empty( $wrapper_open ) ? wp_kses_post( $wrapper_open ) : '';
 
-		if ( 'style1' === $style && '1' == $tf_enquiry_section_status ) :
+		if ( 'style1' === $style ) :
 			?>
 			<div class="tf-single-enquiry-style-1 tf-ask-enquiry tf-icon-<?php echo esc_attr( $icon_type ); ?> <?php echo esc_attr( $wrapper_class ); ?>">
 				<?php if ( ! empty( $tf_enquiry_section_icon ) ) { ?>
@@ -89,7 +93,7 @@ class Enquiry {
 				?>
 			</div>
 			<?php
-		elseif ( 'style2' === $style && '1' == $tf_enquiry_section_status ) :
+		elseif ( 'style2' === $style ) :
 			?>
 			<div class="tf-single-enquiry-style-2 apartment-question tf-icon-<?php echo esc_attr( $icon_type ); ?>">
                 <?php echo 'yes' === $container ? '<div class="tf-container"><div class="apartment-qa-wrapper">' : ''; ?>

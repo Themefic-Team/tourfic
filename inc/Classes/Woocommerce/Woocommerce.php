@@ -182,7 +182,6 @@ class Woocommerce {
 				$check_in             = $item->get_meta( 'check_in', true );
 				$check_out            = $item->get_meta( 'check_out', true );
 				$price                = $item->get_subtotal();
-				$due                  = $item->get_meta( 'due', true );
 				$room_name            = $item->get_meta( 'room_name', true );
 				$option               = $item->get_meta( 'option', true );
 				$adult                = $item->get_meta( 'adult', true );
@@ -191,7 +190,7 @@ class Woocommerce {
 				$airport_service_type = $item->get_meta( 'Airport Service', true );
 				$airport_service_fee  = $item->get_meta( 'Airport Service Fee', true );
 	
-				$tf_integration_order_data[] = [
+				$integration_item = [
 					'room'                 => $room_selected,
 					'room_unique_id'       => $unique_id,
 					'check_in'             => $check_in,
@@ -204,12 +203,12 @@ class Woocommerce {
 					'airport_service_type' => $airport_service_type,
 					'airport_service_fee'  => $airport_service_fee,
 					'total_price'          => $price,
-					'due_price'            => $due,
 					'customer_id'          => $order->get_customer_id(),
 					'payment_method'       => $order->get_payment_method(),
 					'order_status'         => $order->get_status(),
 					'order_date'           => gmdate( 'Y-m-d H:i:s' )
 				];
+				$tf_integration_order_data[] = apply_filters( 'tourfic_hotel_integration_order_item', $integration_item, $item, $order );
 	
 				$tf_integration_order_status = [
 					'customer_id'    => $order->get_customer_id(),
@@ -225,7 +224,6 @@ class Woocommerce {
 				$tour_date  = $item->get_meta( 'Tour Date', true );
 				$tour_time  = $item->get_meta( 'Tour Time', true );
 				$price      = $item->get_subtotal();
-				$due        = $item->get_meta( 'Due', true );
 				$adult      = $item->get_meta( 'Adults', true );
 				$child      = $item->get_meta( 'Children', true );
 				$infants    = $item->get_meta( 'Infants', true );
@@ -241,7 +239,6 @@ class Woocommerce {
 					'child'       => $child,
 					'infants'     => $infants,
 					'total_price' => $price,
-					'due_price'   => $due,
 				];
 				$tf_integration_order_data[] = apply_filters( 'tourfic_tour_integration_order_item', $integration_item, $item, $order );
 	
@@ -261,21 +258,20 @@ class Woocommerce {
 				$adult             = $item->get_meta( 'adults', true );
 				$child             = $item->get_meta( 'children', true );
 				$infants           = $item->get_meta( 'infant', true );
-				$due               = $item->get_meta( '_due_price', true );
 	
 				if ( $check_in_out_date ) {
 					list( $check_in, $check_out ) = tf_split_date_range( $check_in_out_date );
 				}
 	
-				$tf_integration_order_data[] = [
+				$integration_item = [
 					'check_in'       => $check_in,
 					'check_out'      => $check_out,
 					'adult'          => $adult,
 					'child'          => $child,
 					'infants'        => $infants,
 					'total_price'    => $price,
-					'due_price'      => $due,
 				];
+				$tf_integration_order_data[] = apply_filters( 'tourfic_apartment_integration_order_item', $integration_item, $item, $order );
 	
 				$tf_integration_order_status = [
 					'customer_id'    => $order->get_customer_id(),
@@ -296,7 +292,6 @@ class Woocommerce {
 				$tf_dropoff_date = $item->get_meta( 'Drop Off Date', true );
 				$tf_dropoff_time = $item->get_meta( 'Drop Off Time', true );
 				$tf_protection = $item->get_meta( 'Protection', true );
-				$tf_due = $item->get_meta( 'Due', true );
 
 				$integration_item = [
 					'pickup_location'   => $pickup,
@@ -306,7 +301,6 @@ class Woocommerce {
 					'dropoff_date'   => $tf_dropoff_date,
 					'dropoff_time'   => $tf_dropoff_time,
 					'protection' => !empty($tf_protection) ? $tf_protection : '',
-					'due' => !empty($tf_due) ? $tf_due : '',
 					'total_price' => $price
 				];
 				$tf_integration_order_data[] = apply_filters( 'tourfic_car_integration_order_item', $integration_item, $item, $order );
