@@ -1,9 +1,6 @@
 /******/ (() => { // webpackBootstrap
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
-/*!***************************************!*\
-  !*** ./sass/app/js/free/apartment.js ***!
-  \***************************************/
 (function ($, win) {
     $(document).ready(function () {
 
@@ -185,111 +182,6 @@
             $popup.find('.tf-control-pagination.show').show();
         }
 
-        function clearApartmentBookingConfirmFields($popup) {
-            if (!$popup.length) {
-                return;
-            }
-
-            $popup.find('[name^="booking_confirm["]').each(function () {
-                const $field = $(this);
-                const type = ($field.attr('type') || '').toLowerCase();
-
-                if (type === 'checkbox' || type === 'radio') {
-                    $field.prop('checked', false);
-                    return;
-                }
-
-                if ($field.is('select')) {
-                    $field.prop('selectedIndex', 0);
-                    return;
-                }
-
-                $field.val('');
-            });
-
-            $popup.find('.error-text').text('').removeClass('error-visible');
-        }
-
-        function validateApartmentBookingConfirmFields($popup) {
-            let hasErrors = false;
-            let firstErrorElement = null;
-            const requiredText = tf_params.field_required || 'This field is required.';
-            const checkedMap = {};
-
-            const $visibleContainer = $popup.find('.tf-booking-content:visible');
-            if (!$visibleContainer.length || !$visibleContainer.find('.tf-confirm-fields').length) {
-                return true;
-            }
-
-            $visibleContainer.find('.error-text').text('').removeClass('error-visible');
-
-            $visibleContainer.find('.tf-confirm-fields').each(function () {
-                $(this).find('input, select, textarea').each(function () {
-                    const $field = $(this);
-                    const required = String($field.attr('data-required') || '0') === '1';
-                    if (!required) {
-                        return;
-                    }
-
-                    const type = ($field.attr('type') || '').toLowerCase();
-                    if (type === 'radio' || type === 'checkbox') {
-                        const name = $field.attr('name') || '';
-                        if (!name || checkedMap[name]) {
-                            return;
-                        }
-                        checkedMap[name] = true;
-
-                        if ($visibleContainer.find(`input[name="${name}"]:checked`).length === 0) {
-                            hasErrors = true;
-                            const $errorContainer = $field.closest('.tf-confirm-fields').find('.error-text').first();
-                            $errorContainer.text(requiredText).addClass('error-visible');
-                            if (!firstErrorElement) {
-                                firstErrorElement = $field;
-                            }
-                        }
-                    } else if ($field.val() === '') {
-                        hasErrors = true;
-                        const $errorContainer = $field.siblings('.error-text');
-                        $errorContainer.text(requiredText).addClass('error-visible');
-                        if (!firstErrorElement) {
-                            firstErrorElement = $field;
-                        }
-                    }
-                });
-            });
-
-            if (hasErrors && firstErrorElement) {
-                $('html, body').animate({
-                    scrollTop: firstErrorElement.offset().top - 100
-                }, 300);
-                firstErrorElement.trigger('focus');
-                return false;
-            }
-
-            return true;
-        }
-
-        function appendApartmentBookingConfirmationData(formData, $popup) {
-            if (!$popup.length) {
-                return;
-            }
-
-            $popup.find('[name^="booking_confirm["]').each(function () {
-                const $field = $(this);
-                const name = $field.attr('name');
-                if (!name) {
-                    return;
-                }
-
-                const type = ($field.attr('type') || '').toLowerCase();
-                if ((type === 'checkbox' || type === 'radio') && !$field.is(':checked')) {
-                    return;
-                }
-
-                formData.append(name, $field.val());
-            });
-        }
-
         function submitApartmentBooking($form, options = {}) {
             const settings = $.extend({
                 fromPopup: false
@@ -299,7 +191,6 @@
             const $popup = $('.tf-apartment-booking-popup');
             const formData = new FormData($form[0]);
             formData.append('action', 'tf_apartment_booking');
-            appendApartmentBookingConfirmationData(formData, $popup);
             $(document).trigger('tourfic:apartment-booking:form-data', [formData, $form, 'booking']);
 
             $.ajax({
@@ -347,13 +238,11 @@
                         return false;
                     }
 
-                    if (response.without_payment == 'true') {
-                        if (settings.fromPopup) {
-                            $popup.removeClass('show tf-is-processing');
-                        }
-                        $('.tf-apartment-withoutpayment-booking-confirm').addClass('show');
-                        return;
-                    }
+					const responseState = { handled: false };
+					$(document).trigger('tourfic:apartment-booking:response', [response, responseState, $popup, settings]);
+					if (responseState.handled) {
+						return;
+					}
 
                     if (response.redirect_to) {
                         if (settings.fromPopup) {
@@ -430,7 +319,7 @@
 
             activeApartmentBookingForm = $form;
             resetApartmentPopupSteps($popup);
-            clearApartmentBookingConfirmFields($popup);
+			$(document).trigger('tourfic:apartment-booking:popup-reset', [$popup]);
 
             $(document).trigger('tourfic:apartment-booking:popup-open', [$form, $popup]);
 
@@ -461,7 +350,9 @@
             }
 
             const $popup = $('.tf-apartment-booking-popup');
-            if (!validateApartmentBookingConfirmFields($popup)) {
+			const validationState = { valid: true };
+			$(document).trigger('tourfic:apartment-booking:validate', [$popup, validationState]);
+			if (!validationState.valid) {
                 return;
             }
 
@@ -474,18 +365,8 @@
             e.preventDefault();
             const $popup = $('.tf-apartment-booking-popup');
             $popup.removeClass('show tf-is-processing');
-            $('.tf-apartment-withoutpayment-booking-confirm').removeClass('show');
             resetApartmentPopupSteps($popup);
-            clearApartmentBookingConfirmFields($popup);
-        });
-
-        $('body').on('click touchstart', '.tf-apartment-withoutpayment-booking-confirm .tf-booking-times span', function (e) {
-            e.preventDefault();
-            $('.tf-apartment-withoutpayment-booking-confirm').removeClass('show');
-            const $popup = $('.tf-apartment-booking-popup');
-            $popup.removeClass('show tf-is-processing');
-            resetApartmentPopupSteps($popup);
-            clearApartmentBookingConfirmFields($popup);
+			$(document).trigger('tourfic:apartment-booking:popup-reset', [$popup]);
         });
 
 
@@ -881,9 +762,6 @@
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
-/*!*********************************!*\
-  !*** ./sass/app/js/free/car.js ***!
-  \*********************************/
 (function ($, win) {
     $(document).ready(function () {
        
@@ -1322,49 +1200,7 @@
         * @author Jahid
         */
 
-        const BookingVallidation = (booking) => {
-            let hasErrors = [];
-            
-            $('.error-text').text("");
-            booking.find('.tf-single-field').each(function () {
-                $(this).find('input, select').each(function () {
-                    if ($(this).attr('data-required')) {
-                        if ($(this).val() == "") {
-                            hasErrors.push(true);
-                            const errorContainer = $(this).siblings('.error-text');
-                            errorContainer.text(tf_params.field_required);
-                            if (errorContainer.text() !== '') {
-                                errorContainer.addClass('error-visible');
-                            } else {
-                                errorContainer.removeClass('error-visible');
-                            }
-                        }
-                    }
-                });
-                $(this).find('input[type="radio"], input[type="checkbox"]').each(function () {
-                    if ($(this).attr('data-required')) {
-                        const radioName = $(this).attr('name');
-                        const isChecked = $('input[name="' + radioName + '"]:checked').length > 0;
-
-                        if (!isChecked) {
-                            hasErrors.push(true);
-                            const errorContainer = $(this).parent().siblings('.error-text');
-                            errorContainer.text(tf_params.field_required);
-                            if (errorContainer.text() !== '') {
-                                errorContainer.addClass('error-visible');
-                            } else {
-                                errorContainer.removeClass('error-visible');
-                            }
-                        }
-                    }
-                });
-            });
-            if (hasErrors.includes(true)) {
-                return true;
-            }
-        }
-
-        const protectionValidation = (protections) => {
+		const protectionValidation = (protections) => {
 
             var attrCount = 0;
             var response = [];
@@ -1403,37 +1239,7 @@
             }
             let $this = $(this);
 
-            var travellerData = {};
-            if($this.hasClass('tf-offline-booking')){
-                let booking = $(this).closest('.tf-booking-form-fields');
-                let Validation_response = BookingVallidation(booking);
-                if(Validation_response){
-                    return;
-                }
-                // Text, email, date inputs
-                $("input[name^='traveller[']").each(function() {
-                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
-                    travellerData[name] = $(this).val();
-                });
-
-                // Select dropdowns
-                $("select[name^='traveller[']").each(function() {
-                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
-                    travellerData[name] = $(this).val();
-                });
-
-                // Checkbox and Radio buttons
-                $("input[type='checkbox'][name^='traveller[']:checked, input[type='radio'][name^='traveller[']:checked").each(function() {
-                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
-                    if (!travellerData[name]) {
-                        travellerData[name] = [];
-                    }
-                    travellerData[name].push($(this).val());
-                });
-
-            }
-    
-            if($this.hasClass('tf-final-step')){
+			if($this.hasClass('tf-final-step')){
                 var pickup = $('#tf_pickup_location').val();
                 let dropoff = $('#tf_dropoff_location').val();
                 let pickup_date = $('.tf_pickup_date').val();
@@ -1493,10 +1299,14 @@
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,
                 dropoff_time: dropoff_time,
-				protection: protection,
-				travellerData: travellerData
-			};
+					protection: protection
+				};
 
+			var requestState = { abort: false };
+			$(document).trigger('tourfic:car-booking:prepare-request', [data, $this, requestState]);
+			if (requestState.abort) {
+				return;
+			}
 			$(document).trigger('tourfic:car-booking:request-data', [data, $this]);
 
             $.ajax({
@@ -1533,50 +1343,19 @@
                             $('.tf-booking-tabs ul li.booking').addClass('active');
                         }
                         return false;
-                    } else {
-                        if (response.without_payment == 'false') {
-                            if (response.status == 'error') {
+					} else {
+						var responseState = { handled: false };
+						$(document).trigger('tourfic:car-booking:response', [response, $this, responseState]);
+						if (responseState.handled) {
+							return false;
+						}
 
-                                if (response.errors) {
-                                    response.errors.forEach(function (text) {
-                                        notyf.error(text);
-                                    });
-                                }
-
-                                return false;
-                            } else {
-
-                                if (response.redirect_to) {
-                                    window.location.replace(response.redirect_to);
-                                } else {
-                                    jQuery(document.body).trigger('added_to_cart');
-                                }
-
-                            }
-                        }else{
-                            $('.tf-car-booking-popup').hide();
-                            $('.tf-withoutpayment-booking-confirm').addClass('show');
-                            $this.removeClass('tf-btn-loading');
-                            $('#tf_pickup_location').val('');
-                            $('#tf_dropoff_location').val('');
-                            $('.tf_pickup_date').val('');
-                            $('.tf_dropoff_date').val('');
-                            $('.tf_pickup_time').val('');
-                            $('.tf_dropoff_time').val('');
-                            if($('.tf-protection-content')){
-                                $('.tf-protection-content').show();
-                                $('.tf-booking-bar').show();
-                                $('.tf-booking-form-fields').hide();
-
-                                $('.tf-booking-tabs ul li').removeClass('active');
-                                $('.tf-booking-tabs ul li.protection').addClass('active');
-                            }else{
-                                $('.tf-booking-form-fields').show();
-                                $('.tf-booking-tabs ul li').removeClass('active');
-                                $('.tf-booking-tabs ul li.booking').addClass('active');
-                            }
-                        }
-                    }
+						if (response.redirect_to) {
+							window.location.replace(response.redirect_to);
+						} else {
+							jQuery(document.body).trigger('added_to_cart');
+						}
+					}
                 }
             });
 
@@ -1672,27 +1451,28 @@
                 success: function (data) {
                     $this.unblock();
 
-                    var response = JSON.parse(data);
-                    if (response.without_payment == 'false') {
-                        if (response.status == 'error') {
+					var response = JSON.parse(data);
+					if (response.status == 'error') {
+						if (response.errors) {
+							response.errors.forEach(function (text) {
+								notyf.error(text);
+							});
+						}
 
-                            if (response.errors) {
-                                response.errors.forEach(function (text) {
-                                    notyf.error(text);
-                                });
-                            }
+						return false;
+					}
 
-                            return false;
-                        } else {
+					var responseState = { handled: false };
+					$(document).trigger('tourfic:car-booking:response', [response, $this, responseState]);
+					if (responseState.handled) {
+						return false;
+					}
 
-                            if (response.redirect_to) {
-                                window.location.replace(response.redirect_to);
-                            } else {
-                                jQuery(document.body).trigger('added_to_cart');
-                            }
-
-                        }
-                    }
+					if (response.redirect_to) {
+						window.location.replace(response.redirect_to);
+					} else {
+						jQuery(document.body).trigger('added_to_cart');
+					}
                 }
             });
 
@@ -1704,36 +1484,7 @@
             }
             let $this = $(this);
 
-            var travellerData = {};
-            if($this.hasClass('tf-offline-booking')){
-                let booking = $(this).closest('.tf-booking-form-fields');
-                let Validation_response = BookingVallidation(booking);
-                if(Validation_response){
-                    return;
-                }
-                // Text, email, date inputs
-                $("input[name^='traveller[']").each(function() {
-                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
-                    travellerData[name] = $(this).val();
-                });
-
-                // Select dropdowns
-                $("select[name^='traveller[']").each(function() {
-                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
-                    travellerData[name] = $(this).val();
-                });
-
-                // Checkbox and Radio buttons
-                $("input[type='checkbox'][name^='traveller[']:checked, input[type='radio'][name^='traveller[']:checked").each(function() {
-                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
-                    if (!travellerData[name]) {
-                        travellerData[name] = [];
-                    }
-                    travellerData[name].push($(this).val());
-                });
-            }
-    
-            var pickup = $('#tf_pickup_location').val();
+			var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
 
             if( !validateCarBookingLocations() ){
@@ -1773,10 +1524,14 @@
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,
                 dropoff_time: dropoff_time,
-				protection: protection,
-				travellerData: travellerData
-			};
+					protection: protection
+				};
 
+			var requestState = { abort: false };
+			$(document).trigger('tourfic:car-booking:prepare-request', [data, $this, requestState]);
+			if (requestState.abort) {
+				return;
+			}
 			$(document).trigger('tourfic:car-booking:request-data', [data, $this]);
 
             $.ajax({
@@ -1801,32 +1556,19 @@
                         $('.tf-car-booking-popup').hide();
                         $this.removeClass('tf-btn-loading');
                         return false;
-                    } else {
-                        if (response.without_payment == 'false') {
-                            if (response.status == 'error') {
+					} else {
+						var responseState = { handled: false };
+						$(document).trigger('tourfic:car-booking:response', [response, $this, responseState]);
+						if (responseState.handled) {
+							return false;
+						}
 
-                                if (response.errors) {
-                                    response.errors.forEach(function (text) {
-                                        notyf.error(text);
-                                    });
-                                }
-
-                                return false;
-                            } else {
-
-                                if (response.redirect_to) {
-                                    window.location.replace(response.redirect_to);
-                                } else {
-                                    jQuery(document.body).trigger('added_to_cart');
-                                }
-
-                            }
-                        }else{
-                            $('.tf-car-booking-popup').hide();
-                            $('.tf-withoutpayment-booking-confirm').addClass('show');
-                            $this.removeClass('tf-btn-loading');
-                        }
-                    }
+						if (response.redirect_to) {
+							window.location.replace(response.redirect_to);
+						} else {
+							jQuery(document.body).trigger('added_to_cart');
+						}
+					}
                 }
             });
 
@@ -2144,9 +1886,6 @@ function convertTo24HourFormat(timeStr) {
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
-/*!***********************************!*\
-  !*** ./sass/app/js/free/hotel.js ***!
-  \***********************************/
 (function ($, win) {
     $(document).ready(function () {
 
@@ -2446,6 +2185,11 @@ function convertTo24HourFormat(timeStr) {
 
                         return false;
                     } else {
+                        var responseState = { handled: false };
+                        $bookingPopup.trigger('tourfic:hotel-booking:response', [response, responseState]);
+                        if (responseState.handled) {
+                            return;
+                        }
 
                         if (response.redirect_to) {
                             window.location.replace(response.redirect_to);
@@ -2948,15 +2692,13 @@ function convertTo24HourFormat(timeStr) {
         $('body').on('submit', 'form.tf-room', function (e) {
             e.preventDefault();
 
-            var $this = $(this);
+            var $form = $(this);
             var formData = new FormData(this);
 
-            var airport_service = $this.find('[name="airport_service"]').val();
             formData.append('action', 'tf_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
-            formData.append('airport_service', airport_service);
-            $this.trigger('tourfic:hotel-booking:form-data', [formData]);
-
+            formData.append('airport_service', $form.find('[name="airport_service"]').val() || '');
+            $form.trigger('tourfic:hotel-booking:form-data', [formData]);
 
             $.ajax({
                 type: 'post',
@@ -2964,27 +2706,57 @@ function convertTo24HourFormat(timeStr) {
                 data: formData,
                 processData: false,
                 contentType: false,
-                beforeSend: function (data) {
-                    $this.block({
+                beforeSend: function () {
+                    $form.block({
                         message: null,
                         overlayCSS: {
-                            background: "#fff",
+                            background: '#fff',
                             opacity: .5
                         }
                     });
                     $('#tour_room_details_loader').show();
-                    $('.tf-notice-wrapper').html("").hide();
+                    $('.tf-notice-wrapper').html('').hide();
+                },
+                success: function (data) {
+                    var response = data;
+                    if (typeof data === 'string') {
+                        try {
+                            response = JSON.parse(data);
+                        } catch (error) {
+                            return;
+                        }
+                    }
+
+                    if (response.status === 'error') {
+                        if (response.errors) {
+                            response.errors.forEach(function (text) {
+                                notyf.error(text);
+                            });
+                        }
+                        return;
+                    }
+
+                    var responseState = { handled: false };
+                    $form.trigger('tourfic:hotel-booking:response', [response, responseState]);
+                    if (responseState.handled) {
+                        return;
+                    }
+
+                    if (response.redirect_to) {
+                        window.location.replace(response.redirect_to);
+                    } else {
+                        jQuery(document.body).trigger('added_to_cart');
+                        $.fancybox.close();
+                    }
                 },
                 error: function (data) {
                     console.log(data);
                 },
-                complete: function (data) {
-                    $this.unblock()
+                complete: function () {
+                    $form.unblock();
                     $('#tour_room_details_loader').hide();
-                    $('.tf-withoutpayment-booking').removeClass('show');
-                    $this.find('.tf-withoutpayment-booking-confirm').addClass('show');
-                },
-            })
+                }
+            });
         });
 
         $('body').on('click', '.tf-room-option .tf-room-option-book', function (e) {
@@ -3055,9 +2827,6 @@ function convertTo24HourFormat(timeStr) {
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
-/*!**********************************!*\
-  !*** ./sass/app/js/free/room.js ***!
-  \**********************************/
 (function ($, win) {
     $(document).ready(function () {
 
@@ -3122,9 +2891,6 @@ function convertTo24HourFormat(timeStr) {
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
-/*!**********************************!*\
-  !*** ./sass/app/js/free/tour.js ***!
-  \**********************************/
 (function ($, win) {
     $(document).ready(function () {
 
@@ -3224,11 +2990,10 @@ function convertTo24HourFormat(timeStr) {
 
             try {
                 return JSON.parse(data);
-            } catch (error) {
-                return {
-                    status: 'error',
-                    without_payment: 'false',
-                    errors: [tf_params.something_went_wrong || 'Something went wrong. Please try again.']
+			} catch (error) {
+				return {
+					status: 'error',
+					errors: [tf_params.something_went_wrong || 'Something went wrong. Please try again.']
                 };
             }
         }
@@ -3282,29 +3047,27 @@ function convertTo24HourFormat(timeStr) {
 
                     var response = tfParseTourBookingResponse(data);
 
-                    if (response.without_payment == 'false') {
-                        if (response.status == 'error') {
-                            $.fancybox.close();
-                            $('#tour_room_details_loader').hide();
-                            tfShowTourBookingErrors(response.errors);
+					if (response.status == 'error') {
+						$.fancybox.close();
+						$('#tour_room_details_loader').hide();
+						tfShowTourBookingErrors(response.errors);
 
-                            return false;
-                        } else {
+						return false;
+					}
 
-                            if (response.redirect_to) {
-                                window.location.replace(response.redirect_to);
-                            } else {
-                                jQuery(document.body).trigger('added_to_cart');
-                                $('#tour_room_details_loader').hide();
-                                $('.tf-withoutpayment-booking').removeClass('show');
-                            }
+					var responseState = { handled: false };
+					$this.trigger('tourfic:tour-booking:response', [response, responseState]);
+					if (responseState.handled) {
+						return false;
+					}
 
-                        }
-                    } else {
-                        $('#tour_room_details_loader').hide();
-                        $('.tf-withoutpayment-booking').removeClass('show');
-                        $('.tf-withoutpayment-booking-confirm').addClass('show');
-                    }
+					if (response.redirect_to) {
+						window.location.replace(response.redirect_to);
+					} else {
+						jQuery(document.body).trigger('added_to_cart');
+						$('#tour_room_details_loader').hide();
+						$('.tf-withoutpayment-booking').removeClass('show');
+					}
                 },
                 error: function (data) {
                     $('#tour_room_details_loader').hide();
@@ -4063,9 +3826,6 @@ function convertTo24HourFormat(timeStr) {
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
-/*!*************************************!*\
-  !*** ./sass/app/js/free/tourfic.js ***!
-  \*************************************/
 (function ($, win) {
     $(document).ready(function () {
 

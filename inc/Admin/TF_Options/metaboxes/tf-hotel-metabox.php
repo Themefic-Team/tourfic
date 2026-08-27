@@ -104,21 +104,6 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 						array( 'tf_single_hotel_layout_opt', '==', 'single' )
 					],
 				),
-				array(
-					'id'      => 'Booking-Type',
-					'type'    => 'heading',
-					'title' => esc_html__( 'Booking Settings', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'      => 'booking-by',
-					'type'    => 'select',
-					'label'   => esc_html__( 'Booking Type', 'tourfic' ),
-					'options' => array(
-						'1' => esc_html__( 'Default Booking (WooCommerce)', 'tourfic' ),
-					),
-					'default' => '1',
-				),
 			),
 		),
 		'location'         => array(

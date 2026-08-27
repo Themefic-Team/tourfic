@@ -107,7 +107,6 @@ class Base {
 		\Tourfic\App\TF_Review::instance();
 
 		// Without Payment Booking
-		// \Tourfic\Classes\Without_Payment_Booking\Hotel_WP_Booking::instance();
 
 	}
 

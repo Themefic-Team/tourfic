@@ -487,16 +487,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'label_off' => esc_html__( 'No', 'tourfic' ),
 				),
 				array(
-					'id'      => 'booking-by',
-					'type'    => 'select',
-					'label'   => esc_html__( 'Booking Type', 'tourfic' ),
-					'subtitle'  => esc_html__( 'Choose the type of booking you would like to implement for this tour.', 'tourfic' ),
-					'options' => array(
-						'1' => esc_html__( 'Default Booking (WooCommerce)', 'tourfic' ),
-					),
-					'default' => '1',
-				),
-				array(
 					'id'       => 'single_tour_booking_form_button_text',
 					'type'     => 'text',
 					'label'    => esc_html__( 'Change Booking Form Button Text', 'tourfic' ),

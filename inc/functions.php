@@ -6,22 +6,6 @@ use Tourfic\Classes\Helper;
 use Tourfic\Classes\Room\Availability;
 use Tourfic\Classes\Room\Room;
 
-if ( ! function_exists( 'tf_get_tour_booking_type' ) ) {
-	/**
-	 * Resolve the active Tour booking type.
-	 *
-	 * Tourfic Free owns the default WooCommerce booking flow. Extensions can
-	 * provide another booking type without Free depending on extension code.
-	 *
-	 * @param int   $post_id Tour post ID.
-	 * @param array $meta    Tour settings.
-	 * @return string Booking type identifier.
-	 */
-	function tf_get_tour_booking_type( $post_id, $meta = array() ) {
-		return (string) apply_filters( 'tourfic_tour_booking_type', '1', $post_id, $meta );
-	}
-}
-
 if ( ! function_exists( 'tf_is_block_theme' ) ) {
 	/**
 	 * Check for a block theme without breaking WordPress versions before 5.9.

@@ -1207,7 +1207,6 @@ class Migrator {
 
 			$searchable_keys = [
 				'featured',
-				'booking-by',
 				'map'
 			];
 			$args            = array(

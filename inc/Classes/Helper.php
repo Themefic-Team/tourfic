@@ -3867,7 +3867,7 @@ class Helper {
         $lastid = $wpdb->insert_id;
 
         if($lastid > 0) {
-            Hotel::tf_hotel_without_payment_inventory_data($order_id);
+	            Hotel::tf_hotel_order_inventory_data( $order_id );
         }
 
 		return $order_id;

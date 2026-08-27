@@ -77,10 +77,6 @@ tf_traveler_compliance_assert(
 	'Tour booking nonce failure must return structured JSON.'
 );
 tf_traveler_compliance_assert(
-	false !== strpos( $tour_booking_body, "'without_payment' => 'false'" ),
-	'Tour booking nonce failure must preserve the existing without_payment error envelope.'
-);
-tf_traveler_compliance_assert(
 	false !== strpos( $tour_booking_body, 'Your booking session has expired. Please refresh the page and try again.' ),
 	'Tour booking nonce failure must tell the user how to recover.'
 );

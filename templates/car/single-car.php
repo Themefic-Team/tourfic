@@ -164,9 +164,6 @@ while ( have_posts() ) : the_post();
 	$tourfic_driver_address = ! empty( $tourfic_meta['driver_address'] ) ? $tourfic_meta['driver_address'] : '';
 	$tourfic_driver_image = ! empty( $tourfic_meta['driver_image'] ) ? $tourfic_meta['driver_image'] : '';
 
-	// Booking
-	$tourfic_car_booking_by = ! empty( $tourfic_meta['booking-by'] ) ? $tourfic_meta['booking-by'] : '1';
-	
 	// Protection
 	$tourfic_benefits_sec_title = ! empty( $tourfic_meta['benefits_sec_title'] ) ? $tourfic_meta['benefits_sec_title'] : '';
 	$tourfic_car_protection_section_status = ! empty( $tourfic_meta['protection_section'] ) ? $tourfic_meta['protection_section'] : '';

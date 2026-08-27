@@ -91,8 +91,7 @@ function tf_car_booking_callback() {
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
 	$tf_protection = isset( $_POST['protection'] ) && is_array( $_POST['protection'] ) ? wp_unslash( $_POST['protection'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
-	// Booking Confirmation Details
-	$tf_confirmation_details = isset( $_POST['travellerData'] ) && is_array( $_POST['travellerData'] ) ? wp_unslash( $_POST['travellerData'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$tf_confirmation_details = apply_filters( 'tourfic_car_booking_confirmation_details', array(), $_POST, $post_id ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 	$should_validate_pickup = '' !== trim( $pickup ) || '' !== trim( $pickup_slug );
 	$should_validate_dropoff = '' !== trim( $dropoff ) || '' !== trim( $dropoff_slug );
@@ -133,13 +132,6 @@ function tf_car_booking_callback() {
 
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	$post_author   = get_post_field( 'post_author', $post_id );
-
-	// Booking
-	$car_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : '1';
-	$tf_booking_url = !empty( $meta['booking-url'] ) ? esc_url($meta['booking-url']) : '';
-	$tf_booking_query_url = !empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'pickup={pickup}&dropoff={dropoff}&pickup_date={pickup_date}&dropoff_date={dropoff_date}';
-
-	$tf_booking_attribute = !empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 
 	$product_id    = get_post_meta( $post_id, 'product_id', true );
 	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
@@ -210,166 +202,44 @@ function tf_car_booking_callback() {
 			'tourfic_car_booking_data',
 			$tf_cars_data['tf_car_data'],
 			array(
-				'meta'       => $meta,
-				'booking_by' => $car_booking_by,
+				'meta'    => $meta,
+				'post_id' => $post_id,
 			)
 		);
 		
-		if( !empty($car_booking_by) && '3'==$car_booking_by ){
+		$mode_response = apply_filters(
+			'tourfic_car_booking_mode_response',
+			null,
+			array(
+				'post_id'              => $post_id,
+				'product_id'           => $product_id,
+				'post_author'          => $post_author,
+				'meta'                 => $meta,
+				'pickup'               => $pickup,
+				'dropoff'              => $dropoff,
+				'pickup_date'          => $tf_pickup_date,
+				'dropoff_date'         => $tf_dropoff_date,
+				'pickup_time'          => $tf_pickup_time,
+				'dropoff_time'         => $tf_dropoff_time,
+				'confirmation_details' => $tf_confirmation_details,
+				'booking_data'         => $tf_cars_data,
+				'total_price'          => $total_prices,
+				'adjustments'          => $booking_adjustments,
+			)
+		);
 
-			$tf_booking_fields = !empty(Helper::tfopt( 'car-book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'car-book-confirm-field' )) : '';
-			if(empty($tf_booking_fields)){
-				$billing_details  = array(
-					'billing_first_name' => sanitize_text_field($tf_confirmation_details['tf_first_name']),
-					'billing_last_name'  => sanitize_text_field($tf_confirmation_details['tf_last_name']),
-					'billing_company'    => '',
-					'billing_address_1'  => sanitize_text_field($tf_confirmation_details['tf_street_address']),
-					'billing_address_2'  => "",
-					'billing_city'       => sanitize_text_field($tf_confirmation_details['tf_town_city']),
-					'billing_state'      => sanitize_text_field($tf_confirmation_details['tf_state_country']),
-					'billing_postcode'   => sanitize_text_field($tf_confirmation_details['tf_postcode']),
-					'billing_country'    => sanitize_text_field($tf_confirmation_details['tf_country']),
-					'billing_email'      => sanitize_email($tf_confirmation_details['tf_email']),
-					'billing_phone'      => sanitize_text_field($tf_confirmation_details['tf_phone']),
-				);
-				$shipping_details = array(
-					'tf_first_name' => sanitize_text_field($tf_confirmation_details['tf_first_name']),
-					'tf_last_name'  => sanitize_text_field($tf_confirmation_details['tf_last_name']),
-					'shipping_company'    => '',
-					'tf_street_address'  => sanitize_text_field($tf_confirmation_details['tf_street_address']),
-					'shipping_address_2'  => "",
-					'tf_town_city'       => sanitize_text_field($tf_confirmation_details['tf_town_city']),
-					'tf_state_country'      => sanitize_text_field($tf_confirmation_details['tf_state_country']),
-					'tf_postcode'   => sanitize_text_field($tf_confirmation_details['tf_postcode']),
-					'tf_country'    => sanitize_text_field($tf_confirmation_details['tf_country']),
-					'tf_phone'      => sanitize_text_field($tf_confirmation_details['tf_phone']),
-					'tf_email'      => sanitize_email($tf_confirmation_details['tf_email']),
-				);
-			}else{
-				$billing_details = [];
-				$shipping_details = [];
-				
-				if(!empty($tf_confirmation_details)){
-					foreach( $tf_confirmation_details as $key => $details ){
-						if("tf_first_name"==$key){
-							$billing_details['billing_first_name'] = sanitize_text_field($details);
-							$shipping_details[$key] = sanitize_text_field($details);
-						}else if("tf_last_name"==$key){
-							$billing_details['billing_last_name'] = sanitize_text_field($details);
-							$shipping_details[$key] = sanitize_text_field($details);
-						}else if("tf_street_address"==$key){
-							$billing_details['billing_address_1'] = sanitize_text_field($details);
-							$shipping_details[$key] = sanitize_text_field($details);
-						}else if("tf_town_city"==$key){
-							$billing_details['billing_city'] = sanitize_text_field($details);
-							$shipping_details[$key] = sanitize_text_field($details);
-						}else if("tf_state_country"==$key){
-							$billing_details['billing_state'] = sanitize_text_field($details);
-							$shipping_details[$key] = sanitize_text_field($details);
-						}else if("tf_postcode"==$key){
-							$billing_details['billing_postcode'] = sanitize_text_field($details);
-							$shipping_details[$key] = sanitize_text_field($details);
-						}else if("tf_country"==$key){
-							$billing_details['billing_country'] = sanitize_text_field($details);
-							$shipping_details[$key] = sanitize_text_field($details);
-						}else if("tf_email"==$key){
-							$billing_details['billing_email'] = sanitize_email($details);
-							$shipping_details[$key] = sanitize_email($details);
-						}else if("tf_phone"==$key){
-							$billing_details['billing_phone'] = sanitize_text_field($details);
-							$shipping_details[$key] = sanitize_text_field($details);
-						}else{
-							$billing_details[$key] = $details;
-							$shipping_details[$key] = $details;
-						}
-					}
-				}
-			}
-
-			if ( is_user_logged_in() ) {
-				$current_user = wp_get_current_user();
-				// get user id
-				$tf_offline_user_id = $current_user->ID;
+		if ( is_array( $mode_response ) ) {
+			$response = array_merge( $response, $mode_response );
+		} else {
+			$added_to_cart = WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_cars_data );
+			if ( ! $added_to_cart ) {
+				$response['status']   = 'error';
+				$response['errors'][] = esc_html__( 'Unable to add this car booking to cart. Please try again.', 'tourfic' );
 			} else {
-				$tf_offline_user_id = 1;
-			}
-
-			$order_details = [
-				'order_by'    => '',
-				'pickup_location'   => $pickup,
-				'pickup_date'   => $tf_pickup_date,
-				'pickup_time'   => $tf_pickup_time,
-				'dropoff_location'   => $dropoff,
-				'dropoff_date'   => $tf_dropoff_date,
-				'dropoff_time'   => $tf_dropoff_time,
-				'protection' => !empty($tf_cars_data['tf_car_data']['protection']) ? $tf_cars_data['tf_car_data']['protection'] : '',
-				'total_price' => $total_prices
-			];
-			$order_details = array_merge( $order_details, $booking_adjustments['order_details'] );
-
-			$order_data = array(
-				'post_id'          => $post_id,
-				'post_type'        => 'car',
-				'room_number'      => null,
-				'check_in'         => $tf_pickup_date,
-				'check_out'        => $tf_dropoff_date,
-				'billing_details'  => $billing_details,
-				'shipping_details' => $shipping_details,
-				'order_details'    => $order_details,
-				'payment_method'   => 'offline',
-				'customer_id'	   => $tf_offline_user_id,
-				'status'           => 'processing',
-				'order_date'       => gmdate( 'Y-m-d H:i:s' ),
-			);
-			$response['without_payment'] = 'true';
-			$order_id = Helper::tf_set_order( $order_data );
-			
-			if ( ! empty( $order_id ) ) {
-				do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
-
-				if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
-					
-					/**
-					 * Filters the data passed to the Google Calendar integration.
-					 *
-					 * @param int    $order_id   The order ID.
-					 * @param array  $order_data The items in the order.
-					 * @param string $type Order type
-					 */
-					apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order_data, '' );
-				}
-			}
-
-		}else{
-			if( '2'==$car_booking_by && !empty($tf_booking_url) ){
-				$external_search_info = array(
-					'{pickup}'    => $pickup,
-					'{dropoff}'    => $dropoff,
-					'{pickup_date}' => $tf_pickup_date,
-					'{dropoff_date}'     => $tf_dropoff_date
-				);
-				if(!empty($tf_booking_attribute)){
-					$tf_booking_query_url = str_replace(array_keys($external_search_info), array_values($external_search_info), $tf_booking_query_url);
-					if( !empty($tf_booking_query_url) ){
-						$tf_booking_url = $tf_booking_url.'/?'.$tf_booking_query_url;
-					}
-				}
-
 				$response['product_id']  = $product_id;
 				$response['add_to_cart'] = 'true';
-				$response['redirect_to'] = $tf_booking_url;
-			}else{
-				$added_to_cart = WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_cars_data );
-				if ( ! $added_to_cart ) {
-					$response['status']   = 'error';
-					$response['errors'][] = esc_html__( 'Unable to add this car booking to cart. Please try again.', 'tourfic' );
-				} else {
-					$response['product_id']  = $product_id;
-					$response['add_to_cart'] = 'true';
-					$response['redirect_to'] = wc_get_checkout_url();
-				}
+				$response['redirect_to'] = wc_get_checkout_url();
 			}
-			$response['without_payment'] = 'false';
 		}
 	}else {
 		$response['status'] = 'error';
