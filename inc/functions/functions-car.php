@@ -66,10 +66,6 @@ if ( ! function_exists( 'tf_normalize_car_meta' ) ) {
 			}
 		}
 
-		if ( empty( $meta['booking-by'] ) && isset( $meta['enable_inline_booking'] ) ) {
-			$meta['booking-by'] = ! empty( $meta['enable_inline_booking'] ) ? '1' : '2';
-		}
-
 		if ( empty( $meta['badge'] ) && ! empty( $meta['featured_text'] ) ) {
 			$meta['badge'] = array(
 				array(
@@ -157,9 +153,6 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 
 	// Badge
 	$badges = ! empty( $meta['badge'] ) ? $meta['badge'] : '';
-
-	// Booking
-	$car_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : '1';
 
 	// Protection
 	$car_protection_section_status = ! empty( $meta['protection_section'] ) ? $meta['protection_section'] : '';
@@ -870,9 +863,6 @@ function tf_car_booking_pupup_callback() {
 	 */
 	$post_id = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
-	// Booking
-	$car_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : '1';
-
 	// Protection
 	$car_protection_section_status = ! empty( $meta['protection_section'] ) ? $meta['protection_section'] : '';
 	$car_protection_content = ! empty( $meta['protection_content'] ) ? $meta['protection_content'] : '';
@@ -894,9 +884,7 @@ function tf_car_booking_pupup_callback() {
 			<?php if(!empty($car_protection_section_status) && !empty($car_protections)){ ?>
 				<li class="protection active"><?php echo esc_html($car_protection_tab_title); ?></li>
 			<?php } ?>
-			<?php if($car_booking_by=='3'){ ?>
-			<li class="booking <?php echo empty($car_protection_section_status) ? esc_attr('active') : ''; ?>"><?php esc_html_e("Booking", "tourfic"); ?></li>
-			<?php } ?>
+			<?php do_action( 'tourfic_car_popup_booking_tab', $post_id, $meta, ! empty( $car_protection_section_status ) && ! empty( $car_protections ) ); ?>
 		</ul>
 	</div>
 	<?php if(!empty($car_protection_section_status) && !empty($car_protections)){ ?>
@@ -993,95 +981,27 @@ function tf_car_booking_pupup_callback() {
 		</div>
 	</div>
 
+	<?php
+	$protection_button = apply_filters(
+		'tourfic_car_popup_protection_button',
+		array(
+			'class' => 'booking-process',
+			'label' => $booking_btn_text,
+		),
+		$post_id,
+		$meta
+	);
+	?>
 	<div class="tf-booking-bar tf-flex tf-flex-gap-24">
-		<button class="with-charge <?php echo '3'==$car_booking_by ? esc_attr('booking-next') : esc_attr('booking-process'); ?>">
-			<?php if ( '3' == $car_booking_by ) : ?>
-				<?php esc_html_e( "Next", "tourfic" ); ?>
-			<?php else : ?>
-				<?php echo esc_html( $booking_btn_text ); ?>
-			<?php endif; ?>
+		<button class="with-charge <?php echo esc_attr( $protection_button['class'] ); ?>">
+			<?php echo esc_html( $protection_button['label'] ); ?>
 			<i class="ri-arrow-right-s-line"></i>
 		</button>
 	</div>
 
 	<?php } ?>
 	
-	<div class="tf-booking-form-fields" style="<?php echo $car_booking_by=='3' && empty($car_protection_section_status) ? esc_attr('display: block') : ''; ?>">
-		<div class="tf-form-fields tf-flex tf-flex-gap-24 tf-flex-w">
-			<?php 
-			$traveller_info_fields = ! empty( Helper::tf_data_types( Helper::tfopt( 'car-book-confirm-field' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'car-book-confirm-field' ) ) : '';
-
-			if(empty($traveller_info_fields)){
-			?>
-			<div class="tf-single-field">
-				<label for="tf_first_name"><?php esc_html_e("First Name", "tourfic"); ?></label>
-				<input type="text" placeholder="First Name" id="tf_first_name" name="traveller[tf_first_name]" data-required="1">
-				<div class="error-text" data-error-for="tf_first_name"></div>
-			</div>
-			<div class="tf-single-field">
-				<label for="tf_last_name"><?php esc_html_e("Last Name", "tourfic"); ?></label>
-				<input type="text" placeholder="Name" id="tf_last_name" name="traveller[tf_last_name]" data-required="1">
-				<div class="error-text" data-error-for="tf_last_name"></div>
-			</div>
-			<div class="tf-single-field">
-				<label for="tf_email"><?php esc_html_e("Email", "tourfic"); ?></label>
-				<input type="text" placeholder="Email" id="tf_email" name="traveller[tf_email]" data-required="1">
-				<div class="error-text" data-error-for="tf_email"></div>
-			</div>
-			<?php }else{ 
-				foreach ( $traveller_info_fields as $field ) {
-					if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) {
-						$reg_field_required = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
-						?>
-						<div class="tf-single-field">
-							<label for="<?php echo esc_attr($field['reg-field-name']); ?>"><?php echo esc_html($field['reg-field-label']); ?></label>
-							<input type="<?php echo esc_attr($field['reg-fields-type']); ?>" name="traveller[<?php echo esc_attr($field['reg-field-name']); ?>]" data-required="<?php echo esc_attr($reg_field_required); ?>" id="<?php echo esc_attr($field['reg-field-name']); ?>" />
-							<div class="error-text" data-error-for="<?php echo esc_attr($field['reg-field-name']); ?>"></div>
-						</div>
-					<?php } if ( "select" == $field['reg-fields-type'] && ! empty( $field['reg-options'] ) ) { ?>
-						<div class="tf-single-field">
-							<label for="<?php echo esc_attr($field['reg-field-name']); ?>"><?php echo esc_html($field['reg-field-label']); ?></label>
-							<select name="traveller[<?php echo esc_attr($field['reg-field-name']); ?>]" data-required="<?php echo esc_attr($reg_field_required); ?>" id="<?php echo esc_attr($field['reg-field-name']); ?>" >
-							<?php 
-							foreach ( $field['reg-options'] as $sfield ) {
-								if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) { ?>
-								<option value="<?php echo esc_attr($sfield['option-value']); ?>"><?php echo esc_html($sfield['option-label']); ?></option>';
-								<?php
-								}
-							}
-							?>
-							</select>
-							<div class="error-text" data-error-for="<?php echo esc_attr($field['reg-field-name']); ?>"></div>
-						</div>
-					<?php } if ( ( "checkbox" == $field['reg-fields-type'] || "radio" == $field['reg-fields-type'] ) && ! empty( $field['reg-options'] ) ) { ?>
-
-						<div class="tf-single-field">
-							<label for="<?php echo esc_attr($field['reg-field-name']); ?>"><?php echo esc_html($field['reg-field-label']); ?></label>
-							<?php 
-							foreach ( $field['reg-options'] as $sfield ) {
-								if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) { ?>
-									<div class="tf-single-checkbox">
-									<input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="traveller[<?php echo esc_attr($field['reg-field-name']); ?>][]" id="<?php echo esc_attr($sfield['option-value']); ?>" value="<?php echo esc_attr($sfield['option-value']); ?>" data-required="<?php echo esc_attr($field['reg-field-required']); ?>" />
-									<label for="<?php echo esc_attr($sfield['option-value']); ?>"><?php echo esc_html( $sfield['option-label'] ); ?></label></div>
-								<?php }
-							}
-							?>
-							<div class="error-text" data-error-for="<?php echo esc_attr($field['reg-field-name']); ?>"></div>
-						</div>
-
-					<?php } ?>
-
-			<?php }} ?>
-		</div>
-
-		<div class="tf-booking-submission">
-			<button class="booking-process tf-offline-booking">
-				<?php esc_html_e("Continue to Pay", "tourfic"); ?>
-				<i class="ri-arrow-right-s-line"></i>
-			</button>
-		</div>
-	</div>
-	
+	<?php do_action( 'tourfic_car_popup_booking_fields', $post_id, $meta, ! empty( $car_protection_section_status ) && ! empty( $car_protections ) ); ?>
 
 <?php
 	wp_die();

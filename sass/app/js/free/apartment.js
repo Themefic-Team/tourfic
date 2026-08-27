@@ -179,111 +179,6 @@
             $popup.find('.tf-control-pagination.show').show();
         }
 
-        function clearApartmentBookingConfirmFields($popup) {
-            if (!$popup.length) {
-                return;
-            }
-
-            $popup.find('[name^="booking_confirm["]').each(function () {
-                const $field = $(this);
-                const type = ($field.attr('type') || '').toLowerCase();
-
-                if (type === 'checkbox' || type === 'radio') {
-                    $field.prop('checked', false);
-                    return;
-                }
-
-                if ($field.is('select')) {
-                    $field.prop('selectedIndex', 0);
-                    return;
-                }
-
-                $field.val('');
-            });
-
-            $popup.find('.error-text').text('').removeClass('error-visible');
-        }
-
-        function validateApartmentBookingConfirmFields($popup) {
-            let hasErrors = false;
-            let firstErrorElement = null;
-            const requiredText = tf_params.field_required || 'This field is required.';
-            const checkedMap = {};
-
-            const $visibleContainer = $popup.find('.tf-booking-content:visible');
-            if (!$visibleContainer.length || !$visibleContainer.find('.tf-confirm-fields').length) {
-                return true;
-            }
-
-            $visibleContainer.find('.error-text').text('').removeClass('error-visible');
-
-            $visibleContainer.find('.tf-confirm-fields').each(function () {
-                $(this).find('input, select, textarea').each(function () {
-                    const $field = $(this);
-                    const required = String($field.attr('data-required') || '0') === '1';
-                    if (!required) {
-                        return;
-                    }
-
-                    const type = ($field.attr('type') || '').toLowerCase();
-                    if (type === 'radio' || type === 'checkbox') {
-                        const name = $field.attr('name') || '';
-                        if (!name || checkedMap[name]) {
-                            return;
-                        }
-                        checkedMap[name] = true;
-
-                        if ($visibleContainer.find(`input[name="${name}"]:checked`).length === 0) {
-                            hasErrors = true;
-                            const $errorContainer = $field.closest('.tf-confirm-fields').find('.error-text').first();
-                            $errorContainer.text(requiredText).addClass('error-visible');
-                            if (!firstErrorElement) {
-                                firstErrorElement = $field;
-                            }
-                        }
-                    } else if ($field.val() === '') {
-                        hasErrors = true;
-                        const $errorContainer = $field.siblings('.error-text');
-                        $errorContainer.text(requiredText).addClass('error-visible');
-                        if (!firstErrorElement) {
-                            firstErrorElement = $field;
-                        }
-                    }
-                });
-            });
-
-            if (hasErrors && firstErrorElement) {
-                $('html, body').animate({
-                    scrollTop: firstErrorElement.offset().top - 100
-                }, 300);
-                firstErrorElement.trigger('focus');
-                return false;
-            }
-
-            return true;
-        }
-
-        function appendApartmentBookingConfirmationData(formData, $popup) {
-            if (!$popup.length) {
-                return;
-            }
-
-            $popup.find('[name^="booking_confirm["]').each(function () {
-                const $field = $(this);
-                const name = $field.attr('name');
-                if (!name) {
-                    return;
-                }
-
-                const type = ($field.attr('type') || '').toLowerCase();
-                if ((type === 'checkbox' || type === 'radio') && !$field.is(':checked')) {
-                    return;
-                }
-
-                formData.append(name, $field.val());
-            });
-        }
-
         function submitApartmentBooking($form, options = {}) {
             const settings = $.extend({
                 fromPopup: false
@@ -293,7 +188,6 @@
             const $popup = $('.tf-apartment-booking-popup');
             const formData = new FormData($form[0]);
             formData.append('action', 'tf_apartment_booking');
-            appendApartmentBookingConfirmationData(formData, $popup);
             $(document).trigger('tourfic:apartment-booking:form-data', [formData, $form, 'booking']);
 
             $.ajax({
@@ -341,13 +235,11 @@
                         return false;
                     }
 
-                    if (response.without_payment == 'true') {
-                        if (settings.fromPopup) {
-                            $popup.removeClass('show tf-is-processing');
-                        }
-                        $('.tf-apartment-withoutpayment-booking-confirm').addClass('show');
-                        return;
-                    }
+					const responseState = { handled: false };
+					$(document).trigger('tourfic:apartment-booking:response', [response, responseState, $popup, settings]);
+					if (responseState.handled) {
+						return;
+					}
 
                     if (response.redirect_to) {
                         if (settings.fromPopup) {
@@ -424,7 +316,7 @@
 
             activeApartmentBookingForm = $form;
             resetApartmentPopupSteps($popup);
-            clearApartmentBookingConfirmFields($popup);
+			$(document).trigger('tourfic:apartment-booking:popup-reset', [$popup]);
 
             $(document).trigger('tourfic:apartment-booking:popup-open', [$form, $popup]);
 
@@ -455,7 +347,9 @@
             }
 
             const $popup = $('.tf-apartment-booking-popup');
-            if (!validateApartmentBookingConfirmFields($popup)) {
+			const validationState = { valid: true };
+			$(document).trigger('tourfic:apartment-booking:validate', [$popup, validationState]);
+			if (!validationState.valid) {
                 return;
             }
 
@@ -468,18 +362,8 @@
             e.preventDefault();
             const $popup = $('.tf-apartment-booking-popup');
             $popup.removeClass('show tf-is-processing');
-            $('.tf-apartment-withoutpayment-booking-confirm').removeClass('show');
             resetApartmentPopupSteps($popup);
-            clearApartmentBookingConfirmFields($popup);
-        });
-
-        $('body').on('click touchstart', '.tf-apartment-withoutpayment-booking-confirm .tf-booking-times span', function (e) {
-            e.preventDefault();
-            $('.tf-apartment-withoutpayment-booking-confirm').removeClass('show');
-            const $popup = $('.tf-apartment-booking-popup');
-            $popup.removeClass('show tf-is-processing');
-            resetApartmentPopupSteps($popup);
-            clearApartmentBookingConfirmFields($popup);
+			$(document).trigger('tourfic:apartment-booking:popup-reset', [$popup]);
         });
 
 

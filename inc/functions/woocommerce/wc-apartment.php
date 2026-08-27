@@ -83,21 +83,15 @@ function tf_apartment_get_booking_validation_errors( $post_id, $adults, $childre
 	if ( 0 > $adults || 0 > $children || 0 > $infant ) {
 		$errors[] = esc_html__( 'Guest count cannot be negative.', 'tourfic' );
 	}
-	if ( 0 === $max_adults && $adults > 0 ) {
-		$errors[] = esc_html__( 'Adult not allowed.', 'tourfic' );
-	} elseif ( $max_adults && $adults > $max_adults ) {
+	if ( 0 < $max_adults && $adults > $max_adults ) {
 		/* translators: %s Adult Count */
 		$errors[] = sprintf( esc_html__( 'Maximum %s Adult(s) allowed.', 'tourfic' ), $max_adults );
 	}
-	if ( 0 === $max_children && $children > 0 ) {
-		$errors[] = esc_html__( 'Children not allowed.', 'tourfic' );
-	} elseif ( $max_children && $children > $max_children ) {
+	if ( 0 < $max_children && $children > $max_children ) {
 		/* translators: %s Children Count */
 		$errors[] = sprintf( esc_html__( 'Maximum %s Children(s) allowed.', 'tourfic' ), $max_children );
 	}
-	if ( 0 === $max_infants && $infant > 0 ) {
-		$errors[] = esc_html__( 'Infant not allowed.', 'tourfic' );
-	} elseif ( $max_infants && $infant > $max_infants ) {
+	if ( 0 < $max_infants && $infant > $max_infants ) {
 		/* translators: %s Infant Count */
 		$errors[] = sprintf( esc_html__( 'Maximum %s Infant(s) allowed.', 'tourfic' ), $max_infants );
 	}
@@ -132,117 +126,6 @@ function tf_apartment_get_booking_total_price( $post_id, $check_in, $check_out, 
 	return (float) Apt_Pricing::instance( $post_id )->set_dates( $check_in, $check_out )->set_persons( $adults, $children, $infant )->set_total_price()->get_total_price();
 }
 
-/**
- * Build billing/shipping details for apartment booking without payment.
- *
- * @param array $confirmation_details Confirmation fields from request.
- * @return array<string, array<string, string>>
- */
-function tf_apartment_get_without_payment_customer_details( $confirmation_details ) {
-	$billing_details  = array();
-	$shipping_details = array();
-
-	if ( ! is_array( $confirmation_details ) || empty( $confirmation_details ) ) {
-		return array(
-			'billing_details'  => $billing_details,
-			'shipping_details' => $shipping_details,
-		);
-	}
-
-	$tf_booking_fields = ! empty( Helper::tfopt( 'book-confirm-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'book-confirm-field' ) ) : '';
-
-	if ( empty( $tf_booking_fields ) ) {
-		$billing_details = array(
-			'billing_first_name' => isset( $confirmation_details['tf_first_name'] ) ? sanitize_text_field( $confirmation_details['tf_first_name'] ) : '',
-			'billing_last_name'  => isset( $confirmation_details['tf_last_name'] ) ? sanitize_text_field( $confirmation_details['tf_last_name'] ) : '',
-			'billing_company'    => '',
-			'billing_address_1'  => isset( $confirmation_details['tf_street_address'] ) ? sanitize_text_field( $confirmation_details['tf_street_address'] ) : '',
-			'billing_address_2'  => '',
-			'billing_city'       => isset( $confirmation_details['tf_town_city'] ) ? sanitize_text_field( $confirmation_details['tf_town_city'] ) : '',
-			'billing_state'      => isset( $confirmation_details['tf_state_country'] ) ? sanitize_text_field( $confirmation_details['tf_state_country'] ) : '',
-			'billing_postcode'   => isset( $confirmation_details['tf_postcode'] ) ? sanitize_text_field( $confirmation_details['tf_postcode'] ) : '',
-			'billing_country'    => isset( $confirmation_details['tf_country'] ) ? sanitize_text_field( $confirmation_details['tf_country'] ) : '',
-			'billing_email'      => isset( $confirmation_details['tf_email'] ) ? sanitize_email( $confirmation_details['tf_email'] ) : '',
-			'billing_phone'      => isset( $confirmation_details['tf_phone'] ) ? sanitize_text_field( $confirmation_details['tf_phone'] ) : '',
-		);
-
-		$shipping_details = array(
-			'tf_first_name'      => isset( $confirmation_details['tf_first_name'] ) ? sanitize_text_field( $confirmation_details['tf_first_name'] ) : '',
-			'tf_last_name'       => isset( $confirmation_details['tf_last_name'] ) ? sanitize_text_field( $confirmation_details['tf_last_name'] ) : '',
-			'shipping_company'   => '',
-			'tf_street_address'  => isset( $confirmation_details['tf_street_address'] ) ? sanitize_text_field( $confirmation_details['tf_street_address'] ) : '',
-			'shipping_address_2' => '',
-			'tf_town_city'       => isset( $confirmation_details['tf_town_city'] ) ? sanitize_text_field( $confirmation_details['tf_town_city'] ) : '',
-			'tf_state_country'   => isset( $confirmation_details['tf_state_country'] ) ? sanitize_text_field( $confirmation_details['tf_state_country'] ) : '',
-			'tf_postcode'        => isset( $confirmation_details['tf_postcode'] ) ? sanitize_text_field( $confirmation_details['tf_postcode'] ) : '',
-			'tf_country'         => isset( $confirmation_details['tf_country'] ) ? sanitize_text_field( $confirmation_details['tf_country'] ) : '',
-			'tf_phone'           => isset( $confirmation_details['tf_phone'] ) ? sanitize_text_field( $confirmation_details['tf_phone'] ) : '',
-			'tf_email'           => isset( $confirmation_details['tf_email'] ) ? sanitize_email( $confirmation_details['tf_email'] ) : '',
-		);
-
-		return array(
-			'billing_details'  => $billing_details,
-			'shipping_details' => $shipping_details,
-		);
-	}
-
-	foreach ( $confirmation_details as $key => $details ) {
-		$sanitized_detail = is_array( $details ) ? wp_json_encode( array_map( 'sanitize_text_field', $details ) ) : sanitize_text_field( $details );
-		if ( 'tf_first_name' === $key ) {
-			$billing_details['billing_first_name'] = $sanitized_detail;
-			$shipping_details[ $key ]              = $sanitized_detail;
-		} elseif ( 'tf_last_name' === $key ) {
-			$billing_details['billing_last_name'] = $sanitized_detail;
-			$shipping_details[ $key ]             = $sanitized_detail;
-		} elseif ( 'tf_street_address' === $key ) {
-			$billing_details['billing_address_1'] = $sanitized_detail;
-			$shipping_details[ $key ]             = $sanitized_detail;
-		} elseif ( 'tf_town_city' === $key ) {
-			$billing_details['billing_city'] = $sanitized_detail;
-			$shipping_details[ $key ]        = $sanitized_detail;
-		} elseif ( 'tf_state_country' === $key ) {
-			$billing_details['billing_state'] = $sanitized_detail;
-			$shipping_details[ $key ]         = $sanitized_detail;
-		} elseif ( 'tf_postcode' === $key ) {
-			$billing_details['billing_postcode'] = $sanitized_detail;
-			$shipping_details[ $key ]            = $sanitized_detail;
-		} elseif ( 'tf_country' === $key ) {
-			$billing_details['billing_country'] = $sanitized_detail;
-			$shipping_details[ $key ]           = $sanitized_detail;
-		} elseif ( 'tf_email' === $key ) {
-			$billing_details['billing_email'] = sanitize_email( $details );
-			$shipping_details[ $key ]         = sanitize_email( $details );
-		} elseif ( 'tf_phone' === $key ) {
-			$billing_details['billing_phone'] = $sanitized_detail;
-			$shipping_details[ $key ]         = $sanitized_detail;
-		} else {
-			$billing_details[ $key ] = $sanitized_detail;
-			$shipping_details[ $key ] = $sanitized_detail;
-		}
-	}
-
-	return array(
-		'billing_details'  => $billing_details,
-		'shipping_details' => $shipping_details,
-	);
-}
-
-/**
- * Get customer id for apartment booking without payment.
- *
- * @return int
- */
-function tf_apartment_get_offline_customer_id() {
-	if ( is_user_logged_in() ) {
-		$current_user = wp_get_current_user();
-		if ( ! empty( $current_user->ID ) ) {
-			return (int) $current_user->ID;
-		}
-	}
-
-	return 1;
-}
-
 function tf_apartment_booking_callback() {
 	$response          = [];
 	$tf_apartment_data = [];
@@ -257,8 +140,6 @@ function tf_apartment_booking_callback() {
 	$children          = isset( $_POST['children'] ) ? intval( sanitize_text_field( wp_unslash($_POST['children']) ) ) : '0';
 	$infant            = isset( $_POST['infant'] ) ? intval( sanitize_text_field( wp_unslash($_POST['infant']) ) ) : '0';
 	$check_in_out_date = isset( $_POST['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_POST['check-in-out-date']) ) : '';
-	$tf_confirmation_details = ! empty( $_POST['booking_confirm'] ) ? wp_unslash( $_POST['booking_confirm'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-
 	$product_id          = get_post_meta( $post_id, 'product_id', true );
 	$post_author         = get_post_field( 'post_author', $post_id );
 	$meta                = get_post_meta( $post_id, 'tf_apartment_opt', true );
@@ -271,11 +152,9 @@ function tf_apartment_booking_callback() {
 		$instantio_is_active = 1;
 	}
 
-	// Booking Type
-	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
-	$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
-	$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
-	$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
+	$core_booking = (bool) apply_filters( 'tourfic_apartment_core_booking', true, $post_id, $meta );
+	$confirmation_details = apply_filters( 'tourfic_apartment_booking_confirmation_details', array(), $_POST, $post_id );
+	$confirmation_details = is_array( $confirmation_details ) ? $confirmation_details : array();
 
 	$date_data    = tf_apartment_parse_check_in_out_date( $check_in_out_date );
 	$check_in_out = $date_data['date_parts'];
@@ -315,74 +194,29 @@ function tf_apartment_booking_callback() {
 			$tf_apartment_data['tf_apartment_data'],
 			array(
 				'meta'         => $meta,
-				'booking_type' => $tf_booking_type,
+				'core_booking' => $core_booking,
 			)
 		);
 
-		if ( 3 == $tf_booking_type ) {
-			$customer_details               = tf_apartment_get_without_payment_customer_details( $tf_confirmation_details );
-			$without_payment_order_details  = array(
-				'order_by'    => '',
-				'check_in'    => $check_in,
-				'check_out'   => $check_out,
-				'adult'       => $adults,
-				'child'       => $children,
-				'infants'     => $infant,
-				'total_price' => ! empty( $tf_apartment_data['tf_apartment_data']['total_price'] ) ? $tf_apartment_data['tf_apartment_data']['total_price'] : 0,
-			);
-			$without_payment_order_data     = array(
-				'post_id'          => $post_id,
-				'post_type'        => 'apartment',
-				'room_number'      => null,
-				'check_in'         => $check_in,
-				'check_out'        => $check_out,
-				'billing_details'  => $customer_details['billing_details'],
-				'shipping_details' => $customer_details['shipping_details'],
-				'order_details'    => $without_payment_order_details,
-				'payment_method'   => 'offline',
-				'customer_id'      => tf_apartment_get_offline_customer_id(),
-				'status'           => 'processing',
-				'order_date'       => gmdate( 'Y-m-d H:i:s' ),
-			);
+		$mode_response = apply_filters(
+			'tourfic_apartment_booking_mode_response',
+			null,
+			array(
+				'post_id'              => $post_id,
+				'product_id'           => $product_id,
+				'meta'                 => $meta,
+				'adults'               => $adults,
+				'children'             => $children,
+				'infant'               => $infant,
+				'check_in'             => $check_in,
+				'check_out'            => $check_out,
+				'confirmation_details' => $confirmation_details,
+				'booking_data'         => $tf_apartment_data['tf_apartment_data'],
+			)
+		);
 
-			$order_id = Helper::tf_set_order( $without_payment_order_data );
-			if ( ! empty( $order_id ) ) {
-				$response['without_payment'] = 'true';
-				$response['product_id']      = $product_id;
-				$response['add_to_cart']     = 'true';
-
-				if ( ! empty( $order_id ) ) {
-					do_action( 'tf_offline_payment_booking_confirmation', $order_id, $without_payment_order_data );
-					if (
-						! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) &&
-						Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == '1'
-					) {
-						apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $without_payment_order_data, '' );
-					}
-				}
-			} else {
-				$response['status']   = 'error';
-				$response['errors'][] = esc_html__( 'Unable to complete booking. Please try again.', 'tourfic' );
-			}
-		} elseif ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) ) {
-			$external_search_info = array(
-				'{adult}'    => $adults,
-				'{child}'    => $children,
-				'{infant}'   => $infant,
-				'{checkin}'  => $check_in,
-				'{checkout}' => $check_out,
-			);
-			if ( ! empty( $tf_booking_attribute ) ) {
-				$tf_booking_query_url = str_replace( array_keys( $external_search_info ), array_values( $external_search_info ), $tf_booking_query_url );
-				if ( ! empty( $tf_booking_query_url ) ) {
-					$tf_booking_url = $tf_booking_url . '/?' . $tf_booking_query_url;
-				}
-			}
-
-			$response['product_id']  = $product_id;
-			$response['add_to_cart'] = 'true';
-			$response['redirect_to'] = $tf_booking_url;
-			$response['without_payment'] = 'false';
+		if ( is_array( $mode_response ) ) {
+			$response = $mode_response;
 		} else {
 
 			# Add product to cart with the custom cart item data
@@ -394,7 +228,6 @@ function tf_apartment_booking_callback() {
 				$response['product_id']  = $product_id;
 				$response['add_to_cart'] = 'true';
 				$response['redirect_to'] = $instantio_is_active == 1 ? ( $quick_checkout == 0 ? wc_get_checkout_url() : '' ) : wc_get_checkout_url();
-				$response['without_payment'] = 'false';
 			}
 		}
 	} else {
@@ -432,7 +265,7 @@ function tf_apartment_booking_popup_callback() {
 	$child_price         = ! empty( $meta['child_price'] ) ? (float) $meta['child_price'] : 0;
 	$infant_price        = ! empty( $meta['infant_price'] ) ? (float) $meta['infant_price'] : 0;
 	$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
-	$tf_booking_type     = ! empty( $meta['booking-by'] ) ? intval( $meta['booking-by'] ) : 1;
+	$core_booking        = (bool) apply_filters( 'tourfic_apartment_core_booking', true, $post_id, $meta );
 
 	$date_data    = tf_apartment_parse_check_in_out_date( $check_in_out_date );
 	$check_in_out = $date_data['date_parts'];
@@ -464,7 +297,7 @@ function tf_apartment_booking_popup_callback() {
 		),
 		array(
 			'meta'         => $meta,
-			'booking_type' => $tf_booking_type,
+			'core_booking' => $core_booking,
 		)
 	);
 	$date_format  = ! empty( Helper::tfopt( 'tf-date-format-for-users' ) ) ? Helper::tfopt( 'tf-date-format-for-users' ) : 'Y/m/d';

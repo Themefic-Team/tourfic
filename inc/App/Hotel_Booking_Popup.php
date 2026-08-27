@@ -1,29 +1,31 @@
-<?php 
+<?php
 
-namespace Tourfic\App\Without_Payment;
+namespace Tourfic\App;
 
-use Tourfic\Core\Without_Payment_Booking;
+use Tourfic\Core\Booking_Popup;
 use Tourfic\Classes\Hotel\Hotel;
 use Tourfic\Classes\Helper;
 use Tourfic\Classes\Hotel\Pricing;
 use Tourfic\Classes\Room\Availability;
 
-// don't call the file directly
 defined( 'ABSPATH' ) || exit;
 
-class Hotel_Offline_Booking extends Without_Payment_Booking{
+/**
+ * Builds the shared Hotel booking popup.
+ */
+class Hotel_Booking_Popup extends Booking_Popup {
 
-    use \Tourfic\Traits\Singleton;
+	use \Tourfic\Traits\Singleton;
 
-    protected array $args = array(
-        "post_type" => "tf_hotel"
-    );
+	protected array $args = array(
+		'post_type' => 'tf_hotel',
+	);
 
-    function __construct(){
-        parent::__construct($this->args);
-    }
+	public function __construct() {
+		parent::__construct( $this->args );
+	}
 
-    function without_payment_booking_popup_callback() {
+	public function booking_popup_callback() {
 		// Check nonce security
 		if ( ! isset( $_POST['tf_room_booking_nonce'] ) ||
 			! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_room_booking_nonce'] ) ), 'check_room_booking_nonce' ) ) {

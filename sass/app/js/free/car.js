@@ -436,49 +436,7 @@
         * @author Jahid
         */
 
-        const BookingVallidation = (booking) => {
-            let hasErrors = [];
-            
-            $('.error-text').text("");
-            booking.find('.tf-single-field').each(function () {
-                $(this).find('input, select').each(function () {
-                    if ($(this).attr('data-required')) {
-                        if ($(this).val() == "") {
-                            hasErrors.push(true);
-                            const errorContainer = $(this).siblings('.error-text');
-                            errorContainer.text(tf_params.field_required);
-                            if (errorContainer.text() !== '') {
-                                errorContainer.addClass('error-visible');
-                            } else {
-                                errorContainer.removeClass('error-visible');
-                            }
-                        }
-                    }
-                });
-                $(this).find('input[type="radio"], input[type="checkbox"]').each(function () {
-                    if ($(this).attr('data-required')) {
-                        const radioName = $(this).attr('name');
-                        const isChecked = $('input[name="' + radioName + '"]:checked').length > 0;
-
-                        if (!isChecked) {
-                            hasErrors.push(true);
-                            const errorContainer = $(this).parent().siblings('.error-text');
-                            errorContainer.text(tf_params.field_required);
-                            if (errorContainer.text() !== '') {
-                                errorContainer.addClass('error-visible');
-                            } else {
-                                errorContainer.removeClass('error-visible');
-                            }
-                        }
-                    }
-                });
-            });
-            if (hasErrors.includes(true)) {
-                return true;
-            }
-        }
-
-        const protectionValidation = (protections) => {
+		const protectionValidation = (protections) => {
 
             var attrCount = 0;
             var response = [];
@@ -517,37 +475,7 @@
             }
             let $this = $(this);
 
-            var travellerData = {};
-            if($this.hasClass('tf-offline-booking')){
-                let booking = $(this).closest('.tf-booking-form-fields');
-                let Validation_response = BookingVallidation(booking);
-                if(Validation_response){
-                    return;
-                }
-                // Text, email, date inputs
-                $("input[name^='traveller[']").each(function() {
-                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
-                    travellerData[name] = $(this).val();
-                });
-
-                // Select dropdowns
-                $("select[name^='traveller[']").each(function() {
-                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
-                    travellerData[name] = $(this).val();
-                });
-
-                // Checkbox and Radio buttons
-                $("input[type='checkbox'][name^='traveller[']:checked, input[type='radio'][name^='traveller[']:checked").each(function() {
-                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
-                    if (!travellerData[name]) {
-                        travellerData[name] = [];
-                    }
-                    travellerData[name].push($(this).val());
-                });
-
-            }
-    
-            if($this.hasClass('tf-final-step')){
+			if($this.hasClass('tf-final-step')){
                 var pickup = $('#tf_pickup_location').val();
                 let dropoff = $('#tf_dropoff_location').val();
                 let pickup_date = $('.tf_pickup_date').val();
@@ -607,10 +535,14 @@
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,
                 dropoff_time: dropoff_time,
-				protection: protection,
-				travellerData: travellerData
-			};
+					protection: protection
+				};
 
+			var requestState = { abort: false };
+			$(document).trigger('tourfic:car-booking:prepare-request', [data, $this, requestState]);
+			if (requestState.abort) {
+				return;
+			}
 			$(document).trigger('tourfic:car-booking:request-data', [data, $this]);
 
             $.ajax({
@@ -647,50 +579,19 @@
                             $('.tf-booking-tabs ul li.booking').addClass('active');
                         }
                         return false;
-                    } else {
-                        if (response.without_payment == 'false') {
-                            if (response.status == 'error') {
+					} else {
+						var responseState = { handled: false };
+						$(document).trigger('tourfic:car-booking:response', [response, $this, responseState]);
+						if (responseState.handled) {
+							return false;
+						}
 
-                                if (response.errors) {
-                                    response.errors.forEach(function (text) {
-                                        notyf.error(text);
-                                    });
-                                }
-
-                                return false;
-                            } else {
-
-                                if (response.redirect_to) {
-                                    window.location.replace(response.redirect_to);
-                                } else {
-                                    jQuery(document.body).trigger('added_to_cart');
-                                }
-
-                            }
-                        }else{
-                            $('.tf-car-booking-popup').hide();
-                            $('.tf-withoutpayment-booking-confirm').addClass('show');
-                            $this.removeClass('tf-btn-loading');
-                            $('#tf_pickup_location').val('');
-                            $('#tf_dropoff_location').val('');
-                            $('.tf_pickup_date').val('');
-                            $('.tf_dropoff_date').val('');
-                            $('.tf_pickup_time').val('');
-                            $('.tf_dropoff_time').val('');
-                            if($('.tf-protection-content')){
-                                $('.tf-protection-content').show();
-                                $('.tf-booking-bar').show();
-                                $('.tf-booking-form-fields').hide();
-
-                                $('.tf-booking-tabs ul li').removeClass('active');
-                                $('.tf-booking-tabs ul li.protection').addClass('active');
-                            }else{
-                                $('.tf-booking-form-fields').show();
-                                $('.tf-booking-tabs ul li').removeClass('active');
-                                $('.tf-booking-tabs ul li.booking').addClass('active');
-                            }
-                        }
-                    }
+						if (response.redirect_to) {
+							window.location.replace(response.redirect_to);
+						} else {
+							jQuery(document.body).trigger('added_to_cart');
+						}
+					}
                 }
             });
 
@@ -786,27 +687,28 @@
                 success: function (data) {
                     $this.unblock();
 
-                    var response = JSON.parse(data);
-                    if (response.without_payment == 'false') {
-                        if (response.status == 'error') {
+					var response = JSON.parse(data);
+					if (response.status == 'error') {
+						if (response.errors) {
+							response.errors.forEach(function (text) {
+								notyf.error(text);
+							});
+						}
 
-                            if (response.errors) {
-                                response.errors.forEach(function (text) {
-                                    notyf.error(text);
-                                });
-                            }
+						return false;
+					}
 
-                            return false;
-                        } else {
+					var responseState = { handled: false };
+					$(document).trigger('tourfic:car-booking:response', [response, $this, responseState]);
+					if (responseState.handled) {
+						return false;
+					}
 
-                            if (response.redirect_to) {
-                                window.location.replace(response.redirect_to);
-                            } else {
-                                jQuery(document.body).trigger('added_to_cart');
-                            }
-
-                        }
-                    }
+					if (response.redirect_to) {
+						window.location.replace(response.redirect_to);
+					} else {
+						jQuery(document.body).trigger('added_to_cart');
+					}
                 }
             });
 
@@ -818,36 +720,7 @@
             }
             let $this = $(this);
 
-            var travellerData = {};
-            if($this.hasClass('tf-offline-booking')){
-                let booking = $(this).closest('.tf-booking-form-fields');
-                let Validation_response = BookingVallidation(booking);
-                if(Validation_response){
-                    return;
-                }
-                // Text, email, date inputs
-                $("input[name^='traveller[']").each(function() {
-                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
-                    travellerData[name] = $(this).val();
-                });
-
-                // Select dropdowns
-                $("select[name^='traveller[']").each(function() {
-                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
-                    travellerData[name] = $(this).val();
-                });
-
-                // Checkbox and Radio buttons
-                $("input[type='checkbox'][name^='traveller[']:checked, input[type='radio'][name^='traveller[']:checked").each(function() {
-                    var name = $(this).attr('name').replace(/^traveller\[(.*)\]$/, '$1'); // Remove 'traveller_' prefix
-                    if (!travellerData[name]) {
-                        travellerData[name] = [];
-                    }
-                    travellerData[name].push($(this).val());
-                });
-            }
-    
-            var pickup = $('#tf_pickup_location').val();
+			var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
 
             if( !validateCarBookingLocations() ){
@@ -887,10 +760,14 @@
                 dropoff_date: dropoff_date,
                 pickup_time: pickup_time,
                 dropoff_time: dropoff_time,
-				protection: protection,
-				travellerData: travellerData
-			};
+					protection: protection
+				};
 
+			var requestState = { abort: false };
+			$(document).trigger('tourfic:car-booking:prepare-request', [data, $this, requestState]);
+			if (requestState.abort) {
+				return;
+			}
 			$(document).trigger('tourfic:car-booking:request-data', [data, $this]);
 
             $.ajax({
@@ -915,32 +792,19 @@
                         $('.tf-car-booking-popup').hide();
                         $this.removeClass('tf-btn-loading');
                         return false;
-                    } else {
-                        if (response.without_payment == 'false') {
-                            if (response.status == 'error') {
+					} else {
+						var responseState = { handled: false };
+						$(document).trigger('tourfic:car-booking:response', [response, $this, responseState]);
+						if (responseState.handled) {
+							return false;
+						}
 
-                                if (response.errors) {
-                                    response.errors.forEach(function (text) {
-                                        notyf.error(text);
-                                    });
-                                }
-
-                                return false;
-                            } else {
-
-                                if (response.redirect_to) {
-                                    window.location.replace(response.redirect_to);
-                                } else {
-                                    jQuery(document.body).trigger('added_to_cart');
-                                }
-
-                            }
-                        }else{
-                            $('.tf-car-booking-popup').hide();
-                            $('.tf-withoutpayment-booking-confirm').addClass('show');
-                            $this.removeClass('tf-btn-loading');
-                        }
-                    }
+						if (response.redirect_to) {
+							window.location.replace(response.redirect_to);
+						} else {
+							jQuery(document.body).trigger('added_to_cart');
+						}
+					}
                 }
             });
 

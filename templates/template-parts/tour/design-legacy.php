@@ -7,26 +7,6 @@ use \Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Tour\Tour_Price;
 use \Tourfic\Classes\Tour\Pricing;
 
-$tourfic_booking_type      = tf_get_tour_booking_type( $tourfic_post_id, $tourfic_meta );
-$tourfic_booking_url       = ! empty( $tourfic_meta['booking-url'] ) ? esc_url( $tourfic_meta['booking-url'] ) : '';
-$tourfic_booking_query_url = ! empty( $tourfic_meta['booking-query'] ) ? $tourfic_meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
-$tourfic_booking_attribute = ! empty( $tourfic_meta['booking-attribute'] ) ? $tourfic_meta['booking-attribute'] : '';
-$tourfic_hide_booking_form = ! empty( $tourfic_meta['hide_booking_form'] ) ? $tourfic_meta['hide_booking_form'] : '';
-$tourfic_hide_price        = ! empty( $tourfic_meta['hide_price'] ) ? $tourfic_meta['hide_price'] : '';
-if( 2==$tourfic_booking_type && !empty($tourfic_booking_url) ){
-	$tourfic_external_search_info = array(
-		'{adult}'    => !empty($adults) ? $adults : 1,
-		'{child}'    => !empty($children) ? $children : 0,
-		'{infant}'     => !empty($infant) ? $infant : 0,
-		'{booking_date}' => !empty($tour_date) ? $tour_date : '',
-	);
-	if(!empty($tourfic_booking_attribute)){
-		$tourfic_booking_query_url = str_replace(array_keys($tourfic_external_search_info), array_values($tourfic_external_search_info), $tourfic_booking_query_url);
-		if( !empty($tourfic_booking_query_url) ){
-			$tourfic_booking_url = $tourfic_booking_url.'/?'.$tourfic_booking_query_url;
-		}
-	}
-}
 ?>
 <div class="tf-single-template__legacy">
     <?php do_action( 'tf_before_container' ); ?>
@@ -131,9 +111,7 @@ if( 2==$tourfic_booking_type && !empty($tourfic_booking_url) ){
                 <div class="tf-title-right" style="align-items: flex-end">
                     <?php \Tourfic\App\Templates\Components\Tour\Single\Tour_Price::render() ?>
                     
-                    <?php if ($tourfic_booking_type == 2 && $tourfic_hide_booking_form == 1):?>
-                        <a href="<?php echo esc_url($tourfic_booking_url) ?>" target="_blank" class="tf_btn" style="margin-left: 16px;"><?php echo esc_html($tourfic_tour_single_book_now_text); ?></a>
-                    <?php endif; ?>
+					<?php do_action( 'tourfic_tour_legacy_header_booking_action', $tourfic_post_id, $tourfic_meta, $tourfic_tour_single_book_now_text ); ?>
                 </div>
             </div>
         </div>

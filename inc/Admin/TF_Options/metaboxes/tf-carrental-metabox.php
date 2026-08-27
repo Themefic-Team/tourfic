@@ -786,32 +786,6 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 			),
 		),
 
-        // Booking
-		'booking'              => array(
-			'title'  => esc_html__( 'Booking', 'tourfic' ),
-			'icon'   => 'fa-solid fa-person-walking-luggage',
-			'fields' => array(
-				array(
-					'id'    => 'tour-booking-heading',
-					'type'  => 'heading',
-					'title' => esc_html__( 'Booking Settings', 'tourfic' ),
-					'content' => esc_html__( 'This section offer the options to customize the booking process for your rental package.', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/booking/')
-				),
-				
-				array(
-					'id'      => 'booking-by',
-					'type'    => 'select',
-					'label'   => esc_html__( 'Booking Type', 'tourfic' ),
-					'subtitle'  => esc_html__( 'Choose the type of booking you would like to implement for this tour.', 'tourfic' ),
-					'options' => array(
-						'1' => esc_html__( 'Default Booking (WooCommerce)', 'tourfic' ),
-					),
-					'default' => '1'
-				),
-			),
-		),
-
 		// FAQ
 		'faq' => array(
 			'title'  => esc_html__( 'FAQ Section', 'tourfic' ),

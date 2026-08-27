@@ -6,10 +6,6 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Hotel\Hotel;
 
-$tourfic_booking_type      = ! empty( $tourfic_meta['booking-by'] ) ? $tourfic_meta['booking-by'] : 1;
-$tourfic_hide_booking_form = ! empty( $tourfic_meta['hide_booking_form'] ) ? $tourfic_meta['hide_booking_form'] : '';
-$tourfic_ext_booking_type  = ! empty( $tourfic_meta['external-booking-type'] ) ? $tourfic_meta['external-booking-type'] : '1';
-$tourfic_ext_booking_code  = ! empty( $tourfic_meta['booking-code'] ) ? $tourfic_meta['booking-code'] : '';
 ?>
 <div class="tf-single-template__one">
     <div class="tf-tour-single">

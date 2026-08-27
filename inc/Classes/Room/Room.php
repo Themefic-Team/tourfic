@@ -287,26 +287,6 @@ class Room {
 
 		$design = !empty($settings['design_room']) ? $settings['design_room'] : '';
 		$tf_room_arc_selected_template = !empty($design) ? $design : (! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['room-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['room-archive'] : 'design-1');
-		$tf_booking_type      = ! empty( $hotel_meta['booking-by'] ) ? $hotel_meta['booking-by'] : 1;
-		$tf_booking_url       = ! empty( $hotel_meta['booking-url'] ) ? esc_url( $hotel_meta['booking-url'] ) : '';
-		$tf_booking_query_url = ! empty( $hotel_meta['booking-query'] ) ? $hotel_meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
-		$tf_booking_attribute = ! empty( $hotel_meta['booking-attribute'] ) ? $hotel_meta['booking-attribute'] : '';
-		$tf_hide_price        = ! empty( $hotel_meta['hide_price'] ) ? $hotel_meta['hide_price'] : '';
-		if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
-			$external_search_info = array(
-				'{adult}'    => ! empty( $adult ) ? $adult : 1,
-				'{child}'    => ! empty( $child ) ? $child : 0,
-				'{checkin}'  => ! empty( $check_in ) ? $check_in : gmdate( 'Y-m-d' ),
-				'{checkout}' => ! empty( $check_out ) ? $check_out : gmdate( 'Y-m-d', strtotime( '+1 day' ) ),
-				'{room}'     => ! empty( $room_selected ) ? $room_selected : 1,
-			);
-			if ( ! empty( $tf_booking_attribute ) ) {
-				$tf_booking_query_url = str_replace( array_keys( $external_search_info ), array_values( $external_search_info ), $tf_booking_query_url );
-				if ( ! empty( $tf_booking_query_url ) ) {
-					$tf_booking_url = $tf_booking_url . '/?' . $tf_booking_query_url;
-				}
-			}
-		}
 
 		$pricing_by   = ! empty( $meta['pricing-by'] ) ? $meta['pricing-by'] : '';
 		$room_options = ! empty( $meta['room-options'] ) ? $meta['room-options'] : [];
@@ -1211,8 +1191,6 @@ class Room {
 
 		$hotel_service_avail = ! empty( $hotel_meta['airport_service'] ) ? $hotel_meta['airport_service'] : '';
 		$hotel_service_type  = ! empty( $hotel_meta['airport_service_type'] ) ? $hotel_meta['airport_service_type'] : '';
-		$room_book_by        = ! empty( $hotel_meta['booking-by'] ) ? $hotel_meta['booking-by'] : 1;
-		$room_book_url       = ! empty( $hotel_meta['booking-url'] ) ? $hotel_meta['booking-url'] : '';
 
 		if ( $tf_room_selected_template == "design-1" ) { ?>
 			<form class="tf-hotel-booking-sidebar tf-booking-form tf-room-booking-form tf-room" method="get" autocomplete="off">

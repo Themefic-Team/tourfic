@@ -97,11 +97,10 @@
 
             try {
                 return JSON.parse(data);
-            } catch (error) {
-                return {
-                    status: 'error',
-                    without_payment: 'false',
-                    errors: [tf_params.something_went_wrong || 'Something went wrong. Please try again.']
+			} catch (error) {
+				return {
+					status: 'error',
+					errors: [tf_params.something_went_wrong || 'Something went wrong. Please try again.']
                 };
             }
         }
@@ -155,29 +154,27 @@
 
                     var response = tfParseTourBookingResponse(data);
 
-                    if (response.without_payment == 'false') {
-                        if (response.status == 'error') {
-                            $.fancybox.close();
-                            $('#tour_room_details_loader').hide();
-                            tfShowTourBookingErrors(response.errors);
+					if (response.status == 'error') {
+						$.fancybox.close();
+						$('#tour_room_details_loader').hide();
+						tfShowTourBookingErrors(response.errors);
 
-                            return false;
-                        } else {
+						return false;
+					}
 
-                            if (response.redirect_to) {
-                                window.location.replace(response.redirect_to);
-                            } else {
-                                jQuery(document.body).trigger('added_to_cart');
-                                $('#tour_room_details_loader').hide();
-                                $('.tf-withoutpayment-booking').removeClass('show');
-                            }
+					var responseState = { handled: false };
+					$this.trigger('tourfic:tour-booking:response', [response, responseState]);
+					if (responseState.handled) {
+						return false;
+					}
 
-                        }
-                    } else {
-                        $('#tour_room_details_loader').hide();
-                        $('.tf-withoutpayment-booking').removeClass('show');
-                        $('.tf-withoutpayment-booking-confirm').addClass('show');
-                    }
+					if (response.redirect_to) {
+						window.location.replace(response.redirect_to);
+					} else {
+						jQuery(document.body).trigger('added_to_cart');
+						$('#tour_room_details_loader').hide();
+						$('.tf-withoutpayment-booking').removeClass('show');
+					}
                 },
                 error: function (data) {
                     $('#tour_room_details_loader').hide();

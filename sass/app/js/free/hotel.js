@@ -297,6 +297,11 @@
 
                         return false;
                     } else {
+                        var responseState = { handled: false };
+                        $bookingPopup.trigger('tourfic:hotel-booking:response', [response, responseState]);
+                        if (responseState.handled) {
+                            return;
+                        }
 
                         if (response.redirect_to) {
                             window.location.replace(response.redirect_to);
@@ -799,15 +804,13 @@
         $('body').on('submit', 'form.tf-room', function (e) {
             e.preventDefault();
 
-            var $this = $(this);
+            var $form = $(this);
             var formData = new FormData(this);
 
-            var airport_service = $this.find('[name="airport_service"]').val();
             formData.append('action', 'tf_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
-            formData.append('airport_service', airport_service);
-            $this.trigger('tourfic:hotel-booking:form-data', [formData]);
-
+            formData.append('airport_service', $form.find('[name="airport_service"]').val() || '');
+            $form.trigger('tourfic:hotel-booking:form-data', [formData]);
 
             $.ajax({
                 type: 'post',
@@ -815,27 +818,57 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                beforeSend: function (data) {
-                    $this.block({
+                beforeSend: function () {
+                    $form.block({
                         message: null,
                         overlayCSS: {
-                            background: "#fff",
+                            background: '#fff',
                             opacity: .5
                         }
                     });
                     $('#tour_room_details_loader').show();
-                    $('.tf-notice-wrapper').html("").hide();
+                    $('.tf-notice-wrapper').html('').hide();
+                },
+                success: function (data) {
+                    var response = data;
+                    if (typeof data === 'string') {
+                        try {
+                            response = JSON.parse(data);
+                        } catch (error) {
+                            return;
+                        }
+                    }
+
+                    if (response.status === 'error') {
+                        if (response.errors) {
+                            response.errors.forEach(function (text) {
+                                notyf.error(text);
+                            });
+                        }
+                        return;
+                    }
+
+                    var responseState = { handled: false };
+                    $form.trigger('tourfic:hotel-booking:response', [response, responseState]);
+                    if (responseState.handled) {
+                        return;
+                    }
+
+                    if (response.redirect_to) {
+                        window.location.replace(response.redirect_to);
+                    } else {
+                        jQuery(document.body).trigger('added_to_cart');
+                        $.fancybox.close();
+                    }
                 },
                 error: function (data) {
                     console.log(data);
                 },
-                complete: function (data) {
-                    $this.unblock()
+                complete: function () {
+                    $form.unblock();
                     $('#tour_room_details_loader').hide();
-                    $('.tf-withoutpayment-booking').removeClass('show');
-                    $this.find('.tf-withoutpayment-booking-confirm').addClass('show');
-                },
-            })
+                }
+            });
         });
 
         $('body').on('click', '.tf-room-option .tf-room-option-book', function (e) {

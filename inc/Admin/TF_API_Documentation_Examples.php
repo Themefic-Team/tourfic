@@ -9,7 +9,7 @@ trait TF_API_Documentation_Examples {
 	}
 
 	private function get_general_settings_example_payload() {
-		return array(
+		$payload = array(
 			'general-notice-heading'           => '',
 			'general-option-notice-one'       => '',
 			'disable-services'                => '',
@@ -150,11 +150,7 @@ trait TF_API_Documentation_Examples {
 			),
 			'itinerary_map'                  => '',
 			'travel_mode'                    => 'DRIVING',
-			'confirmation_fields_heading'    => '',
 			'tour-option-notice-four'        => '',
-			'book-confirm-field'             => 'serialized string',
-			'booking-confirmation-msg'       => 'Booked Successfully',
-			'booking_tour_heading'           => '',
 			'disable_traveller_info'         => '',
 			'custom_fields_heading'          => '',
 			'without-payment-field'          => 'serialized string',
@@ -178,10 +174,6 @@ trait TF_API_Documentation_Examples {
 			'hotel_service_popup_title'      => 'Add Service to your Booking.',
 			'hotel_service_popup_subtile'    => 'Select the services you want to add to your booking.',
 			'hotel_service_popup_action'     => 'Continue to booking',
-			'hotel_confirmation_fields_heading' => '',
-			'hotel-book-confirm-field'       => 'serialized string',
-			'hotel-booking-confirmation-msg' => 'Booked Successfully',
-			'booking_hotel_heading'          => '',
 			'enable_guest_info'              => '1',
 			'hotel_custom_fields_heading'    => '',
 			'hotel_guest_info_fields'        => 'serialized string',
@@ -199,8 +191,6 @@ trait TF_API_Documentation_Examples {
 			'apartment_booking_form_button_text' => '',
 			'disable-car-share'              => '',
 			'car_booking_form_button_text'   => 'Reserve',
-			'car-book-confirm-field'         => 'serialized string',
-			'car-booking-confirmation-msg'   => '',
 			'disable-car-time-slots'         => '',
 			'car_time_interval'              => '30',
 			'front-dash-heading'             => '',
@@ -347,6 +337,8 @@ trait TF_API_Documentation_Examples {
 			'export-import-notice-one'       => '',
 			'backup'                         => '',
 		);
+
+		return apply_filters( 'tourfic_general_settings_api_example_payload', $payload );
 	}
 
 	private function get_hotel_room_availability_example_response() {
@@ -453,10 +445,6 @@ trait TF_API_Documentation_Examples {
 			'ical_url'                  => '',
 			'avil_by_date'              => '0',
 			'avail_date'                => '',
-			'booking-by'                => '1',
-			'booking-url'               => '',
-			'booking-attribute'         => '0',
-			'booking-query'             => '',
 		);
 	}
 
@@ -517,7 +505,7 @@ trait TF_API_Documentation_Examples {
 	}
 
 	private function get_tours_example_payload() {
-		return array(
+		$payload = array(
 			'tours' => array(
 				array(
 					'id'               => 56,
@@ -550,10 +538,6 @@ trait TF_API_Documentation_Examples {
 						'highlights-section-title'    => 'Highlights',
 						'contact-info-section-title'  => 'Contact Information',
 						'tour-traveller-info'         => '',
-						'booking-by'                  => '1',
-						'booking-url'                 => '',
-						'booking-attribute'           => '',
-						'booking-query'               => '',
 						'itinerary-section-title'     => 'Travel Itinerary',
 						'faq-section-title'           => 'Frequently Asked Questions',
 						't-enquiry-section'           => '1',
@@ -661,6 +645,8 @@ trait TF_API_Documentation_Examples {
 			),
 			'total' => 6,
 		);
+
+		return apply_filters( 'tourfic_tours_api_example_payload', $payload );
 	}
 
 	private function get_hotels_example_payload() {
@@ -718,10 +704,6 @@ trait TF_API_Documentation_Examples {
 								'minimum_stay_requirement' => '1',
 								'maximum_stay_requirement' => '10',
 								'pricing-by'               => '1',
-								'booking-by'               => '',
-								'booking-url'              => '',
-								'booking-attribute'        => 0,
-								'booking-query'            => '',
 								'price'                    => '88',
 								'adult_price'              => '',
 								'child_price'              => '',
@@ -833,7 +815,7 @@ trait TF_API_Documentation_Examples {
 	}
 
 	private function get_tour_opt_example_payload() {
-		return array(
+		$payload = array(
 			'tour_as_featured'                => '0',
 			'featured_text'                   => 'Hot Deal',
 			'is_taxable'                      => '0',
@@ -888,10 +870,6 @@ trait TF_API_Documentation_Examples {
 			'min_days_before_book'            => '',
 			'disable_same_day'                => '0',
 			'tour-traveler-info'              => '0',
-			'booking-by'                      => '1',
-			'booking-url'                     => '',
-			'booking-attribute'               => '',
-			'booking-query'                   => '',
 			'inc'                             => array(
 				array( 'inc' => 'Specialized bilingual guide' ),
 				array( 'inc' => 'Entrance fees' ),
@@ -941,6 +919,8 @@ trait TF_API_Documentation_Examples {
 			't-enquiry-option-content'        => 'Looking for more info? Send a question to find out more.',
 			't-enquiry-option-btn'            => 'Ask a Question',
 		);
+
+		return apply_filters( 'tourfic_tour_api_example_payload', $payload );
 	}
 
 	private function get_add_tour_example_request() {
@@ -971,7 +951,7 @@ trait TF_API_Documentation_Examples {
 	}
 
 	private function get_apartment_opt_example_payload() {
-		return array(
+		$payload = array(
 			'apartment_gallery'         => '60,61,62',
 			'apartment_as_featured'     => '0',
 			'featured_text'             => 'Hot Deal',
@@ -1000,10 +980,6 @@ trait TF_API_Documentation_Examples {
 			'additional_fees'           => array(),
 			'discount_type'             => 'none',
 			'discount'                  => '',
-			'booking-by'                => '1',
-			'booking-url'               => '',
-			'booking-attribute'         => '',
-			'booking-query'             => '',
 			'enable_availability'       => '0',
 			'apt_availability'          => '',
 			'ical_url'                  => '',
@@ -1031,6 +1007,8 @@ trait TF_API_Documentation_Examples {
 			'enquiry-content'           => '',
 			'enquiry-btn'               => '',
 		);
+
+		return apply_filters( 'tourfic_apartment_api_example_payload', $payload );
 	}
 
 	private function get_apartments_example_response() {
@@ -1160,10 +1138,6 @@ trait TF_API_Documentation_Examples {
 			'protections'            => array(),
 			'instructions_section'   => '0',
 			'instructions_content'   => '',
-			'booking-by'             => '1',
-			'booking-url'            => '',
-			'booking-attribute'      => '',
-			'booking-query'          => 'pickup={pickup}&dropoff={dropoff}&pickup_date={pickup_date}&dropoff_date={dropoff_date}',
 			'is_taxable'             => '0',
 			'taxable_class'          => 'standard',
 			'faq_sec_title'          => 'FAQs',

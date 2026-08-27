@@ -244,17 +244,6 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'attributes'  => array( 'min' => 0 ),
 					'field_width' => 50,
 				),
-				//Booking Type
-				array(
-					'id'      => 'apt-booking-by',
-					'type'    => 'select',
-					'label'   => esc_html__( 'Booking Type', 'tourfic' ),
-					'options' => array(
-						'1' => esc_html__( 'Default Booking (WooCommerce)', 'tourfic' ),
-					),
-					'default' => '1',
-				),
-
 				array(
 					'id'    => 'apartment-cancellation-heading',
 					'type'  => 'heading',

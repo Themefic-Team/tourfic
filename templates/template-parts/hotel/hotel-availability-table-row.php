@@ -19,8 +19,6 @@ if ( ! empty( $room['avail_date'] ) ) {
 	}
 }
 $tourfic_room_disable_date           = array_intersect( $avail_durationdate, $tourfic_total_dis_dates );
-$tourfic_room_book_by                   = ! empty( $room['booking-by'] ) ? $room['booking-by'] : 1;
-$tourfic_room_book_url                  = ! empty( $room['booking-url'] ) ? $room['booking-url'] : '';
 $tourfic_hotel_reserve_button_text   = ! empty( Helper::tfopt( 'hotel_booking_form_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_form_button_text' ) ) ) : esc_html__( "Reserve Now", 'tourfic' );
 $tourfic_room_options                   = ! empty( $room['room-options'] ) ? $room['room-options'] : [];
 $tourfic_room_select_max                = (int) $num_room_available;
@@ -373,7 +371,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 							<?php
 							$tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 							$tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
-							if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
+							if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && $show_room_service_popup ) {
 								?>
                                 <a class="tf_air_service tf_btn tf_btn_gray tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
 							<?php } else { ?>
@@ -504,7 +502,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 						<?php
 						$tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 						$tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
-						if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
+						if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && $show_room_service_popup ) {
                                 ?>
                                 <a class="tf_air_service tf_btn tf_btn_gray tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
 						<?php } else { ?>
@@ -877,7 +875,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                                 <?php
                                 $tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
                                 $tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
-                                if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
+                                if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && $show_room_service_popup ) {
                                     ?>
 									<?php do_action( 'tourfic_hotel_room_payment_hidden_field', $tourfic_payment_context ); ?>
                                     <div class="roomselectissue"></div>
@@ -1076,7 +1074,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 						<?php
 						$tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 						$tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
-						if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
+						if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && $show_room_service_popup ) {
 							?>
 	                                <?php do_action( 'tourfic_hotel_room_payment_hidden_field', $tourfic_payment_context ); ?>
                                 <div class="roomselectissue"></div>
@@ -1331,7 +1329,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 						<?php
 						$tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 						$tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
-						if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
+						if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && $show_room_service_popup ) {
 							?>
 	                                <?php do_action( 'tourfic_hotel_room_payment_hidden_field', $tourfic_payment_context ); ?>
                                 <div class="roomselectissue"></div>
@@ -1618,7 +1616,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 			                        <?php
 			                        $tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 			                        $tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
-			                        if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
+			                        if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && $show_room_service_popup ) {
 				                        ?>
 	                                        <?php do_action( 'tourfic_hotel_room_payment_hidden_field', $tourfic_payment_context ); ?>
                                         <div class="roomselectissue"></div>
@@ -1810,7 +1808,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 		                        <?php
 		                        $tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 		                        $tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
-		                        if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
+		                        if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && $show_room_service_popup ) {
 			                        ?>
 	                                    <?php do_action( 'tourfic_hotel_room_payment_hidden_field', $tourfic_payment_context ); ?>
                                     <div class="roomselectissue"></div>
@@ -2176,7 +2174,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 							$tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 							$tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
 
-							if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
+							if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && $show_room_service_popup ) {
 								?>
                                 <a class="tf_air_service tf_btn tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php echo esc_html( $tourfic_hotel_reserve_button_text ); ?></a>
 							<?php } else { ?>
@@ -2312,7 +2310,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 						$tourfic_tour_hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 						$tourfic_tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
 
-						if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
+						if ( ! empty( $tourfic_tour_hotel_service_avail ) && ! empty( $tourfic_tour_hotel_service_type ) && $show_room_service_popup ) {
 							?>
                                 <a class="tf_air_service tf_btn tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php echo esc_html( $tourfic_hotel_reserve_button_text ); ?></a>
 

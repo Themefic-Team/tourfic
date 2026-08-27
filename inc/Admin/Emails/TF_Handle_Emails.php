@@ -672,17 +672,15 @@ class TF_Handle_Emails {
         //booking details end
 
         //customer details Start
-        $tf_booking_fields = '';
-        if('tour'==$order_data['post_type']){
-            $tf_booking_fields = !empty(Helper::tfopt( 'book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'book-confirm-field' )) : '';
-        } else if( 'car'==$order_data['post_type'] ){
-            $tf_booking_fields = !empty(Helper::tfopt( 'car-book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'car-book-confirm-field' )) : '';
-        } else if( 'hotel'==$order_data['post_type'] ){
-            $tf_booking_fields = !empty(Helper::tfopt( 'hotel-book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'hotel-book-confirm-field' )) : '';
-        }
+        $tf_booking_fields = apply_filters(
+            'tourfic_booking_customer_email_fields',
+            array(),
+            $order_data['post_type'],
+            $order_data
+        );
 
         $customer_details = '<table style="max-width: 600px;border-collapse: collapse; color: #5A5A5A; font-family: Inter,sans-serif;"><tbody><tr><td style="padding: 15px 0;text-align: left;">';
-        if(!empty($tf_booking_fields)){
+        if ( is_array( $tf_booking_fields ) && ! empty( $tf_booking_fields ) ) {
             foreach($tf_booking_fields as $single){
                 if(!empty($single['reg-field-label']) && !empty($order_data['shipping_details'][$single['reg-field-name']])){
                     $customer_details .= '<strong>'.$single['reg-field-label'].':</strong> ' . $order_data['shipping_details'][$single['reg-field-name']] . '<br>';
