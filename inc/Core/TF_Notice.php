@@ -16,7 +16,7 @@ abstract class TF_Notice {
 
 		if ( $this->type == 'admin_notice' ) {
 			add_action( 'admin_notices', array( $this, 'tf_plugin_admin_notice' ) );
-			add_action( 'wp_ajax_tf_disable_critical_update_admin_notice', array( $this, 'tf_disable_critical_update_admin_notice' ) );
+			add_action( 'wp_ajax_tourfic_disable_critical_update_admin_notice', array( $this, 'tf_disable_critical_update_admin_notice' ) );
 		} else if ( $this->type == 'update_notice' ) {
 			add_action( 'in_plugin_update_message-tourfic/tourfic.php', array( $this, 'tf_in_plugin_update_message' ), 10, 2 );
 		} else if ( $this->type == 'plugin_row_notice' ) {
@@ -48,7 +48,7 @@ abstract class TF_Notice {
 	function tf_disable_critical_update_admin_notice() {
 		$this->tf_validate_notice_ajax_request();
 
-		$notice_id = ! empty( $this->notice_id ) ? $this->notice_id : 'tf_dismiss_222';
+		$notice_id = ! empty( $this->notice_id ) ? $this->notice_id : 'tourfic_dismiss_222';
 		update_option( $notice_id, 1 );
 
 		wp_die();

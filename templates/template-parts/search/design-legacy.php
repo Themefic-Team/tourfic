@@ -31,7 +31,7 @@ if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_carrental" && $tourfic_c
     ?>
 
     <div class="tf-main-wrapper search-result-wrapper tf-archive-template__legacy" data-fullwidth="true">
-        <?php do_action( 'tf_before_container' ); ?>
+        <?php do_action( 'tourfic_before_container' ); ?>
         <div class="tf-container">
             <div class="search-result-inner">
                 <!-- Start Content -->           
@@ -47,7 +47,7 @@ if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_carrental" && $tourfic_c
                 <!-- End Sidebar -->
             </div>
         </div>
-        <?php do_action( 'tf_after_container' ); ?>
+        <?php do_action( 'tourfic_after_container' ); ?>
     </div>
-<?php echo wp_kses( apply_filters( 'tf_search_result_legacy_template', ob_get_clean() ), tf_custom_wp_kses_allow_tags() ); ?>
+<?php echo wp_kses( apply_filters( 'tourfic_search_result_legacy_template', ob_get_clean() ), tourfic_custom_wp_kses_allow_tags() ); ?>
 <?php endif; ?>

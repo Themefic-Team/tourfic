@@ -4,9 +4,9 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 
-if(tf_is_block_theme()){
+if(tourfic_is_block_theme()){
     wp_head();
-    tf_render_block_header_area();
+    tourfic_render_block_header_area();
 }else{
     get_header('tourfic');
 }
@@ -26,16 +26,16 @@ if ( Helper::tf_is_woo_active() ) {
 	if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_tours" && $tourfic_tour_arc_selected_template == "design-1" ) || 
 		( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_hotel" && $tourfic_hotel_arc_selected_template == "design-1" ) || 
 		( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_room" && $tourfic_room_arc_selected_template == "design-1" )) {
-		include TF_TEMPLATE_PART_PATH . 'search/design-1.php';
+		include TOURFIC_TEMPLATE_PART_PATH . 'search/design-1.php';
 	} elseif ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_tours" && $tourfic_tour_arc_selected_template == "design-2" ) || ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_hotel" && $tourfic_hotel_arc_selected_template == "design-2" ) || ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_apartment" && $tourfic_apartment_arc_selected_template == "design-1" ) ) {
-		include TF_TEMPLATE_PART_PATH . 'search/design-2.php';
+		include TOURFIC_TEMPLATE_PART_PATH . 'search/design-2.php';
 	}  elseif ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_tours" && $tourfic_tour_arc_selected_template == "design-3" ) ||
                 ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_hotel" && $tourfic_hotel_arc_selected_template == "design-3" ) ||
 	            ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_apartment" && $tourfic_apartment_arc_selected_template == "design-2" )
     ) {
-		include TF_TEMPLATE_PART_PATH . 'search/design-3.php';
+		include TOURFIC_TEMPLATE_PART_PATH . 'search/design-3.php';
 	} else {
-		include TF_TEMPLATE_PART_PATH . 'search/design-legacy.php';
+		include TOURFIC_TEMPLATE_PART_PATH . 'search/design-legacy.php';
 	}
 } else {
 	?>
@@ -52,9 +52,9 @@ while ( have_posts() ) :
 
 	the_content();
 endwhile;
-if(tf_is_block_theme()){
+if(tourfic_is_block_theme()){
     wp_footer();
-    tf_render_block_footer_area();
+    tourfic_render_block_footer_area();
  }else{
 	get_footer('tourfic');
  }

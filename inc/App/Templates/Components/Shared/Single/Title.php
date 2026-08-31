@@ -18,7 +18,7 @@ class Title {
 	public static function render( $settings = [], $builder = '' ) {
 		$title_tag    = ! empty( $settings['tf-title-tag'] ) ? $settings['tf-title-tag'] : 'h1';
 		$post_type    = get_post_type();
-		$tf_cars_slug = get_option( 'car_slug' );
+		$tf_cars_slug = get_option( 'tourfic_car_slug' );
 
 		if ( 'tf_carrental' === $post_type ) :
 			?>

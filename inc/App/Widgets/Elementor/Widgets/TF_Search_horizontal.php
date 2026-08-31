@@ -70,6 +70,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			'carrentals' => esc_html__( 'Car', 'tourfic' ),
 		);
 
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- TravelFic Toolkit-owned hook.
 		return apply_filters( 'travelfic_slider_search_types', $types );
 	}
 
@@ -364,7 +365,7 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			$car_tab_title = 'car_tab_title="' . $settings['car_tab_title'] . '" ';
 		}
 
-		echo do_shortcode( '[tf_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" type="' . $type . '" fullwidth="' . $full_width . '" ' . $tour_tab_title . $hotel_tab_title . $apt_tab_title . $car_tab_title .  ']' );
+		echo do_shortcode( '[tourfic_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" type="' . $type . '" fullwidth="' . $full_width . '" ' . $tour_tab_title . $hotel_tab_title . $apt_tab_title . $car_tab_title .  ']' );
 
 	}
 

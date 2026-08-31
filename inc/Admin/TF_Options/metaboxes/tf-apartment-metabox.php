@@ -4,8 +4,8 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 
-if(!function_exists('tf_apt_amenities_cats')){
-	function tf_apt_amenities_cats() {
+if(!function_exists('tourfic_apt_amenities_cats')){
+	function tourfic_apt_amenities_cats() {
 		$amenities_cats = ! empty( Helper::tf_data_types( Helper::tfopt( 'amenities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'amenities_cats' ) ) : '';
 		$all_cats       = [];
 		if ( ! empty( $amenities_cats ) && is_array( $amenities_cats ) ) {
@@ -22,7 +22,7 @@ if(!function_exists('tf_apt_amenities_cats')){
 	}
 }
 
-TF_Metabox::metabox( 'tf_apartment_opt', array(
+Tourfic_Metabox::metabox( 'tf_apartment_opt', array(
 	'title'     => esc_html__( 'Apartment Settings', 'tourfic' ),
 	'post_type' => 'tf_apartment',
 	'sections'  => array(
@@ -79,12 +79,12 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'options'  => array(
 						'design-1' => array(
 							'title' => esc_html__('Design 1', 'tourfic'),
-							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-design-1.png",
+							'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-apt-design-1.png",
 							'preview_link' => esc_url('https://tourfic.com/preview/apartments/2-bedroom-apartment-in-gamle-oslo/'),
 						),
 						'default'  => array(
 							'title' => esc_html__('Legacy', 'tourfic'),
-							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-default.png",
+							'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-apt-default.png",
 							'preview_link' => esc_url('https://tourfic.com/preview/apartments/barcelo-residences-dubai-marina/'),
 						),
 					),
@@ -486,7 +486,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 							'type'        => 'select2',
 							'label'       => esc_html__( 'Category', 'tourfic' ),
 							'placeholder' => esc_html__( 'Select category', 'tourfic' ),
-							'options'     => tf_apt_amenities_cats(),
+							'options'     => tourfic_apt_amenities_cats(),
 							'description' => esc_html__( 'Add new category from ', 'tourfic' ) . '<a target="_blank" href="' . esc_url( admin_url('admin.php?page=tf_settings#tab=apartment_single_page') ) .'">' . esc_html__("Amenities Categories", 'tourfic') . '</a>',
 							'field_width' => 50,
 						),

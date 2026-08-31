@@ -12,7 +12,7 @@ class Recent_Cars extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
 
-	protected $shortcode = 'tf_recent_cars';
+	protected $shortcode = 'tourfic_recent_cars';
 
 	function render( $atts, $content = null ) {
 		extract(
@@ -57,18 +57,18 @@ class Recent_Cars extends \Tourfic\Core\Shortcodes {
 					echo ! empty( $subtitle ) ? '<p>' . esc_html( $subtitle ) . '</p>' : '';
 					?>
 				</div>
-                <?php do_action("tf_car_archive_card_items_before"); ?>
+                <?php do_action("tourfic_car_archive_card_items_before"); ?>
                 <div class="tf-car-result archive_ajax_result tf-flex tf-flex-gap-32 <?php echo esc_attr($views_activate); ?>">
                     
                     <?php
                         while ( $car_loop->have_posts() ) {
                             $car_loop->the_post();
-                            tf_car_archive_single_item();
+                            tourfic_car_archive_single_item();
                         }
                     ?>
 
                 </div>
-                <?php do_action("tf_car_archive_card_items_after"); ?>
+                <?php do_action("tourfic_car_archive_card_items_after"); ?>
 
             </div>
 		<?php endif;

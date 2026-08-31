@@ -8,7 +8,7 @@ class Carrental_Locations extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
 
-	protected $shortcode = 'tf_carrental_locations';
+	protected $shortcode = 'tourfic_carrental_locations';
 
 	function render( $atts, $content = null ) {
 
@@ -52,7 +52,7 @@ class Carrental_Locations extends \Tourfic\Core\Shortcodes {
 					<?php foreach ( $brands as $term ) {
 
 						$meta      = get_term_meta( $term->term_id, 'tf_carrental_location', true );
-						$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg');
+						$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg');
 						$term_link = get_term_link( $term );
 
 						if ( is_wp_error( $term_link ) ) {

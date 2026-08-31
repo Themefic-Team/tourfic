@@ -2,8 +2,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'TF_number' ) ) {
-	class TF_number extends TF_Fields {
+if ( ! class_exists( 'Tourfic_number' ) ) {
+	class Tourfic_number extends Tourfic_Fields {
 
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '', $related_value = '') {
 			parent::__construct( $field, $value, $settings_id, $parent_field, $related_value );

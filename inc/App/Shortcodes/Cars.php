@@ -11,7 +11,7 @@ class Cars extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
 
-	protected $shortcode = 'tf_cars';
+	protected $shortcode = 'tourfic_cars';
 
 	function render( $atts, $content = null ) {
 		extract(
@@ -57,7 +57,7 @@ class Cars extends \Tourfic\Core\Shortcodes {
 				echo ! empty( $subtitle ) ? '<p>' . esc_html( $subtitle ) . '</p>' : '';
 				?>
 			</div>
-			<?php do_action("tf_car_archive_card_items_before"); ?>
+			<?php do_action("tourfic_car_archive_card_items_before"); ?>
 			<?php if ( $car_loop->have_posts() ) { ?>
 			<div class="tf-car-result archive_ajax_result tf-flex tf-flex-gap-32 <?php echo esc_attr($views_activate); ?>">
 				
@@ -66,7 +66,7 @@ class Cars extends \Tourfic\Core\Shortcodes {
 						$car_loop->the_post();
 						$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
 						if ( $car_meta["car_as_featured"] ) {
-							tf_car_archive_single_item();
+							tourfic_car_archive_single_item();
 						}
 					}
 				?>
@@ -76,7 +76,7 @@ class Cars extends \Tourfic\Core\Shortcodes {
 				echo esc_html__( 'Cars Not Found', 'tourfic' );
 			}
 			wp_reset_postdata(); 
-			do_action("tf_car_archive_card_items_after"); 
+			do_action("tourfic_car_archive_card_items_after");
 			?>
 		</div>
 

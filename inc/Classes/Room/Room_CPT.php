@@ -25,7 +25,7 @@ class Room_CPT extends \Tourfic\Core\Post_Type {
 			'slug'          => 'tf_room',
 			'menu_icon'     => Menu_Icon::$room_icon,
 			'menu_position' => 26.3,
-			'supports'      => apply_filters( 'tf_room_supports', array( 'title', 'editor', 'thumbnail', 'author' ) ),
+			'supports'      => apply_filters( 'tourfic_room_supports', array( 'title', 'editor', 'thumbnail', 'author' ) ),
 			'capability'    => array( 'tf_room', 'tf_rooms' ),
 			'rewrite_slug'  => $this->get_room_slug(),
 		) )->set_tax_args( array(
@@ -33,7 +33,7 @@ class Room_CPT extends \Tourfic\Core\Post_Type {
 				'name'          => esc_html__( 'Types', 'tourfic' ),
 				'singular_name' => esc_html__( 'Type', 'tourfic' ),
 				'taxonomy'      => 'room_type',
-				'rewrite_slug'  => apply_filters( 'tf_room_type_slug', 'room-type' ),
+				'rewrite_slug'  => apply_filters( 'tourfic_room_type_slug', 'room-type' ),
 				'capability'    => array(
 					'assign_terms' => 'edit_tf_room',
 					'edit_terms'   => 'edit_tf_room',
@@ -78,8 +78,8 @@ class Room_CPT extends \Tourfic\Core\Post_Type {
 	private function get_room_slug() {
 		$tf_room_setting_permalink_slug = ! empty( Helper::tfopt( 'room-permalink-setting' ) ) ? Helper::tfopt( 'room-permalink-setting' ) : "rooms";
 
-		update_option( "room_slug", $tf_room_setting_permalink_slug );
+		update_option( "tourfic_room_slug", $tf_room_setting_permalink_slug );
 
-		return apply_filters( 'tf_room_slug', get_option( 'room_slug' ) );
+		return apply_filters( 'tourfic_room_slug', get_option( 'tourfic_room_slug' ) );
 	}
 }

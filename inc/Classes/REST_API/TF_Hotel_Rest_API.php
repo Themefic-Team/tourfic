@@ -5,8 +5,8 @@ defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use Tourfic\Classes\Room\Room;
 
-if ( ! class_exists( 'TF_Hotel_Rest_API' ) ) {
-	class TF_Hotel_Rest_API extends TF_Rest_API {
+if ( ! class_exists( 'Tourfic_Hotel_Rest_API' ) ) {
+	class Tourfic_Hotel_Rest_API extends Tourfic_Rest_API {
 
 		/*
 		 * instance
@@ -168,7 +168,7 @@ if ( ! class_exists( 'TF_Hotel_Rest_API' ) ) {
 			if ( ! empty( $rooms ) ):
 				foreach ( $rooms as $_room ) {
 					$room       = get_post_meta( $_room->ID, 'tf_room_opt', true );
-					$pricing_by = apply_filters( 'tf_room_pricing_mode', 1, $room );
+					$pricing_by = apply_filters( 'tourfic_room_pricing_mode', 1, $room );
 					if ( $pricing_by == 1 ) {
 						$price        = ! empty( $room['price'] ) ? $room['price'] : '';
 						$room_price[] = $price;
@@ -237,4 +237,4 @@ if ( ! class_exists( 'TF_Hotel_Rest_API' ) ) {
 	}
 }
 
-TF_Hotel_Rest_API::get_instance();
+Tourfic_Hotel_Rest_API::get_instance();

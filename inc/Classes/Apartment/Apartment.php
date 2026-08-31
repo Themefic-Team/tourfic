@@ -18,18 +18,18 @@ class Apartment {
 	public function __construct() {
 
 		if ( Helper::tf_is_woo_active() ) {
-			if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' ) ) {
-				require_once TF_INC_PATH . 'functions/woocommerce/wc-apartment.php';
+			if ( file_exists( TOURFIC_INC_PATH . 'functions/woocommerce/wc-apartment.php' ) ) {
+				require_once TOURFIC_INC_PATH . 'functions/woocommerce/wc-apartment.php';
 			} else {
-				tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-apartment.php' );
+				tourfic_file_missing( TOURFIC_INC_PATH . 'functions/woocommerce/wc-apartment.php' );
 			}
 		}
 
-		add_action( 'wp_ajax_tf_apt_room_details_qv', array( $this, 'tf_apartment_room_quick_view' ) );
-		add_action( 'wp_ajax_nopriv_tf_apt_room_details_qv', array( $this, 'tf_apartment_room_quick_view' ) );
+		add_action( 'wp_ajax_tourfic_apt_room_details_qv', array( $this, 'tf_apartment_room_quick_view' ) );
+		add_action( 'wp_ajax_nopriv_tourfic_apt_room_details_qv', array( $this, 'tf_apartment_room_quick_view' ) );
 		add_action( 'wp_after_insert_post', array( $this, 'tf_apartment_feature_assign_taxonomies' ), 100, 3 );
-		add_action( 'wp_ajax_tf_apartments_search', array( $this, 'tf_apartments_search_ajax_callback' ) );
-		add_action( 'wp_ajax_nopriv_tf_apartments_search', array( $this, 'tf_apartments_search_ajax_callback' ) );
+		add_action( 'wp_ajax_tourfic_apartments_search', array( $this, 'tf_apartments_search_ajax_callback' ) );
+		add_action( 'wp_ajax_nopriv_tourfic_apartments_search', array( $this, 'tf_apartments_search_ajax_callback' ) );
 
 		// apartmet CPT
 		Apartment_CPT::instance();
@@ -555,7 +555,7 @@ class Apartment {
 		self::tf_sync_legacy_apartment_feature_terms();
 		if( !empty($design) && 2==$design ){
 		?>
-		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
+		<form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tourfic_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
 			<div class="tf_hotel_searching">
 				<div class="tf_form_innerbody">
 					<div class="tf_form_fields">
@@ -798,7 +798,7 @@ class Apartment {
 			})(jQuery);
 		</script>
 		<?php }elseif( !empty($design) && 3==$design ){ ?>
-			<form class="tf-archive-search-box-wrapper <?php echo esc_attr( $classes ); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
+			<form class="tf-archive-search-box-wrapper <?php echo esc_attr( $classes ); ?>" id="tourfic_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
 				<div class="tf-date-selection-form">
 				<div class="tf-date-select-box tf-flex tf-flex-gap-8">
 					<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location full-width">
@@ -921,7 +921,7 @@ class Apartment {
 				<div class="tf-driver-location-box">
 					<div class="tf-submit-button">
 						<input type="hidden" name="type" value="tf_apartment" class="tf-post-type"/>
-						<button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html( apply_filters("tf_apartment_search_form_submit_button_text", esc_html__('Search', 'tourfic') )); ?> <i class="ri-search-line"></i></button>
+						<button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html( apply_filters("tourfic_apartment_search_form_submit_button_text", esc_html__('Search', 'tourfic') )); ?> <i class="ri-search-line"></i></button>
 					</div>
 				</div>
 				</div>
@@ -950,7 +950,7 @@ class Apartment {
                 })(jQuery);
             </script>
         <?php } elseif (!empty($design) && 4 == $design) { ?>
-            <form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
+            <form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tourfic_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
                 <fieldset class="tf-search__form__fieldset">
                     <!-- Location -->
                     <div class="tf-search__form__fieldset__left">
@@ -1140,7 +1140,7 @@ class Apartment {
                         <!-- Submit Button -->
                         <input type="hidden" name="type" value="tf_apartment" class="tf-post-type" />
                         <button type="submit" class="tf-search__form__submit tf_btn">
-                            <?php echo esc_html(apply_filters("tf_apartment_search_form_submit_button_text", 'Search')); ?>
+                            <?php echo esc_html(apply_filters("tourfic_apartment_search_form_submit_button_text", 'Search')); ?>
                             <svg class="tf-search__form__submit__icon" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.75 14.7188L11.5625 10.5312C12.4688 9.4375 12.9688 8.03125 12.9688 6.5C12.9688 2.9375 10.0312 0 6.46875 0C2.875 0 0 2.9375 0 6.5C0 10.0938 2.90625 13 6.46875 13C7.96875 13 9.375 12.5 10.5 11.5938L14.6875 15.7812C14.8438 15.9375 15.0312 16 15.25 16C15.4375 16 15.625 15.9375 15.75 15.7812C16.0625 15.5 16.0625 15.0312 15.75 14.7188ZM1.5 6.5C1.5 3.75 3.71875 1.5 6.5 1.5C9.25 1.5 11.5 3.75 11.5 6.5C11.5 9.28125 9.25 11.5 6.5 11.5C3.71875 11.5 1.5 9.28125 1.5 6.5Z" fill="white" />
                             </svg>
@@ -1207,7 +1207,7 @@ class Apartment {
             </script>
 
         <?php } else { ?>
-        <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
+        <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tourfic_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
             <div class="tf_homepage-booking">
                 <div class="tf_destination-wrap">
                     <div class="tf_input-inner">
@@ -1351,7 +1351,7 @@ class Apartment {
 
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_apartment" class="tf-post-type"/>
-                    <button class="tf_btn tf-submit" type="submit"><?php echo esc_html(apply_filters("tf_apartment_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
+                    <button class="tf_btn tf-submit" type="submit"><?php echo esc_html(apply_filters("tourfic_apartment_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
                 </div>
 
             </div>
@@ -1432,7 +1432,7 @@ class Apartment {
 		$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 		$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
 		$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
-		$tf_allow_deposit     = apply_filters( 'tf_allow_deposit_feature', false, $meta );
+		$tf_allow_deposit     = apply_filters( 'tourfic_allow_deposit_feature', false, $meta );
 		$tf_deposit_type      = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : '';
 		$tf_deposit_amount    = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : '';
 		$tf_show_internal_booking_form = ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3;
@@ -1448,7 +1448,7 @@ class Apartment {
 		$child        = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$infant       = ! empty( $_GET['infant'] ) ? sanitize_text_field( wp_unslash($_GET['infant']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        $check_in_out_arr = tf_split_date_range( $check_in_out );
+        $check_in_out_arr = tourfic_split_date_range( $check_in_out );
         $check_in = ! empty( $check_in_out_arr[0] ) ? $check_in_out_arr[0] : '';
         $check_out = ! empty( $check_in_out_arr[1] ) ? $check_in_out_arr[1] : '';
 
@@ -1675,11 +1675,11 @@ class Apartment {
 				<?php endif; ?>
             </div>
 
-			<?php wp_nonce_field( 'tf_apartment_booking', 'tf_apartment_nonce' ); ?>
+			<?php wp_nonce_field( 'tourfic_apartment_booking', 'tf_apartment_nonce' ); ?>
         </form>
 		<?php }else{ ?>
 
-		<?php do_action("tf_apartment_before_single_booking_form"); ?>
+		<?php do_action("tourfic_apartment_before_single_booking_form"); ?>
         <!-- Start Booking widget -->
         <form id="tf-apartment-booking" class="tf-apartment-side-booking tf-apartment-design-one-form" method="get" autocomplete="off">
             <h5><?php echo ! empty( $meta['booking_form_title'] ) ? esc_html( $meta['booking_form_title'] ) : esc_html_e( 'Book your Apartment', 'tourfic' ); ?></h5>
@@ -1819,10 +1819,10 @@ class Apartment {
 
             </div>
 
-			<?php wp_nonce_field( 'tf_apartment_booking', 'tf_apartment_nonce' ); ?>
+			<?php wp_nonce_field( 'tourfic_apartment_booking', 'tf_apartment_nonce' ); ?>
         </form>
 
-		<?php do_action("tf_apartment_after_single_booking_form"); ?>
+		<?php do_action("tourfic_apartment_after_single_booking_form"); ?>
 
 		<?php } ?>
 		<?php
@@ -1883,7 +1883,7 @@ class Apartment {
                         altInput: true,
                         altFormat: '<?php echo esc_html( $date_format_change_appartments ); ?>',
                         dateFormat: "Y/m/d",
-                        defaultDate: <?php echo wp_json_encode( tf_split_date_range( $check_in_out ) ) ?>,
+                        defaultDate: <?php echo wp_json_encode( tourfic_split_date_range( $check_in_out ) ) ?>,
                         onReady: function (selectedDates, dateStr, instance) {
                             instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
 								return `${date1} - ${date2}`;
@@ -1963,7 +1963,7 @@ class Apartment {
 		?>
 		<div id="tour_room_details_loader">
 			<div id="tour-room-details-loader-img">
-				<img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/loader.gif" alt="Loader">
+				<img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ) ?>images/loader.gif" alt="Loader">
 			</div>
 		</div>
 		<div class="tf-withoutpayment-booking-confirm tf-apartment-withoutpayment-booking-confirm">
@@ -1977,7 +1977,7 @@ class Apartment {
 						</svg>
 					</span>
 				</div>
-				<img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/thank-you.gif" alt="Thank You">
+				<img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ) ?>images/thank-you.gif" alt="Thank You">
 				<div class="tf-tour-without-payment-booking-confirm-msg-container">
 					<?php
 					$booking_confirmation_msg = ! empty( Helper::tfopt( 'booking-confirmation-msg' ) ) ? Helper::tfopt( 'booking-confirmation-msg' ) : '<h2>Booked Successfully</h2>';
@@ -2292,7 +2292,7 @@ class Apartment {
 
 					$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size_customize' );
 				} elseif ( '' === $thumbnail_html && 'yes' !== $show_fallback_img ) {
-					$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+					$thumbnail_html = '<img src="' . esc_url( TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
 				}
 			} else {
 				$image_size = isset( $settings['image_size'] ) ? $settings['image_size'] : 'full';
@@ -2306,7 +2306,7 @@ class Apartment {
 					}
 					$thumbnail_html = '<img src="' . esc_url( $fallback_img_src ) . '" class="attachment-' . esc_attr( $image_size ) . ' size-' . esc_attr( $image_size ) . ' wp-post-image">';
 				} else {
-					$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+					$thumbnail_html = '<img src="' . esc_url( TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
 				}
 			}
 		}
@@ -2353,7 +2353,7 @@ class Apartment {
 					} elseif ( has_post_thumbnail($post_id) ) {
 						echo get_the_post_thumbnail($post_id, 'full' );
 					} else {
-						echo '<img src="' . esc_url(TF_ASSETS_APP_URL) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+						echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 					}
 					?>
 				</div>
@@ -2508,7 +2508,7 @@ class Apartment {
 						} elseif ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 							the_post_thumbnail( 'full' );
 						} else {
-							echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
+							echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
 						}
 						?>
                     </a>
@@ -2647,7 +2647,7 @@ class Apartment {
 						} elseif ( has_post_thumbnail($post_id) ) {
 							echo get_the_post_thumbnail($post_id, 'full' );
 						} else {
-							echo '<img width="100%" height="100%" src="' . esc_url(TF_ASSETS_APP_URL) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+							echo '<img width="100%" height="100%" src="' . esc_url(TOURFIC_ASSETS_APP_URL) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 						}
 						?>
                     </a>
@@ -2776,7 +2776,7 @@ class Apartment {
 
 		if ( ! empty( $check_in_out ) ) {
 			$booked_dates   = self::tf_apartment_booked_days( get_the_ID() );
-			$checkInOutDate = tf_split_date_range( $check_in_out );
+			$checkInOutDate = tourfic_split_date_range( $check_in_out );
 			if ( $checkInOutDate[0] && $checkInOutDate[1] ) {
 				$check_in_stt  = strtotime( $checkInOutDate[0] . ' +1 day' );
 				$check_out_stt = strtotime( $checkInOutDate[1] );
@@ -4765,7 +4765,7 @@ class Apartment {
 					$check_in_out_date = wc_get_order_item_meta( $item_id, 'check_in_out_date', true );
 
 					if ( ! empty( $check_in_out_date ) ) {
-						$check_in_out_date = tf_split_date_range( $check_in_out_date );
+						$check_in_out_date = tourfic_split_date_range( $check_in_out_date );
 						$booked_days[]     = array(
 							'check_in'  => $check_in_out_date[0],
 							'check_out' => $check_in_out_date[1],

@@ -32,10 +32,10 @@ class Base {
 			\Tourfic\Classes\Woocommerce\Woocommerce::instance();
 		}
 
-		if ( file_exists( TF_INC_PATH . 'functions.php' ) ) {
-			require_once TF_INC_PATH . 'functions.php';
+		if ( file_exists( TOURFIC_INC_PATH . 'functions.php' ) ) {
+			require_once TOURFIC_INC_PATH . 'functions.php';
 		} else {
-			tf_file_missing( TF_INC_PATH . 'functions.php' );
+			tourfic_file_missing( TOURFIC_INC_PATH . 'functions.php' );
 		}
 
 		\Tourfic\Classes\Migrator::instance();

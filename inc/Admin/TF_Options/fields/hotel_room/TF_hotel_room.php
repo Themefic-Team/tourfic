@@ -13,8 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @version 1.0.0
  *
  */
-if ( ! class_exists( 'TF_hotel_room' ) ) {
-	class TF_hotel_room extends TF_Fields {
+if ( ! class_exists( 'Tourfic_hotel_room' ) ) {
+	class Tourfic_hotel_room extends Tourfic_Fields {
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field );
 		}

@@ -304,7 +304,7 @@
 
             const $popup = $('.tf-apartment-booking-popup');
             const formData = new FormData($form[0]);
-            formData.append('action', 'tf_apartment_booking');
+            formData.append('action', 'tourfic_apartment_booking');
             appendApartmentBookingConfirmationData(formData, $popup);
 
             $.ajax({
@@ -384,7 +384,7 @@
         function loadApartmentBookingPopupSummary($form) {
             const $popup = $('.tf-apartment-booking-popup');
             const formData = new FormData($form[0]);
-            formData.append('action', 'tf_apartment_booking_popup');
+            formData.append('action', 'tourfic_apartment_booking_popup');
             formData.append('_nonce', tf_params.nonce);
 
             $.ajax({
@@ -512,7 +512,7 @@
                 submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
 
-            formData.append('action', 'tf_apartments_search');
+            formData.append('action', 'tourfic_apartments_search');
             formData.append('_nonce', tf_params.nonce);
 
             if (formData.get('from') == null || formData.get('to') == null) {
@@ -554,7 +554,7 @@
             let post_id = $(this).data("post-id");
             let id = $(this).data("id");
             let data = {
-                action: 'tf_apt_room_details_qv',
+                action: 'tourfic_apt_room_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 id: id,
@@ -589,7 +589,7 @@
             let post_id = $(this).data("post-id");
             let id = $(this).data("id");
             let data = {
-                action: 'tf_apt_room_details_qv',
+                action: 'tourfic_apt_room_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 id: id,
@@ -1260,7 +1260,7 @@
             setCarPartialPayment($this);
 
             var data = {
-                action: 'tf_car_booking_pupup',
+                action: 'tourfic_car_booking_pupup',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 pickup_date: pickup_date,
@@ -1305,7 +1305,7 @@
             let dropoff_time = $this.closest('.tf-booking-btn').find('#dropoff_time').val();
 
             var data = {
-                action: 'tf_car_booking_pupup',
+                action: 'tourfic_car_booking_pupup',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 pickup_date: pickup_date,
@@ -1528,7 +1528,7 @@
             let partial_payment = getCarPartialPayment($this);
 
             var data = {
-                action: 'tf_car_booking',
+                action: 'tourfic_car_booking',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 pickup: pickup,
@@ -1638,7 +1638,7 @@
             let form = $(this),
                 submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
-            formData.append('action', 'tf_car_search');
+            formData.append('action', 'tourfic_car_search');
             formData.append('_nonce', tf_params.nonce);
 
             if (formData.get('from') == null || formData.get('to') == null) {
@@ -1696,7 +1696,7 @@
             let post_id = $this.closest('.tf-booking-btn').find('#post_id').val();
 
             var data = {
-                action: 'tf_car_booking',
+                action: 'tourfic_car_booking',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 pickup: pickup,
@@ -1810,7 +1810,7 @@
             }
 
             var data = {
-                action: 'tf_car_booking',
+                action: 'tourfic_car_booking',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 pickup: pickup,
@@ -1915,7 +1915,7 @@
                 return;
             }
             var data = {
-                action: 'tf_car_price_calculation',
+                action: 'tourfic_car_price_calculation',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 pickup_date: pickup_date,
@@ -2316,7 +2316,7 @@ function convertTo24HourFormat(timeStr) {
             var room = $('#tf-single-hotel-avail').find('[name=room]').val() || 1;
 
             var data = {
-                action: 'tf_room_availability',
+                action: 'tourfic_room_availability',
                 tf_room_avail_nonce: tf_room_avail_nonce,
                 post_id: post_id,
                 adult: adult,
@@ -2473,7 +2473,7 @@ function convertTo24HourFormat(timeStr) {
 
             let selectedExtraData = tfGetHotelSelectedExtras($this.closest('.tf-withoutpayment-popup'));
             var data = {
-                action: 'tf_hotel_booking',
+                action: 'tourfic_hotel_booking',
                 tf_room_booking_nonce: tf_room_booking_nonce,
                 post_id: post_id,
                 room_id: room_id,
@@ -2656,7 +2656,7 @@ function convertTo24HourFormat(timeStr) {
                 submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
             
-            formData.append('action', 'tf_hotel_search');
+            formData.append('action', 'tourfic_hotel_search');
             formData.append('_nonce', tf_params.nonce);
 
             if (formData.get('from') == null || formData.get('to') == null) {
@@ -2948,7 +2948,7 @@ function convertTo24HourFormat(timeStr) {
 
             let selectedExtraData = tfGetHotelSelectedExtras($roomForm);
             var data = {
-                action: 'tf_hotel_booking_popup',
+                action: 'tourfic_hotel_booking_popup',
                 tf_room_booking_nonce: tf_room_booking_nonce,
                 post_id: post_id,
                 room_id: room_id,
@@ -3057,7 +3057,7 @@ function convertTo24HourFormat(timeStr) {
             var deposit = $this.find("input[name=hotel_room_depo]").val();
             var airport_service = $this.find('[name="airport_service"]').val();
             let selectedExtraData = tfGetHotelSelectedExtras($this);
-            formData.append('action', 'tf_hotel_booking');
+            formData.append('action', 'tourfic_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
             formData.append('deposit', deposit);
             formData.append('airport_service', airport_service);
@@ -3228,7 +3228,7 @@ function convertTo24HourFormat(timeStr) {
                 submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
             
-            formData.append('action', 'tf_room_search');
+            formData.append('action', 'tourfic_room_search');
             formData.append('_nonce', tf_params.nonce);
 
             if (formData.get('from') == null || formData.get('to') == null) {
@@ -3391,7 +3391,7 @@ function convertTo24HourFormat(timeStr) {
             }
 
             var formData = new FormData(this);
-            formData.append('action', 'tf_tours_booking');
+            formData.append('action', 'tourfic_tours_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
 
 
@@ -3606,7 +3606,7 @@ function convertTo24HourFormat(timeStr) {
                 submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
 
-            formData.append('action', 'tf_tour_search');
+            formData.append('action', 'tourfic_tour_search');
             formData.append('_nonce', tf_params.nonce);
 
             if (formData.get('from') == null || formData.get('to') == null) {
@@ -3804,7 +3804,7 @@ function convertTo24HourFormat(timeStr) {
                 return;
             }
             var data = {
-                action: 'tf_tour_price_calculation',
+                action: 'tourfic_tour_price_calculation',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 date: date,
@@ -4340,7 +4340,7 @@ function convertTo24HourFormat(timeStr) {
                     type: 'POST',
                     url: tf_params.ajax_url,
                     data: {
-                        action: 'tf_get_min_max_price',
+                        action: 'tourfic_get_min_max_price',
                         _nonce: tf_params.nonce,
                         post_type: post_type
                     },
@@ -4703,7 +4703,7 @@ function convertTo24HourFormat(timeStr) {
             let builderSettings = $('#tf-builder-settings').text();
             
             var formData = new FormData();
-            formData.append('action', 'tf_trigger_filter');
+            formData.append('action', 'tourfic_trigger_filter');
             formData.append('_nonce', tf_params.nonce);
             formData.append('type', posttype);
             formData.append('page', page);
@@ -5328,7 +5328,7 @@ function convertTo24HourFormat(timeStr) {
                 let ids = userLists.map(e => e.post);
                 let data = {
                     nonce: $(element).data('nonce'),
-                    action: 'tf_generate_table',
+                    action: 'tourfic_generate_table',
                     ids
                 }
                 $.post(tf_params.ajax_url, data,
@@ -5423,7 +5423,7 @@ function convertTo24HourFormat(timeStr) {
 
             /* For logged in user */
             if ($('body').hasClass('logged-in')) {
-                data.action = 'tf_add_to_wishlists';
+                data.action = 'tourfic_add_to_wishlists';
                 data.nonce = targetNode.data('nonce');
                 $.ajax({
                     type: "post",
@@ -5484,7 +5484,7 @@ function convertTo24HourFormat(timeStr) {
             if ($('body').hasClass('logged-in')) {
                 let tableNode = targetNode.closest('table');
                 let type = tableNode.data('type');
-                let data = {id, action: 'tf_remove_wishlist', type, nonce: targetNode.data('nonce')}
+                let data = {id, action: 'tourfic_remove_wishlist', type, nonce: targetNode.data('nonce')}
                 $.get(tf_params.ajax_url, data,
                     function (data) {
                         if (data.success) {
@@ -5971,7 +5971,7 @@ function convertTo24HourFormat(timeStr) {
             var $this = $(this);
 
             var formData = new FormData(this);
-            formData.append('action', 'tf_ask_question');
+            formData.append('action', 'tourfic_ask_question');
 
             $.ajax({
                 type: 'post',
@@ -6327,7 +6327,7 @@ function convertTo24HourFormat(timeStr) {
                 type: 'POST',
                 url: tf_params.ajax_url,
                 data: {
-                    action: 'tf_checkout_cart_item_remove',
+                    action: 'tourfic_checkout_cart_item_remove',
                     _nonce: tf_params.nonce,
                     cart_item_key: cart_item_key,
                 },
@@ -7080,7 +7080,7 @@ function convertTo24HourFormat(timeStr) {
             var extras = extras.join();
             var quantities = quantity.join();
             var data = {
-                action: 'tf_tour_booking_popup',
+                action: 'tourfic_tour_booking_popup',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 adults: adults,
@@ -7347,7 +7347,7 @@ function convertTo24HourFormat(timeStr) {
             var post_id = $(this).attr("data-hotel");
             var uniqid_id = $(this).attr("data-uniqid");
             var data = {
-                action: 'tf_tour_details_qv',
+                action: 'tourfic_tour_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 uniqid_id: uniqid_id
@@ -7381,7 +7381,7 @@ function convertTo24HourFormat(timeStr) {
             var design = $('input[name=design]').val();
             var uniqid_id = $(this).attr("data-uniqid");
             var data = {
-                action: 'tf_tour_details_qv',
+                action: 'tourfic_tour_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 design: design,
@@ -7651,7 +7651,7 @@ function convertTo24HourFormat(timeStr) {
             var post_type = $(this).attr("data-type");
 
             var data = {
-                action: 'tf_archive_gallery_popup_qv',
+                action: 'tourfic_archive_gallery_popup_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 post_type: post_type
@@ -7794,7 +7794,7 @@ function convertTo24HourFormat(timeStr) {
             var post_id = $(this).attr("data-hotel");
             var uniqid_id = $(this).attr("data-uniqid");
             var data = {
-                action: 'tf_tour_details_qv',
+                action: 'tourfic_tour_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 uniqid_id: uniqid_id

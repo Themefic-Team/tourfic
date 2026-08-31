@@ -7,9 +7,9 @@ defined( 'ABSPATH' ) || exit;
  * @author Foysal
  */
 
- if(tf_is_block_theme()){
+ if(tourfic_is_block_theme()){
     wp_head();
-    tf_render_block_header_area();
+    tourfic_render_block_header_area();
 }else{
     get_header();
 }
@@ -61,7 +61,7 @@ if( $tourfic_post_type == "tf_apartment" && $tourfic_apartment_arc_selected_temp
                         Helper::tf_archive_sidebar_search_form($tourfic_post_type, '', '', '');
                     }
                     ?>
-					<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
+					<?php require_once TOURFIC_TEMPLATE_PART_PATH . 'archive.php'; ?>
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
                     <div class="tf-filter-wrapper">
@@ -101,7 +101,7 @@ if( $tourfic_post_type == "tf_apartment" && $tourfic_apartment_arc_selected_temp
 
         <div class="tf-content-wrapper">
             <?php
-            do_action('tf_before_container');
+            do_action('tourfic_before_container');
             $tourfic_post_count = $GLOBALS['wp_query']->post_count;
             $tourfic_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
             $tourfic_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
@@ -119,7 +119,7 @@ if( $tourfic_post_type == "tf_apartment" && $tourfic_apartment_arc_selected_temp
                 </div>
             </div>
 
-            <?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
+            <?php require_once TOURFIC_TEMPLATE_PART_PATH . 'archive.php'; ?>
         </div>
         <!--Content section end -->
 
@@ -127,13 +127,13 @@ if( $tourfic_post_type == "tf_apartment" && $tourfic_apartment_arc_selected_temp
 
 <?php }else{ ?>
 <div class="tf-main-wrapper tf-archive-template__legacy" data-fullwidth="true">
-	<?php do_action( 'tf_before_container' ); ?>
+	<?php do_action( 'tourfic_before_container' ); ?>
 	<div class="tf-container">
 		<h3><?php echo esc_html( $tourfic_taxonomy_name ); ?></h3>
 		<div class="search-result-inner">
 
 			<div class="tf-search-left">
-				<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
+				<?php require_once TOURFIC_TEMPLATE_PART_PATH . 'archive.php'; ?>
 			</div>
 
 			<div class="tf-search-right">
@@ -153,13 +153,13 @@ if( $tourfic_post_type == "tf_apartment" && $tourfic_apartment_arc_selected_temp
 
 		</div>
 	</div>
-	<?php do_action( 'tf_after_container' ); ?>
+	<?php do_action( 'tourfic_after_container' ); ?>
 </div>
 <?php
 }
-if(tf_is_block_theme()){
+if(tourfic_is_block_theme()){
     wp_footer();
-    tf_render_block_footer_area();
+    tourfic_render_block_footer_area();
  }else{
 	get_footer();
  }

@@ -18,7 +18,7 @@ function tf_runtime_contract_assert( $condition, $message ) {
 
 $forbidden_patterns = array(
 	'inc/Classes/Hotel/Hotel.php'                         => '/(?<![:>])\btfopt\s*\(/',
-	'inc/Classes/REST_API/TF_User_Rest_API.php'           => '/(?<![:>])\btfopt\s*\(/',
+	'inc/Classes/REST_API/TF_User_Rest_API.php'                => '/(?<![:>])\btfopt\s*\(/',
 	'inc/Admin/TF_List_Table.php'                         => '/(?<![:>])\btfopt\s*\(/',
 	'templates/template-parts/tour/design-1.php'          => '/\$(?:meta|post_id)\b/',
 	'templates/template-parts/tour/design-2.php'          => '/\$(?:meta|gallery_ids)\b/',

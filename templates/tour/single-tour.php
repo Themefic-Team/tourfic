@@ -10,9 +10,9 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Tour\Tour_Price;
 use \Tourfic\App\Wishlist;
 
-if(tf_is_block_theme()){
+if(tourfic_is_block_theme()){
     wp_head();
-    tf_render_block_header_area();
+    tourfic_render_block_header_area();
 }else{
     get_header();
 }
@@ -220,18 +220,18 @@ while ( have_posts() ) : the_post();
 	$tourfic_tour_lang_icon = ! empty( $tourfic_meta['tf-tour-lang-icon'] ) ? $tourfic_meta['tf-tour-lang-icon'] : 'ri-global-line';
 
 	if( $tourfic_tour_selected_template == "design-1" ){
-		include TF_TEMPLATE_PART_PATH . 'tour/design-1.php';
+		include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-1.php';
 	}elseif( $tourfic_tour_selected_template == "design-2" ){
-		include TF_TEMPLATE_PART_PATH . 'tour/design-2.php';
+		include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-2.php';
 	}else{
-		include TF_TEMPLATE_PART_PATH . 'tour/design-legacy.php';
+		include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-legacy.php';
 	}
 	?>
 <?php
 endwhile;
-if(tf_is_block_theme()){
+if(tourfic_is_block_theme()){
     wp_footer();
-    tf_render_block_footer_area();
+    tourfic_render_block_footer_area();
  }else{
 	get_footer();
 }

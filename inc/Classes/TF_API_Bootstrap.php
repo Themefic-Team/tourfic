@@ -13,13 +13,13 @@ class TF_API_Bootstrap {
 
 		$this->load_api_classes();
 
-		if ( class_exists( 'TF_API_Routes' ) ) {
-			\TF_API_Routes::get_instance();
+		if ( class_exists( 'Tourfic_API_Routes' ) ) {
+			\Tourfic_API_Routes::get_instance();
 		}
 	}
 
 	private function load_api_classes() {
-		$base_path = TF_INC_PATH . 'Classes/REST_API/';
+		$base_path = TOURFIC_INC_PATH . 'Classes/REST_API/';
 		$files     = array(
 			'TF_Rest_API.php',
 			'TF_Tour_Rest_API.php',

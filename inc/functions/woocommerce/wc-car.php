@@ -10,10 +10,10 @@ use \Tourfic\Classes\Car_Rental\Availability;
  *
  * @since 2.12.10
  */
-add_action( 'wp_ajax_tf_car_booking', 'tf_car_booking_callback' );
-add_action( 'wp_ajax_nopriv_tf_car_booking', 'tf_car_booking_callback' );
+add_action( 'wp_ajax_tourfic_car_booking', 'tourfic_car_booking_callback' );
+add_action( 'wp_ajax_nopriv_tourfic_car_booking', 'tourfic_car_booking_callback' );
 
-if ( ! function_exists( 'tf_car_get_supported_booking_location' ) ) {
+if ( ! function_exists( 'tourfic_car_get_supported_booking_location' ) ) {
 	/**
 	 * Get a supported car booking location by exact name or matching slug/name pair.
 	 *
@@ -23,7 +23,7 @@ if ( ! function_exists( 'tf_car_get_supported_booking_location' ) ) {
 	 * @param string $location_slug Optional location slug.
 	 * @return WP_Term|false
 	 */
-	function tf_car_get_supported_booking_location( $location_name, $location_slug = '' ) {
+	function tourfic_car_get_supported_booking_location( $location_name, $location_slug = '' ) {
 		$location_name = trim( $location_name );
 		$location_slug = trim( $location_slug );
 
@@ -71,7 +71,7 @@ if ( ! function_exists( 'tf_car_get_supported_booking_location' ) ) {
  */
 
 
-function tf_car_booking_callback() {
+function tourfic_car_booking_callback() {
 	// Check nonce security
 	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 		return;
@@ -85,22 +85,22 @@ function tf_car_booking_callback() {
 	$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( wp_unslash( $_POST['dropoff'] ) ) : '';
 	$pickup_slug = isset( $_POST['pickup_slug'] ) ? sanitize_text_field( wp_unslash( $_POST['pickup_slug'] ) ) : '';
 	$dropoff_slug = isset( $_POST['dropoff_slug'] ) ? sanitize_text_field( wp_unslash( $_POST['dropoff_slug'] ) ) : '';
-	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? tf_normalize_date(sanitize_text_field( wp_unslash($_POST['pickup_date']) )) : '';
-	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? tf_normalize_date(sanitize_text_field( wp_unslash($_POST['dropoff_date']) )) : '';
+	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? tourfic_normalize_date(sanitize_text_field( wp_unslash($_POST['pickup_date']) )) : '';
+	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? tourfic_normalize_date(sanitize_text_field( wp_unslash($_POST['dropoff_date']) )) : '';
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_time']) ) : '';
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
-	$tf_protection = isset( $_POST['protection'] ) && is_array( $_POST['protection'] ) ? wp_unslash( $_POST['protection'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-	$extra_ids  = isset( $_POST['extra_ids'] ) ? wp_unslash( $_POST['extra_ids'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-	$extra_qty  = isset( $_POST['extra_qty'] ) ? wp_unslash( $_POST['extra_qty'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$tf_protection = isset( $_POST['protection'] ) && is_array( $_POST['protection'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['protection'] ) ) : [];
+	$extra_ids  = isset( $_POST['extra_ids'] ) && is_array( $_POST['extra_ids'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['extra_ids'] ) ) : [];
+	$extra_qty  = isset( $_POST['extra_qty'] ) && is_array( $_POST['extra_qty'] ) ? array_map( 'absint', wp_unslash( $_POST['extra_qty'] ) ) : [];
 	$partial_payment  = isset( $_POST['partial_payment'] ) ? sanitize_text_field(wp_unslash($_POST['partial_payment'])) : 'no';
 
 	// Booking Confirmation Details
-	$tf_confirmation_details = isset( $_POST['travellerData'] ) && is_array( $_POST['travellerData'] ) ? wp_unslash( $_POST['travellerData'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$tf_confirmation_details = isset( $_POST['travellerData'] ) && is_array( $_POST['travellerData'] ) ? map_deep( wp_unslash( $_POST['travellerData'] ), 'sanitize_text_field' ) : [];
 
 	$should_validate_pickup = '' !== trim( $pickup ) || '' !== trim( $pickup_slug );
 	$should_validate_dropoff = '' !== trim( $dropoff ) || '' !== trim( $dropoff_slug );
-	$pickup_location = $should_validate_pickup ? tf_car_get_supported_booking_location( $pickup, $pickup_slug ) : false;
-	$dropoff_location = $should_validate_dropoff ? tf_car_get_supported_booking_location( $dropoff, $dropoff_slug ) : false;
+	$pickup_location = $should_validate_pickup ? tourfic_car_get_supported_booking_location( $pickup, $pickup_slug ) : false;
+	$dropoff_location = $should_validate_dropoff ? tourfic_car_get_supported_booking_location( $dropoff, $dropoff_slug ) : false;
 
 	if ( ( $should_validate_pickup && ! $pickup_location ) || ( $should_validate_dropoff && ! $dropoff_location ) ) {
 		$response = array(
@@ -166,7 +166,7 @@ function tf_car_booking_callback() {
 	}
 
 	// Deposit
-	$car_allow_deposit = apply_filters( 'tf_allow_deposit_feature', false, $meta );
+	$car_allow_deposit = apply_filters( 'tourfic_allow_deposit_feature', false, $meta );
 	$car_deposit_type = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : 'none';
 	$car_deposit_amount = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : 0;
 
@@ -332,7 +332,7 @@ function tf_car_booking_callback() {
 			$order_id = Helper::tf_set_order( $order_data );
 			
 			if ( ! empty( $order_id ) ) {
-				do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
+				do_action( 'tourfic_offline_payment_booking_confirmation', $order_id, $order_data );
 
 				if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
 					
@@ -343,7 +343,7 @@ function tf_car_booking_callback() {
 					 * @param array  $order_data The items in the order.
 					 * @param string $type Order type
 					 */
-					apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order_data, '' );
+					apply_filters( 'tourfic_after_booking_completed_calendar_data', $order_id, $order_data, '' );
 				}
 			}
 
@@ -391,7 +391,7 @@ function tf_car_booking_callback() {
 /**
  * Over write WooCommerce Price
  */
-function tf_car_set_order_price( $cart ) {
+function tourfic_car_set_order_price( $cart ) {
 
 	if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
 		return;
@@ -409,10 +409,10 @@ function tf_car_set_order_price( $cart ) {
 
 }
 
-add_action( 'woocommerce_before_calculate_totals', 'tf_car_set_order_price', 30, 1 );
+add_action( 'woocommerce_before_calculate_totals', 'tourfic_car_set_order_price', 30, 1 );
 
 // Display custom cart item meta data (in cart and checkout)
-function car_display_cart_item_custom_meta_data( $item_data, $cart_item ) {
+function tourfic_car_display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 
 	if ( isset( $cart_item['tf_car_data']['pickup'] ) ) {
 		$item_data[] = array(
@@ -461,13 +461,13 @@ function car_display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 
 }
 
-add_filter( 'woocommerce_get_item_data', 'car_display_cart_item_custom_meta_data', 10, 2 );
+add_filter( 'woocommerce_get_item_data', 'tourfic_car_display_cart_item_custom_meta_data', 10, 2 );
 
 
 /**
  * Show custom data in order details
  */
-function tf_car_custom_order_data( $item, $cart_item_key, $values, $order ) {
+function tourfic_car_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
 	// Assigning data into variables
 	$order_type = !empty($values['tf_car_data']['order_type']) ? $values['tf_car_data']['order_type'] : '';
@@ -531,7 +531,7 @@ function tf_car_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
 }
 
-add_action( 'woocommerce_checkout_create_order_line_item', 'tf_car_custom_order_data', 10, 4 );
+add_action( 'woocommerce_checkout_create_order_line_item', 'tourfic_car_custom_order_data', 10, 4 );
 
 
 /**
@@ -540,7 +540,7 @@ add_action( 'woocommerce_checkout_create_order_line_item', 'tf_car_custom_order_
  *
  * @author Jahid
  */
-function tf_add_car_data_checkout_order_processed( $order_id, $posted_data, $order ) {
+function tourfic_add_car_data_checkout_order_processed( $order_id, $posted_data, $order ) {
 
 	$tf_integration_order_data   = array(
 		'order_id' => $order_id
@@ -714,12 +714,12 @@ function tf_add_car_data_checkout_order_processed( $order_id, $posted_data, $ord
 	 */
 
 	if ( ! empty( $tf_integration_order_status ) ) {
-		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
-		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+		do_action( 'tourfic_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+		do_action( 'tourfic_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
 	}
 }
 
-add_action( 'woocommerce_checkout_order_processed', 'tf_add_car_data_checkout_order_processed', 10, 4 );
+add_action( 'woocommerce_checkout_order_processed', 'tourfic_add_car_data_checkout_order_processed', 10, 4 );
 
 /**
  *
@@ -728,7 +728,7 @@ add_action( 'woocommerce_checkout_order_processed', 'tf_add_car_data_checkout_or
  * @author Jahid
  */
 
-function tf_add_car_data_checkout_order_processed_block_checkout( $order ) {
+function tourfic_add_car_data_checkout_order_processed_block_checkout( $order ) {
 
 	$order_id = $order->get_id();
 
@@ -904,9 +904,9 @@ function tf_add_car_data_checkout_order_processed_block_checkout( $order ) {
 	 */
 
 	if ( ! empty( $tf_integration_order_status ) ) {
-		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
-		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+		do_action( 'tourfic_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+		do_action( 'tourfic_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
 	}
 }
 
-add_action( 'woocommerce_store_api_checkout_order_processed', 'tf_add_car_data_checkout_order_processed_block_checkout', 10, 4 );
+add_action( 'woocommerce_store_api_checkout_order_processed', 'tourfic_add_car_data_checkout_order_processed_block_checkout', 10, 4 );

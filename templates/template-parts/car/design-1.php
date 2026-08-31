@@ -16,8 +16,8 @@ $tourfic_dropoff_date_query = !empty($_GET['dropoff_date']) ? sanitize_text_fiel
 if ( empty( $tourfic_dropoff_date_query ) && !empty($_GET['dropoff-date']) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	$tourfic_dropoff_date_query = sanitize_text_field( wp_unslash($_GET['dropoff-date']) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 }
-$tourfic_pickup_date = !empty($tourfic_pickup_date_query) && function_exists('tf_normalize_date') ? tf_normalize_date($tourfic_pickup_date_query) : $tourfic_pickup_date_query;
-$tourfic_dropoff_date = !empty($tourfic_dropoff_date_query) && function_exists('tf_normalize_date') ? tf_normalize_date($tourfic_dropoff_date_query) : $tourfic_dropoff_date_query;
+$tourfic_pickup_date = !empty($tourfic_pickup_date_query) && function_exists('tourfic_normalize_date') ? tourfic_normalize_date($tourfic_pickup_date_query) : $tourfic_pickup_date_query;
+$tourfic_dropoff_date = !empty($tourfic_dropoff_date_query) && function_exists('tourfic_normalize_date') ? tourfic_normalize_date($tourfic_dropoff_date_query) : $tourfic_dropoff_date_query;
 
 // Pull options from settings or set fallback values
 $tourfic_disable_car_time_slot = !empty(Helper::tfopt('disable-car-time-slots')) ? boolval(Helper::tfopt('disable-car-time-slots')) : false;
@@ -71,7 +71,7 @@ if ( empty( $tourfic_selected_dropoff_time ) ) {
 $tourfic_total_prices = Pricing::set_total_price($tourfic_meta, $tourfic_pickup_date, $tourfic_dropoff_date, $tourfic_selected_pickup_time, $tourfic_selected_dropoff_time);
 $tourfic_show_total_regular_price = ! empty( $tourfic_total_prices['regular_price'] ) && (float) $tourfic_total_prices['regular_price'] > (float) $tourfic_total_prices['sale_price'];
 $tourfic_display_total_price = ! empty( $tourfic_total_prices['sale_price'] ) ? $tourfic_total_prices['sale_price'] : ( ! empty( $tourfic_total_prices['regular_price'] ) ? $tourfic_total_prices['regular_price'] : 0 );
-$tourfic_cars_slug = get_option('car_slug');
+$tourfic_cars_slug = get_option('tourfic_car_slug');
 ?>
 <div class="tf-single-template__one">
     <div class="tf-single-booking-bar">
@@ -87,7 +87,7 @@ $tourfic_cars_slug = get_option('car_slug');
                         <p><?php echo wp_kses_post(Pricing::is_taxable($tourfic_meta)); ?></p>
                     </div>
                     <button class="tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-gap-8 tf-back-to-booking">
-                        <?php echo esc_html( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ) ); ?>
+                        <?php echo esc_html( apply_filters("tourfic_car_booking_form_submit_button_text", 'Continue' ) ); ?>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -111,21 +111,21 @@ $tourfic_cars_slug = get_option('car_slug');
                         if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-car-layout'] ) ) {
                             foreach ( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-car-layout'] as $tourfic_section ) {
                                 if ( ! empty( $tourfic_section['status'] ) && $tourfic_section['status'] == "1" && ! empty( $tourfic_section['slug'] ) ) {
-                                    include TF_TEMPLATE_PART_PATH . 'car/design-1/' . $tourfic_section['slug'] . '.php';
+                                    include TOURFIC_TEMPLATE_PART_PATH . 'car/design-1/' . $tourfic_section['slug'] . '.php';
                                 }
                             }
                         } else {
-                            include TF_TEMPLATE_PART_PATH . 'car/design-1/description.php';
-                            include TF_TEMPLATE_PART_PATH . 'car/design-1/car-info.php';
-                            include TF_TEMPLATE_PART_PATH . 'car/design-1/benefits.php';
-                            include TF_TEMPLATE_PART_PATH . 'car/design-1/inc-exc.php';
-                            include TF_TEMPLATE_PART_PATH . 'car/design-1/location.php';
-                            include TF_TEMPLATE_PART_PATH . 'car/design-1/faq.php';
+                            include TOURFIC_TEMPLATE_PART_PATH . 'car/design-1/description.php';
+                            include TOURFIC_TEMPLATE_PART_PATH . 'car/design-1/car-info.php';
+                            include TOURFIC_TEMPLATE_PART_PATH . 'car/design-1/benefits.php';
+                            include TOURFIC_TEMPLATE_PART_PATH . 'car/design-1/inc-exc.php';
+                            include TOURFIC_TEMPLATE_PART_PATH . 'car/design-1/location.php';
+                            include TOURFIC_TEMPLATE_PART_PATH . 'car/design-1/faq.php';
                         }
                         ?>
                     </div>
                 </div>
-                <?php do_action("tf_car_before_single_booking_form"); ?>
+                <?php do_action("tourfic_car_before_single_booking_form"); ?>
                 <div class="tf-car-booking-form">
                     <?php 
                     \Tourfic\App\Templates\Components\Shared\Single\Booking_Form::render(['wrapper' => 'no']);
@@ -138,7 +138,7 @@ $tourfic_cars_slug = get_option('car_slug');
                     \Tourfic\App\Templates\Components\Car_Rental\Single\Car_Contact_Info::render(); 
                     ?>
                 </div>
-                <?php do_action("tf_car_after_single_booking_form"); ?>
+                <?php do_action("tourfic_car_after_single_booking_form"); ?>
             </div>
             
             <?php \Tourfic\App\Templates\Components\Shared\Single\Terms_And_Conditions::render(); ?>
@@ -205,7 +205,7 @@ $tourfic_cars_slug = get_option('car_slug');
                         url: <?php echo wp_json_encode( admin_url( 'admin-ajax.php' ) ) ?>,
                         type: 'POST',
                         data: {
-                            action: 'get_car_time_slots',
+                            action: 'tourfic_get_car_time_slots',
                             pickup_day: startDay,
                             drop_day: endDay,
                             nonce: <?php echo wp_json_encode( wp_create_nonce( 'tf_get_car_time_slots_nonce' ) ); ?>

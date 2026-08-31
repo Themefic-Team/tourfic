@@ -2,8 +2,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
-	class TF_Taxonomy_Metabox {
+if ( ! class_exists( 'Tourfic_Taxonomy_Metabox' ) ) {
+	class Tourfic_Taxonomy_Metabox {
 
 		public $taxonomy_id = null;
 		public $taxonomy_title = null;
@@ -46,11 +46,11 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 		public function load_fields() {
 
 			// Fields Class
-			require_once TF_ADMIN_PATH . 'TF_Options/fields/TF_Fields.php';
+			require_once TOURFIC_ADMIN_PATH . 'TF_Options/fields/TF_Fields.php';
 
 			$fields = apply_filters(
 				'tourfic_admin_field_files',
-				glob( TF_ADMIN_PATH . 'TF_Options/fields/*/TF_*.php' )
+				glob( TOURFIC_ADMIN_PATH . 'TF_Options/fields/*/TF_*.php' )
 			);
 
 			if ( ! empty( $fields ) ) {
@@ -125,7 +125,9 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 	        }
 
 			$tf_taxonomy_value = array();
-			$taxonomy_request   = ( ! empty( $_POST[ $this->taxonomy_id ] ) ) ? $_POST[ $this->taxonomy_id ] : array(); //phpcs:ignore
+			$taxonomy_request = ( ! empty( $_POST[ $this->taxonomy_id ] ) && is_array( $_POST[ $this->taxonomy_id ] ) )
+				? map_deep( wp_unslash( $_POST[ $this->taxonomy_id ] ), 'wp_kses_post' )
+				: array();
 
 			if ( ! empty( $taxonomy_request ) && ! empty( $this->taxonomy_fields ) ) {
 				foreach ( $this->taxonomy_fields as $field ) {
@@ -133,8 +135,8 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 					if ( ! empty( $field['id'] ) ) {
 						$data = isset( $taxonomy_request[ $field['id'] ] ) ? $taxonomy_request[ $field['id'] ] : '';
 
-						$fieldClass = 'TF_' . $field['type'];
-						$data       = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_map' || $fieldClass == 'TF_tab' || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
+						$fieldClass = 'Tourfic_' . $field['type'];
+						$data       = in_array( $fieldClass, array( 'Tourfic_repeater', 'Tourfic_map', 'Tourfic_tab', 'Tourfic_color' ), true ) ? serialize( $data ) : $data;
 
 						if ( class_exists( $fieldClass ) ) {
 							$_field                            = new $fieldClass( $field, $data, $this->taxonomy_id );
@@ -155,4 +157,3 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 
 	}
 }
-

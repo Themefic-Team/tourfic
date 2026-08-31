@@ -12,7 +12,7 @@ class Apartments extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
 
-	protected $shortcode = 'tf_apartment';
+	protected $shortcode = 'tourfic_apartment';
 
 	function render( $atts, $content = null ) {
 		extract(
@@ -69,7 +69,7 @@ class Apartments extends \Tourfic\Core\Shortcodes {
 		} else {
 			$slider_activate = 'tf-hotel-grid';
 		}
-		$apartment_loop = new \WP_Query( apply_filters("tf_apartment_shortcode_query_args", $args) );
+		$apartment_loop = new \WP_Query( apply_filters("tourfic_apartment_shortcode_query_args", $args) );
 		?>
 		<?php if ( $apartment_loop->have_posts() ) : ?>
 			<div class="tf-widget-slider recent-apartment-slider">
@@ -88,7 +88,7 @@ class Apartments extends \Tourfic\Core\Shortcodes {
 						$min_price = Pricing::instance( $post_id )->get_min_max_price();
 						$discounted_price = Pricing::instance( $post_id )->calculate_discount( $min_price["min"] );
 						?>
-						<div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg'); ?>);">
+						<div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg'); ?>);">
 							<div class="tf-slider-content">
 								<div class="tf-slider-desc">
 									<h3>

@@ -220,7 +220,7 @@ class TF_Tour_Grid_Slider extends \Elementor\Widget_Base {
 		if(is_array($destinations)){
 			$destinations = implode(',',$destinations);
 		}
-        echo do_shortcode('[tf_tour title="'.$title.'" subtitle="'.$subtitle.'" destinations="'.$destinations.'" style="'.$style.'" count="' .$count. '"]');
+        echo do_shortcode('[tourfic_tour title="'.$title.'" subtitle="'.$subtitle.'" destinations="'.$destinations.'" style="'.$style.'" count="' .$count. '"]');
 
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
 			<script>

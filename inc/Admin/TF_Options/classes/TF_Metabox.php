@@ -2,8 +2,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'TF_Metabox' ) ) {
-	class TF_Metabox {
+if ( ! class_exists( 'Tourfic_Metabox' ) ) {
+	class Tourfic_Metabox {
 
 		public $metabox_id = null;
 		public $metabox_title = null;
@@ -11,11 +11,12 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 		public $metabox_sections = array();
 
 		public function __construct( $key, $params = array() ) {
+			$hook_key = 0 === strpos( $key, 'tf_' ) ? substr( $key, 3 ) : $key;
 
 			$this->metabox_id        = $key;
-			$this->metabox_title     = ! empty( $params['title'] ) ? apply_filters( $key . '_title', $params['title'] ) : '';
+			$this->metabox_title     = ! empty( $params['title'] ) ? apply_filters( 'tourfic_' . $hook_key . '_title', $params['title'] ) : '';
 			$this->metabox_post_type = $params['post_type'];
-			$this->metabox_sections  = ! empty( $params['sections'] ) ? apply_filters( $key . '_sections', $params['sections'] ) : array();
+			$this->metabox_sections  = ! empty( $params['sections'] ) ? apply_filters( 'tourfic_' . $hook_key . '_sections', $params['sections'] ) : array();
 
 			add_action( 'add_meta_boxes', array( $this, 'tf_meta_box' ) );
 			add_action( 'save_post', array( $this, 'save_metabox' ), 10, 2 );
@@ -35,11 +36,11 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 		public function load_fields() {
 
 			// Fields Class
-			require_once TF_ADMIN_PATH . 'TF_Options/fields/TF_Fields.php';
+			require_once TOURFIC_ADMIN_PATH . 'TF_Options/fields/TF_Fields.php';
 
 			$fields = apply_filters(
 				'tourfic_admin_field_files',
-				glob( TF_ADMIN_PATH . 'TF_Options/fields/*/TF_*.php' )
+				glob( TOURFIC_ADMIN_PATH . 'TF_Options/fields/*/TF_*.php' )
 			);
 
 			if ( ! empty( $fields ) ) {
@@ -155,7 +156,9 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 
 			$existing_meta_value = get_post_meta( $post_id, $this->metabox_id, true );
 			$tf_meta_box_value   = is_array( $existing_meta_value ) ? $existing_meta_value : array();
-			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array(); //phpcs:ignore
+			$metabox_request = ( ! empty( $_POST[ $this->metabox_id ] ) && is_array( $_POST[ $this->metabox_id ] ) )
+				? map_deep( wp_unslash( $_POST[ $this->metabox_id ] ), 'wp_kses_post' )
+				: array();
 
 			if ( ! empty( $metabox_request ) && ! empty( $this->metabox_sections ) ) {
 				foreach ( $this->metabox_sections as $section ) {
@@ -166,8 +169,8 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 							if ( ! empty( $field['id'] ) ) {
 								$data = isset( $metabox_request[ $field['id'] ] ) ? $metabox_request[ $field['id'] ] : '';
 
-								$fieldClass = 'TF_' . $field['type'];
-								$data       = $fieldClass == 'TF_map' ||  $fieldClass == 'TF_color' ? serialize( $data ) : $data;
+								$fieldClass = 'Tourfic_' . $field['type'];
+								$data       = 'Tourfic_map' === $fieldClass || 'Tourfic_color' === $fieldClass ? serialize( $data ) : $data;
 
 								if ( class_exists( $fieldClass ) ) {
 									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
@@ -182,8 +185,8 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 							if ( ! empty( $field['related_name'] ) ) {
 								$data = isset( $metabox_request[ $field['related_name'] ] ) ? $metabox_request[ $field['related_name'] ] : '';
 
-								$fieldClass = 'TF_' . $field['type'];
-								$data       = $fieldClass == 'TF_map' ||  $fieldClass == 'TF_color' ? serialize( $data ) : $data;
+								$fieldClass = 'Tourfic_' . $field['type'];
+								$data       = 'Tourfic_map' === $fieldClass || 'Tourfic_color' === $fieldClass ? serialize( $data ) : $data;
 
 								if ( class_exists( $fieldClass ) ) {
 									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
@@ -208,29 +211,19 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			 * Hotel and Tour Pabbly Integration
 			 * @author Jahid
 			 */
-			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_hotel" ){
-				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_hotels_opt' ] ) ) ? $_POST[ 'tf_hotels_opt' ] : array();  //phpcs:ignore
-			}
-			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_tours" ){
-				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_tours_opt' ] ) ) ? $_POST[ 'tf_tours_opt' ] : array();  //phpcs:ignore
-			}
-			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_apartment" ){
-				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_apartment_opt' ] ) ) ? $_POST[ 'tf_apartment_opt' ] : array();  //phpcs:ignore
-			}
-			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_carrental" ){
-				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_carrental_opt' ] ) ) ? $_POST[ 'tf_carrental_opt' ] : array();  //phpcs:ignore
-			}
+			$post_type          = ! empty( $_POST['post_type'] ) ? sanitize_key( wp_unslash( $_POST['post_type'] ) ) : '';
+			$tf_metabox_request = $metabox_request;
 			$post_basic_info = array(
 				'post_id' => sanitize_key( $post_id ),
 				'post_title' => !empty($_POST['post_title']) ? sanitize_text_field( wp_unslash($_POST['post_title']) ) : '',
-				'post_content' => !empty($_POST['content']) ? sanitize_text_field( wp_unslash($_POST['content']) ) : '',
+				'post_content' => !empty($_POST['content']) ? wp_kses_post( wp_unslash($_POST['content']) ) : '',
 				'post_status' => !empty($_POST['post_status']) ? sanitize_text_field( wp_unslash($_POST['post_status']) ) : '',
 				'post_thumbnail' => !empty( get_the_post_thumbnail_url($post_id,'full') ) ?  get_the_post_thumbnail_url($post_id,'full') : '',
 				'post_date' => get_the_date( 'Y-m-d H:i:s', $post_id )
 			);
-				if( (!empty($_POST['post_type']) && $_POST['post_type']=="tf_hotel") || (!empty($_POST['post_type']) && $_POST['post_type']=="tf_tours") || (!empty($_POST['post_type']) && $_POST['post_type']=="tf_apartment") ){
-					do_action( 'tf_services_pabbly_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
-					do_action( 'tf_services_zapier_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
+				if ( in_array( $post_type, array( 'tf_hotel', 'tf_tours', 'tf_apartment' ), true ) ) {
+					do_action( 'tourfic_services_pabbly_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
+					do_action( 'tourfic_services_zapier_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
 				}
 		}
 

@@ -46,7 +46,7 @@ while ( have_posts() ) : the_post();
 	 * Get car meta values
 	 */
 	$tourfic_meta = get_post_meta( $tourfic_post_id, 'tf_carrental_opt', true );
-	$tourfic_meta = function_exists( 'tf_normalize_car_meta' ) ? tf_normalize_car_meta( $tourfic_meta ) : $tourfic_meta;
+	$tourfic_meta = function_exists( 'tourfic_normalize_car_meta' ) ? tourfic_normalize_car_meta( $tourfic_meta ) : $tourfic_meta;
 
 	$tourfic_disable_share_opt    = ! empty( $tourfic_meta['c-share'] ) ? $tourfic_meta['c-share'] : '';
 	$tourfic_disable_wishlist_sec = ! empty( $tourfic_meta['c-wishlist'] ) ? $tourfic_meta['c-wishlist'] : 0;
@@ -188,11 +188,11 @@ while ( have_posts() ) : the_post();
 	$tourfic_owner_sec_title  = ! empty( $tourfic_meta['owner_sec_title'] ) ? $tourfic_meta['owner_sec_title'] : '';
 
 	// Car Extras
-	$tourfic_car_extra_sec_title  = apply_filters( 'tf_car_extra_sec_title', '', $tourfic_post_id, $tourfic_meta );
-	$tourfic_car_extras = apply_filters( 'tf_car_extra_meta', null, $tourfic_post_id, $tourfic_meta );
+	$tourfic_car_extra_sec_title  = apply_filters( 'tourfic_car_extra_sec_title', '', $tourfic_post_id, $tourfic_meta );
+	$tourfic_car_extras = apply_filters( 'tourfic_car_extra_meta', null, $tourfic_post_id, $tourfic_meta );
 
 	// Car Deposit
-	$tourfic_car_allow_deposit = apply_filters( 'tf_allow_deposit_feature', false, $tourfic_meta );
+	$tourfic_car_allow_deposit = apply_filters( 'tourfic_allow_deposit_feature', false, $tourfic_meta );
 	$tourfic_car_deposit_type = ! empty( $tourfic_meta['deposit_type'] ) ? $tourfic_meta['deposit_type'] : 'none';
 	$tourfic_car_deposit_amount = ! empty( $tourfic_meta['deposit_amount'] ) ? $tourfic_meta['deposit_amount'] : '';
 
@@ -222,9 +222,9 @@ while ( have_posts() ) : the_post();
 	$tourfic_car_selected_template = $tourfic_car_selected_check;
 
     if( $tourfic_car_selected_template == "design-1" ){
-		include TF_TEMPLATE_PART_PATH . 'car/design-1.php';
+		include TOURFIC_TEMPLATE_PART_PATH . 'car/design-1.php';
 	}else{
-		include TF_TEMPLATE_PART_PATH . 'car/design-1.php';
+		include TOURFIC_TEMPLATE_PART_PATH . 'car/design-1.php';
 	}
 endwhile;
 get_footer();

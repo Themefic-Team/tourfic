@@ -328,7 +328,7 @@ class Related_Post {
 		<div class="tf-slider-item tf-post-box-lists">
 			<div class="tf-post-single-box">
 				<div class="tf-image-data">
-					<img src="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>" alt="">
+					<img src="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url( TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>" alt="">
 					<div class="tf-meta-data-price">
 						<?php esc_html_e( 'From', 'tourfic' ); ?>
 						<span><?php echo wp_kses_post( self::get_tour_price_html( $tour_price, $meta ) ); ?></span>
@@ -356,7 +356,7 @@ class Related_Post {
 		<div class="tf-slider-item tf-post-box-lists">
 			<div class="tf-post-single-box">
 				<div class="tf-image-data">
-					<img src="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>" alt="">
+					<img src="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url( TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>" alt="">
 				</div>
 				<div class="tf-meta-info">
 					<div class="meta-content">
@@ -474,7 +474,7 @@ class Related_Post {
 							<div class="tf-slider-item tf-post-box-lists">
 								<div class="tf-post-single-box">
 									<div class="tf-image-data">
-										<img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $selected_post_id, 'full' ) ) : esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>" alt="">
+										<img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $selected_post_id, 'full' ) ) : esc_url( TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>" alt="">
 									</div>
 									<div class="tf-meta-info">
 										<div class="meta-content">
@@ -541,7 +541,7 @@ class Related_Post {
 										<?php if ( has_post_thumbnail() ) : ?>
 											<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'tourfic-370x250' ); ?></a>
 										<?php else : ?>
-											<a href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( TF_ASSETS_APP_URL ) . 'images/feature-default.jpg'; ?>"/></a>
+											<a href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ) . 'images/feature-default.jpg'; ?>"/></a>
 										<?php endif; ?>
 									</div>
 									<div class="tf-related-apartment-content">

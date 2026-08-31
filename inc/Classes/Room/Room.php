@@ -17,9 +17,9 @@ class Room {
 	public function __construct() {
 		\Tourfic\Classes\Room\Room_CPT::instance();
 
-		add_action( 'wp_ajax_tf_remove_room_order_ids', array( $this, 'tf_remove_room_order_ids' ) );
-		add_action( 'wp_ajax_tf_room_search', array( $this, 'tf_room_search_ajax_callback' ) );
-		add_action( 'wp_ajax_nopriv_tf_room_search', array( $this, 'tf_room_search_ajax_callback' ) );
+		add_action( 'wp_ajax_tourfic_remove_room_order_ids', array( $this, 'tf_remove_room_order_ids' ) );
+		add_action( 'wp_ajax_tourfic_room_search', array( $this, 'tf_room_search_ajax_callback' ) );
+		add_action( 'wp_ajax_nopriv_tourfic_room_search', array( $this, 'tf_room_search_ajax_callback' ) );
 	}
 
 	static function get_hotel_rooms( $hotel_id ) {
@@ -65,7 +65,19 @@ class Room {
 
 		if ( '1' === $pricing_by && empty( $room_meta['price'] ) && ( ! empty( $room_meta['adult_price'] ) || ! empty( $room_meta['child_price'] ) ) ) {
 			$room_meta['pricing-by'] = '2';
+			$pricing_by              = '2';
 			$has_changes             = true;
+		}
+
+		$has_room_basis_price = isset( $room_meta['price'] )
+			&& '' !== trim( (string) $room_meta['price'] )
+			&& is_numeric( $room_meta['price'] );
+		if ( ! $has_room_basis_price ) {
+			$legacy_room_basis_price = self::get_legacy_room_basis_price( $room_meta, $pricing_by );
+			if ( null !== $legacy_room_basis_price ) {
+				$room_meta['price'] = $legacy_room_basis_price;
+				$has_changes        = true;
+			}
 		}
 
 		if ( ! isset( $room_meta['avil_by_date'] ) && isset( $room_meta['avail_by_date'] ) ) {
@@ -93,6 +105,49 @@ class Room {
 		}
 
 		return $room_meta;
+	}
+
+	/**
+	 * Preserve a Room Basis fallback for metadata saved by legacy advanced modes.
+	 *
+	 * The saved pricing mode and its values remain unchanged so the owning
+	 * companion can restore the original calculation when it is active.
+	 *
+	 * @param array  $room_meta  Room settings.
+	 * @param string $pricing_by Saved pricing mode.
+	 * @return string|null
+	 */
+	private static function get_legacy_room_basis_price( $room_meta, $pricing_by ) {
+		$price_candidates = array();
+
+		if ( '2' === $pricing_by ) {
+			$price_candidates = array(
+				$room_meta['adult_price'] ?? null,
+				$room_meta['child_price'] ?? null,
+			);
+		} elseif ( '3' === $pricing_by && ! empty( $room_meta['room-options'] ) && is_array( $room_meta['room-options'] ) ) {
+			foreach ( $room_meta['room-options'] as $room_option ) {
+				if ( ! is_array( $room_option ) ) {
+					continue;
+				}
+
+				$option_pricing_type = $room_option['option_pricing_type'] ?? 'per_room';
+				if ( 'per_person' === $option_pricing_type ) {
+					$price_candidates[] = $room_option['option_adult_price'] ?? null;
+					$price_candidates[] = $room_option['option_child_price'] ?? null;
+				} else {
+					$price_candidates[] = $room_option['option_price'] ?? null;
+				}
+			}
+		}
+
+		foreach ( $price_candidates as $price_candidate ) {
+			if ( is_numeric( $price_candidate ) && (float) $price_candidate > 0 ) {
+				return (string) $price_candidate;
+			}
+		}
+
+		return null;
 	}
 
 	static function get_hotel_id_for_assigned_room( $room_id ) {
@@ -263,7 +318,7 @@ class Room {
 		}
 
 		if ( ! empty( $check_in_out ) ) {
-			list( $tf_form_start, $tf_form_end ) = tf_split_date_range( $check_in_out );
+			list( $tf_form_start, $tf_form_end ) = tourfic_split_date_range( $check_in_out );
 		}
 
 		if ( ! empty( $check_in_out ) ) {
@@ -356,7 +411,7 @@ class Room {
 
 					$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size_customize' );
 				} elseif ( '' === $thumbnail_html && 'yes' !== $show_fallback_img ) {
-					$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+					$thumbnail_html = '<img src="' . esc_url( TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
 				}
 			} else {
 				$image_size = isset( $settings['image_size'] ) ? $settings['image_size'] : 'full';
@@ -370,7 +425,7 @@ class Room {
 					}
 					$thumbnail_html = '<img src="' . esc_url( $fallback_img_src ) . '" class="attachment-' . esc_attr( $image_size ) . ' size-' . esc_attr( $image_size ) . ' wp-post-image">';
 				} else {
-					$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+					$thumbnail_html = '<img src="' . esc_url( TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
 				}
 			}
 		}
@@ -390,7 +445,7 @@ class Room {
 							} elseif ( has_post_thumbnail() ) {
 								the_post_thumbnail( 'full' );
 							} else {
-								echo '<img src="' . esc_url( TF_ASSETS_APP_URL ) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+								echo '<img src="' . esc_url( TOURFIC_ASSETS_APP_URL ) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 							}
 							?>
 						</div>
@@ -504,7 +559,7 @@ class Room {
 							} elseif ( has_post_thumbnail() ) {
 								the_post_thumbnail( 'full' );
 							} else {
-								echo '<img src="' . esc_url( TF_ASSETS_APP_URL ) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+								echo '<img src="' . esc_url( TOURFIC_ASSETS_APP_URL ) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 							}
 							?>
 						</div>
@@ -1110,7 +1165,7 @@ class Room {
 		$room_option = ! empty( $_GET['room-option'] ) ? sanitize_text_field( wp_unslash($_GET['room-option']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// Check-in & out date
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$check_in_out_dates = ! empty( $check_in_out ) ? tf_split_date_range( $check_in_out ) : [];
+		$check_in_out_dates = ! empty( $check_in_out ) ? tourfic_split_date_range( $check_in_out ) : [];
 		
 		//get features
 		$features = ! empty( $_GET['features'] ) ? sanitize_text_field( wp_unslash($_GET['features']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -1391,7 +1446,7 @@ class Room {
 									<?php endif; ?>
 
 									<?php if(! empty( $check_in_out )){ ?>
-									defaultDate: <?php echo wp_json_encode( tf_split_date_range( $check_in_out ) ) ?>,
+									defaultDate: <?php echo wp_json_encode( tourfic_split_date_range( $check_in_out ) ) ?>,
 									<?php } ?>
 								});
 
@@ -1834,7 +1889,7 @@ class Room {
 					<div class="tf-driver-location-box">
 						<div class="tf-submit-button">
 							<input type="hidden" name="type" value="tf_room" class="tf-post-type"/>
-							<button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html( apply_filters("tf_hotel_search_form_submit_button_text", esc_html__('Search', 'tourfic') ) ); ?> <i class="ri-search-line"></i></button>
+							<button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html( apply_filters("tourfic_hotel_search_form_submit_button_text", esc_html__('Search', 'tourfic') ) ); ?> <i class="ri-search-line"></i></button>
 						</div>
 					</div>
 				</div>
@@ -2034,7 +2089,7 @@ class Room {
                         <!-- Submit Button -->
                         <input type="hidden" name="type" value="tf_room" class="tf-post-type" />
                         <button type="submit" class="tf-search__form__submit tf_btn">
-                            <?php echo esc_html(apply_filters("tf_hotel_search_form_submit_button_text", 'Search')); ?>
+                            <?php echo esc_html(apply_filters("tourfic_hotel_search_form_submit_button_text", 'Search')); ?>
                             <svg class="tf-search__form__submit__icon" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.75 14.7188L11.5625 10.5312C12.4688 9.4375 12.9688 8.03125 12.9688 6.5C12.9688 2.9375 10.0312 0 6.46875 0C2.875 0 0 2.9375 0 6.5C0 10.0938 2.90625 13 6.46875 13C7.96875 13 9.375 12.5 10.5 11.5938L14.6875 15.7812C14.8438 15.9375 15.0312 16 15.25 16C15.4375 16 15.625 15.9375 15.75 15.7812C16.0625 15.5 16.0625 15.0312 15.75 14.7188ZM1.5 6.5C1.5 3.75 3.71875 1.5 6.5 1.5C9.25 1.5 11.5 3.75 11.5 6.5C11.5 9.28125 9.25 11.5 6.5 11.5C3.71875 11.5 1.5 9.28125 1.5 6.5Z" fill="white" />
                             </svg>
@@ -2107,7 +2162,7 @@ class Room {
 				$child = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children']) ) : '0'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				$room = ! empty( $_GET['room'] ) ? sanitize_text_field( wp_unslash($_GET['room']) ) : '1'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-					$check_in_out_arr = tf_split_date_range( $check_in_out );
+					$check_in_out_arr = tourfic_split_date_range( $check_in_out );
 				$check_in = !empty($check_in_out_arr[0]) ? $check_in_out_arr[0] : ''; 
 				$check_out = !empty($check_in_out_arr[1]) ? $check_in_out_arr[1] : ''; 
 				$date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
@@ -2255,7 +2310,7 @@ class Room {
 										instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
 										dateSetToFields(selectedDates, instance);
 									},
-									defaultDate: <?php echo ! empty( $check_in_out ) ? wp_json_encode( tf_split_date_range( $check_in_out ) ) : '[' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+1 day' ) ) ) . ', ' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+2 day' ) ) ) . ']' ; ?>,
+									defaultDate: <?php echo ! empty( $check_in_out ) ? wp_json_encode( tourfic_split_date_range( $check_in_out ) ) : '[' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+1 day' ) ) ) . ', ' . wp_json_encode( gmdate( 'Y/m/d', strtotime( '+2 day' ) ) ) . ']' ; ?>,
 								});
 
 								function dateSetToFields(selectedDates, instance) {
@@ -2350,7 +2405,7 @@ class Room {
                             <div class="tf_input-inner">
                                 <label class="tf_label-row" style="width: 100%;">
                                     <span class="tf-label"><?php esc_html_e( 'More', 'tourfic' ); ?></span>
-                                    <span style="text-decoration: none; display: block; cursor: pointer;"><?php echo esc_html( apply_filters("tf_search_form_advance_filter_label", 'Filter') ); ?>  <i class="fas fa-angle-down"></i></span>
+                                    <span style="text-decoration: none; display: block; cursor: pointer;"><?php echo esc_html( apply_filters("tourfic_search_form_advance_filter_label", 'Filter') ); ?>  <i class="fas fa-angle-down"></i></span>
                                 </label>
                             </div>
                             <div class="tf-more-info">
@@ -2408,7 +2463,7 @@ class Room {
 						if ( $author ) { ?>
                             <input type="hidden" name="tf-author" value="<?php echo esc_attr( $author ); ?>" class="tf-post-type"/>
 						<?php } ?>
-                        <button class="tf_btn tf-submit" type="submit"><?php echo esc_html(apply_filters("tf_room_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
+                        <button class="tf_btn tf-submit" type="submit"><?php echo esc_html(apply_filters("tourfic_room_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
                     </div>
 
                 </div>

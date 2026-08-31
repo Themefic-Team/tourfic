@@ -3,8 +3,8 @@
 defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 
-if ( ! class_exists( 'TF_Shortcodes' ) ) {
-	class TF_Shortcodes {
+if ( ! class_exists( 'Tourfic_Shortcodes' ) ) {
+	class Tourfic_Shortcodes {
 
 		private static $instance = null;
 
@@ -59,7 +59,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Search Form', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_search_form"><?php esc_html_e( 'Search form', 'tourfic' ); ?></option>
+                                                <option value="tourfic_search_form"><?php esc_html_e( 'Search form', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -171,7 +171,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_search_form]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -200,7 +200,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Reviews', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_reviews"><?php esc_html_e( 'Reviews', 'tourfic' ); ?></option>
+                                                <option value="tourfic_reviews"><?php esc_html_e( 'Reviews', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -287,7 +287,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_reviews]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -316,7 +316,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Recent Blogs', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_recent_blog"><?php esc_html_e( 'Recent Blogs', 'tourfic' ); ?></option>
+                                                <option value="tourfic_recent_blog"><?php esc_html_e( 'Recent Blogs', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -356,7 +356,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_recent_blog]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -390,7 +390,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Tour', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_tour"><?php esc_html_e( 'Tour', 'tourfic' ); ?></option>
+                                                <option value="tourfic_tour"><?php esc_html_e( 'Tour', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -444,7 +444,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_tour]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -473,7 +473,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Tour Destinations', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tour_destinations"><?php esc_html_e( 'Tour Destinations', 'tourfic' ); ?></option>
+                                                <option value="tourfic_tour_destinations"><?php esc_html_e( 'Tour Destinations', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -535,7 +535,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_tour_destinations]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -564,7 +564,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Recent Tours', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_recent_tour"><?php esc_html_e( 'Recent tour', 'tourfic' ); ?></option>
+                                                <option value="tourfic_recent_tour"><?php esc_html_e( 'Recent tour', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -629,7 +629,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_recent_tour]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -658,7 +658,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'External Listing', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_tour_external_listings"><?php esc_html_e( 'External Listing', 'tourfic' ); ?></option>
+                                                <option value="tourfic_tour_external_listings"><?php esc_html_e( 'External Listing', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -716,7 +716,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_tour_external_listings]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -750,7 +750,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Hotels', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_hotel"><?php esc_html_e( 'Hotels', 'tourfic' ); ?></option>
+                                                <option value="tourfic_hotel"><?php esc_html_e( 'Hotels', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -804,7 +804,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_hotel]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -833,7 +833,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Hotel Locations', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="hotel_locations"><?php esc_html_e( 'Hotel Locations', 'tourfic' ); ?></option>
+                                                <option value="tourfic_hotel_locations"><?php esc_html_e( 'Hotel Locations', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -895,7 +895,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_hotel_locations]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -924,7 +924,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Hotels', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_recent_hotel"><?php esc_html_e( 'Recent Hotel', 'tourfic' ); ?></option>
+                                                <option value="tourfic_recent_hotel"><?php esc_html_e( 'Recent Hotel', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -989,7 +989,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_recent_hotel]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -1018,7 +1018,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'External Listing', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_hotel_external_listings"><?php esc_html_e( 'External Listing', 'tourfic' ); ?></option>
+                                                <option value="tourfic_hotel_external_listings"><?php esc_html_e( 'External Listing', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1076,7 +1076,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_hotel_external_listings]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -1110,7 +1110,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Rooms', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_room"><?php esc_html_e( 'Rooms', 'tourfic' ); ?></option>
+                                                <option value="tourfic_room"><?php esc_html_e( 'Rooms', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1164,7 +1164,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_room]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -1193,7 +1193,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Room Types', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="room_types"><?php esc_html_e( 'Room Types', 'tourfic' ); ?></option>
+                                                <option value="tourfic_room_types"><?php esc_html_e( 'Room Types', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1255,7 +1255,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_room_types]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -1284,7 +1284,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Rooms', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_recent_room"><?php esc_html_e( 'Recent Room', 'tourfic' ); ?></option>
+                                                <option value="tourfic_recent_room"><?php esc_html_e( 'Recent Room', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1349,7 +1349,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_recent_room]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -1383,7 +1383,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Apartments', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_apartment"><?php esc_html_e( 'Apartments', 'tourfic' ); ?></option>
+                                                <option value="tourfic_apartment"><?php esc_html_e( 'Apartments', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1437,7 +1437,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_apartment]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -1466,7 +1466,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Apartment Locations', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_apartment_locations"><?php esc_html_e( 'Apartment Locations', 'tourfic' ); ?></option>
+                                                <option value="tourfic_apartment_locations"><?php esc_html_e( 'Apartment Locations', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1528,7 +1528,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_apartment_locations]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -1557,7 +1557,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Apartments', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_recent_apartment"><?php esc_html_e( 'Recent Apartment', 'tourfic' ); ?></option>
+                                                <option value="tourfic_recent_apartment"><?php esc_html_e( 'Recent Apartment', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1622,7 +1622,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_recent_apartment]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -1651,7 +1651,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'External Listing', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_apartment_external_listings"><?php esc_html_e( 'External Listing', 'tourfic' ); ?></option>
+                                                <option value="tourfic_apartment_external_listings"><?php esc_html_e( 'External Listing', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1709,7 +1709,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_apartment_external_listings]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -1743,7 +1743,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Cars', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_cars"><?php esc_html_e( 'Cars', 'tourfic' ); ?></option>
+                                                <option value="tourfic_cars"><?php esc_html_e( 'Cars', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1788,7 +1788,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_cars]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_cars]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -1817,7 +1817,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Car Locations', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_carrental_locations"><?php esc_html_e( 'Car Locations', 'tourfic' ); ?></option>
+                                                <option value="tourfic_carrental_locations"><?php esc_html_e( 'Car Locations', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1879,7 +1879,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_carrental_locations]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -1908,7 +1908,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Cars', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_recent_cars"><?php esc_html_e( 'Recent Cars', 'tourfic' ); ?></option>
+                                                <option value="tourfic_recent_cars"><?php esc_html_e( 'Recent Cars', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -1976,7 +1976,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_recent_cars]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_recent_cars]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -2012,7 +2012,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                         <div class="tf-sg-field-wrap">
                                             <h3><?php echo esc_html__( 'Vendor Posts', 'tourfic' ) ?></h3>
                                             <select class="tf-select-field tf-setting-field">
-                                                <option value="tf_vendor_post"><?php esc_html_e( 'Vendor Posts', 'tourfic' ); ?></option>
+                                                <option value="tourfic_vendor_post"><?php esc_html_e( 'Vendor Posts', 'tourfic' ); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -2066,7 +2066,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                 </div>
                                 <div class="tf-copy-item">
                                     <div class="tf-shortcode-field copy-shortcode">
-                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_vendor_post]" readonly/>
+                                        <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tourfic_vendor_post]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
                                             <span class="dashicons dashicons-admin-page"></span>
                                         </button>
@@ -2083,4 +2083,4 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
 
 	}
 }
-TF_Shortcodes::instance();
+Tourfic_Shortcodes::instance();

@@ -5,9 +5,9 @@
 // Don't load directly
 defined( 'ABSPATH' ) || exit;
 
- if(tf_is_block_theme()){
+ if(tourfic_is_block_theme()){
     wp_head();
-    tf_render_block_header_area();
+    tourfic_render_block_header_area();
 }else{
     get_header();
 }
@@ -124,16 +124,16 @@ while ( have_posts() ) : the_post();
 	$tourfic_apartment_selected_template = $tourfic_apartment_selected_check;
     
     if( $tourfic_apartment_selected_template == "design-1" ){
-		include TF_TEMPLATE_PART_PATH . 'apartment/design-1.php';
+		include TOURFIC_TEMPLATE_PART_PATH . 'apartment/design-1.php';
 	}else{
-		include TF_TEMPLATE_PART_PATH . 'apartment/design-legacy.php';
+		include TOURFIC_TEMPLATE_PART_PATH . 'apartment/design-legacy.php';
 	}
 
 endwhile;
 
-if(tf_is_block_theme()){
+if(tourfic_is_block_theme()){
     wp_footer();
-    tf_render_block_footer_area();
+    tourfic_render_block_footer_area();
  }else{
 	get_footer();
  }

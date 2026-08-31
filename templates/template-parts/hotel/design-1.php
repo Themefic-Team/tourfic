@@ -46,8 +46,8 @@ $tourfic_ext_booking_code  = ! empty( $tourfic_meta['booking-code'] ) ? $tourfic
                             
                             <!-- Hotel Single Widget Hook are - start -->
                             <div class="tf-hotel-single-custom-widget-wrap">
-                                <?php do_action( "tf_hotel_single_widgets" ); ?>
-                                <?php do_action( "tf_single_hotel_sidebar_area_with_args", $tourfic_post_id ); ?>
+                                <?php do_action( "tourfic_hotel_single_widgets" ); ?>
+                                <?php do_action( "tourfic_single_hotel_sidebar_area_with_args", $tourfic_post_id ); ?>
                             </div>
                             <!-- Hotel Single Widget Hook are - end -->
                         </div>
@@ -55,8 +55,8 @@ $tourfic_ext_booking_code  = ! empty( $tourfic_meta['booking-code'] ) ? $tourfic
                 </div>
                
                 <?php 
-                if(file_exists(TF_TEMPLATE_PART_PATH . 'hotel/design-1/places.php')) {
-                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/places.php';
+                if(file_exists(TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-1/places.php')) {
+                    include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-1/places.php';
                 }
                 ?>
 
@@ -64,17 +64,17 @@ $tourfic_ext_booking_code  = ! empty( $tourfic_meta['booking-code'] ) ? $tourfic
                 if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout']) ){
                     foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout'] as $tourfic_section){
                         if( !empty($tourfic_section['status']) && $tourfic_section['status']=="1" && !empty($tourfic_section['slug']) ){
-                            include TF_TEMPLATE_PART_PATH . 'hotel/design-1/'.$tourfic_section['slug'].'.php';
+                            include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-1/'.$tourfic_section['slug'].'.php';
                         }
                     }
                 }else{
-                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/description.php';
-                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/features.php';
-                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/rooms.php';
-                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/facilities.php';
-                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/faq.php';
-                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/review.php';
-                    include TF_TEMPLATE_PART_PATH . 'hotel/design-1/trams-condition.php';
+                    include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-1/description.php';
+                    include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-1/features.php';
+                    include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-1/rooms.php';
+                    include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-1/facilities.php';
+                    include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-1/faq.php';
+                    include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-1/review.php';
+                    include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-1/trams-condition.php';
                 }
                 ?>
             </div>

@@ -10,7 +10,7 @@ class Tour_Destinations extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
 
-	protected $shortcode = 'tour_destinations';
+	protected $shortcode = 'tourfic_tour_destinations';
 
 	function render( $atts, $content = null ) {
 		// Shortcode extract
@@ -61,7 +61,7 @@ class Tour_Destinations extends \Tourfic\Core\Shortcodes {
 					<?php foreach ( $destinations as $term ) {
 
 						$meta      = get_term_meta( $term->term_id, 'tf_tour_destination', true );
-						$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg');
+						$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg');
 						$term_link = get_term_link( $term );
 
 						$taxonomy_query = new \WP_Query( array(

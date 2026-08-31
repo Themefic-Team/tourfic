@@ -30,8 +30,8 @@ abstract class Without_Payment_Booking {
         $this->args = $args;
 
         // Add actions
-        add_action("wp_ajax_" . $this->args["post_type"]. '_booking_popup', array( $this, 'without_payment_booking_popup_callback' ) );
-        add_action("wp_ajax_nopriv_" . $this->args["post_type"]. '_booking_popup', array( $this, 'without_payment_booking_popup_callback' ) );
+        add_action( 'wp_ajax_' . $this->args['action'], array( $this, 'without_payment_booking_popup_callback' ) );
+        add_action( 'wp_ajax_nopriv_' . $this->args['action'], array( $this, 'without_payment_booking_popup_callback' ) );
         
     }
 

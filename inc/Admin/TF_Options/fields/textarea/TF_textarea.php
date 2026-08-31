@@ -5,8 +5,8 @@ defined( 'ABSPATH' ) || exit;
 use PHP_CodeSniffer\Util\Help;
 use \Tourfic\Classes\Helper;
 
-if ( ! class_exists( 'TF_textarea' ) ) {
-	class TF_textarea extends TF_Fields {
+if ( ! class_exists( 'Tourfic_textarea' ) ) {
+	class Tourfic_textarea extends Tourfic_Fields {
 
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field  );

@@ -87,7 +87,6 @@ class Car_Booking_Details extends \Tourfic\Core\TF_Booking_Details
 
 }
 
-add_filter("tf_car_booking_details_pricing_section_title_change", function() {
+add_filter("tourfic_car_booking_details_pricing_section_title_change", function() {
     return esc_html__("Car details", "tourfic");
 });
- 

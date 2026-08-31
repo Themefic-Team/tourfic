@@ -7,12 +7,12 @@ defined( 'ABSPATH' ) || exit;
  *
  * This keeps the core routes available unless another component replaces them.
  */
-class TF_API_Routes {
+class Tourfic_API_Routes {
 
 	/**
 	 * Singleton instance.
 	 *
-	 * @var TF_API_Routes|null
+	 * @var Tourfic_API_Routes|null
 	 */
 	private static $instance = null;
 
@@ -33,15 +33,15 @@ class TF_API_Routes {
 
 	public function __construct() {
 		$this->api_classes = array(
-			'rest'          => TF_Rest_API::get_instance(),
-			'tour'          => TF_Tour_Rest_API::get_instance(),
-			'apartment'     => TF_Apartment_Rest_API::get_instance(),
-			'rental'        => TF_Rental_Rest_API::get_instance(),
-			'hotel'         => TF_Hotel_Rest_API::get_instance(),
-			'room'          => TF_Room_Rest_API::get_instance(),
-			'booking'       => TF_Booking_Rest_API::get_instance(),
-			'enquiry'       => TF_Enquiry_Rest_API::get_instance(),
-			'user'          => TF_User_Rest_API::get_instance(),
+			'rest'          => Tourfic_Rest_API::get_instance(),
+			'tour'          => Tourfic_Tour_Rest_API::get_instance(),
+			'apartment'     => Tourfic_Apartment_Rest_API::get_instance(),
+			'rental'        => Tourfic_Rental_Rest_API::get_instance(),
+			'hotel'         => Tourfic_Hotel_Rest_API::get_instance(),
+			'room'          => Tourfic_Room_Rest_API::get_instance(),
+			'booking'       => Tourfic_Booking_Rest_API::get_instance(),
+			'enquiry'       => Tourfic_Enquiry_Rest_API::get_instance(),
+			'user'          => Tourfic_User_Rest_API::get_instance(),
 		);
 
 		add_action( 'rest_api_init', array( $this, 'register_get_routes' ) );

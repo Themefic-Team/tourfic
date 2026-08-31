@@ -84,7 +84,7 @@ class TF_Demo_Importer {
 			}
 		}
 
-		$dummy_hotels_files = TF_ASSETS_PATH . 'demo/hotel-data.csv';
+		$dummy_hotels_files = TOURFIC_ASSETS_PATH . 'demo/hotel-data.csv';
 		if ( file_exists( $dummy_hotels_files ) ) {
 			$dummy_hotel_fields = array(
 				'id',
@@ -699,7 +699,7 @@ class TF_Demo_Importer {
 			}
 		}
 
-		$dummy_tours_files  = TF_ASSETS_PATH . 'demo/tour-data.csv';
+		$dummy_tours_files  = TOURFIC_ASSETS_PATH . 'demo/tour-data.csv';
 		$dummy_tours_fields = array(
 			'id',
 			'post_title',
@@ -1391,7 +1391,7 @@ class TF_Demo_Importer {
 			}
 		}
 
-		$dummy_apartments_files = TF_ASSETS_PATH . 'demo/apartment-data.csv';
+		$dummy_apartments_files = TOURFIC_ASSETS_PATH . 'demo/apartment-data.csv';
 		if ( file_exists( $dummy_apartments_files ) ) {
 			$dummy_apartment_fields = array(
 				'id',
@@ -2036,7 +2036,7 @@ class TF_Demo_Importer {
 			}
 		}
 		
-		$dummy_cars_files = TF_ASSETS_PATH . 'demo/car-data.csv';
+		$dummy_cars_files = TOURFIC_ASSETS_PATH . 'demo/car-data.csv';
 		$dummy_cars_fields = array(
 			'id',
 			'post_title',

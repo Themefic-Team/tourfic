@@ -8,10 +8,10 @@ use Tourfic\Classes\Helper;
  * Apartment booking ajax function
  * @author Foysal
  */
-add_action( 'wp_ajax_tf_apartment_booking', 'tf_apartment_booking_callback' );
-add_action( 'wp_ajax_nopriv_tf_apartment_booking', 'tf_apartment_booking_callback' );
-add_action( 'wp_ajax_tf_apartment_booking_popup', 'tf_apartment_booking_popup_callback' );
-add_action( 'wp_ajax_nopriv_tf_apartment_booking_popup', 'tf_apartment_booking_popup_callback' );
+add_action( 'wp_ajax_tourfic_apartment_booking', 'tourfic_apartment_booking_callback' );
+add_action( 'wp_ajax_nopriv_tourfic_apartment_booking', 'tourfic_apartment_booking_callback' );
+add_action( 'wp_ajax_tourfic_apartment_booking_popup', 'tourfic_apartment_booking_popup_callback' );
+add_action( 'wp_ajax_nopriv_tourfic_apartment_booking_popup', 'tourfic_apartment_booking_popup_callback' );
 
 /**
  * Parse apartment check-in/out range.
@@ -19,14 +19,14 @@ add_action( 'wp_ajax_nopriv_tf_apartment_booking_popup', 'tf_apartment_booking_p
  * @param string $check_in_out_date Check-in/out date string.
  * @return array<string, mixed>
  */
-function tf_apartment_parse_check_in_out_date( $check_in_out_date ) {
+function tourfic_apartment_parse_check_in_out_date( $check_in_out_date ) {
 	$date_parts = array( '', '' );
 	$check_in   = '';
 	$check_out  = '';
 	$days       = 0;
 
 	if ( ! empty( $check_in_out_date ) ) {
-		$date_parts = tf_split_date_range( $check_in_out_date );
+		$date_parts = tourfic_split_date_range( $check_in_out_date );
 
 		$check_in_stt  = ! empty( $date_parts[0] ) ? strtotime( $date_parts[0] ) : 0;
 		$check_out_stt = ! empty( $date_parts[1] ) ? strtotime( $date_parts[1] ) : 0;
@@ -65,7 +65,7 @@ function tf_apartment_parse_check_in_out_date( $check_in_out_date ) {
  * @param array $meta       Apartment meta.
  * @return array<int, string>
  */
-function tf_apartment_get_booking_validation_errors( $post_id, $adults, $children, $infant, $date_parts, $meta ) {
+function tourfic_apartment_get_booking_validation_errors( $post_id, $adults, $children, $infant, $date_parts, $meta ) {
 	$errors       = array();
 	$max_adults   = ( isset( $meta['max_adults'] ) && ! empty( $meta['max_adults'] ) ) ? intval( $meta['max_adults'] ) : 0;
 	$max_children = ( isset( $meta['max_children'] ) && ! empty( $meta['max_children'] ) ) ? intval( $meta['max_children'] ) : 0;
@@ -120,7 +120,7 @@ function tf_apartment_get_booking_validation_errors( $post_id, $adults, $childre
  * @param string $enable_availability  Availability mode.
  * @return float
  */
-function tf_apartment_get_booking_total_price( $post_id, $check_in, $check_out, $adults, $children, $infant, $enable_availability ) {
+function tourfic_apartment_get_booking_total_price( $post_id, $check_in, $check_out, $adults, $children, $infant, $enable_availability ) {
 	if ( empty( $check_in ) || empty( $check_out ) ) {
 		return 0;
 	}
@@ -141,7 +141,7 @@ function tf_apartment_get_booking_total_price( $post_id, $check_in, $check_out, 
  * @param integer $booking_type  Booking type.
  * @return array<string, float>
  */
-function tf_apartment_get_booking_payable_and_due( $meta, $total_price, $make_deposit, $booking_type ) {
+function tourfic_apartment_get_booking_payable_and_due( $meta, $total_price, $make_deposit, $booking_type ) {
 	$payable = (float) $total_price;
 	$due     = 0;
 
@@ -172,7 +172,7 @@ function tf_apartment_get_booking_payable_and_due( $meta, $total_price, $make_de
  * @param array $confirmation_details Confirmation fields from request.
  * @return array<string, array<string, string>>
  */
-function tf_apartment_get_without_payment_customer_details( $confirmation_details ) {
+function tourfic_apartment_get_without_payment_customer_details( $confirmation_details ) {
 	$billing_details  = array();
 	$shipping_details = array();
 
@@ -266,7 +266,7 @@ function tf_apartment_get_without_payment_customer_details( $confirmation_detail
  *
  * @return int
  */
-function tf_apartment_get_offline_customer_id() {
+function tourfic_apartment_get_offline_customer_id() {
 	if ( is_user_logged_in() ) {
 		$current_user = wp_get_current_user();
 		if ( ! empty( $current_user->ID ) ) {
@@ -277,12 +277,12 @@ function tf_apartment_get_offline_customer_id() {
 	return 1;
 }
 
-function tf_apartment_booking_callback() {
+function tourfic_apartment_booking_callback() {
 	$response          = [];
 	$tf_apartment_data = [];
 
 	// Check nonce security
-	if ( ! isset( $_POST['tf_apartment_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_apartment_nonce'])), 'tf_apartment_booking' ) ) {
+	if ( ! isset( $_POST['tf_apartment_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_apartment_nonce'])), 'tourfic_apartment_booking' ) ) {
 		return;
 	}
 
@@ -292,7 +292,7 @@ function tf_apartment_booking_callback() {
 	$infant            = isset( $_POST['infant'] ) ? intval( sanitize_text_field( wp_unslash($_POST['infant']) ) ) : '0';
 	$check_in_out_date = isset( $_POST['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_POST['check-in-out-date']) ) : '';
 	$make_deposit      = isset( $_POST['deposit'] ) ? sanitize_text_field( wp_unslash( $_POST['deposit'] ) ) : '0';
-	$tf_confirmation_details = ! empty( $_POST['booking_confirm'] ) ? wp_unslash( $_POST['booking_confirm'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$tf_confirmation_details = ! empty( $_POST['booking_confirm'] ) && is_array( $_POST['booking_confirm'] ) ? map_deep( wp_unslash( $_POST['booking_confirm'] ), 'sanitize_text_field' ) : array();
 
 	$product_id          = get_post_meta( $post_id, 'product_id', true );
 	$post_author         = get_post_field( 'post_author', $post_id );
@@ -312,13 +312,13 @@ function tf_apartment_booking_callback() {
 	$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
 	$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 
-	$date_data    = tf_apartment_parse_check_in_out_date( $check_in_out_date );
+	$date_data    = tourfic_apartment_parse_check_in_out_date( $check_in_out_date );
 	$check_in_out = $date_data['date_parts'];
 	$check_in     = $date_data['check_in'];
 	$check_out    = $date_data['check_out'];
 	$days         = $date_data['days'];
 
-	$validation_errors = tf_apartment_get_booking_validation_errors( $post_id, $adults, $children, $infant, $check_in_out, $meta );
+	$validation_errors = tourfic_apartment_get_booking_validation_errors( $post_id, $adults, $children, $infant, $check_in_out, $meta );
 	if ( ! empty( $validation_errors ) ) {
 		$response['errors'] = $validation_errors;
 	}
@@ -339,14 +339,14 @@ function tf_apartment_booking_callback() {
 
 		// Calculate price
 		if ( $days > 0 ) {
-			$total_price = tf_apartment_get_booking_total_price( $post_id, $check_in, $check_out, $adults, $children, $infant, $enable_availability );
+			$total_price = tourfic_apartment_get_booking_total_price( $post_id, $check_in, $check_out, $adults, $children, $infant, $enable_availability );
 
 			$tf_apartment_data['tf_apartment_data']['pricing_type'] = $pricing_type;
 			$tf_apartment_data['tf_apartment_data']['total_price']  = $total_price;
 		}
 
 		if ( ! empty( $tf_apartment_data['tf_apartment_data']['total_price'] ) ) {
-			$payable_info = tf_apartment_get_booking_payable_and_due( $meta, $tf_apartment_data['tf_apartment_data']['total_price'], $make_deposit, $tf_booking_type );
+			$payable_info = tourfic_apartment_get_booking_payable_and_due( $meta, $tf_apartment_data['tf_apartment_data']['total_price'], $make_deposit, $tf_booking_type );
 			if ( $payable_info['due'] > 0 ) {
 				$tf_apartment_data['tf_apartment_data']['due'] = $payable_info['due'];
 			}
@@ -354,7 +354,7 @@ function tf_apartment_booking_callback() {
 		}
 
 		if ( 3 == $tf_booking_type ) {
-			$customer_details               = tf_apartment_get_without_payment_customer_details( $tf_confirmation_details );
+			$customer_details               = tourfic_apartment_get_without_payment_customer_details( $tf_confirmation_details );
 			$without_payment_order_details  = array(
 				'order_by'    => '',
 				'check_in'    => $check_in,
@@ -375,7 +375,7 @@ function tf_apartment_booking_callback() {
 				'shipping_details' => $customer_details['shipping_details'],
 				'order_details'    => $without_payment_order_details,
 				'payment_method'   => 'offline',
-				'customer_id'      => tf_apartment_get_offline_customer_id(),
+				'customer_id'      => tourfic_apartment_get_offline_customer_id(),
 				'status'           => 'processing',
 				'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 			);
@@ -387,12 +387,12 @@ function tf_apartment_booking_callback() {
 				$response['add_to_cart']     = 'true';
 
 				if ( ! empty( $order_id ) ) {
-					do_action( 'tf_offline_payment_booking_confirmation', $order_id, $without_payment_order_data );
+					do_action( 'tourfic_offline_payment_booking_confirmation', $order_id, $without_payment_order_data );
 					if (
 						! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) &&
 						Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == '1'
 					) {
-						apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $without_payment_order_data, '' );
+						apply_filters( 'tourfic_after_booking_completed_calendar_data', $order_id, $without_payment_order_data, '' );
 					}
 				}
 			} else {
@@ -447,7 +447,7 @@ function tf_apartment_booking_callback() {
  *
  * @return void
  */
-function tf_apartment_booking_popup_callback() {
+function tourfic_apartment_booking_popup_callback() {
 	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
 		return;
 	}
@@ -470,13 +470,13 @@ function tf_apartment_booking_popup_callback() {
 	$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 	$tf_booking_type     = ! empty( $meta['booking-by'] ) ? intval( $meta['booking-by'] ) : 1;
 
-	$date_data    = tf_apartment_parse_check_in_out_date( $check_in_out_date );
+	$date_data    = tourfic_apartment_parse_check_in_out_date( $check_in_out_date );
 	$check_in_out = $date_data['date_parts'];
 	$check_in     = $date_data['check_in'];
 	$check_out    = $date_data['check_out'];
 	$days         = $date_data['days'];
 
-	$validation_errors = tf_apartment_get_booking_validation_errors( $post_id, $adults, $children, $infant, $check_in_out, $meta );
+	$validation_errors = tourfic_apartment_get_booking_validation_errors( $post_id, $adults, $children, $infant, $check_in_out, $meta );
 	if ( ! empty( $validation_errors ) ) {
 		$response['status'] = 'error';
 		$response['errors'] = $validation_errors;
@@ -484,7 +484,7 @@ function tf_apartment_booking_popup_callback() {
 		die();
 	}
 
-	$total_price = tf_apartment_get_booking_total_price( $post_id, $check_in, $check_out, $adults, $children, $infant, $enable_availability );
+	$total_price = tourfic_apartment_get_booking_total_price( $post_id, $check_in, $check_out, $adults, $children, $infant, $enable_availability );
 	if ( $total_price <= 0 ) {
 		$response['status']   = 'error';
 		$response['errors'][] = esc_html__( 'Unable to calculate booking total. Please try again.', 'tourfic' );
@@ -492,7 +492,7 @@ function tf_apartment_booking_popup_callback() {
 		die();
 	}
 
-	$payable_info = tf_apartment_get_booking_payable_and_due( $meta, $total_price, $make_deposit, $tf_booking_type );
+	$payable_info = tourfic_apartment_get_booking_payable_and_due( $meta, $total_price, $make_deposit, $tf_booking_type );
 	$date_format  = ! empty( Helper::tfopt( 'tf-date-format-for-users' ) ) ? Helper::tfopt( 'tf-date-format-for-users' ) : 'Y/m/d';
 	$summary      = '';
 
@@ -574,7 +574,7 @@ function tf_apartment_booking_popup_callback() {
  * Override WooCommerce Price
  * @author Foysal
  */
-function tf_aprtment_set_order_price( $cart ) {
+function tourfic_aprtment_set_order_price( $cart ) {
 
 	if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
 		return;
@@ -593,13 +593,13 @@ function tf_aprtment_set_order_price( $cart ) {
 
 }
 
-add_action( 'woocommerce_before_calculate_totals', 'tf_aprtment_set_order_price', 30, 1 );
+add_action( 'woocommerce_before_calculate_totals', 'tourfic_aprtment_set_order_price', 30, 1 );
 
 /*
  * Display custom cart item meta data (in cart and checkout)
  * @author Foysal
  */
-function tf_apartment_cart_item_custom_meta_data( $item_data, $cart_item ) {
+function tourfic_apartment_cart_item_custom_meta_data( $item_data, $cart_item ) {
 
 	if ( isset( $cart_item['tf_apartment_data']['adults'] ) && $cart_item['tf_apartment_data']['adults'] >= 1 ) {
 		$item_data[] = array(
@@ -640,13 +640,13 @@ function tf_apartment_cart_item_custom_meta_data( $item_data, $cart_item ) {
 
 }
 
-add_filter( 'woocommerce_get_item_data', 'tf_apartment_cart_item_custom_meta_data', 10, 2 );
+add_filter( 'woocommerce_get_item_data', 'tourfic_apartment_cart_item_custom_meta_data', 10, 2 );
 
 /**
  * Change cart item permalink
  * @author Foysal
  */
-function tf_apartment_cart_item_permalink( $permalink, $cart_item, $cart_item_key ) {
+function tourfic_apartment_cart_item_permalink( $permalink, $cart_item, $cart_item_key ) {
 
 	$type = ! empty( $cart_item['tf_apartment_data']['order_type'] ) ? $cart_item['tf_apartment_data']['order_type'] : '';
 	if ( is_cart() && $type == 'apartment' ) {
@@ -657,13 +657,13 @@ function tf_apartment_cart_item_permalink( $permalink, $cart_item, $cart_item_ke
 
 }
 
-add_filter( 'woocommerce_cart_item_permalink', 'tf_apartment_cart_item_permalink', 10, 3 );
+add_filter( 'woocommerce_cart_item_permalink', 'tourfic_apartment_cart_item_permalink', 10, 3 );
 
 /**
  * Show custom data in order details
  * @author Foysal
  */
-function tf_apartment_custom_order_data( $item, $cart_item_key, $values, $order ) {
+function tourfic_apartment_custom_order_data( $item, $cart_item_key, $values, $order ) {
 
 	// Assigning data into variables
 	$order_type        = ! empty( $values['tf_apartment_data']['order_type'] ) ? $values['tf_apartment_data']['order_type'] : '';
@@ -712,7 +712,7 @@ function tf_apartment_custom_order_data( $item, $cart_item_key, $values, $order 
 	}
 }
 
-add_action( 'woocommerce_checkout_create_order_line_item', 'tf_apartment_custom_order_data', 10, 4 );
+add_action( 'woocommerce_checkout_create_order_line_item', 'tourfic_apartment_custom_order_data', 10, 4 );
 
 
 /**
@@ -722,7 +722,7 @@ add_action( 'woocommerce_checkout_create_order_line_item', 'tf_apartment_custom_
  *
  * @author Jahid
  */
-function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data, $order ) {
+function tourfic_add_apartment_data_checkout_order_processed( $order_id, $posted_data, $order ) {
 
 	$tf_integration_order_data   = array(
 		'order_id' => $order_id
@@ -813,7 +813,7 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 			$due               = $item->get_meta( '_due_price', true );
 
 			if ( $check_in_out_date ) {
-				list( $check_in, $check_out ) = tf_split_date_range( $check_in_out_date );
+				list( $check_in, $check_out ) = tourfic_split_date_range( $check_in_out_date );
 			}
 
 			$iteminfo = [
@@ -888,12 +888,12 @@ function tf_add_apartment_data_checkout_order_processed( $order_id, $posted_data
 	 */
 
 	if ( ! empty( $tf_integration_order_status ) ) {
-		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
-		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+		do_action( 'tourfic_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+		do_action( 'tourfic_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
 	}
 }
 
-add_action( 'woocommerce_checkout_order_processed', 'tf_add_apartment_data_checkout_order_processed', 10, 4 );
+add_action( 'woocommerce_checkout_order_processed', 'tourfic_add_apartment_data_checkout_order_processed', 10, 4 );
 
 
 
@@ -905,7 +905,7 @@ add_action( 'woocommerce_checkout_order_processed', 'tf_add_apartment_data_check
  * @since 2.11.10
  * @author Foysal
  */
-function tf_add_apartment_data_checkout_order_processed_block_checkout( $order ) {
+function tourfic_add_apartment_data_checkout_order_processed_block_checkout( $order ) {
 
 	$order_id = $order->get_id();
 	$tf_integration_order_data   = array(
@@ -997,7 +997,7 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 			$due               = $item->get_meta( '_due_price', true );
 
 			if ( $check_in_out_date ) {
-				list( $check_in, $check_out ) = tf_split_date_range( $check_in_out_date );
+				list( $check_in, $check_out ) = tourfic_split_date_range( $check_in_out_date );
 			}
 
 			$iteminfo = [
@@ -1071,9 +1071,9 @@ function tf_add_apartment_data_checkout_order_processed_block_checkout( $order )
 	 * @author Jahid
 	 */
 	if ( ! empty( $tf_integration_order_status ) ) {
-		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
-		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+		do_action( 'tourfic_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+		do_action( 'tourfic_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
 	}
 }
 
-add_action( 'woocommerce_store_api_checkout_order_processed', 'tf_add_apartment_data_checkout_order_processed_block_checkout' );
+add_action( 'woocommerce_store_api_checkout_order_processed', 'tourfic_add_apartment_data_checkout_order_processed_block_checkout' );

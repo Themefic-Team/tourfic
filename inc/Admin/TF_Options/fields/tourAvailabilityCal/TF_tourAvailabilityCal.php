@@ -4,8 +4,8 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 
-if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
-	class TF_tourAvailabilityCal extends TF_Fields {
+if ( ! class_exists( 'Tourfic_tourAvailabilityCal' ) ) {
+	class Tourfic_tourAvailabilityCal extends Tourfic_Fields {
 
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field );

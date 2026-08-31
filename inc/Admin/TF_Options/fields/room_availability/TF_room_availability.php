@@ -4,8 +4,8 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 
-if ( ! class_exists( 'TF_room_availability' ) ) {
-	class TF_room_availability extends TF_Fields {
+if ( ! class_exists( 'Tourfic_room_availability' ) ) {
+	class Tourfic_room_availability extends Tourfic_Fields {
 
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field );

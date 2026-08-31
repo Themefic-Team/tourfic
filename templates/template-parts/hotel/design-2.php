@@ -44,13 +44,13 @@ use \Tourfic\Classes\Helper;
             if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1']) ){
                 foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1'] as $tourfic_section){
                     if( !empty($tourfic_section['status']) && $tourfic_section['status']=="1" && !empty($tourfic_section['slug']) ){
-                        include TF_TEMPLATE_PART_PATH . 'hotel/design-2/'.$tourfic_section['slug'].'.php';
+                        include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-2/'.$tourfic_section['slug'].'.php';
                     }
                 }
             }else{
-                include TF_TEMPLATE_PART_PATH . 'hotel/design-2/description.php';
-                include TF_TEMPLATE_PART_PATH . 'hotel/design-2/features.php';
-                include TF_TEMPLATE_PART_PATH . 'hotel/design-2/rooms.php';
+                include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-2/description.php';
+                include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-2/features.php';
+                include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-2/rooms.php';
             }
             ?>
         </div>
@@ -83,8 +83,8 @@ use \Tourfic\Classes\Helper;
             
             <!-- Hotel Single Widget Hook are - start -->
             <div class="tf-hotel-single-custom-widget-wrap">
-                <?php do_action( "tf_hotel_single_widgets" ); ?>
-                <?php do_action( "tf_single_hotel_sidebar_area_with_args", $tourfic_post_id ); ?>
+                <?php do_action( "tourfic_hotel_single_widgets" ); ?>
+                <?php do_action( "tourfic_single_hotel_sidebar_area_with_args", $tourfic_post_id ); ?>
             </div>       
             <!-- Hotel Single Widget Hook are - end -->
         </div>        
@@ -95,14 +95,14 @@ use \Tourfic\Classes\Helper;
     if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2']) ){
         foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2'] as $tourfic_section){
             if( !empty($tourfic_section['status']) && $tourfic_section['status']=="1" && !empty($tourfic_section['slug']) ){
-                include TF_TEMPLATE_PART_PATH . 'hotel/design-2/'.$tourfic_section['slug'].'.php';
+                include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-2/'.$tourfic_section['slug'].'.php';
             }
         }
     }else{
-        include TF_TEMPLATE_PART_PATH . 'hotel/design-2/facilities.php';
-        include TF_TEMPLATE_PART_PATH . 'hotel/design-2/review.php';
-        include TF_TEMPLATE_PART_PATH . 'hotel/design-2/faq.php';
-        include TF_TEMPLATE_PART_PATH . 'hotel/design-2/trams-condition.php';
+        include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-2/facilities.php';
+        include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-2/review.php';
+        include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-2/faq.php';
+        include TOURFIC_TEMPLATE_PART_PATH . 'hotel/design-2/trams-condition.php';
     }
     ?>
 

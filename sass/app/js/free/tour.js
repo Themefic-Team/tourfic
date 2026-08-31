@@ -122,7 +122,7 @@
             }
 
             var formData = new FormData(this);
-            formData.append('action', 'tf_tours_booking');
+            formData.append('action', 'tourfic_tours_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
 
 
@@ -337,7 +337,7 @@
                 submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
 
-            formData.append('action', 'tf_tour_search');
+            formData.append('action', 'tourfic_tour_search');
             formData.append('_nonce', tf_params.nonce);
 
             if (formData.get('from') == null || formData.get('to') == null) {
@@ -535,7 +535,7 @@
                 return;
             }
             var data = {
-                action: 'tf_tour_price_calculation',
+                action: 'tourfic_tour_price_calculation',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 date: date,

@@ -9,8 +9,8 @@ use Tourfic\Classes\Helper;
  * @author AbuHena
  * @since 1.7.0
  */
-if(!function_exists('tf_tour_meals')){
-	function tf_tour_meals() {
+if(!function_exists('tourfic_tour_meals')){
+	function tourfic_tour_meals() {
 		$itinerary_options = ! empty( Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) ) : '';
 		$all_meals         = [];
 		if ( ! empty( $itinerary_options['meals'] ) && is_array( $itinerary_options['meals'] ) ) {
@@ -24,7 +24,7 @@ if(!function_exists('tf_tour_meals')){
 	}
 }
 
-TF_Metabox::metabox( 'tf_tours_opt', array(
+Tourfic_Metabox::metabox( 'tf_tours_opt', array(
 	'title'     => esc_html__( 'Tour Settings', 'tourfic' ),
 	'post_type' => 'tf_tours',
 	'sections'  => array(
@@ -73,17 +73,17 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'options'  => array(
 						'design-1' => array(
 							'title' => esc_html__('Design 1', 'tourfic'),
-							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+							'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
 							'preview_link' => esc_url('https://tourfic.com/preview/tours/amplified-nz-tour/'),
 						),
 						'design-2' => array(
 							'title' => esc_html__('Design 2', 'tourfic'),
-							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-2.png",
+							'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-design-2.png",
 							'preview_link' => esc_url('https://tourfic.com/preview/tours/ancient-trails-of-japan/'),
 						),
 						'default'  => array(
 							'title' => esc_html__('Legacy', 'tourfic'),
-							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
+							'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
 							'preview_link' => esc_url('https://tourfic.com/preview/tours/magical-russia/'),
 						),
 					),

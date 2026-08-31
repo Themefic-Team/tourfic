@@ -29,11 +29,11 @@ if( 2==$tourfic_booking_type && !empty($tourfic_booking_url) ){
 }
 ?>
 <div class="tf-single-template__legacy">
-    <?php do_action( 'tf_before_container' ); ?>
+    <?php do_action( 'tourfic_before_container' ); ?>
     <!-- Hero section Start -->
     <div class="tf-hero-wrapper">
         <div class="tf-container">
-            <div class="tf-hero-content" style="background-image: url(<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'images/feature-default.jpg'); ?>);">
+            <div class="tf-hero-content" style="background-image: url(<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TOURFIC_ASSETS_APP_URL.'images/feature-default.jpg'); ?>);">
                 <div class="tf-hero-top">
                     <div class="tf-top-review">
                         <?php if ( $tourfic_comments && ! $tourfic_disable_review_sec == '1' ) { ?>
@@ -237,5 +237,5 @@ if( 2==$tourfic_booking_type && !empty($tourfic_booking_url) ){
         'wrapper_class' => 'sp-50',
 	]); 
 	?>
-    <?php do_action( 'tf_after_container' ); ?>
+    <?php do_action( 'tourfic_after_container' ); ?>
 </div>

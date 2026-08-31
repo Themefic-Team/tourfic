@@ -11,7 +11,7 @@ class Recent_Tour extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
 
-	protected $shortcode = 'tf_recent_tour';
+	protected $shortcode = 'tourfic_recent_tour';
 
 	function render( $atts, $content = null ) {
 		extract(

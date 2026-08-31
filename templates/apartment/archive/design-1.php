@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 
     <!--Content section end -->
     <div class="tf-content-wrapper">
-        <?php do_action( 'tf_before_container' ); ?>
+        <?php do_action( 'tourfic_before_container' ); ?>
         <div class="tf-container">
         
             <!-- Hotel details Srart -->

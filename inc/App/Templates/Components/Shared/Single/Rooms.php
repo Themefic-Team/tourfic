@@ -42,7 +42,7 @@ class Rooms {
         $tf_hotel_reserve_button_text   = ! empty( Helper::tfopt( 'hotel_booking_form_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_form_button_text' ) ) ) : esc_html__( "Reserve Now", 'tourfic' );
 		$price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'hotel_archive_price_minimum_settings' ) : 'all';
         $tf_booking_type = '1';
-        $adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
+        $adults_name = apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
         $rm_features = [];
         if ( ! empty( $rooms ) ) {
             foreach ( $rooms as $_room ) {
@@ -90,12 +90,12 @@ class Rooms {
             <?php echo 'yes' === $wrapper ? '<div class="tf-single-template__one tf-single-hotel-room__style-1 sp-0">' : ''; ?>
                 <div class="tf-rooms-sections tf-template-section">
                     <h2 class="section-heading tf-section-title"><?php echo ! empty( $meta['room-section-title'] ) ? esc_html( $meta['room-section-title'] ) : ''; ?></h2>
-                    <?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
+                    <?php do_action( 'tourfic_hotel_features_filter', $rm_features, 10 ) ?>
 
                     <div class="tf-rooms" id="rooms">
                         <div id="tour_room_details_loader">
                             <div id="tour-room-details-loader-img">
-                                <img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/loader.gif" alt="">
+                                <img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ) ?>images/loader.gif" alt="">
                             </div>
                         </div>
 
@@ -116,7 +116,7 @@ class Rooms {
                                     $adult_number            = ! empty( $room['adult'] ) ? $room['adult'] : '0';
                                     $child_number            = ! empty( $room['child'] ) ? $room['child'] : '0';
                                     $total_person            = $adult_number + $child_number;
-                                    $pricing_by              = apply_filters( 'tf_room_pricing_mode', 1, $room );
+                                    $pricing_by              = apply_filters( 'tourfic_room_pricing_mode', 1, $room );
                                     $avil_by_date            = ! empty( $room['avil_by_date'] ) ? ! empty( $room['avil_by_date'] ) : false;
                                     $multi_by_date           = ! empty( $room['price_multi_day'] ) ? ! empty( $room['price_multi_day'] ) : false;
                                     $child_age_limit         = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
@@ -403,13 +403,13 @@ class Rooms {
                             </div>
                         <?php endif; ?>
                     </div>
-                    <?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
+                    <?php do_action( 'tourfic_hotel_features_filter', $rm_features, 10 ) ?>
 
                     <div class="tf-available-rooms tf-rooms" id="rooms">
                         <!-- Loader Image -->
                         <div id="tour_room_details_loader">
                             <div id="tour-room-details-loader-img">
-                                <img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/loader.gif" alt="">
+                                <img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ) ?>images/loader.gif" alt="">
                             </div>
                         </div>
                         <?php if ( $rooms ) : ?>
@@ -423,7 +423,7 @@ class Rooms {
                                     $adult_number    = ! empty( $room['adult'] ) ? $room['adult'] : '0';
                                     $child_number    = ! empty( $room['child'] ) ? $room['child'] : '0';
                                     $total_person    = $adult_number + $child_number;
-                                    $pricing_by      = apply_filters( 'tf_room_pricing_mode', 1, $room );
+                                    $pricing_by      = apply_filters( 'tourfic_room_pricing_mode', 1, $room );
                                     $avil_by_date    = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : false;
                                     $multi_by_date   = ! empty( $room['price_multi_day'] ) ? $room['price_multi_day'] : false;
                                     $child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
@@ -560,7 +560,7 @@ class Rooms {
                                                                 <?php if ( $adult_number ) { ?>
                                                                     <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?>
                                                                     <?php 
-                                                                    echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
+                                                                    echo ' ' . esc_html( apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
                                                                     ?>
                                                                 <?php } ?>
                                                                 <?php if ( $child_number ) { ?>
@@ -646,7 +646,7 @@ class Rooms {
                                                         <?php if ( $adult_number ) { ?>
                                                             <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?>
                                                             <?php 
-                                                            echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
+                                                            echo ' ' . esc_html( apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
                                                             ?>
                                                             </li>
                                                         <?php } ?>
@@ -822,7 +822,7 @@ class Rooms {
                                                                 <?php } ?>
                                                                 <?php if ( $adult_number ) { ?>
                                                                     <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php 
-                                                                    echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
+                                                                    echo ' ' . esc_html( apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
                                                                     ?>
                                                                     </li>
                                                                 <?php } ?>
@@ -901,7 +901,7 @@ class Rooms {
                                                         <?php } ?>
                                                         <?php if ( $adult_number ) { ?>
                                                             <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php 
-                                                            echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
+                                                            echo ' ' . esc_html( apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
                                                             ?>
                                                             </li>
                                                         <?php } ?>
@@ -974,12 +974,12 @@ class Rooms {
                     <?php echo 'yes' === $container ? '<div class="tf-container">' : ''; ?>
                     <h2 class="section-heading"><?php echo ! empty( $meta['room-section-title'] ) ? esc_html( $meta['room-section-title'] ) : ''; ?></h2>
                     
-                    <?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
+                    <?php do_action( 'tourfic_hotel_features_filter', $rm_features, 10 ) ?>
                     <div class="tf-room-type" id="rooms">
                         <div class="tf-room-table hotel-room-wrap">
                             <div id="tour_room_details_loader">
                                 <div id="tour-room-details-loader-img">
-                                    <img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/loader.gif" alt="">
+                                    <img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ) ?>images/loader.gif" alt="">
                                 </div>
                             </div>
                             <table class="availability-table" cellpadding="0" cellspacing="0">
@@ -1008,7 +1008,7 @@ class Rooms {
                                         $adult_number    = ! empty( $room['adult'] ) ? $room['adult'] : '0';
                                         $child_number    = ! empty( $room['child'] ) ? $room['child'] : '0';
                                         $total_person    = $adult_number + $child_number;
-                                        $pricing_by      = apply_filters( 'tf_room_pricing_mode', 1, $room );
+                                        $pricing_by      = apply_filters( 'tourfic_room_pricing_mode', 1, $room );
                                         $avil_by_date    = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : false;
                                         $multi_by_date   = ! empty( $room['price_multi_day'] ) ?  $room['price_multi_day'] : false;
                                         $child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
@@ -1282,7 +1282,7 @@ class Rooms {
                         <div class="tf-apartment-room-item">
                             <div class="tf-apartment-room-item-thumb">
                                 <a href="#" class="tf-apt-room-qv-desgin-1" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
-                                    <img src="<?php echo !empty($room['thumbnail']) ? esc_url( $room['thumbnail'] ) : esc_url(TF_ASSETS_APP_URL) . "images/feature-default.jpg" ?>" alt="room-thumbnail">
+                                    <img src="<?php echo !empty($room['thumbnail']) ? esc_url( $room['thumbnail'] ) : esc_url(TOURFIC_ASSETS_APP_URL) . "images/feature-default.jpg" ?>" alt="room-thumbnail">
                                 </a>
                             </div>
                             <div class="tf-apartment-room-item-content">
@@ -1299,7 +1299,7 @@ class Rooms {
                     <!-- Loader Image -->
                     <div id="tour_room_details_loader">
                         <div id="tour-room-details-loader-img">
-                            <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
+                            <img src="<?php echo esc_url(TOURFIC_ASSETS_APP_URL) ?>images/loader.gif" alt="">
                         </div>
                     </div>
                     </div>
@@ -1319,7 +1319,7 @@ class Rooms {
                             <div class="tf-apartment-room-item">
                                 <div class="tf-apartment-room-item-thumb">
                                     <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
-                                        <img src="<?php echo ! empty( $room['thumbnail'] ) ? esc_url( $room['thumbnail'] ) : esc_url( TF_ASSETS_APP_URL . "images/feature-default.jpg" ) ?>" alt="room-thumbnail">
+                                        <img src="<?php echo ! empty( $room['thumbnail'] ) ? esc_url( $room['thumbnail'] ) : esc_url( TOURFIC_ASSETS_APP_URL . "images/feature-default.jpg" ) ?>" alt="room-thumbnail">
                                     </a>
                                 </div>
                                 <div class="tf-apartment-room-item-content">
@@ -1337,11 +1337,11 @@ class Rooms {
                             </div>
                         <?php endforeach; ?>
                     </div>
-                    <div id="tf_apt_room_details_qv" class=""></div>
+                    <div id="tourfic_apt_room_details_qv" class=""></div>
                     <!-- Loader Image -->
                     <div id="tour_room_details_loader">
                         <div id="tour-room-details-loader-img">
-                            <img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/loader.gif" alt="">
+                            <img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ) ?>images/loader.gif" alt="">
                         </div>
                     </div>
                 </div>

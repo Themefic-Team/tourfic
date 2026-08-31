@@ -110,7 +110,7 @@ tf_vendor_email_assert(
 	'Single traveler records with custom-only field keys must be treated as one traveler.'
 );
 tf_vendor_email_assert(
-	false !== strpos( $source, 'tf_tour_get_traveler_document_download_url' ),
+	false !== strpos( $source, 'tourfic_tour_get_traveler_document_download_url' ),
 	'Traveler file fields must use the secure document download URL helper.'
 );
 tf_vendor_email_assert(

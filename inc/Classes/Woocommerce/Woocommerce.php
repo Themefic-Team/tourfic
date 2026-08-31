@@ -232,7 +232,7 @@ class Woocommerce {
 				$infants    = $item->get_meta( 'Infants', true );
 	
 				if ( $tour_date ) {
-					list( $tour_in, $tour_out ) = tf_split_date_range( $tour_date, false );
+					list( $tour_in, $tour_out ) = tourfic_split_date_range( $tour_date, false );
 				}
 	
 				$tf_integration_order_data[] = [
@@ -265,7 +265,7 @@ class Woocommerce {
 				$due               = $item->get_meta( '_due_price', true );
 	
 				if ( $check_in_out_date ) {
-					list( $check_in, $check_out ) = tf_split_date_range( $check_in_out_date );
+					list( $check_in, $check_out ) = tourfic_split_date_range( $check_in_out_date );
 				}
 	
 				$tf_integration_order_data[] = [
@@ -328,8 +328,8 @@ class Woocommerce {
 		 * @author Jahid
 		 */
 	
-		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
-		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+		do_action( 'tourfic_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
+		do_action( 'tourfic_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
 	
 	}
 

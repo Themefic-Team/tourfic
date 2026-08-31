@@ -2,7 +2,7 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-TF_Taxonomy_Metabox::taxonomy( 'tf_apartment_feature', array(
+Tourfic_Taxonomy_Metabox::taxonomy( 'tf_apartment_feature', array(
 	'title'    => '',
 	'taxonomy' => 'apartment_feature',
 	'fields'   => array(

@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
         use \Tourfic\Classes\Helper;
         use Tourfic\App\Templates\Components\Hotel\Archive\Listings;
 
-        do_action('tf_before_container');
+        do_action('tourfic_before_container');
         $tourfic_hotel_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_3_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_3_bannar'] : '';
         ?>
 

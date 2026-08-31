@@ -2,8 +2,8 @@
 //don't load directly
 defined( 'ABSPATH' ) || exit;
 //backup import export field
-if ( ! class_exists( 'TF_Backup' ) ) {
-    class TF_Backup extends TF_Fields {
+if ( ! class_exists( 'Tourfic_Backup' ) ) {
+    class Tourfic_Backup extends Tourfic_Fields {
         public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
             parent::__construct( $field, $value, $settings_id, $parent_field  );
         }

@@ -5,8 +5,8 @@ use Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'TF_imageselect' ) ) {
-	class TF_imageselect extends TF_Fields {
+if ( ! class_exists( 'Tourfic_imageselect' ) ) {
+	class Tourfic_imageselect extends Tourfic_Fields {
 
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field );

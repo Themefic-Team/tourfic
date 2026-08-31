@@ -63,7 +63,7 @@ class Highlights {
 							<?php if ( ! empty( $meta['hightlights_thumbnail'] ) ) : ?>
 								<img src="<?php echo esc_url( $meta['hightlights_thumbnail'] ); ?>" alt="<?php esc_attr_e( 'Highlights Icon', 'tourfic' ); ?>" />
 							<?php else : ?>
-								<img src="<?php echo esc_url( TF_ASSETS_APP_URL ) . 'images/tour-highlights.png'; ?>" alt="<?php esc_attr_e( 'Highlights Icon', 'tourfic' ); ?>" />
+								<img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ) . 'images/tour-highlights.png'; ?>" alt="<?php esc_attr_e( 'Highlights Icon', 'tourfic' ); ?>" />
 							<?php endif; ?>
 						</div>
 						<div class="ft-highlights-details">

@@ -5,8 +5,8 @@ use Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'TF_text' ) ) {
-	class TF_tab extends TF_Fields {
+if ( ! class_exists( 'Tourfic_text' ) ) {
+	class Tourfic_tab extends Tourfic_Fields {
 
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field );
@@ -99,7 +99,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 									$tf_option->field( $field, $value, $this->settings_id, $parent );
 								}
 								?>
-								<?php do_action("tf-" . $parent_id . '-after-tab-content') ?>
+								<?php do_action("tourfic-" . $parent_id . '-after-tab-content') ?>
                             </div>
 						<?php endforeach; ?>
 					<?php endif; ?>

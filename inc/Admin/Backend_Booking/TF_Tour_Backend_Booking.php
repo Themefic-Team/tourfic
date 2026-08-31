@@ -116,8 +116,8 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 
 		parent::__construct($this->args);
 
-		add_action( 'wp_ajax_tf_tour_date_time_update', array( $this, 'tf_tour_date_time_update' ) );
-		add_action( 'wp_ajax_tf_backend_tour_booking', array( $this, 'backend_booking_callback' ) );
+		add_action( 'wp_ajax_tourfic_tour_date_time_update', array( $this, 'tf_tour_date_time_update' ) );
+		add_action( 'wp_ajax_tourfic_backend_tour_booking', array( $this, 'backend_booking_callback' ) );
 	}
 
 	public function tf_tour_date_time_update() {
@@ -144,7 +144,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		$adult_price          = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : false;
 		$child_price          = ! empty( $meta['child_price'] ) ? $meta['child_price'] : false;
 		$infant_price         = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
-		$tour_extras          = apply_filters( 'tf_tour_extra_meta', null, $tour_id, $meta );
+		$tour_extras          = apply_filters( 'tourfic_tour_extra_meta', null, $tour_id, $meta );
 
 
 		// Single Template Check
@@ -346,7 +346,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			if ( ! array_key_exists( 'errors', $res['response'] ) || count( $res['response']['errors'] ) == 0 ) {
 				$order_id = Helper::tf_set_order( $order_data );
 				if ( ! empty( $order_id ) ) {
-					do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
+					do_action( 'tourfic_offline_payment_booking_confirmation', $order_id, $order_data );
 				}
 
 				if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
@@ -358,7 +358,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 					 * @param array  $order_data The items in the order.
 					 * @param string $type Order type
 					 */
-					apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order_data, '' );
+					apply_filters( 'tourfic_after_booking_completed_calendar_data', $order_id, $order_data, '' );
 				}
 				$response['success'] = true;
 				$response['message'] = esc_html__( 'Your booking has been successfully submitted.', 'tourfic' );
@@ -509,7 +509,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		// Tour extra
 		$tour_extra_total     = 0;
 		$tour_extra_title_arr = [];
-		$tour_extra_meta      = apply_filters( 'tf_tour_extra_meta', null, $post_id, $meta );
+		$tour_extra_meta      = apply_filters( 'tourfic_tour_extra_meta', null, $post_id, $meta );
 		if ( ! empty( $tour_extra_meta ) ) {
 			foreach ( $tours_extra as $extra ) {
 				$tour_extra_pricetype = ! empty( $tour_extra_meta[ $extra ]['price_type'] ) ? $tour_extra_meta[ $extra ]['price_type'] : 'fixed';

@@ -28,7 +28,7 @@ class Itinerary {
 			return;
 		}
 
-		$has_itinerary_renderer = has_action( 'after_itinerary_builder' );
+		$has_itinerary_renderer = has_action( 'tourfic_after_itinerary_builder' );
 		$itinerary_map          = $has_itinerary_renderer && ! empty( Helper::tfopt( 'itinerary_map' ) ) ? Helper::tfopt( 'itinerary_map' ) : 0;
 		$style         = ! empty( $settings['itinerary_style'] ) ? $settings['itinerary_style'] : 'style1';
 		$tf_openstreet_map         = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : 'default';
@@ -65,8 +65,8 @@ class Itinerary {
 		?>
 		<div class="tf-single-template__one tf-single-itinerary-style1 sp-0">
 			<?php
-			if ( has_action( 'after_itinerary_builder' ) ) {
-				do_action( 'after_itinerary_builder', $itineraries, $itinerary_map, $settings, $style );
+			if ( has_action( 'tourfic_after_itinerary_builder' ) ) {
+				do_action( 'tourfic_after_itinerary_builder', $itineraries, $itinerary_map, $settings, $style );
 			} else {
 				if ( $itineraries ) { ?>
 				<div class="tf-itinerary-wrapper tf-mb-50 tf-template-section">
@@ -132,8 +132,8 @@ class Itinerary {
 		?>
 		<div class="tf-single-template__two tf-single-itinerary-style2">
 			<?php
-			if ( has_action( 'after_itinerary_builder' ) ) {
-				do_action( 'after_itinerary_builder', $itineraries, $itinerary_map, $settings, $style );
+			if ( has_action( 'tourfic_after_itinerary_builder' ) ) {
+				do_action( 'tourfic_after_itinerary_builder', $itineraries, $itinerary_map, $settings, $style );
 			} else {
 				if ( $itineraries ) { ?>
 					<div class="tf-itinerary-wrapper" id="tf-tour-itinerary">
@@ -192,8 +192,8 @@ class Itinerary {
 		?>
 		<?php echo 'yes' === $wrapper ? '<div class="tf-single-template__legacy tf-single-itinerary-legacy sp-0">' : ''; ?>
 			<?php
-			if ( has_action( 'after_itinerary_builder' ) ) {
-				do_action( 'after_itinerary_builder', $itineraries, $itinerary_map, $settings, $style );
+			if ( has_action( 'tourfic_after_itinerary_builder' ) ) {
+				do_action( 'tourfic_after_itinerary_builder', $itineraries, $itinerary_map, $settings, $style );
 			} else {
 				if ( $itineraries ) { ?>
 					<div class="tf-travel-itinerary-wrapper sp-50">

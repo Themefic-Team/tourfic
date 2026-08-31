@@ -207,7 +207,7 @@ class TF_Recent_Blog extends \Elementor\Widget_Base {
 		if(is_array($cats)){
 			$cats = implode(',',$cats);
 		}
-        echo do_shortcode('[tf_recent_blog title="'.$title.'" subtitle="'.$subtitle.'" cats="'.$cats.'" count="' .$count. '"]');
+        echo do_shortcode('[tourfic_recent_blog title="'.$title.'" subtitle="'.$subtitle.'" cats="'.$cats.'" count="' .$count. '"]');
 
 
 	}

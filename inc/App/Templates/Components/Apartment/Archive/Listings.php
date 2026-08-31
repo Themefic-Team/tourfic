@@ -70,11 +70,11 @@ class Listings {
             <!-- Loader Image -->
             <div id="tour_room_details_loader">
                 <div id="tour-room-details-loader-img">
-                    <img src="<?php echo esc_url( TF_ASSETS_APP_URL ); ?>images/loader.gif" alt="">
+                    <img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ); ?>images/loader.gif" alt="">
                 </div>
             </div>
 
-            <?php do_action( 'tf_apartment_archive_card_items_before' ); ?>
+            <?php do_action( 'tourfic_apartment_archive_card_items_before' ); ?>
 
             <!--Available rooms start -->
             <div class="tf-archive-available-rooms tf-available-rooms archive_ajax_result">
@@ -88,7 +88,7 @@ class Listings {
                         if ( $is_apartment_featured ) {
                             echo wp_kses(
                                 apply_filters(
-                                    'tf_apartment_archive_single_featured_card_design_one',
+                                    'tourfic_apartment_archive_single_featured_card_design_one',
                                     Apartment::tf_apartment_archive_single_item( [ 1, 0, 0, '' ], $settings )
                                 ),
                                 Helper::tf_custom_wp_kses_allow_tags()
@@ -106,7 +106,7 @@ class Listings {
                         if ( ! $is_apartment_featured ) {
                             echo wp_kses(
                                 apply_filters(
-                                    'tf_apartment_archive_single_card_design_one',
+                                    'tourfic_apartment_archive_single_card_design_one',
                                     Apartment::tf_apartment_archive_single_item( [ 1, 0, 0, '' ], $settings )
                                 ),
                                 Helper::tf_custom_wp_kses_allow_tags()
@@ -128,7 +128,7 @@ class Listings {
             </div>
             <!-- Available rooms end -->
 
-            <?php do_action( 'tf_apartment_archive_card_items_after' ); ?>
+            <?php do_action( 'tourfic_apartment_archive_card_items_after' ); ?>
         </div>
 
         <div class="tf-popup-wrapper tf-hotel-popup">
@@ -188,7 +188,7 @@ class Listings {
                             <div class="tf-container">
                                 <div class="tf-notice tf-mt-24 tf-mb-30">
                                     <?php
-                                    if ( current_user_can( 'administrator' ) ) {
+                                    if ( current_user_can( 'manage_options' ) ) {
                                         echo '<p>' . esc_html__( 'Google Maps is selected but the API key is missing. Please configure the API key ', 'tourfic' ) . '<a href="' . esc_url( admin_url( 'admin.php?page=tf_settings#tab=map_settings' ) ) . '" target="_blank">' . esc_html__( 'Map Settings', 'tourfic' ) . '</a></p>';
                                     } else {
                                         echo '<p>' . esc_html__( 'Access is restricted as Google Maps API key is not configured. Please contact the site administrator.', 'tourfic' ) . '</p>';
@@ -201,7 +201,7 @@ class Listings {
                                 <!-- Loader Image -->
                                 <div id="tf_ajax_searchresult_loader">
                                     <div id="tf-searchresult-loader-img">
-                                        <img src="<?php echo esc_url( TF_ASSETS_APP_URL ); ?>images/loader.gif" alt="">
+                                        <img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ); ?>images/loader.gif" alt="">
                                     </div>
                                 </div>
 
@@ -320,7 +320,7 @@ class Listings {
                                                             if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
                                                                 the_post_thumbnail( 'full' );
                                                             } else {
-                                                                echo '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+                                                                echo '<img src="' . esc_url( TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
                                                             }
                                                             ?>
                                                         </a>
@@ -360,7 +360,7 @@ class Listings {
 
                                             echo wp_kses(
                                                 apply_filters(
-                                                    'tf_apartment_archive_single_featured_card_design_one',
+                                                    'tourfic_apartment_archive_single_featured_card_design_one',
                                                     Apartment::tf_apartment_archive_single_item( [ 1, 0, 0, '' ], $settings )
                                                 ),
                                                 Helper::tf_custom_wp_kses_allow_tags()
@@ -398,7 +398,7 @@ class Listings {
                                                             if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
                                                                 the_post_thumbnail( 'full' );
                                                             } else {
-                                                                echo '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+                                                                echo '<img src="' . esc_url( TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
                                                             }
                                                             ?>
                                                         </a>
@@ -438,7 +438,7 @@ class Listings {
 
                                             echo wp_kses(
                                                 apply_filters(
-                                                    'tf_apartment_archive_single_card_design_one',
+                                                    'tourfic_apartment_archive_single_card_design_one',
                                                     Apartment::tf_apartment_archive_single_item( [ 1, 0, 0, '' ], $settings )
                                                 ),
                                                 Helper::tf_custom_wp_kses_allow_tags()
@@ -472,7 +472,7 @@ class Listings {
                                     </svg>
                                     <span><?php echo esc_html__( 'List view', 'tourfic' ); ?></span>
                                 </a>
-                                <div id="map-marker" data-marker="<?php echo esc_url( TF_ASSETS_URL . 'app/images/cluster-marker.png' ); ?>"></div>
+                                <div id="map-marker" data-marker="<?php echo esc_url( TOURFIC_ASSETS_URL . 'app/images/cluster-marker.png' ); ?>"></div>
                                 <div class="tf-hotel-archive-map-wrap">
                                     <div id="tf-hotel-archive-map"></div>
                                 </div>
@@ -482,7 +482,7 @@ class Listings {
                         <div class="tf-container">
                             <div class="tf-notice tf-mt-24 tf-mb-30">
                                 <?php
-                                if ( current_user_can( 'administrator' ) ) {
+                                if ( current_user_can( 'manage_options' ) ) {
                                     echo '<p>' . esc_html__( 'Google Maps is not selected. Please configure it ', 'tourfic' ) . '<a href="' . esc_url( admin_url( 'admin.php?page=tf_settings#tab=map_settings' ) ) . '" target="_blank">' . esc_html__( 'Map Settings', 'tourfic' ) . '</a></p>';
                                 } else {
                                     echo '<p>' . esc_html__( 'Access is restricted as Google Maps is not enabled. Please contact the site administrator', 'tourfic' ) . '</p>';
@@ -574,7 +574,7 @@ class Listings {
                 </div>
             </div>
 
-            <?php do_action( 'tf_apartment_archive_card_items_before' ); ?>
+            <?php do_action( 'tourfic_apartment_archive_card_items_before' ); ?>
 
             <div class="archive_ajax_result <?php echo 'grid' === $listing_layout ? esc_attr( 'tours-grid' ) : ''; ?> tf-grid-<?php echo esc_attr( $grid_column ); ?>">
                 <?php
@@ -614,9 +614,8 @@ class Listings {
                 <?php endif; ?>
             </div>
 
-            <?php do_action( 'tf_apartment_archive_card_items_after' ); ?>
+            <?php do_action( 'tourfic_apartment_archive_card_items_after' ); ?>
         </div>
         <?php
     }
 }
-

@@ -365,7 +365,7 @@
             setCarPartialPayment($this);
 
             var data = {
-                action: 'tf_car_booking_pupup',
+                action: 'tourfic_car_booking_pupup',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 pickup_date: pickup_date,
@@ -410,7 +410,7 @@
             let dropoff_time = $this.closest('.tf-booking-btn').find('#dropoff_time').val();
 
             var data = {
-                action: 'tf_car_booking_pupup',
+                action: 'tourfic_car_booking_pupup',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 pickup_date: pickup_date,
@@ -633,7 +633,7 @@
             let partial_payment = getCarPartialPayment($this);
 
             var data = {
-                action: 'tf_car_booking',
+                action: 'tourfic_car_booking',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 pickup: pickup,
@@ -743,7 +743,7 @@
             let form = $(this),
                 submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
-            formData.append('action', 'tf_car_search');
+            formData.append('action', 'tourfic_car_search');
             formData.append('_nonce', tf_params.nonce);
 
             if (formData.get('from') == null || formData.get('to') == null) {
@@ -801,7 +801,7 @@
             let post_id = $this.closest('.tf-booking-btn').find('#post_id').val();
 
             var data = {
-                action: 'tf_car_booking',
+                action: 'tourfic_car_booking',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 pickup: pickup,
@@ -915,7 +915,7 @@
             }
 
             var data = {
-                action: 'tf_car_booking',
+                action: 'tourfic_car_booking',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 pickup: pickup,
@@ -1020,7 +1020,7 @@
                 return;
             }
             var data = {
-                action: 'tf_car_price_calculation',
+                action: 'tourfic_car_price_calculation',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 pickup_date: pickup_date,

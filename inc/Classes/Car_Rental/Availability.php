@@ -9,8 +9,8 @@ class Availability {
     // Car Available or Not
 	    static function tf_car_inventory($post_id, $meta, $tf_pickup_date = '', $tf_dropoff_date = '', $tf_pickup_time = '', $tf_dropoff_time = '') {
 	        $post_id = absint( $post_id );
-	        if ( function_exists( 'tf_normalize_car_meta' ) ) {
-	            $meta = tf_normalize_car_meta( $meta );
+	        if ( function_exists( 'tourfic_normalize_car_meta' ) ) {
+	            $meta = tourfic_normalize_car_meta( $meta );
 	        }
 
         $pricing_by = !empty($meta["price_by"]) ? $meta["price_by"] : 'day';

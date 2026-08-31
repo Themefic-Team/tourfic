@@ -11,7 +11,7 @@ use Tourfic\App\Templates\Components\Tour\Archive\Listings;
     <div class="tf-container">
         <div class="tf-row tf-archive-inner tf-flex">
             <div class="tf-page-content tf-archive-left tf-result-previews">
-                <?php do_action( 'tf_before_container' ); ?>
+                <?php do_action( 'tourfic_before_container' ); ?>
                 <?php Listings::render_design_1(); ?>
             </div>
 

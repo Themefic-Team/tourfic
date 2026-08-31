@@ -137,7 +137,7 @@
             }
 
             let formData = new FormData(form[0]);
-            formData.append('action', 'tf_setup_wizard_submit');
+            formData.append('action', 'tourfic_setup_wizard_submit');
 
             $.ajax({
                 url: tf_admin_params.ajax_url,
@@ -194,7 +194,7 @@
                 }
                 $('.tf-setup-travelfic-theme-btn').addClass('tf-btn-loading');
                 var data = {
-                    action: "tf_theme_installing",
+                    action: "tourfic_theme_installing",
                     _ajax_nonce: tf_admin_params.tf_nonce,
                     slug: theme_slug,
                 };
@@ -232,7 +232,7 @@
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: "tf_setup_travelfic_theme_active",
+                    action: "tourfic_setup_travelfic_theme_active",
                     _ajax_nonce: tf_admin_params.tf_nonce,
                     slug: theme_slug,
                 },
@@ -264,7 +264,7 @@
                 $this.addClass('tf-btn-loading');
 
                 var data = {
-                    action: "tf_travelfic_toolkit_installing",
+                    action: "tourfic_travelfic_toolkit_installing",
                     _ajax_nonce: tf_admin_params.tf_nonce,
                     slug: plugin_slug,
                 };
@@ -291,7 +291,7 @@
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: "tf_travelfic_toolkit_activate",
+                    action: "tourfic_travelfic_toolkit_activate",
                     _ajax_nonce: tf_admin_params.tf_nonce,
                     slug: plugin_slug,
                 },
@@ -316,7 +316,7 @@
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: "tf_ajax_install_woo",
+                    action: "tourfic_ajax_install_woo",
                     _ajax_nonce: tf_admin_params.tf_nonce,
                     slug: 'woocommerce',
                 },
@@ -346,7 +346,7 @@
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: "tf_ajax_activate_woo",
+                    action: "tourfic_ajax_activate_woo",
                     _ajax_nonce: tf_admin_params.tf_nonce,
                     slug: 'woocommerce',
                 },

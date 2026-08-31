@@ -2,8 +2,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'TF_Fields' ) ) {
-	class TF_Fields {
+if ( ! class_exists( 'Tourfic_Fields' ) ) {
+	class Tourfic_Fields {
 
 		public $field;
 		public $value;

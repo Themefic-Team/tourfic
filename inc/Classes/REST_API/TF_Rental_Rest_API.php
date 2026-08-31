@@ -4,8 +4,8 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 
-if ( ! class_exists( 'TF_Rental_Rest_API' ) ) {
-	class TF_Rental_Rest_API extends TF_Rest_API {
+if ( ! class_exists( 'Tourfic_Rental_Rest_API' ) ) {
+	class Tourfic_Rental_Rest_API extends Tourfic_Rest_API {
 
 		/*
 		 * instance
@@ -118,4 +118,4 @@ if ( ! class_exists( 'TF_Rental_Rest_API' ) ) {
 	}
 }
 
-TF_Rental_Rest_API::get_instance();
+Tourfic_Rental_Rest_API::get_instance();

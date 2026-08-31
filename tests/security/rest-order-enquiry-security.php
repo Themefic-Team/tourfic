@@ -139,7 +139,7 @@ tf_security_assert(
 
 $free_settings = tf_security_method_body( tf_security_file( $files['free_rest'] ), 'tf_get_tf_settings' );
 $settings_permission_offset = strpos( $free_settings, 'tf_settings_permission_callback' );
-$settings_read_offset       = strpos( $free_settings, "get_option( 'tf_settings' )" );
+$settings_read_offset       = strpos( $free_settings, "get_option( 'tourfic_settings' )" );
 tf_security_assert( false !== $settings_permission_offset, 'Free settings handler must repeat its capability check.' );
 tf_security_assert(
 	false !== $settings_read_offset,

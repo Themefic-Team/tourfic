@@ -25,7 +25,7 @@
             e.preventDefault();
             var $this = $(this);
             var data = {
-                action: 'tf_delete_old_review_fields',
+                action: 'tourfic_delete_old_review_fields',
                 deleteAll: $(this).data('delete-all'),
                 _ajax_nonce: tf_admin_params.tf_nonce
             };
@@ -60,7 +60,7 @@
             var post_id = $("#post_ID").val();
             var meta_field = $this.closest('.tf-repeater-content-wrap').find('.tf-order_id input').attr('name');
             var data = {
-                action: 'tf_remove_room_order_ids',
+                action: 'tourfic_remove_room_order_ids',
                 meta_field: meta_field,
                 post_id: post_id,
                 _ajax_nonce: tf_admin_params.tf_nonce
@@ -140,7 +140,7 @@
             current.addClass('updating-message').text(tf_admin_params.installing);
 
             var data = {
-                action: 'tf_ajax_install_plugin',
+                action: 'tourfic_ajax_install_plugin',
                 _ajax_nonce: tf_admin_params.tf_nonce,
                 slug: plugin_slug,
             };
@@ -195,7 +195,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_ticket_status_change',
+                        action: 'tourfic_ticket_status_change',
                         _ajax_nonce: tf_admin_params.tf_nonce,
                         status: "check in",
                         order_unique_id: order_unique_id,
@@ -211,7 +211,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_ticket_status_change',
+                        action: 'tourfic_ticket_status_change',
                         _ajax_nonce: tf_admin_params.tf_nonce,
                         status: "",
                         order_unique_id: order_unique_id,
@@ -239,7 +239,7 @@
                 type: 'POST',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: 'tf_duplicate_post_data',
+                    action: 'tourfic_duplicate_post_data',
                     postID: postID,
                     postType: postType,
                     security: nonce
@@ -361,7 +361,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_check_available_hotel',
+                        action: 'tourfic_check_available_hotel',
                         _nonce: tf_admin_params.tf_nonce,
                         from: from,
                         to: to,
@@ -412,7 +412,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_check_available_room',
+                        action: 'tourfic_check_available_room',
                         _nonce: tf_admin_params.tf_nonce,
                         hotel_id: hotel_id,
                         from: from,
@@ -474,7 +474,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_update_room_fields',
+                        action: 'tourfic_update_room_fields',
                         _nonce: tf_admin_params.tf_nonce,
                         hotel_id: hotel_id,
                         room_id: room_id,
@@ -528,7 +528,7 @@
             let btn = $(this);
             let form = btn.closest('form.tf-backend-hotel-booking');
             let formData = new FormData(form[0]);
-            formData.append('action', 'tf_backend_hotel_booking');
+            formData.append('action', 'tourfic_backend_hotel_booking');
             let requiredFields = [
                 'tf_hotel_booked_by', 'tf_customer_first_name', 'tf_customer_email', 'tf_customer_phone', 'tf_customer_country', 'tf_customer_address', 'tf_customer_city', 'tf_customer_state', 'tf_customer_zip', 'tf_hotel_date[from]', 'tf_hotel_date[to]', 'tf_available_hotels', 'tf_available_rooms', 'tf_hotel_rooms_number', 'tf_hotel_adults_number', 'tf_hotel_children_number'];
 
@@ -617,7 +617,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_tour_date_time_update',
+                        action: 'tourfic_tour_date_time_update',
                         _nonce: tf_admin_params.tf_nonce,
                         tour_id: tourId,
                     },
@@ -714,7 +714,7 @@
             let btn = $(this);
             let form = btn.closest('form.tf-backend-tour-booking');
             let formData = new FormData(form[0]);
-            formData.append('action', 'tf_backend_tour_booking');
+            formData.append('action', 'tourfic_backend_tour_booking');
             let requiredFields = ['tf_tours_booked_by', 'tf_customer_first_name', 'tf_customer_email', 'tf_customer_phone', 'tf_customer_country', 'tf_customer_address', 'tf_customer_city', 'tf_customer_state', 'tf_customer_zip', 'tf_tour_date', 'tf_available_tours', 'tf_tour_adults_number', 'tf_tour_children_number'];
 
             $.ajax({
@@ -791,7 +791,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_check_available_apartment',
+                        action: 'tourfic_check_available_apartment',
                         _nonce: tf_admin_params.tf_nonce,
                         from: fromValue,
                         to: toValue,
@@ -841,7 +841,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_check_apartment_aditional_fees',
+                        action: 'tourfic_check_apartment_aditional_fees',
                         _nonce: tf_admin_params.tf_nonce,
                         apartment_id: apartment_id,
                         from: from,
@@ -893,7 +893,7 @@
             let btn = $(this);
             let form = btn.closest('form.tf-backend-apartment-booking');
             let formData = new FormData(form[0]);
-            formData.append('action', 'tf_backend_apartment_booking');
+            formData.append('action', 'tourfic_backend_apartment_booking');
             let requiredFields = [
                 'tf_apartment_booked_by',
                 'tf_customer_first_name',
@@ -1000,6 +1000,17 @@
                 y: 'bottom',
             },
         });
+
+        const getBookingNonce = () => $('[data-booking-nonce]').first().attr('data-booking-nonce') || '';
+        const getFilterNonce = () => $('.tf_booking_details_wrap').attr('data-filter-nonce') || '';
+        const redirectToFilteredBookings = (parameter, value) => {
+            const currentURL = new URL(window.location.href);
+            currentURL.searchParams.delete('paged');
+            currentURL.searchParams.set(parameter, value);
+            currentURL.searchParams.set('nonce', 'list');
+            currentURL.searchParams.set('_wpnonce', getFilterNonce());
+            window.location.href = currentURL.toString();
+        };
 
         // Select Form
         $('.tf-filter-selection').on("click", function() {
@@ -1142,8 +1153,8 @@
             var $this = $(this);
 
             var formData = new FormData(this);
-            formData.append('action', 'tf_visitor_details_edit');
-            formData.append('_ajax_nonce', tf_admin_params.tf_nonce);
+            formData.append('action', 'tourfic_visitor_details_edit');
+            formData.append('_ajax_nonce', getBookingNonce());
             $.ajax({
                 type: 'post',
                 url: tf_admin_params.ajax_url,
@@ -1180,10 +1191,10 @@
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: 'tf_checkinout_details_edit',
+                    action: 'tourfic_checkinout_details_edit',
                     order_id: order_id,
                     checkinout: selected_value,
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: getBookingNonce()
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -1215,10 +1226,10 @@
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: 'tf_order_status_edit',
+                    action: 'tourfic_order_status_edit',
                     order_id: order_id,
                     status: selected_value,
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: getBookingNonce()
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -1251,7 +1262,7 @@
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: 'tf_order_status_email_resend',
+                    action: 'tourfic_order_status_email_resend',
                     order_id: order_id,
                     status: selected_value,
                     id : db_id,
@@ -1318,10 +1329,10 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_order_bulk_action_edit',
+                        action: 'tourfic_order_bulk_action_edit',
                         orders: order_list,
                         status: bulk_action,
-                        _ajax_nonce: tf_admin_params.tf_nonce
+                        _ajax_nonce: getBookingNonce()
                     },
                     beforeSend: function (data) {
                         $('.tf-preloader-box').show();
@@ -1351,13 +1362,7 @@
             let id = $("#tf-searching-key").val();
             if(id!==""){
                 $('.tf-preloader-box').show();
-                let currentURL = new URL(window.location.href);
-                currentURL.searchParams.delete("paged");
-                currentURL.searchParams.set("order_id", id);
-                if (!currentURL.searchParams.has("nonce")) {
-                    currentURL.searchParams.set("nonce", tf_admin_params.tf_nonce);
-                }
-                window.location.href = currentURL.toString();
+                redirectToFilteredBookings('order_id', id);
             }
         });
 
@@ -1368,59 +1373,17 @@
         $('.tf-tour-checkinout-options').change(function() {
             let changeValue = $(this).val();
             $('.tf-preloader-box').show();
-            let currentURL = window.location.href;
-            let BaseURL = currentURL.split('?')[0];
-            let queryString = currentURL.split('?')[1];
-
-            let currentURLParams= new URLSearchParams(queryString);
-            currentURLParams.delete("paged");
-            if (currentURLParams.has("checkinout")) {
-                currentURLParams.set("checkinout", changeValue);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }else{
-                currentURLParams.set("checkinout", changeValue);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }
-
-            //Nonce
-            if (!currentURLParams.has("nonce")) {
-                currentURLParams.set("nonce", tf_admin_params.tf_nonce);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }
+            redirectToFilteredBookings('checkinout', changeValue);
         });
 
         /**
          * Filter Post Perameter Passing
          *
          */
-        $('.tf-post-id-filter-options, .tf-hotel-id-filter-options, .tf-apartment-id-filter-options').change(function() {
+        $('.tf-post-id-filter-options, .tf-hotel-id-filter-options, .tf-apartment-id-filter-options, .tf-car-id-filter-options').change(function() {
             let changeValue = $(this).val();
             $('.tf-preloader-box').show();
-            let currentURL = window.location.href;
-            let BaseURL = currentURL.split('?')[0];
-            let queryString = currentURL.split('?')[1];
-
-            let currentURLParams= new URLSearchParams(queryString);
-            currentURLParams.delete("paged");
-            if (currentURLParams.has("post")) {
-                currentURLParams.set("post", changeValue);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }else{
-                currentURLParams.set("post", changeValue);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }
-
-            //Nonce
-            if (!currentURLParams.has("nonce")) {
-                currentURLParams.set("nonce", tf_admin_params.tf_nonce);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }
+            redirectToFilteredBookings('post', changeValue);
         });
 
         /**
@@ -1430,28 +1393,7 @@
         $('.tf-order-payment-status').change(function() {
             let changeValue = $(this).val();
             $('.tf-preloader-box').show();
-            let currentURL = window.location.href;
-            let BaseURL = currentURL.split('?')[0];
-            let queryString = currentURL.split('?')[1];
-
-            let currentURLParams= new URLSearchParams(queryString);
-            currentURLParams.delete("paged");
-            if (currentURLParams.has("payment")) {
-                currentURLParams.set("payment", changeValue);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }else{
-                currentURLParams.set("payment", changeValue);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }
-            
-            //Nonce
-            if (!currentURLParams.has("nonce")) {
-                currentURLParams.set("nonce", tf_admin_params.tf_nonce);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }
+            redirectToFilteredBookings('payment', changeValue);
         });
 
         // Booking View Change
@@ -1494,11 +1436,9 @@
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: 'tf_booking_details_popup',
+                    action: 'tourfic_booking_details_popup',
                     id: $this.attr('data-id'),
-                    type: $this.attr('data-type'),
-                    page: $this.attr('data-page'),
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: getBookingNonce()
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -1529,12 +1469,12 @@
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: 'tf_booking_calendar_filter',
+                    action: 'tourfic_booking_calendar_filter',
                     ostatus: ostatus,
                     checkinout: checkinout,
                     post_id: post_id,
                     post_type: $('#tf_booking_post_type').val(),
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: getBookingNonce()
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -1543,9 +1483,10 @@
                     
                 },
                 success: function (response) {
-                    let data = JSON.parse(response);
                     $('.tf-preloader-box').hide();
-                    initializeCalendar(data.events);
+                    if (response.success) {
+                        initializeCalendar(response.data.events);
+                    }
                 },
                 error: function (data) {
                     console.log(data);
@@ -1566,20 +1507,15 @@
 // Booking Calendar
 function initializeCalendar(eventsSource) {
     var calendarEl = document.getElementById('tf-booking-calendar');
-    var currentPageUrl = window.location.href;
+    if (!calendarEl) {
+        return;
+    }
 
-    // Set the events based on the page URL
     if (!eventsSource) {
-        if (currentPageUrl.includes('post_type=tf_tours&page=tf_tours_booking')) {
-            eventsSource = tf_options.tf_tours_orders;
-        } else if (currentPageUrl.includes('post_type=tf_hotel&page=tf_hotel_booking')) {
-            eventsSource = tf_options.tf_hotels_orders;
-        } else if (currentPageUrl.includes('post_type=tf_apartment&page=tf_apartment_booking')) {
-            eventsSource = tf_options.tf_apartments_orders;
-        } else if (currentPageUrl.includes('post_type=tf_carrental&page=tf_carrental_booking')) {
-            eventsSource = tf_options.tf_cars_orders;
-        } else {
-            eventsSource = []; // Fallback option if none of the conditions match
+        try {
+            eventsSource = JSON.parse(calendarEl.dataset.events || '[]');
+        } catch (error) {
+            eventsSource = [];
         }
     }
 
@@ -1595,11 +1531,11 @@ function initializeCalendar(eventsSource) {
         events: eventsSource,
         eventContent: function(info) {
             var customEl = document.createElement('div');
+            var titleEl = document.createElement('span');
             customEl.classList.add('tf-booking-single-popup');
             customEl.setAttribute('data-id', info.event.id);
-            customEl.setAttribute('data-type', info.event.extendedProps.post_type);
-            customEl.setAttribute('data-page', info.event.extendedProps.page);
-            customEl.innerHTML = `<span>${info.event.title}</span>`;
+            titleEl.textContent = info.event.title;
+            customEl.appendChild(titleEl);
             return { domNodes: [customEl] };
         }
     });
@@ -1661,7 +1597,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 url: tf_admin_params.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'tf_enquiry_bulk_action',
+                    action: 'tourfic_enquiry_bulk_action',
                     selected_items: selected_items,
                     bulk_action: actions,
                     _ajax_nonce: tf_admin_params.tf_nonce
@@ -1693,7 +1629,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 url: tf_admin_params.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'tf_enquiry_filter_post',
+                    action: 'tourfic_enquiry_filter_post',
                     post_id: post_id,
                     post_type: post_type,
                     filter: filter,
@@ -1730,7 +1666,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 url: tf_admin_params.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'tf_enquiry_filter_mail',
+                    action: 'tourfic_enquiry_filter_mail',
                     filter: filter,
                     post_id : post_id,
                     post_type: post_type,
@@ -1766,7 +1702,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 url: tf_admin_params.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'tf_enquiry_reply_email',
+                    action: 'tourfic_enquiry_reply_email',
                     reply_mail: reply_mail,
                     reply_message: reply_message,
                     user_name: userName,
@@ -1849,19 +1785,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
         $(".tf-enquiry-single-row").on("click", function(e) {
 
-            let currentURL = window.location.href;
-            let id = $(".tf-enquiry-id", this).val();
-
             if( $(e.target)[0].className == 'check-column' || $(e.target)[0].className == 'tf-enquiry-name-checkbox'|| $(e.target)[0].className == 'table-name-column' ) {
                 return;
             }
 
-            let updatedUrl = currentURL + "&enquiry_id=" + id + "&action=preview";
-            window.location.href = updatedUrl;
+            let viewUrl = $(this).data("view-url");
+            if (viewUrl) {
+                window.location.href = viewUrl;
+            }
         });
     });
 
 })(jQuery);
+
 })();
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
@@ -2124,7 +2060,7 @@ jQuery(function ($) {
             }
 
             let formData = new FormData(form[0]);
-            formData.append('action', 'tf_setup_wizard_submit');
+            formData.append('action', 'tourfic_setup_wizard_submit');
 
             $.ajax({
                 url: tf_admin_params.ajax_url,
@@ -2181,7 +2117,7 @@ jQuery(function ($) {
                 }
                 $('.tf-setup-travelfic-theme-btn').addClass('tf-btn-loading');
                 var data = {
-                    action: "tf_theme_installing",
+                    action: "tourfic_theme_installing",
                     _ajax_nonce: tf_admin_params.tf_nonce,
                     slug: theme_slug,
                 };
@@ -2219,7 +2155,7 @@ jQuery(function ($) {
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: "tf_setup_travelfic_theme_active",
+                    action: "tourfic_setup_travelfic_theme_active",
                     _ajax_nonce: tf_admin_params.tf_nonce,
                     slug: theme_slug,
                 },
@@ -2251,7 +2187,7 @@ jQuery(function ($) {
                 $this.addClass('tf-btn-loading');
 
                 var data = {
-                    action: "tf_travelfic_toolkit_installing",
+                    action: "tourfic_travelfic_toolkit_installing",
                     _ajax_nonce: tf_admin_params.tf_nonce,
                     slug: plugin_slug,
                 };
@@ -2278,7 +2214,7 @@ jQuery(function ($) {
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: "tf_travelfic_toolkit_activate",
+                    action: "tourfic_travelfic_toolkit_activate",
                     _ajax_nonce: tf_admin_params.tf_nonce,
                     slug: plugin_slug,
                 },
@@ -2303,7 +2239,7 @@ jQuery(function ($) {
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: "tf_ajax_install_woo",
+                    action: "tourfic_ajax_install_woo",
                     _ajax_nonce: tf_admin_params.tf_nonce,
                     slug: 'woocommerce',
                 },
@@ -2333,7 +2269,7 @@ jQuery(function ($) {
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: "tf_ajax_activate_woo",
+                    action: "tourfic_ajax_activate_woo",
                     _ajax_nonce: tf_admin_params.tf_nonce,
                     slug: 'woocommerce',
                 },
@@ -2407,7 +2343,7 @@ jQuery(function($) {
 
 	function loadKeys() {
 		$.post(config.ajaxUrl, {
-			action: 'tf_get_api_keys',
+			action: 'tourfic_get_api_keys',
 			nonce: config.nonce
 		}).done(function(response) {
 			if (response && response.success) {
@@ -2416,11 +2352,24 @@ jQuery(function($) {
 		});
 	}
 
+	function showGeneratedKey(key) {
+		if (!key || !key.api_key) {
+			return;
+		}
+
+		$('#tf-api-generated-credentials')
+			.html(
+				'<p><strong>' + esc(t('apiKey', 'API Key:')) + '</strong> <code>' + esc(key.api_key) + '</code></p>' +
+				'<p class="description">' + esc(t('saveApiKey', 'Copy this key now. It will not be shown again.')) + '</p>'
+			)
+			.show();
+	}
+
 	$('#tf-generate-api-key-form').on('submit', function(event) {
 		event.preventDefault();
 
 		const data = $(this).serializeArray();
-		data.push({ name: 'action', value: 'tf_generate_api_key' });
+		data.push({ name: 'action', value: 'tourfic_generate_api_key' });
 		data.push({ name: 'nonce', value: config.nonce });
 
 		$.post(config.ajaxUrl, $.param(data)).done(function(response) {
@@ -2433,6 +2382,7 @@ jQuery(function($) {
 				return;
 			}
 
+			showGeneratedKey(response.data);
 			$('#tf-generate-api-key-form')[0].reset();
 			loadKeys();
 		});
@@ -2449,7 +2399,7 @@ jQuery(function($) {
 		}
 
 		$.post(config.ajaxUrl, {
-			action: 'tf_revoke_api_key',
+			action: 'tourfic_revoke_api_key',
 			nonce: config.nonce,
 			key_id: keyId
 		}).done(function(response) {
@@ -2602,6 +2552,7 @@ jQuery(function($) {
 
 	loadKeys();
 });
+
 })();
 
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
@@ -3021,7 +2972,7 @@ jQuery(function($) {
                 url: tf_options.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'tf_icon_search',
+                    action: 'tourfic_icon_search',
                     _nonce: tf_admin_params.tf_nonce,
                     search: searchVal,
                     type: type,
@@ -3065,7 +3016,7 @@ jQuery(function($) {
                         url: tf_options.ajax_url,
                         type: 'POST',
                         data: {
-                            action: 'tf_load_more_icons',
+                            action: 'tourfic_load_more_icons',
                             _nonce: tf_admin_params.tf_nonce,
                             start_index: startIndex,
                             type: type,
@@ -3132,7 +3083,7 @@ jQuery(function($) {
                                 url: tf_options.ajax_url,
                                 type: 'POST',
                                 data: {
-                                    action: 'tf_options_reset',
+                                    action: 'tourfic_options_reset',
                                     tf_option_nonce: tf_admin_params.tf_nonce,
                                 },
                                 beforeSend: function () {
@@ -3178,7 +3129,7 @@ jQuery(function($) {
                         url: tf_options.ajax_url,
                         type: 'POST',
                         data: {
-                            action: 'tf_search_settings_autocomplete',
+                            action: 'tourfic_search_settings_autocomplete',
                             tf_option_nonce: tf_admin_params.tf_nonce,
                             search: value,
                         },
@@ -3286,7 +3237,7 @@ jQuery(function($) {
 
                 tf_import_option = true;
             }
-            data.append('action', 'tf_options_save');
+            data.append('action', 'tourfic_options_save');
 
             $.ajax({
                 url: tf_options.ajax_url,
@@ -3430,7 +3381,7 @@ jQuery(function($) {
                     url: tf_options.ajax_url,
                     method: 'POST',
                     data: {
-                        action: 'tf_delete_category_data',
+                        action: 'tourfic_delete_category_data',
                         _nonce: tf_admin_params.tf_nonce,
                         term_id: termId,
                         categoryName: categoryName
@@ -3506,7 +3457,7 @@ jQuery(function($) {
                 },
                 events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
                     let requestData = {
-                        action: "tf_get_hotel_room_availability",
+                        action: "tourfic_get_hotel_room_availability",
                         _nonce: tf_admin_params.tf_nonce,
                         new_post: $(self.container).find('[name="new_post"]').val(),
                         room_id: $(self.container).find('[name="room_id"]').val(),
@@ -3672,7 +3623,7 @@ jQuery(function($) {
             let cal = container.find('.tf-room-cal');
             let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
             let avail_date = container.find('.avail_date');
-            data.push({ name: 'action', value: 'tf_add_hotel_room_availability' });
+            data.push({ name: 'action', value: 'tourfic_add_hotel_room_availability' });
             data.push({ name: '_nonce', value: tf_admin_params.tf_nonce });
             data.push({ name: 'avail_date', value: avail_date.val() });
             $(document).trigger('tourfic:room-availability:prepare-request', [data, container]);
@@ -3774,7 +3725,7 @@ jQuery(function($) {
                 },
                 events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
                     let requestData = {
-                        action: "tf_get_apartment_availability",
+                        action: "tourfic_get_apartment_availability",
                         _nonce: tf_admin_params.tf_nonce,
                         new_post: $(self.container).find('[name="new_post"]').val(),
                         apartment_id: $(self.container).find('[name="apartment_id"]').val(),
@@ -3928,7 +3879,7 @@ jQuery(function($) {
             let cal = container.find('.tf-apt-cal');
             let data = $('input, select', container.find('.tf-apt-cal-field')).serializeArray();
             let aptAvailability = container.find('.apt_availability');
-            data.push({ name: 'action', value: 'tf_add_apartment_availability' });
+            data.push({ name: 'action', value: 'tourfic_add_apartment_availability' });
             data.push({ name: '_nonce', value: tf_admin_params.tf_nonce });
             data.push({ name: 'apt_availability', value: aptAvailability.val() });
             $(document).trigger('tourfic:apartment-availability:prepare-request', [data, container]);
@@ -4015,7 +3966,7 @@ jQuery(function($) {
                 },
                 events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
                     let requestData = {
-                        action: "tf_get_tour_availability",
+                        action: "tourfic_get_tour_availability",
                         _nonce: tf_admin_params.tf_nonce,
                         new_post: $(self.container).find('[name="new_post"]').val(),
                         tour_id: $(self.container).find('[name="tour_id"]').val(),
@@ -4255,7 +4206,7 @@ jQuery(function($) {
             let data = $('input, select', $tourField).serializeArray();
 
             let tourAvailability = container.find('.tour_availability');
-            data.push({ name: 'action', value: 'tf_add_tour_availability' });
+            data.push({ name: 'action', value: 'tourfic_add_tour_availability' });
             data.push({ name: '_nonce', value: tf_admin_params.tf_nonce });
             data.push({ name: 'tour_availability', value: tourAvailability.val() });
             $(document).trigger('tourfic:tour-availability:prepare-request', [data, container]);
@@ -4344,7 +4295,7 @@ jQuery(function($) {
                 url: tf_options.ajax_url,
                 type: 'POST',
                 data: {
-                    'action': 'tf_reset_tour_availability',
+                    'action': 'tourfic_reset_tour_availability',
                     '_nonce': tf_admin_params.tf_nonce,
                     'tour_id': $('#post_ID').val()
                 },
@@ -4399,7 +4350,7 @@ jQuery(function($) {
                 url: tf_options.ajax_url,
                 type: 'POST',
                 data: {
-                    'action': 'tf_reset_room_availability',
+                    'action': 'tourfic_reset_room_availability',
                     '_nonce': tf_admin_params.tf_nonce,
                     'room_id': $('#post_ID').val()
                 },
@@ -4449,7 +4400,7 @@ jQuery(function($) {
                 url: tf_options.ajax_url,
                 type: 'POST',
                 data: {
-                    'action': 'tf_reset_apt_availability',
+                    'action': 'tourfic_reset_apt_availability',
                     '_nonce': tf_admin_params.tf_nonce,
                     'apartment_id': $('#post_ID').val()
                 },
@@ -5020,7 +4971,7 @@ jQuery(function($) {
                 url: tf_options.ajax_url,
                 method: 'POST',
                 data: {
-                    action: 'tf_insert_category_data',
+                    action: 'tourfic_insert_category_data',
                     _nonce: tf_admin_params.tf_nonce,
                     categoryName: categoryName,
                     categoryTitle: categoryTitle,
@@ -5061,7 +5012,7 @@ jQuery(function($) {
                     url: tf_options.ajax_url,
                     method: 'POST',
                     data: {
-                        action: 'tf_insert_post_data',
+                        action: 'tourfic_insert_post_data',
                         _nonce: tf_admin_params.tf_nonce,
                         postType: postType,
                         postTitle: postTitle,
@@ -5727,7 +5678,7 @@ const legendSpacingPlugin = {
                     type: 'post',
                     url: tf_options.ajax_url,
                     data: {
-                        action: 'tf_month_reports',
+                        action: 'tourfic_month_reports',
                         _nonce: tf_admin_params.tf_nonce,
                         month: monthTarget,
                         year: yearTarget,
@@ -5809,7 +5760,7 @@ const legendSpacingPlugin = {
                     type: 'post',
                     url: tf_options.ajax_url,
                     data: {
-                        action: 'tf_month_reports',
+                        action: 'tourfic_month_reports',
                         _nonce: tf_admin_params.tf_nonce,
                         month: monthTarget,
                         year: yearTarget,
@@ -6043,7 +5994,7 @@ const legendSpacingPlugin = {
                 url: tf_options.ajax_url,
                 method: 'POST',
                 data: {
-                    action: 'tf_export_data',
+                    action: 'tourfic_export_data',
                     _nonce: tf_admin_params.tf_nonce,
                 },
                 beforeSend: function () {
@@ -6111,7 +6062,7 @@ const legendSpacingPlugin = {
 
         // Function to get the selected design
         function getSelectedDesign() {
-            return $('input[name="tf_settings\\[color-palette-template\\]"]:checked').val();
+            return $('input[name="tourfic_settings\\[color-palette-template\\]"]:checked').val();
         }
 
         const designDefault = {
@@ -6218,7 +6169,7 @@ const legendSpacingPlugin = {
                 $(`input[name^="tf_settings[${selectedPalette}-${field}]"]`).each(function () {
                     let fieldName = $(this).attr('name').split('[')[2].replace(']', ''); // Extract the sub-field (e.g., 'default', 'dark', 'lite')
                     let fieldValue = $(this).val();
-                    let $customField = $(`input[name="tf_settings[tf-custom-${field}][${fieldName}]"]`);
+                    let $customField = $(`input[name="tourfic_settings[tf-custom-${field}][${fieldName}]"]`);
 
                     if ($customField.length) {
                         $customField.val(fieldValue).trigger('change');
@@ -6252,12 +6203,12 @@ const legendSpacingPlugin = {
                     let fieldName = match[3]; // e.g., 'default', 'dark', 'lite', etc.
 
                     // Update the corresponding custom field
-                    let $customColorField = $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`);
+                    let $customColorField = $(`input[name="tourfic_settings[tf-custom-${fieldType}][${fieldName}]"]`);
                     if ($customColorField.length) {
 
-                        let value = $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val();
-                        $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`).val(value).trigger('change');
-                        $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val(designDefault[design][fieldType][fieldName]).trigger('change');
+                        let value = $(`input[name="tourfic_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val();
+                        $(`input[name="tourfic_settings[tf-custom-${fieldType}][${fieldName}]"]`).val(value).trigger('change');
+                        $(`input[name="tourfic_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val(designDefault[design][fieldType][fieldName]).trigger('change');
                         $customColorField.val(newValue).trigger('change');
                     }
                 }

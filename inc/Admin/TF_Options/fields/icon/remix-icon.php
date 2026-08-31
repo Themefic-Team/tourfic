@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-function remix_icon() {
+function tourfic_remix_icon() {
 	$remix_icons = array(
 		'ri-24-hours-fill',
 		'ri-24-hours-line',

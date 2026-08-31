@@ -55,7 +55,7 @@ class Room_Options {
 		}
 
 		if ( ! empty( $check_in_out ) ) {
-			list( $tf_form_start, $tf_form_end ) = tf_split_date_range( $check_in_out );
+			list( $tf_form_start, $tf_form_end ) = tourfic_split_date_range( $check_in_out );
 		}
 
 		if ( ! empty( $check_in_out ) ) {
@@ -72,7 +72,7 @@ class Room_Options {
 		$min_discount_type   = ! empty( $min_price_arr['min_discount_type'] ) ? $min_price_arr['min_discount_type'] : 'none';
 		$min_discount_amount = ! empty( $min_price_arr['min_discount_amount'] ) ? $min_price_arr['min_discount_amount'] : 0;
 		$tf_room_book_button_text = ! empty( Helper::tfopt( 'room_booking_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'room_booking_button_text' ) ) ) : esc_html__( 'Book Now', 'tourfic' );
-		$pricing_by          = apply_filters( 'tf_room_pricing_mode', 1, $meta );
+		$pricing_by          = apply_filters( 'tourfic_room_pricing_mode', 1, $meta );
 		$unique_id           = ! empty( $meta['unique_id'] ) ? $meta['unique_id'] : '';
 
 		if ( '3' === $pricing_by && isset( $meta['room-options'] ) && ! empty( Helper::tf_data_types( $meta['room-options'] ) ) ) :

@@ -70,7 +70,7 @@ $tour_js_source        = tf_traveler_compliance_file( $files['tour_js'] );
 $tourfic_js_source     = tf_traveler_compliance_file( $files['tourfic_js'] );
 $pro_tourfic_js_source = tf_traveler_compliance_file( $files['pro_tourfic_js'] );
 
-$tour_booking_body = tf_traveler_compliance_function_body( $tour_booking_source, 'tf_tours_booking_function' );
+$tour_booking_body = tf_traveler_compliance_function_body( $tour_booking_source, 'tourfic_tours_booking_function' );
 
 tf_traveler_compliance_assert(
 	false !== strpos( $tour_booking_body, 'wp_send_json(' ),
@@ -130,7 +130,7 @@ tf_traveler_compliance_assert(
 );
 
 $expected_formats = array( 'Y/m/d', 'd/m/Y', 'm/d/Y', 'Y-m-d', 'd-m-Y', 'm-d-Y', 'Y.m.d', 'd.m.Y', 'm.d.Y' );
-$php_formats_body = tf_traveler_compliance_function_body( $functions_source, 'tf_tour_get_supported_date_formats' );
+$php_formats_body = tf_traveler_compliance_function_body( $functions_source, 'tourfic_tour_get_supported_date_formats' );
 
 foreach ( $expected_formats as $format ) {
 	tf_traveler_compliance_assert(
@@ -143,14 +143,14 @@ foreach ( $expected_formats as $format ) {
 	);
 }
 
-$parse_user_date_body = tf_traveler_compliance_function_body( $functions_source, 'tf_tour_parse_user_date' );
+$parse_user_date_body = tf_traveler_compliance_function_body( $functions_source, 'tourfic_tour_parse_user_date' );
 tf_traveler_compliance_assert(
-	false !== strpos( $parse_user_date_body, 'tf_split_date_range( $date_string, false )' ),
+	false !== strpos( $parse_user_date_body, 'tourfic_split_date_range( $date_string, false )' ),
 	'Traveler age validation must derive the reference date from the selected date/range.'
 );
 
-$store_document_body = tf_traveler_compliance_function_body( $functions_source, 'tf_tour_store_traveler_document_upload' );
-$download_document_body = tf_traveler_compliance_function_body( $functions_source, 'tf_download_traveler_document' );
+$store_document_body = tf_traveler_compliance_function_body( $functions_source, 'tourfic_tour_store_traveler_document_upload' );
+$download_document_body = tf_traveler_compliance_function_body( $functions_source, 'tourfic_download_traveler_document' );
 tf_traveler_compliance_assert(
 	false === strpos( $store_document_body . $download_document_body, 'wp-admin/includes/' ),
 	'Traveler document handlers must use APIs loaded by their WordPress request entry points without directly loading core files.'
@@ -162,9 +162,9 @@ tf_traveler_compliance_assert(
 	'Traveler document handlers must retain the standard WordPress upload, metadata, and filesystem APIs.'
 );
 
-$validate_age_body = tf_traveler_compliance_function_body( $functions_source, 'tf_tour_validate_traveler_age_limits' );
+$validate_age_body = tf_traveler_compliance_function_body( $functions_source, 'tourfic_tour_validate_traveler_age_limits' );
 tf_traveler_compliance_assert(
-	false !== strpos( $validate_age_body, 'tf_tour_parse_user_date( $tour_date )' ),
+	false !== strpos( $validate_age_body, 'tourfic_tour_parse_user_date( $tour_date )' ),
 	'Server age validation must parse the selected travel date before comparing ages.'
 );
 tf_traveler_compliance_assert(
@@ -176,7 +176,7 @@ tf_traveler_compliance_assert(
 	'Invalid selected travel dates must not be reported as DOB mismatches.'
 );
 tf_traveler_compliance_assert(
-	false === strpos( $validate_age_body, 'tf_tour_get_reference_timestamp( $tour_date )' ),
+	false === strpos( $validate_age_body, 'tourfic_tour_get_reference_timestamp( $tour_date )' ),
 	'Server age validation must not fall back to today for invalid selected travel dates.'
 );
 

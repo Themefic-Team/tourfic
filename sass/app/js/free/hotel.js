@@ -111,7 +111,7 @@
             var room = $('#tf-single-hotel-avail').find('[name=room]').val() || 1;
 
             var data = {
-                action: 'tf_room_availability',
+                action: 'tourfic_room_availability',
                 tf_room_avail_nonce: tf_room_avail_nonce,
                 post_id: post_id,
                 adult: adult,
@@ -268,7 +268,7 @@
 
             let selectedExtraData = tfGetHotelSelectedExtras($this.closest('.tf-withoutpayment-popup'));
             var data = {
-                action: 'tf_hotel_booking',
+                action: 'tourfic_hotel_booking',
                 tf_room_booking_nonce: tf_room_booking_nonce,
                 post_id: post_id,
                 room_id: room_id,
@@ -451,7 +451,7 @@
                 submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
             
-            formData.append('action', 'tf_hotel_search');
+            formData.append('action', 'tourfic_hotel_search');
             formData.append('_nonce', tf_params.nonce);
 
             if (formData.get('from') == null || formData.get('to') == null) {
@@ -743,7 +743,7 @@
 
             let selectedExtraData = tfGetHotelSelectedExtras($roomForm);
             var data = {
-                action: 'tf_hotel_booking_popup',
+                action: 'tourfic_hotel_booking_popup',
                 tf_room_booking_nonce: tf_room_booking_nonce,
                 post_id: post_id,
                 room_id: room_id,
@@ -852,7 +852,7 @@
             var deposit = $this.find("input[name=hotel_room_depo]").val();
             var airport_service = $this.find('[name="airport_service"]').val();
             let selectedExtraData = tfGetHotelSelectedExtras($this);
-            formData.append('action', 'tf_hotel_booking');
+            formData.append('action', 'tourfic_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
             formData.append('deposit', deposit);
             formData.append('airport_service', airport_service);

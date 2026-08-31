@@ -2,7 +2,7 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-TF_Taxonomy_Metabox::taxonomy( 'tf_carrental_location', array(
+Tourfic_Taxonomy_Metabox::taxonomy( 'tf_carrental_location', array(
 	'title'    => esc_html__( 'Car Rental Location Settings', 'tourfic' ),
 	'taxonomy' => 'carrental_location',
 	'fields'   => array(

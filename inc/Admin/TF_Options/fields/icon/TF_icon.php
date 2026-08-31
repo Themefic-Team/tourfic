@@ -2,8 +2,8 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'TF_icon' ) ) {
-	class TF_icon extends TF_Fields {
+if ( ! class_exists( 'Tourfic_icon' ) ) {
+	class Tourfic_icon extends Tourfic_Fields {
 
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field );
@@ -103,31 +103,31 @@ if ( ! class_exists( 'TF_icon' ) ) {
 				'all'           => array(
 					'label'      => esc_html__( 'All Icons', 'tourfic' ),
 					'label_icon' => 'ri-grid-fill',
-					'icons'      => array_merge( fontawesome_four_icons(), fontawesome_five_icons(), fontawesome_six_icons(), remix_icon() ),
+					'icons'      => array_merge( tourfic_fontawesome_four_icons(), tourfic_fontawesome_five_icons(), tourfic_fontawesome_six_icons(), tourfic_remix_icon() ),
 				),
 				'fontawesome_4' => array(
 					'label'      => esc_html__( 'Font Awesome 4', 'tourfic' ),
 					'label_icon' => 'fa-regular fa-font-awesome',
-					'icons'      => fontawesome_four_icons(),
+					'icons'      => tourfic_fontawesome_four_icons(),
 				),
 				'fontawesome_5' => array(
 					'label'      => esc_html__( 'Font Awesome 5', 'tourfic' ),
 					'label_icon' => 'fa-regular fa-font-awesome',
-					'icons'      => fontawesome_five_icons(),
+					'icons'      => tourfic_fontawesome_five_icons(),
 				),
 				'fontawesome_6' => array(
 					'label'      => esc_html__( 'Font Awesome 6', 'tourfic' ),
 					'label_icon' => 'fa-regular fa-font-awesome',
-					'icons'      => fontawesome_six_icons(),
+					'icons'      => tourfic_fontawesome_six_icons(),
 				),
 				'remixicon'     => array(
 					'label'      => esc_html__( 'Remix Icon', 'tourfic' ),
 					'label_icon' => 'ri-remixicon-line',
-					'icons'      => remix_icon(),
+					'icons'      => tourfic_remix_icon(),
 				),
 			);
 
-			$icons = apply_filters( 'tf_icon_list', $icons );
+			$icons = apply_filters( 'tourfic_icon_list', $icons );
 
 			return $icons;
 		}

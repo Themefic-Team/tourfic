@@ -65,7 +65,7 @@ class Hotel_Feature_Filter extends \WP_Widget {
             $get_terms = get_terms( $taxonomy );
 
             $destination_name = !empty( $_GET['destination'] ) ? sanitize_text_field( wp_unslash($_GET['destination']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-            $search_features_query = isset( $_GET['features'] ) ? wp_unslash( $_GET['features'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
+            $search_features_query = isset( $_GET['features'] ) && is_array( $_GET['features'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_GET['features'] ) ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             echo "<div class='tf-filter'><ul>";
             foreach ( $get_terms as $key => $term ) {
                 $id = $term->term_id;

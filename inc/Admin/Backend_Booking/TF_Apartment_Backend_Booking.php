@@ -28,9 +28,9 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 		$this->set_settings_fields();
 
 		// actions
-		add_action( 'wp_ajax_tf_check_available_apartment', array( $this, 'check_avaibility_callback' ) );
-		add_action( 'wp_ajax_tf_check_apartment_aditional_fees', array( $this, 'tf_check_apartment_aditional_fees_callback' ) );
-		add_action( 'wp_ajax_tf_backend_apartment_booking', array( $this, 'backend_booking_callback' ) );
+		add_action( 'wp_ajax_tourfic_check_available_apartment', array( $this, 'check_avaibility_callback' ) );
+		add_action( 'wp_ajax_tourfic_check_apartment_aditional_fees', array( $this, 'tf_check_apartment_aditional_fees_callback' ) );
+		add_action( 'wp_ajax_tourfic_backend_apartment_booking', array( $this, 'backend_booking_callback' ) );
 	}
 
 	function set_settings_fields() {
@@ -449,7 +449,7 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 
 			$order_id = Helper::tf_set_order( $order_data );
 			if ( ! empty( $order_id ) ) {
-				do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
+				do_action( 'tourfic_offline_payment_booking_confirmation', $order_id, $order_data );
 			}
 
 			if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
@@ -461,7 +461,7 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 				 * @param array  $order_data The items in the order.
 				 * @param string $type Order type
 				 */
-				apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order_data, '' );
+				apply_filters( 'tourfic_after_booking_completed_calendar_data', $order_id, $order_data, '' );
 			}
 
 			$response['success'] = true;

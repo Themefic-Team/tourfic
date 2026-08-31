@@ -4,8 +4,8 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 
-if ( ! class_exists( 'TF_User_Rest_API' ) ) {
-	class TF_User_Rest_API extends TF_Rest_API {
+if ( ! class_exists( 'Tourfic_User_Rest_API' ) ) {
+	class Tourfic_User_Rest_API extends Tourfic_Rest_API {
 
 		protected $log_reg_settings = array();
 
@@ -162,7 +162,7 @@ if ( ! class_exists( 'TF_User_Rest_API' ) ) {
 				}
 
 				//google data
-				$_tf_integration_settings = is_array( get_user_meta( $user->ID, '_tf_integration_settings', true ) ) ? get_user_meta( $user->ID, '_tf_integration_settings', true ) : array();
+				$_tf_integration_settings = is_array( get_user_meta( $user->ID, 'tourfic_integration_settings', true ) ) ? get_user_meta( $user->ID, 'tourfic_integration_settings', true ) : array();
 				$user_data['tf_google_client_id'] = get_user_meta( $user->ID, 'tf_google_client_id', true );
 				$user_data['tf_google_secret_key'] = get_user_meta( $user->ID, 'tf_google_secret_key', true );
 				$user_data['tf_google_redirect_url'] = site_url().'/wp-json/tourfic/v1/integration/google-api';
@@ -287,4 +287,4 @@ if ( ! class_exists( 'TF_User_Rest_API' ) ) {
 	}
 }
 
-TF_User_Rest_API::get_instance();
+Tourfic_User_Rest_API::get_instance();

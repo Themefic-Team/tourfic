@@ -12,8 +12,8 @@ use Tourfic\Classes\Helper;
  * @version 1.0.0
  *
  */
-if ( ! class_exists( 'TF_Repeater' ) ) {
-	class TF_Repeater extends TF_Fields {
+if ( ! class_exists( 'Tourfic_Repeater' ) ) {
+	class Tourfic_Repeater extends Tourfic_Fields {
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field);
 		}

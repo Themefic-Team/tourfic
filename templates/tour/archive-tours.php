@@ -10,9 +10,9 @@ defined( 'ABSPATH' ) || exit;
 
  use Tourfic\Classes\Helper;
 
- if(tf_is_block_theme()){
+ if(tourfic_is_block_theme()){
     wp_head();
-    tf_render_block_header_area();
+    tourfic_render_block_header_area();
 }else{
     get_header('tourfic');
 }
@@ -44,8 +44,8 @@ if(!empty($tourfic_expired_tour_showing )){
 $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 $tourfic_args = array(
     'post_type' 	 => "tf_tours",
-    'orderby'   	 => apply_filters( 'tf_archive_post_orderby', 'date' ),
-    'order'     	 => apply_filters( 'tf_archive_post_order', 'DESC' ),
+    'orderby'   	 => apply_filters( 'tourfic_archive_post_orderby', 'date' ),
+    'order'     	 => apply_filters( 'tourfic_archive_post_order', 'DESC' ),
     'post_status'    => $tourfic_tour_posts_status,
 	'paged'          => $paged,
 );
@@ -57,13 +57,13 @@ $tourfic_tour_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfo
 
 if ( Helper::tf_is_woo_active() ) {
 	if ( $tourfic_tour_arc_selected_template == "design-1" ) {
-		include TF_TEMPLATE_PATH . 'tour/archive/design-1.php';
+		include TOURFIC_TEMPLATE_PATH . 'tour/archive/design-1.php';
 	} elseif ( $tourfic_tour_arc_selected_template == "design-2" ) {
-		include TF_TEMPLATE_PATH . 'tour/archive/design-2.php';
+		include TOURFIC_TEMPLATE_PATH . 'tour/archive/design-2.php';
 	} elseif ( $tourfic_tour_arc_selected_template == "design-3" ) {
-		include TF_TEMPLATE_PATH . 'tour/archive/design-3.php';
+		include TOURFIC_TEMPLATE_PATH . 'tour/archive/design-3.php';
 	} else {
-		include TF_TEMPLATE_PATH . 'tour/archive/design-legacy.php';
+		include TOURFIC_TEMPLATE_PATH . 'tour/archive/design-legacy.php';
 	}
 } else {
 	?>
@@ -75,9 +75,9 @@ if ( Helper::tf_is_woo_active() ) {
 	<?php
 }
 
-if(tf_is_block_theme()){
+if(tourfic_is_block_theme()){
     wp_footer();
-    tf_render_block_footer_area();
+    tourfic_render_block_footer_area();
  }else{
 	get_footer('tourfic');
  }

@@ -301,7 +301,7 @@
 
             const $popup = $('.tf-apartment-booking-popup');
             const formData = new FormData($form[0]);
-            formData.append('action', 'tf_apartment_booking');
+            formData.append('action', 'tourfic_apartment_booking');
             appendApartmentBookingConfirmationData(formData, $popup);
 
             $.ajax({
@@ -381,7 +381,7 @@
         function loadApartmentBookingPopupSummary($form) {
             const $popup = $('.tf-apartment-booking-popup');
             const formData = new FormData($form[0]);
-            formData.append('action', 'tf_apartment_booking_popup');
+            formData.append('action', 'tourfic_apartment_booking_popup');
             formData.append('_nonce', tf_params.nonce);
 
             $.ajax({
@@ -509,7 +509,7 @@
                 submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
 
-            formData.append('action', 'tf_apartments_search');
+            formData.append('action', 'tourfic_apartments_search');
             formData.append('_nonce', tf_params.nonce);
 
             if (formData.get('from') == null || formData.get('to') == null) {
@@ -551,7 +551,7 @@
             let post_id = $(this).data("post-id");
             let id = $(this).data("id");
             let data = {
-                action: 'tf_apt_room_details_qv',
+                action: 'tourfic_apt_room_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 id: id,
@@ -586,7 +586,7 @@
             let post_id = $(this).data("post-id");
             let id = $(this).data("id");
             let data = {
-                action: 'tf_apt_room_details_qv',
+                action: 'tourfic_apt_room_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 id: id,

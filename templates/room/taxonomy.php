@@ -8,9 +8,9 @@ defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\Templates\Components\Room\Archive\Listings;
 
-if(tf_is_block_theme()){
+if(tourfic_is_block_theme()){
     wp_head();
-    tf_render_block_header_area();
+    tourfic_render_block_header_area();
 }else{
     get_header();
 }
@@ -40,9 +40,9 @@ if( $tourfic_post_type == "tf_room" && $tourfic_room_arc_selected_template=="des
 </div>
 <?php }
 
-if(tf_is_block_theme()){
+if(tourfic_is_block_theme()){
     wp_footer();
-    tf_render_block_footer_area();
+    tourfic_render_block_footer_area();
  }else{
 	get_footer();
  }

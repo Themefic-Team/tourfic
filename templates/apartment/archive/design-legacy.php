@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 	use Tourfic\App\Templates\Components\Apartment\Archive\Listings;
 	use Tourfic\App\Templates\Components\Shared\Archive\Sidebar;
 
-    do_action( 'tf_before_container' ); 
+    do_action( 'tourfic_before_container' );
     ?>
 	<div class="tf-container">
 		<div class="search-result-inner">
@@ -23,5 +23,5 @@ defined( 'ABSPATH' ) || exit;
 			<!-- End Sidebar -->
 		</div>
 	</div>
-	<?php do_action( 'tf_after_container' ); ?>
+	<?php do_action( 'tourfic_after_container' ); ?>
 </div>

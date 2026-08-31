@@ -106,7 +106,7 @@ class Booking_Form {
 
 	private static function tf_room_booking_form( $post_id, $settings ) {
         $meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
-        $pricing_by = apply_filters( 'tf_room_pricing_mode', 1, $meta );
+        $pricing_by = apply_filters( 'tourfic_room_pricing_mode', 1, $meta );
 		$style       = ! empty( $settings['booking_form_style'] ) ? $settings['booking_form_style'] : 'style1';
 		$room_option = ! empty( $_GET['room-option'] ) ? sanitize_text_field( wp_unslash( $_GET['room-option'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         $wrapper     = ! empty( $settings['wrapper'] ) ? $settings['wrapper'] : 'yes';
@@ -268,7 +268,7 @@ class Booking_Form {
 
 				<div id="tour_room_details_loader">
 					<div id="tour-room-details-loader-img">
-						<img src="<?php echo esc_url( TF_ASSETS_APP_URL ); ?>images/loader.gif" alt="">
+						<img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ); ?>images/loader.gif" alt="">
 					</div>
 				</div>
 			<?php echo 'yes' === $wrapper ? '</div>' : ''; ?>
@@ -343,14 +343,14 @@ class Booking_Form {
 
 	private static function tf_car_booking_form( $post_id, $settings ) {
 		$meta                            = get_post_meta( $post_id, 'tf_carrental_opt', true );
-		$car_allow_deposit               = apply_filters( 'tf_allow_deposit_feature', false, $meta );
+		$car_allow_deposit               = apply_filters( 'tourfic_allow_deposit_feature', false, $meta );
 		$car_deposit_type                = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : 'none';
 		$car_deposit_amount              = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : '';
 		$car_booking_by                  = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : '1';
 		$car_instructions_section_status = ! empty( $meta['instructions_section'] ) ? $meta['instructions_section'] : '';
 		$car_instructions_content        = ! empty( $meta['instructions_content'] ) ? $meta['instructions_content'] : '';
-		$car_extra_sec_title             = apply_filters( 'tf_car_extra_sec_title', '', $post_id, $meta );
-		$car_extras                      = apply_filters( 'tf_car_extra_meta', null, $post_id, $meta );
+		$car_extra_sec_title             = apply_filters( 'tourfic_car_extra_sec_title', '', $post_id, $meta );
+		$car_extras                      = apply_filters( 'tourfic_car_extra_meta', null, $post_id, $meta );
 		$tf_pickup_date                  = ! empty( $_GET['pickup_date'] ) ? sanitize_text_field( wp_unslash( $_GET['pickup_date'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$tf_dropoff_date                 = ! empty( $_GET['dropoff_date'] ) ? sanitize_text_field( wp_unslash( $_GET['dropoff_date'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$check_in_out                    = '';
@@ -585,7 +585,7 @@ class Booking_Form {
                     }
 					if ( '2' == $car_booking_by ) { ?>
                         <button class="tf_btn tf-flex tf-flex-align-center tf-flex-justify-center booking-process tf-final-step tf-flex-gap-8">
-                            <?php echo esc_html( apply_filters("tf_car_booking_form_submit_button_text", $booking_btn_text ), 'tourfic' ); ?>
+                            <?php echo esc_html( apply_filters("tourfic_car_booking_form_submit_button_text", $booking_btn_text ), 'tourfic' ); ?>
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -609,7 +609,7 @@ class Booking_Form {
                             </div>
                         <?php }else{ ?>
                             <button class="tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-gap-8 <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>">
-                                <?php echo esc_html( apply_filters("tf_car_booking_form_submit_button_text", esc_html__('Continue', 'tourfic') ) ); ?>
+                                <?php echo esc_html( apply_filters("tourfic_car_booking_form_submit_button_text", esc_html__('Continue', 'tourfic') ) ); ?>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
@@ -644,7 +644,7 @@ class Booking_Form {
                     </div>
                 <?php } ?>
 
-                <?php do_action( 'tf_car_cancellation', $post_id ); ?>
+                <?php do_action( 'tourfic_car_cancellation', $post_id ); ?>
             </div>
             <div class="tf-mobile-booking-btn">
                 <div class="tf-price-header">
@@ -685,7 +685,7 @@ class Booking_Form {
                                 </svg>
                             </span>
                     </div>
-                    <img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/thank-you.gif" alt="Thank You">
+                    <img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ) ?>images/thank-you.gif" alt="Thank You">
                     <h2>
                         <?php
                         $booking_confirmation_msg = ! empty( Helper::tfopt( 'car-booking-confirmation-msg' ) ) ? Helper::tfopt( 'car-booking-confirmation-msg' ) : esc_html__('Booked Successfully', 'tourfic');
@@ -695,7 +695,7 @@ class Booking_Form {
                 </div>
             </div>
 
-            <?php do_action( 'tf_car_extras', $car_extras, $post_id, $car_extra_sec_title ); ?>
+            <?php do_action( 'tourfic_car_extras', $car_extras, $post_id, $car_extra_sec_title ); ?>
 		<?php echo 'yes' === $wrapper ? '</div>' : ''; ?>
 		<script>
 			(function ($) {
@@ -742,7 +742,7 @@ class Booking_Form {
 								url: <?php echo wp_json_encode( admin_url( 'admin-ajax.php' ) ) ?>,
 								type: 'POST',
 								data: {
-									action: 'get_car_time_slots',
+									action: 'tourfic_get_car_time_slots',
 									pickup_day: startDay,
 									drop_day: endDay
 								},

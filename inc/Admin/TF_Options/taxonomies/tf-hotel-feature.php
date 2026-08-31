@@ -2,7 +2,7 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-TF_Taxonomy_Metabox::taxonomy( 'tf_hotel_feature', array(
+Tourfic_Taxonomy_Metabox::taxonomy( 'tf_hotel_feature', array(
 	'title'    => esc_html__( 'Tour Settings', 'tourfic' ),
 	'taxonomy' => 'hotel_feature',
 	'fields'   => array(

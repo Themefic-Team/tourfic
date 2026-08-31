@@ -149,8 +149,8 @@ class Sticky_Nav {
 			$dropoff_date_query = sanitize_text_field( wp_unslash( $_GET['dropoff-date'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 
-		$tf_pickup_date  = ! empty( $pickup_date_query ) && function_exists( 'tf_normalize_date' ) ? tf_normalize_date( $pickup_date_query ) : $pickup_date_query;
-		$tf_dropoff_date = ! empty( $dropoff_date_query ) && function_exists( 'tf_normalize_date' ) ? tf_normalize_date( $dropoff_date_query ) : $dropoff_date_query;
+		$tf_pickup_date  = ! empty( $pickup_date_query ) && function_exists( 'tourfic_normalize_date' ) ? tourfic_normalize_date( $pickup_date_query ) : $pickup_date_query;
+		$tf_dropoff_date = ! empty( $dropoff_date_query ) && function_exists( 'tourfic_normalize_date' ) ? tourfic_normalize_date( $dropoff_date_query ) : $dropoff_date_query;
 
 		$disable_car_time_slot    = ! empty( Helper::tfopt( 'disable-car-time-slots' ) ) ? boolval( Helper::tfopt( 'disable-car-time-slots' ) ) : false;
 		$car_time_slots           = ! empty( Helper::tfopt( 'car_time_slots' ) ) ? Helper::tfopt( 'car_time_slots' ) : '';

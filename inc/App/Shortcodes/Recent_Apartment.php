@@ -12,7 +12,7 @@ class Recent_Apartment extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
 
-	protected $shortcode = 'tf_recent_apartment';
+	protected $shortcode = 'tourfic_recent_apartment';
 
 	function render( $atts, $content = null ) {
 		extract(

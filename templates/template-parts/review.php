@@ -148,12 +148,12 @@ if ( ( get_post_type( $tourfic_post_id ) == 'tf_tours' && $tourfic_tour_selected
 			foreach ( $tourfic_comments as $comment ) {
 
 				// Get rating details
-				$tourfic_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+				$tourfic_overall_rate = get_comment_meta( $comment->comment_ID, TOURFIC_TOTAL_RATINGS, true );
 				if ( $tourfic_overall_rate == false ) {
-					$tourfic_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+					$tourfic_comment_meta = get_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, true );
 					$tourfic_overall_rate = TF_Review::Tf_average_ratings( $tourfic_comment_meta );
 				}
-				$tourfic_base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+				$tourfic_base_rate = get_comment_meta( $comment->comment_ID, TOURFIC_BASE_RATE, true );
 				$tourfic_c_rating  = TF_Review::tf_single_rating_change_on_base( $tourfic_overall_rate, $tourfic_base_rate );
 
 				// Comment details
@@ -371,12 +371,12 @@ if ( ( get_post_type( $tourfic_post_id ) == 'tf_tours' && $tourfic_tour_selected
 					foreach ( $tourfic_comments as $comment ) {
 
 						// Get rating details
-						$tourfic_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+						$tourfic_overall_rate = get_comment_meta( $comment->comment_ID, TOURFIC_TOTAL_RATINGS, true );
 						if ( $tourfic_overall_rate == false ) {
-							$tourfic_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+							$tourfic_comment_meta = get_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, true );
 							$tourfic_overall_rate = TF_Review::Tf_average_ratings( $tourfic_comment_meta );
 						}
-						$tourfic_base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+						$tourfic_base_rate = get_comment_meta( $comment->comment_ID, TOURFIC_BASE_RATE, true );
 						$tourfic_c_rating  = TF_Review::tf_single_rating_change_on_base( $tourfic_overall_rate, $tourfic_base_rate );
 
 						// Comment details
@@ -484,7 +484,7 @@ if ( ( get_post_type( $tourfic_post_id ) == 'tf_tours' && $tourfic_tour_selected
 		<div class="tf-modal-dialog">
 			<div class="tf-modal-content">
 				<div class="tf-modal-header">
-						<?php echo wp_kses( apply_filters( 'tf_rating_modal_header_content', '' ), tf_custom_wp_kses_allow_tags() ); ?>
+						<?php echo wp_kses( apply_filters( 'tourfic_rating_modal_header_content', '' ), tourfic_custom_wp_kses_allow_tags() ); ?>
 					<a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
 				</div>
 				<div class="tf-modal-body">

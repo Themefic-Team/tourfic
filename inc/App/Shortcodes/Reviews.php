@@ -11,7 +11,7 @@ class Reviews extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
 
-	protected $shortcode = 'tf_reviews';
+	protected $shortcode = 'tourfic_reviews';
 
 	function render( $atts, $content = null ) {
 		extract(
@@ -69,12 +69,12 @@ class Reviews extends \Tourfic\Core\Shortcodes {
 			if ( $comments ) {
 				foreach ( $comments as $comment ) {
 					// Get rating details
-					$tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+					$tf_overall_rate = get_comment_meta( $comment->comment_ID, TOURFIC_TOTAL_RATINGS, true );
 					if ( $tf_overall_rate == false ) {
-						$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+						$tf_comment_meta = get_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, true );
 						$tf_overall_rate = TF_Review::tf_average_ratings( $tf_comment_meta );
 					}
-					$base_rate = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+					$base_rate = get_comment_meta( $comment->comment_ID, TOURFIC_BASE_RATE, true );
 					$c_rating  = TF_Review::tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
 
 					// Comment details

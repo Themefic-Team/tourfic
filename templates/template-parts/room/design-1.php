@@ -51,16 +51,16 @@ $tourfic_pricing_by = ! empty( $tourfic_meta["pricing-by"] ) ? $tourfic_meta["pr
                     if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-room-layout']) ){
                         foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-room-layout'] as $tourfic_section){
                             if( !empty($tourfic_section['status']) && $tourfic_section['status']=="1" && !empty($tourfic_section['slug']) ){
-                                include TF_TEMPLATE_PART_PATH . 'room/design-1/'.$tourfic_section['slug'].'.php';
+                                include TOURFIC_TEMPLATE_PART_PATH . 'room/design-1/'.$tourfic_section['slug'].'.php';
                             }
                         }
                     }else{
-                        include TF_TEMPLATE_PART_PATH . 'room/design-1/description.php';
-                        include TF_TEMPLATE_PART_PATH . 'room/design-1/amenities.php';
-                        include TF_TEMPLATE_PART_PATH . 'room/design-1/room-options.php';
-                        include TF_TEMPLATE_PART_PATH . 'room/design-1/house-rules.php';
-                        include TF_TEMPLATE_PART_PATH . 'room/design-1/cancellation-policy.php';
-                        include TF_TEMPLATE_PART_PATH . 'room/design-1/reviews.php';
+                        include TOURFIC_TEMPLATE_PART_PATH . 'room/design-1/description.php';
+                        include TOURFIC_TEMPLATE_PART_PATH . 'room/design-1/amenities.php';
+                        include TOURFIC_TEMPLATE_PART_PATH . 'room/design-1/room-options.php';
+                        include TOURFIC_TEMPLATE_PART_PATH . 'room/design-1/house-rules.php';
+                        include TOURFIC_TEMPLATE_PART_PATH . 'room/design-1/cancellation-policy.php';
+                        include TOURFIC_TEMPLATE_PART_PATH . 'room/design-1/reviews.php';
                     }
                     ?>
                 </div>
@@ -116,7 +116,7 @@ $tourfic_pricing_by = ! empty( $tourfic_meta["pricing-by"] ) ? $tourfic_meta["pr
 
             <div id="tour_room_details_loader">
                 <div id="tour-room-details-loader-img">
-                    <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
+                    <img src="<?php echo esc_url(TOURFIC_ASSETS_APP_URL) ?>images/loader.gif" alt="">
                 </div>
             </div>
         </div>

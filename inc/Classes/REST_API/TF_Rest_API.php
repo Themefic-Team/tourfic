@@ -4,8 +4,8 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\App\TF_Review;
 
-if ( ! class_exists( 'TF_Rest_API' ) ) {
-	class TF_Rest_API {
+if ( ! class_exists( 'Tourfic_Rest_API' ) ) {
+	class Tourfic_Rest_API {
 
 		/*
 		 * instance
@@ -34,7 +34,7 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 				return $permission;
 			}
 
-			$options           = get_option( 'tf_settings' );
+			$options           = get_option( 'tourfic_settings' );
 			$unserialize_array = array( 'itinerary-builder-setings', 'amenities_cats' );
 			foreach ( $unserialize_array as $item ) {
 				if ( ! empty( $options[ $item ] ) && is_serialized( $options[ $item ] ) ) {
@@ -450,4 +450,4 @@ if ( ! class_exists( 'TF_Rest_API' ) ) {
 	}
 }
 
-TF_Rest_API::get_instance();
+Tourfic_Rest_API::get_instance();

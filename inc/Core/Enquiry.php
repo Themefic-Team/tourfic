@@ -12,13 +12,13 @@ abstract class Enquiry {
 
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'add_submenu' ) );
-		add_action( 'wp_ajax_tf_ask_question', array($this, 'tourfic_ask_question_ajax') );
-		add_action( 'wp_ajax_nopriv_tf_ask_question', array($this, 'tourfic_ask_question_ajax') );
+		add_action( 'wp_ajax_tourfic_ask_question', array($this, 'tourfic_ask_question_ajax') );
+		add_action( 'wp_ajax_nopriv_tourfic_ask_question', array($this, 'tourfic_ask_question_ajax') );
 
-		add_action( 'wp_ajax_tf_enquiry_bulk_action', array($this, 'tf_enquiry_bulk_action_callback') );
-		add_action( 'wp_ajax_tf_enquiry_filter_post', array($this, 'tf_enquiry_filter_post_callback') );
-		add_action( 'wp_ajax_tf_enquiry_reply_email', array($this, 'tf_enquiry_reply_email_callback') );
-		add_action( 'wp_ajax_tf_enquiry_filter_mail', array($this, 'tf_enquiry_filter_mail_callback') );
+		add_action( 'wp_ajax_tourfic_enquiry_bulk_action', array($this, 'tf_enquiry_bulk_action_callback') );
+		add_action( 'wp_ajax_tourfic_enquiry_filter_post', array($this, 'tf_enquiry_filter_post_callback') );
+		add_action( 'wp_ajax_tourfic_enquiry_reply_email', array($this, 'tf_enquiry_reply_email_callback') );
+		add_action( 'wp_ajax_tourfic_enquiry_filter_mail', array($this, 'tf_enquiry_filter_mail_callback') );
 
 }
 
@@ -75,7 +75,7 @@ abstract class Enquiry {
 									if ( $tf_posts_list_query->have_posts() ):
 										while ( $tf_posts_list_query->have_posts() ) : $tf_posts_list_query->the_post();
 											?>
-											<option value="<?php echo esc_attr(get_the_ID()); ?>" <?php echo ! empty( $_GET['post'] ) && get_the_ID() == $_GET['post'] ? esc_attr( 'selected' ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>><?php echo esc_html(get_the_title()); ?></option>
+								<option value="<?php echo esc_attr(get_the_ID()); ?>"><?php echo esc_html(get_the_title()); ?></option>
 										<?php
 										endwhile;
 									endif;
@@ -124,17 +124,13 @@ abstract class Enquiry {
 		<?php 
 	}
 
-	public function enquiry_details_list(array $data, $total_pages = 1) {
+	public function enquiry_details_list( array $data, $total_pages = 1, $paged = 1 ) {
 
 		$post_type = !empty($data) ? $data[0]["post_type"] : '';
-
-		if ( isset( $_GET['paged'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		} else {
-			$paged = 1;
-		}
+		$hook_post_type = 0 === strpos( $post_type, 'tf_' ) ? substr( $post_type, 3 ) : $post_type;
+		$paged     = max( 1, absint( $paged ) );
 		?>
-		<div class="<?php echo esc_attr(apply_filters( $post_type . '_booking_oder_table_class', "tf-order-table-responsive")) ?> tf-enquiry-table">
+		<div class="<?php echo esc_attr(apply_filters( 'tourfic_' . $hook_post_type . '_booking_oder_table_class', "tf-order-table-responsive")) ?> tf-enquiry-table">
             <table class="wp-list-table table" cellpadding="0" cellspacing="0">
                 <thead>
 					<tr>
@@ -171,7 +167,21 @@ abstract class Enquiry {
 							$submit_time = self::convert_to_wp_timezone($enquiry["submit_time"]);
 						
 						?>
-						<tr class="<?php echo esc_attr($tr_unread_class); ?> tf-enquiry-single-row">
+						<?php
+						$enquiry_view_url = wp_nonce_url(
+							add_query_arg(
+								array(
+									'post_type'  => sanitize_key( $enquiry['post_type'] ),
+									'page'       => sanitize_key( $enquiry['post_type'] ) . '_enquiry',
+									'enquiry_id' => absint( $enquiry['id'] ),
+									'action'     => 'preview',
+								),
+								admin_url( 'edit.php' )
+							),
+							'tourfic_view_enquiry_' . absint( $enquiry['id'] )
+						);
+						?>
+						<tr class="<?php echo esc_attr($tr_unread_class); ?> tf-enquiry-single-row" data-view-url="<?php echo esc_url( $enquiry_view_url ); ?>">
 							<input type="hidden" class="tf-enquiry-id" value="<?php echo esc_html($enquiry["id"]); ?>">
 							<th class="check-column">
 								<div class="table-name-column">
@@ -205,7 +215,7 @@ abstract class Enquiry {
 							
 							<td>
 								<?php
-								$actions_details = '<a href="' . admin_url() . 'edit.php?post_type=' . $enquiry["post_type"] . '&amp;page=' . $enquiry["post_type"] . '_enquiry' . '&amp;enquiry_id=' . $enquiry["id"] . '&amp;action=preview" class="tf_booking_details_view"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+								$actions_details = '<a href="' . esc_url( $enquiry_view_url ) . '" class="tf_booking_details_view"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 									<path d="M2.42012 12.7132C2.28394 12.4975 2.21584 12.3897 2.17772 12.2234C2.14909 12.0985 2.14909 11.9015 2.17772 11.7766C2.21584 11.6103 2.28394 11.5025 2.42012 11.2868C3.54553 9.50484 6.8954 5 12.0004 5C17.1054 5 20.4553 9.50484 21.5807 11.2868C21.7169 11.5025 21.785 11.6103 21.8231 11.7766C21.8517 11.9015 21.8517 12.0985 21.8231 12.2234C21.785 12.3897 21.7169 12.4975 21.5807 12.7132C20.4553 14.4952 17.1054 19 12.0004 19C6.8954 19 3.54553 14.4952 2.42012 12.7132Z" stroke="#1D2327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 									<path d="M12.0004 15C13.6573 15 15.0004 13.6569 15.0004 12C15.0004 10.3431 13.6573 9 12.0004 9C10.3435 9 9.0004 10.3431 9.0004 12C9.0004 13.6569 10.3435 15 12.0004 15Z" stroke="#1D2327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg></a>';
@@ -229,7 +239,7 @@ abstract class Enquiry {
 						<th colspan="8">
 							<ul class="tf-booking-details-pagination">
 									<?php if ( ! empty( $paged ) && $paged >= 2 ) { ?>
-									<li><a href="<?php echo esc_url($this->enquiry_details_pagination( $paged - 1 )); ?>">
+										<li><a href="<?php echo esc_url($this->enquiry_details_pagination( $paged - 1, $post_type )); ?>">
 											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 												<path d="M15.8333 10.0001H4.16663M4.16663 10.0001L9.99996 15.8334M4.16663 10.0001L9.99996 4.16675" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round"
 													stroke-linejoin="round"/>
@@ -240,18 +250,18 @@ abstract class Enquiry {
 											if ( $i == $paged ) {
 												?>
 												<li class="active">
-													<a href="<?php echo esc_url($this->enquiry_details_pagination( $i )); ?>"><?php echo esc_html($i); ?></a>
+													<a href="<?php echo esc_url($this->enquiry_details_pagination( $i, $post_type )); ?>"><?php echo esc_html($i); ?></a>
 												</li>
 											<?php } else { ?>
 												<li>
-													<a href="<?php echo esc_url($this->enquiry_details_pagination( $i )); ?>"><?php echo esc_html($i); ?></a>
+													<a href="<?php echo esc_url($this->enquiry_details_pagination( $i, $post_type )); ?>"><?php echo esc_html($i); ?></a>
 												</li>
 											<?php }
 										}
 									}
 									if ( ! empty( $total_pages ) && ! empty( $paged ) && $paged < $total_pages ) {
 										?>
-										<li><a href="<?php echo esc_url($this->enquiry_details_pagination( $paged + 1 )); ?>"><?php esc_html_e( "Next", "tourfic" ); ?>
+									<li><a href="<?php echo esc_url($this->enquiry_details_pagination( $paged + 1, $post_type )); ?>"><?php esc_html_e( "Next", "tourfic" ); ?>
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 													<path d="M4.16669 10.0001H15.8334M15.8334 10.0001L10 4.16675M15.8334 10.0001L10 15.8334" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
 												</svg>
@@ -266,7 +276,7 @@ abstract class Enquiry {
 		<?php 
 	}
 
-	function enquiry_details_pagination( $page ) {
+	function enquiry_details_pagination( $page, $post_type ) {
 		// Safely get request URI
 		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 		$query_str   = isset( $_SERVER['QUERY_STRING'] ) ? sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ) ) : '';
@@ -284,8 +294,9 @@ abstract class Enquiry {
 		// Force page to be integer
 		$current_params['paged'] = absint( $page );
 	
-		// Rebuild the URL
-		return esc_url( $base_url . '?' . http_build_query( $current_params ) );
+		$url = $base_url . '?' . http_build_query( $current_params );
+
+		return wp_nonce_url( $url, 'tourfic_filter_enquiries_' . sanitize_key( $post_type ) );
 	}	
 
 	public function single_enquiry_details($data) {
@@ -300,7 +311,6 @@ abstract class Enquiry {
 		$formateed_date = gmdate( "M d, Y", strtotime($date));
 		$formateed_time = gmdate( "h:i:s A", strtotime($time));
 		$reply_data = !empty( $data["reply_data"] ) ? json_decode($data["reply_data"], true) : array();
-		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( wp_unslash($_POST['user_name']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$current_user = wp_get_current_user();
 		$_SESSION["WP"]["userId"] = $current_user->ID;
 		$email_body_setting = !empty( Helper::tfopt("tf-email-piping")["email_body_type"] ) ? Helper::tfopt("tf-email-piping")["email_body_type"] : 'text';
@@ -308,14 +318,14 @@ abstract class Enquiry {
 		?>
 		<div class="wrap tf_booking_details_wrap tf-enquiry-details-wrap" style="margin-right: 20px;">
 		<div id="tf-enquiry-status-loader">
-			<img src="<?php echo esc_url(TF_ASSETS_URL); ?>app/images/loader.gif" alt="Loader">
+			<img src="<?php echo esc_url(TOURFIC_ASSETS_URL); ?>app/images/loader.gif" alt="Loader">
 		</div>
 			<!-- Header Wrap - Start -->
 			<hr class="wp-header-end">
 			<div class="tf_booking_wrap_header">
 				<div class="tf-enquiry-single-header-details">
 					<div class="tf-single-enquiry-header-logo">
-						<img src="<?php echo esc_url( esc_url(TF_ASSETS_APP_URL.'images/tourfic-logo-icon-blue.png') ); ?>" alt="<?php echo esc_html( get_the_title( $data['post_id'] ) ); ?>">
+						<img src="<?php echo esc_url( esc_url(TOURFIC_ASSETS_APP_URL.'images/tourfic-logo-icon-blue.png') ); ?>" alt="<?php echo esc_html( get_the_title( $data['post_id'] ) ); ?>">
 					</div>
 					<h1 class="wp-heading-inline"> <?php echo esc_html( get_the_title($data["post_id"])); ?> <?php echo esc_html(" / ID #"); ?><?php echo esc_html($data["id"]) ?></h1>
 				</div>
@@ -644,15 +654,13 @@ abstract class Enquiry {
 		return array( 'read', 'unread', 'replied', 'responded', 'not-replied', 'not-responded' );
 	}
 
-	protected function tf_get_requested_enquiry_post_type() {
-		$post_type = isset( $_POST['post_type'] ) ? sanitize_key( wp_unslash( $_POST['post_type'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
-
+	protected function tf_get_requested_enquiry_post_type( $post_type ) {
+		$post_type = sanitize_key( $post_type );
 		return array_key_exists( $post_type, $this->tf_enquiry_post_type_capabilities() ) ? $post_type : '';
 	}
 
-	protected function tf_get_requested_enquiry_filter() {
-		$filter = isset( $_POST['filter'] ) ? sanitize_key( wp_unslash( $_POST['filter'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
-
+	protected function tf_get_requested_enquiry_filter( $filter ) {
+		$filter = sanitize_key( $filter );
 		return in_array( $filter, $this->tf_enquiry_status_filters(), true ) ? $filter : '';
 	}
 
@@ -773,6 +781,49 @@ abstract class Enquiry {
 		return false;
 	}
 
+	protected function tf_get_enquiry_for_admin_view( $expected_post_type ) {
+		$expected_post_type = sanitize_key( $expected_post_type );
+		$enquiry_id         = isset( $_GET['enquiry_id'] ) ? absint( wp_unslash( $_GET['enquiry_id'] ) ) : 0;
+		$action             = isset( $_GET['action'] ) ? sanitize_key( wp_unslash( $_GET['action'] ) ) : '';
+
+		if ( ! $enquiry_id || 'preview' !== $action ) {
+			wp_die( esc_html__( 'Invalid enquiry request.', 'tourfic' ) );
+		}
+
+		check_admin_referer( 'tourfic_view_enquiry_' . $enquiry_id );
+
+		if ( ! $this->tf_current_user_can_manage_enquiry_post_type( $expected_post_type ) ) {
+			wp_die( esc_html__( 'You do not have permission to view this enquiry.', 'tourfic' ) );
+		}
+
+		global $wpdb;
+		$enquiry = $wpdb->get_row( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$wpdb->prepare(
+				"SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %d AND post_type = %s",
+				$enquiry_id,
+				$expected_post_type
+			),
+			ARRAY_A
+		);
+
+		if ( empty( $enquiry ) || ! $this->tf_current_user_can_access_enquiry( $enquiry ) ) {
+			wp_die( esc_html__( 'You do not have permission to view this enquiry.', 'tourfic' ) );
+		}
+
+		if ( 'unread' === $enquiry['enquiry_status'] ) {
+			$wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+				$wpdb->prefix . 'tf_enquiry_data',
+				array( 'enquiry_status' => 'read' ),
+				array( 'id' => $enquiry_id ),
+				array( '%s' ),
+				array( '%d' )
+			);
+			$enquiry['enquiry_status'] = 'read';
+		}
+
+		return $enquiry;
+	}
+
 	protected function tf_send_enquiry_json_error( $message, $status_code = 403 ) {
 		wp_send_json(
 			array(
@@ -885,8 +936,8 @@ abstract class Enquiry {
 		 * Enquiry Pabbly Integration
 		 * @author Jahid
 		 */
-		do_action( 'enquiry_pabbly_form_trigger', $post_id, $name, $email, $question );
-		do_action( 'enquiry_zapier_form_trigger', $post_id, $name, $email, $question );
+		do_action( 'tourfic_enquiry_pabbly_form_trigger', $post_id, $name, $email, $question );
+		do_action( 'tourfic_enquiry_zapier_form_trigger', $post_id, $name, $email, $question );
 
 		if ( "tf_hotel" == get_post_type( $post_id ) ) {
 			$send_email_to[] = ! empty( Helper::tfopt( 'h-enquiry-email' ) ) ? sanitize_email( Helper::tfopt( 'h-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
@@ -1062,8 +1113,8 @@ abstract class Enquiry {
 		}
 
 		$post_id   = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
-		$post_type = $this->tf_get_requested_enquiry_post_type();
-		$filter    = $this->tf_get_requested_enquiry_filter();
+		$post_type = $this->tf_get_requested_enquiry_post_type( isset( $_POST['post_type'] ) ? sanitize_key( wp_unslash( $_POST['post_type'] ) ) : '' );
+		$filter    = $this->tf_get_requested_enquiry_filter( isset( $_POST['filter'] ) ? sanitize_key( wp_unslash( $_POST['filter'] ) ) : '' );
 
 		if ( empty( $post_type ) || ! $this->tf_current_user_can_access_enquiry_post( $post_type, $post_id ) ) {
 			$this->tf_send_enquiry_json_error( esc_html__( 'You do not have permission to perform this action.', 'tourfic' ), 403 );
@@ -1238,8 +1289,8 @@ abstract class Enquiry {
 			$this->tf_send_enquiry_json_error( esc_html__( 'Security error! Reload the page and try again.', 'tourfic' ), 403 );
 		}
 
-		$filter    = $this->tf_get_requested_enquiry_filter();
-		$post_type = $this->tf_get_requested_enquiry_post_type();
+		$filter    = $this->tf_get_requested_enquiry_filter( isset( $_POST['filter'] ) ? sanitize_key( wp_unslash( $_POST['filter'] ) ) : '' );
+		$post_type = $this->tf_get_requested_enquiry_post_type( isset( $_POST['post_type'] ) ? sanitize_key( wp_unslash( $_POST['post_type'] ) ) : '' );
 		$post_id   = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
 
 		if ( empty( $post_type ) || ! $this->tf_current_user_can_access_enquiry_post( $post_type, $post_id ) ) {
@@ -1281,7 +1332,7 @@ abstract class Enquiry {
 		$headers[] = 'Content-Type: text/html; charset=UTF-8';
 		$headers[] = $from;
 		$headers[] = 'Reply-To: no-reply@' . wp_parse_url( site_url() )["host"];
-		$dashboard_link = get_option("tf_dashboard_page_id") ? get_permalink(get_option("tf_dashboard_page_id")) : site_url('my-account/');
+		$dashboard_link = get_option("tourfic_dashboard_page_id") ? get_permalink(get_option("tourfic_dashboard_page_id")) : site_url('my-account/');
 		$email_content = '';
 
 

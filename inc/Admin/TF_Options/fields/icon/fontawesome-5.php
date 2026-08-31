@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-function fontawesome_five_icons() {
+function tourfic_fontawesome_five_icons() {
 	$icons = array(
 		'fab fa-500px',
 		'fab fa-accessible-icon',

@@ -23,7 +23,7 @@
                 submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
             
-            formData.append('action', 'tf_room_search');
+            formData.append('action', 'tourfic_room_search');
             formData.append('_nonce', tf_params.nonce);
 
             if (formData.get('from') == null || formData.get('to') == null) {

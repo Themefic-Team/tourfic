@@ -7,7 +7,7 @@ use \Tourfic\App\TF_Review;
 ?>
 
 <div class="tf-single-template__legacy">
-	<?php do_action( 'tf_before_container' ); ?>
+	<?php do_action( 'tourfic_before_container' ); ?>
 
     <div class="tf-title-area tf-apartment-title">
         <div class="tf-container">
@@ -137,6 +137,6 @@ use \Tourfic\App\TF_Review;
         'wrapper' => 'no',
 	]); 
     
-    do_action( 'tf_after_container' ); 
+    do_action( 'tourfic_after_container' );
     ?>
 </div>

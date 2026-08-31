@@ -139,9 +139,9 @@ tf_wp_review_security_assert_order(
 	'Bulk status changes must authorize each enquiry before updating.'
 );
 
-$wc_tour_booking = tf_wp_review_security_function_body( $wc_tour_source, 'tf_tours_booking_function' );
+$wc_tour_booking = tf_wp_review_security_function_body( $wc_tour_source, 'tourfic_tours_booking_function' );
 tf_wp_review_security_assert(
-	false !== strpos( $wc_tour_source, "wp_ajax_nopriv_tf_tours_booking" ),
+	false !== strpos( $wc_tour_source, "wp_ajax_nopriv_tourfic_tours_booking" ),
 	'Tour booking must remain publicly reachable for frontend bookings.'
 );
 tf_wp_review_security_assert(

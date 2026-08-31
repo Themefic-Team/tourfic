@@ -50,8 +50,8 @@ class Pricing {
 	}
 
 	private static function create_datetime( $date, $time ) {
-		if ( function_exists( 'tf_car_create_datetime' ) ) {
-			$datetime = \tf_car_create_datetime( $date, $time );
+		if ( function_exists( 'tourfic_car_create_datetime' ) ) {
+			$datetime = \tourfic_car_create_datetime( $date, $time );
 			if ( $datetime instanceof \DateTime ) {
 				return $datetime;
 			}
@@ -60,8 +60,8 @@ class Pricing {
 		$date = ! empty( $date ) ? sanitize_text_field( (string) $date ) : '';
 		$time = ! empty( $time ) ? sanitize_text_field( (string) $time ) : '00:00';
 
-		if ( function_exists( 'tf_normalize_date' ) ) {
-			$date = tf_normalize_date( $date );
+		if ( function_exists( 'tourfic_normalize_date' ) ) {
+			$date = tourfic_normalize_date( $date );
 		}
 
 		if ( empty( $date ) ) {
@@ -94,8 +94,8 @@ class Pricing {
 
 	// all price will be calculate here
 	static function set_total_price( $meta, $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_archive='' ) {
-		if ( function_exists( 'tf_normalize_car_meta' ) ) {
-			$meta = tf_normalize_car_meta( $meta );
+		if ( function_exists( 'tourfic_normalize_car_meta' ) ) {
+			$meta = tourfic_normalize_car_meta( $meta );
 		}
 
 		$pricing_by = !empty($meta["price_by"]) ? $meta["price_by"] : 'day';
@@ -292,7 +292,7 @@ class Pricing {
     // Return Tour Extras Price
     static function set_extra_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $extra_ids=[], $extra_qty=[]){
 
-        $car_extra = apply_filters( 'tf_car_extra_meta', null, null, $meta );
+        $car_extra = apply_filters( 'tourfic_car_extra_meta', null, null, $meta );
         $prices = 0;
         $extra_title = [];
         if(!empty($extra_qty)){

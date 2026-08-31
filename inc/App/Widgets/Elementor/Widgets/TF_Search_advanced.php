@@ -69,6 +69,7 @@ class TF_Search_advanced extends \Elementor\Widget_Base {
 			'apartment' => esc_html__( 'Apartment', 'tourfic' ),
 		);
 
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- TravelFic Toolkit-owned hook.
 		return apply_filters( 'travelfic_slider_search_types', $types );
 	}
 
@@ -206,7 +207,7 @@ class TF_Search_advanced extends \Elementor\Widget_Base {
 		$type               = implode( ',', $settings['type'] );
 		$full_width         = $settings['full-width'];
 
-		echo do_shortcode( '[tf_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" type="' . $type . '" fullwidth="' . $full_width . '" advanced="enabled"]' );
+		echo do_shortcode( '[tourfic_search_form title="' . $tf_search_title . '" subtitle="' . $tf_search_subtitle . '" type="' . $type . '" fullwidth="' . $full_width . '" advanced="enabled"]' );
 
 	}
 

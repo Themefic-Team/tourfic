@@ -8,7 +8,7 @@ class Recent_Blog extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
 
-	protected $shortcode = 'tf_recent_blog';
+	protected $shortcode = 'tourfic_recent_blog';
 
 	function render( $atts, $content = null ) {
 		extract(

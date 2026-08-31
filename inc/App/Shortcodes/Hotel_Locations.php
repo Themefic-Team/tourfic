@@ -8,12 +8,11 @@ class Hotel_Locations extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
 
-    protected $shortcode = 'hotel_locations';
+    protected $shortcode = 'tourfic_hotel_locations';
 
 	public function __construct() {
 		parent::__construct();
 		// Old compatibility
-		add_shortcode( 'tourfic_destinations', [ $this, 'render' ] );
 	}
 
 	function render( $atts, $content = null ) {
@@ -58,7 +57,7 @@ class Hotel_Locations extends \Tourfic\Core\Shortcodes {
 					<?php foreach ( $locations as $term ) {
 
 						$meta      = get_term_meta( $term->term_id, 'tf_hotel_location', true );
-						$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg');
+						$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg');
 						$term_link = get_term_link( $term ); ?>
 
 						<div class="single_recomended_item">

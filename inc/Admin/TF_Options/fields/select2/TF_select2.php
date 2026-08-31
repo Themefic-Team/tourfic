@@ -5,8 +5,8 @@ use Mpdf\Tag\Em;
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'TF_select2' ) ) {
-	class TF_select2 extends TF_Fields {
+if ( ! class_exists( 'Tourfic_select2' ) ) {
+	class Tourfic_select2 extends Tourfic_Fields {
 
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field  );

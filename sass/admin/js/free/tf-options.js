@@ -413,7 +413,7 @@
                 url: tf_options.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'tf_icon_search',
+                    action: 'tourfic_icon_search',
                     _nonce: tf_admin_params.tf_nonce,
                     search: searchVal,
                     type: type,
@@ -457,7 +457,7 @@
                         url: tf_options.ajax_url,
                         type: 'POST',
                         data: {
-                            action: 'tf_load_more_icons',
+                            action: 'tourfic_load_more_icons',
                             _nonce: tf_admin_params.tf_nonce,
                             start_index: startIndex,
                             type: type,
@@ -524,7 +524,7 @@
                                 url: tf_options.ajax_url,
                                 type: 'POST',
                                 data: {
-                                    action: 'tf_options_reset',
+                                    action: 'tourfic_options_reset',
                                     tf_option_nonce: tf_admin_params.tf_nonce,
                                 },
                                 beforeSend: function () {
@@ -570,7 +570,7 @@
                         url: tf_options.ajax_url,
                         type: 'POST',
                         data: {
-                            action: 'tf_search_settings_autocomplete',
+                            action: 'tourfic_search_settings_autocomplete',
                             tf_option_nonce: tf_admin_params.tf_nonce,
                             search: value,
                         },
@@ -678,7 +678,7 @@
 
                 tf_import_option = true;
             }
-            data.append('action', 'tf_options_save');
+            data.append('action', 'tourfic_options_save');
 
             $.ajax({
                 url: tf_options.ajax_url,
@@ -822,7 +822,7 @@
                     url: tf_options.ajax_url,
                     method: 'POST',
                     data: {
-                        action: 'tf_delete_category_data',
+                        action: 'tourfic_delete_category_data',
                         _nonce: tf_admin_params.tf_nonce,
                         term_id: termId,
                         categoryName: categoryName
@@ -898,7 +898,7 @@
                 },
                 events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
                     let requestData = {
-                        action: "tf_get_hotel_room_availability",
+                        action: "tourfic_get_hotel_room_availability",
                         _nonce: tf_admin_params.tf_nonce,
                         new_post: $(self.container).find('[name="new_post"]').val(),
                         room_id: $(self.container).find('[name="room_id"]').val(),
@@ -1064,7 +1064,7 @@
             let cal = container.find('.tf-room-cal');
             let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
             let avail_date = container.find('.avail_date');
-            data.push({ name: 'action', value: 'tf_add_hotel_room_availability' });
+            data.push({ name: 'action', value: 'tourfic_add_hotel_room_availability' });
             data.push({ name: '_nonce', value: tf_admin_params.tf_nonce });
             data.push({ name: 'avail_date', value: avail_date.val() });
             $(document).trigger('tourfic:room-availability:prepare-request', [data, container]);
@@ -1166,7 +1166,7 @@
                 },
                 events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
                     let requestData = {
-                        action: "tf_get_apartment_availability",
+                        action: "tourfic_get_apartment_availability",
                         _nonce: tf_admin_params.tf_nonce,
                         new_post: $(self.container).find('[name="new_post"]').val(),
                         apartment_id: $(self.container).find('[name="apartment_id"]').val(),
@@ -1320,7 +1320,7 @@
             let cal = container.find('.tf-apt-cal');
             let data = $('input, select', container.find('.tf-apt-cal-field')).serializeArray();
             let aptAvailability = container.find('.apt_availability');
-            data.push({ name: 'action', value: 'tf_add_apartment_availability' });
+            data.push({ name: 'action', value: 'tourfic_add_apartment_availability' });
             data.push({ name: '_nonce', value: tf_admin_params.tf_nonce });
             data.push({ name: 'apt_availability', value: aptAvailability.val() });
             $(document).trigger('tourfic:apartment-availability:prepare-request', [data, container]);
@@ -1407,7 +1407,7 @@
                 },
                 events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
                     let requestData = {
-                        action: "tf_get_tour_availability",
+                        action: "tourfic_get_tour_availability",
                         _nonce: tf_admin_params.tf_nonce,
                         new_post: $(self.container).find('[name="new_post"]').val(),
                         tour_id: $(self.container).find('[name="tour_id"]').val(),
@@ -1647,7 +1647,7 @@
             let data = $('input, select', $tourField).serializeArray();
 
             let tourAvailability = container.find('.tour_availability');
-            data.push({ name: 'action', value: 'tf_add_tour_availability' });
+            data.push({ name: 'action', value: 'tourfic_add_tour_availability' });
             data.push({ name: '_nonce', value: tf_admin_params.tf_nonce });
             data.push({ name: 'tour_availability', value: tourAvailability.val() });
             $(document).trigger('tourfic:tour-availability:prepare-request', [data, container]);
@@ -1736,7 +1736,7 @@
                 url: tf_options.ajax_url,
                 type: 'POST',
                 data: {
-                    'action': 'tf_reset_tour_availability',
+                    'action': 'tourfic_reset_tour_availability',
                     '_nonce': tf_admin_params.tf_nonce,
                     'tour_id': $('#post_ID').val()
                 },
@@ -1791,7 +1791,7 @@
                 url: tf_options.ajax_url,
                 type: 'POST',
                 data: {
-                    'action': 'tf_reset_room_availability',
+                    'action': 'tourfic_reset_room_availability',
                     '_nonce': tf_admin_params.tf_nonce,
                     'room_id': $('#post_ID').val()
                 },
@@ -1841,7 +1841,7 @@
                 url: tf_options.ajax_url,
                 type: 'POST',
                 data: {
-                    'action': 'tf_reset_apt_availability',
+                    'action': 'tourfic_reset_apt_availability',
                     '_nonce': tf_admin_params.tf_nonce,
                     'apartment_id': $('#post_ID').val()
                 },
@@ -2412,7 +2412,7 @@
                 url: tf_options.ajax_url,
                 method: 'POST',
                 data: {
-                    action: 'tf_insert_category_data',
+                    action: 'tourfic_insert_category_data',
                     _nonce: tf_admin_params.tf_nonce,
                     categoryName: categoryName,
                     categoryTitle: categoryTitle,
@@ -2453,7 +2453,7 @@
                     url: tf_options.ajax_url,
                     method: 'POST',
                     data: {
-                        action: 'tf_insert_post_data',
+                        action: 'tourfic_insert_post_data',
                         _nonce: tf_admin_params.tf_nonce,
                         postType: postType,
                         postTitle: postTitle,
@@ -3119,7 +3119,7 @@ const legendSpacingPlugin = {
                     type: 'post',
                     url: tf_options.ajax_url,
                     data: {
-                        action: 'tf_month_reports',
+                        action: 'tourfic_month_reports',
                         _nonce: tf_admin_params.tf_nonce,
                         month: monthTarget,
                         year: yearTarget,
@@ -3201,7 +3201,7 @@ const legendSpacingPlugin = {
                     type: 'post',
                     url: tf_options.ajax_url,
                     data: {
-                        action: 'tf_month_reports',
+                        action: 'tourfic_month_reports',
                         _nonce: tf_admin_params.tf_nonce,
                         month: monthTarget,
                         year: yearTarget,
@@ -3435,7 +3435,7 @@ const legendSpacingPlugin = {
                 url: tf_options.ajax_url,
                 method: 'POST',
                 data: {
-                    action: 'tf_export_data',
+                    action: 'tourfic_export_data',
                     _nonce: tf_admin_params.tf_nonce,
                 },
                 beforeSend: function () {
@@ -3503,7 +3503,7 @@ const legendSpacingPlugin = {
 
         // Function to get the selected design
         function getSelectedDesign() {
-            return $('input[name="tf_settings\\[color-palette-template\\]"]:checked').val();
+            return $('input[name="tourfic_settings\\[color-palette-template\\]"]:checked').val();
         }
 
         const designDefault = {
@@ -3610,7 +3610,7 @@ const legendSpacingPlugin = {
                 $(`input[name^="tf_settings[${selectedPalette}-${field}]"]`).each(function () {
                     let fieldName = $(this).attr('name').split('[')[2].replace(']', ''); // Extract the sub-field (e.g., 'default', 'dark', 'lite')
                     let fieldValue = $(this).val();
-                    let $customField = $(`input[name="tf_settings[tf-custom-${field}][${fieldName}]"]`);
+                    let $customField = $(`input[name="tourfic_settings[tf-custom-${field}][${fieldName}]"]`);
 
                     if ($customField.length) {
                         $customField.val(fieldValue).trigger('change');
@@ -3644,12 +3644,12 @@ const legendSpacingPlugin = {
                     let fieldName = match[3]; // e.g., 'default', 'dark', 'lite', etc.
 
                     // Update the corresponding custom field
-                    let $customColorField = $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`);
+                    let $customColorField = $(`input[name="tourfic_settings[tf-custom-${fieldType}][${fieldName}]"]`);
                     if ($customColorField.length) {
 
-                        let value = $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val();
-                        $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`).val(value).trigger('change');
-                        $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val(designDefault[design][fieldType][fieldName]).trigger('change');
+                        let value = $(`input[name="tourfic_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val();
+                        $(`input[name="tourfic_settings[tf-custom-${fieldType}][${fieldName}]"]`).val(value).trigger('change');
+                        $(`input[name="tourfic_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val(designDefault[design][fieldType][fieldName]).trigger('change');
                         $customColorField.val(newValue).trigger('change');
                     }
                 }

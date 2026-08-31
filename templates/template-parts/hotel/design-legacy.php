@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 ?>
 <div class="tf-single-template__legacy">
-	<?php do_action( 'tf_before_container' ); ?>
+	<?php do_action( 'tourfic_before_container' ); ?>
 
     <!-- Start title area -->
     <div class="tf-title-area tf-hotel-title sp-b-20">
@@ -72,8 +72,8 @@ use \Tourfic\Classes\Helper;
 
                     <!-- Hotel Single Widget Hook are - start -->
                     <div class="tf-hotel-single-custom-widget-wrap tf-single-widgets">
-						<?php do_action( "tf_hotel_single_widgets" ); ?>
-                        <?php do_action( "tf_single_hotel_sidebar_area_with_args", $tourfic_post_id ); ?>
+						<?php do_action( "tourfic_hotel_single_widgets" ); ?>
+                        <?php do_action( "tourfic_single_hotel_sidebar_area_with_args", $tourfic_post_id ); ?>
                     </div>
                     <!-- Hotel Single Widget Hook are - end -->
                 </div>
@@ -206,5 +206,5 @@ use \Tourfic\Classes\Helper;
     ]);
 	?>
 
-	<?php do_action( 'tf_after_container' ); ?>
+	<?php do_action( 'tourfic_after_container' ); ?>
 </div>

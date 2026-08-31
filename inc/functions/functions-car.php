@@ -13,10 +13,10 @@ use \Elementor\Icons_Manager;
  * @include
  */
 if ( Helper::tf_is_woo_active() ) {
-	if ( file_exists( TF_INC_PATH . 'functions/woocommerce/wc-car.php' ) ) {
-		require_once TF_INC_PATH . 'functions/woocommerce/wc-car.php';
+	if ( file_exists( TOURFIC_INC_PATH . 'functions/woocommerce/wc-car.php' ) ) {
+		require_once TOURFIC_INC_PATH . 'functions/woocommerce/wc-car.php';
 	} else {
-		tf_file_missing( TF_INC_PATH . 'functions/woocommerce/wc-car.php' );
+		tourfic_file_missing( TOURFIC_INC_PATH . 'functions/woocommerce/wc-car.php' );
 	}
 }
 
@@ -26,17 +26,17 @@ if ( Helper::tf_is_woo_active() ) {
  * @include
  */
 
-add_action( 'wp_ajax_nopriv_tf_extra_add_to_booking', 'tf_extra_add_to_booking_callback' );
-add_action( 'wp_ajax_tf_extra_add_to_booking', 'tf_extra_add_to_booking_callback' );
+add_action( 'wp_ajax_nopriv_tourfic_extra_add_to_booking', 'tourfic_extra_add_to_booking_callback' );
+add_action( 'wp_ajax_tourfic_extra_add_to_booking', 'tourfic_extra_add_to_booking_callback' );
 
-if ( ! function_exists( 'tf_normalize_car_meta' ) ) {
+if ( ! function_exists( 'tourfic_normalize_car_meta' ) ) {
 	/**
 	 * Normalize car meta between legacy and modern key variants.
 	 *
 	 * @param array $meta Raw car meta.
 	 * @return array
 	 */
-	function tf_normalize_car_meta( $meta ) {
+	function tourfic_normalize_car_meta( $meta ) {
 		if ( ! is_array( $meta ) ) {
 			return array();
 		}
@@ -91,7 +91,7 @@ if ( ! function_exists( 'tf_normalize_car_meta' ) ) {
 	}
 }
 
-if ( ! function_exists( 'tf_car_get_total_price_display_html' ) ) {
+if ( ! function_exists( 'tourfic_car_get_total_price_display_html' ) ) {
 	/**
 	 * Format car total price HTML with optional strike-through regular amount.
 	 *
@@ -99,7 +99,7 @@ if ( ! function_exists( 'tf_car_get_total_price_display_html' ) ) {
 	 * @param float $regular_total Regular total amount before discount.
 	 * @return string
 	 */
-	function tf_car_get_total_price_display_html( $sale_total, $regular_total = 0 ) {
+	function tourfic_car_get_total_price_display_html( $sale_total, $regular_total = 0 ) {
 		$sale_total    = max( 0, (float) $sale_total );
 		$regular_total = max( 0, (float) $regular_total );
 
@@ -123,7 +123,7 @@ if ( ! function_exists( 'tf_car_get_total_price_display_html' ) ) {
 	}
 }
 
-function tf_extra_add_to_booking_callback() {
+function tourfic_extra_add_to_booking_callback() {
 // Check nonce security
 if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 	return;
@@ -132,16 +132,16 @@ $response = [];
 $post_id = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
 // Get meta safely
 $meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
-$meta = tf_normalize_car_meta( $meta );
+$meta = tourfic_normalize_car_meta( $meta );
 
-$car_extra = apply_filters( 'tf_car_extra_meta', null, $post_id, $meta );
+$car_extra = apply_filters( 'tourfic_car_extra_meta', null, $post_id, $meta );
 // Extra key from POST
-$car_extra_pass = !empty( $_POST['extra_key'] ) ? $_POST['extra_key'] : ''; //phpcs:ignore
+$car_extra_pass = ! empty( $_POST['extra_key'] ) && is_array( $_POST['extra_key'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['extra_key'] ) ) : [];
 
 // Quantity from POST
-$extra_qty = !empty( $_POST['qty'] ) ? $_POST['qty'] : 0; //phpcs:ignore
-$pickup_date = !empty($_POST['pickup_date']) ? tf_normalize_date( sanitize_text_field($_POST['pickup_date']) ) : ''; //phpcs:ignore
-$dropoff_date = !empty($_POST['dropoff_date']) ? tf_normalize_date( sanitize_text_field($_POST['dropoff_date']) ) : ''; //phpcs:ignore
+$extra_qty = ! empty( $_POST['qty'] ) && is_array( $_POST['qty'] ) ? array_map( 'absint', wp_unslash( $_POST['qty'] ) ) : [];
+$pickup_date = !empty($_POST['pickup_date']) ? tourfic_normalize_date( sanitize_text_field( wp_unslash( $_POST['pickup_date'] ) ) ) : '';
+$dropoff_date = !empty($_POST['dropoff_date']) ? tourfic_normalize_date( sanitize_text_field( wp_unslash( $_POST['dropoff_date'] ) ) ) : '';
 $pickup_time = !empty($_POST['pickup_time']) ? sanitize_text_field(wp_unslash($_POST['pickup_time'])) : '';
 $dropoff_time = !empty($_POST['dropoff_time']) ? sanitize_text_field(wp_unslash($_POST['dropoff_time'])) : '';
 
@@ -162,13 +162,13 @@ if(!empty($car_extra_pass)){
 	$total_prices = $total_prices + $total_extra['price'];
 	$total_regular_prices = $total_regular_prices + $total_extra['price'];
 }
-$response['total_price'] = tf_car_get_total_price_display_html( $total_prices, $total_regular_prices );
+$response['total_price'] = tourfic_car_get_total_price_display_html( $total_prices, $total_regular_prices );
 
 $total_days = 1;
 if( !empty($pickup_date) && !empty($dropoff_date) && !empty($pickup_time) && !empty($dropoff_time) ){
 	// Combine date and time
-	$pickup_datetime = tf_car_create_datetime( $pickup_date, $pickup_time );
-	$dropoff_datetime = tf_car_create_datetime( $dropoff_date, $dropoff_time );
+	$pickup_datetime = tourfic_car_create_datetime( $pickup_date, $pickup_time );
+	$dropoff_datetime = tourfic_car_create_datetime( $dropoff_date, $dropoff_time );
 
 	if ( $pickup_datetime && $dropoff_datetime ) {
 		// Calculate the difference
@@ -222,10 +222,10 @@ wp_send_json( $response );
 wp_die();
 }
 
-function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = '', $dropoff_date = '', $pickup_time = '', $dropoff_time = '', $settings = []){
+function tourfic_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = '', $dropoff_date = '', $pickup_time = '', $dropoff_time = '', $settings = []){
 	$post_id = get_the_ID();
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
-	$meta = tf_normalize_car_meta( $meta );
+	$meta = tourfic_normalize_car_meta( $meta );
 	// Single link
 	$url = get_the_permalink();
 	$url = add_query_arg( array(
@@ -309,7 +309,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 
 				$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings, 'image_size_customize' );
 			} elseif ( '' === $thumbnail_html && 'yes' !== $show_fallback_img ) {
-				$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+				$thumbnail_html = '<img src="' . esc_url( TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
 			}
 		} else {
 			$image_size = isset( $settings['image_size'] ) ? $settings['image_size'] : 'full';
@@ -323,7 +323,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 				}
 				$thumbnail_html = '<img src="' . esc_url( $fallback_img_src ) . '" class="attachment-' . esc_attr( $image_size ) . ' size-' . esc_attr( $image_size ) . ' wp-post-image">';
 			} else {
-				$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+				$thumbnail_html = '<img src="' . esc_url( TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
 			}
 		}
 	}
@@ -338,7 +338,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 		} elseif ( has_post_thumbnail() ) {
 			the_post_thumbnail( 'full' );
 		} else {
-			echo '<img src="' . esc_url(TF_ASSETS_APP_URL) . "images/feature-default.jpg" . '">';
+			echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL) . "images/feature-default.jpg" . '">';
 		}
 		?>
 		<div class="tf-other-infos tf-flex">
@@ -534,7 +534,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 <?php
 }
 
-if ( ! function_exists( 'tf_get_car_archive_search_context' ) ) {
+if ( ! function_exists( 'tourfic_get_car_archive_search_context' ) ) {
 	/**
 	 * Build archive search context for car card rendering.
 	 *
@@ -542,7 +542,7 @@ if ( ! function_exists( 'tf_get_car_archive_search_context' ) ) {
 	 *
 	 * @return array
 	 */
-	function tf_get_car_archive_search_context() {
+	function tourfic_get_car_archive_search_context() {
 		$default_time_str = '10:00';
 		$disable_car_time_slot = ! empty( Helper::tfopt( 'disable-car-time-slots' ) ) ? (bool) Helper::tfopt( 'disable-car-time-slots' ) : false;
 
@@ -554,8 +554,8 @@ if ( ! function_exists( 'tf_get_car_archive_search_context' ) ) {
 		}
 
 		$default_time = gmdate( 'g:i A', strtotime( $default_time_str ) );
-		$pickup_date  = ! empty( $_GET['pickup-date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash( $_GET['pickup-date'] ) ) ) : gmdate( 'Y/m/d', strtotime( '+1 day' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$dropoff_date = ! empty( $_GET['dropoff-date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash( $_GET['dropoff-date'] ) ) ) : gmdate( 'Y/m/d', strtotime( '+2 day' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$pickup_date  = ! empty( $_GET['pickup-date'] ) ? tourfic_normalize_date( sanitize_text_field( wp_unslash( $_GET['pickup-date'] ) ) ) : gmdate( 'Y/m/d', strtotime( '+1 day' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$dropoff_date = ! empty( $_GET['dropoff-date'] ) ? tourfic_normalize_date( sanitize_text_field( wp_unslash( $_GET['dropoff-date'] ) ) ) : gmdate( 'Y/m/d', strtotime( '+2 day' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		return array(
 			'pickup'       => ! empty( $_GET['pickup'] ) ? sanitize_text_field( wp_unslash( $_GET['pickup'] ) ) : '', // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -568,14 +568,14 @@ if ( ! function_exists( 'tf_get_car_archive_search_context' ) ) {
 	}
 }
 
-if ( ! function_exists( 'tf_normalize_car_binary_filter_values' ) ) {
+if ( ! function_exists( 'tourfic_normalize_car_binary_filter_values' ) ) {
 	/**
 	 * Normalize binary car filter values.
 	 *
 	 * @param mixed $raw_values Filter raw values.
 	 * @return array
 	 */
-	function tf_normalize_car_binary_filter_values( $raw_values ) {
+	function tourfic_normalize_car_binary_filter_values( $raw_values ) {
 		if ( '' === $raw_values || null === $raw_values ) {
 			return array();
 		}
@@ -600,9 +600,9 @@ if ( ! function_exists( 'tf_normalize_car_binary_filter_values' ) ) {
  * @include
  */
 
-function tf_car_availability_response($car_meta, array &$not_found, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_startprice='', $tf_endprice='', $tf_min_seat='', $tf_max_seat='', $tf_driver_age='', $car_driver_min_age=18, $car_driver_max_age=40, $tf_transmission = '', $tf_carplay_android_auto = '') {
+function tourfic_car_availability_response($car_meta, array &$not_found, $pickup='', $dropoff='', $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_startprice='', $tf_endprice='', $tf_min_seat='', $tf_max_seat='', $tf_driver_age='', $car_driver_min_age=18, $car_driver_max_age=40, $tf_transmission = '', $tf_carplay_android_auto = '') {
 
-	$car_meta = tf_normalize_car_meta( $car_meta );
+	$car_meta = tourfic_normalize_car_meta( $car_meta );
 	$has_car = false;
 	$pricing_type = !empty($car_meta["pricing_type"]) ? $car_meta["pricing_type"] : 'day_hour';
 	$price_by = !empty($car_meta["price_by"]) ? $car_meta["price_by"] : 'day';
@@ -709,7 +709,7 @@ function tf_car_availability_response($car_meta, array &$not_found, $pickup='', 
 		}
 	}
 
-	$selected_transmission = tf_normalize_car_binary_filter_values( $tf_transmission );
+	$selected_transmission = tourfic_normalize_car_binary_filter_values( $tf_transmission );
 	if ( $has_car && 1 === count( $selected_transmission ) ) {
 		$auto_transmission = isset( $car_meta['auto_transmission'] ) ? (string) absint( $car_meta['auto_transmission'] ) : '0';
 		if ( $selected_transmission[0] !== $auto_transmission ) {
@@ -717,7 +717,7 @@ function tf_car_availability_response($car_meta, array &$not_found, $pickup='', 
 		}
 	}
 
-	$selected_carplay_android_auto = tf_normalize_car_binary_filter_values( $tf_carplay_android_auto );
+	$selected_carplay_android_auto = tourfic_normalize_car_binary_filter_values( $tf_carplay_android_auto );
 	if ( $has_car && 1 === count( $selected_carplay_android_auto ) ) {
 		$carplay_android_auto = isset( $car_meta['carplay_android_auto'] ) ? (string) absint( $car_meta['carplay_android_auto'] ) : '0';
 		if ( $selected_carplay_android_auto[0] !== $carplay_android_auto ) {
@@ -748,8 +748,8 @@ function tf_car_availability_response($car_meta, array &$not_found, $pickup='', 
  *
  * @include
  */
-if ( ! function_exists( 'get_cars_min_max_price' ) ) {
-	function get_cars_min_max_price( $post_id = ''){
+if ( ! function_exists( 'tourfic_get_cars_min_max_price' ) ) {
+	function tourfic_get_cars_min_max_price( $post_id = ''){
 		$tf_car_min_max = array(
 			'posts_per_page' => - 1,
 			'post_type'      => 'tf_carrental',
@@ -767,7 +767,7 @@ if ( ! function_exists( 'get_cars_min_max_price' ) ) {
 			while ( $tf_car_min_max_query->have_posts() ) : $tf_car_min_max_query->the_post();
 
 				$meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
-				$meta = tf_normalize_car_meta( $meta );
+				$meta = tourfic_normalize_car_meta( $meta );
 				
 				if ( ! empty( $meta['passengers'] ) ) {
 					$tf_car_min_max_seat[] = $meta['passengers'];
@@ -849,10 +849,10 @@ if ( ! function_exists( 'get_cars_min_max_price' ) ) {
  * Car search ajax
  * @author Jahid
  */
-add_action( 'wp_ajax_tf_car_search', 'tf_car_search_ajax_callback' );
-add_action( 'wp_ajax_nopriv_tf_car_search', 'tf_car_search_ajax_callback' );
-if ( ! function_exists( 'tf_car_search_ajax_callback' ) ) {
-	function tf_car_search_ajax_callback() {
+add_action( 'wp_ajax_tourfic_car_search', 'tourfic_car_search_ajax_callback' );
+add_action( 'wp_ajax_nopriv_tourfic_car_search', 'tourfic_car_search_ajax_callback' );
+if ( ! function_exists( 'tourfic_car_search_ajax_callback' ) ) {
+	function tourfic_car_search_ajax_callback() {
 		// Check nonce security
 		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 			return;
@@ -918,7 +918,7 @@ if ( ! function_exists( 'tf_car_search_ajax_callback' ) ) {
  * @author Jahid
  */
 
-if ( ! function_exists( 'tf_car_create_datetime' ) ) {
+if ( ! function_exists( 'tourfic_car_create_datetime' ) ) {
 	/**
 	 * Create DateTime from car booking date/time input safely.
 	 *
@@ -927,8 +927,8 @@ if ( ! function_exists( 'tf_car_create_datetime' ) ) {
 	 * @param DateTimeZone|false $timezone Optional timezone.
 	 * @return DateTime|false
 	 */
-	function tf_car_create_datetime( $date, $time, $timezone = false ) {
-		$date = ! empty( $date ) ? tf_normalize_date( sanitize_text_field( $date ) ) : '';
+	function tourfic_car_create_datetime( $date, $time, $timezone = false ) {
+		$date = ! empty( $date ) ? tourfic_normalize_date( sanitize_text_field( $date ) ) : '';
 		$time = ! empty( $time ) ? sanitize_text_field( $time ) : '';
 
 		if ( empty( $date ) || empty( $time ) ) {
@@ -966,14 +966,14 @@ if ( ! function_exists( 'tf_car_create_datetime' ) ) {
 	}
 }
 
-function tf_getBestRefundPolicy($cancellations, $pickup_date, $pickup_time) {
+function tourfic_getBestRefundPolicy($cancellations, $pickup_date, $pickup_time) {
     $bestPolicy = null;
 
 	$tf_default_time_zone = ! empty( Helper::tfopt( 'cancellation_time_zone' ) ) ? Helper::tfopt( 'cancellation_time_zone' ) : 'America/New_York';
 	$timezone = new DateTimeZone($tf_default_time_zone);
 
 	$today = new DateTime('now', $timezone);
-	$pickupDateTime = tf_car_create_datetime( $pickup_date, $pickup_time, $timezone );
+	$pickupDateTime = tourfic_car_create_datetime( $pickup_date, $pickup_time, $timezone );
 	$days = 0;
 	$hours = 0;
 
@@ -1024,9 +1024,9 @@ function tf_getBestRefundPolicy($cancellations, $pickup_date, $pickup_time) {
     return $bestPolicy;
 }
 
-add_action( 'wp_ajax_nopriv_tf_car_booking_pupup', 'tf_car_booking_pupup_callback' );
-add_action( 'wp_ajax_tf_car_booking_pupup', 'tf_car_booking_pupup_callback' );
-function tf_car_booking_pupup_callback() {
+add_action( 'wp_ajax_nopriv_tourfic_car_booking_pupup', 'tourfic_car_booking_pupup_callback' );
+add_action( 'wp_ajax_tourfic_car_booking_pupup', 'tourfic_car_booking_pupup_callback' );
+function tourfic_car_booking_pupup_callback() {
 	// Check nonce security
 	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 		return;
@@ -1045,10 +1045,10 @@ function tf_car_booking_pupup_callback() {
 	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
 	$car_protection_tab_title = ! empty( $meta['protection_tab_title'] ) ? esc_html($meta['protection_tab_title']) : __('Protection', 'tourfic');
 
-	$pickup_date = ! empty( $_POST['pickup_date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash($_POST['pickup_date']) ) ) : '';
+	$pickup_date = ! empty( $_POST['pickup_date'] ) ? tourfic_normalize_date( sanitize_text_field( wp_unslash($_POST['pickup_date']) ) ) : '';
 	$pickup_time = ! empty( $_POST['pickup_time'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_time']) ) : '';
 
-	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash($_POST['dropoff_date']) ) ) : '';
+	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? tourfic_normalize_date( sanitize_text_field( wp_unslash($_POST['dropoff_date']) ) ) : '';
 	$dropoff_time = ! empty( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
 
 	$booking_btn_text = !empty(Helper::tfopt('car_booking_form_button_text')) ? Helper::tfopt('car_booking_form_button_text') : __('Continue', 'tourfic');
@@ -1086,8 +1086,8 @@ function tf_car_booking_pupup_callback() {
 							<?php
 								if( 'day' == $protection['price_by'] ){
 									// Combine date and time
-									$pickup_datetime = tf_car_create_datetime( $pickup_date, $pickup_time );
-									$dropoff_datetime = tf_car_create_datetime( $dropoff_date, $dropoff_time );
+									$pickup_datetime = tourfic_car_create_datetime( $pickup_date, $pickup_time );
+									$dropoff_datetime = tourfic_car_create_datetime( $dropoff_date, $dropoff_time );
 
 									if ( $pickup_datetime && $dropoff_datetime ) {
 										// Calculate the difference
@@ -1253,15 +1253,15 @@ function tf_car_booking_pupup_callback() {
 	wp_die();
 }
 
-add_action("admin_init", "tf_remove_sidebar_category_meta_box");
-function tf_remove_sidebar_category_meta_box() {
+add_action("admin_init", "tourfic_remove_sidebar_category_meta_box");
+function tourfic_remove_sidebar_category_meta_box() {
 	remove_meta_box( 'carrental_branddiv', array( 'tf_carrental' ), 'normal' );
 	remove_meta_box( 'carrental_fuel_typediv', array( 'tf_carrental' ), 'normal' );
 	remove_meta_box( 'carrental_engine_yeardiv', array( 'tf_carrental' ), 'normal' );
 }
 
 // tf refund Policy
-function tf_getRefundPolicy($cancellations, $pickup_date, $pickup_time) {
+function tourfic_getRefundPolicy($cancellations, $pickup_date, $pickup_time) {
     $freePolicies = [];
     $bestPaidPolicy = null;
 
@@ -1269,7 +1269,7 @@ function tf_getRefundPolicy($cancellations, $pickup_date, $pickup_time) {
     $timezone = new DateTimeZone($tf_default_time_zone);
 
 	$today = new DateTime('now', $timezone);
-	$pickupDateTime = tf_car_create_datetime( $pickup_date, $pickup_time, $timezone );
+	$pickupDateTime = tourfic_car_create_datetime( $pickup_date, $pickup_time, $timezone );
 	$days = 0;
 	$hours = 0;
 
@@ -1328,9 +1328,9 @@ function tf_getRefundPolicy($cancellations, $pickup_date, $pickup_time) {
     return $bestPolicies;
 }
 
-add_action( 'wp_ajax_nopriv_tf_car_price_calculation', 'tf_car_price_calculation_callback' );
-add_action( 'wp_ajax_tf_car_price_calculation', 'tf_car_price_calculation_callback' );
-function tf_car_price_calculation_callback() {
+add_action( 'wp_ajax_nopriv_tourfic_car_price_calculation', 'tourfic_car_price_calculation_callback' );
+add_action( 'wp_ajax_tourfic_car_price_calculation', 'tourfic_car_price_calculation_callback' );
+function tourfic_car_price_calculation_callback() {
 	// Check nonce security
 	if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 		return;
@@ -1340,8 +1340,8 @@ function tf_car_price_calculation_callback() {
 	 * Get car meta values
 	 */
 	$post_id   = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( wp_unslash($_POST['post_id']) ) ) : null;
-	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? tf_normalize_date(sanitize_text_field( wp_unslash($_POST['pickup_date']) )) : '';
-	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? tf_normalize_date(sanitize_text_field( wp_unslash($_POST['dropoff_date']) )) : '';
+	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? tourfic_normalize_date(sanitize_text_field( wp_unslash($_POST['pickup_date']) )) : '';
+	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? tourfic_normalize_date(sanitize_text_field( wp_unslash($_POST['dropoff_date']) )) : '';
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_time']) ) : '';
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
 
@@ -1373,9 +1373,9 @@ function tf_car_price_calculation_callback() {
 		$total_regular_prices = $total_regular_prices + $total_extra['price'];
 	}
 	
-	$car_calcellation_policy = apply_filters( 'tf_cancellation_policy_meta', [], $post_id, $meta );
-	$bestRefundPolicy = tf_getBestRefundPolicy($car_calcellation_policy, $tf_pickup_date, $tf_pickup_time);
-	$twobestRefundPolicy = tf_getRefundPolicy($car_calcellation_policy, $tf_pickup_date, $tf_pickup_time);
+	$car_calcellation_policy = apply_filters( 'tourfic_cancellation_policy_meta', [], $post_id, $meta );
+	$bestRefundPolicy = tourfic_getBestRefundPolicy($car_calcellation_policy, $tf_pickup_date, $tf_pickup_time);
+	$twobestRefundPolicy = tourfic_getRefundPolicy($car_calcellation_policy, $tf_pickup_date, $tf_pickup_time);
 	
 	$tf_default_time_zone = ! empty( Helper::tfopt( 'cancellation_time_zone' ) ) ? Helper::tfopt( 'cancellation_time_zone' ) : 'America/New_York';
 	$timezone = new DateTimeZone($tf_default_time_zone);
@@ -1386,7 +1386,7 @@ function tf_car_price_calculation_callback() {
 	$beforeTime = '';
 
 	// Combine pickup date and time into a single string and convert it to a DateTime object
-	$pickupDateTime = tf_car_create_datetime( $tf_pickup_date, $tf_pickup_time, $timezone );
+	$pickupDateTime = tourfic_car_create_datetime( $tf_pickup_date, $tf_pickup_time, $timezone );
 
 	// Extract the "before_cancel_time" and "cancellation-times" (hours, days, etc.)
 	$beforeCancelTime = !empty($bestRefundPolicy['before_cancel_time']) ? (int) $bestRefundPolicy['before_cancel_time'] : 0;
@@ -1451,7 +1451,7 @@ function tf_car_price_calculation_callback() {
             <ul>';
             
 			// Add timeline items dynamically based on the best refund policies
-			$twobestRefundPolicy = tf_getRefundPolicy($car_calcellation_policy, $tf_pickup_date, $tf_pickup_time);
+			$twobestRefundPolicy = tourfic_getRefundPolicy($car_calcellation_policy, $tf_pickup_date, $tf_pickup_time);
 			if (!empty($twobestRefundPolicy)) {
 				foreach ($twobestRefundPolicy as $policy) {
 					$policyType = $policy['cancellation_type'] === 'free' ? esc_html__('Fully refundable', 'tourfic') : esc_html__('Charged', 'tourfic');
@@ -1490,7 +1490,7 @@ function tf_car_price_calculation_callback() {
 	// Send response
 	wp_send_json_success(
 		array(
-			'total_price'  => tf_car_get_total_price_display_html( $total_prices, $total_regular_prices ),
+			'total_price'  => tourfic_car_get_total_price_display_html( $total_prices, $total_regular_prices ),
 			'cancellation' => $cancellation,
 		)
 	);

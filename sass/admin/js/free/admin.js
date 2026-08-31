@@ -22,7 +22,7 @@
             e.preventDefault();
             var $this = $(this);
             var data = {
-                action: 'tf_delete_old_review_fields',
+                action: 'tourfic_delete_old_review_fields',
                 deleteAll: $(this).data('delete-all'),
                 _ajax_nonce: tf_admin_params.tf_nonce
             };
@@ -57,7 +57,7 @@
             var post_id = $("#post_ID").val();
             var meta_field = $this.closest('.tf-repeater-content-wrap').find('.tf-order_id input').attr('name');
             var data = {
-                action: 'tf_remove_room_order_ids',
+                action: 'tourfic_remove_room_order_ids',
                 meta_field: meta_field,
                 post_id: post_id,
                 _ajax_nonce: tf_admin_params.tf_nonce
@@ -137,7 +137,7 @@
             current.addClass('updating-message').text(tf_admin_params.installing);
 
             var data = {
-                action: 'tf_ajax_install_plugin',
+                action: 'tourfic_ajax_install_plugin',
                 _ajax_nonce: tf_admin_params.tf_nonce,
                 slug: plugin_slug,
             };
@@ -192,7 +192,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_ticket_status_change',
+                        action: 'tourfic_ticket_status_change',
                         _ajax_nonce: tf_admin_params.tf_nonce,
                         status: "check in",
                         order_unique_id: order_unique_id,
@@ -208,7 +208,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_ticket_status_change',
+                        action: 'tourfic_ticket_status_change',
                         _ajax_nonce: tf_admin_params.tf_nonce,
                         status: "",
                         order_unique_id: order_unique_id,
@@ -236,7 +236,7 @@
                 type: 'POST',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: 'tf_duplicate_post_data',
+                    action: 'tourfic_duplicate_post_data',
                     postID: postID,
                     postType: postType,
                     security: nonce

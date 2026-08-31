@@ -2,7 +2,7 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
-TF_Taxonomy_Metabox::taxonomy( 'tour_features', array(
+Tourfic_Taxonomy_Metabox::taxonomy( 'tour_features', array(
 	'taxonomy' => 'tour_features',
 	'fields'   => array(
 		array(

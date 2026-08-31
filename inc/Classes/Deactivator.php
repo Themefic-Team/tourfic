@@ -26,7 +26,7 @@ class Deactivator {
 	}
 
 	public function __construct() {
-		register_deactivation_hook( TF_PATH . 'tourfic.php', array( $this, 'deactivate' ) );
+		register_deactivation_hook( TOURFIC_PATH . 'tourfic.php', array( $this, 'deactivate' ) );
 	}
 
 	/**
@@ -53,9 +53,9 @@ class Deactivator {
 			'qr_code_scanner',
 		);
 		foreach ( $pages as $page ) {
-			if ( is_page( get_option( 'tf_' . $page . '_page_id' ) ) ) {
-				wp_delete_post( get_option( 'tf_' . $page . '_page_id' ), true );
-				delete_option( 'tf_' . $page . '_page_id' );
+			if ( is_page( get_option( 'tourfic_' . $page . '_page_id' ) ) ) {
+				wp_delete_post( get_option( 'tourfic_' . $page . '_page_id' ), true );
+				delete_option( 'tourfic_' . $page . '_page_id' );
 			}
 		}
 	}

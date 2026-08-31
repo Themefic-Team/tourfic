@@ -10,9 +10,9 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Hotel\Hotel;
 use \Tourfic\Classes\Hotel\Pricing;
 
- if(tf_is_block_theme()){
+ if(tourfic_is_block_theme()){
     wp_head();
-    tf_render_block_header_area();
+    tourfic_render_block_header_area();
 }else{
     get_header();
 }
@@ -44,7 +44,7 @@ if( $tourfic_post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="d
     <div class="tf-container">
 		<h3><?php echo esc_html( $tourfic_taxonomy_name ); ?></h3>
         <div class="tf-row tf-archive-inner tf-flex">
-		<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
+		<?php require_once TOURFIC_TEMPLATE_PART_PATH . 'archive.php'; ?>
 		<!-- SideBar-->
 		<div class="tf-sidebar tf-archive-right">
 			<?php 
@@ -86,7 +86,7 @@ if( $tourfic_post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="d
                         Helper::tf_archive_sidebar_search_form($tourfic_post_type, '', '', '');
                     }
                     ?>
-					<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
+					<?php require_once TOURFIC_TEMPLATE_PART_PATH . 'archive.php'; ?>
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
                     <div class="tf-filter-wrapper">
@@ -129,7 +129,7 @@ if( $tourfic_post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="d
 
         <div class="tf-content-wrapper">
             <?php
-            do_action('tf_before_container');
+            do_action('tourfic_before_container');
             $tourfic_post_count = $GLOBALS['wp_query']->post_count;
             $tourfic_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
             $tourfic_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
@@ -147,7 +147,7 @@ if( $tourfic_post_type == "tf_hotel" && $tourfic_hotel_arc_selected_template=="d
                 </div>
             </div>
 
-            <?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
+            <?php require_once TOURFIC_TEMPLATE_PART_PATH . 'archive.php'; ?>
         </div>
         <!--Content section end -->
 
@@ -159,13 +159,13 @@ ob_start();
 ?>
 
 <div class="tf-main-wrapper tf-archive-template__legacy" data-fullwidth="true">
-    <?php do_action( 'tf_before_container' ); ?>
+    <?php do_action( 'tourfic_before_container' ); ?>
     <div class="tf-container">
         <h3><?php echo esc_html( $tourfic_taxonomy_name ); ?></h3>
         <div class="search-result-inner">
 
             <div class="tf-search-left">
-                <?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
+                <?php require_once TOURFIC_TEMPLATE_PART_PATH . 'archive.php'; ?>
             </div>
 
             <div class="tf-search-right">
@@ -185,17 +185,17 @@ ob_start();
 
         </div>
     </div>
-    <?php do_action( 'tf_after_container' ); ?>
+    <?php do_action( 'tourfic_after_container' ); ?>
 </div>
 
 <?php
 // Get the output and apply filter
 $tourfic_template_output = ob_get_clean();
-echo wp_kses( apply_filters( 'tf_hotel_location_archive_legacy_template', $tourfic_template_output, $tourfic_post_type, $tourfic_taxonomy, $tourfic_taxonomy_name, $tourfic_taxonomy_slug ), tf_custom_wp_kses_allow_tags() );
+echo wp_kses( apply_filters( 'tourfic_hotel_location_archive_legacy_template', $tourfic_template_output, $tourfic_post_type, $tourfic_taxonomy, $tourfic_taxonomy_name, $tourfic_taxonomy_slug ), tourfic_custom_wp_kses_allow_tags() );
 }
-if(tf_is_block_theme()){
+if(tourfic_is_block_theme()){
     wp_footer();
-    tf_render_block_footer_area();
+    tourfic_render_block_footer_area();
  }else{
 	get_footer();
  }

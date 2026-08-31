@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-function fontawesome_four_icons() {
+function tourfic_fontawesome_four_icons() {
 	$icons = array(
 		'fa fa-glass',
 		'fa fa-music',

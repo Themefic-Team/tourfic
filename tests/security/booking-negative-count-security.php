@@ -68,9 +68,9 @@ $hotel_source     = tf_booking_security_file( $files['hotel'] );
 $apartment_source = tf_booking_security_file( $files['apartment'] );
 $car_source       = tf_booking_security_file( $files['car'] );
 
-$tour_booking = tf_booking_security_function_body( $tour_source, 'tf_tours_booking_function' );
+$tour_booking = tf_booking_security_function_body( $tour_source, 'tourfic_tours_booking_function' );
 tf_booking_security_assert(
-	false !== strpos( $tour_source, "wp_ajax_nopriv_tf_tours_booking" ),
+	false !== strpos( $tour_source, "wp_ajax_nopriv_tourfic_tours_booking" ),
 	'Tour booking must remain a public booking endpoint.'
 );
 tf_booking_security_assert(
@@ -82,9 +82,9 @@ tf_booking_security_assert(
 	'Tour booking must not convert negative traveler counts with absint().'
 );
 
-$hotel_booking = tf_booking_security_function_body( $hotel_source, 'tf_hotel_booking_callback' );
+$hotel_booking = tf_booking_security_function_body( $hotel_source, 'tourfic_hotel_booking_callback' );
 tf_booking_security_assert(
-	false !== strpos( $hotel_source, "wp_ajax_nopriv_tf_hotel_booking" ),
+	false !== strpos( $hotel_source, "wp_ajax_nopriv_tourfic_hotel_booking" ),
 	'Hotel booking must remain a public booking endpoint.'
 );
 tf_booking_security_assert(
@@ -102,10 +102,10 @@ tf_booking_security_assert(
 
 $apartment_validation = tf_booking_security_function_body(
 	$apartment_source,
-	'tf_apartment_get_booking_validation_errors'
+	'tourfic_apartment_get_booking_validation_errors'
 );
 tf_booking_security_assert(
-	false !== strpos( $apartment_source, "wp_ajax_nopriv_tf_apartment_booking" ),
+	false !== strpos( $apartment_source, "wp_ajax_nopriv_tourfic_apartment_booking" ),
 	'Apartment booking must remain a public booking endpoint.'
 );
 tf_booking_security_assert(
@@ -117,9 +117,9 @@ tf_booking_security_assert(
 	'Apartment booking must not convert negative guest counts with absint().'
 );
 
-$car_booking = tf_booking_security_function_body( $car_source, 'tf_car_booking_callback' );
+$car_booking = tf_booking_security_function_body( $car_source, 'tourfic_car_booking_callback' );
 tf_booking_security_assert(
-	false !== strpos( $car_source, "wp_ajax_nopriv_tf_car_booking" ),
+	false !== strpos( $car_source, "wp_ajax_nopriv_tourfic_car_booking" ),
 	'Car booking must remain a public booking endpoint.'
 );
 tf_booking_security_assert(
@@ -127,10 +127,10 @@ tf_booking_security_assert(
 	'Car booking must reject negative extra quantities.'
 );
 
-$tour_price      = tf_booking_security_function_body( $tour_source, 'tf_tours_set_order_price' );
-$hotel_price     = tf_booking_security_function_body( $hotel_source, 'tf_hotel_set_order_price' );
-$apartment_price = tf_booking_security_function_body( $apartment_source, 'tf_aprtment_set_order_price' );
-$car_price       = tf_booking_security_function_body( $car_source, 'tf_car_set_order_price' );
+$tour_price      = tf_booking_security_function_body( $tour_source, 'tourfic_tours_set_order_price' );
+$hotel_price     = tf_booking_security_function_body( $hotel_source, 'tourfic_hotel_set_order_price' );
+$apartment_price = tf_booking_security_function_body( $apartment_source, 'tourfic_aprtment_set_order_price' );
+$car_price       = tf_booking_security_function_body( $car_source, 'tourfic_car_set_order_price' );
 
 tf_booking_security_assert(
 	false !== strpos( $tour_price, 'max( 0, $tour_price )' ),

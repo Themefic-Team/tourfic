@@ -117,10 +117,10 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
         parent::__construct($this->args);
 
 		// all actions
-		add_action( 'wp_ajax_tf_check_available_hotel', array( $this, 'tf_check_available_hotel' ) );
-		add_action( 'wp_ajax_tf_check_available_room', array( $this, 'tf_check_available_room' ) );
-		add_action( 'wp_ajax_tf_update_room_fields', array( $this, 'tf_update_room_fields' ) );
-		add_action( 'wp_ajax_tf_backend_hotel_booking', array( $this, 'backend_booking_callback' ) );
+		add_action( 'wp_ajax_tourfic_check_available_hotel', array( $this, 'tf_check_available_hotel' ) );
+		add_action( 'wp_ajax_tourfic_check_available_room', array( $this, 'tf_check_available_room' ) );
+		add_action( 'wp_ajax_tourfic_update_room_fields', array( $this, 'tf_update_room_fields' ) );
+		add_action( 'wp_ajax_tourfic_backend_hotel_booking', array( $this, 'backend_booking_callback' ) );
 	}
 
 	public function tf_check_available_hotel() {
@@ -546,7 +546,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 
 			$order_id = Helper::tf_set_order( $order_data );
 			if ( ! empty( $order_id ) ) {
-				do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
+				do_action( 'tourfic_offline_payment_booking_confirmation', $order_id, $order_data );
 			}
 
 			$rooms     = Room::get_hotel_rooms( intval( $field['tf_available_hotels'] ) );
@@ -577,7 +577,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 				 * @param array  $order_data The items in the order.
 				 * @param string $type Order type
 				 */
-				apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order_data, '' );
+				apply_filters( 'tourfic_after_booking_completed_calendar_data', $order_id, $order_data, '' );
 			}
 
 			$response['success'] = true;
@@ -617,7 +617,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		if ( $avail_by_date ) {
 			$avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
 		}
-		$pricing_by      = apply_filters( 'tf_room_pricing_mode', 1, $room_data );
+		$pricing_by      = apply_filters( 'tourfic_room_pricing_mode', 1, $room_data );
 		$price_multi_day = ! empty( $room_data['price_multi_day'] ) ? $room_data['price_multi_day'] : false;
 
 		# Calculate night number

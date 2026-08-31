@@ -24,10 +24,10 @@ class TF_Handle_Emails {
         add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 7, 1 );
         //send cancellation mail
         //Offline Payment send confirmation mail
-        add_action( 'tf_offline_payment_booking_confirmation', array( $this,'tf_offline_booking_confirmation_callback'), 10, 2 );
+        add_action( 'tourfic_offline_payment_booking_confirmation', array( $this,'tf_offline_booking_confirmation_callback'), 10, 2 );
 
         // Order Email resend confirmation mail
-        add_action( 'wp_ajax_tf_order_status_email_resend', array( $this,'tf_order_status_email_resend_function' ) );
+        add_action( 'wp_ajax_tourfic_order_status_email_resend', array( $this,'tf_order_status_email_resend_function' ) );
 
     }
 
@@ -245,7 +245,7 @@ class TF_Handle_Emails {
 	 */
 	private function format_email_traveler_field_value( $value, $is_file = false, $empty_label = '' ) {
 		if ( $is_file ) {
-			$file_value = function_exists( 'tf_tour_normalize_file_field_value' ) ? tf_tour_normalize_file_field_value( $value ) : $value;
+			$file_value = function_exists( 'tourfic_tour_normalize_file_field_value' ) ? tourfic_tour_normalize_file_field_value( $value ) : $value;
 			$file_value = is_array( $file_value ) ? $file_value : array();
 
 			$file_name = ! empty( $file_value['filename'] ) ? $file_value['filename'] : '';
@@ -253,7 +253,7 @@ class TF_Handle_Emails {
 				return ! empty( $file_name ) ? esc_html( $file_name ) : esc_html( $empty_label );
 			}
 
-			$download_url = function_exists( 'tf_tour_get_traveler_document_download_url' ) ? tf_tour_get_traveler_document_download_url( $file_value['attachment_id'] ) : '';
+			$download_url = function_exists( 'tourfic_tour_get_traveler_document_download_url' ) ? tourfic_tour_get_traveler_document_download_url( $file_value['attachment_id'] ) : '';
 			$file_name    = ! empty( $file_name ) ? $file_name : get_the_title( $file_value['attachment_id'] );
 
 			if ( ! empty( $download_url ) ) {
@@ -794,7 +794,7 @@ class TF_Handle_Emails {
         );
 
         //include email template
-        $template_path = TF_EMAIL_TEMPLATES_PATH . $template;
+        $template_path = TOURFIC_EMAIL_TEMPLATES_PATH . $template;
         ob_start();
         include $template_path;
         $template = ob_get_clean();
@@ -805,7 +805,7 @@ class TF_Handle_Emails {
     //method get strings
     public static function get_emails_strings( $template_type, $sendto = 'admin', $string = 'heading' ) {
         $strings = apply_filters(
-            'tf_email_strings',
+            'tourfic_email_strings',
             array(
                 'order'              => array(
                     'admin'    => array(

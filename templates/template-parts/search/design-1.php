@@ -9,7 +9,7 @@ $tourfic_room_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfo
 
 if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_room" && $tourfic_room_arc_selected_template == "design-1" ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended
     $tourfic_room_arc_banner = ! empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar']) ?  Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar'] : '';
-    $tourfic_room_arc_banner = !empty($tourfic_room_arc_banner) ? $tourfic_room_arc_banner : TF_ASSETS_APP_URL . '/images/room-hero-banner.jpg';
+    $tourfic_room_arc_banner = !empty($tourfic_room_arc_banner) ? $tourfic_room_arc_banner : TOURFIC_ASSETS_APP_URL . '/images/room-hero-banner.jpg';
     ?>
 
     <div class="tf-archive-template__one sp-0">

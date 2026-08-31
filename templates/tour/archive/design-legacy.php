@@ -7,7 +7,7 @@ use Tourfic\App\Templates\Components\Shared\Archive\Sidebar;
 use Tourfic\App\Templates\Components\Tour\Archive\Listings;
 ?>
 <div class="tf-main-wrapper tf-archive-template__legacy" data-fullwidth="true">
-	<?php do_action( 'tf_before_container' ); ?>
+	<?php do_action( 'tourfic_before_container' ); ?>
 	<div class="tf-container">
 		<div class="search-result-inner">
 			<?php Listings::render_design_legacy(); ?>
@@ -20,5 +20,5 @@ use Tourfic\App\Templates\Components\Tour\Archive\Listings;
 			<!-- End Sidebar -->
 		</div>
 	</div>
-	<?php do_action( 'tf_after_container' ); ?>
+	<?php do_action( 'tourfic_after_container' ); ?>
 </div>

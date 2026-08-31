@@ -46,7 +46,7 @@ if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
     <!--Content section end -->
     <div class="tf-content-wrapper">
         <?php
-            do_action( 'tf_before_container' );
+            do_action( 'tourfic_before_container' );
             $tourfic_post_count = $GLOBALS['wp_query']->post_count;
         ?>
         <div class="tf-container">

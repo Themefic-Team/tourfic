@@ -10,8 +10,8 @@
  * @version 1.0.0
  *
  */
-if ( ! class_exists( 'TF_Switch_Group' ) ) {
-	class TF_Switch_Group extends TF_Fields {
+if ( ! class_exists( 'Tourfic_Switch_Group' ) ) {
+	class Tourfic_Switch_Group extends Tourfic_Fields {
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field);
 		}

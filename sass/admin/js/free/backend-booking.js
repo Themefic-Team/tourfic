@@ -97,7 +97,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_check_available_hotel',
+                        action: 'tourfic_check_available_hotel',
                         _nonce: tf_admin_params.tf_nonce,
                         from: from,
                         to: to,
@@ -148,7 +148,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_check_available_room',
+                        action: 'tourfic_check_available_room',
                         _nonce: tf_admin_params.tf_nonce,
                         hotel_id: hotel_id,
                         from: from,
@@ -210,7 +210,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_update_room_fields',
+                        action: 'tourfic_update_room_fields',
                         _nonce: tf_admin_params.tf_nonce,
                         hotel_id: hotel_id,
                         room_id: room_id,
@@ -264,7 +264,7 @@
             let btn = $(this);
             let form = btn.closest('form.tf-backend-hotel-booking');
             let formData = new FormData(form[0]);
-            formData.append('action', 'tf_backend_hotel_booking');
+            formData.append('action', 'tourfic_backend_hotel_booking');
             let requiredFields = [
                 'tf_hotel_booked_by', 'tf_customer_first_name', 'tf_customer_email', 'tf_customer_phone', 'tf_customer_country', 'tf_customer_address', 'tf_customer_city', 'tf_customer_state', 'tf_customer_zip', 'tf_hotel_date[from]', 'tf_hotel_date[to]', 'tf_available_hotels', 'tf_available_rooms', 'tf_hotel_rooms_number', 'tf_hotel_adults_number', 'tf_hotel_children_number'];
 
@@ -353,7 +353,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_tour_date_time_update',
+                        action: 'tourfic_tour_date_time_update',
                         _nonce: tf_admin_params.tf_nonce,
                         tour_id: tourId,
                     },
@@ -450,7 +450,7 @@
             let btn = $(this);
             let form = btn.closest('form.tf-backend-tour-booking');
             let formData = new FormData(form[0]);
-            formData.append('action', 'tf_backend_tour_booking');
+            formData.append('action', 'tourfic_backend_tour_booking');
             let requiredFields = ['tf_tours_booked_by', 'tf_customer_first_name', 'tf_customer_email', 'tf_customer_phone', 'tf_customer_country', 'tf_customer_address', 'tf_customer_city', 'tf_customer_state', 'tf_customer_zip', 'tf_tour_date', 'tf_available_tours', 'tf_tour_adults_number', 'tf_tour_children_number'];
 
             $.ajax({
@@ -527,7 +527,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_check_available_apartment',
+                        action: 'tourfic_check_available_apartment',
                         _nonce: tf_admin_params.tf_nonce,
                         from: fromValue,
                         to: toValue,
@@ -577,7 +577,7 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_check_apartment_aditional_fees',
+                        action: 'tourfic_check_apartment_aditional_fees',
                         _nonce: tf_admin_params.tf_nonce,
                         apartment_id: apartment_id,
                         from: from,
@@ -629,7 +629,7 @@
             let btn = $(this);
             let form = btn.closest('form.tf-backend-apartment-booking');
             let formData = new FormData(form[0]);
-            formData.append('action', 'tf_backend_apartment_booking');
+            formData.append('action', 'tourfic_backend_apartment_booking');
             let requiredFields = [
                 'tf_apartment_booked_by',
                 'tf_customer_first_name',

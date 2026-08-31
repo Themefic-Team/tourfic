@@ -1,11 +1,11 @@
 <?php
 // don't load directly
 defined( 'ABSPATH' ) || exit;
-$tourfic_hotel_name = apply_filters( 'tf_hotel_post_type_name_change_singular', esc_html__( 'Hotel', 'tourfic' ) );
-$tourfic_hotels_name = apply_filters( 'tf_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
-$tourfic_adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
+$tourfic_hotel_name = apply_filters( 'tourfic_hotel_post_type_name_change_singular', esc_html__( 'Hotel', 'tourfic' ) );
+$tourfic_hotels_name = apply_filters( 'tourfic_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
+$tourfic_adults_name = apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
-TF_Metabox::metabox( 'tf_room_opt', array(
+Tourfic_Metabox::metabox( 'tf_room_opt', array(
 	'title'     => esc_html__( 'Room Settings', 'tourfic' ),
 	'post_type' => 'tf_room',
 	'sections'  => array(
@@ -40,7 +40,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 					'options'  => array(
 						'design-1' => array(
 							'title' => esc_html__('Design 1', 'tourfic'),
-							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+							'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
 							'preview_link' => esc_url('https://tourfic.com/preview/cars/honda-city/'),
 						),
 					),
@@ -387,7 +387,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'id'         => 'tf-callback',
                     'type'       => 'callback',
                     'dependency' => array( 'reduce_num_room', '==', '1' ),
-                    'function'   => 'tf_remove_order_ids_from_room',
+                    'function'   => 'tourfic_remove_order_ids_from_room',
                 ),
 
 			),

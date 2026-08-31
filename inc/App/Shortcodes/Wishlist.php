@@ -10,7 +10,7 @@ class Wishlist extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
 
-	protected $shortcode = 'tf-wishlist';
+	protected $shortcode = 'tourfic_wishlist';
 
 	function render( $atts, $content = null ) {
 		$defaults = array(

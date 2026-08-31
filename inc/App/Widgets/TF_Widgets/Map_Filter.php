@@ -65,7 +65,7 @@ class Map_Filter extends \WP_Widget {
             is_post_type_archive('tf_apartment') ||
             (!empty($tax_post_type))) {
             extract($args);
-            $button_title = !empty($instance['title']) ? apply_filters('tf_map_button_title', $instance['title']) : esc_html__('Show on Map', 'tourfic');
+            $button_title = !empty($instance['title']) ? apply_filters('tourfic_map_button_title', $instance['title']) : esc_html__('Show on Map', 'tourfic');
             echo wp_kses_post($before_widget);
             if (is_post_type_archive('tf_hotel')) {
                 $this->widget_html($button_title, 'tf_hotel');
@@ -158,7 +158,7 @@ class Map_Filter extends \WP_Widget {
                 ?>
                 <div class="tf-notice">
                     <?php
-                    if (current_user_can('administrator')) {
+                    if (current_user_can('manage_options')) {
                         echo '<p>' . esc_html__('Google Maps is selected but the API key is missing. Please configure the API key ', 'tourfic') . '<a href="' . esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings')) . '" target="_blank">' . esc_html__('Map Settings', 'tourfic') . '</a></p>';
                     } else {
                         echo '<p>' . esc_html__('Access is restricted as Google Maps API key is not configured. Please contact the site administrator.', 'tourfic') . '</p>';
@@ -168,7 +168,7 @@ class Map_Filter extends \WP_Widget {
             <?php else: ?>
                 <div class="tf-map-widget-wrap">
                     <div class="tf-map-preview">
-                        <img src="<?php echo esc_url(TF_ASSETS_URL . 'app/images/map-img.png'); ?>" alt="">
+                        <img src="<?php echo esc_url(TOURFIC_ASSETS_URL . 'app/images/map-img.png'); ?>" alt="">
 
                         <div class="tf-map-preview-content">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="45" viewBox="0 0 32 45" fill="none">
@@ -189,7 +189,7 @@ class Map_Filter extends \WP_Widget {
                                     <!-- Loader Image -->
                                     <div id="tf_ajax_searchresult_loader">
                                         <div id="tf-searchresult-loader-img">
-                                            <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
+                                            <img src="<?php echo esc_url(TOURFIC_ASSETS_APP_URL) ?>images/loader.gif" alt="">
                                         </div>
                                     </div>
                                     <div class="tf-archive-hotels-wrapper">
@@ -267,7 +267,7 @@ class Map_Filter extends \WP_Widget {
                                                                     if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
                                                                         the_post_thumbnail( 'full' );
                                                                     } else {
-                                                                        echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
+                                                                        echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
                                                                     }
                                                                     ?>
                                                                 </a>
@@ -340,7 +340,7 @@ class Map_Filter extends \WP_Widget {
                                                                     if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
                                                                         the_post_thumbnail( 'full' );
                                                                     } else {
-                                                                        echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
+                                                                        echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
                                                                     }
                                                                     ?>
                                                                 </a>
@@ -411,7 +411,7 @@ class Map_Filter extends \WP_Widget {
                                                                     if (!empty(wp_get_attachment_url(get_post_thumbnail_id(), 'tf_gallery_thumb'))) {
                                                                         the_post_thumbnail('full');
                                                                     } else {
-                                                                        echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
+                                                                        echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
                                                                     }
                                                                     ?>
                                                                 </a>
@@ -448,7 +448,7 @@ class Map_Filter extends \WP_Widget {
                                                             'content' => base64_encode($infoWindowtext)
                                                         ];
                                                     }
-                                                    echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
+                                                    echo wp_kses(apply_filters("tourfic_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                                 }
                                             }
                                             $loop->rewind_posts();
@@ -489,7 +489,7 @@ class Map_Filter extends \WP_Widget {
                                                                     if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
                                                                         the_post_thumbnail( 'full' );
                                                                     } else {
-                                                                        echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
+                                                                        echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
                                                                     }
                                                                     ?>
                                                                 </a>
@@ -562,7 +562,7 @@ class Map_Filter extends \WP_Widget {
                                                                     if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
                                                                         the_post_thumbnail( 'full' );
                                                                     } else {
-                                                                        echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
+                                                                        echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
                                                                     }
                                                                     ?>
                                                                 </a>
@@ -633,7 +633,7 @@ class Map_Filter extends \WP_Widget {
                                                                     if (!empty(wp_get_attachment_url(get_post_thumbnail_id(), 'tf_gallery_thumb'))) {
                                                                         the_post_thumbnail('full');
                                                                     } else {
-                                                                        echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
+                                                                        echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
                                                                     }
                                                                     ?>
                                                                 </a>
@@ -670,7 +670,7 @@ class Map_Filter extends \WP_Widget {
                                                             'content' => base64_encode($infoWindowtext)
                                                         ];
                                                     }
-                                                    echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
+                                                    echo wp_kses(apply_filters("tourfic_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                                 }
                                             }
                                             wp_reset_postdata();
@@ -686,7 +686,7 @@ class Map_Filter extends \WP_Widget {
                                 </div>
 
                                 <div class="tf-details-right tf-archive-right">
-                                    <div id="map-marker" data-marker="<?php echo esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
+                                    <div id="map-marker" data-marker="<?php echo esc_url(TOURFIC_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
                                     <div class="tf-hotel-archive-map-wrap">
                                         <div id="tf-hotel-archive-map"></div>
                                     </div>
@@ -699,7 +699,7 @@ class Map_Filter extends \WP_Widget {
         <?php else: ?>
             <div class="tf-notice">
                 <?php
-                if (current_user_can('administrator')) {
+                if (current_user_can('manage_options')) {
                     echo '<p>' . esc_html__('Google Maps is not selected. Please configure it ', 'tourfic') . '<a href="' . esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings')) . '" target="_blank">' . esc_html__('Map Settings', 'tourfic') . '</a></p>';
                 } else {
                     echo '<p>' . esc_html__('Access is restricted as Google Maps is not enabled. Please contact the site administrator', 'tourfic') . '</p>';

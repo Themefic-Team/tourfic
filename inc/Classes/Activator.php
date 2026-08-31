@@ -61,7 +61,7 @@ class Activator {
 			'search_form'        => array(
 				'name'    => esc_html(_x( 'tf-search-form', 'Page slug', 'tourfic' )),
 				'title'   => esc_html(_x( 'TF Search Form', 'Page title', 'tourfic' )),
-				'content' => "[tf_search_form style='default' type='all' fullwidth='true' title='' subtitle='' classes='' advanced='enabled']",
+				'content' => "[tourfic_search_form style='default' type='all' fullwidth='true' title='' subtitle='' classes='' advanced='enabled']",
 			),
 			'wishlist'           => array(
 				'name'    => esc_html(_x( 'tf-wishlist', 'Page slug', 'tourfic' )),
@@ -147,22 +147,22 @@ class Activator {
 	function load_page_templates( $page_template ) {
 
 		if ( get_page_template_slug() == 'tf-search' ) {
-			$theme_files     = TF_PATH . 'templates/common/search-results.php';
+			$theme_files     = TOURFIC_PATH . 'templates/common/search-results.php';
 			$exists_in_theme = locate_template( $theme_files, false );
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
-				return TF_PATH . 'templates/common/search-results.php';
+				return TOURFIC_PATH . 'templates/common/search-results.php';
 			}
 		}
 
 		if ( get_page_template_slug() == 'tf-wishlist' ) {
-			$theme_files     = TF_PATH . 'templates/common/tf-wishlist.php';
+			$theme_files     = TOURFIC_PATH . 'templates/common/tf-wishlist.php';
 			$exists_in_theme = locate_template( $theme_files, false );
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
-				return TF_PATH . 'templates/common/tf-wishlist.php';
+				return TOURFIC_PATH . 'templates/common/tf-wishlist.php';
 			}
 		}
 
@@ -177,7 +177,7 @@ class Activator {
 	public function add_post_state( $post_states, $post ) {
 		$page_options = apply_filters(
 			'tourfic_page_option_names',
-			array( 'tf_search_page_id', 'tf_search_form_page_id', 'tf_wishlist_page_id' )
+			array( 'tourfic_search_page_id', 'tf_search_form_page_id', 'tourfic_wishlist_page_id' )
 		);
 		$page_ids     = array_map( 'get_option', $page_options );
 

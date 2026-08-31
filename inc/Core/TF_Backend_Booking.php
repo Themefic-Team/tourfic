@@ -21,7 +21,7 @@ abstract class TF_Backend_Booking {
 
 		// Add actions
 		add_action( 'admin_menu', array( $this, 'tf_backend_booking_menu' ) );
-		add_action( 'tf_before_' . $this->args["name"] . '_booking_details', array( $this, 'tf_backend_booking_button' ) );
+		add_action( 'tourfic_before_' . $this->args["name"] . '_booking_details', array( $this, 'tf_backend_booking_button' ) );
 
 	}
 
@@ -156,20 +156,20 @@ abstract class TF_Backend_Booking {
 		$booking_form_title = sprintf( esc_html__( 'Add New %s Booking', 'tourfic' ), ucfirst( $this->args["name"] ) );
 
 		// Filters to change booking form title and class
-		$booking_form_title = apply_filters('tf_' . $this->args["name"] . '_backend_booking_form_title', $booking_form_title);
-		$booking_form_class = apply_filters('tf_' . $this->args["name"] . '_backend_booking_form_class', $booking_form_class);
+		$booking_form_title = apply_filters('tourfic_' . $this->args["name"] . '_backend_booking_form_title', $booking_form_title);
+		$booking_form_class = apply_filters('tourfic_' . $this->args["name"] . '_backend_booking_form_class', $booking_form_class);
 
 		// before form action hook
-		do_action( 'tf_before_' . $this->args["name"] . '_backend_booking_form');
+		do_action( 'tourfic_before_' . $this->args["name"] . '_backend_booking_form');
 
 		?>
 		
         <form method="post" action="" class="<?php echo esc_attr( $booking_form_class ); ?>" enctype="multipart/form-data">
             <h1><?php echo esc_html( $booking_form_title ); ?></h1>
 			<?php
-			$tf_backend_booking_form_fields = apply_filters( 'tf_' . $this->args["name"] . '_backend_booking_form_card', $this->settings);
+			$tf_backend_booking_form_fields = apply_filters( 'tourfic_' . $this->args["name"] . '_backend_booking_form_card', $this->settings);
 			foreach ( $tf_backend_booking_form_fields as $id => $tf_backend_booking_form_field ) : ?>
-				<?php do_action( 'tf_before_' . $this->args["name"] . '_each_backend_booking_form_card'); ?>
+				<?php do_action( 'tourfic_before_' . $this->args["name"] . '_each_backend_booking_form_card'); ?>
                 <div class="tf-backend-booking-card-wrap">
                     <h3 class="tf-backend-booking-card-title"><?php echo esc_html( $tf_backend_booking_form_field['title'] ); ?></h3>
 
@@ -200,7 +200,7 @@ abstract class TF_Backend_Booking {
         </form>
 		<?php 
 		// after form action hook
-		do_action( 'tf_after_' . $this->args["name"] . '_backend_booking_form');
+		do_action( 'tourfic_after_' . $this->args["name"] . '_backend_booking_form');
 		
 		?>
 		<?php

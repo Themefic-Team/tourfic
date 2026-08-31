@@ -64,7 +64,7 @@
                     type: 'POST',
                     url: tf_params.ajax_url,
                     data: {
-                        action: 'tf_get_min_max_price',
+                        action: 'tourfic_get_min_max_price',
                         _nonce: tf_params.nonce,
                         post_type: post_type
                     },
@@ -427,7 +427,7 @@
             let builderSettings = $('#tf-builder-settings').text();
             
             var formData = new FormData();
-            formData.append('action', 'tf_trigger_filter');
+            formData.append('action', 'tourfic_trigger_filter');
             formData.append('_nonce', tf_params.nonce);
             formData.append('type', posttype);
             formData.append('page', page);
@@ -1052,7 +1052,7 @@
                 let ids = userLists.map(e => e.post);
                 let data = {
                     nonce: $(element).data('nonce'),
-                    action: 'tf_generate_table',
+                    action: 'tourfic_generate_table',
                     ids
                 }
                 $.post(tf_params.ajax_url, data,
@@ -1147,7 +1147,7 @@
 
             /* For logged in user */
             if ($('body').hasClass('logged-in')) {
-                data.action = 'tf_add_to_wishlists';
+                data.action = 'tourfic_add_to_wishlists';
                 data.nonce = targetNode.data('nonce');
                 $.ajax({
                     type: "post",
@@ -1208,7 +1208,7 @@
             if ($('body').hasClass('logged-in')) {
                 let tableNode = targetNode.closest('table');
                 let type = tableNode.data('type');
-                let data = {id, action: 'tf_remove_wishlist', type, nonce: targetNode.data('nonce')}
+                let data = {id, action: 'tourfic_remove_wishlist', type, nonce: targetNode.data('nonce')}
                 $.get(tf_params.ajax_url, data,
                     function (data) {
                         if (data.success) {
@@ -1695,7 +1695,7 @@
             var $this = $(this);
 
             var formData = new FormData(this);
-            formData.append('action', 'tf_ask_question');
+            formData.append('action', 'tourfic_ask_question');
 
             $.ajax({
                 type: 'post',
@@ -2051,7 +2051,7 @@
                 type: 'POST',
                 url: tf_params.ajax_url,
                 data: {
-                    action: 'tf_checkout_cart_item_remove',
+                    action: 'tourfic_checkout_cart_item_remove',
                     _nonce: tf_params.nonce,
                     cart_item_key: cart_item_key,
                 },
@@ -2804,7 +2804,7 @@
             var extras = extras.join();
             var quantities = quantity.join();
             var data = {
-                action: 'tf_tour_booking_popup',
+                action: 'tourfic_tour_booking_popup',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 adults: adults,
@@ -3071,7 +3071,7 @@
             var post_id = $(this).attr("data-hotel");
             var uniqid_id = $(this).attr("data-uniqid");
             var data = {
-                action: 'tf_tour_details_qv',
+                action: 'tourfic_tour_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 uniqid_id: uniqid_id
@@ -3105,7 +3105,7 @@
             var design = $('input[name=design]').val();
             var uniqid_id = $(this).attr("data-uniqid");
             var data = {
-                action: 'tf_tour_details_qv',
+                action: 'tourfic_tour_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 design: design,
@@ -3375,7 +3375,7 @@
             var post_type = $(this).attr("data-type");
 
             var data = {
-                action: 'tf_archive_gallery_popup_qv',
+                action: 'tourfic_archive_gallery_popup_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 post_type: post_type
@@ -3518,7 +3518,7 @@
             var post_id = $(this).attr("data-hotel");
             var uniqid_id = $(this).attr("data-uniqid");
             var data = {
-                action: 'tf_tour_details_qv',
+                action: 'tourfic_tour_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 uniqid_id: uniqid_id

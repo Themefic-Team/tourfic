@@ -4,8 +4,8 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 
-if ( ! class_exists( 'TF_Room_Rest_API' ) ) {
-	class TF_Room_Rest_API extends TF_Rest_API {
+if ( ! class_exists( 'Tourfic_Room_Rest_API' ) ) {
+	class Tourfic_Room_Rest_API extends Tourfic_Rest_API {
 
 		/*
 		 * instance
@@ -139,4 +139,4 @@ if ( ! class_exists( 'TF_Room_Rest_API' ) ) {
 	}
 }
 
-TF_Room_Rest_API::get_instance();
+Tourfic_Room_Rest_API::get_instance();

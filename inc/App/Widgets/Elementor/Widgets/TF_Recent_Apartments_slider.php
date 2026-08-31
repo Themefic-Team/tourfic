@@ -196,7 +196,7 @@ class TF_Recent_Apartments_slider extends \Elementor\Widget_Base {
 		$count = $settings['count'];
 		$slidestoshow = $settings['slidestoshow'];
 
-        echo do_shortcode('[tf_recent_apartment title="' .$title. '" subtitle="' .$subtitle. '" count="' .$count. '" slidestoshow="' .$slidestoshow. '"]');
+        echo do_shortcode('[tourfic_recent_apartment title="' .$title. '" subtitle="' .$subtitle. '" count="' .$count. '" slidestoshow="' .$slidestoshow. '"]');
 
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
 			<script>

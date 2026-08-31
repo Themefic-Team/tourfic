@@ -85,7 +85,7 @@ class Listings {
             </div>
 
             <div class="tf-room-archive-result">
-                <?php do_action("tf_room_archive_roomd_items_before"); ?>
+                <?php do_action("tourfic_room_archive_roomd_items_before"); ?>
                 <div class="tf-room-item-cards tf-flex tf-room-result archive_ajax_result">
                     <?php
                     if ($query->have_posts()) {
@@ -104,7 +104,7 @@ class Listings {
                         </div>
                     <?php endif; ?>
                 </div>
-                <?php do_action("tf_room_archive_roomd_items_after"); ?>
+                <?php do_action("tourfic_room_archive_roomd_items_after"); ?>
             </div>
             <?php echo empty($builder) ? '</div>' : ''; ?>
         </div>

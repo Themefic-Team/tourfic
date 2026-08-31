@@ -189,12 +189,12 @@ class Review {
 					<div class="tf-reviews-slider tf-slick-slider">
 						<?php
 						foreach ( $comments as $comment ) {
-							$tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+							$tf_overall_rate = get_comment_meta( $comment->comment_ID, TOURFIC_TOTAL_RATINGS, true );
 							if ( $tf_overall_rate == false ) {
-								$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+								$tf_comment_meta = get_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, true );
 								$tf_overall_rate = TF_Review::tf_average_ratings( $tf_comment_meta );
 							}
-							$base_rate     = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+							$base_rate     = get_comment_meta( $comment->comment_ID, TOURFIC_BASE_RATE, true );
 							$c_rating      = TF_Review::tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
 							$c_avatar      = get_avatar( $comment, '56' );
 							$c_author_name = $comment->comment_author;
@@ -364,12 +364,12 @@ class Review {
 					<div class="tf-review-items">
 						<?php
 						foreach ( $comments as $comment ) {
-							$tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+							$tf_overall_rate = get_comment_meta( $comment->comment_ID, TOURFIC_TOTAL_RATINGS, true );
 							if ( $tf_overall_rate == false ) {
-								$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+								$tf_comment_meta = get_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, true );
 								$tf_overall_rate = TF_Review::tf_average_ratings( $tf_comment_meta );
 							}
-							$base_rate     = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+							$base_rate     = get_comment_meta( $comment->comment_ID, TOURFIC_BASE_RATE, true );
 							$c_rating      = TF_Review::tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
 							$c_avatar      = get_avatar( $comment, '64' );
 							$c_author_name = $comment->comment_author;
@@ -551,12 +551,12 @@ class Review {
 					<div class="tf-reviews-slider tf-slick-slider">
 						<?php
 						foreach ( $comments as $comment ) {
-							$tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+							$tf_overall_rate = get_comment_meta( $comment->comment_ID, TOURFIC_TOTAL_RATINGS, true );
 							if ( $tf_overall_rate == false ) {
-								$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+								$tf_comment_meta = get_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, true );
 								$tf_overall_rate = TF_Review::tf_average_ratings( $tf_comment_meta );
 							}
-							$base_rate     = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+							$base_rate     = get_comment_meta( $comment->comment_ID, TOURFIC_BASE_RATE, true );
 							$c_rating      = TF_Review::tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
 							$c_avatar      = get_avatar( $comment, '56' );
 							$c_author_name = $comment->comment_author;
@@ -727,12 +727,12 @@ class Review {
 					<div class="tf-reviews-slider tf-slick-slider">
 						<?php
 						foreach ( $comments as $comment ) {
-							$tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+							$tf_overall_rate = get_comment_meta( $comment->comment_ID, TOURFIC_TOTAL_RATINGS, true );
 							if ( $tf_overall_rate == false ) {
-								$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+								$tf_comment_meta = get_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, true );
 								$tf_overall_rate = TF_Review::tf_average_ratings( $tf_comment_meta );
 							}
-							$base_rate     = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+							$base_rate     = get_comment_meta( $comment->comment_ID, TOURFIC_BASE_RATE, true );
 							$c_rating      = TF_Review::tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
 							$c_avatar      = get_avatar( $comment, '56' );
 							$c_author_name = $comment->comment_author;
@@ -857,12 +857,12 @@ class Review {
 						<div class="tf-clients-reviews">
 							<?php
 							foreach ( $comments as $comment ) {
-								$tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+								$tf_overall_rate = get_comment_meta( $comment->comment_ID, TOURFIC_TOTAL_RATINGS, true );
 								if ( $tf_overall_rate == false ) {
-									$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+									$tf_comment_meta = get_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, true );
 									$tf_overall_rate = TF_Review::tf_average_ratings( $tf_comment_meta );
 								}
-								$base_rate     = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+								$base_rate     = get_comment_meta( $comment->comment_ID, TOURFIC_BASE_RATE, true );
 								$c_rating      = TF_Review::tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
 								$c_avatar      = get_avatar( $comment, '56' );
 								$c_author_name = $comment->comment_author;
@@ -985,12 +985,12 @@ class Review {
 					</div>
 					<?php
 					foreach ( $comments as $comment ) {
-						$tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+						$tf_overall_rate = get_comment_meta( $comment->comment_ID, TOURFIC_TOTAL_RATINGS, true );
 						if ( $tf_overall_rate == false ) {
-							$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+							$tf_comment_meta = get_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, true );
 							$tf_overall_rate = TF_Review::tf_average_ratings( $tf_comment_meta );
 						}
-						$base_rate     = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+						$base_rate     = get_comment_meta( $comment->comment_ID, TOURFIC_BASE_RATE, true );
 						$c_rating      = TF_Review::tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
 						$c_avatar      = get_avatar( $comment, '56' );
 						$c_author_name = $comment->comment_author;
@@ -1162,12 +1162,12 @@ class Review {
 					<div class="tf-single-review <?php echo esc_attr( $post_type ); ?>">
 						<?php
 						foreach ( $comments2 as $comment ) {
-							$tf_overall_rate = get_comment_meta( $comment->comment_ID, TF_TOTAL_RATINGS, true );
+							$tf_overall_rate = get_comment_meta( $comment->comment_ID, TOURFIC_TOTAL_RATINGS, true );
 							if ( $tf_overall_rate == false ) {
-								$tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+								$tf_comment_meta = get_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, true );
 								$tf_overall_rate = TF_Review::tf_average_ratings( $tf_comment_meta );
 							}
-							$base_rate     = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+							$base_rate     = get_comment_meta( $comment->comment_ID, TOURFIC_BASE_RATE, true );
 							$c_rating      = TF_Review::tf_single_rating_change_on_base( $tf_overall_rate, $base_rate );
 							$c_avatar      = get_avatar( $comment, '56' );
 							$c_author_name = $comment->comment_author;

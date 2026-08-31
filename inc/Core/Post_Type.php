@@ -26,6 +26,7 @@ abstract class Post_Type {
 
 	public function tf_post_type_register() {
 		$post_args = $this->post_args;
+		$hook_slug = 0 === strpos( $post_args['slug'], 'tf_' ) ? substr( $post_args['slug'], 3 ) : $post_args['slug'];
 
 		$labels = array(
 			'name'                  => $post_args['name'],
@@ -69,7 +70,7 @@ abstract class Post_Type {
 			'items_list'            => sprintf( esc_html__( '%s list', 'tourfic' ), $post_args['name'] ),
 		);
 
-		$labels = apply_filters( $post_args['slug'] . '_labels', $labels );
+		$labels = apply_filters( 'tourfic_' . $hook_slug . '_labels', $labels );
 
 		$args = array(
 			'labels'             => $labels,
@@ -88,7 +89,7 @@ abstract class Post_Type {
 			'supports'           => $post_args['supports'],
 		);
 
-		$args = apply_filters( $post_args['slug'] . '_args', $args );
+		$args = apply_filters( 'tourfic_' . $hook_slug . '_args', $args );
 
 		register_post_type( $post_args['slug'], $args );
 	}
@@ -138,7 +139,7 @@ abstract class Post_Type {
 				/* translators: %s: taxonomy singular name */
 				'back_to_items'              => sprintf( esc_html__( 'Back to %s', 'tourfic' ), strtolower( $tax_args['singular_name'] ) ),
 			);
-			$tax_labels = apply_filters( 'tf_' . $tax_args['taxonomy'] . '_labels', $tax_labels );
+			$tax_labels = apply_filters( 'tourfic_' . $tax_args['taxonomy'] . '_labels', $tax_labels );
 			
 			$hidden_taxonomies = array( );
 			
@@ -172,7 +173,7 @@ abstract class Post_Type {
 				'show_in_quick_edit'    => true,
 				'capabilities'          => $tax_args['capability'],
 			);
-			$tf_tax_args = apply_filters( 'tf_' . $tax_args['taxonomy'] . '_args', $tf_tax_args );
+			$tf_tax_args = apply_filters( 'tourfic_' . $tax_args['taxonomy'] . '_args', $tf_tax_args );
 
 			if(!empty( $hidden_taxonomies ) && in_array( $tax_args['name'], $hidden_taxonomies )) {
 				$tf_tax_args['meta_box_cb'] = false;

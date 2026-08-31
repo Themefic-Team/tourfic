@@ -44,11 +44,11 @@ class Car_Transmission_Filter extends \WP_Widget {
             $manual_label    = ! empty( $instance['manual_label'] ) ? $instance['manual_label'] : esc_html__( 'Manual', 'tourfic' );
 
             $selected_values = array();
-            if ( isset( $_GET['car_transmission'] ) && function_exists( 'tf_normalize_car_binary_filter_values' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if ( isset( $_GET['car_transmission'] ) && function_exists( 'tourfic_normalize_car_binary_filter_values' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 $car_transmission = is_array( $_GET['car_transmission'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                     ? array_map( 'sanitize_text_field', wp_unslash( $_GET['car_transmission'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                     : sanitize_text_field( wp_unslash( $_GET['car_transmission'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                $selected_values = tf_normalize_car_binary_filter_values( $car_transmission );
+                $selected_values = tourfic_normalize_car_binary_filter_values( $car_transmission );
             }
 
             echo wp_kses_post( $before_widget );

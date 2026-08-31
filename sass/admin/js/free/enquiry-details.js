@@ -33,7 +33,7 @@
                 url: tf_admin_params.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'tf_enquiry_bulk_action',
+                    action: 'tourfic_enquiry_bulk_action',
                     selected_items: selected_items,
                     bulk_action: actions,
                     _ajax_nonce: tf_admin_params.tf_nonce
@@ -65,7 +65,7 @@
                 url: tf_admin_params.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'tf_enquiry_filter_post',
+                    action: 'tourfic_enquiry_filter_post',
                     post_id: post_id,
                     post_type: post_type,
                     filter: filter,
@@ -102,7 +102,7 @@
                 url: tf_admin_params.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'tf_enquiry_filter_mail',
+                    action: 'tourfic_enquiry_filter_mail',
                     filter: filter,
                     post_id : post_id,
                     post_type: post_type,
@@ -138,7 +138,7 @@
                 url: tf_admin_params.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'tf_enquiry_reply_email',
+                    action: 'tourfic_enquiry_reply_email',
                     reply_mail: reply_mail,
                     reply_message: reply_message,
                     user_name: userName,
@@ -221,15 +221,14 @@
 
         $(".tf-enquiry-single-row").on("click", function(e) {
 
-            let currentURL = window.location.href;
-            let id = $(".tf-enquiry-id", this).val();
-
             if( $(e.target)[0].className == 'check-column' || $(e.target)[0].className == 'tf-enquiry-name-checkbox'|| $(e.target)[0].className == 'table-name-column' ) {
                 return;
             }
 
-            let updatedUrl = currentURL + "&enquiry_id=" + id + "&action=preview";
-            window.location.href = updatedUrl;
+            let viewUrl = $(this).data("view-url");
+            if (viewUrl) {
+                window.location.href = viewUrl;
+            }
         });
     });
 

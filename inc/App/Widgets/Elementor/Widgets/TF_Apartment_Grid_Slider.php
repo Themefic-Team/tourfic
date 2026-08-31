@@ -214,7 +214,7 @@ class TF_Apartment_Grid_Slider extends \Elementor\Widget_Base {
 		if ( is_array( $locations ) ) {
 			$locations = implode( ',', $locations );
 		}
-		echo do_shortcode( '[tf_apartment title="' . $title . '" subtitle="' . $subtitle . '" locations="' . $locations . '" style="' . $style . '" count="' . $count . '"]' );
+		echo do_shortcode( '[tourfic_apartment title="' . $title . '" subtitle="' . $subtitle . '" locations="' . $locations . '" style="' . $style . '" count="' . $count . '"]' );
 
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
 			<script>

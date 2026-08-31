@@ -5,8 +5,8 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Field: text
  */
-if ( ! class_exists( 'TF_image' ) ) {
-	class TF_image extends TF_Fields {
+if ( ! class_exists( 'Tourfic_image' ) ) {
+	class Tourfic_image extends Tourfic_Fields {
 
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field  );

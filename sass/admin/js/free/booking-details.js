@@ -12,6 +12,17 @@
             },
         });
 
+        const getBookingNonce = () => $('[data-booking-nonce]').first().attr('data-booking-nonce') || '';
+        const getFilterNonce = () => $('.tf_booking_details_wrap').attr('data-filter-nonce') || '';
+        const redirectToFilteredBookings = (parameter, value) => {
+            const currentURL = new URL(window.location.href);
+            currentURL.searchParams.delete('paged');
+            currentURL.searchParams.set(parameter, value);
+            currentURL.searchParams.set('nonce', 'list');
+            currentURL.searchParams.set('_wpnonce', getFilterNonce());
+            window.location.href = currentURL.toString();
+        };
+
         // Select Form
         $('.tf-filter-selection').on("click", function() {
             $(this).toggleClass('active');
@@ -153,8 +164,8 @@
             var $this = $(this);
 
             var formData = new FormData(this);
-            formData.append('action', 'tf_visitor_details_edit');
-            formData.append('_ajax_nonce', tf_admin_params.tf_nonce);
+            formData.append('action', 'tourfic_visitor_details_edit');
+            formData.append('_ajax_nonce', getBookingNonce());
             $.ajax({
                 type: 'post',
                 url: tf_admin_params.ajax_url,
@@ -191,10 +202,10 @@
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: 'tf_checkinout_details_edit',
+                    action: 'tourfic_checkinout_details_edit',
                     order_id: order_id,
                     checkinout: selected_value,
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: getBookingNonce()
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -226,10 +237,10 @@
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: 'tf_order_status_edit',
+                    action: 'tourfic_order_status_edit',
                     order_id: order_id,
                     status: selected_value,
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: getBookingNonce()
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -262,7 +273,7 @@
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: 'tf_order_status_email_resend',
+                    action: 'tourfic_order_status_email_resend',
                     order_id: order_id,
                     status: selected_value,
                     id : db_id,
@@ -329,10 +340,10 @@
                     type: 'post',
                     url: tf_admin_params.ajax_url,
                     data: {
-                        action: 'tf_order_bulk_action_edit',
+                        action: 'tourfic_order_bulk_action_edit',
                         orders: order_list,
                         status: bulk_action,
-                        _ajax_nonce: tf_admin_params.tf_nonce
+                        _ajax_nonce: getBookingNonce()
                     },
                     beforeSend: function (data) {
                         $('.tf-preloader-box').show();
@@ -362,13 +373,7 @@
             let id = $("#tf-searching-key").val();
             if(id!==""){
                 $('.tf-preloader-box').show();
-                let currentURL = new URL(window.location.href);
-                currentURL.searchParams.delete("paged");
-                currentURL.searchParams.set("order_id", id);
-                if (!currentURL.searchParams.has("nonce")) {
-                    currentURL.searchParams.set("nonce", tf_admin_params.tf_nonce);
-                }
-                window.location.href = currentURL.toString();
+                redirectToFilteredBookings('order_id', id);
             }
         });
 
@@ -379,59 +384,17 @@
         $('.tf-tour-checkinout-options').change(function() {
             let changeValue = $(this).val();
             $('.tf-preloader-box').show();
-            let currentURL = window.location.href;
-            let BaseURL = currentURL.split('?')[0];
-            let queryString = currentURL.split('?')[1];
-
-            let currentURLParams= new URLSearchParams(queryString);
-            currentURLParams.delete("paged");
-            if (currentURLParams.has("checkinout")) {
-                currentURLParams.set("checkinout", changeValue);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }else{
-                currentURLParams.set("checkinout", changeValue);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }
-
-            //Nonce
-            if (!currentURLParams.has("nonce")) {
-                currentURLParams.set("nonce", tf_admin_params.tf_nonce);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }
+            redirectToFilteredBookings('checkinout', changeValue);
         });
 
         /**
          * Filter Post Perameter Passing
          *
          */
-        $('.tf-post-id-filter-options, .tf-hotel-id-filter-options, .tf-apartment-id-filter-options').change(function() {
+        $('.tf-post-id-filter-options, .tf-hotel-id-filter-options, .tf-apartment-id-filter-options, .tf-car-id-filter-options').change(function() {
             let changeValue = $(this).val();
             $('.tf-preloader-box').show();
-            let currentURL = window.location.href;
-            let BaseURL = currentURL.split('?')[0];
-            let queryString = currentURL.split('?')[1];
-
-            let currentURLParams= new URLSearchParams(queryString);
-            currentURLParams.delete("paged");
-            if (currentURLParams.has("post")) {
-                currentURLParams.set("post", changeValue);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }else{
-                currentURLParams.set("post", changeValue);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }
-
-            //Nonce
-            if (!currentURLParams.has("nonce")) {
-                currentURLParams.set("nonce", tf_admin_params.tf_nonce);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }
+            redirectToFilteredBookings('post', changeValue);
         });
 
         /**
@@ -441,28 +404,7 @@
         $('.tf-order-payment-status').change(function() {
             let changeValue = $(this).val();
             $('.tf-preloader-box').show();
-            let currentURL = window.location.href;
-            let BaseURL = currentURL.split('?')[0];
-            let queryString = currentURL.split('?')[1];
-
-            let currentURLParams= new URLSearchParams(queryString);
-            currentURLParams.delete("paged");
-            if (currentURLParams.has("payment")) {
-                currentURLParams.set("payment", changeValue);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }else{
-                currentURLParams.set("payment", changeValue);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }
-            
-            //Nonce
-            if (!currentURLParams.has("nonce")) {
-                currentURLParams.set("nonce", tf_admin_params.tf_nonce);
-                let updatedUrl = BaseURL.split('?')[0] + '?' + currentURLParams.toString();
-                window.location.href = updatedUrl;
-            }
+            redirectToFilteredBookings('payment', changeValue);
         });
 
         // Booking View Change
@@ -505,11 +447,9 @@
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: 'tf_booking_details_popup',
+                    action: 'tourfic_booking_details_popup',
                     id: $this.attr('data-id'),
-                    type: $this.attr('data-type'),
-                    page: $this.attr('data-page'),
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: getBookingNonce()
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -540,12 +480,12 @@
                 type: 'post',
                 url: tf_admin_params.ajax_url,
                 data: {
-                    action: 'tf_booking_calendar_filter',
+                    action: 'tourfic_booking_calendar_filter',
                     ostatus: ostatus,
                     checkinout: checkinout,
                     post_id: post_id,
                     post_type: $('#tf_booking_post_type').val(),
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: getBookingNonce()
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -554,9 +494,10 @@
                     
                 },
                 success: function (response) {
-                    let data = JSON.parse(response);
                     $('.tf-preloader-box').hide();
-                    initializeCalendar(data.events);
+                    if (response.success) {
+                        initializeCalendar(response.data.events);
+                    }
                 },
                 error: function (data) {
                     console.log(data);
@@ -577,20 +518,15 @@
 // Booking Calendar
 function initializeCalendar(eventsSource) {
     var calendarEl = document.getElementById('tf-booking-calendar');
-    var currentPageUrl = window.location.href;
+    if (!calendarEl) {
+        return;
+    }
 
-    // Set the events based on the page URL
     if (!eventsSource) {
-        if (currentPageUrl.includes('post_type=tf_tours&page=tf_tours_booking')) {
-            eventsSource = tf_options.tf_tours_orders;
-        } else if (currentPageUrl.includes('post_type=tf_hotel&page=tf_hotel_booking')) {
-            eventsSource = tf_options.tf_hotels_orders;
-        } else if (currentPageUrl.includes('post_type=tf_apartment&page=tf_apartment_booking')) {
-            eventsSource = tf_options.tf_apartments_orders;
-        } else if (currentPageUrl.includes('post_type=tf_carrental&page=tf_carrental_booking')) {
-            eventsSource = tf_options.tf_cars_orders;
-        } else {
-            eventsSource = []; // Fallback option if none of the conditions match
+        try {
+            eventsSource = JSON.parse(calendarEl.dataset.events || '[]');
+        } catch (error) {
+            eventsSource = [];
         }
     }
 
@@ -606,11 +542,11 @@ function initializeCalendar(eventsSource) {
         events: eventsSource,
         eventContent: function(info) {
             var customEl = document.createElement('div');
+            var titleEl = document.createElement('span');
             customEl.classList.add('tf-booking-single-popup');
             customEl.setAttribute('data-id', info.event.id);
-            customEl.setAttribute('data-type', info.event.extendedProps.post_type);
-            customEl.setAttribute('data-page', info.event.extendedProps.page);
-            customEl.innerHTML = `<span>${info.event.title}</span>`;
+            titleEl.textContent = info.event.title;
+            customEl.appendChild(titleEl);
             return { domNodes: [customEl] };
         }
     });

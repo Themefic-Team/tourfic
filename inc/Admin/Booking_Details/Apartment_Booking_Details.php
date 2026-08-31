@@ -12,7 +12,7 @@ class Apartment_Booking_Details extends \Tourfic\Core\TF_Booking_Details
         $booking_args = array(
             'post_type' => 'tf_apartment',
             'menu_title' => esc_html__('Apartment Booking Details', 'tourfic'),
-            'menu_slug' => 'tf_apartment_booking',
+            'menu_slug' => 'tourfic_apartment_booking',
             'capability' => 'edit_tf_apartments',
 			'booking_type' => 'apartment',
             'booking_title' => esc_html__('Apartment', 'tourfic'),
@@ -87,7 +87,6 @@ class Apartment_Booking_Details extends \Tourfic\Core\TF_Booking_Details
 
 }
 
-add_filter("tf_apartment_booking_details_pricing_section_title_change", function() {
+add_filter("tourfic_apartment_booking_details_pricing_section_title_change", function() {
     return esc_html__("Apartment details", "tourfic");
 });
- 

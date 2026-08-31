@@ -56,21 +56,21 @@ if( 2==$tourfic_booking_type && !empty($tourfic_booking_url) ){
 							if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout'] ) ) {
 								foreach ( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout'] as $tourfic_section ) {
 									if ( ! empty( $tourfic_section['status'] ) && $tourfic_section['status'] == "1" && ! empty( $tourfic_section['slug'] ) ) {
-										include TF_TEMPLATE_PART_PATH . 'tour/design-1/' . $tourfic_section['slug'] . '.php';
+										include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-1/' . $tourfic_section['slug'] . '.php';
 									}
 								}
 							} else {
-								include TF_TEMPLATE_PART_PATH . 'tour/design-1/gallery.php';
-								include TF_TEMPLATE_PART_PATH . 'tour/design-1/price.php';
-								include TF_TEMPLATE_PART_PATH . 'tour/design-1/description.php';
-								include TF_TEMPLATE_PART_PATH . 'tour/design-1/information.php';
-								include TF_TEMPLATE_PART_PATH . 'tour/design-1/highlights.php';
-								include TF_TEMPLATE_PART_PATH . 'tour/design-1/include-exclude.php';
-								include TF_TEMPLATE_PART_PATH . 'tour/design-1/itinerary.php';
-								include TF_TEMPLATE_PART_PATH . 'tour/design-1/map.php';
-								include TF_TEMPLATE_PART_PATH . 'tour/design-1/faq.php';
-								include TF_TEMPLATE_PART_PATH . 'tour/design-1/trams-condition.php';
-								include TF_TEMPLATE_PART_PATH . 'tour/design-1/review.php';
+								include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-1/gallery.php';
+								include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-1/price.php';
+								include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-1/description.php';
+								include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-1/information.php';
+								include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-1/highlights.php';
+								include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-1/include-exclude.php';
+								include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-1/itinerary.php';
+								include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-1/map.php';
+								include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-1/faq.php';
+								include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-1/trams-condition.php';
+								include TOURFIC_TEMPLATE_PART_PATH . 'tour/design-1/review.php';
 							}
 							?>
                         </div>

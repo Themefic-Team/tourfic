@@ -5,11 +5,11 @@ defined( 'ABSPATH' ) || exit;
 use Tourfic\Classes\Helper;
 
 
-$tourfic_hotel_name = apply_filters( 'tf_hotel_post_type_name_change_singular', esc_html__( 'Hotel', 'tourfic' ) );
-$tourfic_hotels_name = apply_filters( 'tf_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
+$tourfic_hotel_name = apply_filters( 'tourfic_hotel_post_type_name_change_singular', esc_html__( 'Hotel', 'tourfic' ) );
+$tourfic_hotels_name = apply_filters( 'tourfic_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
 
-if(!function_exists('tf_hotel_facilities_categories')) {
-	function tf_hotel_facilities_categories() {
+if(!function_exists('tourfic_hotel_facilities_categories')) {
+	function tourfic_hotel_facilities_categories() {
 		$facilities_cats = ! empty( Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel_facilities_cats' ) ) : '';
 		$all_cats       = [];
 		if ( ! empty( $facilities_cats ) && is_array( $facilities_cats ) ) {
@@ -26,11 +26,11 @@ if(!function_exists('tf_hotel_facilities_categories')) {
 	}
 }
 
-TF_Metabox::metabox( 'tf_hotels_opt', array(
+Tourfic_Metabox::metabox( 'tf_hotels_opt', array(
 	/* translators: %s is the hotel name */
 	'title' => sprintf( esc_html__( '%s Settings', 'tourfic' ), $tourfic_hotel_name ),
 	'post_type' => 'tf_hotel',
-	'sections'  => apply_filters( 'tf_hotels_opt_sections', array(
+	'sections'  => apply_filters( 'tourfic_hotels_opt_sections', array(
 		'general' => array(
 			'title'  => esc_html__( 'General', 'tourfic' ),
 			'icon'   => 'fa fa-cog',
@@ -85,17 +85,17 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'options'   	=> array(
 						'design-1' => array(
 							'title' => esc_html__('Design 1', 'tourfic'),
-							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+							'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
 							'preview_link' => esc_url('https://tourfic.com/preview/hotels/tuvo-suites-hotel/'),
 						),
 						'design-2' 	=> array(
 							'title'	=> esc_html__('Design 2', 'tourfic'),
-							'url' 	=> TF_ASSETS_ADMIN_URL."images/template/preview-single-design-2.png",
+							'url' 	=> TOURFIC_ASSETS_ADMIN_URL."images/template/preview-single-design-2.png",
 							'preview_link' => esc_url('https://tourfic.com/preview/hotels/melbourne-mastlereagh/'),
 						),
 						'default'  => array(
 							'title' => esc_html__('Legacy', 'tourfic'),
-							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
+							'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
 							'preview_link' => esc_url('https://tourfic.com/preview/hotels/rio-ontho-palace/'),
 						),
 					),
@@ -260,7 +260,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'type'        => 'select2',
 							'label'       => esc_html__( 'Facilities Category', 'tourfic' ),
 							'placeholder' => esc_html__( 'Select facilities category', 'tourfic' ),
-							'options'     => tf_hotel_facilities_categories(),
+							'options'     => tourfic_hotel_facilities_categories(),
 							'description' => esc_html__( 'Add new category from ', 'tourfic' ) . '<a target="_blank" href="' . esc_url( admin_url('admin.php?page=tf_settings#tab=single_page') ) .'">' . esc_html__("Facilities Categories", 'tourfic') . '</a>',
 							'field_width' => 50,
 						),

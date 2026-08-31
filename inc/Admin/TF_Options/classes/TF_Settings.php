@@ -4,10 +4,11 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 
-if ( ! class_exists( 'TF_Settings' ) ) {
-	class TF_Settings {
+if ( ! class_exists( 'Tourfic_Settings' ) ) {
+	class Tourfic_Settings {
 
 		public $option_id = null;
+		public $menu_slug = null;
 		public $option_title = null;
 		public $option_icon = null;
 		public $option_position = null;
@@ -17,11 +18,20 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		public $pre_sections;
 
 		public function __construct( $key, $params = array() ) {
+			if ( 0 === strpos( $key, 'tourfic_' ) ) {
+				$hook_key = substr( $key, 8 );
+			} elseif ( 0 === strpos( $key, 'tf_' ) ) {
+				$hook_key = substr( $key, 3 );
+			} else {
+				$hook_key = $key;
+			}
+
 			$this->option_id       = $key;
-			$this->option_title    = ! empty( $params['title'] ) ? apply_filters( $key . '_title', $params['title'] ) : '';
-			$this->option_icon     = ! empty( $params['icon'] ) ? apply_filters( $key . '_icon', $params['icon'] ) : '';
-			$this->option_position = ! empty( $params['position'] ) ? apply_filters( $key . '_position', $params['position'] ) : 5;
-			$this->option_sections = ! empty( $params['sections'] ) ? apply_filters( $key . '_sections', $params['sections'] ) : array();
+			$this->menu_slug       = ! empty( $params['menu_slug'] ) ? sanitize_key( $params['menu_slug'] ) : $key;
+			$this->option_title    = ! empty( $params['title'] ) ? apply_filters( 'tourfic_' . $hook_key . '_title', $params['title'] ) : '';
+			$this->option_icon     = ! empty( $params['icon'] ) ? apply_filters( 'tourfic_' . $hook_key . '_icon', $params['icon'] ) : '';
+			$this->option_position = ! empty( $params['position'] ) ? apply_filters( 'tourfic_' . $hook_key . '_position', $params['position'] ) : 5;
+			$this->option_sections = ! empty( $params['sections'] ) ? apply_filters( 'tourfic_' . $hook_key . '_sections', $params['sections'] ) : array();
 
 			// run only is admin panel options, avoid performance loss
 			$this->pre_tabs     = $this->pre_tabs( $this->option_sections );
@@ -35,11 +45,11 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			add_action( 'admin_init', array( $this, 'save_options' ) );
 
 			//ajax save options
-			add_action( 'wp_ajax_tf_options_save', array( $this, 'tf_ajax_save_options' ) );
-			add_action( 'wp_ajax_tf_options_reset', array( $this, 'tf_ajax_reset_options' ) );
-			add_action( 'wp_ajax_tf_search_settings_autocomplete', array( $this, 'tf_search_settings_autocomplete_callback' ) );
+			add_action( 'wp_ajax_tourfic_options_save', array( $this, 'tf_ajax_save_options' ) );
+			add_action( 'wp_ajax_tourfic_options_reset', array( $this, 'tf_ajax_reset_options' ) );
+			add_action( 'wp_ajax_tourfic_search_settings_autocomplete', array( $this, 'tf_search_settings_autocomplete_callback' ) );
 
-            add_action( 'wp_ajax_tf_export_data', array( $this, 'tf_export_data' ) );
+            add_action( 'wp_ajax_tourfic_export_data', array( $this, 'tf_export_data' ) );
 			
         }
 
@@ -112,7 +122,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				$this->option_title,
 				$this->option_title,
 				'manage_options',
-				$this->option_id,
+				$this->menu_slug,
 				array( $this, 'tf_options_page' ),
 				$this->option_icon,
 				$this->option_position
@@ -120,7 +130,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
             //Dashboard submenu
 			add_submenu_page(
-				$this->option_id,
+				$this->menu_slug,
 				esc_html__('Dashboard', 'tourfic'),
 				esc_html__('Dashboard', 'tourfic'),
 				'manage_options',
@@ -130,27 +140,27 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			//Setting submenu
 			add_submenu_page(
-				$this->option_id,
+				$this->menu_slug,
 				esc_html__('Settings', 'tourfic'),
 				esc_html__('Settings', 'tourfic'),
 				'manage_options',
-				$this->option_id . '#tab=general',
+				$this->menu_slug . '#tab=general',
 				array( $this, 'tf_options_page' ),
 			);
 
 			// Shortcode submenu
 			add_submenu_page(
-				$this->option_id,
+				$this->menu_slug,
 				esc_html__('Shortcodes', 'tourfic'),
 				esc_html__('Shortcodes', 'tourfic'),
 				'manage_options',
 				'tf_shortcodes',
-				array( 'TF_Shortcodes','tf_shortcode_callback'),
+				array( 'Tourfic_Shortcodes','tf_shortcode_callback'),
 			);
 
 			//Get Help submenu
 			add_submenu_page(
-				$this->option_id,
+				$this->menu_slug,
 				esc_html__('Get Help', 'tourfic'),
 				esc_html__('Get Help', 'tourfic'),
 				'manage_options',
@@ -162,7 +172,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			if ( is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ) {
 				$library_url = admin_url( 'admin.php?page=travelfic-template-list' );
 				add_submenu_page(
-					$this->option_id,
+					$this->menu_slug,
 					esc_html__('Template Library', 'tourfic'),
 					esc_html__('Template Library', 'tourfic'),
 					'manage_options',
@@ -172,7 +182,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				);
 			}
 			// remove first submenu
-			remove_submenu_page( $this->option_id, $this->option_id );
+			remove_submenu_page( $this->menu_slug, $this->menu_slug );
 
 		}
 
@@ -314,7 +324,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</div>
 							</div>
 							<div id="tf-report-loader">
-								<img src="<?php echo esc_url(TF_ASSETS_APP_URL.'images/loader.gif'); ?>" alt="Loader">
+								<img src="<?php echo esc_url(TOURFIC_ASSETS_APP_URL.'images/loader.gif'); ?>" alt="Loader">
 							</div>
 							<div class="tf-report-filter">
 								<h2><?php esc_html_e("Reports","tourfic"); ?></h2>
@@ -508,7 +518,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						<div class="tf-plugin-info-wrapper">
 							<div class="tf-plugin-content">
 								<div class="tf-plugin-image">
-									<img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL.'images/'.$plugin['image']); ?>" alt="<?php echo esc_attr($plugin['name']); ?>" class="<?php echo esc_attr($plugin['name'] == 'BEAF' ? 'beaf-logo' : ''); ?>" width="48" height="48">
+									<img src="<?php echo esc_url(TOURFIC_ASSETS_ADMIN_URL.'images/'.$plugin['image']); ?>" alt="<?php echo esc_attr($plugin['name']); ?>" class="<?php echo esc_attr($plugin['name'] == 'BEAF' ? 'beaf-logo' : ''); ?>" width="48" height="48">
 								</div>
 								<div class="tf-plugin-title">
 									<h4><?php echo esc_html($plugin['name']); ?>
@@ -914,27 +924,33 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			}
 
 			//  Checked Currenct can save option
-			$current_user = wp_get_current_user();
-			$current_user_role = $current_user->roles[0];
-
-			if ( $current_user_role !== 'administrator' && !is_admin()) {
+			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_die( 'You do not have sufficient permissions to access this page.' );
 			}
 
 			$existing_option = get_option( $this->option_id, array() );
 			$tf_option_value = is_array( $existing_option ) ? $existing_option : array();
-			$option_request  = ( ! empty( $_POST[ $this->option_id ] ) ) ? $_POST[ $this->option_id ] : array(); //phpcs:ignore
+			$option_request = ( ! empty( $_POST[ $this->option_id ] ) && is_array( $_POST[ $this->option_id ] ) )
+				? map_deep( wp_unslash( $_POST[ $this->option_id ] ), 'wp_kses_post' )
+				: array();
 
-			if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) ))){ //phpcs:ignore
+			$import_json = isset( $_POST['tf_import_option'] ) ? wp_kses_post( wp_unslash( $_POST['tf_import_option'] ) ) : '';
+			if ( '' !== trim( $import_json ) ) {
 
-				$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true ); //phpcs:ignore
+				$tf_import_option = json_decode( trim( $import_json ), true );
+				if ( ! is_array( $tf_import_option ) ) {
+					return;
+				}
+				$tf_import_option = map_deep( $tf_import_option, 'wp_kses_post' );
 
-				do_action( 'tf_setting_import_before_save', $tf_import_option );
+				do_action( 'tourfic_setting_import_before_save', $tf_import_option );
 
-				// $option_request = !empty($tf_import_option) && is_array($tf_import_option) ? $tf_import_option : $option_request;
-				update_option( $this->option_id, $tf_import_option );
-				return;
+				$option_request = $tf_import_option;
 			}
+
+			$uploaded_files = isset( $_FILES['file'] ) && is_array( $_FILES['file'] )
+				? map_deep( wp_unslash( $_FILES['file'] ), 'sanitize_text_field' )
+				: array();
 
 			if ( ! empty( $option_request ) && ! empty( $this->option_sections ) ) {
 				foreach ( $this->option_sections as $section ) {
@@ -944,9 +960,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 							if ( ! empty( $field['id'] ) ) {
 
-								$fieldClass = 'TF_' . $field['type'];
+								$fieldClass = 'Tourfic_' . $field['type'];
 
-								if($fieldClass == 'TF_tab'){
+								if($fieldClass == 'Tourfic_tab'){
 									$data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
 									foreach ( $field['tabs'] as $tab ) {
 										foreach ( $tab['fields'] as $tab_fields ) {
@@ -977,36 +993,59 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									$data = isset( $option_request[ $field['id'] ] ) ? $option_request[ $field['id'] ] : '';
 								}
 
-								if($fieldClass != 'TF_file'){
-									$data       = $fieldClass == 'TF_repeater' || $fieldClass == 'TF_map'  || $fieldClass == 'TF_color' ? serialize( $data ) : $data;
+								if($fieldClass != 'Tourfic_file'){
+									$data       = $fieldClass == 'TF_repeater' || $fieldClass == 'Tourfic_map'  || $fieldClass == 'Tourfic_color' ? serialize( $data ) : $data;
 								}
-								if(isset($_FILES) && !empty($_FILES['file'])){
+								if ( 'Tourfic_file' === $fieldClass && ! empty( $uploaded_files ) ) {
 									$tf_upload_dir = wp_upload_dir();
 									if ( ! empty( $tf_upload_dir['basedir'] ) ) {
-										$tf_itinerary_fonts = $tf_upload_dir['basedir'].'/itinerary-fonts';
-										if ( ! file_exists( $tf_itinerary_fonts ) ) {
-											wp_mkdir_p( $tf_itinerary_fonts );
-										}
-										// extension want to allow
-										$allowed_ext = array('ttf', 'otf', 'woff', 'woff2', 'eot');
-										$allowed_mime_types = array('application/octet-stream', 'font/ttf', 'font/otf', 'font/woff', 'font/woff2', 'application/vnd.ms-fontobject');
-										for($i = 0; $i < count($_FILES['file']['name']); $i++) { //phpcs:ignore
-											
-											$tf_font_filename = sanitize_file_name( wp_unslash($_FILES['file']['name'][$i]) ); //phpcs:ignore
-											$uploaded_file_tmp = sanitize_file_name( wp_unslash($_FILES['file']['tmp_name'][$i]) ); //phpcs:ignore
-											$checked = wp_check_filetype_and_ext( $uploaded_file_tmp, $tf_font_filename);
-											if (isset($checked['ext']) && in_array($checked["ext"], $allowed_ext) && in_array($checked['type'], $allowed_mime_types)) {
-												$destination_path = $tf_itinerary_fonts .'/'. $tf_font_filename;
-												if (copy($uploaded_file_tmp, $destination_path)) {
-													// File copied successfully, you can perform further actions if needed
-												} else {
-													// Handle error if copy operation failed
-												}
-											} else {
-												// Invalid file type or extension
+										$allowed_mime_types = array(
+											'ttf'   => 'font/ttf',
+											'otf'   => 'font/otf',
+											'woff'  => 'font/woff',
+											'woff2' => 'font/woff2',
+											'eot'   => 'application/vnd.ms-fontobject',
+										);
+										$file_names = isset( $uploaded_files['name'] ) && is_array( $uploaded_files['name'] ) ? $uploaded_files['name'] : array();
+										for ( $i = 0; $i < count( $file_names ); $i++ ) {
+											$tf_font_filename = sanitize_file_name( $file_names[ $i ] );
+											$uploaded_file_tmp = isset( $uploaded_files['tmp_name'][ $i ] ) ? sanitize_text_field( $uploaded_files['tmp_name'][ $i ] ) : '';
+											$upload_error = isset( $uploaded_files['error'][ $i ] ) ? absint( $uploaded_files['error'][ $i ] ) : UPLOAD_ERR_NO_FILE;
+											if ( UPLOAD_ERR_OK !== $upload_error || ! is_uploaded_file( $uploaded_file_tmp ) ) {
+												continue;
+											}
+
+											$font_upload_dir = static function ( $upload_dir ) {
+												$upload_dir['subdir'] = '/itinerary-fonts';
+												$upload_dir['path']   = $upload_dir['basedir'] . $upload_dir['subdir'];
+												$upload_dir['url']    = $upload_dir['baseurl'] . $upload_dir['subdir'];
+
+												return $upload_dir;
+											};
+											$font_file       = array(
+												'name'     => $tf_font_filename,
+												'type'     => isset( $uploaded_files['type'][ $i ] ) ? sanitize_mime_type( $uploaded_files['type'][ $i ] ) : '',
+												'tmp_name' => $uploaded_file_tmp,
+												'error'    => $upload_error,
+												'size'     => isset( $uploaded_files['size'][ $i ] ) ? absint( $uploaded_files['size'][ $i ] ) : 0,
+											);
+
+											add_filter( 'upload_dir', $font_upload_dir );
+											$upload_result = function_exists( 'wp_handle_upload' )
+												? wp_handle_upload(
+													$font_file,
+													array(
+														'test_form' => false,
+														'mimes'     => $allowed_mime_types,
+													)
+												)
+												: array( 'error' => esc_html__( 'WordPress upload handling is unavailable.', 'tourfic' ) );
+											remove_filter( 'upload_dir', $font_upload_dir );
+
+											if ( ! empty( $upload_result['error'] ) ) {
 												$response    = [
 													'status'  => 'error',
-													'message' => esc_html__( 'Invalid file type or extension', 'tourfic' ),
+													'message' => sanitize_text_field( $upload_result['error'] ),
 												];
 												echo wp_json_encode($response);
 												wp_die();
@@ -1057,9 +1096,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                 die();
 	        }
 
-			if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) )) ){ //phpcs:ignore
+			$import_json = isset( $_POST['tf_import_option'] ) ? wp_kses_post( wp_unslash( $_POST['tf_import_option'] ) ) : '';
+			if ( '' !== trim( $import_json ) ) {
 
-				$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true ); //phpcs:ignore
+				$tf_import_option = json_decode( trim( $import_json ), true );
 				if(empty($tf_import_option) || !is_array($tf_import_option)){
 					$response    = [
 						'status'  => 'error',
@@ -1106,8 +1146,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                 die();
 	        }
 
-			if( !empty( get_option( 'tf_settings' ) ) ) {
-				update_option( 'tf_settings', '' );
+			if( !empty( get_option( 'tourfic_settings' ) ) ) {
+				update_option( 'tourfic_settings', '' );
 				$response = [
 					'status'  => 'success',
 					'message' => esc_html__( 'Options Reset successfully!', 'tourfic' ),

@@ -18,7 +18,7 @@ class Ask_Question extends \WP_Widget {
     public function __construct() {
 
         parent::__construct(
-            'tf_ask_question', // Base ID
+            'tourfic_ask_question', // Base ID
             esc_html__( 'Tourfic - Ask Question', 'tourfic' ), // Name
             array( 'description' => esc_html__( 'Ask a question button on single hotel page.', 'tourfic' ) ) // Args
         );

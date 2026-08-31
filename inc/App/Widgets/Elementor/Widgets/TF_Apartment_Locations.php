@@ -279,7 +279,7 @@ class TF_Apartment_Locations extends \Elementor\Widget_Base {
 		$ids_txt    = ! empty( $ids ) ? ' ids="' . $ids . '"' : '';
 		$hide_empty = $settings['hide_empty'];
 
-		echo do_shortcode( '[tf_apartment_locations' . $ids_txt . ' hide_empty="' . $hide_empty . '" limit="' . $settings['limit'] . '" order="' . $settings['order'] . '" orderby="' . $settings['orderby'] . '"]' );
+		echo do_shortcode( '[tourfic_apartment_locations' . $ids_txt . ' hide_empty="' . $hide_empty . '" limit="' . $settings['limit'] . '" order="' . $settings['order'] . '" orderby="' . $settings['orderby'] . '"]' );
 
 	}
 

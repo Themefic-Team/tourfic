@@ -172,7 +172,7 @@ class TF_Reviews_Slider extends \Elementor\Widget_Base {
 		$infinite = $settings['infinite'];
 		$infinite == 'yes' ? $infinite = 'true' : $infinite = 'false';
 
-        echo do_shortcode('[tf_reviews type="'.$type.'" count="' .$count. '" autoplay="'.$autoplay.'" arrows="'.$arrows.'" dots="'.$dots.'" speed="'.$autoplay_speed.'" infinite="'.$infinite.'"]');
+        echo do_shortcode('[tourfic_reviews type="'.$type.'" count="' .$count. '" autoplay="'.$autoplay.'" arrows="'.$arrows.'" dots="'.$dots.'" speed="'.$autoplay_speed.'" infinite="'.$infinite.'"]');
 		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
 
 		<script>

@@ -166,19 +166,19 @@ if ( ! $admin_user || ! $low_user ) {
 $free_rest_path  = WP_PLUGIN_DIR . '/tourfic/inc/Classes/REST_API/TF_Rest_API.php';
 $free_hotel_path = WP_PLUGIN_DIR . '/tourfic/inc/Classes/REST_API/TF_Hotel_Rest_API.php';
 
-if ( ! class_exists( 'TF_Rest_API' ) && is_readable( $free_rest_path ) ) {
+if ( ! class_exists( 'Tourfic_Rest_API' ) && is_readable( $free_rest_path ) ) {
 	require_once $free_rest_path;
 }
 
-if ( class_exists( 'TF_Rest_API' ) && ! class_exists( 'TF_Hotel_Rest_API' ) && is_readable( $free_hotel_path ) ) {
+if ( class_exists( 'Tourfic_Rest_API' ) && ! class_exists( 'Tourfic_Hotel_Rest_API' ) && is_readable( $free_hotel_path ) ) {
 	require_once $free_hotel_path;
 }
 
 $checked = 0;
 
-if ( class_exists( 'TF_Rest_API' ) && class_exists( 'TF_Hotel_Rest_API' ) ) {
-	$free_settings_api = TF_Rest_API::get_instance();
-	$free_hotel_api    = TF_Hotel_Rest_API::get_instance();
+if ( class_exists( 'Tourfic_Rest_API' ) && class_exists( 'Tourfic_Hotel_Rest_API' ) ) {
+	$free_settings_api = Tourfic_Rest_API::get_instance();
+	$free_hotel_api    = Tourfic_Hotel_Rest_API::get_instance();
 	$settings_request  = tf_security_live_request( '/tf/v1/tf-settings' );
 	$hotel_request     = tf_security_live_request( '/tf/v1/hotels' );
 	$hotel_request->set_param( 'user', $admin_user->ID );
@@ -265,8 +265,8 @@ if ( class_exists( 'TF_Rest_API' ) && class_exists( 'TF_Hotel_Rest_API' ) ) {
 	$checked++;
 }
 
-if ( class_exists( 'TF_User_Rest_API' ) ) {
-	$free_api = TF_User_Rest_API::get_instance();
+if ( class_exists( 'Tourfic_User_Rest_API' ) ) {
+	$free_api = Tourfic_User_Rest_API::get_instance();
 	wp_set_current_user( $low_user->ID );
 
 	tf_security_live_assert(
@@ -422,9 +422,9 @@ if ( $vendor_user ) {
 	wp_set_current_user( $vendor_user->ID );
 
 	if ( tf_security_live_route_supports_method( '/tf/v1/reset-google-access-token', 'POST' ) ) {
-		$original_admin_integration_settings = get_user_meta( $admin_user->ID, '_tf_integration_settings', true );
+		$original_admin_integration_settings = get_user_meta( $admin_user->ID, 'tourfic_integration_settings', true );
 		$sentinel_admin_integration_settings = array( 'tourfic_security_probe' => 'preserve-admin-integration-meta' );
-		update_user_meta( $admin_user->ID, '_tf_integration_settings', $sentinel_admin_integration_settings );
+		update_user_meta( $admin_user->ID, 'tourfic_integration_settings', $sentinel_admin_integration_settings );
 
 		$admin_reset_response = tf_security_live_rest_post(
 			'/tf/v1/reset-google-access-token',
@@ -432,12 +432,12 @@ if ( $vendor_user ) {
 				'user_id' => $admin_user->ID,
 			)
 		);
-		$admin_integration_settings_after_reset = get_user_meta( $admin_user->ID, '_tf_integration_settings', true );
+		$admin_integration_settings_after_reset = get_user_meta( $admin_user->ID, 'tourfic_integration_settings', true );
 
 		if ( '' === $original_admin_integration_settings ) {
-			delete_user_meta( $admin_user->ID, '_tf_integration_settings' );
+			delete_user_meta( $admin_user->ID, 'tourfic_integration_settings' );
 		} else {
-			update_user_meta( $admin_user->ID, '_tf_integration_settings', $original_admin_integration_settings );
+			update_user_meta( $admin_user->ID, 'tourfic_integration_settings', $original_admin_integration_settings );
 		}
 
 		tf_security_live_assert_status(

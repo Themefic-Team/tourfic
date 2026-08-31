@@ -43,7 +43,7 @@ jQuery(function($) {
 
 	function loadKeys() {
 		$.post(config.ajaxUrl, {
-			action: 'tf_get_api_keys',
+			action: 'tourfic_get_api_keys',
 			nonce: config.nonce
 		}).done(function(response) {
 			if (response && response.success) {
@@ -52,11 +52,24 @@ jQuery(function($) {
 		});
 	}
 
+	function showGeneratedKey(key) {
+		if (!key || !key.api_key) {
+			return;
+		}
+
+		$('#tf-api-generated-credentials')
+			.html(
+				'<p><strong>' + esc(t('apiKey', 'API Key:')) + '</strong> <code>' + esc(key.api_key) + '</code></p>' +
+				'<p class="description">' + esc(t('saveApiKey', 'Copy this key now. It will not be shown again.')) + '</p>'
+			)
+			.show();
+	}
+
 	$('#tf-generate-api-key-form').on('submit', function(event) {
 		event.preventDefault();
 
 		const data = $(this).serializeArray();
-		data.push({ name: 'action', value: 'tf_generate_api_key' });
+		data.push({ name: 'action', value: 'tourfic_generate_api_key' });
 		data.push({ name: 'nonce', value: config.nonce });
 
 		$.post(config.ajaxUrl, $.param(data)).done(function(response) {
@@ -69,6 +82,7 @@ jQuery(function($) {
 				return;
 			}
 
+			showGeneratedKey(response.data);
 			$('#tf-generate-api-key-form')[0].reset();
 			loadKeys();
 		});
@@ -85,7 +99,7 @@ jQuery(function($) {
 		}
 
 		$.post(config.ajaxUrl, {
-			action: 'tf_revoke_api_key',
+			action: 'tourfic_revoke_api_key',
 			nonce: config.nonce,
 			key_id: keyId
 		}).done(function(response) {
@@ -238,5 +252,6 @@ jQuery(function($) {
 
 	loadKeys();
 });
+
 /******/ })()
 ;

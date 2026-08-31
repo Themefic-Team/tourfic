@@ -9,7 +9,7 @@ class TF_Duplicator {
 
 	public function __construct() {
 		add_filter('post_row_actions', array($this, 'tf_add_duplicate_post_button'), 10, 2);
-		add_action('wp_ajax_tf_duplicate_post_data', array($this, 'tf_duplicate_post_data_function'));
+		add_action('wp_ajax_tourfic_duplicate_post_data', array($this, 'tf_duplicate_post_data_function'));
 	}
 
 	function tf_add_duplicate_post_button($actions, $post) {

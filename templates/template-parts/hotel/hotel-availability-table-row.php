@@ -6,6 +6,9 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Hotel\Pricing;
 use \Tourfic\Classes\Hotel\Hotel;
 
+$tourfic_price   = isset( $price ) && is_numeric( $price ) ? (float) $price : 0.0;
+$tourfic_d_price = isset( $d_price ) && is_numeric( $d_price ) ? (float) $d_price : 0.0;
+
 $tourfic_total_dis_dates = [];
 if ( ! empty( $room['avail_date'] ) ) {
 	$tourfic_avail_dates = json_decode( $room['avail_date'], true );
@@ -269,7 +272,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                                 <span class="icon-text tf-d-b">x<?php echo esc_html( $adult_number ); ?></span>
                             </div>
                             <div class="tf-top">
-								<?php echo esc_html( 'Number of Adult' .  apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's' ); ?>
+								<?php echo esc_html( 'Number of Adult' .  apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's' ); ?>
                                 <i class="tool-i"></i>
                             </div>
                         </div>
@@ -411,7 +414,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                             <span class="icon-text tf-d-b">x<?php echo esc_html( $adult_number ); ?></span>
                         </div>
                         <div class="tf-top">
-							<?php echo esc_html( 'Number of ' .  apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's' ); ?>
+							<?php echo esc_html( 'Number of ' .  apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's' ); ?>
                             <i class="tool-i"></i>
                         </div>
                     </div>
@@ -762,7 +765,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                                 <?php } ?>
                                 <?php if ( $adult_number ) { ?>
                                     <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php 
-									echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
+									echo ' ' . esc_html( apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
 									?>
 									</li>
                                 <?php } ?>
@@ -873,7 +876,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                             </div>
                             <div class="tf-available-room-select">
                                 <span><?php esc_html_e( "Select your Room", "tourfic" ); ?></span>
-                                <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
+                                <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TOURFIC_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
                                     <?php
                                     foreach ( range( 1, $room_select_max ) as $tourfic_value ) {
                                         echo '<option>' . esc_html( $tourfic_value ) . '</option>';
@@ -932,7 +935,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 						<?php if ( $adult_number ) { ?>
                             <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?>
 							<?php 
-							echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
+							echo ' ' . esc_html( apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
 							?>
 							</li>
 						<?php } ?>
@@ -1086,7 +1089,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                     </div>
                     <div class="tf-available-room-select">
                         <span><?php esc_html_e( "Select your Room", "tourfic" ); ?></span>
-                        <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
+                        <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TOURFIC_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
 							<?php
 							foreach ( range( 1, $room_select_max ) as $tourfic_value ) {
 								echo '<option>' . esc_html( $tourfic_value ) . '</option>';
@@ -1287,7 +1290,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 						<?php if ( $adult_number ) { ?>
                             <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?>
 							<?php 
-							echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
+							echo ' ' . esc_html( apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
 							?>
 							</li>
 						<?php } ?>
@@ -1355,7 +1358,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 
                     <div class="tf-available-room-select">
                         <span><?php esc_html_e( "Select your Room", "tourfic" ); ?></span>
-                        <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
+                        <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TOURFIC_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
 							<?php
 							foreach ( range( 1, $room_select_max ) as $tourfic_value ) {
 								echo '<option>' . esc_html( $tourfic_value ) . '</option>';
@@ -1413,7 +1416,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 					<?php if ( ! empty( $tourfic_room_preview_img ) ) : ?>
                         <img src="<?php echo esc_url( $tourfic_room_preview_img ); ?>" alt="<?php esc_html_e( "Room Image", "tourfic" ); ?>">
 					<?php else: ?>
-                        <img src="<?php echo esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) ?>" alt="room-thumb"/>
+                        <img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg' ) ?>" alt="room-thumb"/>
 					<?php endif; ?>
                 </div>
 
@@ -1586,7 +1589,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 									<?php if ( $adult_number ) { ?>
                                         <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?>
 										<?php 
-										echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
+										echo ' ' . esc_html( apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
 										?>
 										</li>
 									<?php } ?>
@@ -1654,7 +1657,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                                 </div>
                                 <div class="tf-available-room-select">
                                     <span><?php esc_html_e( "Select Room", "tourfic" ); ?></span>
-                                    <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
+                                    <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TOURFIC_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
 				                        <?php foreach ( range( 1, $room_select_max ) as $tourfic_value ) {
 					                        echo '<option>' . esc_html( $tourfic_value ) . '</option>';
 				                        } ?>
@@ -1748,7 +1751,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 								<?php if ( $adult_number ) { ?>
                                     <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?>
 									<?php 
-									echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
+									echo ' ' . esc_html( apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
 									?>
 									</li>
 								<?php } ?>
@@ -1858,7 +1861,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                             </div>
                             <div class="tf-available-room-select">
                                 <span><?php esc_html_e( "Select Room", "tourfic" ); ?></span>
-                                <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
+                                <select name="hotel_room_selected" id="hotel-room-selected" style="background-image: url(<?php echo esc_url( TOURFIC_ASSETS_APP_URL ) ?>images/select-arrow-dark.svg);">
 			                        <?php
 			                        foreach ( range( 1, $room_select_max ) as $tourfic_value ) {
 				                        echo '<option>' . esc_html( $tourfic_value ) . '</option>';
@@ -2159,7 +2162,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                                 <span class="icon-text tf-d-b">x<?php echo esc_html( $adult_number ); ?></span>
                             </div>
                             <div class="tf-top">
-								<?php echo esc_html( 'Number of '.  apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) .'s' ); ?>
+								<?php echo esc_html( 'Number of '.  apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) .'s' ); ?>
                                 <i class="tool-i"></i>
                             </div>
                         </div>
@@ -2290,7 +2293,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                             <span class="icon-text tf-d-b">x<?php echo esc_html( $adult_number ); ?></span>
                         </div>
                         <div class="tf-top">
-							<?php echo esc_html( 'Number of Adult'.  apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's' ); ?>
+							<?php echo esc_html( 'Number of Adult'.  apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's' ); ?>
                             <i class="tool-i"></i>
                         </div>
                     </div>

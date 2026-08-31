@@ -8,9 +8,9 @@ defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use Tourfic\Classes\Room\Room;
 
-if(tf_is_block_theme()){
+if(tourfic_is_block_theme()){
     wp_head();
-    tf_render_block_header_area();
+    tourfic_render_block_header_area();
 }else{
     get_header();
 }
@@ -62,8 +62,8 @@ while ( have_posts() ) : the_post();
 		$tourfic_gallery_ids = explode( ',', $tourfic_gallery );
 	}
 
-	$tourfic_calcellation_policy_title = apply_filters( 'tf_cancellation_policy_title_meta', '', $tourfic_post_id, $tourfic_meta );
-	$tourfic_calcellation_policy       = apply_filters( 'tf_cancellation_policy_meta', [], $tourfic_post_id, $tourfic_meta );
+	$tourfic_calcellation_policy_title = apply_filters( 'tourfic_cancellation_policy_title_meta', '', $tourfic_post_id, $tourfic_meta );
+	$tourfic_calcellation_policy       = apply_filters( 'tourfic_cancellation_policy_meta', [], $tourfic_post_id, $tourfic_meta );
 	
 	// Single Template Style
 	$tourfic_room_layout_conditions = ! empty( $tourfic_meta['tf_single_room_layout_opt'] ) ? $tourfic_meta['tf_single_room_layout_opt'] : 'global';
@@ -75,13 +75,13 @@ while ( have_posts() ) : the_post();
 	$tourfic_room_selected_template = $tourfic_room_selected_check;
 
     if( $tourfic_room_selected_template == "design-1" ){
-		include TF_TEMPLATE_PART_PATH . 'room/design-1.php';
+		include TOURFIC_TEMPLATE_PART_PATH . 'room/design-1.php';
 	}
 endwhile;
 
-if(tf_is_block_theme()){
+if(tourfic_is_block_theme()){
     wp_footer();
-    tf_render_block_footer_area();
+    tourfic_render_block_footer_area();
  }else{
 	get_footer();
  }

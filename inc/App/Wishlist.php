@@ -9,10 +9,10 @@ class Wishlist {
 	use \Tourfic\Traits\Singleton;
 
 	public function __construct() {
-		add_action( 'wp_ajax_tf_add_to_wishlists', array($this, 'tf_add_to_wishlists') );
-		add_action( 'wp_ajax_nopriv_tf_add_to_wishlists', array($this, 'tf_add_to_wishlists') );
-		add_action( 'wp_ajax_nopriv_tf_generate_table', array($this, 'tf_generate_table_guest') );
-		add_action( 'wp_ajax_tf_remove_wishlist', array($this, 'tf_remove_wishlist') );
+		add_action( 'wp_ajax_tourfic_add_to_wishlists', array($this, 'tf_add_to_wishlists') );
+		add_action( 'wp_ajax_nopriv_tourfic_add_to_wishlists', array($this, 'tf_add_to_wishlists') );
+		add_action( 'wp_ajax_nopriv_tourfic_generate_table', array($this, 'tf_generate_table_guest') );
+		add_action( 'wp_ajax_tourfic_remove_wishlist', array($this, 'tf_remove_wishlist') );
 	}
 
 	/**
@@ -122,7 +122,7 @@ class Wishlist {
 			exit;
 		}
 		ob_start();
-		include TF_TEMPLATE_PATH . 'template-parts/wishlist.php';
+		include TOURFIC_TEMPLATE_PATH . 'template-parts/wishlist.php';
 
 		return ob_get_clean();
 	}

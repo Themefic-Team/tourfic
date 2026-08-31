@@ -9,7 +9,7 @@ class Room_Types extends \Tourfic\Core\Shortcodes {
 
 	use \Tourfic\Traits\Singleton;
 
-    protected $shortcode = 'room_types';
+    protected $shortcode = 'tourfic_room_types';
 
 	public function __construct() {
 		parent::__construct();
@@ -57,7 +57,7 @@ class Room_Types extends \Tourfic\Core\Shortcodes {
 					<?php foreach ( $types as $term ) {
 
 						$meta      = get_term_meta( $term->term_id, 'tf_room_type', true );
-						$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg');
+						$image_url = ! empty( $meta['image'] ) ? $meta['image'] : esc_url(TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg');
 						$term_link = get_term_link( $term ); ?>
 
 						<div class="single_recomended_item">

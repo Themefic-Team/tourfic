@@ -46,7 +46,7 @@ class Listings {
         $pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
         $pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
 
-        $tf_car_search_context = function_exists( 'tf_get_car_archive_search_context' ) ? tf_get_car_archive_search_context() : array(
+        $tf_car_search_context = function_exists( 'tourfic_get_car_archive_search_context' ) ? tourfic_get_car_archive_search_context() : array(
             'pickup'       => '',
             'dropoff'      => '',
             'pickup_date'  => '',
@@ -101,7 +101,7 @@ class Listings {
             <?php endif; ?>
 
             <div class="tf-car-archive-result" <?php echo !empty( $builder ) ? 'style="width: 100%;"' : ''; ?>>
-                <?php do_action( 'tf_car_archive_card_items_before' ); ?>
+                <?php do_action( 'tourfic_car_archive_card_items_before' ); ?>
 
                 <div class="tf-car-result archive_ajax_result tf-flex tf-flex-gap-32 <?php echo 'list' === $listing_layout ? esc_attr( 'list-view' ) : esc_attr( 'grid-view' ); ?> tf-grid-<?php echo esc_attr( $grid_column ); ?>">
                     <?php
@@ -112,7 +112,7 @@ class Listings {
                             $is_car_featured = is_array( $car_meta ) && ! empty( $car_meta['car_as_featured'] );
 
                             if ( $is_car_featured ) {
-                                tf_car_archive_single_item(
+                                tourfic_car_archive_single_item(
                                     $tf_car_search_context['pickup'],
                                     $tf_car_search_context['dropoff'],
                                     $tf_car_search_context['pickup_date'],
@@ -132,7 +132,7 @@ class Listings {
                             $is_car_featured = is_array( $car_meta ) && ! empty( $car_meta['car_as_featured'] );
 
                             if ( ! $is_car_featured ) {
-                                tf_car_archive_single_item(
+                                tourfic_car_archive_single_item(
                                     $tf_car_search_context['pickup'],
                                     $tf_car_search_context['dropoff'],
                                     $tf_car_search_context['pickup_date'],
@@ -157,7 +157,7 @@ class Listings {
                     <?php endif; ?>
                 </div>
 
-                <?php do_action( 'tf_car_archive_card_items_after' ); ?>
+                <?php do_action( 'tourfic_car_archive_card_items_after' ); ?>
             </div>
         </div>
         <?php

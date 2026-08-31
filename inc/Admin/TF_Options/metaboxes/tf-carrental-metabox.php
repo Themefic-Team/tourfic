@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 
-TF_Metabox::metabox( 'tf_carrental_opt', array(
+Tourfic_Metabox::metabox( 'tf_carrental_opt', array(
 	'title'     => esc_html__( 'Cars Settings', 'tourfic' ),
 	'post_type' => 'tf_carrental',
 	'sections'  => array(
@@ -43,7 +43,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'options'  => array(
 						'design-1' => array(
 							'title' => esc_html__('Design 1', 'tourfic'),
-							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-car-design-1.png",
+							'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-car-design-1.png",
 							'preview_link' => esc_url('https://tourfic.com/preview/cars/honda-city/'),
 						),
 					),

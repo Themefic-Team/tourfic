@@ -19,7 +19,7 @@ $tourfic_car_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfop
 
 if ( Helper::tf_is_woo_active() ) {
 	if ( $tourfic_car_arc_selected_template == "design-1" ) {
-		include TF_TEMPLATE_PATH . 'car/archive/design-1.php';
+		include TOURFIC_TEMPLATE_PATH . 'car/archive/design-1.php';
 	}
 } else {
 	?>

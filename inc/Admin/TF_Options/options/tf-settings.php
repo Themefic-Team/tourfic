@@ -6,14 +6,14 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 
 
-if ( file_exists( TF_ADMIN_PATH . 'TF_Options/options/tf-menu-icon.php' ) ) {
-	require_once TF_ADMIN_PATH . 'TF_Options/options/tf-menu-icon.php';
+if ( file_exists( TOURFIC_ADMIN_PATH . 'TF_Options/options/tf-menu-icon.php' ) ) {
+	require_once TOURFIC_ADMIN_PATH . 'TF_Options/options/tf-menu-icon.php';
 } else {
-	// $menu_icon = TF_ASSETS_ADMIN_URL . 'images/icons/tourfic-settings.svg';
+	// $menu_icon = TOURFIC_ASSETS_ADMIN_URL . 'images/icons/tourfic-settings.svg';
 }
 
-if ( !function_exists( 'tf_search_page_default' ) ) {
-    function tf_search_page_default() {
+if ( !function_exists( 'tourfic_search_page_default' ) ) {
+    function tourfic_search_page_default() {
         $args = array(
             'post_type'      => 'page',
             'posts_per_page' => -1,
@@ -32,8 +32,8 @@ if ( !function_exists( 'tf_search_page_default' ) ) {
     }
 }
 
-if ( ! function_exists( 'tf_wishlist_page_default') ) {
-	function tf_wishlist_page_default() {
+if ( ! function_exists( 'tourfic_wishlist_page_default') ) {
+	function tourfic_wishlist_page_default() {
 		$args = array(
 			'post_type'      => 'page',
 			'posts_per_page' => - 1,
@@ -52,10 +52,11 @@ if ( ! function_exists( 'tf_wishlist_page_default') ) {
 	}
 }
 
-TF_Settings::option( 'tf_settings', array(
+Tourfic_Settings::option( 'tourfic_settings', array(
 	'title'    => esc_html__( 'Tourfic Settings ', 'tourfic' ),
 	'icon'     => $tourfic_menu_icon,
 	'position' => 26,
+	'menu_slug' => 'tf_settings',
 	'sections' => array(
 		'general'               => array(
 			'title'  => esc_html__( 'General', 'tourfic' ),
@@ -79,19 +80,19 @@ TF_Settings::option( 'tf_settings', array(
 					'options'  => array(
 						'hotel' => array(
 							'title' => esc_html__( 'Hotel', 'tourfic' ),
-							'url'   => TF_ASSETS_ADMIN_URL . "images/hotel.png",
+							'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/hotel.png",
 						),
 						'tour' 		=> array(
 							'title'	=> esc_html__( 'Tour', 'tourfic' ),
-							'url' 	=> TF_ASSETS_ADMIN_URL."images/tour.png",
+							'url' 	=> TOURFIC_ASSETS_ADMIN_URL."images/tour.png",
 						),
 						'apartment'  => array(
 							'title' => esc_html__( 'Apartment', 'tourfic' ),
-							'url'   => TF_ASSETS_ADMIN_URL . "images/apartment.png",
+							'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/apartment.png",
 						),
 						'carrentals'  => array(
 							'title' => esc_html__( 'Car', 'tourfic' ),
-							'url'   => TF_ASSETS_ADMIN_URL . "images/carrentals.png",
+							'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/carrentals.png",
 						),
 					),
 				),
@@ -175,17 +176,17 @@ TF_Settings::option( 'tf_settings', array(
 									'options'  => array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
 											'preview_link' => esc_url('https://tourfic.com/preview/hotels/tuvo-suites-hotel/'),
 										),
 										'design-2' 	=> array(
 											'title'	=> esc_html__('Design 2', 'tourfic'),
-											'url' 	=> TF_ASSETS_ADMIN_URL."images/template/preview-single-design-2.png",
+											'url' 	=> TOURFIC_ASSETS_ADMIN_URL."images/template/preview-single-design-2.png",
 											'preview_link' => esc_url('https://tourfic.com/preview/hotels/melbourne-mastlereagh/'),
 										),
 										'default'  => array(
 											'title' => esc_html__('Legacy', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
 											'preview_link' => esc_url('https://tourfic.com/preview/hotels/rio-ontho-palace/'),
 										),
 									),
@@ -306,15 +307,15 @@ TF_Settings::option( 'tf_settings', array(
 									'options'  => array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-1.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-archive-design-1.png",
 										),
 										'design-2' => array(
 											'title' => esc_html__('Design 2', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png",
 										),
 										'default'  => array(
 											'title' => esc_html__('Legacy', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
 										),
 									),
 									'default'  => 'design-1',
@@ -325,7 +326,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => esc_html__( 'Upload Banner Image for this hotel archive template.', 'tourfic' ),
 									'library' => 'image',
-									'default' => TF_ASSETS_ADMIN_URL . "images/hotel-placeholder.jpg",
+									'default' => TOURFIC_ASSETS_ADMIN_URL . "images/hotel-placeholder.jpg",
 									'dependency' => array( 'hotel-archive', '==', 'design-2' ),
 								),
 								array(
@@ -334,7 +335,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => esc_html__( 'Upload Banner Image for this hotel archive template.', 'tourfic' ),
 									'library' => 'image',
-									'default' => TF_ASSETS_ADMIN_URL . "images/hotel-placeholder.jpg",
+									'default' => TOURFIC_ASSETS_ADMIN_URL . "images/hotel-placeholder.jpg",
 									'dependency' => array( 'hotel-archive', '==', 'design-3' ),
 								),
 								array(
@@ -376,17 +377,17 @@ TF_Settings::option( 'tf_settings', array(
 									'options'  => array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
 											'preview_link' => esc_url('https://tourfic.com/preview/tours/amplified-nz-tour/'),
 										),
 										'design-2' => array(
 											'title' => esc_html__('Design 2', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-2.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-design-2.png",
 											'preview_link' => esc_url('https://tourfic.com/preview/tours/ancient-trails-of-japan/'),
 										),
 										'default'  => array(
 											'title' => esc_html__('Legacy', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
 											'preview_link' => esc_url('https://tourfic.com/preview/tours/magical-russia/'),
 										),
 									),
@@ -534,15 +535,15 @@ TF_Settings::option( 'tf_settings', array(
 									'options'  => array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-1.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-archive-design-1.png",
 										),
 										'design-2' => array(
 											'title' => esc_html__('Design 2', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png",
 										),
 										'default'  => array(
 											'title' => esc_html__('Legacy', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
 										),
 									),
 									'default'  => 'design-1',
@@ -553,7 +554,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
 									'library' => 'image',
-									'default' => TF_ASSETS_ADMIN_URL . "images/tour-placeholder.jpg",
+									'default' => TOURFIC_ASSETS_ADMIN_URL . "images/tour-placeholder.jpg",
 									'dependency' => array( 'tour-archive', '==', 'design-2' ),
 								),
 								array(
@@ -562,7 +563,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
 									'library' => 'image',
-									'default' => TF_ASSETS_ADMIN_URL . "images/tour-placeholder.jpg",
+									'default' => TOURFIC_ASSETS_ADMIN_URL . "images/tour-placeholder.jpg",
 									'dependency' => array( 'tour-archive', '==', 'design-3' ),
 								),
 								array(
@@ -605,12 +606,12 @@ TF_Settings::option( 'tf_settings', array(
 									'options'  => array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-design-1.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-apt-design-1.png",
 											'preview_link' => esc_url('https://tourfic.com/preview/apartments/2-bedroom-apartment-in-gamle-oslo/'),
 										),
 										'default'  => array(
 											'title' => esc_html__('Legacy', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-default.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-apt-default.png",
 											'preview_link' => esc_url('https://tourfic.com/preview/apartments/barcelo-residences-dubai-marina/'),
 										),
 									),
@@ -695,11 +696,11 @@ TF_Settings::option( 'tf_settings', array(
 									'options'  => array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png",
 										),
 										'default'  => array(
 											'title' => esc_html__('Legacy', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
 										),
 									),
 									'default'  => 'default',
@@ -710,7 +711,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => esc_html__( 'Upload Banner Image for this apartment archive template.', 'tourfic' ),
 									'library' => 'image',
-									'default' => TF_ASSETS_ADMIN_URL . "images/apartment-placeholder.webp",
+									'default' => TOURFIC_ASSETS_ADMIN_URL . "images/apartment-placeholder.webp",
 									'dependency' => array( 'apartment-archive', '==', 'design-1' ),
 								),
 								array(
@@ -719,7 +720,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => esc_html__( 'Upload Banner Image for this apartment archive template.', 'tourfic' ),
 									'library' => 'image',
-									'default' => TF_ASSETS_ADMIN_URL . "images/apartment-placeholder.webp",
+									'default' => TOURFIC_ASSETS_ADMIN_URL . "images/apartment-placeholder.webp",
 									'dependency' => array( 'apartment-archive', '==', 'design-2' ),
 								),
 								array(
@@ -762,7 +763,7 @@ TF_Settings::option( 'tf_settings', array(
 									'options'  => array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-car-design-1.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-car-design-1.png",
 											'preview_link' => esc_url('https://tourfic.com/preview/cars/honda-city/'),
 										),
 									),
@@ -833,7 +834,7 @@ TF_Settings::option( 'tf_settings', array(
 									'options'  => array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-car-design-1.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-archive-car-design-1.png",
 										),
 									),
 									'default'  => 'design-1',
@@ -844,7 +845,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => esc_html__( 'Upload Banner Image for this car archive template.', 'tourfic' ),
 									'library' => 'image',
-									'default' => TF_ASSETS_ADMIN_URL . "images/carrental-placeholder.png",
+									'default' => TOURFIC_ASSETS_ADMIN_URL . "images/carrental-placeholder.png",
 									// 'dependency' => array( 'car-archive', '==', 'design-1' ),
 								),
 								array(
@@ -901,7 +902,7 @@ TF_Settings::option( 'tf_settings', array(
 									'options'  => array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-room-design-1.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-single-room-design-1.png",
 											'preview_link' => esc_url('https://tourfic.com/preview/cars/honda-city/'),
 										),
 									),
@@ -962,7 +963,7 @@ TF_Settings::option( 'tf_settings', array(
 									'options'  => array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-room-design-1.png",
+											'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/template/preview-archive-room-design-1.png",
 										),
 									),
 									'default'  => 'design-1',
@@ -993,11 +994,11 @@ TF_Settings::option( 'tf_settings', array(
 					'options'  => array(
 						'boxed' => array(
 							'title' => esc_html__('Boxed', 'tourfic'),
-							'url'   => TF_ASSETS_ADMIN_URL . "images/boxed.png",
+							'url'   => TOURFIC_ASSETS_ADMIN_URL . "images/boxed.png",
 						),
 						'full-width' => array(
 							'title'	=> esc_html__('Full width', 'tourfic'),
-							'url' 	=> TF_ASSETS_ADMIN_URL."images/full-width.png",
+							'url' 	=> TOURFIC_ASSETS_ADMIN_URL."images/full-width.png",
 						),
 					),
 					'default'  => 'boxed',
@@ -1071,7 +1072,7 @@ TF_Settings::option( 'tf_settings', array(
 						),
 						'custom' => array(
 							'title' => 'Custom Palette',
-							'colors' => function_exists('tf_custom_color_palette_values') ? tf_custom_color_palette_values() : '',
+							'colors' => function_exists('tourfic_custom_color_palette_values') ? tourfic_custom_color_palette_values() : '',
 						)
 					),
 					'default'  => 'design-1',
@@ -1947,7 +1948,7 @@ TF_Settings::option( 'tf_settings', array(
 						'post_type'      => 'page',
 						'posts_per_page' => - 1,
 					),
-					'default'     => !empty( get_option( 'tf_search_page_id	' ) ) ? get_option( 'tf_search_page_id	' ) : tf_search_page_default(),
+					'default'     => !empty( get_option( 'tourfic_search_page_id' ) ) ? get_option( 'tourfic_search_page_id' ) : tourfic_search_page_default(),
 				),
 
 				array(
@@ -2222,7 +2223,7 @@ TF_Settings::option( 'tf_settings', array(
 						'orderby'        => 'post_title',
 						'order'          => 'ASC'
 					),
-					'default' => !empty( get_option('tf_wishlist_page_id') ) ? get_option('tf_wishlist_page_id') : tf_wishlist_page_default(),
+					'default' => !empty( get_option('tourfic_wishlist_page_id') ) ? get_option('tourfic_wishlist_page_id') : tourfic_wishlist_page_default(),
 				),
 			),
 		),
@@ -2251,7 +2252,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => esc_html__( 'Tour Permalink', 'tourfic' ),
 					'subtitle' => esc_html__( 'Enter a permalink for your tour archive page.', 'tourfic' ),
 					'default' => "tours",
-					'placeholder' => !empty(get_option("tour_slug")) ? get_option("tour_slug") : "tours",
+					'placeholder' => !empty(get_option("tourfic_tour_slug")) ? get_option("tourfic_tour_slug") : "tours",
 					
 				),
 				array(
@@ -2260,7 +2261,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => esc_html__( 'Hotel Permalink', 'tourfic' ),
 					'subtitle' => esc_html__( 'Enter a permalink for your hotel archive page.', 'tourfic' ),
 					'default' => "hotels",
-					'placeholder' => ! empty(get_option("hotel_slug")) ? get_option("hotel_slug") : "hotels",
+					'placeholder' => ! empty(get_option("tourfic_hotel_slug")) ? get_option("tourfic_hotel_slug") : "hotels",
 				),
 				array(
 					'id'       => 'apartment-permalink-setting',
@@ -2268,7 +2269,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => esc_html__( 'Apartment Permalink', 'tourfic' ),
 					'subtitle' => esc_html__( 'Enter a permalink for your apartment archive page.', 'tourfic' ),
 					'default' => "apartments",
-					'placeholder' => ! empty(get_option("apartment_slug")) ? get_option("apartment_slug") : "apartments",
+					'placeholder' => ! empty(get_option("tourfic_apartment_slug")) ? get_option("tourfic_apartment_slug") : "apartments",
 				),
 				array(
 					'id'       => 'car-permalink-setting',
@@ -2276,7 +2277,7 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => esc_html__( 'Car Permalink', 'tourfic' ),
 					'subtitle' => esc_html__( 'Enter a permalink for your car archive page.', 'tourfic' ),
 					'default' => "cars",
-					'placeholder' => ! empty(get_option("car_slug")) ? get_option("car_slug") : "cars",
+					'placeholder' => ! empty(get_option("tourfic_car_slug")) ? get_option("tourfic_car_slug") : "cars",
 				),
 			),
 		),

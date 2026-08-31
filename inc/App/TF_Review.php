@@ -20,8 +20,10 @@ class TF_Review {
         add_action( "admin_init", array($this, "tf_remove_comment_meta_box"));
         add_action( 'wp_enqueue_scripts', array($this, 'tf_review_script'), 99999 );
         add_action( 'comment_post', array( $this, 'tf_save_rating' ), 10, 3 );
+        add_action( 'comment_form_after_fields', array( $this, 'tf_review_nonce_field' ) );
+        add_action( 'comment_form_logged_in_after', array( $this, 'tf_review_nonce_field' ) );
         add_action( 'wp_insert_comment', array( $this, 'tf_auto_approve_comments' ) );
-        add_action( 'wp_ajax_tf_delete_old_review_fields', array( $this, 'tf_delete_old_review_fields' ) );
+        add_action( 'wp_ajax_tourfic_delete_old_review_fields', array( $this, 'tf_delete_old_review_fields' ) );
         add_action( 'set_comment_cookies', array( $this, "tf_set_comment_cookie_callback"), 10, 2);
         
         // All Filter hooks
@@ -33,9 +35,9 @@ class TF_Review {
     }
 
     static function define_review_constants() {
-        define( 'TF_COMMENT_META', 'tf_comment_meta' );
-        define( 'TF_TOTAL_RATINGS', 'tf_total_ratings' );
-        define( 'TF_BASE_RATE', 'tf_base_rate' );
+        define( 'TOURFIC_COMMENT_META', 'tf_comment_meta' );
+        define( 'TOURFIC_TOTAL_RATINGS', 'tf_total_ratings' );
+        define( 'TOURFIC_BASE_RATE', 'tf_base_rate' );
     }
 
     function tf_remove_comment_meta_box() {
@@ -51,7 +53,7 @@ class TF_Review {
              *
              * v1.19.5
              */
-			wp_enqueue_script( 'jquery-validate', TF_ASSETS_APP_URL . 'libs/jquery-validate/jquery.validate.min.js', array( 'jquery' ), '1.22.1', true );
+			wp_enqueue_script( 'jquery-validate', TOURFIC_ASSETS_APP_URL . 'libs/jquery-validate/jquery.validate.min.js', array( 'jquery' ), '1.22.1', true );
             
             $data = '
             
@@ -91,26 +93,55 @@ class TF_Review {
     
     }
 
-    function tf_save_rating( $comment_id, $comment_approved, $commentdata ) {
-		// Get the post ID from the comment data
-        $post_id = $commentdata['comment_post_ID'];
-
-        global $current_user;
-        $is_user_logged_in = $current_user->exists();
-        
-        if ( $is_user_logged_in ) {
-
-            if ( ! isset( $_POST['_wp_unfiltered_html_comment'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_wp_unfiltered_html_comment'])), 'unfiltered-html-comment_' . $post_id ) ) {
-                return;
-            }
-
+    function tf_review_nonce_field() {
+        $post_id = get_the_ID();
+        if ( ! $post_id || ! in_array( get_post_type( $post_id ), array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_room' ), true ) ) {
+            return;
         }
 
-		if ( ( isset( $_POST[ TF_COMMENT_META ] ) ) && ( '' !== $_POST[ TF_COMMENT_META ] ) ) {
-			$tf_comment_meta =  $_POST[ TF_COMMENT_META ]; // phpcs:ignore
-			add_comment_meta( $comment_id, TF_COMMENT_META, $tf_comment_meta );
-			add_comment_meta( $comment_id, TF_BASE_RATE, Helper::tfopt( 'r-base' ) ?? 5 );
+        wp_nonce_field( 'tourfic_save_rating_' . $post_id, 'tourfic_rating_nonce' );
+    }
+
+    function tf_save_rating( $comment_id, $comment_approved, $commentdata ) {
+		$post_id = ! empty( $commentdata['comment_post_ID'] ) ? absint( $commentdata['comment_post_ID'] ) : 0;
+		if ( ! $post_id || ! in_array( get_post_type( $post_id ), array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_room' ), true ) ) {
+			return;
 		}
+
+		$nonce = isset( $_POST['tourfic_rating_nonce'] )
+			? sanitize_text_field( wp_unslash( $_POST['tourfic_rating_nonce'] ) )
+			: '';
+		if ( ! wp_verify_nonce( $nonce, 'tourfic_save_rating_' . $post_id ) ) {
+			return;
+		}
+
+			$submitted_ratings = isset( $_POST[ TOURFIC_COMMENT_META ] ) && is_array( $_POST[ TOURFIC_COMMENT_META ] )
+				? map_deep( wp_unslash( $_POST[ TOURFIC_COMMENT_META ] ), 'sanitize_text_field' )
+				: array();
+		if ( empty( $submitted_ratings ) ) {
+			return;
+		}
+
+		$rating_limit = max( 1, absint( Helper::tfopt( 'r-base' ) ?? 5 ) );
+		$ratings      = array();
+		foreach ( $submitted_ratings as $field_name => $rating ) {
+			if ( ! is_scalar( $field_name ) || ! is_scalar( $rating ) ) {
+				continue;
+			}
+
+			$field_name = sanitize_text_field( (string) $field_name );
+			$rating     = absint( $rating );
+			if ( '' !== $field_name && $rating >= 1 && $rating <= $rating_limit ) {
+				$ratings[ $field_name ] = $rating;
+			}
+		}
+
+		if ( empty( $ratings ) ) {
+			return;
+		}
+
+		add_comment_meta( $comment_id, TOURFIC_COMMENT_META, $ratings );
+		add_comment_meta( $comment_id, TOURFIC_BASE_RATE, $rating_limit );
 	}
 
     function tf_auto_approve_comments( $comment_id ) {
@@ -185,7 +216,7 @@ class TF_Review {
     
         foreach ( $comments as $comment ) {
     
-            $review    = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+            $review    = get_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, true );
             $post_type = get_post_type( $comment->comment_post_ID );
             self::tf_get_review_fields( $fields, $post_type );
             if ( ! empty( $review ) ) {
@@ -200,8 +231,8 @@ class TF_Review {
                     }
                 }
     
-                update_comment_meta( $comment->comment_ID, TF_COMMENT_META, $review );
-                $review = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
+                update_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, $review );
+                $review = get_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, true );
     
                 if ( ! empty( $_POST['deleteAll'] ) && sanitize_text_field( wp_unslash( $_POST['deleteAll'] ) ) == 'yes' && count( $review ) == 0 ) {
                     wp_delete_comment( $comment, true );
@@ -491,8 +522,8 @@ class TF_Review {
         if ( ! is_array( $total_rate ) ) {
             $total_rate = array();
         }
-        $tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
-        $tf_base_rate    = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+        $tf_comment_meta = get_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, true );
+        $tf_base_rate    = get_comment_meta( $comment->comment_ID, TOURFIC_BASE_RATE, true );
     
         if ( $tf_comment_meta ) {
             $total_rate[] = self::tf_average_rating_change_on_base( self::tf_average_ratings( $tf_comment_meta ), $tf_base_rate );
@@ -502,7 +533,7 @@ class TF_Review {
                 $ratings = self::tf_average_rating_change_on_base( $ratings, $tf_base_rate );
     
                 if ( is_array( $ratings ) ) {
-                    $overall_rating[ $key ][] = tf_average_ratings( $ratings );
+                    $overall_rating[ $key ][] = tourfic_average_ratings( $ratings );
                 } else {
                     $overall_rating[ $key ][] = $ratings;
                 }
@@ -728,8 +759,8 @@ class TF_Review {
         $total_rate = [];
 
         foreach ( $comments as $comment ) {
-            $tf_comment_meta = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
-            $tf_base_rate    = get_comment_meta( $comment->comment_ID, TF_BASE_RATE, true );
+            $tf_comment_meta = get_comment_meta( $comment->comment_ID, TOURFIC_COMMENT_META, true );
+            $tf_base_rate    = get_comment_meta( $comment->comment_ID, TOURFIC_BASE_RATE, true );
     
             if ( $tf_comment_meta ) {
                 $total_rate[] = self::tf_average_rating_change_on_base( self::tf_average_ratings( $tf_comment_meta ), $tf_base_rate );
@@ -742,7 +773,7 @@ class TF_Review {
 
     public static function tf_based_on_text( $number ) {
         $comments_title = apply_filters(
-            'tf_comment_form_title',
+            'tourfic_comment_form_title',
             sprintf( // WPCS: XSS OK.
             /* translators: 1: number of comments */
                 esc_html( _nx( '%1$s review', '%1$s reviews', $number, 'comments title', 'tourfic' ) ),

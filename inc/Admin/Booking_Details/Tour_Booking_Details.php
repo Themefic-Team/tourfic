@@ -11,7 +11,7 @@ class Tour_Booking_Details extends \Tourfic\Core\TF_Booking_Details {
 		$booking_args = array(
 			'post_type'    => 'tf_tours',
 			'menu_title'   => 'Tour Booking Details',
-			'menu_slug'    => 'tf_tours_booking',
+			'menu_slug'    => 'tourfic_tours_booking',
 			'capability'   => 'edit_tf_tourss',
 			'booking_type' => 'tour',
 			'booking_title'=> 'Tour',

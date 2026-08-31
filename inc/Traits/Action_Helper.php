@@ -30,7 +30,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
-				return TF_TEMPLATE_PATH . 'hotel/archive-hotels.php';
+				return TOURFIC_TEMPLATE_PATH . 'hotel/archive-hotels.php';
 			}
 		}
 
@@ -41,7 +41,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
-				return TF_TEMPLATE_PATH . 'apartment/archive-apartments.php';
+				return TOURFIC_TEMPLATE_PATH . 'apartment/archive-apartments.php';
 			}
 		}
 
@@ -51,7 +51,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
-				return TF_TEMPLATE_PATH . 'tour/archive-tours.php';
+				return TOURFIC_TEMPLATE_PATH . 'tour/archive-tours.php';
 			}
 		}
 
@@ -61,7 +61,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
-				return TF_TEMPLATE_PATH . 'car/archive-cars.php';
+				return TOURFIC_TEMPLATE_PATH . 'car/archive-cars.php';
 			}
 		}
 
@@ -71,7 +71,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
-				return TF_TEMPLATE_PATH . 'room/archive-rooms.php';
+				return TOURFIC_TEMPLATE_PATH . 'room/archive-rooms.php';
 			}
 		}
 
@@ -301,7 +301,7 @@ trait Action_Helper {
 		?>
         <div class="tf_docs_preview">
             <a href="<?php echo esc_url( $tfhoteldocumentation ); ?>" target="_blank">
-                <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL . 'images/banner-cta.png' ); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
+                <img src="<?php echo esc_url( TOURFIC_ASSETS_ADMIN_URL . 'images/banner-cta.png' ); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
             </a>
         </div>
 		<?php
@@ -313,7 +313,7 @@ trait Action_Helper {
 		?>
         <div class="tf_docs_preview">
             <a href="<?php echo esc_url( $tf_apartment_documentation ); ?>" target="_blank">
-                <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL . 'images/banner-cta.png' ); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
+                <img src="<?php echo esc_url( TOURFIC_ASSETS_ADMIN_URL . 'images/banner-cta.png' ); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
             </a>
         </div>
 		<?php
@@ -324,7 +324,7 @@ trait Action_Helper {
 		?>
         <div class="tf_docs_preview">
             <a href="<?php echo esc_url( $tf_tour_documentation ); ?>" target="_blank">
-                <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL . 'images/banner-cta.png' ); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
+                <img src="<?php echo esc_url( TOURFIC_ASSETS_ADMIN_URL . 'images/banner-cta.png' ); ?>" alt="<?php echo esc_html__( 'Go to Documentation', 'tourfic' ); ?>">
             </a>
         </div>
 		<?php
@@ -441,7 +441,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
-				return TF_TEMPLATE_PATH . "hotel/single-hotel.php";
+				return TOURFIC_TEMPLATE_PATH . "hotel/single-hotel.php";
 			}
 		}
 
@@ -458,7 +458,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
-				return TF_TEMPLATE_PATH . "apartment/single-apartment.php";
+				return TOURFIC_TEMPLATE_PATH . "apartment/single-apartment.php";
 			}
 		}
 
@@ -475,7 +475,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
-				return TF_TEMPLATE_PATH . "tour/single-tour.php";
+				return TOURFIC_TEMPLATE_PATH . "tour/single-tour.php";
 			}
 		}
 
@@ -492,7 +492,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
-				return TF_TEMPLATE_PATH . "car/single-car.php";
+				return TOURFIC_TEMPLATE_PATH . "car/single-car.php";
 			}
 		}
 
@@ -509,7 +509,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
-				return TF_TEMPLATE_PATH . "room/single-room.php";
+				return TOURFIC_TEMPLATE_PATH . "room/single-room.php";
 			}
 		}
 
@@ -530,7 +530,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				return $exists_in_theme;
 			} else {
-				return TF_TEMPLATE_PATH . 'template-parts/review.php';
+				return TOURFIC_TEMPLATE_PATH . 'template-parts/review.php';
 			}
 		}
 
@@ -549,7 +549,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				$template = $exists_in_theme;
 			} else {
-				$template = TF_TEMPLATE_PATH . 'hotel/taxonomy-hotel_locations.php';
+				$template = TOURFIC_TEMPLATE_PATH . 'hotel/taxonomy-hotel_locations.php';
 			}
 		}
 
@@ -560,7 +560,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				$template = $exists_in_theme;
 			} else {
-				$template = TF_TEMPLATE_PATH . 'apartment/taxonomy-apartment_locations.php';
+				$template = TOURFIC_TEMPLATE_PATH . 'apartment/taxonomy-apartment_locations.php';
 			}
 		}
 
@@ -572,7 +572,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				$template = $exists_in_theme;
 			} else {
-				$template = TF_TEMPLATE_PATH . 'tour/taxonomy-tour_destinations.php';
+				$template = TOURFIC_TEMPLATE_PATH . 'tour/taxonomy-tour_destinations.php';
 			}
 
 		}
@@ -584,7 +584,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				$template = $exists_in_theme;
 			} else {
-				$template = TF_TEMPLATE_PATH . 'car/taxonomy-carrental_locations.php';
+				$template = TOURFIC_TEMPLATE_PATH . 'car/taxonomy-carrental_locations.php';
 			}
 		}
 
@@ -595,7 +595,7 @@ trait Action_Helper {
 			if ( $exists_in_theme ) {
 				$template = $exists_in_theme;
 			} else {
-				$template = TF_TEMPLATE_PATH . 'car/taxonomy-carrental_brands.php';
+				$template = TOURFIC_TEMPLATE_PATH . 'car/taxonomy-carrental_brands.php';
 			}
 		}
 
@@ -627,7 +627,7 @@ trait Action_Helper {
 				}
 
 				// 2. Plugin fallback
-				$plugin_tpl = TF_TEMPLATE_PATH . "{$post_type}/taxonomy.php";
+				$plugin_tpl = TOURFIC_TEMPLATE_PATH . "{$post_type}/taxonomy.php";
 
 				if ( file_exists( $plugin_tpl ) ) {
 					return $plugin_tpl;
@@ -675,7 +675,7 @@ trait Action_Helper {
 	 */
 	function tf_admin_role_caps() {
 
-		if ( get_option( 'tf_admin_caps' ) < 8 ) {
+		if ( get_option( 'tourfic_admin_caps' ) < 8 ) {
 			$admin_role  = get_role( 'administrator' );
 			$editor_role = get_role( 'editor' );
 
@@ -764,12 +764,12 @@ trait Action_Helper {
 				$editor_role->add_cap( $cap );
 			}
 
-			update_option( 'tf_admin_caps', 8 );
+			update_option( 'tourfic_admin_caps', 8 );
 		}
 	}
 
 	function tf_customer_role_caps(){
-		if ( get_option( 'tf_customer_caps' ) < 1 ) {
+		if ( get_option( 'tourfic_customer_caps' ) < 1 ) {
 			$customer_role  = get_role( 'customer' );
 
 			// Add a new capability.
@@ -782,7 +782,7 @@ trait Action_Helper {
 				$customer_role->add_cap( $cap );
 			}
 
-			update_option( 'tf_customer_caps', 1 );
+			update_option( 'tourfic_customer_caps', 1 );
 		}
 	}
 
@@ -840,8 +840,8 @@ trait Action_Helper {
 		$endprice   = ! empty( $_POST['endprice'] ) ? sanitize_text_field( wp_unslash( $_POST['endprice'] ) ) : '';
 
         //Map Template only
-        $mapFilter = !empty($_POST['mapFilter']) ? sanitize_text_field($_POST['mapFilter']) : false; //phpcs:ignore
-        $mapCoordinates = !empty($_POST['mapCoordinates']) ? explode(',', sanitize_text_field($_POST['mapCoordinates'])) : []; //phpcs:ignore
+        $mapFilter = !empty($_POST['mapFilter']) ? sanitize_text_field( wp_unslash( $_POST['mapFilter'] ) ) : false;
+        $mapCoordinates = !empty($_POST['mapCoordinates']) ? explode(',', sanitize_text_field( wp_unslash( $_POST['mapCoordinates'] ) ) ) : [];
         if (!empty($mapCoordinates) && count($mapCoordinates) === 4) {
             list($minLat, $minLng, $maxLat, $maxLng) = $mapCoordinates;
         }
@@ -849,8 +849,8 @@ trait Action_Helper {
 		// Cars Data Start
 		$pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( wp_unslash($_POST['pickup']) ) : '';
 		$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff']) ) : '';
-		$tf_pickup_date  = ! empty( $_POST['pickup_date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash($_POST['pickup_date']) ) ) : '';
-		$tf_dropoff_date = ! empty( $_POST['dropoff_date'] ) ? tf_normalize_date( sanitize_text_field( wp_unslash($_POST['dropoff_date']) ) ) : '';
+		$tf_pickup_date  = ! empty( $_POST['pickup_date'] ) ? tourfic_normalize_date( sanitize_text_field( wp_unslash($_POST['pickup_date']) ) ) : '';
+		$tf_dropoff_date = ! empty( $_POST['dropoff_date'] ) ? tourfic_normalize_date( sanitize_text_field( wp_unslash($_POST['dropoff_date']) ) ) : '';
 		$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_time']) ) : '';
 		$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
 
@@ -869,18 +869,18 @@ trait Action_Helper {
 		$tf_car_brand = ! empty( $_POST['car_brand'] ) ? sanitize_text_field( wp_unslash( $_POST['car_brand'] ) ) : null;
 		$car_brand = ! empty( $tf_car_brand ) ? explode( ',', $tf_car_brand ) : null;
 		$tf_car_transmission = array();
-		if ( isset( $_POST['car_transmission'] ) && function_exists( 'tf_normalize_car_binary_filter_values' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_POST['car_transmission'] ) && function_exists( 'tourfic_normalize_car_binary_filter_values' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$car_transmission = is_array( $_POST['car_transmission'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				? array_map( 'sanitize_text_field', wp_unslash( $_POST['car_transmission'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				: sanitize_text_field( wp_unslash( $_POST['car_transmission'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$tf_car_transmission = tf_normalize_car_binary_filter_values( $car_transmission );
+			$tf_car_transmission = tourfic_normalize_car_binary_filter_values( $car_transmission );
 		}
 		$tf_carplay_android_auto = array();
-		if ( isset( $_POST['carplay_android_auto'] ) && function_exists( 'tf_normalize_car_binary_filter_values' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_POST['carplay_android_auto'] ) && function_exists( 'tourfic_normalize_car_binary_filter_values' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$carplay_android_auto = is_array( $_POST['carplay_android_auto'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				? array_map( 'sanitize_text_field', wp_unslash( $_POST['carplay_android_auto'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				: sanitize_text_field( wp_unslash( $_POST['carplay_android_auto'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$tf_carplay_android_auto = tf_normalize_car_binary_filter_values( $carplay_android_auto );
+			$tf_carplay_android_auto = tourfic_normalize_car_binary_filter_values( $carplay_android_auto );
 		}
 
 		$tf_startprice  = isset( $_POST['startprice'] ) ? sanitize_text_field( wp_unslash($_POST['startprice']) ) : '';
@@ -892,7 +892,8 @@ trait Action_Helper {
         $car_driver_max_age = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] : 40;
 		// Cars Data End
 		
-		$builderSettings = !empty($_POST['builderSettings']) ? json_decode(stripslashes($_POST['builderSettings']), true) : []; //phpcs:ignore
+		$builderSettings = ! empty( $_POST['builderSettings'] ) ? json_decode( sanitize_textarea_field( wp_unslash( $_POST['builderSettings'] ) ), true ) : [];
+		$builderSettings = is_array( $builderSettings ) ? map_deep( $builderSettings, 'sanitize_text_field' ) : [];
 
 		// Author ID if any (single value)
 		$tf_author_ids = isset( $_POST['tf_author'] ) ? intval( $_POST['tf_author'] ) : '';
@@ -920,7 +921,7 @@ trait Action_Helper {
 		}
 
 		if ( ! empty( $check_in_out ) ) {
-			list( $tf_form_start, $tf_form_end ) = tf_split_date_range( $check_in_out );
+			list( $tf_form_start, $tf_form_end ) = tourfic_split_date_range( $check_in_out );
 		}
 
 		if ( ! empty( $check_in_out ) ) {
@@ -1227,7 +1228,7 @@ trait Action_Helper {
 			);
 		}
 
-		// NOTE: Car seat/price/driver-age/transmission/CarPlay filtering is handled by tf_car_availability_response()
+		// NOTE: Car seat/price/driver-age/transmission/CarPlay filtering is handled by tourfic_car_availability_response()
 		// to keep behavior consistent across legacy and modern car meta schemas.
 
 		if ( $category ) {
@@ -1359,7 +1360,7 @@ trait Action_Helper {
 
 					$car_inventory = Availability::tf_car_inventory(get_the_ID(), $car_meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 					if($car_inventory){
-						tf_car_availability_response( $car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice, $tf_min_seat, $tf_max_seat, $tf_driver_age, $car_driver_min_age, $car_driver_max_age, $tf_car_transmission, $tf_carplay_android_auto );
+						tourfic_car_availability_response( $car_meta, $not_found, $pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $tf_startprice, $tf_endprice, $tf_min_seat, $tf_max_seat, $tf_driver_age, $car_driver_min_age, $car_driver_max_age, $tf_car_transmission, $tf_carplay_android_auto );
 					}
 				} elseif ( $posttype == 'tf_room' ) {
 					
@@ -1476,7 +1477,7 @@ trait Action_Helper {
 												if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 													the_post_thumbnail( 'full' );
 												} else {
-													echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
+													echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
 												}
 												?>
                                             </a>
@@ -1574,7 +1575,7 @@ trait Action_Helper {
                                                 if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
                                                     the_post_thumbnail( 'full' );
                                                 } else {
-                                                    echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
+                                                    echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
                                                 }
                                                 ?>
                                             </a>
@@ -1672,7 +1673,7 @@ trait Action_Helper {
 												if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 													the_post_thumbnail( 'full' );
 												} else {
-													echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
+													echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
 												}
 												?>
                                             </a>
@@ -1728,7 +1729,7 @@ trait Action_Helper {
 						} elseif ( $posttype == 'tf_carrental' ) {
 							$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
 							if ( $car_meta["car_as_featured"] ) {
-								tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+								tourfic_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 							}
 						} elseif ( $posttype == 'tf_room' ) {
 							if ( ! empty( $data ) ) {
@@ -1792,7 +1793,7 @@ trait Action_Helper {
 												if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 													the_post_thumbnail( 'full' );
 												} else {
-													echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
+													echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
 												}
 												?>
                                             </a>
@@ -1892,7 +1893,7 @@ trait Action_Helper {
 												if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 													the_post_thumbnail( 'full' );
 												} else {
-													echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
+													echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
 												}
 												?>
                                             </a>
@@ -1982,7 +1983,7 @@ trait Action_Helper {
 												if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 													the_post_thumbnail( 'full' );
 												} else {
-													echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
+													echo '<img src="' . esc_url(TOURFIC_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
 												}
 												?>
                                             </a>
@@ -2039,7 +2040,7 @@ trait Action_Helper {
 						} elseif ( $posttype == 'tf_carrental' ) {
 							$car_meta = get_post_meta( get_the_ID(), 'tf_carrental_opt', true );
 							if ( ! $car_meta["car_as_featured"] ) {
-								tf_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+								tourfic_car_archive_single_item($pickup, $dropoff, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 							}
 						}else{
 
@@ -2302,7 +2303,9 @@ trait Action_Helper {
 		if ( ! is_checkout() ) {
 			return $subtotal;
 		}
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce-owned hook.
 		$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce-owned hook.
 		$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
 		?>
         <div class="tf-product-total">
@@ -2348,7 +2351,7 @@ trait Action_Helper {
 	 * @author Abu Hena
 	 */
 	function tf_update_email_template_default_content() {
-		$tf_settings = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
+		$tf_settings = ! empty( get_option( 'tourfic_settings' ) ) ? get_option( 'tourfic_settings' ) : array();
 		if ( empty( $tf_settings['email-settings'] ) || ! is_array( $tf_settings['email-settings'] ) ) {
 			return;
 		}
@@ -2370,7 +2373,7 @@ trait Action_Helper {
 		}
 
 		if ( $updated ) {
-			update_option( 'tf_settings', $tf_settings );
+			update_option( 'tourfic_settings', $tf_settings );
 		}
 	}
 
@@ -2561,7 +2564,7 @@ trait Action_Helper {
 
 	function tf_no_idex_search_page($robots) {
 		global $post;
-		$tf_search_page_id = get_option("tf_search_page_id");
+		$tf_search_page_id = get_option("tourfic_search_page_id");
 
 		if( !empty($tf_search_page_id) && $tf_search_page_id == $post->ID ) {
 			$robots['noindex'] = true;
@@ -2590,7 +2593,7 @@ trait Action_Helper {
 		// } else if( $post_type == 'tf_apartment' ) {
 			$response['tf_apartment'] = Apt_Pricing::get_min_max_price_from_all_apartment();
 		// } else if( $post_type == 'tf_carrental' ) {
-			$response['tf_carrental'] = get_cars_min_max_price();
+			$response['tf_carrental'] = tourfic_get_cars_min_max_price();
 		// } else if( $post_type == 'tf_room' ) {
 			$response['tf_room'] = Room_Pricing::get_min_max_price_from_all_room();
 		// }

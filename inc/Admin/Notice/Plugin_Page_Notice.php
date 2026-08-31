@@ -22,7 +22,7 @@ class Plugin_Page_Notice extends \Tourfic\Core\TF_Notice {
     }
 
     function set_notice_id() {
-        $this->notice_id = 'tf_dismiss_221';
+        $this->notice_id = 'tourfic_dismiss_221';
     }
 
     // Red Color: style="color:#d63638;

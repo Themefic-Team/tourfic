@@ -37,25 +37,25 @@ class TF_Options {
 		//load taxonomy
 		$this->load_taxonomy();
 
-		add_action( 'wp_ajax_tf_load_more_icons', array( $this, 'tf_load_more_icons' ) );
-		add_action( 'wp_ajax_tf_icon_search', array( $this, 'tf_icon_search' ) );
+		add_action( 'wp_ajax_tourfic_load_more_icons', array( $this, 'tf_load_more_icons' ) );
+		add_action( 'wp_ajax_tourfic_icon_search', array( $this, 'tf_icon_search' ) );
 
-		add_action( 'wp_ajax_tf_add_hotel_room_availability', array( $this, 'tf_add_hotel_room_availability' ) );
-		add_action( 'wp_ajax_tf_get_hotel_room_availability', array( $this, 'tf_get_hotel_room_availability' ) );
-		add_action( 'wp_ajax_tf_reset_room_availability', array( $this, 'tf_reset_room_availability' ) );
+		add_action( 'wp_ajax_tourfic_add_hotel_room_availability', array( $this, 'tf_add_hotel_room_availability' ) );
+		add_action( 'wp_ajax_tourfic_get_hotel_room_availability', array( $this, 'tf_get_hotel_room_availability' ) );
+		add_action( 'wp_ajax_tourfic_reset_room_availability', array( $this, 'tf_reset_room_availability' ) );
 		add_action( 'save_post', array( $this, 'tf_update_room_avail_date_price' ), 9999, 2 );
-		add_action( 'wp_ajax_tf_add_apartment_availability', array( $this, 'tf_add_apartment_availability' ) );
-		add_action( 'wp_ajax_tf_get_apartment_availability', array( $this, 'tf_get_apartment_availability' ) );
-		add_action( 'wp_ajax_tf_reset_apt_availability', array( $this, 'tf_reset_apt_availability' ) );
+		add_action( 'wp_ajax_tourfic_add_apartment_availability', array( $this, 'tf_add_apartment_availability' ) );
+		add_action( 'wp_ajax_tourfic_get_apartment_availability', array( $this, 'tf_get_apartment_availability' ) );
+		add_action( 'wp_ajax_tourfic_reset_apt_availability', array( $this, 'tf_reset_apt_availability' ) );
 
-		add_action( 'wp_ajax_tf_add_tour_availability', array( $this, 'tf_add_tour_availability' ) );
-		add_action( 'wp_ajax_tf_get_tour_availability', array( $this, 'tf_get_tour_availability' ) );
-		add_action( 'wp_ajax_tf_reset_tour_availability', array( $this, 'tf_reset_tour_availability' ) );
+		add_action( 'wp_ajax_tourfic_add_tour_availability', array( $this, 'tf_add_tour_availability' ) );
+		add_action( 'wp_ajax_tourfic_get_tour_availability', array( $this, 'tf_get_tour_availability' ) );
+		add_action( 'wp_ajax_tourfic_reset_tour_availability', array( $this, 'tf_reset_tour_availability' ) );
 		add_action( 'save_post', array( $this, 'tf_update_apt_availability_price' ), 99, 2 );
-		add_action( 'wp_ajax_tf_insert_category_data', array( $this, 'tf_insert_category_data_callback' ) );
-		add_action( 'wp_ajax_tf_delete_category_data', array( $this, 'tf_delete_category_data_callback' ) );
-		add_action( 'wp_ajax_tf_insert_post_data', array( $this, 'tf_insert_post_data_callback' ) );
-		add_action( 'wp_ajax_tf_delete_post_data', array( $this, 'tf_delete_post_data_callback' ) );
+		add_action( 'wp_ajax_tourfic_insert_category_data', array( $this, 'tf_insert_category_data_callback' ) );
+		add_action( 'wp_ajax_tourfic_delete_category_data', array( $this, 'tf_delete_category_data_callback' ) );
+		add_action( 'wp_ajax_tourfic_insert_post_data', array( $this, 'tf_insert_post_data_callback' ) );
+		add_action( 'wp_ajax_tourfic_delete_post_data', array( $this, 'tf_delete_post_data_callback' ) );
 	}
 
 	public function tf_options_file_path( $file_path = '' ) {
@@ -579,7 +579,7 @@ class TF_Options {
 
             <div class="tf-fieldset">
 				<?php
-				$fieldClass = 'TF_' . $field['type'];
+				$fieldClass = 'Tourfic_' . $field['type'];
 				if ( class_exists( $fieldClass ) ) {
 					$_field = new $fieldClass( $field, $value, $settings_id, $parent, $related_value );
 					$_field->render();
@@ -602,31 +602,31 @@ class TF_Options {
 			'all'           => array(
 				'label'      => esc_html__( 'All Icons', 'tourfic' ),
 				'label_icon' => 'ri-grid-fill',
-				'icons'      => array_merge( fontawesome_four_icons(), fontawesome_five_icons(), fontawesome_six_icons(), remix_icon() ),
+				'icons'      => array_merge( tourfic_fontawesome_four_icons(), tourfic_fontawesome_five_icons(), tourfic_fontawesome_six_icons(), tourfic_remix_icon() ),
 			),
 			'fontawesome_4' => array(
 				'label'      => esc_html__( 'Font Awesome 4', 'tourfic' ),
 				'label_icon' => 'fa-regular fa-font-awesome',
-				'icons'      => fontawesome_four_icons(),
+				'icons'      => tourfic_fontawesome_four_icons(),
 			),
 			'fontawesome_5' => array(
 				'label'      => esc_html__( 'Font Awesome 5', 'tourfic' ),
 				'label_icon' => 'fa-regular fa-font-awesome',
-				'icons'      => fontawesome_five_icons(),
+				'icons'      => tourfic_fontawesome_five_icons(),
 			),
 			'fontawesome_6' => array(
 				'label'      => esc_html__( 'Font Awesome 6', 'tourfic' ),
 				'label_icon' => 'fa-regular fa-font-awesome',
-				'icons'      => fontawesome_six_icons(),
+				'icons'      => tourfic_fontawesome_six_icons(),
 			),
 			'remixicon'     => array(
 				'label'      => esc_html__( 'Remix Icon', 'tourfic' ),
 				'label_icon' => 'ri-remixicon-line',
-				'icons'      => remix_icon(),
+				'icons'      => tourfic_remix_icon(),
 			),
 		);
 
-		$icons = apply_filters( 'tf_icon_list', $icons );
+		$icons = apply_filters( 'tourfic_icon_list', $icons );
 
 		return $icons;
 	}
@@ -720,9 +720,9 @@ class TF_Options {
 		$new_post    = isset( $_POST['new_post'] ) ? sanitize_text_field( wp_unslash( $_POST['new_post'] ) ) : '';
 		$check_in    = isset( $_POST['tf_room_check_in'] ) ? sanitize_text_field( wp_unslash( $_POST['tf_room_check_in'] ) ) : '';
 		$check_out   = isset( $_POST['tf_room_check_out'] ) ? sanitize_text_field( wp_unslash( $_POST['tf_room_check_out'] ) ) : '';
-		$status      = $this->tf_sanitize_availability_status( $_POST['tf_room_status'] ?? '' ); //phpcs:ignore
-		$price       = $this->tf_sanitize_availability_number( $_POST['tf_room_price'] ?? '' ); //phpcs:ignore
-		$avail_date  = isset( $_POST['avail_date'] ) ? wp_unslash( $_POST['avail_date'] ) : ''; //phpcs:ignore
+		$status      = isset( $_POST['tf_room_status'] ) ? $this->tf_sanitize_availability_status( sanitize_key( wp_unslash( $_POST['tf_room_status'] ) ) ) : 'available';
+		$price       = isset( $_POST['tf_room_price'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_room_price'] ) ) ) : '';
+		$avail_date  = isset( $_POST['avail_date'] ) ? sanitize_textarea_field( wp_unslash( $_POST['avail_date'] ) ) : '';
 		$room_meta   = get_post_meta( $room_id, 'tf_room_opt', true );
 		$room_meta   = is_array( $room_meta ) ? $room_meta : array();
 
@@ -752,7 +752,7 @@ class TF_Options {
 			: $this->tf_safe_json_decode_assoc( $room_meta['avail_date'] ?? array() );
 		$rule_type             = (string) apply_filters( 'tourfic_room_availability_rule_type', '1', $room_meta, $room_id );
 		$rule_type             = sanitize_key( $rule_type );
-		$request_data          = wp_unslash( $_POST );
+		$request_data          = map_deep( wp_unslash( $_POST ), 'sanitize_text_field' );
 		$updated_availability  = array();
 
 		for ( $timestamp = $check_in_timestamp; $timestamp <= $check_out_timestamp; $timestamp = strtotime( '+1 day', $timestamp ) ) {
@@ -813,8 +813,8 @@ class TF_Options {
 			'tf_room'
 		);
 		$new_post   = isset( $_POST['new_post'] ) ? sanitize_text_field( wp_unslash( $_POST['new_post'] ) ) : '';
-		$avail_date = isset( $_POST['avail_date'] ) ? wp_unslash( $_POST['avail_date'] ) : ''; //phpcs:ignore
-		$option_arr = $this->tf_sanitize_availability_array( $_POST['option_arr'] ?? array() ); //phpcs:ignore
+		$avail_date = isset( $_POST['avail_date'] ) ? sanitize_textarea_field( wp_unslash( $_POST['avail_date'] ) ) : '';
+		$option_arr = isset( $_POST['option_arr'] ) && is_array( $_POST['option_arr'] ) ? map_deep( wp_unslash( $_POST['option_arr'] ), 'sanitize_text_field' ) : array();
 		$room_meta  = get_post_meta( $room_id, 'tf_room_opt', true );
 		$room_meta  = is_array( $room_meta ) ? $room_meta : array();
 
@@ -955,9 +955,9 @@ class TF_Options {
 		$new_post         = isset( $_POST['new_post'] ) ? sanitize_text_field( wp_unslash( $_POST['new_post'] ) ) : '';
 		$check_in         = isset( $_POST['tf_apt_check_in'] ) ? sanitize_text_field( wp_unslash( $_POST['tf_apt_check_in'] ) ) : '';
 		$check_out        = isset( $_POST['tf_apt_check_out'] ) ? sanitize_text_field( wp_unslash( $_POST['tf_apt_check_out'] ) ) : '';
-		$status           = $this->tf_sanitize_availability_status( $_POST['tf_apt_status'] ?? '' ); //phpcs:ignore
-		$price            = $this->tf_sanitize_availability_number( $_POST['tf_apt_price'] ?? '' ); //phpcs:ignore
-		$posted_rules     = isset( $_POST['apt_availability'] ) ? wp_unslash( $_POST['apt_availability'] ) : ''; //phpcs:ignore
+		$status           = isset( $_POST['tf_apt_status'] ) ? $this->tf_sanitize_availability_status( sanitize_key( wp_unslash( $_POST['tf_apt_status'] ) ) ) : 'available';
+		$price            = isset( $_POST['tf_apt_price'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_apt_price'] ) ) ) : '';
+		$posted_rules     = isset( $_POST['apt_availability'] ) ? sanitize_textarea_field( wp_unslash( $_POST['apt_availability'] ) ) : '';
 		$apartment_meta   = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
 		$apartment_meta   = is_array( $apartment_meta ) ? $apartment_meta : array();
 
@@ -988,7 +988,7 @@ class TF_Options {
 		$rule_type             = sanitize_key(
 			(string) apply_filters( 'tourfic_apartment_availability_rule_type', 'per_night', $apartment_meta, $apartment_id )
 		);
-		$request_data          = wp_unslash( $_POST );
+		$request_data          = map_deep( wp_unslash( $_POST ), 'sanitize_text_field' );
 		$updated_availability  = array();
 
 		for ( $timestamp = $check_in_timestamp; $timestamp <= $check_out_timestamp; $timestamp = strtotime( '+1 day', $timestamp ) ) {
@@ -1046,7 +1046,7 @@ class TF_Options {
 			'tf_apartment'
 		);
 		$new_post     = isset( $_POST['new_post'] ) ? sanitize_text_field( wp_unslash( $_POST['new_post'] ) ) : '';
-		$posted_rules = isset( $_POST['apt_availability'] ) ? wp_unslash( $_POST['apt_availability'] ) : ''; //phpcs:ignore
+		$posted_rules = isset( $_POST['apt_availability'] ) ? sanitize_textarea_field( wp_unslash( $_POST['apt_availability'] ) ) : '';
 		$meta         = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
 		$meta         = is_array( $meta ) ? $meta : array();
 		$availability = 'true' === $new_post
@@ -1121,19 +1121,19 @@ class TF_Options {
 		$new_post          = isset( $_POST['new_post'] ) ? sanitize_text_field( wp_unslash( $_POST['new_post'] ) ) : '';
 		$check_in          = isset( $_POST['tf_tour_check_in'] ) ? sanitize_text_field( wp_unslash( $_POST['tf_tour_check_in'] ) ) : '';
 		$check_out         = isset( $_POST['tf_tour_check_out'] ) ? sanitize_text_field( wp_unslash( $_POST['tf_tour_check_out'] ) ) : '';
-		$status            = $this->tf_sanitize_availability_status( $_POST['tf_tour_status'] ?? '' ); //phpcs:ignore
-		$adult_price       = $this->tf_sanitize_availability_number( $_POST['tf_tour_adult_price'] ?? '' ); //phpcs:ignore
-		$child_price       = $this->tf_sanitize_availability_number( $_POST['tf_tour_child_price'] ?? '' ); //phpcs:ignore
-		$infant_price      = $this->tf_sanitize_availability_number( $_POST['tf_tour_infant_price'] ?? '' ); //phpcs:ignore
-		$min_person        = $this->tf_sanitize_availability_number( $_POST['tf_tour_min_person'] ?? '' ); //phpcs:ignore
-		$max_person        = $this->tf_sanitize_availability_number( $_POST['tf_tour_max_person'] ?? '' ); //phpcs:ignore
-		$max_capacity      = $this->tf_sanitize_availability_number( $_POST['tf_tour_max_capacity'] ?? '' ); //phpcs:ignore
-		$posted_rules      = isset( $_POST['tour_availability'] ) ? wp_unslash( $_POST['tour_availability'] ) : ''; //phpcs:ignore
-		$is_bulk_edit      = ! empty( $_POST['bulk_edit_option'] ); //phpcs:ignore
+		$status            = isset( $_POST['tf_tour_status'] ) ? $this->tf_sanitize_availability_status( sanitize_key( wp_unslash( $_POST['tf_tour_status'] ) ) ) : 'available';
+		$adult_price       = isset( $_POST['tf_tour_adult_price'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_tour_adult_price'] ) ) ) : '';
+		$child_price       = isset( $_POST['tf_tour_child_price'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_tour_child_price'] ) ) ) : '';
+		$infant_price      = isset( $_POST['tf_tour_infant_price'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_tour_infant_price'] ) ) ) : '';
+		$min_person        = isset( $_POST['tf_tour_min_person'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_tour_min_person'] ) ) ) : '';
+		$max_person        = isset( $_POST['tf_tour_max_person'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_tour_max_person'] ) ) ) : '';
+		$max_capacity      = isset( $_POST['tf_tour_max_capacity'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_tour_max_capacity'] ) ) ) : '';
+		$posted_rules      = isset( $_POST['tour_availability'] ) ? sanitize_textarea_field( wp_unslash( $_POST['tour_availability'] ) ) : '';
+		$is_bulk_edit      = (bool) filter_input( INPUT_POST, 'bulk_edit_option', FILTER_VALIDATE_BOOLEAN );
 		$meta              = get_post_meta( $tour_id, 'tf_tours_opt', true );
 		$meta              = is_array( $meta ) ? $meta : array();
 		$rule_type         = sanitize_key( (string) apply_filters( 'tourfic_tour_availability_rule_type', 'person', $meta, $tour_id ) );
-		$request_data      = wp_unslash( $_POST );
+		$request_data      = map_deep( wp_unslash( $_POST ), 'sanitize_text_field' );
 
 		if ( '' === $adult_price ) {
 			$adult_price = $this->tf_sanitize_availability_number( $meta['adult_price'] ?? '' );
@@ -1198,10 +1198,10 @@ class TF_Options {
 		};
 
 		if ( $is_bulk_edit ) {
-			$months      = array_values( array_unique( array_map( 'absint', $this->tf_sanitize_availability_array( $_POST['tf_tour_repeat_month'] ?? array() ) ) ) ); //phpcs:ignore
-			$years       = array_values( array_unique( array_map( 'absint', $this->tf_sanitize_availability_array( $_POST['tf_tour_repeat_year'] ?? array() ) ) ) ); //phpcs:ignore
-			$repeat_days = $this->tf_sanitize_availability_array( $_POST['tf_tour_repeat_day'] ?? array() ); //phpcs:ignore
-			$weekdays    = $this->tf_sanitize_availability_array( $_POST['tf_tour_repeat_week'] ?? array() ); //phpcs:ignore
+			$months      = isset( $_POST['tf_tour_repeat_month'] ) && is_array( $_POST['tf_tour_repeat_month'] ) ? array_values( array_unique( array_map( 'absint', wp_unslash( $_POST['tf_tour_repeat_month'] ) ) ) ) : array();
+			$years       = isset( $_POST['tf_tour_repeat_year'] ) && is_array( $_POST['tf_tour_repeat_year'] ) ? array_values( array_unique( array_map( 'absint', wp_unslash( $_POST['tf_tour_repeat_year'] ) ) ) ) : array();
+			$repeat_days = isset( $_POST['tf_tour_repeat_day'] ) && is_array( $_POST['tf_tour_repeat_day'] ) ? array_map( 'absint', wp_unslash( $_POST['tf_tour_repeat_day'] ) ) : array();
+			$weekdays    = isset( $_POST['tf_tour_repeat_week'] ) && is_array( $_POST['tf_tour_repeat_week'] ) ? array_map( 'absint', wp_unslash( $_POST['tf_tour_repeat_week'] ) ) : array();
 			$months      = array_values( array_filter( $months, static function( $month ) {
 				return $month >= 1 && $month <= 12;
 			} ) );
@@ -1285,9 +1285,9 @@ class TF_Options {
 			'tf_tours'
 		);
 		$new_post        = isset( $_POST['new_post'] ) ? sanitize_text_field( wp_unslash( $_POST['new_post'] ) ) : '';
-		$posted_rules    = isset( $_POST['tour_availability'] ) ? wp_unslash( $_POST['tour_availability'] ) : ''; //phpcs:ignore
-		$option_arr      = $this->tf_sanitize_availability_array( $_POST['option_arr'] ?? array() ); //phpcs:ignore
-		$group_option_arr = $this->tf_sanitize_availability_array( $_POST['group_option_arr'] ?? array() ); //phpcs:ignore
+		$posted_rules    = isset( $_POST['tour_availability'] ) ? sanitize_textarea_field( wp_unslash( $_POST['tour_availability'] ) ) : '';
+		$option_arr      = isset( $_POST['option_arr'] ) && is_array( $_POST['option_arr'] ) ? map_deep( wp_unslash( $_POST['option_arr'] ), 'sanitize_text_field' ) : array();
+		$group_option_arr = isset( $_POST['group_option_arr'] ) && is_array( $_POST['group_option_arr'] ) ? map_deep( wp_unslash( $_POST['group_option_arr'] ), 'sanitize_text_field' ) : array();
 		$meta            = get_post_meta( $tour_id, 'tf_tours_opt', true );
 		$meta            = is_array( $meta ) ? $meta : array();
 		$availability    = 'true' === $new_post

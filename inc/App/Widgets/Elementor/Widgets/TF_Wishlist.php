@@ -72,7 +72,7 @@ class TF_Wishlist extends \Elementor\Widget_Base {
 	 */
 	protected function render() {
 
-        echo do_shortcode('[tf-wishlist]');
+        echo do_shortcode('[tourfic_wishlist]');
 
 
 	}

@@ -134,7 +134,7 @@ class Listings {
         <!-- Loader Image -->
         <div id="tf_ajax_searchresult_loader">
             <div id="tf-searchresult-loader-img">
-                <img src="<?php echo esc_url( TF_ASSETS_APP_URL ); ?>images/loader.gif" alt="">
+                <img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ); ?>images/loader.gif" alt="">
             </div>
         </div>
 
@@ -244,7 +244,7 @@ class Listings {
             <!-- Loader Image -->
             <div id="tour_room_details_loader">
                 <div id="tour-room-details-loader-img">
-                    <img src="<?php echo esc_url( TF_ASSETS_APP_URL ); ?>images/loader.gif" alt="">
+                    <img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ); ?>images/loader.gif" alt="">
                 </div>
             </div>
 
@@ -335,7 +335,7 @@ class Listings {
         $pagination_prev_label  = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
         $pagination_next_label  = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
 
-        $hotels_name = apply_filters( 'tf_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
+        $hotels_name = apply_filters( 'tourfic_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
 
         if ( $query->have_posts() ) : ?>
             <div class="tf-archive-details-wrap">
@@ -346,7 +346,7 @@ class Listings {
                             <div class="tf-container">
                                 <div class="tf-notice tf-mt-24 tf-mb-30">
                                     <?php
-                                    if ( current_user_can( 'administrator' ) ) {
+                                    if ( current_user_can( 'manage_options' ) ) {
                                         echo '<p>' . esc_html__( 'Google Maps is selected but the API key is missing. Please configure the API key', 'tourfic' ) . '<a href="' . esc_url( admin_url( 'admin.php?page=tf_settings#tab=map_settings' ) ) . '" target="_blank">' . esc_html__( 'Map Settings', 'tourfic' ) . '</a></p>';
                                     } else {
                                         echo '<p>' . esc_html__( 'Access is restricted as Google Maps API key is not configured. Please contact the site administrator.', 'tourfic' ) . '</p>';
@@ -360,7 +360,7 @@ class Listings {
                                 <!-- Loader Image -->
                                 <div id="tf_ajax_searchresult_loader">
                                     <div id="tf-searchresult-loader-img">
-                                        <img src="<?php echo esc_url( TF_ASSETS_APP_URL ); ?>images/loader.gif" alt="">
+                                        <img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ); ?>images/loader.gif" alt="">
                                     </div>
                                 </div>
 
@@ -486,7 +486,7 @@ class Listings {
                                                             if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
                                                                 the_post_thumbnail( 'full' );
                                                             } else {
-                                                                echo '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+                                                                echo '<img src="' . esc_url( TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
                                                             }
                                                             ?>
                                                         </a>
@@ -567,7 +567,7 @@ class Listings {
                                                             if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
                                                                 the_post_thumbnail( 'full' );
                                                             } else {
-                                                                echo '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
+                                                                echo '<img src="' . esc_url( TOURFIC_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" class="attachment-full size-full wp-post-image">';
                                                             }
                                                             ?>
                                                         </a>
@@ -636,7 +636,7 @@ class Listings {
                                     <span><?php echo esc_html__( 'List view', 'tourfic' ); ?></span>
                                 </a>
 
-                                <div id="map-marker" data-marker="<?php echo esc_url( TF_ASSETS_URL . 'app/images/cluster-marker.png' ); ?>"></div>
+                                <div id="map-marker" data-marker="<?php echo esc_url( TOURFIC_ASSETS_URL . 'app/images/cluster-marker.png' ); ?>"></div>
                                 <div class="tf-hotel-archive-map-wrap">
                                     <div id="tf-hotel-archive-map"></div>
                                 </div>
@@ -646,7 +646,7 @@ class Listings {
                         <div class="tf-container">
                             <div class="tf-notice tf-mt-24 tf-mb-30">
                                 <?php
-                                if ( current_user_can( 'administrator' ) ) {
+                                if ( current_user_can( 'manage_options' ) ) {
                                     echo '<p>' . esc_html__( 'Google Maps is not selected. Please configure it ', 'tourfic' ) . '<a href="' . esc_url( admin_url( 'admin.php?page=tf_settings#tab=map_settings' ) ) . '" target="_blank">' . esc_html__( 'Map Settings', 'tourfic' ) . '</a></p>';
                                 } else {
                                     echo '<p>' . esc_html__( 'Access is restricted as Google Maps is not enabled. Please contact the site administrator', 'tourfic' ) . '</p>';
@@ -789,4 +789,3 @@ class Listings {
         <?php
     }
 }
-
