@@ -931,11 +931,11 @@ if ( ! class_exists( 'Tourfic_Settings' ) ) {
 			$existing_option = get_option( $this->option_id, array() );
 			$tf_option_value = is_array( $existing_option ) ? $existing_option : array();
 			$option_request = ( ! empty( $_POST[ $this->option_id ] ) && is_array( $_POST[ $this->option_id ] ) )
-				? Helper::tf_sanitize_recursive_input( wp_unslash( $_POST[ $this->option_id ] ), 'wp_kses_post' )
+				? Helper::tf_sanitize_recursive_input( wp_unslash( $_POST[ $this->option_id ] ), 'wp_kses_post' ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- The recursive sanitizer cleans both keys and scalar values.
 				: array();
 
 			$import_json = isset( $_POST['tf_import_option'] ) && is_string( $_POST['tf_import_option'] )
-				? wp_unslash( $_POST['tf_import_option'] )
+				? wp_unslash( $_POST['tf_import_option'] ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- JSON is decoded and recursively sanitized before storage.
 				: '';
 			if ( '' !== trim( $import_json ) ) {
 
@@ -1099,7 +1099,7 @@ if ( ! class_exists( 'Tourfic_Settings' ) ) {
 	        }
 
 			$import_json = isset( $_POST['tf_import_option'] ) && is_string( $_POST['tf_import_option'] )
-				? wp_unslash( $_POST['tf_import_option'] )
+				? wp_unslash( $_POST['tf_import_option'] ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- JSON is validated here and recursively sanitized by save_options().
 				: '';
 			if ( '' !== trim( $import_json ) ) {
 

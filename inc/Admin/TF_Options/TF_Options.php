@@ -560,16 +560,17 @@ class TF_Options {
 		$fields = is_array( $schema['fields'] ?? null ) ? $schema['fields'] : array();
 		$patterns = is_array( $schema['patterns'] ?? null ) ? $schema['patterns'] : array();
 		$request = array();
+		$post_data = wp_unslash( $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Every caller verifies its nonce and capability; only schema-declared values are retained and type-sanitized below.
 
 		foreach ( $fields as $key => $type ) {
-			if ( ! is_string( $key ) || ! array_key_exists( $key, $_POST ) ) {
+			if ( ! is_string( $key ) || ! array_key_exists( $key, $post_data ) ) {
 				continue;
 			}
 
-			$request[ $key ] = $this->tf_sanitize_availability_request_value( $_POST[ $key ], $type );
+			$request[ $key ] = $this->tf_sanitize_availability_request_value( $post_data[ $key ], $type );
 		}
 
-		foreach ( $_POST as $raw_key => $value ) {
+		foreach ( $post_data as $raw_key => $value ) {
 			if ( ! is_string( $raw_key ) ) {
 				continue;
 			}
@@ -598,8 +599,6 @@ class TF_Options {
 	 * @return mixed
 	 */
 	private function tf_sanitize_availability_request_value( $value, $type ) {
-		$value = wp_unslash( $value );
-
 		switch ( $type ) {
 			case 'absint':
 				return absint( $value );
@@ -1000,7 +999,7 @@ class TF_Options {
 		$check_out   = isset( $_POST['tf_room_check_out'] ) ? sanitize_text_field( wp_unslash( $_POST['tf_room_check_out'] ) ) : '';
 		$status      = isset( $_POST['tf_room_status'] ) ? $this->tf_sanitize_availability_status( sanitize_key( wp_unslash( $_POST['tf_room_status'] ) ) ) : 'available';
 		$price       = isset( $_POST['tf_room_price'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_room_price'] ) ) ) : '';
-		$avail_date  = isset( $_POST['avail_date'] ) && is_string( $_POST['avail_date'] ) ? wp_unslash( $_POST['avail_date'] ) : '';
+		$avail_date  = isset( $_POST['avail_date'] ) && is_string( $_POST['avail_date'] ) ? wp_unslash( $_POST['avail_date'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- The JSON is decoded and sanitized by tf_safe_json_decode_assoc().
 		$room_meta   = get_post_meta( $room_id, 'tf_room_opt', true );
 		$room_meta   = is_array( $room_meta ) ? $room_meta : array();
 
@@ -1091,7 +1090,7 @@ class TF_Options {
 			'tf_room'
 		);
 		$new_post   = isset( $_POST['new_post'] ) ? sanitize_text_field( wp_unslash( $_POST['new_post'] ) ) : '';
-		$avail_date = isset( $_POST['avail_date'] ) && is_string( $_POST['avail_date'] ) ? wp_unslash( $_POST['avail_date'] ) : '';
+		$avail_date = isset( $_POST['avail_date'] ) && is_string( $_POST['avail_date'] ) ? wp_unslash( $_POST['avail_date'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- The JSON is decoded and sanitized by tf_safe_json_decode_assoc().
 		$option_arr = isset( $_POST['option_arr'] ) && is_array( $_POST['option_arr'] ) ? map_deep( wp_unslash( $_POST['option_arr'] ), 'sanitize_text_field' ) : array();
 		$room_meta  = get_post_meta( $room_id, 'tf_room_opt', true );
 		$room_meta  = is_array( $room_meta ) ? $room_meta : array();
@@ -1237,7 +1236,7 @@ class TF_Options {
 		$check_out        = isset( $_POST['tf_apt_check_out'] ) ? sanitize_text_field( wp_unslash( $_POST['tf_apt_check_out'] ) ) : '';
 		$status           = isset( $_POST['tf_apt_status'] ) ? $this->tf_sanitize_availability_status( sanitize_key( wp_unslash( $_POST['tf_apt_status'] ) ) ) : 'available';
 		$price            = isset( $_POST['tf_apt_price'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_apt_price'] ) ) ) : '';
-		$posted_rules     = isset( $_POST['apt_availability'] ) && is_string( $_POST['apt_availability'] ) ? wp_unslash( $_POST['apt_availability'] ) : '';
+		$posted_rules     = isset( $_POST['apt_availability'] ) && is_string( $_POST['apt_availability'] ) ? wp_unslash( $_POST['apt_availability'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- The JSON is decoded and sanitized by tf_safe_json_decode_assoc().
 		$apartment_meta   = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
 		$apartment_meta   = is_array( $apartment_meta ) ? $apartment_meta : array();
 
@@ -1326,7 +1325,7 @@ class TF_Options {
 			'tf_apartment'
 		);
 		$new_post     = isset( $_POST['new_post'] ) ? sanitize_text_field( wp_unslash( $_POST['new_post'] ) ) : '';
-		$posted_rules = isset( $_POST['apt_availability'] ) && is_string( $_POST['apt_availability'] ) ? wp_unslash( $_POST['apt_availability'] ) : '';
+		$posted_rules = isset( $_POST['apt_availability'] ) && is_string( $_POST['apt_availability'] ) ? wp_unslash( $_POST['apt_availability'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- The JSON is decoded and sanitized by tf_safe_json_decode_assoc().
 		$meta         = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
 		$meta         = is_array( $meta ) ? $meta : array();
 		$availability = 'true' === $new_post
@@ -1408,7 +1407,7 @@ class TF_Options {
 		$min_person        = isset( $_POST['tf_tour_min_person'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_tour_min_person'] ) ) ) : '';
 		$max_person        = isset( $_POST['tf_tour_max_person'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_tour_max_person'] ) ) ) : '';
 		$max_capacity      = isset( $_POST['tf_tour_max_capacity'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_tour_max_capacity'] ) ) ) : '';
-		$posted_rules      = isset( $_POST['tour_availability'] ) && is_string( $_POST['tour_availability'] ) ? wp_unslash( $_POST['tour_availability'] ) : '';
+		$posted_rules      = isset( $_POST['tour_availability'] ) && is_string( $_POST['tour_availability'] ) ? wp_unslash( $_POST['tour_availability'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- The JSON is decoded and sanitized by tf_safe_json_decode_assoc().
 		$is_bulk_edit      = (bool) filter_input( INPUT_POST, 'bulk_edit_option', FILTER_VALIDATE_BOOLEAN );
 		$meta              = get_post_meta( $tour_id, 'tf_tours_opt', true );
 		$meta              = is_array( $meta ) ? $meta : array();
@@ -1565,7 +1564,7 @@ class TF_Options {
 			'tf_tours'
 		);
 		$new_post        = isset( $_POST['new_post'] ) ? sanitize_text_field( wp_unslash( $_POST['new_post'] ) ) : '';
-		$posted_rules    = isset( $_POST['tour_availability'] ) && is_string( $_POST['tour_availability'] ) ? wp_unslash( $_POST['tour_availability'] ) : '';
+		$posted_rules    = isset( $_POST['tour_availability'] ) && is_string( $_POST['tour_availability'] ) ? wp_unslash( $_POST['tour_availability'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- The JSON is decoded and sanitized by tf_safe_json_decode_assoc().
 		$option_arr      = isset( $_POST['option_arr'] ) && is_array( $_POST['option_arr'] ) ? map_deep( wp_unslash( $_POST['option_arr'] ), 'sanitize_text_field' ) : array();
 		$group_option_arr = isset( $_POST['group_option_arr'] ) && is_array( $_POST['group_option_arr'] ) ? map_deep( wp_unslash( $_POST['group_option_arr'] ), 'sanitize_text_field' ) : array();
 		$meta            = get_post_meta( $tour_id, 'tf_tours_opt', true );

@@ -893,7 +893,7 @@ trait Action_Helper {
 		// Cars Data End
 		
 		$builder_settings_json = isset( $_POST['builderSettings'] ) && is_string( $_POST['builderSettings'] )
-			? wp_unslash( $_POST['builderSettings'] )
+			? wp_unslash( $_POST['builderSettings'] ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- The JSON is decoded and recursively sanitized before use.
 			: '';
 		$builderSettings      = '' !== $builder_settings_json ? json_decode( $builder_settings_json, true ) : array();
 		$builderSettings      = JSON_ERROR_NONE === json_last_error() && is_array( $builderSettings )
