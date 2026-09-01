@@ -64,6 +64,7 @@ foreach ( $metabox_expectations as $file => $markers ) {
 
 foreach (
 	array(
+		'tourfic_availability_request_schema',
 		'tourfic_room_availability_rule_data',
 		'tourfic_room_availability_calendar_event',
 		'tourfic_apartment_availability_rule_data',
@@ -172,6 +173,8 @@ $pro_frontend_js = file_get_contents( $pro_root . '/sass/app/js/pro/tourfic-pro.
 
 foreach (
 	array(
+		'tourfic_availability_request_schema',
+		'availability_request_schema',
 		'tourfic_room_availability_rule_data',
 		'tourfic_apartment_availability_rule_data',
 		'tourfic_tour_availability_rule_data',
@@ -183,6 +186,13 @@ foreach (
 ) {
 	tf_availability_ownership_assert( false !== strpos( $pro_server, $marker ), 'Pro availability extension is missing ' . $marker . '.' );
 }
+
+tf_availability_ownership_assert(
+	false !== strpos( $pro_server, 'public function room_rule_type( $default, $meta, $post_id, $request = array() )' )
+		&& false !== strpos( $pro_server, 'public function apartment_rule_type( $default, $meta, $post_id, $request = array() )' )
+		&& false !== strpos( $pro_server, 'public function tour_rule_type( $default, $meta, $post_id, $request = array() )' ),
+	'Pro rule types must consume the schema-sanitized request supplied by Free.'
+);
 
 tf_availability_ownership_assert(
 	false !== strpos( $pro_server, "current_user_can( 'edit_post', \$post_id )" ),

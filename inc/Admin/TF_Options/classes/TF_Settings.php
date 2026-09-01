@@ -931,17 +931,19 @@ if ( ! class_exists( 'Tourfic_Settings' ) ) {
 			$existing_option = get_option( $this->option_id, array() );
 			$tf_option_value = is_array( $existing_option ) ? $existing_option : array();
 			$option_request = ( ! empty( $_POST[ $this->option_id ] ) && is_array( $_POST[ $this->option_id ] ) )
-				? map_deep( wp_unslash( $_POST[ $this->option_id ] ), 'wp_kses_post' )
+				? Helper::tf_sanitize_recursive_input( wp_unslash( $_POST[ $this->option_id ] ), 'wp_kses_post' )
 				: array();
 
-			$import_json = isset( $_POST['tf_import_option'] ) ? wp_kses_post( wp_unslash( $_POST['tf_import_option'] ) ) : '';
+			$import_json = isset( $_POST['tf_import_option'] ) && is_string( $_POST['tf_import_option'] )
+				? wp_unslash( $_POST['tf_import_option'] )
+				: '';
 			if ( '' !== trim( $import_json ) ) {
 
 				$tf_import_option = json_decode( trim( $import_json ), true );
-				if ( ! is_array( $tf_import_option ) ) {
+				if ( JSON_ERROR_NONE !== json_last_error() || ! is_array( $tf_import_option ) ) {
 					return;
 				}
-				$tf_import_option = map_deep( $tf_import_option, 'wp_kses_post' );
+				$tf_import_option = Helper::tf_sanitize_recursive_input( $tf_import_option, 'wp_kses_post' );
 
 				do_action( 'tourfic_setting_import_before_save', $tf_import_option );
 
@@ -1096,11 +1098,13 @@ if ( ! class_exists( 'Tourfic_Settings' ) ) {
                 die();
 	        }
 
-			$import_json = isset( $_POST['tf_import_option'] ) ? wp_kses_post( wp_unslash( $_POST['tf_import_option'] ) ) : '';
+			$import_json = isset( $_POST['tf_import_option'] ) && is_string( $_POST['tf_import_option'] )
+				? wp_unslash( $_POST['tf_import_option'] )
+				: '';
 			if ( '' !== trim( $import_json ) ) {
 
 				$tf_import_option = json_decode( trim( $import_json ), true );
-				if(empty($tf_import_option) || !is_array($tf_import_option)){
+				if ( JSON_ERROR_NONE !== json_last_error() || empty( $tf_import_option ) || ! is_array( $tf_import_option ) ) {
 					$response    = [
 						'status'  => 'error',
 						'message' => esc_html__( 'Your imported data is not valid', 'tourfic' ),

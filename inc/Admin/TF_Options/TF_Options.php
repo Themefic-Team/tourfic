@@ -319,29 +319,307 @@ class TF_Options {
 	}
 
 	/**
-	 * Safely decode JSON that may already be an array.
+	 * Decode and sanitize availability JSON that may already be an array.
 	 *
 	 * Availability fields can be stored as JSON strings or as arrays
 	 * (e.g. when updated/reset by older code paths).
 	 *
-	 * @param mixed $value Raw value.
+	 * @param mixed $value             Raw value.
+	 * @param bool  $preserve_unknown Preserve sanitized extension fields loaded from storage.
 	 * @return array
 	 */
-	private function tf_safe_json_decode_assoc( $value ) {
+	private function tf_safe_json_decode_assoc( $value, $preserve_unknown = false ) {
 		if ( empty( $value ) ) {
-			return [];
-		}
-
-		if ( is_array( $value ) ) {
-			return $value;
+			return array();
 		}
 
 		if ( is_string( $value ) ) {
 			$decoded = json_decode( $value, true );
-			return is_array( $decoded ) ? $decoded : [];
+			$value   = JSON_ERROR_NONE === json_last_error() && is_array( $decoded ) ? $decoded : array();
+		} elseif ( ! is_array( $value ) ) {
+			return array();
 		}
 
-		return [];
+		$sanitized = array();
+		foreach ( $value as $rule_key => $rule ) {
+			if ( ! is_array( $rule ) ) {
+				continue;
+			}
+
+			$rule_key = $this->tf_sanitize_availability_rule_key( $rule_key, $rule, $preserve_unknown );
+			if ( null === $rule_key ) {
+				continue;
+			}
+
+			$sanitized[ $rule_key ] = $this->tf_sanitize_availability_rule( $rule, $preserve_unknown );
+		}
+
+		return $sanitized;
+	}
+
+	/**
+	 * Validate an availability date or date-range array key.
+	 *
+	 * @param mixed $rule_key         Raw rule key.
+	 * @param array $rule             Availability rule associated with the key.
+	 * @param bool  $preserve_unknown Whether the rule came from existing storage.
+	 * @return string|int|null
+	 */
+	private function tf_sanitize_availability_rule_key( $rule_key, $rule, $preserve_unknown = false ) {
+		if ( is_int( $rule_key ) ) {
+			if ( $preserve_unknown ) {
+				return $rule_key;
+			}
+
+			return $this->tf_availability_rule_date_key( $rule );
+		}
+
+		if ( ! is_string( $rule_key ) ) {
+			return null;
+		}
+
+		$rule_key = sanitize_text_field( $rule_key );
+		if ( preg_match( '/^(\d{4}\/\d{2}\/\d{2})_block$/', $rule_key, $matches ) ) {
+			$date = $this->tf_sanitize_availability_date( $matches[1] );
+
+			return '' !== $date ? $date . '_block' : null;
+		}
+
+		$dates    = explode( ' - ', $rule_key );
+		if ( count( $dates ) > 2 ) {
+			return null;
+		}
+
+		foreach ( $dates as $date ) {
+			if ( '' === $this->tf_sanitize_availability_date( $date ) ) {
+				return null;
+			}
+		}
+
+		return implode( ' - ', $dates );
+	}
+
+	/**
+	 * Build a normalized date key for legacy numerically indexed request rules.
+	 *
+	 * @param array $rule Availability rule.
+	 * @return string|null
+	 */
+	private function tf_availability_rule_date_key( $rule ) {
+		$check_in  = $this->tf_sanitize_availability_date( $rule['check_in'] ?? '' );
+		$check_out = $this->tf_sanitize_availability_date( $rule['check_out'] ?? '' );
+
+		if ( '' === $check_in ) {
+			return null;
+		}
+
+		return '' !== $check_out && $check_in !== $check_out
+			? $check_in . ' - ' . $check_out
+			: $check_in;
+	}
+
+	/**
+	 * Validate one normalized availability date.
+	 *
+	 * @param mixed $date Raw date.
+	 * @return string
+	 */
+	private function tf_sanitize_availability_date( $date ) {
+		$date = is_scalar( $date ) ? sanitize_text_field( (string) $date ) : '';
+		if ( ! preg_match( '/^\d{4}\/\d{2}\/\d{2}$/', $date ) ) {
+			return '';
+		}
+
+		$date_object = \DateTimeImmutable::createFromFormat( '!Y/m/d', $date );
+
+		return $date_object && $date_object->format( 'Y/m/d' ) === $date ? $date : '';
+	}
+
+	/**
+	 * Sanitize one availability rule using its stored field types.
+	 *
+	 * @param array $rule             Raw rule.
+	 * @param bool  $preserve_unknown Preserve sanitized extension fields loaded from storage.
+	 * @return array
+	 */
+	private function tf_sanitize_availability_rule( $rule, $preserve_unknown = false ) {
+		$sanitized = array();
+
+		foreach ( $rule as $key => $value ) {
+			if ( ! is_string( $key ) ) {
+				continue;
+			}
+
+			$key = sanitize_key( $key );
+			if ( '' === $key ) {
+				continue;
+			}
+
+			if ( in_array( $key, array( 'check_in', 'check_out' ), true ) ) {
+				$date = $this->tf_sanitize_availability_date( $value );
+				if ( '' !== $date ) {
+					$sanitized[ $key ] = $date;
+				}
+				continue;
+			}
+
+			if ( 'status' === $key || preg_match( '/^tf_option_status_\d+$/', $key ) ) {
+				$sanitized[ $key ] = $this->tf_sanitize_availability_status( $value );
+				continue;
+			}
+
+			if ( 'price_by' === $key ) {
+				$value = is_scalar( $value ) ? sanitize_key( (string) $value ) : '';
+				if ( in_array( $value, array( '1', '2', '3' ), true ) ) {
+					$sanitized[ $key ] = $value;
+				}
+				continue;
+			}
+
+			if ( 'pricing_type' === $key ) {
+				$value = is_scalar( $value ) ? sanitize_key( (string) $value ) : '';
+				if ( in_array( $value, array( 'per_night', 'per_person', 'person', 'group', 'package' ), true ) ) {
+					$sanitized[ $key ] = $value;
+				}
+				continue;
+			}
+
+			$is_number = in_array(
+				$key,
+				array( 'price', 'adult_price', 'child_price', 'infant_price', 'min_person', 'max_person', 'max_capacity' ),
+				true
+			) || preg_match( '/^tf_option_(?:room|adult|child|infant|group)_price_\d+$/', $key );
+			if ( $is_number ) {
+				$sanitized[ $key ] = $this->tf_sanitize_availability_number( $value );
+				continue;
+			}
+
+			if ( 'options_count' === $key ) {
+				$sanitized[ $key ] = absint( $value );
+				continue;
+			}
+
+			if ( 'selected_packages' === $key ) {
+				$sanitized[ $key ] = is_array( $value )
+					? array_values( array_unique( array_map( 'strval', array_map( 'absint', $value ) ) ) )
+					: array();
+				continue;
+			}
+
+			if ( 'allowed_time' === $key || preg_match( '/^tf_option_(?:times|group_discount)_\d+$/', $key ) ) {
+				$sanitized[ $key ] = is_array( $value ) ? Helper::tf_sanitize_recursive_input( $value ) : array();
+				continue;
+			}
+
+			if ( preg_match( '/^tf_room_option_\d+$/', $key ) ) {
+				$sanitized[ $key ] = empty( $value ) ? '' : '1';
+				continue;
+			}
+
+			if ( preg_match( '/^tf_option_title_\d+$/', $key ) ) {
+				$sanitized[ $key ] = is_scalar( $value ) ? sanitize_text_field( (string) $value ) : '';
+				continue;
+			}
+
+			if ( preg_match( '/^tf_option_pricing_type_\d+$/', $key ) ) {
+				$value = is_scalar( $value ) ? sanitize_key( (string) $value ) : '';
+				if ( in_array( $value, array( 'per_room', 'per_person', 'person', 'group' ), true ) ) {
+					$sanitized[ $key ] = $value;
+				}
+				continue;
+			}
+
+			if ( $preserve_unknown ) {
+				$sanitized[ $key ] = Helper::tf_sanitize_recursive_input( $value );
+			}
+		}
+
+		return $sanitized;
+	}
+
+	/**
+	 * Build a sanitized availability extension payload from declared fields.
+	 *
+	 * @param string $context Availability context.
+	 * @param array  $meta    Listing meta.
+	 * @param int    $post_id Listing post ID.
+	 * @return array
+	 */
+	private function tf_sanitize_availability_request_data( $context, $meta, $post_id ) {
+		$schema = apply_filters(
+			'tourfic_availability_request_schema',
+			array(
+				'fields'   => array(),
+				'patterns' => array(),
+			),
+			$context,
+			$meta,
+			$post_id
+		);
+		$schema = is_array( $schema ) ? $schema : array();
+		$fields = is_array( $schema['fields'] ?? null ) ? $schema['fields'] : array();
+		$patterns = is_array( $schema['patterns'] ?? null ) ? $schema['patterns'] : array();
+		$request = array();
+
+		foreach ( $fields as $key => $type ) {
+			if ( ! is_string( $key ) || ! array_key_exists( $key, $_POST ) ) {
+				continue;
+			}
+
+			$request[ $key ] = $this->tf_sanitize_availability_request_value( $_POST[ $key ], $type );
+		}
+
+		foreach ( $_POST as $raw_key => $value ) {
+			if ( ! is_string( $raw_key ) ) {
+				continue;
+			}
+
+			$key = sanitize_key( $raw_key );
+			if ( '' === $key || array_key_exists( $key, $request ) ) {
+				continue;
+			}
+
+			foreach ( $patterns as $pattern => $type ) {
+				if ( is_string( $pattern ) && 1 === preg_match( $pattern, $key ) ) {
+					$request[ $key ] = $this->tf_sanitize_availability_request_value( $value, $type );
+					break;
+				}
+			}
+		}
+
+		return $request;
+	}
+
+	/**
+	 * Sanitize one field declared by an availability request schema.
+	 *
+	 * @param mixed  $value Raw request value.
+	 * @param string $type  Sanitizer type.
+	 * @return mixed
+	 */
+	private function tf_sanitize_availability_request_value( $value, $type ) {
+		$value = wp_unslash( $value );
+
+		switch ( $type ) {
+			case 'absint':
+				return absint( $value );
+			case 'absint_array':
+				return is_array( $value ) ? array_values( array_unique( array_map( 'absint', $value ) ) ) : array();
+			case 'boolean':
+				return empty( $value ) ? '' : '1';
+			case 'key':
+				return is_scalar( $value ) ? sanitize_key( (string) $value ) : '';
+			case 'number':
+				return $this->tf_sanitize_availability_number( $value );
+			case 'status':
+				return $this->tf_sanitize_availability_status( $value );
+			case 'text_array':
+				return is_array( $value ) ? Helper::tf_sanitize_recursive_input( $value ) : array();
+			case 'text':
+				return is_scalar( $value ) ? sanitize_text_field( (string) $value ) : '';
+			default:
+				return '';
+		}
 	}
 
 	/**
@@ -398,7 +676,7 @@ class TF_Options {
 			return array();
 		}
 
-		return map_deep( wp_unslash( $value ), 'sanitize_text_field' );
+		return Helper::tf_sanitize_recursive_input( wp_unslash( $value ) );
 	}
 
 	/**
@@ -722,7 +1000,7 @@ class TF_Options {
 		$check_out   = isset( $_POST['tf_room_check_out'] ) ? sanitize_text_field( wp_unslash( $_POST['tf_room_check_out'] ) ) : '';
 		$status      = isset( $_POST['tf_room_status'] ) ? $this->tf_sanitize_availability_status( sanitize_key( wp_unslash( $_POST['tf_room_status'] ) ) ) : 'available';
 		$price       = isset( $_POST['tf_room_price'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_room_price'] ) ) ) : '';
-		$avail_date  = isset( $_POST['avail_date'] ) ? sanitize_textarea_field( wp_unslash( $_POST['avail_date'] ) ) : '';
+		$avail_date  = isset( $_POST['avail_date'] ) && is_string( $_POST['avail_date'] ) ? wp_unslash( $_POST['avail_date'] ) : '';
 		$room_meta   = get_post_meta( $room_id, 'tf_room_opt', true );
 		$room_meta   = is_array( $room_meta ) ? $room_meta : array();
 
@@ -749,10 +1027,10 @@ class TF_Options {
 
 		$existing_availability = 'true' === $new_post
 			? $this->tf_safe_json_decode_assoc( $avail_date )
-			: $this->tf_safe_json_decode_assoc( $room_meta['avail_date'] ?? array() );
-		$rule_type             = (string) apply_filters( 'tourfic_room_availability_rule_type', '1', $room_meta, $room_id );
+			: $this->tf_safe_json_decode_assoc( $room_meta['avail_date'] ?? array(), true );
+		$request_data          = $this->tf_sanitize_availability_request_data( 'room', $room_meta, $room_id );
+		$rule_type             = (string) apply_filters( 'tourfic_room_availability_rule_type', '1', $room_meta, $room_id, $request_data );
 		$rule_type             = sanitize_key( $rule_type );
-		$request_data          = map_deep( wp_unslash( $_POST ), 'sanitize_text_field' );
 		$updated_availability  = array();
 
 		for ( $timestamp = $check_in_timestamp; $timestamp <= $check_out_timestamp; $timestamp = strtotime( '+1 day', $timestamp ) ) {
@@ -776,7 +1054,7 @@ class TF_Options {
 				$existing_rule,
 				$room_id
 			);
-			$rule          = is_array( $rule ) ? $rule : $core_rule;
+			$rule          = is_array( $rule ) ? $this->tf_sanitize_availability_rule( $rule, true ) : $core_rule;
 			$rule['check_in']  = $date;
 			$rule['check_out'] = $date;
 			$rule['price_by']  = $rule_type;
@@ -813,14 +1091,14 @@ class TF_Options {
 			'tf_room'
 		);
 		$new_post   = isset( $_POST['new_post'] ) ? sanitize_text_field( wp_unslash( $_POST['new_post'] ) ) : '';
-		$avail_date = isset( $_POST['avail_date'] ) ? sanitize_textarea_field( wp_unslash( $_POST['avail_date'] ) ) : '';
+		$avail_date = isset( $_POST['avail_date'] ) && is_string( $_POST['avail_date'] ) ? wp_unslash( $_POST['avail_date'] ) : '';
 		$option_arr = isset( $_POST['option_arr'] ) && is_array( $_POST['option_arr'] ) ? map_deep( wp_unslash( $_POST['option_arr'] ), 'sanitize_text_field' ) : array();
 		$room_meta  = get_post_meta( $room_id, 'tf_room_opt', true );
 		$room_meta  = is_array( $room_meta ) ? $room_meta : array();
 
 		$availability = 'true' === $new_post
 			? $this->tf_safe_json_decode_assoc( $avail_date )
-			: $this->tf_safe_json_decode_assoc( $room_meta['avail_date'] ?? array() );
+			: $this->tf_safe_json_decode_assoc( $room_meta['avail_date'] ?? array(), true );
 		$events       = array();
 
 		foreach ( $availability as $rule ) {
@@ -878,7 +1156,7 @@ class TF_Options {
 
 		$rule_type    = sanitize_key( (string) apply_filters( 'tourfic_room_availability_rule_type', '1', $room, $post_id ) );
 		$base_price   = $this->tf_sanitize_availability_number( $room['price'] ?? '' );
-		$availability = $this->tf_safe_json_decode_assoc( $room['avail_date'] ?? array() );
+		$availability = $this->tf_safe_json_decode_assoc( $room['avail_date'] ?? array(), true );
 
 		if ( empty( $availability ) ) {
 			for ( $offset = 0; $offset <= 500; $offset++ ) {
@@ -892,7 +1170,7 @@ class TF_Options {
 				);
 				$rule = apply_filters( 'tourfic_room_availability_default_rule_data', $rule, $room, array(), $post_id );
 
-				$availability[ $date ] = is_array( $rule ) ? $rule : array();
+				$availability[ $date ] = is_array( $rule ) ? $this->tf_sanitize_availability_rule( $rule, true ) : array();
 			}
 		} else {
 			foreach ( $availability as $date => $rule ) {
@@ -906,7 +1184,9 @@ class TF_Options {
 				$rule['price_by'] = $rule_type;
 				$rule = apply_filters( 'tourfic_room_availability_default_rule_data', $rule, $room, $availability[ $date ], $post_id );
 
-				$availability[ $date ] = is_array( $rule ) ? $rule : $availability[ $date ];
+				$availability[ $date ] = is_array( $rule )
+					? $this->tf_sanitize_availability_rule( $rule, true )
+					: $availability[ $date ];
 			}
 		}
 
@@ -957,7 +1237,7 @@ class TF_Options {
 		$check_out        = isset( $_POST['tf_apt_check_out'] ) ? sanitize_text_field( wp_unslash( $_POST['tf_apt_check_out'] ) ) : '';
 		$status           = isset( $_POST['tf_apt_status'] ) ? $this->tf_sanitize_availability_status( sanitize_key( wp_unslash( $_POST['tf_apt_status'] ) ) ) : 'available';
 		$price            = isset( $_POST['tf_apt_price'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_apt_price'] ) ) ) : '';
-		$posted_rules     = isset( $_POST['apt_availability'] ) ? sanitize_textarea_field( wp_unslash( $_POST['apt_availability'] ) ) : '';
+		$posted_rules     = isset( $_POST['apt_availability'] ) && is_string( $_POST['apt_availability'] ) ? wp_unslash( $_POST['apt_availability'] ) : '';
 		$apartment_meta   = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
 		$apartment_meta   = is_array( $apartment_meta ) ? $apartment_meta : array();
 
@@ -984,11 +1264,11 @@ class TF_Options {
 
 		$existing_availability = 'true' === $new_post
 			? $this->tf_safe_json_decode_assoc( $posted_rules )
-			: $this->tf_safe_json_decode_assoc( $apartment_meta['apt_availability'] ?? array() );
+			: $this->tf_safe_json_decode_assoc( $apartment_meta['apt_availability'] ?? array(), true );
+		$request_data          = $this->tf_sanitize_availability_request_data( 'apartment', $apartment_meta, $apartment_id );
 		$rule_type             = sanitize_key(
-			(string) apply_filters( 'tourfic_apartment_availability_rule_type', 'per_night', $apartment_meta, $apartment_id )
+			(string) apply_filters( 'tourfic_apartment_availability_rule_type', 'per_night', $apartment_meta, $apartment_id, $request_data )
 		);
-		$request_data          = map_deep( wp_unslash( $_POST ), 'sanitize_text_field' );
 		$updated_availability  = array();
 
 		for ( $timestamp = $check_in_timestamp; $timestamp <= $check_out_timestamp; $timestamp = strtotime( '+1 day', $timestamp ) ) {
@@ -1012,7 +1292,7 @@ class TF_Options {
 				$existing_rule,
 				$apartment_id
 			);
-			$rule          = is_array( $rule ) ? $rule : $core_rule;
+			$rule          = is_array( $rule ) ? $this->tf_sanitize_availability_rule( $rule, true ) : $core_rule;
 			$rule['check_in']     = $date;
 			$rule['check_out']    = $date;
 			$rule['pricing_type'] = $rule_type;
@@ -1046,12 +1326,12 @@ class TF_Options {
 			'tf_apartment'
 		);
 		$new_post     = isset( $_POST['new_post'] ) ? sanitize_text_field( wp_unslash( $_POST['new_post'] ) ) : '';
-		$posted_rules = isset( $_POST['apt_availability'] ) ? sanitize_textarea_field( wp_unslash( $_POST['apt_availability'] ) ) : '';
+		$posted_rules = isset( $_POST['apt_availability'] ) && is_string( $_POST['apt_availability'] ) ? wp_unslash( $_POST['apt_availability'] ) : '';
 		$meta         = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
 		$meta         = is_array( $meta ) ? $meta : array();
 		$availability = 'true' === $new_post
 			? $this->tf_safe_json_decode_assoc( $posted_rules )
-			: $this->tf_safe_json_decode_assoc( $meta['apt_availability'] ?? array() );
+			: $this->tf_safe_json_decode_assoc( $meta['apt_availability'] ?? array(), true );
 		$events       = array();
 
 		foreach ( $availability as $rule ) {
@@ -1128,12 +1408,12 @@ class TF_Options {
 		$min_person        = isset( $_POST['tf_tour_min_person'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_tour_min_person'] ) ) ) : '';
 		$max_person        = isset( $_POST['tf_tour_max_person'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_tour_max_person'] ) ) ) : '';
 		$max_capacity      = isset( $_POST['tf_tour_max_capacity'] ) ? $this->tf_sanitize_availability_number( sanitize_text_field( wp_unslash( $_POST['tf_tour_max_capacity'] ) ) ) : '';
-		$posted_rules      = isset( $_POST['tour_availability'] ) ? sanitize_textarea_field( wp_unslash( $_POST['tour_availability'] ) ) : '';
+		$posted_rules      = isset( $_POST['tour_availability'] ) && is_string( $_POST['tour_availability'] ) ? wp_unslash( $_POST['tour_availability'] ) : '';
 		$is_bulk_edit      = (bool) filter_input( INPUT_POST, 'bulk_edit_option', FILTER_VALIDATE_BOOLEAN );
 		$meta              = get_post_meta( $tour_id, 'tf_tours_opt', true );
 		$meta              = is_array( $meta ) ? $meta : array();
-		$rule_type         = sanitize_key( (string) apply_filters( 'tourfic_tour_availability_rule_type', 'person', $meta, $tour_id ) );
-		$request_data      = map_deep( wp_unslash( $_POST ), 'sanitize_text_field' );
+		$request_data      = $this->tf_sanitize_availability_request_data( 'tour', $meta, $tour_id );
+		$rule_type         = sanitize_key( (string) apply_filters( 'tourfic_tour_availability_rule_type', 'person', $meta, $tour_id, $request_data ) );
 
 		if ( '' === $adult_price ) {
 			$adult_price = $this->tf_sanitize_availability_number( $meta['adult_price'] ?? '' );
@@ -1147,7 +1427,7 @@ class TF_Options {
 
 		$existing_availability = 'true' === $new_post
 			? $this->tf_safe_json_decode_assoc( $posted_rules )
-			: $this->tf_safe_json_decode_assoc( $meta['tour_availability'] ?? array() );
+			: $this->tf_safe_json_decode_assoc( $meta['tour_availability'] ?? array(), true );
 		$updated_availability  = array();
 		$build_rule            = function( $start_date, $end_date ) use (
 			$adult_price,
@@ -1188,7 +1468,7 @@ class TF_Options {
 				$existing_rule,
 				$tour_id
 			);
-			$rule          = is_array( $rule ) ? $rule : $core_rule;
+			$rule          = is_array( $rule ) ? $this->tf_sanitize_availability_rule( $rule, true ) : $core_rule;
 			$rule['check_in']     = $start_date;
 			$rule['check_out']    = $end_date;
 			$rule['pricing_type'] = $rule_type;
@@ -1285,14 +1565,14 @@ class TF_Options {
 			'tf_tours'
 		);
 		$new_post        = isset( $_POST['new_post'] ) ? sanitize_text_field( wp_unslash( $_POST['new_post'] ) ) : '';
-		$posted_rules    = isset( $_POST['tour_availability'] ) ? sanitize_textarea_field( wp_unslash( $_POST['tour_availability'] ) ) : '';
+		$posted_rules    = isset( $_POST['tour_availability'] ) && is_string( $_POST['tour_availability'] ) ? wp_unslash( $_POST['tour_availability'] ) : '';
 		$option_arr      = isset( $_POST['option_arr'] ) && is_array( $_POST['option_arr'] ) ? map_deep( wp_unslash( $_POST['option_arr'] ), 'sanitize_text_field' ) : array();
 		$group_option_arr = isset( $_POST['group_option_arr'] ) && is_array( $_POST['group_option_arr'] ) ? map_deep( wp_unslash( $_POST['group_option_arr'] ), 'sanitize_text_field' ) : array();
 		$meta            = get_post_meta( $tour_id, 'tf_tours_opt', true );
 		$meta            = is_array( $meta ) ? $meta : array();
 		$availability    = 'true' === $new_post
 			? $this->tf_safe_json_decode_assoc( $posted_rules )
-			: $this->tf_safe_json_decode_assoc( $meta['tour_availability'] ?? array() );
+			: $this->tf_safe_json_decode_assoc( $meta['tour_availability'] ?? array(), true );
 		$events          = array();
 
 		foreach ( $availability as $rule ) {
@@ -1379,7 +1659,7 @@ class TF_Options {
 			(string) apply_filters( 'tourfic_apartment_availability_rule_type', 'per_night', $meta, $post_id )
 		);
 		$base_price   = $this->tf_sanitize_availability_number( $meta['price_per_night'] ?? '' );
-		$availability = $this->tf_safe_json_decode_assoc( $meta['apt_availability'] ?? array() );
+		$availability = $this->tf_safe_json_decode_assoc( $meta['apt_availability'] ?? array(), true );
 
 		if ( empty( $availability ) ) {
 			$today = strtotime( gmdate( 'Y-m-d' ) );
@@ -1395,7 +1675,7 @@ class TF_Options {
 				);
 				$rule = apply_filters( 'tourfic_apartment_availability_default_rule_data', $rule, $meta, array(), $post_id );
 
-				$availability[ $date ] = is_array( $rule ) ? $rule : array();
+				$availability[ $date ] = is_array( $rule ) ? $this->tf_sanitize_availability_rule( $rule, true ) : array();
 			}
 		} else {
 			foreach ( $availability as $date => $rule ) {
@@ -1409,7 +1689,9 @@ class TF_Options {
 				$rule['pricing_type'] = $rule_type;
 				$rule = apply_filters( 'tourfic_apartment_availability_default_rule_data', $rule, $meta, $availability[ $date ], $post_id );
 
-				$availability[ $date ] = is_array( $rule ) ? $rule : $availability[ $date ];
+				$availability[ $date ] = is_array( $rule )
+					? $this->tf_sanitize_availability_rule( $rule, true )
+					: $availability[ $date ];
 			}
 		}
 

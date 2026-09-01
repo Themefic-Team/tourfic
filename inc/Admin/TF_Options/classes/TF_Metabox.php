@@ -212,7 +212,7 @@ if ( ! class_exists( 'Tourfic_Metabox' ) ) {
 			 * @author Jahid
 			 */
 			$post_type          = ! empty( $_POST['post_type'] ) ? sanitize_key( wp_unslash( $_POST['post_type'] ) ) : '';
-			$tf_metabox_request = $metabox_request;
+			$tf_metabox_request = array_intersect_key( $tf_meta_box_value, $metabox_request );
 			$post_basic_info = array(
 				'post_id' => sanitize_key( $post_id ),
 				'post_title' => !empty($_POST['post_title']) ? sanitize_text_field( wp_unslash($_POST['post_title']) ) : '',

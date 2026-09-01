@@ -892,8 +892,29 @@ trait Action_Helper {
         $car_driver_max_age = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] : 40;
 		// Cars Data End
 		
-		$builderSettings = ! empty( $_POST['builderSettings'] ) ? json_decode( sanitize_textarea_field( wp_unslash( $_POST['builderSettings'] ) ), true ) : [];
-		$builderSettings = is_array( $builderSettings ) ? map_deep( $builderSettings, 'sanitize_text_field' ) : [];
+		$builder_settings_json = isset( $_POST['builderSettings'] ) && is_string( $_POST['builderSettings'] )
+			? wp_unslash( $_POST['builderSettings'] )
+			: '';
+		$builderSettings      = '' !== $builder_settings_json ? json_decode( $builder_settings_json, true ) : array();
+		$builderSettings      = JSON_ERROR_NONE === json_last_error() && is_array( $builderSettings )
+			? Helper::tf_sanitize_recursive_input( $builderSettings )
+			: array();
+
+		if ( isset( $builderSettings['posts_per_page'] ) ) {
+			$builderSettings['posts_per_page'] = min( 1000, max( 1, absint( $builderSettings['posts_per_page'] ) ) );
+		}
+
+		if ( isset( $builderSettings['orderby'] ) ) {
+			$allowed_orderby = array( 'ID', 'author', 'title', 'date', 'modified', 'rand', 'comment_count', 'menu_order' );
+			$builderSettings['orderby'] = in_array( $builderSettings['orderby'], $allowed_orderby, true )
+				? $builderSettings['orderby']
+				: 'date';
+		}
+
+		if ( isset( $builderSettings['order'] ) ) {
+			$order = strtolower( $builderSettings['order'] );
+			$builderSettings['order'] = in_array( $order, array( 'asc', 'desc' ), true ) ? $order : 'desc';
+		}
 
 		// Author ID if any (single value)
 		$tf_author_ids = isset( $_POST['tf_author'] ) ? intval( $_POST['tf_author'] ) : '';

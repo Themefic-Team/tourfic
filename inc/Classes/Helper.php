@@ -514,6 +514,40 @@ class Helper {
 		return $text;
 	}
 
+	/**
+	 * Sanitize every key and scalar value in a nested input array.
+	 *
+	 * Numeric indexes are retained so repeater ordering remains stable.
+	 *
+	 * @param mixed    $value          Raw input value.
+	 * @param callable $value_callback Scalar value sanitizer.
+	 * @return mixed
+	 */
+	static function tf_sanitize_recursive_input( $value, $value_callback = 'sanitize_text_field' ) {
+		if ( is_array( $value ) ) {
+			$sanitized = array();
+
+			foreach ( $value as $key => $item ) {
+				$sanitized_key = is_int( $key ) ? $key : sanitize_key( $key );
+				if ( '' === $sanitized_key && ! is_int( $key ) ) {
+					continue;
+				}
+
+				$sanitized[ $sanitized_key ] = self::tf_sanitize_recursive_input( $item, $value_callback );
+			}
+
+			return $sanitized;
+		}
+
+		if ( is_object( $value ) || is_resource( $value ) ) {
+			return '';
+		}
+
+		$value = is_scalar( $value ) ? (string) $value : '';
+
+		return is_callable( $value_callback ) ? call_user_func( $value_callback, $value ) : sanitize_text_field( $value );
+	}
+
 	static function tf_sanitize_extra_quantities( $quantities ) {
 		if ( is_string( $quantities ) ) {
 			$quantities = explode( ',', sanitize_text_field( $quantities ) );
