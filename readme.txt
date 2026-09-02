@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, hellokhoyer,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 7.1
-Stable tag: 2.23.3
+Stable tag: 2.23.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -478,14 +478,15 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.23.4 – Sep 02, 2026 =
+
+- Security: Improved sanitization and overall security.
+- Updated: Addressed reported WordPress.org issues.
+
 = 2.23.3 – August 25, 2026 =
 
 - Fixed: WordPress.org directory compliance and security issues.
 - Improved: Source-code transparency, compatibility, and bundled third-party libraries.
-
-= 2.23.2 – July 30, 2026 =
-
-- Improved: System stability and security.
  
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 
