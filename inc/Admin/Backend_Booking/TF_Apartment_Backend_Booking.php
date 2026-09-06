@@ -16,7 +16,7 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 
 	protected array $args = array(
 		'name'      => 'apartment',
-		'prefix'    => 'tf-apartment',
+		'prefix'    => 'tourfic-apartment',
 		'post_type' => 'tf_apartment',
 		'caps'      => 'edit_tf_apartments'
 	);

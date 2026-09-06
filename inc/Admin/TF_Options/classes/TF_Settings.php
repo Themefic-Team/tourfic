@@ -134,7 +134,7 @@ if ( ! class_exists( 'Tourfic_Settings' ) ) {
 				esc_html__('Dashboard', 'tourfic'),
 				esc_html__('Dashboard', 'tourfic'),
 				'manage_options',
-				'tf_dashboard',
+				'tourfic_dashboard',
 				array( $this, 'tf_dashboard_page' ),
 			);
 
@@ -154,7 +154,7 @@ if ( ! class_exists( 'Tourfic_Settings' ) ) {
 				esc_html__('Shortcodes', 'tourfic'),
 				esc_html__('Shortcodes', 'tourfic'),
 				'manage_options',
-				'tf_shortcodes',
+				'tourfic_shortcodes',
 				array( 'Tourfic_Shortcodes','tf_shortcode_callback'),
 			);
 
@@ -164,7 +164,7 @@ if ( ! class_exists( 'Tourfic_Settings' ) ) {
 				esc_html__('Get Help', 'tourfic'),
 				esc_html__('Get Help', 'tourfic'),
 				'manage_options',
-				'tf_get_help',
+				'tourfic_get_help',
 				array( $this,'tf_get_help_callback'),
 			);
 
@@ -391,7 +391,7 @@ if ( ! class_exists( 'Tourfic_Settings' ) ) {
 			?>
 			<div class="tf-sidebar-content">
 
-				<?php if( !empty($_GET['page']) && $_GET['page']!='tf_dashboard' ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+				<?php if( !empty($_GET['page']) && $_GET['page']!='tourfic_dashboard' ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
 				<div class="tf-plugin-lists">
 					<h3>Power up your website</h3>
 					<div class="tf-others-plugin">
@@ -587,7 +587,7 @@ if ( ! class_exists( 'Tourfic_Settings' ) ) {
 							</svg>
 							<h3><?php esc_html_e("Get Started Quickly","tourfic"); ?></h3>
 							<p><?php esc_html_e("Use our guided setup wizard to get up and running fast.","tourfic"); ?></p>
-							<a href="<?php echo esc_url(admin_url( 'admin.php?page=tf-setup-wizard' )) ?>" target="" class="tf-link-skip-btn"><?php esc_html_e("Setup Wizard","tourfic"); ?></a>
+							<a href="<?php echo esc_url(admin_url( 'admin.php?page=tourfic-setup-wizard' )) ?>" target="" class="tf-link-skip-btn"><?php esc_html_e("Setup Wizard","tourfic"); ?></a>
 						</div>
 
 						<!-- Customization -->

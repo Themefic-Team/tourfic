@@ -56,7 +56,7 @@ Tourfic_Settings::option( 'tourfic_settings', array(
 	'title'    => esc_html__( 'Tourfic Settings ', 'tourfic' ),
 	'icon'     => $tourfic_menu_icon,
 	'position' => 26,
-	'menu_slug' => 'tf_settings',
+	'menu_slug' => 'tourfic_settings',
 	'sections' => array(
 		'general'               => array(
 			'title'  => esc_html__( 'General', 'tourfic' ),

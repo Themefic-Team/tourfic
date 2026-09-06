@@ -543,6 +543,7 @@ if ( ! function_exists( 'tourfic_get_car_archive_search_context' ) ) {
 	 * @return array
 	 */
 	function tourfic_get_car_archive_search_context() {
+		$search_request = tourfic_get_public_search_request();
 		$default_time_str = '10:00';
 		$disable_car_time_slot = ! empty( Helper::tfopt( 'disable-car-time-slots' ) ) ? (bool) Helper::tfopt( 'disable-car-time-slots' ) : false;
 
@@ -554,16 +555,16 @@ if ( ! function_exists( 'tourfic_get_car_archive_search_context' ) ) {
 		}
 
 		$default_time = gmdate( 'g:i A', strtotime( $default_time_str ) );
-		$pickup_date  = ! empty( $_GET['pickup-date'] ) ? tourfic_normalize_date( sanitize_text_field( wp_unslash( $_GET['pickup-date'] ) ) ) : gmdate( 'Y/m/d', strtotime( '+1 day' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$dropoff_date = ! empty( $_GET['dropoff-date'] ) ? tourfic_normalize_date( sanitize_text_field( wp_unslash( $_GET['dropoff-date'] ) ) ) : gmdate( 'Y/m/d', strtotime( '+2 day' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$pickup_date  = ! empty( $search_request['pickup-date'] ) ? tourfic_normalize_date( $search_request['pickup-date'] ) : gmdate( 'Y/m/d', strtotime( '+1 day' ) );
+		$dropoff_date = ! empty( $search_request['dropoff-date'] ) ? tourfic_normalize_date( $search_request['dropoff-date'] ) : gmdate( 'Y/m/d', strtotime( '+2 day' ) );
 
 		return array(
-			'pickup'       => ! empty( $_GET['pickup'] ) ? sanitize_text_field( wp_unslash( $_GET['pickup'] ) ) : '', // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			'dropoff'      => ! empty( $_GET['dropoff'] ) ? sanitize_text_field( wp_unslash( $_GET['dropoff'] ) ) : '', // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			'pickup'       => isset( $search_request['pickup'] ) ? $search_request['pickup'] : '',
+			'dropoff'      => isset( $search_request['dropoff'] ) ? $search_request['dropoff'] : '',
 			'pickup_date'  => $pickup_date,
 			'dropoff_date' => $dropoff_date,
-			'pickup_time'  => ! empty( $_GET['pickup-time'] ) ? sanitize_text_field( wp_unslash( $_GET['pickup-time'] ) ) : $default_time, // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			'dropoff_time' => ! empty( $_GET['dropoff-time'] ) ? sanitize_text_field( wp_unslash( $_GET['dropoff-time'] ) ) : $default_time, // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			'pickup_time'  => isset( $search_request['pickup-time'] ) ? $search_request['pickup-time'] : $default_time,
+			'dropoff_time' => isset( $search_request['dropoff-time'] ) ? $search_request['dropoff-time'] : $default_time,
 		);
 	}
 }
@@ -890,7 +891,16 @@ if ( ! function_exists( 'tourfic_car_search_ajax_callback' ) ) {
 			'type',
 			'from',
 			'to',
-			'_nonce',
+			'min_seat',
+			'max_seat',
+			'same_location',
+			'driver_age',
+			'car_brand',
+			'car_category',
+			'car_fueltype',
+			'car_engine_year',
+			'car_transmission',
+			'carplay_android_auto',
 		];
 
 		$fields = [];
@@ -903,6 +913,7 @@ if ( ! function_exists( 'tourfic_car_search_ajax_callback' ) ) {
 				}
 			}
 		}
+		$fields['tourfic_search_nonce'] = wp_create_nonce( 'tourfic_public_search' );
 
 		$response['query_string'] = http_build_query( $fields );
 		$response['status']       = 'success';

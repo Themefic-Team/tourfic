@@ -4,8 +4,8 @@ const {select, dispatch} = wp.data;
 
 function TfPrePublishCheck() {
     let lockPost = false;
-    tf_admin_params.error = false;
-    tf_admin_params.messages = [];
+    tourficAdminParams.error = false;
+    tourficAdminParams.messages = [];
 
     let tf_post_pre_save = Object.assign({}, select('core/editor').getCurrentPost(), select('core/editor').getPostEdits());
 
@@ -15,7 +15,7 @@ function TfPrePublishCheck() {
         });
     }
 
-    jQuery.each(tf_admin_params.taxonomies, function (taxonomy, config) {
+    jQuery.each(tourficAdminParams.taxonomies, function (taxonomy, config) {
         if (tf_post_pre_save.hasOwnProperty(taxonomy) && tf_post_pre_save[taxonomy].length === 0) {
             dispatch('core/notices').createNotice(
                 'error',
@@ -25,7 +25,7 @@ function TfPrePublishCheck() {
                     isDismissible: false
                 }
             );
-            tf_admin_params.error = lockPost = true;
+            tourficAdminParams.error = lockPost = true;
         }else{
             dispatch('core/notices').removeNotice('tfNotice_' + taxonomy);
         }

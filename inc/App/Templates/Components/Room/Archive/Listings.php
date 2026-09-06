@@ -49,6 +49,7 @@ class Listings {
                 <div class="tf-archive-header-right tf-flex tf-flex-space-bttn tf-flex-align-center tf-flex-gap-16">
                     <?php if($show_sorting == 'yes') : ?>
                         <form class="tf-archive-ordering" method="get">
+                            <?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                             <select class="tf-orderby tf-room-archive-action-btn" name="tf-orderby" id="tf-orderby">
                                 <option value="default"><?php echo esc_html__( 'Default Sorting', 'tourfic' ); ?></option>
                                 <option value="rating"><?php echo esc_html__( 'Sort By Average Rating', 'tourfic' ); ?></option>
@@ -111,4 +112,3 @@ class Listings {
         <?php
 	}
 }
-

@@ -12,7 +12,7 @@ get_header();
 		while ( have_posts() ) :
 			the_post();
 
-			echo do_shortcode( "[tf-wishlist]" );
+			echo do_shortcode( '[tourfic_wishlist]' );
 			the_content();
 		endwhile;
 		?>

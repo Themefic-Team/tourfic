@@ -12,7 +12,7 @@ class Apartment_Enquiry extends \Tourfic\Core\Enquiry {
 			apply_filters( 'tourfic_apartment_enquiry_page_title', esc_html__( 'Apartment Enquiry Details', 'tourfic' ) ),
 			apply_filters( 'tourfic_apartment_enquiry_menu_title', esc_html__( 'Enquiry Details', 'tourfic' ) ),
 			'edit_tf_apartments',
-			'tf_apartment_enquiry',
+			'tourfic_apartment_enquiry',
 			array( $this, 'tf_enquiry_page_callback' )
 		);
 	}

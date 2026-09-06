@@ -74,7 +74,7 @@
                 // If no match found, show "No results found"
                 if (!found) {
                     let b = document.createElement("DIV");
-                    b.innerHTML = `<span>${tf_params.no_found}</span>`;
+                    b.innerHTML = `<span>${tourficParams.no_found}</span>`;
                     b.innerHTML += `<input type='hidden' value="">`;
                     b.addEventListener("click", function () {
                         inp.value = "";
@@ -216,7 +216,7 @@
         function validateApartmentBookingConfirmFields($popup) {
             let hasErrors = false;
             let firstErrorElement = null;
-            const requiredText = tf_params.field_required || 'This field is required.';
+            const requiredText = tourficParams.field_required || 'This field is required.';
             const checkedMap = {};
 
             const $visibleContainer = $popup.find('.tf-booking-content:visible');
@@ -306,7 +306,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -341,7 +341,7 @@
                     try {
                         response = JSON.parse(data);
                     } catch (error) {
-                        response = { status: 'error', errors: [tf_params.something_went_wrong || 'Something went wrong.'] };
+                        response = { status: 'error', errors: [tourficParams.something_went_wrong || 'Something went wrong.'] };
                     }
 
                     if (response.status === 'error') {
@@ -382,11 +382,11 @@
             const $popup = $('.tf-apartment-booking-popup');
             const formData = new FormData($form[0]);
             formData.append('action', 'tourfic_apartment_booking_popup');
-            formData.append('_nonce', tf_params.nonce);
+            formData.append('_nonce', tourficParams.nonce);
 
             $.ajax({
                 type: 'post',
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -401,7 +401,7 @@
                     try {
                         response = JSON.parse(data);
                     } catch (error) {
-                        response = { status: 'error', errors: [tf_params.something_went_wrong || 'Something went wrong.'] };
+                        response = { status: 'error', errors: [tourficParams.something_went_wrong || 'Something went wrong.'] };
                     }
 
                     if (response.status === 'error') {
@@ -510,15 +510,15 @@
                 formData = new FormData(form[0]);
 
             formData.append('action', 'tourfic_apartments_search');
-            formData.append('_nonce', tf_params.nonce);
+            formData.append('_nonce', tourficParams.nonce);
 
             if (formData.get('from') == null || formData.get('to') == null) {
-                formData.append('from', tf_params.tf_apartment_min_price);
-                formData.append('to', tf_params.tf_apartment_max_price);
+                formData.append('from', tourficParams.tf_apartment_min_price);
+                formData.append('to', tourficParams.tf_apartment_max_price);
             }
 
             $.ajax({
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -552,7 +552,7 @@
             let id = $(this).data("id");
             let data = {
                 action: 'tourfic_apt_room_details_qv',
-                _nonce: tf_params.nonce,
+                _nonce: tourficParams.nonce,
                 post_id: post_id,
                 id: id,
                 design: 'default'
@@ -560,7 +560,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 data: data,
                 success: function (response) {
                     $("#tf_apt_room_details_qv").html(response);
@@ -587,7 +587,7 @@
             let id = $(this).data("id");
             let data = {
                 action: 'tourfic_apt_room_details_qv',
-                _nonce: tf_params.nonce,
+                _nonce: tourficParams.nonce,
                 post_id: post_id,
                 id: id,
                 design: 'design-1'
@@ -595,7 +595,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 data: data,
                 success: function (response) {
                     $(".tf-room-popup").html(response);
@@ -612,7 +612,7 @@
          * @author Foysal
          */
         var apartment_location_input = document.getElementById("tf-apartment-location");
-        var apartment_locations = tf_params.apartment_locations;
+        var apartment_locations = tourficParams.apartment_locations;
         if (apartment_location_input) {
             tourfic_autocomplete(apartment_location_input, apartment_locations);
         }
@@ -621,16 +621,16 @@
          * Apartment Min and Max Range
          * @author Foysal
          */
-        if (tf_params.tf_apartment_min_price >= 0 && tf_params.tf_apartment_max_price > 0) {
+        if (tourficParams.tf_apartment_min_price >= 0 && tourficParams.tf_apartment_max_price > 0) {
             $('.tf-apartment-filter-range').alRangeSlider({
                 range: {
-                    min: parseInt(tf_params.tf_apartment_min_price),
-                    max: parseInt(tf_params.tf_apartment_max_price),
+                    min: parseInt(tourficParams.tf_apartment_min_price),
+                    max: parseInt(tourficParams.tf_apartment_max_price),
                     step: 1
                 },
                 initialSelectedValues: {
-                    from: parseInt(tf_params.tf_apartment_min_price),
-                    to: parseInt(tf_params.tf_apartment_max_price)
+                    from: parseInt(tourficParams.tf_apartment_min_price),
+                    to: parseInt(tourficParams.tf_apartment_max_price)
                 },
                 grid: false,
                 theme: "dark",
@@ -872,15 +872,15 @@
         });
 
         if ($('#apartment-location').length) {
-            const map = L.map('apartment-location').setView([tf_params.single_apartment_data.address_latitude, tf_params.single_apartment_data.address_longitude], tf_params.single_apartment_data.address_zoom);
+            const map = L.map('apartment-location').setView([tourficParams.single_apartment_data.address_latitude, tourficParams.single_apartment_data.address_longitude], tourficParams.single_apartment_data.address_zoom);
 
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' + tourficParams.open_street_map_text + '</a>'
             }).addTo(map);
 
-            const marker = L.marker([tf_params.single_apartment_data.address_latitude, tf_params.single_apartment_data.address_longitude], {alt: tf_params.single_apartment_data.address}).addTo(map)
-                .bindPopup(tf_params.single_apartment_data.address);
+            const marker = L.marker([tourficParams.single_apartment_data.address_latitude, tourficParams.single_apartment_data.address_longitude], {alt: tourficParams.single_apartment_data.address}).addTo(map)
+                .bindPopup(tourficParams.single_apartment_data.address);
         }
     });
 

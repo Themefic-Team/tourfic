@@ -43,7 +43,9 @@ class TF_Setup_Wizard {
 		add_action( 'wp_ajax_tourfic_setup_travelfic_theme_active', array( $this, 'tf_setup_travelfic_theme_active_callabck' ) );
 
 
-		self::$current_step = isset( $_GET['step'] ) ? sanitize_key( $_GET['step'] ) : 'welcome'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$allowed_steps      = array( 'welcome', 'step_1', 'step_2', 'step_3', 'step_4', 'step_5', 'step_6', 'finish' );
+		$requested_step     = isset( $_GET['step'] ) && is_scalar( $_GET['step'] ) ? sanitize_key( wp_unslash( (string) $_GET['step'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		self::$current_step = in_array( $requested_step, $allowed_steps, true ) ? $requested_step : 'welcome';
 	}
 
 	/**
@@ -52,13 +54,13 @@ class TF_Setup_Wizard {
 	public function tf_wizard_menu() {
 
 		if ( current_user_can( 'manage_options' ) ) {
-			$tf_settings_parentmenu = ! empty( $_GET['page'] ) && "tf-setup-wizard" == $_GET['page'] ? 'tf_settings' : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$tf_settings_parentmenu = ! empty( $_GET['page'] ) && "tourfic-setup-wizard" == $_GET['page'] ? 'tourfic_settings' : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			add_submenu_page(
 				$tf_settings_parentmenu,
 				esc_html__( 'TF Setup Wizard', 'tourfic' ),
 				esc_html__( 'TF Setup Wizard', 'tourfic' ),
 				'manage_options',
-				'tf-setup-wizard',
+				'tourfic-setup-wizard',
 				[ $this, 'tf_wizard_page' ],
 				99
 			);
@@ -66,7 +68,7 @@ class TF_Setup_Wizard {
 	}
 
 	public function tf_setup_wizard_admin_enqueue_scripts( $screen ) {
-		if ( ! empty( $screen ) && 'tourfic-settings_page_tf-setup-wizard' == $screen ) {
+		if ( ! empty( $screen ) && 'tourfic-settings_page_tourfic-setup-wizard' == $screen ) {
 			wp_enqueue_style( 'travelfic-toolkit-fonts', '//fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap', array(), '2.11.9' );
 		}
 	}
@@ -75,7 +77,7 @@ class TF_Setup_Wizard {
 	 * Remove all notice in setup wizard page
 	 */
 	public function remove_notice() {
-		if ( isset( $_GET['page'] ) && $_GET['page'] == 'tf-setup-wizard' ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( isset( $_GET['page'] ) && $_GET['page'] == 'tourfic-setup-wizard' ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			remove_all_actions( 'admin_notices' );
 			remove_all_actions( 'all_admin_notices' );
 		}
@@ -123,7 +125,7 @@ class TF_Setup_Wizard {
 		?>
         <div class="tf-setup-content-layout tf-welcome-step tf-setup-step-0 <?php echo self::$current_step == 'welcome' ? 'active' : ''; ?>">
             <div class="back-to-dashboard">
-                <a href="<?php echo esc_url( admin_url( 'admin.php?page=tf_settings' ) ); ?>" class="tf-back-btn">
+                <a href="<?php echo esc_url( admin_url( 'admin.php?page=tourfic_settings' ) ); ?>" class="tf-back-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 19L5 12L12 5" stroke="#003C79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M19 12H5" stroke="#003C79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1245,7 +1247,7 @@ class TF_Setup_Wizard {
                        class="tf-link-skip-btn tf-add-new-tour tf-settings-default-button"><?php esc_html_e( 'Create Tour', 'tourfic' ) ?></a>
                     <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=tf_apartment' ) ) ?>"
                        class="tf-link-skip-btn tf-add-new-apartment tf-settings-default-button"><?php esc_html_e( 'Create Apartment', 'tourfic' ) ?></a>
-                    <a href="<?php echo esc_url( admin_url( 'admin.php?page=tf_settings' ) ) ?>" class="tf-quick-setup-btn tf-settings-default-button">
+                    <a href="<?php echo esc_url( admin_url( 'admin.php?page=tourfic_settings' ) ) ?>" class="tf-quick-setup-btn tf-settings-default-button">
                         <span><?php esc_html_e( 'Tourfic Setting', 'tourfic' ) ?></span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M5 12H19" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1264,7 +1266,7 @@ class TF_Setup_Wizard {
 	public function tf_activation_redirect() {
 		if ( ! get_option( 'tourfic_setup_wizard' ) ) {
 			update_option( 'tourfic_setup_wizard', 'active' );
-			wp_safe_redirect( admin_url( 'admin.php?page=tf-setup-wizard' ) );
+			wp_safe_redirect( admin_url( 'admin.php?page=tourfic-setup-wizard' ) );
 			exit;
 		}
 	}
@@ -1501,7 +1503,7 @@ class TF_Setup_Wizard {
 		update_option( 'tourfic_settings', $tf_settings );
 		$response = [
 			'success'      => true,
-			'redirect_url' => esc_url( admin_url( 'admin.php?page=tf_settings' ) )
+			'redirect_url' => esc_url( admin_url( 'admin.php?page=tourfic_settings' ) )
 		];
 
 		echo wp_json_encode( $response );

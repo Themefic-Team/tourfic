@@ -15,11 +15,11 @@ class TF_API_Documentation {
 		$position = is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ? 4 : 3;
 
 		add_submenu_page(
-			'tf_settings',
+			'tourfic_settings',
 			esc_html__( 'API Documentation', 'tourfic' ),
 			esc_html__( 'API Documentation', 'tourfic' ),
 			'manage_options',
-			'tf_api_docs',
+			'tourfic_api_docs',
 			array( $this, 'render_page' ),
 			$position
 		);

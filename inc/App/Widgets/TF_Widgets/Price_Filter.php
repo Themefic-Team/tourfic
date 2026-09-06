@@ -34,6 +34,8 @@ class Price_Filter extends \WP_Widget {
      * @param array $instance Saved values from database.
      */
     public function widget( $args, $instance ) {
+		$tourfic_search_request = \tourfic_get_public_search_request();
+		$tourfic_search_type    = isset( $tourfic_search_request['type'] ) ? $tourfic_search_request['type'] : '';
         ?>
 		<!-- Start Price Range widget -->
 		<?php 
@@ -132,35 +134,35 @@ class Price_Filter extends \WP_Widget {
             extract( $args );
             $title = !empty($instance['title']) ? apply_filters( 'widget_title', $instance['title'] ) : '';
             echo wp_kses_post($before_widget);
-            if( !empty($_GET['type']) && $_GET['type']=="tf_tours" && !empty($_GET['from']) && !empty($_GET['to'] ) ){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if( "tf_tours" === $tourfic_search_type && ! empty( $tourfic_search_request['from'] ) && ! empty( $tourfic_search_request['to'] ) ){
             ?>
                 <div class="tf-widget-title">
                     <span><?php esc_html_e("Tour Price Range","tourfic"); ?> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)</span>
                 </div>
                 <div class="tf-tour-result-price-range"></div>
             <?php }
-            if( !empty($_GET['type']) && $_GET['type']=="tf_hotel" && !empty($_GET['from']) && !empty($_GET['to'] ) ){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if( "tf_hotel" === $tourfic_search_type && ! empty( $tourfic_search_request['from'] ) && ! empty( $tourfic_search_request['to'] ) ){
             ?>
                 <div class="tf-widget-title">
                     <span><?php esc_html_e("Hotel Price Range","tourfic"); ?> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)</span>
                 </div>
                 <div class="tf-hotel-result-price-range"></div>
             <?php }
-            if( !empty($_GET['type']) && $_GET['type']=="tf_room" && !empty($_GET['from']) && !empty($_GET['to'] ) ){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if( "tf_room" === $tourfic_search_type && ! empty( $tourfic_search_request['from'] ) && ! empty( $tourfic_search_request['to'] ) ){
             ?>
                 <div class="tf-widget-title">
                     <span><?php esc_html_e("Price Range","tourfic"); ?> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)</span>
                 </div>
                 <div class="tf-room-result-price-range"></div>
             <?php }
-            if( !empty($_GET['type']) && $_GET['type']=="tf_apartment" && !empty($_GET['from']) && !empty($_GET['to'] ) ){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if( "tf_apartment" === $tourfic_search_type && ! empty( $tourfic_search_request['from'] ) && ! empty( $tourfic_search_request['to'] ) ){
             ?>
                 <div class="tf-widget-title">
                     <span><?php esc_html_e("Apartment Price Range","tourfic"); ?> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)</span>
                 </div>
                 <div class="tf-apartment-result-price-range"></div>
             <?php }
-            if( !empty($_GET['type']) && $_GET['type']=="tf_carrental" && !empty($_GET['from']) && !empty($_GET['to'] ) ){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if( "tf_carrental" === $tourfic_search_type && ! empty( $tourfic_search_request['from'] ) && ! empty( $tourfic_search_request['to'] ) ){
             ?>
                 <div class="tf-widget-title">
                     <span><?php esc_html_e("Price Range","tourfic"); ?> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)</span>

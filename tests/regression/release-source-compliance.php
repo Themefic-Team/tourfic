@@ -115,4 +115,24 @@ foreach (
 	);
 }
 
+$internal_shortcode_templates = array(
+	'templates/common/tf-wishlist.php'                   => 'tourfic_wishlist',
+	'templates/template-parts/search/design-1.php'      => 'tourfic_search_result',
+	'templates/template-parts/search/design-2.php'      => 'tourfic_search_result',
+	'templates/template-parts/search/design-3.php'      => 'tourfic_search_result',
+	'templates/template-parts/search/design-legacy.php' => 'tourfic_search_result',
+);
+
+foreach ( $internal_shortcode_templates as $template => $shortcode ) {
+	$template_source = file_get_contents( $root . '/' . $template );
+	tf_release_source_assert(
+		false !== strpos( $template_source, '[' . $shortcode . ']' ),
+		'Internal template must call the registered shortcode [' . $shortcode . ']: ' . $template . '.'
+	);
+	tf_release_source_assert(
+		0 === preg_match( '/\[(?:tf[_-]|hotel_locations|room_types|tour_destinations|tourfic_destinations)/', $template_source ),
+		'Internal template still calls a removed legacy shortcode: ' . $template . '.'
+	);
+}
+
 echo "PASS: release source documentation and bundled Select2 checks.\n";

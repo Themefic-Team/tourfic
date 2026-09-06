@@ -27,15 +27,15 @@
             var data = {
                 action: 'tourfic_delete_old_review_fields',
                 deleteAll: $(this).data('delete-all'),
-                _ajax_nonce: tf_admin_params.tf_nonce
+                _ajax_nonce: tourficAdminParams.tf_nonce
             };
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: data,
                 beforeSend: function (data) {
-                    notyf.success(tf_admin_params.deleting_old_review_fields);
+                    notyf.success(tourficAdminParams.deleting_old_review_fields);
                 },
                 success: function (data) {
                     notyf.success(data.data);
@@ -63,7 +63,7 @@
                 action: 'tourfic_remove_room_order_ids',
                 meta_field: meta_field,
                 post_id: post_id,
-                _ajax_nonce: tf_admin_params.tf_nonce
+                _ajax_nonce: tourficAdminParams.tf_nonce
             };
 
             $.ajax({
@@ -71,7 +71,7 @@
                 url: ajaxurl,
                 data: data,
                 beforeSend: function (data) {
-                    notyf.success(tf_admin_params.deleting_room_order_ids);
+                    notyf.success(tourficAdminParams.deleting_room_order_ids);
                 },
                 success: function (response) {
                     notyf.success(response.data.message);
@@ -93,7 +93,7 @@
             if ($('input[name="tf_tours_opt[location][address]"]').val().length === 0) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
-                notyf.error(tf_admin_params.tour_location_required);
+                notyf.error(tourficAdminParams.tour_location_required);
                 return false;
             }
         });
@@ -107,7 +107,7 @@
             if ($('input[name="tf_hotels_opt[map][address]"]').val().length === 0) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
-                notyf.error(tf_admin_params.hotel_location_required);
+                notyf.error(tourficAdminParams.hotel_location_required);
                 return false;
             }
         });
@@ -121,7 +121,7 @@
             if ($('[name="tf_apartment_opt[map][address]"]').val().length === 0) {
                 e.preventDefault;
                 e.stopImmediatePropagation();
-                notyf.error(tf_admin_params.apartment_location_required);
+                notyf.error(tourficAdminParams.apartment_location_required);
                 return false;
             }
         });
@@ -137,24 +137,24 @@
             var current = $(this);
             var plugin_slug = current.attr("data-plugin-slug");
 
-            current.addClass('updating-message').text(tf_admin_params.installing);
+            current.addClass('updating-message').text(tourficAdminParams.installing);
 
             var data = {
                 action: 'tourfic_ajax_install_plugin',
-                _ajax_nonce: tf_admin_params.tf_nonce,
+                _ajax_nonce: tourficAdminParams.tf_nonce,
                 slug: plugin_slug,
             };
 
-            jQuery.post(tf_admin_params.ajax_url, data, function (response) {
+            jQuery.post(tourficAdminParams.ajax_url, data, function (response) {
                 current.removeClass('updating-message');
-                current.addClass('updated-message').text(tf_admin_params.installed);
+                current.addClass('updated-message').text(tourficAdminParams.installed);
                 current.attr("href", response.data.activateUrl);
             })
                 .fail(function () {
-                    current.removeClass('updating-message').text(tf_admin_params.install_failed);
+                    current.removeClass('updating-message').text(tourficAdminParams.install_failed);
                 })
                 .always(function () {
-                    current.removeClass('install-now updated-message').addClass('activate-now button-primary').text(tf_admin_params.activating);
+                    current.removeClass('install-now updated-message').addClass('activate-now button-primary').text(tourficAdminParams.activating);
                     current.unbind(e);
                     current[0].trigger("click");
                 });
@@ -180,7 +180,7 @@
         $('.tf-go-docs').parent().attr('target', '_blank');
 
         //pricing link open in new tab
-        $('#toplevel_page_tf_settings a[href*="tourfic.com/pricing"]').attr('target', '_blank');
+        $('#toplevel_page_tourfic_settings a[href*="tourfic.com/pricing"]').attr('target', '_blank');
 
         /*
         * Author @Jahid
@@ -193,10 +193,10 @@
                 $("#tf-booking-status-loader").addClass('show');
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_ticket_status_change',
-                        _ajax_nonce: tf_admin_params.tf_nonce,
+                        _ajax_nonce: tourficAdminParams.tf_nonce,
                         status: "check in",
                         order_unique_id: order_unique_id,
                     },
@@ -209,10 +209,10 @@
                 $("#tf-booking-status-loader").addClass('show');
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_ticket_status_change',
-                        _ajax_nonce: tf_admin_params.tf_nonce,
+                        _ajax_nonce: tourficAdminParams.tf_nonce,
                         status: "",
                         order_unique_id: order_unique_id,
                     },
@@ -231,25 +231,32 @@
         $('.tf-post-data-duplicate').on('click', function(e) {
             e.preventDefault();
             var postID = $(this).data('postid');
-            var postType = $(this).data('posttype');
             var nonce = $(this).data('nonce');
             $('#wpcontent').append('<div class="tf-duplicator-loader"></div>');
             // AJAX request to duplicate post
             $.ajax({
                 type: 'POST',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: 'tourfic_duplicate_post_data',
                     postID: postID,
-                    postType: postType,
                     security: nonce
                 },
                 success: function(response) {
-                    window.location.reload();
+                    if (response.success) {
+                        window.location.reload();
+                        return;
+                    }
+
+                    $('.tf-duplicator-loader').remove();
+                    notyf.error(response.data && response.data.message ? response.data.message : 'Unable to duplicate this post.');
                 },
-                error: function(errorThrown) {
-                    // Handle errors (if any)
-                    console.error('Error duplicating post:', errorThrown);
+                error: function(xhr) {
+                    $('.tf-duplicator-loader').remove();
+                    var message = xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message
+                        ? xhr.responseJSON.data.message
+                        : 'Unable to duplicate this post.';
+                    notyf.error(message);
                 }
             });
         });
@@ -359,10 +366,10 @@
             if (from.length > 0 && to.length > 0) {
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_check_available_hotel',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         from: from,
                         to: to,
                     },
@@ -375,7 +382,7 @@
                         } else {
                             var select2 = $('[name="tf_available_hotels"]');
                             select2.empty();
-                            select2.append('<option value="">' + tf_admin_params.select_hotel + '</option>');
+                            select2.append('<option value="">' + tourficAdminParams.select_hotel + '</option>');
                             $.each(response.data.hotels, function (key, value) {
                                 select2.append('<option value="' + key + '">' + value + '</option>');
                             });
@@ -410,10 +417,10 @@
             if (hotel_id.length > 0) {
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_check_available_room',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         hotel_id: hotel_id,
                         from: from,
                         to: to,
@@ -430,7 +437,7 @@
 
                             select2.removeAttr('disabled');
                             select2.empty();
-                            select2.append('<option value="">' + tf_admin_params.select_room + '</option>');
+                            select2.append('<option value="">' + tourficAdminParams.select_room + '</option>');
                             $.each(response.data.rooms, function (key, value) {
                                 select2.append('<option value="' + key + '">' + value + '</option>');
                             });
@@ -472,10 +479,10 @@
             if (room_id.length > 0) {
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_update_room_fields',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         hotel_id: hotel_id,
                         room_id: room_id,
                         from: from,
@@ -534,7 +541,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -615,10 +622,10 @@
             if (tourId) {
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_tour_date_time_update',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         tour_id: tourId,
                     },
                     beforeSend: function () {
@@ -719,7 +726,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -789,10 +796,10 @@
             if (fromValue.length > 0 && toValue.length > 0) {
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_check_available_apartment',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         from: fromValue,
                         to: toValue,
                         apartment_id: apartment_id
@@ -839,10 +846,10 @@
             if (apartment_id.length > 0) {
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_check_apartment_aditional_fees',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         apartment_id: apartment_id,
                         from: from,
                         to: to,
@@ -914,7 +921,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -1157,7 +1164,7 @@
             formData.append('_ajax_nonce', getBookingNonce());
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -1168,10 +1175,20 @@
                     
                 },
                 success: function (data) {
-                    location.reload();
+                    if (data.success) {
+                        location.reload();
+                        return;
+                    }
+
+					$('.tf-preloader-box').hide();
+					notyf.error(data.data || 'Unable to update traveler details.');
                 },
-                error: function (data) {
-                    console.log(data);
+                error: function (xhr) {
+					$('.tf-preloader-box').hide();
+					let message = xhr.responseJSON && xhr.responseJSON.data
+						? xhr.responseJSON.data
+						: 'Unable to update traveler details.';
+					notyf.error(message);
                 },
 
             });
@@ -1189,7 +1206,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: 'tourfic_checkinout_details_edit',
                     order_id: order_id,
@@ -1224,7 +1241,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: 'tourfic_order_status_edit',
                     order_id: order_id,
@@ -1260,13 +1277,13 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: 'tourfic_order_status_email_resend',
                     order_id: order_id,
                     status: selected_value,
                     id : db_id,
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: getBookingNonce()
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -1276,10 +1293,19 @@
                 },
                 success: function (data) {
                     $('.tf-preloader-box').hide();
-                    notyf.success("Email Sucessfully Resend!");
+                    if (data.success) {
+                        notyf.success("Email successfully resent!");
+                        return;
+                    }
+
+                    notyf.error(data.data || "Unable to resend this email.");
                 },
-                error: function (data) {
-                    console.log(data);
+                error: function (xhr) {
+                    $('.tf-preloader-box').hide();
+                    let message = xhr.responseJSON && xhr.responseJSON.data
+                        ? xhr.responseJSON.data
+                        : "Unable to resend this email.";
+                    notyf.error(message);
                 },
 
             });
@@ -1327,7 +1353,7 @@
             if(order_list.length > 0 && bulk_action!==''){
                 $.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_order_bulk_action_edit',
                         orders: order_list,
@@ -1434,7 +1460,7 @@
             $('.tf-calendar-popup-box').html('');
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: 'tourfic_booking_details_popup',
                     id: $this.attr('data-id'),
@@ -1467,7 +1493,7 @@
             
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: 'tourfic_booking_calendar_filter',
                     ostatus: ostatus,
@@ -1594,13 +1620,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             $.ajax({
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 type: 'POST',
                 data: {
                     action: 'tourfic_enquiry_bulk_action',
                     selected_items: selected_items,
                     bulk_action: actions,
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: tourficAdminParams.tf_nonce
                 },
                 beforeSend: function() {
                     $this.addClass("loading");
@@ -1626,14 +1652,14 @@ document.addEventListener('DOMContentLoaded', function() {
             let filter = $(".tf-filter-mail-option-enquiry ").val();
 
             $.ajax({
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 type: 'POST',
                 data: {
                     action: 'tourfic_enquiry_filter_post',
                     post_id: post_id,
                     post_type: post_type,
                     filter: filter,
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: tourficAdminParams.tf_nonce
                 },
                 beforeSend: function() {
                     $("#tf-enquiry-status-loader").addClass("show");
@@ -1663,14 +1689,14 @@ document.addEventListener('DOMContentLoaded', function() {
             let post_type = $(".enquiry-post-type").val();
 
             $.ajax({
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 type: 'POST',
                 data: {
                     action: 'tourfic_enquiry_filter_mail',
                     filter: filter,
                     post_id : post_id,
                     post_type: post_type,
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: tourficAdminParams.tf_nonce
                 },
                 beforeSend: function() {
                     $("#tf-enquiry-status-loader").addClass("show");
@@ -1699,7 +1725,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let enquiry_id = $this.find(".tf-enquiry-reply-id").val();
 
             $.ajax({
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 type: 'POST',
                 data: {
                     action: 'tourfic_enquiry_reply_email',
@@ -1709,7 +1735,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     subject: subject,
                     post_id: post_id,
                     enquiry_id: enquiry_id,
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: tourficAdminParams.tf_nonce
                 },
                 beforeSend: function() {
                     $("#tf-enquiry-status-loader").addClass("show");
@@ -1744,7 +1770,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if( $.inArray(post_id, values) !== -1 ) {
                 $('.tf-filter-hotel-name').val(post_id).trigger('change');
             } else {
-                notyf.error(tf_admin_params.no_data_found_with_id);
+                notyf.error(tourficAdminParams.no_data_found_with_id);
             }
             
         })
@@ -1808,8 +1834,8 @@ const {select, dispatch} = wp.data;
 
 function TfPrePublishCheck() {
     let lockPost = false;
-    tf_admin_params.error = false;
-    tf_admin_params.messages = [];
+    tourficAdminParams.error = false;
+    tourficAdminParams.messages = [];
 
     let tf_post_pre_save = Object.assign({}, select('core/editor').getCurrentPost(), select('core/editor').getPostEdits());
 
@@ -1819,7 +1845,7 @@ function TfPrePublishCheck() {
         });
     }
 
-    jQuery.each(tf_admin_params.taxonomies, function (taxonomy, config) {
+    jQuery.each(tourficAdminParams.taxonomies, function (taxonomy, config) {
         if (tf_post_pre_save.hasOwnProperty(taxonomy) && tf_post_pre_save[taxonomy].length === 0) {
             dispatch('core/notices').createNotice(
                 'error',
@@ -1829,7 +1855,7 @@ function TfPrePublishCheck() {
                     isDismissible: false
                 }
             );
-            tf_admin_params.error = lockPost = true;
+            tourficAdminParams.error = lockPost = true;
         }else{
             dispatch('core/notices').removeNotice('tfNotice_' + taxonomy);
         }
@@ -1866,23 +1892,23 @@ jQuery(function ($) {
 	});
 
     function tf_event_handler(e) {
-        tf_admin_params.error = false;
-        $.each(tf_admin_params.taxonomies, function (taxonomy, config) {
+        tourficAdminParams.error = false;
+        $.each(tourficAdminParams.taxonomies, function (taxonomy, config) {
             if (config.type == 'hierarchical') {
                 if ($('#taxonomy-' + taxonomy + ' input:checked').length == 0) {
                     //alert(config.message);
 					notyf.error(config.message);
-                    tf_admin_params.error = true;
+                    tourficAdminParams.error = true;
                 }
             } else {
                 if ($('#tagsdiv-' + taxonomy + ' .tagchecklist').is(':empty')) {
                     //alert(config.message);
                     notyf.error(config.message);
-                    tf_admin_params.error = true;
+                    tourficAdminParams.error = true;
                 }
             }
         });
-        if (tf_admin_params.error) {
+        if (tourficAdminParams.error) {
             e.stopImmediatePropagation();
             return false;
         } else {
@@ -1935,15 +1961,15 @@ jQuery(function ($) {
             },
         });
 
-        //if body has class .tourfic-settings_page_tf-setup-wizard then add background-color: #ecf5ff; to html
-        if ($('body').hasClass('tourfic-settings_page_tf-setup-wizard')) {
+        //if body has class .tourfic-settings_page_tourfic-setup-wizard then add background-color: #ecf5ff; to html
+        if ($('body').hasClass('tourfic-settings_page_tourfic-setup-wizard')) {
             $('html').css('padding', '0');
         }
 
         $(document).on('click', '.tf-setup-start-btn', function (e) {
             e.preventDefault();
             $('.tf-welcome-step').hide();
-            if(tf_admin_params.is_woo_not_active) {
+            if(tourficAdminParams.is_woo_not_active) {
                 $('.tf-setup-step-1').fadeIn(600);
             } else {
                 $('.tf-setup-step-2').fadeIn(600);
@@ -1962,7 +1988,7 @@ jQuery(function ($) {
                 let services = $('input[name="tf-services[]"]:checked').length;
 
                 if (!services) {
-                    alert(tf_admin_params.i18n.no_services_selected);
+                    alert(tourficAdminParams.i18n.no_services_selected);
                     return false;
                 }
 
@@ -2032,7 +2058,7 @@ jQuery(function ($) {
             e.preventDefault();
             let step = $(this).closest('.tf-setup-step-container').data('step');
             let prevStep = step - 1;
-            if(step === 2 && !tf_admin_params.is_woo_not_active) {
+            if(step === 2 && !tourficAdminParams.is_woo_not_active) {
                 $('.tf-setup-step-2').fadeOut(300, function () {
                     $('.tf-setup-step-0').fadeIn(300);
                 });
@@ -2063,7 +2089,7 @@ jQuery(function ($) {
             formData.append('action', 'tourfic_setup_wizard_submit');
 
             $.ajax({
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 type: 'POST',
                 data: formData,
                 processData: false,
@@ -2093,12 +2119,12 @@ jQuery(function ($) {
         * Travelfic Theme Installing
         * @author: Jahid
         */
-        let travelfic_toolkit_active_plugins = tf_admin_params.is_travelfic_toolkit_active;
+        let travelfic_toolkit_active_plugins = tourficAdminParams.is_travelfic_toolkit_active;
 
         $(document).on('click', '.tf-setup-travelfic-theme-btn', function (e) {
             e.preventDefault();
             
-            if(tf_admin_params.current_active_theme && "travelfic"!=tf_admin_params.current_active_theme && "ultimate-hotel-booking"!=tf_admin_params.current_active_theme && "bricks"!=tf_admin_params.current_active_theme){
+            if(tourficAdminParams.current_active_theme && "travelfic"!=tourficAdminParams.current_active_theme && "ultimate-hotel-booking"!=tourficAdminParams.current_active_theme && "bricks"!=tourficAdminParams.current_active_theme){
                 let theme_slug = $('.tf-template-selection input[name="tf_theme_select"]:checked').val();
 
                 // Bricks is a premium theme (already installed), skip wp.org install and activate directly
@@ -2118,11 +2144,11 @@ jQuery(function ($) {
                 $('.tf-setup-travelfic-theme-btn').addClass('tf-btn-loading');
                 var data = {
                     action: "tourfic_theme_installing",
-                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    _ajax_nonce: tourficAdminParams.tf_nonce,
                     slug: theme_slug,
                 };
                 // Installing Function
-                jQuery.post(tf_admin_params.ajax_url, data, function (response) {
+                jQuery.post(tourficAdminParams.ajax_url, data, function (response) {
                     $('.tf-setup-travelfic-theme-active').trigger("click");
                 })
             }else{
@@ -2153,17 +2179,17 @@ jQuery(function ($) {
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: "tourfic_setup_travelfic_theme_active",
-                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    _ajax_nonce: tourficAdminParams.tf_nonce,
                     slug: theme_slug,
                 },
                 success: function(response) {
                     if ($.inArray("travelfic-toolkit", travelfic_toolkit_active_plugins) !== -1) {
                         $('.tf-setup-travelfic-toolkit-btn').trigger("click");
                     }else{
-                        window.location.replace(tf_admin_params.toolkit_page_url);
+                        window.location.replace(tourficAdminParams.toolkit_page_url);
                     }
                 },
                 error: function(error) {
@@ -2188,15 +2214,15 @@ jQuery(function ($) {
 
                 var data = {
                     action: "tourfic_travelfic_toolkit_installing",
-                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    _ajax_nonce: tourficAdminParams.tf_nonce,
                     slug: plugin_slug,
                 };
                 // Installing Function
-                jQuery.post(tf_admin_params.ajax_url, data, function (response) {
+                jQuery.post(tourficAdminParams.ajax_url, data, function (response) {
                     $('.tf-setup-travelfic-toolkit-active').trigger("click");
                 })
             }else{
-                window.location.replace(tf_admin_params.toolkit_page_url);
+                window.location.replace(tourficAdminParams.toolkit_page_url);
             }
         });
 
@@ -2212,14 +2238,14 @@ jQuery(function ($) {
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: "tourfic_travelfic_toolkit_activate",
-                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    _ajax_nonce: tourficAdminParams.tf_nonce,
                     slug: plugin_slug,
                 },
                 success: function(response) {
-                    window.location.replace(tf_admin_params.toolkit_page_url);
+                    window.location.replace(tourficAdminParams.toolkit_page_url);
                 },
                 error: function(error) {
                     
@@ -2237,18 +2263,18 @@ jQuery(function ($) {
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: "tourfic_ajax_install_woo",
-                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    _ajax_nonce: tourficAdminParams.tf_nonce,
                     slug: 'woocommerce',
                 },
                 beforeSend: function () {
-                    btn.text(tf_admin_params.installing)
+                    btn.text(tourficAdminParams.installing)
                     btn.addClass('tf-btn-loading');
                 },
                 success: function(response) {
-                    btn.text(tf_admin_params.activating);
+                    btn.text(tourficAdminParams.activating);
                     $('.tf-active-woo-btn').trigger("click");
                 },
                 error: function(error) {
@@ -2267,14 +2293,14 @@ jQuery(function ($) {
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: "tourfic_ajax_activate_woo",
-                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    _ajax_nonce: tourficAdminParams.tf_nonce,
                     slug: 'woocommerce',
                 },
                 beforeSend: function () {
-                    btn.text(tf_admin_params.activating)
+                    btn.text(tourficAdminParams.activating)
                     btn.addClass('tf-btn-loading');
                 },
                 success: function(response) {
@@ -2300,7 +2326,7 @@ jQuery(function ($) {
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 jQuery(function($) {
-	const config = window.tfApiDocs || {};
+	const config = window.tourficApiDocs || {};
 	const i18n = config.i18n || {};
 	const $list = $('#tf-api-keys-container');
 
@@ -2620,7 +2646,7 @@ jQuery(function($) {
             let query = window.location.search;
 
             if (query.indexOf('dashboard') > -1) {
-                let submenu = $("#toplevel_page_tf_settings").find(".wp-submenu");
+                let submenu = $("#toplevel_page_tourfic_settings").find(".wp-submenu");
                 submenu.find("a").filter(function (a, e) {
                     return e.href.indexOf(query) > -1;
                 }).parent().addClass("current");
@@ -2664,7 +2690,7 @@ jQuery(function($) {
 
             $(".tf-admin-tab").removeClass('active');
 
-            let submenu = $("#toplevel_page_tf_settings").find(".wp-submenu");
+            let submenu = $("#toplevel_page_tourfic_settings").find(".wp-submenu");
             submenu.find("a").filter(function (a, e) {
                 let slug = e.hash.replace('#tab=', '');
                 return tabId === slug || parentTabId === slug;
@@ -2704,7 +2730,7 @@ jQuery(function($) {
                         dateFormat: format,
                         minDate: minDate,
                         altInput: true,
-                        altFormat: tf_options.tf_admin_date_format,
+                        altFormat: tourficOptions.tf_admin_date_format,
                         onChange: function (selectedDates, dateStr, instance) {
                             endDate.set('minDate', dateStr);
                         }
@@ -2713,7 +2739,7 @@ jQuery(function($) {
                         dateFormat: format,
                         minDate: minDate,
                         altInput: true,
-                        altFormat: tf_options.tf_admin_date_format,
+                        altFormat: tourficOptions.tf_admin_date_format,
                         onChange: function (selectedDates, dateStr, instance) {
                             startDate.set('maxDate', dateStr);
                         }
@@ -2723,7 +2749,7 @@ jQuery(function($) {
                         dateFormat: format,
                         minDate: minDate,
                         altInput: true,
-                        altFormat: tf_options.tf_admin_date_format,
+                        altFormat: tourficOptions.tf_admin_date_format,
                         mode: multiple ? 'multiple' : 'single',
                     });
                 }
@@ -2969,11 +2995,11 @@ jQuery(function($) {
             let iconList = $('.tf-icon-tab-pane.active .tf-icon-list');
 
             $.ajax({
-                url: tf_options.ajax_url,
+                url: tourficOptions.ajax_url,
                 type: 'POST',
                 data: {
                     action: 'tourfic_icon_search',
-                    _nonce: tf_admin_params.tf_nonce,
+                    _nonce: tourficAdminParams.tf_nonce,
                     search: searchVal,
                     type: type,
                 },
@@ -3013,11 +3039,11 @@ jQuery(function($) {
                 if (iconList.scrollTop() >= iconListBottom && !loading && startIndex < max) {
                     loading = true;
                     $.ajax({
-                        url: tf_options.ajax_url,
+                        url: tourficOptions.ajax_url,
                         type: 'POST',
                         data: {
                             action: 'tourfic_load_more_icons',
-                            _nonce: tf_admin_params.tf_nonce,
+                            _nonce: tourficAdminParams.tf_nonce,
                             start_index: startIndex,
                             type: type,
                             search: searchVal,
@@ -3063,8 +3089,8 @@ jQuery(function($) {
 
             $.confirm({
                 icon: 'fa fa-warning',
-                title: tf_options.swal_reset_title_text,
-                content: tf_options.swal_reset_other_text,
+                title: tourficOptions.swal_reset_title_text,
+                content: tourficOptions.swal_reset_other_text,
                 type: 'red',
                 typeAnimated: false,
                 boxWidth: '500px',
@@ -3076,15 +3102,15 @@ jQuery(function($) {
                 theme: 'modern',
                 buttons: {
                     confirm: {
-                        text: tf_options.swal_reset_btn_text,
+                        text: tourficOptions.swal_reset_btn_text,
                         btnClass: 'btn-blue',
                         action: function () {
                             $.ajax({
-                                url: tf_options.ajax_url,
+                                url: tourficOptions.ajax_url,
                                 type: 'POST',
                                 data: {
                                     action: 'tourfic_options_reset',
-                                    tf_option_nonce: tf_admin_params.tf_nonce,
+                                    tf_option_nonce: tourficAdminParams.tf_nonce,
                                 },
                                 beforeSend: function () {
                                     $('.tf-setting-save-btn .tf-reset-btn').addClass('tf-btn-loading');
@@ -3111,7 +3137,7 @@ jQuery(function($) {
                         }
                     },
                     cancel: {
-                        text: tf_options.swal_reset_cancel_btn_text,
+                        text: tourficOptions.swal_reset_cancel_btn_text,
                         btnClass: 'btn-red',
                     }
                 }
@@ -3126,11 +3152,11 @@ jQuery(function($) {
                 div.classList.add('tf-search-results');
                 if (value.length >= 3) {
                     $.ajax({
-                        url: tf_options.ajax_url,
+                        url: tourficOptions.ajax_url,
                         type: 'POST',
                         data: {
                             action: 'tourfic_search_settings_autocomplete',
-                            tf_option_nonce: tf_admin_params.tf_nonce,
+                            tf_option_nonce: tourficAdminParams.tf_nonce,
                             search: value,
                         },
                         success: function (response) {
@@ -3173,7 +3199,7 @@ jQuery(function($) {
                                 if (notfound == 1) {
                                     let not_found = document.createElement("p");
                                     not_found.classList.add('tf-search-not-found');
-                                    not_found.innerHTML = tf_admin_params.setting_search_no_result;
+                                    not_found.innerHTML = tourficAdminParams.setting_search_no_result;
                                     resultDiv.append(not_found);
                                 }
                                 $(".tf-setting-search").append(div);
@@ -3231,7 +3257,7 @@ jQuery(function($) {
             if (typeof data.get('tf_import_option') !== "undefined" && data.get('tf_import_option').trim() != '') {
 
                 //  confirm data before send
-                if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {
+                if (!confirm(tourficOptions.tf_export_import_msg.import_confirm)) {
                     return;
                 }
 
@@ -3240,7 +3266,7 @@ jQuery(function($) {
             data.append('action', 'tourfic_options_save');
 
             $.ajax({
-                url: tf_options.ajax_url,
+                url: tourficOptions.ajax_url,
                 type: 'POST',
                 data: data,
                 processData: false,
@@ -3276,7 +3302,7 @@ jQuery(function($) {
                     //if error msg contain max_input_vars then show a proper msg
                     if (error['responseText'].includes('max_input_vars')) {
                         notyf.error({
-                            message: tf_admin_params.max_input_vars_notice,
+                            message: tourficAdminParams.max_input_vars_notice,
                             duration: 15000,
                             dismissible: true
                         });
@@ -3378,17 +3404,16 @@ jQuery(function($) {
                 var termId = $(e.params.args.originalEvent.target).data("id");
 
                 $.ajax({
-                    url: tf_options.ajax_url,
+                    url: tourficOptions.ajax_url,
                     method: 'POST',
                     data: {
                         action: 'tourfic_delete_category_data',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.delete_category_nonce,
                         term_id: termId,
                         categoryName: categoryName
                     },
                     success: function (response) {
-                        var data = JSON.parse(response);
-                        if (data.success) {
+                        if (response.success) {
                             // Remove the option and trigger the change event
                             let $selectField = $('#' + categorySelect);
 
@@ -3398,9 +3423,13 @@ jQuery(function($) {
                             // Close the Select2 dropdown
                             $selectField.select2('close');
 
-                        } else {
-
                         }
+                    },
+                    error: function (xhr) {
+                        var message = xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message
+                            ? xhr.responseJSON.data.message
+                            : 'Unable to delete this term.';
+                        notyf.error(message);
                     }
                 });
             }
@@ -3450,15 +3479,15 @@ jQuery(function($) {
                         var zone = moment(start).format("Z");
                         zone = zone.split(":");
                         zone = "" + parseInt(zone[0]) + ":00";
-                        var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
-                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        var check_in = moment(start).utcOffset(zone).format(String(tourficOptions.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tourficOptions.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
                         setRoomCheckInOut(check_in, check_out, self.roomCalData);
                     }
                 },
                 events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
                     let requestData = {
                         action: "tourfic_get_hotel_room_availability",
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         new_post: $(self.container).find('[name="new_post"]').val(),
                         room_id: $(self.container).find('[name="room_id"]').val(),
                         avail_date: $(self.container).find('.avail_date').val(),
@@ -3466,7 +3495,7 @@ jQuery(function($) {
                     $(document).trigger('tourfic:room-availability:prepare-fetch', [requestData, self.roomCalData]);
 
                     $.ajax({
-                        url: tf_options.ajax_url,
+                        url: tourficOptions.ajax_url,
                         dataType: "json",
                         type: "POST",
                         data: requestData,
@@ -3498,12 +3527,12 @@ jQuery(function($) {
                     return { domNodes: [eventTitleElement] };
                 },
                 eventClick: function ({ event, el, jsEvent, view }) {
-                    let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
-                        .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    let startTime = moment(event.start, String(tourficOptions.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                        .format(String(tourficOptions.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
                     let endTime;
                     if (event.end) {
-                        endTime = moment(event.end, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
-                            .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                        endTime = moment(event.end, String(tourficOptions.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                            .format(String(tourficOptions.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
                     } else {
                         endTime = startTime;
                     }
@@ -3557,20 +3586,20 @@ jQuery(function($) {
 
             // Re-initialize flatpickr instances
             let checkIn = $(roomCalData).find('[name="tf_room_check_in"]').flatpickr({
-                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                dateFormat: tourficOptions.tf_admin_date_format || 'MM/DD/YYYY',
                 minDate: 'today',
                 altInput: true,
-                altFormat: tf_options.tf_admin_date_format,
+                altFormat: tourficOptions.tf_admin_date_format,
                 onChange: function (selectedDates, dateStr, instance) {
                     if (checkOut) checkOut.set('minDate', dateStr);
                 }
             });
 
             let checkOut = $(roomCalData).find('[name="tf_room_check_out"]').flatpickr({
-                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                dateFormat: tourficOptions.tf_admin_date_format || 'MM/DD/YYYY',
                 minDate: 'today',
                 altInput: true,
-                altFormat: tf_options.tf_admin_date_format,
+                altFormat: tourficOptions.tf_admin_date_format,
                 onChange: function (selectedDates, dateStr, instance) {
                     if (checkIn) checkIn.set('maxDate', dateStr);
                 }
@@ -3595,20 +3624,20 @@ jQuery(function($) {
 
         $('.tf-room-cal-wrap').each(function (index, el) {
             let checkIn = $(el).find('[name="tf_room_check_in"]').flatpickr({
-                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                dateFormat: tourficOptions.tf_admin_date_format || 'MM/DD/YYYY',
                 minDate: 'today',
                 altInput: true,
-                altFormat: tf_options.tf_admin_date_format,
+                altFormat: tourficOptions.tf_admin_date_format,
                 onChange: function (selectedDates, dateStr, instance) {
                     checkOut.set('minDate', dateStr);
                 }
             });
 
             let checkOut = $(el).find('[name="tf_room_check_out"]').flatpickr({
-                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                dateFormat: tourficOptions.tf_admin_date_format || 'MM/DD/YYYY',
                 minDate: 'today',
                 altInput: true,
-                altFormat: tf_options.tf_admin_date_format,
+                altFormat: tourficOptions.tf_admin_date_format,
                 onChange: function (selectedDates, dateStr, instance) {
                     checkIn.set('maxDate', dateStr);
                 }
@@ -3624,12 +3653,12 @@ jQuery(function($) {
             let data = $('input, select', container.find('.tf-room-cal-field')).serializeArray();
             let avail_date = container.find('.avail_date');
             data.push({ name: 'action', value: 'tourfic_add_hotel_room_availability' });
-            data.push({ name: '_nonce', value: tf_admin_params.tf_nonce });
+            data.push({ name: '_nonce', value: tourficAdminParams.tf_nonce });
             data.push({ name: 'avail_date', value: avail_date.val() });
             $(document).trigger('tourfic:room-availability:prepare-request', [data, container]);
 
             $.ajax({
-                url: tf_options.ajax_url,
+                url: tourficOptions.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
@@ -3718,15 +3747,15 @@ jQuery(function($) {
                         var zone = moment(start).format("Z");
                         zone = zone.split(":");
                         zone = "" + parseInt(zone[0]) + ":00";
-                        var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
-                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        var check_in = moment(start).utcOffset(zone).format(String(tourficOptions.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tourficOptions.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
                         setAptCheckInOut(check_in, check_out, self.apartmentCalData);
                     }
                 },
                 events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
                     let requestData = {
                         action: "tourfic_get_apartment_availability",
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         new_post: $(self.container).find('[name="new_post"]').val(),
                         apartment_id: $(self.container).find('[name="apartment_id"]').val(),
                         apt_availability: $(self.container).find('.apt_availability').val(),
@@ -3734,7 +3763,7 @@ jQuery(function($) {
                     $(document).trigger('tourfic:apartment-availability:prepare-fetch', [requestData, self.apartmentCalData]);
 
                     $.ajax({
-                        url: tf_options.ajax_url,
+                        url: tourficOptions.ajax_url,
                         dataType: "json",
                         type: "POST",
                         data: requestData,
@@ -3763,12 +3792,12 @@ jQuery(function($) {
                     return { domNodes: [eventTitleElement] };
                 },
                 eventClick: function ({ event, el, jsEvent, view }) {
-                    let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
-                        .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    let startTime = moment(event.start, String(tourficOptions.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                        .format(String(tourficOptions.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
                     let endTime;
                     if (event.end) {
-                        endTime = moment(event.end, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
-                            .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                        endTime = moment(event.end, String(tourficOptions.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                            .format(String(tourficOptions.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
                     } else {
                         endTime = startTime;
                     }
@@ -3822,20 +3851,20 @@ jQuery(function($) {
 
             // Re-initialize flatpickr instances
             let checkIn = $(apartmentCalData).find('[name="tf_apt_check_in"]').flatpickr({
-                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                dateFormat: tourficOptions.tf_admin_date_format || 'MM/DD/YYYY',
                 minDate: 'today',
                 altInput: true,
-                altFormat: tf_options.tf_admin_date_format,
+                altFormat: tourficOptions.tf_admin_date_format,
                 onChange: function (selectedDates, dateStr, instance) {
                     if (checkOut) checkOut.set('minDate', dateStr);
                 }
             });
 
             let checkOut = $(apartmentCalData).find('[name="tf_apt_check_out"]').flatpickr({
-                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                dateFormat: tourficOptions.tf_admin_date_format || 'MM/DD/YYYY',
                 minDate: 'today',
                 altInput: true,
-                altFormat: tf_options.tf_admin_date_format,
+                altFormat: tourficOptions.tf_admin_date_format,
                 onChange: function (selectedDates, dateStr, instance) {
                     if (checkIn) checkIn.set('maxDate', dateStr);
                 }
@@ -3848,20 +3877,20 @@ jQuery(function($) {
                 apt.init();
 
                 let checkIn = $(el).find('[name="tf_apt_check_in"]').flatpickr({
-                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                    dateFormat: tourficOptions.tf_admin_date_format || 'MM/DD/YYYY',
                     minDate: 'today',
                     altInput: true,
-                    altFormat: tf_options.tf_admin_date_format,
+                    altFormat: tourficOptions.tf_admin_date_format,
                     onChange: function (selectedDates, dateStr, instance) {
                         checkOut.set('minDate', dateStr);
                     }
                 });
 
                 let checkOut = $(el).find('[name="tf_apt_check_out"]').flatpickr({
-                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                    dateFormat: tourficOptions.tf_admin_date_format || 'MM/DD/YYYY',
                     minDate: 'today',
                     altInput: true,
-                    altFormat: tf_options.tf_admin_date_format,
+                    altFormat: tourficOptions.tf_admin_date_format,
                     onChange: function (selectedDates, dateStr, instance) {
                         checkIn.set('maxDate', dateStr);
                     }
@@ -3880,12 +3909,12 @@ jQuery(function($) {
             let data = $('input, select', container.find('.tf-apt-cal-field')).serializeArray();
             let aptAvailability = container.find('.apt_availability');
             data.push({ name: 'action', value: 'tourfic_add_apartment_availability' });
-            data.push({ name: '_nonce', value: tf_admin_params.tf_nonce });
+            data.push({ name: '_nonce', value: tourficAdminParams.tf_nonce });
             data.push({ name: 'apt_availability', value: aptAvailability.val() });
             $(document).trigger('tourfic:apartment-availability:prepare-request', [data, container]);
 
             $.ajax({
-                url: tf_options.ajax_url,
+                url: tourficOptions.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
@@ -3959,15 +3988,15 @@ jQuery(function($) {
                         var zone = moment(start).format("Z");
                         zone = zone.split(":");
                         zone = "" + parseInt(zone[0]) + ":00";
-                        var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
-                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        var check_in = moment(start).utcOffset(zone).format(String(tourficOptions.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tourficOptions.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
                         setTourCheckInOut(check_in, check_out, self.tourCalData);
                     }
                 },
                 events: function ({ start, end, startStr, endStr, timeZone }, successCallback, failureCallback) {
                     let requestData = {
                         action: "tourfic_get_tour_availability",
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         new_post: $(self.container).find('[name="new_post"]').val(),
                         tour_id: $(self.container).find('[name="tour_id"]').val(),
                         tour_availability: $(self.container).find('.tour_availability').val(),
@@ -3975,7 +4004,7 @@ jQuery(function($) {
                     $(document).trigger('tourfic:tour-availability:prepare-fetch', [requestData, self.tourCalData]);
 
                     $.ajax({
-                        url: tf_options.ajax_url,
+                        url: tourficOptions.ajax_url,
                         dataType: "json",
                         type: "POST",
                         data: requestData,
@@ -4011,11 +4040,11 @@ jQuery(function($) {
                     }
                 },
                 eventClick: function ({ event }) {
-                    let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
-                        .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    let startTime = moment(event.start, String(tourficOptions.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                        .format(String(tourficOptions.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
                     let endTime = event.end
-                        ? moment(event.end, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase()).subtract(1, 'days')
-                            .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase())
+                        ? moment(event.end, String(tourficOptions.tf_admin_date_format || "MM/DD/YYYY").toUpperCase()).subtract(1, 'days')
+                            .format(String(tourficOptions.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase())
                         : startTime;
 
                     setTourCheckInOut(startTime, endTime, self.tourCalData);
@@ -4146,20 +4175,20 @@ jQuery(function($) {
 
             // Re-initialize flatpickr instances
             let checkIn = $(tourCalData).find('[name="tf_tour_check_in"]').flatpickr({
-                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                dateFormat: tourficOptions.tf_admin_date_format || 'MM/DD/YYYY',
                 minDate: 'today',
                 altInput: true,
-                altFormat: tf_options.tf_admin_date_format,
+                altFormat: tourficOptions.tf_admin_date_format,
                 onChange: function (selectedDates, dateStr, instance) {
                     if (checkOut) checkOut.set('minDate', dateStr);
                 }
             });
 
             let checkOut = $(tourCalData).find('[name="tf_tour_check_out"]').flatpickr({
-                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                dateFormat: tourficOptions.tf_admin_date_format || 'MM/DD/YYYY',
                 minDate: 'today',
                 altInput: true,
-                altFormat: tf_options.tf_admin_date_format,
+                altFormat: tourficOptions.tf_admin_date_format,
                 onChange: function (selectedDates, dateStr, instance) {
                     if (checkIn) checkIn.set('maxDate', dateStr);
                 }
@@ -4173,20 +4202,20 @@ jQuery(function($) {
                 tour.init();
 
                 let checkIn = $(el).find('[name="tf_tour_check_in"]').flatpickr({
-                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                    dateFormat: tourficOptions.tf_admin_date_format || 'MM/DD/YYYY',
                     minDate: 'today',
                     altInput: true,
-                    altFormat: tf_options.tf_admin_date_format,
+                    altFormat: tourficOptions.tf_admin_date_format,
                     onChange: function (selectedDates, dateStr, instance) {
                         checkOut.set('minDate', dateStr);
                     }
                 });
 
                 let checkOut = $(el).find('[name="tf_tour_check_out"]').flatpickr({
-                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                    dateFormat: tourficOptions.tf_admin_date_format || 'MM/DD/YYYY',
                     minDate: 'today',
                     altInput: true,
-                    altFormat: tf_options.tf_admin_date_format,
+                    altFormat: tourficOptions.tf_admin_date_format,
                     onChange: function (selectedDates, dateStr, instance) {
                         checkIn.set('maxDate', dateStr);
                     }
@@ -4207,12 +4236,12 @@ jQuery(function($) {
 
             let tourAvailability = container.find('.tour_availability');
             data.push({ name: 'action', value: 'tourfic_add_tour_availability' });
-            data.push({ name: '_nonce', value: tf_admin_params.tf_nonce });
+            data.push({ name: '_nonce', value: tourficAdminParams.tf_nonce });
             data.push({ name: 'tour_availability', value: tourAvailability.val() });
             $(document).trigger('tourfic:tour-availability:prepare-request', [data, container]);
 
             $.ajax({
-                url: tf_options.ajax_url,
+                url: tourficOptions.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
@@ -4292,11 +4321,11 @@ jQuery(function($) {
             let cal = container.find('.tf-tour-cal');
             let tourAvailability = container.find('.tour_availability');
             $.ajax({
-                url: tf_options.ajax_url,
+                url: tourficOptions.ajax_url,
                 type: 'POST',
                 data: {
                     'action': 'tourfic_reset_tour_availability',
-                    '_nonce': tf_admin_params.tf_nonce,
+                    '_nonce': tourficAdminParams.tf_nonce,
                     'tour_id': $('#post_ID').val()
                 },
                 beforeSend: function () {
@@ -4347,11 +4376,11 @@ jQuery(function($) {
             let cal = container.find('.tf-room-cal');
             let roomAvailability = container.find('avail_date');
             $.ajax({
-                url: tf_options.ajax_url,
+                url: tourficOptions.ajax_url,
                 type: 'POST',
                 data: {
                     'action': 'tourfic_reset_room_availability',
-                    '_nonce': tf_admin_params.tf_nonce,
+                    '_nonce': tourficAdminParams.tf_nonce,
                     'room_id': $('#post_ID').val()
                 },
                 beforeSend: function () {
@@ -4397,11 +4426,11 @@ jQuery(function($) {
             let cal = container.find('.tf-apt-cal');
             let aptAvailability = container.find('.apt_availability');
             $.ajax({
-                url: tf_options.ajax_url,
+                url: tourficOptions.ajax_url,
                 type: 'POST',
                 data: {
                     'action': 'tourfic_reset_apt_availability',
-                    '_nonce': tf_admin_params.tf_nonce,
+                    '_nonce': tourficAdminParams.tf_nonce,
                     'apartment_id': $('#post_ID').val()
                 },
                 beforeSend: function () {
@@ -4968,29 +4997,34 @@ jQuery(function($) {
             let categorySelect = parentDiv.find('#category_select_field_name').val();
 
             $.ajax({
-                url: tf_options.ajax_url,
+                url: tourficOptions.ajax_url,
                 method: 'POST',
                 data: {
                     action: 'tourfic_insert_category_data',
-                    _nonce: tf_admin_params.tf_nonce,
+                    _nonce: tourficAdminParams.insert_category_nonce,
                     categoryName: categoryName,
                     categoryTitle: categoryTitle,
                     parentCategory: parentCategory
                 },
                 success: function (response) {
-                    var data = JSON.parse(response);
-                    if (data.insert_category) {
+                    if (response.success && response.data.insert_category) {
                         // Store to List and Selected
-                        var newOption = new Option(data.insert_category.title, data.insert_category.id, true, true);
+                        var newOption = new Option(response.data.insert_category.title, response.data.insert_category.id, true, true);
                         $('#' + categorySelect).append(newOption).trigger('change');
 
                         // Store to Popup List
-                        var newPopuOption = new Option(data.insert_category.title, data.insert_category.id, false, false);
+                        var newPopuOption = new Option(response.data.insert_category.title, response.data.insert_category.id, false, false);
                         parentDiv.find('#parent_category').append(newPopuOption).trigger('change');
                     }
                     $('.tf-popup-box').hide();
                     parentDiv.find('#category_title').val('');
                     parentDiv.find('#parent_category').val('');
+                },
+                error: function (xhr) {
+                    var message = xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message
+                        ? xhr.responseJSON.data.message
+                        : 'Unable to add this term.';
+                    notyf.error(message);
                 }
             });
 
@@ -5009,11 +5043,11 @@ jQuery(function($) {
 
             if (postTitle) {
                 $.ajax({
-                    url: tf_options.ajax_url,
+                    url: tourficOptions.ajax_url,
                     method: 'POST',
                     data: {
                         action: 'tourfic_insert_post_data',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.insert_post_nonce,
                         postType: postType,
                         postTitle: postTitle,
                         fieldId: fieldId,
@@ -5023,13 +5057,12 @@ jQuery(function($) {
                         $this.addClass('tf-btn-loading');
                     },
                     success: function (response) {
-                        var data = JSON.parse(response);
-                        if (data.insert_post) {
+                        if (response.success && response.data.insert_post) {
                             // Store to List and Selected
-                            var newOption = new Option(data.insert_post.title, data.insert_post.id, true, true);
+                            var newOption = new Option(response.data.insert_post.title, response.data.insert_post.id, true, true);
 
                             if (fieldId == 'tf_rooms') {
-                                $(newOption).attr('data-edit-url', data.insert_post.edit_url);
+                                $(newOption).attr('data-edit-url', response.data.insert_post.edit_url);
                             }
 
                             $('#' + postSelect).append(newOption).trigger('change');
@@ -5037,6 +5070,13 @@ jQuery(function($) {
                         $this.removeClass('tf-btn-loading');
                         $('.tf-popup-box').hide();
                         parentDiv.find('.post_title').val('');
+                    },
+                    error: function (xhr) {
+                        $this.removeClass('tf-btn-loading');
+                        var message = xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message
+                            ? xhr.responseJSON.data.message
+                            : 'Unable to create this room.';
+                        notyf.error(message);
                     }
                 });
             } else {
@@ -5172,7 +5212,7 @@ var frame, gframe;
             $(".tf-fieldset-media-preview").html("");
         });
 
-        if (tf_options.gmaps != "googlemap") {
+        if (tourficOptions.gmaps != "googlemap") {
             $(".tf-field-map").each(function () {
                 var $this = $(this),
                     $map = $this.find('.tf--map-osm'),
@@ -5609,7 +5649,7 @@ const legendSpacingPlugin = {
 (function ($) {
     let tfChart = null;
     $(document).ready(function () {
-        if (tf_options.tf_chart_enable == 1) {
+        if (tourficOptions.tf_chart_enable == 1) {
             var ctx = document.getElementById('tf_months'); // node
             var ctx = document.getElementById('tf_months').getContext('2d'); // 2d context
             var ctx = $('#tf_months'); // jQuery instance
@@ -5622,14 +5662,14 @@ const legendSpacingPlugin = {
             tfChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: tf_options.months,
+                    labels: tourficOptions.months,
                     // Information about the dataset
                     datasets: [{
                         label: "Complete Booking",
                         backgroundColor: '#0185FF',
                         borderColor: '#0185FF',
                         tension: 0.1,
-                        data: tf_options.tf_complete_order,
+                        data: tourficOptions.tf_complete_order,
                         fill: false
                     },
                     {
@@ -5637,7 +5677,7 @@ const legendSpacingPlugin = {
                         borderColor: '#E7000B',
                         backgroundColor: '#E7000B',
                         tension: 0.1,
-                        data: tf_options.tf_cancel_orders,
+                        data: tourficOptions.tf_cancel_orders,
                         fill: false
                     }
                     ]
@@ -5676,10 +5716,10 @@ const legendSpacingPlugin = {
                 var yearTarget = $("#tf-year-report").val();
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_options.ajax_url,
+                    url: tourficOptions.ajax_url,
                     data: {
                         action: 'tourfic_month_reports',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         month: monthTarget,
                         year: yearTarget,
                     },
@@ -5758,10 +5798,10 @@ const legendSpacingPlugin = {
                 $('.tf-order-report').find('iframe').remove();
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_options.ajax_url,
+                    url: tourficOptions.ajax_url,
                     data: {
                         action: 'tourfic_month_reports',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         month: monthTarget,
                         year: yearTarget,
                     },
@@ -5938,14 +5978,14 @@ const legendSpacingPlugin = {
         //     // Get the import data from the textarea
         //     var importData = $('textarea[name="tf_import_option"]').val().trim();
         //     if (importData == '') {
-        //         alert(tf_options.tf_export_import_msg.import_empty);
+        //         alert(tourficOptions.tf_export_import_msg.import_empty);
         //         let importField = $('textarea[name="tf_import_option"]');
         //         importField.focus();
         //         importField.css('border', '1px solid red');
         //         return;
         //     } else {
         //         //confirm data before send
-        //         if (!confirm(tf_options.tf_export_import_msg.import_confirm)) {
+        //         if (!confirm(tourficOptions.tf_export_import_msg.import_confirm)) {
         //             return;
         //         }
         //         $.ajax({
@@ -5953,7 +5993,7 @@ const legendSpacingPlugin = {
         //             method: 'POST',
         //             data: {
         //                 action: 'tf_import',
-        //                 nonce: tf_admin_params.tf_nonce,
+        //                 nonce: tourficAdminParams.tf_nonce,
         //                 tf_import_option: importData,
         //             },
         //             beforeSend: function () {
@@ -5962,7 +6002,7 @@ const legendSpacingPlugin = {
         //             },
         //             success: function (response) {
         //                 if (response.success) {
-        //                     alert(tf_options.tf_export_import_msg.imported);
+        //                     alert(tourficOptions.tf_export_import_msg.imported);
         //                     $('.tf-import-btn').html('Imported');
         //                     window.location.reload();
         //                 } else {
@@ -5977,7 +6017,7 @@ const legendSpacingPlugin = {
             var textarea = $('textarea[name="tf_import_option"]');
             var importData = textarea.val().trim();
             if (importData == '') {
-                alert(tf_options.tf_export_import_msg.import_empty);
+                alert(tourficOptions.tf_export_import_msg.import_empty);
                 let importField = $('textarea[name="tf_import_option"]');
                 importField.focus();
                 importField.css('border', '1px solid red');
@@ -5991,14 +6031,14 @@ const legendSpacingPlugin = {
             event.preventDefault();
 
             $.ajax({
-                url: tf_options.ajax_url,
+                url: tourficOptions.ajax_url,
                 method: 'POST',
                 data: {
                     action: 'tourfic_export_data',
-                    _nonce: tf_admin_params.tf_nonce,
+                    _nonce: tourficAdminParams.tf_nonce,
                 },
                 beforeSend: function () {
-                    $('.tf-export-btn').html(tf_admin_params.setting_exporting_text);
+                    $('.tf-export-btn').html(tourficAdminParams.setting_exporting_text);
                     $('.tf-export-btn').attr('disabled', 'disabled');
                 },
                 success: function (response) {
@@ -6024,12 +6064,12 @@ const legendSpacingPlugin = {
                     } else {
                         notyf.error(obj.message);
                     }
-                    $('.tf-export-btn').html(tf_admin_params.setting_export_text);
+                    $('.tf-export-btn').html(tourficAdminParams.setting_export_text);
                     $('.tf-export-btn').removeAttr('disabled');
                 },
                 error: function (response) {
                     console.log(response);
-                    $('.tf-export-btn').html(tf_admin_params.setting_export_text);
+                    $('.tf-export-btn').html(tourficAdminParams.setting_export_text);
                     $('.tf-export-btn').removeAttr('disabled');
                 }
             });

@@ -70,10 +70,28 @@ abstract Class TF_Booking_Details {
             'tour'      => array( 'post_type' => 'tf_tours', 'page' => 'tourfic_tours_booking' ),
             'hotel'     => array( 'post_type' => 'tf_hotel', 'page' => 'tourfic_hotel_booking' ),
             'apartment' => array( 'post_type' => 'tf_apartment', 'page' => 'tourfic_apartment_booking' ),
-            'car'       => array( 'post_type' => 'tf_carrental', 'page' => 'tf_carrental_booking' ),
+            'car'       => array( 'post_type' => 'tf_carrental', 'page' => 'tourfic_carrental_booking' ),
         );
 
         return isset( $contexts[ $booking_type ] ) ? $contexts[ $booking_type ] : array();
+    }
+
+    /**
+     * Check whether the current user may access this booking screen.
+     *
+     * Record ownership is enforced separately when a booking is read or
+     * changed. Requiring a record here would block vendors from reaching the
+     * list that is subsequently filtered to their own bookings.
+     *
+     * @return bool
+     */
+    protected function tf_current_user_can_access_booking_screen() {
+        $booking_type = isset( $this->booking_args['booking_type'] )
+            ? sanitize_key( $this->booking_args['booking_type'] )
+            : '';
+        $capability   = $this->tf_get_booking_capability( $booking_type );
+
+        return ! empty( $capability ) && current_user_can( $capability );
     }
 
     /**
@@ -164,7 +182,7 @@ abstract Class TF_Booking_Details {
         $booking_type = ! empty( $this->booking_args['booking_type'] ) ? $this->booking_args['booking_type'] : '';
 		$hook_post_type = 0 === strpos( $this->booking_args['post_type'], 'tf_' ) ? substr( $this->booking_args['post_type'], 3 ) : $this->booking_args['post_type'];
 
-        if ( ! $this->tf_current_user_can_manage_booking() ) {
+        if ( ! $this->tf_current_user_can_access_booking_screen() ) {
             wp_die( esc_html__( 'You are not allowed to access this page.', 'tourfic' ), 403 );
         }
 
@@ -205,6 +223,14 @@ abstract Class TF_Booking_Details {
             $tf_payment_perms = isset( $_GET['payment'] ) ? sanitize_key( wp_unslash( $_GET['payment'] ) ) : '';
             $paged            = isset( $_GET['paged'] ) ? max( 1, absint( wp_unslash( $_GET['paged'] ) ) ) : 1;
             $list_view        = isset( $_GET['nonce'] );
+
+            $pagination_filters = array(
+                'checkinout' => $checkinout_perms,
+                'post'       => $tf_post_perms,
+                'order_id'   => $tf_order_perms,
+                'payment'    => $tf_payment_perms,
+                'list_view'  => $list_view,
+            );
 
             $tf_order_filters = array();
             if ( in_array( $checkinout_perms, array( 'in', 'out', 'not' ), true ) ) {
@@ -664,7 +690,7 @@ abstract Class TF_Booking_Details {
                         <th colspan="8">
                             <ul class="tf-booking-details-pagination">
 	                                <?php if ( ! empty( $paged ) && $paged >= 2 ) { ?>
-                                        <li><a href="<?php echo esc_url($this->tf_booking_details_pagination( $paged - 1 )); ?>">
+                                        <li><a href="<?php echo esc_url($this->tf_booking_details_pagination( $paged - 1, $pagination_filters )); ?>">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                                     <path d="M15.8333 10.0001H4.16663M4.16663 10.0001L9.99996 15.8334M4.16663 10.0001L9.99996 4.16675" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round"
                                                         stroke-linejoin="round"/>
@@ -675,18 +701,18 @@ abstract Class TF_Booking_Details {
                                             if ( $i == $paged ) {
                                                 ?>
                                                 <li class="active">
-                                                    <a href="<?php echo esc_url($this->tf_booking_details_pagination( $i )); ?>"><?php echo esc_html($i); ?></a>
+                                                    <a href="<?php echo esc_url($this->tf_booking_details_pagination( $i, $pagination_filters )); ?>"><?php echo esc_html($i); ?></a>
                                                 </li>
                                             <?php } else { ?>
                                                 <li>
-                                                    <a href="<?php echo esc_url($this->tf_booking_details_pagination( $i )); ?>"><?php echo esc_html($i); ?></a>
+                                                    <a href="<?php echo esc_url($this->tf_booking_details_pagination( $i, $pagination_filters )); ?>"><?php echo esc_html($i); ?></a>
                                                 </li>
                                             <?php }
                                         }
                                     }
                                     if ( ! empty( $total_pages ) && ! empty( $paged ) && $paged < $total_pages ) {
                                         ?>
-                                        <li><a href="<?php echo esc_url($this->tf_booking_details_pagination( $paged + 1 )); ?>"><?php esc_html_e( "Next", "tourfic" ); ?>
+                                        <li><a href="<?php echo esc_url($this->tf_booking_details_pagination( $paged + 1, $pagination_filters )); ?>"><?php esc_html_e( "Next", "tourfic" ); ?>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                                     <path d="M4.16669 10.0001H15.8334M15.8334 10.0001L10 4.16675M15.8334 10.0001L10 15.8334" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
@@ -1158,6 +1184,7 @@ abstract Class TF_Booking_Details {
 	                    <div class="customers-order-date details-box">
                         <h4>
                             <?php apply_filters( 'tourfic_' . $this->booking_args["booking_type"] . '_booking_details_visitor_section_title_change',  $tf_order_details->post_type == 'tour' ? esc_html_e("Visitor details", "tourfic") : esc_html_e("Guest details", "tourfic") ); ?>
+							<?php if ( current_user_can( 'manage_options' ) ) { ?>
                             <div class="others-button visitor_edit">
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1166,6 +1193,7 @@ abstract Class TF_Booking_Details {
                                     <?php esc_html_e("Edit", "tourfic"); ?>
                                 </span>
                             </div>
+							<?php } ?>
                         </h4>
 	                        <div class="tf-grid-box tf-visitor-grid-box">
 	                            <?php
@@ -1360,7 +1388,7 @@ abstract Class TF_Booking_Details {
             </div>
         </div>
 
-		<?php if ( "tf_tours" == $this->booking_args['post_type'] || "tf_hotel" == $this->booking_args['post_type'] ) { ?>
+		<?php if ( current_user_can( 'manage_options' ) && ( "tf_tours" == $this->booking_args['post_type'] || "tf_hotel" == $this->booking_args['post_type'] ) ) { ?>
             <div class="visitor-details-edit-form">
                 <form class="visitor-details-edit-popup">
                     <div class="tf-visitor-details-edit-header">
@@ -1548,22 +1576,44 @@ abstract Class TF_Booking_Details {
     abstract function check_in_out_status( $tf_order_details );
     // Pagination Function
 
-    function tf_booking_details_pagination($page){
-        $request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
-        $queryString   = isset( $_SERVER['QUERY_STRING'] ) ? sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ) ) : '';
+    function tf_booking_details_pagination( $page, $filters ) {
+        $query_args = array(
+            'post_type' => sanitize_key( $this->booking_args['post_type'] ),
+            'page'      => sanitize_key( $this->booking_args['menu_slug'] ),
+            'paged'     => max( 1, absint( $page ) ),
+        );
 
-        $currentURL = home_url($request_uri);
-        $BaseURL = strtok($currentURL, '?');
-        
-        parse_str($queryString, $currentURLParams);
-
-        if (array_key_exists('paged', $currentURLParams)) {
-            $currentURLParams['paged'] = $page;
-            $updatedQuery = http_build_query($currentURLParams);
-            return esc_url($updatedUrl = $BaseURL . '?' . $updatedQuery);
-        } else {
-            return esc_url($updatedUrl = $currentURL . '&paged=' . $page);
+        $checkinout = isset( $filters['checkinout'] ) ? sanitize_key( $filters['checkinout'] ) : '';
+        if ( in_array( $checkinout, array( 'in', 'out', 'not' ), true ) ) {
+            $query_args['checkinout'] = $checkinout;
         }
+
+        $post_id = isset( $filters['post'] ) ? absint( $filters['post'] ) : 0;
+        if ( $post_id ) {
+            $query_args['post'] = $post_id;
+        }
+
+        $order_id = isset( $filters['order_id'] ) ? absint( $filters['order_id'] ) : 0;
+        if ( $order_id ) {
+            $query_args['order_id'] = $order_id;
+        }
+
+        $payment = isset( $filters['payment'] ) ? sanitize_key( $filters['payment'] ) : '';
+        if ( in_array( $payment, array( 'processing', 'on-hold', 'completed', 'cancelled', 'refunded' ), true ) ) {
+            $query_args['payment'] = $payment;
+        }
+
+        if ( ! empty( $filters['list_view'] ) ) {
+            $query_args['nonce'] = '1';
+        }
+
+        $pagination_url = add_query_arg( $query_args, admin_url( 'edit.php' ) );
+        $pagination_url = remove_query_arg( '_wpnonce', $pagination_url );
+
+        return wp_nonce_url(
+            $pagination_url,
+            'tourfic_filter_bookings_' . $this->booking_args['menu_slug']
+        );
     }
 
     // Ajax Callback Function
@@ -1633,7 +1683,7 @@ abstract Class TF_Booking_Details {
                 $uploaded_files
             );
             if ( is_wp_error( $tf_visitor_details ) ) {
-                wp_send_json_error( $tf_visitor_details->get_error_message() );
+                wp_send_json_error( $tf_visitor_details->get_error_message(), 400 );
             }
         }
 

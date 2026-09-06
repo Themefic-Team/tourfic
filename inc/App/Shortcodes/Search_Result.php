@@ -21,9 +21,14 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 	protected $shortcode = 'tourfic_search_result';
 
 	function render( $atts, $content = null ) {
+		$search_request = tourfic_get_public_search_request();
+		if ( empty( $search_request ) ) {
+			echo '<h3>' . esc_html__( 'Please submit a Tourfic search form.', 'tourfic' ) . '</h3>';
+			return;
+		}
 
 		// Get post type
-		$post_type = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$post_type = isset( $search_request['type'] ) ? $search_request['type'] : '';
 		if ( empty( $post_type ) ) {
 			echo '<h3>' . esc_html__(" Please select fields from the search form! ", "tourfic") . '</h3>';
 
@@ -37,46 +42,44 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		} elseif($post_type == 'tf_apartment'){
 			$taxonomy = 'apartment_location';
 		}
-		$place        = isset( $_GET['place'] ) ? sanitize_text_field( wp_unslash($_GET['place']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$adults       = isset( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$child        = isset( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$infant       = isset( $_GET['infant'] ) ? sanitize_text_field( wp_unslash($_GET['infant']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$room         = isset( $_GET['room'] ) ? sanitize_text_field( wp_unslash($_GET['room']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$check_in_out = isset( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		//get children ages
-		//$children_ages = isset( $_GET['children_ages'] ) ? sanitize_text_field($_GET['children_ages']) : '';
+		$place        = isset( $search_request['place'] ) ? $search_request['place'] : '';
+		$adults       = isset( $search_request['adults'] ) ? $search_request['adults'] : '';
+		$child        = isset( $search_request['children'] ) ? $search_request['children'] : '';
+		$infant       = isset( $search_request['infant'] ) ? $search_request['infant'] : '';
+		$room         = isset( $search_request['room'] ) ? $search_request['room'] : '';
+		$check_in_out = isset( $search_request['check-in-out-date'] ) ? $search_request['check-in-out-date'] : '';
 
 
 		// Price Range
-		$startprice = isset( $_GET['from'] ) ? absint( sanitize_text_field( wp_unslash($_GET['from']) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$endprice   = isset( $_GET['to'] ) ? absint( sanitize_text_field( wp_unslash($_GET['to']) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$tf_min_seat = isset( $_GET['min_seat'] ) ? absint( sanitize_text_field( wp_unslash($_GET['min_seat']) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$tf_max_seat = isset( $_GET['max_seat'] ) ? absint( sanitize_text_field( wp_unslash($_GET['max_seat']) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$tf_driver_age = isset( $_GET['driver_age'] ) ? sanitize_text_field( wp_unslash( $_GET['driver_age'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$startprice   = isset( $search_request['from'] ) ? absint( $search_request['from'] ) : '';
+		$endprice     = isset( $search_request['to'] ) ? absint( $search_request['to'] ) : '';
+		$tf_min_seat  = isset( $search_request['min_seat'] ) ? $search_request['min_seat'] : '';
+		$tf_max_seat  = isset( $search_request['max_seat'] ) ? $search_request['max_seat'] : '';
+		$tf_driver_age = isset( $search_request['driver_age'] ) ? $search_request['driver_age'] : '';
 
 		// Cars Data Start
-		$pickup   = isset( $_GET['pickup'] ) ? sanitize_text_field( wp_unslash($_GET['pickup']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$dropoff = isset( $_GET['dropoff'] ) ? sanitize_text_field( wp_unslash($_GET['dropoff']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$pickup  = isset( $search_request['pickup'] ) ? $search_request['pickup'] : '';
+		$dropoff = isset( $search_request['dropoff'] ) ? $search_request['dropoff'] : '';
 
-		$tf_pickup_date  = isset( $_GET['pickup-date'] ) ? tourfic_normalize_date( sanitize_text_field( wp_unslash( $_GET['pickup-date'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$tf_dropoff_date  = isset( $_GET['dropoff-date'] ) ? tourfic_normalize_date( sanitize_text_field( wp_unslash( $_GET['dropoff-date'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$tf_pickup_time  = isset( $_GET['pickup-time'] ) ? sanitize_text_field( wp_unslash( $_GET['pickup-time'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$tf_dropoff_time  = isset( $_GET['dropoff-time'] ) ? sanitize_text_field( wp_unslash( $_GET['dropoff-time'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$tf_pickup_date  = isset( $search_request['pickup-date'] ) ? tourfic_normalize_date( $search_request['pickup-date'] ) : '';
+		$tf_dropoff_date = isset( $search_request['dropoff-date'] ) ? tourfic_normalize_date( $search_request['dropoff-date'] ) : '';
+		$tf_pickup_time  = isset( $search_request['pickup-time'] ) ? $search_request['pickup-time'] : '';
+		$tf_dropoff_time = isset( $search_request['dropoff-time'] ) ? $search_request['dropoff-time'] : '';
 		// Cars Data End
 
 		// Author Id if any
-		$tf_author_ids = isset( $_GET['tf-author'] ) ? sanitize_key( $_GET['tf-author'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$tf_author_ids = isset( $search_request['tf-author'] ) ? $search_request['tf-author'] : '';
 
 		if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-			if ( $_GET['type'] == "tf_tours" ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( 'tf_tours' === $post_type ) {
 				$data = array( $adults, $child, $check_in_out, $startprice, $endprice );
-			} elseif ( $_GET['type'] == "tf_apartment" ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			} elseif ( 'tf_apartment' === $post_type ) {
 				$data = array( $adults, $child, $infant, $check_in_out, $startprice, $endprice );
-			} else { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			} else {
 				$data = array( $adults, $child, $room, $check_in_out, $startprice, $endprice );
 			}
 		} else {
-			if ( $_GET['type'] == "tf_tours" ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( 'tf_tours' === $post_type ) {
 				$data = array( $adults, $child, $check_in_out );
 			} else {
 				$data = array( $adults, $child, $room, $check_in_out );
@@ -84,20 +87,18 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		}
 
 		// Gird or List View
-		if(!empty($_GET['type']) && $_GET['type'] == "tf_hotel"){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( 'tf_hotel' === $post_type ) {
 			$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] : 'list';
-		}elseif(!empty($_GET['type']) && $_GET['type'] == "tf_tours"){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		} elseif ( 'tf_tours' === $post_type ) {
 			$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_view'] : 'list';
-		}elseif(!empty($_GET['type']) && $_GET['type'] == "tf_apartment"){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		} elseif ( 'tf_apartment' === $post_type ) {
 			$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_view'] : 'list';
-		}elseif(!empty($_GET['type']) && $_GET['type'] == "tf_carrental"){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		} elseif ( 'tf_carrental' === $post_type ) {
 			$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] : 'grid';
-		}else{
-
 		}
 
 		$paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-		$checkInOutDate = ! empty( $_GET['check-in-out-date'] ) ? tourfic_split_date_range( sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$checkInOutDate = ! empty( $check_in_out ) ? tourfic_split_date_range( $check_in_out ) : '';
 		if ( ! empty( $checkInOutDate ) ) {
 			$period = new \DatePeriod(
 				new \DateTime( $checkInOutDate[0] ),
@@ -165,19 +166,19 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 
 		// Hotel/Apartment Features
-		if ( ! empty( $_GET['features'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $search_request['features'] ) ) {
 			$args['tax_query'][] = array(
 				'taxonomy' => $post_type == 'tf_hotel' ? 'hotel_feature' : 'apartment_feature',
 				'field'    => 'slug',
-				'terms'    => sanitize_text_field( wp_unslash($_GET['features']) ), // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				'terms'    => $search_request['features'],
 			);
 		}
 		// Hotel/Tour/Apartment Types
-		if ( ! empty( $_GET['types'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $search_request['types'] ) ) {
 			$args['tax_query'][] = array(
 				'taxonomy' => $post_type == 'tf_hotel' ? 'hotel_type' : ($post_type == 'tf_tours' ? 'tour_type' : 'apartment_type'),
 				'field'    => 'slug',
-				'terms'    => sanitize_text_field( wp_unslash($_GET['types']) ), // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				'terms'    => $search_request['types'],
 			);
 		}
 
@@ -274,7 +275,8 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 							</div>
 						</div>
 						<div class="tf-sorting-selection-warper">
-                            <form class="tf-archive-ordering" method="get">
+							<form class="tf-archive-ordering" method="get">
+								<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                                 <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
                                     <option value="default">Default Sorting</option>
                                     <option value="enquiry">Sort By Recommended</option>
@@ -491,6 +493,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 					</h3>
 					<div class="tf-sorting-selection-warper">
 						<form class="tf-archive-ordering" method="get">
+							<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
 							<select class="tf-orderby" name="tf-orderby" id="tf-orderby">
 								<option value="default"><?php echo esc_html__( 'Default Sorting', 'tourfic' ); ?></option>
 								<option value="enquiry"><?php echo esc_html__( 'Sort By Recommended', 'tourfic' ); ?></option>
@@ -866,6 +869,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 				</h3>
 				<div class="tf-archive-header-right tf-flex tf-flex-space-bttn tf-flex-align-center tf-flex-gap-16">
 					<form class="tf-archive-ordering" method="get">
+						<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
 						<select class="tf-orderby tf-room-archive-action-btn" name="tf-orderby" id="tf-orderby">
 							<option value="default"><?php echo esc_html__( 'Default Sorting', 'tourfic' ); ?></option>
 							<option value="order"><?php echo esc_html__( 'Sort By Popularity', 'tourfic' ); ?></option>
@@ -1673,7 +1677,8 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 						<a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e( 'List View', 'tourfic' ); ?>"><i class="fas fa-list"></i></a>
 						<a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e( 'Grid View', 'tourfic' ); ?>"><i class="fas fa-border-all"></i></a>
 						<div class="tf-sorting-selection-warper">
-                            <form class="tf-archive-ordering" method="get">
+							<form class="tf-archive-ordering" method="get">
+								<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                                 <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
                                     <option value="default"><?php echo esc_html__( 'Default Sorting', 'tourfic' ); ?></option>
                                     <option value="enquiry"><?php echo esc_html__( 'Sort By Recommended', 'tourfic' ); ?></option>

@@ -560,21 +560,22 @@ class TF_Handle_Emails {
         $order_status           = ! empty( $order_data['status'] ) ? $order_data['status'] : ( ! empty( $order_data['ostatus'] ) ? $order_data['ostatus'] : '' );
         $order_date_created     = $order_data['order_date'];
 
-        //Booking URL
-        global $wpdb;
-        $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE order_id = %s",sanitize_key( $order_id ) ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-
-		if('tour'==$order_data['post_type']){
-			$order_url = esc_url(admin_url() . 'edit.php?post_type=tf_tours&page=tf_tours_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
-		}elseif('car'==$order_data['post_type']){
-			$order_url = esc_url(admin_url() . 'edit.php?post_type=tf_carrental&page=tf_carrental_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
-		}elseif('hotel'==$order_data['post_type']){
-			$order_url = esc_url(admin_url() . 'edit.php?post_type=tf_hotel&page=tf_hotel_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
-		}elseif('apartment'==$order_data['post_type']){
-			$order_url = esc_url(admin_url() . 'edit.php?post_type=tf_apartment&page=tf_apartment_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
-		}else{
-			$order_url = '#';
-		}
+		$booking_contexts = array(
+			'tour'      => array( 'post_type' => 'tf_tours', 'page' => 'tourfic_tours_booking' ),
+			'car'       => array( 'post_type' => 'tf_carrental', 'page' => 'tourfic_carrental_booking' ),
+			'hotel'     => array( 'post_type' => 'tf_hotel', 'page' => 'tourfic_hotel_booking' ),
+			'apartment' => array( 'post_type' => 'tf_apartment', 'page' => 'tourfic_apartment_booking' ),
+		);
+		$booking_type     = ! empty( $order_data['post_type'] ) ? sanitize_key( $order_data['post_type'] ) : '';
+		$booking_context  = isset( $booking_contexts[ $booking_type ] ) ? $booking_contexts[ $booking_type ] : null;
+		$order_url        = $booking_context
+			? esc_url(
+				add_query_arg(
+					$booking_context,
+					admin_url( 'edit.php' )
+				)
+			)
+			: '#';
 
         $booking_details = '<table width="100%" style="max-width: 600px;border-collapse: collapse; color: #5A5A5A; font-family: Inter,sans-serif;"><thead><tr><th align="left" style="color:#0209AF;">Item Name</th><th align="center" style="color:#0209AF;">Quantity</th><th align="right" style="color:#0209AF;">Price</th></tr></thead><tbody style="border-bottom: 1px solid #D9D9D9">';
         $booking_details .= '<tr>';
@@ -1129,27 +1130,14 @@ public function tf_offline_booking_confirmation_callback( $order_id, $order_data
      */
 
     public function tf_order_status_email_resend_function() {
-        check_ajax_referer( 'updates', '_ajax_nonce' );
-
-        if (
-            ! current_user_can( 'manage_options' )
-            && ! current_user_can( 'tf_vendor_options' )
-            && ! current_user_can( 'tf_manager_options' )
-        ) {
-            wp_send_json_error( esc_html__( 'You do not have permission to access this resource.', 'tourfic' ), 403 );
-        }
+        check_ajax_referer( 'tourfic_manage_bookings', '_ajax_nonce' );
 
         $recipient = isset( $_POST['status'] ) ? sanitize_key( wp_unslash( $_POST['status'] ) ) : '';
-        $order_id  = isset( $_POST['order_id'] ) ? absint( $_POST['order_id'] ) : 0;
-        $db_id     = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0;
+        $order_id  = isset( $_POST['order_id'] ) ? absint( wp_unslash( $_POST['order_id'] ) ) : 0;
+        $db_id     = isset( $_POST['id'] ) ? absint( wp_unslash( $_POST['id'] ) ) : 0;
 
-        if ( ! in_array( $recipient, array( 'vendor', 'customer' ), true ) || ! $db_id ) {
+        if ( ! in_array( $recipient, array( 'vendor', 'customer' ), true ) || ! $db_id || ! $order_id ) {
             wp_send_json_error( esc_html__( 'Invalid email resend request.', 'tourfic' ), 400 );
-        }
-
-        if ( apply_filters( 'tourfic_use_companion_email_templates', false, $order_id ) ) {
-            do_action( 'tourfic_resend_companion_booking_email', $recipient, $order_id, $db_id );
-            wp_send_json_success();
         }
 
         global $wpdb;
@@ -1164,6 +1152,28 @@ public function tf_offline_booking_confirmation_callback( $order_id, $order_data
         if ( empty( $order_data ) ) {
             wp_send_json_error( esc_html__( 'Booking not found.', 'tourfic' ), 404 );
         }
+
+		if ( $order_id !== absint( $order_data['order_id'] ) ) {
+			wp_send_json_error( esc_html__( 'The booking and order do not match.', 'tourfic' ), 400 );
+		}
+
+		$post_id = ! empty( $order_data['post_id'] ) ? absint( $order_data['post_id'] ) : 0;
+		if ( ! $post_id || ! current_user_can( 'edit_post', $post_id ) ) {
+			wp_send_json_error( esc_html__( 'You do not have permission to resend email for this booking.', 'tourfic' ), 403 );
+		}
+
+		$current_user = wp_get_current_user();
+		if (
+			in_array( 'tf_vendor', (array) $current_user->roles, true )
+			&& absint( get_post_field( 'post_author', $post_id ) ) !== get_current_user_id()
+		) {
+			wp_send_json_error( esc_html__( 'You do not have permission to resend email for this booking.', 'tourfic' ), 403 );
+		}
+
+		if ( apply_filters( 'tourfic_use_companion_email_templates', false, $order_id ) ) {
+			do_action( 'tourfic_resend_companion_booking_email', $recipient, $order_id, $db_id );
+			wp_send_json_success();
+		}
 
         if ( 'offline' === $order_data['payment_method'] ) {
             foreach ( array( 'order_details', 'shipping_details', 'billing_details' ) as $field ) {

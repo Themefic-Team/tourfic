@@ -44,8 +44,9 @@ class Room_Options {
 	private static function render_room_options( $settings ) {
 		$post_id = get_the_ID();
 		$meta    = get_post_meta( $post_id, 'tf_room_opt', true );
+		$search_request = tourfic_get_public_search_request();
 
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$check_in_out = isset( $search_request['check-in-out-date'] ) ? $search_request['check-in-out-date'] : '';
 
 		if ( $check_in_out ) {
 			$form_check_in      = substr( $check_in_out, 0, 10 );

@@ -56,14 +56,16 @@ class Similar_Tours extends \WP_Widget {
         ?>
 			<div class="ni-buttons">
 				<?php
-				$adults           = isset( $_GET['adults'] ) ? sanitize_text_field( wp_unslash( $_GET['adults'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				$children         = isset( $_GET['children'] ) ? sanitize_text_field( wp_unslash( $_GET['children'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				$room             = isset( $_GET['room'] ) ? sanitize_text_field( wp_unslash( $_GET['room'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				$check_in_date    = isset( $_GET['check-in-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-date'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				$check_out_date   = isset( $_GET['check-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-out-date'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$tourfic_search_request = \tourfic_get_public_search_request();
+				$adults           = isset( $tourfic_search_request['adults'] ) ? $tourfic_search_request['adults'] : '';
+				$children         = isset( $tourfic_search_request['children'] ) ? $tourfic_search_request['children'] : '';
+				$room             = isset( $tourfic_search_request['room'] ) ? $tourfic_search_request['room'] : '';
+				$check_in_date    = isset( $tourfic_search_request['check-in-date'] ) ? $tourfic_search_request['check-in-date'] : '';
+				$check_out_date   = isset( $tourfic_search_request['check-out-date'] ) ? $tourfic_search_request['check-out-date'] : '';
 				$destination_name = ! empty( $terms[0]->name ) ? sanitize_text_field( $terms[0]->name ) : '';
 				$search_url       = add_query_arg(
 					array(
+						'tourfic_search_nonce' => wp_create_nonce( 'tourfic_public_search' ),
 						'destination'   => $destination_name,
 						'adults'        => $adults,
 						'children'      => $children,

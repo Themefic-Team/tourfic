@@ -36,7 +36,8 @@ class Car_Brand_Filter extends \WP_Widget {
      */
     public function widget( $args, $instance ) {
 
-        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $tourfic_search_request = \tourfic_get_public_search_request();
+        $posttype               = isset( $tourfic_search_request['type'] ) ? $tourfic_search_request['type'] : get_post_type();
 
         if ( is_admin() || 'tf_carrental' === $posttype ) {
             extract( $args );
@@ -45,7 +46,7 @@ class Car_Brand_Filter extends \WP_Widget {
             $show_count = isset( $instance['show_count'] ) ? $instance['show_count'] : null;
             $hide_empty = ! empty( $instance['hide_empty'] ) && 'on' === $instance['hide_empty'];
 
-            $selected_brands = ! empty( $_GET['car_brand'] ) ? array_map( 'absint', (array) wp_unslash( $_GET['car_brand'] ) ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $selected_brands = isset( $tourfic_search_request['car_brand'] ) ? $tourfic_search_request['car_brand'] : array();
 
             echo wp_kses_post( $before_widget );
             if ( ! empty( $title ) ) {

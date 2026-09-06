@@ -30,13 +30,13 @@
             });
 
             $.ajax({
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 type: 'POST',
                 data: {
                     action: 'tourfic_enquiry_bulk_action',
                     selected_items: selected_items,
                     bulk_action: actions,
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: tourficAdminParams.tf_nonce
                 },
                 beforeSend: function() {
                     $this.addClass("loading");
@@ -62,14 +62,14 @@
             let filter = $(".tf-filter-mail-option-enquiry ").val();
 
             $.ajax({
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 type: 'POST',
                 data: {
                     action: 'tourfic_enquiry_filter_post',
                     post_id: post_id,
                     post_type: post_type,
                     filter: filter,
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: tourficAdminParams.tf_nonce
                 },
                 beforeSend: function() {
                     $("#tf-enquiry-status-loader").addClass("show");
@@ -99,14 +99,14 @@
             let post_type = $(".enquiry-post-type").val();
 
             $.ajax({
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 type: 'POST',
                 data: {
                     action: 'tourfic_enquiry_filter_mail',
                     filter: filter,
                     post_id : post_id,
                     post_type: post_type,
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: tourficAdminParams.tf_nonce
                 },
                 beforeSend: function() {
                     $("#tf-enquiry-status-loader").addClass("show");
@@ -135,7 +135,7 @@
             let enquiry_id = $this.find(".tf-enquiry-reply-id").val();
 
             $.ajax({
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 type: 'POST',
                 data: {
                     action: 'tourfic_enquiry_reply_email',
@@ -145,7 +145,7 @@
                     subject: subject,
                     post_id: post_id,
                     enquiry_id: enquiry_id,
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: tourficAdminParams.tf_nonce
                 },
                 beforeSend: function() {
                     $("#tf-enquiry-status-loader").addClass("show");
@@ -180,7 +180,7 @@
             if( $.inArray(post_id, values) !== -1 ) {
                 $('.tf-filter-hotel-name').val(post_id).trigger('change');
             } else {
-                notyf.error(tf_admin_params.no_data_found_with_id);
+                notyf.error(tourficAdminParams.no_data_found_with_id);
             }
             
         })

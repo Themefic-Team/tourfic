@@ -16,7 +16,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 
 	protected array $args = array(
 		'name' => 'tour',
-        'prefix' => 'tf-tour',
+        'prefix' => 'tourfic-tour',
         'post_type' => 'tf_tours',
         'caps' => 'edit_tf_tourss',
 	);

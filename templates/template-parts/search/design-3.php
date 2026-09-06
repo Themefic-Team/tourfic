@@ -7,14 +7,15 @@ defined( 'ABSPATH' ) || exit;
 
     use \Tourfic\Classes\Helper;
 
-    // Check nonce security
-    if (!isset($_GET['_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_nonce'])), 'tf_ajax_nonce')) {
+    $tourfic_search_request = tourfic_get_public_search_request();
+    $tourfic_search_type    = isset( $tourfic_search_request['type'] ) ? $tourfic_search_request['type'] : '';
+    if ( empty( $tourfic_search_type ) ) {
         return;
     }
 
-    if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
+    if( "tf_tours" === $tourfic_search_type ){
         $tourfic_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_3_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_3_bannar'] : '';
-    }elseif( !empty($_GET['type']) && $_GET['type']=="tf_hotel" ){
+    }elseif( "tf_hotel" === $tourfic_search_type ){
         $tourfic_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_3_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_3_bannar'] : '';
     }else{
         $tourfic_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_2_bannar'] : '';
@@ -31,6 +32,7 @@ defined( 'ABSPATH' ) || exit;
         <div class="tf-archive-search-form tf-booking-form-wrapper" style="<?php echo !empty($tourfic_search_result_banner) ? 'background-image: url('.esc_url($tourfic_search_result_banner).')' : ''; ?>">
             <div class="tf-container">
                 <form action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf-archive-booking-form__style-3 tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                    <?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                     <?php Helper::tf_search_result_sidebar_form('archive'); ?>
                 </form>
             </div>
@@ -46,7 +48,7 @@ defined( 'ABSPATH' ) || exit;
                             <div class="tf-notice tf-mt-24 tf-mb-30">
                                 <?php
                                 if (current_user_can('manage_options')) {
-                                    echo '<p>' . esc_html__('Google Maps is selected but the API key is missing. Please configure the API key ', 'tourfic') . '<a href="' . esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings')) . '" target="_blank">' . esc_html__('Map Settings', 'tourfic') . '</a></p>';
+                                    echo '<p>' . esc_html__('Google Maps is selected but the API key is missing. Please configure the API key ', 'tourfic') . '<a href="' . esc_url(admin_url('admin.php?page=tourfic_settings#tab=map_settings')) . '" target="_blank">' . esc_html__('Map Settings', 'tourfic') . '</a></p>';
                                 } else {
                                     echo '<p>' . esc_html__('Access is restricted as Google Maps API key is not configured. Please contact the site administrator.', 'tourfic') . '</p>';
                                 }
@@ -84,7 +86,7 @@ defined( 'ABSPATH' ) || exit;
                                     </div>
                                 </div>
 
-                                <?php echo do_shortcode("[tf_search_result]"); ?>
+                                <?php echo do_shortcode( '[tourfic_search_result]' ); ?>
 
                             </div>
                             <!-- Available rooms end -->
@@ -112,7 +114,7 @@ defined( 'ABSPATH' ) || exit;
                         <div class="tf-notice tf-mt-24 tf-mb-30">
                             <?php
                             if (current_user_can('manage_options')) {
-                                echo '<p>' . esc_html__('Google Maps is not selected. Please configure it ', 'tourfic') . '<a href="' . esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings')) . '" target="_blank">' . esc_html__('Map Settings', 'tourfic') . '</a></p>';
+                                echo '<p>' . esc_html__('Google Maps is not selected. Please configure it ', 'tourfic') . '<a href="' . esc_url(admin_url('admin.php?page=tourfic_settings#tab=map_settings')) . '" target="_blank">' . esc_html__('Map Settings', 'tourfic') . '</a></p>';
                             } else {
                                 echo '<p>' . esc_html__('Access is restricted as Google Maps is not enabled. Please contact the site administrator', 'tourfic') . '</p>';
                             }

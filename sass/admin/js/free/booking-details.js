@@ -168,7 +168,7 @@
             formData.append('_ajax_nonce', getBookingNonce());
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -179,10 +179,20 @@
                     
                 },
                 success: function (data) {
-                    location.reload();
+                    if (data.success) {
+                        location.reload();
+                        return;
+                    }
+
+					$('.tf-preloader-box').hide();
+					notyf.error(data.data || 'Unable to update traveler details.');
                 },
-                error: function (data) {
-                    console.log(data);
+                error: function (xhr) {
+					$('.tf-preloader-box').hide();
+					let message = xhr.responseJSON && xhr.responseJSON.data
+						? xhr.responseJSON.data
+						: 'Unable to update traveler details.';
+					notyf.error(message);
                 },
 
             });
@@ -200,7 +210,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: 'tourfic_checkinout_details_edit',
                     order_id: order_id,
@@ -235,7 +245,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: 'tourfic_order_status_edit',
                     order_id: order_id,
@@ -271,13 +281,13 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: 'tourfic_order_status_email_resend',
                     order_id: order_id,
                     status: selected_value,
                     id : db_id,
-                    _ajax_nonce: tf_admin_params.tf_nonce
+                    _ajax_nonce: getBookingNonce()
                 },
                 beforeSend: function (data) {
                     $('.tf-preloader-box').show();
@@ -287,10 +297,19 @@
                 },
                 success: function (data) {
                     $('.tf-preloader-box').hide();
-                    notyf.success("Email Sucessfully Resend!");
+                    if (data.success) {
+                        notyf.success("Email successfully resent!");
+                        return;
+                    }
+
+                    notyf.error(data.data || "Unable to resend this email.");
                 },
-                error: function (data) {
-                    console.log(data);
+                error: function (xhr) {
+                    $('.tf-preloader-box').hide();
+                    let message = xhr.responseJSON && xhr.responseJSON.data
+                        ? xhr.responseJSON.data
+                        : "Unable to resend this email.";
+                    notyf.error(message);
                 },
 
             });
@@ -338,7 +357,7 @@
             if(order_list.length > 0 && bulk_action!==''){
                 $.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_order_bulk_action_edit',
                         orders: order_list,
@@ -445,7 +464,7 @@
             $('.tf-calendar-popup-box').html('');
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: 'tourfic_booking_details_popup',
                     id: $this.attr('data-id'),
@@ -478,7 +497,7 @@
             
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: 'tourfic_booking_calendar_filter',
                     ostatus: ostatus,

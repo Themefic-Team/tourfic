@@ -53,7 +53,8 @@ class Car_Rental
     {
         
         // Check-in & out date
-        $check_in_out = ! empty($_GET['check-in-out-date']) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $search_request = tourfic_get_public_search_request();
+        $check_in_out = isset( $search_request['check-in-out-date'] ) ? $search_request['check-in-out-date'] : '';
 
         // date format for apartments
         $date_format = ! empty(Helper::tfopt("tf-date-format-for-users")) ? Helper::tfopt("tf-date-format-for-users") : "Y/m/d";
@@ -93,6 +94,7 @@ class Car_Rental
         if (!empty($design) && 2 == $design) {
 ?>
             <form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tourfic_car_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
+				<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                 <div class="tf_hotel_searching">
                     <div class="tf_form_innerbody">
                         <div class="tf_form_fields">
@@ -284,6 +286,7 @@ class Car_Rental
             </script>
         <?php } elseif (!empty($design) && 3 == $design) { ?>
             <form class="tf-archive-search-box-wrapper <?php echo esc_attr($classes); ?>" id="tourfic_car_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
+				<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                 <div class="tf-date-select-box tf-flex tf-flex-gap-8 tf-date-selection-form">
                     <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location active">
                         <div class="tf-select-date">
@@ -525,6 +528,7 @@ class Car_Rental
             </script>
         <?php } elseif (!empty($design) && 4 == $design) { ?>
             <form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tourfic_car_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
+				<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                 <fieldset class="tf-search__form__fieldset tf-search__form__car__fieldset">
                     <!-- Pickup -->
                     <div class="tf-search__form__fieldset__left tf-pick-drop-location active">
@@ -782,6 +786,7 @@ class Car_Rental
 
         <?php } else { ?>
             <form class="tf_booking-widget <?php echo esc_attr($classes); ?>" id="tourfic_car_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
+				<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                 <div class="tf_homepage-booking">
                     <div class="tf_destination-wrap">
                         <div class="tf_input-inner">

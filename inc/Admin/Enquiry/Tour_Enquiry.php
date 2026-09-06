@@ -12,7 +12,7 @@ class Tour_Enquiry extends \Tourfic\Core\Enquiry {
 			apply_filters( 'tourfic_tour_enquiry_page_title', esc_html__( 'Tour Enquiry Details', 'tourfic' ) ),
 			apply_filters( 'tourfic_tour_enquiry_menu_title', esc_html__( 'Enquiry Details', 'tourfic' ) ),
 			'edit_tf_tourss',
-			'tf_tours_enquiry',
+			'tourfic_tours_enquiry',
 			array( $this, 'tf_enquiry_page_callback' )
 		);
 	}

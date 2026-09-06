@@ -25,8 +25,7 @@ class Base {
 	}
 
 	public function init() {
-		add_action( 'admin_init', array($this, 'create_enquiry_database_table') );
-		add_action('admin_init', array($this, 'tf_order_table_create'));
+		$this->tourfic_maybe_upgrade_database();
 
 		if ( Helper::tf_is_woo_active() ) {
 			\Tourfic\Classes\Woocommerce\Woocommerce::instance();

@@ -12,7 +12,7 @@ class Car_Booking_Details extends \Tourfic\Core\TF_Booking_Details
         $booking_args = array(
             'post_type' => 'tf_carrental',
             'menu_title' => esc_html__('Car Booking Details', 'tourfic'),
-            'menu_slug' => 'tf_carrental_booking',
+            'menu_slug' => 'tourfic_carrental_booking',
             'capability' => 'edit_tf_carrentals',
 			'booking_type' => 'car',
             'booking_title' => esc_html__('Car', 'tourfic'),

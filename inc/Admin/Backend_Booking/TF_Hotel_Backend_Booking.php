@@ -16,7 +16,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 
 	protected array $args = array(
 		'name' => 'hotel',
-        'prefix' => 'tf-hotel',
+        'prefix' => 'tourfic-hotel',
         'post_type' => 'tf_hotel',
         'caps' => 'edit_tf_hotels'
 	);

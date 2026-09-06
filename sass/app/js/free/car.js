@@ -71,7 +71,7 @@
         // Car Location Autocomplete
 
         function getCarLocationSlug(locationName) {
-            var locations = tf_params.car_locations || {};
+            var locations = tourficParams.car_locations || {};
             var normalizedLocation = $.trim(locationName || '');
 
             for (const [key, value] of Object.entries(locations)) {
@@ -136,11 +136,11 @@
 
             let validPickup = validateCarLocationField(
                 '#tf_pickup_location',
-                tf_params.car_pickup_location_invalid_msg
+                tourficParams.car_pickup_location_invalid_msg
             );
             let validDropoff = validateCarLocationField(
                 '#tf_dropoff_location',
-                tf_params.car_dropoff_location_invalid_msg
+                tourficParams.car_dropoff_location_invalid_msg
             );
 
             if (!validPickup || !validDropoff) {
@@ -226,7 +226,7 @@
                     b = document.createElement("DIV");
                     /*make the matching letters bold:*/
 
-                    b.innerHTML += tf_params.no_found;
+                    b.innerHTML += tourficParams.no_found;
                     /*insert a input field that will hold the current array item's value:*/
                     b.innerHTML += "<input type='hidden' value=''>";
                     /*execute a function when someone clicks on the item value (DIV element):*/
@@ -305,7 +305,7 @@
 
         // Car location autocomplete
         var car_pickup_input = document.getElementById("tf_pickup_location");
-        var car_locations = tf_params.car_locations;
+        var car_locations = tourficParams.car_locations;
         if (car_pickup_input) {
             tourfic_car_autocomplete(car_pickup_input, car_locations);
             $(car_pickup_input).on('input', function () {
@@ -354,7 +354,7 @@
 
             if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
                 $('.error-notice').show();
-                $('.error-notice').text(tf_params.fields_required_msg);
+                $('.error-notice').text(tourficParams.fields_required_msg);
                 return;
             }
 
@@ -366,7 +366,7 @@
 
             var data = {
                 action: 'tourfic_car_booking_pupup',
-                _nonce: tf_params.nonce,
+                _nonce: tourficParams.nonce,
                 post_id: post_id,
                 pickup_date: pickup_date,
                 pickup_time: pickup_time,
@@ -375,7 +375,7 @@
             };
 
             $.ajax({
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
@@ -411,7 +411,7 @@
 
             var data = {
                 action: 'tourfic_car_booking_pupup',
-                _nonce: tf_params.nonce,
+                _nonce: tourficParams.nonce,
                 post_id: post_id,
                 pickup_date: pickup_date,
                 pickup_time: pickup_time,
@@ -420,7 +420,7 @@
             };
 
             $.ajax({
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
@@ -472,7 +472,7 @@
                         if ($(this).val() == "") {
                             hasErrors.push(true);
                             const errorContainer = $(this).siblings('.error-text');
-                            errorContainer.text(tf_params.field_required);
+                            errorContainer.text(tourficParams.field_required);
                             if (errorContainer.text() !== '') {
                                 errorContainer.addClass('error-visible');
                             } else {
@@ -489,7 +489,7 @@
                         if (!isChecked) {
                             hasErrors.push(true);
                             const errorContainer = $(this).parent().siblings('.error-text');
-                            errorContainer.text(tf_params.field_required);
+                            errorContainer.text(tourficParams.field_required);
                             if (errorContainer.text() !== '') {
                                 errorContainer.addClass('error-visible');
                             } else {
@@ -529,9 +529,9 @@
 
             if( response.includes(true) ){
                 if( attrCount > 1 ){
-                    notyf.error(tf_params.fields_required_msg);
+                    notyf.error(tourficParams.fields_required_msg);
                 } else {
-                    notyf.error(tf_params.field_required);
+                    notyf.error(tourficParams.field_required);
                 }
                 return true;
             }
@@ -595,7 +595,7 @@
 
                 if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
                     $('.error-notice').show();
-                    $('.error-notice').text(tf_params.fields_required_msg);
+                    $('.error-notice').text(tourficParams.fields_required_msg);
                     return;
                 }
 
@@ -634,7 +634,7 @@
 
             var data = {
                 action: 'tourfic_car_booking',
-                _nonce: tf_params.nonce,
+                _nonce: tourficParams.nonce,
                 post_id: post_id,
                 pickup: pickup,
                 dropoff: dropoff,
@@ -652,7 +652,7 @@
             };
 
             $.ajax({
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
@@ -744,15 +744,15 @@
                 submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
             formData.append('action', 'tourfic_car_search');
-            formData.append('_nonce', tf_params.nonce);
+            formData.append('_nonce', tourficParams.nonce);
 
             if (formData.get('from') == null || formData.get('to') == null) {
-                formData.append('from', tf_params.tf_car_min_price);
-                formData.append('to', tf_params.tf_car_max_price);
+                formData.append('from', tourficParams.tf_car_min_price);
+                formData.append('to', tourficParams.tf_car_max_price);
             }
 
             $.ajax({
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -802,7 +802,7 @@
 
             var data = {
                 action: 'tourfic_car_booking',
-                _nonce: tf_params.nonce,
+                _nonce: tourficParams.nonce,
                 post_id: post_id,
                 pickup: pickup,
                 dropoff: dropoff,
@@ -815,7 +815,7 @@
             };
 
             $.ajax({
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
@@ -916,7 +916,7 @@
 
             var data = {
                 action: 'tourfic_car_booking',
-                _nonce: tf_params.nonce,
+                _nonce: tourficParams.nonce,
                 post_id: post_id,
                 pickup: pickup,
                 dropoff: dropoff,
@@ -932,7 +932,7 @@
             };
             
             $.ajax({
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
@@ -1021,7 +1021,7 @@
             }
             var data = {
                 action: 'tourfic_car_price_calculation',
-                _nonce: tf_params.nonce,
+                _nonce: tourficParams.nonce,
                 post_id: post_id,
                 pickup_date: pickup_date,
                 dropoff_date: dropoff_date,
@@ -1032,7 +1032,7 @@
             };
 
             $.ajax({
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
@@ -1207,11 +1207,11 @@
         })
 
         function tfFormatCarProtectionPrice(amount) {
-            const decimals = parseInt(tf_params.wc_price_num_decimals, 10) || 0;
-            const decimalSeparator = typeof tf_params.wc_price_decimal_sep === 'string' ? tf_params.wc_price_decimal_sep : '.';
-            const thousandSeparator = typeof tf_params.wc_price_thousand_sep === 'string' ? tf_params.wc_price_thousand_sep : ',';
-            const currencySymbol = typeof tf_params.wc_currency_symbol === 'string' ? tf_params.wc_currency_symbol : '';
-            const currencyPosition = typeof tf_params.wc_currency_pos === 'string' ? tf_params.wc_currency_pos : 'left';
+            const decimals = parseInt(tourficParams.wc_price_num_decimals, 10) || 0;
+            const decimalSeparator = typeof tourficParams.wc_price_decimal_sep === 'string' ? tourficParams.wc_price_decimal_sep : '.';
+            const thousandSeparator = typeof tourficParams.wc_price_thousand_sep === 'string' ? tourficParams.wc_price_thousand_sep : ',';
+            const currencySymbol = typeof tourficParams.wc_currency_symbol === 'string' ? tourficParams.wc_currency_symbol : '';
+            const currencyPosition = typeof tourficParams.wc_currency_pos === 'string' ? tourficParams.wc_currency_pos : 'left';
             const absoluteAmount = Math.abs(Number(amount) || 0);
             const fixedAmount = absoluteAmount.toFixed(decimals);
             const amountParts = fixedAmount.split('.');
@@ -1262,23 +1262,23 @@
             $('.tf-date-select-box').slideToggle( function () {
                 // Check visibility after the toggle animation completes
                 if ($(this).is(':visible')) {
-                    $button.text(tf_params.car_mobile_button_hide);
+                    $button.text(tourficParams.car_mobile_button_hide);
                 } else {
-                    $button.text(tf_params.car_mobile_button_book_now);
+                    $button.text(tourficParams.car_mobile_button_book_now);
                 }
             });
         });
 
         if ($('#car-location').length) {
-            const map = L.map('car-location').setView([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], tf_params.single_car_data.address_zoom);
+            const map = L.map('car-location').setView([tourficParams.single_car_data.address_latitude, tourficParams.single_car_data.address_longitude], tourficParams.single_car_data.address_zoom);
 
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' + tourficParams.open_street_map_text + '</a>'
             }).addTo(map);
 
-            const marker = L.marker([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], {alt: tf_params.single_car_data.address}).addTo(map)
-                .bindPopup(tf_params.single_car_data.address);
+            const marker = L.marker([tourficParams.single_car_data.address_latitude, tourficParams.single_car_data.address_longitude], {alt: tourficParams.single_car_data.address}).addTo(map)
+                .bindPopup(tourficParams.single_car_data.address);
         }
     });
 

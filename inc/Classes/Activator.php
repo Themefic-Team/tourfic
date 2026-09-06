@@ -10,6 +10,7 @@ defined( 'ABSPATH' ) || exit;
  * @author Foysal
  */
 class Activator {
+	use \Tourfic\Traits\Database;
 
 	private static $instance = null;
 
@@ -26,7 +27,8 @@ class Activator {
 	}
 
 	public function __construct() {
-		add_action( 'init', array( $this, 'activate' ) );
+		add_action( 'admin_init', array( $this, 'tourfic_maybe_reconcile_pages' ) );
+		add_action( 'init', array( $this, 'tourfic_maybe_flush_rewrite_rules' ), 999 );
 
 		// add post state
 		add_filter( 'display_post_states', array( $this, 'add_post_state' ), 10, 2 );
@@ -39,40 +41,144 @@ class Activator {
 
 	/**
 	 * Plugin activation hook
+	 *
+	 * @param bool $network_wide Whether the plugin is being network activated.
+	 *
 	 * @since 1.0.0
 	 */
-	public function activate() {
-		// Create Tourfic Pages
-		$this->create_pages();
-		flush_rewrite_rules();
+	public static function activate( $network_wide = false ) {
+		if ( is_multisite() && $network_wide ) {
+			$site_ids = get_sites(
+				array(
+					'fields' => 'ids',
+					'number' => 0,
+				)
+			);
+
+			foreach ( $site_ids as $site_id ) {
+				self::install_site( $site_id );
+			}
+
+			return;
+		}
+
+		self::install_site();
 	}
 
 	/**
-	 * Create Tourfic Pages
-	 * @since 1.0.0
+	 * Install Tourfic data for one site.
+	 *
+	 * @param int $site_id Site ID. Defaults to the current site.
 	 */
-	private function create_pages() {
+	public static function install_site( $site_id = 0 ) {
+		$site_id      = absint( $site_id );
+		$restore_site = is_multisite() && $site_id && get_current_blog_id() !== $site_id;
+
+		if ( $restore_site ) {
+			switch_to_blog( $site_id );
+		}
+
+		$activator = self::instance();
+		$pages     = $activator->get_activation_pages();
+
+		$activator->create_pages( $pages );
+		$activator->tourfic_install_database();
+		update_option( 'tourfic_activation_pages_signature', $activator->get_activation_pages_signature( $pages ), false );
+		update_option( 'tourfic_template_installed', true );
+		update_option( 'tourfic_flush_rewrite_rules', true, false );
+
+		if ( $restore_site ) {
+			restore_current_blog();
+		}
+	}
+
+	/**
+	 * Reconcile activation pages only when the filtered page contract changes.
+	 */
+	public function tourfic_maybe_reconcile_pages() {
+		$pages     = $this->get_activation_pages();
+		$signature = $this->get_activation_pages_signature( $pages );
+
+		if ( $signature === get_option( 'tourfic_activation_pages_signature' ) ) {
+			return;
+		}
+
+		$this->create_pages( $pages );
+		update_option( 'tourfic_activation_pages_signature', $signature, false );
+		update_option( 'tourfic_flush_rewrite_rules', true, false );
+	}
+
+	/**
+	 * Flush rewrite rules once, after post types and taxonomies are registered.
+	 */
+	public function tourfic_maybe_flush_rewrite_rules() {
+		if ( ! get_option( 'tourfic_flush_rewrite_rules' ) ) {
+			return;
+		}
+
+		flush_rewrite_rules();
+		delete_option( 'tourfic_flush_rewrite_rules' );
+	}
+
+	/**
+	 * Get pages owned by Tourfic and its active extensions.
+	 *
+	 * @return array
+	 */
+	private function get_activation_pages() {
 		$pages = array(
-			'search'             => array(
+			'search'      => array(
 				'name'    => esc_html(_x( 'tf-search', 'Page slug', 'tourfic' )),
 				'title'   => esc_html(_x( 'TF Search', 'Page title', 'tourfic' )),
 				'content' => '',
 			),
-			'search_form'        => array(
+			'search_form' => array(
 				'name'    => esc_html(_x( 'tf-search-form', 'Page slug', 'tourfic' )),
 				'title'   => esc_html(_x( 'TF Search Form', 'Page title', 'tourfic' )),
 				'content' => "[tourfic_search_form style='default' type='all' fullwidth='true' title='' subtitle='' classes='' advanced='enabled']",
 			),
-			'wishlist'           => array(
+			'wishlist'    => array(
 				'name'    => esc_html(_x( 'tf-wishlist', 'Page slug', 'tourfic' )),
 				'title'   => esc_html(_x( 'TF Wishlist', 'Page title', 'tourfic' )),
 				'content' => '',
 			),
 		);
-		$pages = apply_filters( 'tourfic_activation_pages', $pages );
 
+		return apply_filters( 'tourfic_activation_pages', $pages );
+	}
+
+	/**
+	 * Build a deterministic signature for the active page owners.
+	 *
+	 * @param array $pages Activation page definitions.
+	 * @return string
+	 */
+	private function get_activation_pages_signature( $pages ) {
+		return hash( 'sha256', wp_json_encode( $pages ) );
+	}
+
+	/**
+	 * Create Tourfic Pages
+	 *
+	 * @param array $pages Activation page definitions.
+	 *
+	 * @since 1.0.0
+	 */
+	private function create_pages( $pages ) {
 		foreach ( $pages as $key => $page ) {
-			$this->create_page( esc_sql( $page['name'] ), 'tf_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? $page['parent'] : '' );
+			$legacy_option = 'tf_' . $key . '_page_id';
+			$option        = 'tourfic_' . $key . '_page_id';
+			$legacy_value  = get_option( $legacy_option, null );
+
+			if ( null !== $legacy_value ) {
+				if ( null === get_option( $option, null ) ) {
+					update_option( $option, $legacy_value );
+				}
+
+				delete_option( $legacy_option );
+			}
+
+			$this->create_page( esc_sql( $page['name'] ), $option, $page['title'], $page['content'], ! empty( $page['parent'] ) ? $page['parent'] : '' );
 		}
 	}
 
@@ -177,7 +283,7 @@ class Activator {
 	public function add_post_state( $post_states, $post ) {
 		$page_options = apply_filters(
 			'tourfic_page_option_names',
-			array( 'tourfic_search_page_id', 'tf_search_form_page_id', 'tourfic_wishlist_page_id' )
+			array( 'tourfic_search_page_id', 'tourfic_search_form_page_id', 'tourfic_wishlist_page_id' )
 		);
 		$page_ids     = array_map( 'get_option', $page_options );
 

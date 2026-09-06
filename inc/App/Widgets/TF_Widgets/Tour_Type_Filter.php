@@ -39,7 +39,8 @@ class Tour_Type_Filter extends \WP_Widget {
 	public function widget( $args, $instance ) {
 
 		//check if is Hotel
-		$posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$tourfic_search_request = \tourfic_get_public_search_request();
+		$posttype               = isset( $tourfic_search_request['type'] ) ? $tourfic_search_request['type'] : get_post_type();
 
 		if ( is_admin() || $posttype == 'tf_tours' ) {
 			extract( $args );
@@ -63,14 +64,7 @@ class Tour_Type_Filter extends \WP_Widget {
 
 			$get_terms = get_terms( $taxonomy );
 
-			$search_types_query = array();
-            if ( isset( $_GET['types'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                if ( is_array( $_GET['types'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                    $search_types_query = array_map( 'sanitize_text_field', wp_unslash( $_GET['types'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                } else {
-                    $search_types_query = array( sanitize_text_field( wp_unslash( $_GET['types'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                }
-            }
+			$search_types_query = isset( $tourfic_search_request['types'] ) ? $tourfic_search_request['types'] : array();
 
 			echo "<div class='tf-filter'><ul>";
 			foreach ( $get_terms as $key => $term ) {

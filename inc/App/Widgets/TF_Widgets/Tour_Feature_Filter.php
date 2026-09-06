@@ -39,7 +39,8 @@ class Tour_Feature_Filter extends \WP_Widget {
     public function widget( $args, $instance ) {
 
         //check if is Tours
-        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $tourfic_search_request = \tourfic_get_public_search_request();
+        $posttype               = isset( $tourfic_search_request['type'] ) ? $tourfic_search_request['type'] : get_post_type();
 
         if ( is_admin() || $posttype == 'tf_tours' ) {
             extract( $args );

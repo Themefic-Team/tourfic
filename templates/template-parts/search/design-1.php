@@ -6,8 +6,10 @@ use \Tourfic\Classes\Helper;
 use Tourfic\Classes\Room\Room;
 
 $tourfic_room_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['room-archive'] : 'design-1';
+$tourfic_search_request              = tourfic_get_public_search_request();
+$tourfic_search_type                 = isset( $tourfic_search_request['type'] ) ? $tourfic_search_request['type'] : '';
 
-if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_room" && $tourfic_room_arc_selected_template == "design-1" ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+if ( 'tf_room' === $tourfic_search_type && $tourfic_room_arc_selected_template == "design-1" ) :
     $tourfic_room_arc_banner = ! empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar']) ?  Helper::tf_data_types(Helper::tfopt('tf-template'))['room_archive_design_1_bannar'] : '';
     $tourfic_room_arc_banner = !empty($tourfic_room_arc_banner) ? $tourfic_room_arc_banner : TOURFIC_ASSETS_APP_URL . '/images/room-hero-banner.jpg';
     ?>
@@ -23,7 +25,7 @@ if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_room" && $tourfic_room_a
         </div>
         <div class="tf-archive-room-details">
             <div class="tf-container">
-                <?php echo do_shortcode("[tf_search_result]"); ?>
+                <?php echo do_shortcode( '[tourfic_search_result]' ); ?>
             </div>
         </div>
     </div>
@@ -31,7 +33,7 @@ if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_room" && $tourfic_room_a
     <div class="tf-archive-page tf-archive-design-1 tf-archive-template__one">
         <div class="tf-container">
             <div class="tf-row tf-archive-inner tf-flex">
-                <?php echo do_shortcode("[tf_search_result]"); ?>
+                <?php echo do_shortcode( '[tourfic_search_result]' ); ?>
                 <!-- SideBar-->
                 <div class="tf-sidebar tf-archive-right">
 

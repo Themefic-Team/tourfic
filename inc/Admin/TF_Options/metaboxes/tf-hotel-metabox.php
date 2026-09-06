@@ -140,7 +140,7 @@ Tourfic_Metabox::metabox( 'tf_hotels_opt', array(
 					// translators: %s is the link to the Google Maps API Key settings page.
 					'subtitle' => wp_kses_post(sprintf(__( 'Enter the specific address you wish to use for the %1$s and select the correct option from the suggested addresses. This will be used to hyperlink the address and display it on the front-end map. <strong>Google Maps is also available for location. Simply set up your <a href="%2$s" target="_blank">Google Maps API Key</a></strong>', 'tourfic'),
 							strtolower( $tourfic_hotel_name ),
-							esc_url( admin_url( 'admin.php?page=tf_settings#tab=map_settings' ) )
+							esc_url( admin_url( 'admin.php?page=tourfic_settings#tab=map_settings' ) )
 						)
 					),
 
@@ -261,7 +261,7 @@ Tourfic_Metabox::metabox( 'tf_hotels_opt', array(
 							'label'       => esc_html__( 'Facilities Category', 'tourfic' ),
 							'placeholder' => esc_html__( 'Select facilities category', 'tourfic' ),
 							'options'     => tourfic_hotel_facilities_categories(),
-							'description' => esc_html__( 'Add new category from ', 'tourfic' ) . '<a target="_blank" href="' . esc_url( admin_url('admin.php?page=tf_settings#tab=single_page') ) .'">' . esc_html__("Facilities Categories", 'tourfic') . '</a>',
+							'description' => esc_html__( 'Add new category from ', 'tourfic' ) . '<a target="_blank" href="' . esc_url( admin_url('admin.php?page=tourfic_settings#tab=single_page') ) .'">' . esc_html__("Facilities Categories", 'tourfic') . '</a>',
 							'field_width' => 50,
 						),
 						array(
@@ -369,7 +369,6 @@ Tourfic_Metabox::metabox( 'tf_hotels_opt', array(
 						'posts_per_page' => -1,
 					),
 					'inline_add_new'  => true,
-					'inline_delete'   => true,
 					'add_button_text' => esc_html__( 'Add New Room', 'tourfic' ),
 				),
 				

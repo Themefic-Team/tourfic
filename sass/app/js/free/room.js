@@ -24,15 +24,15 @@
                 formData = new FormData(form[0]);
             
             formData.append('action', 'tourfic_room_search');
-            formData.append('_nonce', tf_params.nonce);
+            formData.append('_nonce', tourficParams.nonce);
 
             if (formData.get('from') == null || formData.get('to') == null) {
-                formData.append('from', tf_params.tf_hotel_min_price);
-                formData.append('to', tf_params.tf_hotel_max_price);
+                formData.append('from', tourficParams.tf_hotel_min_price);
+                formData.append('to', tourficParams.tf_hotel_max_price);
             }
 
             $.ajax({
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 type: 'POST',
                 data: formData,
                 contentType: false,

@@ -27,7 +27,6 @@ class Tour {
 		}
 		add_action( 'wp_ajax_tourfic_tour_search', array( $this, 'tf_tour_search_ajax_callback' ) );
 		add_action( 'wp_ajax_nopriv_tourfic_tour_search', array( $this, 'tf_tour_search_ajax_callback' ) );
-		add_action( 'wp', array( $this, 'tf_setup_everydate_cron_job' ) );
 		add_action( 'init', array( $this, 'tf_tours_custom_status_creation' ) );
 		add_action( 'admin_footer-edit.php', array( $this, 'tf_tours_custom_status_add_in_quick_edit' ) );
 		add_action( 'admin_footer-post.php', array( $this, 'tf_tours_custom_status_add_in_post_page' ) );
@@ -59,6 +58,7 @@ class Tour {
 		if ( ! empty( $design ) && 2 == $design ) {
 			?>
             <form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
+				<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                 <div class="tf_hotel_searching">
                     <div class="tf_form_innerbody">
                         <div class="tf_form_fields">
@@ -318,6 +318,7 @@ class Tour {
 		<?php }elseif( !empty($design) && 3==$design ){ ?>
 
 			<form class="tf-archive-search-box-wrapper <?php echo esc_attr( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
+				<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
 
 				<div class="tf-date-selection-form">
 				<div class="tf-date-select-box tf-flex tf-flex-gap-8">
@@ -475,6 +476,7 @@ class Tour {
 
 		<?php } elseif (!empty($design) && 4 == $design) { ?>
 			<form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
+				<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
 				<fieldset class="tf-search__form__fieldset">
 					<!-- Destination -->
 					<?php if ( $show_tour_location_field ) : ?>
@@ -735,6 +737,7 @@ class Tour {
 
 		<?php } else { ?>
             <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
+				<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                 <div class="tf_homepage-booking">
 					<?php if ( $show_tour_location_field ): ?>
                         <div class="tf_destination-wrap">
@@ -967,16 +970,17 @@ class Tour {
 	 * Single Tour Page
 	 */
 	static function tf_single_tour_booking_form( $post_id, $design = '' ) {
+		$search_request = tourfic_get_public_search_request();
 
 		// Value from URL
 		// Adults
-		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$adults = isset( $search_request['adults'] ) ? $search_request['adults'] : '';
 		// children
-		$child = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$child = isset( $search_request['children'] ) ? $search_request['children'] : '';
 		// room
-		$infant = ! empty( $_GET['infant'] ) ? sanitize_text_field( wp_unslash($_GET['infant']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$infant = isset( $search_request['infant'] ) ? $search_request['infant'] : '';
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$check_in_out = isset( $search_request['check-in-out-date'] ) ? $search_request['check-in-out-date'] : '';
 
 		$meta      = get_post_meta( $post_id, 'tf_tours_opt', true );
 
@@ -1024,8 +1028,6 @@ class Tour {
 		$tf_tour_book_now_text = isset($meta['single_tour_booking_form_button_text']) && !empty($tf_tour_single_book_now_text) ? $tf_tour_single_book_now_text : $tf_tour_global_book_now_text;
 
 		$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
-		$tf_ext_booking_type  = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
-		$tf_booking_code      = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
 		$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
 		$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
 		$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
@@ -1224,11 +1226,6 @@ class Tour {
                 </form>
 
 			<?php endif; ?>
-			<?php if ( apply_filters( 'tourfic_show_tour_external_code', false, $post_id, $meta ) ) :
-				echo wp_kses( $tf_booking_code, Helper::tf_custom_wp_kses_allow_tags() );
-			endif; ?>
-
-
 		<?php } elseif ( $tf_tour_selected_template == "design-2" ) { ?>
 			<?php if ( apply_filters( 'tourfic_show_tour_booking_form', $tf_booking_type == 1, $post_id, $meta ) ) : ?>
                 <form class="tf_tours_booking tf_tours_main_booking" enctype="multipart/form-data">
@@ -1725,9 +1722,6 @@ class Tour {
                 </form>
 			<?php endif; ?>
 
-			<?php if ( apply_filters( 'tourfic_show_tour_external_code', false, $post_id, $meta ) ) :
-				echo wp_kses( $tf_booking_code, Helper::tf_custom_wp_kses_allow_tags() );
-			endif; ?>
 			<?php if ( apply_filters( 'tourfic_show_tour_external_url_btn', false, $post_id, $meta ) ): ?>
                 <div class="tf-btn-wrap">
                     <a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf_btn tf_btn_full tf_btn_sharp tf-tour-external-booking-button" style="margin-top: 10px;"><?php echo esc_html( $tf_tour_single_book_now_text); ?></a>
@@ -1831,9 +1825,6 @@ class Tour {
 						?>
                     </form>
 				<?php endif; ?>
-				<?php if ( apply_filters( 'tourfic_show_tour_external_code', false, $post_id, $meta ) ) :
-					echo wp_kses( $tf_booking_code, Helper::tf_custom_wp_kses_allow_tags() );
-				endif; ?>
 				<div class="tf-booking-mobile-btn">
 					<a href="#" class="tf_btn"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
 				</div>
@@ -2352,6 +2343,7 @@ class Tour {
 	 * Tours Archive
 	 */
 	static function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out = '', $startprice = '', $endprice = '', $settings = [] ) {
+		$search_request = tourfic_get_public_search_request();
 
 		// get post id
 		$post_id = get_the_ID();
@@ -2379,18 +2371,18 @@ class Tour {
 		$features           = ! empty( $meta['features'] ) ? $meta['features'] : '';
 
 		// Adults
-		if ( empty( $adults ) ) {
-			$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( empty( $adults ) && isset( $search_request['adults'] ) ) {
+			$adults = $search_request['adults'];
 		}
 		// children
-		if ( empty( $child ) ) {
-			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( empty( $child ) && isset( $search_request['children'] ) ) {
+			$child = $search_request['children'];
 		}
 		// room
-		$infant = ! empty( $_GET['infant'] ) ? sanitize_text_field( wp_unslash($_GET['infant']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$infant = isset( $search_request['infant'] ) ? $search_request['infant'] : '';
 		// Check-in & out date
-		if ( empty( $check_in_out ) ) {
-			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( empty( $check_in_out ) && isset( $search_request['check-in-out-date'] ) ) {
+			$check_in_out = $search_request['check-in-out-date'];
 		}
 
 		$disable_adult_price              = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
@@ -3860,7 +3852,6 @@ class Tour {
 			'types',
 			'from',
 			'to',
-			'_nonce',
 		];
 
 		$fields = [];
@@ -3873,6 +3864,7 @@ class Tour {
 				}
 			}
 		}
+		$fields['tourfic_search_nonce'] = wp_create_nonce( 'tourfic_public_search' );
 
 		// Success response if validation passes
 		if ( ( Helper::tfopt( 'date_tour_search' ) && ! empty( $fields['check-in-out-date'] ) )
@@ -3884,16 +3876,6 @@ class Tour {
 
 		echo wp_json_encode( $response );
 		wp_die();
-	}
-
-	/*
-    * Tour will be auto draft after Expire
-    * Author: Jahid
-    */
-	function tf_setup_everydate_cron_job() {
-		if ( ! wp_next_scheduled( 'tf_everydate_cron_job' ) ) {
-			wp_schedule_event( strtotime( 'midnight' ), 'daily', 'tf_everydate_cron_job' );
-		}
 	}
 
 	/*

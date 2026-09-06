@@ -8,7 +8,6 @@
  * Text Domain:     tourfic
  * Domain Path:     /lang/
  * Version:         2.23.4
- * Tested up to:    7.1
  * WC tested up to: 11.0
  * Requires PHP:    7.4 
  * Elementor tested up to: 4.2
@@ -28,6 +27,7 @@ final class Tourfic {
 	 */
 
 	const VERSION = '2.23.4';
+	const DATABASE_VERSION = '1.0.0';
 
 	/**
 	 * Minimum PHP version required.
@@ -92,8 +92,10 @@ final class Tourfic {
 	private function define_constants() {
 		define( 'TOURFIC', self::VERSION );
 		define( 'TOURFIC_VERSION', self::VERSION );
+		define( 'TOURFIC_DATABASE_VERSION', self::DATABASE_VERSION );
 		define( 'TOURFIC_MINIMUM_PHP_VERSION', self::MINIMUM_PHP_VERSION );
 		define( 'TOURFIC_MINIMUM_WC_VERSION', self::MINIMUM_WC_VERSION );
+		define( 'TOURFIC_SETTINGS_MENU_SLUG', 'tourfic_settings' );
 		define( 'TOURFIC_URL', plugin_dir_url( __FILE__ ) );
 		define( 'TOURFIC_TEMPLATES_URL', TOURFIC_URL . 'templates/' );
 		define( 'TOURFIC_ADMIN_URL', TOURFIC_URL . 'admin/' );
@@ -120,6 +122,10 @@ final class Tourfic {
 		add_action( 'init', array( $this, 'init_plugin' ), 0 );
 		//Compatibility with custom order tables for the WooCommerce plugin
 		add_action( 'before_woocommerce_init', array( $this, 'tf_woocommerce_compatibility' ) );
+
+		if ( is_multisite() ) {
+			add_action( 'wp_initialize_site', 'tourfic_initialize_network_site', 200 );
+		}
 	}
 
 	/**
@@ -248,10 +254,34 @@ final class Tourfic {
 
 Tourfic::instance();
 
-function tourfic_active_template_settings_callback() {
-	//all code goes here if need
-	update_option( 'tourfic_template_installed', true );
+/**
+ * Install Tourfic data when the plugin is activated.
+ *
+ * @param bool $network_wide Whether the plugin is being network activated.
+ */
+function tourfic_activate_plugin( $network_wide ) {
+	require_once TOURFIC_PATH . 'autoloader.php';
+	\Tourfic\Classes\Activator::activate( $network_wide );
 }
- 
-//Register activation hook
-register_activation_hook( __FILE__, 'tourfic_active_template_settings_callback' );
+
+/**
+ * Install Tourfic data when a site is added to an active network.
+ *
+ * @param WP_Site $new_site Newly initialized site.
+ */
+function tourfic_initialize_network_site( $new_site ) {
+	$network_plugins = get_site_option( 'active_sitewide_plugins', array() );
+	if ( ! isset( $network_plugins[ plugin_basename( __FILE__ ) ] ) ) {
+		return;
+	}
+
+	$site_id = isset( $new_site->blog_id ) ? absint( $new_site->blog_id ) : 0;
+	if ( ! $site_id ) {
+		return;
+	}
+
+	require_once TOURFIC_PATH . 'autoloader.php';
+	\Tourfic\Classes\Activator::install_site( $site_id );
+}
+
+register_activation_hook( __FILE__, 'tourfic_activate_plugin' );

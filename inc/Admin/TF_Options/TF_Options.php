@@ -55,7 +55,6 @@ class TF_Options {
 		add_action( 'wp_ajax_tourfic_insert_category_data', array( $this, 'tf_insert_category_data_callback' ) );
 		add_action( 'wp_ajax_tourfic_delete_category_data', array( $this, 'tf_delete_category_data_callback' ) );
 		add_action( 'wp_ajax_tourfic_insert_post_data', array( $this, 'tf_insert_post_data_callback' ) );
-		add_action( 'wp_ajax_tourfic_delete_post_data', array( $this, 'tf_delete_post_data_callback' ) );
 	}
 
 	public function tf_options_file_path( $file_path = '' ) {
@@ -1715,33 +1714,53 @@ class TF_Options {
 	 * @author Jahid
 	 */
 	function tf_insert_category_data_callback() {
-		//Verify Nonce
-		check_ajax_referer( 'updates', '_nonce' );
+		check_ajax_referer( 'tourfic_insert_category_data', '_nonce' );
 
-		$categoryName = !empty($_POST['categoryName']) ? sanitize_title( wp_unslash($_POST['categoryName']) ) : '';
-		$categoryTitle = !empty($_POST['categoryTitle']) ? sanitize_text_field( wp_unslash($_POST['categoryTitle']) ) : '';
-		$parentCategory = !empty($_POST['parentCategory']) ? sanitize_key( wp_unslash($_POST['parentCategory']) ) : '';
+		$taxonomy  = isset( $_POST['categoryName'] ) ? sanitize_key( wp_unslash( $_POST['categoryName'] ) ) : '';
+		$term_name = isset( $_POST['categoryTitle'] ) ? sanitize_text_field( wp_unslash( $_POST['categoryTitle'] ) ) : '';
+		$parent_id = isset( $_POST['parentCategory'] ) ? absint( wp_unslash( $_POST['parentCategory'] ) ) : 0;
 
-		$response = [];
-		if ( !empty($categoryName) && !empty($categoryTitle) ) {
-			// Insert the term
-			$term = wp_insert_term(
-				$categoryTitle,   // The term
-				$categoryName, // The taxonomy
-				array(
-					'slug'   => sanitize_title($categoryTitle),
-					'parent' => !empty($parentCategory) ? intval($parentCategory) : ''
-				)
-			);
-			$insert_Date = array(
-				'id' => $term['term_id'],
-				'title' => get_term_field('name', $term['term_id'], $categoryName)
-			);
-
-			$response ['insert_category'] = $insert_Date;
+		$taxonomy_object = $this->tf_get_allowed_inline_taxonomy( $taxonomy );
+		if ( ! $taxonomy_object || empty( $taxonomy_object->cap->edit_terms ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Invalid taxonomy.', 'tourfic' ) ), 400 );
 		}
-		echo wp_json_encode( $response );
-		wp_die();
+
+		if ( ! current_user_can( $taxonomy_object->cap->edit_terms ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'You do not have permission to add this term.', 'tourfic' ) ), 403 );
+		}
+
+		if ( '' === $term_name ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'A term name is required.', 'tourfic' ) ), 400 );
+		}
+
+		if ( $parent_id ) {
+			$parent_term = get_term( $parent_id, $taxonomy );
+			if ( ! $taxonomy_object->hierarchical || ! $parent_term || is_wp_error( $parent_term ) ) {
+				wp_send_json_error( array( 'message' => esc_html__( 'Invalid parent term.', 'tourfic' ) ), 400 );
+			}
+		}
+
+		$term = wp_insert_term(
+			$term_name,
+			$taxonomy,
+			array(
+				'slug'   => sanitize_title( $term_name ),
+				'parent' => $parent_id,
+			)
+		);
+
+		if ( is_wp_error( $term ) ) {
+			wp_send_json_error( array( 'message' => $term->get_error_message() ), 400 );
+		}
+
+		wp_send_json_success(
+			array(
+				'insert_category' => array(
+					'id'    => absint( $term['term_id'] ),
+					'title' => $term_name,
+				),
+			)
+		);
 	}
 
 	/**
@@ -1750,28 +1769,7 @@ class TF_Options {
 	 * @author Jahid
 	 */
 	function tf_delete_category_data_callback() {
-		//Verify Nonce
-		check_ajax_referer( 'updates', '_nonce' );
-
-		$categoryName = !empty($_POST['categoryName']) ? sanitize_title( wp_unslash($_POST['categoryName']) ) : '';
-		$term_id = !empty($_POST['term_id']) ? sanitize_text_field( wp_unslash($_POST['term_id']) ) : '';
-
-		$response = [];
-
-		if (!empty($term_id)) {
-			$result = wp_delete_term($term_id, $categoryName); // Replace 'category' with your taxonomy if it's different
-
-			if (!is_wp_error($result)) {
-				$response['success'] = true;
-			} else {
-				$response['error'] = $result->get_error_message();
-			}
-		} else {
-			$response['error'] = 'Invalid term ID.';
-		}
-
-		echo wp_json_encode($response);
-		wp_die();
+		$this->tf_delete_inline_term( 'tourfic_delete_category_data' );
 	}
 
 	/**
@@ -1780,67 +1778,123 @@ class TF_Options {
 	 * @author Foysal
 	 */
 	function tf_insert_post_data_callback() {
-		//Verify Nonce
-		check_ajax_referer( 'updates', '_nonce' );
+		check_ajax_referer( 'tourfic_insert_post_data', '_nonce' );
 
-		$postType = !empty($_POST['postType']) ? sanitize_title( wp_unslash($_POST['postType']) ) : '';
-		$postTitle = !empty($_POST['postTitle']) ? sanitize_text_field( wp_unslash($_POST['postTitle']) ) : '';
-		$fieldId = !empty($_POST['fieldId']) ? sanitize_text_field( wp_unslash($_POST['fieldId']) ) : '';
-		$postId = !empty($_POST['postId']) ? sanitize_text_field( wp_unslash($_POST['postId']) ) : '';
+		$post_type = isset( $_POST['postType'] ) ? sanitize_key( wp_unslash( $_POST['postType'] ) ) : '';
+		$post_title = isset( $_POST['postTitle'] ) ? sanitize_text_field( wp_unslash( $_POST['postTitle'] ) ) : '';
+		$field_id   = isset( $_POST['fieldId'] ) ? sanitize_key( wp_unslash( $_POST['fieldId'] ) ) : '';
+		$parent_id  = isset( $_POST['postId'] ) ? absint( wp_unslash( $_POST['postId'] ) ) : 0;
 
-		$response = [];
-		if ( !empty($postType) && !empty($postTitle) ) {
-			// Insert the post
-			$post_id = wp_insert_post(array(
-				'post_type'    => $postType,
-				'post_title'   => $postTitle,
-				'post_status'  => 'publish'
-			));
-
-			if($fieldId == 'tf_rooms'){
-				$room_meta['tf_hotel'] = $postId;
-				update_post_meta($post_id, 'tf_room_opt', $room_meta);
-			}
-
-			$insert_Data = array(
-				'id' => $post_id,
-				'title' => get_the_title($post_id),
-				'edit_url' => esc_url( get_edit_post_link( $post_id ) ),
-			);
-
-			$response ['insert_post'] = $insert_Data;
+		if ( 'tf_room' !== $post_type || 'tf_rooms' !== $field_id || '' === $post_title ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Invalid room request.', 'tourfic' ) ), 400 );
 		}
-		echo wp_json_encode( $response );
-		wp_die();
+
+		$parent_post = $parent_id ? get_post( $parent_id ) : null;
+		if ( ! $parent_post || 'tf_hotel' !== $parent_post->post_type ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Invalid hotel.', 'tourfic' ) ), 400 );
+		}
+
+		if ( ! current_user_can( 'edit_post', $parent_id ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'You do not have permission to edit this hotel.', 'tourfic' ) ), 403 );
+		}
+
+		$post_type_object = get_post_type_object( $post_type );
+		if (
+			! $post_type_object
+			|| empty( $post_type_object->cap->create_posts )
+			|| empty( $post_type_object->cap->publish_posts )
+			|| ! current_user_can( $post_type_object->cap->create_posts )
+			|| ! current_user_can( $post_type_object->cap->publish_posts )
+		) {
+			wp_send_json_error( array( 'message' => esc_html__( 'You do not have permission to create rooms.', 'tourfic' ) ), 403 );
+		}
+
+		$post_id = wp_insert_post(
+			wp_slash(
+				array(
+					'post_type'   => $post_type,
+					'post_title'  => $post_title,
+					'post_status' => 'publish',
+					'post_author' => get_current_user_id(),
+				)
+			),
+			true
+		);
+
+		if ( is_wp_error( $post_id ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'The room could not be created.', 'tourfic' ) ), 500 );
+		}
+
+		update_post_meta(
+			$post_id,
+			'tf_room_opt',
+			array( 'tf_hotel' => $parent_id )
+		);
+
+		wp_send_json_success(
+			array(
+				'insert_post' => array(
+					'id'       => $post_id,
+					'title'    => get_the_title( $post_id ),
+					'edit_url' => esc_url( get_edit_post_link( $post_id ) ),
+				),
+			)
+		);
 	}
 
 	/**
-	 * Delete Post Data
+	 * Return a supported taxonomy object for inline term management.
 	 *
-	 * @author Foysal
+	 * @param string $taxonomy Taxonomy name.
+	 * @return \WP_Taxonomy|false
 	 */
-	function tf_delete_post_data_callback() {
-		//Verify Nonce
-		check_ajax_referer( 'updates', '_nonce' );
+	private function tf_get_allowed_inline_taxonomy( $taxonomy ) {
+		$allowed_taxonomies = array(
+			'tour_features',
+			'carrental_brand',
+			'carrental_fuel_type',
+			'carrental_engine_year',
+		);
 
-		$categoryName = !empty($_POST['categoryName']) ? sanitize_title( wp_unslash($_POST['categoryName']) ) : '';
-		$term_id = !empty($_POST['term_id']) ? sanitize_text_field( wp_unslash($_POST['term_id']) ) : '';
-
-		$response = [];
-
-		if (!empty($term_id)) {
-			$result = wp_delete_term($term_id, $categoryName); // Replace 'category' with your taxonomy if it's different
-
-			if (!is_wp_error($result)) {
-				$response['success'] = true;
-			} else {
-				$response['error'] = $result->get_error_message();
-			}
-		} else {
-			$response['error'] = 'Invalid term ID.';
+		if ( ! in_array( $taxonomy, $allowed_taxonomies, true ) ) {
+			return false;
 		}
 
-		echo wp_json_encode($response);
-		wp_die();
+		$taxonomy_object = get_taxonomy( $taxonomy );
+		return $taxonomy_object instanceof \WP_Taxonomy ? $taxonomy_object : false;
+	}
+
+	/**
+	 * Delete a supported inline-managed taxonomy term.
+	 *
+	 * @param string $nonce_action Nonce action for the calling endpoint.
+	 */
+	private function tf_delete_inline_term( $nonce_action ) {
+		check_ajax_referer( $nonce_action, '_nonce' );
+
+		$taxonomy = isset( $_POST['categoryName'] ) ? sanitize_key( wp_unslash( $_POST['categoryName'] ) ) : '';
+		$term_id  = isset( $_POST['term_id'] ) ? absint( wp_unslash( $_POST['term_id'] ) ) : 0;
+
+		$taxonomy_object = $this->tf_get_allowed_inline_taxonomy( $taxonomy );
+		if ( ! $taxonomy_object || empty( $taxonomy_object->cap->delete_terms ) || ! $term_id ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Invalid term request.', 'tourfic' ) ), 400 );
+		}
+
+		if ( ! current_user_can( $taxonomy_object->cap->delete_terms ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'You do not have permission to delete this term.', 'tourfic' ) ), 403 );
+		}
+
+		$term = get_term( $term_id, $taxonomy );
+		if ( ! $term || is_wp_error( $term ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'The term does not exist.', 'tourfic' ) ), 404 );
+		}
+
+		$result = wp_delete_term( $term_id, $taxonomy );
+		if ( ! $result || is_wp_error( $result ) ) {
+			$message = is_wp_error( $result ) ? $result->get_error_message() : esc_html__( 'The term could not be deleted.', 'tourfic' );
+			wp_send_json_error( array( 'message' => $message ), 400 );
+		}
+
+		wp_send_json_success();
 	}
 }

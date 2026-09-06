@@ -1,6 +1,6 @@
 /******/ (() => { // webpackBootstrap
 jQuery(function($) {
-	const config = window.tfApiDocs || {};
+	const config = window.tourficApiDocs || {};
 	const i18n = config.i18n || {};
 	const $list = $('#tf-api-keys-container');
 

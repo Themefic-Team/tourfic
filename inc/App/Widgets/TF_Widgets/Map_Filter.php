@@ -41,6 +41,8 @@ class Map_Filter extends \WP_Widget {
      *
      */
     public function widget($args, $instance) {
+		$tourfic_search_request = \tourfic_get_public_search_request();
+		$tourfic_search_type    = isset( $tourfic_search_request['type'] ) ? $tourfic_search_request['type'] : '';
 
         $tax_post_type = '';
         if (is_tax()) {
@@ -97,14 +99,14 @@ class Map_Filter extends \WP_Widget {
         } else {
             extract($args);
             echo wp_kses_post($before_widget);
-            if (!empty($_GET['type']) && $_GET['type'] == "tf_tours" && !empty($_GET['from']) && !empty($_GET['to'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) )); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if ("tf_tours" === $tourfic_search_type && ! empty( $tourfic_search_request['from'] ) && ! empty( $tourfic_search_request['to'] )) {
+                $this->widget_html($button_title, $tourfic_search_type);
             }
-            if (!empty($_GET['type']) && $_GET['type'] == "tf_hotel" && !empty($_GET['from']) && !empty($_GET['to'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) )); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if ("tf_hotel" === $tourfic_search_type && ! empty( $tourfic_search_request['from'] ) && ! empty( $tourfic_search_request['to'] )) {
+                $this->widget_html($button_title, $tourfic_search_type);
             }
-            if (!empty($_GET['type']) && $_GET['type'] == "tf_apartment" && !empty($_GET['from']) && !empty($_GET['to'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) )); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if ("tf_apartment" === $tourfic_search_type && ! empty( $tourfic_search_request['from'] ) && ! empty( $tourfic_search_request['to'] )) {
+                $this->widget_html($button_title, $tourfic_search_type);
             }
         } ?>
         <!-- End Price Range widget -->
@@ -159,7 +161,7 @@ class Map_Filter extends \WP_Widget {
                 <div class="tf-notice">
                     <?php
                     if (current_user_can('manage_options')) {
-                        echo '<p>' . esc_html__('Google Maps is selected but the API key is missing. Please configure the API key ', 'tourfic') . '<a href="' . esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings')) . '" target="_blank">' . esc_html__('Map Settings', 'tourfic') . '</a></p>';
+                        echo '<p>' . esc_html__('Google Maps is selected but the API key is missing. Please configure the API key ', 'tourfic') . '<a href="' . esc_url(admin_url('admin.php?page=tourfic_settings#tab=map_settings')) . '" target="_blank">' . esc_html__('Map Settings', 'tourfic') . '</a></p>';
                     } else {
                         echo '<p>' . esc_html__('Access is restricted as Google Maps API key is not configured. Please contact the site administrator.', 'tourfic') . '</p>';
                     }
@@ -700,7 +702,7 @@ class Map_Filter extends \WP_Widget {
             <div class="tf-notice">
                 <?php
                 if (current_user_can('manage_options')) {
-                    echo '<p>' . esc_html__('Google Maps is not selected. Please configure it ', 'tourfic') . '<a href="' . esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings')) . '" target="_blank">' . esc_html__('Map Settings', 'tourfic') . '</a></p>';
+                    echo '<p>' . esc_html__('Google Maps is not selected. Please configure it ', 'tourfic') . '<a href="' . esc_url(admin_url('admin.php?page=tourfic_settings#tab=map_settings')) . '" target="_blank">' . esc_html__('Map Settings', 'tourfic') . '</a></p>';
                 } else {
                     echo '<p>' . esc_html__('Access is restricted as Google Maps is not enabled. Please contact the site administrator', 'tourfic') . '</p>';
                 }

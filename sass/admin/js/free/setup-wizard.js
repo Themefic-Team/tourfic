@@ -12,15 +12,15 @@
             },
         });
 
-        //if body has class .tourfic-settings_page_tf-setup-wizard then add background-color: #ecf5ff; to html
-        if ($('body').hasClass('tourfic-settings_page_tf-setup-wizard')) {
+        //if body has class .tourfic-settings_page_tourfic-setup-wizard then add background-color: #ecf5ff; to html
+        if ($('body').hasClass('tourfic-settings_page_tourfic-setup-wizard')) {
             $('html').css('padding', '0');
         }
 
         $(document).on('click', '.tf-setup-start-btn', function (e) {
             e.preventDefault();
             $('.tf-welcome-step').hide();
-            if(tf_admin_params.is_woo_not_active) {
+            if(tourficAdminParams.is_woo_not_active) {
                 $('.tf-setup-step-1').fadeIn(600);
             } else {
                 $('.tf-setup-step-2').fadeIn(600);
@@ -39,7 +39,7 @@
                 let services = $('input[name="tf-services[]"]:checked').length;
 
                 if (!services) {
-                    alert(tf_admin_params.i18n.no_services_selected);
+                    alert(tourficAdminParams.i18n.no_services_selected);
                     return false;
                 }
 
@@ -109,7 +109,7 @@
             e.preventDefault();
             let step = $(this).closest('.tf-setup-step-container').data('step');
             let prevStep = step - 1;
-            if(step === 2 && !tf_admin_params.is_woo_not_active) {
+            if(step === 2 && !tourficAdminParams.is_woo_not_active) {
                 $('.tf-setup-step-2').fadeOut(300, function () {
                     $('.tf-setup-step-0').fadeIn(300);
                 });
@@ -140,7 +140,7 @@
             formData.append('action', 'tourfic_setup_wizard_submit');
 
             $.ajax({
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 type: 'POST',
                 data: formData,
                 processData: false,
@@ -170,12 +170,12 @@
         * Travelfic Theme Installing
         * @author: Jahid
         */
-        let travelfic_toolkit_active_plugins = tf_admin_params.is_travelfic_toolkit_active;
+        let travelfic_toolkit_active_plugins = tourficAdminParams.is_travelfic_toolkit_active;
 
         $(document).on('click', '.tf-setup-travelfic-theme-btn', function (e) {
             e.preventDefault();
             
-            if(tf_admin_params.current_active_theme && "travelfic"!=tf_admin_params.current_active_theme && "ultimate-hotel-booking"!=tf_admin_params.current_active_theme && "bricks"!=tf_admin_params.current_active_theme){
+            if(tourficAdminParams.current_active_theme && "travelfic"!=tourficAdminParams.current_active_theme && "ultimate-hotel-booking"!=tourficAdminParams.current_active_theme && "bricks"!=tourficAdminParams.current_active_theme){
                 let theme_slug = $('.tf-template-selection input[name="tf_theme_select"]:checked').val();
 
                 // Bricks is a premium theme (already installed), skip wp.org install and activate directly
@@ -195,11 +195,11 @@
                 $('.tf-setup-travelfic-theme-btn').addClass('tf-btn-loading');
                 var data = {
                     action: "tourfic_theme_installing",
-                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    _ajax_nonce: tourficAdminParams.tf_nonce,
                     slug: theme_slug,
                 };
                 // Installing Function
-                jQuery.post(tf_admin_params.ajax_url, data, function (response) {
+                jQuery.post(tourficAdminParams.ajax_url, data, function (response) {
                     $('.tf-setup-travelfic-theme-active').trigger("click");
                 })
             }else{
@@ -230,17 +230,17 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: "tourfic_setup_travelfic_theme_active",
-                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    _ajax_nonce: tourficAdminParams.tf_nonce,
                     slug: theme_slug,
                 },
                 success: function(response) {
                     if ($.inArray("travelfic-toolkit", travelfic_toolkit_active_plugins) !== -1) {
                         $('.tf-setup-travelfic-toolkit-btn').trigger("click");
                     }else{
-                        window.location.replace(tf_admin_params.toolkit_page_url);
+                        window.location.replace(tourficAdminParams.toolkit_page_url);
                     }
                 },
                 error: function(error) {
@@ -265,15 +265,15 @@
 
                 var data = {
                     action: "tourfic_travelfic_toolkit_installing",
-                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    _ajax_nonce: tourficAdminParams.tf_nonce,
                     slug: plugin_slug,
                 };
                 // Installing Function
-                jQuery.post(tf_admin_params.ajax_url, data, function (response) {
+                jQuery.post(tourficAdminParams.ajax_url, data, function (response) {
                     $('.tf-setup-travelfic-toolkit-active').trigger("click");
                 })
             }else{
-                window.location.replace(tf_admin_params.toolkit_page_url);
+                window.location.replace(tourficAdminParams.toolkit_page_url);
             }
         });
 
@@ -289,14 +289,14 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: "tourfic_travelfic_toolkit_activate",
-                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    _ajax_nonce: tourficAdminParams.tf_nonce,
                     slug: plugin_slug,
                 },
                 success: function(response) {
-                    window.location.replace(tf_admin_params.toolkit_page_url);
+                    window.location.replace(tourficAdminParams.toolkit_page_url);
                 },
                 error: function(error) {
                     
@@ -314,18 +314,18 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: "tourfic_ajax_install_woo",
-                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    _ajax_nonce: tourficAdminParams.tf_nonce,
                     slug: 'woocommerce',
                 },
                 beforeSend: function () {
-                    btn.text(tf_admin_params.installing)
+                    btn.text(tourficAdminParams.installing)
                     btn.addClass('tf-btn-loading');
                 },
                 success: function(response) {
-                    btn.text(tf_admin_params.activating);
+                    btn.text(tourficAdminParams.activating);
                     $('.tf-active-woo-btn').trigger("click");
                 },
                 error: function(error) {
@@ -344,14 +344,14 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: {
                     action: "tourfic_ajax_activate_woo",
-                    _ajax_nonce: tf_admin_params.tf_nonce,
+                    _ajax_nonce: tourficAdminParams.tf_nonce,
                     slug: 'woocommerce',
                 },
                 beforeSend: function () {
-                    btn.text(tf_admin_params.activating)
+                    btn.text(tourficAdminParams.activating)
                     btn.addClass('tf-btn-loading');
                 },
                 success: function(response) {

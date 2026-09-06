@@ -222,7 +222,7 @@ trait Action_Helper {
 
 			foreach ( $menu_order as $index => $item ) {
 
-				if ( 'tf_settings' === $item ) {
+				if ( 'tourfic_settings' === $item ) {
 					$tourfic_menu_order[] = 'separator-tourfic';
 					$tourfic_menu_order[] = $item;
 					$tourfic_menu_order[] = 'edit.php?post_type=tf_tours';
@@ -399,7 +399,7 @@ trait Action_Helper {
 	function tf_plugin_action_links( $links ) {
 
 		$settings_link = array(
-			'<a href="admin.php?page=tf_dashboard">' . esc_html__( 'Settings', 'tourfic' ) . '</a>',
+			'<a href="admin.php?page=tourfic_dashboard">' . esc_html__( 'Settings', 'tourfic' ) . '</a>',
 		);
 
 		$action_links = array_merge(

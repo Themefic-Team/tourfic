@@ -34,7 +34,8 @@ class Car_Transmission_Filter extends \WP_Widget {
      */
     public function widget( $args, $instance ) {
 
-        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $tourfic_search_request = \tourfic_get_public_search_request();
+        $posttype               = isset( $tourfic_search_request['type'] ) ? $tourfic_search_request['type'] : get_post_type();
 
         if ( is_admin() || 'tf_carrental' === $posttype ) {
             extract( $args );
@@ -44,11 +45,8 @@ class Car_Transmission_Filter extends \WP_Widget {
             $manual_label    = ! empty( $instance['manual_label'] ) ? $instance['manual_label'] : esc_html__( 'Manual', 'tourfic' );
 
             $selected_values = array();
-            if ( isset( $_GET['car_transmission'] ) && function_exists( 'tourfic_normalize_car_binary_filter_values' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                $car_transmission = is_array( $_GET['car_transmission'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                    ? array_map( 'sanitize_text_field', wp_unslash( $_GET['car_transmission'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                    : sanitize_text_field( wp_unslash( $_GET['car_transmission'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                $selected_values = tourfic_normalize_car_binary_filter_values( $car_transmission );
+            if ( isset( $tourfic_search_request['car_transmission'] ) && function_exists( 'tourfic_normalize_car_binary_filter_values' ) ) {
+                $selected_values = tourfic_normalize_car_binary_filter_values( $tourfic_search_request['car_transmission'] );
             }
 
             echo wp_kses_post( $before_widget );

@@ -94,7 +94,7 @@ class Helper {
         $admin_bar->add_menu( array(
             'id'    => 'tf-quick-links',
             'title' => esc_html__( 'Tourfic', 'tourfic' ),
-            'href'  => admin_url( 'admin.php?page=tf_dashboard' ),
+            'href'  => admin_url( 'admin.php?page=tourfic_dashboard' ),
             'meta'  => array(
                 'title' => esc_html__( 'Tourfic Dashboard', 'tourfic' ),
             ),
@@ -105,7 +105,7 @@ class Helper {
             'id'     => 'tf-quick-dashboard',
             'parent' => 'tf-quick-links',
             'title'  => esc_html__( 'Dashboard', 'tourfic' ),
-            'href'   => admin_url( 'admin.php?page=tf_dashboard' ),
+            'href'   => admin_url( 'admin.php?page=tourfic_dashboard' ),
         ) );
 
         // Settings
@@ -113,7 +113,7 @@ class Helper {
             'id'     => 'tf-quick-settings',
             'parent' => 'tf-quick-links',
             'title'  => esc_html__( 'Settings', 'tourfic' ),
-            'href'   => admin_url( 'admin.php?page=tf_settings#tab=general' ),
+            'href'   => admin_url( 'admin.php?page=tourfic_settings#tab=general' ),
         ) );
 
         // Get Help
@@ -121,7 +121,7 @@ class Helper {
             'id'     => 'tf-quick-get-help',
             'parent' => 'tf-quick-links',
             'title'  => esc_html__( 'Get Help', 'tourfic' ),
-            'href'   => admin_url( 'admin.php?page=tf_get_help' ),
+            'href'   => admin_url( 'admin.php?page=tourfic_get_help' ),
         ) );
 
         // Shortcodes
@@ -129,7 +129,7 @@ class Helper {
             'id'     => 'tf-quick-shortcodes',
             'parent' => 'tf-quick-links',
             'title'  => esc_html__( 'Shortcodes', 'tourfic' ),
-            'href'   => admin_url( 'admin.php?page=tf_shortcodes' ),
+            'href'   => admin_url( 'admin.php?page=tourfic_shortcodes' ),
         ) );
 
         // Template Library (if plugin active)
@@ -801,7 +801,7 @@ class Helper {
 	}
 
 	static function tf_custom_wp_kses_allow_tags() {
-		// Allow all HTML tags and attributes
+		// Extend post HTML for Tourfic-generated form controls and SVG icons.
 		$allowed_tags = wp_kses_allowed_html( 'post' );
 
 		// Add form-related tags to the allowed tags
@@ -874,14 +874,6 @@ class Helper {
 			'id'    => true,
 		);
 
-		$allowed_tags['script'] = array(
-			'src'   => true,
-			'type'  => true,
-			'class' => true,
-			'id'    => true,
-			'async' => true,
-			'defer' => true,
-		);
 		$allowed_tags['button'] = array(
 			'class'    => true,
 			'id'       => true,
@@ -889,25 +881,6 @@ class Helper {
 			'data-*'   => true,
 
 		);
-		$allowed_tags['style']  = array(
-			'class' => true,
-			'id'    => true,
-		);
-
-		$allowed_tags['iframe'] = array(
-			'class'           => true,
-			'id'              => true,
-			'allowfullscreen' => true,
-			'frameborder'     => true,
-			'src'             => true,
-			'style'           => true,
-			'width'           => true,
-			'height'          => true,
-			'title'           => true,
-			'allow'           => true,
-			'data-*'          => true,
-		);
-
 		$allowed_tags["svg"] = array(
 			'class'           => true,
 			'aria-hidden'     => true,
@@ -1256,7 +1229,8 @@ class Helper {
 	static function tf_search_result_sidebar_form( $placement = 'single' ) {
 
 		// Get post type
-		$post_type                     = !empty($_GET['type']) ? sanitize_text_field( wp_unslash($_GET['type']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$search_request                = tourfic_get_public_search_request();
+		$post_type                     = ! empty( $search_request['type'] ) ? $search_request['type'] : '';
 		$place_title                   = '';
 		$date_format_for_users         = ! empty( self::tfopt( "tf-date-format-for-users" ) ) ? self::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$hotel_location_field_required = ! empty( self::tfopt( "required_location_hotel_search" ) ) ? self::tfopt( "required_location_hotel_search" ) : 0;
@@ -1272,22 +1246,22 @@ class Helper {
 			$place_placeholder = ( $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ) ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Enter Destination', 'tourfic' );
 
 			$place_key   = 'place';
-			$place_value = ! empty( $_GET[ $place_key ] ) ? sanitize_text_field( wp_unslash( $_GET[ $place_key ] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$place_title = ! empty( $_GET['place-name'] ) ? sanitize_text_field( wp_unslash( $_GET['place-name'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$place_value = ! empty( $search_request[ $place_key ] ) ? $search_request[ $place_key ] : '';
+			$place_title = ! empty( $search_request['place-name'] ) ? $search_request['place-name'] : '';
 
 			$taxonomy = $post_type == 'tf_hotel' ? 'hotel_location' : ( $post_type == 'tf_tour' ? 'tour_destination' : 'apartment_location' );
 			// $place_name = ! empty( $place_value ) ? get_term_by( 'slug', $place_value, $taxonomy )->name : '';
 			$place_name = ! empty( $place_value ) ? esc_attr( $place_value ) : '';
 
-			$room = ! empty( $_GET['room'] ) ? sanitize_text_field( wp_unslash( $_GET['room'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$room = ! empty( $search_request['room'] ) ? $search_request['room'] : 0;
 		}
 
-		$adult      = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash( $_GET['adults'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$children   = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash( $_GET['children'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$infant     = ! empty( $_GET['infant'] ) ? sanitize_text_field( wp_unslash( $_GET['infant'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$date       = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$startprice = ! empty( $_GET['from'] ) ? sanitize_text_field( wp_unslash( $_GET['from'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$endprice   = ! empty( $_GET['to'] ) ? sanitize_text_field( wp_unslash( $_GET['to'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$adult      = ! empty( $search_request['adults'] ) ? $search_request['adults'] : 0;
+		$children   = ! empty( $search_request['children'] ) ? $search_request['children'] : 0;
+		$infant     = ! empty( $search_request['infant'] ) ? $search_request['infant'] : 0;
+		$date       = ! empty( $search_request['check-in-out-date'] ) ? $search_request['check-in-out-date'] : '';
+		$startprice = ! empty( $search_request['from'] ) ? $search_request['from'] : '';
+		$endprice   = ! empty( $search_request['to'] ) ? $search_request['to'] : '';
 
 		$search_current_timestamp = current_time( 'timestamp' );
 		$search_default_check_in  = wp_date( 'Y/m/d', $search_current_timestamp );
@@ -1328,6 +1302,7 @@ class Helper {
             <div class="tf-archive-booking-form__style-1 tf-box-wrapper tf-box">
                 <form class="widget tf-hotel-side-booking" method="get" autocomplete="off"
                       action="<?php echo esc_url( self::tf_booking_search_action() ); ?>" id="tf-widget-booking-search">
+					<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
 
                     <div class="tf-field-group tf-destination-box" <?php echo ( $post_type == 'tf_hotel' && self::tfopt( "hide_hotel_location_search" ) == 1 & self::tfopt( "required_location_hotel_search" ) != 1 ) || ( $post_type == 'tf_tours' && self::tfopt( "hide_tour_location_search" ) == 1 && self::tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : '' ?>>
                         <i class="fa-solid fa-location-dot"></i>
@@ -1405,7 +1380,7 @@ class Helper {
 
                     <div class="tf-booking-bttns tf-mt-24">
 						<?php
-						$ptype = !empty($_GET['type']) ?  sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+						$ptype = ! empty( $search_request['type'] ) ? $search_request['type'] : get_post_type();
 						?>
                         <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                         <button class="tf_btn tf_btn_full tf-submit"
@@ -1692,7 +1667,7 @@ class Helper {
             </div>
             <div class="tf-booking-form-submit">
 				<?php
-				$ptype = !empty($_GET['type']) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$ptype = ! empty( $search_request['type'] ) ? $search_request['type'] : get_post_type();
 				?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                 <button class="tf_btn tf_btn_large tf_btn_sharp tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
@@ -2048,7 +2023,7 @@ class Helper {
                 </div>
             </div>
             <div class="tf-booking-form-submit">
-	            <?php $ptype = !empty($_GET['type']) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+	            <?php $ptype = ! empty( $search_request['type'] ) ? $search_request['type'] : get_post_type(); ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr($ptype); ?>" class="tf-post-type"/>
                 <button class="tf_btn tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
             </div>
@@ -2113,6 +2088,7 @@ class Helper {
             <!-- Start Booking widget -->
             <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
                   action="<?php echo esc_url( self::tf_booking_search_action() ); ?>" id="tf-widget-booking-search">
+				<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                 <div class="tf_form-row">
                     <label class="tf_label-row">
                         <div class="tf_form-inner" <?php echo ( $post_type == 'tf_hotel' && self::tfopt( "hide_hotel_location_search" ) == 1 && self::tfopt( "required_location_hotel_search" ) != 1 ) || ( $post_type == 'tf_tours' && self::tfopt( "hide_tour_location_search" ) == 1 && self::tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : '' ?>>
@@ -2248,11 +2224,11 @@ class Helper {
                         <input type="hidden" id="endprice" value="<?php echo esc_attr( $endprice ); ?>">
 					<?php } ?>
 					<?php
-					if ( ! empty( $_GET['tf-author'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
-                        <input type="hidden" id="tf_author" value="<?php echo esc_html(sanitize_text_field( wp_unslash( $_GET['tf-author'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>">
+					if ( ! empty( $search_request['tf-author'] ) ) { ?>
+                        <input type="hidden" id="tf_author" value="<?php echo esc_html( $search_request['tf-author'] ); ?>">
 					<?php } ?>
 					<?php
-					$ptype = !empty($_GET['type']) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					$ptype = ! empty( $search_request['type'] ) ? $search_request['type'] : get_post_type();
 					?>
                     <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                     <button class="tf_btn tf_btn_full tf-submit"
@@ -2370,6 +2346,8 @@ class Helper {
 	 * Archive Sidebar Search Form
 	 */
 	static function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_name = '', $taxonomy_slug = '', $settings = array() ) {
+		$search_request = tourfic_get_public_search_request();
+
 		// Set builder from settings or default to elementor
 		$builder = isset( $settings['builder'] ) ? $settings['builder'] : 'elementor';
 
@@ -2420,7 +2398,7 @@ class Helper {
 		$disable_apartment_child_search  = ! empty( self::tfopt( 'disable_apartment_child_search' ) ) ? self::tfopt( 'disable_apartment_child_search' ) : '';
 		$disable_apartment_infant_search = ! empty( self::tfopt( 'disable_apartment_infant_search' ) ) ? self::tfopt( 'disable_apartment_infant_search' ) : '';
 
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$check_in_out = ! empty( $search_request['check-in-out-date'] ) ? $search_request['check-in-out-date'] : '';
 
 		$archive_current_timestamp = current_time( 'timestamp' );
 		$archive_default_check_in  = wp_date( 'Y/m/d', $archive_current_timestamp );
@@ -2464,8 +2442,8 @@ class Helper {
         $default_time = gmdate('g:i A', strtotime($default_time_str));
 
         // Use selected time from GET or fall back to default
-        $selected_pickup_time = !empty($_GET['pickup-time']) ? sanitize_text_field( wp_unslash($_GET['pickup-time']) ) : $default_time; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        $selected_dropoff_time = !empty($_GET['dropoff-time']) ? sanitize_text_field( wp_unslash($_GET['dropoff-time']) ) : $default_time; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $selected_pickup_time = ! empty( $search_request['pickup-time'] ) ? $search_request['pickup-time'] : $default_time;
+        $selected_dropoff_time = ! empty( $search_request['dropoff-time'] ) ? $search_request['dropoff-time'] : $default_time;
 
 		if ( ( is_post_type_archive( 'tf_hotel' ) && $design_hotel == "design-1" ) ||
              ( is_post_type_archive( 'tf_tours' ) && $design_tours == "design-1" ) ||
@@ -2474,6 +2452,7 @@ class Helper {
 			?>
             <div class="tf-archive-booking-form__style-1 tf-box-wrapper tf-box">
                 <form action="<?php echo esc_url( self::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking">
+					<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                     <div class="tf-field-group tf-destination-box" <?php echo ( $post_type == 'tf_hotel' && self::tfopt( "hide_hotel_location_search" ) == 1 && self::tfopt( "required_location_hotel_search" ) != 1 ) || ( $post_type == 'tf_tours' && self::tfopt( "hide_tour_location_search" ) == 1 && self::tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : '' ?>>
                         <?php echo wp_kses( self::tf_render_builder_icon_html( $settings, 'search_location_icon', '<i class="fa-solid fa-location-dot"></i>', $builder ), self::tf_custom_wp_kses_allow_tags() ); ?>
 
@@ -2612,6 +2591,7 @@ class Helper {
             </span>
             <div class="tf-archive-booking-form__style-2 tf-archive-search-form tf-booking-form-wrapper">
                 <form action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+					<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                     <div class="tf-booking-form-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
                         <div class="tf-booking-form-location" <?php echo ( $post_type == 'tf_hotel' && self::tfopt( "hide_hotel_location_search" ) == 1 && self::tfopt( "required_location_hotel_search" ) != 1 ) || ( $post_type == 'tf_tours' && self::tfopt( "hide_tour_location_search" ) == 1 && self::tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : '' ?>>
                             <span class="tf-booking-form-title"><?php echo esc_html( $loc_label ); ?></span>
@@ -3029,7 +3009,7 @@ class Helper {
 		<div class="tf-archive-search-box">
 			<div class="tf-archive-search-box-wrapper">
 				<div class="tf-date-select-box tf-flex tf-flex-gap-8">
-					<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location <?php echo !isset( $_GET['same_location'] ) || 'on'==$_GET['same_location'] ? esc_attr('active') : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>">
+					<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location <?php echo ! isset( $search_request['same_location'] ) || 'on' === $search_request['same_location'] ? esc_attr('active') : ''; ?>">
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
 								<div class="icon">
@@ -3037,8 +3017,8 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php echo esc_html( $pickup_label ); ?></h5>
-									<input type="text" placeholder="<?php echo esc_attr( $pickup_location_placeholder ); ?>" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-name']) ) ) : '' // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>" />
-									<input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : '' // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>" />
+									<input type="text" placeholder="<?php echo esc_attr( $pickup_location_placeholder ); ?>" id="tf_pickup_location" value="<?php echo ! empty( $search_request['pickup-name'] ) ? esc_html( $search_request['pickup-name'] ) : ''; ?>" />
+									<input type="hidden" id="tf_pickup_location_id" value="<?php echo ! empty( $search_request['pickup'] ) ? esc_html( $search_request['pickup'] ) : ''; ?>" />
 								</div>
 							</div>
 						</div>
@@ -3049,8 +3029,8 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php echo esc_html( $dropoff_label ); ?></h5>
-									<input type="text" placeholder="<?php echo esc_attr( $dropoff_location_placeholder ); ?>" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-name']) )) : '' // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>" />
-									<input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : '' // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>" />
+									<input type="text" placeholder="<?php echo esc_attr( $dropoff_location_placeholder ); ?>" id="tf_dropoff_location" value="<?php echo ! empty( $search_request['dropoff-name'] ) ? esc_html( $search_request['dropoff-name'] ) : ''; ?>" />
+									<input type="hidden" id="tf_dropoff_location_id" value="<?php echo ! empty( $search_request['dropoff'] ) ? esc_html( $search_request['dropoff'] ) : ''; ?>" />
 								</div>
 							</div>
 						</div>
@@ -3064,7 +3044,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php echo esc_html( $pickup_date_label ); ?></h5>
-									<input type="text" placeholder="<?php echo esc_attr( $pickup_date_placeholder ); ?>" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup-date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-date']) )) : esc_attr(gmdate($date_format_for_users, strtotime('+1 day'))); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>" />
+									<input type="text" placeholder="<?php echo esc_attr( $pickup_date_placeholder ); ?>" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo ! empty( $search_request['pickup-date'] ) ? esc_html( $search_request['pickup-date'] ) : esc_attr(gmdate($date_format_for_users, strtotime('+1 day'))); ?>" />
 								</div>
 							</div>
 						</div>
@@ -3111,7 +3091,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php echo esc_html( $dropoff_date_label ); ?></h5>
-									<input type="text" placeholder="<?php echo esc_attr( $dropoff_date_placeholder ); ?>" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-date']) )) : esc_attr(gmdate($date_format_for_users, strtotime('+2 day'))); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>" readonly='' />
+									<input type="text" placeholder="<?php echo esc_attr( $dropoff_date_placeholder ); ?>" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo ! empty( $search_request['dropoff-date'] ) ? esc_html( $search_request['dropoff-date'] ) : esc_attr(gmdate($date_format_for_users, strtotime('+2 day'))); ?>" readonly='' />
 								</div>
 							</div>
 						</div>
@@ -3161,7 +3141,7 @@ class Helper {
 							<li>
 								<label>
                                     <?php echo !empty($settings['return_same_location_text']) ? esc_attr($settings['return_same_location_text']) : esc_html__( 'Return in the same location', 'tourfic' ); ?>
-                                    <input type="checkbox" name="same_location" <?php echo !isset($_GET['same_location']) || $_GET['same_location'] === 'on' ? esc_attr('checked') : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>>
+                                    <input type="checkbox" name="same_location" <?php echo ! isset( $search_request['same_location'] ) || 'on' === $search_request['same_location'] ? esc_attr('checked') : ''; ?>>
                                     <span class="tf-checkmark"></span>
                                 </label>
 
@@ -3169,7 +3149,7 @@ class Helper {
 							<li>
 								<label><?php esc_html_e("Age of driver ", "tourfic"); ?>
                                 <?php echo esc_attr($car_driver_min_age); ?>-<?php echo esc_attr($car_driver_max_age); ?>?
-									<input type="checkbox" name="driver_age" <?php echo !isset($_GET['driver_age']) || $_GET['driver_age']==='on' ? esc_attr('checked') : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>>
+									<input type="checkbox" name="driver_age" <?php echo ! isset( $search_request['driver_age'] ) || 'on' === $search_request['driver_age'] ? esc_attr('checked') : ''; ?>>
 									<span class="tf-checkmark"></span>
 								</label>
 							</li>
@@ -3216,8 +3196,8 @@ class Helper {
                                         dateSetToFields(selectedDates, instance);
                                     },
                                     <?php
-                                    $pickup_date  = ! empty($_GET['pickup-date']) ? gmdate('Y-m-d', strtotime(sanitize_text_field( wp_unslash($_GET['pickup-date']) ))) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                                    $dropoff_date = ! empty($_GET['dropoff-date']) ? gmdate('Y-m-d', strtotime(sanitize_text_field( wp_unslash($_GET['dropoff-date']) ))) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                                    $pickup_date  = ! empty( $search_request['pickup-date'] ) ? gmdate( 'Y-m-d', strtotime( $search_request['pickup-date'] ) ) : '';
+                                    $dropoff_date = ! empty( $search_request['dropoff-date'] ) ? gmdate( 'Y-m-d', strtotime( $search_request['dropoff-date'] ) ) : '';
                                     ?>
 
                                     <?php if ( $pickup_date && $dropoff_date ) : ?>
@@ -3253,10 +3233,10 @@ class Helper {
 		</div>
         <?php } elseif ( $post_type == 'tf_room' && $design_room == "design-1" ) {
             
-			$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults']) ) : '1'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children']) ) : '0'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$room = ! empty( $_GET['room'] ) ? sanitize_text_field( wp_unslash($_GET['room']) ) : '1'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$adults = ! empty( $search_request['adults'] ) ? $search_request['adults'] : '1';
+			$child = ! empty( $search_request['children'] ) ? $search_request['children'] : '0';
+			$room = ! empty( $search_request['room'] ) ? $search_request['room'] : '1';
+			$check_in_out = ! empty( $search_request['check-in-out-date'] ) ? $search_request['check-in-out-date'] : '';
             $check_in_out_arr = tourfic_split_date_range( $check_in_out );
             $check_in = !empty($check_in_out_arr[0]) ? $check_in_out_arr[0] : ''; 
             $check_out = !empty($check_in_out_arr[1]) ? $check_in_out_arr[1] : '';
@@ -3278,6 +3258,7 @@ class Helper {
                         <h1><?php echo esc_html($room_banner_title); ?></h1>
                         <div class="tf-archive-search-box">
                             <form action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+								<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                                 <div class="tf-archive-search-box-wrapper tf-flex tf-flex-space-bttn tf-flex-align-center">
                                     <div class="tf-select-date">
                                         <div class="tf-flex tf-flex-gap-4 tf-flex-direction-column">
@@ -3472,6 +3453,7 @@ class Helper {
                                     </svg>';
             ?>
             <form class="tf-archive-booking-form__style-3 tf_archive_search_result tf-hotel-side-booking tf-booking-form" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off">
+				<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                 <div class="tf-search-fields <?php echo $post_type == 'tf_tours' ? esc_attr( 'tf-tour-archive-block' ) : ''; ?>">
                     <div class="tf-search-field">
                         <div class="tf-search-field-icon">
@@ -3727,6 +3709,7 @@ class Helper {
 		<?php } else { ?>
             <form class="tf_archive_search_result tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
                   action="<?php echo esc_url( self::tf_booking_search_action() ); ?>">
+				<?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
 
                 <div class="tf_form-row">
                     <label class="tf_label-row">

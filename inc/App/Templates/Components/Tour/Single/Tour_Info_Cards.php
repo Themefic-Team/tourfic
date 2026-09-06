@@ -153,7 +153,7 @@ class Tour_Info_Cards {
 								} else {
 									$duration_time_html = $duration_time;
 								}
-								echo " " . esc_html( $duration_time_html );
+								echo esc_html( ' ' . $duration_time_html );
 								?>
 							</span></p>
 							<?php if ( $night ) { ?>

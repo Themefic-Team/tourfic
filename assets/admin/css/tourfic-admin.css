@@ -462,7 +462,7 @@ button.tf-order-remove {
   fill: #f56e28;
 }
 
-#adminmenu .toplevel_page_tf_settings .dashicons-before img, #adminmenu .menu-icon-tf_tours .dashicons-before img, #adminmenu .menu-icon-tf_hotel .dashicons-before img, #adminmenu .menu-icon-tf_apartment .dashicons-before img, #adminmenu .toplevel_page_tf-multi-vendor .dashicons-before img, #adminmenu .menu-icon-tf_email_templates .dashicons-before img {
+#adminmenu .toplevel_page_tourfic_settings .dashicons-before img, #adminmenu .menu-icon-tf_tours .dashicons-before img, #adminmenu .menu-icon-tf_hotel .dashicons-before img, #adminmenu .menu-icon-tf_apartment .dashicons-before img, #adminmenu .toplevel_page_tf-multi-vendor .dashicons-before img, #adminmenu .menu-icon-tf_email_templates .dashicons-before img {
   opacity: 1;
 }
 #adminmenu .menu-icon-tf_hotel .dashicons-before:before {
@@ -513,7 +513,7 @@ input.select2-search__field {
   box-shadow: none;
 }
 
-body.tourfic-settings_page_tf-setup-wizard {
+body.tourfic-settings_page_tourfic-setup-wizard {
   background-color: #EBF5FF;
 }
 
@@ -610,21 +610,21 @@ body.tourfic-settings_page_tf-setup-wizard {
   min-width: auto;
 }
 
-.tourfic-settings_page_tf-setup-wizard #wpcontent {
+.tourfic-settings_page_tourfic-setup-wizard #wpcontent {
   margin-left: 0 !important;
 }
 
-.tourfic-settings_page_tf-setup-wizard #wpbody-content, .tourfic-settings_page_tf-setup-wizard #wpcontent {
+.tourfic-settings_page_tourfic-setup-wizard #wpbody-content, .tourfic-settings_page_tourfic-setup-wizard #wpcontent {
   padding: 0;
   overflow-x: hidden !important;
   min-height: calc(100vh - 32px);
 }
 
-.tourfic-settings_page_tf-setup-wizard #adminmenumain, .tourfic-settings_page_tf-setup-wizard .error, .tourfic-settings_page_tf-setup-wizard .notice, .tourfic-settings_page_tf-setup-wizard .update-nag, .tourfic-settings_page_tf-setup-wizard .updated, .tourfic-settings_page_tf-setup-wizard div#wpadminbar, .tourfic-settings_page_tf-setup-wizard div#wpfooter {
+.tourfic-settings_page_tourfic-setup-wizard #adminmenumain, .tourfic-settings_page_tourfic-setup-wizard .error, .tourfic-settings_page_tourfic-setup-wizard .notice, .tourfic-settings_page_tourfic-setup-wizard .update-nag, .tourfic-settings_page_tourfic-setup-wizard .updated, .tourfic-settings_page_tourfic-setup-wizard div#wpadminbar, .tourfic-settings_page_tourfic-setup-wizard div#wpfooter {
   display: none;
 }
 
-.tourfic-settings_page_tf-setup-wizard #wpbody {
+.tourfic-settings_page_tourfic-setup-wizard #wpbody {
   padding-top: 0px;
 }
 
@@ -1698,12 +1698,12 @@ Steps
   }
 }
 
-.tourfic-settings_page_tf_dashboard #wpcontent,
+.tourfic-settings_page_tourfic_dashboard #wpcontent,
 .tourfic-settings_page_tf_workspace #wpcontent {
   background-color: #F5F9FF;
 }
 
-.tourfic-settings_page_tf_get_help #wpcontent {
+.tourfic-settings_page_tourfic_get_help #wpcontent {
   background-color: #EBF5FF;
 }
 

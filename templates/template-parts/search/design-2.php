@@ -6,13 +6,14 @@ defined( 'ABSPATH' ) || exit;
 <?php 
 
 use \Tourfic\Classes\Helper;
-// Check nonce security
-if ( ! isset( $_GET['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_GET['_nonce'])), 'tf_ajax_nonce' ) ) {
+$tourfic_search_request = tourfic_get_public_search_request();
+$tourfic_search_type    = isset( $tourfic_search_request['type'] ) ? $tourfic_search_request['type'] : '';
+if ( empty( $tourfic_search_type ) ) {
 	return;
 }
-if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
+if( "tf_tours" === $tourfic_search_type ){
 	$tourfic_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] : '';
-}elseif( !empty($_GET['type']) && $_GET['type']=="tf_hotel" ){
+}elseif( "tf_hotel" === $tourfic_search_type ){
 	$tourfic_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] : '';
 }else{
     $tourfic_search_result_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] : '';
@@ -23,17 +24,17 @@ if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
         <div class="tf-container">
             <div class="tf-hero-content tf-archive-hero-content">
                 <div class="tf-head-title">
-                    <h1><?php echo !empty($_GET['place-name']) ? esc_html( sanitize_text_field( wp_unslash($_GET['place-name'])) ) : '' ?></h1>
-                    <?php if( !empty($_GET['type']) && "tf_tours"==$_GET['type'] ){ 
-                    $tourfic_adults = !empty($_GET['adults']) ? absint( sanitize_key($_GET['adults']) ) : 0;
-                    $tourfic_children = !empty($_GET['children']) ? absint( sanitize_key($_GET['children']) ) : 0;
+                    <h1><?php echo ! empty( $tourfic_search_request['place-name'] ) ? esc_html( $tourfic_search_request['place-name'] ) : '' ?></h1>
+                    <?php if( "tf_tours" === $tourfic_search_type ){
+                    $tourfic_adults = ! empty( $tourfic_search_request['adults'] ) ? $tourfic_search_request['adults'] : 0;
+                    $tourfic_children = ! empty( $tourfic_search_request['children'] ) ? $tourfic_search_request['children'] : 0;
                     ?>
                         <div class="tf-title-meta">
-                            <p>( <?php echo esc_html( $tourfic_adults + $tourfic_children ); ?> <?php esc_html_e("Guest", "tourfic"); ?>, <?php echo !empty($_GET['check-in-out-date']) ? esc_html( sanitize_text_field( wp_unslash($_GET['check-in-out-date'])) ) : '' ?> )</p>
+                            <p>( <?php echo esc_html( $tourfic_adults + $tourfic_children ); ?> <?php esc_html_e("Guest", "tourfic"); ?>, <?php echo ! empty( $tourfic_search_request['check-in-out-date'] ) ? esc_html( $tourfic_search_request['check-in-out-date'] ) : '' ?> )</p>
                         </div>
-                    <?php } if( !empty($_GET['type']) && "tf_hotel"==$_GET['type'] ){ ?>
+                    <?php } if( "tf_hotel" === $tourfic_search_type ){ ?>
                     <div class="tf-title-meta">
-                        <p>( <?php echo !empty($_GET['room']) ? esc_html( sanitize_text_field( wp_unslash($_GET['room'])) ) : '0' ?> <?php esc_html_e("room", "tourfic"); ?>, <?php echo !empty($_GET['check-in-out-date']) ? esc_html( sanitize_text_field( wp_unslash($_GET['check-in-out-date'])) ) : '' ?> )</p>
+                        <p>( <?php echo ! empty( $tourfic_search_request['room'] ) ? esc_html( $tourfic_search_request['room'] ) : '0' ?> <?php esc_html_e("room", "tourfic"); ?>, <?php echo ! empty( $tourfic_search_request['check-in-out-date'] ) ? esc_html( $tourfic_search_request['check-in-out-date'] ) : '' ?> )</p>
                     </div>
                     <?php } ?>
                 </div>
@@ -61,11 +62,12 @@ if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
                     <!-- Booking form Start -->
                     <div class="tf-archive-booking-form__style-2 tf-archive-search-form tf-booking-form-wrapper">
                         <form action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                            <?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                             <?php Helper::tf_search_result_sidebar_form( 'archive' ); ?>
                         </form>
                     </div>
                     <!-- Booking form end -->        
-                    <?php echo do_shortcode("[tf_search_result]"); ?>
+                    <?php echo do_shortcode( '[tourfic_search_result]' ); ?>
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
                     <div class="tf-filter-wrapper">

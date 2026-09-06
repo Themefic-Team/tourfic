@@ -8,13 +8,14 @@ use \Tourfic\App\TF_Review;
 ?>
 <?php
 $tourfic_booking_btn_text = !empty(Helper::tfopt('car_booking_form_button_text')) ? Helper::tfopt('car_booking_form_button_text') : esc_html__('Continue', 'tourfic');
-$tourfic_pickup_date_query = !empty($_GET['pickup_date']) ? sanitize_text_field( wp_unslash($_GET['pickup_date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-if ( empty( $tourfic_pickup_date_query ) && !empty($_GET['pickup-date']) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-	$tourfic_pickup_date_query = sanitize_text_field( wp_unslash($_GET['pickup-date']) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$tourfic_search_request = tourfic_get_public_search_request();
+$tourfic_pickup_date_query = ! empty( $tourfic_search_request['pickup_date'] ) ? $tourfic_search_request['pickup_date'] : '';
+if ( empty( $tourfic_pickup_date_query ) && ! empty( $tourfic_search_request['pickup-date'] ) ) {
+	$tourfic_pickup_date_query = $tourfic_search_request['pickup-date'];
 }
-$tourfic_dropoff_date_query = !empty($_GET['dropoff_date']) ? sanitize_text_field( wp_unslash($_GET['dropoff_date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-if ( empty( $tourfic_dropoff_date_query ) && !empty($_GET['dropoff-date']) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-	$tourfic_dropoff_date_query = sanitize_text_field( wp_unslash($_GET['dropoff-date']) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$tourfic_dropoff_date_query = ! empty( $tourfic_search_request['dropoff_date'] ) ? $tourfic_search_request['dropoff_date'] : '';
+if ( empty( $tourfic_dropoff_date_query ) && ! empty( $tourfic_search_request['dropoff-date'] ) ) {
+	$tourfic_dropoff_date_query = $tourfic_search_request['dropoff-date'];
 }
 $tourfic_pickup_date = !empty($tourfic_pickup_date_query) && function_exists('tourfic_normalize_date') ? tourfic_normalize_date($tourfic_pickup_date_query) : $tourfic_pickup_date_query;
 $tourfic_dropoff_date = !empty($tourfic_dropoff_date_query) && function_exists('tourfic_normalize_date') ? tourfic_normalize_date($tourfic_dropoff_date_query) : $tourfic_dropoff_date_query;
@@ -52,17 +53,17 @@ $tourfic_start_time = strtotime($tourfic_start_time_str);
 $tourfic_end_time   = strtotime($tourfic_end_time_str);
 $tourfic_default_time = gmdate('g:i A', strtotime($tourfic_default_time_str));
 
-// Use selected time from GET or fall back to default
-$tourfic_selected_pickup_time = !empty($_GET['pickup_time']) ? sanitize_text_field( wp_unslash($_GET['pickup_time']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-if ( empty( $tourfic_selected_pickup_time ) && !empty($_GET['pickup-time']) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-	$tourfic_selected_pickup_time = sanitize_text_field( wp_unslash($_GET['pickup-time']) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+// Use the verified search time or fall back to the configured default.
+$tourfic_selected_pickup_time = ! empty( $tourfic_search_request['pickup_time'] ) ? $tourfic_search_request['pickup_time'] : '';
+if ( empty( $tourfic_selected_pickup_time ) && ! empty( $tourfic_search_request['pickup-time'] ) ) {
+	$tourfic_selected_pickup_time = $tourfic_search_request['pickup-time'];
 }
 if ( empty( $tourfic_selected_pickup_time ) ) {
 	$tourfic_selected_pickup_time = $tourfic_default_time;
 }
-$tourfic_selected_dropoff_time = !empty($_GET['dropoff_time']) ? sanitize_text_field( wp_unslash($_GET['dropoff_time']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-if ( empty( $tourfic_selected_dropoff_time ) && !empty($_GET['dropoff-time']) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-	$tourfic_selected_dropoff_time = sanitize_text_field( wp_unslash($_GET['dropoff-time']) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$tourfic_selected_dropoff_time = ! empty( $tourfic_search_request['dropoff_time'] ) ? $tourfic_search_request['dropoff_time'] : '';
+if ( empty( $tourfic_selected_dropoff_time ) && ! empty( $tourfic_search_request['dropoff-time'] ) ) {
+	$tourfic_selected_dropoff_time = $tourfic_search_request['dropoff-time'];
 }
 if ( empty( $tourfic_selected_dropoff_time ) ) {
 	$tourfic_selected_dropoff_time = $tourfic_default_time;

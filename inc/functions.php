@@ -6,6 +6,201 @@ use Tourfic\Classes\Helper;
 use Tourfic\Classes\Room\Availability;
 use Tourfic\Classes\Room\Room;
 
+if ( ! function_exists( 'tourfic_get_public_search_request' ) ) {
+	/**
+	 * Return the verified and sanitized public search request.
+	 *
+	 * Companion plugins may add owned fields by extending the schema with one of
+	 * the supported types: text, key, post_type, absint, decimal, toggle,
+	 * key_list, absint_list, or binary_list.
+	 *
+	 * @return array<string, mixed>
+	 */
+	function tourfic_get_public_search_request() {
+		$nonce = isset( $_GET['tourfic_search_nonce'] )
+			? sanitize_text_field( wp_unslash( $_GET['tourfic_search_nonce'] ) )
+			: '';
+
+		if ( ! wp_verify_nonce( $nonce, 'tourfic_public_search' ) ) {
+			return array();
+		}
+
+		$schema = array(
+			'type'                     => 'post_type',
+			'place'                    => 'text',
+			'place-name'               => 'text',
+			'destination'              => 'text',
+			'pickup'                   => 'text',
+			'pickup-name'              => 'text',
+			'dropoff'                  => 'text',
+			'dropoff-name'             => 'text',
+			'check-in-out-date'        => 'text',
+			'check-in-date'            => 'text',
+			'check-out-date'           => 'text',
+			'tour_date'                => 'text',
+			'pickup-date'              => 'text',
+			'pickup_date'              => 'text',
+			'dropoff-date'             => 'text',
+			'dropoff_date'             => 'text',
+			'pickup-time'              => 'text',
+			'pickup_time'              => 'text',
+			'dropoff-time'             => 'text',
+			'dropoff_time'             => 'text',
+			'room-option'              => 'text',
+			'adults'                   => 'absint',
+			'children'                 => 'absint',
+			'infant'                   => 'absint',
+			'room'                     => 'absint',
+			'min_seat'                 => 'absint',
+			'max_seat'                 => 'absint',
+			'tf-author'                => 'absint',
+			'from'                     => 'decimal',
+			'to'                       => 'decimal',
+			'driver_age'               => 'toggle',
+			'same_location'            => 'toggle',
+			'features'                 => 'key_list',
+			'types'                    => 'key_list',
+			'room_types'               => 'key_list',
+			'car_brand'                => 'absint_list',
+			'children_ages'            => 'absint_list',
+			'car_transmission'         => 'binary_list',
+			'carplay_android_auto'     => 'binary_list',
+			'car_category'             => 'key_list',
+			'car_fueltype'             => 'key_list',
+			'car_engine_year'          => 'key_list',
+		);
+
+		/**
+		 * Filter the allowlisted public search request schema.
+		 *
+		 * @param array<string, string> $schema Field names mapped to sanitizer types.
+		 */
+		$schema = apply_filters( 'tourfic_public_search_request_schema', $schema );
+		if ( ! is_array( $schema ) ) {
+			return array();
+		}
+
+		$supported_types = array(
+			'text',
+			'key',
+			'post_type',
+			'absint',
+			'decimal',
+			'toggle',
+			'key_list',
+			'absint_list',
+			'binary_list',
+		);
+		$request         = array();
+
+		foreach ( $schema as $field => $type ) {
+			if (
+				! is_string( $field ) ||
+				! preg_match( '/^[a-z0-9_-]+$/', $field ) ||
+				! in_array( $type, $supported_types, true ) ||
+				! isset( $_GET[ $field ] )
+			) {
+				continue;
+			}
+
+			$value = map_deep( wp_unslash( $_GET[ $field ] ), 'sanitize_text_field' );
+
+			switch ( $type ) {
+				case 'text':
+					if ( is_scalar( $value ) ) {
+						$request[ $field ] = sanitize_text_field( (string) $value );
+					}
+					break;
+
+				case 'key':
+					if ( is_scalar( $value ) ) {
+						$request[ $field ] = sanitize_key( (string) $value );
+					}
+					break;
+
+				case 'post_type':
+					if ( is_scalar( $value ) ) {
+						$post_type = sanitize_key( (string) $value );
+						if ( in_array( $post_type, array( 'tf_tours', 'tf_hotel', 'tf_room', 'tf_apartment', 'tf_carrental' ), true ) ) {
+							$request[ $field ] = $post_type;
+						}
+					}
+					break;
+
+				case 'absint':
+					if ( is_scalar( $value ) ) {
+						$request[ $field ] = absint( $value );
+					}
+					break;
+
+				case 'decimal':
+					if ( is_scalar( $value ) ) {
+						$decimal = sanitize_text_field( (string) $value );
+						if ( preg_match( '/^\d+(?:\.\d+)?$/', $decimal ) ) {
+							$request[ $field ] = $decimal;
+						}
+					}
+					break;
+
+				case 'toggle':
+					if ( is_scalar( $value ) ) {
+						$request[ $field ] = 'on' === sanitize_key( (string) $value ) ? 'on' : '';
+					}
+					break;
+
+				case 'key_list':
+					$items             = is_array( $value ) ? $value : explode( ',', (string) $value );
+					$request[ $field ] = array_values(
+						array_filter(
+							array_map(
+								static function ( $item ) {
+									return is_scalar( $item ) ? sanitize_key( (string) $item ) : '';
+								},
+								$items
+							)
+						)
+					);
+					break;
+
+				case 'absint_list':
+					$items             = is_array( $value ) ? $value : explode( ',', (string) $value );
+					$request[ $field ] = array_values(
+						array_filter(
+							array_map(
+								static function ( $item ) {
+									return is_scalar( $item ) ? absint( $item ) : 0;
+								},
+								$items
+							)
+						)
+					);
+					break;
+
+				case 'binary_list':
+					$items             = is_array( $value ) ? $value : explode( ',', (string) $value );
+					$request[ $field ] = array_values(
+						array_filter(
+							array_map(
+								static function ( $item ) {
+									$item = is_scalar( $item ) ? sanitize_key( (string) $item ) : '';
+
+									return in_array( $item, array( '0', '1' ), true ) ? $item : null;
+								},
+								$items
+							),
+							static function ( $item ) {
+								return null !== $item;
+							}
+						)
+					);
+					break;
+			}
+		}
+
+		return $request;
+	}
+}
+
 if ( ! function_exists( 'tourfic_is_block_theme' ) ) {
 	/**
 	 * Check for a block theme without breaking WordPress versions before 5.9.
@@ -64,7 +259,6 @@ function tourfic_file_missing( $files = '' ) {
 }
 
 add_action( 'admin_notices', 'tourfic_file_missing' );
-add_action( 'plugins_loaded', 'tf_add_elelmentor_addon' );
 
 if ( ! function_exists( 'tourfic_tour_traveler_info_mode_settings' ) ) {
 	/**
@@ -1041,7 +1235,7 @@ if ( ! function_exists( 'tourfic_tour_get_traveler_document_download_url' ) ) {
 
 		return wp_nonce_url(
 			admin_url( 'admin-post.php?action=tourfic_download_traveler_document&attachment_id=' . $attachment_id ),
-			'tf_download_traveler_document_' . $attachment_id
+			'tourfic_download_traveler_document_' . $attachment_id
 		);
 	}
 }
@@ -1056,7 +1250,7 @@ if ( ! function_exists( 'tourfic_download_traveler_document' ) ) {
 		$attachment_id = isset( $_GET['attachment_id'] ) ? absint( wp_unslash( $_GET['attachment_id'] ) ) : 0;
 		$nonce         = isset( $_GET['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
 
-		if ( $attachment_id <= 0 || ! wp_verify_nonce( $nonce, 'tf_download_traveler_document_' . $attachment_id ) ) {
+		if ( $attachment_id <= 0 || ! wp_verify_nonce( $nonce, 'tourfic_download_traveler_document_' . $attachment_id ) ) {
 			wp_die( esc_html__( 'Invalid download request.', 'tourfic' ) );
 		}
 
@@ -1094,7 +1288,7 @@ if ( ! function_exists( 'tourfic_download_traveler_document' ) ) {
 		exit;
 	}
 }
-add_action( 'admin_post_tf_download_traveler_document', 'tourfic_download_traveler_document' );
+add_action( 'admin_post_tourfic_download_traveler_document', 'tourfic_download_traveler_document' );
 
 /**
  * Car Functions
@@ -1268,7 +1462,7 @@ if(!function_exists('tourfic_set_order')){
 
 if(!function_exists('tourfic_custom_wp_kses_allow_tags')){
 	function tourfic_custom_wp_kses_allow_tags() {
-		// Allow all HTML tags and attributes
+		// Extend post HTML for Tourfic-generated form controls and SVG icons.
 		$allowed_tags = wp_kses_allowed_html( 'post' );
 
 		// Add form-related tags to the allowed tags
@@ -1341,14 +1535,6 @@ if(!function_exists('tourfic_custom_wp_kses_allow_tags')){
 			'id'    => true,
 		);
 
-		$allowed_tags['script'] = array(
-			'src'   => true,
-			'type'  => true,
-			'class' => true,
-			'id'    => true,
-			'async' => true,
-			'defer' => true,
-		);
 		$allowed_tags['button'] = array(
 			'class'    => true,
 			'id'       => true,
@@ -1356,25 +1542,6 @@ if(!function_exists('tourfic_custom_wp_kses_allow_tags')){
 			'data-*'   => true,
 
 		);
-		$allowed_tags['style']  = array(
-			'class' => true,
-			'id'    => true,
-		);
-
-		$allowed_tags['iframe'] = array(
-			'class'           => true,
-			'id'              => true,
-			'allowfullscreen' => true,
-			'frameborder'     => true,
-			'src'             => true,
-			'style'           => true,
-			'width'           => true,
-			'height'          => true,
-			'title'           => true,
-			'allow'           => true,
-			'data-*'          => true,
-		);
-
 		$allowed_tags["svg"] = array(
 			'class'           => true,
 			'aria-hidden'     => true,

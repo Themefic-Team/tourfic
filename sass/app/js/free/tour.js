@@ -3,7 +3,7 @@
 
 
         function tf_flatpickr_locale() {
-            let locale = tf_params.tour_form_data.flatpickr_locale;
+            let locale = tourficParams.tour_form_data.flatpickr_locale;
             let allowed_locales = ['ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN'];
 
             if (jQuery.inArray(locale, allowed_locales) !== -1) {
@@ -46,7 +46,7 @@
 
         // let locale_zone = tf_flatpickr_locale();
 
-        window.flatpickr.l10ns[tf_flatpickr_locale()].firstDayOfWeek = tf_params.tour_form_data.first_day_of_week;
+        window.flatpickr.l10ns[tf_flatpickr_locale()].firstDayOfWeek = tourficParams.tour_form_data.first_day_of_week;
         window.flatpickr.l10ns[tf_flatpickr_locale()].rangeSeparator = ' - ';
 
         function tfSplitDateRange(value, singleDateAsRange = true) {
@@ -83,7 +83,7 @@
         });
 
         function tfShowTourBookingErrors(errors) {
-            const bookingErrors = Array.isArray(errors) && errors.length ? errors : [tf_params.something_went_wrong || 'Something went wrong. Please try again.'];
+            const bookingErrors = Array.isArray(errors) && errors.length ? errors : [tourficParams.something_went_wrong || 'Something went wrong. Please try again.'];
 
             bookingErrors.forEach(function (text) {
                 notyf.error(text);
@@ -101,7 +101,7 @@
                 return {
                     status: 'error',
                     without_payment: 'false',
-                    errors: [tf_params.something_went_wrong || 'Something went wrong. Please try again.']
+                    errors: [tourficParams.something_went_wrong || 'Something went wrong. Please try again.']
                 };
             }
         }
@@ -123,7 +123,7 @@
 
             var formData = new FormData(this);
             formData.append('action', 'tourfic_tours_booking');
-            formData.append('_ajax_nonce', tf_params.nonce);
+            formData.append('_ajax_nonce', tourficParams.nonce);
 
 
             // Tour Extra
@@ -159,7 +159,7 @@
             $this.trigger('tourfic:tour-booking:form-data', [formData, $selectedPackage]);
             $.ajax({
                 type: 'post',
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -338,15 +338,15 @@
                 formData = new FormData(form[0]);
 
             formData.append('action', 'tourfic_tour_search');
-            formData.append('_nonce', tf_params.nonce);
+            formData.append('_nonce', tourficParams.nonce);
 
             if (formData.get('from') == null || formData.get('to') == null) {
-                formData.append('from', tf_params.tf_tour_min_price);
-                formData.append('to', tf_params.tf_tour_max_price);
+                formData.append('from', tourficParams.tf_tour_min_price);
+                formData.append('to', tourficParams.tf_tour_max_price);
             }
 
             $.ajax({
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -448,7 +448,7 @@
                     b = document.createElement("DIV");
                     /*make the matching letters bold:*/
 
-                    b.innerHTML += tf_params.no_found;
+                    b.innerHTML += tourficParams.no_found;
                     /*insert a input field that will hold the current array item's value:*/
                     b.innerHTML += "<input type='hidden' value=''>";
                     /*execute a function when someone clicks on the item value (DIV element):*/
@@ -536,13 +536,13 @@
             }
             var data = {
                 action: 'tourfic_tour_price_calculation',
-                _nonce: tf_params.nonce,
+                _nonce: tourficParams.nonce,
                 post_id: post_id,
                 date: date,
             };
 
             $.ajax({
-                url: tf_params.ajax_url,
+                url: tourficParams.ajax_url,
                 type: 'POST',
                 data: data,
                 beforeSend: function () {
@@ -681,7 +681,7 @@
 
         // Tour destination autocomplete
         var tour_destination_input = document.getElementById("tf-destination");
-        var tour_destinations = tf_params.tour_destinations;
+        var tour_destinations = tourficParams.tour_destinations;
         if (tour_destination_input) {
             tourfic_autocomplete(tour_destination_input, tour_destinations);
         }
@@ -846,13 +846,13 @@
         });
 
         // First Day of Week
-        //const first_day_of_week = tf_params.tour_form_data.flatpickr_locale;
+        //const first_day_of_week = tourficParams.tour_form_data.flatpickr_locale;
 
         var tour_date_options = {
             enableTime: false,
             dateFormat: "Y/m/d",
             altInput: true,
-            altFormat: tf_params.tour_form_data.date_format,
+            altFormat: tourficParams.tour_form_data.date_format,
             locale: tf_flatpickr_locale(),
 
             onReady: function (selectedDates, dateStr, instance) {
@@ -866,10 +866,10 @@
                 $(".tours-check-in-out").val(instance.altInput.value);
                 $('.tours-check-in-out[type="hidden"]').val(tfNormalizeDateRange(dateStr));
 
-                $(document).trigger('tourfic:tour-booking:date-change', [selectedDates, tf_params.tour_form_data]);
+                $(document).trigger('tourfic:tour-booking:date-change', [selectedDates, tourficParams.tour_form_data]);
 
 
-                if (tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
+                if (tourficParams.tour_form_data.tf_tour_selected_template === 'design-2') {
                     dateSetToFields(selectedDates, instance);
                 }
             },
@@ -877,10 +877,10 @@
         };
 
 
-        if (!tf_params.tour_form_data.is_all_unavailable && typeof tf_params.tour_form_data.tour_availability === 'object' && tf_params.tour_form_data.tour_availability && Object.keys(tf_params.tour_form_data.tour_availability).length > 0) {
+        if (!tourficParams.tour_form_data.is_all_unavailable && typeof tourficParams.tour_form_data.tour_availability === 'object' && tourficParams.tour_form_data.tour_availability && Object.keys(tourficParams.tour_form_data.tour_availability).length > 0) {
             tour_date_options.minDate = "today";
             tour_date_options.disableMobile = "true";
-            tour_date_options.enable = Object.entries(tf_params.tour_form_data.tour_availability)
+            tour_date_options.enable = Object.entries(tourficParams.tour_form_data.tour_availability)
                 .filter(([dateRange, data]) => data.status === "available")
                 .map(([dateRange, data]) => {
                     const [fromRaw, toRaw] = tfSplitDateRange(dateRange);
@@ -899,8 +899,8 @@
         }
 
         tour_date_options.disable = [];
-        if (tf_params.tour_form_data.is_all_unavailable && typeof tf_params.tour_form_data.tour_availability === 'object' && tf_params.tour_form_data.tour_availability && Object.keys(tf_params.tour_form_data.tour_availability).length > 0) {
-            tour_date_options.disable = Object.entries(tf_params.tour_form_data.tour_availability)
+        if (tourficParams.tour_form_data.is_all_unavailable && typeof tourficParams.tour_form_data.tour_availability === 'object' && tourficParams.tour_form_data.tour_availability && Object.keys(tourficParams.tour_form_data.tour_availability).length > 0) {
+            tour_date_options.disable = Object.entries(tourficParams.tour_form_data.tour_availability)
                 .filter(([dateRange, data]) => data.status === "unavailable")
                 .map(([dateRange, data]) => {
                     const [fromRaw, toRaw] = tfSplitDateRange(dateRange);
@@ -916,11 +916,11 @@
                 });
         }
 
-        if (tf_params.tour_form_data.disable_same_day) {
+        if (tourficParams.tour_form_data.disable_same_day) {
             tour_date_options.disable.push("today");
         }
 
-        if (tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
+        if (tourficParams.tour_form_data.tf_tour_selected_template === 'design-1') {
             tour_date_options.disableMobile = "true";
             $(".tours-check-in-out").flatpickr(tour_date_options);
 
@@ -933,7 +933,7 @@
             });
         }
 
-        if (tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
+        if (tourficParams.tour_form_data.tf_tour_selected_template === 'design-2') {
             tour_date_options.disableMobile = "true";
             $(".tours-check-in-out").flatpickr(tour_date_options);
             if (tour_date_options.defaultDate) {
@@ -968,7 +968,7 @@
             });
         }
 
-        if (tf_params.tour_form_data.tf_tour_selected_template === 'default') {
+        if (tourficParams.tour_form_data.tf_tour_selected_template === 'default') {
             tour_date_options.disableMobile = "true";
             $("#check-in-out-date").flatpickr(tour_date_options);
         }
@@ -986,15 +986,15 @@
         });
 
         if ($('#tour-location').length) {
-            const map = L.map('tour-location').setView([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], tf_params.tour_form_data.location_zoom);
+            const map = L.map('tour-location').setView([tourficParams.tour_form_data.location_latitude, tourficParams.tour_form_data.location_longitude], tourficParams.tour_form_data.location_zoom);
 
             const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' + tf_params.open_street_map_text + '</a>'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">' + tourficParams.open_street_map_text + '</a>'
             }).addTo(map);
 
-            const marker = L.marker([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], { alt: tf_params.tour_form_data.location }).addTo(map)
-                .bindPopup(tf_params.tour_form_data.location);
+            const marker = L.marker([tourficParams.tour_form_data.location_latitude, tourficParams.tour_form_data.location_longitude], { alt: tourficParams.tour_form_data.location }).addTo(map)
+                .bindPopup(tourficParams.tour_form_data.location);
         }
 
     });

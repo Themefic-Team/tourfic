@@ -114,7 +114,8 @@ class Listings {
 
                 <?php if ( 'yes' == $show_sorting ) : ?>
                     <div class="tf-sorting-selection-warper">
-                        <form class="tf-archive-ordering" method="get">
+                    <form class="tf-archive-ordering" method="get">
+                        <?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                             <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
                                 <option value="default"><?php echo esc_html__( 'Default Sorting', 'tourfic' ); ?></option>
                                 <option value="enquiry"><?php echo esc_html__( 'Sort By Recommended', 'tourfic' ); ?></option>
@@ -213,7 +214,8 @@ class Listings {
 
                 <?php if ( 'yes' == $show_sorting ) : ?>
                     <div class="tf-sorting-selection-warper">
-                        <form class="tf-archive-ordering" method="get">
+                    <form class="tf-archive-ordering" method="get">
+                        <?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                             <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
                                 <option value="default"><?php echo esc_html__( 'Default Sorting', 'tourfic' ); ?></option>
                                 <option value="enquiry"><?php echo esc_html__( 'Sort By Recommended', 'tourfic' ); ?></option>
@@ -347,7 +349,7 @@ class Listings {
                                 <div class="tf-notice tf-mt-24 tf-mb-30">
                                     <?php
                                     if ( current_user_can( 'manage_options' ) ) {
-                                        echo '<p>' . esc_html__( 'Google Maps is selected but the API key is missing. Please configure the API key', 'tourfic' ) . '<a href="' . esc_url( admin_url( 'admin.php?page=tf_settings#tab=map_settings' ) ) . '" target="_blank">' . esc_html__( 'Map Settings', 'tourfic' ) . '</a></p>';
+                                        echo '<p>' . esc_html__( 'Google Maps is selected but the API key is missing. Please configure the API key', 'tourfic' ) . '<a href="' . esc_url( admin_url( 'admin.php?page=tourfic_settings#tab=map_settings' ) ) . '" target="_blank">' . esc_html__( 'Map Settings', 'tourfic' ) . '</a></p>';
                                     } else {
                                         echo '<p>' . esc_html__( 'Access is restricted as Google Maps API key is not configured. Please contact the site administrator.', 'tourfic' ) . '</p>';
                                     }
@@ -647,7 +649,7 @@ class Listings {
                             <div class="tf-notice tf-mt-24 tf-mb-30">
                                 <?php
                                 if ( current_user_can( 'manage_options' ) ) {
-                                    echo '<p>' . esc_html__( 'Google Maps is not selected. Please configure it ', 'tourfic' ) . '<a href="' . esc_url( admin_url( 'admin.php?page=tf_settings#tab=map_settings' ) ) . '" target="_blank">' . esc_html__( 'Map Settings', 'tourfic' ) . '</a></p>';
+                                    echo '<p>' . esc_html__( 'Google Maps is not selected. Please configure it ', 'tourfic' ) . '<a href="' . esc_url( admin_url( 'admin.php?page=tourfic_settings#tab=map_settings' ) ) . '" target="_blank">' . esc_html__( 'Map Settings', 'tourfic' ) . '</a></p>';
                                 } else {
                                     echo '<p>' . esc_html__( 'Access is restricted as Google Maps is not enabled. Please contact the site administrator', 'tourfic' ) . '</p>';
                                 }
@@ -732,6 +734,7 @@ class Listings {
                     <?php if ( 'yes' == $show_sorting ) : ?>
                         <div class="tf-sorting-selection-warper">
                             <form class="tf-archive-ordering" method="get">
+                                <?php wp_nonce_field( 'tourfic_public_search', 'tourfic_search_nonce', false ); ?>
                                 <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
                                     <option value="default"><?php echo esc_html__( 'Default Sorting', 'tourfic' ); ?></option>
                                     <option value="enquiry"><?php echo esc_html__( 'Sort By Recommended', 'tourfic' ); ?></option>

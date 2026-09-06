@@ -95,10 +95,10 @@
             if (from.length > 0 && to.length > 0) {
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_check_available_hotel',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         from: from,
                         to: to,
                     },
@@ -111,7 +111,7 @@
                         } else {
                             var select2 = $('[name="tf_available_hotels"]');
                             select2.empty();
-                            select2.append('<option value="">' + tf_admin_params.select_hotel + '</option>');
+                            select2.append('<option value="">' + tourficAdminParams.select_hotel + '</option>');
                             $.each(response.data.hotels, function (key, value) {
                                 select2.append('<option value="' + key + '">' + value + '</option>');
                             });
@@ -146,10 +146,10 @@
             if (hotel_id.length > 0) {
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_check_available_room',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         hotel_id: hotel_id,
                         from: from,
                         to: to,
@@ -166,7 +166,7 @@
 
                             select2.removeAttr('disabled');
                             select2.empty();
-                            select2.append('<option value="">' + tf_admin_params.select_room + '</option>');
+                            select2.append('<option value="">' + tourficAdminParams.select_room + '</option>');
                             $.each(response.data.rooms, function (key, value) {
                                 select2.append('<option value="' + key + '">' + value + '</option>');
                             });
@@ -208,10 +208,10 @@
             if (room_id.length > 0) {
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_update_room_fields',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         hotel_id: hotel_id,
                         room_id: room_id,
                         from: from,
@@ -270,7 +270,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -351,10 +351,10 @@
             if (tourId) {
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_tour_date_time_update',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         tour_id: tourId,
                     },
                     beforeSend: function () {
@@ -455,7 +455,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -525,10 +525,10 @@
             if (fromValue.length > 0 && toValue.length > 0) {
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_check_available_apartment',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         from: fromValue,
                         to: toValue,
                         apartment_id: apartment_id
@@ -575,10 +575,10 @@
             if (apartment_id.length > 0) {
                 jQuery.ajax({
                     type: 'post',
-                    url: tf_admin_params.ajax_url,
+                    url: tourficAdminParams.ajax_url,
                     data: {
                         action: 'tourfic_check_apartment_aditional_fees',
-                        _nonce: tf_admin_params.tf_nonce,
+                        _nonce: tourficAdminParams.tf_nonce,
                         apartment_id: apartment_id,
                         from: from,
                         to: to,
@@ -650,7 +650,7 @@
 
             $.ajax({
                 type: 'post',
-                url: tf_admin_params.ajax_url,
+                url: tourficAdminParams.ajax_url,
                 data: formData,
                 processData: false,
                 contentType: false,

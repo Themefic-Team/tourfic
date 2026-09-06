@@ -12,7 +12,7 @@ class Hotel_Enquiry extends \Tourfic\Core\Enquiry {
 			apply_filters( 'tourfic_hotel_enquiry_page_title', esc_html__( 'Hotel Enquiry Details', 'tourfic' ) ),
 			apply_filters( 'tourfic_hotel_enquiry_menu_title', esc_html__( 'Enquiry Details', 'tourfic' ) ),
 			'edit_tf_hotels',
-			'tf_hotel_enquiry',
+			'tourfic_hotel_enquiry',
 			array( $this, 'tf_enquiry_page_callback' )
 		);
 	}

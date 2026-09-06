@@ -57,12 +57,11 @@ class Rooms {
 		$tf_booking_type        = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 		$tf_booking_url         = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
 		$tf_booking_query_url   = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
-		$tf_booking_attribute   = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
-		$tf_hide_booking_form   = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
-		$tf_hide_price          = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
-		$tf_hide_external_price = ! empty( $meta['booking-by'] ) && 2 == $meta['booking-by'] ? ( ! empty( $meta['hide_external_price'] ) ? $meta['hide_external_price'] : true ) : true;
-		$tf_ext_booking_type    = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
-		$tf_ext_booking_code    = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
+		$tf_booking_attribute        = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
+		$tf_hide_booking_form        = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+		$tf_hide_price               = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
+		$tf_hide_external_price      = ! empty( $meta['booking-by'] ) && 2 == $meta['booking-by'] ? ( ! empty( $meta['hide_external_price'] ) ? $meta['hide_external_price'] : true ) : true;
+		$tf_has_external_booking_url = '2' === (string) $tf_booking_type && '' !== $tf_booking_url;
         if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
             $external_search_info = array(
                 '{adult}'    => ! empty( $adult ) ? $adult : 1,
@@ -363,15 +362,11 @@ class Rooms {
                                                 Pricing::instance(get_the_ID(), $room_id)->get_per_price_html();
                                             }
                                             ?>
-                                            <?php if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) && $tf_ext_booking_type == 1 ): ?>
-                                                <a href="<?php echo esc_url( $tf_booking_url ); ?>" class="tf_btn tf_btn_gray" target="_blank">
-                                                    <?php echo esc_html( $tf_hotel_reserve_button_text ); ?>
-                                                </a>
-                                            <?php elseif ( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && ! empty( $tf_ext_booking_code ) ): ?>
-                                                <a href="<?php echo esc_url( "#tf-external-booking-embaded-form" ); ?>" class="tf_btn tf_btn_gray" target="_blank">
-                                                    <?php echo esc_html( $tf_hotel_reserve_button_text ); ?>
-                                                </a>
-                                            <?php else: ?>
+											<?php if ( $tf_has_external_booking_url ) : ?>
+												<a href="<?php echo esc_url( $tf_booking_url ); ?>" class="tf_btn tf_btn_gray" target="_blank">
+													<?php echo esc_html( $tf_hotel_reserve_button_text ); ?>
+												</a>
+											<?php else: ?>
                                                 <button class="hotel-room-availability tf_btn tf_btn_gray" type="submit">
                                                     <?php esc_html_e( 'Check Availability', 'tourfic' ); ?>
                                                 </button>
@@ -710,8 +705,13 @@ class Rooms {
 											                <?php Pricing::instance( get_the_ID(), $room_id)->get_per_price_html(); ?>
                                                         </div>
                                                     <?php endif; ?>
-                                                    <a href="<?php echo $tf_booking_type == 2 ? ( !empty( $tf_booking_url ) && $tf_ext_booking_type == 1 ? esc_url( $tf_booking_url ) : ( $tf_ext_booking_type == 2 && !empty( $tf_ext_booking_code) ? esc_url("#tf-external-booking-embaded-form") : '' ) ) : esc_url( '#room-availability' ) ?>" class="tf_btn tf_btn_large tf_btn_sharp"><?php $tf_booking_type == 2 ? ( !empty( $tf_booking_url ) && ( $tf_hide_booking_form == 1 && $tf_ext_booking_type == 1 ) ? esc_html_e( 'Book Now', 'tourfic') : ($tf_ext_booking_type == 2 && !empty( $tf_ext_booking_code ) ? esc_html_e("Book Now", "tourfic") : esc_html_e("Check Availability", "tourfic") ) ) :  esc_html_e("Check Availability", "tourfic") ?></a>
-                                                    <!--TODO: Need to add external booking code Book now Button  -->
+											<a href="<?php echo esc_url( $tf_has_external_booking_url ? $tf_booking_url : '#room-availability' ); ?>" class="tf_btn tf_btn_large tf_btn_sharp">
+												<?php if ( $tf_has_external_booking_url && '1' === (string) $tf_hide_booking_form ) : ?>
+													<?php esc_html_e( 'Book Now', 'tourfic' ); ?>
+												<?php else : ?>
+													<?php esc_html_e( 'Check Availability', 'tourfic' ); ?>
+												<?php endif; ?>
+											</a>
                                                 </div>
 
                                             </div>
@@ -1232,15 +1232,11 @@ class Rooms {
                                         <?php endif; ?>
                                             <td class="reserve tf-t-c">
                                                 <div class="tf-btn-wrap">
-                                                    <?php if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) && $tf_ext_booking_type == 1 ): ?>
-                                                        <a href="<?php echo esc_url( $tf_booking_url ); ?>" class="tf_btn tf_btn_full" target="_blank">
-                                                            <?php echo esc_html( $tf_hotel_reserve_button_text ); ?>
-                                                        </a>
-                                                    <?php elseif( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && !empty( $tf_ext_booking_code ) ): ?>
-                                                        <a href="<?php echo esc_url( "#tf-external-booking-embaded-form" ); ?>" class="tf_btn tf_btn_full" target="_blank">
-                                                            <?php echo esc_html( $tf_hotel_reserve_button_text ); ?>
-                                                        </a>
-                                                    <?php else: ?>
+										<?php if ( $tf_has_external_booking_url ) : ?>
+													<a href="<?php echo esc_url( $tf_booking_url ); ?>" class="tf_btn tf_btn_full" target="_blank">
+														<?php echo esc_html( $tf_hotel_reserve_button_text ); ?>
+													</a>
+												<?php else: ?>
                                                         <button class="tf_btn tf_btn_full hotel-room-availability" type="submit">
                                                             <?php esc_html_e( 'Check Availability', 'tourfic' ); ?>
                                                         </button>

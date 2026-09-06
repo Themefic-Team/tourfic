@@ -15,7 +15,6 @@ class TF_API_Keys {
 	public function __construct() {
 		add_action( 'init', array( $this, 'maybe_create_tables' ) );
 		add_action( 'rest_api_init', array( $this, 'register_rest_routes' ) );
-		add_filter( 'determine_current_user', array( $this, 'authenticate_current_user' ), 30 );
 		add_filter( 'rest_authentication_errors', array( $this, 'rest_authentication_errors' ) );
 		add_filter( 'rest_request_before_callbacks', array( $this, 'enforce_request_permissions' ), 10, 3 );
 
@@ -151,8 +150,14 @@ class TF_API_Keys {
 			return $result;
 		}
 
+		$user_id = $this->authenticate_current_user( get_current_user_id() );
+
 		if ( $this->headers_present && is_wp_error( $this->last_auth_error ) ) {
 			return $this->last_auth_error;
+		}
+
+		if ( ! empty( $user_id ) && get_current_user_id() !== $user_id ) {
+			wp_set_current_user( $user_id );
 		}
 
 		return $result;
@@ -471,7 +476,12 @@ class TF_API_Keys {
 	}
 
 	private function is_tf_rest_request() {
-		$rest_route = isset( $_GET['rest_route'] ) ? sanitize_text_field( wp_unslash( $_GET['rest_route'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! defined( 'REST_REQUEST' ) || ! REST_REQUEST ) {
+			return false;
+		}
+
+		$rest_route = get_query_var( 'rest_route' );
+		$rest_route = is_string( $rest_route ) ? '/' . ltrim( $rest_route, '/' ) : '';
 		if ( 0 === strpos( $rest_route, '/tf/v1/' ) ) {
 			return true;
 		}

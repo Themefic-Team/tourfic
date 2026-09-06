@@ -6,11 +6,37 @@ defined( 'ABSPATH' ) || exit;
 
 trait Database {
 
-	function create_enquiry_database_table() {
+	/**
+	 * Upgrade the Tourfic tables when their schema version changes.
+	 */
+	public function tourfic_maybe_upgrade_database() {
+		if ( TOURFIC_DATABASE_VERSION === get_option( 'tourfic_database_version' ) ) {
+			return;
+		}
+
+		$this->tourfic_install_database();
+	}
+
+	/**
+	 * Install or update all Tourfic database tables.
+	 */
+	public function tourfic_install_database() {
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+		$this->tourfic_create_enquiry_database_table();
+		$this->tourfic_create_order_database_table();
+
+		wp_clear_scheduled_hook( 'tf_everydate_cron_job' );
+		update_option( 'tourfic_database_version', TOURFIC_DATABASE_VERSION, false );
+	}
+
+	/**
+	 * Create or update the enquiry table.
+	 */
+	private function tourfic_create_enquiry_database_table() {
 		global $wpdb;
 		$table_name      = $wpdb->prefix . 'tf_enquiry_data';
 		$charset_collate = $wpdb->get_charset_collate();
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
 		$sql = "CREATE TABLE $table_name (
         id bigint(20) NOT NULL AUTO_INCREMENT,
@@ -31,12 +57,14 @@ trait Database {
 
 	}
 
-	function tf_order_table_create(){
+	/**
+	 * Create or update the order table.
+	 */
+	private function tourfic_create_order_database_table() {
 
 		global $wpdb;
 		$order_table_name = $wpdb->prefix.'tf_order_data';
 		$charset_collate = $wpdb->get_charset_collate();
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		$sql = "CREATE TABLE $order_table_name (
 		 id bigint(20) NOT NULL AUTO_INCREMENT,
 		 order_id bigint(20) NOT NULL,
