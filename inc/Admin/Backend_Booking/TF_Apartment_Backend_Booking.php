@@ -104,19 +104,10 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 	}
 
 	public function tf_check_apartment_aditional_fees_callback() {
-		// Add nonce for security and authentication.
-		check_ajax_referer( 'updates', '_nonce' );
-
-		// Check if the current user has the required capability.
-		if (!current_user_can('manage_options')) {
-			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
-			return;
-		}
-
-		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( wp_unslash($_POST['apartment_id']) ) : 0;
+		$request      = $this->read_request( array( 'apartment_id' => 'positive' ) );
+		$apartment_id = $request['apartment_id'];
+		$this->authorize_listing( $apartment_id );
 		$meta = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
-		$from         = isset( $_POST['from'] ) ? sanitize_text_field( wp_unslash($_POST['from']) ) : '';
-		$to           = isset( $_POST['to'] ) ? sanitize_text_field( wp_unslash($_POST['to']) ) : '';
 
 		$additional_fees = ! empty( $meta["additional_fees"] ) ? $meta["additional_fees"] : array();
 
@@ -265,24 +256,12 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 	}
 
 	function check_avaibility_callback() {
-		// Add nonce for security and authentication.
-		check_ajax_referer( 'updates', '_nonce' );
-
-		// Check if the current user has the required capability.
-		if (!current_user_can('manage_options')) {
-			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
-			return;
-		}
-
-		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( wp_unslash($_POST['apartment_id']) ) : '';
-		$from         = isset( $_POST['from'] ) ? sanitize_text_field( wp_unslash($_POST['from']) ) : '';
-		$to           = isset( $_POST['to'] ) ? sanitize_text_field( wp_unslash($_POST['to']) ) : '';
-
-		$loop = new \WP_Query( array(
-			'post_type'      => 'tf_apartment',
-			'post_status'    => 'publish',
-			'posts_per_page' => - 1,
-		) );
+		$request = $this->read_request( array( 'from' => 'date', 'to' => 'date' ) );
+		$from    = $request['from'];
+		$to      = $request['to'];
+		$this->validate_date_range( $from, $to );
+		$loop = new \WP_Query( $this->listing_query_args() );
+		$tf_total_filters = array();
 
 		$period = '';
 		if ( ! empty( $from ) && ! empty( $to ) ) {
@@ -318,22 +297,18 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 	}
 
 	function backend_booking_callback() {
-		// Add nonce for security and authentication.
-		check_ajax_referer( 'tf_backend_booking_nonce_action', 'tf_backend_booking_nonce' );
+		$field = $this->read_request( array(
+			'tf_available_apartments'       => 'positive',
+			'tf_apartment_date'             => 'date_range',
+			'tf_apartment_adults_number'    => 'positive',
+			'tf_apartment_children_number'  => 'number',
+			'tf_apartment_infant_number'    => 'number',
+		), true );
+		$this->authorize_listing( $field['tf_available_apartments'], true );
 
 		$response = array(
 			'success' => false,
 		);
-
-		$field = [];
-		foreach ( $_POST as $key => $value ) {
-			if ( $key === 'tf_apartment_date' ) {
-				$field[ $key ]['from'] = sanitize_text_field( $value['from'] );
-				$field[ $key ]['to']   = sanitize_text_field( $value['to'] );
-			} else {
-				$field[ $key ] = $value;
-			}
-		}
 
 		$required_fields = array(
 			'tf_apartment_booked_by',

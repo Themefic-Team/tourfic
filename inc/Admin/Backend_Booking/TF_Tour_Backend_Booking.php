@@ -121,16 +121,9 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 	}
 
 	public function tf_tour_date_time_update() {
-		// Add nonce for security and authentication.
-		check_ajax_referer( 'updates', '_nonce' );
-
-		// Check if the current user has the required capability.
-		if (!current_user_can('manage_options')) {
-			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
-			return;
-		}
-
-		$tour_id      = isset( $_POST['tour_id'] ) ? absint( wp_unslash( $_POST['tour_id'] ) ) : 0;
+		$request      = $this->read_request( array( 'tour_id' => 'positive' ) );
+		$tour_id      = $request['tour_id'];
+		$this->authorize_listing( $tour_id );
 		$meta         = get_post_meta( $tour_id, 'tf_tours_opt', true );
 
 		// Same Day Booking
@@ -240,17 +233,22 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 	}
 
     function backend_booking_callback(){
-		// Add nonce for security and authentication.
-		check_ajax_referer( 'tf_backend_booking_nonce_action', 'tf_backend_booking_nonce' );
+		$field = $this->read_request( array(
+			'tf_available_tours'       => 'positive',
+			'tf_tour_date'             => 'date',
+			'tf_tour_time'             => 'text',
+			'tf_tour_adults_number'    => 'positive',
+			'tf_tour_children_number'  => 'number',
+			'tf_tour_infants_number'   => 'number',
+			'tf_tour_packages'         => 'selection',
+			'tf_tour_extras'           => 'extra_ids',
+		), true );
+		$this->authorize_listing( $field['tf_available_tours'], true );
+		$this->validate_booking_selections( $field );
 
 		$response = array(
 			'success' => false,
 		);
-
-		$field = [];
-		foreach ( $_POST as $key => $value ) {
-			$field[ $key ] = $value;
-		}
 
 		$required_fields = array(
 			'tf_tours_booked_by',
@@ -369,6 +367,25 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 
 		echo wp_json_encode( $response );
 		die();
+	}
+
+	private function validate_booking_selections( array $field ) {
+		$post_id = $field['tf_available_tours'];
+		$meta    = get_post_meta( $post_id, 'tf_tours_opt', true );
+		$extras  = apply_filters( 'tourfic_tour_extra_meta', null, $post_id, $meta );
+		foreach ( $field['tf_tour_extras'] as $extra ) {
+			if ( ! is_array( $extras ) || ! isset( $extras[ $extra ] ) ) {
+				$this->request_error( esc_html__( 'Please select an extra offered by this tour.', 'tourfic' ), true, 'tf_tour_extras' );
+			}
+		}
+		$package         = $field['tf_tour_packages'];
+		$package_pricing = 'package' === ( $meta['pricing'] ?? '' );
+		if ( $package_pricing && '' === $package ) {
+			$package = $this->tf_get_default_tour_package_id( $post_id );
+		}
+		if ( ( $package_pricing || '' !== $package ) && ( ! $package_pricing || '' === $package || empty( $meta['package_pricing'][ $package ]['pack_status'] ) ) ) {
+			$this->request_error( esc_html__( 'Please select an available package for this tour.', 'tourfic' ), true, 'tf_tour_packages' );
+		}
 	}
 
 	public function tf_get_tour_total_price( $post_id, $tour_date, $tour_time, $tours_extra, $adults, $children, $infant, $selected_package = '' ) {
