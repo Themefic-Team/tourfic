@@ -152,24 +152,213 @@ class Helper {
 	}
 
 	/**
-	 * Return the compliant option name for a stored booking unique ID.
+	 * Validate a booking unique ID stored in tour order metadata.
 	 *
-	 * Existing order metadata may still contain the historical `tf_` value, so
-	 * only the option-name representation is normalized.
-	 *
-	 * @param string $unique_id Stored booking unique ID.
+	 * @param mixed $unique_id Stored booking unique ID.
 	 * @return string
 	 */
-	static function tourfic_booking_unique_option_name( $unique_id ) {
-		$unique_id = (string) $unique_id;
-
-		if ( 0 === strpos( $unique_id, 'tourfic_' ) ) {
-			return $unique_id;
+	static function tourfic_booking_unique_id( $unique_id ) {
+		if ( ! is_int( $unique_id ) && ! is_string( $unique_id ) ) {
+			return '';
 		}
 
-		return 0 === strpos( $unique_id, 'tf_' )
-			? 'tourfic_' . substr( $unique_id, 3 )
-			: 'tourfic_' . ltrim( $unique_id, '_' );
+		$unique_id = trim( (string) $unique_id );
+
+		return preg_match( '/^[0-9]+$/', $unique_id ) ? $unique_id : '';
+	}
+
+	/**
+	 * Return the option name that maps a booking unique ID to an order ID.
+	 *
+	 * @param mixed $unique_id Stored booking unique ID.
+	 * @return string
+	 */
+	static function tourfic_booking_order_id_option_name( $unique_id ) {
+		$unique_id = self::tourfic_booking_unique_id( $unique_id );
+
+		return '' !== $unique_id ? 'tourfic_booking_order_id_' . $unique_id : '';
+	}
+
+	/**
+	 * Return the option name that stores the check-in state of a tour booking.
+	 *
+	 * @param mixed $unique_id Stored booking unique ID.
+	 * @return string
+	 */
+	static function tourfic_booking_checkin_status_option_name( $unique_id ) {
+		$unique_id = self::tourfic_booking_unique_id( $unique_id );
+
+		return '' !== $unique_id ? 'tourfic_booking_checkin_status_' . $unique_id : '';
+	}
+
+	/**
+	 * Check that an order owns the supplied tour booking unique ID.
+	 *
+	 * @param int    $order_id  WooCommerce order ID.
+	 * @param string $unique_id Stored booking unique ID.
+	 * @param int    $tour_id   Optional tour post ID.
+	 * @return bool
+	 */
+	static function tourfic_booking_order_matches_unique_id( $order_id, $unique_id, $tour_id = 0 ) {
+		$unique_id = self::tourfic_booking_unique_id( $unique_id );
+		if ( '' === $unique_id ) {
+			return false;
+		}
+
+		if ( ! function_exists( 'wc_get_order' ) ) {
+			return false;
+		}
+
+		$order = wc_get_order( absint( $order_id ) );
+		if ( ! $order ) {
+			return false;
+		}
+
+		$matched_items = 0;
+		foreach ( $order->get_items() as $item ) {
+			if (
+				'tour' === $item->get_meta( '_order_type', true )
+				&& $unique_id === self::tourfic_booking_unique_id( $item->get_meta( '_tour_unique_id', true ) )
+				&& ( ! $tour_id || absint( $tour_id ) === absint( $item->get_meta( '_tour_id', true ) ) )
+			) {
+				++$matched_items;
+			}
+		}
+
+		return 1 === $matched_items;
+	}
+
+	/**
+	 * Resolve an order ID from authoritative WooCommerce line-item metadata.
+	 *
+	 * Legacy options may contain either an order ID or a check-in state because
+	 * earlier releases used overlapping dynamic keys. The exact line item also
+	 * supports multi-tour orders and lets duplicate IDs fail closed. A valid
+	 * result is cached under the canonical key without rewriting legacy data.
+	 *
+	 * @param mixed $unique_id Stored booking unique ID.
+	 * @return int
+	 */
+	static function tourfic_get_booking_order_id_by_unique_id( $unique_id ) {
+		$unique_id = self::tourfic_booking_unique_id( $unique_id );
+		if ( '' === $unique_id ) {
+			return 0;
+		}
+
+		$option_name = self::tourfic_booking_order_id_option_name( $unique_id );
+		global $wpdb;
+		$candidate_order_ids = $wpdb->get_col( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Validate the ticket-to-order relation against authoritative WooCommerce line-item metadata.
+			$wpdb->prepare(
+				"SELECT order_items.order_id
+				FROM {$wpdb->prefix}woocommerce_order_items AS order_items
+				INNER JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS itemmeta
+					ON itemmeta.order_item_id = order_items.order_item_id
+				WHERE itemmeta.meta_key = %s AND itemmeta.meta_value = %s
+				ORDER BY order_items.order_item_id DESC
+				LIMIT 2", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				'_tour_unique_id',
+				$unique_id
+			)
+		);
+		$candidate_order_ids = array_values( array_filter( array_map( 'absint', (array) $candidate_order_ids ) ) );
+
+		if ( 1 !== count( $candidate_order_ids ) || ! self::tourfic_booking_order_matches_unique_id( $candidate_order_ids[0], $unique_id ) ) {
+			return 0;
+		}
+
+		$order_id = $candidate_order_ids[0];
+		update_option( $option_name, $order_id, false );
+
+		return $order_id;
+	}
+
+	/**
+	 * Return a booking unique ID only when one tour item matches the order row.
+	 *
+	 * @param int $order_id WooCommerce order ID.
+	 * @param int $tour_id  Tour post ID.
+	 * @return string
+	 */
+	static function tourfic_get_single_tour_booking_unique_id( $order_id, $tour_id ) {
+		$order_id = absint( $order_id );
+		$tour_id  = absint( $tour_id );
+		if ( ! $order_id || ! $tour_id || ! function_exists( 'wc_get_order' ) ) {
+			return '';
+		}
+
+		$order = wc_get_order( $order_id );
+		if ( ! $order ) {
+			return '';
+		}
+
+		$unique_ids = array();
+		foreach ( $order->get_items() as $item ) {
+			if (
+				'tour' !== $item->get_meta( '_order_type', true )
+				|| $tour_id !== absint( $item->get_meta( '_tour_id', true ) )
+			) {
+				continue;
+			}
+
+			$unique_id = self::tourfic_booking_unique_id( $item->get_meta( '_tour_unique_id', true ) );
+			if ( '' !== $unique_id ) {
+				$unique_ids[] = $unique_id;
+			}
+		}
+
+		if ( 1 !== count( $unique_ids ) ) {
+			return '';
+		}
+
+		return $order_id === self::tourfic_get_booking_order_id_by_unique_id( $unique_ids[0] )
+			? $unique_ids[0]
+			: '';
+	}
+
+	/**
+	 * Return the normalized check-in state for a tour booking.
+	 *
+	 * @param mixed $unique_id Stored booking unique ID.
+	 * @return string
+	 */
+	static function tourfic_get_booking_checkin_status( $unique_id ) {
+		$unique_id = self::tourfic_booking_unique_id( $unique_id );
+		if ( '' === $unique_id ) {
+			return '';
+		}
+
+		$option_name = self::tourfic_booking_checkin_status_option_name( $unique_id );
+		$status      = get_option( $option_name, null );
+		if ( null !== $status ) {
+			return in_array( $status, array( 'in', 'check in' ), true ) ? 'in' : '';
+		}
+
+		foreach ( array( 'tf_' . $unique_id, 'tourfic_' . $unique_id ) as $legacy_option_name ) {
+			$legacy_status = get_option( $legacy_option_name, null );
+			if ( in_array( $legacy_status, array( 'in', 'check in' ), true ) ) {
+				update_option( $option_name, 'in', false );
+
+				return 'in';
+			}
+		}
+
+		return '';
+	}
+
+	/**
+	 * Update the normalized check-in state for a tour booking.
+	 *
+	 * @param mixed  $unique_id Stored booking unique ID.
+	 * @param string $status    Booking check-in state.
+	 * @return bool
+	 */
+	static function tourfic_update_booking_checkin_status( $unique_id, $status ) {
+		$option_name = self::tourfic_booking_checkin_status_option_name( $unique_id );
+		if ( '' === $option_name ) {
+			return false;
+		}
+
+		return update_option( $option_name, 'in' === $status ? 'in' : '', false );
 	}
 
     /**

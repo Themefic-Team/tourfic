@@ -97,7 +97,15 @@ class Migrator {
 		);
 
 		foreach ( $dynamic_legacy_names as $legacy_name ) {
-			$this->tourfic_migrate_single_option( $legacy_name, 'tourfic_' . substr( $legacy_name, 3 ) );
+			if ( preg_match( '/^tf_([0-9]+)$/', $legacy_name, $matches ) ) {
+				$new_name = Helper::tourfic_booking_checkin_status_option_name( $matches[1] );
+			} else {
+				$new_name = 'tourfic_' . substr( $legacy_name, 3 );
+			}
+
+			if ( '' !== $new_name ) {
+				$this->tourfic_migrate_single_option( $legacy_name, $new_name );
+			}
 		}
 
 		update_option( 'tourfic_option_name_migration', '1.0.0', false );

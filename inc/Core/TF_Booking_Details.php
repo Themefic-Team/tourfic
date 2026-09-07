@@ -1728,7 +1728,31 @@ abstract Class TF_Booking_Details {
         );
     
         global $wpdb;
-        $tf_order_uni_id = get_option( 'tourfic_order_uni_' . absint( $tf_order->order_id ) );
+        $tf_order_details = json_decode( $tf_order->order_details, true );
+        $tf_order_uni_id  = is_array( $tf_order_details ) && isset( $tf_order_details['unique_id'] )
+			? Helper::tourfic_booking_unique_id( $tf_order_details['unique_id'] )
+			: '';
+
+		if (
+			'' !== $tf_order_uni_id
+			&& (
+				absint( $tf_order->order_id ) !== Helper::tourfic_get_booking_order_id_by_unique_id( $tf_order_uni_id )
+				|| ! Helper::tourfic_booking_order_matches_unique_id(
+					$tf_order->order_id,
+					$tf_order_uni_id,
+					$tf_order->post_id
+				)
+			)
+		) {
+			$tf_order_uni_id = '';
+		}
+
+		if ( '' === $tf_order_uni_id && 'tour' === $tf_order->post_type ) {
+			$tf_order_uni_id = Helper::tourfic_get_single_tour_booking_unique_id(
+				$tf_order->order_id,
+				$tf_order->post_id
+			);
+		}
 
         $wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $wpdb->prepare(
@@ -1740,7 +1764,7 @@ abstract Class TF_Booking_Details {
         );
 
         if ( ! empty( $tf_order_uni_id ) && 'tour' === $tf_order->post_type ) {
-			update_option( Helper::tourfic_booking_unique_option_name( $tf_order_uni_id ), 'in' === $tf_checkinout ? 'in' : '' );
+			Helper::tourfic_update_booking_checkin_status( $tf_order_uni_id, $tf_checkinout );
         }
 
         wp_send_json_success();

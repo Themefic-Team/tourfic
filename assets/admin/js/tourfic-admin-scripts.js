@@ -184,47 +184,6 @@
 
         /*
         * Author @Jahid
-        * Tour Booking Status
-        */
-
-        $('.tf-ticket-status').on("click", function () {
-            if ($(this).is(':checked')) {
-                var order_unique_id = $(this).val();
-                $("#tf-booking-status-loader").addClass('show');
-                jQuery.ajax({
-                    type: 'post',
-                    url: tourficAdminParams.ajax_url,
-                    data: {
-                        action: 'tourfic_ticket_status_change',
-                        _ajax_nonce: tourficAdminParams.tf_nonce,
-                        status: "check in",
-                        order_unique_id: order_unique_id,
-                    },
-                    success: function (data) {
-                        $("#tf-booking-status-loader").removeClass('show');
-                    }
-                });
-            } else {
-                var order_unique_id = $(this).val();
-                $("#tf-booking-status-loader").addClass('show');
-                jQuery.ajax({
-                    type: 'post',
-                    url: tourficAdminParams.ajax_url,
-                    data: {
-                        action: 'tourfic_ticket_status_change',
-                        _ajax_nonce: tourficAdminParams.tf_nonce,
-                        status: "",
-                        order_unique_id: order_unique_id,
-                    },
-                    success: function (data) {
-                        $("#tf-booking-status-loader").removeClass('show');
-                    }
-                });
-            }
-        });
-
-        /*
-        * Author @Jahid
         * Hotel, Tour, Apartment Duplicator
         */
        

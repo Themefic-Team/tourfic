@@ -1199,7 +1199,10 @@ function tourfic_add_order_tour_details_checkout_order_processed( $order_id, $po
 
 			// Tour Unique ID Store to Option
 			$tour_ides = $item->get_meta( '_tour_unique_id', true );
-			update_option( Helper::tourfic_booking_unique_option_name( $tour_ides ), $order_id);
+			$order_lookup_option = Helper::tourfic_booking_order_id_option_name( $tour_ides );
+			if ( '' !== $order_lookup_option ) {
+				update_option( $order_lookup_option, $order_id, false );
+			}
 			update_option( 'tourfic_order_uni_'.$order_id, $tour_ides);
 			update_option( 'tourfic_order_tour_'.$tour_ides, $post_id);
 			$tour_date = $item->get_meta( 'Tour Date', true );
@@ -1420,7 +1423,10 @@ function tourfic_add_order_tour_details_checkout_order_processed_block_checkout(
 
 			// Tour Unique ID Store to Option
 			$tour_ides = $item->get_meta( '_tour_unique_id', true );
-			update_option( Helper::tourfic_booking_unique_option_name( $tour_ides ), $order_id);
+			$order_lookup_option = Helper::tourfic_booking_order_id_option_name( $tour_ides );
+			if ( '' !== $order_lookup_option ) {
+				update_option( $order_lookup_option, $order_id, false );
+			}
 			update_option( 'tourfic_order_uni_'.$order_id, $tour_ides);
 			update_option( 'tourfic_order_tour_'.$tour_ides, $post_id);
 			$tour_date = $item->get_meta( 'Tour Date', true );
