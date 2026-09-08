@@ -3,6 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use Tourfic\App\TF_Review;
+use Tourfic\Classes\Helper;
 
 if ( ! class_exists( 'Tourfic_Rest_API' ) ) {
 	class Tourfic_Rest_API {
@@ -190,8 +191,7 @@ if ( ! class_exists( 'Tourfic_Rest_API' ) ) {
 		 * @auther Foysal
 		 */
 		public function tf_admin_permission_callback( WP_REST_Request $request ) {
-			$current_user_id = get_current_user_id();
-			if ( is_user_logged_in() && ( $this->user_has_role( $current_user_id, 'administrator' ) || $this->user_has_role( $current_user_id, 'tf_manager' ) ) ) {
+			if ( is_user_logged_in() && ( current_user_can( 'list_users' ) || $this->tf_current_user_can_view_vendors() ) ) {
 				return true;
 			} else {
 				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
@@ -211,34 +211,83 @@ if ( ! class_exists( 'Tourfic_Rest_API' ) ) {
 		}
 
 		public function tf_order_permission_callback( WP_REST_Request $request ) {
-			return $this->tf_admin_vendor_permission_callback();
+			return $this->tf_record_permission_callback( $request, 'booking' );
 		}
 
 		public function tf_enquiry_permission_callback( WP_REST_Request $request ) {
-			return $this->tf_admin_vendor_permission_callback();
+			return $this->tf_record_permission_callback( $request, 'enquiry' );
 		}
 
-		protected function tf_admin_vendor_permission_callback() {
-			$current_user_id = get_current_user_id();
+		protected function tf_record_capabilities() {
+			return array(
+				'hotel'     => array( 'tf_hotel', 'edit_tf_hotels', 'edit_others_tf_hotels', 'hotel' ),
+				'tour'      => array( 'tf_tours', 'edit_tf_tourss', 'edit_others_tf_tourss', 'tour' ),
+				'apartment' => array( 'tf_apartment', 'edit_tf_apartments', 'edit_others_tf_apartments', 'apartment' ),
+				'car'       => array( 'tf_carrental', 'edit_tf_carrentals', 'edit_others_tf_carrentals', 'car_rental' ),
+			);
+		}
 
-			if (
-				is_user_logged_in()
-				&& (
-					$this->user_has_role( $current_user_id, 'administrator' )
-					|| $this->user_has_role( $current_user_id, 'tf_manager' )
-					|| $this->user_has_role( $current_user_id, 'tf_vendor' )
-				)
-			) {
+		protected function tf_record_permission_callback( WP_REST_Request $request, $kind ) {
+			$post_type = $request->get_param( 'post_type' );
+			if ( is_string( $post_type ) && $this->tf_current_user_can_read_records( $post_type, $kind ) ) {
 				return true;
+			}
+
+			// Detail handlers authorize the stored record type and owner before returning data.
+			if ( null === $post_type && $request->get_param( 'id' ) ) {
+				foreach ( array_keys( $this->tf_record_capabilities() ) as $record_type ) {
+					if ( $this->tf_current_user_can_read_records( $record_type, $kind ) ) {
+						return true;
+					}
+				}
 			}
 
 			return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
 		}
 
-		protected function tf_current_user_can_manage_records() {
-			$current_user_id = get_current_user_id();
+		protected function tf_view_permission_allows( $permission ) {
+			if ( current_user_can( 'manage_options' ) ) {
+				return true;
+			}
+			$group = current_user_can( 'tf_manager_options' ) ? 'manager_can_manage' : '';
+			if ( ! $group && current_user_can( 'tf_vendor_options' ) ) {
+				$group = 'vendor_can_manage';
+			}
+			if ( ! $group ) {
+				return true;
+			}
+			$permissions = Helper::tf_data_types( Helper::tfopt( 'tf_user_permission' ) );
+			// Unconfigured sites keep their defaults; a saved empty list grants no views.
+			if ( ! is_array( $permissions ) || ! array_key_exists( $group, $permissions ) ) {
+				return true;
+			}
+			return is_array( $permissions[ $group ] ) && in_array( $permission, $permissions[ $group ], true );
+		}
 
-			return $this->user_has_role( $current_user_id, 'administrator' ) || $this->user_has_role( $current_user_id, 'tf_manager' );
+		protected function tf_current_user_can_read_records( $post_type, $kind ) {
+			$post_type    = is_string( $post_type ) ? $this->tf_normalize_order_post_type( $post_type ) : '';
+			$capabilities = $this->tf_record_capabilities();
+			if ( ! is_user_logged_in() || ! isset( $capabilities[ $post_type ] )
+				|| ! in_array( $kind, array( 'booking', 'enquiry' ), true )
+				|| ( 'enquiry' === $kind && 'car' === $post_type ) ) {
+				return false;
+			}
+			return current_user_can( $capabilities[ $post_type ][1] )
+				&& $this->tf_view_permission_allows( 'view_' . $capabilities[ $post_type ][3] . '_' . $kind );
+		}
+
+		protected function tf_current_user_can_manage_records( $post_type, $kind ) {
+			if ( ! $this->tf_current_user_can_read_records( $post_type, $kind ) ) {
+				return false;
+			}
+			$capabilities = $this->tf_record_capabilities();
+			$post_type    = $this->tf_normalize_order_post_type( $post_type );
+			return current_user_can( 'manage_options' ) || current_user_can( 'tf_manager_options' )
+				|| current_user_can( $capabilities[ $post_type ][2] );
+		}
+
+		protected function tf_current_user_can_view_vendors() {
+			return current_user_can( 'manage_vendors' ) && $this->tf_view_permission_allows( 'view_vendors' );
 		}
 
 		protected function tf_current_user_can_access_user( $user_id ) {
@@ -253,15 +302,14 @@ if ( ! class_exists( 'Tourfic_Rest_API' ) ) {
 				return true;
 			}
 
-			return $this->tf_current_user_can_manage_records()
-				|| current_user_can( 'list_users' )
-				|| current_user_can( 'edit_user', $user_id );
+			return current_user_can( 'list_users' ) || current_user_can( 'edit_user', $user_id )
+				|| ( $this->tf_current_user_can_view_vendors() && $this->user_has_role( $user_id, 'tf_vendor' ) );
 		}
 
-		protected function tf_current_user_can_manage_vendor_record( $post_id = 0, $author_id = 0 ) {
+		protected function tf_current_user_owns_record( $post_id, $post_type, $author_id = 0 ) {
 			$current_user_id = get_current_user_id();
 
-			if ( ! $this->user_has_role( $current_user_id, 'tf_vendor' ) ) {
+			if ( ! $current_user_id ) {
 				return false;
 			}
 
@@ -269,26 +317,38 @@ if ( ! class_exists( 'Tourfic_Rest_API' ) ) {
 				return true;
 			}
 
-			return ! empty( $post_id ) && absint( get_post_field( 'post_author', absint( $post_id ) ) ) === $current_user_id;
+			$post = $post_id ? get_post( absint( $post_id ) ) : null;
+			return $post && $post_type === $post->post_type && (int) $post->post_author === $current_user_id;
 		}
 
 		protected function tf_current_user_can_access_order( $order ) {
-			if ( $this->tf_current_user_can_manage_records() ) {
+			$post_type = isset( $order['post_type'] ) ? $order['post_type'] : '';
+			if ( ! $this->tf_current_user_can_read_records( $post_type, 'booking' ) ) {
+				return false;
+			}
+			if ( $this->tf_current_user_can_manage_records( $post_type, 'booking' ) ) {
 				return true;
 			}
 
-			return ! empty( $order['post_id'] ) && $this->tf_current_user_can_manage_vendor_record( $order['post_id'] );
+			$capabilities = $this->tf_record_capabilities();
+			$post_type    = $this->tf_normalize_order_post_type( $post_type );
+			return ! empty( $order['post_id'] ) && $this->tf_current_user_owns_record( $order['post_id'], $capabilities[ $post_type ][0] );
 		}
 
 		protected function tf_current_user_can_access_enquiry( $enquiry ) {
-			if ( $this->tf_current_user_can_manage_records() ) {
+			$post_type = isset( $enquiry['post_type'] ) ? $enquiry['post_type'] : '';
+			if ( ! in_array( $post_type, $this->tf_enquiry_post_types(), true )
+				|| ! $this->tf_current_user_can_read_records( $post_type, 'enquiry' ) ) {
+				return false;
+			}
+			if ( $this->tf_current_user_can_manage_records( $post_type, 'enquiry' ) ) {
 				return true;
 			}
 
 			$post_id   = ! empty( $enquiry['post_id'] ) ? $enquiry['post_id'] : 0;
 			$author_id = ! empty( $enquiry['author_id'] ) ? $enquiry['author_id'] : 0;
 
-			return $this->tf_current_user_can_manage_vendor_record( $post_id, $author_id );
+			return $this->tf_current_user_owns_record( $post_id, $post_type, $author_id );
 		}
 
 		protected function tf_order_post_types() {

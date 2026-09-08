@@ -27,7 +27,27 @@ if ( ! class_exists( 'Tourfic_User_Rest_API' ) ) {
 		 * @author Foysal
 		 */
 		public function tf_get_users( $request ) {
-			$user_roles = $request->get_param( 'roles' ) ? $request->get_param( 'roles' ) : array();
+			$permission = $this->tf_admin_permission_callback( $request );
+			if ( is_wp_error( $permission ) ) {
+				return $permission;
+			}
+			$user_roles = $request->get_param( 'roles' );
+			$user_roles = null === $user_roles || '' === $user_roles ? array() : $user_roles;
+			$user_roles = is_string( $user_roles ) ? explode( ',', $user_roles ) : $user_roles;
+			if ( ! is_array( $user_roles ) ) {
+				return new WP_Error( 'rest_invalid_param', esc_html__( 'Invalid user roles.', 'tourfic' ), array( 'status' => 400 ) );
+			}
+			foreach ( $user_roles as $role ) {
+				if ( ! is_string( $role ) || '' === $role || sanitize_key( $role ) !== $role ) {
+					return new WP_Error( 'rest_invalid_param', esc_html__( 'Invalid user roles.', 'tourfic' ), array( 'status' => 400 ) );
+				}
+			}
+			if ( ! current_user_can( 'list_users' ) ) {
+				if ( array_diff( $user_roles, array( 'tf_vendor' ) ) ) {
+					return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access these users.', 'tourfic' ), array( 'status' => 403 ) );
+				}
+				$user_roles = array( 'tf_vendor' );
+			}
 			$users      = get_users( array(
 				'role__in' => $user_roles,
 				'number'   => - 1,

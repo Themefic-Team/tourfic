@@ -1348,6 +1348,7 @@ class Helper {
 	}
 
 	private static function tf_order_table_structured_sql( $query, &$values ) {
+		global $wpdb;
 		$sql             = '';
 		$allowed_columns = array(
 			'order_id'    => '%d',
@@ -1367,6 +1368,12 @@ class Helper {
 				$sql     .= " AND {$column} = {$allowed_columns[ $column ]}";
 				$values[] = '%d' === $allowed_columns[ $column ] ? absint( $value ) : sanitize_text_field( $value );
 			}
+		}
+
+		if ( array_key_exists( 'post_author', $query ) ) {
+			$sql     .= " AND post_id IN (SELECT ID FROM {$wpdb->posts} WHERE post_author = %d AND post_type = %s)";
+			$values[] = absint( $query['post_author'] );
+			$values[] = isset( $query['author_post_type'] ) ? sanitize_key( $query['author_post_type'] ) : '';
 		}
 
 		if ( ! empty( $query['orderby'] ) ) {

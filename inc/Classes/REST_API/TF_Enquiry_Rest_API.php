@@ -25,6 +25,10 @@ if ( ! class_exists( 'Tourfic_Enquiry_Rest_API' ) ) {
 		 * @author Foysal
 		 */
 		public function tf_get_enquiries( $request ) {
+			$permission = $this->tf_enquiry_permission_callback( $request );
+			if ( is_wp_error( $permission ) ) {
+				return $permission;
+			}
 			$current_user_id = get_current_user_id();
 			$post_type       = $this->tf_validate_allowed_param( $request, 'post_type', $this->tf_enquiry_post_types(), true );
 			$post_id         = $this->tf_get_rest_absint_param( $request, 'post_id' );
@@ -53,11 +57,13 @@ if ( ! class_exists( 'Tourfic_Enquiry_Rest_API' ) ) {
 				}
 			}
 
-			$can_manage_records = $this->tf_current_user_can_manage_records();
-			if ( ! $can_manage_records && $this->user_has_role( $current_user_id, 'tf_vendor' ) ) {
-				$where[] = $wpdb->prepare( 'author_id = %d', $current_user_id );
-			} elseif ( ! $can_manage_records ) {
-				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
+			if ( ! $this->tf_current_user_can_manage_records( $post_type, 'enquiry' ) ) {
+				$where[] = $wpdb->prepare(
+					"(author_id = %d OR post_id IN (SELECT ID FROM {$wpdb->posts} WHERE post_author = %d AND post_type = %s))",
+					$current_user_id,
+					$current_user_id,
+					$post_type
+				);
 			}
 
 			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared,PluginCheck.Security.DirectDB.UnescapedDBParameter,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Every dynamic clause is prepared above.

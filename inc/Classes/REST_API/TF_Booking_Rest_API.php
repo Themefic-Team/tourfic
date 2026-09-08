@@ -25,6 +25,10 @@ if ( ! class_exists( 'Tourfic_Booking_Rest_API' ) ) {
 		 * @author Foysal
 		 */
 		public function tf_get_orders( $request ) {
+			$permission = $this->tf_order_permission_callback( $request );
+			if ( is_wp_error( $permission ) ) {
+				return $permission;
+			}
 			$current_user_id = get_current_user_id();
 			$post_type       = $this->tf_validate_allowed_param( $request, 'post_type', $this->tf_order_post_types(), true );
 			$post_id         = $this->tf_get_rest_absint_param( $request, 'post_id' );
@@ -49,34 +53,19 @@ if ( ! class_exists( 'Tourfic_Booking_Rest_API' ) ) {
 				$filters['ostatus'] = $order_status;
 			}
 
-			$orders_result = array();
-			if ( $this->tf_current_user_can_manage_records() ) {
-
-				$tf_orders_select = array(
-					'select'    => "*",
-					'post_type' => $post_type,
-					'where'     => $filters,
-					'orderby'   => 'order_date',
-					'order'     => 'DESC'
-				);
-
-				$orders_result = Helper::tourfic_order_table_data( $tf_orders_select );
-			} elseif ( $this->user_has_role( $current_user_id, 'tf_vendor' ) ) {
-
-				$tf_orders_select = array(
-					'select'    => "*",
-					'post_type' => $post_type,
-					'author'    => $current_user_id,
-					'where'     => $filters,
-					'orderby'   => 'order_date',
-					'order'     => 'DESC',
-					'limit'     => ""
-				);
-                
-				$orders_result = tourfic_vendor_order_table_data( $tf_orders_select );
-			} else {
-				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this endpoint.', 'tourfic' ), array( 'status' => 403 ) );
+			$tf_orders_select = array(
+				'select'    => '*',
+				'post_type' => $post_type,
+				'where'     => $filters,
+				'orderby'   => 'order_date',
+				'order'     => 'DESC',
+			);
+			if ( ! $this->tf_current_user_can_manage_records( $post_type, 'booking' ) ) {
+				$capabilities = $this->tf_record_capabilities();
+				$tf_orders_select['post_author']      = $current_user_id;
+				$tf_orders_select['author_post_type'] = $capabilities[ $post_type ][0];
 			}
+			$orders_result = Helper::tourfic_order_table_data( $tf_orders_select );
             $events = array();
 			$orders_data = array();
 			foreach ( $orders_result as $order ) {		
