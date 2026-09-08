@@ -9,9 +9,22 @@ use \Tourfic\Classes\Room\Room;
 class Migrator {
 	use \Tourfic\Traits\Singleton;
 
+	private const SHORTCODE_MIGRATION_VERSION = '1.0.1';
+
+	/**
+	 * Prevent recursive post-meta normalization.
+	 *
+	 * @var bool
+	 */
+	private $normalizing_shortcode_meta = false;
+
 	public function __construct() {
 		$this->tourfic_migrate_option_names();
 		add_action( 'init', array( $this, 'tourfic_migrate_shortcode_names' ), 1 );
+		add_filter( 'wp_insert_post_data', array( $this, 'tourfic_normalize_shortcode_post_data' ) );
+		add_action( 'added_post_meta', array( $this, 'tourfic_normalize_shortcode_post_meta' ), 10, 4 );
+		add_action( 'updated_post_meta', array( $this, 'tourfic_normalize_shortcode_post_meta' ), 10, 4 );
+		add_filter( 'pre_update_option', array( $this, 'tourfic_normalize_shortcode_option_value' ), 10, 3 );
 
 		add_action( 'init', array( $this, 'tf_permalink_settings_migration' ) );
 		add_action( 'init', array( $this, 'tf_template_3_migrate_data' ) );
@@ -131,38 +144,12 @@ class Migrator {
 	 * Migrate stored shortcode tags to the public Tourfic prefix.
 	 */
 	public function tourfic_migrate_shortcode_names() {
-		if ( '1.0.0' === get_option( 'tourfic_shortcode_name_migration' ) ) {
+		if ( self::SHORTCODE_MIGRATION_VERSION === get_option( 'tourfic_shortcode_name_migration' ) ) {
 			return;
 		}
 
-		$shortcode_map = array(
-			'hotel_locations'          => 'tourfic_hotel_locations',
-			'room_types'               => 'tourfic_room_types',
-			'tf-wishlist'              => 'tourfic_wishlist',
-			'tf_apartment'             => 'tourfic_apartment',
-			'tf_apartment_external_listings' => 'tourfic_apartment_external_listings',
-			'tf_apartment_locations'   => 'tourfic_apartment_locations',
-			'tf_carrental_brand'       => 'tourfic_carrental_brand',
-			'tf_carrental_locations'   => 'tourfic_carrental_locations',
-			'tf_cars'                  => 'tourfic_cars',
-			'tf_hotel'                 => 'tourfic_hotel',
-			'tf_hotel_external_listings' => 'tourfic_hotel_external_listings',
-			'tf_recent_apartment'      => 'tourfic_recent_apartment',
-			'tf_recent_blog'           => 'tourfic_recent_blog',
-			'tf_recent_cars'           => 'tourfic_recent_cars',
-			'tf_recent_hotel'          => 'tourfic_recent_hotel',
-			'tf_recent_room'           => 'tourfic_recent_room',
-			'tf_recent_tour'           => 'tourfic_recent_tour',
-			'tf_reviews'               => 'tourfic_reviews',
-			'tf_room'                  => 'tourfic_room',
-			'tf_search_form'           => 'tourfic_search_form',
-			'tf_search_result'         => 'tourfic_search_result',
-			'tf_tour'                  => 'tourfic_tour',
-			'tf_tour_external_listings' => 'tourfic_tour_external_listings',
-			'tf_vendor_post'           => 'tourfic_vendor_post',
-			'tour_destinations'        => 'tourfic_tour_destinations',
-			'tourfic_destinations'     => 'tourfic_hotel_locations',
-		);
+		$shortcode_map      = $this->tourfic_shortcode_name_map();
+		$migration_complete = true;
 
 		global $wpdb;
 		$patterns = array(
@@ -189,7 +176,19 @@ class Migrator {
 			$content = get_post_field( 'post_content', $post_id, 'raw' );
 			$migrated_content = $this->tourfic_replace_shortcode_tags( $content, $shortcode_map );
 			if ( $content !== $migrated_content ) {
-				wp_update_post( array( 'ID' => absint( $post_id ), 'post_content' => $migrated_content ) );
+				$result = wp_update_post(
+					wp_slash(
+						array(
+							'ID'           => absint( $post_id ),
+							'post_content' => $migrated_content,
+						)
+					),
+					true
+				);
+
+				if ( is_wp_error( $result ) || 0 === $result ) {
+					$migration_complete = false;
+				}
 			}
 		}
 
@@ -209,7 +208,9 @@ class Migrator {
 			$value          = maybe_unserialize( $meta_row['meta_value'] );
 			$migrated_value = $this->tourfic_replace_shortcode_tags( $value, $shortcode_map );
 			if ( $value !== $migrated_value ) {
-				update_metadata_by_mid( 'post', absint( $meta_row['meta_id'] ), $migrated_value );
+				if ( ! update_metadata_by_mid( 'post', absint( $meta_row['meta_id'] ), $migrated_value ) ) {
+					$migration_complete = false;
+				}
 			}
 		}
 
@@ -228,11 +229,111 @@ class Migrator {
 			$value          = get_option( $option_name );
 			$migrated_value = $this->tourfic_replace_shortcode_tags( $value, $shortcode_map );
 			if ( $value !== $migrated_value ) {
-				update_option( $option_name, $migrated_value );
+				if ( ! update_option( $option_name, $migrated_value ) && get_option( $option_name ) !== $migrated_value ) {
+					$migration_complete = false;
+				}
 			}
 		}
 
-		update_option( 'tourfic_shortcode_name_migration', '1.0.0', false );
+		if ( $migration_complete ) {
+			update_option( 'tourfic_shortcode_name_migration', self::SHORTCODE_MIGRATION_VERSION, false );
+		}
+	}
+
+	/**
+	 * Normalize legacy shortcode tags whenever post content is saved.
+	 *
+	 * @param array $data Slashed post data ready for storage.
+	 * @return array
+	 */
+	public function tourfic_normalize_shortcode_post_data( $data ) {
+		if ( isset( $data['post_content'] ) ) {
+			$data['post_content'] = $this->tourfic_replace_shortcode_tags(
+				$data['post_content'],
+				$this->tourfic_shortcode_name_map()
+			);
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Normalize legacy shortcode tags added to post metadata by importers and builders.
+	 *
+	 * @param int    $meta_id   Metadata row ID.
+	 * @param int    $object_id Post ID.
+	 * @param string $meta_key  Metadata key.
+	 * @param mixed  $value     Stored metadata value.
+	 */
+	public function tourfic_normalize_shortcode_post_meta( $meta_id, $object_id, $meta_key, $value ) {
+		unset( $object_id, $meta_key );
+
+		if ( $this->normalizing_shortcode_meta ) {
+			return;
+		}
+
+		$migrated_value = $this->tourfic_replace_shortcode_tags( $value, $this->tourfic_shortcode_name_map() );
+		if ( $value === $migrated_value ) {
+			return;
+		}
+
+		$this->normalizing_shortcode_meta = true;
+		update_metadata_by_mid( 'post', absint( $meta_id ), $migrated_value );
+		$this->normalizing_shortcode_meta = false;
+	}
+
+	/**
+	 * Normalize legacy shortcode tags in WordPress content-bearing options.
+	 *
+	 * @param mixed  $value     New option value.
+	 * @param string $option    Option name.
+	 * @param mixed  $old_value Previous option value.
+	 * @return mixed
+	 */
+	public function tourfic_normalize_shortcode_option_value( $value, $option, $old_value ) {
+		unset( $old_value );
+
+		if ( 0 !== strpos( $option, 'widget_' ) && 0 !== strpos( $option, 'theme_mods_' ) ) {
+			return $value;
+		}
+
+		return $this->tourfic_replace_shortcode_tags( $value, $this->tourfic_shortcode_name_map() );
+	}
+
+	/**
+	 * Get the complete legacy-to-current shortcode map.
+	 *
+	 * @return array
+	 */
+	private function tourfic_shortcode_name_map() {
+		return array(
+			'hotel_locations'               => 'tourfic_hotel_locations',
+			'room_types'                    => 'tourfic_room_types',
+			'tf-wishlist'                   => 'tourfic_wishlist',
+			'tf_apartment'                  => 'tourfic_apartment',
+			'tf_apartment_external_listings' => 'tourfic_apartment_external_listings',
+			'tf_apartment_locations'        => 'tourfic_apartment_locations',
+			'tf_carrental_brand'            => 'tourfic_carrental_brand',
+			'tf_carrental_locations'        => 'tourfic_carrental_locations',
+			'tf_cars'                       => 'tourfic_cars',
+			'tf_hotel'                      => 'tourfic_hotel',
+			'tf_hotel_external_listings'    => 'tourfic_hotel_external_listings',
+			'tf_recent_apartment'           => 'tourfic_recent_apartment',
+			'tf_recent_blog'                => 'tourfic_recent_blog',
+			'tf_recent_cars'                => 'tourfic_recent_cars',
+			'tf_recent_hotel'               => 'tourfic_recent_hotel',
+			'tf_recent_room'                => 'tourfic_recent_room',
+			'tf_recent_tour'                => 'tourfic_recent_tour',
+			'tf_reviews'                    => 'tourfic_reviews',
+			'tf_room'                       => 'tourfic_room',
+			'tf_search_form'                => 'tourfic_search_form',
+			'tf_search_result'              => 'tourfic_search_result',
+			'tf_tour'                       => 'tourfic_tour',
+			'tf_tour_external_listings'     => 'tourfic_tour_external_listings',
+			'tf_vendor_post'                => 'tourfic_vendor_post',
+			'tour_destinations'             => 'tourfic_tour_destinations',
+			'tourfic_destinations'          => 'tourfic_hotel_locations',
+		);
 	}
 
 	/**
