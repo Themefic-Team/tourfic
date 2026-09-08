@@ -12,6 +12,8 @@ $tourfic_base_file      = file_get_contents( $tourfic_test_root . '/inc/Classes/
 $tourfic_database_file  = file_get_contents( $tourfic_test_root . '/inc/Traits/Database.php' );
 $tourfic_plugin_file    = file_get_contents( $tourfic_test_root . '/tourfic.php' );
 $tourfic_enqueue_file   = file_get_contents( $tourfic_test_root . '/inc/Classes/Enqueue.php' );
+$tourfic_migrator_file  = file_get_contents( $tourfic_test_root . '/inc/Classes/Migrator.php' );
+$tourfic_wc_tour_file   = file_get_contents( $tourfic_test_root . '/inc/functions/woocommerce/wc-tour.php' );
 
 function tourfic_lifecycle_assert( $condition, $message ) {
 	if ( ! $condition ) {
@@ -46,8 +48,31 @@ tourfic_lifecycle_assert(
 );
 tourfic_lifecycle_assert(
 	false !== strpos( $tourfic_activator_file, "add_action( 'init', array( \$this, 'tourfic_maybe_flush_rewrite_rules' ), 999 )" )
-		&& false !== strpos( $tourfic_activator_file, "delete_option( 'tourfic_flush_rewrite_rules' )" ),
+		&& false !== strpos( $tourfic_activator_file, "delete_option( 'tourfic_flush_rewrite_rules' )" )
+		&& 1 === substr_count( $tourfic_activator_file, "\n\t\tflush_rewrite_rules();" ),
 	'Rewrite rules must flush once on normal init after registrations.'
+);
+tourfic_lifecycle_assert(
+	false !== strpos( $tourfic_migrator_file, "update_option( 'tourfic_flush_rewrite_rules', true, false )" )
+		&& 2 === substr_count( $tourfic_migrator_file, '$this->tourfic_schedule_rewrite_flush();' ),
+	'Only permalink-capable migrations may queue the shared one-shot rewrite flush.'
+);
+tourfic_lifecycle_assert(
+	false === strpos( $tourfic_migrator_file, 'flush_rewrite_rules(' )
+		&& false === strpos( $tourfic_wc_tour_file, 'flush_rewrite_rules(' )
+		&& false === strpos( $tourfic_migrator_file, 'wp_cache_flush(' )
+		&& false === strpos( $tourfic_wc_tour_file, 'wp_cache_flush(' ),
+	'Data migrations must not directly flush global caches or rewrite rules.'
+);
+tourfic_lifecycle_assert(
+	false !== strpos( $tourfic_base_file, '\\Tourfic\\Classes\\Activator::instance();' )
+		&& false !== strpos( $tourfic_activator_file, "add_filter( 'theme_page_templates'" ),
+	'The runtime template provider must remain active independently of installation work.'
+);
+tourfic_lifecycle_assert(
+	false === strpos( $tourfic_activator_file, 'tourfic_permalink_settings_migration' )
+		&& false === strpos( $tourfic_activator_file, 'tourfic_old_order_data_migrate' ),
+	'Activation must not pre-seed historical migration markers that an older site may still need.'
 );
 tourfic_lifecycle_assert(
 	false !== strpos( $tourfic_activator_file, "get_option( 'tourfic_activation_pages_signature' )" )

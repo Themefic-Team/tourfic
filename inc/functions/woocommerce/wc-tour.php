@@ -1575,8 +1575,6 @@ function tourfic_tour_unique_id_order_data_migration(){
 				
 		}
 
-		wp_cache_flush();
-		flush_rewrite_rules( true );
 		update_option( 'tourfic_old_tour_order_unique_id_data_migrate', 1 );
 	}
 }

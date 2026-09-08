@@ -366,6 +366,13 @@ class Migrator {
 		return $value;
 	}
 
+	/**
+	 * Queue one rewrite flush after post types and taxonomies are registered.
+	 */
+	private function tourfic_schedule_rewrite_flush() {
+		update_option( 'tourfic_flush_rewrite_rules', true, false );
+	}
+
 	function tf_permalink_settings_migration() {
 
 		if ( empty( get_option( 'tourfic_permalink_settings_migration' ) ) ) {
@@ -388,8 +395,7 @@ class Migrator {
 			}
 
 			update_option( 'tourfic_settings', $options );
-			wp_cache_flush();
-			flush_rewrite_rules( true );
+			$this->tourfic_schedule_rewrite_flush();
 			update_option( 'tourfic_permalink_settings_migration', 1 );
 
 		}
@@ -496,8 +502,6 @@ class Migrator {
 			$settings['tf-template']['single-car-layout'] = $single_car_layout;
 
 			update_option( 'tourfic_settings', $settings );
-			wp_cache_flush();
-			flush_rewrite_rules( true );
 			update_option( 'tourfic_template_migrate_data', 1 );
 		}
 	}
@@ -699,8 +703,6 @@ class Migrator {
 
 
 			update_option( 'tourfic_settings', $options );
-			wp_cache_flush();
-			flush_rewrite_rules( true );
 			update_option( 'tourfic_template_3_migrate_data', 2 );
 
 		}
@@ -761,8 +763,6 @@ class Migrator {
 			);
 
 			update_option( 'tourfic_settings', $options );
-			wp_cache_flush();
-			flush_rewrite_rules( true );
 			update_option( 'tourfic_template_2_apartment_migrate_data', 1 );
 
 		}
@@ -844,8 +844,6 @@ class Migrator {
 				$options["tf-template"]["car_archive_driver_max_age"] = 40;
 			}
 			update_option( 'tourfic_settings', $options );
-			wp_cache_flush();
-			flush_rewrite_rules( true );
 			update_option( 'tourfic_template_1_car_migrate_data', 2 );
 		}
 
@@ -929,8 +927,6 @@ class Migrator {
 				}
 
 				update_option( 'tourfic_settings', $options );
-				wp_cache_flush();
-				flush_rewrite_rules( true );
 				update_option( 'tourfic_color_data_migrate', 1 );
 			}
 		}
@@ -1092,8 +1088,6 @@ class Migrator {
 			}
 
 
-			wp_cache_flush();
-			flush_rewrite_rules( true );
 			update_option( 'tourfic_migrate_data_204_210', 1 );
 
 		}
@@ -1244,8 +1238,7 @@ class Migrator {
 			}
 			update_option( 'tourfic_settings', $old_setting_option );
 
-			wp_cache_flush();
-			flush_rewrite_rules( true );
+			$this->tourfic_schedule_rewrite_flush();
 			update_option( 'tourfic_migrate_data_204_210_2022', 2 );
 		}
 
@@ -1426,8 +1419,6 @@ class Migrator {
 				}
 
 			}
-			wp_cache_flush();
-			flush_rewrite_rules( true );
 			update_option( 'tourfic_old_order_data_migrate', 1 );
 		}
 	}
