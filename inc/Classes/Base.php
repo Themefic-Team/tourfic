@@ -41,7 +41,6 @@ class Base {
 		\Tourfic\Classes\Helper::instance();
 		\Tourfic\Classes\Enqueue::instance();
 		\Tourfic\Classes\Activator::instance();
-		\Tourfic\Classes\Deactivator::instance();
 		\Tourfic\Classes\TF_API_Keys::instance();
 		\Tourfic\Classes\TF_API_Bootstrap::instance();
 
