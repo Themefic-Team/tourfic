@@ -102,7 +102,7 @@ tf_security_assert(
 tf_security_assert( false !== strpos( $free_routes, 'tf_user_permission_callback' ), 'Free user detail route must use user-object permission callback.' );
 tf_security_assert( false !== strpos( $free_routes, 'tf_admin_permission_callback' ), 'Free users route must stay admin-gated.' );
 tf_security_assert( false !== strpos( $pro_routes, 'tf_fd_order_permission_callback' ), 'Pro orders route must use order permission callback.' );
-tf_security_assert( false !== strpos( $pro_routes, 'tf_fd_enquiry_permission_callback' ), 'Pro enquiries route must use enquiry permission callback.' );
+tf_security_assert( false !== strpos( $pro_routes, 'tf_fd_enquiry_read_permission_callback' ), 'Pro enquiry reads must use the read-specific permission callback.' );
 tf_security_assert( false !== strpos( $pro_routes, 'tf_fd_user_permission_callback' ), 'Pro user detail route must use user-object permission callback.' );
 tf_security_assert( false !== strpos( $pro_routes, 'tf_fd_admin_permission_callback' ), 'Pro users route must stay admin-gated.' );
 tf_security_assert( false !== strpos( $pro_routes, "'callback'            => array( \$api, 'tf_fd_update_user' )" ), 'Pro update-user route must remain registered.' );
@@ -233,9 +233,14 @@ foreach ( array( 'free_user' => 'tf_user_wishlist', 'pro_user' => 'tf_fd_user_wi
 	tf_security_assert( false !== strpos( $body, '$wishlist_data' ), "{$method} must return a defined wishlist response for non-customer users." );
 }
 
-foreach ( array( 'free_user' => 'tf_get_user', 'pro_user' => 'tf_fd_get_user' ) as $label => $method ) {
+$user_read_contracts = array(
+	'free_user' => array( 'tf_get_user', 'current_user_can_access_user' ),
+	'pro_user'  => array( 'tf_fd_get_user', 'tf_fd_can_read_user' ),
+);
+foreach ( $user_read_contracts as $label => $contract ) {
+	list( $method, $authorization_method ) = $contract;
 	$body          = tf_security_method_body( tf_security_file( $files[ $label ] ), $method );
-	$access_offset = strpos( $body, 'current_user_can_access_user' );
+	$access_offset = strpos( $body, $authorization_method );
 	$data_offset   = strpos( $body, '$user_data = array' );
 	tf_security_assert( false !== $access_offset, "{$method} must perform handler-level user authorization." );
 	tf_security_assert( false !== $data_offset, "{$method} must still build a user data response." );
