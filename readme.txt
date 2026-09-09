@@ -476,6 +476,12 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 22. Map Template(Pro)
 23. Elementor Page Builder support.
 
+== Upgrade Notice ==
+
+= 2.23.4 =
+
+Back up your database and files before updating. This release migrates Tourfic settings and shortcode identifiers and requires compatible Tourfic Pro/add-on versions. Complete all Tourfic updates in the same maintenance window. Do not downgrade without restoring the pre-update backup.
+
 == Changelog ==
 
 = 2.23.4 – Sep 02, 2026 =
