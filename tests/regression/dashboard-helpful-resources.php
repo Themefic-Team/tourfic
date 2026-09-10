@@ -55,5 +55,53 @@ tourfic_dashboard_resources_assert(
 	'The dashboard header must not render the support prompt.'
 );
 
+$help_start = strpos( $settings_source, 'public function tf_get_help_callback' );
+$help_end   = strpos( $settings_source, 'public function tf_options_page', $help_start );
+tourfic_dashboard_resources_assert(
+	false !== $help_start && false !== $help_end,
+	'The Get Help page markup must be discoverable.'
+);
+$help_markup = substr( $settings_source, $help_start, $help_end - $help_start );
+
+$retained_help_cards = array(
+	'Get Started Quickly',
+	'Setup Wizard',
+	'Documentation',
+	'Video Tutorials',
+	'Watch Video',
+);
+
+foreach ( $retained_help_cards as $retained_help_card ) {
+	tourfic_dashboard_resources_assert(
+		false !== strpos( $help_markup, $retained_help_card ),
+		"The Get Help page must retain {$retained_help_card}."
+	);
+}
+
+$removed_help_cards = array(
+	'Need a Custom Solution?',
+	'Request Customization',
+	'Need a Hand?',
+	'Join the community',
+	'Email Support',
+	'get_help_support',
+	'Live Chat',
+	'get_help_live_chat',
+);
+
+foreach ( $removed_help_cards as $removed_help_card ) {
+	tourfic_dashboard_resources_assert(
+		false === strpos( $help_markup, $removed_help_card ),
+		"The Get Help page must not contain {$removed_help_card}."
+	);
+}
+
+tourfic_dashboard_resources_assert(
+	3 === substr_count( $help_markup, 'class="tf-single-support-card"' )
+		&& 1 === substr_count( $help_markup, 'class="tf-support-cards tf-support-cards-resources"' )
+		&& false === strpos( $help_markup, 'tf-support-cards-4' ),
+	'The three retained Get Help cards must share one responsive grid.'
+);
+
 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI-only test diagnostics.
 echo "Tourfic dashboard Helpful Resources checks passed.\n";

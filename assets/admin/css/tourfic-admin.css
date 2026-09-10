@@ -2286,23 +2286,23 @@ Steps
 .tf-settings-help-center .tf-support-cards .tf-single-support-card a.tf-link-skip-btn {
   min-width: inherit;
 }
-.tf-settings-help-center .tf-support-cards.tf-support-cards-4 {
+.tf-settings-help-center .tf-support-cards.tf-support-cards-resources {
   padding: 24px;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   border-radius: 16px;
   background: #F6FAFE;
 }
 @media only screen and (max-width: 1199.98px) {
-  .tf-settings-help-center .tf-support-cards.tf-support-cards-4 {
+  .tf-settings-help-center .tf-support-cards.tf-support-cards-resources {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media only screen and (max-width: 768px) {
-  .tf-settings-help-center .tf-support-cards.tf-support-cards-4 {
+  .tf-settings-help-center .tf-support-cards.tf-support-cards-resources {
     grid-template-columns: 1fr;
   }
 }
-.tf-settings-help-center .tf-support-cards.tf-support-cards-4 .tf-single-support-card h3 {
+.tf-settings-help-center .tf-support-cards.tf-support-cards-resources .tf-single-support-card h3 {
   margin: 0 0 -16px 0;
 }
 .tf-settings-help-center .tf-settings-faq {
