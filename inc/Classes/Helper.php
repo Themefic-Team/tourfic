@@ -965,9 +965,6 @@ class Helper {
                 <img src="<?php echo esc_url( TOURFIC_ASSETS_APP_URL ); ?>images/tourfic-logo.webp" alt="logo">
                 <span>v<?php echo esc_html( TOURFIC_VERSION ); ?></span>
             </div>
-            <div class="other-document">
-                <span><?php esc_html_e( "Having troubles?", "tourfic" ); ?> <a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/support/', array( 'utm_medium' => 'settings_header_menu_request' ) ) ); ?>" target="_blank"><?php esc_html_e( "Get help", "tourfic" ); ?></a></span>
-            </div>
         </div>
         <!-- dashboard-top-section -->
 		<?php
