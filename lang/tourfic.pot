@@ -609,7 +609,7 @@ msgstr ""
 #: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:916
 #: inc/Classes/Tour/Tour.php:4554
 #: inc/functions/woocommerce/wc-tour.php:812
-msgid "Childern price is blank!"
+msgid "Children price is blank!"
 msgstr ""
 
 #: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:919
@@ -4323,7 +4323,8 @@ msgid "Wednesday"
 msgstr ""
 
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:75
-msgid "Thrusday"
+#: inc/Admin/TF_Options/options/tf-settings.php:126
+msgid "Thursday"
 msgstr ""
 
 #: inc/Admin/TF_Options/fields/tourAvailabilityCal/TF_tourAvailabilityCal.php:79
@@ -7414,10 +7415,6 @@ msgstr ""
 msgid "Select a Day, that will show in the DatePickr of Frontend"
 msgstr ""
 
-#: inc/Admin/TF_Options/options/tf-settings.php:126
-msgid "Thursday"
-msgstr ""
-
 #: inc/Admin/TF_Options/options/tf-settings.php:135
 msgid "Enable Quick Checkout"
 msgstr ""
@@ -8709,7 +8706,7 @@ msgid "Background Color"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2683
-msgid "Booking Confrimation Template"
+msgid "Booking Confirmation Template"
 msgstr ""
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2685
@@ -9179,11 +9176,11 @@ msgid "Travelfic Active"
 msgstr ""
 
 #: inc/Admin/TF_Setup_Wizard.php:433
-msgid "Travelfic Toolklit"
+msgid "Travelfic Toolkit"
 msgstr ""
 
 #: inc/Admin/TF_Setup_Wizard.php:437
-msgid "Travelfic Toolklit Active"
+msgid "Travelfic Toolkit Active"
 msgstr ""
 
 #: inc/Admin/TF_Setup_Wizard.php:472
@@ -10773,7 +10770,7 @@ msgstr ""
 
 #: inc/App/Widgets/Elementor/Widgets/TF_Apartment_Locations.php:198
 #: inc/App/Widgets/Elementor/Widgets/TF_Hotel_Locations.php:197
-msgid "Location Subitle Typography"
+msgid "Location Subtitle Typography"
 msgstr ""
 
 #: inc/App/Widgets/Elementor/Widgets/TF_Apartment_Locations.php:206
@@ -10962,7 +10959,7 @@ msgid "Destination Title Hover Color"
 msgstr ""
 
 #: inc/App/Widgets/Elementor/Widgets/TF_Tour_Destinations.php:197
-msgid "Destination Subitle Typography"
+msgid "Destination Subtitle Typography"
 msgstr ""
 
 #: inc/App/Widgets/Elementor/Widgets/TF_Tour_Destinations.php:205
@@ -12604,7 +12601,7 @@ msgid "- Select Service -"
 msgstr ""
 
 #: inc/Classes/Hotel/Hotel.php:3533
-msgid "Booking summery"
+msgid "Booking summary"
 msgstr ""
 
 #. translators: 1: adult count, 2: adult price, 3: child count, 4: child price.

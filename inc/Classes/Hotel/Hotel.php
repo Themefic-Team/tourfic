@@ -3535,10 +3535,10 @@ class Hotel {
                         </div>
 					<?php } ?>
 
-                    <!-- Popup Booking Summery -->
+                    <!-- Popup Booking Summary -->
                     <div class="tf-booking-summery" style="<?php echo empty( $airport_service_type ) && empty($hotel_extras) && empty( $enable_guest_info ) && 3 != $room_book_by ? esc_attr( "width: 100%;" ) : ''; ?>">
                         <div class="tf-booking-fixed-summery">
-                            <h5><?php esc_html_e( "Booking summery", "tourfic" ); ?></h5>
+                            <h5><?php esc_html_e( "Booking summary", "tourfic" ); ?></h5>
                             <h4><?php echo esc_html(get_the_title( $post_id )); ?></h4>
                         </div>
                         <div class="tf-booking-traveller-info">

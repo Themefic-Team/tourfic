@@ -72,7 +72,7 @@ if ( ! class_exists( 'Tourfic_tourAvailabilityCal' ) ) {
                                                 </li>
                                                 <li>
                                                     <input type="checkbox" id="tf_tour_repeat_week[4]" name="tf_tour_repeat_week[]" class="tf-group-checkbox" value="4">
-                                                    <label for="tf_tour_repeat_week[4]"><?php echo esc_html__( 'Thrusday', 'tourfic' ); ?></label>
+                                                    <label for="tf_tour_repeat_week[4]"><?php echo esc_html__( 'Thursday', 'tourfic' ); ?></label>
                                                 </li>
                                                 <li>
                                                     <input type="checkbox" id="tf_tour_repeat_week[5]" name="tf_tour_repeat_week[]" class="tf-group-checkbox" value="5">

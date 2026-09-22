@@ -2677,7 +2677,7 @@ Tourfic_Settings::option( 'tourfic_settings', array(
 								array(
 									'id'          => 'admin_booking_email_template',
 									'type'        => 'editor',
-									'label'       => esc_html__( 'Booking Confrimation Template', 'tourfic' ),
+									'label'       => esc_html__( 'Booking Confirmation Template', 'tourfic' ),
 									'default'     => Tourfic\Admin\Emails\TF_Handle_Emails::get_email_template( 'order_confirmation', '', 'admin' ),
 									'description' => esc_html__( 'This template will be sent to admin', 'tourfic' )
 								),

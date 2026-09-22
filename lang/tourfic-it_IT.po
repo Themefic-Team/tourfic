@@ -552,7 +552,7 @@ msgstr "Il prezzo adulto è vuoto!"
 
 #: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:922
 #: inc/Classes/Tour/Tour.php:4626 inc/functions/woocommerce/wc-tour.php:812
-msgid "Childern price is blank!"
+msgid "Children price is blank!"
 msgstr "Il prezzo del bambino è vuoto!"
 
 #: inc/Admin/Backend_Booking/TF_Tour_Backend_Booking.php:925
@@ -9140,8 +9140,8 @@ msgid "Background Color"
 msgstr "Colore di sfondo"
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2683
-msgid "Booking Confrimation Template"
-msgstr "Modello di Prenotazione Confrimation"
+msgid "Booking Confirmation Template"
+msgstr "Modello di conferma della prenotazione"
 
 #: inc/Admin/TF_Options/options/tf-settings.php:2685
 msgid "This template will be sent to admin"
@@ -9793,12 +9793,12 @@ msgid "Travelfic Active"
 msgstr "Travelfic Attiva"
 
 #: inc/Admin/TF_Setup_Wizard.php:433
-msgid "Travelfic Toolklit"
-msgstr "Travelfic Toolklit"
+msgid "Travelfic Toolkit"
+msgstr "Travelfic Toolkit"
 
 #: inc/Admin/TF_Setup_Wizard.php:437
-msgid "Travelfic Toolklit Active"
-msgstr "Travelfic Toolklit Attivo"
+msgid "Travelfic Toolkit Active"
+msgstr "Travelfic Toolkit Attivo"
 
 #: inc/Admin/TF_Setup_Wizard.php:472 inc/Admin/TF_Setup_Wizard.php:581
 msgid "From here you can customize your website according to your need"
@@ -11355,7 +11355,7 @@ msgstr "Titolo della posizione Colore del cursore"
 
 #: inc/App/Widgets/Elementor/Widgets/TF_Apartment_Locations.php:198
 #: inc/App/Widgets/Elementor/Widgets/TF_Hotel_Locations.php:197
-msgid "Location Subitle Typography"
+msgid "Location Subtitle Typography"
 msgstr "Localizzazione Tipografia dei sottotitoli"
 
 #: inc/App/Widgets/Elementor/Widgets/TF_Apartment_Locations.php:206
@@ -11553,7 +11553,7 @@ msgid "Destination Title Hover Color"
 msgstr "Titolo della destinazione Colore del cursore"
 
 #: inc/App/Widgets/Elementor/Widgets/TF_Tour_Destinations.php:197
-msgid "Destination Subitle Typography"
+msgid "Destination Subtitle Typography"
 msgstr "Tipografia dei sottotitoli di destinazione"
 
 #: inc/App/Widgets/Elementor/Widgets/TF_Tour_Destinations.php:205
@@ -13127,8 +13127,8 @@ msgid "Select Quantity"
 msgstr "Quantità selezionata"
 
 #: inc/Classes/Hotel/Hotel.php:3574
-msgid "Booking summery"
-msgstr "Prenotazione estiva"
+msgid "Booking summary"
+msgstr "Riepilogo della prenotazione"
 
 #. translators: 1: adult count, 2: adult price, 3: child count, 4: child price.
 #: inc/Classes/Hotel/Hotel.php:3652 inc/Classes/Hotel/Hotel.php:3701

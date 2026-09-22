@@ -508,7 +508,7 @@ function tourfic_tours_booking_function() {
 			$response['errors'][] = esc_html__( 'Adult price is blank!', 'tourfic' );
 		}
 		if ( ! $disable_child_price && $children > 0 && empty( $children_price ) ) {
-			$response['errors'][] = esc_html__( 'Childern price is blank!', 'tourfic' );
+			$response['errors'][] = esc_html__( 'Children price is blank!', 'tourfic' );
 		}
 		if ( ! $disable_infant_price && $infant > 0 && empty( $infant_price ) ) {
 			$response['errors'][] = esc_html__( 'Infant price is blank!', 'tourfic' );

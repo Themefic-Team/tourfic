@@ -194,7 +194,7 @@ class TF_Hotel_Locations extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name'     => 'hotel_location_subtitle_typography',
-				'label'    => esc_html__( 'Location Subitle Typography', 'tourfic' ),
+				'label'    => esc_html__( 'Location Subtitle Typography', 'tourfic' ),
 				'selector' => '{{WRAPPER}} .recomended_place_info_header p',
 			]
 		);

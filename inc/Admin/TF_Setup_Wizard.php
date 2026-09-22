@@ -432,11 +432,11 @@ class TF_Setup_Wizard {
                         </button>
 
                         <button type="button" class="tf-setup-travelfic-toolkit-btn" data-install="travelfic-toolkit" style="display: none;">
-                            <span><?php esc_html_e( 'Travelfic Toolklit', 'tourfic' ) ?></span>
+                            <span><?php esc_html_e( 'Travelfic Toolkit', 'tourfic' ) ?></span>
                         </button>
 
                         <button type="button" class="tf-setup-travelfic-toolkit-active" data-install="travelfic-toolkit" style="display: none;">
-                            <span><?php esc_html_e( 'Travelfic Toolklit Active', 'tourfic' ) ?></span>
+                            <span><?php esc_html_e( 'Travelfic Toolkit Active', 'tourfic' ) ?></span>
                         </button>
                     </div>
                 </div>
