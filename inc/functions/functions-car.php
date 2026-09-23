@@ -997,6 +997,17 @@ function tourfic_getBestRefundPolicy($cancellations, $pickup_date, $pickup_time)
 
 	if(!empty($cancellations)){
 		foreach ($cancellations as $cancellation) {
+			if (
+				! is_array( $cancellation ) ||
+				! isset(
+					$cancellation['cancellation-times'],
+					$cancellation['cancellation_type'],
+					$cancellation['before_cancel_time']
+				)
+			) {
+				continue;
+			}
+
 			if('day'==$cancellation['cancellation-times']){
 				// Check if it's a free cancellation
 				if ($cancellation['cancellation_type'] === 'free' && !empty($days) && $days > $cancellation['before_cancel_time']) {
@@ -1022,6 +1033,13 @@ function tourfic_getBestRefundPolicy($cancellations, $pickup_date, $pickup_time)
     if (!$bestPolicy) {
 		if(!empty($cancellations)){
 			foreach ($cancellations as $cancellation) {
+				if (
+					! is_array( $cancellation ) ||
+					! isset( $cancellation['cancellation_type'], $cancellation['refund_amount'] )
+				) {
+					continue;
+				}
+
 				if ($cancellation['cancellation_type'] === 'paid') {
 					// If we don't have a policy yet, or if this one has a higher refund amount
 					if (!$bestPolicy || $cancellation['refund_amount'] > $bestPolicy['refund_amount']) {
@@ -1293,6 +1311,21 @@ function tourfic_getRefundPolicy($cancellations, $pickup_date, $pickup_time) {
 
 	if(!empty($cancellations)){
 		foreach ($cancellations as $cancellation) {
+			if (
+				! is_array( $cancellation ) ||
+				! isset(
+					$cancellation['cancellation-times'],
+					$cancellation['cancellation_type'],
+					$cancellation['before_cancel_time']
+				)
+			) {
+				continue;
+			}
+
+			if ( 'paid' === $cancellation['cancellation_type'] && ! isset( $cancellation['refund_amount'] ) ) {
+				continue;
+			}
+
 			$timeType = $cancellation['cancellation-times'];
 			$cancelTime = (int)$cancellation['before_cancel_time'];
 
