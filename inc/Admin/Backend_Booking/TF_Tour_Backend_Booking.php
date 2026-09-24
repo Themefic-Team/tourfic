@@ -405,6 +405,21 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		// People number
 		$total_people         = $adults + $children + $infant;
 		$total_people_booking = $adults + $children;
+		if ( 'package' === $pricing_rule && '' === (string) $selected_package ) {
+			foreach ( $tf_package_pricing as $package_index => $package_data ) {
+				if ( ! empty( $package_data['pack_status'] ) ) {
+					$selected_package = $package_index;
+					break;
+				}
+			}
+		}
+		$package_limit        = Helper::tourfic_resolve_tour_package_group_limit(
+			$meta,
+			$selected_package,
+			$adults,
+			$children,
+			$infant
+		);
 		$tour_extra_selection = Helper::tf_sanitize_tour_extra_selection( $tours_extra );
 		$tours_extra          = $tour_extra_selection['extras'];
 
@@ -551,6 +566,21 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		 */
 		if ( $total_people == 0 ) {
 			$response['errors'][] = esc_html__( 'Please Select Adults/Children/Infant required', 'tourfic' );
+		}
+
+		if ( $package_limit['is_exceeded'] ) {
+			$response['errors'][] = sprintf(
+				/* translators: %s: Maximum travelers per package booking. */
+				esc_html(
+					_n(
+						'This package allows a maximum of %s traveler per booking.',
+						'This package allows a maximum of %s travelers per booking.',
+						$package_limit['maximum'],
+						'tourfic'
+					)
+				),
+				$package_limit['maximum']
+			);
 		}
 
 

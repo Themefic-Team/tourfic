@@ -65,6 +65,13 @@ function tourfic_tours_booking_function() {
 	// Tour Package
 	$selectedPackage = isset( $_POST['selectedPackage'] ) ? sanitize_text_field( wp_unslash( $_POST['selectedPackage'] ) ) : '';
 	$tf_package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+	$package_limit     = Helper::tourfic_resolve_tour_package_group_limit(
+		$meta,
+		$selectedPackage,
+		$adults,
+		$children,
+		$infant
+	);
 
 	// Visitor Details
 	$tf_visitor_details = ! empty( $booking_request['traveller'] ) && is_array( $booking_request['traveller'] )
@@ -344,17 +351,19 @@ function tourfic_tours_booking_function() {
 		}
 	}
 
-	$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
-
-	if ( $pricing_rule=='package' && !empty($single_package) && $single_package['pricing_type'] == 'group' ) {
-		$pack_max_people = !empty($single_package['group_tabs'][3]['max_person']) ? $single_package['group_tabs'][3]['max_person'] : 0;
-		/* translators: %s: maximum number of person */
-		$max_text = sprintf( __( '%s person', 'tourfic' ), $pack_max_people );
-		// echo $total_people_booking;
-		if ( $total_people_booking > $pack_max_people && $pack_max_people > 0 ) {
-			/* translators: %1$s: maximum number of people, %2$s: start date, %3$s: end date */
-			$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
-		}
+	if ( $package_limit['is_exceeded'] ) {
+		$response['errors'][] = sprintf(
+			/* translators: %s: Maximum travelers per package booking. */
+			esc_html(
+				_n(
+					'This package allows a maximum of %s traveler per booking.',
+					'This package allows a maximum of %s travelers per booking.',
+					$package_limit['maximum'],
+					'tourfic'
+				)
+			),
+			$package_limit['maximum']
+		);
 	}
 
 

@@ -2009,10 +2009,8 @@ class Tour {
 									if ($tf_first_key === '') {
 										$tf_first_key = $key;
 									}
-									$tf_package_max_person = '';
-									if ( ! empty( $pack['pricing_type'] ) && 'group' === $pack['pricing_type'] ) {
-										$tf_package_max_person = ! empty( $pack['group_tabs'][3]['max_person'] ) ? $pack['group_tabs'][3]['max_person'] : '';
-									}
+									$tf_package_limit      = Helper::tourfic_resolve_tour_package_group_limit( $meta, $key );
+									$tf_package_max_person = 0 < $tf_package_limit['maximum'] ? $tf_package_limit['maximum'] : '';
 
 									?>
 									<div class="tf-single-package"<?php if ( '' !== $tf_package_max_person ) : ?> data-package-max-person="<?php echo esc_attr( $tf_package_max_person ); ?>"<?php endif; ?>>
@@ -2023,6 +2021,30 @@ class Tour {
 										<label for="package-<?php echo esc_attr($key); ?>"><h3><?php echo esc_html($pack['pack_title']); ?></h3></label>
 											<div class="tf-pacakge-persons">
 												<?php echo wp_kses_post( $pack['desc'] ); ?>
+											<p
+												class="tf-package-limit-message"
+												aria-live="polite"
+												<?php if ( 1 > $tf_package_limit['maximum'] ) : ?>
+													hidden
+												<?php endif; ?>
+											>
+													<?php
+													if ( 0 < $tf_package_limit['maximum'] ) {
+														echo esc_html(
+															sprintf(
+																/* translators: %s: Maximum travelers per package booking. */
+															_n(
+																'Maximum %s traveler per booking for this package.',
+																'Maximum %s travelers per booking for this package.',
+																$tf_package_limit['maximum'],
+																'tourfic'
+															),
+																$tf_package_limit['maximum']
+															)
+														);
+													}
+													?>
+												</p>
 											<?php do_action( 'tourfic_tour_package_schedule_field', $key ); ?>
 												<div class="tf-select-persons">
 													<?php if($pack['pricing_type']=='person'){ ?>
@@ -3966,6 +3988,13 @@ class Tour {
 		$default_min_people  = ! empty( $meta['min_person'] ) ? absint( $meta['min_person'] ) : 0;
 		$default_max_people  = ! empty( $meta['max_person'] ) ? absint( $meta['max_person'] ) : 0;
 		$tour_time           = apply_filters( 'tourfic_tour_booking_schedule_time', '', $_POST, $post_id, $meta );
+		$package_limit       = Helper::tourfic_resolve_tour_package_group_limit(
+			$meta,
+			$selectedPackage,
+			$adults,
+			$children,
+			$infant
+		);
 
 		$tour_availability = '';
 		if ( ! empty( $meta['tour_availability'] ) ) {
@@ -4145,16 +4174,19 @@ class Tour {
 
 		}
 
-		$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
-
-		if ( $pricing_rule=='package' && !empty($single_package) && $single_package['pricing_type'] == 'group' ) {
-			$pack_max_people = !empty($single_package['group_tabs'][3]['max_person']) ? $single_package['group_tabs'][3]['max_person'] : 0;
-			/* translators: %s: maximum number of person */
-			$max_text = sprintf( __( '%s person', 'tourfic' ), $pack_max_people );
-			if ( $total_people_booking > $pack_max_people && $pack_max_people > 0 ) {
-				/* translators: %1$s: maximum number of people, %2$s: start date, %3$s: end date */
-				$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
-			}
+		if ( $package_limit['is_exceeded'] ) {
+			$response['errors'][] = sprintf(
+				/* translators: %s: Maximum travelers per package booking. */
+				esc_html(
+					_n(
+						'This package allows a maximum of %s traveler per booking.',
+						'This package allows a maximum of %s travelers per booking.',
+						$package_limit['maximum'],
+						'tourfic'
+					)
+				),
+				$package_limit['maximum']
+			);
 		}
 
 		// Min and check, when availability is empty
@@ -4755,6 +4787,57 @@ class Tour {
 				}
 
 				$response['package_statuses'] = $package_status_map;
+
+				if ( '' !== $selected_package_key ) {
+					$capacity_limited   = ! empty( $schedule_context['adult_child_capacity_limited'] );
+					$remaining_capacity = $capacity_limited
+						? max( 0, (int) ( $schedule_context['adult_child_remaining_capacity'] ?? 0 ) )
+						: 0;
+					$limit_messages     = array();
+
+					if ( 0 < $package_limit['maximum'] ) {
+						$limit_messages[] = sprintf(
+							/* translators: %s: Maximum travelers per package booking. */
+							esc_html(
+								_n(
+									'Maximum %s traveler per booking for this package.',
+									'Maximum %s travelers per booking for this package.',
+									$package_limit['maximum'],
+									'tourfic'
+								)
+							),
+							$package_limit['maximum']
+						);
+					}
+
+					if ( $capacity_limited ) {
+						$limit_messages[] = sprintf(
+							/* translators: %s: Remaining Adult/Child seats. */
+							esc_html(
+								_n(
+									'%s Adult/Child seat remains for the selected schedule.',
+									'%s Adult/Child seats remain for the selected schedule.',
+									$remaining_capacity,
+									'tourfic'
+								)
+							),
+							$remaining_capacity
+						);
+					}
+
+					$response['package_limit'] = array(
+						'package_key'                    => $selected_package_key,
+						'pricing_type'                   => $package_limit['pricing_type'],
+						'is_group'                       => $package_limit['is_group'],
+						'package_min'                    => $package_limit['minimum'],
+						'package_max'                    => $package_limit['maximum'],
+						'capacity_limited'               => $capacity_limited,
+						'remaining_adult_child_capacity' => $remaining_capacity,
+						'package_exceeded'               => $package_limit['is_exceeded'],
+						'adult_child_capacity_exceeded'  => $capacity_limited && $total_people_booking > $remaining_capacity,
+						'message'                        => implode( ' ', $limit_messages ),
+					);
+				}
 			}
 
 			$response = apply_filters(
@@ -4766,6 +4849,9 @@ class Tour {
 					'pricing_rule'      => $pricing_rule,
 					'tour_availability' => $tour_availability,
 					'tour_date'         => $tour_date,
+					'tour_time'         => $tour_time,
+					'selected_package'  => $selected_package_key,
+					'schedule_context'  => $schedule_context,
 				)
 			);
 

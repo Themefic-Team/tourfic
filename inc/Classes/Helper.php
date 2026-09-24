@@ -415,6 +415,51 @@ class Helper {
 	}
 
 	/**
+	 * Resolve the per-booking traveler limit for a group-priced tour package.
+	 *
+	 * Package limits count every traveler. Schedule capacity is intentionally
+	 * excluded because Pro inventory counts Adults and Children only.
+	 *
+	 * @param array      $meta             Tour metadata.
+	 * @param int|string $package_key      Selected package index.
+	 * @param int        $adults           Requested Adults.
+	 * @param int        $children         Requested Children.
+	 * @param int        $infants          Requested Infants.
+	 * @return array
+	 */
+	public static function tourfic_resolve_tour_package_group_limit(
+		$meta,
+		$package_key,
+		$adults = 0,
+		$children = 0,
+		$infants = 0
+	) {
+		$meta         = is_array( $meta ) ? $meta : array();
+		$package_key  = is_int( $package_key ) || is_string( $package_key ) ? (string) $package_key : '';
+		$packages     = ! empty( $meta['package_pricing'] ) && is_array( $meta['package_pricing'] )
+			? $meta['package_pricing']
+			: array();
+		$package      = '' !== $package_key && isset( $packages[ $package_key ] ) && is_array( $packages[ $package_key ] )
+			? $packages[ $package_key ]
+			: array();
+		$pricing_type = sanitize_key( $package['pricing_type'] ?? '' );
+		$is_group     = 'package' === sanitize_key( $meta['pricing'] ?? '' ) && 'group' === $pricing_type;
+		$minimum      = $is_group ? absint( $package['group_tabs'][2]['min_person'] ?? 0 ) : 0;
+		$maximum      = $is_group ? absint( $package['group_tabs'][3]['max_person'] ?? 0 ) : 0;
+		$requested    = max( 0, (int) $adults ) + max( 0, (int) $children ) + max( 0, (int) $infants );
+
+		return array(
+			'package_key'  => $package_key,
+			'pricing_type' => $pricing_type,
+			'is_group'    => $is_group,
+			'minimum'     => $minimum,
+			'maximum'     => $maximum,
+			'requested'   => $requested,
+			'is_exceeded' => $is_group && 0 < $maximum && $requested > $maximum,
+		);
+	}
+
+	/**
 	 * Return the most specific tour availability item for a date.
 	 *
 	 * Matching priority:

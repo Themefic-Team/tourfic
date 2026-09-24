@@ -5721,6 +5721,15 @@ function convertTo24HourFormat(timeStr) {
             return Number.isNaN(maxPeople) ? 0 : maxPeople;
         }
 
+        function tfGetTourPackageRemainingCapacity($package) {
+            if ($package.attr('data-package-capacity-limited') !== '1') {
+                return null;
+            }
+
+            const remainingCapacity = parseInt($package.attr('data-package-remaining-capacity') || '0', 10);
+            return Number.isNaN(remainingCapacity) ? 0 : Math.max(0, remainingCapacity);
+        }
+
         function tfGetTourPackagePeopleTotal($package) {
             let totalPeople = 0;
             $package.find('input[name="adults"], input[name="childrens"], input[name="infants"]').each(function () {
@@ -5731,34 +5740,108 @@ function convertTo24HourFormat(timeStr) {
             return totalPeople;
         }
 
-        function tfRefreshTourPackageLimitControls($package) {
+        function tfGetTourPackageAdultChildTotal($package) {
+            let totalPeople = 0;
+            $package.find('input[name="adults"], input[name="childrens"]').each(function () {
+                const count = parseInt($(this).val() || '0', 10);
+                totalPeople += Number.isNaN(count) ? 0 : count;
+            });
+
+            return totalPeople;
+        }
+
+        function tfTourPackageInputUsesCapacity($input) {
+            return $input.is('input[name="adults"], input[name="childrens"]');
+        }
+
+        function tfGetTourPackageLimitReason($package, $input) {
             const maxPeople = tfGetTourPackageMaxPeople($package);
-            if (!maxPeople) {
+            if (maxPeople && tfGetTourPackagePeopleTotal($package) >= maxPeople) {
+                return 'package';
+            }
+
+            const remainingCapacity = tfGetTourPackageRemainingCapacity($package);
+            if (
+                remainingCapacity !== null &&
+                tfTourPackageInputUsesCapacity($input) &&
+                tfGetTourPackageAdultChildTotal($package) >= remainingCapacity
+            ) {
+                return 'capacity';
+            }
+
+            return '';
+        }
+
+        function tfRefreshTourPackageLimitControls($package) {
+            if (!$package.length) {
                 return;
             }
 
+            const maxPeople = tfGetTourPackageMaxPeople($package);
             const totalPeople = tfGetTourPackagePeopleTotal($package);
-            const $incrementButtons = $package.find('.tf-single-person .acr-inc');
+            const remainingCapacity = tfGetTourPackageRemainingCapacity($package);
+            const adultChildTotal = tfGetTourPackageAdultChildTotal($package);
 
-            if (totalPeople >= maxPeople) {
-                $incrementButtons.addClass('disable');
-            } else {
-                $incrementButtons.removeClass('disable');
+            $package.find('.tf-single-person input[type="number"]').each(function () {
+                const $input = $(this);
+                const currentValue = parseInt($input.val() || '0', 10);
+                const individualMax = parseInt($input.attr('data-max') || $input.attr('max') || '0', 10);
+                const packageReached = maxPeople > 0 && totalPeople >= maxPeople;
+                const capacityReached = remainingCapacity !== null && tfTourPackageInputUsesCapacity($input) && adultChildTotal >= remainingCapacity;
+                const individualReached = individualMax > 0 && !Number.isNaN(currentValue) && currentValue >= individualMax;
+
+                $input.siblings('.acr-inc').toggleClass('disable', packageReached || capacityReached || individualReached);
+            });
+        }
+
+        function tfReduceTourPackageValues($inputs, $preferredInput, overflow) {
+            const orderedInputs = [];
+            if ($preferredInput && $preferredInput.length && $inputs.is($preferredInput)) {
+                orderedInputs.push($preferredInput.get(0));
             }
+            $inputs.each(function () {
+                if (!orderedInputs.includes(this)) {
+                    orderedInputs.push(this);
+                }
+            });
+
+            orderedInputs.some(function (input) {
+                if (overflow <= 0) {
+                    return true;
+                }
+
+                const $input = $(input);
+                const currentValue = Math.max(0, parseInt($input.val() || '0', 10) || 0);
+                const reduction = Math.min(currentValue, overflow);
+                $input.val(currentValue - reduction);
+                overflow -= reduction;
+
+                return overflow <= 0;
+            });
         }
 
         function tfClampTourPackagePeople($input) {
-            const $package = $input.closest('.tf-single-package[data-package-max-person]');
+            const $package = $input.closest('.tf-single-package');
             const maxPeople = tfGetTourPackageMaxPeople($package);
-            if (!$package.length || !maxPeople) {
+            if (!$package.length) {
                 return;
             }
 
             const totalPeople = tfGetTourPackagePeopleTotal($package);
-            if (totalPeople > maxPeople) {
-                const currentValue = parseInt($input.val() || '0', 10);
-                const overflow = totalPeople - maxPeople;
-                $input.val(Math.max(0, (Number.isNaN(currentValue) ? 0 : currentValue) - overflow));
+            if (maxPeople && totalPeople > maxPeople) {
+                tfReduceTourPackageValues(
+                    $package.find('input[name="adults"], input[name="childrens"], input[name="infants"]'),
+                    $input,
+                    totalPeople - maxPeople
+                );
+            }
+
+            const remainingCapacity = tfGetTourPackageRemainingCapacity($package);
+            const adultChildTotal = tfGetTourPackageAdultChildTotal($package);
+            if (remainingCapacity !== null && adultChildTotal > remainingCapacity) {
+                const $capacityInputs = $package.find('input[name="adults"], input[name="childrens"]');
+                const $preferredCapacityInput = tfTourPackageInputUsesCapacity($input) ? $input : $capacityInputs.last();
+                tfReduceTourPackageValues($capacityInputs, $preferredCapacityInput, adultChildTotal - remainingCapacity);
             }
 
             tfRefreshTourPackageLimitControls($package);
@@ -5771,13 +5854,12 @@ function convertTo24HourFormat(timeStr) {
             }
 
             var input = $(this).parent().find('input');
-            var $package = input.closest('.tf-single-package[data-package-max-person]');
-            var packageMaxPeople = tfGetTourPackageMaxPeople($package);
+            var $package = input.closest('.tf-single-package');
+            var packageLimitReason = tfGetTourPackageLimitReason($package, input);
             if (
                 $(this).hasClass('acr-inc') &&
                 $package.length &&
-                packageMaxPeople &&
-                tfGetTourPackagePeopleTotal($package) >= packageMaxPeople
+                packageLimitReason
             ) {
                 $(this).addClass('disable');
                 input.blur();
@@ -5831,10 +5913,10 @@ function convertTo24HourFormat(timeStr) {
             }else{
                 $(this).parent().find('.acr-inc').removeClass('disable');
             }
-            tfRefreshTourPackageLimitControls(input.closest('.tf-single-package[data-package-max-person]'));
+            tfRefreshTourPackageLimitControls(input.closest('.tf-single-package'));
         });
 
-        $(document).on('change', '.tf-single-package[data-package-max-person] input[type="number"]', function () {
+        $(document).on('change', '.tf-single-package input[type="number"]', function () {
             tfClampTourPackagePeople($(this));
         });
 
@@ -7050,6 +7132,65 @@ function convertTo24HourFormat(timeStr) {
             });
         };
 
+        const applyTourPackageLimit = (packageLimit = null, $context = null) => {
+            if (!packageLimit || typeof packageLimit !== 'object') {
+                return;
+            }
+
+            const packageKey = String(packageLimit.package_key === undefined ? '' : packageLimit.package_key);
+            const $package = tfResolveTourPackageList($context).filter(function () {
+                return String($(this).find('input[name="tf_package"]').first().val() || '') === packageKey;
+            }).first();
+            if (!$package.length) {
+                return;
+            }
+
+            const packageMax = Math.max(0, parseInt(packageLimit.package_max || '0', 10) || 0);
+            const capacityLimited = packageLimit.capacity_limited === true || packageLimit.capacity_limited === 1;
+            const remainingCapacity = Math.max(0, parseInt(packageLimit.remaining_adult_child_capacity || '0', 10) || 0);
+            const isGroupPackage = packageLimit.is_group === true || packageLimit.is_group === 1;
+
+            if (isGroupPackage && packageMax > 0) {
+                $package.attr('data-package-max-person', String(packageMax));
+            } else {
+                $package.removeAttr('data-package-max-person');
+            }
+
+            if (capacityLimited) {
+                $package.attr('data-package-capacity-limited', '1');
+                $package.attr('data-package-remaining-capacity', String(remainingCapacity));
+            } else {
+                $package.removeAttr('data-package-capacity-limited data-package-remaining-capacity');
+            }
+
+            $package.find('.tf-single-person input[type="number"]').each(function () {
+                const $input = $(this);
+                if ($input.attr('data-package-original-max') === undefined) {
+                    $input.attr('data-package-original-max', $input.attr('data-max') || $input.attr('max') || '');
+                }
+
+                const originalMax = Math.max(0, parseInt($input.attr('data-package-original-max') || '0', 10) || 0);
+                let controlMax = isGroupPackage ? packageMax : originalMax;
+                if (capacityLimited && tfTourPackageInputUsesCapacity($input)) {
+                    controlMax = controlMax > 0 ? Math.min(controlMax, remainingCapacity) : remainingCapacity;
+                }
+
+                if (controlMax > 0 || (capacityLimited && tfTourPackageInputUsesCapacity($input))) {
+                    $input.attr('max', String(controlMax));
+                    $input.attr('data-max', String(controlMax));
+                } else {
+                    $input.removeAttr('max data-max');
+                }
+            });
+
+            const limitMessage = packageLimit.message || '';
+            $package.find('.tf-package-limit-message').text(limitMessage).prop('hidden', !limitMessage);
+            const $preferredInput = $package.find('input[name="childrens"]').first().length
+                ? $package.find('input[name="childrens"]').first()
+                : $package.find('input[type="number"]').first();
+            tfClampTourPackagePeople($preferredInput);
+        };
+
         $('body').on('click', '.tf-withoutpayment-booking .tf-pagination-content-1 .tf_btn.disabled', function (e) {
             e.preventDefault();
             e.stopImmediatePropagation();
@@ -7138,6 +7279,7 @@ function convertTo24HourFormat(timeStr) {
                     $trigger.unblock();
 
                     var response = JSON.parse(data);
+                    applyTourPackageLimit(response.package_limit || null, $form);
                     const packageStatuses = response.package_statuses || {};
                     const hasPackageStatuses = Object.keys(packageStatuses).length > 0;
                     const hasPackageUI = $form.find('.tf-booking-content-package .tf-single-package').length > 0;
