@@ -224,14 +224,6 @@ abstract Class TF_Booking_Details {
             $paged            = isset( $_GET['paged'] ) ? max( 1, absint( wp_unslash( $_GET['paged'] ) ) ) : 1;
             $list_view        = isset( $_GET['nonce'] );
 
-            $pagination_filters = array(
-                'checkinout' => $checkinout_perms,
-                'post'       => $tf_post_perms,
-                'order_id'   => $tf_order_perms,
-                'payment'    => $tf_payment_perms,
-                'list_view'  => $list_view,
-            );
-
             $tf_order_filters = array();
             if ( in_array( $checkinout_perms, array( 'in', 'out', 'not' ), true ) ) {
                 $tf_order_filters['checkinout'] = $checkinout_perms;
@@ -382,6 +374,13 @@ abstract Class TF_Booking_Details {
         $calendar_events
     ) {
 		$hook_post_type = 0 === strpos( $this->booking_args['post_type'], 'tf_' ) ? substr( $this->booking_args['post_type'], 3 ) : $this->booking_args['post_type'];
+		$pagination_filters = array(
+			'checkinout' => $selected_checkinout,
+			'post'       => $selected_post,
+			'order_id'   => $selected_order,
+			'payment'    => $selected_payment,
+			'list_view'  => $list_view,
+		);
 
 		?>
         <div class="tf-booking-calendar-popup-box">

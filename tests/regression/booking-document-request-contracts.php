@@ -14,6 +14,11 @@ defined( 'ABSPATH' ) || exit;
 $root                   = dirname( __DIR__, 2 );
 $booking_details_source = file_get_contents( $root . '/inc/Core/TF_Booking_Details.php' );
 $functions_source       = file_get_contents( $root . '/inc/functions.php' );
+$list_method_start      = strpos( $booking_details_source, 'function tf_booking_details_list(' );
+$list_method_end        = strpos( $booking_details_source, 'abstract function voucher_details', $list_method_start );
+$list_method_source     = substr( $booking_details_source, $list_method_start, $list_method_end - $list_method_start );
+$pagination_state_start = strpos( $list_method_source, '$pagination_filters = array(' );
+$previous_page_link     = strpos( $list_method_source, 'tf_booking_details_pagination( $paged - 1, $pagination_filters )' );
 
 function tourfic_booking_document_contract_assert( $condition, $message ) {
 	if ( ! $condition ) {
@@ -35,10 +40,19 @@ tourfic_booking_document_contract_assert(
 	'Booking pagination must rebuild an explicit allowlisted query instead of reflecting the raw query string.'
 );
 tourfic_booking_document_contract_assert(
-	false !== strpos( $booking_details_source, "'list_view'  => \$list_view" )
-		&& false !== strpos( $booking_details_source, 'tf_booking_details_pagination( $paged - 1, $pagination_filters )' )
+	false !== $list_method_start
+		&& false !== $list_method_end
+		&& false !== strpos( $list_method_source, "'checkinout' => \$selected_checkinout" )
+		&& false !== strpos( $list_method_source, "'post'       => \$selected_post" )
+		&& false !== strpos( $list_method_source, "'order_id'   => \$selected_order" )
+		&& false !== strpos( $list_method_source, "'payment'    => \$selected_payment" )
+		&& false !== strpos( $list_method_source, "'list_view'  => \$list_view" )
+		&& false !== $pagination_state_start
+		&& false !== $previous_page_link
+		&& $pagination_state_start < $previous_page_link
+		&& 1 === substr_count( $booking_details_source, '$pagination_filters = array(' )
 		&& false === strpos( $booking_details_source, "function tf_booking_details_pagination( \$page )" ),
-	'Booking pagination must reuse the already verified and sanitized filter state.'
+	'Booking pagination must define and reuse the verified filter state inside the rendering method that consumes it.'
 );
 tourfic_booking_document_contract_assert(
 	false !== strpos( $booking_details_source, 'function tf_current_user_can_access_booking_screen()' )
