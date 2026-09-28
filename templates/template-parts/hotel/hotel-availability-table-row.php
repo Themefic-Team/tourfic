@@ -32,7 +32,7 @@ if ( $tourfic_room_select_max < 1 ) {
 	return;
 }
 
-if ( $tourfic_hotel_selected_template_check == "design-1" ) {
+if ( $tf_hotel_selected_template_check == "design-1" ) {
 	if ( empty( $tourfic_room_disable_date ) || !empty($tourfic_room_disable_date[$tf_enddate]) ) {
 		?>
         <tr>
@@ -316,7 +316,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 								<?php
 								if ( $multi_by_date_ck ) {
 									/* translators: %s: Days */
-									$days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per night', 'tourfic' );
+									$days > 0 ? printf( esc_html( _n( 'for %s night', 'for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per night', 'tourfic' );
 								} else {
 									/* translators: %s: Days */
 									$days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per day', 'tourfic' );
@@ -328,7 +328,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 								<?php
 								if ( $multi_by_date_ck ) {
 									/* translators: %s: Days */
-									$days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
+									$days > 0 ? printf( esc_html( _n( 'for %s night', 'for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
 								} else {
 									/* translators: %s: Days */
 									$days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/day', 'tourfic' );
@@ -457,7 +457,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 							<?php
 							if ( $multi_by_date_ck ) {
 								/* translators: %s: Days */
-								$days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per night', 'tourfic' );
+								$days > 0 ? printf( esc_html( _n( 'for %s night', 'for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per night', 'tourfic' );
 							} else {
 								/* translators: %s: Days */
 								$days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per day', 'tourfic' );
@@ -469,7 +469,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 							<?php
 							if ( $multi_by_date_ck ) {
 								/* translators: %s: Days */
-								$days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
+								$days > 0 ? printf( esc_html( _n( 'for %s night', 'for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
 							} else {
 								/* translators: %s: Days */
 								$days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/day', 'tourfic' );
@@ -865,7 +865,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                                         <?php
                                         if ( $multi_by_date_ck ) {
                                             /* translators: %s: Days */
-                                            $days > 0 ? printf( esc_html__( ' / for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
+                                            $days > 0 ? printf( esc_html( _n( ' / for %s night', ' / for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
                                         } else {
                                             /* translators: %s: Days */
                                             $days > 0 ? printf( esc_html__( ' /for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/day', 'tourfic' );
@@ -1065,7 +1065,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 									<?php
 									if ( $multi_by_date_ck ) {
 										/* translators: %s: Days */
-										$days > 0 ? printf( esc_html__( ' / for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per night', 'tourfic' );
+										$days > 0 ? printf( esc_html( _n( ' / for %s night', ' / for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per night', 'tourfic' );
 									} else {
 										/* translators: %s: Days */
 										$days > 0 ? printf( esc_html__( ' / for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per day', 'tourfic' );
@@ -1077,7 +1077,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 									<?php
 									if ( $multi_by_date_ck ) {
 										/* translators: %s: Days */
-										$days > 0 ? printf( esc_html__( ' / for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
+										$days > 0 ? printf( esc_html( _n( ' / for %s night', ' / for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
 									} else {
 										/* translators: %s: Days */
 										$days > 0 ? printf( esc_html__( ' /for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/day', 'tourfic' );
@@ -1257,7 +1257,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 										<?php
 										if ( $multi_by_date_ck ) {
 											/* translators: %s: Days */
-											$days > 0 ? printf( esc_html__( ' / for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per night', 'tourfic' );
+											$days > 0 ? printf( esc_html( _n( ' / for %s night', ' / for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per night', 'tourfic' );
 										} else {
 											/* translators: %s: Days */
 											$days > 0 ? printf( esc_html__( ' / for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per day', 'tourfic' );
@@ -1269,7 +1269,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 										<?php
 										if ( $multi_by_date_ck ) {
 											/* translators: %s: Days */
-											$days > 0 ? printf( esc_html__( ' / for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
+											$days > 0 ? printf( esc_html( _n( ' / for %s night', ' / for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
 										} else {
 											/* translators: %s: Days */
 											$days > 0 ? printf( esc_html__( ' /for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/day', 'tourfic' );
@@ -1646,7 +1646,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 					                        <?php
 					                        if ( $multi_by_date_ck ) {
 						                        /* translators: %s: Days */
-						                        $days > 0 ? printf( esc_html__( ' / for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
+						                        $days > 0 ? printf( esc_html( _n( ' / for %s night', ' / for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
 					                        } else {
 						                        /* translators: %s: Days */
 						                        $days > 0 ? printf( esc_html__( ' /for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/day', 'tourfic' );
@@ -1837,7 +1837,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 				                            <?php
 				                            if ( $multi_by_date_ck ) {
 					                            /* translators: %s: Days */
-					                            $days > 0 ? printf( esc_html__( ' / for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per night', 'tourfic' );
+					                            $days > 0 ? printf( esc_html( _n( ' / for %s night', ' / for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per night', 'tourfic' );
 				                            } else {
 					                            /* translators: %s: Days */
 					                            $days > 0 ? printf( esc_html__( ' / for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per day', 'tourfic' );
@@ -1849,7 +1849,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 				                            <?php
 				                            if ( $multi_by_date_ck ) {
 					                            /* translators: %s: Days */
-					                            $days > 0 ? printf( esc_html__( ' / for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
+					                            $days > 0 ? printf( esc_html( _n( ' / for %s night', ' / for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
 				                            } else {
 					                            /* translators: %s: Days */
 					                            $days > 0 ? printf( esc_html__( ' /for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/day', 'tourfic' );
@@ -2205,7 +2205,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
                             <?php
                             if ( $multi_by_date_ck ) {
                                 /* translators: %s: Days */
-                                $days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
+                                $days > 0 ? printf( esc_html( _n( 'for %s night', 'for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
                             } else {
                                 /* translators: %s: Days */
                                 $days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/day', 'tourfic' );
@@ -2338,7 +2338,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 							<?php
 							if ( $multi_by_date_ck ) {
 								/* translators: %s: Days */
-								$days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per night', 'tourfic' );
+								$days > 0 ? printf( esc_html( _n( 'for %s night', 'for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per night', 'tourfic' );
 							} else {
 								/* translators: %s: Days */
 								$days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per day', 'tourfic' );
@@ -2350,7 +2350,7 @@ if ( $tourfic_hotel_selected_template_check == "design-1" ) {
 							<?php
 							if ( $multi_by_date_ck ) {
 								/* translators: %s: Days */
-								$days > 0 ? printf( esc_html__( 'for %s nights', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
+								$days > 0 ? printf( esc_html( _n( 'for %s night', 'for %s nights', $days, 'tourfic' ) ), esc_html( $days ) ) : esc_html_e( 'per person/night', 'tourfic' );
 							} else {
 								/* translators: %s: Days */
 								$days > 0 ? printf( esc_html__( 'for %s days', 'tourfic' ), esc_html( $days ) ) : esc_html_e( 'per person/day', 'tourfic' );

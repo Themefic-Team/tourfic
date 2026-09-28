@@ -273,8 +273,8 @@
             .tf-rooms-sections{
                 .tf-rooms{
                     @media #{$max768}{
-                        overflow-x: scroll;
-                        width: auto;
+                        overflow-x: visible;
+                        width: 100%;
                     }
                     .hotel-room-wrap {
                         overflow-x: unset;
@@ -287,6 +287,24 @@
                         border-collapse: collapse;
                         width: 100%;
                         border-left: none;
+                        @media #{$max768}{
+                            display: block;
+
+                            &>thead,
+                            &>tbody,
+                            &>thead>tr,
+                            &>tbody>tr {
+                                display: block;
+                                width: 100%;
+                            }
+
+                            &>thead>tr>th,
+                            &>tbody>tr>td {
+                                box-sizing: border-box;
+                                display: block;
+                                width: 100% !important;
+                            }
+                        }
                         &>thead{
                             background-color: $color-filling-fg;
                             tr{
@@ -312,6 +330,7 @@
                                     text-align-last: left;
                                     @media #{$max768}{
                                         padding: 20px;
+                                        border-right: 1px solid $color-border-lite;
                                     }
                                     .tf-room-preview-img{
                                         margin-right: 20px;
@@ -389,13 +408,16 @@
                                     padding: 30px;
                                     border-left: 0px;
                                     @media #{$max768}{
-                                        width: 300px;
+                                        width: 100%;
                                         padding: 20px;
-                                        display: table-caption;
+                                        display: block;
                                         border-top: 0;
                                     }
                                     .tf-room-description-box{
                                         width: 100%;
+                                        @media #{$max768}{
+                                            flex-direction: column;
+                                        }
                                         .tf-room-detail-qv{
                                             display: block;
                                             &.tf-room-gallery-info{
