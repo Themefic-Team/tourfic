@@ -1942,7 +1942,7 @@ Tourfic_Settings::option( 'tourfic_settings', array(
 					'placeholder' => esc_html__( 'Select a page', 'tourfic' ),
 					'label'       => esc_html__( 'Select Search Result Page', 'tourfic' ),
 					/* translators: %s: Page template name wrapped in <code> tag */
-					'description' => sprintf( esc_html__( 'This page will be used to show the Search form Results. Please make sure Page template: %s is selected while creating this page.', 'tourfic' ), '<code>' . esc_html__( 'Tourfic - Search Result', 'tourfic' ) . '</code>' ),
+					'description' => sprintf( esc_html__( 'This page shows search-form results and uses the Tourfic: Search Result Sidebar. Select the %s page template. Service archives are generated routes and do not appear under Pages.', 'tourfic' ), '<code>' . esc_html__( 'Tourfic - Search Results', 'tourfic' ) . '</code>' ),
 					'options'     => 'posts',
 					'query_args'  => array(
 						'post_type'      => 'page',

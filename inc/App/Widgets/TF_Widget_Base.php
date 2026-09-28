@@ -34,9 +34,9 @@ class TF_Widget_Base {
     function tourfic_sidebar_widgets_init() {
 
         register_sidebar( array(
-            'name'          => esc_html__( 'TOURFIC: Archive Sidebar', 'tourfic' ),
+            'name'          => esc_html__( 'Tourfic: Service Archive Sidebar', 'tourfic' ),
             'id'            => 'tf_archive_booking_sidebar',
-            'description'   => esc_html__( 'Widgets in this area will be shown on tourfic archive/search page', 'tourfic' ),
+            'description'   => esc_html__( 'Widgets in this area appear on generated hotel, tour, apartment, room, and car archive routes.', 'tourfic' ),
             'before_widget' => '<div id="%1$s" class="tf_widget widget %2$s">',
             'after_widget'  => '</div>',
             'before_title'  => '<div class="tf-widget-title"><span>',
@@ -46,7 +46,7 @@ class TF_Widget_Base {
         register_sidebar( array(
             'name'          => esc_html__( 'Tourfic: Search Result Sidebar', 'tourfic' ),
             'id'            => 'tf_search_result',
-            'description'   => esc_html__( 'Widgets in this area will be shown on tourfic search page', 'tourfic' ),
+            'description'   => esc_html__( 'Widgets in this area appear on the selected Tourfic Search Results page.', 'tourfic' ),
             'before_widget' => '<div id="%1$s" class="tf_widget widget %2$s">',
             'after_widget'  => '</div>',
             'before_title'  => '<div class="tf-widget-title"><span>',
