@@ -7,7 +7,7 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         3.0.0
+ * Version:         3.0.1
  * Requires PHP:    7.4 
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,7 @@ final class Tourfic {
 	 * @var string
 	 */
 
-	const VERSION = '3.0.0';
+	const VERSION = '3.0.1';
 	const DATABASE_VERSION = '1.0.0';
 
 	/**
