@@ -63,6 +63,7 @@ namespace {
 	$tourfic_test_orders         = array();
 	$tourfic_test_uuid_counter   = 0;
 	$tourfic_test_admin_emails   = 'admin@example.test';
+	$tourfic_test_order_meta     = array();
 
 	function tourfic_pro_email_assert( $condition, $message ) {
 		if ( ! $condition ) {
@@ -74,6 +75,13 @@ namespace {
 	function add_action( $hook, $callback, $priority = 10, $accepted_args = 1 ) {
 		global $tourfic_test_actions;
 		$tourfic_test_actions[ $hook ] = array( $callback, $priority, $accepted_args );
+	}
+
+	function do_action( $hook, ...$args ) {
+		$action = $GLOBALS['tourfic_test_actions'][ $hook ] ?? false;
+		if ( $action ) {
+			call_user_func_array( $action[0], array_slice( $args, 0, $action[2] ) );
+		}
 	}
 
 	function apply_filters( $hook, $value, ...$args ) {
@@ -186,14 +194,22 @@ namespace {
 	}
 
 	class Tourfic_Test_Order_Item {
+		private $order_type;
+
+		public function __construct( $order_type ) {
+			$this->order_type = $order_type;
+		}
+
 		public function get_meta( $key, $single = true ) {
-			return '_order_type' === $key ? 'tour' : '';
+			return '_order_type' === $key ? $this->order_type : '';
 		}
 	}
 
 	class Tourfic_Test_Order {
 		private $order_id;
 		private $meta = array();
+		public $status = 'processing';
+		public $order_type = 'tour';
 
 		public function __construct( $order_id ) {
 			$this->order_id = $order_id;
@@ -204,7 +220,11 @@ namespace {
 		}
 
 		public function get_items() {
-			return array( new Tourfic_Test_Order_Item() );
+			return array( new Tourfic_Test_Order_Item( $this->order_type ) );
+		}
+
+		public function is_paid() {
+			return in_array( $this->status, array( 'processing', 'completed' ), true );
 		}
 
 		public function get_billing_email() {
@@ -212,7 +232,7 @@ namespace {
 		}
 
 		public function get_meta( $key, $single = true ) {
-			return $this->meta[ $key ] ?? '';
+			return $this->meta[ $key ] ?? $GLOBALS['tourfic_test_order_meta'][ $this->order_id ][ $key ] ?? '';
 		}
 
 		public function update_meta_data( $key, $value ) {
@@ -220,6 +240,11 @@ namespace {
 		}
 
 		public function save_meta_data() {
+			$GLOBALS['tourfic_test_order_meta'][ $this->order_id ] = array_replace(
+				$GLOBALS['tourfic_test_order_meta'][ $this->order_id ] ?? array(),
+				$this->meta
+			);
+			$this->meta = array();
 			return true;
 		}
 	}
@@ -272,11 +297,46 @@ namespace {
 
 	$handler = \TourficPro\Emails\Advanced_Email_Handler::instance();
 
-	$handler->send_confirmation( 1001 );
-	$handler->send_confirmation( 1001 );
+	if ( '--persisted-delivery' === ( $argv[1] ?? '' ) ) {
+		$tourfic_test_order_meta = json_decode( base64_decode( $argv[2] ), true );
+		do_action( 'woocommerce_thankyou', 1001 );
+		do_action( 'woocommerce_thankyou', 1001 );
+		echo json_encode( array( 'mail_calls' => count( $tourfic_test_messages ) ) );
+		exit;
+	}
+
+	tourfic_pro_email_assert(
+		isset( $tourfic_test_actions['woocommerce_thankyou'] )
+		&& ! isset( $tourfic_test_actions['woocommerce_order_status_changed'] )
+		&& ! isset( $tourfic_test_actions['woocommerce_payment_complete'] )
+		&& ! isset( $tourfic_test_actions['tourfic_pro_retry_booking_confirmation'] ),
+		'Duplicate prevention must preserve the existing confirmation timing without a new paid-only or cron policy.'
+	);
+
+	for ( $render = 0; $render < 3; ++$render ) {
+		$tourfic_test_orders[1001] = new Tourfic_Test_Order( 1001 );
+		do_action( 'woocommerce_thankyou', 1001 );
+		do_action( 'woocommerce_thankyou', 1001 );
+	}
 	tourfic_pro_email_assert(
 		3 === count( $tourfic_test_messages ),
-		'Reloading the WooCommerce thank-you flow must not resend automatic admin, vendor, or customer confirmations.'
+		'Repeated renders and duplicate hooks must send each recipient once, using markers persisted across order objects.'
+	);
+
+	// phpcs:ignore Generic.PHP.ForbiddenFunctions.Found -- CLI fixture starts only itself with PHP_BINARY and no shell.
+	$process = proc_open(
+		array( PHP_BINARY, __FILE__, '--persisted-delivery', base64_encode( json_encode( $tourfic_test_order_meta ) ) ),
+		array( 1 => array( 'pipe', 'w' ), 2 => array( 'pipe', 'w' ) ),
+		$pipes
+	);
+	tourfic_pro_email_assert( is_resource( $process ), 'The fresh-process persistence check must start.' );
+	$output = stream_get_contents( $pipes[1] );
+	$error  = stream_get_contents( $pipes[2] );
+	fclose( $pipes[1] ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- Close a process pipe.
+	fclose( $pipes[2] ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- Close a process pipe.
+	tourfic_pro_email_assert(
+		0 === proc_close( $process ) && array( 'mail_calls' => 0 ) === json_decode( $output, true ),
+		'Saved WooCommerce delivery metadata must prevent sends in a fresh PHP process. ' . $error
 	);
 
 	$handler->send_cancellation( 1001 );
@@ -312,12 +372,14 @@ namespace {
 		'post_id'        => 501,
 		'payment_method' => 'woocommerce',
 	);
+	$tourfic_test_orders[1001]->status = 'pending';
 	$handler->resend_email( 'customer', 1001, 77 );
 	$handler->resend_email( 'customer', 1001, 77 );
 	tourfic_pro_email_assert(
 		13 === count( $tourfic_test_messages ),
 		'Authorized manual resends must intentionally bypass automatic-delivery markers.'
 	);
+	$tourfic_test_orders[1001]->status = 'processing';
 
 	$tourfic_test_email_settings = tourfic_test_email_settings( array( 'admin' ) );
 	$tourfic_test_admin_emails   = 'admin@example.test, admin@example.test';
@@ -354,6 +416,48 @@ namespace {
 		15 === count( $tourfic_test_messages ),
 		'An active delivery claim must prevent a concurrent request from sending the same message.'
 	);
+
+	$tourfic_test_email_settings = tourfic_test_email_settings( array( 'vendor', 'customer' ) );
+	foreach ( array( 'pending', 'on-hold', 'processing', 'completed' ) as $index => $status ) {
+		$order_id = 6006 + $index;
+		$before   = count( $tourfic_test_messages );
+		for ( $render = 0; $render < 3; ++$render ) {
+			$tourfic_test_orders[ $order_id ] = new Tourfic_Test_Order( $order_id );
+			$tourfic_test_orders[ $order_id ]->status = $status;
+			do_action( 'woocommerce_thankyou', $order_id );
+			do_action( 'woocommerce_thankyou', $order_id );
+		}
+		tourfic_pro_email_assert(
+			array( 'vendor@example.test', 'customer@example.test' ) === array_slice( $tourfic_test_messages, $before ),
+			'Existing ' . $status . ' booking confirmations must remain eligible but must not repeat on refresh.'
+		);
+	}
+
+	$tourfic_test_orders[7007] = new Tourfic_Test_Order( 7007 );
+	$tourfic_test_mail_results = array( true, false, true );
+	$before = count( $tourfic_test_messages );
+	do_action( 'woocommerce_thankyou', 7007 );
+	$tourfic_test_orders[7007] = new Tourfic_Test_Order( 7007 );
+	do_action( 'woocommerce_thankyou', 7007 );
+	do_action( 'woocommerce_thankyou', 7007 );
+	tourfic_pro_email_assert(
+		array( 'vendor@example.test', 'customer@example.test', 'customer@example.test' )
+			=== array_slice( $tourfic_test_messages, $before ),
+		'A failed customer send must remain retryable without resending the successful vendor copy.'
+	);
+
+	$tourfic_test_orders[8008] = new Tourfic_Test_Order( 8008 );
+	$tourfic_test_email_settings = tourfic_test_email_settings( array() );
+	$before = count( $tourfic_test_messages );
+	do_action( 'woocommerce_thankyou', 8008 );
+	tourfic_pro_email_assert( $before === count( $tourfic_test_messages ), 'Disabled confirmation settings must remain honored.' );
+
+	$tourfic_test_email_settings = tourfic_test_email_settings();
+	$tourfic_test_orders[9009] = new Tourfic_Test_Order( 9009 );
+	$tourfic_test_orders[9009]->order_type = '';
+	do_action( 'woocommerce_thankyou', 9009 );
+	do_action( 'woocommerce_thankyou', 0 );
+	tourfic_pro_email_assert( $before === count( $tourfic_test_messages ), 'Missing and non-Tourfic orders must not send Tourfic mail.' );
 
 	echo "Tourfic Pro booking-email idempotency regression checks passed.\n";
 }
