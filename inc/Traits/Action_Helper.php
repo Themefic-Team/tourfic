@@ -768,22 +768,23 @@ trait Action_Helper {
 		}
 	}
 
-	function tf_customer_role_caps(){
-		if ( get_option( 'tourfic_customer_caps' ) < 1 ) {
-			$customer_role  = get_role( 'customer' );
-
-			// Add a new capability.
-			$caps = array(
-				// for comment submit
-				'unfiltered_html',
-			);
-
-			foreach ( $caps as $cap ) {
-				$customer_role->add_cap( $cap );
+	function tf_revoke_customer_unfiltered_html_cap() {
+		if ( ! get_option( 'tourfic_customer_unfiltered_html_revoked' ) ) {
+			$customer_role = get_role( 'customer' );
+			if ( $customer_role ) {
+				if ( $customer_role->has_cap( 'unfiltered_html' ) ) {
+					$customer_role->remove_cap( 'unfiltered_html' );
+				}
+				delete_option( 'tourfic_customer_caps' );
+				update_option( 'tourfic_customer_unfiltered_html_revoked', 1 );
+			} elseif ( false !== get_option( 'tourfic_customer_caps' ) ) {
+				delete_option( 'tourfic_customer_caps' );
 			}
-
-			update_option( 'tourfic_customer_caps', 1 );
 		}
+	}
+
+	function tf_customer_role_caps() {
+		$this->tf_revoke_customer_unfiltered_html_cap();
 	}
 
 	/**
