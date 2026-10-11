@@ -34,9 +34,7 @@ class Helper {
 
 
 		add_action( 'admin_init', array( $this, 'tf_admin_role_caps' ), 999 );
-        if ( Helper::tf_is_woo_active() ) {
-		    add_action( 'init', array( $this, 'tf_customer_role_caps' ), 999 );
-        }
+		add_action( 'admin_init', array( $this, 'tf_revoke_customer_unfiltered_html_cap' ) );
 		add_filter( 'template_include', array( $this, 'taxonomy_template' ) );
 		add_filter( 'comments_template', array( $this, 'load_comment_template' ) );
 		add_filter( 'template_include', array( $this, 'tourfic_archive_page_template' ) );
