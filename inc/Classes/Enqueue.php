@@ -921,7 +921,7 @@ class Enqueue {
 					'delete_category_nonce'            => wp_create_nonce( 'tourfic_delete_category_data' ),
 					'insert_post_nonce'                => wp_create_nonce( 'tourfic_insert_post_data' ),
 					'ajax_url'                         => admin_url( 'admin-ajax.php' ),
-					'toolkit_page_url'                 => admin_url( 'admin.php?page=travelfic-template-list' ),
+					'toolkit_page_url'                 => admin_url( 'admin.php?page=travelfic-template-list&tourfic_setup=1' ),
 					'is_travelfic_toolkit_active'      => $travelfic_toolkit_active_plugins,
 					'current_active_theme'             => $current_active_theme,
 					'deleting_old_review_fields'       => esc_html__( 'Deleting old review fields...', 'tourfic' ),
