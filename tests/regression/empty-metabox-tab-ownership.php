@@ -61,7 +61,6 @@ foreach ( $pro_metaboxes as $file => $markers ) {
 
 $pro_loader    = file_get_contents( $pro_root . '/tourfic-pro.php' );
 $ical_bootstrap = file_get_contents( $ical_root . '/tourfic-ical.php' );
-$ical_settings  = file_get_contents( $ical_root . '/inc/ical-settings/room-settings.php' );
 
 tf_empty_metabox_tab_assert(
 	false !== strpos( $pro_loader, "add_filter( 'tourfic_admin_metabox_files'" )
@@ -72,10 +71,29 @@ tf_empty_metabox_tab_assert(
 	false !== strpos( $ical_bootstrap, 'Requires Plugins: tourfic-pro' ),
 	'iCal must continue declaring Tourfic Pro as its required plugin.'
 );
-foreach ( array( "add_filter( 'tf_room_opt_sections'", "'id'           => 'ical_url'", "'id'           => 'ical_export'" ) as $marker ) {
+
+foreach ( array( 'room', 'apartment' ) as $listing_type ) {
+	$ical_settings = file_get_contents( $ical_root . '/inc/ical-settings/' . $listing_type . '-settings.php' );
+	$markers       = array(
+		"add_filter( 'tourfic_{$listing_type}_opt_sections'",
+		"'id'           => 'ical_url'",
+		"'id'           => 'ical_export'",
+	);
+
+	foreach ( $markers as $marker ) {
+		tf_empty_metabox_tab_assert(
+			false !== strpos( $ical_settings, $marker ),
+			'iCal is missing ' . $listing_type . ' metabox injection marker ' . $marker . '.'
+		);
+	}
+}
+
+foreach ( array( 'ical', 'ical_export' ) as $field_type ) {
+	$ical_renderer = file_get_contents( $ical_root . '/inc/fields/' . $field_type . '/TF_' . $field_type . '.php' );
+
 	tf_empty_metabox_tab_assert(
-		false !== strpos( $ical_settings, $marker ),
-		'iCal is missing Room metabox injection marker ' . $marker . '.'
+		false !== strpos( $ical_renderer, 'class Tourfic_' . $field_type . ' extends Tourfic_Fields' ),
+		'iCal renderer ' . $field_type . ' must use the class name expected by Tourfic Free.'
 	);
 }
 
