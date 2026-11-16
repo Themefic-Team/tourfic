@@ -40,6 +40,10 @@ foreach ( $forbidden_patterns as $file => $pattern ) {
 
 $review_source = file_get_contents( $root . '/templates/template-parts/review.php' );
 tf_runtime_contract_assert(
+	false !== strpos( $review_source, '$tourfic_comments = $comments;' ),
+	'Review template must initialize its local list from the comments_template() include scope.'
+);
+tf_runtime_contract_assert(
 	false === strpos( $review_source, 'if ( $comments )' )
 		&& false === strpos( $review_source, 'count( $comments )' )
 		&& false === strpos( $review_source, 'foreach ( $comments as $comment )' )
