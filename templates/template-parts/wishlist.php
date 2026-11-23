@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
         <tbody>
 		<?php
 		foreach ( $ids as $tourfic_key => $tourfic_id ) :
-			$tourfic_post = get_post( $tourfic_id );
+			$tourfic_post = \Tourfic\App\Wishlist::get_eligible_post( $tourfic_id );
 			if ( $tourfic_post ):
 				?>
                 <tr>

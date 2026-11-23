@@ -37,6 +37,10 @@ namespace {
 		private $params;
 		public function __construct( $params = array() ) { $this->params = $params; }
 		public function get_param( $name ) { return $this->params[ $name ] ?? null; }
+		public function get_url_params() { return array(); }
+		public function get_query_params() { return $this->params; }
+		public function get_body_params() { return array(); }
+		public function get_json_params() { return null; }
 	}
 	class WC_Payment_Gateways {
 		public static function instance() { return new self(); }
@@ -47,6 +51,13 @@ namespace {
 		public $posts = 'wp_posts';
 		public $queries = array();
 		public $pdo;
+		public $last_error = '';
+		public $suppress_errors = false;
+		public function suppress_errors( $suppress = true ) {
+			$previous = $this->suppress_errors;
+			$this->suppress_errors = $suppress;
+			return $previous;
+		}
 		public function __construct() {
 			$this->pdo = new \PDO( 'sqlite::memory:' );
 			$this->pdo->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
@@ -96,6 +107,8 @@ namespace {
 		$GLOBALS['wpdb']->queries = array();
 		$GLOBALS['tourfic_rest_user_queries'] = array();
 	}
+	function add_filter() {}
+	function add_action() {}
 	function get_current_user_id() { return $GLOBALS['tourfic_rest_actor']; }
 	function is_user_logged_in() { return get_current_user_id() > 0; }
 	function current_user_can( $cap, ...$args ) {
@@ -189,6 +202,14 @@ namespace {
 				'created_at' => '2026-09-01 12:00:00', 'reply_data' => '[]',
 			) );
 		}
+		tourfic_rest_actor( array( $cap ) );
+		foreach ( array( -1, '-1', '1.5', 1.5, '1e2', true, ' 1', '+1', '01', str_repeat( '9', 40 ) ) as $invalid ) {
+			tourfic_rest_error( $bookings->tf_get_orders( new WP_REST_Request( array( 'post_type' => $type, 'post_id' => $invalid ) ) ), 400, "$type: direct handler rejects coerced identifiers." );
+		}
+		foreach ( array( 'IN', '<in>', "in'", array( 'in' ) ) as $invalid ) {
+			tourfic_rest_error( $bookings->tf_get_orders( new WP_REST_Request( array( 'post_type' => $type, 'checkinout' => $invalid ) ) ), 400, "$type: direct handler rejects noncanonical enums." );
+		}
+		tourfic_rest_assert( ! $wpdb->queries, "$type: malformed direct requests perform no protected SQL." );
 		$request = new WP_REST_Request( array( 'post_type' => $type ) );
 		foreach ( array( 'administrator', 'tf_manager', 'tf_vendor' ) as $role ) {
 			tourfic_rest_actor( array(), array( $role ) );
@@ -247,14 +268,14 @@ namespace {
 	tourfic_rest_error( $bookings->tf_get_order_details( new WP_REST_Request( array( 'id' => 9999 ) ) ), 404, 'Missing order retains 404 response.' );
 	tourfic_rest_error( $enquiries->tf_get_enquiry_details( new WP_REST_Request( array( 'id' => 9999 ) ) ), 404, 'Missing enquiry retains 404 response.' );
 	foreach ( array( null, array( 'hotel' ), 'post', 'hotel OR 1=1' ) as $type ) {
-		tourfic_rest_error( $bookings->tf_get_orders( new WP_REST_Request( array( 'post_type' => $type ) ) ), 403, 'Unsupported collection type fails closed.' );
+		tourfic_rest_error( $bookings->tf_get_orders( new WP_REST_Request( array( 'post_type' => $type ) ) ), 400, 'Unsupported collection type fails closed.' );
 	}
 	tourfic_rest_error( $bookings->tf_get_orders( new WP_REST_Request( array( 'post_type' => 'hotel', 'post_id' => array( 100 ) ) ) ), 400, 'Malformed filter remains rejected.' );
 	tourfic_rest_assert( 1 === count( $bookings->tf_get_orders( new WP_REST_Request( array( 'post_type' => 'hotel', 'order_status' => 'completed', 'checkinout' => 'not' ) ) )['data'] ), 'Allowed filters remain functional with owner scope.' );
 	tourfic_rest_actor( array( 'edit_tf_carrentals', 'manage_options' ) );
-	tourfic_rest_error( $enquiries->tf_get_enquiries( new WP_REST_Request( array( 'post_type' => 'tf_carrental' ) ) ), 403, 'No unintended car enquiry route is enabled.' );
+	tourfic_rest_error( $enquiries->tf_get_enquiries( new WP_REST_Request( array( 'post_type' => 'tf_carrental' ) ) ), 400, 'No unintended car enquiry route is enabled.' );
 	tourfic_rest_actor( array( 'edit_tf_hotels', 'manage_options' ), array(), 0 );
-	tourfic_rest_error( $bookings->tf_get_orders( new WP_REST_Request( array( 'post_type' => 'hotel' ) ) ), 403, 'Guest denied even with stray capability fixture.' );
+	tourfic_rest_error( $bookings->tf_get_orders( new WP_REST_Request( array( 'post_type' => 'hotel' ) ) ), 401, 'Guest denied even with stray capability fixture.' );
 	tourfic_rest_error( $users->tf_get_users( new WP_REST_Request() ), 403, 'Guest cannot read user directory.' );
 
 	foreach ( array( 'administrator', 'tf_manager', 'tf_vendor' ) as $role ) {

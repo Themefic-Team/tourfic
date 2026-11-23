@@ -1,6 +1,8 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
+use Tourfic\Classes\Woocommerce\Booking_Validation;
+use Tourfic\Classes\Woocommerce\Booking_Context;
 
 /**
  * Tour booking ajax function
@@ -35,10 +37,11 @@ function tourfic_tours_booking_function() {
 	 *
 	 * @since 2.2.0
 	 */
-	$post_id              = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( wp_unslash($_POST['post_id']) ) ) : '';
+	$post_id              = Booking_Context::request( 'post_id' );
 	$product_id           = get_post_meta( $post_id, 'product_id', true );
 	$post_author          = get_post_field( 'post_author', $post_id );
-	$meta                 = get_post_meta( $post_id, 'tf_tours_opt', true );
+	$meta = Booking_Validation::product( $post_id, 'tour' );
+	Booking_Context::reject( $meta );
 	$pricing_rule         = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 	$disable_adult_price  = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
 	$disable_child_price  = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
@@ -65,6 +68,14 @@ function tourfic_tours_booking_function() {
 	// Tour Package
 	$selectedPackage = isset( $_POST['selectedPackage'] ) ? sanitize_text_field( wp_unslash( $_POST['selectedPackage'] ) ) : '';
 	$tf_package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+	$booking_selection = Booking_Context::tour( $post_id, array(
+		'date' => $tour_date, 'package' => $selectedPackage, 'time' => $tour_time,
+		'adults' => Booking_Context::request( 'adults', 0 ),
+		'children' => Booking_Context::request( 'childrens', 0 ),
+		'infant' => Booking_Context::request( 'infants', 0 ),
+	) );
+	Booking_Context::reject( $booking_selection );
+	$tour_date = $booking_selection['date'];
 	$package_limit     = Helper::tourfic_resolve_tour_package_group_limit(
 		$meta,
 		$selectedPackage,
@@ -164,7 +175,7 @@ function tourfic_tours_booking_function() {
 	if ( 'package' === $pricing_rule ) {
 		$package_is_unavailable = false;
 
-		if ( '' === $selectedPackage ) {
+		if ( '' === $selectedPackage || ! is_array( $tf_package_pricing ) || ! array_key_exists( $selectedPackage, $tf_package_pricing ) ) {
 			$response['errors'][] = esc_html__( 'Please select a package.', 'tourfic' );
 		}
 
@@ -741,9 +752,11 @@ function tourfic_tours_booking_function() {
 			// get user id
 			$tf_offline_user_id = $current_user->ID;
 		} else {
-			$tf_offline_user_id = 1;
+			$tf_offline_user_id = 0;
 		}
 
+		$without_payment_price = Booking_Context::total( $without_payment_price ?? null );
+		Booking_Context::reject( $without_payment_price );
 		$order_details = [
 			'order_by'    => '',
 			'tour_date'   => $tour_date,
@@ -794,6 +807,7 @@ function tourfic_tours_booking_function() {
 	}else{
 		if ( ! array_key_exists( 'errors', $response ) || count( $response['errors'] ) == 0 ) {
 
+			$tf_tours_data['tf_tours_data']['tourfic_booking_selection'] = $booking_selection;
 			$tf_tours_data['tf_tours_data']['order_type']     = 'tour';
 			$tf_tours_data['tf_tours_data']['post_author']    = $post_author;
 			$tf_tours_data['tf_tours_data']['tour_id']        = $post_id;
@@ -906,6 +920,8 @@ function tourfic_tours_booking_function() {
 				$response['redirect_to'] = html_entity_decode($tf_booking_url);
 			}else{
 				// Add product to cart with the custom cart item data
+			$tf_tours_data = Booking_Validation::seal( 'tour', $tf_tours_data );
+			Booking_Context::reject( $tf_tours_data );
 				$added_to_cart = WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_tours_data );
 				if ( ! $added_to_cart ) {
 					$response['status']   = 'error';
@@ -936,25 +952,8 @@ function tourfic_tours_booking_function() {
  * Set tour price in WooCommerce
  */
 function tourfic_tours_set_order_price( $cart ) {
-
-	if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
-		return;
-	}
-
-	if ( did_action( 'woocommerce_before_calculate_totals' ) >= 2 ) {
-		return;
-	}
-
-	foreach ( $cart->get_cart() as $cart_item ) {
-
-		if ( isset( $cart_item['tf_tours_data']['price'] ) && ! empty( $cart_item['tf_tours_data']['tour_extra_total'] ) ) {
-			$tour_price = $cart_item['tf_tours_data']['price'] + $cart_item['tf_tours_data']['tour_extra_total'];
-			$cart_item['data']->set_price( max( 0, $tour_price ) );
-		} elseif ( isset( $cart_item['tf_tours_data']['price'] ) && empty( $cart_item['tf_tours_data']['tour_extra_total'] ) ) {
-			$cart_item['data']->set_price( max( 0, $cart_item['tf_tours_data']['price'] ) );
-		}
-
-	}
+	if ( is_admin() && ! defined( 'DOING_AJAX' ) ) { return; }
+	Booking_Validation::set_prices( $cart, 'tour' );
 }
 
 add_action( 'woocommerce_before_calculate_totals', 'tourfic_tours_set_order_price', 30, 1 );
@@ -1141,7 +1140,8 @@ function tourfic_add_order_tour_details_checkout_order_processed( $order_id, $po
 			$post_id   = $item->get_meta( '_tour_id', true ); // Tour id
 
 			//Tax Calculation
-			$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+			$meta = Booking_Validation::product( $post_id, 'tour' );
+	Booking_Context::reject( $meta );
 			$tax_labels = array();
 			if(!empty($meta['is_taxable'])){
 				$single_price = $item->get_subtotal();
@@ -1365,7 +1365,8 @@ function tourfic_add_order_tour_details_checkout_order_processed_block_checkout(
 			$post_id   = $item->get_meta( '_tour_id', true ); // Tour id
 
 			//Tax Calculation
-			$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+			$meta = Booking_Validation::product( $post_id, 'tour' );
+	Booking_Context::reject( $meta );
 			$tax_labels = array();
 			if(!empty($meta['is_taxable'])){
 				$single_price = $item->get_subtotal();

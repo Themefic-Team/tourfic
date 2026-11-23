@@ -65,7 +65,12 @@ if ( ! class_exists( 'Tourfic_Booking_Rest_API' ) ) {
 				$tf_orders_select['post_author']      = $current_user_id;
 				$tf_orders_select['author_post_type'] = $capabilities[ $post_type ][0];
 			}
-			$orders_result = Helper::tourfic_order_table_data( $tf_orders_select );
+			$orders_result = $this->tf_read_record_data( function() use ( $tf_orders_select ) {
+					return Helper::tourfic_order_table_data( $tf_orders_select );
+				} );
+			if ( is_wp_error( $orders_result ) ) {
+				return $orders_result;
+			}
             $events = array();
 			$orders_data = array();
 			foreach ( $orders_result as $order ) {		
@@ -152,14 +157,36 @@ if ( ! class_exists( 'Tourfic_Booking_Rest_API' ) ) {
 		 * @author Foysal
 		 */
 		public function tf_get_order_details( $request ) {
+			$permission = $this->tf_order_permission_callback( $request );
+			if ( is_wp_error( $permission ) ) {
+				return $permission;
+			}
+			$id = $this->tf_get_rest_absint_param( $request, 'id' );
+			if ( is_wp_error( $id ) || ! $id ) {
+				return new WP_Error( 'rest_invalid_param', esc_html__( 'A valid record ID is required.', 'tourfic' ), array( 'status' => 400 ) );
+			}
 			global $wpdb;
-			$id    = absint( $request->get_param( 'id' ) );
-			$order = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %d", $id ), ARRAY_A ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$order = $this->tf_read_record_data( function() use ( $wpdb, $id ) {
+				return $wpdb->get_row( $wpdb->prepare( "SELECT id, post_id, post_type FROM {$wpdb->prefix}tf_order_data WHERE id = %d", $id ), ARRAY_A );
+			} );
+			if ( is_wp_error( $order ) ) {
+				return $order;
+			}
 			if ( empty( $order ) ) {
 				return new WP_Error( 'tf_order_not_found', esc_html__( 'Order not found.', 'tourfic' ), array( 'status' => 404 ) );
 			}
 			if ( ! $this->tf_current_user_can_access_order( $order ) ) {
 				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this order.', 'tourfic' ), array( 'status' => 403 ) );
+			}
+
+			$order = $this->tf_read_record_data( function() use ( $wpdb, $id ) {
+				return $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %d", $id ), ARRAY_A );
+			} );
+			if ( is_wp_error( $order ) ) {
+				return $order;
+			}
+			if ( ! $order || ! $this->tf_current_user_can_access_order( $order ) ) {
+				return new WP_Error( 'rest_forbidden', esc_html__( 'The record is no longer accessible.', 'tourfic' ), array( 'status' => 403 ) );
 			}
 
 			$order_details = json_decode( $order['order_details'] );

@@ -8,6 +8,9 @@ class Availability {
 
     // Car Available or Not
 	    static function tf_car_inventory($post_id, $meta, $tf_pickup_date = '', $tf_dropoff_date = '', $tf_pickup_time = '', $tf_dropoff_time = '') {
+	        if ( ! \Tourfic\Classes\Woocommerce\Booking_Validation::id( $post_id )
+	            || 'tf_carrental' !== get_post_type( $post_id ) || 'publish' !== get_post_status( $post_id )
+	            || ! is_array( $meta ) || ! $meta ) { return false; }
 	        $post_id = absint( $post_id );
 	        if ( function_exists( 'tourfic_normalize_car_meta' ) ) {
 	            $meta = tourfic_normalize_car_meta( $meta );
@@ -15,10 +18,13 @@ class Availability {
 
         $pricing_by = !empty($meta["price_by"]) ? $meta["price_by"] : 'day';
         $car_numbers = !empty($meta["car_numbers"]) ? $meta["car_numbers"] : 0;
+        if ( isset( $meta['car_numbers'] ) && '' !== $meta['car_numbers']
+            && ! \Tourfic\Classes\Woocommerce\Booking_Validation::id( $meta['car_numbers'] ) ) { return false; }
 
         // Combine date and time for precise checks
         $requested_start = strtotime("$tf_pickup_date $tf_pickup_time");
         $requested_end = strtotime("$tf_dropoff_date $tf_dropoff_time");
+        if ( ! $requested_start || ! $requested_end || $requested_end <= $requested_start ) { return false; }
 
 	        if (!empty($post_id) && !empty($car_numbers)) {
 	            $tf_orders_select = array(

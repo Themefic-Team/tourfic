@@ -228,6 +228,13 @@ if ( ! class_exists( 'Tourfic_Rest_API' ) ) {
 		}
 
 		protected function tf_record_permission_callback( WP_REST_Request $request, $kind ) {
+			if ( ! is_user_logged_in() ) {
+				return new WP_Error( 'rest_not_logged_in', esc_html__( 'Authentication is required.', 'tourfic' ), array( 'status' => 401 ) );
+			}
+			$validation = $this->tf_validate_record_request( $request, $kind );
+			if ( is_wp_error( $validation ) ) {
+				return $validation;
+			}
 			$post_type = $request->get_param( 'post_type' );
 			if ( is_string( $post_type ) && $this->tf_current_user_can_read_records( $post_type, $kind ) ) {
 				return true;
@@ -391,6 +398,74 @@ if ( ! class_exists( 'Tourfic_Rest_API' ) ) {
 			return array( 'read', 'unread', 'replied', 'responded', 'not-replied', 'not-responded' );
 		}
 
+		/**
+		 * Validate decimal identifiers without coercing signs, fractions or overflow.
+		 */
+		public function tf_validate_rest_id( $value ) {
+			return '' === $value || null === $value || (
+				( is_int( $value ) || is_string( $value ) )
+				&& 1 === preg_match( '/^[1-9][0-9]*$/D', (string) $value )
+				&& (string) (int) $value === (string) $value
+			);
+		}
+
+		protected function tf_validate_record_request( WP_REST_Request $request, $kind ) {
+			$ids = array( 'post_id', 'user_id', 'id' );
+			foreach ( $ids as $param ) {
+				$value = $this->tf_get_rest_absint_param( $request, $param );
+				if ( is_wp_error( $value ) ) {
+					return $value;
+				}
+			}
+			$allowed = array( 'post_type' => 'booking' === $kind ? $this->tf_order_post_types() : $this->tf_enquiry_post_types() );
+			if ( 'booking' === $kind ) {
+				$allowed['checkinout'] = $this->tf_checkinout_statuses();
+				$allowed['order_status'] = $this->tf_order_statuses();
+			} else {
+				$allowed['filters'] = $this->tf_enquiry_status_filters();
+			}
+			foreach ( $allowed as $param => $values ) {
+				$required = 'post_type' === $param && null === $request->get_param( 'id' );
+				$value = $this->tf_validate_allowed_param( $request, $param, $values, $required );
+				if ( is_wp_error( $value ) ) {
+					return $value;
+				}
+			}
+			return $this->tf_validate_record_sources( $request, array_merge( $ids, array_keys( $allowed ) ) );
+		}
+
+		protected function tf_validate_record_sources( WP_REST_Request $request, $params ) {
+			$sources = array( $request->get_url_params(), $request->get_query_params(), $request->get_body_params(), $request->get_json_params() );
+			$seen = array();
+			foreach ( $sources as $source ) {
+				foreach ( array_intersect_key( (array) $source, array_flip( $params ) ) as $param => $value ) {
+					if ( array_key_exists( $param, $seen ) && $seen[ $param ] !== $value
+						&& ( ! is_scalar( $value ) || ! is_scalar( $seen[ $param ] ) || (string) $seen[ $param ] !== (string) $value ) ) {
+						return new WP_Error( 'rest_invalid_param', esc_html__( 'Conflicting request parameters.', 'tourfic' ), array( 'status' => 400 ) );
+					}
+					$seen[ $param ] = $value;
+				}
+			}
+			return true;
+		}
+
+		/**
+		 * Keep database diagnostics out of private REST responses, even with WP_DEBUG.
+		 */
+		protected function tf_read_record_data( callable $read ) {
+			global $wpdb;
+			$suppressed = $wpdb->suppress_errors();
+			try {
+				$result = $read();
+				if ( $wpdb->last_error ) {
+					return new WP_Error( 'tourfic_rest_database_error', esc_html__( 'Unable to retrieve records.', 'tourfic' ), array( 'status' => 500 ) );
+				}
+				return $result;
+			} finally {
+				$wpdb->suppress_errors( $suppressed );
+			}
+		}
+
 		protected function tf_validate_allowed_param( WP_REST_Request $request, $param, $allowed, $required = false ) {
 			$value = $request->get_param( $param );
 
@@ -416,8 +491,7 @@ if ( ! class_exists( 'Tourfic_Rest_API' ) ) {
 				);
 			}
 
-			$value = sanitize_key( $value );
-			if ( ! in_array( $value, $allowed, true ) ) {
+			if ( ! is_string( $value ) || ! in_array( $value, $allowed, true ) ) {
 					return new WP_Error(
 						'tf_rest_invalid_param',
 						/* translators: %s: REST API parameter name. */
@@ -436,7 +510,7 @@ if ( ! class_exists( 'Tourfic_Rest_API' ) ) {
 				return 0;
 			}
 
-			if ( ! is_scalar( $value ) || ! is_numeric( $value ) ) {
+			if ( ! $this->tf_validate_rest_id( $value ) ) {
 					return new WP_Error(
 						'tf_rest_invalid_param',
 						/* translators: %s: REST API parameter name. */

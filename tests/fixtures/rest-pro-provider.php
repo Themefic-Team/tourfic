@@ -5,6 +5,7 @@
  */
 
 $pro_root = dirname( ABSPATH ) . '/tourfic-pro/';
+require_once $pro_root . 'inc/classes/class-vendor-approval.php';
 foreach ( array( 'Rest', 'Booking_Rest', 'Enquiry_Rest', 'User_Rest' ) as $api_class ) {
 	require $pro_root . 'inc/frontend-dashboard/classes/TF_FD_' . $api_class . '_API.php';
 }

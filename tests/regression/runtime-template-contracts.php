@@ -53,7 +53,7 @@ tf_runtime_contract_assert(
 
 $enqueue_source = file_get_contents( $root . '/inc/Classes/Enqueue.php' );
 tf_runtime_contract_assert(
-	false !== strpos( $enqueue_source, "array( 'jquery', 'tf-flatpickr', 'notyf' )" )
+	false !== strpos( $enqueue_source, "array( 'jquery', 'tf-flatpickr', 'tf-slick', 'notyf' )" )
 		&& false !== strpos( $enqueue_source, "\$tourfic_script_dependencies[] = 'tf-leaflet';" ),
 	'Tourfic frontend script dependencies do not guarantee the calendar and map runtimes.'
 );

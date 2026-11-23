@@ -87,9 +87,9 @@ class Availability {
 
 					if( $date_stt >= $check_in_stt && $date_stt < $check_out_stt && self::get_rule_status( $single_avail ) !== 'unavailable' ) {
 						if ( $pricing_type === 'per_night' ) {
-							$total_price += ! empty( $single_avail['price'] ) ? intval( $single_avail['price'] ) : 0;
+							$total_price += ! empty( $single_avail['price'] ) ? (float) $single_avail['price'] : 0;
 						} else {
-							$total_price += !empty( $this->persons ) ? ( ( (int) $single_avail['adult_price'] * (int) $this->persons['adult'] ) + ( (int) $single_avail['child_price'] * (int) $this->persons["child"] ) + ( (int) $single_avail['infant_price'] * (int) $this->persons["infant"] ) ) : 0;
+							$total_price += !empty( $this->persons ) ? ( ( (float) $single_avail['adult_price'] * (int) $this->persons['adult'] ) + ( (float) $single_avail['child_price'] * (int) $this->persons["child"] ) + ( (float) $single_avail['infant_price'] * (int) $this->persons["infant"] ) ) : 0;
 						}
 					}
 				}
@@ -109,12 +109,12 @@ class Availability {
 		}
 
 		if ( 'per_night' === $pricing_type ) {
-			return ! empty( $meta['price_per_night'] ) ? ( (int) $meta['price_per_night'] * $days ) : 0;
+			return ! empty( $meta['price_per_night'] ) ? ( (float) $meta['price_per_night'] * $days ) : 0;
 		}
 
-		$adult_price  = ! empty( $meta['adult_price'] ) ? (int) $meta['adult_price'] : 0;
-		$child_price  = ! empty( $meta['child_price'] ) ? (int) $meta['child_price'] : 0;
-		$infant_price = ! empty( $meta['infant_price'] ) ? (int) $meta['infant_price'] : 0;
+		$adult_price  = ! empty( $meta['adult_price'] ) ? (float) $meta['adult_price'] : 0;
+		$child_price  = ! empty( $meta['child_price'] ) ? (float) $meta['child_price'] : 0;
+		$infant_price = ! empty( $meta['infant_price'] ) ? (float) $meta['infant_price'] : 0;
 		$adult_count  = ! empty( $this->persons['adult'] ) ? (int) $this->persons['adult'] : 0;
 		$child_count  = ! empty( $this->persons['child'] ) ? (int) $this->persons['child'] : 0;
 		$infant_count = ! empty( $this->persons['infant'] ) ? (int) $this->persons['infant'] : 0;

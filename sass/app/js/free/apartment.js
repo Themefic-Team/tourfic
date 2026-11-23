@@ -373,7 +373,7 @@
                     }
                 },
                 error: function (data) {
-                    console.log(data);
+                    showApartmentBookingErrors(data.responseJSON && data.responseJSON.errors ? data.responseJSON.errors : [tourficParams.booking_error]);
                 },
             });
         }
@@ -416,7 +416,7 @@
                     $popup.addClass('show');
                 },
                 error: function (data) {
-                    console.log(data);
+                    showApartmentBookingErrors(data.responseJSON && data.responseJSON.errors ? data.responseJSON.errors : [tourficParams.booking_error]);
                 }
             });
         }
@@ -641,7 +641,11 @@
          * Apartment highlights slider
          * @author Foysal
          */
-        $('.tf-apt-highlights-slider').slick({
+        win.tourfic_init_highlight_sliders = function (elements) {
+            $(elements).filter(function () {
+            return this && this.nodeType === 1 && this.isConnected && this.classList.contains('tf-apt-highlights-slider') &&
+                $(this).children('.tf-apt-highlight').length > 3 && !this.classList.contains('slick-initialized');
+        }).removeAttr('data-slick').removeData('slick').slick({
             dots: true,
             arrows: false,
             infinite: true,
@@ -676,6 +680,21 @@
                 }
             ]
         });
+        };
+        win.tourfic_init_highlight_sliders(Array.isArray(win.tourfic_highlight_sliders) ? win.tourfic_highlight_sliders : []);
+        function registerHighlightWidget() {
+            if (win.elementorFrontend && win.elementorFrontend.hooks) {
+                win.elementorFrontend.hooks.addAction('frontend/element_ready/tf-single-highlights.default', function ($scope) {
+                    win.tourfic_init_highlight_sliders($scope.find('.tf-apt-highlights-wrapper > .tf-apt-highlights-slider').toArray());
+                });
+            }
+        }
+        if (win.elementorFrontend && win.elementorFrontend.hooks) {
+            registerHighlightWidget();
+        } else {
+            $(win).on('elementor/frontend/init', registerHighlightWidget);
+        }
+
 
         /**
          * Apartment room slider
