@@ -768,22 +768,27 @@ trait Action_Helper {
 		}
 	}
 
-	function tf_customer_role_caps(){
-		if ( get_option( 'tourfic_customer_caps' ) < 1 ) {
-			$customer_role  = get_role( 'customer' );
-
-			// Add a new capability.
-			$caps = array(
-				// for comment submit
-				'unfiltered_html',
-			);
-
-			foreach ( $caps as $cap ) {
-				$customer_role->add_cap( $cap );
-			}
-
-			update_option( 'tourfic_customer_caps', 1 );
+	function tf_customer_role_caps() {
+		if ( 2 <= (int) get_option( 'tourfic_customer_caps', 0 ) ) {
+			return;
 		}
+
+		$customer_role = get_role( 'customer' );
+		if ( ! $customer_role ) {
+			return;
+		}
+
+		if ( $customer_role->has_cap( 'unfiltered_html' ) ) {
+			$customer_role->remove_cap( 'unfiltered_html' );
+		}
+
+		// Role changes do not refresh an already loaded user's capabilities.
+		$user = wp_get_current_user();
+		if ( $user->exists() && in_array( 'customer', $user->roles, true ) ) {
+			$user->get_role_caps();
+		}
+
+		update_option( 'tourfic_customer_caps', 2 );
 	}
 
 	/**
