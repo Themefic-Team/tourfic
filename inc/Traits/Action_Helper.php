@@ -768,27 +768,23 @@ trait Action_Helper {
 		}
 	}
 
+	function tf_revoke_customer_unfiltered_html_cap() {
+		if ( ! get_option( 'tourfic_customer_unfiltered_html_revoked' ) ) {
+			$customer_role = get_role( 'customer' );
+			if ( $customer_role ) {
+				if ( $customer_role->has_cap( 'unfiltered_html' ) ) {
+					$customer_role->remove_cap( 'unfiltered_html' );
+				}
+				delete_option( 'tourfic_customer_caps' );
+				update_option( 'tourfic_customer_unfiltered_html_revoked', 1 );
+			} elseif ( false !== get_option( 'tourfic_customer_caps' ) ) {
+				delete_option( 'tourfic_customer_caps' );
+			}
+		}
+	}
+
 	function tf_customer_role_caps() {
-		if ( 2 <= (int) get_option( 'tourfic_customer_caps', 0 ) ) {
-			return;
-		}
-
-		$customer_role = get_role( 'customer' );
-		if ( ! $customer_role ) {
-			return;
-		}
-
-		if ( $customer_role->has_cap( 'unfiltered_html' ) ) {
-			$customer_role->remove_cap( 'unfiltered_html' );
-		}
-
-		// Role changes do not refresh an already loaded user's capabilities.
-		$user = wp_get_current_user();
-		if ( $user->exists() && in_array( 'customer', $user->roles, true ) ) {
-			$user->get_role_caps();
-		}
-
-		update_option( 'tourfic_customer_caps', 2 );
+		$this->tf_revoke_customer_unfiltered_html_cap();
 	}
 
 	/**
@@ -2636,4 +2632,20 @@ trait Action_Helper {
 		wp_send_json_success( $response );
 		wp_die();
 	}
+
+	/**
+	 * Revoke legacy HTML access before core filters use a preloaded customer.
+	 */
+	function tourfic_maybe_revoke_customer_unfiltered_html() {
+		if ( get_option( 'tourfic_customer_unfiltered_html_revoked' ) ) {
+			return;
+		}
+
+		$this->tf_revoke_customer_unfiltered_html_cap();
+		$user = wp_get_current_user();
+		if ( $user->exists() && in_array( 'customer', $user->roles, true ) ) {
+			$user->get_role_caps();
+		}
+	}
+
 }

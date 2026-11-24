@@ -41,6 +41,14 @@ function update_option( $key, $value, $autoload = null ) {
 	$GLOBALS['tourfic_fixture_writes'][] = array( get_current_blog_id(), $key );
 	return true;
 }
+function delete_option( $key ) {
+	if ( ! array_key_exists( $key, $GLOBALS['tourfic_fixture_options'][ get_current_blog_id() ] ) ) {
+		return false;
+	}
+	unset( $GLOBALS['tourfic_fixture_options'][ get_current_blog_id() ][ $key ] );
+	$GLOBALS['tourfic_fixture_writes'][] = array( get_current_blog_id(), $key );
+	return true;
+}
 function get_user_meta( $id, $key, $single = false ) {
 	return $GLOBALS['tourfic_fixture_meta'][ $id ][ $key ] ?? array();
 }
@@ -86,7 +94,7 @@ function tourfic_customer_caps_expect( $condition, $label ) {
 	}
 }
 
-function tourfic_customer_caps_fixture( $version, $unsafe, $woo, $roles = array( 'customer' ), $customer_exists = true, $during_init = false ) {
+function tourfic_customer_caps_fixture( $version, $unsafe, $woo, $roles = array( 'customer' ), $customer_exists = true, $during_init = false, $revoked = false ) {
 	$GLOBALS['wp_filter'] = array();
 	$GLOBALS['wp_user_roles'] = null;
 	$GLOBALS['tourfic_fixture_writes'] = array();
@@ -107,6 +115,9 @@ function tourfic_customer_caps_fixture( $version, $unsafe, $woo, $roles = array(
 	$GLOBALS['tourfic_fixture_options'][ get_current_blog_id() ] = array( $role_key => $definitions );
 	if ( null !== $version ) {
 		$GLOBALS['tourfic_fixture_options'][ get_current_blog_id() ]['tourfic_customer_caps'] = $version;
+	}
+	if ( $revoked ) {
+		$GLOBALS['tourfic_fixture_options'][ get_current_blog_id() ]['tourfic_customer_unfiltered_html_revoked'] = $revoked;
 	}
 	$GLOBALS['wp_roles'] = new WP_Roles();
 	$cap_key = $GLOBALS['wpdb']->get_blog_prefix( get_current_blog_id() ) . 'capabilities';
@@ -134,16 +145,17 @@ function tourfic_customer_caps_filtered_comment() {
 	return stripslashes( $result['comment_content'] );
 }
 
-foreach ( array( null, 0, 1, '1' ) as $tourfic_version ) {
+foreach ( array( null, 0, 1, '1', 2 ) as $tourfic_version ) {
 	foreach ( array( false, true ) as $tourfic_woo ) {
 		$label = 'version=' . json_encode( $tourfic_version ) . ', Woo=' . (int) $tourfic_woo;
 		$helper = tourfic_customer_caps_fixture( $tourfic_version, null !== $tourfic_version, $tourfic_woo );
-		tourfic_customer_caps_expect( 1 === has_action( 'init', array( $helper, 'tf_customer_role_caps' ) ), 'Cleanup precedes core KSES: ' . $label );
+		tourfic_customer_caps_expect( 1 === has_action( 'init', array( $helper, 'tourfic_maybe_revoke_customer_unfiltered_html' ) ), 'Cleanup precedes core KSES: ' . $label );
 		do_action( 'init' );
 		tourfic_customer_caps_expect( ! get_role( 'customer' )->has_cap( 'unfiltered_html' ), 'Customer role cannot bypass HTML filtering: ' . $label );
 		tourfic_customer_caps_expect( ! current_user_can( 'unfiltered_html' ), 'Preloaded customer capability cache is refreshed: ' . $label );
 		tourfic_customer_caps_expect( current_user_can( 'read' ) && get_role( 'customer' )->has_cap( 'level_0' ), 'Normal customer permissions survive: ' . $label );
-		tourfic_customer_caps_expect( 2 === get_option( 'tourfic_customer_caps' ), 'Cleanup completes its upgrade gate: ' . $label );
+		tourfic_customer_caps_expect( 1 === get_option( 'tourfic_customer_unfiltered_html_revoked' ), 'Cleanup completes its upgrade gate: ' . $label );
+		tourfic_customer_caps_expect( false === get_option( 'tourfic_customer_caps' ), 'Legacy capability marker is removed: ' . $label );
 		$html = tourfic_customer_caps_filtered_comment();
 		tourfic_customer_caps_expect( false === strpos( $html, '<script' ) && false === strpos( $html, 'onclick' ), 'Core filters unsafe comment markup on the upgrade request: ' . $label );
 		tourfic_customer_caps_expect( false !== strpos( $html, '<strong>Safe review</strong>' ) && false !== strpos( $html, '<em>formatting</em>' ) && false !== strpos( $html, 'href=' ), 'Safe review formatting survives: ' . $label );
@@ -159,13 +171,14 @@ foreach ( array( null, 0, 1, '1' ) as $tourfic_version ) {
 $helper = tourfic_customer_caps_fixture( 1, false, false, array( 'subscriber' ), false );
 try {
 	do_action( 'init' );
-	tourfic_customer_caps_expect( 1 === get_option( 'tourfic_customer_caps' ), 'Missing role does not prematurely complete cleanup.' );
+	tourfic_customer_caps_expect( false === get_option( 'tourfic_customer_unfiltered_html_revoked' ), 'Missing role does not prematurely complete cleanup.' );
+	tourfic_customer_caps_expect( false === get_option( 'tourfic_customer_caps' ), 'Missing role still clears the legacy capability marker.' );
 } catch ( Throwable $error ) {
 	tourfic_customer_caps_expect( false, 'Missing role must not cause an exception: ' . $error->getMessage() );
 }
 add_role( 'customer', 'Customer', array( 'read' => true, 'unfiltered_html' => true ) );
 $helper->tf_customer_role_caps();
-tourfic_customer_caps_expect( 2 === get_option( 'tourfic_customer_caps' ) && ! get_role( 'customer' )->has_cap( 'unfiltered_html' ), 'A subsequently available role is cleaned up.' );
+tourfic_customer_caps_expect( 1 === get_option( 'tourfic_customer_unfiltered_html_revoked' ) && ! get_role( 'customer' )->has_cap( 'unfiltered_html' ), 'A subsequently available role is cleaned up.' );
 
 foreach ( array( array( 'administrator' ), array( 'editor' ), array( 'customer', 'administrator' ) ) as $tourfic_roles ) {
 	tourfic_customer_caps_fixture( 1, true, false, $tourfic_roles );
@@ -173,18 +186,19 @@ foreach ( array( array( 'administrator' ), array( 'editor' ), array( 'customer',
 	tourfic_customer_caps_expect( current_user_can( 'unfiltered_html' ), 'Legitimate privilege is retained for ' . implode( '+', $tourfic_roles ) );
 }
 
-$helper = tourfic_customer_caps_fixture( 2, false, false );
+$helper = tourfic_customer_caps_fixture( null, false, false, array( 'customer' ), true, false, 1 );
 do_action( 'init' );
 tourfic_customer_caps_expect( array() === $GLOBALS['tourfic_fixture_writes'], 'An already migrated site performs no option or role writes.' );
+tourfic_customer_caps_expect( ! current_user_can( 'unfiltered_html' ), 'A site already migrated by staging remains safe.' );
 $GLOBALS['tourfic_fixture_site'] = 2;
 tourfic_customer_caps_fixture( 1, true, false );
 do_action( 'init' );
-tourfic_customer_caps_expect( ! get_role( 'customer' )->has_cap( 'unfiltered_html' ) && 2 === get_option( 'tourfic_customer_caps' ), 'Another site prefix receives its own cleanup.' );
-tourfic_customer_caps_expect( 2 === $GLOBALS['tourfic_fixture_options'][1]['tourfic_customer_caps'], 'Cleaning another site preserves the first site marker.' );
+tourfic_customer_caps_expect( ! get_role( 'customer' )->has_cap( 'unfiltered_html' ) && 1 === get_option( 'tourfic_customer_unfiltered_html_revoked' ), 'Another site prefix receives its own cleanup.' );
+tourfic_customer_caps_expect( 1 === $GLOBALS['tourfic_fixture_options'][1]['tourfic_customer_unfiltered_html_revoked'], 'Cleaning another site preserves the first site marker.' );
 
 tourfic_customer_caps_fixture( 1, true, false, array( 'customer' ), true, true );
 do_action( 'init' );
-tourfic_customer_caps_expect( 2 === get_option( 'tourfic_customer_caps' ), 'Helper construction during init priority zero completes cleanup on that request.' );
+tourfic_customer_caps_expect( 1 === get_option( 'tourfic_customer_unfiltered_html_revoked' ), 'Helper construction during init priority zero completes cleanup on that request.' );
 tourfic_customer_caps_expect( ! current_user_can( 'unfiltered_html' ), 'Late helper construction refreshes the customer capability cache.' );
 $html = tourfic_customer_caps_filtered_comment();
 tourfic_customer_caps_expect( false === strpos( $html, '<script' ) && false === strpos( $html, 'onclick' ), 'Late helper construction still restores core comment filtering before submission.' );
