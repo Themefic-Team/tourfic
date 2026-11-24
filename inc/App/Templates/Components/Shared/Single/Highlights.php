@@ -167,6 +167,7 @@ class Highlights {
 							</div>
 						<?php endforeach; ?>
 					</div>
+					<?php wp_print_inline_script_tag( '(function(element) { if (typeof window.tourfic_init_highlight_sliders === "function") { window.tourfic_init_highlight_sliders([element]); } else { window.tourfic_highlight_sliders = Array.isArray(window.tourfic_highlight_sliders) ? window.tourfic_highlight_sliders : []; window.tourfic_highlight_sliders.push(element); } })(document.currentScript.previousElementSibling);' ); ?>
 				</div>
 			<?php echo !empty($builder) ? '</div>' : ''; ?>
 			<?php

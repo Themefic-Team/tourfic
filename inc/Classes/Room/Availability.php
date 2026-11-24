@@ -74,7 +74,7 @@ class Availability {
 	 * @param string $check_out Check-out date (can be Y-m-d or format from settings)
 	 */
 	public function __construct( $room_id, $check_in, $check_out ) {
-		$this->room_id   = intval( $room_id );
+		$this->room_id = \Tourfic\Classes\Woocommerce\Booking_Validation::canonical( $room_id, 'tf_room' ) ?: 0;
 		$this->check_in  = $this->normalize_date( $check_in );
 		$this->check_out = $this->normalize_date( $check_out );
 
@@ -259,6 +259,7 @@ class Availability {
 	 * @return array Array of booked date ranges with room count
 	 */
 	private function get_booked_dates() {
+		if ( empty( $this->room_meta['reduce_num_room'] ) ) { return array(); }
 		$wc_orders = wc_get_orders( array(
 			'post_status' => array( 'wc-completed' ),
 			'limit'       => -1,
@@ -273,12 +274,15 @@ class Availability {
 				// Check both hotel and room post IDs
 				$item_post_id = wc_get_order_item_meta( $item_id, '_post_id', true );
 
-				if ( intval( $item_post_id ) === $this->hotel_id ) {
+				if ( \Tourfic\Classes\Woocommerce\Booking_Validation::canonical( $item_post_id, 'tf_hotel' ) === \Tourfic\Classes\Woocommerce\Booking_Validation::canonical( $this->hotel_id, 'tf_hotel' )
+					&& (string) wc_get_order_item_meta( $item_id, '_unique_id', true ) === (string) ( $this->room_meta['unique_id'] ?? '' )
+					&& ! empty( $this->room_meta['unique_id'] ) ) {
 					$check_in  = wc_get_order_item_meta( $item_id, 'check_in', true );
 					$check_out = wc_get_order_item_meta( $item_id, 'check_out', true );
 					$room      = wc_get_order_item_meta( $item_id, 'number_room_booked', true );
 
-					if ( ! empty( $check_in ) && ! empty( $check_out ) && ! empty( $room ) ) {
+					if ( \Tourfic\Classes\Woocommerce\Booking_Validation::dates( $check_in, $check_out )
+						&& \Tourfic\Classes\Woocommerce\Booking_Validation::id( $room ) ) {
 						$booked_days[] = array(
 							'check_in'  => $check_in,
 							'check_out' => $check_out,

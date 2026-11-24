@@ -66,8 +66,13 @@ if ( ! class_exists( 'Tourfic_Enquiry_Rest_API' ) ) {
 				);
 			}
 
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared,PluginCheck.Security.DirectDB.UnescapedDBParameter,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Every dynamic clause is prepared above.
-			$hotel_enquiry_result = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . ' ORDER BY id DESC', ARRAY_A );
+			$hotel_enquiry_result = $this->tf_read_record_data( function() use ( $wpdb, $where ) {
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared,PluginCheck.Security.DirectDB.UnescapedDBParameter,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Every dynamic clause is prepared above.
+				return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE " . implode( ' AND ', $where ) . ' ORDER BY id DESC', ARRAY_A );
+			} );
+			if ( is_wp_error( $hotel_enquiry_result ) ) {
+				return $hotel_enquiry_result;
+			}
 
 			$enquirys_data = array();
 			foreach ( $hotel_enquiry_result as $enquiry ) {		
@@ -85,14 +90,36 @@ if ( ! class_exists( 'Tourfic_Enquiry_Rest_API' ) ) {
          * @author Foysal
          */
         public function tf_get_enquiry_details( $request ){
-            global $wpdb;
-			$id    = absint( $request->get_param( 'id' ) );
-			$enquiry = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %d", $id ), ARRAY_A ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$permission = $this->tf_enquiry_permission_callback( $request );
+			if ( is_wp_error( $permission ) ) {
+				return $permission;
+			}
+			$id = $this->tf_get_rest_absint_param( $request, 'id' );
+			if ( is_wp_error( $id ) || ! $id ) {
+				return new WP_Error( 'rest_invalid_param', esc_html__( 'A valid record ID is required.', 'tourfic' ), array( 'status' => 400 ) );
+			}
+			global $wpdb;
+			$enquiry = $this->tf_read_record_data( function() use ( $wpdb, $id ) {
+				return $wpdb->get_row( $wpdb->prepare( "SELECT id, post_id, post_type, author_id FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %d", $id ), ARRAY_A );
+			} );
+			if ( is_wp_error( $enquiry ) ) {
+				return $enquiry;
+			}
 			if ( empty( $enquiry ) ) {
 				return new WP_Error( 'tf_enquiry_not_found', esc_html__( 'Enquiry not found.', 'tourfic' ), array( 'status' => 404 ) );
 			}
 			if ( ! $this->tf_current_user_can_access_enquiry( $enquiry ) ) {
 				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not authorized to access this enquiry.', 'tourfic' ), array( 'status' => 403 ) );
+			}
+
+			$enquiry = $this->tf_read_record_data( function() use ( $wpdb, $id ) {
+				return $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %d", $id ), ARRAY_A );
+			} );
+			if ( is_wp_error( $enquiry ) ) {
+				return $enquiry;
+			}
+			if ( ! $enquiry || ! $this->tf_current_user_can_access_enquiry( $enquiry ) ) {
+				return new WP_Error( 'rest_forbidden', esc_html__( 'The record is no longer accessible.', 'tourfic' ), array( 'status' => 403 ) );
 			}
 
 			$reply_data = !empty( $enquiry["reply_data"] ) ? json_decode($enquiry["reply_data"], true) : array();

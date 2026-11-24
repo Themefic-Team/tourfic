@@ -24,7 +24,10 @@ class Enqueue {
 		$this->js_min  = ! empty( Helper::tfopt( 'js_min' ) ) ? '.min' : '';	
 
 		add_filter( 'wp_enqueue_scripts', array( $this, 'tf_dequeue_scripts' ), 9999 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_frontend_dependencies' ), 1 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_enqueue_scripts' ) );
+		add_filter( 'pre_do_shortcode_tag', array( $this, 'shortcode_assets' ), 10, 2 );
+		add_action( 'elementor/frontend/widget/before_render', array( $this, 'widget_assets' ) );
 		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'elementor_editor_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_dependencies' ), 1 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_enqueue_admin_scripts' ) );
@@ -50,6 +53,70 @@ class Enqueue {
 	public function register_admin_dependencies() {
 		wp_register_style( 'notyf', TOURFIC_ASSETS_URL . 'app/libs/notyf/notyf.min.css', array(), TOURFIC_VERSION );
 		wp_register_script( 'notyf', TOURFIC_ASSETS_URL . 'app/libs/notyf/notyf.min.js', array( 'jquery' ), TOURFIC_VERSION, true );
+	}
+
+
+	public function register_frontend_dependencies() {
+		wp_register_style( 'tf-slick', TOURFIC_ASSETS_URL . 'app/libs/slick/slick.css', array(), TOURFIC_VERSION );
+		wp_register_script( 'tf-slick', TOURFIC_ASSETS_URL . 'app/libs/slick/slick.min.js', array( 'jquery' ),
+			(string) filemtime( TOURFIC_PATH . 'assets/app/libs/slick/slick.min.js' ), true );
+	}
+
+	public function shortcode_assets( $result, $tag ) {
+		if ( 0 === strpos( $tag, 'tourfic_' ) ) { $this->tf_enqueue_scripts( true ); }
+		return $result;
+	}
+
+	public function widget_assets( $widget ) {
+		if ( preg_match( '/^(tf[-_]|tourfic|tft[-_]|travelfic)/', $widget->get_name() ) ) {
+			$this->tf_enqueue_scripts( true );
+		}
+	}
+
+	public function needs_frontend_assets() {
+		$types = array( 'tf_hotel', 'tf_room', 'tf_tours', 'tf_apartment', 'tf_carrental' );
+		$required = is_singular( $types ) || is_post_type_archive( $types )
+			|| in_array( get_page_template_slug(), array( 'tf-search', 'tf-wishlist' ), true );
+		$object = get_queried_object();
+		if ( is_tax() && $object && ! is_wp_error( $object ) ) {
+			$taxonomy = get_taxonomy( $object->taxonomy );
+			$required = $required || ( $taxonomy && array_intersect( $types, $taxonomy->object_type ) );
+		}
+		if ( is_singular() && ! $required ) {
+			$post = get_queried_object();
+			$required = $post instanceof \WP_Post && $this->content_uses_tourfic( $post->post_content );
+			foreach ( array( '_elementor_data', '_bricks_page_content_2' ) as $key ) {
+				$data = get_post_meta( get_queried_object_id(), $key, true );
+				$data = is_string( $data ) ? json_decode( $data, true ) : $data;
+				$required = $required || $this->builder_uses_tourfic( $data );
+			}
+		}
+		return (bool) apply_filters( 'tourfic_frontend_assets_required', (bool) $required );
+	}
+
+	private function builder_uses_tourfic( $nodes ) {
+		if ( ! is_array( $nodes ) ) { return false; }
+		foreach ( $nodes as $node ) {
+			if ( ! is_array( $node ) ) { continue; }
+			$name = $node['widgetType'] ?? $node['name'] ?? '';
+			if ( is_string( $name ) && preg_match( '/^(tf[-_]|tourfic|tft[-_]|travelfic)/', $name ) ) { return true; }
+			if ( $this->builder_uses_tourfic( $node['elements'] ?? array() ) ) { return true; }
+		}
+		return false;
+	}
+
+	private function content_uses_tourfic( $content, $depth = 0 ) {
+		if ( $depth > 10 ) { return false; }
+		if ( preg_match( '/\[tourfic_[a-z_]+(?:[\s\]\/])/', $content ) || has_block( 'tourfic', $content ) ) { return true; }
+		foreach ( parse_blocks( $content ) as $block ) {
+			if ( 0 === strpos( (string) $block['blockName'], 'tourfic/' ) ) { return true; }
+			if ( 'core/block' === $block['blockName'] && ! empty( $block['attrs']['ref'] ) ) {
+				$reusable = get_post( $block['attrs']['ref'] );
+				if ( $reusable && $this->content_uses_tourfic( $reusable->post_content, $depth + 1 ) ) { return true; }
+			}
+			if ( ! empty( $block['innerBlocks'] ) && $this->content_uses_tourfic( serialize_blocks( $block['innerBlocks'] ), $depth + 1 ) ) { return true; }
+		}
+		return false;
 	}
 
 	/**
@@ -114,6 +181,7 @@ class Enqueue {
 	 * @since 1.0
 	 */
 	function tf_dequeue_scripts() {
+		if ( ! wp_script_is( 'tourfic', 'enqueued' ) ) { return; }
 
 		// Flatpickr
 		wp_deregister_script( 'flatpickr' );
@@ -134,7 +202,9 @@ class Enqueue {
 	 * Enqueue Frontend scripts
 	 * @since 1.0
 	 */
-	function tf_enqueue_scripts() {
+	function tf_enqueue_scripts( $required = false ) {
+		if ( wp_script_is( 'tourfic', 'enqueued' ) || ( true !== $required && ! $this->needs_frontend_assets() ) ) { return; }
+		$this->register_frontend_dependencies();
 		$flatpickr_locale = ! empty( get_locale() ) ? get_locale() : 'en_US';
 		$allowed_locale   = array( 'ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN' );	
 		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
@@ -205,7 +275,7 @@ class Enqueue {
 		 * v1.8.1
 		 */
 		wp_enqueue_style( 'tf-slick', TOURFIC_ASSETS_URL . 'app/libs/slick/slick.css', '', TOURFIC_VERSION );
-		wp_enqueue_script( 'tf-slick', TOURFIC_ASSETS_URL . 'app/libs/slick/slick.min.js', array( 'jquery' ), TOURFIC_VERSION, true );
+		wp_enqueue_script( 'tf-slick' );
 		
 
 		/**
@@ -383,7 +453,7 @@ class Enqueue {
 		/**
 		 * Custom
 		 */
-		$tourfic_script_dependencies = array( 'jquery', 'tf-flatpickr', 'notyf' );
+		$tourfic_script_dependencies = array( 'jquery', 'tf-flatpickr', 'tf-slick', 'notyf' );
 		if ( 'default' === $tf_openstreet_map ) {
 			$tourfic_script_dependencies[] = 'tf-leaflet';
 		}
@@ -392,7 +462,7 @@ class Enqueue {
 			'tourfic',
 			TOURFIC_ASSETS_APP_URL . 'js/tourfic-scripts' . $this->js_min . '.js',
 			$tourfic_script_dependencies,
-			TOURFIC_VERSION,
+			(string) filemtime( TOURFIC_PATH . 'assets/app/js/tourfic-scripts' . $this->js_min . '.js' ),
 			true
 		);
 		wp_localize_script( 'tourfic', 'tourficParams',
@@ -412,6 +482,7 @@ class Enqueue {
 				'wishlist_add_error'     => esc_html__( 'Failed to add in wishlist!', 'tourfic' ),
 				'wishlist_removed'       => esc_html__( 'Item removed from wishlist', 'tourfic' ),
 				'wishlist_remove_error'  => esc_html__( 'Failed to remove from wishlist!', 'tourfic' ),
+				'booking_error' => esc_html__( 'Unable to complete this booking. Please check your selection and try again.', 'tourfic' ),
 				'field_required'         => esc_html__( 'This field is required!', 'tourfic' ),
 				'traveler_age_mismatch'  => esc_html__( 'The entered date of birth does not match the selected passenger type.', 'tourfic' ),
 				'adult'                  => apply_filters( 'tourfic_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ),
@@ -921,7 +992,7 @@ class Enqueue {
 					'delete_category_nonce'            => wp_create_nonce( 'tourfic_delete_category_data' ),
 					'insert_post_nonce'                => wp_create_nonce( 'tourfic_insert_post_data' ),
 					'ajax_url'                         => admin_url( 'admin-ajax.php' ),
-					'toolkit_page_url'                 => admin_url( 'admin.php?page=travelfic-template-list' ),
+					'toolkit_page_url'                 => admin_url( 'admin.php?page=travelfic-template-list&tourfic_setup=1' ),
 					'is_travelfic_toolkit_active'      => $travelfic_toolkit_active_plugins,
 					'current_active_theme'             => $current_active_theme,
 					'deleting_old_review_fields'       => esc_html__( 'Deleting old review fields...', 'tourfic' ),

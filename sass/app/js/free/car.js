@@ -652,6 +652,14 @@
             };
 
             $.ajax({
+                error: function (xhr) {
+                    $this.removeClass('tf-btn-loading');
+                    if (typeof $this.unblock === 'function') { $this.unblock(); }
+                    const errors = xhr.responseJSON && xhr.responseJSON.errors;
+                    (Array.isArray(errors) && errors.length ? errors : [tourficParams.booking_error]).forEach(function (message) {
+                        notyf.error(message);
+                    });
+                },
                 url: tourficParams.ajax_url,
                 type: 'POST',
                 data: data,
@@ -815,6 +823,14 @@
             };
 
             $.ajax({
+                error: function (xhr) {
+                    $this.removeClass('tf-btn-loading');
+                    if (typeof $this.unblock === 'function') { $this.unblock(); }
+                    const errors = xhr.responseJSON && xhr.responseJSON.errors;
+                    (Array.isArray(errors) && errors.length ? errors : [tourficParams.booking_error]).forEach(function (message) {
+                        notyf.error(message);
+                    });
+                },
                 url: tourficParams.ajax_url,
                 type: 'POST',
                 data: data,
@@ -932,6 +948,14 @@
             };
             
             $.ajax({
+                error: function (xhr) {
+                    $this.removeClass('tf-btn-loading');
+                    if (typeof $this.unblock === 'function') { $this.unblock(); }
+                    const errors = xhr.responseJSON && xhr.responseJSON.errors;
+                    (Array.isArray(errors) && errors.length ? errors : [tourficParams.booking_error]).forEach(function (message) {
+                        notyf.error(message);
+                    });
+                },
                 url: tourficParams.ajax_url,
                 type: 'POST',
                 data: data,

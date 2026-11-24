@@ -660,7 +660,7 @@ body.tourfic-settings_page_tourfic-setup-wizard {
 }
 .tf-setup-header .tf-setup-header-right span {
   color: #566676;
-  font-family: Inter;
+  font-family: Inter, sans-serif;
   font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
@@ -668,7 +668,7 @@ body.tourfic-settings_page_tourfic-setup-wizard {
 }
 .tf-setup-header .tf-setup-header-right span a {
   color: #003C79;
-  font-family: Inter;
+  font-family: Inter, sans-serif;
   font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;

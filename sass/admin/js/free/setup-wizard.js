@@ -105,10 +105,25 @@
             }
         });
 
+        function showCompletionPanel(currentPanel, nextPanel) {
+            currentPanel.hide();
+            nextPanel.show().find('h1').first().trigger('focus');
+        }
+
+        $(document).on('click', '.tourfic-setup-comparison-continue', function () {
+            const panel = $(this).closest('.tourfic-setup-comparison');
+            showCompletionPanel(panel, panel.siblings('.tf-finish-step'));
+        });
+
         $(document).on('click', '.tf-setup-prev-btn', function (e) {
             e.preventDefault();
-            let step = $(this).closest('.tf-setup-step-container').data('step');
+            const panel = $(this).closest('.tf-setup-step-container');
+            let step = panel.data('step');
             let prevStep = step - 1;
+            if (panel.is('.tourfic-setup-comparison, .tf-finish-step')) {
+                showCompletionPanel(panel, panel.siblings('.tf-setup-step-' + prevStep));
+                return;
+            }
             if(step === 2 && !tourficAdminParams.is_woo_not_active) {
                 $('.tf-setup-step-2').fadeOut(300, function () {
                     $('.tf-setup-step-0').fadeIn(300);
@@ -128,7 +143,8 @@
             e.preventDefault();
             let submitBtn = $('.tf-setup-submit-btn.tf-quick-setup-btn');
             let form = $(this).closest('#tf-setup-wizard-form');
-            let step = $(this).closest('.tf-setup-step-container').data('step');
+            const panel = $(this).closest('.tf-setup-step-container');
+            let step = panel.data('step');
             let skipSteps = form.find('input[name="tf-skip-steps"]').val();
 
             if($(this).hasClass('tf-quick-setup-btn') && skipSteps.indexOf(step) !== -1) {
@@ -145,15 +161,13 @@
                 data: formData,
                 processData: false,
                 contentType: false,
+                dataType: 'json',
                 beforeSend: function () {
                     submitBtn.addClass('tf-btn-loading');
                 },
-                success: function (response) {
-                    let data = JSON.parse(response);
-                    submitBtn.removeClass('tf-btn-loading');
-                    if (data.success) {
-                        $('.tf-finish-step').show();
-                        $('.tf-setup-step-' + step).hide();
+                success: function (data) {
+                    if (data && data.success === true) {
+                        showCompletionPanel(panel, panel.siblings('.tourfic-setup-comparison'));
                     }
                 },
                 complete: function () {

@@ -4,6 +4,9 @@ defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Car_Rental\Pricing;
 use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Car_Rental\Availability;
+use Tourfic\Classes\Car_Rental\Booking;
+use Tourfic\Classes\Woocommerce\Booking_Validation;
+use Tourfic\Classes\Woocommerce\Booking_Context;
 
 /**
  * car booking ajax function
@@ -80,19 +83,23 @@ function tourfic_car_booking_callback() {
 	/**
 	 * Get car meta values
 	 */
-	$post_id   = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( wp_unslash($_POST['post_id']) ) ) : null;
+	$post_id = Booking_Context::request( 'post_id' );
+	$selection = array();
+	foreach ( array( 'pickup_date', 'dropoff_date', 'pickup_time', 'dropoff_time', 'protection', 'extra_ids', 'extra_qty', 'partial_payment' ) as $key ) {
+		if ( isset( $_POST[ $key ] ) ) { $selection[ $key ] = Booking_Context::request( $key ); }
+	}
+	$quote = Booking::quote( $post_id, $selection );
+	if ( is_wp_error( $quote ) ) {
+		wp_send_json( array( 'status' => 'error', 'errors' => array( $quote->get_error_message() ) ), 400 );
+	}
 	$pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( wp_unslash( $_POST['pickup'] ) ) : '';
 	$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( wp_unslash( $_POST['dropoff'] ) ) : '';
 	$pickup_slug = isset( $_POST['pickup_slug'] ) ? sanitize_text_field( wp_unslash( $_POST['pickup_slug'] ) ) : '';
 	$dropoff_slug = isset( $_POST['dropoff_slug'] ) ? sanitize_text_field( wp_unslash( $_POST['dropoff_slug'] ) ) : '';
-	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? tourfic_normalize_date(sanitize_text_field( wp_unslash($_POST['pickup_date']) )) : '';
-	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? tourfic_normalize_date(sanitize_text_field( wp_unslash($_POST['dropoff_date']) )) : '';
-	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_time']) ) : '';
-	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
-	$tf_protection = isset( $_POST['protection'] ) && is_array( $_POST['protection'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['protection'] ) ) : [];
-	$extra_ids  = isset( $_POST['extra_ids'] ) && is_array( $_POST['extra_ids'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['extra_ids'] ) ) : [];
-	$extra_qty  = isset( $_POST['extra_qty'] ) && is_array( $_POST['extra_qty'] ) ? array_map( 'absint', wp_unslash( $_POST['extra_qty'] ) ) : [];
-	$partial_payment  = isset( $_POST['partial_payment'] ) ? sanitize_text_field(wp_unslash($_POST['partial_payment'])) : 'no';
+	$tf_pickup_date = $quote['selection']['pickup_date'];
+	$tf_dropoff_date = $quote['selection']['dropoff_date'];
+	$tf_pickup_time = $quote['selection']['pickup_time'];
+	$tf_dropoff_time = $quote['selection']['dropoff_time'];
 
 	// Booking Confirmation Details
 	$tf_confirmation_details = isset( $_POST['travellerData'] ) && is_array( $_POST['travellerData'] ) ? map_deep( wp_unslash( $_POST['travellerData'] ), 'sanitize_text_field' ) : [];
@@ -134,7 +141,7 @@ function tourfic_car_booking_callback() {
 		$dropoff = $dropoff_location->name;
 	}
 
-	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
+	$meta = $quote['meta'];
 	$post_author   = get_post_field( 'post_author', $post_id );
 
 	// Booking
@@ -145,52 +152,13 @@ function tourfic_car_booking_callback() {
 	$tf_booking_attribute = !empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 
 	$product_id    = get_post_meta( $post_id, 'product_id', true );
-	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
-	
-
-	$total_prices = ! empty( $get_prices['sale_price'] ) ? (float) $get_prices['sale_price'] : 0;
-	if ( $total_prices <= 0 && ! empty( $get_prices['regular_price'] ) ) {
-		$total_prices = (float) $get_prices['regular_price'];
-	}
-
-	$response      = array();
-	$tf_cars_data = array();
-
-	if ( is_array( $extra_qty ) ) {
-		foreach ( $extra_qty as $single_extra_qty ) {
-			if ( 0 > intval( $single_extra_qty ) ) {
-				$response['errors'][] = esc_html__( 'Extra quantity cannot be negative.', 'tourfic' );
-				break;
-			}
-		}
-	}
-
-	// Deposit
-	$car_allow_deposit = apply_filters( 'tourfic_allow_deposit_feature', false, $meta );
-	$car_deposit_type = ! empty( $meta['deposit_type'] ) ? $meta['deposit_type'] : 'none';
-	$car_deposit_amount = ! empty( $meta['deposit_amount'] ) ? $meta['deposit_amount'] : 0;
-
-	$car_inventory = Availability::tf_car_inventory($post_id, $meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
-	// Check Inventory
-	if ( ! $car_inventory ) {
-		$response['errors'][] = esc_html__( 'Car Not Available this Slot!', 'tourfic' );
-	}
-
-	if(!empty($extra_ids)){
-		$total_extra = Pricing::set_extra_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $extra_ids, $extra_qty);
-		$total_prices = $total_prices + $total_extra['price'];
-		$tf_cars_data['tf_car_data']['extras'] = $total_extra['title'];
-	}
-
-	if(!empty($tf_protection)){
-		$total_protection_prices = Pricing::set_protection_price($meta, $tf_protection, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
-		if(!empty($total_protection_prices['price'])){
-			$total_prices = $total_prices + $total_protection_prices['price'];
-		}
-		if(!empty($total_protection_prices['title'])){
-			$tf_cars_data['tf_car_data']['protection'] = $total_protection_prices['title'];
-		}
-	}
+	$total_prices = $quote['total'];
+	$response = array();
+	$tf_cars_data = array( 'tf_car_data' => array(
+		'tourfic_booking_selection' => $quote['selection'],
+		'extras' => $quote['extras'],
+		'protection' => $quote['protection'],
+	) );
 
 	/**
 	 * If no errors then process
@@ -206,22 +174,10 @@ function tourfic_car_booking_callback() {
 		$tf_cars_data['tf_car_data']['tf_dropoff_date']    = $tf_dropoff_date;
 		$tf_cars_data['tf_car_data']['tf_pickup_time']     = $tf_pickup_time;
 		$tf_cars_data['tf_car_data']['tf_dropoff_time']    = $tf_dropoff_time;
-		$tf_cars_data['tf_car_data']['price_total']    	   = $total_prices;
+		$tf_cars_data['tf_car_data']['price_total'] = $quote['payable'];
 
-		# Deposit information
-		if ( $car_allow_deposit && 'none'!=$car_deposit_type && 'yes'==$partial_payment) {
-			if( !empty($car_deposit_amount) ){
-				if ( 'percent'==$car_deposit_type ) {
-					$deposit_amount = ($tf_cars_data['tf_car_data']['price_total'] * $car_deposit_amount)/100;
-				}
-				if ( 'fixed'==$car_deposit_type ) {
-					$deposit_amount = $car_deposit_amount;
-				}
-				$tf_cars_data['tf_car_data']['due']   = $tf_cars_data['tf_car_data']['price_total'] - $deposit_amount;
-				$tf_cars_data['tf_car_data']['price_total'] = $deposit_amount;
-			}
-		}
-		
+		if ( $quote['due'] > 0 ) { $tf_cars_data['tf_car_data']['due'] = $quote['due']; }
+
 		if( !empty($car_booking_by) && '3'==$car_booking_by ){
 
 			$tf_booking_fields = !empty(Helper::tfopt( 'car-book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'car-book-confirm-field' )) : '';
@@ -298,7 +254,7 @@ function tourfic_car_booking_callback() {
 				// get user id
 				$tf_offline_user_id = $current_user->ID;
 			} else {
-				$tf_offline_user_id = 1;
+				$tf_offline_user_id = 0;
 			}
 
 			$order_details = [
@@ -366,6 +322,10 @@ function tourfic_car_booking_callback() {
 				$response['add_to_cart'] = 'true';
 				$response['redirect_to'] = $tf_booking_url;
 			}else{
+				$tf_cars_data = Booking_Validation::seal( 'car', $tf_cars_data );
+				if ( is_wp_error( $tf_cars_data ) ) {
+					wp_send_json( array( 'status' => 'error', 'errors' => array( $tf_cars_data->get_error_message() ) ), 400 );
+				}
 				$added_to_cart = WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_cars_data );
 				if ( ! $added_to_cart ) {
 					$response['status']   = 'error';
@@ -392,21 +352,8 @@ function tourfic_car_booking_callback() {
  * Over write WooCommerce Price
  */
 function tourfic_car_set_order_price( $cart ) {
-
-	if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
-		return;
-	}
-
-	if ( did_action( 'woocommerce_before_calculate_totals' ) >= 2 ) {
-		return;
-	}
-
-	foreach ( $cart->get_cart() as $cart_item ) {
-		if ( isset( $cart_item['tf_car_data']['price_total'] ) ) {
-			$cart_item['data']->set_price( max( 0, $cart_item['tf_car_data']['price_total'] ) );
-		}
-	}
-
+	if ( is_admin() && ! defined( 'DOING_AJAX' ) ) { return; }
+	Booking_Validation::set_prices( $cart, 'car' );
 }
 
 add_action( 'woocommerce_before_calculate_totals', 'tourfic_car_set_order_price', 30, 1 );

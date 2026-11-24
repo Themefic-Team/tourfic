@@ -1,0 +1,382 @@
+@use "../../../../common/variable" as *;
+@use "setup-header";
+
+html.wp-toolbar:has(.admin_page_travelfic-template-list .tourfic-setup-comparison-shell:not([hidden])) {
+    padding-top: 0;
+}
+
+.admin_page_travelfic-template-list:has(.tourfic-setup-comparison-shell:not([hidden])) {
+    .travelfic-template-top-header {
+        display: none;
+    }
+
+    #wpbody {
+        padding-top: 0;
+    }
+}
+
+.tourfic-setup-comparison-shell {
+    min-height: 100vh;
+    background: $tf_fill_alternative;
+
+    .tf-setup-header {
+        @include setup-header.styles;
+    }
+}
+
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) {
+    width: calc(100% - 24px);
+    max-width: 886px;
+    margin: 72px auto 60px;
+    font-family: Inter, sans-serif;
+
+    &.tf-setup-step-container {
+        min-width: 0;
+        margin-inline: auto;
+    }
+
+    &.tourfic-setup-comparison--import {
+        margin: 0 auto;
+        padding: 112px 0 60px;
+
+        .tf-setup-step-title {
+            color: $tf_text_title;
+            font-size: 30px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .tf-setup-step-layout {
+            background: $tf_fill_white;
+        }
+
+        .tf-setup-steps {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 48px;
+        }
+
+        .tf-setup-step-desc {
+            color: $tf_text_paragraph;
+            font-size: 15px;
+            line-height: 24px;
+            margin-top: 8px;
+        }
+    }
+
+    &.tf-setup-step-container .tf-setup-step-layout,
+    .tf-setup-step-layout {
+        padding: 56px 32px;
+        border-radius: 16px;
+        text-align: center;
+    }
+
+    .tf-setup-step-desc {
+        max-width: 690px;
+        margin-inline: auto;
+        margin-bottom: 32px;
+    }
+
+    .tf-setup-step-title:focus {
+        outline: none;
+    }
+
+    .tf-back-btn,
+    .tourfic-setup-comparison-continue,
+    .tourfic-setup-learn-more {
+        align-items: center;
+        text-transform: uppercase;
+
+        &:focus-visible {
+            outline: 2px solid $tf_primary_default;
+            outline-offset: 3px;
+        }
+
+        i {
+            font-size: 20px;
+            line-height: 1;
+        }
+    }
+
+    .tf-back-btn {
+        color: $tf_primary_default;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        padding: 0 4px;
+    }
+
+    .tourfic-setup-comparison-card {
+        width: 100%;
+        max-width: 662px;
+        margin-inline: auto;
+        box-sizing: border-box;
+        border: 1px solid transparent;
+        border-radius: 16px;
+        background: linear-gradient($tf_fill_white, $tf_fill_white) padding-box,
+            linear-gradient(135deg, #f8e5cc, #f6dce8) border-box;
+        box-shadow: 0 4px 24px rgba(213, 117, 154, 0.08);
+        overflow: hidden;
+    }
+
+    .tourfic-setup-comparison-table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+        color: $tf_text_title;
+        font: 400 14px / 1.4 Inter, sans-serif;
+        overflow-wrap: anywhere;
+
+        th,
+        td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #e8eaed;
+            vertical-align: middle;
+        }
+
+        thead th {
+            padding-block: 14px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        th:first-child {
+            width: 54%;
+            padding-inline-start: 20px;
+            text-align: start;
+        }
+
+        tbody th {
+            font-weight: 500;
+        }
+
+        th:last-child,
+        td:last-child {
+            width: 23%;
+            color: $tf_primary_default;
+            background: #f0f7ff;
+        }
+    }
+
+    .tourfic-setup-plan-current,
+    .tourfic-setup-plan-badge {
+        display: block;
+        margin: 6px auto 0;
+    }
+
+    .tourfic-setup-plan-current {
+        color: $tf_text_paragraph;
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    .tourfic-setup-plan-badge {
+        box-sizing: border-box;
+        width: fit-content;
+        max-width: 100%;
+        padding: 3px 10px;
+        border-radius: 12px;
+        background: #005bb5;
+        color: $tf_fill_white;
+        font-size: 10px;
+        line-height: 1.4;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+
+    .tourfic-setup-feature {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .tourfic-setup-feature-icon,
+    .tourfic-setup-plan-mark {
+        display: inline-grid;
+        place-items: center;
+        font-style: normal;
+        line-height: 1;
+    }
+
+    .tourfic-setup-feature-icon {
+        flex: 0 0 32px;
+        height: 32px;
+        border-radius: 10px;
+        font-size: 16px;
+    }
+
+    $icon-palettes: (
+        (1, #ad4715, #fbe6d9, #fbe4ed),
+        (2, #185e84, #e4f2f8, #faeae0),
+        (3, #137348, #d6f4e6, #ebf9ed),
+        (4, #165ec7, #e0ebfd, #edf7fe),
+        (5, #b73542, #f0eafa, #fbe4e7)
+    );
+
+    @each $offset, $color, $start, $end in $icon-palettes {
+        tbody tr:nth-child(5n + #{$offset}) .tourfic-setup-feature-icon {
+            color: $color;
+            background: linear-gradient(180deg, $start, $end);
+        }
+    }
+
+    .tourfic-setup-plan-mark {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #eff1f4;
+        color: #556476;
+        font-size: 16px;
+
+        &.ri-check-line {
+            background: #005bb5;
+            color: $tf_fill_white;
+        }
+    }
+
+    .tourfic-setup-comparison-cta {
+        padding: 16px;
+    }
+
+    .tourfic-setup-learn-more {
+        font: 600 15px / 24px Inter, sans-serif;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        justify-content: center;
+        gap: 8px;
+        min-width: 0;
+        padding: 11px 30px;
+        border: 1px solid #e4ad00;
+        background: $tf_fill_white;
+        color: #785700;
+
+        &::after {
+            content: none;
+        }
+
+        &:hover {
+            background: #fff8df;
+            box-shadow: none;
+        }
+    }
+
+    .tf-setup-action-btn-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 64px;
+
+        .tf-setup-action-btn-next {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+    }
+
+    .tourfic-setup-comparison-continue {
+        display: inline-flex;
+        justify-content: center;
+        gap: 8px;
+        min-width: 0;
+        border: 0;
+        border-radius: 8px;
+        padding: 12px 32px;
+        font: 600 15px / 24px Inter, sans-serif;
+        color: $tf_primary_default;
+        background: $tf_fill_alternative;
+        cursor: pointer;
+
+        &::after {
+            content: none;
+        }
+
+        &:hover {
+            background: #dceeff;
+            box-shadow: none;
+        }
+
+        &.tf-quick-setup-btn {
+            color: $tf_fill_white;
+            background: linear-gradient(180deg, #0051a3, $tf_primary_default);
+
+            &:hover {
+                background: linear-gradient(0deg, #0051a3, $tf_primary_default);
+            }
+        }
+    }
+
+    @media #{$max575} {
+        margin-top: 32px;
+        margin-bottom: 32px;
+
+        &.tourfic-setup-comparison--import {
+            padding: 32px 0;
+        }
+
+        &.tf-setup-step-container .tf-setup-step-layout,
+        .tf-setup-step-layout {
+            padding: 32px 12px;
+        }
+
+        &.tourfic-setup-comparison--import .tf-setup-steps,
+        .tf-setup-steps {
+            margin-bottom: 24px;
+        }
+
+        .tf-setup-action-btn-wrapper {
+            margin-block: 32px 0;
+        }
+
+        &.tourfic-setup-comparison--import .tf-setup-step-title,
+        .tf-setup-step-title {
+            font-size: 25px;
+        }
+
+        .tourfic-setup-comparison-table {
+            font-size: 13px;
+
+            thead th {
+                font-size: 13px;
+            }
+
+            th,
+            td {
+                padding-inline: 4px;
+            }
+
+            th:first-child {
+                width: 46%;
+                padding-inline-start: 8px;
+            }
+
+            th:last-child,
+            td:last-child {
+                width: 30%;
+            }
+        }
+
+        .tourfic-setup-plan-badge {
+            padding-inline: 4px;
+            font-size: 9px;
+            letter-spacing: 0;
+        }
+
+        .tourfic-setup-feature {
+            gap: 6px;
+        }
+
+        .tourfic-setup-feature-icon {
+            flex-basis: 24px;
+            height: 24px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .tourfic-setup-comparison-continue {
+            padding-inline: 20px;
+        }
+    }
+}

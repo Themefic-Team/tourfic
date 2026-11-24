@@ -10,8 +10,9 @@
   },
   "scripts": {
     "watch": "webpack --mode=development --watch --config webpack-config.js",
-    "build": "webpack --mode=production --config webpack-config.js",
-    "package:release": "git archive --format=zip --prefix=tourfic/ --output=tourfic.zip HEAD"
+    "build": "npm run build:slick && webpack --mode=production --config webpack-config.js",
+    "package:release": "git archive --format=zip --prefix=tourfic/ --output=tourfic.zip HEAD",
+    "build:slick": "node scripts/build-slick.js"
   },
   "keywords": [
     "wordpress",
@@ -31,6 +32,7 @@
     "sass": "^1.89.0",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
+    "terser": "^5.46.1",
     "webpack": "^5.87.0",
     "webpack-cli": "^5.0.1"
   }

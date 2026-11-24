@@ -34,6 +34,7 @@ class TF_Setup_Wizard {
 		add_action( 'wp_ajax_tourfic_setup_wizard_submit', [ $this, 'tf_setup_wizard_submit_ajax' ] );
 		add_action( 'in_admin_header', [ $this, 'remove_notice' ], 1000 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_setup_wizard_admin_enqueue_scripts' ), 9 );
+		add_action( 'travelfic_toolkit_before_import_completion', [ $this, 'tourfic_setup_template_import_comparison' ] );
 
 		add_action( 'wp_ajax_tourfic_ajax_install_woo', 'wp_ajax_install_plugin' );
 		add_action( 'wp_ajax_tourfic_ajax_activate_woo', array( $this, 'tf_ajax_activate_woo_callback' ) );
@@ -68,8 +69,39 @@ class TF_Setup_Wizard {
 	}
 
 	public function tf_setup_wizard_admin_enqueue_scripts( $screen ) {
-		if ( ! empty( $screen ) && 'tourfic-settings_page_tourfic-setup-wizard' == $screen ) {
+		$is_wizard = 'tourfic-settings_page_tourfic-setup-wizard' === $screen;
+		$is_template_import = 'admin_page_travelfic-template-list' === $screen && $this->is_setup_template_import();
+
+		if ( $is_wizard ) {
 			wp_enqueue_style( 'travelfic-toolkit-fonts', '//fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap', array(), '2.11.9' );
+		}
+
+		if ( $is_wizard || $is_template_import ) {
+			$stylesheet = 'css/tourfic-setup-comparison.min.css';
+			$path       = TOURFIC_ASSETS_PATH . 'admin/' . $stylesheet;
+			$version    = file_exists( $path ) ? (string) filemtime( $path ) : TOURFIC_VERSION;
+			wp_enqueue_style( 'tf-remixicon', TOURFIC_ASSETS_APP_URL . 'libs/remixicon/remixicon.css', array(), TOURFIC_VERSION );
+			wp_enqueue_style(
+				'tourfic-setup-comparison',
+				TOURFIC_ASSETS_ADMIN_URL . $stylesheet,
+				array( 'tf-remixicon' ),
+				$version
+			);
+		}
+	}
+
+	private function is_setup_template_import() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Selects an informational panel only.
+		$context = isset( $_GET['tourfic_setup'] ) && is_string( $_GET['tourfic_setup'] ) ? sanitize_key( wp_unslash( $_GET['tourfic_setup'] ) ) : '';
+		return '1' === $context;
+	}
+
+	/**
+	 * Offer the same comparison when starter template import completes setup.
+	 */
+	public function tourfic_setup_template_import_comparison() {
+		if ( current_user_can( 'manage_options' ) && $this->is_setup_template_import() ) {
+			$this->tourfic_setup_comparison_step( true );
 		}
 	}
 
@@ -90,15 +122,7 @@ class TF_Setup_Wizard {
 		?>
         <div class="tf-setup-wizard-wrapper" id="tf-setup-wizard-wrapper">
             <div class="tf-setup-container">
-                <div class="tf-setup-header">
-                    <div class="tf-setup-header-left">
-                        <img src="<?php echo esc_url( TOURFIC_ASSETS_ADMIN_URL ) . 'images/welcome.png' ?>" alt="<?php esc_attr_e( 'Welcome to Tourfic!', 'tourfic' ) ?>">
-                    </div>
-                    <div class="tf-setup-header-right">
-                        <span class="get-help-link"><?php esc_html_e( 'Having troubles?', 'tourfic' ) ?> 
-                        <a class="" target="_blank" href="<?php echo esc_url( "https://portal.themefic.com/support/?utm_source=tourfic_" . wp_parse_url( get_site_url(), PHP_URL_HOST ) .  "&utm_medium=setup_wizard_get_help&utm_campaign=tourfic_plugin_installation" ); ?>"><?php esc_html_e( 'Get help', 'tourfic' ) ?></a></span>
-                    </div>
-                </div>
+                <?php $this->render_setup_header(); ?>
                 <form method="post" id="tf-setup-wizard-form" data-skip-steps="">
 					<?php
 					$this->tf_setup_welcome_step();
@@ -108,6 +132,7 @@ class TF_Setup_Wizard {
 					$this->tf_setup_step_four();
 					$this->tf_setup_step_five();
 					$this->tf_setup_step_six();
+					$this->tourfic_setup_comparison_step();
 					$this->tf_setup_finish_step();
 					?>
 					<?php wp_nonce_field( 'tf_setup_wizard_action', 'tf_setup_wizard_nonce' ); ?>
@@ -115,6 +140,30 @@ class TF_Setup_Wizard {
                 </form>
             </div>
         </div>
+		<?php
+	}
+
+	private function render_setup_header() {
+		$help_url = add_query_arg(
+			array(
+				'utm_source'   => 'tourfic_' . wp_parse_url( get_site_url(), PHP_URL_HOST ),
+				'utm_medium'   => 'setup_wizard_get_help',
+				'utm_campaign' => 'tourfic_plugin_installation',
+			),
+			'https://portal.themefic.com/support/'
+		);
+		?>
+		<header class="tf-setup-header">
+			<div class="tf-setup-header-left">
+				<img src="<?php echo esc_url( TOURFIC_ASSETS_ADMIN_URL . 'images/welcome.png' ); ?>" alt="<?php esc_attr_e( 'Welcome to Tourfic!', 'tourfic' ); ?>">
+			</div>
+			<div class="tf-setup-header-right">
+				<span class="get-help-link">
+					<?php esc_html_e( 'Having troubles?', 'tourfic' ); ?>
+					<a href="<?php echo esc_url( $help_url ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Get help', 'tourfic' ); ?></a>
+				</span>
+			</div>
+		</header>
 		<?php
 	}
 
@@ -830,7 +879,7 @@ class TF_Setup_Wizard {
             <section class="tf-setup-step-layout tf-template-step">
 				<?php $this->tf_setup_wizard_steps_header( 5 ) ?>
 
-                <h1 class="tf-setup-step-title"><?php esc_html_e( 'Choose Templates for Single & Archive Pages', 'tourfic' ) ?></h1>
+                <h1 class="tf-setup-step-title" tabindex="-1"><?php esc_html_e( 'Choose Templates for Single & Archive Pages', 'tourfic' ) ?></h1>
                 <p class="tf-setup-step-desc"><?php echo wp_kses_post( 'These templates are designed for showcasing your Single Hotel, Tour, and <br> Apartment pages, along with their respective Archive Pages' ) ?></p>
 
                 <div class="tf-hotel-setup-wizard">
@@ -1221,12 +1270,31 @@ class TF_Setup_Wizard {
 		<?php
 	}
 
+	/**
+	 * Render the optional plan comparison between saving and completion.
+	 */
+	private function tourfic_setup_comparison_step( $is_template_import = false ) {
+		$features = array(
+			array( __( 'Multivendor Marketplace', 'tourfic' ), 'ri-store-2-line' ),
+			array( __( 'Conditional Rules Based Pricing', 'tourfic' ), 'ri-price-tag-3-line' ),
+			array( __( 'Admin Dashboard', 'tourfic' ), 'ri-dashboard-line' ),
+			array( __( 'Advanced Itinerary Builder', 'tourfic' ), 'ri-route-line' ),
+			array( __( 'API Based Integrations', 'tourfic' ), 'ri-plug-line' ),
+			array( __( 'Map based Search and Filter', 'tourfic' ), 'ri-map-2-line' ),
+			array( __( 'Extra Services / Addons', 'tourfic' ), 'ri-box-3-line' ),
+			array( __( 'Multiple Booking Options', 'tourfic' ), 'ri-ticket-2-line' ),
+			array( __( 'Advanced Availability and Calendar Sync', 'tourfic' ), 'ri-calendar-check-line' ),
+			array( __( 'Advanced Booking Management', 'tourfic' ), 'ri-file-list-3-line' ),
+		);
+		require __DIR__ . '/setup-wizard/plan-comparison.php';
+	}
+
 	/*
 	 * Finish setup wizard
 	 */
 	private function tf_setup_finish_step() {
 		?>
-        <div class="tf-setup-step-container tf-setup-content-layout tf-setup-step-7 tf-finish-step <?php echo self::$current_step == 'finish' ? 'active' : ''; ?>" data-step="7">
+        <div class="tf-setup-step-container tf-setup-content-layout tf-setup-step-8 tf-finish-step <?php echo self::$current_step == 'finish' ? 'active' : ''; ?>" data-step="8">
             <div class="back-to-dashboard">
                 <a href="#" class="tf-back-btn tf-setup-prev-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1238,7 +1306,7 @@ class TF_Setup_Wizard {
             </div>
             <div class="tf-setup-finish-content">
                 <div class="welcome-img"><img src="<?php echo esc_url( TOURFIC_ASSETS_ADMIN_URL ) . 'images/hooray.gif' ?>" alt="<?php esc_attr_e( 'Thank you', 'tourfic' ) ?>"></div>
-                <h1 class="tf-setup-welcome-title"><?php esc_html_e( 'Hooray! You’re all set.', 'tourfic' ) ?></h1>
+                <h1 class="tf-setup-welcome-title" tabindex="-1"><?php esc_html_e( 'Hooray! You’re all set.', 'tourfic' ) ?></h1>
                 <div class="tf-setup-welcome-description"><?php echo wp_kses_post( 'Let\'s get started with Tourfic. Provide your customers with a seamless booking </br> experience with this plugin. Let\'s streamline your business operations now!', 'tourfic' ) ?></div>
                 <div class="tf-setup-welcome-footer tf-setup-finish-footer">
                     <a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=tf_hotel' ) ) ?>"

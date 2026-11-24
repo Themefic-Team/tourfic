@@ -996,11 +996,12 @@ class TF_API_Documentation {
 			array(
 				'method'      => 'GET',
 				'url'         => '/orders',
-				'description' => __( 'Get booking orders list with optional filtering and calendar event data.', 'tourfic' ),
+				'description' => __( 'Get booking orders and calendar events within the authenticated user\'s service permissions and record ownership scope.', 'tourfic' ),
 				'parameters'  => array(
+					array( 'name' => 'user_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Legacy positive decimal hint; ignored for identity and authorization. Conflicting parameter sources are rejected.', 'tourfic' ) ),
 					array( 'name' => 'checkinout', 'type' => 'string', 'required' => false, 'description' => __( 'Check-in status filter (in, out, not).', 'tourfic' ) ),
 					array( 'name' => 'post_type', 'type' => 'string', 'required' => true, 'description' => __( 'Booking type filter (hotel, tour, apartment, car). CPT aliases are also accepted: tf_hotel, tf_tours, tf_apartment, tf_carrental.', 'tourfic' ) ),
-					array( 'name' => 'post_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Filter bookings for a specific post ID.', 'tourfic' ) ),
+					array( 'name' => 'post_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Filter bookings by a positive decimal post ID. Signs, fractions and overflow are rejected.', 'tourfic' ) ),
 					array( 'name' => 'order_status', 'type' => 'string', 'required' => false, 'description' => __( 'Order status filter.', 'tourfic' ) ),
 				),
 				'example_request'  => 'GET /wp-json/tf/v1/orders?post_type=tf_hotel&order_status=completed\nX-API-Key: your-api-key',
@@ -1046,11 +1047,12 @@ class TF_API_Documentation {
 			array(
 				'method'      => 'GET',
 				'url'         => '/enquiries',
-				'description' => __( 'Get enquiry list by user role context with optional filters.', 'tourfic' ),
+				'description' => __( 'Get enquiries within the authenticated user\'s service permissions and record ownership scope.', 'tourfic' ),
 				'parameters'  => array(
+					array( 'name' => 'user_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Legacy positive decimal hint; ignored for identity and authorization. Conflicting parameter sources are rejected.', 'tourfic' ) ),
 					array( 'name' => 'post_type', 'type' => 'string', 'required' => true, 'description' => __( 'Post type for enquiries (tf_hotel, tf_tours, tf_apartment).', 'tourfic' ) ),
-					array( 'name' => 'post_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Filter by specific post ID.', 'tourfic' ) ),
-					array( 'name' => 'filters', 'type' => 'string', 'required' => false, 'description' => __( 'Status filter (for example: replied, responded, not-replied, not-responded).', 'tourfic' ) ),
+					array( 'name' => 'post_id', 'type' => 'integer', 'required' => false, 'description' => __( 'Filter by a positive decimal post ID. Signs, fractions and overflow are rejected.', 'tourfic' ) ),
+					array( 'name' => 'filters', 'type' => 'string', 'required' => false, 'description' => __( 'Exact status filter: read, unread, replied, responded, not-replied or not-responded.', 'tourfic' ) ),
 				),
 				'example_request'  => 'GET /wp-json/tf/v1/enquiries?post_type=tf_hotel&filters=not-replied\nX-API-Key: your-api-key',
 				'example_response' => '[\n    {\n        "id": 1,\n        "post_id": 321,\n        "post_title": "Hotel Sunrise"\n    }\n]',
