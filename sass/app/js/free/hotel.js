@@ -341,7 +341,8 @@
                 },
                 error: function (data) {
                     $('#tour_room_details_loader').hide();
-                    console.log(data);
+                    const errors = data.responseJSON && data.responseJSON.errors;
+                    (Array.isArray(errors) && errors.length ? errors : [tourficParams.booking_error]).forEach(function (message) { notyf.error(message); });
                 },
 
             });
@@ -861,6 +862,21 @@
 
 
             $.ajax({
+                success: function (data) {
+                    let response;
+                    try { response = typeof data === 'string' ? JSON.parse(data) : data; } catch (error) { response = null; }
+                    if (!response || response.status === 'error') {
+                        const errors = response && response.errors;
+                        (Array.isArray(errors) && errors.length ? errors : [tourficParams.booking_error]).forEach(function (message) { notyf.error(message); });
+                        return;
+                    }
+                    if (response.without_payment === 'true') {
+                        $('.tf-withoutpayment-booking').removeClass('show');
+                        $this.find('.tf-withoutpayment-booking-confirm').addClass('show');
+                    } else if (response.redirect_to) {
+                        window.location.replace(response.redirect_to);
+                    }
+                },
                 type: 'post',
                 url: tourficParams.ajax_url,
                 data: formData,
@@ -878,13 +894,13 @@
                     $('.tf-notice-wrapper').html("").hide();
                 },
                 error: function (data) {
-                    console.log(data);
+                    $('#tour_room_details_loader').hide();
+                    const errors = data.responseJSON && data.responseJSON.errors;
+                    (Array.isArray(errors) && errors.length ? errors : [tourficParams.booking_error]).forEach(function (message) { notyf.error(message); });
                 },
                 complete: function (data) {
-                    $this.unblock()
+                    $this.unblock();
                     $('#tour_room_details_loader').hide();
-                    $('.tf-withoutpayment-booking').removeClass('show');
-                    $this.find('.tf-withoutpayment-booking-confirm').addClass('show');
                 },
             })
         });

@@ -49,7 +49,7 @@ if ( ! function_exists( 'tourfic_normalize_car_meta' ) ) {
 			$meta['baggage'] = $meta['bags'];
 		}
 
-		if ( empty( $meta['car_rent'] ) && isset( $meta['regular_price'] ) ) {
+		if ( ( ! isset( $meta['car_rent'] ) || '' === $meta['car_rent'] ) && isset( $meta['regular_price'] ) ) {
 			$meta['car_rent'] = $meta['regular_price'];
 		}
 

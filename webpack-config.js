@@ -29,6 +29,7 @@ const RoomAppScss = glob.sync('./sass/app/css/free/room/room.scss');
 
 StyleEntryPoints['assets/app/css/tourfic-style'] = appScss;
 StyleEntryPoints['assets/admin/css/tourfic-admin'] = adminScss;
+StyleEntryPoints['assets/admin/css/tourfic-setup-comparison'] = glob.sync('./sass/admin/css/free/setup-wizard/plan-comparison.scss');
 StyleEntryPoints['assets/admin/css/tourfic-admin-dashboard'] = glob.sync('./sass/admin/css/free/tourfic-dashboard.scss');
 StyleEntryPoints['assets/admin/css/tourfic-admin-api'] = glob.sync('./sass/admin/css/free/tourfic-api.scss');
 StyleEntryPoints['assets/app/css/tourfic-carrentals'] = CarAppScss;

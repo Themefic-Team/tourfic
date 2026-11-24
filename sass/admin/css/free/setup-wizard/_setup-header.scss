@@ -1,0 +1,47 @@
+@use "../../../../common/variable" as *;
+@use "../../../../common/mixin" as *;
+
+@mixin styles {
+    padding: 16px 56px;
+    background: #F8FAFC;
+    box-shadow: 0px 32px 32px 0px rgba(125, 168, 212, 0.02), 0px 16px 40px 0px rgba(125, 168, 212, 0.04), 0px 32px 56px 0px rgba(125, 168, 212, 0.08);
+
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items(center);
+
+    @media #{$max575} {
+        @include flex-direction(column);
+        gap: 15px;
+    }
+
+    .tf-setup-header-left {
+        height: 48px;
+
+        img {
+            width: 44px;
+            height: 48px;
+        }
+    }
+
+    .tf-setup-header-right {
+        span {
+            color: #566676;
+            font-family: Inter, sans-serif;
+            font-size: 0.938rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px; /* 160% */
+            a {
+                color: #003C79;
+                font-family: Inter, sans-serif;
+                font-size: 0.938rem;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 24px;
+                text-decoration-line: underline;
+            }
+        }
+
+    }
+}

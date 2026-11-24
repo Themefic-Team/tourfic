@@ -1,0 +1,377 @@
+html.wp-toolbar:has(.admin_page_travelfic-template-list .tourfic-setup-comparison-shell:not([hidden])) {
+  padding-top: 0;
+}
+
+.admin_page_travelfic-template-list:has(.tourfic-setup-comparison-shell:not([hidden])) .travelfic-template-top-header {
+  display: none;
+}
+.admin_page_travelfic-template-list:has(.tourfic-setup-comparison-shell:not([hidden])) #wpbody {
+  padding-top: 0;
+}
+
+.tourfic-setup-comparison-shell {
+  min-height: 100vh;
+  background: #EBF5FF;
+}
+.tourfic-setup-comparison-shell .tf-setup-header {
+  padding: 16px 56px;
+  background: #F8FAFC;
+  box-shadow: 0px 32px 32px 0px rgba(125, 168, 212, 0.02), 0px 16px 40px 0px rgba(125, 168, 212, 0.04), 0px 32px 56px 0px rgba(125, 168, 212, 0.08);
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+@media only screen and (max-width: 575.98px) {
+  .tourfic-setup-comparison-shell .tf-setup-header {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+.tourfic-setup-comparison-shell .tf-setup-header .tf-setup-header-left {
+  height: 48px;
+}
+.tourfic-setup-comparison-shell .tf-setup-header .tf-setup-header-left img {
+  width: 44px;
+  height: 48px;
+}
+.tourfic-setup-comparison-shell .tf-setup-header .tf-setup-header-right span {
+  color: #566676;
+  font-family: Inter, sans-serif;
+  font-size: 0.938rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 160% */
+}
+.tourfic-setup-comparison-shell .tf-setup-header .tf-setup-header-right span a {
+  color: #003C79;
+  font-family: Inter, sans-serif;
+  font-size: 0.938rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration-line: underline;
+}
+
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) {
+  width: calc(100% - 24px);
+  max-width: 886px;
+  margin: 72px auto 60px;
+  font-family: Inter, sans-serif;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import).tf-setup-step-container {
+  min-width: 0;
+  margin-inline: auto;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import).tourfic-setup-comparison--import {
+  margin: 0 auto;
+  padding: 112px 0 60px;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import).tourfic-setup-comparison--import .tf-setup-step-title {
+  color: #27333F;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import).tourfic-setup-comparison--import .tf-setup-step-layout {
+  background: #FFFFFF;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import).tourfic-setup-comparison--import .tf-setup-steps {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 48px;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import).tourfic-setup-comparison--import .tf-setup-step-desc {
+  color: #566676;
+  font-size: 15px;
+  line-height: 24px;
+  margin-top: 8px;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import).tf-setup-step-container .tf-setup-step-layout,
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tf-setup-step-layout {
+  padding: 56px 32px;
+  border-radius: 16px;
+  text-align: center;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tf-setup-step-desc {
+  max-width: 690px;
+  margin-inline: auto;
+  margin-bottom: 32px;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tf-setup-step-title:focus {
+  outline: none;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tf-back-btn,
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-continue,
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-learn-more {
+  align-items: center;
+  text-transform: uppercase;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tf-back-btn:focus-visible,
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-continue:focus-visible,
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-learn-more:focus-visible {
+  outline: 2px solid #003C79;
+  outline-offset: 3px;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tf-back-btn i,
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-continue i,
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-learn-more i {
+  font-size: 20px;
+  line-height: 1;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tf-back-btn {
+  color: #003C79;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0 4px;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-card {
+  width: 100%;
+  max-width: 662px;
+  margin-inline: auto;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background: linear-gradient(#FFFFFF, #FFFFFF) padding-box, linear-gradient(135deg, #f8e5cc, #f6dce8) border-box;
+  box-shadow: 0 4px 24px rgba(213, 117, 154, 0.08);
+  overflow: hidden;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  color: #27333F;
+  font: 400 14px/1.4 Inter, sans-serif;
+  overflow-wrap: anywhere;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table th,
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #e8eaed;
+  vertical-align: middle;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table thead th {
+  padding-block: 14px;
+  font-weight: 600;
+  font-size: 15px;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table th:first-child {
+  width: 54%;
+  padding-inline-start: 20px;
+  text-align: start;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table tbody th {
+  font-weight: 500;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table th:last-child,
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table td:last-child {
+  width: 23%;
+  color: #003C79;
+  background: #f0f7ff;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-plan-current,
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-plan-badge {
+  display: block;
+  margin: 6px auto 0;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-plan-current {
+  color: #566676;
+  font-size: 13px;
+  font-weight: 400;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-plan-badge {
+  box-sizing: border-box;
+  width: fit-content;
+  max-width: 100%;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: #005bb5;
+  color: #FFFFFF;
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-feature-icon,
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-plan-mark {
+  display: inline-grid;
+  place-items: center;
+  font-style: normal;
+  line-height: 1;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-feature-icon {
+  flex: 0 0 32px;
+  height: 32px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) tbody tr:nth-child(5n+1) .tourfic-setup-feature-icon {
+  color: #ad4715;
+  background: linear-gradient(180deg, #fbe6d9, #fbe4ed);
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) tbody tr:nth-child(5n+2) .tourfic-setup-feature-icon {
+  color: #185e84;
+  background: linear-gradient(180deg, #e4f2f8, #faeae0);
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) tbody tr:nth-child(5n+3) .tourfic-setup-feature-icon {
+  color: #137348;
+  background: linear-gradient(180deg, #d6f4e6, #ebf9ed);
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) tbody tr:nth-child(5n+4) .tourfic-setup-feature-icon {
+  color: #165ec7;
+  background: linear-gradient(180deg, #e0ebfd, #edf7fe);
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) tbody tr:nth-child(5n+5) .tourfic-setup-feature-icon {
+  color: #b73542;
+  background: linear-gradient(180deg, #f0eafa, #fbe4e7);
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-plan-mark {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #eff1f4;
+  color: #556476;
+  font-size: 16px;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-plan-mark.ri-check-line {
+  background: #005bb5;
+  color: #FFFFFF;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-cta {
+  padding: 16px;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-learn-more {
+  font: 600 15px/24px Inter, sans-serif;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 11px 30px;
+  border: 1px solid #e4ad00;
+  background: #FFFFFF;
+  color: #785700;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-learn-more::after {
+  content: none;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-learn-more:hover {
+  background: #fff8df;
+  box-shadow: none;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tf-setup-action-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 64px;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tf-setup-action-btn-wrapper .tf-setup-action-btn-next {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-continue {
+  display: inline-flex;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  border: 0;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font: 600 15px/24px Inter, sans-serif;
+  color: #003C79;
+  background: #EBF5FF;
+  cursor: pointer;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-continue::after {
+  content: none;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-continue:hover {
+  background: #dceeff;
+  box-shadow: none;
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-continue.tf-quick-setup-btn {
+  color: #FFFFFF;
+  background: linear-gradient(180deg, #0051a3, #003C79);
+}
+.tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-continue.tf-quick-setup-btn:hover {
+  background: linear-gradient(0deg, #0051a3, #003C79);
+}
+@media only screen and (max-width: 575.98px) {
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) {
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import).tourfic-setup-comparison--import {
+    padding: 32px 0;
+  }
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import).tf-setup-step-container .tf-setup-step-layout,
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tf-setup-step-layout {
+    padding: 32px 12px;
+  }
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import).tourfic-setup-comparison--import .tf-setup-steps,
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tf-setup-steps {
+    margin-bottom: 24px;
+  }
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tf-setup-action-btn-wrapper {
+    margin-block: 32px 0;
+  }
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import).tourfic-setup-comparison--import .tf-setup-step-title,
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tf-setup-step-title {
+    font-size: 25px;
+  }
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table {
+    font-size: 13px;
+  }
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table thead th {
+    font-size: 13px;
+  }
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table th,
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table td {
+    padding-inline: 4px;
+  }
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table th:first-child {
+    width: 46%;
+    padding-inline-start: 8px;
+  }
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table th:last-child,
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-table td:last-child {
+    width: 30%;
+  }
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-plan-badge {
+    padding-inline: 4px;
+    font-size: 9px;
+    letter-spacing: 0;
+  }
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-feature {
+    gap: 6px;
+  }
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-feature-icon {
+    flex-basis: 24px;
+    height: 24px;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  .tourfic-setup-comparison:is(.tf-setup-step-container, .tourfic-setup-comparison--import) .tourfic-setup-comparison-continue {
+    padding-inline: 20px;
+  }
+}
+
+/*# sourceMappingURL=tourfic-setup-comparison.css.map*/

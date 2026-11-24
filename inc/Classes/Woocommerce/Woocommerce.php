@@ -9,6 +9,7 @@ class Woocommerce {
 	use \Tourfic\Traits\Singleton;
 
 	public function __construct() {
+		new Booking_Validation();
 		add_filter( 'woocommerce_data_stores', array( $this, 'tf_woocommerce_data_stores' ) );
 		add_action( 'publish_tf_apartment', array($this, 'tf_add_price_field_to_post'), 10, 2 );
 		add_action( 'publish_tf_hotel', array($this, 'tf_add_price_field_to_post'), 10, 2 );

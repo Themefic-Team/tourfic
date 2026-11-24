@@ -123,7 +123,8 @@ tf_booking_security_assert(
 	'Car booking must remain a public booking endpoint.'
 );
 tf_booking_security_assert(
-	false !== strpos( $car_booking, '0 > intval( $single_extra_qty )' ),
+	false !== strpos( $car_booking, 'Booking::quote( $post_id, $selection )' )
+		&& false !== strpos( file_get_contents( $root . '/inc/Classes/Car_Rental/Booking.php' ), 'Validation::id( $quantity )' ),
 	'Car booking must reject negative extra quantities.'
 );
 
@@ -132,21 +133,11 @@ $hotel_price     = tf_booking_security_function_body( $hotel_source, 'tourfic_ho
 $apartment_price = tf_booking_security_function_body( $apartment_source, 'tourfic_aprtment_set_order_price' );
 $car_price       = tf_booking_security_function_body( $car_source, 'tourfic_car_set_order_price' );
 
-tf_booking_security_assert(
-	false !== strpos( $tour_price, 'max( 0, $tour_price )' ),
-	'Tour cart price setter must not apply negative totals.'
-);
-tf_booking_security_assert(
-	false !== strpos( $hotel_price, "max( 0, \$cart_item['tf_hotel_data']['price_total'] )" ),
-	'Hotel cart price setter must not apply negative totals.'
-);
-tf_booking_security_assert(
-	false !== strpos( $apartment_price, "max( 0, \$cart_item['tf_apartment_data']['total_price'] )" ),
-	'Apartment cart price setter must not apply negative totals.'
-);
-tf_booking_security_assert(
-	false !== strpos( $car_price, "max( 0, \$cart_item['tf_car_data']['price_total'] )" ),
-	'Car cart price setter must not apply negative totals.'
-);
+foreach ( array( 'tour' => $tour_price, 'hotel' => $hotel_price, 'apartment' => $apartment_price, 'car' => $car_price ) as $kind => $body ) {
+	tf_booking_security_assert(
+		false !== strpos( $body, "Booking_Validation::set_prices( \$cart, '" . $kind . "' )" ),
+		$kind . ' cart price setter must validate a signed, nonnegative quote before applying prices.'
+	);
+}
 
 echo "Booking negative count security regression checks passed.\n";

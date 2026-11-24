@@ -268,27 +268,7 @@ if ( ! class_exists( 'Tourfic_User_Rest_API' ) ) {
 		 * @auther Foysal
 		 */
 		public function tf_user_wishlist( $request ) {
-			$current_user_id = get_current_user_id();
-			$remove          = $request->get_param( 'remove' ) ? $request->get_param( 'remove' ) : false;
-			$postId          = $request->get_param( 'post_id' ) ? $request->get_param( 'post_id' ) : '';
-			$wishlist_data = array();
-			
-			if ( ! empty( $current_user_id ) ) {
-				$wishlist_items = get_user_meta( $current_user_id, 'wishlist_item', false );
-
-				if ( $remove == true && ! empty( $postId ) ) {
-					$post_id = array_search($postId, array_column($wishlist_items, 'post_id'));
-					delete_user_meta($current_user_id, 'wishlist_item', $wishlist_items[$post_id]);
-				}
-
-				$wishlist_items = get_user_meta( $current_user_id, 'wishlist_item', false );
-				
-				foreach ( $wishlist_items as $item ) {
-					$wishlist_data[] = get_post( $item['post_id'] );
-				}
-			}
-
-			return $wishlist_data;
+			return \Tourfic\App\Wishlist::rest_items( $request );
 		}
 
 		/**

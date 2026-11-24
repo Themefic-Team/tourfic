@@ -36,7 +36,7 @@ class Pricing {
 		$this->meta = self::get_normalized_meta( $this->apt_id );
 	}
 
-	private static function get_normalized_meta( $apt_id ) {
+	public static function get_normalized_meta( $apt_id ) {
 		$meta = get_post_meta( $apt_id, 'tf_apartment_opt', true );
 		$meta = is_array( $meta ) ? $meta : array();
 
@@ -49,11 +49,11 @@ class Pricing {
 			$meta['pricing_type'] = '1' === (string) $legacy_meta['pricing_by'] ? 'per_night' : 'per_person';
 		}
 
-		if ( empty( $meta['price_per_night'] ) && isset( $legacy_meta['per_night_price'] ) && '' !== (string) $legacy_meta['per_night_price'] ) {
+		if ( ( ! isset( $meta['price_per_night'] ) || '' === $meta['price_per_night'] ) && isset( $legacy_meta['per_night_price'] ) && is_scalar( $legacy_meta['per_night_price'] ) && '' !== (string) $legacy_meta['per_night_price'] ) {
 			$meta['price_per_night'] = $legacy_meta['per_night_price'];
 		}
 
-		if ( empty( $meta['adult_price'] ) && isset( $legacy_meta['adult_price'] ) && '' !== (string) $legacy_meta['adult_price'] ) {
+		if ( ( ! isset( $meta['adult_price'] ) || '' === $meta['adult_price'] ) && isset( $legacy_meta['adult_price'] ) && is_scalar( $legacy_meta['adult_price'] ) && '' !== (string) $legacy_meta['adult_price'] ) {
 			$meta['adult_price'] = $legacy_meta['adult_price'];
 		}
 
@@ -226,9 +226,9 @@ class Pricing {
 
 		if( !empty($discount_arr) ) {
 			if($discount_arr['discount_type'] == 'fixed') {
-				$price = (int) $price - (int) $discount_arr['discount_amount'];
+				$price = (float) $price - (float) $discount_arr['discount_amount'];
 			} else if($discount_arr['discount_type'] == 'percent') {
-				$price = (int) $price - ( (int) $price * (int) $discount_arr['discount_amount'] ) / 100;
+				$price = (float) $price - ( (float) $price * (float) $discount_arr['discount_amount'] ) / 100;
 			}
 		}
 

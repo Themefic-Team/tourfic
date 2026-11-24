@@ -503,45 +503,25 @@ class Review {
 					<?php endif; ?>
 
 					<?php
-					if ( $show_review_form == 'yes' ) :
-						$tf_comment_counts = get_comments( [
-							'post_id' => $post_id,
-							'user_id' => $current_user->ID,
-							'count'   => true,
-						] );
-					?>
-						<?php if ( empty( $tf_comment_counts ) && $tf_comment_counts == 0 ) : ?>
+					if ( 'yes' === $show_review_form ) :
+						$reviewer_type = $is_user_logged_in ? 'li' : 'lo';
+						$can_review    = in_array( $reviewer_type, (array) $tf_ratings_for, true )
+							&& ( ! $is_user_logged_in || ! TF_Review::tf_user_has_comments() );
+						?>
+						<?php if ( $can_review ) : ?>
 							<button class="tf_btn tf_btn_full tf_btn_sharp tf_btn_large tf-review-open">
 								<?php esc_html_e( 'Leave your review', 'tourfic' ); ?>
 							</button>
 						<?php endif; ?>
 						<?php echo wp_kses_post( TF_Review::tf_pending_review_notice( $post_id ) ?? '' ); ?>
-						<?php
-						if ( ! empty( $tf_ratings_for ) ) {
-							if ( $is_user_logged_in ) {
-								if ( in_array( 'li', $tf_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
-									?>
-									<div class="tf-review-form-wrapper">
-										<h3><?php esc_html_e( 'Leave your review', 'tourfic' ); ?></h3>
-										<p><?php esc_html_e( 'Your email address will not be published. Required fields are marked.', 'tourfic' ); ?></p>
-										<?php TF_Review::tf_review_form(); ?>
-									</div>
-									<?php
-								}
-							} else {
-								if ( in_array( 'lo', $tf_ratings_for ) ) {
-									?>
-									<div class="tf-review-form-wrapper">
-										<h3><?php esc_html_e( 'Leave your review', 'tourfic' ); ?></h3>
-										<p><?php esc_html_e( 'Your email address will not be published. Required fields are marked.', 'tourfic' ); ?></p>
-										<?php TF_Review::tf_review_form(); ?>
-									</div>
-									<?php
-								}
-							}
-						}
-					endif;
-					?>
+						<?php if ( $can_review ) : ?>
+							<div class="tf-review-form-wrapper">
+								<h3><?php esc_html_e( 'Leave your review', 'tourfic' ); ?></h3>
+								<p><?php esc_html_e( 'Your email address will not be published. Required fields are marked.', 'tourfic' ); ?></p>
+								<?php TF_Review::tf_review_form(); ?>
+							</div>
+						<?php endif; ?>
+					<?php endif; ?>
 				</div>
 
 				<?php if ( $comments && $show_reviews == 'yes' ) { ?>

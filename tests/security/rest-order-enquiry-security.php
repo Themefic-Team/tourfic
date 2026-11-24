@@ -229,8 +229,7 @@ foreach ( array( 'free_user' => 'tf_user_bookings', 'pro_user' => 'tf_fd_user_bo
 foreach ( array( 'free_user' => 'tf_user_wishlist', 'pro_user' => 'tf_fd_user_wishlist' ) as $label => $method ) {
 	$body = tf_security_method_body( tf_security_file( $files[ $label ] ), $method );
 	tf_security_assert( false === strpos( $body, "get_param( 'user_id' )" ), "{$method} must use the current user only." );
-	tf_security_assert( false !== strpos( $body, 'get_current_user_id()' ), "{$method} must scope wishlist data to get_current_user_id()." );
-	tf_security_assert( false !== strpos( $body, '$wishlist_data' ), "{$method} must return a defined wishlist response for non-customer users." );
+	tf_security_assert( false !== strpos( $body, '\\Tourfic\\App\\Wishlist::rest_items' ), "{$method} must use the shared current-user wishlist policy." );
 }
 
 $user_read_contracts = array(

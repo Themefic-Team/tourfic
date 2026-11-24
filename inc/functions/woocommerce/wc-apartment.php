@@ -3,6 +3,8 @@ defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
 use Tourfic\Classes\Helper;
+use Tourfic\Classes\Woocommerce\Booking_Validation;
+use Tourfic\Classes\Woocommerce\Booking_Context;
 
 /**
  * Apartment booking ajax function
@@ -28,21 +30,12 @@ function tourfic_apartment_parse_check_in_out_date( $check_in_out_date ) {
 	if ( ! empty( $check_in_out_date ) ) {
 		$date_parts = tourfic_split_date_range( $check_in_out_date );
 
-		$check_in_stt  = ! empty( $date_parts[0] ) ? strtotime( $date_parts[0] ) : 0;
-		$check_out_stt = ! empty( $date_parts[1] ) ? strtotime( $date_parts[1] ) : 0;
-
-		if ( ! empty( $check_in_stt ) ) {
-			$check_in = gmdate( 'Y-m-d', $check_in_stt );
-		}
-		if ( ! empty( $check_out_stt ) ) {
-			$check_out = gmdate( 'Y-m-d', $check_out_stt );
-		}
-		if ( ! empty( $check_in ) && ! empty( $check_out ) ) {
-			$check_in_night_stt = strtotime( $check_in . ' +1 day' );
-			$check_out_date_stt = strtotime( $check_out );
-			if ( ! empty( $check_in_night_stt ) && ! empty( $check_out_date_stt ) ) {
-				$days = round( ( ( $check_out_date_stt - $check_in_night_stt ) / ( 60 * 60 * 24 ) ) + 1 );
-			}
+		if ( Booking_Validation::dates( $date_parts[0] ?? null, $date_parts[1] ?? null ) ) {
+			$start = Booking_Validation::date( $date_parts[0] );
+			$end = Booking_Validation::date( $date_parts[1] );
+			$check_in = $start->format( 'Y-m-d' );
+			$check_out = $end->format( 'Y-m-d' );
+			$days = (int) $start->diff( $end )->days;
 		}
 	}
 
@@ -274,7 +267,7 @@ function tourfic_apartment_get_offline_customer_id() {
 		}
 	}
 
-	return 1;
+	return 0;
 }
 
 function tourfic_apartment_booking_callback() {
@@ -286,7 +279,7 @@ function tourfic_apartment_booking_callback() {
 		return;
 	}
 
-	$post_id           = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( wp_unslash($_POST['post_id']) ) ) : null;
+	$post_id           = Booking_Context::request( 'post_id' );
 	$adults            = isset( $_POST['adults'] ) ? intval( sanitize_text_field( wp_unslash($_POST['adults']) ) ) : '0';
 	$children          = isset( $_POST['children'] ) ? intval( sanitize_text_field( wp_unslash($_POST['children']) ) ) : '0';
 	$infant            = isset( $_POST['infant'] ) ? intval( sanitize_text_field( wp_unslash($_POST['infant']) ) ) : '0';
@@ -296,7 +289,8 @@ function tourfic_apartment_booking_callback() {
 
 	$product_id          = get_post_meta( $post_id, 'product_id', true );
 	$post_author         = get_post_field( 'post_author', $post_id );
-	$meta                = get_post_meta( $post_id, 'tf_apartment_opt', true );
+	$meta = Booking_Validation::product( $post_id, 'apartment' );
+	Booking_Context::reject( $meta );
 	$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
 	$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
 	$quick_checkout      = ! empty( Helper::tfopt( 'tf-quick-checkout' ) ) ? Helper::tfopt( 'tf-quick-checkout' ) : 0;
@@ -318,6 +312,14 @@ function tourfic_apartment_booking_callback() {
 	$check_out    = $date_data['check_out'];
 	$days         = $date_data['days'];
 
+	$booking_selection = Booking_Context::apartment( $post_id, array(
+		'check_in' => $check_in, 'check_out' => $check_out,
+		'adults' => Booking_Context::request( 'adults', 0 ),
+		'children' => Booking_Context::request( 'children', 0 ),
+		'infant' => Booking_Context::request( 'infant', 0 ),
+	) );
+	Booking_Context::reject( $booking_selection );
+
 	$validation_errors = tourfic_apartment_get_booking_validation_errors( $post_id, $adults, $children, $infant, $check_in_out, $meta );
 	if ( ! empty( $validation_errors ) ) {
 		$response['errors'] = $validation_errors;
@@ -328,6 +330,7 @@ function tourfic_apartment_booking_callback() {
 	 */
 	if ( ! array_key_exists( 'errors', $response ) || count( $response['errors'] ) == 0 ) {
 
+		$tf_apartment_data['tf_apartment_data']['tourfic_booking_selection'] = $booking_selection;
 		$tf_apartment_data['tf_apartment_data']['order_type']        = 'apartment';
 		$tf_apartment_data['tf_apartment_data']['post_id']           = $post_id;
 		$tf_apartment_data['tf_apartment_data']['post_permalink']    = get_permalink( $post_id );
@@ -341,6 +344,8 @@ function tourfic_apartment_booking_callback() {
 		if ( $days > 0 ) {
 			$total_price = tourfic_apartment_get_booking_total_price( $post_id, $check_in, $check_out, $adults, $children, $infant, $enable_availability );
 
+			$total_price = Booking_Context::total( $total_price );
+			Booking_Context::reject( $total_price );
 			$tf_apartment_data['tf_apartment_data']['pricing_type'] = $pricing_type;
 			$tf_apartment_data['tf_apartment_data']['total_price']  = $total_price;
 		}
@@ -421,6 +426,8 @@ function tourfic_apartment_booking_callback() {
 		} else {
 
 			# Add product to cart with the custom cart item data
+			$tf_apartment_data = Booking_Validation::seal( 'apartment', $tf_apartment_data );
+			Booking_Context::reject( $tf_apartment_data );
 			$added_to_cart = WC()->cart->add_to_cart( $post_id, 1, '0', array(), $tf_apartment_data );
 			if ( ! $added_to_cart ) {
 				$response['status']   = 'error';
@@ -461,7 +468,8 @@ function tourfic_apartment_booking_popup_callback() {
 	$check_in_out_date = isset( $_POST['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_POST['check-in-out-date'] ) ) : '';
 	$make_deposit      = isset( $_POST['deposit'] ) ? sanitize_text_field( wp_unslash( $_POST['deposit'] ) ) : '0';
 
-	$meta                = get_post_meta( $post_id, 'tf_apartment_opt', true );
+	$meta = Booking_Validation::product( $post_id, 'apartment' );
+	Booking_Context::reject( $meta );
 	$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
 	$price_per_night     = ! empty( $meta['price_per_night'] ) ? (float) $meta['price_per_night'] : 0;
 	$adult_price         = ! empty( $meta['adult_price'] ) ? (float) $meta['adult_price'] : 0;
@@ -475,6 +483,14 @@ function tourfic_apartment_booking_popup_callback() {
 	$check_in     = $date_data['check_in'];
 	$check_out    = $date_data['check_out'];
 	$days         = $date_data['days'];
+
+	$booking_selection = Booking_Context::apartment( $post_id, array(
+		'check_in' => $check_in, 'check_out' => $check_out,
+		'adults' => Booking_Context::request( 'adults', 0 ),
+		'children' => Booking_Context::request( 'children', 0 ),
+		'infant' => Booking_Context::request( 'infant', 0 ),
+	) );
+	Booking_Context::reject( $booking_selection );
 
 	$validation_errors = tourfic_apartment_get_booking_validation_errors( $post_id, $adults, $children, $infant, $check_in_out, $meta );
 	if ( ! empty( $validation_errors ) ) {
@@ -575,22 +591,8 @@ function tourfic_apartment_booking_popup_callback() {
  * @author Foysal
  */
 function tourfic_aprtment_set_order_price( $cart ) {
-
-	if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
-		return;
-	}
-
-	if ( did_action( 'woocommerce_before_calculate_totals' ) >= 2 ) {
-		return;
-	}
-
-	foreach ( $cart->get_cart() as $cart_item ) {
-
-		if ( isset( $cart_item['tf_apartment_data']['total_price'] ) ) {
-			$cart_item['data']->set_price( max( 0, $cart_item['tf_apartment_data']['total_price'] ) );
-		}
-	}
-
+	if ( is_admin() && ! defined( 'DOING_AJAX' ) ) { return; }
+	Booking_Validation::set_prices( $cart, 'apartment' );
 }
 
 add_action( 'woocommerce_before_calculate_totals', 'tourfic_aprtment_set_order_price', 30, 1 );
@@ -737,7 +739,8 @@ function tourfic_add_apartment_data_checkout_order_processed( $order_id, $posted
 			$post_id = $item->get_meta( '_post_id', true ); // Apartment id
 
 			//Tax Calculation
-			$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
+			$meta = Booking_Validation::product( $post_id, 'apartment' );
+	Booking_Context::reject( $meta );
 			$tax_labels = array();
 			if(!empty($meta['is_taxable'])){
 				$single_price = $item->get_subtotal();
@@ -921,7 +924,8 @@ function tourfic_add_apartment_data_checkout_order_processed_block_checkout( $or
 			$post_id = $item->get_meta( '_post_id', true ); // Apartment id
 
 			//Tax Calculation
-			$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
+			$meta = Booking_Validation::product( $post_id, 'apartment' );
+	Booking_Context::reject( $meta );
 			$tax_labels = array();
 			if(!empty($meta['is_taxable'])){
 				$single_price = $item->get_subtotal();

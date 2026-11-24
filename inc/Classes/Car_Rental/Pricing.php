@@ -3,6 +3,8 @@
 namespace Tourfic\Classes\Car_Rental;
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Classes\Woocommerce\Booking_Validation as Validation;
+
 class Pricing {
 
 	use \Tourfic\Traits\Singleton;
@@ -22,7 +24,7 @@ class Pricing {
 		$pickup_datetime = self::create_datetime( $pickup_date, $pickup_time );
 		$dropoff_datetime = self::create_datetime( $dropoff_date, $dropoff_time );
 
-		if ( ! $pickup_datetime || ! $dropoff_datetime ) {
+		if ( ! $pickup_datetime || ! $dropoff_datetime || $dropoff_datetime <= $pickup_datetime ) {
 			return $duration_data;
 		}
 
@@ -98,6 +100,14 @@ class Pricing {
 			$meta = tourfic_normalize_car_meta( $meta );
 		}
 
+		$invalid = array( 'sale_price' => 0, 'regular_price' => 0, 'type' => 'day', 'valid' => false );
+		if ( ! is_array( $meta ) || ! self::valid_configuration( $meta ) ) { return $invalid; }
+		$base_valid = Validation::amount( $meta['car_rent'] ?? null );
+		$valid_price = $base_valid;
+		if ( $tf_pickup_date || $tf_dropoff_date ) {
+			$duration = self::get_duration_data( $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time );
+			if ( ! $duration['valid'] ) { return $invalid; }
+		}
 		$pricing_by = !empty($meta["price_by"]) ? $meta["price_by"] : 'day';
 		$initial_pricing = !empty($meta["car_rent"]) ? $meta["car_rent"] : 0;
 
@@ -113,6 +123,7 @@ class Pricing {
         if( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'date'==$pricing_type && !empty($date_pricing) ){
 
             $all_prices = [];
+            $valid_price = true;
             $result = array();
             foreach ($date_pricing as $entry) {
                 $startDate = strtotime($entry['date']['from']);
@@ -147,6 +158,7 @@ class Pricing {
                 if (isset($result[$currentDate])) {
                     $totalPrice += $result[$currentDate];
                 } else {
+                    $valid_price = $valid_price && $base_valid;
                     $totalPrice += $initial_pricing;
                 }
 
@@ -198,6 +210,7 @@ class Pricing {
                 }
             }
             if(!empty($result)){
+                $valid_price = true;
                 $totalPrice = $result['price'] ? $result['price'] : 0;
                 $total_multiply = $result['total_multiply'] ? $result['total_multiply'] : 1;
             }else{
@@ -273,10 +286,33 @@ class Pricing {
             }
         }
 
+		$all_prices['valid'] = $valid_price && Validation::amount( $all_prices['sale_price'] ?? null );
 		$all_prices['type'] = esc_html( $price_type );
 
         return $all_prices;
     }
+
+	private static function valid_configuration( $meta ) {
+		if ( ! in_array( $meta['price_by'] ?? 'day', array( 'day', 'hour' ), true )
+			|| ! in_array( $meta['pricing_type'] ?? 'day_hour', array( 'day_hour', 'date' ), true )
+			|| ( isset( $meta['car_rent'] ) && '' !== $meta['car_rent'] && ! Validation::amount( $meta['car_rent'] ) ) ) { return false; }
+		foreach ( array( 'date' === ( $meta['pricing_type'] ?? 'day_hour' ) ? 'date_prices' : 'day_prices' ) as $key ) {
+			$rows = $meta[ $key ] ?? array();
+			if ( '' === $rows ) { continue; }
+			if ( ! is_array( $rows ) ) { return false; }
+			foreach ( $rows as $row ) {
+				if ( ! is_array( $row ) || ! Validation::amount( $row['price'] ?? null ) ) { return false; }
+				if ( 'day_prices' === $key && ( ! in_array( $row['type'] ?? '', array( 'day', 'hour' ), true )
+					|| ! Validation::amount( $row['from_day'] ?? null ) || ! Validation::amount( $row['to_day'] ?? null )
+					|| (float) $row['to_day'] < (float) $row['from_day'] ) ) { return false; }
+				if ( 'date_prices' === $key && ! Validation::dates( $row['date']['from'] ?? null, $row['date']['to'] ?? null, true ) ) { return false; }
+			}
+		}
+		$type = $meta['discount_type'] ?? 'none';
+		if ( ! in_array( $type, array( 'none', 'fixed', 'percent' ), true ) ) { return false; }
+		return 'none' === $type || ( Validation::amount( $meta['discount_price'] ?? null )
+			&& ( 'percent' !== $type || (float) $meta['discount_price'] <= 100 ) );
+	}
 
     // taxable car or not
 	static function is_taxable( $meta ) {

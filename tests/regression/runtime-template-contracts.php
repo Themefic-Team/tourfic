@@ -40,6 +40,10 @@ foreach ( $forbidden_patterns as $file => $pattern ) {
 
 $review_source = file_get_contents( $root . '/templates/template-parts/review.php' );
 tf_runtime_contract_assert(
+	false !== strpos( $review_source, '$tourfic_comments = $comments;' ),
+	'Review template must initialize its local list from the comments_template() include scope.'
+);
+tf_runtime_contract_assert(
 	false === strpos( $review_source, 'if ( $comments )' )
 		&& false === strpos( $review_source, 'count( $comments )' )
 		&& false === strpos( $review_source, 'foreach ( $comments as $comment )' )
@@ -49,7 +53,7 @@ tf_runtime_contract_assert(
 
 $enqueue_source = file_get_contents( $root . '/inc/Classes/Enqueue.php' );
 tf_runtime_contract_assert(
-	false !== strpos( $enqueue_source, "array( 'jquery', 'tf-flatpickr', 'notyf' )" )
+	false !== strpos( $enqueue_source, "array( 'jquery', 'tf-flatpickr', 'tf-slick', 'notyf' )" )
 		&& false !== strpos( $enqueue_source, "\$tourfic_script_dependencies[] = 'tf-leaflet';" ),
 	'Tourfic frontend script dependencies do not guarantee the calendar and map runtimes.'
 );

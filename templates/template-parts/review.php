@@ -79,6 +79,9 @@ if ( ( get_post_type( $tourfic_post_id ) == 'tf_tours' && $tourfic_tour_selected
      ( get_post_type( $tourfic_post_id ) == "tf_hotel" && $tourfic_hotel_selected_template == "design-3" ) ||
      ( get_post_type( $tourfic_post_id ) == "tf_apartment" && $tourfic_apartment_selected_template != "default" ) ) {
 
+	// WordPress supplies the current comment page through comments_template().
+	$tourfic_comments = $comments;
+
 	if ( $tourfic_comments ) {
 		$tourfic_overall_rate = [];
 		TF_Review::tf_calculate_comments_rating( $tourfic_comments, $tourfic_overall_rate, $total_rating );
