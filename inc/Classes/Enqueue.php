@@ -984,10 +984,12 @@ class Enqueue {
 
 			wp_enqueue_script( 'tf-fullcalender', TOURFIC_ASSETS_ADMIN_URL . 'js/lib/fullcalender.min.js', array( 'jquery' ), TOURFIC_VERSION, true );
 
-			wp_enqueue_script( 'tf-admin', TOURFIC_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts'. $this->js_min .'.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post', 'notyf' ), TOURFIC_VERSION, true );
+			wp_enqueue_script( 'tf-admin', TOURFIC_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts'. $this->js_min .'.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post', 'notyf' ),
+				(string) filemtime( TOURFIC_PATH . 'assets/admin/js/tourfic-admin-scripts' . $this->js_min . '.js' ), true );
 			wp_localize_script( 'tf-admin', 'tourficAdminParams',
 				array(
 					'tf_nonce'                         => wp_create_nonce( 'updates' ),
+					'month_reports_nonce'              => wp_create_nonce( 'tourfic_month_reports' ),
 					'insert_category_nonce'            => wp_create_nonce( 'tourfic_insert_category_data' ),
 					'delete_category_nonce'            => wp_create_nonce( 'tourfic_delete_category_data' ),
 					'insert_post_nonce'                => wp_create_nonce( 'tourfic_insert_post_data' ),
@@ -1416,6 +1418,7 @@ class Enqueue {
 			'taxonomies'                       => $post_types[ $post_type ],
 			'error'                            => false,
 			'tf_nonce'                         => wp_create_nonce( 'updates' ),
+			'month_reports_nonce'              => wp_create_nonce( 'tourfic_month_reports' ),
 			'insert_category_nonce'            => wp_create_nonce( 'tourfic_insert_category_data' ),
 			'delete_category_nonce'            => wp_create_nonce( 'tourfic_delete_category_data' ),
 			'insert_post_nonce'                => wp_create_nonce( 'tourfic_insert_post_data' ),
