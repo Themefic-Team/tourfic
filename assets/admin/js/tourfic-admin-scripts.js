@@ -5692,7 +5692,7 @@ const legendSpacingPlugin = {
                     url: tourficOptions.ajax_url,
                     data: {
                         action: 'tourfic_month_reports',
-                        _nonce: tourficAdminParams.tf_nonce,
+                        _nonce: tourficAdminParams.month_reports_nonce,
                         month: monthTarget,
                         year: yearTarget,
                     },
@@ -5774,7 +5774,7 @@ const legendSpacingPlugin = {
                     url: tourficOptions.ajax_url,
                     data: {
                         action: 'tourfic_month_reports',
-                        _nonce: tourficAdminParams.tf_nonce,
+                        _nonce: tourficAdminParams.month_reports_nonce,
                         month: monthTarget,
                         year: yearTarget,
                     },

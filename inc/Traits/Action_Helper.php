@@ -2261,12 +2261,21 @@ trait Action_Helper {
 	}
 
 	function tf_month_chart_filter_callback() {
-		//Verify Nonce
-		check_ajax_referer( 'updates', '_nonce' );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'You cannot view these reports.', 'tourfic' ) ), 403 );
+		}
 
-		$search_month = isset( $_POST['month'] ) ? sanitize_key( wp_unslash($_POST['month']) ) : '';
-		$search_year  = isset( $_POST['year'] ) ? sanitize_key( wp_unslash($_POST['year']) ) : '';
-		$month_dates  = $this->tf_get_days_in_month( $search_month, $search_year );
+		if ( ! isset( $_POST['_nonce'] ) || ! is_string( $_POST['_nonce'] )
+			|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tourfic_month_reports' ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Invalid report request.', 'tourfic' ) ), 403 );
+		}
+
+		$search_month = isset( $_POST['month'] ) && is_string( $_POST['month'] ) ? wp_unslash( $_POST['month'] ) : '';
+		$search_year  = isset( $_POST['year'] ) && is_string( $_POST['year'] ) ? wp_unslash( $_POST['year'] ) : '';
+		if ( ! preg_match( '/^(?:[1-9]|1[0-2])$/D', $search_month ) || ! preg_match( '/^[0-9]{2}$/D', $search_year ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Select a valid report month and year.', 'tourfic' ) ), 400 );
+		}
+		$month_dates = $this->tf_get_days_in_month( $search_month, 2000 + (int) $search_year );
 
 		//Order Data Retrive
 		$tf_old_order_limit = new \WC_Order_Query( array(
@@ -2313,7 +2322,7 @@ trait Action_Helper {
 		$response['tf_search_month']    = gmdate( "F", strtotime( '2000-' . $search_month . '-01' ) );
 		echo wp_json_encode( $response );
 
-		die();
+		wp_die();
 	}
 
 	/**
@@ -2623,4 +2632,20 @@ trait Action_Helper {
 		wp_send_json_success( $response );
 		wp_die();
 	}
+
+	/**
+	 * Revoke legacy HTML access before core filters use a preloaded customer.
+	 */
+	function tourfic_maybe_revoke_customer_unfiltered_html() {
+		if ( get_option( 'tourfic_customer_unfiltered_html_revoked' ) ) {
+			return;
+		}
+
+		$this->tf_revoke_customer_unfiltered_html_cap();
+		$user = wp_get_current_user();
+		if ( $user->exists() && in_array( 'customer', $user->roles, true ) ) {
+			$user->get_role_caps();
+		}
+	}
+
 }

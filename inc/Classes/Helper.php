@@ -81,6 +81,8 @@ class Helper {
             }
         });
 
+		add_action( 'init', array( $this, 'tourfic_maybe_revoke_customer_unfiltered_html' ), 1 );
+
 	}
 
     function tf_add_admin_bar_links( $admin_bar ) {
