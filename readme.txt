@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, hellokhoyer,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 7.1
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -483,18 +483,15 @@ Back up your database and files before updating. This release migrates Tourfic s
 
 == Changelog ==
 
+= 3.0.5 – Nov 26, 2026 =
+- Fixed: Corrected hotel room and pricing issues.
+- Fixed: Skipped shipping for Tourfic bookings during checkout.
+- Tested: Added UI test coverage for booking details rendering.
+- Improved: System performance and security.
+- Updated: Plugin readme.txt information.
+
 = 3.0.4 – Nov 25, 2026 =
 - Improved: System and security performance.
-
-= 3.0.3 – Nov 24, 2026 =
-- Fixed booking price manipulation across hotels, tours, apartments and cars.
-- Added validation for rooms, packages, dates, guest counts and availability.
-- Rechecked saved cart bookings and prices before checkout.
-- Added permission and ownership checks for booking, enquiry and dashboard records.
-- Fixed wishlist exposure of private listing data and incorrect item removal.
-- Blocked stored XSS through slider configuration.
-- Secured database lookups for email replies.
-- Fixed booking errors incorrectly displaying success messages.
  
 **Old Changelog can be found [here](https://community.themefic.com/changelog/)**.
 

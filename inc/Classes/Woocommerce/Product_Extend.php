@@ -38,6 +38,12 @@ class Product_Extend extends \WC_Product_Data_Store_CPT implements \WC_Object_Da
 		$this->read_visibility( $product );
 		$this->read_product_data( $product );
 		$this->read_extra_data( $product );
+
+		$booking_post_types = array( 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental' );
+		if ( isset( $post_object->post_type ) && in_array( $post_object->post_type, $booking_post_types, true ) ) {
+			$product->set_virtual( true );
+		}
+
 		$product->set_object_read( true );
 	}
 

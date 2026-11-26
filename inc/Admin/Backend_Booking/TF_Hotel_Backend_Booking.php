@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 use \Tourfic\Classes\Helper;
 use Tourfic\Classes\Room\Room;
+use Tourfic\Classes\Room\Availability as Room_Availability;
 use \Tourfic\Core\TF_Backend_Booking;
 use \Tourfic\Classes\Hotel\Hotel;
 
@@ -173,7 +174,6 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 			$to = gmdate( 'Y/m/d', strtotime( $from . " + 1 day" ) );
 		}
 		$this->validate_date_range( $from, $to );
-		$from = gmdate( 'Y/m/d', strtotime( $from . ' +1 day' ) );
 
 		/**
 		 * Backend data
@@ -190,43 +190,37 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 				$enable = ! empty( $room['enable'] ) && boolval( $room['enable'] );
 
 				if ( $enable ) {
-					// Check availability by date option
-					$period = new \DatePeriod(
-						new \DateTime( $from . ' 00:00' ),
-						new \DateInterval( 'P1D' ),
-						new \DateTime( $to . ' 23:59' )
-					);
-
-					$avail_durationdate = [];
-					foreach ( $period as $date ) {
-						$avail_durationdate[ $date->format( 'Y/m/d' ) ] = $date->format( 'Y/m/d' );
-					}
-
-					/**
-					 * Set room availability
-					 */
-					$avil_by_date = ! empty( $room['avil_by_date'] ) ? $room['avil_by_date'] : false;      // Room Available by date enabled or  not ?
-					if ( $avil_by_date ) {
-						$avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
-					}
-
-					if ( $avil_by_date ) {
-
-						foreach ( $period as $date ) {
-							$available_rooms = array_values( array_filter( $avail_date, function ( $date_availability ) use ( $date ) {
-								$date_availability_from = strtotime( $date_availability['check_in'] . ' 00:00' );
-								$date_availability_to   = strtotime( $date_availability['check_out'] . ' 23:59' );
-
-								return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
-							} ) );
-
-							if ( is_iterable( $available_rooms ) && count( $available_rooms ) >= 1 ) {
-								$room_array[ $room['unique_id'] ] = get_the_title($_room->ID);
+					if ( ! empty( $room['avil_by_date'] ) ) {
+						$avail_date = is_string( $room['avail_date'] ?? null ) ? json_decode( $room['avail_date'], true ) : null;
+						if ( ! is_array( $avail_date ) || empty( $avail_date ) ) {
+							continue;
+						}
+						foreach ( $avail_date as $rule ) {
+							if ( ! is_array( $rule ) || ! is_string( $rule['check_in'] ?? null )
+								|| ! is_string( $rule['check_out'] ?? null )
+								|| false === strtotime( $rule['check_in'] ) || false === strtotime( $rule['check_out'] )
+								|| strtotime( $rule['check_out'] ) < strtotime( $rule['check_in'] ) ) {
+								continue 2;
 							}
 						}
-					} else {
-						$room_array[ $room['unique_id'] ] = get_the_title($_room->ID);
+						// Manual calendar pricing requires explicit available-date rules.
+						if ( ! Room_Availability::has_explicit_available_rules( $avail_date ) ) {
+							continue;
+						}
+						$period = new \DatePeriod(
+							new \DateTime( $from . ' 00:00' ),
+							new \DateInterval( 'P1D' ),
+							new \DateTime( $to . ( empty( $room['price_multi_day'] ) ? ' 23:59' : ' 00:00' ) )
+						);
+						$dates = array();
+						foreach ( $period as $date ) {
+							$dates[] = $date->format( 'Y/m/d' );
+						}
+						if ( empty( $dates ) || ! Room_Availability::are_dates_available_for_rules( $avail_date, $dates ) ) {
+							continue;
+						}
 					}
+					$room_array[ $room['unique_id'] ] = get_the_title($_room->ID);
 				}
 			}
 		}
@@ -600,10 +594,12 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		$meta            = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
 		$airport_service = $meta['airport_service'] ?? null;
 		$avail_by_date   = ! empty( $room_data['avil_by_date'] ) ? $room_data['avil_by_date'] : '';
+		$air_service_price = 0;
+		$air_service_info = '';
 		$tf_room_discount_type = !empty($room_data['discount_hotel_type']) ? $room_data['discount_hotel_type'] : 'none';
 		$tf_room_discount_amount = $tf_room_discount_type != 'none' ? ( !empty($room_data['discount_hotel_price']) ? $room_data['discount_hotel_price'] : 0 ) : 0;
 		if ( $avail_by_date ) {
-			$avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
+			$avail_date = ! empty( $room_data['avail_date'] ) ? json_decode($room_data['avail_date'], true) : [];
 		}
 		$pricing_by      = apply_filters( 'tourfic_room_pricing_mode', 1, $room_data );
 		$price_multi_day = ! empty( $room_data['price_multi_day'] ) ? $room_data['price_multi_day'] : false;
@@ -624,7 +620,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 			$period = new \DatePeriod(
 				new \DateTime( $check_in . ' 00:00' ),
 				new \DateInterval( 'P1D' ),
-				new \DateTime( $check_out . ' 00:00' )
+				new \DateTime( $check_out . ( $price_multi_day ? ' 00:00' : ' 23:59' ) )
 			);
 
 			$total_price = 0;
