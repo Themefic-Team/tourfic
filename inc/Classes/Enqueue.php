@@ -120,30 +120,54 @@ class Enqueue {
 	}
 
 	/**
-	 * Add the upgrade menu styling through WordPress' inline-style API.
+	 * Style the upgrade menu link and open it in a new tab.
 	 *
 	 * @return void
 	 */
 	public function tf_enqueue_upgrade_menu_style() {
-		if ( ! wp_style_is( 'tf-admin', 'enqueued' ) ) {
+		if ( defined( 'TF_PRO' ) || ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
-		$css = '
-		#adminmenu #toplevel_page_tourfic_settings a[href*="https://tourfic.com/pricing"]{
+		// WordPress trims the trailing slash from submenu URLs during registration.
+		$selector = '#adminmenu #toplevel_page_tourfic_settings .wp-submenu a:is([href="https://tourfic.com/pricing"], [href="https://tourfic.com/pricing/"])';
+		$css = $selector . ' {
 			border-radius: 6px;
-			background: radial-gradient(104% 50% at 50.21% 100%, #FFD24C 0%, rgba(220, 166, 4, 0.20) 100%), linear-gradient(180deg, #D7A613 0%, #FFC71F 100%);
-			box-shadow: 0 -4px 4px 0 rgba(236, 187, 39, 0.60) inset, 0 2px 4px 0 rgba(161, 121, 1, 0.40);
-			color: #22292F !important;
+			background: #0e3dd8;
+			color: #fff;
 			text-align: center;
 			font-size: 13px;
 			font-weight: 600;
 			line-height: 20px;
 			margin: 8px;
-			box-shadow: 0 -2px 2px 0 rgba(178, 159, 102, 0.12) inset;
+		}
+		' . $selector . ':hover,
+		' . $selector . ':focus {
+			background: #0a2b99;
+			color: #fff;
+			box-shadow: none;
+		}
+		' . $selector . ':focus-visible {
+			outline: 2px solid #c9d4f7;
+			outline-offset: 2px;
 		}';
 
-		wp_add_inline_style( 'tf-admin', $css );
+		wp_register_style( 'tourfic-upgrade-menu', false, array(), TOURFIC_VERSION );
+		wp_enqueue_style( 'tourfic-upgrade-menu' );
+		wp_add_inline_style( 'tourfic-upgrade-menu', $css );
+
+		wp_enqueue_script( 'common' );
+		wp_add_inline_script(
+			'common',
+			'document.addEventListener("DOMContentLoaded", function () {
+				const link = document.querySelector(' . wp_json_encode( $selector ) . ');
+				if (link) {
+					link.href = "https://tourfic.com/pricing/";
+					link.target = "_blank";
+					link.rel = "noopener";
+				}
+			});'
+		);
 	}
 
 	/**

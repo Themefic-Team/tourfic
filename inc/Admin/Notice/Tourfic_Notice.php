@@ -25,6 +25,10 @@ class Tourfic_Notice {
 	}
 
 	public function render() {
+		if ( defined( 'TF_PRO' ) ) {
+			return;
+		}
+
 		$screen = get_current_screen();
 		if ( ! $screen || ! in_array( $screen->id, self::SCREENS, true ) || ! current_user_can( 'manage_options' ) || get_option( self::DISMISS_ACTION ) ) {
 			return;
