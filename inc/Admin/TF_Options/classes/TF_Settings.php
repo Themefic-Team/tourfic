@@ -168,6 +168,17 @@ if ( ! class_exists( 'Tourfic_Settings' ) ) {
 				array( $this,'tf_get_help_callback'),
 			);
 
+			if ( ! defined( 'TF_PRO' ) ) {
+				$upgrade_title = esc_html__( '★ Upgrade to Pro', 'tourfic' );
+				add_submenu_page(
+					$this->menu_slug,
+					$upgrade_title,
+					$upgrade_title,
+					'manage_options',
+					'https://tourfic.com/pricing/'
+				);
+			}
+
 			// Library submenu
 			if ( is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ) {
 				$library_url = admin_url( 'admin.php?page=travelfic-template-list' );
