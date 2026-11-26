@@ -72,7 +72,7 @@ class Base {
 			\Tourfic\Admin\Notice_Update::instance();
 			// Room_Notice::instance();
 			Plugin_Page_Notice::instance();
-			new \Tourfic\Admin\Notice\Dashboard_Promotion();
+			new \Tourfic\Admin\Notice\Tourfic_Notice();
 
 		}
 

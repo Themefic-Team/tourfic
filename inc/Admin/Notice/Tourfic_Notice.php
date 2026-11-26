@@ -4,9 +4,9 @@ namespace Tourfic\Admin\Notice;
 
 defined( 'ABSPATH' ) || exit;
 
-class Dashboard_Promotion {
+class Tourfic_Notice {
 
-	private const DISMISS_ACTION = 'tourfic_dismiss_dashboard_promotion';
+	private const DISMISS_ACTION = 'tourfic_dismiss_notice';
 	private const SCREENS = array(
 		'dashboard',
 		'edit-page',
@@ -31,7 +31,7 @@ class Dashboard_Promotion {
 		}
 		?>
 		<style>
-			#tourfic-dashboard-promotion {
+			#tourfic-notice {
 				position: relative;
 				display: flex;
 				align-items: flex-start;
@@ -43,60 +43,60 @@ class Dashboard_Promotion {
 				background: #f5f7ff;
 				color: #494d59;
 			}
-			#tourfic-dashboard-promotion > .dashicons {
+			#tourfic-notice > .dashicons {
 				width: 26px;
 				height: 26px;
 				font-size: 26px;
 				color: #0e3dd8;
 			}
-			#tourfic-dashboard-promotion h2 {
+			#tourfic-notice h2 {
 				margin: 0;
 				color: #1c2130;
 				font-size: 18px;
 				line-height: 1.4;
 			}
-			#tourfic-dashboard-promotion p {
+			#tourfic-notice p {
 				margin: 6px 0 14px;
 			}
-			#tourfic-dashboard-promotion .tourfic-promotion-actions {
+			#tourfic-notice .tourfic-notice-actions {
 				display: flex;
 				flex-wrap: wrap;
 				gap: 8px 12px;
 			}
-			#tourfic-dashboard-promotion .button {
+			#tourfic-notice .button {
 				border-color: #0e3dd8;
 				border-radius: 6px;
 				padding-inline: 16px;
 			}
-			#tourfic-dashboard-promotion .button-primary {
+			#tourfic-notice .button-primary {
 				background: #0e3dd8;
 			}
-			#tourfic-dashboard-promotion .button-primary:hover,
-			#tourfic-dashboard-promotion .button-primary:focus {
+			#tourfic-notice .button-primary:hover,
+			#tourfic-notice .button-primary:focus {
 				background: #0a2b99;
 				border-color: #0a2b99;
 			}
-			#tourfic-dashboard-promotion .button-secondary {
+			#tourfic-notice .button-secondary {
 				background: transparent;
 				color: #0e3dd8;
 			}
-			#tourfic-dashboard-promotion .button-secondary:hover,
-			#tourfic-dashboard-promotion .button-secondary:focus {
+			#tourfic-notice .button-secondary:hover,
+			#tourfic-notice .button-secondary:focus {
 				background: #f3f5fd;
 				border-color: #0a2b99;
 				color: #0a2b99;
 			}
-			#tourfic-dashboard-promotion .notice-dismiss {
+			#tourfic-notice .notice-dismiss {
 				inset-inline: auto 10px;
 			}
 		</style>
-		<div id="tourfic-dashboard-promotion" class="notice">
+		<div id="tourfic-notice" class="notice">
 			<span class="dashicons dashicons-megaphone" aria-hidden="true"></span>
 			<div>
 				<h2><?php esc_html_e( 'Themefic Black Friday / Cyber Monday Sale: Up to 80% OFF!', 'tourfic' ); ?></h2>
 				<p><?php esc_html_e( 'Get 70% OFF Tourfic lifetime plans + double the site licenses, or save up to 80% with the Themefic Bundle. Pay once for lifetime updates and support!', 'tourfic' ); ?></p>
-				<div class="tourfic-promotion-actions">
-					<a class="button button-primary" target="_blank" rel="noopener" href="<?php echo esc_url( 'https://themefic.com/bfcm26/#single-plugin-deal' ); ?>">
+				<div class="tourfic-notice-actions">
+					<a class="button button-primary" target="_blank" rel="noopener" href="<?php echo esc_url( 'https://themefic.com/bfcm26/#single-deal-wrapper' ); ?>">
 						<?php esc_html_e( 'Get Lifetime Deals', 'tourfic' ); ?>
 					</a>
 					<a class="button button-secondary" target="_blank" rel="noopener" href="<?php echo esc_url( 'https://themefic.com/bfcm26/' ); ?>">
