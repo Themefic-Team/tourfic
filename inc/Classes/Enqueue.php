@@ -234,7 +234,14 @@ class Enqueue {
         }
 	
 		//Updated CSS
-		wp_enqueue_style( 'tf-app-style', TOURFIC_ASSETS_URL . 'app/css/tourfic-style' . $this->css_min . '.css', null, TOURFIC_VERSION );
+		$stylesheet_path = TOURFIC_PATH . 'assets/app/css/tourfic-style' . $this->css_min . '.css';
+		$stylesheet_version = is_file( $stylesheet_path ) ? filemtime( $stylesheet_path ) : false;
+		wp_enqueue_style(
+			'tf-app-style',
+			TOURFIC_ASSETS_URL . 'app/css/tourfic-style' . $this->css_min . '.css',
+			null,
+			false !== $stylesheet_version ? (string) $stylesheet_version : TOURFIC_VERSION
+		);
 	
 		foreach ($tf_services as $key => $post_type) {
 			if (!in_array($key, $tf_disable_services) && (is_singular($post_type) || is_post_type_archive($post_type) || $post_type == $tax_post_type)) {

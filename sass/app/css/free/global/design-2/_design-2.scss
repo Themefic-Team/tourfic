@@ -1667,6 +1667,48 @@
                     }
                 }
 
+                .tf-available-room.tourfic-room-options-card {
+                    @media #{$max1024} {
+                        display: block;
+
+                        .tf-available-room-gallery {
+                            min-width: 0;
+                            max-width: none;
+                            width: 100%;
+
+                            .tf-room-gallery:first-child {
+                                width: 100%;
+                                height: 220px;
+
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
+                            }
+
+                            .tf-room-gallery:not(:first-child) {
+                                display: none;
+                            }
+                        }
+
+                        .tf-room-options-content-inner {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 16px;
+
+                            .tf-available-room-content-left,
+                            .tf-available-room-content-right {
+                                width: 100%;
+                            }
+
+                            .tf-available-room-content-right {
+                                align-items: stretch;
+                            }
+                        }
+                    }
+                }
+
                 .tf-available-room.tf-desktop-room {
                     @media #{$max1024} {
                         display: none;
